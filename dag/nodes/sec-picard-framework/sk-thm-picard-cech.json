@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-thm-picard-cech",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-sc-cech-spectral"
+  ]
  },
  "kind": "statement",
  "title": "Čech-to-derived",
@@ -26,47 +28,165 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "sk-def-groth-ss"
+ ],
  "proof": [
   {
-   "text": "Write $C^\\bullet(\\mathfrak U,-)$ for the (alternating) Čech complex of\nthe covering,\n\n$$\nC^p(\\mathfrak U,G)=\\prod_{i_0,\\dots,i_p}\nG\\bigl(U_{i_0}\\times_X\\dots\\times_XU_{i_p}\\bigr),\n$$\n\nso that $\\Cech^p(\\mathfrak U,G)=H^p\\bigl(C^\\bullet(\\mathfrak U,G)\\bigr)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the small-site convention in [def-weil-pbc-sites-and-cohomology]: objects, morphisms, covering indices and the coefficient groups are sets in a common universe. This is Stacks Tag 00VI (sites.tex, remark-no-big-sites), not an additional geometric assumption. By [lem-weil-pbc-site-sheaves-enough-injectives], choose an injective resolution $F\\to I^\\bullet$ in $\\mathrm{Ab}(\\mathcal C)$ as in [def-sp-injective-resolutions]. In particular the resolution is on $\\mathcal C$, not an unintroduced sheaf on $\\mathcal C/X$. Compute $H^q(V,F)$ using this resolution and evaluation at $V$, as in [def-weil-pbc-sites-and-cohomology]. The Ext formulation in the column and total comparison statements is taken in this common universe and means these same resolution-computed groups; no large-site or independent coefficient-universe assertion is being used.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Step 1 (choice of resolution); Stacks sites.tex Tag 00VI, remark-no-big-sites, and injectives.tex Tag 01DP, theorem-sheaves-injectives"
+   }
   },
   {
-   "text": "*Step 1 (the double complex).* Choose an injective resolution\n$F\\to I^\\bullet$ of abelian sheaves on $\\mathcal C/X$ and put\n$D^{p,q}=C^p(\\mathfrak U,I^q)$, a first-quadrant double complex of\nabelian groups. By [sk-def-groth-ss] its two filtrations give two\nspectral sequences, both abutting to $H^\\bullet(\\operatorname{Tot}D)$\nwith the image filtration, which is finite in each degree.",
+   "text": "Form the specified double complex of [def-sc-cech-resolution-double-complex],\n$$D^{p,q}=C^p(\\mathfrak U,I^q)=\\prod_{(i_0,\\ldots,i_p)\\in I^{p+1}}I^q(U_{i_0}\\times_X\\cdots\\times_XU_{i_p}).$$\nHere the horizontal maps are the alternating sums of the omitted-factor restrictions and the vertical maps come from $I^\\bullet$. They commute by the naturality stipulated in that construction. The given fibre products supply every finite wide pullback over $X$ (the empty one is $X$), and successive binary fibre products supply the products of tuples in $\\mathcal C/X$; no terminal object of $\\mathcal C$ is required. Use the first-quadrant total complex with $d=d_I+(-1)^p d_{II}$ from [def-sp-double-complex-total]. In degree $n$ its sum has only $0\\le p\\le n$, so this totalization has no infinite-diagonal issue.",
+   "uses": [
+    "def-sc-cech-resolution-double-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Opening paragraph and Step 1 (specified double complex and its totalization)"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-double-complex-spectral-sequences] to this first-quadrant double complex in abelian groups. Its first filtration gives a spectral sequence with\n$$E_1^{p,q}=H^q(D^{p,\\bullet}),\\qquad E_2^{p,q}=H^p\\bigl(H^q_{II}(D)\\bigr),$$\nwhere $d_1$ is induced by the horizontal differential. It abuts to $H^{p+q}(\\operatorname{Tot}D)$ with a finite decreasing filtration in each total degree. Thus the page identification requires an isomorphism of the horizontal complexes of vertical cohomology, not just unrelated isomorphisms of their individual terms.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Step 1 (two filtrations), and Step 2 (first spectral sequence)"
+   }
+  },
+  {
+   "text": "For the same $I$, $X$ and family, apply [lem-sc-cech-resolution-columns]. Its statement identifies the entire complex $H^q_{II}(D)$ with $C^\\bullet(\\mathfrak U,\\mathcal H^q(F))$, including the horizontal differential. Hence the preceding $E_1$ is the Cech cochain complex in degree $p$, and taking its $p$-th cohomology gives\n$$E_2^{p,q}\\cong\\check H^p(\\mathfrak U,\\mathcal H^q(F)).$$\nThe last equality is the definition of Cech cohomology in [def-weil-pbc-site-cech-complex]. The column lemma works for an arbitrary family; consequently its hypotheses require neither an acyclic cover nor a vanishing hypothesis on $F$. It includes the product-cohomology and evaluation comparisons, so no assertion about preservation of injectives under localization is needed here.",
+   "uses": [
+    "lem-sc-cech-resolution-columns",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Step 2 (column cohomology and the Cech horizontal differential)"
+   }
+  },
+  {
+   "text": "Now use the covering hypothesis: the sieve generated by $\\mathfrak U$ belongs to the site's topology. For this same resolution and double complex, [lem-sc-cech-resolution-total] gives, for every $n\\ge0$, an isomorphism\n$$\\theta_n:H^n(\\operatorname{Tot}D)\\xrightarrow{\\sim}H^n(X,F).$$\nThis is precisely the total-cohomology comparison required by Step 3 of the unit, whose argument uses injective Cech row acyclicity (Stacks sites-cohomology.tex, Tags 03F6 and 03AW). The cited total-comparison statement has the covering-sieve hypothesis, so no replacement of a sieve-generating family by a finite, open, or affine covering is involved.",
+   "uses": [
+    "lem-sc-cech-resolution-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Step 3 (total cohomology and the abutment); Stacks sites-cohomology.tex Tags 03F6, lemma-injective-abelian-sheaf-injective-presheaf, and 03AW, lemma-injective-trivial-cech"
+   }
+  },
+  {
+   "text": "Let $T^aH^n(\\operatorname{Tot}D)$ be the image filtration given by the double-complex theorem. Define $F^aH^n(X,F)=\\theta_n(T^aH^n(\\operatorname{Tot}D))$. Since $\\theta_n$ is an isomorphism, this is a decreasing filtration with $F^0H^n(X,F)=H^n(X,F)$ and $F^{n+1}H^n(X,F)=0$; it induces isomorphisms of successive quotients with those of $T$. Their identifications with $E_\\infty^{a,n-a}$ therefore give an abutment in exactly the sense of [sk-def-groth-ss]. Combining this filtration with the second-page identification above proves the claimed spectral sequence. This spells out the transfer of the abutment instead of assuming an unspecified compatibility between two filtrations.",
    "uses": [
     "sk-def-groth-ss"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Step 4 (combine the page and abutment calculations)"
+   }
   },
   {
-   "text": "*Step 2 (one filtration gives the $E_2$-page).* Fix $p$ and take\ncohomology of $D^{p,\\bullet}$ in the $q$-direction. Products of\ncomplexes of abelian groups have the product of the cohomologies, and for\neach $V=U_{i_0}\\times_X\\dots\\times_XU_{i_p}$ the restriction\n$I^\\bullet|_V$ is again an injective resolution, restriction along the\nlocalization $\\mathcal C/V\\to\\mathcal C/X$ having an exact left adjoint.\nHence $H^q\\bigl(I^\\bullet(V)\\bigr)=H^q(V,F)$ and\n\n$$\nE_1^{p,q}=C^p\\bigl(\\mathfrak U,\\mathcal H^q(F)\\bigr),\\qquad\nE_2^{p,q}=\\Cech^p\\bigl(\\mathfrak U,\\mathcal H^q(F)\\bigr),\n$$\n\nfor the presheaf $\\mathcal H^q(F)$ of the statement.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 3 (the other filtration gives the abutment).* Fix $q$ and\nconsider the column $C^\\bullet(\\mathfrak U,I^q)$. An injective abelian\nsheaf is injective as a *presheaf*\n([Stacks `03F6`](https://stacks.math.columbia.edu/tag/03F6)),\nthe Čech complex only sees presheaf values, and the Čech complex\nof an injective presheaf is acyclic in positive degrees: it is\n$\\Hom(\\Z_{\\mathfrak U,\\bullet},-)$ applied to the complex of free\npresheaves of the covering, and $\\Hom(-,I^q)$ is exact. So\n$C^\\bullet(\\mathfrak U,I^q)$ has cohomology $I^q(X)$ in degree $0$ and\n$0$ above\n([Stacks `03AW`](https://stacks.math.columbia.edu/tag/03AW)).\nThis filtration therefore collapses onto the bottom edge and\n\n$$\nH^n(\\operatorname{Tot}D)\\cong H^n\\bigl(I^\\bullet(X)\\bigr)=H^n(X,F).\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 4 (the edge map).* Combining Steps 2 and 3 gives the\ndisplayed sequence. When $\\mathcal H^q(F)$ vanishes for $q>0$ the\nsequence collapses onto the row $q=0$ instead, and the edge maps\n$\\Cech^q(\\mathfrak U,F)\\to H^q(X,F)$ are isomorphisms.\n\nThis is Stacks, Cohomology on Sites, Lemma 21.10.6\n([`03AZ`](https://stacks.math.columbia.edu/tag/03AZ)).",
-   "uses": [],
-   "elementary": null
+   "text": "For the optional collapse stated in Step 4 of the unit, suppose $\\mathcal H^q(F)=0$ for $q>0$. All rows of $E_2$ except $q=0$ vanish, while $\\mathcal H^0(F)=F$ by [def-weil-pbc-sites-and-cohomology]. Every differential $d_r$ with $r\\ge2$ to or from $(n,0)$ has a zero source or target, so $E_\\infty^{n,0}=\\check H^n(\\mathfrak U,F)$. The abutment filtration of [sk-def-groth-ss] then has zero successive quotients except in degree $n$: $F^0=\\cdots=F^n=H^n(X,F)$ and $F^{n+1}=0$. Thus the edge identification is an isomorphism $\\check H^n(\\mathfrak U,F)\\cong H^n(X,F)$. This is a consequence of the sequence just constructed, not an extra hypothesis of the theorem.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "sk-def-groth-ss"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+    "place": "Step 4 (optional row-zero collapse); Stacks sites-cohomology.tex Tag 03AZ, lemma-cech-spectral-sequence"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-groth-ss"
+  "def-sc-cech-resolution-double-complex",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sc-cech-resolution-columns",
+  "lem-sc-cech-resolution-total",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "sk-def-groth-ss",
+  "thm-sp-double-complex-spectral-sequences"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Proof, opening paragraph and Steps 1--4, compared with the current main-20261015 statement and Stacks sites-cohomology.tex Tags 03AZ, 03AW, 03F6. The blueprint route is retained; its resolution is taken on C, as in Stacks."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech to derived sheaf cohomology first quadrant spectral sequence of a covering",
+   "results": "Hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.H, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.plusPlusSheaf_obj_val",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence|[Ss]pectral",
+   "results": "No hits",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "cechToDerived|cech.*[Ss]pectral|[Ss]pectral.*[Cc]ech",
+   "results": "No hits",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology spectral sequence converging to derived sheaf cohomology",
+   "results": "Hits: CategoryTheory.Sheaf.H, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, TopCat.Sheaf.forget, HomotopyCategory.spectralObjectMappingCone, AlgebraicGeometry.SheafedSpace.IsSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, TopCat.isSheaf_of_isLimit",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.cohomologyPresheaf, cechComplexFunctor",
+   "results": "No hits; loogle: unknown identifier 'Sheaf.cohomologyPresheaf'",
+   "verdict": "invalid query: unknown identifier; retried with substring query",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectral sequence of the double complex of Cech cochains of an injective sheaf resolution",
+   "results": "Hits: CochainComplex.cm5b.I, CategoryTheory.InjectiveResolution.ofCocomplex, CochainComplex.cm5b.I_X, CategoryTheory.InjectiveResolution.cocomplex, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.cochainComplex, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"cohomology\"",
+   "results": "No hits",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -91,5 +211,38 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-cech",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-thm-picard-cech",
+  "worker": "stage1",
+  "summary": "Retained the current statement and made its site/Cech/cohomology/spectral-sequence definition dependencies explicit. Realized the injective-resolution double-complex route with existing construction, column, total and double-complex spectral-sequence nodes; corrected the resolution base from C/X to C; wrote the finite-filtration transfer and optional collapse explicitly. No new nodes and no Mathlib leaf claim.",
+  "blueprint": {
+   "statement": "Current main-20261015 sk-thm-picard-cech, order 715; same_as lem-sc-cech-spectral after its documented small-site convention.",
+   "steps": {
+    "1": "Opening Cech-complex paragraph: proof step 2; definition dependencies.",
+    "2": "Step 1 double complex: proof steps 1--3.",
+    "3": "Step 2 column calculation: proof step 4.",
+    "4": "Step 3 total comparison and Step 4 assembly/collapse: proof steps 5--7.",
+    "5": "Final Stacks reference and detailed version: source audit and same_as lem-sc-cech-spectral."
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic first-quadrant double-complex spectral-sequence construction and page formulas, exactly the general tool invoked by Step 1; sk-def-groth-ss supplies the abutment notion but not the explicit page formulas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-0b8827414",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-0b8827414 (reviewer sub-agent of L); spot-checked: PASS on the split of sk-thm-picard-cech. I read the item, all 7 steps, the unit record, the main-20261015 statement, the master unit text, Stacks 03AZ (sites-cohomology.tex lemma-cech-spectral-sequence) and the statement of every cited node. There are no new nodes. The statement is verbatim from main-20261015, and the item is not dropped and has no repair note. Step 1: resolution on C via the enough-injectives leaf, H^q(V,F)=H^q(I(V)) by def-weil-pbc-sites-and-cohomology (2); the Lean-shaped hypotheses (v-small Homs, sheafification, HasExt) hold under the small-site convention of 00VI. Step 2: def-sc-cech-resolution-double-complex and the total with finite diagonals; finite wide pullbacks come from fibre products (empty case X). Step 3: thm-sp-double-complex-spectral-sequences clause (I); the declared tool use from sk-prop-av-pqf-finite is generic and already a tool_use of lem-sc-cech-spectral, so accepted. Step 4: lem-sc-cech-resolution-columns is an isomorphism of complexes including the differential, so E2 = Cech cohomology. Step 5: lem-sc-cech-resolution-total, with the sieve-covering hypothesis matching the item's. Step 6: the abutment transfer via θ_n fits sk-def-groth-ss (E_∞=E_{p+q+2} is covered by stabilisation at r>max(p,q+1)). Step 7: I checked the collapse bidegrees. Edge cases checked: F=0, singleton identity cover, repeated members, empty covering sieve, infinite index set. Taking the resolution on C instead of C/X simplifies the unit's route without leaving it. Maintainer notes: (1) the item duplicates the reviewed, same-unit lem-sc-cech-spectral (same statement and Lean declaration CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence, same cited nodes); I recommend merging one into the other. (2) def-weil-pbc-site-cech-complex is stated for coverings but is applied to a sieve-generating family; this is a literal extension since the fibre products exist (advisory). (3) The live Cech.lean:289 declaration contains no sorry; closure of its dependencies was not checked (not a stage-1 matter)."
+ }
 }
