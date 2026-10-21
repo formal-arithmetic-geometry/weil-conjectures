@@ -17,40 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Use finiteComparisonRealization_exact to take the inverse image P of K under the actual termwise derived coefficient equivalence, with its counit isomorphism. Isomorphism invariance of constantModelConstructibleFiniteTor transports the hypothesis to the realization of P. Apply finiteDiscreteCtfRealization to reflect boundedness, fixed-scalar constructibility and finite Tor amplitude.",
+   "text": "Use finiteComparisonRealization_exact to install the coefficient equivalence and take a preimage P of K under its derived functor R. The counit gives eP : R(P) ≅ K. Isomorphism invariance of constantModelBoundedConstructible, together with the generic finiteTorAmplitude isomorphism instance, transports hK to R(P).",
    "uses": [
     "det-ctf-finite-comparison-localizing",
-    "det-def-sfb-constructible-tor-amplitude",
-    "lem-finite-discrete-ctf-realization"
+    "det-def-sfb-constructible-tor-amplitude"
    ],
    "elementary": false
   },
   {
-   "text": "Unpack boundedness of P into lower and upper cohomology bounds. Apply the proved fixedDerivedOrigin helper of ProEtaleConstructibleOrigin with those bounds and its constructible cohomology. This bounded devissage gives an etale bounded constructible L and comparisonUpperStar(L) isomorphic to P. This is the ordinary fixed-scalar constructible-comparison part of the finite-Tor comparison route.",
+   "text": "A Noetherian scheme is quasi-compact and quasi-separated. Apply the reverse implication of finiteComparisonGenerators_identification to P with its transported internal constructible finite-Tor predicate. This gives an etale bounded constructible finite-Tor complex L and an isomorphism eL from its ordinary derived comparison image to P. This uses the bounded finite-Tor generator correspondence directly, without separately reflecting fixed-scalar constructibility and descending it again.",
    "uses": [
-    "lem-sf-proetale-constructible-origin"
+    "lem-ctf-finite-comparison-generators"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the finite Tor interval of P across the comparison isomorphism. The source-library torAmplitudeIn_of_mapDerivedCategory reflects that interval to L. Enlarge the interval to its ordered hull [min c d,max c d], and express the resulting cohomology vanishing as hasTorAmplitudeIn. Finally apply the coefficient realization to the comparison isomorphism and compose with the counit. Empty schemes and the zero ring need no separate nontriviality hypotheses.",
-   "uses": [
-    "lem-sf-comparison-tor-amplitude"
-   ],
-   "elementary": false
+   "text": "Unpack the finite Tor amplitude of L as an interval [a,b]. Enlarge it by DerivedCategory.torAmplitudeIn.mono to [min a b,max a b], which is ordered even if the original interval is empty. Apply the proved source helper Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn: it expresses canonical t-structure bounds on each degree-zero tensor as the identical cohomology vanishing predicate hasTorAmplitudeIn. Using this API avoids unfolding the derived tensor construction. Apply R to eL and compose with eP for the required internal comparison isomorphism. No nonempty-scheme or nonzero-ring assumption is introduced.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "det-ctf-finite-comparison-localizing",
   "det-def-sfb-constructible-tor-amplitude",
-  "lem-finite-discrete-ctf-realization",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-sf-proetale-constructible-origin"
+  "lem-ctf-finite-comparison-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.proof.md",
-  "place": "Coefficient identification followed by the existing fixedDerivedOrigin bounded-devissage proof and torAmplitudeIn_of_mapDerivedCategory interval reflection, in the same finite-Tor comparison route."
+  "place": "The equivalence paragraph: apply the existing finiteComparisonGenerators_identification directly after taking the exact coefficient-equivalence preimage; order its Tor interval and compose the ambient comparison isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -187,13 +182,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G6",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261020T051329-L-1639838",
-  "kind": "interface",
+  "landing": "20261021T020052-L-2580695",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
