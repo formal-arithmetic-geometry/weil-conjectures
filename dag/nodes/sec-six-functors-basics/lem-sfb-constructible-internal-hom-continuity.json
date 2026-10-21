@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sfb-module-object-ringed-site-derived-comparison] work in ordinary ringed-site models preserving evaluation. Use the property $P$ of [lem-sfb-rhom-continuity-triangle-closure], which includes a diagram-independent lower bound. Exact filtered colimits [lem-pur-ringed-site-grothendieck-abelian] commute with cohomology by applying exactness to the kernel/image sequences of each differential; hence they preserve quasi-isomorphisms and commute with the smart truncation having $\\operatorname{coker}d^{c-1}$ in degree $c$. Thus uniformly cohomologically bounded targets may be replaced functorially by termwise bounded targets. The model invariance of [def-pur-derived-internal-hom] justifies these choices.",
+   "text": "Transport the native module-object internal Hom and a uniform output-bound offset through the exact derived module-sheaf equivalence of [lem-sfb-module-object-ringed-site-derived-comparison]. Use the property of [lem-sfb-rhom-continuity-triangle-closure]. Exact filtered colimits in module sheaves [lem-pur-ringed-site-grothendieck-abelian] commute with cohomology, so the localized complex comparison for [def-pur-derived-internal-hom] is an isomorphism exactly when the image of the original colimit cocone on every cohomology sheaf is a colimit. Naturality of the equivalence transports that very cocone, without choosing an arbitrary derived colimit.",
    "uses": [
     "lem-sfb-module-object-ringed-site-derived-comparison",
     "lem-sfb-rhom-continuity-triangle-closure",
@@ -53,12 +53,12 @@
    }
   },
   {
-   "text": "Let $i:Z\\hookrightarrow T$ be closed with open complement and $T$ topologically Noetherian. By [lem-sfb-closed-support-bounded-continuity], $Ri^!$ commutes with our colimits and preserves their common lower bound. The functor $Ri^!=R\\underline\\Gamma_Z$ of [lem-sfb-open-closed-internal-hom-formulas] and the $Ri^!$ of [lem-sfb-closed-support-bounded-continuity] are both right adjoints of $i_*$ on bounded-below objects, so they are canonically isomorphic by uniqueness of adjoints, compatibly with the counits; we identify them. The closed formula [lem-sfb-open-closed-internal-hom-formulas] then gives $R\\mathcal Hom_T(i_*L,N_i)\\cong i_*R\\mathcal Hom_Z(L,Ri^!N_i)$. Step 2 applies on $Z$. Closed $i_*$ is exact and commutes with filtered colimits by [lem-weil-pbc-proetale-ringed-open-closed]; its qcqs hypothesis follows from [lem-sfb-noetherian-space-compact-subsets]. The natural formulas therefore prove $P_T(i_*L)$ with bound zero.",
+   "text": "For a closed immersion i:Z→T with open complement j, Noetherian T gives a quasi-compact open complement by [lem-sfb-noetherian-space-compact-subsets]. Apply [lem-sfb-closed-support-bounded-continuity] to its functorial K-injective model: Ri! preserves the common lower bound and its complex comparison is an isomorphism. Step 1 converts this to continuity on cohomology cocones. Compose with the finite-local-model Hom of step 2; its applicability follows from the same uniform lower bound. Closed direct image is exact and preserves colimits, by its adjunction to the recorded closed-support functor in [det-lem-formal-closed-support-adjunction]. The natural closed formula of that node identifies the composite i_* RHom_Z(L,Ri!(-)) with RHom_T(i_*L,-), on all cocone legs. Thus the closed stratum source has the continuity property and bound offset zero.",
    "uses": [
     "lem-sfb-closed-support-bounded-continuity",
     "lem-sfb-open-closed-internal-hom-formulas",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-sfb-noetherian-space-compact-subsets"
+    "lem-sfb-noetherian-space-compact-subsets",
+    "det-lem-formal-closed-support-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -90,11 +90,9 @@
    }
   },
   {
-   "text": "The given diagram has the common termwise lower bound $c$, hence also the common cohomological bound required by $P_X(K)$. Its comparison is therefore an isomorphism. All comparison maps above are evaluation-induced. Exact filtered colimits preserve the quasi-isomorphisms of the models, by step 1, giving the asserted independence; by [lem-weil-pbc-unbounded-derived-iso-cohomology] a morphism of $D(\\operatorname{Mod}_B)$ is an isomorphism exactly when it is so on all cohomology sheaves, which is the equivalent cohomology-sheaf formulation.",
-   "uses": [
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
+   "text": "The common termwise lower bound c on the given complexes implies the common cohomological lower bound c. Apply the continuity component of step 5 to this diagram in every degree. The conclusion is precisely the stated cohomology-cocone formulation, since all previous transports were natural isomorphisms applied to the original termwise-colimit cocone; no categorical colimit in the derived category was required.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
     "place": "Lemma 6.8.12, conclusion of the internal filtered-colimit elaboration."
@@ -103,6 +101,7 @@
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
+  "det-lem-formal-closed-support-adjunction",
   "lem-pur-ringed-site-grothendieck-abelian",
   "lem-sfb-bounded-finite-model-generation",
   "lem-sfb-closed-support-bounded-continuity",
@@ -111,14 +110,12 @@
   "lem-sfb-noetherian-space-compact-subsets",
   "lem-sfb-open-closed-internal-hom-formulas",
   "lem-sfb-rhom-continuity-open-extension",
-  "lem-sfb-rhom-continuity-triangle-closure",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "lem-sfb-rhom-continuity-triangle-closure"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Internal sheaf-valued filtered-colimit elaboration of the finite local-model/open-closed devissage in Lemmas 6.3.14 and 6.8.12; the formal internal support calculation is in Lemma 6.7.13. The global direct-sum statements are not cited as though they stated this conclusion."
+  "place": "Lean assembly by F7 of the six stated devissage steps. Native/ringed equivalence transports the cohomology-cocone property; closed-support composition is checked through its K-injective model, then exact closed direct image, open extension, and triangulated finite-model generation apply. Source: local support in Lemma 6.7.13 and finite devissage in Lemmas 6.3.14, 6.8.12; the internal filtered-colimit assertion remains the recorded elaboration."
  },
  "mathlib_searches": [
   {
@@ -291,28 +288,7 @@
  },
  "tool_uses": [
   "def-pur-derived-internal-hom",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-sfb-module-upper-lower-adjunction",
-  "det-pe-bounded-continuity-direct-image",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-pur-rhom-global-sections",
   "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-ses-triangle",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-proetale-weakly-etale-localization",
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "reviewed": {
@@ -342,5 +318,15 @@
   "existing": false,
   "note": "Equivalent cohomology-sheaf formulation expressly allowed by the node: for each degree the image of the termwise-colimit cocone under Q, the recorded closed internal Hom, and cohomology is a colimit cocone. Its legs are the canonical evaluation-induced maps; Nonempty IsColimit says their canonical comparison is an isomorphism. The added landed statement dependency supplies the already defined integral and rational condensed coefficient rings, including their spectral topologies and ring structures."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261021T193234-L-1017514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
