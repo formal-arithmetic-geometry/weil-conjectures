@@ -1,6 +1,6 @@
 # Work queue
 
-478 items; claim with `tools/claim.py next <group> [--stage N]`.
+477 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (13 clusters, 1538 modules)
 
@@ -52,7 +52,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-dl-a1-galois-prime-residue-lifting` | - | none |
 | `lem-dl-a1-integral-normal-residue-etale-splitting` | - | none |
 
-## Stage 2: nodes to state (54)
+## Stage 2: nodes to state (53)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -64,7 +64,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-a1-completed-perfect-scalar-pullback` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-a1-roos-intrinsic-unit-comparison` | 1 | state | 0 |
-| `lem-cbc-completed-open-strict-mate-identification` | 1 | state | 0 |
 | `lem-cbc-ringed-open-scalar-limit-coherence` | 1 | state | 0 |
 | `lem-coef-enriched-sequence-projection-formula` | 1 | state | 0 |
 | `lem-dl-a1-finite-group-inertia-invariants-etale` | 1 | state | 0 |
@@ -501,7 +500,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPresentation` | - | 2 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.UnboundedDirectImageSectionPresheaf` | - | 1 | proof | 18 |
 
-## Stage 3: waiting for statements of dependencies (26)
+## Stage 3: waiting for statements of dependencies (27)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -515,7 +514,8 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.CategoryTheory.FiniteFreeCompletionTransport` | - | 4 | `lem-weil-pbc-finite-free-strict-tower-transport` |
 | `Sheaf.Paper.ClopenRoosIntegralDescent` | - | 12 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | `lem-coef-enriched-sequence-projection-formula` |
-| `Sheaf.Paper.CompleteProetaleStrictTowerRealization` | - | 9 | `lem-cbc-completed-open-strict-mate-identification` |
+| `Sheaf.Paper.CompleteProetaleStrictTowerRealization` | - | 9 | `lem-cbc-ringed-open-scalar-limit-coherence` |
+| `Sheaf.Paper.CompletedOpenStrictMateIdentification` | - | 2 | `lem-cbc-ringed-open-scalar-limit-coherence` |
 | `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | `lem-pur-perfect-quotient-exchange-normalization` |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | `lem-weil-pbc-pulled-reduction-normalization-comparison` |
 | `Sheaf.Paper.ContinuousAlgClStratifiedFiniteModels` | - | 1 | `lem-sfb-normal-continuous-algcl-monodromy` |
