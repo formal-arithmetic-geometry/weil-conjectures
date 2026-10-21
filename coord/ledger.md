@@ -22062,3 +22062,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:07 L: merged deliver/A5/Sheaf.CategoryTheory.SectionwiseFlatPresheafTensor (stage 3; reviewer PASS; first push; landing 20261021T100712-L-4113076 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:07 L: merged deliver/A5/Sheaf.Paper.CompleteCompactSupportProetale (stage 3; reviewer PASS; first push; landing 20261021T100716-L-4115285 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:07 L: merged deliver/A5/Sheaf.Paper.LatticePullback (stage 3; reviewer PASS; first push; landing 20261021T100720-L-4118107 (interface); batch 20261021T100250; modules 3; new nodes 2)
+- 10:07 L: merged deliver/A6/Sheaf.Paper.ECoefficientSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261021T100726-L-4121929 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/A6-e-coefficient-smooth-base-change-proof-context.md)
