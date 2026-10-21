@@ -22312,3 +22312,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:36 L: returned deliver/NE/lem-pur-strict-coefficient-comparison-calculus (reviewer RETURN: L: independent stage-2 immutable head 3e097a34a3cb: H2: delivery adds theorem node lem-pur-system-scalar-coherence to st)
 - 11:38 L: returned deliver/Q51/lem-cbc-ringed-open-scalar-limit-coherence (reviewer RETURN: L: independent stage-2 immutable head 3c932412c1ca: H13: delivery rebinds the landed, reviewed NZ lean record of lem-cbc)
 - 11:38 L: returned deliver/N5/lem-pur-quotient-diagram-projection-evaluation (reviewer RETURN: L: independent stage-2 immutable head fa128d2760c0: H3/H12 F1: Presentation is uninhabitable. evaluationExactY/X (ExactA)
+- 11:38 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A6/A7/B10/G4: this is the 7th push, superseded by the live Lean closure and byte-identical to the returned 6th push. The)
