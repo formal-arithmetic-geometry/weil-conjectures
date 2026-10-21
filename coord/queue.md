@@ -1,6 +1,6 @@
 # Work queue
 
-289 items; claim with `tools/claim.py next <group> [--stage N]`.
+290 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 1358 modules)
 
@@ -20,7 +20,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.DerivedTensorTruncationWindow` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 78, stage 3 190 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 78, stage 3 191 items.
 
 ## Stage 1: nodes to split (75)
 
@@ -56,12 +56,14 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-ringed-open-total-tensor-kflat` | 1003 | none |
 | `lem-sf-fixed-pair-adjunction-lift` | 1017 | none |
 | `det-def-sp-tate-twist-locally-free` | 2000 | none |
-| `lem-sf-integral-direct-image-constructible` | 2002 | none |
 | `det-sf-comp-coherence-cocycle` | 2003 | none |
 | `lem-cbc-completed-extension-zero-comparison` | 2003 | none |
-| `det-sf-existence-brown` | 2005 | none |
+| `lem-sf-etale-origin-pushforward-amplitude` | 2003 | none |
+| `lem-sf-finite-proetale-pushforward-constructible` | 2003 | none |
+| `lem-sf-nilpotent-coefficient-direct-image-bound` | 2003 | none |
 | `lem-pur-etale-compact-scalar-coherence` | 2005 | none |
 | `lem-pur-signed-line-derived-base-change` | 2005 | none |
+| `lem-sfb-coherent-right-adjoint-comparisons` | 2006 | none |
 | `lem-fix-operation-reduction` | 3002 | none |
 | `lem-coef-closed-adjunction-enriched-isomorphism` | 5003 | none |
 | `lem-coef-enriched-sequence-projection-formula` | 5003 | none |
@@ -91,7 +93,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-finite-scalar-restriction-constructible` | - | none |
 | `lem-sfb-scalar-presentation-cokernel` | - | none |
 | `lem-sfb-tor-interval-local-detection` | - | none |
-| `lem-sp-chart-counit-scalar-transport` | - | none |
 | `lem-sp-etale-ctf-chart-domain` | - | none |
 | `lem-sp-open-proetale-counit-scalar` | - | none |
 | `lem-sp-smooth-admissible-coordinate-cover` | - | none |
@@ -100,9 +101,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-module-object-ringed-site-derived-comparison` | - | none |
 | `lem-sfb-rational-derived-scalar-invertible` | - | none |
 | `det-brown-hypotheses-small` | - | none |
-| `lem-sfb-shriek-coefficient-isomorphism` | - | none |
 
-## Stage 2: nodes to state (74)
+## Stage 2: nodes to state (75)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -154,6 +154,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-ringed-complete-triangulated` | 1 | state | 0 |
 | `lem-sfb-scalar-coordinate-limit-criterion` | 1 | state | 0 |
 | `lem-sfb-scalar-inverse-image-tower-diagram` | 1 | state | 0 |
+| `lem-sfb-shriek-coefficient-isomorphism` | 1 | state | 0 |
 | `lem-sfb-square-zero-periodic-tensor` | 1 | state | 0 |
 | `lem-sfb-stratified-local-cohomological-bounds` | 1 | state | 0 |
 | `lem-sp-etale-sum-coefficient-computation` | 1 | state | 0 |
@@ -181,7 +182,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-finite-classical-localizing` | 2 | state | 0 |
 | `lem-sfb-subfield-extension-local-presentation` | 2 | state | 0 |
 
-Not open yet: 300 nodes that below a finished node, not needed, 97 nodes that wait for a statement dependency (bottom-up), 51 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 300 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 53 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (119)
 
@@ -200,7 +201,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProEtaleConstructibleExactClosure` | - | 1 | proof | 1 |
 | `Sheaf.Paper.ProjectionMateExact` | - | 1 | proof | 1 |
 | `Sheaf.Paper.ScalarModelFiniteFlatResolution` | - | 3 | proof | 1 |
-| `Sheaf.Paper.SfIntegralDirectImageConstructible` | - | 1 | proof | 1 |
 | `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 2 |
 | `Sheaf.Algebra.Homology.StrictScalarHomChain` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.EtaleChartAdjointComparison` | - | 1 | proof | 2 |
@@ -208,6 +208,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FiniteFieldProEtaleDirectImage` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.InternalExtensionFinitePresentation` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.InternalExtensionInverseImage` | - | 1 | proof | 2 |
+| `Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus` | - | 5 | proof | 2 |
 | `Sheaf.CategoryTheory.DirectImageRoosNormalization` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.FilteredRingObjectCoconeColimit` | - | 2 | proof | 2 |
 | `Sheaf.CategoryTheory.LocalizingHomTest` | - | 1 | proof | 2 |
@@ -268,7 +269,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteFieldStratifiedPerfectModels` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteSubextensionsDirected` | - | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralScalarExtensionWellDefined` | - | 2 | proof | 3 |
-| `Sheaf.Paper.LevelwiseAdicTruncations` | - | 5 | proof | 3 |
+| `Sheaf.Paper.LevelwiseAdicTruncations` | - | 6 | proof | 3 |
 | `Sheaf.Paper.RingedSliceComparisonsShift` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RingedSlicePullbackMateNormalization` | - | 1 | proof | 3 |
 | `Sheaf.Paper.ShiftedTensorMorphismCalculus` | - | 4 | proof | 3 |
