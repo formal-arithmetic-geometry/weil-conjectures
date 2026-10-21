@@ -1,6 +1,6 @@
 # Work queue
 
-101 items; claim with `tools/claim.py next <group> [--stage N]`.
+97 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (2 clusters, 466 modules)
 
@@ -13,23 +13,22 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 52, stage 3 2 items.
 
-## Stage 1: nodes to split (11)
+## Stage 1: nodes to split (10)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
-| `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
+| `lem-sfb-strict-local-prime-to-p-kummer-splitting` | 4011 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
-| `lem-sfb-norm-algcl-bar-augmentation` | 4016 | none |
+| `lem-sfb-norm-algcl-profinite-cech-exact` | 4017 | none |
 | `lem-sfb-parameter-cochain-completion-boundary-descent` | 4017 | none |
-| `lem-sfb-profinite-action-coherent-presentation` | 4017 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (24)
+## Stage 2: nodes to state (21)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -42,23 +41,20 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-sfb-discrete-lattice-cup-exterior` | 1 | state | 0 |
 | `lem-sfb-equivariant-resolution-bar-normalization` | 1 | state | 0 |
-| `lem-sfb-field-action-derived-section-transport` | 1 | state | 0 |
-| `lem-sfb-ind-unipotent-procyclic-difference` | 1 | state | 0 |
 | `lem-sfb-internal-bar-ordered-cup` | 1 | state | 0 |
 | `lem-sfb-internal-bar-roof-adjunction` | 1 | state | 0 |
 | `lem-sfb-internal-inflation-graded-cup` | 1 | state | 0 |
 | `lem-sfb-lattice-koszul-triangulated-cup-comparison` | 1 | state | 0 |
-| `lem-sfb-polynomial-translation-acyclic` | 1 | state | 0 |
+| `lem-sfb-lisse-lattice-potential-kummer-tameness` | 1 | state | 0 |
+| `lem-sfb-norm-algcl-bar-augmentation` | 1 | state | 0 |
 | `lem-sfb-procyclic-scalar-cochain-evaluation` | 1 | state | 0 |
-| `lem-sfb-profinite-invariants-filtered-continuity` | 1 | state | 0 |
+| `lem-sfb-profinite-action-coherent-presentation` | 1 | state | 0 |
 | `lem-sfb-relative-cyclic-restriction-model` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-trivial-ladic-derived-exterior` | 1 | state | 0 |
 | `lem-trf-point-system-roos-transport` | 1 | state | 0 |
-| `lem-zl-classical-weil-filtration-heart-transport` | 1 | state | 0 |
-| `lem-trf-point-system-power-roos-coherence` | 2 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 10 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 9 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (57)
 
