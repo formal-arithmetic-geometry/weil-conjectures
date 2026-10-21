@@ -22826,3 +22826,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:39 L: merged deliver/G3/Sheaf.Paper.IntegralCoefficientPresentationComparison (stage 3; reviewer PASS; first push; landing 20261021T143906-L-17757 (interface); batch 20261021T143835; modules 1; new nodes 0; change records: coord/changes/integral-coefficient-presentation-proof-scope.md)
 - 14:39 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 14:39 L: merged deliver/J1/Sheaf.SixFunctors.FiniteCoverCTFLocality (stage 3; reviewer PASS; first push; landing 20261021T143914-L-19430 (proof); batch 20261021T143835; modules 1; new nodes 0)
+- 14:39 L: merged deliver/K3/Sheaf.SixFunctors.IntegralExpressionOccurrences (stage 3; reviewer PASS; first push; landing 20261021T143917-L-20148 (proof); batch 20261021T143835; modules 1; new nodes 0)

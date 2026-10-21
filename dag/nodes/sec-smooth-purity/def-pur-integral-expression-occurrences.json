@@ -12,9 +12,45 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
   "place": "Step 2 (adic stage); the independent leaf-slot convention of lem-pur-integral-realization-shift-coherence"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For inputShift_obj apply dependent function extensionality at j and split on i = j. Substitution in the equal case and Function.update_of_ne in the unequal case identify the product-functor component with the dependent update. The occurrence-functor object theorem is this equality specialized to the occurrence family.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the private evaluation-under-renaming equality by induction on the expression: evaluation of reindexInputs f at K is evaluation of the old tree at K composed with f. Then induct on the original tree for slotContext_evaluate. Unary cases apply congrArg of the unchanged operation. At a tensor split the selected occurrence into the left or right summand, apply the renaming equality and the selected induction hypothesis, and check dependent updates componentwise. The other summand is unchanged.",
+   "uses": [
+    "def-sf-integral-system-expression-domain"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By induction, reindexing preserves the occurrence set up to an explicit equivalence, and the renamed occurrence label is f applied to the original label through that equivalence. At each tensor take the sum of these equivalences. Induct on the tree to prove independentInputs_bijectiveLabel: the variable case is the singleton bijection, unary cases preserve it, and the tensor case composes the sum equivalence with the disjoint sum of the inductive label bijections.",
+   "uses": [
+    "def-sf-integral-system-expression-domain"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the expression to characterize a successful variableContext search by existence of a leaf with the requested label. At a tensor search the left tree first; if it fails, the existence statement reduces to the right tree. Surjectivity proves variableContext_isSome. Separately, induction shows that updating a label absent from a tree leaves its evaluation unchanged. Finally induct along a successful search under injectivity of the leaf-label map: in the selected tensor branch use the induction hypothesis and in the other branch use the absence lemma; injectivity excludes the same label in both branches. This proves evaluation on any replacement. Apply it also at the original value and use Function.update_eq_self for the second equality.",
+   "uses": [
+    "def-sf-integral-system-expression-domain"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-expression-domain",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Elementary structural proofs of the occurrence constructions, following the six existing theorem docstrings and the independent leaf-slot convention in adic Step 2; formalized by K3."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -125,5 +161,15 @@
   "group": "Q15",
   "result": "pass",
   "note": "Re-delivery after H13 RETURN of 629de211ff8c: def-weil-finite-tor-amplitude record now byte-identical to live (R1 fixed), report paragraph removed. Lean modules and item/new-node records byte-identical to the returned head, whose substance was accepted. Against live: item changes only lean and adds 3 new def nodes (H2 ok); dependency records' lean equals live; no dependency module touched. Live IntegralCompactificationSystemRealization changed after the last review, but only imports; constructor sets of CanonicalIsoPair/BasicPair/CanonicalPair = SynchronizedIso/Basic/Pair (9/11/8, same names). Statements verbatim, declarations present, no line over 100 chars, sorry only in theorem bodies, report sections present. nt_compile --json on the 4 files: rc 0, clean, 7.1/32.8/14.9/4.6 s at load ~89 (base RingedSiteDualityMaps fault no longer blocks). Advisory/maintainer: def-pur-integral-operation-shift-data cites theorem lem-sf-completed-tensor-shift-right for plain defs, and def-pur-synchronized-canonical-maps cites lem-sf-integral-compactification-system-realization (already a base item dep) for CanonicalPair/Realizations; no def node owns either module, so existing:true def nodes are suggested. The item does not import Sheaf.Paper.PurReductionLimitShiftAdjunction (proof dep); its docstring paraphrases the node's proof steps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261021T143917-L-20148",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

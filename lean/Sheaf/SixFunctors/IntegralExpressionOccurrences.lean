@@ -165,7 +165,11 @@ substitution the selected component is (K i)[r]; every other component is K j. -
 theorem inputShift_obj {I : Type u} (C : I → Type v) [∀ i, Category.{w} (C i)]
     [∀ i, HasShift (C i) ℤ] (K : ∀ j, C j) (i : I) (r : ℤ) :
     (inputShift C i r).obj K = Function.update K i ((K i)⟦r⟧) := by
-  sorry
+  funext j
+  by_cases h : i = j
+  · subst j
+    simp [inputShift]
+  · simp [inputShift, h, Function.update_of_ne (Ne.symm h)]
 
 open Classical in
 /-- Shift just the designated occurrence as an endofunctor of all input families.
@@ -193,7 +197,7 @@ theorem Expression.shiftOccurrenceFunctor_obj {B : Scheme.{u}} {I : Type u}
     [∀ W, HasShift (C W) ℤ] {W : Over B} (e : Expression B I X W)
     (K : ∀ j, C (e.occurrenceScheme j).left) (i : e.Occurrences) (r : ℤ) :
     (e.shiftOccurrenceFunctor i r).obj K = e.shiftOccurrence K i r := by
-  sorry
+  exact inputShift_obj (fun j ↦ C (e.occurrenceScheme j).left) K i r
 
 /-- A single designated input, with every other operand held at its actual value.
 Unary vertices retain their original maps and witnesses, and tensor vertices retain
@@ -253,6 +257,21 @@ def Expression.slotContext {B : Scheme.{u}} {I : Type u} {X : I → Over B}
       .tensorRight ((e.independentInputs.evaluate d).obj (fun k ↦ K (Sum.inl k)))
         (t.slotContext d (fun k ↦ K (Sum.inr k)) j)
 
+private theorem evaluate_reindex {B : Scheme.{u}} {I J : Type u} {Y : J → Over B}
+    {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)] (d : Interpretation C)
+    (f : I → J) {W : Over B} (e : Expression B I (Y ∘ f) W)
+    (K : ∀ j, C (Y j).left) :
+    ((e.reindexInputs f).evaluate d).obj K = (e.evaluate d).obj (fun i ↦ K (f i)) := by
+  induction e with
+  | var i => rfl
+  | pull g e ih => exact congrArg (d.pull g.left).obj ih
+  | push g hp e ih => exact congrArg (d.push g.left).obj ih
+  | shriek j hj hq e ih =>
+    let := hj
+    exact congrArg (d.shriek j.left).obj ih
+  | compactSupport g c e ih => exact congrArg (d.compactSupport g.left c).obj ih
+  | tensor e t ih jt => exact congrArg (d.tensor _).obj (Prod.ext ih jt)
+
 open Classical in
 /-- Evaluating the selected-slot context is evaluating the existing expression with
 only that occurrence replaced. This equality fixes the comparison without choosing
@@ -275,7 +294,80 @@ theorem Expression.slotContext_evaluate {B : Scheme.{u}} {I : Type u} {X : I →
     (P : C (e.occurrenceScheme i).left) :
     ((e.slotContext d K i).evaluate).obj P =
       (e.independentInputs.evaluate d).obj (Function.update K i P) := by
-  sorry
+  classical
+  induction e with
+  | var j =>
+    cases i
+    simp [slotContext, SlotContext.evaluate, independentInputs, evaluate]
+  | pull f e ih => exact congrArg (d.pull f.left).obj (ih K i P)
+  | push f hp e ih => exact congrArg (d.push f.left).obj (ih K i P)
+  | shriek j hj hq e ih =>
+    let := hj
+    exact congrArg (d.shriek j.left).obj (ih K i P)
+  | compactSupport f c e ih => exact congrArg (d.compactSupport f.left c).obj (ih K i P)
+  | tensor e t ih jt =>
+    cases i with
+    | inl i =>
+      change (d.tensor _).obj (_, _) = (d.tensor _).obj (_, _)
+      apply congrArg (d.tensor _).obj
+      apply Prod.ext
+      · change _ = ((e.independentInputs.reindexInputs
+          (Y := (e.tensor t).occurrenceScheme) Sum.inl).evaluate d).obj _
+        rw [evaluate_reindex, ih]
+        apply congrArg (e.independentInputs.evaluate d).obj
+        funext k
+        by_cases h : k = i
+        · subst k; simp
+        · rw [Function.update_of_ne h]
+          symm
+          apply dif_neg
+          exact fun heq ↦ h (Sum.inl.inj heq)
+      · change _ = ((t.independentInputs.reindexInputs
+          (Y := (e.tensor t).occurrenceScheme) Sum.inr).evaluate d).obj _
+        rw [evaluate_reindex]
+        apply congrArg (t.independentInputs.evaluate d).obj
+        funext k
+        simp
+    | inr i =>
+      change (d.tensor _).obj (_, _) = (d.tensor _).obj (_, _)
+      apply congrArg (d.tensor _).obj
+      apply Prod.ext
+      · change _ = ((e.independentInputs.reindexInputs
+          (Y := (e.tensor t).occurrenceScheme) Sum.inl).evaluate d).obj _
+        rw [evaluate_reindex]
+        apply congrArg (e.independentInputs.evaluate d).obj
+        funext k
+        simp
+      · change _ = ((t.independentInputs.reindexInputs
+          (Y := (e.tensor t).occurrenceScheme) Sum.inr).evaluate d).obj _
+        rw [evaluate_reindex, jt]
+        apply congrArg (t.independentInputs.evaluate d).obj
+        funext k
+        by_cases h : k = i
+        · subst k; simp
+        · rw [Function.update_of_ne h]
+          symm
+          apply dif_neg
+          exact fun heq ↦ h (Sum.inr.inj heq)
+
+private theorem reindex_labels {B : Scheme.{u}} {I J : Type u} {Y : J → Over B}
+    (f : I → J) {W : Over B} (e : Expression B I (Y ∘ f) W) :
+    ∃ g : (e.reindexInputs f).Occurrences ≃ e.Occurrences,
+      ∀ i, (e.reindexInputs f).occurrenceLabel i = f (e.occurrenceLabel (g i)) := by
+  induction e with
+  | var i => exact ⟨Equiv.refl _, fun _ ↦ rfl⟩
+  | pull g e ih => exact ih
+  | push g hp e ih => exact ih
+  | shriek j hj hq e ih => exact ih
+  | compactSupport g c e ih => exact ih
+  | tensor e t ih jt =>
+    obtain ⟨g, hg⟩ := ih
+    obtain ⟨h, hh⟩ := jt
+    refine ⟨Equiv.sumCongr g h, ?_⟩
+    intro i
+    cases i with
+    | inl i => exact hg i
+    | inr i => exact hh i
 
 /-- Relabelling by occurrences gives precisely one leaf for each input label.
 Source: blueprint, the independent-occurrence convention
@@ -289,7 +381,28 @@ inductive bijections. Their disjoint union is a bijection onto the sum. -/
 theorem Expression.independentInputs_bijectiveLabel {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W) :
     Function.Bijective e.independentInputs.occurrenceLabel := by
-  sorry
+  induction e with
+  | var i =>
+    change Function.Bijective (fun _ : PUnit.{u + 1} ↦ PUnit.unit)
+    exact ⟨fun a b _ ↦ Subsingleton.elim a b, fun a ↦ ⟨a, rfl⟩⟩
+  | pull f e ih => exact ih
+  | push f hp e ih => exact ih
+  | shriek j hj hq e ih => exact ih
+  | compactSupport f c e ih => exact ih
+  | tensor e t ih jt =>
+    obtain ⟨g, hg⟩ := reindex_labels
+      (Y := (e.tensor t).occurrenceScheme) Sum.inl e.independentInputs
+    obtain ⟨h, hh⟩ := reindex_labels
+      (Y := (e.tensor t).occurrenceScheme) Sum.inr t.independentInputs
+    have heq : (e.tensor t).independentInputs.occurrenceLabel =
+        Sum.map e.independentInputs.occurrenceLabel t.independentInputs.occurrenceLabel ∘
+          Equiv.sumCongr g h := by
+      funext i
+      cases i with
+      | inl i => exact hg i
+      | inr i => exact hh i
+    rw [heq]
+    exact (ih.sumMap jt).comp (Equiv.sumCongr g h).bijective
 
 /-- Independently labelled finite expressions. This is only a presentation of
 independent occurrences: independentInputs provides it for every existing expression.
@@ -317,6 +430,85 @@ def Expression.variableContext {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     | none => (t.variableContext d K i).map
       (fun c ↦ .tensorRight ((e.evaluate d).obj K) c)
 
+private theorem variableContext_isSome_iff {B : Scheme.{u}} {I : Type u}
+    {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
+    (d : Interpretation C) (K : ∀ i, C (X i).left) (i : I)
+    {W : Over B} (e : Expression B I X W) :
+    (e.variableContext d K i).isSome ↔ ∃ j, e.occurrenceLabel j = i := by
+  classical
+  induction e with
+  | var j =>
+    by_cases h : i = j
+    · subst j
+      constructor
+      · intro _; exact ⟨PUnit.unit, rfl⟩
+      · intro _; simp [Expression.variableContext]
+    · simp [Expression.variableContext, Expression.occurrenceLabel, h, Ne.symm h]
+  | pull f e ih =>
+    change (Option.map _ (e.variableContext d K i)).isSome ↔
+      ∃ j : e.Occurrences, e.occurrenceLabel j = i
+    rw [Option.isSome_map]
+    exact ih
+  | push f hp e ih =>
+    change (Option.map _ (e.variableContext d K i)).isSome ↔
+      ∃ j : e.Occurrences, e.occurrenceLabel j = i
+    rw [Option.isSome_map]
+    exact ih
+  | shriek j hj hq e ih =>
+    change (Option.map _ (e.variableContext d K i)).isSome ↔
+      ∃ j : e.Occurrences, e.occurrenceLabel j = i
+    rw [Option.isSome_map]
+    exact ih
+  | compactSupport f c e ih =>
+    change (Option.map _ (e.variableContext d K i)).isSome ↔
+      ∃ j : e.Occurrences, e.occurrenceLabel j = i
+    rw [Option.isSome_map]
+    exact ih
+  | tensor e t ih jt =>
+    cases he : e.variableContext d K i with
+    | none =>
+      have ha : ¬ ∃ j, e.occurrenceLabel j = i := by
+        intro hex
+        have bad := ih.mpr hex
+        simp [he] at bad
+      simp only [Expression.variableContext, he]
+      rw [Option.isSome_map]
+      constructor
+      · intro ht
+        obtain ⟨j, hj⟩ := jt.mp ht
+        exact ⟨Sum.inr j, hj⟩
+      · rintro ⟨j, hj⟩
+        cases j with
+        | inl j => exact (ha ⟨j, hj⟩).elim
+        | inr j => exact jt.mpr ⟨j, hj⟩
+    | some c =>
+      have hex := ih.mp (by simp [he])
+      constructor
+      · intro _
+        obtain ⟨j, hj⟩ := hex
+        exact ⟨Sum.inl j, hj⟩
+      · intro _
+        simp [Expression.variableContext, he]
+
+open Classical in
+private theorem evaluate_update_absent {B : Scheme.{u}} {I : Type u}
+    {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
+    (d : Interpretation C) (K : ∀ i, C (X i).left) (i : I) (P : C (X i).left)
+    {W : Over B} (e : Expression B I X W) (h : ∀ j, e.occurrenceLabel j ≠ i) :
+    (e.evaluate d).obj (Function.update K i P) = (e.evaluate d).obj K := by
+  induction e with
+  | var j =>
+    exact Function.update_of_ne (h PUnit.unit) P K
+  | pull f e ih => exact congrArg (d.pull f.left).obj (ih h)
+  | push f hp e ih => exact congrArg (d.push f.left).obj (ih h)
+  | shriek j hj hq e ih =>
+    let := hj
+    exact congrArg (d.shriek j.left).obj (ih h)
+  | compactSupport f c e ih => exact congrArg (d.compactSupport f.left c).obj (ih h)
+  | tensor e t ih jt =>
+    exact congrArg (d.tensor _).obj
+      (Prod.ext (ih (fun j ↦ h (Sum.inl j))) (jt (fun j ↦ h (Sum.inr j))))
+
 /-- Every independently labelled input has a context in the explicit search.
 Source: blueprint, independent leaf indexing
 (blueprint: def-pur-integral-expression-occurrences).
@@ -330,7 +522,7 @@ theorem IndependentExpression.variableContext_isSome {B : Scheme.{u}} {I : Type 
     {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
     (d : Interpretation C) {W : Over B} (e : IndependentExpression B I X W)
     (K : ∀ i, C (X i).left) (i : I) : (e.val.variableContext d K i).isSome := by
-  sorry
+  exact (variableContext_isSome_iff d K i e.val).mpr (e.property.surjective i)
 
 /-- Extract the context from the successful explicit tree search. The proof only
 certifies Option.get; it does not choose a context from an existence theorem.
@@ -341,6 +533,63 @@ def IndependentExpression.variableContext {B : Scheme.{u}} {I : Type u}
     (d : Interpretation C) {W : Over B} (e : IndependentExpression B I X W)
     (K : ∀ i, C (X i).left) (i : I) : Expression.SlotContext d (X i) W :=
   (e.val.variableContext d K i).get (e.variableContext_isSome d K i)
+
+open Classical in
+private theorem variableContext_evaluate_of_some {B : Scheme.{u}} {I : Type u}
+    {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
+    (d : Interpretation C) (K : ∀ i, C (X i).left) (i : I) (P : C (X i).left)
+    {W : Over B} (e : Expression B I X W) (h : Function.Injective e.occurrenceLabel)
+    (c : Expression.SlotContext d (X i) W) (hc : e.variableContext d K i = some c) :
+    c.evaluate.obj P = (e.evaluate d).obj (Function.update K i P) := by
+  induction e with
+  | var j =>
+    by_cases hij : i = j
+    · subst j
+      simp [Expression.variableContext] at hc
+      subst c
+      simp [Expression.SlotContext.evaluate, Expression.evaluate]
+    · simp [Expression.variableContext, hij] at hc
+  | pull f e ih =>
+    obtain ⟨c', hc', rfl⟩ := Option.map_eq_some_iff.mp hc
+    exact congrArg (d.pull f.left).obj (ih h c' hc')
+  | push f hp e ih =>
+    obtain ⟨c', hc', rfl⟩ := Option.map_eq_some_iff.mp hc
+    exact congrArg (d.push f.left).obj (ih h c' hc')
+  | shriek j hj hq e ih =>
+    obtain ⟨c', hc', rfl⟩ := Option.map_eq_some_iff.mp hc
+    let := hj
+    exact congrArg (d.shriek j.left).obj (ih h c' hc')
+  | compactSupport f c e ih =>
+    obtain ⟨c', hc', rfl⟩ := Option.map_eq_some_iff.mp hc
+    exact congrArg (d.compactSupport f.left c).obj (ih h c' hc')
+  | tensor e t ih jt =>
+    have hl : Function.Injective e.occurrenceLabel :=
+      fun a b hab ↦ Sum.inl.inj (h (a₁ := Sum.inl a) (a₂ := Sum.inl b) hab)
+    have hr : Function.Injective t.occurrenceLabel :=
+      fun a b hab ↦ Sum.inr.inj (h (a₁ := Sum.inr a) (a₂ := Sum.inr b) hab)
+    cases he : e.variableContext d K i with
+    | some c' =>
+      have hex := (variableContext_isSome_iff d K i e).mp (by simp [he])
+      obtain ⟨j, hj⟩ := hex
+      have ha : ∀ k, t.occurrenceLabel k ≠ i := by
+        intro k hk
+        have bad := h (a₁ := Sum.inl j) (a₂ := Sum.inr k) (hj.trans hk.symm)
+        cases bad
+      simp only [Expression.variableContext, he, Option.some.injEq] at hc
+      subst c
+      change (d.tensor _).obj (_, _) = (d.tensor _).obj (_, _)
+      exact congrArg (d.tensor _).obj
+        (Prod.ext (ih hl c' he) (evaluate_update_absent d K i P t ha).symm)
+    | none =>
+      have ha : ∀ k, e.occurrenceLabel k ≠ i := by
+        intro k hk
+        have bad := (variableContext_isSome_iff d K i e).mpr ⟨k, hk⟩
+        simp [he] at bad
+      simp only [Expression.variableContext, he] at hc
+      obtain ⟨c', hc', rfl⟩ := Option.map_eq_some_iff.mp hc
+      change (d.tensor _).obj (_, _) = (d.tensor _).obj (_, _)
+      exact congrArg (d.tensor _).obj
+        (Prod.ext (evaluate_update_absent d K i P e ha).symm (jt hr c' hc'))
 
 open Classical in
 /-- Replacing the sole occurrence of a label is evaluation of its actual context.
@@ -361,7 +610,12 @@ theorem IndependentExpression.variableContext_evaluate {B : Scheme.{u}} {I : Typ
     ((e.variableContext d K i).evaluate).obj P =
       (e.val.evaluate d).obj (Function.update K i P) ∧
     ((e.variableContext d K i).evaluate).obj (K i) = (e.val.evaluate d).obj K := by
-  sorry
+  have hP := variableContext_evaluate_of_some d K i P e.val e.property.injective
+    (e.variableContext d K i) (Option.some_get _).symm
+  refine ⟨hP, ?_⟩
+  have hK := variableContext_evaluate_of_some d K i (K i) e.val e.property.injective
+    (e.variableContext d K i) (Option.some_get _).symm
+  simpa only [Function.update_eq_self] using hK
 
 end WeilConjectures.IntegralSystemRealization
 
