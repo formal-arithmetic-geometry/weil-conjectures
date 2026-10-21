@@ -17,63 +17,97 @@
  ],
  "proof": [
   {
-   "text": "Set $c=2e$ and $G=Rf_*$. The module categories $\\mathcal A_X,\\mathcal A_Y$ are Grothendieck by the small-ringed-site theorem. The proper classical amplitude lemma gives a triangulated $G$, preservation of all lower bounds, and $G(L)\\in D^{\\le b+c}$ for every classical $L\\in D^{\\le b}$. It also gives preservation of arbitrary sums by the total étale direct image $E$, supplying the explicit hypothesis of the bounded classical transport lemma. That lemma gives closure of classical sheaves under sums (apply its closure assertion to degree-zero objects), closure of classical complexes under sums and truncations, and invertibility of the canonical comparison on every common finite interval.",
+   "text": "Specialize the base-change fibre bound to the identity of Y. The pullback along the identity, and its fibres, are canonically isomorphic to X and the fibres of f. Transport topological Krull dimension through the induced homeomorphism. This is the private helper fibre_bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
+   }
+  },
+  {
+   "text": "Every module over the finite ring A is additively torsion. Apply the proper torsion direct-image bound with d=e to the underlying abelian étale sheaf, obtaining vanishing above 2e. The higher-direct-image forgetful isomorphism and faithfulness of forgetting transfer this vanishing to A-module sheaves. The identification on a sheaf in degree zero gives the usual rightDerived vanishing. This is etale_cd.",
    "uses": [
-    "lem-sfb-finite-proper-classical-amplitude",
-    "lem-sfb-finite-proper-classical-bounded-sums",
-    "lem-weil-pbc-ring-sheaves-grothendieck"
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements and Transfer; assembly of the three extracted arguments, returned proof steps 1–12"
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
    }
   },
   {
-   "text": "Fix $m\\in\\mathbf Z$. Apply the family truncation lemma with $\\mathcal P$ the classical module sheaves, using the properties from step 1. Put $U_s=\\tau_{\\le m}K_s$, $V_s=\\tau_{\\ge m-c}U_s$, and denote their maps by $u_s:U_s\\to K_s$, $v_s:U_s\\to V_s$. It gives all four isomorphisms $H^m(G(\\bigoplus u_s))$, $H^m(G(\\bigoplus v_s))$, $H^m(\\bigoplus Gu_s)$ and $H^m(\\bigoplus Gv_s)$, and places every $V_s$ in the common interval $[m-c,m]$.",
+   "text": "For bounded classical complexes use the already proved source declarations plusEtaleOrigin_of_etaleOriginHomology, isLE_of_isLE_mapDerivedCategory_comparisonUpperStar, Functor.isLE_rightDerivedFunctor_obj, and rightDerivedLowerStarComparisonIso. They give the upper bound b+2e on each bounded truncation. The pro-étale unbounded derived adjunction makes direct image preserve countable products. Source exact countable products and DerivedCategory.isLE_obj_of_forall_isLE_obj_truncGE then give the uniform bound b+2e+1 on the original bounded-above classical complex. This is fixed_amplitude; the extra one is harmless.",
    "uses": [
-    "lem-sfb-amplitude-truncation-family-comparison"
+    "lem-sfb-derived-left-complete-truncation-bound",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements and Transfer; assembly of the three extracted arguments, returned proof steps 1–12"
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
    }
   },
   {
-   "text": "Write $\\sigma_T:\\bigoplus_sGT_s\\to G(\\bigoplus_sT_s)$ for the canonical comparison. For any family $h_s:T_s\\to T'_s$, the coproduct universal property gives $G(\\bigoplus h_s)\\sigma_T=\\sigma_{T'}(\\bigoplus Gh_s)$: both composites with the $s$-th coprojection are $G(\\iota'_sh_s)$. Apply this identity to $u$ and $v$. After $H^m$, the four maps from step 2 are invertible. The bounded classical transport lemma makes $\\sigma_V$ invertible. Cancellation in the square for $v$ gives invertibility of $H^m(\\sigma_U)$; cancellation in the square for $u$ then gives invertibility of $H^m(\\sigma_K)$.",
-   "uses": [
-    "lem-sfb-finite-proper-classical-bounded-sums"
-   ],
+   "text": "Apply the already proved source theorem DerivedCategory.isIso_sigmaComparison_of_bounded with the class DerivedCategory.etaleOriginHomology and amplitude 2e+1. Source homologyProperty_truncLE, homologyProperty_truncGE and etaleOriginHomology_sigma give the class stability hypotheses; right derived direct image preserves lower bounds. The source theorem isIso_sigmaComparison_rightDerivedLowerStar_of_bounded supplies the uniformly bounded-family case for every proper f, with no ground-field hypothesis. Its finite-window argument is exactly the truncation-and-naturality portion of the original plan, already proved in the source library. This is fixed_coproducts.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements and Transfer; assembly of the three extracted arguments, returned proof steps 1–12"
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
    }
   },
   {
-   "text": "Since $m$ is arbitrary, the unbounded derived cohomology criterion makes $\\sigma_K$ invertible. Its components are $G(\\iota_s)$ by its defining universal property, so it is precisely the comparison in the statement. The empty family is covered by the same argument; equivalently, additive $G$ takes zero to zero.",
+   "text": "The canonical coefficient realization is an exact equivalence. Its underlying abelian sheaf is naturally the original underlying abelian sheaf: use the sheafification counit, giving realizationToSheafIso. The derived homology comparison and invariance of classicality under isomorphism therefore show that preimages of the given family under derived realization have homology of étale origin. Use proEtaleClassicalSheavesModules for this last identification. This is classical_of_realization.",
    "uses": [
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "def-weil-pbc-proetale-operations",
+    "det-pe-classical-sheaves-modules"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
+   }
+  },
+  {
+   "text": "Derive finiteCoefficientRealization_directImage using the existing source composition isomorphisms mapDerivedCategoryCompRightDerivedFunctorIso and rightDerivedFunctorCompMapDerivedCategoryIso. Realization is an equivalence and thus preserves K-injectives and coproducts. Apply fixed_coproducts to the preimage family, transport colimit preservation through the derived natural isomorphism by Mathlib preservesColimit_of_natIso, cancel the realization equivalence, and transport along the family isomorphism by preservesColimit_of_iso_diagram. Thus the actual finiteCoefficientDerivedDirectImage preserves this specified family coproduct.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-realization-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
+   }
+  },
+  {
+   "text": "Take the standard source coproduct cofan. Since its image is colimiting, use that image cofan as the target coproduct witness. The comparison in the statement is then the descent of this cofan to itself, hence the identity by uniqueness in the colimit universal property. This also proves the empty-family case.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements and Transfer; assembly of the three extracted arguments, returned proof steps 1–12"
+    "place": "Étale statements and Transfer; existing source-library implementations cited in the step"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-amplitude-truncation-family-comparison",
-  "lem-sfb-finite-proper-classical-amplitude",
-  "lem-sfb-finite-proper-classical-bounded-sums",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "def-weil-pbc-proetale-operations",
+  "det-pe-classical-sheaves-modules",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-finite-coefficient-realization-direct-image",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-  "place": "Étale statements and Transfer; short assembly of uniform amplitude, bounded classical coproduct comparison, and family truncation maps."
+  "place": "Étale statements and Transfer, using the already proved source LowerStarCoproducts and CoproductsOfFiniteAmplitude arguments; replace the separate heart-bound route by the source left-complete truncation bound, with slack one, and transport through canonical coefficient realization."
  },
  "mathlib_searches": [
   {
@@ -191,32 +225,11 @@
   ]
  },
  "tool_uses": [
-  "det-pe-classical-derived-equivalence",
   "det-pe-classical-sheaves-modules",
-  "det-pe-left-complete-iso",
-  "det-pe-products-exact",
-  "lem-exc-direct-image-coproducts",
-  "lem-kun-grothendieck-derived-coproducts",
   "lem-kun-proper-torsion-cd-bound",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-separated-quasi-separated",
-  "lem-pur-exact-derived-coproducts",
   "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sfb-left-complete-heart-upper-bound",
   "lem-sp-derived-functor-single-identification",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-derived-countable-products-core",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-right-adjoint-preserves-limits",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "sk-prop-sf-comparison",
-  "sk-thm-pe-direct-image-comparison",
-  "src-right-derived-functor-plus-compatibility"
+  "lem-weil-pbc-right-adjoint-preserves-limits"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -244,5 +257,15 @@
   "result": "pass",
   "note": "All clauses match node lem-sfb-finite-proper-classical-coproducts: CommRing+Finite A (u+1 and discrete topology forced by def-weil-pbc-proetale-modules), IsProper f with no qc/field hypothesis, fibre bound over every base change and point, FiniteCoefficientDerivedCategory, finiteCoefficientDerivedDirectImage = total K-injective rightDerivedFunctor of the standard pushforward, I : Type (u+1) possibly empty, IsClassicalModuleComplex in every degree, IsIso of the universal hc'.desc with components Rf_*(c.inj s) (the exists-cofan form implies every choice). Statement verbatim; node diff only the lean field; dependency records byte-identical to side-live; no definitions, only sorry; docstrings give the source place, blueprint tag and 12 steps; report sections present. nt_compile --json rc=0 in 4.9 s, clean. Advisory: finiteCoefficientDerivedDirectImage is owned by no stmt_dep record (it comes from the module behind proof_dep def-weil-pbc-proetale-operations) but is the canonical object."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T111008-L-3871783",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
