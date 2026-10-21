@@ -2,142 +2,55 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Apply [lem-pur-kflat-change-of-rings] to $R_{E,Y}\\to A_{Y,m}$ and then $A_{Y,m}\\to B_{Y,m}$: $P_m,Q_m,sP_m,sQ_m$ are flat-term K-flat complexes, without a flatness hypothesis on either ring map. By [lem-pur-kflat-total-tensor-model] their total tensors are also flat-term K-flat. Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to the finite ringed-topos pullbacks specified in [def-weil-proetale-inverse-image]; the pulled-back complexes are valid K-flat models as well. Thus every ordinary tensor and pullback used below has the stated derived interpretation.",
+   "text": "Apply [lem-pur-normalized-scalar-comparison-realization] to the stated $P,Q$, $E\\subset L$ and $f$. It supplies flat-term K-flat finite models, their normalized scalar extensions, the simultaneous association $(x\\otimes a)\\otimes b\\mapsto x\\otimes i_m(a)b$, and the normalized finite pullback and tensor systems. Thus these are the actual quotient systems of the item, with every transition, and all ordinary complexes used below have their derived interpretations.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-weil-proetale-inverse-image"
+    "lem-pur-normalized-scalar-comparison-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
+    "place": "Agent re-split assembly step 1; original proof steps 1--2 and 8"
    }
   },
   {
-   "text": "Use the actual coefficient maps of [def-weil-integral-scalar-extension]. Define $\\alpha_m:(P\\otimes_{R_{E,Y}}A_{Y,m})\\otimes_{A_{Y,m}}B_{Y,m}\\to P\\otimes_{R_{E,Y}}B_{Y,m}$ by $(x\\otimes a)\\otimes b\\mapsto x\\otimes\\iota_m(a)b$; its inverse sends $x\\otimes b$ to $(x\\otimes1)\\otimes b$. The tensor balancing relations in [def-pur-sheaf-tensor-product] show that these are inverse sheaf maps. For $m\\geq n$, reduction of the displayed image is $x\\otimes\\iota_n(\\bar a)\\bar b$, exactly the image after reduction first. They are therefore simultaneous chain isomorphisms of towers, also for $Q$. The normalization and coherent reduction identification for these very models are the assertions of [lem-pur-coefficient-extension-reduction-model], not an assertion that $A_m\\to B_m$ is flat.",
+   "text": "Apply [lem-pur-strict-coefficient-comparison-calculus] with $u$ the geometric morphism of small pro-etale topoi induced by $f$ (inverse image $f^{-1}$), $\\phi^a$ the constant-coefficient identifications, and $R^0=A,R^1=B,R^2=C$. The coefficient maps and quotient transitions of [def-weil-integral-scalar-extension] and the constant-coefficient pullbacks of [def-weil-proetale-inverse-image] give its commuting coefficient squares. Its balanced formulas identify its $\\kappa,\\sigma,c$ with the canonical maps in the item. Its strict square is exactly the displayed equation, and its generator value is the required $(b\\otimes x)\\otimes(1\\otimes y)$. Its inverse, transition, identity and coefficient-composition equations give the corresponding assertions on these models. For $L=E$ the tensor identity is also exactly [lem-pur-scalar-tensor-unit] (the normalized $\\sigma$ followed by $T(U,U)$ is the action unitor on $T$) on the ringed quotient sequence site of the item's Lean statement.",
    "uses": [
+    "lem-pur-strict-coefficient-comparison-calculus",
     "def-weil-integral-scalar-extension",
-    "def-pur-sheaf-tensor-product",
-    "lem-pur-coefficient-extension-reduction-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
-   }
-  },
-  {
-   "text": "Write coefficient factors on the left, using commutativity, and suppress inverse-image symbols on local sections. For each level, $\\kappa_K$ is the scalar-association map $b\\otimes(a\\otimes x)\\mapsto b\\iota_m(a)\\otimes(1\\otimes x)$; the right-hand side is in $f_{L,m}^*(s_{Y,m}K)$. Its inverse is $b\\otimes(d\\otimes x)\\mapsto b\\,c^f_{B_m}(d)\\otimes(1\\otimes x)$, where the right-hand side is in $s_{X,m}(f_{E,m}^*K)$. Here $a$ is an $A_{X,m}$ coefficient and $d$ is an inverse-image $B_{Y,m}$ coefficient. The coefficient square in [def-weil-proetale-inverse-image] commutes with $\\iota_m$: on a constant section both composites send it to its image in $B_m$, and the defining sheafification adjunction extends this equality. Tensor balancing [def-pur-sheaf-tensor-product] then verifies both inverse identities. These formulas are degreewise and use no differential on coefficients, so they define inverse chain maps.",
-   "uses": [
     "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-cochain-pullback-tensor-coherence] also to the identity inverse image with ring map $A_{W,m}\\to B_{W,m}$. Its comparison is precisely $\\sigma_W$, with formulas $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$ and inverse $(b\\otimes x)\\otimes(d\\otimes y)\\mapsto bd\\otimes(x\\otimes y)$. Applied to $f$ with coefficients $A_m$ or $B_m$ it gives $c_E,c_L$. These are chain isomorphisms for direct-sum totals, including unbounded ones. In degrees $(p,q)$ their differentials have the two terms with coefficients $1$ and $(-1)^p$, respectively [def-pc-tensor-complex-sheaves]; the comparisons preserve $(p,q)$ and introduce no permutation, hence preserve this sign.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
-   }
-  },
-  {
-   "text": "Apply the coefficient-square clause of [lem-pur-cochain-pullback-tensor-coherence] to the commuting square of finite coefficient ring sheaves for $f$. Under the scalar-association maps from step 3, its equation is exactly the displayed equation of the item. Explicitly, start with a local tensor $b\\otimes(x\\otimes y)$ with $x,y$ homogeneous. The left route associates scalars, splits the tensor by $\\sigma_Y$, then splits the pullback by $c_L$; the right route splits the pullback by $s_X(c_E)$, splits scalars by $\\sigma_X$, then associates each factor by $\\kappa_P,\\kappa_Q$. Each gives $(b\\otimes x)\\otimes(1\\otimes y)$. General coefficients in either factor are moved to $b$ by balancing. Such tensors generate the presheaf tensor products and the direct-sum terms, and equality persists on sheafification [def-pur-sheaf-tensor-product]. Thus this is equality of chain maps, rather than just equality of their localized classes.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
-   }
-  },
-  {
-   "text": "For any quotient $m\\to n$, write $\\bar b$ for the coefficient image and $\\bar x$ for the image of a section of the relevant quotient complex. The formulas in steps 3--5 commute with reduction: $\\overline{b\\iota_m(a)}=\\bar b\\iota_n(\\bar a)$ for $\\kappa$, and both orders for $\\sigma$ or $c$ give $(\\bar b\\otimes\\bar x)\\otimes(1\\otimes\\bar y)$. The inverse formulas multiply coefficients, and $\\overline{bd}=\\bar b\\bar d$, so they commute too. Naturality of inverse image and the transition-compatible ring maps of [def-weil-integral-scalar-extension] give the same formulas for sections before suppressing inverse-image notation. The cochain lemma [lem-pur-cochain-pullback-tensor-coherence] gives the transition compatibility for $c$. Consequently all maps and both routes are strict tower maps; the square and its inverse hold in the strict tower category.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
-   }
-  },
-  {
-   "text": "For $L=E$ identify $A_m\\otimes_{A_m}K$ with $K$ by the action unitor: $a\\otimes x\\mapsto ax$. The formulas for $\\kappa$ and $\\sigma$ become the identity under these unitors. For $E\\subset L\\subset F$, let $j_m:B_m\\to C_m$ be the coefficient map of [def-weil-integral-scalar-extension] for $L\\subset F$; since all three maps are induced by the inclusions $\\mathcal O_E\\subset\\mathcal O_L\\subset\\mathcal O_F$, the map for $E\\subset F$ is $j_m\\iota_m$. Identify $C_m\\otimes_{B_m}(B_m\\otimes_{A_m}K)$ with $C_m\\otimes_{A_m}K$ by $d\\otimes(b\\otimes x)\\mapsto d\\,j_m(b)\\otimes x$. The successive $\\kappa$ formulas and the direct one multiply the same coefficients in the same order. For $\\sigma$, both the successive route on $d\\otimes(b\\otimes(x\\otimes y))$ and the direct route give $(d\\,j_m(b)\\otimes x)\\otimes(1\\otimes y)$. Balancing proves these equations on all sections. Reduction preserves $d\\,j_m(b)$, so these are strict-system equations. The coherent reduction identifications used here have exactly this transitivity and identity compatibility by [lem-pur-coefficient-extension-reduction-model]. In Lean the scalar/pullback identity is proved by precomposing with the inverse action unitor, testing with the pullback adjunction unit, and applying the generator normalization of def-trf-integral-comparison-sequence-systems. The tensor identity uses [lem-pur-scalar-tensor-unit], specialized to the sigma field of Comparisons and its pure-tensor formula at coefficient one. The other obligations remain open.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-pur-coefficient-extension-reduction-model",
-    "def-weil-integral-scalar-extension",
-    "def-trf-integral-comparison-sequence-systems",
     "lem-pur-scalar-tensor-unit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
-   }
-  },
-  {
-   "text": "Use [lem-pur-coefficient-extension-reduction-model] to identify the coherent reductions of the integral scalar extensions of $M,N$ with the actual $B_m$-models of step 2, using its canonical counit and simultaneous $\\alpha_m$ maps. Apply [lem-pur-completed-operation-tower-substitution] to these normalized systems: their finite pullback and tensor systems are normalized, and their derived limits are the completed operations on the limits, naturally in system maps. This supplies the coherent reduction identifications needed for the targets of $\\kappa,\\sigma$. Apply the coefficient-extension reduction theorem also to the integral pullback and tensor inputs, using the same substitution theorem at $E$ to identify their reduction systems. Thus the sources are the scalar extensions of those integral operations. The definitions in [def-pur-integral-derived-operations] use these finite models and derived limits. On these identified systems, the canonical scalar-association comparison is precisely $\\kappa$ for pullback and $\\sigma$ for tensor, by steps 3--4. Their limits therefore realize the first two isomorphisms of [lem-pur-integral-operations-scalar-extension] with their canonical tensor-association normalization. No uniqueness of arbitrary natural isomorphisms, and no commutation of pullback or tensor with arbitrary inverse limits, is asserted.",
-   "uses": [
-    "lem-pur-coefficient-extension-reduction-model",
-    "lem-pur-completed-operation-tower-substitution",
-    "def-pur-integral-derived-operations",
-    "lem-pur-integral-operations-scalar-extension"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
+    "place": "Agent re-split assembly step 2; original proof steps 3--7"
    }
   },
   {
-   "text": "After restriction to the completed $L$-coefficient sheaf, all towers and maps above are strict towers over one sheaf of rings. Apply the derived-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The levelwise inverse tower maps give inverse maps on derived limits because a functor preserves compositions and identities. Step 8 identifies these with the canonical integral pullback and tensor scalar-extension isomorphisms. Applying the same functor to the strict square, unit equations and successive-extension equations preserves them. Hence their derived limits have precisely the asserted quotient representatives and transition compatibility, also in the ramified case.",
+   "text": "The two coherent counit equations of [lem-pur-normalized-scalar-comparison-realization] identify the localized maps of step 2, under precisely the reduction identifications of step 1, with the canonical integral pullback and tensor scalar comparisons. Restrict all systems to the completed $L$-coefficient sheaf and apply the total derived-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. A functor preserves inverse pairs, identities, and equal composites, so the strict square, units and successive-extension equations persist on the limits. The realization theorem identifies these limit maps with the first two integral scalar isomorphisms named in the item, with their specified normalization. Neither step uses flatness of a finite quotient inclusion, so the same conclusion includes ramified extensions.",
    "uses": [
+    "lem-pur-normalized-scalar-comparison-realization",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent calculation of the strict quotient representatives, refining the integral-operations clause"
+    "place": "Agent re-split assembly step 3; original proof steps 8--9"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "def-weil-proetale-inverse-image",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-strict-coefficient-comparison-calculus",
   "def-weil-integral-scalar-extension",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-coefficient-extension-reduction-model",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pc-tensor-complex-sheaves",
-  "def-trf-integral-comparison-sequence-systems",
-  "lem-pur-scalar-tensor-unit",
-  "lem-pur-completed-operation-tower-substitution",
-  "def-pur-integral-derived-operations",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-scalar-tensor-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Original nine-step plan retained for the unresolved declarations; proof step 7 now records the Lean pullback-unit proof and the proved signed-tensor unit lemma (D3, 2026-10-19)."
+  "place": "Short assembly of the independent strict coefficient calculus and normalized realization tasks; complete former nine-step argument preserved verbatim in the Q06 report."
  },
  "mathlib_match": null,
  "status": "split",
@@ -267,23 +180,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-scalar-extension-tower-coherence",
   "worker": "stage1",
-  "summary": "Kept the statement and all inherited metadata. Nine steps identify the K-flat quotient models, write scalar-association maps and inverses, calculate the finite tensor square, quotient compatibility and successive-extension equations, and identify the functorial derived limits via existing coherent reduction and integral-operation nodes. No new nodes; no finite-level flatness assumption. Read the actual cited statements and local sources and logged fresh Mathlib searches with a second semantic phrasing.",
-  "blueprint": "Ancestor def-weil-frobenius-coefficient-twists: compatibility of the Weil/twist tensor comparison with finite reduction and scalar extension. Realizes the parent lem-pur-derived-pullback-tensor-iso former step 6 by actual finite quotient maps, strict transition equations, identity and extension-tower equations, and their integral derived limits.",
+  "summary": "Human-requested re-split without changing the statement or Lean records: two independent statement-only tasks, generic strict coefficient comparison calculus (former steps 3--7) and normalized scalar comparison realization (former steps 1--2,8--9). All former argument text retained in report.md; three assembly steps total 1932 characters.",
+  "blueprint": "Realizes former coefficient-compatible Frobenius-transport proof step 6 through the main-20261015 integral-operations clause, without changing the unit or chapter route.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Generic ringed-topos preservation supplies valid finite pullback models; no purity argument is replaced."
-   },
-   {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic derived-limit functor on strict towers preserves the already established map equations; the conventions unit has no such functoriality theorem."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Identifies the existing canonical integral operations comparisons whose strict finite representatives are calculated here; this is a coefficient-operation tool, not a replacement purity route."
+    "why": "Generic total derived-limit functor for strict towers after restriction to one completed ring sheaf; the unit does not replace this categorical tool."
    }
   ]
  },
@@ -293,12 +198,12 @@
   "lem-pur-integral-operations-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NF-73a83592c",
-  "group": "NF",
+  "reviewer": "NT-cc-Q06-f5d81d166",
+  "group": "Q06",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-73a83592c (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited statement in full, along with the parent lem-pur-derived-pullback-tensor-iso and the proof of lem-pur-integral-operations-scalar-extension. Sources are checked at the cited places: Stacks 07A4 is sites-cohomology lemma-pullback-tensor-product (tags line 9294; .tex lines 3684-3714); the main-20261015 blueprint def-weil-derived-pullback-tensor-hom has the integral-operations clause; the ancestor def-weil-frobenius-coefficient-twists has its last sentence on compatibility with reduction and scalar extension; Bhatt-Scholze Def 3.4.10, Lem 3.4.12 and Prop 3.5.1 are on pp. 22-25. No SGA is used. The displayed square is true: it is the coefficient-square clause of lem-pur-cochain-pullback-tensor-coherence (u=f, R=A_Y, S=A_X, R'=B_Y, S'=B_X, eps=sigma_Y, eps^S=sigma_X) with the item's kappa equal to the inverse of the lemma's kappa. Domains, codomains and the (-1)^p sign were checked. The item is not a restatement of the parent: it adds strict tower compatibility, units, transitivity for successive extensions, and the derived-limit identification. Small cases tested: f=id with L=E and P=Q=A[0], where everything reduces to unitors; the ramified case Q_l(sqrt l), where B_2=F_l[pi]/pi^2 is not flat over Z/l^2, so the ordinary tensors have derived meaning only through K-flatness (step 1), and the statement correctly assumes no flatness; and E in L in F, where iota^{EF}=j iota^{EL}. Step 8 pins a specific choice for the isomorphisms that lem-pur-integral-operations-scalar-extension only asserts exist. It shows the limits have that lemma's shape, naturality, unit and transitivity, and claims no uniqueness. This matches how that lemma's proof builds them (scalar association plus completion) and how lem-trf-integral-pullback-comparison-realization makes the same kind of choice, so I accept it. No new nodes, no cycle (dependency closure of 2257 nodes checked) and no duplicate. The three declared tool_uses are accepted as generic black boxes: lem-weil-pbc-ringed-pullback-preserves-kflat, lem-weil-pbc-ringed-strict-tower-homotopy-limit and lem-pur-integral-operations-scalar-extension. FIX: step 7 used j_m:B_m->C_m and iota^{EF}_m=j_m iota^{EL}_m without citing where j_m is defined. I added both, citing def-weil-integral-scalar-extension for L in F, and added that node to step 7's uses; it was already in proof_deps. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-pur-scalar-extension-tower-coherence.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-f5d81d166 (reviewer sub-agent of L); spot-checked: Read in full: the re-split note (released 14:08, ≥2 new nodes, parent ≤3000 chars), the item, both new nodes, and the full statements of every cited node. Field diff against clones/live and side-live: only proof, proof_deps, proof_origin and split_report changed. The statement, stmt_deps, Lean record and tool_uses are unchanged. All 9 old steps appear verbatim in the report and are allocated to nodes. Old steps 3-7 go to lem-pur-strict-coefficient-comparison-calculus, a generic calculus for ring-sheaf towers. Old steps 1-2 and 8 go to lem-pur-normalized-scalar-comparison-realization. Old step 9 is Rlim functoriality and stays in item step 3. The two nodes are of comparable size and independent, and neither restates the item. The parent is 1932 chars. Strict node, checked by hand: kappa typing via Stacks 03EL; the inverse uses phi^b, and its coefficient square comes from the commuting hypothesis. Sigma is degree-preserving, so the (-1)^p sign is kept. Both routes of the square give (b⊗(1⊗x))⊗(1⊗(1⊗y)). The unit holds under U, and composition gives d·i(b) on both routes. It is strict under transitions. Edge cases (zero ring, unbounded complexes, ramified non-flat B_m, odd degree) are fine. Realization node: both counit equations are well typed. The base change is the same-index iota_m/rho_m of def-weil-integral-scalar-extension, the coefficient category is derived-complete D^b_c(Y,O_E), and the reduction model is lem-pur-coefficient-extension-reduction-model. a_F and a_T are pinned by canonical tensor-association normalization, as the NF review already accepted. lem-trf-integral-pullback-comparison-realization overlaps only the pullback half (advisory). Stacks 03EL, 07A4, 06YS and 0G7E verified at their labels. No SGA, not on the dropped list, no cycle (closure of 2885 nodes). Tool use lem-weil-pbc-ringed-strict-tower-homotopy-limit accepted. FIX: the delivery dropped the Lean-proved lem-pur-scalar-tensor-unit from old step 7, and the item was its only citer, so it was left orphaned. Item step 2 now re-cites it for the L=E tensor identity (same unit; uses and proof_deps updated). I also made explicit that u is the geometric morphism induced by f (it was written u=f^{-1}) and named phi^a. The parent is 2282 chars after the fix. Maintainer: the node-level tool_uses still lists lem-weil-pbc-ringed-pullback-preserves-kflat, which the proof no longer cites.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ScalarExtensionTowerCoherence",
