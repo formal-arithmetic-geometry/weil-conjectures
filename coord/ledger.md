@@ -22739,3 +22739,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:06 L: merged deliver/Q06/lem-sp-proetale-scalar-tensor-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 14:06 L: merged deliver/NV/lem-pur-quotient-diagram-projection-evaluation (stage 2; reviewer PASS; parallel immutable checks)
 - 14:06 L: merged deliver/NE/lem-pur-normalized-operation-system-models (stage 2; reviewer PASS; parallel immutable checks)
+- 14:07 L: returned deliver/NL/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: Route-pivot fault (F): the item is live and reachable. Its only citer is the live lem-sfb-tame-pair-proper-generators, w)
