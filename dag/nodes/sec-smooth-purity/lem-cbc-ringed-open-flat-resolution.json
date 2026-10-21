@@ -16,9 +16,83 @@
   "def-weil-presheaf-modules-sheafification",
   "lem-weil-tower-category-levelwise-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j^*$ for restriction to $\\mathcal C/V$ and $e_!$ for the functor in the statement. The exact-adjunction lemma identifies precisely this sheafified direct-sum extension and says that both functors are exact. For either $F=e_!$ or $F=j^*$, apply exactness to $0\\to Z^iX\\to X^i\\to B^{i+1}X\\to0$ and $0\\to B^iX\\to Z^iX\\to H^iX\\to0$. The first identifies the cycles and boundaries after applying $F$; the second gives $H^i(FX)\\cong F(H^iX)$, naturally in chain maps. In particular either functor sends acyclic complexes to acyclic complexes. This is a degreewise calculation for every integer $i$, without boundedness.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact), 0E8I (lemma-j-shriek-and-tensor); agent-written cochain and strict-tower refinement."
+   }
+  },
+  {
+   "text": "Let $A$ be an acyclic complex of $R$-modules. By step 1, $j^*A$ is acyclic. The unbounded total-tensor comparison gives $\\operatorname{Tot}(e_!P\\otimes_R A)\\cong e_!\\operatorname{Tot}(P\\otimes_{R|_V}j^*A)$. The inner complex is acyclic by K-flatness of $P$, and its extension is acyclic by step 1. Thus $e_!P$ is K-flat. Here the order of the two tensor factors is immaterial: the signed swap on the $(p,q)$ summand is $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$; substitution in $d(x\\otimes y)=dx\\otimes y+(-1)^p x\\otimes dy$ verifies it is a chain isomorphism, inverse to the same signed swap. The cited comparison is for direct-sum totalization and all unbounded complexes, so no convergence or product-totalization assertion is needed.",
+   "uses": [
+    "lem-sf-ringed-open-total-tensor-kflat",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact), 0E8I (lemma-j-shriek-and-tensor); agent-written cochain and strict-tower refinement."
+   }
+  },
+  {
+   "text": "Fix a flat term $M=P^i$ and a short exact sequence $0\\to F_1\\to F_2\\to F_3\\to0$ of $R$-modules. Exact restriction gives a short exact sequence of the $j^*F_a$. Flatness of $M$ gives an exact sequence after tensoring these three modules with $M$, and exactness of $e_!$ preserves it. The natural sheaf projection isomorphisms $e_!(M\\otimes j^*F_a)\\cong e_!M\\otimes F_a$ identify its arrows with the tensor maps induced by $F_1\\to F_2\\to F_3$. Hence tensoring with $e_!M$ is exact, which is precisely flatness. Apply this separately for each $i$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact), 0E8I (lemma-j-shriek-and-tensor); agent-written cochain and strict-tower refinement."
+   }
+  },
+  {
+   "text": "Let $q:P\\to C$ be the given termwise surjective quasi-isomorphism, where surjective means epimorphic in the category of module sheaves. For each $i$, the short exact sequence $0\\to\\ker(q^i)\\to P^i\\to C^i\\to0$ stays exact under $e_!$, so $e_!q^i$ is epimorphic. The natural homology identification of step 1 identifies $H^i(e_!q)$ with $e_!H^i(q)$, an isomorphism because a functor sends an inverse pair to an inverse pair. Thus $e_!q$ is a quasi-isomorphism as well as termwise surjective. Combining with steps 2 and 3 proves preservation of a flat-term K-flat replacement.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact), 0E8I (lemma-j-shriek-and-tensor); agent-written cochain and strict-tower refinement."
+   }
+  },
+  {
+   "text": "For a strict inverse sequence of complexes with transition maps $t_n:P_{n+1}\\to P_n$, apply $e_!$ to every term, differential, transition and resolution map. The chain-map and tower commutation equations remain equations because $e_!$ preserves composition. Steps 2 and 3 apply to each $P_n$ and step 4 to each resolution map. Kernels and cokernels in the tower category are levelwise by the cited tower lemma, so epimorphisms and cohomology isomorphisms of these tower complexes are detected at every level. The resulting transitions are exactly $e_!(t_n)$, without replacing the strict system or choosing levelwise comparison maps. This proves precisely the objectwise assertion in the statement.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact), 0E8I (lemma-j-shriek-and-tensor); agent-written cochain and strict-tower refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pc-acyclic-complex-modules",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact), 0E8I (lemma-j-shriek-and-tensor); agent-written cochain and strict-tower refinement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +128,45 @@
    "results": "[leansearch] OK 8 hit(s) HomologicalComplex.extendMap_zero, HomologicalComplex.extend.X, HomologicalComplex.instHasZeroObject, HomologicalComplex.extend_single_d, HomologicalComplex.extend.d, HomologicalComplex.extend.isZero_X, HomologicalComplex.extend.d_comp_eq_zero_iff, HomologicalComplex.extend",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary ring localization, simplicial/Dold-Kan comparisons, generic exact functors or geometric/module pullback, not this ringed strict completion statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on a ringed slice site preserves unbounded K-flat complexes and flat terms",
+   "results": "8 hits: HomologicalComplex.isZero_extend_X', CategoryTheory.lan_flat_of_flat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.compatiblePreservingOfFlat, HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.isZero_extend_X, Module.Flat.of_forall_exists_factorization, CategoryTheory.flat_iff_lan_flat",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern index-shape extension of complexes, flat ordinary modules, or representably flat functors; none states sheafified ringed-slice extension preserving K-flat resolutions."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|jShriek|KFlat",
+   "results": "0 hits: ; Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern index-shape extension of complexes, flat ordinary modules, or representably flat functors; none states sheafified ringed-slice extension preserving K-flat resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern index-shape extension of complexes, flat ordinary modules, or representably flat functors; none states sheafified ringed-slice extension preserving K-flat resolutions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves K-flat complexes of module sheaves on a ringed site",
+   "results": "8 hits: HomologicalComplex.extendMap_zero, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, HomologicalComplex.extend.X, HomologicalComplex.isZero_extend_X, FractionalIdeal.extended_zero, HomologicalComplex.extend, HomologicalComplex.instHasZeroObject, CategoryTheory.ShortComplex.ShortExact.extClass_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern index-shape extension of complexes, flat ordinary modules, or representably flat functors; none states sheafified ringed-slice extension preserving K-flat resolutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension left adjoint with tensor projection formula preserves K-flat resolutions of sheaf modules",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern index-shape extension of complexes, flat ordinary modules, or representably flat functors; none states sheafified ringed-slice extension preserving K-flat resolutions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-completed-extension-zero-comparison",
@@ -75,5 +184,59 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-ringed-open-flat-resolution",
+  "worker": "stage1",
+  "summary": "Q54: preserved the statement, reused the existing unbounded total-tensor comparison, exact slice adjunction and sheaf projection formula; wrote out cohomology, flat-term, epimorphism and strict-tower arguments. No new nodes. No exact project Lean attachment found.",
+  "blueprint": "Realizes the opening exactness/reduction-tower sentence of lem-cbc-completed-extension-zero-comparison: supplies the flat-term K-flat representative and strict transition preservation required before ordinary scalar reduction. Does not claim preservation of countable products from the later blueprint paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact sheafified direct-sum extension and slice restriction; generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Natural module-level tensor projection formula needed for the flat-term test."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "Existing unbounded chain-level total-tensor comparison used for the acyclic K-flat test."
+   },
+   {
+    "node": "def-pc-acyclic-complex-modules",
+    "why": "Degreewise cycles, boundaries and cohomology definition used in step 1."
+   },
+   {
+    "node": "def-pc-quasi-iso-modules",
+    "why": "Quasi-isomorphism criterion used in step 4."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Acyclic tensor test used in step 2."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Exact tensor criterion used in step 3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-29c9f6557",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-29c9f6557 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It changes only the item's proof fields: the statement, stmt_deps, source, created record and unit are byte-identical to side-live. It adds no new nodes. Neither the item nor its parent nor any cited node is on the route-pivot dropped list. There is no repair note for this item, it was unsplit on side-live, and nothing cites SGA. I read all 8 cited statements. Step 1: an exact functor applied to the two cycle/boundary short exact sequences gives H^i(FX)≅F(H^iX); the argument is degreewise and needs no boundedness. Step 2: the chain iso of lem-sf-ringed-open-total-tensor-kflat plus the signed swap (-1)^{pq}, which I checked against the total differential, together with step 1, give K-flatness. Step 3: restriction is exact, the term is flat, extension is exact, and the natural iso of lem-weil-pbc-ringed-slice-extension-tensor (Stacks 0E8I, sites-modules.tex l.4051) identifies the maps, so each extended term is flat. Step 4: the kernel short exact sequence is preserved and the cohomology identification makes the extended map a termwise-surjective quasi-isomorphism. Step 5: by the levelwise tower lemma the clauses hold at every level, with transitions e_!(t_n); no product claim is made. I checked Stacks tags 03DI, 03DJ, 0E8I and 03ER in tags/tags, and the blueprint opening sentence of lem-cbc-completed-extension-zero-comparison. Edge cases checked: zero complexes, one-term complexes, unbounded complexes, zero transition maps, and several morphisms V→U. Maintainer note: the item's K-flat clause is already stated in lem-sf-ringed-open-total-tensor-kflat. The item predates this delivery (created by NW) and adds the flat-term, surjectivity and tower clauses, so the overlap is not a fault of this split. I accept the generic tool_uses. No changes."
+ }
 }
