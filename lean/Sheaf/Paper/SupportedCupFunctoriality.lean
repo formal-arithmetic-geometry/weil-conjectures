@@ -17,6 +17,11 @@ import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.Paper.ComparisonPullbackExact
 public import Sheaf.Paper.SupportedCup
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.Finite.BaseChange
+import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
@@ -38,6 +43,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.Paper.SupportedCohomologyHom
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
@@ -71,6 +77,73 @@ universe u c v w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem functorialSingleTensor_isIso {C : Type c} [Category.{v} C] [Abelian C]
+    [IsGrothendieckAbelian.{v} C] [hD : HasDerivedCategory.{v} C]
+    [HasColimitsOfSize.{0, 0} C] [hM : MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C]
+    [hB : BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C] (L M : C) (hL : ObjectProperty.flat L) :
+    IsIso (ProEtale.cupSingleTensorMap L M) := by
+  let K := (HomologicalComplex.single C (.up ℤ) 0).obj L
+  let T := (HomologicalComplex.single C (.up ℤ) 0).obj M
+  let H := HomotopyCategory.quotient C (.up ℤ)
+  have hK : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat (H.obj K) :=
+    (HomotopyCategory.kFlat_quotient_obj_iff K).2
+      ((CochainComplex.kFlat_single_obj_iff_flat L 0).2 hL)
+  have := DerivedCategory.isIso_μ_Qh_of_kFlat (H.obj K) (H.obj T) hK
+  have : IsIso (Functor.LaxMonoidal.μ (H ⋙ DerivedCategory.Qh) K T) := by
+    rw [Functor.LaxMonoidal.comp_μ]
+    infer_instance
+  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q K T) := by
+    change IsIso (tensorHom _ _ ≫
+      Functor.LaxMonoidal.μ (H ⋙ DerivedCategory.Qh) K T ≫ _)
+    infer_instance
+  dsimp only [K, T] at this
+  unfold ProEtale.cupSingleTensorMap
+  have hμ : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
+      ((HomologicalComplex.single C (.up ℤ) 0).obj L)
+      ((HomologicalComplex.single C (.up ℤ) 0).obj M)) := this
+  have hmap : IsIso (DerivedCategory.Q.map
+      ((((CochainComplex.map₂HomologicalComplexObjSingleIso (curriedTensor C) L).app
+          ((HomologicalComplex.single C (.up ℤ) 0).obj M)) ≪≫
+        ((HomologicalComplex.singleMapHomologicalComplex (tensorLeft L) (.up ℤ) 0).app M)).hom)) :=
+    inferInstance
+  have ht : IsIso (tensorIso ((DerivedCategory.singleFunctorIsoCompQ C 0).app L)
+      ((DerivedCategory.singleFunctorIsoCompQ C 0).app M)).hom := inferInstance
+  have hi : IsIso ((DerivedCategory.singleFunctorIsoCompQ C 0).app (L ⊗ M)).inv :=
+    inferInstance
+  exact IsIso.comp_isIso' ht (IsIso.comp_isIso' hμ (IsIso.comp_isIso' hmap hi))
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem functorialDerivedCoefficient_isIso {C : Type c} [Category.{v} C]
+    [Abelian C] [IsGrothendieckAbelian.{v} C] [hD : HasDerivedCategory.{v} C]
+    [HasColimitsOfSize.{0, 0} C] [hM : MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [hB : BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    {L M N : C} (μ : L ⊗ M ⟶ N) [hμ : IsIso μ] (hL : ObjectProperty.flat L) :
+    IsIso (ProEtale.cupDerivedCoefficientMap μ) := by
+  have h := functorialSingleTensor_isIso L M hL
+  unfold ProEtale.cupDerivedCoefficientMap
+  exact IsIso.comp_isIso' h (Functor.map_isIso _ μ)
+
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem functorialDerivedPair_isIso {C : Type c} [hCat : Category.{v} C]
+    [hAb : Abelian C] [IsGrothendieckAbelian.{v} C] [hD : HasDerivedCategory.{v} C]
+    [HasColimitsOfSize.{0, 0} C] [hM : MonoidalCategory C] [hMP : MonoidalPreadditive C]
+    [hClosed : MonoidalClosed C] [hB : BraidedCategory C]
+    [hFlat : Abelian.HasFunctorialFlatResolution C]
+    (p : Σ m : MonoidalCategory (DerivedCategory C),
+      letI := m
+      (DerivedCategory.Q (C := C)).LaxMonoidal)
+    (e : p = ⟨inferInstance, inferInstance⟩)
+    {L M N : C} (μ : L ⊗ M ⟶ N) [hμ : IsIso μ] (hL : ObjectProperty.flat L) :
+    letI := p.1
+    letI := p.2
+    IsIso (ProEtale.cupDerivedCoefficientMap μ) := by
+  subst p
+  exact functorialDerivedCoefficient_isIso μ hL
 
 /-- The two existing sheaf categories. Source: purity conventions
 (blueprint: lem-pur-supported-cup-functoriality). -/
@@ -351,6 +424,20 @@ def functorialCupTwistProduct (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Sc
       (P.functorialCupComparisonFunctor X).mapIso
         (P.functorialCupEtaleTwistProduct X a r s)
 
+section CoefficientProof
+
+set_option backward.isDefEq.respectTransparency true
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] functorialCupHasDerived functorialCupDerivedMonoidal
+  functorialCupMonoidal functorialCupAbelian functorialCupCategory
+  functorialCupMonoidalPreadditive functorialCupSymmetric functorialCupClosed
+  functorialCupFlatResolutions functorialCupMultiplication functorialCupSource
+
+private abbrev selectedLaxQ (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u}) :
+    letI := P.functorialCupDerivedMonoidal pro X
+    (DerivedCategory.Q (C := P.functorialCupSheaves pro X)).LaxMonoidal := inferInstance
+
 /-- Flat supported coefficients make the canonical degree-zero tensor comparison
 invertible. Source: def-pur-supported-cup and lem-pur-etale-closed-constant-tensor
 (blueprint: lem-pur-supported-cup-functoriality).
@@ -363,7 +450,44 @@ theorem functorialCupCoefficient_isIso (P : PurityFiniteSetting.{u}) (pro : Bool
     [IsClosedImmersion i] [IsClosedImmersion j] :
     IsIso (ProEtale.cupDerivedCoefficientMap (hD := P.functorialCupHasDerived pro X)
       (hDM := P.functorialCupDerivedMonoidal pro X) (P.functorialCupMultiplication pro i j)) := by
-  sorry
+  cases pro with
+  | false =>
+    have h := Etale.closedConstantTensor P.Coefficient X i j j (𝟙 X)
+    have hμ : IsIso (P.functorialCupMultiplication false i j) :=
+      h.2.2.2.2.2.2.2.2.2.1
+    have hcoeff := functorialDerivedPair_isIso
+      (C := P.functorialCupSheaves false X)
+      (hCat := P.functorialCupCategory false X) (hAb := P.functorialCupAbelian false X)
+      (hMP := P.functorialCupMonoidalPreadditive false X)
+      (hClosed := P.functorialCupClosed false X)
+      (hFlat := P.functorialCupFlatResolutions false X)
+      (hD := P.functorialCupHasDerived false X)
+      (hM := P.functorialCupMonoidal false X)
+      (hB := (P.functorialCupSymmetric false X).toBraidedCategory)
+      (L := P.functorialCupSource false i) (M := P.functorialCupSource false j)
+      (N := P.functorialCupSource false (ProEtale.cupIntersection i j))
+      (hμ := hμ) ⟨P.functorialCupDerivedMonoidal false X, selectedLaxQ P false X⟩ rfl
+      (P.functorialCupMultiplication false i j) (Etale.closedConstantModule_flat _ i)
+    exact hcoeff
+  | true =>
+    have hμ : IsIso (P.functorialCupMultiplication true i j) :=
+      ProEtale.cupCoefficientMap_isIso P i j
+    have hcoeff := functorialDerivedPair_isIso
+      (C := P.functorialCupSheaves true X)
+      (hCat := P.functorialCupCategory true X) (hAb := P.functorialCupAbelian true X)
+      (hMP := P.functorialCupMonoidalPreadditive true X)
+      (hClosed := P.functorialCupClosed true X)
+      (hFlat := P.functorialCupFlatResolutions true X)
+      (hD := P.functorialCupHasDerived true X)
+      (hM := P.functorialCupMonoidal true X)
+      (hB := (P.functorialCupSymmetric true X).toBraidedCategory)
+      (L := P.functorialCupSource true i) (M := P.functorialCupSource true j)
+      (N := P.functorialCupSource true (ProEtale.cupIntersection i j))
+      (hμ := hμ) ⟨P.functorialCupDerivedMonoidal true X, selectedLaxQ P true X⟩ rfl
+      (P.functorialCupMultiplication true i j) (ProEtale.cupCoefficient_flat P i)
+    exact hcoeff
+
+end CoefficientProof
 
 /-- The prescribed tensor-morphism supported product followed by multiplication
 of the twist lines. For pro=true its first composite is the published supportedCup;
@@ -420,6 +544,302 @@ def functorialCupTwistPullback (P : PurityFiniteSetting.{u}) (pro : Bool)
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).mapIso
         (P.functorialCupEtaleTwistPullback v aX r)
 
+section ClosedSupportProof
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] functorialCupCategory functorialCupAbelian
+  functorialCupMonoidal functorialCupSymmetric functorialCupClosed
+  constant constantEtale functorialCupConstant functorialCupComparisonFunctor
+  functorialCupSource functorialCupRestriction functorialCupInverseImage
+  functorialCupConstantPullback
+
+section ClosedSourceNormalization
+
+open ProEtale
+universe c1 c2 c3 c4 v1 v2 v3 v4
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+set_option backward.isDefEq.respectTransparency.types false
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem cupRestriction_eq_laxUnit (P : WeilConjectures.PurityFiniteSetting.{u})
+    {D X : Scheme.{u}} (c : D ⟶ X) :
+    cupCoefficientRestriction P c = (cupConstantIso P X).hom ≫
+      Functor.LaxMonoidal.ε (lowerStar (ModuleCat.{u + 1} P.Coefficient) c) ≫
+      (lowerStar (ModuleCat.{u + 1} P.Coefficient) c).map (cupConstantIso P D).inv := by
+  unfold cupCoefficientRestriction
+  congr 1
+  congr 1
+  apply ((constantSheafAdj (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)
+    (Scheme.ProEt.isTerminalMkId X)).homEquiv _ _).injective
+  rw [Equiv.apply_symm_apply]
+  exact (Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ c)
+    (ModuleCat.{u + 1} P.Coefficient) (Scheme.ProEt.topology X)
+    (Scheme.ProEt.topology D) (op (Scheme.ProEt.mk (𝟙 X)))).symm
+
+set_option backward.defeqAttrib.useBackward true in
+private theorem monoidal_mate
+    {C : Type c1} {D : Type c2} {E : Type c3} {F : Type c4}
+    [Category.{v1} C] [Category.{v2} D] [Category.{v3} E] [Category.{v4} F]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory F]
+    {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
+    {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    [G.LaxMonoidal] [H.LaxMonoidal] [L₁.Monoidal] [L₂.Monoidal]
+    [R₁.LaxMonoidal] [R₂.LaxMonoidal]
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [adj₁.IsMonoidal] [adj₂.IsMonoidal]
+    (β : R₁ ⋙ G ⟶ H ⋙ R₂) [NatTrans.IsMonoidal β] :
+    NatTrans.IsMonoidal (TwoSquare.natTrans ((mateEquiv adj₁ adj₂).symm β)) := by
+  change NatTrans.IsMonoidal (_ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _)
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem constant_iso_eta (P : WeilConjectures.PurityFiniteSetting.{u})
+    (X : Scheme.{u}) :
+    (cupConstantIso P X).hom = Functor.OplaxMonoidal.η
+      (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X) := by
+  unfold cupConstantIso comparisonUpperStarConstantSheafIso
+  apply (((constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
+    (Scheme.Etale.isTerminalMkId X)).comp
+      (comparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) X)).ofNatIsoRight
+    ((Scheme.toProEt X).sheafPushforwardContinuousCompSheafSectionsObjIso
+      (ModuleCat.{u + 1} P.Coefficient) X.smallEtaleTopology
+      (Scheme.ProEt.topology X) (op (Scheme.Etale.mk (𝟙 X))))).homEquiv _ _ |>.injective
+  simp only [Iso.app_hom]
+  erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+  change (constantSheafAdj (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} P.Coefficient) (Scheme.ProEt.isTerminalMkId X)).unit.app
+      (𝟙_ (ModuleCat.{u + 1} P.Coefficient)) =
+    (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
+      (Scheme.Etale.isTerminalMkId X)).unit.app _ ≫
+    ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)).obj
+      (op (Scheme.Etale.mk (𝟙 X)))).map
+      ((comparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) X).unit.app _ ≫
+        (comparisonLowerStar (ModuleCat.{u + 1} P.Coefficient) X).map
+          (Functor.OplaxMonoidal.η
+            (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X))) ≫
+    ((Scheme.toProEt X).sheafPushforwardContinuousCompSheafSectionsObjIso
+      (ModuleCat.{u + 1} P.Coefficient) X.smallEtaleTopology
+      (Scheme.ProEt.topology X) (op (Scheme.Etale.mk (𝟙 X)))).hom.app _
+  erw [Adjunction.unit_app_unit_comp_map_η]
+  have hp : (constantSheafAdj (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} P.Coefficient) (Scheme.ProEt.isTerminalMkId X)).unit.app
+      (𝟙_ (ModuleCat.{u + 1} P.Coefficient)) =
+      (Functor.LaxMonoidal.ε (sheafToPresheaf _ _)).app
+        (op (Scheme.ProEt.mk (𝟙 X))) := by
+    simp only [constantSheafAdj, Adjunction.rightAdjointLaxMonoidal_ε]
+    rw [Adjunction.homEquiv_unit]
+    have : Functor.OplaxMonoidal.η
+      (presheafToSheaf (Scheme.ProEt.topology X)
+        (ModuleCat.{u + 1} P.Coefficient)) = 𝟙 _ := rfl
+    simp [this]
+    rfl
+  have he : (constantSheafAdj X.smallEtaleTopology
+      (ModuleCat.{u + 1} P.Coefficient) (Scheme.Etale.isTerminalMkId X)).unit.app
+      (𝟙_ (ModuleCat.{u + 1} P.Coefficient)) =
+      (Functor.LaxMonoidal.ε (sheafToPresheaf _ _)).app
+        (op (Scheme.Etale.mk (𝟙 X))) := by
+    simp only [constantSheafAdj, Adjunction.rightAdjointLaxMonoidal_ε]
+    rw [Adjunction.homEquiv_unit]
+    have : Functor.OplaxMonoidal.η
+      (presheafToSheaf X.smallEtaleTopology
+        (ModuleCat.{u + 1} P.Coefficient)) = 𝟙 _ := rfl
+    simp [this]
+    rfl
+  rw [hp, he]
+  erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app_assoc]
+  rfl
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem comparison_monoidal (P : WeilConjectures.PurityFiniteSetting.{u})
+    {Z X : Scheme.{u}} (i : Z ⟶ X) :
+    NatTrans.IsMonoidal
+      (lowerStarComparisonUpperStarBaseChange i (ModuleCat.{u + 1} P.Coefficient)) := by
+  exact monoidal_mate
+    (comparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) Z)
+    (comparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) X)
+    (lowerStarCompComparisonLowerStarIso i (ModuleCat.{u + 1} P.Coefficient)).inv
+
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem comparison_restriction (P : WeilConjectures.PurityFiniteSetting.{u})
+    {Z X : Scheme.{u}} (i : Z ⟶ X) :
+    cupCoefficientRestriction P i =
+      (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).map
+        (Functor.LaxMonoidal.ε (Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)) ≫
+      (lowerStarComparisonUpperStarBaseChange i (ModuleCat.{u + 1} P.Coefficient)).app
+        (𝟙_ (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) := by
+  have := comparison_monoidal P i
+  have h := NatTrans.IsMonoidal.unit
+    (τ := lowerStarComparisonUpperStarBaseChange i (ModuleCat.{u + 1} P.Coefficient))
+  simp only [Functor.LaxMonoidal.comp_ε, Category.assoc] at h
+  have hi : (cupConstantIso P Z).inv =
+      Functor.LaxMonoidal.ε (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z) := by
+    apply (cancel_mono (cupConstantIso P Z).hom).mp
+    rw [Iso.inv_hom_id, constant_iso_eta, Functor.Monoidal.ε_η]
+    rfl
+  rw [cupRestriction_eq_laxUnit, constant_iso_eta, hi]
+  apply (cancel_epi (Functor.LaxMonoidal.ε
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X))).mp
+  simp only [Functor.Monoidal.ε_η_assoc]
+  exact h.symm
+
+end ClosedSourceNormalization
+
+section EtaleSourceNormalization
+
+open Etale
+
+private theorem transition_unit (A : Type (u + 1)) [CommRing A]
+    {V D X : Scheme.{u}} (p : V ⟶ D) (g : D ⟶ X) (h : V ⟶ X)
+    (hp : p ≫ g = h) :
+    Functor.LaxMonoidal.ε (lowerStar (ModuleCat.{u + 1} A) g) ≫
+      constantModulePushforwardMap A (ModuleCat.of A A) g h p hp =
+    Functor.LaxMonoidal.ε (lowerStar (ModuleCat.{u + 1} A) h) := by
+  unfold constantModulePushforwardMap
+  erw [upperStarConstantSheafIso_hom_app_tensorUnit (ModuleCat.{u + 1} A) p]
+  erw [Adjunction.unit_app_unit_comp_map_η]
+  exact (ε_lowerStar_comp p g h hp.symm).symm
+
+private theorem section_unit (A : Type (u + 1)) [CommRing A]
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    closedConstantSectionMap A i =
+      Functor.LaxMonoidal.ε (lowerStar (ModuleCat.{u + 1} A) i) := by
+  unfold closedConstantSectionMap
+  erw [← ε_lowerStar_id]
+  exact transition_unit A i (𝟙 X) i (by simp)
+
+private theorem section_epi (A : Type (u + 1)) [CommRing A]
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    Epi (closedConstantSectionMap A i) := by
+  erw [section_unit A i]
+  erw [← (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).unit_app_unit_comp_map_η]
+  have : Epi ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).unit.app
+      (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))) :=
+    (shortExact_openClosedShortComplex (ModuleCat.{u + 1} A)
+      i.openComplement.ι i
+      (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+      i.range_eq_compl_range_openComplement_ι).epi_g
+  exact epi_comp _ _
+
+end EtaleSourceNormalization
+
+private theorem comparisonSource_normalized (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    ∃! b : (P.functorialCupComparisonFunctor X).obj
+        (P.functorialCupSource false i) ≅ P.functorialCupSource true i,
+      (P.functorialCupComparisonFunctor X).map
+          (P.functorialCupRestriction false i) ≫ b.hom = P.functorialCupRestriction true i := by
+  let F := P.functorialCupComparisonFunctor X
+  have := section_epi P.Coefficient i
+  have : Epi (F.map (P.functorialCupRestriction false i)) := F.map_epi _
+  have := ProEtale.isIso_lowerStarComparisonUpperStarBaseChange i
+    (ModuleCat.{u + 1} P.Coefficient)
+  let e := asIso ((ProEtale.lowerStarComparisonUpperStarBaseChange i
+    (ModuleCat.{u + 1} P.Coefficient)).app (P.constantEtale C))
+  have he : F.map (P.functorialCupRestriction false i) ≫ e.hom =
+      P.functorialCupRestriction true i := by
+    change (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).map
+      (Etale.closedConstantSectionMap P.Coefficient i) ≫ _ = _
+    rw [section_unit]
+    exact (comparison_restriction P i).symm
+  refine ⟨e, he, ?_⟩
+  intro b hb
+  apply Iso.ext
+  exact (cancel_epi (F.map (P.functorialCupRestriction false i))).1 (hb.trans he.symm)
+
+
+section EtaleExchangeNormalization
+
+open Etale
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+
+private theorem mate_symm_monoidal
+    {V W V' W' : Type*} [Category V] [Category W] [Category V'] [Category W']
+    [MonoidalCategory V] [MonoidalCategory W]
+    [MonoidalCategory V'] [MonoidalCategory W']
+    {L : V ⥤ W} {R : W ⥤ V} {L' : V' ⥤ W'} {R' : W' ⥤ V'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (F : V ⥤ V') (G : W ⥤ W')
+    [L.Monoidal] [R.LaxMonoidal] [L'.Monoidal] [R'.LaxMonoidal]
+    [F.LaxMonoidal] [G.LaxMonoidal] [adj.IsMonoidal] [adj'.IsMonoidal]
+    (β : TwoSquare R G F R') [β.natTrans.IsMonoidal] :
+    NatTrans.IsMonoidal ((mateEquiv adj adj').symm β).natTrans := by
+  change NatTrans.IsMonoidal
+    ((Functor.leftUnitor _).inv ≫
+      Functor.whiskerRight adj.unit (F ⋙ L') ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (Functor.associator _ _ _).hom _ ≫
+      Functor.whiskerRight (Functor.whiskerLeft L β.natTrans) L' ≫
+      Functor.whiskerRight (Functor.associator _ _ _).inv _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (L ⋙ G) adj'.counit ≫
+      (Functor.rightUnitor _).hom)
+  infer_instance
+
+private theorem basechange_monoidal
+    (A : Type (u + 1)) [CommRing A]
+    {C' C X' X : Scheme.{u}} {q : C' ⟶ C} {r : C' ⟶ X'}
+    {i : C ⟶ X} {v : X' ⟶ X} (sq : CommSq q r i v) :
+    NatTrans.IsMonoidal (baseChangeMap (ModuleCat.{u + 1} A) sq) := by
+  change NatTrans.IsMonoidal (baseChangeSquare (ModuleCat.{u + 1} A) sq).natTrans
+  rw [baseChangeSquare_eq_mateEquiv_symm]
+  have : NatTrans.IsMonoidal (squareLowerStarIso (ModuleCat.{u + 1} A) sq).hom := by
+    dsimp only [squareLowerStarIso, Iso.trans_hom, Iso.symm_hom]
+    infer_instance
+  exact mate_symm_monoidal _ _ _ _ _
+
+private theorem etaleExchange_normalized (P : PurityFiniteSetting.{u})
+    {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+    (sq : ChosenCartesianSquare g j i v) :
+    ∃! b : (P.functorialCupInverseImage false v).obj (P.functorialCupSource false i) ≅
+        P.functorialCupSource false j,
+      (P.functorialCupInverseImage false v).map (P.functorialCupRestriction false i) ≫
+          b.hom =
+        (P.functorialCupConstantPullback false v).hom ≫
+          P.functorialCupRestriction false j := by
+  let B := ModuleCat.{u + 1} P.Coefficient
+  have hs : IsPullback g j i v :=
+    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  let b := (baseChangeMap B sq.toCommSq).app (𝟙_ _) ≫
+    (lowerStar B j).map (Functor.OplaxMonoidal.η (upperStar B g))
+  have hBC := basechange_monoidal P.Coefficient sq.toCommSq
+  have hb : (upperStar B v).map (Etale.closedConstantSectionMap P.Coefficient i) ≫ b =
+      Functor.OplaxMonoidal.η (upperStar B v) ≫
+        Etale.closedConstantSectionMap P.Coefficient j := by
+    erw [section_unit, section_unit]
+    apply (cancel_epi (Functor.LaxMonoidal.ε (upperStar B v))).1
+    dsimp only [b]
+    have hu := NatTrans.IsMonoidal.unit (τ := baseChangeMap B sq.toCommSq)
+    dsimp only [Functor.LaxMonoidal.comp_ε] at hu
+    simp only [Category.assoc] at hu ⊢
+    rw [reassoc_of% hu]
+    simp only [← Functor.map_comp, Functor.Monoidal.ε_η,
+      Functor.Monoidal.ε_η_assoc]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have := isIso_baseChangeMap_of_isFinite B hs
+  have : IsIso b := by dsimp only [b]; infer_instance
+  have := section_epi P.Coefficient i
+  have : Epi ((upperStar B v).map (Etale.closedConstantSectionMap P.Coefficient i)) :=
+    (upperStar B v).map_epi _
+  have he : (P.functorialCupInverseImage false v).map
+        (P.functorialCupRestriction false i) ≫ (asIso b).hom =
+      (P.functorialCupConstantPullback false v).hom ≫
+        P.functorialCupRestriction false j := by
+    change (upperStar B v).map (Etale.closedConstantSectionMap P.Coefficient i) ≫ b =
+      (Scheme.upperStarConstantSheafIso B v).hom.app (𝟙_ B) ≫
+        Etale.closedConstantSectionMap P.Coefficient j
+    rw [upperStarConstantSheafIso_hom_app_tensorUnit]
+    exact hb
+  refine ⟨asIso b, he, ?_⟩
+  intro e he'
+  apply Iso.ext
+  exact (cancel_epi ((upperStar B v).map
+    (Etale.closedConstantSectionMap P.Coefficient i))).1 (he'.trans he.symm)
+
+end EtaleExchangeNormalization
+
 /-- Closed constant exchange is uniquely fixed by restriction of the unit.
 Source: Stacks 03Q1 and 099V; supported functoriality, proof Steps 2 and 6
 (blueprint: lem-pur-supported-cup-functoriality).
@@ -438,7 +858,61 @@ theorem functorialCupExchange_existsUnique (P : PurityFiniteSetting.{u}) (pro : 
         P.functorialCupSource pro j,
       (P.functorialCupInverseImage pro v).map (P.functorialCupRestriction pro i) ≫ b.hom =
         (P.functorialCupConstantPullback pro v).hom ≫ P.functorialCupRestriction pro j := by
-  sorry
+  cases pro with
+  | false => exact etaleExchange_normalized P i j v g _sq
+  | true =>
+    let FX := P.functorialCupComparisonFunctor X
+    let FY := P.functorialCupComparisonFunctor Y
+    let V := P.functorialCupInverseImage true v
+    let U := P.functorialCupInverseImage false v
+    let ei := (comparisonSource_normalized P i).choose
+    let ej := (comparisonSource_normalized P j).choose
+    have hi := (comparisonSource_normalized P i).choose_spec.1
+    have hj := (comparisonSource_normalized P j).choose_spec.1
+    change FX.map (P.functorialCupRestriction false i) ≫ ei.hom = _ at hi
+    change FY.map (P.functorialCupRestriction false j) ≫ ej.hom = _ at hj
+    let e := (etaleExchange_normalized P i j v g _sq).choose
+    have he := (etaleExchange_normalized P i j v g _sq).choose_spec.1
+    change U.map (P.functorialCupRestriction false i) ≫ e.hom = _ at he
+    let τ := ProEtale.comparisonUpperStarCompUpperStarIso
+      (ModuleCat.{u + 1} P.Coefficient) v
+    let b := V.mapIso ei.symm ≪≫ τ.app (P.functorialCupSource false i) ≪≫
+      FY.mapIso e ≪≫ ej
+    have hb : V.map (P.functorialCupRestriction true i) ≫ b.hom =
+        (P.functorialCupConstantPullback true v).hom ≫
+          P.functorialCupRestriction true j := by
+      rw [← hi]
+      change V.map (FX.map (P.functorialCupRestriction false i) ≫ ei.hom) ≫
+        V.map ei.inv ≫ τ.hom.app _ ≫ FY.map e.hom ≫ ej.hom = _
+      rw [V.map_comp]
+      simp only [Category.assoc, ← V.map_comp_assoc, Iso.hom_inv_id,
+        V.map_id, Category.id_comp]
+      have hn := τ.hom.naturality (P.functorialCupRestriction false i)
+      change V.map (FX.map (P.functorialCupRestriction false i)) ≫ τ.hom.app _ =
+        τ.hom.app _ ≫ FY.map (U.map (P.functorialCupRestriction false i)) at hn
+      rw [reassoc_of% hn]
+      rw [← FY.map_comp_assoc, he, FY.map_comp]
+      rw [Category.assoc, hj]
+      simp only [functorialCupConstantPullback, frameConstantPullback, Iso.trans_hom,
+        Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+      rfl
+    have := section_epi P.Coefficient i
+    have : Epi (FX.map (P.functorialCupRestriction false i)) := FX.map_epi _
+    have hpi : Epi (P.functorialCupRestriction true i) := by
+      rw [← hi]
+      exact epi_comp _ _
+    have : V.Additive := inferInstanceAs (P.functorialCupInverseImage true v).Additive
+    have : PreservesFiniteColimits V :=
+      inferInstanceAs (PreservesFiniteColimits (P.functorialCupInverseImage true v))
+    have : V.PreservesEpimorphisms :=
+      NormalMonoCategory.preservesEpimorphisms_of_preservesCokernels V
+    have : Epi (V.map (P.functorialCupRestriction true i)) := V.map_epi _
+    refine ⟨b, hb, ?_⟩
+    intro b' hb'
+    apply Iso.ext
+    exact (cancel_epi (V.map (P.functorialCupRestriction true i))).1 (hb'.trans hb.symm)
+
+end ClosedSupportProof
 
 /-- The uniquely normalized ordinary coefficient exchange; no purity exchange is used.
 Source: Stacks 03Q1, supported functoriality formula
@@ -468,6 +942,15 @@ def functorialCupPullback (P : PurityFiniteSetting.{u}) (pro : Bool)
         (P.functorialCupTwist pro X r) ≫
       (P.functorialCupSingle pro Y).map (P.functorialCupTwistPullback pro v aX r).hom)⟦a⟧'
 
+section SupportMapProof
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] functorialCupCategory functorialCupAbelian
+  functorialCupMonoidal functorialCupSymmetric functorialCupClosed
+  constant constantEtale functorialCupConstant functorialCupComparisonFunctor
+  functorialCupSource functorialCupRestriction functorialCupInverseImage
+  functorialCupConstantPullback
+
 /-- Change of closed support over a fixed scheme, uniquely determined on local constants.
 Source: supported functoriality, Steps 2 and 5
 (blueprint: lem-pur-supported-cup-functoriality).
@@ -479,7 +962,43 @@ theorem functorialCupSupportMap_existsUnique (P : PurityFiniteSetting.{u}) (pro 
     [IsClosedImmersion i] [IsClosedImmersion j] (g : D ⟶ C) (_h : g ≫ i = j) :
     ∃! b : P.functorialCupSource pro i ⟶ P.functorialCupSource pro j,
       P.functorialCupRestriction pro i ≫ b = P.functorialCupRestriction pro j := by
-  sorry
+  let t := Etale.constantModulePushforwardMap P.Coefficient
+    (ModuleCat.of P.Coefficient P.Coefficient) i j g _h
+  have ht : Etale.closedConstantSectionMap P.Coefficient i ≫ t =
+      Etale.closedConstantSectionMap P.Coefficient j := by
+    rw [section_unit, section_unit]
+    exact transition_unit _ g i j _h
+  have := section_epi P.Coefficient i
+  cases pro with
+  | false =>
+    refine ⟨t, ht, ?_⟩
+    intro b hb
+    exact (cancel_epi (Etale.closedConstantSectionMap P.Coefficient i)).1 (hb.trans ht.symm)
+  | true =>
+    let F := P.functorialCupComparisonFunctor X
+    let ei := (comparisonSource_normalized P i).choose
+    let ej := (comparisonSource_normalized P j).choose
+    have hi := (comparisonSource_normalized P i).choose_spec.1
+    have hj := (comparisonSource_normalized P j).choose_spec.1
+    change F.map (P.functorialCupRestriction false i) ≫ ei.hom = _ at hi
+    change F.map (P.functorialCupRestriction false j) ≫ ej.hom = _ at hj
+    have : Epi (F.map (Etale.closedConstantSectionMap P.Coefficient i)) := F.map_epi _
+    have hpi : Epi (P.functorialCupRestriction true i) := by
+      rw [← hi]
+      exact epi_comp _ _
+    let b := ei.inv ≫ F.map t ≫ ej.hom
+    have hb : P.functorialCupRestriction true i ≫ b =
+        P.functorialCupRestriction true j := by
+      rw [← hi]
+      dsimp only [b]
+      simp only [Category.assoc, Iso.hom_inv_id_assoc]
+      rw [← F.map_comp_assoc, ht]
+      exact hj
+    refine ⟨b, hb, ?_⟩
+    intro b' hb'
+    exact (cancel_epi (P.functorialCupRestriction true i)).1 (hb'.trans hb.symm)
+
+end SupportMapProof
 
 /-- The actual restriction on closed constant sheaves, fixed by its epic unit map.
 Source: supported functoriality, Steps 2 and 5
@@ -527,7 +1046,7 @@ Proof: unfold frameTwistEtale and functorialCupTwist at the etale site; both
 are the same finiteEtaleTateSheaf with the same annihilation proof. -/
 theorem functorialCupFrameTwistEtale_eq (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
     P.frameTwistEtale X 1 = P.functorialCupTwist false X 1 := by
-  sorry
+  rfl
 
 /-- The frame twist is the identical signed pro-etale coefficient line.
 Source: def-pur-frame-class, comparison of the Kummer target
@@ -536,7 +1055,7 @@ Proof: both frameTwist and functorialCupTwist on the pro-etale site are the
 same exact comparison inverse image of the etale signed finite coefficient line. -/
 theorem functorialCupFrameTwist_eq (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
     P.frameTwist X 1 = P.functorialCupTwist true X 1 := by
-  sorry
+  rfl
 
 /-- The published Kummer Ext class, selected before passing to derived Hom.
 Source: the arbitrary-index Kummer prescription
@@ -805,7 +1324,32 @@ this identity. -/
 theorem functorialCupSequence_zero (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     P.functorialCupOpenInclusion pro i ≫ P.functorialCupRestriction pro i = 0 := by
-  sorry
+  have hd : Disjoint (Set.range i.openComplement.ι.base) (Set.range i.base) :=
+    disjoint_range_of_range_eq_compl i.openComplement.ι i
+      i.range_eq_compl_range_openComplement_ι
+  cases pro with
+  | false =>
+    have hz := Etale.isZero_upperStar_lowerStar_of_disjoint_range
+      (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι i hd (P.constantEtale C)
+    have : Subsingleton (P.functorialCupConstant false i.openComplement.toScheme ⟶
+        (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).obj
+          (P.functorialCupSource false i)) := ⟨fun _ _ ↦ hz.eq_of_tgt _ _⟩
+    have : Subsingleton (P.functorialCupOpenSource false i ⟶
+        P.functorialCupSource false i) := Equiv.subsingleton
+      ((Etale.openImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).homEquiv _ _)
+    exact Subsingleton.elim _ _
+  | true =>
+    have hz := ProEtale.isZero_upperStar_lowerStar_of_disjoint
+      (ModuleCat.{u + 1} P.Coefficient) i i.openComplement.ι hd.symm (P.constant C)
+    have : Subsingleton (P.functorialCupConstant true i.openComplement.toScheme ⟶
+        (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).obj
+          (P.functorialCupSource true i)) := ⟨fun _ _ ↦ hz.eq_of_tgt _ _⟩
+    have : Subsingleton (P.functorialCupOpenSource true i ⟶
+        P.functorialCupSource true i) := Equiv.subsingleton
+      ((ProEtale.openImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).homEquiv _ _)
+    exact Subsingleton.elim _ _
 
 /-- The actual open-closed coefficient sequence, before deriving.
 Source: Stacks 095L, 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
@@ -813,6 +1357,144 @@ def functorialCupSequence (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :=
   ShortComplex.mk (P.functorialCupOpenInclusion pro i) (P.functorialCupRestriction pro i)
     (P.functorialCupSequence_zero pro i)
+
+section SequenceProof
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] functorialCupCategory functorialCupAbelian
+  constant constantEtale functorialCupConstant functorialCupSource
+  functorialCupRestriction functorialCupInverseImage functorialCupConstantPullback
+  functorialCupComparisonFunctor functorialCupOpenExtension functorialCupOpenSource
+  functorialCupOpenInclusion
+
+private theorem adjunctionCounitSquare
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (a : L ⊣ R) (b : L' ⊣ R') (F : D ⥤ D') (G : C ⥤ C')
+    (e : L ⋙ F ≅ G ⋙ L') (t : R ⋙ G ⟶ F ⋙ R')
+    (hu : ∀ K : C, G.map (a.unit.app K) ≫ t.app (L.obj K) ≫
+      R'.map (e.hom.app K) = b.unit.app (G.obj K)) (M : D) :
+    e.hom.app (R.obj M) ≫ L'.map (t.app M) ≫ b.counit.app (F.obj M) =
+      F.map (a.counit.app M) := by
+  apply (cancel_epi (e.inv.app (R.obj M))).1
+  simp only [Iso.inv_hom_id_app_assoc]
+  apply (b.homEquiv _ _).injective
+  have hl : (b.homEquiv _ _).symm (t.app M) =
+      L'.map (t.app M) ≫ b.counit.app (F.obj M) := b.homEquiv_counit _ _ _
+  change (b.homEquiv (G.obj (R.obj M)) (F.obj M))
+      (L'.map (t.app M) ≫ b.counit.app (F.obj M)) =
+    (b.homEquiv (G.obj (R.obj M)) (F.obj M))
+      (e.inv.app (R.obj M) ≫ F.map (a.counit.app M))
+  rw [← hl]
+  apply Eq.trans ((b.homEquiv _ _).apply_symm_apply (t.app M))
+  rw [Adjunction.homEquiv_unit, R'.map_comp, ← hu]
+  simp only [Category.assoc, ← R'.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [R'.map_id, Category.id_comp]
+  have hn := t.naturality (a.counit.app M)
+  change G.map (R.map (a.counit.app M)) ≫ t.app M =
+    t.app (L.obj (R.obj M)) ≫ R'.map (F.map (a.counit.app M)) at hn
+  rw [← hn, ← G.map_comp_assoc, a.right_triangle_components]
+  erw [G.map_id, Category.id_comp]
+
+private theorem openComparison_normalized (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    ∃ e : (P.functorialCupComparisonFunctor X).obj
+        (P.functorialCupOpenSource false i) ≅ P.functorialCupOpenSource true i,
+      (P.functorialCupComparisonFunctor X).map (P.functorialCupOpenInclusion false i) =
+        e.hom ≫ P.functorialCupOpenInclusion true i := by
+  let A := ModuleCat.{u + 1} P.Coefficient
+  let j := i.openComplement.ι
+  let F := ProEtale.comparisonUpperStar A X
+  let G := ProEtale.comparisonUpperStar A i.openComplement.toScheme
+  let E := Etale.openImmersionLowerShriek A j
+  let L := ProEtale.openImmersionLowerShriek A j
+  let U := Etale.upperStar A j
+  let V := ProEtale.upperStar A j
+  let a := Etale.openImmersionLowerShriekUpperStarAdjunction A j
+  let b := ProEtale.openImmersionLowerShriekUpperStarAdjunction A j
+  let ar := Etale.openImmersionLowerShriekAdjunction A j
+  let br := ProEtale.openImmersionLowerShriekAdjunction A j
+  let er := Etale.upperStarIsoOpenImmersionRestriction A j
+  let pr := ProEtale.upperStarIsoOpenImmersionRestriction A j
+  let τ := ProEtale.comparisonUpperStarCompUpperStarIso A j
+  let θ := ProEtale.openImmersionLowerShriekComparisonUpperStarIso A j
+  have hu (K : Sheaf i.openComplement.toScheme.smallEtaleTopology A) :
+      G.map (a.unit.app K) ≫ τ.inv.app (E.obj K) ≫ V.map (θ.hom.app K) =
+        b.unit.app (G.obj K) := by
+    have hr := (ProEtale.openComparison_unit_normalization P.Coefficient j).2 K
+    change G.map (ar.unit.app K) ≫
+      (ProEtale.openComparisonRestrictionIso P.Coefficient j).hom.app (E.obj K) ≫
+      (ProEtale.openImmersionRestriction A j).map (θ.hom.app K) =
+        br.unit.app (G.obj K) at hr
+    change G.map (ar.unit.app K ≫ er.inv.app (E.obj K)) ≫
+      τ.inv.app (E.obj K) ≫ V.map (θ.hom.app K) =
+        br.unit.app (G.obj K) ≫ pr.inv.app (L.obj (G.obj K))
+    rw [G.map_comp]
+    apply ((pr.app (L.obj (G.obj K))).homToEquiv).injective
+    change (G.map (ar.unit.app K) ≫ G.map (er.inv.app (E.obj K)) ≫
+      τ.inv.app (E.obj K) ≫ V.map (θ.hom.app K)) ≫ pr.hom.app _ =
+        (br.unit.app (G.obj K) ≫ pr.inv.app _) ≫ pr.hom.app _
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    rw [pr.hom.naturality]
+    erw [Category.comp_id]
+    change G.map (ar.unit.app K) ≫
+      ((G.map (er.inv.app (E.obj K)) ≫ τ.inv.app (E.obj K)) ≫
+        pr.hom.app (F.obj (E.obj K))) ≫
+      (ProEtale.openImmersionRestriction A j).map (θ.hom.app K) = _ at hr
+    simpa only [Category.assoc] using hr
+  have hc := adjunctionCounitSquare a b F G θ τ.inv hu (P.constantEtale X)
+  let e := θ.app (P.constantEtale i.openComplement.toScheme)
+  refine ⟨e, ?_⟩
+  change F.map (E.map (P.functorialCupConstantPullback false j).inv ≫
+      a.counit.app (P.constantEtale X)) = e.hom ≫
+    L.map (P.functorialCupConstantPullback true j).inv ≫
+      b.counit.app (P.constant X)
+  rw [F.map_comp]
+  change _ = e.hom ≫ L.map (G.map
+    (P.functorialCupConstantPullback false j).inv ≫ τ.inv.app _) ≫ _
+  rw [L.map_comp]
+  simp only [Category.assoc]
+  have hn := θ.hom.naturality (P.functorialCupConstantPullback false j).inv
+  change F.map (E.map (P.functorialCupConstantPullback false j).inv) ≫ θ.hom.app _ =
+    e.hom ≫ L.map (G.map (P.functorialCupConstantPullback false j).inv) at hn
+  rw [← reassoc_of% hn, hc]
+
+private theorem etaleSequence_shortExact (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    (P.functorialCupSequence false i).ShortExact := by
+  let A := ModuleCat.{u + 1} P.Coefficient
+  let j := i.openComplement.ι
+  let eU := P.functorialCupConstantPullback false j
+  let eC := P.functorialCupConstantPullback false i
+  let S := Etale.openClosedShortComplex A j i
+    (disjoint_range_of_range_eq_compl j i i.range_eq_compl_range_openComplement_ι)
+    (P.constantEtale X)
+  let e₁ := (Etale.openImmersionLowerShriek A j).mapIso eU
+  let e₃ := (Etale.lowerStar A i).mapIso eC
+  let e : S ≅ P.functorialCupSequence false i := ShortComplex.isoMk
+    e₁ (Iso.refl _) e₃ (by
+      change (Etale.openImmersionLowerShriek A j).map eU.hom ≫
+        ((Etale.openImmersionLowerShriek A j).map eU.inv ≫
+          (Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit.app
+            (P.constantEtale X)) =
+        (Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit.app
+          (P.constantEtale X) ≫ 𝟙 _
+      rw [← Functor.map_comp_assoc, Iso.hom_inv_id,
+        CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]) (by
+      change 𝟙 _ ≫ Etale.closedConstantSectionMap P.Coefficient i =
+        (Etale.upperStarLowerStarAdjunction A i).unit.app (P.constantEtale X) ≫
+          (Etale.lowerStar A i).map eC.hom
+      simp only [Category.id_comp]
+      rw [section_unit]
+      change _ = (Etale.upperStarLowerStarAdjunction A i).unit.app _ ≫
+        (Etale.lowerStar A i).map
+          ((Scheme.upperStarConstantSheafIso A i).hom.app (𝟙_ A))
+      rw [Etale.upperStarConstantSheafIso_hom_app_tensorUnit]
+      exact (Adjunction.unit_app_unit_comp_map_η
+        (Etale.upperStarLowerStarAdjunction A i)).symm)
+  exact ShortComplex.shortExact_of_iso e
+    (Etale.shortExact_openClosedShortComplex A j i (P.constantEtale X)
+      i.range_eq_compl_range_openComplement_ι)
 
 /-- Exactness of this normalized coefficient sequence on either small site.
 Source: Stacks 095L, 09XP, proof Steps 4 and 7
@@ -824,7 +1506,26 @@ extension-by-zero comparison. This argument does not require a quasi-compact com
 theorem functorialCupSequence_shortExact (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     (P.functorialCupSequence pro i).ShortExact := by
-  sorry
+  cases pro with
+  | false => exact etaleSequence_shortExact P i
+  | true =>
+    let F := P.functorialCupComparisonFunctor X
+    obtain ⟨e₁, h₁⟩ := openComparison_normalized P i
+    let e₃ := (comparisonSource_normalized P i).choose
+    have h₃ := (comparisonSource_normalized P i).choose_spec.1
+    let e : (P.functorialCupSequence false i).map F ≅
+        P.functorialCupSequence true i := ShortComplex.isoMk e₁ (Iso.refl _) e₃
+      (by
+        change e₁.hom ≫ P.functorialCupOpenInclusion true i =
+          F.map (P.functorialCupOpenInclusion false i) ≫ 𝟙 _
+        exact h₁.symm.trans (Category.comp_id _).symm)
+      (by
+        change 𝟙 _ ≫ P.functorialCupRestriction true i =
+          F.map (P.functorialCupRestriction false i) ≫ e₃.hom
+        exact (Category.id_comp _).trans h₃.symm)
+    exact ShortComplex.shortExact_of_iso e ((etaleSequence_shortExact P i).map_of_exact F)
+
+end SequenceProof
 
 /-- Cohomology of the open complement in its exact extension-by-zero adjunction
 model Hom_X(j!A_U,F[a])=Hom_U(A_U,j*F[a]). This retains the usual cohomology
@@ -851,6 +1552,22 @@ def functorialCupBoundary (P : PurityFiniteSetting.{u}) (pro : Bool)
     (α : P.FunctorialCupOpenH pro i a r) : P.FunctorialCupH pro i (a + 1) r :=
   ShiftedHom.comp (P.functorialCupSequence_shortExact pro i).singleδ α rfl
 
+private theorem normalizedKernelIso {E : Type c} [Category.{v} E] [Abelian E]
+    {S T : ShortComplex E} (hS : S.ShortExact) (hT : T.ShortExact)
+    (e₂ : S.X₂ ≅ T.X₂) (e₃ : S.X₃ ≅ T.X₃)
+    (h : e₂.hom ≫ T.g = S.g ≫ e₃.hom) :
+    ∃! e₁ : S.X₁ ≅ T.X₁, S.f ≫ e₂.hom = e₁.hom ≫ T.f := by
+  let φ : Arrow.mk S.g ≅ Arrow.mk T.g := Arrow.isoMk e₂ e₃ h
+  let e := KernelFork.mapIsoOfIsLimit hS.fIsKernel hT.fIsKernel φ
+  have he : S.f ≫ e₂.hom = e.hom ≫ T.f := by
+    exact (KernelFork.mapOfIsLimit_ι (KernelFork.ofι S.f S.zero) hT.fIsKernel φ.hom).symm
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  have := hT.mono_f
+  apply (cancel_mono T.f).1
+  exact he'.symm.trans he
+
 /-- Open coefficient exchange is uniquely normalized by its inclusion in the unit.
 Source: Stacks 09XP, supported functoriality, Steps 4 and 7
 (blueprint: lem-pur-supported-cup-functoriality).
@@ -866,7 +1583,13 @@ theorem functorialCupOpenExchange_existsUnique (P : PurityFiniteSetting.{u}) (pr
       (P.functorialCupInverseImage pro v).map (P.functorialCupOpenInclusion pro i) ≫
           (P.functorialCupConstantPullback pro v).hom =
         b.hom ≫ P.functorialCupOpenInclusion pro j := by
-  sorry
+  let F := P.functorialCupInverseImage pro v
+  let e := (P.functorialCupExchange_existsUnique pro i j v g _sq).choose
+  have he := (P.functorialCupExchange_existsUnique pro i j v g _sq).choose_spec.1
+  exact normalizedKernelIso
+    ((P.functorialCupSequence_shortExact pro i).map_of_exact F)
+    (P.functorialCupSequence_shortExact pro j)
+    (P.functorialCupConstantPullback pro v) e he.symm
 
 /-- Canonical open pullback, expressed by exact inverse image on the adjunction Hom model.
 Source: Stacks 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
@@ -949,7 +1672,7 @@ theorem functorialCupComparisonSource_existsUnique (P : PurityFiniteSetting.{u})
         (P.functorialCupSource false i) ≅ P.functorialCupSource true i,
       (P.functorialCupComparisonFunctor X).map
           (P.functorialCupRestriction false i) ≫ b.hom = P.functorialCupRestriction true i := by
-  sorry
+  exact comparisonSource_normalized P i
 
 /-- The comparison target of the signed twist is its defining pro-etale sheaf.
 Source: finite coefficient twist comparison, Stacks 099W
@@ -960,7 +1683,7 @@ theorem functorialCupComparisonTwist_eq (P : PurityFiniteSetting.{u})
     (X : Scheme.{u}) (r : ℤ) :
     (P.functorialCupComparisonFunctor X).obj (P.functorialCupTwist false X r) =
       P.functorialCupTwist true X r := by
-  sorry
+  rfl
 
 /-- The comparison target of the coefficient unit is its defining pro-etale constant.
 Source: finite coefficient comparison, Stacks 099W
@@ -971,7 +1694,7 @@ theorem functorialCupComparisonConstant_eq (P : PurityFiniteSetting.{u})
     (X : Scheme.{u}) :
     (P.functorialCupComparisonFunctor X).obj (P.functorialCupConstant false X) =
       P.functorialCupConstant true X := by
-  sorry
+  rfl
 
 /-- Canonical comparison on the supported Hom groups. The finite twist on the
 pro-etale site is the exact inverse image of the identical etale twist.
@@ -1010,7 +1733,16 @@ theorem functorialCupComparisonOpen_existsUnique (P : PurityFiniteSetting.{u})
       (P.functorialCupComparisonFunctor X).map
           (P.functorialCupOpenInclusion false i) =
         b.hom ≫ P.functorialCupOpenInclusion true i := by
-  sorry
+  let F := P.functorialCupComparisonFunctor X
+  let e := (P.functorialCupComparisonSource_existsUnique i).choose
+  have he := (P.functorialCupComparisonSource_existsUnique i).choose_spec.1
+  exact normalizedKernelIso
+    ((P.functorialCupSequence_shortExact false i).map_of_exact F)
+    (P.functorialCupSequence_shortExact true i)
+    (eqToIso (P.functorialCupComparisonConstant_eq X)) e (by
+      change 𝟙 _ ≫ P.functorialCupRestriction true i =
+        F.map (P.functorialCupRestriction false i) ≫ e.hom
+      exact (Category.id_comp _).trans he.symm)
 
 /-- Site comparison on open cohomology in the extension-by-zero adjunction model.
 Source: Stacks 099V, 09XP (blueprint: lem-pur-supported-cup-functoriality). -/

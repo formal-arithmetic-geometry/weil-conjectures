@@ -32,10 +32,11 @@
    }
   },
   {
-   "text": "First work on the etale site. For $i:C\\hookrightarrow X$ put $P_C=i_*A_C$. Apply [lem-pur-etale-closed-constant-tensor] with the finite ring $A$ of Step 1. Its specified $b_{v,C}$ is the adjoint of pullback of locally constant sections and is an isomorphism for every $v:X'\\to X$. Its identities and composition equations apply also to nonreduced and empty supports. The same lemma supplies flatness of every $P_C$ and the particular isomorphism $\\mu_{C,D}:P_C\\otimes_A^LP_D\\xrightarrow{\\sim}P_{C\\times_XD}$ induced by restriction and multiplication. Use these maps to define the etale analogue of the tensor-morphism construction in [def-pur-supported-cup], which itself is pro-etale. The associativity, symmetry and pullback equations for these source multiplications are exactly the equations in the cited lemma. They are the source equations used in Steps 4--6; they assert ordinary coefficient pullback and do not use exceptional base change.",
+   "text": "First work on the etale site. For $i:C\\hookrightarrow X$ put $P_C=i_*A_C$. Apply [lem-pur-etale-closed-constant-tensor] with the finite ring $A$ of Step 1. Its specified $b_{v,C}$ is the adjoint of pullback of locally constant sections and is an isomorphism for every $v:X'\\to X$. Its identities and composition equations apply also to nonreduced and empty supports. The same lemma supplies flatness of every $P_C$ and the particular isomorphism $\\mu_{C,D}:P_C\\otimes_A^LP_D\\xrightarrow{\\sim}P_{C\\times_XD}$ induced by restriction and multiplication. Use these maps to define the etale analogue of the tensor-morphism construction in [def-pur-supported-cup], which itself is pro-etale. The associativity, symmetry and pullback equations for these source multiplications are exactly the equations in the cited lemma. They are the source equations used in Steps 4--6; they assert ordinary coefficient pullback and do not use exceptional base change. For the normalized etale closed-source exchange, specialize the existing underived finite base-change isomorphism [sk-lem-pbc-finite] to the tensor unit, identify constant pullback with the monoidal unit map, and use epimorphic constant restriction for uniqueness.",
    "uses": [
     "lem-pur-etale-closed-constant-tensor",
-    "def-pur-supported-cup"
+    "def-pur-supported-cup",
+    "sk-lem-pbc-finite"
    ],
    "elementary": false,
    "source": {
@@ -59,7 +60,7 @@
    }
   },
   {
-   "text": "By [lem-amb-closed-support-hom] represent a class by $\\alpha:P_C\\to A_X(r)[a]$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] defines\n$$v^*\\alpha=\\tau_{v,r}[a]\\circ v^{-1}(\\alpha)\\circ b_{v,C}^{-1}.$$\nHere $\\tau$ is Step 1 and $b$ is Step 2. To fix its normalization, apply $\\operatorname{Hom}(-,I^q)$, for injective $I^q$, to the source sequence of [lem-weil-pbc-open-closed-short-exact]. Evaluation at the image of $1$ identifies $\\operatorname{Hom}(P_C,I^q)$ with $\\ker(I^q(X)\\to I^q(U))$; the last Hom is $I^q(U)$ by [lem-weil-pbc-extension-by-zero-adjunction]. For $a<0$ both groups vanish, since the coefficients are degree-zero sheaves and supported cohomology is a right derived functor. For $a\\geq0$, [lem-weil-pbc-ext-exact-functor-cocycle] represents the displayed derived map by inverse image followed by the injective comparison. Evaluating at $1$ gives precisely pullback of a supported section, so [lem-weil-pbc-site-cohomology-pullback] identifies it with the usual kernel pullback. Functoriality of [thm-pur-with-support-exactness] now gives restriction and boundary compatibility. The equations for $b$ in Step 2 and for $\\tau$ in Step 1 give identities and composition. When $C=X$, $P_C=A_X$ and $b$ is the constant-ring identification, so the formula is ordinary pullback.",
+   "text": "By [lem-amb-closed-support-hom] represent a class by $\\alpha:P_C\\to A_X(r)[a]$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] defines\n$$v^*\\alpha=\\tau_{v,r}[a]\\circ v^{-1}(\\alpha)\\circ b_{v,C}^{-1}.$$\nHere $\\tau$ is Step 1 and $b$ is Step 2. To fix its normalization, apply $\\operatorname{Hom}(-,I^q)$, for injective $I^q$, to the source sequence of [lem-weil-pbc-open-closed-short-exact]. Evaluation at the image of $1$ identifies $\\operatorname{Hom}(P_C,I^q)$ with $\\ker(I^q(X)\\to I^q(U))$; the last Hom is $I^q(U)$ by [lem-weil-pbc-extension-by-zero-adjunction]. For $a<0$ both groups vanish, since the coefficients are degree-zero sheaves and supported cohomology is a right derived functor. For $a\\geq0$, [lem-weil-pbc-ext-exact-functor-cocycle] represents the displayed derived map by inverse image followed by the injective comparison. Evaluating at $1$ gives precisely pullback of a supported section, so [lem-weil-pbc-site-cohomology-pullback] identifies it with the usual kernel pullback. Functoriality of [thm-pur-with-support-exactness] now gives restriction and boundary compatibility. The equations for $b$ in Step 2 and for $\\tau$ in Step 1 give identities and composition. When $C=X$, $P_C=A_X$ and $b$ is the constant-ring identification, so the formula is ordinary pullback. The zero composite in the coefficient short complex follows by the open-extension adjunction from disjoint-support vanishing [lem-sfb-proetale-open-disjoint-direct-image] on the pro-etale site and its existing etale counterpart.",
    "uses": [
     "lem-amb-closed-support-hom",
     "prop-weil-pbc-inverse-image-modules-exact",
@@ -67,7 +68,8 @@
     "lem-weil-pbc-extension-by-zero-adjunction",
     "lem-weil-pbc-ext-exact-functor-cocycle",
     "lem-weil-pbc-site-cohomology-pullback",
-    "thm-pur-with-support-exactness"
+    "thm-pur-with-support-exactness",
+    "lem-sfb-proetale-open-disjoint-direct-image"
    ],
    "elementary": false,
    "source": {
@@ -106,7 +108,7 @@
    }
   },
   {
-   "text": "Full faithfulness in [thm-weil-pbc-site-comparison], with Steps 1 and 6 and the Hom descriptions [lem-pur-supported-hom, lem-amb-closed-support-hom], gives a bijection on supported groups: $\\alpha\\mapsto\\nu_X^*(\\alpha)q_C^{-1}$, with twists identified. By [lem-weil-pbc-comparison-pullback] it commutes with geometric pullback: $q_C$ and $b_{v,C}$ both pull back the same local section.\nFor localization, use [lem-cbc-proetale-extension-zero-comparison] to identify $\\nu_X^*j^{\\mathrm{et}}_!A_U$ with $j^{\\mathrm{proet}}_!A_U$. This canonical comparison carries counits to counits: under the two adjunctions [lem-weil-pbc-extension-by-zero-adjunction, lem-cbc-proetale-extension-zero], both maps correspond to the identity of $A_U$, since comparison restricts on etale objects to the same sections. Step 6 identifies the other arrow $A_X\\to P_C$ by its value on $1$. Exact comparison [lem-sf-comparison-pullback-exact] therefore sends [lem-weil-pbc-open-closed-short-exact] to the identical source sequence on the pro-etale site. By [lem-weil-pbc-exact-functor-ses-triangle-image] it sends its connecting arrow to the connecting arrow with the same sign. Applying Hom into the coefficient object thus commutes with the localization boundary; Step 4's kernel evaluation and [thm-pur-with-support-exactness] fix its normalization.\nFinally [lem-pur-shifted-tensor-morphism-calculus] and Step 6's multiplication comparison identify the specified cup of [def-pur-supported-cup], including its shift sign, with the etale cup. Every pro-etale class is in the Hom bijection, so all laws in Steps 4--5 hold on both sites.",
+   "text": "Full faithfulness in [thm-weil-pbc-site-comparison], with Steps 1 and 6 and the Hom descriptions [lem-pur-supported-hom, lem-amb-closed-support-hom], gives a bijection on supported groups: $\\alpha\\mapsto\\nu_X^*(\\alpha)q_C^{-1}$, with twists identified. By [lem-weil-pbc-comparison-pullback] it commutes with geometric pullback: $q_C$ and $b_{v,C}$ both pull back the same local section.\nFor localization, use [lem-cbc-proetale-extension-zero-comparison] to identify $\\nu_X^*j^{\\mathrm{et}}_!A_U$ with $j^{\\mathrm{proet}}_!A_U$. This canonical comparison carries counits to counits: under the two adjunctions [lem-weil-pbc-extension-by-zero-adjunction, lem-cbc-proetale-extension-zero], both maps correspond to the identity of $A_U$, since comparison restricts on etale objects to the same sections. Step 6 identifies the other arrow $A_X\\to P_C$ by its value on $1$. Exact comparison [lem-sf-comparison-pullback-exact] therefore sends [lem-weil-pbc-open-closed-short-exact] to the identical source sequence on the pro-etale site. By [lem-weil-pbc-exact-functor-ses-triangle-image] it sends its connecting arrow to the connecting arrow with the same sign. Applying Hom into the coefficient object thus commutes with the localization boundary; Step 4's kernel evaluation and [thm-pur-with-support-exactness] fix its normalization.\nFinally [lem-pur-shifted-tensor-morphism-calculus] and Step 6's multiplication comparison identify the specified cup of [def-pur-supported-cup], including its shift sign, with the etale cup. Every pro-etale class is in the Hom bijection, so all laws in Steps 4--5 hold on both sites. In Lean, use [lem-sf-open-comparison-unit-normalization] to identify the extension comparison with the specified inverse-image comparison. Transport its unit equation to the inverse-image adjunctions; the triangle identities give the counit equation. This identifies both arrows of the exact comparison image of the etale coefficient sequence, so its pro-etale image is short exact without a quasi-compactness assumption on the open. Open pullback exchange is then the unique isomorphism of the kernels of the closed restriction arrows, obtained from exact inverse image and the normalized middle and closed-source isomorphisms.",
    "uses": [
     "thm-weil-pbc-site-comparison",
     "lem-pur-supported-hom",
@@ -120,7 +122,8 @@
     "lem-weil-pbc-exact-functor-ses-triangle-image",
     "thm-pur-with-support-exactness",
     "lem-pur-shifted-tensor-morphism-calculus",
-    "def-pur-supported-cup"
+    "def-pur-supported-cup",
+    "lem-sf-open-comparison-unit-normalization"
    ],
    "elementary": false,
    "source": {
@@ -175,12 +178,15 @@
   "lem-cbc-proetale-extension-zero",
   "lem-weil-pbc-exact-functor-ses-triangle-image",
   "lem-amb-kummer-any-base",
-  "lem-weil-pbc-right-derived-universal-delta-functor"
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sf-open-comparison-unit-normalization",
+  "sk-lem-pbc-finite",
+  "lem-sfb-proetale-open-disjoint-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Supported tensor-morphism refinement of Tags 0FPL/0FPM, with the explicit cochain symmetry calculation; etale support Tag 09XP, finite Kummer Tag 03PL, and arbitrary-scheme comparison Tags 099V/099W/09B1."
+  "place": "Supported tensor-morphism refinement of Tags 0FPL/0FPM, with the explicit cochain symmetry calculation; etale support Tag 09XP, finite Kummer Tag 03PL, and arbitrary-scheme comparison Tags 099V/099W/09B1. P9 (2026-10-21): the coefficient, closed-source, and open-source normalization lemmas are implemented separately; the final assembly theorem remains to be proved. The canonical open comparison uses its recorded unit normalization and the kernel universal property."
  },
  "mathlib_searches": [
   {
@@ -517,5 +523,15 @@
   "result": "fix",
   "note": "Substance correct: every node clause is rendered on the etale site and the specified pro-etale realizations. Covered: kappa_c invertible and natural for every compactification; u_Z = constant-section unit then counit image; supported classes for every a : Z; the u_{ZxW}.kappa^{Z,W} = kappa_c.(u_Z (x) u_W) square with the dependency's supportedExteriorProduct; excision for every D+ extension; signed-twist, even-degree, arbitrary-closed-support cup identity on both sites with the support identification; pro-etale square, unit/counit normalization and witness independence. Definitions are canonical: normalized Classical.choice/exists-unique data; the eqToHom equalities compactProductTensor_eq, compactProductExterior_eq, compactProductCoefficientUnit_eq and functorialCupComparisonTwist_eq all hold by rfl (checked). Advisory: proper_support_comparison only restates the dependency's IsIso; output_representative is an extra true conclusion. Mechanical faults, fixed: (1) the delivered SupportedCupFunctoriality is NE's stale text and reverts Q10's landed named-predicate refactor (22 record declarations dropped, no outside users). fixes/SupportedCupFunctoriality.lean is a clean diff3 merge of base->live and base->delivered: superset of both, statement unchanged. (2) The SupportedCup legacy-import change is unneeded, since the legacy TensorResolution path now re-exports the FiniteCoefficient one; fixes/SupportedCup.lean is the live text. nt_compile: all 15 new modules plus the merged dependency clean (dependency 26.6-49.7 s by load); live importers ClosedSupportedCupVanishing 13.9 s and PurityDivisorClass 16.3 s clean. Maintainer: --revert-nodes def-pur-supported-cup; re-add Q10's 22 names to the SupportedCupFunctoriality record if convenient; NE lem-pur-divisor-class must rebase or revert the same dependency."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261021T140853-L-2766708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
