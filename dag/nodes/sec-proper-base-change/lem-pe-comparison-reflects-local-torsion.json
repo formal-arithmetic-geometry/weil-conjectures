@@ -1,0 +1,122 @@
+{
+ "id": "lem-pe-comparison-reflects-local-torsion",
+ "kind": "statement",
+ "title": "Etale/pro-etale comparison reflects local integer torsion",
+ "statement": "For any scheme X, commutative ring A, and etale sheaf F of A-modules, if the underlying abelian sheaf of its pro-etale inverse image is locally torsion, then F is a torsion module sheaf. There is no uniform annihilator assumption.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+  "place": "Opening paragraph: descend local torsion; Stacks 03SA, 0993, 0GLZ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Represent a pro-etale geometric stalk germ on a pointed weakly etale neighbourhood. Apply local torsion to a representing section. A member of its covering lifts the algebraically closed geometric point: base change the cover, use joint surjectivity, and split the resulting nonempty weakly etale scheme over the algebraically closed field. Restriction to that pointed member preserves the germ and kills the section by a positive integer. Hence the pro-etale stalk is a torsion group.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-fix-weakly-etale-algclosed-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical comparison-stalk isomorphism identifies this stalk with the etale module stalk of F. Forgetting module scalars commutes with its filtered colimit. The conservative family of algebraically closed etale points reflects local torsion on the underlying abelian sheaf, which is equivalent to IsTorsionModuleSheaf.",
+   "uses": [
+    "lem-cbc-proetale-comparison-stalk",
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-geometric-stalk",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-cbc-proetale-comparison-stalk",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+  "place": "Opening paragraph: descend local torsion; Stacks 03SA, 0993, 0GLZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of abelian categories preserve derived cohomology, reflect lower bounds and identify classical sheaves; restriction to constant scalars commutes with base change mates",
+   "results": "8 hits: Ext.mapExactFunctor_hom, mapExactFunctor_smul, Ext.mapExactFunctor, Functor.exact_tfae, Functor.instLinearDerivedCategoryMapDerivedCategory, Ext.mapExactFunctor_zero, Sheaf.H, instAbelianCondensedMod. Generic exact functor APIs only.",
+   "verdict": "No specialized coefficient-encoding or torsion-reflection theorem; use the library exact-functor and stalk APIs.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryHomologyFunctorIso",
+   "results": "0 hits; identifier unknown in Mathlib index. The adopted source library supplies this exact-functor cohomology comparison.",
+   "verdict": "Use source ExactFunctor, not a duplicate of its result.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar_reflects_local_torsion|proEtaleConstantExchange_encoding|proEtaleDerivedModuleRestriction",
+   "results": "0 hits. Local rg additionally found proEtaleModuleRestriction_isEquivalence, proEtale_comparison_stalk, and private homology/classicality helpers in ProEtaleClassicalDirectImagePreservation.",
+   "verdict": "No existing public combined API; new results below are needed.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of sheaf categories reflects local torsion and induces an exact derived equivalence compatible with cohomology and base change mates",
+   "results": "8 hits, all sheaf equivalences from site equivalences or dense subsites: Equivalence.sheafCongr and its component formulas; IsDenseSubsite.sheafEquiv; Equivalence.sheafCongrPrecoherent and its component formulas; Equivalence.precoherent_isSheaf_iff. No constant-ring derived exchange or torsion reflection result.",
+   "verdict": "The hits compare equivalent sites; the etale/pro-etale sites here are not equivalent. Use the source coefficient equivalence and comparison stalk APIs instead.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange",
+  "date": "2026-10-21",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-properbasechange",
+   "place": "Opening paragraph: descend local torsion; Stacks 03SA, 0993, 0GLZ",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComparisonReflectsTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonReflectsTorsion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.comparisonUpperStar_reflects_local_torsion",
+  "statement": "theorem comparisonUpperStar_reflects_local_torsion (X : Scheme.{u})\n    (A : Type (u + 1)) [CommRing A]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hF : ((sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})).obj\n        ((comparisonUpperStar (ModuleCat.{u + 1} A) X).obj F)).IsTorsion) :\n    Scheme.IsTorsionModuleSheaf F",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47110",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T061154-L-1730286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47110",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T061154-L-1730286",
+  "kind": "interface",
+  "note": "independent cc review: Delivery files vs previously PASSed H1 1a9e782a4 (identical); item vs restored live file (statement/def byte-identical); thm-weil-pbc-bounded-below vs unit realized.statement; --all compile + axioms; live importer Sheaf.Paper.FiniteProperBaseChange compiled against delivered item (40.2 s)"
+ }
+}

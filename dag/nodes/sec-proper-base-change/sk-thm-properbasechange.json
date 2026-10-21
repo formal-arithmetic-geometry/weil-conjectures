@@ -34,109 +34,54 @@
  ],
  "proof": [
   {
-   "text": "Write $A_T=\\nu_T^*$. The bounded-below comparison unit is invertible, so the classical derived equivalence applies: $L=R\\nu_{X,*}K\\in D^+(X_{\\Et},\\Lambda)$ and its counit $\\alpha:A_XL\\cong K$ is invertible because $K$ is classical. Exactness of the module comparison gives $A_XH^q(L)\\cong H^q(K)$ for every $q$. Apply the torsion-reflection lemma to the exact fully faithful left adjoint $A_X$ (right adjoint $\\nu_{X,*}$): every $H^q(L)$ has torsion underlying abelian sheaf, with no uniform annihilator.",
+   "text": "Restrict the input ringed module complex to constant scalars. Exact derived restriction identifies its cohomology, lower bounds and classicality. The bounded-below comparison unit and classical derived equivalence produce a bounded-below etale complex L with a counit isomorphism from its pro-etale inverse image to the restricted K. Apply cohomology and torsion invariance under isomorphisms; comparison on geometric stalks reflects local torsion, hence L has torsion cohomology.",
    "uses": [
+    "lem-pe-constant-derived-encoding",
     "sk-prop-sf-comparison",
     "det-pe-classical-derived-equivalence",
-    "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-weil-pbc-exact-faithful-torsion"
+    "lem-pe-comparison-reflects-local-torsion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Opening paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "On abelian etale complexes put $\\Phi=g^{-1}Rf_*$ and $\\Psi=Rf'_*g'^{-1}$, with the abelian derived exchange $\\Ex:\\Phi\\to\\Psi$. Abelian etale sheaves form Grothendieck categories and $f_*,f'_*$ are left exact additive, so the K-injective right derived direct images preserve every lower bound by negative vanishing; exact inverse images preserve cohomology. Both functors are triangulated and the exchange respects shifts. Torsion assembly makes it invertible on every $H^q(E)[0]$ when $E$ has torsion cohomology. The heart test therefore makes $\\Ex_E$ invertible for every such $E\\in D^+$.",
+   "text": "Apply the existing arbitrary-ring etale proper-base-change theorem to L. It is the source library module-valued bounded-below theorem, with exactly the required torsion cohomology hypothesis. This reuses the unit statement thm-weil-pbc-bounded-below and its projective-line/reduction/torsion route; no unit step is removed.",
    "uses": [
-    "lem-weil-pbc-heart-test-bounded-below",
-    "def-weil-pbc-derived-exchange",
-    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
-    "lem-weil-pbc-direct-image-left-exact",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-derived-exchange-triangulated",
-    "lemma-weil-pbc-torsion-assembly"
+    "thm-weil-pbc-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Bounded below complexes paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Forgetting coefficients sends $L$ to an abelian complex with its underlying cohomology. The coefficient-forgetting comparison identifies the forgotten specified module exchange $e_L$ with the abelian exchange of step 2 and reflects invertibility. Hence $e_L$ is invertible.",
+   "text": "The base change f-prime is proper, hence both vertical morphisms are qcqs. The existing comparison_derivedBaseChangeMap identifies the fixed-coefficient pro-etale exchange on the inverse image of L with the image of its etale exchange via the specified endpoint comparisons. Isomorphisms in the arrow category transfer invertibility. Naturality then transports it across the counit to the restriction of K.",
    "uses": [
-    "lem-weil-pbc-exchange-forget-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Lambda-modules paragraph"
-   }
-  },
-  {
-   "text": "The base change $f'$ is proper. Properness gives finite type and separatedness; finite type gives quasi-compactness, and separatedness gives quasi-separatedness. Apply discrete exchange site comparison: its canonical vertex isomorphisms satisfy $T_L A_{Y'}(e_L)=e^p_{A_XL}S_L$. Thus $e^p_{A_XL}=T_L A_{Y'}(e_L)S_L^{-1}$ is invertible, and both endpoints are bounded below and classical.",
-   "uses": [
-    "lem-weil-pbc-discrete-exchange-site-comparison",
     "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-pc-separated-quasi-separated"
+    "lem-weil-pbc-transport-identifies-exchange"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Pro-etale site paragraph: qcqs hypotheses and canonical mate"
-   }
+   "elementary": false
   },
   {
-   "text": "Naturality of the ambient exchange along the counit isomorphism $\\alpha:A_XL\\cong K$ conjugates the preceding map to the exchange at $K$, and its two endpoint maps are isomorphisms. Hence its endpoints remain bounded below and classical. Their full derived subcategory contains the inverse, giving the claimed isomorphism.",
+   "text": "Constant scalar restriction identifies the actual ambient ringed exchange, with the original normalization and coefficient compatibility proof, with that fixed-coefficient arrow. The exact equivalence reflects its invertibility. The source comparison identifies its restricted source with the inverse image of a bounded-below etale source, which is bounded below and classical by the classical image clause. Reflect both properties through the encoding. Transfer them to the target along the exchange isomorphism. This gives every conjunct of the unchanged statement.",
    "uses": [
-    "def-weil-pbc-ambient-ringed-exchange",
-    "sk-def-pe-classical-definition"
+    "lem-pe-constant-exchange-encoding",
+    "lem-pe-constant-derived-encoding",
+    "det-pe-classical-derived-equivalence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Pro-etale site paragraph: naturality and classical endpoints"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pe-constant-derived-encoding",
   "sk-prop-sf-comparison",
   "det-pe-classical-derived-equivalence",
-  "det-pe-classical-sheaves-modules",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-exact-faithful-torsion",
-  "lem-weil-pbc-heart-test-bounded-below",
-  "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
-  "lem-weil-pbc-direct-image-left-exact",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-derived-exchange-triangulated",
-  "lemma-weil-pbc-torsion-assembly",
-  "lem-weil-pbc-exchange-forget-coefficients",
-  "lem-weil-pbc-discrete-exchange-site-comparison",
+  "lem-pe-comparison-reflects-local-torsion",
+  "thm-weil-pbc-bounded-below",
   "lem-weil-pbc-proper-base-change",
-  "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "lem-pc-separated-quasi-separated",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "sk-def-pe-classical-definition"
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-pe-constant-exchange-encoding"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-  "place": "The four retained blueprint paragraphs, assembled through the existing classical derived equivalence and Q03 helpers and two independent statement-only helpers (heart test, discrete exchange site comparison); argument allocation in the Q70 report and review."
+  "place": "Opening, module and pro-etale paragraphs. H1 uses the existing proved etale bounded-below theorem, proves torsion descent by geometric stalks, and separates the normalization-sensitive coefficient-encoding comparison."
  },
  "mathlib_searches": [
   {
@@ -271,9 +216,6 @@
   "det-pe-classical-derived-equivalence",
   "det-pe-classical-sheaves-modules",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-derived-exchange-triangulated",
-  "lem-sf-triangle-two-out-of-three",
   "sk-thm-pe-direct-image-comparison",
   "sbc-lem-bounded-below-truncation-criterion",
   "sbc-def-derived-categories-with-allowable-torsion",
@@ -312,5 +254,15 @@
   "existing": false,
   "note": "Reviewer fix (H4): classicalProEtaleExchange is the recorded proEtaleAmbientRingedExchange (def-weil-pbc-ambient-ringed-exchange) specialized to constant rings with proEtaleConstantRingComparison; coefficient coherence from proEtaleConstantRingCompositeCoefficients_eq (pur713-def-pullback-comparison). The private square comparison helper was removed.",
   "fixed_by": "NT-stage2-cc-60a9ea5bc"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47110",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T061154-L-1730286",
+  "kind": "interface",
+  "note": "independent cc review: Delivery files vs previously PASSed H1 1a9e782a4 (identical); item vs restored live file (statement/def byte-identical); thm-weil-pbc-bounded-below vs unit realized.statement; --all compile + axioms; live importer Sheaf.Paper.FiniteProperBaseChange compiled against delivered item (40.2 s)"
  }
 }
