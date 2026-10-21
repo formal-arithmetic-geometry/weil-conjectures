@@ -3,34 +3,130 @@
  "blueprint": {
   "is": "def-sfb-left-derived-functor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Left derived functor via K-flat resolutions",
- "statement": "Let $\\mathcal C$ be a monoidal abelian category with the following properties: its\ntensor product is additive in each variable; it has countable coproducts and exact\n$\\mathbf Z$-indexed colimits, which tensoring with a fixed object on either side\npreserves; and it has functorial flat resolutions. Let $F\\colon\\mathcal C\\to\\mathcal D$\nbe an additive functor to an abelian category that preserves K-flat quasi-isomorphisms\n[def-sfb-preserves-kflat-quasi-iso]. The *left derived functor*\n$LF\\colon D(\\mathcal C)\\to D(\\mathcal D)$ is the total left derived functor of\n$K(\\mathcal C)\\xrightarrow{F}K(\\mathcal D)\\xrightarrow{Q}D(\\mathcal D)$ with respect to\nthe quasi-isomorphisms. It comes with a counit $LF\\circ Q\\Rightarrow Q\\circ F$, which is\nan isomorphism on K-flat complexes. So $LF(K)=F(P)$ for a K-flat resolution $P\\to K$.\nConversely, a functor with a counit is the left derived functor if and only if its counit\nis an isomorphism on all K-flat complexes.",
+ "statement": "Let $\\mathcal C$ be a monoidal abelian category with the following properties: its\ntensor product is additive in each variable; it has countable coproducts and exact\n$\\mathbf Z$-indexed colimits, which tensoring with a fixed object on either side\npreserves; and it has functorial flat resolutions. Let $F\\colon\\mathcal C\\to\\mathcal D$\nbe an additive functor to an abelian category that preserves K-flat quasi-isomorphisms\n[def-sfb-preserves-kflat-quasi-iso]. The *left derived functor*\n$LF\\colon D(\\mathcal C)\\to D(\\mathcal D)$ is the total left derived functor of\n$K(\\mathcal C)\\xrightarrow{F}K(\\mathcal D)\\xrightarrow{Q}D(\\mathcal D)$ with respect to\nthe quasi-isomorphisms. It comes with a counit $LF\\circ Q\\Rightarrow Q\\circ F$, which is\nan isomorphism on K-flat complexes. So $LF(K)=F(P)$ for a K-flat resolution $P\\to K$.\nConversely, a functor with a counit is the left derived functor if and only if its counit\nis an isomorphism on all K-flat complexes.\n\nHere monoidal and abelian categories are as in [def-sfb-monoidal-category] and [def-sp-abelian], and the coproducts and colimits are those of [def-weil-pbc-category-colimit]; $\\mathbf Z$ is ordered by $\\leq$, not discrete, for the latter colimits. Exactness of this colimit functor means preservation of short exact sequences. A flat object is one whose two fixed-factor tensor functors preserve short exact sequences; functorial flat resolutions mean a functor $P:\\mathcal C\\to\\mathcal C$ with flat values and a natural epimorphism $P\\Rightarrow\\mathrm{id}$. Complexes, quasi-isomorphisms and the localizations $Q_{\\mathcal C},Q_{\\mathcal D}$ are those of [def-weil-abstract-derived-category]. The homotopy category has complexes as objects and cochain maps modulo $f-g=dh+hd$ as morphisms. The total left derived universal property means that composition with the counit gives, for every $V:D(\\mathcal C)\\to D(\\mathcal D)$, a bijection $\\operatorname{Nat}(V,LF)\\cong\\operatorname{Nat}(V\\circ Q_{\\mathcal C},Q_{\\mathcal D}\\circ F)$, where these two occurrences of $Q$ have source the homotopy categories. The displayed resolution formula denotes a canonical isomorphism $LF(Q_{\\mathcal C}K)\\cong Q_{\\mathcal D}(FP)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.md",
   "place": "node def-sfb-left-derived-functor, order 1612"
  },
  "stmt_deps": [
-  "def-sfb-preserves-kflat-quasi-iso"
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-monoidal-category",
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "The hypotheses on $\\mathcal C$ make the K-flat complexes a left derivability structure\nfor the quasi-isomorphisms. Every complex has a K-flat resolution: the functorial flat\nresolutions resolve each term, and the resulting double complex is totalized using the\ncountable coproducts. The exactness of $\\mathbf Z$-indexed colimits and their\ncompatibility with $\\otimes$ make this totalization K-flat and quasi-isomorphic to the\ngiven complex. Any two resolutions are compared through a third one. By hypothesis, $F$\nsends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms. So\n$Q\\circ F$, restricted to K-flat complexes, inverts the quasi-isomorphisms and descends to\n$D(\\mathcal C)$; this descended functor is $LF$. The general theory of derivability\nstructures then shows that $LF$, with the counit induced by the resolutions, is the total\nleft derived functor. It also shows that a functor with a counit is the left derived\nfunctor exactly when its counit is invertible on the objects of the derivability\nstructure, i.e. on the K-flat complexes.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $A=K(\\mathcal C)$, let $W$ be its quasi-isomorphisms, and let $i:\\mathcal P\\hookrightarrow A$ be the full subcategory of K-flat complexes. The hypotheses of [lem-sfb-sequential-kflat-derivability] are precisely the hypotheses on $\\mathcal C$: flatness is two-sided, the colimits are indexed by the ordered integers, and no Grothendieck, symmetry or closedness assumption is needed. It supplies a left derivability structure for $i$ with $W_{\\mathcal P}=i^{-1}W$. The localization $Q_{\\mathcal C}:A\\to D(\\mathcal C)$ is the homotopy-category localization specified by [def-weil-abstract-derived-category]. If the preservation phrase in the statement is read as referring only to ordered-integer colimits, countable-coproduct preservation still follows: a countable coproduct is the colimit of its increasing finite partial biproducts, extended by zero to negative integer stages. Maps out of this colimit are exactly families of maps from its summands. An additive tensor functor preserves each finite biproduct and, by hypothesis, this integer colimit, hence preserves their countable coproduct.",
+   "uses": [
+    "lem-sfb-sequential-kflat-derivability",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
+    "place": "Opening sentence: K-flat left derivability; the colimit hypotheses are checked explicitly"
+   }
+  },
+  {
+   "text": "Apply $F$ termwise to cochain complexes and cochain maps. Additivity gives $F(0)=0$ on morphisms, so $F(d^{n+1})F(d^n)=0$. It also carries a homotopy equation $f-g=dh+hd$ to $F(f)-F(g)=F(d)F(h)+F(h)F(d)$, so it induces $F_h:K(\\mathcal C)\\to K(\\mathcal D)$. Set $G=Q_{\\mathcal D}\\circ F_h$. For any arrow $s$ in $W_{\\mathcal P}$, both endpoints are K-flat and $s$ is a quasi-isomorphism. The preservation property [def-sfb-preserves-kflat-quasi-iso] says exactly that $F(s)$ is a quasi-isomorphism; localization [def-weil-abstract-derived-category] therefore makes $G(s)$ invertible. This verifies the restriction-inverts-$W_{\\mathcal P}$ hypothesis, without requiring $F$ to be exact or its values to be K-flat.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
+    "place": "Middle sentences: the functor-specific preservation hypothesis, made explicit on the homotopy quotient"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-unary-left-derived-calculus] with $A=K(\\mathcal C)$, $D=D(\\mathcal C)$, $H=D(\\mathcal D)$, $L=Q_{\\mathcal C}$, resolving inclusion $i$ from step 1, and functor $G$ from step 2. Quasi-isomorphisms contain identities by their cohomology definition. All hypotheses have now been verified. The theorem supplies $(LF,\\varepsilon)$ with $\\varepsilon:LF\\circ Q_{\\mathcal C}\\Rightarrow G$ and, for every $V$, the bijection $\\operatorname{Nat}(V,LF)\\cong\\operatorname{Nat}(V\\circ Q_{\\mathcal C},G)$. Define the left derived functor to be this universally characterized functor with its counit. The same cited statement says that, for every candidate $(T,\\eta)$, this universal property holds if and only if every $\\eta_{iP}$ is invertible. Applied to $(LF,\\varepsilon)$ it gives invertibility on all K-flat complexes; applied to arbitrary $(T,\\eta)$ it is exactly the final characterization in the item. Thus existence and the characterization use the general theorem, rather than an unjustified descent of a functor from a subcategory.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
+    "place": "Last four sentences: construction by the derived universal property and the counit criterion"
+   }
+  },
+  {
+   "text": "For any complex $K$, [lem-sfb-unbounded-kflat-resolution-existence] supplies a quasi-isomorphism $q:P\\to K$ with $P$ K-flat, under exactly the flat-resolution and colimit hypotheses here. For any such $q$, not only a chosen one, $Q_{\\mathcal C}(q)$ is invertible by [def-weil-abstract-derived-category], and $\\varepsilon_P$ is invertible by step 3. Consequently the composite\n$$LF(Q_{\\mathcal C}K)\\xrightarrow{LF((Q_{\\mathcal C}q)^{-1})}LF(Q_{\\mathcal C}P)\\xrightarrow{\\varepsilon_P}Q_{\\mathcal D}(FP)$$\nis an isomorphism. This is the stated resolution formula. In particular two resolutions produce canonically isomorphic values by composing their displayed isomorphisms through $LF(Q_{\\mathcal C}K)$; the counit naturality equation $G(a)\\varepsilon_P=\\varepsilon_{P'}LF(Q_{\\mathcal C}a)$ for $a:P\\to P'$ proves compatibility whenever $q=q'a$. The value is determined by the already constructed universal functor, so no unproved assertion about a common chain-map refinement of two resolutions is used.",
+   "uses": [
+    "lem-sfb-unbounded-kflat-resolution-existence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
+    "place": "Resolution-existence sentences and the formula LF(K)=F(P); explicit isomorphism and comparison"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sfb-sequential-kflat-derivability",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-unary-left-derived-calculus",
+  "lem-sfb-unbounded-kflat-resolution-existence"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
+  "place": "Entire proof; the hidden general-hypothesis K-flat derivability assertion is isolated, existing resolution and unary-calculus statements are reused, and the resolution formula is written as an explicit isomorphism"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|totalLeftDerived|isLeftDerivedFunctor_iff_isIso",
+   "results": "Hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean Search directory: Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: totalLeftDerived and totalLeftDerivedCounit assume existence already; exact-functor and projective-resolution results do not establish the K-flat criterion under the stated hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalLeftDerived",
+   "results": "Hits: CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: totalLeftDerived and totalLeftDerivedCounit assume existence already; exact-functor and projective-resolution results do not establish the K-flat criterion under the stated hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total left derived functor using K-flat resolutions in a monoidal abelian category",
+   "results": "Hits: CategoryTheory.Functor.leftDerived, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Tor', CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.HasLeftDerivedFunctor.mk', CategoryTheory.Tor, CategoryTheory.Functor.IsLeftDerivedFunctor.mk",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: totalLeftDerived and totalLeftDerivedCounit assume existence already; exact-functor and projective-resolution results do not establish the K-flat criterion under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived functor of an additive functor is computed by K-flat resolutions and characterized by its counit on K-flat complexes",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.NatTrans.leftDerived",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: totalLeftDerived and totalLeftDerivedCounit assume existence already; exact-functor and projective-resolution results do not establish the K-flat criterion under the stated hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizerMorphism.Derives",
+   "results": "Hits: CategoryTheory.LocalizerMorphism.Derives, CategoryTheory.LocalizerMorphism.Derives.hasPointwiseLeftDerivedFunctor, CategoryTheory.LocalizerMorphism.Derives.hasPointwiseRightDerivedFunctor, CategoryTheory.LocalizerMorphism.Derives.isIso, CategoryTheory.LocalizerMorphism.Derives.isIso', CategoryTheory.LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor, CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_of_isIso, CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: totalLeftDerived and totalLeftDerivedCounit assume existence already; exact-functor and projective-resolution results do not establish the K-flat criterion under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right Kan extension along localization computes a left derived functor exactly when the counit is invertible on a resolving subcategory",
+   "results": "Hits: CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.hasLeftDerivedFunctor_iff, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts, CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.hasPointwiseLeftDerivedFunctorAt_iff, CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: totalLeftDerived and totalLeftDerivedCounit assume existence already; exact-functor and projective-resolution results do not establish the K-flat criterion under the stated hypotheses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -78,5 +174,29 @@
   "group": "Q10",
   "result": "pass",
   "note": "All node clauses, hypotheses, dependencies, docstrings, edge cases, and canonical derived-functor declarations verified; per-file scompile passed cleanly."
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-sfb-left-derived-functor",
+  "worker": "stage1",
+  "summary": "Retained the original mathematical hypotheses and conclusions, clarified the universal property and flat-resolution terminology, and replaced the imported paragraph by four checked steps. Reused the existing general-hypothesis K-flat resolution theorem and unary derived calculus. Added one strictly supporting statement for K-flat left derivability under exact integer colimits, because the existing kflat-derivability node has stronger Grothendieck and all-colimit assumptions. No new Mathlib leaf or exact upstream attachment is claimed.",
+  "blueprint": "Step 1 realizes the opening derivability assertion; step 2 the preservation and restriction assertions; step 3 the final universal-property and iff sentences; step 4 the existence and resolution-computation sentences. The parent unit step 2 is followed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-unary-left-derived-calculus",
+    "why": "Generic localization/right-Kan-extension calculus for a left derivability structure; this unit has no alternative statement giving its existence and counit criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-unary-left-derived-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-37aa48a15",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-37aa48a15 (reviewer sub-agent of L); spot-checked: Read the main-20261015 statement and proof of def-sfb-left-derived-functor, all four steps, the new node lem-sfb-sequential-kflat-derivability and every cited statement (unary-left-derived-calculus, unbounded-kflat-resolution-existence, preserves-kflat-quasi-iso, abstract-derived-category, left-derivability-structure). The statement keeps the source paragraph verbatim; the added paragraph only spells out notions, consistent with the unit's left-derived bullet; no weakening. Step 1: new-node hypotheses match the item exactly; Q_C is the K(C) localization by def-weil-abstract-derived-category; the derivation of countable-coproduct preservation from finite partial biproducts plus Z-colimit preservation is correct. Step 2 is elementary (termwise F; the definition says F(s) is a quasi-isomorphism). Step 3: all hypotheses of the unary calculus checked; existence, the Nat bijection and the iff-criterion are in its statement. Step 4: the composite iso and the naturality compatibility q=q'a were verified algebraically. New node is true: (a) is the resolution-existence node; (b) holds because K-flat is a triangulated, homotopy-closed subcategory, E is an equivalence via lem-trf-right-fraction-dense-subcategory, and connectedness follows from a homotopy pullback plus a K-flat resolution. It matches FromJoel Flat/KFlat.lean lines 416-438. Not a duplicate: lem-sfb-kflat-derivability needs Grothendieck and all colimits, so the new node generalizes its derivability clause (maintainer note). The other candidates cover only resolution existence or functorial or pointwise criteria. No cycle. The tool use of unary-left-derived-calculus (other unit, generic) is accepted. No re-split note applies. No fixes."
  }
 }
