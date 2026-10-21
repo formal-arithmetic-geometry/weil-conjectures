@@ -19,83 +19,114 @@
  ],
  "proof": [
   {
-   "text": "Put $F=f^*$ on module objects, as in [def-sfb-module-upper-star]. By [det-prop-sfb-module-pullback-exact-main], $F$ is additive and exact for every commutative condensed $\\Lambda$ and every scheme morphism $f$. In particular this applies without any coefficient finiteness or flatness hypothesis.",
+   "text": "By [det-prop-sfb-module-pullback-exact-main], $F=f^*$ is additive and exact. Its total derived functor is $Lf^*$ by [sk-def-sfb-module-derived-pushpull]. The exact-derived comparison [lem-weil-pbc-exact-functor-derived-functor] and cohomology formula [lem-weil-pbc-exact-functor-bounded-below] give $H^q(Lf^*K)\\cong f^*H^q(K)$ for every integer $q$.",
    "uses": [
-    "def-sfb-module-upper-star",
-    "det-prop-sfb-module-pullback-exact-main"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "First sentence: exactness, now cited from the existing general exactness node"
-   }
-  },
-  {
-   "text": "Represent $K$ by a complex $C$ and choose a K-flat resolution $P\\to C$. By [sk-def-sfb-module-derived-pushpull], $Lf^*K$ is represented by $F(P)$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to the exact functor of step 1. The quasi-isomorphism $P\\to C$ gives, for every integer $q$, $$H^q(Lf^*K)\\simeq H^q(F(P))\\simeq F(H^q(P))\\simeq f^*H^q(K).$$ Thus the required derived cohomology calculation uses the total derived composite specified in the item.",
-   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
     "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "First two sentences: compute derived pullback on a resolution and identify its cohomology"
+    "place": "First two sentences: exactness, termwise derivation and cohomology"
    }
   },
   {
-   "text": "By [sk-def-sfb-bounded-constructible], choose integers $a\\le b$ outside which $H^q(K)=0$. The additive exact functor $F$ sends zero to zero, so step 2 gives $H^q(Lf^*K)=0$ outside $[a,b]$.",
+   "text": "Choose a cohomological interval $[a,b]$ for $K$ by [sk-def-sfb-bounded-constructible]. Outside it $H^q(K)=0$; additivity sends zero to zero, so step 1 gives the same interval for $Lf^*K$.",
    "uses": [
     "sk-def-sfb-bounded-constructible"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "Second sentence: the same finite cohomological interval gives boundedness"
+    "place": "Second sentence: boundedness"
    }
   },
   {
-   "text": "For each $q$, $M=H^q(K)$ is constructible by [sk-def-sfb-bounded-constructible]. Choose the finite stratification of $Y$ given by [def-sfb-constructible-module] for $M$. Its strata are locally closed; $Y$ is of finite type over the field $k$ by [sk-def-sfb-dc-setting], so its underlying space is Noetherian and every locally closed subset of it is constructible by [def-weil-constructible-subset]. Thus $M$ is constructible in the sense required as hypothesis by [lem-weil-pbc-module-constructible-pullback], whose stratifications must have constructible underlying subsets. Apply [lem-weil-pbc-module-constructible-pullback] to $\\Lambda,f,M$: it allows every commutative condensed ring and scheme morphism. Its coefficient ring is $p_T^*\\Lambda$, its pullback is $\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M$, exactly [def-sfb-module-upper-star], and its constructibility is the transported restriction being locally finitely presented on a finite stratification, which implies [def-sfb-constructible-module] after forgetting that the strata are constructible. Therefore $f^*H^q(K)$ is constructible. This existing lemma supplies the stratification, base-changed covering, finite-presentation and coefficient-relabeling arguments of the inherited proof.",
+   "text": "Fix $q$ and $M=H^q(K)$. By [sk-def-sfb-bounded-constructible, def-sfb-constructible-module], choose strata $j_a\\colon Y_a\\to Y$ with raw restrictions locally finitely presented. By [lem-sfb-alpha-iso], $\\alpha_{j_a}$ is invertible. Apply [lem-sfb-lfp-scalar-isomorphism] and [def-sfb-module-upper-star] to obtain locally finitely presented normalized restrictions $M_a=j_a^*M$ over $\\Lambda_{Y_a}$.",
    "uses": [
     "sk-def-sfb-bounded-constructible",
-    "lem-weil-pbc-module-constructible-pullback",
-    "def-sfb-module-upper-star",
     "def-sfb-constructible-module",
-    "sk-def-sfb-dc-setting",
-    "def-weil-constructible-subset"
+    "lem-sfb-alpha-iso",
+    "lem-sfb-lfp-scalar-isomorphism",
+    "def-sfb-module-upper-star"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "Remaining sentences: preservation of constructibility, factored through the existing general module-pullback lemma"
+    "place": "Finite stratification sentence; raw versus normalized restrictions"
    }
   },
   {
-   "text": "Constructibility is invariant under module isomorphism: transport the witnessing presentation on each covering member of each stratum. Using step 2 and step 4, every $H^q(Lf^*K)$ is therefore constructible. Together with the finite interval from step 3, these are exactly the two conditions of [sk-def-sfb-bounded-constructible]. Hence $Lf^*K$ is bounded constructible.",
+   "text": "By [lemma-constructible-pullback-stratification], $X_a=X\\times_Y Y_a$, with immersions $i_a$ and projections $f_a$, form a finite stratification of $X$, and $f\\circ i_a=j_a\\circ f_a$.",
+   "uses": [
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Preimage strata sentence"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-finite-presentation-inverse-image] to each $f_a,M_a$: the base-changed cover and presentations of the same ranks give raw local finite presentation over $f_a^*\\Lambda_{Y_a}$. Since $\\alpha_{f_a}$ is invertible [lem-sfb-alpha-iso], [lem-sfb-lfp-scalar-isomorphism] and [def-sfb-module-upper-star] give local finite presentation of $f_a^*M_a$ over $\\Lambda_{X_a}$.",
+   "uses": [
+    "lem-sfb-local-finite-presentation-inverse-image",
+    "lem-sfb-alpha-iso",
+    "lem-sfb-lfp-scalar-isomorphism",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Base-changed cover and finite-free cokernel presentations"
+   }
+  },
+  {
+   "text": "Composition [sk-def-sfb-module-pushforward-pullback] and step 4 give $i_a^*f^*M\\cong(f\\circ i_a)^*M=(j_a\\circ f_a)^*M\\cong f_a^*j_a^*M=f_a^*M_a$. Compose the cokernel presentation isomorphisms with this isomorphism. By [lem-sfb-alpha-iso, lem-sfb-lfp-scalar-isomorphism], restriction along $\\alpha_{i_a}$ gives locally finitely presented raw restrictions over $i_a^*\\Lambda_X$. Thus [def-sfb-constructible-module] makes $f^*M$ constructible.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-lfp-scalar-isomorphism",
+    "lem-sfb-alpha-iso",
+    "def-sfb-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Pullbacks compose; return to raw constructibility"
+   }
+  },
+  {
+   "text": "For every $q$, step 6 makes $f^*H^q(K)$ constructible. Composing its presentation isomorphisms with step 1 gives constructibility of $H^q(Lf^*K)$. The bound from step 2 completes [sk-def-sfb-bounded-constructible].",
    "uses": [
     "sk-def-sfb-bounded-constructible"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "Conclusion: assemble boundedness and constructible cohomology"
+    "place": "Conclusion"
    }
   }
  ],
  "proof_deps": [
-  "def-sfb-module-upper-star",
   "det-prop-sfb-module-pullback-exact-main",
   "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "sk-def-sfb-bounded-constructible",
-  "lem-weil-pbc-module-constructible-pullback",
   "def-sfb-constructible-module",
-  "sk-def-sfb-dc-setting",
-  "def-weil-constructible-subset"
+  "lem-sfb-alpha-iso",
+  "lem-sfb-lfp-scalar-isomorphism",
+  "def-sfb-module-upper-star",
+  "lemma-constructible-pullback-stratification",
+  "lem-sfb-local-finite-presentation-inverse-image",
+  "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-  "place": "Same exactness/cohomology/stratification/presentation route, assembled from existing exactness, exact-functor cohomology and general constructible-module pullback nodes"
+  "place": "Same exactness/cohomology/stratification/presentation route, now separating raw inverse-image local finite presentation from coefficient-isomorphism transport"
  },
  "mathlib_searches": [
   {
@@ -219,33 +250,44 @@
   "date": "2026-10-21",
   "item": "lem-sfb-dc-upper-star-preserves",
   "worker": "stage1",
-  "summary": "Repair of the 7153-character coarse proof, preserving the statement verbatim. DAG search found the required general exactness and constructible-module pullback arguments already split and reviewed, so duplicate new nodes are unnecessary. Replaced the expanded arguments by citations to det-prop-sfb-module-pullback-exact-main and lem-weil-pbc-module-constructible-pullback, retaining the existing exact-functor cohomology Mathlib leaf. The proof is now a short assembly of these smaller arguments with elementary boundedness and isomorphism transport. All inherited searches, source metadata and maintainer-owned fields are retained.",
-  "blueprint": "lem-sfb-dc-upper-star-preserves.proof.md in full: first sentence via exactness (step 1), cohomology (2), boundedness (3), finite stratification and base-changed finite-presentation covers via the existing module-pullback lemma (4), conclusion (5).",
+  "summary": "Rebased repair of the deliberately returned coarse split: the chosen-cover/presentation comparison is a new statement-only node and coefficient-isomorphism transport is the existing lem-sfb-lfp-scalar-isomorphism. The item statement is unchanged; current reviewed and Lean records from the DAG were retained while the parent proof was shortened to the repaired seven-step assembly. Reviewer FIX (2026-10-21): the new coefficient-isomorphism helper duplicated the existing same-unit node lem-sfb-lfp-scalar-isomorphism (Res/Ext along a ring-object isomorphism preserve and reflect local finite presentation on the same covers, same ranks); it is dropped and steps 3, 5 and 6 cite the existing node.",
+  "blueprint": "First two sentences: steps 1-2, using existing exactness and exact-derived cohomology results. Finite stratification/preimages: steps 3-4. Chosen cover, base change, right exactness and finite free ranks: step 5 via lem-sfb-local-finite-presentation-inverse-image. Coefficient normalization and denormalization: steps 3, 5, 6 via lem-sfb-lfp-scalar-isomorphism. Pullback composition: step 6. Conclusion: step 7.",
   "tool_uses": [
    {
     "node": "det-prop-sfb-module-pullback-exact-main",
-    "why": "Existing generic exactness theorem for the very same arbitrary-condensed-coefficient module pullback; supplies the first sentence of the prescribed route."
+    "why": "Generic exactness, exact-derived comparison/cohomology, or stratification base change supplies the corresponding explicit argument of the blueprint route; no result of this restricted-functor unit supplies it."
    },
    {
-    "node": "lem-weil-pbc-module-constructible-pullback",
-    "why": "Existing generic module-level preservation theorem, not a derived preservation theorem; supplies exactly the stratification/base-changed-cover/finite-presentation argument of the unit route, with the same coefficient construction and general ring-object constructibility."
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exactness, exact-derived comparison/cohomology, or stratification base change supplies the corresponding explicit argument of the blueprint route; no result of this restricted-functor unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exactness, exact-derived comparison/cohomology, or stratification base change supplies the corresponding explicit argument of the blueprint route; no result of this restricted-functor unit supplies it."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic exactness, exact-derived comparison/cohomology, or stratification base change supplies the corresponding explicit argument of the blueprint route; no result of this restricted-functor unit supplies it."
    }
   ]
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q25-65f4a2168",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q10-0609ecc99",
+  "group": "Q10",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-65f4a2168 (reviewer sub-agent of L); spot-checked: Read in full: the item (5 steps, statement and stmt_deps identical to the base), the blueprint statement and proof (main-20261015), the unit sk-def-sfb-dc-restricted-functors, and each cited statement. Also read the full proof of lem-weil-pbc-module-constructible-pullback and compared its p_T^*/alpha construction with sk-def-sfb-pullback-from-point and sk-def-sfb-coefficient-morphisms: they are the same construction (a(S)=Spec LC(S,Z)). Steps 1-3 and 5 are correct: exactness for any Lambda and f, the K-flat formula plus the Mathlib exact-functor cohomology leaf with the quasi-isomorphism, the bounded interval, and invariance under isomorphism. No cycle (the item is not in the dependency closure of the pbc lemma) and no new nodes. The off-unit tool use of the generic module-level pbc lemma is accepted. No SGA. FIX: step 4 called the pbc lemma's constructibility 'exactly' def-sfb-constructible-module, but that lemma requires strata with constructible underlying subsets, and the hypothesis was never checked; the base proof did check it. Repaired by citing sk-def-sfb-dc-setting (finite type over k, so Noetherian) and def-weil-constructible-subset (locally closed implies constructible, Stacks 005L). The conclusion direction is now stated as an implication by forgetting that the strata are constructible, and proof_deps was recomputed. Edge cases checked: K=0, Lambda=0, empty schemes, f=id, rank 0, non-flat Z/4.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-0609ecc99 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the main-20261015 blueprint statement and proof, the unit sk-def-sfb-dc-restricted-functors, the repair note, the old 7153-character proof and the live Q25 proof. Shape: this head is the rebased re-push of the PASSed 3cb0f7e4, which the landing refused for lean_audit drift. The new nodes are byte-identical to that head, the proof is identical, and the item differs from live only in proof, proof_deps, proof_origin and split_report; the statement is verbatim. Mathematics: steps 1-7 are correct. Exactness for any Lambda and any f comes from det-prop-sfb-module-pullback-exact-main. Lf^* is identified with F_D by the left Kan extension of lem-weil-pbc-exact-functor-derived-functor, and the H^q formula for all q comes from lem-weil-pbc-exact-functor-bounded-below. The strata are the base changes X x_Y Y_a, which are locally closed strata as def-constructible-stratification requires. The Ext/Res directions along alpha are right (Ext_alpha = Res_{alpha^-1}). The inverse-image node is true: base change of a pro-etale covering, monoidal composition iso beta_i, regular module sent to regular module via beta^-1, exact transport and Res, same ranks. It was tested on f=id, empty schemes, ranks 0, R=0 and Z/4. Fault C5: the new lem-sfb-local-finite-presentation-coefficient-iso duplicates lem-sfb-lfp-scalar-isomorphism, which is in the base, in the same unit, split and reviewed as a pass (Q24, merged 03:23, landed for stage 2 at 07:08). It states that Res and Ext along a ring-object isomorphism preserve and reflect local finite presentation on the same covers with the same ranks; the worker and the first reader both missed it. FIX: the node is dropped and steps 3, 5 and 6 and proof_deps cite the existing node; there is no cycle (item not in its 304-node closure). B3: added [def-pc-fibre-product] to the inverse-image node's statement and stmt_deps. After the fix the proof is 2155 characters. Every old argument has a carrier: steps 3 and 6-8 are in the new inverse-image node, relabelling is in lem-sfb-lfp-scalar-isomorphism, and exactness, cohomology and stratification are in existing nodes. Tools accepted: the sk-def-exchange exact-functor nodes and lemma-constructible-pullback-stratification. No SGA. Maintainer note: 1 new node remains against the note's 2, but a second node could only duplicate existing ones and the item is already Lean-proved, so close the note with this landing. The live tool_uses still list lem-weil-pbc-module-constructible-pullback and det-prop-sfb-module-pullback-exact-lifted, which are now stale.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "tool_uses": [
   "det-prop-sfb-module-pullback-exact-lifted",
   "lem-sfb-alpha-iso",
   "det-prop-sfb-module-pullback-exact-main",
-  "lem-weil-pbc-module-constructible-pullback"
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lemma-constructible-pullback-stratification"
  ],
  "lean": {
   "branch": "master",
