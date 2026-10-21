@@ -319,5 +319,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bbfca1fa7 (reviewer sub-agent of L); spot-checked: I read the item, both new Mathlib leaves, every cited node (lem-weil-l-adic-extension-proper, def-weil-l-adic-coefficient-extension, lem-weil-l-adic-extension-absolute-value, def-weil-l-adic-numbers, def-weil-finite-dimensional-subspace, def-weil-field, def-kun-subspace-topology), the citer lem-sfb-countable-normed-orthogonal-basis step 1, blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), and the Mathlib source of FiniteDimensional.proper (FiniteDimension.lean 544-556) and IsCompact.exists_isMinOn (Topology/Order/Compact.lean 229-234). The statement is unchanged, so the citer still gets the nearest point it needs. The proof checks out step by step. Step 1: E is proper, hence locally compact, and |l|=1/l<1 makes it nontrivially normed. Step 2: the ball C of radius r=||x|| in W is compact by FiniteDimensional.proper with K=E, Y=W; no completeness or properness of V is used. Step 3: w -> ||x-w|| is 1-Lipschitz, so continuous. Step 4: it attains a minimum w0 on C, and f(w0)<=f(0)=r. Step 5: for ||w||>r, the two ultrametric inequalities give f(w)=||w||>r, so w0 is a global minimum; no value-group discreteness is needed. Step 6: the infimum is attained and is positive by definiteness when x is not in W. Small cases checked: the Gauss norm on Q_l(t) with W=Q_l and x=t; W=0; x in W; a case with several nearest points; incomplete V. Both leaves are exact or one-line Mathlib matches with lines given and all three search kinds recorded. The proper leaf shares its declaration with lem-weil-l-adic-extension-proper, but that node is only the special case K=Q_l, Y=E and cannot give compactness of balls in an arbitrary normed E-space W, so the new node is not a duplicate. No DAG node carries exists_isMinOn. No new node restates a clause of the item, there is no cycle, proof_deps equals the union of the step uses, no SGA is cited, and this is not a re-split under a repair note. One immaterial slip: the minimum leaf's line range says 230-235, but the proof ends at 234. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.NormedSpace.FiniteUltrametricBestApproximation",
+  "declaration": "Padic.exists_finite_ultrametric_best_approximation",
+  "file": "lean/Sheaf/Analysis/NormedSpace/FiniteUltrametricBestApproximation.lean",
+  "statement": "theorem exists_finite_ultrametric_best_approximation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (V : Type v) [NormedAddCommGroup V] [Module E V] (h_hom : ∀ (a : E) (v : V), ‖a • v‖ = coefficientExtensionAbsoluteValue l E a * ‖v‖) (h_ultra : ∀ v w : V, ‖v + w‖ ≤ max ‖v‖ ‖w‖) (W : Submodule E V) [FiniteDimensional E W] (x : V) : (∃ w₀ : W, ‖x - (w₀ : V)‖ = ⨅ w : W, ‖x - (w : V)‖) ∧ (x ∉ W → 0 < ⨅ w : W, ‖x - (w : V)‖)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33731aa2d",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (coefficientExtensionAbsoluteValue = spectral AbsoluteValue, CoefficientExtension.lean:44; Mathlib FiniteDimensional), source para (3), module, report, citer CountableUltrametricBasis (interface usable via norm_smul). Clause-by-clause match: ℓ prime, finite E/Q_ℓ, dep absolute value in h_hom, h_ultra, NormedAddCommGroup adds nothing (triangle from ultrametric, ‖-v‖ from homogeneity), FiniteDimensional W, attained iInf over nonempty bounded-below set, positivity when x∉W; no completeness/discreteness. Edge cases W=0, x∈W, x=0 ok; universes u,v free. lean.statement verbatim; node unchanged vs live except lean; no defs, sorry only, docstrings with source + blueprint tag and proof steps; existing:false justified. No findings."
  }
 }
