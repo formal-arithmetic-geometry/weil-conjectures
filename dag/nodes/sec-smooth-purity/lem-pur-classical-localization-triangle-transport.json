@@ -22,109 +22,62 @@
  ],
  "proof": [
   {
-   "text": "Check the hypotheses for the direct-image comparisons. The coefficient ring $A=A_{E,n}$ is finite and commutative by [def-pur-conventions]. The affine description in [def-weil-closed-immersion] makes $i$ quasi-compact: over $\\operatorname{Spec}R$ its source is $\\operatorname{Spec}(R/I)$. Both $i$ and $j$ are monomorphisms, since they identify their source with a closed or open subscheme [def-weil-closed-immersion, def-weil-open-immersion]. Their diagonals are therefore isomorphisms, hence quasi-compact, so they are quasi-separated. The quasi-compactness of $j$ is assumed. Thus both morphisms satisfy the quasi-compact and quasi-separated hypothesis of [sk-thm-pe-direct-image-comparison].",
+   "text": "The coefficient ring is finite by Padic.finite_coefficientExtensionRing. Closed and open immersions are monomorphisms and therefore quasi-separated; the closed immersion is quasi-compact and the open immersion is quasi-compact by hypothesis. Hence the specified canonical direct-image mates for both morphisms are isomorphisms.",
    "uses": [
     "def-pur-conventions",
     "def-weil-closed-immersion",
     "def-weil-open-immersion",
     "sk-thm-pe-direct-image-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison.proof.md",
-    "place": "Direct-image comparison, hypothesis that g is quasi-compact and quasi-separated"
-   }
+   "elementary": true
   },
   {
-   "text": "The etale closed direct image on constant-$A$ modules is exact, as stated in [lem-cbc-open-closed-recollement]. Its pro-etale counterpart is exact by [lem-exc-proetale-closed-exact], whose quasi-compact-complement hypothesis is assumed here. By [lem-weil-pbc-exact-functor-derived-functor], their termwise functors are canonically their right derived functors; use these normalized identifications in every occurrence of the comparison for $i$. The comparison inverse images $F_T=\\nu_T^*$ and the open inverse images are exact by [sk-thm-pe-direct-image-comparison]. By [lem-sf-exact-functor-derived-triangulated], $F_X$ induces a triangulated functor with its termwise shift comparison $\\sigma_M:F_X(M[1])\\xrightarrow{\\sim}F_X(M)[1]$. By [lem-weil-pbc-exact-functor-bounded-below], these exact inverse images preserve $D^+$, so $L=F_ZD$, $K=F_XB$, and $j_e^*B$ are bounded below. In particular the two inputs $D$ and $j_e^*B$ to the direct-image comparisons lie in their stated domains.",
+   "text": "Use the existing rightDerivedFunctorPlusCompatibility, whose inverse identifies the unbounded etale direct image on each D+ input with the included D+ direct image. Compose its image under comparison inverse image with the included canonical mate; this is exactly classicalLocalizationDirectImageMap. Its invertibility and naturality follow by composition. The exact inverse-image functors restrict literally to D+, so no extra choice of bounded-below models is needed.",
    "uses": [
-    "lem-cbc-open-closed-recollement",
-    "lem-exc-proetale-closed-exact",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-exact-functor-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, label lemma-right-derived-exact-functor; proetale.tex Tag 09BM, label lemma-closed-immersion-complement-retrocompact-exact"
-   }
-  },
-  {
-   "text": "Compare the two open direct images on the etale side. In [lem-exc-closed-support-triangle], $Rj_{e,*}$ is the total unbounded right derived functor with the unbounded adjunction $j_e^*\\dashv Rj_{e,*}$. By contrast, [sk-thm-pe-direct-image-comparison] and [lem-pe-direct-image-mate-compatibility] use the bounded-below derived direct image $R^+j_{e,*}$ of [def-weil-pbc-direct-image], together with its adjunction on $D^+$, whose unit is $\\eta^+_e$. Every $M\\in D^+(U_{\\mathrm{et}},A)$ is $QI$ for a bounded-below complex $I$ of injectives, and such an $I$ is K-injective [lem-weil-pbc-dplus-injective-representative, prop-weil-pbc-kinjective-resolutions-exist]. A K-injective complex computes the total derived functor [lem-weil-pbc-kinjective-total-derived], so $Rj_{e,*}M\\cong Q(j_{e,*}I)$ is bounded below. Thus $Rj_{e,*}$ and, by Step 2, $j_e^*$ preserve $D^+$. The inclusion $D^+\\subseteq D$ is full, so the unbounded adjunction restricts to an adjunction $j_e^*\\dashv Rj_{e,*}|_{D^+}$ between the $D^+$ categories with the same unit $\\eta_e$. Uniqueness of right adjoints gives a unique natural isomorphism $\\mu:R^+j_{e,*}\\xrightarrow{\\sim}Rj_{e,*}|_{D^+}$ with $\\mu_{j_e^*B}\\circ\\eta^+_{e,B}=\\eta_{e,B}$ for every $B\\in D^+(X_{\\mathrm{et}},A)$. On the pro-etale side, $Rj_{p,*}$ and its unit $\\eta_p$ denote the bounded-below derived direct image and adjunction of [sk-thm-pe-direct-image-comparison] and [lem-pe-direct-image-mate-compatibility]; $K$ and $j_p^*K$ are bounded below by Step 2.",
-   "uses": [
-    "lem-exc-closed-support-triangle",
     "def-weil-pbc-direct-image",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-pe-direct-image-mate-compatibility",
-    "lem-weil-pbc-dplus-injective-representative",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-thm-pe-direct-image-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Section 06XW (label section-unbounded): K-injective complexes compute RF; Lemma 070J (lemma-bounded-below-injectives-K-injective); restriction of an adjunction to full subcategories and uniqueness of adjoints"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-exc-closed-support-triangle] to $B$ on the ordinary etale module derived category. Its right adjoint is precisely the $i_{\\mathrm{supp}}^\\times$ in the statement, so its first object is $i_{e,*}D$ and its first two arrows are $\\epsilon_e$ and $\\eta_e$. Write $Q_B=Rj_{e,*}j_e^*B$ and write $b_e:Q_B\\to(i_{e,*}D)[1]$ for its third arrow. Applying the triangulated functor of [lem-sf-exact-functor-derived-triangulated] gives the distinguished triangle\n$$F_X(i_{e,*}D)\\xrightarrow{F_X\\epsilon_e}K\\xrightarrow{F_X\\eta_e}F_XQ_B\\xrightarrow{\\sigma_{i_{e,*}D}\\,F_X(b_e)}F_X(i_{e,*}D)[1].$$\nThis applies the functor to the given natural triangle, so its third arrow and naturality are retained.",
+   "text": "Choose the natural boundary delta from exists_etale_closedSupportTriangle. Apply the triangulated exact comparison functor to each distinguished component; its third arrow is the image of delta followed by the canonical shift comparison.",
    "uses": [
     "lem-exc-closed-support-triangle",
     "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "Opening localization triangle, before applying Rp_*; etale source triangle is lem-exc-closed-support-triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\beta_{g,M}:F_{\\mathrm{target}(g)}Rg_{e,*}M\\xrightarrow{\\sim}Rg_{p,*}F_{\\mathrm{source}(g)}M$ be the canonical mate comparison of [sk-thm-pe-direct-image-comparison]. Using the normalized exact-direct-image identifications of Step 2, put\n$$\\alpha_B=\\beta_{i,D}:F_X(i_{e,*}D)\\xrightarrow{\\sim}i_{p,*}L.$$\nLet $c_{j,B}:j_p^*K\\xrightarrow{\\sim}F_Uj_e^*B$ be the inverse-image comparison of that same theorem, and put\n$$\\gamma_B=Rj_{p,*}(c_{j,B}^{-1})\\circ\\beta_{j,j_e^*B}\\circ F_X(\\mu_{j_e^*B}^{-1}):F_XQ_B\\xrightarrow{\\sim}Rj_{p,*}j_p^*K,$$\nwith $\\mu$ the identification of Step 3.\nAll factors are natural isomorphisms. Step 1 verifies the geometric hypotheses for both $\\beta$'s; Steps 2 and 3 verify their bounded-below input hypotheses. These are the canonical mate comparisons, with no independently chosen object isomorphism.",
+   "text": "Set alpha to asIso of classicalLocalizationDirectImageMap on the support object. Set gamma to asIso of the same map on the etale open pullback, followed by the included direct image of the inverse pullback comparison. This gives exactly the two specified equations for their homs.",
    "uses": [
     "sk-thm-pe-direct-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison.proof.md",
-    "place": "Inverse-image square and canonical derived mate, opening sentences; isomorphism for qcqs g"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the explicit unit identity of [lem-pe-direct-image-mate-compatibility] with $g=j$ and its object $A$ there equal to $B$ here:\n$$\\beta_{j,j_e^*B}\\circ F_X(\\eta^+_{e,B})=Rj_{p,*}(c_{j,B})\\circ\\eta_{p,K}.$$\nBy Step 3, $F_X(\\eta^+_{e,B})=F_X(\\mu_{j_e^*B}^{-1})\\circ F_X(\\eta_{e,B})$. Composing with $Rj_{p,*}(c_{j,B}^{-1})$ therefore gives\n$$\\gamma_B\\circ F_X(\\eta_{e,B})=\\eta_{p,K}.$$\nThus the second arrow after changing objects is the actual open adjunction unit. Define the first arrow by\n$$\\epsilon'_B=F_X(\\epsilon_{e,B})\\circ\\alpha_B^{-1}:i_{p,*}L\\to K.$$\nSince $\\epsilon_{e,B}$ is the closed-support counit by [lem-exc-closed-support-triangle], this is exactly the transported etale closed counit requested. No assertion about a right adjoint on arbitrary pro-etale inputs is needed.",
+   "text": "The bounded-below etale adjunction is defined by restriction of the unbounded adjunction. Mathlib map_restrictFullyFaithful_unit_app, together with the existing equality of the two unbounded etale derived adjunctions, identifies the unbounded unit followed by rightDerivedFunctorPlusCompatibility.inv with the included D+ unit. Apply comparison inverse image and then directImageMateCompatibility. The pullback comparison and its inverse cancel, proving that the transported second arrow is the actual pro-etale unit.",
    "uses": [
-    "lem-pe-direct-image-mate-compatibility",
-    "lem-exc-closed-support-triangle"
+    "def-weil-pbc-direct-image",
+    "lem-pe-direct-image-mate-compatibility"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison.proof.md",
-    "place": "Opening sentence: comparison adjoint to inverse-image square and etale counit, compatible with units and counits"
-   }
+   "elementary": true
   },
   {
-   "text": "Define the connecting arrow by the explicit formula\n$$b'_B=\\alpha_B[1]\\circ\\sigma_{i_{e,*}D}\\circ F_X(b_{e,B})\\circ\\gamma_B^{-1}.$$\nThen $(\\alpha_B,1_K,\\gamma_B)$ is an isomorphism from the triangle of Step 4 to\n$$i_{p,*}L\\xrightarrow{\\epsilon'_B}K\\xrightarrow{\\eta_{p,K}}Rj_{p,*}j_p^*K\\xrightarrow{b'_B}(i_{p,*}L)[1].$$\nFor the first square use $\\epsilon'_B\\alpha_B=F_X\\epsilon_e$; the second square is Step 6; the last square is $b'_B\\gamma_B=\\alpha_B[1]\\sigma_{i_{e,*}D}F_Xb_e$, by the displayed definition. Isomorphism invariance of distinguished triangles (TR1 in [def-weil-triangulated-category]) proves distinguishedness. This formula uses the given shift comparison and adds no rotation or negative sign, so it specifies the sign of the entire transported third arrow.",
+   "text": "Use Triangle.isoMk with components alpha inverse, identity, and gamma inverse from the proposed transported triangle to the mapped etale triangle. Its first square is cancellation, its second square is the preceding unit identity, and its last square cancels the shifted alpha hom with shifted alpha inverse. Isomorphism invariance of distinguished triangles proves the asserted triangle with exactly the displayed boundary, without rotation or a sign change.",
    "uses": [
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0145, label definition-triangulated-category: TR1, invariance under triangle isomorphisms"
-   }
+   "elementary": true
   },
   {
-   "text": "Finally let $h:B\\to\\widetilde B$ be a morphism of bounded-below inputs for which both support objects are bounded below, and put $d=i_{\\mathrm{supp}}^\\times(h)$. The natural etale triangle of [lem-exc-closed-support-triangle] has components $(i_{e,*}d,h,Rj_{e,*}j_e^*h)$, including its last square. Apply $F_X$ and conjugate this triangle morphism by $(\\alpha,1,\\gamma)$ for its source and target. Naturality of the comparisons in [sk-thm-pe-direct-image-comparison] gives components $(i_{p,*}F_Zd,F_Xh,Rj_{p,*}j_p^*F_Xh)$. The last square reads\n$$(i_{p,*}F_Zd)[1]\\circ b'_B=b'_{\\widetilde B}\\circ Rj_{p,*}j_p^*(F_Xh).$$\nIt follows directly by substituting Step 7's formula, using the last square of the etale triangle, and then naturality of $\\alpha,\\gamma,\\sigma$ (for $\\gamma$ including that of $\\mu$ from Step 3). This proves naturality of every arrow, including the signed connecting arrow.",
+   "text": "For an admissible morphism f, fullness of the D+ inclusion gives the morphism between support objects. Naturality of classicalLocalizationDirectImageMap proves the alpha equation. Its naturality on the open pullbacks, followed by naturality of the inverse pullback comparison, proves the gamma equation. Cancel gamma to get its inverse naturality. Substitute the displayed boundary formula and successively use this inverse naturality, naturality of delta, naturality of the canonical shift comparison, and the shifted alpha equation. These are exactly the final three required equations.",
    "uses": [
     "lem-exc-closed-support-triangle",
-    "sk-thm-pe-direct-image-comparison"
+    "sk-thm-pe-direct-image-comparison",
+    "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "Opening localization triangle: naturality before pushforward, expanded using the direct-image comparison"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -133,22 +86,16 @@
   "def-weil-open-immersion",
   "def-weil-pbc-direct-image",
   "def-weil-triangulated-category",
-  "lem-cbc-open-closed-recollement",
   "lem-exc-closed-support-triangle",
-  "lem-exc-proetale-closed-exact",
   "lem-pe-direct-image-mate-compatibility",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-kinjective-total-derived",
-  "prop-weil-pbc-kinjective-resolutions-exist",
   "sk-thm-pe-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-  "place": "Opening pre-pushforward localization triangle; explicit comparison-map and shift calculation using the direct-image comparison proof"
+  "place": "Opening localization triangle before Rp_*; implemented using existing D+/D compatibility, canonical mates, Triangle.isoMk and naturality (R8 stage 3)."
  },
  "mathlib_searches": [
   {
@@ -296,13 +243,8 @@
   "sk-thm-pe-direct-image-comparison",
   "lem-pe-direct-image-mate-compatibility",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-cbc-open-closed-recollement",
-  "lem-exc-proetale-closed-exact",
-  "lem-exc-closed-support-triangle",
-  "lem-weil-pbc-kinjective-total-derived",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "lem-exc-closed-support-triangle"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -335,5 +277,15 @@
   "group": "O1",
   "result": "pass",
   "note": "Node unchanged except lean; lean.statement verbatim. Hypotheses match the node and are no stronger; universes u/u+1 as in both deps. alpha and gamma are pinned to canonical maps (rightDerivedFunctorPlusCompatibility plus comparisonDirectImageCanonicalMate; gamma also uses the inverse of directImageComparisonPullbackPlusIso, orientation checked). Unit equation agrees with the direct-image comparison theorem's unit clause. epsilon' = alpha.inv then F(counit); b' = gamma.inv, F(delta), commShiftIso, alpha[1], no sign; distinguished triangle; three naturality equations. Existential delta mirrors exists_etale_closedSupportTriangle and is unique by open/closed orthogonality, so the sign is determined. No hollow definitions; only sorry is the main theorem; docstrings carry source, blueprint id and all 8 steps; all imports exist. Edge cases Z empty, U empty, B=0, unequal bounds, n=1. Advisory only: some imports serve only proof deps. Compile not re-run per instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261021T151157-L-1167943",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

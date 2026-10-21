@@ -11,14 +11,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 public import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageMateCompatibility
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageMateCompatibility
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 
 /-!
 # Transport of the classical closed-support localization triangle
@@ -128,6 +123,72 @@ def ClassicalLocalizationTriangleTransport
                 (Ip.map ((Fp Z).map (DerivedCategory.Plus.ι.preimage
                   (X := D B h) (Y := D B' h') (S.map f.hom)))))))
 
+private theorem classicalLocalizationDirectImageMap_isIso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {V T : Scheme.{u}} (g : V ⟶ T) [QuasiCompact g] [QuasiSeparated g]
+    (M : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    IsIso (classicalLocalizationDirectImageMap A g M) := by
+  have := isIso_comparisonDirectImageCanonicalMate A g
+  unfold classicalLocalizationDirectImageMap
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem classicalLocalizationDirectImageMap_naturality
+    (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (g : V ⟶ T)
+    {M N : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (f : M ⟶ N) :
+    (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.map
+        ((Etale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.map f.hom) ≫
+      classicalLocalizationDirectImageMap A g N =
+    classicalLocalizationDirectImageMap A g M ≫ DerivedCategory.Plus.ι.map
+      ((lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlus.map
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) V).mapDerivedCategoryPlus.map f)) := by
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  let R := Etale.lowerStar (ModuleCat.{u + 1} A) g
+  have h₁ := R.rightDerivedFunctorPlusCompatibility.inv.naturality f
+  have h₂ := (comparisonDirectImageCanonicalMate A g).naturality f
+  simp only [Functor.comp_map] at h₁ h₂
+  change R.rightDerivedFunctor.map f.hom ≫
+      R.rightDerivedFunctorPlusCompatibility.inv.app N =
+    R.rightDerivedFunctorPlusCompatibility.inv.app M ≫
+      DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlus.map f) at h₁
+  have hm := congrArg F.map h₁
+  simp only [Functor.map_comp] at hm
+  change F.map (R.rightDerivedFunctor.map f.hom) ≫
+      (F.map (R.rightDerivedFunctorPlusCompatibility.inv.app N) ≫
+        DerivedCategory.Plus.ι.map ((comparisonDirectImageCanonicalMate A g).app N)) = _
+  rw [← Category.assoc, hm, Category.assoc]
+  have hn := congrArg DerivedCategory.Plus.ι.map h₂
+  simp only [Functor.map_comp] at hn
+  change F.map (R.rightDerivedFunctorPlusCompatibility.inv.app M) ≫
+      DerivedCategory.Plus.ι.map
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategoryPlus.map
+          (R.rightDerivedFunctorPlus.map f)) ≫
+        DerivedCategory.Plus.ι.map ((comparisonDirectImageCanonicalMate A g).app N) = _
+  erw [hn]
+  exact (Category.assoc _ _ _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem etale_localization_unit_compatibility
+    (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (g : V ⟶ T)
+    (B : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g).unit.app B.obj ≫
+      (Etale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlusCompatibility.inv.app
+        ((Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.obj B) =
+    DerivedCategory.Plus.ι.map
+      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g).derivedAdjunctionPlus.unit.app
+        B) := by
+  rw [Etale.mapDerivedUpperStarLowerStarAdjunction_eq]
+  symm
+  simp only [Adjunction.derivedAdjunctionPlus, Adjunction.map_restrictFullyFaithful_unit_app,
+    Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_hom, Iso.refl_inv, NatTrans.id_app]
+  erw [(Etale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.map_id]
+  erw [Category.id_comp]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Exact comparison inverse image transports the whole ordinary etale localization
 triangle with the specified canonical arrows and sign. No constructibility is assumed.
 Source: sk-prop-a1.proof.md, first triangle before Rp_*
@@ -166,6 +227,137 @@ theorem classicalLocalizationTriangleTransport
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     ClassicalLocalizationTriangleTransport P i j := by
-  sorry
+  classical
+  let : Finite P.Ring := Padic.finite_coefficientExtensionRing
+    P.coefficients.l P.extension P.level P.level_pos
+  let : Finite P.Coefficient := inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
+  let C := ModuleCat.{u + 1} P.Coefficient
+  let F := fun T : Scheme.{u} ↦ (comparisonUpperStar C T).mapDerivedCategory
+  let Fp := fun T : Scheme.{u} ↦ (comparisonUpperStar C T).mapDerivedCategoryPlus
+  let Ie := (Etale.lowerStar C i).rightDerivedFunctor
+  let S := Ie.rightAdjoint
+  let Ip := (lowerStar C i).rightDerivedFunctorPlus
+  let Je := (Etale.upperStar C j).mapDerivedCategory
+  let Jep := (Etale.upperStar C j).mapDerivedCategoryPlus
+  let Re := (Etale.lowerStar C j).rightDerivedFunctor
+  let Jp := (upperStar C j).mapDerivedCategoryPlus
+  let Rp := (lowerStar C j).rightDerivedFunctorPlus
+  let E := DerivedCategory.Plus (Sheaf X.smallEtaleTopology C)
+  let H := fun B : E ↦ DerivedCategory.TStructure.t.plus (S.obj B.obj)
+  let D := fun (B : E) (h : H B) ↦
+    (⟨S.obj B.obj, h⟩ : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology C))
+  have (B : E) (h : H B) :
+      IsIso (classicalLocalizationDirectImageMap P.Coefficient i (D B h)) :=
+    classicalLocalizationDirectImageMap_isIso P.Coefficient i (D B h)
+  have (B : E) :
+      IsIso (classicalLocalizationDirectImageMap P.Coefficient j (Jep.obj B)) :=
+    classicalLocalizationDirectImageMap_isIso P.Coefficient j (Jep.obj B)
+  let α (B : E) (h : H B) :
+      (F X).obj (Ie.obj (S.obj B.obj)) ≅ (Ip.obj ((Fp Z).obj (D B h))).obj :=
+    asIso (classicalLocalizationDirectImageMap P.Coefficient i (D B h))
+  let γ (B : E) (_h : H B) :
+      (F X).obj (Re.obj (Je.obj B.obj)) ≅ (Rp.obj (Jp.obj ((Fp X).obj B))).obj :=
+    asIso (classicalLocalizationDirectImageMap P.Coefficient j (Jep.obj B)) ≪≫
+      DerivedCategory.Plus.ι.mapIso (Rp.mapIso
+        ((directImageComparisonPullbackPlusIso P.Coefficient j).symm.app B))
+  obtain ⟨δ, hδ⟩ := Etale.exists_etale_closedSupportTriangle P.Coefficient i j hij
+  have hunit (B : E) (h : H B) :
+      (F X).map ((Etale.mapDerivedUpperStarLowerStarAdjunction C j).unit.app B.obj) ≫
+        (γ B h).hom = DerivedCategory.Plus.ι.map
+          ((derivedUpperStarLowerStarAdjunctionPlus C j).unit.app ((Fp X).obj B)) := by
+    dsimp only [γ, Iso.trans_hom, asIso_hom, Functor.mapIso_hom, Iso.app_hom,
+      Iso.symm_hom]
+    unfold classicalLocalizationDirectImageMap
+    simp only [Category.assoc]
+    erw [← (F X).map_comp_assoc, etale_localization_unit_compatibility]
+    change DerivedCategory.Plus.ι.map ((Fp X).map _) ≫
+      DerivedCategory.Plus.ι.map _ ≫ DerivedCategory.Plus.ι.map _ = _
+    rw [← DerivedCategory.Plus.ι.map_comp_assoc]
+    erw [(directImageMateCompatibility P.Ring j).1 B]
+    rw [DerivedCategory.Plus.ι.map_comp]
+    simp only [Category.assoc]
+    change DerivedCategory.Plus.ι.map
+        ((derivedUpperStarLowerStarAdjunctionPlus C j).unit.app ((Fp X).obj B)) ≫
+      DerivedCategory.Plus.ι.map (Rp.map
+        ((directImageComparisonPullbackPlusIso P.Coefficient j).hom.app B)) ≫
+      DerivedCategory.Plus.ι.map (Rp.map
+        ((directImageComparisonPullbackPlusIso P.Coefficient j).inv.app B)) = _
+    have hc := (DerivedCategory.Plus.ι.mapIso (Rp.mapIso
+      ((directImageComparisonPullbackPlusIso P.Coefficient j).app B))).hom_inv_id
+    simp only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv] at hc
+    erw [hc, Category.comp_id]
+  refine ⟨δ, hδ, α, γ, (fun _ _ ↦ rfl), (fun _ _ ↦ rfl), hunit, ?_⟩
+  constructor
+  · intro B h
+    apply isomorphic_distinguished _ ((F X).map_distinguished _ (hδ B.obj))
+    refine Triangle.isoMk _ _ (α B h).symm (Iso.refl _) (γ B h).symm ?_ ?_ ?_
+    · change ((α B h).inv ≫
+          (F X).map ((Adjunction.ofIsLeftAdjoint Ie).counit.app B.obj)) ≫ 𝟙 _ =
+        (α B h).inv ≫ (F X).map ((Adjunction.ofIsLeftAdjoint Ie).counit.app B.obj)
+      exact Category.comp_id _
+    · change DerivedCategory.Plus.ι.map
+          ((derivedUpperStarLowerStarAdjunctionPlus C j).unit.app ((Fp X).obj B)) ≫
+          (γ B h).inv = 𝟙 _ ≫
+            (F X).map ((Etale.mapDerivedUpperStarLowerStarAdjunction C j).unit.app B.obj)
+      rw [← hunit B h]
+      simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Category.id_comp]
+    · change ((γ B h).inv ≫ (F X).map (δ.app B.obj) ≫
+          ((F X).commShiftIso (1 : ℤ)).hom.app (Ie.obj (S.obj B.obj)) ≫
+          (shiftFunctor _ (1 : ℤ)).map (α B h).hom) ≫
+          (shiftFunctor _ (1 : ℤ)).map (α B h).inv =
+        (γ B h).inv ≫ ((F X).map (δ.app B.obj) ≫
+          ((F X).commShiftIso (1 : ℤ)).hom.app (Ie.obj (S.obj B.obj)))
+      simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id]
+      rw [(shiftFunctor (_root_.DerivedCategory
+        (Sheaf (Scheme.ProEt.topology X) C)) (1 : ℤ)).map_id]
+      erw [Category.comp_id]
+  · intro B B' h h' f
+    have hα := classicalLocalizationDirectImageMap_naturality P.Coefficient i
+      (DerivedCategory.Plus.ι.preimage (X := D B h) (Y := D B' h') (S.map f.hom))
+    have he : (DerivedCategory.Plus.ι.preimage
+        (X := D B h) (Y := D B' h') (S.map f.hom)).hom = S.map f.hom :=
+      DerivedCategory.Plus.ι.map_preimage _
+    rw [he] at hα
+    have hγ :
+        (F X).map (Re.map (Je.map f.hom)) ≫ (γ B' h').hom =
+          (γ B h).hom ≫ DerivedCategory.Plus.ι.map (Rp.map (Jp.map ((Fp X).map f))) := by
+      dsimp only [γ, Iso.trans_hom, asIso_hom, Functor.mapIso_hom, Iso.app_hom,
+        Iso.symm_hom]
+      rw [← Category.assoc]
+      erw [classicalLocalizationDirectImageMap_naturality P.Coefficient j (Jep.map f)]
+      rw [Category.assoc]
+      have hc := congrArg (fun t ↦ DerivedCategory.Plus.ι.map (Rp.map t))
+        ((directImageComparisonPullbackPlusIso P.Coefficient j).inv.naturality f)
+      simp only [Functor.comp_map, Functor.map_comp] at hc
+      simpa only [Category.assoc] using congrArg (fun t ↦
+        classicalLocalizationDirectImageMap P.Coefficient j (Jep.obj B) ≫ t) hc
+    refine ⟨hα, hγ, ?_⟩
+    let c := (F X).map (Re.map (Je.map f.hom))
+    let ap := DerivedCategory.Plus.ι.map
+      (Ip.map ((Fp Z).map (DerivedCategory.Plus.ι.preimage
+        (X := D B h) (Y := D B' h') (S.map f.hom))))
+    let cp := DerivedCategory.Plus.ι.map (Rp.map (Jp.map ((Fp X).map f)))
+    have hγinv : cp ≫ (γ B' h').inv = (γ B h).inv ≫ c := by
+      apply (cancel_mono (γ B' h').hom).1
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rw [hγ, Iso.inv_hom_id_assoc]
+    have hd := congrArg (F X).map (δ.naturality f.hom)
+    simp only [Functor.comp_map, Functor.map_comp] at hd
+    have hs := ((F X).commShiftIso (1 : ℤ)).hom.naturality
+      (Ie.map (S.map f.hom))
+    simp only [Functor.comp_map] at hs
+    change (F X).map (Ie.map (S.map f.hom)) ≫ (α B' h').hom =
+      (α B h).hom ≫ ap at hα
+    have ha := congrArg (shiftFunctor _ (1 : ℤ)).map hα
+    simp only [Functor.map_comp] at ha
+    change cp ≫ ((γ B' h').inv ≫ (F X).map (δ.app B'.obj) ≫
+        ((F X).commShiftIso (1 : ℤ)).hom.app (Ie.obj (S.obj B'.obj)) ≫
+        (shiftFunctor _ (1 : ℤ)).map (α B' h').hom) =
+      ((γ B h).inv ≫ (F X).map (δ.app B.obj) ≫
+        ((F X).commShiftIso (1 : ℤ)).hom.app (Ie.obj (S.obj B.obj)) ≫
+        (shiftFunctor _ (1 : ℤ)).map (α B h).hom) ≫
+          (shiftFunctor _ (1 : ℤ)).map ap
+    simp only [Category.assoc]
+    erw [reassoc_of% hγinv, reassoc_of% hd, reassoc_of% hs, ha]
 
 end AlgebraicGeometry.ProEtale
