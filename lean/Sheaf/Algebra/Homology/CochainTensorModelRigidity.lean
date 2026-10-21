@@ -149,6 +149,111 @@ noncomputable def cochainTensorRepresentativeArrow
         (DerivedCategory.quotientCompQhIso (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))).hom.app X.2.obj)
 
+-- Descent through the restricted quotient is componentwise, since it has the
+-- same objects and every homotopy class has a cochain-map representative.
+private theorem representative_quotient_bijective
+    (E : Type e) [Category.{z} E]
+    (U V : (cochainTensorHomotopyRepresentatives J R).FullSubcategory ×
+      (cochainTensorHomotopyRepresentatives J R).FullSubcategory ⥤ E) :
+    Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft
+      ((cochainTensorRepresentativeQuotient J R).prod
+        (cochainTensorRepresentativeQuotient J R)) τ) := by
+  let p := cochainTensorRepresentativeQuotient J R
+  let lift (X : (cochainTensorHomotopyRepresentatives J R).FullSubcategory) :
+      (cochainTensorFlatRepresentatives J R).FullSubcategory :=
+    ⟨X.obj.as, ((site_derived_tensor_descent_independentCoefficients.{u, v, w, d, 0, 0}
+      J R).choose_spec.1 X.obj).1 X.property⟩
+  constructor
+  · intro τ σ h
+    ext X
+    exact congrArg (fun t ↦ t.app (lift X.1, lift X.2)) h
+  · intro τ
+    let σ : U ⟶ V :=
+      { app := fun X ↦ τ.app (lift X.1, lift X.2)
+        naturality := by
+          intro X Y f
+          let g₁ : lift X.1 ⟶ lift Y.1 := ObjectProperty.homMk f.1.hom.out
+          let g₂ : lift X.2 ⟶ lift Y.2 := ObjectProperty.homMk f.2.hom.out
+          have h₁ : p.map g₁ = f.1 := by
+            apply ObjectProperty.hom_ext
+            exact HomotopyCategory.quotient_map_out _
+          have h₂ : p.map g₂ = f.2 := by
+            apply ObjectProperty.hom_ext
+            exact HomotopyCategory.quotient_map_out _
+          have hg : (p.prod p).map (X := (lift X.1, lift X.2))
+              (Y := (lift Y.1, lift Y.2)) (g₁, g₂) = f :=
+            CategoryTheory.Prod.hom_ext h₁ h₂
+          have hn := τ.naturality (X := (lift X.1, lift X.2))
+            (Y := (lift Y.1, lift Y.2)) (g₁, g₂)
+          change U.map ((p.prod p).map (X := (lift X.1, lift X.2))
+              (Y := (lift Y.1, lift Y.2)) (g₁, g₂)) ≫ τ.app (lift Y.1, lift Y.2) =
+            τ.app (lift X.1, lift X.2) ≫ V.map ((p.prod p).map
+              (X := (lift X.1, lift X.2)) (Y := (lift Y.1, lift Y.2)) (g₁, g₂)) at hn
+          rw [hg] at hn
+          exact hn }
+    exact ⟨σ, rfl⟩
+
+-- Combine homotopy descent with quotient descent, and transport along Q ≅ π ⋙ Qh.
+private theorem representative_localization_bijective
+    (E : Type e) [Category.{z} E]
+    (U V : DerivedCategory (SheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ×
+      DerivedCategory (SheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ⥤ E) :
+    Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft
+      ((cochainTensorRepresentativeLocalization J R).prod
+        (cochainTensorRepresentativeLocalization J R)) τ) := by
+  classical
+  let A := SheafOfModules.{w}
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
+  let P := cochainTensorFlatRepresentatives J R
+  let p := cochainTensorRepresentativeQuotient J R
+  let l := (cochainTensorHomotopyRepresentatives J R).ι ⋙ DerivedCategory.Qh
+  let q := cochainTensorRepresentativeLocalization J R
+  let α := DerivedCategory.quotientCompQhIso A
+  let δ : (p ⋙ l).prod (p ⋙ l) ≅ q.prod q :=
+    NatIso.prod (Functor.isoWhiskerLeft P.ι α) (Functor.isoWhiskerLeft P.ι α)
+  have hl (U V : DerivedCategory A × DerivedCategory A ⥤ E) :
+      Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft (l.prod l) τ) := by
+    let h := site_derived_tensor_descent_independentCoefficients.{u, v, w, d, e, z} J R
+    have hp : h.choose = cochainTensorHomotopyRepresentatives J R := by
+      funext X
+      apply propext
+      exact (h.choose_spec.1 X).trans
+        ((site_derived_tensor_descent_independentCoefficients.{u, v, w, d, 0, 0}
+          J R).choose_spec.1 X).symm
+    have hh := h.choose_spec.2.2.2 E inferInstance U V
+    rw [hp] at hh
+    exact hh
+  let W := (Functor.whiskeringLeft _ _ E).obj ((p ⋙ l).prod (p ⋙ l))
+  have hb (U V : DerivedCategory A × DerivedCategory A ⥤ E) :
+      Function.Bijective (W.map (X := U) (Y := V)) := by
+    exact (representative_quotient_bijective J R E (l.prod l ⋙ U)
+      (l.prod l ⋙ V)).comp (hl U V)
+  exact (((Functor.FullyFaithful.nonempty_iff_map_bijective W).2 hb).some.ofIso
+    ((Functor.whiskeringLeft _ _ E).mapIso δ)).map_bijective U V
+
+-- Lift a normalized comparison through any fully faithful functor. Keeping this
+-- cancellation argument abstract avoids unfolding the tensor comparison data.
+private theorem normalized_iso_unique
+    {A B : Type*} [Category A] [Category B] (F : A ⥤ B) (hF : F.FullyFaithful)
+    {X Y : A} {Z : B} (r : Z ≅ F.obj X) (s : Z ≅ F.obj Y) :
+    ∃! e : X ≅ Y, r.hom ≫ F.map e.hom = s.hom := by
+  let e := hF.preimageIso (r.symm ≪≫ s)
+  refine ⟨e, ?_, ?_⟩
+  · change r.hom ≫ F.map e.hom = s.hom
+    rw [show F.map e.hom = (r.symm ≪≫ s).hom from hF.map_preimage _]
+    simp only [Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc]
+  · intro e' he'
+    apply Iso.ext
+    apply hF.map_injective
+    rw [show F.map e.hom = (r.symm ≪≫ s).hom from hF.map_preimage _]
+    calc
+      F.map e'.hom = r.inv ≫ (r.hom ≫ F.map e'.hom) := by
+        rw [Iso.inv_hom_id_assoc]
+      _ = r.inv ≫ s.hom := congrArg (r.inv ≫ ·) he'
+      _ = (r.symm ≪≫ s).hom := rfl
+
 /-- The canonical cochain tensor comparison, its normalized uniqueness, and full faithfulness
 of restriction along the product of the cochain representative localizations.
 Source: Stacks 013H, 06YS, 06YT, 06YU; blueprint `def-wf-tensor-product`, first sentence
@@ -203,6 +308,34 @@ theorem cochain_tensor_model_rigidity :
         Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft
           ((cochainTensorRepresentativeLocalization J R).prod
             (cochainTensorRepresentativeLocalization J R)) τ)) := by
-  sorry
+  classical
+  let A := SheafOfModules.{w}
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
+  let P := cochainTensorFlatRepresentatives J R
+  let p := cochainTensorRepresentativeQuotient J R
+  let l := (cochainTensorHomotopyRepresentatives J R).ι ⋙ DerivedCategory.Qh
+  let q := cochainTensorRepresentativeLocalization J R
+  let T := siteDerivedTensorIndependentCoefficients J R
+  let α := DerivedCategory.quotientCompQhIso A
+  let δ : (p ⋙ l).prod (p ⋙ l) ≅ q.prod q :=
+    NatIso.prod (Functor.isoWhiskerLeft P.ι α) (Functor.isoWhiskerLeft P.ι α)
+  let a := Functor.isoWhiskerLeft ((P.ι.prod P.ι) ⋙ cochainTensorTotal J R) α.symm
+  let b := Functor.isoWhiskerLeft (P.ι.prod P.ι)
+    (Functor.isoWhiskerRight (cochainTensorHomotopyTotalComparison J R).symm
+      DerivedCategory.Qh)
+  let c := Functor.isoWhiskerLeft (p.prod p)
+    (cochainTensorHomotopyDerivedComparison J R)
+  let r := a ≪≫ b ≪≫ c ≪≫ Functor.isoWhiskerRight δ T
+  refine ⟨r, ?_, ?_, ?_⟩
+  · intro X
+    rfl
+  · intro T' r'
+    let W := (Functor.whiskeringLeft _ _ (DerivedCategory A)).obj (q.prod q)
+    have hW : W.FullyFaithful :=
+      ((Functor.FullyFaithful.nonempty_iff_map_bijective W).2
+        (representative_localization_bijective J R (DerivedCategory A))).some
+    exact normalized_iso_unique W hW r r'
+  · intro E hE U V
+    exact representative_localization_bijective J R E U V
 
 end SheafOfModules
