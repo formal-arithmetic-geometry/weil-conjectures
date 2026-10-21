@@ -20,9 +20,118 @@
   "def-amb-etale-compact-support",
   "lem-amb-etale-compact-comparisons"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The closed immersion $c$ is finite by [lem-weil-pbc-closed-immersion-finite]. Hence its direct image on abelian étale sheaves is exact by [lemma-weil-pbc-finite-direct-image-exact]. The module direct image is additive and commutes with forgetting the $A$-module structure by [lem-weil-pbc-module-direct-image-left-exact]. For a short exact sequence of $A_Z$-module sheaves, forget the action, apply the abelian direct image, and obtain a short exact sequence of abelian sheaves. The forgetful functor preserves kernels and cokernels and is faithful by [lem-weil-pbc-module-sheaves-colimits-forgetful]; thus it reflects zero objects (the identity of an object with zero underlying sheaf is zero), and therefore reflects exactness by testing the kernel modulo the image. The resulting module sequence is short exact. This proves exactness of $c_*$ on ordinary étale module sheaves.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero); module transfer: sites-modules.tex Tags 03DA/03DB (lemma-abelian, lemma-limits-colimits)"
+   }
+  },
+  {
+   "text": "For the open immersion, [lem-weil-pbc-extension-by-zero-exact] gives exactness of $j_!$ on $A$-module sheaves. Apply [lem-weil-pbc-exact-functor-derived-factorization] to this functor and to the exact $c_*$ from step 1. Their termwise functors preserve quasi-isomorphisms and descend to the unbounded derived functors $Dj_!$ and $Dc_*$, with $Dj_!Q_W\\cong Q_T C(j_!)$ and $Dc_*Q_Z\\cong Q_T C(c_*)$, where $C$ denotes termwise application and $Q$ denotes localization. No lower cohomological bound is required for these two descents.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); etale-cohomology.tex Tag 03S5 (proposition-describe-jshriek)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-bounded-below] to $j_!$ and $c_*$. It gives the natural isomorphisms $\\mathcal H^q(Dj_!H)\\cong j_!\\mathcal H^q(H)$ and $\\mathcal H^q(Dc_*L)\\cong c_*\\mathcal H^q(L)$ on the unbounded categories. If the input cohomology vanishes in degrees $q<m$, the right sides vanish there because an additive functor sends the zero object to zero. Thus the same integer $m$ works after either functor; in particular bounded-below inputs remain bounded below.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), termwise computation and its cohomology consequence"
+   }
+  },
+  {
+   "text": "The identity direct image is canonically the identity: in [def-weil-pbc-direct-image] the fibre product $V\\times_T T$ is canonically $V$, with the same restriction maps. The identity open extension is also the identity: in [def-weil-pbc-extension-by-zero] every object factors uniquely through the identity, so its extension presheaf is the original sheaf. Its sheafification is canonically itself by the universal property in [def-weil-pbc-sheafification]: the map back extending the identity and the sheafification map are inverse by uniqueness. These identifications are natural. By [lem-weil-pbc-localization-universal-property], their termwise identifications descend uniquely to $D\\mathrm{id}_*\\cong\\mathrm{id}$ and $D\\mathrm{id}_!\\cong\\mathrm{id}$. Finally [lem-weil-pbc-exact-functor-derived-functor] identifies the right derived functor of the exact identity direct image with its termwise descent, giving the specified $R\\mathrm{id}_*\\cong\\mathrm{id}$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), identity case; extension by zero as in etale-cohomology.tex equation-j-p-shriek"
+   }
+  },
+  {
+   "text": "Use the compactifications $b_j=(j,\\mathrm{id}_T)$ and $b_c=(\\mathrm{id}_Z,c)$. The former has proper second factor since an identity is separated, finite type and universally closed; the latter has proper second factor by [lem-weil-pbc-closed-immersion-proper]. Their candidates, by [def-amb-etale-compact-support], are $R\\mathrm{id}_{T,*}Dj_!$ and $Rc_*D\\mathrm{id}_{Z,!}$. Step 4 supplies a natural isomorphism $e_j:Rj_!^{b_j}\\xrightarrow{\\sim}Dj_!$. For the closed case apply [lem-weil-pbc-exact-functor-derived-functor] to the exact module functor $c_*$ of step 1: the canonical comparison $Dc_*\\to Rc_*$ is invertible on every complex. Its inverse, together with $D\\mathrm{id}_{Z,!}\\cong\\mathrm{id}$ from step 4, supplies $e_c:Rc_!^{b_c}\\xrightarrow{\\sim}Dc_*$. These are precisely the termwise and identity normalizations.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Construction before Tag 0F7I (lemma-shriek-well-defined); derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "For $a=j$ or $a=c$, let $d$ be its chosen compactification and let $\\rho_{d,b_a}:Ra_!^d\\xrightarrow{\\sim}Ra_!^{b_a}$ be the canonical comparison on bounded-below inputs from [lem-amb-etale-compact-comparisons]. Define $n_a^d=e_a\\circ\\rho_{d,b_a}$. The hypotheses of that comparison hold: the coefficient ring is finite, both schemes are Noetherian, and the morphism is separated, finite type and compactifiable by assumption. Step 3 ensures that the exact-factor outputs needed in the trivial-compactification computations remain bounded below. Each component of $n_a^d$ is a composite of isomorphisms in the ambient unbounded derived category, since the candidates of [def-amb-etale-compact-support] are functors into that category. This proves the claimed isomorphisms for every bounded-below input.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), canonical comparisons through common refinements"
+   }
+  },
+  {
+   "text": "Every constituent of $n_a^d$ is natural, so for a morphism $u:H\\to H'$ of bounded-below inputs its square is $D_a(u)\\,n_{a,H}^d=n_{a,H'}^d\\,Ra_!^d(u)$, where $D_j=Dj_!$ and $D_c=Dc_*$. For another chosen compactification $d'$, the cocycle identity in [lem-amb-etale-compact-comparisons] gives $\\rho_{d',b_a}\\rho_{d,d'}=\\rho_{d,b_a}$; hence $n_a^{d'}\\rho_{d,d'}=e_a\\rho_{d',b_a}\\rho_{d,d'}=e_a\\rho_{d,b_a}=n_a^d$. This is compatibility with changing compactifications, including identities and refinements. Only bounded-below inputs were used in these equations.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), final coherence paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7I (lemma-shriek-well-defined), specialize to (j,id) and (id,c), with derived.tex Tag 015F and etale-cohomology.tex Tags 03QP/03S5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +167,45 @@
    "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, HasCompactSupport.comp_isClosedEmbedding, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion extension by zero and closed immersion direct image are exact on etale module sheaves and derived compact supports normalize to their termwise derived functors",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.liftCoborder_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic exact-functor part already represented by existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|extensionByZero|ExtensionByZero",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic exact-functor part already represented by existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification independent derived compact support for open and closed immersions of schemes with constant finite module coefficients",
+   "results": "AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.IsClosedImmersion.recOn, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.instIsClosedImmersionMorphismRestrict, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic exact-functor part already represented by existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, AlgebraicGeometry.IsClosedImmersion",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic exact-functor part already represented by existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact additive functor between abelian categories cohomology commutes with termwise derived functor and the right derived functor is canonically isomorphic to it",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic exact-functor part already represented by existing DAG nodes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-chart-adjoint-comparison",
@@ -80,5 +224,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-immersion-shriek-normalization",
+  "worker": "stage1",
+  "summary": "Seven steps prove module exactness from existing finite abelian direct-image exactness, descend exact functors, preserve every cohomological lower bound, construct both identity normalizations and compose the specified bounded-below compactification comparisons. Statement unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "Opening and final paragraphs of sk-prop-sf-rf-shriek-preservation: normalization of the open/closed compact-support factors in the chart adjunction comparison.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Finite direct-image exactness supplies abelian etale closed-pushforward exactness; the unit has no abelian exactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Its compatibility with forgetting scalar actions transfers the abelian computation to constant modules; the unit supplies no such module interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Faithful exact forgetful functors detect exactness of the module sequence; this is generic ringed-site algebra."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exact open extension is required for the open normalization; this is an ordinary etale-site tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic cohomology comparison for exact functors proves the precise lower-bound clause; the unit gives no abstract derived-functor statement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor right-derived comparison fixes the specified identity and closed normalizations."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Canonical bounded-below proper-refinement comparisons and cocycles identify chosen compactifications, as required for the unit chart-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-b6cece22b",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-b6cece22b (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement unchanged against base. Live still has it unsplit and there is no repair note. The coefficient category is the ordinary unbounded constant-A module derived category, matching def-amb-etale-compact-support and both citers (chart-adjoint-comparison, chart-left-compositor, whose n_s/n_v/n_i are these n_a). Compactifications do not need density, so (j,id_T) and (id_Z,c) are valid; c is proper by closed-immersion-proper (a). Source Stacks more-etale 0F7I (lemma-shriek-well-defined, l.3081): checked, the item is its specialization to these trivial compactifications; 0F51/03S5/04FX/03QP exist. Step 1: c finite, so the abelian finite f_* is exact; the module u_* commutes with forget (module-direct-image-left-exact (1)); forget is faithful and preserves kernels and cokernels, so it reflects exactness; correct. Step 2: extension-by-zero-exact holds for arbitrary Λ; the exact-functor factorization is unbounded. Step 3: bounded-below node gives the H^r iso and D^{≥n} preservation for every n. Step 4: identity normalizations come only from the sheafification universal property (no plus construction) and descend by localization-universal-property (2). Step 5: the inverse of the invertible Dc_*→Rc_* comparison works on every unbounded complex. Matching that node's CoCh→D Kan extension with the def's K-injective K(A)→D one is elementary (CoCh→K is the identity on objects and full); no FIX. Step 6: hypotheses of lem-amb-etale-compact-comparisons hold (A finite, Noetherian, compactifiable); D^+ inputs only. Step 7: the cocycle gives n^{d'}ρ_{d,d'}=n^d in the right order. Edge cases checked: A=0, empty W or Z, identity immersions, arbitrary m; no ℓ-invertibility needed. Duplicate search on side-live: no node states this ordinary-étale normalization or closed module exactness; no cycle, no missing ids. The 7 declared tool_uses are accepted as generic tools. No SGA."
  }
 }
