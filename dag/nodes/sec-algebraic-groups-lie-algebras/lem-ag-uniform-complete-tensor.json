@@ -12,9 +12,85 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-ringed-koszul-completion-reflector"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-completed-local-perfect-criterion] to $M$ and $N$. Its hypotheses are exactly the given noetherian finite-dimensional $T$, invertible $\\ell$, and finite extension $E/\\mathbf Q_\\ell$; its category is the stated full uniform category. Obtain finite stratifications with perfect $A$-complex models. Replace the two partitions by their pairwise scheme-theoretic intersections $S_\\alpha\\times_T S^\\prime_\\beta$: these are locally closed immersions with disjoint images covering $T$. Pull the two pro-etale covering families back to these intersections and take their pairwise fibre products. The covering base-change and transitivity axioms give a common covering on each refined stratum. On a member $u:U\\to T$ both restrictions therefore have the form $B_U\\otimes_A^L P$ and $B_U\\otimes_A^L Q$ for perfect $A$-complexes $P,Q$. Here $B_U=\\varprojlim_n(P_n)_U$ is canonically the actual restricted coefficient ring, and the restrictions are exact by [lem-weil-pbc-stratum-completion-unit-restriction]. Pulling a realized model further back preserves that form: apply the derived tensor-pullback isomorphism to its scalar extension, or termwise pull back the finite-projective representative.",
+   "uses": [
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5 and Proposition 6.6.11; the existing integral completed local perfect criterion supplies the refinement to this DAG category."
+   }
+  },
+  {
+   "text": "Choose bounded finite-projective representatives $P^\\bullet,Q^\\bullet$ for each local pair [def-pc-perfect-ring-complex]. Their total tensor $C^k=\\bigoplus_{i+j=k}P^i\\otimes_A Q^j$, with $d(p\\otimes q)=dp\\otimes q+(-1)^i p\\otimes dq$ for $p\\in P^i$, is again bounded finite-projective. Finite generation gives a surjection $A^r\\to P^i$; projectivity lifts $\\mathrm{id}_{P^i}$ along it, providing a splitting, and likewise for $Q^j$ [def-weil-finitely-generated-module, def-weil-pbc-projective-module]. Tensoring these chosen retractions $P^i\\leftrightarrows A^r$ and $Q^j\\leftrightarrows A^s$ exhibits $P^i\\otimes_A Q^j$ as a retract of $A^{rs}$; the finite direct sums of these retractions exhibit every $C^k$ as a retract of a finite free module. If the two term intervals are $[a,b]$ and $[c,d]$, the tensor interval is $[a+c,b+d]$. A retract of a free module is flat, since its tensor functor is a retract of an exact finite-power functor. By [lem-pc-bounded-above-flat-kflat-site], applied to the one-point ringed site, these bounded flat complexes are K-flat. Thus [lem-pc-source-kflat-module-tensor-model] identifies $C^\\bullet$ with $P\\otimes_A^L Q$, proving that this scalar complex is perfect without requiring torsion integral modules to be flat.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-bounded-flat-K-flat; bounded-projective total tensor computation, as used in Bhatt-Scholze Proposition 6.6.11."
+   }
+  },
+  {
+   "text": "Put $V=M\\otimes_B^L N$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the restriction $u$ from step 1, and to constant-coefficient realization followed by extension to $B_U$. This gives $u^*V\\simeq (B_U\\otimes_A^L P)\\otimes_{B_U}^L(B_U\\otimes_A^L Q)\\simeq B_U\\otimes_A^L(P\\otimes_A^L Q)$. The scalar-extension comparison can also be checked directly on the bounded projective models of step 2: $(b\\otimes p)\\otimes(c\\otimes q)\\mapsto bc\\otimes(p\\otimes q)$ has inverse $b\\otimes(p\\otimes q)\\mapsto(b\\otimes p)\\otimes(1\\otimes q)$. The balancing relations make both maps well defined, and the displayed signed total differentials make them chain maps. Completed constant realization of each projective term is a retract of a finite power of $B_U$, so the same bounded-flat K-flat criterion applies to these representatives. Consequently $V$ has a finite stratification with local perfect $A$-complex models, precisely the right-hand condition of [lem-weil-pbc-integral-completed-local-perfect-criterion].",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-integral-completed-local-perfect-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, lemma-pullback-tensor-product, and 0G7E, lemma-pullback-K-flat; applied to the local models of Bhatt-Scholze Proposition 6.6.11."
+   }
+  },
+  {
+   "text": "The reverse implication of [lem-weil-pbc-integral-completed-local-perfect-criterion] now gives $V\\in\\mathcal C_A$, including common uniform local models, compatible etale-origin witnesses and intrinsic completeness: the unit $\\eta^{\\mathrm{int}}_V$ of [def-weil-pbc-intrinsic-completion] is invertible. That unit uses the product mapping-fibre model, while $H$ uses the total derived limit of the item, so compare the units. Apply [lem-weil-pbc-completed-koszul-quotient-comparison] to the generator $a=(\\varpi)$, $r=1$: $\\eta^{\\mathrm{int}}_V$ followed by an isomorphism is the quotient completion unit $\\mathrm{comp}_V$, after reindexing $n+1\\mapsto n$, so $\\mathrm{comp}_V$ is invertible. [prop-weil-pbc-koszul-reconstruction] for the same datum has exactly the item's $Q_m$, transitions, total derived limit and degree-zero unit, so its $\\kappa_V$ is the unit $\\eta_V:V\\to\\Lambda(V)=H$ of [lem-weil-pbc-ringed-koszul-completion-reflector], and $c_V\\eta_V=\\mathrm{comp}_V$ makes $\\eta_V$ an isomorphism. Write $t_n=\\eta_V\\otimes_B^L(P_n)_T:V_n\\xrightarrow{\\sim}H_n$. Keep the witnesses $L_n$ and maps $\\beta_n$ of $V$, and set $\\alpha_n^H=t_n\\alpha_n^V$. For $m\\geq n$, naturality of derived scalar extension gives $t_n\\rho^V_{m,n}=\\rho^H_{m,n}(t_m\\otimes^L P_n)$; with the witness square for $V$ this gives that for $H$, and the $\\beta$ cocycle is unchanged. Take local model comparisons $e_n^H=e_n^V(t_n|_U)^{-1}$; their squares follow from the same equality, and bounds and lisse cohomology are unchanged. The reflector unit is natural, so $\\eta_H\\eta_V=\\Lambda(\\eta_V)\\eta_V$ and $\\eta_H$ is invertible. The two cited comparisons, read backwards for $H$, make $\\mathrm{comp}_H$ and then $\\eta^{\\mathrm{int}}_H$ invertible. These are the clauses of [def-weil-pbc-bounded-constructible-complete], proving $H\\in\\mathcal C_A$.",
+   "uses": [
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-completed-koszul-quotient-comparison",
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5 and Proposition 6.6.11; the existing integral completed local perfect criterion supplies the refinement to this DAG category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-completed-local-perfect-criterion",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5 and Proposition 6.6.11; explicit tensor-local-model argument using the already stated refinement to the common-local-model/compatible-etale-witness category."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +128,54 @@
    "date": "2026-10-21",
    "verdict": "no match",
    "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|derived.*complet",
+   "results": "0 hits: . Ordinary module completion or generic/condensed tensor structures; none states this pro-etale uniform coefficient-category closure.",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Koszul completed tensor product of two bounded constructible integral l adic complexes is bounded constructible",
+   "results": "8 hits: HomologicalComplex.tensorObj, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion. Ordinary module completion or generic/condensed tensor structures; none states this pro-etale uniform coefficient-category closure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "12 hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul. Ordinary module completion or generic/condensed tensor structures; none states this pro-etale uniform coefficient-category closure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived tensor of two bounded constructible adic sheaf complexes preserves common uniform reduction models and compatible etale origins",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of. Ordinary module completion or generic/condensed tensor structures; none states this pro-etale uniform coefficient-category closure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor closure of stratified perfect complexes of sheaves over a completed discrete valuation coefficient ring",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, CondensedMod.IsSolid, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree. Ordinary module completion or generic/condensed tensor structures; none states this pro-etale uniform coefficient-category closure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructib|stratif.*perfect|derivedComplete",
+   "results": "0 hits: . Ordinary module completion or generic/condensed tensor structures; none states this pro-etale uniform coefficient-category closure.",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-tensor-weil",
@@ -72,5 +192,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-ag-uniform-complete-tensor",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Use the existing completed integral local-perfect criterion in both directions. Construct a common stratification and explicit bounded finite-projective tensor models; identify their realized tensors by the generic derived tensor-pullback theorem. The ordinary tensor is already in the full uniform category. Its Koszul unit is invertible, and the proof explicitly transfers normalized local models and compatible etale witnesses to the completed tensor.",
+  "blueprint": "lem-wf-tensor-weil, proof final clause 'the bifunctoriality is that of the ambient derived tensor': verify restriction of the underlying completed tensor to the precise integral uniform category before equipping it with Weil structure.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "why": "The existing equivalence with stratified local perfect models includes the exact uniform reduction and compatible etale-witness clauses; it is the generic coefficient-category tool needed for tensor restriction."
+   },
+   {
+    "node": "lem-weil-pbc-stratum-completion-unit-restriction",
+    "why": "Identifies the actual completed coefficient rings and exact restrictions on common stratum covers."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison for restriction and coefficient extension, used to realize local scalar tensor models."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flatness of bounded-above flat complexes, applied to scalar and realized bounded projective models."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic computation of ordinary-module derived tensor on a K-flat representative."
+   },
+   {
+    "node": "lem-weil-pbc-completed-koszul-quotient-comparison",
+    "why": "Identifies the intrinsic product-fibre completion unit with the quotient completion unit, needed to pass between the category's completeness clause and the item's derived-limit Koszul completion."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Identifies the total-derived-limit Koszul unit used to define H with the quotient completion unit over the actual completed ring."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Naturality of the Koszul completion construction and unit that define H in the item's statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-completed-local-perfect-criterion",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-e89dff4b8",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-e89dff4b8 (reviewer sub-agent of L); spot-checked: Read in full: the item and all four steps (no new nodes), the statements of every cited node, and Bhatt–Scholze Lemma 6.5.5 on pdf p.49. The statement and stmt_deps are unchanged from base. The item is unsplit live, has no repair note, is not dropped and cites no SGA. The statement is true (Bhatt–Scholze 6.5.5); I tested it on M=0, empty T, shifted free objects, and A/ϖ at a geometric point, which needs the Tor term in degree −1. Steps 1–3 are correct. Step 1 uses the local-perfect criterion forward, whose hypotheses match exactly; its common refinement S_α×_T S'_β and the fibre-product covers are valid, and the stratum-restriction node gives u^{-1}B≅B_U. Step 2 shows that a tensor of bounded finite projective complexes is K-flat (one-point site) and computes P⊗^L Q. Step 3 applies tensor-pullback to restriction and to realization over Sh(pt), giving local perfect models. Fault C4, step 4: it took the unit of def-weil-pbc-intrinsic-completion, which lands in its product mapping-fibre model, to be the unit of the item's H. H is instead the total right derived limit of the reflector, and the two derived limits are only non-canonically isomorphic. FIXED: step 4 now uses lem-weil-pbc-completed-koszul-quotient-comparison (generator ϖ, r=1) and prop-weil-pbc-koszul-reconstruction (c_Vκ_V=comp_V; same Q_m, R lim and unit, over the actual A_T) to show η_V is invertible. The same two nodes, read backwards from η_H, give the intrinsic completeness of H. The witness and local-model transfer is kept. proof_deps and split_report.tool_uses are updated with the three added nodes. I accept the 5 declared tool uses as generic coefficient-category tools. Batch-5 flag (criterion → lem-trf-additive-homotopy-category-triangulated): the closure adds only generic category theory (K(B) triangulated, cofiltered finite sets, localization ess. surj., right fractions, ff+ess. surj. ⇒ equivalence, pod exact-square composition). None is part of the trace formula or Poincaré duality, and all are already in the parent's closure, so I accept the flag. Advisory: lem-pur-integral-operations-preserve-constructible clause 2, together with the stratified-perfect characterization, is a near-alternative route; lem-fix-constructible-tensor-completion is not a duplicate.; 1 file(s) fixed by the reviewer"
  }
 }
