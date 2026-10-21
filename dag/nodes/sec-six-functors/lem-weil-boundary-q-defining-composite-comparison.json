@@ -16,9 +16,74 @@
   "lem-weil-pbc-comparison-pullback",
   "def-kun-projection-formula-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the ambient unbounded derived categories, abbreviating $\\otimes_A^L$ to $\\otimes$, $C_T$ to $C$, and $i_e^*M$ to $L$. The comparison morphism $\\nu_W$ is a morphism of ringed topoi with its constant-$A$ structural map; its module pullback is exact, so its total left derived pullback is the termwise functor $C_W$ specified in the statement. Apply the canonical ringed-topos tensor comparison to $\\nu_W$. Its naturality and its compatibility with the signed symmetry give, for arrows $f:U\\to U'$ and $g:V\\to V'$,\n$$c_{W;U',V'}C_W(f\\otimes g)=(C_Wf\\otimes C_Wg)c_{W;U,V},\\qquad c_{W;V,U}C_W(\\sigma_{U,V})=\\sigma_{C_WU,C_WV}c_{W;U,V}.$$\nThe signed symmetries on both sites are natural in both variables. These are statements of the three cited nodes, applied to the small site representatives in a universe containing the module sheaves. No special property of $i$, $B$ or $M$ is needed for them. All subsequent tensor products and comparisons are in these ambient categories; bounded-below inputs need not have bounded-below derived tensor products.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+   }
+  },
+  {
+   "text": "Put $D=L\\otimes B$, $E=B\\otimes L$, $L'=i_p^*CM$, and write $\\sigma_e=\\sigma_{L,B}$ and $\\sigma_p=\\sigma_{L',B'}$. The definitions of $r,s$ and the symmetry equation of step 1, followed by naturality of the pro-etale symmetry for $\\rho_M^{-1}:C_ZL\\to L'$ and $v:C_ZB\\to B'$, give\n$$r\\,C_Z(\\sigma_e)=(v\\otimes\\rho_M^{-1})\\sigma_{C_ZL,C_ZB}c_{Z;L,B}=\\sigma_p(\\rho_M^{-1}\\otimes v)c_{Z;L,B}=\\sigma_p s.$$\nSet $H=\\eta_E F_p(r^{-1})$. Applying $F_p$, cancelling $F_p(r^{-1})F_p(r)$, and using naturality of the given $\\eta$ at $\\sigma_e:D\\to E$, yields the input identity\n$$H F_p(\\sigma_p)F_p(s)=\\eta_E F_p(C_Z\\sigma_e)=C(F_e\\sigma_e)\\eta_D.$$\nThus the two different tensor orders in $r$ and $s$ have been accounted for explicitly.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+   }
+  },
+  {
+   "text": "Define the isomorphisms $V=F_p(v)$, $d=\\eta_B V^{-1}:F_pB'\\to C(F_eB)$, and $k=c_{T;F_eB,M}$. The assumed projection square is exactly\n$$H\\pi_p(V\\otimes1)=C(\\pi_e)k^{-1}(\\eta_B\\otimes1).$$\nCompose on the left with $k\\,C(\\pi_e^{-1})$ and on the right with $(V^{-1}\\otimes1)\\pi_p^{-1}$. Functoriality and the inverse laws cancel $C(\\pi_e^{-1})C(\\pi_e)$, $k k^{-1}$, $V^{-1}V$, and $\\pi_p\\pi_p^{-1}$. The result is\n$$k C(\\pi_e^{-1})H=(d\\otimes1)\\pi_p^{-1}.$$\nThis inverts only the two projection components stipulated to be invertible; it does not invoke any projection-formula theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+   }
+  },
+  {
+   "text": "Put $g_e=(1_M\\otimes a_e)\\sigma_{F_eB,M}$ and $g_p=(1_{CM}\\otimes a_p)\\sigma_{F_pB',CM}$. The hypothesis on the final arrows, after composition with $V^{-1}$, says $a_p=C(a_e)d$. Naturality of the tensor comparison for $(1_M,a_e)$ and its symmetry equation give\n$$c_{T;M,Y}C(g_e)=(1_{CM}\\otimes C(a_e))\\sigma_{C(F_eB),CM}\\,k.$$\nNaturality of the signed pro-etale symmetry at $d:F_pB'\\to C(F_eB)$ gives\n$$(1_{CM}\\otimes C(a_e))\\sigma_{C(F_eB),CM}(d\\otimes1)=(1_{CM}\\otimes C(a_e)d)\\sigma_{F_pB',CM}=g_p.$$\nSince $d$ is invertible, these two equations yield the output identity\n$$c_{T;M,Y}C(g_e)=g_p(d^{-1}\\otimes1)k.$$\nThis uses the given arrow compatibility, rather than assuming that an arbitrary final arrow is preserved by comparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+   }
+  },
+  {
+   "text": "By definition $t_e=g_e\\pi_e^{-1}F_e(\\sigma_e)$ and $t_p=g_p\\pi_p^{-1}F_p(\\sigma_p)$. Substitute the input identity from step 2, the output identity from step 4, and the inverse-projection identity from step 3 in that order:\n$$\\begin{aligned}\nc_{T;M,Y}C(t_e)\\eta_D\n&=c_{T;M,Y}C(g_e)C(\\pi_e^{-1})H F_p(\\sigma_p)F_p(s)\\\\\n&=g_p(d^{-1}\\otimes1)k C(\\pi_e^{-1})H F_p(\\sigma_p)F_p(s)\\\\\n&=g_p(d^{-1}\\otimes1)(d\\otimes1)\\pi_p^{-1}F_p(\\sigma_p)F_p(s)\\\\\n&=t_pF_p(s).\n\\end{aligned}$$\nThe last cancellation is tensor bifunctoriality and $d^{-1}d=1$. Since $D=i_e^*M\\otimes_A^LB$, this is the asserted equality. The argument never forms an exceptional right adjoint or uses constructibility or finite Tor amplitude of $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+  "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -61,10 +126,45 @@
    "results": "none; searched Mathlib/CategoryTheory/Monoidal",
    "date": "2026-10-21",
    "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of symmetric monoidal tensor comparison transports a composite of inverse projection formula braiding and a compatible morphism",
+   "results": "CategoryTheory.MonoidalCategory.tensorμ_natural; CategoryTheory.BraidedCategory.braiding_inv_naturality_assoc; CategoryTheory.BraidedCategory.braiding_inv_naturality; CategoryTheory.GradedObject.Monoidal.braiding_naturality_left; CategoryTheory.GradedObject.Monoidal.braiding_naturality_right; CategoryTheory.MonoidalCategory.tensorμ_natural_right; CategoryTheory.coprodComparison_tensorRight_braiding_hom; CategoryTheory.MonoidalCategory.tensorμ_natural_left",
+   "date": "2026-10-21",
+   "verdict": "no match: individual braided naturality and monoidal transport identities do not state the assumed projection-square composite comparison; inspected Braided/Basic.lean lines 121-139 and 535-538."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection|braiding_naturality",
+   "results": "Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/Enriched/Opposite.lean; Mathlib/CategoryTheory/Enriched/Opposite.lean; Mathlib/CategoryTheory/Enriched/Opposite.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: individual braided naturality and monoidal transport identities do not state the assumed projection-square composite comparison; inspected Braided/Basic.lean lines 121-139 and 535-538."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.BraidedCategory.braiding",
+   "results": "CategoryTheory.Functor.Braided.mk; CategoryTheory.BraidedCategory.ofFaithful",
+   "date": "2026-10-21",
+   "verdict": "no match: individual braided naturality and monoidal transport identities do not state the assumed projection-square composite comparison; inspected Braided/Basic.lean lines 121-139 and 535-538."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal functor and a natural isomorphism transport the composite of inverse projection formula tensor symmetry and a compatible arrow",
+   "results": "CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.Monoidal.transport; CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_inv; CategoryTheory.Functor.Monoidal.μNatIso; CategoryTheory.Functor.Monoidal.commTensorRight_inv_app; CategoryTheory.Functor.Monoidal.commTensorRight; CategoryTheory.Functor.Monoidal.μIso; CategoryTheory.Equivalence.monoidalOfPrecompInverse",
+   "date": "2026-10-21",
+   "verdict": "no match: individual braided naturality and monoidal transport identities do not state the assumed projection-square composite comparison; inspected Braided/Basic.lean lines 121-139 and 535-538."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse of a commuting square of isomorphisms combined with braiding naturality gives equality of tensor composites under a natural comparison",
+   "results": "CategoryTheory.BraidedCategory.braiding_inv_naturality; CategoryTheory.BraidedCategory.braiding_inv_naturality_assoc; CategoryTheory.BraidedCategory.braiding_inv_naturality_left; CategoryTheory.BraidedCategory.braiding_inv_naturality_left_assoc; CategoryTheory.BraidedCategory.braiding_inv_naturality_right; CategoryTheory.BraidedCategory.braiding_inv_naturality_right_assoc; CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight_inv_app; CategoryTheory.BraidedCategory.braiding_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: individual braided naturality and monoidal transport identities do not state the assumed projection-square composite comparison; inspected Braided/Basic.lean lines 121-139 and 535-538."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-boundary-proetale-q-compatibility",
@@ -83,5 +183,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-boundary-q-defining-composite-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the assumed projection-comparison square into input-symmetry, inverse-projection, and output-arrow identities and composed them. Reused existing ringed-site tensor naturality and signed symmetry results; no new nodes, no statement correction, no extra boundedness or Tor hypotheses.",
+  "blueprint": "Realizes the untransposed part of the ancestor cor-weil-boundary-duality-discharge proof, final paragraph: adjointing back through tensor-Hom and i_* dashv Ri^!; follows the comparison paragraph of thm-sf-pf-proetale, with the inverse projection square now an explicit hypothesis.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical derived pullback tensor comparison is natural on arbitrary ringed sites; this generic fact is needed at nu_T and nu_Z and is not supplied by the boundary-biduality unit."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "The prescribed canonical tensor comparison preserves the signed braiding for every ringed-topos morphism; used at the etale/pro-etale comparison, without replacing any biduality step."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The ordinary module derived category on either ringed site has the native signed symmetry natural in both variables; used as tensor calculus, not as a new duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-8842af6e0",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-8842af6e0 (reviewer sub-agent of L); spot-checked: Ordinary first split of the statement-only node Q104 created on 2026-10-21. There is no repair note for this item and live shows it unsplit, so the re-split rules do not apply and no other group superseded it. The statement, stmt_deps, source and blueprint are byte-identical to the Q104-created node. The delivery adds 5 steps (3808 chars), no new nodes and no SGA citations. I read all three cited statements: the canonical ringed-topos tensor comparison (natural in both variables), the sfb node making that comparison symmetric strong monoidal with the signed (−1)^{pq} symmetry, and the signed symmetry being natural on any small ringed site. I recomputed every equation and checked every type. Step 2 gives r C_Z(σ_e)=σ_p s via the comparison/symmetry compatibility and naturality of σ, then H F_p(σ_p)F_p(s)=C(F_eσ_e)η_D by naturality of η. Step 3 inverts the assumed projection square to kC(π_e^{-1})H=(d⊗1)π_p^{-1}, with d=η_B F_p(v)^{-1}, inverting only the assumed-invertible π's. Step 4 gives a_p=C(a_e)d and c C(g_e)=g_p(d^{-1}⊗1)k. Step 5's substitution yields exactly the item's conclusion. Identifying the termwise C_W with Lν^* is elementary (exact pullback, constant A) and is already presupposed by the statement. Edge cases checked: identity comparisons, zero objects, a_e=0 (which forces a_p=0), odd-degree signs, and unbounded-below D^+⊗D^+ (handled by working in unbounded D). Sources read: the comparison paragraph of the thm-sf-pf-proetale proof (main-20261015) and the final paragraph of cor-weil-boundary-duality-discharge. Searching with rg -L found no duplicate; the nearest nodes are lem-weil-boundary-proetale-projection-comparison and lem-weil-pbc-projection-inverse-coefficient-naturality. A reachability check over stmt_deps and proof_deps shows no cycle. The three declared tool uses are accepted as generic monoidal coherence along ν_W (one of them is in the item's own unit)."
  }
 }
