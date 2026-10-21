@@ -5,23 +5,7 @@ Authors: SHEAF group Q146
 -/
 module
 
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
-public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.FiniteTorAmplitudeProEtaleModule
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
-import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.BoundedBelowConstructibleReflection
 import Mathlib.Algebra.CharP.CharAndCard

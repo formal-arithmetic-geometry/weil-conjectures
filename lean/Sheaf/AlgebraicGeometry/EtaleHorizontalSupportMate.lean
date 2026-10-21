@@ -1,20 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact
-public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import WeilConjectures.Compactification.Refinement
-public import WeilConjectures.Compactification.RefinementCategory
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.AlgebraicGeometry.EtaleHorizontalSupportTower
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Sheaf.AlgebraicGeometry.OpenExtensionProperSupportRange
 
 /-!

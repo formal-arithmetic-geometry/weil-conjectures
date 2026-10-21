@@ -6,11 +6,6 @@ Authors: SHEAF group Q27
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionBoundedFlat
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFlatApproximation
 

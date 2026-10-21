@@ -7,23 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
 public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 import Sheaf.AlgebraicGeometry.VectorIntegrationTensorCounit
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 
-import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # The normalized vector integration mate
 

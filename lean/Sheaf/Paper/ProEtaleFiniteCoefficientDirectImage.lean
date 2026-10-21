@@ -5,20 +5,12 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.Paper.SfDerivedDirectImage
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.Topology.KrullDimension
 import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Mathlib.Algebra.CharP.CharAndCard
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.SfDirectImageCTFNonproper

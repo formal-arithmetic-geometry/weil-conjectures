@@ -7,25 +7,12 @@ module
 
 public import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteDualityMaps
-public import Sheaf.Paper.CoefficientRingedTensorHomModel
-public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.Algebra.Homology.BifunctorShift
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.RingedSiteStrictPerfectHom
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.CategoryTheory.Monoidal.Dualizable
-import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Mathlib.CategoryTheory.Sites.LocalProperties
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-! # Perfect duality on a small ringed site
 

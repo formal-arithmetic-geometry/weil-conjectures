@@ -7,16 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.FieldTheory.IsSepClosed
-public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FieldExtensionExchange
 import Sheaf.AlgebraicGeometry.SeparableClosureConservative
 import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 import WeilConjectures.SixFunctors.BaseChange.UniversalHomeomorphism
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Reduction of open-immersion exchange to a separable closure

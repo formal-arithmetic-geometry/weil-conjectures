@@ -7,11 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import Mathlib.CategoryTheory.Comma.Arrow
-import Mathlib.AlgebraicGeometry.Restrict
 
 import WeilConjectures.AlgebraicGeometry.HorizontalDualityMatePasting
-import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Horizontal factorization at a new-base open
 

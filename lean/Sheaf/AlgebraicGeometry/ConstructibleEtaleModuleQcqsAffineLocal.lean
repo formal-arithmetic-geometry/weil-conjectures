@@ -6,15 +6,10 @@ Authors: SHEAF group NW
 module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Mathlib.AlgebraicGeometry.Properties
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Mathlib.Data.List.TFAE
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
-import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Affine locality of constructible etale module sheaves on qcqs schemes

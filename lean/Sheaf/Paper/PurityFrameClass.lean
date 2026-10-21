@@ -6,10 +6,7 @@ Authors: SHEAF group NZ
 module
 
 public import Sheaf.Paper.PurityFramePrincipalBoundary
-public import Sheaf.Paper.SupportedCup
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
-public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 
 /-!

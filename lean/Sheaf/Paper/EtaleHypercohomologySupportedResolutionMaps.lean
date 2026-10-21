@@ -6,7 +6,6 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 import Sheaf.Paper.EtaleHypercohomologySupportedCETotals
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple

@@ -6,7 +6,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import Mathlib.Algebra.Regular.SMul
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient

@@ -6,21 +6,13 @@ Authors: SHEAF group NW
 module
 
 public import Sheaf.Paper.ConstructibleIntervalsUnordered
-public import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
 public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 public import Sheaf.Paper.IntegralScalarExtensionWellDefined
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-public import WeilConjectures.Compactification.Refinement
-public import WeilConjectures.Compactification.RefinementCategory
-public import Mathlib.CategoryTheory.Adjunction.Mates
-public import Mathlib.Algebra.Algebra.Shrink
 public import Mathlib.Algebra.Field.Shrink
-public import Mathlib.LinearAlgebra.Dimension.Free
 
-import Sheaf.Paper.BoundedConstructibleTower
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSupportProjection
 import Sheaf.Paper.SupportScalarProjectionNormalization
 import Sheaf.Paper.ExceptionalSupportProjectionIso
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension

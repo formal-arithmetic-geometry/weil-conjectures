@@ -6,8 +6,6 @@ Authors: SHEAF group Q25
 module
 
 public import Sheaf.Paper.GeneralNearbySliceTest
-public import Mathlib.CategoryTheory.InducedCategory
-public import Mathlib.Topology.KrullDimension
 
 /-!
 # The category of geometric points and strict-local specializations

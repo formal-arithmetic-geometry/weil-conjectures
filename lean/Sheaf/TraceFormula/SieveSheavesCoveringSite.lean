@@ -5,9 +5,7 @@ Authors: SHEAF group Q98
 -/
 module
 
-public import Sheaf.CategoryTheory.Sites.GrothendieckTopos
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Sheaf.CategoryTheory.ToposCompatibleGenerators
 import Sheaf.CategoryTheory.SheafSubcategoryComparison
 

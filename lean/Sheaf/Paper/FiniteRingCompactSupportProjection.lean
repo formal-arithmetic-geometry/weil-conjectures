@@ -9,15 +9,10 @@ public import Sheaf.Paper.FiniteRingCompactSupportProjectionMap
 
 
 import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
-import Mathlib.GroupTheory.Torsion
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 import Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison
 
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
-import Mathlib.Algebra.CharP.CharAndCard
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
 /-!

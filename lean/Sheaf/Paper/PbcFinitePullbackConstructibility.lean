@@ -10,9 +10,7 @@ import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import all Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import all Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 import all Sheaf.AlgebraicGeometry.ProEtaleOperations
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 /-! # Constructible finite-coefficient module pullback
 Source: preservation proof, step 5; Stacks Tags 09AI and 09AL
 (blueprint: lem-weil-pbc-finite-pullback-constructibility).

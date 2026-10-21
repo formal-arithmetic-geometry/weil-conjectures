@@ -1,15 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
-public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.CategoryTheory.Comma.Over.Pullback
-public import Mathlib.CategoryTheory.PathCategory.Basic
-public import Mathlib.Data.Fintype.Order
-public import Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels
-public import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! Declarations of ours that lived in the upstream file
 `WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent` (moved out by the scheduled sync,

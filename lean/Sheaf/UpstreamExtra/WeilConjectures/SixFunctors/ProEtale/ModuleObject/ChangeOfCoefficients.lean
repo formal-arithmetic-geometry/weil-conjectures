@@ -1,11 +1,6 @@
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-! Declarations of ours that lived in the upstream file
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients`

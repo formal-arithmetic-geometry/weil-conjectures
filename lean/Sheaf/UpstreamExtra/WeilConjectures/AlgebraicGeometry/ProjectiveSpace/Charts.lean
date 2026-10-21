@@ -1,10 +1,6 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
-public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-! Declarations of ours that lived in the upstream file
 `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts` (moved out by the scheduled sync,

@@ -12,7 +12,6 @@ import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageScalarShift
 import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageShift
 import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageBalancingCoherence
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Finite-free direct-image coefficient coherence

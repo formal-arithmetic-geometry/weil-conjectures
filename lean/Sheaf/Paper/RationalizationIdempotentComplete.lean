@@ -5,13 +5,9 @@ Authors: SHEAF group Q14
 -/
 module
 
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.RationalizationKaroubi
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 import WeilConjectures.CategoryTheory.Idempotents.TStructure
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.Paper.ConstructibleHeart
 
 /-!

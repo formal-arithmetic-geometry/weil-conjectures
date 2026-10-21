@@ -9,11 +9,8 @@ public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.Paper.IntegralScalarExtension
 
 import Sheaf.Paper.IntegralScalarExtensionConstructible
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
-import Mathlib.Data.Nat.Prime.Infinite
 import Mathlib.Algebra.Field.ULift
-import Mathlib.Algebra.Field.ZMod
 
 /-!
 # Integral scalar extension preserves intrinsic bounded constructibility

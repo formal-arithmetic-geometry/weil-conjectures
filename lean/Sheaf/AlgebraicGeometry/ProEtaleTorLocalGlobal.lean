@@ -11,11 +11,6 @@ import Sheaf.AlgebraicGeometry.CoefficientTorFlatModel
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat
 import Sheaf.Algebra.Homology.SliceTensorNatural
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
-import Mathlib.CategoryTheory.Sites.CoversTop.Basic
-import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
-import Mathlib.Data.Fintype.Order
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-!
 # Local and global finite Tor dimension on a quasi-compact pro-etale site

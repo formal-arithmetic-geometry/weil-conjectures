@@ -6,8 +6,6 @@ Authors: SHEAF group Q10
 module
 
 public import Sheaf.Paper.TorsionCompletionDefinitions
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Mathlib.RingTheory.Nilpotent.Basic
 import Sheaf.CategoryTheory.RingedSiteCompleteElementsLocal
 import Sheaf.CategoryTheory.ScalarLocalizationRegularColimit
 import Sheaf.Paper.TorsionCompletionIdealPowers

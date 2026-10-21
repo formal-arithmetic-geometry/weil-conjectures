@@ -10,17 +10,14 @@ public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 import WeilConjectures.AlgebraicGeometry.KoszulExtCoefficientStalkIso
 import Sheaf.AlgebraicGeometry.KoszulSelfExtExterior
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Constant-rank top scalar Koszul Ext
 

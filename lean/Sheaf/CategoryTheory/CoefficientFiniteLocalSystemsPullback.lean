@@ -6,10 +6,6 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-! # Inverse image of finite module local systems
 

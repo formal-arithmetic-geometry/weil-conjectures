@@ -7,15 +7,10 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Sheaf.CategoryTheory.ScalarLocalization
-public import Mathlib.LinearAlgebra.TensorProduct.Basic
-public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.CategoryTheory.ScalarLocalizationDerivedHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
-import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.CategoryTheory.Preadditive.Opposite
 
 
 /-!

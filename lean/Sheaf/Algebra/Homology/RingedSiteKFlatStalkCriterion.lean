@@ -6,12 +6,9 @@ Authors: SHEAF group N8
 module
 
 public import Sheaf.CategoryTheory.Sites.RingedSitePoint
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
-public import Mathlib.Algebra.Homology.Additive
 import all Sheaf.Paper.KFlatRingedToposPullback
 import all Sheaf.Algebra.Homology.RingedToposAcyclicKFlatPullback
 import Sheaf.Algebra.Homology.RingedSitePointUniversalTensor
@@ -19,8 +16,6 @@ import Sheaf.Algebra.Homology.RingedSitePointKFlatResolution
 import Sheaf.Algebra.Homology.RingedSitePointAcyclic
 import Sheaf.Algebra.Homology.RingedSitePointTensor
 import Sheaf.Algebra.Homology.UniversalAcyclicModuleKFlat
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-!
 # K-flatness and stalks of a ringed site

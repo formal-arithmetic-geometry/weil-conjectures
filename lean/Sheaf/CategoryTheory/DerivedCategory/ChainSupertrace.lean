@@ -6,18 +6,9 @@ Authors: SHEAF group Q61
 module
 
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace
-public import Mathlib.LinearAlgebra.Trace
-import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.Algebra.Homology.ModuleHomComplex
-import Mathlib.Algebra.Category.ModuleCat.Colimits
 import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import WeilConjectures.Algebra.Homology.Monoidal.Supertrace
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
 import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
-import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-!
 # Chain-level supertrace with finite dual frames

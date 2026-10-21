@@ -5,14 +5,7 @@ Authors: SHEAF group Q12
 -/
 module
 
-public import Sheaf.Paper.AdicCoefficientDatum
 public import Sheaf.Paper.PbcActualStrictPullback
-public import Sheaf.Paper.IntrinsicCompletionCompleted
-public import Mathlib.CategoryTheory.Triangulated.Functor
-import Mathlib.CategoryTheory.Triangulated.Adjunction
-import Mathlib.CategoryTheory.Triangulated.Orthogonal
-import Mathlib.CategoryTheory.Localization.Bousfield
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-! # Completed pullback preserves shifts and distinguished triangles
 Source: literature/stacks-project/proetale.tex, Tag 099N (2),(5), with

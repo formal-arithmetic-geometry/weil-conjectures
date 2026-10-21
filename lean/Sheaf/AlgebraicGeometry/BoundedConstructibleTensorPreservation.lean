@@ -5,7 +5,6 @@ Authors: SHEAF group B2
 -/
 module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 import all Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
@@ -13,7 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle
 import Sheaf.AlgebraicGeometry.BoundedConstructibleDevissage
 import Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # BoundedConstructibleTensorPreservation

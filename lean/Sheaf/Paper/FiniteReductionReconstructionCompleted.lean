@@ -6,9 +6,6 @@ Authors: SHEAF group Q22
 module
 
 public import Sheaf.Paper.IntrinsicCompletionCompleted
-public import Sheaf.Paper.SequentialDerivedInverseLimitCompleted
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.Paper.FiniteProjectiveTensorProducts
 import Sheaf.Paper.CompletedReconstructionUnitComparison
 import Sheaf.Paper.CompletedFiniteReductionTensorModel
 

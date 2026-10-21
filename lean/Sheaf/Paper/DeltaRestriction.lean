@@ -6,37 +6,8 @@ Authors: SHEAF group NP, SHEAF group Q145
 module
 
 public import Sheaf.Paper.DualityPairing
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-public import Sheaf.CategoryTheory.RingedDerivedRestriction
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
-public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
-public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
-public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedRestrictionClosed
 import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualCompat
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom

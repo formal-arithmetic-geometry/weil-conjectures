@@ -9,8 +9,6 @@ public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.Paper.ConstructibleIntervals
 public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.Paper.FiniteExceptionalInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Sheaf.Paper.IntrinsicRealizationOriginComparison

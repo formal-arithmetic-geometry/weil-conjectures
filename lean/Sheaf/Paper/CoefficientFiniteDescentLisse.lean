@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.Paper.CoefficientHeartCommonStratification
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import all Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful
 import Sheaf.Paper.LisseFiniteCoefficientModel

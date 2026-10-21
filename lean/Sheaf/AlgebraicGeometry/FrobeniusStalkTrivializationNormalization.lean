@@ -6,8 +6,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
 public import Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence
-public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
-import Mathlib.FieldTheory.Perfect
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!

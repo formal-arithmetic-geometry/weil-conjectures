@@ -10,7 +10,6 @@ public import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineResidueEvaluationHomologyNaturality
 import Sheaf.AlgebraicGeometry.AffinePerfectResidueModelNaturality
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Naturality of strictly perfect affine residue models
 

@@ -6,11 +6,8 @@ Authors: SHEAF group NQ
 module
 
 public import Mathlib.CategoryTheory.Sites.Subcanonical
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
-public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
-import Sheaf.CategoryTheory.FormalCoproductSheafRealization
 import Sheaf.CategoryTheory.FormalCoproductSheafCoverEpi
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers

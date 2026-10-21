@@ -7,7 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorLocalizedNaturality
 public import Sheaf.Algebra.Homology.KFlat
-import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.BaseDerivedExtensionLinear
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.Algebra.Homology.KFlatStalkCriterion

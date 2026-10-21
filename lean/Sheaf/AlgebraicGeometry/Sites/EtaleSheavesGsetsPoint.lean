@@ -6,8 +6,6 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.FieldTheory.KrullTopology
-public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.GaloisStalkActionFunctor

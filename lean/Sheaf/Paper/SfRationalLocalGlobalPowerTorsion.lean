@@ -5,20 +5,9 @@ Authors: SHEAF group Q30
 -/
 module
 
-public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-public import Sheaf.Paper.IntegralReductionTowerUnrestricted
-public import Sheaf.Paper.IntegralConstructibleLinear
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.CategoryTheory.ScalarLocalization
-public import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-public import Mathlib.LinearAlgebra.TensorProduct.Basic
-public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.RingTheory.Localization.BaseChange
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Finite-cover scalar localization gives uniform power torsion

@@ -10,8 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.GrothendieckHypercoverSectionColimit
 import Sheaf.AlgebraicGeometry.FiniteSplitHypercoverSkeletonDescent
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
-import Mathlib.CategoryTheory.Limits.Final
-import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Finite cochain descent generates limit hypercover cohomology -/
 

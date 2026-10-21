@@ -10,7 +10,6 @@ import Sheaf.Paper.IntegralReductionTriangulatedProperty
 import Sheaf.Paper.IntegralReductionTensor
 import Sheaf.Paper.IntegralConstructibleSerre
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Bounded constructibility of integral reduction

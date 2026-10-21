@@ -7,18 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeEtaleCohomology
 public import Sheaf.AlgebraicGeometry.SupportCohomology
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
-public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-public import Mathlib.Algebra.Homology.HomologySequence
-public import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 import Sheaf.Algebra.Homology.KernelShiftedConeBoundary
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
-import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
-import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import WeilConjectures.CategoryTheory.InjectiveSheafMonoRestriction
 
 /-!

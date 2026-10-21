@@ -7,18 +7,6 @@ module
 
 public import Sheaf.Paper.PbcRationalCategory
 public import Sheaf.Paper.ProEtaleFixedModuleConstructible
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Admissible integral lattices for smooth base change

@@ -6,7 +6,6 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.CategoryTheory.Triangulated.Functor
 
 public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftRightUnitor

@@ -5,9 +5,6 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 

@@ -6,7 +6,6 @@ Authors: SHEAF group W2
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties

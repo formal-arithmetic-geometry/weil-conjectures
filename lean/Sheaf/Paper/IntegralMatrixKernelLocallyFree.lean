@@ -6,8 +6,6 @@ module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 import all Sheaf.Paper.IntegralConstructibleKernels
-import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.Paper.IntegralMatrixPivotCover
 
 /-! # Integral matrix kernels with locally free rational cokernel -/
 

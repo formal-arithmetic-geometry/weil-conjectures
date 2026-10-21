@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.InvertibleTensorScalarExtensionDefinitions
 import Sheaf.Paper.ScalarExtensionDualTowerCore
-import Mathlib.Tactic.CategoryTheory.Slice
 
 /-!
 # Tensor powers and duals under scalar extension

@@ -5,45 +5,9 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import Sheaf.Paper.PbcActualRingedExchange
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-public import Mathlib.CategoryTheory.Adjunction.Additive
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!

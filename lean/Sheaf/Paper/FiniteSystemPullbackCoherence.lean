@@ -3,14 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
 module
 
-public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.IntegralFinitePullbackComposition
 public import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
 public import Sheaf.AlgebraicGeometry.VaryingRingOperations
 
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 import Sheaf.CategoryTheory.DerivedExactSquareComposition
 import Sheaf.AlgebraicGeometry.ProEtaleConstantModuleComparisonLocalization

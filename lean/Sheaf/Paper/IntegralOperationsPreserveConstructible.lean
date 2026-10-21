@@ -7,21 +7,14 @@ module
 
 public import Sheaf.Paper.IntegralOperationRoosEffectivity
 public import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.ProEtaleConstructibleSheaf
-import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 import Sheaf.Paper.IntegralResidueTor
 import Sheaf.Paper.FiniteTensorConstructibleCohomology
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import all Sheaf.Algebra.Homology.KFlatResolutionGeneral
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Mathlib.Algebra.Field.ZMod
 import Mathlib.Algebra.Field.ULift
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.Paper.ProEtaleConstantModulePullbackComposition
 import Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback
-import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
 # Integral pullback and completed tensor preserve constructibility

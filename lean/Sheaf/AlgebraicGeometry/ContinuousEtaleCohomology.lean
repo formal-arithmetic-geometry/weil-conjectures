@@ -12,10 +12,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import Mathlib.Algebra.Homology.Functor
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.CategoryTheory.Functor.OfSequence
-public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
 import WeilConjectures.CategoryTheory.RingObjects.Ab
 import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension

@@ -5,8 +5,6 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.SingleComplexQcqsInduction
 
 /-! # The affine single-complex base-change criterion
@@ -15,7 +13,6 @@ The public affine statement is obtained by specializing the closed qcqs inductio
 criterion to the four maps between affine spectra. The original coordinate proof
 is retained as singleComplexAffineBaseChangeCore in the lower homology module;
 it supplies the affine case used by the open-source induction without creating an
-import cycle.
 -/
 
 @[expose] public section

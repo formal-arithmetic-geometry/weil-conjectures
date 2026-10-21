@@ -6,7 +6,6 @@ module
 
 public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-! # Uniform reduction cohomology
 Source: uniform triangulation supplement, steps 2 and 5.

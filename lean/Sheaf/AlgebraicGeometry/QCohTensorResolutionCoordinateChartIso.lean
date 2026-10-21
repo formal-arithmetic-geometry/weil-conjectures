@@ -1,6 +1,5 @@
 /- Copyright (c) 2026 The SHEAF contributors. All rights reserved. -/
 module
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso
 public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionCoordinateSheafIso
 
 @[expose] public section

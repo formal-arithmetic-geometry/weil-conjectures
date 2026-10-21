@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import Mathlib.Algebra.Regular.SMul
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootFiniteEtaleModel
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection

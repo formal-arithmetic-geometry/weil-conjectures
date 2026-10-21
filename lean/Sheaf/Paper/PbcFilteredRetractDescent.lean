@@ -6,7 +6,6 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.Paper.FiniteStagePairCategory
-public import Mathlib.CategoryTheory.Idempotents.Basic
 
 /-!
 # Filtered retract descent for finite PBC coefficient stages

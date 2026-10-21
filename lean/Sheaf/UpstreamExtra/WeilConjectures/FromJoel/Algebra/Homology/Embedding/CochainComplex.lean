@@ -1,9 +1,6 @@
 module
 
-public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.TruncGE
-public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.TruncLE
 
 /-! Declarations of ours that lived in the upstream file
 `WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex`

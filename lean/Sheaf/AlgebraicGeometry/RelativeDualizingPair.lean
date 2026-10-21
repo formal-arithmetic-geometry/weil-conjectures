@@ -7,13 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
-public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 -- The successor-universe sheafification instance gets stuck on coefficient-universe goals.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

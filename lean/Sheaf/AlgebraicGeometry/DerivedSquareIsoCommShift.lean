@@ -5,7 +5,6 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-!

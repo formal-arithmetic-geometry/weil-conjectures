@@ -6,7 +6,6 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.CategoryTheory.DerivedCountableSumsExact
 

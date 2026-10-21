@@ -9,19 +9,12 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocallyProjective
 public import Sheaf.AlgebraicGeometry.AdmissibleCondensedCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
-public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.CategoryTheory.DerivedCoyonedaEvaluation
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteProjectiveDualizable
 import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 
 /-!
 # Global derived Hom out of a stratum extension

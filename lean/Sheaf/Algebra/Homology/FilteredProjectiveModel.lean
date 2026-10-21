@@ -6,18 +6,9 @@ Authors: SHEAF group Q110
 module
 
 public import Sheaf.Algebra.Homology.TwoStepFilteredModuleDerived
-public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
-public import WeilConjectures.CategoryTheory.PBCFiltration
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-public import Mathlib.RingTheory.Finiteness.Defs
-public import Mathlib.Algebra.Module.Projective
 import Sheaf.Algebra.Homology.FilteredProjectiveComparison
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingTriangleClosure
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-!
 # A finite projective model of a two-step filtered endomorphism

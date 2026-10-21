@@ -7,12 +7,10 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Sheaf.Paper.WeilTensorProduct
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Tor intervals survive slice restriction

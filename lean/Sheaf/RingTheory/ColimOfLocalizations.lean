@@ -1,12 +1,7 @@
 module
 
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
-public import Mathlib.CategoryTheory.Category.Preorder
-public import Mathlib.CategoryTheory.Filtered.Basic
-public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.FiniteType
-public import Mathlib.RingTheory.Localization.Away.Basic
-public import Mathlib.RingTheory.Localization.FractionRing
 
 @[expose] public section
 

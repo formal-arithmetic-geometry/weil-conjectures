@@ -5,11 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.BoundedConstructibleComplete
-public import Mathlib.CategoryTheory.Triangulated.Functor
 
 import Sheaf.Paper.PbcCompletedPullbackActual
-import Mathlib.CategoryTheory.Triangulated.Adjunction
-import Mathlib.CategoryTheory.Triangulated.Orthogonal
 
 /-! # Exact completion from the actual reflector
 Source: the completion argument of the uniform triangulation node.

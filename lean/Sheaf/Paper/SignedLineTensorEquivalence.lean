@@ -7,9 +7,6 @@ module
 public import Sheaf.Paper.CoefficientTwistsDetailed
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
-import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-! # Signed powers of a line give inverse tensor functors
 

@@ -8,14 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectLowestMatrixCharts
 import WeilConjectures.AlgebraicGeometry.LocalClosedLocusGluing
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 import WeilConjectures.AlgebraicGeometry.DerivedOpenPullbackHomology
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The lowest matrix-zero closed locus
 

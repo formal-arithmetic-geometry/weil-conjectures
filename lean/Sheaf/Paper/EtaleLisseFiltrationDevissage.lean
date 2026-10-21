@@ -6,9 +6,6 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
-public import Mathlib.CategoryTheory.Abelian.Subobject
-public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
-public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 import Sheaf.Paper.CohomologyInWeakSerreSubcategory

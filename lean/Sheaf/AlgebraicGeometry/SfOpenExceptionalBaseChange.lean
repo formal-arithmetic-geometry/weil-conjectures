@@ -7,22 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.SfFiniteOpenExtensionBaseChange
 public import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
-public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.AlgebraicGeometry.SfConstructibleExceptionalAdjointDischarge
 import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
-import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.FullCdAmbientAdjoint
-import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 -- Retained as a step of the comparison unit used by the coefficient realization.
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 import Sheaf.AlgebraicGeometry.ProperExceptionalOpenBaseChange
 
 /-!

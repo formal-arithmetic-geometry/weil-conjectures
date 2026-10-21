@@ -7,9 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.Paper.RingedEtaleOriginWitness
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Open-adjunction normalization of proper/open comparison on strict towers

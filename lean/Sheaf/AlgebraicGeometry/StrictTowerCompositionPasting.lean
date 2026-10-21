@@ -7,9 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictTowerCompositionMaps
 import all Sheaf.Paper.RefinementExchangeCoherence
-import Mathlib.Algebra.Ring.PUnit
 import all Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-import Sheaf.AlgebraicGeometry.StrictTowerDirectImageCoherence
 
 /-!
 # Composition pasting for strict constant-coefficient towers

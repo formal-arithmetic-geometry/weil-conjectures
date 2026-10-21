@@ -5,7 +5,6 @@ Authors: SHEAF group Q53
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
@@ -15,11 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Finiteness
 import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Mathlib.Data.Set.Finite.Lattice
 import Sheaf.Paper.FiniteCompactSupportScalarComparison
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.CompactificationCoherence
 
 /-!
 # Finite-level bounded constructibility for proper support

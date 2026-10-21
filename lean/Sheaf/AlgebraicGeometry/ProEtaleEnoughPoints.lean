@@ -7,11 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
-import Mathlib.CategoryTheory.Limits.FullSubcategory
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.AlgebraicGeometry.ProEtaleAffineSubsiteEquivalence
 import Sheaf.CategoryTheory.Sites.FinitarySliceEnoughPoints
 

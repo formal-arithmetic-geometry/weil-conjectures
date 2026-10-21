@@ -1,8 +1,6 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Finite affine refinement of a pro-etale cover
