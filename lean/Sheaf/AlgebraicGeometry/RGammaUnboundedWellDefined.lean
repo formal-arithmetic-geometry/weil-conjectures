@@ -3,7 +3,6 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Independence of unbounded derived global sections from a K-injective resolution
@@ -20,6 +19,43 @@ universe u
 open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
+
+private lemma homotopy_of_derived_eq
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {I J : CochainComplex A ℤ} [J.IsKInjective] (f g : I ⟶ J)
+    (h : DerivedCategory.Q.map f = DerivedCategory.Q.map g) : Nonempty (Homotopy f g) := by
+  refine ⟨HomotopyCategory.homotopyOfEq f g ?_⟩
+  apply (CochainComplex.IsKInjective.Qh_map_bijective
+    ((HomotopyCategory.quotient A (.up ℤ)).obj I) J).injective
+  rw [← cancel_mono ((DerivedCategory.quotientCompQhIso A).hom.app J)]
+  simp only [DerivedCategory.quotientCompQhIso_hom_naturality, h]
+
+private lemma exists_comparison
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    (I J : CochainComplex A ℤ) [J.IsKInjective]
+    (f : DerivedCategory.Q.obj I ⟶ DerivedCategory.Q.obj J) :
+    ∃ g : I ⟶ J, DerivedCategory.Q.map g = f := by
+  obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+    ((HomotopyCategory.quotient A (.up ℤ)).obj I) J).surjective
+      ((DerivedCategory.quotientCompQhIso A).hom.app I ≫ f ≫
+        (DerivedCategory.quotientCompQhIso A).inv.app J)
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient A (.up ℤ)).map_surjective g
+  refine ⟨g, ?_⟩
+  rw [← cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app I),
+    ← DerivedCategory.quotientCompQhIso_hom_naturality, hg]
+  simp
+
+private lemma map_comparison_isIso
+    {A B : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    [Category B] [Abelian B] [HasDerivedCategory B]
+    (F : A ⥤ B) [F.Additive] {I J : CochainComplex A ℤ}
+    [I.IsKInjective] [J.IsKInjective] (f : I ⟶ J)
+    [IsIso (DerivedCategory.Q.map f)] :
+    IsIso (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map f)) := by
+  have hf : QuasiIso f := (DerivedCategory.isIso_Q_map_iff_quasiIso A f).mp inferInstance
+  obtain ⟨h, rfl⟩ := (CochainComplex.IsKInjective.quasiIso_iff f).mp hf
+  have := (F.mapHomotopyEquiv h).quasiIso_hom
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso B _).mpr this
 
 /-- Any comparison of two K-injective resolutions induces the canonical isomorphism on
 unbounded derived global sections, and the result is independent of the comparison and,
@@ -93,6 +129,52 @@ theorem rgamma_unbounded_well_defined (Λ : Type (u + 1)) [CommRing Λ]
           (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map f) =
         DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology
           (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map g)) := by
-  sorry
+  let := hs.1
+  let := hs.2
+  let := ht.1
+  let := ht.2
+  let F := Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  have comparison_eq (f : I ⟶ J) (hf : Nonempty (Homotopy (s ≫ f) t)) :
+      DerivedCategory.Q.map s ≫ DerivedCategory.Q.map f = DerivedCategory.Q.map t := by
+    rw [← Functor.map_comp]
+    exact DerivedCategory.Q_map_eq_of_homotopy _ hf.some
+  refine ⟨?_, ?_, ?_⟩
+  · intro f hf
+    have : IsIso (DerivedCategory.Q.map s ≫ DerivedCategory.Q.map f) := by
+      rw [comparison_eq f hf]
+      infer_instance
+    have : IsIso (DerivedCategory.Q.map f) :=
+      IsIso.of_isIso_comp_left (DerivedCategory.Q.map s) (DerivedCategory.Q.map f)
+    exact map_comparison_isIso F f
+  · intro f g hf hg
+    have hfg : DerivedCategory.Q.map f = DerivedCategory.Q.map g := by
+      rw [← cancel_epi (DerivedCategory.Q.map s), comparison_eq f hf, comparison_eq g hg]
+    exact DerivedCategory.Q_map_eq_of_homotopy _
+      (F.mapHomotopy (homotopy_of_derived_eq f g hfg).some)
+  · intro C' I' e' s' hs'
+    let := hs'.1
+    let := hs'.2
+    let a := e.inv ≫ DerivedCategory.Q.map s
+    let b := e'.inv ≫ DerivedCategory.Q.map s'
+    have : IsIso a := by dsimp [a]; infer_instance
+    have : IsIso b := by dsimp [b]; infer_instance
+    refine ⟨?_, ?_⟩
+    · obtain ⟨f, hf⟩ := exists_comparison I I' (inv a ≫ b)
+      refine ⟨f, ?_⟩
+      rw [← Category.assoc]
+      change a ≫ DerivedCategory.Q.map f = b
+      rw [hf, IsIso.hom_inv_id_assoc]
+    · intro f g hf hg
+      rw [← Category.assoc] at hf hg
+      change a ≫ DerivedCategory.Q.map f = b at hf
+      change a ≫ DerivedCategory.Q.map g = b at hg
+      have : IsIso (a ≫ DerivedCategory.Q.map f) := by rw [hf]; infer_instance
+      have : IsIso (DerivedCategory.Q.map f) :=
+        IsIso.of_isIso_comp_left a (DerivedCategory.Q.map f)
+      refine ⟨map_comparison_isIso F f, ?_⟩
+      have hfg : DerivedCategory.Q.map f = DerivedCategory.Q.map g := by
+        rw [← cancel_epi a, hf, hg]
+      exact DerivedCategory.Q_map_eq_of_homotopy _
+        (F.mapHomotopy (homotopy_of_derived_eq f g hfg).some)
 
 end AlgebraicGeometry.Etale
