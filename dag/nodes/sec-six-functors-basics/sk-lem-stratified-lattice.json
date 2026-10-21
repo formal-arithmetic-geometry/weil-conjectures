@@ -20,98 +20,104 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian because its only ideals are $0$ and the whole field. Thus $\\operatorname{Spec}k$ is Noetherian, and [lem-weil-pbc-finite-type-over-noetherian] makes the standing $X$ Noetherian. Choose a finite affine cover with Noetherian coordinate rings. Each chart is topologically Noetherian by [lem-sc-affine-noetherian-underlying-space]. An ascending chain of opens of $X$ stabilizes on each chart, hence on $X$ by taking the maximum of the finitely many stabilization indices. Thus $X$ is topologically Noetherian. Every open subset is quasi-compact: an open cover without a finite subcover would give a strictly increasing sequence of finite unions of its members. In particular $X$ and the intersections of any two affine opens are quasi-compact, so $X$ is qcqs. We may work with the continuous coefficient sheaves $U\\mapsto C(|U|,\\cO_E)$ and $U\\mapsto C(|U|,E)$: [lem-weil-pbc-continuous-coefficient-realizations] identifies them with the pulled condensed coefficients, compatibly with the inclusion $\\cO_E\\to E$. Its total-disconnectedness hypothesis holds: distinct points of an ultrametric field are separated by disjoint clopen balls; the valuation ring inherits this property. Module-object actions are precisely the sectionwise module laws, so these ring isomorphisms transport the modules and their inclusions. By [det-prop-sfb-qlbar-colimit-x-invert-ell], the integral-to-rational coefficient map is localization at $\\ell$. These identifications will also be used on every scheme appearing below.",
+   "text": "A field is Noetherian. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. A finite affine cover has Noetherian underlying charts by [lem-sc-affine-noetherian-underlying-space]; an ascending chain of opens stabilizes on each chart, hence on $X$ at the maximum of the finitely many indices. By [lem-sfb-noetherian-space-compact-subsets] every open and every affine intersection is quasi-compact, so $X$ is qcqs.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Standing finite-type hypothesis before Sheaf of lattices"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-continuous-coefficient-realizations] to identify pulled condensed coefficients with continuous ones, compatibly with $A=\\cO_E\\to E$. Its total-disconnectedness hypothesis holds: disjoint clopen ultrametric balls separate points of $E$, and $A$ inherits this. Module-object actions are precisely the sectionwise module laws, so these ring isomorphisms transport the modules and their inclusions. By [det-prop-sfb-qlbar-colimit-x-invert-ell], scalar extension is inversion of $\\ell$. The same identifications apply on all schemes below.",
+   "uses": [
     "lem-weil-pbc-continuous-coefficient-realizations",
     "det-prop-sfb-qlbar-colimit-x-invert-ell"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.1 and Lemma 6.8.2; continuous realization comparison and the standing finite-type hypothesis"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Sheaf of lattices: coefficient convention"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-continuous-etale-local-lattice] to $L$, regarded through step 1 as an internal continuous rational module. It gives a qcqs scheme $V$, an étale surjection $p:V\\to X$, a pro-étale locally finite free integral module $M_0$ on $V$, and an isomorphism $M_0[1/\\ell]\\simeq p^*L$. The natural map $M_0\\to M_0[1/\\ell]$ is injective: on a trivializing cover it is a finite direct sum of the injective inclusion $C(-,\\cO_E)\\to C(-,E)$. Compose with the displayed isomorphism to regard $M_0$ as a lattice submodule of $p^*L$. This is the sheaf-of-lattices and finite-cover part of the blueprint: the cited theorem already allows varying finite ranks and supplies the quasi-compact cover, so no reduction to a globally constant rank is needed.",
+   "text": "By [lem-weil-pbc-continuous-etale-local-lattice], choose a qcqs étale surjection $p:V\\to X$ and locally finite free $M$ with $E_V\\otimes M\\cong p^*L$. Its unit inclusion is injective on free charts because $A\\to E$ is injective, so it embeds as a lattice in $p^*L$.",
    "uses": [
     "lem-weil-pbc-continuous-etale-local-lattice"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6) and the initial finite-cover reduction of Lemma 6.8.13"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Sheaf of lattices: finite-cover reduction"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-etale-stratified-finite] to $p:V\\to X$, whose source and target are qcqs. Obtain finitely many constructible locally closed subschemes $S_a\\to X$ partitioning $X$ and finite étale morphisms $p_a:V\\times_X S_a\\to S_a$. Every $p_a$ is surjective: for a point of $S_a$ a point in the nonempty fibre of $p$ remains after the residue-field extension defining that fibre product. The locally free modules and their rationalization isomorphisms pull back to these schemes by [lem-weil-pbc-continuous-locally-free-pullback]; the coefficient identifications of step 1 intertwine the integral-to-rational maps. Explicitly, on a chart with integral basis $e_1,\\ldots,e_r$, scalar extension has rational basis $1\\otimes e_1,\\ldots,1\\otimes e_r$. Inverse image pulls these bases back to bases for the corresponding coefficient rings on the base-changed chart. The matrix of the given rationalization isomorphism and the matrix of its inverse pull back to inverse matrices, since pullback preserves their two product identities. Thus the pulled-back scalar-extension map is the rationalization isomorphism on these charts; the maps agree on overlaps because they are induced by the original map. The integral inclusion is injective in these bases, so the pulled-back $M_0$ remains a lattice. Fix one nonempty $S=S_a$ and write $p:V_S\\to S$, $M=M_0|_{V_S}$ and $L_S=L|_S$.",
+   "text": "Apply [lem-weil-pbc-etale-stratified-finite] to $p$. On each stratum $S$, its base change $p_S$ is finite étale; it is surjective, since for a point of $S$ a point of the nonempty fibre of $p$ survives the residue-field extension defining the fibre of $p_S$. Part (2) of [det-lem-coefficient-heart-common-stratification] gives that $L|_S$ is lisse. Apply [lem-sfb-lattice-pullback] along $V\\times_X S\\to V$ to obtain an embedded lattice $M_S\\subseteq p_S^*(L|_S)$.",
    "uses": [
     "lem-weil-pbc-etale-stratified-finite",
-    "lem-weil-pbc-continuous-locally-free-pullback"
+    "lem-sfb-lattice-pullback",
+    "det-lem-coefficient-heart-common-stratification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S0 (etale-cohomology-lemma-etale-stratified-finite); blueprint proof, Pushing down by the trace"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace"
    }
   },
   {
-   "text": "By [lem-weil-pbc-finite-etale-etale-local-split], $S$ has an étale covering on which $V_S$ is a finite disjoint union of copies of the base. On a splitting with sheets indexed by a finite set $J$, define $\\operatorname{Tr}:p_*p^*L_S\\to L_S$ by $(s_j)_{j\\in J}\\mapsto\\sum_js_j$. Two splittings, after a common étale refinement, differ by a permutation of the sheets on clopen pieces. Finite sums are invariant under these permutations, so the maps agree on overlaps and glue by the sheaf axiom. This constructs an $E_S$-linear trace on the pro-étale site itself. Define $L_0\\subseteq L_S$ to consist of sections which locally are traces of sections of $p_*M$. This is an $\\cO_{E,S}$-submodule sheaf: local expressions remain such on restriction and glue locally; after a common refinement, sums of trace expressions and their integral scalar multiples are traces of the corresponding sums and multiples of sections of $p_*M$. On a splitting write $M_j\\subseteq L_S$ for its restrictions to the sheets; the definition then gives $L_0=\\sum_{j\\in J}M_j$. Surjectivity of $p$ implies $J\\ne\\varnothing$ over any nonempty splitting neighbourhood.",
+   "text": "By [lem-sfb-finite-etale-trace-image], define $L_0$ as the integral trace image. By [lem-weil-pbc-finite-etale-etale-local-split], étale splitting neighbourhoods cover $S$; there the image is the sum of the sheet lattices. The sheet set is nonempty on every nonempty neighbourhood because $p_S$ is surjective.",
    "uses": [
+    "lem-sfb-finite-etale-trace-image",
     "lem-weil-pbc-finite-etale-etale-local-split"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace, definition of the trace and its local sum description (splitting: Stacks Tag 04HN)"
+    "place": "Pushing down by the trace"
    }
   },
   {
-   "text": "Refine a splitting neighbourhood pro-étale locally to make $L_S\\simeq E_S^r$. By [lem-weil-pbc-lattice-sheaf-locally-constant], each embedded lattice $M_j\\subseteq E_S^r$ is represented by a section of the constant sheaf on $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(\\cO_E)$. A section of a constant sheaf is locally the image of an element of that set. Since $J$ is finite, successively refining these finitely many covers gives a common pro-étale refinement on which every $M_j$ is the continuous coefficient module of a fixed lattice $\\Lambda_j\\subseteq E^r$. Thus the remaining question concerns the finite sum $\\Lambda=\\sum_{j\\in J}\\Lambda_j$ inside $E^r$. This uses the full classification assertion of the cited node, rather than a representability assertion with a missing classification clause.",
+   "text": "Trivialize $L|_S$ pro-étale locally. By [lem-weil-pbc-lattice-sheaf-locally-constant] every sheet lattice is a section of the constant sheaf on $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$, hence locally one coset $g_j$: a fixed lattice $\\Lambda_j=g_jA^r\\subseteq E^r$. Refine the finitely many covers successively to fix them together. By [lem-sfb-finite-sum-lattice], $\\Lambda=\\sum_j\\Lambda_j$ has a basis homeomorphism $A^r\\simeq\\Lambda$. By [lem-sfb-continuous-lattice-sum], the sheet-sheaf sum is the continuous-function sheaf of $\\Lambda$, free over $A$, with inclusion inducing an isomorphism after rationalization.",
    "uses": [
-    "lem-weil-pbc-lattice-sheaf-locally-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), identification of the lattice sheaf with the discrete lattice-coset sheaf; blueprint trace paragraph"
-   }
-  },
-  {
-   "text": "The union of finite bases of the $\\Lambda_j$ generates $\\Lambda$ over $\\cO_E$. As a submodule of $E^r$, $\\Lambda$ is torsion-free. By [lem-weil-l-adic-extension-integers-dvr], $\\cO_E$ is a DVR with fraction field $E$, so [lem-sc-dvr-fg-torsionfree-free] makes $\\Lambda$ finite free. Because $J\\ne\\varnothing$, $\\Lambda$ contains a lattice $\\Lambda_j$ spanning $E^r$; its localization at $\\ell$ is therefore $E^r$, and its free rank is $r$. Give $\\Lambda$ and every $\\Lambda_j$ their subspace topologies in $E^r$. The chosen $\\cO_E$-basis of $\\Lambda$ is an $E$-basis of $E^r$, since $\\Lambda[1/\\ell]=E^r$. Its basis matrix and inverse over $E$ define continuous inverse maps on $E^r$ (each coordinate is a finite sum of scalar products). Restricting them identifies $\\cO_E^r$ homeomorphically with $\\Lambda$. The same argument applies to each $\\Lambda_j$. Moreover the sheaf sum of the continuous modules of the $\\Lambda_j$ equals the continuous module of $\\Lambda$. Indeed $\\bigoplus_j\\Lambda_j\\to\\Lambda$ is a surjective linear map and has a linear section: choose a basis of the free module $\\Lambda$ and a preimage of each basis vector. In chosen finite bases this section is a matrix over $\\cO_E$, hence is continuous. Applying continuous functions on any site object therefore preserves this surjection and its section. This verifies the trace-image computation at the level of sheaves, not just at individual fibres.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sc-dvr-fg-torsionfree-free"
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-sfb-finite-sum-lattice",
+    "lem-sfb-continuous-lattice-sum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace, finite sum of lattices; algebraic freeness: Stacks Tag 0AUW (more-algebra-lemma-dedekind-torsion-free-flat), part (3)"
+    "place": "Pushing down by the trace"
    }
   },
   {
-   "text": "On the common covering of steps 5 and 6, $L_0$ is consequently isomorphic to $\\cO_{E,S}^r$, and its inclusion into $L_S$ becomes an isomorphism after inverting $\\ell$. Both conclusions are local: the first is exactly the definition of lisse, while the localization maps glue because each is induced by the one inclusion $L_0\\subseteq L_S$. An isomorphism can be checked on a cover, since its local inverses agree on overlaps and hence glue. This supplies a lisse lattice on every nonempty $S_a$; discard empty strata. If $X$ is empty take the empty stratification, and if a local rank is zero take the zero lattice. The finitely many $S_a$ are the required stratification.",
+   "text": "These are local assertions: local freeness is the definition of lisse; the local inverses to rationalization agree and glue. Hence $L_0$ is a lattice on each stratum. Discard empty strata; empty $X$ has the empty stratification, and rank zero gives the zero lattice.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Final two sentences of Pushing down by the trace"
+    "place": "Pushing down by the trace"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
   "lem-weil-pbc-continuous-coefficient-realizations",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-weil-pbc-continuous-etale-local-lattice",
   "lem-weil-pbc-etale-stratified-finite",
-  "lem-weil-pbc-continuous-locally-free-pullback",
+  "lem-sfb-lattice-pullback",
+  "det-lem-coefficient-heart-common-stratification",
+  "lem-sfb-finite-etale-trace-image",
   "lem-weil-pbc-finite-etale-etale-local-split",
   "lem-weil-pbc-lattice-sheaf-locally-constant",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-sc-dvr-fg-torsionfree-free"
+  "lem-sfb-finite-sum-lattice",
+  "lem-sfb-continuous-lattice-sum"
  ],
  "proof_origin": {
   "by": "agent",
@@ -212,47 +218,51 @@
   "det-lem-stratified-lattice-trace"
  ],
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "sk-lem-stratified-lattice",
   "worker": "stage1",
-  "summary": "Retained the theorem and motivational example, expanded coefficient and standing-scheme conventions, and wrote the stratification/trace argument using existing acyclic tools. No new nodes. Avoided imported rank, lattice-scheme and trace nodes whose inherited dependencies lead back to this item. Explicitly verified the trace image as a sheaf by a continuous splitting of a finite free module surjection. Second reading made the affine-to-topological Noetherian argument, scalar-extension pullback comparison, integral closure of the trace image, and lattice-topology calculation explicit.",
-  "blueprint": "The first two blueprint proof paragraphs are realized by steps 1–2 using the existing varying-rank étale-local lattice theorem; the final paragraph is realized by steps 3–7: finite stratification, trace, common lattice trivialization, finite sum and local gluing. No change to the sheaf-of-lattices → finite étale strata → trace route.",
+  "summary": "Repair of the human coarse-split return, following the latest explicit route note: statement and Lean record unchanged; four extracted helper assertions are delivered statement-only with status unsplit, sources and the retained executed Mathlib searches. The parent is the short assembly of those inputs and existing cover, stratification and lattice-classification nodes. Earlier helper proofs are preserved in report.md for future workers. The trace step now directly cites existence of étale splitting neighbourhoods.",
+  "blueprint": "Same sheaf-of-lattices → finite étale strata → trace route. Steps 1–3 handle the standing hypotheses and étale local lattice; steps 4–7 carry Pushing down by the trace, citing four new statement-only helpers. No unit route is replaced.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Standing finite-type schemes are Noetherian, needed for the existing étale-local lattice tool."
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
    },
    {
     "node": "lem-weil-pbc-continuous-coefficient-realizations",
-    "why": "Identifies the condensed coefficients with continuous coefficient sheaves, compatibly with integral inclusion."
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
    },
    {
     "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "why": "Identifies rationalization with localization at ell."
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
    },
    {
     "node": "lem-weil-pbc-continuous-etale-local-lattice",
-    "why": "Supplies a qcqs étale cover and lattice, implementing the blueprint first half without its cyclic detail imports."
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
    },
    {
     "node": "lem-weil-pbc-etale-stratified-finite",
-    "why": "Generic finite-stratification theorem for a qcqs étale map; no independent valid stratification statement is provided by this item’s detail nodes."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-locally-free-pullback",
-    "why": "Pulls locally free integral and rational modules to each stratum."
-   },
-   {
-    "node": "lem-weil-pbc-finite-etale-etale-local-split",
-    "why": "Splits the finite étale cover into finitely many sheets to construct and compute the trace."
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
    },
    {
     "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
-    "why": "Gives precisely the local coset classification needed to trivialize embedded lattices simultaneously."
+    "why": "Reusable input for this proof; its exact statement supplies the assertion cited, with no replacement of the unit trace route."
    },
    {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Provides the DVR and fraction-field properties used on the finite sum of lattices."
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Supplies the étale splitting neighbourhoods needed to apply the local trace-image formula; a generic finite étale tool within the blueprint trace route."
+   },
+   {
+    "node": "det-lem-coefficient-heart-common-stratification",
+    "why": "Part (2) supplies lisse restriction to the locally closed strata; this also realizes the unit’s stated coefficient-heart dependency without changing its trace route."
    }
   ]
  },
@@ -265,15 +275,18 @@
   "lem-weil-pbc-continuous-locally-free-pullback",
   "lem-weil-pbc-finite-etale-etale-local-split",
   "lem-weil-pbc-lattice-sheaf-locally-constant",
-  "lem-weil-l-adic-extension-integers-dvr"
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "det-lem-coefficient-heart-common-stratification"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q47-6e20b989e",
-  "group": "Q47",
+  "reviewer": "NT-cc-Q46-bf963406e",
+  "group": "Q46",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-6e20b989e (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, every cited node and source, blueprint route, coefficient categories, base-change maps, edge cases, and dependency cycles. The mathematics is sound and no repair files are needed. The item lacks maintainer-owned chapter/unit bindings; coord/dag-sync.md requires those to be corrected authoritatively before merge."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-bf963406e (reviewer sub-agent of L); spot-checked: Read the human's re-split note from 2026-10-21, the base 7-step proof, the blueprint proof with its rank, scheme and trace detail nodes, Stacks 0AUW, every cited statement and all four new nodes in full. The parent statement and the Lean record are unchanged; the coefficient categories and the localization meaning of [1/l] are unchanged; no SGA source is used. The substantial arguments of base steps 3, 4 and 6 became four self-contained statement-only unsplit nodes of comparable size: lem-sfb-lattice-pullback, lem-sfb-finite-etale-trace-image, lem-sfb-finite-sum-lattice and lem-sfb-continuous-lattice-sum. Each is cited by the step that uses it and none restates the item. All four are true: tested on rank 0, empty and degree-1 covers, A+pi^-m A, and ramified E. Each has five executed searches with no Mathlib match. Duplicate scan: det-lem-stratified-lattice-trace is larger (Noetherian S, constant rank, stratification conclusion) and det-sp-trace-basic is unrelated. The newly cited det-lem-coefficient-heart-common-stratification(2) gives lisse restriction to locally closed strata, and the cycle check is clean. The step-by-step comparison found three one-line arguments dropped or compressed: the transport of module objects through the sectionwise module laws (base step 1), the reason p_S is surjective via the nonempty fibre (base step 3), and 'a section of the constant coset sheaf is locally one coset' (base step 5). I restored them, plus the finitely-many-indices remark and A=O_E, in the parent text. The proof is now 2909 characters (at most 3000) and proof_deps are unchanged. The declared tool uses are the same generic tools accepted at the base review, so they are accepted. The maintainer should recompute the node-level tool_uses, which still lists the base entries continuous-locally-free-pullback and l-adic-extension-integers-dvr that the parent no longer cites.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-stratified-lattice",
