@@ -21516,3 +21516,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:59 L: merged deliver/Q98/lem-sp-koszul-roos-projection-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:59 L: merged deliver/Q79/lem-pur-quotient-diagram-projection-evaluation (reviewer FIX; first push; new nodes: 0)
 - 08:59 L: merged deliver/Q76/lem-pur-total-tensor-signed-coherence (reviewer FIX; first push; new nodes: 0)
+- 08:59 L: merged deliver/Q45/lem-sfb-coefficient-diagram-regular-scalars (reviewer PASS; first push; new nodes: 0)

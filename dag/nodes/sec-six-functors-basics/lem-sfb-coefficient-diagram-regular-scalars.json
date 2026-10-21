@@ -16,9 +16,100 @@
   "def-sfb-modobj-extension",
   "sk-def-sfb-module-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the asserted module endomorphisms. For any one of the commutative ring objects $Z=\\Lambda,R,T,S$ and $b:\\mathbf1\\to Z$, braiding naturality [lem-sfb-braiding-naturality] gives\n$$\\beta_{Z,Z}(1_Z\\otimes b)=(b\\otimes1_Z)\\beta_{Z,\\mathbf1}.$$\nBy [lem-sfb-braiding-unitors], $\\lambda_Z\\beta_{Z,\\mathbf1}=\\rho_Z$. Composing these equalities with $\\mu_Z$, and using $\\mu_Z\\beta_{Z,Z}=\\mu_Z$ from [sk-def-sfb-ring-object], yields\n$$t_b=\\mu_Z(1_Z\\otimes b)\\rho_Z^{-1}.$$\nWrite $A$ for the ambient associator. Associativity now gives the equality of maps $Z\\otimes Z\\to Z$\n$$t_b\\mu_Z=\\mu_Z(\\mu_Z\\otimes b)\\rho_{Z\\otimes Z}^{-1}\n=\\mu_Z(1_Z\\otimes\\mu_Z)A_{Z,Z,Z}(1_{Z\\otimes Z}\\otimes b)\\rho_{Z\\otimes Z}^{-1}\n=\\mu_Z(1_Z\\otimes t_b).$$\nThe first equality is naturality of $\\rho^{-1}$, and the last is naturality of $A$ together with the structural unit identifications of [lem-coef-monoidal-structural-coherence]. This is exactly regular-module linearity in [sk-def-sfb-module-objects]. All these are morphism identities, using no elements or sections.",
+   "uses": [
+    "lem-sfb-braiding-naturality",
+    "lem-sfb-braiding-unitors",
+    "sk-def-sfb-ring-object",
+    "lem-coef-monoidal-structural-coherence",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0HAY, lemma-monoidal-coherence; direct calculation with the ring-object axioms and braiding identities"
+   }
+  },
+  {
+   "text": "Let $G$ stand for $P$ or $Q$, and write $u^G_{X,Y}$ for its tensor comparison. The left unit coherence in [def-sfb-strong-monoidal-functor], solved for the inverse unitor, reads\n$$G(\\lambda_Z^{-1})=u^G_{\\mathbf1,Z}(\\varepsilon_G\\otimes1_{GZ})\\lambda_{GZ}^{-1}.$$\nUsing the tensorator naturality from that same definition and the transported multiplication of [det-def-sfb-ring-object-transport], compute\n$$\\begin{aligned}\nG(t_b)&=G(\\mu_Z)G(b\\otimes1_Z)u^G_{\\mathbf1,Z}(\\varepsilon_G\\otimes1_{GZ})\\lambda_{GZ}^{-1}\\\\\n&=G(\\mu_Z)u^G_{Z,Z}(G(b)\\otimes1_{GZ})(\\varepsilon_G\\otimes1_{GZ})\\lambda_{GZ}^{-1}\\\\\n&=\\mu_{GZ}((G(b)\\varepsilon_G)\\otimes1_{GZ})\\lambda_{GZ}^{-1}=t_{G(b)\\varepsilon_G}.\n\\end{aligned}$$\nTaking $Z=\\Lambda$, $b=a$ proves $P(t_a)=t_{a_R}$ and $Q(t_a)=t_{a_S}$. This computation needs strong monoidality, not preservation of the braiding.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories, tensorator naturality and unit coherence; agent calculation with chosen unit comparisons"
+   }
+  },
+  {
+   "text": "The composite $FP$ has the sequentially transported ring structure, and clause 3 of [det-def-sfb-ring-object-transport] applied to the given monoidal natural isomorphism $c$ makes $\\alpha=c_\\Lambda$ a ring isomorphism. Naturality of $c$ at the ambient morphism $t_a:\\Lambda\\to\\Lambda$ is\n$$\\alpha F(P(t_a))=Q(t_a)\\alpha.$$\nSubstituting the two equalities from step 2 gives $\\alpha F(t_{a_R})=t_{a_S}\\alpha$. Naturality here concerns the underlying categories; $t_a$ need not be a morphism of ring objects.",
+   "uses": [
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
+    "place": "Last paragraph: the comparison is a monoidal natural isomorphism; naturality evaluated at scalar multiplication"
+   }
+  },
+  {
+   "text": "The regular $R$-module has action $\\mu_R$, by [sk-def-sfb-module-objects]. By the formula in [def-sfb-modobj-transport], its image under $\\operatorname{mapMod}(F)$ has underlying object $F(R)=T$ and action $F(\\mu_R)u^F_{R,R}=\\mu_T$. Thus the identity of $T$ is the claimed identification with the regular $T$-module. On the scalar endomorphism the transported map is exactly $F(t_{a_R})$, since the transport commutes with the forgetful functors.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport.md",
+    "place": "Displayed action formula, applied to the regular module, and final sentence on the forgetful functors"
+   }
+  },
+  {
+   "text": "Use [def-sfb-modobj-extension] with the ring map $\\alpha:T\\to S$. Its statement supplies the $S$-$T$-bimodule $S$, with left action $\\mu_S$ and right action $r=\\mu_S(1_S\\otimes\\alpha)$. The hypotheses hold: $T$ is commutative, and $\\mathcal E$ has the required coequalizers and tensor preservation. Step 4 identifies $H(R)$ with the displayed relative tensor $S\\otimes_TT$, with the same balancing arrows and left $S$-action as in that construction. Apply [lem-sfb-mixed-bimodule-right-unitor] to this bimodule and the regular $T$-$T$-bimodule. Its $S$-linear isomorphism $e$ and inverse are exactly\n$$e q=r=\\mu_S(1_S\\otimes\\alpha),\\qquad e^{-1}=q(1_S\\otimes\\eta_T)\\rho_S^{-1}.$$\nThe cited lemma allows different left and right coefficient rings, so no identification $S=T$ is made.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "lem-sfb-mixed-bimodule-right-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "Balancing coequalizer, applied to the regular module; mixed-bimodule right-unit formula as in Mathlib/CategoryTheory/Monoidal/Bimod.lean:685-690,764"
+   }
+  },
+  {
+   "text": "Set $v=F(t_{a_R})$ and $w=t_{a_S}$. The induced-map clause of [def-sfb-modobj-extension], together with step 4, gives $H(t_{a_R})q=q(1_S\\otimes v)$. Therefore, as maps $S\\otimes T\\to S$,\n$$\\begin{aligned}\neH(t_{a_R})q&=e q(1_S\\otimes v)=\\mu_S(1_S\\otimes\\alpha v)\\\\\n&=\\mu_S(1_S\\otimes w\\alpha)\n=\\mu_S(1_S\\otimes w)(1_S\\otimes\\alpha)\\\\\n&=w\\mu_S(1_S\\otimes\\alpha)=weq.\n\\end{aligned}$$\nThe third equality uses step 3; the penultimate uses the $S$-linearity $\\mu_S(1_S\\otimes w)=w\\mu_S$ proved in step 1. A coequalizer map is epimorphic directly by the uniqueness clause of the colimit universal property [def-weil-pbc-category-colimit]: two maps whose composites with $q$ coincide factor the same coequalizing cocone, and hence coincide. Cancelling $q$ proves $eH(t_{a_R})=t_{a_S}e$. Every calculation is in $\\mathcal E$, so in a sheaf category it does not assert that sections of a sheafified tensor product are pure tensors.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "Final induced-map clause; coequalizer universal property; explicit scalar intertwining after the balancing projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-braiding-naturality",
+  "lem-sfb-braiding-unitors",
+  "sk-def-sfb-ring-object",
+  "lem-coef-monoidal-structural-coherence",
+  "sk-def-sfb-module-objects",
+  "def-sfb-strong-monoidal-functor",
+  "det-def-sfb-ring-object-transport",
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-extension",
+  "lem-sfb-mixed-bimodule-right-unitor",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
+  "place": "Abstract coefficient-diagram calculation from the monoidal comparison; regular tensor normalization follows the mixed-bimodule right unitor. Supports det-proper-base-change-unbounded-pullback, Constructible complexes paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +166,59 @@
    "results": "8 hits: CategoryTheory.Mod_.scalarRestriction_smul, CategoryTheory.Mod_.regular, ModuleCat.CoextendScalars.smul_apply, Representation.IntertwiningMap.instSMul, CategoryTheory.ModObj.smul_eq_mul, CategoryTheory.Mod_.scalarRestriction, ModuleCat.instMonoidalFree, CategoryTheory.Mod_.regular_mod_smul",
    "date": "2026-10-21",
    "verdict": "no match: regular-module definitions, the mixed-bimodule unitor, and ordinary ModuleCat change of rings do not give the complete scalar compatibility through a monoidal coefficient diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitorBimod|mapModUnitIso|regularExtensionIso",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean; Mathlib scope: CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal functor preserves multiplication by a global element on regular internal modules and extension of scalars intertwines these endomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.map_mul, CategoryTheory.Functor.map.instIsMonHom, CategoryTheory.Functor.Monoidal.whiskeringLeft, CategoryTheory.IsMod_Hom.smul_hom, ModuleCat.extendScalars, CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts, ModuleCat.ExtendScalars.obj', CategoryTheory.Monoidal.functorCategoryMonoidal",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightUnitorBimod\"",
+   "results": "7 hits: Bimod.RightUnitorBimod.hom, Bimod.RightUnitorBimod.inv, Bimod.rightUnitorBimod, Bimod.RightUnitorBimod.inv_hom_id, Bimod.RightUnitorBimod.hom_inv_id, Bimod.RightUnitorBimod.hom_left_act_hom', Bimod.RightUnitorBimod.hom_right_act_hom'",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal functors and a monoidal natural isomorphism preserve scalar multiplication and canonically identify extension of scalars of the regular module",
+   "results": "8 hits: ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.extendScalarsId, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id, ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "map_mul|left_unitality|rightUnitorBimod",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean; Mathlib scope: CategoryTheory/Monoidal",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxMonoidal.μ_natural\"",
+   "results": "6 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural_left, CategoryTheory.Functor.LaxMonoidal.μ_natural_right, CategoryTheory.Functor.LaxMonoidal.μ_natural, CategoryTheory.Functor.LaxMonoidal.μ_natural_left_assoc, CategoryTheory.Functor.LaxMonoidal.μ_natural_right_assoc, CategoryTheory.Functor.LaxMonoidal.μ_natural_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between composite strong monoidal functors conjugates multiplication by a map from the tensor unit on the regular module",
+   "results": "8 hits: CategoryTheory.unitOfTensorIsoUnit, Action.leftRegularTensorIso, Action.leftRegularTensorIso_hom_hom, CategoryTheory.unitOfTensorIsoUnit_hom_app, Bimod.TensorBimod.one_act_left', Rep.linearization_δ_hom, Rep.linearization_ε_hom, CategoryTheory.unitOfTensorIsoUnit_inv_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: rightUnitorBimod gives the existing mixed-bimodule unitor node; tensorator naturality and ordinary ModuleCat scalar extension are constituents, not the coefficient-diagram scalar comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-scalar-matrix-inverse-image",
@@ -98,5 +238,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-coefficient-diagram-regular-scalars",
+  "worker": "stage1",
+  "group": "Q45",
+  "summary": "Kept the statement and supplied six proof steps: regular scalar linearity, strong monoidal transport, naturality of c, literal transported regular module, existing mixed-bimodule right unitor, and scalar intertwining by epimorphic balancing projection. No new nodes and no extra braidedness assumption on the functors. Read all cited statements and generated verbatim citation witnesses.",
+  "blueprint": "det-proper-base-change-unbounded-pullback, Constructible complexes paragraph 'via the local coefficient models on strata': expand the coefficient comparison needed for scalar matrices, using sk-def-sfb-pullback-from-point-comp's monoidal natural isomorphism and the existing extension-of-scalars construction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-ff83e805b",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ff83e805b (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged and matches the unsplit live side node; no other group has split it. The item was created by Q38's re-split of lem-sfb-scalar-matrix-inverse-image, whose step 1 applies it with P=p_U^*, Q=p_V^*, F=h^{-1}. The item has no repair note of its own, so six steps with no new nodes is acceptable. Step 1: braiding naturality with (1_Z,b), λβ_{Z,1}=ρ and μβ=μ give t_b=μ(1⊗b)ρ^{-1}; associativity plus the structural identity A_{Z,Z,1}ρ^{-1}=1⊗ρ^{-1} gives regular-module linearity. Step 2: inverted left unit coherence, tensorator naturality and μ_{GZ}=G(μ)u give G(t_b)=t_{G(b)ε}. Step 3: clause 3 of the ring-transport node and naturality of c at t_a give the scalar square. Step 4: the transported action is literally μ_T. Step 5: the extension coequalizer for regular T equals the mixed-bimodule right-unitor coequalizer for the S–T bimodule S with right action μ_S(1⊗α); e and its inverse match Mathlib Bimod.lean:685-690 and :764. Step 6: I checked each equality, and q cancels by colimit uniqueness. The hypotheses (R, T, S commutative; no braided functors; E with coequalizers and colimit-preserving tensor) are sufficient. Every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. Nothing cited is on the route-pivot dropped list, and no SGA is cited. I confirmed the blueprint sources (pullback-from-point-comp last paragraph; unbounded-pullback Constructible complexes paragraph) and Stacks 0FFL and 0HAY. Duplicate check: lem-sfb-regular-scalar-extension-multiplication is a sheaf special case. lem-weil-pbc-regular-extension-comparison (another unit) does not fix the isomorphism by a formula and has no three-functor transport, so it is not a duplicate. Advisory: the parent cites both. No changes."
  }
 }
