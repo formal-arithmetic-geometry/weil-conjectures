@@ -21080,3 +21080,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:16 L: merged deliver/NV/lem-coef-enriched-sequence-projection-formula (reviewer FIX; after a return; new nodes: 0)
 - 08:16 L: merged deliver/Q125/det-lem-stratified-lattice-rank (reviewer PASS; after a return; new nodes: 2)
 - 2026-10-21T08:16:21Z L: superseded stage-1 delivery NB/lem-coef-closed-identity-open-hom-normalization at 75cedc2fa93434f34d3c5ddfdce51f8368f299b9; current completion retained; packet archived at refs/superseded/NB/lem-coef-closed-identity-open-hom-normalization/75cedc2fa93434f34d3c5ddfdce51f8368f299b9; stale return retired.
+- 2026-10-21T08:16:22Z L: superseded stage-1 delivery NE/lem-pur-etale-affine-projection-coefficient-mate at 8c5313fd95bff3e2bf2bbf894308c4e52b11caaa; current completion retained; packet archived at refs/superseded/NE/lem-pur-etale-affine-projection-coefficient-mate/8c5313fd95bff3e2bf2bbf894308c4e52b11caaa; stale return retired.
