@@ -22314,3 +22314,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:38 L: returned deliver/N5/lem-pur-quotient-diagram-projection-evaluation (reviewer RETURN: L: independent stage-2 immutable head fa128d2760c0: H3/H12 F1: Presentation is uninhabitable. evaluationExactY/X (ExactA)
 - 11:38 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A6/A7/B10/G4: this is the 7th push, superseded by the live Lean closure and byte-identical to the returned 6th push. The)
 - 11:41 L: merged deliver/O3/lem-pur-normalized-scalar-comparison-realization (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T11:41:54Z L: superseded stage-1 delivery NV/lem-pod-stratified-dualizable-hom-continuity at 980659abe5e1084fa5c7597f6291c13246118c41; current completion retained; packet archived at refs/superseded/NV/lem-pod-stratified-dualizable-hom-continuity/980659abe5e1084fa5c7597f6291c13246118c41; stale return retired.
