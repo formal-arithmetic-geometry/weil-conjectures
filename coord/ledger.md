@@ -20941,3 +20941,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/N5/lem-sf-etale-chart-left-compositor (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/Q81/lem-pur-finite-etale-dualizing-normalization (reviewer FIX; after a return; new nodes: 5)
 - 08:09 L: merged deliver/NL/lem-weil-pbc-ringed-slice-pullback-mate-normalization (reviewer FIX; after a return; new nodes: 1)
+- 08:09 L: merged deliver/Q42/lem-weil-integral-twist-base-change (reviewer FIX; after a return; new nodes: 3)

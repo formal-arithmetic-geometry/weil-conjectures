@@ -19,125 +19,59 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\widehat{\\mathbf Z}_{\\ell,S}$ and $L_H=\\mathcal O_H(1)$. Clauses 2 and 3 of [lem-pur-twist-sheaf-locally-free] give $T$ locally free of rank one over $A$ and $R_H\\cong A\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_H)_S$. The defining formula of [def-coefficient-twists-detailed] therefore gives $i_H:T\\otimes_A R_H\\cong L_H$: after the latter substitution its map is $t\\otimes(z\\otimes a)\\mapsto zt\\otimes a$, with inverse $t\\otimes a\\mapsto t\\otimes(1\\otimes a)$. Both composites are identities by the balanced tensor relations. All maps are sheaf maps, since the sectionwise formulas commute with restriction and hence extend through the sheafification defining tensor [def-pur-sheaf-tensor-product]. The inclusion of integer rings induces $R_E\\to R_F$ in this presentation, by $z\\otimes a\\mapsto z\\otimes a$ with $a$ mapped to $\\mathcal O_F$; it is compatible with towers. This is also the canonical map of the completed coefficient sheaves [def-weil-completed-integral-coefficients]: composing with each finite quotient gives the inclusion followed by that quotient, which characterizes the map into the inverse limit.",
+   "text": "Put $B=(\\mathbf Z_\\ell)_S$, $A=\\widehat{\\mathbf Z}_{\\ell,S}$ and $C_H=(\\mathcal O_H)_S$. Clauses 2-3 of [lem-pur-twist-sheaf-locally-free] give $T$ locally free of rank one and $R_H=A\\otimes_B C_H$. Apply [lem-pur-common-line-positive-scalar-powers] to these data and $C_E\\to C_F$. The definition [def-coefficient-twists-detailed] identifies its $L_H=T\\otimes_B C_H$ with $\\mathcal O_H(1)$, hence its $P_H(n)$ with $\\mathcal O_H(n)$ for $n\\geq0$. The ring map is the completed coefficient inclusion: its composites with every finite quotient factor through $A_{E,k}\\to A_{F,n}$ whenever $\\varpi_E^k\\mathcal O_F\\subseteq\\varpi_F^n\\mathcal O_F$, as in [def-weil-completed-integral-coefficients]. This gives the required canonical comparisons for $m\\geq0$ and the common local generators.",
    "uses": [
     "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-common-line-positive-scalar-powers",
     "def-coefficient-twists-detailed",
-    "def-pur-sheaf-tensor-product",
     "def-weil-completed-integral-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "First sentence (scalar extension of the first twist), and final sentence (integral coefficients); use the existing rank-one and completion comparison, not an interchange of tensor with an arbitrary limit."
+    "place": "First scalar-extension/tensor-power sentence and final integral-coefficient sentence; old steps 1-3: common tensor presentation, first comparison, zero and positive powers. Stacks 03EL, sites-modules.tex, lemma-tensor-product-pullback, iterated after tensor reassociation."
    }
   },
   {
-   "text": "Through $i_E$ and $i_F$, define $c_1:L_E\\otimes_{R_E}R_F\\to L_F$ by $(t\\otimes a)\\otimes b\\mapsto t\\otimes\\iota_{EF}(a)b$. Its inverse sends $t\\otimes b$ to $(t\\otimes1)\\otimes b$. The inverse is $A$-balanced because $(zt\\otimes1)\\otimes b=(t\\otimes z)\\otimes b=(t\\otimes1)\\otimes zb$; the other balancing and additivity identities follow from the same tensor relations. The composites send $t\\otimes b$ to itself and $(t\\otimes a)\\otimes b$ to $(t\\otimes1)\\otimes\\iota_{EF}(a)b=(t\\otimes a)\\otimes b$. Thus they are inverse sheaf morphisms. Their construction is independent of a local generator of $T$.",
+   "text": "For a tower $E\\subset F\\subset G$ use the first-line maps just constructed. Their composites agree on $(t\\otimes a)\\otimes b\\otimes c$: both give $t\\otimes\\iota_{EG}(a)\\iota_{FG}(b)c$. Thus they satisfy the exponent-one hypothesis of [lem-pur-signed-line-scalar-tensor-tower]. That lemma supplies the negative maps by its explicit dual pairing and proves they are isomorphisms, compatible with evaluation, all signed tensor products, identity extensions and towers. Its positive normalization is exactly step 1, and its negative domain is the sheaf dual prescribed by [def-coefficient-twists-detailed]. These are therefore the stated $\\mathcal O_E(m)\\otimes_{R_E}R_F\\cong\\mathcal O_F(m)$ for every integer $m$.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "First sentence and final sentence: explicit associativity comparison for the first integral twist."
-   }
-  },
-  {
-   "text": "For $m=0$ use $c_0:R_E\\otimes_{R_E}R_F\\cong R_F$, $a\\otimes b\\mapsto\\iota_{EF}(a)b$, with inverse $b\\mapsto1\\otimes b$. For positive powers, apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the identity underlying topos and the ring map $R_E\\to R_F$. Its assertion is precisely $(M\\otimes_{R_E}N)\\otimes_{R_E}R_F\\cong(M\\otimes_{R_E}R_F)\\otimes_{R_F}(N\\otimes_{R_E}R_F)$. Starting with $c_1$, induction on $m$ and the recursive tensor-power definition in [def-pur-sheaf-tensor-product] now give $c_m:L_E^{\\otimes m}\\otimes_{R_E}R_F\\cong L_F^{\\otimes m}$. In the induction step compose the displayed comparison with $c_m\\otimes c_1$; its inverse is the reverse composite of the displayed inverses. These are exactly the positive twists of [def-coefficient-twists-detailed]. Locally, for a generator $e$ of $T$, the map sends $(a e_E^{\\otimes m})\\otimes b$ to $\\iota_{EF}(a)b e_F^{\\otimes m}$, where $e_H=i_H(e\\otimes1)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-sheaf-tensor-product",
+    "lem-pur-signed-line-scalar-tensor-tower",
     "def-coefficient-twists-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Tensor-power sentence and final sentence: positive integral powers, including their zero-th unit."
+    "place": "Tensor-power/internal-Hom sentence and final common-finite-stage sentence; old steps 4-7: dual pairing and its local inverse, signed contractions, evaluation and coefficient towers. Stacks 0GMX, sites-modules.tex, remark-pullback-internal-hom, specialized to a locally free line and iterated with evaluation."
    }
   },
   {
-   "text": "Fix $n>0$, put $P_H=\\mathcal O_H(n)$, and use the sheaf dual $P_H^\\vee=\\mathcal Hom_{R_H}(P_H,R_H)$ of [def-pur-sheaf-hom]. Define $\\beta:P_E^\\vee\\otimes_{R_E}R_F\\to(P_E\\otimes_{R_E}R_F)^\\vee$ on local tensors by $\\beta(\\varphi\\otimes b)(x\\otimes c)=\\iota_{EF}(\\varphi(x))bc$. Linearity of $\\varphi$ checks the $R_E$-balancing in $x\\otimes c$ and in $\\varphi\\otimes b$; restriction of sheaf maps checks restriction compatibility. The sheaf tensor definition and sheaf-Hom definition therefore give this map globally. It is equivalently adjoint to scalar extension of evaluation under the closed tensor adjunction [lem-pc-sheaf-modules-tensor-closed]. Define $c_{-n}$ as $\\beta$ followed by precomposition with $c_n^{-1}:P_F\\to P_E\\otimes_{R_E}R_F$. By [def-coefficient-twists-detailed] its domain and codomain are exactly $\\mathcal O_E(-n)\\otimes_{R_E}R_F$ and $\\mathcal O_F(-n)$.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Internal-Hom sentence and final sentence: construction of the negative comparison from evaluation; the map, rather than an unsupported general Hom/base-change isomorphism, is written explicitly."
-   }
-  },
-  {
-   "text": "On the cover trivializing $T$ in clause 2 of [lem-pur-twist-sheaf-locally-free], $P_H$ has generator $p_H=e_H^{\\otimes n}$. Its dual has generator $p_H^\\vee$ characterized by $p_H^\\vee(p_H)=1$: on every object over the cover, a linear sheaf map out of the free rank-one sheaf is determined by its value on $p_H$, so evaluation at $p_H$ and $a\\mapsto(xp_H\\mapsto ax)$ are inverse. The formula of step 4 sends $p_E^\\vee\\otimes b$ to $b p_F^\\vee$. Hence $c_{-n}$ is an isomorphism locally, with inverse $b p_F^\\vee\\mapsto p_E^\\vee\\otimes b$. On overlaps these inverses agree, since they are inverses of the same globally defined map: if $u,v$ invert $c_{-n}$, then $u=u c_{-n}v=v$. They glue by the sheaf axiom to its global inverse. This proves every negative case. The same formula gives compatibility with evaluation: the evaluation of $c_{-n}(\\varphi\\otimes b)$ on $c_n(x\\otimes c)$ is $\\iota_{EF}(\\varphi(x))bc$, exactly scalar extension of evaluation.",
-   "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Internal-Hom sentence and final sentence: rank-one verification of the dual comparison and evaluation compatibility."
-   }
-  },
-  {
-   "text": "The maps respect tensor powers and the canonical contractions between opposite powers. To check all signs together, on a trivializing cover write $e_H^m$ for the positive tensor generator if $m>0$, the unit if $m=0$, and the dual tensor generator if $m<0$. Tensor associativity and symmetry of [lem-pc-sheaf-modules-tensor-closed], together with evaluation, identify $e_H^a\\otimes e_H^b$ with $e_H^{a+b}$: for opposite signs cancel each paired $e_H$ and $e_H^\\vee$ by $e_H^\\vee(e_H)=1$. Every $c_m$ sends $(x e_E^m)\\otimes y$ to $\\iota_{EF}(x)y e_F^m$. Thus the two routes through any tensor-power comparison send $((x e_E^a)\\otimes(y e_E^b))\\otimes z$ to $\\iota_{EF}(xy)z e_F^{a+b}$. These equalities on free generators establish equality of the sheaf maps, and separatedness makes the equalities global. A different local generator $ue$ scales $e_H^m$ by $u^m$ for every integer $m$, so these checks do not depend on the trivialization.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Tensor-power/internal-Hom sentence: coherence with tensor products and contractions, checked on generators for all signs."
-   }
-  },
-  {
-   "text": "For $E\\subset F\\subset G$, the transitivity identification $((M\\otimes_{R_E}R_F)\\otimes_{R_F}R_G)\\cong M\\otimes_{R_E}R_G$ sends $(x\\otimes b)\\otimes c$ to $x\\otimes\\iota_{FG}(b)c$, with inverse $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. These formulas satisfy the balancing relations and are inverse, as in step 2. On a local twist generator, scalar extension first through $F$ and then through $G$ sends $((a e_E^m)\\otimes b)\\otimes c$ to $\\iota_{EG}(a)\\iota_{FG}(b)c e_G^m$; direct extension sends it to the same section, for every integer $m$. Equality is global by the sheaf axiom. For an identity coefficient extension the same formula is the tensor-unit map. This proves the tower compatibility without choosing an integral basis for $\\mathcal O_F$ over $\\mathcal O_E$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence: common finite stages, here the transitivity of integral coefficient inclusions."
-   }
-  },
-  {
-   "text": "For a scheme morphism $h:S'\\to S$, $\\ell$ is invertible on $S'$. [lem-pur-integral-twist-line-inverse-image] gives ring isomorphisms $\\alpha_{h,H}:h^{-1}R_{H,S}\\cong R_{H,S'}$ and line isomorphisms $\\rho_{h,H}:h^{-1}\\mathcal O_H(1)_S\\cong\\mathcal O_H(1)_{S'}$, semilinear over $\\alpha_{h,H}$, sending $h^{-1}(t\\otimes a)$ to $\\tau_h(h^{-1}t)\\otimes a$, and (clause 4) commuting with $\\iota_{EF}$ and with $j_{EF}:t\\otimes a\\mapsto t\\otimes a$. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to $h$ with $c=\\alpha_{h,H}$; since $c$ is invertible, module pullback is $h^{-1}$ with the transported action. Under $i_H$, $c_1$ is the $R_F$-linear extension of $j_{EF}$, so both routes send $h^{-1}((t\\otimes a)\\otimes b)$ to $\\tau_h(h^{-1}t)\\otimes\\iota_{EF}(\\alpha_{h,E}(h^{-1}a))\\alpha_{h,F}(h^{-1}b)$; for $c_0$ the square is clause 4 for $\\iota_{EF}$. For $m>0$ compare $m$-th powers by the tensor comparison of the cited lemma applied to $\\rho_{h,H}$; its naturality in both variables and the recursion of step 3 give the square by induction. For $m=-n$, $\\mathcal O_H(n)$ is finite locally free of rank one (steps 1, 3), and the base-change functor of $h$ preserves finite limits and coverings [def-weil-proetale-inverse-image]. So [lem-pur-ringed-site-finite-free-dual-pullback] with $c=\\alpha_{h,H}$ gives the evaluation-induced isomorphism of pulled-back duals, natural in the line; compose with the dual of the inverse of the positive comparison. Under it the pairing of step 4 pulls back to $(\\varphi\\otimes b,x\\otimes c)\\mapsto\\iota_{EF}(\\varphi(x))bc$ on $S'$, the pairing there, and the closed tensor adjunction [lem-pc-sheaf-modules-tensor-closed] makes the two dual maps equal. Precomposition with the pulled-back $c_n^{-1}$ matches by the positive case.",
+   "text": "For $h:S'\\to S$, apply [lem-pur-integral-twist-line-inverse-image]. Its clauses 1-3 give the coefficient and first-line isomorphisms; clause 4 makes the coefficient square and the first-line scalar square commute: after linearization, both routes on $h^{-1}x\\otimes s$ give $\\rho_{h,F}(h^{-1}j_{EF}(x))s=j_{EF}(\\rho_{h,E}(h^{-1}x))s$. Use [lem-pur-signed-line-scalar-pullback-square] with $(R,S)=(R_{E,S},R_{F,S})$, $(R',S')=(R_{E,S'},R_{F,S'})$ and $a=\\alpha_{h,E}$, $b=\\alpha_{h,F}$. The base-change site functor preserves finite limits and coverings [def-weil-proetale-inverse-image]; rank one was checked in step 1. Since $a,b$ are isomorphisms, the module pullbacks in the lemma are inverse images with transported action. Its positive and evaluation normalizations identify its signed maps with those of steps 1-2. Its final equality is precisely the required scheme-naturality square for every $m$.",
    "uses": [
     "lem-pur-integral-twist-line-inverse-image",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-weil-proetale-inverse-image",
-    "lem-pur-ringed-site-finite-free-dual-pullback",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-pur-signed-line-scalar-pullback-square",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "First and final sentences: scheme naturality, through the inverse image of the integral twist line of def-coefficient-twists-detailed and its field-inclusion compatibility (lem-pur-integral-twist-line-inverse-image), with Stacks 0GMX (remark-pullback-internal-hom) for dual pullback."
+    "place": "First and final sentences; old step 8: the first-line naturality square propagated to all signed powers. Stacks 0GMX, sites-modules.tex, remark-pullback-internal-hom, its evaluation-defined map under a commutative square of ring maps."
    }
   }
  ],
  "proof_deps": [
   "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-common-line-positive-scalar-powers",
   "def-coefficient-twists-detailed",
-  "def-pur-sheaf-tensor-product",
   "def-weil-completed-integral-coefficients",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-pur-sheaf-hom",
-  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-signed-line-scalar-tensor-tower",
   "lem-pur-integral-twist-line-inverse-image",
-  "def-weil-proetale-inverse-image",
-  "lem-pur-ringed-site-finite-free-dual-pullback"
+  "lem-pur-signed-line-scalar-pullback-square",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-  "place": "First tensor/scalar-extension sentence, tensor-power/internal-Hom sentence, and final integral/common-stage sentence; explicit tensor and dual formulas expanded using Stacks 03EK, 03EL, 03EM, 03EO."
+  "place": "Scalar, tensor-power/internal-Hom, integral and common-stage sentences; re-split of the reviewed explicit eight-step argument into three independent statement-only work units."
  },
  "mathlib_searches": [
   {
@@ -231,11 +165,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-weil-integral-twist-base-change",
   "worker": "stage1",
-  "summary": "Retained the complete statement and its completed, rather than discrete, coefficient rings. Expanded the first line, all positive and negative tensor powers, evaluation, tensor-power coherence, coefficient towers and naturality in the scheme. Reused the existing rank-one/completion statement and general sheaf tensor facts; no new nodes or Mathlib leaves. All new searches were run via msearch and recorded. Removed a tensor-closed theorem from statement dependencies and cited the actual tensor definition instead.",
-  "blueprint": "Realizes the scalar-extension part of the first sentence, the tensor-power/internal-Hom sentence, and the final integral/common-finite-stage sentence of prop-weil-twist-preserves. Steps 1-3 handle the first line and nonnegative powers; 4-6 the duals, evaluation and tensor coherence; 7 towers; 8 scheme naturality.",
+  "summary": "Human-directed re-split, statement and existing Lean metadata unchanged. Three statement-only nodes expose common coefficient rebracketing and nonnegative powers (old 1-3), dual comparison with signed tensor/evaluation and tower coherence (old 4-7), and geometric pullback of the signed scalar square (old 8). All original arguments and handoff details retained in report.md. Parent proof is a three-step assembly below 3000 characters.",
+  "blueprint": "First scalar-extension sentence; tensor-power/internal-Hom sentence; final integral/common-finite-stage sentence. No unit-route change.",
   "tool_uses": [
    {
     "node": "lem-pur-twist-sheaf-locally-free",
@@ -246,28 +180,8 @@
     "why": "Definition of the sheaf operation or coefficient object used by this unit, not a replacement of its route."
    },
    {
-    "node": "def-pur-sheaf-tensor-product",
-    "why": "Definition of the sheaf operation or coefficient object used by this unit, not a replacement of its route."
-   },
-   {
     "node": "def-weil-completed-integral-coefficients",
     "why": "Definition of the sheaf operation or coefficient object used by this unit, not a replacement of its route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "General tensor compatibility for ringed-topos pullback, specialized to the identity topos for coefficient extension and used for naturality."
-   },
-   {
-    "node": "def-pur-sheaf-hom",
-    "why": "Definition of the sheaf operation or coefficient object used by this unit, not a replacement of its route."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "General sheaf tensor associators and evaluation adjunction; the unit has no competing construction."
-   },
-   {
-    "node": "lem-pur-ringed-site-finite-free-dual-pullback",
-    "why": "General evaluation-induced dual comparison for a finite locally free sheaf is used only for scheme-pullback naturality of the explicit negative coefficient comparison."
    },
    {
     "node": "def-weil-proetale-inverse-image",
@@ -287,12 +201,12 @@
   "def-weil-proetale-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q153-d6d3a411e",
-  "group": "Q153",
+  "reviewer": "NT-cc-Q42-71e30e7eb",
+  "group": "Q42",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-d6d3a411e (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources: the item, all 8 steps, every cited statement, the unit record, the master and main-20261015 prop-weil-twist-preserves (identical proofs) and the det-prop-sfb-cartesian-coefficients-twists blueprint text. The statement is unchanged and not weakened. It uses the completed rings R_H, not the discrete (O_H)_S, and O_H(1)=T⊗_Ẑ R_H follows from clause 3 of lem-pur-twist-sheaf-locally-free. Steps 1-7 are correct: balanced tensor maps, the ringed-topos tensor comparison with u=id, the dual map β, the local inverse on a trivialising cover, coherence checked on generators, and the tower. I tested m=0 and m=±1, E=F, a ramified extension and S=∅. Step 8 had a gap (C3/C4, E6). It cited det-prop-sfb-cartesian-coefficients-twists, but that node's integral line is the one from sk-def-sp-tate-twist (lim μ⊗O_E/ℓ^n over p^*O_E), not this item's Zℓ(1)⊗(O_E)_S. Its statement also does not give the compatibility with E⊂F that the c_1 naturality square needs; that appears only in its proof. FIX: I added the statement-only node lem-pur-integral-twist-line-inverse-image (unsplit, unit sk-prop-sf-existence, created.item set to this item, blueprint.from prop-weil-twist-preserves via this item, same_as []). It states the ring isomorphism α, the isomorphism τ for h^{-1}Zℓ(1), the semilinear line isomorphism ρ, and their compatibility with ι_EF and j_EF. It is true via qlbar-integral-limit clause 3, lem-sfb-alpha-iso, lem-pur-inverse-image-compatible-free-tower and det-def-sp-tate-twist-locally-free. Its Mathlib record has three grep searches with no match; LeanSearch is recorded as unavailable. I rewrote step 8 (1775 characters) to cite it together with the module-pullback-tensor lemma, def-weil-proetale-inverse-image, the finite-free dual pullback lemma and the tensor-closed node. The two det-prop citations were removed from proof_deps and tool_uses, and the unsupported 'identity and composition' sentence was deleted. I accept the remaining tool uses as definitions or generic tools. Pre-existing fault for the maintainer: the DAG has two constructions of the integral Tate line and no node relating them.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-71e30e7eb (reviewer sub-agent of L); spot-checked: This is the human's 2026-10-21 re-split, and it is correct. The repair note asks for at least 2 new nodes and a parent proof of at most 3000 characters, with no argument dropped. The item statement is unchanged, and its proof is now a 3-step assembly of 2400 characters. Every old step went to a new node: old 1-3 → lem-pur-common-line-positive-scalar-powers, old 4-7 → lem-pur-signed-line-scalar-tensor-tower, old 8 → lem-pur-signed-line-scalar-pullback-square. The parent keeps only the cofinal-k completed-inclusion identification and the clause-4 first-line square, with its linearized formula written out. Checks: (1) The parent steps are correct against lem-pur-twist-sheaf-locally-free clauses 2-3, def-coefficient-twists-detailed, def-weil-completed-integral-coefficients, lem-pur-integral-twist-line-inverse-image clauses 1-4 and def-weil-proetale-inverse-image (preserves coverings and finite limits). (2) I checked by hand the exponent-one tower cocycle on (t⊗a)⊗b⊗c, and the first-line pullback square through the linearized ρ and j. (3) The new statements are true: β is an isomorphism for locally free lines; b_{ij,-n} sends dual bases to dual bases; μ^{a,b} is independent of the basis (u^{a+b}); tower and square identities hold on compatible local bases for every m. Tested on m=0,±1, the pair (1,-1), identity maps, the non-flat map Z→Z/2, and the zero ring. Node C needs no flatness because the pulled-back covers trivialize f^{-1}P. (4) Not duplicates: lem-pur-completed-line-tensor-coherence (derived/completed), lem-pur-ringed-site-finite-free-dual-pullback (a single dual), and the parallel Q85 lem-weil-ordinary-line-tower-square (exponent one, derived). (5) The 03EL and 0GMX labels are correct; no SGA is cited. Tool uses are already accepted: lem-pur-twist-sheaf-locally-free, def-coefficient-twists-detailed, def-weil-completed-integral-coefficients, def-weil-proetale-inverse-image. FIX, one fault (§1): the stmt_deps of the three new nodes omitted nodes their statements cite inline. Added def-weil-size-convention and def-weil-pbc-sites-and-cohomology to all three, and def-pur-sheaf-tensor-product and def-pur-sheaf-hom to the tensor-tower node. The fix files are under fixes/dag/nodes/sec-smooth-purity/; nothing else changed. Advisory for the maintainer: for isomorphic a,b, the only case the parent uses, node C overlaps the scalar-extension naturality clause of the existing lem-pur-signed-line-derived-base-change. C is a strict generalization, so this is not a fault. The snapshot's dagsnap symlinks for chapters other than sec-smooth-purity are dangling, so those nodes were read from the live DAG, read only.; 3 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
