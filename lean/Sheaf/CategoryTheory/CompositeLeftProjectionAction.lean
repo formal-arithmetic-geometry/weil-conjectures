@@ -112,6 +112,49 @@ theorem compositeLeftProjectionAction_coherence
         (α_ B B' ((J ⋙ R).obj M)).hom ≫
           B ◁ compositeLeftProjectionAction F Q R J t v B' M ≫
           compositeLeftProjectionAction F Q R J t v B ((F ⋙ Q).obj B' ⊗ M)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro B B' M M' b m
+    simp only [compositeLeftProjectionAction, Functor.comp_obj, Functor.comp_map,
+      Category.assoc]
+    rw [← R.map_comp, hv, R.map_comp, ← Category.assoc, ht, Category.assoc]
+  · intro M
+    have hn := hv (F.obj (𝟙_ C₀)) (𝟙_ C₁) M M f.εIso.inv (𝟙 M)
+    simp only [Functor.map_id, tensorHom_id] at hn
+    have hu :
+        v (F.obj (𝟙_ C₀)) M ≫
+            J.map ((Q.map f.εIso.inv ≫ q.εIso.inv) ▷ M ≫ (λ_ M).hom) =
+          f.εIso.inv ▷ J.obj M ≫ (λ_ (J.obj M)).hom := by
+      simp only [comp_whiskerRight, Functor.map_comp, ← Category.assoc]
+      rw [hn, Category.assoc, ← J.map_comp]
+      simp only [Category.assoc, hv_unit]
+    simpa only [compositeLeftProjectionAction, Functor.comp_obj, Functor.comp_map,
+      ← R.map_comp, Category.assoc, hu] using ht_unit (J.obj M)
+  · intro B B' M
+    have hn := hv (F.obj (B ⊗ B')) (F.obj B ⊗ F.obj B') M M
+      (f.μIso B B').inv (𝟙 M)
+    simp only [Functor.map_id, tensorHom_id] at hn
+    have ha :
+        v (F.obj (B ⊗ B')) M ≫
+            J.map
+              ((Q.map (f.μIso B B').inv ≫ (q.μIso (F.obj B) (F.obj B')).inv) ▷ M ≫
+                (α_ (Q.obj (F.obj B)) (Q.obj (F.obj B')) M).hom) =
+          (f.μIso B B').inv ▷ J.obj M ≫
+            (α_ (F.obj B) (F.obj B') (J.obj M)).hom ≫
+            F.obj B ◁ v (F.obj B') M ≫ v (F.obj B) (Q.obj (F.obj B') ⊗ M) := by
+      simp only [comp_whiskerRight, Functor.map_comp, ← Category.assoc]
+      rw [hn, Category.assoc, ← J.map_comp]
+      simp only [Category.assoc, hv_assoc]
+    have ht' := ht B B (F.obj B' ⊗ J.obj M) (J.obj (Q.obj (F.obj B') ⊗ M))
+      (𝟙 B) (v (F.obj B') M)
+    simp only [Functor.map_id, id_tensorHom] at ht'
+    simp only [compositeLeftProjectionAction, Functor.comp_obj, Functor.comp_map]
+    rw [Category.assoc, ← R.map_comp, ha]
+    simp only [Functor.map_comp, ← Category.assoc]
+    have hta := ht_assoc B B' (J.obj M)
+    simp only [Functor.map_comp, ← Category.assoc] at hta
+    rw [hta]
+    simp only [Category.assoc]
+    rw [← Category.assoc (t B _) (R.map _) (R.map _), ht']
+    simp only [whiskerLeft_comp, Category.assoc]
 
 end CategoryTheory
