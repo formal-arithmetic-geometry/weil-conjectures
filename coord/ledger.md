@@ -22927,3 +22927,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:24 L: merged deliver/W6/Sheaf.Paper.ProperEtaleOriginScalarIsomorphism (stage 3; reviewer PASS; first push; landing 20261021T152415-L-1937288 (interface); batch 20261021T152302; modules 3; new nodes 2; change records: coord/changes/W6-proper-etale-origin-scalar-data.md)
 - 15:25 L: merged deliver/NB/lem-sfb-totally-disconnected-coefficient-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 15:26 L: merged deliver/NL/lem-sfb-prime-to-ell-linear-image-finite (stage 2; reviewer PASS; parallel immutable checks)
+- 15:29 L: merged deliver/Q135/lem-weil-pbc-finite-free-strict-tower-transport (stage 2; reviewer PASS; parallel immutable checks)

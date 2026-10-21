@@ -14,7 +14,8 @@
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-weil-inverse-system",
-  "def-weil-category-product"
+  "def-weil-category-product",
+  "def-sbc-strict-projection-tower-data"
  ],
  "proof": [
   {
@@ -364,5 +365,32 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-443ebf6f4 (reviewer sub-agent of L); spot-checked: I read the item in full: 11 steps, no new nodes, statement unchanged from live. Live and side-live still have the item unsplit, so this delivery is not superseded. There is no re-split note, no dropped node and no SGA citation, and the added citations create no cycle. Sources read: Stacks 0941 (sites-cohomology l.5067-5120), 0A0E (context only, correctly not credited), the tag table entries 070I/08BJ/0BK6/0152/09T5, and the main-20261015 prop-weil-pbc-scalar-extension. Small cases d=0, d=1, zero towers and unbounded complexes are fine. Steps 3-8 and 11 are correct: finite powers of K-injectives, the homotopy-equivalence product, conservative U, and the sections of injective-tower transitions with y_n - t_n y_{n+1} = x_n checked. Faults repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-free-strict-tower-transport.json. (1) C4/E6, steps 1-2 and 6: sk-def-sfb-change-of-scalars and lem-sfb-finite-free-scalar-coordinates are about internal module objects but were applied to sectionwise Mod(R) and the sheafified tensor F without a bridge. Now cited: det-def-sfb-ring-object-sheaf, lem-sfb-internal-section-scalar-adjunction (which identifies Ext/Res and the adjunction), and lem-weil-pbc-restriction-derived-products (in the unit; U is conservative and preserves limits). (2) E5/C4, step 9: the claim that exact F carries the SES connecting map to the connecting map of the image is in no cited statement; the SES-triangle node gives only existence and naturality. The rows are degreewise split by step 7, so lem-sc-p1-split-ses-boundary-comparison gives delta = Q(d) on both sides, and phi with shift compatibility (2) of the factorization node gives the identification. (3) C3 tightening, step 10: lem-pc-derived-adjoint-functors gives no formula on representatives. The adjunct lim(qz) is now built explicitly: Delta is left adjoint to lim with Delta exact, so lim I is K-injective by right-adjoint-preserves-kinjective, then the K-injective Hom bijections apply. lem-pc-derived-adjoint-functors and its tool_use are dropped. Three tool_uses are added, proof_deps equals the union of uses, and every step is at most 2000 characters. Advisory: the Roos connecting arrow of lem-weil-pbc-ringed-strict-tower-homotopy-limit is pinned only by that node's construction. The item's statement refers to that triangle, so step 8 reads the node's SES construction. The maintainer should pin the arrow in that node's statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteFreeStrictTowerTransport",
+  "declaration": "SheafOfModules.finiteFreeStrictTowerTransport",
+  "declarations": [
+   "CategoryTheory.strictTowerLimitComplex",
+   "CategoryTheory.strictTowerLimitInclusion",
+   "CategoryTheory.strictTowerResolvedProduct",
+   "CategoryTheory.strictTowerRoosNormalized",
+   "CategoryTheory.FiniteFreeStrictTowerTransport",
+   "SheafOfModules.finiteFreeStrictTowerTransport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteFreeStrictTowerTransport.lean",
+  "statement": "theorem finiteFreeStrictTowerTransport {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {O S : Sheaf J CommRingCat.{r}} (a : O ⟶ S) [HasDerivedCategory.{w} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O))] [HasDerivedCategory.{w} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O))] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))] (D : DerivedChangeOfRingsCochainModel.{u, v, r, w, w} a) (hfree : ∃ d : ℕ, Nonempty (free (R := derivedChangeRingIndependentCoefficients J O) (ULift.{r} (Fin d)) ≅ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj (unit (derivedChangeRingIndependentCoefficients J S)))) : ∃ (_ : PreservesFiniteLimits D.E) (_ : PreservesFiniteColimits D.E) (_ : PreservesFiniteLimits (projectionPost (I := ℕᵒᵖ) D.E)) (_ : PreservesFiniteColimits (projectionPost (I := ℕᵒᵖ) D.E)) (_ : HasCountableProducts (DerivedCategory.{w} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O)))) (_ : HasCountableProducts (DerivedCategory.{w} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S)))) (κ : D.T ≅ D.E.mapDerivedCategory), (∀ M, D.ε.app M = κ.hom.app (DerivedCategory.Q.obj M) ≫ D.E.mapDerivedCategoryFactors.hom.app M) ∧ (∀ M : ℕ → DerivedCategory.{w} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O)), IsIso (piComparison D.T M)) ∧ Nonempty (FiniteFreeStrictTowerTransport D.E D.E.mapDerivedCategory (projectionPost (I := ℕᵒᵖ) D.E).mapDerivedCategory D.E.mapDerivedCategoryFactors (projectionPost (I := ℕᵒᵖ) D.E).mapDerivedCategoryFactors)",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "H2 repair rebased on current live source: StrictProjectionLimitData and projectionPost already reside in Sheaf.CategoryTheory.StrictProjectionLimitData, publicly re-imported by RingedStrictTowerProjectionMorphism. The landed definition node def-sbc-strict-projection-tower-data records both plain declarations. Cite that existing owner, not the projection-morphism theorem; no duplicate definition node or consumer modification is needed. All hypotheses, comparisons, theorem signature and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-188e5deb1",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 18784eb845a7. Delta: one import changed to Sheaf.CategoryTheory.StrictProjectionLimitData, and stmt_deps swap the theorem lem-weil-pbc-ringed-strict-tower-projection-morphism for the landed definition node def-sbc-strict-projection-tower-data, whose lean.declarations include SheafOfModules.StrictProjectionLimitData and projectionPost (now housed in StrictProjectionLimitData.lean, publicly re-exported). Statement and 11 proof steps identical to side-live; lean.statement verbatim in the file; one sorry; no lines over 100 chars; no cycle through the def node's closure. Mathematics re-read: hfree (d=0 allowed), counit-pinned kappa, IsIso piComparison, lambda pinned by comparison_normalized, three Roos squares with p and delta pinned to the ordinary short exact sequence, augmentation and whole-tower naturality, no product exactness or boundedness. Compile not re-run (no file changed); worker scompile and deliver2 dry run passed. Advisory: the landed StrictProjectionLimitData.lean docstrings cite the nonexistent blueprint id def-weil-pbc-strict-projection-limit-data (owner is def-sbc-strict-projection-tower-data); the Q135 second-reading section is again a self-check; augmented_naturality is redundant."
  }
 }
