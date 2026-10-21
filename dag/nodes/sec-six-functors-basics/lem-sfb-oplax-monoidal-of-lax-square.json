@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-oplax-monoidal-of-lax-square",
+ "kind": "statement",
+ "title": "Oplax monoidal descent through a compatible lax monoidal square",
+ "statement": "Use the monoidal-functor conventions of [def-sfb-strong-monoidal-functor]. Let $K_1,K_2,D_1,D_2$ be monoidal categories, $Q_1:K_1\\to D_1$ and $Q_2:K_2\\to D_2$ lax monoidal functors, $F:K_1\\to K_2$ an oplax monoidal functor, and $G:D_1\\to D_2$ a functor. Write $\\mu_Q:QX\\otimes QY\\to Q(X\\otimes Y)$ and $\\varepsilon_Q:\\mathbf1\\to Q\\mathbf1$ for lax maps, and $\\delta_F:F(X\\otimes Y)\\to FX\\otimes FY$ and $\\eta_F:F\\mathbf1\\to\\mathbf1$ for oplax maps. Let $\\delta_{X,Y}:G(X\\otimes Y)\\to GX\\otimes GY$ be natural in both variables, and let $e_a:GQ_1a\\to Q_2Fa$ be a natural family of isomorphisms satisfying\n$$\\delta_{Q_1a,Q_1b};(e_a\\otimes e_b);\\mu_{Q_2;Fa,Fb}=G(\\mu_{Q_1;a,b});e_{a\\otimes b};Q_2(\\delta_{F;a,b}).$$\nHere semicolons denote composition in written order. Assume $\\varepsilon_{Q_2}$ is invertible. Let $S$ be a class of objects of $K_1$ such that every object of $D_1$ is isomorphic to $Q_1a$ for some $a\\in S$, and such that $\\mu_{Q_2;x,Fb}$ is invertible for every $x\\in K_2$ and $b\\in S$. Then $G$ has the oplax monoidal structure with tensor comparison $\\delta$ and unit\n$$G(\\varepsilon_{Q_1});e_{\\mathbf1};Q_2(\\eta_F);\\varepsilon_{Q_2}^{-1}.$$\nNo braiding is required; $Q_1$ need only be lax monoidal.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Monoidal/OplaxOfLaxSquare.lean",
+  "place": "CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare and its associativity and unit helper lemmas"
+ },
+ "stmt_deps": [
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Define the unit and tensor comparison by the displayed composites and δ. Naturality of the tensor comparison is the given naturality in each variable.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For three model objects Q1(a),Q1(b),Q1(c), postcompose the oplax associativity equation with the inverse target associator, e(a)⊗e(b)⊗e(c), μ(Q2,Fa,Fb) tensor identity, and μ(Q2,Fa⊗Fb,Fc). Both tensorators are invertible when b,c∈S. Substitute the compatibility equation twice on each side, moving factors with naturality of e and μ. Lax associativity for Q1 and Q2 and oplax associativity for F identify the two resulting composites. Cancel the invertible postcomposition. Transport the identity from models to arbitrary objects by precomposing with G of the tensor of three model isomorphisms and using naturality of δ and the associator. This is oplax_associativity_of_lax_square followed by oplax_associativity_of_iso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the left unit on Q1(a), substitute the displayed unit. Use compatibility at (1,a), naturality of e, and lax left unitality for Q1 and Q2 to reduce to oplax left unitality for F. Cancel the unit isomorphism ε(Q2) and the target tensorator at the unit; the latter is invertible for a lax monoidal functor with invertible ε. The right-unit calculation uses compatibility at (a,1) and the corresponding right-unit equations. Naturality of δ and of the two unitors transports these equalities along Q1(a)≅X. Thus the explicit maps satisfy all oplax monoidal axioms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W6",
+  "document": "lean/WeilConjectures/CategoryTheory/Monoidal/OplaxOfLaxSquare.lean",
+  "place": "CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare and its associativity and unit helper lemmas",
+  "note": "Read and attached the existing complete generic source-library proof; this node adds no Lean code or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor comparison compatible with an essentially surjective strong monoidal functor satisfies monoidal coherence",
+   "results": "{\"t\": \"2026-10-21T08:51:03Z\", \"tool\": \"leanfinder\", \"query\": \"A natural tensor comparison compatible with an essentially surjective strong monoidal functor satisfies monoidal coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq\", \"CategoryTheory.Functor.CoreMonoidal.\\u03bcIso\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"CategoryTheory.Monoidal.InducingFunctorData.\\u03bcIso\", \"CategoryTheory.Functor.Monoidal.\\u03bcIso\", \"CategoryTheory.Functor.Monoidal.map_tensor\", \"CategoryTheory.Functor.Monoidal.instIsIso\\u03bc\", \"CategoryTheory.Functor.Monoidal.commTensorRight\"], \"digest\": \"1a30d3eabad25871\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: monoidal conversion and localization APIs do not supply the compatible lax-square cancellation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OplaxMonoidal\", \"of\"",
+   "results": "{\"t\": \"2026-10-21T08:51:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"OplaxMonoidal\\\", \\\"of\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal\", \"CategoryTheory.Functor.Monoidal.ofOplaxMonoidal\", \"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_\\u03b5Iso\", \"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_\\u03bcIso\", \"CategoryTheory.Functor.OplaxMonoidal.ofChosenFiniteProducts\", \"CategoryTheory.Functor.OplaxMonoidal.\\u03b7_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.OplaxMonoidal.\\u03b4_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.OplaxMonoidal.ofBifunctor.leftMap\\u1d63\"], \"digest\": \"541e309e11c3880f\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: monoidal conversion and localization APIs do not supply the compatible lax-square cancellation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An oplax monoidal structure descends across a lax monoidal square when every object has an isomorphic model and the target tensor comparison is invertible on models",
+   "results": "{\"t\": \"2026-10-21T09:22:10Z\", \"tool\": \"leansearch\", \"query\": \"An oplax monoidal structure descends across a lax monoidal square when every object has an isomorphic model and the target tensor comparison is invertible on models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.ofLaxMonoidal\", \"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_\\u03bcIso\", \"CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal\", \"CategoryTheory.Functor.OplaxMonoidal.ofBifunctor\", \"CategoryTheory.Functor.OplaxMonoidal.mk\", \"CategoryTheory.Functor.Monoidal.\\u03bcIso\", \"CategoryTheory.Functor.Monoidal.\\u03bcIso_inv\", \"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal.congr_simp\"], \"digest\": \"c870bb46d7f16bab\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: monoidal conversion and localization APIs do not supply the compatible lax-square cancellation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ofLaxSquare|oplax_associativity_of_lax_square in Mathlib/CategoryTheory/Monoidal and Mathlib/CategoryTheory/Localization/Monoidal",
+   "results": "No occurrences. Existing implementation found in WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare. Blueprint search for lax square: zero matching blueprint nodes.",
+   "date": "2026-10-21",
+   "verdict": "Attach the existing proved source-library construction; no new Lean declaration."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.ExactTensorNormalization",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "The coefficient/model identification before the internal RHom reduction: the associativity and unit normalization supplied in Step 4 of lem-sfb-exact-tensor-functor-derived-normalization.",
+   "via": [
+    "lem-sfb-exact-tensor-functor-derived-normalization",
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare",
+  "declaration": "CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare",
+  "statement": "noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : ObjectProperty K₁)\n    (hS : ∀ X : D₁, ∃ a, S a ∧ Nonempty (Q₁.obj a ≅ X))\n    (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b))) :\n    G.OplaxMonoidal",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T120850-L-3971770",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T120850-L-3971770",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
