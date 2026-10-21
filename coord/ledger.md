@@ -20328,3 +20328,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:09 L: returned deliver/P3/WeilConjectures.WeilSheaf.PoincareDualityLisse (reviewer RETURN: (the landing tools, head f1d66d6cb) the delivery did not land: lean/WeilConjectures/WeilSheaf/PoincareDualityLisse.lean )
 - 06:09 L: returned deliver/Q4/Sheaf.Paper.InternalHomDualTorAmplitude (reviewer RETURN: (the landing tools, head 8c79cd743) the delivery did not land: lean/Sheaf/AlgebraicGeometry/CondensedLisseProEtaleLocali)
 - 06:09 L: returned deliver/S2/Sheaf.Paper.CondensedQbarExchangeRightAdjunct (reviewer RETURN: (the landing tools, head 816af00ec) the delivery did not land: lean/Sheaf/Paper/CondensedQbarExchangeRightAdjunct.lean w)
+- 06:09 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head 97824b400) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.ConstructibleCoconeAmbie)
