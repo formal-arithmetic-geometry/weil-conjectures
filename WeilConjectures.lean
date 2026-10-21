@@ -11891,14 +11891,13 @@ public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LefschetzVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.LocalTermLocality
-public import WeilConjectures.TraceFormula.Main
-public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.OpenCover

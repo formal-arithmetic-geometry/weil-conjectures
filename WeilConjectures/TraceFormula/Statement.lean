@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.TraceFormula.WeilTrace
+public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 
 /-!
 
@@ -149,7 +149,7 @@ theorem weilPointCount (he : ∃ m : ℕ, e.powSucc m = Iso.refl X) (n : ℕ) :
       (Nat.card (frobeniusFixedPoints e n) : _) := by
   rw [weilTraceFormula ℓ e he]
   simp only [weilStalkSupertrace_unit]
-  have := finite_frobeniusFixedPoints e n
+  have := finite_frobeniusFixedPoints_of_powSucc_eq_refl e he n
   let := Fintype.ofFinite (frobeniusFixedPoints e n)
   rw [finsum_eq_sum_of_fintype, Finset.sum_const, Finset.card_univ, Nat.card_eq_fintype_card,
     nsmul_eq_mul, mul_one]

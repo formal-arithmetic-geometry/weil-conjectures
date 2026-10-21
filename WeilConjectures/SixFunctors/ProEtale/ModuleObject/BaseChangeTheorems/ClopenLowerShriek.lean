@@ -365,9 +365,10 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
   have := (openImmersionProperRefinement j).isProper
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (openImmersionProperRefinement j).isPullback
-  have hc := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
-    ℓ (compactificationOverField j) (Compactification.ofIsOpenImmersion j.left)
-    (Compactification.ofIsProper j.left))
+  have hc := congrArg Iso.hom
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+      (compactificationOverField j) (Compactification.ofIsOpenImmersion j.left)
+      (Compactification.ofIsProper j.left))
   have hr := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
     ℓ (openImmersionProperRefinement j))
   have ht := congrArg Iso.hom (boundedConstructibleLowerShriekRefinementIso'_trans
