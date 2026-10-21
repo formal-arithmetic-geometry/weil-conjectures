@@ -19740,3 +19740,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:20 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 - 03:20 L: returned deliver/NF/lem-weil-pbc-integral-stratified-perfect-characterization (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; 3 new)
 - 03:21 L: returned deliver/NG/lem-weil-pbc-ringed-projection-mate-exact (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new n)
+- 03:21 L: returned deliver/NI/prop-weil-pbc-direct-image-limits (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new n)
