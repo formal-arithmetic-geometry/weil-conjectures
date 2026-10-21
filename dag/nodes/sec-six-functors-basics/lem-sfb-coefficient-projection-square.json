@@ -16,9 +16,102 @@
   "def-sfb-derived-push-hom",
   "def-sfb-module-object-projection-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the section-ring equivalences of [lem-pd-module-ringed-topos-derived-comparison] for both coefficients $R$ and $S$. They identify the actual module-object tensors, derived pullbacks $P_R,P_S$, pushforwards $G_R,G_S$, the derived adjunctions $P\\dashv G$ with their counits, and the pullback tensor maps $d^R,d^S$ with the canonical ringed-topos ones. That theorem fixes one coefficient ring; the coefficient change is transported separately by [lem-sfb-internal-section-scalar-adjunction], applied on $Z=X,Y$ to the ring-object map $a_Z:R_Z\\to S_Z$ of [sk-def-sfb-coefficient-change]: it identifies internal $\\operatorname{Ext}_{a_Z}$, $\\operatorname{Res}_{a_Z}$, the K-flat derived extension $T_Z$, the exact derived restriction $D(\\operatorname{Res}_{a_Z})$ and the specified derived adjunction $T_Z\\dashv D(\\operatorname{Res}_{a_Z})$, including unit and counit, with the sectionwise ones. Thus $T_Z$ is $L\\phi_Z^*$ for the ringed-topos morphism $\\phi_Z:(Z,S_Z)\\to(Z,R_Z)$ with identity underlying topos, and $D(\\operatorname{Res}_{a_Z})$ is $R\\phi_{Z*}$: restriction is exact and, since $\\operatorname{Ext}_{a_Z}$ preserves finite limits, sends K-injective complexes to K-injective complexes [lem-sfb-comap-preserves-k-injectives], so on a K-injective complex both are restriction termwise. The coefficient squares in [sk-def-sfb-coefficient-change] make the two composites $(X,S_X)\\to(Y,R_Y)$ equal as ringed-topos morphisms: same underlying morphism $f$, and ring maps $\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f$. Apply [lem-sfb-ringed-comparison-tensor-adjunction] to this square with identity commutation, path $1$ being $\\phi_X$ after $f_R$ (so $P_1=T_XP_R$, $V_1=G_RD(\\operatorname{Res}_{a_X})$) and path $2$ being $f_S$ after $\\phi_Y$ (so $P_2=P_ST_Y$, $V_2=D(\\operatorname{Res}_{a_Y})G_S$). Its direct-image comparison $V_1\\cong V_2$ is $e^{-1}$, where $e:D(\\mathrm{Res}_{a_Y})G_S\\cong G_RD(\\mathrm{Res}_{a_X})$ is [def-sfb-derived-comap-lower-star-iso]. Indeed, compute both on a K-injective complex $I$ of $S_X$-modules. By the normalization in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], $\\kappa_{f_R,\\phi_X}$ at $I$ is the identity class of $f_*\\operatorname{Res}_{a_X}I$ (one may take the resolution $j=\\mathrm{id}$, as $\\operatorname{Res}_{a_X}I$ is K-injective), and $\\kappa_{\\phi_Y,f_S}$ at $I$ is the class of $\\operatorname{Res}_{a_Y}f_*I$ (restriction being exact, $\\operatorname{Res}_{a_Y}(j)$ is a quasi-isomorphism and represents the identification of $R\\phi_{Y*}$ with $D(\\operatorname{Res}_{a_Y})$). The ordinary commutation between them is the underived isomorphism $\\theta_I$ of [def-sfb-comap-lower-star-iso], an identity of module sheaves since both sides are $f_*$ followed by restriction along $\\eta'_f\\circ a_Y=f_*a_X\\circ\\eta_f$. The component of $e$ at $QI$ in the definition [def-sfb-derived-comap-lower-star-iso] is $Q(\\theta_I)$ between the same representatives. Both are natural in the derived argument, so they agree. Consequently the lemma's pullback comparison $\\theta:P_2\\cong P_1$, whose conjugate is $e^{-1}$, equals $\\sigma:=c^{-1}$ where $c$ is the conjugate of $e$ specified in [def-sfb-derived-pull-iso], rather than an arbitrary isomorphism of these functors. All sites are taken small in the module-sheaf universe as in the cited section-ring equivalence. Exact scalar extension supplies the flatness hypothesis in the specified definition of $e$; the cited ringed-topos lemma needs no flatness.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "sk-def-sfb-coefficient-change",
+    "lem-sfb-comap-preserves-k-injectives",
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-sfb-comap-lower-star-iso",
+    "def-sfb-derived-comap-lower-star-iso",
+    "def-sfb-derived-pull-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3): compatibility with scalar extension; identification of its specified pull comparison"
+   }
+  },
+  {
+   "text": "Write $\\sigma=c^{-1}$ and let $d^R,d^S$ denote the pullback tensor comparisons in [def-sfb-module-object-projection-map]. The tensor equation of [lem-sfb-ringed-comparison-tensor-adjunction], applied to the same square and transported by [lem-pd-module-ringed-topos-derived-comparison], reads, for $A,B\\in D(R_Y)$,\n$$\n(\\sigma_A\\otimes\\sigma_B)d^S_{T_YA,T_YB}P_S(\\mu_{Y;A,B})\n=\\mu_{X;P_RA,P_RB}T_X(d^R_{A,B})\\sigma_{A\\otimes B}.\\tag{1}\n$$\nIndeed the tensor comparison for the composite $P_ST_Y$ is $d^S P_S(\\mu_Y)$, while for $T_XP_R$ it is $\\mu_XT_X(d^R)$. The scalar tensor comparisons here are the ringed-topos tensor maps $t_{\\phi_Z}$ of the identity-topos coefficient morphisms. They are the canonical $\\mu_Z$ of the statement, in the same direction: on flat-term K-flat representatives both are the localization of the termwise map $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes(1\\otimes y)$ on local pure tensors, and the transports of Step 1 [lem-pd-module-ringed-topos-derived-comparison, lem-sfb-internal-section-scalar-adjunction] preserve local pure tensors and these representatives.",
+   "uses": [
+    "def-sfb-module-object-projection-map",
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3): tensor compatibility before taking projection mates"
+   }
+  },
+  {
+   "text": "The definitions [def-sfb-derived-pull-iso, def-sfb-derived-push-hom, def-sfb-conjugate-pull-iso, def-sfb-mate-push-hom] give the following counit equation:\n$$\\varepsilon^S_{T_XK}P_S(\\gamma_K)=T_X(\\varepsilon^R_K)\\sigma_{G_RK}.\\tag{2}$$\nHere is the calculation, including the relation between the two different mates. Put $U=D(\\mathrm{Res}_{a_X})$, $V=D(\\mathrm{Res}_{a_Y})$, and write $\\eta^X,v^X,v^Y$ for the scalar unit on $X$ and scalar counits on $X,Y$. The mate definition says $\\gamma_K=v^Y_{G_ST_XK}T_Y(e^{-1}_{T_XK})T_YG_R(\\eta^X_K)$. Conjugacy for the composite adjunctions, whose counits are those of [def-weil-pbc-composite-adjunction], says\n$$\\varepsilon^S_B P_S(v^Y_{G_SB})P_ST_Y(e^{-1}_B)=v^X_BT_X(\\varepsilon^R_{UB})\\sigma_{G_RUB}.$$\nSubstitute $B=T_XK$ and precompose with $P_ST_YG_R(\\eta^X_K)$. Naturality of $\\sigma$ moves this last map to $T_XP_RG_R(\\eta^X_K)$; naturality of $\\varepsilon^R$ turns $\\varepsilon^R_{UT_XK}P_RG_R(\\eta^X_K)$ into $\\eta^X_K\\varepsilon^R_K$. Finally $v^X_{T_XK}T_X(\\eta^X_K)=1$ is the scalar adjunction triangle. This proves (2).",
+   "uses": [
+    "def-sfb-derived-pull-iso",
+    "def-sfb-derived-push-hom",
+    "def-sfb-conjugate-pull-iso",
+    "def-sfb-mate-push-hom",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3): explicit mate/conjugate counit calculation"
+   }
+  },
+  {
+   "text": "Set $A=G_RK\\otimes_R^LM$, $H=K\\otimes_R^LP_RM$, $B=T_XK\\otimes_S^LP_ST_YM$, and $q=(1\\otimes c_M)\\mu_{X;K,P_RM}:T_XH\\to B$. To compare the two maps $T_YA\\to G_SB$, apply the injective adjunction bijection of [sk-def-sfb-module-derived-pushpull]: the transpose of $h$ is $\\varepsilon^S_B P_S(h)$. By the defining transpose of $\\pi^S$ in [def-sfb-module-object-projection-map] and naturality of $d^S$, the transpose of the left side of the claimed equation is\n$$(\\varepsilon^S_{T_XK}P_S\\gamma_K\\otimes1)d^S_{T_YG_RK,T_YM}P_S\\mu_Y.$$\nUse (2), insert $c_M\\sigma_M=1$, and use (1) at $(G_RK,M)$. This becomes\n$$(T_X\\varepsilon^R_K\\otimes c_M)\\mu_{X;P_RG_RK,P_RM}T_X(d^R_{G_RK,M})\\sigma_A\n=q\\,T_X((\\varepsilon^R_K\\otimes1)d^R_{G_RK,M})\\sigma_A,\\tag{3}$$\nwhere the last equality is naturality of $\\mu_X$ in the first variable.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3): transpose and calculate the left-hand projection composite"
+   }
+  },
+  {
+   "text": "For the right side $G_S(q)\\gamma_HT_Y(\\pi^R_{K,M})$, naturality of $\\varepsilon^S$ followed by (2) at $H$ gives transpose\n$$q\\,T_X(\\varepsilon^R_H)\\sigma_{G_RH}P_ST_Y(\\pi^R_{K,M}).$$\nNaturality of $\\sigma$ makes this\n$$q\\,T_X(\\varepsilon^R_HP_R(\\pi^R_{K,M}))\\sigma_A\n=q\\,T_X((\\varepsilon^R_K\\otimes1)d^R_{G_RK,M})\\sigma_A.$$\nThe last equality is precisely the defining transpose of $\\pi^R$ in [def-sfb-module-object-projection-map]. This is (3). The adjunction bijection in [sk-def-sfb-module-derived-pushpull] therefore gives the required equality of the original maps. No cancellation of $\\gamma$ or of a projection morphism occurred, so no invertibility or properness hypothesis is needed.",
+   "uses": [
+    "def-sfb-module-object-projection-map",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3): transpose the right-hand composite and conclude equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "sk-def-sfb-coefficient-change",
+  "lem-sfb-comap-preserves-k-injectives",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-sfb-comap-lower-star-iso",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-pull-iso",
+  "def-sfb-module-object-projection-map",
+  "def-sfb-derived-push-hom",
+  "def-sfb-conjugate-pull-iso",
+  "def-sfb-mate-push-hom",
+  "def-weil-pbc-composite-adjunction",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (3), coefficient compatibility of projection maps; explicit counit calculation using the cited ringed-topos comparison theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +147,45 @@
    "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft; ",
    "date": "2026-10-21",
    "verdict": "no match: returned declarations do not state this pro-etale module-object comparison or lattice assertion; see retained full search output in research/lem-sfb-coefficient-projection-square.search.txt"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula mate commutes with exact coefficient extension via the canonical monoidal pullback comparison",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.frobeniusMorphism_mate, PresheafOfModules.pullbackComp, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned statement supplies both the specified unbounded condensed-module comparisons and their tensor/projection normalization; the generic mate facts are only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|projectionFormula|projection.*[Mm]ate",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned statement supplies both the specified unbounded condensed-module comparisons and their tensor/projection normalization; the generic mate facts are only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned statement supplies both the specified unbounded condensed-module comparisons and their tensor/projection normalization; the generic mate facts are only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula compatibility with change of coefficients in derived categories of sheaves of modules",
+   "results": "8 hits: CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.pushforward_obj_map_apply', CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.ProjectiveResolution.Hom.hom_comp_π, Algebra.PreSubmersivePresentation.ofHasCoeffs_map, IsBaseChange.directSumPow",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned statement supplies both the specified unbounded condensed-module comparisons and their tensor/projection normalization; the generic mate facts are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between composites of left adjoints induces a pushforward mate compatible with the projection formula",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned statement supplies both the specified unbounded condensed-module comparisons and their tensor/projection normalization; the generic mate facts are only ingredients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-sfb-proper-base-change-rational",
@@ -69,10 +197,44 @@
  "blueprint": {
   "from": {
    "node": "det-thm-sfb-proper-base-change-rational",
-   "place": "paragraph (3), projection on integral-model pairs; former steps 6 and 9, equality before invertibility",
+   "place": "paragraph (3): the canonical projection maps on integral-model pairs are their scalar extensions, before proving invertibility",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-coefficient-projection-square",
+  "worker": "stage1",
+  "summary": "Proved the actual coefficient/projection square by monoidal comparison for a commuting square of ringed topoi and an explicit two-sided adjunction-transpose calculation. Reused existing module/section equivalences and comparison nodes; no new nodes or statement changes. Expanded the relation between the scalar mate gamma and the inverse pull conjugate c^-1, retaining all unbounded and noninvertible cases.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sfb-proper-base-change-rational.proof.md: equality of the scalar extension of an integral canonical projection morphism with the canonical projection morphism after scalar change, independently of the subsequent isomorphism argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic exact tensor/adjunction equivalence between internal modules and section-ring modules; needed to apply ringed-topos coherence to the actual module-object maps."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Generic monoidal and adjunction normalization for a commuting ringed-topos square; the unit route supplies no such tensor coherence theorem."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic transport of internal scalar extension/restriction and their derived adjunction to section-ring modules along a ring-object map; lem-pd-module-ringed-topos-derived-comparison fixes one coefficient ring and no node of the unit gives this (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-sfb-internal-section-scalar-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-9c49b64a8",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-9c49b64a8 (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, def-sfb-derived-comap-lower-star-iso's construction and blueprint main-20261015 rational PBC proof paragraph (3). Item is not superseded: live and side-live still have it unsplit. No new nodes. Steps 3-5 are correct: (2) follows from the mate formula with the composite-adjunction conjugacy counit, scalar-unit naturality and the triangle identity; I checked both transposes domain by domain against (1) and (2), and nothing uses an inverse of gamma or pi. Two repairable faults in Step 1/2, fixed. C4/C1: lem-pd-module-ringed-topos-derived-comparison fixes one coefficient ring, so it does not give scalar extension or restriction or T -| D(Res). The fix cites the existing lem-sfb-internal-section-scalar-adjunction and adds it to split_report.tool_uses as a generic tool. E5: the identification of the ringed lemma's direct-image comparison with e was only asserted. It is now written out on K-injective I through the normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition, lem-sfb-comap-preserves-k-injectives and theta_I of def-sfb-comap-lower-star-iso, with explicit paths; theta = sigma = c^-1. Step 2 now says why mu_Z is t_{phi_Z}: both are the localization of the pure-tensor map on flat K-flat representatives. Batch 5: lem-pd-module-ringed-topos-derived-comparison is a generic comparison between internal module objects and section-ring modules. Neither assumption states it and it is not a duality or trace step. It is already in the batch-5 closure (via det-thm-sf-pf-adic-projection, earlier N6 PASS), so the closure difference is empty; accepted. The added citations are on route or declared tools, already in the batch-5 closure, and acyclic. Edge cases checked: a=id, f=id, zero inputs, S=0.; 1 file(s) fixed by the reviewer"
  }
 }
