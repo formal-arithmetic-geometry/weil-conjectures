@@ -1,0 +1,95 @@
+{
+ "id": "lem-weil-pbc-top-base-change-presheaf",
+ "kind": "statement",
+ "title": "Top derived module base change on cohomology presheaf classes",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes [def-pc-scheme], with cartesian square $X_T=X\\times_ST$, $v:X_T\\to X$, $f_T:X_T\\to T$ [def-pc-base-change]. Let $F$ be an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], $q\\geq0$, and assume $R^if_*F=0$ for $i>q$ [pqf-def-cohomology]. Put $C=Rf_*(F[0])$ [def-pc-derived-direct-image, def-pc-derived-category]. Let $\\delta_g:Lg^*C\\to Rf_{T,*}((v^*F)[0])$ be the canonical module base-change map [def-pc-derived-module-base-change-map], with derived and ordinary pullbacks [def-pc-derived-pullback, def-pc-module-pullback]. Use $\\kappa_{g,C}:H^q(Lg^*C)\\xrightarrow{\\sim}g^*R^qf_*F$ of [lem-weil-pbc-derived-pullback-top-cohomology], and put $b_g^q=H^q(\\delta_g)\\kappa_{g,C}^{-1}$. Let\n$$a_g^q:R^qf_*F\\longrightarrow g_*R^qf_{T,*}(v^*F)$$\nbe the ordinary adjoint of $b_g^q$ [lem-pc-module-pullback-adjunction]. For an open $V\\subseteq S$, put $U=f^{-1}V$, $W=g^{-1}V$, $U'=v^{-1}U=f_T^{-1}W$; the restricted map is $v_V:U'\\to U$. Let $\\theta_V$ and $\\theta'_W$ denote the canonical cocycle-to-sheafification maps\n$$H^q(U,F|_U)\\to\\Gamma(V,R^qf_*F),\\qquad H^q(U',(v^*F)|_{U'})\\to\\Gamma(W,R^qf_{T,*}v^*F)$$\nof [lem-weil-pbc-higher-direct-image-presheaf]. Then\n$$\\Gamma(V,a_g^q)\\,\\theta_V=\\theta'_W\\,v_V^*.$$\nHere $v_V^*$ is the module cohomology map of the restricted ordinary pullback unit [def-weil-pbc-module-cohomology-fmap], with its coefficient identified with $(v^*F)|_{U'}$ by [lem-pc-module-pullback-identity-composition]. No affineness, flatness, quasi-coherence, or invertibility of $\\delta_g$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, cocycle construction and proof. Agent identification of this map with the module derived mate, using section-functoriality (lemma-functoriality, remark-explain-arrow) and remark-base-change; these additional constructions are read in the same document."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived base change map on the highest nonzero higher direct image agrees with sheafification of cohomology pullback on inverse images of opens",
+   "results": "SheafOfModules.sheafificationCompPullback; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocycle Leray edge from global cohomology to global sections of higher direct image commutes with coefficient pullback in every commutative square of ringed spaces",
+   "results": "CategoryTheory.Sheaf.ΓRes_map_assoc; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; groupCohomology.cocyclesMap_cocyclesIso₀_hom_f; groupCohomology.cocyclesMap_cocyclesIso₀_hom_f_apply; groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply; groupCohomology.π_map_apply; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change on the top higher direct image is the map on sheafified cohomology presheaves induced by pullback on inverse image opens",
+   "results": "TopCat.Presheaf.pullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; TopCat.Sheaf.pullback; TopCat.Presheaf.pullbackObjObjOfImageOpen; TopCat.Presheaf.pushforward; TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.pushforwardPullbackAdjunction; SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "no hits",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(rightDerived|[Cc]ohomology)|rightDerived.*baseChange|sheafif.*[Cc]ohomology|[Cc]ohomology.*sheafif",
+   "results": "no hits",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes.",
+   "via": [
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

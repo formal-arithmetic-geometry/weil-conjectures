@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-derived-pullback-top-cohomology",
+ "kind": "statement",
+ "title": "Canonical top cohomology comparison for derived module pullback",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes [def-pc-scheme], $n\\in\\mathbf Z$, and $C\\in D(\\mathcal O_S)$ [def-pc-derived-category] with $H^i(C)=0$ for $i>n$. Use the canonical truncation $\\tau_C:C\\to H^n(C)[-n]$ of the standard t-structure [def-sbc-standard-tstructure-derived-category], derived pullback [def-pc-derived-pullback], and ordinary module pullback [def-pc-module-pullback]. For an $\\mathcal O_S$-module $M$, let $c_{g,M}:Lg^*(M[0])\\to(g^*M)[0]$ be the comparison normalized as the transpose of the ordinary pullback unit [def-pc-derived-module-base-change-map]. Then $H^i(Lg^*C)=0$ for $i>n$, $H^0(c_{g,M})$ is an isomorphism, and\n$$\\kappa_{g,C}:H^n(Lg^*C)\\xrightarrow{H^n(Lg^*\\tau_C)}H^n(Lg^*(H^n(C)[-n]))\\xrightarrow{H^0(c_{g,H^n(C)})}g^*H^n(C)$$\nis an isomorphism (the second arrow uses the canonical shift comparison). It is natural for every morphism $u:C\\to D$ between objects with cohomology zero above $n$:\n$$\\kappa_{g,D}H^n(Lg^*u)=g^*H^n(u)\\kappa_{g,C}.$$\nFor every $h:T'\\to T$, under the canonical derived composition isomorphism [lem-pc-ringed-spaces-derived-pullback-composition] and the ordinary composition isomorphism $c^{\\rm ord}_{g,h}:h^*g^*\\cong(gh)^*$ [lem-pc-module-pullback-identity-composition],\n$$\\kappa_{gh,C}=c^{\\rm ord}_{g,h,H^n(C)}\\,h^*(\\kappa_{g,C})\\,\\kappa_{h,Lg^*C}.$$\nNo lower cohomological bound, flatness, quasi-coherence, or finite rank is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TC, lemma-negative-vanishing: dual of (1) and dual of the truncation argument in the proof of (2), applied to the right-exact module pullback. The normalization, naturality and composition formulas are the agent assembly from this argument and the canonical pullback comparisons."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-derived-module-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a bounded above complex commutes canonically with its highest nonzero cohomology sheaf, naturally in the complex and compatibly with composition of pullbacks",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.pullback_assoc; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; PresheafOfModules.pullbackComp",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complex of sheaves of modules with vanishing cohomology above n, H n of its derived pullback is canonically the ordinary pullback of H n",
+   "results": "SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_assoc; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top cohomology of left derived right exact functor on a bounded above complex agrees with the functor applied to top cohomology",
+   "results": "CategoryTheory.Functor.leftDerived; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.totalRightDerived",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"homology\"",
+   "results": "no hits",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Hh]omology|[Hh]omology.*pullback|leftDerived.*(zero|[Hh]omology)|[Hh]omology.*leftDerived",
+   "results": "Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*(map|[Hh]omology)|[Hh]omology.*truncGE",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, objectwise classical derived functors, or generic truncation constructions do not state the asserted normalized derived sheaf comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Top truncation projection before taking degree one.",
+   "via": [
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
