@@ -21191,3 +21191,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:35 L: merged deliver/Q130/lem-sfb-unit-tensor-braiding (stage 2; reviewer PASS; parallel immutable checks)
 - 08:35 L: returned deliver/Q39/lem-pur-signed-line-derived-base-change (reviewer RETURN: L: independent stage-2 immutable head 8e42368ae648: Findings 1-3 of 808a03a1 are repaired. (1) The new def node def-pur-)
 - 08:37 L: returned deliver/NQ/lem-sfb-ordinary-proetale-direct-image-plus-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-ordinary-proetale-direct-image-plus-comparison)
+- 08:37 L: returned deliver/O2/lem-pe-two-term-reduction-cohomology (reviewer RETURN: L: independent stage-2 immutable head f2a79c6fbcc8: H2: stmt_deps add theorem lem-sfb-successive-derived-quotient-normal)
