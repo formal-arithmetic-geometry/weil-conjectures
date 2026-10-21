@@ -11,9 +11,73 @@
   "def-nagata-category",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\Theta^{\\mathcal C}$ and $\\Theta^{\\mathcal D}$ for the assumed closed bijections, and $\\Psi_{X,Y}:\\operatorname{Hom}_{\\mathcal D}(FX,Y)\\to\\operatorname{Hom}_{\\mathcal C}(X,GY)$ for the given adjunction bijection. In either category, naturality in $T$ gives\n$$\\Theta\\bigl(\\mathrm{ev}_{X,Y}\\circ(t\\otimes1_X)\\bigr)=\\Theta(\\mathrm{ev}_{X,Y})\\circ t=t,$$\nfor $t:T\\to H(X,Y)$. Bijectivity therefore gives the explicit uncurrying formula $\\Theta^{-1}(t)=\\mathrm{ev}_{X,Y}\\circ(t\\otimes1_X)$. Only the definition of evaluation, the assumed naturality, and the category identity laws of [def-nagata-category] enter.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the adjunction-map formulas immediately following the definition; agent-written closed-bifunctor calculation for the mapping-complex comparisons in prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+   }
+  },
+  {
+   "text": "Fix $P,N$ and use the objects $V,J$ in the statement. For every object $T$ of $\\mathcal C$, compose the following bijections:\n$$\\begin{aligned}\n\\operatorname{Hom}_{\\mathcal C}(T,V)&\\xrightarrow{(\\Theta^{\\mathcal C})^{-1}}\\operatorname{Hom}_{\\mathcal C}(T\\otimes P,GN)\\xrightarrow{\\Psi^{-1}}\\operatorname{Hom}_{\\mathcal D}(F(T\\otimes P),N)\\\\\n&\\xrightarrow{(-)\\circ\\mu_{T,P}}\\operatorname{Hom}_{\\mathcal D}(FT\\otimes FP,N)\\xrightarrow{\\Theta^{\\mathcal D}}\\operatorname{Hom}_{\\mathcal D}(FT,J)\\xrightarrow{\\Psi}\\operatorname{Hom}_{\\mathcal C}(T,GJ).\n\\end{aligned}$$\nCall this bijection $\\Phi_T$. The middle map is bijective by precomposition with $\\mu_{T,P}^{-1}$ as its inverse. The two uses of $\\Psi$ and their directions are exactly the natural bijections of [lem-weil-pbc-adjunction-of-natural-bijection]. Its formula $\\Psi^{-1}(h)=e_N\\circ Fh$, together with step 1, gives\n$$\\Phi_T(t)=\\Psi_{T,J}\\!\\left(\\Theta^{\\mathcal D}\\!\\left(e_N\\circ F(\\mathrm{ev}_{P,GN})\\circ F(t\\otimes1_P)\\circ\\mu_{T,P}\\right)\\right).$$",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the adjunction-map formulas immediately following the definition; agent-written closed-bifunctor calculation for the mapping-complex comparisons in prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+   }
+  },
+  {
+   "text": "Put $r=e_N\\circ F(\\mathrm{ev}_{P,GN})\\circ\\mu_{V,P}:FV\\otimes FP\\to N$, so the specified $b$ is $\\Theta^{\\mathcal D}(r)$. Naturality of $\\mu$ at $(t,1_P)$ gives\n$$F(t\\otimes1_P)\\circ\\mu_{T,P}=\\mu_{V,P}\\circ(Ft\\otimes1_{FP}).$$\nConsequently the inner transpose in step 2 is\n$$\\Theta^{\\mathcal D}\\bigl(r\\circ(Ft\\otimes1_{FP})\\bigr)=\\Theta^{\\mathcal D}(r)\\circ Ft=b\\circ Ft$$\nby the assumed naturality in the first (test-object) variable. Finally, the source naturality and unit formula in [lem-weil-pbc-adjunction-of-natural-bijection] give\n$$\\Phi_T(t)=\\Psi_{T,J}(b\\circ Ft)=\\Psi_{V,J}(b)\\circ t=G(b)\\circ u_V\\circ t=\\delta_{P,N}\\circ t.$$\nThus postcomposition with the specified $\\delta$, rather than an unspecified isomorphism between the objects, is bijective for every $T$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the adjunction-map formulas immediately following the definition; agent-written closed-bifunctor calculation for the mapping-complex comparisons in prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+   }
+  },
+  {
+   "text": "Write $W=GJ$ and $\\delta=\\delta_{P,N}:V\\to W$. Surjectivity of $\\Phi_W$ gives $s:W\\to V$ with $\\delta\\circ s=1_W$. Hence\n$$\\delta\\circ(s\\circ\\delta)=(\\delta\\circ s)\\circ\\delta=\\delta=\\delta\\circ1_V.$$\nInjectivity of $\\Phi_V$, identified in step 3 with postcomposition by $\\delta$, gives $s\\circ\\delta=1_V$. Therefore $s$ is a two-sided inverse and $\\delta$ is an isomorphism. The displayed simplifications use only the identity and associativity laws of [def-nagata-category]. This supplies the elementary Hom-test argument explicitly; no representability or size theorem is being invoked.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the adjunction-map formulas immediately following the definition; agent-written closed-bifunctor calculation for the mapping-complex comparisons in prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-closed-adjunction-naturality] to precisely the two tensor bifunctors, the given three-variable natural closed bijections, the natural isomorphisms $\\mu$, and the adjunction $F\\dashv G$ of this statement. Its $b$ is the closed transpose of $e_N\\circ F(\\mathrm{ev}_{P,GN})\\circ\\mu_{V,P}$ and its $\\delta$ is $G(b)\\circ u_V$, so both are the actual maps used here. The cited statement gives, for arbitrary $a:P'\\to P$ and $v:N\\to N'$,\n$$\\delta_{P',N'}\\circ H_{\\mathcal C}(a,Gv)=G H_{\\mathcal D}(Fa,v)\\circ\\delta_{P,N}.$$\nThese are the two-variable naturality squares. Step 4 makes every component invertible, so these maps form the required natural isomorphism. The naturality lemma assumes only the same bifunctors and natural bijections, with no associator, unit coherence, full faithfulness or dualizability condition.",
+   "uses": [
+    "lem-coef-closed-adjunction-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the adjunction-map formulas immediately following the definition; agent-written closed-bifunctor calculation for the mapping-complex comparisons in prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-coef-closed-adjunction-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the adjunction-map formulas immediately following the definition; agent-written closed-bifunctor calculation for the mapping-complex comparisons in prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +120,129 @@
    "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Transport the property of being monoidal closed across a monoidal equivalence of categories\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\\nresulting\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\\nresulting\"}",
    "date": "2026-10-21",
    "verdict": "no match: MonoidalClosed.ofEquiv requires F.IsEquivalence, absent here; cartesian exponential/Frobenius comparisons do not state this arbitrary closed tensor-bifunctor adjunction isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*[Ii]hom|[Ii]hom.*rightAdjoint|[Ii]hom.*[Aa]djunction|[Ee]nriched.*[Aa]djunction",
+   "results": {
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean",
+     "Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean",
+     "Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean",
+     "Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean"
+    ],
+    "digest": "761282881dde6016"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: closed-adjunction ingredients and Cartesian/Frobenius special cases do not state the claimed isomorphism for arbitrary tensor bifunctors; MonoidalClosed.ofEquiv additionally assumes F.IsEquivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom comparison H(P,G(N)) is isomorphic to G(H(F(P),N)) for a strong tensor left adjoint F adjoint to G",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ihom",
+     "CategoryTheory.internalHom",
+     "CategoryTheory.MonoidalClosed.internalHom",
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+     "CategoryTheory.exp.adjunction",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+     "CategoryTheory.FunctorToTypes.functorHomEquiv_apply_app"
+    ],
+    "digest": "3a601890f74e1226"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: closed-adjunction ingredients and Cartesian/Frobenius special cases do not state the claimed isomorphism for arbitrary tensor bifunctors; MonoidalClosed.ofEquiv additionally assumes F.IsEquivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.ihom",
+   "results": {
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+     "CategoryTheory.MonoidalClosed.ofEquiv_curry_def",
+     "CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+     "CategoryTheory.Over.toOverSectionsAdj",
+     "CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom",
+     "CategoryTheory.Monoidal.Reflective.isIso_tfae",
+     "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso"
+    ],
+    "digest": "27942e7aa461e24f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: closed-adjunction ingredients and Cartesian/Frobenius special cases do not state the claimed isomorphism for arbitrary tensor bifunctors; MonoidalClosed.ofEquiv additionally assumes F.IsEquivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor preserving left adjoint between categories with closed tensor bifunctors induces an isomorphism H(P,G(N)) to G(H(F(P),N))",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.frobeniusMorphism_mate",
+     "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+     "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso",
+     "CategoryTheory.expComparison",
+     "CategoryTheory.MonoidalClosed.ofEquiv_curry_def",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+     "CategoryTheory.tensorLeftAdjunction",
+     "CategoryTheory.coev_expComparison"
+    ],
+    "digest": "62879f5eb1cf1a87"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: closed-adjunction ingredients and Cartesian/Frobenius special cases do not state the claimed isomorphism for arbitrary tensor bifunctors; MonoidalClosed.ofEquiv additionally assumes F.IsEquivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|rightAdjointUniq|conjugateIso",
+   "results": {
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean"
+    ],
+    "digest": "6dbf62a7a56b8911"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: closed-adjunction ingredients and Cartesian/Frobenius special cases do not state the claimed isomorphism for arbitrary tensor bifunctors; MonoidalClosed.ofEquiv additionally assumes F.IsEquivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoints to isomorphic composite left adjoints give a natural internal Hom isomorphism under tensor preserving adjunctions without monoidal coherence",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+     "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ",
+     "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso",
+     "CategoryTheory.tensorRightHomEquiv",
+     "CategoryTheory.tensorLeftHomEquiv",
+     "CategoryTheory.tensorRightHomEquiv_tensor",
+     "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso"
+    ],
+    "digest": "0e97398f43d3e0b0"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: comp_homEquiv composes adjunctions but does not identify or prove invertibility of this evaluation-defined comparison; rigid-category hits require dual objects and monoidal coherence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-system-evaluation-calculus",
@@ -79,5 +262,21 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-closed-adjunction-enriched-isomorphism",
+  "worker": "stage1",
+  "summary": "NU supplies the five-bijection calculation, identifies it with postcomposition by the specified evaluation-defined adjunct, constructs its inverse using surjectivity and injectivity, and cites the existing bifunctor-level naturality lemma. No new nodes, no changed statement, and no added monoidal assumptions. Proof attribution uses the actual Stacks adjunction conventions rather than pretending this abstract result is a literal sites-cohomology lemma.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, first and last mapping-complex comparisons, via the closed-adjunction step extracted from lem-coef-derived-system-evaluation-calculus. The current main-20261015 node records the integral adjunction assertion; the older master node contains the displayed mapping-complex calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-4a2372673",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-4a2372673 (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, no new nodes; the statement and stmt_deps are byte-identical to the base. Live and side-live still have it unsplit, it is not in any route-pivot-dropped section, and there is no re-split repair note. Step 1: naturality of Θ in T gives Θ⁻¹(t)=ev∘(t⊗1). Step 2: Θ_C⁻¹, Ψ⁻¹, ∘μ_{T,P}, Θ_D, Ψ checked map by map with directions and junctions, using Ψ⁻¹(h)=e_N F h from lem-weil-pbc-adjunction-of-natural-bijection. Step 3: μ-naturality at (t,1_P), test-variable naturality of Θ_D and source naturality of Ψ give Φ_T=δ∘(−) with the specified δ=G(b)u_V. Step 4: explicit Yoneda two-sided inverse from surjectivity at GJ and injectivity at V, using only category laws. Step 5: the cited lem-coef-closed-adjunction-naturality (same unit, reviewed PASS by Q132 on 2026-10-17, no cycle) has the same data and its δ-square is exactly the two-variable naturality. Source: Stacks categories.tex:3344-3384, Tag 0037 definition-adjoint (unit/counit and the α/β correspondence); proof_origin is agent. Small cases (identity adjunction, Set with P=∅, terminal category, constant-terminal non-fully-faithful F) are all consistent; no associator or unit is used. Duplicate search over dag/nodes (monoidal-adjunction mates, oplax mate, enrichment-change adjunction, projection-formula and geometric internal-Hom nodes) found no duplicate. Route is fine with no tool_uses; no SGA. Minor, not fixed: an empty base lean_audit {} is omitted (not split-owned, merge keeps the base), and the report mentions a citations.json that is not committed."
+ }
 }
