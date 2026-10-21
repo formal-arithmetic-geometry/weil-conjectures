@@ -1,13 +1,14 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q134
+Authors: SHEAF groups Q134 and K1
 -/
 module
 
 public import Sheaf.Paper.IntegralUniformCoefficient
 public import Sheaf.Paper.IntegralScalarExtensionWellDefined
 public import Sheaf.Paper.PbcActualScalarPullback
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 
 /-!
 # Actual finite coefficient maps and their normalized restriction comparison
@@ -56,7 +57,7 @@ theorem finiteFreeCoefficientQuotientKernel (n : ℕ)
     (hx : x ∈ (pbcPadicCoefficientDatum l E).ideal ^ (n + 1)) :
     Ideal.Quotient.mk ((pbcPadicCoefficientDatum l F).ideal ^ (n + 1))
       (WeilConjectures.integralScalarIntegerInclusion l E F i x) = 0 := by
-  sorry
+  exact WeilConjectures.integralScalar_quotient_kernel l E F i n x hx
 
 /-- Quotient inclusion on the actual, unlifted integer rings.
 Source: blueprint scalar-extension coefficient construction
@@ -71,6 +72,30 @@ def finiteFreeCoefficientQuotientMap (n : ℕ) :
       (WeilConjectures.integralScalarIntegerInclusion l E F i))
     (finiteFreeCoefficientQuotientKernel l E F i n)
 
+-- Sheafification preserves composition of the actual postcomposition maps.
+private theorem coefficientMap_comp (T : Scheme.{u})
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C] (f : A →+* B) (g : B →+* C) :
+    AdicCoefficients.coefficientMap T f ≫ AdicCoefficients.coefficientMap T g =
+      AdicCoefficients.coefficientMap T (g.comp f) := by
+  rw [AdicCoefficients.coefficientMap, AdicCoefficients.coefficientMap,
+    ← Functor.map_comp]
+  congr 1
+
+-- The strict quotient systems use the same integer inclusion at every index.
+private def finiteFreeCoefficientSystemMap (T : Scheme.{u}) :
+    pbcAdicRings T (pbcPadicCoefficientDatum l E) ⟶
+      pbcAdicRings T (pbcPadicCoefficientDatum l F) :=
+  NatTrans.ofOpSequence
+    (fun n ↦ AdicCoefficients.coefficientMap T (finiteFreeCoefficientQuotientMap l E F i n))
+    (fun n ↦ by
+      simp only [pbcAdicRings, AdicCoefficients.ringSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      rw [coefficientMap_comp, coefficientMap_comp]
+      congr 1
+      ext x
+      rfl)
+
 /-- The coefficient map is uniquely determined by its finite quotient projections.
 Source: blueprint scalar-extension coefficient construction; Bhatt--Scholze 6.6.11
 (blueprint: def-weil-pbc-actual-finite-coefficient-transport).
@@ -83,7 +108,15 @@ theorem finiteFreeCompletedCoefficientMap_existsUnique (T : Scheme.{u}) :
       ∀ n : ℕ, c ≫ pbcAdicProjection T (pbcPadicCoefficientDatum l F) n =
         pbcAdicProjection T (pbcPadicCoefficientDatum l E) n ≫
           AdicCoefficients.coefficientMap T (finiteFreeCoefficientQuotientMap l E F i n) := by
-  sorry
+  let c := lim.map (finiteFreeCoefficientSystemMap l E F i T)
+  refine ⟨c, ?_, ?_⟩
+  · intro n
+    exact limMap_π (finiteFreeCoefficientSystemMap l E F i T) (op n)
+  · intro c' hc'
+    apply limit.hom_ext
+    intro n
+    exact (hc' n.unop).trans
+      (limMap_π (finiteFreeCoefficientSystemMap l E F i T) n).symm
 
 /-- The unique residue-normalized completed ring map induced by the field embedding.
 Source: blueprint scalar-extension coefficient construction
@@ -97,6 +130,64 @@ Source: Stacks 06YY; blueprint scalar extension
 abbrev finiteFreeCompletedScalar (T : Scheme.{u}) :=
   pbcDerivedExtend (finiteFreeCompletedCoefficientMap l E F i T)
 
+-- Identify the selected comparison using its fixed constant-section normalization.
+private theorem levelConstantComparison_eq (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    (pbcLevelConstantComparison T d n).hom =
+      AdicCoefficients.constantComparison T (A ⧸ d.ideal ^ (n + 1)) := by
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ ((pbcAdicRings T d).obj (op n)).property
+  change toSheafify _ _ ≫ (pbcLevelConstantComparison T d n).hom.hom =
+    toSheafify _ _ ≫ sheafifyMap _ _
+  rw [← toSheafify_naturality]
+  ext U b
+  exact (pbcLevelConstantComparison_exists T d n).exists.choose_spec U b
+
+private theorem levelConstantComparison_naturality (T : Scheme.{u})
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (dA : AdicCoefficientDatum A) (dB : AdicCoefficientDatum B) (n : ℕ)
+    (q : (A ⧸ dA.ideal ^ (n + 1)) →+* (B ⧸ dB.ideal ^ (n + 1))) :
+    (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map (CommRingCat.ofHom q) ≫
+        (pbcLevelConstantComparison T dB n).hom =
+      (pbcLevelConstantComparison T dA n).hom ≫ AdicCoefficients.coefficientMap T q := by
+  rw [levelConstantComparison_eq, levelConstantComparison_eq]
+  change (presheafToSheaf _ CommRingCat).map _ ≫
+      (presheafToSheaf _ CommRingCat).map _ =
+    (presheafToSheaf _ CommRingCat).map _ ≫
+      (presheafToSheaf _ CommRingCat).map _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+
+private theorem completedCoefficientMap_projection {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    completedCoefficientMap g d ≫ pbcAdicProjection X d n =
+      (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (pbcAdicProjection Y d n) ≫
+        completedFiniteCoefficientMap g d n := by
+  exact limit.lift_π _ (op n)
+
+private theorem finiteCoefficientMap_naturality {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (dA : AdicCoefficientDatum A) (dB : AdicCoefficientDatum B) (n : ℕ)
+    (q : (A ⧸ dA.ideal ^ (n + 1)) →+* (B ⧸ dB.ideal ^ (n + 1))) :
+    (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
+        (AdicCoefficients.coefficientMap Y q) ≫ completedFiniteCoefficientMap g dB n =
+      completedFiniteCoefficientMap g dA n ≫ AdicCoefficients.coefficientMap X q := by
+  let L := proEtaleSheafInverseImage g CommRingCat.{u + 1}
+  have hinv : AdicCoefficients.coefficientMap Y q ≫
+      (pbcLevelConstantComparison Y dB n).inv =
+    (pbcLevelConstantComparison Y dA n).inv ≫
+      (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map (CommRingCat.ofHom q) := by
+    apply (Iso.eq_inv_comp _).2
+    rw [← Category.assoc]
+    apply (Iso.comp_inv_eq _).2
+    exact (levelConstantComparison_naturality Y dA dB n q).symm
+  unfold completedFiniteCoefficientMap
+  change L.map _ ≫ L.map _ ≫ _ ≫ _ = _
+  rw [← L.map_comp_assoc, hinv, L.map_comp, Category.assoc]
+  erw [reassoc_of% (proEtaleConstantInverseImageMap_naturality g (CommRingCat.ofHom q))]
+  simp only [Category.assoc]
+  rw [levelConstantComparison_naturality]
+
 /-- Completed scalar maps commute with the canonical completed structure maps.
 Source: Stacks 03EL; blueprint scalar-extension local restriction
 (blueprint: def-weil-pbc-actual-finite-coefficient-transport).
@@ -109,7 +200,42 @@ theorem finiteFreeCompletedCoefficientMap_naturality {X Y : Scheme.{u}} (g : X �
       pbcActualStructureMap g (pbcPadicCoefficientDatum l E) ≫
         (proEtaleSheafDirectImage g RingCat.{u + 1}).map
           (pbcActualCoefficientRingMap X (finiteFreeCompletedCoefficientMap l E F i X)) := by
-  sorry
+  let dE := pbcPadicCoefficientDatum l E
+  let dF := pbcPadicCoefficientDatum l F
+  let c (T : Scheme.{u}) := finiteFreeCompletedCoefficientMap l E F i T
+  let L := proEtaleSheafInverseImage g CommRingCat.{u + 1}
+  let R := proEtaleSheafDirectImage g CommRingCat.{u + 1}
+  have hc (T : Scheme.{u}) (n : ℕ) :
+      c T ≫ pbcAdicProjection T dF n = pbcAdicProjection T dE n ≫
+        AdicCoefficients.coefficientMap T (finiteFreeCoefficientQuotientMap l E F i n) :=
+    (finiteFreeCompletedCoefficientMap_existsUnique l E F i T).exists.choose_spec n
+  have h : L.map (c Y) ≫ completedCoefficientMap g dF =
+      completedCoefficientMap g dE ≫ c X := by
+    apply limit.hom_ext
+    intro n
+    change (L.map (c Y) ≫ completedCoefficientMap g dF) ≫
+        pbcAdicProjection X dF n.unop =
+      (completedCoefficientMap g dE ≫ c X) ≫ pbcAdicProjection X dF n.unop
+    simp only [Category.assoc, hc]
+    rw [completedCoefficientMap_projection]
+    rw [← Category.assoc (completedCoefficientMap g dE), completedCoefficientMap_projection]
+    rw [← L.map_comp_assoc, hc, L.map_comp, Category.assoc]
+    simpa only [Category.assoc] using congrArg
+      (fun k ↦ L.map (pbcAdicProjection Y dE n.unop) ≫ k)
+      (finiteCoefficientMap_naturality g dE dF n.unop
+        (finiteFreeCoefficientQuotientMap l E F i n.unop))
+  have hd : c Y ≫ completedCoefficientDirectImageMap g dF =
+      completedCoefficientDirectImageMap g dE ≫ R.map (c X) := by
+    unfold completedCoefficientDirectImageMap
+    have hn := (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.naturality (c Y)
+    change c Y ≫ (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app _ =
+      (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app _ ≫ R.map (L.map (c Y)) at hn
+    rw [← Category.assoc]
+    erw [hn]
+    rw [Category.assoc, ← R.map_comp, h, R.map_comp, Category.assoc]
+  exact congrArg
+    (fun k ↦ (sheafCompose (ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map k) hd
 
 /-- The published, K-flat-normalized scalar/pullback comparison for these coefficients.
 Taking g to be a stratum immersion composed with a covering member keeps both fixed.

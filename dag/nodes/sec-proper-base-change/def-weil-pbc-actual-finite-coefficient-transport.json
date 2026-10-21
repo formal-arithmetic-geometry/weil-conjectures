@@ -16,9 +16,55 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
   "place": "Exactness clause: actual integral completed coefficient extension and its pullback compatibility; quotient normalization and Stacks 03EL/0D6D."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ideal of pbcPadicCoefficientDatum is the span of the recorded uniformizer. Apply integralScalar_quotient_kernel of [def-weil-pbc-integer-quotient-inclusions] directly; its ideal-power presentation is definitionally the same. This proves the quotient lift well-defined for every positive exponent, without an unramifiedness assumption.",
+   "uses": [
+    "def-weil-pbc-integer-quotient-inclusions",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcomposition of finite continuous-function presheaves respects composition by extensionality, and sheafification preserves this equality. Quotient induction shows that the finite quotient inclusions commute with consecutive reduction. NatTrans.ofOpSequence supplies the map of the strict coefficient systems of [def-weil-pbc-adic-coefficient-datum]. Apply Mathlib lim.map, limMap_π and limit.hom_ext to obtain existence, the prescribed projection equations, and uniqueness of the completed coefficient map.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The constant-section formula defining pbcLevelConstantComparison in [def-weil-pbc-bounded-constructible-tower], together with sheafify_hom_ext, identifies its hom with AdicCoefficients.constantComparison. Functoriality of sheafification then shows that this comparison commutes with every finite quotient ring homomorphism. Combine this square and its inverse with proEtaleConstantInverseImageMap_naturality from [lem-weil-pbc-profinite-coefficient-inverse-image] to prove naturality of completedFiniteCoefficientMap in the finite quotient coefficients.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply every target limit projection to the inverse-image coefficient square for [def-weil-pbc-completed-pullback]. Its defining limit.lift equations, the completed coefficient map projection equations, and the finite-level naturality just proved identify both composites. limit.hom_ext gives the completed square. Naturality of the inverse-image/direct-image adjunction unit transports it to the direct-image square, and forgetting commutativity gives exactly the specified ring-sheaf equation. The scalar functor and normalized restriction comparison remain the recorded specializations of [def-weil-pbc-normalized-scalar-restriction].",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-normalized-scalar-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integer-quotient-inclusions",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-normalized-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Coefficient-map construction and pullback compatibility; formal categorical proof by K1, 2026-10-21, using the existing integer inclusion, finite constant-section comparison and limit universal properties."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -112,5 +158,15 @@
   "group": "Q134",
   "result": "fix",
   "note": "Re-delivery of the d04022 H2 RETURN. Item Lean signature and statement are unchanged, and that mathematics was already reviewed. Seven declarations moved byte-identical into FiniteFreeCoefficientTransport, owned by the new def-weil-pbc-actual-finite-coefficient-transport; its H4 check against def-weil-pbc-finite-completed-coefficient-map and WeilConjectures.completedCoefficientMap passes (different coefficient sheaf types). The two theorem stmt_deps are replaced by def-weil-pbc-integer-quotient-inclusions (existing:true integralScalarIntegerInclusion; check_existing note: noncomputable kept) and def-weil-pbc-normalized-scalar-restriction (existing:true pbcActualScalarDerivedPullIso; statement matches the right-iso, conjugate and K-flat equation). check_new_node is clean on all three; no cycle. FIX: the normalized-restriction node's Lean uses pbcExtend, pbcDerivedExtend, pbcScalarAdjunction and pbcComplexCounit, owned by def-weil-pbc-bounded-constructible-tower, which is outside its closure. fixes/def-weil-pbc-normalized-scalar-restriction.json adds that stmt_dep and a citing sentence. Records-only fix, no compile needed. Advisories: finiteFreeCoefficientQuotientMap is defeq to integralScalarQuotientMap; pbcActualDerivedPull and pbcActualStructureMap have no owner record (inherited); the transport node cites the theorem lem-pur-derived-change-of-rings as the item base does; the item imports the theorem module IntegralStratifiedPerfectCharacterization; the second reading is the author's own."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T130041-L-2499690",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
