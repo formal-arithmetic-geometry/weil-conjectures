@@ -19953,3 +19953,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:45 L: merged deliver/O2/lem-sfb-constructible-cocone-ambient-realization (reviewer PASS; first push; new nodes: 0)
 - 03:45 L: merged deliver/Q74/lem-sf-module-object-ordinary-coefficient-equivalence (reviewer FIX; after a return; new nodes: 3)
 - 03:45 L: merged deliver/Q51/lem-weil-pbc-realization-scalar-functor (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T03:45:47Z L: superseded stage-1 delivery Q34/lem-weil-pbc-realization-completed-pull at 7f0e97c1cd1686d8e18262d259abe0f6e30b65e5; current completion retained; packet archived at refs/superseded/Q34/lem-weil-pbc-realization-completed-pull/7f0e97c1cd1686d8e18262d259abe0f6e30b65e5; stale return retired.
