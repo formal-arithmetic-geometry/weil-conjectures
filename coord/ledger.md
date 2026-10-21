@@ -23903,3 +23903,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T22:36:31Z L: superseded stage-1 delivery NO/lem-pur-line-zero-class-etale-realization at a7bc4990121ab3dee80915d07dfbf835aa728c4d; current completion retained; packet archived at refs/superseded/NO/lem-pur-line-zero-class-etale-realization/a7bc4990121ab3dee80915d07dfbf835aa728c4d; stale return retired.
 - 22:37 L: merged deliver/NJ/lem-sfb-countable-endomorphism-module-reconstruction (reviewer PASS; first push; new nodes: 4)
 - 22:38 L: merged deliver/NK/lem-sfb-ultrametric-orthogonal-extension (reviewer PASS; first push; new nodes: 0)
+- 22:39 L: returned deliver/NL/det-prop-diagonal-tower-coefficients (reviewer RETURN: L: independent stage-2 immutable head 15ec878f9789: A6/A7/H13: N8's delivery of this item was PASSed (cf03d617d), landed)
