@@ -20101,3 +20101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: merged deliver/NM/lem-sfb-internal-scalar-extension-section-test (reviewer PASS; first push; new nodes: 0)
 - 03:58 L: returned deliver/A6/Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition (reviewer RETURN: (reviewer C-cb404, head cb4040740) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Or)
 - 03:59 L: merged deliver/NU/lem-sfb-base-coefficient-condensed-identification (reviewer PASS; first push; new nodes: 0)
+- 03:59 L: merged deliver/NF/lem-weil-pbc-strict-perfect-ringed-pullback-model (reviewer PASS; first push; new nodes: 0)

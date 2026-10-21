@@ -16,9 +16,88 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a degree $r$ and put $M=F^r$, $N=N_r$. The tensor definition gives $H\\otimes_R R^{\\oplus N}\\cong H^{\\oplus N}$: send $h\\otimes(r_j)_j$ to $(r_jh)_j$, with inverse $(h_j)_j\\mapsto\\sum_jh_j\\otimes e_j$. These maps commute with restriction and hence induce inverse maps on sheafifications. Tensoring $i_r,p_r$ makes the sequence obtained by tensoring any short exact sequence with $M$ a retract of its $N$-fold direct sum. Here exactness of the finite sum is checked coordinatewise, using a common refinement of the finitely many local lifts for the surjection. Exactness passes to this retract directly: a section in a kernel is included into the larger kernel, locally lifted there, and projected back; injectivity and surjectivity follow by the same inclusion and projection. Thus $-\\otimes_R M$ is exact, so $M$ is flat. This argument is valid for any commutative ring sheaf and any finite-free splitting; it also covers $N=0$.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, lemma-colimits-flat, finite sums; elementary finite-free coordinate calculation and retract argument"
+   }
+  },
+  {
+   "text": "The specified bound gives $F^r=0$ for $r>b$, and step 1 gives flatness in every degree. Apply [lem-weil-pbc-independent-bounded-flat-kflat] with upper bound $b$ on the given small site. Its tensor is exactly the sheafified sectionwise tensor used here. Hence $F^\\bullet$ is K-flat. No categorical projectivity of its terms is needed.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "Write $A=u^{-1}R$. Since the inverse image of a morphism of topoi preserves finite products, its transported module structure identifies $u^{-1}(R^{\\oplus N})$ with $A^{\\oplus N}$, with the standard coordinate maps. After this identification define $\\gamma:S\\otimes_A A^{\\oplus N}\\to S^{\\oplus N}$ by $s\\otimes(a_j)_j\\mapsto(s c(a_j))_j$. Its inverse sends $(s_j)_j$ to $\\sum_j s_j\\otimes e_j$; the balanced relation checks both composites are identities. These are maps of sheaves by the tensor definition. The same formula shows $u^*0=0$. Pullback is a functor, so its images of the differentials still have consecutive composite zero. Thus the termwise pullback is a complex, zero outside $[a,b]$. For each $r$, conjugating the pulled splitting by $\\gamma_r$ gives $p^u_ri^u_r=u^*p_r\\gamma_r^{-1}\\gamma_ru^*i_r=u^*(p_ri_r)=1$. These are the required specified splittings of the same ranks, with no assertion that the splittings are chain maps.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08H3, lemma-strictly-perfect-pullback; explicit finite-free identification from sites-modules.tex Tag 03DF, lemma-global-pullback"
+   }
+  },
+  {
+   "text": "Apply the coordinate and retract argument of step 1 over $S$ to the splittings just constructed. Every term of $u^*F^\\bullet$ is flat. This complex is bounded above by $b$, so [lem-weil-pbc-independent-bounded-flat-kflat] on the target site makes it K-flat as well. This uses neither flatness of $A\\to S$ nor exactness of $u^*$ on arbitrary modules.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 08H3, lemma-strictly-perfect-pullback"
+   }
+  },
+  {
+   "text": "The source complex is K-flat with flat terms by steps 1 and 2, so the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] gives the isomorphism $\\epsilon_F:Lu^*(Q_RF^\\bullet)\\to Q_S(u^*F^\\bullet)$. For a derived isomorphism $e:Q_RF^\\bullet\\to P$, functoriality shows $Lu^*(e^{-1})$ is inverse to $Lu^*(e)$, so composing it with $\\epsilon_F$ gives the claimed isomorphism from $Lu^*P$. Finally pass a chain map $v:F^\\bullet\\to G^\\bullet$ to the homotopy category and evaluate the naturality square of the same canonical transformation $\\epsilon:Lu^*Q_R\\to Q_Su^*$. It reads exactly $Q_S(u^*v)\\circ\\epsilon_F=\\epsilon_G\\circ Lu^*(Q_Rv)$. No choice of inverse comparison or resolution is substituted for this transformation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, computation on K-flat complexes and its functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08H3 (lemma-strictly-perfect-pullback), 06YQ (lemma-bounded-flat-K-flat), 06YY (lemma-derived-base-change); elementary coordinate and retract arguments expanded explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +140,45 @@
    "date": "2026-10-21",
    "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality",
    "verdict": "no match: ordinary pullbackObjFreeIso and freeFunctorCompPullbackIso preserve free sheaves, but do not give K-flatness or the canonical derived comparison for a bounded retract complex; K-projective results concern categorical projectives, not finite-projective sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of retracts of finite free module sheaves is K-flat and derived ringed topos pullback is computed termwise",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-21",
+   "verdict": "no match: free-sheaf pullback is only the ordinary finite-free component (PullbackFree.lean:118-143, with a final continuous site functor); K-projective results concern categorical projectives, not degreewise finite-free retract sheaves; exactFunctor derived maps assume exactness not imposed here"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|Kflat|[Ss]trictly[Pp]erfect|strictPerfect",
+   "results": "0 hits: ; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: free-sheaf pullback is only the ordinary finite-free component (PullbackFree.lean:118-143, with a final continuous site functor); K-projective results concern categorical projectives, not degreewise finite-free retract sheaves; exactFunctor derived maps assume exactness not imposed here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective sheaves is K-flat and its derived pullback is naturally the ordinary termwise pullback",
+   "results": "8 hits: Module.Flat.of_projective, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.IsKProjective, CochainComplex.isKProjective_of_op, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullback, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "date": "2026-10-21",
+   "verdict": "no match: free-sheaf pullback is only the ordinary finite-free component (PullbackFree.lean:118-143, with a final continuous site functor); K-projective results concern categorical projectives, not degreewise finite-free retract sheaves; exactFunctor derived maps assume exactness not imposed here"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "5 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: free-sheaf pullback is only the ordinary finite-free component (PullbackFree.lean:118-143, with a final continuous site functor); K-projective results concern categorical projectives, not degreewise finite-free retract sheaves; exactFunctor derived maps assume exactness not imposed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image preserves strict perfect complexes of module sheaves with specified finite free splittings and has a natural K-flat comparison",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.Q, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-21",
+   "verdict": "no match: free-sheaf pullback is only the ordinary finite-free component (PullbackFree.lean:118-143, with a final continuous site functor); K-projective results concern categorical projectives, not degreewise finite-free retract sheaves; exactFunctor derived maps assume exactness not imposed here"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lemma-weil-pbc-perfect-projection-formula",
@@ -81,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "worker": "stage1",
+  "summary": "No new nodes. Expanded the finite-free tensor and retract argument for flatness, the coordinate pullback identification and transported splitting equations, and both applications of the existing bounded-flat K-flat theorem. The canonical derived comparison supplies the isomorphism and its exact naturality equation. Statement unchanged. Project Lean covers a local scheme object isomorphism only, not this arbitrary-topos natural package.",
+  "blueprint": "The ancestor lemma-weil-pbc-perfect-projection-formula proof, second paragraph: the strict-perfect package and its derived pullback in the signed totalization; final paragraph: package independence and base-change compatibility. This split supplies the termwise pullback model and its canonical chain-map naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-15fb056dc",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-15fb056dc (reviewer sub-agent of L); spot-checked: Read the item, all 10 cited node statements, Stacks 08H3 (sites-cohomology l.11755) and 06YQ (l.3120), and the ancestor lemma-weil-pbc-perfect-projection-formula; its step 6 cites this item for the pulled strict-perfect model. Statement and stmt_deps are unchanged against earlier snapshots (same sha1). There are no new nodes, no cycle (BFS over deps) and no SGA. Step 1 (elementary): H⊗R^N≅H^N naturally, so −⊗M is a retract of an exact functor and M is flat; the local-lift retract argument is correct and N=0 is covered. Step 2: the hypotheses of lem-weil-pbc-independent-bounded-flat-kflat match (small site, bounded above by b, flat terms). Step 3: γ and its inverse checked on generators; u^*0=0; p^u i^u=u^*(p i)=1, with degreewise splittings only. Step 4: the same argument over S plus the bounded-flat theorem; no flatness of A→S used (tested Z→Z/2). Step 5: ε from the statement of lem-weil-pbc-ringed-topoi-derived-pullback is an isomorphism at K-flat complexes with flat terms; the composite order is correct, and the chain-map naturality square is that of ε on K(R). Off-unit citations are definitions only, so no tool_uses are needed. No duplicate found by grep of 08H3, strictly perfect, and retract/summand flat. No changes."
  }
 }
