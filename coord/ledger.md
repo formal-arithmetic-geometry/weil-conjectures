@@ -22559,3 +22559,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:33 L: returned deliver/NY/lem-weil-point-finite-free-sections-tensor (reviewer RETURN: L: independent stage-2 immutable head 3ce998cc032c: stage-2 fix of def-weil-completed-integral-scalar-data (existing: tr)
 - 13:33 L: returned deliver/Q111/lem-pur-sequence-adjoint-resolution-shifts (reviewer RETURN: L: independent stage-2 immutable head a15b126b3163: H13/H2: delivered record of dependency def-weil-pbc-ringed-topos-mor)
 - 13:33 L: returned deliver/Q83/lem-pur-concentrated-support-etale-transfer (reviewer RETURN: L: independent stage-2 immutable head ce037a86f6c2: H2: delivery added theorem stmt_dep lem-pur-supported-hom-pullback, )
+- 13:33 L: merged deliver/NS/lem-sfb-cohomology-tor-interval (reviewer PASS; after a return; new nodes: 1)

@@ -15,36 +15,10 @@
  ],
  "proof": [
   {
-   "text": "Let C be the actual category of internal Λ_X-module sheaves in the statement. Let Q be Tor amplitude in I=[a+c,b+d]. For every q let P_q(M) mean a≤q≤b and Tor amplitude [c,d] for M in degree zero. Isomorphism invariance of Tor amplitude and of the single functor makes every P_q replete. Since a≤b and c≤d, I is ordered.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "det-def-sfb-constructible-tor-amplitude"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
-   }
-  },
-  {
-   "text": "For a zero derived object M and any test module N, the additive relative derived tensor functor F_N=(-)⊗ᴸN[0] sends M to zero. Every cohomology of F_N(M) is zero, so Q(M). For a distinguished triangle, the extension clause of constantModelConstructibleFiniteTor_wellDefined gives Q for its middle object from Q on its outer objects, with the common interval I.",
+   "text": "Put $C=\\operatorname{Mod}(\\Lambda_X)$, $I=[a+c,b+d]$, and let $Q(L)$ mean Tor amplitude in $I$. The Tor-amplitude well-definedness statement makes $Q$ invariant under isomorphism and closed under extensions in distinguished triangles. For a zero object, use isomorphism invariance to replace it by $0[0]$. For every test module $N$, the relative single-tensor model with $M=0$ and $q=0$ has all terms zero, hence all cohomology zero. Thus every zero object satisfies $Q$. The interval is ordered since $a\\leq b$ and $c\\leq d$.",
    "uses": [
     "det-def-sfb-constructible-tor-amplitude",
-    "sk-def-sfb-derived-tensor-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
-   }
-  },
-  {
-   "text": "For P_q(M), use the existing K-flat derived tensor shift comparison F_N(M[0][-q])≅F_N(M[0])[-q]. The standard t-structure shift formula moves the bounds [c,d] to [c-(-q),d-(-q)]=[q+c,q+d]. Since a≤q≤b this interval lies in I. Transport the enlarged amplitude through the existing single-functor isomorphism M[0][-q]≅M[q], where the latter denotes placement in degree q. This proves Q(single_q M), including negative q. The tensor is the same relative internal-module tensor used in torAmplitudeIn, with no change of coefficient category.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sbc-standard-tstructure-derived-category",
-    "det-def-sfb-constructible-tor-amplitude",
-    "sk-def-sfb-derived-tensor-hom"
+    "lem-sfb-relative-single-tensor-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -53,12 +27,24 @@
    }
   },
   {
-   "text": "The vanishing hypothesis gives K.IsGE a and K.IsLE b by the standard cohomological characterizations. Apply the already proved degreewise dévissage theorem with Q and P_q above, n=(b-a+1).toNat and lower bound a. Since a≤b, a+n-1=b. The preceding steps supply zero, extension, repleteness and degreewise single-object conditions; hH supplies P_q(H^q(K)) throughout the induction interval. The conclusion is exactly Tor amplitude [a+c,b+d] for K. The dévissage theorem uses the same finite truncation induction as the blueprint, rather than reconstructing it in this module.",
+   "text": "For each integer $q$, let $P_q(M)$ mean $a\\leq q\\leq b$ and Tor amplitude $[c,d]$ for $M[0]$. This property is invariant under isomorphism by Tor-amplitude well-definedness. For relative tensor, the unsigned $s^1_{-q}$ of [lem-weil-pbc-total-tensor-integer-shifts] gives the total-complex shift comparison; the relative single-tensor node supplies its Layer-B model and derived cohomology comparison. If $P_q(M)$ holds, apply that comparison to every test module $N$: its degree-$r$ cohomology is zero when $r-q\\notin[c,d]$. Thus $M[0][-q]$ has amplitude $[q+c,q+d]$. Since $a\\leq q\\leq b$, this interval lies in $I$; vanishing outside the smaller interval implies vanishing outside $I$. This supplies $Q(M[0][-q])$ for every $q,M$ satisfying $P_q(M)$, including negative $q$.",
    "uses": [
-    "lem-sfb-degreewise-bounded-devissage",
-    "def-sbc-standard-tstructure-derived-category"
+    "lem-sfb-relative-single-tensor-cohomology",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-weil-pbc-total-tensor-integer-shifts"
    ],
-   "elementary": true,
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
+   }
+  },
+  {
+   "text": "Apply degreewise bounded dévissage to $C,Q,P_q$, $n=b-a+1\\in\\mathbf N$ and lower bound $a$. Then $a+n-1=b$ and $a\\leq q<a+n$ is precisely $q\\in[a,b]$. The hypotheses on $K$ supply cohomological vanishing outside that interval and $P_q(H^q(K))$ inside it. The preceding steps supply every other hypothesis of dévissage. Its conclusion $Q(K)$ is exactly the required Tor amplitude $[a+c,b+d]$. No constructibility or geometric finiteness hypothesis was used.",
+   "uses": [
+    "lem-sfb-degreewise-bounded-devissage"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
     "place": "Complexes, truncation induction with a general common cohomology Tor interval"
@@ -66,16 +52,15 @@
   }
  ],
  "proof_deps": [
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-abstract-derived-category",
   "det-def-sfb-constructible-tor-amplitude",
   "lem-sfb-degreewise-bounded-devissage",
-  "sk-def-sfb-derived-tensor-hom"
+  "lem-sfb-relative-single-tensor-cohomology",
+  "lem-weil-pbc-total-tensor-integer-shifts"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "Complexes paragraph; reuse the existing proved degreewise finite truncation induction, with direct relative-derived-tensor shift comparison and the stated common-interval extension theorem. E2, 2026-10-21."
+  "place": "Complexes, separated into a relative single-degree K-flat tensor comparison and the existing finite degreewise truncation dévissage."
  },
  "mathlib_searches": [
   {
@@ -172,42 +157,31 @@
   "date": "2026-10-21",
   "item": "lem-sfb-cohomology-tor-interval",
   "worker": "stage1",
-  "summary": "Kept the statement and its arbitrary commutative condensed coefficients unchanged. Wrote the truncation endpoints, the integer-shift calculation, interval enlargement, a finite induction with its base and step, and final isomorphism transport. Reused existing generic nodes; no new nodes or Mathlib leaves. Searched the project for an exact attachment and searched Mathlib with two semantic phrasings, Loogle and grep; no exact match.",
-  "blueprint": "The Complexes paragraph of det-def-localizing-closure-ctf-equals-bc: truncation triangles and extension stability, generalized from the cohomology Tor bound [-1,0] to [c,d].",
+  "summary": "Statement unchanged. Retained the signed single-degree Layer-B tensor model and resolution-independent cohomology comparison as one statement-only child; the parent supplies zero, repleteness, interval enlargement and the existing degreewise bounded devissage. A7/B10 repair: accept the completed live proof and all review metadata. The present user message explicitly re-issues this specific task after quoting the return, stating that the already split-and-reviewed live node is deliberately being re-split and ordering delivery with new statement-only nodes; follow that item-specific override of the standing live-finished rule. Authorization does not rely on quarantine, generic dispatcher assignment or the pre-landing coord note. Preserved the mathematically accepted extraction, exact source labels, citations and logged searches.",
+  "blueprint": "Complexes paragraph: the shifted cohomology term is handled by lem-sfb-relative-single-tensor-cohomology; truncation endpoints and finite induction remain in the existing lem-sfb-degreewise-bounded-devissage; extension closure remains the existing Tor-amplitude well-definedness statement.",
   "tool_uses": [
    {
-    "node": "def-weil-abstract-derived-category",
-    "why": "Generic localization and cohomological-shift conventions used for representative complexes, quasi-isomorphisms and integer shifts."
-   },
-   {
-    "node": "def-weil-sheaf-of-modules-category",
-    "why": "Generic abelianness of modules over the commutative coefficient sheaf on a small site, to form its ordinary derived category; no geometric theorem is imported."
-   },
-   {
     "node": "det-def-sfb-constructible-tor-amplitude",
-    "why": "The unit explicitly cites the coefficient-category definitions; this node also states exactly the extension and isomorphism stability used by its Complexes paragraph."
+    "why": "The unit cites this coefficient-category statement, whose well-definedness gives isomorphism invariance and common-interval extension closure."
    },
    {
-    "node": "lem-weil-pbc-truncation-descends",
-    "why": "Generic cohomology formula for good truncations in any abelian category; supplies the zero lower endpoint and the upper endpoint quasi-isomorphism."
-   },
-   {
-    "node": "lem-weil-pbc-truncation-triangle",
-    "why": "Generic successive-truncation distinguished triangle for any abelian category; the localizing-closure unit has no separate truncation-triangle statement."
+    "node": "lem-sfb-degreewise-bounded-devissage",
+    "why": "Generic finite truncation induction already used by the live proof; it implements precisely the Complexes paragraph with arbitrary degreewise properties."
    }
   ]
  },
  "tool_uses": [
   "def-weil-abstract-derived-category",
-  "det-def-sfb-constructible-tor-amplitude"
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-sfb-degreewise-bounded-devissage"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q01-99295d841",
-  "group": "Q01",
+  "reviewer": "NT-cc-NS-57b631378",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-99295d841 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full. Blueprint main-20261015 ctf-equals-bc Complexes paragraph (the item is its general-[c,d] version, same truncation and extension route). Stacks 0118, 08J5 (derived.tex:4076) and 06YU (sites-cohomology.tex:3300), checked against tags/tags. Not on the drop list, no repair note, still unsplit on live with the same statement. No new nodes, statement unchanged and true (checked K=0, a=b, a flat module in negative degree, a=2,b=3,[c,d]=[-1,0]). Steps 1, 4 and 5 are correct: the truncation-descends cohomology formula gives T_{a-1}≅0 and T_b≅K; the induction m=0..b-a+1 is set up with base and step; the extension clause needs the same interval, which the fixed I gives. One fault, C4/E6: steps 2-3 took shift compatibility and zero-preservation from the exactness sentence of off-unit lem-weil-pbc-ringed-projection-mate-exact. That node's tensor is the sectionwise ringed-site K-flat tensor, while det-def-sfb-constructible-tor-amplitude tests with the Layer-B relative derived tensor of internal module objects (sk-def-sfb-derived-tensor-hom). No node identifies the two. FIX: step 2 now cites sk-def-sfb-derived-tensor-hom and computes with a K-flat resolution P→N. The degree-r term of Tot(M[-q]⊗P) is M⊗P^{r-q}, which is (M⊗P)[-q] up to the sign of each differential, so H^r=H^{r-q} for every integer q. Step 3 gets zero-preservation from additivity, 0⊗P=0. proof_deps recomputed; ringed-projection-mate-exact and def-weil-triangulated-category removed from steps and tool_uses. Remaining tool uses accepted (generic truncation lemmas and notion nodes). No duplicates: lem-sf-source-tensor-cohomology-interval is the converse-type K⊗N cohomology bound. No SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-57b631378 (reviewer sub-agent of L); spot-checked: PASS after a full read on the merits. This is the eighth dispatch, after Q34 1b4aff61, Q25 d44a957a/ec08f8a7 and NS 5da5dec3/5ca8b616/68be506c/691aa04e. All seven were returned only for A7/B10, and each of those reviews found the maths sound. That objection no longer applies. The side-live repair note is still released (mtime 06:08:48Z). The 10:58Z maintenance report (NR-grothendieck-sheafification, commits 0629838df06/243a4db5baf) keeps a node with a released note open in stage 1 even when its Lean is closed, and calls 'note predates landing' supersession returns incorrect. Compared with 691aa04e, only split_report.summary changed. Item: statement unchanged and true (checked K=0, a=b=0, Λ[0]⊕Λ[-1] giving [0,1], a negative degree, and the blueprint case [-1,0] from the main-20261015 ctf-equals-bc Complexes paragraph). Re-split rule against the live 4-step proof: zero, repleteness and extensions are step 1; the interval enlargement is step 2; dévissage with n=b-a+1 is step 3. The shift comparison that live step 3 left implicit is now the new node; the placement iso M[0][-q]≅M[q] is not needed, because dévissage asks for Q(M[0][-q]) directly. Nothing was dropped, and the assembly is under 3000 characters. New node lem-sfb-relative-single-tensor-cohomology: Tot(S_qM⊗P)^r=M⊗P^{r-q} with differential (-1)^q(1⊗d), which equals Tot(S_0M⊗P)[-q]. This is the unsigned s^1_{-q} of the cited Mathlib leaf lem-weil-pbc-total-tensor-integer-shifts. Because K-flat is two-sided, Tot(L⊗P) computes the Layer-B relative derived tensor. No flatness of M or N is needed. Checked q=0, ±1, -2, M=0, N=0, and M=N=R with cohomology at r=q. It does not restate the item and is not a specialization of dévissage. No duplicate found by rg over the DAG or among the report's candidates; hom-kflat-chain-transpose and kflat-fixed-tensor are ringed-site, not Layer-B. Statement-only, with grep, leansearch, loogle and leanfinder searches. No SGA. tool_uses accepted. Maintainer: the summary calls launcher handoff text a human re-issue, which is harmless; stage 2 must state the new child alongside the existing Lean of Sheaf.Paper.CohomologyTorInterval, which is now in quarantine."
  },
  "lean": {
   "module": "Sheaf.Paper.CohomologyTorInterval",
