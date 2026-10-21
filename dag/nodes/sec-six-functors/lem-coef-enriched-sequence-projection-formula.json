@@ -23,104 +23,68 @@
  ],
  "proof": [
   {
-   "text": "Fix $n$ and write $S_n=-\\otimes_A^LB_n$ and $U_n=\\operatorname{Res}_{A\\to B_n}$. The strict representative $(Q\\otimes_A B_k)_k$ for one flat-term K-flat $Q\\to P$ in the current statement of [lem-coef-sequence-projection-derived-adjunction] identifies $e_n\\mathcal R=S_n$. Write $\\pi_n^M:\\mathcal L M\\to U_nM_n$ for the specified natural projection. Its naturality at $b:\\mathcal R V\\to J$, followed by the unit projection formula of [lem-coef-sequence-pushforward-limit-projections], gives\n$$q_n:=\\pi_n^J\\delta=\\pi_n^J\\mathcal L(b)u_V=U_n(b_n)\\pi_n^{\\mathcal R V}u_V=U_n(b_n)\\eta^n_V,$$\nwhere $b_n=e_n(b)$ and $\\eta^n$ is the scalar-extension unit. These are equalities of actual morphisms in $D(A)$.",
+   "text": "Naturality of π at the defining comparison b and the given unit normalization imply that the scalar adjunct of finiteProjection is ρ⁻¹ followed by evaluated b and homIdentification. The same argument applied to the system counit identifies the scalar adjunct of π_N with counitLevel. This is formal adjunction transposition and uses no faithfulness of evaluation.",
    "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-coef-sequence-pushforward-limit-projections"
+    "def-coef-semilinear-system-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition); naturality of the projection-normalized adjunction"
-   }
+   "elementary": true
   },
   {
-   "text": "Use [lem-sf-ringed-derived-closed-symmetric-monoidal] on both ringed sites and the inverse of the tensor-pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for $p$. The definition of $b$ in [lem-coef-closed-adjunction-enriched-isomorphism] is therefore the tensor-Hom transpose of $e_N\\mathcal R(\\mathrm{ev}_{P,\\mathcal L N})\\mu_{V,P}$. Since $\\mathcal R P$ is normalized, [lem-coef-semilinear-derived-sections] identifies $J_n$ with $H_{B_n}(S_nP,N_n)$ and carries system evaluation and its specified transpose to levelwise evaluation and transpose. Its levelwise tensor/scalar-extension formulas identify $e_n\\mu_{V,P}$ with\n$$\\mu^n_{V,P}:S_nV\\otimes^L_{B_n}S_nP\\xrightarrow{\\sim}S_n(V\\otimes_A^LP).$$\nConsequently the closed transpose of $b_n$ is exactly\n$$e_{N,n}\\circ S_n(\\mathrm{ev}_{P,\\mathcal L N})\\circ\\mu^n_{V,P}.$$\nHere $e_{N,n}$ is the component of the specified system counit; no normalization of $J$ is required.",
+   "text": "Uncurry the defining enriched comparison using its evaluation construction. The tensorEvaluation and homEvaluation_evaluation equations transport evaluation to level n; naturality in the first Hom input inserts the inverse ρ on P. Inverting the supplied tensor compatibility equation identifies the resulting tensor map with ν⁻¹. Naturality of ρ then gives precisely reducedEvaluation.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-coef-closed-adjunction-enriched-isomorphism",
     "lem-coef-semilinear-derived-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom); agent evaluation of the specified system transpose"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-sheaf-ring-derived-coefficient-adjunction] to the map of sheaf rings $A\\to B_n$. Step 1 says that the scalar-extension adjunct of $q_n$ is $b_n$: the adjunct of $U_n(b_n)\\eta^n_V$ is $b_n$ by the triangle identity. By [lem-sf-ringed-derived-closed-symmetric-monoidal], closed transposition is a bijection as well. Thus there is exactly one map $V\\to U_nJ_n$ whose scalar-extension adjunct has the closed transpose in step 2. Substituting $S_nV=V\\otimes_A^LB_n$, $S_nP=P\\otimes_A^LB_n$ and $S_n(\\mathrm{ev})=\\mathrm{ev}\\otimes1$ gives the displayed formula in the statement, including its canonical tensor reassociation.",
+   "text": "The scalar adjunction Hom equivalence and the closed transpose are bijections. Their composite defining uncurried is injective, so finiteProjection is the unique map with the computed reduced evaluation.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "def-coef-semilinear-system-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint) for scalar extension, and Tag 08J9 (lemma-internal-hom); composition of the two Hom bijections"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $\\Theta_n:H_A(P,U_nN_n)\\xrightarrow{\\sim}U_nH_{B_n}(S_nP,N_n)$ be the inverse of the evaluation-normalized internal scalar isomorphism of [lem-sfb-dc-hom-scalar-adjunction], using symmetry to write the scalar extension on the right. Its normalization says that the closed transpose after restriction is restricted $B_n$-evaluation precomposed with $1\\otimes\\eta^n_P$. Uncurrying $\\Theta_n H_A(P,\\pi_n^N)$ therefore gives the restriction of the map in step 2: naturality of evaluation gives\n$$\\mathrm{ev}_{P,U_nN_n}(H_A(P,\\pi_n^N)\\otimes1_P)=\\pi_n^N\\mathrm{ev}_{P,\\mathcal L N},$$\nand the scalar adjunct of $\\pi_n^N$ is $e_{N,n}$ by [lem-coef-sequence-pushforward-limit-projections]. The scalar and tensor-Hom bijections of [lem-pur-sheaf-ring-derived-coefficient-adjunction] and [lem-sf-ringed-derived-closed-symmetric-monoidal] then give $q_n=\\Theta_n H_A(P,\\pi_n^N)$ by step 3. This proves the equivalent internal formulation while extending only the first Hom input.",
+   "text": "Use the representing property of ClosedScalarHom.component to uncurry its inverse after H_A(P,π_N). Naturality of evaluation gives scalar(evaluation) followed by the scalar adjunct of π_N. The projected counit identity from step 1 identifies this with reducedEvaluation. Injectivity from step 3 proves finiteProjection = internalScalarMap.",
    "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-coef-sequence-pushforward-limit-projections",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-sfb-closed-scalar-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 08J9 (lemma-internal-hom); agent uncurrying of the evaluation-normalized scalar-Hom comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $G=R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}\\circ U$ as in the current statement of [lem-coef-sequence-global-sections-evaluation]: first restrict to constant-$A$ towers, then take total derived sections using one resolution in that tower category. By [lem-coef-sequence-sections-limit-comparison] there is a specified natural isomorphism $c_J:R\\Gamma(\\mathcal C,Rp_*J)\\xrightarrow{\\sim}R\\lim G(J)$, with $R\\lim:D(\\operatorname{Tow}(\\operatorname{Ab}))\\to D(\\operatorname{Ab})$ the total derived strict-tower limit. Identify $Rp_*J$ with $\\mathcal L J$ by [lem-coef-sequence-pushforward-limit-projections]. Let $\\kappa_n:R\\Gamma(\\mathcal C,U_nJ_n)\\xrightarrow{\\sim}e_nG(J)$ be the inverse of the first finite comparison. The projection clause of the comparison node gives\n$$\\operatorname{pr}_n c_J R\\Gamma(\\delta)=\\kappa_n R\\Gamma(\\pi_n^J\\delta)=\\kappa_n R\\Gamma(q_n).$$\nThe second finite comparison identifies $e_nG(J)$ with $R\\Gamma(\\mathcal C,J_n)$ computed in $B_n$-modules and regarded as an abelian complex; both comparisons are natural in derived input morphisms. Apply them to the equality $q_n=\\Theta_n H_A(P,\\pi_n^N)$ of step 4. The result is exactly the global scalar-extension mapping-complex adjunction of [lem-sfb-dc-hom-scalar-adjunction] after $R\\Gamma H_A(P,\\pi_n^N)=(\\pi_n)_*$. This applies to arbitrary $J$, with no normalization or fiberwise K-injectivity assumption.",
+   "text": "Apply coefficientSequenceSectionsLimitComparison. Compare its derived pair with the supplied pair p using rightDerivedUnique and the universal unit equation. rightDerived_ext and the specified complex projection formulas identify the transported projections with πP. Whiskering this unique isomorphism transports κ and its unit normalization. Naturality of the scalar restriction comparison and the given π = hL followed by projection identify globalProjection with sections of finiteProjection followed by the inverse scalar comparison; substitute step 4.",
    "uses": [
     "lem-coef-sequence-sections-limit-comparison",
-    "lem-coef-sequence-pushforward-limit-projections",
-    "lem-coef-sequence-global-sections-evaluation",
-    "lem-sfb-dc-hom-scalar-adjunction"
+    "lem-coef-sequence-global-sections-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition); projection-retaining comparison and evaluation of strict-system derived sections"
-   }
+   "elementary": false
   },
   {
-   "text": "Finally take $H^0$. The canonical isomorphism of [lem-pur-rhom-global-sections] is, for a K-flat representative $Q$ of the first input and a K-injective complex $X$ representing the second, the map sending the class of a degree-zero cocycle $g\\in\\Gamma(\\mathcal C,\\mathcal Hom^0(Q,X))$ to $Q(g)$; it is natural in the second input. Apply it over $A$ to $(P,\\mathcal LN)$ and $(P,U_nN_n)$, and over $B_n$ to $(S_nP,N_n)$. Naturality turns $H^0R\\Gamma H_A(P,\\pi_n^N)$ into $h\\mapsto\\pi_n^Nh$. Now let $Q$ be a flat-term K-flat representative of $P$, so that $S_nP$ is represented by $Q\\otimes_AB_n$ [lem-pur-sheaf-ring-derived-coefficient-adjunction], and let $I$ be a K-injective complex of $B_n$-modules representing $N_n$. Take the termwise isomorphism $\\operatorname{Res}\\mathcal Hom^\\bullet_{B_n}(Q\\otimes_AB_n,I)\\cong\\mathcal Hom^\\bullet_A(Q,\\operatorname{Res}I)$, $\\varphi\\mapsto(x\\mapsto\\varphi(x\\otimes1))$, followed by the map induced by a K-injective resolution $\\operatorname{Res}I\\to I'$ over $A$. Its tensor-Hom transpose is the restricted $B_n$-evaluation precomposed with $1\\otimes\\eta^n_Q$. By the uniqueness in [lem-sfb-dc-hom-scalar-adjunction] it represents $\\Theta_n^{-1}$. Global sections of the restricted sheaf are those of the underlying sheaf, and the second comparison of [lem-coef-sequence-global-sections-evaluation] is the composition comparison for scalar restriction followed by sections. So on $H^0$ the $n$th projection $\\kappa_nR\\Gamma(q_n)$ of step 5, followed by the second comparison, sends the class of $Q(g)$, for $g:Q\\to\\operatorname{Res}I$, to the class of $Q(x\\otimes a\\mapsto a\\,g(x))$. By normalization (2) of [lem-pur-sheaf-ring-derived-coefficient-adjunction], this is the scalar-extension adjunct of $Q(g)$. Hence $h$ goes to the adjunct of $\\pi_n^Nh$, which is $e_{N,n}\\circ S_n(h)=e_{N,n}\\circ(h\\otimes_A^LB_n)$ by the counit normalization of [lem-coef-sequence-pushforward-limit-projections] and naturality of the adjunction.",
+   "text": "Apply lem-coef-scalar-hom-zero-compatibility to the single map A→B_n with the given scalar data, closed representative models and the unit-normalized finite sections comparisons. The tensor equation identifies ν with evaluatedTensorComparison, so the supplied representative model applies to ν. The compatibility theorem computes the degree-zero image as the scalar adjunct of h followed by π_n. Adjunction naturality and the unit-normalized projection calculation identify this adjunct with scalar(h) followed by counitLevel.",
    "uses": [
-    "lem-pur-rhom-global-sections",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-coef-sequence-global-sections-evaluation",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-coef-sequence-pushforward-limit-projections"
+    "lem-coef-scalar-hom-zero-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JA (lemma-section-RHom-over-U) and 07A6 (lemma-adjoint); degree-zero evaluation of the specified adjunction"
+    "place": "Tags 07A6, 08J9 and 08JA; representative compatibility in step 6 of lem-coef-enriched-sequence-projection-formula."
    }
   }
  ],
  "proof_deps": [
+  "def-coef-semilinear-system-models",
   "lem-coef-closed-adjunction-enriched-isomorphism",
   "lem-coef-semilinear-derived-sections",
-  "lem-coef-sequence-global-sections-evaluation",
-  "lem-coef-sequence-projection-derived-adjunction",
-  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-sfb-closed-scalar-hom-comparison",
   "lem-coef-sequence-sections-limit-comparison",
-  "lem-pur-rhom-global-sections",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-coef-scalar-hom-zero-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Formal projection/naturality calculation using Tags 07A6, 07A4, 08J9, 08JA and 0D6E and the cited strict-system lemmas; realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, first and last mapping-complex comparisons."
+  "place": "Tags 07A6, 07A4, 08J9, 08JA and 0D6E; normalized projection transposition, evaluation, derived sections, and scalar zero-cycle compatibility.",
+  "note": "Steps 1–5 are formalized by normalized projection transposition, evaluation naturality, the representing scalar-Hom bijections and uniqueness of derived pairs. The independent scalar zero-cycle compatibility is stated separately."
  },
  "mathlib_searches": [
   {
@@ -255,12 +219,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-pur-rhom-global-sections"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -314,5 +273,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Re-delivery after 039c5222 RETURN (F1 H3/H5: free (μ,ν) sign flip). Fixed via option (a): new constructed def evaluatedTensorComparison (ρ⁻¹ ≫ e_n μ ≫ d.tensorEvaluation ≫ tensor(ρ,ρ)) and hypotheses aModels + _hμModel : ScalarTensorComparisonModel from the landed def node def-coef-semilinear-system-models (added to stmt_deps, no cycle). ordinary_pure + summand + derived (K-flat flat-term square) determine the evaluated μ uniquely; _hμ then forces ν = evaluatedTensorComparison; −μ is excluded except in char 2. All clauses depend on μ only through e_n (naturality of π_n), so no faithfulness is needed. The joint flips (a-adjunction, aModels) and (adj, hL) leave every clause invariant, so they are not counterexamples. The canonical Lp* comparison satisfies the model, so there is no stronger assumption. Conclusion textually unchanged; clauses 1-5 re-read and correct. Statement verbatim, 26 declarations present, 4 sorry in named theorems, max line 98, unused private import dropped; only the item node differs from side-live. No compile (no file changed; worker reports clean sandbox/library scompile). Advisories: aModels is a parameter, following the Data convention; second reading is a self-reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261021T203641-L-3849496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
