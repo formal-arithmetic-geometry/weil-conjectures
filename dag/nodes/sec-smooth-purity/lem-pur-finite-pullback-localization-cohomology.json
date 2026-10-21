@@ -22,95 +22,67 @@
  ],
  "proof": [
   {
-   "text": "Put $F=u^*$ on module sheaves and $R=R_U$, and use right-to-left composition. Apply clauses (1)-(3) of [lem-sfb-proetale-object-inverse-image-restriction] with $r=u$ and $W=U$. The hypothesis is exactly that $u$ is an object of $X_{\\mathrm{proet}}$; no surjectivity or open-immersion hypothesis is needed. They give the graph-coprojection isomorphism $b:F\\xrightarrow{\\sim}R$, natural in module sheaves. Clause (2), with [lem-weil-proetale-weakly-etale-localization](2)-(3), identifies the specified structure map with the inverse of $A_U\\to A_X|_U$ fixing constant sections. Thus this is the required $A_U$-linear comparison, with precisely the ring transport in the statement. By [lem-pur-site-restriction-module-adjunction-exact], restriction to the slice is exact. Transport through the site equivalence and the ring isomorphism preserves exact sequences (each transport has an inverse), so $R$ is exact; $F\\cong R$ is exact as well. Both functors are additive: restriction adds maps sectionwise, and $b$ transfers that equality to $F$.",
+   "text": "Use Padic.finite_coefficientExtensionRing at n+1 [def-weil-l-adic-coefficient-extension]. Obtain the constant-section-normalized ring isomorphism e from proEtaleObjectInverseImageRestriction [lem-sfb-proetale-object-inverse-image-restriction]. The sheafification Hom equivalence gives the constant-section equation for the specified coefficient direct-image map. Naturality of the sheafification unit at the unit and counit of composition/base change then proves the two scalar compatibility equations. Apply SheafOfModules.pushforwardPushforwardAdj to the site adjunction to construct a: R_U adjoint to the specified constant-module direct image. Compare a with b=sfIntrinsicConstantModuleAdjunction [def-weil-proetale-inverse-image]. The isomorphism m=b.leftAdjointUniq a is natural. Its inverse at M is the transpose under a of b.unit.app M. The Hom-equivalence counit formula and pushforwardPushforwardAdj_counit_app_val_app identify this transpose with restriction of that unit along the distinguished graph. This proves module_graph with exactly the specified intrinsic adjunction unit.",
    "uses": [
+    "def-weil-l-adic-coefficient-extension",
     "lem-sfb-proetale-object-inverse-image-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE, lemma-localize-given-products; module form: sites-modules.tex Tag 03DI, lemma-extension-by-zero (restriction $j_U^*$ of module sheaves and its left adjoint). The graph and coefficient normalization are the cited object-inverse-image-restriction statement."
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-exact-functor-derived-factorization] for $F$ and $R$. Write $Q_X,Q_U$ for the localization functors and $a_T:D(T)Q_X\\xrightarrow{\\sim}Q_UC(T)$ for the factorizations, where $T=F,R$ and $C(T)$ means termwise application. Both termwise functors preserve quasi-isomorphisms. By the unbounded clause (1) of [lem-weil-pbc-exact-functor-derived-functor], $D(F)$ with this factorization is the left derived functor of $F$. The finite-level $Lu^*$ of [def-weil-derived-pullback-tensor-hom] is that of [def-weil-pbc-proetale-operations]: the functor induced termwise by this same $F$, same coefficient map. The uniqueness of that derived functor therefore gives the counit-compatible isomorphism $\\lambda:Lu^*\\xrightarrow{\\sim}D(F)$. Its normalization can also be read directly on a K-flat resolution $q:P\\to K$: the computation map is induced by $F(q):C(F)P\\to C(F)K$, a quasi-isomorphism because $F$ is exact. Hence under $\\lambda$ every representative $K$ computes $Lu^*K$ by $C(F)K$, as specified in the finite-level definition. No bound on $K$.",
+   "text": "The published sfIntrinsicPullback is already additive and preserves finite limits and finite colimits [def-weil-pbc-proetale-operations]. Transfer these three properties along m by Functor.additive_of_iso, preservesFiniteLimits_of_natIso and preservesFiniteColimits_of_natIso. Thus the same normalized restriction functor is exact, without an additional equivalence with a separately presented slice module category. Also sfIntrinsicDerivedPullback is definitionally the exact induced functor sfIntrinsicPullback.mapDerivedCategory, so there is no separate resolution comparison to choose.",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "def-weil-derived-pullback-tensor-hom",
     "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor, unbounded assertion and dual left-derived assertion; finite-level K-flat computation in the cited derived-pullback definition."
-   }
+   "elementary": false
   },
   {
-   "text": "Naturality of $b$ at every differential gives $R(d^i)b_{K^i}=b_{K^{i+1}}F(d^i)$, so its degreewise components define an isomorphism of complexes $C(b)_K:C(F)K\\to C(R)K$. Apply [lem-sfb-exact-derived-natural-iso] to these exact functors and $b$. It gives $D(b):D(F)\\xrightarrow{\\sim}D(R)$ with normalization\n$$a_{R,K}D(b)_{Q_XK}=Q_U(C(b)_K)a_{F,K}.$$\nSet $\\eta=D(b)\\lambda$. This proves the required natural isomorphism and its degreewise graph normalization. In particular a resolution does not change this normalization: naturality at $q:P\\to K$ gives $C(R)(q)C(b)_P=C(b)_KC(F)(q)$; after inverting the two quasi-isomorphisms, the comparison computed from $P$ is exactly the one induced by $C(b)_K$. The coefficients remain those fixed in Step 1.",
+   "text": "Set d=Functor.mapDerivedCategoryNatIso m, the existing source-library specialization of [lem-sfb-exact-derived-natural-iso]. Its theorem mapDerivedCategoryNatIso_fac gives derived_on_complexes using the canonical factorizations [lem-weil-pbc-exact-functor-derived-factorization]. This is precisely the degreewise graph normalization on every cochain complex, with no bound.",
    "uses": [
-    "lem-sfb-exact-derived-natural-iso"
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; natural-isomorphism enhancement: Mathlib CategoryTheory/Localization/Predicate.lean, liftNatIso, as recorded in the cited node."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $r\\in\\mathbf Z$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to the exact functor $R$. It supplies a natural isomorphism on complexes\n$$\\gamma^r_K:H^r(C(R)K)\\xrightarrow{\\sim}R(H^rK).$$\nIts statement identifies $\\ker R(d^r)$ with $R(\\ker d^r)$ and $\\operatorname{im}R(d^{r-1})$ with $R(\\operatorname{im}d^{r-1})$, and specifies compatibility with the cycle inclusion and the projection onto cohomology. Thus $\\gamma^r$ is the required normalized restriction map on the quotient of cycles by boundaries, rather than an arbitrary isomorphism of those objects. By [def-weil-derived-cohomology-sheaves], these are the cohomology sheaves of the represented objects, with quotient in the abelian category of module sheaves. This argument uses exactness, not the generally false assertion that evaluating a sheaf complex on an object computes its sheaf cohomology.",
+   "text": "For R=R_U, use the existing R.mapDerivedCategoryHomologyFunctorIso r. Its definition uses mapHomologicalComplexHomologyIso, the canonical exact-functor cycles/boundaries comparison [lem-weil-pbc-exact-functor-complex-cohomology], and the homology factorizations [def-weil-derived-cohomology-sheaves]. Consequently its inverse has exactly the required sheaf-cohomology quotient normalization.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-derived-cohomology-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, applied to cycles and boundaries; normalized cochain cohomology comparison in the cited exact-functor-complex-cohomology node."
-   }
+   "elementary": false
   },
   {
-   "text": "Use $Q_X$ as the localization at quasi-isomorphisms of [def-weil-abstract-derived-category]. The two complex functors $H^rC(R)$ and $RH^r$ invert quasi-isomorphisms: for the former use the preservation in Step 2 and the definition of quasi-isomorphism, and for the latter apply $R$ to the isomorphism $H^r(q)$. Their specified lifts are $\\mathcal H^rD(R)$ (using $a_R$) and $R\\mathcal H^r$ (using the cohomology factorization of that definition). Apply clause (2) of [lem-weil-pbc-localization-universal-property] with target the category of $A_U$-module sheaves and with $\\tau=\\gamma^r$. It yields a natural isomorphism\n$$\\bar\\gamma^r:\\mathcal H^rD(R)\\xrightarrow{\\sim}R\\mathcal H^r.$$\nThe formula in that clause specifies its component on $Q_XK$ as $\\gamma^r_K$ under exactly these factorizations. Thus it preserves the cycle-to-cohomology normalization of Step 4 and is natural on all derived morphisms, not only images of chain maps.",
+   "text": "The same existing mapDerivedCategoryHomologyFunctorIso is constructed by Localization.liftNatIso [lem-weil-pbc-localization-universal-property] for the localization at quasi-isomorphisms [def-weil-abstract-derived-category]. Thus it is a natural isomorphism on the full unbounded derived category, including every roof; no new descent theorem or representability claim is required.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; fully faithful precomposition and liftNatIso of Mathlib CategoryTheory/Localization/Predicate.lean:278-361, as recorded in the cited universal-property node."
-   }
+   "elementary": false
   },
   {
-   "text": "Define $c^r_K=\\bar\\gamma^r_K\\circ\\mathcal H^r(\\eta_K)$. Its two factors are isomorphisms by Steps 3 and 5, and Steps 3-4 give the stated representative normalization. For any derived $\\psi:K\\to L$, naturality of those two factors gives, in order,\n$$\\begin{aligned}\nc^r_L\\mathcal H^r(Lu^*\\psi)\n&=\\bar\\gamma^r_L\\mathcal H^r(D(R)\\psi)\\mathcal H^r(\\eta_K)\\\\\n&=R(\\mathcal H^r\\psi)\\bar\\gamma^r_K\\mathcal H^r(\\eta_K)\n=R(\\mathcal H^r\\psi)c^r_K.\n\\end{aligned}$$\nFor a roof $K\\xleftarrow{q}P\\xrightarrow{f}L$, let $S=\\mathcal H^rLu^*$ and $T=R\\mathcal H^r$. Naturality at $q$ is $c_KS(q)=T(q)c_P$. Since $q$ is inverted, this implies $c_PS(q)^{-1}=T(q)^{-1}c_K$. Combining with $c_LS(f)=T(f)c_P$ gives $c_LS(f)S(q)^{-1}=T(f)T(q)^{-1}c_K$, precisely the asserted equation for the roof. No choice of a chain-map representative for an arbitrary derived morphism is used.",
+   "text": "Define c r as isoWhiskerRight d (DerivedCategory.homologyFunctor _ r), followed by the inverse of R.mapDerivedCategoryHomologyFunctorIso r. Fill cohomology_formula by reflexivity. Fill cohomology_naturality by (c r).hom.naturality for the arbitrary supplied derived morphism. Assemble these data with e, its constant-section equation, m, its graph equation, and the exactness instances into ProEtaleFiniteLocalizationComparison.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Elementary composition and inverse calculation with the two natural isomorphisms constructed in Steps 3 and 5."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
   "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-proetale-inverse-image",
   "def-weil-pbc-proetale-operations",
   "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 03CE, lemma-localize-given-products, with derived.tex Tag 015F and homology.tex Tag 010N; explicit derived normalization realizing the first sentence of blueprint main-20261015 lem-pur-etale-iso-descent.proof.md."
+  "place": "Tag 03CE with homology.tex Tag 010N and derived.tex Tag 015F; V7 Lean proof via the normalized module adjunction, Mathlib pushforwardPushforwardAdj and leftAdjointUniq, and the existing source-library exact-derived natural-isomorphism and cohomology APIs."
  },
  "mathlib_searches": [
   {
@@ -250,10 +222,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-exact-functor-derived-functor"
+  "lem-sfb-proetale-object-inverse-image-restriction"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -284,5 +253,15 @@
   "group": "Q109",
   "result": "pass",
   "note": "Read the whole delivery: the item node is identical to live except for lean; all 11 stmt_dep records and the upstream declarations were read at source. Every clause matches the node. Each data field of ProEtaleFiniteLocalizationComparison is pinned to the canonical map: ringIso by the constant-section equation (same as clause 3 of the dep theorem), moduleComparison.inv by the graph-coprojection equation through the unit of sfIntrinsicConstantModuleAdjunction and the graph point, derivedComparison by eta_QK ≫ a_R = a_F ≫ Q(C(b)), and cohomologyComparison by H^r(eta) then the inverse of mapDerivedCategoryHomologyFunctorIso (the liftNatIso of ShortComplex.mapHomologyIso). The exactness fields are Prop conclusions. The n+1 level matches finiteDerivedPullback's indexing (finiteCoefficientRing is an abbrev for coefficientExtensionRing), and sfIntrinsicDerivedPullback is definitionally finiteDerivedPullback. Edge cases (empty U, u not mono, level 1, negative r, unbounded complexes, universes) are covered. lean.statement is verbatim in the file; docstrings carry the source places and blueprint id; sorry only. The section 1(B) rebinding of def-weil-derived-cohomology-sheaves to Mathlib DerivedCategory.homologyFunctor (existing:true) restores that node's mathlib_match. None of the 12 dropped N5 declarations is used outside its module (grep of both lean trees). The 8 importing citers use homologyFunctor directly, so nothing is narrowed or overwritten. Advisory: the SfCommonStageWeilCohomology declarations no longer have a recording node and their docstrings are stale; sfIntrinsicPullback and sfIntrinsicConstantModuleAdjunction are used though their owners are outside stmt_deps. No compile run (no file changed); the worker reports a clean compile in 33.2/25.5 s.; reverted the delivery's change of existing node(s) def-weil-derived-cohomology-sheaves (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8627e",
+  "group": "V7",
+  "result": "fix",
+  "landing": "20261021T140939-L-2778401",
+  "kind": "interface",
+  "note": "independent cc review: delivered FinitePullbackLocalizationCohomology.lean vs live clone (signatures identical, 0 importers), node proof fields vs Lean proof, removed unit-route import vs sk-def-sf-setting/sk-prop-cohsm realized lists, #print axioms of the theorem and its ingredients"
  }
 }
