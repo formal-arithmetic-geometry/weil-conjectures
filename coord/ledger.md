@@ -23745,3 +23745,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/NL/lem-sfb-finite-index-rectangle-primitive-operator (reviewer PASS; first push; new nodes: 0)
 - 20:59 L: merged deliver/NI/lem-sfb-parameter-cochain-completion-boundary-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 21:00 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 2026-10-21T21:00:58Z L: superseded stage-1 delivery NF/lem-sfb-trivial-ladic-derived-exterior at 322140e87fd0e46f85152acd5a24f6862b4bdb5c; current completion retained; packet archived at refs/superseded/NF/lem-sfb-trivial-ladic-derived-exterior/322140e87fd0e46f85152acd5a24f6862b4bdb5c; stale return retired.
