@@ -287,5 +287,28 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-e3df840bd (reviewer sub-agent of L); spot-checked: Read the item's 7 steps against every cited statement and the main-20261015 uniform-Ext proof (Lattices/Torsion/Integral targets). Statement and stmt_deps match side-live. The item is still unsplit live and side-live, is not in the dropped list and has no repair note; there are no new nodes. Step checks: 1, A_n is finite (DVR quotients; coefficient-extension (4)), |ℓ|=ℓ^{-1} puts ℓ in (π), so A_n is admissible (discrete quotient topology). 2, Nakayama exact sequence plus locally-free-derived-scalars, which has no flatness hypothesis on φ. 3, elementary reduced-dual evaluation map, checked including rank 0. 4, int-tensor projection with Λ=O_E, cartesian coefficients and ν; correct but redundant. 5, I verified c_n myself: P flat ⇒ P/π^n≃cone(π^n|P)≃cone(π^n|Q)≃Q/π^n, using that Q is torsion-free because a_! is exact; so c_n is an isomorphism in D(A_{n,X}), not only an integral one. 6, the sheaf-ring derived coefficient adjunction for unbounded complexes and an arbitrary ring map. 7, the formal-closed-support stratum lemma with Λ=A_n; its support functor is the same as the item's; the dual is K-flat. Edge cases: n=1, ramified E, L_0=0, Z=X, the point case. rg duplicate search found nothing. Batch-5 flag on det-lem-formal-closed-support-stratum→lem-trf-geometric-inverse-image-exact: the closure difference is 0 (the unchanged stmt_dep sk-lem-formal-closed-support already reaches it), and the target is the generic exactness of geometric inverse image, not a trace-formula or Poincaré step; accepted. Tool_uses accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LatticeSupportedHomFiniteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.latticeSupportedHomFiniteComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.LatticeSupportedHomFiniteComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeSupportedHomFiniteComparison"
+  ],
+  "file": "lean/Sheaf/Paper/LatticeSupportedHomFiniteComparison.lean",
+  "statement": "theorem latticeSupportedHomFiniteComparison (hn : 1 ≤ n) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) [S.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [V.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [i.IsOver (Spec (.of k))] [j.IsOver (Spec (.of k))] [v.IsOver (Spec (.of k))] (hij : Set.range i.base = (Set.range j.base)ᶜ) (hL : IsLisseCoefficientModule R L) : Nonempty (LatticeSupportedHomFiniteComparison l E n i j v L)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The structure packages every clause, including evaluation normalization, a source isomorphism in D(A_n), a natural derived global-Hom comparison and the three natural additive Hom comparisons. Local notation abbreviates existing constructions; no new coefficient, tensor, support or lisse definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5f423675",
+  "group": "NW",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: A_n = O_E/(π)^n with exponent n (coefficientExtensionIdeal); finite/torsion/reduced_lisse; dualReduction pinned uniquely by the evaluation equation (⟨x̄,λ̄⟩=φ(λ(x))); sourceReduction is an iso in D(A_{n,X}); e₁ pinned to derivedExtendMapDerivedCategoryAdjunction.homEquiv.symm and e₂ to precomposition with sourceReduction.inv; third iso goes to H^q of RΓ(S, Dn ⊗^L u^* R formalClosedSupport A) (finite-coefficient support, Γ via formalClosedSupportSections); termwise clause present; the extra derivedComparison is true and is the derived form required 2026-10-21. Bare isos (source reduction, third iso, termwise) match the node, which asserts only existence, and the stratum dependency's own Nonempty form. Hypotheses: all present, none stronger (S/Z/V finite-type instances implied by X's); lean.statement verbatim; only the lean field changed; 7-step proof docstring; no line >100 chars; plain imports are the proof-dependency modules (project convention); not dropped, no repair note. Edge cases n=1 ramified, rank 0, empty strata, all q, unbounded K covered. Advisory: derivedExtendMapDerivedCategoryAdjunction is owned by sk-def-sfb-derived-extension-of-scalars, not a stmt_dep, but covered by the cited coefficient-change node; def-pur-ringed-site-zeroth-hypercohomology's declaration is imported but unused, with RΓ taken from sk-lem-formal-closed-support (not a copy). Not recompiled per instruction; no fixes."
  }
 }
