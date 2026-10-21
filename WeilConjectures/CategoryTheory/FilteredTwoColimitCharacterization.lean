@@ -10,6 +10,12 @@ public import Mathlib.CategoryTheory.Equivalence
 
 /-! # The comparison characterizes a filtered 2-colimit
 
+For a coherent cocone `c` on a directed system of categories, the comparison functor from the
+explicit model `FilteredTwoColimit.Object c` is essentially surjective, full, or faithful exactly
+when the cocone satisfies the object, Hom-surjectivity, or Hom-injectivity condition of
+`CategoryCocone.IsFilteredTwoColimit`; hence the cocone is a filtered 2-colimit if and only if the
+comparison is an equivalence.
+
 (blueprint: det-def-sfb-filtered-two-colimit-characterization).
 -/
 
@@ -42,7 +48,7 @@ this into equality after T_kn. This is Hom-inj.
 via Functor.asEquivalence. Conversely a quasi-inverse supplies essential surjectivity and bijective
 Hom maps (Equivalence.fullyFaithfulFunctor); steps 1--4 recover the three cocone conditions. -/
 theorem comparison_characterization
-    {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
+    {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)]
     {C : I → Type u} [∀ i : I, Category.{v} (C i)]
     {D : Type u'} [Category.{v'} D] (c : CoherentCategoryCocone (C := C) (D := D)) :
     ((comparison c).EssSurj ↔ c.toCategoryCocone.EssSurjObj) ∧
@@ -66,7 +72,8 @@ theorem comparison_characterization
     constructor
     · intro h i j x y f
       obtain ⟨g, hg⟩ := h.map_surjective (X := ⟨i, x⟩) (Y := ⟨j, y⟩) f
-      obtain ⟨k, g, rfl⟩ := (homDiagram c ⟨i, x⟩ ⟨j, y⟩).ιColimitType_jointly_surjective g
+      obtain ⟨k, g, rfl⟩ :=
+        (homDiagram c ⟨i, x⟩ ⟨j, y⟩).ιColimitType_jointly_surjective g
       exact ⟨k.1, k.2.1, k.2.2, g, hg.symm⟩
     · intro h
       constructor

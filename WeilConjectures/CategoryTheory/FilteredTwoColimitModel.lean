@@ -11,6 +11,16 @@ import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
 
 /-! # The concrete directed category colimit and comparison
 
+Given a directed system of categories `C i` (`i` in a directed preorder `I`) with coherent
+transition functors, this file builds the explicit filtered 2-colimit category: its objects are
+pairs `(i, x)` with `x : C i`, and its Hom sets are the filtered set colimits, over the common
+upper stages `k ≥ i, j`, of the Hom sets `T_ik x ⟶ T_jk y`. Composition and identities are
+defined on representatives and descend to the colimit. For a coherent cocone
+`Φ i : C i ⥤ D` with vertex `D` the file also defines the comparison functor `Object c ⥤ D`,
+which sends `(i, x)` to `Φ_i x` and a class `[k, g]` to `θ_jk ∘ Φ_k g ∘ θ_ik⁻¹`.
+`FilteredTwoColimitCharacterization.lean` shows that the cocone is a filtered 2-colimit exactly
+when this comparison is an equivalence.
+
 (blueprint: det-def-sfb-filtered-two-colimit-model).
 -/
 
@@ -91,8 +101,7 @@ theorem homTransition_id (a b : Object c) (k : CommonStage a.1 b.1)
     (c.tau k.2.2 (le_refl k.1)) (c.tau_identity_right k.2.1)
     (c.tau_identity_right k.2.2) a.2 b.2 g
 
-/-- Expand both conjugations, use the cocycle
-on their endpoints, and apply naturality of tau to the middle arrow.
+/-- Transitions compose: `t_lm ∘ t_kl = t_km` on Hom sets at common stages.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
 theorem homTransition_comp (a b : Object c) {k l m : CommonStage a.1 b.1}
     (h : k ≤ l) (h' : l ≤ m) (g : HomAt c a b k) :
@@ -145,49 +154,14 @@ theorem homClass_transition {a b : Object c} {k l : CommonStage a.1 b.1}
     homClass c l (homTransition c h g) = homClass c k g := by
   exact (homDiagram c a b).ιColimitType_map (homOfLE h) g
 
-/-- The colimit cocone, lifting stage Hom types into the colimit's universe.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
-def homCocone (a b : Object c) :
-    Limits.Cocone (homDiagram c a b ⋙ uliftFunctor.{w, v}) where
-  pt := HomSet c a b
-  ι :=
-    { app k := TypeCat.ofHom (fun g => homClass c k g.down)
-      naturality {_ _} h := ConcreteCategory.hom_ext _ _
-        (fun g => homClass_transition c (leOfHom h) g.down) }
-
-/-- A compatible family on the
-lifted Hom diagram factors by sending [k,g] to its value on ULift.up g. Compatibility respects
-the quotient relation; uniqueness follows because every class has a representative. This is
-exactly the universal property of the recorded category-colimit dependency.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
-theorem homCocone_isColimit (a b : Object c) :
-    Nonempty (Limits.IsColimit (homCocone c a b)) := by
-  refine ⟨{
-    desc := fun s ↦ TypeCat.ofHom (Quot.lift
-      (fun f ↦ s.ι.app f.1 ⟨f.2⟩) (by
-        rintro ⟨k, f⟩ ⟨l, g⟩ ⟨h, e⟩
-        dsimp only at h e ⊢
-        rw [e]
-        exact (ConcreteCategory.congr_hom (s.w h) ⟨f⟩).symm))
-    fac := ?_
-    uniq := ?_ }⟩
-  · intro s k
-    ext g
-    rfl
-  · intro s m hm
-    apply ConcreteCategory.hom_ext
-    intro x
-    induction x using Quot.inductionOn with
-    | h f => exact ConcreteCategory.congr_hom (hm f.1) ⟨f.2⟩
-
 /-- The normalized identity class. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
 def identityHom (a : Object c) : HomSet c a a :=
   homClass c ⟨a.1, le_refl a.1, le_refl a.1⟩ (𝟙 _)
 
-/-- Directedness supplies upper bounds of two
-common stages and nonemptiness; thinness of a preorder equalizes every parallel pair.
+/-- The common upper stages of two indices form a filtered preorder.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
-theorem commonStage_isFiltered [IsDirected I (· ≤ ·)] (i j : I) : IsFiltered (CommonStage i j) := by
+theorem commonStage_isFiltered [IsDirected I (· ≤ ·)] (i j : I) :
+    IsFiltered (CommonStage i j) := by
   obtain ⟨k, hi, hj⟩ := exists_ge_ge i j
   have : Nonempty (CommonStage i j) := ⟨⟨k, hi, hj⟩⟩
   have : IsDirectedOrder (CommonStage i j) := ⟨fun a b ↦ by
@@ -195,9 +169,8 @@ theorem commonStage_isFiltered [IsDirected I (· ≤ ·)] (i j : I) : IsFiltered
     exact ⟨⟨m, a.2.1.trans ha, a.2.2.trans ha⟩, ha, hb⟩⟩
   infer_instance
 
-/-- Stacks 04AX. Apply the filtered-set
-colimit equality criterion to homCocone_isColimit, using commonStage_isFiltered and cancelling
-the ULift on each stage. Thus equality means agreement at a common later stage.
+/-- Two representatives define the same class exactly when they agree after transition to a
+common later stage (Stacks 04AX).
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
 theorem homClass_eq_iff [IsDirected I (· ≤ ·)] {a b : Object c} (k l : CommonStage a.1 b.1)
     (f : HomAt c a b k) (g : HomAt c a b l) :
@@ -209,7 +182,7 @@ theorem homClass_eq_iff [IsDirected I (· ≤ ·)] {a b : Object c} (k l : Commo
     ⟨fun ⟨m, hk, hl, h⟩ ↦ ⟨m, leOfHom hk, leOfHom hl, h⟩,
       fun ⟨m, hk, hl, h⟩ ↦ ⟨m, homOfLE hk, homOfLE hl, h⟩⟩
 
-variable [IsDirected I (· ≤ ·)] [Nonempty I]
+variable [IsDirected I (· ≤ ·)]
 
 /-- Composition at a specified common stage. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
 def compAt {a b d : Object c} (f : HomRepresentative c a b)
@@ -229,7 +202,7 @@ noncomputable def compRepresentative {a b d : Object c}
     (Classical.choose_spec (exists_ge_ge f.1.1 g.1.1)).1
     (Classical.choose_spec (exists_ge_ge f.1.1 g.1.1)).2
 
-omit [IsDirected I (· ≤ ·)] [Nonempty I] in
+omit [IsDirected I (· ≤ ·)] in
 private theorem homTransition_product {a b d : Object c} {k l : I}
     (ha : a.1 ≤ k) (hb : b.1 ≤ k) (hd : d.1 ≤ k) (h : k ≤ l)
     (f : (c.T ha).obj a.2 ⟶ (c.T hb).obj b.2)
@@ -241,7 +214,7 @@ private theorem homTransition_product {a b d : Object c} {k l : I}
           (l := ⟨l, hb.trans h, hd.trans h⟩) h g := by
   simp [homTransition, Functor.map_comp, Category.assoc]
 
-omit [IsDirected I (· ≤ ·)] [Nonempty I] in
+omit [IsDirected I (· ≤ ·)] in
 private theorem compAt_transition {a b d : Object c}
     (f : HomRepresentative c a b) (g : HomRepresentative c b d)
     (m n : I) (hf : f.1.1 ≤ m) (hg : g.1.1 ≤ m) (h : m ≤ n) :
@@ -254,16 +227,12 @@ private theorem compAt_transition {a b d : Object c}
   rw [homTransition_product c _ (f.1.2.2.trans hf), homTransition_comp,
     homTransition_comp]
 
-/-- Transport both products to one
-upper bound of their stages; transition functoriality and cancellation of middle tau factors
-give identical products there, hence identical classes.
+/-- The composite class does not depend on the common stage at which it is computed.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
 theorem compRepresentative_eq_compAt {a b d : Object c}
     (f : HomRepresentative c a b) (g : HomRepresentative c b d)
     (m : I) (hf : f.1.1 ≤ m) (hg : g.1.1 ≤ m) :
     compRepresentative c f g = compAt c f g m hf hg := by
-  -- Retain the existing public theorem's section parameter.
-  have _ := (inferInstance : Nonempty I)
   let n := Classical.choose (exists_ge_ge f.1.1 g.1.1)
   have hn := Classical.choose_spec (exists_ge_ge f.1.1 g.1.1)
   change compAt c f g n hn.1 hn.2 = _
@@ -323,10 +292,9 @@ noncomputable def compHom {a b d : Object c}
     (fun f g g' h => compRepresentative_rel_right c f g g' h)
     (fun f f' g h => compRepresentative_rel_left c f f' g h)
 
-/-- At a common stage, the identity class becomes
-an identity by normalization and functoriality; apply the stage's left identity law.
+/-- The identity class is a left identity for composition.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
-theorem identity_comp {a b : Object c} (f : HomSet c a b) :
+theorem id_compHom {a b : Object c} (f : HomSet c a b) :
     compHom c (identityHom c a) f = f := by
   induction f using Quot.inductionOn with
   | h f =>
@@ -339,10 +307,9 @@ theorem identity_comp {a b : Object c} (f : HomSet c a b) :
     simp [homTransition]
     rfl
 
-/-- Transport to one stage, where the normalized
-identity represents the identity and the right identity law applies.
+/-- The identity class is a right identity for composition.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
-theorem comp_identity {a b : Object c} (f : HomSet c a b) :
+theorem compHom_id {a b : Object c} (f : HomSet c a b) :
     compHom c f (identityHom c b) = f := by
   induction f using Quot.inductionOn with
   | h f =>
@@ -400,8 +367,8 @@ noncomputable instance category : Category (Object c) where
   Hom := HomSet c
   id := identityHom c
   comp := compHom c
-  id_comp := identity_comp c
-  comp_id := comp_identity c
+  id_comp := id_compHom c
+  comp_id := compHom_id c
   assoc := comp_assoc c
 
 /-- The comparison formula on representatives.
@@ -410,7 +377,7 @@ def mapHomRepresentative {a b : Object c} (f : HomRepresentative c a b) :
     (c.Φ a.1).obj a.2 ⟶ (c.Φ b.1).obj b.2 :=
   (c.iso f.1.2.1).inv.app a.2 ≫ (c.Φ f.1.1).map f.2 ≫ (c.iso f.1.2.2).hom.app b.2
 
-omit [IsDirected I (· ≤ ·)] [Nonempty I] in
+omit [IsDirected I (· ≤ ·)] in
 private theorem mapHomRepresentative_transition {a b : Object c}
     {k l : CommonStage a.1 b.1} (h : k ≤ l) (f : HomAt c a b k) :
     mapHomRepresentative c ⟨l, homTransition c h f⟩ =
@@ -435,16 +402,12 @@ private theorem mapHomRepresentative_transition {a b : Object c}
   rw [← Category.assoc ((c.Φ l.1).map ((c.T h).map f)), hn]
   simp
 
-/-- Substitute the tau-conjugation formula
-and the two cocone compatibility equations. Cancel Phi(tau) factors and use naturality of theta
-at the middle arrow. Thus moving to a later stage leaves the image unchanged.
+omit [IsDirected I (· ≤ ·)] in
+/-- The comparison formula is constant on the classes of the Hom colimit.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
 theorem mapHomRepresentative_rel {a b : Object c}
     (f g : HomRepresentative c a b) (h : (homDiagram c a b).ColimitTypeRel f g) :
     mapHomRepresentative c f = mapHomRepresentative c g := by
-  -- Retain the existing public theorem's section parameters.
-  have _ := (inferInstance : IsDirected I (· ≤ ·))
-  have _ := (inferInstance : Nonempty I)
   rcases f with ⟨k, f⟩
   rcases g with ⟨l, g⟩
   obtain ⟨h, e⟩ := h
@@ -457,10 +420,10 @@ def mapHom {a b : Object c} (f : HomSet c a b) :
     (c.Φ a.1).obj a.2 ⟶ (c.Φ b.1).obj b.2 :=
   Quot.liftOn f (mapHomRepresentative c) (mapHomRepresentative_rel c)
 
-/-- Normalization makes theta_ii identity;
-Phi_i preserves identity, giving the stated identity morphism.
+omit [IsDirected I (· ≤ ·)] in
+/-- The comparison sends the identity class to the identity morphism.
 (blueprint: det-def-sfb-filtered-two-colimit-model). -/
-theorem mapHom_identity (a : Object c) : mapHom c (identityHom c a) = 𝟙 _ := by
+theorem mapHom_id (a : Object c) : mapHom c (identityHom c a) = 𝟙 _ := by
   change mapHomRepresentative c ⟨⟨a.1, le_refl _, le_refl _⟩, 𝟙 _⟩ = _
   simp [mapHomRepresentative]
 
@@ -491,7 +454,7 @@ theorem mapHom_comp {a b d : Object c} (f : HomSet c a b) (g : HomSet c b d) :
 noncomputable def comparison : Object c ⥤ D where
   obj a := (c.Φ a.1).obj a.2
   map := mapHom c
-  map_id := mapHom_identity c
+  map_id := mapHom_id c
   map_comp := mapHom_comp c
 
 end FilteredTwoColimit
