@@ -42,24 +42,10 @@
    }
   },
   {
-   "text": "Since $A$ is finite and discrete, the two finite-discrete coefficient lemmas identify, for $T=Z,V$, the coefficient ring sheaf of [def-weil-pbc-proetale-modules] used in the statement with the constant ring sheaf $\\nu_T^*A_{T,\\mathrm{\\acute et}}$, as rings. Hence the classical-module equivalence and the comparison statements for constant coefficients used below apply to the module sheaves of the statement. Choose an étale $A$-module sheaf $F$ on $Z$ with $H\\cong\\nu_Z^*F$, using the classical module equivalence. Since $A$ is finite, the additive order $n$ of $1_A$ is a positive integer and $n\\cdot m=(n1_A)m=0$ for every local section $m$ of $F$. Thus its underlying abelian sheaf $U_ZF$ is torsion. For the zero ring take $n=1$; then $F=0$. This choice is made on $Z$ itself and imposes no descent condition from $X$.",
-   "uses": [
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "det-pe-classical-sheaves-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 5.1.3 and Lemma 5.1.2, module form; elementary finite-ring torsion argument"
-   }
-  },
-  {
-   "text": "Apply the proper torsion direct-image bound to $h$ and $U_ZF$: $R^qh_{\\mathrm{ét},*}(U_ZF)=0$ for $q>2e$. The coefficient-forgetting comparison identifies the underlying abelian sheaf of $R^qh_{\\mathrm{ét},*}F$ with this sheaf. Forgetting is faithful and detects zero, since a module with zero underlying abelian group is zero. Consequently $R^qh_{\\mathrm{ét},*}F=0$. An ordinary bounded-below injective resolution of $F$ is K-injective, and computes both the total derived functor on $F[0]$ and its classical higher derived functors. Hence $\\mathcal H^qRh_{\\mathrm{ét},*}(F[0])=0$ for $q>2e$.",
+   "text": "Choose the etale sheaf F and its comparison isomorphism from the stated classicality hypothesis. The positive integer card(A) kills every local section of its underlying abelian sheaf: card(A) times x equals (card(A) times 1_A) times x, which is zero. This also treats the zero ring. Apply the proper torsion direct-image bound to the projection and this torsion abelian sheaf, and transfer back through the higher-direct-image forgetful isomorphism. Faithfulness of coefficient forgetting detects zero.",
    "uses": [
     "lem-kun-proper-torsion-cd-bound",
-    "lem-sbc-higher-direct-image-forget-comparison",
-    "lem-sp-kinjective-computes"
+    "lem-sbc-higher-direct-image-forget-comparison"
    ],
    "elementary": false,
    "source": {
@@ -68,11 +54,13 @@
    }
   },
   {
-   "text": "The complex $F[0]$ is bounded below, so the canonical total-derived comparison is invertible for the qcqs morphism $h$: $\\nu_V^*Rh_{\\mathrm{ét},*}(F[0])\\cong Rh_*(\\nu_Z^*F[0])\\cong Rh_*(H[0])$. Here the bounded-below total-comparison node supplies precisely the compatibility with K-injective total derivation. The module comparison inverse image $\\nu_V^*$ is exact. An exact functor preserves kernels and images, hence the kernel/image quotient defining cohomology; therefore $\\mathcal H^qRh_*(H[0])\\cong\\nu_V^*\\mathcal H^qRh_{\\mathrm{ét},*}(F[0])=0$ for $q>2e$.",
+   "text": "The proved source bounded-below/unbounded compatibility identifies this etale higher direct image with homology of the total derived direct image of F[0]. The canonical total-derived comparison mate is invertible there because the projection is qcqs and F[0] is bounded below. Exact comparison inverse image commutes with homology. Compose the mate with the single-functor comparison and the classicality isomorphism, giving the asserted total proper direct-image bound for H[0].",
    "uses": [
+    "src-right-derived-functor-plus-compatibility",
     "lem-sfb-unbounded-direct-image-bounded-below",
     "def-sfb-unbounded-direct-image-mate",
-    "det-pe-classical-sheaves-modules"
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
@@ -81,14 +69,25 @@
    }
   },
   {
-   "text": "Choose a bounded-below injective resolution $H\\to I^\\bullet$ in the module-sheaf category. It is K-injective, so $h_*I^\\bullet$ represents $Rh_*(H[0])$ and $\\Gamma(Z,I^\\bullet)$ represents $R\\Gamma(Z,H[0])$. By the direct-image section formula, $\\Gamma(Z,I^\\bullet)=\\Gamma(V,h_*I^\\bullet)$ term by term. The weakly étale localization node identifies $V_{\\mathrm{proét}}$ with $Y_{\\mathrm{proét}}/V$ and identifies the constant coefficient rings. We check that the final object $V$ of $V_{\\mathrm{proét}}$ is weakly contractible there. Let $\\varphi:F\\to G$ be an epimorphism of sheaves of sets on $V_{\\mathrm{proét}}=Y_{\\mathrm{proét}}/V$ and $s\\in G(V)$. For an object $U$ of $Y_{\\mathrm{proét}}$ let $P(U)$ be the set of pairs $(a,t)$ with $a:U\\to V$ a $Y$-morphism and $t\\in F(U\\xrightarrow{a}V)$ such that $\\varphi(t)=s|_a$. Then $P$ is a sheaf on $Y_{\\mathrm{proét}}$: for a covering $\\{U_i\\to U\\}$, compatible $a_i$ glue to a unique $a$ because $h_V$ is a sheaf (the topology is subcanonical); the $t_i$ then glue in $F$ because the slice coverings are the coverings of $Y_{\\mathrm{proét}}$; and $\\varphi(t)=s|_a$ holds because $G$ is separated. The map $P\\to h_V$, $(a,t)\\mapsto a$, is an epimorphism: $\\varphi$ is locally surjective, so $s|_a$ lifts on a covering of $U$. Since $V$ is weakly contractible in $Y_{\\mathrm{proét}}$, this map has a section $\\sigma$. Then $\\sigma(\\mathrm{id}_V)=(\\mathrm{id}_V,t)$ with $t\\in F(V)$ and $\\varphi(t)=s$. Thus $V$ is a weakly contractible affine object of $V_{\\mathrm{proét}}$. Exact evaluation applied there makes $\\Gamma(V,-)$ exact on module sheaves of $V_{\\mathrm{proét}}$. Exactness preserves the kernel/image quotients of the complex, giving $H^qR\\Gamma(Z,H[0])=\\Gamma(V,\\mathcal H^qRh_*(H[0]))=0$ for $q>2e$.",
+   "text": "Choose a faithfully flat ind-etale w-contractible algebra S over Gamma(V,O), and let p:Spec S -> V be the resulting affine surjective weakly etale cover. Composition with V -> Y defines a singleton cover in Y_proet. The induced map of representable sheaves is epi: two maps out of h_V equal after p agree by sheaf separatedness. Weak contractibility of V lifts id_V along this epimorphism, giving a section s of p. The object Spec S -> V is weakly contractible in V_proet by the proved affine w-contractible evaluation theorem. Given a locally surjective map of set sheaves on V_proet and a section over its final object, restrict to Spec S, lift there, then restrict along s. Since s followed by p is the identity, this is a lift of the original section. Thus the final object of V_proet is weakly contractible. Evaluation of module sheaves there preserves epis (forget to sets and use this lifting property) and preserves kernels (computed sectionwise), hence is exact. No slice-topos or variable-ring module bridge is needed.",
    "uses": [
-    "lem-sp-kinjective-computes",
-    "def-weil-pbc-proetale-operations",
-    "det-proper-heart-continuity-sections",
+    "lem-weil-pbc-source-wcontractible-extension",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
     "sk-def-pe-weak-contractible",
-    "lem-weil-proetale-weakly-etale-localization",
     "det-pe-topos-functoriality-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0990, 090M and 0946; splitting a contractible affine cover and exact evaluation"
+   }
+  },
+  {
+   "text": "Base change of the terminal object of V_proet is terminal in Z_proet. The unique terminal-object isomorphism yields the natural isomorphism h_* followed by Gamma(V,-) with Gamma(Z,-), objectwise by restriction of the sheaf along that isomorphism. The direct image preserves K-injective complexes, as the right adjoint of exact inverse image. Apply the proved total-derived composition theorem. Since Gamma(V,-) is exact by the preceding step, its derived functor is its exact derived-category functor and commutes with homology. Apply it to the first bound, obtaining the global-sections bound.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-fin-kinjective-derived-composition",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
@@ -102,24 +101,24 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-pc-separated-quasi-separated",
-  "det-pe-classical-sheaves-modules",
   "lem-kun-proper-torsion-cd-bound",
   "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-sp-kinjective-computes",
+  "src-right-derived-functor-plus-compatibility",
   "lem-sfb-unbounded-direct-image-bounded-below",
   "def-sfb-unbounded-direct-image-mate",
-  "def-weil-pbc-proetale-operations",
-  "det-proper-heart-continuity-sections",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-source-wcontractible-extension",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
   "sk-def-pe-weak-contractible",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "det-pe-topos-functoriality-site"
+  "det-pe-topos-functoriality-site",
+  "def-weil-pbc-proetale-operations",
+  "lem-fin-kinjective-derived-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-  "place": "Uniform étale bound and Transfer paragraph; explicit finite-ring coefficient reduction and exact weakly contractible evaluation using Stacks 095U, 03FD and 0946"
+  "place": "Etale uniform bound and Transfer; source total-derived compatibility and composition; exact evaluation proved by splitting a w-contractible affine cover (Stacks 0990, 090M, 0946). Formalized by W5."
  },
  "mathlib_searches": [
   {
@@ -265,12 +264,7 @@
   "lem-pc-separated-quasi-separated",
   "lem-kun-proper-torsion-cd-bound",
   "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-sp-kinjective-computes",
   "lem-sfb-unbounded-direct-image-bounded-below",
-  "det-proper-heart-continuity-sections",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
   "det-pe-topos-functoriality-site"
  ],
  "reviewed": {
@@ -300,5 +294,15 @@
   "group": "Q20",
   "result": "pass",
   "note": "Clause-by-clause match with the node: proper f; fibre bound over every base change; affine V weakly contractible in Y_proet (.{u+1}); literal pullback and pullback.snd; classicality = recorded det-pe-classical essential-image clause on Z itself; total rightDerivedFunctor of ProEtale.lowerStar and globalSectionsFunctor on H[0]; strict q>2e; no extra hypotheses. Edge cases e=0, zero ring, empty Z/V, char dividing |A| covered. lean.statement verbatim; only the item lean field changed; dependency records untouched. Docstrings carry source and blueprint id plus the 5-step proof plan. Report has Worker report and Second reading by Q20. nt_compile --json 23.1 s rc=0 clean. Advisories: fixed-scalar ModuleCat model is canonically equivalent to FiniteCoefficientModules via finiteCoefficientRealization (constant-model precedent); A : Type (u+1) vs sibling truncation's Type u needs a stage-3 ULift/model bridge."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261021T120842-L-3965139",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
