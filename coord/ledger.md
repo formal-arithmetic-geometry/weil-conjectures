@@ -21252,3 +21252,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q85/lem-pur-derived-local-class-edge-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q117/lem-sfb-ringed-signed-bidual-localization (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q143/lem-per-constructible-rational-hom-comparison (reviewer PASS; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q144/lem-cbc-regular-quotient-cone-augmentation (reviewer PASS; first push; new nodes: 0)
