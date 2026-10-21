@@ -19963,3 +19963,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:46 L: merged deliver/Q102/sk-thm-existence (reviewer PASS; after a return; new nodes: 2)
 - 03:46 L: merged deliver/Q63/lem-sf-etale-chart-adjoint-comparison (reviewer FIX; first push; new nodes: 0)
 - 03:46 L: merged deliver/N5/lem-weil-pbc-reduction-pullback-derived-tower (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T03:47:13Z L: superseded stage-1 delivery O4/lem-sp-finite-compact-support-domains at 2efd4501ccd87ac0ac3cf8d504f470255da681a8; current completion retained; packet archived at refs/superseded/O4/lem-sp-finite-compact-support-domains/2efd4501ccd87ac0ac3cf8d504f470255da681a8; stale return retired.
