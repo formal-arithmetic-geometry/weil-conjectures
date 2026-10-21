@@ -78,7 +78,7 @@ theorem etaleStalkSpecialization_naturality
           AddCommGrpCat.{u + 1}).obj
           ((upperStar AddCommGrpCat.{u + 1}
             (Scheme.strictHenselizationStructuralMap s)).obj H) :=
-    fun H ↦ Classical.choose (existsUnique_strictHenselizationStalkRestriction s H)
+    fun H ↦ Classical.choose ((strictLocalSectionCone s).existsUnique_restriction H)
   have hr {F G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}} (a : F ⟶ G) :
       (Scheme.pointSmallEtale s).sheafFiber.map a ≫ r G =
         r F ≫ (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
@@ -96,9 +96,9 @@ theorem etaleStalkSpecialization_naturality
     apply hc.hom_ext
     intro j
     have hrF := (Classical.choose_spec
-      (existsUnique_strictHenselizationStalkRestriction s F)).1
+      ((strictLocalSectionCone s).existsUnique_restriction F)).1
     have hrG := (Classical.choose_spec
-      (existsUnique_strictHenselizationStalkRestriction s G)).1
+      ((strictLocalSectionCone s).existsUnique_restriction G)).1
     change (Scheme.pointSmallEtale s).toPresheafFiber
         ((Scheme.AffineEtale.Spec S).obj
           ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
@@ -108,10 +108,10 @@ theorem etaleStalkSpecialization_naturality
     erw [← Category.assoc,
       (Scheme.pointSmallEtale s).toPresheafFiber_naturality a.hom, Category.assoc]
     erw [hrG j.unop]
-    have hrF' : c.ι.app j ≫ r F = strictHenselizationSectionRestriction s F j.unop :=
+    have hrF' : c.ι.app j ≫ r F = (strictLocalSectionCone s).restriction F j.unop :=
       hrF j.unop
     conv_rhs => rw [← Category.assoc, hrF']
-    dsimp only [strictHenselizationSectionRestriction]
+    dsimp only [PointedEtaleSectionCone.restriction]
     simp only [Category.assoc]
     let g := Scheme.strictHenselizationStructuralMap s
     let W := (Scheme.AffineEtale.Spec S).obj
@@ -126,7 +126,7 @@ theorem etaleStalkSpecialization_naturality
     erw [he]
     simp only [Category.assoc]
     have hn := ((upperStar AddCommGrpCat.{u + 1} g).map a).hom.naturality
-      (strictHenselizationNeighbourhoodSection s j.unop).op
+      (strictLocalNeighbourhoodSection s j.unop).op
     erw [← reassoc_of% hn]
     have ht := (Sheaf.ΓNatIsoSheafSections _ _
       (IsTerminal.isTerminalOfObj
@@ -135,6 +135,7 @@ theorem etaleStalkSpecialization_naturality
       ((upperStar AddCommGrpCat.{u + 1} g).map a)
     change ((upperStar AddCommGrpCat.{u + 1} g).map a).hom.app (Opposite.op V) ≫ _ = _ at ht
     erw [ht]
+    rfl
   let e := Functor.whiskerLeft
       (upperStar AddCommGrpCat.{u + 1} (Scheme.strictHenselizationStructuralMap s))
       (globalGerm t) ≫

@@ -5,11 +5,12 @@ Authors: SHEAF group NL
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 public import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.Algebra.CharP.CharAndCard
 import Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity
@@ -45,7 +46,7 @@ noncomputable def strictLocalSpecialization
     (Scheme.pointSmallEtale s).sheafFiber.obj G ⟶
       (Scheme.pointSmallEtale (t ≫ Scheme.strictHenselizationStructuralMap s)).sheafFiber.obj
         G :=
-  Classical.choose (existsUnique_strictHenselizationStalkRestriction s G) ≫
+  Classical.choose ((strictLocalSectionCone s).existsUnique_restriction G) ≫
     (Sheaf.ΓNatIsoSheafSections _ _
       (IsTerminal.isTerminalOfObj
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤

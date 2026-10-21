@@ -5,6 +5,7 @@ Authors: SHEAF group NQ
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.EtaleStalkSpecialization
 public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
