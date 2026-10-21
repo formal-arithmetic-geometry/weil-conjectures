@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the open-site overlap comparison, the comparison between cartesian pullbacks across a commuting square, and the restriction comparison beta. The cartesian comparison first cancels the inverse-site equivalence by its counit, then uses the fixed derived pullback composition along the two equal scheme composites. Its component formula is the mapped counit followed by derived transport. The exact-restriction and site overlap comparisons are obtained from their canonical module-level isomorphisms by derived localization.",
+   "text": "Reuse the adopted-source PerfectOverlapObjectRealizationCoreComparisons through a public import. It supplies the fixed restriction, site-return and cartesian comparisons with their component API; no comparison is selected anew. The adapter retains the stage-equivalence compatibility API through its existing Sheaf module. The original construction and localization dependencies remain necessary in the source library.",
    "uses": [
     "def-pc-derived-category",
     "def-pc-two-open-comparison-diagram",
@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "The existing open-square component API is relocated unchanged from PerfectOverlapOpenSquareCube into the comparison module, so the constructor and downstream cube can share it without a cycle. Expand the named open-pullback comparison and pinned square to identify inverse components, take inverses for forward components, then substitute those equalities into the two existing beta component formulas.",
+   "text": "Retain the four additional open-square component theorems in the Sheaf adapter. Expand the source openPullbackRestrictionIso and singleComplexOpenPullbackSquareIso, then identify perfectHomComposition with the same fixed singleComplexOpenPinnedComposition. This gives the inverse-component equality. Apply Iso.ext and invert to obtain the forward-component equality; substitute both into the source restriction-beta component formulas for the final two theorems. These equations apply unchanged to empty and equal opens.",
    "uses": [
     "def-pc-t2-open-pullback-square-iso",
     "def-pc-t2-open-pinned-composition"
@@ -46,11 +46,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "D2",
-  "date": "2026-10-16",
+  "agent": "U9",
+  "date": "2026-10-21",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Restriction and fixed pullback composition, also Tag 0D5S.",
-  "note": "Duplicate-proof repair: relocate the four existing open-square component theorems without changing their names, signatures or proofs; NestedSiteCompatibility now uses this shared API."
+  "place": "Canonical open restriction and fixed composition comparisons, also Tag 0D5S.",
+  "note": "Restore quarantined module as a canonical source adapter; preserve all names through reexport and retain the four helper proofs missing upstream. No adopted-source declaration is changed."
  },
  "mathlib_searches": [
   {
@@ -115,8 +115,8 @@
   "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons",
   "declaration": "AlgebraicGeometry.perfectOverlapNaturalComparisonOfSquare",
   "statement": "def perfectOverlapNaturalComparisonOfSquare {X Y K C T S : Scheme.{u}} (g : X ⟶ Y) (f : K ⟶ Y) (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S) (b : C ⟶ S) (q : T ⟶ S) (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q) (U V : Y.Opens) (r : (g ⁻¹ᵁ (U ⊓ V)).toScheme ⟶ (f ⁻¹ᵁ (U ⊓ V)).toScheme) (m : pullback ((U ⊓ V).ι ≫ pY) b ⟶ pullback ((U ⊓ V).ι ≫ pY) q) (hmap : ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback.inv ≫ r = m ≫ ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback.inv) : (derivedPullback r ⋙ (overlapSiteInverse (g ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory) ⋙ (perfectOverlapApexEquivalence g pX pY b hg U V).functor ≅ (perfectOverlapStageEquivalence f pK pY q hf U V).functor ⋙ derivedPullback m",
-  "by": "C1",
-  "date": "2026-10-16",
+  "by": "U9",
+  "date": "2026-10-21",
   "branch": "sheaf-dag",
   "declarations": [
    "AlgebraicGeometry.comparisonFromRestrictions",
@@ -143,7 +143,9 @@
    "AlgebraicGeometry.openPullbackRestrictionIso_hom_app_eq_square_inv",
    "AlgebraicGeometry.perfectOverlapRestrictionBeta_hom_app_square",
    "AlgebraicGeometry.perfectOverlapRestrictionBeta_inv_app_square"
-  ]
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreComparisons.lean",
+  "note": "The canonical constructors and their component API are reexported from WeilConjectures.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons; the four square-component helper theorems are declared and proved in this adapter. The archived attachment and all construction dependencies are preserved."
  },
  "lean_audit": {},
  "reviewed": {
@@ -157,13 +159,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-fe9bc",
-  "group": "D2",
+  "reviewer": "C-9bee9",
+  "group": "U9",
   "result": "pass",
-  "landing": "20261016T095751-L-2157367",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all seven delivered Lean modules with their five DAG records and three change records; verified unchanged signatures, comparison preservation, adaptations, required importers, and permitted axioms."
+  "landing": "20261021T163831-L-1115476",
+  "kind": "proof",
+  "note": "independent cc review: the adapter's re-exported 20 declarations against the archived module (change-record Old) and the live WeilConjectures source (identical signatures); the 4 retained theorems against the node's lean.declarations and proof steps; node diff vs live (proof/proof_origin/lean record only)"
  }
 }
