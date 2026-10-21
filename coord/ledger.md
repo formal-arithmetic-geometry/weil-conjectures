@@ -22962,3 +22962,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:41 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ShiftedDeterminantDualEvaluation (stage 3; reviewer PASS; first push; landing 20261021T154105-L-2792525 (interface); batch 20261021T154012; modules 1; new nodes 0; change records: coord/changes/W2-retire-shifted-determinant-dual-evaluation.md)
 - 15:41 L: merged deliver/NK/lem-per-adic-stratified-pullback-texact (stage 2; reviewer PASS; parallel immutable checks)
 - 15:41 L: merged deliver/Q08/lem-sp-supported-etale-tensor-origin (stage 2; reviewer PASS; parallel immutable checks)
+- 15:42 L: merged deliver/ND/lem-sfb-condensed-product-action-inflation (stage 2; reviewer PASS; parallel immutable checks)

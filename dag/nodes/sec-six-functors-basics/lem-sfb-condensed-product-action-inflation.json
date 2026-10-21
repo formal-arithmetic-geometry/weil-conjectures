@@ -11,7 +11,8 @@
   "sk-def-sfb-condensed-ring",
   "def-weil-size-convention",
   "sk-def-sfb-module-objects",
-  "def-sp-grothendieck-abelian"
+  "def-sp-grothendieck-abelian",
+  "def-sfb-condensed-action-module"
  ],
  "proof": [
   {
@@ -253,5 +254,26 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-7ed4b063d (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from base side-live; base unsplit, no proof, no repair note, not in route-pivot-dropped), the new node lem-sfb-internal-action-site-presentation, and the statements of every cited node. Source: main-20261015 sk-thm-sf-ctf-stability direct-images proof para (3); the item is agent-formulated categorical input, so proof_origin agent plus WANTED is correct; no SGA. Steps: 1 uses sfb-sheaf-tensor clause 1 (strong monoidal sheafification ⇒ monoidal local equivalences) to apply the internal/sectionwise module equivalence, which keeps sections. 2 applies the new node with K=C(-,P): a sheaf of groups because a finite jointly surjective family of profinite sets is a quotient; the skeleton has finite limits. 3 uses lem-pur-ringed-site-grothendieck-abelian on (C_P,R_P), transferred along the equivalence; tool_use accepted. 4–7 are elementary and checked: the invariant subsheaf glues via the pulled-back cover; the adjunction n·f(x)|_T=f(x|_T) holds; equivariance uses the lift (q,1) and (g,h)=(g,1)(1,h); the mate is the identity M^{G×H}=(M^H)^G. New node checked independently: composition label b·g*a is associative; the left action comes from (1,b)∘(1,a)=(1,ab); naturality from (1,a)∘(f,1)=(f,1)∘(1,f*a); R_K semilinear; fibre products exist with labels (1, pr1*a·(pr2*b)^{-1}), verified by the universal property; C_K-sheaves are C-sheaves with a natural action, since (f,a)=(f,1)∘iso and the sieves correspond; the sheafification comparison holds because K is a sheaf. Small cases tested: K=1, one-object nonabelian K, empty set, R=0. It is not a restated clause of the item (D1/D2 ok); there is no duplicate from rg -L for inflation/equivariant/twisted-arrow/action-site; three search kinds recorded. FIX (B3): the new node's 'module sheafification' was uncited; added [def-weil-presheaf-modules-sheafification] to its statement and stmt_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-internal-action-site-presentation.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedProductActionInflation",
+  "declaration": "Profinite.CondensedAction.product_action_inflation",
+  "declarations": [
+   "Profinite.CondensedAction.product_action_inflation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedProductActionInflation.lean",
+  "statement": "theorem product_action_inflation : ∃ (aG : Abelian (ActionModule R G)) (aH : Abelian (ActionModule R H)) (aGH : Abelian (ActionModule R (G × H))), aG.toPreadditive = actionPreadditive ∧ aH.toPreadditive = actionPreadditive ∧ aGH.toPreadditive = actionPreadditive ∧ IsGrothendieckAbelian.{u + 1} (Modules R) ∧ @IsGrothendieckAbelian.{u + 1} (ActionModule R G) _ aG ∧ @IsGrothendieckAbelian.{u + 1} (ActionModule R H) _ aH ∧ @IsGrothendieckAbelian.{u + 1} (ActionModule R (G × H)) _ aGH ∧ (trivial (R := R) (P := G)).Additive ∧ PreservesFiniteLimits (trivial (R := R) (P := G)) ∧ PreservesFiniteColimits (trivial (R := R) (P := G)) ∧ (trivial (R := R) (P := H)).Additive ∧ PreservesFiniteLimits (trivial (R := R) (P := H)) ∧ PreservesFiniteColimits (trivial (R := R) (P := H)) ∧ (inflate (R := R) (ContinuousMonoidHom.fst G H)).Additive ∧ PreservesFiniteLimits (inflate (R := R) (ContinuousMonoidHom.fst G H)) ∧ PreservesFiniteColimits (inflate (R := R) (ContinuousMonoidHom.fst G H)) ∧ ∃ (dG : Invariants R G) (dH : Invariants R H) (dGH : Invariants R (G × H)) (dHG : ProductInvariants R G H) (h : trivial (R := R) (P := G × H) = trivial (R := R) (P := G) ⋙ inflate (R := R) (ContinuousMonoidHom.fst G H)), ∀ (M : ActionModule R (G × H)) (S : Profinite.{u}) (x : sectionModule R (dGH.functor.obj M) S), (((dG.inclusion.app (dHG.functor.obj M)) ≫ dHG.inclusion.app M).hom.hom.app (op S)).hom (((((conjugateIsoEquiv dGH.adjunction (dG.adjunction.comp dHG.adjunction)) (eqToIso h.symm)).hom.app M).hom.hom.app (op S)).hom x) = ((dGH.inclusion.app M).hom.hom.app (op S)).hom x",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cdb6e0a8",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read item, 5 stmt_deps, new def node def-sfb-condensed-action-module and both modules (CondensedActionModule, CondensedProductActionInflation), sectionRings/sectionModuleFunctor in side-live, source place (direct-images proof para 3, agent input). Clause match: arbitrary comm condensed ring (no Nontrivial), profinite G,H in Type u, ActionModule = C(S,P)→*End natural in T⟶S with sectionwise equivariant maps; IsGrothendieckAbelian.{u+1} for Modules R and existential Abelian structures equal to actionPreadditive; trivial/inflate fst Additive + finite limits/colimits; Invariants/ProductInvariants pin inclusion injectivity, image = fixed-after-every-base-change sections, transpose/untranspose formulas, residual (g,1) action; final clause conjugateIsoEquiv of direct vs composite adjunction composed with inclusions = direct inclusion (identity M^{G×H}=(M^H)^G). Edge cases (trivial factor, zero ring, empty tests) covered. No duplicate in project/Mathlib, no name clash; statement verbatim; declarations complete; only equivariant_closure and the item are sorry. No compile re-run (human 2026-10-21), no files changed. Advisory: proof-only imports unused by the statement; docstring merges node steps 2-3."
  }
 }
