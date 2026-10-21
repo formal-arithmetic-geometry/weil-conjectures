@@ -22944,3 +22944,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:38 L: merged deliver/NR/lem-sfb-internal-action-site-presentation (reviewer PASS; first push; new nodes: 0)
 - 15:39 L: merged deliver/NG/lem-sfb-condensed-internal-bar-resolution (reviewer FIX; first push; new nodes: 0)
 - 15:39 L: returned deliver/J4/Sheaf.Paper.IntegralTwistBaseChange (reviewer RETURN: (reviewer C-e0c24, head e0c244931) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralTwistB)
+- 15:40 L: returned deliver/H1/Sheaf.Paper.SpecifiedPullbackComparisonAlpha (reviewer RETURN: (the landing tools, head 737fd1e48) the delivery did not land: lean/Sheaf/Paper/SpecifiedPullbackComparisonAlpha.lean: <)
