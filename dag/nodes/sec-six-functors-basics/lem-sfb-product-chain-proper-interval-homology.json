@@ -10,9 +10,94 @@
  "stmt_deps": [
   "def-weil-pbc-module-chain-complex-homology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use $C(P)=C(P;\\mathbf Q)$ from [lem-sfb-poset-augmented-chain-prism]. The complex in the statement is precisely $C(T_m)$. Alternating deletion squares to zero: deleting positions $a<b$ in the two orders has coefficients $(-1)^{a+b-1}$ and $(-1)^{a+b}$; in degree one the two augmentations cancel. If monotone maps $f\\leq g$ are compared by that lemma, then for a cycle $z$ one has $(g_*-f_*)z=d(hz)$, so they induce equal homology maps. If an induced map factors through the one-element poset $\\{e\\}$, its homology map is zero: $C(\\{e\\})$ is $\\mathbf Q\\xrightarrow{1}\\mathbf Q$ in degrees $0,-1$ and zero elsewhere, so every cycle there is a boundary. These observations apply also in degree $-1$.",
+   "uses": [
+    "lem-sfb-poset-augmented-chain-prism",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+   }
+  },
+  {
+   "text": "Suppose $m_j\\geq2$ and put $e=(0,\\ldots,1,\\ldots,0)$ with $1$ in coordinate $j$. This is a vertex of $T_m$. Define $u:T_m\\to T_m$ by $u(v)_j=\\max(v_j,1)$ and $u(v)_i=v_i$ for $i\\ne j$. This is monotone and nonzero. If $u(v)=m$, then $\\max(v_j,1)=m_j\\geq2$ forces $v_j=m_j$; all other coordinates are also those of $m$, contradicting $v\\ne m$. Thus $u$ stays in $T_m$. Pointwise $\\mathrm{id}\\leq u$ and $c_e\\leq u$, where $c_e$ is the constant map at $e$. By [lem-sfb-poset-augmented-chain-prism], their induced maps on cycles differ by boundaries. Consequently $H_k(\\mathrm{id})=H_k(u)=H_k(c_e)=0$, the last equality following from factorization through $\\{e\\}$ as in step 1. Hence all $H_k(A(m))$ vanish.",
+   "uses": [
+    "lem-sfb-poset-augmented-chain-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+   }
+  },
+  {
+   "text": "Now every $m_i\\in\\{0,1\\}$. Discarding the zero coordinates identifies $[0,m]$ with the inclusion poset of subsets of $E=\\{i:m_i=1\\}$, and identifies $T_m$ with $P_E=\\{S:\\varnothing\\ne S\\subsetneq E\\}$. The induced bijection of chain bases respects deletion and the empty chain, hence is a chain isomorphism. Put $B_E=C(P_E)$. Induct on $s=|E|\\geq1$. If $s=1$, $P_E$ is empty, so $B_E$ is $\\mathbf Q$ in degree $-1$ only; its homology is exactly as asserted. Degrees below $-1$ always have zero homology by the definition of $H_k$ [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+   }
+  },
+  {
+   "text": "For $s\\geq2$, choose $a\\in E$, put $v=E\\setminus\\{a\\}$, and let $D=P_E\\setminus\\{v\\}$ with its induced order. The map $u:D\\to D$, $S\\mapsto S\\cup\\{a\\}$, is well defined: if its value were $E$, then either $S=E$ or $S=v$, both excluded; its value contains $a$ and so cannot be $v$. It is monotone, $\\mathrm{id}_D\\leq u$, and $c_{\\{a\\}}\\leq u$. The vertex $\\{a\\}$ belongs to $D$ also for $s=2$. Apply [lem-sfb-poset-augmented-chain-prism] and the singleton calculation of step 1: the identity on every $H_k(C(D))$ equals a map factoring through $C(\\{\\{a\\}\\})$ and is zero. Thus $C(D)$ is acyclic, including in degree $-1$.",
+   "uses": [
+    "lem-sfb-poset-augmented-chain-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+   }
+  },
+  {
+   "text": "The inclusion of chain bases defines $C(D)\\hookrightarrow B_E$, identity in degree $-1$. Let $V=B_E/C(D)$, degree by degree, with the induced differential. A basis of $V_n$ for $n\\geq0$ consists of the chains containing $v$. Since $v$ is a maximal element of $P_E$, these are exactly $[S_0<\\cdots<S_{n-1}<v]$, with $\\varnothing\\ne S_i\\subsetneq v$; for $n=0$ this means $[v]$. Thus there are basis bijections $V_n\\cong(B_v)_{n-1}$ for all $n$, where $B_v=C(P_v)$ and the empty chain corresponds to $[v]$. The spaces $V_{-1}$ and $(B_v)_{-2}$ are both zero. Deleting the final $v$ gives a chain in $D$, hence zero in $V$; every other deletion keeps its original sign. Therefore these bijections identify the differential of $V$ with that of $B_v$ shifted one degree (without a sign change). In particular cycles and boundaries correspond, and $H_n(V)\\cong H_{n-1}(B_v)$ directly by the quotient definition [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+   }
+  },
+  {
+   "text": "The degreewise exact sequence $0\\to C(D)\\to B_E\\to V\\to0$ gives the segment $H_n(C(D))\\to H_n(B_E)\\to H_n(V)\\to H_{n-1}(C(D))$ by [lem-weil-pbc-complex-ses-homology-long-exact]. To apply its cochain convention, replace a chain complex $K$ by the integer cochain complex $K^{-q}$; $H^q$ is then $H_{-q}$. The category is rational vector spaces, an abelian module category, and short exactness holds in each degree by the explicit quotient construction of step 5, including $0\\to\\mathbf Q\\xrightarrow{1}\\mathbf Q\\to0$ in degree $-1$. Both outside homology groups vanish by step 4, so exactness makes $H_n(B_E)\\to H_n(V)$ an isomorphism for every integer $n$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain; apply after reversal of the integer grading."
+   }
+  },
+  {
+   "text": "Since $|v|=s-1\\geq1$, the inductive hypothesis gives $H_j(B_v)=0$ except at $j=s-3$, where it is one-dimensional over $\\mathbf Q$. Steps 5 and 6 identify $H_n(B_E)$ with $H_{n-1}(B_v)$, so its only nonzero degree is $n=s-2$ and its dimension is one. This proves the induction and, through step 3, the Boolean clause for all nonzero $m$, including zero coordinates. Together with step 2 it proves every case of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-poset-augmented-chain-prism",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Source paragraph supplies only the motivation; the proof here is a new finite-chain argument, using Stacks 019S prism input and 0117."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +133,45 @@
    "results": "{\"t\": \"2026-10-21T17:51:10Z\", \"tool\": \"leansearch\", \"query\": \"The augmented chain complex of the proper part of a product of finite integer intervals has zero homology unless all nonzero interval lengths equal one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"ChainComplex.alternatingConstHomologyZero\", \"HomologicalComplex.zero\", \"ChainComplex.truncateAugment\", \"ChainComplex.instHasHomologyNatObjAlternatingConst\", \"CochainComplex.isZero_of_isLE\", \"instQFactorsThroughHomotopyIntUp\", \"CategoryTheory.ShortComplex.hasLeftHomology_of_hasHomology\"], \"digest\": \"5da80637e0d6edba\"}",
    "date": "2026-10-22",
    "verdict": "no match: Nobeling products and incidence-algebra Euler characteristics do not compute these chain homology groups; singular homology for totally disconnected spaces and alternating constant complexes concern different complexes. No order-complex theorem was found under either phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "orderComplex|order complex|proper.*interval.*homolog|Boolean.*homolog",
+   "results": "{\"t\": \"2026-10-21T18:14:01Z\", \"tool\": \"grep\", \"query\": \"orderComplex|order complex|proper.*interval.*homolog|Boolean.*homolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/GramMatrix.lean\"], \"digest\": \"e20efa1fb2e26993\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold–Kan normalization, constant complexes, singular homology of totally disconnected spaces and incidence Euler characteristics do not compute the asserted reduced strict-chain homology. Neither phrasing yielded an exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced rational homology of a product of finite chains with top and bottom removed",
+   "results": "{\"t\": \"2026-10-21T18:14:01Z\", \"tool\": \"leansearch\", \"query\": \"Reduced rational homology of a product of finite chains with top and bottom removed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology\", \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace\", \"RestrictedProduct.homeoTop\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff.isNotG2\", \"AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace\", \"ChainComplex.instHasHomologyNatObjAlternatingConst\", \"RootPairing.chainTopCoeff_sub_chainBotCoeff\"], \"digest\": \"8b73c88496ed9457\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold–Kan normalization, constant complexes, singular homology of totally disconnected spaces and incidence Euler characteristics do not compute the asserted reduced strict-chain homology. Neither phrasing yielded an exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OrderComplex\"",
+   "results": "{\"t\": \"2026-10-21T18:14:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"OrderComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold–Kan normalization, constant complexes, singular homology of totally disconnected spaces and incidence Euler characteristics do not compute the asserted reduced strict-chain homology. Neither phrasing yielded an exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmented chains of the Boolean lattice without minimum and maximum form a rational homology sphere",
+   "results": "{\"t\": \"2026-10-21T18:14:02Z\", \"tool\": \"leanfinder\", \"query\": \"Augmented chains of the Boolean lattice without minimum and maximum form a rational homology sphere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.c\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"SSet.boundary\", \"IncidenceAlgebra.eulerChar\", \"SimplexCategory.toTop₀_obj\", \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"IncidenceAlgebra.eulerChar_prod\", \"SSet.boundary_eq_iSup\"], \"digest\": \"96c5116845df75ce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold–Kan normalization, constant complexes, singular homology of totally disconnected spaces and incidence Euler characteristics do not compute the asserted reduced strict-chain homology. Neither phrasing yielded an exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced homology of the strict-chain complex of the open interval in a product of finite chains",
+   "results": "{\"t\": \"2026-10-21T18:14:03Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced homology of the strict-chain complex of the open interval in a product of finite chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.c\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"ChainComplex.alternatingConstHomologyDataEvenNEZero\", \"AlgebraicTopology.DoldKan.hσ'_eq_zero\", \"ChainComplex.instHasHomologyNatObjAlternatingConst\", \"Rep.standardComplex.d_of\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"AlgebraicTopology.NormalizedMooreComplex.obj\"], \"digest\": \"80cd0d37340aee9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold–Kan normalization, constant complexes, singular homology of totally disconnected spaces and incidence Euler characteristics do not compute the asserted reduced strict-chain homology. Neither phrasing yielded an exact match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-rational-polynomial-bar-contraction",
@@ -63,7 +183,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), trivial-lattice polynomial-bar calculation: finite combinatorial input for the multidegree m normalized complex; agent-formulated proper-product-interval homology lemma, not asserted in the blueprint. Exact combinatorial reference WANTED.",
+   "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint.",
    "via": [
     "lem-sfb-rational-polynomial-bar-contraction",
     "lem-sfb-trivial-ladic-derived-exterior",
@@ -77,5 +197,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-product-chain-proper-interval-homology",
+  "worker": "stage1",
+  "summary": "Q21 retains the statement and supplies an explicit join contraction for non-Boolean products, followed by coatom deletion, a quotient basis calculation and induction for Boolean products. One general augmented-poset prism node is created; the long exact sequence is an existing Mathlib leaf. The source does not assert the combinatorial lemma; the proof is marked agent-written.",
+  "blueprint": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Steps 1–2 give the contractible multidegrees; steps 3–7 give the squarefree multidegrees. The ancestor command returns None for this existing imported-ancestry chain; the inherited null from.node is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-e77a4c266",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-e77a4c266 (reviewer sub-agent of L); spot-checked: I read the item, its new node lem-sfb-poset-augmented-chain-prism and every cited statement in full. The cited statements are def-weil-pbc-module-chain-complex-homology and lem-weil-pbc-complex-ses-homology-long-exact, both Mathlib leaves. I also read Stacks 019S/019Y/0117 at their labels and blueprint main-20261015 direct-images paragraph (3). That paragraph is motivation only, so proof_origin agent and the WANTED note are correct. The item statement is unchanged and true. My own exact rational rank check of m=(1),(2),(3),(1,1),(2,1),(1,1,1),(2,2),(0,1,1),(1,1,1,1),(3,1),(2,1,1),(0,2) matches it: Boolean m gives Q only in degree s-2 (degree -1 when s=1), and every other m is acyclic. The new node is true and general, not a clause of the item and not a duplicate. It is the standard prism identity on augmented normalized strict poset chains: degree 0 gives dh0[x]=[g(x)]-[f(x)], degree -1 gives 0=0, and empty P is fine. The nearest nodes, simplicial-homotopy-free-chain-homotopy (unnormalized, no augmentation, needs a Delta[1] homotopy) and cbc-normalized-alternating (a different normalization), do not give it in one line. Its searches are recorded in all three kinds, and the bad Loogle query is honestly marked unavailable. Step 1: acyclicity of C({e}) and equality on homology for comparable maps. Step 2: u(v)_j=max(v_j,1) is a valid map T_m->T_m because m_j>=2. Step 4: the coatom deletion map S->S∪{a} is valid and {a} lies in D for s>=2. Step 5: the quotient V is identified with B_v shifted by one, without a sign; checked at n=0 and n=1. Step 6: the long exact sequence is re-indexed correctly (chain to cochain). Step 7: the induction degree is right. The result fits the parent's use with n=sum m_i. There are no SGA citations, no route departures, no tool_uses and no fixes. The inherited from.node=null is a base-era ancestry fact."
  }
 }

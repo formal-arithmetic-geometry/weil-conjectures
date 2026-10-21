@@ -23337,3 +23337,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:28:40Z L: superseded stage-1 delivery NW/lem-wf-internal-hom-weil at 37737d745e09c3d7f4fd44fb33840503d4894606; current completion retained; packet archived at refs/superseded/NW/lem-wf-internal-hom-weil/37737d745e09c3d7f4fd44fb33840503d4894606; stale return retired.
 - 18:28 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 18:29 L: merged deliver/Q06/sk-thm-acyclicity (reviewer PASS; first push; new nodes: 0)
+- 18:29 L: merged deliver/Q21/lem-sfb-product-chain-proper-interval-homology (reviewer PASS; first push; new nodes: 1)
