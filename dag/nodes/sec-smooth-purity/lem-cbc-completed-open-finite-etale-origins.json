@@ -1,0 +1,136 @@
+{
+ "id": "lem-cbc-completed-open-finite-etale-origins",
+ "kind": "statement",
+ "title": "Finite etale origins under completed-coefficient open extension",
+ "statement": "Let j:U→T be an open immersion [def-weil-open-immersion], let d be an adic coefficient datum on A with ideal I [def-weil-pbc-adic-coefficient-datum], and let K∈D(Mod(A_U)). If each positive quotient reduction K⊗ᴸ_(A_U)(A/I^(n+1))_U has a specified bounded-below etale origin [def-weil-pbc-etale-origin-witness], then each quotient reduction of j_!K, for the actual completed-coefficient extension [lem-cbc-completed-extension-zero-comparison], has a bounded-below etale origin on T. No completeness, quasi-compactness, common lower bound or compatibility of the supplied origins is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "First paragraph: the reductions of j_!K are j_!K_n and carry the witnesses j_!L_n."
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-cbc-completed-extension-zero-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Fix a positive quotient B=A/I^(n+1). The coefficient-linear finite comparison of lem-cbc-ringed-open-strict-reduction, computed on a flat-term K-flat representative, identifies reduction of completed-coefficient open extension with open extension of the B-reduction. Its formula is [x] tensor b maps to [x tensor b restricted to the open]; it is B-linear before scalar restriction. Descend from K-flat representatives.",
+   "uses": [
+    "lem-cbc-ringed-open-strict-reduction",
+    "lem-pc-kflat-resolution",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the finite function-coefficient ring to the constant coefficient ring using finiteOriginConstantIso. The same extension-summand formula intertwines this scalar restriction with exact open extension on constant B-module sheaves. Extend each retained bounded-below etale antecedent by etale open extension. The etale/pro-etale open comparison identifies its realization with extension of the original realization. Compose that comparison, extension of the supplied witness isomorphism, and the inverse finite reduction comparison of step 1.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact etale open extension preserves the lower cohomological bound of that particular antecedent. The preceding isomorphism therefore gives a FiniteEtaleOriginWitness for this quotient. Repeat independently for each n; no common lower bound or transition compatibility is used. For an empty open or a zero quotient ring the constructions are the zero functors, with the same unit and tensor formulas.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-ringed-open-strict-reduction",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "First paragraph: the reductions of j_!K are j_!K_n and carry the witnesses j_!L_n."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves bounded below etale origins of every derived quotient reduction of a complex of completed coefficient sheaves",
+   "results": "8 hits: IsEtale composition/cancellation, Scheme.Etale, and etale loci; none concerns derived open extension or finite-origin witnesses.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "12 hits concerning PresheafOfModules.pushforward, its composition and forgetful comparisons. No derived quotient/open or etale-origin statement.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*origin|origin.*etale|extensionByZero",
+   "results": "0 hits in Mathlib. Local source search found ReductionOpenEtaleOrigin, whose theorem assumes the integral coefficient-extension datum and bounded constructibility; its underlying open site comparison is relevant but does not give this arbitrary-adic quotient statement.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero preserves bounded below derived etale origins",
+   "results": "8 hits: Hahn series support and zero extension, topological function extension, and zero morphisms in derived categories. No statement about etale/pro-etale origin transport.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "date": "2026-10-21",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof step 2: reductions of j_!K carry the etale witnesses j_!L_n.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedOpenFiniteEtaleOrigins",
+  "file": "lean/Sheaf/Paper/CompletedOpenFiniteEtaleOrigins.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcCompletedOpenFiniteEtaleOrigins",
+  "statement": "theorem cbcCompletedOpenFiniteEtaleOrigins\n    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]\n    (K : d.derived U)\n    (W : ∀ n : ℕ, FiniteEtaleOriginWitness U (A ⧸ d.ideal ^ (n + 1))\n      ((d.reduction U n).obj K)) :\n    Nonempty (∀ n : ℕ, FiniteEtaleOriginWitness T (A ⧸ d.ideal ^ (n + 1))\n      ((d.reduction T n).obj ((cbcDerivedOpenShriek d j inferInstance).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T134533-L-1333060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T134533-L-1333060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

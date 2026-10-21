@@ -17,48 +17,18 @@ public import Sheaf.Paper.CompletedOpenExchangeTransport
 public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.CompleteProetale
+import all Sheaf.Paper.CompleteProetale
 public import Sheaf.Paper.CompletedExchangeCoherence
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.OpenImmersionTensorPiece
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import WeilConjectures.Algebra.Homology.RoosComplex
-import Sheaf.Paper.CompletedRlimFunctor
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.CompletedPullbackReduction
+import all Sheaf.Paper.OpenImmersionTensorPiece
+import all Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Paper.StrictTowerExchangeMateNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
-import WeilConjectures.Compactification.CategoryBaseChange
-import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-import Sheaf.AlgebraicGeometry.StrictTowerCompositionPasting
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.ExactProductFunctorStrictLimit
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.Paper.RefinementExchangeCoherence
+import Sheaf.Paper.RingedOpenStrictReduction
+import Sheaf.Paper.CompletedOpenFiniteEtaleOrigins
+import Sheaf.Paper.CompletedKoszulQuotientComparison
 
 /-!
 # Complete pro-etale compact-support base change
@@ -219,7 +189,60 @@ structure map of an object over the open. Sheafification and localization preser
 this unit identification, so every component of the derived unit is invertible. -/
 theorem cbcOpenUnit_isIso {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     IsIso (cbcDerivedOpenAdjunction d j).unit := by
-  sorry
+  let W := cbcOpenObject j inferInstance
+  let e := ProEt.sliceEquiv T W
+  let : e.inverse.IsDenseSubsite (ProEt.topology U) ((ProEt.topology T).over W) :=
+    ProEt.sliceDense T W
+  let : e.inverse.IsContinuous (ProEt.topology U) ((ProEt.topology T).over W) :=
+    inferInstance
+  let : e.functor.IsContinuous ((ProEt.topology T).over W) (ProEt.topology U) :=
+    cbcSliceFunctor_continuous T W
+  let : e.symm.functor.IsContinuous (ProEt.topology U) ((ProEt.topology T).over W) :=
+    inferInstanceAs (e.inverse.IsContinuous _ _)
+  let : e.symm.inverse.IsContinuous ((ProEt.topology T).over W) (ProEt.topology U) :=
+    inferInstanceAs (e.functor.IsContinuous _ _)
+  let : e.functor.IsDenseSubsite ((ProEt.topology T).over W) (ProEt.topology U) := by
+    have h := e.eq_inducedTopology_of_isDenseSubsite
+      ((ProEt.topology T).over W) (ProEt.topology U)
+    rw [h]
+    infer_instance
+  let : e.symm.inverse.IsDenseSubsite ((ProEt.topology T).over W)
+      (ProEt.topology U) := inferInstanceAs (e.functor.IsDenseSubsite _ _)
+  let c := (sheafCompose ((ProEt.topology T).over W)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).mapIso
+      (cbcCompletedRestriction W d)
+  obtain ⟨q, hq⟩ := ProEt.module_transport (ProEt.topology U) ((ProEt.topology T).over W)
+    e.symm (reductionModuleRing U (d.completedRing U))
+    ((reductionModuleRing T (d.completedRing T)).over W) c
+  let hq' : q.functor ≅ cbcModuleToSlice d T W :=
+    Functor.fullyFaithfulCancelRight (SheafOfModules.forget _)
+      (eqToIso (by rw [hq]; rfl))
+  have : (cbcModuleToSlice d T W).IsEquivalence :=
+    Functor.isEquivalence_of_iso hq'
+  have : (cbcModuleToSlice d T W).Additive := by
+    constructor
+    intro M N f g
+    ext V x
+    rfl
+  have : (SheafOfModules.localizedModuleExtension.{t} (d.completedRing T) W).Additive :=
+    SheafOfModules.localizedModuleExtension_additive (d.completedRing T) W
+  have : PreservesFiniteLimits
+      (SheafOfModules.localizedModuleExtension.{t} (d.completedRing T) W) :=
+    SheafOfModules.localizedModuleExtension_limits (d.completedRing T) W
+  have : PreservesFiniteColimits
+      (SheafOfModules.localizedModuleExtension.{t} (d.completedRing T) W) :=
+    SheafOfModules.localizedModuleExtension_colimits (d.completedRing T) W
+  let b := SheafOfModules.localizedModuleDerivedAdjunction.{t}
+    (d.completedRing T) W
+  have : IsIso b.unit :=
+    SheafOfModules.localizedDerivedUnit_isIso j (d.completedRing T)
+  have := b.fullyFaithfulLOfIsIsoUnit.full
+  have := b.fullyFaithfulLOfIsIsoUnit.faithful
+  let eD := Functor.mapDerivedCategoryCompIso (cbcModuleToSlice d T W)
+    (SheafOfModules.localizedModuleExtension (d.completedRing T) W)
+  have : (cbcJ d j).Full := Functor.Full.of_iso eD.symm
+  have : (cbcJ d j).Faithful := Functor.Faithful.of_iso eD.symm
+  infer_instance
 
 /-- Open extension to direct image, fixed by the ordinary units of both adjunctions.
 Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale). -/
@@ -362,6 +385,40 @@ def cbcTowerCompositionMap {X Y Z : Scheme.{t}} {f : X ⟶ Y} {h : Y ⟶ Z}
     (ch.quasiCompact_openImmersion qh)
   cbcCompositionMap d cf ch chf b p hb hp hq K
 
+private theorem cbcTowerComplete_of_property (T : Scheme.{t})
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : d.derived T) (hK : cbcCompleteProperty d T r a ha K) :
+    d.TowerComplete T K := by
+  obtain ⟨c, hc⟩ := completedKoszulQuotientComparison T d r a ha K
+    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)
+  change IsIso (intrinsicCompletionUnit T d r a ha K
+    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)) at hK
+  change IsIso (d.completionUnit T K)
+  change intrinsicCompletionUnit T d r a ha K
+    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K) ≫
+      c.hom = d.completionUnit T K at hc
+  rw [← hc]
+  infer_instance
+
+private theorem cbcCompletedExchange_naturality
+    {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
+    {K H : d.derived X} (k : K ⟶ H) :
+    (d.completedPull g).map ((d.push f).map k) ≫ d.completedExchange sq H =
+      d.completedExchange sq K ≫ (d.push f').map ((d.completedPull g').map k) := by
+  let π : d.push f ⋙ completedReductionTower Y d ≅
+      completedReductionTower X d ⋙ d.towerPush f :=
+    NatIso.ofComponents (fun K ↦ asIso (d.towerProjection f K))
+      (fun {K H} k ↦ (d.towerProjection_properties f K).2.1 H k)
+  let e : d.push f ⋙ d.completedPull g ⟶ d.completedPull g' ⋙ d.push f' :=
+    Functor.whiskerRight (Functor.whiskerRight π.hom (d.towerPull g))
+      (completedRlim Y' (d.completedRing Y')) ≫
+        Functor.whiskerRight (exchangeStrictNatTrans d sq)
+          (completedRlim Y' (d.completedRing Y')) ≫
+        Functor.whiskerLeft (completedReductionTower X d ⋙ d.towerPull g')
+          (d.directImageRlimIso f').inv
+  exact e.naturality k
+
 /-- The completed compact-support exchange is invertible on an intrinsically complete
 object carrying compatible bounded-below etale origins. Its component is the ordered
 proper exchange followed by the normalized completed open comparison from
@@ -432,7 +489,31 @@ theorem completeCompactSupportProetale_isIso
             (d.push c'.g).map
               ((cbcDerivedOpenShriek d c'.i c'.isOpenImmersion).map
                 ((d.completedPull g').map k)) := by
-  sorry
+  let : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  have hopen := completedOpenExchangeComparison d openSquare r a ha
+  have hJ := (hopen.2 K).1
+  obtain ⟨W⟩ := ringedOrigins X d K.obj _origins
+  obtain ⟨WJ⟩ := cbcCompletedOpenFiniteEtaleOrigins d c.i K.obj W
+  have hT := cbcTowerComplete_of_property d c.Z r a ha _ hJ
+  have := completedExchange_isIso_of_towerComplete d properSquare _ hT WJ
+  have := hopen.1
+  constructor
+  · unfold completedCompactSupportExchange
+    infer_instance
+  · intro H k
+    have hproper := cbcCompletedExchange_naturality d properSquare
+      ((cbcDerivedOpenShriek d c.i c.isOpenImmersion).map k)
+    have hopenNat := (cbcDatumCompletedExchange d openSquare r a ha).naturality
+      (ObjectProperty.homMk k)
+    change (d.completedPull gbar).map ((cbcDerivedOpenShriek d c.i
+      c.isOpenImmersion).map k) ≫ (cbcDatumCompletedExchange d openSquare r a ha).app H =
+        (cbcDatumCompletedExchange d openSquare r a ha).app K ≫
+          (cbcDerivedOpenShriek d c'.i c'.isOpenImmersion).map
+            ((d.completedPull g').map k) at hopenNat
+    unfold completedCompactSupportExchange
+    simp only [Category.assoc]
+    rw [← Category.assoc, hproper, Category.assoc, ← Functor.map_comp, hopenNat]
+    simp only [Functor.map_comp]
 
 
 /-- Identity base change is the identity after the canonical completed identity maps.

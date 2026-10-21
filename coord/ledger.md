@@ -22653,3 +22653,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:45 L: merged deliver/P4/Sheaf.CategoryTheory.FlatScalarKoszulTowerComparison (stage 3; reviewer PASS; first push; landing 20261021T134522-L-1295510 (interface); batch 20261021T134254; modules 3; new nodes 2; change records: coord/changes/P4-flat-scalar-koszul-models.md)
 - 13:45 L: merged deliver/R7/Sheaf.Paper.PointAutomorphismRestrictionNatural (stage 3; reviewer PASS; first push; landing 20261021T134525-L-1308901 (proof); batch 20261021T134254; modules 1; new nodes 0)
 - 13:45 L: merged deliver/R8/Sheaf.Paper.RealWeilSheaves (stage 3; reviewer PASS; first push; landing 20261021T134529-L-1318687 (proof); batch 20261021T134254; modules 1; new nodes 0)
+- 13:45 L: merged deliver/S3/Sheaf.Paper.CompleteCompactSupportProetale (stage 3; reviewer PASS; first push; landing 20261021T134533-L-1333060 (interface); batch 20261021T134254; modules 2; new nodes 1)
