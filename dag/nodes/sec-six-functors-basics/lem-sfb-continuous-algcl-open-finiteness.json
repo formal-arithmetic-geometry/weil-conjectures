@@ -17,9 +17,99 @@
   "det-def-sfb-constructible-local-model",
   "sk-def-sfb-module-derived-pushpull"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The standing schemes, and their locally closed subschemes, are Noetherian and qcqs by [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-qcqs-over-affine], applied over the spectrum of the field. Write $\\mathcal B(T)$ for bounded finite-constant-model constructible $B_T$-complexes. By [lem-sfb-continuous-qbar-constructible-generators], $\\mathcal B(X)$ is triangulated and $\\mathcal B(U)$ is generated under finitely many shifts, isomorphisms and triangles by $(a_!L)[0]$ with $a:S\\hookrightarrow U$ locally closed and $L$ lisse over $B_S$. All objects used here are bounded below. On that subcategory the ordinary total derived functor is its bounded-below version [sk-def-sfb-module-derived-pushpull], which is triangulated by [lem-weil-pbc-derived-direct-image-triangulated] applied to the additive left exact module direct image. Its inverse image of $\\mathcal B(X)$ is consequently a replete triangulated class. It suffices to put every such generator in that class.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-sfb-continuous-qbar-constructible-generators",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open image: reduction to the finite lisse generators, using the all-continuous generator theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-continuous-algcl-stratified-finite-models] to $L$ on $S$. Refine its finite stratification to a good one by [lem-sfb-noetherian-good-stratification-refinement], realizing each refined locally closed subset inside its original scheme stratum by a locally closed pullback, so the same finite-field models actually restrict along scheme morphisms. Since closures are unions of strata, a finite good stratification has an open layer and a closed complementary union of strata. The exact sequence $0\\to v_!v^*M\\to M\\to i_*i^*M\\to0$ of [lem-weil-pbc-proetale-ringed-open-closed] therefore gives, by induction on the finite number of strata, a finite extension filtration with pieces $b_!(B_{S_b}\\otimes_{A_{E_b,S_b}}L_b)$. At an open layer consisting of several disjoint strata, take their finite direct sum. Applying the exact $a_!$ (open extension followed by closed direct image) gives the corresponding finite triangle filtration of $a_!L$. Thus it is enough to treat $G=a_!b_!(B_V\\otimes_{A_{E,V}}N)[0]$ with $b:V\\hookrightarrow S$ locally closed and $N$ a lisse $A_{E,V}$-module for one finite $E$. This induction ends with the empty closed complement, which contributes zero.",
+   "uses": [
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-noetherian-good-stratification-refinement",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), source-stratum finite-field reduction; finite localization filtration written out."
+   }
+  },
+  {
+   "text": "Put $C=(a_!b_!N)[0]$. The old strata of $V$, together with the zero model off $V$, at each of the two immersions prove that $C$ is bounded constructible over $A_E$ by [lem-sfb-scalar-model-immersion-extension]. Locally free $N$ is flat; its derived coefficient extension is its ordinary one, by the field/free calculation of [lem-sfb-scalar-model-finite-flat-resolution]. Factor each of $a$ and $b$ as an open immersion followed by a closed immersion. Apply both formulas of [lem-sfb-condensed-support-projection-formula] with coefficient $A_E$ and with the other tensor factor the underlying $A_E$-complex of $B_U$. They give\n$$B_U\\otimes^L_{A_{E,U}}a_!b_!N\\ \\cong\\ a_!b_!(B_V\\otimes^L_{A_{E,V}}N)\\ \\cong\\ G.$$\nThe comparison carries the $B_U$-action to the action through its restriction to $V$: on a local pure tensor it sends $b\\otimes n$ to the same product $bn$. It is therefore an isomorphism of $B_U$-complexes, not just of the restricted $A_E$-complexes.",
+   "uses": [
+    "lem-sfb-scalar-model-immersion-extension",
+    "lem-sfb-scalar-model-finite-flat-resolution",
+    "lem-sfb-condensed-support-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), comparison of locally closed generators with actual scalar extension."
+   }
+  },
+  {
+   "text": "We record the scalar calculation needed on the target. If $M\\in\\mathcal B_E(X)$ has cohomology in $[r,s]$, then $B_X\\otimes^L_{A_{E,X}}M$ is in $\\mathcal B(X)$ with the same interval. Indeed, refine the finitely many cohomology stratifications to one. On any resulting stratum, every cohomology sheaf is locally finite free, by the field case of [lem-sfb-scalar-model-finite-flat-resolution]. Such a sheaf is dualizable in degree zero: evaluation and coevaluation for a free module descend from its local trivializations. The finite truncation triangles of [lem-weil-pbc-truncation-triangle] and stability of dualizable objects in [lem-zl-condensed-dualizable-local-perfect-models] make $M$ dualizable on that stratum. The same node gives pro-etale local perfect scalar models over $E$. Coefficient extension commutes with restriction by the tensor-pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and takes each such model to the identical finite scalar complex extended from $E$ to $\\Omega$. A finite complex of vector spaces splits into its cohomology and contractible two-term summands, so these new models have finite-dimensional cohomology in the same interval. The computation is valid on every nonempty member of the cover; empty members are discarded. Exact restrictions to the finitely many strata detect zero objects, by iterating the open/closed exact sequence [lem-weil-pbc-proetale-ringed-open-closed]. This proves both the global interval and finite constant local models on this finite stratification. No flatness of $B_X$ on all $A_{E,X}$-modules is claimed.",
+   "uses": [
+    "lem-sfb-scalar-model-finite-flat-resolution",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), finite-field scalar model calculation; Hemo--Richarz--Scholbach Theorem 4.13, via the cited local-perfect-model theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rational-open-direct-image-constructible] with coefficient $E$, not its algebraic-closure alternative: $C$ is bounded constructible by step 3, the base field has characteristic different from $\\ell$, and $j$ is quasi-compact open between the standing schemes. It gives $M=Rj_{*,A_E}C\\in\\mathcal B_E(X)$. Step 4 puts $B_X\\otimes^L_{A_{E,X}}M$ in $\\mathcal B(X)$. Now [lem-sfb-continuous-algcl-open-scalar-comparison] gives the canonical isomorphism\n$$B_X\\otimes^L_{A_{E,X}}M\\ \\xrightarrow{\\sim}\\ Rj_{*,B}(B_U\\otimes^L_{A_{E,U}}C)\\ \\cong\\ Rj_{*,B}G.$$\nThis is precisely the ordinary derived direct image of the generator identified in step 3. Isomorphism invariance and the finite triangle filtrations of steps 1--2 give $Rj_{*,B}K\\in\\mathcal B(X)$ for every input $K$. Each construction involves finitely many bounds, so their minima and maxima give a finite bound for the resulting object. Identity and empty open immersions reduce to the identity and zero functors respectively.",
+   "uses": [
+    "lem-sfb-rational-open-direct-image-constructible",
+    "lem-sfb-continuous-algcl-open-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), finite-field open finiteness followed by the distinct all-continuous coefficient comparison, and finite devissage."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sfb-continuous-qbar-constructible-generators",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sfb-continuous-algcl-stratified-finite-models",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-scalar-model-immersion-extension",
+  "lem-sfb-scalar-model-finite-flat-resolution",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-rational-open-direct-image-constructible",
+  "lem-sfb-continuous-algcl-open-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), coefficient-specific all-continuous case. Two separate statement-only inputs retain stratified finite-field models and the actual open coefficient-change mate; no filtered-union comparison is substituted."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +145,38 @@
    "results": "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; CompHausLike.LocallyConstantModule.functor; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafProfinite; AlgebraicGeometry.Scheme.Hom.isConstructible_image; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.ofSheafStonean",
    "date": "2026-10-21",
    "verdict": "no match: hits concern constructible subsets, scheme morphisms, underived structure-sheaf modules, or construction of condensed sheaves; none asserts the stated constructible derived-image finiteness or Tor interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived pushforward along a quasi compact open immersion preserves bounded constructible sheaves of modules over continuous maps into the l adic algebraic closure",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pushforward_obj_val; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the specified coefficient-field descent or derived coefficient-change comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(PadicAlgCl|Condensed).*(constructible|rightDerived)|(constructible|rightDerived).*(PadicAlgCl|Condensed)",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the specified coefficient-field descent or derived coefficient-change comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of bounded constructible l adic sheaves along open immersions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.SheafedSpace.IsOpenImmersion; AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.ofRestrict_appLE; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the specified coefficient-field descent or derived coefficient-change comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"rightDerived\"",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the specified coefficient-field descent or derived coefficient-change comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-admissible-direct-image",
@@ -77,5 +195,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-algcl-open-finiteness",
+  "worker": "stage1",
+  "summary": "Separated the all-continuous coefficient argument into stratified finite-field models and the canonical open scalar-comparison input. Reused the existing all-continuous finite-cone generator theorem, finite-E open finiteness, localization, support projection and scalar-perfect-model tools. Wrote the finite filtrations and scalar preservation calculation explicitly; no statement change or coefficient identification.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, paragraph (3), open-image finiteness. The imported created.item ancestry reaches a Lean module rather than a blueprint id; retained its prescribed null from.node and named the source blueprint explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-sfb-noetherian-good-stratification-refinement",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-sfb-scalar-model-immersion-extension",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-sfb-scalar-model-finite-flat-resolution",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-sfb-condensed-support-projection-formula",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-zl-condensed-dualizable-local-perfect-models",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   },
+   {
+    "node": "lem-sfb-rational-open-direct-image-constructible",
+    "why": "Generic localization, scalar or derived-category tool used exactly as stated; it does not replace the open-image finiteness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-scalar-model-immersion-extension",
+  "lem-sfb-scalar-model-finite-flat-resolution",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-rational-open-direct-image-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a7a076141",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a7a076141 (reviewer sub-agent of L); spot-checked: Shape: one commit on cf90c2f. The item's statement and blueprint are unchanged from side-live, and live still shows it unsplit (created 2026-10-21 by Q59, parent step 3). No repair note, no SGA. All cited ids exist, step uses match their citations, and there is no cycle. from.node=null is what the tooling requires: blueprint_refs ancestor returns None because the created.item chain ends in a Lean module. Maintainer note: the parent's from.node is det-thm-sf-ctf-stability-direct-images. Source: main-20261015 direct-images proof paragraph (3) covers only the filtered-union Q̄_ℓ. In Bhatt-Scholze, Lemma 6.8.2(2) and Lemma 4.3.7 rely on the colimit topology, and Example 7.1.7 contrasts it with the ℓ-adic topology. So the norm-topology C(-,Ω) case cannot cite filtered-union results, and the report's sequence counterexample is valid. Step 1: Noetherian/qcqs; the continuous generator theorem (smallest triangulated class, finitely many triangles); R⁺j_* triangulated by the derived-direct-image node; the preimage of ℬ(X) is replete triangulated. Step 2: stratified models on S, good refinement, and the open layer is the complement of the closed set ∪(cl Q_c∖Q_c) (checked). Induction with the open/closed exact sequence and exact a_! gives the triangle filtration. Step 3: immersion-extension at both immersions (E admissible, schemes Noetherian); the field case gives B⊗^L N = B⊗N; both support projection formulas apply with Λ=A_E; B-linearity holds because extension by zero keeps the action. Step 4: E-finite-free cohomology, truncation triangles, the dualizable node (stratum has finitely many components, R=E) gives local perfect E-models, these split over E, nonempty members detect the interval and strata detect zero. Valid but longer than needed. Step 5: rational-open finiteness with Λ=E (all hypotheses hold), then step 4, then β_C and step 3; identity and empty cases checked. New stratified-finite-models node: self-contained, statement only, not a duplicate (lisse-finite-coefficient-model is filtered-union; compact-matrix descent is a group statement; the generators node has no finite fields). Plausible via normal strata, profinite π₁, triviality of torsors on the universal cover by comparison with GL_n(C_ℓ), and Baire on the compact image. Edge cases T=∅, rank 0, constant modules. New open-scalar-comparison node: the explicitly pinned mate, the same form as lem-sfb-qlbar-direct-image-comparison but for the all-continuous ring; not a restatement of the item. Tested j=id, U=∅, and A¹⊃G_m (R¹ = Hom_cont(Z_ℓ,Ω)=Ω, as expected); carry-cochain H² counterexamples fail by Baire. No source exists for it; accepted as a statement-only WANTED obligation. Batch-5: both flags accepted. For the dualizable node I recomputed the full closure: its trf/pod nodes are definitions and generic topos, algebra and category lemmas (geometric inverse image exact, slice subtopos, henselian lifting, localization). The rational-open node is already cited by the parent step 2 and is finite-E finiteness; its pd/trf closure is normalization, Tate-twist, base-change and Koszul tools. Neither is a step of the trace formula or Poincaré duality. Tool uses accepted. No changes."
  }
 }
