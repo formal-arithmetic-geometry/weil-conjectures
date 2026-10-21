@@ -56,8 +56,11 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M4",
+  "date": "2026-10-21",
   "document": "Stacks Project, limits.tex",
-  "place": "Tags 01ZM, 01ZR, 05LY and 081F; proper scheme descent first, then fixed-model flat-module descent"
+  "place": "Tags 01ZM, 01ZR, 05LY and 081F; reuse of the adopted upstream proof",
+  "note": "The duplicate Sheaf declaration is withdrawn; the source declaration is the sole Lean attachment."
  },
  "mathlib_searches": [
   {
@@ -103,14 +106,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProperFlatSingleNoetherianDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSingleNoetherianDescent.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProperFlatSingleNoetherianDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProperFlatSingleNoetherianDescent.lean",
   "declaration": "AlgebraicGeometry.properFlat_single_noetherian_descent",
   "statement": "theorem properFlat_single_noetherian_descent {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] (F : X.Modules) [F.IsFinitePresentation] (hF : F.IsFlatOver f) (U : S.Opens) (x : U.toScheme) : ∃ V : U.toScheme.Opens, x ∈ V ∧ ∃ (T Y : Scheme.{u}) (W : T.Opens), IsAffine T ∧ IsCompact (W : Set T) ∧ IsNoetherian W.toScheme ∧ IsNoetherian Y ∧ ∃ (p : Y ⟶ W.toScheme), IsProper p ∧ ∃ (M : Y.Modules), M.IsFinitePresentation ∧ M.IsFlatOver p ∧ ∃ (g : V.toScheme ⟶ W.toScheme) (q : pullback f (V.ι ≫ U.ι) ⟶ Y), IsPullback q (pullback.snd f (V.ι ≫ U.ι)) p g ∧ Nonempty (Scheme.Modules.tensorPullbackObj q M ≅ Scheme.Modules.tensorPullbackObj (pullback.fst f (V.ι ≫ U.ι)) F)",
   "branch": "sheaf-dag",
-  "by": "V2",
-  "date": "2026-10-13"
+  "by": "M4",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module in favour of the adopted upstream theorem. The source theorem has the exact node statement and complete proof; the Noetherian approximation route and all dependency nodes remain unchanged."
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -134,12 +138,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-e4b26",
-  "group": "C7",
+  "reviewer": "C-b8a64",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261021T002129-L-1489967",
+  "landing": "20261021T011025-L-2029601",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf FlatModuleOnLaterStage vs WeilConjectures twin (byte-identical signature, axioms clean); adapted importer ProperFlatSingleNoetherianDescent compiled against delivery; node lean record vs twin signature"
+  "note": "independent cc review: Sheaf properFlat_single_noetherian_descent signature vs WeilConjectures twin (identical, axioms clean); node diff vs live (lean record + proof_origin only); adapted DescentFirstProperFlatCechModel compiled, original also slow"
  },
  "lean_audit": {
   "master": {

@@ -27,7 +27,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 public import WeilConjectures.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-public import Sheaf.AlgebraicGeometry.ProperFlatSingleNoetherianDescent
+public import WeilConjectures.AlgebraicGeometry.ProperFlatSingleNoetherianDescent
 
 /-! # Descent-first bounded flat Čech models
 
