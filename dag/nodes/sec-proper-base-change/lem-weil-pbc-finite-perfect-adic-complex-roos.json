@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-complex-roos",
+ "kind": "statement",
+ "title": "Roos limit of a termwise epimorphic completed-module complex tower",
+ "statement": "Let X be any scheme and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Let T be an inverse sequence of cochain complexes of completed coefficient modules, with an epimorphic consecutive map in every degree. Every ordinary limit cone c of T localizes to a Roos derived limit [def-weil-derived-limit] of T localized levelwise. The corresponding product exists in the derived category, and the assertion holds for every choice of product. No boundedness or completeness hypothesis on the complexes is needed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Cohomology on Sites, Tags 0940 and 0941: the degreewise one-minus-shift short exact sequence and its derived triangle."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Exactness of pro-etale countable products gives CountableAB4Star for the actual completed module category, by identifying discrete limits with categorical products.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the product complex in every degree. The pro-etale epimorphic-tower theorem makes one minus shift epimorphic. The ordinary limit cone is its kernel by the universal property of compatible families. These maps form a short exact sequence of complexes.",
+   "uses": [
+    "lem-weil-proetale-surjective-tower-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact products identify the localization of the complex product with the derived product. Transport the short-exact-sequence triangle through that isomorphism; the first two arrows agree by checking every product projection.",
+   "uses": [
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-surjective-tower-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Cohomology on Sites, Tags 0940 and 0941: the degreewise one-minus-shift short exact sequence and its derived triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tower of complexes of sheaves on a pro-etale site with degreewise epimorphic transition maps has its ordinary termwise inverse limit as its derived inverse limit",
+   "results": "8 hits: condensed ordinary epimorphic limits and sections, no exact complex statement.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; use the generic adjunction, limit and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"IsDerivedLimit\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; use the generic adjunction, limit and localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomotopyLimit_mapCone_Q_of_epi|surjective.*[Cc]omplex.*[Ll]imit",
+   "results": "0 Mathlib hits. The source module has an ordinary-module version; this proof supplies the sheaf epimorphic-product step.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; use the generic adjunction, limit and localization APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse limit of a degreewise epimorphic tower of sheaf complexes represents its derived inverse limit by the one minus shift short exact sequence",
+   "results": "8 hits: CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, CategoryTheory.ShortComplex.limitCone, CategoryTheory.ShortComplex.isLimitOfIsLimitπ, CategoryTheory.ShortComplex.epi_of_epi_of_epi_of_epi, CategoryTheory.ShortComplex.SnakeInput.instEpiGL₀', InverseSystem.invLimEquiv, InverseSystem.piEquivLim, CategoryTheory.ShortComplex.ShortExact.mk.",
+   "date": "2026-10-21",
+   "verdict": "No exact match: these generic or unrelated results do not give the specified completed coefficient diagram comparison. Use the existing generic APIs in the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicRealization",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, integral-lattice sentence: the local perfect lifting argument; Cohomology on Sites, Tags 0940 and 0941: the degreewise one-minus-shift short exact sequence and its derived triangle.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicComplexRoos",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicComplexRoos.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicComplex_roos",
+  "statement": "theorem finitePerfectAdicComplex_roos\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ)\n    (ht : ∀ (n : ℕ) (i : ℤ), Epi ((T.map (homOfLE n.le_succ).op).f i))\n    (c : Cone T) (hc : IsLimit c) :\n    HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n))) ∧\n    ∀ [HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))],\n      IsDerivedLimit (K := fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))\n        (fun n : ℕ ↦ DerivedCategory.Q.map (T.map (homOfLE n.le_succ).op))\n        (DerivedCategory.Q.obj c.pt)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicModules_exactProducts",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicComplex_roos"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-canonical-comparison",
+ "kind": "statement",
+ "title": "Canonical derived quotients as explicit coefficient complexes with compatible finite-free retracts",
+ "statement": "Let X be a scheme, d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], P a bounded finite-projective A-complex [def-pc-perfect-ring-complex], and L_n specified left adjoints to exact derived quotient restriction. There exist a complex tower T over the completed coefficient ring and a cone c such that: in every degree their diagram and cone are compatible split retracts of finite powers of the actual coefficient diagram and its completed-unit cone [lem-weil-pbc-finite-perfect-adic-coefficient-limit]; T localized levelwise is isomorphic to the completed constant realization of the canonical algebraic quotient diagram of P [lem-weil-pbc-finite-perfect-adic-quotient-diagram]; and Q(c.pt) is isomorphic to completed derived constant realization of P. The assertion makes no inverse-limit or Roos claim, and assumes no completeness of A or geometric local-model data.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, the finite-projective quotient and cone comparison preceding the inverse-limit calculation; Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Split each finite-projective term from a finite free A-module using Mathlib Module.Finite.exists_comp_eq_id_of_projective, whose maps satisfy f.comp g = id. This includes rank zero and does not require A Noetherian. Apply constant sheafification and scalar extension to its splitting matrices. Form ordinary completed and finite coefficient realizations with their actual quotient maps. Naturality in linear maps makes differentials and transitions commute, constructing T and c and their compatible finite-free retracts.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use flatness of the completed coefficient algebra and its normalized finite reductions. Bounded projectivity and exact constant sheafification compute derived realization on the ordinary bounded flat complex. The finite quotient comparison and constant-realization/scalar-extension mate identify the level complexes naturally, including all differentials and quotient maps. Transport the coefficient universe through its explicit lifts and ring equivalences.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved choice-independence theorem finitePerfectAdicQuotientDiagram_changeAdjunction: uniqueness of left adjoints identifies the supplied L_n with actual derived scalar extension while preserving units and the whole canonical diagram. Combine it with the levelwise tensor comparisons from the preceding step. The ordinary-to-derived comparison on the bounded flat representative identifies the cone point with completed derived realization. No limit assertion enters this construction.",
+   "uses": [
+    "lem-weil-pbc-derived-module-scalar-adjunction",
+    "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-derived-module-scalar-adjunction",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, the finite-projective quotient and cone comparison preceding the inverse-limit calculation; Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective complex has its canonical derived quotient diagram identified with the complex of finite coefficient sheaves, compatibly with finite free retracts and differentials",
+   "results": "8 hits: K-projective resolutions, projective maps from single complexes and generic projective resolutions, no coefficient-diagram mate.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison at the completed coefficient presentation and universes of this item; the existing comparison declarations remain dependencies."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Projective\", \"SheafOfModules\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison at the completed coefficient presentation and universes of this item; the existing comparison declarations remain dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Cc]omparison.*[Pp]rojective|[Pp]rojective.*quotient.*[Cc]omparison",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison at the completed coefficient presentation and universes of this item; the existing comparison declarations remain dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_comp_eq_id_of_projective",
+   "results": "Mathlib.RingTheory.Finiteness.Projective gives the exact algebraic finite-free splitting with explicit maps and f.comp g = id. This closes the initial algebraic choice; it does not give natural coefficient realization, its derived mate or the complex diagram.",
+   "date": "2026-10-21",
+   "verdict": "Use this proved Mathlib splitting in the first step; retain only the functorial coefficient and derived comparison obligation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived quotient diagram of a bounded finite projective complex is represented by its finite coefficient complex and completed realization, with compatible finite free retracts",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instIsStableUnderRetractsQuasiIso, CochainComplex.IsKProjective.Qh_map_bijective, HomologicalComplexUpToQuasiIso, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences, HomologicalComplexUpToQuasiIso.Q, DerivedCategory.instEssSurjCochainComplexIntQ.",
+   "date": "2026-10-21",
+   "verdict": "No exact match: these generic or unrelated results do not give the specified completed coefficient diagram comparison. Use the existing generic APIs in the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicRealization",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, integral-lattice sentence and its local perfect lifting argument: the finite-projective constant quotient model and completed realization comparisons, before taking an inverse limit.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicCanonicalComparison",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicCanonicalComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicCanonical_comparison",
+  "statement": "theorem finitePerfectAdicCanonical_comparison\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤\n      DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))))\n    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction d.ideal n)\n    (P : CochainComplex (ModuleCat.{t} A) ℤ) (a b : ℤ)\n    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i)) :\n    ∃ (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ) (c : Cone T),\n      (∀ j : ℤ, Nonempty (FinitePerfectAdicCoefficientRetract X d\n        (T ⋙ HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j)\n        ((HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j).mapCone c))) ∧\n      Nonempty (T ⋙ DerivedCategory.Q ≅\n        finitePerfectAdicQuotientDiagram d.ideal L adj (DerivedCategory.Q.obj P) ⋙\n          finitePerfectAdicDerivedConstant X A ⋙\n            completedAdicDerivedChange X (completedAdicScalar X d)) ∧\n      Nonempty (DerivedCategory.Q.obj c.pt ≅\n        (completedAdicDerivedChange X (completedAdicScalar X d)).obj\n          ((finitePerfectAdicDerivedConstant X A).obj (DerivedCategory.Q.obj P)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,15 +10,9 @@ public import Sheaf.Paper.KoszulReconstruction
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 
-import Sheaf.Paper.CompatibleFiniteDerivedTrivializations
-import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
-import Sheaf.RingTheory.RlimPerfectComplete
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.Paper.FinitePerfectAdicTowerLimit
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Effectivity of uniformly perfect finite quotient systems
 
@@ -39,6 +33,78 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+attribute [local instance] finitePerfectModelsAbLocallyBijective
+attribute [local instance] finitePerfectAdicAlgebraDerived
+
+/-- The representative restriction is the exact derived restriction. -/
+private theorem finitePerfectRestrictionComparison
+    (X : Scheme.{t}) (R : Sheaf (ProEt.topology X) RingCat.{t + 1})
+    (U : X.ProEt) (K : DerivedCategory (SheafOfModules.{t + 1} R)) :
+    Nonempty (ringedSiteDerivedRestrictionOfUniverses R U K ≅
+      (ringedDerivedRestrictionGeneral.{t + 1, t, t + 1, t + 1} R U).obj K) := by
+  let F := SheafOfModules.overFunctor.{t + 1} R U
+  have := (ringedOverFunctor_exactGeneral.{t + 1, t, t + 1, t + 1} R U).1
+  have := (ringedOverFunctor_exactGeneral.{t + 1, t, t + 1, t + 1} R U).2.1
+  have := (ringedOverFunctor_exactGeneral.{t + 1, t, t + 1, t + 1} R U).2.2
+  exact ⟨(F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)).symm ≪≫
+    F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K)⟩
+
+/-- Algebraic reconstruction retains the actual normalized transition maps. -/
+private theorem finitePerfectAlgebraicModel
+    {A : Type t} [CommRing A] (I : Ideal A) [IsAdicComplete I A]
+    [HasDerivedCategory.{t} (ModuleCat.{t} A)]
+    [∀ n : ℕ, HasDerivedCategory.{t} (ModuleCat.{t} (A ⧸ I ^ (n + 1)))]
+    (K : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))
+    (v : ∀ n : ℕ, K (n + 1) ⟶ (DerivedCategory.adicStepRestriction I n).obj (K n))
+    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
+      DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))
+    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction I n)
+    (B : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1 + 1))) ⥤
+      DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))
+    (badj : ∀ n : ℕ, B n ⊣ DerivedCategory.adicStepRestriction I n)
+    (hbase : ∀ n : ℕ, IsIso (((badj n).homEquiv (K (n + 1)) (K n)).symm (v n)))
+    (hperfect : DerivedCategory.IsPerfect (K 0)) :
+    ∃ (P : CochainComplex (ModuleCat.{t} A) ℤ) (a b : ℤ),
+      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+      (∀ i : ℤ, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i)) ∧
+      ∃ e : ∀ n : ℕ, (L n).obj (DerivedCategory.Q.obj P) ≅ K n,
+        ∀ n : ℕ,
+          (adj (n + 1)).unit.app (DerivedCategory.Q.obj P) ≫
+              (DerivedCategory.adicLevelRestriction I (n + 1)).map (e (n + 1)).hom ≫
+              DerivedCategory.adicTowerTransition I K v n =
+            (adj n).unit.app (DerivedCategory.Q.obj P) ≫
+              (DerivedCategory.adicLevelRestriction I n).map (e n).hom := by
+  classical
+  obtain ⟨hprod, _, _⟩ := derivedCategory_countableProducts_core.{0}
+    (ModuleCat.{t} A)
+  let := hprod
+  obtain ⟨C, p, δ, hlim⟩ :=
+    (exists_isDerivedLimit_and_iso
+      (fun n ↦ (DerivedCategory.adicLevelRestriction I n).obj (K n))
+      (DerivedCategory.adicTowerTransition I K v)).1
+  obtain ⟨hC, _, hred, hcompat⟩ :=
+    DerivedCategory.rlim_perfect_complete I K v L adj B badj hbase hperfect C p δ hlim
+  obtain ⟨P, a, b, ha, hb, hP, ⟨i⟩⟩ := hC
+  let e (n : ℕ) : (L n).obj (DerivedCategory.Q.obj P) ≅ K n :=
+    (L n).mapIso i.symm ≪≫ @asIso _ _ _ _
+      (DerivedCategory.adicLimitReduction I K L adj C p n) (hred n)
+  refine ⟨P, a, b, ha, hb, hP, e, ?_⟩
+  intro n
+  have hn (k : ℕ) :
+      (adj k).unit.app (DerivedCategory.Q.obj P) ≫
+          (DerivedCategory.adicLevelRestriction I k).map (e k).hom =
+        i.inv ≫ (adj k).unit.app C ≫
+          (DerivedCategory.adicLevelRestriction I k).map
+            (DerivedCategory.adicLimitReduction I K L adj C p k) := by
+    dsimp only [e, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+    rw [Functor.map_comp, ← Category.assoc]
+    simpa only [Functor.comp_map, Functor.id_map, Category.assoc] using
+      congrArg (fun z ↦ z ≫ (DerivedCategory.adicLevelRestriction I k).map
+        (DerivedCategory.adicLimitReduction I K L adj C p k))
+        ((adj k).unit.naturality i.inv).symm
+  rw [reassoc_of% hn (n + 1), hn n]
+  simpa only [Category.assoc] using congrArg (fun z ↦ i.inv ≫ z) (hcompat n)
 
 /-- A normalized quotient system with uniformly bounded etale local perfect constant
 models has a pro-etale local perfect completed realization.
@@ -95,6 +161,33 @@ theorem finitePerfectModels_adic_realization
               ringedSiteDerivedRestrictionOfUniverses (completedAdicRing X d) U
                 ((completedAdicDerivedChange X (completedAdicScalar X d)).obj
                   (DerivedCategory.Q.obj (finiteModelConstantComplex X A P)))) := by
-  sorry
+  classical
+  obtain ⟨S, hS, hlocal⟩ :=
+    finitePerfectAdicTower_extraction X d φ _hφ _hcompat M _hmodels
+  refine ⟨S, hS, ?_⟩
+  intro U f hf
+  obtain ⟨T⟩ := hlocal U f hf
+  obtain ⟨P, a, b, ha, hb, hP, e, he⟩ := finitePerfectAlgebraicModel d.ideal
+    T.level T.transition T.extension T.adjunction T.stepExtension T.stepAdjunction
+    T.normalized T.residuePerfect
+  refine ⟨P, a, b, ha, hb, hP, ?_⟩
+  obtain ⟨i⟩ := finitePerfectAdicTower_limit X d U
+    ((completedAdicReduction X d).obj M) T P a b ha hb hP e he
+  let F := finitePerfectAdicConstant X A
+  have := (finitePerfectAdicConstant_exact X A).1
+  have := (finitePerfectAdicConstant_exact X A).2.1
+  have := (finitePerfectAdicConstant_exact X A).2.2
+  let c : (finitePerfectAdicDerivedConstant X A).obj (DerivedCategory.Q.obj P) ≅
+      DerivedCategory.Q.obj (finiteModelConstantComplex X A P) :=
+    F.mapDerivedCategoryFactors.app P
+  let R := ringedDerivedRestrictionGeneral.{t + 1, t, t + 1, t + 1}
+    (completedAdicRing X d) U
+  obtain ⟨i₁⟩ := finitePerfectRestrictionComparison X (completedAdicRing X d) U
+    ((reconstructionRlim X d).obj ((completedAdicReduction X d).obj M))
+  obtain ⟨i₂⟩ := finitePerfectRestrictionComparison X (completedAdicRing X d) U
+    ((completedAdicDerivedChange X (completedAdicScalar X d)).obj
+      (DerivedCategory.Q.obj (finiteModelConstantComplex X A P)))
+  exact ⟨i₁ ≪≫ i ≪≫
+    R.mapIso ((completedAdicDerivedChange X (completedAdicScalar X d)).mapIso c) ≪≫ i₂.symm⟩
 
 end AlgebraicGeometry.Scheme

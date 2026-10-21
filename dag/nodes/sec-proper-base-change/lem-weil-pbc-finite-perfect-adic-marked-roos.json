@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-marked-roos",
+ "kind": "statement",
+ "title": "Roos limit of the canonical finite-projective quotient diagram",
+ "statement": "Let X be any scheme, d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and U a pro-etale object. Let L_n be specified left adjoints to levelwise derived scalar restriction. The canonical quotient diagram of a bounded finite-projective A-complex P [lem-weil-pbc-finite-perfect-adic-quotient-diagram], followed by completed constant realization and exact slice restriction, has that completed realization of P as its Roos derived limit [def-weil-derived-limit]. No arbitrary algebraic tower, marking, geometric trivialization or completeness hypothesis on A is supplied.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse: the displayed equality of ordinary and derived limits of the finite-projective quotient complex; Cohomology on Sites, Tags 0940 and 0941."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical coefficient-complex comparison to obtain an explicit tower T and cone c with compatible finite-free retracts degree by degree, a whole-diagram localization comparison, and the cone-point realization comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-canonical-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved compatible-retract complex calculation makes Q(c.pt) a Roos limit of T localized levelwise. Exact countable products supply the global derived products. Transport the Roos triangle along the diagram and point isomorphisms; one minus shift is conjugated by the product of the component isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+    "lem-weil-pbc-finite-perfect-adic-complex-roos",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the exact slice extension/restriction adjunction to show that derived restriction is a right adjoint. It preserves products, and its exact derived functor is triangulated. Apply it to the global Roos triangle, obtaining the specified local realization and its canonical quotient diagram.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-finite-perfect-adic-canonical-comparison",
+  "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+  "lem-weil-pbc-finite-perfect-adic-complex-roos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse: the displayed equality of ordinary and derived limits of the finite-projective quotient complex; Cohomology on Sites, Tags 0940 and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of the constant finite quotients of a bounded finite projective complex is its completed constant realization",
+   "results": "8 hits, profinite projective presentations and ordinary adic-completion finite-product equivalences; no derived sheaf-complex realization.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; existing declarations are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimit\", \"Projective\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; existing declarations are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*projective|projective.*roos",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; existing declarations are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit of the canonical quotient diagram of a bounded finite projective complex is its completed constant realization",
+   "results": "8 hits: HomologicalComplex.instHasLimit, ProfiniteGrp.isIso_toLimit, Profinite.lim, Profinite.asLimit, Profinite.asLimitConeIso, Profinite.isoAsLimitConeLift, Profinite.isIso_asLimitCone_lift, ProfiniteGrp.isoLimittoFiniteQuotientFunctor.",
+   "date": "2026-10-21",
+   "verdict": "No exact match: these generic or unrelated results do not give the specified completed coefficient diagram comparison. Use the existing generic APIs in the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicRealization",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, integral-lattice sentence: the local perfect lifting argument on each lisse residue stratum; its finite-projective quotient inverse-limit computation.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicMarkedRoos",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicMarkedRoos.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicMarked_roos",
+  "statement": "theorem finitePerfectAdicMarked_roos\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (U : X.ProEt)\n    [HasCountableProducts\n      (DerivedCategory (SheafOfModules.{t + 1} ((completedAdicRing X d).over U)))]\n    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤\n      DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))))\n    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction d.ideal n)\n    (P : CochainComplex (ModuleCat.{t} A) ℤ) (a b : ℤ)\n    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i)) :\n    let F := finitePerfectAdicQuotientDiagram d.ideal L adj (DerivedCategory.Q.obj P) ⋙\n      finitePerfectAdicLocalRealization X d U\n    IsDerivedLimit (K := fun n : ℕ ↦ F.obj (op n))\n      (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op)\n      ((finitePerfectAdicLocalRealization X d U).obj (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicRoos_changeObject",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicRoos_changeDiagram",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicRestriction_rightAdjoint",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicRestriction_roos",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicMarked_roos"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

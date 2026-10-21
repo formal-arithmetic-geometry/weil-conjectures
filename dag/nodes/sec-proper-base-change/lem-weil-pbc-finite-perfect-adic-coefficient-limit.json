@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+ "kind": "statement",
+ "title": "Actual coefficient limits, finite powers, and compatible finite-projective complex retracts",
+ "statement": "Let X be any scheme and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Form the diagram of finite coefficient modules restricted along the actual completed-ring projections, with the recorded quotient maps. The completed coefficient unit, with its original projections, is an ordinary module-sheaf limit of this diagram. Every consecutive coefficient module map is epimorphic. The degree-zero complex tower therefore has the localized completed coefficient unit as its Roos derived limit [def-weil-derived-limit], for every choice of its existing derived product. No geometric hypotheses, coefficient completeness or boundedness hypothesis is required. More generally, finite powers of the coefficient cone are limits with epimorphic transitions. A specified cone of a complex tower whose diagram and cone in every degree are compatibly split retracts of those finite-power coefficient diagrams is an ordinary limit and localizes to a Roos derived limit. The ranks may depend on the degree; no boundedness is needed for this assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, the coefficient-unit case of the finite-projective inverse-limit calculation; Cohomology on Sites, Tags 0940/0941; Modules on Sites, Tag 03DA."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "View each actual completed-ring projection as a linear map from the completed coefficient unit to the restricted quotient unit. The defining ring limit identities give a cone. Forget to module presheaves, evaluate on every object, and forget to additive groups. Identify the resulting diagram and cone with the corresponding forgetful image of the defining ring limit. Preservation and reflection of limits proves the module cone is limiting.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A quotient map of powers is surjective. Choose a set section of its universe lift. Finite quotient rings have the discrete topology, so postcomposition with this section lifts every continuous coefficient function. Sheafification preserves local surjectivity. The specified module transition has exactly those functions on sections; its underlying additive sheaf map is locally surjective, hence epi. Faithful forgetting reflects epi.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero single-complex functor preserves limits and epimorphisms. Apply the proved epimorphic complex-tower Roos theorem to the image of the actual coefficient limit cone.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-complex-roos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite powers preserve limits and finite colimits by the finite biproduct comparison. For a compatible split retract cone, include a test cone into the finite-free diagram, lift into its computed limit, and project. The compatibility and splitting equations prove the universal property. Each retract transition is epi, since after precomposition with its split projection it is the epi free transition followed by a split projection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a complex tower with these compatible retracts degree by degree, evaluation jointly reflects limits of complexes. Apply the epimorphic-complex Roos theorem to this ordinary complex limit, whose transitions are epi in every degree.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-complex-roos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-finite-perfect-adic-complex-roos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, the coefficient-unit case of the finite-projective inverse-limit calculation; Cohomology on Sites, Tags 0940/0941; Modules on Sites, Tag 03DA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A limit of ring sheaves, viewed as modules over the limit ring, has its unit module as the inverse limit of the restricted coefficient modules",
+   "results": "8 hits: sheaf-module createsLimit, module limit construction and evaluation. These generic results are used.",
+   "date": "2026-10-21",
+   "verdict": "Use Mathlib preservation and reflection of limits; no exact completed coefficient statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.unit\", \"IsLimit\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "Use Mathlib preservation and reflection of limits; no exact completed coefficient statement."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Ii]sLimit|[Ii]sLimit.*unit",
+   "results": "25 hits: adjunction, monoidal unit and PUnit limits, no coefficient module tower.",
+   "date": "2026-10-21",
+   "verdict": "Use Mathlib preservation and reflection of limits; no exact completed coefficient statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible retract of a limit cone and of its entire inverse diagram is again a limit cone, and epimorphic transitions pass to such a retract",
+   "results": "8 hits: stability of epis under retracts, weak-limit retracts, generic created limits and profinite cones.",
+   "date": "2026-10-21",
+   "verdict": "No exact compatible coefficient-cone retract computation; use limit universality and epi cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLimit\", \"Retract\"",
+   "results": "2 hits: split idempotent equalizers and IsWeakLimit.retractOfIsLimit, neither the required diagram-and-cone assertion.",
+   "date": "2026-10-21",
+   "verdict": "No exact compatible coefficient-cone retract computation; use limit universality and epi cancellation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLimit.*[Rr]etract|[Rr]etract.*IsLimit|isLimit.*[Rr]etract",
+   "results": "4 hits, weak limits and idempotent equalizer retractions.",
+   "date": "2026-10-21",
+   "verdict": "No exact compatible coefficient-cone retract computation; use limit universality and epi cancellation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed coefficient module is the inverse limit of the finite quotient modules, with epimorphic transitions, and finite projective retracts preserve this limit",
+   "results": "8 hits: AdicCompletion, AdicCompletion.module, Profinite.lim, AdicCompletion.submodule, AdicCompletion.transitionMap_comp_eval_apply, Profinite.asLimit, Profinite.lim', Profinite.asLimitConeIso.",
+   "date": "2026-10-21",
+   "verdict": "No exact match: these generic or unrelated results do not give the specified completed coefficient diagram comparison. Use the existing generic APIs in the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicRealization",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, integral-lattice sentence and its local perfect lifting argument; the coefficient-unit case of the finite-projective quotient inverse-limit calculation.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicCoefficientLimit",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicCoefficientLimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicProjectiveComplex_roos",
+  "statement": "theorem finitePerfectAdicProjectiveComplex_roos (X : Scheme.{t}) {A : Type t} [CommRing A]\n    (d : AdicCoefficientDatum A)\n    (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ) (c : Cone T)\n    (h : ∀ j : ℤ, Nonempty (FinitePerfectAdicCoefficientRetract X d\n      (T ⋙ HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j)\n      ((HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j).mapCone c))) :\n    HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n))) ∧\n    ∀ [HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))],\n      IsDerivedLimit (K := fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))\n        (fun n : ℕ ↦ DerivedCategory.Q.map (T.map (homOfLE n.le_succ).op))\n        (DerivedCategory.Q.obj c.pt)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicCoefficientDiagram",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicCoefficientProjection",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicCoefficientCone",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicCoefficient_isLimit",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicCoefficientStep_epi",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicCoefficient_roos",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicFiniteFree_roos",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicRetract_roos",
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicCoefficientRetract",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicProjectiveComplex_roos"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

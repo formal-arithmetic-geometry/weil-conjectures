@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-tower-limit",
+ "kind": "statement",
+ "title": "Specified completed strict limit from a compatible finite-projective marking",
+ "statement": "For the completed coefficient system of an adic datum d [def-weil-pbc-adic-coefficient-datum], let Z be a strict derived tower on X and U a pro-etale object. Suppose a compatible algebraic local tower comparison is given [lem-weil-pbc-finite-perfect-adic-tower-extraction]. Let P be a bounded finite-projective A-complex [def-pc-perfect-ring-complex] with reductions compatibly marked to this algebraic tower. Then exact derived slice restriction of the specified total right derived inverse limit of Z is isomorphic to completed constant realization of P on U [def-weil-pbc-ringed-derived-restriction]. This theorem assembles restriction, diagram transport, and uniqueness of Roos limits, using the separate marked finite-projective calculation [lem-weil-pbc-finite-perfect-adic-marked-roos].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse: take the derived limit of compatible local quotient markings; Cohomology on Sites, Tags 0940 and 0941."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-finite-perfect-adic-marked-roos",
+  "lem-weil-pbc-finite-perfect-adic-tower-extraction"
+ ],
+ "proof": [
+  {
+   "text": "Take a K-injective resolution of the chosen strict representative. Exact countable products give its Roos triangle, and the total-right-derived-functor comparison identifies the limit object with the specified reconstructionRlim. Level evaluation inverts the resolution quasi-isomorphism; transport the triangle along this diagram isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-derived-limit-tower-core-property-triangle",
+    "prop-weil-pbc-derived-product-representation",
+    "lem-weil-pbc-finite-perfect-adic-complex-roos",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved derived-restriction Roos theorem: the localized exact adjunction makes restriction a product-preserving triangulated right adjoint, hence it carries the specified global Roos limit to the restricted diagram.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-marked-roos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the restricted Roos triangle through the compatible local diagram comparison. The adjunction-unit marking theorem identifies this algebraic diagram with the canonical quotient diagram. Apply the finite-projective Roos calculation to that canonical diagram and transport once more. Uniqueness of derived limits gives the required isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-marked-roos",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-limit-existence",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-derived-limit-tower-core-property-triangle",
+  "lem-weil-pbc-finite-perfect-adic-complex-roos",
+  "lem-weil-pbc-finite-perfect-adic-marked-roos",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram",
+  "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-derived-product-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse: take the derived limit of compatible local quotient markings; Cohomology on Sites, Tags 0940 and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact slice restriction preserves the Roos inverse limit and isomorphisms of inverse diagrams preserve derived limits",
+   "results": "8 hits, generic exact limits/adjunction/localization results; none supplies this specified completed strict-limit comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; existing declarations are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimit\", \"IsRightAdjoint\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; existing declarations are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimit.*iso|isDerivedLimitTriangle_map",
+   "results": "0 Mathlib hits. The library map theorem and derived-limit uniqueness are used in the proof.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; existing declarations are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total right derived inverse limit of a strict sheaf tower agrees after exact slice restriction with its Roos homotopy limit",
+   "results": "8 hits: CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, SheafOfModules.hasLimitsOfShape, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.Limits.limitRightOpIsoOpColimit, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, SheafOfModules.hasLimit, TopCat.instHasLimitsOfShapeSheaf.",
+   "date": "2026-10-21",
+   "verdict": "No exact match: these generic or unrelated results do not give the specified completed coefficient diagram comparison. Use the existing generic APIs in the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicRealization",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, integral-lattice sentence: the local perfect lifting argument on each lisse residue stratum; its passage from compatible finite-level markings to the specified local inverse limit.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicTowerLimit",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicTowerLimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicTower_limit",
+  "statement": "theorem finitePerfectAdicTower_limit\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [IsAdicComplete d.ideal A] (U : X.ProEt)\n    (Z : DerivedCategory (CompletedAdicTowers X d))\n    (T : FinitePerfectAdicLocalTower X d U Z)\n    (P : CochainComplex (ModuleCat.{t} A) ℤ) (a b : ℤ)\n    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i))\n    (e : ∀ n : ℕ, (T.extension n).obj (DerivedCategory.Q.obj P) ≅ T.level n)\n    (he : ∀ n : ℕ,\n      (T.adjunction (n + 1)).unit.app (DerivedCategory.Q.obj P) ≫\n          (DerivedCategory.adicLevelRestriction d.ideal (n + 1)).map (e (n + 1)).hom ≫\n          DerivedCategory.adicTowerTransition d.ideal T.level T.transition n =\n        (T.adjunction n).unit.app (DerivedCategory.Q.obj P) ≫\n          (DerivedCategory.adicLevelRestriction d.ideal n).map (e n).hom) :\n    Nonempty\n      ((ringedDerivedRestrictionGeneral.{t + 1, t, t + 1, t + 1}\n          (completedAdicRing X d) U).obj ((reconstructionRlim X d).obj Z) ≅\n        (finitePerfectAdicLocalRealization X d U).obj (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

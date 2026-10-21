@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-quotient-diagram",
+ "kind": "statement",
+ "title": "Compatible adjunction-unit markings identify canonical quotient diagrams",
+ "statement": "For a commutative ring A, ideal I, and specified left adjoints L_n to exact derived restriction D(A/I^(n+1)) to D(A) [lem-pur-derived-change-of-rings], define the canonical consecutive quotient map by transposing the preceding level unit. Let K_n have consecutive quotient-linear maps v_n, and let e_n:L_n(C)≅K_n. If these maps satisfy the displayed unit-transition equations, then e_n after scalar restriction define an isomorphism of the entire inverse diagrams. Neither finiteness, projectivity, normalization nor completeness is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, compatibility of the finite-projective quotient diagram; More on Algebra, Tag 09AW, actual reduction units."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Define the canonical quotient transition as the inverse adjunction Hom map of the preceding unit followed by the iterated scalar-restriction isomorphism. The Hom equivalence immediately proves its unit equation.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the proposed consecutive marking square. Cancel the invertible scalar-restriction comparison and use its naturality. The assumed unit-transition equation then proves equality of transposes, and injectivity gives the square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the squares to form a natural transformation of sequential diagrams. Every component is the image of an isomorphism under scalar restriction, hence invertible. The natural transformation is therefore an isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For two choices of quotient left adjoints, the unique isomorphism of left adjoints carries the specified units to each other. The transpose equation gives compatible markings, so the proved diagram-marking theorem identifies the entire canonical diagrams. This proves the choice-independence step used by the canonical representative comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, compatibility of the finite-projective quotient diagram; More on Algebra, Tag 09AW, actual reduction units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms of levels of two inverse systems commute with all transitions if their adjunction unit equations agree",
+   "results": "8 directed inverse-system equivalence hits; none connects derived quotient adjunction units to sequential diagrams.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; use the generic adjunction, limit and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.ofOpSequence\", \"Adjunction\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; use the generic adjunction, limit and localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*[Tt]ower|[Tt]ower.*adjunction",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; use the generic adjunction, limit and localization APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms between levels of inverse systems induced by adjunction units commute with quotient transitions and define a natural isomorphism",
+   "results": "8 hits: CategoryTheory.Adjunction.coconesIso, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit, CategoryTheory.Adjunction.conesIso, CategoryTheory.Adjunction.unitAsIsoOfIso, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence, CategoryTheory.Quotient.LiftCommShift.iso, CategoryTheory.Limits.HasLimit.isoOfNatIso.",
+   "date": "2026-10-21",
+   "verdict": "No exact match: these generic or unrelated results do not give the specified completed coefficient diagram comparison. Use the existing generic APIs in the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicRealization",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, integral-lattice sentence: the local perfect lifting argument; Tag 09C6, compatibility of the finite-projective quotient diagram; More on Algebra, Tag 09AW, actual reduction units.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicQuotientDiagram",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicQuotientDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicQuotientDiagram_marking",
+  "statement": "theorem finitePerfectAdicQuotientDiagram_marking\n    {A : Type t} [CommRing A] (I : Ideal A)\n    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤\n      DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))\n    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction I n)\n    (C : DerivedCategory (ModuleCat.{t} A))\n    (K : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))\n    (v : ∀ n : ℕ, K (n + 1) ⟶ (DerivedCategory.adicStepRestriction I n).obj (K n))\n    (e : ∀ n : ℕ, (L n).obj C ≅ K n)\n    (he : ∀ n : ℕ,\n      (adj (n + 1)).unit.app C ≫\n          (DerivedCategory.adicLevelRestriction I (n + 1)).map (e (n + 1)).hom ≫\n          DerivedCategory.adicTowerTransition I K v n =\n        (adj n).unit.app C ≫\n          (DerivedCategory.adicLevelRestriction I n).map (e n).hom) :\n    Nonempty (finitePerfectAdicQuotientDiagram I L adj C ≅\n      Functor.ofOpSequence (X := fun n ↦\n        (DerivedCategory.adicLevelRestriction I n).obj (K n))\n        (DerivedCategory.adicTowerTransition I K v))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicQuotientTransition",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicQuotientDiagram",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicQuotientDiagram_marking",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicQuotientDiagram_changeAdjunction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T012429-L-2190159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
