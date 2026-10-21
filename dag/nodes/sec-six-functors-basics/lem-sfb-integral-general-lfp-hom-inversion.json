@@ -20,9 +20,109 @@
   "sk-prop-sfb-qlbar-colimit-x",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the topological hypothesis needed for internal continuity. Apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to the given locally Noetherian, quasi-compact scheme $X$. In a descending chain $(Z_n)$ of closed subsets, choose a minimal member $Z_N$ of the nonempty set of its members. For $n\\ge N$, $Z_n\\subseteq Z_N$, so minimality forces $Z_n=Z_N$. Thus the underlying space of $X$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ, lemma-Noetherian-topology; minimal-closed-subset formulation"
+   }
+  },
+  {
+   "text": "For each nonzero cohomology sheaf $H^q(K)$ apply (i)$\\Rightarrow$(ii) of [lem-sfb-integral-lfp-constant-model-comparison], with $A=R$. Its input is exactly the finite constructible stratification and the arbitrary-entry local finite presentation in the hypothesis. It gives finite constant scalar local models for $H^q(K)$, allowing a different stratification for each $q$. Since only finitely many $q$ occur, $K$ has bounded constructible cohomology in the finite constant local model sense. No torsion-freeness or completeness of these cohomology sheaves is required.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(2)–(3), Theorem 4.13; use the existing coefficient-specific general-lfp comparison obligation, not merely the heart characterization"
+   }
+  },
+  {
+   "text": "Use the small skeleton of $X_{\\mathrm{proet}}$ specified by [def-weil-pbc-proetale-site]. By [lem-pur-ringed-site-grothendieck-abelian], filtered colimits of $B$-module sheaves are exact. Apply [lem-sfb-constructible-internal-hom-continuity] with $\\Lambda=\\underline R$, using steps 1–2. In particular take any sequential diagram $(M_n^\\bullet)$ with a common termwise lower bound; the natural-number category is small and filtered. The evaluation-induced map $\\varinjlim_n R\\mathcal Hom_B(K,M_n)\\to R\\mathcal Hom_B(K,\\varinjlim_n M_n)$ is an isomorphism. This proves precisely the sequential-continuity hypothesis of the formal localization theorem.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62; agent internal-sheaf localization extraction"
+   }
+  },
+  {
+   "text": "Here is an explicit bounded-below representative for the telescope of $L$. Choose $c$ with $H^q(L)=0$ for $q<c$ and any complex $C$ representing $L$ [def-weil-abstract-derived-category]. Define $P^q=0$ for $q<c$, $P^c=\\operatorname{coker}(d_C^{c-1})$, and $P^q=C^q$ for $q>c$, with induced differentials. The quotient $C\\to P$ induces the identity on cohomology in degrees $q\\ge c$, while both sides have zero cohomology below $c$. It is a quasi-isomorphism. Multiplication by $\\ell$ descends to $P$, so the repeated-$\\ell$ tower has one common termwise lower bound. This construction uses no condition on $L$ beyond the stipulated cohomological lower bound.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical lower truncation; direct kernel/image computation"
+   }
+  },
+  {
+   "text": "By [sk-prop-sfb-qlbar-colimit-x], the actual coefficient map $B\\to S$ identifies $S$ with $B[1/\\ell]$, with underlying module the repeated-$\\ell$ telescope. Apply [lem-sfb-internal-hom-localization-comparison] with ring sheaf $B$, section $s=\\ell$, first input $K$, and second input $L$. Smallness, exact filtered colimits and sequential continuity were checked in step 3, and $L$ is cohomologically bounded below. This yields the asserted isomorphism in $D(S)$ for the canonical evaluation-transpose map. The same theorem identifies its restriction to $D(B)$ with the evaluation-induced sequential-continuity isomorphism. It also supplies naturality in both inputs.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sfb-internal-hom-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62; agent internal-sheaf localization extraction"
+   }
+  },
+  {
+   "text": "Pin down the legs of that identification. By [lem-sfb-derived-scalar-localization-reflection], localization is exact termwise extension with unit $x\\mapsto1\\otimes x$. Apply [lem-weil-pbc-scalar-localization-complex-colimit] with scalar ring $R$, $t=\\ell$, sheaf ring $B$, to $P$ and to any complex representing $H=R\\mathcal Hom_B(K,L)$. It identifies each scalar telescope with the restricted localization, with $n$th leg $x\\mapsto\\ell^{-n}(1\\otimes x)$. For a functorial K-injective Hom representative the transition obtained from $\\ell_P$ need not literally equal multiplication by $\\ell$ on the chain level. The leg-compatible isomorphism of [lem-sfb-kinjective-hom-scalar-telescope] identifies those two colimits and preserves every derived leg. Consequently the preceding restricted comparison is the one between the two scalar repeated-$\\ell$ telescopes, including at every stage. No lower bound on the complex representing $H$ is needed.",
+   "uses": [
+    "lem-sfb-derived-scalar-localization-reflection",
+    "lem-weil-pbc-scalar-localization-complex-colimit",
+    "lem-sfb-kinjective-hom-scalar-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62; agent internal-sheaf localization extraction"
+   }
+  },
+  {
+   "text": "The evaluation normalization of [lem-sfb-dc-hom-scalar-adjunction] identifies the restricted target with $R\\mathcal Hom_B(K,L_E)$ by precomposing restricted evaluation with $K\\to K_E$. On telescope stage $n$, step 6 gives the leg $h\\mapsto\\ell^{-n}(1\\otimes h)$. Pairing it with $k$ therefore gives $\\ell^{-n}(1\\otimes h(k))$ by scalar linearity of evaluation. This notation means the corresponding composite of evaluation, the scalar unit, and multiplication by $\\ell^{-n}$ on representatives. The next-stage representative is $\\ell h$, and $\\ell^{-(n+1)}(1\\otimes(\\ell h)(k))=\\ell^{-n}(1\\otimes h(k))$, so these pairings form the required cocone. The scalar-adjunction normalization shows that its transpose is exactly the map of step 5. Thus the formula characterizes the canonical derived map, and all choices disappear under the representative-independent continuity and localization isomorphisms already used.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62; agent internal-sheaf localization extraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "def-weil-abstract-derived-category",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sfb-internal-hom-localization-comparison",
+  "lem-sfb-derived-scalar-localization-reflection",
+  "lem-weil-pbc-scalar-localization-complex-colimit",
+  "lem-sfb-kinjective-hom-scalar-telescope",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Internal-sheaf refinement of Lemma 6.8.12 and Proposition 6.8.14(2), via the existing coefficient-specific local-model bridge and conditional localization theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +158,45 @@
    "results": "Module.FinitePresentation.isLocalizedModule_mapExtendScalars; IsLocalizedModule.mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv; LocalizedModule.restrictScalars_map_eq; Localization.AtPrime.instIsScalarTower; IsLocalization.instIsScalarTowerAtPrimeFractionRing; instIsScalarTowerAtPrimeFractionRing_1; PresheafOfModules.restrictHomEquivOfIsLocallySurjective",
    "date": "2026-10-21",
    "verdict": "No match: hits concern ambient closed categories, underived module localization/presentations, or ordinary filtered colimits, not this coefficient-specific derived sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|derivedHom|rhom).*(localiz|invert)|(localiz|invert).*(internalHom|derivedHom|rhom)",
+   "results": "Mathlib/RingTheory/PicardGroup.lean; Mathlib/GroupTheory/OreLocalization/Basic.lean; Mathlib/GroupTheory/MonoidLocalization/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No match: these are generic categorical localization, underived sheafification or light-condensed internal Hom facts; none states coefficient-specific derived internal Hom inversion for general-lfp pro-etale constructible inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of derived internal Hom for bounded constructible sheaves of integral adic coefficients",
+   "results": "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; HasDerivedCategory.standard; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.Q; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-21",
+   "verdict": "No match: these are generic categorical localization, underived sheafification or light-condensed internal Hom facts; none states coefficient-specific derived internal Hom inversion for general-lfp pro-etale constructible inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"localization\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No match: these are generic categorical localization, underived sheafification or light-condensed internal Hom facts; none states coefficient-specific derived internal Hom inversion for general-lfp pro-etale constructible inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a bounded constructible integral pro-etale sheaf commutes with inverting ell",
+   "results": "LightCondensed.ihom_map_val_app; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.ihomPoints_symm_comp; LightCondensed.ihomPoints_apply; LightCondensed.ihomPoints; LightCondensed.ihomPoints_symm_apply; LightCondensed.instMonoidalClosedLightCondMod; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "No match: these are generic categorical localization, underived sheafification or light-condensed internal Hom facts; none states coefficient-specific derived internal Hom inversion for general-lfp pro-etale constructible inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension to a localized ring commutes with derived sheaf Hom when the first argument has finite constant local models",
+   "results": "PresheafOfModules.Sheafify.mul_smul; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.Sheafify.SMulCandidate.mk'; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.Sheafify.SMulCandidate.h; PresheafOfModules.Sheafify.smulCandidate; PresheafOfModules.Sheafify.smul; PresheafOfModules.Sheafify.one_smul",
+   "date": "2026-10-21",
+   "verdict": "No match: these are generic categorical localization, underived sheafification or light-condensed internal Hom facts; none states coefficient-specific derived internal Hom inversion for general-lfp pro-etale constructible inputs."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-hom-small-coefficients",
@@ -71,12 +206,61 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "lem-sfb-dc-hom-preserves, proof: Rational paragraph: inverting ell; integral scalar-model conversion, internal continuity and evaluation-normalized localization; live proof step 6.",
+   "place": "lem-sfb-dc-hom-preserves.proof.md, final paragraph: the finite-extension field case follows by inverting ell; realized by general-lfp to scalar local models, internal continuity and evaluation-normalized localization. The ancestor command returns None for the created parent lem-sfb-dc-hom-small-coefficients.",
    "via": [
     "lem-sfb-dc-hom-small-coefficients"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-general-lfp-hom-inversion",
+  "worker": "stage1",
+  "summary": "Q30 preserves the full statement and supplies a seven-step split using only existing DAG nodes. Checks Noetherian topology, converts each general-lfp cohomology sheaf to finite scalar local models, applies internal sequential continuity and formal scalar localization, and computes every telescope leg including the functorial-resolution scalar-transition comparison. No new nodes, completed categories or hypotheses on L.",
+  "blueprint": "Realizes the inverting-ell clause in the final paragraph of lem-sfb-dc-hom-preserves.proof.md, through the live parent lem-sfb-dc-hom-small-coefficients step 6. No imported blueprint ancestor is recorded by blueprint_refs ancestor for this created-node chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Noetherian-topology input to the internal-continuity theorem; no node of this unit supplies it."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "The fixed small site and module universe, used to check the general ringed-site theorem."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Exact filtered colimits for arbitrary module sheaves on the small site; not a replacement of the unit finiteness route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Definition of complexes, cohomology and quasi-isomorphisms for the explicit lower truncation."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Actual integral-to-field coefficient identification and its repeated-ell telescope."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-complex-colimit",
+    "why": "Generic leg-normalized complex localization telescope; the unit requires this scalar normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-pbc-scalar-localization-complex-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-8677df9cc",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-8677df9cc (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The statement is byte-identical to the base version from the Q22 parent snapshots, and the delivery adds no new nodes. The item is unsplit on live and side-live, so it is not superseded; neither it nor any cited node is on the dropped list. There is no cycle (closure of 3582 nodes), proof_deps equals the union of the step uses, and no SGA source is cited. Sources read: blueprint main-20261015 lem-sfb-dc-hom-preserves.proof.md final paragraph ('follow by inverting ell'); Bhatt–Scholze Lemma 6.8.12 and Proposition 6.8.14, pp. 61–62 (global RHom and direct sums; the node correctly marks the internal telescope as agent-written); Stacks 01OZ and 0118, checked against the tags file. Step 1: the minimal-closed-subset leaf turns a descending chain into a Noetherian space. Step 2: the item's general-lfp hypothesis is exactly (i) of the integral lfp constant-model comparison, so (i)⇒(ii) applied to each of the finitely many H^q gives finite constant models. Step 3: the continuity node's hypotheses hold (Λ=O_E, Noetherian space, bounded finite models, I=ℕ, common lower bound); site smallness and exact filtered colimits come from the pro-étale site definition and Grothendieck-abelian. Step 4: the tau_{≥c} truncation and its ℓ-compatibility are correct, checked by hand. Step 5: qlbar-colimit-x gives E_X=O_{E,X}[1/ℓ] as the telescope, matching R[1/s] in the localization comparison; all its hypotheses are met, giving the D(S) isomorphism, naturality and the restriction identification. Step 6: the reflection, complex-colimit and K-injective telescope statements pin the telescope legs, including the fact that the transition from ℓ_P is not literally ℓ on chains. This parallels the localization node's proof, but cites only statements. Step 7: the evaluation-normalized scalar adjunction gives the pairing ℓ^{-n}(1⊗h(k)), and the cocone identity checks. Edge cases tested: X empty, K=0, L=0, K=B, torsion K=B/ℓ^a (both sides 0), and L bounded below but termwise unbounded. The six declared tool_uses are generic and accepted. Nothing was changed."
  }
 }

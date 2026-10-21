@@ -21241,3 +21241,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q121/lem-pur-common-line-positive-scalar-powers (reviewer FIX; first push; new nodes: 0)
 - 08:43 L: merged deliver/NA/lem-sfb-scalar-adjunction-unit-coefficient-normalization (reviewer FIX; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q63/lem-sfb-etale-proetale-cube-flat-model (reviewer FIX; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q30/lem-sfb-integral-general-lfp-hom-inversion (reviewer PASS; first push; new nodes: 0)
