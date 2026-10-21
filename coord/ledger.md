@@ -20344,3 +20344,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:10 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProducts (stage 3; reviewer PASS; first push; landing 20261021T061018-L-1684502 (proof); batch 20261021T060921; modules 1; new nodes 0)
 - 06:10 L: merged deliver/E2/Sheaf.Paper.CohomologyTorInterval (stage 3; reviewer PASS; first push; landing 20261021T061022-L-1685287 (proof); batch 20261021T060921; modules 1; new nodes 1)
 - 06:10 L: merged deliver/E4/Sheaf.CategoryTheory.ExactFaithfulTorsion (stage 3; reviewer PASS; first push; landing 20261021T061027-L-1686349 (proof); batch 20261021T060921; modules 1; new nodes 0)
+- 06:10 L: merged deliver/E4/Sheaf.CategoryTheory.FilteredRingObjectCoconeColimit (stage 3; reviewer PASS; first push; landing 20261021T061032-L-1687556 (interface); batch 20261021T060921; modules 1; new nodes 0; change records: coord/changes/e4-filtered-ring-object-colimit-imports.md)

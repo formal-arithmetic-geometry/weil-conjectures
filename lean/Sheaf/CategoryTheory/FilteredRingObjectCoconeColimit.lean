@@ -5,12 +5,9 @@ Authors: The Weil Conjectures Project
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Category
 public import Mathlib.CategoryTheory.Monoidal.CommMon_
-public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 
 /-!
 # Filtered colimit cocones of ring objects
@@ -34,6 +31,8 @@ universe v u w
 open CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory
+
+open MonObj
 
 /-- An underlying filtered colimit cocone of ring objects is colimiting in ring objects.
 Source: blueprint `sk-prop-sfb-qlbar-colimit-x`, proof, "Third isomorphism"; Stacks Project,
@@ -61,7 +60,64 @@ theorem Mon.filtered_cocone_isColimit
     Nonempty (IsColimit c) ∧
       ∀ s : Cocone D,
         IsMonHom (M := c.pt.X) (N := s.pt.X) (hc.desc ((Mon.forget C).mapCocone s)) := by
-  sorry
+  classical
+  have hmon (s : Cocone D) :
+      IsMonHom (M := c.pt.X) (N := s.pt.X)
+        (hc.desc ((Mon.forget C).mapCocone s)) := by
+    let d : c.pt.X ⟶ s.pt.X := hc.desc ((Mon.forget C).mapCocone s)
+    have hd (i : I) : (c.ι.app i).hom ≫ d = (s.ι.app i).hom :=
+      hc.fac ((Mon.forget C).mapCocone s) i
+    constructor
+    · obtain ⟨i⟩ := IsFiltered.nonempty (C := I)
+      rw [← IsMonHom.one_hom (c.ι.app i).hom, Category.assoc, hd i]
+      exact IsMonHom.one_hom (s.ι.app i).hom
+    · have hdiag (i : I) :
+          ((c.ι.app i).hom ⊗ₘ (c.ι.app i).hom) ≫ μ[c.pt.X] ≫ d =
+            ((c.ι.app i).hom ⊗ₘ (c.ι.app i).hom) ≫ (d ⊗ₘ d) ≫ μ[s.pt.X] := by
+        rw [← IsMonHom.mul_hom_assoc, hd i,
+          tensorHom_comp_tensorHom_assoc, hd i]
+        exact IsMonHom.mul_hom (s.ι.app i).hom
+      have hmixed (i j : I) :
+          ((c.ι.app i).hom ⊗ₘ (c.ι.app j).hom) ≫ μ[c.pt.X] ≫ d =
+            ((c.ι.app i).hom ⊗ₘ (c.ι.app j).hom) ≫ (d ⊗ₘ d) ≫ μ[s.pt.X] := by
+        let k := IsFiltered.max i j
+        let u : i ⟶ k := IsFiltered.leftToMax i j
+        let v : j ⟶ k := IsFiltered.rightToMax i j
+        have hu : (D.map u).hom ≫ (c.ι.app k).hom = (c.ι.app i).hom :=
+          congrArg Mon.Hom.hom (c.w u)
+        have hv : (D.map v).hom ≫ (c.ι.app k).hom = (c.ι.app j).hom :=
+          congrArg Mon.Hom.hom (c.w v)
+        have hleg : ((c.ι.app i).hom ⊗ₘ (c.ι.app j).hom) =
+            ((D.map u).hom ⊗ₘ (D.map v).hom) ≫
+              ((c.ι.app k).hom ⊗ₘ (c.ι.app k).hom) := by
+          rw [tensorHom_comp_tensorHom, hu, hv]
+        rw [hleg]
+        simpa only [Category.assoc] using
+          congrArg (((D.map u).hom ⊗ₘ (D.map v).hom) ≫ ·) (hdiag k)
+      apply (isColimitOfPreserves (tensorRight c.pt.X) hc).hom_ext
+      intro i
+      apply (isColimitOfPreserves (tensorLeft (D.obj i).X) hc).hom_ext
+      intro j
+      change ((D.obj i).X ◁ (c.ι.app j).hom) ≫
+          ((c.ι.app i).hom ▷ c.pt.X) ≫ μ[c.pt.X] ≫ d =
+        ((D.obj i).X ◁ (c.ι.app j).hom) ≫
+          ((c.ι.app i).hom ▷ c.pt.X) ≫ (d ⊗ₘ d) ≫ μ[s.pt.X]
+      simpa only [tensorHom_def' (c.ι.app i).hom (c.ι.app j).hom, Category.assoc,
+        Functor.const_obj_obj]
+        using hmixed i j
+  let desc (s : Cocone D) : c.pt ⟶ s.pt :=
+    { hom := hc.desc ((Mon.forget C).mapCocone s)
+      isMonHom_hom := hmon s }
+  refine ⟨⟨{ desc := desc, fac := ?_, uniq := ?_ }⟩, hmon⟩
+  · intro s i
+    apply Mon.Hom.ext
+    exact hc.fac ((Mon.forget C).mapCocone s) i
+  · intro s m hm
+    apply Mon.Hom.ext
+    apply hc.hom_ext
+    intro i
+    exact (congrArg Mon.Hom.hom (hm i)).trans
+      (hc.fac ((Mon.forget C).mapCocone s) i).symm
 
 /-- The same underlying cocone is colimiting among commutative ring objects.
 Source: blueprint `sk-prop-sfb-qlbar-colimit-x`, proof, "Third isomorphism"; Stacks Project,
@@ -82,6 +138,8 @@ theorem CommMon.filtered_cocone_isColimit
     {D : I ⥤ CommMon C} (c : Cocone D)
     (hc : IsColimit ((CommMon.forget C).mapCocone c)) :
     Nonempty (IsColimit c) := by
-  sorry
+  obtain ⟨h, _⟩ := Mon.filtered_cocone_isColimit
+    ((CommMon.forget₂Mon C).mapCocone c) hc
+  exact ⟨isColimitOfReflects (CommMon.forget₂Mon C) h.some⟩
 
 end CategoryTheory
