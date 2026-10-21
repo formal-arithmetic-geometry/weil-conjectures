@@ -7,24 +7,21 @@
  },
  "kind": "definition",
  "title": "The support-localization triangle of a complex: the construction",
- "statement": "Fix the closed–open pair of\nsupported sections. For a bounded\nbelow complex $K$, choose the specified\nK-injective resolution\n$K\\to I(K)$, with injective terms. Put\n\n$$\nA(K)=s_*s^!I(K),\\quad B(K)=I(K),\\quad C(K)=j_*j^*I(K).\n$$\n\nLet $u:A(K)\\to B(K)$ be the inclusion. The cone complex is\n$\\operatorname{Cone}(u)^m=B(K)^m\\oplus A(K)^{m+1}$, with differential\n$d(b,a)=(d_Bb+u(a),-d_Aa)$. This construction specifies the maps; it does not identify\nordinary restriction $s^{-1}$ with the derived functor $Rs^!$.",
+ "statement": "Let $s:Z\\hookrightarrow X$ be a closed immersion of schemes with complementary open immersion $j:U\\hookrightarrow X$, and fix a finite commutative ring $\\Lambda$. Work in the abelian category of all constant-$\\Lambda$ module sheaves on the small pro-etale site of $X$, with the underived functors and supported kernel $\\mathcal G_Z$ of [def-pur-flasque-support]. Assume that $j$ is quasi-compact [def-weil-finite-type-morphism], so that the canonical comparison $\\mathcal G_ZM\\xrightarrow{\\sim}s_*s^!M$ of [def-pur-flasque-support] is invertible.\n\nFor a bounded below cochain complex $K$ [def-weil-abstract-derived-category], choose the specified K-injective resolution $K\\to I(K)$ [def-pur-kinjective-complex], with injective terms, as supplied by [prop-pur-kinjective-resolutions-exist]. Apply the additive sheaf functors termwise and put\n$$\n A(K)=s_*s^!I(K),\\qquad B(K)=I(K),\\qquad C(K)=j_*j^*I(K).\n$$\nLet $u:A(K)\\to B(K)$ be the inverse of the canonical supported-kernel comparison followed by the kernel inclusion $\\mathcal G_ZI(K)\\to I(K)$. Let $v:B(K)\\to C(K)$ be the open-restriction unit. Thus $vu=0$.\n\nDefine the cone complex, with the convention of [def-weil-abstract-derived-category], by\n$$\n \\operatorname{Cone}(u)^m=B(K)^m\\oplus A(K)^{m+1},\\qquad\n d(b,a)=(d_Bb+u(a),-d_Aa).\n$$\nThis construction specifies the complexes and maps. It does not identify ordinary restriction $s^{-1}$ with the derived functor $Rs^!$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-support-triangle.md",
   "place": "node def-pur-support-triangle, order 1931"
  },
  "stmt_deps": [
   "def-pur-flasque-support",
+  "def-weil-finite-type-morphism",
   "def-pur-kinjective-complex",
   "prop-pur-kinjective-resolutions-exist",
   "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-pur-support-triangle.md",
-  "place": "A8: supportModelTriangle factors its identical explicit formula through supportSequenceTriangle for generic short complexes. The quotient inverse, cone projection and shift comparison are unchanged by reduction."
- },
+ "proof_origin": null,
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +85,52 @@
    "results": "No hits in the pinned Mathlib source.",
    "date": "2026-10-16",
    "verdict": "no match for the support-specific construction"
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*section|sections.*support|supportLocalization|supportsShortComplex",
+   "results": "Search returned 0 hits: none. Read the generic cone definition and its signed projections in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:57,275,288; the support-specific sheaf construction is absent.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Support localization triangle of a bounded below complex of sheaves constructed from an injective resolution",
+   "results": "Search returned 8 hits: CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.self, DerivedCategory.triangleOfSES, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.InjectiveResolution.cocomplex, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex. Read the generic cone definition and its signed projections in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:57,275,288; the support-specific sheaf construction is absent.",
+   "date": "2026-10-21",
+   "verdict": "partial ingredient matches; not the complete support-resolution definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CochainComplex",
+   "results": "Search returned 12 hits: CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain. Read the generic cone definition and its signed projections in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:57,275,288; the support-specific sheaf construction is absent.",
+   "date": "2026-10-21",
+   "verdict": "partial ingredient matches; not the complete support-resolution definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The support localization mapping cone of the inclusion of supported sections in a K-injective resolution of a complex of sheaves",
+   "results": "Search returned 8 hits: CochainComplex.cm5b.I, CochainComplex.cm5b.i, CochainComplex.cm5b.p, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.cm5b.I_X, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.ofCocomplex. Read the generic cone definition and its signed projections in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:57,275,288; the support-specific sheaf construction is absent.",
+   "date": "2026-10-21",
+   "verdict": "partial ingredient matches; not the complete support-resolution definition"
+  },
+  {
+   "tool": "grep",
+   "query": "supportLocalizationTriangle|supportsShortComplex|def mappingCone",
+   "results": "Search returned 6 hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean. Read the generic cone definition and its signed projections in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:57,275,288; the support-specific sheaf construction is absent.",
+   "date": "2026-10-21",
+   "verdict": "partial ingredient matches; not the complete support-resolution definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complex of sheaves on a ringed site form the kernel of the open restriction unit and the mapping cone of the kernel inclusion after an injective replacement",
+   "results": "Search returned 8 hits: CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CochainComplex.cm5b.i, CochainComplex.cm5b.I_X, CochainComplex.cm5b.I, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b, CategoryTheory.InjectiveResolution.kernelFork, CochainComplex.cm5b.instInjectiveXIntI. Read the generic cone definition and its signed projections in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:57,275,288; the support-specific sheaf construction is absent.",
+   "date": "2026-10-21",
+   "verdict": "partial ingredient matches; not the complete support-resolution definition"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -108,19 +147,19 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "def-pur-support-triangle",
   "worker": "stage1",
-  "summary": "Definition-only split; the statement and all cone signs are preserved verbatim. Reuse supported sections, the general ringed-site K-injective definition and existence theorem, and the existing abstract-derived-category Mathlib leaf for the cone. Replace the etale-only K-injective definition, which does not apply on the pro-etale site fixed by supported sections. No new nodes or proof steps are needed. The source blueprint file is not installed on this machine; see the report WANTED entry. Project etale support definitions cover a different site and do not give an attachment for this item.",
-  "blueprint": "Imported definition, first paragraph (the closed-open pair and supplied K-injective resolution), displayed A(K), B(K), C(K), and final paragraph (inclusion and explicit cone differential). This is a definition: proof and proof_deps remain empty; blueprint.from remains null because blueprint.is is this item."
+  "summary": "NG: definition-only split, reusing all four existing ingredients and adding the definition of quasi-compactness. STATEMENT-DISPUTED: the imported pro-etale formula silently treats the supported-kernel comparison as invertible without the quasi-compact-complement hypothesis. Make that hypothesis explicit, as in the already repaired def-pur-flasque-support and lem-pur-support-localization-triangle; specify the inclusion through the inverse canonical comparison. Preserve the cone signs and all finite coefficient/site conventions. No new nodes, no proof steps, no Lean changes.",
+  "blueprint": "main-20261015 def-pur-support-triangle: first paragraph fixes the closed-open pair and chosen injective resolution; displayed A,B,C are termwise sheaf constructions; final paragraph supplies the kernel inclusion and signed cone. Correct the omitted scope using the supported-sections definition and the intended quasi-compact localization application. This definition has blueprint.is equal to its own id, so from stays null. The related triangle-meaning definition and localization theorem do not state this concrete construction, so same_as remains empty."
  },
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-NO-365ea30f9",
-  "group": "NO",
+  "reviewer": "NT-cc-NG-422c315a3",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-365ea30f9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, primary blueprint and relevant sources. Pro-étale resolution hypotheses, kernel construction, cone differential and edge cases check out. No new nodes or repairs. Target coefficient categories remain distinct; no comparison theorem is inferred. Detailed checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-422c315a3 (reviewer sub-agent of L); spot-checked: Definition-only split with 0 new nodes, no proof steps and no Lean change. The one change adds a hypothesis: the complementary open immersion j must be quasi-compact. That scope was missing from the item, and the report names the change (E7). It is needed because the comparison G_Z M -> s_*s^!M is only supplied for quasi-compact j by the live def-pur-flasque-support. The infinite-product counterexample (lem-pur-infinite-clopen-pair, R = product of F_2, U = union of D(e_n)) shows it can fail otherwise, and the report's argument that injective terms do not avoid the failure is correct (left exactness on 0 -> M -> I^0 -> I^1). The landed Lean module SupportTriangleConstruction already has [QuasiCompact j], finite commutative Lambda, Sheaf(ProEt.topology X)(ModuleCat Lambda) and u = inverse comparison followed by the kernel inclusion, so the new text matches the Lean hypothesis for hypothesis. All three citers already assume j quasi-compact: lem-pur-support-localization-triangle, lem-pur-proetale-support-global-boundary, and def-pur-triangle-meaning (quasi-compactness is stable under its etale base change). In the unit sk-prop-a1-kummer the complement of the zero section is D(t), which is quasi-compact. I read all five stmt_deps. prop-pur-kinjective-resolutions-exist (small-site K-injective resolutions with injective terms) is the right node for the pro-etale site. The cone d(b,a) = (d_B b + u(a), -d_A a) agrees with def-weil-abstract-derived-category and with Mathlib MappingCone.lean:275/288 (summands swapped). I checked that u is a cochain map, vu = 0 and d^2 = 0, and the edge cases Z empty, U empty, K = 0 and Lambda = 0. No SGA source is cited and there are no tool_uses. Maintainer note B10: this node was Lean-closed (reviewed_lean 2026-10-17, reviewed_proof 2026-10-19) and was re-dispatched to stage 1; the split is correct and only brings the text in line with the Lean. The main-20261015 blueprint def-pur-flasque-support and def-pur-support-triangle omit the quasi-compactness hypothesis; record this source error in HUMAN.md."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SupportTriangleConstruction",
