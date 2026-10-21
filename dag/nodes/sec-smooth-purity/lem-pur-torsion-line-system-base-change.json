@@ -17,9 +17,123 @@
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "lem-pe-internal-section-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R_{T,r}=(\\mathbf Z/\\ell^r)_T$, and write $[x]=h^{-1}x$ for the inverse-image unit section over $X\\times_YV$ of a section $x$ over $V$. Every unital coefficient homomorphism $v:A\\to B$ commutes with the canonical maps from $\\mathbf Z/\\ell^r$ whenever both rings are annihilated by $\\ell^r$. Moreover $v_X\\gamma_A=\\gamma_Bh^{-1}v_Y$: under the ring adjunction these maps are the maps $A_Y\\to h_*B_X$ sending a constant section $a$ to the constant section $v(a)$. They agree by the constant-presheaf sheafification universal property. This also proves compatibility of $\\gamma_A$ with $R_{Y,r}\\to A_Y$, and with every reduction $R_{Y,s}\\to R_{Y,r}$. Thus the scalar identifications below are compatible ring-sheaf identifications, rather than choices of abstract isomorphisms.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Apply clause 1 of [lem-pur-proetale-inverse-image-tensor-comparison] with $\\mathcal O=R_{Y,r}$, $\\mathcal F=P_{Y,r}$ and $\\mathcal G=A_Y$. Its isomorphism is followed by the map on tensors induced by $c_r$ and $\\gamma_A$:\n$$h^{-1}(P_{Y,r}\\otimes_{R_{Y,r}}A_Y)\\xrightarrow{\\sigma}h^{-1}P_{Y,r}\\otimes_{h^{-1}R_{Y,r}}h^{-1}A_Y\\xrightarrow{c_r\\otimes\\gamma_A}P_{X,r}\\otimes_{R_{X,r}}A_X.$$\nThe second arrow is defined by the balanced-bilinear universal property, using the scalar square in step 1 and the assumed semilinearity of $c_r$. Its inverse is induced by $c_r^{-1}$ and $\\gamma_A^{-1}$; both composites fix pure tensors, so are identities by that same universal property. This constructs $C_{A,r}$ as an isomorphism. Multiplication by a section $b$ of $h^{-1}A_Y$ acts on the second tensor factor; the displayed map changes it to multiplication by $\\gamma_A(b)$. Hence $C_{A,r}$ is $\\gamma_A$-semilinear, with exactly the required formula $[x\\otimes a]\\mapsto c_r([x])\\otimes\\gamma_A([a])$.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Here is the equality test used for uniqueness and all later squares. For maps from $h^{-1}(P_{Y,s}\\otimes_{R_{Y,s}}A_Y)$ to an abelian sheaf $H$ on $X$, take adjuncts to maps $P_{Y,s}\\otimes_{R_{Y,s}}A_Y\\to h_*H$. In the semilinear situation give $h_*H$ the $R_{Y,s}$-action through the specified coefficient map and the constant-section structure map. The adjuncts are then $R_{Y,s}$-linear. The tensor universal property says they agree if they agree on $x\\otimes a$ over every $V$. By naturality of the adjunction unit this is precisely agreement of the original maps on all $[x\\otimes a]$. Apply this test with $s=r$ and $H=P_X(A;r)$: any semilinear map with the prescribed formula equals the map constructed in step 2. This proves the asserted uniqueness without assuming that arbitrary inverse-image sections are single unit sections.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "For an allowed transition $v:(s,A)\\to(r,B)$ define $D_T(v)$ on pure tensors by $x\\otimes a\\mapsto q^T_{s,r}(x)\\otimes v_T(a)$. For a local section $b$ of $R_{T,s}$, semilinearity of $q^T_{s,r}$ gives $q^T_{s,r}(bx)=\\bar bq^T_{s,r}(x)$, while the unital ring map gives $v_T(ba)=\\bar b v_T(a)$. Thus the formula is balanced and biadditive. The tensor universal property, with the target viewed as an $R_{T,s}$-module, defines the map of sheaves. It is semilinear over $v_T$ by multiplication on the second factor. Identities act as $x\\otimes a\\mapsto x\\otimes a$; composing transitions sends $x\\otimes a$ to $q^T_{r,t}q^T_{s,r}(x)\\otimes w_Tv_T(a)=q^T_{s,t}(x)\\otimes(wv)_T(a)$. Tensor uniqueness proves the diagram laws. This includes coefficient-only and exponent-only transitions.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Fix $s\\ge r$ and $\\ell^rA=0$. There is an elementary tensor reassociation\n$$P_{T,s}\\otimes_{R_{T,s}}A_T\\cong(P_{T,s}\\otimes_{R_{T,s}}R_{T,r})\\otimes_{R_{T,r}}A_T.$$\nExplicitly the forward map sends $x\\otimes a$ to $(x\\otimes1)\\otimes a$, and the reverse sends $(x\\otimes b)\\otimes a$ to $x\\otimes ba$. Each is well defined by the balanced-bilinear universal property, applied twice on the right. The composites fix $x\\otimes a$ and $(x\\otimes b)\\otimes a$, respectively: $(x\\otimes1)\\otimes ba=(x\\otimes b)\\otimes a$. These identities prove they are inverse, as sheaf maps, without identifying tensor-sheaf sections with sectionwise tensors.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Follow step 5's forward isomorphism by $\\bar q^T_{s,r}\\otimes1$, where $\\bar q^T_{s,r}:P_{T,s}\\otimes_{R_{T,s}}R_{T,r}\\xrightarrow{\\sim}P_{T,r}$ is an isomorphism by the hypothesis of the item. Tensoring it with $A_T$ is invertible: tensor its inverse to obtain an inverse map, with composites equal to the identity on pure tensors. The resulting isomorphism $P_T(A;s)\\to P_T(A;r)$ sends $x\\otimes a$ to $q^T_{s,r}(x)\\otimes a$, so is exactly $D_T((s,A)\\to(r,A))$ from step 4. Thus exponent independence concerns the specified transition, with no arbitrary choice of identifications.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "For every allowed $v:(s,A)\\to(r,B)$ compare $C_{B,r}\\,h^{-1}D_Y(v)$ and $D_X(v)\\,C_{A,s}$. On $[x\\otimes a]$ the first map is\n$$c_r([q^Y_{s,r}(x)])\\otimes\\gamma_B([v_Y(a)]),$$\nwhereas the second is\n$$q^X_{s,r}(c_s([x]))\\otimes v_X(\\gamma_A([a])).$$\nThe first factors agree by the assumed equation $c_rh^{-1}q^Y_{s,r}=q^X_{s,r}c_s$; the second agree by step 1. The two maps are semilinear over the same coefficient map, so step 3's adjunction and tensor equality test proves the square. Taking $s=r$ proves coefficient naturality, and taking $A=B$, $v=1$ proves exponent naturality, including compatibility with the isomorphism of step 6. Step 4 supplies the diagram laws; step 2 supplies invertible components. Their inverses satisfy the inverse squares by composing this square with the component inverses, so this is an isomorphism of the varying-scalar diagrams.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Finally use the abelian sheaf tensor structure and its monoidal local equivalences from [sk-def-sfb-sheaf-tensor] and [det-def-sfb-sheaf-tensor-local-iso] on the chosen small sites. These verify the hypotheses for [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and [lem-pe-internal-section-tensor-comparison]. Apply the latter over $R_{T,r}$ to $P_{T,r}$ and $A_T$. Its tensor comparison fixes every local pure tensor, and the equivalence fixes underlying abelian sheaves and maps. The extra $A_T$-action is multiplication on the $A_T$ factor; its action on a pure tensor is $x\\otimes a\\mapsto x\\otimes ba$, and tensor naturality identifies this action in the two interpretations. Consequently the map of step 2 has the same underlying abelian map after internal interpretation: both send $[x\\otimes a]$ to $c_r([x])\\otimes\\gamma_A([a])$, so step 3 proves equality. The identical argument for $x\\otimes a\\mapsto q_{s,r}(x)\\otimes v(a)$ identifies every diagram arrow; hence the squares in step 7 are the same squares on underlying abelian sheaves.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "det-def-sfb-sheaf-tensor-local-iso",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "sk-def-sfb-sheaf-tensor",
+  "det-def-sfb-sheaf-tensor-local-iso",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 03EL, lemma-tensor-product-pullback; Tag 0GMW, lemma-sheafification-tensor; explicit torsion-system naturality argument realizing the Finite A paragraph of det-prop-sfb-cartesian-coefficients-twists"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +169,45 @@
    "results": "8 hits: Module.comap_freeLocus_le, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, LightCondensed.instMonoidalLightCondSetLightCondModFree, Ideal.Fiber.exists_smul_eq_one_tmul, LightCondensed.instMonoidalCategoryLightCondMod, Module.mem_freeLocus_iff_tensor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat.  The completion and ordinary tensor hits concern modules over single rings; LightCondensed monoidality has a different site and no exponent-system statement. None gives the specified sheaf diagram with varying scalars and its internal-module normalization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with extension to finite coefficient rings, naturally for prime power reduction systems",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.Presentation.map_π_eq, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Pullback/adjunction definitions, free-module identities, presheaf tensor formulas or ordinary torsion facts; none states the compatible varying-scalar torsion-system comparison. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean for the pullback candidates.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*pullback|pullback.*torsion|sheafPullback.*tensor",
+   "results": "3 hits: Mathlib/Algebra/Module/Torsion/Free.lean, Mathlib/Algebra/Module/Torsion/Free.lean, Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean. Pullback/adjunction definitions, free-module identities, presheaf tensor formulas or ordinary torsion facts; none states the compatible varying-scalar torsion-system comparison. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean for the pullback candidates.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of compatible torsion module sheaves commutes with scalar extension and coefficient reduction",
+   "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, PresheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.PullbackConstruction.adjunction. Pullback/adjunction definitions, free-module identities, presheaf tensor formulas or ordinary torsion facts; none states the compatible varying-scalar torsion-system comparison. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean for the pullback candidates.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"tensor\"",
+   "results": "0 hits: . Pullback/adjunction definitions, free-module identities, presheaf tensor formulas or ordinary torsion facts; none states the compatible varying-scalar torsion-system comparison. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean for the pullback candidates.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism preserves relative tensor products of module sheaves and the resulting isomorphisms commute with changes of coefficient rings",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforwardCongr, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc. Pullback/adjunction definitions, free-module identities, presheaf tensor formulas or ordinary torsion facts; none states the compatible varying-scalar torsion-system comparison. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean for the pullback candidates.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-sfb-cartesian-coefficients-twists",
@@ -75,5 +224,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-torsion-line-system-base-change",
+  "worker": "stage1",
+  "summary": "Q14: eight explicit steps, no new nodes. Construct the normalized tensor comparison, prove uniqueness by adjunction and balanced tensors, construct all coefficient/exponent arrows, prove exponent independence by explicit inverse tensor formulas, check every mixed square and the internal-module interpretation. Statement retained verbatim.",
+  "blueprint": "det-prop-sfb-cartesian-coefficients-twists, Finite A paragraph: inverse image is monoidal and preserves finite constant coefficients; refined with exponent independence, arbitrary mixed coefficient transitions, and internal-module normalization.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Finite constant-ring pullback comparison is an isomorphism preserving constant sections; already part of the item hypotheses."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Normalized ordinary tensor pullback on arbitrary pro-etale module sheaves; the finite-A paragraph needs this generic tensor tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Balanced-bilinear universal property for module sheaf tensors; used only to construct and compare elementary tensor maps."
+   },
+   {
+    "node": "det-def-sfb-sheaf-tensor-local-iso",
+    "why": "Monoidality of abelian sheafification local equivalences, a hypothesis of the existing internal-module comparison."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Existing equivalence preserves relative tensor and pure tensors; exactly the final interpretation clause of the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "det-def-sfb-sheaf-tensor-local-iso",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-4b17de042",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-4b17de042 (reviewer sub-agent of L); spot-checked: I read the item in full. This is an ordinary split with no new nodes: there is no repair note, the statement is verbatim and stmt_deps are unchanged. proof_deps equals the union of the step uses, and the Stacks sources 03EK/0GMW/03EL check out in sites-modules.tex. The route matches the Finite A paragraph of the main-20261015 proof of det-prop-sfb-cartesian-coefficients-twists. The base change is the pro-étale h^{-1} with the constant-section γ_A of prop-weil-pbc-proetale-constant-ring-map, so the coefficient category is unchanged; there is no SGA. Step by step: step 1 proves the coefficient square by agreement of the adjuncts on constant sections. Step 2 builds the map from σ of lem-pur-proetale-inverse-image-tensor-comparison clause 1 (any h) followed by c_r⊗γ_A, which is balanced by the semilinearity of c_r and step 1. Step 3 is an adjunction plus bilinear-property equality test that gives uniqueness. In steps 4-6 I checked the balancing of D(v), the reassociation inverses and that exponent independence is the specified transition q̄⊗1. Step 7: I recomputed the mixed squares on [x⊗a]. Step 8: the hypotheses of the internal equivalence and tensor comparison are supplied, and the pure-tensor formulas agree. Edge cases checked: A=0, an empty scheme, s=r, Z/ℓ^2→Z/ℓ, and ℓ not invertible. Candidate duplicates read: adic-line-system, kummer-coefficient, scalar-tensor-normalization, coefficient-pullback and inverse-image-tensor nodes; none states this item. There is no cycle. I accept the 5 declared tool_uses as generic tensor and constant-ring tools."
  }
 }
