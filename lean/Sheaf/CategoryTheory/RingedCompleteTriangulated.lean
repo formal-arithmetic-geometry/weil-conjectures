@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q05
+Authors: SHEAF groups Q05 and M7
 -/
 module
 
@@ -9,10 +9,8 @@ public import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 /-! # Exact Koszul completion and the triangulated complete locus
 
@@ -30,6 +28,57 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
+/-- The reflector onto a strictly full triangulated subcategory is exact, with
+shift structure compatible with its specified unit. This is the left-adjoint form of
+Mathlib's triangulated-adjoint theorem, applied to the full-subcategory inclusion. -/
+private theorem exact_reflector
+    {A : Type*} [Category* A] [HasZeroObject A] [Preadditive A] [HasShift A ℤ]
+    [∀ n : ℤ, (shiftFunctor A n).Additive] [Pretriangulated A]
+    (P : ObjectProperty A) [P.IsClosedUnderIsomorphisms] [P.IsTriangulated]
+    (F : A ⥤ A) (η : 𝟭 A ⟶ F) (hc : ∀ X, P (F.obj X))
+    (hb : ∀ X Y, P Y → Function.Bijective (fun a : F.obj X ⟶ Y ↦ η.app X ≫ a)) :
+    ∃ _s : F.CommShift ℤ, F.IsTriangulated ∧ NatTrans.CommShift η ℤ := by
+  classical
+  let L := P.lift F hc
+  let e (X : A) (Y : P.FullSubcategory) :
+      (L.obj X ⟶ Y) ≃ (X ⟶ P.ι.obj Y) :=
+    P.fullyFaithfulι.homEquiv.trans
+      (Equiv.ofBijective (fun a ↦ η.app X ≫ a) (hb X Y.obj Y.property))
+  let adj : L ⊣ P.ι := Adjunction.mkOfHomEquiv
+    { homEquiv := e
+      homEquiv_naturality_left_symm := by
+        intro X' X Y f g
+        apply (e X' Y).injective
+        change η.app X' ≫ ((e X' Y).symm (f ≫ g)).hom =
+          η.app X' ≫ F.map f ≫ ((e X Y).symm g).hom
+        rw [← Category.assoc, ← η.naturality f, Category.assoc]
+        exact (e X' Y).apply_symm_apply (f ≫ g) |>.trans
+          (congrArg (fun a ↦ f ≫ a) ((e X Y).apply_symm_apply g)).symm
+      homEquiv_naturality_right := by
+        intro X Y Y' f g
+        change η.app X ≫ (f.hom ≫ g.hom) = (η.app X ≫ f.hom) ≫ g.hom
+        exact (Category.assoc _ _ _).symm }
+  have hunit : adj.unit = η := by
+    ext X
+    change η.app X ≫ 𝟙 _ = η.app X
+    exact Category.comp_id _
+  let sL := adj.leftAdjointCommShift ℤ
+  have hAdj : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  have hL : L.IsTriangulated := adj.isTriangulated_leftAdjoint
+  let sF : F.CommShift ℤ :=
+    Functor.CommShift.ofIso (P.liftCompιIso F hc) ℤ
+  have he : NatTrans.CommShift (P.liftCompιIso F hc).hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (P.liftCompιIso F hc) ℤ
+  have hF : F.IsTriangulated := Functor.isTriangulated_of_iso (P.liftCompιIso F hc)
+  have hη : NatTrans.CommShift η ℤ := by
+    have h : η = adj.unit ≫ (P.liftCompιIso F hc).hom := by
+      rw [hunit]
+      ext X
+      exact (Category.comp_id _).symm
+    rw [h]
+    exact NatTrans.CommShift.comp adj.unit (P.liftCompιIso F hc).hom ℤ
+  exact ⟨sF, hF, hη⟩
+
 /-- Koszul completion is exact, its prescribed unit commutes with all integer shifts,
 and the local derived-complete locus is a strictly full triangulated subcategory.
 
@@ -41,40 +90,33 @@ The list may be empty. `RingedKoszulLimitPresentation` fixes the strict Koszul t
 its descent and total derived inverse limit, and `D.unit` is its degree-zero unit.
 Its index `m : ℕ` denotes exponent `m+1`. The presentation uses the dual of the positive
 Koszul complex, the negative Koszul complex of Tag 0A0E. No boundedness, Noetherian
-condition or exactness of products is imposed. The existential shift structure is the
-one obtained from the unsigned first-variable tensor shift and derived-limit shift.
+condition or exactness of products is imposed. The existential shift structure is
+induced by the reflector adjunction and is compatible with the prescribed unit.
 The natural transformation is required to have precisely the prescribed components;
 its `CommShift` property supplies the natural morphism of distinguished image triangles
 via `NatTrans.mapTriangle`, including compatibility with maps of triangles.
 
-Proof plan:
-1. Expand the negative Koszul complexes into finite free terms in degrees [-r,0].
-   Their terms are flat (def-pc-flat-sheaf-modules), and they are K-flat by
-   lem-pc-bounded-above-flat-kflat-site. Apply
-   lem-weil-pbc-kflat-fixed-tensor-triangulated, also for the empty list O[0].
-2. Retain the strict transition maps in the total tensor tower. Cohomology in towers
-   is levelwise (lem-weil-tower-category-levelwise-abelian), so this construction
-   descends through quasi-isomorphisms. The unsigned first-variable shift and cone
-   reindexing preserve the cone inclusion and negative projection: the second tensor
-   differential has sign (-1)^p = -(-1)^(p+1). Thus the descended tower functor is exact
-   (lem-weil-pbc-total-tensor-integer-shifts, def-weil-abstract-derived-category).
-3. Compose with exact total right derived inverse limit, supplied by
-   lem-weil-pbc-ringed-strict-tower-homotopy-limit, to obtain exact completion.
-4. On K-injective strict-tower resolutions the unit is the ordinary limit augmentation
-   followed by the resolution comparison. Shift the resolution; it stays K-injective
-   by lem-weil-pbc-kinjective-shift. The unsigned tensor shift and termwise inverse
-   limit identify this shifted map with the unit of the shifted input, coherently
-   for every integer. Naturality is that of the reflector unit.
-5. Apply lem-weil-pbc-commshift-nattrans-triangle-morphism to the identity, completion
-   and the unit. The first two squares are naturality; the last follows from the
-   shift equation. Naturality of the transformation gives naturality in triangles.
-6. By lem-weil-pbc-ringed-koszul-completion-reflector, completeness is invertibility
-   of the unit. Exactness gives zero completeness, naturality gives invariance under
-   isomorphism, and the shift equation gives closure under every integer shift.
-7. Apply lem-sf-triangle-two-out-of-three to the unit on any distinguished triangle.
-   Any two invertible components force the third to be invertible. This gives the
-   strictly full triangulated locus of def-weil-triangulated-subcategory, with the
-   local predicate def-weil-pbc-locally-derived-ringed-ideal-complete itself. -/
+Proof:
+1. On each slice and for each section of the ideal, compose exact derived restriction
+   with derived internal Hom from its localization. The existing theorem
+   `ringedInternalHom_exact` supplies integer shifts and exactness of this Hom functor
+   (Stacks, sites-cohomology.tex, Tag 08JC).
+2. Local completeness is simultaneous vanishing of these exact functors. Mapping an
+   isomorphism preserves vanishing; exact functors send zero to zero; their shift
+   comparisons preserve vanishing under all integer shifts. In a distinguished triangle,
+   zero first and third images force zero middle image. Thus the local predicate itself
+   defines a strictly full triangulated subcategory (Tag 0999 and its following paragraph).
+3. Obtain the actual strict Koszul presentation, output completeness, naturality and
+   mapping bijection from `ringedKoszulCompletionReflector` (Tags 099B and 0A0E).
+   Lift its completion functor to the complete full subcategory. Precomposition with
+   precisely `D.unit` defines the Hom equivalence for an adjunction to its inclusion.
+   The identity map gives the adjunction unit, which equals the prescribed unit.
+4. The inclusion is triangulated. Its left adjoint acquires a coherent shift structure
+   from the adjunction and is triangulated by Mathlib's triangulated-adjoint theorem.
+   Composing with inclusion and transporting through the canonical lift comparison gives
+   exact completion. The adjunction unit commutes with shifts; the proved equality with
+   the prescribed unit supplies the required natural transformation and its `CommShift`.
+   This argument is the private helper `exact_reflector`, proved above. -/
 theorem ringedCompleteTriangulated
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)
@@ -96,6 +138,57 @@ theorem ringedCompleteTriangulated
         (∀ N : ringedSiteDerived O, η.app N = D.unit N) ∧ NatTrans.CommShift η ℤ) ∧
       ObjectProperty.IsClosedUnderIsomorphisms (IsLocallyDerivedRingedIdealComplete O I ι) ∧
       ObjectProperty.IsTriangulated (IsLocallyDerivedRingedIdealComplete O I ι) := by
-  sorry
+  classical
+  let : Zero (ringedSiteDerived O) := HasZeroObject.zero' _
+  let P : ObjectProperty (ringedSiteDerived O) := IsLocallyDerivedRingedIdealComplete O I ι
+  let hRshift (U : C) : (ringedDerivedRestriction O U).CommShift ℤ := by
+    unfold ringedDerivedRestriction
+    infer_instance
+  let hRtri (U : C) : (ringedDerivedRestriction O U).IsTriangulated := by
+    unfold ringedDerivedRestriction
+    infer_instance
+  let H (U : C) (f : O.obj.obj (op U)) :=
+    (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
+      (op ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))))
+  have hPiso : P.IsClosedUnderIsomorphisms := by
+    constructor
+    intro X Y e hX U f hf
+    exact (((ringedDerivedRestriction O U ⋙ H U f).mapIso e).isZero_iff).mp (hX U f hf)
+  have hPzero : P (0 : ringedSiteDerived O) := by
+    intro U f _
+    obtain ⟨s, ht⟩ := (ringedInternalHom_exact (J.over U) (O.over U)).1
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f)))
+    let G := ringedDerivedRestriction O U ⋙ H U f
+    exact G.map_isZero (isZero_zero _)
+  have hPshift : P.IsStableUnderShift ℤ := by
+    constructor
+    intro n
+    constructor
+    intro X hX U f hf
+    obtain ⟨s, ht⟩ := (ringedInternalHom_exact (J.over U) (O.over U)).1
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f)))
+    let G := ringedDerivedRestriction O U ⋙ H U f
+    exact (((G.commShiftIso n).app X).isZero_iff).mpr
+      ((shiftFunctor _ n).map_isZero (hX U f hf))
+  have hPtri : P.IsTriangulated := by
+    refine {
+      exists_zero := ⟨0, isZero_zero _, hPzero⟩
+      toIsTriangulatedClosed₂ := .mk' ?_ }
+    intro T hT h₁ h₃ U f hf
+    obtain ⟨s, ht⟩ := (ringedInternalHom_exact (J.over U) (O.over U)).1
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f)))
+    let G := ringedDerivedRestriction O U ⋙ H U f
+    exact Pretriangulated.Triangle.isZero₂_of_isZero₁₃ _ (G.map_distinguished T hT)
+      (h₁ U f hf) (h₃ U f hf)
+  obtain ⟨D, hc, hb, _, hn⟩ := ringedKoszulCompletionReflector O r b I ι hgen
+  let η : 𝟭 (ringedSiteDerived O) ⟶ D.completion :=
+    { app := D.unit
+      naturality := fun X Y a ↦ (hn X Y a).symm }
+  obtain ⟨sD, hD, hη⟩ := exact_reflector P D.completion η hc hb
+  exact ⟨D, sD, hD, ⟨η, fun _ ↦ rfl, hη⟩, hPiso, hPtri⟩
 
 end CategoryTheory
