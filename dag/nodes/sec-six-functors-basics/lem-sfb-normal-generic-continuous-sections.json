@@ -17,9 +17,125 @@
   "def-weil-pbc-normal-ring",
   "lem-weil-pbc-condensed-field-continuous-realization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the chart geometry, without assuming $X$ affine or quasi-separated. If $V=\\operatorname{Spec}R\\subset X$ is nonempty affine, $R$ is a domain by [def-pc-integral-scheme]. By [lem-weil-pbc-affine-open-stalk-localization], its prime localizations are the corresponding local rings of $X$, hence are normal by hypothesis. Apply [lem-weil-pbc-normal-domain-of-local-normal] to see that $R$ is integrally closed in its fraction field. The generic point corresponds to $(0)$, so the same stalk-localization statement identifies this fraction field with $k$. Cover $U$ by affine opens $W=\\operatorname{Spec}B$ mapping into such $V$. These form an open basis: shrink around the image point in $X$, then take an affine neighbourhood in its inverse image. By [sk-lem-pe-weakly-etale-stability] and the site definition, $W\\to V$ is weakly etale. It therefore gives a weakly etale ring map $R\\to B$ in [def-weil-pbc-ind-etale-algebra]; in particular $B$ is flat over $R$. Finally [lem-weil-pbc-fibre-product-affine-spectra] identifies $W_\\eta$ with $\\operatorname{Spec}(B\\otimes_Rk)$ and its projection with the structural ring map.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092W, lemma-normality-goes-up, chart setup; Algebra Tag 030B; Schemes Tag 01I4"
+   }
+  },
+  {
+   "text": "On each chart from step 1 put $D=B\\otimes_Rk$. This is the localization of $B$ at the images of $R\\setminus\\{0\\}$: the maps sending $b\\otimes(a/s)$ to $ab/s$ and $b/s$ to $b\\otimes(1/s)$ are inverse by the tensor and localization relations. By [lem-trf-flat-module-torsionfree-domain], a nonzero $s\\in R$ acts injectively on $B$. The localization zero criterion then makes $B\\to D$ injective. The hypotheses of [lem-weil-pbc-weak-etale-integral-closure] are now exactly satisfied. Every idempotent $e\\in D$ is integral over $B$, since it solves the monic equation $T^2-T=0$; it consequently belongs to $B$, where injectivity gives the same idempotent equation and uniqueness of the lift. The correspondence of [lem-weil-pbc-spec-clopen-idempotent] now proves that inverse image gives a bijection $\\operatorname{Clop}(W)\\to\\operatorname{Clop}(W_\\eta)$: $D(b)$ pulls back to $D(b\\otimes1)$ by the definition of inverse image of a prime. This includes $B=0$, since then $D=0$ and both spectra are empty.",
+   "uses": [
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-weak-etale-integral-closure",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092W, lemma-normality-goes-up; idempotent application of Tag 00EE, lemma-disjoint-decomposition"
+   }
+  },
+  {
+   "text": "We globalize the clopen bijections, using only their uniqueness on the chart basis of step 1. Given a clopen $H\\subset U_\\eta$, extend $H\\cap W_\\eta$ uniquely to a clopen $H_W\\subset W$ on every such chart. For two charts $W,W\\prime$, cover their intersection by smaller chart-basis opens $Z$. The restrictions $H_W\\cap Z$ and $H_{W\\prime}\\cap Z$ have the same generic inverse image $H\\cap Z_\\eta$, so step 2 on $Z$ makes them equal. Thus the $H_W$ agree on overlaps. Their union $\\widetilde H\\subset U$ is open, and its complement is open because on each $W$ it is $W\\setminus H_W$. Its generic inverse image is $H$. Uniqueness holds by restricting any other extension to every $W$ and applying step 2. Hence inverse image along $i:U_\\eta\\to U$ is bijective on clopen subsets. This proof does not assume that intersections of affine opens of $X$ or $U$ are affine, or that the individual components of $U$ are open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, lemma-disjoint-decomposition, elementary open gluing after step 2"
+   }
+  },
+  {
+   "text": "The morphism $j:\\operatorname{Spec}k\\to X$ is affine: the inverse image of every nonempty affine open of the integral $X$ is all of $\\operatorname{Spec}k$, and that of the empty open is empty. By [lem-weil-pbc-affine-morphism-permanence], $i:U_\\eta\\to U$ is affine and $U_\\eta$ is affine. Both $U$ and $U_\\eta$ are therefore qcqs by [lem-weil-pbc-affine-scheme-qcqs], and spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-sfb-spectral-clopen-component-homeomorphism] to their continuous map $i$ and the bijection proved in step 3. It yields a homeomorphism $h=\\pi_0(i):P_\\eta\\xrightarrow{\\sim}P$, where $P_\\eta=\\pi_0(U_\\eta)$, $P=\\pi_0(U)$, normalized by $h q_\\eta=q i$. This remains valid for the empty object.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-sfb-spectral-clopen-component-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0; agent clopen-preimage criterion; Morphisms Tag 01SD"
+   }
+  },
+  {
+   "text": "The field $A$ is totally disconnected. Indeed an ultrametric ball $B(a,r)$ is open and closed: if $y$ lies outside it, the ball $B(y,r)$ is disjoint from it by the strong triangle inequality. For distinct $a,b$, choose $0<r\\leq |a-b|$; this clopen ball separates them. A connected subset cannot meet both a clopen set and its complement, so has at most one point. Any continuous $f:|U_\\eta|\\to A$ is therefore constant on every connected component: its image on that component is connected, as a separation of the image would pull back to a separation of the component. Thus $f=\\bar f q_\\eta$ for a unique function $\\bar f:P_\\eta\\to A$. The quotient topology makes $\\bar f$ continuous, since $q_\\eta^{-1}(\\bar f^{-1}(O))=f^{-1}(O)$ is open for every open $O\\subset A$. The same factorization holds for continuous functions on $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, last paragraph; ultrametric total disconnectedness and quotient-topology argument expanded"
+   }
+  },
+  {
+   "text": "Define the extension of $f$ to be $E_U(f)=\\bar f h^{-1}q$. It is continuous and $E_U(f)i=\\bar f h^{-1}h q_\\eta=f$. Conversely, if $g:|U|\\to A$ is continuous, write $g=\\bar g q$ as in step 5. Its restriction factors as $\\bar g h q_\\eta$, so applying the displayed formula returns $\\bar g h h^{-1}q=g$. This proves bijectivity of the actual restriction map. Restriction preserves $0,1,+$ and multiplication pointwise; its inverse does too, since restriction is injective and the restrictions of $E_U(f+f\\prime)$ and $E_U(f)+E_U(f\\prime)$ are equal, and likewise for products and constants. For $U=\\varnothing$, both function rings have one element and the same formula is the unique map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, factorization through components; agent extension formula using step 4"
+   }
+  },
+  {
+   "text": "Let $v:V\\to U$ be any $X$-morphism of affine pro-etale objects and $v_\\eta:V_\\eta\\to U_\\eta$ its base change. The projection equations give $iv_\\eta=vi_V$. Thus $(g\\circ v)\\circ i_V=(g\\circ i)\\circ v_\\eta$ for every continuous $g$ on $U$. This proves the restriction square commutes. In particular $E_U(f)\\circ v$ and $E_V(f\\circ v_\\eta)$ have identical generic restrictions, so injectivity for $V$ proves they agree. For a continuous field homomorphism $a:A\\to A\\prime$, composition is continuous and $a\\circ(g\\circ i)=(a\\circ g)\\circ i$. This proves coefficient naturality of restriction. When both coefficient fields satisfy the statement, $a\\circ E_U^A(f)$ and $E_U^{A\\prime}(a\\circ f)$ have the same generic restriction and hence agree by uniqueness for $A\\prime$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Fibre-product projection equations; elementary composition and uniqueness using step 6"
+   }
+  },
+  {
+   "text": "Finally use the canonical realization [lem-weil-pbc-condensed-field-continuous-realization] with the totally disconnected normed field $A$ established in step 5. It identifies the ring sheaf $R_{A,T}$ from [sk-def-sfb-pulled-back-coefficients] with continuous functions on $T$ in precisely the topology supplied by [def-sfb-continuous-map-condensed-ring]. Thus the ring bijections above concern the requested continuous coefficients and the actual restriction maps. All arguments used the norm topology itself; no completion, compactness of the coefficient field, or passage to discrete coefficients occurred.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6, continuous-function realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "sk-lem-pe-weakly-etale-stability",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-weak-etale-integral-closure",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-sfb-spectral-clopen-component-homeomorphism",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-continuous-map-condensed-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12; generic extension argument supplied by Q05 using Stacks Tags 092W, 00EE, 030B and 0906"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +213,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, PrimeSpectrum.preimageHomeomorphFiber, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
    "date": "2026-10-21",
    "verdict": "no match: these results do not state this geometric continuous-coefficient input"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions to a nonarchimedean field on an affine weakly etale object over a normal integral scheme extend uniquely from the generic fibre",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, StandardEtalePair.hom_ext, AlgebraicGeometry.Scheme.SpecToEquivOfField, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.hom_ext_iff, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.exists_lift_of_germInjective",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction continuity, fibre homeomorphisms and normalization extensionality do not extend generic continuous functions."
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|functionField).*(ContinuousMap|[Cc]onnectedComponents)|[Cc]onnectedComponents.*(generic|functionField)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction continuity, fibre homeomorphisms and normalization extensionality do not extend generic continuous functions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"ContinuousMap\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction continuity, fibre homeomorphisms and normalization extensionality do not extend generic continuous functions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic restriction preserves continuous functions on weakly etale objects over an integral normal scheme",
+   "results": "8 hits: ContinuousMap.continuous_restrict, Continuous.restrict, ContinuousOn.mapsToRestrict, Pi.continuous_restrict₂_apply, Pi.continuous_restrict_apply, ContinuousOn.restrict, Continuous.restrictPreimage, ContinuousMap.restrict",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction continuity, fibre homeomorphisms and normalization extensionality do not extend generic continuous functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic fibre inclusion of an affine weakly etale scheme over a normal domain induces a homeomorphism on profinite connected component spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply, AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm, PrimeSpectrum.preimageHomeomorphFiber, AlgebraicGeometry.Scheme.Hom.fiberHomeo, StandardEtalePresentation.lift_bijective, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, AlgebraicGeometry.Scheme.Etale, StandardEtalePair.homEquiv_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction continuity, fibre homeomorphisms and normalization extensionality do not extend generic continuous functions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-normal-continuous-algcl-monodromy",
@@ -122,5 +273,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-normal-generic-continuous-sections",
+  "worker": "stage1",
+  "summary": "Kept all hypotheses and all clauses. Proved generic clopen extension by the existing weakly-etale integral-closure theorem, chartwise idempotents and open gluing; isolated the general spectral clopen-preimage criterion as one unsplit topology lemma. Derived continuous extension by an explicit component-space inverse formula and checked both naturalities, empty objects and arbitrary nonarchimedean norm topologies. No Lean attachment exists for this continuous assertion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; realizes the generic restriction input to normal-stratum continuous monodromy in det-thm-sf-ctf-stability-direct-images paragraph (3). The inherited created.item chain ends in a Lean module, so blueprint_refs ancestor returns null; the existing null ancestor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-of-local-normal",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-integral-closure",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Generic algebra, topology or affine-chart tool used for generic restriction; no replacement of a six-functor or finiteness step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-weak-etale-integral-closure",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-a36b02e3f",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-a36b02e3f (reviewer sub-agent of L); spot-checked: Read item steps 1-8, the new node and every cited statement. Sources checked: Stacks 092W (more-algebra.tex:30728) matches lem-weil-pbc-weak-etale-integral-closure exactly; BS Lemma 4.2.12 (continuous maps from qcqs U into a totally disconnected T factor through pi_0(U)); HRS Example 3.1; Stacks 0906. Statement unchanged against live; the item is not on the 10-19 drop list and has no repair note. The math is correct: flat implies torsion-free gives B -> B⊗k injective, and with 092W idempotents lift uniquely, so 00EE gives a clopen bijection on charts. Gluing over chart-basis overlaps makes no assumption that intersections of affines are affine. j is affine, so U_eta is affine and spectral. Ultrametric balls are clopen, so A is totally disconnected and E_U(f) = f-bar h^{-1} q is the inverse; both naturalities follow from injectivity. Normality is used exactly where the nodal-curve counterexample needs it. New node lem-sfb-spectral-clopen-component-homeomorphism (clopen-preimage bijection of spectral spaces implies pi_0(f) is a homeomorphism) is true by 0906 plus Stone duality, is not a clause of the item, and has no DAG or Mathlib duplicate; unsplit is correct. Batch-5 cite lem-trf-flat-module-torsionfree-domain is a dependency-free Mathlib leaf (Module.Flat.torsion_eq_bot), pure algebra outside the trace formula and Poincare duality: accepted. Declared tool uses (01HV, 030B, weakly-etale stability, 01I4, 092W, 00EE, affine permanence/qcqs/spectral, condensed realization) are generic and accepted. Maintainer note: blueprint from.node is null because it is inherited from the lem-sfb-admissible-direct-image ancestry, a base-node fault; the intended anchor det-thm-sf-ctf-stability-direct-images (3) is in from.place."
  }
 }
