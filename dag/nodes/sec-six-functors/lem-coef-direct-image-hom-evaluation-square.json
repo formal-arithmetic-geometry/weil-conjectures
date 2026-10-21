@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-direct-image-hom-evaluation-square",
+ "kind": "statement",
+ "title": "Ordinary direct-image and internal-Hom evaluation scalar square",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings and $f:Y\\to X$ a morphism of schemes. Work with constant ring sheaves on small etale sites, small in the module universe, and ordinary uncompleted unbounded derived module categories. Write $F_W=-\\otimes_A^LB$ for $W=X,Y$, $H_R=R\\mathcal Hom_R$ for $R=A,B$, and $\\alpha_{R,P}:f_R^*Rf_{*,R}P\\to P$ for the ordinary counit. Use the canonical scalar tensor and pullback identifications. Let $L,N\\in D(Y_{\\mathrm{et}},A)$, let $N'\\in D(Y_{\\mathrm{et}},B)$, and let $b:F_YN\\to N'$ be any morphism, not necessarily invertible. Put $Q=H_A(L,N)$ and $T=Rf_{*,A}Q$.\n\nDefine $u:F_YQ\\to H_B(F_YL,F_YN)$ as the tensor--Hom transpose of $F_Y(\\mathrm{ev}_A)$ under $F_Y(Q\\otimes_A^LL)\\cong F_YQ\\otimes_B^LF_YL$. Define $c_{f,Q}:F_XT\\to Rf_{*,B}F_YQ$ to be the $f_B^*\\dashv Rf_{*,B}$ adjunct of $F_Y(\\alpha_{A,Q})$ under $f_B^*F_X\\cong F_Yf_A^*$. Put\n$$w=H_B(1,b)\\circ u,\\qquad h=Rf_{*,B}(w)\\circ c_{f,Q}:F_XT\\longrightarrow Rf_{*,B}H_B(F_YL,N'),$$\n$$e_A=\\mathrm{ev}_A\\circ(\\alpha_{A,Q}\\otimes1):f_A^*T\\otimes_A^LL\\longrightarrow N,$$\nand let $\\iota:F_Y(f_A^*T\\otimes_A^LL)\\xrightarrow{\\sim}f_B^*F_XT\\otimes_B^LF_YL$ be the canonical comparison. The composite ordinary inverse-image and tensor--Hom transpose of $h$ is\n$$p_h=\\mathrm{ev}_{B,F_YL,N'}\\circ\\bigl((\\alpha_{B,H_B(F_YL,N')}\\circ f_B^*h)\\otimes1\\bigr).$$\nThen the following specified equality holds in $D(Y_{\\mathrm{et}},B)$:\n$$p_h=b\\circ F_Y(e_A)\\circ\\iota^{-1}:f_B^*F_XT\\otimes_B^LF_YL\\longrightarrow N'.$$\nNo flatness, finiteness of coefficients, properness of $f$, boundedness, constructibility, exceptional pullback, or invertibility of $u,c_{f,Q},b$ is assumed.\n\nConventions: [def-pc-scheme], [def-weil-size-convention], [def-weil-pbc-derived-categories], [def-kun-derived-tensor], [lem-pur-derived-change-of-rings], [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], [def-kun-projection-formula-map], [def-pur-derived-internal-hom], [lem-sfb-dc-hom-scalar-adjunction].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraph 4, transposing the comparisons; pairing-change proof Step 5 and the ordinary-counit/evaluation part of Step 6; formal extraction of the existing pairing-change proof, not a separately stated theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-kun-projection-formula-map",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "internalHom.*scalar|scalar.*internalHom|evaluation.*[Cc]oefficient|counit.*[Ss]calar",
+   "results": "Mathlib/NumberTheory/ZetaValues.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/Algebra/Polynomial/AlgebraMap.lean; Mathlib/Algebra/Category/AlgCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. The hits give ordinary scalar adjunctions, underived condensed Hom, or naturality of uncurrying in one category. No hit computes this two-coefficient geometric direct-image transpose. Read Closed/Basic.lean:170-205 and Closed/Functor.lean:42-85; expComparison_ev assumes Cartesian monoidal categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings internal Hom evaluation is compatible with the counit of pullback direct image",
+   "results": "CategoryTheory.ihom.ihom_adjunction_counit; CategoryTheory.exp.ev; CategoryTheory.ihom.ev; CategoryTheory.Functor.closedCounit_app_app; CategoryTheory.Pi.closedCounit; CategoryTheory.Monoidal.ComonFunctorCategoryEquivalence.functorObjObj_comon_counit; ModuleCat.RestrictionCoextensionAdj.counit'_app; CoalgHomClass.counit_comp_apply. The hits give ordinary scalar adjunctions, underived condensed Hom, or naturality of uncurrying in one category. No hit computes this two-coefficient geometric direct-image transpose. Read Closed/Basic.lean:170-205 and Closed/Functor.lean:42-85; expComparison_ev assumes Cartesian monoidal categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"uncurry\"",
+   "results": "CategoryTheory.MonoidalClosed.uncurry'; CategoryTheory.MonoidalClosed.uncurry'_curry'; CategoryTheory.MonoidalClosed.uncurry; CategoryTheory.MonoidalClosed.uncurry_injective; CategoryTheory.MonoidalClosed.uncurry_curry; CategoryTheory.MonoidalClosed.curry_uncurry; CategoryTheory.MonoidalClosed.curry'_uncurry'; CategoryTheory.MonoidalClosed.uncurry_id_eq_ev. The hits give ordinary scalar adjunctions, underived condensed Hom, or naturality of uncurrying in one category. No hit computes this two-coefficient geometric direct-image transpose. Read Closed/Basic.lean:170-205 and Closed/Functor.lean:42-85; expComparison_ev assumes Cartesian monoidal categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit naturality and change of rings transport the restriction evaluation pairing under tensor Hom adjunction",
+   "results": "ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.RestrictionCoextensionAdj.unit'_app; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply. The hits give ordinary scalar adjunctions, underived condensed Hom, or naturality of uncurrying in one category. No hit computes this two-coefficient geometric direct-image transpose. Read Closed/Basic.lean:170-205 and Closed/Functor.lean:42-85; expComparison_ev assumes Cartesian monoidal categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary direct image scalar extension comparison preserves the evaluation transpose of a derived internal Hom morphism",
+   "results": "LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_apply; LightCondensed.ihomPoints_symm_comp; LightCondensed.ihomPoints_symm_apply; ModuleCat.monoidalClosed_pre_app; LightCondensed.ihomPoints; CategoryTheory.expComparison_ev; CategoryTheory.coev_expComparison. The hits give ordinary scalar adjunctions, underived condensed Hom, or naturality of uncurrying in one category. No hit computes this two-coefficient geometric direct-image transpose. Read Closed/Basic.lean:170-205 and Closed/Functor.lean:42-85; expComparison_ev assumes Cartesian monoidal categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison_ev|uncurry_natural_left|uncurry_natural_right|uncurry_injective",
+   "results": "Mathlib/CategoryTheory/Sites/Monoidal.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean. The hits give ordinary scalar adjunctions, underived condensed Hom, or naturality of uncurrying in one category. No hit computes this two-coefficient geometric direct-image transpose. Read Closed/Basic.lean:170-205 and Closed/Functor.lean:42-85; expComparison_ev assumes Cartesian monoidal categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-internal-adjunction-pairing-change",
+  "date": "2026-10-21",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 4, transposing the comparisons; pairing-change proof Step 5 and the ordinary-counit/evaluation part of Step 6",
+   "via": [
+    "lem-coef-internal-adjunction-pairing-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

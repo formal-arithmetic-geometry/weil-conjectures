@@ -27,110 +27,61 @@
  ],
  "proof": [
   {
-   "text": "Notation: for $T\\in D(X_{\\mathrm{et}},A)$ and $L$ as in the statement, $\\Pi_A(T,L):T\\otimes_A^Ls_{!,A}L\\xrightarrow{\\sim}s_{!,A}(s^*T\\otimes_A^LL)$ is the proper projection $T\\otimes g_*j_!L\\to g_*(g^*T\\otimes j_!L)$ followed by $g_*(\\gamma^{-1}_{L,g^*T})$, as in the statement; similarly $\\Pi_B$. Open square: for $T'\\in D(Z_{\\mathrm{et}},A)$ the two maps $F_Zj_!(L\\otimes j^*T')\\to j_!F_SL\\otimes_BF_ZT'$ given by $\\gamma_B\\circ j_!(\\text{tensor identification})\\circ q_{j,L\\otimes j^*T'}$ and $(q_{j,L}\\otimes1)\\circ F_Z(\\gamma_A)$ are equal. Indeed $q_j$ is invertible, so it suffices to compare them after precomposing with $q^{-1}$; both are then maps out of $j_!(\\cdot)$, hence determined by their $j_!\\dashv j^*$ adjuncts on $S$, and both adjuncts are the canonical restriction/tensor identification, because $\\gamma$ is the adjunct of that identification and $q_{j,P}$ restricts to the identity. The associativity identifications are the canonical ones of [lem-coef-etale-open-tensor].",
+   "text": "Put $T=Rs_{*,A}Q$ and $e_A=\\mathrm{ev}_A\\circ(\\alpha_A\\otimes1)$. The immersion $s$ is separated of finite type between the Noetherian schemes $S$ and $X$ (finite type over $k$), $s=gj$ is a compactification with $g$ proper, and $A\\to B$ is a homomorphism of finite rings. Apply [lem-pur-etale-compact-scalar-coherence] to $f=s$ with this compactification, $A'=B$, $K=T$ and $M=L$. Its $q_f$ is the counit-adjunct proper scalar map at $j_{!,A}L$, which is $c_{g,j_!L}$, followed by $Rg_{*,B}$ of the open scalar map, which restricts to the identity on $S$ and is therefore $q_{j,L}$; so $q_f=q_s$. Its $P_{f,R}$ is the proper projection on $j_!L$ followed by the open tensor identification, i.e. $\\Pi_R$ of the statement and of [lem-asd-internal-adjunction-evaluation]. With the scalar tensor comparison $\\mu$ on the source and $\\iota:F_S(s^*T\\otimes L)\\cong s^*F_XT\\otimes F_SL$ on the target this reads $\\Pi_B(F_XT,F_SL)(1\\otimes q_{s,L})\\mu=s_{!,B}(\\iota)q_{s,s^*T\\otimes L}F_X\\Pi_A$.",
    "uses": [
-    "lem-coef-etale-open-tensor"
+    "lem-pur-etale-compact-scalar-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
+    "place": "Proof paragraph 4, \"Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite\"; extracted returned step 8"
    }
   },
   {
-   "text": "Proper square for $g$, applied to the pushed object $P=j_!L$ and $T\\in D(X_{\\mathrm{et}},A)$ (not to $Q$, which lives on $S$). Let $c_{g,P}:F_Xg_{*,A}P\\to g_{*,B}F_ZP$ be the closed direct-image comparison that is the first factor of $q_{s,L}=g_{*,B}(q_{j,L})\\circ c_{g,j_!L}$ [lem-coef-etale-locally-closed-shriek]; its $g^*\\dashv g_{*}$ transpose over $B$ is $F_Z(\\epsilon^{g}_{A,P})$ after $g^*F_X\\cong F_Zg^*$ (definition in [lem-coef-finite-direct-image] and [lem-coef-etale-locally-closed-shriek]). The proper projection $\\mathrm{pr}(T,P):T\\otimes g_*P\\to g_*(g^*T\\otimes P)$ has transpose $1\\otimes\\epsilon^g_P$. Compare $c_{g,g^*T\\otimes P}\\circ F_X\\mathrm{pr}_A(T,P)$ and $\\mathrm{pr}_B(F_XT,F_ZP)\\circ(1\\otimes c_{g,P})$ through their $B$-transposes $g^*F_X(T\\otimes g_*P)\\to F_Z(g^*T\\otimes P)$: the first is $F_Z(\\epsilon^g)\\circ g^*F_X\\mathrm{pr}_A=F_Z(1\\otimes\\epsilon^g_P)$ by naturality of the counit transpose; the second is $(1\\otimes\\epsilon^g_{B})\\circ(1\\otimes g^*c_{g,P})=1\\otimes F_Z(\\epsilon^g_P)$. They agree under the monoidal identification $g^*F_X(T\\otimes g_*P)\\cong g^*F_XT\\otimes F_Zg^*g_*P$, so the proper square commutes.",
+   "text": "Apply [lem-coef-direct-image-hom-evaluation-square] with $f=s$, $N=s_A^!M$, $N'=s_B^!F_XM$ and the given $b=b_{s,M}$. For $h=Rs_{*,B}(H_B(1,b)u)c_{s,Q}$ it gives $p_h=bF_S(e_A)\\iota^{-1}$. By [lem-asd-internal-adjunction-evaluation] (whose case $h=1$ shows that $I_B$ is its internal adjunction), the transpose of $I_Bh$ is $\\epsilon_{s,B}s_{!,B}(p_h)\\Pi_B(F_XT,F_SL)$. Precomposing the first Hom argument with $q_{s,L}$ makes the transpose of the required left side equal to this pairing precomposed with $1\\otimes q_{s,L}$.",
    "uses": [
-    "lem-coef-finite-direct-image",
-    "lem-coef-etale-locally-closed-shriek"
+    "lem-coef-direct-image-hom-evaluation-square",
+    "lem-asd-internal-adjunction-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
+    "place": "Proof paragraph 4, \"Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite\"; extracted returned step 8"
    }
   },
   {
-   "text": "Paste Step 1 (with $T'=g^*T$), applied under $g_{*,B}$, with Step 2, using naturality of $c_{g,\\cdot}$ to move $F_Xg_*(\\gamma_A^{-1})$ past it [lem-coef-finite-direct-image]. Since $q_{s,L}=g_{*,B}(q_{j,L})\\circ c_{g,j_!L}$ [lem-coef-etale-locally-closed-shriek], this gives, for every $T\\in D(X_{\\mathrm{et}},A)$, the compact-support projection square $$\\Pi_B(F_XT,F_SL)\\circ(1\\otimes q_{s,L})=s_{!,B}(\\iota)\\circ q_{s,s^*T\\otimes L}\\circ F_X\\Pi_A(T,L)$$ as maps $F_X(T\\otimes s_{!,A}L)\\to s_{!,B}(s^*F_XT\\otimes F_SL)$, where $\\iota:F_S(s^*T\\otimes L)\\cong s^*F_XT\\otimes F_SL$ is the canonical restriction/tensor identification and $F_X(T\\otimes s_!L)\\cong F_XT\\otimes F_Xs_!L$ is used on the source. No counit $\\alpha$ and no $c_{s,Q}$ enter this square; they are treated in Step 6.",
+   "text": "Substitute Step 1 and cancel $s_{!,B}(\\iota^{-1})s_{!,B}(\\iota)$. Naturality of $q_s=q_f$ on the entire derived category, supplied by [lem-pur-etale-compact-scalar-coherence], gives $s_{!,B}F_S(e_A)q_{s,s^*T\\otimes L}=q_{s,N}F_Xs_{!,A}(e_A)$. The assumed equation $\\epsilon_{s,B}s_{!,B}(b)q_{s,N}=F_X\\epsilon_{s,A}$ therefore rewrites the left transpose as $F_X(\\epsilon_{s,A}s_{!,A}(e_A)\\Pi_A(T,L))$. This is coefficient change of the defining $A$ pairing. No finite-Tor condition on $s^*T\\otimes L$ is needed for this naturality.",
    "uses": [
-    "lem-coef-etale-open-tensor",
-    "lem-coef-finite-direct-image",
-    "lem-coef-etale-locally-closed-shriek"
+    "lem-pur-etale-compact-scalar-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
+    "place": "Proof paragraph 4, \"Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite\"; extracted returned step 8"
    }
   },
   {
-   "text": "The final exceptional-counit square is the displayed hypothesis on b_{s,M}: epsilon_{s,B} composed with s_{!,B}(b_{s,M}) and q_{s,N} equals F_X(epsilon_{s,A}). Therefore, once the preceding projection square has been applied, the last counit in the B pairing is exactly the coefficient change of the last counit in the A pairing. No pro-etale closed-shriek result is needed here, since this identity is part of the ordinary-etale statement being proved.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
-   }
-  },
-  {
-   "text": "Let ev_u:F_SQ tensor_B F_SL to F_SN be the transpose of u. By the defining transpose condition for u, ev_u is the coefficient change of ev_A under the canonical scalar-extension and tensor-associativity maps. Thus the middle evaluation arrow in the B pairing, after the coefficient comparisons, is exactly F_S of the middle evaluation arrow in the A pairing.",
+   "text": "By the defining evaluation transpose of $v$, the transpose of $v_{s_{!,A}L,M}F_XI_A$ is $F_X(\\mathrm{ev}_A\\circ(I_A\\otimes1))$, with the scalar tensor comparison on its source. Naturality of the tensor--Hom Hom-bijections [lem-sfb-dc-hom-scalar-adjunction] identifies this with coefficient change of the transpose of $I_A$, namely the $A$ pairing in Step 3. The same bijection is injective, so equality of these two transposes proves the displayed equality. No inverse of $v$ is used.",
    "uses": [
     "lem-sfb-dc-hom-scalar-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
-   }
-  },
-  {
-   "text": "Put $h=Rs_{*,B}(w)\\circ c_{s,Q}$ with $w=H_B(1,b_{s,M})\\circ u$. Since $I_B$ is the internal adjunction whose transpose is the stated pairing, [lem-asd-internal-adjunction-evaluation] (for $s=gj$, finite ring $B$) gives the transpose of $I_B\\circ h$ as $\\epsilon_{s,B}\\circ s_{!,B}(p)\\circ\\Pi_B(F_XRs_{*,A}Q,F_SL)$, where $p:s^*F_XRs_{*,A}Q\\otimes F_SL\\to s_B^!F_XM$ is the transpose of $h$, i.e. $p=\\mathrm{ev}_B\\circ((w\\circ\\alpha_B\\circ s^*c_{s,Q})\\otimes1)$. By the definition of $c_{s,Q}$ [lem-coef-finite-direct-image], $\\alpha_B\\circ s^*c_{s,Q}=F_S(\\alpha_A)$ after $s^*F_X\\cong F_Ss^*$. By Step 5 and naturality of evaluation in the target, $\\mathrm{ev}_B\\circ(w\\otimes1)=b_{s,M}\\circ\\mathrm{ev}_u=b_{s,M}\\circ F_S(\\mathrm{ev}_A)$. Hence $p=b_{s,M}\\circ F_S(e_A)\\circ\\iota^{-1}$ with $e_A=\\mathrm{ev}_A\\circ(\\alpha_A\\otimes1)$. The transpose of the left side is this map precomposed with $1\\otimes q_{s,L}$. Step 3 with $T=Rs_{*,A}Q$ rewrites it as $\\epsilon_{s,B}\\circ s_{!,B}(b_{s,M})\\circ s_{!,B}F_S(e_A)\\circ q_{s,s^*T\\otimes L}\\circ F_X\\Pi_A$; naturality of $q_s$ [lem-coef-etale-locally-closed-shriek] gives $s_{!,B}F_S(e_A)\\circ q=q_{s,N}\\circ F_Xs_{!,A}(e_A)$, and Step 4 turns $\\epsilon_{s,B}\\circ s_{!,B}(b_{s,M})\\circ q_{s,N}$ into $F_X\\epsilon_{s,A}$. So the transpose is $F_X(\\epsilon_{s,A}\\circ s_{!,A}(e_A)\\circ\\Pi_A)$, i.e. $F_X$ of the $A$ pairing defining $I_A$.",
-   "uses": [
-    "lem-asd-internal-adjunction-evaluation",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-coef-finite-direct-image",
-    "lem-coef-etale-locally-closed-shriek"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
-   }
-  },
-  {
-   "text": "Transpose of the right side: by the evaluation normalization of $v$ (its $B$-transpose is $F_X(\\mathrm{ev}_A)$ under $F_X(H\\otimes P)\\cong F_XH\\otimes F_XP$, as in [lem-sfb-dc-hom-scalar-adjunction]) and naturality of the tensor--Hom bijection, the transpose of $v_{s_{!,A}L,M}\\circ F_XI_A$ is $F_X(\\mathrm{ev}_A\\circ(I_A\\otimes1))=F_X$ of the transpose of $I_A$, which by the definition of $I_A$ (equivalently [lem-asd-internal-adjunction-evaluation] with $h=1$) is $F_X(\\epsilon_{s,A}\\circ s_{!,A}(e_A)\\circ\\Pi_A)$. This is the map obtained in Step 6. No inverse of $v$ is used.",
-   "uses": [
-    "lem-asd-internal-adjunction-evaluation",
-    "lem-sfb-dc-hom-scalar-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
-   }
-  },
-  {
-   "text": "The representing Hom-bijections for the ordinary tensor–Hom adjunction are bijective, so two maps are equal when their transposes are equal. Applying this to the common transpose computed in Steps 6 and 7 proves the displayed equality. Only canonical associativity, restriction, and scalar-extension identifications were used.",
-   "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits"
+    "place": "Proof paragraph 4, \"Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite\"; extracted returned step 8"
    }
   }
  ],
  "proof_deps": [
   "lem-asd-internal-adjunction-evaluation",
-  "lem-coef-etale-locally-closed-shriek",
-  "lem-coef-etale-open-tensor",
-  "lem-coef-finite-direct-image",
+  "lem-coef-direct-image-hom-evaluation-square",
+  "lem-pur-etale-compact-scalar-coherence",
   "lem-sfb-dc-hom-scalar-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-  "place": "Proof paragraph 4, Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite"
+  "place": "Proof paragraph 4, \"Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite\"; extracted returned step 8; formal re-split of the reviewed pairing calculation"
  },
  "mathlib_searches": [
   {
@@ -196,33 +147,38 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-coef-internal-adjunction-pairing-change",
   "worker": "stage1",
-  "summary": "Proof of the pairing-change equality by transposition. Steps 1-3 prove the compact-support projection square for the actual projection (closed proper projection of g on j_!L, then the inverse open tensor map), with the closed comparison c_{g,j_!L} that is the first factor of q_{s,L}. Step 4 is the assumed exceptional-counit identity, Step 5 the evaluation normalization of u. Step 6 computes the transpose of the left side, handling the c_{s,Q}/counit square and the naturality of q_s. Step 7 computes the transpose of the right side, and Step 8 concludes from the Hom-bijection. No closed-shriek pro-etale theorem is used. Maintainer reader (Q111) corrected steps 2, 3, 6 and 7: step 2 had used c_{g,Q} instead of c_{g,j_!L}, and the counit square for c_{s,Q} and the naturality of q_s were implicit.",
-  "blueprint": "Realizes paragraph 4 of thm-coef-finite-hom: comparisons are defined by evaluations and adjunction counits, and equality follows after transposing.",
+  "summary": "Re-split on the human instruction of 2026-10-21. Extracted the statement-only ordinary-direct-image/internal-Hom evaluation square (old Step 5 and the counit/evaluation half of Step 6); old Steps 1-3 (open square, closed square, pasting, naturality of q_s) are carried by the existing reviewed lem-pur-etale-compact-scalar-coherence (reviewer FIX: the delivered projection node duplicated it for the finite-ring instance used). The parent retains the exceptional-counit substitution, evaluation normalization of v, and injectivity of transposition; its statement and all Lean records are unchanged. The report preserves every old proof step and gives the argument allocation.",
+  "blueprint": "Paragraph 4 of thm-coef-finite-hom, same evaluations and adjunction counits, then transposing identifies their composite; old Steps 1-3 via lem-pur-etale-compact-scalar-coherence, Step 5 and inner part of Step 6 in the evaluation node, old Steps 4 and remaining 6-8 in the parent.",
   "tool_uses": [
    {
     "node": "lem-sfb-dc-hom-scalar-adjunction",
-    "why": "Generic tensor-Hom transpose and evaluation normalization of scalar change of internal Hom (Steps 5-8); no node of sk-prop-sf-biduality-general states it. Accepted by the maintainer reader."
+    "why": "Generic tensor-Hom Hom-bijections and their evaluation normalization in the final assembly; already approved on the previous split."
    },
    {
     "node": "lem-asd-internal-adjunction-evaluation",
-    "why": "Generic evaluation formula for the transpose of the etale internal adjunction (Steps 6-7); no node of this unit states it. Accepted by the maintainer reader, as on lem-coef-finite-mapping-adjunction."
+    "why": "Generic formula for the transpose of the canonical internal adjunction, for the specified closed/open compactification; already approved on the previous split."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "Generic compact-support scalar projection square and naturality of the compact-support scalar map on the entire derived category for finite rings, applied to s=gj; no node of this unit states it on all derived inputs (lem-coef-etale-locally-closed-shriek only on D^b_ctf)."
    }
   ]
  },
  "tool_uses": [
   "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-asd-internal-adjunction-evaluation"
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-pur-etale-compact-scalar-coherence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q111-5fe85b61c",
-  "group": "Q111",
+  "reviewer": "NT-cc-Q65-640628966",
+  "group": "Q65",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-5fe85b61c (reviewer sub-agent of L); spot-checked: Read in full: the item, the source paragraph 4 of thm-coef-finite-hom, the four cited nodes, lem-coef-etale-locally-closed-shriek (which defines q_s and b_s), lem-amb-proper-coproducts-projection, the parent's steps 7-8 and the unit route. The statement is true and well-typed in the ordinary étale categories with A=O_E/ϖ^n → B=O_E/ϖ^m, and is unchanged. Edge cases checked: m=n, S=Z, L=0. No new nodes and no duplicates. Three repairable faults, corrected in fixes/dag/nodes/sec-six-functors/lem-coef-internal-adjunction-pairing-change.json. (1) E4: step 2 used c_{g,Q}, but Q lives on S. The proper projection pushes j_!L, so the comparison is c_{g,j_!L}, the first factor of q_{s,L}. I rewrote the step with an explicit B-transpose calculation of both routes. (2) C/E5: the counit square α_B∘s^*c_{s,Q}=F_S(α_A) and the naturality of q_s were hidden inside 'projection' in steps 3 and 6. Step 3 now states the pure projection square for every T. Step 6 now computes the transpose p of h through lem-asd-internal-adjunction-evaluation, uses the definition of c (lem-coef-finite-direct-image) and the naturality of q_s (lem-coef-etale-locally-closed-shriek, same unit, reviewed, no cycle), then the b-hypothesis. Step 7 is made explicit. (3) The split_report summary was stale and the tool_uses were undeclared. Accepted tool_uses: lem-sfb-dc-hom-scalar-adjunction and lem-asd-internal-adjunction-evaluation, as generic transpose and evaluation tools already accepted on sibling nodes of this unit. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-640628966 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the base proof (the live node: 8 steps, 6039 characters), the human re-split note of 2026-10-21, the source and every cited statement. Source: thm-coef-finite-hom proof paragraph 4, 'Every comparison used is defined by the same evaluations and adjunction counits; transposing identifies their composite'. The item's statement, stmt_deps and blueprint fields are unchanged, and every old argument has a carrier after the fix.\n\nC5, dropped node: the new lem-coef-locally-closed-projection-scalar-square (old steps 1-3) is true, but the parent uses it only for finite rings O_E/ϖ^n→O_E/ϖ^m and s=gj between Noetherian finite-type k-schemes. That instance is exactly the reviewed lem-pur-etale-compact-scalar-coherence:\n- its q_f is the counit-adjunct proper map at j_! (lem-asd-proper-finite-coefficient-extension, which is c_g) followed by the open scalar map, which restricts to the identity and so is q_j; hence q_f=q_s;\n- its P_f is the same Π as in lem-asd-internal-adjunction-evaluation;\n- it states the projection square after μ and ι, and that q_f is natural on the entire derived category.\nA DFS over stmt_deps and proof_deps from that node and from lem-asd-proper-finite-coefficient-extension does not reach the item, so there is no cycle. The item was the dropped node's only citer.\n\nChanges in fixes/dag/nodes/sec-six-functors/lem-coef-internal-adjunction-pairing-change.json:\n- step 1 now cites lem-pur-etale-compact-scalar-coherence and writes out q_f=q_s and P=Π, with its hypotheses checked;\n- step 3 takes naturality of q_s on all inputs from that node, which is needed because s^*T⊗L need not be ctf;\n- step 2 adds that the h=1 case identifies I_B with the asd internal adjunction;\n- proof_deps and the split_report summary, blueprint and tool_uses are updated. The new tool use is lem-pur-etale-compact-scalar-coherence (off-unit sk-prop-an, a generic coherence black box). The earlier tool uses lem-sfb-dc-hom-scalar-adjunction and lem-asd-internal-adjunction-evaluation are kept.\nThe proof is now 2527 characters, within the 3000 limit.\n\nKept node: lem-coef-direct-image-hom-evaluation-square (old step 5 and the counit/evaluation half of step 6) is true. Derivation: α_B f^*h = w α_B f^*c, then α_B f^*c = F_Y(α_A)θ, then ev(H(1,b)u⊗1) = b F_Y(ev_A)μ^{-1}, and naturality of μ gives p_h = b F_Y(e_A)ι^{-1}. Tested on f=id, b=0, N'=0 and L=0. It is self-contained and statement-only, with searches of all three kinds and no duplicate among about 40 evaluation/counit/scalar statements in the DAG.\n\nParent steps 2-4: types checked. b_{s,M}: F_S N → s_B^!F_XM. The hypotheses of the asd node hold (B finite, compactification (j,g), Noetherian schemes). The v-transpose and injectivity steps are checked, and no inverse of v is used. No SGA source is used.\n\nMaintainer note: after the drop the delivery adds 1 new node, not the 2 the note asks for. Old steps 1-3 are carried by the existing reviewed node, not folded into the parent (as in the Q10 and Q21 drops). Q37 and Q57 were RETURNed in the same situation, so whether one node meets the note is your call.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.InternalAdjunctionPairingChange",
