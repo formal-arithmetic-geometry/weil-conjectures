@@ -29,6 +29,69 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace DerivedCategory
 
+private theorem projection_isIso
+    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    (T : Triangle (DerivedCategory A)) (hT : T ∈ distTriang (DerivedCategory A))
+    {B P : DerivedCategory A} (β : T.obj₂ ≅ B) [Epi T.mor₂]
+    (j : P ⟶ B) (π : B ⟶ P)
+    (hj : (j ≫ β.inv) ≫ T.mor₂ = 0) (hjπ : j ≫ π = 𝟙 P)
+    (hf : T.mor₁ ≫ β.hom = (T.mor₁ ≫ β.hom ≫ π) ≫ j) :
+    IsIso (T.mor₁ ≫ β.hom ≫ π) := by
+  have : Mono T.mor₁ := T.mono₁ hT (T.mor₃_eq_zero_of_epi₂ hT inferInstance)
+  obtain ⟨k, hk⟩ := T.coyoneda_exact₂ hT (j ≫ β.inv) hj
+  have hk' : k ≫ T.mor₁ ≫ β.hom = j := by
+    rw [← Category.assoc, ← hk]
+    simp
+  refine ⟨⟨k, ?_, ?_⟩⟩
+  · apply (cancel_mono (T.mor₁ ≫ β.hom)).1
+    simpa only [Category.assoc, hk', Category.id_comp] using hf.symm
+  · simpa only [Category.assoc, hjπ] using congrArg (fun a ↦ a ≫ π) hk'
+
+private theorem graph_image_kernel_fst
+    {A : Type u} [Category.{v} A] [Abelian A] {X Y : A} (h : X ⟶ Y) :
+    imageSubobject (biprod.lift (𝟙 X) h) =
+      kernelSubobject (biprod.desc h (-𝟙 Y)) := by
+  let j : X ⟶ X ⊞ Y := biprod.lift (𝟙 X) h
+  let d : X ⊞ Y ⟶ Y := biprod.desc h (-𝟙 Y)
+  have : IsSplitMono j := IsSplitMono.mk' ⟨biprod.fst, by simp [j]⟩
+  change imageSubobject j = kernelSubobject d
+  rw [imageSubobject_mono]
+  apply le_antisymm
+  · exact Subobject.mk_le_of_comm
+      (factorThruKernelSubobject d j (by simp [j, d, biprod.lift_desc]))
+      (factorThruKernelSubobject_comp_arrow _ _ _)
+  · let k := (kernelSubobject d).arrow
+    have hk : k ≫ biprod.snd = k ≫ biprod.fst ≫ h := by
+      apply Eq.symm
+      apply sub_eq_zero.mp
+      simpa [d, biprod.desc_eq, Preadditive.comp_add, Preadditive.comp_neg,
+        Category.assoc, sub_eq_add_neg] using kernelSubobject_arrow_comp d
+    exact Subobject.le_mk_of_comm (k ≫ biprod.fst) (by
+      change (k ≫ biprod.fst) ≫ j = k
+      ext <;> simp [j, Category.assoc, hk])
+
+private theorem graph_image_kernel_snd
+    {A : Type u} [Category.{v} A] [Abelian A] {X Y : A} (r : Y ⟶ X) :
+    imageSubobject (biprod.lift r (𝟙 Y)) =
+      kernelSubobject (biprod.desc (𝟙 X) (-r)) := by
+  let j : Y ⟶ X ⊞ Y := biprod.lift r (𝟙 Y)
+  let d : X ⊞ Y ⟶ X := biprod.desc (𝟙 X) (-r)
+  have : IsSplitMono j := IsSplitMono.mk' ⟨biprod.snd, by simp [j]⟩
+  change imageSubobject j = kernelSubobject d
+  rw [imageSubobject_mono]
+  apply le_antisymm
+  · exact Subobject.mk_le_of_comm
+      (factorThruKernelSubobject d j (by simp [j, d, biprod.lift_desc]))
+      (factorThruKernelSubobject_comp_arrow _ _ _)
+  · let k := (kernelSubobject d).arrow
+    have hk : k ≫ biprod.fst = k ≫ biprod.snd ≫ r := by
+      apply sub_eq_zero.mp
+      simpa [d, biprod.desc_eq, Preadditive.comp_add, Preadditive.comp_neg,
+        Category.assoc, sub_eq_add_neg] using kernelSubobject_arrow_comp d
+    exact Subobject.le_mk_of_comm (k ≫ biprod.snd) (by
+      change (k ≫ biprod.snd) ≫ j = k
+      ext <;> simp [j, Category.assoc, hk])
+
 /-- Projections from the fibre of either signed split difference map, including
 specified identifications of the middle and final vertices.
 
@@ -107,6 +170,81 @@ theorem split_fibre_projections
             imageSubobject
               (biprod.lift ((homologyFunctor A n).map r)
                 (𝟙 ((homologyFunctor A n).obj Y)))) := by
-  sorry
+  constructor
+  · intro h γ hd
+    have : IsSplitEpi T.mor₂ := IsSplitEpi.mk' {
+      section_ := γ.hom ≫ (-biprod.inr) ≫ β.inv
+      id := by
+        apply (cancel_mono γ.hom).1
+        simp [Category.assoc, hd] }
+    have hz : (T.mor₁ ≫ β.hom) ≫ biprod.desc h (-𝟙 Y) = 0 := by
+      rw [Category.assoc, ← hd, ← Category.assoc,
+        comp_distTriang_mor_zero₁₂ T hT, zero_comp]
+    have hpq : T.mor₁ ≫ β.hom ≫ biprod.snd =
+        (T.mor₁ ≫ β.hom ≫ biprod.fst) ≫ h := by
+      apply Eq.symm
+      apply sub_eq_zero.mp
+      simpa [biprod.desc_eq, Preadditive.comp_add, Preadditive.comp_neg,
+        Category.assoc, sub_eq_add_neg] using hz
+    have hp : IsIso (T.mor₁ ≫ β.hom ≫ biprod.fst) :=
+      projection_isIso T hT β (biprod.lift (𝟙 X) h) biprod.fst
+        (by
+          apply (cancel_mono γ.hom).1
+          simp [Category.assoc, hd, biprod.lift_desc])
+        (by simp)
+        (by ext <;> simp [Category.assoc, hpq])
+    refine ⟨hp, hpq, ?_⟩
+    intro n
+    let F := homologyFunctor A n
+    have hm : Mono (F.map T.mor₁) := by
+      exact mono_of_mono_fac (F.map_comp T.mor₁ (β.hom ≫ biprod.fst)).symm
+    have hg : F.map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison F X Y =
+        F.map (T.mor₁ ≫ β.hom ≫ biprod.fst) ≫ biprod.lift (𝟙 (F.obj X)) (F.map h) := by
+      ext
+      · simp [Functor.map_comp, Category.assoc]
+      · simp only [Category.assoc, Functor.biprodComparison_snd, biprod.lift_snd]
+        rw [← F.map_comp, Category.assoc, hpq, F.map_comp]
+    have hi : imageSubobject
+          (F.map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison F X Y) =
+        imageSubobject (biprod.lift (𝟙 (F.obj X)) (F.map h)) := by
+      rw [hg, imageSubobject_iso_comp]
+    exact ⟨inferInstance, hm, hi.trans (graph_image_kernel_fst (F.map h)), hi⟩
+  · intro r γ hd
+    have : IsSplitEpi T.mor₂ := IsSplitEpi.mk' {
+      section_ := γ.hom ≫ biprod.inl ≫ β.inv
+      id := by
+        apply (cancel_mono γ.hom).1
+        simp [Category.assoc, hd] }
+    have hz : (T.mor₁ ≫ β.hom) ≫ biprod.desc (𝟙 X) (-r) = 0 := by
+      rw [Category.assoc, ← hd, ← Category.assoc,
+        comp_distTriang_mor_zero₁₂ T hT, zero_comp]
+    have hpq : T.mor₁ ≫ β.hom ≫ biprod.fst =
+        (T.mor₁ ≫ β.hom ≫ biprod.snd) ≫ r := by
+      apply sub_eq_zero.mp
+      simpa [biprod.desc_eq, Preadditive.comp_add, Preadditive.comp_neg,
+        Category.assoc, sub_eq_add_neg] using hz
+    have hq : IsIso (T.mor₁ ≫ β.hom ≫ biprod.snd) :=
+      projection_isIso T hT β (biprod.lift r (𝟙 Y)) biprod.snd
+        (by
+          apply (cancel_mono γ.hom).1
+          simp [Category.assoc, hd, biprod.lift_desc])
+        (by simp)
+        (by ext <;> simp [Category.assoc, hpq])
+    refine ⟨hq, hpq, ?_⟩
+    intro n
+    let F := homologyFunctor A n
+    have hm : Mono (F.map T.mor₁) := by
+      exact mono_of_mono_fac (F.map_comp T.mor₁ (β.hom ≫ biprod.snd)).symm
+    have hg : F.map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison F X Y =
+        F.map (T.mor₁ ≫ β.hom ≫ biprod.snd) ≫ biprod.lift (F.map r) (𝟙 (F.obj Y)) := by
+      ext
+      · simp only [Category.assoc, Functor.biprodComparison_fst, biprod.lift_fst]
+        rw [← F.map_comp, Category.assoc, hpq, F.map_comp]
+      · simp [Functor.map_comp, Category.assoc]
+    have hi : imageSubobject
+          (F.map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison F X Y) =
+        imageSubobject (biprod.lift (F.map r) (𝟙 (F.obj Y))) := by
+      rw [hg, imageSubobject_iso_comp]
+    exact ⟨inferInstance, hm, hi.trans (graph_image_kernel_snd (F.map r)), hi⟩
 
 end DerivedCategory

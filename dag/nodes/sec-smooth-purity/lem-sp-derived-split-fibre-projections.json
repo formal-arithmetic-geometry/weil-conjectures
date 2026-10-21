@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Use the cohomology construction in [def-weil-abstract-derived-category]. Cohomology is additive: differentials on a direct sum are diagonal, so cycles and boundaries, and then their quotient, are the corresponding direct sums. Thus the canonical identification $H^n(X\\oplus Y)=H^n(X)\\oplus H^n(Y)$ carries $H^n(f)$ to $(H^n(p),H^n(q))$ and $H^n(d)$ to $(H^n(h),-1)$ or $(1,-H^n(r))$, respectively. Functoriality and additivity preserve each biproduct identity used below.",
+   "text": "For d=(h,-1), conjugate the explicit section (0,-1) by the specified vertex isomorphisms: s=γ.hom ≫ (-biprod.inr) ≫ β.inv. For d=(1,-r), use s=γ.hom ≫ biprod.inl ≫ β.inv. In each case the arrow-identification hypothesis proves s ≫ T.mor₂ = 1. Hence the second triangle arrow is split epic and epic. Mathlib Triangle.mor₃_eq_zero_of_epi₂ gives T.mor₃=0, and Triangle.mono₁ makes T.mor₁ monic.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -25,38 +25,8 @@
    }
   },
   {
-   "text": "In the first case $s:Y\\to X\\oplus Y$, $s=(0,-1)$, satisfies $ds=1_Y$; in the second case $s:X\\to X\\oplus Y$, $s=(1,0)$, satisfies $ds=1_X$. Therefore $D_n=H^n(d)$ has section $H^n(s)$ for every integer $n$. Apply [lem-sf-derived-homology-long-exact] to the given distinguished triangle. Its connecting map $\\delta^n$ is zero, since $\\delta^n D_n=0$ and $D_n$ has a right inverse. The same argument in degree $n-1$ gives $\\delta^{n-1}=0$. Exactness now gives a short exact sequence $0\\to H^n(G)\\xrightarrow{F_n}H^n(X)\\oplus H^n(Y)\\xrightarrow{D_n}H^n(Z)\\to0$, with $F_n=H^n(f)$. In particular $F_n$ is a kernel of $D_n$.",
+   "text": "Apply the triangle identity T.mor₁ ≫ T.mor₂=0 from [lem-weil-pbc-hom-into-triangle-exact]. After composing with γ.hom and using the prescribed β-identification, expand the biproduct difference map. The two cases give q=p≫h and p=q≫r respectively. Thus fβ=p≫j in the first case with j=(1,h), and fβ=q≫j in the second case with j=(r,1).",
    "uses": [
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
-   }
-  },
-  {
-   "text": "For the first case put $A=H^n(X)$, $B=H^n(Y)$ and $a=H^n(h)$. The morphism $j=(1_A,a):A\\to A\\oplus B$ is a kernel of $(a,-1_B)$: its composite with that map is zero, and if $t:T\\to A\\oplus B$ has components $(u,v)$ with $au-v=0$, then $v=au$ and $t=ju$. This factorization is unique because $\\operatorname{pr}_A j=1_A$. Hence the kernel subobject is exactly the image of this graph morphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
-   }
-  },
-  {
-   "text": "For each $n$, let $k:A\\to H^n(G)$ be the unique kernel comparison with $F_n k=j$, using Steps 2 and 3. Then $H^n(p)k=\\operatorname{pr}_A j=1_A$. The equation $D_nF_n=0$ also gives $F_n=jH^n(p)$. Consequently $F_n kH^n(p)=jH^n(p)=F_n$; cancellation of the monomorphism $F_n$ gives $kH^n(p)=1$. Thus $H^n(p)$ is an isomorphism, and $F_n=jH^n(p)$ is precisely the asserted identification of $H^n(G)$ with the graph, for every $n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to $p:G\\to X$: Step 4 verifies its hypothesis in every integer degree, so $p$ is an isomorphism in the ordinary unbounded derived category. By clause (i) of [lem-weil-pbc-hom-into-triangle-exact], $df=0$ in the derived category itself. In the first case this is $hp-q=0$, hence $q=hp$. This proves the equality of derived morphisms, rather than merely its images under cohomology.",
-   "uses": [
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "lem-weil-pbc-hom-into-triangle-exact"
    ],
    "elementary": false,
@@ -66,18 +36,8 @@
    }
   },
   {
-   "text": "For the second case put $A=H^n(X)$, $B=H^n(Y)$ and $b=H^n(r)$. Now $j=(b,1_B):B\\to A\\oplus B$ is a kernel of $(1_A,-b)$: a morphism with components $(u,v)$ killed by this map satisfies $u=bv$, hence is uniquely $jv$. Step 2 makes $F_n$ another kernel, so obtain $k:B\\to H^n(G)$ with $F_nk=j$. The identities $H^n(q)k=1_B$ and $F_n=jH^n(q)$ give $kH^n(q)=1$ by cancellation of $F_n$. Thus $H^n(q)$ is an isomorphism, and $F_n=jH^n(q)$ identifies $H^n(G)$ with the stated image of $(H^n(r),1)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to $q:G\\to Y$, using Step 6 in all degrees, to conclude that $q$ is an isomorphism. Clause (i) of [lem-weil-pbc-hom-into-triangle-exact] gives $df=0$; in this case the equation reads $p-rq=0$, so $p=rq$. The split epimorphism assertion for $H^n(d)$ was proved in Step 2.",
+   "text": "For either case, let π be the appropriate projection and j its graph section, so j≫π=1. The composite j≫β.inv is killed by T.mor₂. By Triangle.coyoneda_exact₂ in [lem-weil-pbc-hom-into-triangle-exact], obtain k with k≫T.mor₁=j≫β.inv; consequently k≫T.mor₁≫β.hom=j. Then k≫(T.mor₁≫β.hom≫π)=j≫π=1. Conversely, (T.mor₁≫β.hom≫π)≫k≫T.mor₁≫β.hom=(T.mor₁≫β.hom≫π)≫j=T.mor₁≫β.hom. Cancel the monomorphism T.mor₁≫β.hom to prove the other inverse identity. This constructs the required projection isomorphism directly in the derived category.",
    "uses": [
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "lem-weil-pbc-hom-into-triangle-exact"
    ],
    "elementary": false,
@@ -87,7 +47,18 @@
    }
   },
   {
-   "text": "Finally suppose specified isomorphisms $\\alpha:G_0\\xrightarrow{\\sim}G$, $\\beta:M_0\\xrightarrow{\\sim}X\\oplus Y$, $\\gamma:Z_0\\xrightarrow{\\sim}Z$ satisfy $\\beta f_0=f\\alpha$ and $\\gamma d_0=d\\beta$, with the transported triangle distinguished. The actual projections are $p_0=\\operatorname{pr}_X\\beta f_0=p\\alpha$ and $q_0=\\operatorname{pr}_Y\\beta f_0=q\\alpha$. Thus the isomorphism assertion and the identities $q_0=hp_0$ or $p_0=rq_0$ follow by composition with $\\alpha$. A section for $d_0$ is $\\beta^{-1}s\\gamma$. On cohomology, $H^n(\\beta)H^n(f_0)=F_nH^n(\\alpha)$ and $H^n(\\gamma)H^n(d_0)=D_nH^n(\\beta)$; therefore $H^n(\\beta)$ carries the kernel subobject of $H^n(d_0)$ onto the graph already computed, and the first equation identifies its inclusion. These formulas prove all assertions after the specified identifications.",
+   "text": "For F=H^n, functoriality preserves the constructed splitting of T.mor₂, so F(T.mor₂) is split epic. Since the appropriate projection p or q is now an isomorphism, F(p) or F(q) is monic; its factorization through F(T.mor₁) implies that F(T.mor₁) is monic. Check the two projections of F(T.mor₁≫β.hom)≫Functor.biprodComparison F X Y: using functoriality and the already proved component equality, it is F(p)≫(1,F(h)) or F(q)≫(F(r),1). Precomposition by the isomorphism F(p) or F(q) does not change an image subobject (imageSubobject_iso_comp), giving the asserted graph-image equality.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "In any abelian category the graph j=(1,a) is split monic with retraction pr₁, and j≫(a,-1)=0. Therefore its image subobject is Subobject.mk j and factors through the kernel subobject. For the reverse inclusion, let t be the kernel-subobject arrow. The equation t≫(a,-1)=0 gives t≫pr₂=t≫pr₁≫a; hence t=(t≫pr₁)≫j. The two factorizations give equality of the graph image and the kernel subobject. For j=(b,1) and difference map (1,-b), use retraction pr₂ and the equation t≫pr₁=t≫pr₂≫b instead. Apply these calculations to a=H^n(h) and b=H^n(r), and combine with the preceding image equalities. No cohomological detection or long exact sequence is needed.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -98,14 +69,12 @@
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-pbc-hom-into-triangle-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
-  "place": "Explicit cohomological verification of the split restriction assertion in Tag 08DG, lemma-glue, using Tags 05RS and 05RT; graph and conjugation calculations supplied here."
+  "document": "literature/stacks-project/cohomology.tex; Mathlib.CategoryTheory.Triangulated.Pretriangulated; Mathlib.CategoryTheory.Subobject.Limits",
+  "place": "Stacks Tag 08DG, lemma-glue, split restriction calculation. F5 supplies the direct inverse using Triangle.coyoneda_exact₂, Triangle.mor₃_eq_zero_of_epi₂ and Triangle.mono₁, then transports graph images under homology functors. All five steps are proved in Lean; no new holes or nodes."
  },
  "mathlib_searches": [
   {
@@ -237,5 +206,15 @@
   "group": "Q91",
   "result": "pass",
   "note": "Q91 lem-sp-derived-split-fibre-projections 554981268ab8: one sorry-only theorem DerivedCategory.split_fibre_projections; only the lean field added, dep record identical to side-live, lean.statement matches the file verbatim, no live module or collision, not dropped, no repair note. Clause check: arbitrary distinguished T with specified β : obj₂ ≅ X⊞Y and γ cover the literal triangles and the specified-isomorphism clause; case 1 IsIso p, q = p≫h, per-degree split epi, mono, image = kernel of (Hh,-1) = graph lift(1,Hh); case 2 IsIso q, p = q≫r, kernel of (1,-Hr) = image of lift(Hr,1); signs verified, identification uses the canonical Functor.biprodComparison; all clauses true (section in D). Universes u,v,w independent, no extra hypotheses; edge cases zero summands, h=0/r=0, characteristic 2, all n, unbounded complexes. No duplicate (exists_iso_binaryBiproduct_of_distTriang needs mor3=0). Docstrings carry Stacks 08DG/05RS, the blueprint tag and the 8 proof steps; minimal imports; no defs. Not recompiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T111102-L-4058022",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
