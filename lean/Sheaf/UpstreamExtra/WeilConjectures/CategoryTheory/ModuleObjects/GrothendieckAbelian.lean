@@ -3,7 +3,11 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
-/-! Declarations of ours that lived in the upstream file `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
+/-!
+Declarations of ours that lived in the upstream file
+`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` (moved out by the
+scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live).
+-/
 
 /-!
 
@@ -209,6 +213,7 @@ private noncomputable def freeTensorForgetIso (F : C) :
     exact congrArg (fun k ↦ (α_ M.X R F).inv ≫ k ▷ F)
       (congrArg Hom.hom (rightActHom_naturality f)))
 
+omit [MonoidalPreadditive C] in
 /-- A free module on a flat ambient object is flat for the relative tensor product. -/
 private lemma flat_free {F : C} (hF : ObjectProperty.flat F) :
     ObjectProperty.flat ((free R).obj F) := by
