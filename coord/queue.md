@@ -1,8 +1,8 @@
 # Work queue
 
-127 items; claim with `tools/claim.py next <group> [--stage N]`.
+123 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (12 clusters, 941 modules)
+## Rework: quarantined by the upstream sync (11 clusters, 941 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -15,7 +15,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -23,7 +22,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 89, stage 3 2 items.
 
-## Stage 1: nodes to split (19)
+## Stage 1: nodes to split (17)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -43,11 +42,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-snc-tame-root-etale-extension` | 4013 | none |
 | `lem-sfb-indfinite-contractible-base-wstrict` | 4014 | none |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 4014 | none |
-| `sk-thm-pe-indetale-refinement` | - | none |
-| `sk-thm-pe-wc-cover` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (25)
+## Stage 2: nodes to state (24)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -59,7 +56,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
-| `lem-sfb-faithfully-flat-normal-ring-descent` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
@@ -77,7 +73,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 18 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (63)
 
