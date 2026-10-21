@@ -3,27 +3,86 @@
  "blueprint": {
   "is": "sk-def-sf-kv-maps",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sf-kv-maps"
+  ]
  },
  "kind": "definition",
  "title": "The product comparison maps",
- "statement": "For $i=1,2$ let $f_i:X_i\\to Y_i$ be separated of finite type between\nfinite-type $k$-schemes, with $Rf_i^!$ the constructible exceptional adjoints\nof [sk-def-sf-operations](vi) (no admissibility datum of\n[sk-def-sf-admissible] is assumed), put $f=f_1\\times f_2$, and let\n$L_i\\in\\Dctf(Y_i,\\Lambda)$, $B_i\\in\\Dctf(X_i,\\Lambda)$.\n\n1. **(i)** The $!$-Künneth\n$\\mathrm{Ku}_!:Rf_!(B_1\\boxtimes B_2)\\xrightarrow{\\ \\sim\\ } Rf_{1!}B_1\\boxtimes Rf_{2!}B_2$ is [sk-thm-sf-kunneth-relative] for the base\n$B=Y_1\\times Y_2$, using\n$X_1\\times X_2=(X_1\\times Y_2)\\times_B(Y_1\\times X_2)$. It is an isomorphism.\n1. **(ii)** The *exceptional Künneth*\n$\\alpha:Rf_1^!L_1\\boxtimes Rf_2^!L_2\\to Rf^!(L_1\\boxtimes L_2)$ is the\nexceptional adjoint of\n$$\nRf_!\\bigl(Rf_1^!L_1\\boxtimes Rf_2^!L_2\\bigr)\n\\xrightarrow{\\ \\mathrm{Ku}_!\\ }\nRf_{1!}Rf_1^!L_1\\boxtimes Rf_{2!}Rf_2^!L_2\n\\xrightarrow{\\ \\varepsilon_1\\boxtimes\\varepsilon_2\\ }\nL_1\\boxtimes L_2 ,\n$$\nwhere the $\\varepsilon_i$ are the counits of $Rf_{i!}\\dashv Rf_i^!$.\n1. **(iii)** For $E_i\\in\\Dctf(Y_i,\\Lambda)$, on the same scheme $Y_i$ as\n$L_i$, the *external Hom* map\n$$\n\\beta:\\RHom(E_1,L_1)\\boxtimes\\RHom(E_2,L_2)\n\\longrightarrow\\RHom\\bigl(E_1\\boxtimes E_2,L_1\\boxtimes L_2\\bigr)\n$$\nis the tensor–Hom transpose of the two evaluations, with the tensor symmetry\nand its Koszul signs.\n1. **(iv)** For separated finite-type $k$-schemes $X,Y$, with the structure\nmorphism $a_Y$ and the product projection\n$p_X=\\operatorname{id}_X\\times a_Y:X\\times Y\\to X$ (whose constructible\nexceptional adjoints $Ra_Y^!$, $Rp_X^!$ are the inputs for\n$\\omega_Y=Ra_Y^!\\Lambda$ and $\\mathbb D_Y$, for $Rp_X^!$, and for\n$\\alpha_{\\operatorname{id}_X,a_Y}$; no admissibility datum is assumed),\nand for $M\\in\\Dctf(X,\\Lambda)$ and $N\\in\\Dctf(Y,\\Lambda)$, with\n$p_X,p_Y$ the projections of $X\\times Y$, the *Künneth–Verdier* map is\n$$\n\\begin{aligned}\n\\kappa_{M,N}:M\\boxtimes\\mathbb D_YN\n&\\xrightarrow{\\ \\beta\\ }\\RHom\\bigl(p_Y^*N,M\\boxtimes\\omega_Y\\bigr)\\\\\n&\\xrightarrow{\\ \\RHom(1,\\alpha_{\\operatorname{id}_X,a_Y})\\ }\n\\RHom\\bigl(p_Y^*N,Rp_X^!M\\bigr),\n\\end{aligned}\n$$\nusing the unit identifications $\\RHom(\\Lambda_X,M)=M$ and\n$\\Lambda_X\\boxtimes N=p_Y^*N$; here $\\beta$ is applied to the pairs\n$(E_1,L_1)=(\\Lambda_X,M)$ on $X$ and $(E_2,L_2)=(N,\\omega_Y)$ on $Y$.\n\nOnly $\\mathrm{Ku}_!$ is built from isomorphisms; invertibility of\n$\\alpha,\\beta,\\kappa$ is the content of [sk-thm-sf-kunneth-verdier].",
+ "statement": "Use the field and coefficient datum, the geometric six-functor datum,\nand the bounded constructible finite-Tor categories of [def-sf-kv-maps]:\n$p$ and $\\ell$ are distinct primes, $a\\geq1$ is an integer,\n$k=\\overline{\\mathbf F}_{p^a}$,\n$E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer\n$\\varpi_E$, an integer $n\\geq1$, and\n$\\Lambda\\in\\{\\mathcal O_E/\\varpi_E^n,\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$.\nIntegral pullbacks and tensors are completed; field coefficients use the\nspecified localization and common finite stages. All products below are\nover $k$, and $C_1\\boxtimes C_2=Lr_1^*C_1\\otimes^L_\\Lambda Lr_2^*C_2$\nfor the product projections $r_i$. The four maps below are precisely the\nmaps of [def-sf-kv-maps], formed with its geometric adjunctions,\nbase-change transformations, signed tensor constraints and internal Hom.\n\nFor $i=1,2$ let $f_i:X_i\\to Y_i$ be separated of finite type between\nseparated finite-type $k$-schemes, with $Rf_i^!$ the constructible exceptional adjoints\nof [sk-def-sf-operations](vi) (no ambient exceptional-adjoint datum is assumed), put $f=f_1\\times f_2$, and let\n$L_i\\in\\Dctf(Y_i,\\Lambda)$, $B_i\\in\\Dctf(X_i,\\Lambda)$.\n\n1. **(i)** The $!$-Künneth\n$\\mathrm{Ku}_!:Rf_!(B_1\\boxtimes B_2)\\xrightarrow{\\ \\sim\\ } Rf_{1!}B_1\\boxtimes Rf_{2!}B_2$ is constructed as in [def-sf-kv-maps](i):\nput $T=Y_1\\times_kY_2$, $U=X_1\\times_kY_2$,\n$V=Y_1\\times_kX_2$, $u=f_1\\times\\operatorname{id}_{Y_2}$,\n$v=\\operatorname{id}_{Y_1}\\times f_2$, and let $t_i:T\\to Y_i$,\n$a_1:U\\to X_1$, $a_2:V\\to X_2$ be the projections.\nIdentify $W=U\\times_TV$ with $X_1\\times_kX_2$, with projections\n$p:W\\to U$, $q:W\\to V$ and $up=vq=f$.\nApply [sk-thm-sf-kunneth-relative] over $T$ to\n$K=La_1^*B_1$, $H=La_2^*B_2$. Its source is identified with\n$Rf_!(B_1\\boxtimes B_2)$ and its target is\n$Ru_!K\\otimes^L Rv_!H$.\nThe two Cartesian squares give the compact-support exchanges of\n[sk-def-sf-exchanges], invertible on these domains as specified in\n[def-sf-kv-maps](i):\n$$\n\\operatorname{Ex}_{!,1}:Lt_1^*Rf_{1!}B_1\\xrightarrow{\\sim}Ru_!K,\n\\qquad\n\\operatorname{Ex}_{!,2}:Lt_2^*Rf_{2!}B_2\\xrightarrow{\\sim}Rv_!H.\n$$\nPostcompose the relative map with\n$\\operatorname{Ex}_{!,1}^{-1}\\otimes^L\\operatorname{Ex}_{!,2}^{-1}$\nto obtain the displayed target. Every arrow is an isomorphism.\n1. **(ii)** The *exceptional Künneth*\n$\\alpha:Rf_1^!L_1\\boxtimes Rf_2^!L_2\\to Rf^!(L_1\\boxtimes L_2)$ is the\nexceptional adjoint of\n$$\nRf_!\\bigl(Rf_1^!L_1\\boxtimes Rf_2^!L_2\\bigr)\n\\xrightarrow{\\ \\mathrm{Ku}_!\\ }\nRf_{1!}Rf_1^!L_1\\boxtimes Rf_{2!}Rf_2^!L_2\n\\xrightarrow{\\ \\varepsilon_1\\boxtimes\\varepsilon_2\\ }\nL_1\\boxtimes L_2 ,\n$$\nwhere the $\\varepsilon_i$ are the counits of $Rf_{i!}\\dashv Rf_i^!$.\n1. **(iii)** For $E_i\\in\\Dctf(Y_i,\\Lambda)$, on the same scheme $Y_i$ as\n$L_i$, the *external Hom* map\n$$\n\\beta:\\RHom(E_1,L_1)\\boxtimes\\RHom(E_2,L_2)\n\\longrightarrow\\RHom\\bigl(E_1\\boxtimes E_2,L_1\\boxtimes L_2\\bigr)\n$$\nis the tensor–Hom transpose of the two evaluations, with the tensor symmetry\nand its Koszul signs. Explicitly, write $H_i=\\RHom(E_i,L_i)$ and let\n$t_i:Y_1\\times_kY_2\\to Y_i$ be the projections. Reassociate and permute\n$(H_1\\boxtimes H_2)\\otimes^L(E_1\\boxtimes E_2)$ to\n$Lt_1^*(H_1\\otimes^LE_1)\\otimes^L Lt_2^*(H_2\\otimes^LE_2)$,\napply $Lt_1^*\\operatorname{ev}_1\\otimes^LLt_2^*\\operatorname{ev}_2$,\nand transpose, exactly as in [def-sf-kv-maps](iii).\n1. **(iv)** For separated finite-type $k$-schemes $X,Y$, with the structure\nmorphism $a_Y$ and the product projection\n$p_X=\\operatorname{id}_X\\times a_Y:X\\times Y\\to X$ (whose constructible\nexceptional adjoints $Ra_Y^!$, $Rp_X^!$ are the inputs for\n$\\omega_Y=Ra_Y^!\\Lambda$ and $\\mathbb D_Y$, for $Rp_X^!$, and for\n$\\alpha_{\\operatorname{id}_X,a_Y}$; no ambient exceptional-adjoint datum is assumed),\nand for $M\\in\\Dctf(X,\\Lambda)$ and $N\\in\\Dctf(Y,\\Lambda)$, with\n$p_X,p_Y$ the projections of $X\\times Y$, the *Künneth–Verdier* map is\n$$\n\\begin{aligned}\n\\kappa_{M,N}:M\\boxtimes\\mathbb D_YN\n&\\xrightarrow{\\ \\beta\\ }\\RHom\\bigl(p_Y^*N,M\\boxtimes\\omega_Y\\bigr)\\\\\n&\\xrightarrow{\\ \\RHom(1,\\alpha_{\\operatorname{id}_X,a_Y})\\ }\n\\RHom\\bigl(p_Y^*N,Rp_X^!M\\bigr),\n\\end{aligned}\n$$\nwhere $\\mathbb D_YN=\\RHom(N,\\omega_Y)$, and $p_Y^*$ denotes $Lp_Y^*$.\nThe second arrow uses (ii) with $f_1=\\operatorname{id}_X$, $f_2=a_Y$,\n$L_1=M$ and $L_2=\\Lambda_{\\operatorname{Spec}k}$, identifying\n$X\\times_k\\operatorname{Spec}k$ with $X$, exactly as in [def-sf-kv-maps](iv).\nUse the unit identifications $\\RHom(\\Lambda_X,M)=M$ and\n$\\Lambda_X\\boxtimes N=p_Y^*N$; here $\\beta$ is applied to the pairs\n$(E_1,L_1)=(\\Lambda_X,M)$ on $X$ and $(E_2,L_2)=(N,\\omega_Y)$ on $Y$.\n\nOnly $\\mathrm{Ku}_!$ is built from isomorphisms; invertibility of\n$\\alpha,\\beta,\\kappa$ is the content of [sk-thm-sf-kunneth-verdier].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/_section.md",
   "place": "node sk-def-sf-kv-maps, order 2511"
  },
  "stmt_deps": [
+  "def-sf-kv-maps",
   "sk-def-sf-operations",
-  "sk-def-sf-admissible",
   "sk-thm-sf-kunneth-relative",
   "sk-def-sf-exchanges"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def expComparison|def internalHomAdjunction|def prodCompExternalProduct",
+   "results": "3 hits: Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; source read at Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:81, Closed/Basic.lean:305, ExternalProduct/Basic.lean:105",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|Verdier|exceptional.*[Kk]unneth|kunnethVerdier",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHomAdjunction\"",
+   "results": "2 hits: CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.expComparison",
+   "results": "10 hits: CategoryTheory.expComparison, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.MonoidalClosedFunctor.mk, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.uncurry_expComparison, CategoryTheory.coev_expComparison",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth Verdier comparison from external tensor product with Verdier dual to internal Hom of pullback and exceptional inverse image",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.MonoidalCategory.externalProductCompDiagIso_hom_app_app, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.Over.tensorObj_hom, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft, CategoryTheory.coev_expComparison, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth Verdier comparison maps exceptional inverse image external Hom compact support",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, CategoryTheory.coev_expComparison, LightCondensed.ihom_map_val_app, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, LightCondensed.ihomPoints_symm_apply, instMonoidalClosedCondensedSet, CategoryTheory.ExponentiableMorphism.coev_ev, LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product comparison maps defined by adjunction counits and tensor Hom evaluations on constructible sheaf derived categories",
+   "results": "8 hits: CategoryTheory.expComparison, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.ihomPoints, CategoryTheory.prodComparison_iso, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CompHausLike.LocallyConstant.adjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: generic monoidal, closed-category or condensed-module infrastructure does not define these four geometric six-functor maps at all four coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|Verdier|rightDerivedLowerShriek|exceptionalInverseImage",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no geometric Kunneth/Verdier or exceptional-image declaration found"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -58,5 +117,29 @@
  ],
  "chapter": "sec-six-functors",
  "unit": "sk-def-sf-kv-maps",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-sf-kv-maps",
+  "worker": "stage1",
+  "summary": "Split this definition by reusing the already reviewed expanded definition def-sf-kv-maps in the same unit. Made the field/coefficient/operation datum explicit, retained the four canonical maps, expanded the two inverse compact-support exchanges in (i), the signed evaluation transpose in (iii), and the inputs and derived pullback in (iv). No new nodes. Corrected the separated-target scope already disputed in the expanded definition; no ambient adjoint datum is assumed. The Lean HasKunnethComparisons structure is not an attachment: it records Nonempty isomorphisms instead of these specified maps.",
+  "blueprint": "main-20261015 sk-def-sf-kv-maps order 2511, clauses (i)-(iv), using the existing expanded def-sf-kv-maps order 2567 in this unit. Definition has no proof steps; statement dependencies name all construction inputs.",
+  "unit_statement_error": {
+   "place": "First paragraph and clause (i) of sk-def-sf-kv-maps",
+   "failure": "STATEMENT-DISPUTED: finite-type targets need not be separated, but the stipulated relative-product construction invokes sk-thm-sf-kunneth-relative with separated base T=Y_1 x_k Y_2. Take Y_1 the affine line with doubled origin, Y_2=Spec k and both f_i identities. The imported hypotheses hold while T is not separated. This is a failing inference, not a counterexample to the underlying product theorem.",
+   "correction": "Require separated finite-type schemes, as in the reviewed expanded def-sf-kv-maps, its geometric operations datum and the intended applications. Keep all four maps and the relative-product route. Protected unit.statement remains unchanged."
+  },
+  "maintainer_actions": [
+   "Record the separated-target source correction in coord/HUMAN.md if not already recorded from def-sf-kv-maps."
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-3c52b16ba",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-3c52b16ba (reviewer sub-agent of L); spot-checked: I read the sketch source (main-20261015 sk-def-sf-kv-maps/_section.md, order 2511), the expanded def-sf-kv-maps (order 2567, reviewed PASS by NZ), all four statement dependencies and the report. The delivery has no new nodes, and the unit record changes only realized/realized_by. The item keeps clauses (i)-(iv) with the same maps, directions and D^b_ctf categories at all four stages. Its additions (the explicit T,U,V,u,v,t_i,a_i,W, the two Ex_! inverses, the reassociation and evaluation for beta, the alpha inputs for kappa) all match def-sf-kv-maps. Restricting to separated schemes is a genuine source error: sk-thm-sf-kunneth-relative needs a separated base, and the doubled-origin line Y_1 with Y_2=Spec k gives a non-separated T. This is the same correction already accepted for def-sf-kv-maps; it is recorded in split_report.unit_statement_error, and the unit statement is untouched. Clause checks: (i) the squares (a_1,u;f_1,t_1) and (a_2,v;f_2,t_2) are Cartesian, Ex_! has the direction of sk-def-sf-exchanges, and the target is Rf_1!B_1 boxtimes Rf_2!B_2. (ii) alpha is the transpose under the constructible adjunction of sk-def-sf-operations(vi). (iii) beta comes from the symmetry and monoidality of Lt_i^*, then ev_1 tensor ev_2, then the transpose. (iv) beta on (Lambda_X,M),(N,omega_Y) is followed by RHom(1,alpha_{id_X,a_Y}), and alpha lands in Rp_X^!M on X x s = X. I checked identity maps over Spec k, an empty factor, zero complexes and shifts. There is no cycle. sk-def-sf-admissible was dropped from stmt_deps; the source uses it only in a negative remark. Batch-5 check: citing def-sf-kv-maps adds only def-sf-kv-maps, thm-sf-biduality-class and thm-weil-six-operations to the closure. These are general six-functor foundations, not steps of the trace formula or of Poincare duality. The flagged lem-trf-right-fraction-dense-subcategory is already reached through the other stmt_deps and is pure category theory (calculus of fractions), so the citation is accepted. Advisory: the citer lem-sf-kv-affine-locality uses alpha of this item for non-separated Y and Z through its own compactification-formula reading, so its wording should be checked. Record the separated-target correction in HUMAN.md. Tooling: the dagsnap e3ececac behind the snapshot's chapter symlinks disappeared during the review; the closure had already been computed."
+ }
 }
