@@ -241,30 +241,6 @@ private lemma qbarPull_square_cube_iso
         (constructibleToQbarPullIso ℓ k E g M) ≪≫ t) tOmega
   exact heq.trans (hp.trans hoq.symm)
 
-private lemma qbarPull_square_cube
-    (sq : CommSq g' f' f g) (M : PadicSubfieldConstructible Y ℓ E) :
-    (constructibleToPadicAlgCl X' ℓ E).map
-        ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ
-          (sq.asOver (Spec (.of k)))).hom.app M) ≫
-      (constructibleToQbarPullIso ℓ k E g'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
-          (f.asOver (Spec (.of k)))).obj M)).hom ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (g'.asOver (Spec (.of k)))).map
-        (constructibleToQbarPullIso ℓ k E f M).hom =
-    (constructibleToQbarPullIso ℓ k E f'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
-          (g.asOver (Spec (.of k)))).obj M)).hom ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (f'.asOver (Spec (.of k)))).map
-        (constructibleToQbarPullIso ℓ k E g M).hom ≫
-      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-        (sq.asOver (Spec (.of k)))).hom.app
-          ((constructibleToPadicAlgCl Y ℓ E).obj M) := by
-  have h := congrArg Iso.hom (qbarPull_square_cube_iso ℓ k E f g f' g' sq M)
-  dsimp only [Iso.trans, Functor.mapIso, Iso.app] at h
-  exact h
-
 end PullSquareCalculation
 set_option backward.isDefEq.respectTransparency true
 
