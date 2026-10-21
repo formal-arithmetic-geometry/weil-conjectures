@@ -6,7 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.SourceLocalizedCocycleHomology
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Restriction of a cocycle through exact strict-local functors
 
@@ -84,7 +86,7 @@ private theorem sourceSectionsCocycleRestriction {S : Scheme.{v}}
     let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
-    letI := strictHenselization_globalSections_preservesFiniteColimits s
+    letI := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let c := CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)
     let C := (U.mapHomologicalComplex (.up ℤ)).obj L
     let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L
@@ -102,7 +104,7 @@ private theorem sourceSectionsCocycleRestriction {S : Scheme.{v}}
   let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
   let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}
-  have := strictHenselization_globalSections_preservesFiniteColimits s
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
   let C := (U.mapHomologicalComplex (.up ℤ)).obj L
   let D := (G.mapHomologicalComplex (.up ℤ)).obj C
   let A := ((CochainComplex.singleFunctor _ 0).obj
@@ -246,7 +248,7 @@ theorem smallModel_sourceCocycleExactRestriction {S : Scheme.{v}}
     let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
-    letI := strictHenselization_globalSections_preservesFiniteColimits s
+    letI := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let c := CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)
     let C := (U.mapHomologicalComplex (.up ℤ)).obj L
     let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L
@@ -269,7 +271,7 @@ theorem smallModel_sourceCocycleExactRestriction {S : Scheme.{v}}
   let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
   let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}
-  have := strictHenselization_globalSections_preservesFiniteColimits s
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
   let C := (U.mapHomologicalComplex (.up ℤ)).obj L
   let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L
   let b := (DerivedCategory.homologyFunctorFactors _ n).inv.app L ≫

@@ -6,7 +6,11 @@ Authors: Bin Wu
 
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
 /-! # Derived sections unit followed by Leray on a representative
 
@@ -34,14 +38,14 @@ private theorem sections_exact_bridge {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     G.rightDerivedFunctorPlusCompatibility.hom =
       Functor.whiskerRight G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom
         DerivedCategory.Plus.ι ≫
       Functor.whiskerLeft DerivedCategory.Plus.ι
         G.rightDerivedFunctorIsoMapDerivedCategory.inv := by
   dsimp only
-  have := strictHenselization_globalSections_preservesFiniteColimits s
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
   let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}
   apply Functor.rightDerived_ext _ G.rightDerivedFunctorPlusιUnit
@@ -117,7 +121,7 @@ private lemma sections_unit_on_complex {S : Scheme.{v}}
       ℤ) :
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     G.mapDerivedCategoryFactors.inv.app E ≫
       G.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app E) ≫
       G.rightDerivedFunctorIsoMapDerivedCategory.inv.app
@@ -126,7 +130,7 @@ private lemma sections_unit_on_complex {S : Scheme.{v}}
         ((G.mapHomologicalComplex (.up ℤ)).obj E) ≫
       G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj E) := by
   dsimp only
-  have := strictHenselization_globalSections_preservesFiniteColimits s
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
   let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}
   let N := (HomotopyCategory.quotient _ _).obj E
@@ -176,7 +180,7 @@ theorem smallModel_strictLocalSections_unit_leray {S : Scheme.{v}}
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
     let H := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let V := F.rightDerivedFunctorPlus.obj T
     let ℓ := DerivedCategory.Plus.ι.map
         (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app V) ≫
@@ -201,7 +205,7 @@ theorem smallModel_strictLocalSections_unit_leray {S : Scheme.{v}}
       H.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫
       H.rightDerivedFunctor.map r  := by
   dsimp only
-  have := strictHenselization_globalSections_preservesFiniteColimits s
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
   let F := lowerStar AddCommGrpCat.{v + 1} t
   let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}

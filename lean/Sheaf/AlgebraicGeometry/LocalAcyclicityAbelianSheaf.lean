@@ -6,7 +6,8 @@ Authors: SHEAF group NA
 module
 
 public import Sheaf.Paper.StrictHenselizationPointEvaluation
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.Paper.StrictHenselizationFunctoriality
@@ -147,7 +148,7 @@ noncomputable def localAcyclicityAlpha
         ((upperStar AddCommGrpCat.{u + 1}
           (pullback.fst (localAcyclicityStrictMap f x) t ≫
             Scheme.strictHenselizationStructuralMap x)).obj G) :=
-  Classical.choose (existsUnique_strictHenselizationStalkRestriction x G) ≫
+  Classical.choose ((strictLocalSectionCone x).existsUnique_restriction G) ≫
     globalSectionsUpperStarMap AddCommGrpCat.{u + 1}
       (pullback.fst (localAcyclicityStrictMap f x) t)
       ((upperStar AddCommGrpCat.{u + 1}

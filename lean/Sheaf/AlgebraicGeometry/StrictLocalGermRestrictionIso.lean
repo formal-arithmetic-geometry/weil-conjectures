@@ -5,7 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
@@ -59,7 +59,7 @@ theorem isIso_strictHenselizationStalkRestriction
         AddCommGrpCat.{v + 1}).obj
         ((upperStar AddCommGrpCat.{v + 1}
           (Scheme.strictHenselizationStructuralMap s)).obj G))
-    (hr : IsStrictHenselizationStalkRestriction s G r) : IsIso r := by
+    (hr : (strictLocalSectionCone s).IsRestriction G r) : IsIso r := by
   classical
   let : Algebra (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
     (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
@@ -127,22 +127,26 @@ theorem isIso_strictHenselizationStalkRestriction
     exact hc G U ū
   obtain ⟨c, hc⟩ := comparison s hbase
   let r₀ := c.inv ≫ inv γ ≫ e.inv.app P
-  have hr₀ : IsStrictHenselizationStalkRestriction s G r₀ := by
+  have hr₀ : (strictLocalSectionCone s).IsRestriction G r₀ := by
     intro j
     let n := (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j
-    have ha : y ≫ (strictHenselizationNeighbourhoodSection s j).left ≫
+    have ha : y ≫ (strictLocalNeighbourhoodSection s j).left ≫
         pullback.fst ((Scheme.AffineEtale.Spec S).obj n.1).hom g = n.2.left := by
       dsimp only [g, n]
-      simp only [strictHenselizationNeighbourhoodSection,
+      simp only [strictLocalNeighbourhoodSection,
         MorphismProperty.Over.homMk, Over.homMk, CostructuredArrow.homMk, pullback.lift_fst]
       simpa only [Scheme.isoSpec_Spec_inv, Category.assoc] using hpoint j
     have h := hc ((Scheme.AffineEtale.Spec S).obj n.1) n.2
-      (strictHenselizationNeighbourhoodSection s j) ha
-    dsimp only [r₀, strictHenselizationSectionRestriction]
+      (strictLocalNeighbourhoodSection s j) ha
+    change (Scheme.pointSmallEtale s).toPresheafFiber
+      ((Scheme.AffineEtale.Spec S).obj n.1) n.2 G.obj ≫ r₀ =
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} g).unit.app G).hom.app
+          (op ((Scheme.AffineEtale.Spec S).obj n.1)) ≫
+        P.obj.map (strictLocalNeighbourhoodSection s j).op ≫ e.inv.app P
+    dsimp only [r₀]
     rw [← h]
     simp only [Category.assoc, Iso.hom_inv_id_assoc, IsIso.hom_inv_id_assoc]
-    rfl
-  have hEq : r = r₀ := (existsUnique_strictHenselizationStalkRestriction s G).unique hr hr₀
+  have hEq : r = r₀ := ((strictLocalSectionCone s).existsUnique_restriction G).unique hr hr₀
   rw [hEq]
   dsimp only [r₀]
   infer_instance

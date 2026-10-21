@@ -179,9 +179,9 @@ theorem exists_strictLocalConstantComparison
     isConstant_of_strictlyHenselian (R := Scheme.strictHenselizationRing x) F
   have : IsIso (adj.counit.app F) :=
     constantSheaf_counit_isIso (R := Scheme.strictHenselizationRing x) F
-  let r := Classical.choose (existsUnique_strictHenselizationStalkRestriction x G)
-  have hr : IsStrictHenselizationStalkRestriction x G r :=
-    (Classical.choose_spec (existsUnique_strictHenselizationStalkRestriction x G)).1
+  let r := Classical.choose ((strictLocalSectionCone x).existsUnique_restriction G)
+  have hr : (strictLocalSectionCone x).IsRestriction G r :=
+    (Classical.choose_spec ((strictLocalSectionCone x).existsUnique_restriction G)).1
   have : IsIso r := isIso_strictHenselizationStalkRestriction x G r hr
   let e₀ : C.obj M ≅ F := C.mapIso (asIso r) ≪≫ asIso (adj.counit.app F)
   have he₀ : adj.unit.app M ≫ Γ.map e₀.hom = r := by

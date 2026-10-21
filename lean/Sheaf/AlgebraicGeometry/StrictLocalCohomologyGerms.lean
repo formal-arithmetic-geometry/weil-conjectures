@@ -5,7 +5,9 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
 public import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
 
@@ -153,8 +155,8 @@ noncomputable def strictLocalCohomologySourceIso {S : Scheme.{v}}
             (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlus.obj L)) := by
   classical
   let G := (DerivedCategory.Plus.homologyFunctor _ n).obj L
-  let r := Classical.choose (existsUnique_strictHenselizationStalkRestriction s G)
-  have hr := (Classical.choose_spec (existsUnique_strictHenselizationStalkRestriction s G)).1
+  let r := Classical.choose ((strictLocalSectionCone s).existsUnique_restriction G)
+  have hr := (Classical.choose_spec ((strictLocalSectionCone s).existsUnique_restriction G)).1
   letI := isIso_strictHenselizationStalkRestriction s G r hr
   exact asIso r ≪≫
     (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology

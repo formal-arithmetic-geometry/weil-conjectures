@@ -6,8 +6,11 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
+public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.SourceCocycleExactRestriction
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Localized Hom classes and restriction of a complex on the base
 
@@ -60,12 +63,12 @@ theorem smallModel_strictHenselizationSectionRestriction_naturality {S : Scheme.
     {F G : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}} (b : F ⟶ G) :
     ((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
       (op ((strictLocalNeighbourhoods s).obj i))).map b ≫
-        strictHenselizationSectionRestriction s G i =
-    strictHenselizationSectionRestriction s F i ≫
+        (strictLocalSectionCone s).restriction G i =
+    (strictLocalSectionCone s).restriction F i ≫
       (upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) ⋙
         Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
           AddCommGrpCat.{v + 1}).map b := by
-  unfold strictHenselizationSectionRestriction
+  unfold PointedEtaleSectionCone.restriction
   let g := Scheme.strictHenselizationStructuralMap s
   let W := (strictLocalNeighbourhoods s).obj i
   let V := Scheme.Etale.mk (𝟙 (Scheme.strictHenselizationScheme s))
@@ -78,7 +81,7 @@ theorem smallModel_strictHenselizationSectionRestriction_naturality {S : Scheme.
   erw [he]
   simp only [Category.assoc]
   have hn := ((upperStar AddCommGrpCat.{v + 1} g).map b).hom.naturality
-    (strictHenselizationNeighbourhoodSection s i).op
+    (strictLocalNeighbourhoodSection s i).op
   erw [← reassoc_of% hn]
   have ht := (Sheaf.ΓNatIsoSheafSections _ _
     (IsTerminal.isTerminalOfObj
@@ -100,7 +103,7 @@ Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
       upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) ⋙
         Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
           AddCommGrpCat.{v + 1} where
-  app F := strictHenselizationSectionRestriction s F i
+  app F := (strictLocalSectionCone s).restriction F i
   naturality {_ _} b := smallModel_strictHenselizationSectionRestriction_naturality s i b
 
 set_option backward.isDefEq.respectTransparency false in
@@ -125,7 +128,7 @@ Source: Stacks Project, Tag 03Q9, restriction of the complex to the strict local
   let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
   let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}
-  have := strictHenselization_globalSections_preservesFiniteColimits s
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
   let C := (U.mapHomologicalComplex (.up ℤ)).obj L
   let a := (NatTrans.mapHomologicalComplex (strictLocalSectionRestrictionNat s i)
     (.up ℤ)).app L
@@ -143,7 +146,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
     (n : ℤ) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
     (strictLocalCohomologySourceLegs s K n).app (op i) =
       (strictLocalCohomologyGermMap K n).app (op ((strictLocalNeighbourhoods s).obj i)) ≫
-        strictHenselizationSectionRestriction s
+        (strictLocalSectionCone s).restriction
           ((DerivedCategory.Plus.homologyFunctor _ n).obj K) i ≫
         (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
           AddCommGrpCat.{v + 1}).map
@@ -154,7 +157,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
   dsimp only [strictLocalCohomologySourceLegs, strictLocalCohomologySourceIso,
     Iso.trans_hom, Functor.mapIso_hom]
   erw [(Scheme.pointSmallEtale s).toPresheafFiber_naturality_assoc]
-  have hr := (Classical.choose_spec (existsUnique_strictHenselizationStalkRestriction s
+  have hr := (Classical.choose_spec ((strictLocalSectionCone s).existsUnique_restriction
     ((DerivedCategory.Plus.homologyFunctor _ n).obj K))).1 i
   change _ ≫ ( _ ≫ Classical.choose _ ) ≫ _ = _ at ⊢
   erw [hr]
@@ -226,7 +229,7 @@ theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
       (((upperStar AddCommGrpCat.{v + 1}
         (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlusHomologyFunctorIso
           n).hom.app K))
-    ((strictHenselizationSectionRestriction s
+    (((strictLocalSectionCone s).restriction
       ((DerivedCategory.Plus.homologyFunctor _ n).obj K) i)
       ((strictLocalCohomologyGermMap K n).app (op W)
         ((smallModel_sourcePlusHomIso A K L r n).inv

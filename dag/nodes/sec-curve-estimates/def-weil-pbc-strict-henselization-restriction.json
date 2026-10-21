@@ -26,7 +26,7 @@
  },
  "proof": [
   {
-   "text": "For the germ restriction, use the initial representative affine pointed-neighbourhood functor of strictHenselization_properties (def-weil-pbc-strict-henselization-limit). Its opposite is final. Mathlib GrothendieckTopology.Point.isColimitPresheafFiberCocone and Functor.Final.isColimitWhiskerEquiv identify the stalk germ cocone restricted to these representatives as a colimit.",
+   "text": "For the germ restriction, use the initial representative affine pointed-neighbourhood functor of strictHenselizationAffineProperties (def-weil-pbc-strict-henselization-limit). Its opposite is final. Mathlib GrothendieckTopology.Point.isColimitPresheafFiberCocone and Functor.Final.isColimitWhiskerEquiv identify the stalk germ cocone restricted to these representatives as a colimit.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit"
    ],
@@ -40,7 +40,7 @@
    "elementary": true
   },
   {
-   "text": "For exact global sections, give Ω its canonical algebra structure over the residue field of the geometric image. Clause (1) of lem-weil-pbc-strict-henselization-functoriality, namely strictHenselizationResidue, supplies the strictly henselian local ring structure on strictHenselizationRing s. The already proved source-library declaration Scheme.preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing (WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian, Stacks 03QO) supplies preservation of epimorphisms by evaluation at the terminal etale object. Transport it to global sections through Sheaf.ΓNatIsoSheafSections. Global sections preserve kernels and are additive; Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels and Functor.preservesFiniteColimits_of_preservesHomology give the stated exactness.",
+   "text": "For exact global sections, give Ω its canonical algebra structure over the residue field of the geometric image. Clause (1) of lem-weil-pbc-strict-henselization-functoriality, namely strictHenselizationResidue, supplies the strictly henselian local ring structure on strictHenselization s. The already proved source-library declaration Scheme.preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing (WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian, Stacks 03QO) supplies preservation of epimorphisms by evaluation at the terminal etale object. Transport it to global sections through Sheaf.ΓNatIsoSheafSections. Global sections preserve kernels and are additive; Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels and Functor.preservesFiniteColimits_of_preservesHomology give the stated exactness.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
@@ -52,9 +52,9 @@
   "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent M2",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03Q9 and 03QO; explicit Lean colimit descent and terminal-section exactness using the existing source-library proof of 03QO (J2, 2026-10-12)."
+  "place": "Tag 03Q9; existing adopted-source canonical restriction proof preserved verbatim, SHEAF duplicate retired and small-model consumers generalized."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -114,14 +114,14 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationRestriction",
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction",
   "declaration": "AlgebraicGeometry.Etale.strictHenselizationCohomologyComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationRestriction.lean",
-  "statement": "def strictHenselizationCohomologyComparison {X : Scheme.{v}} (f : X ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) (q : ℕ) : (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).obj ((upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)).obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) ⟶ (cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictHenselizationStructuralMap s)) (q : ℤ)).obj ((DerivedCategory.Plus.ι).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar AddCommGrpCat.{v + 1} (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)))",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationRestriction.lean",
+  "statement": "def strictHenselizationCohomologyComparison {X : Scheme.{v}} (f : X ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) (q : ℕ) : (Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology AddCommGrpCat.{v + 1}).obj ((upperStar AddCommGrpCat.{v + 1} (Scheme.strictLocalizationToBase s)).obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) ⟶ (cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictLocalizationToBase s)) (q : ℤ)).obj ((DerivedCategory.Plus.ι).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar AddCommGrpCat.{v + 1} (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F)))",
   "branch": "sheaf-dag",
   "by": "Q1",
   "date": "2026-10-11",
-  "existing": false,
+  "existing": true,
   "declarations": [
    "AlgebraicGeometry.Etale.strictHenselizationNeighbourhoodSection",
    "AlgebraicGeometry.Etale.strictHenselizationSectionRestriction",
@@ -131,7 +131,7 @@
    "AlgebraicGeometry.Etale.strictHenselizationLerayHomologyIso",
    "AlgebraicGeometry.Etale.strictHenselizationCohomologyComparison"
   ],
-  "note": "g = the landed strictHenselizationStructuralMap s (def-weil-pbc-strict-henselization-structural-map); r_G is characterised, not chosen: IsStrictHenselizationStalkRestriction s G r (components at the representative affine pointed neighbourhoods of strictHenselizationCone s) with existsUnique_strictHenselizationStalkRestriction; rho^q = r ≫ strictHenselizationCohomologyComparison s f F q for that unique r.",
+  "note": "Canonical official strictLocalization realization from the adopted source. The retired SHEAF twin used the small colimit scheme; its live consumers now use PointedEtaleSectionCone specialized through strictLocalSectionCone, and the existing small-model exact-sections instance. No duplicate canonical restriction declaration is re-exported or copied.",
   "fixed_by": "R-gsf"
  },
  "reviewed": {
@@ -153,13 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K7",
+  "reviewer": "C-651cf",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261021T011023-L-2029206",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261021T022438-L-2847349",
+  "kind": "interface",
+  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
  }
 }

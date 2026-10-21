@@ -6,10 +6,12 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.InjectiveExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalSectionsUnitLeray
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Derived exchange and Leray before taking homology
 
@@ -73,7 +75,7 @@ theorem smallModel_strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X ‚ü
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s)))
         (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1}
           (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).hom
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let P := upperStar AddCommGrpCat.{v + 1}
       (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
     let Y := pullback f (Scheme.strictHenselizationStructuralMap s)
@@ -114,7 +116,7 @@ theorem smallModel_strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X ‚ü
   set_option backward.defeqAttrib.useBackward true in
   exact (by
     dsimp (config := { failIfUnchanged := false }) only
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let M := ((InjectiveObject.Œπ _).mapHomologicalComplex (.up ‚Ñ§)).obj J.obj
     let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ‚Ñ§)).obj M
     let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)

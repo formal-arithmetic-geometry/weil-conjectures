@@ -5,11 +5,15 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import WeilConjectures.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalNeighbourhoodGeometryExistence
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalCohomologySourceColimit
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalMateProjectionFormulas
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedMateSectionsFactorization
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalLocalizedHomGerm
 
 /-! # Presenting the strict-local mate as projection restriction
 

@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalUnderivedSectionsMate
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedExchangeGlobalSections
 
@@ -90,7 +91,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Schem
   set_option backward.defeqAttrib.useBackward true in
   exact (by
     intro i
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
     let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology

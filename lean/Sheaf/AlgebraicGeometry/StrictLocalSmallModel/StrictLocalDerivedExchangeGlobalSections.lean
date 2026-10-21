@@ -6,9 +6,11 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedExchangeLeray
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Derived exchange on global sections before neighbourhood restriction
 
@@ -69,7 +71,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s)))
         (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1}
           (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).hom
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     H.map (G.mapDerivedCategoryFactors.inv.app C ≫
       G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.inv.app L ≫
         U.mapDerivedCategory.map (smallModel_sourceInjectiveDirectImageIso f K J q).inv)) ≫
@@ -93,7 +95,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
   set_option backward.defeqAttrib.useBackward true in
   exact (by
     dsimp only
-    have := strictHenselization_globalSections_preservesFiniteColimits s
+    have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
     let m := (mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus
@@ -107,7 +109,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
     dsimp only [Functor.comp_map] at hn
     change _ ≫ _ ≫ G.map ((DerivedCategory.homologyFunctor _ n).map
       (DerivedCategory.Plus.ι.map m)) ≫ _ = _
-    unfold strictLocalBaseChangeTargetIso strictHenselizationLerayHomologyIso
+    unfold strictLocalBaseChangeTargetIso exactGlobalSectionsLerayHomologyIso
     simp only [Iso.trans_hom, Functor.mapIso_hom]
     erw [← reassoc_of% hn]
     let T := (upperStar AddCommGrpCat.{v + 1}

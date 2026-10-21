@@ -17,16 +17,13 @@
    "text": "Supply exact global sections for the original affine-neighbourhood colimit scheme using strictHenselizationScheme_globalSections_preservesFiniteColimits, proved from strictHenselizationLocalStructure and the terminal-sections theorem. Compute the cocycle class using leftHomologyData.π_comp_homologyIso_inv. Apply the chain map given by sourceFreeSectionsComplexIso followed by the degreewise transformation τ. For an exact functor, ShortComplex.LeftHomologyData.homologyπ_comp_homologyIso_hom and mapHomologyIso_eq identify the mapped homology projection with the mapped original projection after mapCyclesIso. Apply this for inverse image U and strict-local sections G. The composite cycle inclusion is G.map (U.map (L.iCycles n)); it is monic. Cancel this inclusion to identify the mapped cycle with τ applied to free-generator evaluation of L.liftCycles f. This follows from cyclesMap_i, cyclesIso_inv_comp_iCycles, Cochain.fromSingleEquiv_fromSingleMk and naturality of τ for L.iCycles n. Naturality for L.homologyπ n now gives the restriction identity before localization.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
-    "def-weil-pbc-strict-henselization-restriction",
     "lem-weil-pbc-strict-henselization-scheme-sections-exact"
    ],
    "elementary": false
   },
   {
    "text": "Prove the generic exact-functor transport identity: the inverse homology localization factorization, followed by homology of F.mapDerivedCategoryFactors.inv and F.mapDerivedCategory.map t, then the inverse derived homology comparison, equals the complex homology comparison followed by F.map of the original localized homology transport. Use naturality of mapDerivedCategoryHomologyFunctorIso.inv at t, cancel its hom component, and apply mapDerivedCategoryHomologyFunctorIso_hom_app_Q. Apply this identity first to G and then to U, postcomposing the latter identity with its hom comparison. Naturality of homologyFunctorFactors.inv for the degreewise transformation τ removes Q.map from that map.",
-   "uses": [
-    "def-weil-pbc-strict-henselization-restriction"
-   ],
+   "uses": [],
    "elementary": false
   },
   {
@@ -36,18 +33,24 @@
     "lem-weil-pbc-source-localized-cocycle-homology"
    ],
    "elementary": true
+  },
+  {
+   "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-scheme-sections-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-local-injective-source-comparison",
-  "def-weil-pbc-strict-henselization-restriction",
-  "lem-weil-pbc-source-localized-cocycle-homology",
-  "lem-weil-pbc-strict-henselization-scheme-sections-exact"
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "lem-weil-pbc-source-localized-cocycle-homology"
  ],
  "proof_origin": {
-  "by": "agent K1, complete Lean proof from cycle projections and exact-functor naturality; H4 repairs original-model exactness after the upstream model change",
+  "by": "agent M2, API adaptation of the existing proof",
   "document": "Stacks Project",
-  "place": "Tags 03Q9 (theorem-higher-direct-images), final paragraph, and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian); explicit compatibility of the cited constructions"
+  "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison; restriction generalized to PointedEtaleSectionCone without changing its canonical maps."
  },
  "mathlib_searches": [
   {
@@ -126,7 +129,7 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.SourceCocycleExactRestriction",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/SourceCocycleExactRestriction.lean",
   "declaration": "AlgebraicGeometry.Etale.smallModel_sourceCocycleExactRestriction",
-  "statement": "theorem smallModel_sourceCocycleExactRestriction {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) (W : S.Etale) (τ : (sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj (op W) ⟶ upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) ⋙ Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}) (f : (strictLocalFreeSheaf S.smallEtaleTopology).obj W ⟶ L.X n) (hf : f ≫ L.d n (n + 1) = 0) : let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1} letI := strictHenselization_globalSections_preservesFiniteColimits s let c := CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf) let C := (U.mapHomologicalComplex (.up ℤ)).obj L let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L let x := ((HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map (smallModel_sourceFreeSectionsComplexIso W L).hom) ((leftHomologyData ((CochainComplex.singleFunctor _ 0).obj ((strictLocalFreeSheaf S.smallEtaleTopology).obj W)) L n).homologyIso.inv c) (((DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map (DerivedCategory.Q.map a ≫ G.mapDerivedCategoryFactors.inv.app C ≫ G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.inv.app L ≫ U.mapDerivedCategory.map r.inv)) ≫ (G.mapDerivedCategoryHomologyFunctorIso n).inv.app (U.mapDerivedCategory.obj K.obj)) x : G.obj ((DerivedCategory.Plus.homologyFunctor _ n).obj (U.mapDerivedCategoryPlus.obj K))) = (G.map ((U.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app K)) (τ.app ((DerivedCategory.Plus.homologyFunctor _ n).obj K) (smallModel_sourceCocycleHomologySection K L r n W f hf))",
+  "statement": "theorem smallModel_sourceCocycleExactRestriction {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) (W : S.Etale) (τ : (sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj (op W) ⟶ upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) ⋙ Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}) (f : (strictLocalFreeSheaf S.smallEtaleTopology).obj W ⟶ L.X n) (hf : f ≫ L.d n (n + 1) = 0) : let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1} letI := strictHenselizationScheme_globalSections_preservesFiniteColimits s let c := CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf) let C := (U.mapHomologicalComplex (.up ℤ)).obj L let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L let x := ((HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map (smallModel_sourceFreeSectionsComplexIso W L).hom) ((leftHomologyData ((CochainComplex.singleFunctor _ 0).obj ((strictLocalFreeSheaf S.smallEtaleTopology).obj W)) L n).homologyIso.inv c) (((DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map (DerivedCategory.Q.map a ≫ G.mapDerivedCategoryFactors.inv.app C ≫ G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.inv.app L ≫ U.mapDerivedCategory.map r.inv)) ≫ (G.mapDerivedCategoryHomologyFunctorIso n).inv.app (U.mapDerivedCategory.obj K.obj)) x : G.obj ((DerivedCategory.Plus.homologyFunctor _ n).obj (U.mapDerivedCategoryPlus.obj K))) = (G.map ((U.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app K)) (τ.app ((DerivedCategory.Plus.homologyFunctor _ n).obj K) (smallModel_sourceCocycleHomologySection K L r n W f hf))",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
@@ -146,14 +149,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-651cf",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261020T233100-L-891847",
+  "landing": "20261021T022438-L-2847349",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
  },
  "lean_audit": {
   "master": {

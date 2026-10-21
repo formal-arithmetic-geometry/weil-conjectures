@@ -453,7 +453,7 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
     Functor.associator_inv_app, Functor.associator_hom_app, Category.id_comp]
   unfold strictLocalSectionRestrictionNat
   dsimp only [Functor.comp_obj]
-  unfold strictHenselizationSectionRestriction
+  unfold PointedEtaleSectionCone.restriction
   have hterminal : IsTerminal.isTerminalOfObj
       (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤
         (Scheme.strictHenselizationScheme s))
@@ -472,7 +472,7 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
   let H := (upperStar A p).obj F
   let G := (upperStar A g).obj ((lowerStar A f).obj F)
   let P := (lowerStar A h).obj H
-  let σ := strictHenselizationNeighbourhoodSection s i
+  let σ := strictLocalNeighbourhoodSection s i
   let b := (baseChangeMap A (IsPullback.of_hasPullback f g).toCommSq).app F
   let tS := Sheaf.ΓNatIsoSheafSections (Scheme.strictHenselizationScheme s).smallEtaleTopology A
     (MorphismProperty.Over.mkIdTerminal (P := @Etale) (Scheme.strictHenselizationScheme s))

@@ -12,12 +12,24 @@
   "def-weil-pbc-canonical-derived-cohomology-germs",
   "def-weil-pbc-strict-henselization-restriction"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+    "def-weil-pbc-exact-global-sections-leray"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "def-weil-pbc-exact-global-sections-leray"
+ ],
  "proof_origin": {
-  "by": "G2 following document",
+  "by": "agent M2, API adaptation of the existing proof",
   "document": "Stacks Project",
-  "place": "Tags 03Q9 and 0BKV, with canonical derived Hom comparisons expanded by G2"
+  "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph; restriction generalized to PointedEtaleSectionCone without changing its canonical maps."
  },
  "mathlib_searches": [
   {
@@ -89,14 +101,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "C-651cf",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T085242-L-16042",
+  "landing": "20261021T022438-L-2847349",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
  },
  "lean_audit": {
   "master": {

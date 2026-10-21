@@ -5,7 +5,7 @@ Authors: SHEAF group NQ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
@@ -35,7 +35,7 @@ noncomputable def etaleStalkSpecialization
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶
       (Scheme.pointSmallEtale (t ≫ Scheme.strictHenselizationStructuralMap s)).sheafFiber.obj F :=
-  Classical.choose (existsUnique_strictHenselizationStalkRestriction s F) ≫
+  Classical.choose ((strictLocalSectionCone s).existsUnique_restriction F) ≫
     (Sheaf.ΓNatIsoSheafSections _ _
       (IsTerminal.isTerminalOfObj
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤

@@ -5,7 +5,10 @@ Authors: SHEAF group G2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.ExactGlobalSectionsLeray
+public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Projection restriction formulas for the strict-local mate
 
@@ -75,7 +78,9 @@ noncomputable def strictLocalBaseChangeTargetIso
       ((upperStar AddCommGrpCat.{v + 1}
         (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).mapDerivedCategory.obj
         K.obj) :=
-  strictHenselizationLerayHomologyIso s f n _
+  exactGlobalSectionsLerayHomologyIso
+    (strictHenselizationScheme_globalSections_preservesFiniteColimits s)
+    (pullback.snd f (Scheme.strictHenselizationStructuralMap s)) n _
 
 /-- Hypercohomology identifications, their transitions, and their compatibility with
 projection restriction. There is no source colimit assertion in this data.
