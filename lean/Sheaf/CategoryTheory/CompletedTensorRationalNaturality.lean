@@ -8,7 +8,6 @@ module
 public import Sheaf.CategoryTheory.ScalarLocalization
 public import Mathlib.CategoryTheory.Products.Basic
 import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Naturality and rationalization of a completed tensor comparison
@@ -66,6 +65,45 @@ def comparison
       (tensor C L T).obj ((restriction C H hH).obj M, (restriction C H hH).obj N) :=
   ObjectProperty.isoMk C
     (c (T.obj (M.obj, N.obj)) ≪≫ C.ι.mapIso (L.mapIso (τ.app (M.obj, N.obj))))
+
+private theorem tensor_fraction (A : Type r) [CommRing A] (p : A)
+    (V : Type v) [AddCommGroup V] [Module A V]
+    (x : Localization.Away p ⊗[A] V) :
+    ∃ (f : V) (n : ℕ), x =
+      (IsLocalization.Away.invSelf (S := Localization.Away p) p ^ n) ⊗ₜ[A] f := by
+  obtain ⟨⟨f, s⟩, hs⟩ := IsLocalizedModule.surj (Submonoid.powers p)
+    (TensorProduct.mk A (Localization.Away p) V 1) x
+  obtain ⟨n, hn⟩ := s.property
+  refine ⟨f, n, ?_⟩
+  have hi : (IsLocalization.Away.invSelf (S := Localization.Away p) p ^ n) *
+      algebraMap A (Localization.Away p) (p ^ n) = 1 := by
+    rw [map_pow, ← mul_pow, mul_comm, IsLocalization.Away.mul_invSelf, one_pow]
+  change (s : A) • x = 1 ⊗ₜ[A] f at hs
+  rw [← hn, ← algebraMap_smul (Localization.Away p) (p ^ n) x] at hs
+  have hh := congrArg
+    (fun y ↦ (IsLocalization.Away.invSelf (S := Localization.Away p) p ^ n) • y) hs
+  rw [smul_smul, hi, one_smul] at hh
+  simpa only [TensorProduct.mk_apply, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+    using hh
+
+private theorem map_heq {E : Type u} [Category.{v} E]
+    {F : Type u} [Category.{v} F]
+    (J : E ⥤ F) {X Y X' Y' : E} (hx : X = X') (hy : Y = Y')
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (h : HEq f g) : HEq (J.map f) (J.map g) := by
+  subst X'; subst Y'
+  cases eq_of_heq h
+  rfl
+
+private theorem prod_heq {E : Type u} [Category.{v} E]
+    {X Y X' Y' Z W Z' W' : E}
+    (hx : X = X') (hy : Y = Y') (hz : Z = Z') (hw : W = W')
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Z ⟶ W} {g' : Z' ⟶ W'}
+    (hf : HEq f f') (hg : HEq g g') :
+    HEq (Prod.mkHom f g) (Prod.mkHom f' g') := by
+  subst X'; subst Y'; subst Z'; subst W'
+  cases eq_of_heq hf
+  cases eq_of_heq hg
+  rfl
 
 /-- Unit normalization forces naturality and a unique rational tensor comparison.
 Source: blueprint `def-wf-tensor-product`, second sentence (tensor Frobenius)
@@ -139,6 +177,109 @@ theorem naturality_and_rationalization
         HEq (μ.inv.app (⟨M⟩, ⟨N⟩))
           ((ScalarLocalization.localization A C.FullSubcategory p).map
             (comparison C L H hH T c τ M N).inv) := by
-  sorry
+  classical
+  have _ := hT
+  have hcancel (X : D) (Y : C.FullSubcategory)
+      (a b : H.functor.obj (C.ι.obj (L.obj X)) ⟶ Y.obj)
+      (h : H.functor.map (η.app X) ≫ a = H.functor.map (η.app X) ≫ b) : a = b := by
+    apply (cancel_epi (c X).inv).1
+    apply (hη (H.functor.obj X) Y).1
+    simpa only [← hc X, Category.assoc, Iso.hom_inv_id_assoc] using h
+  have hcn (X X' : D) (f : X ⟶ X') :
+      H.functor.map (C.ι.map (L.map f)) ≫ (c X').hom =
+        (c X).hom ≫ C.ι.map (L.map (H.functor.map f)) := by
+    apply hcancel X (L.obj (H.functor.obj X'))
+    calc
+      _ = H.functor.map (η.app X ≫ C.ι.map (L.map f)) ≫ (c X').hom := by
+        rw [H.functor.map_comp, Category.assoc]
+      _ = H.functor.map (f ≫ η.app X') ≫ (c X').hom := by
+        rw [show η.app X ≫ C.ι.map (L.map f) = f ≫ η.app X' from
+          (η.naturality f).symm]
+      _ = H.functor.map f ≫ η.app (H.functor.obj X') := by
+        rw [H.functor.map_comp, Category.assoc, hc]
+      _ = η.app (H.functor.obj X) ≫ C.ι.map (L.map (H.functor.map f)) :=
+        η.naturality (H.functor.map f)
+      _ = _ := by rw [← hc X, Category.assoc]
+  have hdn (M M' N N' : C.FullSubcategory) (f : M ⟶ M') (g : N ⟶ N') :
+      (restriction C H hH).map ((tensor C L T).map (Prod.mkHom f g)) ≫
+          (comparison C L H hH T c τ M' N').hom =
+        (comparison C L H hH T c τ M N).hom ≫
+          (tensor C L T).map (Prod.mkHom
+            ((restriction C H hH).map f) ((restriction C H hH).map g)) := by
+    apply C.ι.map_injective
+    change H.functor.map (C.ι.map (L.map (T.map (Prod.mkHom f.hom g.hom)))) ≫
+        ((c _).hom ≫ C.ι.map (L.map (τ.hom.app (M'.obj, N'.obj)))) =
+      ((c _).hom ≫ C.ι.map (L.map (τ.hom.app (M.obj, N.obj)))) ≫
+        C.ι.map (L.map (T.map (Prod.mkHom (H.functor.map f.hom) (H.functor.map g.hom))))
+    rw [← Category.assoc, hcn, Category.assoc, ← C.ι.map_comp, ← L.map_comp]
+    have ht := τ.hom.naturality (Prod.mkHom f.hom g.hom)
+    dsimp at ht
+    rw [ht]
+    rw [L.map_comp, C.ι.map_comp, Category.assoc]
+  refine ⟨hcn, hdn, ?_⟩
+  let Q := ScalarLocalization.localization A C.FullSubcategory p
+  let P := restriction C H hH
+  let B := tensor C L T
+  let d := comparison C L H hH T c τ
+  have hp (M N : C.FullSubcategory) :
+      (Bbar ⋙ Pbar).obj (⟨M⟩, ⟨N⟩) = Q.obj (P.obj (B.obj (M, N))) :=
+    (congrArg Pbar.obj (hBobj M N)).trans (hPobj (B.obj (M, N)))
+  have hb (M N : C.FullSubcategory) :
+      ((Pbar.prod Pbar) ⋙ Bbar).obj (⟨M⟩, ⟨N⟩) =
+        Q.obj (B.obj (P.obj M, P.obj N)) := by
+    change Bbar.obj (Pbar.obj ⟨M⟩, Pbar.obj ⟨N⟩) = _
+    rw [hPobj M, hPobj N]
+    exact hBobj _ _
+  let e (M N : C.FullSubcategory) :=
+    eqToIso (hp M N) ≪≫ Q.mapIso (d M N) ≪≫ (eqToIso (hb M N)).symm
+  have eh (M N : C.FullSubcategory) :
+      HEq (e M N).hom (Q.map (d M N).hom) := by
+    simp only [e, Iso.trans_hom, eqToIso.hom, Iso.symm_hom, eqToIso.inv,
+      Functor.mapIso_hom, eqToHom_comp_heq_iff, comp_eqToHom_heq_iff]
+    rfl
+  have ei (M N : C.FullSubcategory) :
+      HEq (e M N).inv (Q.map (d M N).inv) := by
+    simp only [e, Iso.trans_inv, eqToIso.hom, Iso.symm_inv, eqToIso.inv,
+      Functor.mapIso_inv, eqToHom_comp_heq_iff, comp_eqToHom_heq_iff]
+    rfl
+  have en (X Y : ScalarLocalization A C.FullSubcategory p ×
+      ScalarLocalization A C.FullSubcategory p) (f : X ⟶ Y) :
+      (Bbar ⋙ Pbar).map f ≫ (e Y.1.obj Y.2.obj).hom =
+        (e X.1.obj X.2.obj).hom ≫ ((Pbar.prod Pbar) ⋙ Bbar).map f := by
+    rcases X with ⟨⟨M⟩, ⟨N⟩⟩
+    rcases Y with ⟨⟨M'⟩, ⟨N'⟩⟩
+    rcases f with ⟨f, g⟩
+    obtain ⟨f, n, rfl⟩ := tensor_fraction A p (M ⟶ M') f
+    obtain ⟨g, m, rfl⟩ := tensor_fraction A p (N ⟶ N') g
+    have hl := (map_heq Pbar (hBobj M N) (hBobj M' N')
+      (hBmap M M' N N' f g n m)).trans (hPmap _ _ (B.map (Prod.mkHom f g)) (n + m))
+    have hr := (map_heq Bbar
+      (congrArg₂ Prod.mk (hPobj M) (hPobj N))
+      (congrArg₂ Prod.mk (hPobj M') (hPobj N'))
+      (prod_heq (hPobj M) (hPobj M') (hPobj N) (hPobj N')
+        (hPmap M M' f n) (hPmap N N' g m))).trans
+      (hBmap _ _ _ _ (P.map f) (P.map g) n m)
+    have hleft := heq_comp (hp M N) (hp M' N') (hb M' N') hl (eh M' N')
+    have hright := heq_comp (hp M N) (hb M N) (hb M' N') (eh M N) hr
+    apply eq_of_heq
+    refine hleft.trans (HEq.trans ?_ hright.symm)
+    apply heq_of_eq
+    change ScalarLocalization.composition A C.FullSubcategory p _ _ _
+        (1 ⊗ₜ[A] (d M' N').hom)
+        ((IsLocalization.Away.invSelf p ^ (n + m)) ⊗ₜ[A]
+          P.map (B.map (Prod.mkHom f g))) =
+      ScalarLocalization.composition A C.FullSubcategory p _ _ _
+        ((IsLocalization.Away.invSelf p ^ (n + m)) ⊗ₜ[A]
+          B.map (Prod.mkHom (P.map f) (P.map g))) (1 ⊗ₜ[A] (d M N).hom)
+    simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
+    rw [hdn M M' N N' f g]
+  let μ : Bbar ⋙ Pbar ≅ (Pbar.prod Pbar) ⋙ Bbar :=
+    NatIso.ofComponents (fun X ↦ e X.1.obj X.2.obj) (fun {X Y} f ↦ en X Y f)
+  refine ⟨μ, fun M N ↦ ⟨eh M N, ei M N⟩, ?_⟩
+  intro ν hν
+  apply Iso.ext
+  apply NatTrans.ext
+  funext X
+  exact eq_of_heq ((hν X.1.obj X.2.obj).1.trans (eh X.1.obj X.2.obj).symm)
 
 end CategoryTheory.CompletedTensorComparison
