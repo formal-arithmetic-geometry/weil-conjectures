@@ -28,112 +28,67 @@
  ],
  "proof": [
   {
-   "text": "Condition (2) at $n=1$ gives $K_1\\in\\Dbc(X,\\cO_E/\\pi_E)$, proving $(2)\\Rightarrow(1)$.",
+   "text": "Condition (2) at $n=1$ gives condition (1).",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "First paragraph: specialize to n=1."
+    "place": "First paragraph."
    }
   },
   {
-   "text": "Put $t=\\pi_E$, $B=\\cO_{E,X}$, $\\Lambda_j=\\cO_E/t^j$ and $R_j=(\\Lambda_j)_X$. Every $\\Lambda_j$ is a finite commutative ring: [lem-weil-l-adic-extension-absolute-value] supplies the nonarchimedean absolute value on $E$; [lem-weil-l-adic-extension-integers-dvr] says its valuation ring is a DVR with finite residue field and that $t$ generates its maximal ideal; [lem-weil-valued-dvr-finite-quotients], clause (2), then applies to give finiteness for every $j\\ge1$. The coefficient sheaf $(\\Lambda_j)_X=p_X^*\\underline{\\Lambda_j}$ of [sk-def-sfb-pulled-back-coefficients] is the constant sheaf of rings with value $\\Lambda_j$: the condensed set of the finite discrete set $\\Lambda_j$ is represented by the finite profinite set $\\Lambda_j$, and $p_X^*$ is the inverse image along $u_X$ ([sk-def-sfb-pullback-from-point], clause 4), so it sends this representable to the sheaf represented by $X[\\Lambda_j]=\\coprod_{\\Lambda_j}X$, which represents the constant sheaf by [det-prop-sfb-qlbar-colimit-x-integral-limit], clause 1; the ring structures agree since both are induced by the ring operations of $\\Lambda_j$. For these finite rings, the constructibility conventions in [sk-def-sfb-constructible] and [def-weil-proetale-constructible-sheaf] agree: the coefficient sheaf is constant, a finitely presented module is a quotient of a finite free module and hence finite as a set; conversely a finite module admits a surjection from a finite free module, whose kernel is finite and hence finitely generated. A constant local model $\\Lambda_U\\otimes_\\Lambda P$ is the constant sheaf of $P$: both are the sheafification of the constant module presheaf $P$. Thus both definitions ask for finite constant local models on a finite constructible stratification. Here $X$ is Noetherian, hence qcqs, so the global finite-stratification clause applies.",
+   "text": "Put $t=\\pi_E$, $B=\\mathcal O_{E,X}$, $\\Lambda_j=\\mathcal O_E/t^j$ and $R_j=(\\Lambda_j)_X$. The extension absolute value, DVR and finite-quotient lemmas give that every $\\Lambda_j$ is finite. Apply the finite-coefficient model comparison to identify both constructibility conventions, retaining the same vanishing intervals.",
    "uses": [
     "lem-weil-l-adic-extension-absolute-value",
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
-    "sk-def-sfb-constructible",
-    "def-weil-proetale-constructible-sheaf",
-    "sk-def-sfb-pullback-from-point",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "sk-def-sfb-pulled-back-coefficients"
+    "lem-pe-finite-coefficient-model-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph: finite torsion coefficients and the classical finite-stalk constructibility convention."
+    "place": "Second paragraph: finite quotient rings and constructibility conventions."
    }
   },
   {
-   "text": "For $n>1$ the first assertion of [det-pe-derived-nakayama-resolution] identifies $R_j=B/t^jB$ and says multiplication by $t$ on $B$ is injective. Consequently\n$$0\\longrightarrow R_{n-1}\\xrightarrow{\\ t\\ }R_n\\longrightarrow R_1\\longrightarrow0$$\nis a short exact sequence of $R_n$-modules, with scalar structures through $R_n\\to R_{n-1}$ and $R_n\\to R_1$. Indeed the first map sends the local class of $b$ to the class of $tb$; if $tb=t^nc$, injectivity of multiplication by $t$ gives $b=t^{n-1}c$, so the map is injective. The kernel of the final quotient is precisely the local classes divisible by $t$, which is the image of the first map. Quotient sheaf sections have such representatives locally; this proves sheaf exactness. All maps are $R_n$-linear by the displayed formulas. Kernels and sheafified cokernels compute exactness in module sheaves by [def-weil-sheaf-of-modules-category], so this is exact in that coefficient category as well.",
+   "text": "The first assertion of [det-pe-derived-nakayama-resolution] gives injectivity of $t$ on $B$ and $R_j=B/t^jB$. Apply [lem-pe-successive-quotient-linear-triangle] for $n>1$: in $D(R_n)$ the outer terms of its triangle are the scalar restrictions of $K_{n-1}$ and $K_1$, and the middle term is $K_n$.",
    "uses": [
     "det-pe-derived-nakayama-resolution",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph: the coefficient short exact sequence, with its R_n-linear structure made explicit."
-   }
-  },
-  {
-   "text": "Choose a representing complex for $K$. By [lem-pc-kflat-resolution] it has a K-flat resolution $P^\\bullet$ with flat $B$-module terms; there is no boundedness assumption on $K$. By the exact-functor definition [def-pc-flat-sheaf-modules], tensoring the preceding sequence with each $P^a$ preserves its kernel and cokernel, yielding a degreewise short exact sequence\n$$0\\to P^\\bullet\\otimes_B R_{n-1}\\to P^\\bullet\\otimes_B R_n\\to P^\\bullet\\otimes_B R_1\\to0.$$\nThese are complexes of $R_n$-modules with the action on the second tensor factor, and their differentials and the sequence maps are $R_n$-linear. Exactness of the underlying module sheaves is exactness here, by the kernel/cokernel description in [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-complex-ses-triangle] in the abelian category of $R_n$-module sheaves. By [lem-pur-derived-change-of-rings] each $P^\\bullet\\otimes_B R_j$ represents $K_j$ in its own coefficient category; regarding the same complex as an $R_n$-complex therefore gives a distinguished triangle\n$$\\operatorname{Res}_{R_n\\to R_{n-1}}K_{n-1}\\longrightarrow K_n\\longrightarrow\\operatorname{Res}_{R_n\\to R_1}K_1\\longrightarrow(\\operatorname{Res}_{R_n\\to R_{n-1}}K_{n-1})[1]$$\nin $D(R_n)$. In particular this constructs the required triangle with the quotient-ring action, rather than inferring that action from a triangle only in $D(B)$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-flat-sheaf-modules",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-pur-derived-change-of-rings"
+    "lem-pe-successive-quotient-linear-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph: applying derived tensor to the coefficient sequence; the construction uses Stacks 06YS, 03ER, 06YY and 0152."
+    "place": "Second paragraph: coefficient exact sequence and derived tensor triangle."
    }
   },
   {
-   "text": "For $1\\le j\\le n$, restriction along $R_n\\to R_j$ preserves bounded constructibility. Indeed [def-pc-sheaf-restrict-scalars] leaves the underlying abelian sheaf unchanged. Kernels and sheafified cokernels are unchanged by [def-weil-sheaf-of-modules-category], so this restriction is exact and the cohomology of a restricted complex is the restricted cohomology. In the definition [def-weil-proetale-constructible-sheaf], keep the same finite stratification and the same pro-étale covers trivializing a constructible $R_j$-sheaf. A constant local model $M$ becomes the same constant sheaf with $\\Lambda_n$ acting through $\\Lambda_n\\to\\Lambda_j$; this follows directly by applying that scalar action to local constant sections and their gluings, and commutes with restriction to each stratum. Its stalk set is unchanged and finite. Thus it is a finite $\\Lambda_n$-module and these same models witness constructibility. Cohomological vanishing bounds are unchanged as well.",
+   "text": "Assume (1), choosing $r\\le s$ with $H^q(K_1)=0$ outside $[r,s]$. Induct on $n\\ge1$ with simultaneous claims: $K_n$ is bounded constructible and has this same bound. The base is (1). At $n>1$, [lem-pe-finite-scalar-restriction-constructible] puts both outer triangle terms in the bounded constructible category over the finite ring $\\Lambda_n$, without changing bounds. The distinguished-triangle clause of [lem-weil-proetale-dbc-triangulated] gives constructibility of $K_n$. The long exact sequence [lem-sf-derived-homology-long-exact] contains $H^q(\\operatorname{Res}K_{n-1})\\to H^q(K_n)\\to H^q(\\operatorname{Res}K_1)$. Outside $[r,s]$ both outer terms vanish, so exactness forces the middle term to vanish. This completes the induction and proves (2).",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-constructible-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph, last sentence: restriction of scalars preserves constructibility; the finite local models are unchanged."
-   }
-  },
-  {
-   "text": "Assume (1), and fix integers $r\\le s$ such that $H^q(K_1)=0$ outside $[r,s]$. Induct on $n\\ge1$, asserting both bounded constructibility and this same bound for $K_n$. The base case is the hypothesis. For $n>1$, the preceding scalar-restriction argument puts the two outer terms of the preceding triangle in $\\Dbc(X,\\Lambda_n)$. By step 2, $\\Lambda_n$ is finite commutative. The scheme $X$ and this ring satisfy all hypotheses of [lem-weil-proetale-dbc-triangulated], whose distinguished-triangle clause therefore gives bounded constructibility of the middle term $K_n$ over $\\Lambda_n$.",
-   "uses": [
-    "lem-weil-proetale-dbc-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph: induction and closure of bounded constructible finite-coefficient complexes under distinguished triangles; Stacks 09B5, 09AL and 06UQ."
-   }
-  },
-  {
-   "text": "For the same inductive step, [lem-sf-derived-homology-long-exact] applied in $D(R_n)$ gives the exact segment\n$$H^q(K_{n-1})\\longrightarrow H^q(K_n)\\longrightarrow H^q(K_1).$$\nThe outer sheaves here have the restricted $R_n$-actions described above. For $q<r$ or $q>s$, both are zero, by the induction hypothesis and the chosen bound for $K_1$. Exactness forces $H^q(K_n)=0$. This completes the induction with the identical interval $[r,s]$ for all $n$, proving $(1)\\Rightarrow(2)$.",
-   "uses": [
+    "lem-pe-finite-scalar-restriction-constructible",
+    "lem-weil-proetale-dbc-triangulated",
     "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph: the long exact sequence gives the uniform interval; Stacks 05RS and 0147."
+    "place": "Second paragraph: induction, constructible extension closure and uniform interval."
    }
   },
   {
-   "text": "For the final interpretation, [det-prop-sfb-qlbar-colimit-x-integral-limit], clause 3, identifies the pulled-back coefficient sheaf $B$ with the completed coefficient sheaf $\\varprojlim_j R_j$ as sheaves of rings, and [det-prop-integral-criterion-constant-coefficients] fixes the same finite-reduction tower and canonical completion map. In particular the K-flat representative $P^\\bullet$ used above computes exactly the reductions of [def-weil-integral-derived-reduction] over this completed sheaf. By [sk-def-pe-derived-completion], the canonical map $\\varphi:K\\to L=R\\varprojlim_n K_n$ is an isomorphism. Write its Roos triangle [def-weil-derived-limit] as $L\\xrightarrow{\\iota}\\prod_n\\operatorname{Res} K_n\\xrightarrow{1-s}\\prod_n\\operatorname{Res} K_n\\xrightarrow{\\delta_L}L[1]$. The canonical map has $\\iota\\varphi=(c_n)_n$, with $c_n:K\\to\\operatorname{Res}K_n$ the reduction maps. Hence $( (c_n)_n,1-s,\\varphi[1]^{-1}\\delta_L)$ is a distinguished triangle, being isomorphic to this Roos triangle through $(\\varphi,\\mathrm{id},\\mathrm{id})$. This is precisely the completeness condition of [def-weil-derived-complete]. Finally [def-weil-finite-torsion-constructibility] and [def-weil-proetale-constructible-sheaf] require the identical finite locally closed constructible stratifications, locally constant restrictions and finite module stalks. By [def-weil-cohomological-support], $\\operatorname{Supp}_{\\mathrm{coh}}(K_n)\\subseteq[r,s]$ says exactly that $\\mathcal H^q(K_n)=0$ for $q\\notin[r,s]$. Thus, under the already assumed completeness, the remaining conditions of [def-weil-derived-complete-integral-detailed] are exactly (2), and the equivalence proved above replaces them by (1). The definition [def-weil-derived-complete-integral-detailed] is stated for $\\ell\\neq p$, with $p$ the prime of the fixed global finite-field datum, and this interpretation is made in that range; the equivalence $(1)\\Leftrightarrow(2)$ proved in steps 1-7 uses no such hypothesis, and neither the completed sheaf nor the displayed predicates depends on $p$. No Tor-amplitude condition is inserted.",
+   "text": "For the final interpretation apply [lem-pe-integral-completion-presentation] to the already complete $K$: its completed-coefficient reduction tower is the same tower, and it satisfies the completeness condition used by [def-weil-derived-complete-integral-detailed]. Finite-torsion constructibility [def-weil-finite-torsion-constructibility] imposes literally the clauses of [def-weil-proetale-constructible-sheaf] for $\\Lambda=A_{E,n}$ (finite partition into locally closed constructible strata, locally constant restrictions, finite module stalks), so by [lem-pe-finite-coefficient-model-comparison] it is precisely the constructibility used above. By [def-weil-cohomological-support], support in $[r,s]$ means vanishing outside it. Thus the remaining defining conditions are exactly (2), hence equivalent to (1). This final interpretation uses the global range $\\ell\\ne p$ of that definition; the equivalence (1)--(2) itself does not require it. No Tor-amplitude condition is added.",
    "uses": [
-    "det-prop-integral-criterion-constant-coefficients",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "def-weil-integral-derived-reduction",
-    "sk-def-pe-derived-completion",
-    "def-weil-derived-limit",
-    "def-weil-derived-complete",
+    "lem-pe-integral-completion-presentation",
+    "lem-pe-finite-coefficient-model-comparison",
+    "def-weil-derived-complete-integral-detailed",
     "def-weil-finite-torsion-constructibility",
-    "def-weil-proetale-constructible-sheaf",
     "def-weil-cohomological-support",
-    "def-weil-derived-complete-integral-detailed"
+    "def-weil-proetale-constructible-sheaf"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Statement final sentence and second proof paragraph: interpret the equivalence in the derived-complete integral category."
+    "place": "Statement final sentence: interpret the all-reductions criterion."
    }
   }
  ],
@@ -141,28 +96,17 @@
   "lem-weil-l-adic-extension-absolute-value",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-valued-dvr-finite-quotients",
-  "sk-def-sfb-constructible",
-  "def-weil-proetale-constructible-sheaf",
-  "sk-def-sfb-pullback-from-point",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "sk-def-sfb-pulled-back-coefficients",
+  "lem-pe-finite-coefficient-model-comparison",
   "det-pe-derived-nakayama-resolution",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-kflat-resolution",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-pur-derived-change-of-rings",
-  "def-pc-sheaf-restrict-scalars",
+  "lem-pe-successive-quotient-linear-triangle",
+  "lem-pe-finite-scalar-restriction-constructible",
   "lem-weil-proetale-dbc-triangulated",
   "lem-sf-derived-homology-long-exact",
-  "det-prop-integral-criterion-constant-coefficients",
-  "def-weil-integral-derived-reduction",
-  "sk-def-pe-derived-completion",
-  "def-weil-derived-limit",
-  "def-weil-derived-complete",
+  "lem-pe-integral-completion-presentation",
+  "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-torsion-constructibility",
   "def-weil-cohomological-support",
-  "def-weil-derived-complete-integral-detailed"
+  "def-weil-proetale-constructible-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
@@ -269,31 +213,23 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-integral-criterion",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-prop-integral-criterion-reductions",
   "worker": "stage1",
-  "summary": "Completed the blueprint induction with no new nodes. Expanded coefficient finiteness, constructed the short exact sequence and distinguished triangle inside D(R_n) using a flat-term K-flat resolution, checked scalar restriction on finite constant local models, and separated triangulated constructibility closure from the fixed cohomological bound. Added explicit notion references and replaced a non-node unit citation by plain text; no mathematical hypotheses or conclusions changed. Corrected initial invalid Mathlib search patterns/scopes by recording and retrying them. Second reading made the finite-module equivalence explicit and added the finite-torsion constructibility and integral-reduction definitions to the final comparison; the Roos-triangle isomorphism is written with its maps.",
-  "blueprint": "Step 1 realizes the first proof paragraph. Steps 2-5 expand the second paragraph coefficient exact sequence, derived tensor construction and scalar restriction. Steps 6-7 realize its constructibility induction and uniform cohomological interval. Step 8 explains the statement final sentence in the same completed coefficient category.",
+  "summary": "Repair of the 2026-10-21 coarse-split return. Kept the mathematical statement and all maintained Lean metadata unchanged. Replaced the 8379-character proof with a short assembly using four smaller auxiliary lemmas: finite-model comparison, quotient-linear reduction triangle, finite scalar restriction, and integral completion presentation. New nodes are statement-only as the delivery contract requires; report.md supplies a complete proof in words for each, all below 3000 characters. Existing coefficient and triangulated tools are reused.",
+  "blueprint": "Step 1 realizes the first proof paragraph. Steps 2--4 realize the second paragraph on finite coefficients, quotient-linear triangles and the simultaneous constructibility/interval induction. Step 5 realizes the statement final sentence in the completed coefficient presentation.",
   "tool_uses": [
    {
     "node": "det-pe-derived-nakayama-resolution",
-    "why": "Its first assertion identifies quotient sheaves and injectivity of the uniformizer; the integral-criterion unit does not supply this elementary coefficient infrastructure."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "General unbounded K-flat flat-term resolution theorem used to construct the coefficient-linear triangle; no unit-specific geometric result replaces it."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "General K-flat computation of derived scalar extension in the target coefficient category, needed to identify the triangle terms; the unit does not supply this generic construction."
-   },
-   {
-    "node": "lem-weil-proetale-dbc-triangulated",
-    "why": "General finite-coefficient closure under distinguished triangles supplies exactly the constructibility closure used by the blueprint induction; no integral-criterion node replaces this tool."
+    "why": "Its first assertion supplies uniformizer injectivity and the quotient sheaves; this is coefficient infrastructure, not a replacement geometric route."
    },
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "General local-field arithmetic identifies the DVR and finite residue field needed for finite quotient coefficients; no step of the integral-criterion unit proves this arithmetic."
+    "why": "DVR arithmetic and the finite residue field are generic coefficient tools."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Generic finite-coefficient closure under distinguished triangles is the exact constructibility tool used by the blueprint induction."
    }
   ]
  },
@@ -305,12 +241,12 @@
   "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q125-ac3c590eb",
-  "group": "Q125",
+  "reviewer": "NT-cc-Q34-cf6b6c7f9",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-ac3c590eb (reviewer sub-agent of L); spot-checked: I read the item, the integral-criterion unit, the blueprint main-20261015 statement and proof, and the full statement of every cited node. The statement is the blueprint's word for word: X Noetherian, E/Q_ell finite, K derived complete, all n, one interval [r,s]. No hypothesis is added or dropped and no conclusion is weakened. The delivery creates no new nodes. Steps 1 and 3-7 are correct. Step 3 gets injectivity of pi on O_{E,X} from the first assertion of det-pe-derived-nakayama-resolution. Step 4 builds the triangle Res K_{n-1} -> K_n -> Res K_1 inside D(R_n) from a flat-term K-flat resolution, the short-exact-sequence triangle and derived change of rings (Stacks 06YS, 06YY, 03ER, 0152). Step 5 shows restriction of scalars keeps constructibility. Step 6 applies lem-weil-proetale-dbc-triangulated, the triangulated form of the blueprint's closure under extensions (Stacks 09B5). Step 7 gets the uniform interval from the long exact sequence. Edge cases checked: n=1 and n=2, K=0, K_1=0, an interval of one degree, X empty, nonreduced quotient rings, unbounded K. Fixed in fixes/dag/nodes/sec-proetale-coefficients/det-prop-integral-criterion-reductions.json: (C1, step 2) the claim that p_X^* of Lambda_n is the constant sheaf had no citation; I added the argument and cited sk-def-sfb-pullback-from-point clause 4, det-prop-sfb-qlbar-colimit-x-integral-limit clause 1 and sk-def-sfb-pulled-back-coefficients. (C4, step 8) The identification O_{E,X} = lim R_n was credited to the constant-coefficients node, whose statement only points to another node for it; it now cites det-prop-sfb-qlbar-colimit-x-integral-limit clause 3, which is on the unit's route. (C1, step 8) I added def-weil-cohomological-support for Supp_coh. I also reworded the remark that a prime p != ell can be 'chosen'; p is the fixed global prime, and the comparison is made where the detailed definition applies. proof_deps is resynced and the new citations create no cycle. I accept all five declared tool uses: nakayama-resolution, kflat-resolution, derived-change-of-rings, proetale-dbc-triangulated and l-adic-extension-integers-dvr. The Mathlib searches cover all three kinds and find no match. No node in the DAG duplicates this item.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-cf6b6c7f9 (reviewer sub-agent of L); spot-checked: This is the re-split the human requested on 2026-10-21; the item statement and stmt_deps are byte-identical to the base. The proof is now a 2187-character, five-step assembly of four new statement-only nodes, carrying the content of old steps 2, 3-4, 5 and 8. It follows the blueprint main-20261015 route: the case n=1, the coefficient exact sequence, the D(R_n) triangle, induction with extension closure and the long exact sequence, and restriction of scalars. Every cited statement and its hypotheses check out: finiteness of Λ_j from the absolute-value, DVR and finite-quotient lemmas; injectivity of t and R_j=B/t^jB from the first assertion of det-pe-derived-nakayama-resolution; dbc-triangulated with Λ_n finite; the long exact sequence in Mod(R_n); and the Roos triangle iso (φ,id,id) for def-weil-derived-complete with ℓ≠p. All four new nodes are true and not duplicates. Tests: finite-model comparison with Z/4 and Z/2, the zero ring, X empty; the quotient triangle with B=Z, t=2, K=Z/2, and with t a zero divisor in Z/4, where the injectivity hypothesis fails; scalar restriction along Z/2→F_4 without assuming surjectivity; completion with K=0. Duplicate candidates read and rejected: module-object equivalence, local-model lemma, étale change-of-ring, restriction-exact, adic-reduction-triangle, complex-ses-triangle, constant-coefficients. The declared tool uses (nakayama-resolution, integers-dvr, dbc-triangulated) are accepted. Fixes: (B3) lem-pe-successive-quotient-linear-triangle gains stmt_deps def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-kflat-complex and def-pc-flat-sheaf-modules, with inline citations for the K-flat and flat-term resolution; (B3) lem-pe-integral-completion-presentation gains the two category definitions in stmt_deps; (C4) item step 5 now says that finite-torsion constructibility has literally the clauses of def-weil-proetale-constructible-sheaf before applying the model comparison, and cites it in uses and proof_deps.; 3 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
