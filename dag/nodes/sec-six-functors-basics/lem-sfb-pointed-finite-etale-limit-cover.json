@@ -21,7 +21,8 @@
   "def-weil-surjective-morphism",
   "def-weil-weakly-etale-morphism",
   "def-pc-fibre-product",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-sfb-profinite-test-objects"
  ],
  "proof": [
   {
@@ -430,5 +431,45 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-7aacf4ffb (reviewer sub-agent of L); spot-checked: I read the item, all 16 steps and all 26 cited statements in full. There are no new nodes, no SGA citations and no dropped ids. The shape is clean: one commit with the item and its report. There is no re-split note for this item. Steps: (2) finite gives affine and separated, and with the qcqs-permanence lemma the stages are qcqs. (3) Trace-degree (b) gives d≥1 on connected Y_N, and limit-fibre-products with limit-nonempty makes every p_N surjective. (4) Each chart is ind-étale, so det-pe-morphisms-etale-comparison clauses 2 and 4 give weak étaleness, and the affine preimage covers V, so {v} is a pro-étale covering. (6) Compact-open descent (01Z4), surjectivity of p_N and connectedness of Y_N make T connected. (7-8) The splitting (aN,s)↦(aN,as) is well defined and invertible, base change is exact (lem-fet-finite-limits), and marked sections are unique by connectedness. (9) I checked f_s d_g = f_{gs} and d_h d_g = d_{gh} by hand, so the action is a right action. (10) Π ≅ lim Π/N as a homeomorphism. (11-12) Fibre-product limits give the Cech terms, with correct cumulative/consecutive label bijections. (13-14) LC(P,A) is the colimit and the prime-spectrum homeomorphism applies; π0 = Π^q with the quotient topology because the projection is open. (15) The cocycle derivation is correct. (16) lem-galois-pi1-functoriality gives F d'_h = d_{f_*h} F. Statement change (E7): base claimed c(gh)=c(g)c(h) for all right torsors. I verified the counterexample: X = Spec R, T = Spec C, G_m-torsor with section 1+i, giving c(σ) = −i and c(σ)² = −1. The shifted equation c(z,gh) = c(z,g)c(z·g,h) holds and keeps c(gh)=c(g)c(h) as the label-only special case. The sole citer, lem-sfb-complete-group-torsor-monodromy, works with a totally disconnected constant group G over connected T, so it still gets what it uses. This is not a weakening. I accept the 10 declared generic tool_uses: Galois, scheme-limit and pro-étale tools that replace no unit step. Stacks tags 0BND, 0BN2, 01YX, 01Z2, 01Z4, 097I and 097N resolve. Edge cases checked: Π=1, X=Spec k, Y empty, q=0. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.PointedLimitCech",
+  "declaration": "AlgebraicGeometry.Scheme.UniversalCover.nonempty_pointedLimitCechCoordinates",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.UniversalCover.finiteSplitMap",
+   "AlgebraicGeometry.Scheme.UniversalCover.profiniteProduct",
+   "AlgebraicGeometry.Scheme.UniversalCover.profiniteProductBase",
+   "AlgebraicGeometry.Scheme.UniversalCover.profiniteProductSection",
+   "AlgebraicGeometry.Scheme.UniversalCover.labelPower",
+   "AlgebraicGeometry.Scheme.UniversalCover.finiteLabelDiagram",
+   "AlgebraicGeometry.Scheme.UniversalCover.cumulativeLabel",
+   "AlgebraicGeometry.Scheme.UniversalCover.restrictedLabels",
+   "AlgebraicGeometry.Scheme.UniversalCover.rightDeck",
+   "AlgebraicGeometry.Scheme.UniversalCover.cechTerm",
+   "AlgebraicGeometry.Scheme.UniversalCover.cechVertex",
+   "AlgebraicGeometry.Scheme.UniversalCover.labelMap",
+   "AlgebraicGeometry.Scheme.UniversalCover.profiniteProductMap",
+   "AlgebraicGeometry.Scheme.UniversalCover.PointedLimitCechCoordinates",
+   "AlgebraicGeometry.Scheme.UniversalCover.nonempty_pointedLimitCechCoordinates",
+   "AlgebraicGeometry.Scheme.UniversalCover.pointedLimitCechCoordinates_natural",
+   "AlgebraicGeometry.Scheme.UniversalCover.right_torsor_cech_cocycle",
+   "AlgebraicGeometry.Scheme.UniversalCover.label_only_cocycle",
+   "AlgebraicGeometry.Scheme.UniversalCover.pointedLimitMap_identity_composition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/PointedLimitCech.lean",
+  "statement": "theorem nonempty_pointedLimitCechCoordinates {X : Scheme.{u}} [ConnectedSpace X] [CompactSpace X] [QuasiSeparatedSpace X] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (G : ProfiniteGrp.{u}) [∀ Y, MulAction G ((FiniteEtale.fiber x).obj Y)] [IsFundamentalGroup (FiniteEtale.fiber x) G] : Nonempty (PointedLimitCechCoordinates x G)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The existing UniversalCover limit, marked point, toObj sections, transport and map are reused. The main theorem packages the missing normalized scheme-level Cech isomorphisms and finite-quotient limit cone; companion statements supply pointed naturality, identity/composition and the sectionwise right-torsor cocycle. IsFundamentalGroup allows every small profinite realization of the finite fibre functor, canonically homeomorphic to Aut of the FLC fibre functor. All helpers are explicit constructions or interface fields of this node; no arbitrary comparison is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86579515b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement verbatim, 19 decls present; only change vs live: lean record plus added stmt_dep def-sfb-profinite-test-objects (landed def, used for T×P). Hypotheses exact (ConnectedSpace/CompactSpace/QuasiSeparatedSpace, IsAlgClosed Ω : Type u); Π via IsFundamentalGroup on FiniteEtale.fiber with ProfiniteGrp.{u}, non-vacuous by exists_isFundamentalGroup. Every PointedLimitCechCoordinates field checked true: rightDeck=transport (toAut g).symm gives monodromy toObj(g•s) via transportHom_toObj and the right action law; iso/quotient cone/components pinned on constant-label sections (equalizers into unramified separated targets are clopen, sections hit all points), so no free comparison; simplicial restrictedLabels and middle-face g*h checked by hand; cocycle lemma hypotheses are the correct edge-vertex identities and keep the shifted form required by E7; naturality fundamentalGroupMap H→*G direction and square correct; identity/composition HEq true. Edge cases q=0, empty Y, trivial G, noncommutative labels, universes OK. Docstrings carry all 16 steps; sorry only. Advisory: upstream FullSubcategory FEt model vs recorded MorphismProperty.Over (isomorphic, already used); big-site proetalePrecoverage equivalent to ProEt.precoverage comap; unused proof-dep plain imports. No compile run (no fix)."
  }
 }
