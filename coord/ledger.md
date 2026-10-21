@@ -23760,3 +23760,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:06 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 21:08 L: returned deliver/NI/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9 + G4. This is the 11th push of this live item. The 2026-10-19 drop list is unchanged (side-live coord/route)
 - 21:08 L: merged deliver/NC/lem-sfb-finite-index-rectangle-primitive-operator (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T21:09:26Z L: superseded stage-1 delivery NM/lem-sfb-internal-inflation-graded-cup at 43646c262a250b404e959e56f8bb00f6844b3f30; current completion retained; packet archived at refs/superseded/NM/lem-sfb-internal-inflation-graded-cup/43646c262a250b404e959e56f8bb00f6844b3f30; stale return retired.
