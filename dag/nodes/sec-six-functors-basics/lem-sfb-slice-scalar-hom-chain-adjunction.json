@@ -16,9 +16,111 @@
   "def-pur-sheaf-hom",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify scalar extension on slices with restriction of scalar extension. For $j_W:\\mathcal C/W\\to\\mathcal C$, restriction is precomposition and the covering sieves over $V/W$ are exactly those over $V$ [def-pur-localized-ringed-site]. Thus $j_W$ is continuous (restriction sends sheaves to sheaves), and cocontinuous: every covering sieve on $V$ lifts to the sieve with the same arrows, given their composite maps to $W$. Both sites are small in the stated module universe. Apply [lem-weil-pbc-slice-module-sheafification] to this functor and the ring sheaf $S$. The presheaves of tensors before sheafification are identical, since their value at $V/W$ is $S(V)\\otimes_{R(V)}M(V)$ [def-pur-sheaf-tensor-product]. Consequently there is a natural isomorphism $(EM)|_W\\cong E_W(M|_W)$ taking the unit image of $s\\otimes m$ to that same unit image. The comparison is normalized by its sheafification-unit transpose, as specified by the cited lemma. Restriction of scalars commutes with slice restriction sectionwise by [def-pc-sheaf-restrict-scalars]. These comparisons also apply to further slice restrictions.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-slice-module-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DH (section-localize), 04IX (definition-localize-ringed-site), 03CY (lemma-sheafification-presheaf-modules); explicit covering-sieve verification for slice restriction."
+   }
+  },
+  {
+   "text": "On each small slice $\\mathcal C/W$ apply [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] with the ring map $R|_W\\to S|_W$. Its sheafification hypotheses hold by smallness, and the chosen $E_W$ is additive: for module maps $a,b$ one has $E_W(a+b)(s\\otimes x)=s\\otimes(a(x)+b(x))=E_Wa(s\\otimes x)+E_Wb(s\\otimes x)$, and uniqueness through sheafification extends the equality to sheaf maps. Its normalized Hom bijection is $g\\mapsto(x\\mapsto g(1\\otimes x))$. To identify the inverse, let $h:M\\to UL$. On every object of the slice the formula $(s,x)\\mapsto s h(x)$ is additive in both variables and balanced, because $s h(rx)=s\\varphi(r)h(x)$. The tensor universal property [def-weil-pbc-module-tensor-product] gives a linear map from the presheaf tensor. The equality $(s h(x))|_V=s|_V h(x|_V)$ makes these maps a presheaf map; it is $S$-linear since $(ts)h(x)=t(sh(x))$. The sheafification universal property [def-weil-presheaf-modules-sheafification] extends it uniquely to $E_WM\\to L$. Its adjunct is $h$, since $1h(x)=h(x)$, so it is the inverse of the cited bijection. Alternatively the other composite is $s\\otimes x\\mapsto s g(1\\otimes x)=g(s\\otimes x)$; tensor generation and sheafification uniqueness make this the identity on all sections.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), with 03CY (lemma-sheafification-presheaf-modules); explicit inverse formula."
+   }
+  },
+  {
+   "text": "These slice bijections are additive and $R(W)$-linear: evaluating $g_1+g_2$ or $rg$ at $1\\otimes x$ gives respectively $g_1(1\\otimes x)+g_2(1\\otimes x)$ or $r g(1\\otimes x)$. Their inverses are additive and linear too, by bijectivity. For $a:M'\\to M$, $b:L\\to L'$ one has $(b\\circ g\\circ E_Wa)(1\\otimes x)=b(g(1\\otimes a(x)))$, proving both composition naturalities. Under further restriction $V\\to W$, the unit comparison of step 1 sends $1\\otimes x$ to $1\\otimes x$; the two restricted forward maps therefore agree. The inverses agree by uniqueness of inverses. These are equalities of sheaf maps because they hold on every object of every slice [def-pur-localized-ringed-site]. With the slice description and scalar action of [def-pur-sheaf-hom], the same formulas give isomorphisms of sheaves of $R$-modules, rather than merely bijections of global Hom sets.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), explicit naturality of its two formulas on localized ringed sites (04IX)."
+   }
+  },
+  {
+   "text": "Construct $\\nu$ before considering Hom complexes. Both $T(A^i)$ and $UE(A^i)$ are the abelian sheafification of the same presheaf $V\\mapsto S(V)\\otimes_{R(V)}A^i(V)$ [def-pur-sheaf-tensor-product]. The underlying abelian sheafification is the one in [def-weil-presheaf-modules-sheafification], independently of the module ring. Its unique extension of the $R$-action agrees with the restriction of the extended $S$-action [def-pc-sheaf-restrict-scalars], since both extend $r(s\\otimes x)=\\varphi(r)s\\otimes x$. Thus the identity on that presheaf induces the required $R$-linear isomorphism $\\nu_A^i$. Naturality follows on $s\\otimes x$ from $s\\otimes a^i(x)$ and on all sections by the sheafification universal property. Both differentials send $s\\otimes x$ to $s\\otimes d_A^i(x)$; the same uniqueness proves $d\\nu=\\nu d$. Hence these degreewise isomorphisms form the natural chain isomorphism $\\nu_A$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules): the abelian sheafification with its unique extended ring action; 03CZ for the same tensor model."
+   }
+  },
+  {
+   "text": "Fix $n$ and $W$. By [def-pur-hom-complex] the degree-$n$ sections of the source are the full product of $S|_W$-linear sheaf maps $(EP^i)|_W\\to N^{i+n}|_W$, indexed by $i\\in\\mathbf Z$. Use the unit-normalized slice comparison of step 1 and apply the bijection of steps 2–3 separately in every coordinate. It gives $(\\theta^n(g))^i(p)=g^i(1\\otimes p)$ and inverse $(h^i)_i\\mapsto(s\\otimes p\\mapsto s h^i(p))_i$. The two composites are the identity in every coordinate. Their compatibility with restrictions and $R(W)$-linearity, proved in step 3, make them inverse morphisms of $R$-module sheaves, using [def-pur-sheaf-hom]. Restriction of scalars changes only the action [def-pc-sheaf-restrict-scalars], so the source product has exactly these same section families. This constructs the degreewise isomorphism using a product of bijections; it never applies $E$ to an infinite product.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product terms; Tag 03CZ of sites-modules.tex on each coordinate."
+   }
+  },
+  {
+   "text": "Check the differential on an arbitrary further object $V\\to W$ and $p\\in P^i(V)$. Since $d_{EP}^i(1\\otimes p)=1\\otimes d_P^i(p)$, the differential of [def-pur-hom-complex] gives\n$$\\bigl(\\theta^{n+1}(dg)\\bigr)^i(p)=d_N^{i+n}\\bigl(g^i(1\\otimes p)\\bigr)-(-1)^n g^{i+1}(1\\otimes d_P^i(p))=\\bigl(d\\theta^n(g)\\bigr)^i(p).$$\nEquality for every $V,p,i$ is equality of the local sheaf maps and then of all product coordinates. Thus $\\theta$ is a chain map. Its degreewise inverse is also a chain map: multiply $d\\theta=\\theta d$ by the inverses on both sides to obtain $d\\theta^{-1}=\\theta^{-1}d$. This proves the chain isomorphism with the exact sign convention in the statement.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), displayed differential; explicit evaluation calculation."
+   }
+  },
+  {
+   "text": "Finally let $a:P'\\to P$ be an $R$-linear chain map and $b:N\\to N'$ an $S$-linear chain map. The functoriality in [def-pur-hom-complex] is coordinatewise composition. On every slice its degree-$n$, coordinate-$i$ formula becomes\n$$\\theta_{P',N'}\\bigl(b\\circ g\\circ Ea\\bigr)^i(p)=b^{i+n}\\bigl(g^i(1\\otimes a^i(p))\\bigr)=\\bigl(b\\circ\\theta_{P,N}(g)\\circ a\\bigr)^i(p).$$\nTogether with the differential calculation this is naturality as chain maps, contravariantly in $P$ and covariantly in $N$; inverse naturality follows by cancellation. All constructions used arbitrary integer-indexed families, tensor universal properties and module sheafification. Consequently the result applies to the stated unbounded complexes without flatness or K-injectivity assumptions, and uses the actual slice evaluation at $V$ (in particular at the identity of each slice).",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), functorial product Hom construction; explicit two-variable naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-slice-module-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ (lemma-adjointness-tensor-restrict), 03CY (lemma-sheafification-presheaf-modules), 03DH (section-localize), 04IX (definition-localize-ringed-site); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent assembly of the slice comparisons, product coordinates, signs and naturality."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +156,80 @@
    "results": "Returned LightCondensed.ihomPoints_symm_comp, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.ιFree_mapFree_inv_assoc, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module Hom adjunction and sheaf pullback/free/unit equivalences do not state the normalized internal product-Hom chain isomorphism on all slices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension and restriction of scalar sheaves induce an isomorphism of unbounded internal product Hom complexes by evaluation at one tensor x on every slice",
+   "results": "Hits read: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|homComplex|extendRestrictScalarsAdj",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean. Search subdirectory: Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom cochain complexes of sheaves and the extension restriction of scalars adjunction",
+   "results": "Hits read: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, PresheafOfModules.restrictScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CategoryTheory.sheafHom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, CochainComplex.HomComplex.instModuleCochain",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homEquiv\"",
+   "results": "Hits read: PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv', PresheafOfModules.ModuleColimit.homEquiv, PresheafOfModules.colimitAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv_naturality_left",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of rings the enriched extension restriction adjunction is an isomorphism of differential graded internal Hom objects for arbitrary unbounded complexes",
+   "results": "Hits read: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.sheafHom'Iso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension and restriction of scalar sheaves induce an isomorphism of unbounded internal product Hom complexes by evaluation at one tensor x on every slice",
+   "results": "Hits read: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|homComplex|extendRestrictScalarsAdj",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean. Search subdirectory: Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom cochain complexes of sheaves and the extension restriction of scalars adjunction",
+   "results": "Hits read: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, PresheafOfModules.restrictScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CategoryTheory.sheafHom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, CochainComplex.HomComplex.instModuleCochain",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homEquiv\"",
+   "results": "Hits read: PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv', PresheafOfModules.ModuleColimit.homEquiv, PresheafOfModules.colimitAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv_naturality_left",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of rings the enriched extension restriction adjunction is an isomorphism of differential graded internal Hom objects for arbitrary unbounded complexes",
+   "results": "Hits read: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.sheafHom'Iso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module extension/restriction bijections, sheaf restriction/sheafification and generic sheaf Hom do not state this slice-normalized internal product Hom chain isomorphism for arbitrary ring sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-hom-scalar-chain-identification",
@@ -77,5 +249,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-slice-scalar-hom-chain-adjunction",
+  "worker": "stage1",
+  "summary": "Q41: retained the statement and all inherited metadata/searches. Reused the general-site normalized ordinary scalar adjunction and continuous/cocontinuous module-sheafification comparison, with their hypotheses checked on every small slice. Wrote the inverse formula, the underlying tensor identification, all product coordinates, signed differential, and input naturality explicitly. No new nodes are needed: these remaining calculations are elementary consequences of the cited statements and definitions. Searched the project library, whole DAG/blueprint and Mathlib; no exact finished declaration or leaf for the whole item was found.",
+  "blueprint": "The final paragraph of lem-sfb-dc-hom-preserves, inverting ell and descending to a finite E: supplies the strict ordinary scalar-Hom identification extracted as old steps 1–5 and the nu/theta parts of step 10 of lem-sfb-hom-scalar-chain-identification. The present steps 1–3 establish normalized slice adjunctions, step 4 gives nu, and steps 5–7 construct theta and its differential/naturality. No finiteness theorem is used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-slice-module-sheafification",
+    "why": "Generic sheafification comparison for continuous cocontinuous restriction, specialized to localization and normalized by the original unit; the restricted-functor unit does not state this site tool."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic ordinary scalar adjunction on an arbitrary small ringed site, used on each slice; the restricted-functor unit gives no ordinary normalized scalar adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-slice-module-sheafification",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-23c1e0a68",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-23c1e0a68 (reviewer sub-agent of L); spot-checked: The delivery is one commit containing only the item and the report, with no new nodes. The item is unsplit with an empty proof in live and side-live, has no repair note, and neither it nor any node it cites is on the route-pivot drop list. Its statement, stmt_deps, source and blueprint from are unchanged from live. I read all 7 steps against the statements of every cited node and against Stacks sites-modules 03CZ (l.933, proof via the presheaf tensor plus the sheaf property), 03CY, 03DH and 04IX, and sites-cohomology 0A8X (l.8571; the sign d(f)^p=d^{p+n}f^p-(-1)^n f^{p+1}d matches def-pur-hom-complex). Step 1: j_W is continuous and cocontinuous (the same arrows composed to W generate the sieve), and the comparison from lem-weil-pbc-slice-module-sheafification is the transpose of the restricted unit, so 1⊗x goes to 1⊗x. Step 2: E_W is additive; s·h(x) is balanced because s·h(rx)=s·φ(r)h(x); the tensor and module-sheafification universal properties give the map, and its adjunct is h, so it is the inverse of the bijection stated by the ordinary-adjunction node. Steps 3–7 are elementary and I recomputed each: R(W)-linearity; naturality b(g(1⊗a x)); ν as one abelian sheafification with a unique R-action; θ as a coordinatewise product, so E is never applied to a product; the differential θ(dg)^i(p)=d_N g^i(1⊗p)-(-1)^n g^{i+1}(1⊗d_P p); and two-variable naturality. Every argument from the parent's base steps 1–5 and the ν/θ part of step 10 is covered. Edge cases checked: S=0, R=S, Z→F_2, unbounded constant complexes, characteristic 2. The duplicate search found no existing node stating the item; the siblings cite it. I accept the two tool_uses, both generic other-unit tools: the slice sheafification comparison and the ordinary scalar adjunction. Advisory only: step 4 could also cite lem-weil-pbc-extension-tensor-comparison and step 1 could cite lem-sfb-localized-site-tensor-restriction; mathlib_searches has duplicate entries. No changes."
  }
 }
