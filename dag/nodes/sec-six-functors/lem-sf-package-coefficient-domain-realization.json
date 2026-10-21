@@ -11,50 +11,207 @@
  },
  "stmt_deps": [
   "def-fix-six-functor-datum",
-  "def-weil-site-perfect-complex"
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At each $A_n$, apply clauses (i), (ii), (iii), and (iv) of [thm-sf-ctf-stability] to the given $f$ and the finite-Tor inputs. These respectively restrict $Lf^*$, $\\otimes^L$, $Rf_*$, and $Rf_!$ to the displayed finite-stage categories. Its hypotheses are exactly separated finite-type morphisms between separated finite-type schemes over the fixed $k$, with $\\ell\\ne p$; they hold here for every $n\\ge1$.",
+   "uses": [
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening sentence, proved constructible domains; stability clauses (i)–(iv)"
+   }
+  },
+  {
+   "text": "For $K,L\\in\\mathcal C_{X,A_n}$, [cor-weil-finite-constructible-hom] gives bounded constructibility and finite Tor amplitude of $R\\mathcal Hom_{A_n}(K,L)$, on the small pro-etale site used by the operation datum. With input intervals $[a,b]$, $[c,e]$ and any integer $d\\ge0$ satisfying $\\dim X\\le d$, its stated interval is precisely $[c-b-2d,e-a+2d]$. This proves the general finite-stage Hom restriction and the asserted dimension-dependent bound.",
+   "uses": [
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening sentence: cor-weil-finite-constructible-hom"
+   }
+  },
+  {
+   "text": "Apply [thm-coef-finite-hom] with $A=A_n$, $B=A_m$ and $M=L$. The hypotheses $n\\ge m\\ge1$ and $K,L\\in D^b_{ctf}(X,A_n)$ are those of the item. The resulting isomorphism is exactly the displayed finite coefficient comparison. The theorem characterizes its arrow as the unique tensor–Hom transpose of scalar extension of evaluation; thus the comparison here is that specified arrow, not an arbitrarily chosen isomorphism.",
+   "uses": [
+    "thm-coef-finite-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening sentence: coefficient comparison thm-coef-finite-hom"
+   }
+  },
+  {
+   "text": "When the first input $K\\in D^b_{ctf}(X,A_n)$ is site-perfect in the sense of [def-weil-site-perfect-complex], it is locally on the small pro-etale site a bounded complex of direct summands of finite free $(A_n)_X$-modules, i.e. perfect in the sense of [lem-sfb-ringed-site-perfect-duality] for the ringed site $(X_{\\mathrm{proet}},(A_n)_X)$. That lemma gives the canonical evaluation isomorphism $K^\\vee\\otimes^L_{A_n}L\\xrightarrow{\\sim}R\\mathcal Hom_{A_n}(K,L)$ with $K^\\vee=R\\mathcal Hom_{A_n}(K,(A_n)_X)$, for every $L$. Clause (ii) of [thm-sf-ctf-stability] gives, under exactly this extra hypothesis, the sharper Tor interval $[c-b,e-a]$. No application of either result to a merely constructible finite-Tor first input is made; that case was covered instead by step 2 (and the origin of $\\mathbf A^1$ in clause (ii) shows the sharper bound fails without site-perfectness).",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "lem-sfb-ringed-site-perfect-duality",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening domains and site-perfect qualification in prop-functor-package; stability clause (ii)"
+   }
+  },
+  {
+   "text": "At $R$, [lem-pur-integral-operations-preserve-constructible] restricts the completed pullback and completed tensor to the derived-complete integral constructible categories, with their stated finite reductions. Apply [lem-sf-integral-direct-image-constructible] to obtain the same restriction for the specified $Rf_*$. Apply [lem-sf-integral-compact-support-constructible] to the specified compactification reduction tower defining $Rf_!$. That theorem applies to its derived limit with exactly the quotient/restriction-of-scalars transitions, and proves completeness and one finite cohomological interval for all its reductions. All three results allow our finite-type $k$-schemes with $\\ell$ invertible; the compact-support result requires the separated finite-type $f$ assumed here. These are preservation theorems for the actual completed operations, so the definition of the integral category alone is not being used to assert preservation.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening integral preservation; completed pullback/tensor and the two direct images"
+   }
+  },
+  {
+   "text": "For integral $K,L$, [lem-coef-integral-residue-tor] supplies uniform finite-level Tor intervals from the bounded residue reductions; it does not assert site-perfectness. Now [cor-coef-integral-internal-hom] applies to all $K,L\\in D^b_c(X,R)$ and places their ambient internal Hom in that same category. Its canonical evaluation-defined reduction comparison gives the required formula from $R$ to every $A_n$. Consequently this step uses neither a site-perfect model for arbitrary constructible objects nor an inference of completeness from levelwise boundedness alone.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "cor-coef-integral-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening integral internal Hom: cor-coef-integral-internal-hom"
+   }
+  },
+  {
+   "text": "Use the raw rationalization of [def-weil-rationalization-karoubi] and the finite-representative common-stage construction of [def-weil-algebraically-closed-coefficients]. By [lem-fix-operation-reduction], the pullback, tensor, and two direct-image operations and their coefficient comparisons commute with rationalization and common-stage scalar extension. Thus their field values are the specified coefficient-passage values of the integral outputs established in step 5, and belong to the displayed field categories. The same result supplies scalar compatibility for internal Hom; [lem-coef-rational-operations] identifies the rationalized integral internal Hom with the field internal Hom and explicitly preserves evaluation, including under finite scalar extension. Applied to the integral outputs of step 6 and then to finite representatives, these identifications give internal-Hom restriction and the required evaluation identification at both field stages.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-fix-operation-reduction",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Opening field passage: lem-coef-rational-operations; basic operation coefficient passage"
+   }
+  },
+  {
+   "text": "For each finite inclusion $E\\subset F$, apply [lem-weil-scalar-extension-exact-triangulated] with $L=F$ to $T$ (and to $S$ when needed). It states that this scalar-extension functor on the rationalized constructible categories preserves shifts and distinguished triangles. This is exactly the finite coefficient-field exactness asserted here.",
+   "uses": [
+    "lem-weil-scalar-extension-exact-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (1): lem-weil-scalar-extension-exact-triangulated"
+   }
+  },
+  {
+   "text": "The item's finite stages $D^b_c(-,E)$ and common-stage category $\\mathcal C_T$ are those of [def-weil-rationalization-karoubi] and [def-weil-algebraically-closed-coefficients], while [prop-weil-pbc-descent-functors] is stated for the stages of [def-weil-pbc-rational-category] and the pair category $\\mathcal P_T$ of [def-weil-pbc-qbar-category]. Our separated finite-type $k$-schemes $T,S$ are noetherian, finite-dimensional, with $\\ell$ invertible, so [lem-fd-rational-coefficient-category-comparison] gives exact equivalences $J_{W,E}$ ($W=T,S$), the identity on the common integral objects and on localized Hom groups, with scalar comparisons $j_{W,F/E}:J_{W,F}T^{\\mathrm{sf}}_{F/E}\\simeq T^{\\mathrm{pbc}}_{F/E}J_{W,E}$ respecting identities, shifts and the associators, and the induced exact equivalences $J_W:\\mathcal C_W\\simeq\\mathcal P_W$ which identify finite-stage inclusions, shifts and distinguished triangles. Put $\\Phi^{p}_E=J_{S,E}\\Phi_EJ_{T,E}^{-1}$ and $\\beta^p_{F/E}=(\\Phi^p_F j_{T,F/E})\\circ J_{S,F}(\\beta_{F/E})\\circ j_{S,F/E}^{-1}$, all at the transported object. Since the $j$ respect identities, associators and shifts, the identity, associator and shift equations assumed for $\\beta$ give those of [prop-weil-pbc-scalar-extension] for $\\beta^p$. Apply [prop-weil-pbc-descent-functors] to $(\\Phi^p_E,\\beta^p_{F/E})$: it gives an exact $\\Phi^p:\\mathcal P_T\\to\\mathcal P_S$, represented on $u$ by $\\beta^{p,-1}_{M/F}\\circ\\Phi^p_M(u)\\circ\\beta^p_{M/E}$, and descent of compatible transformations and their equations by the same formula. Then $\\Phi=J_S^{-1}\\Phi^pJ_T$ is an exact functor $\\mathcal C_T\\to\\mathcal C_S$, as a composite of exact functors. Since $J_T,J_S$ conjugate common-stage arrows by the same $j$, these cancel, and $\\Phi$ has value $(E,\\Phi_EK)$ on $(E,K)$ and is represented on $u:T^{\\mathrm{sf}}_{M/E}K\\to T^{\\mathrm{sf}}_{M/F}L$ by $\\beta_{M/F}^{-1}\\circ\\Phi_M(u)\\circ\\beta_{M/E}$. Transformations and their equations transport the same way. This supplies all of the requested functor and transformation descent, with the given comparisons.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "prop-weil-pbc-descent-functors",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (1): prop-weil-pbc-descent-functors"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-pbc-idempotent-complete-triangulation] to $\\mathcal P_T$: it is an idempotent-complete ordinary triangulated category, and every finite-stage embedding $j^{\\mathrm{pbc}}_E:D^b_c(T,E)^{\\mathrm{pbc}}\\to\\mathcal P_T$ is exact. By [lem-fd-rational-coefficient-category-comparison] (hypotheses checked in step 9), $J_T:\\mathcal C_T\\to\\mathcal P_T$ is an exact equivalence, exact also in the reverse direction, preserving shifts and common-stage distinguished triangles in both directions and identifying the finite-stage inclusions: $J_Tj^{\\mathrm{sf}}_E\\cong j^{\\mathrm{pbc}}_EJ_{T,E}$. Hence the triangulated category $\\mathcal C_T$ is idempotent complete (an idempotent $e$ of $\\mathcal C_T$ splits because $J_T(e)$ splits in $\\mathcal P_T$ and $J_T$ is an equivalence), and $j^{\\mathrm{sf}}_E\\cong J_T^{-1}j^{\\mathrm{pbc}}_EJ_{T,E}$ is a composite of exact functors, hence exact. These are properties of the literal common-stage category $\\mathcal C_T$; no Karoubi envelope is inserted. Together with steps 8–9 this proves the remaining exact common-stage realization assertions.",
+   "uses": [
+    "thm-weil-pbc-idempotent-complete-triangulation",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (1): thm-weil-pbc-idempotent-complete-triangulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-ctf-stability",
+  "cor-weil-finite-constructible-hom",
+  "thm-coef-finite-hom",
+  "lem-sfb-ringed-site-perfect-duality",
+  "def-weil-site-perfect-complex",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-coef-integral-residue-tor",
+  "cor-coef-integral-internal-hom",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-fix-operation-reduction",
+  "lem-coef-rational-operations",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-fd-rational-coefficient-category-comparison",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-qbar-category",
+  "thm-weil-pbc-idempotent-complete-triangulation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Opening coefficient-domain assembly and clause (1); expanded using the existing operation-preservation and common-stage statements"
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Constructible derived sheaf operations preserve finite Tor categories and descend from finite l-adic coefficient fields to the algebraically closed coefficient category",
-   "results": "{\"hits\": 8, \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.profiniteSolid\", \"CondensedMod.IsSolid\", \"Condensed.instAB5CondensedMod\", \"Condensed.instAB4CondensedMod\", \"Condensed.finFree\", \"localCohomology.diagram\", \"Condensed.instAB4StarCondensedMod\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-coefficient-domain-realization.search-results.txt\"}",
-   "date": "2026-10-21",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.IsTriangulated",
-   "results": "{\"hits\": 12, \"top\": [\"CategoryTheory.Functor.IsTriangulated.instId\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms\", \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-coefficient-domain-realization.search-results.txt\"}",
-   "date": "2026-10-21",
-   "verdict": "no match"
-  },
   {
    "tool": "grep",
    "query": "constructible.*(rational|Tor)|six.?functor|adic.*scalar",
-   "results": "{\"hits\": 9, \"top\": [\"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-coefficient-domain-realization.search-results.txt\"}",
+   "results": "{\"hits\": 9, \"top\": [\"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\"], \"note\": \"\"} Read hits: ModuleCat/Descent is faithfully-flat descent for ordinary modules, not constructible derived coefficient categories; other hits concern adic completion or constructible subsets.",
    "date": "2026-10-21",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Six functors on constructible adic sheaves and common finite coefficient field descent",
-   "results": "{\"hits\": 8, \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-coefficient-domain-realization.search-results.txt\"}",
+   "results": "{\"hits\": 8, \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\"], \"note\": \"\"} Hits are underived sheaf pullback/pushforward adjunctions and condensed locally constant functors, not the full coefficient-domain statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"hits\": 12, \"top\": [\"CategoryTheory.Functor.IsTriangulated.instId\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms\", \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\"], \"note\": \"\"} Read the triangulated-functor interface; it assumes categories and exactness data and proves no constructible preservation, coefficient comparison, or common-stage realization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible derived sheaf operations preserve finite Tor categories and descend from finite l-adic coefficient fields to the algebraically closed coefficient category",
+   "results": "{\"hits\": 8, \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.ofSheafLightProfinite\", \"Condensed.profiniteSolid\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Condensed.finFree\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"localCohomology.diagram\"], \"note\": \"\"} Hits concern condensed module structures, internal projectivity, finite-dimensional module internal Hom, or unrelated exact sequences; none states this constructible derived package.",
    "date": "2026-10-21",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "Bounded constructible finite Tor internal Hom coefficient reduction and exact scalar field extension descent",
-   "results": "{\"hits\": 8, \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Algebra.Generators.Cotangent.exact\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"Algebra.Generators.CotangentSpace.exact\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"FGModuleCat.ihom_obj\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-coefficient-domain-realization.search-results.txt\"}",
+   "results": "{\"hits\": 8, \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Algebra.Generators.Cotangent.exact\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"Algebra.Generators.CotangentSpace.exact\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"FGModuleCat.ihom_obj\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\"], \"note\": \"\"} Hits concern condensed module structures, internal projectivity, finite-dimensional module internal Hom, or unrelated exact sequences; none states this constructible derived package.",
    "date": "2026-10-21",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-functor-package",
@@ -69,5 +226,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-package-coefficient-domain-realization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Ten short steps assemble existing preservation, coefficient-comparison, rational-identification, and common-stage descent results. No new nodes: the general Hom comparison is not inferred from site-perfectness, completed operations are retained, and exactness/retract closure refer to the actual pair category.",
+  "blueprint": "Steps 1–7 realize the opening proved-domain and internal-Hom sentences of prop-functor-package (including its site-perfect qualification); steps 8–10 realize clause (1), precisely the three results named in its proof. The item is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Existing more general stability theorem gives only its finite-stage restrictions and site-perfect formula here; the package unit explicitly cites its unit."
+   },
+   {
+    "node": "cor-weil-finite-constructible-hom",
+    "why": "Source-named generic finite-stage Hom preservation and its dimension-dependent bound; no reconstruction of its geometric duality proof is needed."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "Source-named evaluation-defined finite coefficient comparison on arbitrary constructible finite-Tor inputs."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Existing completed pullback/tensor preservation supplies the opening proved-domain assertion, without changing its coefficient conventions."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Existing completed ordinary direct-image preservation proves the opening integral-domain assertion for the specified operation."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Existing compactification-tower preservation proves the opening integral-domain assertion with exactly the stated transitions."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic uniform Tor control for reductions of integral constructible objects; it does not replace their coefficient construction."
+   },
+   {
+    "node": "cor-coef-integral-internal-hom",
+    "why": "Source-named integral internal Hom preservation and its canonical evaluation-defined finite reductions."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Existing generic compatibility of the basic operations with rationalization and common-stage scalar extension; only its coefficient-passage clauses are used."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Source-named identification of rational internal Hom preserving evaluation and finite scalar extension."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Source-named exactness of finite coefficient-field extension."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Source-named descent theorem is used with exactly its identity, associator, and shift hypotheses."
+   },
+   {
+    "node": "thm-weil-pbc-idempotent-complete-triangulation",
+    "why": "Source-named structural theorem for the actual common-stage category and its exact finite-stage embeddings."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Reviewed exact equivalence between the item's common-stage category (def-weil-algebraically-closed-coefficients over def-weil-rationalization-karoubi) and the PBC pair category P_T on which prop-weil-pbc-descent-functors and thm-weil-pbc-idempotent-complete-triangulation are stated; used only to transport those two results. No node of the package unit compares the two coefficient constructions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ctf-stability",
+  "cor-weil-finite-constructible-hom",
+  "thm-coef-finite-hom",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-coef-integral-residue-tor",
+  "cor-coef-integral-internal-hom",
+  "lem-fix-operation-reduction",
+  "lem-coef-rational-operations",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "prop-weil-pbc-descent-functors",
+  "thm-weil-pbc-idempotent-complete-triangulation",
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-18bc020a1",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-18bc020a1 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps and every cited statement against main-20261015 prop-functor-package (opening domain/internal-Hom paragraph and clause (1)). The statement is unchanged against live; the added stmt_deps are all used. There are no new nodes. The item is still unsplit in live and side-live. The re-split note is on the parent only. No cycles, including through the nodes added by the fix. Steps 1-3 and 5-8 are correct. (1) stability (i)-(iv) gives the finite-stage operations. (2) cor-weil-finite-constructible-hom gives [c-b-2d,e-a+2d]; tested on the origin of A^1, a point and empty X. (3) thm-coef-finite-hom gives the unique evaluation transpose, n=m allowed. (5) Integral pullback/tensor come from lem-pur-integral-operations-preserve-constructible, Rf_* from lem-sf-integral-direct-image-constructible with uniform N, Rf_! from lem-sf-integral-compact-support-constructible on the actual tower. (6) cor-coef-integral-internal-hom covers all K,L, with H_n iso for every n. (7) Field passage via lem-fix-operation-reduction and lem-coef-rational-operations on raw rationalization. (8) Scalar-extension exactness is on the item's own categories. FIX 1 (C3/C4, step 4): thm-sf-ctf-stability (ii) only says the formula RHom=K^vee⊗L requires site-perfectness and does not state it. Now cited from lem-sfb-ringed-site-perfect-duality (unit sk-thm-sf-ctf-stability, on the route); site-perfect = locally bounded complex of finite-free summands is its perfectness hypothesis. FIX 2 (E4, silent identification of coefficient categories, steps 9-10): the item's common-stage category C_T (def-weil-algebraically-closed-coefficients over def-weil-rationalization-karoubi / def-weil-derived-complete-integral-detailed) is not literally P_T of def-weil-pbc-qbar-category. P_T's stages come from def-weil-pbc-bounded-constructible-complete, which requires étale-origin witnesses, and its scalar extensions are those of prop-weil-pbc-scalar-extension, which differ by the completion maps chi. prop-weil-pbc-descent-functors and thm-weil-pbc-idempotent-complete-triangulation are stated only on P_T. Repaired by citing the reviewed lem-fd-rational-coefficient-category-comparison (hypotheses hold: noetherian, finite-dimensional, ell invertible). It gives J_{T,E} with coherent scalar comparisons j and an exact equivalence J_T: C_T ≃ P_T. Step 9 transports Phi_E and beta; I checked arrow directions, the equations transfer by j-coherence, and the j cancel, recovering beta_{M/F}^{-1}∘Phi_M(u)∘beta_{M/E}. Step 10 transports idempotent completeness and exactness of j_E. The comparison node is declared in tool_uses (unit sk-def-trace); proof_deps are recomputed. Two repairable faults. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-package-coefficient-domain-realization.json. The parallel delivery Q108 e4a23b40 of the same item is under review; this head was judged on its own.; 1 file(s) fixed by the reviewer"
  }
 }
