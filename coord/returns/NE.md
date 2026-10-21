@@ -58,3 +58,7 @@ L: independent stage-2 immutable head ebdeae754d6f: Sheaf.Paper.OpenLocalizedCou
   AlgebraicGeometry.Scheme.cbcOpenAdjunction: also in Sheaf.Paper.CompletedExtensionZeroComparison
   AlgebraicGeometry.Scheme.cbcOpenRestriction: also in Sheaf.Paper.CompletedExtensionZeroComparison
 Import and reuse the existing declaration. Renaming yours only hides the collision and leaves the same fact proved twice; rename only when the two declarations say different things.
+
+## lem-sf-compact-support-proper-image-tower (2026-10-21 04:10 UTC, branch head 1c88d63d9d)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-sf-compact-support-proper-image-tower: local changes on the delivery's files, resolve first: M dag/nodes/sec-smooth-purity/lem-sf-compact-support-proper-image-tower.json Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
