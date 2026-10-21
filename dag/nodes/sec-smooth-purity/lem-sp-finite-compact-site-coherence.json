@@ -23,9 +23,154 @@
   "lem-sp-refinement-coefficient-mate",
   "lem-sp-proper-open-coefficient-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All comparisons are evaluated on bounded-below etale complexes. Exactness of the two open-extension functors and of $N$ implies that they preserve cohomological lower bounds. Consequently the sheaf comparison $e_j$ induces the indicated derived comparison termwise; its composition equation also descends termwise, since the exact functors preserve quasi-isomorphisms. The etale derived direct image has codomain $D^+$, so every etale intermediate $Rr_*j_!E$, including the input to $C_g$, is bounded below. For each proper map used below the source and target are Noetherian, hence the target is quasi-separated and the source is quasi-compact and quasi-separated. The qcqs permanence lemma therefore supplies the hypotheses of the specified direct-image counit-mate comparison $d_r$. Its invertibility and that of $e_j$ make $C_h^c=Rr_*^{\\rm pro}(e_j)\\circ d_r(j_!^{\\rm et}(-))$ an invertible natural transformation. Moreover $F_h^{\\rm pro}N_UE$ is of bounded-below etale origin, with witness $(F_h^{\\rm et}E,C_h^c(E))$. This supplies each subsequent pro-etale input; no unrestricted preservation assertion on arbitrary pro-etale complexes is needed.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09A6 (lemma-morphism-comparison), 09AF (lemma-jshriek-comparison); termwise derived deduction"
+   }
+  },
+  {
+   "text": "Use the canonical direct-image compositors $\\kappa^t_{b,a}:Rb_*^tRa_*^t\\xrightarrow{\\sim}R(ba)_*^t$. Their adjunction normalization follows from the derived-composition normalization lemma applied to the exact constant-ring inverse images and their right adjoints. Its Grothendieck hypotheses hold by the module-sheaf theorem for small sites: a sheaf of modules over the constant ring sheaf is equivalently a sheaf of $R$-modules, since the action of a locally constant scalar is uniquely obtained by gluing its constant local actions. Exactness and the adjunctions are supplied by the etale inverse-image theorem and the pro-etale operations. The site pullback comparisons $a_a,a_b,a_{ba}$ respect composition. Since $d$ is exactly their inverse-square counit mate, part (2) of mate pasting, with the normalized composite adjunctions, and part (3) to pass between the composite adjunction and that of $ba$ along these compositors, gives\n$$d_{ba}\\circ N(\\kappa^{\\rm et}_{b,a})=(\\kappa^{\\rm pro}_{b,a}N)\\circ Rb_*^{\\rm pro}(d_a)\\circ d_b(Ra_*^{\\rm et}(-)).$$\nThis is a specialization of the cited pasting identity, not a choice of $d_{ba}$. Its identity case is part (4) of the same lemma. The open counterpart is the composition equation for $e$ from Step 1, with the canonical $J_bJ_a\\cong J_{ba}$ inserted. Here and below $P_r^t=Rr_*^t$ and $J_j^t=j_!^t$, and canonical associators are inserted in every word of functors.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-cbc-sieve-module-sheaves-grothendieck",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), second equality; Mathlib mateEquiv_hcomp for the site deduction"
+   }
+  },
+  {
+   "text": "Orient a refinement as $u:W_1\\to W_2$, $u j_1=j_2$, $r_1=r_2u$, so $c=(j_2,r_2)$, $c'=(j_1,r_1)$. By the specified normalization,\n$$\\rho^t=\\kappa^t_{r_2,u}(J_{j_1}^t(-))\\circ P_{r_2}^t(\\alpha_u^t).$$\nThe site clause of the refinement-mate lemma gives\n$$P_u^{\\rm pro}(e_{j_1})\\circ d_u(J_{j_1}^{\\rm et}(-))\\circ N(\\alpha_u^{\\rm et})=\\alpha_u^{\\rm pro}N\\circ e_{j_2}.$$\nApply $P_{r_2}^{\\rm pro}$ to this equality. In $C_h^{c'}N(\\rho^{\\rm et})$, substitute the formula for $\\rho$, replace $d_{r_2u}N\\kappa^{\\rm et}$ by Step 2, and use naturality of $\\kappa^{\\rm pro}$ to move $e_{j_1}$ past it. Naturality of $d_{r_2}$ moves $N(\\alpha_u^{\\rm et})$ next to $d_u$. The displayed refinement equation then replaces these inner three factors by $\\alpha_u^{\\rm pro}N\\circ e_{j_2}$. The outside factors are exactly $\\kappa^{\\rm pro}_{r_2,u}P_{r_2}^{\\rm pro}(\\alpha_u^{\\rm pro})$ followed by $P_{r_2}^{\\rm pro}(e_{j_2})d_{r_2}(J_{j_2}^{\\rm et}(-))$, giving\n$$C_h^{c'}\\circ N_V(\\rho^{\\rm et})=\\rho^{\\rm pro}N_U\\circ C_h^c.$$\nThe original refinement square is not required to be Cartesian.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison",
+    "lem-sp-refinement-coefficient-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), comparison along a morphism of compactifications; site clause of lem-sp-refinement-coefficient-mate"
+   }
+  },
+  {
+   "text": "First compute composition on a compatible tower. Use the tower lemma to choose $i:Y\\hookrightarrow\\overline Y$, $q:\\overline Y\\to Z$, $a:X\\hookrightarrow U$, $b:U\\hookrightarrow\\overline X$, $s:U\\to Y$, $p:\\overline X\\to\\overline Y$, with $pb=is$ Cartesian, $p,s,q$ proper, $f=sa$, and $gf=(qp)(ba)$. Thus the tower candidates are $F_f^t=P_s^tJ_a^t$, $F_g^t=P_q^tJ_i^t$, $F_{gf}^t=P_{qp}^tJ_{ba}^t$. By the normalization clause of the unbounded compact-support comparison theorem, whose comparisons restrict on bounded-below inputs to those of the etale compactification comparison theorem, the etale composition on this tower is precisely\n$$P_q^tJ_i^tP_s^tJ_a^t\\xrightarrow{P_q^t(\\Gamma^t J_a^t)}P_q^tP_p^tJ_b^tJ_a^t\\xrightarrow{\\kappa^t_{q,p},\\,m^t_{b,a}}P_{qp}^tJ_{ba}^t,$$\nwhere $m^t_{b,a}:J_b^tJ_a^t\\cong J_{ba}^t$ is open composition. On the pro-etale site this uses the specified open adjunct $\\Gamma^{\\rm pro}$, not an isomorphism chosen by conjugation with $C$. The Cartesian square is exactly one to which the site clause of the proper/open-mate lemma applies. Its input is the bounded-below complex $J_a^{\\rm et}E$, and Step 1 identifies $J_a^{\\rm pro}N_XE$ with its etale-origin pullback.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), compatible tower and four displayed equalities"
+   }
+  },
+  {
+   "text": "For this tower the site equation for $\\Gamma$, evaluated at $J_a^{\\rm et}E$, is\n$$P_p^{\\rm pro}(e_b)\\circ d_p(J_b^{\\rm et}(-))\\circ N(\\Gamma^{\\rm et})=\\Gamma^{\\rm pro}N\\circ J_i^{\\rm pro}(d_s)\\circ e_i(P_s^{\\rm et}(-)).$$\nWhisker this equality on the right by $J_a^{\\rm et}$ and on the left by $P_q^{\\rm pro}$. To its domain attach $d_q(J_i^{\\rm et}P_s^{\\rm et}J_a^{\\rm et}E)$; naturality of $d_q$ identifies the top route with $N_Z$ of the first arrow in Step 4 followed by the comparisons for the resulting word. To its codomain attach $P_q^{\\rm pro}P_p^{\\rm pro}J_b^{\\rm pro}(e_a(E))$. Naturality of $\\Gamma^{\\rm pro}$ moves this last $e_a$ across $\\Gamma^{\\rm pro}$, so the bottom route becomes\n$$P_q^{\\rm pro}J_i^{\\rm pro}(C_f(E))\\circ C_g(F_f^{\\rm et}E)$$\nfollowed by the pro-etale tower interchange. These are equal maps from $N_ZP_q^{\\rm et}J_i^{\\rm et}P_s^{\\rm et}J_a^{\\rm et}E$ to $P_q^{\\rm pro}P_p^{\\rm pro}J_b^{\\rm pro}J_a^{\\rm pro}N_XE$. This explicitly pastes the named interchange square and the open comparison, using only naturality.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7J (lemma-shriek-composition); site-square pasting in the compatible tower"
+   }
+  },
+  {
+   "text": "Postcompose the equality of Step 5 with the pro-etale compositors $\\kappa^{\\rm pro}_{q,p}$ and $m^{\\rm pro}_{b,a}$. Apply the proper and open comparison equations of Step 2 to these two adjacent factors. They replace comparison for the word $P_qP_pJ_bJ_a$ after the etale compositors by $C_{gf}$ for $P_{qp}J_{ba}$. The etale interchange followed by the etale compositors is $\\alpha^{\\rm et}$ by Step 4; the corresponding pro-etale factors are $\\alpha^{\\rm pro}$. The result is exactly\n$$C_{gf}\\circ N_Z(\\alpha^{\\rm et})=\\alpha^{\\rm pro}N_X\\circ F_g^{\\rm pro}(C_f)\\circ C_g(F_f^{\\rm et}(-)).$$\nThis is an equality for the computed normalized arrows. In particular their agreement with transport through $C$ is a conclusion: solve this equation for $\\alpha^{\\rm pro}N_X$, using the inverse of $F_g^{\\rm pro}(C_f)\\circ C_g(F_f^{\\rm et}(-))$. The refinement equation similarly solves for $\\rho^{\\rm pro}N_U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), assembly of the tower formula; substitution of Steps 2, 4, 5"
+   }
+  },
+  {
+   "text": "For arbitrary compactifications compare them with the tower choices using a common proper refinement; such refinements and common refinements of towers exist by the cited geometric lemmas. The etale refinement maps are coherent isomorphisms and the etale composition is independent of the tower: this is the etale compactification comparison theorem, applied to the proper/open tower composition of Step 4, which by the unbounded compact-support comparison theorem is its composition map restricted to bounded-below inputs. Step 3 expresses every computed pro-etale refinement map as $C^{c'}N(\\rho^{\\rm et})(C^c)^{-1}$; hence its identity, composition, and common-refinement independence follow by cancelling adjacent $C^{-1}C$ and using the etale equalities. The same holds for a comparison through a common refinement, since it is a composite of a refinement comparison and an inverse. In the tower identity of Step 6 replace each tower candidate by its comparison with the chosen candidate. Step 3 commutes the $C$ factors past these comparisons; naturality commutes $C_g$ past the comparison on $F_f^{\\rm et}E$. The etale square for changing tower commutes by choice independence, and all remaining comparison isomorphisms cancel. This proves Step 6 for the chosen compactifications and shows that every common refining tower gives the same pro-etale composition map.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined) and 0F7J (lemma-shriek-composition), independence of common refinements and towers"
+   }
+  },
+  {
+   "text": "The open comparison at the identity is the identity under the canonical unit identifications: its composition equation with two identity opens makes it an invertible idempotent. The proper comparison at the identity is the identity by Step 2. Thus $C_{\\mathrm{id}}$ is normalized to the identity. For three maps $f,g,h$, both pro-etale composition parenthesizations equal\n$$C_{hgf}\\circ N(\\alpha^{\\rm et}_{\\rm triple})\\circ D^{-1},\\qquad D=F_h^{\\rm pro}F_g^{\\rm pro}(C_f)\\circ F_h^{\\rm pro}(C_gF_f^{\\rm et})\\circ C_h(F_g^{\\rm et}F_f^{\\rm et}).$$\nIndeed substitute Step 6 twice into either parenthesization; naturality of $C_h$ and of the composition maps moves the inner $C$ factors together and cancels them, leaving exactly the displayed three-factor $D$. The two etale triple maps agree by etale associativity, proving pro-etale associativity; the same cancellation with an identity gives the unit laws. Each constituent $d,e,\\rho^{\\rm et},\\Gamma^{\\rm et},\\Gamma^{\\rm pro}$ is natural, so the pasted equations are natural in $E$. Throughout we used an arbitrary finite commutative $R$ and Noetherian schemes, with neither a coefficient presentation nor a hypothesis on a base field.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K (lemma-pseudo-functor), associativity; identity and naturality deductions from the normalized site equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-cbc-sieve-module-sheaves-grothendieck",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-proper-open-comparison",
+  "lem-sp-refinement-coefficient-mate",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-compactifiable-cofiltered"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I, 0F7J, 0F7K; site-coherence deduction from the existing refinement/interchange site squares and normalized mate pasting"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +207,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_counit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective and given the existence of explicit finite coproducts and pullbacks in the category of compact Hausdorff-like spaces, the counit of the \"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n    \", \"doc\": \"A natural transformation from the composition of the sheaf sections functor (evaluated at the terminal object PUnit) with a finite-product-preserving functor to the identity functor on sheaves over co\"}\n  {\"name\": \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit\", \"doc\": \"The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n    \", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}\n  {\"name\": \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_counitIso\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.Preregular C]\\n  [inst_3 : CategoryTheory.FinitaryExtensive C] [inst_4 : ∀ (X : C), CategoryTheory.Projective X],\\n  CategoryTheory.Presheaf.coherentExt\", \"doc\": \"In a preregular finitary extensive category $\\\\mathcal{C}$ where all objects are projective, the counit isomorphism of the equivalence between the category of coherent sheaves and the category of exten\"}\n  {\"name\": \"CondensedSet.compactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CondensedSet.condensedSetToCompactlyGenerated ⊣ CondensedSet.compactlyGeneratedToCondensedSet\", \"doc\": \"The adjunction between the category of compactly generated spaces and the category of condensed sets, obtained by restricting the adjunction between topological spaces and condensed sets through the f\"}\n  {\"name\": \"Alexandrov.principalsKanExtension\", \"module\": \"Mathlib/Topology/Sheaves/Alexandrov\", \"type\": \"{X : Type v} →\\n  [inst : TopologicalSpace X] →\\n    [inst_1 : Preorder X] →\\n      [Topology.IsUpperSet X] →\\n        {C : Type u} →\\n          [inst_3 : CategoryTheory.Category.{v, u} C] →\\n            [CategoryTheory.Limits.HasLimits C] →\\n              CategoryTheory.Functor X C → CategoryTheory.Functo\", \"doc\": \"For a preorder $X$ with the Alexandrov topology (where open sets are upper sets), a category $\\\\mathcal{C}$ with all limits, and a functor $F : X \\\\to \\\\mathcal{C}$, this is the pointwise right Kan exten\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary algebra, sheafification, categorical mates or underived sheaves; none states this normalized geometric derived assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|compactification|shriek",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits do not state normalized derived etale/pro-etale compactification coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical etale to proetale derived compact support comparison preserves refinement and composition maps",
+   "results": "8 hits: DiscreteQuotient.ofLE_map, CocompactMap.coe_comp, RingHom.Etale.stableUnderComposition, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Etale.comp, CategoryTheory.Meq.refine, RingHom.Etale.respectsIso; actual answer digest 937f8cfe33ba5efc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits do not state normalized derived etale/pro-etale compactification coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp; actual answer digest 7deb50fb1122da8a",
+   "date": "2026-10-21",
+   "verdict": "match for the generic mate-pasting tool only; already cited as lem-weil-pbc-mate-pasting, not a one-line specialization for the whole geometric item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale derived compact support comparison commutes with proper refinements and composition of compactifications",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_map_preimage_le_map_preimage, Condensed.profiniteSolidification, LightCondSet.hom_naturality_apply, AlgebraicGeometry.IsEtale.of_comp; actual answer digest 109a33504ebbeef5",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits do not state normalized derived etale/pro-etale compactification coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|conjugateEquiv_id",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; actual answer digest bc7bfa299826683a; Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-21",
+   "verdict": "match for the generic mate-pasting tool only; already cited as lem-weil-pbc-mate-pasting, not a one-line specialization for the whole geometric item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit mate direct image and extension by zero comparison commute with composition and refinement on etale and pro etale sites",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, CategoryTheory.plusPlusAdjunction_counit_app_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; actual answer digest 3d297dce027ab9ae",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits do not state normalized derived etale/pro-etale compactification coherence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-et-proet-coefficient-compatibility",
@@ -84,5 +271,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-finite-compact-site-coherence",
+  "worker": "stage1",
+  "summary": "Q124: proved the two site-coherence equations by expanding the normalized proper/open refinement and tower formulas, pasting the existing site squares, and using counit-mate composition. Verified bounded-below inputs and arbitrary finite-ring hypotheses; no new nodes or statement changes.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md, Locality paragraph: composite adjunctions, compatibility with open extension, and transposes of composites. This split supplies the finite-ring site/refinement/tower coherence used in Steps 5, 6, 9 of the Q58 parent split.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic categorical input to the canonical direct-image compositor normalization in Step 2; it does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-cbc-sieve-module-sheaves-grothendieck",
+    "why": "Generic categorical input to the canonical direct-image compositor normalization in Step 2; it does not replace any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-cbc-sieve-module-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-837dedd41",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-837dedd41 (reviewer sub-agent of L); spot-checked: FIX for one C4 fault. I read the item, all 23 cited statements, Stacks more-etale 0F7B (l.2460) and 0F7J (l.3159), and the blueprint Locality paragraph. The statement and stmt_deps are unchanged from Q58's version and not weakened; there are no new nodes, no SGA citations and no cycle. All citations are on the route of sk-thm-sf-compatibility. I recomputed Steps 3, 5 and 6 and they are right. Step 3 is d_{r2u}Nκ = κ^pro P(d_u) d_{r2} plus the site clause of lem-sp-refinement-coefficient-mate, which needs no Cartesian square. Step 5 whiskers the Γ site square of lem-sp-proper-open-coefficient-mate at J_aE, with d_q and e_a attached by naturality. Step 6 uses the e-composition clause and Step 2. The hypotheses hold: all schemes are Noetherian, hence qcqs for the canonical-mate node; inputs are bounded below; opens are quasi-compact; R is any finite commutative ring. Edge cases R=0, u=id, an identity open and a non-Cartesian refinement all work. The fault (C4) is in Steps 4 and 7: they took the Γ-tower formula for α^et and its tower-independence from lem-amb-etale-compact-comparisons, whose statement gives no formula. That formula is the normalization clause of lem-amb-unbounded-compact-support-comparisons, which also says it restricts on D+ to lem-amb's composition. The fix cites that node in Steps 4 and 7 and adds it to proof_deps. I also named mate-pasting clause (3) in Step 2's text, since passing from the composite adjunction to that of ba needs it. The node generalizes lem-pur-compact-support-site-coherence (A_{E,n}), lem-trf-proper-composition-site-transport and lem-sf-proper-open-comparison-site-normalization; it is not a duplicate of any of them. The tool_uses for the sfb normalization and sieve-Grothendieck lemmas are accepted; both are on route anyway.; 1 file(s) fixed by the reviewer"
  }
 }

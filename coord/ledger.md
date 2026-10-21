@@ -19934,3 +19934,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/Q115/lem-sfb-finite-field-proetale-direct-image (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T03:43:48Z L: superseded stage-1 delivery Q10/lem-sp-affine-counit-scalar at 7eead15362921282b6b23c5c1ecc19f845dd58e9; current completion retained; packet archived at refs/superseded/Q10/lem-sp-affine-counit-scalar/7eead15362921282b6b23c5c1ecc19f845dd58e9; stale return retired.
 - 03:44 L: merged deliver/Q40/lem-weil-pbc-realization-localized-push (reviewer FIX; first push; new nodes: 0)
+- 03:44 L: merged deliver/Q124/lem-sp-finite-compact-site-coherence (reviewer FIX; first push; new nodes: 0)
