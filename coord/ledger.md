@@ -20806,3 +20806,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:52 L: returned deliver/Q124/thm-zl-real-mixed-by-curves (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED thm-zl-real-mixed-by-curves: cited node def-wf-iota-re)
 - 07:52 L: returned deliver/Q55/lem-sfb-rationalization-localization-hom-criterion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-rationalization-localization-hom-criterion: le)
 - 07:52 L: returned deliver/Q128/lemma-nagata-strict-transform-chart-localization-data (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-transform-chart-localization-data:)
+- 07:52 L: returned deliver/Q94/lemma-nagata-scheme-image-of-closed-immersion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-scheme-image-of-closed-immersion: cited n)
