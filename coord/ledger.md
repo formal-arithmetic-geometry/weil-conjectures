@@ -20047,3 +20047,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:54 L: merged deliver/Q43/lem-sfb-integral-derived-extension-comparison (reviewer PASS; first push; new nodes: 0)
 - 03:54 L: merged deliver/Q17/lem-sfb-rhom-continuity-triangle-closure (reviewer PASS; first push; new nodes: 0)
 - 03:54 L: merged deliver/Q29/lem-sfb-coefficient-projection-square (reviewer FIX; first push; new nodes: 0)
+- 03:54 L: merged deliver/Q57/lem-sfb-adic-proper-localizing-adjunction-comparison (reviewer PASS; first push; new nodes: 0)

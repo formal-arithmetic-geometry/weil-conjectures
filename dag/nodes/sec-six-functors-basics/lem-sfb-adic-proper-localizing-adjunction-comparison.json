@@ -22,9 +22,89 @@
   "lem-sfb-adic-proper-localizing-pushforward",
   "sk-prop-sf-existence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify the scheme hypotheses needed below. The affine scheme $\\operatorname{Spec}k$ is Noetherian: its underlying space is a point and its coordinate ring is Noetherian, since a field has only the ideals $0$ and $k$. This uses the affine-cover definition [pqf-def-locnoeth]. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure morphism of each $T=Z,Y$. Thus $T$ is quasi-compact and locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated] it is also quasi-separated. In particular both the Noetherian constructibility comparison and the qcqs Tor-bound theorem apply, without assuming the base field algebraically closed.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OV, definition-noetherian, and Tag 01OY, lemma-locally-Noetherian-quasi-separated."
+   }
+  },
+  {
+   "text": "Eliminate the certificate [def-sfb-adic-coefficient-certificate] into its three constructors. Each constructor specifies the actual condensed ring and its multiplication, so the results for $\\mathcal O_E$, $E$ and the finite-subextension-valued $\\overline{\\mathbf Q}_\\ell$ apply to this $\\Lambda$, without changing scalar rings. By [lem-sfb-adic-constructibility-predicate-comparison], for each $T$ the property $\\mathcal B_T$ is exactly $\\Dbc(T,\\Lambda)$ in the same $D_T$. If $K$ lies in this property with cohomology in $[a,b]$, [det-def-localizing-closure-ctf-equals-bc] gives Tor amplitude in $[a-1,b]$, hence $K\\in\\mathcal C_T$. Conversely $\\mathcal C_T\\subseteq\\Dbc(T,\\Lambda)$ by the definition [sk-def-sfb-constructible]. These two inclusions prove $\\mathcal B_T=\\mathcal C_T$ as object properties, including integral torsion objects.",
+   "uses": [
+    "def-sfb-adic-coefficient-certificate",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Clauses (1)-(2), applied after the ordinary constructibility comparison of the adic bullets in det-existence-restriction.proof.md."
+   }
+  },
+  {
+   "text": "Expand the two intersection definitions [def-sfb-bounded-constructible-localizing-closure; sk-def-localizing-closure]. For any replete triangulated object property $P$ closed under the specified ambient coproducts, $\\mathcal B_T\\subseteq P$ if and only if $\\mathcal C_T\\subseteq P$, by step 2. The families being intersected are therefore identical, since both use $D_T$ and coproducts indexed in universe $u+1$. Hence $\\mathcal L_T=\\mathcal H_T$ pointwise. Identify the full subcategories by sending an object to that very same ambient object and every morphism to itself. Their ambient inclusions agree; the inclusions of the equal bounded classes into the equal hulls also agree on objects and morphisms. This is an equality of ordinary object properties, and introduces no derived-completeness condition.",
+   "uses": [
+    "def-sfb-bounded-constructible-localizing-closure",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Part (1), localizing categories; equality of their generating properties and identical full inclusions."
+   }
+  },
+  {
+   "text": "By [lem-sfb-adic-proper-localizing-pushforward], $F_g$ is the restriction of the actual ambient $Rg_*$ to $\\mathcal L_Z,\\mathcal L_Y$. Apply clause (1) of [det-cor-existence-ii-restriction] to the proper morphism $g$ and the admissible adic coefficient selected in step 2. It identifies the compact-support functor on $\\mathcal H_Z,\\mathcal H_Y$ with the restriction of that same ambient $Rg_*$. Under the identities of step 3 the latter restriction is $F_g$: its object and morphism maps agree, and its membership witnesses are properties. Thus the proper compactification comparison, restricted to these full subcategories, supplies $e:Rg_!\\xrightarrow{\\sim}F_g$. Its components are the ambient comparison components, now regarded as arrows of the full hull. Their inverses and naturality equations remain the same ambient arrows and equations.",
+   "uses": [
+    "lem-sfb-adic-proper-localizing-pushforward",
+    "det-cor-existence-ii-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Part (1): comparison with the identity compactification of a proper morphism."
+   }
+  },
+  {
+   "text": "Regard the given adjunction $a:Rg_!\\dashv J$ on the equal hulls from step 3. Apply [lem-sfb-adjunction-transport-left-iso] to $L=Rg_!$, $L\\prime=F_g$, $R=J$ and the isomorphism $e$ of step 4. This gives $F_g\\dashv J$ with Hom bijection $b_{M,N}(h)=a_{M,N}(h\\circ e_M)$ for every $M,N$ in the hulls. Explicitly its inverse sends $q:M\\to JN$ to $a_{M,N}^{-1}(q)\\circ e_M^{-1}$. Both composites are identities by the inverse identities for $a_{M,N}$ and $e_M$; naturality follows from the naturality of $a$ and $e$. This applies to the supplied adjunction itself, with no replacement of its right adjoint and no completeness restriction.",
+   "uses": [
+    "lem-sfb-adjunction-transport-left-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Part (1), proper-left-functor identification; explicit Hom transport as Mathlib Adjunction.ofNatIsoLeft and homEquiv_ofNatIsoLeft_apply."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-sfb-adic-coefficient-certificate",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "sk-def-sfb-constructible",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "sk-def-localizing-closure",
+  "lem-sfb-adic-proper-localizing-pushforward",
+  "det-cor-existence-ii-restriction",
+  "lem-sfb-adjunction-transport-left-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "Part (1), combined with the adic constructibility and finite-Tor comparison in det-existence-restriction.proof.md and det-def-localizing-closure-ctf-equals-bc.md; explicit equal-hull and Hom arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +147,38 @@
    "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardPushforwardAdj; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; SheafOfModules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; PresheafOfModules.instIsRightAdjointPushforward",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary sheaf pushforward as a right adjoint, scalar local cohomology, or localization of complexes, not the stated geometric hull and exceptional-adjunction comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*localizing|constructible.*finiteTor|ofNatIsoLeft",
+   "results": "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the full geometric item; adjunction transport declarations at Basic.lean:497 and :509 are used through the existing leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes with l adic coefficients have finite Tor amplitude and proper compact support pushforward agrees with derived pushforward",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.isStrictlyGE_of_iso, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.instHasFiniteLimits, DerivedCategory.TStructure.t, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general module finite presentations, ordinary sheaf pushforward right adjoints, local cohomology, or bounded derived representatives; none identifies the adic constructibility predicates and hulls or the proper compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For adic coefficients the bounded constructible and finite Tor constructible localizing hulls agree and proper pushforward inherits the compact support adjunction",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, localCohomology, localCohomology.ofSelfLERadical, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, localCohomology.isoSelfLERadical",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general module finite presentations, ordinary sheaf pushforward right adjoints, local cohomology, or bounded derived representatives; none identifies the adic constructibility predicates and hulls or the proper compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify locally finitely presented stratified constructible l adic sheaves with finite scalar local models, and compare the two localizing subcategories under proper direct image",
+   "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general module finite presentations, ordinary sheaf pushforward right adjoints, local cohomology, or bounded derived representatives; none identifies the adic constructibility predicates and hulls or the proper compact-support comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-localizing-exceptional-cohomology",
@@ -87,5 +195,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-adic-proper-localizing-adjunction-comparison",
+  "worker": "stage1",
+  "summary": "Proved the comparison in five steps using only existing nodes: verified Noetherian/qcqs hypotheses, combined the ordinary constructibility comparison with adic Tor bounds, equated the hulls by their identical intersections, used the existing proper comparison, and transported the supplied adjunction with its explicit Hom formula. Statement unchanged; no new nodes.",
+  "blueprint": "The created-item chain has no imported blueprint ancestor (blueprint_refs ancestor returns None); realizes det-existence-restriction.proof.md adic comparison together with det-cor-existence-ii-restriction part (1), in the fixed sk-cor-existence-ii proper-compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Generic comparison of the two constructibility predicates on Noetherian schemes; required before comparing hull generators, not a replacement of the proper-adjunction route."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Generic adic Tor-amplitude bound identifies the two bounded classes; the proper-adjunction unit has no separate coefficient Tor bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "det-def-localizing-closure-ctf-equals-bc"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-d48ee5210",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-d48ee5210 (reviewer sub-agent of L); spot-checked: No new nodes and the item's statement is unchanged from the Q80 snapshot that created it (only proof, proof_deps, proof_origin, status, split_report and searches differ). Step 1: Spec k is Noetherian; Stacks 01T6 and 01OY (morphisms.tex l.2765, properties.tex l.481) give Z and Y Noetherian and qcqs, which is what the next step's two theorems need. Step 2: the predicate-comparison node gives B_T=Dbc in the same D_T; ctf-equals-bc (2) gives Tor amplitude [a-1,b] on qcqs X for O_E, E and Qlb; Dctf⊆Dbc holds by definition. Step 3: both hulls intersect the same family of properties (u+1 coproducts), so they are equal; correctly marked elementary. Step 4: sk-def-sfb-dc-setting fixes one chosen compactification per morphism, so the Rg_! of sk-prop-sf-existence is the Rp_! that det-cor-existence-ii-restriction (1) identifies with the restricted Rg_*; that is the blueprint's identity-compactification route of sk-cor-existence-ii-restriction.proof (1). Step 5: Mathlib ofNatIsoLeft (l.497) and homEquiv_ofNatIsoLeft_apply (l.509) give exactly a(h∘e_M). Coefficients: the three certificate families are admissible, a finite normed E embeds isometrically into Qlb, and the item fixes the finite-subextension Qlb. No cycle: the dependency closure contains neither the item nor its parent. No re-split note and no SGA. The two tool_uses (predicate comparison, ctf-equals-bc) are same-unit or used-unit nodes; accepted. Edge cases: integral torsion sheaves (Tor amplitude [-1,0]); g=id on Spec k, where any compactification's j is clopen. Advisory: the certificate's constructor (iii) C(-,Qlb) is ambiguous against sk-def-sfb-qlbar-condensed; the item resolves it in its statement."
  }
 }
