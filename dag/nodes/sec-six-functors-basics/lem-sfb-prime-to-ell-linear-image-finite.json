@@ -10,41 +10,143 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $M=0$, its only automorphism is the identity, so the image has order $1$. Otherwise put $r=\\dim_E M$. Apply [lem-pod-profinite-stable-lattice] with $G=H$ and $V=M$: a profinite group is compact and the action is jointly continuous by hypothesis. Obtain a stable free $\\mathcal O_E$-lattice $\\Lambda$ of rank $r$ spanning $M$, with continuous restricted action and its maximal-ideal-adic topology equal to the subspace topology. Choose a basis of $\\Lambda$. It is an $E$-basis of $M$: its $r$ vectors span a space of dimension $r$. In this basis write $A(h)\\in\\operatorname{GL}_r(\\mathcal O_E)$ for the action; stability for $h$ and $h^{-1}$ supplies both an integral matrix and an integral inverse.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, p. 3: choose a stable lattice."
+   }
+  },
+  {
+   "text": "Write $\\mathcal O=\\mathcal O_E$, $\\pi=\\varpi_E$, and $A_n=\\mathcal O/\\pi^n\\mathcal O$ for $n\\geq1$, with the coefficient notation of [def-weil-l-adic-coefficient-extension]. The rings $A_n$ are finite by [lem-weil-valued-dvr-finite-quotients], applied to the valuation ring and uniformizer supplied by that coefficient datum. Reduction of the matrices defines $\\rho_n:H\\to\\operatorname{GL}_r(A_n)$; put $Q_n=\\rho_n(H)$ and $K_n=\\ker\\rho_n$. Each $Q_n$ is finite because its matrices have finitely many entries in a finite ring. Moreover $\\rho_n$ is continuous for the discrete topology: for each basis vector $e_j$, $h\\mapsto\\rho(h)e_j$ is continuous into $\\Lambda$ by [lem-pod-profinite-stable-lattice], and reduction modulo $\\pi^n\\Lambda$ has open fibres in the adic topology. Finitely many such evaluations determine the reduced matrix. Thus $H\\to Q_n$ is a continuous surjective homomorphism to a finite group, so $\\gcd(|Q_n|,\\ell)=1$ by the hypothesis on $H$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pod-profinite-stable-lattice",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, p. 3; elementary construction of finite continuous reduction images."
+   }
+  },
+  {
+   "text": "For every $n\\geq1$ and matrix $B$ over $\\mathcal O$, repeated multiplication gives $(I+\\pi^nB)^m\\equiv I+m\\pi^nB\\pmod{\\pi^{n+1}}$ for all integers $m\\geq0$: the base $m=0$ is immediate, and the induction step multiplies by $I+\\pi^nB$, whose extra product term is divisible by $\\pi^{2n}$, hence by $\\pi^{n+1}$. By [def-weil-l-adic-coefficient-extension], $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$, so $\\ell\\in\\mathfrak m_E=\\pi\\mathcal O$. Taking $m=\\ell$ gives $(I+\\pi^nB)^\\ell\\equiv I\\pmod{\\pi^{n+1}}$. This calculation works also at $\\ell=2$ and for ramified $E$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent expansion after Proposition 1.1.9: first-order matrix congruence calculation (not asserted in the notes)."
+   }
+  },
+  {
+   "text": "We prove $K_1=K_n$ by induction on $n\\geq1$. The base $n=1$ is equality. Suppose $K_1=K_n$ and take $h\\in K_1$. Since $h\\in K_n$, every entry of $A(h)-I$ is divisible by $\\pi^n$, so $A(h)=I+\\pi^nB$ for a matrix $B$ over $\\mathcal O$. The previous calculation implies $\\rho_{n+1}(h)^\\ell=1$ in $Q_{n+1}$. Apply [lem-sfb-finite-matrix-group-coprime-power] to $R=A_{n+1}$, $G=Q_{n+1}$ and exponent $\\ell$; the needed coprimality was established in Step 2. Its power map is injective and sends $1$ to $1$, so $\\rho_{n+1}(h)=1$. This proves $K_1\\subseteq K_{n+1}$; the reverse inclusion follows by reduction modulo $\\pi$. This completes the induction.",
+   "uses": [
+    "lem-sfb-finite-matrix-group-coprime-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent corollary to Proposition 1.1.9: induction on congruence depth using the Mathlib coprime-power bijection."
+   }
+  },
+  {
+   "text": "If $h\\in K_1$, Step 4 gives $A(h)-I\\in\\pi^nM_r(\\mathcal O)$ for every $n\\geq1$. For any entry $a$ of this difference, $a\\in\\pi^n\\mathcal O$ implies $|a|_E\\leq|\\pi|_E^n$. Here $0<|\\pi|_E<1$ by [def-weil-l-adic-coefficient-extension], so the right side tends to zero and $a=0$. Thus $A(h)=I$, which implies $\\rho(h)=1$ since $\\Lambda$ spans $M$. Conversely $\\rho(h)=1$ implies $h\\in K_1$. Therefore $\\ker\\rho=K_1$. The rule $\\rho(h)\\mapsto\\rho_1(h)$ is consequently a well-defined bijective group homomorphism $\\rho(H)\\to Q_1$: equality of reductions is equivalent to $h_2^{-1}h_1\\in K_1=\\ker\\rho$. Its target is finite and has order prime to $\\ell$ by Step 2, proving both assertions.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent expansion after Proposition 1.1.9: separatedness of the lattice and identification with the first finite reduction image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-profinite-stable-lattice",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sfb-finite-matrix-group-coprime-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, p. 3 for the lattice; agent-written congruence calculation and induction for the prime-to-ell corollary."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A continuous representation of a pro prime to ell profinite group on a finite dimensional ell adic vector space has finite image of order prime to ell",
    "results": "8 hits: Ideal.Quotient.stabilizerHom_surjective_of_profinite, cyclotomicCharacter.continuous, InfiniteGalois.profiniteGalGrp, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, krullTopology_discreteTopology_of_finiteDimensional, ProfiniteGrp.toFiniteQuotientFunctor, ModN.instFinite, ProfiniteAddGrp.ofFiniteAddGrp",
    "date": "2026-10-21",
-   "verdict": "no match: these hits do not state the internal condensed-module derived or geometric assertion"
+   "verdict": "no match: the listed results do not state the prime-to-ell linear-image assertion."
   },
   {
    "tool": "loogle",
    "query": "\"Profinite\", \"GeneralLinearGroup\"",
    "results": "0 hits: ",
    "date": "2026-10-21",
-   "verdict": "no match: these hits do not state the internal condensed-module derived or geometric assertion"
+   "verdict": "no match: the listed results do not state the prime-to-ell linear-image assertion."
   },
   {
    "tool": "grep",
    "query": "(pro.?ell|congruence).*(representation|GeneralLinear)|(representation|GeneralLinear).*(pro.?ell|congruence)",
    "results": "0 hits: ",
    "date": "2026-10-21",
-   "verdict": "no match: these hits do not state the internal condensed-module derived or geometric assertion"
+   "verdict": "no match: the listed results do not state the prime-to-ell linear-image assertion."
   },
   {
    "tool": "leansearch",
    "query": "Compact prime to ell subgroups of GL n over a finite extension of Q ell inject into a finite matrix quotient",
    "results": "8 hits: Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace, Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace, AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace, QuotientGroup.instCompactSpaceQuotientSubgroup, InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois, QuotientGroup.instLocallyCompactSpace, Matrix.SpecialLinearGroup.toGL_injective, Subgroup.IsArithmetic.finiteIndex_comap",
    "date": "2026-10-21",
-   "verdict": "no match: these hits do not state the internal condensed-module derived or geometric assertion"
+   "verdict": "no match: the listed results do not state the prime-to-ell linear-image assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous representation of a profinite group with all finite quotients of order coprime to ell over a finite extension of Q ell has finite image",
+   "results": "8 hits: InfiniteGalois.profiniteGalGrp, cyclotomicCharacter.continuous, InfiniteGalois.proj, ProfiniteGrp.toFiniteQuotientFunctor, InfiniteGalois.asProfiniteGaloisGroupFunctor, krullTopology_discreteTopology_of_finiteDimensional, IsPrimitiveRoot.finite_quotient_span_sub_one, Field.absoluteGaloisGroupAbelianization",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-quotient, local-field and arithmetic-subgroup results do not assert finiteness of prime-to-ell linear monodromy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact subgroup of a general linear group over a nonarchimedean local field of residue characteristic p has finite image if all its finite quotients have order prime to p",
+   "results": "8 hits: Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace, CategoryTheory.PreGaloisCategory.has_decomp_quotients, Subgroup.quotient_finite_of_isOpen', IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation, Valued.integer.locallyFiniteOrder_units_mrange_of_isCompact_integer, Subgroup.IsArithmetic.finiteIndex_comap, Subgroup.quotient_finite_of_isOpen",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-quotient, local-field and arithmetic-subgroup results do not assert finiteness of prime-to-ell linear monodromy."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"Finite\"",
+   "results": "3 hits: Subgroup.instIsArithmeticMapSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGLOfFiniteIndex, ModularForm.instFiniteDimensionalComplexRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL, ModularForm.instFiniteTypeComplexDirectSumIntRangeSpecialLinearGroupFinOfNatNatGeneralLinearGroupRealMapGL",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-quotient, local-field and arithmetic-subgroup results do not assert finiteness of prime-to-ell linear monodromy."
+  },
+  {
+   "tool": "grep",
+   "query": "(congruence|profinite).*(GeneralLinear|finite.image)|(GeneralLinear|finite.image).*(congruence|profinite)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-quotient, local-field and arithmetic-subgroup results do not assert finiteness of prime-to-ell linear monodromy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous representation of a pro prime to ell group on an ell adic vector space factors through a finite quotient",
+   "results": "8 hits: ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, ProfiniteGrp.toLimit_fun_continuous, ProfiniteGrp.isIso_toLimit, ProfiniteGrp.toLimit, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, ProfiniteGrp.toLimit_surjective, ProfiniteGrp.denseRange_toLimit, ProfiniteGrp.toLimit_injective",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-quotient, local-field and arithmetic-subgroup results do not assert finiteness of prime-to-ell linear monodromy."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-stratum-kummer-descent",
@@ -67,5 +169,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-prime-to-ell-linear-image-finite",
+  "worker": "stage1",
+  "summary": "Reused the existing stable-lattice theorem; wrote out continuity of finite matrix reduction, the first-order congruence power calculation, the full kernel induction, and separatedness. Added only the exact Mathlib coprime-power leaf. No statement change. The rank-zero, ell=2 and ramified cases are covered.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images.proof.md, ordinary open direct image: agent tame-boundary expansion via lem-sfb-tame-stratum-kummer-descent; this item supplies finite prime-to-ell monodromy. The inherited created.item chain is broken at lem-sfb-admissible-direct-image, so blueprint_refs.py ancestor returns None; retain that null ancestor and record the precise source location here.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Generic compact-group invariant-lattice theorem with exactly the joint continuity and finite-dimensional hypotheses needed here; this unit contains no separate invariant-lattice theorem."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic finiteness of quotients of a valued DVR with finite residue field; the coefficient datum supplies these hypotheses, and no lemma in this unit replaces this coefficient-ring tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-valued-dvr-finite-quotients"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-2cfbbe784",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-2cfbbe784 (reviewer sub-agent of L); spot-checked: Read in full: item and new leaf lem-sfb-finite-matrix-group-coprime-power, statement unchanged. Base had no proof and no repair note. Source: L19.pdf Prop 1.1.9 second bullet p.3 gives the stable lattice; the prime-to-ell corollary is correctly labelled agent-written. Step 1: lem-pod-profinite-stable-lattice hypotheses match (profinite so compact, joint continuity), giving a free full stable lattice and A(h) in GL_r(O_E); M=0 handled. Step 2: A_n finite; rho_n continuous via finitely many evaluations, so Q_n is a finite continuous quotient of order prime to ell. Step 3: (I+pi^nB)^ell = I mod pi^{n+1}, since cross terms are in pi^{2n} and ell is in m_E; holds for ell=2 and ramified E. Step 4: induction K_1=K_n written out; Mathlib leaf on Q_{n+1}, checked at OrderOfElement.lean:1245-1247 Nat.Coprime.pow_left_bijective. Step 5: the intersection of pi^nO is 0, so ker rho=K_1 and rho(H) is isomorphic to Q_1. rg -L found no duplicate of either node; the leaf is strictly smaller than the item. Batch-5 flag: the closure of lem-pod-profinite-stable-lattice is only l-adic field/DVR/lattice nodes and reaches no trace-formula, Poincare-duality or batch-4 node; it is generic representation theory and outside both assumptions, so accepted. Tool uses (stable lattice, valued-DVR quotients leaf) accepted. No SGA cited. No changes."
  }
 }
