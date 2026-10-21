@@ -104,10 +104,11 @@
   "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare",
   "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSinglePullbackSquare.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalSinglePullbackSquare",
-  "statement": "theorem canonicalSinglePullbackSquare {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S') (h : g' ≫ f = f' ≫ g) (N : S.Modules) (M : X.Modules) (a : (pullback f).obj N ⟶ M) : let E := (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj N let c := (pullbackComp g' f).app N ≪≫ (pullbackCongr h).app N ≪≫ ((pullbackComp f' g).app N).symm let d := ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) f' g).hom.app E ≫ eqToHom (congrArg (fun k ↦ (derivedPullback k).obj E) h.symm) ≫ ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) g' f).inv.app E d ≫ (derivedPullback g').map (canonicalSinglePullbackMap f N ≫ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map a) ≫ canonicalSinglePullbackMap g' M = (derivedPullback f').map (canonicalSinglePullbackMap g N) ≫ canonicalSinglePullbackMap f' ((pullback g).obj N) ≫ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).map (c.inv ≫ (pullback g').map a)",
+  "statement": "theorem canonicalSinglePullbackSquare\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (h : g' ≫ f = f' ≫ g) (N : S.Modules) (M : X.Modules)\n    (a : (pullback f).obj N ⟶ M) :\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj N\n    let c := (pullbackComp g' f).app N ≪≫ (pullbackCongr h).app N ≪≫\n      ((pullbackComp f' g).app N).symm\n    let d := ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) f' g).hom.app E ≫\n      eqToHom (congrArg (fun k ↦ (AlgebraicGeometry.derivedPullback k).obj E) h.symm) ≫\n      ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) g' f).inv.app E\n    d ≫ (AlgebraicGeometry.derivedPullback g').map\n        (canonicalSinglePullbackMap f N ≫ (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map a) ≫\n        canonicalSinglePullbackMap g' M =\n      (AlgebraicGeometry.derivedPullback f').map (canonicalSinglePullbackMap g N) ≫\n        canonicalSinglePullbackMap f' ((pullback g).obj N) ≫\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).map\n            (c.inv ≫ (pullback g').map a)",
   "branch": "sheaf-dag",
-  "by": "U3",
-  "date": "2026-10-12"
+  "by": "E4",
+  "date": "2026-10-21",
+  "note": "Restored the quarantined zero-hole theorem against the adopted source API. Explicit AlgebraicGeometry.derivedPullback qualification preserves the intended shared-category functor, avoiding the newer Scheme.Modules.derivedPullback. The statement, pinned maps, proof plan and dependencies are otherwise retained."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -120,14 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "C-b9586",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261012T184350-L-4022388",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T012356-L-2181906",
+  "kind": "proof",
+  "note": "independent cc review: delivered CanonicalSinglePullbackSquare.lean vs quarantine/ original (only derivedPullback → AlgebraicGeometry.derivedPullback, matching canonicalSinglePullbackMap's type); node lean.statement vs delivered signature; compile 36.9 s clean, axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
