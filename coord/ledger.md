@@ -20769,3 +20769,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:42 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: Superseded (A7/B10, brief l.103: live finished nodes are not split). The human's re-split note was written at 05:04 UTC.)
 - 07:42 L: returned deliver/Q71/det-lem-int-integral-heart-local-model (reviewer RETURN: Re-split delivery for the 2026-10-21 human note. The one new node, lem-sfb-completed-scalar-complex-cohomology, is true:)
 - 07:42 L: returned deliver/Q32/lem-sfb-monoidal-finite-free-transport (reviewer RETURN: Superseded by a later stage-3 Lean landing on live (brief l.103/B10, A7, C5). Timeline: (1) Q32 committed this re-split )
+- 07:42 L: returned deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer RETURN: Superseded (A7/B10, brief 'live finished nodes win; never split one'). This re-split was committed 05:52 UTC on base 7ff)
