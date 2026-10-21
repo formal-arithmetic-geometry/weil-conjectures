@@ -12,9 +12,72 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=A_{\\mathcal C}$, let $O$ be the constant presheaf of commutative rings with value $A$, so that $\\theta:O\\to O^\\#=R$ is its sheafification as a presheaf of rings [def-weil-pbc-constant-sheaf], and let $P$ be $O$ regarded as a presheaf of $O$-modules (its underlying presheaf of abelian groups is the constant presheaf with value the additive group of $A$). Multiplication $u:P\\to P$, $x\\mapsto ax$, has zero sectionwise kernel by the assumed injectivity on $A$. Abelian sheafification $\\eta:P\\to P^\\#$ preserves finite limits, hence kernels and the zero object, by [lem-weil-pbc-sheafification-exact]; therefore $u^\\#:P^\\#\\to P^\\#$ has zero kernel. By [lem-pc-sites-module-sheafification-interface] the abelian sheaf $P^\\#$ carries a unique $R$-module structure with $\\theta(o)\\eta(x)=\\eta(ox)$, and $O$-linear maps from $P$ to $R$-modules extend uniquely to $R$-linear maps from $P^\\#$. Identify $P^\\#$ with $R$: the $O$-linear map $\\theta:P\\to R$ extends to an $R$-linear $\\bar\\theta:P^\\#\\to R$, and $\\psi:R\\to P^\\#$, $r\\mapsto r\\,\\eta(1)$, is $R$-linear. Then $\\bar\\theta\\psi(r)=r\\,\\bar\\theta(\\eta(1))=r\\theta(1)=r$; and $\\psi\\bar\\theta$ is an $R$-linear endomorphism of $P^\\#$ with $\\psi\\bar\\theta\\eta(o)=\\theta(o)\\eta(1)=\\eta(o)$, so it is the identity by the uniqueness of extensions. Under $\\bar\\theta$, $u^\\#$ is multiplication by the constant section $\\theta(a)$: both $u^\\#$ and $x\\mapsto\\theta(a)x$ are additive endomorphisms of $P^\\#$ restricting along $\\eta$ to $\\eta(ox)\\mapsto\\eta(aox)=\\theta(a)\\eta(ox)$, and the extension along $\\eta$ is unique [lem-weil-pbc-sheafification-exact]. Commutativity of $A$ makes this endomorphism $R$-linear. Its kernel, computed on underlying abelian sheaves, is zero, so it is monic in $\\operatorname{Mod}(R)$: cancellation holds on underlying abelian sheaves, hence on module morphisms.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI, lemma-sheafification-exact, via its underlying abelian sheafification proof; Tag 03CY, lemma-sheafification-presheaf-modules, extended scalar action and universal property"
+   }
+  },
+  {
+   "text": "Construct the tensor-unit isomorphism $\\lambda:R\\otimes_R M\\xrightarrow{\\sim}M$ using [def-pur-sheaf-tensor-product]. On each object $U$, the balanced map $R(U)\\otimes_{R(U)}M(U)\\to M(U)$ is $r\\otimes m\\mapsto rm$, with inverse $m\\mapsto1\\otimes m$. The first composite is $m\\mapsto m$; the second is $r\\otimes m\\mapsto1\\otimes rm=r\\otimes m$, by the balancing relation, and hence is the identity on all tensors. Both maps commute with restrictions because restrictions preserve $1$ and the module action. Thus the presheaf tensor is isomorphic to the underlying presheaf of the sheaf $M$; sheafifying gives the displayed isomorphism. In particular, this calculation does not assert that an arbitrary section of a sheaf tensor is globally a pure tensor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, definition as sheafified sectionwise tensor; elementary tensor-unit calculation"
+   }
+  },
+  {
+   "text": "Let $T(N)=N\\otimes_R M$. Flatness [def-pc-flat-sheaf-modules] says exactly that $T$ is an exact functor on the abelian category $\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Apply the monomorphism-preservation clause (a) of [lem-sp-exact-functor-preserves-homology] to the monomorphism $u^\\#:R\\to R$ from Step 1. It gives a monomorphism $v=u^\\#\\otimes1_M$ on $R\\otimes_R M$. Under $\\lambda$ from Step 2 this is multiplication by $a$: on the presheaf tensor $\\lambda(v(r\\otimes m))=\\lambda(ar\\otimes m)=(ar)m=a(rm)$. Equivalently, its conjugate sends $m$ to $\\lambda(a\\otimes m)=am$, by the explicit inverse $m\\mapsto1\\otimes m$. These equalities hold after sheafification as equalities of the induced morphisms. Thus multiplication by $a$ on $M$ is a monomorphism.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, definition-flat (3), with Tag 03EK, section-tensor-product; exact-functor tool: homology.tex Tag 010N, lemma-exact-functor"
+   }
+  },
+  {
+   "text": "Kernels in $\\operatorname{Mod}(R)$ are computed sectionwise by [def-weil-sheaf-of-modules-category]. The two monomorphisms just proved therefore have zero kernels on every object $U$. If $as=at$ in either $R(U)$ or $M(U)$, then $s-t$ belongs to that zero kernel, so $s=t$. Conversely sectionwise injectivity implies cancellation of sheaf morphisms component by component. This proves the two explicit injectivity assertions and their stated monomorphism formulation. The argument used only injectivity of $x\\mapsto ax$ on $A$ and exactness of sheaf tensor with $M$; it applies on any small site.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, sectionwise kernels; elementary subtraction and cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EI, lemma-sheafification-exact, followed by Tag 03ER, definition-flat (3), and the elementary tensor-unit calculation of Section Tag 03EK"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +120,52 @@
    "results": "0 hits; none; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
    "date": "2026-10-21",
    "verdict": "no match: ordinary-module regularity lemmas and presheaf mono criteria do not state scalar injectivity for flat module sheaves on an arbitrary site"
+  },
+  {
+   "tool": "grep",
+   "query": "isSMulRegular|constantSheaf.*[Mm]ono|[Mm]ono.*constantSheaf|[Ff]lat",
+   "results": "0 hits; ; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module regularity/tensor lemmas and presheaf constructions do not state the arbitrary-site flat module-sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Mono\"",
+   "results": "12 hits; PresheafOfModules.instIsNormalMonoCategory, PresheafOfModules.instMonoModuleCatCarrierObjOppositeRingCatApp, PresheafOfModules.injective_of_mono, PresheafOfModules.mono_of_injective, PresheafOfModules.mono_iff_surjective, PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.monoidalCategory, PresheafOfModulesOfCommRing.monoidalCategoryStruct",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module regularity/tensor lemmas and presheaf constructions do not state the arbitrary-site flat module-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular scalar acts injectively on a flat sheaf of modules over the constant sheaf of rings on an arbitrary site",
+   "results": "8 hits; Module.Flat.isSMulRegular_of_isRegular, Module.Flat.isSMulRegular_of_nonZeroDivisors, IsSMulRegular.of_flat, IsSMulRegular.of_flat_of_isBaseChange, Module.Flat.toAlgebra_injective, Module.FaithfullyFlat.faithfulSMul, IsSMulRegular.rTensor, Module.FaithfullyFlat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module regularity/tensor lemmas and presheaf constructions do not state the arbitrary-site flat module-sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "isSMulRegular_of_nonZeroDivisors|isSMulRegular_of_isRegular",
+   "results": "5 hits; Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean; searched Mathlib/RingTheory/Flat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module regularity/tensor lemmas and presheaf constructions do not state the arbitrary-site flat module-sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat sheaves of modules tensor an injective scalar endomorphism of the constant ring sheaf to an injective endomorphism",
+   "results": "8 hits; Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.rTensor_preserves_injective_linearMap, IsTensorProduct.map_injective_of_flat_left_right, IsTensorProduct.map_id_injective_of_flat_left, Module.Flat.iff_lTensor_preserves_injective_linearMapₛ, TensorProduct.map_injective_of_flat_flat, Module.Flat.iff_lTensor_preserves_injective_linearMap, IsTensorProduct.map_id_injective_of_flat_right",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module regularity/tensor lemmas and presheaf constructions do not state the arbitrary-site flat module-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a monomorphism of sheaves of modules with a flat sheaf preserves its kernel and the tensor unit identifies scalar multiplication",
+   "results": "8 hits; Module.Flat.ker_lTensor_eq, LinearMap.tensorKerEquiv_apply, LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm, LinearMap.tensorKerEquiv, PresheafOfModules.Monoidal.tensorObj, LinearMap.kerLTensorEquivOfSurjective, LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm, Module.Flat.iff_lTensor_preserves_injective_linearMapₛ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module regularity/tensor lemmas and presheaf constructions do not state the arbitrary-site flat module-sheaf assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-flat-scalar-cyclic-resolution",
@@ -79,5 +184,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-flat-constant-module-scalar-mono",
+  "worker": "stage1",
+  "summary": "Q19: preserved the statement; proved regularity on the constant ring by exact abelian sheafification, constructed the sheaf tensor unitor explicitly, applied an existing exact-functor monomorphism theorem to the flat sheaf tensor functor, and used sectionwise kernels. No new nodes; no sectionwise-flatness or enough-points assumption.",
+  "blueprint": "Realizes the constant-scalar regularity input of det-lem-integral-models-operations, paragraph (2), tensor product/local scalar models, through lem-sfb-flat-scalar-cyclic-resolution Steps 1-2. No unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-fa6a05dc7",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-fa6a05dc7 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. Read every cited statement and the Stacks places 03EI, 03ER(3), 03EK, 03CY, 03DA and 010N, all checked in tags/tags. The statement is true without domain or points hypotheses. Tested cases: M=0, the empty site, objects with an empty covering, Z/6 with a=5, Z×Z with a=(2,3), a=0 forcing A=0, and Z/2 with a=2 showing flatness is needed. Steps 2-4 are correct: the explicit unitor is built on presheaf tensors and then sheafified; exactness of the flat tensor with lem-sp-exact-functor-preserves-homology (a) carries the monomorphism through and it is conjugated by the unitor; kernels are computed sectionwise. All cited nodes are definitions or Mathlib leaves, so there is no route issue and no tool_uses are needed. No duplicate found in the DAG. One C4 fault: Step 1 identified the abelian sheafification P^# with the additive sheaf of the ring sheafification R=A_C by citing def-weil-pbc-constant-sheaf and def-sf-site-constant-module-functor, and neither statement gives this. Fixed: Step 1 now cites the Mathlib leaf lem-pc-sites-module-sheafification-interface (unique R-action on P^# and unique R-linear extension) and proves P^#≅R explicitly. The maps are θ̄ and r↦r·η(1); one composite is the identity by computation and the other by uniqueness of extensions. It then shows that u^# is multiplication by θ(a), also by uniqueness. In the item, proof_deps are updated: def-sf-site-constant-module-functor is replaced by the interface lemma. The statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
