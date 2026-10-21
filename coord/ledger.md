@@ -19852,3 +19852,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:36 L: merged deliver/Q106/lem-sfb-exact-derived-composition (stage 2; reviewer PASS; parallel immutable checks)
 - 03:36 L: merged deliver/Q133/def-sfb-open-immersion-shriek-iso (stage 2; reviewer PASS; parallel immutable checks)
 - 03:36 L: merged deliver/NH/lem-cbc-ringed-open-extension-products (stage 2; reviewer PASS; parallel immutable checks)
+- 03:36 L: merged deliver/N5/lem-sfb-proper-open-boundary-zero (reviewer FIX; first push; new nodes: 0)
