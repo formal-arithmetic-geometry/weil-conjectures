@@ -1,0 +1,84 @@
+{
+ "id": "lem-sfb-topological-module-condensation",
+ "kind": "statement",
+ "title": "Continuous-function condensation of topological modules",
+ "statement": "Let $R$ be a commutative topological ring, and work on the coherent site of profinite sets in a fixed universe large enough for the coefficients [sk-def-sfb-condensed-ring]. A topological $R$-module here is an $R$-module $M$ with continuous addition, negation and scalar multiplication $R\\times M\\to M$; morphisms are continuous $R$-linear maps. Use the sheafified objectwise tensor over $\\mathbf Z$ [sk-def-sfb-sheaf-tensor], its sheafification [def-weil-pbc-sheafification], and internal module objects [sk-def-sfb-module-objects]. There is an additive functor $\\mathscr C_R$ from these topological modules to internal $\\underline R$-modules with the following specified formulas.\n\nFor every $M$, its underlying abelian sheaf is $S\\mapsto C(S,M)$, with restrictions by precomposition and pointwise addition. Its action $\\gamma_M:\\underline R\\otimes\\mathscr C_R(M)\\to\\mathscr C_R(M)$ is the unique morphism whose restriction along the canonical map from the objectwise tensor presheaf sends $a\\otimes h$ to $(s\\mapsto a(s)h(s))$. This action satisfies the internal unit and associativity identities, so it is defined on the sheafified tensor, without an assertion that tensor-sheaf sections equal tensor products of sections.\n\nFor every continuous $R$-linear map $f:M\\to N$, the underlying map of $\\mathscr C_R(f)$ on $S$ is $h\\mapsto f\\circ h$; this is an internal $\\underline R$-linear morphism. These maps preserve identities, composition and sums.\n\nFor every finite family $(M_i)_{i\\in I}$ with product topology, the canonical map\n$$\\mathscr C_R\\left(\\prod_{i\\in I}M_i\\right)\\xrightarrow{\\sim}\\prod_{i\\in I}\\mathscr C_R(M_i)$$\nis an internal module isomorphism, with section map $h\\mapsto(\\operatorname{pr}_i\\circ h)_i$ and inverse $(h_i)_i\\mapsto(s\\mapsto(h_i(s))_i)$. For $M=R$ with its regular action, $\\mathscr C_R(R)$ is the regular internal module over $\\underline R$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "First two sentences: passing continuous linear coordinates and their inverse to internal condensed modules; expanded as a general continuous-function construction"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "topological|Topological|ContinuousLinear|ModuleCat",
+   "results": "25 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Module.lean, Mathlib/Condensed/Module.lean, Mathlib/Condensed/Module.lean, Mathlib/Condensed/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ContinuousMap.module′ gives only the action on individual section groups; the condensed constructors use a fixed scalar ring type. None supplies the functor to internal modules over the varying section ring C(-,R), its sheaf-tensor action, and its normalized product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, Module",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ContinuousMap.module′ gives only the action on individual section groups; the condensed constructors use a fixed scalar ring type. None supplies the functor to internal modules over the varying section ring C(-,R), its sheaf-tensor action, and its normalized product comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions with values in a topological module form an internal module over the condensed topological scalar ring and continuous linear maps induce internal module morphisms",
+   "results": "8 hits: ContinuousMap.module.congr_simp, TopModuleCat.toModuleCat, ContinuousMap.module, continuousSubmodule, ContinuousMap.module', ContinuousLinearMap.continuousSMul, ContinuousLinearMap.continuous, ContinuousLinearMapClass",
+   "date": "2026-10-21",
+   "verdict": "no match: ContinuousMap.module′ gives only the action on individual section groups; the condensed constructors use a fixed scalar ring type. None supplies the functor to internal modules over the varying section ring C(-,R), its sheaf-tensor action, and its normalized product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopModuleCat, \"functor\"",
+   "results": "3 hits: TopRep.invariantsFunctor, TopRep.instAdditiveTopModuleCatInvariantsFunctor, TopRep.instLinearTopModuleCatInvariantsFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: ContinuousMap.module′ gives only the action on individual section groups; the condensed constructors use a fixed scalar ring type. None supplies the functor to internal modules over the varying section ring C(-,R), its sheaf-tensor action, and its normalized product comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological modules over a commutative topological ring give internal modules over its condensed ring by continuous functions on profinite sets, functorially in continuous linear maps and compatibly with finite products",
+   "results": "8 hits: CondensedMod, Condensed.profiniteFree, CondensedMod.LocallyConstant.functor, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, LightCondMod, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-21",
+   "verdict": "no match: ContinuousMap.module′ gives only the action on individual section groups; the condensed constructors use a fixed scalar ring type. None supplies the functor to internal modules over the varying section ring C(-,R), its sheaf-tensor action, and its normalized product comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The continuous function construction on profinite sets sends topological modules and continuous linear maps to module objects over the sheaf of continuous scalar valued functions with sheafified tensor product",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functorToPresheaves, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteFree, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ContinuousMap.module′ gives only the action on individual section groups; the condensed constructors use a fixed scalar ring type. None supplies the functor to internal modules over the varying section ring C(-,R), its sheaf-tensor action, and its normalized product comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-subfield-basis",
+  "date": "2026-10-21",
+  "group": "Q21"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-subfield-flat",
+   "place": "First two sentences: passing continuous linear coordinates and their inverse to internal condensed modules; expanded as a general continuous-function construction",
+   "via": [
+    "lem-sfb-condensed-subfield-basis"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
