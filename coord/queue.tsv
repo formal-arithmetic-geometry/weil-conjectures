@@ -1,6 +1,8 @@
 # item	stage	distance (to a target; to Mathlib in stage 2)	sorry	kind	blockers (stage 2: open stage-2 nodes that wait for it through stmt_deps; stage 3: `route`, or the distance to the nearest route sorry)
 Sheaf.Algebra.Homology.KFlatResolution	3	-		retire-first	unblocks 1 rework roots
 WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility	3	-	4	rework	root; 1055 quarantined importers wait
+Sheaf.Paper.FdCoefficientComparison	3	-	0	rework	root; 383 quarantined importers wait
+Sheaf.Paper.SitePerfectComplex	3	-	0	rework	root; 364 quarantined importers wait
 Sheaf.Paper.AdicStratifiedPerfect	3	-	1	rework	root; 207 quarantined importers wait
 Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology	3	-	0	rework	root; 170 quarantined importers wait
 Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono	3	-	0	rework	root; 90 quarantined importers wait
@@ -8,6 +10,7 @@ Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit	3	-	0	rework	root; 66 quaranti
 Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare	3	-	0	rework	root; 56 quarantined importers wait
 Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons	3	-	0	rework	root; 56 quarantined importers wait
 Sheaf.CategoryTheory.MappedSmartTruncationTower	3	-	0	rework	root; 32 quarantined importers wait
+Sheaf.Paper.ExtensionZeroStratifiedPerfect	3	-	0	rework	root; 28 quarantined importers wait
 Sheaf.AlgebraicGeometry.IntegralDerivedTensorBoundedTorsion	3	-	1	rework	root; 12 quarantined importers wait
 Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre	3	-	0	rework	root; 8 quarantined importers wait
 Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison	3	-	0	rework	root; 2 quarantined importers wait
@@ -48,7 +51,6 @@ lem-dl-a1-integral-normal-residue-etale-splitting	1	-		none
 def-sfb-finite-derived-adjunction	2	1		state	0
 lem-weil-point-finite-free-sections-tensor	2	1		state	2
 sk-thm-picard-duality	2	1		state	2
-lem-sp-ell-coefficient-fiber	2	1		state	1
 lem-dl-a1-finite-group-inertia-invariants-etale	2	1		state	0
 lem-pc-curve-local-scalar-principal-parts	2	1		state	0
 lem-pc-finite-dimensional-trace-exact	2	1		state	0
@@ -66,6 +68,7 @@ lem-sfb-continuous-frame-sheaf-comparison	2	1		state	0
 lem-sfb-ordinary-proetale-direct-image-plus-comparison	2	1		state	0
 lem-sfb-reduction-single-cohomology-normalization	2	1		state	0
 lem-sfb-scalar-hom-chain-coefficient-coherence	2	1		state	0
+lem-sp-normalized-error-tower-vanishing	2	1		state	0
 lem-sp-power-torsion-sheaf-limit-complete	2	1		state	0
 lem-sp-semilinear-kflat-tower-model	2	1		state	0
 lem-trf-section-coordinate-counit-normalization	2	1		state	0
@@ -220,6 +223,7 @@ Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatConstantScalarMono	3	-	1	proof	4
 Sheaf.Algebra.Category.Ring.Sheaf.PrincipalPowerQuotients	3	-	4	proof	4
 Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex	3	-	1	proof	4
 Sheaf.Algebra.Homology.BoundedProjectiveComplexDualPairing	3	-	1	proof	4
+Sheaf.Algebra.Homology.CochainTensorModelRigidity	3	-	1	proof	4
 Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints	3	-	4	proof	4
 Sheaf.Algebra.Homology.FiniteFreeMonoCokernelKFlat	3	-	1	proof	4
 Sheaf.Algebra.Homology.FlatCoefficientReductionAdjunct	3	-	1	proof	4
@@ -260,6 +264,7 @@ Sheaf.CategoryTheory.AdditiveLocalizationDescent	3	-	1	proof	4
 Sheaf.CategoryTheory.AdjointEquivalenceConjugation	3	-	4	proof	4
 Sheaf.CategoryTheory.AmplitudeTruncationFamilyComparison	3	-	1	proof	4
 Sheaf.CategoryTheory.CofinalRoosRestriction	3	-	1	proof	4
+Sheaf.CategoryTheory.CompletedTensorRationalNaturality	3	-	1	proof	4
 Sheaf.CategoryTheory.DerivedCategory.ConstantTowerNormalization	3	-	1	proof	4
 Sheaf.CategoryTheory.DerivedTowerCounitProjections	3	-	1	proof	4
 Sheaf.CategoryTheory.ExactSquareDerivedCounit	3	-	1	proof	4
@@ -347,6 +352,7 @@ Sheaf.Paper.PuritySupportCommonInjectives	3	-	1	proof	5
 Sheaf.Paper.StrictQuotientScalarBalancing	3	-	1	proof	5
 Sheaf.RingTheory.HenselianWStrictLocalInvariance	3	-	1	proof	5
 Sheaf.SixFunctors.EtaleStalkConstantComplexExactness	3	-	6	proof	5
+Sheaf.SixFunctors.GeometricTwoIsoScalarPairing	3	-	1	proof	5
 Sheaf.ZetaWeil.FiniteProjectiveModuleDualPairing	3	-	1	proof	5
 Sheaf.Algebra.Homology.KFlatShortExactQuotient	3	-	1	proof	6
 Sheaf.Algebra.Homology.KoszulRoosProjectionComparison	3	-	1	proof	6
@@ -371,14 +377,15 @@ Sheaf.Paper.ClassicalLocalizationTriangleTransport	3	-	1	proof	6
 Sheaf.Paper.CommonLinePositiveScalarPowers	3	-	2	proof	6
 Sheaf.Paper.ComparisonGlobalResolutionModel	3	-	1	proof	6
 Sheaf.Paper.DerivedLocalClassEdgeComparison	3	-	1	proof	6
+Sheaf.Paper.EllCoefficientFiber	3	-	3	proof	6
 Sheaf.Paper.EtaleLowerTruncationFlatModel	3	-	1	proof	6
 Sheaf.Paper.SignedLineScalarTensorTower	3	-	7	proof	6
 Sheaf.RingTheory.HenselianSmoothAlgebraLifting	3	-	1	proof	6
-Sheaf.SixFunctors.GeometricTwoIsoScalarPairing	3	-	1	proof	6
 Sheaf.Topology.FiniteQuotientFiberProduct	3	-	1	proof	6
 Sheaf.Algebra.Homology.ExternalEvaluationTwoShiftSquares	3	-	1	proof	7
 Sheaf.Algebra.Homology.RegularQuotientConeAugmentation	3	-	1	proof	7
 Sheaf.Algebra.Homology.SubcategoryTruncationResolutionSystem	3	-	1	proof	7
+Sheaf.AlgebraicGeometry.EtaleOriginOpenRestrictionTransport	3	-	1	proof	7
 Sheaf.AlgebraicGeometry.EtaleQuotientTensorStalkCriterion	3	-	1	proof	7
 Sheaf.AlgebraicGeometry.SupportQuotientPairPullback	3	-	1	proof	7
 Sheaf.CategoryTheory.SemilinearTensorPresentationTransport	3	-	1	proof	7

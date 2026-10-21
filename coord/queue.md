@@ -1,14 +1,16 @@
 # Work queue
 
-399 items; claim with `tools/claim.py next <group> [--stage N]`.
+406 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (13 clusters, 2095 modules)
+## Rework: quarantined by the upstream sync (16 clusters, 2095 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 1 |  | error: failed in the global build (no message located) |
+| `Sheaf.Paper.FdCoefficientComparison` | 1 |  | error: Sheaf/Paper/FdCoefficientComparison.lean:195:2: failed to synthesize instance of type class |
+| `Sheaf.Paper.SitePerfectComplex` | 1 |  | error: Sheaf/Paper/SitePerfectComplex.lean:122:10: failed to synthesize instance of type class |
 | `Sheaf.Paper.AdicStratifiedPerfect` | 1 |  | error: Sheaf/Paper/AdicStratifiedPerfect.lean:209:8: Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono` | 1 |  | error: Sheaf/AlgebraicGeometry/SingleComplexQcqsHomologyMono.lean:59:15: Unknown identifier `SingleComplexBaseChange.StalkCondition` |
@@ -16,13 +18,14 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.CategoryTheory.MappedSmartTruncationTower` | 1 |  | error: Sheaf/CategoryTheory/MappedSmartTruncationTower.lean:5:0: error: import WeilConjectures.CategoryTheory.DoubleComplexTotal failed, environment already con |
+| `Sheaf.Paper.ExtensionZeroStratifiedPerfect` | 1 |  | error: Sheaf/Paper/ExtensionZeroStratifiedPerfect.lean:87:9: Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.AlgebraicGeometry.IntegralDerivedTensorBoundedTorsion` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 188, stage 3 186 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 187, stage 3 188 items.
 
 ## Stage 1: nodes to split (24)
 
@@ -60,7 +63,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-weil-point-finite-free-sections-tensor` | 1 | state | 2 |
 | `sk-thm-picard-duality` | 1 | state | 2 |
-| `lem-sp-ell-coefficient-fiber` | 1 | state | 1 |
 | `lem-dl-a1-finite-group-inertia-invariants-etale` | 1 | state | 0 |
 | `lem-pc-curve-local-scalar-principal-parts` | 1 | state | 0 |
 | `lem-pc-finite-dimensional-trace-exact` | 1 | state | 0 |
@@ -78,6 +80,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-ordinary-proetale-direct-image-plus-comparison` | 1 | state | 0 |
 | `lem-sfb-reduction-single-cohomology-normalization` | 1 | state | 0 |
 | `lem-sfb-scalar-hom-chain-coefficient-coherence` | 1 | state | 0 |
+| `lem-sp-normalized-error-tower-vanishing` | 1 | state | 0 |
 | `lem-sp-power-torsion-sheaf-limit-complete` | 1 | state | 0 |
 | `lem-sp-semilinear-kflat-tower-model` | 1 | state | 0 |
 | `lem-trf-section-coordinate-counit-normalization` | 1 | state | 0 |
@@ -87,9 +90,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-zl-dualizable-categorical-trace-conjugacy` | 1 | state | 0 |
 | `sk-thm-picard-rr` | 1 | state | 0 |
 
-Not open yet: 355 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 124 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 355 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (324)
+## Stage 3: modules to prove (328)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -241,6 +244,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Category.Ring.Sheaf.PrincipalPowerQuotients` | - | 4 | proof | 4 |
 | `Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.BoundedProjectiveComplexDualPairing` | - | 1 | proof | 4 |
+| `Sheaf.Algebra.Homology.CochainTensorModelRigidity` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints` | - | 4 | proof | 4 |
 | `Sheaf.Algebra.Homology.FiniteFreeMonoCokernelKFlat` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.FlatCoefficientReductionAdjunct` | - | 1 | proof | 4 |
@@ -281,6 +285,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.AdjointEquivalenceConjugation` | - | 4 | proof | 4 |
 | `Sheaf.CategoryTheory.AmplitudeTruncationFamilyComparison` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.CofinalRoosRestriction` | - | 1 | proof | 4 |
+| `Sheaf.CategoryTheory.CompletedTensorRationalNaturality` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.DerivedCategory.ConstantTowerNormalization` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.DerivedTowerCounitProjections` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.ExactSquareDerivedCounit` | - | 1 | proof | 4 |
@@ -368,6 +373,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.StrictQuotientScalarBalancing` | - | 1 | proof | 5 |
 | `Sheaf.RingTheory.HenselianWStrictLocalInvariance` | - | 1 | proof | 5 |
 | `Sheaf.SixFunctors.EtaleStalkConstantComplexExactness` | - | 6 | proof | 5 |
+| `Sheaf.SixFunctors.GeometricTwoIsoScalarPairing` | - | 1 | proof | 5 |
 | `Sheaf.ZetaWeil.FiniteProjectiveModuleDualPairing` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.KFlatShortExactQuotient` | - | 1 | proof | 6 |
 | `Sheaf.Algebra.Homology.KoszulRoosProjectionComparison` | - | 1 | proof | 6 |
@@ -392,14 +398,15 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CommonLinePositiveScalarPowers` | - | 2 | proof | 6 |
 | `Sheaf.Paper.ComparisonGlobalResolutionModel` | - | 1 | proof | 6 |
 | `Sheaf.Paper.DerivedLocalClassEdgeComparison` | - | 1 | proof | 6 |
+| `Sheaf.Paper.EllCoefficientFiber` | - | 3 | proof | 6 |
 | `Sheaf.Paper.EtaleLowerTruncationFlatModel` | - | 1 | proof | 6 |
 | `Sheaf.Paper.SignedLineScalarTensorTower` | - | 7 | proof | 6 |
 | `Sheaf.RingTheory.HenselianSmoothAlgebraLifting` | - | 1 | proof | 6 |
-| `Sheaf.SixFunctors.GeometricTwoIsoScalarPairing` | - | 1 | proof | 6 |
 | `Sheaf.Topology.FiniteQuotientFiberProduct` | - | 1 | proof | 6 |
 | `Sheaf.Algebra.Homology.ExternalEvaluationTwoShiftSquares` | - | 1 | proof | 7 |
 | `Sheaf.Algebra.Homology.RegularQuotientConeAugmentation` | - | 1 | proof | 7 |
 | `Sheaf.Algebra.Homology.SubcategoryTruncationResolutionSystem` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.EtaleOriginOpenRestrictionTransport` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.EtaleQuotientTensorStalkCriterion` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.SupportQuotientPairPullback` | - | 1 | proof | 7 |
 | `Sheaf.CategoryTheory.SemilinearTensorPresentationTransport` | - | 1 | proof | 7 |
