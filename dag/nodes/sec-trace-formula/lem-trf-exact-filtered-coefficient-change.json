@@ -1,0 +1,146 @@
+{
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "id": "lem-trf-exact-filtered-coefficient-change",
+ "kind": "statement",
+ "title": "Exact coefficient change for finite filtered derived complexes",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredDerivedHomCalculusUniverse",
+  "date": "2026-10-21",
+  "group": "T2"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor induces a functor on the derived category and preserves homology",
+   "results": "8 hits, including Functor.mapDerivedCategory, mapDerivedCategoryFactors, preservesHomologyOfExact and Ext.mapExactFunctor.",
+   "date": "2026-10-21",
+   "verdict": "Use the ordinary exact derived functor and its localization comparison; no finite-filtered coefficient functor or normalized inclusion/projection comparison is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor, including mapDerivedCategoryFactors, mapDerivedCategoryCompIso and mapDerivedCategoryIdIso.",
+   "date": "2026-10-21",
+   "verdict": "These supply the ordinary coefficient functor; filtered localization and the two normalized squares still require a construction."
+  },
+  {
+   "tool": "grep",
+   "query": "uliftFunctor|mapDerivedCategoryFactors|mapHomologyIso",
+   "results": "25 hits; AddCommGrpCat.uliftFunctor and its preservation of all limits and colimits are in Mathlib.Algebra.Category.Grp.Ulift.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing exact universe-lift functor rather than reconstructing abelian groups or ordinary derived functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor between abelian categories acts on finite filtered derived categories and commutes with filtration subobjects and associated graded quotients",
+   "results": "8 hits: ExactFunctor.of, exactFunctor, Functor.mapDerivedCategory, Ext.mapExactFunctor.congr_simp, Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, Ext.mapExactFunctor, ExactFunctor, Functor.exact_tfae.",
+   "date": "2026-10-21",
+   "verdict": "No finite-filtered construction or its normalized squares. Reuse mapDerivedCategory and the usual exact-functor API for the ordinary coefficient change."
+  }
+ ],
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1–5.1.2: functoriality of finite filtrations and filtered localization; Stacks derived.tex Tags 05S2, 05S4, and Mathlib ExactFunctor for ordinary exact coefficient change."
+ },
+ "statement": "Let A and B be abelian categories [def-sp-abelian] with chosen derived categories [def-weil-abstract-derived-category]. Let F:A→B be an additive functor preserving finite limits and finite colimits. Give each finite-filtered bounded-below localization its cone-normalized triangulation, and let S and T be any representative-normalized truncation calculi on these localizations [lem-trf-filtered-derived-hom-calculus-base]. Then there exist a functor L:DF⁺(A)→DF⁺(B), natural isomorphisms eω:L⋙T.ω≅S.ω⋙D(F), egr(r):L⋙T.gr(r)≅S.gr(r)⋙D(F), and eh:S.high(0)⋙S.ω⋙D(F)≅L⋙T.high(0)⋙T.ω such that, for every X, eh_X followed by T.ω of the high-zero inclusion at LX and then eω_X equals D(F) applied to S.ω of the inclusion at X; and eh_X followed by the normalized grade-zero projection at LX and then egr(0)_X equals D(F) of the normalized grade-zero projection at X. Here D(F) is the ordinary derived functor of the exact functor F, high is filtration subcomplex truncation, and grade-zero projection is from ω high(0) to gr(0), with the actual inclusion and quotient maps on representatives. Filtrations are uniformly finite, independently of the cochain bound, as in [def-sp-filtration, def-sp-filtered-complex-subquotients].",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-trf-filtered-derived-hom-calculus-base",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Apply F termwise to the underlying complex. Define the pth new filtration step as the image of F of the original step inclusion. The mapped original step is monic, hence its factorization onto that image is an isomorphism. These isomorphisms are natural and commute with step inclusions. The original top/bottom filtration indices and lower cochain bound remain valid, including zero complexes and empty filtration support.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus-base",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "F preserves cokernels. Comparing the cokernel of consecutive mapped step inclusions with the new filtration quotient gives a natural graded-complex isomorphism. Its quotient square commutes by the cokernel universal property. Therefore graded quasi-isomorphisms remain graded quasi-isomorphisms. Descend the filtered coefficient functor and its underlying and graded comparisons using the localization universal property and the ordinary exact derived functor comparison.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus-base",
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The high-truncation inclusion is injective on Hom from an object supported in filtration indices at least r, by the high Hom bijection of the universal truncation triangle. Its support and representative normalization apply to actual high complexes. This proves naturality of the normalized high comparison of any truncation calculus, by composing the desired equation with the inclusion and cancelling. The mapped step isomorphisms therefore give the high-zero underlying comparison.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus-base",
+    "lem-trf-filtered-truncation-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On representatives, expand the three descended comparisons. Naturality cancels the localization comparison isomorphisms. The inclusion equation reduces to the image factorization of the mapped step inclusion. The projection equation reduces to the cokernel quotient square from step 2. The prescribed normalizations of S and T identify these equations with the requested maps. Whiskering with the localization functor is faithful on natural transformations, so the equations hold on all localized objects.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus-base",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-filtered-derived-hom-calculus-base",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-trf-filtered-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1–5.1.2; explicit image/cokernel construction and localization descent, with universal high-truncation Hom bijection for naturality."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-filtered-derived-hom-calculus",
+   "place": "Independent coefficient-universe enlargement: exact additive transport of the finite filtered Hom output and its canonical maps."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExactFilteredCoefficientChange",
+  "file": "lean/Sheaf/Algebra/Homology/ExactFilteredCoefficientChange.lean",
+  "declaration": "CochainComplex.FiniteFiltered.exactFilteredCoefficientChange",
+  "declarations": [
+   "CochainComplex.FiniteFiltered.ExactFilteredCoefficientChangeData",
+   "CochainComplex.FiniteFiltered.exactFilteredCoefficientChange"
+  ],
+  "statement": "theorem exactFilteredCoefficientChange : Nonempty (ExactFilteredCoefficientChangeData F S T)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T011038-L-2032412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T011038-L-2032412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

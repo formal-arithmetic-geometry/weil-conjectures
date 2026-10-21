@@ -2,9 +2,9 @@
  "id": "def-trf-filtered-truncation-data",
  "kind": "definition",
  "title": "Data for universal finite filtered truncation triangles",
- "statement": "For an abelian category A [def-sp-abelian] with a chosen bounded-below derived category [def-weil-abstract-derived-category], FilteredTruncationData(A) is the structure consisting of the localization $DF^+(A)$ of bounded-below cochain complexes with a uniformly finite filtration by subcomplexes at graded quasi-isomorphisms, with its cone-normalized triangulation, as set up in [lem-trf-filtered-derived-hom-calculus] [def-weil-triangulated-category], exact forgetful and graded functors to the ordinary bounded-below derived category, required to agree on representatives with the underlying complex and with the graded complexes $\\operatorname{gr}^pK=F^pK/F^{p+1}K$, exact subcomplex and quotient truncation functors with their canonical inclusion, quotient, and connecting transformations, the distinguished truncation triangles and their support and uniqueness properties, the two natural Hom-set bijections expressing the right and left adjunctions, and the pure-grade placement equivalence with the ordinary derived category. The truncation functors are required to agree on representatives with F^p and M/F^pM, using filtered-complex subquotients [def-sp-filtered-complex-subquotients], and the pure-grade comparison is required to identify t_{\\ge p}t_{<p+1} with gr^p by an isomorphism normalized on representatives by the canonical projection $F^pK\\to\\operatorname{gr}^pK$ and to allow acyclic rather than literally zero other graded pieces. The filtration operations use the decreasing filtration notion [def-sp-filtration].",
+ "statement": "For an abelian category A [def-sp-abelian] with a chosen bounded-below derived category [def-weil-abstract-derived-category], FilteredTruncationData(A) is the structure consisting of the localization $DF^+(A)$ of bounded-below cochain complexes with a uniformly finite filtration by subcomplexes at graded quasi-isomorphisms, with its cone-normalized triangulation, as set up in [lem-trf-filtered-derived-hom-calculus-base] [def-weil-triangulated-category], exact forgetful and graded functors to the ordinary bounded-below derived category, required to agree on representatives with the underlying complex and with the graded complexes $\\operatorname{gr}^pK=F^pK/F^{p+1}K$, exact subcomplex and quotient truncation functors with their canonical inclusion, quotient, and connecting transformations, the distinguished truncation triangles and their support and uniqueness properties, the two natural Hom-set bijections expressing the right and left adjunctions, and the pure-grade placement equivalence with the ordinary derived category. The truncation functors are required to agree on representatives with F^p and M/F^pM, using filtered-complex subquotients [def-sp-filtered-complex-subquotients], and the pure-grade comparison is required to identify t_{\\ge p}t_{<p+1} with gr^p by an isomorphism normalized on representatives by the canonical projection $F^pK\\to\\operatorname{gr}^pK$ and to allow acyclic rather than literally zero other graded pieces. The filtration operations use the decreasing filtration notion [def-sp-filtration].",
  "stmt_deps": [
-  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-filtered-derived-hom-calculus-base",
   "def-sp-filtered-complex-subquotients",
   "def-sp-filtration",
   "def-sp-abelian",
@@ -114,5 +114,40 @@
   "group": "NI",
   "result": "fix",
   "note": "Read the item, its 6 stmt_deps, the new node def-trf-filtered-truncation-data, Varshavsky 5.1.1-5.1.2 (corrected adjoint directions), both modules, upstream FilteredDerivedHomCalculus/FiniteFilteredLocalization/FilteredComplexSubquotients and Mathlib DerivedCategory.Plus. F1 (H3): omega and gr p were arbitrary exact functors, so all support, uniqueness, Hom-bijection and pure-grade clauses quantified over unconstrained functors; fixed by adding omegaComparison (Q false ⋙ omega ⋙ Plus.ι ≅ forget false ⋙ DerivedCategory.Q) and grComparison (to graded false p), as in TruncationCalculus. F2 (H3, canonically): grade_truncation was an arbitrary iso; fixed by grade_normalization, which on representatives pins it to complexQuotientπ p (p+1). F3 (H12/H9): the new node cited def-trf-finite-filtered-localization, whose FiniteFilteredDerivedPlus is unused and is a different localization, and its import was unused; now cites lem-trf-filtered-derived-hom-calculus, which owns Derived false/Complex/forget/graded/high/low/TriangulatedLocalization; no cycle; import dropped. Everything else matches the node: uniform finite filtration, bounded below, cone-normalized triangulation, truncation comparisons and normalizations, distinguished triangle, ∃! iso fixing M, both Hom bijections, pure-grade equivalence with IsZero support; edge cases fine; HasDerivedCategory.{w} unrestricted; no hollow def; sorry only in the theorem; docstrings present; lean.statement verbatim. nt_compile --json: delivered pair clean; fixed module plus unchanged triangle module clean; control error reported. Fixes: FilteredTruncationData.lean, def-trf-filtered-truncation-data.json (statement and stmt_deps only), lem-trf-filtered-truncation-triangle.report.md (appended fix section)."
+ },
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "T2 stage 2",
+  "old_statement": "For an abelian category A [def-sp-abelian] with a chosen bounded-below derived category [def-weil-abstract-derived-category], FilteredTruncationData(A) is the structure consisting of the localization $DF^+(A)$ of bounded-below cochain complexes with a uniformly finite filtration by subcomplexes at graded quasi-isomorphisms, with its cone-normalized triangulation, as set up in [lem-trf-filtered-derived-hom-calculus] [def-weil-triangulated-category], exact forgetful and graded functors to the ordinary bounded-below derived category, required to agree on representatives with the underlying complex and with the graded complexes $\\operatorname{gr}^pK=F^pK/F^{p+1}K$, exact subcomplex and quotient truncation functors with their canonical inclusion, quotient, and connecting transformations, the distinguished truncation triangles and their support and uniqueness properties, the two natural Hom-set bijections expressing the right and left adjunctions, and the pure-grade placement equivalence with the ordinary derived category. The truncation functors are required to agree on representatives with F^p and M/F^pM, using filtered-complex subquotients [def-sp-filtered-complex-subquotients], and the pure-grade comparison is required to identify t_{\\ge p}t_{<p+1} with gr^p by an isomorphism normalized on representatives by the canonical projection $F^pK\\to\\operatorname{gr}^pK$ and to allow acyclic rather than literally zero other graded pieces. The filtration operations use the decreasing filtration notion [def-sp-filtration].",
+  "what": "The concrete localization and truncation infrastructure lives in the existing base module. Its old citation was attached to the stronger independent-universe Hom theorem. Distinguishing these attachments avoids a spurious cycle when coefficient transport uses the universal truncation Hom bijection. No mathematical clause or Lean declaration changes.",
+  "source": {
+   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+   "place": "§§5.1.1(a)–(e), §5.1.2(a)–(c), pp.39–40; Stacks derived.tex Tags 05S1–05S6"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-filtered-truncation-triangle",
+    "holds": true,
+    "note": "The structure, its localization, all fields and Lean signature are unchanged; only the citation identifying its existing base infrastructure is redirected."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-trf-filtered-derived-hom-calculus",
+   "def-sp-filtered-complex-subquotients",
+   "def-sp-filtration",
+   "def-sp-abelian",
+   "def-weil-abstract-derived-category",
+   "def-weil-triangulated-category"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T011038-L-2032412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
