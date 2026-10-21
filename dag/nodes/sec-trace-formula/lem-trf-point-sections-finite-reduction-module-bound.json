@@ -1,0 +1,102 @@
+{
+ "kind": "statement",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-prop-trace-adic",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteReduction",
+  "date": "2026-10-21",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-sections-finite-reduction-bounded",
+   "place": "module-side boundedness helper",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-trf-point-sections-finite-reduction-module-bound",
+ "title": "Boundedness of the selected module derived tensor",
+ "statement": "For commutative rings R and A, a ring map f : R →+* A, a strictly bounded-above complex C of A-modules supported above 0, and a bounded-above object N of D(R), the selected second-factor derived tensor functor applied to C sends N to a bounded-above object of D(A).",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project, Tag 064L",
+  "place": "bounded-above flat resolution and derived tensor upper bound."
+ },
+ "proof": [
+  {
+   "text": "Choose an upper-bounded representative and a bounded-above termwise flat quasi-isomorphic resolution. Apply the selected derived-tensor universal comparison on that K-flat resolution. The mixed tensor complex is strictly bounded above by the componentwise tensor support calculation; convert this to the derived t-structure bound and transport it across the resolution and counit isomorphisms.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "R1 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/",
+  "place": "boundedness proof, module tensor component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exists_quasiIso_flat_of_isStrictlyLE",
+   "results": "Used the existing bounded flat resolution declaration.",
+   "verdict": "supporting declaration",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "isStrictlyLE_tensorObj",
+   "results": "Used the existing tensor support lemma pattern.",
+   "verdict": "supporting declaration",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor preserves bounded above objects",
+   "results": "No single direct theorem for the selected witness.",
+   "verdict": "no exact match",
+   "date": "2026-10-21"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSectionsFiniteReductionModuleBound",
+  "file": "lean/Sheaf/Paper/PointSectionsFiniteReductionModuleBound.lean",
+  "declaration": "DerivedCategory.isLE_derivedTensor_second_factor_obj",
+  "statement": "theorem isLE_derivedTensor_second_factor_obj {R A : Type u} [CommRing R] [CommRing A] (f : R →+* A) (C : CochainComplex (ModuleCat.{u} A) ℤ) (hC : C.IsStrictlyLE 0) (N : DerivedCategory (ModuleCat.{u} R)) (hN : ∃ b : ℤ, N.IsLE b) : ∃ b : ℤ, (((Classical.choose (exists_derivedTensor_second_factor_functor f).2).obj C).obj N).IsLE b",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T012426-L-2189397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T012426-L-2189397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

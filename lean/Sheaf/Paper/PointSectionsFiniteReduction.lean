@@ -17,6 +17,9 @@ import Sheaf.Paper.ConstantModuleSectionProperties
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.RingedTensorCohomologicalBounds
+import Sheaf.Paper.PointSectionsFiniteReductionModuleBound
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 import Mathlib.RingTheory.Flat.Tensor
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
@@ -37,6 +40,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option linter.style.haveILetI false
+set_option linter.unusedVariables false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -373,7 +377,40 @@ theorem point_sections_finite_reduction_bounded (_hl : IsUnit (l : k)) :
           ((DerivedCategory.homologyFunctor _ q).obj
             ((pointFiniteReductionModuleTensor l E n j hjn).obj
               ((pointFiniteReductionSections k l E n).obj N.obj)))) := by
-  sorry
+  intro n j hn hj hjn N
+  clear hn hj
+  obtain ⟨b, hb⟩ := N.property
+  have hSheaf : pointFiniteReductionBoundedAbove k l E j
+      ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) := by
+    have h := (SheafOfModules.ringedTensorCohomologicalBounds
+      (pointFiniteReductionSheafMap k l E n j hjn) b).1 N.obj hb
+    have heq : pointFiniteReductionSheafTensor k l E n j hjn =
+        SheafOfModules.ringedDerivedScalarExtension
+          (pointFiniteReductionSheafMap k l E n j hjn) := by
+      unfold pointFiniteReductionSheafTensor SheafOfModules.ringedDerivedScalarExtension
+      rfl
+    rw [heq]
+    exact ⟨b, h⟩
+  have hsec : ((pointFiniteReductionSections k l E n).obj N.obj).IsLE b :=
+    (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).isLE_mapDerivedCategory_obj
+      N.obj b
+  have hC : (pointFiniteReductionCoefficientComplex l E j).IsStrictlyLE 0 := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro q hq
+    simpa [pointFiniteReductionCoefficientComplex] using
+      (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0
+        (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))
+          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))) q (by omega))
+  have hmod := DerivedCategory.isLE_derivedTensor_second_factor_obj
+    (pointFiniteReductionRingMap l E n j hjn)
+    (pointFiniteReductionCoefficientComplex l E j) hC
+    ((pointFiniteReductionSections k l E n).obj N.obj) ⟨b, hsec⟩
+  refine ⟨hSheaf, ?_⟩
+  obtain ⟨c, hc⟩ := hmod
+  refine ⟨c, ?_⟩
+  intro q hq
+  exact (DerivedCategory.isLE_iff _ c).1 hc q hq
+
 
 /-- Flat-complex model, generator normalization, and counit compatibility.
 Source: Steps 5, 6 and 8 of the parent proof.
@@ -509,11 +546,13 @@ theorem point_sections_finite_reduction (_hl : IsUnit (l : k)) :
         (pointFiniteReductionSectionFactors k l E j
           ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom := by
   obtain ⟨e⟩ := point_sections_finite_reduction_iso k l E _hl
+  have hbounded := fun (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n) ↦
+    point_sections_finite_reduction_bounded k l E _hl n j hn hj hjn
+  have hcomplex := fun (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n) ↦
+    point_sections_finite_reduction_complex k l E _hl e n j hn hj hjn
   refine ⟨e, ?_⟩
   intro n j hn hj hjn
-  constructor
-  · exact point_sections_finite_reduction_bounded k l E _hl n j hn hj hjn
-  · exact point_sections_finite_reduction_complex k l E _hl e n j hn hj hjn
+  exact ⟨hbounded n j hn hj hjn, hcomplex n j hn hj hjn⟩
 
 
 end WeilConjectures
