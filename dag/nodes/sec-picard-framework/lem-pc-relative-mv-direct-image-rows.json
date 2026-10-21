@@ -15,29 +15,26 @@
  },
  "proof": [
   {
-   "text": "Apply the strictly smaller pre-overlap rows theorem. It supplies the two short exact rows, the row morphism and all six vertex comparisons, together with the global and middle adjoint-mate identities.",
+   "text": "Apply the resolved-row core theorem to obtain both short exact rows, their strict morphism, all six vertex comparisons, and the three normalized adjunction-mate equations.",
    "uses": [
-    "lem-pc-relative-mv-direct-image-rows-preoverlap"
+    "lem-pc-relative-mv-direct-image-rows-core"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the overlap-mate theorem to the supplied rows and comparisons. It proves the retained third component by the underived open-counit square and localization-unit naturality, so the three displayed identities hold simultaneously.",
-   "uses": [
-    "lem-pc-relative-mv-direct-image-rows-overlap-mate"
-   ],
-   "elementary": false
+   "text": "For each normalized equation, apply the inverse adjunction Hom equivalence and simplify by Equiv.symm_apply_apply. Postcompose with the corresponding target vertex isomorphism; associativity and its inverse-hom identity cancel the inverse comparison. Package the three resulting identities with the same witnesses and short-exactness proofs.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-relative-mv-direct-image-rows-preoverlap",
-  "lem-pc-relative-mv-direct-image-rows-overlap-mate"
+  "lem-pc-relative-mv-direct-image-rows-core"
  ],
  "proof_origin": {
-  "by": "worker decomposition",
+  "by": "J1 worker proof",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 08BV, 08HZ, 08FE and 08HY; strict rows and overlap mate separated into two proper intermediate statements",
-  "note": "The target is assembled by a real Lean proof from the two strictly smaller declarations."
+  "place": "Tags 08BV, 08HZ, 08FE and 08HY; resolved-row core followed by elementary adjunction and isomorphism cancellation",
+  "note": "Restore the quarantined interface and use the existing core directly; the preoverlap, mates, and overlap-mate wrappers are unnecessary for this proof."
  },
  "mathlib_searches": [
   {
@@ -145,13 +142,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261014T171840-L-2711156",
-  "kind": "interface",
+  "landing": "20261021T021916-L-2791844",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
