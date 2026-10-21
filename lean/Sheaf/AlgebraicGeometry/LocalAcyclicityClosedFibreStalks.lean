@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
 import Sheaf.AlgebraicGeometry.LocalAcyclicityStrictFibreComparison
 import WeilConjectures.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
@@ -129,7 +129,7 @@ theorem closedFibre_derivedUnit_target_stalks
   let Ψ := (Scheme.pointSmallEtale x').sheafFiber (A := AddCommGrpCat.{u + 1})
   let d : L ≅ (DerivedCategory.Plus.singleFunctor _ 0).obj F :=
     ((upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlusSingleFunctor 0).app G'
-  obtain ⟨cStalk, _⟩ := inverseImage_stalk_germ i z
+  let cStalk := upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} i z
   let c := Φ.mapIso
       (((upperStar AddCommGrpCat.{u + 1} i).mapDerivedCategoryPlusHomologyFunctorIso
         (q : ℤ)).symm.app (R.obj L)) ≪≫
@@ -169,15 +169,13 @@ theorem closedFibre_derivedUnit_target_stalks
     Spec.map (Scheme.smallStrictHenselizationColimitIso x').inv
   have hι : ι ≫ σ = ρ := Scheme.smallStrictHenselizationColimitIso_toBase x'
   let g : W ⟶ pullback h σ :=
-    pullback.lift w (pullback.snd h ρ ≫ ι) (by
-      rw [Category.assoc, hι, pullback.condition])
-  let g' : pullback h σ ⟶ W :=
-    pullback.lift (pullback.fst h σ) (pullback.snd h σ ≫ inv ι) (by
-      rw [Category.assoc, ← hι, IsIso.inv_hom_id_assoc, pullback.condition])
-  have : IsIso g := ⟨g', by apply pullback.hom_ext <;> simp [g, g', w],
-    by apply pullback.hom_ext <;> simp [g, g', w]⟩
+    pullback.map h ρ h σ (𝟙 _) ι (𝟙 _) (by simp) (by simpa using hι.symm)
+  have : IsIso g := by dsimp only [g]; infer_instance
   obtain ⟨cWN⟩ := nonempty_cohomology_iso_of_iso_over (asIso g) w
-    (pullback.fst h σ) (by simp [g]) F (q : ℤ)
+    (pullback.fst h σ) (by
+      change g ≫ pullback.fst h σ = w
+      dsimp only [g]
+      rw [pullback.lift_fst, Category.comp_id]) F (q : ℤ)
   exact ⟨c ≪≫ asIso (r ≫ strictHenselizationCohomologyComparison x' h F q) ≪≫
     (cohomology AddCommGrpCat.{u + 1} (pullback h σ) (q : ℤ)).mapIso
       ((DerivedCategory.Plus.singleFunctorιIso _ 0).app
