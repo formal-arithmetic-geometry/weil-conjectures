@@ -1,0 +1,111 @@
+{
+ "id": "def-trf-ambient-affine-translation-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "The parent proof uses the ambient coordinate translation constructions in its affine translation step.",
+   "via": [
+    "lem-pur-affine-translation-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical affine translation coordinate constructions",
+ "statement": "For a Noetherian scheme S, a coordinate vector a on affine d-space, and finite coefficients A killed by N, use the canonical coordinate-tower translation isomorphism, its ordered Tate pullback identification, the compact-support exchange, and the normalized twist transport and projective-line datum. These are the explicit constructions in AmbientAffineTranslationTrace; no trace-invariance theorem is part of this definition node.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/AmbientAffineTranslationTrace.lean",
+  "place": "Definitions ambientAffineTranslationIso through ambientAffineTraceDatum"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical affine-space translation, Tate pullback and compact-support exchange coordinate constructions",
+   "results": "No exact Mathlib match; the project declaration AmbientAffineTranslationTrace is the existing source interface.",
+   "date": "2026-10-21",
+   "verdict": "existing project declarations found"
+  },
+  {
+   "tool": "loogle",
+   "query": "AffineSpace.translation, compactSupport exchange, Tate pullback",
+   "results": "No matching Mathlib declaration for the combined coordinate-tower constructions.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ambientAffineTranslation|ambientAffineTranslationTate|ambientAffineTranslationExchange",
+   "results": "Matches in lean/Sheaf/AlgebraicGeometry/AmbientAffineTranslationTrace.lean; these are the exact existing declarations recorded below.",
+   "date": "2026-10-21",
+   "verdict": "existing project module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Translation action and normalized Tate identification on an affine coordinate tower",
+   "results": "No exact generic result; use the existing project module.",
+   "date": "2026-10-21",
+   "verdict": "existing project module"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-translation-trace",
+  "date": "2026-10-21",
+  "group": "NK"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace",
+  "declaration": "AlgebraicGeometry.Etale.ambientAffineTranslation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ambientAffineTranslationIso",
+   "AlgebraicGeometry.Etale.ambientAffineTranslation",
+   "AlgebraicGeometry.Etale.ambientAffineLineRightExpansion",
+   "AlgebraicGeometry.Etale.ambientAffineLineRightSquare",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationTateStep",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationTate",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationLineExchange",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationExchange",
+   "AlgebraicGeometry.Etale.ambientAffineTraceTransport",
+   "AlgebraicGeometry.Etale.ambientAffineTraceDatum"
+  ],
+  "statement": "def ambientAffineTranslation (S : Scheme.{u}) : (d : ℕ) → (a : Fin d → Γ(S, ⊤)) → (affineTraceTower S d ≅ affineTraceTower S d)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "note": "Existing explicit definitions from AmbientAffineTranslationTrace. The item uses these coordinate translation, exchange, Tate, and normalized transport/data constructions; it cites the separate trace theorem only in proof_deps."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d52e71b7",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d52e71b7",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after L's proof-dependency return on 60ab047e (PASSed). Lean file, Lean record, statement, stmt_deps, statement_change and the new definition node are byte-identical to 60ab047e. Only proof step 4 changed: it adds a sentence citing lem-trf-ambient-affine-translation-trace (applied on S at a and on P at the tautological coordinates), and that id is added to its uses. proof_deps now equals the union of the steps' uses exactly; step lengths 835/770/768/1066. The live trf theorem ambientAffineTranslationTrace (Noetherian S, N invertible, any a) is exactly the ordinary equation, and S and P meet its hypotheses. Lean docstring step 5 already names it. The theorem stays out of stmt_deps; the def-trf definition-only stmt_dep from the H2 repair is intact. No competing landing in side-live. Advisories from 60ab047e unchanged. No compile: no FIX, file unchanged; worker compile clean 9.0/9.1 s."
+ }
+}

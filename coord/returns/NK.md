@@ -64,6 +64,3 @@ L: independent stage-2 immutable head a8dd21e96468: H13: the delivered §1(B) re
 
 (the landing tools, head 2fd4eeb76) the delivery did not land: (merge queue) your landing 20261021T154126-NK-2783326-18 was taken out of the candidate: the global build of dc04907e06 failed in Sheaf.Paper.IntegralStratumChartRestrictions Sheaf.Paper.PerAdicStratifiedPullbackTExact job job computation; this change is a possible cause
 
-## lem-pur-affine-translation-trace (2026-10-21 22:24 UTC, branch head 60ab047e913)
-
-L: independent stage-2 immutable head 60ab047e9131: review_split.py: lem-pur-affine-translation-trace: proof_deps ['lem-trf-ambient-affine-translation-trace'] differ from the union of uses

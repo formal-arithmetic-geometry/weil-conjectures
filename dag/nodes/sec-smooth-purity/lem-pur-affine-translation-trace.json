@@ -2,7 +2,7 @@
  "id": "lem-pur-affine-translation-trace",
  "kind": "statement",
  "title": "Translation invariance of the normalized affine-space integration",
- "statement": "Use the finite coefficients $A=A_{E,n}$, for arbitrary $n\\geq1$, and the field $k$ of [def-pur-conventions]. Let $S$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $d\\geq0$, and put $V=\\mathbf A^d_S$ with projection $q:V\\to S$ [def-sbc-affine-space]. Work in the ordinary etale derived categories $D(T_{\\mathrm{et}},A)$ of the schemes $T$ below [def-weil-pbc-derived-categories], with the ordinary etale Tate line and its pullback identifications [lem-asd-etale-finite-twist-pullback]. Put $L=A_V(d)[2d]$ and let $t_q:Rq_!L\\to A_S$ be the normalized trace [lem-amb-affine-space-top-trace], with ordinary compact supports [def-amb-etale-compact-support].\n\nFor a section $a:S\\to\\mathbf A^d_S$, let $\\tau_a:V\\to V$ be the $S$-automorphism $z\\mapsto z-a$. For the Cartesian square with both vertical maps $q$, bottom map $1_S$ and top map $\\tau_a$, let $\\operatorname{Ex}_{!,\\tau_a}:Rq_!L\\to Rq_!\\tau_a^*L$ be the canonical compact-support exchange, normalized as in [lem-amb-unbounded-compact-support-comparisons], and let $\\kappa_a:\\tau_a^*L\\xrightarrow{\\sim}L$ be the Tate pullback identification. Then the actual derived morphisms satisfy\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nThis equality includes the universal translation over $P=\\mathbf A^d_S$, with $a$ its tautological section after base change, and commutes with every base change $S'\\to S$ between separated finite-type $k$-schemes. Under the specified Tate and compact-support comparisons [lem-pur-vector-integration-site-comparison], it is also the equality of the corresponding pro-etale integration maps.",
+ "statement": "Use the finite coefficients $A=A_{E,n}$, for arbitrary $n\\geq1$, and the field $k$ of [def-pur-conventions]. Let $S$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $d\\geq0$, and put $V=\\mathbf A^d_S$ with projection $q:V\\to S$ [def-sbc-affine-space]. Work in the ordinary etale derived categories $D(T_{\\mathrm{et}},A)$ of the schemes $T$ below [def-weil-pbc-derived-categories], with the ordinary etale Tate line and its pullback identifications [lem-asd-etale-finite-twist-pullback]. Put $L=A_V(d)[2d]$ and let $t_q:Rq_!L\\to A_S$ be the normalized trace [lem-amb-affine-space-top-trace], with ordinary compact supports [def-amb-etale-compact-support].\n\nFor a section $a:S\\to\\mathbf A^d_S$, let $\\tau_a:V\\to V$ be the $S$-automorphism $z\\mapsto z-a$. For the Cartesian square with both vertical maps $q$, bottom map $1_S$ and top map $\\tau_a$, let $\\operatorname{Ex}_{!,\\tau_a}:Rq_!L\\to Rq_!\\tau_a^*L$ be the canonical compact-support exchange, normalized as in [lem-amb-unbounded-compact-support-comparisons], and let $\\kappa_a:\\tau_a^*L\\xrightarrow{\\sim}L$ be the Tate pullback identification. Then the actual derived morphisms satisfy\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nThis equality includes the universal translation over $P=\\mathbf A^d_S$, with $a$ its tautological section after base change, and commutes with every base change $S'\\to S$ between separated finite-type $k$-schemes. Under the specified Tate and compact-support comparisons [lem-pur-vector-integration-site-comparison], it is also the equality of the corresponding pro-etale integration maps. Concretely, at every annihilating prime-power level, use the trivial rank-d bundle integration `vectorIntegration` and its canonical `vectorSite` comparison; the affine-trace counit is identified with `vectorBundleIntegration` by the affine vector-integration construction [def-amb-vector-integration].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
   "place": "Expanded Step 2: universal translation and the locally constant trace multiplier; unit Agreement on the model paragraph, translation invariance"
@@ -16,7 +16,9 @@
   "lem-amb-affine-space-top-trace",
   "lem-amb-unbounded-compact-support-comparisons",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-pur-vector-integration-site-comparison"
+  "lem-pur-vector-integration-site-comparison",
+  "def-trf-ambient-affine-translation-trace",
+  "def-amb-vector-integration"
  ],
  "proof": [
   {
@@ -63,11 +65,13 @@
    }
   },
   {
-   "text": "Pull the universal equality back along the section $a:S\\to P$. The action base-change identity of [lem-amb-compact-action-base-change] identifies the pulled-back action with $Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}$, while the affine trace base-change identity of [lem-amb-affine-space-top-trace] identifies the pulled-back $t_P$ with $t_q$. Thus\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nThe same argument after any $S'\\to S$ gives the asserted universal and arbitrary-base-change compatibility. Finally [lem-pur-vector-integration-site-comparison] carries this actual ordinary étale equality, with the specified Tate and compact-support comparisons, to the corresponding pro-étale integration maps.",
+   "text": "Pull the universal equality back along the section $a:S\\to P$. The action base-change identity of [lem-amb-compact-action-base-change] identifies the pulled-back action with $Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}$, while the affine trace base-change identity of [lem-amb-affine-space-top-trace] identifies the pulled-back $t_P$ with $t_q$. Thus\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nIn the recorded coordinate-tower model, [lem-trf-ambient-affine-translation-trace] supplies precisely this ordinary equation for ambientAffineTranslationExchange followed by ambientAffineTranslationTate and the normalized affineTraceCounit; apply it both on $S$ at $a$ and on the parameter scheme $P$ at its tautological coordinates. The same argument after any $S'\\to S$ gives the asserted universal and arbitrary-base-change compatibility. Finally [lem-pur-vector-integration-site-comparison] carries this actual ordinary étale equality, with the specified Tate and compact-support comparisons, to the corresponding pro-étale integration maps.",
    "uses": [
     "lem-amb-compact-action-base-change",
     "lem-amb-affine-space-top-trace",
-    "lem-pur-vector-integration-site-comparison"
+    "lem-pur-vector-integration-site-comparison",
+    "def-amb-vector-integration",
+    "lem-trf-ambient-affine-translation-trace"
    ],
    "elementary": false,
    "source": {
@@ -86,7 +90,9 @@
   "lem-weil-pbc-connected-locally-constant-map",
   "lem-weil-pbc-constant-sheaf-sections-locally-constant",
   "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-finite-type-over-noetherian"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-ambient-affine-translation-trace",
+  "def-amb-vector-integration"
  ],
  "proof_origin": {
   "by": "document",
@@ -198,5 +204,136 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-0699c2d35 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 4 steps, with no new nodes. I read every cited statement (the amb action and affine-trace lemmas, the unbounded compact-support comparisons, the twist pullback lemma, the four pbc lemmas, the vector-integration site comparison and the definitions). Sources read: the main-20261015 vector-bundle orientation proof, Step 1 'translation'; the blueprint text of the parent lem-pur-projection-purity-agreement; and the unit sk-thm-smooth-purity, 'Agreement on the model'. No SGA is cited. The statement is true, not weakened, and matches the parent's Step 3. Hypotheses check out: S finite type over k is Noetherian, ℓ is invertible, L is bounded below so the D^+ action lemma applies, and the bounded-below exchange equals the unbounded one. Edge cases d=0, S empty and a=0 all reduce to rho_{1,1}=1. I recomputed both base-change specialisations. Along the zero section, theta_T is the identity identification by the twist composition compatibility. Along a, the base change of tau_P is tau_a, theta_T is kappa_a, and t_q·rho = a*(t_P·rho_P)·C^{-1} = t_q. Fibres over geometric points are spectra of polynomial domains, so they are connected and b is 1. The 03P5 identification is used as natural, which I accept as part of the canonical isomorphism. The pro-étale clause holds in the transported sense through t^p·beta = C_S(t^e), which is how the parent uses it. There is no duplicate: lem-amb-linear-trace-invariance is the GL_d analogue. All cited units are on the transitive route of sk-thm-smooth-purity. I accept the 6 declared tool_uses. review_split gives PASS. One fault, repaired (B5/B9): the step source places and blueprint.from.place cited a non-existent 'Expanded Step 1/2'. They now cite the exact sentences of 'Step 1: translation' and of the parent and unit blueprint text, in fixes/dag/nodes/sec-smooth-purity/lem-pur-affine-translation-trace.json. Maintainer note: the maintainer-owned source.place carries the same wrong label and should name the 'Agreement on the model' paragraph.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.AffineTranslationTrace",
+  "declaration": "AlgebraicGeometry.Etale.purAffineTranslationTrace",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTranslationAction",
+   "AlgebraicGeometry.Etale.affineTranslationBaseChange",
+   "AlgebraicGeometry.Etale.affineTraceTrivialModule",
+   "AlgebraicGeometry.Etale.affineTraceTrivialModule_isFinite",
+   "AlgebraicGeometry.Etale.affineTraceTrivialFrame",
+   "AlgebraicGeometry.Etale.affineTranslationChartBridge",
+   "AlgebraicGeometry.Etale.proEtaleAffineTranslationAction",
+   "AlgebraicGeometry.Etale.ProEtaleAffineTraceCompatibility",
+   "AlgebraicGeometry.Etale.AffineUniversalTranslationTraceEquation",
+   "AlgebraicGeometry.Etale.AffineTranslationTraceCompatibility",
+   "AlgebraicGeometry.Etale.purAffineTranslationTrace"
+  ],
+  "file": "lean/Sheaf/Paper/AffineTranslationTrace.lean",
+  "statement": "theorem purAffineTranslationTrace (P : WeilConjectures.PurityFiniteSetting.{u}) (S : Scheme.{u}) (s : S ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType s] [QuasiCompact s] [IsSeparated s] (N : ℕ) (hN : 0 < N) (hA : (N : P.Coefficient) = 0) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) : AffineTranslationTraceCompatibility P S s N hN hA hS d",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Return F2/H3 repaired: the pro-etale translation action is the conjugate of comparison.map(affineTranslationAction) through the canonical global-frame chart bridge and vectorSite. The explicit equation action ≫ vectorIntegration = vectorIntegration is stated for every a and also at the universal coordinate vector. The chart bridge is the vectorIntegrationLocalTrace prefix at the top open transported by canonical affine base change; it uses no integration map, existential isomorphism, or IntegrationCompatibility restatement. The accepted F1 definition-only dependency interface is retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d52e71b7",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after L's proof-dependency return on 60ab047e (PASSed). Lean file, Lean record, statement, stmt_deps, statement_change and the new definition node are byte-identical to 60ab047e. Only proof step 4 changed: it adds a sentence citing lem-trf-ambient-affine-translation-trace (applied on S at a and on P at the tautological coordinates), and that id is added to its uses. proof_deps now equals the union of the steps' uses exactly; step lengths 835/770/768/1066. The live trf theorem ambientAffineTranslationTrace (Noetherian S, N invertible, any a) is exactly the ordinary equation, and S and P meet its hypotheses. Lean docstring step 5 already names it. The theorem stays out of stmt_deps; the def-trf definition-only stmt_dep from the H2 repair is intact. No competing landing in side-live. Advisories from 60ab047e unchanged. No compile: no FIX, file unchanged; worker compile clean 9.0/9.1 s.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "NK stage 2",
+  "old_statement": "Use the finite coefficients $A=A_{E,n}$, for arbitrary $n\\geq1$, and the field $k$ of [def-pur-conventions]. Let $S$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $d\\geq0$, and put $V=\\mathbf A^d_S$ with projection $q:V\\to S$ [def-sbc-affine-space]. Work in the ordinary etale derived categories $D(T_{\\mathrm{et}},A)$ of the schemes $T$ below [def-weil-pbc-derived-categories], with the ordinary etale Tate line and its pullback identifications [lem-asd-etale-finite-twist-pullback]. Put $L=A_V(d)[2d]$ and let $t_q:Rq_!L\\to A_S$ be the normalized trace [lem-amb-affine-space-top-trace], with ordinary compact supports [def-amb-etale-compact-support].\n\nFor a section $a:S\\to\\mathbf A^d_S$, let $\\tau_a:V\\to V$ be the $S$-automorphism $z\\mapsto z-a$. For the Cartesian square with both vertical maps $q$, bottom map $1_S$ and top map $\\tau_a$, let $\\operatorname{Ex}_{!,\\tau_a}:Rq_!L\\to Rq_!\\tau_a^*L$ be the canonical compact-support exchange, normalized as in [lem-amb-unbounded-compact-support-comparisons], and let $\\kappa_a:\\tau_a^*L\\xrightarrow{\\sim}L$ be the Tate pullback identification. Then the actual derived morphisms satisfy\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nThis equality includes the universal translation over $P=\\mathbf A^d_S$, with $a$ its tautological section after base change, and commutes with every base change $S'\\to S$ between separated finite-type $k$-schemes. Under the specified Tate and compact-support comparisons [lem-pur-vector-integration-site-comparison], it is also the equality of the corresponding pro-etale integration maps.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
+   "place": "Expanded Step 2: universal translation and the locally constant trace multiplier; unit Agreement on the model paragraph, translation invariance"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-projection-purity-agreement",
+    "holds": true,
+    "note": "The parent uses the ambient translation theorem only in its proof route; the theorem remains in this item's proof_deps."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-amb-etale-compact-support",
+   "def-pur-conventions",
+   "def-sbc-affine-space",
+   "def-weil-pbc-derived-categories",
+   "def-weil-scheme-morphism-properties",
+   "lem-amb-affine-space-top-trace",
+   "lem-amb-unbounded-compact-support-comparisons",
+   "lem-asd-etale-finite-twist-pullback",
+   "lem-pur-vector-integration-site-comparison"
+  ],
+  "old_proof_deps": [
+   "def-sbc-affine-space",
+   "def-weil-pbc-derived-categories",
+   "lem-amb-affine-space-top-trace",
+   "lem-amb-compact-action-base-change",
+   "lem-asd-etale-finite-twist-pullback",
+   "lem-pur-vector-integration-site-comparison",
+   "lem-weil-pbc-connected-locally-constant-map",
+   "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+   "lem-weil-pbc-derived-single-fully-faithful",
+   "lem-weil-pbc-finite-type-over-noetherian"
+  ],
+  "what": "The recorded theorem dependency was incorrectly being treated as a statement dependency even though the item uses only the module's plain coordinate definitions; the pro-etale sentence also needed the actual vectorIntegration/vectorSite maps and their affine vector-integration bridge.",
+  "old_proof": [
+   {
+    "text": "First work on the ordinary étale site. The finite-type $k$-scheme $S$ is Noetherian, and so are $P=\\mathbf A^d_S$ and $V_P=V\\times_SP$; the affine polynomial charts give the needed separated finite-type maps. Let $q_P:V_P\\to P$ be the base change of $q$, let $a_P:P\\to V$ be the tautological section, and let $\\tau_P:V_P\\to V_P$ be $(z,a)\\mapsto(z-a,a)$. It is an automorphism over $P$, with inverse $(z,a)\\mapsto(z+a,a)$. Apply [lem-amb-compact-action-base-change] to $q_P$, $\\tau_P$, and the canonical pullback isomorphism $\\tau_P^*L\\simeq L$. This gives the actual compact-support action $\\rho_P:Rq_{P!}L\\to Rq_{P!}L$ and its compatibility with every base change. By the base-change clause of [lem-amb-affine-space-top-trace], the normalized trace $t_P:Rq_{P!}L\\to A_P$ is an isomorphism and is the pullback of $t_q$ along $P\\to S$.",
+    "uses": [
+     "lem-amb-compact-action-base-change",
+     "lem-amb-affine-space-top-trace",
+     "lem-weil-pbc-finite-type-over-noetherian",
+     "def-sbc-affine-space",
+     "def-weil-pbc-derived-categories",
+     "lem-asd-etale-finite-twist-pullback"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+     "place": "Step 1: translation, sentences 1-4 ('let the translation vector vary over $V$; its effect on the top compactly supported direct image ... is multiplication by a section of the locally constant sheaf of units')"
+    }
+   },
+   {
+    "text": "Conjugate the universal action by the specified trace: $\\alpha=t_P\\circ\\rho_P\\circ t_P^{-1}:A_P[0]\\to A_P[0]$. It is an automorphism of the constant $A_P$-module sheaf. By full faithfulness of degree-zero sheaves [lem-weil-pbc-derived-single-fully-faithful], it is induced by a unique $A_P$-linear sheaf automorphism $\\alpha_0$. Module linearity makes $\\alpha_0$ multiplication by $b=\\alpha_0(1)$, and the inverse action shows that $b$ is a unit. The section $b$ is a Zariski-locally constant function with values in $A$ by [lem-weil-pbc-constant-sheaf-sections-locally-constant]. Pullback of $b$ along any base-change section is the scalar by which the corresponding translated trace is multiplied, by the action and trace base-change equations in the two cited lemmas.",
+    "uses": [
+     "lem-amb-compact-action-base-change",
+     "lem-amb-affine-space-top-trace",
+     "lem-weil-pbc-derived-single-fully-faithful",
+     "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+     "place": "Step 1: translation, sentence 4 ('identified with the constant sheaf by integration, is multiplication by a section of the locally constant sheaf of units of $\\mathbf Z/\\ell^n\\mathbf Z$ on $V$')"
+    }
+   },
+   {
+    "text": "For every geometric point $\\bar s\\to S$, the fibre $P_{\\bar s}=\\operatorname{Spec}\\overline{\\kappa(s)}[x_1,\\ldots,x_d]$ is nonempty and connected: its coordinate ring is a nonzero domain (and for $d=0$ it is the one-point scheme). The restriction of $b$ to this fibre is locally constant, and its value at the origin is $1$, because the universal translation restricted along the zero section is the identity and [lem-amb-compact-action-base-change] gives $\\rho_{1,1}=1$. Hence [lem-weil-pbc-connected-locally-constant-map] makes $b|_{P_{\\bar s}}=1$. Every point of $P$ lies in such a geometric fibre, so the section/function identification of [lem-weil-pbc-constant-sheaf-sections-locally-constant] gives $b=1$ globally. Therefore $\\alpha=1$ and $t_P\\circ\\rho_P=t_P$.",
+    "uses": [
+     "lem-amb-compact-action-base-change",
+     "lem-weil-pbc-connected-locally-constant-map",
+     "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+     "place": "Step 1: translation, sentences 5-6 ('The locus where this unit is $1$ is open and closed. It contains the zero section, where the translation is the identity, and every geometric fibre of $V\\to S$ is connected, so it is all of $V$')"
+    }
+   },
+   {
+    "text": "Pull the universal equality back along the section $a:S\\to P$. The action base-change identity of [lem-amb-compact-action-base-change] identifies the pulled-back action with $Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}$, while the affine trace base-change identity of [lem-amb-affine-space-top-trace] identifies the pulled-back $t_P$ with $t_q$. Thus\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nThe same argument after any $S'\\to S$ gives the asserted universal and arbitrary-base-change compatibility. Finally [lem-pur-vector-integration-site-comparison] carries this actual ordinary étale equality, with the specified Tate and compact-support comparisons, to the corresponding pro-étale integration maps.",
+    "uses": [
+     "lem-amb-compact-action-base-change",
+     "lem-amb-affine-space-top-trace",
+     "lem-pur-vector-integration-site-comparison"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+     "place": "Step 1: translation, last sentence ('Hence $\\tau$ identifies the pair $(p_1,\\Delta)$, together with the vector-bundle integration of $p_1$, with the pair (bundle, zero section) together with its own integration')"
+    }
+   }
+  ]
+ }
 }
