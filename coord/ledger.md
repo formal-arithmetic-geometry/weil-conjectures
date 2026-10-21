@@ -20015,3 +20015,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:51 L: returned deliver/Q56/lem-sp-finite-ring-action-local-constancy (reviewer RETURN: L: independent stage-2 immutable head a05421e5cef3: H3 (special case, universe too small): the statement requires [Small)
 - 03:51 L: merged deliver/NK/lem-weil-pbc-formal-exact-projection-mate (reviewer PASS; first push; new nodes: 0)
 - 03:51 L: merged deliver/Q14/lem-sfb-projection-comparison-etale-proetale (reviewer PASS; first push; new nodes: 0)
+- 03:51 L: merged deliver/Q35/lem-cbc-strict-quotient-pullback-computation (reviewer PASS; first push; new nodes: 0); claim not held by Q35: not your claim

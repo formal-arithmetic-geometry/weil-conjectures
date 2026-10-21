@@ -16,9 +16,98 @@
   "lem-pur-left-derived-from-kflat-class",
   "lem-weil-pbc-diagram-kflat-replacements"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient datum gives the strict complex of towers $R(P)$ with transitions $1\\otimes q_{n+1,n}$. Its augmentation is a strict chain map: $d(x\\otimes1)=d(x)\\otimes1$, and $(1\\otimes q_{n+1,n})(x\\otimes1)=x\\otimes1$ since the quotient maps preserve $1$. The balanced tensor relation makes $x\\mapsto x\\otimes1$ $A_T$-linear, and these maps commute with restrictions, hence pass to the sheaf tensor products. For a chain map $f:P\\to P'$, define $R(f)_n=f\\otimes1$. On sections both $R(f)a_P$ and $a_{P'}\\Delta f$ send $x$ to $f(x)\\otimes1$, so they agree as strict chain maps. Levelwise application of $G$ gives $G(\\Delta P)=\\Delta G(P)$, including identity transitions.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback invocation; explicit strict quotient augmentation computation (agent-written), with the resolving-class counit from Stacks derived.tex Tag 06XN, lemma-find-existence-computes (dual)."
+   }
+  },
+  {
+   "text": "Put $F=Q'G$ on the homotopy category of strict tower complexes and let $\\mathcal P$ be the objectwise K-flat flat-term class. The small indexing category is $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. The diagram-replacement theorem gives a strict quasi-isomorphism from an object of $\\mathcal P$ to every tower complex, and says that $F$ inverts quasi-isomorphisms between objects of $\\mathcal P$. The functor is exact on homotopy categories: termwise additive $G$ preserves shifts and the finite direct sums and differential matrices defining cones, and target localization takes cone triangles to distinguished triangles. Apply the resolving-class theorem. Its counit is invertible on every object of $\\mathcal P$, in particular on $H_\\bullet$ and $\\Delta P$. This also holds for the specified universal pair $(\\widetilde L,\\tau)$: universal maps between it and the pair supplied by the theorem have composites equal to identities by uniqueness, and commute with their counits; thus the corresponding counit components differ by isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback invocation; explicit strict quotient augmentation computation (agent-written), with the resolving-class counit from Stacks derived.tex Tag 06XN, lemma-find-existence-computes (dual)."
+   }
+  },
+  {
+   "text": "Since $r$ is a quasi-isomorphism, $Qr$ is invertible in the source localization, and $\\widetilde L(Qr)$ is invertible by functoriality. Together with the preceding step this proves that $\\chi_r=\\tau_{H_\\bullet}\\widetilde L(Qr)^{-1}$ is an isomorphism. Naturality of the specified counit at $r$ gives $Q'G(r)\\tau_{H_\\bullet}=\\tau_{R(P)}\\widetilde L(Qr)$; consequently $Q'G(r)\\chi_r=\\tau_{R(P)}$. Define $w_P=\\widetilde L(Qa_P)\\tau_{\\Delta P}^{-1}$. This is exactly the image of the strict augmentation under derived pullback, with its source identified by the invertible counit at $\\Delta P$, as in the definition of completed pullback. Counit naturality at $a_P$ now gives\n$$Q'G(r)\\chi_rw_P=\\tau_{R(P)}\\widetilde L(Qa_P)\\tau_{\\Delta P}^{-1}=Q'G(a_P)\\tau_{\\Delta P}\\tau_{\\Delta P}^{-1}=Q'G(a_P).$$\nOnly $\\tau_{H_\\bullet}$ and $\\tau_{\\Delta P}$ were inverted; $\\tau_{R(P)}$ and $G(r)$ need not be invertible.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback invocation; explicit strict quotient augmentation computation (agent-written), with the resolving-class counit from Stacks derived.tex Tag 06XN, lemma-find-existence-computes (dual)."
+   }
+  },
+  {
+   "text": "For any second resolution $s$, the same formula gives an isomorphism $\\chi_s$ from the same object $\\widetilde L(QR(P))$. Define $c_{s,r}=\\chi_s\\chi_r^{-1}$. Then $c_{s,r}(\\chi_rw_P)=\\chi_sw_P$ by cancellation. For a third resolution $t$ one has $c_{t,s}c_{s,r}=\\chi_t\\chi_s^{-1}\\chi_s\\chi_r^{-1}=c_{t,r}$, and $c_{r,r}=1$. These are canonical comparisons determined by the fixed counit and the given resolution arrows. In particular a strict comparison $h:H_\\bullet\\to H'_\\bullet$ with $sh=r$ satisfies $Q'G(h)\\chi_r=\\tau_{H'_\\bullet}\\widetilde L(Qh)\\widetilde L(Qr)^{-1}=\\chi_s$, using counit naturality and $\\widetilde L(Qr)=\\widetilde L(Qs)\\widetilde L(Qh)$. Hence it induces exactly $c_{s,r}$, without choosing such an $h$.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback invocation; explicit strict quotient augmentation computation (agent-written), with the resolving-class counit from Stacks derived.tex Tag 06XN, lemma-find-existence-computes (dual)."
+   }
+  },
+  {
+   "text": "Write $B(f)=Q'G(\\Delta f)$ and $D(f)=\\widetilde L(QR(f))$. The strict identity from step 1 and counit naturality give\n$$D(f)w_P=\\widetilde L(Qa_{P'})\\widetilde L(Q\\Delta f)\\tau_{\\Delta P}^{-1}=\\widetilde L(Qa_{P'})\\tau_{\\Delta P'}^{-1}B(f)=w_{P'}B(f).$$\nThe middle equality follows by multiplying $B(f)\\tau_{\\Delta P}=\\tau_{\\Delta P'}\\widetilde L(Q\\Delta f)$ by the two counit inverses. This proves naturality for every chain map between the stated representatives. Identity and composition compatibility follow from those of the functors and of $R(f)_n=f\\otimes1$.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback invocation; explicit strict quotient augmentation computation (agent-written), with the resolving-class counit from Stacks derived.tex Tag 06XN, lemma-find-existence-computes (dual)."
+   }
+  },
+  {
+   "text": "Suppose $f:P\\to P'$ is a quasi-isomorphism between the K-flat flat-term representatives. Apply derived change of rings to $A_T\\to(P_n)_T$: each $f\\otimes1$ is a quasi-isomorphism over $(P_n)_T$. Restricting scalars to $A_T$ does not change the underlying sheaves or their cohomology. Levelwise kernels and cokernels in the tower category therefore show that $R(f)$ is a quasi-isomorphism of strict tower complexes; hence $D(f)$ is invertible. The diagram theorem applied to $\\Delta f$ shows that $B(f)$ is also invertible. The naturality equality in step 5 can thus be rewritten as $w_PB(f)^{-1}=D(f)^{-1}w_{P'}$. It holds for each formally inverted quasi-isomorphism and hence, by composition, for every morphism in the localization at these quasi-isomorphisms. For a resolution $r$ of $R(P)$ and $s$ of $R(P')$, the corresponding map on computed objects is $\\chi_sD(f)\\chi_r^{-1}$ and its product with $\\chi_rw_P$ is $\\chi_sw_{P'}B(f)$; this checks the same compatibility in every resolved presentation. All arguments use strict diagrams and the original $a_P$, without a lift to a resolution or an assumption of K-flat quotient levels.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback invocation; explicit strict quotient augmentation computation (agent-written), with the resolving-class counit from Stacks derived.tex Tag 06XN, lemma-find-existence-computes (dual)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Completed-pullback invocation and finite-reduction sentence; augmentation, counit naturality, comparison cocycle and localization calculations written explicitly, using Stacks Tag 06XN through the existing resolving-class node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +150,59 @@
    "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_id\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_3} {D : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_1} D] [CategoryTheory.Category.{v_3, u_2} H] (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : L.comp LF ⟶ F) (W : CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"The natural transformation `LF' ⟶ LF` on left derived functors that is\\ninduced by a natural transformation `F' ⟶ F`.\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatIso_inv\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_fac\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_app\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_comp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (LF'' LF' LF : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α'' : L.comp LF'' ⟶ \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α' : L.comp LF' ⟶ F') (α : L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (LF'' LF' LF : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α'' : L.comp LF'' ⟶ \", \"doc\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: generic derived counits, derived-adjunction units, ordinary module completion and bounded-below injective-resolution formulas do not identify this strict ringed-site quotient/resolution construction"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|isIso_leftDerivedFunctorCounit_app_of_kFlat",
+   "results": "OK 14 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.NatTrans.naturality",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left derived functor counit is invertible on resolving objects and transports a natural augmentation through quasi-isomorphic resolutions",
+   "results": "OK 8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Computing a total left derived functor on a resolving class: counit at a good resolution, natural augmentation and resolution independence",
+   "results": "OK 8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.ProjectiveResolution.leftDerived_app_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerivedCounit|leftDerivedNatTrans_app|isIso.*[Cc]ounit",
+   "results": "OK 4 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "results": "OK 1 hits: CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a strict inverse sequence of quotient complexes and naturality of the left derived counit on a flat resolution",
+   "results": "OK 8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.leftDerived_map_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic derived-counit or projective-resolution constructions, not the strict sheaf quotient tower with its augmentation and all comparison clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -83,5 +221,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-strict-quotient-pullback-computation",
+  "worker": "stage1",
+  "summary": "Verified the strict quotient augmentation and proved the counit formula, its augmentation identity, resolution-comparison cocycle, representative naturality and compatibility with inverted quasi-isomorphisms. Reused the existing resolving-class, diagram-replacement, derived change-of-rings and levelwise tower statements; no new nodes or statement changes.",
+  "blueprint": "Realizes the invocation of def-weil-pbc-completed-pullback and the following finite-reduction sentence in the current proof of lem-cbc-completed-extension-zero-comparison, by retaining the actual strict quotient augmentation through derived pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic resolving-class existence and counit computation on good objects; the compact-support base-change unit has no separate version of this general derived-functor tool."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Strict replacements and invariance under module pullback on objectwise K-flat flat-term diagrams; used as a generic tool on the fixed countable tower category."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Tensoring a quasi-isomorphism between K-flat representatives with a quotient coefficient sheaf preserves quasi-isomorphisms; this is the generic change-of-rings tool needed to localize R."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-625cfd040",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-625cfd040 (reviewer sub-agent of L); spot-checked: Read in full: the item's six steps, all eight cited statements, the parent lem-cbc-adic-pullback-presentation-transport (its Steps 5–6 use exactly the w_P/χ_r data), the main-20261015 lem-cbc-completed-extension-zero-comparison proof, and Stacks derived.tex lemma-find-existence-computes (06XN, dual part, l.5092). The delivery has 0 new nodes, leaves the statement unchanged, sets proof_deps to exactly the union of the step uses, cites no SGA, and has no re-split note. Hand checks: chi_r=tau_H L(Qr)^-1 has the right domain and codomain; naturality gives Q'G(r)chi_r=tau_R(P), hence the augmentation identity, and tau_R(P) is never inverted. The cocycle holds, and a strict comparison h with sh=r gives chi_s. Step 5's naturality uses B(f)tau=tau L(QΔf). In step 6, R(f) is a quasi-isomorphism by derived change of rings (1) plus levelwise tower cohomology, and B(f) is invertible by the diagram theorem because both ΔP and ΔP' are in the class. The hypotheses of the diagram theorem hold: J=N^op is small, the sites are small skeletons, the rings are commutative, and c_g is a ring map. The resolving-class hypotheses (1)/(2) hold and F=Q'G is exact; the fixed universal pair agrees with the theorem's up to counit-compatible iso. Edge cases checked: g=id, I=A, and non-K-flat R(P)_n with Z_l,(l). No duplicate of this computation exists in the DAG. Accepted the three generic tool_uses (left-derived-from-kflat-class, diagram-kflat-replacements, derived-change-of-rings)."
  }
 }
