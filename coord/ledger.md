@@ -19913,3 +19913,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: returned deliver/Q33/lem-weil-pbc-ringed-common-quotient-pullback-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-ringed-common-quotient-pullback-compariso)
 - 03:41 L: merged deliver/Q69/lem-sfb-finite-field-closed-support (reviewer FIX; first push; new nodes: 0)
 - 03:41 L: merged deliver/Q110/lem-sfb-etale-proetale-scalar-pullback-cube (reviewer FIX; first push; new nodes: 0)
+- 03:41 L: merged deliver/Q61/lem-sp-supported-etale-tensor-origin (reviewer PASS; first push; new nodes: 0); claim not held by Q61: not your claim

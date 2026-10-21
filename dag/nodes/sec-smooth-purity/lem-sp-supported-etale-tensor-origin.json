@@ -18,9 +18,104 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every integer q apply [lem-weil-pbc-finite-ring-constructible-sheaf-origin] to the intrinsically constructible A-module sheaf H^q(M). It gives a globally constructible etale A-module sheaf F_q with nu_U^*F_q isomorphic to H^q(M). The ring A is finite and U is an arbitrary scheme, precisely the hypotheses of that node; no Noetherianity of U is used. Since M is bounded, [lem-weil-pbc-fixed-module-bounded-constructible-origin] now gives a bounded etale complex L with globally constructible cohomology and an isomorphism e:nu_U^*L -> M. Fix this witness e for the remaining canonical identifications.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK (lemma-compare-constructible) and 09AL (lemma-compare-constructible-derived); finite-ring global-stratification versions recorded in the cited nodes"
+   }
+  },
+  {
+   "text": "Set K=j_!^{et,A}L and N=j_!^{pro,A}M. Etale extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact]; pro-etale extension by zero is exact and acts degreewise by [lem-cbc-proetale-extension-zero]. Hence [lem-weil-pbc-exact-functor-complex-cohomology] gives H^q(K)=j_!^{et,A}H^q(L) and H^q(N)=j_!^{pro,A}H^q(M); in particular both are bounded. Apply [lem-cbc-proetale-extension-zero-comparison] degreewise to a representative of L. Its natural sheaf isomorphism is a chain isomorphism, and the exact functors on both sides preserve quasi-isomorphisms, so it gives nu_Z^*K isomorphic to j_!^{pro,A}nu_U^*L. Composing with j_!^{pro,A}(e) gives the required canonical identification nu_Z^*K isomorphic to N.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF (lemma-jshriek-comparison); exactness from sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact), cohomology from homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Regard the degree-zero constant sheaf B_{Z,et} as an A_{Z,et}-module and put H=K tensor^L_A B_{Z,et}. The constant-ring identification in [lem-sf-comparison-pullback-exact], applied to A and B, identifies nu_Z^*B_{Z,et} with B_Z, including its A-action: the identifications preserve constant sections and therefore the structural map A -> B. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the comparison morphism with the structural ring isomorphism nu_Z^{-1}A_{Z,et} -> A_Z. Its derived pullback is termwise nu_Z^*, since that functor is exact. It gives nu_Z^*H isomorphic to (nu_Z^*K) tensor^L_{A_Z} B_Z, hence to N tensor^L_{A_Z}B_Z by Step 2. This use of the tensor comparison is in the unbounded derived categories; no boundedness of H has yet been asserted.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); constant-coefficient exactness as recorded in lem-sf-comparison-pullback-exact"
+   }
+  },
+  {
+   "text": "Choose integers a <= b witnessing the finite Tor amplitude of M. By [def-weil-proetale-tor-amplitude], testing this very interval against the degree-zero A_U-module B_U gives H^q(Q)=0 for q outside [a,b], where Q=M tensor^L_{A_U}B_U is viewed as an A-complex. This tests M against B_U and imposes no flatness or projective-dimension condition on B.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ (definition-tor-amplitude), degree-zero test module B_U"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-extension-zero-projection-formula] with coefficient ring A, complex M on U and degree-zero complex B_Z on Z. Restriction of B_Z is canonically B_U by [prop-weil-pbc-proetale-constant-ring-map], so N tensor^L_{A_Z}B_Z is canonically j_!^{pro,A}Q. The scalar extension M_B of [det-sp-scalar-extension-functor](1) is computed by P tensor_A B_U for a K-flat representative P of M, with B_U acting on the right factor. Forgetting this B-action leaves exactly the complex computing Q. Thus Q is canonically Res_{A->B}M_B, with the identification induced by the identity on that tensor complex. The restriction-of-scalars compatibility in [lem-cbc-proetale-extension-zero] gives j_!^{pro,A}Q isomorphic to Res_{A->B}j_!^{pro,B}M_B. This proves the second claimed identification. Exactness of that same j_! and the cohomology formula of [lem-weil-pbc-exact-functor-complex-cohomology] show that j_!^{pro,A}Q, and consequently nu_Z^*H by Step 3, have cohomology only in [a,b].",
+   "uses": [
+    "lem-cbc-extension-zero-projection-formula",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "det-sp-scalar-extension-functor",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); the scalar extension is the K-flat construction in Tag 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "For q outside [a,b], exactness and the cohomology comparison of [lem-sf-comparison-pullback-exact] identify nu_Z^*H^q(H) with H^q(nu_Z^*H)=0 by Step 5. By [det-pe-classical-sheaves-modules], nu_Z^* is faithful on A-module sheaves. Therefore nu_Z^*(id_{H^q(H)})=0 implies id_{H^q(H)}=0, so H^q(H)=0. Thus H is bounded in [a,b]. Together with Step 2, K and H are bounded etale A-complexes and in particular belong to D^+. All identifications were the canonical comparisons followed by the fixed origin witness e; no further choices of isomorphisms were made.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T (lemma-fully-faithful); exactness/cohomology compatibility as in sites-modules.tex Tag 04JC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-tor-amplitude",
+  "lem-cbc-extension-zero-projection-formula",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "det-sp-scalar-extension-functor",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AK, 09AL, 09AF and 099T, combined with sites-cohomology.tex Tags 07A4, 0GL1 and 08FZ; boundedness argument serving det-sp-reduction-direct-image Step 1 and its finite-window input"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +158,38 @@
    "results": "OK: 4 hits; Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Finite.lean",
    "date": "2026-10-21",
    "verdict": "no match: algebraic etale base change and abstract bounded representatives do not give pro-etale constructible origin or its supported scalar tensor bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact faithful etale to pro-etale comparison reflects boundedness of the derived tensor of an open extension by zero",
+   "results": "OK: 8 hits; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.comp, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ring-etale and general presheaf tensor results do not state the pro-etale constructible-origin and supported derived tensor bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "OK: 12 hits; PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ring-etale and general presheaf tensor results do not state the pro-etale constructible-origin and supported derived tensor bound."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*(tensor|constructible)|constructible.*pro.?etale",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ring-etale and general presheaf tensor results do not state the pro-etale constructible-origin and supported derived tensor bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible pro-etale complexes have etale origin and tensor bounds are reflected by exact comparison",
+   "results": "OK: 8 hits; Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.comp, Algebra.Etale.baseChange, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.comp, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ring-etale and general presheaf tensor results do not state the pro-etale constructible-origin and supported derived tensor bound."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-direct-image",
@@ -83,5 +206,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-supported-etale-tensor-origin",
+  "worker": "stage1",
+  "summary": "Constructible sheaf comparison and the existing bounded derived-origin node provide L without a Noetherian hypothesis. Exact open extension gives K and its pro-etale comparison. The unbounded tensor comparison and open projection identify nu*H with j_!(M tensor_A^L B); the Tor interval of M bounds this object, and exact faithful comparison reflects that interval to H. All proof ingredients already have DAG nodes; no new node and no statement change.",
+  "blueprint": "det-sp-reduction-direct-image, Step 1: extension by zero and coefficient tensor; bounded etale origin supplies the D^+ inputs used in the repaired Steps 2-3 finite-window argument. This is a supporting lemma, not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "Generic Constructible sheaves over a finite ring have etale origin used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "why": "Generic Bounded fixed-module complexes with constructible sheaf origins have derived origin used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic Extension by zero on the pro-etale site used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic Comparison of extension by zero with the site morphism used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic Constant coefficients on the pro-etale site used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Generic The module form of the classical equivalence used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-4a84ce7c0",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-4a84ce7c0 (reviewer sub-agent of L); spot-checked: Read the full item proof (6 steps, no new nodes) and every cited statement; review.md lists the checks per step. Preliminaries: the item and its deps are not in route-pivot-dropped.txt; side-live still has the item unsplit; there is no re-split note for this item; no SGA source; proof_deps equal the union of the step uses; stmt_deps are unchanged and equal the statement's bracket citations. Step 1: Stacks 09AK holds for an arbitrary scheme, and the sheaf-origin node plus the fixed-module bounded-origin node give a bounded constructible L with nu*L≅M. Step 2: étale and pro-étale j_! are exact, and the 09AF comparison is natural, so it gives a chain isomorphism termwise; nu*K≅N. Step 3: nu*B_et=B_proet as an A-module; the ringed-topoi tensor pullback (07A4) holds unbounded, with Lu*=termwise nu* because nu* is exact. Step 4: the 08FZ definition tests every module sheaf, so B_U is a valid test; no flatness of B is needed. Step 5: projection formula (0GL1), then j^{-1}B_Z=B_U (constant-ring-map node), then Q=Res M_B by the K-flat model of det-sp-scalar-extension-functor(1), then the Res/j_! clause of lem-cbc-proetale-extension-zero; exactness keeps the bound [a,b]. Step 6: nu* is exact and fully faithful on module sheaves (099T), so it reflects zero cohomology and H is bounded. This matches parent det-sp-reduction-direct-image Steps 1 and 3 (D^+ inputs) and blueprint main-20261015 sk-lem-sp-reduction-direct-image Step 1. Edge cases checked: U=∅, B=0, A=B, and Z/ℓ²→F_ℓ (M=A gives bounded Q; M=F_ℓ is excluded by finite Tor). No duplicate of the whole item in the DAG. The declared tool_uses (pbc origin, cbc j_!, sf comparison, ringed-topoi tensor, constant ring map, pe classical) are generic tools and I accept them. Advisory: lem-weil-pbc-finite-ring-constructible-derived-origin alone would give Step 1 and the interval reflection."
  }
 }
