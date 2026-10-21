@@ -481,7 +481,6 @@ lemma compactPullback_app_comp_baseChange (sq : IsPullback g' f' f g) [IsProper 
   simp only [Category.assoc]
   rw [← reassoc_of% hn, ← reassoc_of% hM', boundedConstructibleLowerShriekSquareIso_compToPoint,
     reassoc_of% hn']
-  trace_state
 
 end BaseChange
 
