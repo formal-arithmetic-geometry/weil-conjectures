@@ -20,9 +20,138 @@
   "sk-def-sfb-derived-tensor-hom",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the section-ring sheaf of $B_T$. The evaluation-preserving derived equivalence of [lem-sfb-module-object-ringed-site-derived-comparison] identifies the module-object internal Hom in the question with ringed-site derived sheaf Hom, globally and on slices. The underlying abelian sheaves and maps are unchanged, so colimits, cohomology and the given cocone are identified too. By [lem-pur-ringed-site-grothendieck-abelian], small filtered colimits in this module category are exact. Applying this exact functor to the kernel/image and image/cokernel sequences of a diagram of complexes gives $H^n(\\varinjlim_i C_i)=\\varinjlim_iH^n(C_i)$. In particular it preserves objectwise quasi-isomorphisms. This justifies all changes of functorial representatives below; no sectionwise exactness assertion is needed.",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JA (internal Hom construction); sites-modules Tag 03DB (lemma-limits-colimits) for exact filtered colimits; agent application to cohomology."
+   }
+  },
+  {
+   "text": "Fix a member $W=W_\\alpha$ of the cover in the hypothesis. By the site equivalence in [lem-weil-proetale-weakly-etale-localization], its pro-étale site is the slice $T_{\\mathrm{pro\\acute et}}/W$. The untwisted coefficient isomorphism of [sk-prop-sfb-cartesian-coefficients] identifies $B_T|_W$ with $B_W$. Write $R=B_W$ and $L_W=L|_W$. These identifications allow the local model in the hypothesis to be treated as an $R$-module on precisely this slice, without changing coefficient categories. The coefficient assertion here imposes no invertibility condition on $\\ell$ on the scheme.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U), local-site setting; blueprint sk-prop-sfb-cartesian-coefficients, untwisted clause (1)."
+   }
+  },
+  {
+   "text": "Slice restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], so it commutes with cohomology. It commutes with the sheaf colimits used here as well: [lem-weil-pbc-module-sheaves-colimits-forgetful] computes their underlying abelian sheaves by sheafifying sectionwise colimits, and [lem-cbc-sieve-slice-sheafification], applied to abelian presheaves, identifies restriction of that sheafification with sheafification of the restricted presheaf, including the original cocone maps. The induced module actions agree on every section, hence give the same module colimit. Finally [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies restricted derived Hom with derived Hom of the restrictions. Thus it suffices to prove continuity and the bound on each of these slices, then check the resulting cohomology maps locally.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-cbc-sieve-slice-sheafification",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U); sites-modules Tags 03DH, 03DJ and 03DB; slice/sheafification comparison as in cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The chosen local model is $L_W=R\\otimes_{\\underline A}\\underline{P_\\alpha}$. Apply [lem-sfb-finite-constant-model-two-term-free-resolution] on the scheme $W$: its hypotheses are exactly that $E/\\mathbf Q_\\ell$ is finite and $P_\\alpha$ is finitely presented, with either of the two allowed coefficient rings. It gives $0\\to R^a\\xrightarrow u R^b\\to L_W\\to0$ with $a,b$ finite. Let $Q=[R^a\\xrightarrow u R^b]$ in degrees $-1,0$. The augmentation $Q\\to L_W[0]$ is a quasi-isomorphism. In the field case take $a=0$. No flatness of $L_W$ or torsion-freeness of $P_\\alpha$ has been used.",
+   "uses": [
+    "lem-sfb-finite-constant-model-two-term-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), p. 61, finite projective scalar resolution; the cited existing node supplies the exact length-one scalar-extension resolution."
+   }
+  },
+  {
+   "text": "Since $Q$ is bounded and finite free in each degree, [lem-sfb-ringed-site-strict-perfect-hom] applies to every target complex $C$, with no boundedness hypothesis: $\\mathcal Hom^\\bullet(Q,C)\\to\\mathcal Hom^\\bullet(Q,I(C))$ is a quasi-isomorphism. By [def-pur-derived-internal-hom], $R\\mathcal Hom_R(L_W[0],C)$ is $\\mathcal Hom^\\bullet(L_W[0],I(C))$, and its first variable may be replaced by the quasi-isomorphic $Q$: precomposition with the augmentation $Q\\to L_W[0]$ gives a quasi-isomorphism $\\mathcal Hom^\\bullet(L_W[0],I(C))\\to\\mathcal Hom^\\bullet(Q,I(C))$, natural in $C$. Hence $\\mathcal Hom^\\bullet(Q,C)$ computes $R\\mathcal Hom_R(L_W[0],C)$ through natural quasi-isomorphisms. Using [lem-sc-finite-free-internal-hom-exact] and the signed formula of [def-pur-hom-complex], this model is the functor $F_Q$ with\n$$F_Q(C)^n=(C^n)^b\\oplus(C^{n-1})^a,\\qquad D^n(f,g)=(d_Cf,\\ d_Cg-(-1)^n f u).$$\nFor a map of complexes $v:C\\to C'$ its degree-$n$ map is $(f,g)\\mapsto(v^nf,v^{n-1}g)$. Thus these computations form a model of the whole original target diagram, rather than unrelated models for its objects.",
+   "uses": [
+    "lem-sfb-ringed-site-strict-perfect-hom",
+    "lem-sc-finite-free-internal-hom-exact",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH (lemma-Rhom-strictly-perfect), strengthening the bounded-target Tag 08JI used in the imported source; signed Hom differential in section-internal-hom."
+   }
+  },
+  {
+   "text": "Put $C_i=N_i|_W$ and $C=\\varinjlim_i C_i$. The finite sums in the displayed formula commute with colimits: both iterated coproduct constructions have the same maps from their finitely many summands. Consequently the original cocone induces degreewise isomorphisms\n$$\\varinjlim_i F_Q(C_i)^n\\ \\cong\\ (\\varinjlim_i C_i^n)^b\\oplus(\\varinjlim_i C_i^{n-1})^a=F_Q(C)^n.$$\nThese maps commute with $D$: the cocone maps commute with $d_{C_i}$, and composition with the fixed matrix $u$ and multiplication by $(-1)^n$ commute with the additive cocone maps. They therefore give an isomorphism of complexes $\\varinjlim_iF_Q(C_i)\\cong F_Q(C)$. This is a finite-sum calculation from step 5, not a commutation of an infinite product with a filtered colimit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, explicit Hom-complex formula; agent finite-sum and differential calculation."
+   }
+  },
+  {
+   "text": "For each cocone arrow $C_i\\to C$, applying $F_Q$ gives exactly postcomposition in the Hom complex, as written in step 5. The comparison induced by these arrows is the map of step 6. Derived Hom functoriality gives the evaluation-transpose map associated with that same target cocone: at each vertex its composite is $R\\mathcal Hom_R(L_W[0],C_i)\\to R\\mathcal Hom_R(L_W[0],C)$. The natural Hom models identify these vertex maps with $F_Q(C_i)\\to F_Q(C)$. Thus the induced colimit map is the asserted comparison. Step 1 permits passage through their objectwise quasi-isomorphisms. The evaluation-preserving comparison in [lem-sfb-module-object-ringed-site-derived-comparison] identifies this with the original module-object evaluation comparison. Hence continuity is proved on $W$ for the specified canonical map.",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH and section-internal-hom: postcomposition in target and evaluation; agent identification of the cocone-induced map."
+   }
+  },
+  {
+   "text": "For the bound, let $N\\in D^{\\ge c}(B_T)$. Exact restriction puts $N|_W$ in $D^{\\ge c}(R)$. By the equivalent representative description in [def-sbc-standard-tstructure-derived-category], choose a complex $C$ representing $N|_W$ with $C^r=0$ for $r<c$. The model of step 5 then has $F_Q(C)^n=(C^n)^b\\oplus(C^{n-1})^a=0$ for $n<c$. It follows directly that its cohomology vanishes in those degrees. By [lem-sfb-ringed-site-strict-perfect-hom] this computes $R\\mathcal Hom_R(L_W[0],N|_W)$, so its lower bound is $c$, with no loss even when $P_\\alpha$ has torsion. This representative choice is needed only for one target at a time in the bound, not for replacing the filtered diagram by a nonfunctorial collection of truncations.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sfb-ringed-site-strict-perfect-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, Hom-complex formula; standard t-structure representative criterion of the cited definition (BBD Exemples 1.3.2(i))."
+   }
+  },
+  {
+   "text": "Let $\\theta$ be the global comparison in the question. By steps 1 and 3, $H^n(\\theta)|_{W_\\alpha}$ is the comparison calculated in steps 5–7 on the slice; it is an isomorphism for every $n,\\alpha$. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the underlying abelian cohomology sheaves on this covering family. Every $H^n(\\theta)$ is an isomorphism, and [lem-weil-pbc-unbounded-derived-iso-cohomology] makes $\\theta$ an isomorphism. Likewise step 8 says every restriction of each cohomology sheaf below $c$ of $R\\mathcal Hom_{B_T}(L[0],N)$ is zero. The same cover-local criterion applied to its map to zero makes that sheaf zero globally. These arguments require only the given cover, small filtered colimits and the finite local resolutions, not Noetherianity of $T$.",
+   "uses": [
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB and sites Tag 04TQ (lemma-glue-maps); derived Tag 05RT (lemma-acyclic), cohomology criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-ringed-site-strict-perfect-hom",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH (lemma-Rhom-strictly-perfect), 08JI and 08JB, with Bhatt–Scholze Proposition 6.8.11(3), p. 61; agent filtered-cocone extraction from the explicit finite local Hom model."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +187,45 @@
    "results": "Hits read: HomologicalComplex.instHasFilteredColimitsOfSize, instPreservesHomologyFunctorAddCommGrpCatColim, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.sheafHom, CategoryTheory.Sheaf.hasExactColimitsOfShape",
    "date": "2026-10-21",
    "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not local-model comparison and common lower bound (returned step 2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a sheaf locally resolved by two finite free modules commutes with filtered colimits of complexes and preserves a cohomological lower bound",
+   "results": "Hits read: CategoryTheory.Sheaf.H, SheafOfModules.mapFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, Ext, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary sheaf/free-module and exact-colimit infrastructure, not this local-model derived internal-Hom comparison and lower bound."
+  },
+  {
+   "tool": "grep",
+   "query": "(RHom|derivedHom|internalHom|sheafHom).*(filtered|colimit)|(filtered|colimit).*(RHom|derivedHom|internalHom|sheafHom)",
+   "results": "Hits read: Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean, Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary sheaf/free-module and exact-colimit infrastructure, not this local-model derived internal-Hom comparison and lower bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal sheaf Hom from a locally perfect complex preserves filtered colimits",
+   "results": "Hits read: HomologicalComplex.instHasFilteredColimitsOfSize, instPreservesHomologyFunctorAddCommGrpCatColim, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, HomologicalComplex.ab5OfSize, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary sheaf/free-module and exact-colimit infrastructure, not this local-model derived internal-Hom comparison and lower bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafHom\", \"colimit\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary sheaf/free-module and exact-colimit infrastructure, not this local-model derived internal-Hom comparison and lower bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal sheaf Hom from a bounded complex of finite free sheaves is computed by the ordinary Hom complex and preserves filtered direct limits",
+   "results": "Hits read: SheafOfModules.mapFree, CategoryTheory.Sheaf.H, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.freeFunctor, SheafOfModules.freeHomEquiv, instAbelianCondensedMod",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary sheaf/free-module and exact-colimit infrastructure, not this local-model derived internal-Hom comparison and lower bound."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-internal-hom-continuity",
@@ -80,5 +244,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-local-model-rhom-continuity",
+  "worker": "stage1",
+  "summary": "Q15: kept the statement unchanged; used the existing two-term scalar-resolution node and strict-perfect Hom calculation, expanded the finite-sum cocone map and sign calculation, proved the sharp lower bound and descended by cover-local cohomology. No new nodes; all cited statements opened and verified; all new Mathlib searches logged.",
+  "blueprint": "Serves lem-sfb-dc-hom-preserves.proof.md last sentence, inverting ell and descending to a finite coefficient extension, via the parent constructible continuity split: the finite local-model base case for the continuity used in parent steps 5 and 8.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Exact filtered colimits of sheaves of modules on any small ringed site; needed to make termwise derived colimits independent of representatives. This is a general tool, not a constructibility finiteness route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "The general identification of a pro-étale object site with its slice; needed to apply the local scalar resolution on the stated cover."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Only the untwisted identification of restricted pulled-back coefficients with B_W; no finiteness or other six-functor preservation assertion is taken."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact slice restriction for module sheaves; a generic site tool not supplied by the unit preservation lemmas."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "The sheafified sectionwise description of module colimits, used with slice sheafification to preserve the original cocone."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Only unrestricted slice compatibility of derived sheaf Hom, a ringed-site tool needed before the finite local calculation."
+   },
+   {
+    "node": "lem-sfb-ringed-site-strict-perfect-hom",
+    "why": "The arbitrary-target ordinary Hom model for a bounded finite free complex; generic ringed-site homological algebra, not the unit constructibility conclusion."
+   },
+   {
+    "node": "lem-sc-finite-free-internal-hom-exact",
+    "why": "The elementary-looking but separately available ringed-site finite free Hom identification; used on the two free terms only."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-ringed-site-strict-perfect-hom",
+  "lem-sc-finite-free-internal-hom-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-fb08c2a1e",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-fb08c2a1e (reviewer sub-agent of L); spot-checked: Read the item's nine steps and all 15 cited statements in full. Checked against Stacks 08JH (l.11912, arbitrary target), 08JI and 08JB, and Bhatt–Scholze Prop. 6.8.11(3) (finite projective resolution) and Lemma 6.8.12. The statement is unchanged from base and true. Hom^n(Q,C)=(C^n)^b⊕(C^{n-1})^a for Q=[R^a→R^b] in degrees −1,0, and the sign was re-derived. Small cases: P=A/ϖ puts Ext^1 in degree 1, so the lower bound c is sharp and not lowered by torsion; A=E gives a=0. Steps 1–4 and 6–9: each cited node says what the step takes. Step 3 needs only D-level naturality because H^n of a filtered colimit is the colimit of H^n. Step 9's cover-local criterion holds because the W_α cover the terminal object. No new nodes, no cycle, no SGA. The item is still unsplit in live and side-live and is not dropped. All eight off-unit generic tool uses are accepted (Grothendieck-abelian, weakly étale localization, untwisted cartesian coefficients, slice exactness, module colimits, RHom restriction, strict-perfect Hom, finite-free Hom). One fault (C1/C4), repaired: step 5 identified Hom^•(Q,I(C)) with RHom(L_W[0],C) without citing def-pur-derived-internal-hom or its first-variable quasi-isomorphism invariance (lem-pur-rhom-well-defined), which step 7's naturality also needs. Fixed file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-local-model-rhom-continuity.json: one sentence added to step 5, and def-pur-derived-internal-hom added to its uses and to proof_deps.; 1 file(s) fixed by the reviewer"
  }
 }
