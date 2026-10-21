@@ -21824,3 +21824,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: merged deliver/Q35/lem-sf-cbc-word-reconstruction-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 09:17 L: merged deliver/Q38/lem-sf-projective-top-cell-attachment (stage 2; reviewer PASS; parallel immutable checks)
 - 09:17 L: merged deliver/Q88/lem-pur-finite-proper-product-transpose (stage 2; reviewer PASS; parallel immutable checks)
+- 09:17 L: returned deliver/Q29/lem-weil-pbc-derived-tensor-shift-descent (reviewer RETURN: L: independent stage-2 immutable head 11346db0c65e: H2 / theorem-stmt_dep rule: the delivery adds the theorem node lem-t)
