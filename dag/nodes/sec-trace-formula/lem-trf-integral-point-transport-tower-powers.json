@@ -30,132 +30,66 @@
  ],
  "proof": [
   {
-   "text": "Put $F_r=(h^r)^{-1}$, with the module action transported through the specified coefficient isomorphism. The site-equivalence description in [lem-weil-proetale-isomorphism-inverse-image](1) identifies $(F_rM)(U\\to s)$ with $M(U\\xrightarrow{h^r\\circ u}s)$. Under it the restriction/colimit-insertion/sheafification map $\\sigma_{r,M}$ in [def-weil-frobenius-point-transport] is exactly restriction along $h^r$ at the final object. Indeed its colimit index is $(s\\xrightarrow{h^r}s)$ and its coprojection is the reindexing identification at that object. The coefficient isomorphism sends the insertion of a constant $a\\in A_n$ to the same constant $a$, by its definition in [def-weil-proetale-inverse-image]. Thus $\\sigma_{r,M}$ is $A_n$-linear. The finite tensor comparison $j_{r,M}:F_rM\\to(h^r)^*M$, $x\\mapsto x\\otimes1$, has inverse $x\\otimes a\\mapsto c_n^{-1}(a)x$, by balancing. These formulas hold for every module, without constructibility. They identify the tensor-pullback model of $G_r$ with $F_r$; below we retain $j_r$ whenever the tensor model is used.",
+   "text": "Apply [lem-trf-point-system-transport-descent]. It constructs the specified $I_{r,C}$ before localization with the actual semilinear transitions, identifies its finite evaluations, and gives naturality for every derived system morphism.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-proetale-inverse-image",
-    "def-weil-frobenius-point-transport",
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-trf-point-system-transport-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): identify the explicit point-transport recipe with restriction in the automorphism reindexing model"
+    "place": "Assembly step 1; clause (3), whole-system integral transport"
    }
   },
   {
-   "text": "Represent $C$ by a complex of strict semilinear systems $M$. At level $n$ define $u_{r,n}=\\Gamma(j_{r,M_n})\\sigma_{r,M_n}$. A differential or a transition $v:M_{n+1}\\to\\operatorname{Res}M_n$ is a map of underlying sheaves. Its restrictions commute with $\\operatorname{res}_{h^r}$, and its inverse image commutes with the colimit coprojections and sheafification maps. At the tensor insertion, applying the coefficient quotient $\\rho_n:B_{n+1}\\to B_n$ sends $x\\otimes1$ to $v(x)\\otimes\\rho_n(1)=v(x)\\otimes1$. The coefficient square $\\pi_nc_{\\widehat R}=c_nF_r(\\pi_n)$ in [def-weil-inverse-image-pullback-comparison] makes this equation $\\widehat R_s$-linear after restriction. Hence $u_{r,\\bullet}$ is a chain map of whole $R$-module towers, with the original transitions of $M$. A chain map $f:M\\to M'$ satisfies $\\Gamma_\\bullet(G_rf)u_{r,M}=u_{r,M'}\\Gamma_\\bullet(f)$ by the same restriction and tensor formulas. Its level $n$ is the stated finite point transport whenever that derived evaluation is bounded constructible, since this is its defining recipe.",
+   "text": "Apply [lem-trf-point-system-power-roos-coherence] to obtain the stated power law with the specified $t_m$, and retain its identity $a_{m+1}d_m=\\mathcal L_s(t_m)a_{1,G_mC}F_1(a_m)$ for the normalized whole-limit comparisons.",
    "uses": [
-    "def-weil-frobenius-point-transport",
-    "def-weil-inverse-image-pullback-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): form the map on strict whole systems, including arbitrary semilinear transitions"
-   }
-  },
-  {
-   "text": "Restriction of scalars is exact: it changes only the scalar action, leaving kernels and cokernels of underlying abelian sheaves unchanged. Exactness of systems is componentwise, as in [lem-coef-derived-system-evaluation-calculus]. The functor $G_r$ is exact by the equivalence of [lem-weil-proetale-isomorphism-inverse-image], and sections are exact by [lem-weil-point-proetale-sections-exact]. Consequently the two functors between complex categories used in step 2 preserve quasi-isomorphisms. Their natural chain transformation therefore localizes to a specified $I_r$ on $D(\\mathscr S_s)$. Explicitly, the commutative square of step 2 for each arrow of a roof $C\\xleftarrow{a}M\\xrightarrow{b}D$, with $a$ a quasi-isomorphism of systems, also commutes after inverting the images of $a$. This proves the asserted naturality for every derived SYSTEM morphism, without trying to lift an arbitrary family of evaluated maps.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): localize the whole-system natural transformation"
-   }
-  },
-  {
-   "text": "Check the power formula before localization in the reindexing model of step 1. The two successive restrictions, first along $h^m$ and then along $h$, are restriction along $h^m\\circ h=h^{m+1}$ by the sheaf restriction axiom. The inverse-image compositor identifies $F_1F_mM$ with $F_{m+1}M$ by associating these same site reindexings. In the tensor model its inverse is the termwise canonical module-pullback comparison of [lem-weil-pbc-proetale-derived-pullback-composition]; multiplying the two inserted units sends $(x\\otimes1)\\otimes1$ to $x\\otimes1$. Thus it is precisely the specified $t_m$, and on the whole strict tower $u_{m+1,M}=\\Gamma_\\bullet(t_{m,M})u_{1,G_mM}u_{m,M}$. This is an equality of chain maps: the restriction calculation is in every degree and commutes with the actual transitions checked in step 2. Localization gives the displayed power identity in the derived tower category.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-frobenius-point-transport"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Ancestor thm-trf-l-function-euler-product, Step 1, Global powers: composition of the point-transport factors"
-   }
-  },
-  {
-   "text": "For a strict tower complex $X$, use $H(X)=\\operatorname{Cone}(1-s_X)[-1]$ in the coordinates $H(X)^i=(\\prod_nX_n^{i-1})\\oplus(\\prod_nX_n^i)$, $d(b,a)=(-db-(1-s_X)a,da)$. Products of sheaf modules on $s_{\\mathrm{proet}}$ are sectionwise and exact by [lem-weil-proetale-countable-products-exact]. Products of $R$-modules are exact too: choose a preimage in each coordinate of a family of surjections. Regard $R$-modules as modules on the one-object trivial site. Thus [lem-weil-strict-roos-comparison] identifies these cone functors, including their maps and strict augmentations, with TOTAL derived inverse limit. The completed-module functor $F_r$ is exact by [def-weil-inverse-image-pullback-comparison] and preserves products by the site reindexing of step 1. Sections are exact by [lem-weil-point-proetale-sections-exact] and preserve products because they are sectionwise. Apply [lem-cbc-exact-product-functor-strict-limit] to these two functors. It gives the specified natural comparisons $a_{r,C}:F_r\\mathcal L_sC\\xrightarrow{\\sim}\\mathcal L_sG_rC$ (including $j_r$) and $\\zeta_C:R\\lim\\Gamma_\\bullet C\\xrightarrow{\\sim}\\Gamma(s,\\mathcal L_sC)$, the latter in the inverse direction to that lemma's comparison. In cone coordinates the comparisons are the canonical product comparisons on BOTH summands, with no extra off-diagonal term. The lemma's resolution normalization identifies them with applying inverse image, respectively sections, to the entire limit cone.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-cbc-exact-product-functor-strict-limit"
+    "lem-trf-point-system-power-roos-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): specified whole-limit comparisons, using Stacks Tag 0941 (lemma-derived-limit-is-ok) and its normalized strict Roos refinement"
+    "place": "Assembly step 2; clause (3), whole-system integral transport"
    }
   },
   {
-   "text": "Write $X=U_sM$ and $N=H(X)$ for the moment. Under the comparisons of step 5, $R\\lim(I_{r,C})$ is the actual two-component chain map $H(u_r)(b,a)=((\\prod_nu_{r,n})b,(\\prod_nu_{r,n})a)$. This is a chain map because the transition equation in step 2 gives $(1-s_{G_rX})\\prod u_{r,n}=(\\prod u_{r,n})(1-s_X)$. On a product sheaf, restriction sends $(x_n)_n$ to $(x_n|_{h^r})_n$. Hence $\\sigma_{r,\\prod X_n}$, followed by the canonical inverse-image product comparison, is $\\prod_n\\sigma_{r,X_n}$. Restriction also preserves the two direct-sum coordinates in $H(X)$. Consequently, on BOTH the shifted and unshifted coordinates, $H(u_r)$ equals sections of the cone comparison $a_{r,C}$ after $\\sigma_{r,H(X)}$. The natural normalized cone identifications of [lem-weil-strict-roos-comparison] therefore give\n$$\\zeta_{G_rC}R\\lim(I_{r,C})=\\Gamma(s,a_{r,C})\\sigma_{r,\\mathcal L_sC}\\zeta_C.$$\nThis calculation proves an equality of derived maps on whole systems; it does not infer it from equality after projection to each $n$.",
+   "text": "By [lem-trf-point-system-roos-transport], the actual cone-normalized maps $a_r,\\zeta$ are natural and satisfy $\\zeta_{G_rC}R\\lim(I_r)=\\Gamma(s,a_r)\\sigma_{r,N}\\zeta_C$ for $N=\\mathcal L_sC$, without assumptions on $C$ or $N$.",
    "uses": [
-    "lem-weil-strict-roos-comparison",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "def-weil-frobenius-point-transport"
+    "lem-trf-point-system-roos-transport"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): compare point transport on both coordinates of the whole derived-limit cone"
+    "place": "Assembly step 3; clause (3), whole-system integral transport"
    }
   },
   {
-   "text": "Now assume $N=\\mathcal L_sC\\in D^b_c(s,R)$. Choose a flat-term K-flat resolution $Q\\to N$ by [lem-pc-kflat-resolution] and write $Q_n=Q\\otimes_{\\widehat R_s}B_n$. The $L=E$ case of [lem-weil-finite-free-completed-scalar-comparison] gives the natural isomorphism $\\chi_N:N\\to H((\\operatorname{Res}_nQ_n)_n)$, represented on $Q$ by $z\\mapsto(0,(z\\otimes1)_n)$. It applies because derived completeness is part of [def-weil-derived-complete-integral-detailed]. Applying exact $F_r$, its product comparison and the tower isomorphisms $j_{r,Q_n}$ of step 1 gives an isomorphism\n$$F_rN\\xrightarrow{F_r\\chi_N}F_rH(Q_\\bullet)\\xrightarrow{\\sim}H(F_rQ_\\bullet)\\xrightarrow{H(j_r)}H(((h^r)^*Q_n)_n)=P_rN.$$\nOn $F_rQ$ its formula is $w\\mapsto(0,(j_{r,Q_n}F_r(z\\mapsto z\\otimes1)(w))_n)$. This is EXACTLY the map $\\tilde\\theta$ defining part (b) of [def-weil-inverse-image-pullback-comparison], followed by the inverse of $F_r(Q\\to N)$. Thus the displayed isomorphism is the specified $\\kappa_N$, not merely some isomorphism with the same reductions. Independence and naturality follow from the resolution-independent natural completion comparison, the product comparison in step 5, and the functorial descent in [lem-pur-integral-operations-well-defined].",
+   "text": "Now suppose $N\\in D^b_c(s,R)$. Its derived completeness [def-weil-derived-complete-integral-detailed] makes the actual $\\kappa^{(r)}_N$ invertible by [lem-weil-isomorphism-derived-pullback-comparison-normalization], naturally with the specified zero-shifted-coordinate completion augmentation. Put $\\nu_r=a_r(\\kappa^{(r)}_N)^{-1}$. The defining recipe [def-weil-frobenius-point-transport] gives $\\iota_N^{(r)}=\\Gamma(s,\\kappa^{(r)}_N)\\sigma_{r,N}$. Cancellation in step 3 proves precisely the asserted realization identity and its naturality.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-finite-free-completed-scalar-comparison",
     "def-weil-derived-complete-integral-detailed",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-pur-integral-operations-well-defined"
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "def-weil-frobenius-point-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): identify and invert the actual integral comparison (b), via the natural completion augmentation of Bhatt-Scholze Definition 3.5.2"
+    "place": "Assembly step 4; clause (3), whole-system integral transport"
    }
   },
   {
-   "text": "By definition the stated realization comparison is $\\nu_{r,C}=a_{r,C}\\kappa_N^{-1}$. The integral transport of [def-weil-frobenius-point-transport], with the recipe applied to $h^r$, is $\\iota_N^{(r)}=\\Gamma(s,\\kappa_N)\\sigma_{r,N}$. Therefore $\\Gamma(s,\\nu_{r,C})\\iota_N^{(r)}=\\Gamma(s,a_{r,C})\\sigma_{r,N}$ by cancellation of the actual $\\kappa_N$ and its inverse. Substitution into the equality of step 6 proves precisely\n$$\\zeta_{G_rC}R\\lim(I_{r,C})=\\Gamma(s,\\nu_{r,C})\\iota_N^{(r)}\\zeta_C.$$\nThe assumption is only on $N$; nowhere was $C$ replaced by the reduction system of $N$.",
+   "text": "The object $P_mN$ is constructible by [lem-weil-isomorphism-derived-pullback]; hence so is $\\mathcal L_sG_mC\\cong P_mN$. With the specified $c^E$ of [lem-trf-integral-pullback-comparison-realization], [lem-trf-integral-inverse-image-comparison-composition] gives $c^E_m\\kappa^{(m+1)}_Nd_m=\\kappa^{(1)}_{P_mN}F_1(\\kappa^{(m)}_N)$. Naturality of $\\kappa^{(1)}$ at $\\nu_m$, inversion of this equality, and step 2 yield\n$$\\mathcal L_s(t_m)\\nu_{1,G_mC}P_1(\\nu_m)c^E_m=\\mathcal L_s(t_m)a_{1,G_mC}F_1(a_m)d_m^{-1}(\\kappa^{(m+1)}_N)^{-1}=a_{m+1}(\\kappa^{(m+1)}_N)^{-1}=\\nu_{m+1}.$$\nThis proves compositor compatibility for these actual whole-cone maps.",
    "uses": [
-    "def-weil-frobenius-point-transport",
-    "def-weil-inverse-image-pullback-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): the normalization identity with the specified nu and iota, without reconstruction of C"
-   }
-  },
-  {
-   "text": "Naturality: the product comparisons and normalized Roos identifications are natural on the derived tower category by [lem-cbc-exact-product-functor-strict-limit] and [lem-weil-strict-roos-comparison], and step 7 makes $\\kappa_N$ natural and invertible on $D^b_c(s,R)$. Inverse-image side: put $d_m:F_1F_m\\xrightarrow{\\sim}F_{m+1}$ for site reindexing. On either cone summand\n$$a_{m+1,C}d_{m,N}=\\mathcal L_s(t_{m,C})a_{1,G_mC}F_1(a_{m,C}),$$\nsince projecting either product gives the same twice-reindexed projection with the same tensor units multiplied, as in step 4, and the universal property of the product identifies the summand maps. Pullback side: $P_mN\\in D^b_c(s,R)$ by [lem-weil-isomorphism-derived-pullback], and [lem-trf-integral-inverse-image-comparison-composition] for $h$ followed by $h^m$ gives $c^E_{m,N}\\kappa^{(m+1)}_Nd_{m,N}=\\kappa^{(1)}_{P_mN}F_1(\\kappa^{(m)}_N)$, with $c^E$ as in [lem-trf-integral-pullback-comparison-realization]. Naturality of $\\kappa^{(1)}$ at the isomorphism $\\nu_{m,C}=a_{m,C}(\\kappa^{(m)}_N)^{-1}$ gives $(\\kappa^{(1)}_{\\mathcal L_sG_mC})^{-1}P_1(\\nu_{m,C})=F_1(a_{m,C})F_1(\\kappa^{(m)}_N)^{-1}(\\kappa^{(1)}_{P_mN})^{-1}$. Hence\n$$\\mathcal L_s(t_{m,C})\\nu_{1,G_mC}P_1(\\nu_{m,C})c^E_{m,N}=\\mathcal L_s(t_{m,C})a_{1,G_mC}F_1(a_{m,C})d_{m,N}^{-1}(\\kappa^{(m+1)}_N)^{-1}=a_{m+1,C}(\\kappa^{(m+1)}_N)^{-1}=\\nu_{m+1,C}.$$\nWith step 4 this is the stated compositor compatibility. No equality is deduced from individual derived evaluations.",
-   "uses": [
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-strict-roos-comparison",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
     "lem-weil-isomorphism-derived-pullback",
     "lem-trf-integral-pullback-comparison-realization",
     "lem-trf-integral-inverse-image-comparison-composition"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Ancestor Step 1, Global powers: naturality and compositor compatibility before rationalization"
+    "place": "Assembly step 5; Global powers, compatibility with composition"
    }
   },
   {
-   "text": "For $C=\\mathcal R_sN_0$, the reduction construction in [lem-coef-derived-system-evaluation-calculus] is the strict system $(Q\\otimes B_n)_n$ for one flat-term K-flat $Q\\to N_0$. If $N_0\\in D^b_c(s,R)$, the same completion map of [lem-weil-finite-free-completed-scalar-comparison] identifies $\\mathcal L_sC$ with $N_0$, naturally and with its actual quotient augmentation. Thus steps 2 and 8 identify the realized power-$r$ map with $\\iota_{N_0}^{(r)}$, which recovers the announced reduction-tower case. Conversely a finite-output compact-support system whose derived limit is bounded constructible satisfies exactly the hypothesis used in step 7, regardless of its normalization or Tor-amplitude. Steps 1-6 applied to every system, and steps 7-9 only used derived completeness of that limit. This proves the final scope assertions.",
+   "text": "For $N_0\\in D^b_c(s,R)$ and $C=\\mathcal R_sN_0$, [lem-coef-derived-system-evaluation-calculus] supplies the simultaneous quotient system, and the $L=E$ completion isomorphism of [lem-weil-finite-free-completed-scalar-comparison] identifies its limit with $N_0$ by the actual quotient augmentation. Steps 1 and 4 give the reduction-tower specialization for every power. Any finite-output system with constructible limit satisfies step 4 directly. No reconstruction of $C$, normalization, or finite Tor-amplitude was used.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus",
     "lem-weil-finite-free-completed-scalar-comparison"
@@ -163,33 +97,27 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): reduction-tower specialization and arbitrary finite-output systems"
+    "place": "Assembly step 6; clause (3), whole-system integral transport"
    }
   }
  ],
  "proof_deps": [
+  "lem-trf-point-system-transport-descent",
+  "lem-trf-point-system-power-roos-coherence",
+  "lem-trf-point-system-roos-transport",
   "def-weil-derived-complete-integral-detailed",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
   "def-weil-frobenius-point-transport",
-  "def-weil-inverse-image-pullback-comparison",
-  "def-weil-proetale-inverse-image",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pc-kflat-resolution",
-  "lem-pur-integral-operations-well-defined",
-  "lem-trf-integral-inverse-image-comparison-composition",
-  "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-weil-strict-roos-comparison"
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Clause (3), expanded whole-system and normalized-cone argument; supporting sources Stacks Tags 03D6 and 0941, Bhatt-Scholze Definition 3.5.2"
+  "place": "Prerequisite to clause (3); short assembly of the three extracted point-system lemmas and the existing specified completion/composition comparisons."
  },
  "mathlib_searches": [
   {
@@ -313,19 +241,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-trf-integral-point-transport-tower-powers",
   "worker": "stage1",
-  "summary": "Construct the transport on strict arbitrary semilinear system complexes, localize its naturality and power identities, and compare both coordinates of the normalized total-limit cone. Identify the actual specified integral kappa with the inverse image of the completion augmentation, proving its invertibility before cancellation. No new nodes; no reconstruction or uniform Tor hypothesis on the input system. Maintainer reader (2026-10-18): made the vague compositor clause for nu explicit with the specified integral composition c^E, added statement-only lemma lem-trf-integral-inverse-image-comparison-composition for the compatibility of the integral comparison kappa with composition (step 9), and made explicit that the levels of G_r are read through j_r; tool_uses removed because every cited statement is on the unit's route.",
-  "blueprint": "thm-trf-l-function-euler-product, proof Step 1 Global powers, compatibility with composition before rationalization; expand prop-trf-rational-frobenius-integral-model proof clause (3) on arbitrary simultaneous compact-output systems."
+  "summary": "Repair of the human re-split request: retain the exact statement and Lean metadata, replace the 10565-character proof by a short assembly, and extract three independently stated unsplit work items. Retain every old argument verbatim in the report with a coverage map. Reuse the already existing general completion-unit normalization rather than duplicate it. All new nodes have actual recorded Mathlib searches and no proof.",
+  "blueprint": "thm-trf-l-function-euler-product proof Step 1, Global powers, the naturality and composition sentences; prerequisite expansion of prop-trf-rational-frobenius-integral-model proof (3), realizing maps as whole derived limits before rationalization."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q53-a6c7c3966",
-  "group": "Q53",
+  "reviewer": "NT-cc-Q89-41198a1b8",
+  "group": "Q89",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-a6c7c3966 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all 10 steps, split_report and searches. I also read every cited node's statement, blueprint main-20261015 prop-trf-rational-frobenius-integral-model clause (3) and thm-trf-l-function-euler-product Step 1 'Global powers', and unit sk-thm-trace-transport. Steps 1-8 and 10 are correct. Step 1: for an automorphism the (s,h^r) index is initial, so sigma is restriction, and j_r has a balancing inverse for every module. Step 2: transitions need only rho(1)=1 and the square pi_n c = c_n F_r(pi_n). Step 3: G_r is an exact equivalence, Gamma is exact because k is algebraically closed, so the map localizes over roofs. Step 4: restriction along h^m then h is restriction along h^{m+1}, an equality of chain maps; this is the whole-tower strengthening of lem-trf-point-transport-composition, not a duplicate. Step 5: the hypotheses of lem-cbc-exact-product-functor-strict-limit hold for F_r and for Gamma, products being exact by lem-weil-proetale-countable-products-exact and Gamma(s, completed sheaf) = R. Step 6: I recomputed the equality from lambda = theta^{-1} kappa F(theta) and naturality of rho and sigma; it reduces to diagonal cone maps that agree on both summands. Step 7: the composite F_r(chi_N), then the product comparison, then H(j_r) is exactly theta-tilde of def-weil-inverse-image-pullback-comparison (b). It is invertible because N is derived complete (part of def-weil-derived-complete-integral-detailed; the L=E clause of lem-weil-finite-free-completed-scalar-comparison). Step 8: cancelling kappa gives the formula. Step 10: correct. Small cases checked: C=0, a system supported at one level, m=1, N = the completed sheaf. Fault (E5): the statement's 'respect the compositors t_m' for nu named no integral compositor, and step 9 only gestured at 'comparisons supplied by that construction'; the cited composition lemma is about module pullbacks, not the derived-limit completed pullback. Repairs in fixes/: (1) a new statement-only node lem-trf-integral-inverse-image-comparison-composition: c^E∘kappa^{kh}∘d = kappa^h_{Lk^*N}∘h^{-1}(kappa^k_N), with c^E from lem-trf-integral-pullback-comparison-realization (same unit; no cycle; no duplicate in the DAG or blueprint; only Mathlib grep searches, since LeanSearch and Loogle cannot be reached here). (2) The item statement now gives the explicit identity nu_{m+1}=L_s(t_m) nu_{1,G_mC} P_1(nu_m) c^E_m and notes P_mN in D^b_c, which puts the stray stmt_dep lem-weil-isomorphism-derived-pullback to use; it also says the levels of G_r are read through j_r. (3) Step 9 rewritten as a three-line derivation. The parent does not use this nu clause, and nothing it uses changed. split_report.tool_uses removed: every proof dependency is on the unit's route, so no tool_uses are accepted. No SGA source is used, and the coefficient category is modules over the completed sheaf throughout.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-41198a1b8 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the cited mathematics. The re-split meets the human's 2026-10-21 note: the 10565-char proof became a 6-step parent of 2390 chars, the item statement is byte-identical to the base, and there are 3 new statement-only nodes of comparable size (3162, 3528 and 3930 chars). (1) lem-trf-point-system-transport-descent holds old steps 1-3. (2) lem-trf-point-system-power-roos-coherence holds old step 4 and the inverse-image half of step 9. (3) lem-trf-point-system-roos-transport holds old steps 5-6. Old step 7 is the exact statement of the existing node lem-weil-isomorphism-derived-pullback-comparison-normalization (theta kappa = G(u_N), invertible for derived complete N; D^b_c(s,R) includes derived completeness), so a new node would be a C5 duplicate. Old step 8 is the cancellation in parent step 4. The pullback half of old step 9 stays in step 5: I recomputed the nu_{m+1} chain from the composition node with h and k=h^m, and every domain and codomain checks, so Q53's earlier FIX content is kept. Old step 10 is step 6. No argument was dropped or blurred. All three new statements are true: site reindexing (h^{-1}M)(V,v)=M(V,hv); exact, product-preserving F_r and sections on the pro-etale site of a point; and lem-weil-strict-roos-comparison and lem-cbc-exact-product-functor-strict-limit giving a and zeta on both summands. I checked small cases (zero system, m=1, constant tower, zero transitions). There are no cycles and no orphaned nodes among the dropped dependencies. None of the new nodes duplicates point-transport-natural, compact-support-system-realization-normalization, or the cbc Roos chain-maps/compatibility/descent nodes. Sources checked: prop-trf-rational-frobenius-integral-model.proof.md (3), lines 55-75, and the Global powers paragraph of thm-trf-l-function-euler-product.proof.md, lines 35-45; no SGA. Batch-5 flags: the item is already in the base closure through prop-every-iterate-trace and lem-zl-general-condensed-weil-realization, not through sk-thm-trace-transport. The normalization node is already in the closure through lem-weil-isomorphism-derived-pullback. The closure diff adds only the 3 new nodes. Every trf or pod node in the flagged closure is generic coefficient calculus, with no trace-formula or Poincare-duality step, so all 4 flags are accepted. Advisory only: step 5 uses naturality of kappa^(1) from the node cited in step 4."
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralPointTransportTowerPowers",
