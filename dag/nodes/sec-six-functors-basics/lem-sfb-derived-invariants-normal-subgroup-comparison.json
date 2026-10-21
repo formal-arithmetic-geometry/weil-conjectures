@@ -13,9 +13,197 @@
   "def-sfb-condensed-action-module",
   "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the internal action-site presentation with the sheaf of groups $S\\mapsto C(S,P)$ and the trivial action on $A$, for each $P=1,K,G\\times L,Q\\times L$. Its small ringed action site presents $\\mathcal A_P(A)$ as a module-sheaf category. The ringed-site Grothendieck theorem therefore makes all these categories Grothendieck abelian. The presentation creates kernels and cokernels after forgetting actions. Changing an action by precomposition leaves the underlying module and its morphisms unchanged, so restriction, inflation and forgetting are additive and exact. These assertions also hold after a change of coefficient ring: scalar restriction leaves the underlying abelian sheaf, its kernels, and its sheaf-cokernels unchanged.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent action-category foundation; Grothendieck input: Stacks 03DA, 03DB, 03EW (sites-modules.tex) and 07A5 (sites-cohomology.tex)"
+   }
+  },
+  {
+   "text": "The disjoint open cosets of $K$ cover compact $G$, so a finite subcover exhausts them. Choose one representative of each of the finitely many cosets of the open subgroup $K$ in $G$. This gives a continuous set section $s:Q\\to G$. Define $T(M)$ by the sections fixed by $K$ after every profinite base change. The condition is local and preserved by restriction, so this is an internal submodule. Normality makes it $G\\times L$-stable: $k(gm)=g((g^{-1}kg)m)=gm$. Every map into $Q\\times L$ lifts using $(s,1_L)$, so its action on these sections is independent of the lift and defines the residual condensed $Q\\times L$-action. A map from an inflated module lands in $T(M)$, since its source is $K$-fixed; conversely the invariant inclusion makes every map into $T(M)$ equivariant after inflation. These inverse operations give precisely the normalized adjunction. Applying the same fixed-section definition gives the identity $\\Gamma_{G\\times L}=\\Gamma_{Q\\times L}T$ on objects and maps, since every $(g,l)$ is a lift of $(\\bar g,l)$ and the kernel is $K$.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent quotient-action and normalized transpose calculation"
+   }
+  },
+  {
+   "text": "Put $P=G\\times L$ and identify $H=K\\times\\{1\\}$ with $K$. The coset space $P/H$ is $Q\\times L$; $(q,l)\\mapsto(s(q),l)$ is a continuous section of its projection. The exact condensed induction lemma supplies an exact left adjoint to $\\operatorname{Res}_K:\\mathcal A_{G\\times L}(A)\\to\\mathcal A_K(A)$, without requiring $L$ finite. Consequently restriction to $K$ preserves K-injective complexes by the exact-left-adjoint criterion. The same criterion applied to exact quotient inflation shows that $T$ preserves K-injectives. Applied to exact trivial inflation, it also shows that every invariants functor $\\Gamma_P$ carries K-injectives to K-injectives.",
+   "uses": [
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent kernel restriction; Stacks Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "There are enough K-injectives by the Grothendieck K-injective theorem. In the exact-square comparison theorem take $H'=T$, $H=\\Gamma_K$, $r=\\operatorname{Res}_K$, and $s=U_{Q\\times L}$. The square $sH'=Hr$ is the fixed-section identity, and $r$ is exact and preserves K-injectives by step 3. Its normalized isomorphism is the required $\\beta:D(U_{Q\\times L})RT\\cong R\\Gamma_K D(\\operatorname{Res}_K)$. Explicitly, on a resolution $N\\to I$ both sides are represented by the identical complex $(I|_K)^K=U(TI)$; the comparison is its identity. This also fixes the comparison independently of all choices.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-kinjective-exact-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); normalized exact-square application"
+   }
+  },
+  {
+   "text": "Apply the normalized derived adjunction-composition theorem to the exact trivial inflation from $\\mathcal A_1(A)$ to $\\mathcal A_{Q\\times L}(A)$, followed by exact quotient inflation to $\\mathcal A_{G\\times L}(A)$. Their composite is trivial inflation to $G\\times L$, and step 2 identifies the conjugate right adjoints by $\\Gamma_{G\\times L}=\\Gamma_{Q\\times L}T$, with the specified invariant inclusions. The theorem gives $c:R\\Gamma_{G\\times L}\\cong R\\Gamma_{Q\\times L}RT$ as the conjugate of this exact inflation identity. On a K-injective $I$, the intermediate $TI$ is K-injective by step 3, so $c$ is represented by the identity $I^{G\\times L}=(TI)^{Q\\times L}$. Thus it has precisely the required adjunction normalization.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; exact-left-adjoint composition extraction of Tag 0D6E, sites-cohomology.tex, lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "For a module $N$, choose a K-injective resolution $i:N[0]\\to I$ in the action category. The unit of $RT$ is represented by $T(i):T(N)[0]\\to TI$. The first comparison of step 4 takes its underlying map to $(i|_K)^K$, which is the usual invariant-to-derived-invariant map, since $I|_K$ is K-injective. Let $a:T(N)[0]\\to J$ be a K-injective resolution in the quotient-action category. As $TI$ is K-injective, precomposition with $a$ gives a bijection of homotopy classes of maps into $TI$. Hence there is a unique homotopy class $b:J\\to TI$ with $ba=T(i)$. Applying quotient invariants represents $R\\Gamma_{Q\\times L}(\\eta_N)$ by $\\Gamma_{Q\\times L}(b)$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y; resolution unit and extension of a map to a K-injective target"
+   }
+  },
+  {
+   "text": "Under the normalized inflation adjunction, $b:J\\to TI$ transposes to the chain map from the inflation of $J$ into $I$ obtained by composing with $TI\\hookrightarrow I$. On invariant complexes its map is exactly $\\Gamma_{Q\\times L}(b):J^{Q\\times L}\\to I^{G\\times L}$, using $I^{G\\times L}=(TI)^{Q\\times L}$. This is the derived inflation attached to the projection and the original inclusion $\\operatorname{Inf}T(N)\\hookrightarrow N$: its composite with the inflated resolution map agrees up to homotopy with $i$ composed with that inclusion, by $ba=T(i)$. Since $c_N$ is the identity on the target invariant complex, this gives $c_N\\operatorname{inf}_N=R\\Gamma_{Q\\times L}(\\eta_N)$. The Hom bijection in step 6 and the derived adjunction normalization show that this description is independent of $i,a,b$.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized inflation calculation on resolutions, using Stacks 070I and 09T5"
+   }
+  },
+  {
+   "text": "For a morphism of complexes, maps between K-injective resolutions representing it are unique up to homotopy, by the K-injective Hom bijection. Applying $T$, restriction and invariants preserves homotopies. The identities of fixed-section submodules in steps 2, 4 and 5 commute with every equivariant linear map. Thus $\\beta,c,\\eta$ and the displayed inflation equation are natural in module maps (and $\\beta,c$ are natural on the unbounded derived category). In later steps, equality of natural derived maps may be checked on K-injectives: every object is isomorphic to one, and their derived Hom sets equal their homotopy Hom sets.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, (1) implies (3); homotopy-natural fixed-section identities"
+   }
+  },
+  {
+   "text": "For a continuous $h:L'\\to L$, write $r_h$ for action restriction and use the analogous quotient restriction. There is an equality $T' r_h=r_hT$ of underlying invariant submodules with residual action. Full invariants have the natural inclusion $M^{G\\times L}\\to(r_hM)^{G\\times L'}$, and likewise for $Q$; the $K$-invariant submodule itself is unchanged. To derive these maps on a K-injective source $I$, resolve $r_hI\\to J$ in the new action category and apply these inclusions followed by the corresponding invariant map to $J$. The target $T'J$ and $J|_K$ are K-injective by step 3 for $L'$. All paths through $\\beta$ or $c$ are therefore the same maps of invariant complexes: use $I^{G\\times L}=(TI)^{Q\\times L}$, then $T'(r_hI)\\to T'J$. This proves the two naturality squares and, with $T(N)\\to TI$, the inflation equation after $h$. Resolution-independence follows from the Hom bijection; no preservation of K-injectives by $r_h$ is asserted.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent continuous-homomorphism naturality via invariant inclusions and Stacks 070I/070Y"
+   }
+  },
+  {
+   "text": "Use the action sites also for sheaves of sets: the same formulas as in the action-site presentation identify a $P$-set sheaf $X$ with the sheaf having restriction $x\\mapsto a f^*x$ along $(f,a)$. Restricting to $(f,1)$ is the inverse; twisting by $(1,a)$ is invertible, so the covering-sieve criterion in that presentation identifies the two sheaf conditions. Thus the category $B_P$ of internal $P$-set sheaves is a small-site topos. Inflation along $P\\to1$ or $G\\times L\\to Q\\times L$ preserves finite limits, computed on underlying sheaves, and is left adjoint to kernel invariants by the fixed-section formulas of step 2 (with sets in place of modules). These are geometric morphisms; with the trivially acted-on ring $A$ their module direct images are $\\Gamma_P$ and $T$. A ring map $A\\to A'$ is a ringed-topos morphism on the identity underlying $B_P$, with exact module direct image scalar restriction $r_P$. For either projection $f:B_P\\to B_R$, the two composites of the coefficient-change and projection morphisms agree, since the ring structural map is the same $A\\to A'$. The ringed-topos composition theorem gives the canonical isomorphism\n$$\\theta_f:Rf_{*,A}D(r_P)\\xrightarrow{\\sim}D(r_R)Rf_{*,A'}.$$\nIndeed composition identifies both sides with the direct image of that common composite. Its normalization says: for $A'$-K-injective $I'$ and a resolution $a:r_PI'\\to J$ over $A$, the map $f_{*,A}(a)$ from $r_R f_{*,A'}I'$ to $f_{*,A}J$ is a quasi-isomorphism and represents $\\theta_f^{-1}$. Thus no scalar restriction is assumed to preserve K-injectives.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent realization of invariants on action topoi and its coefficient-change composition square"
+   }
+  },
+  {
+   "text": "Let $\\sigma:A\\to A'$ and $v:N\\to r_{G\\times L}N'$ be an equivariant coefficient map. The required coefficient transformation for invariants is explicitly $R\\Gamma_A(v)$ followed by $\\theta_\\Gamma$ of step 10; it derives the equality of invariants with scalar restriction. Use the analogous $\\theta_T$ for $T$. On an $A'$-K-injective $I'$ choose $a:rI'\\to J$ over $A$. The inverses of all these coefficient comparisons are represented by the invariant maps of $a$. The square for $\\beta$ is the single map $(rI')^K\\to J^K$, since $T_A(a)$ has that underlying map and $J|_K$ is K-injective. The square for $c$ is the single map $(rI')^{G\\times L}\\to J^{G\\times L}$, written also as quotient invariants of $T_A(a)$. The ringed-topos composition cocycle states exactly that resolving after either of these two factorizations gives the same canonical comparison, including coefficient changes on identity topoi. Its unit normalization agrees with the normalization in step 5, so these are the specified $c,\\theta$ rather than arbitrary isomorphisms. Naturality of the derived unit for $N'[0]\\to I'$ gives the same square for $\\eta$; composing the original invariant inclusions with $a$ gives it for inflation by step 7. Finally compose with $R\\Gamma_A(v)$. This proves every coefficient square for arbitrary $v$, without a flatness assumption on $A'$ over $A$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-ringed-derived-composition-cocycle",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; normalized cocycle for coefficient changes on identity topoi and agent invariant-inclusion calculation"
+   }
+  },
+  {
+   "text": "Consider successive quotient projections $P_0\\to P_1\\to P_2$ with open normal kernels, retaining any factor $L$. Write $T_1,T_2$ for their invariant functors. A section is fixed by the composite kernel exactly when it is $\\ker(P_0\\to P_1)$-fixed and its residual section is $\\ker(P_1\\to P_2)$-fixed; quotient maps have the continuous set sections used in step 2. Consequently $T_{02}=T_2T_1$ and the invariant inclusion for the composite is the composite of the two inclusions. For a K-injective resolution $N\\to I$, both $T_1I$ and $T_2T_1I$ are K-injective. The derived composition comparisons, in either parenthesization, are the identity on $I^{P_0}=(T_1I)^{P_1}=(T_2T_1I)^{P_2}$, by their adjunction-normalization theorem. Step 8 extends this equality to all derived objects.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent successive quotient and compositor identity calculation"
+   }
+  },
+  {
+   "text": "To check inflation itself under those projections, resolve $T_1N\\to J$ in the $P_1$-action category and extend $T_1(N\\to I)$ to $b:J\\to T_1I$ using the Hom bijection. Resolve $T_2T_1N\\to Z$ in the $P_2$-action category. Extend $T_2(T_1N\\to J)$ to $d:Z\\to T_2J$; this is possible because $T_2J$ is K-injective. The map $T_2(b)d:Z\\to T_2T_1I$ extends $T_2T_1(N\\to I)$. The direct inflation uses the unique homotopy class with exactly this extension property, so it agrees with $T_2(b)d$. Taking $P_2$-invariants identifies this map with the composite of the two inflations, since the invariant inclusions compose as in step 12. This proves the asserted transitivity, including its actual arrow.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent two-resolution calculation of successive inflation; Stacks 070I"
+   }
+  },
+  {
+   "text": "If $K=1$, the quotient is $G$, $T$ is the identity functor, and $\\Gamma_K$ is the identity on underlying modules. Its derived unit is the class of a quasi-isomorphism $N\\to I$, hence is the identity under the exact-functor resolution identifications. The termwise fixed-section identities defining $\\beta$ and $c$ are identities too, so their normalized derived comparisons are identities under the same identifications. The zero ring, zero module, $K=G$, and trivial $L$ require no changes: all constructions are submodules, exact adjunctions and resolutions, with no division by a group order.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent identity and degenerate-case check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-condensed-split-coset-induction",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-weil-pbc-kinjective-exact-square-comparison",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated open-normal-kernel quotient input; detailed proof using Stacks Tags 08BJ, 070I, 070Y, 070K, 09T5 and the existing normalized derived-composition node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +239,66 @@
    "results": "8 hits: Condensed.profiniteFree, CondensedMod.ofSheafProfinite, CondensedMod.IsSolid, CondensedMod.LocallyConstant.functor, LightCondMod.ofSheafLightProfinite, Rep.toCoinvariantsKer, LightCondMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functor_obj_val; ",
    "date": "2026-10-22",
    "verdict": "no match: ordinary representations, discrete condensed modules, solidification and topological continuous cohomology do not state this ordinary internal condensed derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived invariants for condensed modules compose through an open normal subgroup with normalized inflation and coefficient restriction",
+   "results": "8 hits: CondensedMod.IsSolid, Condensed.profiniteSolid, CondensedMod.LocallyConstant.functor, CondensedMod, Condensed.profiniteFree, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed scalar-ring condensed modules, abstract group cohomology and K-injective adjunction searches do not state the internal condensed normal-subgroup comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"Adjunction\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed scalar-ring condensed modules, abstract group cohomology and K-injective adjunction searches do not state the internal condensed normal-subgroup comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant|induction|coinduction",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed scalar-ring condensed modules, abstract group cohomology and K-injective adjunction searches do not state the internal condensed normal-subgroup comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariants normal subgroup quotient condensed modules inflation restriction scalars",
+   "results": "8 hits: Rep.quotientToInvariants, groupCohomology.H1InfRes_exact, Representation.quotientToInvariants, groupCohomology.H1InfRes, groupCohomology.instMonoModuleCatFH1InfRes, groupCohomology.H1InfRes_X₁, groupCohomology.H1InfRes_f, Rep.quotientToInvariantsFunctor_map_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed scalar-ring condensed modules, abstract group cohomology and K-injective adjunction searches do not state the internal condensed normal-subgroup comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classifying topos of internal group actions geometric morphism from group homomorphism inflation and kernel invariants ringed topos scalar restriction",
+   "results": "8 hits: Rep.instIsRightAdjointActionModuleCatRes, Rep.indResAdjunction, Rep.instIsLeftAdjointActionModuleCatRes, Rep.instIsLeftAdjointIndFunctor, Rep.resCoindAdjunction, PresheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj_map, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract action/restriction adjunctions and scalar restriction are not a classifying topos comparison theorem for internal condensed actions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal group action sheaves classifying topos change coefficient ring invariants direct image geometric morphism",
+   "results": "8 hits: ContinuousCohomology.invariants, ContinuousCohomology.instLinearActionTopModuleCatInvariants, CategoryTheory.instPreadditiveSheaf, SheafOfModules, CategoryTheory.presheafToSheaf_additive, SheafOfModules.Hom, SheafOfModules.unit, Algebra.IsInvariant",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract action/restriction adjunctions and scalar restriction are not a classifying topos comparison theorem for internal condensed actions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"Sheaf\"",
+   "results": "9 hits: AlgebraicGeometry.StructureSheaf.isFractionPrelocal, AlgebraicGeometry.StructureSheaf.isLocallyFraction, AlgebraicGeometry.StructureSheaf.IsFraction, AlgebraicGeometry.StructureSheaf.isLocallyFraction_comapFun, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract action/restriction adjunctions and scalar restriction are not a classifying topos comparison theorem for internal condensed actions"
+  },
+  {
+   "tool": "grep",
+   "query": "(classifying.*top|topos.*action|action.*topos|equivariant.*sheaf)",
+   "results": "4 hits: Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/Algebra/Order/Module/Field.lean, Mathlib/Algebra/Order/Module/Field.lean, Mathlib/RingTheory/DedekindDomain/Ideal/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract action/restriction adjunctions and scalar restriction are not a classifying topos comparison theorem for internal condensed actions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-prime-to-ell-derived-invariants-reduction",
@@ -78,5 +322,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-derived-invariants-normal-subgroup-comparison",
+  "worker": "stage1",
+  "summary": "Constructed quotient invariants with normalized transposes, isolated exact condensed split-coset induction, used existing K-injective and normalized adjunction-composition tools, and wrote the resolution calculations for inflation, group/coefficient naturality and transitivity. Statement unchanged.",
+  "blueprint": "The inherited main-20261015 direct-images proof paragraph (3) has only the open-image assertion; this split realizes the agent-formulated tame-boundary quotient input below it, not an assertion explicitly present in the source. The ancestor tool reports null; inherited via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "General small ringed-site Grothendieck theorem applied to the existing action-site presentation; no condensed-action node replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Exact-left-adjoint criterion for K-injective preservation, used for kernel restriction and invariant functors."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Existence of unbounded K-injective resolutions in the Grothendieck action categories."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-exact-square-comparison",
+    "why": "Normalized derived comparison for the kernel restriction/forgetful square; no geometric base change is used."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic normalized composition of right adjoints to exact functors, used for quotient inflation adjunctions."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Specified universal derived unit and computation on K-injectives."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Derived Hom equals homotopy Hom into K-injectives, used to extend maps and compare resolutions."
+   },
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Definition of a geometric/ringed-topos morphism, applied to trivial-action inflation and coefficient changes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Unbounded derived composition for arbitrary ringed topoi gives scalar-restriction comparison, even when scalar restriction does not preserve K-injectives."
+   },
+   {
+    "node": "lem-pur-ringed-derived-composition-cocycle",
+    "why": "Normalized associativity explicitly including coefficient changes on identity topoi verifies the scalar squares."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-exact-square-comparison",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-82d4d1906",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-82d4d1906 (reviewer sub-agent of L); spot-checked: I read the full item (14 steps), the new node lem-sfb-condensed-split-coset-induction, the statements of all cited nodes, Stacks 0D6E and 08BJ, and blueprint direct-images paragraph (3). Every step is correct, and I made no fixes. Step 2: Q is finite, the section s is continuous, the residual action does not depend on the lift, normality makes the fixed sections stable, and Γ_{G×L}=Γ_{Q×L}T. Step 3: H=K×1 in P=G×L has coset space Q×L with section (s,1), so Ind is an exact left adjoint of Res_K. The exact-left-adjoint criterion then applies with the right directions to Res_K, T and Γ_P. Step 4: the roles in the exact-square theorem (H'=T, H=Γ_K, r=Res_K, s=U) match, the square holds on the nose, and the normalization is the identity on (I|_K)^K. Step 5: the conjugate of the identity inflation is the identity on invariants. Steps 6–7: b:J→TI is unique up to homotopy, its transpose represents inf_N, and c_N∘inf_N=RΓ(η_N) with the directions checked. Step 9 uses the invariant inclusions and does not claim that r_h preserves K-injectives. Steps 10–11: the coefficient squares follow from the ringed-topos composition theorem and the cocycle node, which covers coefficient changes on identity topoi, with the same identity normalization as step 5 and no flatness assumption. Steps 12–13: the transitivity argument gives the actual arrow. Step 14: the K=1 and degenerate cases hold. The new node's statement is true: a section makes A(S)[P_S] free over A(S)[H_S] on C(S,X), so induction is exact sectionwise up to sheafification and the transpose formulas are well defined. I checked it on H=P, H=1, finite X and the zero ring. It is statement-only, strictly smaller than the item, and has three kinds of search. I searched for duplicates (induction, coinduction, exact left adjoint, normal subgroup) and found none. The ten tool uses are generic categorical lemmas, accepted. No SGA source is cited. The null blueprint.from.node is inherited from the parent chain and is not this delivery's fault."
  }
 }

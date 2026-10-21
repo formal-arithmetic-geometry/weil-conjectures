@@ -23238,3 +23238,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:49 L: merged deliver/Q18/lem-coef-residue-controlled-finite-homs (stage 2; reviewer PASS; parallel immutable checks)
 - 17:50 L: merged deliver/S4/Sheaf.Paper.DerivedPullbackTensorHom (stage 3; reviewer PASS; first push; landing 20261021T175009-L-3961883 (interface); batch 20261021T175005; modules 1; new nodes 0; change records: coord/changes/S4-derived-operations-private-proof-context.md)
 - 17:50 L: merged deliver/NN/lem-sfb-tame-inertia-continuous-koszul (stage 2; reviewer PASS; parallel immutable checks)
+- 17:50 L: merged deliver/NL/lem-sfb-derived-invariants-normal-subgroup-comparison (reviewer PASS; first push; new nodes: 1)
