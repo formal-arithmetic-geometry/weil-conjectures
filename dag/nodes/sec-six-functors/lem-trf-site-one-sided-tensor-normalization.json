@@ -19,110 +19,61 @@
  ],
  "proof": [
   {
-   "text": "Total tensor is defined on the homotopy category. In the differential of [def-pc-tensor-complex-sheaves], if $f-f'=dh+hd$ in the first variable, $h\\otimes1$ is a homotopy between the induced tensor maps: the cross terms cancel because $h$ lowers the first degree by one. In the second variable, a homotopy $k$ induces $(-1)^i1\\otimes k$ on the summand of bidegree $(i,j)$, with the same cancellation. Thus both tensor functors and the transformations induced by maps of the other factor are well defined on $K(B)$. The signed interchange $s(x\\otimes y)=(-1)^{ij}y\\otimes x$ is a chain isomorphism. Indeed the coefficients of $y\\otimes dx$ and $dy\\otimes x$ in $sd(x\\otimes y)$ are respectively $(-1)^{(i+1)j}$ and $(-1)^{i+i(j+1)}=(-1)^{ij}$, which are their coefficients in $ds(x\\otimes y)$. Its square is the identity since $(-1)^{2ij}=1$. The maps are balanced, natural, and pass from presheaf tensors to their sheafifications by [def-pur-sheaf-tensor-product]. All calculations act summandwise on direct sums, even for unbounded complexes.",
+   "text": "For each homotopy object X apply lem-pc-kflat-resolution to X.as, and convert its termwise exact tensor-right functors to IsFlatOnSite using siteSheafTensorRightIso from lem-weil-pbc-independent-sheaf-tensor-colimits. This gives a quasi-isomorphism r:V→X with V in the supplied P. The predicate supplied by lem-weil-pbc-site-derived-tensor-descent equals P by their membership equivalences. Transport its localization equivalence to conclude that L=P.ι⋙Q is a localization at the restricted quasi-isomorphisms.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YM (lemma-derived-tor-exact), tensor homotopies; Tag 06YU (definition-derived-tor), signed interchange"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $f:M\\to M'$ be a quasi-isomorphism. The module category is abelian by [def-weil-sheaf-of-modules-category], so [lem-pur-quasi-iso-cone-acyclic] makes $C(f)$ acyclic. K-flatness in [def-pc-kflat-complex] gives acyclicity of $\\operatorname{Tot}(C(f)\\otimes_B T)$. The chain symmetry of step 1 gives acyclicity of $\\operatorname{Tot}(T\\otimes_B C(f))$. By [lem-pc-tensor-mapping-cone-iso] the latter is the cone of $1_T\\otimes f$. The cone criterion again proves this map is a quasi-isomorphism. Conjugating by the natural symmetry proves the same for $f\\otimes1_T$. Every homotopy-category arrow has a chain-map representative, so the result holds in $K(B)$ as well. Flatness of the terms of $T$ and boundedness of either complex were not used here.",
+   "text": "Take a chain representative of a homotopy quasi-isomorphism f. Apply the quasi-isomorphism-preservation clause of lem-weil-pbc-kflat-fixed-tensor-triangulated to the fixed complex T.as. The specified hB natural isomorphism identifies both resulting quotient tensor maps with the maps of the supplied B, by its naturality squares. Quasi-isomorphisms respect arrow isomorphisms, proving preservation for both orders.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-pc-kflat-complex",
-    "lem-pc-tensor-mapping-cone-iso"
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), cone proof, using Tag 06YM (lemma-derived-tor-exact)"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $\\mathcal P=\\mathcal P_B$ and $L=Q|_{\\mathcal P}$. The equivalence $W_B^{-1}\\mathcal P\\to D(B)$ supplied by [lem-weil-pbc-site-derived-tensor-descent], compatible with the localization maps, makes $L$ a localization at $W_B$. Explicitly, precomposition with that equivalence is an equivalence on functor categories (precompose with its inverse), and precomposition with $\\mathcal P\\to W_B^{-1}\\mathcal P$ is the equivalence in the definition of localization in [lem-weil-pbc-localization-universal-property]. Their composite is precomposition with $L$. Fix $T\\in\\mathcal P$. Define $F_T:D(B)\\to D(B)$ by $F_T(N)=QT\\otimes_B^{\\mathbf L}N$, using the specified tensor of [lem-weil-pbc-site-derived-tensor-descent], and $H_T:K(B)\\to D(B)$ by $H_T(M)=Q\\operatorname{Tot}(T\\otimes_B M)$. Step 2 shows that $H_T$ inverts quasi-isomorphisms. By clause (1) of [lem-weil-pbc-localization-universal-property] applied to $Q:K(B)\\to D(B)$ [def-weil-abstract-derived-category], choose a functor $\\overline H_T$ and a natural isomorphism $\\phi_T:\\overline H_T Q\\xrightarrow{\\sim}H_T$. These choices will disappear by uniqueness.",
+   "text": "For fixed T put F=D(QT,-) and H=B(T,-)⋙Q. Step 2 lets H descend along Q to H′, with φ:Q⋙H′≅H. The inverse of δ restricted to (T,V) is a natural isomorphism e:L⋙F≅P.ι⋙H. Compose e with the inverse of P.ι-whiskered φ. Fully faithful precomposition by L, from lem-weil-pbc-localization-universal-property, lifts this isomorphism to b:F≅H′. Define c=(Q-whiskered b) followed by φ. The preimage equation and cancellation of φ give c(V)=δ(T,V)⁻¹ exactly.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-site-derived-tensor-descent",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), construction immediately before the definition; Categories Tag 04VK (lemma-properties-right-localization)"
-   }
+   "elementary": false
   },
   {
-   "text": "On $\\mathcal P$, put $b_V=\\phi_{T,V}^{-1}\\delta_{T,V}^{-1}:F_T(LV)\\to\\overline H_T(LV)$. This is a natural isomorphism: $\\phi_T$ is natural and the specified two-sided comparison is natural on homotopy-category maps by [lem-weil-pbc-site-derived-tensor-descent]. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $L$, the functors $F_TL,\\overline H_TL$, their displayed descents $F_T,\\overline H_T$, and $b$. It gives a unique transformation $\\overline b:F_T\\to\\overline H_T$ restricting to $b$. Apply the same clause to $b^{-1}$; preservation of composition and uniqueness show that the two extensions are inverse. Define $c_{T,M}=\\phi_{T,M}\\overline b_{QM}$. This is an isomorphism natural in every $M\\in K(B)$, and for $V\\in\\mathcal P$ it equals $\\phi_{T,V}\\phi_{T,V}^{-1}\\delta_{T,V}^{-1}=\\delta_{T,V}^{-1}$. Naturality is exactly $Q(1_T\\otimes f)c_{T,M}=c_{T,M'}(1_{QT}\\otimes^{\\mathbf L}Qf)$.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), comparison with the specified two-sided localization; Categories Tag 04VK (lemma-properties-right-localization), transformation extension"
-   }
-  },
-  {
-   "text": "The normalization determines every component, without choosing a comparison map between resolutions. By [lem-pc-kflat-resolution], for every $M$ choose a quasi-isomorphism $r:V\\to M$ with $V\\in\\mathcal P$. For any family $c'$ natural in $M$ with the required normalization, naturality at $r$ forces\n$$c'_{T,M}=Q(1_T\\otimes r)\\delta_{T,V}^{-1}(1_{QT}\\otimes^{\\mathbf L}Qr)^{-1}.$$\nBoth outer factors are isomorphisms: the first by step 2 and the second because $Q$ inverts quasi-isomorphisms [def-weil-abstract-derived-category] and $F_T$ is a functor. The family of step 4 has the same formula. Hence $c'=c$. This also proves independence of the auxiliary descent in step 3 and that the displayed formula holds for every supplied K-flat flat-term resolution, not only for the chosen one.",
+   "text": "Two natural transformations Q⋙F→H equal on P agree everywhere: choose r:V→X from step 1; naturality and cancellation of the isomorphism F(Qr) force equality at X. Apply this first to the hom transformations of normalized comparison families, proving uniqueness. For g:T→T′ apply it to c(T) followed by Q(B(g,-)) and D(Qg,-) followed by c(T′). Their equality on P is exactly naturality of δ inverse at (g,idV). This proves naturality in every fixed-factor map without inverting g.",
    "uses": [
     "lem-pc-kflat-resolution",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YU (definition-derived-tor), independence of resolutions with explicit normalization"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $g:T\\to T'$ be any map in $\\mathcal P$, not necessarily a quasi-isomorphism. There are two natural transformations $F_TQ\\to H_{T'}$, with components\n$$a_M=Q(g\\otimes1_M)c_{T,M},\\qquad b_M=c_{T',M}(Qg\\otimes^{\\mathbf L}1_{QM}).$$\nTheir naturality follows from tensor bifunctoriality in step 1 and naturality of $c$ from step 4. At every $V\\in\\mathcal P$ they agree by the first-variable naturality of $\\delta^{-1}$ in [lem-weil-pbc-site-derived-tensor-descent]. To extend this equality, choose $r:V\\to M$ by [lem-pc-kflat-resolution]. The common domain map $F_T(Qr)$ is invertible, and naturality gives\n$$a_M F_T(Qr)=H_{T'}(r)a_V=H_{T'}(r)b_V=b_M F_T(Qr).$$\nCancel this domain isomorphism. Thus $a_M=b_M$ for every $M$, giving precisely the required naturality in $T$. No inversion of $g$ has occurred.",
+   "text": "Apply the same one-order argument to the flipped bifunctors B.flip and D.flip with comparison δ(V,T). This proves all reversed-order clauses. The final signed summand formula is precisely the existing CochainComplex.Monoidal.ι_braiding_hom lemma for the tensor on module sheaves.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-kflat-resolution"
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), simultaneous naturality in the K-flat fixed factor and arbitrary other factor"
-   }
-  },
-  {
-   "text": "For the reversed order use $F_T^{\\mathrm r}(N)=N\\otimes_B^{\\mathbf L}QT$ and $H_T^{\\mathrm r}(M)=Q\\operatorname{Tot}(M\\otimes_B T)$. Step 2 proves that the latter inverts quasi-isomorphisms. Repeat step 3 using clause (1) of [lem-weil-pbc-localization-universal-property]. In step 4 replace $\\delta_{T,V}^{-1}$ by $\\delta_{V,T}^{-1}$, which is natural in $V$ by [lem-weil-pbc-site-derived-tensor-descent], and extend the resulting natural isomorphism and its inverse by clause (2). This gives $c^{\\mathrm r}_{T,M}$, natural in $M$ and normalized by $c^{\\mathrm r}_{T,V}=\\delta_{V,T}^{-1}$. For $r:V\\to M$ the forced formula is\n$$c^{\\mathrm r}_{T,M}=Q(r\\otimes1_T)\\delta_{V,T}^{-1}(Qr\\otimes^{\\mathbf L}1_{QT})^{-1}.$$\nResolutions exist by [lem-pc-kflat-resolution], so this proves uniqueness exactly as in step 5. For a map $g:T\\to T'$, compare $Q(1_M\\otimes g)c^{\\mathrm r}_{T,M}$ and $c^{\\mathrm r}_{T',M}(1_{QM}\\otimes^{\\mathbf L}Qg)$; they agree at $V$ by naturality of $\\delta_{V,T}^{-1}$, and precomposing with the isomorphism $Qr\\otimes^{\\mathbf L}1_{QT}$ proves equality at $M$, as in step 6. The chain symmetry between the two total tensors is the signed interchange explicitly checked in step 1. Neither construction imposes a condition on the arbitrary complex $M$.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), same localization construction in reversed tensor order; Tag 06YS (lemma-K-flat-resolution)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "def-pc-kflat-complex",
-  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
   "lem-weil-pbc-localization-universal-property",
   "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution"
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding construction); normalization made explicit using Categories Tag 04VK (lemma-properties-right-localization)"
+  "place": "Tags 06YS, 06YP, and construction preceding Tag 06YU; Categories Tag 04VK. Lean uses the existing fixed-tensor preservation clause and fully faithful localization precomposition; the normalization and uniqueness arguments are proved here."
  },
  "mathlib_searches": [
   {
@@ -263,8 +214,6 @@
  "tool_uses": [
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-localization-universal-property",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-tensor-mapping-cone-iso",
   "lem-pc-kflat-resolution"
  ],
  "reviewed": {
@@ -292,5 +241,15 @@
   "group": "Q68",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN at 645f5df3: Lean module byte-identical; item differs from side-live only in stmt_deps, where the theorem node lem-weil-pbc-kflat-fixed-tensor-triangulated is replaced by the landed existing:true def-sf-ringed-kflat-tensor-representative-data (Q18, reviewed_lean pass). It owns Modules/ordinaryTensor/totalTensor as plain abbrevs (side-live KFlatFixedTensorTriangulated l.45-70, no .choose); the addition is allowed by STMT_DEPS MAY GAIN LANDED NODES; all 7 base deps kept. Clauses re-checked: qis preservation in both orders, c direction, normalization by δ⁻¹ (T,V)/(V,T), uniqueness among M-natural families, T-naturality for every g, (−1)^{ij} braiding matching ι_braiding_hom, M unrestricted, independent u v r w. Free D/δ is a true, non-hollow generalization (advisory: D := derivedTensor R). Docstrings, source places and report sections are present. No compile: file unchanged, earlier clean nt_compile 28.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261021T130129-L-2549134",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
