@@ -22725,3 +22725,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:59 L: merged deliver/NP/lem-pur-etale-sum-right-adjoint-tensor (stage 2; reviewer PASS; parallel immutable checks)
 - 13:59 L: merged deliver/N6/lem-dl-a1-integral-normal-residue-etale-splitting (stage 2; reviewer PASS; parallel immutable checks)
 - 13:59 L: merged deliver/Q95/lem-pur-quotient-expression-kflat-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 14:00 L: returned deliver/ND/lem-coef-enriched-sequence-projection-formula (reviewer RETURN: L: independent stage-2 immutable head 3e255f21b94a: H3/H5: the repaired degree-zero conjunct uses (rhom_global_sectionsO)
