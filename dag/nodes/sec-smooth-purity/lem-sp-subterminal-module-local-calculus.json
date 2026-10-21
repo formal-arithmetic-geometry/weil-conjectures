@@ -16,9 +16,140 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-site-restriction-module-adjunction-exact] with coefficient sheaf $R$ and object $Z$, for $Z=U,V,W$. It gives exact restriction and its exact left adjoint, constructed as the module sheafification of [def-weil-extension-by-zero-presheaf]. Since $Z\\hookrightarrow1$ is monic, any two arrows $C\\to Z$ coincide. Thus the direct sum defining that presheaf has one summand $F(C\\to Z)$ or no summands, giving exactly $P_F$ in the statement, with its specified $R(C)$-action and restrictions. Restriction is additive sectionwise; extension is additive because both the summand maps and sheafification preserve addition of morphisms (the latter follows from its linear universal property [def-weil-presheaf-modules-sheafification]). Apply the same exact-adjunction lemma on $\\mathcal E/U$ at $W\\to U$ and on $\\mathcal E/V$ at $W\\to V$ to obtain $k_{U!}$ and $k_{V!}$. Their coefficient rings are the literal restrictions of $R$ by [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact); specialization to subterminal objects"
+   }
+  },
+  {
+   "text": "For $q:\\mathcal E/Z\\to\\mathcal E$, every covering of $(C\\to Z)$ is an underlying covering of $C$, and every covering of $C$ lifts to one of $(C\\to Z)$ by composing its arrows with $C\\to Z$. Pullbacks of these covering arrows are the same in the slice and the base. Thus $q$ is continuous and cocontinuous. The identical verification applies to further slice restriction. Apply [lem-weil-pbc-module-sheafification-restriction] to these functors: restriction of $P^\\#$ is canonically the sheafification of the restricted module presheaf, and the comparison sends the unit image of each presheaf section to the same unit image. This also fixes the normalization of all comparisons below. The smallness hypothesis holds for the slices, and their ring sheaves are restrictions along the identity coefficient map.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-module-sheafification-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04B8 (lemma-almost-cocontinuous-sheafification), continuous cocontinuous slice case"
+   }
+  },
+  {
+   "text": "On an object $(C\\to U)$, the presheaf extending $F$ from $\\mathcal E/U$ evaluates to $F(C\\to U)$, since the arrow to $U$ is unique. Consequently its restriction to $\\mathcal E/U$ is exactly the already sheaf-valued presheaf $F$. Step 2 and the universal property of [def-weil-presheaf-modules-sheafification] identify $j_U^*j_{U!}F$ with $F$, with the unit $F\\to j_U^*j_{U!}F$ corresponding to the identity. Interchanging $U$ and $V$ gives the other self-restriction identification.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0F6Z (lemma-restrict-back), module-linear proof using the singleton-summand formula"
+   }
+  },
+  {
+   "text": "Let $F$ be an $R|_V$-module sheaf. At $(C,a:C\\to U)$ the presheaf underlying $j_U^*j_{V!}F$ before sheafification is $F(C\\to V)$ if $C\\to V$ exists, and zero otherwise. An arrow $b:C\\to V$ is equivalent, by the product universal property, to an arrow $(a,b):C\\to W$ over $U$. The presheaf extending $k_V^*F$ from $\\mathcal E/W$ to $\\mathcal E/U$ therefore has precisely the same values. Its restrictions are those of $F$ when the source has an arrow to $V$, and zero out of a zero summand otherwise, on both sides. The scalar ring on each summand is $R(C)$ on both sides. Sheafifying this identity and using Step 2 gives $j_U^*j_{V!}\\cong k_{U!}k_V^*$. The identity commutes with maps $F\\to F'$, so is natural. Interchanging $U,V$ proves the remaining intersection identification.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 0F6Z; agent intersection calculation from the explicit presheaf"
+   }
+  },
+  {
+   "text": "The adjunction of Step 1 can be computed directly from the universal property in [def-weil-presheaf-modules-sheafification]. A map $a:F\\to j_Z^*G$ induces $j_{Z!}F\\to G$ by sending a summand section $s\\in F(C\\to Z)$ to $a_{(C\\to Z)}(s)\\in G(C)$; conversely precompose a restricted map with the summand inclusion $F(C\\to Z)\\to P_F(C)\\to P_F^\\#(C)$. These operations are inverse, since every map out of the sheafification is determined on those summand sections. Hence the unit is this summand inclusion and the counit sends each summand section of $G(C)$ to that same section of $G(C)$. Under Steps 3 and 4 all nonzero summands and their sections are identified by identity maps. Step 2 preserves their sheafification-unit images. Thus the unit and counit diagrams commute on every presheaf summand, hence after sheafification by its universal property.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, proof of lemma-extension-by-zero; explicit unit/counit formulas"
+   }
+  },
+  {
+   "text": "For nested subterminals $A\\hookrightarrow B\\hookrightarrow1$, write $h^*$ for restriction from the $B$-slice to the $A$-slice and $h_!$ for its left adjoint. Composition of the natural Hom bijections of Step 1 identifies $j_{B!}h_!$ with $j_{A!}$: both represent $F\\mapsto\\operatorname{Hom}(F,j_A^*G)$, and the identification is uniquely fixed by the summand section maps. The nested-open map $j_{A!}h^*H\\to j_{B!}H$ is $j_{B!}$ of the counit $h_!h^*H\\to H$. By Step 5 it sends the summand indexed by $C\\to A$ to the summand indexed by its composite $C\\to B$, carrying $s$ to $s$. Restriction and the intersection identifications send the same section to $s$ whenever that summand exists; otherwise the source is zero. Therefore their diagrams with nested-open maps commute, again by the sheafification universal property. This covers the inclusions of $W$ in $U,V$ and their inclusions in $1$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 04IY (lemma-relocalize); composition of the displayed adjunctions on generators"
+   }
+  },
+  {
+   "text": "For any $C$, pullback stability of the covering sieve generated by $U,V\\to1$ says that $C\\times U\\to C$ and $C\\times V\\to C$ generate a covering sieve. If $j_U^*M=j_V^*M=0$, a section $s\\in M(C)$ restricts to zero on both objects, since they map to $U$ and $V$. Every arrow in the covering sieve factors through one of them, so all restrictions of $s$ on that sieve are zero. Uniqueness in the sheaf condition gives $s=0$. Thus all section modules vanish and $M=0$. The same argument applied to the section $t_C(s)$ proves that a morphism $t:M\\to N$ whose two restrictions are zero is zero. This uses only the site axioms and the sheaf condition in [def-weil-sheaf-of-modules-category], not existence of points.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent cover/separatedness argument for the two covering subterminals"
+   }
+  },
+  {
+   "text": "For module maps $A\\xrightarrow{f}B\\xrightarrow{g}C$ whose restrictions are exact, the restrictions of $gf$ vanish, so Step 7 gives $gf=0$. Form $H=\\ker(g)/\\operatorname{im}(f)$ in the abelian category of module sheaves [def-weil-sheaf-of-modules-category]. By exactness of the two restriction functors from Step 1 and [lem-sp-exact-functor-preserves-homology], $j_Z^*H\\cong\\ker(j_Z^*g)/\\operatorname{im}(j_Z^*f)=0$ for $Z=U,V$. Step 7 gives $H=0$, which is exactly exactness at $B$. Conversely, the two exact functors preserve exactness by the same cited lemma. Applying this to each successive triple proves joint detection for sequences, including endpoint mono/epi conditions by inserting zero objects.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor); agent application to the cover"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to exact restriction: $H^q(j_Z^*K)\\cong j_Z^*H^q(K)$ naturally, for every integer $q$. Step 7 now gives joint detection of vanishing of each $H^q(K)$. For a chain map $a$, exact restriction preserves its cohomology kernels and cokernels by [lem-sp-exact-functor-preserves-homology]. If both restrictions of $a$ are quasi-isomorphisms, these kernels and cokernels restrict to zero; Step 7 makes them zero, so each $H^q(a)$ is an isomorphism and $a$ is a quasi-isomorphism. The converse follows from the cohomology comparison. Finally apply [lem-sf-exact-functor-derived-triangulated] to all exact restriction and extension functors of Step 1: their termwise actions descend to the ordinary unbounded derived categories as triangulated functors. The natural cohomology comparison descends through localization [def-weil-abstract-derived-category], so the same cohomological vanishing tests hold there, with no boundedness assumption.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), and homology.tex Tag 010N; termwise exact-functor calculus"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-module-sheafification-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ and 0F6Z; explicit intersection and cover arguments, using sites.tex Tag 04B8 and exact-functor calculus"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +185,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {K : CategoryTheory.GrothendieckTopology D} {A : Type u_4}\\n  [inst_2 : CategoryTheory.Category.{v_4, u_4} A] {G : CategoryTheory.Functor C D} [inst_3 : G.IsCoverDense K]\\n  \", \"doc\": \"For a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, and a natural transformation $ \\\\alpha : G^{\\\\text{op}} \\\\circ \\\\mathcal{F} \\\\R\"}\n  {\"name\": \"SheafOfModules.bijective_pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given a continuous and final functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves \"}",
    "date": "2026-10-21",
    "verdict": "No match. Read Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:59-87 (overFunctor and overFunctorMap) and Sites/MayerVietorisSquare.lean:231-265. These do not identify restriction of lower shriek across an intersection or jointly detect exactness for arbitrary module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|extensionByZero|extension_by_zero|jointly.*(exact|zero)",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. overFunctorMap gives only transitivity of restrictions (PushforwardContinuous.lean:83-87); the other hits are module-category structure or local generators, not the intersection exchange, canonical-map compatibilities and joint exactness tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves extension by zero along subterminal objects intersection restriction base change binary covering conservativity",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.Finite.hasFiniteLimits\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"CategoryTheory.Precoverage.ZeroHypercover.inter\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"TopCat.Presheaf.isSheaf_iff_isSheafPreservesLimitPairwiseIntersections\", \"SheafOfModules.over\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"ModuleCat.tildeInModuleCat\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. overFunctorMap gives only transitivity of restrictions (PushforwardContinuous.lean:83-87); the other hits are module-category structure or local generators, not the intersection exchange, canonical-map compatibilities and joint exactness tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor, SheafOfModules.overFunctorMap",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"top\": [\"SheafOfModules.overFunctorMap\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. overFunctorMap gives only transitivity of restrictions (PushforwardContinuous.lean:83-87); the other hits are module-category structure or local generators, not the intersection exchange, canonical-map compatibilities and joint exactness tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to covering subterminal slice sites and extension by zero for sheaves of modules satisfy intersection base change and jointly detect exactness",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"SheafOfModules.instAbelian\", \"SheafOfModules.IsFiniteType\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. overFunctorMap gives only transitivity of restrictions (PushforwardContinuous.lean:83-87); the other hits are module-category structure or local generators, not the intersection exchange, canonical-map compatibilities and joint exactness tests."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|extensionByZero|extension_by_zero|[Ss]ubterminal",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. overFunctorMap gives only transitivity of restrictions (PushforwardContinuous.lean:83-87); the other hits are module-category structure or local generators, not the intersection exchange, canonical-map compatibilities and joint exactness tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules localized at objects: extension by zero has invertible unit for subterminal objects and base change over their intersection",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.X\", \"ModuleCat.Tilde.isFractionPrelocal\", \"SheafOfModules.LocalGeneratorsData\", \"ModuleCat.Tilde.isLocallyFraction\", \"SheafOfModules.LocalGeneratorsData.generators\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. overFunctorMap gives only transitivity of restrictions (PushforwardContinuous.lean:83-87); the other hits are module-category structure or local generators, not the intersection exchange, canonical-map compatibilities and joint exactness tests."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-ringed-topos-binary-descent",
@@ -74,5 +247,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-subterminal-module-local-calculus",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing exact localized-module adjunction, normalized sheafification/restriction comparison and exact-functor homology/derived leaves. Wrote intersection, unit/counit and nested-open compatibilities on summand sections, and proved joint zero/morphism/exactness detection on the binary cover. No new nodes.",
+  "blueprint": "det-sp-tower-gluing, chart-gluing clause 1 and unit sk-prop-sp-tower-geometric step 5: the module-slice calculus supporting the open-cover cone and its canonical restrictions.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact localized ringed-site module adjunction supplies the two basic functors and their presheaf construction; the tower-gluing unit does not reprove this site-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheafification-restriction",
+    "why": "Generic normalized sheafification comparison for continuous cocontinuous restriction supplies comparison on original unit sections; the tower-gluing unit uses this site-theoretic tool without replacing its geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-module-sheafification-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-5d7e26b53",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-5d7e26b53 (reviewer sub-agent of L); spot-checked: First split of the Q106-created item, which is still unsplit in live and side-live, so the delivery is not superseded. One commit. The item's statement, stmt_deps and blueprint fields are byte-identical to live, there are no new nodes, proof_deps equals the union of uses, and no SGA is cited. I read every cited statement. lem-pur-site-restriction-module-adjunction-exact gives exact j^* and j_! and the Hom bijection for any object and comm ring sheaf. The special-case clause of def-weil-extension-by-zero-presheaf (at most one map to U) applies because Z and W are subterminal. lem-weil-pbc-module-sheafification-restriction needs continuous and cocontinuous functors between small sites; step 2 checks this for the slice forgetful functor, and it gives the unit-normalized comparison. The exact-functor H^q, homology and triangulated results are mathlib leaves. Step by step: (3) the restricted P_F equals F (module version of 0F6Z). (4) An arrow C→V is the same as the unique arrow C→W=U×V over U, so the presheaves agree before sheafification; the k_V^* value comes from relocalization. (5) The unit and counit are determined on summand generators; I checked j_U^*ε_V against the k_U counit. (6) Nested maps use uniqueness of left adjoints and relocalization. (7) The pulled-back cover {C×U,C×V} plus sheaf separation proves zero and zero-morphism detection, with no points used. (8) Homology detection. (9) H^q commutes with restriction, giving quasi-isomorphism detection and unbounded triangulated functors. Edge cases tested: U=V=1, U=1, disjoint U and V, objects locally but not globally over V (sheafification is taken before identification), zero ring. Sources checked: sites-modules 03DI, 03DJ (l.2160), 0F6Z (l.2338) and 04IY; sites 04B8; homology 010N; derived 015F; all tag→label pairs verified. No duplicate found: cbc open-localized-counit is scheme/pro-étale only, pbc site-extension-by-zero-exact is abelian only, and ringed-slice-extension-preserves-exact covers only exactness. The item's statement covers all three uses in the parent lem-sp-ringed-topos-binary-descent (steps 0, 2, 3). I accept the two declared tool_uses (site restriction adjunction, sheafification-restriction comparison) as generic tools that the unit sk-prop-sp-tower-geometric does not replace. No fixes written."
  }
 }
