@@ -28,92 +28,53 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(R_X)$ and $\\mathcal B=\\operatorname{Tow}(\\mathcal A)$. The sectionwise description of inverse limit gives an additive adjunction $\\Delta:\\mathcal A\\rightleftarrows\\mathcal B:\\lim$: a map $H\\to\\lim T$ is exactly a family $f_n:H\\to T_n$ with $t_nf_{n+1}=f_n$, and the inverse sends the family to its unique limit lift. The ordinary counit $e_T:\\Delta\\lim T\\to T$ is the family of limit projections. Exactness in $\\mathcal B$ is levelwise, so $\\Delta$ is exact: applying it to a short exact sequence repeats that same short exact sequence at every level. Consequently the termwise $\\Delta$ preserves cohomology and quasi-isomorphisms.",
+   "text": "Use the already constructed integralComparisonConstantAdjunction of def-trf-integral-comparison-realization-models. Its inverse Hom equivalence is exactly f mapped by the derived constant tower functor and then composed with integralComparisonTowerCounit. Hence this map is bijective on arbitrary derived variables. Functoriality and counit naturality give the displayed two-variable naturality equation. For every quasi-isomorphism j:T to I, counit naturality followed by the inverse of Q(j) transports integralComparisonTowerCounit_computes from I to T, proving the every-resolution formula.",
    "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "lem-weil-tower-category-levelwise-abelian"
+    "def-trf-integral-comparison-realization-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940, section-derived-limits: inverse limit and constant-system inverse image; ordinary adjunction by the limit universal property"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-termwise-adjunction-homotopy] to the additive adjunction of Step 1. It gives $\\Delta\\dashv\\lim$ on homotopy categories with the same termwise counit $e$. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], total $R\\lim$ is defined on all of $D(\\mathcal B)$ and its value at $T$ is represented by $\\lim J$ for the chosen $j:T\\to J$. Since $\\Delta$ already inverts quasi-isomorphisms, its left derived functor is $\\Delta$ itself: every map in the diagram defining $L\\Delta(H)$ is an isomorphism after localization, and the identity representative has value $\\Delta H$. Now use [lem-pc-pre-derived-adjoint-functors-general] with its $\\mathcal A=\\mathcal B$, $\\mathcal B=\\mathcal A$, $F=\\lim$, $G=\\Delta$, $K=T$, and $M=H$. This gives a canonical bijection $e_{H,T}:\\operatorname{Hom}(H,R\\lim T)\\simeq\\operatorname{Hom}(\\Delta H,T)$, functorial in both derived variables. Both categories are abelian, the site is small in the fixed module universe, and the cited tower theorem applies to the sheaf of commutative rings $R_X$; neither boundedness nor exactness of products is needed here.",
+   "text": "For any strict tower augmentation theta:Delta V to C and zero-shifted-coordinate lift z:V to Roos(C), choose a K-injective resolution j:C to I. The ordinary adjunction lifted to complexes gives a:V to lim I whose constant-tower composite with the ordinary counit is theta followed by j. Thus a followed by the nth limit projection is theta_n followed by j_n. The defining properties of integralComparisonLimitToRoos give its limit projections and zero shifted component. Factor a zero-shifted-coordinate map through the unshifted cone inclusion using the two-coordinate identity. The signed cocone map preserves that inclusion, so product extensionality and the projection equations prove z followed by Roos(j) equals a followed by integralComparisonLimitToRoos(I), as an equality of strict chain maps.",
    "uses": [
+    "def-pur-sheaf-inverse-limit",
     "lem-weil-pbc-termwise-adjunction-homotopy",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-trf-integral-comparison-realization-models",
+    "lem-weil-signed-mapping-cocone-shift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND and 0DVC, lemma-pre-derived-adjoint-functors-general and lemma-pre-derived-adjoint-functors; sites-cohomology Tag 0941 for the chosen derived-limit model"
-   }
+   "elementary": false
   },
   {
-   "text": "Determine this canonical bijection at $H=R\\lim T=[\\lim J]$. In the fraction formula of [lem-pc-pre-derived-adjoint-functors-general], take $s=j:T\\to J$, $t=\\mathrm{id}_{\\lim J}$, and $f=\\mathrm{id}_{\\lim J}$. The representing map $p_j:[\\lim J]\\to R\\lim T$ is the identity in the chosen model, and the left-derived comparison $u_t$ is the identity because $L\\Delta=\\Delta$. The ordinary transpose of $f$ is $e_J$. Thus $e_{R\\lim T,T}(\\mathrm{id})=[j]^{-1}[e_J]=\\epsilon_T$. Naturality in the first variable, applied to any derived morphism $h:H\\to R\\lim T$, gives $e_{H,T}(h)=\\epsilon_T\\circ\\Delta(h)$. This is exactly $\\Phi_{H,T}$. The cited canonical bijection is functorial in both localized variables for their representing cocones; changing $J$ changes only the chosen representative of $R\\lim T$, so the formula is independent of the resolution under the canonical derived-functor comparison. In particular this establishes naturality for arbitrary derived tower morphisms, not merely levelwise maps.",
+   "text": "Naturality of the given normalized Roos isomorphism rho and its computes field turn the preceding strict identity into Q(z) followed by rho_C inverse followed by Rlim(Q(j)) followed by rightDerivedFunctorObjQIso(I).hom equals Q(a). The normalization also makes Q(integralComparisonLimitToRoos(I)) invertible, since its composite with the right-derived comparison is rho_I. Use the K-injective counit formula, its naturality along Q(j), and naturality of mapDerivedCategoryFactors to identify the whole-tower adjunct of Q(z) followed by rho_C inverse with Q(theta), after the canonical exact-derived factor. Cancel Q(j). No equality is inferred by derived projections alone.",
    "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "def-trf-integral-comparison-realization-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0DVC via 0FND: canonical fraction formula and functoriality in both variables"
-   }
+   "elementary": true
   },
   {
-   "text": "For the integral comparison put $V=g^{-1}P$ and $C=C_{g,\\bullet}$. Definition [def-weil-inverse-image-pullback-comparison](b) supplies the actual $R_X$-linear chain maps $\\theta_m:V\\to C_m$, with $t_m\\theta_{m+1}=\\theta_m$, hence the strict map $\\theta^\\Delta:\\Delta V\\to C$. It also supplies that $g^{-1}(q)$ is a quasi-isomorphism and that the specified $\\kappa$ is $[\\widetilde\\theta]\\circ[g^{-1}(q)]^{-1}$, where $\\widetilde\\theta(z)=(0,(\\theta_m(z))_m)$. Countable products in $\\operatorname{Mod}(R_X)$ are exact by [lem-weil-proetale-countable-products-exact], including for the completed coefficient sheaf $R_X$. Thus all hypotheses of [lem-weil-strict-roos-comparison] hold and its normalized isomorphism $\\rho_C:\\mathsf C(C)\\to R\\lim C$ identifies this specified cone model with the total derived limit.",
+   "text": "Specialize to the actual pullback strict tower, thetaStrictTower and inverseImageRoosComparisonComplex. The mapping-cocone lift equations give its theta_n product coordinates and zero shifted coordinate. Unfold inverseImagePullbackComparison and integralComparisonPullbackLimitIso and cancel their mutually inverse representative isomorphisms; this proves the second displayed cone formula. Precompose the preceding whole-tower adjunct identity by the localized inverse-image resolution denominator and use functoriality of the constant tower functor. Finally, injectivity of its counit Hom map and cancellation of integralComparisonPullbackLimitIso prove the requested if and only if.",
    "uses": [
     "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison"
+    "def-trf-integral-comparison-realization-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; the specified comparison definition (b), normalized Roos comparison, and Bhatt-Scholze exact-product input"
-   }
-  },
-  {
-   "text": "Choose $j:C\\to J$ as in the normalized Roos comparison. The strict map $j\\theta^\\Delta:\\Delta V\\to J$ has an ordinary limit lift $a:V\\to\\lim J$, characterized by $e_J\\circ\\Delta a=j\\theta^\\Delta$. Write $i_J:\\lim J\\to\\mathsf C(J)$ for the inclusion with zero shifted-product component. On the two cone coordinates one has the equality of chain maps $\\mathsf C(j)\\widetilde\\theta=i_Ja$: both send $z$ to $(0,(j_m\\theta_m(z))_m)$. The normalization of [lem-weil-strict-roos-comparison] is $\\rho_C=[i_J]^{-1}[\\mathsf C(j)]$. Therefore $\\rho_C[\\widetilde\\theta]=[a]$. In the derived tower category this gives\n$$\\epsilon_C\\circ\\Delta(\\rho_C[\\widetilde\\theta])=[j]^{-1}[e_J]\\Delta[a]=[j]^{-1}[j\\theta^\\Delta]=[\\theta^\\Delta].$$\nThis computation is an equality of whole tower morphisms; it does not infer equality from separate projections in the derived category.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok: comparison via the inclusion of the ordinary inverse limit; normalized strict Roos refinement"
-   }
-  },
-  {
-   "text": "Conjugate the equality of Step 5 by the quasi-isomorphism $g^{-1}(q)$ supplied by [def-weil-inverse-image-pullback-comparison](b). Functoriality of $\\Delta$ gives\n$$\\epsilon_C\\circ\\Delta\\bigl(\\rho_C[\\widetilde\\theta]\\,[g^{-1}(q)]^{-1}\\bigr)=[\\theta^\\Delta]\\circ\\Delta[g^{-1}(q)]^{-1}.$$\nBy that definition the map inside $\\Delta$ is the specified $\\kappa^g_K$ after the prescribed Roos identification. The bijectivity already proved in Steps 2--3, with $H=g^{-1}K$ and $T=C$, says that exactly one morphism has this adjunct. This proves the asserted characterization and its zero shifted-product cone description. The argument applies in the ambient unbounded module derived category and hence to the stated bounded constructible $K$ without adding a hypothesis.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers: specified integral comparison underlying the composition identifications; agent expansion using the stated definition (b)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
   "def-pur-sheaf-inverse-limit",
-  "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison"
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-signed-mapping-cocone-shift",
+  "def-weil-inverse-image-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0FND and 0DVC, specialized to constant towers and inverse limit; explicit counit/Roos calculation following sites-cohomology Tag 0941 and the specified integral comparison definition (b)."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; derived.tex Tags 0FND/0DVC via the existing integralComparisonConstantAdjunction and integralComparisonTowerCounit_computes. Explicit zero-coordinate cocone calculation and localization by K4, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -255,10 +216,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison"
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -293,5 +251,15 @@
   "group": "Q116",
   "result": "pass",
   "note": "Lean matches the node clause by clause. Theorem 1: Φ bijective for all H and derived T, natural in arbitrary derived a,b, and the counit equals [j]^{-1}[Δlim J→J] for every K-injective j with injective terms, which gives resolution independence. Theorem 2: for all f, the whole-tower adjunct equation holds iff f = the recorded inverseImagePullbackComparison K P q, using the actual pullback tower, the strict θ family from inverseImageReductionTheta_compatible, and a ρ uniquely pinned by its computes field (existence via strictRoosComparison; same pattern already landed). The cone-lift clause is near-definitional and acceptable as the node's 'in particular'. The only stmt_deps change adds landed def-trf-integral-comparison-realization-models; its closure does not reach the item. lean.statement is verbatim; all 5 declarations have source/blueprint docstrings; only two sorry theorems; the common universe is inherited from sfIntegralConstructible; no existing duplicate found. Not recompiled per instruction; worker reports a clean compile. Advisory: unused proof-dep imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T203657-L-3851647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

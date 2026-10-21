@@ -8,10 +8,8 @@ module
 public import Sheaf.Paper.InverseImagePullbackComparisonDerived
 public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.SfIntegralConstructible
-public import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.Algebra.Homology.SignedMappingCoconeShift
 
 /-!
 # Whole-tower characterization of the specified integral comparison
@@ -94,7 +92,173 @@ theorem integralComparisonLimitCounitCharacterization (X : AlgebraicGeometry.Sch
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
           (constLimAdj (J := ℕᵒᵖ) (C := integralTowerModules l E X)).counit (.up ℤ)).app I) ≫
         inv (DerivedCategory.Q.map j)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro H T
+    exact ((integralComparisonConstantAdjunction l E X).homEquiv H T).symm.bijective
+  · intro H H' T T' a b f
+    simp only [Functor.map_comp, Category.assoc]
+    exact congrArg (fun z ↦ (integralComparisonConstantTower l E X).map a ≫
+      (integralComparisonConstantTower l E X).map f ≫ z)
+      ((integralComparisonTowerCounit l E X).naturality b)
+  · intro T I j _ _ _
+    have hn := (integralComparisonTowerCounit l E X).naturality (DerivedCategory.Q.map j)
+    change (integralComparisonConstantTower l E X).map
+      ((coefficientConstantTowerLimit l E X).map (DerivedCategory.Q.map j)) ≫
+      (integralComparisonTowerCounit l E X).app (DerivedCategory.Q.obj I) =
+      (integralComparisonTowerCounit l E X).app (DerivedCategory.Q.obj T) ≫
+        DerivedCategory.Q.map j at hn
+    have ht := congrArg (fun f ↦ f ≫ inv (DerivedCategory.Q.map j)) hn.symm
+    simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id] at ht
+    rw [ht, integralComparisonTowerCounit_computes]
+    simp only [Functor.map_comp, Category.assoc]
+
+private theorem zeroCoconeFactor
+    {A : Type*} [Category A] [Abelian A]
+    {B C P : CochainComplex A ℤ} (φ : B ⟶ C) (z : P ⟶ CochainComplex.mappingCocone φ)
+    (hz : ∀ k : ℤ, z.f k ≫
+      (CochainComplex.mappingCocone.snd φ).v k (k - 1) (by omega) = 0) (k : ℤ) :
+    z.f k = (z ≫ CochainComplex.mappingCocone.fst φ).f k ≫
+      (CochainComplex.mappingCocone.inl φ).v k k (add_zero k) := by
+  rw [← Category.comp_id (z.f k),
+    ← CochainComplex.mappingCocone.id_X φ k (k - 1) (by omega)]
+  simp only [Preadditive.comp_add, ← Category.assoc, hz k, zero_comp, add_zero,
+    HomologicalComplex.comp_f]
+
+private theorem zeroCoconeMap
+    {A : Type*} [Category A] [Abelian A]
+    {B C B' C' P : CochainComplex A ℤ} (φ : B ⟶ C) (ψ : B' ⟶ C')
+    (a : Arrow.mk φ ⟶ Arrow.mk ψ)
+    (z : P ⟶ CochainComplex.mappingCocone φ)
+    (z' : P ⟶ CochainComplex.mappingCocone ψ)
+    (hz : ∀ k : ℤ, z.f k ≫
+      (CochainComplex.mappingCocone.snd φ).v k (k - 1) (by omega) = 0)
+    (hz' : ∀ k : ℤ, z'.f k ≫
+      (CochainComplex.mappingCocone.snd ψ).v k (k - 1) (by omega) = 0)
+    (hf : z ≫ CochainComplex.mappingCocone.fst φ ≫ a.left =
+      z' ≫ CochainComplex.mappingCocone.fst ψ) :
+    z ≫ SignedCoconeShift.coconeMap φ ψ a = z' := by
+  ext k : 1
+  rw [HomologicalComplex.comp_f, zeroCoconeFactor φ z hz k, Category.assoc,
+    SignedCoconeShift.coconeMap_inl, ← Category.assoc]
+  have h := congrArg (fun f ↦ HomologicalComplex.Hom.f f k) hf
+  simp only [HomologicalComplex.comp_f] at h
+  simp only [HomologicalComplex.comp_f]
+  rw [Category.assoc (z.f k), h]
+  simpa only [HomologicalComplex.comp_f] using (zeroCoconeFactor ψ z' hz' k).symm
+
+private theorem normalizedRoosAdjunct (X : AlgebraicGeometry.Scheme.{t})
+    (ρ : IntegralComparisonRoosModel l E X)
+    (V : CochainComplex (integralTowerModules l E X) ℤ)
+    (C : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E X) ℤ)
+    (θ : ((Functor.const ℕᵒᵖ).mapHomologicalComplex (.up ℤ)).obj V ⟶ C)
+    (z : V ⟶ integralOperationsRoos C.asFunctor)
+    (hf : ∀ (n : ℕ) (k : ℤ),
+      (z ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C.asFunctor) ≫
+        Pi.π (fun m ↦ C.asFunctor.obj (op m)) n).f k = (θ.f k).app (op n))
+    (hz : ∀ k : ℤ, z.f k ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary C.asFunctor)).v
+        k (k - 1) (by omega) = 0) :
+    (integralComparisonConstantTower l E X).map
+        (DerivedCategory.Q.map z ≫ (ρ.comparison.app C).inv) ≫
+      (integralComparisonTowerCounit l E X).app (DerivedCategory.Q.obj C) =
+    (Functor.const ℕᵒᵖ : integralTowerModules l E X ⥤
+      ℕᵒᵖ ⥤ integralTowerModules l E X).mapDerivedCategoryFactors.hom.app V ≫
+      DerivedCategory.Q.map θ := by
+  let Δ : integralTowerModules l E X ⥤ ℕᵒᵖ ⥤ integralTowerModules l E X :=
+    Functor.const ℕᵒᵖ
+  obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective C
+  let a := ((constLimAdj (J := ℕᵒᵖ) (C := integralTowerModules l E X)).mapHomologicalComplex
+    (.up ℤ)).homEquiv V I (θ ≫ j)
+  have ha : (Δ.mapHomologicalComplex (.up ℤ)).map a ≫
+      (NatTrans.mapHomologicalComplex
+        (constLimAdj (J := ℕᵒᵖ) (C := integralTowerModules l E X)).counit (.up ℤ)).app I =
+      θ ≫ j := by
+    exact (((constLimAdj (J := ℕᵒᵖ) (C := integralTowerModules l E X)).mapHomologicalComplex
+      (.up ℤ)).homEquiv V I).symm_apply_apply (θ ≫ j)
+  have hap (n : ℕ) (k : ℤ) :
+      a.f k ≫ limit.π (I.X k) (op n) =
+        (θ.f k).app (op n) ≫ (j.f k).app (op n) := by
+    exact congrArg (fun f ↦ (f.f k).app (op n)) ha
+  let ι := integralComparisonLimitToRoos l E X I
+  have hι := (integralComparisonLimitToRoos_existsUnique l E X I).exists.choose_spec
+  change (∀ n, ι ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary I.asFunctor) ≫
+    Pi.π (fun m ↦ I.asFunctor.obj (op m)) n =
+      (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app I) ∧ _ at hι
+  have hc : z ≫ integralOperationsRoosFunctor.map
+        (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j) = a ≫ ι := by
+    apply zeroCoconeMap (scalarRoosBoundary C.asFunctor) (scalarRoosBoundary I.asFunctor)
+      (Arrow.homMk (Limits.Pi.map (fun n ↦
+        (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j).app (op n)))
+        (Limits.Pi.map (fun n ↦
+        (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j).app (op n)))
+        (integralOperationsRoos_square _).symm) z (a ≫ ι) hz
+    · intro k
+      rw [HomologicalComplex.comp_f, Category.assoc]
+      exact (congrArg (fun f ↦ a.f k ≫ f) (hι.2 k (k - 1) (by omega))).trans
+        comp_zero
+    · apply Pi.hom_ext
+      intro n
+      simp only [Arrow.homMk_left, Category.assoc]
+      erw [Limits.Pi.map_π]
+      rw [hι.1 n]
+      ext k : 1
+      have hfn := congrArg (fun f ↦ f ≫ (j.f k).app (op n)) (hf n k)
+      simp only [HomologicalComplex.comp_f, Category.assoc] at hfn
+      exact hfn.trans (hap n k).symm
+  have hn := ρ.comparison.hom.naturality j
+  dsimp only [Functor.comp_map] at hn
+  have hnorm := ρ.computes I
+  have : IsIso (DerivedCategory.Q.map ι) := by
+    apply (isIso_comp_left_iff
+      (Functor.rightDerivedFunctorObjQIso
+        (lim : (ℕᵒᵖ ⥤ integralTowerModules l E X) ⥤ integralTowerModules l E X) I).hom
+      (DerivedCategory.Q.map ι)).1
+    rw [← hnorm]
+    infer_instance
+  have hd : (DerivedCategory.Q.map z ≫ (ρ.comparison.app C).inv) ≫
+      (coefficientConstantTowerLimit l E X).map (DerivedCategory.Q.map j) ≫
+      (Functor.rightDerivedFunctorObjQIso
+        (lim : (ℕᵒᵖ ⥤ integralTowerModules l E X) ⥤ integralTowerModules l E X) I).hom =
+      DerivedCategory.Q.map a := by
+    apply (cancel_mono (DerivedCategory.Q.map ι)).1
+    simp only [Category.assoc]
+    erw [← hnorm, hn]
+    change DerivedCategory.Q.map z ≫ (ρ.comparison.app C).inv ≫
+      (ρ.comparison.app C).hom ≫ _ = _
+    rw [Iso.inv_hom_id_assoc, ← Functor.map_comp, hc, Functor.map_comp]
+  have hcoun := (integralComparisonTowerCounit l E X).naturality (DerivedCategory.Q.map j)
+  have hjiso : IsIso (DerivedCategory.Q.map j) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso (ℕᵒᵖ ⥤ integralTowerModules l E X) j).2 hj
+  have hwhole :
+      ((integralComparisonConstantTower l E X).map
+        (DerivedCategory.Q.map z ≫ (ρ.comparison.app C).inv) ≫
+        (integralComparisonTowerCounit l E X).app (DerivedCategory.Q.obj C)) ≫
+        DerivedCategory.Q.map j =
+      (Δ.mapDerivedCategoryFactors.hom.app V ≫ DerivedCategory.Q.map θ) ≫
+        DerivedCategory.Q.map j := by
+    simp only [Category.assoc]
+    erw [← hcoun, integralComparisonTowerCounit_computes]
+    dsimp only [Functor.comp_map]
+    simp only [Functor.map_comp, Category.assoc]
+    have hmap := congrArg (integralComparisonConstantTower l E X).map hd
+    have hmap' := congrArg (fun f ↦ f ≫
+      Δ.mapDerivedCategoryFactors.hom.app
+        (((lim : (ℕᵒᵖ ⥤ integralTowerModules l E X) ⥤
+          integralTowerModules l E X).mapHomologicalComplex (.up ℤ)).obj I) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (constLimAdj (J := ℕᵒᵖ) (C := integralTowerModules l E X)).counit (.up ℤ)).app I)) hmap
+    simp only [Functor.map_comp, Category.assoc] at hmap'
+    rw [hmap']
+    have hnat := Δ.mapDerivedCategoryFactors_hom_naturality a
+    have hnat' := congrArg (fun f ↦ f ≫ DerivedCategory.Q.map
+      ((NatTrans.mapHomologicalComplex
+        (constLimAdj (J := ℕᵒᵖ) (C := integralTowerModules l E X)).counit (.up ℤ)).app I)) hnat
+    simp only [Category.assoc] at hnat'
+    change Δ.mapDerivedCategory.map (DerivedCategory.Q.map a) ≫ _ = _
+    rw [hnat']
+    rw [← Functor.map_comp, ha, Functor.map_comp]
+  have heq := congrArg (fun f ↦ f ≫ inv (DerivedCategory.Q.map j)) hwhole
+  simpa only [Category.assoc, IsIso.hom_inv_id, Category.comp_id] using heq
 
 variable {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
@@ -191,6 +355,60 @@ theorem integralComparisonCounitCharacterization
           (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).map q)) ≫
         DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫
         (ρ.comparison.app (integralComparisonPullbackStrictTower l E h P.obj)).inv) := by
-  sorry
+  have hcomp : inverseImagePullbackComparison l E h hS hT K P q ≫
+      (integralComparisonPullbackLimitIso l E h ρ K P q).hom =
+      (inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app K ≫
+        inv (DerivedCategory.Q.map
+          (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).map q)) ≫
+        DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫
+        (ρ.comparison.app (integralComparisonPullbackStrictTower l E h P.obj)).inv := by
+    simp [inverseImagePullbackComparison, integralComparisonPullbackLimitIso,
+      Category.assoc]
+  have hr := normalizedRoosAdjunct l E S ρ
+    (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P.obj)
+    (integralComparisonPullbackStrictTower l E h P.obj)
+    (integralComparisonThetaStrictTower l E h P.obj)
+    (inverseImageRoosComparisonComplex l E h P.obj) ?_ ?_
+  · have hc :
+        (integralComparisonConstantTower l E S).map
+            (inverseImagePullbackComparison l E h hS hT K P q ≫
+              (integralComparisonPullbackLimitIso l E h ρ K P q).hom) ≫
+          (integralComparisonTowerCounit l E S).app
+            (DerivedCategory.Q.obj (integralComparisonPullbackStrictTower l E h P.obj)) =
+        (integralComparisonConstantTower l E S).map
+            ((inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app K ≫
+              inv (DerivedCategory.Q.map
+                (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).map q))) ≫
+          (Functor.const ℕᵒᵖ : integralTowerModules l E S ⥤
+            ℕᵒᵖ ⥤ integralTowerModules l E S).mapDerivedCategoryFactors.hom.app
+              (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P.obj) ≫
+          DerivedCategory.Q.map (integralComparisonThetaStrictTower l E h P.obj) := by
+      rw [hcomp]
+      simp only [Functor.map_comp, Category.assoc] at hr ⊢
+      rw [hr]
+    refine ⟨?_, hcomp⟩
+    intro f
+    constructor
+    · intro hf
+      apply (cancel_mono (integralComparisonPullbackLimitIso l E h ρ K P q).hom).1
+      apply ((integralComparisonLimitCounitCharacterization l E S).1 _ _).1
+      exact hf.trans hc.symm
+    · rintro rfl
+      exact hc
+  · intro n k
+    have hp := CochainComplex.mappingCocone.lift_fst _
+      (inverseImageReductionProduct l E h P.obj) 0
+      (inverseImageReductionProduct_lift_condition l E h P.obj)
+    have hn := congrArg (fun f ↦
+      (f ≫ Pi.π (fun n ↦ (integralOperationsPullbackLevel l E h n).obj P.obj) n).f k) hp
+    change (inverseImageRoosComparisonComplex l E h P.obj ≫
+      CochainComplex.mappingCocone.fst _ ≫ Pi.π _ n).f k = _ at hn
+    change _ = ((inverseImageReductionTheta l E h n P.obj).f k)
+    exact hn.trans (congrArg (fun f ↦ f.f k)
+      (Pi.lift_π (fun n ↦ inverseImageReductionTheta l E h n P.obj) n))
+  · intro k
+    exact CochainComplex.mappingCocone.lift_f_snd_v _
+      (inverseImageReductionProduct l E h P.obj) 0
+      (inverseImageReductionProduct_lift_condition l E h P.obj) k (k - 1) (by omega)
 
 end AlgebraicGeometry.ProEtale
