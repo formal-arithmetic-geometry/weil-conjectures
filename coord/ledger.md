@@ -20736,3 +20736,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:37 L: returned deliver/Q86/lem-sfb-ring-isomorphism-tensor-transport (reviewer RETURN: L: independent stage-2 immutable head 34ed7f399cbb: Statement correct in substance. Clauses checked: equivalence, invers)
 - 07:37 L: returned deliver/Q74/lem-sfb-scalar-presentation-cokernel (reviewer RETURN: L: independent stage-2 immutable head 3bf39c79b1f5: H13: item scalar_presentation_cokernel is correct vs node (local-mod)
 - 07:37 L: returned deliver/Q64/lem-pd-ringed-tensor-adjunction-mate (reviewer RETURN: L: independent stage-2 immutable head 413f37dfba29: H13/H4: the delivery rebinds two landed dependency lean records. (1))
+- 07:37 L: returned deliver/N7/lem-sfb-stratified-local-cohomological-bounds (reviewer RETURN: L: independent stage-2 immutable head 46b27b34205e: H2: the item's stmt_deps adds the theorem node lem-weil-pbc-noetheri)
