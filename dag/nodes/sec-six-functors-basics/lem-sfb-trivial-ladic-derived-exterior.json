@@ -12,7 +12,11 @@
   "def-sfb-condensed-action-module",
   "def-weil-abstract-derived-category",
   "def-sfb-continuous-map-condensed-ring",
-  "lem-sfb-condensed-derived-restriction-calculus"
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-sfb-ladic-lattice",
+  "def-sfb-condensed-derived-cup",
+  "def-sfb-condensed-unipotent-class"
  ],
  "proof": [
   {
@@ -207,5 +211,38 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ba9aae130 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full. The item statement and its stmt_deps are unchanged from the NP 23a527bb version. The blueprint source is main-20261015 direct-images.proof.md paragraph (3); it only delegates the analytic case, so the new nodes are honestly marked as agent-formulated (WANTED). No SGA source is used. Step checks: (1) P_{A,r} and K_{A,r}=𝓔_{A,r} are the same objects with the same differential and signs in both new nodes. (2) The internal extension of p and h by finite rational matrices is elementary and correct. (3) The analytic node is applied with exactly the item's F (E or Ω) and L. (4) derived-invariant-bar applies: L is profinite, N=A is commutative with trivial action, and it gives the isomorphism ε. (6) r=0 is trivially the identity. New nodes: rational-polynomial-bar-contraction is the Hochschild complex of G_a^r over Q. My own exact-arithmetic script checked d²=0, pd=0, d∘i=0 and pi=1 for r≤4, and computed H^q=binom(r,q) only in polynomial degree q for r≤3 and degrees ≤3, so the statement is true. polynomial-derived-bar-comparison is true for F=E (underline E is a colimit of O_E; condensed H^i of profinite S vanishes; Lazard comparison). For F=Ω it carries the inherited open core: compact subsets of Q̄_ℓ need not lie in a finite extension. It deliberately does not assert acyclicity of U^n, and it is not a restatement of the item, because the exterior algebra and cup content sit elsewhere. internal-bar-ordered-cup: z is a cocycle, and restriction-calculus normalizes [a] to the cocycle +a. Fault repaired: the cup node asserted exact equality j∘z=ε∘(⌣[a_k]), but no cited node fixes the shift convention A[-1]^{⊗q}≅A[-q], so the equality can fail by (−1)^{q(q−1)/2}. The fix states it up to a sign ε_q=±1 depending only on q, with ε_0=ε_1=1. Item step 5 is rewritten so that θ=χ∘σ with σ the diagonal sign automorphism, hence χ is an isomorphism; the item statement is not weakened. Duplicate search (rg -L over polynomial cochain, Lazard, Hochschild, Alexander–Whitney, bar, cup, exterior, continuous cochain, plus the sfb bar/cup/Koszul/lattice nodes) found no duplicate. Changed files: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-internal-bar-ordered-cup.json (statement only) and lem-sfb-trivial-ladic-derived-exterior.json (step 5 only). No tool_uses, no drop_nodes.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TrivialLadicDerivedExterior",
+  "declaration": "Profinite.TrivialLadicExterior.trivial_ladic_derived_exterior",
+  "declarations": [
+   "Profinite.TrivialLadicExterior.coordinateSection",
+   "Profinite.TrivialLadicExterior.coordinateSection_laws",
+   "Profinite.TrivialLadicExterior.coordinateCharacter",
+   "Profinite.TrivialLadicExterior.shiftedRegular",
+   "Profinite.TrivialLadicExterior.exteriorObject",
+   "Profinite.TrivialLadicExterior.splitShift",
+   "Profinite.TrivialLadicExterior.orderedCoordinateCup",
+   "Profinite.TrivialLadicExterior.subsetCup",
+   "Profinite.TrivialLadicExterior.exteriorMap",
+   "Profinite.TrivialLadicExterior.rankZeroSourceIso",
+   "Profinite.TrivialLadicExterior.trivial_ladic_derived_exterior",
+   "Profinite.TrivialLadicExterior.rankZeroNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/TrivialLadicDerivedExterior.lean",
+  "statement": "theorem trivial_ladic_derived_exterior (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (r : ℕ) : IsIso (exteriorMap ell E r) ∧ IsIso (exteriorMap ell Ω r)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Return L/H2 repaired: the lattice is owned by def-sfb-ladic-lattice and imported directly. PolynomialBar.Lattice remains a reducible alias under the authorized §1(B) repair. The polynomial theorem is retained solely as a non-public proof import; it is not a statement dependency. Cup and positive character definitions are cited directly. The statement and specified arrow are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08019a441",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 130eb8bf28ea, repaired as requested. New def node def-sfb-ladic-lattice (cites def-weil-l-adic-numbers) owns Sheaf.Topology.LadicLattice: Lattice = Multiplicative (ULift (Fin r → ℤ_[ell])) plus a transported TotallyDisconnectedSpace instance; real data, no collision in live Sheaf/WeilConjectures. §1(B) repair of PolynomialDerivedBarComparison is exactly 3 hunks vs live (import, PolynomialBar.Lattice abbrev alias, instance via owner); live module unchanged since base. Item stmt_deps replace the theorem with 4 def nodes (bundled scalar ring, ladic lattice, derived cup, unipotent class; advisory implemented); no base dep dropped; statement and proof unchanged; lean.statement verbatim. Item module changes only imports and open; all declarations byte-identical to the version whose mathematics was found faithful (E/Ω conjuncts, noncomplete Ω, all-continuous coefficients, biproduct.desc ordered-cup χ, IsIso in D(Mod A), unit-pinned r=0 clause, universes); re-checked. No compile (no file changed); worker reports clean compiles 3.5/8.4/49.3 s and a passing deliver2 --no-push. Advisory only: the polynomial module now uses the new node's declaration without citing it in stmt_deps (the requested alias)."
  }
 }

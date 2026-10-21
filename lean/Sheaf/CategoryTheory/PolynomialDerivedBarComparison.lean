@@ -5,6 +5,7 @@ Authors: SHEAF group NA
 -/
 module
 
+public import Sheaf.Topology.LadicLattice
 public import Sheaf.CategoryTheory.ContinuousScalarRing
 public import Sheaf.Topology.ContinuousMapCondensedRing
 public import Sheaf.CategoryTheory.CondensedActionModule
@@ -48,14 +49,14 @@ namespace Profinite.CondensedAction.PolynomialBar
 `Multiplicative` only changes the notation for its additive group law.
 Source: blueprint paragraph (3) (blueprint: lem-sfb-polynomial-derived-bar-comparison). -/
 abbrev Lattice (ell r : ℕ) [Fact ell.Prime] :=
-  Multiplicative (ULift.{u} (Fin r → ℤ_[ell]))
+  Profinite.LadicLattice.Lattice.{u} ell r
 
 /-- Transport total disconnectedness along the notation-only multiplicative tag.
 Source: the inverse-limit lattice topology in blueprint paragraph (3)
 (blueprint: lem-sfb-polynomial-derived-bar-comparison). -/
 instance latticeTotallyDisconnected (ell r : ℕ) [Fact ell.Prime] :
     TotallyDisconnectedSpace (Lattice.{u} ell r) :=
-  Homeomorph.ulift.symm.totallyDisconnectedSpace
+  Profinite.LadicLattice.latticeTotallyDisconnected ell r
 
 /-- Monomials in the nr variables, with finite nonnegative exponent vectors.
 Source: blueprint paragraph (3) (blueprint: lem-sfb-polynomial-derived-bar-comparison). -/

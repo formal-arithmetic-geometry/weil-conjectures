@@ -248,17 +248,17 @@
   "file": "lean/Sheaf/CategoryTheory/PolynomialDerivedBarComparison.lean",
   "statement": "theorem polynomial_derived_bar_comparison (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (r : ℕ) : Comparison ell E r ∧ Comparison ell Ω r",
   "branch": "sheaf-dag",
-  "by": "NA",
+  "by": "O3",
   "date": "2026-10-21",
   "existing": false,
-  "note": "All helpers belong to the polynomial complex and canonical comparison specified in this node. Complex.isColimit fixes the monomial coproducts; Evaluation.monomial and TotalComponents fix the actual evaluation-resolution arrow. The statement and stage-1 split are unchanged. Return L/H2 repaired: def-sfb-bundled-continuous-scalar-ring owns continuousScalarRing, bundling the already recorded continuous-map sheaf, MonObj and commutativity. It replaces the former added theorem dependency lem-sfb-prime-to-ell-condensed-acyclicity, whose module is no longer imported. The already landed def-sfb-condensed-equivariant-bar-data supplies the compatible bar model."
+  "note": "§1(B) repair required by return L/H2 at 130eb8bf28ea: the former standalone PolynomialBar.Lattice helper had no definition-node owner, forcing statement consumers to cite this theorem only for its lattice. The new def-sfb-ladic-lattice owns Profinite.LadicLattice.Lattice and its total-disconnectedness instance. This module keeps PolynomialBar.Lattice as a reducible alias and delegates its existing instance to that owner. Every polynomial complex, evaluation formula, comparison assertion and theorem signature is unchanged up to definitional equality; all non-lean node fields are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-4c2a54f3a",
-  "group": "NA",
+  "reviewer": "NT-stage2-cc-08019a441",
+  "group": "O3",
   "result": "pass",
-  "note": "Re-delivery after H2 RETURN at 642ade15. The theorem stmt_dep lem-sfb-prime-to-ell-condensed-acyclicity and its public import are gone. Their place is taken by the new def node def-sfb-bundled-continuous-scalar-ring (module ContinuousScalarRing; continuousScalarRing bundles only the recorded continuousMapRingObjOfUniverse, MonObj and isCommMonObj fields; not hollow, no sorry, same universes). The item module diff vs 642ade15 is only the import swap, two Mathlib imports and a scalarRing to continuousScalarRing rename. The statement is identical to the live node. The prior faithful reading holds (E/Omega conjuncts, noncomplete IsAlgClosure Omega, all-continuous ring, trivial ULift(Fin r -> Z_ell) lattice, monomial coproducts, faceVariable signs, pinned Evaluation, TotalComponents, IsIso in D(Mod A), r=0/n=0). Both lean statements are verbatim and the records are complete. stmt_deps = 7 base + landed def-sfb-condensed-equivariant-bar-data + the new def node. No compile run (no file changed); the worker reports a clean scompile and an OK dry run. Maintainer note: PrimeToEllCondensedAcyclicity.lean:39 keeps an rfl-equal unowned scalarRing; it could become an abbrev of continuousScalarRing. Advisory: the Nonempty Model conjunct restates the bar node."
+  "note": "Re-delivery after H2 RETURN at 130eb8bf28ea, repaired as requested. New def node def-sfb-ladic-lattice (cites def-weil-l-adic-numbers) owns Sheaf.Topology.LadicLattice: Lattice = Multiplicative (ULift (Fin r → ℤ_[ell])) plus a transported TotallyDisconnectedSpace instance; real data, no collision in live Sheaf/WeilConjectures. §1(B) repair of PolynomialDerivedBarComparison is exactly 3 hunks vs live (import, PolynomialBar.Lattice abbrev alias, instance via owner); live module unchanged since base. Item stmt_deps replace the theorem with 4 def nodes (bundled scalar ring, ladic lattice, derived cup, unipotent class; advisory implemented); no base dep dropped; statement and proof unchanged; lean.statement verbatim. Item module changes only imports and open; all declarations byte-identical to the version whose mathematics was found faithful (E/Ω conjuncts, noncomplete Ω, all-continuous coefficients, biproduct.desc ordered-cup χ, IsIso in D(Mod A), unit-pinned r=0 clause, universes); re-checked. No compile (no file changed); worker reports clean compiles 3.5/8.4/49.3 s and a passing deliver2 --no-push. Advisory only: the polynomial module now uses the new node's declaration without citing it in stmt_deps (the requested alias)."
  }
 }

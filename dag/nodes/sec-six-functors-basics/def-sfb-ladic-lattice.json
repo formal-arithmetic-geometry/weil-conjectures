@@ -1,0 +1,111 @@
+{
+ "id": "def-sfb-ladic-lattice",
+ "kind": "definition",
+ "title": "The finite-rank ell-adic lattice",
+ "status": "split",
+ "statement": "For a prime $\\ell$ and $r\\in\\mathbf N$, use the p-adic integers $\\mathbf Z_\\ell$ of [def-weil-l-adic-numbers], with their usual p-adic topology. Define the lattice $L_{\\ell,r}=\\prod_{i\\in\\{0,\\ldots,r-1\\}}(\\mathbf Z_\\ell,+)$ with coordinatewise addition and the product (equivalently inverse-limit) topology. For use as a group on the profinite site in universe $\\mathcal U$, lift this set into $\\mathcal U$ and write its additive group multiplicatively, so multiplication is coordinatewise addition. These wrappers change neither the topology nor the group law. The existing total disconnectedness of this finite product is transported along the universe lift. The case $r=0$ is the one-element group.",
+ "stmt_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice input: trivial-representation analytic base case, coordinate-cup derived exterior calculation. Exact all-continuous noncomplete-coefficient reference WANTED."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "abbrev.*Lattice|def.*Lattice|TotallyDisconnectedSpace.*PadicInt|PadicInt.*TotallyDisconnectedSpace",
+   "results": "{\"t\": \"2026-10-21T20:32:26Z\", \"tool\": \"grep\", \"query\": \"abbrev.*Lattice|def.*Lattice|TotallyDisconnectedSpace.*PadicInt|PadicInt.*TotallyDisconnectedSpace\", \"sub\": \"NumberTheory/Padics\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing PadicInt and general topology APIs, but no definition-node-owned finite-rank ell-adic lattice; reuse the existing lattice expression and replace the polynomial helper with an alias."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ell adic lattice Z ell power r with its product topology and additive group structure",
+   "results": "{\"t\": \"2026-10-21T20:32:26Z\", \"tool\": \"leansearch\", \"query\": \"The ell adic lattice Z ell power r with its product topology and additive group structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupTopology\", \"WithIdeal.instIsUniformAddGroup\", \"AddGroupTopology.instTop\", \"ProfiniteAddGrp.addGroup\", \"isAdic_iff\", \"Ideal.adicTopology\", \"AddGroupTopology.toTopologicalSpace\", \"WithIdeal.instTopologicalSpace\"], \"digest\": \"c323b8c87084ec8d\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing PadicInt and general topology APIs, but no definition-node-owned finite-rank ell-adic lattice; reuse the existing lattice expression and replace the polynomial helper with an alias."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite product of p adic integers is a compact totally disconnected topological additive group",
+   "results": "{\"t\": \"2026-10-21T20:32:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite product of p adic integers is a compact totally disconnected topological additive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.compactSpace\", \"Padic.instProperSpace\", \"PadicInt.completeSpace\", \"Padic\", \"PadicInt.totallyBounded_univ\", \"PadicInt\", \"Padic.instAddCommGroup\", \"PadicInt.complete\"], \"digest\": \"feda95cebdd3fe6a\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing PadicInt and general topology APIs, but no definition-node-owned finite-rank ell-adic lattice; reuse the existing lattice expression and replace the polynomial helper with an alias."
+  },
+  {
+   "tool": "grep",
+   "query": "rg abbrev Lattice|def Lattice|latticeTotallyDisconnected in lean/WeilConjectures, lean/Sheaf; definition statements mentioning p-adic integers in dag/nodes; blueprint_refs.py search lattice; blueprint_refs.py ancestor lem-sfb-trivial-ladic-derived-exterior",
+   "results": "Only PolynomialBar.Lattice has this exact product type; other Lattice declarations are unrelated. def-weil-l-adic-numbers owns PadicInt, not its finite product. No DAG node owns the lattice. Ancestor tool returns None, matching item blueprint.from.node. No proposed declaration-name collision in upstream or project.",
+   "date": "2026-10-21",
+   "verdict": "Extract the existing expression into its own owner; preserve the old helper as an alias."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trivial-ladic-derived-exterior",
+  "date": "2026-10-21",
+  "group": "O3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), dense-lattice input: trivial-representation analytic base case, coordinate-cup derived exterior calculation. Exact all-continuous noncomplete-coefficient reference WANTED.",
+   "via": [
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Topology.LadicLattice",
+  "declaration": "Profinite.LadicLattice.Lattice",
+  "declarations": [
+   "Profinite.LadicLattice.Lattice",
+   "Profinite.LadicLattice.latticeTotallyDisconnected"
+  ],
+  "file": "lean/Sheaf/Topology/LadicLattice.lean",
+  "statement": "abbrev Lattice (ell r : ℕ) [Fact ell.Prime]",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08019a441",
+  "group": "O3",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08019a441",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 130eb8bf28ea, repaired as requested. New def node def-sfb-ladic-lattice (cites def-weil-l-adic-numbers) owns Sheaf.Topology.LadicLattice: Lattice = Multiplicative (ULift (Fin r → ℤ_[ell])) plus a transported TotallyDisconnectedSpace instance; real data, no collision in live Sheaf/WeilConjectures. §1(B) repair of PolynomialDerivedBarComparison is exactly 3 hunks vs live (import, PolynomialBar.Lattice abbrev alias, instance via owner); live module unchanged since base. Item stmt_deps replace the theorem with 4 def nodes (bundled scalar ring, ladic lattice, derived cup, unipotent class; advisory implemented); no base dep dropped; statement and proof unchanged; lean.statement verbatim. Item module changes only imports and open; all declarations byte-identical to the version whose mathematics was found faithful (E/Ω conjuncts, noncomplete Ω, all-continuous coefficients, biproduct.desc ordered-cup χ, IsIso in D(Mod A), unit-pinned r=0 clause, universes); re-checked. No compile (no file changed); worker reports clean compiles 3.5/8.4/49.3 s and a passing deliver2 --no-push. Advisory only: the polynomial module now uses the new node's declaration without citing it in stmt_deps (the requested alias)."
+ }
+}
