@@ -396,11 +396,7 @@ theorem constant_additive (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Constant module realization preserves finite limits and finite colimits.
-Source: Stacks Tag 093J (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
-Proof: constant module presheaves preserve these limits and colimits sectionwise;
-compose with exact module sheafification. -/
-theorem constant_exact (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
+private theorem constant_exact (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     PreservesFiniteLimits (adicLisseConstantModules T A) ∧
       PreservesFiniteColimits (adicLisseConstantModules T A) := by
   let P : ModuleCat.{u + 1} A ⥤

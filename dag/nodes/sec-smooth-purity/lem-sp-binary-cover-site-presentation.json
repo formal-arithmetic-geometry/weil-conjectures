@@ -1,294 +1,345 @@
 {
- "id": "lem-sp-binary-cover-site-presentation",
- "kind": "statement",
- "title": "A simultaneous subterminal site presentation and its module equivalences",
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-tower-geometric",
- "statement": "Let $\\mathcal T=\\operatorname{Sh}(\\mathcal S)$ be a Grothendieck topos presented on a small site $\\mathcal S$ [def-weil-pbc-topos], let $R$ be a commutative ring object, and let $U,V\\hookrightarrow1$ be subterminal objects with $U\\cup V=1$; put $W=U\\times V$. There is a full subcategory $\\mathcal E\\subset\\mathcal T$ with a set of objects, closed under finite limits and containing the sheafified representables of $\\mathcal S$ and $1,U,V,W$, with a small subcanonical site structure whose covers are the jointly epimorphic families (up to choice of a set of representatives). In particular $\\{C\\times U,C\\times V\\}\\to C$ is a cover for every $C\\in\\mathcal E$. The nerve $N(F)(C)=\\operatorname{Hom}_{\\mathcal T}(C,F)$ is an equivalence $\\mathcal T\\simeq\\operatorname{Sh}(\\mathcal E)$ carrying every object of $\\mathcal E$ to its represented sheaf. For $Z=1,U,V,W$ it identifies $\\mathcal T/Z$ with $\\operatorname{Sh}(\\mathcal E/Z)$ for the localized topology [def-pur-localized-ringed-site], and carries the restricted ring $R_Z$ to $N(R)|_Z$. These equivalences induce additive exact equivalences of the categories of module sheaves over these rings [def-weil-sheaf-of-modules-category] and triangulated equivalences of their ordinary derived categories [def-weil-abstract-derived-category]. They commute with restriction and its composition comparisons; hence their identifications of left and right adjoints preserve the adjunction units, counits, and nested-localization adjunction mates.",
- "source": {
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 03A1 (lemma-special-equivalence); finite-limit closure with prescribed subterminals and transport of internal rings, modules and localized slices are the agent extension of this comparison lemma."
- },
- "stmt_deps": [
-  "def-weil-pbc-topos",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "def-pur-localized-ringed-site"
- ],
- "proof": [
-  {
-   "text": "Use the proved generators helper of ToposCompatibleGenerators: take the union of the original sheafified representables with 1,U,V,U×V and close under terminal objects and pullbacks using ObjectProperty.limitsClosure. Pass to its small model. This gives a single full faithful finite-limit-preserving inclusion F and chosen representatives for the four objects. The helper works directly in Sh(J), for an arbitrary Grothendieck topology J, so no replacement covering site is required.",
-   "uses": [
-    "lem-weil-pbc-topos-compatible-generators"
-   ],
-   "elementary": false,
-   "source": {
+  "id": "lem-sp-binary-cover-site-presentation",
+  "kind": "statement",
+  "title": "A simultaneous subterminal site presentation and its module equivalences",
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sp-tower-geometric",
+  "statement": "Let $\\mathcal T=\\operatorname{Sh}(\\mathcal S)$ be a Grothendieck topos presented on a small site $\\mathcal S$ [def-weil-pbc-topos], let $R$ be a commutative ring object, and let $U,V\\hookrightarrow1$ be subterminal objects with $U\\cup V=1$; put $W=U\\times V$. There is a full subcategory $\\mathcal E\\subset\\mathcal T$ with a set of objects, closed under finite limits and containing the sheafified representables of $\\mathcal S$ and $1,U,V,W$, with a small subcanonical site structure whose covers are the jointly epimorphic families (up to choice of a set of representatives). In particular $\\{C\\times U,C\\times V\\}\\to C$ is a cover for every $C\\in\\mathcal E$. The nerve $N(F)(C)=\\operatorname{Hom}_{\\mathcal T}(C,F)$ is an equivalence $\\mathcal T\\simeq\\operatorname{Sh}(\\mathcal E)$ carrying every object of $\\mathcal E$ to its represented sheaf. For $Z=1,U,V,W$ it identifies $\\mathcal T/Z$ with $\\operatorname{Sh}(\\mathcal E/Z)$ for the localized topology [def-pur-localized-ringed-site], and carries the restricted ring $R_Z$ to $N(R)|_Z$. These equivalences induce additive exact equivalences of the categories of module sheaves over these rings [def-weil-sheaf-of-modules-category] and triangulated equivalences of their ordinary derived categories [def-weil-abstract-derived-category]. They commute with restriction and its composition comparisons; hence their identifications of left and right adjoints preserve the adjunction units, counits, and nested-localization adjunction mates.",
+  "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
-   }
+    "place": "Tag 03A1 (lemma-special-equivalence); finite-limit closure with prescribed subterminals and transport of internal rings, modules and localized slices are the agent extension of this comparison lemma."
   },
-  {
-   "text": "Use the proved arbitrary-topology helpers in SheafSubcategoryComparison with pullbacks preserved by F. Set the precoverage to the epimorphic precoverage; it is a site and subcanonical, its nerve is an equivalence, and representables are represented by full faithfulness. At any original section, the covering sieve in the hypothesis locally supplies a U or V section. Product preservation lifts this section to F(X×U) or F(X×V); the two candidate maps agree there. Separatedness makes them equal on the original section, proving the binary families epimorphic. Apply exists_small_coveringFamilies to the entire epimorphic covering class to choose a small representative class with equal supports. Membership in that class implies a cover, and every cover has a representative with the same support.",
-   "uses": [
-    "lem-weil-pbc-sheaf-subcategory-comparison",
-    "lem-weil-pbc-small-set-of-covering-families"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
-   }
-  },
-  {
-   "text": "For every X in E, transport the over category along the nerve and the canonical represented-object isomorphism. Compose with the fibre quasi-inverse of localizedSheavesOverRepresentable. A fibre section corresponds to a map F(T)→B with composite equal to F(T→X); full faithfulness converts the fibre condition into this equality. The inverse sends an over-category morphism to its section under the nerve isomorphism. Their inverse laws and both naturality equations follow from those of the nerve. This proves exactly the displayed sliceFormula.",
-   "uses": [
-    "lem-weil-pbc-localized-sheaves-over-representable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
-   }
-  },
-  {
-   "text": "Transport R along the nerve using ringedTopos_equivalenceRingTransport. Its orientation has inverse N.inverse, so invert the ring data with RingData.square, using the identity ring data and N.unitIso. Full faithfulness reflects invertibility of the lifted structural map. Construct its induced module direct image with ringData_inducedModules. The presentationAt helper of RingedPresentationTransport gives the whole module transport. Obtain source slice data from ringed_sheaf_slice_adjunction and element-map continuity from element_site_descent.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-pbc-topos",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-pur-localized-ringed-site"
+  ],
+  "proof": [
+    {
+      "text": "Work in the coefficient universe of the given small-site presentation. The original site need not have pullbacks. Apply [lem-trf-sieve-sheaves-covering-site] to choose a covering-family site $\\mathcal A$ and an equivalence $H:\\mathcal T\\simeq\\operatorname{Sh}(\\mathcal A)$, with inverse $K$. If the original site already has this form, use the identity. Sheafified representables of the original site exist by [lem-trf-sieve-set-sheafification-exists]. In $\\mathcal T$ start with the set consisting of those objects, $1,U,V,W$, and the objects $K(h_a^\\#)$ for $a\\in\\mathcal A$. Including this last set will let us apply the covering-site comparison without imposing extra assumptions on the original site.",
+      "uses": [
+        "lem-trf-sieve-sheaves-covering-site",
+        "lem-trf-sieve-set-sheafification-exists"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tags 00ZM (proposition-sheafification-adjoint-topology), 03CI (lemma-topos-good-site); covering-site replacement is the cited agent generalization."
+      }
+    },
+    {
+      "text": "Let $E_0$ be the preceding set. Given $E_n$, adjoin a chosen terminal object and one chosen pullback for every cospan between its objects to obtain $E_{n+1}$; retain $E_n$. These limits exist: sheaf limits on $\\mathcal A$ are computed sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], and their universal properties transport through $H,K$. Each stage is a set because the previous object set and all its Hom sets are sets. Put $E=\\bigcup_{n\\geq0}E_n$ and take the full subcategory $\\mathcal E$ on it. A cospan uses finitely many objects, all in some common stage, so its chosen pullback lies in the next stage. Thus $\\mathcal E$ has a terminal object and pullbacks computed in $\\mathcal T$, hence all finite limits (products are pullbacks over $1$ and equalizers are pullbacks of diagonals). The inclusion, and therefore $F=H|_{\\mathcal E}$, preserve these limits. This constructs the required single closure, rather than making unrelated choices of sites for $U,V,W$.",
+      "uses": [
+        "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 03CI (lemma-topos-good-site), inductive closure construction, with only terminal objects and pullbacks needed here."
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-site-of-sheaf-generators] to the small covering site $\\mathcal A$ and the fully faithful finite-limit-preserving $F:\\mathcal E\\to\\operatorname{Sh}(\\mathcal A)$. Its generator hypothesis holds because $K(h_a^\\#)\\in E_0$ and $HK(h_a^\\#)\\cong h_a^\\#$. We obtain the epimorphic covering precoverage on $\\mathcal E$ and a sheaf equivalence with underlying nerve $X\\mapsto(C\\mapsto\\operatorname{Hom}(H C,X))$. Compose with $H$ and use its fully faithful Hom bijections: the resulting functor is naturally $N(B)(C)=\\operatorname{Hom}_{\\mathcal T}(C,B)$. Replace the equivalence functor along this natural isomorphism to use exactly $N$. Since $\\mathcal E$ is full, $N(C)=h_C$ for $C\\in\\mathcal E$; thus every represented presheaf is a sheaf and the topology is subcanonical. Joint epimorphy is unchanged by $H$ (its Hom bijections preserve and reflect right cancellation), so the covers are exactly the jointly epimorphic families in $\\mathcal T$.",
+      "uses": [
+        "lem-weil-pbc-site-of-sheaf-generators"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 03A1 (lemma-special-equivalence), clauses (1)-(5); use the existing fully faithful generator formulation."
+      }
+    },
+    {
+      "text": "We check the binary families are jointly epimorphic. For subterminal sheaves, their join is the local closure of their pointwise union: a section belongs to it if its restrictions locally belong to one of the two subsheaves. This description is a sheaf by the transitivity axiom for coverings and gluing; it is the least subsheaf containing both because any such subsheaf contains these local gluings. Consequently $U\\cup V=1$ means that locally on the original site the unique terminal section lifts to $U$ or $V$. If $a,b:C\\to B$ agree after both projections $C\\times U\\to C$ and $C\\times V\\to C$, restrict any section of $C$ to such a cover. There it lifts to one of the two products and its images under $a,b$ agree. The separatedness axiom then gives $a=b$. Hence each binary family covers for the precoverage just constructed; both product objects belong to $\\mathcal E$.",
+      "uses": [
+        "def-weil-pbc-topos"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 03A1 (lemma-special-equivalence), epimorphic-family topology; direct verification using the sheaf and topology axioms."
+      }
+    },
+    {
+      "text": "Select covering-family representatives using [lem-weil-pbc-small-set-of-covering-families], with the prescribed set $\\operatorname{Cov}_0$ consisting of all these binary covers, indexed by the set $E$. The covering-class axioms hold by the precoverage of step 3; its pullbacks exist by step 2. Thus the representatives can retain every displayed binary family while preserving the site axioms, and every jointly epimorphic family is combinatorially equivalent to a chosen covering. The generated topology, its sheaves, and $N$ do not change.",
+      "uses": [
+        "lem-weil-pbc-small-set-of-covering-families"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sets.tex",
+        "place": "Tag 000X (lemma-coverings-site), retaining a prescribed set of coverings."
+      }
+    },
+    {
+      "text": "For each $Z=1,U,V,W$, apply [lem-weil-pbc-localized-sheaves-over-representable] to the subcanonical site $\\mathcal E$ and its object $Z$. Compose the equivalence $\\mathcal T/Z\\simeq\\operatorname{Sh}(\\mathcal E)/h_Z$ induced by $N$ with its fibre equivalence to $\\operatorname{Sh}(\\mathcal E/Z)$; here $h_Z=h_Z^\\#$ by subcanonicity. Explicitly it sends $p:B\\to Z$ to\n$$N_Z(B,p)(C\\xrightarrow c Z)=\\{b:C\\to B\\mid p b=c\\}=\\operatorname{Hom}_{\\mathcal T/Z}((C,c),(B,p)).$$\nRestriction along arrows of $\\mathcal E/Z$ is precomposition. This is the localized topology in [def-pur-localized-ringed-site], and makes the choice of each slice comparison explicit.",
+      "uses": [
+        "lem-weil-pbc-localized-sheaves-over-representable",
+        "def-pur-localized-ringed-site"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 00Y1 (lemma-essential-image-j-shriek), fibre quasi-inverse; Tag 04GZ (lemma-localize-topos)."
+      }
+    },
+    {
+      "text": "For an arrow $t:Z'\\to Z$ among these objects and $(B\\xrightarrow p Z)$, the comparison with slice restriction is the bijection\n$$\\operatorname{Hom}_{\\mathcal T/Z'}((C,c'),(B\\times_Z Z',\\operatorname{pr}_2))\\longrightarrow\\{b:C\\to B\\mid p b=t c'\\},\\qquad(b,c')\\longmapsto b.$$\nIts inverse is $b\\mapsto(b,c')$. For $Z\\to1$ this says $N_Z(B\\times Z\\to Z)=N(B)|_Z$. For $Z''\\xrightarrow s Z'\\xrightarrow t Z$ both iterated and direct comparisons send a lift to its $B$ component. They therefore agree under the canonical pullback associator, and are identity comparisons for identity arrows. This proves compatibility with composition, including both $W\\to U\\to1$ and $W\\to V\\to1$. Applied to $R$, the same formula sends addition, multiplication, zero and one to those on the $R$ component, hence sends $R_Z=R\\times Z\\to Z$ to $N(R)|_Z$.",
+      "uses": [
+        "def-pur-localized-ringed-site"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tags 00Y1 and 04GZ, product/fibre calculation; relocalization comparison is Tag 03EH (lemma-relocalize)."
+      }
+    },
+    {
+      "text": "View the internal commutative ring $R$ as its section-ring sheaf using [lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction]. Apply [lem-weil-pbc-ringed-topos-equivalence-ring-transport] to the equivalence whose direct functor is $N$. It gives the transported sheaf of rings with underlying sheaf $N(R)$ and invertible structural map $N^{-1}N(R)\\to R$. The operations are exactly those obtained by applying $N$ to the ring operations and its product comparisons. In the Hom description they are the pointwise operations on maps to $R$. Apply the same construction to each explicit $N_Z$; by step 7 its coefficient sheaf is precisely $N(R)|_Z$. Thus we have ringed-topos equivalences, with invertible structural maps, on the whole topos and all four slices.",
+      "uses": [
+        "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
+        "lem-weil-pbc-ringed-topos-equivalence-ring-transport"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03CR (lemma-morphism-ringed-topoi-comes-from-morphism-ringed-sites), carry along the rings; sites.tex Proposition 00YV, ring objects as sextuples."
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-ringed-presentation-transport] to these ringed equivalences, whose sites are small relative to the module universe and whose structural maps have just been shown invertible. It gives additive exact equivalences between the module-sheaf categories, both on the whole topos and the slices, and their termwise induced equivalences of ordinary unbounded derived categories. It also supplies commutation with further restrictions. For the slice-side module category, the concrete identification uses [lem-weil-pbc-ringed-sheaf-slice-adjunction]: the restricted ring on the element site is $(A,z)\\mapsto R(A)$ and restricted modules have $(j_Z^*M)(A,z)=M(A)$. This identifies internal slice modules with the module sheaves to which the transport lemma applies.",
+      "uses": [
+        "lem-weil-pbc-ringed-presentation-transport",
+        "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 03CR, 03D7 (lemma-adjoint-pullback-pushforward-modules), 04IE and 04J4; the exact and derived equivalence refinement is the cited existing transport statement."
+      }
+    },
+    {
+      "text": "The restriction comparisons of these module equivalences are the ones of step 7: on an internal module the underlying lift $(m,c')$ is sent to $m$, preserving sums and the scalar action because both are computed on this component. Thus the module squares satisfy the same identity and composition equations. They hold degreewise on complexes and hence after localization. The derived equivalences are triangulated: an additive equivalence preserves biproducts, negatives, and the cone matrix $\\begin{pmatrix}d_L&f\\\\0&-d_K\\end{pmatrix}$, as well as the shift differential $-d_K$; it therefore sends each cone triangle to the corresponding cone triangle. The characterization of distinguished triangles in [def-weil-abstract-derived-category] gives the assertion in both directions, including unbounded complexes.",
+      "uses": [
+        "def-weil-abstract-derived-category",
+        "def-pur-localized-ringed-site"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Definition 05RU (definition-derived-category), with the cone-triangle triangulation; sites-modules.tex Definition 04IX, sectionwise restriction."
+      }
+    },
+    {
+      "text": "Choose the identifications of the restriction adjoints as their adjunction-compatible conjugates under the equivalences. A right-adjoint identification is uniquely counit-compatible by [det-sp-unique-right-adjoint]; the left-adjoint identification is uniquely unit-compatible by [lem-weil-pbc-conjugate-iso-unit-equation]. The other adjunction transformation then agrees as well: its transpose is the identity, so injectivity of the adjunction Hom bijection determines it. Thus both units and counits are preserved. Finally use the explicit mate formula in [def-weil-pbc-adjunction-mate]: the mate of $\\alpha:L_2G\\to HL_1$ is $(R_2H\\varepsilon_1)\\circ(R_2\\alpha R_1)\\circ(\\eta_2GR_1)$. Under the comparison isomorphisms each of its three factors is the corresponding transported factor. Their composite is therefore the transported mate. Applying this to the composition comparisons verified in steps 7 and 10 proves preservation of the nested-localization mates; no inference from mere isomorphism of endpoints is used.",
+      "uses": [
+        "det-sp-unique-right-adjoint",
+        "lem-weil-pbc-conjugate-iso-unit-equation",
+        "def-weil-pbc-adjunction-mate"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/categories.tex",
+        "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); the mate formula is that recorded in def-weil-pbc-adjunction-mate (sites-cohomology.tex Remark 07A7)."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-trf-sieve-sheaves-covering-site",
+    "lem-trf-sieve-set-sheafification-exists",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-site-of-sheaf-generators",
+    "def-weil-pbc-topos",
+    "lem-weil-pbc-small-set-of-covering-families",
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
     "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
-    "lem-weil-pbc-ringed-topos-ring-square",
-    "lem-weil-pbc-ringed-topos-induced-modules",
     "lem-weil-pbc-ringed-presentation-transport",
     "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "lem-weil-pbc-element-site-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
-   }
-  },
-  {
-   "text": "Apply the separate normalized ringed-nerve slice transport result to these already constructed nerves and the whole module transport. Restrict its family indexed by all objects of E to the four chosen objects. This supplies the actual localized rings, ringed slice inverse images and all normalized module comparisons. The original site and cover constructions have already been proved, so this is only the remaining coefficient/module part of the argument.",
-   "uses": [
-    "lem-sp-ringed-nerve-slice-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
-   }
-  },
-  {
-   "text": "Convert each RingedPresentationAt to BinaryPresentationModules. Exactness and additivity are its recorded forward/backward properties; the ordinary derived equivalence is the actual mapDerivedCategory equivalence, so both functor equalities are reflexive. For any comparison square between equivalences, the mate is invertible: the left-mate assertion is the proved equivalentMate_isIso helper; for the right mate, the hom map induced by its component is a composite of the equivalence hom bijections, the two adjunction bijections and the comparison hom isomorphism. The mate-counit equation identifies this composite, so Yoneda proves componentwise invertibility. Thus binaryAdjointSquare fills both actual mate fields without additional hypotheses. All normalized equalities are those of the supplied module comparisons.",
-   "uses": [
     "def-weil-abstract-derived-category",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
     "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-topos-compatible-generators",
-  "lem-weil-pbc-sheaf-subcategory-comparison",
-  "lem-weil-pbc-small-set-of-covering-families",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
-  "lem-weil-pbc-ringed-topos-ring-square",
-  "lem-weil-pbc-ringed-topos-induced-modules",
-  "lem-weil-pbc-ringed-presentation-transport",
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-  "lem-weil-pbc-element-site-descent",
-  "lem-sp-ringed-nerve-slice-transport",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-adjunction-mate"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "A3: direct finite-limit generator closure and arbitrary-sieve-topology nerve comparison; explicit slice-Hom formula and right-mate hom-bijection proof; normalized module lift separated as lem-sp-ringed-nerve-slice-transport."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Present a Grothendieck topos and a finite family of subterminal objects by a small finite limit closed subcanonical site, with equivalences on ring module sheaves and slice categories",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Subcanonical\", \"module\": \"Mathlib/CategoryTheory/Sites/Canonical\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A Grothendieck topology on a category $\\\\mathcal{C}$ is subcanonical if every representable presheaf on $\\\\mathcal{C}$ is a sheaf with respect to the topology\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {FA : A → A → Type u_1} {CA : A → Type u_2}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteC\", \"doc\": \"For any essentially small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the induced Grothendieck topology on the small model of $\\\\mathcal{C}$ satisfies the locally bijective condition with \"}",
-   "date": "2026-10-21",
-   "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Small site presentation of a ringed topos with represented subterminals and exact equivalence of module sheaves on slice sites",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.noConfusionType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"Sort u_1 →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      {J : CategoryTheory.GrothendieckTopology C} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          SheafOfModules R →\\n            {C' : Type u₁} →\\n              [inst' : CategoryTheory.Category.{v₁, u₁} C'] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $R$, where each module satisfies the sheaf c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J RingCat → Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $F$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $F$, where each module satisfies the sheaf c\"}\n  {\"name\": \"SheafOfModules.mk.inj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {val : PresheafOfModules R.val}\\n  {isSheaf : CategoryTheory.Presheaf.IsSheaf J val.presheaf} {val_1 : PresheafOfModules R.val}\\n  {isSheaf_1 : CategoryTheory.\", \"doc\": \"If two sheaves of modules over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$ have equal underlying presheaves and equal verification of the sheaf condition, the\"}\n  {\"name\": \"SheafOfModules.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        (val : PresheafOfModules R.val) → CategoryTheory.Presheaf.IsSheaf J val.presheaf → SheafOfModules R\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, if a presheaf of modules over the underlying presheaf of $R$ satisfies the sheaf condition wi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}",
-   "date": "2026-10-21",
-   "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Equivalence",
-   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.sheafBotEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] : CategoryTheory.Sheaf ⊥ A ≌ CategoryTheory.Functor Cᵒᵖ A\", \"doc\": \"The category of sheaves on the bottom (trivial) Grothendieck topology is\\nequivalent to the category of presheaves.\"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) (A : Type u_3) [CategoryTheory.Category.{v_3, u_3} A] [CategoryTheory.\", \"doc\": \"If `G : C ⥤ D` exhibits `(C, J)` as a dense subsite of `(D, K)`, and the\\npushforward functor `Sheaf K A ⥤ Sheaf J A` is an equivalence, then this\\nis the equivalence `Sheaf K A ≌ Sheaf J A`.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (K : CategoryTheory.GrothendieckTopology D) (A : Type v) [CategoryTheory.Category.{u, v} A] [G.LocallyCoverDense K] [G.IsLocallyFull K] [G.IsLocallyFaithful K\", \"doc\": \"Cover-dense functors induce an equivalence of categories of sheaves.\\n\\nThis is known as the comparison lemma. It requires that the sites are small and the value category\\nis complete.\"}\n  {\"name\": \"CategoryTheory.Equivalence.instIsDenseSubsiteInducedTopologyInverseFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : CategoryTheory.Functor.IsDenseSubsite J (e.inverse.inducedTopology J) e.functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.instIsDenseSubsiteFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [CategoryTheory.Functor.IsDenseSubsite K J e.inverse] : CategoryTheory.Functor.IsDenseSubsite J K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.hasSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"Transport `HasSheafify` along an equivalence of sites.\"}\n  {\"name\": \"CategoryTheory.Equivalence.eq_inducedTopology_of_isDenseSubsite\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [CategoryTheory.Functor.IsDenseSubsite K J e.inverse] : K = e.inverse.inducedTopology J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [e.functor.IsCocontinuous J K] [e.inverse.IsCocontinuous K J] : CategoryTheory.Functor.IsDenseSub\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isDenseSubsite_inverse_of_isCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [e.functor.IsCocontinuous J K] [e.inverse.IsCocontinuous K J] : CategoryTheory.Functor.IsDenseSub\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.hasSheafCompose\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [CategoryTheory.Functor.IsDenseSubsite K J e.inverse] {A : Type u_1} [CategoryTheory.Category.{v_\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.transportAndSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"Transport a presheaf to the equivalent category and sheafify there.\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"The equivalence of sheaf categories.\"}",
-   "date": "2026-10-21",
-   "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
-  },
-  {
-   "tool": "grep",
-   "query": "subcanonical|sheaf.*[Ee]quiv|[Ee]quiv.*sheaf",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"54\", \"text\": \"noncomputable def skyscraperPresheafHomEquiv :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"72\", \"text\": \"lemma toPresheafFiber_skyscraperPresheafHomEquiv_symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"74\", \"text\": \"    Φ.toPresheafFiber X x P ≫ Φ.skyscraperPresheafHomEquiv.symm g =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"76\", \"text\": \"  simp [skyscraperPresheafHomEquiv_symm_apply]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"80\", \"text\": \"lemma skyscraperPresheafHomEquiv_naturality_left_symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"67\", \"text\": \"    (sheafBotEquivalence A).symm.toAdjunction\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"172\", \"text\": \"  (sheafificationAdjunction J D).homEquiv P ⟨Q, hQ⟩ |>.symm η |>.hom\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"185\", \"text\": \"  rw [toSheafify, sheafifyLift, Adjunction.homEquiv_counit]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"201\", \"text\": \"  rw [← Sheaf.hom_ext_iff, ← Adjunction.homEquiv_apply_eq, Adjunction.homEquiv_unit]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"line\": \"15\", \"text\": \"(see `sheafBotEquivalence` in the file `Mathlib/CategoryTheory/Sites/Sheaf.lean`).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"line\": \"36\", \"text\": \"sheaves are presheaves, see `sheafBotEquivalence`) corresponding to `X`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"line\": \"78\", \"text\": \"sheaves are presheaves, see `sheafBotEquivalence`) given by the objects of `X`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"107\", \"text\": \"    AddEquiv.trans ((constantSheafAdj J AddCommGrpCat hT).homAddEquiv _ F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"153\", \"text\": \"    obtain ⟨x, rfl⟩ := (Φ.obj.shrinkYonedaCompPresheafFiberIso.app X).toEquiv.symm.surjective x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"201\", \"text\": \"      (Presheaf.imageSieve_mem J f' (shrinkYonedaObjObjEquiv.symm (𝟙 U)))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"211\", \"text\": \"  suffices Presheaf.imageSieve f (shrinkYonedaObjObjEquiv.symm (𝟙 U)) ∈ J U from ⟨by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"225\", \"text\": \"  · refine (Φ.obj.shrinkYonedaCompPresheafFiberIso.symm.app U).toEquiv.injective ?_\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"227\", \"text\": \"    trans (Φ.obj.toPresheafFiber V v (shrinkYoneda.{w}.obj U)) (shrinkYonedaObjObjEquiv.symm t)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"35\", \"text\": \"  equalizer condition `CategoryTheory.Presheaf.IsSheaf'`. This is equivalent to the earlier\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"349\", \"text\": \"abbrev Sheaf.homEquiv {X Y : Sheaf J A} : (X ⟶ Y) ≃ (X.obj ⟶ Y.obj) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"350\", \"text\": \"  (fullyFaithfulSheafToPresheaf J A).homEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"355\", \"text\": \"/-- `Sheaf.homEquiv` as a natural isomorphism. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"366\", \"text\": \"      Sheaf.homEquiv.symm.toIso :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"line\": \"71\", \"text\": \"  (conjugateIsoEquiv ((F.sheafAdjunctionContinuous A J K).comp Φ.skyscraperSheafAdjunction)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"line\": \"101\", \"text\": \"noncomputable def Sheaf.ΓHomEquiv [HasGlobalSectionsFunctor J A] {X : A} {F : Sheaf J A} :\"}",
-   "date": "2026-10-21",
-   "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A small full generating subcategory of a topos containing prescribed objects yields a site equivalence and equivalences of internal modules",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.isDiscrete_tfae\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : CondensedMod R),\\n  [Condensed.IsDiscrete M, CategoryTheory.IsIso ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app M),\\n      (Condensed.discrete (ModuleCat R)).essImage M, (CondensedMod.LocallyConstant.functor R).essImage M,\\n      CategoryTheory.Is\", \"doc\": \"For a condensed module $ M $ over a ring $ R $, the following are equivalent: (1) $ M $ is discrete; (2) the counit of the discrete-underlying adjunction at $ M $ is an isomorphism; (3) $ M $ lies in \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {FA : A → A → Type u_1} {CA : A → Type u_2}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteC\", \"doc\": \"For any essentially small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the induced Grothendieck topology on the small model of $\\\\mathcal{C}$ satisfies the locally bijective condition with \"}\n  {\"name\": \"CategoryTheory.Equivalence.precoherent_isSheaf_iff_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C] (A : Type u_3)\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] [inst_3 : CategoryTheory.EssentiallySmall.{u_4, v_1, u_1} C]\\n  (F : CategoryTheory.Functor Cᵒᵖ A),\\n  CategoryTheory.Presheaf.IsSheaf\", \"doc\": \"For an essentially small category $\\\\mathcal{C}$, a presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ satisfies the sheaf condition with respect to the coherent Grothendieck topology on $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {D : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (A : Type v) →\\n              [inst_2 : Catego\", \"doc\": \"Given a cover-dense functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and assuming all limit diagrams exist in the structured arrow categori\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (e : C ≌ D) →\\n              (A : Type u₃\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where the inverse functor $e^{-1}$ is a dense subsite,\"}\n  {\"name\": \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₃)\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.EssentiallySmall.{w, v₁, u₁} C]\\n  [CategoryTheory.HasSheafify ((CategoryTheory.equivSmallModel C).inverse.ind\", \"doc\": \"For any essentially small site $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, and for any category $\\\\mathcal{A}$, there exists a sheafification functor from the category of presheaves on $\\\\m\"}\n  {\"name\": \"LightCondMod.isDiscrete_tfae\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : LightCondMod R),\\n  [LightCondensed.IsDiscrete M,\\n      CategoryTheory.IsIso ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app M),\\n      (LightCondensed.discrete (ModuleCat R)).essImage M, (LightCondMod.LocallyConstant.functor R).essImage M,\\n      Ca\", \"doc\": \"For a light condensed $ R $-module $ M $, the following are equivalent: (1) $ M $ is discrete (isomorphic to a constant sheaf), (2) the counit of the discrete-underlying adjunction is an isomorphism a\"}\n  {\"name\": \"CategoryTheory.Equivalence.instIsDenseSubsiteFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D)\\n  [CategoryTheory.Functor.IsDenseSubsite K J e.inverse], CategoryTheory.Functo\", \"doc\": \"For any categorical equivalence $ e : C ≌ D $ between categories equipped with Grothendieck topologies $ J $ on $ C $ and $ K $ on $ D $, the functor component $ e.\\text{functor} : C → D $ forms a dens\"}",
-   "date": "2026-10-21",
-   "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Present a Grothendieck topos by a small finite limit closed full subcategory containing specified objects using the nerve, with slice and ring module equivalences",
-   "results": "Read hits: CategoryTheory.Limits.IsIndObject.nonempty_presentation, CategoryTheory.IsFinitelyPresentable, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.PresheafIsFinite, CategoryTheory.Precoherent, CategoryTheory.presheafIsGeneratedBy_of_isFinite, SSet.Finite.instIsFinitelyPresentable, CategoryTheory.GrothendieckTopology.Subcanonical.",
-   "date": "2026-10-21",
-   "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Equivalence",
-   "results": "Read hits: CategoryTheory.sheafBotEquivalence, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.instIsDenseSubsiteInducedTopologyInverseFunctor, CategoryTheory.Equivalence.instIsDenseSubsiteFunctor, CategoryTheory.Equivalence.hasSheafify, CategoryTheory.Equivalence.eq_inducedTopology_of_isDenseSubsite, CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous.",
-   "date": "2026-10-21",
-   "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
-  },
-  {
-   "tool": "grep",
-   "query": "specialEquivalence|special_equivalence|topos.*[Gg]ood|sheafInducedTopologyEquiv|ringed.*[Ee]quiv",
-   "results": "Read hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean.",
-   "date": "2026-10-21",
-   "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
-  },
-  {
-   "tool": "leansearch",
-   "query": "The restricted Yoneda functor from sheaves to sheaves on a generating subcategory is an equivalence compatible with localization at subterminal objects",
-   "results": "Read hits: CategoryTheory.OverPresheafAux.restrictedYoneda, CategoryTheory.Presheaf.restrictedYoneda, CategoryTheory.OverPresheafAux.restrictedYonedaObj, CategoryTheory.OverPresheafAux.restrictedYoneda_obj, CategoryTheory.GrothendieckTopology.yoneda, CategoryTheory.GrothendieckTopology.yonedaEquiv, CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv, CategoryTheory.GrothendieckTopology.yonedaFullyFaithful.",
-   "date": "2026-10-21",
-   "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Exact additive equivalence of abelian categories induces triangulated equivalence of unbounded derived categories",
-   "results": "Read hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instIsTriangulated, CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor, DerivedCategory.instPretriangulated, CategoryTheory.Equivalence.IsTriangulated.mk'', CategoryTheory.Equivalence.IsTriangulated.mk', DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Equivalence.IsTriangulated.",
-   "date": "2026-10-21",
-   "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-sp-ringed-topos-binary-descent",
-  "date": "2026-10-21",
-  "group": "Q106"
- },
- "blueprint": {
-  "from": {
-   "node": "det-sp-tower-gluing",
-   "place": "Gluing paragraph: existence of the open-cover cone and its canonical restrictions, and the lower-shriek triangle for lifting the counit. Extraction from lem-sp-ringed-topos-binary-descent, old step(s) (1,).",
-   "via": [
-    "lem-sp-ringed-topos-binary-descent"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-sp-binary-cover-site-presentation",
-  "worker": "stage1",
-  "summary": "Q155 constructs one finite-limit closure containing all prescribed subterminals and the original generators, applies existing epimorphic-site comparison, computes the slice fibres and their composition comparisons, and uses existing ringed module/derived transport with explicit adjunction-mate equations. No new nodes and no statement correction. Arbitrary sieve-site presentations are handled by an existing covering-site replacement.",
-  "blueprint": "det-sp-tower-gluing, Charts and gluing/open-cover cone paragraph: a simultaneous site on which the binary open-cover restrictions, lower-shriek adjunctions, and their nested mates are represented coherently. This is the site-presentation prerequisite extracted by lem-sp-ringed-topos-binary-descent, not a replacement of the unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-trf-sieve-sheaves-covering-site",
-    "why": "Generic replacement for a sieve-site presentation, without extra pullback assumptions on the original site."
-   },
-   {
-    "node": "lem-weil-pbc-site-of-sheaf-generators",
-    "why": "Generic nerve comparison on the constructed finite-limit generator category, not an alternate route for tower gluing."
-   },
-   {
-    "node": "lem-weil-pbc-small-set-of-covering-families",
-    "why": "Generic categorical comparison used in the explicitly constructed site presentation; no node of the tower unit supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-localized-sheaves-over-representable",
-    "why": "Explicit fibre equivalence for the represented objects in this one site."
-   },
-   {
-    "node": "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
-    "why": "Identifies the internal ring with the section-ring sheaf before applying ringed module transport."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
-    "why": "Carries the given ring across the already constructed nerve equivalence with invertible structural map."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-presentation-transport",
-    "why": "Generic exact module and unbounded-derived invariance after the site equivalence has been constructed."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "why": "Identifies the restricted internal ring and its module restrictions in an arbitrary slice."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-small-set-of-covering-families",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
-  "lem-weil-pbc-ringed-presentation-transport",
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-Q155-7c60997d9",
-  "group": "Q155",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-7c60997d9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 11 steps, every cited statement, and Stacks sites.tex 03A1 (l.6982) and 03CI (l.7092). There are no new nodes and the statement is the same as the base (unsplit, no proof). The item came from the re-split of the parent lem-sp-ringed-topos-binary-descent; that note applies to the parent, not to this ordinary first split. The statement is true: it is 03CI/03A1 applied to the set {1,U,V,W} plus ring, module and derived transport. I tested U=1, V=0; U=V=1; W=0; the degenerate topos; and R=0. Step 1 uses the covering-family replacement of a sieve site, so no pullbacks are assumed on the original site. Step 2 builds a countable finite-limit closure; every stage is a set. Step 3 meets every hypothesis of site-of-sheaf-generators: the nerve is Hom_T(C,-) by full faithfulness, which makes the topology subcanonical. Step 4 correctly shows the binary family is jointly epimorphic using the local closure of U∪V and separatedness. Step 5 uses Cov_0 = the binary families. Steps 6-7 give the explicit fibre formula and the pullback-bijection coherence, and send R_Z to N(R)|_Z. Steps 8-9 transport the ring with an invertible structural map, then the modules and derived categories, with the slice ring (U,s)↦R(U). Step 10 checks that cones and shifts are preserved. Step 11 identifies the adjoints by the unique counit- and unit-compatible conjugates, and the mates are preserved factor by factor. Batch-5: lem-trf-sieve-sheaves-covering-site and lem-trf-sieve-set-sheafification-exists are generic site theory (03CI/03A1/00ZM). Their closures contain no trace-formula, Poincaré-duality or nt-assume nodes, so they lie outside both assumptions and I accept them. Nothing in the closure is on the route-pivot dropped list, there is no cycle, no SGA source is cited, and no existing node duplicates or generalises the item (checked lem-trf-topos-localization-site-presentation, which covers one object only, and the other 03CI nodes). The tool_uses entries are accepted. One unstated detail is not a fault: step 8 applies the ring-transport lemma through the covering presentation A."
- },
- "lean": {
-  "module": "Sheaf.CategoryTheory.Sites.BinaryCoverSitePresentation",
-  "declaration": "CategoryTheory.exists_binaryCoverSitePresentation",
-  "declarations": [
-   "CategoryTheory.BinaryPresentationModules",
-   "CategoryTheory.BinaryPresentationAdjointSquare",
-   "CategoryTheory.BinaryCoverSitePresentation",
-   "CategoryTheory.exists_binaryCoverSitePresentation"
   ],
-  "file": "lean/Sheaf/CategoryTheory/Sites/BinaryCoverSitePresentation.lean",
-  "statement": "theorem exists_binaryCoverSitePresentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U V : Sheaf J (Type u)) (hU : IsSubterminal U) (hV : IsSubterminal V) (hcover : ∀ X : C, Sieve.generate (fun (Y : C) (_ : Y ⟶ X) ↦ Nonempty (U.obj.obj (op Y)) ∨ Nonempty (V.obj.obj (op Y))) ∈ J X) : Nonempty (BinaryCoverSitePresentation J R U V)",
-  "branch": "sheaf-dag",
-  "by": "Q114",
-  "date": "2026-10-21",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-03caef4d8",
-  "group": "Q114",
-  "result": "pass",
-  "note": "Read node, the 4 stmt_deps (unchanged vs live), Stacks sites.tex 03A1 (l.6982)/03CI (l.7092), the new module and every helper declaration it uses. Every clause matches: small site in one universe u as in def-weil-pbc-topos; R commutative ring sheaf; IsSubterminal U,V; hcover is exactly U∪V=1, nothing stronger; full faithful finite-limit-closed small E containing h_a^#,1,U,V,U×V; epimorphic precoverage with small representatives; binaryCover; nerve ≅ restricted Yoneda; slices over J.over Z with Hom formula; ring transported with IsIso ringMap (R_Z ↦ ring.over Z); additive exact module equivalences pinned by underlying/unit/structural/pushforward; derived functors equal to presentationDerivedMap; restriction/further squares with HEq identity and cocycle equations. Checked that the HEq endpoint types are propositionally equal (map_π rfl; Over.map 𝟙 and f≫g agree by comp_id/assoc with identity ring maps), so no iso-only HEq. Edge cases: empty site, U=1/V=0, W=0, R=0. No duplicate (topos_sitePresentation family presents morphisms only). One sorry; docstrings with source and blueprint carry the 11 proof steps; statement verbatim; report sections present. Advisories: mate IsIso fields are formal (node's 'hence' clause); derived restriction squares are formal; owners not in stmt_deps; BinaryPresentationModules partly overlaps RingedPresentationAt. No compile (no file changed); worker reports clean scompile and dry-run OK."
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
-  "result": "pass",
-  "landing": "20261021T120313-L-3740740",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI and 03A1, finite-limit closure and nerve comparison; Tag 00Y1 for slice comparison. Additional coherence calculations and use of existing ringed/derived transport are written by Q155."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Present a Grothendieck topos and a finite family of subterminal objects by a small finite limit closed subcanonical site, with equivalences on ring module sheaves and slice categories",
+      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Subcanonical\", \"module\": \"Mathlib/CategoryTheory/Sites/Canonical\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A Grothendieck topology on a category $\\\\mathcal{C}$ is subcanonical if every representable presheaf on $\\\\mathcal{C}$ is a sheaf with respect to the topology\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {FA : A → A → Type u_1} {CA : A → Type u_2}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteC\", \"doc\": \"For any essentially small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the induced Grothendieck topology on the small model of $\\\\mathcal{C}$ satisfies the locally bijective condition with \"}",
+      "date": "2026-10-21",
+      "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Small site presentation of a ringed topos with represented subterminals and exact equivalence of module sheaves on slice sites",
+      "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.noConfusionType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"Sort u_1 →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      {J : CategoryTheory.GrothendieckTopology C} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          SheafOfModules R →\\n            {C' : Type u₁} →\\n              [inst' : CategoryTheory.Category.{v₁, u₁} C'] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $R$, where each module satisfies the sheaf c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J RingCat → Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $F$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $F$, where each module satisfies the sheaf c\"}\n  {\"name\": \"SheafOfModules.mk.inj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {val : PresheafOfModules R.val}\\n  {isSheaf : CategoryTheory.Presheaf.IsSheaf J val.presheaf} {val_1 : PresheafOfModules R.val}\\n  {isSheaf_1 : CategoryTheory.\", \"doc\": \"If two sheaves of modules over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$ have equal underlying presheaves and equal verification of the sheaf condition, the\"}\n  {\"name\": \"SheafOfModules.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        (val : PresheafOfModules R.val) → CategoryTheory.Presheaf.IsSheaf J val.presheaf → SheafOfModules R\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, if a presheaf of modules over the underlying presheaf of $R$ satisfies the sheaf condition wi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}",
+      "date": "2026-10-21",
+      "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Equivalence",
+      "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.sheafBotEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] : CategoryTheory.Sheaf ⊥ A ≌ CategoryTheory.Functor Cᵒᵖ A\", \"doc\": \"The category of sheaves on the bottom (trivial) Grothendieck topology is\\nequivalent to the category of presheaves.\"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) (A : Type u_3) [CategoryTheory.Category.{v_3, u_3} A] [CategoryTheory.\", \"doc\": \"If `G : C ⥤ D` exhibits `(C, J)` as a dense subsite of `(D, K)`, and the\\npushforward functor `Sheaf K A ⥤ Sheaf J A` is an equivalence, then this\\nis the equivalence `Sheaf K A ≌ Sheaf J A`.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (K : CategoryTheory.GrothendieckTopology D) (A : Type v) [CategoryTheory.Category.{u, v} A] [G.LocallyCoverDense K] [G.IsLocallyFull K] [G.IsLocallyFaithful K\", \"doc\": \"Cover-dense functors induce an equivalence of categories of sheaves.\\n\\nThis is known as the comparison lemma. It requires that the sites are small and the value category\\nis complete.\"}\n  {\"name\": \"CategoryTheory.Equivalence.instIsDenseSubsiteInducedTopologyInverseFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : CategoryTheory.Functor.IsDenseSubsite J (e.inverse.inducedTopology J) e.functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.instIsDenseSubsiteFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [CategoryTheory.Functor.IsDenseSubsite K J e.inverse] : CategoryTheory.Functor.IsDenseSubsite J K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.hasSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"Transport `HasSheafify` along an equivalence of sites.\"}\n  {\"name\": \"CategoryTheory.Equivalence.eq_inducedTopology_of_isDenseSubsite\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [CategoryTheory.Functor.IsDenseSubsite K J e.inverse] : K = e.inverse.inducedTopology J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [e.functor.IsCocontinuous J K] [e.inverse.IsCocontinuous K J] : CategoryTheory.Functor.IsDenseSub\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isDenseSubsite_inverse_of_isCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [e.functor.IsCocontinuous J K] [e.inverse.IsCocontinuous K J] : CategoryTheory.Functor.IsDenseSub\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.hasSheafCompose\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) [CategoryTheory.Functor.IsDenseSubsite K J e.inverse] {A : Type u_1} [CategoryTheory.Category.{v_\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.transportAndSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"Transport a presheaf to the equivalent category and sheafify there.\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"The equivalence of sheaf categories.\"}",
+      "date": "2026-10-21",
+      "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
+    },
+    {
+      "tool": "grep",
+      "query": "subcanonical|sheaf.*[Ee]quiv|[Ee]quiv.*sheaf",
+      "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"54\", \"text\": \"noncomputable def skyscraperPresheafHomEquiv :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"72\", \"text\": \"lemma toPresheafFiber_skyscraperPresheafHomEquiv_symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"74\", \"text\": \"    Φ.toPresheafFiber X x P ≫ Φ.skyscraperPresheafHomEquiv.symm g =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"76\", \"text\": \"  simp [skyscraperPresheafHomEquiv_symm_apply]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"80\", \"text\": \"lemma skyscraperPresheafHomEquiv_naturality_left_symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"67\", \"text\": \"    (sheafBotEquivalence A).symm.toAdjunction\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"172\", \"text\": \"  (sheafificationAdjunction J D).homEquiv P ⟨Q, hQ⟩ |>.symm η |>.hom\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"185\", \"text\": \"  rw [toSheafify, sheafifyLift, Adjunction.homEquiv_counit]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"201\", \"text\": \"  rw [← Sheaf.hom_ext_iff, ← Adjunction.homEquiv_apply_eq, Adjunction.homEquiv_unit]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"line\": \"15\", \"text\": \"(see `sheafBotEquivalence` in the file `Mathlib/CategoryTheory/Sites/Sheaf.lean`).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"line\": \"36\", \"text\": \"sheaves are presheaves, see `sheafBotEquivalence`) corresponding to `X`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"line\": \"78\", \"text\": \"sheaves are presheaves, see `sheafBotEquivalence`) given by the objects of `X`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"107\", \"text\": \"    AddEquiv.trans ((constantSheafAdj J AddCommGrpCat hT).homAddEquiv _ F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"153\", \"text\": \"    obtain ⟨x, rfl⟩ := (Φ.obj.shrinkYonedaCompPresheafFiberIso.app X).toEquiv.symm.surjective x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"201\", \"text\": \"      (Presheaf.imageSieve_mem J f' (shrinkYonedaObjObjEquiv.symm (𝟙 U)))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"211\", \"text\": \"  suffices Presheaf.imageSieve f (shrinkYonedaObjObjEquiv.symm (𝟙 U)) ∈ J U from ⟨by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"225\", \"text\": \"  · refine (Φ.obj.shrinkYonedaCompPresheafFiberIso.symm.app U).toEquiv.injective ?_\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"227\", \"text\": \"    trans (Φ.obj.toPresheafFiber V v (shrinkYoneda.{w}.obj U)) (shrinkYonedaObjObjEquiv.symm t)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"35\", \"text\": \"  equalizer condition `CategoryTheory.Presheaf.IsSheaf'`. This is equivalent to the earlier\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"349\", \"text\": \"abbrev Sheaf.homEquiv {X Y : Sheaf J A} : (X ⟶ Y) ≃ (X.obj ⟶ Y.obj) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"350\", \"text\": \"  (fullyFaithfulSheafToPresheaf J A).homEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"355\", \"text\": \"/-- `Sheaf.homEquiv` as a natural isomorphism. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"line\": \"366\", \"text\": \"      Sheaf.homEquiv.symm.toIso :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"line\": \"71\", \"text\": \"  (conjugateIsoEquiv ((F.sheafAdjunctionContinuous A J K).comp Φ.skyscraperSheafAdjunction)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"line\": \"101\", \"text\": \"noncomputable def Sheaf.ΓHomEquiv [HasGlobalSectionsFunctor J A] {X : A} {F : Sheaf J A} :\"}",
+      "date": "2026-10-21",
+      "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A small full generating subcategory of a topos containing prescribed objects yields a site equivalence and equivalences of internal modules",
+      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.isDiscrete_tfae\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : CondensedMod R),\\n  [Condensed.IsDiscrete M, CategoryTheory.IsIso ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app M),\\n      (Condensed.discrete (ModuleCat R)).essImage M, (CondensedMod.LocallyConstant.functor R).essImage M,\\n      CategoryTheory.Is\", \"doc\": \"For a condensed module $ M $ over a ring $ R $, the following are equivalent: (1) $ M $ is discrete; (2) the counit of the discrete-underlying adjunction at $ M $ is an isomorphism; (3) $ M $ lies in \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {FA : A → A → Type u_1} {CA : A → Type u_2}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteC\", \"doc\": \"For any essentially small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the induced Grothendieck topology on the small model of $\\\\mathcal{C}$ satisfies the locally bijective condition with \"}\n  {\"name\": \"CategoryTheory.Equivalence.precoherent_isSheaf_iff_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C] (A : Type u_3)\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] [inst_3 : CategoryTheory.EssentiallySmall.{u_4, v_1, u_1} C]\\n  (F : CategoryTheory.Functor Cᵒᵖ A),\\n  CategoryTheory.Presheaf.IsSheaf\", \"doc\": \"For an essentially small category $\\\\mathcal{C}$, a presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ satisfies the sheaf condition with respect to the coherent Grothendieck topology on $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {D : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (A : Type v) →\\n              [inst_2 : Catego\", \"doc\": \"Given a cover-dense functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and assuming all limit diagrams exist in the structured arrow categori\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (e : C ≌ D) →\\n              (A : Type u₃\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where the inverse functor $e^{-1}$ is a dense subsite,\"}\n  {\"name\": \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₃)\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.EssentiallySmall.{w, v₁, u₁} C]\\n  [CategoryTheory.HasSheafify ((CategoryTheory.equivSmallModel C).inverse.ind\", \"doc\": \"For any essentially small site $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, and for any category $\\\\mathcal{A}$, there exists a sheafification functor from the category of presheaves on $\\\\m\"}\n  {\"name\": \"LightCondMod.isDiscrete_tfae\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : LightCondMod R),\\n  [LightCondensed.IsDiscrete M,\\n      CategoryTheory.IsIso ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app M),\\n      (LightCondensed.discrete (ModuleCat R)).essImage M, (LightCondMod.LocallyConstant.functor R).essImage M,\\n      Ca\", \"doc\": \"For a light condensed $ R $-module $ M $, the following are equivalent: (1) $ M $ is discrete (isomorphic to a constant sheaf), (2) the counit of the discrete-underlying adjunction is an isomorphism a\"}\n  {\"name\": \"CategoryTheory.Equivalence.instIsDenseSubsiteFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D)\\n  [CategoryTheory.Functor.IsDenseSubsite K J e.inverse], CategoryTheory.Functo\", \"doc\": \"For any categorical equivalence $ e : C ≌ D $ between categories equipped with Grothendieck topologies $ J $ on $ C $ and $ K $ on $ D $, the functor component $ e.\\text{functor} : C → D $ forms a dens\"}",
+      "date": "2026-10-21",
+      "verdict": "No match. Mathlib has dense-subsite comparison and equivalence transport, but not construction of a finite-limit-closed presenting subcategory containing prescribed subterminals together with all module/slice and derived identifications. Read Sites/DenseSubsite/InducedTopology.lean and Sites/Equivalence.lean; finite module presentations are unrelated."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Present a Grothendieck topos by a small finite limit closed full subcategory containing specified objects using the nerve, with slice and ring module equivalences",
+      "results": "Read hits: CategoryTheory.Limits.IsIndObject.nonempty_presentation, CategoryTheory.IsFinitelyPresentable, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.PresheafIsFinite, CategoryTheory.Precoherent, CategoryTheory.presheafIsGeneratedBy_of_isFinite, SSet.Finite.instIsFinitelyPresentable, CategoryTheory.GrothendieckTopology.Subcanonical.",
+      "date": "2026-10-21",
+      "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Equivalence",
+      "results": "Read hits: CategoryTheory.sheafBotEquivalence, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.instIsDenseSubsiteInducedTopologyInverseFunctor, CategoryTheory.Equivalence.instIsDenseSubsiteFunctor, CategoryTheory.Equivalence.hasSheafify, CategoryTheory.Equivalence.eq_inducedTopology_of_isDenseSubsite, CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous.",
+      "date": "2026-10-21",
+      "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
+    },
+    {
+      "tool": "grep",
+      "query": "specialEquivalence|special_equivalence|topos.*[Gg]ood|sheafInducedTopologyEquiv|ringed.*[Ee]quiv",
+      "results": "Read hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean.",
+      "date": "2026-10-21",
+      "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
+    },
+    {
+      "tool": "leansearch",
+      "query": "The restricted Yoneda functor from sheaves to sheaves on a generating subcategory is an equivalence compatible with localization at subterminal objects",
+      "results": "Read hits: CategoryTheory.OverPresheafAux.restrictedYoneda, CategoryTheory.Presheaf.restrictedYoneda, CategoryTheory.OverPresheafAux.restrictedYonedaObj, CategoryTheory.OverPresheafAux.restrictedYoneda_obj, CategoryTheory.GrothendieckTopology.yoneda, CategoryTheory.GrothendieckTopology.yonedaEquiv, CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv, CategoryTheory.GrothendieckTopology.yonedaFullyFaithful.",
+      "date": "2026-10-21",
+      "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exact additive equivalence of abelian categories induces triangulated equivalence of unbounded derived categories",
+      "results": "Read hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instIsTriangulated, CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor, DerivedCategory.instPretriangulated, CategoryTheory.Equivalence.IsTriangulated.mk'', CategoryTheory.Equivalence.IsTriangulated.mk', DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Equivalence.IsTriangulated.",
+      "date": "2026-10-21",
+      "verdict": "No match for the full item. Dense-subsite comparison requires a previously constructed site and omits the prescribed-object closure, simultaneous slices and normalized module adjunction comparisons. Derived exact-functor hits cover only the derived transport substep, for which an existing DAG node is reused."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-sp-ringed-topos-binary-descent",
+    "date": "2026-10-21",
+    "group": "Q106"
+  },
+  "blueprint": {
+    "from": {
+      "node": "det-sp-tower-gluing",
+      "place": "Gluing paragraph: existence of the open-cover cone and its canonical restrictions, and the lower-shriek triangle for lifting the counit. Extraction from lem-sp-ringed-topos-binary-descent, old step(s) (1,).",
+      "via": [
+        "lem-sp-ringed-topos-binary-descent"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-sp-binary-cover-site-presentation",
+    "worker": "stage1",
+    "summary": "Q155 constructs one finite-limit closure containing all prescribed subterminals and the original generators, applies existing epimorphic-site comparison, computes the slice fibres and their composition comparisons, and uses existing ringed module/derived transport with explicit adjunction-mate equations. No new nodes and no statement correction. Arbitrary sieve-site presentations are handled by an existing covering-site replacement.",
+    "blueprint": "det-sp-tower-gluing, Charts and gluing/open-cover cone paragraph: a simultaneous site on which the binary open-cover restrictions, lower-shriek adjunctions, and their nested mates are represented coherently. This is the site-presentation prerequisite extracted by lem-sp-ringed-topos-binary-descent, not a replacement of the unit route.",
+    "tool_uses": [
+      {
+        "node": "lem-trf-sieve-sheaves-covering-site",
+        "why": "Generic replacement for a sieve-site presentation, without extra pullback assumptions on the original site."
+      },
+      {
+        "node": "lem-weil-pbc-site-of-sheaf-generators",
+        "why": "Generic nerve comparison on the constructed finite-limit generator category, not an alternate route for tower gluing."
+      },
+      {
+        "node": "lem-weil-pbc-small-set-of-covering-families",
+        "why": "Generic categorical comparison used in the explicitly constructed site presentation; no node of the tower unit supplies it."
+      },
+      {
+        "node": "lem-weil-pbc-localized-sheaves-over-representable",
+        "why": "Explicit fibre equivalence for the represented objects in this one site."
+      },
+      {
+        "node": "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
+        "why": "Identifies the internal ring with the section-ring sheaf before applying ringed module transport."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
+        "why": "Carries the given ring across the already constructed nerve equivalence with invertible structural map."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-presentation-transport",
+        "why": "Generic exact module and unbounded-derived invariance after the site equivalence has been constructed."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+        "why": "Identifies the restricted internal ring and its module restrictions in an arbitrary slice."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-trf-sieve-sheaves-covering-site",
+    "lem-weil-pbc-site-of-sheaf-generators",
+    "lem-weil-pbc-small-set-of-covering-families",
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
+    "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+  ],
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-Q155-7c60997d9",
+    "group": "Q155",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-7c60997d9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 11 steps, every cited statement, and Stacks sites.tex 03A1 (l.6982) and 03CI (l.7092). There are no new nodes and the statement is the same as the base (unsplit, no proof). The item came from the re-split of the parent lem-sp-ringed-topos-binary-descent; that note applies to the parent, not to this ordinary first split. The statement is true: it is 03CI/03A1 applied to the set {1,U,V,W} plus ring, module and derived transport. I tested U=1, V=0; U=V=1; W=0; the degenerate topos; and R=0. Step 1 uses the covering-family replacement of a sieve site, so no pullbacks are assumed on the original site. Step 2 builds a countable finite-limit closure; every stage is a set. Step 3 meets every hypothesis of site-of-sheaf-generators: the nerve is Hom_T(C,-) by full faithfulness, which makes the topology subcanonical. Step 4 correctly shows the binary family is jointly epimorphic using the local closure of U∪V and separatedness. Step 5 uses Cov_0 = the binary families. Steps 6-7 give the explicit fibre formula and the pullback-bijection coherence, and send R_Z to N(R)|_Z. Steps 8-9 transport the ring with an invertible structural map, then the modules and derived categories, with the slice ring (U,s)↦R(U). Step 10 checks that cones and shifts are preserved. Step 11 identifies the adjoints by the unique counit- and unit-compatible conjugates, and the mates are preserved factor by factor. Batch-5: lem-trf-sieve-sheaves-covering-site and lem-trf-sieve-set-sheafification-exists are generic site theory (03CI/03A1/00ZM). Their closures contain no trace-formula, Poincaré-duality or nt-assume nodes, so they lie outside both assumptions and I accept them. Nothing in the closure is on the route-pivot dropped list, there is no cycle, no SGA source is cited, and no existing node duplicates or generalises the item (checked lem-trf-topos-localization-site-presentation, which covers one object only, and the other 03CI nodes). The tool_uses entries are accepted. One unstated detail is not a fault: step 8 applies the ring-transport lemma through the covering presentation A."
+  },
+  "lean": {
+    "module": "Sheaf.CategoryTheory.Sites.BinaryCoverSitePresentation",
+    "declaration": "CategoryTheory.exists_binaryCoverSitePresentation",
+    "declarations": [
+      "CategoryTheory.BinaryPresentationModules",
+      "CategoryTheory.BinaryPresentationAdjointSquare",
+      "CategoryTheory.BinaryCoverSitePresentation",
+      "CategoryTheory.exists_binaryCoverSitePresentation"
+    ],
+    "file": "lean/Sheaf/CategoryTheory/Sites/BinaryCoverSitePresentation.lean",
+    "statement": "theorem exists_binaryCoverSitePresentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U V : Sheaf J (Type u)) (hU : IsSubterminal U) (hV : IsSubterminal V) (hcover : ∀ X : C, Sieve.generate (fun (Y : C) (_ : Y ⟶ X) ↦ Nonempty (U.obj.obj (op Y)) ∨ Nonempty (V.obj.obj (op Y))) ∈ J X) : Nonempty (BinaryCoverSitePresentation J R U V)",
+    "branch": "sheaf-dag",
+    "by": "Q114",
+    "date": "2026-10-21",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-03caef4d8",
+    "group": "Q114",
+    "result": "pass",
+    "note": "Read node, the 4 stmt_deps (unchanged vs live), Stacks sites.tex 03A1 (l.6982)/03CI (l.7092), the new module and every helper declaration it uses. Every clause matches: small site in one universe u as in def-weil-pbc-topos; R commutative ring sheaf; IsSubterminal U,V; hcover is exactly U∪V=1, nothing stronger; full faithful finite-limit-closed small E containing h_a^#,1,U,V,U×V; epimorphic precoverage with small representatives; binaryCover; nerve ≅ restricted Yoneda; slices over J.over Z with Hom formula; ring transported with IsIso ringMap (R_Z ↦ ring.over Z); additive exact module equivalences pinned by underlying/unit/structural/pushforward; derived functors equal to presentationDerivedMap; restriction/further squares with HEq identity and cocycle equations. Checked that the HEq endpoint types are propositionally equal (map_π rfl; Over.map 𝟙 and f≫g agree by comp_id/assoc with identity ring maps), so no iso-only HEq. Edge cases: empty site, U=1/V=0, W=0, R=0. No duplicate (topos_sitePresentation family presents morphisms only). One sorry; docstrings with source and blueprint carry the 11 proof steps; statement verbatim; report sections present. Advisories: mate IsIso fields are formal (node's 'hence' clause); derived restriction squares are formal; owners not in stmt_deps; BinaryPresentationModules partly overlaps RingedPresentationAt. No compile (no file changed); worker reports clean scompile and dry-run OK."
+  }
 }

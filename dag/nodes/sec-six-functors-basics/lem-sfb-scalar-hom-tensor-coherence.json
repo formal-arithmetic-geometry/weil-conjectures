@@ -1,137 +1,141 @@
 {
- "id": "lem-sfb-scalar-hom-tensor-coherence",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sfb-dc-hom-preserves",
-   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Tensor coherence of the normalized scalar extension maps.",
-   "via": [
-    "lem-sfb-dc-hom-scalar-adjunction"
-   ]
+  "id": "lem-sfb-scalar-hom-tensor-coherence",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sfb-dc-hom-preserves",
+      "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Tensor coherence of the normalized scalar extension maps.",
+      "via": [
+        "lem-sfb-dc-hom-scalar-adjunction"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Tensor coherence of the normalized scalar extension maps",
- "statement": "For any simultaneous normalized scalar and tensor-Hom models M [def-sfb-scalar-hom-comparison-data] and any family mu_a of ScalarHomTensorComparison, the two tensor routes for a:R→S and b:S→T agree: F_b(mu_a) followed by mu_b and tensor of the unit-normalized scalarHomExtensionComp maps equals scalarHomExtensionComp at the tensor followed by mu_(ab). For the identity ring map, tensor of scalarHomExtensionId inverse equals that inverse at the tensor followed by mu_id. These are equalities of actual derived tensor morphisms, without internal Hom or any flatness assumption. The full equations are the Lean attachment.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
- },
- "stmt_deps": [
-  "def-sfb-scalar-hom-comparison-data"
- ],
- "proof": [
-  {
-   "text": "Use the unit equation for leftAdjointUniq to identify the ordinary composition and identity comparisons. Map these comparisons termwise to complexes. Test the chain composition and identity squares after the ordinary scalar adjunction on every total pure generator. Naturality of the ordinary unit, the specified generators equations, and the unit equations for the ordinary comparisons give equality. Pure-tensor generation, followed by coproduct generation, proves equality of the chain maps.",
-   "uses": [
-    "lem-sfb-scalar-ordinary-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "Tensor coherence of the normalized scalar extension maps",
+  "statement": "For any simultaneous normalized scalar and tensor-Hom models M [def-sfb-scalar-hom-comparison-data] and any family mu_a of ScalarHomTensorComparison, the two tensor routes for a:R→S and b:S→T agree: F_b(mu_a) followed by mu_b and tensor of the unit-normalized scalarHomExtensionComp maps equals scalarHomExtensionComp at the tensor followed by mu_(ab). For the identity ring map, tensor of scalarHomExtensionId inverse equals that inverse at the tensor followed by mu_id. These are equalities of actual derived tensor morphisms, without internal Hom or any flatness assumption. The full equations are the Lean attachment.",
+  "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
-   }
   },
-  {
-   "text": "The scalar-pair normalization first gives the unit square on K-flat complexes with flat terms. For any complex choose its K-flat resolution with flat terms. Naturality of the derived unit, the universal comparison and the exact restriction comparison transfers the unit square along this resolution; cancel its localized quasi-isomorphism. The unit square determines every normalized transpose. Apply these transpose equations and the canonical exact restriction composition and identity equations to identify the derived left-adjoint comparison on all complexes with the ordinary chain comparison.",
-   "uses": [
+  "stmt_deps": [
+    "def-sfb-scalar-hom-comparison-data"
+  ],
+  "proof": [
+    {
+      "text": "On K-flat representatives, identify the canonical leftAdjointUniq comparison with the ordinary scalar tensor composition sending t tensor (s tensor x) to t b(s) tensor x. The inverse inserts 1. The normalized ordinary and derived scalar transposes give its unit equation, uniquely identifying it with the specified left-adjoint comparison.",
+      "uses": [
+        "lem-sfb-scalar-tensor-cancellation-independent",
+        "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+        "lem-pc-kflat-resolution"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
+      }
+    },
+    {
+      "text": "The proved private generator-extensionality, chain-comparison-uniqueness and derived-comparison-uniqueness lemmas identify the given chain comparisons with the canonical total maps. For the chain composition square one may apply the existing cochainPullbackTensorCoherence to identity geometric inverse images, then identify its normalized comparisons by complexIso_unique; alternatively test the tensor routes on every total pure generator. The given generators fields and tensor balancing give (t b(s) tensor x) tensor (1 tensor y) on both sides. Sheafification, tensor generation, and coproduct generation give equality of chain maps. The representative normalization squares and fully faithful restriction to K-flat pairs descend this equality to the derived tensor bifunctors.",
+      "uses": [
+        "lem-sfb-scalar-ordinary-tensor-comparison",
+        "lem-weil-pbc-resolving-representative-whiskering",
+        "lem-weil-pbc-tensor-comparison-descent-representatives",
+        "lem-pur-cochain-pullback-tensor-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
+      }
+    },
+    {
+      "text": "For an identity coefficient map, scalar multiplication gives the ordinary unit-normalized identity comparison. Repeat the generator argument and full faithful descent to obtain the identity tensor equation.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sfb-scalar-tensor-cancellation-independent",
     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": false,
-   "source": {
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-pur-cochain-pullback-tensor-coherence"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
-   }
   },
-  {
-   "text": "On K-flat pairs, paste the three tensor-normalization squares with the just-proved scalar-comparison square and chain tensor coherence. Cancel the source tensor model isomorphism and the invertible scalar-pair comparisons on each factor. Naturality of the tensor model comparisons supplies the final transport. The same argument for the identity gives its hom equation, and inversion gives the stated inverse equation. Every derived object is isomorphic to the localization of a complex, which has a K-flat resolution. The localized resolving quasi-isomorphism gives a K-flat representative of that object. Naturality transports equality of the two natural transformations from K-flat representative pairs to every pair of derived objects.",
-   "uses": [
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
-   }
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Scalar extension of sheaves of modules preserves K-flat complexes and the tensor product of unbounded complexes naturally",
+      "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.isBaseChange.",
+      "date": "2026-10-21",
+      "verdict": "These are ordinary modules; no unbounded sheaf-complex statement or independent-universe normalized comparison."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"restrictScalars\", \"tensor\"",
+      "results": "Tensor-product restriction-of-scalars curry infrastructure; no ringed-site K-flat or total-complex comparison.",
+      "date": "2026-10-21",
+      "verdict": "No exact statement."
+    },
+    {
+      "tool": "grep",
+      "query": "cancelBaseChange|tensor.*restrictScalars|changeOfRings.*tensor",
+      "results": "25 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange, tensor restriction-of-scalars curry and base-change formulas. Read the ordinary module tensor cancellation interface.",
+      "date": "2026-10-21",
+      "verdict": "Use these ingredients; the present independent coefficient universe, ordinary tensor identification and all-K-flat normalization require the stated bridges."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+    "date": "2026-10-21",
+    "group": "S7"
+  },
+  "chapter": "sec-six-functors-basics",
+  "unit": "sk-def-sfb-dc-restricted-functors",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Algebra.Homology.ScalarHomTensorCoherence",
+    "file": "lean/Sheaf/Algebra/Homology/ScalarHomTensorCoherence.lean",
+    "declaration": "CategoryTheory.scalarHomTensorCoherence",
+    "statement": "theorem scalarHomTensorCoherence (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), ScalarHomTensorComparison M a) : (∀ {R S T : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S) (b : S ⟶ T) (X Y : DerivedCategory (scalarModules J R)), (M.scalar b).derived.map ((μ a).iso.hom.app (X, Y)) ≫ (μ b).iso.hom.app ((M.scalar a).derived.obj X, (M.scalar a).derived.obj Y) ≫ (M.closed T).tensor.map (Prod.mkHom ((scalarHomExtensionComp M a b).hom.app X) ((scalarHomExtensionComp M a b).hom.app Y)) = (scalarHomExtensionComp M a b).hom.app ((M.closed R).tensor.obj (X, Y)) ≫ (μ (a ≫ b)).iso.hom.app (X, Y)) ∧ (∀ (R : Sheaf J CommRingCat.{max c v r}) (X Y : DerivedCategory (scalarModules J R)), (M.closed R).tensor.map (Prod.mkHom ((scalarHomExtensionId M R).inv.app X) ((scalarHomExtensionId M R).inv.app Y)) = (scalarHomExtensionId M R).inv.app ((M.closed R).tensor.obj (X, Y)) ≫ (μ (𝟙 R)).iso.hom.app (X, Y))",
+    "branch": "sheaf-dag",
+    "by": "S7",
+    "date": "2026-10-21"
+  },
+  "lean_audit": {},
+  "reviewed": {
+    "date": "2026-10-20",
+    "by": "L",
+    "reviewer": "C-44c77",
+    "group": "S7",
+    "result": "pass",
+    "landing": "20261020T221348-L-4178240",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-20",
+    "by": "L",
+    "reviewer": "C-44c77",
+    "group": "S7",
+    "result": "pass",
+    "landing": "20261020T221348-L-4178240",
+    "kind": "interface",
+    "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
   }
- ],
- "proof_deps": [
-  "lem-sfb-scalar-ordinary-tensor-comparison",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 and 0D6D; pure-generator coherence, normalized adjunctions, and naturality along isomorphisms from K-flat representatives."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Scalar extension of sheaves of modules preserves K-flat complexes and the tensor product of unbounded complexes naturally",
-   "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.isBaseChange.",
-   "date": "2026-10-21",
-   "verdict": "These are ordinary modules; no unbounded sheaf-complex statement or independent-universe normalized comparison."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"restrictScalars\", \"tensor\"",
-   "results": "Tensor-product restriction-of-scalars curry infrastructure; no ringed-site K-flat or total-complex comparison.",
-   "date": "2026-10-21",
-   "verdict": "No exact statement."
-  },
-  {
-   "tool": "grep",
-   "query": "cancelBaseChange|tensor.*restrictScalars|changeOfRings.*tensor",
-   "results": "25 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange, tensor restriction-of-scalars curry and base-change formulas. Read the ordinary module tensor cancellation interface.",
-   "date": "2026-10-21",
-   "verdict": "Use these ingredients; the present independent coefficient universe, ordinary tensor identification and all-K-flat normalization require the stated bridges."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
-  "date": "2026-10-21",
-  "group": "S7"
- },
- "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-restricted-functors",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.ScalarHomTensorCoherence",
-  "file": "lean/Sheaf/Algebra/Homology/ScalarHomTensorCoherence.lean",
-  "declaration": "CategoryTheory.scalarHomTensorCoherence",
-  "statement": "theorem scalarHomTensorCoherence (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), ScalarHomTensorComparison M a) : (∀ {R S T : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S) (b : S ⟶ T) (X Y : DerivedCategory (scalarModules J R)), (M.scalar b).derived.map ((μ a).iso.hom.app (X, Y)) ≫ (μ b).iso.hom.app ((M.scalar a).derived.obj X, (M.scalar a).derived.obj Y) ≫ (M.closed T).tensor.map (Prod.mkHom ((scalarHomExtensionComp M a b).hom.app X) ((scalarHomExtensionComp M a b).hom.app Y)) = (scalarHomExtensionComp M a b).hom.app ((M.closed R).tensor.obj (X, Y)) ≫ (μ (a ≫ b)).iso.hom.app (X, Y)) ∧ (∀ (R : Sheaf J CommRingCat.{max c v r}) (X Y : DerivedCategory (scalarModules J R)), (M.closed R).tensor.map (Prod.mkHom ((scalarHomExtensionId M R).inv.app X) ((scalarHomExtensionId M R).inv.app Y)) = (scalarHomExtensionId M R).inv.app ((M.closed R).tensor.obj (X, Y)) ≫ (μ (𝟙 R)).iso.hom.app (X, Y))",
-  "branch": "sheaf-dag",
-  "by": "S7",
-  "date": "2026-10-21"
- },
- "lean_audit": {},
- "reviewed": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "C-44c77",
-  "group": "S7",
-  "result": "pass",
-  "landing": "20261020T221348-L-4178240",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H4",
-  "result": "pass",
-  "landing": "20261021T120414-L-3885937",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

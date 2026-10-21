@@ -8,6 +8,11 @@ module
 public import Sheaf.Paper.IntegralStratifiedPerfectModels
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.CategoryTheory.FiniteTypeConstantExact
+import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Normalized completed realization on unbounded derived categories
 
@@ -107,13 +112,26 @@ The natural comparisons are `integralRealizationHomologyIso` and
 Source: Stacks Tags 093J, 093M and 015F; Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3)
 (blueprint: lem-weil-pbc-completed-realization-derived-cohomology).
 
-Proof: `integralConstantModule_exact` already gives preservation of finite limits
-and finite colimits for the normalized realization, and `integralConstantModule_additive`
-gives additivity. Install those instances and the standard derived category of modules.
-The realization is definitionally the exact functor's `mapDerivedCategory`, which is
-triangulated. Its factorization is definitionally `mapDerivedCategoryFactors`, whose
-hom is compatible with the canonical shift structures. The homology and shifted-module
-comparisons above use the same exact-functor construction. -/
+Proof: (1) `lem-weil-pbc-finite-type-constant-exact` makes constant module
+sheafification exact on arbitrary modules. Its maps preserve addition already on
+presheaves, hence after sheafification (`def-sf-site-constant-module-functor`).
+(2) `lem-weil-pbc-completed-constant-sheaf-reduction` gives flatness of the completed
+constant ring over constant A, since the adic datum is Noetherian. Tensoring is additive
+and exact (`def-pur-sheaf-tensor-product`). The finite quotients identify the two
+coefficient diagrams by the sheafified constant-function maps; taking limits gives
+`pbcCompletedComparison`. Restriction along its inverse is an additive exact equivalence
+(`def-pc-sheaf-restrict-scalars`, `def-weil-sheaf-of-modules-category`).
+(3) `lem-weil-pbc-exact-functor-derived-factorization` localizes this exact termwise
+functor, giving `integralConstantDerived`, its factorization and its triangulated structure.
+This applies to unbounded complexes without a resolution or convergence condition.
+(4) `lem-weil-pbc-exact-functor-complex-cohomology` compares kernels, images and
+cokernels on every complex. Invert its comparison and then the cohomology of the
+factorization. `lem-weil-pbc-localization-universal-property` descends this natural
+isomorphism uniquely; this is precisely `integralRealizationHomologyIso`.
+(5) On a degree-zero complex the termwise image is the degree-zero complex of F(M).
+Compose that comparison with the shift comparison from step (3). This gives
+`integralRealizationShiftedModuleIso`, normalized by the identity in degree -r,
+for positive, zero and negative r and for arbitrary M. -/
 theorem integralConstantRealization_exact_derived (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     (integralConstantModule T d).Additive ∧
@@ -121,13 +139,6 @@ theorem integralConstantRealization_exact_derived (T : Scheme.{u})
       PreservesFiniteColimits (integralConstantModule T d) ∧
       (integralConstantDerived T d).IsTriangulated ∧
       NatTrans.CommShift (integralRealizationFactors T d).hom ℤ := by
-  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  let := (integralConstantModule_exact T d).1
-  let := (integralConstantModule_exact T d).2
-  refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_⟩
-  · dsimp only [integralConstantDerived]
-    infer_instance
-  · dsimp only [integralRealizationFactors]
-    infer_instance
+  sorry
 
 end AlgebraicGeometry.Scheme

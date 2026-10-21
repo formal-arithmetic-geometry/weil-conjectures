@@ -1,243 +1,242 @@
 {
- "id": "lem-weil-pbc-completed-constant-sheaf-reduction",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-finite-reduction-reconstruction",
-   "place": "proof, bounded finite-projective representative of P_a: the scalar-extension identification needed to use it over A_T",
-   "via": []
+  "id": "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-finite-reduction-reconstruction",
+      "place": "proof, bounded finite-projective representative of P_a: the scalar-extension identification needed to use it over A_T",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Completed constant coefficients and finite reduction",
- "statement": "Let $T$ be a scheme, $A$ a commutative Noetherian ring, and $I\\subseteq A$ an ideal. For an $A$-module $M$ write $\\underline M$ for the sheafification of the constant presheaf with value $M$ [def-weil-pbc-constant-sheaf] on $T_{\\Proet}$ [def-weil-pbc-proetale-site]. Put $B=\\varprojlim_{n\\geq1}\\underline{A/I^n}$, with its canonical $\\underline A$-algebra structure. Then $B$ is flat over $\\underline A$ (tensoring with $B$ preserves short exact sequences), and for every $a\\geq1$ the canonical reduction map gives an isomorphism\n$$\nB\\otimes_{\\underline A}^L\\underline{A/I^a}\\xrightarrow{\\sim}\\underline{A/I^a}.\n$$\nIf $A/I^a$ has a bounded finite-projective $A$-module resolution $F^\\bullet$, then $B\\otimes_{\\underline A}\\underline{F^\\bullet}$ represents this reduction, with every term a direct summand of a finite sum of $B$. When every $A/I^n$ is finite, the locally constant sheaf $\\underline{A/I^n}$ is the sheaf $(P_n)_T$ of [def-weil-pbc-adic-coefficient-datum], so $B=A_T$ and the reduction identifies $A_T\\otimes_{\\underline A}^L\\underline{P_a}$ with $(P_a)_T$.",
- "source": {
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093M (lemma-completion-flat), applied also to I^a with its cofinal power filtration; Tag 093J (lemma-constant-exact) for the resolution."
- },
- "stmt_deps": [
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-noetherian-ring",
-  "def-pc-flat-sheaf-modules",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-projective-module",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-proetale-modules"
- ],
- "proof": [
-  {
-   "text": "Apply [lem-weil-pbc-completed-constant-algebra-flat-quotients] with S=B, e the identity and c=base. The defining projection equations of base give its hypotheses. Its quotient assertion applies to reduction because reduction_exists gives exactly the stated multiplication formula. This proves flatness, exact scalar extension and all ordinary reduction isomorphisms.",
-   "uses": [
+  "kind": "statement",
+  "title": "Completed constant coefficients and finite reduction",
+  "statement": "Let $T$ be a scheme, $A$ a commutative Noetherian ring, and $I\\subseteq A$ an ideal. For an $A$-module $M$ write $\\underline M$ for the sheafification of the constant presheaf with value $M$ [def-weil-pbc-constant-sheaf] on $T_{\\Proet}$ [def-weil-pbc-proetale-site]. Put $B=\\varprojlim_{n\\geq1}\\underline{A/I^n}$, with its canonical $\\underline A$-algebra structure. Then $B$ is flat over $\\underline A$ (tensoring with $B$ preserves short exact sequences), and for every $a\\geq1$ the canonical reduction map gives an isomorphism\n$$\nB\\otimes_{\\underline A}^L\\underline{A/I^a}\\xrightarrow{\\sim}\\underline{A/I^a}.\n$$\nIf $A/I^a$ has a bounded finite-projective $A$-module resolution $F^\\bullet$, then $B\\otimes_{\\underline A}\\underline{F^\\bullet}$ represents this reduction, with every term a direct summand of a finite sum of $B$. When every $A/I^n$ is finite, the locally constant sheaf $\\underline{A/I^n}$ is the sheaf $(P_n)_T$ of [def-weil-pbc-adic-coefficient-datum], so $B=A_T$ and the reduction identifies $A_T\\otimes_{\\underline A}^L\\underline{P_a}$ with $(P_a)_T$.",
+  "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M (lemma-completion-flat), applied also to I^a with its cofinal power filtration; Tag 093J (lemma-constant-exact) for the resolution."
+  },
+  "stmt_deps": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-noetherian-ring",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-derived-tensor",
+    "def-weil-pbc-projective-module",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-proetale-modules"
+  ],
+  "proof": [
+    {
+      "text": "Apply [lem-weil-pbc-completed-constant-algebra-flat-quotients] with S=B, e the identity and c=base. The defining projection equations of base give its hypotheses. Its quotient assertion applies to reduction because reduction_exists gives exactly the stated multiplication formula. This proves flatness, exact scalar extension and all ordinary reduction isomorphisms.",
+      "uses": [
+        "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Exact scalar extension preserves quasi-isomorphisms, so applying it termwise to any augmented resolution, followed by the degree-zero reduction isomorphism, is again a quasi-isomorphism. This proves the asserted derived reduction, and in fact does not require the K-flat hypothesis for this particular flat algebra.",
+      "uses": [
+        "lem-pur-derived-change-of-rings"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The constant-module functor preserves finite limits and colimits: its constant presheaf part does so sectionwise, and module sheafification is exact. A finite projective A-module is a retract of A^r by Mathlib Module.Finite and Module.Projective theory. Apply the constant functor and scalar extension to the splitting. Their additivity preserves the finite coproduct, and an explicit tensor-adjunction construction identifies extension of the constant A-module A with the unit S-module. Thus every term is the required finite retract. Exactness gives the augmented quasi-isomorphism, and preservation of zero objects retains both degree bounds.",
+      "uses": [
+        "def-weil-pbc-projective-module",
+        "def-weil-pbc-sheafification",
+        "def-weil-sheaf-of-modules-category",
+        "def-weil-pbc-adic-lisse-module"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For finite discrete coefficients, use the established locally bijective constants-to-functions map and its recorded RingCat sheafification comparison. Uniqueness of sheafification maps shows that the original CommRingCat comparison is locally bijective, hence an isomorphism. Naturality gives the isomorphism of coefficient systems, and the limit functor gives completedComparison invertible.",
+      "uses": [
+        "def-weil-pbc-proetale-modules",
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the ordinary flat-algebra quotient theorem again, now with the isomorphic function-sheaf completion S, the completed comparison e, and each component comparison d. Limit naturality gives the transported projection equation; finiteReduction_exists supplies the required tensor formula. Exact scalar extension then preserves each augmented quasi-isomorphism and yields finiteReductionComplex a quasi-isomorphism.",
+      "uses": [
+        "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-completed-constant-algebra-flat-quotients",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact scalar extension preserves quasi-isomorphisms, so applying it termwise to any augmented resolution, followed by the degree-zero reduction isomorphism, is again a quasi-isomorphism. This proves the asserted derived reduction, and in fact does not require the K-flat hypothesis for this particular flat algebra.",
-   "uses": [
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The constant-module functor preserves finite limits and colimits: its constant presheaf part does so sectionwise, and module sheafification is exact. A finite projective A-module is a retract of A^r by Mathlib Module.Finite and Module.Projective theory. Apply the constant functor and scalar extension to the splitting. Their additivity preserves the finite coproduct, and an explicit tensor-adjunction construction identifies extension of the constant A-module A with the unit S-module. Thus every term is the required finite retract. Exactness gives the augmented quasi-isomorphism, and preservation of zero objects retains both degree bounds.",
-   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-derived-change-of-rings",
     "def-weil-pbc-projective-module",
     "def-weil-pbc-sheafification",
     "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-adic-lisse-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For finite discrete coefficients, use the established locally bijective constants-to-functions map and its recorded RingCat sheafification comparison. Uniqueness of sheafification maps shows that the original CommRingCat comparison is locally bijective, hence an isomorphism. Naturality gives the isomorphism of coefficient systems, and the limit functor gives completedComparison invertible.",
-   "uses": [
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the ordinary flat-algebra quotient theorem again, now with the isomorphic function-sheaf completion S, the completed comparison e, and each component comparison d. Limit naturality gives the transported projection equation; finiteReduction_exists supplies the required tensor formula. Exact scalar extension then preserves each augmented quasi-isomorphism and yields finiteReductionComplex a quasi-isomorphism.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-pbc-projective-module",
-  "def-weil-pbc-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-adic-lisse-module",
-  "def-weil-pbc-proetale-modules"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 093J–093M: ordinary Tag 093M isolated as a separate sourced statement; exact constant functor, tensor-unit comparison, finite-projective retracts and finite constants-to-functions identification formalized by T4, 2026-10-19."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "AdicCompletion.*[Ff]lat|[Ff]lat.*AdicCompletion|completion.*quotient",
-   "results": "6 hits: Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean; grep subdirectory RingTheory",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Completed constant sheaf of a Noetherian ring is flat and has the same quotients modulo ideal powers",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"AdicCompletion\", \"Flat\"",
-   "results": "1 hits: AdicCompletion.flat_of_isNoetherian",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The inverse limit of constant quotient sheaves of a Noetherian ring is flat and its reduction modulo a power of the ideal is the constant quotient sheaf",
-   "results": "8 hits: AdicCompletion.flat_of_isNoetherian, localCohomology, Hausdorffification, localCohomology.isoSelfLERadical, AdicCompletion, AdicCompletion.of_apply, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, localCohomology.ofSelfLERadical",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Flatness of completed constant ring sheaves and extension of scalars of finite projective resolutions to adic completion",
-   "results": "8 hits: AdicCompletion.flat_of_isNoetherian, Module.flat_of_isLocalized_span, Module.flat_of_localized_span, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.flat_of_localized_maximal, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.flat_of_isLocalized_maximal, Module.Flat.of_projective",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Inverse limit of constant quotient sheaves of a Noetherian ring is flat and reduction modulo ideal powers is the constant quotient sheaf",
-   "results": "8 hits: AdicCompletion.flat_of_isNoetherian, localCohomology, Hausdorffification, localCohomology.isoSelfLERadical, AdicCompletion, AdicCompletion.of_apply, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.eval_of",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"AdicCompletion\", \"Flat\"",
-   "results": "1 hits: AdicCompletion.flat_of_isNoetherian",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
-  },
-  {
-   "tool": "grep",
-   "query": "completion.*flat|flat.*completion|constantSheaf.*[Tt]ensor",
-   "results": "5 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/Smooth/Flat.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Flatness and quotient reduction of completed constant sheaves on a site",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Sheafification of constant modules commutes with finitely presented tensor products and completion of constant ring sheaves is flat",
-   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free, SheafOfModules.IsFinitePresentation, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-weil-pbc-finite-reduction-reconstruction",
-  "by": "worker",
-  "date": "2026-10-13"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "worker": "stage1",
-  "summary": "Six steps prove flatness, canonical ordinary and derived reductions, the bounded finite-projective representative, and the finite coefficient interpretation. Existing constant-section, inverse-limit-flatness and sheafification-flatness nodes suffice; no new nodes. The sectionwise flatness argument uses the constant presheaf A before sheafification, avoiding an unsupported inference of flatness over underline A(U). Finite coefficient comparison uses clopen fibres rather than falsely assuming connected components open.",
-  "blueprint": "Realizes the first proof sentence of lem-weil-pbc-finite-reduction-reconstruction: the bounded finite-projective representative of P_a is scalar-extended to A_T with the canonical finite reduction.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-sites-modules-sheafification-flat",
-    "why": "General ringed-site sheafification preserves flatness, used as a black box; no node in this unit states this passage."
-   }
-  ]
- },
- "tool_uses": [],
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "NT-Codex-NE-ec70267cc",
-  "group": "NE",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-ec70267cc (reviewer sub-agent of L); spot-checked: Read the item, six proof steps, all cited DAG statements, unit/chapter route, Stacks 093J/093K/093L/093M, More on Algebra 0912, and cohomology definitions 06YN/06YU. Checked hypotheses, canonical reduction morphism, coefficient categories, topology/gluing, projective-resolution clause, duplicates, route/tool use, and edge cases including I=0, I=A, nilpotent and nonprincipal ideals, empty/disconnected objects, and n<a/n>=a. No faults or repairs found; review.md records the full checks."
- },
- "lean_audit": {},
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-81724f7b3",
-  "group": "Q32",
-  "result": "pass",
-  "note": "Wrote review.md. Hypotheses, conclusions, canonical constructions, dependencies, universes, edge cases, report sections, and verbatim signatures checked. Both immutable Lean files compiled cleanly through scompile.py; no fixes required."
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedConstantSheafReduction",
-  "declaration": "AlgebraicGeometry.Scheme.CompletedConstantReduction.completed_constant_sheaf_reduction",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.base_exists",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.base",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.completedModule",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.residue",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction_exists",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.reductionComplex",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.IsFiniteRetract",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constant_additive",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constant_exact",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantComplex",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantAugmentation",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.completed_constant_sheaf_reduction",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.systemComparison_naturality",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.systemComparison",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.completedComparison",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteResidue",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction_exists",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReductionComplex",
-   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finite_coefficient_identification"
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-pbc-proetale-modules"
   ],
-  "file": "lean/Sheaf/Paper/CompletedConstantSheafReduction.lean",
-  "statement": "theorem completed_constant_sheaf_reduction (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) : SheafOfModules.IsFlatOnSite (completedModule T I) ∧ (∀ n : ℕ, IsIso (reduction T I n)) ∧ (∀ (n : ℕ) (P : CochainComplex (SheafOfModules.{u + 1} ((adicLisseForget T).obj (adicLisseConstantRing T A))) ℤ) (f : P ⟶ (CochainComplex.singleFunctor _ 0).obj ((adicLisseConstantModules T A).obj (ModuleCat.of A (A ⧸ I ^ (n + 1))))), CochainComplex.IsAcyclicTensorKFlat (R := adicLisseConstantRing T A) P → QuasiIso f → QuasiIso (reductionComplex T I n P f)) ∧ (∀ (n : ℕ) (F : CochainComplex (ModuleCat.{u + 1} A) ℤ) (f : F ⟶ (CochainComplex.singleFunctor _ 0).obj (ModuleCat.of A (A ⧸ I ^ (n + 1)))) (a b : ℤ), QuasiIso f → (∀ i : ℤ, Module.Finite A (F.X i) ∧ Module.Projective A (F.X i)) → (∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i)) → QuasiIso (reductionComplex T I n ((constantComplex T A).obj F) (constantAugmentation T I n F f)) ∧ (∀ i : ℤ, IsFiniteRetract T I ((completedAdicChange T (base T I)).obj (((constantComplex T A).obj F).X i))) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero ((completedAdicChange T (base T I)).obj (((constantComplex T A).obj F).X i))))",
-  "branch": "newtargets-dag",
-  "by": "Q32",
-  "date": "2026-10-15",
-  "existing": false
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A8",
-  "result": "pass",
-  "landing": "20261021T120317-L-3749629",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J–093M: ordinary Tag 093M isolated as a separate sourced statement; exact constant functor, tensor-unit comparison, finite-projective retracts and finite constants-to-functions identification formalized by T4, 2026-10-19."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "AdicCompletion.*[Ff]lat|[Ff]lat.*AdicCompletion|completion.*quotient",
+      "results": "6 hits: Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean; grep subdirectory RingTheory",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Completed constant sheaf of a Noetherian ring is flat and has the same quotients modulo ideal powers",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"AdicCompletion\", \"Flat\"",
+      "results": "1 hits: AdicCompletion.flat_of_isNoetherian",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The inverse limit of constant quotient sheaves of a Noetherian ring is flat and its reduction modulo a power of the ideal is the constant quotient sheaf",
+      "results": "8 hits: AdicCompletion.flat_of_isNoetherian, localCohomology, Hausdorffification, localCohomology.isoSelfLERadical, AdicCompletion, AdicCompletion.of_apply, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, localCohomology.ofSelfLERadical",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Flatness of completed constant ring sheaves and extension of scalars of finite projective resolutions to adic completion",
+      "results": "8 hits: AdicCompletion.flat_of_isNoetherian, Module.flat_of_isLocalized_span, Module.flat_of_localized_span, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.flat_of_localized_maximal, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.flat_of_isLocalized_maximal, Module.Flat.of_projective",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completion flatness does not assert flatness of the inverse-limit sheaf on a site or its coefficient resolution comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Inverse limit of constant quotient sheaves of a Noetherian ring is flat and reduction modulo ideal powers is the constant quotient sheaf",
+      "results": "8 hits: AdicCompletion.flat_of_isNoetherian, localCohomology, Hausdorffification, localCohomology.isoSelfLERadical, AdicCompletion, AdicCompletion.of_apply, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.eval_of",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"AdicCompletion\", \"Flat\"",
+      "results": "1 hits: AdicCompletion.flat_of_isNoetherian",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
+    },
+    {
+      "tool": "grep",
+      "query": "completion.*flat|flat.*completion|constantSheaf.*[Tt]ensor",
+      "results": "5 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/Smooth/Flat.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Flatness and quotient reduction of completed constant sheaves on a site",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Sheafification of constant modules commutes with finitely presented tensor products and completion of constant ring sheaves is flat",
+      "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free, SheafOfModules.IsFinitePresentation, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary ring completion and light condensed modules do not state this ringed-site completed constant sheaf assertion"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-weil-pbc-finite-reduction-reconstruction",
+    "by": "worker",
+    "date": "2026-10-13"
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "worker": "stage1",
+    "summary": "Six steps prove flatness, canonical ordinary and derived reductions, the bounded finite-projective representative, and the finite coefficient interpretation. Existing constant-section, inverse-limit-flatness and sheafification-flatness nodes suffice; no new nodes. The sectionwise flatness argument uses the constant presheaf A before sheafification, avoiding an unsupported inference of flatness over underline A(U). Finite coefficient comparison uses clopen fibres rather than falsely assuming connected components open.",
+    "blueprint": "Realizes the first proof sentence of lem-weil-pbc-finite-reduction-reconstruction: the bounded finite-projective representative of P_a is scalar-extended to A_T with the canonical finite reduction.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-sites-modules-sheafification-flat",
+        "why": "General ringed-site sheafification preserves flatness, used as a black box; no node in this unit states this passage."
+      }
+    ]
+  },
+  "tool_uses": [],
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "NT-Codex-NE-ec70267cc",
+    "group": "NE",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-ec70267cc (reviewer sub-agent of L); spot-checked: Read the item, six proof steps, all cited DAG statements, unit/chapter route, Stacks 093J/093K/093L/093M, More on Algebra 0912, and cohomology definitions 06YN/06YU. Checked hypotheses, canonical reduction morphism, coefficient categories, topology/gluing, projective-resolution clause, duplicates, route/tool use, and edge cases including I=0, I=A, nilpotent and nonprincipal ideals, empty/disconnected objects, and n<a/n>=a. No faults or repairs found; review.md records the full checks."
+  },
+  "lean_audit": {},
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-81724f7b3",
+    "group": "Q32",
+    "result": "pass",
+    "note": "Wrote review.md. Hypotheses, conclusions, canonical constructions, dependencies, universes, edge cases, report sections, and verbatim signatures checked. Both immutable Lean files compiled cleanly through scompile.py; no fixes required."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedConstantSheafReduction",
+    "declaration": "AlgebraicGeometry.Scheme.CompletedConstantReduction.completed_constant_sheaf_reduction",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.base_exists",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.base",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.completedModule",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.residue",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction_exists",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.reductionComplex",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.IsFiniteRetract",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.constant_additive",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantComplex",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantAugmentation",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.completed_constant_sheaf_reduction",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.systemComparison_naturality",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.systemComparison",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.completedComparison",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteResidue",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction_exists",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReductionComplex",
+      "AlgebraicGeometry.Scheme.CompletedConstantReduction.finite_coefficient_identification"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedConstantSheafReduction.lean",
+    "statement": "theorem completed_constant_sheaf_reduction (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) : SheafOfModules.IsFlatOnSite (completedModule T I) ∧ (∀ n : ℕ, IsIso (reduction T I n)) ∧ (∀ (n : ℕ) (P : CochainComplex (SheafOfModules.{u + 1} ((adicLisseForget T).obj (adicLisseConstantRing T A))) ℤ) (f : P ⟶ (CochainComplex.singleFunctor _ 0).obj ((adicLisseConstantModules T A).obj (ModuleCat.of A (A ⧸ I ^ (n + 1))))), CochainComplex.IsAcyclicTensorKFlat (R := adicLisseConstantRing T A) P → QuasiIso f → QuasiIso (reductionComplex T I n P f)) ∧ (∀ (n : ℕ) (F : CochainComplex (ModuleCat.{u + 1} A) ℤ) (f : F ⟶ (CochainComplex.singleFunctor _ 0).obj (ModuleCat.of A (A ⧸ I ^ (n + 1)))) (a b : ℤ), QuasiIso f → (∀ i : ℤ, Module.Finite A (F.X i) ∧ Module.Projective A (F.X i)) → (∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i)) → QuasiIso (reductionComplex T I n ((constantComplex T A).obj F) (constantAugmentation T I n F f)) ∧ (∀ i : ℤ, IsFiniteRetract T I ((completedAdicChange T (base T I)).obj (((constantComplex T A).obj F).X i))) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero ((completedAdicChange T (base T I)).obj (((constantComplex T A).obj F).X i))))",
+    "branch": "newtargets-dag",
+    "by": "Q32",
+    "date": "2026-10-15",
+    "existing": false
+  },
+  "reviewed_proof": {
+    "date": "2026-10-19",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "T4",
+    "result": "pass",
+    "landing": "20261019T192838-L-1875455",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

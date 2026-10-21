@@ -1,206 +1,241 @@
 {
- "id": "lem-weil-pbc-completed-realization-derived-cohomology",
- "kind": "statement",
- "title": "Exact completed realization and its normalized derived cohomology comparisons",
- "statement": "Let $T$ be a scheme [def-pc-scheme] and $(A,I)$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], in particular $A$ is commutative Noetherian. On the small pro-etale site [def-weil-pbc-proetale-site] write $B_T=\\varprojlim_{n\\ge1}\\underline{A/I^n}$, where $\\underline M$ denotes the sheafification of the constant module presheaf [def-weil-pbc-constant-sheaf]. Let $A_T=\\varprojlim_n(A/I^n)_T$ be the completed coefficient sheaf of [def-weil-pbc-adic-coefficient-datum], and $\\gamma:B_T\\xrightarrow{\\sim}A_T$ the normalized completed coefficient isomorphism used in [def-weil-pbc-integral-stratified-perfect-models], induced levelwise by the sheafified constant-function maps $\\underline{A/I^n}\\to(A/I^n)_T$. Let $F_T:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(A_T)$ be $M\\mapsto B_T\\otimes_{\\underline A}\\underline M$, regarded as an $A_T$-module by restriction of scalars along $\\gamma^{-1}$; this is the realization of that definition. Then $F_T$ is additive and exact. Its termwise action descends to an exact functor $DF_T:D(A)\\to D(\\operatorname{Mod}(A_T))$ [def-weil-abstract-derived-category]. There are isomorphisms, natural in $P\\in D(A)$ and $M\\in\\operatorname{Mod}(A)$,\n$$F_T(H^q(P))\\xrightarrow{\\sim}H^q(DF_T(P)),\\qquad DF_T(M[r])\\xrightarrow{\\sim}F_T(M)[r]\\quad(q,r\\in\\mathbf Z),$$\nwhere $M[r]$ is the shift of the degree-zero complex. The comparisons are the ones induced by preservation of kernels, images and cokernels on complexes, and by the localization factorization of the termwise functor, followed by exact restriction along the normalized coefficient-ring isomorphism. They hold for unbounded $P$ and arbitrary $M$.",
- "source": {
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); derived.tex, Tag 015F (lemma-right-derived-exact-functor). Applied to Bhatt–Scholze Proposition 6.6.11 and Proposition 6.8.11(3); normalized realization is the one in the existing DAG definition."
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-integral-stratified-perfect-models",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-cohomology-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-pc-sheaf-restrict-scalars"
- ],
- "proof": [
-  {
-   "text": "Use integralConstantModule_exact and integralConstantModule_additive from the existing realization module [def-weil-pbc-integral-stratified-perfect-models]. They give preservation of finite limits and finite colimits, and additivity, for exactly the normalized functor F_T. These results already incorporate constant sheafification, flat scalar extension and restriction along the normalized completed coefficient comparison. No new exactness argument is required here.",
-   "uses": [
-    "def-weil-pbc-integral-stratified-perfect-models"
-   ],
-   "elementary": true
+  "id": "lem-weil-pbc-completed-realization-derived-cohomology",
+  "kind": "statement",
+  "title": "Exact completed realization and its normalized derived cohomology comparisons",
+  "statement": "Let $T$ be a scheme [def-pc-scheme] and $(A,I)$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], in particular $A$ is commutative Noetherian. On the small pro-etale site [def-weil-pbc-proetale-site] write $B_T=\\varprojlim_{n\\ge1}\\underline{A/I^n}$, where $\\underline M$ denotes the sheafification of the constant module presheaf [def-weil-pbc-constant-sheaf]. Let $A_T=\\varprojlim_n(A/I^n)_T$ be the completed coefficient sheaf of [def-weil-pbc-adic-coefficient-datum], and $\\gamma:B_T\\xrightarrow{\\sim}A_T$ the normalized completed coefficient isomorphism used in [def-weil-pbc-integral-stratified-perfect-models], induced levelwise by the sheafified constant-function maps $\\underline{A/I^n}\\to(A/I^n)_T$. Let $F_T:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(A_T)$ be $M\\mapsto B_T\\otimes_{\\underline A}\\underline M$, regarded as an $A_T$-module by restriction of scalars along $\\gamma^{-1}$; this is the realization of that definition. Then $F_T$ is additive and exact. Its termwise action descends to an exact functor $DF_T:D(A)\\to D(\\operatorname{Mod}(A_T))$ [def-weil-abstract-derived-category]. There are isomorphisms, natural in $P\\in D(A)$ and $M\\in\\operatorname{Mod}(A)$,\n$$F_T(H^q(P))\\xrightarrow{\\sim}H^q(DF_T(P)),\\qquad DF_T(M[r])\\xrightarrow{\\sim}F_T(M)[r]\\quad(q,r\\in\\mathbf Z),$$\nwhere $M[r]$ is the shift of the degree-zero complex. The comparisons are the ones induced by preservation of kernels, images and cokernels on complexes, and by the localization factorization of the termwise functor, followed by exact restriction along the normalized coefficient-ring isomorphism. They hold for unbounded $P$ and arbitrary $M$.",
+  "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); derived.tex, Tag 015F (lemma-right-derived-exact-functor). Applied to Bhatt–Scholze Proposition 6.6.11 and Proposition 6.8.11(3); normalized realization is the one in the existing DAG definition."
   },
-  {
-   "text": "Install these exactness instances and HasDerivedCategory.standard for ModuleCat A. By definition integralConstantDerived is F_T.mapDerivedCategory. Apply [lem-weil-pbc-exact-functor-derived-factorization]: its existing Mathlib instances give the triangulated structure and shift compatibility of mapDerivedCategoryFactors.hom. The defined integralRealizationFactors is precisely that factorization. Together with step 1 these prove integralConstantRealization_exact_derived.",
-   "uses": [
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-integral-stratified-perfect-models",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Retain the actual natural isomorphisms constructed in the module. integralRealizationHomologyIso is mapDerivedCategoryHomologyFunctorIso: it descends the inverse complex homology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] through [lem-weil-pbc-localization-universal-property] and the factorization of step 2. integralRealizationShiftedModuleIso composes the canonical derived shift isomorphism with mapDerivedCategorySingleFunctor at zero. These use the same exact functor F_T and therefore the same coefficient transport. All constructions apply to unbounded derived objects and arbitrary modules.",
-   "uses": [
-    "def-weil-pbc-integral-stratified-perfect-models",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-cohomology-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+  ],
+  "proof": [
+    {
+      "text": "Write $c(M)=\\underline M$ for constant module sheafification. By [lem-weil-pbc-finite-type-constant-exact], $c$ preserves finite limits and finite colimits on all $A$-modules, not just finitely presented ones. The site is the small skeleton specified in [def-weil-pbc-proetale-site], so its smallness hypothesis applies. The explicit functor of [def-sf-site-constant-module-functor] is additive: the map of constant presheaves induced by $f+g$ is the sum of those induced by $f,g$, and this equality persists after sheafification. Thus a short exact sequence of $A$-modules gives a short exact sequence of $\\underline A$-module sheaves.",
+      "uses": [
+        "lem-weil-pbc-finite-type-constant-exact",
+        "def-weil-pbc-proetale-site",
+        "def-sf-site-constant-module-functor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 093J (lemma-constant-exact) and 03CY (lemma-sheafification-presheaf-modules)."
+      }
+    },
+    {
+      "text": "By [lem-weil-pbc-completed-constant-sheaf-reduction], $B_T=\\varprojlim_{n\\geq1}\\underline{A/I^n}$ is flat over $\\underline A$: tensoring with it preserves every short exact sequence of $\\underline A$-module sheaves. Its hypotheses hold because the adic datum makes $A$ commutative Noetherian; no finiteness condition is imposed on $M$. Apply it to the sequence in step 1. Tensoring is additive, since on local tensor generators $(1\\otimes(f+g))(b\\otimes m)=b\\otimes f(m)+b\\otimes g(m)$, and these equalities pass to the sheaf tensor product [def-pur-sheaf-tensor-product]. The map $\\gamma$ is invertible: the adic datum makes every $A/I^n$ finite, so by the last clause of [lem-weil-pbc-completed-constant-sheaf-reduction] each levelwise sheafified constant-function map $\\underline{A/I^n}\\to(A/I^n)_T$ is an isomorphism compatible with the transitions, and $\\gamma$ is their limit, with inverse the limit of the inverses. Finally restrict scalars along the specified $\\gamma^{-1}:A_T\\to B_T$ [def-pc-sheaf-restrict-scalars]. This has inverse restriction along $\\gamma$; the composites have exactly the original scalar actions. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels in the module categories [def-weil-sheaf-of-modules-category]. Neither construction changes under this invertible relabelling of scalars. Hence this restriction is additive and exact, and their composite is exactly the stated $F_T$. Being additive and preserving short exact sequences, $F_T$ preserves kernels and cokernels, hence finite limits and finite colimits (Homology, Tag 010N).",
+      "uses": [
+        "lem-weil-pbc-completed-constant-sheaf-reduction",
+        "def-pur-sheaf-tensor-product",
+        "def-pc-sheaf-restrict-scalars",
+        "def-weil-sheaf-of-modules-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 093M (lemma-completion-flat), 03EK (section-tensor-product), and 03CN (lemma-abelian-abelian); homology.tex Tag 010N (lemma-exact-functor), part (4)."
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the additive exact functor $F_T$ just proved. Its termwise functor $C(F_T)$ preserves quasi-isomorphisms and factors through localization as $DF_T$, with natural isomorphism $\\varphi_K:DF_T(Q_AK)\\xrightarrow{\\sim}Q_T(C(F_T)K)$. The same cited statement supplies its shift comparisons and says that this is a triangulated functor, hence exact as a functor of derived categories. This construction uses the unbounded categories throughout; no resolution, convergence assertion or cohomological bound is needed.",
+      "uses": [
+        "lem-weil-pbc-exact-functor-derived-factorization"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)--(4); Tag 014X (lemma-additive-exact-homotopy-category)."
+      }
+    },
+    {
+      "text": "For each integer $q$ and each cochain complex $K$, [lem-weil-pbc-exact-functor-complex-cohomology] gives $c_K^q:H^q(C(F_T)K)\\xrightarrow{\\sim}F_T(H^qK)$, induced by the canonical kernel and image comparisons and the resulting quotient comparison. Invert this map and follow it by $H^q(\\varphi_K)^{-1}$ to obtain $F_T(H^q(Q_AK))\\xrightarrow{\\sim}H^q(DF_T(Q_AK))$, using the cohomology identification of [def-weil-abstract-derived-category]. All these maps are natural in chain maps. Both functors on complexes invert quasi-isomorphisms: cohomology does so by definition, $F_T$ preserves isomorphisms, and $C(F_T)$ does so by step 3. Part (2) of [lem-weil-pbc-localization-universal-property] therefore descends this natural isomorphism uniquely to $P\\in D(A)$, with its inverse descending as well. This is the requested cohomology comparison, and its construction fixes its normalization. In particular $F_T$ includes scalar restriction along the specified $\\gamma^{-1}$; restriction leaves the underlying cycle, boundary and quotient maps unchanged, so this comparison has exactly the prescribed coefficient transport.",
+      "uses": [
+        "lem-weil-pbc-exact-functor-complex-cohomology",
+        "def-weil-abstract-derived-category",
+        "lem-weil-pbc-localization-universal-property",
+        "def-pc-sheaf-restrict-scalars"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 015F (lemma-right-derived-exact-functor), proof, with the cohomology calculation of homology.tex Tag 010N (lemma-exact-functor); localization as in Tag 05RU (definition-unbounded-derived-category)."
+      }
+    },
+    {
+      "text": "Let $M[0]$ be the complex with $M$ in degree zero and zero elsewhere. Its termwise image under $F_T$ has $F_T(M)$ in degree zero and zero elsewhere, with zero differentials. Thus $\\varphi_{M[0]}$ identifies $DF_T(M[0])$ with $F_T(M)[0]$, naturally in every module map. For $r\\in\\mathbf Z$, compose the shift comparison from [lem-weil-pbc-exact-functor-derived-factorization] with this degree-zero identification shifted by $r$. This gives $DF_T(M[r])\\xrightarrow{\\sim}F_T(M)[r]$. At the complex level its map is the identity in each degree: the only possibly nonzero term is $F_T(M)$ in degree $-r$, and every differential is zero. The cited factorization's shift-compatibility equation identifies this with the localization comparison for the shifted complex itself. Consequently the comparison is the specified one, natural in arbitrary $M$, for positive, zero and negative shifts alike.",
+      "uses": [
+        "lem-weil-pbc-exact-functor-derived-factorization"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 015F (lemma-right-derived-exact-functor), part (4); termwise shift normalization in Tag 014X (lemma-additive-exact-homotopy-category)."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-finite-type-constant-exact",
+    "def-weil-pbc-proetale-site",
+    "def-sf-site-constant-module-functor",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
     "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-integral-stratified-perfect-models",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-localization-universal-property"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)--(4); reuse the already constructed integralConstantModule_exact and integralConstantModule_additive, and specialize the canonical Mathlib exact-derived-functor instances and existing normalized comparisons."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "completedConstant|adic.*realiz|realiz.*homology",
-   "results": "{\"t\": \"2026-10-21T06:48:23Z\", \"tool\": \"grep\", \"query\": \"completedConstant|adic.*realiz|realiz.*homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Exact realization of constant modules over the completed ring sheaf commutes with cohomology",
-   "results": "{\"t\": \"2026-10-21T06:48:24Z\", \"tool\": \"leansearch\", \"query\": \"Exact realization of constant modules over the completed ring sheaf commutes with cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.module\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"ContinuousCohomology.const_app_hom\", \"CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"ModuleCat.Tilde.res_const\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\"], \"digest\": \"6b7638b88fe9d42c\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SheafOfModules\", \"homology\"",
-   "results": "{\"t\": \"2026-10-21T06:48:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Exact completed constant sheaf realization of modules over a Noetherian adic ring commutes with derived cohomology and single complexes",
-   "results": "{\"t\": \"2026-10-21T06:48:26Z\", \"tool\": \"leanfinder\", \"query\": \"Exact completed constant sheaf realization of modules over a Noetherian adic ring commutes with derived cohomology and single complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"localCohomology.diagram\", \"Condensed.profiniteSolid\", \"Profinite.NobelingProof.succ_exact\", \"instAbelianCondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB4CondensedMod\", \"CondensedMod.IsSolid\"], \"digest\": \"b883286dbff135a6\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For an adic coefficient datum the functor from algebra modules to modules over the completed pro-etale ring sheaf is exact and its derived functor preserves single objects and homology",
-   "results": "{\"t\": \"2026-10-21T06:49:31Z\", \"tool\": \"leanfinder\", \"query\": \"For an adic coefficient datum the functor from algebra modules to modules over the completed pro-etale ring sheaf is exact and its derived functor preserves single objects and homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"BDeRhamPlus\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Profinite.NobelingProof.succ_exact\", \"localCohomology.diagram\", \"Condensed.profiniteSolid\", \"Algebra.H1Cotangent.exact_map_δ\", \"localCohomology.ofSelfLERadical\"], \"digest\": \"4c486bfb5f4b8f3c\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Exact completed constant module sheaf realization over a Noetherian adic ring commutes with unbounded derived cohomology",
-   "results": "{\"t\": \"2026-10-21T08:12:01Z\", \"tool\": \"leanfinder\", \"query\": \"Exact completed constant module sheaf realization over a Noetherian adic ring commutes with unbounded derived cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"localCohomology.diagram\", \"Profinite.NobelingProof.succ_exact\", \"instAbelianCondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.IsSolid\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"3cfac0a72f5927a5\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
-  },
-  {
-   "tool": "grep",
-   "query": "completedConstant|adic.*realiz|realiz.*homology",
-   "results": "{\"t\": \"2026-10-21T08:12:15Z\", \"tool\": \"grep\", \"query\": \"completedConstant|adic.*realiz|realiz.*homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Exact constant sheaf tensor completed coefficient ring derived functor cohomology",
-   "results": "{\"t\": \"2026-10-21T08:12:16Z\", \"tool\": \"leansearch\", \"query\": \"Exact constant sheaf tensor completed coefficient ring derived functor cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.constantSheaf\", \"LightCondensed.discrete\", \"CategoryTheory.constantSheafΓAdj\", \"LightCondensed.IsDiscrete\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"Condensed.discrete\", \"CategoryTheory.Sheaf.tensorUnit_isSheaf\"], \"digest\": \"8c5e4b88c2bcd571\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SheafOfModules\", \"homology\"",
-   "results": "{\"t\": \"2026-10-21T08:12:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An additive exact functor from algebra modules to sheaves over a completed constant algebra induces a triangulated functor preserving cohomology and shifted modules",
-   "results": "{\"t\": \"2026-10-21T08:13:10Z\", \"tool\": \"leanfinder\", \"query\": \"An additive exact functor from algebra modules to sheaves over a completed constant algebra induces a triangulated functor preserving cohomology and shifted modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\"], \"digest\": \"a114c02282f94cac\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "date": "2026-10-21",
-  "group": "NA"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "blueprint": {
-  "from": {
-   "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); derived.tex, lemma-right-derived-exact-functor. Applied to Bhatt–Scholze Proposition 6.6.11 and Proposition 6.8.11(3); normalized realization is the one in the existing DAG definition.",
-   "via": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-condensed-e-realization",
-    "nt-target-proetale-e"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-weil-pbc-completed-realization-derived-cohomology",
-  "worker": "stage1",
-  "summary": "Statement retained verbatim. Proved exactness by constant sheafification, completed-sheaf flatness and invertible scalar restriction; applied existing exact-functor localization and cohomology nodes and explicitly descended the normalized cohomology comparison. Shifted singles are computed termwise. All dependencies already exist, so no new nodes. Read the actual Stacks lemmas and Bhatt--Scholze 6.6.11 and 6.8.11(3); searched project Lean and Mathlib.",
-  "blueprint": "Expands the integral-lattice local-model realization underlying thm-weil-pbc-finite-extension.proof.md, first sentence \"Choose an integral lattice for K\", via the integral-stratified-perfect-characterization branch. Realizes the completed constant models of Bhatt--Scholze 6.6.11 and 6.8.11(3); preserves the existing ancestor and via chain."
- },
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-NW-6d8c54808",
-  "group": "NW",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-6d8c54808 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, and the item's statement, stmt_deps and blueprint are unchanged from side-live. The item is not on the drop list, has no re-split note, and its live node is still unsplit. Steps checked: step 1 (lem-weil-pbc-finite-type-constant-exact is for all modules on a small site; Stacks 093J line 8198; 03CY). Step 2 (flatness from lem-weil-pbc-completed-constant-sheaf-reduction clause 1, which matches Stacks 093M lemma-completion-flat, line 8261: only Λ Noetherian, any site). Step 3 (exact-functor-derived-factorization; derived.tex 015F parts (3)-(4) and 014X). Step 4 (cohomology comparison via 010N, inverted and composed with H^q(φ_K)^{-1}, then descended by localization-universal-property(2); both functors invert quasi-isomorphisms). Step 5 (elementary: σ composed with φ_{M[0]}, with τ the identity). Edge cases checked: M=0; r negative, zero and positive; unbounded P; I=0; empty T. One fault, repaired: step 2 uses γ^{-1} but never shows γ is invertible. I added that γ is the limit of the levelwise isomorphisms A̲/I^n≅(A/I^n)_T given by the last clause of the already-cited completed-constant-sheaf-reduction (every A/I^n is finite by the adic datum). I also made explicit that an additive functor preserving short exact sequences preserves finite limits and colimits (Homology 010N(4)), which step 3's hypothesis needs. The corrected item is under fixes/dag/nodes/sec-proper-base-change/. Advisory: the exactness clause overlaps the existing lem-weil-pbc-completed-constant-algebra-flat-quotients and the parallel lem-sfb-admissible-scalar-realization-exact; the derived and cohomology clauses are new. No tool_uses.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedRealizationDerivedCohomology",
-  "declaration": "AlgebraicGeometry.Scheme.integralConstantRealization_exact_derived",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.integralConstantDerived_commShift",
-   "AlgebraicGeometry.Scheme.integralRealizationFactors",
-   "AlgebraicGeometry.Scheme.integralRealizationHomologyIso",
-   "AlgebraicGeometry.Scheme.integralRealizationShiftedModuleIso",
-   "AlgebraicGeometry.Scheme.integralConstantRealization_exact_derived"
   ],
-  "file": "lean/Sheaf/Paper/CompletedRealizationDerivedCohomology.lean",
-  "statement": "theorem integralConstantRealization_exact_derived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive ∧ PreservesFiniteLimits (integralConstantModule T d) ∧ PreservesFiniteColimits (integralConstantModule T d) ∧ (integralConstantDerived T d).IsTriangulated ∧ NatTrans.CommShift (integralRealizationFactors T d).hom ℤ",
-  "branch": "sheaf-dag",
-  "by": "Q28",
-  "date": "2026-10-21",
-  "existing": false,
-  "note": "Exactness and triangulated descent are stated by the main theorem; the same module constructs the normalized localization, homology and shifted-module natural isomorphisms as real data using the recorded realization and canonical exact-functor interfaces."
- },
- "reviewed_lean": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-0935d4578",
-  "group": "Q28",
-  "result": "pass",
-  "note": "Re-delivery after H13 RETURN of b3477c2d3d69. def-weil-derived-cohomology-sheaves.json is now byte-identical to side-live, so N5's record is kept. Of the 11 snapshot node records, only the item node differs from live, and only in its new lean record. The item module is byte-identical to the previous head. Report has Worker report, Second reading by Q28 and Return repair sections; the dependency-module paragraph is removed. Item and its 10 stmt_deps are not on the drop list and there is no repair note. Independent clause-by-clause H3 check passes: integralConstantModule is completedKoszulConstant then pbcRestrict along gamma inverse; integralConstantDerived is mapDerivedCategory on the standard derived category; the homology comparison is mapDerivedCategoryHomologyFunctorIso, a functor iso for all q in the node's orientation; the shifted comparison is commShiftIso r composed with mapDerivedCategorySingleFunctor 0, for all r and all M. No hollow defs, only the theorem has sorry, docstrings carry source and blueprint, lean.statement is verbatim. Advisory: every conjunct follows from landed or Mathlib results; some imports are proof-only. No compile, since no file changed."
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X6",
-  "result": "pass",
-  "landing": "20261021T120942-L-4015475",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J and 093M, followed by derived.tex Tag 015F; normalized cohomology and shifted-single comparisons expanded explicitly from the exact-functor and localization statements."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "completedConstant|adic.*realiz|realiz.*homology",
+      "results": "{\"t\": \"2026-10-21T06:48:23Z\", \"tool\": \"grep\", \"query\": \"completedConstant|adic.*realiz|realiz.*homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Exact realization of constant modules over the completed ring sheaf commutes with cohomology",
+      "results": "{\"t\": \"2026-10-21T06:48:24Z\", \"tool\": \"leansearch\", \"query\": \"Exact realization of constant modules over the completed ring sheaf commutes with cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.module\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"ContinuousCohomology.const_app_hom\", \"CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"ModuleCat.Tilde.res_const\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\"], \"digest\": \"6b7638b88fe9d42c\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"SheafOfModules\", \"homology\"",
+      "results": "{\"t\": \"2026-10-21T06:48:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exact completed constant sheaf realization of modules over a Noetherian adic ring commutes with derived cohomology and single complexes",
+      "results": "{\"t\": \"2026-10-21T06:48:26Z\", \"tool\": \"leanfinder\", \"query\": \"Exact completed constant sheaf realization of modules over a Noetherian adic ring commutes with derived cohomology and single complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"localCohomology.diagram\", \"Condensed.profiniteSolid\", \"Profinite.NobelingProof.succ_exact\", \"instAbelianCondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB4CondensedMod\", \"CondensedMod.IsSolid\"], \"digest\": \"b883286dbff135a6\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For an adic coefficient datum the functor from algebra modules to modules over the completed pro-etale ring sheaf is exact and its derived functor preserves single objects and homology",
+      "results": "{\"t\": \"2026-10-21T06:49:31Z\", \"tool\": \"leanfinder\", \"query\": \"For an adic coefficient datum the functor from algebra modules to modules over the completed pro-etale ring sheaf is exact and its derived functor preserves single objects and homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"BDeRhamPlus\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Profinite.NobelingProof.succ_exact\", \"localCohomology.diagram\", \"Condensed.profiniteSolid\", \"Algebra.H1Cotangent.exact_map_δ\", \"localCohomology.ofSelfLERadical\"], \"digest\": \"4c486bfb5f4b8f3c\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: ordinary module adic completion and discrete condensed modules are not this completed ring-sheaf functor; exact-functor infrastructure does not provide its coefficient normalization and exactness"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exact completed constant module sheaf realization over a Noetherian adic ring commutes with unbounded derived cohomology",
+      "results": "{\"t\": \"2026-10-21T08:12:01Z\", \"tool\": \"leanfinder\", \"query\": \"Exact completed constant module sheaf realization over a Noetherian adic ring commutes with unbounded derived cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"localCohomology.diagram\", \"Profinite.NobelingProof.succ_exact\", \"instAbelianCondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.IsSolid\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"3cfac0a72f5927a5\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
+    },
+    {
+      "tool": "grep",
+      "query": "completedConstant|adic.*realiz|realiz.*homology",
+      "results": "{\"t\": \"2026-10-21T08:12:15Z\", \"tool\": \"grep\", \"query\": \"completedConstant|adic.*realiz|realiz.*homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Exact constant sheaf tensor completed coefficient ring derived functor cohomology",
+      "results": "{\"t\": \"2026-10-21T08:12:16Z\", \"tool\": \"leansearch\", \"query\": \"Exact constant sheaf tensor completed coefficient ring derived functor cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.constantSheaf\", \"LightCondensed.discrete\", \"CategoryTheory.constantSheafΓAdj\", \"LightCondensed.IsDiscrete\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"Condensed.discrete\", \"CategoryTheory.Sheaf.tensorUnit_isSheaf\"], \"digest\": \"8c5e4b88c2bcd571\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"SheafOfModules\", \"homology\"",
+      "results": "{\"t\": \"2026-10-21T08:12:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An additive exact functor from algebra modules to sheaves over a completed constant algebra induces a triangulated functor preserving cohomology and shifted modules",
+      "results": "{\"t\": \"2026-10-21T08:13:10Z\", \"tool\": \"leanfinder\", \"query\": \"An additive exact functor from algebra modules to sheaves over a completed constant algebra induces a triangulated functor preserving cohomology and shifted modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\"], \"digest\": \"a114c02282f94cac\"}",
+      "date": "2026-10-21",
+      "verdict": "no match: returned ordinary adic completion, constant/condensed sheaf infrastructure, or exact-derived-functor infrastructure; none supplies the completed pro-etale coefficient normalization and exact realization asserted here"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "date": "2026-10-21",
+    "group": "NA"
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "blueprint": {
+    "from": {
+      "node": "thm-weil-pbc-finite-extension",
+      "place": "Proof, first sentence: \"Choose an integral lattice for K\"; Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); derived.tex, lemma-right-derived-exact-functor. Applied to Bhatt–Scholze Proposition 6.6.11 and Proposition 6.8.11(3); normalized realization is the one in the existing DAG definition.",
+      "via": [
+        "lem-weil-pbc-integral-stratified-perfect-characterization",
+        "lem-weil-pbc-condensed-e-realization",
+        "nt-target-proetale-e"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-weil-pbc-completed-realization-derived-cohomology",
+    "worker": "stage1",
+    "summary": "Statement retained verbatim. Proved exactness by constant sheafification, completed-sheaf flatness and invertible scalar restriction; applied existing exact-functor localization and cohomology nodes and explicitly descended the normalized cohomology comparison. Shifted singles are computed termwise. All dependencies already exist, so no new nodes. Read the actual Stacks lemmas and Bhatt--Scholze 6.6.11 and 6.8.11(3); searched project Lean and Mathlib.",
+    "blueprint": "Expands the integral-lattice local-model realization underlying thm-weil-pbc-finite-extension.proof.md, first sentence \"Choose an integral lattice for K\", via the integral-stratified-perfect-characterization branch. Realizes the completed constant models of Bhatt--Scholze 6.6.11 and 6.8.11(3); preserves the existing ancestor and via chain."
+  },
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-NW-6d8c54808",
+    "group": "NW",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-6d8c54808 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, and the item's statement, stmt_deps and blueprint are unchanged from side-live. The item is not on the drop list, has no re-split note, and its live node is still unsplit. Steps checked: step 1 (lem-weil-pbc-finite-type-constant-exact is for all modules on a small site; Stacks 093J line 8198; 03CY). Step 2 (flatness from lem-weil-pbc-completed-constant-sheaf-reduction clause 1, which matches Stacks 093M lemma-completion-flat, line 8261: only Λ Noetherian, any site). Step 3 (exact-functor-derived-factorization; derived.tex 015F parts (3)-(4) and 014X). Step 4 (cohomology comparison via 010N, inverted and composed with H^q(φ_K)^{-1}, then descended by localization-universal-property(2); both functors invert quasi-isomorphisms). Step 5 (elementary: σ composed with φ_{M[0]}, with τ the identity). Edge cases checked: M=0; r negative, zero and positive; unbounded P; I=0; empty T. One fault, repaired: step 2 uses γ^{-1} but never shows γ is invertible. I added that γ is the limit of the levelwise isomorphisms A̲/I^n≅(A/I^n)_T given by the last clause of the already-cited completed-constant-sheaf-reduction (every A/I^n is finite by the adic datum). I also made explicit that an additive functor preserving short exact sequences preserves finite limits and colimits (Homology 010N(4)), which step 3's hypothesis needs. The corrected item is under fixes/dag/nodes/sec-proper-base-change/. Advisory: the exactness clause overlaps the existing lem-weil-pbc-completed-constant-algebra-flat-quotients and the parallel lem-sfb-admissible-scalar-realization-exact; the derived and cohomology clauses are new. No tool_uses.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedRealizationDerivedCohomology",
+    "declaration": "AlgebraicGeometry.Scheme.integralConstantRealization_exact_derived",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.integralConstantDerived_commShift",
+      "AlgebraicGeometry.Scheme.integralRealizationFactors",
+      "AlgebraicGeometry.Scheme.integralRealizationHomologyIso",
+      "AlgebraicGeometry.Scheme.integralRealizationShiftedModuleIso",
+      "AlgebraicGeometry.Scheme.integralConstantRealization_exact_derived"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedRealizationDerivedCohomology.lean",
+    "statement": "theorem integralConstantRealization_exact_derived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive ∧ PreservesFiniteLimits (integralConstantModule T d) ∧ PreservesFiniteColimits (integralConstantModule T d) ∧ (integralConstantDerived T d).IsTriangulated ∧ NatTrans.CommShift (integralRealizationFactors T d).hom ℤ",
+    "branch": "sheaf-dag",
+    "by": "Q28",
+    "date": "2026-10-21",
+    "existing": false,
+    "note": "Exactness and triangulated descent are stated by the main theorem; the same module constructs the normalized localization, homology and shifted-module natural isomorphisms as real data using the recorded realization and canonical exact-functor interfaces."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-0935d4578",
+    "group": "Q28",
+    "result": "pass",
+    "note": "Re-delivery after H13 RETURN of b3477c2d3d69. def-weil-derived-cohomology-sheaves.json is now byte-identical to side-live, so N5's record is kept. Of the 11 snapshot node records, only the item node differs from live, and only in its new lean record. The item module is byte-identical to the previous head. Report has Worker report, Second reading by Q28 and Return repair sections; the dependency-module paragraph is removed. Item and its 10 stmt_deps are not on the drop list and there is no repair note. Independent clause-by-clause H3 check passes: integralConstantModule is completedKoszulConstant then pbcRestrict along gamma inverse; integralConstantDerived is mapDerivedCategory on the standard derived category; the homology comparison is mapDerivedCategoryHomologyFunctorIso, a functor iso for all q in the node's orientation; the shifted comparison is commShiftIso r composed with mapDerivedCategorySingleFunctor 0, for all r and all M. No hollow defs, only the theorem has sorry, docstrings carry source and blueprint, lean.statement is verbatim. Advisory: every conjunct follows from landed or Mathlib results; some imports are proof-only. No compile, since no file changed."
+  }
 }

@@ -13,8 +13,9 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.Algebra.Module.FinitePresentation
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTowerLimit
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Noetherian.Basic
@@ -139,86 +140,6 @@ theorem local_integral_perfect_model_cohomology
             (DerivedCategory.homologyFunctorFactors _ q).hom.app _ ≫
             ((localIntegralScalarRealization S (Padic.coefficientExtensionIdeal l E 1)
               U).mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app P) := by
-  classical
-  let R := Padic.coefficientExtensionIntegers l E
-  let I := Padic.coefficientExtensionIdeal l E 1
-  have hdvr := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  let : IsPrincipalIdealRing R := hdvr.2.2.2.2.2.2.2.2.1
-  let : IsNoetherianRing R := inferInstance
-  let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} :=
-    Functor.ofOpSequence (X := fun n : ℕ ↦ CommRingCat.of (R ⧸ I ^ (n + 1)))
-      (fun n ↦ CommRingCat.ofHom (Ideal.Quotient.factorPowSucc I (n + 1)))
-  let : ∀ n : ℕᵒᵖ, Finite (Q.obj n) := fun n ↦ by
-    change Finite (R ⧸ I ^ (n.unop + 1))
-    have h := Padic.finite_coefficientExtensionRing l E (n.unop + 1)
-      (Nat.le_add_left 1 _)
-    change Finite (R ⧸ Padic.coefficientExtensionIdeal l E (n.unop + 1)) at h
-    have hpow : I ^ (n.unop + 1) =
-        Padic.coefficientExtensionIdeal l E (n.unop + 1) :=
-      congrArg (fun J : Ideal R ↦ J ^ (n.unop + 1))
-        (pow_one (Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)))
-    exact (congrArg (fun J : Ideal R ↦ Finite (R ⧸ J)) hpow).mpr h
-  let L := proEtaleSheafInverseImage g CommRingCat.{u + 1}
-  let e : Q ⋙ constantSheaf (ProEt.topology X) CommRingCat.{u + 1} ≅
-      adicLisseRingSystem X I := by
-    let t : Q ⋙ constantSheaf (ProEt.topology X) CommRingCat.{u + 1} ⟶
-        adicLisseRingSystem X I := NatTrans.ofOpSequence (fun n ↦ 𝟙 _) (by
-          intro n
-          simp [Q, adicLisseRingSystem])
-    have : ∀ n, IsIso (t.app n) := fun n ↦ inferInstanceAs (IsIso (𝟙 _))
-    let : IsIso t := NatIso.isIso_of_isIso_app _
-    exact asIso t
-  let : PreservesLimit (Q ⋙ constantSheaf (ProEt.topology X) CommRingCat.{u + 1}) L :=
-    proEtaleSheafInverseImage_preserves_finite_tower g Q
-  let : PreservesLimit (adicLisseRingSystem X I) L :=
-    preservesLimit_of_iso_diagram L e
-  let t : adicLisseRingSystem X I ⋙ L ⟶ adicLisseRingSystem S I :=
-    NatTrans.ofOpSequence
-      (fun n ↦ proEtaleConstantInverseImageMap g CommRingCat.{u + 1}
-        (CommRingCat.of (R ⧸ I ^ (n + 1)))) (by
-          intro n
-          simpa [adicLisseRingSystem, L] using
-            proEtaleConstantInverseImageMap_naturality g
-              (CommRingCat.ofHom (Ideal.Quotient.factorPowSucc I (n + 1))))
-  have ht (n : ℕᵒᵖ) : IsIso (t.app n) :=
-    (proEtale_profinite_coefficient_inverse_image Q).1 S X g n
-  let : IsIso t := NatIso.isIso_of_isIso_app _
-  let c := preservesLimitIso L (adicLisseRingSystem X I) ≪≫ HasLimit.isoOfNatIso (asIso t)
-  refine ⟨c, ?_, ?_⟩
-  · intro n
-    change (preservesLimitIso L (adicLisseRingSystem X I)).hom ≫
-      (HasLimit.isoOfNatIso (asIso t)).hom ≫
-        limit.π (adicLisseRingSystem S I) (op n) = _
-    rw [HasLimit.isoOfNatIso_hom_π, ← Category.assoc, preservesLimitIso_hom_π]
-    rfl
-  · intro U
-    let : (adicLisseConstantModules S R).Additive :=
-      CompletedConstantReduction.constant_additive S R
-    let : PreservesFiniteLimits (adicLisseConstantModules S R) :=
-      (CompletedConstantReduction.constant_exact S R).1
-    let : PreservesFiniteColimits (adicLisseConstantModules S R) :=
-      (CompletedConstantReduction.constant_exact S R).2
-    have he := (exactFunctor_iff (completedAdicChange S
-        (CompletedConstantReduction.base S I))).1
-      (completed_constant_algebra_flat_quotients S I _ (Iso.refl _)
-        (CompletedConstantReduction.base S I) (fun n ↦ by
-          simpa [CompletedConstantReduction.base] using
-            (CompletedConstantReduction.base_exists S I).choose_spec.1 n)).2.1
-    let : PreservesFiniteLimits
-        (completedAdicChange S (CompletedConstantReduction.base S I)) := he.1
-    let : PreservesFiniteColimits
-        (completedAdicChange S (CompletedConstantReduction.base S I)) := he.2
-    refine ⟨inferInstance, inferInstance, inferInstance,
-      inferInstance, inferInstance, inferInstance, ?_⟩
-    intro K P a b ha hb hP α q
-    have : Module.Finite R (P.X q) := (hP q).2
-    have : Module.Finite R (P.cycles q) :=
-      Module.Finite.of_injective (P.iCycles q).hom
-        ((ModuleCat.mono_iff_injective _).1 inferInstance)
-    have : Module.Finite R (P.homology q) :=
-      Module.Finite.of_surjective (P.homologyπ q).hom
-        ((ModuleCat.epi_iff_surjective _).1 inferInstance)
-    exact ⟨Module.finitePresentation_of_finite R (P.homology q), inferInstance⟩
+  sorry
 
 end AlgebraicGeometry.Scheme
