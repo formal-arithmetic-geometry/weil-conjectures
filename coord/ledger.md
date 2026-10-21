@@ -21501,3 +21501,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q95/lem-sp-cofinal-finite-reduction-constructibility (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q117/lem-pur-finite-site-counit-projection-transport (reviewer PASS; first push; new nodes: 0); claim not held by Q117: not your claim
 - 08:58 L: merged deliver/Q86/lem-per-adic-normalized-fibre-comparisons (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q97/lem-sp-ell-coefficient-fiber (reviewer FIX; first push; new nodes: 0)
