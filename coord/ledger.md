@@ -20012,3 +20012,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:50:59Z L: superseded stage-1 delivery NO/lem-weil-pbc-realization-completed-mate at d5c78705f8399ece4e0de17968d26b00f4ecfd30; current completion retained; packet archived at refs/superseded/NO/lem-weil-pbc-realization-completed-mate/d5c78705f8399ece4e0de17968d26b00f4ecfd30; stale return retired.
 - 03:51 L: merged deliver/NB/lem-sfb-etale-proetale-scalar-counit-transposes (stage 2; reviewer PASS; parallel immutable checks)
 - 03:51 L: returned deliver/Q11/lem-sfb-scalar-model-finite-flat-resolution (reviewer RETURN: L: independent stage-2 immutable head 3881ef0399cf: H13: the delivered record for def-sf-site-constant-module-functor re)
+- 03:51 L: returned deliver/Q56/lem-sp-finite-ring-action-local-constancy (reviewer RETURN: L: independent stage-2 immutable head a05421e5cef3: H3 (special case, universe too small): the statement requires [Small)
