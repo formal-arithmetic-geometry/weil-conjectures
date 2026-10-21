@@ -1,0 +1,85 @@
+{
+ "id": "lem-sfb-localized-ring-mate-graph-evaluation",
+ "kind": "statement",
+ "title": "Localized ring-sheaf mates evaluated along graphs",
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-constructible",
+ "statement": "Let $B$ be a scheme, let $u:V\\to B$ be an object of its small pro-étale site with the universe convention of [def-weil-pbc-proetale-site], and use the inverse image $u^{-1}$ of [def-sfb-finite-upper-star] on abelian sheaves (and its induced ring-object functor). Let $R$ and $S$ be sheaves of commutative rings on $B_{\\mathrm{proét}}$ and $V_{\\mathrm{proét}}$, respectively, and let $\\beta:u^{-1}R\\xrightarrow{\\sim}S$ be a ring-sheaf isomorphism. Under the restriction identification of clause (1) of [lem-sfb-proetale-object-inverse-image-restriction], write $\\bar\\beta:R|_V\\xrightarrow{\\sim}S$; restriction and its ring operations are those of [def-pur-localized-ringed-site]. Let $e_u:R\\to u_*u^{-1}R$ be the unit of the sheafified-left-Kan-extension adjunction of [def-weil-proetale-inverse-image], and put $\\eta^\\beta=u_*\\beta\\circ e_u$.\n\nFor every $T\\to B$ in $B_{\\mathrm{proét}}$ and $a\\in R(T)$, with $T\\times_BV$ viewed over $V$ by the second projection, one has\n$$e_{u,T}(a)=R(\\operatorname{pr}_T)(a),\\qquad \\eta^\\beta_T(a)=\\bar\\beta_{T\\times_BV}\\bigl(R(\\operatorname{pr}_T)(a)\\bigr),$$\nwhere the first equality uses the stated restriction identification. For every $U\\to V$ in $V_{\\mathrm{proét}}$ and every $B$-map $b:U\\to T$, let $\\gamma_b=(b,U\\to V):U\\to T\\times_BV$. Then\n$$S(\\gamma_b)\\eta^\\beta_T(a)=\\bar\\beta_U(R(b)(a)).$$\nIn particular, with $\\delta:V\\to V\\times_BV$ the diagonal, the map $S(\\delta)\\eta^\\beta_V$ is the ring isomorphism $\\bar\\beta_{V/V}:R(V)\\xrightarrow{\\sim}\\Gamma(V,S)$. For a global section $r\\in\\Gamma(B,R)$, pullback of the map $\\underline{\\mathbf Z}\\to R$ sending $1$ to $r$, followed by $\\beta$, is the global section $\\bar\\beta_{V/V}(R(u)(r))$; the monoidal-unit comparison is the canonical one for inverse image.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CE (lemma-localize-given-products), adjunction via product and graph; restriction formula following Tag 00Y0 (definition-localize). Agent-formulated ring-sheaf mate specialization of these formulas, extracted from coefficient-sections-localization old Steps 2–4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-sfb-finite-upper-star",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-pur-localized-ringed-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "toPushforwardOverPullback|overMapPushforwardAdj|overPullback",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean; Mathlib subdirectory CategoryTheory/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "unit of restriction to slice site sends sections to projection restriction and graph evaluation computes the mate of a ring sheaf map",
+   "results": "8 hits: ModuleCat.Tilde.res_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.StructureSheaf.res_apply, TopCat.Presheaf.restrict, CategoryTheory.sheafSectionsNatIsoEvaluation, TopCat.Presheaf.restrictOpenCommRingCat_apply, PresheafOfModules.restriction_app",
+   "date": "2026-10-21",
+   "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.toPushforwardOverPullback",
+   "results": "2 hits: CategoryTheory.Sheaf.toPushforwardOverPullback, CategoryTheory.Sheaf.toPushforwardOverPullback_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization inverse image sheaf unit is restriction along projection and a ring coefficient mate evaluated on the graph equals the restricted coefficient isomorphism",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens, SheafOfModules.unitHomEquiv_symm_comp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*over|over.*unit|toPushforwardOverPullback",
+   "results": "13 hits: Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/Basic.lean, Mathlib/CategoryTheory/Sites/Pretopology.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean, Mathlib/CategoryTheory/Sites/Adjunction.lean; Mathlib subdirectory CategoryTheory/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for weakly etale u V to B arbitrary ring sheaves F and G and isomorphism beta u inverse image F to G the mate unit restricted along any graph computes beta of ordinary sheaf restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-sections-localization",
+  "date": "2026-10-21",
+  "group": "Q121"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-def-sfb-constructible-local-model",
+   "place": "Statement final sentence about nonconstant local-presentation entries; supplementary nonconstant-section counterexample Steps 5–6: Localized ring-sheaf mates evaluated along graphs.",
+   "via": [
+    "lem-sfb-coefficient-sections-localization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

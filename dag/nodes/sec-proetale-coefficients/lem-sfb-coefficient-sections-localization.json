@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Apply clause (1) of [lem-weil-proetale-weakly-etale-localization] to $u:V\\to B$: composition gives the equivalence $V_{\\mathrm{proét}}\\simeq B_{\\mathrm{proét}}/V$, with identical covering families. Its assertion about morphisms between objects also makes every given $h:W\\to V$ weakly étale, so the same result applies to $h$ and to $w=u\\circ h$. Clause (1) of [lem-sfb-proetale-object-inverse-image-restriction], applied to abelian sheaves and ring sheaves, identifies inverse image along each of these maps with restriction. The auxiliary constant ring in that lemma can be chosen to be $\\mathbf Z$; we use only clause (1), which applies to arbitrary abelian and ring sheaves, not its constant-coefficient module assertions. This is the same abelian inverse image as [def-sfb-finite-upper-star]: both it and [def-weil-proetale-inverse-image] are sheafified left Kan extension along the opposite of the same base-change functor. Thus write $u^{-1}F=F|_V$ with $(F|_V)(T/V)=F(T/B)$, using the natural restriction isomorphism, not an assertion of literal equality between chosen skeletons.",
+   "text": "Clause (1) of [lem-weil-proetale-weakly-etale-localization] identifies $V_{\\mathrm{proét}}$ with $B_{\\mathrm{proét}}/V$, including coverings, and makes every given $h:W\\to V$ weakly étale. Clause (1) of [lem-sfb-proetale-object-inverse-image-restriction] identifies abelian and ring inverse image with restriction. This applies to [def-sfb-finite-upper-star]: it and [def-weil-proetale-inverse-image] are the same sheafified left Kan extension along base change. Only clause (1) is used; the auxiliary constant ring may be $\\mathbf Z$.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
     "lem-sfb-proetale-object-inverse-image-restriction",
@@ -31,76 +31,39 @@
    }
   },
   {
-   "text": "Put $F=\\Lambda_B$. Under Step 1, [sk-def-sfb-coefficient-morphisms] supplies a ring-sheaf isomorphism $\\beta_u:F|_V\\xrightarrow{\\sim}\\Lambda_V$, namely $\\alpha_u$ after the inverse-image restriction identification. Evaluating at $V/V$ gives $\\theta_V=(\\beta_u)_{V/V}:F(V)\\xrightarrow{\\sim}\\Lambda_V(V)$. This is the required ring isomorphism: on a site with terminal object, a compatible family of sections is determined by its section at that object, and every such section yields the family of its restrictions. Hence $\\Lambda_V(V)=\\Gamma(V,\\Lambda_V)$. Restriction on the localized site has the original ring operations and restriction maps by [def-pur-localized-ringed-site]. The same construction defines $\\theta_W$.",
+   "text": "By [sk-def-sfb-coefficient-morphisms], for each of $f=u,w,h$ the map $\\alpha_f$ is a ring-sheaf isomorphism and $\\eta_f$ is the inverse-image unit followed by $f_*\\alpha_f$; by Step 1 this unit is the one of [def-weil-proetale-inverse-image], so $\\eta_f=\\eta^{\\alpha_f}$ in the notation of [lem-sfb-localized-ring-mate-graph-evaluation]. Apply that node three times. (a) To $u$ with $R=\\Lambda_B$, $S=\\Lambda_V$, $\\beta=\\alpha_u$: final-object evaluation gives the ring isomorphism $\\theta_V$, and its diagonal formula gives $\\Lambda_V(\\delta)\\eta_{u,V}(s)=\\theta_V(s)$. (b) To $w=u\\circ h$ with $R=\\Lambda_B$, $S=\\Lambda_W$, $\\beta=\\alpha_w$: final-object evaluation gives $\\theta_W$, and its graph formula with $T=V$, $U=(W\\to W)$, $b=h$, so $\\gamma_b=\\gamma=(h,\\mathrm{id}_W)$, gives $\\Lambda_W(\\gamma)\\eta_{w,V}(s)=\\theta_W(\\Lambda_B(h)(s))$. (c) To $h:W\\to V$ over the base $V$ with $R=\\Lambda_V$, $S=\\Lambda_W$, $\\beta=\\alpha_h$: for $r\\in\\Gamma(V,\\Lambda_V)$ its unit formula at $T=V$, with $V\\times_VW=W$ and $\\operatorname{pr}_V=h$, gives $\\eta_{h,V}(r)=(\\bar\\alpha_h)_{W/W}(\\Lambda_V(h)(r))$, and its section-as-map formula identifies the right side with $h^\\sharp(r)$. Thus $\\eta_{h,V}=h^\\sharp$ on global sections.",
    "uses": [
+    "lem-sfb-localized-ring-mate-graph-evaluation",
     "sk-def-sfb-coefficient-morphisms",
-    "def-pur-localized-ringed-site"
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00Y0 and following restriction formula; ringed specialization using the canonical alpha isomorphism"
+    "place": "Tag 03CE (lemma-localize-given-products), adjunction via product and graph; restriction formula following Tag 00Y0 (definition-localize). Agent-formulated ring-sheaf mate specialization of these formulas, extracted from coefficient-sections-localization old Steps 2–4."
    }
   },
   {
-   "text": "We will compute using the coefficient mates $\\eta$ of [def-sfb-eta]. In the restriction model, the adjunction unit at an object $T/B$ sends $a\\in F(T)$ to its restriction along $\\operatorname{pr}_T:T\\times_BV\\to T$. Indeed, in the colimit formula of [def-weil-proetale-inverse-image] the unit uses the index $(T,\\mathrm{id}_{T\\times_BV})$; the initial graph index of [lem-sfb-proetale-object-inverse-image-restriction] maps to this index by $\\operatorname{pr}_T$, so the induced colimit identification sends it to $F(\\operatorname{pr}_T)(a)$. Consequently $\\eta_{u,T}(a)=(\\beta_u)_{T\\times_BV}\\bigl(F(\\operatorname{pr}_T)(a)\\bigr)$. With $P=V\\times_BV$ viewed over $V$ by its second projection and $\\delta:V\\to P$ the diagonal, naturality of $\\beta_u$ gives\n$$\\Lambda_V(\\delta)\\eta_{u,V}(s)=\\theta_V(s).$$\nFor $h:W\\to V$, $V\\times_VW=W$. Thus for a global section $r$ of $\\Lambda_V$ the same unit computation gives $\\eta_{h,V}(r)=\\alpha_h(r|_W)=h^\\sharp(r)$. The final equality also follows directly from the section-as-map description: pullback of $\\mathbf Z\\to\\Lambda_V$, $1\\mapsto r$, sends $1$ to $r|_W$ under the monoidal-unit identification; composing with $\\alpha_h$ gives precisely the stated section map.",
+   "text": "Now [lem-sfb-coefficient-mate-diagonal-graph] equates the graph evaluation in Step 2 with $\\eta_{h,V}$ applied to the diagonal evaluation there. Substituting the three formulas of Step 2 proves $\\theta_W(\\Lambda_B(h)(s))=h^\\sharp(\\theta_V(s))$. Both the diagonal and graph are retained, so $h$ need not be a monomorphism.",
    "uses": [
-    "def-sfb-eta",
-    "def-weil-proetale-inverse-image",
-    "lem-sfb-proetale-object-inverse-image-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE, lemma-localize-given-products: adjunction unit of localization, computed by its graph index; coefficient mate specialization"
-   }
-  },
-  {
-   "text": "Let $w=u\\circ h$ and $\\gamma:W\\to V\\times_BW$ have projections $h$ and $\\mathrm{id}_W$. Applying the unit formula of Step 3 with $w$ instead of $u$ and $T=V$, followed by restriction along $\\gamma$, gives\n$$\\Lambda_W(\\gamma)\\eta_{w,V}(s)=(\\beta_w)_W\\bigl(F(\\operatorname{pr}_V\\circ\\gamma)(s)\\bigr)=\\theta_W(F(h)(s)).$$\nHere naturality of the ring-sheaf morphism $\\beta_w$ from [sk-def-sfb-coefficient-morphisms] is applied to the $W$-morphism $\\gamma$, and $\\operatorname{pr}_V\\gamma=h$. Thus this is an equality for the actual section $s$, without requiring it to be constant or restricting the condensed ring.",
-   "uses": [
-    "sk-def-sfb-coefficient-morphisms"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Restriction formula after Definition 00Y0 and relocalization in Tag 03EH, lemma-relocalize; explicit graph computation"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-eta-comp] to $f=h$, $g=u$. Its canonical coefficient maps are the ones here: [sk-def-sfb-coefficient-morphisms] defines $\\alpha$ using the inverse of the pullback composition comparison and defines $\\eta$ as its mate, exactly as specified in that lemma. It gives $\\eta_w=c_{h,u}\\circ u_*\\eta_h\\circ\\eta_u$. Evaluate at $V/B$. By [def-sfb-finite-lower-star-comp], $c_{h,u}$ identifies $P\\times_VW$ with $V\\times_BW$, by $(v_1,v_2,z)\\mapsto(v_1,z)$, where $v_2=h(z)$. Under this identification the base change of $\\delta:V\\to P$ along $h$ is precisely $\\gamma$. Naturality of the sheaf map $\\eta_h:\\Lambda_V\\to h_*\\Lambda_W$ along $\\delta$ therefore reads\n$$\\Lambda_W(\\gamma)\\eta_{w,V}(s)=\\eta_{h,V}\\bigl(\\Lambda_V(\\delta)\\eta_{u,V}(s)\\bigr).$$\nSteps 3 and 4 identify the two sides respectively with $\\theta_W(F(h)(s))$ and $h^\\sharp(\\theta_V(s))$. This proves the asserted naturality for every $B$-morphism $h$. No monomorphism assumption is used: both the diagonal $\\delta$ and the graph $\\gamma$ are retained.",
-   "uses": [
-    "lem-sfb-eta-comp",
-    "sk-def-sfb-coefficient-morphisms",
-    "def-sfb-finite-lower-star-comp"
+    "lem-sfb-coefficient-mate-diagonal-graph"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
-    "place": "Displayed eta composition identity, evaluated on V and restricted along the graph; source final paragraph specifies the fibre-product comparison"
+    "place": "Displayed coefficient-mate composition identity and final paragraph on the canonical iterated-fibre-product comparison; agent-formulated diagonal/graph evaluation, extracted from coefficient-sections-localization old Step 5."
    }
   },
   {
-   "text": "Finally fix $r=\\theta_V(s)$. Set $R=h^{-1}_{\\mathrm{Ab}}\\Lambda_V$ and $S=\\Lambda_W$. The module pullback of [def-sfb-module-upper-star] is $S\\otimes_R h^{-1}_{\\mathrm{Ab}}(-)$ with scalar map $\\alpha_h:R\\to S$. In the restriction model of Step 1, inverse image of the regular module and of its multiplication map are $R$ and $m_t$, where $t=r|_W$; this follows objectwise by restricting $x\\mapsto rx$. The tensor description of [def-sfb-modobj-extension] has the canonical regular-module isomorphism\n$$q:S\\otimes_R R\\xrightarrow{\\sim}S,\\qquad b\\otimes a\\mapsto b\\alpha_h(a),\\qquad q^{-1}(b)=b\\otimes1.$$\nThe formula is balanced since $b\\alpha_h(c)\\alpha_h(a)=b\\alpha_h(ca)$; its two composites with the proposed inverse are identities using the balancing relation $b\\otimes a=b\\alpha_h(a)\\otimes1$. These formulas define morphisms of sheaves: the sheaf tensor is the sheafification of the presheaf tensor [sk-def-sfb-sheaf-tensor], and the relative tensor imposes the balancing coequalizer. Thus the calculations on pure tensors extend by its universal property; no assertion that arbitrary global tensor sections are pure tensors is needed.",
+   "text": "Set $r=\\theta_V(s)$, $R=h^{-1}_{\\mathrm{Ab}}\\Lambda_V$, $S=\\Lambda_W$. By [def-sfb-module-upper-star] module pullback is $S\\otimes_Rh^{-1}_{\\mathrm{Ab}}(-)$ along $\\alpha_h$. Restriction from Step 1 sends the regular module and $x\\mapsto rx$ to $R$ and multiplication by $t=r|_W$, objectwise. Apply [lem-sfb-regular-scalar-extension-multiplication] to $\\varphi=\\alpha_h$: its normalized $q$ is the canonical $h^*\\Lambda_V\\cong\\Lambda_W$, and it conjugates the pulled-back multiplication to $m_{\\alpha_h(t)}$. Step 2 identifies $\\alpha_h(t)=h^\\sharp(r)$, and Step 3 identifies this with $\\theta_W(\\Lambda_B(h)(s))$, proving the last clause.",
    "uses": [
     "def-sfb-module-upper-star",
-    "def-sfb-modobj-extension",
-    "sk-def-sfb-sheaf-tensor"
+    "lem-sfb-regular-scalar-extension-multiplication"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
-    "place": "Extension of scalars as a balancing coequalizer, applied to the regular module"
-   }
-  },
-  {
-   "text": "On the same generators the pulled-back endomorphism is $b\\otimes a\\mapsto b\\otimes ta$ by the morphism formula in [def-sfb-modobj-extension]. Its image under $q$ is\n$$b\\alpha_h(ta)=\\alpha_h(t)b\\alpha_h(a).$$\nHence conjugation by $q$ makes it multiplication by the global section $\\alpha_h(t)=h^\\sharp(r)$; equality follows on the sheafified tensor and its balancing coequalizer from equality of these bilinear maps. Step 5 identifies this section with $\\theta_W(\\Lambda_B(h)(s))$. This is exactly the asserted module-pullback clause under the canonical identification $h^*\\Lambda_V\\cong\\Lambda_W$.",
-   "uses": [
-    "def-sfb-modobj-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
-    "place": "Morphisms under extension of scalars; balanced tensor calculation for multiplication"
+    "place": "Balancing coequalizer and its induced morphisms, with def-sfb-modobj-extension.proof.md on descent and epimorphic projections; agent-formulated normalized regular-module and multiplication specialization, extracted from coefficient-sections-localization old Steps 6–7."
    }
   }
  ],
@@ -109,19 +72,16 @@
   "lem-sfb-proetale-object-inverse-image-restriction",
   "def-sfb-finite-upper-star",
   "def-weil-proetale-inverse-image",
+  "lem-sfb-localized-ring-mate-graph-evaluation",
   "sk-def-sfb-coefficient-morphisms",
-  "def-pur-localized-ringed-site",
-  "def-sfb-eta",
-  "lem-sfb-eta-comp",
-  "def-sfb-finite-lower-star-comp",
+  "lem-sfb-coefficient-mate-diagonal-graph",
   "def-sfb-module-upper-star",
-  "def-sfb-modobj-extension",
-  "sk-def-sfb-sheaf-tensor"
+  "lem-sfb-regular-scalar-extension-multiplication"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00Y0, 03CE, 03EH with the blueprint canonical coefficient mate and module scalar-extension constructions; the graph calculation is written out by Q47."
+  "place": "Re-split of the retained seven-step proof into localized mate evaluation, diagonal/graph comparison, and normalized regular scalar extension; original argument preserved in report.md."
  },
  "mathlib_searches": [
   {
@@ -236,10 +196,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-coefficient-sections-localization",
   "worker": "stage1",
-  "summary": "Proved the site and inverse-image clauses using existing general localization nodes; evaluated the canonical coefficient isomorphism; proved section naturality by the existing eta composition theorem and an explicit diagonal/graph calculation; computed module multiplication under the balancing tensor isomorphism. Statement unchanged. No new nodes; no constant-coefficient substitution.",
+  "summary": "Human-requested re-split: statement unchanged; three independent statement-only unsplit nodes carry old Steps 2–4, 5, and 6–7. Existing site/restriction lemmas carry old Step 1. The parent now assembles their explicit identities in four steps; the full original arguments and assignment are retained in the report.",
   "blueprint": "Supplement to det-def-sfb-constructible-local-model final sentence, its counterexample Steps 5–6: evaluation of the nonconstant coefficient section, naturality under maps of test objects, and pullback of its multiplication endomorphism.",
   "tool_uses": [
    {
@@ -249,10 +209,6 @@
    {
     "node": "lem-sfb-proetale-object-inverse-image-restriction",
     "why": "Only clause (1), for arbitrary abelian and ring sheaves, is used as the generic inverse-image restriction calculation; its constant-coefficient module clauses are not used."
-   },
-   {
-    "node": "lem-sfb-eta-comp",
-    "why": "Generic composition law for the canonical condensed coefficient maps, used to compare restrictions in the counterexample; no local-model-unit node supplies this coherence."
    }
   ]
  },
@@ -262,12 +218,12 @@
   "lem-sfb-eta-comp"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q47-d584c5ba6",
-  "group": "Q47",
+  "reviewer": "NT-cc-Q121-557630754",
+  "group": "Q121",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-d584c5ba6 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, all 17 cited and statement-dependency nodes, the alpha-comparison chain (def-sfb-alpha, def-sfb-pullback-from-point-comp-iso, def-sfb-finite-upper-star-comp, det-pe-topos-functoriality-inverse-image), the unit sk-def-sfb-constructible, and the ancestor det-def-sfb-constructible-local-model, whose Steps 5-6 use theta_X, theta_B, naturality along q_s and the module-pullback clause, matching the item. Sources checked: Stacks sites.tex 00Y0 (definition-localize) with its restriction formula, 03CE (lemma-localize-given-products) and its adjunction proof, 03EH (lemma-relocalize); the tag map entries for 098T, 04IX and 03EL; blueprint main-20261015 lem-sfb-eta-comp.proof.md and the def-sfb-modobj-extension files. I recomputed each step. Step 3: the initial index maps to (T,id) by pr_T, so unit_T(a)=F(pr_T)a; naturality of beta_u along the diagonal gives theta_V; and eta_{h,V}=h^sharp. Step 4: gamma=(h,id) gives theta_W(F(h)s). Step 5: lem-sfb-eta-comp's m_{a,b} (conjugate c^{-1}) agrees with def-sfb-alpha's inverse of upper-star-comp (conjugate of c); c_{h,u} is restriction along W x_V P = W x_B V, and the base change of the diagonal is gamma, so naturality of eta_h gives the identity. Steps 6-7: the balancing iso q and m_t -> m_{alpha_h(t)}, using commutativity of Lambda_W. Hypotheses: h is weakly etale by clause (1) of the localization lemma; only clause (1) of the restriction lemma is used, not the constant-coefficient clauses; the coefficient category stays condensed module objects. Edge cases: empty V or W, Lambda=0, h=id, non-monomorphic objects, the ancestor case q_s. No new nodes, no duplicate node found, no cycle (327 reachable nodes), proof_deps equals the union of step uses, no SGA. The three declared tool_uses (weakly etale localization, inverse-image restriction clause (1), eta composition) are generic and accepted. One small remark: Step 3 equates the unit of def-sfb-finite-upper-lower-star-adjunction with the standard Lan unit; I accept this as the blueprint's convention. Statement unchanged, no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-557630754 (reviewer sub-agent of L); spot-checked: Human re-split. The 7-step base proof (Q47, as on side-live; the report quotes it word for word) now goes to three statement-only unsplit nodes plus a 4-step parent assembly (2112 chars, 2721 after the fix). Parent Step 1 keeps the existing localization and inverse-image citations (clause (1) of each). Node A (lem-sfb-localized-ring-mate-graph-evaluation) takes old Steps 2–4: the localization unit is restriction along pr_T, by Stacks 03CE (sites.tex l.6094) and the initial index of lem-sfb-proetale-object-inverse-image-restriction; then the eta^beta formula, the graph formula by naturality along gamma_b, the diagonal ring isomorphism, and section-as-map. Node B (lem-sfb-coefficient-mate-diagonal-graph) takes old Step 5. I checked it against lem-sfb-eta-comp (eta_w = c_{h,u} u_*eta_h eta_u) and def-sfb-finite-lower-star-comp: (V x_B V) x_V W = V x_B W by (v1,v2,z)->(v1,z), and the base change of delta along h is gamma; no mono hypothesis is needed. Node C (lem-sfb-regular-scalar-extension-multiplication) takes old Steps 6–7. I checked it against the def-sfb-modobj-extension convention: q(b(x)a)=b phi(a) is balanced, and q Ext(m_t) = m_{phi(t)} q holds by commutativity; I tested it on the point site with Z -> Z/n. I found no dropped or blurred argument. No new node restates the item or a clause of it, and the three are of comparable size. I searched the snapshot and the side-live DAG for duplicates and found none (closest: localized-site-tensor-restriction, kflat-scalar-comparison-normalization, def-pod-ring-scalar-extension, eta-comp). No SGA. One assembly fault, repaired in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-coefficient-sections-localization.json. Step 2 applied node A only to (Lambda_B, Lambda_V, alpha_u) but then quoted the graph formula, which needs the w-instance (Lambda_W, alpha_w, T=V, U=W/W, b=h). It identified eta_{h,V}=h^sharp by section-as-map alone, which also needs the unit formula at T=V. And it named a 'mate relation' hypothesis that node A does not have, where eta_f = eta^{alpha_f} via coefficient-morphisms and the Step 1 unit identification is what is needed. Step 2 now states the three instances (u, w, h) explicitly, and def-weil-proetale-inverse-image (already in proof_deps) is added to its uses. tool_uses accepted (weakly-etale localization, object inverse-image restriction clause (1)).; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
