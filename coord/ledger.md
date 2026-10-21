@@ -23756,3 +23756,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:05 L: merged deliver/NF/lem-sfb-root-tower-inner-support (stage 2; reviewer PASS; parallel immutable checks)
 - 21:06 L: returned deliver/NJ/lem-sfb-strict-local-prime-to-p-kummer-splitting (reviewer RETURN: L: independent stage-2 immutable head 45d5d59f833f: Stage-1 re-split sent on the S2 lane: no .lean module and no lean re)
 - 21:06 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 21:06 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
