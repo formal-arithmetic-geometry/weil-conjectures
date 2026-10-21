@@ -385,5 +385,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-7b791eb53 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The item statement is unchanged and is exactly what its citer (step 4 of lem-sfb-countable-endomorphism-module-reconstruction) uses: an uncountable I, infinite A_i, and finite pairwise intersections. Step 1: I=P(N); Cantor with X=N rules out an injection into N, which is exactly the negation of def-sfb-countable-set. Step 2: the binary code c([])=1, c(b::w)=2c(w)+b is injective. Every code is at least 1, so nonempty words have codes at least 2; mod 2 gives the heads; induction on the total length finishes it. Checked on 2, 3, 4, 5, 6, 7. Step 3: equal codes give equal words, hence equal lengths and agreement below n. Step 4: different n give different lengths, so the codes are injective in n and A_S is infinite, including for S empty and S=N. Step 5: if S and T differ at k, the intersection lies in the k+1 codes of lengths up to k, so it is finite. If they differ at 0 the intersection is {1}. The condition i≠j is needed. Steps 2-5 are genuinely elementary. New node lem-sfb-cantor-no-powerset-injection is a statement-only Mathlib leaf, and I read Function.cantor_injective at Mathlib/Logic/Function/Basic.lean:376-378: it is exact for every type, with no hypotheses, and four searches are recorded. It is strictly smaller than the item (no D1 problem). rg -L over dag/nodes finds no duplicate of the Cantor theorem or the almost-disjoint family. No SGA citation. The blueprint paragraph (3) does not assert the lemma, so the proof is correctly marked by=agent with a literature reference WANTED. There was no prior proof and no re-split note. No off-unit statements or tool_uses, no cycle. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.SetTheory.UncountableAlmostDisjointFamily",
+  "declaration": "Set.exists_uncountable_almostDisjoint_family",
+  "file": "lean/Sheaf/SetTheory/UncountableAlmostDisjointFamily.lean",
+  "statement": "theorem exists_uncountable_almostDisjoint_family : ∃ (I : Type u) (A : I → Set ℕ), ¬ Countable I ∧ (∀ i : I, (A i).Infinite) ∧ ∀ i j : I, i ≠ j → (A i ∩ A j).Finite",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c4983c90",
+  "group": "NE",
+  "result": "pass",
+  "note": "Lean statement ∃ (I : Type u) (A : I → Set ℕ), ¬Countable I ∧ (∀ i, (A i).Infinite) ∧ ∀ i j, i ≠ j → (A i ∩ A j).Finite matches the node clause by clause; universe u declared and inhabited by a lift of Set ℕ; no extra hypotheses; lean.statement verbatim; node diff vs side-live only adds the lean record; stmt_deps Countable / Set.Finite / Set.Infinite are Mathlib records, publicly imported; cantor_injective proof dep exists; citer countable-endomorphism-module-reconstruction uses exactly this shape; no Mathlib/project duplicate, name clash or module-path clash; docstrings carry source place, blueprint tag and the node proof; proof is sorry only; both report sections present (second reading is the standard note). Advisory only: private Logic.Function.Basic import serves the future proof."
  }
 }
