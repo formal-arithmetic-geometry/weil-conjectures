@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-finite-coefficient-realization-flat",
+ "kind": "statement",
+ "title": "Flatness of the canonical finite-coefficient realization",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $A$ a finite commutative ring. If $M$ is a flat sheaf of $A$-modules [def-pc-flat-sheaf-modules] on $X_{proet}$, its canonical realization [def-weil-pbc-proetale-modules], followed by restriction along the commutative constant-ring comparison [prop-weil-pbc-proetale-constant-exact], is flat as a sheaf of modules over the constant commutative ring sheaf.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-proetale-modules",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DA; constant scalar presentation and flatness under the module equivalence"
+ },
+ "proof": [
+  {
+   "text": "Construct the associated-module-sheaf adjunction unit. The equations identifying the constant-ring comparison on constant sections show it is linear for constant scalars. Its underlying additive morphism is the sheafification unit of the original additive sheaf, hence invertible. The restriction of the realized module is therefore isomorphic to the given flat sheaf. Apply the flatness equivalence for constant-scalar restriction [lem-sfb-constant-scalar-restriction-tensor].",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-pbc-proetale-modules",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03DA; associated-module-sheaf adjunction unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-pbc-proetale-modules",
+  "lem-sfb-constant-scalar-restriction-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DA; unit of associated module sheafification and constant scalar restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "The finite constant coefficient realization of a flat sheaf of modules is flat",
+   "date": "2026-10-22",
+   "results": [
+    "Module.FaithfullyFlat.toFlat",
+    "Module.Flat.finsupp",
+    "Module.Flat.mk",
+    "Module.Flat.of_projective",
+    "Module.Flat.dfinsupp_iff",
+    "Module.Flat.of_free",
+    "Module.Flat.of_forall_exists_factorization",
+    "Module.Flat.instOfIsDedekindDomainOfIsTorsionFree"
+   ],
+   "verdict": "The eight results concern flat algebraic modules. None states flatness of this finite-coefficient sheaf realization or identifies its canonical scalar coordinates."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "The finite constant coefficient realization of a flat sheaf of modules is flat",
+   "verdict": "No exact realization theorem found; this construction belongs to the project.",
+   "date": "2026-10-22",
+   "results": [
+    "Module.FaithfullyFlat.toFlat",
+    "Module.Flat.of_ulift",
+    "SheafOfModules.isFinitePresentation"
+   ]
+  },
+  {
+   "tool": "Loogle",
+   "query": "SheafOfModules.IsFlatOnSite",
+   "verdict": "Project-specific predicate, unknown to Loogle.",
+   "date": "2026-10-22",
+   "results": []
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOnSite|flat_iff",
+   "verdict": "Mathlib has algebraic flatness and unrelated flat functor results; no finite-coefficient realization theorem.",
+   "date": "2026-10-22",
+   "results": [
+    "Module.Flat",
+    "flat functor results"
+   ]
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenScalarSiteCoherence",
+  "date": "2026-10-22",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality: extension by zero commutes with extension of scalars; bounded flat models in lem-sp-open-scalar-site-coherence",
+   "via": [
+    "lem-sp-open-scalar-site-coherence",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenScalarFlatModelRealization",
+  "file": "lean/Sheaf/Paper/OpenScalarFlatModelRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarFlatModel.finiteCoefficientRealization_flat",
+  "statement": "theorem finiteCoefficientRealization_flat\n    (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))\n    (hM : ObjectProperty.flat M) :\n    letI : TopologicalSpace A := ⊥\n    letI : DiscreteTopology A := ⟨rfl⟩\n    SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T)\n      (R := finiteCoefficientCommRing A T)\n      ((finiteCoefficientRealization T A ⋙\n        SheafOfModules.restrictScalars (finiteCoefficientCommRingComparison A T)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T203504-L-3786821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T203504-L-3786821",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
