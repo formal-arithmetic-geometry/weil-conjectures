@@ -21685,3 +21685,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: merged deliver/Q99/lem-zl-bertini-prescribed-point-smooth-system (reviewer FIX; after a return; new nodes: 0)
 - 09:12 L: merged deliver/Q97/lem-zl-common-irreducibility-detecting-cover (reviewer PASS; after a return; new nodes: 0)
 - 09:12 L: merged deliver/NM/lem-weil-pbc-derived-square-shift-on-kinjectives (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T09:12:44Z L: superseded stage-1 delivery Q94/lem-fd-whole-tower-integral-pullback-comparison at 04fd128fa52523f01e75b3a0ae8f72ff7e71fcc9; current completion retained; packet archived at refs/superseded/Q94/lem-fd-whole-tower-integral-pullback-comparison/04fd128fa52523f01e75b3a0ae8f72ff7e71fcc9; stale return retired.
