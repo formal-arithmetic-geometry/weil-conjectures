@@ -27,292 +27,100 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal C_X=D^b_c(X,A)$ for the completed-coefficient category, including its compatible etale-origin witnesses. The coefficient datum defines $B_X=\\varprojlim_n(A/\\varpi^n)_X$ as a ring sheaf with its specified projections. The continuous-coefficient restriction lemma identifies this ring with $V\\mapsto C(|V|,A)$, and identifies its sheafified localization at $\\varpi$ with $V\\mapsto C(|V|,E)$. The identifications preserve constant sections and quotient projections and commute with locally closed restriction. All categories below are categories of module sheaves over these actual ring sheaves.",
+   "text": "Use [lem-per-rational-module-realization-functor] to identify the completed and continuous coefficient rings and construct $J_X$ with its normalized fraction rule, triangulation and cohomology formula. Its values are bounded with constructible cohomology.",
    "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+    "lem-per-rational-module-realization-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2; Definitions 6.8.1, 6.8.6 and 6.8.8"
+    "place": "Lemma 6.8.2; Proposition 6.8.11(3); Proposition 6.8.14(2), construction of scalar localization and cohomology"
    }
   },
   {
-   "text": "The integral stratified-perfect characterization applies to $X$: it assumes exactly a finite coefficient field, a noetherian finite-dimensional scheme, and invertibility of $\\ell$. It says that $K\\in\\mathcal C_X$ if and only if $K$ is bounded and its cohomology, on a finite stratification, is locally $B_S\\otimes_A N$ for finitely presented $A$-modules $N$. Equivalently its local models are $B_S\\otimes_A^L P$ with $P$ perfect. In particular it puts such integral sheaves in degree zero in $\\mathcal C_X$, and supplies closure under shifts, cones, truncations and cohomology. This step concerns the integral category only; it does not yet identify its rationalization with the target category.",
+   "text": "[lem-per-constructible-rational-hom-comparison] identifies its maps on all shifted Hom groups with the invertible scalar-extension comparison. In degree zero this proves full faithfulness.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
+    "lem-per-constructible-rational-hom-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11; Proposition 6.8.11(3)"
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
    }
   },
   {
-   "text": "Scalar localization of module sheaves is exact by the localization/inverse-image coherence lemma, applied to the identity geometric morphism with $R=B_X,t=\\varpi$. Its termwise derived functor is $F_X(K)=E_X\\otimes^L_{B_X}K$, as also given by derived change of rings. Exactness implies $\\mathcal H^r(F_XK)=E_X\\otimes_{B_X}\\mathcal H^r(K)$: an exact functor preserves the kernels, images and quotients defining cohomology. On a stratum $h:S\\to X$ the continuous-coefficient restriction lemma gives $h^{-1}B_X\\cong B_S$ and $h^{-1}E_X\\cong E_S$, and the coherence lemma (for $h$) commutes $h^{-1}$ with localization; so on an integral local model this sheaf is $E_S\\otimes_A N$. A finitely presented module over the DVR $A$ has a finite presentation; after tensoring the presentation with the field $E$, its cokernel is a finite-dimensional vector space, so the last sheaf is locally finite free. Thus $F_XK$ lies in $D_{\\mathrm{cons}}(X,E_X)$. Since $\\varpi$ acts invertibly after $F_X$, the fraction relation defines $J_X(f/\\varpi^n)=\\varpi^{-n}F_X(f)$, respecting addition, identities and composition. Raw scalar localization is triangulated with distinguished triangles isomorphic to integral image triangles; hence the triangulated functor $F_X$ induces a triangulated $E$-linear functor $J_X$ into the ambient $D(\\operatorname{Mod}(E_X))$.",
+   "text": "[lem-per-rational-stratum-integral-models] gives finite filtrations with genuine integral models for every quotient, with completeness and etale witnesses. Apply the finite-cone construction [lem-per-rational-realization-finite-cone-models], using full faithfulness from Step 2. Every bounded constructible target object is in the image. Thus $J_X$ is an $E$-linear triangulated equivalence onto the stated full subcategory.",
    "uses": [
-    "lem-weil-pbc-localization-inverse-image-coherence",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-pbc-rational-category",
-    "lem-weil-linear-scalar-localization-triangulated"
+    "lem-per-rational-stratum-integral-models",
+    "lem-per-rational-realization-finite-cone-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2): construction of the functor; Lemma 6.8.2"
+    "place": "Definitions 6.8.6 and 6.8.10; Proposition 6.8.11(3); Lemma 6.8.13 and Proposition 6.8.14(2), finite-stratum reduction, pp. 60-62"
    }
   },
   {
-   "text": "For $K,L\\in\\mathcal C_X$, verify the Hom-continuity hypothesis of the scalar-localization Hom lemma. Integral bounded-below compactness gives the global-derived-Hom coproduct comparison for every countable family with a common lower bound, including its shift by any integer $q$. Take $H^0$ and use the global-sections/internal-Hom comparison to identify $H^0R\\operatorname{Hom}(K,M)$ with $\\operatorname{Hom}_{D(B_X)}(K,M)$. Countable sums of $A$-modules are exact, since finite-support coordinates preserve kernels and surjections; their termwise sums represent derived sums by the countable-sums lemma. Thus $H^0$ of their sum is the sum of their $H^0$'s. These observations give precisely the Hom/coproduct hypothesis, and boundedness makes $L$ bounded below. The scalar-localization Hom lemma, with $R=B_X,t=\\varpi$, now gives\n$$\\operatorname{Hom}_{D(B_X)}(K,L[q])[1/\\varpi]\\cong\\operatorname{Hom}_{D(E_X)}(F_XK,F_XL[q]),\\quad f/\\varpi^n\\longmapsto\\varpi^{-n}F_X(f).$$\nAt $q=0$ the left side is the raw category's Hom group. The lemma's identity and composition clauses prove full faithfulness of $J_X$. The target here is $D(E_X)$, not $D(B_X)$.",
+   "text": "[lem-per-rational-realization-degree-reflection] reflects both degree bounds and gives the canonical truncation and cohomology comparisons. Essential surjectivity from Step 3 now identifies the localized heart with all constructible rational module sheaves in degree zero.",
    "uses": [
-    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-    "lem-pur-rhom-global-sections",
-    "lem-kun-derived-countable-sums-exact",
-    "lem-weil-pbc-scalar-localization-derived-hom",
-    "def-weil-pbc-rational-category"
+    "lem-per-rational-realization-degree-reflection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12; Proposition 6.8.14(2), full faithfulness"
+    "place": "Propositions 6.8.11(3) and 6.8.14(2), standard cohomology and localized truncations, pp. 61-62"
    }
   },
   {
-   "text": "Apply the directed-triangulated-image lemma with the singleton preorder, source the raw rationalized category, identity transition, and functor $J_X$ to the ambient $D(E_X)$. Step 3 gives a triangulated functor and Step 4 gives every arrow between its image objects an actual lift; these are the lemma's hypotheses at the unique common stage. Its conclusion makes the essential image closed under zero, shifts and distinguished triangles. If $L$ is a lisse $E_X$-sheaf, the lisse-lattice lemma produces a constructible $B_X$-module $N$ with $E_X\\otimes_{B_X}N\\cong L$. Step 2 puts $N[0]$ in $\\mathcal C_X$, with completeness and compatible etale origins. Hence all lisse sheaves in degree zero belong to the essential image.",
+   "text": "[lem-per-rational-realization-pullback-comparison] identifies completed pullback with the displayed ambient module inverse image, through the inverse of its specified completion unit. [lem-per-rational-pullback-composition-coherence] makes this identification natural and compatible with identity and composition using exactly the ambient composition comparisons.",
    "uses": [
-    "lem-weil-pbc-directed-triangulated-image",
-    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-rational-pullback-composition-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13; Proposition 6.8.14(2), lattice and cone argument"
+    "place": "Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15, ordinary/completed module pullback and specified completion unit, pp. 50,54,62"
    }
   },
   {
-   "text": "Let $F$ be a constructible $E_X$-module sheaf. To use the finite-model stratum-filtration tool, take the condensed ring $C(-,E)$. The continuous-coefficient realization identifies its pulled ring on every scheme with the continuous ring sheaf, naturally for coefficient maps. The internal/sectionwise module equivalence preserves underlying sheaves and actions. Thus a finite free model $E_S^r$ is exactly the tool's finite constant local model $E_S\\otimes_E E^r$. This identification is used only for the sheaf filtration, never to infer membership in the completed integral category. Choose the finite noetherian affine cover of $X$. The affine-noetherian-space lemma makes each member noetherian. A descending closed chain stabilizes on each of these finitely many members, hence stabilizes globally. Thus $|X|$ is noetherian, and the filtration lemma applies and gives a finite filtration of $F$ with quotients $v_{k!}(t_k)_*L_k$, where $v_k:V_k\\hookrightarrow X$ is qcqs open and $t_k:S_k\\hookrightarrow V_k$ is reduced closed. Each local model of $L_k$ is a finitely presented $E$-module, hence a finite-dimensional vector space; therefore $L_k$ is lisse.",
+   "text": "[lem-per-rational-realization-scalar-coherence] supplies finite coefficient extension, successive-extension associators and mixed pullback/scalar coherence for these comparisons, all induced by finite quotient maps and balanced tensors.",
    "uses": [
-    "lem-sfb-finite-model-stratum-filtration",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-sc-affine-noetherian-underlying-space"
+    "lem-per-rational-realization-scalar-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), finite stratification devissage; filtration tool uses Stacks Tag 09Y5"
+    "place": "Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15; expanded finite-extension balancing and mixed coherence, pp. 58,61-62"
    }
   },
   {
-   "text": "Each $S_k$ is noetherian, finite-dimensional and $\\ell$-coprime: it is closed in the noetherian open $V_k$, affine rings are quotients of noetherian rings, irreducible closed chains have the dimension bound from $X$, and the inverse of $\\ell$ survives in the quotient local rings. Choose a constructible integral lattice $N_k$ for $L_k$ by the lisse-lattice lemma. The ringed open-closed lemma supplies exact $v_{k!}$ and $(t_k)_*$, and their restrictions are $N_k$ on the supporting pieces and zero on the complements. Extending the finite stratification of $N_k$ by those zero pieces proves $M_k=v_{k!}(t_k)_*N_k$ is an integral constructible sheaf; Step 2 certifies $M_k[0]\\in\\mathcal C_X$, including the etale witnesses. Locally closed coefficient restrictions are the maps of Step 1. Localization is the sequential sheaf colimit of multiplication by $\\varpi$, with fractions as transition classes. It commutes with $v_{k!}$ since that functor is a left adjoint, and with $(t_k)_*$ by the filtered-colimit clause of the open-closed lemma on the qcqs $V_k$. Module colimits are the underlying abelian sheaf colimits. Therefore $J_X(QM_k)\\cong v_{k!}(t_k)_*L_k$.",
+   "text": "[lem-per-continuous-coefficient-slice-normalization] identifies the coefficient maps for etale maps and locally closed immersions, and for every site-object restriction. Under these identifications the ambient module inverse image is exact ordinary inverse image, respectively exact site restriction, with the stated normalizations.",
    "uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "lem-per-continuous-coefficient-slice-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), integral models for the filtration quotients; Lemma 6.8.13"
-   }
-  },
-  {
-   "text": "Induct over the finite filtration of Step 6, beginning with its zero term. Its short exact sequence $0\\to F_{k-1}\\to F_k\\to v_{k!}(t_k)_*L_k\\to0$ is a distinguished triangle in $D(E_X)$ by the short-exact-sequence clause of the heart-triangle lemma for the ambient standard t-structure. Step 7 and the induction hypothesis put its outer terms in the essential image. The connecting morphism lifts by full faithfulness, and the cone closure in Step 5 puts $F_k$ in the image. This proves that every constructible $E_X$-sheaf in degree zero has an integral derived model; it does not assert a globally lisse integral lattice.",
-   "uses": [
-    "lem-weil-heart-short-exact-triangles",
-    "def-sbc-standard-tstructure-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), sheaf extension devissage"
-   }
-  },
-  {
-   "text": "For $C\\in D_{\\mathrm{cons}}(X,E_X)$ choose a finite cohomological interval $[a,b]$ and induct on its length. An object with zero cohomology is zero in the derived category. Otherwise its standard truncation triangle has terms $\\tau^{\\leq b-1}C,C,\\mathcal H^b(C)[-b]$. The first has a shorter interval and the third lies in the image by Step 8 and shift closure. Step 5 gives extension closure, or equivalently lifts the connecting arrow and takes its cone. Thus $C$ is in the image. Together with Steps 3 and 4 this proves the asserted $E$-linear triangulated equivalence. In particular the full target subcategory inherits the ambient distinguished triangles; no idempotent envelope is introduced.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-weil-heart-short-exact-triangles",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), bounded truncation induction"
-   }
-  },
-  {
-   "text": "The integral t-structure proposition identifies integral truncations and cohomology with the ambient ones and keeps them in $\\mathcal C_X$. The localized t-structure proposition gives $\\tau_E^{\\leq m}QK\\cong Q\\tau_A^{\\leq m}K$ and the analogous upper formula. Exact scalar localization gives the cohomology formula of Step 3, so $J_X$ sends the two localized degree-bound classes into the corresponding ambient degree-bound classes. In particular it is t-exact in this direction, and $J_X(\\mathcal H^r(QK))$ is $E_X\\otimes_{B_X}\\mathcal H^r(K)$ placed in degree zero.",
-   "uses": [
-    "prop-weil-pbc-integral-tstructure",
-    "prop-weil-localized-tstructure",
-    "lem-weil-pbc-localization-inverse-image-coherence",
-    "def-weil-derived-cohomology-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 6.8.11(3) and 6.8.14(2): cohomology and forward degree bounds"
-   }
-  },
-  {
-   "text": "Conversely, if $J_X(QK)$ has no cohomology above $m$, then Step 3 and the integral truncation formula show $J_X(Q\\tau_A^{\\geq m+1}K)$ has zero cohomology in every degree. It is zero in the derived category, so full faithfulness implies $Q\\tau_A^{\\geq m+1}K=0$ (its identity is zero). The localized truncation triangle then gives $Q\\tau_A^{\\leq m}K\\cong QK$, putting $QK$ in the localized nonpositive class at $m$. The same argument with $\\tau_A^{\\leq m-1}K$ proves the converse nonnegative bound. Hence both t-structures agree under $J_X$. Uniqueness of truncation triangles, with their canonical units and counits, makes the truncation comparisons natural. Intersecting the two degree bounds identifies the heart with all constructible $E_X$-sheaves in degree zero, using Step 8 for their essential surjectivity.",
-   "uses": [
-    "prop-weil-pbc-integral-tstructure",
-    "prop-weil-localized-tstructure",
-    "lem-weil-heart-short-exact-triangles",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2): converse degree bounds and truncation/heart identification"
-   }
-  },
-  {
-   "text": "Fix $g:X'\\to X$ as in the statement. Use the actual structural map $c_g:g^{-1}B_X\\to B_{X'}$ defined by its finite quotient components, not an assumed isomorphism. Pull back a supporting stratification of $K\\in\\mathcal C_X$; its base changes form a stratification of $X'$. The trivializing pro-etale covers pull back to covers by weakly etale base change and fpqc covering stability. On each pulled-back cover, ordinary derived module pullback sends $B_S\\otimes_A^L P$ to $B_{S'}\\otimes_A^L P$: on the finite projective terms the balancing map is $b'\\otimes(b\\otimes p)\\mapsto b'c_g(b)\\otimes p$, with inverse $b'\\otimes p\\mapsto b'\\otimes(1\\otimes p)$. These maps commute with differentials. Derived pullback is computed on K-flat flat-term resolutions; its tensor and composition comparisons identify this local computation with the restriction of $Lg^*_{B}K$. Every new stratum is locally closed in the noetherian finite-dimensional $X'$, so has the same scheme hypotheses. The stratified-perfect characterization therefore gives $Lg^*_{B}K\\in\\mathcal C_{X'}$, including derived completeness and compatible etale-origin witnesses.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lemma-constructible-pullback-stratification",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-galois-fpqc-covering-base-change",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11; Remark 6.8.15: ordinary pullback preserves the integral category"
-   }
-  },
-  {
-   "text": "The specified comparison $\\gamma_{g,K}:Lg^*_{B}K\\to Lg^*_{\\mathrm{comp}}K$ is the quotient-tower completion unit by the completed-pullback definition and the constant/completed comparison. Step 12 makes its source complete. Intrinsic completeness says its Koszul completion unit is invertible, and the constant-completion equivalence identifies that unit with this quotient-tower unit, including transitions. Thus $\\gamma_{g,K}$ is invertible, naturally in $K$. Apply localization/inverse-image coherence to $R=B_X,t=\\varpi$. It identifies $g^{-1}E_X$ with $(g^{-1}B_X)[1/\\varpi]$, preserving the localization unit. The map $c_g$ sends $\\varpi$ to $\\varpi$, so it extends to the structural map into $E_{X'}$. The ringed-topos derived pullback composition comparison now gives\n$$J_{X'}(Q Lg^*_{B}K)\\cong E_{X'}\\otimes^L_{g^{-1}E_X}g^{-1}(E_X\\otimes^L_{B_X}K).$$\nBoth sides flatten to $E_{X'}\\otimes^L_{g^{-1}B_X}g^{-1}K$ by balancing. Composing this comparison with $J_{X'}(Q\\gamma_{g,K}^{-1})$ proves the displayed completed-pullback comparison. Its naturality and the fraction rule let it descend to raw rationalizations.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-localization-inverse-image-coherence",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "def-weil-pbc-rational-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15; Stacks Tag 099M (completion units) and Tag 099N as specified by the completed-pullback node"
-   }
-  },
-  {
-   "text": "For composable scheme maps $X''\\xrightarrow h X'\\xrightarrow g X$, the structural maps satisfy $c_{gh}=c_h\\,h^{-1}c_g$ after the inverse-image composition comparison: composing with each finite quotient projection gives the same finite constant-coefficient map, and the limit universal property gives equality. The ambient derived pullback composition and identity comparisons are those of the ringed-derived monoidal-comparison lemma. Localization/inverse-image coherence identifies the comparison for $gh$ with the composite comparisons for $g,h$, as an equation of natural transformations. On K-flat complexes the tensor maps send a balanced representative $e''\\otimes e'\\otimes k$ to $e''h^{-1}(e')\\otimes k$ in either order; the identity sends $1\\otimes k$ to $k$. These maps give the comparisons in Step 13. Under the natural completion units $\\gamma$, completed pullback on this category is ordinary pullback; conjugating by those isomorphisms gives exactly the same equations. The finite-reduction and completion-unit comparisons used here preserve the quotient maps, so the conjugation uses the specified units, not arbitrary identifications. This proves naturality, identity and composition with the ambient composition comparisons stated in the item.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-localization-inverse-image-coherence",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15: specified ambient identity and composition comparisons"
-   }
-  },
-  {
-   "text": "For a finite extension $E\\subset L$, put $A_L=\\mathcal O_L$ and $B_{L,X}=\\varprojlim_n(A_L/\\varpi_L^n)_X$. The raw scalar-extension proposition defines $T_{L/E}$ by the actual integral change $C_{L/E,X}K=B_{L,X}\\otimes^L_{B_{E,X}}K$ followed by rationalization, and puts this object in the integral category under our scheme hypotheses. Continuous-coefficient realization is natural for $A_E\\to A_L$ and $E\\to L$, so these are the stated continuous ring maps. Apply the ambient derived pullback composition comparison to the same-site coefficient maps. It gives\n$$J_{L,X}(T_{L/E}QK)=L_X\\otimes^L_{B_{L,X}}(B_{L,X}\\otimes^L_{B_{E,X}}K)\\cong L_X\\otimes^L_{B_{E,X}}K\\cong L_X\\otimes^L_{E_X}J_{E,X}(QK).$$\nThe maps flatten $(l\\otimes b)\\otimes k$ to $lb\\otimes k$, with inverses inserting $1$. They are canonical on K-flat representatives, and the comparison lemma descends them to derived categories. The image of every nonzero scalar of $E$ is invertible in $L$, so the equations also hold for the raw morphisms $f/\\varpi_E^n$.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2); coefficient naturality of Lemma 6.8.2 and ordinary derived tensor balancing"
-   }
-  },
-  {
-   "text": "For $E\\subset L\\subset M$ both routes in the coefficient associator comparison flatten $m\\otimes l\\otimes k$ to $ml\\otimes k$. For four fields the pentagon flattens all factors to their ordered product; the unit inserts and removes $1$. The ringed-derived comparison lemma makes these equations valid on derived complexes; the raw scalar-extension proposition identifies these associators with its specified ones. To combine with $g:X'\\to X$, the square of the integral structural maps $c_g$ and coefficient change commutes, since on each quotient the two composites are postcomposition of the same coefficient map and inverse image of the same section. The continuous realization's coefficient naturality gives the localized square as well. The last clause of the ringed-derived comparison lemma for isomorphic underlying geometric composites identifies the two derived tensor routes. Its balanced map sends $l'\\otimes b'\\otimes k$ to $l'b'\\otimes g^{-1}k$ in either order. The completion-unit comparisons of Step 13 and the scalar-extension/pullback comparison in the raw scalar-extension proposition preserve this equation. Thus the realization comparison commutes with finite coefficient extension, successive extensions, and their pullback and composition associators. No pair-category descent is used.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "prop-weil-pbc-scalar-extension",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), Remark 6.8.15: finite-field-extension and pullback coherence"
-   }
-  },
-  {
-   "text": "For a locally closed immersion the coefficient isomorphism is precisely the continuous-coefficient immersion restriction lemma. For an etale map $g:X'\\to X$, use the weakly etale localization equivalence $X'_{\\mathrm{proet}}\\simeq X_{\\mathrm{proet}}/X'$. The inverse image $g^{-1}$ of the pro-etale inverse-image definition is this slice restriction: for $U\\to X'$ in $X'_{\\mathrm{proet}}$ with structure map $s$, the pair $(U\\to X,(s,\\mathrm{id}_U))$ is initial in the indexing category $\\mathcal I_U$, since any $(V,\\phi)$ has $\\phi=(s,a)$ with $a=\\mathrm{pr}_2\\phi$ the unique $X$-morphism satisfying $u_g(a)(s,\\mathrm{id})=\\phi$; hence $(u_{g,p}F)(U)=F(U\\to X)$, already a sheaf on the slice, and no sheafification changes it. Restriction to this slice evaluates a coefficient sheaf on the same underlying scheme $V$, so sends $C(|V|,A)$ and $C(|V|,E)$ identically to the corresponding coefficient sheaves on $X'$. In the finite-quotient description it restricts each constant quotient to the same quotient and preserves the sectionwise limit, so the resulting coefficient map is exactly $c_g$, with the constant-section normalizations. The same evaluation argument works for any site object $U\\to X$, without requiring $U$ itself to be noetherian. Inverse image with an identified coefficient ring is exact by localization/inverse-image coherence; its termwise derived functor is ordinary inverse image. Hence for the etale and locally closed morphisms the displayed module pullback is exact inverse image, and on an arbitrary site object it restricts to exact site restriction. All identifications preserve coefficient maps by their section formulas and Step 1.",
-   "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-localization-inverse-image-coherence",
-    "def-weil-pbc-completed-pullback",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15, etale and closed-immersion clauses; site localization for a pro-etale object"
+    "place": "Definition 6.8.1, Lemma 6.8.2, paragraph before Definition 6.8.6 and Remark 6.8.15; normalized slice interpretation of inverse image, pp. 58,60,62"
    }
   }
  ],
  "proof_deps": [
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-bounded-constructible-complete",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-rational-category",
-  "def-weil-proetale-inverse-image",
-  "lem-galois-fpqc-covering-base-change",
-  "lem-kun-derived-countable-sums-exact",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-rhom-global-sections",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-finite-model-stratum-filtration",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-heart-short-exact-triangles",
-  "lem-weil-linear-scalar-localization-triangulated",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-pbc-directed-triangulated-image",
-  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-  "lem-weil-pbc-localization-inverse-image-coherence",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-scalar-localization-derived-hom",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lemma-constructible-pullback-stratification",
-  "prop-weil-localized-tstructure",
-  "prop-weil-pbc-integral-tstructure",
-  "prop-weil-pbc-scalar-extension"
+  "lem-per-constructible-rational-hom-comparison",
+  "lem-per-continuous-coefficient-slice-normalization",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-pullback-composition-coherence",
+  "lem-per-rational-realization-degree-reflection",
+  "lem-per-rational-realization-finite-cone-models",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-per-rational-realization-scalar-coherence",
+  "lem-per-rational-stratum-integral-models"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Propositions 6.6.11 and 6.8.11(3), Lemmas 6.8.2, 6.8.12 and 6.8.13, Proposition 6.8.14(2), and Remark 6.8.15; expanded finite-stratum and truncation devissage and canonical tensor/completion-unit comparisons."
+  "place": "Assembly of Proposition 6.8.14(2) and Remark 6.8.15, through nine separately queued statement-only arguments."
  },
  "mathlib_searches": [
   {
@@ -388,129 +196,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-per-continuous-rational-derived-realization",
   "worker": "stage1",
-  "summary": "Repair of the returned Q133 delivery: replaced the incompatible condensed integral-model shortcut by site-module lisse lattices, finite stratum filtration, exact open/closed assembly and bounded truncation induction; proved both t-structure directions; verified ordinary pullback is integral and its specified completion unit invertible; supplied localization/pullback, finite extension and associator equations and separate etale/slice coefficient restrictions. No statement change and no new nodes. Replaced one constant-coefficient statement dependency by the general ring-sheaf derived change-of-rings node.",
-  "blueprint": "Realizes the first proof paragraph of lem-per-smooth-pullback-t-exact: Steps 1–4 the actual continuous-coefficient rational realization functor and Hom comparison; Steps 5–9 integral essential surjectivity; Steps 10–11 cohomology and both t-structure directions; Steps 12–17 completed/ambient pullback, identity, composition, finite coefficient extension and exact etale/immersion/site restrictions used before the degree-zero calculation.",
-  "tool_uses": [
-   {
-    "node": "lem-galois-fpqc-covering-base-change",
-    "why": "Generic An fpqc covering remains an fpqc covering after base change applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-kun-derived-countable-sums-exact",
-    "why": "Generic termwise model of derived countable coproducts in an abelian category with exact sums, used on ordinary A-modules when taking H^0 of global derived Hom."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic existence and K-flat computation of derived extension along an arbitrary morphism of ring sheaves; the coefficient sheaves here are not constant."
-   },
-   {
-    "node": "lem-pur-rhom-global-sections",
-    "why": "Generic H^0 of global derived internal Hom equals derived morphisms; used only to verify the scalar-localization Hom lemma hypotheses."
-   },
-   {
-    "node": "lem-sc-affine-noetherian-underlying-space",
-    "why": "Generic An affine scheme with Noetherian coordinate ring has Noetherian underlying space applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-sfb-finite-model-stratum-filtration",
-    "why": "Generic finite filtration of a finite-stratified module sheaf by extension-by-zero stratum pieces. Used only after identifying continuous rational coefficient sheaves and their finite free models; not used to infer integral completeness."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Generic canonical tensor, structural-map and composition comparisons on ordinary ringed-topos derived categories. Supplies ambient balancing and coherence for the specified coefficient ring maps, not a different perverse-sheaf route."
-   },
-   {
-    "node": "lem-weil-heart-short-exact-triangles",
-    "why": "Generic short-exact-sequence triangles, extension closure and uniqueness of truncations for a t-structure; used for the explicit filtration and bounded truncation arguments."
-   },
-   {
-    "node": "lem-weil-linear-scalar-localization-triangulated",
-    "why": "Generic triangulation of a raw scalar-localized linear triangulated category and exactness of its localization functor."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic Constant-to-completed coefficients on derived-complete categories applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-coefficient-realizations",
-    "why": "Generic Canonical continuous coefficient realizations commute with ring maps applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "why": "Generic Continuous coefficient sheaves, localization and restriction to immersions applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-directed-triangulated-image",
-    "why": "Generic Morphism descent makes the union of triangulated essential images triangulated applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-    "why": "Generic Bounded below compactness of an integral constructible complex applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Generic Stratified perfect description of the integral completed category applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Generic Left adjoints preserve colimits applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-    "why": "Generic A lisse E sheaf has a constructible integral lattice applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-localization-inverse-image-coherence",
-    "why": "Generic Coherent localization comparison for exact inverse image applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic Ringed pro-etale open-closed localization applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic Derived tensor comparison for arbitrary ringed topoi applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-scalar-localization-derived-hom",
-    "why": "Generic Localization of shifted derived Hom from a bounded-below compact source applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
-    "why": "Generic Composition and base change of weakly etale morphisms applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "lemma-constructible-pullback-stratification",
-    "why": "Generic Pullback of a stratification applied to the coefficient sheaves, scheme hypotheses and ambient module category in this item; supplies an input for the continuous-coefficient comparison, not a replacement of the perverse unit route."
-   },
-   {
-    "node": "prop-weil-localized-tstructure",
-    "why": "Generic t-structure on the exact raw scalar localization of the same completed integral category; supplies truncations and heart on the source, as required by the item."
-   },
-   {
-    "node": "prop-weil-pbc-integral-tstructure",
-    "why": "Generic integral standard t-structure on exactly the site-module completed category with etale witnesses; needed for integral truncation and cohomology in both directions."
-   },
-   {
-    "node": "prop-weil-pbc-scalar-extension",
-    "why": "Generic finite-field scalar change and coherent associators for the exact same raw rational categories; replaces the irrelevant Qbar pair-category descent citation."
-   }
-  ]
+  "summary": "Q115 repair of the human re-split return: preserve the statement exactly and distribute all seventeen retained arguments among nine self-contained unsplit nodes. The parent has a short assembly; no Lean changed. All new tasks have real recorded searches and the full former argument is preserved verbatim with its task assignment in report.md.",
+  "blueprint": "Realizes the first proof paragraph of lem-per-smooth-pullback-t-exact: Steps 1–4 the actual continuous-coefficient rational realization functor and Hom comparison; Steps 5–9 integral essential surjectivity; Steps 10–11 cohomology and both t-structure directions; Steps 12–17 completed/ambient pullback, identity, composition, finite coefficient extension and exact etale/immersion/site restrictions used before the degree-zero calculation. The nine factors unpack this same first-paragraph realization input; the perverse unit route is unchanged.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-galois-fpqc-covering-base-change",
@@ -544,12 +235,12 @@
   "prop-weil-pbc-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q133-4064494db",
-  "group": "Q133",
+  "reviewer": "NT-cc-Q115-7b53ff1ba",
+  "group": "Q115",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-4064494db (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 17 steps, the statements of all 38 proof dependencies and 13 statement dependencies, the unit sk-p-dl-a1-perverse, the ancestor and via-nodes, sk-def-sfb-constructible, and Bhatt–Scholze §6.8 pp. 58–62 (Lemma 6.8.2, Defs 6.8.3/6.8.6/6.8.8/6.8.10, Prop 6.8.11(3), Lemmas 6.8.12/6.8.13, Prop 6.8.14(2), Remark 6.8.15). The statement is unchanged and matches BS 6.8.14(2) for finite E with B_X=lim(A/ϖ^n)_X and E_X=B_X[1/ϖ]. The source category is the raw localization of the completed integral category with étale-origin witnesses, with no Karoubi envelope. Pullback uses the actual c_g and the completion unit of def-weil-pbc-completed-pullback, matching BS Remark 6.8.15. Replacing def-weil-derived-tensor by lem-pur-derived-change-of-rings in stmt_deps is correct, since the coefficient rings are not constant. The steps check out. Full faithfulness: I verified that the Hom/countable-sum hypothesis of the scalar-localization Hom lemma follows from bounded-below compactness, H^0 of RHom, and exact countable sums. Essential surjectivity: the lisse-lattice lemma, the finite-model stratum filtration (noetherian |X|; E totally disconnected, so the condensed ring is C(-,E)), open-closed assembly with qcqs V_k, and truncation induction. Both t-structure directions are proved, the converse by acyclicity plus full faithfulness. The integrality of Lg^*_B K via pulled-back strata and covers and characterization (ii) is correct, and gamma is invertible because Koszul and quotient units agree. Finite extension and associators go through prop-weil-pbc-scalar-extension. Edge cases tested: empty X, zero rank, torsion N (killed, no flatness assumed), g=id, open immersion, E=L, ramified L/E. There are no new nodes, so nothing to check for duplicates or restated clauses; lem-weil-pbc-condensed-e-realization is narrower (finite-type over a field, condensed target) and not a duplicate. I accept all 29 declared tool_uses as generic black boxes that the unit does not supply. No SGA is used. Two small faults are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-continuous-rational-derived-realization.json, changing only proof and proof_deps. (1) C1/C4, Step 3: restricting to a stratum used h^{-1}E_X≅E_S without citing it; I added lem-weil-pbc-continuous-coefficients-immersion-restriction and the sentence. (2) E5, Step 17: g^{-1} as defined in def-weil-proetale-inverse-image was identified with slice restriction without an argument; I added it ((U→X,(s,id)) is initial in I_U, so (u_{g,p}F)(U)=F(U)) and cited def-weil-proetale-inverse-image. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-7b53ff1ba (reviewer sub-agent of L); spot-checked: Faithful re-split under the human note of 2026-10-21; nothing to repair, no fixes written. Item statement, stmt_deps, source and blueprint fields are byte-identical to the live node; only proof, proof_deps, proof_origin and split_report changed. The new proof is 7 assembly steps (2070 characters) citing 9 new statement-only unsplit nodes of 2.1-3.1k characters each. A script confirmed that all 17 old steps (17062 characters) are kept verbatim in the report, and each maps to one new statement with every obligation intact: functor/rings/cohomology 1-3, Hom continuity and full faithfulness 4, stratum integral models 6-7, lifted-fraction cone and truncation induction 5/8/9, both converse degree bounds 10-11, specified gamma and alpha_g 12-13, composition equations 14, scalar theta and mixed square 15-16, initial-object slice normalization 17. No new node restates the item, none cites it, and a computed closure has no cycle. Bhatt-Scholze pp. 58-62 checked: 6.8.12 RHom/sums, 6.8.13 constructible lattice via the Ext^1 step, 6.8.14(2) full faithfulness plus reduction to local systems, Rem 6.8.15 naive pullback. All 33 cited existing nodes exist, are unmerged and say what is used. Hypotheses checked: noetherian/dimension/ell-invertible for V_k and S_k, qcqs V_k, bounded L in the Hom lemma, full faithfulness as an explicit hypothesis in the cone and degree nodes, c_g not assumed iso, ramified L/E, non-noetherian U only for slice restriction. Edge cases: empty X, rank 0, torsion H^r, g=id, E=L. Duplicate candidates read and found narrower or different: realization-scalar-functor/completed-pull (finite type over char-p k, condensed target), tw-lisse-rational-realization, fd-rational-coefficient-category-comparison, sfb stratum filtration, scalar-localization-derived-hom, localized-tstructure, weakly-etale-localization. Batch-5 flags (slice-normalization and pullback-comparison cite lem-weil-pbc-localization-inverse-image-coherence): accepted. That node and the reached lem-trf-geometric-inverse-image-exact are generic topos facts (localization coherence, exactness of inverse image), not the trace formula, Poincare duality or a step of their proofs. The base item already cited the node in old steps 3/10/13/14/17, and the closure diff adds no trf/pod/nt-assume node. No SGA. Maintainer note: the snapshot chapter symlinks are dangling (dagsnap b39728cf missing), so dependencies were read from side-live; the node-level tool_uses (29) from the 10-18 merge is now stale and should be recomputed at merge."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
