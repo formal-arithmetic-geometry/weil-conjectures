@@ -21527,3 +21527,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:00 L: merged deliver/Q41/lem-weil-roos-transition-homotopy (reviewer PASS; after a return; new nodes: 0)
 - 09:00 L: merged deliver/Q80/lem-pur-external-evaluation-transpose-natural (reviewer FIX; first push; new nodes: 0)
 - 09:00 L: merged deliver/NU/lem-weil-constant-scalar-unit-quasi-isomorphism (reviewer PASS; first push; new nodes: 0)
+- 09:00 L: merged deliver/Q112/lem-zl-raw-heart-adic-lisse-stratification (reviewer FIX; first push; new nodes: 0); claim not held by Q112: not your claim

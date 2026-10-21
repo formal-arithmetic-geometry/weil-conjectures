@@ -22,11 +22,205 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion",
   "lem-tw-lisse-rational-realization",
-  "lem-per-continuous-rational-derived-realization"
+  "lem-per-continuous-rational-derived-realization",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The schemes to which we apply the comparisons are allowed: $T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over the spectrum of the field $k$, and has finite dimension by [lem-kun-dimension-finite-type]. The same holds for its locally closed reduced strata, which are again finite type over $k$; $\\ell$ is invertible since $\\ell\\ne p$. At every finite coefficient stage the integral categories in the sf and PBC conventions are the same full category, with the same completed ring and cohomology sheaves, by [lem-weil-pbc-integral-stratified-perfect-characterization]. The equivalence $J$ in [lem-fd-rational-coefficient-category-comparison] is the identity on this category and its localized arrows. The sf integral halves in [def-weil-constructible-standard-tstructure] are the vanishing classes of the cohomology sheaves $\\mathcal H^r$ over the completed coefficient sheaf, and the PBC integral halves of [prop-weil-pbc-integral-tstructure] are the vanishing classes of the same ambient cohomology sheaves $\\mathcal H^i$ over the same completed ring; so the two integral halves are the same classes of the common integral category. The sf rational halves in [def-weil-constructible-standard-tstructure] and the PBC rational halves in [prop-weil-localized-tstructure] are the isomorphism closures of these integral halves. Thus $J$ carries each half onto the corresponding half. Its common-stage extension does the same, since it identifies the finite-stage inclusions and scalar transitions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-weil-constructible-standard-tstructure",
+    "prop-weil-localized-tstructure",
+    "prop-weil-pbc-integral-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3) and Proposition 6.8.14(2); identity comparison and standard-pair definitions in the cited nodes"
+   }
+  },
+  {
+   "text": "Use $J$ to view $M$ in the PBC common-stage heart. By [lem-per-adic-heart-pullback-fibres], the common-stage heart consists of objects isomorphic to a pair $(E,N_E)$ with $N_E$ in the finite-stage rational heart. Choose such a pair; transporting back by $J_{T,E}^{-1}$ gives $M_E$ in the raw sf $E$-heart and an isomorphism $(E,M_E)\\simeq M$. We fix this $E$ for the construction of all strata and lattices. Apply [lem-per-continuous-rational-derived-realization] to $N_E=J_{T,E}M_E$: its image is a constructible sheaf $F$ of modules over $E_T=B_{E,T}[1/\\varpi_E]$, in degree zero. This uses the equivalence's asserted identification of hearts, rather than assuming an arbitrary integral representative is a sheaf.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Proposition 6.8.11(3); common-stage heart formulation in lem-per-adic-heart-pullback-fibres"
+   }
+  },
+  {
+   "text": "We first compare the actual completed pullbacks, with their normalizations. For any $h:V\\to W$ under consideration, the sf completed pullback in [def-weil-derived-pullback-tensor-hom] and the PBC completed pullback in [def-weil-pbc-completed-pullback] apply finite-level pullback to the reductions of the same integral representative, with the same quotient transitions, then realize that whole tower. The integral identity equivalence identifies these input diagrams. Applying the derived-limit functor to this identity gives the comparison. The resolution independence, composition and coefficient comparisons are supplied by the whole-diagram realization of [lem-trf-integral-pullback-comparison-realization].",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-completed-pullback",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2, Proposition 6.8.4 and Remark 6.8.15; Stacks Tag 099N, proetale.tex lemma-pushforward-Noetherian-case (2),(5), with the cited whole-tower normalization"
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_E$, $\\varpi=\\varpi_E$. The coefficient identifications in [lem-per-continuous-rational-derived-realization] give $B_{E,W}=\\varprojlim_n(A/\\varpi^n)_W$ and $B_{E,W}[1/\\varpi]=E_W$ as continuous integral and rational coefficient sheaves, with the specified finite-quotient normalizations. By [lem-weil-pbc-continuous-coefficient-realizations], the pulled-back condensed $A$ and $E$ rings identify with these continuous-function sheaves, and the inclusion $A\\to E$ is respected. The totally disconnected hypothesis here holds: residue classes modulo $\\varpi^n$ separate distinct points of $A$, and their scaled translates are clopen balls separating distinct points of $E$. Consequently the composite integral comparison has its $n$th projection equal to reduction modulo $\\varpi^n$, and its rational comparison is the localization of this same map. We use these maps, not independently chosen ring isomorphisms, on every subsequent stratum.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2) and Definition 6.8.1; normalized coefficient comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "The definition of constructibility in [lem-per-continuous-rational-derived-realization] gives a finite locally closed partition $(S_a)$ of $T$ such that $F|_{S_a}$ is pro-etale locally finite free over $E_{S_a}$. The encoding equivalence [def-weil-pbc-continuous-coefficient-module-encoding], together with the coefficient comparisons of Step 4, regards this as a lisse internal module over the pulled-back condensed $E$ ring. This assertion about lisse objects is justified on the actual trivializing pro-etale cover by [lem-weil-pbc-continuous-module-encoding-slice-freeness]; its equivalence is in both directions, including rank zero. This sets up the hypotheses of the internal lattice theorem without identifying internal modules with ordinary sectionwise modules by notation.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-slice-freeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.6; Definitions 6.8.1, 6.8.3 and the explicit encoding/slice comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-topological-stratified-lisse-lattices] to each of these lisse internal modules on the topologically Noetherian $S_a$. It gives a finite further locally closed partition and, on each member, a lisse internal integral submodule whose ordinary rational scalar extension is the restricted rational module. Under [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and the ring maps of Step 4 this is a lisse $B_{E,W}$-module lattice $L_W$ with $L_W[1/\\varpi]\\simeq F|_W$. Here the sectionwise equivalence leaves the underlying sheaf and action unchanged: inverse image applies to that action, and scalar extension is the sheafified quotient of the free bilinear expressions $r\\otimes m$ by the balancing relations in both conventions. Thus the identification of inverse images and tensor products is induced by $r\\otimes m\\mapsto r\\otimes m$. It preserves the displayed inclusion and its rationalization. Freeness is checked on the cover by the slice comparison used in Step 5. Replace each member by its reduced locally closed structure. Pullback of the lattice and its localization remains lisse and has the same localization, by the pullback compatibility in [lem-per-lisse-completed-system-comparison]; the rational restriction comparison is that of [lem-per-continuous-rational-derived-realization]. Denote this finite refined partition by $(T_\\nu)$ and its lattices by $L_\\nu$. None of these operations changes $E$.",
+   "uses": [
+    "lem-sfb-topological-stratified-lisse-lattices",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph, with Proposition 6.8.4(1),(4) and Remark 6.8.15; module-encoding transport made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-per-lisse-completed-system-comparison] on each Noetherian separated $T_\\nu$. The lattice $L_\\nu$ determines normalized finite locally free etale sheaves $L_{\\nu,n}$ over $A/\\varpi^n$, with $L_{\\nu,n+1}\\otimes_{A/\\varpi^{n+1}}A/\\varpi^n\\simeq L_{\\nu,n}$ and $L_\\nu\\simeq\\varprojlim_n\\nu^*L_{\\nu,n}$. Thus $(L_{\\nu,n})_n$, after inverting $\\varpi$ and including $E$ into $\\Qlb$, is exactly a classical lisse $\\Qlb$-sheaf under [def-pod-lisse-l-adic-sheaves]. In particular the reductions are ordinary quotients of a lisse lattice; no concentration assertion is being made for the derived reduction of a torsion integral representative of $M$.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), and Corollary 5.1.5; Weil II (1.1.1)b)-d) via the cited definition"
+   }
+  },
+  {
+   "text": "Each $L_\\nu[0]$ is an integral constructible object by condition (ii) of [lem-weil-pbc-integral-stratified-perfect-characterization], since its local model is a finite free $A$-module in degree zero. Its raw rational image is lisse. Under [lem-tw-lisse-rational-realization] its scalar realization is $L_\\nu[1/\\varpi]$. The PBC realization of [lem-per-continuous-rational-derived-realization] has the same formula on this integral object and on localized arrows. Its comparison with locally closed pullback identifies $J(M_E|_{T_\\nu})$ with the object whose image is $F|_{T_\\nu}$. The isomorphism $L_\\nu[1/\\varpi]\\simeq F|_{T_\\nu}$ from Step 6 therefore lifts, by full faithfulness of this equivalence, to an isomorphism of raw rational objects. The identity-on-integral $J$ transports it back to the sf convention. This proves that the classical system of Step 7 realizes $M_E|_{T_\\nu}$ by the specified lisse realization, and hence realizes $M|_{T_\\nu}$ after extending to $\\Qlb$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-tw-lisse-rational-realization",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3) and Proposition 6.8.14(2); prescribed scalar realizations, with Proposition 6.8.4"
+   }
+  },
+  {
+   "text": "For two classical systems with lattices on a stratum, [lem-per-lisse-completed-system-comparison] identifies their integral maps with compatible maps of the normalized reduction towers and identifies their rational Hom groups fully faithfully with maps between the localized lisse module sheaves. Combining this with [lem-tw-lisse-rational-realization] gives full faithfulness into the raw lisse heart. At $\\Qlb$ choose a common finite stage for the two objects; the Hom groups on both sides are the directed colimits described in [def-pod-lisse-l-adic-sheaves] and [def-weil-algebraically-closed-coefficients], so the finite-stage bijections give a bijection on these colimits. Further locally closed pullback and finite coefficient extension commute with this realization: the first cited comparison asserts this for reduction, limit and localization, and the second asserts it for the raw lisse realization. Their maps are the quotient, balanced tensor and pulled-back basis maps. Thus their composite is the same normalized comparison, also for successive restrictions and field extensions.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-tw-lisse-rational-realization",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(3),(4), with Remark 6.8.15; common-stage definitions"
+   }
+  },
+  {
+   "text": "At a geometric point the maps of Step 3 identify the finite reductions and the point evaluation, hence their localized fibres. On a lisse stratum [lem-per-adic-heart-pullback-fibres] identifies the PBC fibre with $(\\varprojlim_n (L_{\\nu,n})_{\\bar x})\\otimes_A E$ and then scalar extension to $\\Qlb$. On the sf side [lem-tw-lisse-rational-realization] identifies this same fibre and carries restriction-and-coprojection transport along a point automorphism to the identical transport in the module model, including every iterate. This proves the adic fibre and iterated geometric-Frobenius point-transport assertions for $J$ and the classical realization.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Proposition 6.8.4; the normalized adic fibre and sf point-transport comparison of the cited nodes"
+   }
+  },
+  {
+   "text": "Suppose $T=Y_0\\times_{k_0}k$ and $(M,\\theta)$ has a Weil structure as in [def-weil-weil-sheaf-complex]. Let $V_0$ be a further locally closed piece defined over $k_m$ whose geometric base change $V$ is inside one $T_\\nu$. Its inclusion $j$ satisfies $g_T^m j=jg_V$; restrict the iterated Weil isomorphism $\\theta^{(m)}$ to obtain $g_V^*(M|_V)\\simeq M|_V$, using the composition comparisons of [lem-trf-integral-pullback-comparison-realization]. Both objects are lisse by [lem-tw-lisse-rational-realization] and Step 8. Step 9 lifts this map and its inverse to classical rational lisse maps. Faithfulness sends their two composites to identities, so they are inverse classical maps. The point-transport normalization in Step 10 identifies their local iterated Frobenius maps. If these maps require a larger finite coefficient field, the common-stage Hom definition represents the map, its inverse and the two identity equations at one common finite enlargement. This is a classical lisse Weil isomorphism; it need not preserve the selected integral lattice. Neither $g_T$-stability of the original $T_\\nu$ nor a Weil structure on $L_\\nu$ has entered the argument.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-tw-lisse-rational-realization",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Blueprint thm-zl-real-mixed-by-curves.proof.md paragraph 7; normalized lisse comparison and common-stage Weil-pair definition"
+   }
+  },
+  {
+   "text": "Finally suppose $T=(Y_0\\times_{k_0}k)_{\\mathrm{red}}$. Apply [lem-zl-smooth-affine-frontier-stratification] to the reduced partition $(T_\\nu)$. Its hypotheses are precisely the separated finite-type $Y_0$ and this finite reduced locally closed partition; no initial Frobenius stability is needed. It supplies one $k_m$, the finite reduced closed chain starting at $(Y_0\\times_{k_0}k_m)_{\\mathrm{red}}$, and all the smooth geometrically connected affine open-and-closed pieces in the successive differences, of constant dimensions $d\\geq0$. Their geometric base changes factor as locally closed subschemes through the $T_\\nu$. Restrict the already chosen systems and lattices along those factorizations. By [lem-per-lisse-completed-system-comparison] and [lem-tw-lisse-rational-realization], the restrictions remain lisse, at the same coefficient $E$, with the quotient, coefficient-extension and pullback normalizations already proved. The frontier theorem also gives $U_{a,b}\\simeq\\operatorname{Spec}k_m$ for a zero-dimensional piece and includes the empty scheme with a length-zero chain. This proves all clauses of the requested refinement.",
+   "uses": [
+    "lem-zl-smooth-affine-frontier-stratification",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Blueprint thm-zl-real-mixed-by-curves.proof.md paragraphs 6-7; frontier theorem sourced at Stacks Tags 0B8X, 01ZM and 06LH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-weil-sheaf-complex",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-kun-dimension-finite-type",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-topological-stratified-lisse-lattices",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-tw-lisse-rational-realization",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-zl-smooth-affine-frontier-stratification",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-integral-tstructure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, especially Lemma 6.8.2, Proposition 6.8.4, Definition 6.8.6, Lemma 6.8.13 and Proposition 6.8.14; assembled with the blueprint paragraphs 6-7 and the existing normalized coefficient/point comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +256,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}",
    "date": "2026-10-21",
    "verdict": "no match: the displayed hits do not state this classical adic/constructible Weil-heart assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|[Ll]isse|[Cc]onstructible",
+   "results": "[grep] OK 25 hit(s). Returned names/files: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean. Subdirectory searched: AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state raw adic-heart classical lisse stratification or normalized classical integral systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Equivalence",
+   "results": "[loogle] OK 12 hit(s). Returned names/files: CategoryTheory.sheafBotEquivalence; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense; CategoryTheory.Equivalence.transportAndSheafify; CategoryTheory.Equivalence.sheafCongr; CategoryTheory.Equivalence.sheafCongr.functor; CategoryTheory.Equivalence.sheafCongr.inverse; CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state raw adic-heart classical lisse stratification or normalized classical integral systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw rational constructible adic heart admits finite classical lisse strata with normalized integral reduction towers",
+   "results": "[leanfinder] OK 8 hit(s). Returned names/files: AlgebraicGeometry.IsLocallyArtinian; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.IsLocallyNoetherian; Algebra.QuasiFiniteAt; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state raw adic-heart classical lisse stratification or normalized classical integral systems"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]isse|[Ss]tratified|[Cc]onstructible",
+   "results": "[grep] OK 0 hit(s). Returned names/files: . Subdirectory searched: AlgebraicGeometry/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state raw adic-heart classical lisse stratification or normalized classical integral systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible continuous coefficient module sheaves admit integral lattices on finite locally closed strata",
+   "results": "[leansearch] OK 8 hit(s). Returned names/files: AlgebraicGeometry.Scheme.Modules; SheafOfModules.Finite.hasFiniteLimits; SheafOfModules; SheafOfModules.mk; SheafOfModules.hasLimit; ContinuousLinearMap.instModuleFinite; smoothSheafCommRing.coeFun; AlgebraicGeometry.Scheme.Modules.instHasColimits",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state raw adic-heart classical lisse stratification or normalized classical integral systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between lisse completed integral sheaves and compatible inverse systems of finite free etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s). Returned names/files: Condensed.lanSheafProfinite; Condensed.profiniteSolid; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; LightCondAb.ofSheafLightProfinite; Condensed.ofSheafForgetProfinite; LightCondensed.ofSheafLightProfinite_val; LightCondMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state raw adic-heart classical lisse stratification or normalized classical integral systems"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-zl-real-mixed-by-curves",
@@ -77,10 +313,94 @@
  "blueprint": {
   "from": {
    "node": "thm-zl-real-mixed-by-curves",
-   "place": "Paragraphs 6-7: constructing the lisse adapted partition before smooth affine refinement; raw-heart, continuous-coefficient and normalized integral-system identifications expanded in returned Steps 8-9. Returned Step 10: simultaneous finite-field frontier refinement preserving the normalized lisse systems.",
+   "place": "Paragraphs 6-7 of thm-zl-real-mixed-by-curves.proof.md: finite classical-lisse partition before smooth affine frontier refinement; the raw-heart, coefficient-ring, normalized finite-system and point-transport identifications needed to apply those paragraphs.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-raw-heart-adic-lisse-stratification",
+  "worker": "stage1",
+  "summary": "Split all clauses using existing normalized raw/continuous/lisse comparison nodes, finite stratified integral lattices and the existing finite-field frontier theorem. No new nodes and no statement change. Checked source text, actual cited statements, common coefficient field, ordinary reductions, and rational rather than integral Weil stability.",
+  "blueprint": "Steps 1-10 supply the raw-heart and classical-lisse identifications implicit in paragraph 6; Step 11 supplies the finite-field Weil restriction in paragraph 7; Step 12 realizes the closed frontier chain and simultaneous finite-field smooth affine refinement in paragraphs 6-7.",
+  "tool_uses": [
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "The required identity-induced raw/common-stage coefficient comparison, without Karoubi completion. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite-dimensional hypothesis of the raw coefficient and continuous realization equivalences. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Common finite heart representatives and normalized adic geometric fibres. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Raw PBC heart equivalence to constructible continuous module sheaves, with normalized coefficients and restrictions. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Equivalence with normalized finite etale systems and fully faithful rational maps, with pullback and scalar compatibility. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-sfb-topological-stratified-lisse-lattices",
+    "why": "Actual lisse integral lattices after a finite stratification; the general-base lattice tool required by Bhatt–Scholze Lemma 6.8.13. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Whole-quotient-diagram coherence for actual completed pullbacks and their coefficient comparisons. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Prescribed raw sf lisse realization, including Hom, coefficient-extension and point-transport normalization. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Canonical pulled-back condensed versus continuous coefficient ring comparison. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+    "why": "Both directions of lisse local freeness under the explicit internal/sectionwise module encoding. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identity of the integral sf/PBC categories and membership of finite locally free lattices in them. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Explicit PBC standard halves as integral isomorphism closures for comparison with the sf definition. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Explicit PBC integral standard halves (vanishing of ambient cohomology sheaves), compared in Step 1 with the sf integral halves. No node of sk-i-dl-general-real provides this coefficient-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-kun-dimension-finite-type",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-topological-stratified-lisse-lattices",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-tw-lisse-rational-realization",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-integral-tstructure"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-ac53e1132",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-ac53e1132 (reviewer sub-agent of L); spot-checked: I read all 12 steps and every cited statement in full. The split has 0 new nodes and the statement is unchanged; it adds four stmt_deps that the statement uses (constructible-heart, algebraically-closed-coefficients, completed-integral-coefficients, l-adic-coefficient-extension). The live item is still unsplit, there is no repair note, and neither the item nor any cited id is in route-pivot-dropped.txt. No SGA is cited. The route is blueprint thm-zl-real-mixed-by-curves paragraphs 6-7 (main-20261015), with the smooth affine chain delegated to the same-unit lem-zl-smooth-affine-frontier-stratification, whose hypotheses match exactly (finite reduced partition of X_red, no Frobenius stability, Spec k_m pieces, empty case). Steps 2-12 say what their cited statements say: the Q-bar-l heart pairs of adic-heart; the continuous-realization heart and restriction clauses; one flat-term K-flat representative for both completed pullbacks, with coherence from lem-trf-integral-pullback-comparison-realization for arbitrary morphisms; total disconnectedness of O_E and E checked; encoding plus slice-freeness in both directions; lattices at a fixed E on Noetherian strata; reductions to normalized etale systems (lem-per-lisse-completed); (ii)=>(i) of the integral characterization; full faithfulness of lem-tw; directed Hom colimits at Q-bar-l; and rational, not integral, Weil lifts. I tested T empty, M=0, T=Spec k (a scalar Weil map with nonzero valuation preserves no lattice) and nonreduced T. FIX (C3/C4): Step 1 needs the sf and PBC integral halves to be the same classes. That uses the explicit H^i-vanishing halves of prop-weil-pbc-integral-tstructure, which was not cited. I added the sentence, uses/proof_deps and a tool_uses entry (unit sk-rem-rest, like the declared prop-weil-localized-tstructure); this creates no cycle and leaves the batch-5 closure unchanged. Batch 5: the flags on lem-per-adic-heart-pullback-fibres and lem-per-lisse-completed-system-comparison reach sec-poincare-duality only through the general definition def-pod-lisse-l-adic-sheaves, already a base stmt_dep, so I accept them. My own closure diff also found three sk-def-sp-tate-twist roots-of-unity lemmas (lem-poincare-compatible-primitive-roots, -integral-residue-free-comparison, -integral-residue-module-limit) reached through lem-sfb-topological-stratified-lisse-lattices. They are generic, neither assumption states them and they are not steps of either proof, so I accept them. The 12 declared coefficient tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
