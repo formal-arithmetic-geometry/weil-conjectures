@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-extension-bounds",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension bounds for Frobenius modules",
@@ -17,23 +17,68 @@
  ],
  "proof": [
   {
-   "text": "Unpack the two finite stable filtrations from [def-weil-frobenius-module-weights]. Define W_i=f(V_i) for i<=m and W_i=g^(-1)(Z_(i-m)) for i>m. Exactness identifies f(V_m)=range(f)=ker(g)=g^(-1)(Z_0). Thus the definitions agree at the join. The zero and whole endpoints, increasing property and Frobenius stability follow from those of V and Z and the equivariance of f and g. The construction permits m=0 or n=0 and repeated steps.",
+   "text": "Write the maps as $f:V'\\to V$ and $g:V\\to V''$, and the three automorphisms as $F',F,F''$. Thus $f$ is injective, $g$ is surjective, $\\operatorname{im}f=\\ker g$, $Ff=fF'$ and $gF=F''g$. By [def-weil-frobenius-module-weights] choose stable filtrations $0=A_0\\subseteq\\cdots\\subseteq A_m=V'$ and $0=C_0\\subseteq\\cdots\\subseteq C_n=V''$, with pure successive quotients of weights $a_i\\le w$ and $c_j\\le w$. The coefficient field, $q$, and $\\iota$ are the same for both filtrations.",
    "uses": [
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+    "place": "entire proof: pull back and splice the two stable filtrations"
+   }
   },
   {
-   "text": "For a surjective equivariant linear map between upper subspaces whose inverse image of the lower target subspace is the lower source subspace, the induced quotient map is bijective: its kernel is zero and representatives lift by surjectivity. Conjugate the pure target quotient Frobenius through this linear equivalence. Equivariance gives the prescribed quotient action, and applying the equivalence to a nonzero eigenvector proves that purity is preserved. This elementary quotient argument is the fully proved private helper transport_piece.",
+   "text": "Define $W_i=f(A_i)$ for $0\\le i\\le m$ and $W_{m+j}=g^{-1}(C_j)$ for $0\\le j\\le n$. These definitions agree at $m$, since $f(A_m)=\\operatorname{im}f=\\ker g=g^{-1}(C_0)$. Images and inverse images preserve inclusions, so this is increasing. Its endpoints are $W_0=0$ and $W_{m+n}=g^{-1}(V'')=V$. This includes $m=0$ or $n=0$.",
    "uses": [],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+    "place": "entire proof: pull back and splice the two stable filtrations"
+   }
   },
   {
-   "text": "For each mapped filtration step, injectivity of f identifies its upper subspace with V_(i+1) and identifies its lower subspace with V_i; use the inverse restricted equivalence in transport_piece. For each pulled-back step, the restriction of g is surjective onto Z_(j+1) and the preimage of Z_j is the lower subspace; apply transport_piece directly. All weights are inherited unchanged and remain <=w. Hence W satisfies every clause of [def-weil-frobenius-module-weights], giving mixedness of B.",
+   "text": "Each subspace is stable with equality, as required by [def-weil-frobenius-module-weights]. On the left, $F(f(A_i))=f(F'(A_i))=f(A_i)$. On the right, equivariance and $F''(C_j)=C_j$ give $F(g^{-1}(C_j))\\subseteq g^{-1}(C_j)$. Conversely, for $x\\in g^{-1}(C_j)$, put $y=F^{-1}x$; then $g(y)=(F'')^{-1}g(x)\\in C_j$, so $x=F(y)$ belongs to $F(g^{-1}(C_j))$.",
    "uses": [
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+    "place": "entire proof: pull back and splice the two stable filtrations"
+   }
+  },
+  {
+   "text": "For $1\\le i\\le m$, the map $A_i/A_{i-1}\\to W_i/W_{i-1}$ sending $[x]$ to $[f(x)]$ is well-defined and linear. Every target class has such a representative, so it is surjective. If $f(x)\\in f(A_{i-1})$, choose $z\\in A_{i-1}$ with $f(x)=f(z)$; injectivity gives $x=z$, proving its kernel is zero. It is therefore an isomorphism. The quotient actions defined in [def-weil-frobenius-module-weights] satisfy $[f(F'x)]=[Ff(x)]$, so this isomorphism commutes with Frobenius.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+    "place": "entire proof: pull back and splice the two stable filtrations"
+   }
+  },
+  {
+   "text": "For $1\\le j\\le n$, the map $W_{m+j}/W_{m+j-1}\\to C_j/C_{j-1}$ sending $[x]$ to $[g(x)]$ is well-defined and linear. Given $z\\in C_j$, surjectivity of $g$ supplies $x\\in V$ with $g(x)=z$, and then $x\\in g^{-1}(C_j)=W_{m+j}$. Its kernel is zero, because $g(x)\\in C_{j-1}$ is precisely $x\\in g^{-1}(C_{j-1})=W_{m+j-1}$. Thus it is an isomorphism, and $[g(Fx)]=[F''g(x)]$ proves Frobenius compatibility for the quotient actions in [def-weil-frobenius-module-weights].",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+    "place": "entire proof: pull back and splice the two stable filtrations"
+   }
+  },
+  {
+   "text": "If $e$ is either of these isomorphisms, an eigenvector $x\\ne0$ of the source quotient with eigenvalue $\\alpha$ maps to the nonzero eigenvector $e(x)$, since $e(Fx)=F e(x)$ and $e(\\alpha x)=\\alpha e(x)$. Applying the same argument to $e^{-1}$ gives equality of eigenvalue sets. Consequently each left graded piece of $W$ is pure of weight $a_i$, and each right graded piece is pure of weight $c_j$, by the eigenvalue definition of purity in [def-weil-frobenius-module-weights]. Concatenate these weight lists, all bounded by $w$. The filtration constructed above now satisfies every clause of that node's definition of mixedness, proving the assertion. Zero graded pieces cause no exception, since they have no nonzero eigenvectors.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+    "place": "entire proof: pull back and splice the two stable filtrations"
+   }
   }
  ],
  "proof_deps": [
@@ -41,12 +86,55 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.md",
-  "place": "## Proof; direct Lean filtration-splicing implementation, with proved quotient transport"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.proof.md",
+  "place": "entire proof: pull back and splice the two stable filtrations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|HasWeightsAtMost|FrobeniusModule",
+   "results": "{\"t\": \"2026-10-21T06:16:12Z\", \"tool\": \"grep\", \"query\": \"IsMixedOfWeightsAtMost|HasWeightsAtMost|FrobeniusModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state extension closure of mixed Frobenius-module weights"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a short exact sequence of Frobenius modules if both outer terms are mixed of weights at most w then the middle term is mixed of weights at most w",
+   "results": "{\"t\": \"2026-10-21T06:16:12Z\", \"tool\": \"leansearch\", \"query\": \"In a short exact sequence of Frobenius modules if both outer terms are mixed of weights at most w then the middle term is mixed of weights at most w\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.free_shortExact\", \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"CategoryTheory.ShortComplex.ShortExact.hasInjectiveDimensionLT_X₂\", \"Module.support_of_exact\", \"ModuleCat.free_shortExact_finrank_add\", \"CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂\", \"ModuleCat.free_shortExact_rank_add\", \"Module.length_eq_add_of_exact\"], \"digest\": \"c8ed84f4fbf43cab\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state extension closure of mixed Frobenius-module weights"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, LinearEquiv, Function.Exact",
+   "results": "{\"t\": \"2026-10-21T06:16:12Z\", \"tool\": \"loogle\", \"query\": \"Submodule, LinearEquiv, Function.Exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Function.Exact.linearEquivOfSurjective\", \"Function.Exact.linearEquivOfSurjective_symm_apply\", \"Function.Exact.linearEquivOfSurjective_apply\", \"lTensor.equiv\", \"rTensor.equiv\", \"lTensor.linearEquiv_of_rightInverse\", \"rTensor.linearEquiv_of_rightInverse\"], \"digest\": \"3e5226ba8f58131c\"}",
+   "date": "2026-10-21",
+   "verdict": "constituent only: quotient equivalence, not stable pure-weight filtration extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of finite dimensional vector spaces with automorphism having finite invariant filtrations with pure weight graded pieces again has such a filtration with weights at most w",
+   "results": "{\"t\": \"2026-10-21T06:16:22Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of finite dimensional vector spaces with automorphism having finite invariant filtrations with pure weight graded pieces again has such a filtration with weights at most w\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.mk_int\", \"IsModuleFiltration\", \"IsModuleFiltration.toGradedSMul\", \"LieModule.genWeightSpace_le_genWeightSpaceChain\", \"LieModule.genWeightSpaceChain\", \"Ideal.Filtration.Stable.exists_forall_le\", \"Ideal.Filtration.Stable.bounded_difference\", \"IsModuleFiltration.toIsFiltration\"], \"digest\": \"2bc5e566ce8e8e3d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state extension closure of mixed Frobenius-module weights"
+  },
+  {
+   "tool": "grep",
+   "query": "mixed.*weight|pure.*weight|filtration.*exact|exact.*filtration",
+   "results": "{\"t\": \"2026-10-21T06:16:34Z\", \"tool\": \"grep\", \"query\": \"mixed.*weight|pure.*weight|filtration.*exact|exact.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/SelbergSieve.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\"], \"digest\": \"5dea6a8ff2dfe5a1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state extension closure of mixed Frobenius-module weights"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splice an invariant filtration on a submodule with the inverse image of an invariant filtration on the quotient so successive quotients are unchanged",
+   "results": "{\"t\": \"2026-10-21T06:16:44Z\", \"tool\": \"leanfinder\", \"query\": \"Splice an invariant filtration on a submodule with the inverse image of an invariant filtration on the quotient so successive quotients are unchanged\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.stableFiltration_stable\", \"IsModuleFiltration.mk_int\", \"Ideal.Filtration.Stable\", \"IsModuleFiltration.toIsFiltration\", \"Ideal.stableFiltration\", \"Ideal.Filtration.N\", \"IsModuleFiltration\", \"Ideal.Filtration.Stable.bounded_difference\"], \"digest\": \"acea4f4a19a38320\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state extension closure of mixed Frobenius-module weights"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -85,5 +173,20 @@
   "landing": "20261019T192850-L-1877474",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-extension-bounds",
+  "worker": "stage1",
+  "summary": "Retained the statement and existing filtration-splicing proof, expanded the join, stability with equality, both quotient maps and the nonzero-eigenvector argument. The upstream eigenvalue-bound theorem is not the filtration predicate; the matching Sheaf proof is outside the explicitly authorized attachment root. All arguments beyond the cited definition are written as elementary representative calculations. No new nodes or route changes.",
+  "blueprint": "Realizes the entire main-20261015 proof: choose filtrations (step 1), pull back and splice (steps 2-3), identify graded pieces (steps 4-5), preserve their pure weights and conclude (step 6). No other blueprint node states this result; same_as is empty."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-1563c60a5",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-1563c60a5 (reviewer sub-agent of L); spot-checked: Read the item in full, the main-20261015 statement (order 3134) and proof file, the master statement (order 2790), def-weil-frobenius-module-weights (filtration with F(V_r)=V_r, pure quotients by eigenvalues, induced quotient Frobenius, m=0 allowed), sk-def-frobmod and unit sk-thm-dl-a1-upper. The statement, stmt_deps, lean and review records are unchanged; there are no new nodes and no repair note for this item. Live status is still imported. Six steps, all elementary and citing only the definition, as the blueprint proof does. Step 1 unpacks exactness and equivariance and takes the two filtrations with the same p, a, ℓ, ι. Step 2 builds W_i=f(A_i) and W_{m+j}=g^{-1}(C_j); they agree at m because im f=ker g=g^{-1}(0), and the endpoints are 0 and V. Step 3 proves F(W_r)=W_r both ways; the reverse direction uses F^{-1} and gF^{-1}=F''^{-1}g. Step 4: quotient map [x]↦[fx] is an isomorphism by injectivity of f. Step 5: [x]↦[gx] is an isomorphism because W_{m+j-1}=g^{-1}(C_{j-1}) and g is surjective. Step 6: a Frobenius-compatible isomorphism gives equal eigenvalue sets, so purity transfers and the concatenated weights are ≤w. This writes out the base's bare 'transport_piece' Lean reference. Edge cases tested: m=n=0, one end zero, repeated subspaces, a non-split Jordan block, different weights at the two ends. The conclusion is the full filtration predicate, not weakened. Duplicate search: lem-a1-mixed-direct-summand cites this item and is the sheaf version; lem-zl-complex-extension and lem-zl-composition-weight-bound are different statements; same_as [] is correct and there is no cycle. Maintainer note (B10): the item is already Lean-closed by FrobeniusModule.IsMixedOfWeightsAtMost.of_shortExact (lean/Sheaf/LinearAlgebra/FrobeniusModuleExtensionBounds.lean:169, no sorry, reviewed_proof pass at W4 landing 20261019T192850), so stage-1 dispatch of this item was unnecessary. This is not a delivery fault."
  }
 }
