@@ -23448,3 +23448,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:14 L: merged deliver/ND/lem-sfb-normed-scalar-profinite-cech-exact (reviewer PASS; first push; new nodes: 1)
 - 19:14 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 19:15 L: merged deliver/Q03/lem-sfb-finite-subfield-continuous-linear-retraction (reviewer PASS; first push; new nodes: 1)
+- 19:16 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
