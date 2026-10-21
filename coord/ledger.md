@@ -21375,3 +21375,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q84/lem-trf-integral-comparison-counit-characterization (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q24/lem-sfb-integral-residue-class-triangle-closure (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q20/lem-sp-subterminal-derived-image-calculus (reviewer PASS; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q139/lem-sf-open-exchange-roos-restriction (reviewer PASS; first push; new nodes: 0); claim not held by Q139: not your claim

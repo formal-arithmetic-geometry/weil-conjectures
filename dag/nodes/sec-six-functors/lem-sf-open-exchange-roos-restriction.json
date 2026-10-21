@@ -32,9 +32,155 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-sf-pull-completion-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sf-open-roos-unit-adjunction] to the open immersions $j,j'$. Its finite-type hypotheses are exactly those here: the schemes are Noetherian and qcqs, both opens are quasi-compact, $(R,(t))$ is an admissible adic datum, and the coefficient restriction isomorphisms preserve every quotient projection. The same statement identifies the assumed Roos-triangle completeness of $K$ with intrinsic completeness and invertibility of its actual quotient-augmentation unit. We may therefore apply lemmas stated for intrinsic completeness, without replacing the augmentation by an arbitrary isomorphism. Write $L_W=R\\lim$ on strict $B_W$-towers and $\\mathsf H$ for its normalized signed Roos model.",
+   "uses": [
+    "lem-sf-open-roos-unit-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099N, lemma-pushforward-Noetherian-case (2),(5), and 09BN, lemma-open-immersion; admissibility and actual-unit bridge supplied by the cited node."
+   }
+  },
+  {
+   "text": "The module categories on all four sites have exact countable products by [lem-weil-proetale-countable-products-exact]. The functors $j'_!$ and $j'^*$ are additive and exact by [lem-pur-site-restriction-module-adjunction-exact]. The former preserves countable products by [lem-cbc-ringed-open-extension-products], since $j'$ is quasi-compact; the latter does so by [lem-weil-pbc-right-adjoint-preserves-limits], applied to $j'_!\\dashv j'^*$ and the small discrete countable index category. Thus [lem-cbc-exact-product-functor-strict-limit] applies separately to both functors. Denote its normalized restriction comparison by $\\rho_T:j'^*L_{X'}T\\xrightarrow{\\sim}L_{U'}j'^*T$ and its extension comparison by $\\lambda_M:j'_!L_{U'}M\\xrightarrow{\\sim}L_{X'}J'M$. Both comparisons preserve strict augmentations. No product-preservation assertion is required of $F_h$ or $F_a$.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP, lemma-j-shriek-limits; normalized exact-product comparisons and the augmentation clause of the cited strict-limit node."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative $P$ of $K$ using [lem-pc-kflat-resolution]. By [lem-cbc-ringed-open-flat-resolution], $j_!P$ is again flat-term K-flat, so it computes the reductions of $j_!K$. Put $T=Q_U(K)_\\bullet$ and $M=F_aT$. The canonical isomorphism $r_j$ of [lem-sf-integral-open-reduction-comparison] identifies the entire reduction system of $j_!K$ with $JT$, including quotient transitions, and gives completeness of $j_!K$. The simultaneous comparison of [lem-cbc-completed-ring-strict-finite-exchange] identifies pullback of this system with $F_hJT$ and identifies its exchange with the strict finite map $b:T_h=F_hJT\\to J'M$. These are maps of systems over $B_{X'}$ through its quotient projections, not selected maps between separate derived evaluations.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5); strict finite exchange and open reduction interfaces of the cited nodes."
+   }
+  },
+  {
+   "text": "At each finite constant coefficient $A_n$, let $\\alpha_n:j'^*h_n^*j_!P_n\\to a_n^*P_n$ be pullback composition followed by the inverse open unit. The compositor is the one normalized on representatives in [lem-weil-pbc-proetale-derived-pullback-composition]; its coefficient-isomorphism hypotheses hold here for finite constant sheaves. By [lem-sf-open-tensor-normalization] the open units identify sections with themselves. Let $u'_n:N_n\\to j'^*j'_!N_n$, $N_n=a_n^*P_n$, and let $d_n=b_n^{-1}$. The inverse-mate formula of [lem-cbc-finite-open-exchange-scalars] says precisely $j'^*d_n\\circ u'_n=\\alpha_n^{-1}$, by the definition of adjunct. Inverting gives $(u'_n)^{-1}\\circ j'^*b_n=\\alpha_n$. The same cited statement makes $b_n,d_n$, their units, and composition identifications compatible with every quotient transition. We obtain an equality of strict tower maps $(u'_M)^{-1}\\circ j'^*b=\\alpha:j'^*T_h\\to M$, with $u'$ the termwise open unit. In the specified composition and unit coordinates this is the identity on the simultaneous system.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-finite-open-exchange-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN, lemma-open-immersion, and 099N; finite-composition input: sites-cohomology.tex Tag 0D6D, lemma-derived-pullback-composition."
+   }
+  },
+  {
+   "text": "The definition [def-weil-pbc-completed-pullback] now represents $Lh^*_{\\mathrm{comp}}j_!K$ by $L_{X'}T_h$ and $La^*_{\\mathrm{comp}}K$ by $L_{U'}M$. The canonical map of [lem-cbc-completed-extension-zero-comparison] is defined from the finite exchanges and the extension/derived-limit comparison. Use the augmentation-normalized comparison of step 2 for that latter comparison: [lem-cbc-exact-product-functor-strict-limit] identifies it with $\\lambda_M$, including the comparison obtained by resolving the image tower. Hence, in the fixed strict reduction coordinates, the specified exchange is exactly $\\Beta_K=\\lambda_M^{-1}\\circ L_{X'}(b)$. Both factors are invertible. The completed-extension comparison also states that both endpoints are intrinsically complete. The equivalence in step 1 converts this to the completeness predicate of the item.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5); the canonical-map clause of the cited completed open comparison."
+   }
+  },
+  {
+   "text": "Compute the restriction of $\\lambda_M$. In the section-normalized open-unit coordinates, the product comparison for $j'_!$, after applying $j'^*$ and its product comparison, has $n$-th projection $\\operatorname{pr}_n$: this follows from its defining equation $\\operatorname{pr}_n\\phi=j'_!(\\operatorname{pr}_n)$ and naturality of the open unit. Equality into a product is equality of its projections, so this composite product comparison is the identity. In the signed model $\\mathsf H(M)^q=(\\prod M_n)^q\\oplus(\\prod M_n)^{q-1}$, the corresponding map is therefore $(x,y)\\mapsto(x,y)$. It commutes with $d(x,y)=(dx,(1-s)x-dy)$ since the open-unit identification commutes with all transitions. The conjugation formula for $\\lambda$ in [lem-cbc-exact-product-functor-strict-limit] and the same normalization for $\\rho$ give\n$$L_{U'}((u'_M)^{-1})\\circ\\rho_{J'M}\\circ j'^*(\\lambda_M)\\circ u'_{L_{U'}M}=1.$$\nHere $u'$ is the section-normalized open unit of [lem-sf-open-tensor-normalization]. The augmentation is $(\\gamma,0)$ in [lem-weil-strict-roos-comparison], so the very same identity fixes it. There is no undetermined cone map or sign in the second summand.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN and 09BP; signed Roos normalization: sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok; explicit identity calculation from the cited comparisons."
+   }
+  },
+  {
+   "text": "Naturality of $\\rho$ for the strict map $b:T_h\\to J'M$ gives\n$$\\rho_{J'M}\\circ j'^*L_{X'}(b)=L_{U'}(j'^*b)\\circ\\rho_{T_h}.$$\nThis is also immediate in [lem-weil-strict-roos-comparison]: both sides apply the same product map of $b$ on both signed coordinates. Substitute step 5 into $j'^*\\Beta_K$, then use the equation in step 6 to obtain\n$$ (u'_{L_{U'}M})^{-1}\\circ j'^*\\Beta_K\n =L_{U'}((u'_M)^{-1}\\circ j'^*b)\\circ\\rho_{T_h}\n =L_{U'}(\\alpha)\\circ\\rho_{T_h}.$$\nThe last equality is step 4. The right side is exactly $\\Theta_K$: it first commutes open restriction with the normalized strict limit and then applies the finite pullback compositors and the open unit. Thus $j'^*\\Beta_K=\\Theta_K$ under the stated endpoint identification. The equality is obtained on simultaneous Roos maps and hence holds in the ambient completed-coefficient derived category.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5); normalized strict-limit naturality and the explicit calculation of steps 4–6."
+   }
+  },
+  {
+   "text": "Check the ordinary-to-completed units before taking limits. For a complete $H\\in D(B_X)$, choose a flat-term K-flat $P\\to H$. Ringed pullback and restriction preserve these representatives by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Write $\\delta_H:j'^*Lh^*H\\xrightarrow{\\sim}La^*j^*H$ for the ordinary ringed-square compositor specified in [lem-sf-open-tensor-normalization]. The strict reduction comparison for restriction in [lem-sf-immersion-completed-pullback-comparison] identifies $j'^*F_hQ_X(H)$ with $F_aQ_U(j^*H)$. Under this identification the two strict augmentations agree after $\\delta_H$: both send a local pullback tensor $r'\\otimes p$ to $r'_n\\otimes(p\\otimes1)$ at level $n$. Restriction simply views this section over the open; the constant-section compositor and open unit do not change it. This equation is balanced, respects differentials degreewise, and commutes with $A_{n+1}\\to A_n$ because $r'_{n+1}$ reduces to $r'_n$. The completed structural maps used on the two sides have equal $n$-th projections, namely restriction of the same constant-section map. Thus they agree as maps into $B_{U'}$; [lem-cbc-adic-pullback-presentation-transport] carries these coefficient identifications, their strict augmentations, and the derived representative comparisons to the specified constructions. This does not assume that $h^{-1}B_X\\to B_{X'}$ is invertible.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-cbc-adic-pullback-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5); sites-cohomology.tex Tag 0D6D; explicit tensor-generator and quotient-projection calculation."
+   }
+  },
+  {
+   "text": "Let $v_h:Lh^*H\\to Lh^*_{\\mathrm{comp}}H$ and $v_a:La^*j^*H\\to La^*_{\\mathrm{comp}}j^*H$ be the actual units of [def-weil-pbc-completed-pullback]. They are induced by the strict augmentations of step 8. Let $c_H:j'^*Lh^*_{\\mathrm{comp}}H\\to La^*_{\\mathrm{comp}}j^*H$ be $\\rho$ followed by the strict finite-composition/restriction comparison. By [lem-weil-strict-roos-comparison], the two augmented maps are represented by $(\\gamma,0)$. Step 8 makes their first components equal, and their second components are both zero; the augmentation clause of [lem-cbc-exact-product-functor-strict-limit] therefore gives the actual equation\n$$c_H\\circ j'^*v_h=v_a\\circ\\delta_H.$$\nThis is precisely the normalization retained in [def-sf-pull-completion-comparison], whose ordinary-to-completed map uses the recorded quotient unit. Apply it to $H=j_!K$ and identify $j^*j_!K=K$ with its specified open unit: the $c_H$ used here is the comparison in $\\Theta_K$. Together with the augmentation identity in step 6 this proves all asserted completion-unit compatibilities. Functoriality of the strict maps and the normalized comparisons gives naturality in $K$.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-strict-roos-comparison",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "def-sf-pull-completion-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), and sites-cohomology.tex Tag 0941; augmentation-normalized strict Roos calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-pull-completion-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-cbc-adic-pullback-presentation-transport",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-completed-ring-strict-finite-exchange",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-cbc-finite-open-exchange-scalars",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-roos-unit-adjunction",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor (both composites restrict to the identity); expanded here using Stacks Tags 099N, 09BN, 09BP, 0941 and 0D6D and the cited normalized strict-tower interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -98,10 +244,59 @@
    "results": "Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/Elements.lean",
    "date": "2026-10-21",
    "verdict": "no match: inspected AdicCompletion.map_exact (RingTheory/AdicCompletion/Exactness.lean:184), ofTensorProduct_naturality (AsTensorProduct.lean:74), Scheme.Modules.restrictFunctorIsoPullback (AlgebraicGeometry/Modules/Sheaf.lean:453), restrictAdjunction_unit_app_app (:442), and preservesLimitIso_inv_π (CategoryTheory/Limits/Preserves/Limits.lean:63); these are respectively ordinary module completion, Zariski structure-module restriction, and ordinary categorical limits, not this pro-etale strict derived/unit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completedPullback|completed.*[Ee]xchange",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of extension by zero base change to an open is identity and commutes with derived completion units",
+   "results": "AlgebraicGeometry.RingedSpace.res_zero, AlgebraicGeometry.morphismRestrict_id, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, ContinuousLinearMap.restrictScalars_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of derived completed open base change preserves the quotient augmentation and is the pullback composition comparison",
+   "results": "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.isPullback_morphismRestrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitIso_inv_π|rightAdjoint_preservesLimits|restrictFunctorIsoPullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact product preserving functor commutes with derived inverse limits via the two term Roos complex compatibly with augmentations",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapProjectiveResolution_complex, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, localCohomology.diagramComp, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh|mapDerivedCategoryFactors",
+   "results": "41, 47, 48, 49, 51",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned hits; ordinary scheme/structure-module restriction, exact-functor localization, and categorical limits do not state the strict completed-coefficient open exchange or its normalized unit equality. Closest generic limit fact is already lem-weil-pbc-right-adjoint-preserves-limits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-pf-open-factor-coherence",
@@ -118,5 +313,110 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-exchange-roos-restriction",
+  "worker": "stage1",
+  "group": "Q139",
+  "summary": "Kept the statement, expanded the simultaneous inverse-open-unit and signed-Roos calculations in nine steps, proved the restricted actual completion-unit square on strict quotient augmentations, and reused all mathematical inputs from the existing DAG. No new nodes or attachments.",
+  "blueprint": "prop-sf-pf-coherence, base-change paragraph, open factor: both composites are in the essential image of j prime shriek and restrict to the identity. This item supplies the exchange restriction and its units, not the projection-formula assertion.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-completed-pullback",
+    "why": "Generic Completed pullback interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-adic-pullback-presentation-transport",
+    "why": "Generic Counit-normalized transport of adic pullback presentations and completion units interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Generic Completed extension-by-zero base change interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-completed-ring-strict-finite-exchange",
+    "why": "Generic Strict finite open exchange over completed coefficient rings interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic Canonical strict derived-limit comparison for exact product-preserving module functors interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-finite-open-exchange-scalars",
+    "why": "Generic Finite open exchange commutes with coefficient restriction and tower transitions interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-ringed-open-extension-products",
+    "why": "Generic Products of ringed pro-etale open extensions without ambient quasi-compactness interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-cbc-ringed-open-flat-resolution",
+    "why": "Generic Flat resolutions under ringed slice extension interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Generic Ordinary immersion pullback agrees with quotient-tower completed pullback interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic Strict reduction and normalized realization of completed open extension interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic Natural comparison of strict derived inverse limit and the product cone interface used with the given open square and strict quotient systems; the unit does not reprove this tool and its open-factor route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-completed-pullback",
+  "lem-cbc-adic-pullback-presentation-transport",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-completed-ring-strict-finite-exchange",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-cbc-finite-open-exchange-scalars",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-5d5d97d08",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-5d5d97d08 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, item JSON plus report, 0 new nodes, statement byte-identical to live and side-live, no fixes. The item has no repair note of its own (created 2026-10-21 by Q100's re-split of lem-sf-pf-open-factor-coherence), so the re-split rule does not bind it. Every argument of the parent's old steps 10-11 (read from the Q24 snapshot) reappears here expanded. A DAG walk from all stmt_deps and proof_deps finds no cycle. On route, the two same-unit nodes are open-roos-unit-adjunction and pull-completion-comparison, the right-adjoint fact is a Mathlib leaf, and every other cited node is a generic interface declared in tool_uses (cbc exact-product strict limit, finite open exchange, K-flat representatives, completed pullback); I accept them. Sources read: Stacks proetale.tex 099N (2),(5) at l.4336, 09BN at l.5117, 09BP at l.5185, and sites-cohomology 0D6D; blueprint prop-sf-pf-coherence proof l.21-25. Step by step: 1 checked the adic datum, quasi-compactness and Roos<->eta<->intrinsic completeness. 2 checked the hypotheses of exact-product-strict-limit for j'_! (j' quasi-compact as a base change of j over a Noetherian X) and for j'^* (right adjoint). 3 checked K-flat P, j_!P, r_j (l invertible) and the strict b_K; its components are the same beta_B as finite-open-exchange-scalars. 4 I re-derived the adjunct algebra: j'^*d.u'=alpha^{-1} gives (u')^{-1}.j'^*b=alpha. 5 Beta=lambda^{-1}.Rlim(b) follows from the resolving-image-tower clause, in the right direction. 6 I verified that the composite of rho and j'^*lambda is theta^{-1}(phi'.F'phi)theta, which is the identity after u' on both signed summands, compatible with d(x,y)=(dx,(1-s)x-dy) and with the (gamma,0) augmentation. 7 Naturality of rho plus substitution gives L(alpha)rho=Theta. 8 and 9 give the strict augmentation equality, then c_H.j'^*v_h=v_a.delta_H via the augmentation clause and adic-pullback-presentation-transport, with no invertibility of c_g assumed. Edge cases checked: U empty, j=id, K=0, constant towers. Advisories only: step 8 composes the immersion comparison with theta without naming the composite, and the proof is 8.8k characters with 0 new nodes, which is not a fault without a re-split note."
  }
 }
