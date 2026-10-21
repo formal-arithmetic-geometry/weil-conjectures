@@ -15,9 +15,126 @@
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-pc-derived-adjoint-functors"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U=\\operatorname{Res}_{B/R}$ and let $q:P\\to M$ be a flat-term K-flat $B$-resolution, supplied by [lem-pc-kflat-resolution]. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], restriction along any of the ring maps is exact and its derived functor is termwise restriction. Thus $Uq$ is a quasi-isomorphism. We use the same underlying complex $UP$ for the $R$-side, after checking its K-flatness in the next step.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution); Tag 07A6 (lemma-adjoint), identity-topos exact restriction."
+   }
+  },
+  {
+   "text": "For an acyclic $R$-complex $A$, flatness of $B/R$ and [lem-weil-pbc-exact-functor-derived-factorization] make $B\\otimes_R A$ acyclic. The natural cancellation of [lem-pur-change-of-rings-tensor-cancellation], degree by degree and then on total direct sums, gives\n$$\\operatorname{Tot}(UP\\otimes_R A)\\cong U\\operatorname{Tot}(P\\otimes_B(B\\otimes_R A)).$$\nRestriction commutes with these direct sums and detects acyclicity because the underlying abelian sheaf and its cohomology are unchanged [lem-weil-pbc-module-sheaves-colimits-forgetful]. The right side is acyclic by the definition of K-flatness [def-pc-kflat-complex]. Hence $UP$ is K-flat. For each term the same cancellation writes $UP^i\\otimes_R-$ as the composite of $B\\otimes_R-$, $P^i\\otimes_B-$ and exact restriction; consequently $UP^i$ is flat. This is a direct application of the cited cancellation and the definition, not a separate flat-restriction lemma.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-change-of-rings-tensor-cancellation",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); flat identity-topos specialization; sites-modules.tex Tag 05V4 (lemma-flat-change-of-rings), displayed cancellation."
+   }
+  },
+  {
+   "text": "Put $\\mu:B\\otimes_R S\\xrightarrow{\\sim}S$. Cancellation [lem-pur-change-of-rings-tensor-cancellation] followed by $1\\otimes_B\\mu$ gives a chain isomorphism\n$$UP\\otimes_R S\\xrightarrow{\\sim}P\\otimes_B(B\\otimes_R S)\\xrightarrow{1\\otimes\\mu}P\\otimes_B S.$$\nThe first map sends $x\\otimes s$ to $x\\otimes(1\\otimes s)$ and its inverse sends $x\\otimes(b\\otimes s)$ to $bx\\otimes s$. These are the sheafified balanced tensor maps [def-pur-sheaf-tensor-product]. They are $S$-linear for the action on the last factor, and commute with $d_P$; all scalar factors have degree zero. The composite is $k_{P,S}(x\\otimes s)=x\\otimes s$. Invertibility uses exactly the assumed isomorphism $\\mu$, not flatness of $S/B$.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-modules.tex Tag 05V4 (lemma-flat-change-of-rings), tensor cancellation; Section 03EK (section-tensor-product)."
+   }
+  },
+  {
+   "text": "By [lem-pur-derived-change-of-rings], $UP\\otimes_R S$ and $P\\otimes_B S$ represent the two derived extensions, since step 2 proves that $Uq$ is a K-flat resolution. The maps $k_{P,S}$ commute with every $B$-chain map: both composites send $x\\otimes s$ to $f(x)\\otimes s$. They therefore give a natural chain isomorphism on the homotopy category of flat-term K-flat $B$-complexes. By [lem-weil-pbc-site-derived-tensor-descent], localization of this category at quasi-isomorphisms is equivalent to $D(B)$. The natural-transformation part of [lem-weil-pbc-localization-universal-property] descends $k$ and its inverse uniquely, yielding the natural isomorphism $\\kappa_{M,S}$ independently of the chosen resolution. This also proves naturality for derived morphisms, including inverses of quasi-isomorphisms.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change); the K-flat localization construction."
+   }
+  },
+  {
+   "text": "Let $\\eta^B_M:M\\to\\operatorname{Res}_{S/B}(M\\otimes_B^L S)$ and $\\eta^R_{UM}:UM\\to\\operatorname{Res}_{S/R}(UM\\otimes_R^L S)$ denote the canonical derived units. Their normalization in [lem-pur-sheaf-ring-derived-coefficient-adjunction] represents both on $P$ (respectively $UP$) by $x\\mapsto x\\otimes1$. Step 3 gives $k_{P,S}(x\\otimes1)=x\\otimes1$. Thus, identifying composite restriction with restriction along the composite (the scalar action is literally the composite ring map),\n$$\\operatorname{Res}_{S/R}(\\kappa_{M,S})\\circ\\eta^R_{UM}=U(\\eta^B_M).$$\nFor $M=QP$ this is the displayed chain equality. Naturality of both units and of $\\kappa$ carries it along the isomorphism $Qq:QP\\xrightarrow{\\sim}M$ to every $M$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), normalized by derived.tex Tags 0FND (lemma-pre-derived-adjoint-functors) and 09T5 (lemma-derived-adjoint-functors)."
+   }
+  },
+  {
+   "text": "The defining adjunction formula [lem-pur-sheaf-ring-derived-coefficient-adjunction] sends a map $a:M\\otimes_B^L S\\to Q$ to $\\operatorname{Res}_{S/B}(a)\\circ\\eta^B_M$. Accordingly, for the given arbitrary derived morphism $p$, we have $p=\\operatorname{Res}_{S/B}(p_B^\\sharp)\\circ\\eta^B_M$. The $R$-transpose of $p_B^\\sharp\\circ\\kappa_{M,S}$ is, using step 5,\n$$\\operatorname{Res}_{S/R}(p_B^\\sharp)\\circ\\operatorname{Res}_{S/R}(\\kappa_{M,S})\\circ\\eta^R_{UM}=U(\\operatorname{Res}_{S/B}(p_B^\\sharp)\\circ\\eta^B_M)=U(p).$$\nInjectivity of the $R$-adjunction bijection proves $p_R^\\sharp=p_B^\\sharp\\circ\\kappa_{M,S}$. This calculation applies to all $p\\in\\operatorname{Hom}_{D(B)}(M,\\operatorname{Res}_{S/B}Q)$ without requiring a chain-map representative of $p$ on the chosen $P$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), the adjunction Hom bijection and its unit formula."
+   }
+  },
+  {
+   "text": "For a morphism of $B$-algebras $\\tau:S\\to S'$ satisfying the second multiplication-isomorphism hypothesis, compare the square of chain maps from $UP\\otimes_R S$ to $P\\otimes_B S'$ formed by $k_{P,S}$, $k_{P,S'}$ and $1\\otimes\\tau$. Each route sends $x\\otimes s$ to $x\\otimes\\tau(s)$. These equalities hold for the actual sheaf tensor maps [def-pur-sheaf-tensor-product], since their sectionwise bilinear formulas agree before sheafification. By the K-flat computation and localization already cited in step 4 they give the asserted naturality of the derived comparisons, with the coefficient-change arrows viewed after restriction to $D(S)$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 0D6D (lemma-derived-pullback-composition); sectionwise coefficient naturality."
+   }
+  },
+  {
+   "text": "By [lem-pur-kflat-change-of-rings], both $UP\\otimes_R S$ and $P\\otimes_B S$ remain flat-term K-flat over $S$. Thus they compute successive extension to $S'$ with no assumption that $S'/S$ is flat. Under the canonical associators of [lem-sfb-successive-derived-quotient-normalization], both routes from $(UP\\otimes_R S)\\otimes_S S'$ to $P\\otimes_B S'$ send $(x\\otimes s)\\otimes s'$ to $x\\otimes\\tau(s)s'$. This proves compatibility with successive derived extension. For a further ring map $S'\\to S''$ the formulas give $x\\otimes\\tau'(\\tau(s))\\tau'(s')s''$ along every parenthesization, so the comparisons agree with the iterated canonical associators. For $S'=S$ and the identity ring map, the canonical unit is $(x\\otimes s)\\otimes t\\mapsto x\\otimes st$ and its inverse is $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$; hence the equal-index comparison is the canonical unit identification. The same localization argument as in step 4 carries these identities to $D(S')$.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat) and 0D6D (lemma-derived-pullback-composition), canonical flat-model associator."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); identity-topos scalar changes. The flat-restriction argument and balanced/unit calculations are written out here; tensor cancellation uses sites-modules.tex Tag 05V4 (lemma-flat-change-of-rings)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +191,45 @@
    "results": "1 hits: Mathlib/Algebra/Homology/LocalCohomology.lean",
    "date": "2026-10-21",
    "verdict": "no match: underived module adjunctions, scalar restriction and ordinary algebra pushouts do not state the unbounded ring-sheaf reduction comparison with normalized derived adjuncts"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, Adjunction",
+   "results": "0 hits: ; loogle: unknown identifier 'Adjunction'",
+   "date": "2026-10-21",
+   "verdict": "unavailable: invalid Loogle name; corrected query was run separately"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|extendScalars",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness and underived scalar adjunctions do not state the unbounded sheaf derived comparison with normalized adjuncts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of sheaves of rings restriction of scalars K flat derived tensor balanced comparison compatible adjunction",
+   "results": "8 hits: Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, comonadicExtendScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_flat_tensorProduct, Module.Flat.of_flat_tensorProduct, Module.Flat.baseChange, Module.flat_iff_of_isLocalization",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness and underived scalar adjunctions do not state the unbounded sheaf derived comparison with normalized adjuncts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings for sheaves flat restriction comparison and extension restriction adjunction",
+   "results": "8 hits: ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, ModuleCat.RestrictionCoextensionAdj.unit', SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness and underived scalar adjunctions do not state the unbounded sheaf derived comparison with normalized adjuncts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a B module over flat ring sheaves R to B when B tensor R S is S agrees with reduction over B preserving scalar extension units",
+   "results": "8 hits: IsReduced.tensorProduct_of_flat_of_forall_fg, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.FormallyUnramified.sec, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Module.Flat.isBaseChange, Module.flat_of_isLocalized_span",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness and underived scalar adjunctions do not state the unbounded sheaf derived comparison with normalized adjuncts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lemma-weil-pbc-completed-pullback-reduction",
@@ -95,5 +247,74 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-coefficient-reduction-adjunct",
+  "worker": "stage1",
+  "summary": "Flat restriction preserves the chosen K-flat model by the cancellation identity and exactness. Multiplication B tensor_R S = S gives the explicit balanced chain comparison. Its equality on the two normalized units proves preservation of arbitrary derived adjuncts; sectionwise formulas prove coefficient naturality and successive extension coherence. All ingredients already have DAG nodes; no new node and no statement change.",
+  "blueprint": "main-20261015 sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md: finite reduction comparison and stated transition/normalization compatibilities; this item is the flat scalar-comparison constituent of its first reduction paragraph.",
+  "tool_uses": [
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic K-flat complex of modules on a ringed site used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic Tensor product of sheaves of modules on a site used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-cancellation",
+    "why": "Generic Natural cancellation of scalar extension in sheaf tensors used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic Change of rings preserves K-flat complexes with flat terms used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic Successive derived scalar extensions agree with direct quotient extension used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used on the same small ringed site; supplies a tensor, resolution, localization or adjunction fact, not a replacement for a unit-level proper-base-change step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-ef5dad566",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-ef5dad566 (reviewer sub-agent of L); spot-checked: I read all 8 steps and the 12 cited statements in full. The delivery has no new nodes, and the item's statement and stmt_deps are byte-equal to live. The item is unsplit on live and side-live, nothing it touches is in the dropped lists, and there is no SGA source. The statement holds: (Res M)⊗^L_R S ≅ M⊗^L_B (B⊗_R S) ≅ M⊗^L_B S. Small cases checked: R=B gives κ=id; Z→Z[1/2]→F_3 gives the obvious identification; Z→F_p (B not flat) and k→k[t]→k (μ not an isomorphism) both give an extra Tor_1, so each hypothesis is needed. The S′ hypothesis is in fact automatic, since B⊗_R S′ ≅ (B⊗_R S)⊗_S S′ ≅ S′. Step 2 uses the cancellation with M=P^i over B and N=A^j over R, the colimit/forget node for sums and acyclicity, and the exact-functor node for acyclicity of B⊗A; this gives K-flatness and flat terms. Step 3 writes balanced inverse formulas whose S-linearity can be checked directly. Step 4 uses derived change of rings (1),(2) on UP and P, plus descent through W^{-1}P_B≃D(B) and the localization universal property. Steps 5-6 use the unit normalization (1) for ψ and ψφ, then Hom-equivalence injectivity; this proves the adjunct equation for arbitrary derived p. Step 7 is the sectionwise square x⊗τ(s). Step 8 uses kflat-change-of-rings and the stated associator formula of lem-sfb-successive-derived-quotient-normalization, which holds for arbitrary ring maps; the iterated case and the unit were checked. Sources checked: Stacks 06YS, 0G7E (l.3508), 05V4 (l.4610) and the other tags, plus the main-20261015 proof of the parent, whose steps use exactly the three clauses. No duplicate found among roughly 10 candidate scalar-comparison nodes. The tool uses are generic K-flat, tensor and adjunction lemmas and are accepted. Advisories, not faults: (1) the item's 'canonical' adjunctions are read as the normalized lem-pur-sheaf-ring-derived-coefficient-adjunction; the two agree because both units are x↦x⊗1 on K-flat models. (2) def-pc-flat-sheaf-modules is not cited in step 2, but the step writes out what flat means."
+ }
 }

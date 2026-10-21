@@ -20612,3 +20612,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:14 L: merged deliver/Q131/def-sc-general-curve (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/Q132/def-sfb-right-derived-exact (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/Q60/lem-sfb-locally-prescribed-modules-small (reviewer PASS; first push; new nodes: 0)
+- 07:15 L: merged deliver/NK/lem-weil-pbc-flat-coefficient-reduction-adjunct (reviewer PASS; first push; new nodes: 0)
