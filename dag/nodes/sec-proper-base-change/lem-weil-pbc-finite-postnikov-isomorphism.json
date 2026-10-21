@@ -14,9 +14,77 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E_q=\\tau_{\\le q}E$ for every integer $q\\ge a-1$. The truncation-cohomology statement gives $H^i(E_q)\\cong H^i(E)$ for $i\\le q$ and $H^i(E_q)=0$ for $i>q$. Thus $H^i(E_q)=0$ for $i<a$ as well, and $E_q$ is in $D^+(\\mathcal A)$. Each $C_q=H^q(E)[0][-q]$ is also bounded below, being concentrated in degree $q$. The full bounded-below subcategory has the inherited triangulated structure, so a distinguished triangle of these objects in $D(\\mathcal A)$ is a distinguished triangle in the domain of $\\Phi,\\Psi$. We will prove $P(q)$: $\\eta_{E_q}$ is invertible, for $a-1\\le q\\le b$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category): the full triangulated subcategory D+; Tag 08J5 (remark-truncation-distinguished-triangle); truncation cohomology in homology.tex Tag 0118 (section-truncations)"
+   }
+  },
+  {
+   "text": "For $q=a-1$, every cohomology object of $E_{a-1}$ is zero by step 1: in degrees at most $a-1$ this is the lower-bound hypothesis, and in larger degrees it is upper truncation. The map $E_{a-1}\\to0$ induces isomorphisms on all cohomology objects, hence is an isomorphism by cohomology detection in $D^+(\\mathcal A)$. In particular $\\mathrm{id}_{E_{a-1}}=0$. The functors are additive by the definition of exact triangulated functor, so $\\mathrm{id}_{\\Phi(E_{a-1})}=\\Phi(\\mathrm{id}_{E_{a-1}})=\\Phi(0)=0$, and likewise for $\\Psi$. The zero map $\\Psi(E_{a-1})\\to\\Phi(E_{a-1})$ is therefore a two-sided inverse of $\\eta_{E_{a-1}}$: both composites are the zero identities. This proves $P(a-1)$.",
+   "uses": [
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category) and Tag 05RT (lemma-acyclic): acyclic objects become zero; the zero-object argument for additive functors is written out here"
+   }
+  },
+  {
+   "text": "The assumed shift equation rewrites as $\\eta_{M[1]}=\\zeta_M^{-1}\\circ\\eta_M[1]\\circ\\xi_M$. Thus $\\eta_{M[1]}$ is invertible exactly when $\\eta_M$ is: the shift is an autoequivalence, so its inverse shift carries an inverse of $\\eta_M[1]$ back to an inverse of $\\eta_M$. Iterating this equivalence forwards, and backwards by applying it to $M[-1]$, proves invertibility on every integral shift of $M$. Canonical identifications of iterated shifts cause no difficulty: for any isomorphism $u:M\\to N$, naturality gives $\\eta_N=\\Psi(u)\\circ\\eta_M\\circ\\Phi(u)^{-1}$. Consequently the hypothesis on $\\eta_{H^q(E)[0]}$ implies that $\\eta_{C_q}$ is invertible for every $a\\le q\\le b$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0145 and 014V (definition-triangulated and definition-exact-functor-triangulated-categories): shifts and their inverses; the displayed conjugation and its iteration use the hypotheses directly"
+   }
+  },
+  {
+   "text": "Fix $q$ with $a\\le q\\le b$ and assume $P(q-1)$. The successive-truncation triangle gives the distinguished triangle $E_{q-1}\\longrightarrow E_q\\longrightarrow C_q\\longrightarrow E_{q-1}[1]$. Its three vertices belong to $D^+(\\mathcal A)$ by step 1. Apply the two-out-of-three theorem for a shift-compatible natural transformation between exact triangulated functors, with $\\alpha=\\eta$, $X=E_{q-1}$, $Y=E_q$, $Z=C_q$, and the specified comparisons $\\xi,\\zeta$. Its compatibility condition is exactly the equation in the statement of this item. The first component is invertible by the induction hypothesis and the third by step 3, so its middle component $\\eta_{E_q}$ is invertible. This proves $P(q-1)\\Rightarrow P(q)$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), successive upper-truncation triangle with index q-1; Tag 014A (lemma-third-isomorphism-triangle) via the cited shift-compatible natural-transformation theorem"
+   }
+  },
+  {
+   "text": "The integer $N=b-a+1$ is nonnegative. Starting with $P(a-1)$ from step 2 and using step 4 exactly $N$ times proves $P(b)$, which is the required invertibility of $\\eta_{\\tau_{\\le b}E}$. When $N=0$, equivalently $b=a-1$, the conclusion is already step 2 and no assumption on a cohomology component is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent finite induction realizing the bounded-below complexes paragraph of literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Finite induction on b-a+1 from Tag 08J5 (remark-truncation-distinguished-triangle), using Tag 014A (lemma-third-isomorphism-triangle) through lem-sf-triangle-two-out-of-three; the agent supplies the zero base and integral-shift argument."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -80,10 +148,45 @@
    "results": "{\"t\": \"2026-10-21T03:04:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"induction\\\", DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: only cohomology, individual truncations, or general triangulated-functor infrastructure; no finite Postnikov propagation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "induction.*(trunc|homology)|isIso_app.*(single|homology|bounded)|[Pp]ostnikov",
+   "results": "{\"t\": \"2026-10-21T03:22:05Z\", \"tool\": \"grep\", \"query\": \"induction.*(trunc|homology)|isIso_app.*(single|homology|bounded)|[Pp]ostnikov\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, homological functors or triangle-map infrastructure, not finite Postnikov invertibility for arbitrary triangulated targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.NatTrans, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-21T03:22:05Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CategoryTheory.NatTrans, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, homological functors or triangle-map infrastructure, not finite Postnikov invertibility for arbitrary triangulated targets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation of triangulated functors is an isomorphism on a bounded complex by induction on cohomology using truncation triangles",
+   "results": "{\"t\": \"2026-10-21T03:22:05Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformation of triangulated functors is an isomorphism on a bounded complex by induction on cohomology using truncation triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.functorHomMk\", \"CategoryTheory.Triangulated.TStructure.truncLTι\", \"CochainComplex.πTruncGE_naturality\", \"CategoryTheory.Pretriangulated.Triangle.functorIsoMk\", \"CategoryTheory.NatTrans.app_homology\", \"CochainComplex.truncate\", \"CochainComplex.ιTruncLE_naturality\", \"CochainComplex.ιTruncLE_naturality_assoc\"], \"digest\": \"0d3174c0b8134c66\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, homological functors or triangle-map infrastructure, not finite Postnikov invertibility for arbitrary triangulated targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A shift compatible natural transformation between exact functors from the bounded below derived category to any triangulated category is invertible on a bounded truncation if invertible on its cohomology objects",
+   "results": "{\"t\": \"2026-10-21T03:22:06Z\", \"tool\": \"leanfinder\", \"query\": \"A shift compatible natural transformation between exact functors from the bounded below derived category to any triangulated category is invertible on a bounded truncation if invertible on its cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.map_distinguished_exact\", \"DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\"], \"digest\": \"4e1776b17538ebdf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, homological functors or triangle-map infrastructure, not finite Postnikov invertibility for arbitrary triangulated targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility of a natural transformation on a finite Postnikov filtration follows from invertibility on shifted cohomology and two out of three for distinguished triangles",
+   "results": "{\"t\": \"2026-10-21T03:22:07Z\", \"tool\": \"leanfinder\", \"query\": \"Invertibility of a natural transformation on a finite Postnikov filtration follows from invertibility on shifted cohomology and two out of three for distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.right_fac\"], \"digest\": \"33c006d7ba2fb4aa\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, homological functors or triangle-map infrastructure, not finite Postnikov invertibility for arbitrary triangulated targets"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-properbasechange",
@@ -100,5 +203,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-finite-postnikov-isomorphism",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited metadata and searches. Gave the finite Postnikov induction, including the zero base for the empty interval and an explicit integral-shift conjugation argument. Reused the existing truncation-cohomology, cohomology-detection, successive-triangle and shift-compatible two-out-of-three nodes; created no nodes. Checked that the project finite-range theorem has the more restricted target D+(D), so does not attach to this arbitrary triangulated-target item.",
+  "blueprint": "Realizes sk-thm-properbasechange, main-20261015 proof, Bounded below complexes paragraph, sentence: Using truncation triangles, its finite Postnikov filtration reduces the exchange isomorphism in degree m to torsion sheaves and their shifts. Only this finite propagation step is proved; no change of unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic formal two-out-of-three for shift-compatible natural transformations; applied to the successive Postnikov triangles required by the unit route. Its three project declarations are Lean-closed, and the unit supplies no separate generic version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-triangle-two-out-of-three"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-0bb28a461",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-0bb28a461 (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, Stacks 08J5 (derived.tex l.4076) and the main-20261015 sk-thm-properbasechange 'Bounded below complexes' paragraph. The delivery creates no new nodes and keeps the statement unchanged. Step 1: truncation-cohomology and the D+ subcategory give the objects E_q and C_q in D+, and the induction claim P(q) is stated. Step 2: E_{a-1} has no cohomology, so it is zero by the cohomology-detection leaf; additivity then makes the zero map an inverse of η. This proves the b=a-1 case. Step 3 is correctly elementary: it conjugates by the shift isomorphisms in both directions, uses naturality along isomorphisms, and checks that H^q[0][-q] sits in degree q. Step 4: the truncation triangle (only existence and boundedness used) plus two-out-of-three, whose shift-compatibility hypothesis is exactly the item's equation. Step 5: induction on N=b-a+1. Edge cases checked: empty interval, a single degree, negative degrees, unbounded above, non-split. No duplicate: lem-sp-finite-filtration-induction is about filtered objects and sbc-lem-finite-range-comparison is about a specific exchange. There is no cycle, proof_deps equals the union of the steps' uses, and no SGA source is cited. I accept the declared tool use of lem-sf-triangle-two-out-of-three: it is a generic lemma, Lean-closed and reviewed PASS. The route matches the blueprint's finite Postnikov sentence, and no target, coefficient category or base-change morphism is changed."
  }
 }
