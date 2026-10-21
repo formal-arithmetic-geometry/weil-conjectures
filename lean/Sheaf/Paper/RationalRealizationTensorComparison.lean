@@ -14,6 +14,17 @@ public import Sheaf.CategoryTheory.RingedSiteDualityMaps
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
+import Sheaf.Paper.CompletedOperationTowerSubstitution
+import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Paper.ScalarExtensionTowerCoherence
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Tensor compatibility of continuous rational realization
 
@@ -56,10 +67,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-attribute [local irreducible] integralOperationsTensorLevel
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Exactly the four normalization and completeness clauses of the tensor-completion
 lemma, on its displayed ordinary tensor, K-flat model, chain map and descended map.
 Source: BS Lemma 6.5.5 and Definition 3.4.10
@@ -81,11 +88,9 @@ def ConstructibleTensorCompletionNormalized
     Pi.π (fun n ↦ (integralOperationsTensorLevel l E W n).obj (P, Q)) n).f
       (p + q)).val.app U)
     (constructibleTensorTotalSection l E W P Q p q U x y) =
-    (by
-      unfold integralOperationsTensorLevel
-      exact integralOperationsTotalTensorSection l E W n P Q p q U
-        (unrestrictedIntegralTensorSection l E W n (P.X p) U 1 x)
-        (unrestrictedIntegralTensorSection l E W n (Q.X q) U 1 y))) ∧
+    integralOperationsTotalTensorSection l E W n P Q p q U
+      (unrestrictedIntegralTensorSection l E W n (P.X p) U 1 x)
+      (unrestrictedIntegralTensorSection l E W n (Q.X q) U 1 y)) ∧
   (∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ) (i j : ℤ)
     (h : i + -1 = j),
   (cochain.app (P, Q)).f i ≫ (CochainComplex.mappingCocone.snd
@@ -98,8 +103,6 @@ def ConstructibleTensorCompletionNormalized
   (∀ M N : DerivedCategory (integralTowerModules l E W),
   sfIntegralConstructible l E W M → sfIntegralConstructible l E W N →
     IsDerivedCompleteUnrestricted l E W (tensor.obj (M, N)) ∧ IsIso (comparison.app (M, N)))
-
-attribute [local semireducible] integralOperationsTensorLevel
 
 /-- A projection-stable packaging of the same ordinary tensor and its normalized
 quotient-completion map; normalized retains every pure, shifted and descent equation.
@@ -117,10 +120,6 @@ structure ConstructibleTensorCompletionPresentation where
   comparison : tensor ⟶ integralCompletedTensor l E W
   normalized : ConstructibleTensorCompletionNormalized l E W tensor model cochain comparison
 
-attribute [local irreducible] integralOperationsTensorLevel
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-
 /-- The tensor-completion lemma, with exactly the same normalized data packaged together.
 Source: BS Lemma 6.5.5 and Definition 3.4.10
 (blueprint: lem-zl-rational-realization-tensor-comparison).
@@ -132,14 +131,8 @@ recovers every existential and conjunct of that lemma. No comparison is changed.
 theorem constructibleTensorCompletionPresentation [CompactSpace W] [QuasiSeparatedSpace W]
     [∀ w : W, Invertible (l : W.residueField w)] :
     Nonempty (ConstructibleTensorCompletionPresentation l E W) := by
-  exact (constructibleTensorCompletion l E W).elim fun tensor hmodel ↦
-    hmodel.elim fun model hcochain ↦ hcochain.elim fun cochain h ↦
-      h.2.2.elim fun comparison hc ↦
-        ⟨⟨tensor, model, cochain, comparison, h.1, h.2.1, hc.1, hc.2⟩⟩
+  sorry
 
-attribute [local semireducible] integralOperationsTensorLevel
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 end CompletionPresentation
 
@@ -269,9 +262,6 @@ def integralTensorIso
     X.scheme).exists.choose_spec.1
       ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) X.scheme).obj K,
        (sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) X.scheme).obj L))
-
-attribute [local irreducible] realization integralRealization ordinaryTensor ordinaryModel
-  completionData completionMap completionIso integralTensorIso integralCounit
 
 /-- A tensor comparison for the specified realization, including every monoidal
 coherence equation and its canonical completed-integral normalization.

@@ -23064,7 +23064,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:38 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ProEtaleTorIntervalShift (stage 3; reviewer PASS; first push; landing 20261021T163802-L-1086291 (proof); batch 20261021T163749; modules 1; new nodes 0)
 - 16:38 L: merged deliver/M3/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility (stage 3; reviewer PASS; first push; landing 20261021T163806-L-1090508 (interface); batch 20261021T163749; modules 1; new nodes 0; change records: coord/changes/M3-isIso_derivedPushHom_padicSubfieldRingObjMap.md, coord/changes/M3-preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap.md, coord/changes/M3-preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl.md)
 - 16:38 L: merged deliver/M5/Sheaf.SixFunctors.RingedDerivedCompositionComparison (stage 3; reviewer PASS; first push; landing 20261021T163809-L-1094258 (proof); batch 20261021T163749; modules 1; new nodes 0)
-- 16:38 L: merged deliver/M6/Sheaf.Paper.RationalRealizationTensorComparison (stage 3; reviewer PASS; first push; landing 20261021T163813-L-1098808 (interface); batch 20261021T163749; modules 1; new nodes 0; change records: coord/changes/M6-tensor-completion-normalization-elaboration.md)
 - 16:38 L: merged deliver/N3/Sheaf.Paper.CartesianCoefficients (stage 3; reviewer PASS; first push; landing 20261021T163817-L-1103184 (interface); batch 20261021T163749; modules 1; new nodes 0; change records: coord/changes/N3-cartesian-normalized-twist-api.md)
 - 16:38 L: merged deliver/P4/Sheaf.Paper.TAdmissibleDualizableTruncations (stage 3; reviewer PASS; first push; landing 20261021T163820-L-1106263 (interface); batch 20261021T163749; modules 3; new nodes 2)
 - 16:38 L: merged deliver/P8/Sheaf.Paper.SemilinearCompactSupportCoefficientTransport (stage 3; reviewer PASS; first push; landing 20261021T163824-L-1109520 (proof); batch 20261021T163749; modules 1; new nodes 0)
@@ -23090,3 +23089,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:50 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 16:51 L: merged deliver/NB/det-lem-stratified-lattice-scheme (stage 2; reviewer PASS; parallel immutable checks)
 - 16:52 L: merged deliver/Q22/lem-sp-cofinal-finite-reduction-constructibility (stage 2; reviewer PASS; parallel immutable checks)
+
+- 00:55 L: batch 20261021T163749 dependency take-out
