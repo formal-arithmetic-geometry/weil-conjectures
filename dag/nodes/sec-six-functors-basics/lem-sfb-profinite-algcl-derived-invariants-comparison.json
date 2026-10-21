@@ -407,5 +407,39 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-254ff753e (reviewer sub-agent of L); spot-checked: First delivery of the item: no prior run and no repair note, so the 2026-10-21 re-split rules do not apply. Item statement unchanged, route is direct-images proof paragraph (3), no SGA. I read the item and all 4 new nodes in full.\n\nSteps 1-4 reduce alpha_W to the cochain inclusion C_fin(G,V_Omega) -> C_cts(G,V_Omega). Inputs, each checked against its cited statement: finite-dimensional continuity gives W = A^d, which is K-flat; A[P] = j_P!A_P is flat; the scalar adjunction (no flatness hypothesis); normed-scalar acyclicity for Omega and, renaming its finite field, for each F; the qlbar colimit with compositum cofinality; the new filtered-colimit node; the bar lemma with scalar-restriction naturality; the first-quadrant comparison; exact evaluation at T=*.\n\nSteps 5-8 are correct. In step 6, p = p_F^d commutes with E-matrices and hence with d. In step 7, cor(u) is V_F-valued by naturality, cor res = m up to homotopy, and m^-1 lies in E.\n\nNew nodes:\n- local-norm-algcl-cocycle-descent is true, checked myself: Omega is a countable union of closed F_k, Baire on G^n gives a box of cosets of a normal open H, and the coboundary shift z' = z - d(z(.,b)) plus the cocycle identity at (a,.,.) makes z' F-valued on H^n. A bilinear counterexample attempt on prod Z_ell fails because its values would leave Omega. Not a restatement: weaker than surjectivity, and the transfer step is genuine.\n- The transfer node is standard Shapiro/coinduction; open H makes coset maps locally constant.\n- The retraction node follows from Ingleton Hahn-Banach (E is spherically complete).\n- The filtered-colimit node is true via Stacks 0GN3 (sites-cohomology l.2630) on S x P slices.\n\nDuplicate search (corestriction, Hahn-Banach, Baire, continuous cochain, filtered colimit, and the 10-22 sfb neighbours) found no duplicates; lem-sfb-dc-hom-filtered-colimit assumes this continuity rather than proving it.\n\nBatch-5 flag: def-pod-l-adic-representations is a general definition whose 23-node closure contains no trace-formula or Poincare-duality node, so I accept it. I accept the listed generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ProfiniteAlgclDerivedInvariantsComparison",
+  "declaration": "Profinite.AlgclInvariantsComparison.profinite_algcl_derived_invariants_comparison",
+  "declarations": [
+   "Profinite.AlgclInvariantsComparison.scalarRing",
+   "Profinite.AlgclInvariantsComparison.finiteModule",
+   "Profinite.AlgclInvariantsComparison.normScalarMap",
+   "Profinite.AlgclInvariantsComparison.normScalarMap_isMonHom",
+   "Profinite.AlgclInvariantsComparison.normModule",
+   "Profinite.AlgclInvariantsComparison.pointEvaluation",
+   "Profinite.AlgclInvariantsComparison.TensorModel",
+   "Profinite.AlgclInvariantsComparison.DerivedTensor",
+   "Profinite.AlgclInvariantsComparison.derivedCoefficientMap",
+   "Profinite.AlgclInvariantsComparison.RepresentationModel",
+   "Profinite.AlgclInvariantsComparison.Comparison",
+   "Profinite.AlgclInvariantsComparison.Assertion",
+   "Profinite.AlgclInvariantsComparison.profinite_algcl_derived_invariants_comparison"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/ProfiniteAlgclDerivedInvariantsComparison.lean",
+  "statement": "theorem profinite_algcl_derived_invariants_comparison [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : Assertion ℓ E G",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The ordinary derived-invariants comparison is encoded after scalar restriction to A. The recorded bar theorem supplies scalar-restriction compatibility, and exact point evaluation identifies R(ev_* Gamma_G) with ev_* R Gamma_G. TensorModel fixes the ordinary equivariant relative tensor, DerivedTensor fixes its universal K-flat derived pair and shifts, and derivedCoefficientMap is Mathlib leftDerivedNatTrans of the sectionwise inclusion. Assertion asserts existence of all normalized data and invertibility for every finite-dimensional continuous norm representation; no data are selected from a mere Nonempty theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5babf6b97",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read item, 8 stmt_deps, report (Worker report + Second reading by NZ present), module and side-live interfaces (CondensedBar Ring/Modules/Equivariant/Invariants/ActionAbelian/ScalarModel, Mod relative monoidal tensor, pureTensor). Clause match: prime ℓ, PadicAlgCl Ω, finite intermediate E, arbitrary profinite G : Type u, A = continuousMapRingObj E, C = padicAlgClRingObj restricted along recorded padicSubfieldRingObjToPadicAlgCl, B = C(-,Ω) restricted along ring-sheaf map of algebraMap; c pinned sectionwise to subtype inclusion; TensorModel = relative tensor over A with trivial coefficient action on pure tensors; η pinned to c ▷ M; DerivedTensor = IsLeftDerivedFunctor + counit-compatible CommShift + K-flat counit iso; α = Mathlib leftDerivedNatTrans whiskered with R(Γ ⋙ ev); CommShift of α asserted; W finite-dim normed with jointly continuous ρ; RepresentationModel pins underline W up to equivariant iso; IsIso in D(Ab) at W[0] (derived form). All existentials are pinned up to arrow-isomorphism (underlying isos forced equivariant by the action clause), so not hollow; no strengthened hypotheses. Computing over A instead of R is justified by the bar lemma's scalar-restriction clause, exact ev and exact restriction. Edge cases W=0, finite G, E=Q_ℓ, empty S, universes (W in u+1 loses nothing) ok. stmt_deps unchanged vs live; statement verbatim; docstrings and 8-step proof present; single sorry. No compile (2026-10-21 rule), no files changed. Advisories: scalarRing is a local bundle because def-sfb-bundled-continuous-scalar-ring only accepts F : Type u; ∃ N could read ∀ N; W hypotheses do not cite def-pod-l-adic-representations."
  }
 }

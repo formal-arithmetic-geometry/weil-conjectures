@@ -10,7 +10,8 @@
   "place": "Example 4.1.10, p. 28: pro-objects in finite discrete G-sets are profinite continuous G-sets. The invariant-partition detail is the compact-action refinement argument; compare Stacks topology.tex Tag 08ZY (lemma-profinite) for the underlying clopen-partition construction."
  },
  "stmt_deps": [
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-sfb-invariant-discrete-quotients"
  ],
  "proof": [
   {
@@ -567,5 +568,26 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-3216d9bc4 (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full; the delivery has no new nodes and leaves the statement unchanged. Steps 1-2: compactness of P and a continuity tube give an open normal N fixing every block; a finite coset cover makes the set of translates gα finite; their common refinement is G-invariant and refines α. This matches BS Ex 4.1.10, and the compactness of G excludes the non-compact Z-action counterexample of BS Ex 4.1.12. Steps 3-4: the refinement poset J is small, nonempty and directed, the maps r_ji are surjective, and the block action is jointly continuous via the test gB=C iff g·x_B∈C. Steps 5-7 follow Stacks 08ZY (topology.tex l.4134ff): injectivity via the cited clopen-basis leaf, surjectivity by finite intersections in compact P, and the homeomorphism via the cited compact-Hausdorff-bijection leaf with U=P, V=L. Steps 8-10: compactness via the Tychonoff leaf plus the closed compatibility locus, Hausdorff and totally disconnected via coordinate cylinders, and joint continuity of the action via act_i∘(id×pr_i). All cited nodes are Mathlib leaves or def-weil-size-convention, so there is no route issue and no tool_uses are needed. proof_deps equals the union of the uses, and no SGA source is cited. Edge cases checked: P empty, empty Q_i, a trivial group, and non-surjective transition maps. No duplicate exists: rg -L found only the Galois base-change partition node, the discrete-action orbit coproduct and the stalk realization node. Both uses in the only citer, lem-sfb-field-profinite-galois-site (steps 2 and 4), match the statement. Nothing to fix."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteActionFiniteQuotients",
+  "declaration": "profiniteAction_finite_quotients",
+  "declarations": [
+   "profiniteAction_finite_quotients"
+  ],
+  "file": "lean/Sheaf/Topology/ProfiniteActionFiniteQuotients.lean",
+  "statement": "theorem profiniteAction_finite_quotients (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (hG : ∀ U ∈ 𝓝 (1 : G), ∃ N : OpenNormalSubgroup G, (N : Set G) ⊆ U) : (∀ (P : Type v) [TopologicalSpace P] [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] [MulAction G P] [ContinuousSMul G P], (∀ s : DiscreteQuotient P, ∃ i : InvariantDiscreteQuotient G P, i.val ≤ s) ∧ IsCofiltered (InvariantDiscreteQuotient G P) ∧ (∀ i : InvariantDiscreteQuotient G P, Finite i.val ∧ DiscreteTopology i.val ∧ Function.Surjective i.val.proj) ∧ (∀ (i j : InvariantDiscreteQuotient G P) (h : i ≤ j), Function.Surjective (DiscreteQuotient.ofLE h)) ∧ ∃ (a : ∀ i : InvariantDiscreteQuotient G P, MulAction G i.val) (b : MulAction G (TopCat.limitCone (invariantDiscreteQuotientDiagram G P)).pt), (∀ i : InvariantDiscreteQuotient G P, ContinuousSMul G i.val) ∧ (∀ (g : G) (p : P) (i : InvariantDiscreteQuotient G P), i.val.proj (g • p) = g • i.val.proj p) ∧ (∀ (i j : InvariantDiscreteQuotient G P) (h : i ≤ j) (g : G) (x : i.val), DiscreteQuotient.ofLE h (g • x) = g • DiscreteQuotient.ofLE h x) ∧ ContinuousSMul G (TopCat.limitCone (invariantDiscreteQuotientDiagram G P)).pt ∧ (∀ (g : G) (z : (TopCat.limitCone (invariantDiscreteQuotientDiagram G P)).pt) (i : InvariantDiscreteQuotient G P), (g • z).val i = @SMul.smul G i.val (a i).toSMul g (z.val i)) ∧ ∃ e : P ≃ₜ (TopCat.limitCone (invariantDiscreteQuotientDiagram G P)).pt, (∀ (p : P) (i : InvariantDiscreteQuotient G P), (e p).val i = i.val.proj p) ∧ (∀ (g : G) (p : P), e (g • p) = g • e p)) ∧ (∀ (I : Type v) [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : Iᵒᵖ ⥤ TopCat.{v}) [∀ i : Iᵒᵖ, Finite (F.obj i)] [∀ i : Iᵒᵖ, DiscreteTopology (F.obj i)] [∀ i : Iᵒᵖ, MulAction G (F.obj i)] [∀ i : Iᵒᵖ, ContinuousSMul G (F.obj i)], (∀ (i j : Iᵒᵖ) (f : i ⟶ j) (g : G) (x : F.obj i), F.map f (g • x) = g • F.map f x) → CompactSpace (TopCat.limitCone F).pt ∧ T2Space (TopCat.limitCone F).pt ∧ TotallyDisconnectedSpace (TopCat.limitCone F).pt ∧ ∃ b : MulAction G (TopCat.limitCone F).pt, ContinuousSMul G (TopCat.limitCone F).pt ∧ ∀ (g : G) (z : (TopCat.limitCone F).pt) (i : Iᵒᵖ), (g • z).val i = g • z.val i)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d6fb37b7",
+  "group": "NR",
+  "result": "pass",
+  "note": "Clause-by-clause match of profiniteAction_finite_quotients to the node: the profinite G hypotheses are exact (compact, T2, open-normal neighbourhood basis via hG); DiscreteQuotient renders finite clopen partitions on compact P; invariance x~y→gx~gy gives block permutation; ∀ s ∃ i ≤ s is refinement in Mathlib's finer-is-smaller order; IsCofiltered; finite/discrete stages with surjective proj and ofLE; the stage actions a are pinned by proj-equivariance plus surjectivity, the limit action b by its coordinate formula, and e by (e p).val i = proj p, with equivariance; the TopCat.limitCone compatible-family subspace is exact; the converse covers any small nonempty directed poset with equivariant transitions and no surjectivity, concluding compact, T2, totally disconnected with a continuous pinned action. Edge cases (empty P, empty stages, trivial G) covered. The new (A) node def-sfb-invariant-discrete-quotients has the full §5 fields and real data (subtype plus ofLE functor), and my searches of Mathlib, side-live lean and the DAG found no duplicate. Both lean.statement strings appear verbatim in their files; the item node changes only by the permitted stmt_dep addition; docstrings carry source, blueprint tag and all ten steps; the only sorry is the item proof; report sections present; no live collision; the only citer uses it in proof_deps without Lean. Advisory only: the converse shares universe v, which TopCat.limitCone forces and which is harmless for finite stages. No compile run (no FIX)."
  }
 }

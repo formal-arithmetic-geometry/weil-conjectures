@@ -23460,3 +23460,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:20 L: returned deliver/NH/lem-a1-finite-pullback-strict-tower-comparison (reviewer RETURN: L: independent stage-2 immutable head da39d42ea06e: H13 (F1): delivery da39d42e keeps the item Lean byte-identical to th)
 - 19:21 L: returned deliver/NL/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9 + G4. This is the 6th delivery of this item; NV 01fd, NF 02bf/7bcb/4bc0 and NL 27f2 were all RETURNed. The )
 - 19:22 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 19:23 L: merged deliver/Q15/lem-trf-point-transport-strict-quotient (stage 2; reviewer PASS; parallel immutable checks)
+- 19:23 L: merged deliver/NZ/lem-sfb-profinite-algcl-derived-invariants-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 19:23 L: merged deliver/NR/lem-sfb-profinite-action-finite-quotients (stage 2; reviewer PASS; parallel immutable checks)
