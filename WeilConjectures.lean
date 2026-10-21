@@ -12079,6 +12079,7 @@ public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.SupportedPairing
