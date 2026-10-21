@@ -22994,3 +22994,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:00 L: returned deliver/Q12/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 11eb25685607: H2: the statement, via def-real-lisse-realization-data (transport/Tr)
 - 16:00 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 16:01 L: merged deliver/J4/Sheaf.Paper.IntegralCohomologicalAdicCriterion (stage 3; reviewer PASS; first push; landing 20261021T160059-L-3498537 (interface); batch 20261021T160058; modules 1; new nodes 0; change records: coord/changes/J4-integral-cohomological-criterion-proof-context.md)
+- 16:02 L: merged deliver/NE/lem-sfb-integral-quotient-direct-image-comparison (stage 2; reviewer FIX; parallel immutable checks)

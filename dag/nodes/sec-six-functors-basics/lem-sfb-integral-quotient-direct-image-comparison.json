@@ -19,7 +19,10 @@
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "def-weil-pbc-proetale-site",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-sfb-integral-quotient-coefficients",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-integral-quotient-projection-map"
  ],
  "proof": [
   {
@@ -317,5 +320,26 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e78bb5101 (reviewer sub-agent of L); spot-checked: I read the item in full. The split creates no new nodes, and statement, stmt_deps and blueprint are byte-identical to live and side-live (unsplit there). There is no repair note, the item is not in the dropped list, there is no SGA citation, every bracketed id is in its step's uses and the uses union equals proof_deps, and there is no cycle. The statement is true: after forgetting scalars ρ is the projection map with the K-flat [R→π^n R] resolution, i.e. the cone of π^n. Edge cases f=id, n=m, K=0 and n>m pass, and the proof correctly avoids a regular resolution of S_m over S_n. Step 1 is checked against Stacks 093M (sites-modules.tex l.8261): via completed-constant-sheaf-reduction and flat-scalar-cyclic-resolution the canonical projection gives R/π^j≅S_j, and O_E is a Noetherian DVR. Step 2: internal and section tensor and pushpull (counits included) are identified, cartesian coefficients are untwisted, and λ is the c_{f,g} comparison of the two factorizations. Step 3: since pullbacks are the exact f^{-1} lifts, r(λ)b^{-1} is the tensor comparison. Step 4: the adjunction-compatibility clause of lem-weil-pbc-ring-sheaf-change-adjunction gives d∘r(ρ) = adjunct of (ε⊗1)∘c = π_{f,K,S_Y}, matching def-weil-pbc-projection-formula-map and Stacks 0B56 (l.13666). Step 5: the perfect projection formula holds for (O_E,(π)) (Noetherian, k_E finite torsion, P_n finite and perfect), for unbounded K; d is invertible and restriction reflects isomorphisms. Step 6: β normalization plus mate-pasting clause (1), with the elementary naturality of mates under the invertible β; units normalize as x↦x⊗1. I accept all 17 declared tool_uses, including the 3 off-route generic tools (DVR algebra, the pd pushpull model comparison, ringed monoidal coherence). Batch-5 citation of lem-pd-section-derived-pushpull-normalization: it compares internal-module and ringed-topos derived pushpull, with no duality or trace content; neither nt-assume leaf gives it; and the b5 closure with and without this edge is 16477 nodes with zero difference. Accepted, not a RETURN. Duplicate sweep: lem-pur-completed-coefficient-pushforward-comparison, lemma-weil-pbc-projection-formula-tower-compatibility and lem-sfb-integral-ambient-tower-comparison do not state the quotient-linear ρ isomorphism. Maintainer note: group NO has a concurrent delivery of the same item (3068412e9c09), so whichever lands second is superseded."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientDirectImageComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_direct_image_comparison",
+  "file": "lean/Sheaf/Paper/IntegralQuotientDirectImageComparison.lean",
+  "statement": "theorem integral_quotient_direct_image_comparison : ∃ t : ∀ (T : Scheme.{u}) (n : ℕ), TensorNormalization (reduction l E n) T, (∀ (T : Scheme.{u}) (n : ℕ), TensorNormalized (reduction l E n) T (t T n)) ∧ (∀ (T : Scheme.{u}) (n : ℕ), ∃ ε : resolution l E T n ⟶ (CochainComplex.singleFunctor _ 0).obj (B₀ (reduction l E n) T), CochainComplex.mappingCone.inr ((CochainComplex.singleFunctor _ 0).map (multiplication l E T n)) ≫ ε = (CochainComplex.singleFunctor _ 0).map (projection l E T n) ∧ QuasiIso ε ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (resolution l E T n) ∧ (∀ i : ℤ, ObjectProperty.flat ((resolution l E T n).X i))) ∧ ∃ b : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ), D (reduction l E n) Y ⋙ L (finite l E n) f ≅ L (integral l E) f ⋙ D (reduction l E n) X, (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ), PullNormalized (reduction l E n) f (b f n)) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ), IsIso (rho (reduction l E n) f (b f n))) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (K : DerivedCategory (Modules (integral l E) X)), (V (reduction l E n) Y).map ((rho (reduction l E n) f (b f n)).app K) ≫ (restrictPush (reduction l E n) f (b f n)).hom.app ((D (reduction l E n) X).obj K) ≫ (F (integral l E) f).map ((t X n).derived.hom.app K) = (t Y n).derived.hom.app ((F (integral l E) f).obj K) ≫ projectionMap l E f n K) ∧ (∀ (n m : ℕ) (h : m ≤ n), ∃ β : ∀ T : Scheme.{u}, D (reduction l E n) T ⋙ D (finiteMap l E n m h) T ≅ D (reduction l E m) T, (∀ T : Scheme.{u}, SuccessiveNormalized (reduction l E n) (finiteMap l E n m h) (reduction l E m) (reduction_comp l E n m h) T (β T)) ∧ ∃ c : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), D (finiteMap l E n m h) Y ⋙ L (finite l E m) f ≅ L (finite l E n) f ⋙ D (finiteMap l E n m h) X, (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), PullNormalized (finiteMap l E n m h) f (c f)) ∧ ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : DerivedCategory (Modules (integral l E) X)), (β Y).hom.app ((F (integral l E) f).obj K) ≫ (rho (reduction l E m) f (b f m)).app K = (D (finiteMap l E n m h) Y).map ((rho (reduction l E n) f (b f n)).app K) ≫ (rho (finiteMap l E n m h) f (c f)).app ((D (reduction l E n) X).obj K) ≫ (F (finite l E m) f).map ((β X).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_direct_image_comparison"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f5ce76f",
+  "group": "NE",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: R=sfbCondensedIntegers, S_n=discrete continuous-map quotient at n+1 (all positive levels), ordinary unbounded internal-module D/L/F/adj wrappers of the recorded decls, rho=mateEquiv of b.hom (direction checked), IsIso for all f,K, projection equation, cone-of-pi^(n+1) resolution with unique augmentation, tower compatibility via SuccessiveNormalized beta and PullNormalized c; all existentials pinned by universal-counit/K-flat equations; dep records byte-identical to live, item changed only lean+stmt_deps. F1 (H4/H12) fixed: def-sfb-integral-quotient-projection-map re-implemented the projection map via its own tensorPull (generic leftDerivedTensorComparison + sorry'd upperStar_preservesFlat), duplicating def-sfb-module-object-projection-map; fix defines projectionMap := moduleObjectProjectionMap ≫ Rf_*.map (K ◁ coefficientPull) (same signature), removes tensorPull/coefficientTensorPull/upperStar_preservesFlat and their 2 imports, adds the existing node to the new node's stmt_deps, trims declarations. Fixed files compile clean via nt_compile --json (10.6/33.6/28.4 s); check_new_node/check_lean_text clean. Advisories: internal projection map instead of section-module pi (N9 precedent); unused duplicate helpers scalar/restrict/scalarAdjunction; plain proof-plan imports (H9); sorry'd Prop helpers documented; second reading is a self-audit under dispatcher policy."
+ }
 }

@@ -1,0 +1,111 @@
+{
+ "id": "def-sfb-integral-quotient-projection-map",
+ "kind": "definition",
+ "title": "Integral quotient internal projection arrow",
+ "status": "split",
+ "statement": "Use the actual integral quotient coefficient maps of [def-sfb-integral-quotient-coefficients] and the specified internal derived adjunction and scalar interfaces of [def-sfb-internal-derived-scalar-comparisons]. Construct the cartesian coefficient pullback $Lf^*S_{n,Y}\\to S_{n,X}$ from ordinary restriction/pullback comparison, the monoidal unit and the exact inverse-image computation counit. Define the projection arrow $(Rf_*K)\\otimes^L S_{n,Y}\\to Rf_*(K\\otimes^L S_{n,X})$ as the canonical module-object projection map $Rf_*K\\otimes^LS_{n,Y}\\to Rf_*(K\\otimes^LLf^*S_{n,Y})$ of [def-sfb-module-object-projection-map], over the integral coefficient ring, followed by $Rf_*$ of $K\\otimes^L$ this coefficient pullback. Equivalently, it is the adjunction transpose of the canonical derived tensor pullback comparison followed by the tensor of the integral counit and the coefficient pullback. This is the internal expression of the projection morphism of [def-weil-pbc-projection-formula-map].",
+ "stmt_deps": [
+  "def-sfb-integral-quotient-coefficients",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-module-object-projection-map",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1), (3); scalar-refined cone reduction and compatibility of canonical maps; Stacks 06YY, 0D6D, 0G7E, 07A6, 0944."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical unbounded extension restriction of scalars tensor identification normalized by K flat representative computation",
+   "results": "8 hits; Algebra.FormallyUnramified.flat_of_restrictScalars; ContinuousLinearMap.bilinearRestrictScalars; FormalMultilinearSeries.restrictScalars; ContinuousLinearMap.bilinearRestrictScalars_eq_restrictScalarsL_comp_restrictScalars; instNormedAddCommGroupRestrictScalars; Module.RestrictScalars.normedAlgebraOrig; Module.RestrictScalars.normedSpaceOrig; instNormedCommRingRestrictScalars",
+   "date": "2026-10-21",
+   "verdict": "No normalized internal derived scalar/pullback comparison interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensed valuation ring finite uniformizer quotient projection as continuous functions and induced internal module scalar extension",
+   "results": "8 hits; IsDedekindDomain.HeightOneSpectrum.adicValued.uniformContinuousConstSMul; ModP.preVal_mk; IsDedekindDomain.HeightOneSpectrum.adicValued.has_uniform_continuous_const_smul'; IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def; IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletion; Valuation.comap_onQuot_eq; Valuation.onQuot_comap_eq; PreTilt.mk_comp_untilt_eq_coeff_zero",
+   "date": "2026-10-21",
+   "verdict": "No matching condensed quotient interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendForgetTensorObjIso\", \"mateEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalization|SuccessiveNormalized|continuous.*quotient.*derived",
+   "results": "0 hits in Mathlib; rg in lean/WeilConjectures and lean/Sheaf found the scalar coequalizer API and different residue/open tensor normalizations, no exact quotient-level interface. DAG/blueprint search: 0 blueprint nodes match integral quotient coefficients or scalar balancing.",
+   "date": "2026-10-21",
+   "verdict": "Underlying constructions reused; missing normalized interfaces supplied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-direct-image-comparison",
+  "date": "2026-10-21",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraphs (1), (3), canonical quotient-scalar comparison and projection normalization.",
+   "via": [
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientProjectionMap",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.projectionMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.coefficientPull₀",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.computePull",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.coefficientPull",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.projectionMap"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralQuotientProjectionMap.lean",
+  "statement": "def projectionMap {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (K : DerivedCategory (Modules (integral l E) X)) : (F (integral l E) f).obj K ⊗ B (reduction l E n) Y ⟶ (F (integral l E) f).obj (K ⊗ B (reduction l E n) X)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-86f5ce76f"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f5ce76f",
+  "group": "NE",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f5ce76f",
+  "group": "NE",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: R=sfbCondensedIntegers, S_n=discrete continuous-map quotient at n+1 (all positive levels), ordinary unbounded internal-module D/L/F/adj wrappers of the recorded decls, rho=mateEquiv of b.hom (direction checked), IsIso for all f,K, projection equation, cone-of-pi^(n+1) resolution with unique augmentation, tower compatibility via SuccessiveNormalized beta and PullNormalized c; all existentials pinned by universal-counit/K-flat equations; dep records byte-identical to live, item changed only lean+stmt_deps. F1 (H4/H12) fixed: def-sfb-integral-quotient-projection-map re-implemented the projection map via its own tensorPull (generic leftDerivedTensorComparison + sorry'd upperStar_preservesFlat), duplicating def-sfb-module-object-projection-map; fix defines projectionMap := moduleObjectProjectionMap ≫ Rf_*.map (K ◁ coefficientPull) (same signature), removes tensorPull/coefficientTensorPull/upperStar_preservesFlat and their 2 imports, adds the existing node to the new node's stmt_deps, trims declarations. Fixed files compile clean via nt_compile --json (10.6/33.6/28.4 s); check_new_node/check_lean_text clean. Advisories: internal projection map instead of section-module pi (N9 precedent); unused duplicate helpers scalar/restrict/scalarAdjunction; plain proof-plan imports (H9); sorry'd Prop helpers documented; second reading is a self-audit under dispatcher policy."
+ }
+}
