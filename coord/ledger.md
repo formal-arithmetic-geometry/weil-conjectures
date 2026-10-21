@@ -23882,3 +23882,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:12 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 22:13 L: returned deliver/NE/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: 14th push of this item. I read the item, all 10 steps and the 4 new nodes in full. The mathematics is sound: the Sylow i)
 - 22:14 L: returned deliver/NL/lem-pur-line-zero-class-etale-realization (reviewer RETURN: L: independent stage-2 immutable head e1133fdd92a4: H2: delivery added theorem node lem-pur-cartier-class-agreement to t)
+- 22:14 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
