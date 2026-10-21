@@ -11,12 +11,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.GrothendieckSheafification
-import Sheaf.AlgebraicGeometry.InternalExtensionFinitePresentation
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
 # Local finite presentation under a ring-object isomorphism
@@ -46,6 +40,97 @@ variable {X : Scheme.{u}}
 variable {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
 
+omit [IsCommMonObj R] [IsCommMonObj S] in
+private theorem presentation_comap (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S} (m n : ℕ)
+    (h : ∃ f : Mod.finiteFree S m ⟶ Mod.finiteFree S n,
+      Nonempty (N ≅ cokernel f)) :
+    ∃ f : Mod.finiteFree R m ⟶ Mod.finiteFree R n,
+      Nonempty ((Mod.comap φ).obj N ≅ cokernel f) := by
+  obtain ⟨f, ⟨e⟩⟩ := h
+  exact ⟨(Mod.finiteFreeIsoComap φ m).inv ≫ (Mod.comap φ).map f ≫
+      (Mod.finiteFreeIsoComap φ n).hom,
+    ⟨(Mod.comap φ).mapIso e ≪≫ PreservesCokernel.iso _ f ≪≫
+      cokernel.mapIso _ _ (Mod.finiteFreeIsoComap φ m)
+        (Mod.finiteFreeIsoComap φ n) (by simp)⟩⟩
+
+omit [IsCommMonObj R] [IsCommMonObj S] in
+private theorem presentation_comap_iff (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S} (m n : ℕ) :
+    (∃ f : Mod.finiteFree S m ⟶ Mod.finiteFree S n,
+      Nonempty (N ≅ cokernel f)) ↔
+    (∃ f : Mod.finiteFree R m ⟶ Mod.finiteFree R n,
+      Nonempty ((Mod.comap φ).obj N ≅ cokernel f)) := by
+  refine ⟨presentation_comap φ m n, fun h ↦ ?_⟩
+  obtain ⟨f, ⟨e⟩⟩ := presentation_comap (asIso φ).inv m n h
+  exact ⟨f, ⟨(Mod.comapEquivalenceOfIsIso φ).unitIso.app N ≪≫ e⟩⟩
+
+private theorem presentation_iso {T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj T] {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) T}
+    (e : M ≅ N) (m n : ℕ) :
+    (∃ f : Mod.finiteFree T m ⟶ Mod.finiteFree T n,
+      Nonempty (M ≅ cokernel f)) ↔
+    (∃ f : Mod.finiteFree T m ⟶ Mod.finiteFree T n,
+      Nonempty (N ≅ cokernel f)) := by
+  constructor
+  · rintro ⟨f, ⟨p⟩⟩
+    exact ⟨f, ⟨e.symm ≪≫ p⟩⟩
+  · rintro ⟨f, ⟨p⟩⟩
+    exact ⟨f, ⟨e ≪≫ p⟩⟩
+
+omit [IsCommMonObj R] [IsCommMonObj S] in
+private theorem presentation_mapMod_comap_iff (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S}
+    {Y : Scheme.{u}} (g : Y ⟶ X) (m n : ℕ) :
+    (∃ f : Mod.finiteFree ((ProEtale.upperStar Ab.{u + 1} g).obj S) m ⟶
+        Mod.finiteFree ((ProEtale.upperStar Ab.{u + 1} g).obj S) n,
+      Nonempty (((ProEtale.upperStar Ab.{u + 1} g).mapMod S).obj N ≅ cokernel f)) ↔
+    (∃ f : Mod.finiteFree ((ProEtale.upperStar Ab.{u + 1} g).obj R) m ⟶
+        Mod.finiteFree ((ProEtale.upperStar Ab.{u + 1} g).obj R) n,
+      Nonempty (((ProEtale.upperStar Ab.{u + 1} g).mapMod R).obj
+        ((Mod.comap φ).obj N) ≅ cokernel f)) := by
+  let F := ProEtale.upperStar Ab.{u + 1} g
+  exact (presentation_comap_iff (F.map φ) m n).trans
+    (presentation_iso ((F.mapModComapIso φ).app N) m n).symm
+
+omit [IsCommMonObj R] [IsCommMonObj S] in
+private theorem lfp_comap_iff (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S} :
+    IsLocallyFinitelyPresented S N ↔
+      IsLocallyFinitelyPresented R ((Mod.comap φ).obj N) := by
+  constructor
+  · rintro ⟨𝒰, h⟩
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨n, m, f, e⟩ := h i
+    obtain ⟨f', e'⟩ := (presentation_mapMod_comap_iff φ (𝒰.f i) m n).mp ⟨f, e⟩
+    exact ⟨n, m, f', e'⟩
+  · rintro ⟨𝒰, h⟩
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨n, m, f, e⟩ := h i
+    obtain ⟨f', e'⟩ := (presentation_mapMod_comap_iff φ (𝒰.f i) m n).mpr ⟨f, e⟩
+    exact ⟨n, m, f', e'⟩
+
+private theorem lfp_iso {T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj T] {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) T}
+    (e : M ≅ N) :
+    IsLocallyFinitelyPresented T M ↔ IsLocallyFinitelyPresented T N := by
+  constructor
+  · rintro ⟨𝒰, h⟩
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨n, m, f, p⟩ := h i
+    obtain ⟨f', p'⟩ :=
+      (presentation_iso ((ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod T |>.mapIso e)
+        m n).mp ⟨f, p⟩
+    exact ⟨n, m, f', p'⟩
+  · rintro ⟨𝒰, h⟩
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨n, m, f, p⟩ := h i
+    obtain ⟨f', p'⟩ :=
+      (presentation_iso ((ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod T |>.mapIso e)
+        m n).mpr ⟨f, p⟩
+    exact ⟨n, m, f', p'⟩
+
+set_option linter.unusedSectionVars false in
 /--
 Local finite presentation is invariant under restriction and extension of scalars along an
 isomorphism of commutative ring objects.  A fixed pro-étale cover and fixed finite ranks admit
@@ -111,6 +196,15 @@ theorem isLocallyFinitelyPresented_comap_iff_sameCover
             Nonempty
               ((((ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod S).obj
                 ((Mod.extendScalars φ).obj M)) ≅ cokernel f))) := by
-  sorry
+  -- The direct finite-free restriction comparison keeps both ranks unchanged.
+  refine ⟨lfp_comap_iff φ, fun 𝒰 i m n ↦
+    presentation_mapMod_comap_iff φ (𝒰.f i) m n, ?_⟩
+  intro M
+  let e := (Mod.extendScalarsIsoComapInv φ).app M
+  refine ⟨(lfp_comap_iff (asIso φ).inv).trans (lfp_iso e.symm), ?_⟩
+  intro 𝒰 i m n
+  exact (presentation_mapMod_comap_iff (asIso φ).inv (𝒰.f i) m n).trans
+    (presentation_iso
+      ((ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod S |>.mapIso e.symm) m n)
 
 end AlgebraicGeometry.ProEtale

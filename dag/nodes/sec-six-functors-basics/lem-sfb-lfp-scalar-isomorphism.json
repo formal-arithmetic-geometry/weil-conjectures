@@ -16,77 +16,47 @@
  ],
  "proof": [
   {
-   "text": "Put $\\psi=\\varphi^{-1}$. The sheaf tensor structure is symmetric and closed, and tensoring preserves colimits [sk-def-sfb-sheaf-tensor]; the small-site convention [def-weil-pbc-proetale-site] lets [lem-sfb-grothendieck-sheafification] apply with coefficients $\\Ab$, giving an abelian sheaf category. By [def-sp-abelian], equalizers are kernels of differences and coequalizers are cokernels of differences, so both exist. Thus clause 5 of [sk-def-sfb-change-of-scalars] applies to both $\\varphi$ and $\\psi$: $\\operatorname{Ext}_{\\psi}\\cong\\operatorname{Res}_{\\varphi}$ and $\\operatorname{Ext}_{\\varphi}\\cong\\operatorname{Res}_{\\psi}$. Their restriction functors are quasi-inverse. In fact double restriction restores the action: $\\gamma_N\\circ(\\varphi\\otimes1)\\circ(\\psi\\otimes1)=\\gamma_N$ and similarly for an $R$-module. The comparison maps have underlying identity. A presentation is unchanged in ranks when its last isomorphism is composed with an isomorphism of modules, directly from [def-sfb-finitely-presented-module].",
+   "text": "Restriction along $\\varphi$ preserves finite colimits by the restriction/coextension adjunction [sk-def-sfb-change-of-scalars]. In the abelian sheaf category [lem-sfb-grothendieck-sheafification], with closed tensor [sk-def-sfb-sheaf-tensor], Mod.finiteFreeIsoComap identifies $\\operatorname{Res}_\\varphi(S^k)$ with $R^k$. For a fixed map $f:S^m\\to S^n$, conjugate $\\operatorname{Res}_\\varphi(f)$ by these comparisons. PreservesCokernel.iso and cokernel.mapIso identify the restricted cokernel with the cokernel of this conjugate. Composing the image of a presentation isomorphism proves the fixed-rank forward implication [def-sfb-finitely-presented-module]. Apply the same construction along $\\varphi^{-1}$ and compose with the unit of Mod.comapEquivalenceOfIsIso [sk-def-sfb-change-of-scalars] for reflection. This is the fixed-rank version of the existing source-library proof Mod.IsFinitelyPresented.comap; no general scalar-extension finite-presentation theorem is needed.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-pbc-proetale-site",
-    "lem-sfb-grothendieck-sheafification",
-    "def-sp-abelian",
     "sk-def-sfb-change-of-scalars",
+    "lem-sfb-grothendieck-sheafification",
+    "sk-def-sfb-sheaf-tensor",
     "def-sfb-finitely-presented-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
-    "place": "clause 5 in both directions; inverse-action identity expanded by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "Suppose $N\\cong\\operatorname{coker}(S^m\\xrightarrow{a}S^n)$. Apply [lem-sfb-internal-extension-finite-presentation] to $\\psi:S\\to R$. It supplies $\\operatorname{Ext}_{\\psi}N\\cong\\operatorname{coker}(R^m\\xrightarrow{a_R}R^n)$, with $a_R$ the conjugate of $\\operatorname{Ext}_{\\psi}(a)$. Compose with the component $\\operatorname{Ext}_{\\psi}N\\cong\\operatorname{Res}_{\\varphi}N$ from step 1. This is the required presentation of the restriction, with exactly $m,n$. Conversely, given a presentation of $\\operatorname{Res}_{\\varphi}N$ with ranks $m,n$, apply the same cited lemma to $\\varphi$ and compose $\\operatorname{Ext}_{\\varphi}\\operatorname{Res}_{\\varphi}N\\cong\\operatorname{Res}_{\\psi}\\operatorname{Res}_{\\varphi}N\\cong N$. The inverse-action calculation of step 1 supplies the last isomorphism. This proves both directions for finite presentations, on any scheme, without a flatness assumption.",
-   "uses": [
-    "lem-sfb-internal-extension-finite-presentation",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "local presentations on strata; expanded using inverse scalar extension"
-   }
-  },
-  {
-   "text": "Fix any pro-étale covering family $\\{u_i:U_i\\to X\\}$, and set $F_i=u_i^*$ and $\\varphi_i=F_i\\varphi$. These pullbacks are strong monoidal [def-sfb-finite-upper-star-monoidal]. They are moreover symmetric monoidal, so $F_iR$ and $F_iS$ are commutative ring objects of $\\Sh(U_{i,\\mathrm{pro\\acute et}},\\Ab)$ [lem-sfb-finite-upper-star-braided], as step 2 on $U_i$ requires. Also $F_i\\psi$ is inverse to $\\varphi_i$, since functoriality sends $\\varphi\\psi=1$ and $\\psi\\varphi=1$ to the same identities. In [def-sfb-comap-mapmod-square] take $F=F_i$, $R_Y=F_iR$, $S_Y=F_iS$, $\\eta_R=1$, $\\eta_S=1$, and $\\varphi_Y=F_i\\varphi$. Its square commutes identically and its comparison gives $\\operatorname{mapMod}(F_i)(\\operatorname{Res}_{\\varphi}N)\\cong\\operatorname{Res}_{\\varphi_i}(\\operatorname{mapMod}(F_i)N)$. Apply step 2 on the scheme $U_i$, then compose presentation isomorphisms with this comparison. Thus for each $i$ finite presentations on the two sides exist with exactly the same pair $(m_i,n_i)$. By [def-sfb-locally-finitely-presented] this very family witnesses local finite presentation on one side if and only if it does on the other. No refinement or change of indices has occurred.",
+   "text": "For each member $u_i$ of a fixed pro-étale cover, set $F=u_i^*$. The lax monoidal structure underlying [def-sfb-finite-upper-star-monoidal] sends $\\varphi$ to an isomorphism of monoid objects. The fixed-rank restriction calculation in step 1 does not require commutativity, so no braidedness of $F$ is needed here. The identity-coefficient case of the restriction/transport comparison [def-sfb-comap-mapmod-square] is already supplied by Functor.mapModComapIso: $F(\\operatorname{Res}_\\varphi N)\\cong\\operatorname{Res}_{F\\varphi}(FN)$. Apply step 1 to $F\\varphi$ and compose presentation isomorphisms with this comparison. This proves equivalence for every specified cover member and both specified ranks. Quantifying the ranks and the unchanged cover gives the local finite-presentation equivalence [def-sfb-locally-finitely-presented].",
    "uses": [
     "def-sfb-finite-upper-star-monoidal",
-    "lem-sfb-finite-upper-star-braided",
     "def-sfb-comap-mapmod-square",
     "def-sfb-locally-finitely-presented"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "same covering witnesses for locally finitely presented restrictions; monoidal square comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "For an $R$-module $M$, clause 5 of [sk-def-sfb-change-of-scalars] identifies $\\operatorname{Ext}_{\\varphi}M$ with $\\operatorname{Res}_{\\psi}M$. Apply step 3 to the isomorphism $\\psi:S\\to R$. For each fixed cover and each member, applying $\\operatorname{mapMod}(u_i^*)$ to this module isomorphism again gives an isomorphism, since any functor sends mutually inverse maps to mutually inverse maps. Composing the cokernel-presentation isomorphisms with these maps leaves both ranks unchanged [def-sfb-finitely-presented-module]. Hence that cover, with any specified presentation ranks, works for $M$ exactly when it works for $\\operatorname{Ext}_{\\varphi}M$. This proves the extension clause, including reflection.",
+   "text": "For an $R$-module $M$, let $e:\\operatorname{Ext}_\\varphi M\\cong\\operatorname{Res}_{\\varphi^{-1}}M$ be the component of Mod.extendScalarsIsoComapInv [sk-def-sfb-change-of-scalars]. Apply step 2 to $\\varphi^{-1}$. Pull $e$ back on every member of the unchanged cover and compose its inverse with the resulting presentation isomorphisms. Composition with an isomorphism preserves the witness map and both ranks [def-sfb-finitely-presented-module]; existential quantification gives the local assertion too [def-sfb-locally-finitely-presented].",
    "uses": [
     "sk-def-sfb-change-of-scalars",
-    "def-sfb-finitely-presented-module"
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "coefficient relabelling of local presentations; extension clause"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-pbc-proetale-site",
-  "lem-sfb-grothendieck-sheafification",
-  "def-sp-abelian",
   "sk-def-sfb-change-of-scalars",
+  "lem-sfb-grothendieck-sheafification",
+  "sk-def-sfb-sheaf-tensor",
   "def-sfb-finitely-presented-module",
-  "lem-sfb-internal-extension-finite-presentation",
   "def-sfb-finite-upper-star-monoidal",
-  "lem-sfb-finite-upper-star-braided",
   "def-sfb-comap-mapmod-square",
   "def-sfb-locally-finitely-presented"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-  "place": "Expansion of coefficient relabelling in the locally finitely presented stratum argument, using change-of-scalars clause 5 and the monoidal comparison square."
+  "place": "Coefficient relabelling paragraph, implemented by the source-library finiteFreeIsoComap and cokernel comparisons rather than general extension of scalars; pullback compatibility and inverse restriction finish the same-cover clauses."
  },
  "mathlib_searches": [
   {
@@ -212,8 +182,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-grothendieck-sheafification",
-  "lem-sfb-internal-extension-finite-presentation"
+  "lem-sfb-grothendieck-sheafification"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -241,5 +210,15 @@
   "group": "Q41",
   "result": "pass",
   "note": "Only the item lean record + new module LfpScalarIsomorphism.lean differ from live. Lean renders all node clauses exactly: (1) LFP N <-> LFP Res_phi N; (2) for every fixed Scheme.Cover.{u} 𝒰, member i, ranks m n: finite-free cokernel presentation of mapMod(u_i^*)N over u_i^*S <-> same for Res_phi N over u_i^*R (faithful unfolding of Mod.IsFinitelyPresented inside IsLocallyFinitelyPresented, same rank orientation); (3) same pair for Mod.extendScalars phi on R-modules. Hypotheses MonObj/IsCommMonObj/IsMonHom/IsIso exactly the node's; universes Scheme.{u}/Ab.{u+1}/Cover.{u} as recorded def; statement true via mapModComapIso + Res along iso. Edge cases (phi=id, zero rings, m/n=0, empty cover, varying ranks) fine. Existing IsLocallyFinitelyPresented.comap / localFinitePresentation_(of_)comap are one-way helpers, not the node. All proof_dep modules imported non-public; docstrings carry source place, blueprint tag, 4 proof steps; sorry only; lines <=100. nt_compile --json: 8.3 s clean, exit 0. Advisory only: unused plain import FinitelyPresentedComap (stage-3 helper)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T120532-L-3907480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
