@@ -20,9 +20,128 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a_Z:A_Z\\to B_Z$ for the coefficient maps. The constant-section description of $c_A,c_B$ in [prop-weil-pbc-proetale-constant-ring-map] gives $a_Xc_A=c_Bf^{-1}a_Y$: both sides take a constant section $a$ to the constant section $\\varphi(a)$. The same equality holds for locally constant sections by restriction and gluing and then on the sheafifications. Thus the coefficient square required by [lem-weil-pbc-ring-sheaf-change-adjunction] commutes. By [def-weil-pbc-proetale-operations], pullback with either identified coefficient ring is the exact algebraic inverse image with its action transported along $c_R$. In particular, forgetting the $B$-action before or after that inverse image gives the same underlying sheaf and the same transported $A$-action. This is the ordinary restriction comparison inducing $b$.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; identified-coefficient actions and coefficient naturality"
+   }
+  },
+  {
+   "text": "For any $A_Y$-module sheaf $M$, apply clause 1 of [lem-pur-proetale-inverse-image-tensor-comparison] to $(M,B_Y)$. Transport its coefficient ring along $c_A$ and its second factor along $c_B$. This gives an isomorphism\n$$t_M:f_A^*r_Y(M\\otimes_{A_Y}B_Y)\\longrightarrow r_X(f_A^*M\\otimes_{A_X}B_X).$$\nIts formula is $f^{-1}(x\\otimes s)\\mapsto f^{-1}x\\otimes c_B(f^{-1}s)$, with the understood transported module actions. For $a\\in A_Y$, the balancing equality is preserved because $c_B(f^{-1}(a_Y(a)s))=a_X(c_A(f^{-1}a))c_B(f^{-1}s)$, by Step 1. Locally a section $v$ of the finite constant sheaf $B_X$ is a constant $b\\in B$. On the unit-section tensors, multiplying by $v$ on the source replaces $s$ by $bs$; the formula sends this to $f^{-1}x\\otimes c_B(f^{-1}b)c_B(f^{-1}s)$, which is $v$ times the original output. These tensors determine the map by the uniqueness clause of the cited comparison, and the equality glues. Thus $t_M$ respects the transported $B_X$-action. Consequently this also gives the $B_X$-linear map from $f_B^*(M\\otimes_{A_Y}B_Y)$ after applying the ordinary restriction comparison. Naturality of $t_M$ in $M$ follows from the cited simultaneous naturality; the formula uses the sheafified tensors, not an identification of tensor sections with all sections of a sheaf tensor.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, bilinear adjunction construction specialized to (M,B_Y)"
+   }
+  },
+  {
+   "text": "Apply $t_M$ with $M=P^i$ in each degree. Naturality for $d_P^i:P^i\\to P^{i+1}$ gives $(f_A^*d_P^i\\otimes1)t_{P^i}=t_{P^{i+1}}f_A^*(d_P^i\\otimes1)$. Hence these components and their inverses are chain maps, producing $t_P$. There is no totalization issue here: $B_Y$ lies in degree zero, so in each total degree only $P^i\\otimes B_Y$ occurs. The formula in Step 2 is exactly the asserted formula over $X\\times_YV$ for every $V,x,s$. The same naturality equation with any cochain map $P\\to P'$ proves naturality of this chain isomorphism.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary tensor map on complex terms"
+   }
+  },
+  {
+   "text": "Let $P$ be flat-term K-flat. By [lem-pur-derived-change-of-rings], the scalar-derived counit identifies $T_Y(QP)$ with $Q_B(P\\otimes_{A_Y}B_Y)$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $f_A^*P$ is again flat-term K-flat, so the scalar-derived counit also identifies $T_XL_A(QP)$ with $Q_B(f_A^*P\\otimes_{A_X}B_X)$. Exact inverse image [def-weil-pbc-proetale-operations] and exact restriction [lem-weil-pbc-ring-sheaf-change-adjunction] have their termwise localization factor isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Thus these comparisons are valid even though $P\\otimes_{A_Y}B_Y$, viewed over $A_Y$, need not be K-flat. By the K-flat ordinary-balancing normalization in [def-sp-constant-scalar-pullback-comparison], $\\theta_{QP}$ in these coordinates is precisely the $B$-linear chain map of Step 2. The comparison $b^{-1}$ changes only the inverse-image coefficient action as in Step 1. Therefore $r_X(\\theta_{QP})\\circ b_{T_Y(QP)}^{-1}$ is represented in the asserted counit and localization-factor coordinates by $Q_A(t_P)$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sp-constant-scalar-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A4; ordinary-balancing normalization specified in def-sp-constant-scalar-pullback-comparison"
+   }
+  },
+  {
+   "text": "To compute the other comparison without assuming $B_Y$ flat, choose a flat-term K-flat resolution $q:H\\to B_Y[0]$ by [lem-pc-kflat-resolution]. For either $J=P$ or $J=f_A^*P$, tensoring a quasi-isomorphism with $J$ preserves quasi-isomorphisms: its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]; K-flatness [def-pc-kflat-complex] makes the tensor of that cone with $J$ acyclic. The chain symmetry $z\\otimes w\\mapsto(-1)^{ij}w\\otimes z$ in degrees $(i,j)$ commutes with the differential displayed in [def-pc-tensor-complex-sheaves], so the order of the factors is immaterial here. The cone identification [lem-pc-tensor-mapping-cone-iso] and the same cone criterion finish the assertion. Exactness of $f_A^*$ then shows that the vertical maps obtained from $q$ in\n$$\\begin{array}{ccc}\nf_A^*\\operatorname{Tot}(P\\otimes H)&\\longrightarrow&\\operatorname{Tot}(f_A^*P\\otimes f_A^*H)\\\\\n\\downarrow&&\\downarrow\\\\\nf_A^*(P\\otimes B_Y)&\\xrightarrow{t_P}&f_A^*P\\otimes B_X\n\\end{array}$$\nare quasi-isomorphisms. On the right we use $f_A^*B_Y\\cong B_X$ from $c_B$. The square commutes by the simultaneous naturality of the ordinary tensor comparison of Step 2, before passing to the derived categories.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, replacement of the coefficient factor; cone argument written out"
+   }
+  },
+  {
+   "text": "The top row of Step 5 computes the canonical derived tensor/pullback comparison for $(QP,QH)$. Here are its representative-normalization hypotheses explicitly. The total tensors of the two flat-term K-flat representatives are flat-term K-flat by [lem-pur-kflat-total-tensor-model], their pullbacks are flat-term K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the exact pullback factors are invertible on all complexes by [lem-weil-pbc-exact-functor-derived-factorization]. The equivalence and fully faithful restriction in two variables of [lem-weil-pbc-site-derived-tensor-descent] therefore allow [lem-weil-pbc-tensor-comparison-descent-representatives] to descend the ordinary natural total tensor comparison. Its unique representative square is the canonical construction of Tag 07A4. The top row is thus the representative of $\\tau_{QP,QH}$. Naturality for the derived isomorphism $Qq:QH\\cong B_Y[0]$ identifies it with $\\tau_{QP,B_Y}$. In Step 5 both vertical arrows become invertible after localization, so its commuting square identifies $\\tau_{QP,B_Y}$ with $Q_A(t_P)$, through precisely the scalar counits of Step 4. In particular no K-flatness over $A_Y$ of $P\\otimes B_Y$ was used.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A2 (lemma-tensor-product-K-flat) and 07A4 (lemma-pullback-tensor-product), canonical representative square and descent"
+   }
+  },
+  {
+   "text": "Steps 4 and 6 identify both sides with $Q_A(t_P)$, so they give the desired equality at every $QP$ with $P$ flat-term K-flat. Every complex representing $K$ has a resolution of this kind by [lem-pc-kflat-resolution]. If $u:QP\\xrightarrow{\\sim}K$ is its localized quasi-isomorphism, naturality of the two comparisons says that their values at $K$, precomposed by the source functor applied to $u$, equal the target functor applied to $u$ followed by their respective values at $QP$. Cancel the invertible source image of $u$ to obtain the equality at $K$. This argument proves independence of representatives as well as the equality of natural transformations. The proof uses neither a bound on $P$ nor a flatness or Tor-dimension condition on $B/A$: the coefficient resolution in Step 5 was arbitrary and inverse image was exact. For $P=0$, $X=\\varnothing$, $A\\to B$ the identity, or $f$ the identity, the same formulas give the zero map or the canonical tensor identity as appropriate.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 07A4; naturality and cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL (sites-modules.tex), 06YS, 06YY, 07A2 and 07A4: explicit coefficient-action and representative normalization argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,10 +198,52 @@
    "results": "{\"t\": \"2026-10-21T03:00:50Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|pullbackPushforwardAdjunction\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"543dab23c1f7c15b\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary restriction and pullback adjunction declarations only; no derived tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On small pro-etale sites forgetting scalar extension from A to B identifies the derived scalar pullback comparison with the canonical derived tensor pullback isomorphism",
+   "results": "{\"t\": \"2026-10-21T03:20:26Z\", \"tool\": \"leanfinder\", \"query\": \"On small pro-etale sites forgetting scalar extension from A to B identifies the derived scalar pullback comparison with the canonical derived tensor pullback isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\"], \"digest\": \"a0a6abf358269fce\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration establishes the arbitrary-ring unbounded sheaf-module normalization and section formula"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*tensor|tensor.*derived|KFlat",
+   "results": "{\"t\": \"2026-10-21T03:20:35Z\", \"tool\": \"grep\", \"query\": \"derived.*tensor|tensor.*derived|KFlat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration establishes the arbitrary-ring unbounded sheaf-module normalization and section formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting the B action on the unbounded derived coefficient pullback comparison gives the tensor pullback isomorphism",
+   "results": "{\"t\": \"2026-10-21T03:20:36Z\", \"tool\": \"leansearch\", \"query\": \"Forgetting the B action on the unbounded derived coefficient pullback comparison gives the tensor pullback isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.Limits.CategoricalPullback.iso\", \"CategoryTheory.Functor.commShiftPullback_iso_eq\", \"SheafOfModules.pullbackIso\", \"CategoryTheory.toOverPullbackIsoToOver\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"CategoryTheory.NatTrans.PullbackShift.natIsoComp\"], \"digest\": \"38bf5ffd8eb5f6dc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration establishes the arbitrary-ring unbounded sheaf-module normalization and section formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-21T03:20:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"restrictScalars\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration establishes the arbitrary-ring unbounded sheaf-module normalization and section formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with derived change of coefficients and restriction identifies the canonical balancing isomorphisms",
+   "results": "{\"t\": \"2026-10-21T03:20:37Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image of sheaves of modules commutes with derived change of coefficients and restriction identifies the canonical balancing isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.pushforwardComp_inv_app_val_app\"], \"digest\": \"422205762baef03b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration establishes the arbitrary-ring unbounded sheaf-module normalization and section formula"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|pullbackPushforwardAdjunction",
+   "results": "{\"t\": \"2026-10-21T03:21:08Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|pullbackPushforwardAdjunction\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"543dab23c1f7c15b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf restriction/pullback only; no derived scalar normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-direct-image-change-ring-transpose",
@@ -101,5 +262,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-proetale-scalar-tensor-normalization",
+  "worker": "stage1",
+  "summary": "Seven-step normalization proof, using only existing nodes: check the coefficient-action square, construct the unit-section tensor map, extend degreewise, identify the scalar counits and restriction factors, resolve the possibly nonflat coefficient and compute the derived tensor map by its representative square, then cancel a K-flat resolution. No statement change or new node.",
+  "blueprint": "Realizes det-sp-reduction-direct-image proof Step 1, the tensor-pullback identification in the counit transpose, through lem-sp-direct-image-change-ring-transpose. The section and derived normalization details refine that identification without changing the compactification/free-term route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical constant-ring identifications, needed to check the coefficient square for arbitrary f. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Canonical exact restriction comparison b and its underlying inverse-image action. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Exact identified-coefficient pullback and its termwise derived model. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic pro-etale tensor comparison with the section formula; it supplies the actual ordinary map. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic scalar-derived counits computed by K-flat complexes on a site. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat pullback preservation and canonical derived tensor comparison. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "The exact termwise localization factor isomorphisms, including on complexes not K-flat over A. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded flat-term K-flat resolutions of K and of the coefficient sheaf B. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Cone criterion used to justify tensoring a resolution of the nonflat coefficient. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "The tensor/cone identification in that quasi-isomorphism argument. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Flat-term K-flat total tensors of two unbounded representatives. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Localization equivalence and fully faithful representative restriction in two variables. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "why": "Unique descent with the actual canonical representative square, not just existence of an unspecified isomorphism. This is a foundational tool, not a replacement for the unit coefficient-comparison route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-ebe2f27dc",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-ebe2f27dc (reviewer sub-agent of L); spot-checked: Read the item and its 7 steps in full, every cited statement (17 proof_deps and 11 stmt_deps), def-weil-pbc-four-corners, Stacks 07A4 (sites-cohomology l.3684-3724) and 03EL (sites-modules l.3649ff), the unit sk-lem-sp-reduction and the parent's Step 2. The statement and stmt_deps are byte-identical to side-live (the item is unsplit there). There are no new nodes, no cycle (the item is not in its own closure), no repair note, it is not in the drop list, and no SGA is cited. Step 1: the coefficient square comes from the constant-section description in the constant-ring-map node; it is the hypothesis of lem-weil-pbc-ring-sheaf-change-adjunction. Step 2: clause 1 of the pro-etale tensor comparison, with uniqueness on generating sections. B-linearity holds because sections of finite B_X are locally constant; the sheafified tensor is used correctly. Step 3 is elementary degreewise naturality. Step 4: lem-pur-derived-change-of-rings computes T on K-flat P; f_A^*P stays flat-term K-flat; the exact factorization covers non-K-flat P⊗B. def-sp's ordinary-balancing normalization is the four-corners natural tensor map on K-flat representatives, which is t_P. Step 5: the cone argument (quasi-iso cone acyclic, K-flat, tensor-cone iso, signed swap) and exact f_A^* make both verticals quasi-isomorphisms; the square commutes by naturality of sigma. Step 6: the canonical tau of the ringed-topoi node is by its own proof the tensorComparisonDescent of the 07A4 representative square, then naturality along Qq. Step 7: resolution plus cancellation. Directions of b, theta and tau are consistent. Edge cases checked: P=0, X empty, phi=id, f=id, and non-flat Z/l^2->F_l with unbounded P. lem-pur-scalar-tensor-pullback-normalization is conditional and off-route, so not a duplicate. All 13 declared tool_uses are generic tools; accepted. No fixes."
  }
 }
