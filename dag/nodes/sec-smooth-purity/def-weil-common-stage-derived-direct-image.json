@@ -1,0 +1,137 @@
+{
+ "id": "def-weil-common-stage-derived-direct-image",
+ "kind": "definition",
+ "title": "Common-stage derived direct image and induced Weil adjunction",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "source": {
+  "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+  "place": "Existing landed interface, lines 275-480; sources recorded there: Bhatt-Scholze 6.8.14(2), 6.8.15 and Stacks 099N, 0D6G, 05TE. Reindexed from def-weil-derived-direct-image, not a new mathematical claim."
+ },
+ "statement": "Fix a finite-field datum D, a prime l distinct from its characteristic, an algebraic closure Omega of Q_l, and a morphism f:X_0 to Y_0 of finite-type quasi-compact models over the base field [def-weil-finite-field-fiber]. On their geometric fibres use the actual common-stage constructible categories [def-weil-algebraically-closed-coefficients] and the normalized derived pullback [def-weil-derived-pullback-tensor-hom]. The finite/integral direct-image construction is [def-weil-derived-direct-image]. The common-stage pullback has a right adjoint sfModelDerivedPush, with its specified adjunction sfModelDerivedAdjunction. Pullback composition gives the normalized commuting-square comparison, whose adjoint is sfModelDerivedExchange; the derived adjunction gives the compatible direct-image shift comparison and the image of connecting morphisms. Frobenius pullback is an equivalence. Its normalized square lifts this adjunction to the actual Weil fixed-pair categories [def-zl-weil-ind-sheaf-category], defining sfModelWeilDerivedPush and sfModelWeilDerivedAdjunction. Forgetting the Weil structure identifies this right adjoint with sfModelDerivedPush by the unique natural isomorphism whose image under geometric pullback, followed by the geometric counit, is the carrier of the Weil counit. These constructions are exactly the already-landed declarations of Sheaf.Paper.SfCommonStageDirectImage; no claim of arbitrary-field Weil models or of new finite-reduction comparison isomorphisms is added.",
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-rational adjunctions and invertible scalar-change mates. The defining counit equation implies unit compatibility by transposition. Transpose both sides of the right-family associativity equation; counit naturality, the mate equation and left-family coherence prove equality. Thus the right functors form a stage-system morphism and both adjunction transformations form compatible families. Descend these transformations on the actual pair category, including both triangle identities. Identify the descended left functor with commonStageDerivedPullback using its exact object and representative formulas.",
+   "uses": [
+    "lem-sf-rational-direct-image-adjunctions",
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The geometric fibre of each finite-type quasi-compact model is Noetherian and has finite topological Krull dimension. Stalk invertibility follows from residue-field invertibility. The coherent coefficient comparison supplies the common-stage identity isomorphism. Together with pullback composition and the inverse geometric Frobenius this proves that Frobenius pullback is an equivalence. Lift the geometric adjunction to IsoAlgebra using the mate of the normalized Frobenius square.",
+   "uses": [
+    "lem-sf-common-stage-pullback-identity",
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply uniqueness of right adjoints to compare the selected Weil right adjoint with the lifted geometric right adjoint. Forget its structure and project the canonical counit equation to the carrier map. If another isomorphism satisfies that equation, injectivity of the inverse geometric Hom equivalence gives equality of every component.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-direct-image-adjunctions",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-descent-functors",
+  "lem-sf-common-stage-pullback-identity",
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "proof_origin": "E1, 2026-10-20: finite-stage adjunction descent on actual pair representatives; explicit Frobenius equivalence; IsoAlgebra mate lifting; uniqueness of the counit-normalized forgetful comparison. No arbitrary-field duality branch is used.",
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-direct-image",
+   "place": "Final rational/common-stage coefficient convention; existing common-stage and Weil extension",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "maintenance",
+  "item": "def-weil-derived-direct-image",
+  "group": "N0",
+  "date": "2026-10-21"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCommonStageDirectImage",
+  "declaration": "WeilConjectures.sfModelDerivedPush",
+  "declarations": [
+   "WeilConjectures.sfModelPullComposition",
+   "WeilConjectures.sfModelPullSquare",
+   "WeilConjectures.sfModelPull_isLeftAdjoint",
+   "WeilConjectures.sfModelDerivedPush",
+   "WeilConjectures.sfModelDerivedAdjunction",
+   "WeilConjectures.sfModelDerivedExchange",
+   "WeilConjectures.sfModelPullCommShift",
+   "WeilConjectures.sfModelPushCommShift",
+   "WeilConjectures.sfModelPushConnecting",
+   "WeilConjectures.sfModelWeilPull_isLeftAdjoint",
+   "WeilConjectures.sfModelWeilDerivedPush",
+   "WeilConjectures.sfModelWeilDerivedAdjunction",
+   "WeilConjectures.sfModelWeilDerivedPush_forget",
+   "WeilConjectures.sfModelWeilDerivedPushForget"
+  ],
+  "file": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+  "statement": "def sfModelDerivedPush (f : X₀ ⟶ Y₀) : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left ⥤ generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded SfIntegralDirectImage supplies only the completed integral reduction tower. This module publicly retains that construction and extends it to the actual geometric common-stage category and its induced Weil pairs by the inverse-image adjunction. The forgetful comparison is uniquely normalized by its counit; shift and open-exchange comparisons use the prescribed pullback comparisons."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32a682350",
+  "group": "N5",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the four delivered modules (WeilOpenImageDelta, SfCommonStageDirectImage, SfCommonStageWeilCohomology, CondensedERealization diffed against live), MiddleExtensionCurve, IsCommonStageLisse and the citers p-dl-a1-exact and lem-dl-a1-constant-field-charts. Every clause and edge case matches (j=id, empty or disconnected C, empty W, rank 0, r<0, independent universes); the B-repairs build on the existing constructions and are not hollow; the CondensedERealization API repair is needed (the landed file fails against the live build) and keeps its statement. One H3 finding, fixed: DlOpenImageData.degreeZero (R^0 j_* = j_*) was an unconstrained natural iso, so boundary was fixed only up to a natural automorphism of j_* (e.g. sign). Added degreeZero_normalization: degreeZero is the inverse of H^0 of the augmentation (adjoint of the ordinary counit) composed with the heart truncation maps. Theorem signature, lean.statement and stmt_deps unchanged. nt_compile --json on all four modules: delivered 43.7/10.7/15.0/12.6 s clean; fixed 49.1/6.6/17.0/22.9 s clean; a broken control copy errors as expected. CondensedERealization is close to the 60 s limit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lead_note": "Maintenance reindex only: proof, proof_deps, proof_origin, lean and reviewed_lean/reviewed_proof are preserved verbatim from the existing def-weil-derived-direct-image record. Review dates describe those original landings, not a new mathematical review. This separates the upper common-stage/Weil adjunction from the foundational finite/integral direct-image definition, preventing its prerequisites from depending on their own consumer. Existing Mathlib searches in the blueprint definition concern the lower construction and stay there; no new search or proof is claimed.",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-weil-common-stage-derived-direct-image",
+  "worker": "maintenance-N0",
+  "summary": "Reindex the existing landed common-stage construction and its entire proof without changing Lean.",
+  "blueprint": "Upper rational/common-stage and induced Weil construction, formerly conflated with the finite/integral definition."
+ }
+}

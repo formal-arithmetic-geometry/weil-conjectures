@@ -2,7 +2,7 @@
  "id": "lem-dl-a1-weil-open-image-delta",
  "kind": "statement",
  "title": "Low-degree open direct-image sequence for adic Weil sheaves",
- "statement": "Fix the finite-field and coefficient datum of [rem-dl-a1-conventions]. Let $X_0$ be a separated [def-weil-proper-morphism] finite-type $k_0$-scheme smooth of relative dimension one [def-sbc-smooth-morphisms], and let $j:U_0\\hookrightarrow X_0$ be a dense open immersion [def-weil-open-immersion]. Use constructible $\\Qlb$-Weil sheaves [def-weil-weil-sheaf-complex] with their underlying constructible heart [def-weil-constructible-heart], and ordinary and derived direct images [def-wf-middle-extension, def-weil-derived-direct-image]. For any short exact sequence $0\\to G_1\\to G\\to G_2\\to0$ of lisse such sheaves [def-pod-lisse-l-adic-sheaves, def-weil-pbc-exact-sequence], there is a natural exact sequence of constructible Weil sheaves\n$$0\\to j_*G_1\\to j_*G\\to j_*G_2\\xrightarrow{\\delta}R^1j_*G_1.$$\nHere $R^1j_*G_1=\\mathcal H^1(Rj_*G_1)$ [def-weil-derived-cohomology-sheaves]. All its maps, including $\\delta$, are Weil-equivariant. Moreover $R^rj_*G_i=0$ for $r<0$, $R^0j_*G_i=j_*G_i$, $j^*j_*G_i\\simeq G_i$, and $j^*R^1j_*G_i=0$. These identifications and the displayed exact sequence commute with restriction to open subschemes of $X_0$. No purity hypothesis is imposed.",
+ "statement": "Fix the finite-field and coefficient datum of [rem-dl-a1-conventions]. Let $X_0$ be a separated [def-weil-proper-morphism] finite-type $k_0$-scheme smooth of relative dimension one [def-sbc-smooth-morphisms], and let $j:U_0\\hookrightarrow X_0$ be a dense open immersion [def-weil-open-immersion]. Use constructible $\\Qlb$-Weil sheaves [def-weil-weil-sheaf-complex] with their underlying constructible heart [def-weil-constructible-heart], and ordinary and derived direct images [def-wf-middle-extension, def-weil-derived-direct-image, def-weil-common-stage-derived-direct-image]. For any short exact sequence $0\\to G_1\\to G\\to G_2\\to0$ of lisse such sheaves [def-pod-lisse-l-adic-sheaves, def-weil-pbc-exact-sequence], there is a natural exact sequence of constructible Weil sheaves\n$$0\\to j_*G_1\\to j_*G\\to j_*G_2\\xrightarrow{\\delta}R^1j_*G_1.$$\nHere $R^1j_*G_1=\\mathcal H^1(Rj_*G_1)$ [def-weil-derived-cohomology-sheaves]. All its maps, including $\\delta$, are Weil-equivariant. Moreover $R^rj_*G_i=0$ for $r<0$, $R^0j_*G_i=j_*G_i$, $j^*j_*G_i\\simeq G_i$, and $j^*R^1j_*G_i=0$. These identifications and the displayed exact sequence commute with restriction to open subschemes of $X_0$. No purity hypothesis is imposed.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 05TE, lemma-right-derived-delta-functor, and the left-exact low-degree sequence immediately preceding it; adic/Weil version required by main-20261015 p-dl-a1-exact.proof.md Step 1 and treated at the coefficient stages of Bhatt–Scholze §6.8. This is the adic enhancement, not a claim that Tag 05TE itself supplies adic coefficient comparison."
@@ -21,7 +21,8 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "def-real-common-stage-lisse",
-  "def-zl-weil-ind-sheaf-category"
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-common-stage-derived-direct-image"
  ],
  "proof": [
   {
@@ -369,5 +370,6 @@
   "group": "N5",
   "result": "fix",
   "note": "Read the node, all 14 stmt_deps, the four delivered modules (WeilOpenImageDelta, SfCommonStageDirectImage, SfCommonStageWeilCohomology, CondensedERealization diffed against live), MiddleExtensionCurve, IsCommonStageLisse and the citers p-dl-a1-exact and lem-dl-a1-constant-field-charts. Every clause and edge case matches (j=id, empty or disconnected C, empty W, rank 0, r<0, independent universes); the B-repairs build on the existing constructions and are not hollow; the CondensedERealization API repair is needed (the landed file fails against the live build) and keeps its statement. One H3 finding, fixed: DlOpenImageData.degreeZero (R^0 j_* = j_*) was an unconstrained natural iso, so boundary was fixed only up to a natural automorphism of j_* (e.g. sign). Added degreeZero_normalization: degreeZero is the inverse of H^0 of the augmentation (adjoint of the ordinary counit) composed with the heart truncation maps. Theorem signature, lean.statement and stmt_deps unchanged. nt_compile --json on all four modules: delivered 43.7/10.7/15.0/12.6 s clean; fixed 49.1/6.6/17.0/22.9 s clean; a broken control copy errors as expected. CondensedERealization is close to the 60 s limit."
- }
+ },
+ "lead_note": "Maintenance 2026-10-21 (N0): cite the separated common-stage/Weil direct-image record explicitly; the finite/integral definition remains def-weil-derived-direct-image. Only the citation and statement dependency change, not the mathematical assertion or Lean."
 }
