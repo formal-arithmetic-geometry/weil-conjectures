@@ -22804,3 +22804,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: merged deliver/Q09/lem-sfb-common-field-lattice-generators (stage 2; reviewer PASS; parallel immutable checks)
 - 14:28 L: merged deliver/Q07/lem-sfb-continuous-algcl-tame-boundary-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 14:28 L: merged deliver/Q10/lem-fd-completion-inverse-scalar-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 14:29 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
