@@ -1,0 +1,81 @@
+{
+ "id": "lem-pur-sequence-adjoint-resolution-shifts",
+ "kind": "statement",
+ "title": "Resolution-normalized identification of the sequence-site derived adjoints",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and a finite-type $k$-scheme $W$. On a fixed small skeleton $\\mathcal V=W_{\\mathrm{proet}}$ put $B_n=(R/t^n)_W$ for $n\\ge1$ and $A=\\lim_nB_n$. Let $\\mathcal T$ be the sequence site and $B=(B_n)_n$ its ring sheaf of [def-coef-ringed-sequence-site]; its module sheaves are strict quotient-semilinear systems $\\mathscr S_W$. Use the ordinary unbounded derived categories and cochain shifts of [def-weil-abstract-derived-category]. Fix any supplied coefficient calculus $S$ and its coherence data of [lem-coef-derived-system-evaluation-calculus], with reduction $\\mathcal R$ and total limit $\\mathcal L=R\\lim\\,D(U)$, where $U$ is termwise restriction along $A\\to B_n$.\n\nThere is a morphism of ringed topoi $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal V),A)$ whose inverse image on underlying sheaves is the constant-system functor, whose structural ring map is given by the quotient maps, and whose ordinary module adjunction has $p^*Q=(Q\\otimes_A B_n)_n$ and $p_*M=\\lim_n\\operatorname{Res}_{A\\to B_n}M_n$. Its Hom bijection is the correspondence between compatible $B_n$-linear maps $Q\\otimes_A B_n\\to M_n$ and an $A$-linear map $Q\\to\\lim_n\\operatorname{Res}M_n$.\n\nThe canonical resolution comparisons identify $Lp^*\\cong\\mathcal R$ and $Rp_*\\cong\\mathcal L$ as adjoint pairs, with the canonical unit and counit of the supplied calculus, not only as evaluated functors. These identifications preserve the prescribed integer-shift comparisons, naturally in all derived inputs and coherently under addition of shifts. The pullback comparison on each flat-term K-flat representative $Q\\to P$ [def-pc-kflat-complex] is the strict quotient system $(Q\\otimes_A B_n)_n$, including quotient transitions and maps of resolutions. Its shift comparison is identity on the terms $Q^{i+r}\\otimes_A B_n$ with differential $(-1)^r(d_Q\\otimes1)$; it also agrees with the canonical finite scalar-extension comparisons at each $n$.\n\nMore precisely on the right, factor $p=g\\circ a$ through $(\\mathcal T,A^{\\mathrm{const}})$, where $a_*=U$ is exact and $g_*=\\lim$. The canonical composition comparison $Rp_*\\cong Rg_*D(U)$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] is normalized on a K-injective $B$-system complex $I$ [def-pur-kinjective-complex] and any K-injective replacement $j:UI\\to J$ by $\\lim j$. For every $r\\in\\mathbf Z$ the shifted comparison uses exactly $j[r]$, with degree-$i$ map $\\lim j^{i+r}$ under $\\lim(J[r])=(\\lim J)[r]$. For any strict system complex $N$ and simultaneous K-injective replacement $UN\\to J$, the resulting comparison $\\mathcal L(N)\\cong\\lim J$ has this same shifted-replacement normalization. No preservation of K-injectives by $U$, exactness of arbitrary products, normalized-system condition, or completeness of $P$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived pullback and pushforward of the ringed sequence site identify with quotient reduction and total inverse limit, preserving the specified termwise shifts on K-flat and K-injective resolutions",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.toRightDerivedZero'. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction or derived-functor infrastructure does not identify the prescribed quotient-system resolution comparisons and shifts"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*limit|pullbackPushforwardAdjunction",
+   "results": "Hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction or derived-functor infrastructure does not identify the prescribed quotient-system resolution comparisons and shifts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison from derived direct image on a ringed sequence site to derived limit after restriction of scalars respects the cochain shift comparison represented by lim j on K-injective resolutions",
+   "results": "Hits: CochainComplex.HomComplex.Cochain.shift, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, PresheafOfModules.limitPresheafOfModules_map, CochainComplex.isKInjective_shift_iff, CochainComplex.HomComplex.Cochain.rightUnshift, CategoryTheory.InjectiveResolution.cochainComplexXIso, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction or derived-functor infrastructure does not identify the prescribed quotient-system resolution comparisons and shifts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.CommShift",
+   "results": "Hits: CategoryTheory.Adjunction.CommShift, CategoryTheory.Adjunction.leftAdjointCommShift, CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.Adjunction.commShift_of_leftAdjoint, CategoryTheory.Adjunction.commShift_of_rightAdjoint, CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.LeftAdjointCommShift.iso. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction or derived-functor infrastructure does not identify the prescribed quotient-system resolution comparisons and shifts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under the projection of a ringed diagram of quotient rings, left derived tensor reduction and right derived inverse limit are identified with derived pullback and pushforward by isomorphisms preserving cochain shifts and the original adjunction",
+   "results": "Hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction or derived-functor infrastructure does not identify the prescribed quotient-system resolution comparisons and shifts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-reduction-limit-shift-adjunction",
+  "date": "2026-10-21",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition).",
+   "via": [
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

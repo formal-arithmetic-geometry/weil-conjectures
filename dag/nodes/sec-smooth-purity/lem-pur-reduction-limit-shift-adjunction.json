@@ -17,48 +17,20 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal V=W_{\\mathrm{proet}}$, $A=\\widehat R_W$ and $B_n=(A_n)_W$. Use the small sequence site $\\mathcal T$ of [def-coef-ringed-sequence-site], with ring sheaf $B=(B_n)_n$. Projection $\\mathcal T\\to\\mathcal V$ gives a morphism of topoi: inverse image is the constant-system functor (the sheaf condition is levelwise), and its right adjoint is limit. The constant-system functor preserves finite limits, since these are computed levelwise. The compatible quotient maps $A\\to B_n$ give a ring map from the constant ring sheaf $A$ to $B$. Denote the resulting morphism of ringed topoi by $p:(\\mathcal T,B)\\to(\\mathcal V,A)$. Its module direct image is $p_*M=\\lim_n\\operatorname{Res}_nM_n$, and its module pullback is $p^*Q=(Q\\otimes_A B_n)_n$, with the actual quotient transitions. The module adjunction is [lem-weil-pbc-ringed-topoi-module-adjunction]: concretely, a compatible family of $B_n$-linear maps $Q\\otimes_A B_n\\to M_n$ is exactly an $A$-linear map $Q\\to\\lim_n\\operatorname{Res}_nM_n$. These formulas specify the whole system map, including its transition equations.",
+   "text": "Apply [lem-pur-sequence-adjoint-resolution-shifts] to the fixed quotient sequence on the small pro-etale site of $W$. It supplies the actual ringed-topos projection $p$, identifies $Lp^*\\dashv Rp_*$ with the supplied $\\mathcal R_W\\dashv\\mathcal L_W$ as adjunctions, and identifies their canonical resolution shifts with the prescribed termwise comparisons. In particular the right comparison is normalized by $j[r]$, not by choosing an unrelated shift on a right adjoint.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-pur-sequence-adjoint-resolution-shifts"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940 (section-derived-limits), projection from the sequence site; sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pullback] to $p$. On a flat-term K-flat representative $Q\\to P$ it computes $Lp^*P$ by $(Q\\otimes_A B_n)_n$. Thus its canonical resolution comparisons identify $Lp^*$ with the actual functor $\\mathcal R_W$ in [lem-coef-derived-system-evaluation-calculus], including the quotient transitions and induced maps of resolutions. Its integer-shift comparison is the stated termwise one: $Q[r]$ is an allowed shifted representative by [lem-weil-pbc-derived-adjunction-shift], and $(Q[r]\\otimes_A B_n)^i=Q^{i+r}\\otimes_A B_n$ has differential $(-1)^r(d_Q\\otimes1)$. Hence the identity on these terms is the comparison $(Q[r]\\otimes_A B_n)_n\\to(Q\\otimes_A B_n)_n[r]$. No tensoring by a non-flat quotient is asserted to preserve arbitrary quasi-isomorphisms; only the K-flat computation is used.",
+   "text": "Apply [lem-weil-pbc-derived-adjunction-shift] to this $p$. Its sites are small and its rings commutative by step 1. With $\\rho_{P,r}:\\mathcal R(P[r])\\to\\mathcal R(P)[r]$ and $\\lambda_{N,r}:\\mathcal L(N[r])\\to\\mathcal L(N)[r]$, transport its unit and counit equations through the adjunction identification of step 1. They are $\\lambda_{\\mathcal RP,r}\\,\\mathcal L(\\rho_{P,r})\\,u_{P[r]}=u_P[r]$ and $e_{N[r]}=e_N[r]\\,\\rho_{\\mathcal LN,r}\\,\\mathcal R(\\lambda_{N,r})$, as natural system transformations for every integer $r$. No completeness of $P$ or normalization of $N$ is required.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-derived-adjunction-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change); derived.tex Tag 0A8D (lemma-adjoint-is-exact), with the canonical-resolution shift normalization stated in lem-weil-pbc-derived-adjunction-shift."
-   }
-  },
-  {
-   "text": "Factor $p=g a$, where $a:(\\mathcal T,B)\\to(\\mathcal T,A^{\\mathrm{const}})$ is the identity-topos ring change and $g:(\\mathcal T,A^{\\mathrm{const}})\\to(\\mathcal V,A)$ is projection. Then $a_*=U$ is the exact restriction functor of [def-coef-ringed-sequence-site], and $g_*=\\lim$. By [lem-weil-pbc-exact-functor-derived-functor], $Ra_*=D(U)$; [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] therefore gives the canonical comparison $Rp_*\\cong R\\lim\\,D(U)=\\mathcal L_W$. It preserves the specified shift comparisons, as follows directly from that node's normalization. For K-injective $I$ on $(\\mathcal T,B)$ and a K-injective replacement $j:UI\\to J$, the comparison is represented by $\\lim j$. For shift $r$ use $I[r]$ and $j[r]:U(I[r])=(UI)[r]\\to J[r]$, which are permitted by [lem-weil-pbc-kinjective-shift]. The two maps are literally equal after $\\lim(J[r])=(\\lim J)[r]$, since their degree-$i$ component is $\\lim j^{i+r}$. This also identifies the shift on $\\mathcal L_W$ with that computed on a simultaneous K-injective $A$-tower, rather than a choice of triangles.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-kinjective-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6E (lemma-derived-pushforward-composition) and 0941 (lemma-derived-limit-is-ok); derived.tex Tag 070H (definition-K-injective)."
-   }
-  },
-  {
-   "text": "Under steps 2 and 3 the canonical adjunction $Lp^*\\dashv Rp_*$ is precisely $\\mathcal R_W\\dashv\\mathcal L_W$ of [lem-coef-derived-system-evaluation-calculus]: both use the derived adjunction of the same module adjunction in step 1 and its canonical resolution comparisons. In particular its unit has the actual reduction components and its counit is obtained by transposing the actual total-limit projections, with their simultaneous system compatibility. We use this canonical adjunction identification, not an inference from equality of evaluated derived arrows. Apply [lem-weil-pbc-derived-adjunction-shift] to the small ringed topoi of step 1. If $\\rho_{P,r}:\\mathcal R(P[r])\\to\\mathcal R(P)[r]$ and $\\lambda_{N,r}:\\mathcal L(N[r])\\to\\mathcal L(N)[r]$ are the comparisons just identified, the conclusion gives\n$$\\lambda_{\\mathcal RP,r}\\,\\mathcal L(\\rho_{P,r})\\,u_{P[r]}=u_P[r],\\qquad e_{N[r]}=e_N[r]\\,\\rho_{\\mathcal LN,r}\\,\\mathcal R(\\lambda_{N,r}).$$\nThese are equations of derived system transformations for every integer $r$, natural in $P,N$. They require neither normalization of $N$ nor derived completeness of $P$.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-sequence-adjoint-resolution-shifts",
     "lem-weil-pbc-derived-adjunction-shift"
    ],
    "elementary": false,
@@ -68,67 +40,27 @@
    }
   },
   {
-   "text": "For the cone-model comparison, take a K-injective resolution $U N\\to I_\\bullet$ in constant-$A$ towers with injective terms, as permitted on the small constant-ring sequence site by [prop-pur-kinjective-resolutions-exist]. It computes total limit by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Each transition of an injective tower object $J$ splits: let $T_n(F)$ be $F$ at indices $1,\\ldots,n$, with identity transitions there, and zero at larger indices. A map $T_n(F)\\to J$ is uniquely a map $F\\to J_n$. The inclusion $T_n(F)\\hookrightarrow T_{n+1}(F)$ is monic by [lem-weil-tower-category-levelwise-abelian]. With $F=J_n$, extend the map corresponding to $1_{J_n}$ across this inclusion using [def-sp-injective-resolutions]; its component at $n+1$ is a section of $J_{n+1}\\to J_n$. Apply this to $J=I^i$ for each degree $i$. Products of module sheaves exist: form them sectionwise, and glue matching families in each coordinate. Thus [lem-weil-roos-split-comparison] applies and gives the quasi-isomorphism $\\eta:\\lim I_n\\to\\operatorname{Cone}(h)[-1]$, $z\\mapsto(0,z)$, where $h=1-s$ on $\\Pi=\\prod_n I_n$. Its formula is natural in strict tower chain maps.",
+   "text": "Apply [lem-pur-injective-tower-roos-shifts] to constant-$\\widehat R_W$ towers after exact restriction of scalars. Its $\\eta_I$ compares the actual limit to the Roos cone, and $\\chi_{I,r}(y,x)=((-1)^r y,x)$ satisfies $\\chi_{I,r}\\eta_{I[r]}=\\eta_I[r]$. Step 1 fixes $\\lambda$ to this same total-limit shift, so the equations of step 2 use exactly the signed cone comparison, including the connecting-map sign. The child also gives naturality and addition of shifts. At $r=0$ the displayed formulas are identities; at $r=\\pm1$ only the first cone coordinate is negated. Zero objects, degree-zero coefficients and the empty scheme satisfy these formulas; indices remain $n\\ge1$.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-sp-injective-resolutions",
-    "lem-weil-roos-split-comparison"
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-injective-tower-roos-shifts"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), injective-tower computation; injectives.tex Tag 079P; elementary finite-prefix argument for split transitions; kernel-to-cone comparison supplied by lem-weil-roos-split-comparison."
-   }
-  },
-  {
-   "text": "Each $I_n$ is K-injective by [lem-weil-tower-evaluation-kinjective], so [lem-pc-ringed-space-product-kinjective] identifies $\\Pi$ with the derived product in the Roos triangle of [def-weil-derived-limit]. In the cone convention of [def-weil-abstract-derived-category], put $C(I)=\\operatorname{Cone}(h)[-1]$. Then $C(I)^i=\\Pi^{i-1}\\oplus\\Pi^i$ and $d(y,x)=(-dy-hx,dx)$. For every integer $r$ define\n$$\\chi_r:C(I[r])\\longrightarrow C(I)[r],\\qquad (y,x)\\longmapsto((-1)^r y,x).$$\nThis is a chain isomorphism: applying its target differential gives $(-dy-(-1)^r hx,(-1)^r dx)$, which is also $\\chi_r$ applied to the source differential $((-1)^{r+1}dy-hx,(-1)^r dx)$. Its inverse has the same formula, and $\\chi_r\\eta_{I[r]}=\\eta_I[r]$ because the first coordinate of $\\eta$ is zero. Hence the signed Roos shift comparison agrees with the total-limit shift used in steps 3 and 4. Both cone coordinates are transformed by the same product map on a tower chain map, so $\\chi_r$ is natural and the equation descends to the chosen derived model. The signs satisfy the shift-addition rule $(-1)^{r+s}=(-1)^r(-1)^s$, also for negative shifts. Thus the unit and counit equations of step 4 include the shifted-cone signs, without assuming exactness of products of arbitrary sheaves.",
-   "uses": [
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-derived-limit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), derived product and Roos triangle; derived.tex Tag 0BK6 (lemma-product-K-injective). Agent sign calculation in the stated cochain-cone convention."
-   }
-  },
-  {
-   "text": "The preceding arguments apply to all the objects in the statement. For $r=0$, all representative comparisons and $\\chi_0$ are identity. For $r=1$ and $r=-1$, $\\chi_r$ negates the cone's first coordinate, as required by the shift differential; two such shifts negate it twice. For the zero object every displayed morphism is the unique zero morphism. A degree-zero coefficient sheaf and a one-step shift give the termwise reduction map in its shifted degree, with no additional scalar sign; the extra sign is confined to the first cone coordinate. The empty scheme gives zero module categories. No $n=0$ quotient occurs. Naturality follows from the canonical derived comparisons and the explicit natural cone formulas, so these checks impose no additional hypotheses.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent edge-case checks of the preceding formulas."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 5–6 and the cone boundary checks in step 7. Agent signed refinement of Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
    }
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
-  "def-sp-injective-resolutions",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-limit",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-kinjective-shift",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-roos-split-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-tower-evaluation-kinjective",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-pur-sequence-adjoint-resolution-shifts",
+  "lem-weil-pbc-derived-adjunction-shift"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 03D7 (sites-modules.tex), 06YY, 07A6, 0D6E, 0941; derived.tex 0A8D. Agent specialization to the strict quotient-ring sequence site and explicit shifted-cone calculation."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence, specialized via the two extracted resolution/cone lemmas; Stacks derived.tex Tag 0A8D (lemma-adjoint-is-exact) through the existing generic canonical derived-adjunction shift theorem."
  },
  "mathlib_searches": [
   {
@@ -220,63 +152,15 @@
  "lean_audit": {},
  "merged_into": null,
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-pur-reduction-limit-shift-adjunction",
   "worker": "stage1",
-  "summary": "NY: reuse the generic canonical ringed-topos derived-adjunction shift theorem. Identify the reduction and total-limit adjoints and their chosen shifts on the actual sequence site; compute the Roos cone sign via the existing split-tower comparison. No new nodes. Correct the attribution of a functorial total-cone model to def-weil-derived-limit, which only defines the homotopy-limit triangle. No geometric or categorical hypotheses or conclusion changed.",
+  "summary": "Q120 repair of the human-requested re-split: keep the statement verbatim; create two comparable statement-only work items for the canonical resolution-normalized adjoint identification and the injective-tower signed Roos comparison. Retain the full returned argument in the report, assigned to the new nodes, and assemble their conclusions using the existing general derived-adjunction shift theorem.",
   "blueprint": "thm-pur-rational-and-qbar-purity, recorded Unit Step 2 transport through the reduction/total-limit adjunction, via lem-pur-adic-projection-shift-coherence and lem-pur-integral-realization-shift-coherence; coefficient-comparison/unit-and-counit sentence of fix-prop-coherence.proof.md.",
   "tool_uses": [
    {
-    "node": "lem-coef-derived-system-evaluation-calculus",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-pc-ringed-space-product-kinjective",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
     "node": "lem-weil-pbc-derived-adjunction-shift",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-functor",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-shift",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-roos-split-comparison",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-tower-category-levelwise-abelian",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "lem-weil-tower-evaluation-kinjective",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic ringed-site derived-functor, resolution, tower or cone tool for the canonical reduction/limit adjunction; the coefficient-compatibility unit supplies no replacement for this general foundational statement."
+    "why": "General ringed-topos canonical derived-adjunction shift theorem, applied only after identifying both actual resolution comparisons; it is the existing generic tool used by the returned split."
    }
   ]
  },
@@ -296,12 +180,12 @@
   "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NY-8180c2464",
-  "group": "NY",
+  "reviewer": "NT-cc-Q120-b99f83a79",
+  "group": "Q120",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-8180c2464 (reviewer sub-agent of L); spot-checked: FIX, one labeling repair: step 6 had elementary=true although it relies on lem-weil-tower-evaluation-kinjective and lem-pc-ringed-space-product-kinjective (C2). I set it to false; the corrected whole file is in fixes/dag/nodes/sec-smooth-purity/lem-pur-reduction-limit-shift-adjunction.json and nothing else changed. I read the item, all 7 steps and the statement of every cited node, plus calculus proof steps 1-4 to see what its canonical adjunction means. I also read Stacks 0940/0941 (sites-cohomology.tex 5016-5110), the tags for 03D7, 07A6, 0D6E, 0A8D, 06YY, 079P, 0BK6 and 070H, unit sk-thm-sf-compatibility clause (7), and the coefficient sentence of the main-20261015 fix-prop-coherence.proof.md. Statement: true and not weakened. The worker's correction (def-weil-derived-limit defines a property of an object plus a triangle, not a functorial model) is right and matches the citer integral-realization-shift-coherence step 1. Step 1 agrees with Stacks 0940, with p^*Q=(Q tensor_A B_n)_n. Step 2: flat-term K-flat representatives, and the shift differential sign checks out. Step 3: p=g a, Ra_*=D(U), composition normalization is lim j, and with j[r] both sides have lim j^{i+r} in degree i. Step 4: the calculus adjunction is the derived adjunction of p transported along the step 2-3 comparisons, not inferred from evaluations; the unit and counit equations have the correct CommShift shape. Step 5: the split-transition argument with T_n(F)=i_{n,!}F checked. Step 6: I recomputed the cone C(h)[-1] in the def-weil-abstract-derived-category convention and the chi_r chain-map identity (-dy-(-1)^r hx,(-1)^r dx); also chi_r eta_{I[r]}=eta_I[r]. No duplicates: lem-pc-pinned-derived-adjunction-shifts and lem-pur-open-adjunction-shift state different things. No new nodes and no SGA citation. I accept the 13 declared generic tool_uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-b99f83a79 (reviewer sub-agent of L); spot-checked: FIX: the re-split is accepted with one small citation repair. The human's note (2026-10-21) asked for at least 2 comparable statement-only nodes, an assembly of at most 3000 characters, and nothing shortened. The item's statement is verbatim and unchanged against side-live; only proof, proof_deps, proof_origin and split_report changed. The proof is 3 steps, 1725 characters in total. Old steps 1-3 plus the part of 4 that identifies the adjunctions became lem-pur-sequence-adjoint-resolution-shifts (2887-character statement). Old steps 5-6 became lem-pur-injective-tower-roos-shifts (2719 characters). The unit/counit equations of old step 4 are parent step 2, citing lem-weil-pbc-derived-adjunction-shift; I accept it as the declared tool use (generic, and already used by the base). Old step 7's edge-case checks are parent step 3. No argument was shortened, and neither child restates the item. Source checks: Stacks sites-cohomology.tex section-derived-limits and Tag 0941 (lemma-derived-limit-is-ok, lines 5016-5110), and the main-20261015 fix-prop-coherence coefficient sentence. I re-derived the roos node: injective tower objects have split transitions via T_n(F) (Hom(T_n F,J)=Hom(F,J_n), extend 1_{J_n} to get a section); 1-s is termwise split surjective (x_{n+1}=sigma_n(x_n-y_n)); in the def-weil-abstract-derived-category convention Cone(h)[-1] has differential (-dy-hx,dx); chi_r is a chain map and chi_r eta=eta[r]; the boundary is z->(z,0), which gives sigma_r[1]delta_{I[r]}=(-1)^r delta_I[r] pi_r. In step 2, lem-weil-pbc-derived-adjunction-shift's hypotheses (small sites, commutative rings, resolution shifts) are all supplied by the seq child; the shift by j[r] composed with lim j is the termwise lim j^{i+r}, which is lambda. Small cases checked: r=0, r=+-1, r+s, the zero object, degree 0, and a constant tower. Not duplicates of lem-weil-roos-split-comparison, lem-weil-derived-limit-roos-complex (which assumes exact products), lem-pc-injective-split-tower-injective or lem-pe-roos-cone-calculus (raw cones). No cycle (closure of 685 nodes), no SGA, nothing on the dropped list, and the item is not superseded (live still has the 7-step proof). Fix (B3): lem-pur-sequence-adjoint-resolution-shifts used K-flat and K-injective without definition nodes; I added [def-pc-kflat-complex] and [def-pur-kinjective-complex] inline and to stmt_deps (fixes/dag/nodes/sec-smooth-purity/). Advisory for maintainers: snapshot chapter symlinks for sec-six-functors and sec-proper-base-change are broken, so I read those nodes from clones/side-live. The 'any supplied calculus S' identification is carried over from the accepted Q18 statement correction and is now the seq child's proof obligation.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PurReductionLimitShiftAdjunction",

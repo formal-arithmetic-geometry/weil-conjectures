@@ -1,0 +1,81 @@
+{
+ "id": "lem-pur-injective-tower-roos-shifts",
+ "kind": "statement",
+ "title": "Injective-tower Roos comparison with normalized integer shifts",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe and $A$ a sheaf of commutative rings. Put $\\mathcal A=\\operatorname{Mod}(A)$ [def-weil-sheaf-of-modules-category], let $\\operatorname{Tow}(\\mathcal A)$ be strict inverse sequences indexed by $n\\ge1$ with levelwise exactness [lem-weil-tower-category-levelwise-abelian], and use the cochain/cone convention of [def-weil-abstract-derived-category]. For $N\\in D(\\operatorname{Tow}(\\mathcal A))$, choose a cochain complex $X_\\bullet$ representing $N$ and a quasi-isomorphism $X_\\bullet\\to I_\\bullet$ to a K-injective tower complex whose terms $I^i_\\bullet$ are injective tower objects [prop-pur-kinjective-resolutions-exist]. Total derived limit $L(N)=R\\lim N$ means the functor computed by $\\lim I_n$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], with its termwise integer-shift comparison.\n\nEvery transition $I_{n+1}^i\\to I_n^i$ is a split epimorphism. Each evaluated complex $I_n$ is K-injective, and the termwise product $\\Pi(I)=\\prod_n I_n$ represents $\\prod_n^D I_n$. Write $h_I=1-s_I$, with $\\operatorname{pr}_n s_I=t_n\\operatorname{pr}_{n+1}$ for the actual transition $t_n$. For $C(I)=\\operatorname{Cone}(h_I)[-1]$, in coordinates $C(I)^i=\\Pi(I)^{i-1}\\oplus\\Pi(I)^i$ the differential is $d(y,x)=(-dy-h_Ix,dx)$. The natural kernel inclusion\n$$\\eta_I:\\lim_n I_n\\longrightarrow C(I),\\qquad z\\longmapsto(0,(z_n)_n)$$\nis a quasi-isomorphism with the actual limit-cone components. Its localized rotated cone triangle identifies the Roos triangle of [def-weil-derived-limit] with first vertex the actual total limit $L(N)$, first arrow the actual product of limit projections, and middle arrow $1-s_I$ on the derived product.\n\nFor every $r\\in\\mathbf Z$, under the termwise product identifications there is a natural chain isomorphism\n$$\\chi_{I,r}:C(I[r])\\xrightarrow{\\sim}C(I)[r],\\qquad(y,x)\\longmapsto((-1)^r y,x),\\qquad \\chi_{I,r}\\eta_{I[r]}=\\eta_I[r].$$\nThe inverse has the same coordinate formula. These comparisons are coherent for addition of shifts and identify the cone shift with the total-limit shift on the chosen K-injective representatives, naturally after localization. If $p_I:L(N)\\to\\prod_n^D I_n$ and $\\delta_I:\\prod_n^D I_n\\to L(N)[1]$ are the transported Roos arrows, $\\sigma_r:L(N[r])\\to L(N)[r]$ is the termwise limit comparison and $\\pi_r:\\prod_n^D(I_n[r])\\to(\\prod_n^D I_n)[r]$ is the canonical product/shift comparison, then\n$$\\pi_rp_{I[r]}=p_I[r]\\sigma_r,\\qquad\\sigma_r[1]\\delta_{I[r]}=(-1)^r\\delta_I[r]\\pi_r,$$\nwhere the second formula uses the canonical identification of $[1][r]$ with $[r][1]$. Products of arbitrary module sheaves need not be exact. No boundedness or hypothesis on the transitions of the original $N$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 5–6 and the cone boundary checks in step 7. Agent signed refinement of Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-abstract-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A K-injective complex of towers of sheaves with injective terms has split transitions and its inverse limit inclusion into the shifted Roos cone is compatible with integer shifts with a sign on the first coordinate",
+   "results": "Hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, CochainComplex.isKInjective_shift_iff, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.IsKInjective.mk, CochainComplex.cm5b.I, CochainComplex.isKProjective_shift_iff. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone/shift or injectivity infrastructure does not establish the injective-tower limit normalization and signed Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping fiber Cone(1 minus transition)[-1] of a K-injective strict tower computes total derived inverse limit; the kernel inclusion (0,x) intertwines shift via (y,x) mapped to ((-1)^r y,x)",
+   "results": "Hits: CochainComplex.cm5b.i_f_comp_assoc, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.i, CochainComplex.cm5b.p, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.cm5b, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone/shift or injectivity infrastructure does not establish the injective-tower limit normalization and signed Roos comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|isKInjective_shift_iff|shiftFunctorObjXIso|mappingCone.*shift",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone/shift or injectivity infrastructure does not establish the injective-tower limit normalization and signed Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.Functor.CommShift",
+   "results": "Hits: . ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone/shift or injectivity infrastructure does not establish the injective-tower limit normalization and signed Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective inverse sequence of module sheaves each transition is split epic, and the natural map from the ordinary inverse limit to the mapping fiber of one minus shift computes derived inverse limit and its shift signs",
+   "results": "Hits: CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv, CochainComplex.cm5b, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, LightCondensed.epi_π_app_zero_of_epi. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone/shift or injectivity infrastructure does not establish the injective-tower limit normalization and signed Roos comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-reduction-limit-shift-adjunction",
+  "date": "2026-10-21",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 5–6 and the cone boundary checks in step 7. Agent signed refinement of Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok).",
+   "via": [
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
