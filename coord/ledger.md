@@ -21499,3 +21499,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q02/lemma-nagata-strict-transform-chart-closed (reviewer PASS; after a return; new nodes: 0)
 - 08:58 L: merged deliver/Q90/lem-pur-unit-adjunct-tensor-action (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q95/lem-sp-cofinal-finite-reduction-constructibility (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q117/lem-pur-finite-site-counit-projection-transport (reviewer PASS; first push; new nodes: 0); claim not held by Q117: not your claim

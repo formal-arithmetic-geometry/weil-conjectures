@@ -28,9 +28,124 @@
   "def-kun-projection-formula-map",
   "lem-pur-etale-open-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $Z=\\overline X$, $C_T=\\nu_T^*$ and $a_{f,K}=\\rho_K$. Since $Z$ is finite type over the field $k$, [lem-kun-dimension-finite-type] supplies a finite integer bound $\\dim Z\\le D$, with $D\\ge0$; for $Z=\\varnothing$ take $D=0$. Apply [lem-pur-bounded-site-adjunction-transpose] with this same compactification $(j,r)$ and its specified $B_f$. Its hypotheses are bounded-below $K,J$ and bounded-below $G_f^eK$, all satisfied on the stated bounded domain. Its displayed counit equation is exactly\n$$\\varepsilon^p_{f,C_YK}F_f^p(a_{f,K})B_{f,G_f^eK}=C_Y(\\varepsilon^e_{f,K}).$$\nIt also gives, for any compatible pair $z_pB_{f,J}=C_Y(z_e)$, the equality $\\operatorname{adj}_p(z_p)=a_{f,K}C_X(\\operatorname{adj}_e(z_e))$. Retain this equality for the tensor and exchange transposes below; the adjunction is used only on bounded-below etale-origin sources.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-pur-bounded-site-adjunction-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; bounded-origin specialization as stated in lem-pur-bounded-site-adjunction-transpose"
+   }
+  },
+  {
+   "text": "First compare the proper projections. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square of constant-$A$ ringed topoi with vertical arrows $r_e:Z_e\\to Y_e$, $r_p:Z_p\\to Y_p$ and horizontal arrows $\\nu_Z,\\nu_Y$. The ring maps are the constant-coefficient identifications and the square is the specified pullback square of [lem-weil-pbc-comparison-pullback]. This is a commuting square of morphisms of ringed topoi; it need not be Cartesian. Its exchange is the direct-image mate $b_{r,E}$, not an unspecified isomorphism, by [lem-weil-pbc-comparison-direct-image-canonical-mate]. Consequently, writing $h_{E,K}:C_Z(E\\otimes^Lr_e^*K)\\cong C_ZE\\otimes^Lr_p^*C_YK$ for tensor and pullback comparison, the cited tensor/exchange identity reads\n$$Rr_{p,*}(h_{E,K})\\,b_{r,E\\otimes^Lr_e^*K}\\,C_Y(\\pi^e_{r,E,K})=\\pi^p_{r,C_ZE,C_YK}(b_{r,E}\\otimes1).$$\nWe use this at $E=j_!^eM$. The ordinary counit-defined projections here are precisely those defining $P^e$ and $P^p$; the cited mate normalization rules out changing either projection by an automorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0E48 (remark-compatible-with-diagram); the ringed-square projection/exchange refinement is lem-weil-pbc-ringed-exchange-tensor-coherence"
+   }
+  },
+  {
+   "text": "Compare the open tensor maps by [lem-sf-comparison-open-tensor-coherence], applied to $j:X\\hookrightarrow Z$, $M$ and $N=r_e^*K$. Its equality identifies $C_Z(\\gamma^e_{M,N})$ followed by $e_j$ with $\\gamma^p_{C_XM,C_ZN}$ preceded by $e_j\\otimes1$, using exactly the specified tensor and pullback comparisons. It has no Tor or boundedness restriction. Now use $B_{f,M}=Rr_{p,*}(e_{j,M})b_{r,j_!^eM}$ from [lem-pur-compact-support-site-coherence]. Expand $P^e=Rr_{e,*}(\\gamma^e)\\pi_r^e$ and $P^p=Rr_{p,*}(\\gamma^p)\\pi_r^p$ as in [def-exchange-projection]. Naturality of $b_r$ moves $Rr_{e,*}(\\gamma^e)$ across $b_r$; the open equality replaces $e_j C_Z(\\gamma^e)$, and Step 2 replaces $b_r C_Y(\\pi_r^e)$. The resulting composite is $Rr_{p,*}(\\gamma^p)\\pi_r^p(B_{f,M}\\otimes1)$. Thus\n$$B_{f,M\\otimes^Lf^*K}\\,C_Y(P^e_{f,M,K})=P^p_{f,C_XM,C_YK}(B_{f,M}\\otimes1).$$\nThe pullback-composition identifications $j^*r^*=f^*$ agree with the tensor identifications by the monoidal composition clause of [lem-sfb-ringed-derived-monoidal-comparisons].",
+   "uses": [
+    "lem-sf-comparison-open-tensor-coherence",
+    "lem-pur-compact-support-site-coherence",
+    "def-exchange-projection",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0GL1 (lemma-j-shriek-and-tensor), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); assemble the proper and open equalities"
+   }
+  },
+  {
+   "text": "On $M\\in D^b_c$ and $K\\in D^b_{ctf}$, [lem-weil-finite-compact-projection-formula] makes both of the named projections in Step 3 invertible. Multiplying that equality on the appropriate sides by their inverses identifies their inverse maps as well. For $M=G_f^eA_Y$ in the stated bounded constructible domain, form the defining composite for $\\theta^e$: symmetry, inverse projection, counit at $A_Y$ tensored with $1_K$, then the left unitor. Step 1 identifies the counit, and Step 3 identifies the inverse projection. The symmetry, coefficient-unit and unitor agree under comparison by [lem-sfb-ringed-derived-monoidal-comparisons], including the monoidal pullback comparison. Therefore the resulting map $z_p:F_f^pC_X(f_e^*K\\otimes^LG_f^eA_Y)\\to C_YK$ satisfies $z_pB_f=C_Y(z_e)$, after $a_{f,A_Y}$ on the dualizing factor. Apply the transpose identity in Step 1: $a_{f,K}C_X(\\theta^e_{f,K})$ is exactly $\\theta^p_{f,C_YK}$ with that factor identified. This proves agreement with the specified counit-transpose map of [def-pur-co-smoothness], on precisely the domains where its inverse projection is defined.",
+   "uses": [
+    "lem-weil-finite-compact-projection-formula",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Steps 1 and 3: the canonical tensor map is defined by the adjunction counit; the explicit tensor-transpose calculation is agent-written"
+   }
+  },
+  {
+   "text": "For a compact-support composition map $\\alpha:F_gF_f\\to F_{gf}$, its right-adjoint conjugate is determined by composing $\\alpha$ with the counit, by [def-weil-pbc-adjunction-conjugate]. The composition equality for $B$ in [lem-pur-compact-support-site-coherence] identifies this left-hand map on the two sites. Step 1 identifies each counit, so [lem-weil-pbc-mate-pasting] (2),(3) identifies its conjugate under $a_{gf}$ and $a_fa_g$, with the composite-adjunction comparisons inserted. The identical argument with $\\alpha$ replaced by a refinement comparison identifies the refinement conjugates. More explicitly the two candidate right-hand arrows have the same adjoint: apply the corresponding compact-support map and then the same identified counit. The injectivity of the adjunction bijection makes them equal. Pasting with a second composition or refinement gives the same equality by the pasting formulas (1),(2); the identity clause (4) gives the identity case. Thus the comparisons preserve the actual chosen composition/refinement arrows, including all their pasted instances.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-pur-compact-support-site-coherence",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; proper/open composition normalization: more-etale.tex Tags 0F7C and 0F7D; mate-pasting formulas are stated in lem-weil-pbc-mate-pasting"
+   }
+  },
+  {
+   "text": "For an arbitrary Cartesian base change, [lem-pur-co-smooth-exchange-transport] identifies the actual compactification exchanges: in its notation $T_LC_{Y'}(\\operatorname{Ex}^e)=\\operatorname{Ex}^pS_L$. It assumes only bounded-below etale input and the supplied compactification, and puts no separatedness condition on the base-change morphism. [thm-cbc-finite-torsion] gives invertibility, identities and horizontal/vertical pasting for the etale exchanges; hence the displayed comparison also identifies the inverses on etale-origin inputs. For example, the map transposed to the dualizing base-change arrow is $v^*\\varepsilon^e_{f,A}\\circ(\\operatorname{Ex}^e)^{-1}$ followed by the coefficient-unit identification, as in [def-pur-co-smoothness]. Replacing the inverse exchange by this equality and the counit by Step 1 gives the specified pro-etale defining composite. Step 1 identifies its transpose. More generally the same conclusion holds for the counit transposes of exchanges themselves by [lem-weil-pbc-mate-pasting] (1)--(3), without requiring their inverses. Applying those pasting formulas to a pasted exchange proves compatibility with further Cartesian base change. For open restrictions, the restriction equality and pasting of [lem-pur-compact-support-site-coherence] apply to these same factors, so the construction also commutes with every further compatible open restriction. Projection compatibility in these squares is the proper tensor/exchange identity of Step 2 and the open tensor identity of Step 3.",
+   "uses": [
+    "lem-pur-co-smooth-exchange-transport",
+    "thm-cbc-finite-torsion",
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-compact-support-site-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change); the specified site-exchange comparison is lem-pur-co-smooth-exchange-transport; categories.tex Tag 0B65 for its transposes"
+   }
+  },
+  {
+   "text": "Finally [lem-sf-proetale-constructible-origin] (ii) gives an etale origin for each bounded constructible pro-etale input. If $(J,\\lambda:C_TJ\\cong N)$ and $(J',\\lambda':C_TJ'\\cong N)$ are two choices, full faithfulness in [thm-weil-pbc-site-comparison] gives a unique arrow $u:J\\to J'$ with $C_Tu=(\\lambda')^{-1}\\lambda$. The same assertion for the inverse shows $u$ is an isomorphism. All the comparisons used above are natural in their inputs, so their naturality square at $u$ says exactly that conjugating the maps by $\\lambda$ or by $\\lambda'$ gives the same map on $N$. For several inputs apply this argument in each variable. Faithfulness reflects each equality of maps between etale origins; existence of origins transfers the verified equalities to bounded constructible pro-etale inputs. This proves independence of origins and finishes the coherence assertions without invoking an exceptional adjunction on the whole ambient unbounded pro-etale category.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AK (lemma-compare-constructible); bounded-derived consequence as stated in lem-sf-proetale-constructible-origin, together with bounded-below full faithfulness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-bounded-site-adjunction-transpose",
+  "lem-pur-co-smooth-exchange-transport",
+  "lem-pur-compact-support-site-coherence",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "thm-cbc-finite-torsion",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Finite etale-origin refinement of Steps 1 and 3, with the explicit compactification factorization and mate-pasting argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +181,66 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
    "verdict": "no match: hits concern generic categorical adjunctions, ordinary module sheaves, or unrelated condensed/tensor constructions; none states this specified geometric map equality or gives a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(projection|counit)|compactSupport.*comparison",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful monoidal site comparison intertwines the counit defined projection formula and exceptional adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app\", \"CategoryTheory.Adjunction.mapMon_counit\", \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit_app\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app\", \"CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit\", \"CategoryTheory.Functor.FullyFaithful.isMonHom_preimage\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, MonoidalCategory",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalCategory'\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "unavailable: loogle: unknown identifier 'MonoidalCategory'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale site comparison preserves compact support exceptional counits projection formula and their adjoint transposes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"Condensed.profiniteSolidCounit\", \"CompHausLike.LocallyConstant.adjunction_counit\", \"Condensed.profiniteSolidification\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"LightCondSet.topCatAdjunctionUnit_val_app_apply\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(mate|counit)|mate.*projection",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []} (subdirectory CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula compatibility with monoidal adjunction mates under a commutative square of inverse image functors",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_square\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.coev_naturality\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mateEquiv_square|theorem mateEquiv_counit|def rightAdjointLaxMonoidal|class IsMonoidal|map_μ_comp_counit_app_tensor",
+   "results": "{\"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\"]} (subdirectory CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate or monoidal-adjunction lemmas do not construct the named geometric site/compact-support comparisons or establish all clauses by a one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-etale-dualizing-normalization",
@@ -89,5 +260,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-site-counit-projection-transport",
+  "worker": "stage1",
+  "summary": "Compared the specified bounded-origin Hom bijections, factored the projection compatibility through a proper ringed-topos square and the existing open tensor comparison, and proved the transpose, composition, refinement, Cartesian exchange and origin-independence clauses. No new nodes and no statement change.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, final paragraph (remaining smooth-base-change and co-projection factors) and Step 2 (tensor formula as a projection mate); finite site normalization requested by lem-pur-co-smooth-etale-locality proof Steps 1 and 3.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-pur-co-smooth-exchange-transport",
+    "why": "Generic Transport of compact-support exchange used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-sf-comparison-open-tensor-coherence",
+    "why": "Generic Etale/pro-etale comparison respects the canonical open tensor map used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic Finite-coefficient compact-support projection formula used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic Projection-formula coherence for a square of ringed topoi used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic Compact-support base change at finite coefficients used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison used in the corresponding proof step with its stated hypotheses; the unit provides no separate theorem for this site/tensor/adjunction ingredient. It preserves the prescribed finite site transport route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-pur-co-smooth-exchange-transport",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "thm-cbc-finite-torsion",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-c84e5bddc",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-c84e5bddc (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited statements and sources and found no fault; I made no fixes. It is a split with no new nodes: the item's 7 steps assemble existing nodes. The statement and stmt_deps match the live side copy. There is no repair note, the item is not on the drop list, nothing cites back to the item, and no SGA source is used. Step 1: lem-pur-bounded-site-adjunction-transpose is applied with the same B and compactification, and lem-kun-dimension-finite-type gives the bound D (empty case handled). Its D+ hypotheses hold because f^x preserves D+ (def-weil-exceptional-inverse-image). Step 2: the coherence lemma's Ex is the mate of theta = a_r^-1, which is exactly the transpose b_r of the canonical-mate node, so actual maps are identified. Its pi is the def-kun-projection-formula-map and def-exchange-projection projection. Step 3: I checked the composite chain: naturality of b, the open coherence equality, Step 2, then naturality of pi^p. Step 4: the finite projection formula is used on D^b_c x D^b_ctf, and theta^p as in def-pur-co-smoothness (2) is identified factor by factor. Step 5: conjugates are identified by equal transposes (Stacks 0B65) and mate-pasting clauses 1-4. Step 6: co-smooth-exchange-transport plus thm-cbc-finite-torsion give the exchanges for arbitrary base change and open restriction. Step 7: constructible-origin (ii) and full faithfulness on D+ give independence of the origin. Sources checked: Stacks 0B65, 07A4, 0GL1, 0F7C/0F7D/0F7F, 09AK, and the blueprint proof of co-smooth-etale-locality. Batch-5 flag on lem-weil-finite-compact-projection-formula: accepted. It is the general finite projection formula, not a step of the trace-formula or Poincare-duality proofs. Recomputed without the item's new deps, the batch-5 closure already contains it (via fix-prop-projection-formula, lem-coef-dual-formula-scalar-transpose, thm-sf-ctf-stability, sk-thm-rationality), and the flagged path ends in the generic lem-pod-lisse-module node. I accept the 12 tool_uses."
  }
 }
