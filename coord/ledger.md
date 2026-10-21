@@ -19929,3 +19929,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/N9/lem-weil-pbc-realization-completed-pull (reviewer FIX; first push; new nodes: 0); claim not held by N9: not your claim
 - 03:43 L: merged deliver/Q65/lem-sp-varying-ring-proper-open-pasting (reviewer FIX+NODE(1); after a return; new nodes: 8)
 - 03:43 L: merged deliver/Q120/lem-sp-etale-sum-coefficient-computation (reviewer PASS; first push; new nodes: 0)
+- 03:43 L: merged deliver/NS/lem-pd-section-derived-pushpull-normalization (reviewer FIX; first push; new nodes: 0); claim not held by NS: not your claim

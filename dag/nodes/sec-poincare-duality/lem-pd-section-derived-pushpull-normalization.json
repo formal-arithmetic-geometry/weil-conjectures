@@ -20,9 +20,147 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C(E_T)$ for degreewise application and $Q_T$ for localization; subscripts int and sec distinguish the two module categories. The fixed $E_T$ is an additive exact equivalence by [lem-sfb-internal-module-operations-transport]. Its inverse is additive and exact too. Apply [lem-weil-pbc-exact-functor-derived-factorization] to both functors. This gives $D(E_T)$ and the factorization $D(E_T)Q_{T,\\mathrm{int}}\\cong Q_{T,\\mathrm{sec}}C(E_T)$. The ordinary equivalence unit and counit applied degreewise are chain isomorphisms (naturality makes them commute with the differentials). By [lem-weil-pbc-localization-universal-property] they descend to unit and counit isomorphisms for the two derived functors; the triangle identities descend because they hold degreewise. Thus $D(E_T)$ is an equivalence induced by the specified $E_T$.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; descent through localization"
+   }
+  },
+  {
+   "text": "An additive equivalence is right adjoint to its inverse, and the inverse is exact by Step 1. Therefore [lem-weil-pbc-right-adjoint-preserves-kinjective] applied to $E_T$ and then to its inverse proves preservation and reflection of K-injectivity. Exactness preserves quasi-isomorphisms, so a K-injective resolution $a:M\\to I$ becomes $C(E_T)a:C(E_T)M\\to C(E_T)I$, again a K-injective resolution [def-pur-kinjective-complex]. Conversely apply the inverse and the equivalence unit. The smallness and commutativity hypotheses give unbounded K-injective resolutions in the section category by [prop-pur-kinjective-resolutions-exist], hence also internally by this inverse construction. Comparison maps and homotopies of resolutions are sent degreewise to comparison maps and homotopies: the equation $u-v=dh+hd$ is preserved by additivity. A quasi-isomorphism between any two such K-injective targets is a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived], so these identifications also give the canonical resolution identifications in the derived categories.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-pur-kinjective-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; Tag 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "For each $f$ put $P_f=f^*_{\\mathrm{int}}$, $S_f=f^*_{\\mathrm{sec}}$, $U_f=f_{*,\\mathrm{int}}$, $V_f=f_{*,\\mathrm{sec}}$. The ordinary comparison theorem [lem-sfb-internal-module-operations-transport] gives $c_f:E_XP_f\\cong S_fE_Y$ and $r_f:E_YU_f\\cong V_fE_X$, identifying their specified adjunctions. These are the comparisons retained in [def-pd-section-module-operations-data]: $r_f$ is the identity on underlying sections, and $c_f$ is its normalized adjunction comparison. The internal pullback is exact for every scheme morphism by [det-prop-sfb-module-pullback-exact-main], and hence the section pullback is exact by the exactness-transport clause of the ordinary comparison theorem. Thus [lem-weil-pbc-exact-functor-derived-factorization] gives the degreewise descents with $\\varphi:F_DQ\\cong QC(F)$, and by [lem-weil-pbc-exact-functor-derived-functor] each $(F_D,\\varphi)$ is a left derived functor (right Kan extension along $Q$). By the universal property both specified total left derived pullbacks are therefore canonically isomorphic to these descents, compatibly with their comparisons $\\epsilon$, and $\\epsilon_M$ is invertible for every complex $M$. In particular every complex computes these left derived functors, including the K-flat resolutions used by the independently specified constructions. Each of $U_f,V_f$ preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], since its left adjoint is exact.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "def-pd-section-module-operations-data",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, and Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "Apply [lem-derived-exact-equivalence-squares] with $B=\\operatorname{Mod}_{R_Y}(\\operatorname{Sh}(Y_{\\mathrm{proet}},\\mathrm{Ab}))$, $H=\\operatorname{Mod}_{R_X}(\\operatorname{Sh}(X_{\\mathrm{proet}},\\mathrm{Ab}))$, $B'=\\operatorname{Mod}(R_Y)$, $H'=\\operatorname{Mod}(R_X)$, $E=E_Y$, $G=E_X$, and the four ordinary functors and comparisons of Step 3. The supplied universal derived pairs are precisely the total derived pairs in the statement, so the lemma supplies natural isomorphisms $\\lambda_f:D(E_X)LP_f\\cong LS_fD(E_Y)$ and $\\rho_f:D(E_Y)RU_f\\cong RV_fD(E_X)$ with both comparison-transformation equations. For example, if $\\beta_{\\mathrm{int}}:Q_YU_f\\to RU_fQ_X$ and $\\beta_{\\mathrm{sec}}:Q_YV_f\\to RV_fQ_X$, the right equation, suppressing localization factorization isomorphisms, is $\\rho_{f,QI}\\,D(E_Y)(\\beta_{\\mathrm{int},I})=\\beta_{\\mathrm{sec},C(E_X)I}\\,Q_Y(r_{f,I})$. On K-injective $I$ the two beta maps are isomorphisms by [lem-weil-pbc-kinjective-total-derived]; hence $\\rho_f$ there is exactly the class of $r_{f,I}$ under the resolution identifications. The left equation similarly says that $\\lambda_f$ is the class of $c_f$ on complexes under Step 3's exact-pullback identifications. These are comparisons with the independently supplied functors, not definitions of either functor by transport.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; universal comparison for left and right derived pairs"
+   }
+  },
+  {
+   "text": "For either ordinary adjunction $P_f\\dashv U_f$ or $S_f\\dashv V_f$, the termwise Hom bijection descends to homotopy categories by [lem-weil-pbc-termwise-adjunction-homotopy]. The adjunction of [lem-sfb-resolving-derived-adjunction-normalization] has the representative formula below: use the class of all complexes as the left resolving class, since the pullbacks are exact by Step 3 and therefore invert all quasi-isomorphisms. This class contains every object (its resolving representative can be the identity); the target has K-injective resolutions by Step 2. In notation $P\\dashv U$ on either side, for every chain map $t:P(M)\\to I$, the derived transpose of $Q(t)\\circ\\epsilon_M$ is $\\beta_I\\circ Q(t^\\flat)$, where $\\epsilon:LP\\,Q\\to QP$ is the left derived comparison and $t^\\flat$ is the ordinary termwise transpose. For arbitrary $M$ and K-injective $I$, this formula accounts for every derived morphism: $\\epsilon_M$ is invertible by exactness, and [lem-weil-pbc-kinjective-hom-derived] identifies maps into $QI$ with homotopy classes of chain maps. On the other side $UI$ is K-injective by Step 3, so the same statement applies to the transposed Hom set. Thus the formula compares the full derived adjunction, not merely its values on degree-zero objects. It remains to see that this is the specified adjunction. Both specified derived adjunctions are the ones derived from the ordinary adjunction, whose counit satisfies $\\varepsilon'_{QI}\\circ LP(\\beta_I)=Q(\\varepsilon_I)\\circ\\epsilon_{UI}$ for every complex $I$ by [lem-sc-derived-adjunction-from-underived]. The formula above with $t=\\varepsilon_I$, $t^\\flat=1_{UI}$ says the normalized counit satisfies the same equation. For K-injective $I$, $\\beta_I$ is invertible, so the two counits agree at $QI$; every object is isomorphic to such a $QI$, so by naturality they agree everywhere, and an adjunction between fixed functors is determined by its counit.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, and Tag 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "The ordinary adjunction comparison [lem-sfb-internal-module-operations-transport] says for every chain map $t:P_fM\\to I$ that the section transpose of $C(E_X)(t)\\circ c_{f,M}^{-1}:S_fC(E_Y)M\\to C(E_X)I$ equals $r_{f,I}\\circ C(E_Y)(t^\\flat)$. It holds degreewise and hence on homotopy classes by [lem-weil-pbc-termwise-adjunction-homotopy]. Apply localization and insert the left and right comparison equations of Step 4. The formula in Step 5 then gives precisely the same equality for the two derived Hom bijections under $\\lambda_f,\\rho_f$. Every target is represented by a K-injective complex by Step 2, so naturality proves this equality for all derived objects. Units are transposes of identities and counits are inverse transposes of identities; consequently the specified units and counits agree. Explicitly, for $A\\in D_{\\mathrm{int}}(Y)$ and $N\\in D_{\\mathrm{int}}(X)$ the equalities are\n$$\\eta_{\\mathrm{sec},D(E_Y)A}=RV_f(\\lambda_{f,A})\\circ\\rho_{f,LP_fA}\\circ D(E_Y)(\\eta_{\\mathrm{int},A}),$$\n$$\\varepsilon_{\\mathrm{sec},D(E_X)N}=D(E_X)(\\varepsilon_{\\mathrm{int},N})\\circ\\lambda_{f,RU_fN}^{-1}\\circ LS_f(\\rho_{f,N}^{-1}).$$\nThis establishes equality of the independently derived adjunction structures under the specified comparisons.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; sites-cohomology.tex Tag 0FPI, lemma-adjoints-push-pull-compatibility"
+   }
+  },
+  {
+   "text": "Let $h=g\\circ f$. Write $d_{g,f}:U_gU_f\\cong U_h$ and $e_{g,f}:V_gV_f\\cong V_h$ for the ordinary geometric direct-image compositors retained in [def-pd-section-module-operations-data] and [def-sfb-module-lower-star-comp]. Their comparison square is\n$$r_h\\circ E_Z(d_{g,f})=(e_{g,f}E_X)\\circ(V_g r_f)\\circ(r_g U_f).$$\nIndeed $r_f,r_g,r_h$ are identities on sections. At a site object over $Z$, both sides take a section over the iterated fibre product to its section over the canonically isomorphic fibre product with $X$; the isomorphism is the geometric fibre-product associator in $d,e$. Restrictions and scalar actions agree because all the maps are the retained coefficient maps. The ordinary pullback compositors are the adjunction conjugates of $d^{-1},e^{-1}$ by [def-sfb-module-upper-star-comp] and the retained section convention. Apply [lem-weil-pbc-mate-pasting], with the adjunction comparisons of Step 3, to the displayed right square. The bijection of mates [def-weil-pbc-adjunction-mate] gives the left square: $c_h$ followed by the section pullback compositor equals the internal pullback compositor followed by $c_g$ and $c_f$ with the appropriate whiskerings. Thus the specified ordinary pullback compositors commute with the section comparisons.",
+   "uses": [
+    "def-pd-section-module-operations-data",
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-module-upper-star-comp",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Geometric compositors and their adjunction mates; compare sites-cohomology.tex lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "All ordinary pullbacks in Step 7 are exact by Step 3. By [prop-sfb-module-left-derived-upper-star-comp], the internal derived pullback compositor is induced by precisely that ordinary pullback compositor. By Step 3 ([lem-weil-pbc-exact-functor-derived-factorization], [lem-weil-pbc-exact-functor-derived-functor]), degreewise application computes the section derived pullbacks too; thus their canonical derived composition comparison is the localization of the ordinary one. Apply degreewise application and then localization to Step 7's left square. The left comparison equations from Step 4 identify its sides with $\\lambda_h$ and the pasted $\\lambda_f,\\lambda_g$, giving the required derived composition square. Equality on all complexes implies equality of the natural transformations by [lem-weil-pbc-localization-universal-property]. Finally, [lem-weil-pbc-mate-pasting] and the unit/counit equations of Step 6 show that taking the adjunction mates of this square gives the same right square under $\\rho$. Explicitly a mate is $\\eta$ followed by the whiskered given map and then the whiskered $\\varepsilon$ [def-weil-pbc-adjunction-mate]; substituting Step 6's identities cancels the comparison isomorphisms in adjacent factors. Hence the comparisons identify the derived composition isomorphisms with their specified adjunction mates as well.",
+   "uses": [
+    "prop-sfb-module-left-derived-upper-star-comp",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "sites-cohomology.tex lemma-derived-pullback-composition; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pd-section-module-operations-data",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-derived-exact-equivalence-squares",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-module-upper-star-comp",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-mate",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Assembly of Tags 015F (lemma-right-derived-exact-functor), 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies) and 09T5 (lemma-derived-adjoint-functors), with sites-cohomology.tex Tags 07A6 and 0FPI; the internal/section comparison argument and compositor verification are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +189,31 @@
    "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"note\": \"\", \"digest\": \"d1cb52c9d88510cf\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give general adjunction/localization or ordinary module facts, not this comparison of the specified internal and section-module constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence of abelian categories comparison of total derived functors adjunction units counits and composition",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedη\"], \"note\": \"\", \"digest\": \"ea7ed9c9a5d841ae\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction and module-sheaf adjunction APIs do not identify the specified internal/section equivalence and its normalized derived compositors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived, CategoryTheory.Equivalence",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction and module-sheaf adjunction APIs do not identify the specified internal/section equivalence and its normalized derived compositors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules in abelian sheaves section module equivalence derived pullback pushforward adjunction normalization",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"note\": \"\", \"digest\": \"3331319e4ee73a6b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction and module-sheaf adjunction APIs do not identify the specified internal/section equivalence and its normalized derived compositors"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pd-module-ringed-topos-derived-comparison",
@@ -72,5 +231,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pd-section-derived-pushpull-normalization",
+  "worker": "stage1",
+  "summary": "Eight-step split using only existing nodes. Checks exactness and descent of E, K-injective resolutions, universal derived squares, the representative Hom transpose and the specified units/counits, then geometric composition and its derived mates. Statement unchanged; no new nodes. Mathlib searches and candidate sources read; no whole-item attachment.",
+  "blueprint": "No imported ancestor exists (blueprint_refs.py ancestor prints None). This realizes the seeded target nt-target-poincare-isiso Step 2, via lem-pd-module-ringed-topos-derived-comparison: the internal/section push-pull comparison and normalization, using the inherited explicit blueprint.from.place. The Verdier-exchange unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Supplies the ordinary internal/section module comparison and exact equivalence; this foundational categorical tool supplies no geometric Verdier-duality step."
+   },
+   {
+    "node": "lem-derived-exact-equivalence-squares",
+    "why": "General universal derived-functor comparison across additive equivalences, including its comparison equations; no node of this unit states that general tool."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Exactness of the existing condensed-coefficient module pullback, needed to compute its total left derived functor degreewise."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "General representative Hom formula for the independently derived adjunction, needed to compare its specified units and counits."
+   },
+   {
+    "node": "prop-sfb-module-left-derived-upper-star-comp",
+    "why": "Identifies the actual internal derived compositor with localization of the ordinary one; this is an existing operation law, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General localization, K-injective, or mate-calculus tool for the comparison of the already specified operations; no geometric step of the Verdier-exchange unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "General fact that the degreewise descent of an exact functor is its left derived functor; needed (reviewer FIX) to identify the specified derived pullbacks with their degreewise descents. No geometric step of the Verdier-exchange unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-derived-exact-equivalence-squares",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-a5ca4935b",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a5ca4935b (reviewer sub-agent of L); spot-checked: Read in full: the item, its 8 steps and the statements of all cited nodes. The statement is unchanged from the base, there are no new nodes, no SGA source, and no cycle (transitive closure of 629 nodes). Small cases checked: Λ=0, f=id, empty X, composable identities. Step 4: I checked the orientation of the lem-derived-exact-equivalence-squares instantiation (c_f = GL≅L'E, r_f = ER≅R'G); the β maps are isomorphisms on K-injectives by Step 2. Steps 6–7: transpose and compositor squares type-checked; the underlying pushforward composition isomorphisms agree and the r's are identities on sections. Two faults, both repaired. (1) C4, Steps 3 and 8: lem-weil-pbc-exact-functor-derived-factorization only constructs F_D with φ; it does not identify F_D with the specified universal Lf^*. I cited lem-weil-pbc-exact-functor-derived-functor (F_D is a right Kan extension), so ε is invertible on every complex. (2) C3/C4, Step 5: lem-sfb-resolving-derived-adjunction-normalization only gives existence of some adjunction with the Hom formula, but the step claimed the canonical one has it. I cited lem-sc-derived-adjunction-from-underived (counit factorization). With t=ε_I the normalized counit satisfies the same equation; β_I is an isomorphism on K-injective I, so the counits agree everywhere and the two adjunctions coincide. proof_deps and tool_uses updated. Maintainer note: a parallel Q111 delivery of the same item exists on the same base.; 1 file(s) fixed by the reviewer"
  }
 }
