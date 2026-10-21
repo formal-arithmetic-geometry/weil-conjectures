@@ -1,0 +1,117 @@
+{
+ "id": "lem-zl-point-finite-dimensional-complex-cohomology",
+ "kind": "lemma",
+ "title": "Finite-dimensional cohomology of a finite supported complex",
+ "statement": "Let $E$ be a field and $K$ a cochain complex of $E$-vector spaces. Suppose $S\\subset\\mathbf Z$ is finite, $K^i=0$ for $i\\notin S$, and every $K^i$ is finite-dimensional. Then the image $Q(K)$ in the derived category [def-weil-abstract-derived-category] has cohomology supported in $S$, and every cohomology vector space is finite-dimensional; thus it belongs to $D^b_{\\mathrm{fd}}(E)$ as defined in [def-weil-point-fd-complexes].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-point-fd-complexes"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+  "place": "Coefficient-point comparison, finite models in steps 3 and 5 of lem-zl-condensed-point-supertrace"
+ },
+ "proof": [
+  {
+   "text": "Outside S the middle term of the short complex computing H^i(K) is zero, so its homology is zero. Transport this fact along the localization homology comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existing CategoryTheory.ShortComplex.finiteDimensional_homology instance realizes homology as the quotient of the kernel of the outgoing differential by the incoming image. Subspaces and quotients retain finite dimension. Transfer the instance along the same localization comparison.",
+   "uses": [
+    "def-weil-point-fd-complexes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-point-fd-complexes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+  "place": "N4: elementary kernel/quotient calculation for the bounded finite-dimensional models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex of finite dimensional vector spaces supported in finitely many degrees has finite dimensional cohomology supported in finitely many degrees",
+   "results": "8 hits, including CochainComplex.isZero_of_isLE and isZero_of_isGE; no exact combined pointFiniteDimensional result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.homology, FiniteDimensional",
+   "results": "0 hits. The source library grep finds ShortComplex.finiteDimensional_homology, which is used for the dimension clause.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteDimensional.*homology|homology.*finiteDimensional|pointFiniteDimensional_Q_of_finite_terms",
+   "results": "msearch grep returned 0 hits; repository rg found the upstream finiteDimensional_homology instance and no exact derived finite-support result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex of finite dimensional vector spaces supported in finitely many degrees has finite dimensional cohomology supported in finitely many degrees",
+   "results": "8 hits: CochainComplex.exists_iso_single, isZero_of_isStrictlyGE, isStrictlyGE_of_iso and finiteDimensional_finsupp; none is the combined derived finite-support/finite-dimension assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedPointSupertrace",
+  "date": "2026-10-21",
+  "group": "N4"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-rationality",
+   "place": "First sentence, finite determinant factors; coefficient-point comparison steps 3 and 5, finite based complex domain membership",
+   "via": [
+    "lem-zl-condensed-point-supertrace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDimensionalComplexCohomology",
+  "file": "lean/Sheaf/Paper/FiniteDimensionalComplexCohomology.lean",
+  "declaration": "DerivedCategory.pointFiniteDimensional_Q_of_finite_terms",
+  "statement": "theorem pointFiniteDimensional_Q_of_finite_terms\n    (E : Type u) [Field E] (K : CochainComplex (ModuleCat.{u} E) ℤ)\n    (s : Finset ℤ) (hs : ∀ i : ℤ, i ∉ s → IsZero (K.X i))\n    (hfinite : ∀ i : ℤ, FiniteDimensional E (K.X i)) :\n    pointFiniteDimensional E (Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-34cb1",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261021T013349-L-2291023",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-34cb1",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261021T013349-L-2291023",
+  "kind": "interface",
+  "note": "independent cc review: delivered CondensedPointSupertrace + FiniteDimensionalComplexCohomology + 10 nodes vs clones/live base and the STATEMENT-DISPUTED counterexamples; compiled delivery, axioms, import variants, and fixed files"
+ }
+}
