@@ -30,7 +30,7 @@ data = sys.stdin.buffer.read()
 # 2026-10-21 (the human): at most SHEAF_COMPILE_SLOTS (40) calls compile at once; the others wait for a slot (a call
 # never fails for this, it only answers later; after 9 min of waiting it answers 75 and the caller retries). 80
 # concurrent single-file compiles had saturated the 80 cores and starved the global build, the landings and the reviews.
-_SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "36")); _slot_fh = None
+_SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "40")); _slot_fh = None
 _sd = REPO / "local" / "compile-slots"; _sd.mkdir(parents=True, exist_ok=True)
 _t0 = time.time()
 while _slot_fh is None:
