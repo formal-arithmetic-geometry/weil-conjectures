@@ -10,11 +10,128 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=R^{\\oplus r}$. By the sectionwise definition of a module sheaf, the finite product $R^r$ is a sheaf (glue its finitely many coordinates); its coordinate inclusions and projections satisfy $\\sum_j u_ju_j^*=1_P$, so it is also the finite coproduct. On $C/U$, a map $R|_U\\to F|_U$ is determined by its value $y\\in F(U)$ at $1$: on $V\\to U$ it sends $a$ to $a\\,y|_V$. Thus evaluation on $u_j$ identifies $\\mathcal Hom_R(P,F)(U)$ with $F(U)^r$, with inverse $(y_j)\\mapsto[(a_j)\\mapsto\\sum_j a_jy_j]$ on every object over $U$. These formulas are linear, commute with restriction and postcomposition in $F$, and are inverse on every slice. They give a natural sheaf isomorphism $\\mathcal Hom_R(P,F)\\cong F^{\\oplus r}$. For $F=R$ this identifies $P^\\vee$ with $P$ by the coordinate duals.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "Define $p^\\vee(\\phi)=\\phi\\circ p$ and $i^\\vee(\\psi)=\\psi\\circ i$ on each localized site. Composition and $pi=1_T$ give $i^\\vee p^\\vee(\\phi)=\\phi\\circ p\\circ i=\\phi$. Hence these are splitting maps of sheaves. Composing them with the coordinate-dual isomorphism of step 1 displays $T^\\vee$ as a retract of $R^{\\oplus r}$.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "For a local section $t$ of $T$, expand $i(t)=\\sum_j u_j u_j^*(i(t))$ in $P$ and apply $p$. This gives $t=\\sum_jt_j\\lambda_j(t)$, where $t_j=p(u_j)$ and $\\lambda_j=u_j^*i$. For any section $\\phi$ of $T^\\vee$ on $C/U$, apply the $R|_U$-linear map $\\phi$ to this equality on every $V\\to U$: $\\phi(t)=\\sum_j\\phi(t_j)\\lambda_j(t)$. Equality on every section of every object of the slice proves the sheaf-map identity $\\phi=\\sum_j\\phi(t_j)\\lambda_j$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "Evaluation defines an $R$-linear sheaf map $\\delta_T(t)(\\phi)=\\phi(t)$. Define $\\beta(\\alpha)=\\sum_j\\alpha(\\lambda_j)t_j$ on every slice; the formula is linear and commutes with restriction. Step 3 gives $\\beta\\delta_T(t)=\\sum_j\\lambda_j(t)t_j=t$. Conversely, for every local $\\phi$, commutativity of $R$ and linearity of $\\alpha$ give $\\delta_T\\beta(\\alpha)(\\phi)=\\sum_j\\alpha(\\lambda_j)\\phi(t_j)=\\alpha(\\sum_j\\phi(t_j)\\lambda_j)=\\alpha(\\phi)$. Thus both composites are identities, and $\\delta_T$ is an isomorphism with precisely the stated inverse.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "Write $G(F)=\\mathcal Hom_R(T,F)$ and $H(F)=\\mathcal Hom_R(P,F)$. Precomposition gives $s_F:G(F)\\to H(F)$, $f\\mapsto fp$, and $q_F:H(F)\\to G(F)$, $h\\mapsto hi$, with $q_Fs_F=1$. For a map $v:F\\to F'$, associativity gives $H(v)s_F=s_{F'}G(v)$ and $G(v)q_F=q_{F'}H(v)$. Hence $s,q$ are natural splitting transformations. In the next steps composition is written right to left; step 1 identifies $H(v)$ with the coordinate map $v^{\\oplus r}$.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "Take a short exact sequence $0\\to A\\xrightarrow{a}B\\xrightarrow{b}D\\to0$ in the abelian category of module sheaves. The sequence of $r$th powers is short exact by the following universal-property calculation. For $k:Z\\to B^r$ killed by $b^r$, each coordinate $\\pi_jk$ factors uniquely through the kernel $a$; the tuple of these factors is the unique factor of $k$ through $a^r$, and $a^r$ is monic by coordinates. If $z:D^r\\to Z$ satisfies $zb^r=0$, then $z\\iota_jb=0$ for each coordinate inclusion $\\iota_j:D\\to D^r$; since $b$ is epic, $z\\iota_j=0$, and therefore $z=\\sum_j z\\iota_j\\pi_j=0$. The same argument applied to the difference of two maps proves that $b^r$ is epic. Thus $H(a)$ is a kernel of $H(b)$ and $H(b)$ is epic, using step 1. This uses categorical epimorphisms, not surjectivity of sections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "First $G(a)$ is monic: if $G(a)u=0$, naturality gives $H(a)s_Au=s_BG(a)u=0$, so $s_Au=0$ by step 6 and $u=q_As_Au=0$; apply this to differences to obtain monicity. Also $G(b)G(a)=0$. For $k:Z\\to G(B)$ with $G(b)k=0$, we have $H(b)s_Bk=0$. The kernel property from step 6 gives a unique $h:Z\\to H(A)$ with $H(a)h=s_Bk$. Then $G(a)q_Ah=q_BH(a)h=q_Bs_Bk=k$. Its factor through $G(a)$ is unique by monicity. This proves that $G(a)$ is a kernel of $G(b)$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "If $z:G(D)\\to Z$ satisfies $zG(b)=0$, naturality implies $(zq_D)H(b)=zG(b)q_B=0$. Since $H(b)$ is epic by step 6, $zq_D=0$, hence $z=zq_Ds_D=0$. Subtracting two maps proves that $G(b)$ is epic. Together with step 7 this is the required short exactness of $0\\to G(A)\\to G(B)\\to G(D)\\to0$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  },
+  {
+   "text": "Finally, localization is sectionwise restriction and successive localization is relocalization. All formulas above use only the restrictions of $i,p$, the standard coordinate inclusions and projections, finite sums, scalar multiplication, evaluation and composition. For an arrow $V\\to U$, each such operation is unchanged by passing from $C/U$ to $C/V$; for example $(\\sum_j\\alpha(\\lambda_j)t_j)|_V=\\sum_j(\\alpha|_V)(\\lambda_j|_V)(t_j|_V)$. The internal-Hom restriction is the restriction of slice maps, so this checks the displayed maps and identities on every localized site. If $r=0$, $pi=1_T$ forces $T=0$ and all formulas are empty sums; the arguments also hold for the zero ring and empty covering objects.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final two paragraphs: finite-free/direct-summand calculation, expanded using the definition of internal Hom (sites-modules.tex, Tag 03EM, lemma-internal-hom) and the abelian category of module sheaves (Tag 03DA, lemma-abelian)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand calculation, with explicit coordinate and kernel/epimorphism arguments supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +160,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.IsReflexive.of_finite_of_free\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Module.Finite R M] [Free R M] : IsReflexive R M\", \"doc\": \"Every finite free module over a commutative semiring is reflexive, meaning the canonical evaluation map from the module to its double dual is an isomorphism of modules.\"}\n  {\"name\": \"Module.Dual.instIsReflecive\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \": IsReflexive R (Dual R M)\", \"doc\": \"For any commutative semiring $ R $ and $ R $-module $ M $, the dual module $ M^* $ is reflexive, meaning the canonical evaluation map $ M^* \\to (M^*)^* $ is an isomorphism of $ R $-modules.\"}\n  {\"name\": \"LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \": IsReflexive R N\", \"doc\": \"If there exists a linear equivalence between a module $ N $ and its dual module $ N^* $, then $ N $ is a reflexive module over the commutative semiring $ R $. This means the canonical evaluation map $\"}\n  {\"name\": \"Module.instIsReflexiveOfFiniteOfProjective\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Module.Finite R N] [Projective R N] : IsReflexive R N\", \"doc\": \"For a commutative semiring $ R $, if a module $ N $ is both finitely generated and projective, then $ N $ is reflexive. This means the canonical evaluation map $ N \\to (N^*)^* $ from the module to its \"}\n  {\"name\": \"dualTensorHomEquivOfBasis\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be modules over $R$. If $M$ is a free module with a finite basis, then there is an $R$-linear isomorphism between the tensor product of the dual \"}\n  {\"name\": \"Module.IsReflexive\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"(R : Type u_3) → (M : Type u_4) → [inst : CommSemiring R] → [inst_1 : AddCommMonoid M] → [Module R M] → Prop\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is reflexive if the canonical evaluation map $ M \\to (M^*)^* $ from the module to its double dual is an isomorphism of $ R $-modules.\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma\"}\n  {\"name\": \"Module.dual_free\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Free R M] : Free R (Dual R M)\", \"doc\": \"If $ M $ is a free $ R $-module, then its dual module $ \\\\mathrm{Dual}(R, M) $ is also a free $ R $-module.\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module duality and light-condensed internal projectivity do not identify internal sheaf duals or their natural finite-power retracts on an arbitrary ringed site."
+  },
+  {
+   "tool": "grep",
+   "query": "homObj|IsReflexive|dual_projective",
+   "results": "0 hits;  ; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module duality, free-sheaf maps or general categorical tools, not the full internal-sheaf dual-basis and exactness statement on an arbitrary ringed site."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": "0 hits;  ; loogle: unknown identifier 'SheafOfModules.homObj'",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module duality, free-sheaf maps or general categorical tools, not the full internal-sheaf dual-basis and exactness statement on an arbitrary ringed site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free module sheaf is isomorphic to its double internal dual and internal Hom from a finite free retract preserves short exact sequences",
+   "results": "8 hits; Module.IsReflexive.of_finite_of_free; Module.instIsReflexiveOfFiniteOfProjective; Module.evalEquiv; Module.IsReflexive; Module.Dual.instIsReflecive; Module.Dual.eval_comp_comp_evalEquiv_eq; LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive; dualTensorHomEquivOfBasis",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module duality, free-sheaf maps or general categorical tools, not the full internal-sheaf dual-basis and exactness statement on an arbitrary ringed site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a direct summand of a finite free sheaf of modules over a sheaf of commutative rings is exact and its dual is reflexive",
+   "results": "8 hits; FGModuleCat.exactPairing; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.ihomPoints",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module duality, free-sheaf maps or general categorical tools, not the full internal-sheaf dual-basis and exactness statement on an arbitrary ringed site."
+  },
+  {
+   "tool": "grep",
+   "query": "retract.*[Ee]xact|[Ee]xact.*retract|preserves.*[Rr]etract",
+   "results": "25 hits; Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean; Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean; Mathlib/CategoryTheory/SmallObject/Basic.lean; Mathlib/CategoryTheory/SmallObject/Basic.lean; Mathlib/CategoryTheory/SmallObject/Basic.lean; Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean; Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean; Mathlib/CategoryTheory/ObjectProperty/Retract.lean ; Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module duality, free-sheaf maps or general categorical tools, not the full internal-sheaf dual-basis and exactness statement on an arbitrary ringed site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category a natural retract of an exact finite direct sum functor preserves kernels and cokernels",
+   "results": "8 hits; CategoryTheory.AdditiveFunctor.ofExact; CategoryTheory.AdditiveFunctor.ofExact_obj_fst; CategoryTheory.Functor.exact_tfae; CategoryTheory.AdditiveFunctor.ofRightExact; CategoryTheory.abelianOfAdjunction; CategoryTheory.AdditiveFunctor.ofRightExact_obj_fst; CategoryTheory.Functor.preservesFiniteLimits_tfae; CategoryTheory.Functor.preservesFiniteColimits_tfae",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module duality, free-sheaf maps or general categorical tools, not the full internal-sheaf dual-basis and exactness statement on an arbitrary ringed site."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-strict-perfect-hom",
@@ -66,5 +225,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "worker": "stage1",
+  "summary": "Expanded the finite-free/direct-summand calculation into explicit slice-coordinate duality, dual-basis bidual inverse, a natural finite-power Hom retract and universal-property proofs of its exactness. All auxiliary calculations are elementary steps; no new nodes. Checked the zero rank and zero coefficient ring.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom, proof The formula, final sentence: perfect coefficient duality. This item realizes the finite-free retract calculation used by lem-sfb-ringed-site-strict-perfect-hom. The inherited nearest-ancestor field is null as reported by blueprint_refs.py; its documented source place is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-aaeec7c05",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-aaeec7c05 (reviewer sub-agent of L); spot-checked: Ordinary first split. The item is still unsplit live, has no repair note and has not been superseded. There are no new nodes. The statement is byte-identical to live; the added stmt_dep def-pur-localized-ringed-site is justified by the 'localized sites' clauses. The source is Stacks 08JJ lemma-dual-perfect-complex, strictly perfect paragraph: the dual of a finite-free summand is a finite-free summand, and evaluation gives an isomorphism to the bidual. The item matches this and adds exactness of Hom(T,-), which the parent lem-sfb-ringed-site-strict-perfect-hom uses in steps 1 and 2. I read all 9 steps against the statements of def-pur-sheaf-hom, def-weil-sheaf-of-modules-category and def-pur-localized-ringed-site. Step 1 gives Hom(R|_U,F|_U)=F(U) via 1 at the terminal object U/U of C/U. Step 3 derives the dual-basis identities from t=p i t, with the scalars moved by commutativity. Step 4 proves both inverse composites of delta_T and beta. Steps 6-8 prove exactness of the natural retract by kernel and categorical-epi universal properties (z b^r=0 implies z iota_j=0 implies z=0), never by surjectivity on sections. Step 9 checks compatibility with restriction. All steps are correct and genuinely elementary from the cited definitions. Edge cases r=0, the zero ring, T=R and T=eR^r all check out, and commutativity is needed in step 4. Duplicate search (rg -L for retract/dual/bidual/reflexive) found only ring-level module dualities (lem-zl-finite-projective-module-dual-pairing, lem-zl-bounded-projective-complex-dual-pairing), which are not duplicates. No route issue and no tool_uses. Four kinds of search are recorded. No SGA is cited. No fixes."
  }
 }
