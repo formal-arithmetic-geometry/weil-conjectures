@@ -1,6 +1,6 @@
 # Work queue
 
-367 items; claim with `tools/claim.py next <group> [--stage N]`.
+365 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 1467 modules)
 
@@ -20,7 +20,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 154, stage 3 186 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 154, stage 3 190 items.
 
 ## Stage 1: nodes to split (22)
 
@@ -30,9 +30,10 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-filtered-ring-object-cocone-colimit` | 1001 | none |
 | `lem-cbc-ringed-open-extension-products` | 2004 | none |
 | `lem-asd-affine-roots-representability` | 2005 | none |
-| `lem-sfb-qcqs-proper-constructible-closed-base-change` | 2005 | none |
+| `lem-sfb-qcqs-integral-finite-model-completeness` | 2006 | none |
+| `lem-sfb-qcqs-proper-integral-rational-scalar-comparison` | 2006 | none |
+| `lem-sfb-qcqs-rational-integral-localizing-generators` | 2006 | none |
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
-| `lem-sfb-grothendieck-sheafification` | 3003 | none |
 | `lem-sfb-continuous-algcl-proper-scalar-comparison` | 4009 | none |
 | `lem-sfb-continuous-algcl-tame-boundary-comparison` | 4009 | none |
 | `lem-sfb-normal-continuous-algcl-monodromy` | 4009 | none |
@@ -44,12 +45,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-internal-extension-finite-presentation` | - | none |
 | `lem-sfb-sheaf-pushforward-generator-comparison` | - | none |
 | `lem-sfb-cohomology-tor-interval` | - | none |
-| `lem-zl-constant-sheaf-weight-zero` | - | none |
 | `def-per-support-condition` | - | none |
 | `lem-dl-a1-galois-prime-residue-lifting` | - | none |
 | `lem-dl-a1-integral-normal-residue-etale-splitting` | - | none |
 
-## Stage 2: nodes to state (49)
+## Stage 2: nodes to state (47)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -57,14 +57,13 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-completed-primitive-counit-comparison` | 2 | state | 4 |
 | `lem-per-adic-common-stage-truncations` | 1 | state | 2 |
 | `lem-weil-point-finite-free-sections-tensor` | 1 | state | 2 |
-| `sk-thm-picard-duality` | 1 | state | 2 |
+| `det-picard-rr-duality` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-a1-roos-intrinsic-unit-comparison` | 1 | state | 0 |
 | `lem-cbc-ringed-open-scalar-limit-coherence` | 1 | state | 0 |
 | `lem-coef-enriched-sequence-projection-formula` | 1 | state | 0 |
-| `lem-dl-a1-finite-group-inertia-invariants-etale` | 1 | state | 0 |
-| `lem-fix-proper-etale-origin-scalar-isomorphism` | 1 | state | 0 |
 | `lem-pc-curve-local-scalar-principal-parts` | 1 | state | 0 |
+| `lem-pc-tate-residue-field-extension` | 1 | state | 0 |
 | `lem-pur-affine-coordinate-support-stalk-continuity` | 1 | state | 0 |
 | `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
 | `lem-pur-etale-kflat-support-comparison` | 1 | state | 0 |
@@ -101,9 +100,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-pbc-quotient-diagram-scalar-projection` | 1 | state | 0 |
 | `lem-weil-pbc-raw-restricted-class-normalization` | 1 | state | 0 |
 | `lem-weil-ramified-pullback-tower-identification` | 1 | state | 0 |
-| `lem-zl-dualizable-categorical-trace-conjugacy` | 1 | state | 0 |
 
-Not open yet: 356 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 122 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 357 nodes that below a finished node, not needed, 10 nodes that wait for stage 1 (statement downstream not grounded), 118 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (278)
 
@@ -111,7 +109,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `Sheaf.Paper.CompleteResidueCohomologyBounds` | - | 0 | repair | route |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 5 | 1 | repair | route |
 | `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory` | 3 | 1 | disputed | 2 |
@@ -233,6 +230,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProEtaleConstantReductionTower` | - | 1 | proof | 3 |
 | `Sheaf.Paper.ProEtaleFiniteScalarRestrictionConstructible` | - | 3 | proof | 3 |
 | `Sheaf.Paper.ProEtaleScalarMateNormalization` | - | 3 | proof | 3 |
+| `Sheaf.Paper.ProperEtaleOriginScalarIsomorphism` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PurityFiniteKummerLevel` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RealWeilSheaves` | - | 2 | proof | 3 |
 | `Sheaf.Paper.RegularQuotientCompletionUnit` | - | 1 | proof | 3 |
@@ -390,7 +388,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge` | - | 1 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.UnboundedDirectImageSectionPresheaf` | - | 1 | proof | 18 |
 
-## Stage 3: waiting for statements of dependencies (72)
+## Stage 3: waiting for statements of dependencies (71)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -420,9 +418,8 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | `lem-weil-pbc-pulled-reduction-normalization-comparison` |
 | `Sheaf.Paper.CondensedERealization` | - | 1 | `det-sp-rational-localized-hom` |
 | `Sheaf.Paper.ConstructibleInternalHomContinuity` | - | 1 | `lem-sfb-bounded-finite-model-generation` |
-| `Sheaf.Paper.ContinuousRationalDerivedRealization` | - | 1 | `lem-per-constructible-rational-hom-comparison` |
+| `Sheaf.Paper.ContinuousRationalDerivedRealization` | - | 1 | `lem-per-rational-pullback-composition-coherence` |
 | `Sheaf.Paper.DirectImageChangeRingTranspose` | - | 1 | `lem-sp-proetale-scalar-tensor-normalization` |
-| `Sheaf.Paper.EtaleCompactSupportCoefficientChange` | - | 3 | `lem-fix-proper-etale-origin-scalar-isomorphism` |
 | `Sheaf.Paper.FiniteClopenConstructibilityBounds` | - | 1 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.FiniteClopenDerivedDecomposition` | - | 16 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.FiniteRingSectionDeformation` | - | 11 | `lem-trf-section-coordinate-counit-normalization` |
