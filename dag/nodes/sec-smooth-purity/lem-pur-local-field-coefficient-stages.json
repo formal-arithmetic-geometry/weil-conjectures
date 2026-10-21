@@ -10,9 +10,99 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the coefficient convention [def-weil-l-adic-coefficient-extension] and [lem-weil-l-adic-extension-integers-dvr] for each of $E$ and $F$. Thus $R,S$ are DVR domains with finite residue fields, their maximal ideals consist of the elements of absolute value less than $1$, and units have absolute value $1$. In particular $t,v$ are nonzero and have absolute value strictly between $0$ and $1$. Compatibility of the absolute values gives $R\\subseteq S$ and preserves the absolute value of $t$. The inclusion is injective, and a unit of $R$ is a unit of $S$ since its inverse already belongs to $R$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "Part (1), coefficient-ring input, with ramified quotients expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-field-integral-basis] to the given finite extensions $E\\subseteq F$ with their compatible absolute values. Its hypotheses are exactly those here, with no geometric base. It supplies $b_1,\\ldots,b_d\\in S$, where $d=[F:E]$, such that every $s\\in S$ has a unique expression $\\sum_i a_i b_i$ with $a_i\\in R$. This is a finite $R$-basis of $S$, proving finite freeness.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "Part (1), coefficient-ring input, with ramified quotients expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dvr-unit-times-uniformizer-power] to the DVR $S$, its maximal-ideal generator $v$, and the nonzero element $t\\in S$. The DVR hypothesis from Step 1 includes Noetherianity. Obtain $t=uv^e$ for a unit $u\\in S$ and an integer $e\\geq0$. If $e=0$, then $t=u$ would have absolute value $1$, contradicting $|t|<1$; hence $e\\geq1$. For each $n\\geq1$, $t^n=u^n v^{en}$ and $u^n$ is invertible, so $t^nS=v^{en}S$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, final assertion; multiplication of principal ideals"
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$. Reduce the basis from Step 2: the map $(R/t^nR)^d\\longrightarrow S/t^nS$ sending $([a_i])_i$ to $[\\sum_i a_i b_i]$ is well defined and surjective. If $\\sum_i a_i b_i\\in t^nS$, write it as $t^n\\sum_i c_i b_i$ with $c_i\\in R$. Uniqueness of the $R$-coordinates gives $a_i=t^n c_i$ for every $i$, so the map is injective. It is $R/t^nR$-linear and therefore exhibits a finite basis of $S/t^nS=S/v^{en}S$. The coefficient ring map is $[r]\\mapsto[r]$, well defined because $t^nR\\subseteq t^nS$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "Part (1), coefficient-ring input, with ramified quotients expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-valued-dvr-finite-quotients] to $E$ with uniformizer $t$ at exponent $n$, and to $F$ with uniformizer $v$ at exponent $en\\geq1$. Step 1 verifies the required DVR and finite-residue-field hypotheses. It follows that $R/t^nR$ and $S/v^{en}S=S/t^nS$ are finite local rings. The same node supplies the quotient transition maps; for arbitrary $m\\leq n$ the map is directly $[x]_{t^n}\\mapsto[x]_{t^m}$, since $t^nS\\subseteq t^mS$ (and likewise in $R$).",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "Part (1), coefficient-ring input, with ramified quotients expanded"
+   }
+  },
+  {
+   "text": "The image of $\\ell$ in $E$ is nonzero and has absolute value $\\ell^{-1}<1$, by the definition of the prime-adic absolute value [def-weil-l-adic-numbers] and the extending absolute value in [def-weil-l-adic-coefficient-extension]. Apply [lem-weil-pbc-dvr-unit-times-uniformizer-power] in $R$ to obtain $\\ell=w t^a$ with $w$ a unit and $a\\geq0$. The case $a=0$ would make $\\ell$ a unit of absolute value $1$, so $a\\geq1$. For each $n\\geq1$, $\\ell^n=w^n t^{an}=t^n(w^n t^{(a-1)n})$. Thus $\\ell^n$ is zero in $R/t^nR$ and also in $S/t^nS$, so multiplication by $\\ell^n$ annihilates both rings.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, applied to the image of the coefficient prime"
+   }
+  },
+  {
+   "text": "For every positive integer $k$, choose $n=k$. Then $en\\geq k$, and hence $v^{en}S\\subseteq v^kS$; this proves the asserted cofinality. If $t$ is replaced by $t^{\\prime}=a t$, $a\\in R^\\times$, and $v$ by $v^{\\prime}=b v$, $b\\in S^\\times$, then $t^{\\prime n}R=t^nR$, $t^{\\prime n}S=t^nS$, and $v^{\\prime j}S=v^jS$ for every $j$. Moreover $t^{\\prime}=(a u b^{-e})(v^{\\prime})^e$, with the coefficient again a unit of $S$, so the same cofinal exponents work. The quotient identifications are induced by the identity on $R$ or $S$. Every transition map sends the class of $x$ to the class of the same $x$, and every scalar map sends $[r]$ to $[r]$; consequently all these maps commute with the identifications. Thus independence concerns canonical quotient rings and their maps, not any chosen basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "Part (1), coefficient-ring input, with ramified quotients expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "Part (1), algebraic finite-free input; expanded using the existing integral-basis theorem and Stacks Tag 00PD (lemma-characterize-dvr), with quotient-coordinate and unit-change arguments written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +145,52 @@
    "results": "[grep] OK 2 hit(s); Mathlib/NumberTheory/LocalField/Basic.lean:120; Mathlib/NumberTheory/LocalField/Basic.lean:164",
    "date": "2026-10-21",
    "verdict": "no match: local-field residue finiteness and valuation lemmas are components, not the finite-free ramified coefficient-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "ramification|finite.*integer|integer.*finite|Module.Free",
+   "results": "[grep] OK 2 hit(s); Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/LocalField/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: results give individual valuation, integral-closure, quotient-basis or number-field ingredients, not all clauses for the specified p-adic coefficient extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite extensions of p-adic fields the rings of integers form a finite free extension whose uniformizer power quotients are finite free and cofinal",
+   "results": "[leansearch] OK 8 hit(s); NumberField.RingOfIntegers.instFreeInt; NumberField.RingOfIntegers.instIsIntegralClosure; PadicComplexInt.integers; PadicInt.isFractionRing; Padic.field; PadicInt; IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation; NumberField.instFreeIntSubtypeMemSubmoduleRingOfIntegersCoeToSubmodule",
+   "date": "2026-10-21",
+   "verdict": "no match: results give individual valuation, integral-closure, quotient-basis or number-field ingredients, not all clauses for the specified p-adic coefficient extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Module.Free",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match: results give individual valuation, integral-closure, quotient-basis or number-field ingredients, not all clauses for the specified p-adic coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extensions of p-adic fields have finite free integer rings, ramified uniformizer powers and cofinal finite local residue quotients",
+   "results": "[leanfinder] OK 8 hit(s); IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation; Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField; Ideal.ramificationIdx_le_finrank; Ideal.Factors.finiteDimensional_quotient_pow; IsLocalRing.ResidueField.finite_of_finite; RingOfIntegers.isPrincipalIdealRing_of_isPrincipal_of_pow_le_of_mem_primesOver_of_mem_Icc; Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing; Algebra.instFiniteResidueFieldOfFormallyUnramified",
+   "date": "2026-10-21",
+   "verdict": "no match: results give individual valuation, integral-closure, quotient-basis or number-field ingredients, not all clauses for the specified p-adic coefficient extension"
+  },
+  {
+   "tool": "grep",
+   "query": "module_free|theorem finite|ramificationIdx_mul_inertiaDeg_of_isLocalRing|finite_quotient_maximalIdeal_pow_of_finite_residueField",
+   "results": "[grep] OK 5 hit(s); Mathlib/RingTheory/DedekindDomain/Factorization.lean; Mathlib/RingTheory/DedekindDomain/Factorization.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: results give individual valuation, integral-closure, quotient-basis or number-field ingredients, not all clauses for the specified p-adic coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of complete discretely valued fields has an integral basis and reducing it modulo any power of the base uniformizer yields a basis of the ramified residue algebra",
+   "results": "[leanfinder] OK 8 hit(s); Module.Basis.ofIsCoprimeDifferentIdeal; Module.Basis.ofIsCoprimeDifferentIdeal_apply; Ideal.ramificationIdx_le_finrank; IsLocalRing.basisQuotient; Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing; Ideal.Quotient.algebraQuotientOfRamificationIdxNeZero; Ideal.Quotient.algebraQuotientPowRamificationIdx; Ideal.finrank_prime_pow_ramificationIdx",
+   "date": "2026-10-21",
+   "verdict": "no match: results give individual valuation, integral-closure, quotient-basis or number-field ingredients, not all clauses for the specified p-adic coefficient extension"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-coefficient-adjoint-comparisons",
@@ -79,5 +211,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-local-field-coefficient-stages",
+  "worker": "stage1",
+  "summary": "NW checked the project source for a full attachment, reused the existing relative local-field integral-basis, DVR, unit-power and finite-quotient nodes, and supplied explicit quotient coordinates, positive ramification exponent, prime-power annihilation, cofinality, and canonical quotient-map independence. No statement change and no new nodes.",
+  "blueprint": "Realizes the finite-free arithmetic prerequisite in sk-lem-sp-field-extension-towers.proof.md Part (1), and the finite-stage cofinality needed for thm-pur-rational-and-qbar-purity Steps 1–2. The seed has no imported blueprint ancestor: blueprint_refs.py ancestor returns None; its inherited from.node and via chain are retained. The broader lem-coef-finite-free-extension additionally concerns geometric coefficient functors and is not the same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Generic existence of an integral basis for O_F over O_E without a scheme hypothesis; the purity-transport unit assumes this arithmetic input rather than proving it."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic local-field ring structure and absolute-value description of units, needed to check the positive exponents and finite residue quotients; the purity-transport unit supplies no separate arithmetic structure theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NW-342801633",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-342801633 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, against the main-20261015 towers proof Part (1) and Stacks 00PD. There are no new nodes, and the statement is byte-identical to the earlier unsplit version. Step 1 (DVR structure, units of absolute value 1, R⊆S), step 2 (integral basis, same hypotheses), step 3 (t=uv^e from the unit-times-uniformizer-power leaf; e≥1 because |t|<1) and step 4 (kernel through uniqueness of coordinates, so S/t^nS is free of rank [F:E]; elementary) all check from the cited statements. So do step 5 (valued-DVR quotients at n and en; hypotheses from step 1), step 6 (|ℓ|=ℓ^{-1} and ℓ=w t^a with a≥1, so ℓ^n kills both rings) and step 7 (cofinality, and unit changes leave ideals and maps unchanged). I tested Q_2/Q_2, Q_2(√2) with e=2, an unramified quadratic extension, and n=1. There is no duplicate: lem-coef-finite-free-extension is a larger geometric statement. Recomputed closures show no cycle. I accepted the tool_uses lem-sfb-local-field-integral-basis and lem-weil-l-adic-extension-integers-dvr as generic arithmetic black boxes. There is no SGA citation and no repair note."
  }
 }
