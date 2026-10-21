@@ -24,146 +24,67 @@
  ],
  "proof": [
   {
-   "text": "Use the element-site equivalences and exact restrictions of [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Put $L=f^{-1}$ and $V=f_*$. The arrowwise functor $L_A:\\mathscr Y/A\\to\\mathscr X/B$ preserves finite limits and has a right adjoint by [lem-sfb-left-exact-left-adjoint-slices]. Explicitly its right adjoint sends $p:H\\to B$ to $A\\times_{VB}VH\\to A$, using $\\eta_A:A\\to VLA=VB$. Indeed, adjunction identifies a map $LK\\to H$ over $B$ with a map $K\\to VH$ whose composite to $VB$ is $\\eta_A$ after $K\\to A$; this is exactly a map into that pullback over $A$. Thus $L_A$ is the inverse image of a geometric morphism $f_A$. Since $L$ preserves products, $L_A(F\\times A\\to A)=(LF\\times B\\to B)$, naturally in $F$. This is the commutation isomorphism of the localization square.",
+   "text": "Obtain the normalized ordinary square, its module mates and the exact restriction functors from [lem-sbc-ringed-sheaf-slice-ordinary-comparison]. All derived structures are constructed from this ordinary output.",
    "uses": [
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "lem-sfb-left-exact-left-adjoint-slices",
-    "def-weil-pbc-ringed-topos-morphism"
+    "lem-sbc-ringed-sheaf-slice-ordinary-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04H1, lemma-localize-morphism-topoi; explicit slice-adjoint formula"
-   }
+   "elementary": true
   },
   {
-   "text": "Restrict the structural ring map $c:LR_Y\\to R_X$ to $\\mathscr X/B$. The last identity of step 1 identifies its domain with $L_A(R_{Y,A})$, so it gives $f_A$ its ringed structure and makes the square commute as a square of ringed topoi. Let $O=LR_Y$ on $\\mathscr X$. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the localization $j_B$ with coefficient ring $O$, to the $O$-modules $R_X$ and $LM$. Its structural ring map is an isomorphism, hence its module pullback is restriction. Together with step 1 this identifies\n$$f_A^*r_YM=R_{X,B}\\otimes_{r_XO}r_XLM\\ \\cong\\ r_X(R_X\\otimes_O LM)=r_Xf^*M.$$\nCall this isomorphism $\\sigma_M$. It preserves the scalar-extension insertion $m\\mapsto1\\otimes m$, since the tensor comparison is the canonical one. The module adjunctions used here are those of [lem-weil-pbc-ringed-topoi-module-adjunction].",
+   "text": "For either supplied module pullback, [lem-weil-pbc-supplied-ringed-topos-kflat-pullback] gives a tensor pullback with the same right adjoint. Transfer preservation of quasi-isomorphisms between flat-term K-flat complexes along the unique isomorphism of left adjoints. Flat-term K-flat resolutions give a resolving class on the homotopy category. Apply [lem-pur-left-derived-from-kflat-class], then [lem-sfb-resolving-derived-adjunction-normalization], obtaining the derived adjunction and its chain-transpose formula on every complex, and invertible epsilon on flat-term K-flat complexes.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; Tag 03EL, lemma-tensor-product-pullback; Tag 03D7, lemma-adjoint-pullback-pushforward-modules"
-   }
-  },
-  {
-   "text": "For an $R_X$-module $E$, restriction corresponds to the module object $E\\times B\\to B$. Step 1 gives\n$$f_{A*}r_XE=A\\times_{VB}V(E\\times B)\\cong A\\times VE=r_Yf_*E.$$\nHere $V(E\\times B)\\cong VE\\times VB$: maps into either side are pairs of maps by the original adjunction. Addition is addition in $VE$ on each fibre. The scalar action is the action induced by $c$, restricted to that fibre, hence agrees on both sides by [def-weil-pbc-ringed-topos-morphism]. Write $\\delta:r_Yf_*\\xrightarrow{\\sim}f_{A*}r_X$ for this natural identification. If $a:M\\to f_*E$ has ordinary adjunct $\\widetilde a:f^*M\\to E$, then the adjunct of $\\delta_E r_Ya$ is $r_X\\widetilde a\\,\\sigma_M$. To check it, first apply the slice-adjoint pullback formula of step 1 to the underlying set-sheaf transpose: it is $r_X$ of the original transpose. The module adjunct extends that map from $1\\otimes m$ by $s\\otimes m\\mapsto s\\widetilde a(1\\otimes m)$, by [lem-weil-pbc-ringed-topoi-module-adjunction, lem-weil-pbc-geometric-module-transport]. Since $\\sigma$ preserves these insertions, the two extensions are equal.",
-   "uses": [
-    "def-weil-pbc-ringed-topos-morphism",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-geometric-module-transport"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; Tags 03D3 and 03D7, underlying adjunction and scalar-extension transpose"
-   }
-  },
-  {
-   "text": "Both $r_X$ and $r_Y$ are exact and have exact additive left adjoints by [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Therefore their termwise functors descend to unbounded derived categories, with the termwise representative identifications of [lem-weil-pbc-exact-functor-derived-factorization]. They preserve K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], applied with the restriction as right adjoint and extension by zero as exact left adjoint. Independently, regard each restriction as module pullback along its ringed localization. By [lem-weil-pbc-ringed-topos-kflat-pullback], it carries every K-flat complex with flat terms to a K-flat complex with flat terms. These arguments apply to the small element sites of step 1, so do not assume that $A$ was representable on an original site.",
-   "uses": [
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ringed-topos-kflat-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; Tag 0G7E, lemma-pullback-K-flat; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives"
-   }
-  },
-  {
-   "text": "Choose a K-injective representative $I$ of $E$, using [prop-pur-kinjective-resolutions-exist] on the small source site. The canonical direct-image computations of [lem-weil-pbc-ringed-projection-mate-exact] and step 4 give\n$$r_YRf_*E\\cong Q(r_Yf_*I)\\xrightarrow{Q\\delta_I}Q(f_{A*}r_XI)\\cong Rf_{A*}r_XE.$$\nDefine this isomorphism to be $\\beta_E$. It is independent of the representative and natural: every derived morphism between two K-injective representatives has a unique homotopy class of chain representatives by [lem-weil-pbc-kinjective-hom-derived]. The naturality square of $\\delta$ for such a chain map gives the square for $\\beta$. A quasi-isomorphism between K-injectives is a homotopy equivalence by the same node; the additive functors and $\\delta$ preserve this equivalence, which proves compatibility with changing representatives.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open, K-injective computation; derived.tex Tag 070I, lemma-K-injective"
-   }
-  },
-  {
-   "text": "Use the mate bijection of [def-weil-pbc-adjunction-mate] for the two canonical derived adjunctions of [lem-weil-pbc-ringed-projection-mate-exact]. Define $\\theta:Lf_A^*r_Y\\to r_XLf^*$ to be the inverse mate of the natural transformation $\\beta$ of step 5. Explicitly, with $\\eta$ the global derived unit,\n$$\\theta_M=\\varepsilon^A_{r_XLf^*M}\\circ Lf_A^*(\\beta_{Lf^*M})\\circ Lf_A^*r_Y(\\eta_M).$$\nThis gives a natural transformation. Its invertibility is not inferred merely from the invertibility of $\\beta$; it will follow from its representative formula below.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change, adjunction mate convention"
-   }
-  },
-  {
-   "text": "Fix a flat-term K-flat complex $T$ on the target. Choose a K-injective resolution $i:f^*T\\to I$ by [prop-pur-kinjective-resolutions-exist], and let $a:T\\to f_*I$ be its ordinary complex transpose under [lem-weil-pbc-ringed-topoi-module-adjunction]. The transpose of $\\delta_I r_Ya$ under the slice module adjunction is, by the explicit identity of step 3,\n$$h:f_A^*r_YT\\xrightarrow{\\sigma_T}r_Xf^*T\\xrightarrow{r_Xi}r_XI.$$\nThus, writing only the chain map, $h=(r_Xi)\\sigma_T$. This identity holds term by term, hence for complexes, because naturality of the ordinary adjunction makes the transposes commute with the differentials.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; Tag 04IF, ordinary localization identity"
-   }
-  },
-  {
-   "text": "The K-flat computations of [lem-weil-pbc-ringed-topoi-derived-pullback], applied to $f$ and $f_A$, identify $Lf^*(QT)$ with $Q(f^*T)$ and $Lf_A^*r_Y(QT)$ with $Q(f_A^*r_YT)$; step 4 supplies the required K-flatness and flat terms of $r_YT$. The canonical derived adjunction is normalized by the ordinary chain transpose, as stated in [lem-sfb-resolving-derived-adjunction-normalization]: applied to $i$, the unit at $QT$, followed by the representative identification using $i$, is represented by $a$. Its hypotheses hold here by K-flat resolution existence [lem-pc-kflat-resolution], K-flat localization [lem-weil-pbc-site-derived-tensor-descent], preservation of quasi-isomorphisms between these representatives [lem-weil-pbc-ringed-topoi-derived-pullback], and K-injective existence. Consequently the three arrows defining $\\theta_{QT}$ in step 6, followed by $Q(r_Xi)$ on its target, give $Q(h)$: the first arrow gives $r_Ya$, the second gives $\\delta_I$, and the last takes the slice derived transpose, computed by the same normalization theorem since $r_XI$ is K-injective. By step 7 this is $Q(r_Xi)Q(\\sigma_T)$. Cancel the isomorphism $Q(r_Xi)$, which is invertible by exactness of restriction. Thus $\\theta_{QT}=Q(\\sigma_T)$ under the specified representative identifications.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-sfb-resolving-derived-adjunction-normalization",
     "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); derived.tex Tag 09T5, lemma-derived-adjoint-functors, canonical transpose normalization"
-   }
+   "elementary": false
   },
   {
-   "text": "Every $M$ is isomorphic to $QT$ for a flat-term K-flat $T$ by [lem-pc-kflat-resolution]. Hence step 8 and naturality show that every $\\theta_M$ is invertible, and identify it with the canonical pullback comparison induced by the ringed square, whose ordinary comparison was constructed in step 2. Step 5 already proves invertibility and the required representative formula for $\\beta$. Finally, the transpose characterization in [def-weil-pbc-adjunction-mate], applied to $\\theta$ and its mate $\\beta$, gives\n$$r_X(\\varepsilon_E)\\circ\\theta_{Rf_*E}=\\varepsilon^A_{r_XE}\\circ Lf_A^*(\\beta_E).$$\nAll constructions used the original geometric adjunction, small element sites and unbounded resolutions. None required a site functor presenting $f$, an invertible or flat structural ring map, or a bounded complex.",
+   "text": "Exact restrictions give their derived functors and canonical representative factors. Apply the generic right-derived uniqueness comparison in [lem-weil-pbc-ringed-slice-derived-comparisons] to ordinary delta. Source restriction preserves K-injectives by the ordinary theorem, so both composites satisfy the right-derived universal property. This gives invertible beta and its representative equation on all complexes.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-slice-derived-comparisons",
+    "lem-sbc-ringed-sheaf-slice-ordinary-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define theta to be the inverse mate of beta. The ordinary mate equation, the normalized global derived unit, the equation for beta, and the local derived Hom normalization give the representative formula, using the generic mateOnRepresentative calculation of [lem-weil-pbc-ringed-slice-derived-mate-isIso].",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-ringed-slice-derived-mate-isIso",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a flat-term K-flat resolution P, both epsilon comparisons are invertible; target restriction preserves the required flatness and K-flatness. The representative formula and invertibility of ordinary sigma show theta is invertible at QP. Naturality transports this along the resolution and the localization object-preimage isomorphism to every derived object. The mate bijection gives the mate equation, and its standard counit identity gives the required counit equation.",
    "uses": [
     "lem-pc-kflat-resolution",
+    "lem-sbc-ringed-sheaf-slice-ordinary-comparison",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; Tag 06YS, lemma-K-flat-resolution"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-  "lem-sfb-left-exact-left-adjoint-slices",
-  "def-weil-pbc-ringed-topos-morphism",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-geometric-module-transport",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sbc-ringed-sheaf-slice-ordinary-comparison",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-slice-derived-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-slice-derived-mate-isIso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi, with sites.tex Tag 04H1; explicit intrinsic slice-adjoint and unbounded mate calculation using sites-cohomology.tex Tags 0G7E, 08FI, 07A6 and 07A7"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 08FI, 07A6, 07A7; derived.tex Tag 09T5; ordinary Stacks 04IF isolated as lem-sbc-ringed-sheaf-slice-ordinary-comparison, followed by resolving-class normalization and the inverse-mate representative calculation"
  },
  "mathlib_searches": [
   {
@@ -325,18 +246,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-geometric-module-transport",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-sfb-resolving-derived-adjunction-normalization",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -350,19 +262,16 @@
   "module": "Sheaf.Paper.SheafSliceDerivedComparison",
   "declaration": "CategoryTheory.ringedSheafSliceDerivedComparison",
   "declarations": [
-   "CategoryTheory.sheafSliceUnderlyingRestriction",
-   "CategoryTheory.SheafSliceSetLocalization",
-   "CategoryTheory.RingedSheafSliceOrdinaryComparison",
    "CategoryTheory.HasRingedSheafSliceDerivedComparison",
    "CategoryTheory.ringedSheafSliceDerivedComparison"
   ],
   "file": "lean/Sheaf/Paper/SheafSliceDerivedComparison.lean",
   "statement": "theorem ringedSheafSliceDerivedComparison {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (RX : Sheaf J CommRingCat.{u}) (RY : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (localCoefficientRings RX) (localCoefficientRings RY)) (A : Sheaf K (Type u)) [HasDerivedCategory.{w} (modules RX)] [HasDerivedCategory.{w} (modules RY)] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} (elementRing (localCoefficientRings RX) (f.inverse.obj A)))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} (elementRing (localCoefficientRings RY) A))] : ∃ o : RingedSheafSliceOrdinaryComparison RX RY f A, HasRingedSheafSliceDerivedComparison.{u, w} o",
   "branch": "newtargets-dag",
-  "by": "Q41",
+  "by": "Q2",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The ordinary output record and derived output proposition give the arbitrary sheaf-slice ringed morphism, the geometric/ordinary mate normalizations, actual exact derived restrictions, K-flat and K-injective computations, representative-normalized derived adjunctions, the two natural isomorphisms, their representative formulas and the counit identity. The existing normalized DerivedAdjunction is owned by def-pur-ringed-coefficient-counit-presentations; presentationElementRing is owned by def-weil-pbc-ringed-presentation-comparison-data; localCoefficientRings is owned by def-weil-pbc-local-coefficient-localization. These three landed definition nodes are added as statement dependencies. No ringed-presentation-transport theorem is used. Module pullbacks are specified by their universal property as left adjoints to the supplied induced module direct images, uniquely up to adjunction-preserving isomorphism."
+  "note": "The original theorem signature and the complete derived output proposition are unchanged. The three ordinary interfaces are re-exported from SheafSliceOrdinaryData, which breaks the import cycle for the separate ordinary theorem. The proof constructs both normalized derived adjunctions, beta, its inverse mate theta, both representative equations and the counit identity. One separate ordinary Stacks 04IF theorem remains."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -371,5 +280,15 @@
   "group": "Q41",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of b223c3c7dc81: Lean module byte-identical (sha256 b298…ca0b4); stmt_deps now replace theorem lem-weil-pbc-ringed-presentation-transport with def-weil-pbc-ringed-presentation-comparison-data and add def-weil-pbc-local-coefficient-localization (records byte-identical to live/side-live); report and lean.note fixed. Every declaration used (RingedToposMorphism, localCoefficientRings, presentationElementRing, DerivedAdjunction/modules/underlying/onComplex, ringedSiteModules, IsKFlatIndependentCoefficients, IsFlatOnSite, DerivedCategory) is owned by a stmt_dep. Item still split, no lean, live/side-live; no repair note; not dropped. Substance re-read: slice square pinned by prodComparison/sections/sets_formula/structural; delta pinned on underlying sheaves, sigma by ordinary_mate; homFormula-normalized DerivedAdjunction; theta determined by theta_representative + flat computations, beta by beta_representative and mateEquiv; K-flat/K-injective restriction clauses and counit equation present. Edge cases (empty/terminal/representable A, unbounded, non-flat c) and gates OK. No compile (no file changed). Advisory: element* helpers owned by theorem node lem-weil-pbc-ringed-sheaf-slice-adjunction (stage-1)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-a4e5a",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261021T140856-L-2767715",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof (sliceNormalizedDerived + derivedComparisonOfOrdinary) and new modules SheafSliceOrdinaryData/Square/Comparison against node lem-sbc-ringed-topos-sheaf-slice-derived-comparison, clone item module (verbatim move diff), sandbox compile + #print axioms (sorryAx only via ringedSheafSliceOrdinarySquare)"
  }
 }

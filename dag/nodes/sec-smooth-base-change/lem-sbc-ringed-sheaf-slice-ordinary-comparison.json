@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-ringed-sheaf-slice-ordinary-comparison",
+ "kind": "statement",
+ "title": "The ordinary ringed localization square at an arbitrary sheaf",
+ "statement": "Let $(C,J),(D,K)$ be small sites, $R_X,R_Y$ commutative coefficient-ring sheaves, $f:(\\operatorname{Sh}(J),R_X)\\to(\\operatorname{Sh}(K),R_Y)$ a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism], and $A$ any sheaf of sets on $(D,K)$. There exists ordinary comparison data [def-sbc-ringed-sheaf-slice-ordinary-data]: the ringed slice morphism at $A$, the normalized geometric restriction square, mutually mate isomorphisms $f_A^*r_Y\\cong r_Xf^*$ and $r_Yf_*\\cong f_{A*}r_X$, exact additive restriction functors, preservation of K-injectives by source restriction, and preservation of K-flat complexes with flat terms by target restriction. No derived-category choices, boundedness hypotheses or flatness of the structural map are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; sites.tex Tag 04H1, lemma-localize-morphism-topoi"
+ },
+ "stmt_deps": [
+  "def-sbc-ringed-sheaf-slice-ordinary-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized ordinary ringed and module square from [lem-sbc-ringed-sheaf-slice-ordinary-square]. It supplies the fibre normalizations, structural ring map, the two module adjunctions, and the mutually mate module isomorphisms.",
+   "uses": [
+    "lem-sbc-ringed-sheaf-slice-ordinary-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The canonical element restriction is additive and exact, and preserves K-injectives by the proved presentationElementRestriction API in [def-weil-pbc-ringed-presentation-comparison-data]. These results apply to the actual canonical restriction, independently of choices of slice presentation.",
+   "uses": [
+    "def-weil-pbc-ringed-presentation-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The element projection is continuous and cocontinuous by [lem-weil-pbc-element-site-descent]. Its induced ringed restriction has canonical module restriction as left adjoint by [lem-weil-pbc-continuous-cocontinuous-ringed-restriction]. Compare this left adjoint with the tensor pullback supplied by [lem-weil-pbc-supplied-ringed-topos-kflat-pullback] using uniqueness of left adjoints. The latter preserves K-flat complexes with flat terms. Transfer K-flatness across the induced complex isomorphism by tensoring with each acyclic complex; transfer flatness across the termwise isomorphism using the induced isomorphism of tensor functors. This fills the targetKFlat field and proves the entire ordinary comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-ringed-sheaf-slice-ordinary-square",
+  "def-weil-pbc-ringed-presentation-comparison-data",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IF square plus restriction exactness (04IE), K-injective preservation (08FI), and K-flat pullback (0G7E), transported through uniqueness of left adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RingedSheafSlice|localize.*ringed.*topoi",
+   "results": "{\"t\": \"2026-10-21T12:04:23Z\", \"tool\": \"grep\", \"query\": \"RingedSheafSlice|localize.*ringed.*topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. The returned site-functor module adjunctions do not construct the ordinary square at an arbitrary sheaf for an arbitrary geometric morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over.post\", \"Over.star\"",
+   "results": "{\"t\": \"2026-10-21T12:04:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Over.post\\\", \\\"Over.star\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. The returned site-functor module adjunctions do not construct the ordinary square at an arbitrary sheaf for an arbitrary geometric morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at a sheaf commutes with inverse and direct images for a morphism of ringed topoi",
+   "results": "{\"t\": \"2026-10-21T13:01:28Z\", \"tool\": \"leansearch\", \"query\": \"Localization at a sheaf commutes with inverse and direct images for a morphism of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"ModuleCat.Tilde.stalkIso_inv\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"AlgebraicGeometry.stalkMap_toStalk\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\"], \"digest\": \"7c930941347a88cc\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the returned stalk and open-immersion formulas do not construct the arbitrary-sheaf ringed localization square."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SheafSliceDerivedComparison",
+  "date": "2026-10-21",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; locality on a target site object before applying the strict-perfect argument; ordinary localization square needed before deriving the exchange"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SheafSliceOrdinaryComparison",
+  "file": "lean/Sheaf/Paper/SheafSliceOrdinaryComparison.lean",
+  "declaration": "CategoryTheory.ringedSheafSliceOrdinaryComparison",
+  "statement": "theorem ringedSheafSliceOrdinaryComparison {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (RX : Sheaf J CommRingCat.{u}) (RY : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (localCoefficientRings RX) (localCoefficientRings RY)) (A : Sheaf K (Type u)) : Nonempty (RingedSheafSliceOrdinaryComparison RX RY f A)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-a4e5a",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261021T140856-L-2767715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-a4e5a",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261021T140856-L-2767715",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof (sliceNormalizedDerived + derivedComparisonOfOrdinary) and new modules SheafSliceOrdinaryData/Square/Comparison against node lem-sbc-ringed-topos-sheaf-slice-derived-comparison, clone item module (verbatim move diff), sandbox compile + #print axioms (sorryAx only via ringedSheafSliceOrdinarySquare)"
+ }
+}

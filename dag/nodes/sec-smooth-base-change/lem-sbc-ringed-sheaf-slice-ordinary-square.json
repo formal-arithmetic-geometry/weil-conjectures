@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-ringed-sheaf-slice-ordinary-square",
+ "kind": "statement",
+ "title": "The normalized ordinary ringed square at a sheaf",
+ "statement": "Let $(C,J),(D,K)$ be small sites, $R_X,R_Y$ commutative coefficient-ring sheaves, $f:(\\operatorname{Sh}(J),R_X)\\to(\\operatorname{Sh}(K),R_Y)$ a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism], and $A$ any sheaf of sets on $(D,K)$. There exists normalized ordinary square data [def-sbc-ringed-sheaf-slice-ordinary-data]: the ringed morphism on the element-site presentations of the slices at $A$ and $f^{-1}A$, its normalized inverse-image localization comparison, and natural module isomorphisms $f_A^*r_Y\\cong r_Xf^*$ and $r_Yf_*\\cong f_{A*}r_X$ which are mates. The underlying direct-image comparison is the geometric mate, and the structural ring map is the restriction of the original one. No derived functors or resolution preservation data are asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; sites.tex Tag 04H1, lemma-localize-morphism-topoi"
+ },
+ "stmt_deps": [
+  "def-sbc-ringed-sheaf-slice-ordinary-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the element-site equivalences and exact restrictions of [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Put $L=f^{-1}$ and $V=f_*$. The arrowwise functor $L_A:\\mathscr Y/A\\to\\mathscr X/B$ preserves finite limits and has a right adjoint by [lem-sfb-left-exact-left-adjoint-slices]. Explicitly its right adjoint sends $p:H\\to B$ to $A\\times_{VB}VH\\to A$, using $\\eta_A:A\\to VLA=VB$. Indeed, adjunction identifies a map $LK\\to H$ over $B$ with a map $K\\to VH$ whose composite to $VB$ is $\\eta_A$ after $K\\to A$; this is exactly a map into that pullback over $A$. Thus $L_A$ is the inverse image of a geometric morphism $f_A$. Since $L$ preserves products, $L_A(A\\times F\\to A)=(B\\times LF\\to B)$, naturally in $F$. This is the commutation isomorphism of the localization square.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-sfb-left-exact-left-adjoint-slices",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04H1, lemma-localize-morphism-topoi; explicit slice-adjoint formula"
+   }
+  },
+  {
+   "text": "Restrict the structural ring map $c:LR_Y\\to R_X$ to $\\mathscr X/B$. The last identity of step 1 identifies its domain with $L_A(R_{Y,A})$, so it gives $f_A$ its ringed structure and makes the square commute as a square of ringed topoi. Let $O=LR_Y$ on $\\mathscr X$. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the localization $j_B$ with coefficient ring $O$, to the $O$-modules $R_X$ and $LM$. Its structural ring map is an isomorphism, hence its module pullback is restriction. Together with step 1 this identifies\n$$f_A^*r_YM=R_{X,B}\\otimes_{r_XO}r_XLM\\ \\cong\\ r_X(R_X\\otimes_O LM)=r_Xf^*M.$$\nCall this isomorphism $\\sigma_M$. It preserves the scalar-extension insertion $m\\mapsto1\\otimes m$, since the tensor comparison is the canonical one. The module adjunctions used here are those of [lem-weil-pbc-ringed-topoi-module-adjunction].",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; Tag 03EL, lemma-tensor-product-pullback; Tag 03D7, lemma-adjoint-pullback-pushforward-modules"
+   }
+  },
+  {
+   "text": "For an $R_X$-module $E$, restriction corresponds to the module object $B\\times E\\to B$. Step 1 gives\n$$f_{A*}r_XE=A\\times_{VB}V(B\\times E)\\cong A\\times VE=r_Yf_*E.$$\nHere $V(B\\times E)\\cong VB\\times VE$: maps into either side are pairs of maps by the original adjunction. Addition is addition in $VE$ on each fibre. The scalar action is the action induced by $c$, restricted to that fibre, hence agrees on both sides by [def-weil-pbc-ringed-topos-morphism]. Write $\\delta:r_Yf_*\\xrightarrow{\\sim}f_{A*}r_X$ for this natural identification. If $a:M\\to f_*E$ has ordinary adjunct $\\widetilde a:f^*M\\to E$, then the adjunct of $\\delta_E r_Ya$ is $r_X\\widetilde a\\,\\sigma_M$. To check it, first apply the slice-adjoint pullback formula of step 1 to the underlying set-sheaf transpose: it is $r_X$ of the original transpose. The module adjunct extends that map from $1\\otimes m$ by $s\\otimes m\\mapsto s\\widetilde a(1\\otimes m)$, by [lem-weil-pbc-ringed-topoi-module-adjunction, lem-weil-pbc-geometric-module-transport]. Since $\\sigma$ preserves these insertions, the two extensions are equal.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; Tags 03D3 and 03D7, underlying adjunction and scalar-extension transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-sfb-left-exact-left-adjoint-slices",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; geometric and module square of parent steps 1–3 only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RingedSheafSlice|localize.*ringed.*topoi",
+   "results": "{\"t\": \"2026-10-21T12:04:23Z\", \"tool\": \"grep\", \"query\": \"RingedSheafSlice|localize.*ringed.*topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. The returned site-functor module adjunctions do not construct the ordinary square at an arbitrary sheaf for an arbitrary geometric morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over.post\", \"Over.star\"",
+   "results": "{\"t\": \"2026-10-21T12:04:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Over.post\\\", \\\"Over.star\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. The returned site-functor module adjunctions do not construct the ordinary square at an arbitrary sheaf for an arbitrary geometric morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at a sheaf commutes with inverse and direct images for a morphism of ringed topoi",
+   "results": "{\"t\": \"2026-10-21T13:01:28Z\", \"tool\": \"leansearch\", \"query\": \"Localization at a sheaf commutes with inverse and direct images for a morphism of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"ModuleCat.Tilde.stalkIso_inv\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"AlgebraicGeometry.stalkMap_toStalk\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\"], \"digest\": \"7c930941347a88cc\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the returned stalk and open-immersion formulas do not construct the arbitrary-sheaf ringed localization square."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SheafSliceDerivedComparison",
+  "date": "2026-10-21",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; locality on a target site object before applying the strict-perfect argument; ordinary localization square needed before deriving the exchange"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SheafSliceOrdinarySquare",
+  "file": "lean/Sheaf/Paper/SheafSliceOrdinarySquare.lean",
+  "declaration": "CategoryTheory.ringedSheafSliceOrdinarySquare",
+  "statement": "theorem ringedSheafSliceOrdinarySquare {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (RX : Sheaf J CommRingCat.{u}) (RY : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (localCoefficientRings RX) (localCoefficientRings RY)) (A : Sheaf K (Type u)) : Nonempty (RingedSheafSliceSquare RX RY f A)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-a4e5a",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261021T140856-L-2767715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-a4e5a",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261021T140856-L-2767715",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof (sliceNormalizedDerived + derivedComparisonOfOrdinary) and new modules SheafSliceOrdinaryData/Square/Comparison against node lem-sbc-ringed-topos-sheaf-slice-derived-comparison, clone item module (verbatim move diff), sandbox compile + #print axioms (sorryAx only via ringedSheafSliceOrdinarySquare)"
+ }
+}
