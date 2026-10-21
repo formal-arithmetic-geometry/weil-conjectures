@@ -33,9 +33,135 @@
   "lem-sf-integral-open-reduction-comparison",
   "lem-sf-open-finite-constructibility-interval"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat complexes $Q\\to K$ on $U$ and $F\\to P$ on $X$. The open semilinear tensor-model lemma gives a flat-term K-flat representative $j_!Q$ of $j_!K$ and a chain isomorphism\n$G=\\operatorname{Tot}(j_!Q\\otimes F)\\cong j_!\\operatorname{Tot}(Q\\otimes j^*F)=j_!G_U$.\nRestriction and coefficient pullback preserve flat-term K-flat representatives, so $j^*F$, $Q_n=Q\\otimes B_{n,U}$ and $F_n=F\\otimes B_{n,X}$ compute the indicated derived objects. Here $B_{n,W}=(A_n)_W$; coefficient pullback is applied on the identity topos with its map $B_W\\to B_{n,W}$. The chain isomorphism is the ordinary slice tensor isomorphism, in the inverse-open-unit-transpose normalization of $\\gamma^B$. All complexes remain unbounded; these are computational K-flat choices, not a finite-Tor assumption on $K$ or $P$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+   }
+  },
+  {
+   "text": "Apply the strict semilinear tensor-model statement to $Q$. It supplies a single $A_\\bullet$-linear chain isomorphism $r_Q:((j_!Q)\\otimes B_{n,X})_n\\to J(Q_n)_n$ with formula $[x]\\otimes a\\mapsto[x\\otimes a|_U]$, commuting with all quotient maps and scalar units. Its evaluations localize to the canonical open scalar comparisons. Their inverses are the open-unit transposes by the open tensor normalization, hence have exactly the normalization specified by the coefficient-mate definition. Since $K$ is complete, the integral open reduction comparison identifies this localization with the already specified $r_j(K)$ and proves that $j_!K$ is complete. This constructs $r_\\bullet$ as a simultaneous system map; it is not assembled from unrelated derived evaluations.",
+   "uses": [
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-sf-open-tensor-normalization",
+    "def-sf-open-reduction-coefficient-mate",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+   }
+  },
+  {
+   "text": "Scalar restriction commutes with the open extensions in the statement: on each extension-presheaf summand it retains the same underlying abelian group, with $B_X$ acting through $B_X\\to B_{n,X}$; this is the same action obtained by first restricting scalars on the open and then extending. The restriction maps and quotient transitions are the same maps on these summands. Sheafification has the same underlying additive sheaf with this induced action, so the identification also holds for the module sheaves and termwise for complexes and strict systems. In particular $r_Q$ retains its $A_n$-linear identification before scalar restriction, as well as its strict $B_X$-linear tower identification afterwards.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-open-semilinear-tensor-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian (its ideals are $0$ and $k$), so finite type over $k$ implies that $X$ is locally Noetherian by the finite-type Noetherian lemma. The definition of finite type gives quasi-compactness over $\\operatorname{Spec}k$, hence $X$ is Noetherian. The open $j$ is therefore quasi-compact. For each $n$, apply the finite open constructibility-interval lemma to $K_n$: via $r_n$ it gives constructible cohomology of $(j_!K)_n$, the equality $\\mathcal H^q(j_!^{A_n}K_n)\\cong j_!^{A_n}\\mathcal H^q(K_n)$, the same interval as $K_n$, and exactly the asserted partition with the reduced closed complement and zero sheaf. The single interval in the integral definition therefore works for every $n$. Combining this with completeness from step 2 proves $j_!K\\in D^b_c(X,R)$. Apply the immersion completed-pullback comparison to the open immersion $j$ and $P$: it gives ordinary exact $j^*P\\in D^b_c(U,R)$ with the same uniform interval and quotient identifications. Its strata are the intersections of the original strata with $U$, omitting empty intersections.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "def-weil-finite-type-morphism",
+    "lem-sf-open-finite-constructibility-interval",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(2),(3), p.50; precise finite-quotient interval statement in lem-sf-open-finite-constructibility-interval. Stacks Tag 01T6, morphisms.tex lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "The complexes $G$ and $G_U$ are K-flat: for an acyclic complex $C$, reassociation identifies $(Q_1\\otimes Q_2)\\otimes C$ with $Q_1\\otimes(Q_2\\otimes C)$, which is acyclic successively by K-flatness of $Q_2$ and $Q_1$. This applies to $(j_!Q,F)$ and $(Q,j^*F)$ from step 1. Thus their ordinary coefficient quotients compute derived reduction. For two module sheaves $M,N$ over $B$ and a coefficient algebra $A$, the balanced maps\n$(M\\otimes_BN)\\otimes_BA\\longrightarrow(M\\otimes_BA)\\otimes_A(N\\otimes_BA)$,\n$(x\\otimes y)\\otimes a\\longmapsto(x\\otimes a)\\otimes(y\\otimes1)$,\nand $(x\\otimes a)\\otimes(y\\otimes b)\\longmapsto(x\\otimes y)\\otimes ab$\nare inverse: balancing moves $b$ between the two $A$ factors and moves every $B$ scalar across either tensor. This calculation is compatible with restrictions and thus gives the sheaf tensor maps. Apply it to each homogeneous summand of $G$ and $G_U$, with $A=B_{n,W}$. Neither map permutes $x$ and $y$, so both preserve bidegrees $(a,b)$ and intertwine $d(x\\otimes y)=dx\\otimes y+(-1)^a x\\otimes dy$. They therefore give chain isomorphisms between the quotient of the ordinary total tensor and the finite total tensor. They also commute with $B_{m,W}\\to B_{n,W}$ because that map sends $ab$ to the product of the images and sends $1$ to $1$. These are the canonical derived coefficient-tensor identifications: on the K-flat representatives of step 1 they are precisely the tensor-pullback comparison.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+   }
+  },
+  {
+   "text": "At each coefficient stage the ordinary slice tensor isomorphism of the open semilinear tensor-model statement gives $\\operatorname{Tot}(j_!^{A_n}Q_n\\otimes_{B_{n,X}}F_n)\\cong j_!^{A_n}\\operatorname{Tot}(Q_n\\otimes_{B_{n,U}}j^*F_n)$. Compose it with $r_Q$ on its first factor to obtain the simultaneous $\\gamma_\\bullet:T_\\bullet\\to JS_\\bullet$. To identify it with reduction of $\\gamma^B$, use the extension-presheaf summand labeled by $V\\to U$. There the ordinary open tensor map sends $[x]\\otimes y$ to $[x\\otimes j^*y]$: its inverse restricts to $u_Q\\otimes1$ and hence is the specified open-unit adjunct, not a separately chosen isomorphism. Under the balancing maps of step 5, reduction followed by this finite open tensor map sends\n$([x]\\otimes y)\\otimes a\\longmapsto[(x\\otimes a|_U)\\otimes(j^*y\\otimes1)]$.\nFirst applying the ordinary open tensor map and then reduction gives the same expression. The sheaf tensor and extension constructions extend these equal bilinear formulas to the sheaves. They preserve bidegrees and satisfy the same signed differential equation as in step 5. Replacing $a$ by its quotient image gives the identical formula at every lower index. Thus the maps and their inverses form chain isomorphisms of strict systems, and the equality identifying reduction of $\\gamma^B$ holds for these chain-system maps.",
+   "uses": [
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-sf-open-tensor-normalization",
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+   }
+  },
+  {
+   "text": "The tensor quotient augmentations on $G$ and $G_U$ are obtained by the scalar units in the reduction tower and the balancing maps of step 5. On a homogeneous extension generator, the upper augmentation sends $[x]\\otimes y$ to $([x]\\otimes1)\\otimes(y\\otimes1)$. Applying $\\gamma_\\bullet$ sends this to $[(x\\otimes1)\\otimes(j^*y\\otimes1)]$. The other route first sends $[x]\\otimes y$ to $[x\\otimes j^*y]$ under $\\gamma^B$ and then to exactly $[(x\\otimes1)\\otimes(j^*y\\otimes1)]$ under $J(c_S)$. The coefficient is $1$ at every level and every quotient map preserves $1$, so this is an equality of the simultaneous augmented strict systems. There is no degree interchange, and the signed differential was checked in steps 5 and 6. The tensor-completion normalization specifies these very scalar-unit tensor augmentations (first Roos coordinate the displayed tensor, shifted coordinate zero). Consequently $\\gamma_\\bullet\\circ c_T=J(c_S)\\circ\\Delta(\\gamma^B)$ before localization. Applying the localization functor preserves that equality, proving it in the derived category of strict systems as asserted; no faithfulness of separate finite evaluations and no commutation of $j_!$ with products or inverse limits is needed.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-sf-tensor-completion-comparison",
+    "lem-sf-open-semilinear-tensor-model",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-sf-tensor-completion-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-finite-type-morphism",
+  "def-weil-integral-reduction-tower",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-open-semilinear-tensor-model",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived map in sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor. Agent calculation of the simultaneous tensor quotient augmentation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,10 +225,45 @@
    "results": "Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/Elements.lean",
    "date": "2026-10-21",
    "verdict": "no match: inspected AdicCompletion.map_exact (RingTheory/AdicCompletion/Exactness.lean:184), ofTensorProduct_naturality (AsTensorProduct.lean:74), Scheme.Modules.restrictFunctorIsoPullback (AlgebraicGeometry/Modules/Sheaf.lean:453), restrictAdjunction_unit_app_app (:442), and preservesLimitIso_inv_π (CategoryTheory/Limits/Preserves/Limits.lean:63); these are respectively ordinary module completion, Zariski structure-module restriction, and ordinary categorical limits, not this pro-etale strict derived/unit assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of module complexes commutes with coefficient reduction and derived tensor with compatibility of the strict quotient tower augmentation",
+   "results": "HomologicalComplex.coinvariantsTensorObj, rTensor.inverse_of_rightInverse, lTensor.inverse_of_rightInverse, AdicCompletion.ofTensorProduct_naturality, rTensor.inverse_comp_rTensor, Ideal.pi_mkQ_rTensor, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ, rTensor.inverse_of_rightInverse_comp_rTensor",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module tensors/completion, definitions of sheaves of modules, or Zariski module restriction, and do not state the simultaneous pro-etale strict augmented tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|ExtensionByZero|jShriek|lowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module tensors/completion, definitions of sheaves of modules, or Zariski module restriction, and do not state the simultaneous pro-etale strict augmented tensor comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor projection formula for extension by zero preserves scalar reduction tower augmentations",
+   "results": "Module.Projective.tensorProduct, TensorProduct.zero_smul, PiTensorProduct.zero_tprodCoeff, retractionOfSectionOfKerSqZero_tmul_D, CategoryTheory.isZero_Tor_succ_of_projective, PiTensorProduct.zero_tprodCoeff', CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, PiTensorProduct.Eqv.of_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module tensors/completion, definitions of sheaves of modules, or Zariski module restriction, and do not state the simultaneous pro-etale strict augmented tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module tensors/completion, definitions of sheaves of modules, or Zariski module restriction, and do not state the simultaneous pro-etale strict augmented tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical open immersion projection formula on sheaves of modules is natural for change of coefficient rings and scalar unit maps",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module tensors/completion, definitions of sheaves of modules, or Zariski module restriction, and do not state the simultaneous pro-etale strict augmented tensor comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-pf-open-factor-coherence",
@@ -119,5 +280,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-tensor-quotient-augmentation",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved it on one pair of flat-term K-flat representatives. Reused the existing strict open scalar model, actual integral reduction comparison, finite constructibility interval and immersion pullback tools; wrote balanced tensor, sign, transition and strict augmentation equations explicitly. No new nodes.",
+  "blueprint": "prop-sf-pf-coherence proof, base-change paragraph, open factor: the two composites are determined on restriction. This split realizes its completed coefficient input by the actual simultaneous open reduction map and a strict augmented tensor calculation, without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat representatives, needed to compute the stipulated strict quotient towers."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact module extension by zero as sheafification and its slice restriction adjunction, used for scalar restriction."
+   },
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Generic immersion restriction preserving quotient completeness and the integral constructible category, needed for j^*P; no own-unit lemma supplies this domain fact."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic actual open reduction comparison and completeness preservation; needed to identify our strict map with r_j(K), which is explicitly named by the item."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Generic finite-stage constructibility and cohomology interval preservation, applied separately at every quotient; the own unit does not prove this finiteness input."
+   },
+   {
+    "node": "lem-sf-open-semilinear-tensor-model",
+    "why": "Generic unbounded open tensor chain model and simultaneous coefficient reduction formula; this supplies the computational input, not the tensor augmentation square proved here."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic arbitrary-coefficient open tensor isomorphism with the inverse-open-unit-transpose normalization, including the diagram-site version; fixes the map used throughout this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic arbitrary-ringed-topos scalar pullback preserving K-flat representatives and its tensor comparison, applied only to the coefficient ring maps and open restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-open-semilinear-tensor-model",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-5eb65573a",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-5eb65573a (reviewer sub-agent of L); spot-checked: Q142 lem-sf-open-tensor-quotient-augmentation 5eb65573: one commit, item and report only, 0 new nodes. Statement and stmt_deps are byte-identical to side-live. The item is still unsplit live, so there is no supersession. It is a new node from the Q100 parent re-split and has no repair note of its own. Both of Q100's FIX citations are present. No SGA, proof_deps equals the union of step uses, three search kinds recorded, and the full closure walk finds no cycle. Sources: Stacks 0E8I (sites-modules.tex:4051) and 0GL1 (sites-cohomology.tex:4578, 'Details omitted'); steps 1, 5 and 6 write out those details. Steps: (1) the kflat-resolution, semilinear-tensor-model, tensor-pullback (K-flatness preserved) and open-normalization (inverse = adjunct of u⊗1) statements give the representatives and the chain isomorphism. (2) r_Q has formula [x]⊗a↦[x⊗a|_U], strict transitions and augmentations; integral-open-reduction-comparison identifies it with r_j(K) and gives completeness; ℓ≠p, and the quasi-compactness of j is only shown in step 4 (forward reference, not circular, advisory). (3) Scalar restriction on the extension-presheaf summands is elementary and correct. (4) X is Noetherian by 01T6 plus finite type. finite-constructibility-interval applies with the uniform interval of def-weil-derived-complete-integral-detailed (read in full). immersion-completed-pullback-comparison gives j^*P in the integral category, and the strata clause (intersect with U) is elementary. (5) The balancing maps (x⊗y)⊗a↦(x⊗a)⊗(y⊗1) and the inverse with ab were rechecked: no factor exchange, signs and every quotient transition preserved. (6) and (7) Both routes give [(x⊗1)⊗(j^*y⊗1)] (rechecked by hand), matching def-sf-tensor-completion-comparison (first Roos coordinate the unit tensors, shifted coordinate 0). The equality holds for strict systems before localization, and no j_!/limit commutation is used. Edge cases: U=∅, U=X, K=0, P=0, n=1, odd degree. Duplicate candidates read: cbc-ringed-open-strict-reduction, cbc-ringed-open-scalar-limit-coherence, sf-open-quotient-koszul-completeness; none states the augmented tensor square. All eight declared tool_uses accepted as generic black boxes, the same tools the parent was accepted with."
  }
 }
