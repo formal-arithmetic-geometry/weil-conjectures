@@ -1,0 +1,90 @@
+{
+ "id": "lem-sfb-ind-finite-free-scalar-model",
+ "kind": "statement",
+ "title": "Exact unbounded scalar model for an ind-finite-free coefficient algebra",
+ "statement": "Let $\\mathcal C$ be a site small in the coefficient universe [def-weil-size-convention], and $R$ a sheaf of commutative rings. Use module sheaves, their cochain complexes, ordinary unbounded derived categories with localization $Q_R,Q_S$, and sheafified tensor [def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules, def-weil-abstract-derived-category, def-pur-sheaf-tensor-product]. Let $I$ be a small filtered category and assume its colimits of $R$-module sheaves are exact. Let $(S_i)$ be a diagram of commutative $R$-algebra sheaves with each underlying module isomorphic to $R^{d_i}$, $d_i\\in\\mathbf N$. Suppose its algebra colimit $S$, with coprojections $q_i:S_i\\to S$, is also the colimit of the underlying $R$-modules [def-weil-pbc-category-colimit]. Write $E=S\\otimes_R-$ for ordinary scalar extension, $U$ for restriction of scalars [def-pc-sheaf-restrict-scalars], and $E^{\\mathbf L}$ for the K-flat-derived extension [lem-pur-derived-change-of-rings, def-pc-kflat-complex]. Then $E$ is exact, its termwise extension preserves every quasi-isomorphism of unbounded complexes, and its canonical derived counit is a natural isomorphism $\\epsilon_A:E^{\\mathbf L}(Q_RA)\\xrightarrow{\\sim}Q_S(EA)$ for every unbounded $R$-complex $A$. Under the K-flat model given by any resolution $p:P\\to A$, this counit is $Q_S(Ep)$. There is a natural chain isomorphism\n$$\\kappa_A:\\varinjlim_i(S_i\\otimes_RA)\\xrightarrow{\\sim}U(EA),$$\nwhere the colimit is termwise. On the sheafification-unit images of local pure tensors its $i$-th leg is $s_i\\otimes a\\mapsto q_i(s_i)\\otimes a$. These identifications commute with chain maps, with inversion of quasi-isomorphisms, and with compatible maps of the coefficient diagrams. No boundedness of $A$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EU (lemma-colimits-flat), part (2), and its tensor-colimit proof; agent refinement extracting the evaluation-normalized termwise scalar model and derived counit from the original coefficient-colimit argument. The derived extension itself is the existing lem-pur-derived-change-of-rings, not a new construction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-category-colimit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of commutative algebras on a small site, a filtered colimit of finite free coefficient algebras has exact scalar extension and ordinary termwise extension computes derived extension on every unbounded complex",
+   "results": "First query returned Condensed.hasExactColimitsOfShape, ordinary Ext and exact-functor maps, and HomologicalComplex.hasExactColimitsOfShape. Second query returned SheafOfModules.mapFree, light-condensed projectivity and ModuleCat.preservesFiniteLimits_extendScalars_of_flat / preservesFiniteLimits_tensorLeft_of_ringHomFlat. These do not give a sheaf-coefficient scalar model. Actual search log: {\"t\": \"2026-10-21T05:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of commutative algebras on a small site, a filtered colimit of finite free coefficient algebras has exact scalar extension and ordinary termwise extension computes derived extension on every unbounded complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.hasExactColimitsOfShape\", \"localCohomology.diagram\", \"Ext\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"HomologicalComplex.hasExactColimitsOfShape\"], \"digest\": \"c8fe7e00cd2482a1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind finite free ring sheaf is flat and its tensor on arbitrary complexes is naturally isomorphic to derived extension of scalars, compatibly with the filtered tensor cocone",
+   "results": "First query returned Condensed.hasExactColimitsOfShape, ordinary Ext and exact-functor maps, and HomologicalComplex.hasExactColimitsOfShape. Second query returned SheafOfModules.mapFree, light-condensed projectivity and ModuleCat.preservesFiniteLimits_extendScalars_of_flat / preservesFiniteLimits_tensorLeft_of_ringHomFlat. These do not give a sheaf-coefficient scalar model. Actual search log: {\"t\": \"2026-10-21T05:57:01Z\", \"tool\": \"leanfinder\", \"query\": \"An ind finite free ring sheaf is flat and its tensor on arbitrary complexes is naturally isomorphic to derived extension of scalars, compatibly with the filtered tensor cocone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"876f72dab1c0d1cb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\", \"colimit\"",
+   "results": "No hits. Actual search log: {\"t\": \"2026-10-21T05:57:00Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "(filtered|colimit).*(flat|changeOfRings|derived)|(flat|changeOfRings|derived).*(filtered|colimit)",
+   "results": "Broad query: representably flat functors, PointwiseRightDerived.hasColimit and Indization; targeted sheaf query: ChangeOfRings.lean imports and Limits.lean:98-115 finite-limit preservation by evaluation and forgetful functors. Actual search log: {\"t\": \"2026-10-21T05:56:59Z\", \"tool\": \"grep\", \"query\": \"(filtered|colimit).*(flat|changeOfRings|derived)|(flat|changeOfRings|derived).*(filtered|colimit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\"], \"digest\": \"ea1e734b3f7f1696\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar extension for a filtered colimit of finite free sheaves of algebras computes the unbounded derived change of rings",
+   "results": "Returned ModuleCat filtered-colimit constructions, ModuleCat.preservesFiniteLimits_extendScalars_of_flat and PresheafOfModules.colimitPresheafOfModules. Actual search log: {\"t\": \"2026-10-21T05:57:00Z\", \"tool\": \"leansearch\", \"query\": \"Exact scalar extension for a filtered colimit of finite free sheaves of algebras computes the unbounded derived change of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.FilteredColimits.colimitSMulAux\", \"ModuleCat.FilteredColimits.colimitHasSMul\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.FilteredColimits.colimit\", \"ModuleCat.FilteredColimits.colimitModule\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"ModuleCat.FilteredColimits.M.mk\", \"PresheafOfModules.colimitPresheafOfModules\"], \"digest\": \"54d2962bc626694a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|[Ff]lat|[Dd]erived|[Pp]reservesFiniteLimits",
+   "results": "Broad query: representably flat functors, PointwiseRightDerived.hasColimit and Indization; targeted sheaf query: ChangeOfRings.lean imports and Limits.lean:98-115 finite-limit preservation by evaluation and forgetful functors. Actual search log: {\"t\": \"2026-10-21T05:57:44Z\", \"tool\": \"grep\", \"query\": \"changeOfRings|[Ff]lat|[Dd]erived|[Pp]reservesFiniteLimits\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\"], \"digest\": \"32282fb86b025404\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization.",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dc-hom-filtered-colimit",
+  "date": "2026-10-21",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md: inverting coefficients and descending to finite extensions; the coefficient-flatness and ordinary-to-derived representative argument in old steps 2-3 of lem-sfb-dc-hom-filtered-colimit.",
+   "via": [
+    "lem-sfb-dc-hom-filtered-colimit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

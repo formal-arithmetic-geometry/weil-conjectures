@@ -36,16 +36,14 @@
    }
   },
   {
-   "text": "Tensor-colimit preservation gives $S\\otimes A=\\varinjlim_i(S_i\\otimes A)$. Each stage functor is $A\\mapsto A^{d_i}$ and is exact; the assumed exact filtered colimit makes $S\\otimes-$ exact. Exact functors commute with cohomology, so these tensors compute derived scalar extension and exact termwise colimits preserve quasi-isomorphisms.",
+   "text": "Apply the ind-finite-free scalar-model lemma to $(S_i)$ and its specified module colimit $S$. It gives exact $E=S\\otimes_R-$, the normalized tensor cocone isomorphism, and the canonical identification of ordinary termwise extension with derived extension on every unbounded complex. Apply it to $B$ for the first arrow of the displayed formula and to $C,J$ for the scalar representatives used below. No bound on $B$ or $J$ is needed.",
    "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-pur-derived-change-of-rings"
+    "lem-sfb-ind-finite-free-scalar-model"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EP, tensor-colimit preservation; elementary finite-biproduct and exact-functor specialization."
+    "place": "Tag 03EU (lemma-colimits-flat), part (2), and its tensor-colimit proof; agent refinement extracting the evaluation-normalized termwise scalar model and derived counit from the original coefficient-colimit argument. The derived extension itself is the existing lem-pur-derived-change-of-rings, not a new construction."
    }
   },
   {
@@ -107,21 +105,20 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-category-colimit",
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
   "lem-sfb-dc-hom-scalar-adjunction",
   "lem-sfb-hom-flat-evaluation-roof",
   "lem-sfb-hom-kflat-chain-transpose",
   "lem-sfb-hom-scalar-chain-identification",
+  "lem-sfb-ind-finite-free-scalar-model",
   "lem-sfb-internal-hom-comparison-exists",
   "lem-sfb-internal-hom-filtered-continuity",
   "lem-sfb-internal-hom-finite-free-stage",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+  "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.proof.md",
-  "place": "Final paragraph, finite coefficient extension and filtered coefficient passage. Finer repair of the previously reviewed chain-zigzag proof, retaining the evaluation normalization and reusing the newer strict-model, finite-free-stage and filtered-continuity nodes. The auxiliary chain and scalar identifications are now separate statement-only nodes."
+  "place": "Final coefficient-extension paragraph. Preserve the live six-step assembly and its three already-landed Q52 lemmas, replacing the formerly inline flatness and unbounded ordinary/derived scalar-model calculation by its own statement-only node."
  },
  "mathlib_searches": [
   {
@@ -218,8 +215,8 @@
   "date": "2026-10-21",
   "item": "lem-sfb-dc-hom-filtered-colimit",
   "worker": "stage1",
-  "summary": "Re-split the 13346-character proof as requested on 2026-10-21, with the statement unchanged. Reused the current finite-free-stage, strict comparison and filtered-continuity nodes; extracted one-sided K-flat transposition, strict scalar Hom identification/evaluation, and flat evaluation-roof compatibility into three statement-only unsplit nodes, as explicitly required by the updated route note. The parent is a short assembly with strict cocone identities before localization. Retained auxiliary arguments, citations and searches in the sandbox report/research notes. No Lean files changed.",
-  "blueprint": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md, descent to a finite extension and coefficient-colimit passage, now realized by the strict finite-free-stage/continuity nodes and three evaluation-model lemmas.",
+  "summary": "Repair of the remaining four-node requirement after Q52 landed three extracted nodes: retain those exact statements and the strict finite-stage/continuity route, and extract the distinct coefficient-flatness, tensor-cocone and canonical ordinary-to-derived scalar-model argument as a fourth statement-only unsplit node. The item statement and Lean record are unchanged; the parent is a short assembly. The initial server dry run explicitly counted three previously landed nodes and required the fourth.",
+  "blueprint": "Final coefficient-passage paragraph of lem-sfb-dc-hom-preserves.proof.md: the three Q52 evaluation lemmas plus the new ind-finite-free scalar model carry the old arguments, with strict finite-free and filtered-continuity nodes reused. All actual sources and normalization are retained.",
   "tool_uses": [
    {
     "node": "lem-pc-kflat-resolution",
@@ -250,10 +247,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q52-6058a974e",
-  "group": "Q52",
+  "reviewer": "NT-cc-Q36-44f2a9b49",
+  "group": "Q36",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-6058a974e (reviewer sub-agent of L); spot-checked: I read the whole item, all 6 steps, the statement of every cited node (including the five R6 strict-model, roof, comparison-exists, finite-free-stage and filtered-continuity nodes, all split and reviewed pass), the unit, the blueprint final paragraph of lem-sfb-dc-hom-preserves, Stacks 08J9 and 03CZ, and the earlier 12-step proof. This is the human-ordered re-split: the statement and stmt_deps are byte-identical to live, and the proof is now 2269 characters. The assembly is correct. Exactness of S⊗− comes from finite-free stages and exact colimits. The filtered-continuity hypotheses hold (C bounded below; Continuous(P) is the item's hypothesis and does not depend on the representative). The chain equations λ_J a = a_S (modulo the tensor-cocone iso (iii)) and λ_J v = v_S λ_C give [v_S]γ = [a_S] before localization. The roof node gives ΘU(c) = γ, and conservative U makes c an iso. I checked the three new statement-only nodes and all are true. The one-K-flat transpose holds because tensoring with K-flat P preserves quasi-isos and ev is a chain map. The scalar chain identification holds: θ(g)(x) = g(1⊗x) on slices, σ_q is balanced and unique, and the strict square sends s⊗f to s·q(1⊗f(x)). For the evaluation roof, both transposes are (s⊗f)⊗p ↦ s⊗f(p); for R = S it reduces to η_J ≃ I(η_C), which holds. None restates an item clause, and none duplicates an existing node: def-coef-ringed-tensor-hom-model and kflat-rhom-currying need both factors K-flat, and the ordinary adjunction node gives Hom-sets only. No cycle. I accept the 3 declared tool_uses (kflat-resolution, derived-change-of-rings, independent-sheaf-tensor-colimits). FIX (B2): the roof node used Q and U without introducing them. I added both, bracketed [def-pc-kflat-complex], and added def-pc-sheaf-restrict-scalars to stmt_deps, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-hom-flat-evaluation-roof.json. Note for the maintainer: the transpose and scalar-chain nodes are really inputs to the roof node's future proof, so their parent citations are thin. When the roof node is split, its worker should cite them rather than re-create them.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-44f2a9b49 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 6 steps and the statement of every node they cite. I also read the new node lem-sfb-ind-finite-free-scalar-model, the live re-split repair note (at least 4 new nodes, proof of at most 3000 characters, reopened 13:45 'split further'), the landed Q52 6058a974 split and its audit, and the RETURN of Q52 3199d7dd. The live item equals the base, and the item is not in route-pivot-dropped. The delivery changes only step 2: its inline elementary claim about flatness and derived scalar extension (old steps 2-3) becomes the new node. This is option (a) of the audit, and the 3 Q52 nodes are kept unchanged. The cumulative count is 4 new nodes. The statement, stmt_deps and lean record are unchanged, and the proof is 2366 characters. Steps 1 and 3-6 still check: D->C is a quasi-isomorphism; filtered-continuity (i)-(iii) holds under the common bound b and Continuous(P); lambda_J a = a_S and lambda_J v = v_S lambda_C give [v_S]gamma = [a_S]; the roof node gives Theta U(c) = gamma, and conservative U makes c an isomorphism. The new statement is true. S_i tensor - is (-)^{d_i}; Stacks 03EP and 03EU(2) (sites-modules.tex l.4342) make S tensor - exact, so it preserves unbounded quasi-isomorphisms. Naturality of the left-derived counit with eps_P invertible on K-flat P makes eps_A = Q_S(Ep) invertible, and kappa is the 03EP termwise isomorphism with legs q_i(s) tensor a. I tested a singleton diagram, d=0 (S=0), S=RxR and varying ranks with arbitrary transition maps. Non-flat Z->Z/2 shows the hypothesis is needed. The new node is not a restatement of the parent. It is not a duplicate of filtered-colimit-flat-module-sheaves (directed poset, flatness only), pur-derived-change-of-rings, sbc-scalar-extension-counit-properties, pur-change-of-rings-acyclic-kflat, sfb-kflat-scalar-comparison-normalization, trf-derived-colimit-change-rings or filtered-continuity (iii). It has no cycle and no SGA source, and its stmt_deps and three kinds of Mathlib search are present. Advisory: the item's tool_uses still list independent-sheaf-tensor-colimits, which its proof no longer uses; this is harmless. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
