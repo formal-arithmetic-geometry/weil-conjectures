@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Write $\\pi:A\\to A/I$ for the quotient map and set $B=A\\otimes_RS$, with structure map $a\\mapsto a\\otimes1$. By clause (1) of [lem-weil-pbc-smooth-ring-map-base-change-composition], $B$ is a smooth $A$-algebra. The tensor-product universal property defines an $A$-algebra map $\\sigma:B\\to A/I$ by $\\sigma(a\\otimes s)=\\pi(a)\\tau(s)$: the formula is additive in each variable, $R$-balanced because $\\tau$ is an $R$-algebra map, multiplicative on pure tensors, and sends $1\\otimes1$ to $1$. In particular $\\sigma(1\\otimes s)=\\tau(s)$.",
+   "text": "Write $\\pi:A\\to A/I$ for the quotient map and set $B=A\\otimes_RS$, with structure map $a\\mapsto a\\otimes1$. By clause (1) of [lem-weil-pbc-smooth-ring-map-base-change-composition], $B$ is a smooth $A$-algebra. The tensor-product universal property defines an $A$-algebra map $\\sigma:B\\to A/I$ by $\\sigma(a\\otimes s)=\\pi(a)\\tau(s)$: the formula is additive in each variable, $R$-balanced because $\\tau$ is an $R$-algebra map, multiplicative on pure tensors, and sends $1\\otimes1$ to $1$. In particular $\\sigma(1\\otimes s)=\\tau(s)$. To apply the single-universe affine lifting statements without changing the universes of R, S, or A, use Algebra.FiniteType.small to regard B as a small type in the universe of A. Replace B by Shrink B, carrying its A-algebra structure along Shrink.algEquiv, and transfer smoothness and the section along this equivalence. After lifting, transport the resulting map back along the inverse equivalence.",
    "uses": [
     "lem-weil-pbc-smooth-ring-map-base-change-composition"
    ],
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-henselization-stage-map] with its rings $(B,C,A)$ equal to $(A,A\\prime,A)$, its ideals $(J,I)$ both equal to $I$, and $\\varphi=\\mathrm{id}_A$. The map $f$ is étale and its quotient map is the isomorphism $\\alpha$ of Step 3; $I$ maps into itself and the target pair $(A,I)$ is henselian by hypothesis. Thus there is a ring map $r:A\\prime\\to A$ with $rf=\\mathrm{id}_A$. This is an $A$-algebra map. All rings may be regarded in one common universe when applying that statement.",
+   "text": "Apply [lem-weil-pbc-henselization-stage-map] with its rings $(B,C,A)$ equal to $(A,A\\prime,A)$, its ideals $(J,I)$ both equal to $I$, and $\\varphi=\\mathrm{id}_A$. The map $f$ is étale and its quotient map is the isomorphism $\\alpha$ of Step 3; $I$ maps into itself and the target pair $(A,I)$ is henselian by hypothesis. Thus there is a ring map $r:A\\prime\\to A$ with $rf=\\mathrm{id}_A$. This is an $A$-algebra map. The small representative from Step 1 and the etale algebra returned by Step 3 both lie in the universe of A, so this application respects the single-universe statement.",
    "uses": [
     "lem-weil-pbc-henselization-stage-map"
    ],
@@ -75,7 +75,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0H74, lemma-lift-smooth-henselian, proof; Tag 0A02 final paragraph for the existing single-stage retraction formulation of 09XI"
+  "place": "Tag 0H74, lemma-lift-smooth-henselian, proof; Tag 0A02 final paragraph for the existing single-stage retraction formulation of 09XI; universe bookkeeping via Mathlib Algebra.FiniteType.small and Shrink.algEquiv"
  },
  "mathlib_searches": [
   {
@@ -234,5 +234,15 @@
   "result": "fix",
   "note": "Delivered statement is mathematically correct against the node and Stacks 0H74 (more-algebra.tex:3440): all hypotheses present, nothing extra, conclusion exact; Algebra.Smooth/HenselianRing are the recorded dep declarations; universes u,v,w independent (#check); edge cases I=bot/top, zero rings, S=R covered; no definitions, sorry only, source/blueprint/5-step docstrings; nt_compile clean, injected error detected. F1: the item was already landed and reviewed on newtargets-dag (Q158, Algebra.Smooth.exists_lift_of_henselianRing, same file, reviewed_lean pass). The Q29 delivery silently overwrites that module and renames the declaration to exists_algHom_lift_of_henselian with a less detailed docstring; its report does not mention the landed version. No citers of either name. Fixes: fixes/HenselianSmoothAlgebraLifting.lean = the landed module byte-identical (compiled clean, #check ok) and fixes/lem-trf-henselian-smooth-algebra-lifting.lean-record.json restoring the landed lean record (declaration Algebra.Smooth.exists_lift_of_henselianRing, statement verbatim). Landing leaves the Lean file and record unchanged and adds Q29's report."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261021T110931-L-3821260",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
