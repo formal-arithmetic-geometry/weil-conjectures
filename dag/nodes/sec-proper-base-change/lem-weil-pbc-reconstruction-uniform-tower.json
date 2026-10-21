@@ -1,335 +1,361 @@
 {
-  "id": "lem-weil-pbc-reconstruction-uniform-tower",
-  "blueprint": {
-    "is": "lem-weil-pbc-reconstruction-uniform-tower",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Reconstruction of a uniform local tower",
-  "statement": "Let $k$ be a field and let $T$ be a scheme of finite type over $\\operatorname{Spec}k$ [def-weil-finite-type-morphism]. Let $M_\\bullet$ be a uniformly bounded constructible adic tower in the sense\nof [def-weil-pbc-bounded-constructible-tower] and put $M=R\\lim M_\\bullet$. Here $R\\lim$ is total right derived inverse limit on the strict tower category, computed by a K-injective tower resolution and termwise inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; its natural Roos triangle realizes the object-only notation of [def-weil-pbc-derived-inverse-limit].\nFor every local model in [def-weil-pbc-bounded-constructible-tower],\nrestriction of the derived-limit projections gives a functorial isomorphism\n\n$$\n L_{\\alpha j}\\xrightarrow{\\sim}M|_{U_{\\alpha j}}.\n$$\n\nConsequently $M$ is derived $I$-complete, the canonical maps\n\n$$\n M\\otimes_A^LP_n\\xrightarrow{\\sim}M_n\n$$\n\nare isomorphisms compatible with normalization, and $M$ has no cohomology\noutside $[d_0,d_1]$. No finiteness assertion about the groups of sections on\n$U_{\\alpha j}$ is required.\n\n\n Here $M\\otimes_A^LP_n$ means $M\\otimes^L_{A_T}(P_n)_T$. Functoriality of the local isomorphism is for local models equipped with a derived-tower isomorphism lifting their specified level maps $e_n$; such a lift always exists, but is not asserted unique or chosen functorially. A morphism between equipped local models is a pair $(f,h)$ whose square with these derived-tower isomorphisms commutes. These conventions specify the coherent data needed to apply the strict derived-limit functor, for the stated functoriality.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-    "place": "node lem-weil-pbc-reconstruction-uniform-tower, order 1251",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 099M"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 099L"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09C7"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09C0"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
-    "def-weil-pbc-derived-inverse-limit",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-pbc-intrinsic-completion"
-  ],
-  "proof": [
-    {
-      "text": "A field is Noetherian: its only ideals are zero and the whole ring. Thus $\\operatorname{Spec}k$ is Noetherian, and finite type over it makes $T$ Noetherian by the finite-type theorem. This is a consequence of the target's existing LocallyOfFiniteType and QuasiCompact assumptions, not a new independent Noetherian assumption. Restriction along the strata and their pro-etale covers jointly detects zero cohomology and isomorphisms by stratum detection. The imported statement without any scheme restriction is false; the explicit two-stratum counterexample in report.md explains this correction.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-noetherian-stratum-detection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    },
-    {
-      "text": "For $u:U_{\\alpha j}\\to T$, module inverse image $u^*$ is exact and preserves countable products: the immersion part has this property by immersion limit preservation, and the covering part is slice restriction. Both pro-etale module categories have exact countable products. The derived product theorem therefore computes products termwise, and the exact triangulated inverse-image functor carries the strict Roos cone for $M_\\bullet$ to that of $u^*M_\\bullet$. Hence there is a natural comparison $c_M:u^*M\\simeq R\\lim(u^*M_\\bullet)$ respecting projections. Explicitly it applies $u^*$ to both product coordinates and to the differential $1-s$, whose $n$-th component is projection $n$ minus transition after projection $n+1$; no arbitrary triangle filler is used. The coefficient inverse-image theorem identifies $u^*A_T$ and $u^*(P_n)_T$ with the corresponding coefficients on $U$. Choose K-flat resolutions with flat terms by the K-flat resolution theorem. Ringed pullback preserves K-flatness for these resolutions, and its tensor comparison identifies the two tensor complexes naturally. Their section formula sends the inverse image of $x\\otimes y$ to the tensor of their inverse images; the balancing relation identifies multiplication by a local ring section on either factor. Derived change of rings therefore identifies restrictions of finite reductions with local finite reductions. The same applies to each finite free Koszul complex; its transition multiplies by $a_j$ in degree $-1$ and is the identity in degree zero. Thus $c$ also respects Koszul completion and its unit.",
-      "uses": [
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "lem-weil-proetale-countable-products-exact",
-        "lem-weil-derived-countable-products-core",
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "def-weil-pbc-proetale-operations",
-        "lem-pur-derived-change-of-rings",
-        "def-weil-pbc-intrinsic-completion",
-        "lem-pc-kflat-resolution",
-        "lem-weil-pbc-ringed-pullback-preserves-kflat",
-        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-        "lem-weil-proetale-weakly-etale-localization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    },
-    {
-      "text": "Each term of a local model $L$ is adic lisse: after a pro-etale cover it is $\\lim_n\\underline{N/I^nN}$. Every quotient is killed by $I^n$, so torsion-limit sheaf completeness makes this term derived complete over the constant sheaf $\\underline A$. The same theorem makes the bounded complex $L$ derived complete; this uses weak Serre closure, not freeness of its terms. The constant/completed coefficient theorem identifies restriction of scalars of the Koszul completion unit of $L$ with the constant-coefficient completion unit. The latter is invertible; restriction of scalars is exact and conservative, since its underlying abelian sheaves are unchanged. Thus the former is invertible as well, so this particular $A_U$-module complex is complete. It does not identify the two entire ambient derived categories. Koszul reconstruction now gives a natural isomorphism $\\eta_L:L\\simeq R\\lim L_\\bullet$ for the strict quotient tower.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-tower",
-        "def-weil-pbc-adic-lisse-module",
-        "lem-weil-pbc-torsion-limit-sheaf-completeness",
-        "lem-weil-pbc-constant-completion-equivalence",
-        "prop-weil-pbc-koszul-reconstruction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    },
-    {
-      "text": "The equation $e_n\\rho_n=\\sigma_n(e_{n+1}\\otimes1)$ from the bounded-tower definition says that the $e_n$ commute with the underlying adjacent transitions. Sequential tower evaluation fullness gives a lift $E:u^*M_\\bullet\\to L_\\bullet$ with these evaluations. Since every $e_n$ is invertible, $E$ is invertible. Fix one such coherent local-model comparison, as specified in the statement. The homotopy-correction proof of this generic lifting assertion is written in report.md; neither the Stacks object-lifting result nor a definition of a Roos limit is claimed to supply it.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-tower",
-        "lem-weil-pbc-sequential-tower-evaluation-full"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    },
-    {
-      "text": "Define $\\phi=c_M^{-1}(R\\lim E)^{-1}\\eta_L:L\\to u^*M$. Its three factors are isomorphisms. The projection formula is $u^*p_n\\phi=e_n^{-1}v_n$, where $v_n:L\\to L_n$ is scalar extension; it follows from the projection compatibility of $c$, the evaluation of $E$, and the completion-unit clause of Koszul reconstruction. For an equipped morphism $(f,h)$ with $E'u^*f=L_\\bullet(h)E$, the functor laws give $(R\\lim E')R\\lim(u^*f)=R\\lim(L_\\bullet(h))(R\\lim E)$. Naturality of $c$ and $\\eta$ gives $c_{M'}u^*R\\lim(f)=R\\lim(u^*f)c_M$ and $\\eta_{L'}h=R\\lim(L_\\bullet(h))\\eta_L$. Substitution proves $u^*R\\lim(f)\\phi=\\phi'h$. This is the stated functoriality, without claiming independence of a chosen coherent lift.",
-      "uses": [
-        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-        "prop-weil-pbc-koszul-reconstruction",
-        "def-weil-pbc-adic-coefficient-datum"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    },
-    {
-      "text": "By the Koszul unit comparison of step 2, the unit of $M$ restricts, under $\\phi$, to the complete local model's unit. Stratum detection therefore makes that global unit invertible; this is derived completeness by definition. Exact restrictions send $\\mathcal H^q(M)$ to $\\mathcal H^q(L)$, zero outside the common termwise window $[d_0,d_1]$. Stratum detection gives the asserted global cohomological bound. This proves the global consequences instead of assuming them in a restriction helper.",
-      "uses": [
-        "def-weil-pbc-intrinsic-completion",
-        "def-weil-pbc-bounded-constructible-tower",
-        "lem-weil-pbc-noetherian-stratum-detection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    },
-    {
-      "text": "Let $b_a:M\\otimes^L_{A_T}(P_a)_T\\to M_a$ be adjoint to the derived-limit projection $p_a$, where $M_a$ is regarded over $(P_a)_T$. Finite-reduction reconstruction applied to the complete local model gives the invertible counit $b^L_a:R\\lim L_\\bullet\\otimes^L(P_a)_U\\to L_a$. The adjoint of $e_a^{-1}b^L_a((R\\lim E)c_M\\otimes1)$ is $e_a^{-1}\\operatorname{pr}_a(R\\lim E)c_M=u^*p_a$ by step 5. Since $e_a$ is a morphism over $(P_a)_U$, scalar-extension adjunction therefore identifies this composite with $u^*b_a$, in the quotient-coefficient derived category itself. The three factors are invertible, so stratum detection makes $b_a$ invertible globally. To check normalization, reassociate the source $M\\otimes^L_{A_T}(P_{a+1})_T\\otimes^L_{(P_{a+1})_T}(P_a)_T$ with $M\\otimes^L_{A_T}(P_a)_T$. The adjoint of $\\rho_a(b_{a+1}\\otimes1)$ is the transition $t_a$ composed with $p_{a+1}$: by definition $t_a$ is the scalar-extension unit followed by $\\rho_a$. The adjoint of $b_a$ is $p_a=t_ap_{a+1}$. Equality follows from the adjunction bijection. Repetition gives compatibility with all quotient normalizations. This uses global tower projections, not faithfulness of local restrictions on derived morphisms. No finiteness of section groups is used.",
-      "uses": [
-        "lem-weil-pbc-finite-reduction-reconstruction",
-        "lem-weil-pbc-noetherian-stratum-detection",
-        "def-weil-pbc-bounded-constructible-tower",
-        "def-weil-pbc-adic-coefficient-datum"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-        "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-adic-lisse-module",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-intrinsic-completion",
-    "def-weil-pbc-proetale-operations",
-    "lem-pc-kflat-resolution",
+ "id": "lem-weil-pbc-reconstruction-uniform-tower",
+ "blueprint": {
+  "is": "lem-weil-pbc-reconstruction-uniform-tower",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Reconstruction of a uniform local tower",
+ "statement": "Let $k$ be a field and let $T$ be a scheme of finite type over $\\operatorname{Spec}k$ [def-weil-finite-type-morphism]. Let $M_\\bullet$ be a uniformly bounded constructible adic tower in the sense\nof [def-weil-pbc-bounded-constructible-tower] and put $M=R\\lim M_\\bullet$. Here $R\\lim$ is total right derived inverse limit on the strict tower category, computed by a K-injective tower resolution and termwise inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; its natural Roos triangle realizes the object-only notation of [def-weil-pbc-derived-inverse-limit].\nFor every local model in [def-weil-pbc-bounded-constructible-tower],\nrestriction of the derived-limit projections gives a functorial isomorphism\n\n$$\n L_{\\alpha j}\\xrightarrow{\\sim}M|_{U_{\\alpha j}}.\n$$\n\nConsequently $M$ is derived $I$-complete, the canonical maps\n\n$$\n M\\otimes_A^LP_n\\xrightarrow{\\sim}M_n\n$$\n\nare isomorphisms compatible with normalization, and $M$ has no cohomology\noutside $[d_0,d_1]$. No finiteness assertion about the groups of sections on\n$U_{\\alpha j}$ is required.\n\n\n Here $M\\otimes_A^LP_n$ means $M\\otimes^L_{A_T}(P_n)_T$. Functoriality of the local isomorphism is for local models equipped with a derived-tower isomorphism lifting their specified level maps $e_n$; such a lift always exists, but is not asserted unique or chosen functorially. A morphism between equipped local models is a pair $(f,h)$ whose square with these derived-tower isomorphisms commutes. These conventions specify the coherent data needed to apply the strict derived-limit functor, for the stated functoriality.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+  "place": "node lem-weil-pbc-reconstruction-uniform-tower, order 1251",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 099M"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 099L"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C7"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C0"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "def-weil-pbc-derived-inverse-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Construct the auxiliary strict reduction and inverse-limit functors before reconstruction. Module sheaves are Grothendieck in the coefficient universe; evaluation left adjoints carry a separator to a separating family of towers, whose coproduct is a separator. Colimits and filtered-colimit exactness are pointwise. Tensor extension and scalar restriction are additive, so evaluation proves the strict tensor tower additive; limit projections prove the inverse limit additive. Resolve source complexes by K-flat complexes. Extension at each quotient preserves quasi-isomorphisms between K-flat complexes, and exact restriction preserves their quasi-isomorphisms. Evaluation detects tower quasi-isomorphisms. The K-flat resolving-class theorem therefore constructs the universal derived strict tower and its invertible counit on K-flat complexes. The coefficient-cone naturality is the image of the limit projection relation. Finite limits and colimits of pulled-back module towers are detected pointwise, where the module inverse image is exact. For the ordinary adjacent reduction, transpose the later quotient unit through the normalized tensor/restriction adjunction, using cone naturality and the identity-on-sections restriction-composition comparison. Scalar linearity gives b tensor x maps to q(b) tensor x; sheafification and tensor induction give uniqueness.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-left-derived-from-kflat-class",
     "lem-pur-derived-change-of-rings",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-finite-reduction-reconstruction",
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A field is Noetherian: its only ideals are zero and the whole ring. Thus $\\operatorname{Spec}k$ is Noetherian, and finite type over it makes $T$ Noetherian by the finite-type theorem. This is a consequence of the target's existing LocallyOfFiniteType and QuasiCompact assumptions, not a new independent Noetherian assumption. Restriction along the strata and their pro-etale covers jointly detects zero cohomology and isomorphisms by stratum detection. The imported statement without any scheme restriction is false; the explicit two-stratum counterexample in report.md explains this correction.",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
-    "lem-weil-pbc-torsion-limit-sheaf-completeness",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-proetale-weakly-etale-localization",
-    "prop-weil-pbc-koszul-reconstruction"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
     "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1251,
-  "blueprint_uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-derived-inverse-limit",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-weil-pbc-finite-reduction-reconstruction",
-    "prop-weil-pbc-koszul-reconstruction"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-reconstruction-uniform-tower",
-    "worker": "stage1",
-    "summary": "Repair: do not add an independent Noetherian assumption; state the exact finite-type-over-field target context and derive Noetherianity. Replace unsupported functorial strictification by existential lifting with an explicit homotopy-correction argument; specify the category of equipped local models. Replace the bundled restriction/completion/detection helper by four separate generic statements and write the derived-limit, tensor, Koszul and global consequences in seven proof steps. Report explicitly disputes the false general-scheme blueprint and identifies the exact immutable master assumptions used.",
-    "blueprint": "First sentence: steps 2-5 reconstruct the adic-lisse local models; final sentence: steps 1,6,7 prove global completeness, amplitude, finite reduction and normalization.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-proetale-countable-products-exact",
-        "why": "Generic exact products for sheaves over any pro-etale coefficient ring"
-      },
-      {
-        "node": "lem-sf-exact-functor-derived-triangulated",
-        "why": "Generic exact functor on derived categories"
-      },
-      {
-        "node": "lem-pur-derived-change-of-rings",
-        "why": "Generic ringed-site derived tensor operation"
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic ringed-site K-flat resolution or derived product theorem, not an alternate route through a theorem of another unit."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Finite type over the Noetherian base Spec k implies the scheme is Noetherian; a generic scheme-theoretic tool, without changing the proper-base-change route."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "Generic localization of the pro-etale site at a weakly-etale object used for termwise restriction."
-      }
-    ]
-  },
-  "tool_uses": [
+  {
+   "text": "For $u:U_{\\alpha j}\\to T$, module inverse image $u^*$ is exact and preserves countable products: the immersion part has this property by immersion limit preservation, and the covering part is slice restriction. Both pro-etale module categories have exact countable products. The derived product theorem therefore computes products termwise, and the exact triangulated inverse-image functor carries the strict Roos cone for $M_\\bullet$ to that of $u^*M_\\bullet$. Hence there is a natural comparison $c_M:u^*M\\simeq R\\lim(u^*M_\\bullet)$ respecting projections. Explicitly it applies $u^*$ to both product coordinates and to the differential $1-s$, whose $n$-th component is projection $n$ minus transition after projection $n+1$; no arbitrary triangle filler is used. The coefficient inverse-image theorem identifies $u^*A_T$ and $u^*(P_n)_T$ with the corresponding coefficients on $U$. Choose K-flat resolutions with flat terms by the K-flat resolution theorem. Ringed pullback preserves K-flatness for these resolutions, and its tensor comparison identifies the two tensor complexes naturally. Their section formula sends the inverse image of $x\\otimes y$ to the tensor of their inverse images; the balancing relation identifies multiplication by a local ring section on either factor. Derived change of rings therefore identifies restrictions of finite reductions with local finite reductions. The same applies to each finite free Koszul complex; its transition multiplies by $a_j$ in degree $-1$ and is the identity in degree zero. Thus $c$ also respects Koszul completion and its unit.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
     "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
     "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations",
     "lem-pur-derived-change-of-rings",
+    "def-weil-pbc-intrinsic-completion",
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
     "lem-weil-proetale-weakly-etale-localization"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NJ-9c05dd6da",
-    "group": "NJ",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9c05dd6da (reviewer sub-agent of L); spot-checked: Mathematics and sources were read in full. The four new nodes had incomplete created metadata; corrected whole JSON files are under fixes/dag/nodes/sec-proper-base-change/, adding by=worker, date=2026-10-14, and group=NJ.; 4 file(s) fixed by the reviewer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+    "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.ReconstructionUniformTower",
-    "declaration": "AlgebraicGeometry.Scheme.reconstructionUniformTower",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.uniformTowers_grothendieck",
-      "AlgebraicGeometry.Scheme.UniformAdicTowerData",
-      "AlgebraicGeometry.Scheme.localReductionLevel",
-      "AlgebraicGeometry.Scheme.localReductionStep_exists",
-      "AlgebraicGeometry.Scheme.localReductionStep",
-      "AlgebraicGeometry.Scheme.localReductionModuleTower",
-      "AlgebraicGeometry.Scheme.localReductionModuleTower_additive",
-      "AlgebraicGeometry.Scheme.LocalReductionDerivedData",
-      "AlgebraicGeometry.Scheme.localReductionDerived_exists",
-      "AlgebraicGeometry.Scheme.localReductionDerivedData",
-      "AlgebraicGeometry.Scheme.localReductionDerived",
-      "AlgebraicGeometry.Scheme.localReductionCounit",
-      "AlgebraicGeometry.Scheme.localReductionComplexCounit",
-      "AlgebraicGeometry.Scheme.localReductionEvaluation_exists",
-      "AlgebraicGeometry.Scheme.localReductionEvaluation",
-      "AlgebraicGeometry.Scheme.uniformTowerLimit",
-      "AlgebraicGeometry.Scheme.uniformTowerLimit_additive",
-      "AlgebraicGeometry.Scheme.uniformTowerRlim",
-      "AlgebraicGeometry.Scheme.uniformConstantTower",
-      "AlgebraicGeometry.Scheme.uniformConstantTower_additive",
-      "AlgebraicGeometry.Scheme.uniformTowerAdjunction",
-      "AlgebraicGeometry.Scheme.uniformConstantEvaluation",
-      "AlgebraicGeometry.Scheme.uniformTowerProjection",
-      "AlgebraicGeometry.Scheme.uniformLocalRings",
-      "AlgebraicGeometry.Scheme.uniformLocalRing",
-      "AlgebraicGeometry.Scheme.uniformLocalProjections_naturality",
-      "AlgebraicGeometry.Scheme.uniformLocalProjections",
-      "AlgebraicGeometry.Scheme.uniformModuleTowerPull",
-      "AlgebraicGeometry.Scheme.uniformModuleTowerPull_preservesFiniteLimits",
-      "AlgebraicGeometry.Scheme.uniformModuleTowerPull_preservesFiniteColimits",
-      "AlgebraicGeometry.Scheme.uniformTowerPull",
-      "AlgebraicGeometry.Scheme.uniformPullEvaluation",
-      "AlgebraicGeometry.Scheme.uniformLocalTower",
-      "AlgebraicGeometry.Scheme.uniformLocalUnit",
-      "AlgebraicGeometry.Scheme.uniformLocalLevel",
-      "AlgebraicGeometry.Scheme.UniformLocalEquipment",
-      "AlgebraicGeometry.Scheme.uniformReconstructionCounit",
-      "AlgebraicGeometry.Scheme.uniformReconstructionLimit",
-      "AlgebraicGeometry.Scheme.UniformReconstructionFamily",
-      "AlgebraicGeometry.Scheme.reconstructionUniformTower"
-    ],
-    "file": "lean/Sheaf/Paper/ReconstructionUniformTower.lean",
-    "statement": "theorem reconstructionUniformTower {k : Type u} [Field k] (X : Scheme.{u}) (fX : X ⟶ Spec (.of k)) (_hX : LocallyOfFiniteType fX ∧ QuasiCompact fX) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (S : LocallyClosedStratification X) : ∃ φ : UniformReconstructionFamily X d S, (∀ (M : AdicTower X d) (W : UniformAdicTowerData d M S) (α : Fin S.n) (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : W.cover α f), Nonempty (UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf)) ∧ ∀ E : UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf), ∀ n : ℕ, (φ M W α U f hf E).hom ≫ CategoryTheory.Functor.map (adicTowerPullback (U.hom ≫ S.immersion α) (pbcAdicCompletion X d)) (uniformTowerProjection X (pbcAdicCompletion X d) M.tower n) ≫ (uniformPullEvaluation (U.hom ≫ S.immersion α) d n).inv.app M.tower = uniformLocalUnit (U.hom ≫ S.immersion α) d (W.model α U f hf).complex n ≫ (pbcTowerEvaluation U.left (uniformLocalRing (U.hom ≫ S.immersion α) d) n).map E.comparison.inv) ∧ (∀ (M : AdicTower X d) (W : UniformAdicTowerData d M S), (∀ (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (e : DerivedCategory.Q.obj C ≅ uniformReconstructionLimit d M), IsDerivedCompleteIntrinsic X d r a ha (uniformReconstructionLimit d M) C e) ∧ (∀ n : ℕ, IsIso (uniformReconstructionCounit d M n)) ∧ (∀ (b a : ℕ) (hab : a ≤ b), (pbcDerivedExtend (pbcAdicQuotient X d b a hab)).map (uniformReconstructionCounit d M b) ≫ (M.normalization b a hab).hom = (pbcReductionNormalization (pbcAdicProjection X d b) (pbcAdicQuotient X d b a hab) (pbcAdicProjection X d a) (pbcAdicProjection_comp X d b a hab) (uniformReconstructionLimit d M)).hom ≫ uniformReconstructionCounit d M a) ∧ ∀ q : ℤ, q < W.lower ∨ W.upper < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (uniformReconstructionLimit d M))) ∧ (∀ (M N : AdicTower X d) (W : UniformAdicTowerData d M S) (V : UniformAdicTowerData d N S) (α : Fin S.n) (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : W.cover α f) (hf' : V.cover α f) (E : UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf)) (E' : UniformLocalEquipment (U.hom ≫ S.immersion α) d N (V.model α U f hf')) (v : M.tower ⟶ N.tower) (h : DerivedCategory.Q.obj (W.model α U f hf).complex ⟶ DerivedCategory.Q.obj (V.model α U f hf').complex), (uniformTowerPull (U.hom ≫ S.immersion α) d).map v ≫ E'.comparison.hom = E.comparison.hom ≫ (localReductionDerived U.left (uniformLocalRing (U.hom ≫ S.immersion α) d) (uniformLocalRings (U.hom ≫ S.immersion α) d) (uniformLocalProjections (U.hom ≫ S.immersion α) d)).map h → h ≫ (φ N V α U f hf' E').hom = (φ M W α U f hf E).hom ≫ (adicTowerPullback (U.hom ≫ S.immersion α) (pbcAdicCompletion X d)).map ((uniformTowerRlim X (pbcAdicCompletion X d)).map v))",
-    "branch": "newtargets-dag",
-    "by": "NU",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Repair of returned file timeout: package the universally characterized K-flat derived pair as LocalReductionDerivedData and project its functor and explicitly typed counit, avoiding repeated nested choice reduction. Reuse the currently recorded intrinsic-completion and sequential-limit interfaces. All canonical normalizations, conclusion clauses and small-site universes are retained."
+  {
+   "text": "Each term of a local model $L$ is adic lisse: after a pro-etale cover it is $\\lim_n\\underline{N/I^nN}$. Every quotient is killed by $I^n$, so torsion-limit sheaf completeness makes this term derived complete over the constant sheaf $\\underline A$. The same theorem makes the bounded complex $L$ derived complete; this uses weak Serre closure, not freeness of its terms. The constant/completed coefficient theorem identifies restriction of scalars of the Koszul completion unit of $L$ with the constant-coefficient completion unit. The latter is invertible; restriction of scalars is exact and conservative, since its underlying abelian sheaves are unchanged. Thus the former is invertible as well, so this particular $A_U$-module complex is complete. It does not identify the two entire ambient derived categories. Koszul reconstruction now gives a natural isomorphism $\\eta_L:L\\simeq R\\lim L_\\bullet$ for the strict quotient tower.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-adic-lisse-module",
+    "lem-weil-pbc-torsion-limit-sheaf-completeness",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "prop-weil-pbc-koszul-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+    "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-96debb9c6",
-    "group": "NU",
-    "result": "pass",
-    "note": "Statement, dependencies, source alignment, declarations, edge cases, report sections, and scompile.py sandbox/library compilation all checked successfully."
+  {
+   "text": "The equation $e_n\\rho_n=\\sigma_n(e_{n+1}\\otimes1)$ from the bounded-tower definition says that the $e_n$ commute with the underlying adjacent transitions. Sequential tower evaluation fullness gives a lift $E:u^*M_\\bullet\\to L_\\bullet$ with these evaluations. Since every $e_n$ is invertible, $E$ is invertible. Fix one such coherent local-model comparison, as specified in the statement. The homotopy-correction proof of this generic lifting assertion is written in report.md; neither the Stacks object-lifting result nor a definition of a Roos limit is claimed to supply it.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-sequential-tower-evaluation-full"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+    "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $M_\\bullet$ be a uniformly bounded constructible adic tower in the sense\nof [def-weil-pbc-bounded-constructible-tower] and put $M=\\Rlim M_\\bullet$.\nFor every local model in [def-weil-pbc-bounded-constructible-tower],\nrestriction of the derived-limit projections gives a functorial isomorphism\n\n$$\n L_{\\alpha j}\\xrightarrow{\\sim}M|_{U_{\\alpha j}}.\n$$\n\nConsequently $M$ is derived $I$-complete, the canonical maps\n\n$$\n M\\otimes_A^LP_n\\xrightarrow{\\sim}M_n\n$$\n\nare isomorphisms compatible with normalization, and $M$ has no cohomology\noutside $[d_0,d_1]$. No finiteness assertion about the groups of sections on\n$U_{\\alpha j}$ is required.",
-    "proof": [
-      {
-        "text": "Restricted to the local model $U_{\\alpha j}$ of\n[def-weil-pbc-bounded-constructible-tower], the tower $M_\\bullet$ is the\nreduction tower $L_{\\alpha j}\\otimes^L(P_n)_T|_{U_{\\alpha j}}$ of the local\nfinite-free model $L_{\\alpha j}$ with the quotient transition maps; its\nderived limit (in the sense of [def-weil-pbc-derived-inverse-limit]) is\n$L_{\\alpha j}\\otimes^L_{A_T}\\Rlim(P_n)_T|_{U_{\\alpha j}} =L_{\\alpha j}$,\nsince $L_{\\alpha j}$ is a bounded complex of finite locally free modules and\n$\\Rlim(P_n)_T=A_T$ by [def-weil-pbc-adic-coefficient-datum]; the\nderived-limit projections realize the displayed isomorphism $L_{\\alpha\nj}\\xrightarrow{\\sim}M|_{U_{\\alpha j}}$. Applying\n[prop-weil-pbc-koszul-reconstruction] to the tower $M_\\bullet$ gives that $M$\nis derived $I$-complete in the sense of\n[def-weil-pbc-intrinsic-completion], and\n[lem-weil-pbc-finite-reduction-reconstruction] applied to the local towers\ngives the isomorphisms $M\\otimes_A^LP_n\\xrightarrow{\\sim}M_n$, compatible\nwith the normalization maps; the bounds $[d_0,d_1]$ and the absence of any\nfiniteness assertion on section groups are properties of the local models.",
-        "uses": [
-          "def-weil-pbc-bounded-constructible-tower",
-          "def-weil-pbc-derived-inverse-limit",
-          "def-weil-pbc-adic-coefficient-datum",
-          "prop-weil-pbc-koszul-reconstruction",
-          "def-weil-pbc-intrinsic-completion",
-          "lem-weil-pbc-finite-reduction-reconstruction"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Define $\\phi=c_M^{-1}(R\\lim E)^{-1}\\eta_L:L\\to u^*M$. Its three factors are isomorphisms. The projection formula is $u^*p_n\\phi=e_n^{-1}v_n$, where $v_n:L\\to L_n$ is scalar extension; it follows from the projection compatibility of $c$, the evaluation of $E$, and the completion-unit clause of Koszul reconstruction. For an equipped morphism $(f,h)$ with $E'u^*f=L_\\bullet(h)E$, the functor laws give $(R\\lim E')R\\lim(u^*f)=R\\lim(L_\\bullet(h))(R\\lim E)$. Naturality of $c$ and $\\eta$ gives $c_{M'}u^*R\\lim(f)=R\\lim(u^*f)c_M$ and $\\eta_{L'}h=R\\lim(L_\\bullet(h))\\eta_L$. Substitution proves $u^*R\\lim(f)\\phi=\\phi'h$. This is the stated functoriality, without claiming independence of a chosen coherent lift.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-weil-pbc-koszul-reconstruction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+    "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
+  },
+  {
+   "text": "By the Koszul unit comparison of step 2, the unit of $M$ restricts, under $\\phi$, to the complete local model's unit. Stratum detection therefore makes that global unit invertible; this is derived completeness by definition. Exact restrictions send $\\mathcal H^q(M)$ to $\\mathcal H^q(L)$, zero outside the common termwise window $[d_0,d_1]$. Stratum detection gives the asserted global cohomological bound. This proves the global consequences instead of assuming them in a restriction helper.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+    "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
+  },
+  {
+   "text": "Let $b_a:M\\otimes^L_{A_T}(P_a)_T\\to M_a$ be adjoint to the derived-limit projection $p_a$, where $M_a$ is regarded over $(P_a)_T$. Finite-reduction reconstruction applied to the complete local model gives the invertible counit $b^L_a:R\\lim L_\\bullet\\otimes^L(P_a)_U\\to L_a$. The adjoint of $e_a^{-1}b^L_a((R\\lim E)c_M\\otimes1)$ is $e_a^{-1}\\operatorname{pr}_a(R\\lim E)c_M=u^*p_a$ by step 5. Since $e_a$ is a morphism over $(P_a)_U$, scalar-extension adjunction therefore identifies this composite with $u^*b_a$, in the quotient-coefficient derived category itself. The three factors are invertible, so stratum detection makes $b_a$ invertible globally. To check normalization, reassociate the source $M\\otimes^L_{A_T}(P_{a+1})_T\\otimes^L_{(P_{a+1})_T}(P_a)_T$ with $M\\otimes^L_{A_T}(P_a)_T$. The adjoint of $\\rho_a(b_{a+1}\\otimes1)$ is the transition $t_a$ composed with $p_{a+1}$: by definition $t_a$ is the scalar-extension unit followed by $\\rho_a$. The adjoint of $b_a$ is $p_a=t_ap_{a+1}$. Equality follows from the adjunction bijection. Repetition gives compatibility with all quotient normalizations. This uses global tower projections, not faithfulness of local restrictions on derived morphisms. No finiteness of section groups is used.",
+   "uses": [
+    "lem-weil-pbc-finite-reduction-reconstruction",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+    "place": "Proof; repaired using the finite-type-over-a-field assumptions of archived master Proper.lean lines 75-89 and the source passages documented in report.md"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-proetale-operations",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-koszul-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
+  "place": "Retain the seven reconstruction steps; auxiliary categorical infrastructure present in the initial working source is restored. M4, 2026-10-21: prove localReductionStep_exists using normalized scalar adjunction, restriction-composition normalization, scalar linearity and sheafified pure-tensor extensionality. The original localReductionEvaluation_exists and reconstructionUniformTower proof obligations remain."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1251,
+ "blueprint_uses": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "prop-weil-pbc-koszul-reconstruction"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-reconstruction-uniform-tower",
+  "worker": "stage1",
+  "summary": "Repair: do not add an independent Noetherian assumption; state the exact finite-type-over-field target context and derive Noetherianity. Replace unsupported functorial strictification by existential lifting with an explicit homotopy-correction argument; specify the category of equipped local models. Replace the bundled restriction/completion/detection helper by four separate generic statements and write the derived-limit, tensor, Koszul and global consequences in seven proof steps. Report explicitly disputes the false general-scheme blueprint and identifies the exact immutable master assumptions used.",
+  "blueprint": "First sentence: steps 2-5 reconstruct the adic-lisse local models; final sentence: steps 1,6,7 prove global completeness, amplitude, finite reduction and normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exact products for sheaves over any pro-etale coefficient ring"
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact functor on derived categories"
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site derived tensor operation"
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site K-flat resolution or derived product theorem, not an alternate route through a theorem of another unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite type over the Noetherian base Spec k implies the scheme is Noetherian; a generic scheme-theoretic tool, without changing the proper-base-change route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic localization of the pro-etale site at a weakly-etale object used for termwise restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-9c05dd6da",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9c05dd6da (reviewer sub-agent of L); spot-checked: Mathematics and sources were read in full. The four new nodes had incomplete created metadata; corrected whole JSON files are under fixes/dag/nodes/sec-proper-base-change/, adding by=worker, date=2026-10-14, and group=NJ.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ReconstructionUniformTower",
+  "declaration": "AlgebraicGeometry.Scheme.reconstructionUniformTower",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.uniformTowers_grothendieck",
+   "AlgebraicGeometry.Scheme.UniformAdicTowerData",
+   "AlgebraicGeometry.Scheme.localReductionLevel",
+   "AlgebraicGeometry.Scheme.localReductionStep_exists",
+   "AlgebraicGeometry.Scheme.localReductionStep",
+   "AlgebraicGeometry.Scheme.localReductionModuleTower",
+   "AlgebraicGeometry.Scheme.localReductionModuleTower_additive",
+   "AlgebraicGeometry.Scheme.LocalReductionDerivedData",
+   "AlgebraicGeometry.Scheme.localReductionDerived_exists",
+   "AlgebraicGeometry.Scheme.localReductionDerivedData",
+   "AlgebraicGeometry.Scheme.localReductionDerived",
+   "AlgebraicGeometry.Scheme.localReductionCounit",
+   "AlgebraicGeometry.Scheme.localReductionComplexCounit",
+   "AlgebraicGeometry.Scheme.localReductionEvaluation_exists",
+   "AlgebraicGeometry.Scheme.localReductionEvaluation",
+   "AlgebraicGeometry.Scheme.uniformTowerLimit",
+   "AlgebraicGeometry.Scheme.uniformTowerLimit_additive",
+   "AlgebraicGeometry.Scheme.uniformTowerRlim",
+   "AlgebraicGeometry.Scheme.uniformConstantTower",
+   "AlgebraicGeometry.Scheme.uniformConstantTower_additive",
+   "AlgebraicGeometry.Scheme.uniformTowerAdjunction",
+   "AlgebraicGeometry.Scheme.uniformConstantEvaluation",
+   "AlgebraicGeometry.Scheme.uniformTowerProjection",
+   "AlgebraicGeometry.Scheme.uniformLocalRings",
+   "AlgebraicGeometry.Scheme.uniformLocalRing",
+   "AlgebraicGeometry.Scheme.uniformLocalProjections_naturality",
+   "AlgebraicGeometry.Scheme.uniformLocalProjections",
+   "AlgebraicGeometry.Scheme.uniformModuleTowerPull",
+   "AlgebraicGeometry.Scheme.uniformModuleTowerPull_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.uniformModuleTowerPull_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.uniformTowerPull",
+   "AlgebraicGeometry.Scheme.uniformPullEvaluation",
+   "AlgebraicGeometry.Scheme.uniformLocalTower",
+   "AlgebraicGeometry.Scheme.uniformLocalUnit",
+   "AlgebraicGeometry.Scheme.uniformLocalLevel",
+   "AlgebraicGeometry.Scheme.UniformLocalEquipment",
+   "AlgebraicGeometry.Scheme.uniformReconstructionCounit",
+   "AlgebraicGeometry.Scheme.uniformReconstructionLimit",
+   "AlgebraicGeometry.Scheme.UniformReconstructionFamily",
+   "AlgebraicGeometry.Scheme.reconstructionUniformTower"
+  ],
+  "file": "lean/Sheaf/Paper/ReconstructionUniformTower.lean",
+  "statement": "theorem reconstructionUniformTower {k : Type u} [Field k] (X : Scheme.{u}) (fX : X ⟶ Spec (.of k)) (_hX : LocallyOfFiniteType fX ∧ QuasiCompact fX) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (S : Stratification X) : ∃ φ : UniformReconstructionFamily X d S, (∀ (M : AdicTower X d) (W : UniformAdicTowerData d M S) (α : Fin S.n) (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : W.cover α f), Nonempty (UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf)) ∧ ∀ E : UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf), ∀ n : ℕ, (φ M W α U f hf E).hom ≫ CategoryTheory.Functor.map (adicTowerPullback (U.hom ≫ S.immersion α) (pbcAdicCompletion X d)) (uniformTowerProjection X (pbcAdicCompletion X d) M.tower n) ≫ (uniformPullEvaluation (U.hom ≫ S.immersion α) d n).inv.app M.tower = uniformLocalUnit (U.hom ≫ S.immersion α) d (W.model α U f hf).complex n ≫ (pbcTowerEvaluation U.left (uniformLocalRing (U.hom ≫ S.immersion α) d) n).map E.comparison.inv) ∧ (∀ (M : AdicTower X d) (W : UniformAdicTowerData d M S), (∀ (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (e : DerivedCategory.Q.obj C ≅ uniformReconstructionLimit d M), IsDerivedCompleteIntrinsic X d r a ha (uniformReconstructionLimit d M) C e) ∧ (∀ n : ℕ, IsIso (uniformReconstructionCounit d M n)) ∧ (∀ (b a : ℕ) (hab : a ≤ b), (pbcDerivedExtend (pbcAdicQuotient X d b a hab)).map (uniformReconstructionCounit d M b) ≫ (M.normalization b a hab).hom = (pbcReductionNormalization (pbcAdicProjection X d b) (pbcAdicQuotient X d b a hab) (pbcAdicProjection X d a) (pbcAdicProjection_comp X d b a hab) (uniformReconstructionLimit d M)).hom ≫ uniformReconstructionCounit d M a) ∧ ∀ q : ℤ, q < W.lower ∨ W.upper < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (uniformReconstructionLimit d M))) ∧ (∀ (M N : AdicTower X d) (W : UniformAdicTowerData d M S) (V : UniformAdicTowerData d N S) (α : Fin S.n) (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : W.cover α f) (hf' : V.cover α f) (E : UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf)) (E' : UniformLocalEquipment (U.hom ≫ S.immersion α) d N (V.model α U f hf')) (v : M.tower ⟶ N.tower) (h : DerivedCategory.Q.obj (W.model α U f hf).complex ⟶ DerivedCategory.Q.obj (V.model α U f hf').complex), (uniformTowerPull (U.hom ≫ S.immersion α) d).map v ≫ E'.comparison.hom = E.comparison.hom ≫ (localReductionDerived U.left (uniformLocalRing (U.hom ≫ S.immersion α) d) (uniformLocalRings (U.hom ≫ S.immersion α) d) (uniformLocalProjections (U.hom ≫ S.immersion α) d)).map h → h ≫ (φ N V α U f hf' E').hom = (φ M W α U f hf E).hom ≫ (adicTowerPullback (U.hom ≫ S.immersion α) (pbcAdicCompletion X d)).map ((uniformTowerRlim X (pbcAdicCompletion X d)).map v))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Restore the quarantined module with the current Stratification identifier, retaining eight auxiliary proofs from the initial working source and proving the unique adjacent ordinary reduction map by normalized scalar adjunction. localReductionEvaluation_exists and reconstructionUniformTower remain the two sorry declarations. All canonical normalizations, small-site universes and reconstruction conclusion clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-96debb9c6",
+  "group": "NU",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, declarations, edge cases, report sections, and scompile.py sandbox/library compilation all checked successfully."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $M_\\bullet$ be a uniformly bounded constructible adic tower in the sense\nof [def-weil-pbc-bounded-constructible-tower] and put $M=\\Rlim M_\\bullet$.\nFor every local model in [def-weil-pbc-bounded-constructible-tower],\nrestriction of the derived-limit projections gives a functorial isomorphism\n\n$$\n L_{\\alpha j}\\xrightarrow{\\sim}M|_{U_{\\alpha j}}.\n$$\n\nConsequently $M$ is derived $I$-complete, the canonical maps\n\n$$\n M\\otimes_A^LP_n\\xrightarrow{\\sim}M_n\n$$\n\nare isomorphisms compatible with normalization, and $M$ has no cohomology\noutside $[d_0,d_1]$. No finiteness assertion about the groups of sections on\n$U_{\\alpha j}$ is required.",
+  "proof": [
+   {
+    "text": "Restricted to the local model $U_{\\alpha j}$ of\n[def-weil-pbc-bounded-constructible-tower], the tower $M_\\bullet$ is the\nreduction tower $L_{\\alpha j}\\otimes^L(P_n)_T|_{U_{\\alpha j}}$ of the local\nfinite-free model $L_{\\alpha j}$ with the quotient transition maps; its\nderived limit (in the sense of [def-weil-pbc-derived-inverse-limit]) is\n$L_{\\alpha j}\\otimes^L_{A_T}\\Rlim(P_n)_T|_{U_{\\alpha j}} =L_{\\alpha j}$,\nsince $L_{\\alpha j}$ is a bounded complex of finite locally free modules and\n$\\Rlim(P_n)_T=A_T$ by [def-weil-pbc-adic-coefficient-datum]; the\nderived-limit projections realize the displayed isomorphism $L_{\\alpha\nj}\\xrightarrow{\\sim}M|_{U_{\\alpha j}}$. Applying\n[prop-weil-pbc-koszul-reconstruction] to the tower $M_\\bullet$ gives that $M$\nis derived $I$-complete in the sense of\n[def-weil-pbc-intrinsic-completion], and\n[lem-weil-pbc-finite-reduction-reconstruction] applied to the local towers\ngives the isomorphisms $M\\otimes_A^LP_n\\xrightarrow{\\sim}M_n$, compatible\nwith the normalization maps; the bounds $[d_0,d_1]$ and the absence of any\nfiniteness assertion on section groups are properties of the local models.",
+    "uses": [
+     "def-weil-pbc-bounded-constructible-tower",
+     "def-weil-pbc-derived-inverse-limit",
+     "def-weil-pbc-adic-coefficient-datum",
+     "prop-weil-pbc-koszul-reconstruction",
+     "def-weil-pbc-intrinsic-completion",
+     "lem-weil-pbc-finite-reduction-reconstruction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-1a646",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261021T001131-L-1375347",
+  "kind": "proof",
+  "note": "independent cc review: delivered ReconstructionUniformTower.lean vs quarantine/Sheaf/Paper/ReconstructionUniformTower.lean (LocallyClosedStratification→Stratification only, 9 sorrys closed, 4 private helpers), node lem-weil-pbc-reconstruction-uniform-tower vs live (new step 0, 3 proof_deps matching new imports), change record; lcompile --all exit 0 in 36.8 s; axioms clean; 0 importers"
+ }
 }
