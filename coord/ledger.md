@@ -19671,3 +19671,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:05 L: merged deliver/NH/lemma-weil-pbc-perfect-projection-formula (reviewer FIX; after a return; new nodes: 0)
 - 03:06 L: merged deliver/Q22/det-thm-sfb-proper-base-change-integral (reviewer FIX; after a return; new nodes: 0)
 - 03:07 L: returned deliver/Q20/det-prop-scalar-six-pullback (reviewer RETURN: A6/D: the human's re-split note was not carried out. coord/repair-notes/det-prop-scalar-six-pullback.json (L, human deci)
+- 03:07 L: returned deliver/NW/lem-cbc-adic-pullback-presentation-transport (reviewer RETURN: G1/A6: the human's re-split order is not carried out. Repair note coord/repair-notes/lem-cbc-adic-pullback-presentation-)
