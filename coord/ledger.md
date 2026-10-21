@@ -19433,3 +19433,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:20 L: batch 20261021T011004 dependency take-out
 - 01:21 L: returned deliver/D5/Sheaf.AlgebraicGeometry.StrictTowerPullbackSquarePasting (reviewer RETURN: (reviewer C-c7970, head c79701662) Brief point 2 (interface change others see): the restated squareG_pasting_inv breaks )
 - 01:22 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (reviewer C-f48e0, head f48e012db) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.RingedProjecti)
+- 01:23 L: merged deliver/A4/Sheaf.SixFunctors.FlatModelGeneration (stage 3; reviewer FIX; first push; landing 20261021T012346-L-2179442 (proof); batch 20261021T012342; modules 1; new nodes 0; change records: coord/changes/A4-restore-flat-model-generation.md)
