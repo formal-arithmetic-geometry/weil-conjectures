@@ -219,5 +219,27 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-dcce8e67b (reviewer sub-agent of L); spot-checked: I read and re-derived all 7 steps, with the domains checked at each one. Step 1: naturality of τ follows from δ at (a,Pb) and π at (Ja,b). Step 2: b_M = α⁻¹(1⊗μ^S) because μ^S = qQ(u). Step 3: the explicit clause follows from naturality of π in its first variable along δ_{M,X}. Steps 4–5: these are direct instances of the two action hypotheses, and α^D cancels against the α⁻¹ inside b_A. Step 6: naturality of δ in its second variable along u gives J(b_M)δ_{M,V}. Step 7: substitution gives H(b_M)τ_{M,N⊗T}α^E, the required identity. Every step is a few substitutions, so elementary is justified (C2). The statement is correctly typed and assumes no invertibility, unit law or adjunction. It matches the only citer, lem-pur-finite-projection-action-laws Step 4 (R=Rp_*, P=Lp^*, J=j_!, Q=Lj^*, PF^c=R(δ)π, μ in the inverse direction). Cited nodes: def-sfb-monoidal-category and def-sfb-strong-monoidal-functor, both read; they give bifunctoriality, inverses and functor laws, which is all the steps use (C3/C4). Sources: tags/tags confirms 0FFK, 0FFL, 0B56 and 0GL1 against their labels (categories.tex:9170 and 9238; sites-cohomology.tex:13666 and 4578). The blueprint sentence about canonical reassociations is in main-20261015 lem-pur-projection-purity-agreement.proof.md around line 23. Small cases: identity functors, π=0, and a non-strict associator; all consistent. Not a duplicate: lem-pur-composite-left-projection-action is left-handed and needs unit equations that this item does not assume; lem-sfb-ringed-projection-tensor-composition is geometric. No repair note and not in the dropped lists. No new nodes, no SGA, no off-unit citations and no tool_uses. proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompositeRelativeTensorAction",
+  "declaration": "CategoryTheory.composite_relative_tensor_action",
+  "declarations": [
+   "CategoryTheory.compositeRelativeTensorAction",
+   "CategoryTheory.composite_relative_tensor_action"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompositeRelativeTensorAction.lean",
+  "statement": "theorem composite_relative_tensor_action {C : Type u₁} {D : Type u₂} {E : Type u₃} [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] (P : E ⥤ D) (Q : D ⥤ C) (p : P.CoreMonoidal) (q : Q.CoreMonoidal) (J : C ⥤ D) (R : D ⥤ E) (π : ∀ (A : D) (N : E), R.obj A ⊗ N ⟶ R.obj (A ⊗ P.obj N)) (δ : ∀ (M : C) (B : D), J.obj M ⊗ B ⟶ J.obj (M ⊗ Q.obj B)) (hπ : ∀ (A A' : D) (N N' : E) (a : A ⟶ A') (b : N ⟶ N'), (R.map a ⊗ₘ b) ≫ π A' N' = π A N ≫ R.map (a ⊗ₘ P.map b)) (hδ : ∀ (M M' : C) (B B' : D) (a : M ⟶ M') (b : B ⟶ B'), (J.map a ⊗ₘ b) ≫ δ M' B' = δ M B ≫ J.map (a ⊗ₘ Q.map b)) (hπ_action : ∀ (A : D) (N T : E), (α_ (R.obj A) N T).hom ≫ π A (N ⊗ T) ≫ R.map ((𝟙 A ⊗ₘ (p.μIso N T).inv) ≫ (α_ A (P.obj N) (P.obj T)).inv) = (π A N ⊗ₘ 𝟙 T) ≫ π (A ⊗ P.obj N) T) (hδ_action : ∀ (M : C) (B B' : D), (α_ (J.obj M) B B').hom ≫ δ M (B ⊗ B') ≫ J.map ((𝟙 M ⊗ₘ (q.μIso B B').inv) ≫ (α_ M (Q.obj B) (Q.obj B')).inv) = (δ M B ⊗ₘ 𝟙 B') ≫ δ (M ⊗ Q.obj B) B') : (∀ (M M' : C) (N N' : E) (a : M ⟶ M') (b : N ⟶ N'), (R.map (J.map a) ⊗ₘ b) ≫ compositeRelativeTensorAction P Q J R π δ M' N' = compositeRelativeTensorAction P Q J R π δ M N ≫ R.map (J.map (a ⊗ₘ Q.map (P.map b)))) ∧ (∀ (M : C) (N T : E), (α_ (R.obj (J.obj M)) N T).hom ≫ compositeRelativeTensorAction P Q J R π δ M (N ⊗ T) ≫ R.map (J.map ((𝟙 M ⊗ₘ (Q.map (p.μIso N T).inv ≫ (q.μIso (P.obj N) (P.obj T)).inv)) ≫ (α_ M (Q.obj (P.obj N)) (Q.obj (P.obj T))).inv)) = (compositeRelativeTensorAction P Q J R π δ M N ⊗ₘ 𝟙 T) ≫ compositeRelativeTensorAction P Q J R π δ (M ⊗ Q.obj (P.obj N)) T) ∧ (∀ (M : C) (N₁ N₂ : E), (compositeRelativeTensorAction P Q J R π δ M N₁ ⊗ₘ 𝟙 N₂) ≫ compositeRelativeTensorAction P Q J R π δ (M ⊗ Q.obj (P.obj N₁)) N₂ = (π (J.obj M) N₁ ⊗ₘ 𝟙 N₂) ≫ π (J.obj M ⊗ P.obj N₁) N₂ ≫ R.map ((δ M (P.obj N₁) ⊗ₘ 𝟙 (P.obj N₂)) ≫ δ (M ⊗ Q.obj (P.obj N₁)) (P.obj N₂)))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0b798fcc",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node unchanged except for the added lean field; statement verbatim in the file and starting at the keyword. P and Q are Mathlib CoreMonoidal data with inverse comparisons μIso.inv in the right direction; composite comparison for QP is Q.map μ^P⁻¹ ≫ μ^Q⁻¹. π and δ are jointly natural and both action identities match the node in diagrammatic order. The def τ = π ≫ R.map δ is real data. All three conclusions (naturality, action identity, explicit factorization with M1 = M⊗QPN1) match the node. Re-derived proof steps 1-7. Six independent universes and no extra assumptions. No duplicate: Mathlib LaxRightLinear needs a common acting category and unit laws; compositeLeftProjectionAction is the left-sided variant with unit equations. Docstrings carry the source place, the blueprint item and all seven proof steps; the proof is only sorry; the report has both required sections. No compile run because no file was changed."
  }
 }

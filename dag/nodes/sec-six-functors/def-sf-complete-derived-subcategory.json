@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-complete-derived-subcategory",
+ "kind": "definition",
+ "title": "Intrinsically complete derived full subcategory",
+ "status": "split",
+ "statement": "Let $X$ be a scheme, $d=(A,I)$ a Noetherian adic coefficient datum with finite perfect positive quotients, and $D_X=D(\\operatorname{Mod}(A_X))$ its completed-coefficient derived category [def-weil-pbc-adic-coefficient-datum]. Fix any finite generating tuple $a:\\operatorname{Fin}(r)\\to A$ for $I$, allowing $r=0$. For $K\\in D_X$, use the complex $C_K$ and isomorphism $Q(C_K)\\simeq K$ supplied by essential surjectivity of the derived localization. Define $\\operatorname{Complete}_{X,d,a}(K)$ to mean that the intrinsic Koszul completion unit of [def-weil-pbc-intrinsic-completion], computed on this representative and transported to $K$, is invertible. Define $D_X^{\\mathrm{comp}}$ to be the full subcategory of $D_X$ cut out by this predicate, with the same morphisms, addition and scalar actions as the ambient category. Its objects carry only the completeness proposition, not a chosen completion witness.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "Second sentence: tensor Frobenius coefficient transport. The actual full subcategory used in the final intrinsic-completeness clause; no reflector theorem or chosen reflector is part of this definition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WfIsComplete|WfCompleteCategory|completedCoefficientDirectImageMap|completedModuleDirectImage",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match: the hits do not define the completed coefficient specialization or intrinsic-completeness subcategory; reuse the exact published project definitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The full subcategory of derived complete module sheaves and the sectionwise direct image of modules over an adic completed coefficient sheaf",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instFullPushforward, ModuleCat.tildeInModuleCat, SheafOfModules.pushforwardSections, SheafOfModules.hasLimit, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, SheafOfModules.instAbelian, SheafOfModules.sectionsFunctor, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match: the hits do not define the completed coefficient specialization or intrinsic-completeness subcategory; reuse the exact published project definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical adjunct ring map for completed coefficient sheaves, module direct image with restricted scalar action, and full subcategory of intrinsically derived complete objects",
+   "results": "8 hits; ModuleCat.tilde, Condensed.free, Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, LightCondensed.free, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.Presentation.mapGenerators, ModuleCat.tildeInModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match: the hits do not define the completed coefficient specialization or intrinsic-completeness subcategory; reuse the exact published project definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n WfIsComplete|WfCompleteCategory|completedCoefficientDirectImageMap|completedModuleDirectImage lean/WeilConjectures lean/Sheaf; rg -l same names dag/nodes; blueprint_refs.py search complete full subcategory / completed module direct image",
+   "results": "No upstream WeilConjectures declaration; exact definitions in Sheaf.Paper.WeilCompletedTensorReflector and Sheaf.Paper.CompletedTowerDirectImage. DAG mentions the completeness names in theorem nodes, with no definition-node owner; no node records either direct-image definition. Both blueprint searches returned 0 matches.",
+   "date": "2026-10-21",
+   "verdict": "reuse the exact published project definitions in existing:true definition nodes; do not duplicate them"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-completed-coefficient-pullback-linearity",
+  "date": "2026-10-21",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-tensor-product",
+   "place": "The actual full subcategory used in the final intrinsic-completeness clause; no reflector theorem or chosen reflector is part of this definition.",
+   "via": [
+    "lem-sf-completed-coefficient-pullback-linearity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.Paper.WeilCompletedTensorReflector",
+  "declaration": "AlgebraicGeometry.Scheme.WfIsComplete",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.wfCompletionRepresentative",
+   "AlgebraicGeometry.Scheme.WfIsComplete",
+   "AlgebraicGeometry.Scheme.WfCompleteCategory"
+  ],
+  "statement": "def WfIsComplete (M : PbcCompletedDerived X d) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership requested in the independent return at af4f9f84d1df. Reuses the concrete existing definitions, without reasserting their containing theorem node. The actual full subcategory used in the final intrinsic-completeness clause; no reflector theorem or chosen reflector is part of this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f10ae935b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f10ae935b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery of af4f9f84 (RETURN H2/H11, maths found correct there). Delta: the Lean module only drops the citation-only imports PbcQbarCompletedPullback/CompletedDirectImageLimits (H9); all 8 signatures are byte-identical. The theorem stmt_deps lem-weil-pbc-ringed-koszul-completion-reflector and prop-weil-pbc-direct-image-limits are replaced by new existing:true def nodes: def-sf-complete-derived-subcategory (wfCompletionRepresentative/WfIsComplete/WfCompleteCategory on WeilCompletedTensorReflector) and def-sf-completed-module-direct-image (completedCoefficientDirectImageMap = unit ≫ f_*c_f, completedModuleDirectImage = pushforward with action along c_f^# on CompletedTowerDirectImage). TeX statements match the live bodies; check_existing reports no failures and no notes; ids not live; no competing def owner. Body owners cited (intrinsic-completion, proetale-inverse-image, completed-pullback); pbcModules/pbcAdicCompletion/PbcCompletedDerived owners uncited = base convention, advisory. Report has a real clause-by-clause '## Second reading by Q06' (H11 fixed) and a Worker report. No stmt_dep dropped vs live (8 kept, 4 added); item not landed or superseded; lean.statement verbatim; all 8 declarations present. Maths re-confirmed: scalar squares and section equation, canonical c_e, Le^* = completedOrdinaryPullback (universal K-flat left-derived functor; keeps the u+1/u universes), preservation for every tuple incl. r=0, H pinned by H⋙ι = ι⋙Le^*; edge cases e=id, empty X, zero A, I=A, I=0, b=0/1 admitted. No file changed, nothing compiled; worker reports a clean compile (6.7/6.9 s) and an OK dry run."
+ }
+}

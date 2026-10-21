@@ -14,7 +14,8 @@
   "def-weil-endomorphism-trace",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-laurent-series",
-  "def-weil-pbc-separable-algebraic-extension"
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-dvr-laurent-coordinates"
  ],
  "proof": [
   {
@@ -302,5 +303,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-479522247 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Tate pp.149–153 (T1–T5, Propositions 1–2, Theorem 1, (*), R2, R4) in full. Status: the item is unsplit on live and side-live, there is no repair note, and it is not on the dropped list. The statement is unchanged. Steps 1–11 are correct. Lifts F_f = πm_f lie in E₁ and differ from m_f by an element of E₂, because (π−1)fO is the image of (fO+O)/O. Lift independence uses the two commutator clauses of the ideals node. The Leibniz operator identity expands to [G,[F,H]], which has zero trace; Tate p.152 wrongly writes it as 0, and the delivery handles this correctly. The finite quotient B/C is Tate's (*). For u∈O, u t⁻¹dt has residue Tr_{κ/k}(ū) with positive sign, consistent with R4; no separability is used. Completion steps: R is complete and local, hence henselian. The residue-section lemma with the empty family gives the coefficient field. R≅κ[[t]] and K∩R=O. π̂ is well defined on K̂=K+R, and B/C≅B̂/Ĉ. I recomputed the Laurent strip: the diagonal coefficient is Σ_{i+j=0}a_ib_j(1_{r≥0}−1_{r+i≥0}), the sum over r is −i=j, and the result Tr([t⁻¹]fg′) holds in every characteristic. Both new nodes are true, self-contained, statement-only and not duplicates (rg -L over the DAG), and neither restates the item; I checked edge cases A=0, A=V and the cyclicity proof. I accept the tool uses complete-pair-henselian and henselian-separably-generated-residue-section as generic algebra. No SGA is used. FIX (B3, missing stmt_deps): the statement uses κ[[t]], κ((t)) and κ/k separable without their definition nodes. I added def-weil-pbc-laurent-series and def-weil-pbc-separable-algebraic-extension to stmt_deps, to the uses of steps 7, 8, 10 and 11, and to proof_deps. Advisory: 'continuous differentials' has no definition node; Step 11 realizes it as g↦g′dt.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateResidue.DVRResidueCalculus",
+  "declaration": "TateResidue.dvr_residue_calculus",
+  "file": "lean/Sheaf/RingTheory/TateResidue/DVRResidueCalculus.lean",
+  "statement": "theorem dvr_residue_calculus (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (O : Subalgebra k K) [IsDiscreteValuationRing O] [IsFractionRing O K] [FiniteDimensional k (IsLocalRing.ResidueField O)] : (∀ f : K, FiniteDimensional k ((O.toSubmodule.map (act k f)).map O.toSubmodule.mkQ)) ∧ (∀ π : K →ₗ[k] O, (∀ x : O, π (x : K) = x) → ∀ f g : K, Module.End.IsFinitePotent ((O.val.toLinearMap.comp π * act k f) * act k g - act k g * (O.val.toLinearMap.comp π * act k f)) ∧ localRes O (f • KaehlerDifferential.D k K g) = Module.End.tateTrace ((O.val.toLinearMap.comp π * act k f) * act k g - act k g * (O.val.toLinearMap.comp π * act k f))) ∧ (∀ ω : KaehlerDifferential k O, localRes O (KaehlerDifferential.map k k O K ω) = 0) ∧ (∀ t : O, IsLocalRing.maximalIdeal O = Ideal.span {t} → ∀ a : O, localRes O (((a : K) * (t : K)⁻¹) • KaehlerDifferential.D k K (t : K)) = Algebra.trace k (IsLocalRing.ResidueField O) (IsLocalRing.residue O a)) ∧ (Algebra.IsSeparable k (IsLocalRing.ResidueField O) → ∀ t : O, IsLocalRing.maximalIdeal O = Ideal.span {t} → Nonempty (DVRLaurentCoordinates O t) ∧ ∀ c : DVRLaurentCoordinates O t, ∃ d : KaehlerDifferential k K →ₗ[k] LaurentSeries (IsLocalRing.ResidueField O), (∀ f g : K, d (f • KaehlerDifferential.D k K g) = c.fieldMap f * LaurentSeries.derivative (IsLocalRing.ResidueField O) (c.fieldMap g)) ∧ ∀ ξ : KaehlerDifferential k K, localRes O ξ = Algebra.trace k (IsLocalRing.ResidueField O) ((d ξ).coeff (-1)))",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9795e5f3",
+  "group": "Q50",
+  "result": "pass",
+  "note": "All six clauses match the node: finite principal parts; finite-potent [πm_f,m_g] with res(f dg)=tateTrace for every π; annihilation of the Ω_{O/k} image; res(u t⁻¹dt)=Tr_{κ/k}(ū) with no separability; under separability, Nonempty coordinates and, for every coordinate c, a uniquely pinned d(f dg)=j(f)∂j(g) with res=Tr(coeff −1). Upstream localRes/res/tateTrace/IsFinitePotent/act were read and are real constructions. New def node DVRLaurentCoordinates has real data (completion AlgEquiv with t↦X, constant coeff = evalOneₐ, compatible fraction-field map), §5 fields correct, no duplicate or name collision. The item node differs from side-live only by lean + one stmt_dep, and lean.statement is verbatim in both files. Docstrings have source, blueprint id and 11 proof steps; sorry only; imports follow the proof deps. Advisories: single-universe residue-section helper needs a universe lift in stage 3; upstream tateTrace/localRes should be the records of the finite-potent and abstract residue nodes when stated. No compile run (no file changed)."
  }
 }

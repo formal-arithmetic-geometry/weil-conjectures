@@ -317,5 +317,29 @@
   "group": "Q155",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-7c60997d9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 11 steps, every cited statement, and Stacks sites.tex 03A1 (l.6982) and 03CI (l.7092). There are no new nodes and the statement is the same as the base (unsplit, no proof). The item came from the re-split of the parent lem-sp-ringed-topos-binary-descent; that note applies to the parent, not to this ordinary first split. The statement is true: it is 03CI/03A1 applied to the set {1,U,V,W} plus ring, module and derived transport. I tested U=1, V=0; U=V=1; W=0; the degenerate topos; and R=0. Step 1 uses the covering-family replacement of a sieve site, so no pullbacks are assumed on the original site. Step 2 builds a countable finite-limit closure; every stage is a set. Step 3 meets every hypothesis of site-of-sheaf-generators: the nerve is Hom_T(C,-) by full faithfulness, which makes the topology subcanonical. Step 4 correctly shows the binary family is jointly epimorphic using the local closure of U∪V and separatedness. Step 5 uses Cov_0 = the binary families. Steps 6-7 give the explicit fibre formula and the pullback-bijection coherence, and send R_Z to N(R)|_Z. Steps 8-9 transport the ring with an invertible structural map, then the modules and derived categories, with the slice ring (U,s)↦R(U). Step 10 checks that cones and shifts are preserved. Step 11 identifies the adjoints by the unique counit- and unit-compatible conjugates, and the mates are preserved factor by factor. Batch-5: lem-trf-sieve-sheaves-covering-site and lem-trf-sieve-set-sheafification-exists are generic site theory (03CI/03A1/00ZM). Their closures contain no trace-formula, Poincaré-duality or nt-assume nodes, so they lie outside both assumptions and I accept them. Nothing in the closure is on the route-pivot dropped list, there is no cycle, no SGA source is cited, and no existing node duplicates or generalises the item (checked lem-trf-topos-localization-site-presentation, which covers one object only, and the other 03CI nodes). The tool_uses entries are accepted. One unstated detail is not a fault: step 8 applies the ring-transport lemma through the covering presentation A."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.BinaryCoverSitePresentation",
+  "declaration": "CategoryTheory.exists_binaryCoverSitePresentation",
+  "declarations": [
+   "CategoryTheory.BinaryPresentationModules",
+   "CategoryTheory.BinaryPresentationAdjointSquare",
+   "CategoryTheory.BinaryCoverSitePresentation",
+   "CategoryTheory.exists_binaryCoverSitePresentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/BinaryCoverSitePresentation.lean",
+  "statement": "theorem exists_binaryCoverSitePresentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U V : Sheaf J (Type u)) (hU : IsSubterminal U) (hV : IsSubterminal V) (hcover : ∀ X : C, Sieve.generate (fun (Y : C) (_ : Y ⟶ X) ↦ Nonempty (U.obj.obj (op Y)) ∨ Nonempty (V.obj.obj (op Y))) ∈ J X) : Nonempty (BinaryCoverSitePresentation J R U V)",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03caef4d8",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Read node, the 4 stmt_deps (unchanged vs live), Stacks sites.tex 03A1 (l.6982)/03CI (l.7092), the new module and every helper declaration it uses. Every clause matches: small site in one universe u as in def-weil-pbc-topos; R commutative ring sheaf; IsSubterminal U,V; hcover is exactly U∪V=1, nothing stronger; full faithful finite-limit-closed small E containing h_a^#,1,U,V,U×V; epimorphic precoverage with small representatives; binaryCover; nerve ≅ restricted Yoneda; slices over J.over Z with Hom formula; ring transported with IsIso ringMap (R_Z ↦ ring.over Z); additive exact module equivalences pinned by underlying/unit/structural/pushforward; derived functors equal to presentationDerivedMap; restriction/further squares with HEq identity and cocycle equations. Checked that the HEq endpoint types are propositionally equal (map_π rfl; Over.map 𝟙 and f≫g agree by comp_id/assoc with identity ring maps), so no iso-only HEq. Edge cases: empty site, U=1/V=0, W=0, R=0. No duplicate (topos_sitePresentation family presents morphisms only). One sorry; docstrings with source and blueprint carry the 11 proof steps; statement verbatim; report sections present. Advisories: mate IsIso fields are formal (node's 'hence' clause); derived restriction squares are formal; owners not in stmt_deps; BinaryPresentationModules partly overlaps RingedPresentationAt. No compile (no file changed); worker reports clean scompile and dry-run OK."
  }
 }

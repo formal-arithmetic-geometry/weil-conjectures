@@ -15,7 +15,9 @@
   "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex",
   "def-coef-ringed-tensor-hom-model",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-ringed-slice-comparison-model",
+  "def-sfb-tensor-symmetry-pure-equation"
  ],
  "proof": [
   {
@@ -278,5 +280,38 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-72a16c6eb (reviewer sub-agent of L); spot-checked: I read the delivery in full. It makes no new nodes, and the statement is byte-identical to side-live; the only stmt_deps change adds def-pc-flat-sheaf-modules for the stated 'flat terms'. The item has no repair note (so it is not a re-split) and is not in the dropped list. No dependency is merged, there is no cycle (closure of 218 nodes), and proof_deps equals the union of the uses. I read Stacks 08J9 and 06YT in the source, and every cited label matches tags/tags. Step 1: the K-flat tensor quasi-iso lemma lets A↦Q(A⊗P) factor through localization (1); the equivalence in the descent node with localization (2)/(3) extends the normalized c_{F,P} uniquely, and c_{A,P}=(Qq⊗1)c_{F,P}Q(q⊗1)^{-1} follows by naturality. Step 2: with d(g)=d_E g−(−1)^n g d_P, f̃ is a chain map with no sign. Step 3: I recomputed the Koszul coefficients ((n+1)m vs nm+m, and nm vs nm) and they agree. Step 4: Hom(P,u) is a quasi-iso by rhom-well-defined with E and I(E) K-injective. Step 5: φ=Hom(P,u)fq meets the normalization of def-coef-ringed-tensor-hom-model with ψ=u f̃(q⊗1); adjunction naturality and cancelling Q(q⊗1) give τ(h)c_{A,P}=Q(f̃), and I checked the algebra. Step 6: the variances are right. Step 7: this is exactly the 06YT square, with the top map handled by the step-3 symmetry and the K-flatness of F. Small cases checked: A=0 or P=0, degree 0 (classical uncurrying), odd degrees (sign −1), and non-flat or unbounded A. The closest duplicate candidates are not duplicates: lem-sf-coefficient-tensor-curry-normalization requires both factors K-flat, and the flat-evaluation-roof and étale chain-transpose nodes are about other maps. I accept the six declared tool uses as generic ringed-site and categorical black boxes: kflat-resolution, kflat-tensor-quasiiso, localization-UP (a Mathlib leaf), site-derived-tensor-descent, kinjective-resolutions-exist and rhom-well-defined. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.OneKFlatChainTranspose",
+  "declaration": "WeilConjectures.oneKFlatChainTranspose",
+  "declarations": [
+   "WeilConjectures.OneKFlatChainComparison",
+   "WeilConjectures.OneKFlatChainComparisonNormalization",
+   "WeilConjectures.OneKFlatChainComparisonNaturality",
+   "WeilConjectures.OneKFlatChainUncurry",
+   "WeilConjectures.OneKFlatChainUncurryPure",
+   "WeilConjectures.OneKFlatChainTransposeEquation",
+   "WeilConjectures.OneKFlatChainUncurryNaturality",
+   "WeilConjectures.OneKFlatChainTensorInverts",
+   "WeilConjectures.OneKFlatChainHomInverts",
+   "WeilConjectures.OneKFlatChainHomComparisonIsIso",
+   "WeilConjectures.OneKFlatChainTransposeData",
+   "WeilConjectures.oneKFlatChainTranspose"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/OneKFlatChainTranspose.lean",
+  "statement": "theorem oneKFlatChainTranspose : Nonempty (OneKFlatChainTransposeData.{c, v, u, w} J R S T)",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The conclusion packages simultaneous normalized natural comparison, actual chain evaluation, fixed derived transpose, naturality, representative quasi-isomorphism inversion, and actual Koszul sign. The fixed augmentation is CategoryTheory.coefficientHomAugmentation from def-sfb-ringed-slice-comparison-model, mapped by the existing covariant Hom functor; this is the same fixed map formerly written podHomAugmentation, without the unrelated automorphism import. Module categories are written directly as SheafOfModules, with identical independent universes. The symmetry predicate is owned by def-sfb-tensor-symmetry-pure-equation. No mathematical clause changed. Repair of cd2471432eb0: ten helper definitions name exactly the existing field types and propositions in the same module, so generated structure declarations do not repeat the large tensor/Hom expressions. All eleven fields and their equations are retained. K-flatness, flatness and Hom universes are explicit; the theorem header and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-115c44978",
+  "group": "Q05",
+  "result": "pass",
+  "note": "115c449780d9 re-delivers fb99135d5498 (PASS) after its landing RETURN 'def-sfb-tensor-symmetry-pure-equation not reached and not flagged unreachable'. The Lean module and item node are byte-identical to fb99. The only node delta is that the delivered symmetry-node copy carries import_flags unreachable; it equals the landed side-live node, so this delivery adds no new-node delta. Recomputed reach with dag_queue: on side-live the item is reached (6) and the symmetry node is unreached and flagged; with the item overlaid the node is reached (7), a stale flag that nt_incremental2.check filters (stale_flag, land2fix 2026-10-18), so landing is not blocked; the worker's dry run printed OK at a6ff3b55c72. Mathematics re-read on the unchanged Lean against Stacks 08J9/06YT/06YU: arbitrary unbounded A; P K-flat with flat terms; E K-injective; comparison pinned by normalization to T.iso, naturality and tensor_inverts; uncurry fixed on the actual generators as f(a)(p) via coefficientHomComponent (p+n=q convention checked in side-live); transpose_eq uses the given adjunction with coefficientHomAugmentation (the same toKInjectiveResolution as coefficientHomResolution); hom/tensor inversion clauses true; symmetryPure gives the (p*q).negOnePow sign; no edge case excluded; statement verbatim; one sorry. No compile run since nothing changed; the same file compiled clean in 50.0 s (fb99 review) and passed the 16:01 landing compile. Advisory: coefficientHomComponent and coefficientHomResolutionIso are owned by def-coef-hom-representative-evaluation, a proof_dep only. Maintainer note: the stale unreachable flag on the symmetry node can be cleared after landing."
+ }
 }

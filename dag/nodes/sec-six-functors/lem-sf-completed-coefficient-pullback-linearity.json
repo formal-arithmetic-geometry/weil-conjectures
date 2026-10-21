@@ -15,7 +15,11 @@
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "def-weil-pbc-intrinsic-completion",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-topoi-derived-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-completed-pullback",
+  "def-sf-complete-derived-subcategory",
+  "def-sf-completed-module-direct-image"
  ],
  "proof": [
   {
@@ -262,5 +266,33 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-9ed5989df (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps, no new nodes), every cited statement, the datum, inverse-image, completed-pullback and completion nodes, and the blueprint def-wf-tensor-product. Stacks labels checked: 09A5, 0H7J, 03D7, 03CR. No SGA. The statement adds no hypothesis and is not weakened. Steps 2-6 are correct as delivered: the adjunct identity s;c^#=ρ;e_*s gives (c^#)_U(s_U(b))=s_{u_e(U)}(b); direct image is linear sectionwise; the left adjoint is linear via α(h)=ζ;G(h) and injectivity; exactness comes from ringed-presentation transport; the Mathlib leaves give derived linearity. Three repairable faults, fixed in fixes/dag/nodes/sec-six-functors/lem-sf-completed-coefficient-pullback-linearity.json. (1) C4/E4: c_{P_n} was cited from lem-weil-proetale-isomorphism-inverse-image clause 3, which covers only constant sheaves, while the datum's (P_n)_X is the Cont(π_0) sheafification. The statement and Steps 1 and 5 now cite lem-weil-pbc-profinite-coefficient-inverse-image for the identification, the projection identity π_n c_e=c_{P_n}e^{-1}π_n and invertibility (stmt_dep added). (2) E5: Step 7 identified the termwise derived functor of Step 6 with the K-flat 'ordinary derived pullback' of lem-sf-automorphism-completion-unit-comparison without argument. The statement now names Le^* [lem-weil-pbc-ringed-topoi-derived-pullback], and Step 7 proves its A-linearity by lem-pur-ringed-derived-pullback-linear; that node's scalar hypothesis is Step 2 on the final object. (3) C8: off-unit tool uses were undeclared. Added declarations for isomorphism-inverse-image, ringed-topoi-module-adjunction, profinite-coefficient-inverse-image and ringed-derived-pullback-linear; all are accepted as generic tools, since the unit cites nothing. No cycle: the closures of the new citations contain neither the item nor its parent. Advisory: lem-sbc-completed-operations-linear-natural-exchange (O_E, completed pullback) overlaps but is not a duplicate. Small cases checked: e=id, I=A, the zero ring, I=0 with the empty tuple, b=0 or 1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCoefficientPullbackLinearity",
+  "declaration": "AlgebraicGeometry.Scheme.sfCompletedCoefficientPullbackLinearity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfCompletedCoefficientScalarSquares",
+   "AlgebraicGeometry.Scheme.sfCompletedModulePullback_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.sfCompletedModulePullback_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.sfCompletedModuleDirectImage_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.sfCompletedModuleDirectImage_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.sfCompletedCoefficientPullbackLinearity",
+   "AlgebraicGeometry.Scheme.sfCompletedCoefficientPullback_preservesComplete",
+   "AlgebraicGeometry.Scheme.sfCompletedCoefficientCompletePullback_linearity"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedCoefficientPullbackLinearity.lean",
+  "statement": "theorem sfCompletedCoefficientPullbackLinearity (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (e : Aut X) : (completedModuleDirectImage e.hom d).Additive ∧ (completedModuleDirectImage e.hom d).Linear A ∧ (completedModulePullback e.hom d).Additive ∧ (completedModulePullback e.hom d).Linear A ∧ (completedModuleDirectImage e.hom d).mapDerivedCategory.Additive ∧ (completedModuleDirectImage e.hom d).mapDerivedCategory.Linear A ∧ (completedModulePullback e.hom d).mapDerivedCategory.Additive ∧ (completedModulePullback e.hom d).mapDerivedCategory.Linear A ∧ (completedOrdinaryPullback e.hom d).Additive ∧ (completedOrdinaryPullback e.hom d).Linear A",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f10ae935b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery of af4f9f84 (RETURN H2/H11, maths found correct there). Delta: the Lean module only drops the citation-only imports PbcQbarCompletedPullback/CompletedDirectImageLimits (H9); all 8 signatures are byte-identical. The theorem stmt_deps lem-weil-pbc-ringed-koszul-completion-reflector and prop-weil-pbc-direct-image-limits are replaced by new existing:true def nodes: def-sf-complete-derived-subcategory (wfCompletionRepresentative/WfIsComplete/WfCompleteCategory on WeilCompletedTensorReflector) and def-sf-completed-module-direct-image (completedCoefficientDirectImageMap = unit ≫ f_*c_f, completedModuleDirectImage = pushforward with action along c_f^# on CompletedTowerDirectImage). TeX statements match the live bodies; check_existing reports no failures and no notes; ids not live; no competing def owner. Body owners cited (intrinsic-completion, proetale-inverse-image, completed-pullback); pbcModules/pbcAdicCompletion/PbcCompletedDerived owners uncited = base convention, advisory. Report has a real clause-by-clause '## Second reading by Q06' (H11 fixed) and a Worker report. No stmt_dep dropped vs live (8 kept, 4 added); item not landed or superseded; lean.statement verbatim; all 8 declarations present. Maths re-confirmed: scalar squares and section equation, canonical c_e, Le^* = completedOrdinaryPullback (universal K-flat left-derived functor; keeps the u+1/u universes), preservation for every tuple incl. r=0, H pinned by H⋙ι = ι⋙Le^*; edge cases e=id, empty X, zero A, I=A, I=0, b=0/1 admitted. No file changed, nothing compiled; worker reports a clean compile (6.7/6.9 s) and an OK dry run."
  }
 }

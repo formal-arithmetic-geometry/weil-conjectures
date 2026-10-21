@@ -255,5 +255,31 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ff83e805b (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged and matches the unsplit live side node; no other group has split it. The item was created by Q38's re-split of lem-sfb-scalar-matrix-inverse-image, whose step 1 applies it with P=p_U^*, Q=p_V^*, F=h^{-1}. The item has no repair note of its own, so six steps with no new nodes is acceptable. Step 1: braiding naturality with (1_Z,b), λβ_{Z,1}=ρ and μβ=μ give t_b=μ(1⊗b)ρ^{-1}; associativity plus the structural identity A_{Z,Z,1}ρ^{-1}=1⊗ρ^{-1} gives regular-module linearity. Step 2: inverted left unit coherence, tensorator naturality and μ_{GZ}=G(μ)u give G(t_b)=t_{G(b)ε}. Step 3: clause 3 of the ring-transport node and naturality of c at t_a give the scalar square. Step 4: the transported action is literally μ_T. Step 5: the extension coequalizer for regular T equals the mixed-bimodule right-unitor coequalizer for the S–T bimodule S with right action μ_S(1⊗α); e and its inverse match Mathlib Bimod.lean:685-690 and :764. Step 6: I checked each equality, and q cancels by colimit uniqueness. The hypotheses (R, T, S commutative; no braided functors; E with coequalizers and colimit-preserving tensor) are sufficient. Every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. Nothing cited is on the route-pivot dropped list, and no SGA is cited. I confirmed the blueprint sources (pullback-from-point-comp last paragraph; unbounded-pullback Constructible complexes paragraph) and Stacks 0FFL and 0HAY. Duplicate check: lem-sfb-regular-scalar-extension-multiplication is a sheaf special case. lem-weil-pbc-regular-extension-comparison (another unit) does not fix the isomorphism by a formula and has no three-functor transport, so it is not a duplicate. Advisory: the parent cites both. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleObjects.CoefficientDiagramRegularScalars",
+  "declaration": "CategoryTheory.coefficientDiagram_regularScalars",
+  "declarations": [
+   "CategoryTheory.regularScalar_eq_leftMultiplication",
+   "CategoryTheory.coefficientDiagram_isMonHom",
+   "CategoryTheory.coefficientDiagramExtension",
+   "CategoryTheory.coefficientDiagramProjection",
+   "CategoryTheory.coefficientDiagram_regularScalars"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjects/CoefficientDiagramRegularScalars.lean",
+  "statement": "theorem coefficientDiagram_regularScalars [HasCoequalizers E] [∀ X : E, PreservesColimits (tensorLeft X)] [∀ X : E, PreservesColimits (tensorRight X)] (P : C ⥤ D) (Q : C ⥤ E) (F : D ⥤ E) [P.Monoidal] [Q.Monoidal] [F.Monoidal] (c : P ⋙ F ≅ Q) [NatTrans.IsMonoidal c.hom] (Λ : C) [MonObj Λ] [IsCommMonObj Λ] [IsCommMonObj (P.obj Λ)] [IsCommMonObj (F.obj (P.obj Λ))] [IsCommMonObj (Q.obj Λ)] : (∃ i : (F.mapMod (P.obj Λ)).obj (Mod.regular (P.obj Λ)) ≅ Mod.regular (F.obj (P.obj Λ)), i.hom.hom = 𝟙 (F.obj (P.obj Λ)) ∧ i.inv.hom = 𝟙 (F.obj (P.obj Λ))) ∧ ∃ e : ((F.mapMod (P.obj Λ)) ⋙ coefficientDiagramExtension (c.hom.app Λ)).obj (Mod.regular (P.obj Λ)) ≅ Mod.regular (Q.obj Λ), @coefficientDiagramProjection E _ _ _ _ _ _ (F.obj (P.obj Λ)) (Q.obj Λ) (F.monObjObj (P.obj Λ)) (Q.monObjObj Λ) _ (c.hom.app Λ) (coefficientDiagram_isMonHom P Q F c Λ) ((F.mapMod (P.obj Λ)).obj (Mod.regular (P.obj Λ))) ≫ e.hom.hom = Q.obj Λ ◁ c.hom.app Λ ≫ μ[Q.obj Λ] ∧ e.inv.hom = (ρ_ (Q.obj Λ)).inv ≫ Q.obj Λ ◁ η[F.obj (P.obj Λ)] ≫ @coefficientDiagramProjection E _ _ _ _ _ _ (F.obj (P.obj Λ)) (Q.obj Λ) (F.monObjObj (P.obj Λ)) (Q.monObjObj Λ) _ (c.hom.app Λ) (coefficientDiagram_isMonHom P Q F c Λ) ((F.mapMod (P.obj Λ)).obj (Mod.regular (P.obj Λ))) ∧ ∀ a : 𝟙_ C ⟶ Λ, P.map ((λ_ Λ).inv ≫ a ▷ Λ ≫ μ[Λ]) = (λ_ (P.obj Λ)).inv ≫ (Functor.LaxMonoidal.ε P ≫ P.map a) ▷ P.obj Λ ≫ μ[P.obj Λ] ∧ Q.map ((λ_ Λ).inv ≫ a ▷ Λ ≫ μ[Λ]) = (λ_ (Q.obj Λ)).inv ≫ (Functor.LaxMonoidal.ε Q ≫ Q.map a) ▷ Q.obj Λ ≫ μ[Q.obj Λ] ∧ F.map ((λ_ (P.obj Λ)).inv ≫ (Functor.LaxMonoidal.ε P ≫ P.map a) ▷ P.obj Λ ≫ μ[P.obj Λ]) ≫ c.hom.app Λ = c.hom.app Λ ≫ (λ_ (Q.obj Λ)).inv ≫ (Functor.LaxMonoidal.ε Q ≫ Q.map a) ▷ Q.obj Λ ≫ μ[Q.obj Λ] ∧ ((F.mapMod (P.obj Λ)) ⋙ coefficientDiagramExtension (c.hom.app Λ)).map (Mod.regularLift (Mod.regular (P.obj Λ)) (Functor.LaxMonoidal.ε P ≫ P.map a)) ≫ e.hom = e.hom ≫ Mod.regularLift (Mod.regular (Q.obj Λ)) (Functor.LaxMonoidal.ε Q ≫ Q.map a)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Three statement clauses of this node: global scalar linearity via existing regularLift, ring compatibility of the coefficient component for sequential transport, and the normalized regular comparison. The two abbrevs only supply small-colimit instances to the existing extendScalars and extendπ constructions, retaining the full colimit-preservation hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34689c3eb",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node: braided C,D,E; HasCoequalizers E with full PreservesColimits of tensorLeft/Right (the {0,0} size for the recorded Mod.extendScalars is derived via preservesSmallestColimits_of_preservesColimits, not substituted); strong monoidal P,Q,F; c : P⋙F≅Q with NatTrans.IsMonoidal; commutative MonObj Λ and IsCommMonObj on R,T,S with sequential monObjObj. coefficientDiagram_isMonHom is needed because the composite and sequential structures on T are not defeq. regularScalar_eq_leftMultiplication ties regularLift (ρ⁻¹≫Z◁b≫μ) to t_b. The three scalar identities appear in diagrammatic order. The identity mapMod regular iso has content. e : H(R)≅S is pinned by q≫e=S◁α≫μ_S and e⁻¹=ρ⁻¹≫S◁η_T≫q with q=Mod.extendπ (epi, so e is unique). ∀a is inside ∃e. Statement field is verbatim; node differs from side-live only in lean; stmt_deps unchanged; no hollow defs (abbrevs are instance adapters); docstrings carry source and blueprint tag; both report sections present. Advisory only: possibly redundant Free.Coherence/RingPresheaf imports. No compile run (no file changed)."
  }
 }

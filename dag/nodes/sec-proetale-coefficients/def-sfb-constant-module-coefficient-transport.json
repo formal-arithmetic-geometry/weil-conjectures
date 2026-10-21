@@ -1,0 +1,104 @@
+{
+ "id": "def-sfb-constant-module-coefficient-transport",
+ "kind": "definition",
+ "title": "Canonical commutative coefficient transport and unit for constant modules",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\Lambda$ a commutative ring. Let $\\underline\\Lambda_{\\mathrm{Ring}}$ be its constant ring sheaf and let $\\underline\\Lambda_{\\mathrm{Comm}}$ be its constant commutative ring sheaf [def-weil-pbc-constant-sheaf]. Write $U(\\underline\\Lambda_{\\mathrm{Comm}})$ for the underlying ring sheaf. Define $c_\\Lambda:\\underline\\Lambda_{\\mathrm{Ring}}\\xrightarrow{\\sim}U(\\underline\\Lambda_{\\mathrm{Comm}})$ to be the canonical sheafification comparison for the forgetful functor from commutative rings to rings. For a $\\Lambda$-module $M$, let $F(M)$ be its constant module sheaf [def-sf-site-constant-module-functor]. Define $F_{\\mathrm{Comm}}(M)$ by restriction of scalars along $c_\\Lambda^{-1}$: it has the same underlying abelian sheaf as $F(M)$ and scalar action $a\\cdot m=c_{\\Lambda,V}^{-1}(a)m$ on every object $V$. On a linear map use the original constant-module morphism. This is a functor to sheaves of $U(\\underline\\Lambda_{\\mathrm{Comm}})$-modules [def-weil-sheaf-of-modules-category]. Define its constant-section unit $\\eta_M:(V\\mapsto M)\\to F_{\\mathrm{Comm}}(M)$ on underlying abelian presheaves to be the sheafification unit [def-weil-pbc-sheafification] of the constant abelian presheaf, retained under this coefficient transport.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-sf-site-constant-module-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules (unique extended module action and sheafification unit); section-constant (constant rings and modules); Tag 093T, lemma-locally-constant, constant-module convention"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical transport of the constant module sheaf from the constant RingCat ring to the underlying ring of the constant CommRingCat sheaf, retaining its constant section unit",
+   "results": "OK: 8 hit(s); CategoryTheory.constantSheaf, SheafOfModules.unit, SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.toSpecΓ, CategoryTheory.Sheaf.IsConstant.mk, PresheafOfModules.unitHomEquiv, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, PresheafOfModules.unit",
+   "date": "2026-10-21",
+   "verdict": "components found; exact existing project constructions reused by existing:true, no new Lean definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ring coefficient transport of a constant module sheaf and its sheafification unit",
+   "results": "OK: 8 hit(s); SheafOfModules.ιFree, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.one_smul, SheafOfModules.unit, SheafOfModules.unit_val, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, PresheafOfModules.Sheafify.module",
+   "date": "2026-10-21",
+   "verdict": "components found; exact existing project constructions reused by existing:true, no new Lean definition"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafComposeNatIso|def pushforward|def toSheafify",
+   "results": "OK: 25 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+   "date": "2026-10-21",
+   "verdict": "components found; exact existing project constructions reused by existing:true, no new Lean definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-finite-free-presentation-extension",
+  "date": "2026-10-21",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "Local models: canonical constant-module coefficients and tensor sections used to extend the specified finite free presentation with the same matrix",
+   "via": [
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-sfb-scalar-model-finite-flat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleHom",
+  "declaration": "CategoryTheory.constantModuleHomRingIso",
+  "declarations": [
+   "CategoryTheory.constantModuleHomRingIso",
+   "CategoryTheory.constantModuleHomFunctor",
+   "CategoryTheory.constantModuleHomUnit"
+  ],
+  "statement": "def constantModuleHomRingIso :\n    (constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ) ≅\n      (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj\n        ((constantSheaf J CommRingCat.{max u v}).obj (CommRingCat.of Λ))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition-node attachment of existing concrete canonical constructions, as required by return L at 4d1bb414611b. Their bodies do not choose or use the conclusion of the theorem housed in the same source module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f9159e62",
+  "group": "NY",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f9159e62",
+  "group": "NY",
+  "result": "fix",
+  "note": "Re-delivery after return L (4d1bb414, theorem nodes cited for plain defs). The item Lean is byte-identical to the returned head, whose clause-by-clause mathematics was found correct (exactness, alpha/beta pinned, matrix A_B, flat ShortExact, IsIso without flatness, rank 0 included). Two new existing:true def nodes own the plain defs; I checked them against the side-live source and their body owners are in their stmt_deps; no theorem stmt_dep remains, no cycle. FIX: fixes/def-sfb-scalar-extension-pure-tensor-section.json removes 'noncomputable' from lean.statement (check_existing note gone). Advisory: siteTensor_identity_* helper instances have no def-node owner. No Lean changed, so no compile."
+ }
+}

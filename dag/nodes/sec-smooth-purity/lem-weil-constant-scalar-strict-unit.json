@@ -254,5 +254,42 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-2934a05d7 (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, 6 elementary steps, 0 new nodes. Its only additions to stmt_deps are the flatness and total-tensor definitions, which the statement uses. The 2026-10-21 re-split note is on the parent (lem-weil-constant-coefficient-objects-constructible, merged as a FIX), not on this item. The item is not on the dropped list, cites no SGA and has no cycle (its citers are the parent and lem-weil-constant-scalar-unit-quasi-isomorphism). Step 1: R_E[0] is K-flat with flat terms. M⊗R_E≅M by balancing plus the sheafification universal property, and Tot(F⊗P)^n=F^n⊗R_E with differential d_F⊗1, which is acyclic. Step 2: u_m and 1⊗z are inverse by 1⊗ρ_m(r)z=r⊗z. With q=id this is the K-flat flat-term model that def-weil-integral-scalar-extension asks for. Step 3: a_mρ_{m+1}=ρ_m holds. For L=E, ρ_m=π^E_m and the reduction tower gives c_m=[γ_m][q]^{-1}, so u_mγ_m=π^E_m. Step 4: h_m=u_m^{-1}π^L_m is R_L-linear, t_mh_{m+1}=h_m, and the product is taken sectionwise, so (1-s)h=0. Step 5: I recomputed Cone(D)[-1] from the cone and shift formulas in def-weil-abstract-derived-category; in normalized coordinates the differential is (dx,Dx-dy), after the minus sign in Mathlib's MappingCocone fst (l.43). Mathlib's lift (l.282) with β=0 needs exactly Dh=0. Step 6: uniqueness follows from the two coordinates and the zero terms in other degrees, and the unit-section version follows by R_L(V)-linearity, including the case 1=0. Bhatt–Scholze Def. 3.5.2 (p.24) and Lemma 6.8.2(1) (pp.58-59) match, and are background only. In the K-flat DAG scan, no node states this result; lem-pc-bounded-above-flat-kflat-site is generic and is not needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantScalarStrictUnit",
+  "declaration": "WeilConjectures.ConstantScalarStrictUnit.regular_scalar_strict_unit",
+  "declarations": [
+   "WeilConjectures.ConstantScalarStrictUnit.regularComplex",
+   "WeilConjectures.ConstantScalarStrictUnit.regularZeroIso",
+   "WeilConjectures.ConstantScalarStrictUnit.regularSection",
+   "WeilConjectures.ConstantScalarStrictUnit.finiteRegularComplex",
+   "WeilConjectures.ConstantScalarStrictUnit.finiteZeroIso",
+   "WeilConjectures.ConstantScalarStrictUnit.projectionModule",
+   "WeilConjectures.ConstantScalarStrictUnit.projectionComplex",
+   "WeilConjectures.ConstantScalarStrictUnit.boundary",
+   "WeilConjectures.ConstantScalarStrictUnit.coordinate",
+   "WeilConjectures.ConstantScalarStrictUnit.quotientCoordinates",
+   "WeilConjectures.ConstantScalarStrictUnit.unitCoordinates",
+   "WeilConjectures.ConstantScalarStrictUnit.zeroSecondComponent",
+   "WeilConjectures.ConstantScalarStrictUnit.finiteMultiplication",
+   "WeilConjectures.ConstantScalarStrictUnit.finiteDerivedComputation",
+   "WeilConjectures.ConstantScalarStrictUnit.reductionUnits",
+   "WeilConjectures.ConstantScalarStrictUnit.regular_scalar_strict_unit"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantScalarStrictUnit.lean",
+  "statement": "theorem regular_scalar_strict_unit (D : FiniteFieldDatum.{d}) (_hl : l ≠ D.p) : integralOperationsGoodComplex l E Y (regularComplex l E Y) ∧ finiteMultiplication l E Y L ι ∧ finiteDerivedComputation l E Y L ι ∧ reductionUnits l E Y ∧ (∃! η : regularComplex l L Y ⟶ (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y), quotientCoordinates l E Y L ι η ∧ zeroSecondComponent l E Y L ι η) ∧ (∀ η : regularComplex l L Y ⟶ (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y), quotientCoordinates l E Y L ι η ↔ unitCoordinates l E Y L ι η)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The full statement includes K-flatness with flat terms, finite multiplication isomorphisms and their reduction compatibility, canonical derived tensor computation, the identity-extension reduction units, and unique strict scalar unit with full-section and unit-only normalization. Helpers transparently name the existing single complexes, linear limit projection, scalar tower boundary and the clauses of this same node. No new coefficient, tensor, completion, derived reduction or Roos construction is defined. Independent datum, scheme and coefficient universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b438126dd",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read node, all 13 stmt_dep records (identical to side-live), module, report (Worker report + Second reading by NM present) and the used decls in side-live. Every clause matches: K-flat+flat terms via integralOperationsGoodComplex; finiteMultiplication pins u by r⊗z↦ρ(r)z, inverse z↦1⊗z and degree-0 transition square; finiteDerivedComputation = IsIso of the recorded change-of-rings derived counit at Q(R_E[0]); reductionUnits gives strict γ≫Res v = projection (unitHomEquiv of section 1 = π_n) and its localized form with canonicalIntegralReductionTowerMap(𝟙); ∃! η into mappingCocone(towerTransitionEndomorphism) of the recorded strict scalar tower with quotient coordinates 1⊗π^L_n(s) for all V,s,n and zero snd in all degrees; ∀η unit-only ↔ full. Independent universes t,u,d; no added hypotheses; n=0 is exponent 1; 1=0 covered. No hollow defs, docstrings with source/blueprint and the 6 proof steps, statement verbatim, declarations list exact, only sorry, real ProEt site. Advisory: uses underlying strict-construction decls from theorem modules outside stmt_deps (as parent does); boundary repeats completedScalarRoosEndomorphism; L=E clause stated via the reduction tower's own extension. No compile run (no file changed)."
  }
 }

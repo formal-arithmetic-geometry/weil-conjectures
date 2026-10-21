@@ -381,5 +381,37 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-18bf421c6 (reviewer sub-agent of L); spot-checked: I read the item and its 7 new proof steps in full, along with every cited statement. The statement is unchanged, adds no hypothesis and is not weakened. It gives exactly what the parent lem-sfb-internal-hom-dual-tor-amplitude takes in its step 2. There are no new nodes. Step 1 uses the finite affine cover (lem-pqf) of the quasi-compact S and the covering condition of Stacks 0989 over each affine A_k, so V_kt is affine open in U_alpha. Over the affine A_k a finite affine refinement is a cover, which is true because A_k is separated. Step 2 composes covers with lem-weil-pbc-fpqc-covering-axioms (2), which is Stacks 022D/098C(2), and gets weak etaleness from open immersion, base change and composition. It never assumes S is quasi-separated, so there is no E1 fault, and J is nonempty because S is. Step 3 is elementary; I checked the zero-complex and disjoint-interval cases. Steps 4-5 restrict to slices via the slice sheafification and tensor comparisons; the slice forgetful functor is continuous and cocontinuous by def-pur-localized-ringed-site. They also use relocalization and exact module restriction (unit sk-def-sf-operations, which is in route), and B tensor 0 = 0. Step 6 is the final clause of Stacks 0GMW, B_j(W) tensor R^N = B_j(W)^N, including N=0. Step 7 applies a functor to p i = id, which matches the degreewise package definition. No flatness is needed (checked R=Z, B=Z/2). I searched the DAG for duplicates; the nearest are the scalar-perfect dual realization, coefficient finite-descent sections and lisse finite models nodes, and none states this. The tool_uses are generic site tools and are accepted. There are no SGA citations. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteScalarPerfectRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.finite_scalar_perfect_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtSmall",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtSliceSmall",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtCommSheafify",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtAbSheafify",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtLocallyBijective",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtSliceCommSheafify",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtSliceSheafify",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtSliceLocallyBijective",
+   "AlgebraicGeometry.Scheme.scalarPerfectOpenChart",
+   "AlgebraicGeometry.Scheme.scalarPerfectProEtRing",
+   "AlgebraicGeometry.Scheme.scalarPerfectLocalModel",
+   "AlgebraicGeometry.Scheme.finite_scalar_perfect_refinement"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteScalarPerfectRefinement.lean",
+  "statement": "theorem finite_scalar_perfect_refinement [Nonempty S] [CompactSpace S] [HasDerivedCategory.{w} (SheafOfModules.{r} (scalarPerfectProEtRing S B))] [∀ U : S.ProEt, HasDerivedCategory.{w'} (SheafOfModules.{r} ((scalarPerfectProEtRing S B).over U))] (P : DerivedCategory (SheafOfModules.{r} (scalarPerfectProEtRing S B))) (I : Type i) (U : I → S.ProEt) (_hcover : Presieve.ofArrows (fun k ↦ (U k).left) (fun k ↦ (U k).hom) ∈ proetalePrecoverage.coverings S) (F : I → CochainComplex (ModuleCat.{r} R) ℤ) (_hbounded : ∀ k, ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((F k).X q)) (spl : ∀ k, ModuleCat.StrictPerfectCoefficientPackage (F k)) (_hrep : ∀ k, Nonempty (ringedSiteDerivedRestrictionOfUniverses.{t + 1, t, r, r, w, w'} (scalarPerfectProEtRing S B) (U k) P ≅ DerivedCategory.Q.obj (scalarPerfectLocalModel S R B φ (U k) (F k)))) : ∃ (n : ℕ) (_hn : 0 < n) (α : Fin n → I) (V : ∀ j, (U (α j)).left.Opens) (lo hi : Fin n → ℤ) (a b : ℤ), (∀ j, IsAffineOpen (V j)) ∧ Presieve.ofArrows (fun j ↦ (V j).toScheme) (fun j ↦ (V j).ι ≫ (U (α j)).hom) ∈ proetalePrecoverage.coverings S ∧ (∀ j, lo j ≤ hi j) ∧ (∀ j q, q < lo j ∨ hi j < q → IsZero ((F (α j)).X q)) ∧ (∀ j, a ≤ lo j) ∧ (∃ j, a = lo j) ∧ (∀ j, hi j ≤ b) ∧ (∃ j, b = hi j) ∧ a ≤ b ∧ ∀ j, Nonempty (ringedSiteDerivedRestrictionOfUniverses.{t + 1, t, r, r, w, w'} (scalarPerfectProEtRing S B) (scalarPerfectOpenChart (U (α j)) (V j)) P ≅ DerivedCategory.Q.obj (scalarPerfectLocalModel S R B φ (scalarPerfectOpenChart (U (α j)) (V j)) (F (α j)))) ∧ (∀ q, q < lo j ∨ hi j < q → IsZero ((scalarPerfectLocalModel S R B φ (scalarPerfectOpenChart (U (α j)) (V j)) (F (α j))).X q)) ∧ ∃ pkg : StrictPerfectCoefficientPackageOnSite ((scalarPerfectProEtRing S B).over (scalarPerfectOpenChart (U (α j)) (V j))) (scalarPerfectLocalModel S R B φ (scalarPerfectOpenChart (U (α j)) (V j)) (F (α j))), ∃ hN : pkg.N = (spl (α j)).N, ∃ e : ∀ q : ℤ, (scalarPerfectChartFunctor.{t + 1, t, r} (ProEt.topology S) R φ (scalarPerfectOpenChart (U (α j)) (V j))).obj (ModuleCat.of R (Fin ((spl (α j)).N q) → R)) ≅ ∏ᶜ fun _ : Fin (pkg.N q) ↦ SheafOfModules.unit ((scalarPerfectProEtRing S B).over (scalarPerfectOpenChart (U (α j)) (V j))), (∀ q, pkg.i q = (scalarPerfectChartFunctor.{t + 1, t, r} (ProEt.topology S) R φ (scalarPerfectOpenChart (U (α j)) (V j))).map ((spl (α j)).i q) ≫ (e q).hom) ∧ (∀ q, pkg.p q = (e q).inv ≫ (scalarPerfectChartFunctor.{t + 1, t, r} (ProEt.topology S) R φ (scalarPerfectOpenChart (U (α j)) (V j))).map ((spl (α j)).p q)) ∧ ∀ (q : ℤ) (W : (Over (scalarPerfectOpenChart (U (α j)) (V j)))ᵒᵖ) (s : B.obj.obj (Opposite.op W.unop.left)) (x : Fin ((spl (α j)).N q) → R) (k : Fin (pkg.N q)), ((e q).hom ≫ Pi.π _ k).val.app W (scalarPerfectChartSection.{t + 1, t, r} (ProEt.topology S) R φ (scalarPerfectOpenChart (U (α j)) (V j)) _ W s x) = s * φ.hom.app (Opposite.op W.unop.left) ((scalarPerfectRingUnit.{t + 1, t, r} (ProEt.topology S) R).app (Opposite.op W.unop.left) (x (Fin.cast (congrFun hN q) k)))",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e41aa4056",
+  "group": "Q15",
+  "result": "pass",
+  "note": "All hypotheses and conclusions match the node: nonempty CompactSpace S with no separation; ProEt site with object universe t+1 and morphism universe t, not equated; UnivLE.{t+1,r} is the size convention; proetalePrecoverage cover keeps the 0989 finite refinement; bounded F with spl splittings; restriction iso to the chart complex (constant sheaf, slice restriction, change of rings along restricted phi). Conclusion: Fin n with n>0; affine V_j in U_alpha(j) with composite cover; lo/hi bounds; attained min/max and a<=b; restricted derived iso; vanishing; packages pinned to chart.map of spl.i/spl.p via e, which the pure-section formula s tensor x to s*phi(x_k) determines, so no arbitrary map. True by 0989 and functoriality; edge cases checked (I infinite, zero complex, disjoint intervals, N=0, nonflat B, zero ring). Statement verbatim; all declarations present; only sorry Prop helpers with docstrings. Dependency module StrictPerfectCoefficientPackageOfUniverses is a strict superset of the unchanged live file, record statement verbatim, no name clashes in 19 importers. Not dropped; first delivery. Advisories: constant-module functor repeats Q11's theorem-module copy; derived and slice restriction owners are proof_deps only; dep record by moves Q33 to Q15. No compile needed (no file changed)."
  }
 }

@@ -264,5 +264,36 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-ad97b2017 (reviewer sub-agent of L); spot-checked: Q20 lem-pur-good-truncation-exact-normalization @ad97b201: PASS. I read the whole delivery, which has no new nodes. The item is not dropped (it is absent from side-live route-pivot-dropped.txt), not superseded (still unsplit on side-live) and not a re-split. The statement, stmt_deps and blueprint are unchanged from the base; the 7 inherited searches are kept verbatim and 7 new ones are appended. I read every cited statement: def-kun-truncations (an off-unit tool use, declared and accepted: only the good-truncation definition and its cohomology clause are used), def-weil-abstract-derived-category, the pbc derived-single-fully-faithful, exact-functor-complex-cohomology, exact-functor-derived-factorization and localization-universal-property (1)-(3) nodes, and lem-sp-exact-functor-preserves-homology (a)-(c), all of them Mathlib leaves. Source checks: Stacks 0118 section-truncations and 06XS lemma-negative-exts read; 010N, 015F and 04VG tag/label pairs verified. No SGA. Mathematics: Step 1's chain-map equation q_C d̄^{-1}=0 and H^0(p_C)=id are right. In Step 2, conjugating by e_K and applying H^0 gives the Hom bijection without assuming naturality. Step 3 gets representative independence and naturality from injectivity, since S H^0 K lies in Z. Step 4 descends (c^a)^{-1} via localization (2), with F(0)=0 putting D(F)K in Z. In Step 5, t_C is correct, the equations c_{FC}t_C=F(c_C) and q_{FC}t^0=(c^0)^{-1}F(q_C) both hold, and the localized formula follows. Step 6 extends by naturality and cancels D(F)r. Step 7 gets the identity and composite cases by mono/epi cancellation and localization (3). Step 8 is the zero category. Edge cases checked: B[0], acyclic K, B[n] with n≠0, F=0, the zero category. The unsplit lem-sfb-derived-degree-zero-abelian-criterion overlaps only partly, so it is not a duplicate. Advisories, no change needed: the statement's D(F) from lem-sf-exact-functor-derived-triangulated is identified with F_D implicitly, and Step 2 uses essential surjectivity of Q tacitly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.GoodTruncationNormalization",
+  "declaration": "DerivedCategory.goodTruncationNormalization_exact",
+  "declarations": [
+   "DerivedCategory.goodTruncationProjection_condition",
+   "DerivedCategory.goodTruncationProjection",
+   "DerivedCategory.goodTruncationNormalization",
+   "DerivedCategory.goodTruncationNormalization_roof",
+   "DerivedCategory.goodTruncationNormalization_naturality_hom",
+   "DerivedCategory.goodTruncationNormalization_exact_concentrated",
+   "DerivedCategory.goodTruncationNormalization_exact",
+   "DerivedCategory.goodTruncationNormalization_identity",
+   "DerivedCategory.goodTruncationNormalization_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/GoodTruncationNormalization.lean",
+  "statement": "theorem goodTruncationNormalization_exact (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K L : DerivedCategory C) (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K)) (hL : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj L)) (a : K ⟶ L) : (goodTruncationNormalization (F.mapDerivedCategory.obj K) (goodTruncationNormalization_exact_concentrated F K hK)).hom = F.mapDerivedCategory.map (goodTruncationNormalization K hK).hom ≫ (F.mapDerivedCategorySingleFunctor 0).hom.app ((homologyFunctor C 0).obj K) ≫ (singleFunctor D 0).map ((F.mapDerivedCategoryHomologyFunctorIso 0).hom.app K) ∧ (F.mapDerivedCategoryHomologyFunctorIso 0).hom.app K ≫ (homologyFunctor D 0).map (F.mapDerivedCategory.map a) = F.map ((homologyFunctor C 0).map a) ≫ (F.mapDerivedCategoryHomologyFunctorIso 0).hom.app L",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations jointly state all clauses: explicit projection, unique normalized epsilon, arbitrary-representative roof and quasi-isomorphisms, naturality and Hom bijection, preservation and exact compatibility, identity and composition coherence. All comparison maps are the existing termwise/localization constructions. Second-reader fix: the uniqueness of the H⁰-normalized isomorphism is the landed DerivedCategory.existsUnique_iso_single_homology_zero (lem-amb-derived-degree-zero-normalization, Sheaf.CategoryTheory.DerivedDegreeZeroNormalization), reused instead of a sorry restatement; epsilon is its choice.",
+  "fixed_by": "NT-stage2-cc-da6676501"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da6676501",
+  "group": "Q09",
+  "result": "fix",
+  "note": "H4: existsUnique_goodTruncationNormalization is a sorry restatement of the landed, proved DerivedCategory.existsUnique_iso_single_homology_zero (Sheaf.CategoryTheory.DerivedDegreeZeroNormalization, node lem-amb-derived-degree-zero-normalization). Fix: removed it, imported that module, eps := Classical.choose of the landed theorem; lean-record.json drops the name from declarations and appends a note; nt_compile --json clean (3.9 s, control compile with a misspelled name fails); refit_record gives no refusals. All other clauses checked against the node: projection p via mkHomToSingle with a named chain condition, roof for every A and r with both quasi-isomorphisms, naturality, Hom bijection and unique-b iff, exact preservation, eps/chi/sigma formula and chi naturality, identity and composition coherence via the upstream canonical localized isos; no extra hypotheses, independent universes, zero category covered, statement verbatim, docstrings and sorry proofs ok. Advisories: the new import's node is not in stmt_deps (a stage-2 fix cannot add it, maintainer may); proof-only imports PreservesHomology and Localization.Predicate are redundant."
  }
 }

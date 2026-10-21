@@ -107,12 +107,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-ab475fbcc (reviewer sub-agent of L); spot-checked: Read the complete definition, report, twelve dependency statements, source passages, and unit/chapter route. Verified Stacks 08FL/08G5/0657, finite-projective retractions, idempotent identities, constant-sheaf construction, and edge cases. No new nodes or repairs needed. Checked master target hypotheses and base-change arrow; this definition asserts no comparison between ordinary constant and condensed coefficients. Detailed findings are in review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-683bf137e",
-  "group": "Q33",
+  "reviewer": "NT-stage2-cc-e41aa4056",
+  "group": "Q15",
   "result": "pass",
-  "note": "Independent review completed; all clauses and dependency interfaces match, universe repair is justified, and both modules passed per-file scompile checks without diagnostics. Branch unchanged."
+  "note": "All hypotheses and conclusions match the node: nonempty CompactSpace S with no separation; ProEt site with object universe t+1 and morphism universe t, not equated; UnivLE.{t+1,r} is the size convention; proetalePrecoverage cover keeps the 0989 finite refinement; bounded F with spl splittings; restriction iso to the chart complex (constant sheaf, slice restriction, change of rings along restricted phi). Conclusion: Fin n with n>0; affine V_j in U_alpha(j) with composite cover; lo/hi bounds; attained min/max and a<=b; restricted derived iso; vanishing; packages pinned to chart.map of spl.i/spl.p via e, which the pure-section formula s tensor x to s*phi(x_k) determines, so no arbitrary map. True by 0989 and functoriality; edge cases checked (I infinite, zero complex, disjoint intervals, N=0, nonflat B, zero ring). Statement verbatim; all declarations present; only sorry Prop helpers with docstrings. Dependency module StrictPerfectCoefficientPackageOfUniverses is a strict superset of the unchanged live file, record statement verbatim, no name clashes in 19 importers. Not dropped; first delivery. Advisories: constant-module functor repeats Q11's theorem-module copy; derived and slice restriction owners are proof_deps only; dep record by moves Q33 to Q15. No compile needed (no file changed)."
  },
  "lean": {
   "module": "Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses",
@@ -120,14 +120,30 @@
   "declarations": [
    "SheafOfModules.IsLocallyStrictPerfectComplexOfUniverses",
    "SheafOfModules.IsPerfectOnRingedSiteOfUniverses",
-   "SheafOfModules.StrictPerfectCoefficientRepresentationOfUniverses"
+   "SheafOfModules.StrictPerfectCoefficientRepresentationOfUniverses",
+   "SheafOfModules.scalarPerfectRing",
+   "SheafOfModules.scalarPerfectRingUnderlying",
+   "SheafOfModules.scalarPerfectConstantPresheaf",
+   "SheafOfModules.scalarPerfectRingUnit",
+   "SheafOfModules.scalarPerfectRingUnit_locallyBijective",
+   "SheafOfModules.scalarPerfectConstantFunctor",
+   "SheafOfModules.scalarPerfectExtensionFunctor",
+   "SheafOfModules.scalarPerfectFunctor",
+   "SheafOfModules.scalarPerfectFunctor_additive",
+   "SheafOfModules.scalarPerfectComplex",
+   "SheafOfModules.scalarPerfectConstantFunctor_additive",
+   "SheafOfModules.scalarPerfectExtensionFunctor_additive",
+   "SheafOfModules.scalarPerfectChartFunctor",
+   "SheafOfModules.scalarPerfectChartComplex",
+   "SheafOfModules.scalarPerfectConstantSection",
+   "SheafOfModules.scalarPerfectChartSection"
   ],
   "file": "lean/Sheaf/Paper/StrictPerfectCoefficientPackageOfUniverses.lean",
   "statement": "structure StrictPerfectCoefficientRepresentationOfUniverses (R : Sheaf J CommRingCat.{max uC vC r}) (U : C) [HasDerivedCategory.{w} (SheafOfModules.{max uC vC r} (((sheafCompose J (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})).obj R).over U))] (Q : DerivedCategory (SheafOfModules.{max uC vC r} (((sheafCompose J (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})).obj R).over U)))",
   "branch": "newtargets-dag",
-  "by": "Q33",
-  "date": "2026-10-16",
+  "by": "Q15",
+  "date": "2026-10-21",
   "existing": false,
-  "note": "The recorded StrictPerfectCoefficientPackageOnSite is reused, not copied. The latest IsPerfectOnSmallRingedSite and SiteStrictPerfectCoefficientRepresentation interfaces fix coefficients at the site-object universe u+1. They cannot accept independent larger coefficient universe max r (t+1) on the small pro-etale site of object universe t+1 and morphism universe t. Generalize only the local-perfectness and representation wrappers to independent coefficient size. Original degreewise, ring-module and constant-sheaf constructions remain imported."
+  "note": "Section 1(B): the existing degreewise packages, local-perfectness predicates, and representation are retained verbatim. The constant-module functor in StrictPerfectCoefficientPackage fixes the site object, site Hom, and coefficient universes equal; the current independent-universe wrappers do not generalize that functor or expose the required scalar-extended maps. This module adds actual constant presheaf/module-sheaf functors, their ordinary scalar extensions, localized scalar complexes and unit-normalized pure sections, with independent site universes and coefficient size, while reusing the original packages."
  }
 }

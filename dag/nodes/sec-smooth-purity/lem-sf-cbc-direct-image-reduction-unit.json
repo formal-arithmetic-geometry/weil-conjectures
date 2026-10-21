@@ -248,5 +248,31 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-57fadeda3 (reviewer sub-agent of L); spot-checked: Read all five steps against every cited statement and against Stacks 099N(3)(4)/0A07 and blueprint fix-lem-exchanges Step 5. The delivery has no new nodes; the item statement and stmt_deps are byte-identical to live and side-live, and the item is still unsplit live. The parent's re-split note concerns the parent, not this item. Step 1: clause (4) of lem-sf-cbc-constant-tower-direct-image-normalization defines h_{f,M} in exactly the item's way and gives h·i = Q(i)·χ in D(T_V); naturality of h comes from the mate-exact node plus clause (1). Step 2: naturality of a=b along i, clause (3) giving b_{ΔF} = L(χ), and the item's own normalization L_T(i) = η combine to L_V(h)·η_{PF} = b·P(η_F); I recomputed this. Step 3: I recomputed the naturality of ρ; it uses only the two naturality squares. Step 4: P_n perfect over A plus the exact constant-module functor give a bounded complex of direct summands of finite free \\underline A_V-modules, which is the hypothesis of lem-sbc-ringed-site-perfect-projection-formula (unbounded F allowed). The augmented-diagram node's h is the same map (same χ, constant \\underline A has f^{-1}R_Y ≅ R_X) and its ev_n is the same counit-tensor projection map. Step 5: levelwise exactness and the unbounded cohomology criterion make h invertible for all F, stronger than the stated complete-K case. Edge cases checked: I = A, I = 0 with A torsion, Z_ℓ with (ℓ), u = id. No cycle; no SGA; no dropped nodes. Advisory for the maintainer: off-unit tool lem-weil-pbc-ringed-projection-mate-exact is not in tool_uses (to record at merge, C8). review_split.py reports 'no such node' only because it does not follow the symlinked chapter directories."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCbcDirectImageReductionUnit",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.directImageReductionUnit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.completion",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.unit",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.comparison",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.finiteTensorPull",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.finiteProjection",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageReduction.directImageReductionUnit"
+  ],
+  "file": "lean/Sheaf/Paper/SfCbcDirectImageReductionUnit.lean",
+  "statement": "theorem directImageReductionUnit (d : CompleteCoefficientDatum A) (_hfinite : ∀ n : ℕ, Finite (A ⧸ d.ideal ^ (n + 1))) {U V : Scheme.{u}} (f : U ⟶ V) : (∀ F : DerivedCategory (Modules A U), (unit d.ideal V).app ((push A f).obj F) ≫ (comparison d.ideal f).app F = (push A f).map ((unit d.ideal U).app F)) ∧ (∀ (F F' : DerivedCategory (Modules A U)) (t : F ⟶ F'), (completion d.ideal V).map ((push A f).map t) ≫ (comparison d.ideal f).app F' = (comparison d.ideal f).app F ≫ (push A f).map ((completion d.ideal U).map t)) ∧ (∀ (F F' : DerivedCategory (Modules A U)) (t : F ⟶ F'), (reduction d.ideal V).map ((push A f).map t) ≫ (projection d.ideal f).app F' = (projection d.ideal f).app F ≫ (R A f).map ((reduction d.ideal U).map t)) ∧ (∀ K : DerivedCategory (Modules A U), IsIso ((unit d.ideal U).app K) → IsIso ((projection d.ideal f).app K) ∧ (∀ n : ℕ, (ev A V n).map ((projection d.ideal f).app K) ≫ (evalR A f n).app ((reduction d.ideal U).obj K) = (finiteProjection d.ideal f n).app K) ∧ (∀ n : ℕ, IsIso ((finiteProjection d.ideal f n).app K)) ∧ (unit d.ideal V).app ((push A f).obj K) ≫ (L A V).map ((projection d.ideal f).app K) = (push A f).map ((unit d.ideal U).app K) ≫ (limitPush A f).hom.app ((reduction d.ideal U).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a08aa8502",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Hypotheses: CompleteCoefficientDatum plus the separate finite-quotient hypothesis (index n = exponent n+1), arbitrary f, nothing stronger; A : Type (u+1) inherited from the landed ConstantTowerDirectImageNormalization. Objects are the dependency's own: reduction/augmentation (K-flat universal), projection = mate of reductionPull, chi, limitPush = b, deltaLimit. The unit is the node's stipulated L(i)∘(Δ⊣L unit); completedPullbackAdjunction needs a small site and cannot apply. comparison = b^{-1}∘L(h) with associators traced. Conjuncts: ρη=P(η) for all F, naturality of ρ and h, and for complete K: IsIso h, ev_n(h)≫evalR = finiteProjection (a mate-pasting identity, true), finiteProjection (Stacks 0B56 mate of evaluated tensor balancing) iso, L(h)η = b P(η). Records: lean-only change, statement verbatim, docstrings and proof steps present, sorry only, lines ≤100, not dropped, not superseded; no compile since no file changed. Advisories: R/ev/evalR/evalG/Modules owned by def-cbc-strict-constant-tower-operations (not an item stmt_dep, re-exported publicly); Mathlib stand-in imports for proof deps without Lean; redundant naturality conjuncts; second reading by the same worker; tool_uses still lacks lem-weil-pbc-ringed-projection-mate-exact."
  }
 }

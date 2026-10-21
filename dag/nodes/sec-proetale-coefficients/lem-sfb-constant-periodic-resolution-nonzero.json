@@ -204,5 +204,42 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-d125f3c1d (reviewer sub-agent of L); spot-checked: Read in full: the item's 5 steps, every cited statement, Stacks 093J/03CY/06YQ at their labels, and the blueprint ctf-equals-bc 'The examples'. No new nodes and no re-split note. The statement is byte-identical to Q43's creation; the only stmt_dep added is def-sf-site-constant-module-functor, which defines the constant-module action the statement uses. Step 1: ker t = Ann(t) = tR = im t, coker = F via q; elementary. Step 2: C from def-sf-site-constant-module-functor gives R_V, F_V, mult-by-t and pi_V. lem-weil-pbc-finite-type-constant-exact preserves kernels and cokernels over any ring with no finiteness hypotheses, so it also preserves images, giving ker = im on R_V, coker = F_V and tF_V = 0. Its functor (termwise sheafification of constant presheaves) is the same construction as C; advisory. Step 3: every hypothesis of lem-sfb-exact-scalar-periodic-resolution is met (small site, compatible square-zero t, ker = im) and degree conventions match; that node is unsplit, so no cycle. Step 4: local injectivity of the unit for M = F plus the pro-etale covering condition (a nonempty affine forces a nonempty member) and identity restrictions give a = b. Step 5: elementary. Edge cases: R = 0 fine; t = 0 with R nonzero is excluded, as it must be; Z/4 with t = 2 and k[e]/e^2 hold; Z/8 with t = 4 correctly excluded; V empty is handled. No SGA. Duplicate search found only the general scalar node (cited) and the unrelated cyclic-group resolution. Tool uses of the two generic sheafification lemmas are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantPeriodicResolutionNonzero",
+  "declaration": "AlgebraicGeometry.Scheme.constant_periodic_resolution_nonzero",
+  "file": "lean/Sheaf/Paper/ConstantPeriodicResolutionNonzero.lean",
+  "statement": "theorem constant_periodic_resolution_nonzero (R : Type r) [CommRing R] (t : R) (ht : t ^ 2 = 0) (hann : ∀ a : R, t * a = 0 ↔ a ∈ Ideal.span ({t} : Set R)) (V : Scheme.{u}) : kernelSubobject (constantPeriodicScalar R t V) = imageSubobject (constantPeriodicScalar R t V) ∧ (∃ e : cokernel (constantPeriodicScalar R t V) ≅ (constantPeriodicModuleFunctor R V).obj (ModuleCat.of R (R ⧸ Ideal.span ({t} : Set R))), cokernel.π (constantPeriodicScalar R t V) ≫ e.hom = constantPeriodicQuotientMap R t V) ∧ (∃ P : CochainComplex (SheafOfModules.{max r (u + 1)} ((sheafCompose (ProEt.topology V) (forget₂ CommRingCat.{max r (u + 1)} RingCat.{max r (u + 1)})).obj ((constantSheaf (ProEt.topology V) CommRingCat.{max r (u + 1)}).obj (CommRingCat.of (ULift.{u + 1} R))))) ℤ, ∃ e : ∀ (i : ℤ), i ≤ 0 → (P.X i ≅ (constantPeriodicModuleFunctor R V).obj (ModuleCat.of R R)), (∀ (i : ℤ), 0 < i → IsZero (P.X i)) ∧ (∀ (i : ℤ) (hi : i < 0) (hi' : i + 1 ≤ 0), P.d i (i + 1) ≫ (e (i + 1) hi').hom = (e i (le_of_lt hi)).hom ≫ constantPeriodicScalar R t V) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, max r (u + 1), max r (u + 1)} (J := ProEt.topology V) (R := (constantSheaf (ProEt.topology V) CommRingCat.{max r (u + 1)}).obj (CommRingCat.of (ULift.{u + 1} R))) (P.X i)) ∧ (∃ ε : P ⟶ (HomologicalComplex.single _ (.up ℤ) 0).obj ((constantPeriodicModuleFunctor R V).obj (ModuleCat.of R (R ⧸ Ideal.span ({t} : Set R)))), ε.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).hom = (e 0 (le_refl 0)).hom ≫ constantPeriodicQuotientMap R t V ∧ (∀ i : ℤ, i ≠ 0 → ε.f i = 0) ∧ CochainComplex.IsKFlatResolutionIndependentCoefficients.{u + 1, u, max r (u + 1)} (R := (constantSheaf (ProEt.topology V) CommRingCat.{max r (u + 1)}).obj (CommRingCat.of (ULift.{u + 1} R))) ε)) ∧ (constantPeriodicModuleFunctor R V).map (t • 𝟙 (ModuleCat.of R (R ⧸ Ideal.span ({t} : Set R)))) = 0 ∧ (Nonempty V → Function.Injective (constantPeriodicSection R V (ModuleCat.of R (R ⧸ Ideal.span ({t} : Set R))))) ∧ (Nontrivial (R ⧸ Ideal.span ({t} : Set R)) → Nonempty V → ¬ IsZero ((constantPeriodicModuleFunctor R V).obj (ModuleCat.of R (R ⧸ Ideal.span ({t} : Set R)))))",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.siteConstantSizedRingSheafify",
+   "CategoryTheory.siteConstantSizedCommRingSheafify",
+   "CategoryTheory.siteConstantSizedRingStructuredLimits",
+   "CategoryTheory.siteConstantSizedCommRingStructuredLimits",
+   "CategoryTheory.siteConstantSizedRingLocallyBijective",
+   "CategoryTheory.siteConstantModulePresheafSized",
+   "CategoryTheory.siteConstantModuleFunctorSized",
+   "CategoryTheory.siteConstantSizedRingIso",
+   "CategoryTheory.siteConstantCommModuleFunctorSized",
+   "CategoryTheory.siteConstantCommModuleUnitSized",
+   "AlgebraicGeometry.Scheme.constantPeriodicSiteSmall",
+   "AlgebraicGeometry.Scheme.constantPeriodicModuleFunctor",
+   "AlgebraicGeometry.Scheme.constantPeriodicScalar",
+   "AlgebraicGeometry.Scheme.constantPeriodicQuotientMap",
+   "AlgebraicGeometry.Scheme.constantPeriodicSection",
+   "AlgebraicGeometry.Scheme.constant_periodic_resolution_nonzero"
+  ],
+  "note": "H13 repair: the sized constant-module realization helpers are in this item module, tagged with this item id. The landed def-sf-site-constant-module-functor record and its General module are unchanged. The theorem signature and independent coefficient/scheme universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba8ae5b53",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of bff0fb0f takes repair option 2: the def-sf-site-constant-module-functor record is byte-identical (cmp) to live and side-live, the General module is untouched, and the 10 sized helpers are moved verbatim into Sheaf.Paper.ConstantPeriodicResolutionNonzero with item-id docstrings and listed in lean.declarations. The diff against the prior head changes only imports and docstrings; definition bodies and the theorem signature are unchanged. lean.statement is verbatim in the file, the 16 declarations equal the record list, there is one sorry, and no line exceeds 100 characters. No name collisions live or side-live; the global instances are Prop-valued; the imports exist. The math was accepted clause by clause in the prior review and re-confirmed: ker=im, normalized cokernel, P pinned by term isos and differentials, IsFlatOnSite and IsKFlatResolutionIndependentCoefficients universes match ProEt and the ULift constant ring, the augmentation is fixed in every degree, tF_V=0, injective unit at ProEt.mk (𝟙 V) for nonempty V, conditional nonvanishing; edge cases R=0, t=0, Z/4, k[e], Z/8 excluded, empty V. No compile run (worker reports 23.0 s and 18.1 s clean); no file changed. Advisory: the KFlatCoefficientUniverse import may be redundant."
  }
 }

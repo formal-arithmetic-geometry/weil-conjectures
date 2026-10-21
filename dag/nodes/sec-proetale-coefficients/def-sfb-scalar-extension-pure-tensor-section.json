@@ -1,0 +1,101 @@
+{
+ "id": "def-sfb-scalar-extension-pure-tensor-section",
+ "kind": "definition",
+ "title": "Canonical pure-tensor sections of scalar extension of module sheaves",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], let $\\mathcal R,\\mathcal S$ be sheaves of commutative rings, let $a:\\mathcal R\\to\\mathcal S$ be a morphism of ring sheaves, and let $M$ be a sheaf of $\\mathcal R$-modules [def-weil-sheaf-of-modules-category]. Let $a_!M$ be the sheaf of $\\mathcal S$-modules associated to the presheaf $V\\mapsto\\mathcal S(V)\\otimes_{\\mathcal R(V)}M(V)$, with scalar action through $a_V$ [def-pur-sheaf-tensor-product]. For every object $V$ of $\\mathcal C$, $x\\in M(V)$ and $s\\in\\mathcal S(V)$, define the canonical pure-tensor section $\\operatorname{tmul}_{a,M,V}(x,s)=\\eta_{a,M,V}(s\\otimes x)\\in(a_!M)(V)$, where $\\eta_{a,M}$ is the module-sheafification unit [def-weil-presheaf-modules-sheafification]. The order of the arguments is $(x,s)$, while the scalar is the first tensor factor; equivalently this is the image of $x\\otimes s$ after the canonical factor interchange. This definition applies to every $a$, without assuming it is invertible or flat.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, section-tensor-product, and preceding section-presheaves-modules (scalar-first change of rings); Tag 03CY, lemma-sheafification-presheaf-modules and its unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pure tensor section of scalar extension of a module sheaf is the sheafification unit applied to the sectionwise tensor",
+   "results": "OK: 8 hit(s); ModuleCat.extendRestrictScalarsAdj_unit_app_apply, PresheafOfModules.sheafify, PresheafOfModules.toSheafify, PresheafOfModules.sheafifyMap, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendScalars.obj', SheafOfModules.unit, ModuleCat.ExtendRestrictScalarsAdj.unit_app",
+   "date": "2026-10-21",
+   "verdict": "components found; exact existing project constructions reused by existing:true, no new Lean definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pure tensor section in the change of rings of a sheaf of modules on a site",
+   "results": "OK: 8 hit(s); SheafOfModules.unit, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unit_val, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.restrictScalars, PresheafOfModules.unit, SheafOfModules.restrictScalars_obj_val, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-21",
+   "verdict": "components found; exact existing project constructions reused by existing:true, no new Lean definition"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|sheafificationAdjunction",
+   "results": "OK: 7 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
+   "date": "2026-10-21",
+   "verdict": "components found; exact existing project constructions reused by existing:true, no new Lean definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-finite-free-presentation-extension",
+  "date": "2026-10-21",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "Local models: canonical constant-module coefficients and tensor sections used to extend the specified finite free presentation with the same matrix",
+   "via": [
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-sfb-scalar-model-finite-flat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso",
+  "declaration": "SheafOfModules.scalarExtensionRingIsoTmul",
+  "declarations": [
+   "SheafOfModules.scalarExtensionRingIsoTmul"
+  ],
+  "statement": "def scalarExtensionRingIsoTmul (a : R ⟶ S)\n    (M : ringedSiteModules.{max r m}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (U : Cᵒᵖ) (x : M.val.obj U) (s : S.obj.obj U) :\n    (changeOfRingsOfUniverses a M).val.obj U",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition-node attachment of existing concrete canonical constructions, as required by return L at 4d1bb414611b. Their bodies do not choose or use the conclusion of the theorem housed in the same source module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f9159e62",
+  "group": "NY",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f9159e62",
+  "group": "NY",
+  "result": "fix",
+  "note": "Re-delivery after return L (4d1bb414, theorem nodes cited for plain defs). The item Lean is byte-identical to the returned head, whose clause-by-clause mathematics was found correct (exactness, alpha/beta pinned, matrix A_B, flat ShortExact, IsIso without flatness, rank 0 included). Two new existing:true def nodes own the plain defs; I checked them against the side-live source and their body owners are in their stmt_deps; no theorem stmt_dep remains, no cycle. FIX: fixes/def-sfb-scalar-extension-pure-tensor-section.json removes 'noncomputable' from lean.statement (check_existing note gone). Advisory: siteTensor_identity_* helper instances have no def-node owner. No Lean changed, so no compile."
+ }
+}

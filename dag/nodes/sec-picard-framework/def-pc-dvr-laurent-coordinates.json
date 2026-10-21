@@ -1,0 +1,96 @@
+{
+ "id": "def-pc-dvr-laurent-coordinates",
+ "kind": "definition",
+ "title": "Compatible Laurent coordinates on a discrete valuation subalgebra",
+ "status": "split",
+ "statement": "Let $k\\subset K$ be fields, $O\\subset K$ a $k$-subalgebra that is a discrete valuation ring [def-sc-discrete-valuation-ring], and $t\\in O$. Put $\\kappa=O/\\mathfrak m$ and $\\widehat O=\\varprojlim_n O/\\mathfrak m^n$ [def-weil-pbc-adic-completion]. A compatible Laurent coordinate at $t$ is a $k$-algebra isomorphism $c:\\widehat O\\simeq\\kappa[[T]]$ sending $t$ to $T$, whose constant coefficient is the canonical reduction $\\widehat O\\to\\kappa$, together with a $k$-algebra map $j:K\\to\\kappa((T))$ [def-weil-pbc-laurent-series] such that $j(x)$ is the power-series inclusion of $c(x)$ for every $x\\in O$.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-laurent-series"
+ ],
+ "source": {
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§3, Theorems 2 and 4; the compatible completion and Laurent coordinates of steps 7–11 of lem-pc-tate-dvr-residue-calculus"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A discrete valuation ring completion with separable residue field has compatible Laurent series coordinates and continuous differential map",
+   "results": "{\"t\": \"2026-10-21T09:05:17Z\", \"tool\": \"leansearch\", \"query\": \"A discrete valuation ring completion with separable residue field has compatible Laurent series coordinates and continuous differential map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.LaurentSeriesPkg\", \"LaurentSeries.continuous_coe\", \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"LaurentSeries.comparePkg_eq_extension\", \"LaurentSeries.instIsFractionRingPowerSeries\", \"LaurentSeries.instTopologicalSpaceSpaceRatFuncLaurentSeriesPkg\", \"Valuation.Completion\"], \"digest\": \"98254311686a1354\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching compatible DVR completion/Laurent coordinate structure. Reuse LaurentSeries and its derivative; the completion hits concern RatFunc only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaurentSeries.derivative\"",
+   "results": "{\"t\": \"2026-10-21T09:05:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaurentSeries.derivative\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LaurentSeries.derivative\", \"LaurentSeries.derivative_iterate_coeff\", \"LaurentSeries.derivative_apply\", \"LaurentSeries.derivative_iterate\", \"LaurentSeries.derivative_map\"], \"digest\": \"28c83cc847b962f0\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching compatible DVR completion/Laurent coordinate structure. Reuse LaurentSeries and its derivative; the completion hits concern RatFunc only."
+  },
+  {
+   "tool": "grep",
+   "query": "DVRLaurent|LaurentCoordinates|coefficient.?field|continuous.*[Dd]ifferential",
+   "results": "{\"t\": \"2026-10-21T09:05:50Z\", \"tool\": \"grep\", \"query\": \"DVRLaurent|LaurentCoordinates|coefficient.?field|continuous.*[Dd]ifferential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching compatible DVR completion/Laurent coordinate structure. Reuse LaurentSeries and its derivative; the completion hits concern RatFunc only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-tate-dvr-residue-calculus",
+  "date": "2026-10-21",
+  "group": "Q50"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-picard-duality",
+   "place": "The Tate residue equals the residue-field trace of the classical residue in the completed local coordinate when the residue extension is separable.",
+   "via": [
+    "lem-pc-tate-dvr-residue-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.RingTheory.TateResidue.DVRLaurentCoordinates",
+  "declaration": "TateResidue.DVRLaurentCoordinates",
+  "file": "lean/Sheaf/RingTheory/TateResidue/DVRLaurentCoordinates.lean",
+  "statement": "structure DVRLaurentCoordinates {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (O : Subalgebra k K) [IsDiscreteValuationRing O] (t : O)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9795e5f3",
+  "group": "Q50",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9795e5f3",
+  "group": "Q50",
+  "result": "pass",
+  "note": "All six clauses match the node: finite principal parts; finite-potent [πm_f,m_g] with res(f dg)=tateTrace for every π; annihilation of the Ω_{O/k} image; res(u t⁻¹dt)=Tr_{κ/k}(ū) with no separability; under separability, Nonempty coordinates and, for every coordinate c, a uniquely pinned d(f dg)=j(f)∂j(g) with res=Tr(coeff −1). Upstream localRes/res/tateTrace/IsFinitePotent/act were read and are real constructions. New def node DVRLaurentCoordinates has real data (completion AlgEquiv with t↦X, constant coeff = evalOneₐ, compatible fraction-field map), §5 fields correct, no duplicate or name collision. The item node differs from side-live only by lean + one stmt_dep, and lean.statement is verbatim in both files. Docstrings have source, blueprint id and 11 proof steps; sorry only; imports follow the proof deps. Advisories: single-universe residue-section helper needs a universe lift in stage 3; upstream tateTrace/localRes should be the records of the finite-potent and abstract residue nodes when stated. No compile run (no file changed)."
+ }
+}

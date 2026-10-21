@@ -88,37 +88,26 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-rem-rest",
  "lean": {
-  "module": "Sheaf.Paper.SfCommonStageWeilCohomology",
-  "declaration": "WeilConjectures.sfModelCohomology",
+  "module": "Mathlib.Algebra.Homology.DerivedCategory.HomologySequence",
+  "declaration": "DerivedCategory.homologyFunctor",
   "declarations": [
-   "WeilConjectures.sfTruncationShift_existsUnique",
-   "WeilConjectures.sfCohomologyShift",
-   "WeilConjectures.sfBaseChangeFinite",
-   "WeilConjectures.sfBaseChangeQuasiCompact",
-   "WeilConjectures.sfModelGeometricFinite",
-   "WeilConjectures.sfModelGeometricQuasiCompact",
-   "WeilConjectures.sfModelCohomology",
-   "WeilConjectures.sfModelPullCohomology",
-   "WeilConjectures.sfModelFrobeniusCohomology",
-   "WeilConjectures.sfModelWeilCohomologyPair",
-   "WeilConjectures.sfModelWeilCohomology_mem",
-   "WeilConjectures.sfModelWeilCohomology"
+   "DerivedCategory.homologyFunctor",
+   "DerivedCategory.homologyFunctorFactors"
   ],
-  "file": "lean/Sheaf/Paper/SfCommonStageWeilCohomology.lean",
-  "statement": "def sfModelCohomology (n : ℤ)",
-  "branch": "newtargets-dag",
-  "by": "N5",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "The recorded pbcQbarCohomology uses the Pbc coefficient-pair category, which is not the intrinsic sfCommonStageWeilComplex of this consumer. The module publicly retains the previous ambient/coefficient-pair definitions and applies the existing standard truncations to the intrinsic common-stage category, inducing the Weil map by the normalized Frobenius comparison."
+  "statement": "noncomputable def homologyFunctor (n : ℤ) : DerivedCategory C ⥤ C",
+  "branch": "mathlib",
+  "by": "Q20",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "§1(B), exact existing Mathlib interface: the previous primary sfModelCohomology is standard geometric cohomology in the common-stage Weil coefficient-pair category and cannot be applied to an arbitrary ringed site and ring sheaf. Use the general DerivedCategory.homologyFunctor already named by this node's unchanged mathlib_match; specializing C to SheafOfModules gives precisely all the cohomology sheaves in the statement. homologyFunctorFactors supplies the comparison with representatives. No cohomology construction or definition is copied, and the specialized Weil declarations remain available in their original module."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-32a682350",
-  "group": "N5",
-  "result": "fix",
-  "note": "Read the node, all 14 stmt_deps, the four delivered modules (WeilOpenImageDelta, SfCommonStageDirectImage, SfCommonStageWeilCohomology, CondensedERealization diffed against live), MiddleExtensionCurve, IsCommonStageLisse and the citers p-dl-a1-exact and lem-dl-a1-constant-field-charts. Every clause and edge case matches (j=id, empty or disconnected C, empty W, rank 0, r<0, independent universes); the B-repairs build on the existing constructions and are not hollow; the CondensedERealization API repair is needed (the landed file fails against the live build) and keeps its statement. One H3 finding, fixed: DlOpenImageData.degreeZero (R^0 j_* = j_*) was an unconstrained natural iso, so boundary was fixed only up to a natural automorphism of j_* (e.g. sign). Added degreeZero_normalization: degreeZero is the inverse of H^0 of the augmentation (adjoint of the ordinary counit) composed with the heart truncation maps. Theorem signature, lean.statement and stmt_deps unchanged. nt_compile --json on all four modules: delivered 43.7/10.7/15.0/12.6 s clean; fixed 49.1/6.6/17.0/22.9 s clean; a broken control copy errors as expected. CondensedERealization is close to the 60 s limit."
+  "reviewer": "NT-stage2-cc-5f4df347d",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed d17c0eceb3b5: SplitPerfectDualTorWindow.lean byte-identical (sha256 2325…8dca); item node differs only in stmt_deps (theorem lem-sf-ringed-derived-closed-symmetric-monoidal replaced by def-zl-ringed-derived-closed-symmetric-monoidal-data, existing:true definition node, reviewed pass, owning RingedTensorModules and ringedTensorUnitComplex, live RingedDerivedClosedSymmetricMonoidal.lean l.50-61) and lean.note, so the H2 finding is resolved. Mechanical theorem-stmt_dep finding judged genuine for both remaining deps: homComplexπ = Classical.choose homComplex_projections_exists, siteDerivedTensorIndependentCoefficients = .choose of site_derived_tensor_descent_independentCoefficients; PASS on that point. Mathematics re-checked: sign (n+1).negOnePow re-derived from the live homComplexπ differential lemma (the B[0] term vanishes), splitting p^* then i^* matches i≫p=𝟙, qis for every K-injective resolution, support [-b,-a], flatness, both Tor windows for every M, universes c,v,r,w independent, edge cases E=0, N=0, a=b, B=0. Only other node difference vs live: the def-weil-derived-cohomology-sheaves rebind to Mathlib homologyFunctor (the node's mathlib_match), identical to the previous delivery, live record unmoved; N5's 12 old declarations are unused outside their module (grep of both live trees), so only a maintainer note about orphaned owners. No compile run (no file changed; module identical to the compiled delivery)."
  },
  "reviewed_proof": {
   "date": "2026-10-19",

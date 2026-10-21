@@ -271,5 +271,38 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-73fcf0024 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the cited statements, and the mathematics holds; the review is in review.md and no fixes are needed. Shape: one commit; the statement is byte-identical to side-live, which is still unsplit, and stmt_deps are unchanged; proof_deps equals the union of the uses; no SGA; no new nodes; 6507 characters, each step under 1100. Step 1: Le is a quasi-isomorphism by exact-functor-derived-factorization, J is K-injective, and t is lifted through the kinjective-hom-derived bijection, which also gives tLe≃e' and uniqueness. The resolutions e come from lifting the dplus-injective-representative isomorphism, and e is a quasi-isomorphism because H^r∘Q≅H^r. Steps 2–3: I recomputed b_{QF}c_e=c'_{e'}Q(S't∘λ_I) from naturality at Qe and t and from QtQLe=Qe'; u'_{LI} is never inverted. Step 4: the cocycle t^aLf d^{-1} is closed, by naturality of θ'. Step 5: the roof node is applied to e and e', the order Q(e')[a]^{-1}Q(t)[a]=Q(Le)[a]^{-1} is right, and shift clause (2) gives DL(χα)d^{-1}. Step 6: the homotopy (-1)^a g is right because d_{I[a]}=(-1)^a∂; independence follows from the canonical b and from the roof node covering every resolution. Step 7: the composite factorization and the composite hypothesis via (d_2L_2d)^{-1}=(L_2d)^{-1}d_2^{-1} check out. Step 8: Kan uniqueness gives RS''(Dζ)b_E=b_T, and d_Tζ_P=d_E gives the Hom formula. Small cases checked: L=id, P=0, a<0 and odd a. Sources read: Stacks 05TH and 05TI (derived.tex l.6948ff), 015F (l.5884), and the blueprint main-20261015 thm-pur-affine-line-orientation proof, final étale-origin transport sentence. No duplicate: lem-sc-ext-right-derived-cocycle-comparison, lem-sf-normalized-derived-comparison-composition and lem-kun-derived-adjoint-square-comparison are related but none states this transport. Accepted tool_uses, all generic homological algebra: lem-weil-pbc-right-derived-plus-injective, lem-weil-pbc-dplus-injective-representative, lem-sc-p1-rhom-hom-derived-roof. Advisory only: the one-line fact that DL maps D^+ to D^+ is left implicit, and the roof node's Rv is identified with the Kan R Hom(P,-) by clause (3), as the base statement already assumes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedRepresentableTransport",
+  "declaration": "CategoryTheory.Functor.derived_representable_transport",
+  "declarations": [
+   "CategoryTheory.Functor.representableTransportUnit",
+   "CategoryTheory.Functor.representableTransportComparison",
+   "CategoryTheory.Functor.representableTransportRoof",
+   "CategoryTheory.Functor.representedTransportHomEquiv",
+   "CategoryTheory.Functor.representableTransportHom",
+   "CategoryTheory.Functor.representableTransportResolutionInverse",
+   "CategoryTheory.Functor.representableTransportModel",
+   "CategoryTheory.Functor.representableTransportExactIso",
+   "CategoryTheory.Functor.representableTransportChainMap",
+   "CategoryTheory.Functor.derived_representable_transport",
+   "CategoryTheory.Functor.derived_representable_transport_independence",
+   "CategoryTheory.Functor.derived_representable_transport_comp",
+   "CategoryTheory.Functor.derived_representable_transport_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedRepresentableTransport.lean",
+  "statement": "theorem derived_representable_transport (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (P : A) (P' : B) (d : L.obj P ≅ P') (S : A ⥤ AddCommGrpCat.{v}) (S' : B ⥤ AddCommGrpCat.{v}) [S.Additive] [S'.Additive] [PreservesFiniteLimits S] [PreservesFiniteLimits S'] (θ : preadditiveCoyoneda.obj (op P) ≅ S) (θ' : preadditiveCoyoneda.obj (op P') ≅ S') (tau : S ⟶ L ⋙ S') (h : ∀ (M : A) (f : P ⟶ M), θ'.hom.app (L.obj M) (d.inv ≫ L.map f) = tau.app M (θ.hom.app M f)) : (S.rightDerivedFunctorPlusUnit ≫ whiskerLeft DerivedCategory.Plus.Qh (representableTransportComparison L S S' tau) = representableTransportUnit L S S' tau) ∧ (∀ b : S.rightDerivedFunctorPlus ⟶ L.mapDerivedCategoryPlus ⋙ S'.rightDerivedFunctorPlus, S.rightDerivedFunctorPlusUnit ≫ whiskerLeft DerivedCategory.Plus.Qh b = representableTransportUnit L S S' tau → b = representableTransportComparison L S S' tau) ∧ (∀ (F I : CochainComplex.Plus A) (J : CochainComplex.Plus B) (e : F ⟶ I) [QuasiIso e.hom] (e' : L.mapCochainComplexPlus.obj F ⟶ J) [QuasiIso e'.hom] (_hi : ∀ k : ℤ, Injective (I.obj.X k)) (_hj : ∀ k : ℤ, Injective (J.obj.X k)), ∃ t : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj ⟶ J.obj, Nonempty (Homotopy ((L.mapHomologicalComplex (ComplexShape.up ℤ)).map e.hom ≫ t) e'.hom) ∧ (∀ t' : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj ⟶ J.obj, Nonempty (Homotopy ((L.mapHomologicalComplex (ComplexShape.up ℤ)).map e.hom ≫ t') e'.hom) → Nonempty (Homotopy t t')) ∧ (representableTransportModel S e ≫ (representableTransportComparison L S S' tau).app ((DerivedCategory.Plus.Q (C := A)).obj F) = DerivedCategory.Plus.Q.map (representableTransportChainMap L S S' tau I J t) ≫ representableTransportModel S' e' ≫ S'.rightDerivedFunctorPlus.map (representableTransportExactIso L F).inv) ∧ (∀ (a : ℤ) (f : P ⟶ I.obj.X a) (_hf : f ≫ I.obj.d a (a + 1) = 0), (d.inv ≫ L.map f ≫ t.f a) ≫ J.obj.d a (a + 1) = 0 ∧ S'.map (t.f a) (tau.app (I.obj.X a) (θ.hom.app (I.obj.X a) f)) = θ'.hom.app (J.obj.X a) (d.inv ≫ L.map f ≫ t.f a))) ∧ (∀ (X : DerivedCategory.Plus A) (a : ℤ) (α : (DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} a).obj (S.rightDerivedFunctorPlus.obj X)), representedTransportHomEquiv P' S' θ' (L.mapDerivedCategoryPlus.obj X) a ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} a).map ((representableTransportComparison L S S' tau).app X) α) = representableTransportHom L d X a (representedTransportHomEquiv P S θ X a α))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc4b34382",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Only the item lean field changed; deps byte-identical to side-live; statement verbatim; 13 decls match lean.declarations; 4 theorem sorries, no hollow defs; docstrings carry source place, blueprint tag and node steps 1-8; all 3 imports used. Clause-by-clause: abelian+EnoughInjectives A,B; exact L; additive left-exact S,S'; theta/theta'/d/tau and square h exact (d.inv ≫ L.map f = Lf∘d⁻¹); shared Hom universe v is forced by tau, others independent. b = rightDerivedDesc of termwise tau ≫ target unit ≫ factorsh.inv, i.e. the node's b. chi = derived theta⁻¹ (rightDerivedFunctorPlusNatIso) then Classical.choose of exists_rhom_hom_derived_roof, uniquely pinned by naturality + injective-resolution normalization. Conclusions: fac + uniqueness, ∃t unique up to homotopy (no injectivity of LI), model formula b c_e = c'_e' Q(S't∘λ_I) via the exact iso, cocycle formula, Hom formula for all X in D+ and all a, boundary/homotopy independence, composition (d2∘L2d, (λ2L)∘λ, Plus/derived comp isos), coherence under zeta (hT is implied, so not stronger). No preservation of injectives assumed. Edge cases a<0, odd a, P=0, L=id covered. Advisory: representableTransportComparison is the γ=𝟭 case of live rightDerivedFunctorPlusBaseChange (PlusBaseChange.lean:74), same Kan construction pinned by fac+uniqueness, so not a re-delivery H4; a stage-3 bridge lemma is suggested. The Second reading by Q07 section is only a self-check; this review supplies the independent reading. No compile run (no file changed)."
  }
 }

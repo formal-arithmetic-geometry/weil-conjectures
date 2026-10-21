@@ -14,7 +14,9 @@
   "def-weil-pbc-constant-sheaf",
   "def-sf-site-constant-module-functor",
   "def-pur-sheaf-tensor-product",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-constant-module-coefficient-transport",
+  "def-sfb-scalar-extension-pure-tensor-section"
  ],
  "proof": [
   {
@@ -218,5 +220,31 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-fc082c65d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 6 steps and 11 search records. There are no new nodes. The statement and stmt_deps are byte-identical to live/side-live, where the item is still unsplit with no base proof, so it is not superseded and the re-split rule does not apply. The item is not on any dropped list and has no repair note. Sources checked: blueprint main-20261015 ctf-equals-bc 'Local models' (the pull-back is exact with the same matrix, and the field case has length zero); Stacks 03EI (sites-modules l.874, PMod(O)->Mod(O^#) exact), 03ER (l.4243), 03DA, 03EK and Homology 010N, with all tags confirmed in tags/tags. No SGA is used. Each step uses what its cited statements actually say (C3/C4). Step 1 combines exact sheafification of the constant presheaves with the module-category kernels and cokernels to show the constant functor is exact in Mod(R_C). Step 2 gets the finite products (R^s)_C=(R_C)^s, including s=0. Step 3 defines beta_s by explicit, restriction-compatible inverse maps; the presheaf tensor is already the sheaf B^s. In step 4 I checked the matrix computation (sum_j a_ij b_j)_i = A_B with the n×m convention. Step 5 uses the flatness definition and lem-sp-exact-functor-preserves-homology (a),(c), the factor flip, and exactness detected on underlying sheaves, and lands on exactly the statement's arrows. Step 6 builds the inverse from functoriality alone, with no flatness. The parent (lem-sfb-scalar-model-finite-flat-resolution) uses exactly the flat-sequence and isomorphism clauses. Edge cases: the non-flat B=Z/2_C with P=Z/2 gives A_B=0, so the hypothesis is needed; flat B=Q_C works; ranks 0, R=0 and B=0 all hold. Off-unit citations are Mathlib leaves only, so no tool_uses are needed. Advisory: lem-weil-pbc-finite-type-constant-exact (another unit, Lean-written, defined through the strict-perfect package's constant sheaf) overlaps step 1; the self-contained proof is acceptable. The inherited statement uses 'sheaf of R_C-algebras' and a B-module structure on B⊗P_C without definition nodes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantFiniteFreePresentationExtension",
+  "declaration": "CategoryTheory.ConstantFiniteFreePresentationExtension.constantFiniteFreePresentationExtension",
+  "declarations": [
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.power",
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.coordinate",
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.commCoordinate",
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.extension",
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.extensionMap",
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.constantFiniteFreePresentationExtension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantFiniteFreePresentationExtension.lean",
+  "statement": "theorem constantFiniteFreePresentationExtension : exactFunctor _ _ (siteConstantModuleFunctorGeneral J R) ∧ ∃ α : ∀ s : ℕ, (constantModuleHomFunctor J R).obj (ModuleCat.of R (Fin s → R)) ≅ power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj ((constantSheaf J CommRingCat).obj (CommRingCat.of R))) s, ∃ β : ∀ s : ℕ, extension J R B σ (ModuleCat.of R (Fin s → R)) ≅ power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) s, (∀ (s : ℕ) (U : Cᵒᵖ) (x : Fin s → R) (i : Fin s), commCoordinate J _ s U ((α s).hom.val.app U ((constantModuleHomUnit J R (ModuleCat.of R (Fin s → R))).app U x)) i = (constantModuleHomRingIso J R).hom.hom.app U ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of R))).app U (x i))) ∧ (∀ (s : ℕ) (U : Cᵒᵖ) (x : ((constantModuleHomFunctor J R).obj (ModuleCat.of R (Fin s → R))).val.obj U) (b : B.obj.obj U) (i : Fin s), commCoordinate J _ s U ((β s).hom.val.app U (SheafOfModules.scalarExtensionRingIsoTmul σ _ U x b)) i = b * σ.hom.app U (commCoordinate J _ s U ((α s).hom.val.app U x) i)) ∧ (∀ (s : ℕ) (U : Cᵒᵖ) (y : (power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) s).val.obj U), (β s).inv.val.app U y = ∑ i : Fin s, SheafOfModules.scalarExtensionRingIsoTmul σ _ U ((constantModuleHomUnit J R (ModuleCat.of R (Fin s → R))).app U (Pi.single i 1)) (commCoordinate J _ s U y i)) ∧ (∀ (m n : ℕ) (A : ModuleCat.of R (Fin m → R) ⟶ ModuleCat.of R (Fin n → R)), ∃ A_B : power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) m ⟶ power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) n, extensionMap J R B σ A ≫ (β n).hom = (β m).hom ≫ A_B ∧ (∀ (U : Cᵒᵖ) (y : (power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) m).val.obj U) (i : Fin n), commCoordinate J _ n U (A_B.val.app U y) i = ∑ j : Fin m, σ.hom.app U ((constantModuleHomRingIso J R).hom.hom.app U ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of R))).app U (A (Pi.single j 1) i))) * commCoordinate J _ m U y j) ∧ (SheafOfModules.IsFlatOnSite (C := C) (J := J) (R := (constantSheaf J CommRingCat).obj (CommRingCat.of R)) ((SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map σ)).obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) → ∀ (P : ModuleCat.{max u v} R) (q : ModuleCat.of R (Fin n → R) ⟶ P), Function.Injective A → Function.Exact A q → Function.Surjective q → ∃ h : A_B ≫ ((β n).inv ≫ extensionMap J R B σ q) = 0, (ShortComplex.mk A_B ((β n).inv ≫ extensionMap J R B σ q) h).ShortExact)) ∧ (∀ (r : ℕ) (P : ModuleCat.{max u v} R) (q : ModuleCat.of R (Fin r → R) ≅ P), IsIso ((β r).inv ≫ extensionMap J R B σ q.hom))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f9159e62",
+  "group": "NY",
+  "result": "fix",
+  "note": "Re-delivery after return L (4d1bb414, theorem nodes cited for plain defs). The item Lean is byte-identical to the returned head, whose clause-by-clause mathematics was found correct (exactness, alpha/beta pinned, matrix A_B, flat ShortExact, IsIso without flatness, rank 0 included). Two new existing:true def nodes own the plain defs; I checked them against the side-live source and their body owners are in their stmt_deps; no theorem stmt_dep remains, no cycle. FIX: fixes/def-sfb-scalar-extension-pure-tensor-section.json removes 'noncomputable' from lean.statement (check_existing note gone). Advisory: siteTensor_identity_* helper instances have no def-node owner. No Lean changed, so no compile."
  }
 }

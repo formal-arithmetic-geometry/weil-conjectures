@@ -306,5 +306,30 @@
   "group": "Q145",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-4576b036b (reviewer sub-agent of L); spot-checked: Read the item's 8 steps, every cited statement, Bhatt–Scholze §6.8 (Lemma 6.8.2, Definitions 6.8.6/6.8.8/6.8.10, Proposition 6.8.11(3), Proposition 6.8.14(2)) and the retained old steps 1-3 of the Q115 re-split. The statement is unchanged and correct: it only constructs F_X/J_X with cohomology, constructibility, E-linearity and triangulation, and claims no full faithfulness or essential surjectivity. The completed integral category with étale witnesses and its raw rationalization are kept apart. There are no new nodes and no cycle; nothing is on the dropped list. Steps 1, 2, 3, 7 and 8 are correct from their cited statements. Three repairable faults were fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-rational-module-realization-functor.json. F1 (C1/C4): Step 4 needs h^{-1} and slice restriction to commute with E_X⊗_{B_X}-, which no cited node gave; the old proof cited it. Fixed by citing lem-weil-pbc-localization-inverse-image-coherence, including its clause on the specified ring identification. F2 (C2): Step 5 was marked elementary but hid transitivity of change of rings and the inner sheafification. Rewritten through lem-pur-sheaf-ring-coefficient-ordinary-adjunction, using uniqueness of left adjoints; this also gives right exactness. F3 (C1): Step 6 passed from E⊗_A N ≅ E^d to E_S^d at sheaf level without a node. Rewritten with a finite presentation, lem-sfb-constant-finite-free-presentation-extension, and row/column reduction over E; vector-space-free was dropped. Edge cases checked: N=0 and N=A/ϖ^k give rank 0, N=A^r⊕torsion gives rank r. proof_deps were recomputed and the three new tool_uses declared; all are generic tools. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalModuleRealizationFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.rationalModuleRealizationFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalModuleIntegerInclusion",
+   "AlgebraicGeometry.Scheme.rationalModuleConstantMap",
+   "AlgebraicGeometry.Scheme.rationalModuleConstantModel",
+   "AlgebraicGeometry.Scheme.RationalModuleRealization",
+   "AlgebraicGeometry.Scheme.rationalModuleRealizationFunctor"
+  ],
+  "file": "lean/Sheaf/Paper/RationalModuleRealizationFunctor.lean",
+  "statement": "theorem rationalModuleRealizationFunctor (X : Scheme.{u}) [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)] [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] : Nonempty (RationalModuleRealization l E X)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20a06d8c2",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Item JSON differs from live only in the new lean record; the 12 dependency node files equal live; lean.statement is verbatim. Hypotheses (noetherian, finite dimension, l invertible) are not stronger than the node. integralIso/finiteIso are pinned by the constant-section and projection normalizations, and localization/inclusion by the recorded predicates. F_X = pbcDerivedExtend along the pinned map, with exactness, triangulation and a natural cohomology iso for every r. Constructibility: bounds plus a finite locally closed stratification with IsFiniteLocallyFree inverse images, matching the node's definition. J is determined by literal object equality and the fraction formula (n=0 gives J∘Q=F); its E-action is fixed by scalar_normalization and the source action by pbcRationalLinear. The models clause covers finitely presented N with finite free E⊗N. The three helpers are canonical and docstringed. Edge cases and universes are OK. No recompile (instruction); the report records a clean compile. Advisories: the Second reading section disclaims a reading under the direct-delivery policy (precedents Q150 and Q18 PASSed); J.CommShift is free; the cohomology iso is unpinned; some declarations have owners outside stmt_deps; the stratum transport of the model clause is left to a proof dependency."
  }
 }
