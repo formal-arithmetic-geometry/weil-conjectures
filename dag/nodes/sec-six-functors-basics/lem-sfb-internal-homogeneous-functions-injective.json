@@ -15,9 +15,114 @@
   "def-sp-injective-resolutions",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the section-ring equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to regard internal $A$-modules as sheaves of modules over the section-ring sheaf $A$. It leaves sections, restriction maps and linear maps unchanged. The bilinear universal property identifies tensor products in these descriptions, and the right-adjoint universal property identifies their internal Homs. Equivalences preserve monomorphisms and the extension property defining injectivity: transport a lifting problem and its solution along the inverse equivalence. We may therefore work with these section-module sheaves. By [def-pur-sheaf-hom], a section of an internal Hom over $S$ is a map on the entire slice over $S$; evaluations below are required after every $T\\to S$, not just at ordinary points.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+   }
+  },
+  {
+   "text": "Put $X=G^n$, with $G^0=*$, a profinite object of the chosen small site, and $P=A[\\underline X]$. The free-module universal property identifies $P$ with the sheafification of $V\\mapsto\\bigoplus_{t\\in C(V,X)}A(V)$: a map out is exactly a natural assignment of an element to each generator $[t]$, and sheafification does not change maps to a sheaf. This is exactly $j_{X!}A_X$ in [lem-pc-sites-modules-j-shriek-flat]. That node applies to the sheaf of commutative rings $A$ on this site and gives that $P\\otimes_A-$ preserves finite limits, hence monomorphisms. This uses flatness, not projectivity, of the free module.",
+   "uses": [
+    "lem-pc-sites-modules-j-shriek-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EV, label lemma-j-shriek-flat, clause (2) and its displayed direct-sum formula"
+   }
+  },
+  {
+   "text": "Let $i:N\\hookrightarrow M$ be any monomorphism of internal $G$-equivariant $A$-modules, and $h:N\\to H_n(J)$ an equivariant linear map. The forgetful functor $U$ sends $i$ to a monomorphism. Indeed $K(S)=\\ker(i_S)$ is a subsheaf of $UN$, because compatible kernel sections glue uniquely in $UN$. Equivariance gives $i_S(gx)=g i_S(x)=0$, so the action of [def-sfb-condensed-action-module] restricts to $K$, naturally after every base change. Its inclusion $k:K\\to N$ is equivariant and $ik=0$; monicity of $i$ implies $k=0$. Thus every $i_S$ has zero kernel, so is injective. A sectionwise injective sheaf map is monic, by testing equality of maps on sections.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+   }
+  },
+  {
+   "text": "For each profinite test object and $\\mathbf t=(t_1,\\ldots,t_n)$, evaluation of $h(x)$ at $(1,\\mathbf t)$ defines $a_{\\mathbf t}(x)=h(x)(1,\\mathbf t)$. It is $A$-linear in $x$ and natural in the test object and $\\mathbf t$. Extend in the free generators of $P$ and apply the tensor universal property, equivalently the natural tensor--Hom adjunction of [lem-pc-sheaf-modules-tensor-closed], to get $\\alpha:P\\otimes_A UN\\to UJ$ with $\\alpha([\\mathbf t]\\otimes x)=a_{\\mathbf t}(x)$. The evaluation is the slice evaluation of [def-pur-sheaf-hom], so this is a morphism of sheaves, including all profinite base changes. For $n=0$, the tuple is empty and the evaluation is at the single group coordinate $1$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, label lemma-internal-hom-adjoint-tensor, clause (2); agent specialization to evaluation on free generators"
+   }
+  },
+  {
+   "text": "By Steps 2 and 3, $P\\otimes_A Ui:P\\otimes_A UN\\hookrightarrow P\\otimes_A UM$ is monic. The assumed injectivity of $UJ$, in precisely the extension sense of [def-sp-injective-resolutions], supplies a sheaf-module morphism $\\beta:P\\otimes_A UM\\to UJ$ satisfying $\\beta\\circ(P\\otimes_A Ui)=\\alpha$. No sectionwise splitting or injectivity of the individual modules $J(S)$ is asserted: this is one extension in the category of internal modules.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z, label lemma-adjoint-preserve-injectives, proof of (a) implies (c): extend the transpose against a monomorphism"
+   }
+  },
+  {
+   "text": "Define $b:M\\to H_n(J)$ on generalized arguments by\n$$b(m)(g_0,\\ldots,g_n)=g_0\\cdot_J\\beta\\bigl([g_0^{-1}g_1,\\ldots,g_0^{-1}g_n]\\otimes(g_0^{-1}\\cdot_M m)\\bigr).$$\nHere $m\\in M(S)$ is first restricted to $T$ for every $T\\to S$, and $g_i\\in C(T,G)$. Inversion, multiplication and both internal actions commute with restriction; so does $\\beta$. The formula is therefore natural on each slice. For fixed tuple it is $A(T)$-linear in $m$, since the two actions are $A(T)$-linear. The free-module universal property in the tuple, followed by the tensor--Hom adjunction of [lem-pc-sheaf-modules-tensor-closed], gives an internal linear map $b$; the slice description of [def-pur-sheaf-hom] ensures these formulas specify its actual internal-Hom sections. Empty tests and the empty $n$-tuple are interpreted by the same formula.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+   }
+  },
+  {
+   "text": "Check equivariance on every profinite test object. Write $\\mathbf r=(g_0^{-1}g_1,\\ldots,g_0^{-1}g_n)$. For $k\\in\\underline G$, the definition gives\n$$b(km)(\\mathbf g)=g_0\\cdot_J\\beta([\\mathbf r]\\otimes(g_0^{-1}k\\cdot_M m)).$$\nOn the other hand the prescribed homogeneous action gives\n$$(k\\cdot b(m))(\\mathbf g)=k\\cdot_J\\bigl((k^{-1}g_0)\\cdot_J\\beta([\\mathbf r]\\otimes((k^{-1}g_0)^{-1}\\cdot_M m))\\bigr).$$\nSince $k(k^{-1}g_0)=g_0$ and $(k^{-1}g_0)^{-1}=g_0^{-1}k$, these expressions agree. These equalities use only the action laws of [def-sfb-condensed-action-module] and hold after all base changes, so $b$ is equivariant.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+   }
+  },
+  {
+   "text": "Finally let $x\\in N$ on any test object. Equivariance of $i$ and the extension identity give\n$$b(ix)(\\mathbf g)=g_0\\cdot_J\\alpha([\\mathbf r]\\otimes(g_0^{-1}\\cdot_N x))=g_0\\cdot_J h(g_0^{-1}\\cdot_N x)(1,\\mathbf r).$$\nEquivariance of $h$ and the stated homogeneous action identify the last evaluation with $g_0\\cdot_J(g_0^{-1}\\cdot_J h(x)(g_0,g_0r_1,\\ldots,g_0r_n))=h(x)(\\mathbf g)$. Equality on all generalized tuples, followed by linear extension in the free generators, gives $bi=h$ as internal maps. Every lifting problem has thus been solved, which is exactly injectivity by [def-sp-injective-resolutions].",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-sfb-condensed-action-module",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-j-shriek-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal homogeneous-function helper. Explicit internal extension proof adapting Stacks homology.tex Tag 015Z (lemma-adjoint-preserve-injectives) using sites-modules.tex Tags 03EV (lemma-j-shriek-flat) and 03EO (lemma-internal-hom-adjoint-tensor)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +179,52 @@
    "results": "{\"t\": \"2026-10-21T18:24:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\"], \"digest\": \"e2b8c5288bc9e1c5\"}",
    "date": "2026-10-21",
    "verdict": "no match: the general exact-left-adjoint theorem is available, but constructing the internal coinduction adjunction and identifying the diagonal homogeneous function module with coinduction are additional arguments. Rep and constant-ring CondensedMod hits do not state this internal-ring assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of internal homogeneous function modules on a profinite group with injective underlying module over a condensed ring",
+   "results": "{\"t\": \"2026-10-21T18:42:21Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of internal homogeneous function modules on a profinite group with injective underlying module over a condensed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.toLimit_injective\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatCondensedDiscrete\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete\", \"instFaithfulLightProfiniteLightCondSetLightProfiniteToLightCondSet\"], \"digest\": \"0e611c1abdd3df9c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general injective-adjoint preservation is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; the other hits concern constant-ring condensed modules, ordinary representations, continuous cochains, or unrelated injectivity. None states this internal condensed-ring assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms",
+   "results": "{\"t\": \"2026-10-21T18:42:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\"], \"digest\": \"e2b8c5288bc9e1c5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general injective-adjoint preservation is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; the other hits concern constant-ring condensed modules, ordinary representations, continuous cochains, or unrelated injectivity. None states this internal condensed-ring assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc|preservesInjectiveObjects_of_adjunction",
+   "results": "{\"t\": \"2026-10-21T18:42:21Z\", \"tool\": \"grep\", \"query\": \"coinduc|preservesInjectiveObjects_of_adjunction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/Topology.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"452d749f4cde1d9f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general injective-adjoint preservation is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; the other hits concern constant-ring condensed modules, ordinary representations, continuous cochains, or unrelated injectivity. None states this internal condensed-ring assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous cochains with an injective underlying condensed module are injective equivariant modules",
+   "results": "{\"t\": \"2026-10-21T18:42:22Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous cochains with an injective underlying condensed module are injective equivariant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Injective.casesOn\", \"Module.Injective.recOn\", \"CochainComplex.isKInjective_of_injective\", \"groupCohomology.cocycles₁\", \"HomogeneousSubmodule.mk.inj\", \"ContinuousCohomology.homogeneousCochains\", \"groupCohomology.cochainsMap_f_map_epi\", \"HomogeneousSubmodule.toSubmodule_injective\"], \"digest\": \"38b3b5406d8f4c1a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general injective-adjoint preservation is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; the other hits concern constant-ring condensed modules, ordinary representations, continuous cochains, or unrelated injectivity. None states this internal condensed-ring assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc|[Ii]njective.*[Aa]ction|[Aa]ction.*[Ii]njective",
+   "results": "{\"t\": \"2026-10-21T18:42:45Z\", \"tool\": \"grep\", \"query\": \"coinduc|[Ii]njective.*[Aa]ction|[Aa]ction.*[Ii]njective\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\"], \"digest\": \"a6d808491b22dbbd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general injective-adjoint preservation is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; the other hits concern constant-ring condensed modules, ordinary representations, continuous cochains, or unrelated injectivity. None states this internal condensed-ring assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coinduction is right adjoint to forgetting internal group actions on sheaves of modules; free representable module sheaves are flat",
+   "results": "{\"t\": \"2026-10-21T18:42:46Z\", \"tool\": \"leanfinder\", \"query\": \"Coinduction is right adjoint to forgetting internal group actions on sheaves of modules; free representable module sheaves are flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.freeForgetAdjunction\", \"Condensed.freeForgetAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.freeFunctor\", \"Rep.instIsRightAdjointActionModuleCatRes\", \"PresheafOfModules.freeAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"SheafOfModules.mapFree\"], \"digest\": \"e0e8a75c1fea4504\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general injective-adjoint preservation is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; the other hits concern constant-ring condensed modules, ordinary representations, continuous cochains, or unrelated injectivity. None states this internal condensed-ring assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-equivariant-resolution-bar-normalization",
@@ -104,5 +251,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-homogeneous-functions-injective",
+  "worker": "stage1",
+  "summary": "Replaced the unsplit helper by an eight-step explicit lifting proof. Evaluating at first coordinate 1 reduces a lifting problem to tensoring with the flat free module on G^n; underlying injectivity extends that map, and an explicit formula reconstructs and verifies the equivariant lift on all profinite tests. Reused existing nodes; no new nodes and no statement change.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), open direct image; supplies the injectivity input for equivariant resolution-to-bar normalization. Nearest imported blueprint ancestor is null, as returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic ringed-site flatness theorem applied to the represented profinite object G^n; the unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site tensor--Hom adjunction already used to define the item; required to construct and interpret evaluation maps, not to replace the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NW-11411aeaa",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-11411aeaa (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The item is a first split with no new nodes and an unchanged statement. The statement is true: classically the module is the coinduction of Hom(A[G^n],UJ), which is injective because UJ is injective and A[G^n] is flat. It matches the parent's step 3, which applies it to UI^q with the action on arguments and values. Step 2: A[G^n] is the sheafification of the direct sum over C(V,G^n), which is exactly j_{X!}A_X of lem-pc-sites-modules-j-shriek-flat. I checked this against Stacks 03EV clause (2) at sites-modules.tex:4389. Step 3: the proof that U preserves monomorphisms is correct; the sectionwise kernel is a subobject stable under the action. Steps 4-5: alpha is the tensor-Hom transpose of Uh followed by evaluation at (1,t), and beta is a single internal extension, matching Stacks 015Z (a)=>(c) at homology.tex:7287. I recomputed steps 7-8 by hand: the relative coordinates are unchanged by left translation, the order of factors is correct for non-abelian G, and b∘i=h. Edge cases checked: n=0, G=1, A=0 or J=0, and infinite G (only representability of G^n and flatness are used). No duplicate found among the sfb/proetale injective-resolution, bar and restriction-calculus nodes or the curve-estimate coinduced nodes, which have discrete coefficients. I accept the two declared tool uses: j-shriek flatness and the closed monoidal structure of sheaf modules. The split uses no SGA source and changes nothing."
  }
 }
