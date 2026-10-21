@@ -10,9 +10,92 @@
  "stmt_deps": [
   "def-weil-pbc-module-chain-complex-homology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a poset $S$, let $W_n(S)$ be the free $R$-module on weakly increasing tuples $(x_0,\\ldots,x_n)$ for $n\\geq0$, with $W_{-1}(S)=R[\\varnothing]$ and zero below $-1$. Define $d$ by alternating deletion and $d[x]=[\\varnothing]$. For positions $a<b$, deleting $a$ then the original $b$ has coefficient $(-1)^{a+b-1}$, whereas deleting $b$ then $a$ has coefficient $(-1)^{a+b}$; the resulting tuples agree. These pairs exhaust $d^2$ for $n\\geq2$. For $n=1$, $d^2[x_0,x_1]=[\\varnothing]-[\\varnothing]=0$, and for $n\\leq0$ the next differential is zero. Thus $W(S)$ is a chain complex in the sense of [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "Let $D_n(S)\\subseteq W_n(S)$ be spanned by tuples with a repetition, and put $D_n(S)=0$ for $n\\leq0$. A repeated weak tuple has adjacent equal entries $x_j=x_{j+1}$: any equality at separated positions forces all intervening entries equal by antisymmetry. Deleting position $j$ or $j+1$ gives identical tuples with opposite coefficients; every other deletion retains these two adjacent equal entries. Hence $dD_n\\subseteq D_{n-1}$. The quotient $W_n/D_n$ is identified with the free module on strict tuples by killing repeated basis tuples and keeping strict ones: this map and inclusion of strict generators are inverse after taking the quotient. In degree $-1$ it is the identity of $R$. The induced differential is exactly that of $C(S;R)$, so this also verifies the complex specified in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "For a monotone $u:P\\to Q$, entrywise application defines $W(u)_n$ on each free basis and is the identity in degree $-1$. It commutes with each vertex deletion, so $dW(u)=W(u)d$ in degrees $n\\geq1$; in degree zero both composites send every vertex to $[\\varnothing]$, and below zero both are zero. Equal adjacent entries have equal images, so $W(u)D(P)\\subseteq D(Q)$. Therefore it induces a chain map on $W/D=C$, exactly $u_*$ from the statement; the termwise commutation is precisely the chain-map condition of [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "Entrywise identity fixes every tuple and the empty generator. For monotone $u:P\\to Q$, $v:Q\\to S$, entrywise $(v\\circ u)$ equals successive entrywise application of $u$ and $v$, including in degree $-1$. These equalities pass to the quotients, giving $(\\mathrm{id}_P)_*=\\mathrm{id}_{C(P;R)}$ and $(v\\circ u)_*=v_*u_*$. In particular, if $u$ collapses a strict tuple to a repeated tuple, every further image is still repeated, in agreement with the zero convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "For a weak tuple $x=(x_0,\\ldots,x_n)$ put $T_i(x)=(f(x_0),\\ldots,f(x_i),g(x_i),\\ldots,g(x_n))$ and $H_n[x]=\\sum_{i=0}^n(-1)^i[T_i(x)]$, with $H_{-1}=0$ and zero lower down. Each $T_i$ is weakly increasing: monotonicity handles the two blocks and $f(x_i)\\leq g(x_i)$ handles their junction. If $x_j=x_{j+1}$, then $i\\leq j$ leaves the repeated pair in the $g$ block, and $i\\geq j+1$ leaves it in the $f$ block. Thus every summand is repeated and $H_nD_n(P)\\subseteq D_{n+1}(Q)$. The induced map on the quotients is the displayed $h_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$, and write $\\delta_j$ for deleting position $j$. Expand $dH_n[x]$ into terms $(-1)^{i+j}[\\delta_jT_i(x)]$. For $j<i$, one has $\\delta_jT_i(x)=T_{i-1}(\\delta_jx)$, whose term in $H_{n-1}d[x]$ has coefficient $(-1)^{i-1+j}$ and cancels it. For $j>i+1$, one has $\\delta_jT_i(x)=T_i(\\delta_{j-1}x)$, whose term in $H_{n-1}d[x]$ has coefficient $(-1)^{i+j-1}$ and cancels it. These pairings exhaust the latter sum: a term there has prism index $r\\in\\{0,\\ldots,n-1\\}$ and deleted original index $k\\in\\{0,\\ldots,n\\}$; if $k\\leq r$ its partner is $(i,j)=(r+1,k)$ in the first case, while if $k>r$ its partner is $(i,j)=(r,k+1)$ in the second case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "Only $j=i$ and $j=i+1$ remain from $dH_n$. Define $A_i=(f(x_0),\\ldots,f(x_{i-1}),g(x_i),\\ldots,g(x_n))$ for $0\\leq i\\leq n+1$, with empty end blocks permitted. The $j=i$ face is $A_i$ with coefficient $(-1)^{2i}=1$; the $j=i+1$ face is $A_{i+1}$ with coefficient $(-1)^{2i+1}=-1$. Hence $dH_n[x]+H_{n-1}d[x]=\\sum_{i=0}^n([A_i]-[A_{i+1}])=[g(x_0),\\ldots,g(x_n)]-[f(x_0),\\ldots,f(x_n)]$. This is $W(g)[x]-W(f)[x]$. Linearity gives the identity on all of $W_n(P)$, and the quotient maps of steps 2, 3 and 5 give $dh+hd=g_*-f_*$ on $C_n(P;R)$ for $n\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "In degree zero, $H_0[x]=[f(x),g(x)]$, so $dH_0[x]=[g(x)]-[f(x)]$ and $H_{-1}d[x]=0$, even when the two vertices coincide. In degree $-1$, $d_0H_{-1}+H_{-2}d_{-1}=0$ and $W(g)_{-1}-W(f)_{-1}=\\mathrm{id}_R-\\mathrm{id}_R=0$. Below $-1$ all source modules vanish. Passing to the quotients proves the identity in all remaining degrees. If $P$ is empty, only the degree $-1$ check is needed; if $Q$ is empty, the assumed maps force $P$ empty. Thus no nonemptiness assumption has entered the proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +145,52 @@
    "results": "{\"t\": \"2026-10-21T18:18:06Z\", \"tool\": \"grep\", \"query\": \"homotopyPInftyToId|def hσ\", \"sub\": \"AlgebraicTopology/DoldKan\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\"], \"digest\": \"e5e23fb3268ac91a\"}",
    "date": "2026-10-22",
    "verdict": "no match: OrderHom results concern monotonicity only; DoldKan.hσ, hσ' and homotopyPInftyToId concern normalization of an arbitrary simplicial object, not the displayed augmented strict-poset-chain prism. No exact or one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "OrderHom.*[Hh]omotop|[Hh]omotop.*OrderHom|[Pp]rism|order[Cc]omplex",
+   "results": "{\"t\": \"2026-10-21T18:34:35Z\", \"tool\": \"grep\", \"query\": \"OrderHom.*[Hh]omotop|[Hh]omotop.*OrderHom|[Pp]rism|order[Cc]omplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: OrderHom and simplex monotonicity declarations do not construct the claimed chain maps or prism. DoldKan homotopies normalize one simplicial object. SSet.Homotopy.chainComplexMap concerns unnormalized nonaugmented chains; normalizedChainComplex requires a separate comparison and neither gives the full displayed augmented formula in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparable order preserving maps induce chain homotopic maps on the augmented order complex",
+   "results": "{\"t\": \"2026-10-21T18:34:35Z\", \"tool\": \"leansearch\", \"query\": \"Comparable order preserving maps induce chain homotopic maps on the augmented order complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"homotopic\", \"OrderHom.ext\", \"Homotopy\", \"OrderHom\", \"OrderHom.toFunctor\", \"Preord.ofHom\", \"FinPartOrd.ofHom\", \"CategoryTheory.SimplicialThickening.functorMap\"], \"digest\": \"c7f0057f8bf828b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: OrderHom and simplex monotonicity declarations do not construct the claimed chain maps or prism. DoldKan homotopies normalize one simplicial object. SSet.Homotopy.chainComplexMap concerns unnormalized nonaugmented chains; normalizedChainComplex requires a separate comparison and neither gives the full displayed augmented formula in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OrderHom\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-21T18:34:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"OrderHom\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: OrderHom and simplex monotonicity declarations do not construct the claimed chain maps or prism. DoldKan homotopies normalize one simplicial object. SSet.Homotopy.chainComplexMap concerns unnormalized nonaugmented chains; normalizedChainComplex requires a separate comparison and neither gives the full displayed augmented formula in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise comparable monotone maps of posets induce a prism chain homotopy on augmented strict chains",
+   "results": "{\"t\": \"2026-10-21T18:34:36Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise comparable monotone maps of posets induce a prism chain homotopy on augmented strict chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.orderHom\", \"SimplexCategory.II.monotone_map'\", \"SimplexCategoryGenRel.simplicialEvalσ_monotone\", \"CategoryTheory.SimplicialThickening.Path\", \"SSet.stdSimplex.monotone_apply\", \"SSet.Augmented.StandardSimplex.shift\", \"AlgebraicTopology.DoldKan.hσ'\", \"SimplexCategory.mkOfLeComp\"], \"digest\": \"1bb5d8a77b4affdd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: OrderHom and simplex monotonicity declarations do not construct the claimed chain maps or prism. DoldKan homotopies normalize one simplicial object. SSet.Homotopy.chainComplexMap concerns unnormalized nonaugmented chains; normalizedChainComplex requires a separate comparison and neither gives the full displayed augmented formula in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPInftyToId|def hσ|Homotopy.*chainComplex|chainComplex.*Homotopy",
+   "results": "{\"t\": \"2026-10-21T18:35:01Z\", \"tool\": \"grep\", \"query\": \"homotopyPInftyToId|def hσ|Homotopy.*chainComplex|chainComplex.*Homotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\"], \"digest\": \"9a4a5204be1a6ee9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: OrderHom and simplex monotonicity declarations do not construct the claimed chain maps or prism. DoldKan homotopies normalize one simplicial object. SSet.Homotopy.chainComplexMap concerns unnormalized nonaugmented chains; normalizedChainComplex requires a separate comparison and neither gives the full displayed augmented formula in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed prism sum f x0 through f xi then g xi through g xn gives a chain homotopy after repeated tuples are killed",
+   "results": "{\"t\": \"2026-10-21T18:35:03Z\", \"tool\": \"leanfinder\", \"query\": \"The signed prism sum f x0 through f xi then g xi through g xn gives a chain homotopy after repeated tuples are killed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\", \"Homotopy.mkInductiveAux₂\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"Homotopy.mkInductiveAux₃\", \"Homotopy.mkInductiveAux₁\", \"Homotopy.mkInductiveAux₂_add_one\"], \"digest\": \"ab6d44050ccb20af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: OrderHom and simplex monotonicity declarations do not construct the claimed chain maps or prism. DoldKan homotopies normalize one simplicial object. SSet.Homotopy.chainComplexMap concerns unnormalized nonaugmented chains; normalizedChainComplex requires a separate comparison and neither gives the full displayed augmented formula in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-product-chain-proper-interval-homology",
@@ -92,5 +217,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-poset-augmented-chain-prism",
+  "worker": "stage1",
+  "summary": "Expanded the weak-tuple prism boundary calculation, including explicit sign pairings, degeneration descent, functoriality, and degrees zero and minus one. No new nodes: each step is a basis calculation or explicit cancellation. Retained the statement and inherited provenance; no exact project or Mathlib match found.",
+  "blueprint": "Carries the general augmented strict-poset prism used by lem-sfb-product-chain-proper-interval-homology, below paragraph (3) of the current direct-images proof. That combinatorial argument is agent-written, not asserted in the blueprint; ancestor tool returns None and inherited blueprint.from.node remains null. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-f0a71bd0a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f0a71bd0a (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 8 steps, 0 new nodes. The only citation is def-weil-pbc-module-chain-complex-homology, a Mathlib-leaf definition used only for what a complex and a chain map are. Source check: Stacks simplicial.tex l.4739-4846 (equation-homotopy-to-homotopy l.4754, lemma-homotopy-s-N l.4817, tag 019S checked in tags l.1663) has the same structure, first and last sums cancelling and the junction terms telescoping. The item's (-1)^i convention gives g_*-f_*, which I recomputed. I re-derived every step: (1) d^2=0 via the (-1)^{a+b-1}/(-1)^{a+b} pairs, including the augmentation at n=1; (2) a repetition is always adjacent by antisymmetry, so D is a subcomplex and W/D is free on strict tuples; (3)-(4) u_* is a chain map and is functorial, including degree 0, [∅] and collapses; (5) T_i is weakly increasing at the junction, and the repeated pair stays in the g block for i<=j and in the f block for i>=j+1, so H descends; (6) the j<i faces match T_{i-1}(δ_j x) and the j>i+1 faces match T_i(δ_{j-1}x) with opposite signs, and the inverse map (r,k) is a bijection; (7) the j=i and j=i+1 faces are A_i(+) and A_{i+1}(-), which telescope to g-f; (8) degrees 0 and -1 hold, including f(x)=g(x) and empty P or Q. My own small-case run: all labelled posets with up to 3 elements, every comparable pair of monotone maps, 12,558 checks of the homotopy identity and of the chain-map condition, all passed. Duplicates: searched the DAG for prism, strict chains, weakly increasing and order complex; simplicial-homotopy-free-chain-homotopy, split-simplicial-nondegenerate-homotopy and preorder-bar-terminal-augmentation do not state it, and blueprint_refs search finds nothing. Parent product-chain-proper-interval-homology uses exactly the stated clauses. No SGA, no repair note, no off-route statement, no tool_uses. Maintainer note: blueprint.from.node is null, inherited from the parent split (ancestor gives None). Not a fault of this delivery."
  }
 }
