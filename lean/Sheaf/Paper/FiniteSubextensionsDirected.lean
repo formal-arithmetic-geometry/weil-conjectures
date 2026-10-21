@@ -52,6 +52,43 @@ theorem finiteSubextensions_directed (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ S : Finset (PadicAlgCl ℓ), ∃ E : FiniteIntermediateField ℓ,
       ∀ x, x ∈ S → x ∈ E.1) ∧
     (∀ x : PadicAlgCl ℓ, ∃ E : FiniteIntermediateField ℓ, x ∈ E.1) := by
-  sorry
+  classical
+  have degree_bound (n : ℕ) (E : Fin n → FiniteIntermediateField ℓ) :
+      Module.finrank ℚ_[ℓ]
+        (⨆ i, (E i).1 : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) ≤
+        ∏ i, Module.finrank ℚ_[ℓ] (E i).1 := by
+    induction n with
+    | zero =>
+      rw [iSup_of_empty, IntermediateField.finrank_bot]
+      simp
+    | succ n ih =>
+      have hs : (⨆ i, (E i).1 : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) =
+          (E 0).1 ⊔ ⨆ i : Fin n, (E i.succ).1 := by
+        apply le_antisymm
+        · refine iSup_le fun i ↦ ?_
+          refine Fin.cases ?_ (fun j ↦ ?_) i
+          · exact le_sup_left
+          · exact (le_iSup (fun j : Fin n ↦ (E j.succ).1) j).trans le_sup_right
+        · refine sup_le (le_iSup (fun i ↦ (E i).1) 0) ?_
+          exact iSup_le fun i ↦ le_iSup (fun i ↦ (E i).1) i.succ
+      rw [hs, Fin.prod_univ_succ]
+      exact (IntermediateField.finrank_sup_le _ _).trans
+        (Nat.mul_le_mul_left _ (ih (fun i ↦ E i.succ)))
+  have finite_subset (S : Finset (PadicAlgCl ℓ)) :
+      ∃ E : FiniteIntermediateField ℓ, ∀ x, x ∈ S → x ∈ E.1 := by
+    have hfin : FiniteDimensional ℚ_[ℓ]
+        (IntermediateField.adjoin ℚ_[ℓ] (S : Set (PadicAlgCl ℓ))) :=
+      IntermediateField.finiteDimensional_adjoin
+        (fun x _ ↦ Algebra.IsIntegral.isIntegral x)
+    exact ⟨⟨IntermediateField.adjoin ℚ_[ℓ] (S : Set (PadicAlgCl ℓ)), hfin⟩,
+      fun x hx ↦ IntermediateField.subset_adjoin ℚ_[ℓ] _ hx⟩
+  refine ⟨?_, inferInstance, ?_, finite_subset, ?_⟩
+  · intro n E
+    exact ⟨inferInstance, fun i ↦ le_iSup (fun j ↦ (E j).1) i, degree_bound n E⟩
+  · intro E F
+    exact ⟨⟨E.1 ⊔ F.1, inferInstance⟩, le_sup_left, le_sup_right⟩
+  · intro x
+    obtain ⟨E, hE⟩ := finite_subset {x}
+    exact ⟨E, hE x (Finset.mem_singleton_self x)⟩
 
 end PadicAlgCl
