@@ -18,91 +18,82 @@
  ],
  "proof": [
   {
-   "text": "For a $B_U$-module sheaf $M$, write $P_M$ for the defining extension presheaf. The formula in [def-weil-extension-by-zero] gives a canonical identity $P_{r_{\\varphi,U}M}=r_{\\varphi,Z}P_M$ of $A_Z$-module presheaves: if $V\\to Z$ factors through $U$, both values are the abelian group $M(V\\to U)$ with action $a m=\\varphi_Z(a)m$; otherwise both are zero. The restriction maps and maps induced by morphisms of $M$ are identical, since scalar restriction changes only the action. For two coefficient maps the sectionwise identity also identifies both successive actions with $a m=\\psi_Z(\\varphi_Z(a))m$; it is precisely the prescribed $\\rho$, on both sheaves and presheaves.",
+   "text": "For fixed-scalar sheaves, the published comparison is leftAdjointUniq for the composite adjunctions formed from open extension and restriction/coextension of scalars. Its unit equation, evaluated on a section and then at 1 in the coextended module, gives the open-unit normalization. Applying the open adjunction mate equivalence therefore sends this comparison to the identity restriction square.",
    "uses": [
     "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction",
     "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
+    "place": "Tags 03DI and 03CY, extension-by-zero adjunction and section-normalized realization; adjunction mate argument in the Lean proof."
    }
   },
   {
-   "text": "Let $aP$ denote abelian sheafification and $\\eta_P:P\\to aP$ its unit. By [def-weil-presheaf-modules-sheafification], both $J_A r_{\\varphi,U}M$ and $r_{\\varphi,Z}J_BM$ have underlying abelian sheaf $aP_M$, canonically identified by the identity on the presheaves of step 1. On the second object the restricted $A_Z$-action extends the action on $r_{\\varphi,Z}P_M$, because $\\eta_{P_M}$ is $B_Z$-linear and hence $A_Z$-linear. Uniqueness of the extended action makes this exactly the action on the first object. The canonical underlying identity and its inverse are therefore $A_Z$-linear and define $e_{\\varphi,M}$. It satisfies $e_{\\varphi,M}\\circ\\eta_{P_{r_\\varphi M}}=r_{\\varphi,Z}(\\eta_{P_M})$, using step 1's identification. The unique factorization clause of the cited sheafification statement shows that this equation determines $e_{\\varphi,M}$ uniquely.",
+   "text": "The published realization comparison preserves each section. Consequently its comparison for a composite coefficient map is the composite of the two comparisons followed by the specified intrinsic scalar compositor. The inverse realization comparison is its adjunction mate, so the same composition law holds for the inverse realization comparisons. Paste the fixed open square with these two realization squares. Compatibility of mates with pasting identifies its mate with the inverse of sfOpenRestrictionCoefficientSquare. The mate unit equation proves the asserted normalization. Injectivity of the open adjunction hom equivalence, followed by cancellation of the coefficient-square component, proves uniqueness.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-extension-by-zero-adjunction",
     "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
+    "place": "Tags 03DI and 03CY, extension-by-zero adjunction and section-normalized realization; adjunction mate argument in the Lean proof."
    }
   },
   {
-   "text": "For a $B_U$-linear map $f:M\\to N$, precompose $r_{\\varphi,Z}(J_B f)\\circ e_{\\varphi,M}$ and $e_{\\varphi,N}\\circ J_A(r_{\\varphi,U}f)$ with $\\eta_{P_{r_\\varphi M}}$. By the unit equation of step 2 and functoriality of sheafification, both become $r_{\\varphi,Z}(\\eta_{P_N}\\circ P_f)$. The unique factorization clause therefore proves naturality. For $\\varphi=\\mathrm{id}$ the identity on $J_AM$ satisfies the same unit equation, so uniqueness gives the identity comparison under the canonical identifications.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
-   }
-  },
-  {
-   "text": "Fix a $C_U$-module sheaf $M$. Both sides of the required cocycle are $A_Z$-linear maps from $J_A r_{\\varphi,U}r_{\\psi,U}M$ to $r_{\\chi,Z}J_CM$. Precompose with $\\eta_{P_{r_\\varphi r_\\psi M}}$ and use step 1's identities. On the left, naturality of the sheafification unit for $P(\\rho_{U,M})$, followed by the unit equation for $e_\\chi$, gives $r_{\\chi,Z}(\\eta_{P_M})$. On the right, the unit equations for $e_\\varphi$ and $e_\\psi$ give $r_{\\varphi,Z}r_{\\psi,Z}(\\eta_{P_M})$, followed by $\\rho_{Z,J_CM}$. Since $\\rho$ is the identity on underlying presheaves, this is the same map $r_{\\chi,Z}(\\eta_{P_M})$. Unique factorization through sheafification proves exactly the displayed equation, including both specified $\\rho$ components.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
-   }
-  },
-  {
-   "text": "Scalar restriction is additive by [def-pc-sheaf-restrict-scalars] and preserves finite limits and finite colimits by [lem-pur-sheaf-ring-coefficient-ordinary-adjunction], applied on each small pro-etale site to its constant-ring sheaf map; thus it is exact. Each $J_R$ is exact by [lem-weil-extension-by-zero-exact]. Consequently [lem-weil-pbc-exact-functor-derived-factorization] applies to all these functors on unbounded cochain complexes and derived categories. Apply the sheaf comparison in each degree to a complex: its commutation with the differential is naturality from step 3. Its inverse likewise is a chain map. The cocycle and identity laws for complexes hold degree by degree by step 4 and the identity law of step 3.",
+   "text": "The fixed-scalar comparison satisfies composition by the unit normalization and injectivity of the open-adjunction hom equivalence. Transport this equation through the realization comparisons. Their composition equations and naturality give the sheaf cocycle with both prescribed intrinsic scalar compositors. The canonical identity restriction comparison preserves every section; the identity specialization of the cocycle and naturality then give the sheaf identity law.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03CY, extension-by-zero adjunction and section-normalized realization; adjunction mate argument in the Lean proof."
+   }
+  },
+  {
+   "text": "Apply the sheaf equations in every degree and use extensionality of complex morphisms. The comparison transformations and their inverses already give chain maps by naturality, so this proves the equations for all unbounded cochain complexes.",
+   "uses": [
     "lem-weil-extension-by-zero-exact",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, label lemma-right-derived-exact-functor, with sites-modules.tex Tag 03DA (lemma-abelian) and the cited ordinary scalar-restriction exactness statement"
+    "place": "Tag 015F, exact termwise functors on unbounded complexes."
    }
   },
   {
-   "text": "Let $Q_R$ be the localization from complexes of $R$-module sheaves to $D(U_{\\mathrm{proet}},R)$, and use the exact factorizations of step 5. Clause (2) of [lem-weil-pbc-localization-universal-property] descends the chain isomorphism to $e_\\varphi:J_A r_{\\varphi,U}\\cong r_{\\varphi,Z}J_B$ on all of $D(U_{\\mathrm{proet}},B)$. Descend $\\rho$ by the same rule. Under the factorization isomorphisms, precomposition with $Q_C$ identifies each factor of the desired derived cocycle with its chain-level factor: for a whiskered transformation this follows from its component formula at a complex, and clause (2)'s uniqueness identifies its lift. Composition and identity are preserved by clause (2). The two resulting natural transformations agree after precomposition with $Q_C$ by step 5, hence agree on the whole derived category by clause (3). The same argument gives the identity coefficient law. Neither this localization theorem nor the exact factorization restricts the degrees of a complex. The presheaf and sheafification arguments never required quasi-compactness, flatness or constructibility.",
+   "text": "Invert the scalar compositors in the sheaf cocycle by cancellation. Apply the existing general composition theorem for exact derived squares to the open-extension squares and these compositors, take its component at K, and cancel the invertible derived compositors. This is the required derived cocycle. Apply the existing exact-derived identity-square theorem to the inverse open comparison and the canonical identity restriction comparisons to obtain the derived identity equation.",
    "uses": [
-    "lem-weil-pbc-localization-universal-property"
+    "lem-pod-derived-exact-square-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-extension-by-zero-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, label lemma-properties-left-localization; the natural-transformation clauses are the cited Mathlib leaf, Localization.liftNatIso, comp_liftNatTrans, liftNatTrans_id and natTrans_ext in CategoryTheory/Localization/Predicate.lean"
+    "place": "Tag 04VG, localization universal property; the existing exact derived-square composition and identity APIs."
    }
   }
  ],
  "proof_deps": [
   "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
   "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pod-derived-exact-square-composition",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI (lemma-extension-by-zero) and 03CY (lemma-sheafification-presheaf-modules), with exact termwise descent from derived.tex Tag 015F and the localization universal property; coefficient coherence proved explicitly by agreement on the sheafification units"
+  "place": "Tags 03DI and 03CY: existing open adjunction, scalar coextension adjunction and section-normalized realization, combined by the mate equivalence; exact unbounded descent via the proved derived-square composition theorem and identity API."
  },
  "mathlib_searches": [
   {
@@ -254,5 +245,15 @@
   "group": "NM",
   "result": "pass",
   "note": "All node clauses are rendered in the Lean: finite rings A,B,C; arbitrary open immersion with no extra assumptions; canonical rho at sheaf and derived level (sfCoefficientRestrictionComp / sfDerivedCoefficientRestrictionComp); e = published sfOpenRestriction with a genuine normalized-and-unique clause (the predicate fixes the adjoint transpose through the recorded j_! -| j^* unit and the canonical square q, equivalent to identity on the extension presheaves); derived e via mapDerivedCategorySquareIso; cocycle at sheaf, cochain (Z-indexed) and derived level, orientation checked; identity laws with real identifications. Mechanical finding: the statement uses the unit of the adjunction constructed by lem-weil-extension-by-zero-adjunction (its Lean record is a def of the adjunction), so it genuinely depends on the theorem's conclusion: PASS on that point. No hollow definitions, all theorems sorry, docstrings and blueprint tags present, lean.statement verbatim, no duplicate, item not yet stated live. Compile: nt_compile hit its 60 s limit at load ~255; lcompile with a 560 s limit gave rc 0, clean, 419 s. Advisory: Sheaf.Paper.SfCompactSupportRestrictionOfScalars, which defines sfOpenRestriction and the scalar-composition maps, is not named by any node's lean record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261021T120503-L-3902287",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
