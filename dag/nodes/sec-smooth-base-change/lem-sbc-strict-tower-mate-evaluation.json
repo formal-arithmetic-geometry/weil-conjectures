@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-strict-tower-mate-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; Normalized evaluation of the actual strict tower square mate",
+   "via": [
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized evaluation of the actual strict tower square mate",
+ "statement": "For four small ringed tensor corners, exact edges, a ring-compatible square s, normalized strict coefficient data q, normalized direct image/limit data dg,dh and normalized tower adjunctions ag,ah [def-sbc-strict-augmented-coefficient-presentation], evaluation at any index n carries the actual square mate towerMate at input q K to the ambient square mate s.exchange at the evaluated input. Explicitly evX(towerMate(input q K)) followed by evaluatedTarget equals evaluatedSource followed by s.exchange(evT(input q K)) [def-sbc-strict-coefficient-exchange-arrows]. No perfectness, projection isomorphism or completeness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+ },
+ "stmt_deps": [
+  "def-sbc-strict-augmented-coefficient-presentation",
+  "def-sbc-strict-coefficient-exchange-arrows",
+  "def-sbc-strict-projection-tower-data",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact evaluation and pullback composition isomorphisms. The ordinary cube commutes because evaluation of termwise pullback is the strict identity and evaluation of the given square is s.modules. Exact derived localization preserves this cube. The representative normalization and uniqueness of s.derivedComparison identify its ambient face.",
+   "uses": [
+    "lem-fix-site-open-exchange-localization",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  },
+  {
+   "text": "The normalized Hom formulas determine the tower adjunction units on localized complexes, hence determine the tower adjunctions. The ordinary counit normalization determines the ambient adjunction counits on K-injective representatives. Apply uniqueness of normalized derived evaluation to identify the recorded direct-image evaluation comparisons with those preserving these counits.",
+   "uses": [
+    "lem-weil-pbc-tower-derived-evaluation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  },
+  {
+   "text": "Apply the mate-cube identity to the inverse-image cube and substitute these counit-preserving comparisons. Reassociate the evaluation isomorphisms: their source composite is evaluatedSource and their target composite is evaluatedTarget. This is the displayed equality of evaluated morphisms.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-site-open-exchange-localization",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-tower-derived-evaluation-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Projection formula, compatibility with diagram and derived limits; strict-complex normalization argument by E3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a derived tower adjunction mate agrees with the ambient adjunction mate",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"{X Y : C} [HasRightDual X] [HasRightDual Y] (f : X ⟶ Y) : (fᘁ ▷ X) ≫ ε_ X (Xᘁ) = ((Yᘁ) ◁ f) ≫ ε_ Y (Yᘁ)\", \"doc\": \"Given objects $X,Y$ in a monoidal category $\\\\mathcal{C}$ with right duals $X^*, Y^*$ and a morphism $f : X \\\\to Y$, the composition of the right adjoint mate morphism $f^*: Y^* \\\\to X^*$ with the evalua\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \": TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {X Y : C}\\n  [inst_2 : CategoryTheory.HasRightDual X] [inst_3 : CategoryTheory.HasRightDual Y] (f : X ⟶ Y) {Z : C}\\n  (h : CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟶ Z),\\n  CategoryTheory.\", \"doc\": \"In a monoidal category $\\\\mathcal{C}$, for objects $X,Y$ with right duals $X^*, Y^*$ and a morphism $f: X \\\\to Y$, the composition of the right adjoint mate morphism $f^*: Y^* \\\\to X^*$ with the evaluati\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Mate\", \"type\": \": (g ≫ l₂ ⟶ l₁ ≫ h) ≃ (r₁ ≫ g ⟶ h ≫ r₂)\", \"doc\": \"Given a bicategory $\\\\mathcal{B}$, objects $a,b,c,d \\\\in \\\\mathcal{B}$, 1-cells $l_1: b \\\\to c$, $r_1: c \\\\to b$ forming an adjunction with unit $\\\\eta_1$ and counit $\\\\varepsilon_1$, and 1-cells $l_2: c \\\\to\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a derived strict tower square mate agrees with the ambient adjunction mate",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv_square\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} {X : Type u₇} {Y : Type u₈}\\n  {Z : Type u₉} [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} C] [inst_3 : CategoryTheory.Categor\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, and compatible two-square diagrams between functors, the mate equivalence for the composition of adjunctions and vertically-horizontal composed squares equa\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv_square\", \"module\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate\", \"type\": \"∀ {B : Type u} [inst : CategoryTheory.Bicategory B] {a b c d e f x y z : B} {g₁ : a ⟶ d} {h₁ : b ⟶ e} {k₁ : c ⟶ f}\\n  {g₂ : d ⟶ x} {h₂ : e ⟶ y} {k₂ : f ⟶ z} {l₁ : a ⟶ b} {r₁ : b ⟶ a} {l₂ : b ⟶ c} {r₂ : c ⟶ b} {l₃ : d ⟶ e} {r₃ : e ⟶ d}\\n  {l₄ : e ⟶ f} {r₄ : f ⟶ e} {l₅ : x ⟶ y} {r₅ : y ⟶ x} {l₆ : y ⟶ z}\", \"doc\": \"In a bicategory $\\\\mathcal{B}$, given adjunctions $f_1 \\\\dashv g_1$, $f_2 \\\\dashv g_2$, $f_3 \\\\dashv g_3$, and $f_4 \\\\dashv g_4$, along with 2-cells $\\\\alpha: g_1 \\\\circ l_3 \\\\Rightarrow l_1 \\\\circ h_1$, $\\\\bet\"}\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    {E : Type u₃} →\\n      {F : Type u₄} →\\n        [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n          [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n            [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n              [inst_3 : CategoryTheory.Category.{v₄,\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ d $ in category $ D $, the composition of $ L₂ $ applied to th\"}\n  {\"name\": \"CategoryTheory.mateEquiv_symm_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ β $ between functors involving these adjoints, applying the inverse of the mate equivalence to $ β $ yields a natural transfor\"}\n  {\"name\": \"CategoryTheory.mateEquiv_hcomp\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆}\\n  [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} C] [inst_3 : CategoryTheory.Category.{v₄, u₄} D]\\n  [inst_4 : CategoryTheory.C\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, $ L₃ ⊣ R₃ $, and $ L₄ ⊣ R₄ $, and two vertical-composable 2-square diagrams $ α $ and $ β $ between functors involving these adjoints, the mate equivalence \"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} B] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.F\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, $ L₃ ⊣ R₃ $, and $ L₄ ⊣ R₄ $, and a two-square diagram α between functors involving these adjoints, applying the mate equivalence twice (first with adj₁ and\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg projectionFormula|projection_formula|coaugmentation|evaluation.*mate|mate.*evaluation|tensor.*square in Mathlib/CategoryTheory and Mathlib/Algebra/Homology; inspect Adjunction/Mates and Functor/Derived/Adjunction",
+   "results": "Generic mateEquiv and derived adjunction APIs exist; no normalized sheaf-coefficient strict-tower result. Searched the adopted WeilConjectures and Sheaf modules too; their related interfaces are the proof dependencies recorded here.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientExchangeUnitEquation",
+  "date": "2026-10-21",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictTowerMateEvaluation",
+  "file": "lean/Sheaf/Paper/StrictTowerMateEvaluation.lean",
+  "declaration": "SheafOfModules.StrictQuotientExchange.strictTowerMateEvaluation",
+  "statement": "theorem strictTowerMateEvaluation\n    (s : RingedTensorSquare S T X Y g f e h) (q : Coefficients f g h e s)\n    (ag : TowerAdjunction g dg) (ah : TowerAdjunction h dh)\n    (K : T.mateDerived) (n : ℕᵒᵖ) :\n    (ev X lX n).map ((towerMate f g h e s ag ah).app (input q K)) ≫\n        (evaluatedTarget q dh K n).hom =\n      (evaluatedSource q dg K n).hom ≫\n        s.exchange.app ((ev T lT n).obj (input q K))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-strict-perfect-tower-projection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; Local perfectness and invertibility of the strict tower projection",
+   "via": [
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local perfectness and invertibility of the strict tower projection",
+ "statement": "Fix small ringed tensor corners A and B, an edge e with isomorphic structural ring map and exact additive module pullback, normalized coefficient reductions rA and rB for strict augmented sequences QA and QB of complexes, and a normalized pullback comparison p:PullReduction e rA rB [def-sbc-strict-augmented-coefficient-presentation]. If every derived coefficient QA(n) is locally perfect [def-weil-pbc-strict-perfect-coefficient-package], then every QB(n) is locally perfect. For every normalized pair of total derived strict inverse limits, normalized total derived direct image d and normalized tower adjunction a, and every unbounded derived object E on B, the adjunct projection e a p E is an isomorphism in the derived category of strict module towers [def-sbc-strict-coefficient-exchange-arrows]. No common bounds or ranks for the coefficients, and no completeness of E, are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+ },
+ "stmt_deps": [
+  "def-sbc-strict-augmented-coefficient-presentation",
+  "def-sbc-strict-coefficient-exchange-arrows",
+  "def-sbc-strict-projection-tower-data",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Pull back a covering on which a level coefficient is a bounded finite-free-retract complex. The strict perfect pullback theorem carries its degreewise splitting to the target with unchanged ranks. Exact inverse image carries the quasi-isomorphism to a quasi-isomorphism. Pullbacks of the covering epimorphism cover, so this proves local perfectness of QB(n) through the given coefficient isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  },
+  {
+   "text": "Use the normalized tower evaluation theorem and the representative equation for p.pull to evaluate the defining transpose of projection e a p E. Its transpose is the usual derived tensor pullback comparison followed by the ambient counit tensored with the coefficient. Thus the evaluated morphism is exactly the perfect coefficient projection map, which is invertible by the ringed-site perfect projection theorem.",
+   "uses": [
+    "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "lem-sbc-ringed-site-perfect-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  },
+  {
+   "text": "Exact evaluation computes each homology object of a strict tower levelwise. For the cone of the projection all evaluated homology objects vanish, so every homology tower is zero and its cone is acyclic. Consequently the projection is invertible in the localization. This detects isomorphisms only, not equality of arrows.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Projection formula, compatibility with diagram and derived limits; strict-complex normalization argument by E3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for locally perfect coefficients is an isomorphism for a derived inverse sequence of sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"(i : D.J) (U : Opens (D.U i).carrier) : IsIso (D.diagramOverOpenπ U i)\", \"doc\": \"For each index $i$ in the indexing category $J$ and each open subset $U$ of the topological space associated with $i$, the projection morphism from the limit of the diagram over $U$ to the object at p\"}\n  {\"name\": \"Perfection.coeff_frobeniusEquiv_symm\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(f : Ring.Perfection R p) (n : ℕ) :\\n  Perfection.coeff R p n ((frobeniusEquiv (Ring.Perfection R p) p).symm f) = Perfection.coeff R p (n + 1) f\", \"doc\": \"For a commutative semiring $ R $ of prime characteristic $ p $, applying the inverse Frobenius ring equivalence to a $ p $-perfect sequence $ (f_k) $ in the perfection of $ R $ results in a sequence w\"}\n  {\"name\": \"Perfection.map_apply_coe\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"∀ {R : Type u₁} [inst : CommSemiring R] (p : ℕ) [hp : Fact (Nat.Prime p)] [inst_1 : CharP R p] {S : Type u₂}\\n  [inst_2 : CommSemiring S] [inst_3 : CharP S p] (φ : R →+* S) (f : Ring.Perfection R p) (n : ℕ),\\n  ↑((Perfection.map p φ) f) n = φ ((Perfection.coeff R p n) f)\", \"doc\": \"For any ring homomorphism $\\\\varphi: R \\\\to S$ between commutative semirings of prime characteristic $p$, and for any $p$-perfect sequence $(f_n) \\\\in \\\\mathrm{Perfection}(R, p)$, the $n$-th coefficient o\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.SequentialLimit\", \"type\": \": Sheaf.IsLocallySurjective (c.π.app ⟨0⟩)\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \": QuasiIso R.π'\", \"doc\": \"The projection morphism $\\\\pi'$ from the extended cochain complex of a projective resolution to the single-term complex at degree 0 is a quasi-isomorphism. This means $\\\\pi'$ induces isomorphisms on all\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (P : CategoryTheory.Projectiv\", \"doc\": \"Given additive functors between abelian categories and projective resolutions of objects, the inverse of the isomorphism relating the left-derived functor to projective resolutions satisfies a natural\"}\n  {\"name\": \"Perfection.coeff_mk\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(f : ℕ → R) (hf) (n : ℕ) : coeff R p n ⟨f, hf⟩ = f n\", \"doc\": \"For a commutative semiring $ R $ of prime characteristic $ p $, the $ n $-th coefficient homomorphism of the perfection of $ R $ maps each $ p $-perfect sequence $ (f_k) $ to its $ n $-th term $ f_n $\"}\n  {\"name\": \"CochainComplex.isIso_homologyπ₀\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \": IsIso (K.homologyπ 0)\", \"doc\": \"The morphism $\\\\pi: K_\\\\text{cycles}(i) \\\\to K_\\\\text{homology}(i)$ for a homological complex $K$ at index $i$, defined as the composition of the projection from cycles to left homology and the isomorphis\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect coefficient projection formula for derived strict towers of module sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) → (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').Derivation' φ'\", \"doc\": \"A derivation constructed for the relative differentials presheaf, defined by assigning to each object the Kähler differential derivation $d$ satisfying the Leibniz rule and annihilating the images of \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (S' ⟶ R) → PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.desc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, there exists a unique morphism of presheaves of modules from the universal derivation t\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.fac\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, the postcomposition of $ d $ with the unique morphism $ \\text{desc}(d') $ from the unive\"}\n  {\"name\": \"PresheafOfModules.Derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat)) → (S' ⟶ R) → Type (max (max u₂ u) v)\", \"doc\": \"Given a presheaf of commutative rings $ S $ on a category $ \\\\mathcal{C} $, a derivation is a natural transformation from $ S $ to the composition of the identity functor on $ \\\\mathcal{D} $ with the pr\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg projectionFormula|projection_formula|coaugmentation|evaluation.*mate|mate.*evaluation|tensor.*square in Mathlib/CategoryTheory and Mathlib/Algebra/Homology; inspect Adjunction/Mates and Functor/Derived/Adjunction",
+   "results": "Generic mateEquiv and derived adjunction APIs exist; no normalized sheaf-coefficient strict-tower result. Searched the adopted WeilConjectures and Sheaf modules too; their related interfaces are the proof dependencies recorded here.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientExchangeUnitEquation",
+  "date": "2026-10-21",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictPerfectTowerProjection",
+  "file": "lean/Sheaf/Paper/StrictPerfectTowerProjection.lean",
+  "declaration": "SheafOfModules.StrictQuotientExchange.strictPerfectTowerProjection",
+  "statement": "theorem strictPerfectTowerProjection\n    (he : IsIso e.ringMap) (p : PullReduction e rA rB)\n    (hperfect : ∀ n : ℕᵒᵖ, IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w}\n      A.ring (DerivedCategory.Q.obj (QA.obj n))) :\n    (∀ n : ℕᵒᵖ, IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w}\n      B.ring (DerivedCategory.Q.obj (QB.obj n))) ∧\n    ∀ (lA : StrictProjectionLimit A) (lB : StrictProjectionLimit B)\n      (d : StrictProjectionDirectImage e lB lA) (a : TowerAdjunction e d)\n      (E : B.mateDerived), IsIso (projection e a p E)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

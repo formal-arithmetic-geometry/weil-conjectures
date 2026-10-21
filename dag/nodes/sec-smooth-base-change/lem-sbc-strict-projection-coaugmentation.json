@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-strict-projection-coaugmentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; Strict coefficient projection and the normalized limit coaugmentation",
+   "via": [
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict coefficient projection and the normalized limit coaugmentation",
+ "statement": "Fix an exact ringed tensor edge e:A to B with isomorphic structural ring map, normalized augmented coefficient reductions rA,rB, normalized reduction pullback p, normalized strict tower direct image and limit comparison d, and a normalized tower adjunction a [def-sbc-strict-augmented-coefficient-presentation]. For normalized constant-limit isomorphisms jA,jB and every unbounded derived object E on B, kappa_A at e.right(E) followed by lA.L of projection e a p E equals e.right of kappa_B at E followed by d.a at rB(E). No perfectness, invertibility of the projection, boundedness or completeness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+ },
+ "stmt_deps": [
+  "def-sbc-strict-augmented-coefficient-presentation",
+  "def-sbc-strict-coefficient-exchange-arrows",
+  "def-sbc-strict-projection-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "On flat K-flat representatives the normalization of p.pull commutes with the strict augmentation: substitute the augmentation and pullback representative equations, then use naturality of canonical tensor pullback and its unit equation. In each total-complex summand the two maps insert the same coefficient unit; coefficient_augmentation identifies the last coefficient maps. Flat K-flat resolution descent gives the resulting whole-tower augmentation square.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  },
+  {
+   "text": "Transpose that augmentation square under a.adjunction. Naturality of the reduction augmentation moves the ambient counit through it. The normalized constant-tower comparison chi has transpose the constant ambient counit. The Hom bijection therefore gives augmentation_A followed by projection = chi followed by derived tower direct image of augmentation_B, in the derived category of strict towers.",
+   "uses": [
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  },
+  {
+   "text": "Apply lA.L. Naturality of d.a at augmentation_B moves this factor to e.right of lB.L of augmentation_B. The constant normalization of d.a and chi identifies jA followed by lA.L(chi) with e.right(jB) followed by d.a at the constant tower. Substitute kappa = j followed by limit of augmentation. Reassociation gives exactly the stated equation; neither augmentation nor projection is inverted.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit strict augmented-complex refinement by E3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Projection formula, compatibility with diagram and derived limits; strict-complex normalization argument by E3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projection formula preserves the coefficient augmentation after derived inverse limit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.preservesLimitIso_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \"(j) : (preservesLimitIso G F).inv ≫ G.map (limit.π F j) = limit.π _ j\", \"doc\": \"For each object $j$ in the diagram category $\\\\mathcal{J}$, the composition of the inverse of the isomorphism between $G(\\\\text{lim} F)$ and $\\\\text{lim}(F \\\\circ G)$ with the functor $G$ applied to the p\"}\n  {\"name\": \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \"∀ {C : Type u_1} {H : Type u_3} {D : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} H] [inst_2 : CategoryTheory.Category.{v_4, u_4} D]\\n  (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H}\\n  (α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, and a natural transform\"}\n  {\"name\": \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F G : J ⥤ C} [HasLimit F] [HasLimit G] (w : F ≅ G) (j : J) :\\n  (HasLimit.isoOfNatIso w).inv ≫ limit.π F j = limit.π G j ≫ w.inv.app j\", \"doc\": \"Given categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, functors $F,G: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ with limits, and a natural isomorphism $w: F \\\\cong G$, the inverse of the limit isomorphism $\\\\text{HasLimi\"}\n  {\"name\": \"CategoryTheory.Limits.Pi.isoLimit_inv_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \"∀ {α : Type w₂} {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (X : CategoryTheory.Functor (CategoryTheory.Discrete α) C)\\n  [inst_1 : CategoryTheory.Limits.HasProduct fun j => X.obj { as := j }] [inst_2 : CategoryTheory.Limits.HasLimit X]\\n  (j : α) {Z : C} (h : X.obj { as := j } ⟶ Z),\\n  Ca\", \"doc\": \"For a functor $ X $ from the discrete category over $ \\\\alpha $ to a category $ C $, the composition of the inverse of the product-limit isomorphism $ \\\\prod^\\\\circ X \\\\cong \\\\lim X $ with the product proj\"}\n  {\"name\": \"CategoryTheory.Limits.limit.conePointUniqueUpToIso_inv_comp\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F : J ⥤ C} [HasLimit F] {c : Cone F} (hc : IsLimit c) (j : J) :\\n  (IsLimit.conePointUniqueUpToIso (limit.isLimit _) hc).inv ≫ limit.π F j = c.π.app j\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ with a limit, given another limit cone $ c $ over $ F $, the composition of the inverse isomorphism between the limit apex $ \\\\lim F $ and $ c $'s apex\"}\n  {\"name\": \"CategoryTheory.CostructuredArrow.instPreservesLimitsOfShapeProjOfIsConnected\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.Over.Connected\", \"type\": \"[IsConnected J] {B : D} : PreservesLimitsOfShape J (CostructuredArrow.proj K B)\", \"doc\": \"For any connected category $\\\\mathcal{J}$ and object $B$ in category $\\\\mathcal{D}$, the projection functor from the costructured arrow category $\\\\text{CostructuredArrow}(K, B)$ to category $\\\\mathcal{C}\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMap'\", \"module\": \"Mathlib.Topology.Category.LightProfinite.AsLimit\", \"type\": \"(n : ℕ) : S.transitionMap n ∘ S.proj (n + 1) = S.proj n\", \"doc\": \"For any natural number $n$ and a light profinite space $S$ constructed as an inverse limit of finite discrete spaces, the composition of the transition map $S_{n+1} \\to S_n$ with the projection $S \\to S\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_inv_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} [inst_2 : CategoryTheory.Category.{w', w} J]\\n  (F : CategoryTheory.Functor J C) [inst_3 : CategoryTheory.Limits.PreservesLimit F G]\\n\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}$, a small category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, and a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserving the limit of $F$, f\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula preserves the coaugmentation after total derived inverse limit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapProjectiveResolution_π\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Projective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v_1, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {D : Type u'} [inst_3 : CategoryTheory.Category.{v', u'} D]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject D] [inst_5 : CategoryTheory.Preadditive D]\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with zero objects, which preserves projective objects and homology, the projection map $ \\\\pi $ of the proje\"}\n  {\"name\": \"LightProfinite.lightToProfinite_map_proj_eq\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) (n : ℕ),\\n  lightToProfinite.map (S.proj n) =\\n    (lightToProfinite.obj S).asLimitCone.π.app\\n      ((CategoryTheory.Limits.IsCofiltered.sequentialFunctor (DiscreteQuotient ↑(lightToProfinite.obj S).toTop)).obj\\n        (Opposite.op n))\", \"doc\": \"For a light profinite space $ S $ and natural number $ n $, applying the canonical inclusion functor $ \\\\text{lightToProfinite} $ to the projection morphism $ S.\\\\text{proj}(n) $ yields the component $ \"}\n  {\"name\": \"HomologicalComplex.coneOfHasLimitEval_π_app_f\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {J : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_3} J] {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] (F : CategoryTheory.Functor J (HomologicalComplex C c))\\n  [inst_3 : ∀ (n : ι), Cat\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $, the component of the cone's projection at object $ j \\\\in \\\\mathcal{J} $ and index $ x \\\\in \\\\iota $ equals the projection \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (P : CategoryTheory.ProjectiveResolution X)\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and a projective resolution $ P $ of an object $ X \\\\in \\\\mathcal{C} $, the natural transformation $ \\\\eta_X : L_0F(\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X : C}\\n  (P : CategoryTheory.ProjectiveResolution X) (F : CategoryTheory.Functor C D) [inst_4 : F.A\", \"doc\": \"For a projective resolution $ P $ of an object $ X $ in an abelian category $ \\\\mathcal{C} $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ to another abelian category $ \\\\mathcal{D} $, th\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.π'_f_zero\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {X : C} (R : CategoryTheory.ProjectiveResolution X),\\n  R.π'.f 0 =\\n    CategoryTheory.CategoryStruct.comp\\n      (R.cochainComplexXIso 0 0 CategoryTheory.\", \"doc\": \"The morphism $\\\\pi'$ evaluated at degree 0 is equal to the composition of the isomorphism from the cochain complex to the chain complex (via negation of indices), followed by the original projection $\\\\\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.ProjectiveRe\", \"doc\": \"Given a projective resolution $ P $ of an object $ X $ in an abelian category $ \\\\mathcal{C} $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ to another abelian category $ \\\\mathcal{D} $, \"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, the composition of the inverse isomorphism $ (L_0F \\\\cong F)^{-1} $ evaluated at object $ X $ followed by the nat\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg projectionFormula|projection_formula|coaugmentation|evaluation.*mate|mate.*evaluation|tensor.*square in Mathlib/CategoryTheory and Mathlib/Algebra/Homology; inspect Adjunction/Mates and Functor/Derived/Adjunction",
+   "results": "Generic mateEquiv and derived adjunction APIs exist; no normalized sheaf-coefficient strict-tower result. Searched the adopted WeilConjectures and Sheaf modules too; their related interfaces are the proof dependencies recorded here.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientExchangeUnitEquation",
+  "date": "2026-10-21",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictProjectionCoaugmentation",
+  "file": "lean/Sheaf/Paper/StrictProjectionCoaugmentation.lean",
+  "declaration": "SheafOfModules.StrictQuotientExchange.strictProjectionCoaugmentation",
+  "statement": "theorem strictProjectionCoaugmentation\n    (he : IsIso e.ringMap) (a : TowerAdjunction e d) (p : PullReduction e rA rB)\n    (jA : ConstantLimit A lA) (jB : ConstantLimit B lB) (E : B.mateDerived) :\n    (kappa rA lA jA).app (e.right.obj E) ≫ lA.L.map (projection e a p E) =\n      e.right.map ((kappa rB lB jB).app E) ≫ d.a.hom.app (rB.functor.obj E)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

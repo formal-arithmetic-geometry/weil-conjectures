@@ -26,122 +26,82 @@
  ],
  "proof": [
   {
-   "text": "Work in $D(\\operatorname{Tow}(\\operatorname{Mod}(\\mathcal O_W)))$ using the small diagram-site realization. Write $i_{W,Z}:\\Delta_WZ\\to\\mathcal R_WZ$ for tensoring with the strict augmentation, $j_{W,Z}:Z\\xrightarrow{\\sim}\\mathcal L_W\\Delta_WZ$ for the canonical constant-tower map, and $\\chi_{u,Z}:\\Delta R_uZ\\xrightarrow{\\sim}\\mathscr R_u\\Delta Z$ for the normalized constant-tower/direct-image comparison. Thus $\\kappa_{W,Z}=\\mathcal L_W(i_{W,Z})j_{W,Z}$. The evaluation comparisons carry the tower adjunction counits to the ambient ones and commute with transitions. Tensor and pullback comparisons here are constructed on the diagram site, so they give actual derived tower maps. Constant pullback commutes with $\\Delta$ exactly; the stated counit equation for $\\chi$ identifies the mate on constant towers with the constant tower of the ambient mate, by the defining transpose formula.",
+   "text": "Apply strictPerfectTowerProjection to f to preserve perfectness on X, and to g and h to obtain invertible strict projections. Compose the first with the invertible f pullback comparison and the second with the invertible e pullback comparison. This proves ProjectionIsomorphisms.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-tower-derived-evaluation-normalization",
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram), 0A07 (lemma-Rf-commutes-with-Rlim); explicit agent-supplied augmentation calculation"
-   }
-  },
-  {
-   "text": "Under these normalized evaluation comparisons, $H_n$ is $L_f$ of $\\pi_{g,K,Q_{S,n}}$ followed by the pullback/tensor identifications, and $H'_n$ is $\\pi_{h,E,Q_{X,n}}$ followed by the corresponding identification with the $e$-pullback of the coefficient-tensored input. The new general ringed-site perfect projection theorem makes each of these maps invertible. The pulled-back $Q_{X,n}$ is perfect: on each object of a covering of $S$ over which $Q_{S,n}$ has a bounded summand-of-finite-free representative, the strict-perfect pullback model gives the termwise pulled-back package with the same ranks and identifies $L_f$ of the representative with it; the inverse images of these covering objects cover the final sheaf of $X$, so every object of $X$ has a covering by objects over which $Q_{X,n}$ has such a representative. The same holds for the pullbacks to $T$ and $Y$. Hence $H,H'$ are invertible as derived tower maps. Indeed their cones have zero cohomology after every evaluation; levelwise kernels and cokernels show that each cohomology tower is zero, so the cones are acyclic. This only uses detection of isomorphisms, not detection of equality of morphisms.",
-   "uses": [
-    "lem-sbc-ringed-site-perfect-projection-formula",
-    "lem-weil-pbc-tower-derived-evaluation-normalization",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-strict-perfect-ringed-pullback-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, applied at each evaluation; levelwise cohomology of strict towers"
-   }
-  },
-  {
-   "text": "Apply the ringed exchange/tensor coherence theorem on the four diagram topoi, with input $\\Delta_TK$ and coefficient $Q_{S,\\bullet}$. It applies to this commutative ringed square without cartesianness and does not require the coefficient diagram to be perfect as a single diagram-site object. Let $\\beta:B\\to D$ be the diagram-site square mate on $\\mathcal R_TK$. The theorem, together with the constant-tower mate comparison of Step 1, gives the equality of derived tower morphisms\n$$\\beta H=H'\\mathcal R_X(b).$$\nHere $\\Delta_TK\\otimes^L\\mathscr L_gQ_{S,\\bullet}=\\mathcal R_TK$ and the analogous identifications on $X,Y$ are precisely the canonical tensor reassociations already specified in the question. Cancel $H$ to obtain $\\beta=H'\\mathcal R_X(b)H^{-1}=v$. This proves the tower equality directly on the diagram topoi.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-constant-tower-pushforward-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram), 0A07 (lemma-Rf-commutes-with-Rlim); explicit agent-supplied augmentation calculation"
-   }
-  },
-  {
-   "text": "Evaluate this actual mate using the counit-preserving evaluation comparisons. Its transpose is the evaluated pullback-square comparison followed by the evaluated $g$-counit; these are exactly the ordinary square comparison and counit on $K\\otimes^LQ_{T,n}$. Thus $v_n$ is the $Q_n$-tensor square mate. When $Q_{W,n}$ are quotient ring sheaves, use the exact scalar-restriction functors and the normalized diagram-ring restriction/direct-image comparison. Apply the ringed comparison/tensor/adjunction theorem to the two paths from $(Y,Q_{Y,n})$ to $(X,\\mathcal O_X)$, and similarly for $g$. Its composite counit equation identifies scalar restriction of the quotient adjunction counit with the ambient one after the inverse-image restriction comparison. Both geometric pullbacks are exact inverse image because both sets of coefficient rings are identified under inverse image. On inverse-image tensors the square comparisons send $x\\otimes q$ to the inverse image of $x$ tensored with the inverse image of $q$ along either path. Therefore they agree. In the mate word (unit, square, counit), substitute these adjunction-compatible comparisons: it becomes the ambient evaluated mate. Hence the restricted quotient-ring mate equals $v_n$ under the specified comparisons; no fullness or faithfulness of derived scalar restriction is used.",
-   "uses": [
-    "lem-weil-pbc-tower-derived-evaluation-normalization",
-    "def-weil-pbc-adjunction-mate",
-    "lem-pur-diagram-ring-restriction-pushforward",
-    "lem-sfb-ringed-comparison-tensor-adjunction",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram), 0A07 (lemma-Rf-commutes-with-Rlim); explicit agent-supplied augmentation calculation"
-   }
-  },
-  {
-   "text": "The projection map is natural in the coefficient object and is the identity on the tensor unit. Apply this to the actual diagram-site coefficient map $a_X:\\Delta\\mathcal O_X[0]\\to Q_{X,\\bullet}$. After the normalized constant-tower identifications, its naturality square is the equality\n$$H'i_{X,N}=\\mathscr R_h(i_{Y,E})\\chi_{h,E}:\\Delta_XN\\longrightarrow D.$$\nThe map at the unit is $\\chi_{h,E}$: its transpose is the tower counit, since the counit equation for $\\chi$ identifies it with the constant ambient counit. The coefficient map pulled to $Y$ is exactly the given strict augmentation there. The pullback/tensor reassociation in $H'$ carries it to $i_{Y,E}$ by naturality. This proves the equation in the tower derived category before taking limits.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
-    "lem-weil-pbc-ringed-strict-tower-projection-morphism"
+    "lem-sbc-strict-perfect-tower-projection"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram), 0A07 (lemma-Rf-commutes-with-Rlim); explicit agent-supplied augmentation calculation"
+    "place": "Tags 0944, 0E48 and 0A07; explicit Lean adjunction and limit calculation by E3"
    }
   },
   {
-   "text": "Put $a_Z=a_{h,Z}:R_h\\mathcal L_YZ\\xrightarrow{\\sim}\\mathcal L_X\\mathscr R_hZ$ for the canonical natural direct-image/limit comparison, so $c=a_{\\mathcal R_YE}$. Naturality at $i_{Y,E}$ gives\n$$c\\,R_h\\mathcal L_Y(i_{Y,E})=\\mathcal L_X\\mathscr R_h(i_{Y,E})\\,a_{\\Delta_YE}.$$\nConstant-tower normalization gives\n$$a_{\\Delta_YE}R_h(j_{Y,E})=\\mathcal L_X(\\chi_{h,E})j_{X,N}.$$\nThe latter is the normalized identity $\\mathcal L_X(\\chi)^{-1}a_{\\Delta}=1$ expressed using $j$ at the two corners. Apply $\\mathcal L_X$ to Step 5 and use these two equations. After composing with $j_{X,N}$ and then cancelling $c$, obtain\n$$c^{-1}\\mathcal L_X(H')\\kappa_{X,N}=R_h(\\kappa_{Y,E}).$$\nAll comparisons used are the derived-composite comparisons, so equality is not being inferred from tower projections.",
+   "text": "The normalized coefficient pullback square is strictReductionPullbackSquare. Apply the general exchange mate cube to the four reduction functors and their pullback comparisons. The vertical mates are the defining adjunct projections. It yields rX(b) followed by H-prime = H followed by the actual tower mate. Cancel H to identify conjugate with towerMate.",
    "uses": [
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram), 0A07 (lemma-Rf-commutes-with-Rlim); explicit agent-supplied augmentation calculation"
-   }
-  },
-  {
-   "text": "Naturality of tensoring the strict augmentation gives $\\mathcal R_X(b)i_{X,M}=i_{X,N}\\Delta_X(b)$. The constant-tower map $j$ is natural, being the inverse of the canonical natural identification $\\mathcal L_X\\Delta_X\\cong\\mathrm{id}$. Thus functoriality gives\n$$\\mathcal L_X\\mathcal R_X(b)\\kappa_{X,M}=\\kappa_{X,N}b.$$\nUsing $s=\\mathcal L_XH$ and $vH=H'\\mathcal R_X(b)$, now calculate\n$$\\begin{aligned}\n\\gamma_K\\kappa_{X,M}\n&=c^{-1}\\mathcal L_X(v)\\mathcal L_X(H)\\kappa_{X,M}\\\\\n&=c^{-1}\\mathcal L_X(H')\\mathcal L_X\\mathcal R_X(b)\\kappa_{X,M}\\\\\n&=c^{-1}\\mathcal L_X(H')\\kappa_{X,N}b\n=R_h(\\kappa_{Y,E})b.\n\\end{aligned}$$\nNaturality in $K$ follows from the naturality of the adjunction mate, projection maps, augmentation, and limit comparisons used throughout. No invertibility of $b$ or $\\kappa$ was used.",
-   "uses": [
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-sbc-strict-reduction-pullback-square",
+    "lem-weil-pbc-exchange-mate-cube"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram), 0A07 (lemma-Rf-commutes-with-Rlim); explicit agent-supplied augmentation calculation"
+    "place": "Tags 0944, 0E48 and 0A07; explicit Lean adjunction and limit calculation by E3"
+   }
+  },
+  {
+   "text": "Evaluate this actual tower mate using strictTowerMateEvaluation. Replacing the conjugate by the actual mate from the previous step gives IsEvaluatedMate.",
+   "uses": [
+    "lem-sbc-strict-tower-mate-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit Lean adjunction and limit calculation by E3"
+   }
+  },
+  {
+   "text": "For quotient corners, the equations c.counit_g and c.counit_h identify the vertical mates of the inverse-image comparisons with c.rg and c.rh: transpose and cancel the comparison isomorphism. Rewrite the normalized scalar square c.square in inverse-comparison form and apply the exchange mate cube. The resulting equality compares the restricted quotient exchange and ambient exchange. Naturality along the supplied input identification i and the evaluated mate equation give QuotientEquation. No existence theorem for scalar comparison data is used; their precise normalization equations are fields of c.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit Lean adjunction and limit calculation by E3"
+   }
+  },
+  {
+   "text": "Expand gamma and conjugate. Cancel firstProjection with its inverse after applying lX.L, and cancel the e-reassociation inside limitComparison with its inverse. The result is completion_X(b), followed by lX.L of projection h, followed by dh.a inverse. This is gamma_eq. Naturality of the adjunct projection follows from naturality of the pullback comparison and ambient counit. These projections, the exchange and dh.a inverse form a composite natural transformation, proving IsNaturalGamma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit Lean adjunction and limit calculation by E3"
+   }
+  },
+  {
+   "text": "Use naturality of kappa_X at b to move b before the coaugmentation. Apply strictProjectionCoaugmentation to h at e.left K, then cancel dh.a.hom with dh.a.inv. This gives precisely HasCoaugmentationEquation. The four conclusions and naturality assemble FullEquation with the unchanged statement.",
+   "uses": [
+    "lem-sbc-strict-projection-coaugmentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0944, 0E48 and 0A07; explicit Lean adjunction and limit calculation by E3"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-pbc-adjunction-mate",
-  "lem-pur-diagram-ring-restriction-pushforward",
-  "lem-sbc-ringed-site-perfect-projection-formula",
-  "lem-sfb-ringed-comparison-tensor-adjunction",
-  "lem-weil-pbc-constant-tower-pushforward-normalization",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
-  "lem-weil-pbc-tower-derived-evaluation-normalization",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-ringed-strict-tower-projection-morphism"
+  "lem-sbc-strict-perfect-tower-projection",
+  "lem-sbc-strict-projection-coaugmentation",
+  "lem-sbc-strict-reduction-pullback-square",
+  "lem-sbc-strict-tower-mate-evaluation",
+  "lem-weil-pbc-exchange-mate-cube"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0E48, 0944, 0A07; explicit strict augmented-tower refinement and coaugmentation calculation by Q09"
+  "place": "Strict augmented perfect-complex refinement: mate-cube assembly, quotient counit calculation, cancellation and naturality by E3"
  },
  "mathlib_searches": [
   {
@@ -290,8 +250,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-diagram-ring-restriction-pushforward",
-  "lem-sfb-ringed-comparison-tensor-adjunction",
   "lem-weil-pbc-constant-tower-pushforward-normalization",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
@@ -325,7 +283,7 @@
    "SheafOfModules.StrictQuotientExchange.strictQuotientExchangeUnitEquation"
   ],
   "file": "lean/Sheaf/Paper/StrictQuotientExchangeUnitEquation.lean",
-  "statement": "theorem strictQuotientExchangeUnitEquation (s : RingedTensorSquare S T X Y g f e h) (q : Coefficients f g h e s) (hperfect : HasPerfectLevels S q.atS.Q) (hf : IsIso f.ringMap) (hg : IsIso g.ringMap) (hh : IsIso h.ringMap) (he : IsIso e.ringMap) (ag : TowerAdjunction g dg) (ah : TowerAdjunction h dh) (jX : ConstantLimit X lX) (jY : ConstantLimit Y lY) : FullEquation q ag ah jX jY",
+  "statement": "theorem strictQuotientExchangeUnitEquation\n    (s : RingedTensorSquare S T X Y g f e h)\n    (q : Coefficients f g h e s)\n    (hperfect : HasPerfectLevels S q.atS.Q)\n    (hf : IsIso f.ringMap) (hg : IsIso g.ringMap)\n    (hh : IsIso h.ringMap) (he : IsIso e.ringMap)\n    (ag : TowerAdjunction g dg) (ah : TowerAdjunction h dh)\n    (jX : ConstantLimit X lX) (jY : ConstantLimit Y lY) :\n    FullEquation q ag ah jX jY",
   "branch": "newtargets-dag",
   "by": "Q58",
   "date": "2026-10-21",
@@ -338,5 +296,15 @@
   "group": "Q58",
   "result": "pass",
   "note": "Re-delivery after the 9e7a2d8e RETURN. F1 fixed: new existing:true def node def-sbc-strict-projection-tower-data owns 12 plain decls of unchanged RingedStrictTowerProjectionMorphism (all 7 used decls covered, check_existing clean, statement verbatim); item and both strict def nodes cite it instead of the theorem, theorem stays in proof_deps (unchanged from base). F2 was a snapshot artifact: def-sbc-quotient-coefficient-presentation.json is in this commit and was byte-identical in 9e7a; record correct. Lean delta: named coefficientSquareNormalized (verbatim body, recorded) and one private import. Statement clauses (H, H', v, c, gamma, kappa equation, evaluated/quotient mates, naturality) re-read: match the node, no extra hypotheses or universe equalities, sorry only, docstrings fine. Not dropped, not landed elsewhere. Advisory: projectionUnit is the .choose of an unrecorded ∃! (base-era), unused imports, duplicated module title. No compile (no file changed); worker's dry run 04bab6598dd passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T162110-L-274539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
