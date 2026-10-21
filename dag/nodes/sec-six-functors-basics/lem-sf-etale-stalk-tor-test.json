@@ -13,9 +13,74 @@
   "def-kun-tor-amplitude",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Kernels and images of maps of module sheaves inherit the action of $A_T$, and their quotient has the induced action, so their underlying abelian sheaves compute the same kernels, images and cohomology. For any representing complex $C$ of $A_T$-module sheaves, apply exactness of geometric stalks to its underlying abelian sheaves. The exact-functor homology comparison, applied in degrees $i-1,i,i+1$, gives $H^i(C)_{\\bar t}\\cong H^i(C_{\\bar t})$. In particular termwise stalks send quasi-isomorphisms to quasi-isomorphisms, so this identity is valid for every $E\\in D(T_{\\mathrm{et}},A)$. A module sheaf is zero exactly when its underlying abelian sheaf is zero. Apply geometric-stalk conservativity to the map from that underlying abelian sheaf to zero: $H^i(E)=0$ if and only if $H^i(E_{\\bar t})=0$ for every $\\bar t$. This uses no bound on $E$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Assume $K$ has Tor amplitude $[a,b]$. Fix a geometric point $\\bar t$ and an arbitrary $A$-module $M$. In the defining quantifier for Tor amplitude take the degree-zero constant sheaf $\\underline M$. Then $H^i(K\\otimes_{A_T}^{\\mathbf L}\\underline M)=0$ for $i\\notin[a,b]$. By step 1 the same vanishing holds after taking the stalk at $\\bar t$. The constant-module tensor/stalk comparison identifies this stalk complex with $K_{\\bar t}\\otimes_A^{\\mathbf L}M[0]$. Hence its cohomology vanishes outside $[a,b]$, for every $M$ and $\\bar t$.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-sfb-geometric-stalk-tensor-constant-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), forward implication specialized to constant coefficients; tensor comparison from Tag 0DEN (lemma-check-K-flat-stalks)"
+   }
+  },
+  {
+   "text": "Conversely assume the stated condition for all geometric points and all ordinary $A$-modules. Let $\\mathcal F$ be any $A_T$-module sheaf, placed in degree zero, and fix $i\\notin[a,b]$. The unbounded derived tensor/stalk comparison gives $(K\\otimes_{A_T}^{\\mathbf L}\\mathcal F[0])_{\\bar t}\\cong K_{\\bar t}\\otimes_A^{\\mathbf L}\\mathcal F_{\\bar t}[0]$. Its right-hand side has zero $i$-th cohomology by the assumption with $M=\\mathcal F_{\\bar t}$. Step 1 therefore gives zero for every stalk of $H^i(K\\otimes_{A_T}^{\\mathbf L}\\mathcal F[0])$. Geometric-stalk conservativity applied to its underlying abelian sheaf makes this cohomology sheaf zero. Since $\\mathcal F$ and $i$ were arbitrary, this is precisely Tor amplitude $[a,b]$.",
+   "uses": [
+    "lem-sfb-etale-derived-tensor-stalk",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), converse; Tag 0DEN (lemma-check-K-flat-stalks)"
+   }
+  },
+  {
+   "text": "Let $u:U\\to T$ be any scheme morphism and suppose $K$ has Tor amplitude $[a,b]$. The constant-coefficient module inverse image is exact, agrees with inverse image on underlying abelian sheaves, and identifies $u^{-1}A_T$ with $A_U$. Thus $u^*K$ is represented by applying $u^*$ termwise. For a geometric point $\\bar v$ of $U$, the natural inverse-image stalk comparison gives $(u^*C^n)_{\\bar v}\\cong C^n_{u\\circ\\bar v}$ in every degree. These are additive and $A$-linear: the canonical comparison respects products and addition, and its naturality for each scalar-multiplication map $m_c:C^n\\to C^n$ gives $c\\,x\\mapsto c\\,x$ for all $c\\in A$. Naturality for $d^n$ makes them an isomorphism of complexes. By exactness of stalks it induces $(u^*K)_{\\bar v}\\cong K_{u\\circ\\bar v}$ in $D(A)$. Step 2 says that this complex tensored with any $A$-module has cohomology in $[a,b]$. Applying step 3 on $U$ proves that $u^*K$ has the same Tor interval.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-openclosed-stalk-upperstar",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback), clauses (1) and (3); Tag 03PT (lemma-stalk-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-kun-tor-amplitude",
+  "lem-sfb-geometric-stalk-tensor-constant-single",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), proof specialized to constant coefficients, with the forward implication tested on constant module sheaves; inverse-image consequence from etale-cohomology.tex Tag 03Q1 (lemma-stalk-pullback)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +116,45 @@
    "results": "TopCat.Presheaf.stalk, ModuleCat.Tilde.toOpen_germ_apply, Module.rankAtStalk_tensorProduct, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.toStalk, TopCat.Presheaf.sheafifyStalkIso, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|stalk.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-21T03:29:33Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|stalk.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\"], \"digest\": \"b3fa3c87ace214ba\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of etale module sheaves has Tor amplitude in an interval if all its geometric stalks do",
+   "results": "{\"t\": \"2026-10-21T03:29:33Z\", \"tool\": \"leansearch\", \"query\": \"A complex of etale module sheaves has Tor amplitude in an interval if all its geometric stalks do\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.noConfusionType\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules\", \"SheafOfModules.instAbelian\", \"SheafOfModules.hasLimit\"], \"digest\": \"f32bbeacf3ef72c7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "{\"t\": \"2026-10-21T03:29:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"torAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of etale sheaf complexes is detected at geometric stalks and preserved by inverse image",
+   "results": "{\"t\": \"2026-10-21T03:29:42Z\", \"tool\": \"leanfinder\", \"query\": \"Tor amplitude of etale sheaf complexes is detected at geometric stalks and preserved by inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"3bbd93d7f132318c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor amplitude of a derived sheaf complex can be checked on a conservative family of exact fibre functors",
+   "results": "{\"t\": \"2026-10-21T03:30:15Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor amplitude of a derived sheaf complex can be checked on a conservative family of exact fibre functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"CategoryTheory.Sheaf.monoidalCategory\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\"], \"digest\": \"42ee83a7d3937407\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sf-rf-shriek-preservation",
@@ -71,5 +171,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-stalk-tor-test",
+  "worker": "stage1",
+  "summary": "Expanded both directions of the geometric-stalk Tor test and inverse-image stability using existing unbounded tensor/stalk, exactness, homology and conservativity nodes. No new nodes, no extra boundedness or finiteness hypotheses, no change to the statement. Recorded five fresh Mathlib searches including a second semantic phrasing.",
+  "blueprint": "Opening/closed-immersion Tor-bound paragraph and affine-space paragraph of sk-prop-sf-rf-shriek-preservation: the stalk test used for Tor intervals and their preservation by pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic exact-functor homology comparison, applied to stalks; the item unit supplies no such categorical tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic geometric-stalk detection of zero abelian sheaves; the item unit uses but does not construct the stalk criterion."
+   },
+   {
+    "node": "lem-sfb-geometric-stalk-tensor-constant-single",
+    "why": "Generic unbounded derived tensor comparison for constant module tests; no such comparison is stated in the item unit."
+   },
+   {
+    "node": "lem-sfb-etale-derived-tensor-stalk",
+    "why": "Generic unbounded tensor/stalk comparison for arbitrary module sheaves, needed to test Tor amplitude; the item unit has no tensor comparison."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic inverse-image stalk formula for any scheme morphism; no such pointwise comparison is stated in the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-exact-functor-preserves-homology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sfb-geometric-stalk-tensor-constant-single",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-0a6dd2655",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-0a6dd2655 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. Item: a geometric-stalk test for Tor amplitude on the small étale site, for any commutative A and any scheme T, plus the consequence that u^* preserves Tor intervals. The statement is unchanged, adds no hypothesis, and matches Stacks 0DJJ (sites-cohomology lemma-tor-amplitude-stalk) on the ordinary étale coefficient category that the parent sk-prop-sf-rf-shriek-preservation uses in steps 3 and 4. Geometric points use algebraically closed Ω throughout (def-weil-geometric-point), the same as in the cited tensor nodes. Step 1: stalk exactness on Ab plus the exact-functor homology lemma give H^i(E)_t̄ ≅ H^i(E_t̄) for unbounded E, and conservativity detects zero; the module-to-abelian forgetful step is written out. Step 2: the definition tested on the constant sheaf M_T[0], then step 1, then lem-sfb-geometric-stalk-tensor-constant-single, for arbitrary M. Step 3: lem-sfb-etale-derived-tensor-stalk (unbounded, any K and L) with L = F[0] and M = F_t̄, then step 1 and conservativity; this follows the converse argument of 0DJJ. Step 4: prop-weil-pbc-inverse-image-modules-exact (1)-(3) and the stalk pullback lemma (03Q1 (3)), with A-linearity and the differentials handled by naturality, give (u^*K)_v̄ ≅ K_{u∘v̄}; then step 2 on T and step 3 on U. The delivery creates no new nodes. Duplicate search over all statement nodes: lem-sfb-tor-interval-local-detection is pro-étale cover/open-closed locality, and the pc Tor nodes are Zariski, so neither is a duplicate. There is no cycle and no SGA. Tags 0DJJ, 0DEN, 03Q1, 03PT, 03PU and 010N were verified against the tags file. I accept all five tool_uses: the two genuinely off-route ones are the generic tensor/stalk comparisons (sk-lem-integral-models, sk-prop-ctf-finite-proper), and the other three are on the unit's route anyway. Edge cases checked: empty T, K = 0, K = A_T[0], a = b, unbounded K, non-Noetherian A, arbitrary u. No fixes."
  }
 }
