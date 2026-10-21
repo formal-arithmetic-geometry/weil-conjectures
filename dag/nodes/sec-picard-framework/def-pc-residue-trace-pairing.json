@@ -1,0 +1,118 @@
+{
+ "id": "def-pc-residue-trace-pairing",
+ "kind": "definition",
+ "title": "Canonical residue trace and cup-product pairing",
+ "status": "split",
+ "statement": "Let $k$ be a field and let $C/k$ be a smooth projective curve [def-pc-smooth-projective-curve], with generic point $\\eta$ and function field $K=\\mathcal O_{C,\\eta}$ [def-sc-function-field]. Give $K$ the canonical $k$-algebra structure $k\\to\\Gamma(C,\\mathcal O_C)\\to\\mathcal O_{C,\\eta}$ induced by the structure morphism and the germ map. Write $\\omega=\\Omega^1_{C/k}$ [def-sc-kahler-differentials]. Define the residue trace $t_C:H^1(C,\\omega)\\to k$ [def-pc-euler-characteristic] by sending an adelic principal-parts representative $(\\alpha_x)_{x\\text{ closed}}$ to $\\sum_x\\operatorname{res}_x(\\alpha_x)$, where $\\operatorname{res}_x$ is Tate's local residue on rational differentials, vanishing on differentials regular at $x$; the residue theorem makes this independent of the representative. For an $\\mathcal O_C$-module $\\mathcal F$ [def-weil-sheaf-of-modules-category], with sheaf dual $\\mathcal F^\\vee=\\mathcal Hom(\\mathcal F,\\mathcal O_C)$ [def-sc-invertible-module] and sheaf tensor product [def-pur-sheaf-tensor-product], define the trace cup-pairing map $H^0(C,\\mathcal F^\\vee\\otimes\\omega)\\to H^1(C,\\mathcal F)^\\vee$ by $b\\mapsto(a\\mapsto t_C(H^1(\\operatorname{ev})(a\\mathbin\\cup b)))$, where $\\operatorname{ev}:\\mathcal F\\otimes(\\mathcal F^\\vee\\otimes\\omega)\\to\\omega$ sends $s\\otimes(\\varphi\\otimes w)$ to $\\varphi(s)w$. This definition asserts no perfectness.",
+ "stmt_deps": [
+  "def-pc-smooth-projective-curve",
+  "def-sc-function-field",
+  "def-sc-kahler-differentials",
+  "def-pc-euler-characteristic",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+  "place": "Trace-pairing duality and field-extension compatibility, including sk-thm-picard-rr-duality.md clauses (1) and (4)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue trace cup product pairing Serre duality curve",
+   "results": "LinearMap.IsPerfPair.dualEval; Algebra.traceForm; Algebra.traceForm_apply; Module.Basis.trace_mul_traceDual; Module.Basis.traceDual_repr_apply; Submodule.mem_traceDual; LinearMap.BilinForm.dualSubmoduleParing; Module.Basis.traceDual_involutive",
+   "date": "2026-10-21",
+   "verdict": "ordinary algebraic trace pairings only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue trace and cup product pairing Serre duality on a smooth proper curve",
+   "results": "map_equiv_traceDual; FractionalIdeal.trace_mem_dual_one; Module.Basis.trace_traceDual_mul; Module.Basis.trace_mul_traceDual; LinearMap.trace_eq_contract; LinearMap.trace_eq_contract'; LinearMap.trace_eq_contract_apply; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+   "date": "2026-10-21",
+   "verdict": "no curve cohomology trace pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "torsionQuotient, cupPairing, residueTrace",
+   "results": "0 hits; loogle: unknown identifier 'torsionQuotient'",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "residueTrace|cupPairing|torsionQuotient|functionFieldAlgebra",
+   "results": "Mathlib/AlgebraicGeometry/FunctionField.lean:81: stalkFunctionFieldAlgebra; no torsion subsheaf or residue trace pairing.",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "rg",
+   "query": "residueTrace|cupPairing|functionFieldAlgebra in dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "Curve.ResidueTrace:236 residueTrace; Cohomology.CupProduct:190 cupPairing; Curve.AdelicStructureSheaf:56 functionFieldAlgebra. No owning DAG definition node; blueprint_refs.py search residue trace gives 0 blueprint nodes.",
+   "date": "2026-10-21",
+   "verdict": "reuse upstream definitions via an existing:true node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-picard-rr",
+  "date": "2026-10-21",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-picard-rr",
+   "place": "Trace-pairing duality and field-extension compatibility, including sk-thm-picard-rr-duality.md clauses (1) and (4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace",
+  "declaration": "AlgebraicGeometry.Scheme.residueTrace",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.residueTrace",
+   "AlgebraicGeometry.Scheme.Modules.cupPairing",
+   "AlgebraicGeometry.Scheme.functionFieldAlgebra",
+   "AlgebraicGeometry.Scheme.isFunctionFieldAlgebra_functionFieldAlgebra"
+  ],
+  "statement": "def residueTrace : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1)",
+  "branch": "slopmaster2",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "ResidueTrace publicly exports Cohomology.CupProduct (cupPairing, line 190) and Curve.AdelicStructureSheaf (functionFieldAlgebra, line 56, and its compatibility instance). The trace is defined on smooth proper integral curves; specializing to a smooth projective curve adds no hypothesis to the item. These are actual existing constructions, with no new chosen trace or pairing."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70c3e051",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70c3e051",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Third head. The previous head was returned only for H4/H2 (adjunction taken from theorem node lem-pc-module-pullback-adjunction). This head makes exactly the requested correction: stmt_deps now cite def-pc-module-pullback, picardRRPullbackIso := (tensorPullbackSectionAdjunction p).leftAdjointUniq (pullbackPushforwardAdjunction p), public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction, docstring and report updated. Snapshot diff shows nothing else changed; the bundled def-pc-module-pullback record is byte-identical to side-live, whose reviewed_lean is pass, and its adjunction is the unique choice pinned to the section unit. No other Classical/theorem-choice use, sorry only in the proof, statement field verbatim. Live item is still split with no lean field (not superseded); no landed node owns residueTrace/cupPairing/torsion/rank, so the two existing:true new nodes do not collide. All clauses and edge cases (genus 0, rank 0, empty D/X in (H), arbitrary K) re-confirmed as in the prior review. No compile (no file changed)."
+ }
+}

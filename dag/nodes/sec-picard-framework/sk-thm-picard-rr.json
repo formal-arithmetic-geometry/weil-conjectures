@@ -36,7 +36,15 @@
   "def-pc-divisor-line-bundle",
   "def-sc-ample",
   "def-weil-affine-spectrum",
-  "lem-pc-regular-curve-divisor-calculus"
+  "lem-pc-regular-curve-divisor-calculus",
+  "def-pc-flat-cohomology-comparison",
+  "def-a1-relative-differentials-pullback-map",
+  "def-pc-degree-line-bundle",
+  "def-pc-module-torsion-generic-rank",
+  "def-pc-residue-trace-pairing",
+  "def-pc-module-pullback",
+  "sk-def-zeta",
+  "def-sc-divisor"
  ],
  "proof": [
   {
@@ -375,5 +383,32 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-7fa8e8d4d (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no fixes. The item statement is unchanged from live, and live is still 'imported', so nothing has superseded it. There is no repair note, so this is an ordinary one-level split. All 10 steps check out against the cited statements. Steps 1-3: χ(O)=1-g, the divisor induction through the new node's exact sequence (the point contributes [κ(x):k]), and the proof that the divisor degree equals the cohomological degree. Steps 4-5: coherent RR through the torsion subsheaf and a rank induction with line subbundles and determinants. Steps 6-7: Serre duality (sk-thm-picard-duality with n=1, q=0,1), deg ω=2g-2, and the no-sections argument in negative degree. Step 8: field-extension compatibility, taken from clause (4) of det-picard-rr-duality, which really states that the duality isomorphism extends by scalars. Step 9: (G) by passing to the algebraic closure, using the separation criterion (edge case g=0 checked) and very-ample descent. Step 10: (H) is exactly lem-sc-ample-complement-affine. The new node lem-pc-regular-curve-divisor-calculus is true; I checked the DVR stalks, the sign convention, the skyscraper quotient, Spec of a DVR, and O(n) on P^1. It is not a duplicate: the existing rational-section and divisor-module nodes assume an algebraically closed field or effective divisors, and lem-sc-divisor-sequence-general is the étale G_m sequence. The Stacks tags are correct and there is no SGA. Batch-5: def-pod-ring-scalar-extension is the general definition of scalar extension, and lem-trf-proper-finite-fibre-finite-near is the generic fact that a proper map with a finite fibre is finite nearby. Neither is the trace formula, Poincaré duality, or a step of their proofs, so I accepted both. The declared tool uses are generic, and a closure traversal finds no cycle. Maintainer notes: (1) det-picard-rr-duality's imported Step 0 relies in prose on the RR proved in this item, so whoever splits det must not cite sk-thm-picard-rr. Its clauses (2) and (3) can be done without it, using the cohomological degree and lem-pc-degree-base-change (2). (2) lem-pc-ample-positive-degree already states (G) for any field; step 9 re-proves it along the unit's route, which is also valid. (3) The item has a stmt_dep on a lemma node for the signed O_C(D) over an arbitrary field, and def-sc-kahler-differentials is written for an algebraically closed field. Stage 2 may need a definition node for these."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardRiemannRoch",
+  "declaration": "AlgebraicGeometry.Scheme.picard_riemannRoch",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picardRRResidueTrace",
+   "AlgebraicGeometry.Scheme.picardRRPullbackIso",
+   "AlgebraicGeometry.Scheme.picardRRBaseChange",
+   "AlgebraicGeometry.Scheme.picardRRFieldExtension",
+   "AlgebraicGeometry.Scheme.picardRRConclusions",
+   "AlgebraicGeometry.Scheme.picard_riemannRoch"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardRiemannRoch.lean",
+  "statement": "theorem picard_riemannRoch (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsSmoothProjectiveCurve (C ↘ Spec (.of k))] [GeometricallyConnected (C ↘ Spec (.of k))] : picardRRConclusions k C",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair R1–R3 and immutable head 872d46cafd32: cite the definition nodes owning torsion/generic rank, residue trace pairing, tensor pullback and its canonical section-normalized adjunction, closed-point degree and divisor constructions. picardRRPullbackIso uses tensorPullbackSectionAdjunction from def-pc-module-pullback. The coherent clause uses the recorded IsQuasiCoherentFiniteType on the Noetherian curve; pqf-def-coherent is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70c3e051",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Third head. The previous head was returned only for H4/H2 (adjunction taken from theorem node lem-pc-module-pullback-adjunction). This head makes exactly the requested correction: stmt_deps now cite def-pc-module-pullback, picardRRPullbackIso := (tensorPullbackSectionAdjunction p).leftAdjointUniq (pullbackPushforwardAdjunction p), public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction, docstring and report updated. Snapshot diff shows nothing else changed; the bundled def-pc-module-pullback record is byte-identical to side-live, whose reviewed_lean is pass, and its adjunction is the unique choice pinned to the section unit. No other Classical/theorem-choice use, sorry only in the proof, statement field verbatim. Live item is still split with no lean field (not superseded); no landed node owns residueTrace/cupPairing/torsion/rank, so the two existing:true new nodes do not collide. All clauses and edge cases (genus 0, rank 0, empty D/X in (H), arbitrary K) re-confirmed as in the prior review. No compile (no file changed)."
  }
 }

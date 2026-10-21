@@ -1,0 +1,113 @@
+{
+ "id": "def-pc-module-torsion-generic-rank",
+ "kind": "definition",
+ "title": "Torsion subsheaf, torsion quotient and generic rank",
+ "status": "split",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme], with generic point $\\eta$ and function field $K=\\mathcal O_{X,\\eta}$ [def-sc-function-field], and let $\\mathcal F$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. A section $s\\in\\mathcal F(U)$ is torsion if its restriction vanishes on some dense open subset of $U$. The torsion subsheaf $\\mathcal T(\\mathcal F)\\subseteq\\mathcal F$ consists of these sections; equivalently, on this integral scheme it is the kernel of the germ map to the generic stalk $\\mathcal F_\\eta$. Define $\\mathcal F/\\mathcal T(\\mathcal F)$ as the cokernel of its inclusion. Define the generic rank $\\operatorname{rk}(\\mathcal F)=\\dim_K\\mathcal F_\\eta\\in\\mathbf N$ when this stalk is finite dimensional, with value $0$ for infinite dimensional generic stalks.",
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+  "place": "Coherent Riemann–Roch complement: the torsion subsheaf, its quotient and generic rank"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "torsion subsheaf generic rank integral scheme module sheaf",
+   "results": "Submodule.torsion'; Submodule.torsion'_isTorsion'; Submodule.torsion_isTorsion; rank_eq_zero_iff_isTorsion; rank_eq_zero_iff; Submodule.isTorsion'_iff_torsion'_eq_top; Module.finrank_eq_zero_iff_isTorsion; Module.IsTorsion'",
+   "date": "2026-10-21",
+   "verdict": "algebraic module torsion only; reuse existing project sheaf constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "torsion subsheaf and generic rank of a module sheaf on an integral scheme",
+   "results": "Module.rankAtStalk; rank_eq_zero_iff_isTorsion; Module.rankAtStalk_self; ModuleCat.Tilde.smul_stalk_no_nonzero_divisor; Module.rankAtStalk_pos_iff_mem_support; Module.finrank_eq_zero_iff_isTorsion; rank_quotient_eq_of_le_torsion; Module.isLocallyConstant_rankAtStalk_freeLocus",
+   "date": "2026-10-21",
+   "verdict": "no sheaf torsion/generic-stalk construction in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "torsionQuotient, cupPairing, residueTrace",
+   "results": "0 hits; loogle: unknown identifier 'torsionQuotient'",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "residueTrace|cupPairing|torsionQuotient|functionFieldAlgebra",
+   "results": "Mathlib/AlgebraicGeometry/FunctionField.lean:81: stalkFunctionFieldAlgebra; no torsion subsheaf or residue trace pairing.",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "rg",
+   "query": "torsion subsheaf|generic rank; Modules.torsion|Modules.rank in dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "The theorem lem-sc-riemann-roch introduces the prose, but owns only eulerChar_free_eq/eulerChar_unit_eq. Modules.Torsion owns torsion/torsionQuotient, Modules.GenericRank owns rank; no definition-node record carries them. blueprint_refs.py search generic rank: 0; torsion subsheaf: lem-sc-riemann-roch only.",
+   "date": "2026-10-21",
+   "verdict": "existing upstream definitions, no owning definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-picard-rr",
+  "date": "2026-10-21",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-picard-rr",
+   "place": "Coherent Riemann–Roch complement: the torsion subsheaf, its quotient and generic rank",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.GenericRank",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.rank",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.rank",
+   "AlgebraicGeometry.Scheme.Modules.torsion",
+   "AlgebraicGeometry.Scheme.Modules.torsionQuotient"
+  ],
+  "statement": "def rank (M : X.Modules) : ℕ",
+  "branch": "slopmaster2",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "The primary declaration is in Modules.GenericRank, which publicly imports Modules.Torsion. The latter owns torsion (line 168) and torsionQuotient (line 196); rank is at GenericRank line 154. No declarations are copied. The rank convention for infinite dimension is Mathlib finrank; coherent modules on the proper curve have finite generic rank."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70c3e051",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70c3e051",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Third head. The previous head was returned only for H4/H2 (adjunction taken from theorem node lem-pc-module-pullback-adjunction). This head makes exactly the requested correction: stmt_deps now cite def-pc-module-pullback, picardRRPullbackIso := (tensorPullbackSectionAdjunction p).leftAdjointUniq (pullbackPushforwardAdjunction p), public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction, docstring and report updated. Snapshot diff shows nothing else changed; the bundled def-pc-module-pullback record is byte-identical to side-live, whose reviewed_lean is pass, and its adjunction is the unique choice pinned to the section unit. No other Classical/theorem-choice use, sorry only in the proof, statement field verbatim. Live item is still split with no lean field (not superseded); no landed node owns residueTrace/cupPairing/torsion/rank, so the two existing:true new nodes do not collide. All clauses and edge cases (genus 0, rank 0, empty D/X in (H), arbitrary K) re-confirmed as in the prior review. No compile (no file changed)."
+ }
+}
