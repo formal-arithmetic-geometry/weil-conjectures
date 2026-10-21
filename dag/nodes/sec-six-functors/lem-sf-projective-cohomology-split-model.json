@@ -14,9 +14,95 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Evaluation on $U$ takes epimorphisms of $C$-module sheaves to surjections. Indeed the exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful] takes such an epimorphism to an epimorphism of abelian sheaves. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] its underlying map is locally surjective; by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] it is therefore an epimorphism of sheaves of sets. Apply the hypothesis on evaluation at $U$. The small pro-etale site has sheafification in an ambient universe containing the site and coefficients, as required by the forgetful result. Kernels are sectionwise by [def-weil-sheaf-of-modules-category]. Thus evaluation preserves kernels and is surjective on every module-sheaf quotient.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; Tag 03CN, lemma-abelian-abelian (5); literature/stacks-project/sites.tex, Tag 00WN, lemma-mono-epi-sheaves."
+   }
+  },
+  {
+   "text": "The object $U\\xrightarrow{1}U$ is terminal in its small pro-etale site. For every module sheaf $F$, a map $C^{\\oplus r}\\to F$ is uniquely specified by $r$ sections $s_j\\in F(U)$: on $T\\to U$ its formula is $(c_j)_j\\mapsto\\sum_jc_j(s_j|_T)$. Semilinear restrictions in [def-weil-sheaf-of-modules-category] show these formulas commute with restriction, and linearity shows every map has this formula. Finite direct sums here are the sectionwise finite products of modules, which satisfy the sheaf condition coordinatewise. Given an epimorphism $F\\to G$ and a map $C^{\\oplus r}\\to G$, step 1 lifts each of its finitely many generator sections to $F(U)$; the displayed formula gives a lift of the map. Hence every $C^{\\oplus r}$ is a projective object. For $r=0$ both the map and the lift are unique.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, proof paragraph beginning If b > a: explicit generator-lifting argument."
+   }
+  },
+  {
+   "text": "For each $q\\in[a,b]$, put $\\mathcal Z^q=\\ker(d_Z^q)$, and let $p_q:\\mathcal Z^q\\twoheadrightarrow H^q(Z)$ be the quotient by $\\operatorname{im}(d_Z^{q-1})$, using [def-weil-derived-cohomology-sheaves]. Regard $\\theta_q$ as a map to $H^q(Z)$ via the fixed identification of $Z$ with a representative of $N$. Projectivity from step 2 gives $t_q:C^{\\oplus r_q}\\to\\mathcal Z^q$ with $p_qt_q=\\theta_q$. Define $v^q:V^q\\to Z^q$ as $t_q$ followed by the kernel inclusion and define it to be zero outside $[a,b]$. Since $d_Z^qv^q=0$ and $d_V=0$, these maps form a chain map. Its cohomology map in degree $q$ is exactly $p_qt_q=\\theta_q$; outside the interval both cohomology sheaves vanish. Thus $v$ is a quasi-isomorphism, and its image in the localization [def-weil-abstract-derived-category] is the asserted isomorphism $V\\cong N$.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, lifting rho to tilde rho: apply the lifting separately to the chosen bases in each of the finitely many degrees."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-bounded-above-projective-kprojective] in the abelian category $\\operatorname{Mod}(C)$ of [def-weil-sheaf-of-modules-category]. Every bounded-above complex of projective module sheaves is K-projective. In the Hom-complex description of K-projectivity, degree-zero cycles are chain maps and degree-zero boundaries are maps $d_Eh+hd_P$; thus acyclicity implies precisely the null-homotopy condition used by the next node. Then [lem-coef-kprojective-derived-hom-bijection] identifies its morphisms in the homotopy category with its morphisms in the unbounded derived category. By that node's definition, the homotopy category has chain maps modulo $f-g=d_Eh+hd_P$. This proves the chain-map representative assertion and its uniqueness precisely up to the homotopy in the statement. This argument does not require enough projective objects or any boundedness of the target.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B, lemma-morphisms-from-projective-complex; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:113-124 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:43-48."
+   }
+  },
+  {
+   "text": "Fix a representative $E$ of $A$ and put $S=C^{\\oplus r}[-q]$, the single-term complex in degree $q$. It is bounded above and projective by step 2, so step 4 applies. A chain map $S\\to E$ is exactly a tuple of cycles $z_j\\in\\ker(d_E^q)(U)$ by the generator formula of step 2. Two such maps are homotopic exactly when their cycle differences have the form $d_E^{q-1}(h_j)$ for sections $h_j\\in E^{q-1}(U)$: the only possibly nonzero homotopy component is $S^q\\to E^{q-1}$, and $d_S=0$. Write $\\mathcal B^q=\\operatorname{im}(d_E^{q-1})$. Step 1 applied to $E^{q-1}\\twoheadrightarrow\\mathcal B^q$ and to $\\ker(d_E^q)\\twoheadrightarrow H^q(E)$ gives\n$$H^q(E)(U)=\\ker(d_E^q)(U)/d_E^{q-1}(E^{q-1}(U)).$$\nThus the homotopy classes, and hence the derived morphisms, are naturally $H^q(A)(U)^r$. The map sends a derived arrow to its cohomology map on the global standard generators, so it is independent of the representative $E$ by [def-weil-derived-cohomology-sheaves]. For a derived arrow $\\alpha:A\\to A'$, functoriality of $H^q$ gives $H^q(\\alpha\\circ f)(e_j)=H^q(\\alpha)(H^q(f)(e_j))$; this proves naturality for all derived arrows, including those not represented by chain maps between these representatives.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B, lemma-morphisms-from-projective-complex, with the explicit cycle and boundary calculation; literature/stacks-project/proetale.tex, Tag 09C3, lifting the rho(e_s)."
+   }
+  },
+  {
+   "text": "Let $\\iota_b:C^{\\oplus r_b}[-b]\\to V$ be the inclusion in degree $b$, with all other components zero. The composite $v\\iota_b:C^{\\oplus r_b}[-b]\\to N$ induces $\\theta_b$ by step 3. Any other derived morphism inducing $\\theta_b$ has the same tuple of standard-generator cohomology sections, hence equals $v\\iota_b$ by step 5. Composing with $v^{-1}$ identifies it with $\\iota_b$. The construction also covers $a=b$, a zero top rank, all ranks zero, and the empty scheme: no nonempty set of generators is required when the relevant free object is zero.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex: identification of the top lifted cell; consequence of the preceding explicit construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, lift of rho(e_s) in the b > a paragraph; expanded generatorwise and combined with derived.tex Tag 064B, lemma-morphisms-from-projective-complex. The simultaneous prescribed-cohomology splitting and the Hom calculation are written out by Q10."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +138,45 @@
    "results": "8 hits: CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.isKProjective_of_projective, CochainComplex.homOfDegreewiseSplit, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
    "date": "2026-10-21",
    "verdict": "no match: K-projective representatives and splitting a single quasi-isomorphism are ingredients, not the prescribed-cohomology sheaf splitting and section-valued Hom calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site where global sections preserve epimorphisms of sheaves of sets, a complex with bounded finite free cohomology admits a quasi-isomorphism from its zero differential cohomology complex and shifted free sheaves represent cohomology sections",
+   "results": "8 hits: Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.quasiIsoAt₀_iff, CochainComplex.cm5b, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.IsKProjective",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give K-projective mapping tools or other partial ingredients, not the full prescribed-cohomology sheaf splitting and section-valued Hom statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Projective\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give K-projective mapping tools or other partial ingredients, not the full prescribed-cohomology sheaf splitting and section-valued Hom statement."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*homology|projective.*homology|homology.*projective|isKProjective_of_projective",
+   "results": "6 hits: Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give K-projective mapping tools or other partial ingredients, not the full prescribed-cohomology sheaf splitting and section-valued Hom statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of module sheaves with finite free projective cohomology is formal with chosen lifts of its cohomology generators",
+   "results": "8 hits: Algebra.FormallySmooth.mk, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, CategoryTheory.ShortComplex.Exact.liftFromProjective.congr_simp, SheafOfModules.isFinitePresentation, CategoryTheory.ShortComplex.Exact.liftFromProjective, SheafOfModules.ιFree, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give K-projective mapping tools or other partial ingredients, not the full prescribed-cohomology sheaf splitting and section-valued Hom statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex in an abelian category with bounded projective cohomology is quasi-isomorphic to the direct sum of its cohomology objects placed in their degrees",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.isKProjective_of_iso, CochainComplex.instIsKProjectiveObjIntShiftFunctor, CochainComplex.isKProjective_iff_of_iso",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give K-projective mapping tools or other partial ingredients, not the full prescribed-cohomology sheaf splitting and section-valued Hom statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-residue-lisse-projective-models",
@@ -75,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-projective-cohomology-split-model",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes: module epis give section surjections via exact forgetful and local-surjectivity criteria; terminal-object generator formulas give finite-free projectivity; chosen cohomology maps lift to cycles; two existing Mathlib leaves give derived representatives; the cycle/boundary quotient proves the natural Hom calculation and uniqueness of the top inclusion. Statement and inherited metadata retained.",
+  "blueprint": "lem-fix-weil-operations, proof paragraph For an admissible exceptional adjoint, sentence Evaluation is natural in the two Weil maps and their inverses, so its square commutes; the local-model ingredient through lem-fix-constructible-tensor-completion and lem-fix-residue-lisse-projective-models, latter current proof step 3 and originally steps 4-5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exactness of the generic forgetful functor from module sheaves to abelian sheaves transfers module epimorphisms to the underlying topos; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-fae7b12a3",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-fae7b12a3 (reviewer sub-agent of L); spot-checked: PASS. I read the item, its report and every cited node's statement in full; the delivery creates no new nodes. Statement and stmt_deps are byte-identical to the item as created by Q43's re-split (PASS d7de9670); all 5 inherited search records are kept and 5 new ones added. Live and side-live still hold the item unsplit, there is no repair note, and neither the item nor any cited node is in route-pivot-dropped. No SGA is cited. Step 1: the forgetful node's clause (1) gives exactness, then abelian epi = locally surjective = set-sheaf epi, then the evaluation hypothesis. The site is V-small, so sheafification exists. Step 2: id_U is terminal, so Hom(C^r,F)=F(U)^r and C^r is projective. Step 3: θ_q lifts along the epi from cycles onto H^q, and v is a quasi-iso without any boundedness of Z. Step 4: the Hom-complex form of K-projectivity in degree 0 is the null-homotopy form; Stacks 064B (derived.tex:6822) needs no enough projectives, and the Mathlib lemmas isKProjective_of_projective (KProjective.lean:111-124) and Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) were read. Step 5: C^r[-q] sits in degree q, the only homotopy component is h^q, and step 1 gives H^q(E)(U)=ker(d^q)(U)/d(E^{q-1}(U)); the description f ↦ H^q(f)(e_j) gives representative independence and naturality. Step 6: uniqueness of the top inclusion follows from step 5. Edge cases checked: r=0, a=b, all ranks 0 (acyclic N), U empty, one-point site. Tags 09C3, 064B, 03DA, 03CN and 00WN confirmed in Stacks. No duplicate: lem-wf-bounded-free-complex-projective-cohomology-splitting is over an ordinary ring, and det-pe-wc-sections-exact needs a w-contractible affine. Accepted tool use: lem-weil-pbc-module-sheaves-colimits-forgetful (generic exactness of forgetting the module structure; the unit cites no units). No fixes."
  }
 }
