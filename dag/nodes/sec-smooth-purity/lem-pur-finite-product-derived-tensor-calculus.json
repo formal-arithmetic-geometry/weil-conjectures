@@ -17,11 +17,198 @@
   "def-pc-kflat-complex",
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-open-immersion",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-completed-integral-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the additive exact equivalence $r$ and quasi-inverse $G$ of [lem-pur-clopen-ringed-module-gluing] degreewise, including on differentials and homotopies. The identities $r_iG\\cong\\operatorname{pr}_i$ and $Gr\\cong1$ give an equivalence of complex categories with $\\prod_i\\mathrm{CoCh}(R_i)$. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^m(r_iK)\\cong r_iH^m(K)$, naturally in chain maps; likewise for the exact insertion $e_i$. Hence a chain map is a quasi-isomorphism exactly when every restricted chain map is: its cohomology maps are isomorphisms exactly when their restrictions are, by the module equivalence.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 05RU, definition-unbounded-derived-category; explicit finite-component application"
+   }
+  },
+  {
+   "text": "For each $i$, localize degreewise $r_i$ and $e_i$ using [lem-weil-pbc-exact-functor-derived-factorization]. The product $\\prod_i Q_{R_i}$ is a localization at componentwise quasi-isomorphisms by [lem-sfb-product-localization]; its index set is finite and each quasi-isomorphism class contains identities. The functor $Q_R G$ on tuples of complexes inverts these arrows by step 1, so [lem-weil-pbc-localization-universal-property] gives a functor $G_D:\\prod_iD(R_i)\\to D(R)$. The degreewise unit and counit descend to natural isomorphisms $G_Dr_D\\cong1$ and $r_DG_D\\cong1$ by the natural-transformation clause of that same universal property, applied to $Q_R$ and to $\\prod_iQ_{R_i}$. Their triangle equations descend because localization is faithful on natural transformations. This proves the derived equivalence on objects and morphisms, without identifying localization morphisms with chain maps.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RU and 015F; agent application of the localization universal property and finite-product localization"
+   }
+  },
+  {
+   "text": "The exact-functor factorization makes every $r_i$ triangulated. The inverse respects shifts and cone triangles as well: apply the additive $G$ to the degreewise cone matrices, whose entries are differentials, the given map, zero and minus the differential. This gives precisely the cone of the glued map; componentwise cone presentations of a distinguished triangle give such a presentation after gluing. The natural module identities $r_ie_i\\cong1$, $r_ie_j=0$ for $i\\ne j$, and $\\bigoplus_i e_ir_i\\cong1$ descend through localization, as in step 2. Thus $G_D((K_i))\\cong\\bigoplus_i e_iK_i$. Here finite sums may be computed by finite sums of representatives, since kernels and images of a finite direct sum of differentials are the finite direct sums of its kernels and images, and the cone matrices have those same finite sums. Step 1's cohomology comparison also descends. If all components of an object vanish, the inverse equivalence gives the zero object. If every component of a morphism is invertible, apply $G_D$ to the tuple of inverses and conjugate by $G_Dr_D\\cong1$ to obtain its inverse. This proves both detection assertions.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; Tag 015F; shift and cone formulas"
+   }
+  },
+  {
+   "text": "Put $T=G((r_iF\\otimes_{R_i}r_iH)_i)$. On sections over $U$, send $(f,h)$ to the tuple $(f|_{U\\times_X X_i}\\otimes h|_{U\\times_X X_i})_i$. This is an $R$-bilinear sheaf map. By [lem-pc-sites-sheaf-tensor-bilinear-universal] it induces $a:F\\otimes_RH\\to T$. Restricting the universal bilinear map $F\\times H\\to F\\otimes_RH$ gives bilinear maps on every component and hence maps $b_i:r_iF\\otimes_{R_i}r_iH\\to r_i(F\\otimes_RH)$. Glue the $b_i$ and use $Gr\\cong1$ to get $b:T\\to F\\otimes_RH$. The composite $ba$ is the identity because its composite with the universal bilinear map is unchanged. Each component of $ab$ is the identity because it fixes every pure tensor, so $ab=1$ by the module equivalence. This constructs the desired comparison, natural in $F,H$, with its stated pure-tensor formula. The equality $r_iR=R_i$ is the definition of $R_i$. The associator, interchange and unit diagrams agree respectively on $f\\otimes h\\otimes k$, $f\\otimes h$, and $a\\otimes f$; their values are the same rebracketed tensor, exchanged tensor and product $af$. Bilinear uniqueness proves the diagrams.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor, and following bilinear universal property in Section 03EK; explicit gluing argument"
+   }
+  },
+  {
+   "text": "The module equivalence gives $r_i\\dashv e_i$: both $\\operatorname{Hom}(r_iF,M)$ and $\\operatorname{Hom}(F,e_iM)$ are the $i$th component Hom set, all other target components being zero. Therefore [lem-weil-pbc-left-adjoint-preserves-colimits] implies that $r_i$ preserves the countable direct sums indexed by $p+q=n$. Apply step 4 on every summand of the total tensor [def-pc-tensor-complex-sheaves]. This gives $r_i\\operatorname{Tot}(P\\otimes_RQ)\\cong\\operatorname{Tot}(r_iP\\otimes_{R_i}r_iQ)$. It commutes with the differential: on the $(p,q)$ summand both composites send $x\\otimes y$ to $r_i(dx)\\otimes r_iy+(-1)^p r_ix\\otimes r_i(dy)$. Naturality on chain maps follows from the same summand formula. All sums used are small in the fixed module universe.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, tensor complexes; signed direct-sum totalization; explicit component calculation"
+   }
+  },
+  {
+   "text": "Flatness is exactness of the tensor functor [def-pc-flat-sheaf-modules]. If every $r_iF$ is flat, restrict any short exact sequence, tensor each restricted sequence, use step 4, and detect exactness by [lem-pur-clopen-ringed-module-gluing]; this proves that $F$ is flat. Conversely, for a short exact sequence on $X_i$, insert it by the exact $e_i$, tensor by flat $F$, and restrict by exact $r_i$. Step 4 and $r_ie_i\\cong1$ identify the result with tensoring the original sequence by $r_iF$. Thus $r_iF$ is flat. No exactness of a section functor or stalk criterion is used.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Flatness by exact sheaf tensor, and Section 03EK; elementary application to component exact sequences"
+   }
+  },
+  {
+   "text": "Use the acyclic-test definition [def-pc-kflat-complex]. If all $r_iP$ are K-flat and $A$ is acyclic, step 1 makes all $r_iA$ acyclic. Step 5 identifies the restrictions of $\\operatorname{Tot}(A\\otimes_RP)$ with acyclic complexes $\\operatorname{Tot}(r_iA\\otimes_{R_i}r_iP)$; step 1 detects acyclicity, proving $P$ K-flat. Conversely, let $P$ be K-flat and let $B$ be an arbitrary acyclic $R_i$-complex. The exact $e_i$ makes $e_iB$ acyclic. Restrict the acyclic $\\operatorname{Tot}(e_iB\\otimes_RP)$ and use step 5 and $r_ie_i\\cong1$ to obtain acyclicity of $\\operatorname{Tot}(B\\otimes_{R_i}r_iP)$. This is K-flatness of $r_iP$, without a boundedness or flat-term hypothesis.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, definition-K-flat; direct use of the acyclic-test definition"
+   }
+  },
+  {
+   "text": "Choose K-flat resolutions $P\\to K$ and $Q\\to L$ with flat terms using [lem-pc-kflat-resolution]. By steps 1, 6 and 7 their restrictions are K-flat resolutions with flat terms. The K-flat model comparisons of [lem-weil-pbc-site-derived-tensor-descent] identify the isomorphism of step 5 with $r_i(K\\otimes_R^{\\mathbf L}L)\\cong r_iK\\otimes_{R_i}^{\\mathbf L}r_iL$. To obtain a comparison of functors, first use step 5 as a natural transformation on the homotopy category of K-flat flat-term complexes in both variables. That category localized at its quasi-isomorphisms is equivalent to $D(R)$, and its component counterpart is equivalent to $D(R_i)$, by the same descent node. Its natural-transformation clause extends the comparison and its inverse uniquely to the derived categories. Consequently the displayed isomorphism is natural for every derived morphism and independent of resolutions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, lemma-K-flat-resolution; 0G7D, lemma-factor-through-K-flat; 06YU, definition-derived-tor; normalized comparison on resolutions"
+   }
+  },
+  {
+   "text": "The symmetric monoidal structures on these derived categories have unit $R[0]$ and $R_i[0]$, and their constraints are induced from total tensors of K-flat representatives, with braiding $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$, by [lem-sf-ringed-derived-closed-symmetric-monoidal]. Its small-site hypothesis holds in the fixed universes. On such representatives, step 4 preserves ordinary associators and multiplication, and step 5 preserves the degree $(p,q)$ summands and their signs. Thus the derived associativity and both unit compatibility diagrams agree on all pure triple tensors and ring-times-section generators; the symmetry diagram agrees because $r_i((-1)^{pq}y\\otimes x)=(-1)^{pq}r_iy\\otimes r_ix$. The constraints in the cited node are precisely induced by these formulas. By the equivalence of localized K-flat models in [lem-weil-pbc-site-derived-tensor-descent], every tuple of derived objects has such representatives, and naturality identifies these equalities with the diagrams for arbitrary derived objects. This proves the symmetric monoidal assertion for the prescribed comparisons, rather than choosing a transported monoidal structure.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ and 0FPT, tensor constraints and derived tensor; Koszul sign and unit formulas"
+   }
+  },
+  {
+   "text": "For $R\\to S$, apply the same gluing to $S$-modules and write $S_i=r_iS$. On a K-flat flat-term $R$-complex $P$, step 4 gives an $S_i$-linear chain isomorphism $r_i(P\\otimes_RS)\\cong r_iP\\otimes_{R_i}S_i$, sending $p\\otimes s$ to $r_ip\\otimes r_is$. By [lem-pur-derived-change-of-rings], these complexes compute derived extension of scalars, since $P$ and $r_iP$ are K-flat. This chain comparison is natural on K-flat models and sends inverted arrows to isomorphisms by clause (1) of that node. Descend it and its inverse along the equivalence of K-flat flat-term models with $D(R)$ in [lem-weil-pbc-site-derived-tensor-descent], using the natural-transformation clause of [lem-weil-pbc-localization-universal-property]. It follows that the scalar comparison is $S_i$-linear, natural for arbitrary derived morphisms and independent of every resolution choice; it is not just the underlying $R_i$-module comparison.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT, lemma-derived-tor-quasi-isomorphism-other-side, and 06YY, lemma-derived-base-change, for the identity site and a coefficient ring map"
+   }
+  },
+  {
+   "text": "For composable maps $R\\to S\\xrightarrow{\\psi}T$, choose a K-flat flat-term $R$-resolution $P$. The cancellation isomorphism of [lem-sfb-scalar-tensor-cancellation-independent] identifies, after exact scalar restriction, $\\operatorname{Tot}(A\\otimes_S(P\\otimes_RS))$ with $\\operatorname{Tot}(\\operatorname{Res}A\\otimes_RP)$ for every acyclic $S$-complex $A$. Exact scalar restriction and its detection of zero cohomology follow directly from unchanged underlying sheaves and differentials; the same cancellation degreewise shows that $P^n\\otimes_RS$ is flat over $S$ because $P^n$ is flat over $R$. Thus $P\\otimes_RS$ is K-flat with flat terms; by steps 1, 6, 7 and 10, $r_iP$ is a K-flat flat-term resolution of $r_iK$ over $R_i$ and $r_i(P\\otimes_RS)\\cong r_iP\\otimes_{R_i}S_i$ is K-flat with flat terms over $S_i$. By [lem-pur-derived-change-of-rings] the composite derived extension is computed by $(P\\otimes_RS)\\otimes_ST$. The canonical comparison for the composite is the natural isomorphism $(-\\otimes^{\\mathbf L}_RS)\\otimes^{\\mathbf L}_ST\\cong-\\otimes^{\\mathbf L}_RT$ of [lem-sfb-successive-derived-quotient-normalization], whose small-site hypothesis holds in the fixed universes. By that statement it is represented on the K-flat flat-term representative $P$ by $(p\\otimes s)\\otimes t\\mapsto p\\otimes\\psi(s)t$. On $X_i$, for $R_i\\to S_i\\xrightarrow{\\psi_i}T_i$ and $r_iP$, it is represented by the same formula with $\\psi_i$. Compose step 10 for $R\\to S$ on $P$, for $\\psi$ on $P\\otimes_RS$, and for $R\\to T$ on $P$. Both paths of the composition square then send $(p\\otimes s)\\otimes t$ to $r_ip\\otimes\\psi_i(r_is)r_it$, so the square commutes on representatives. Descent from K-flat models as in step 10 makes it commute on derived objects and morphisms. For the identity coefficient map the comparison of step 10 is $r_ip\\otimes a\\mapsto a\\,r_ip$ under $r_iP\\otimes_{R_i}R_i\\cong r_iP$, so identity comparisons are preserved.",
+   "uses": [
+    "lem-sfb-scalar-tensor-cancellation-independent",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V4, lemma-flat-change-of-rings, tensor cancellation; sites-cohomology.tex Tag 0D6D, lemma-derived-pullback-composition; explicit scalar compositor calculation"
+   }
+  },
+  {
+   "text": "For finite quotient coefficient maps and maps from the completed integral coefficient ring [def-weil-completed-integral-coefficients], step 10 applies without requiring flatness of the quotient; the coefficient identifications and transition maps are those supplied by [lem-pur-clopen-ringed-module-gluing], and step 11 proves their compatibility under composition. Finally, an empty component has the zero module category by the gluing node, hence only zero complexes and a derived category equivalent to the category with one object and one arrow. If $I$ is empty, its images cover only $X=\\varnothing$, so both sides are these zero categories; all maps and diagrams above are then unique, flatness and K-flatness hold for their sole object, and the tensor unit is zero. This also handles zero coefficient sheaves on any component.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU; specialization to zero module categories; coefficient maps from the gluing statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-product-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-scalar-tensor-cancellation-independent",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent finite-clopen application of Tags 06YS, 06YT, 0G7D, 06YU and 0D6D, with derived.tex Tags 015F/05RU and sites-modules.tex Tags 0GMW/05V4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +244,80 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for any $ R $-linear maps $ l_{12}: N_1 \\\\to N_2 $ and $ l_{23}: N_2 \\\\to N_3 $ between $ R $-modules, the sequence $ N_1 \\\\\"}",
    "date": "2026-10-21",
    "verdict": "No match: mapDerivedCategory and finite products of localizations supply only subarguments; none includes the geometric ringed-site K-flat tensor and coefficient-change comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite clopen decomposition of a ringed site gives an exact equivalence of module categories and a symmetric monoidal equivalence of unbounded derived categories via componentwise K-flat tensor products",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CochainComplex.IsKProjective.Qh_map_bijective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (L : HomotopyCategory C (ComplexShape.up ℤ))\\n  [K.IsKProjective], Function.Bijective DerivedCategory.Qh.map\", \"doc\": \"For any K-projective cochain complex $K$ in an abelian category $\\\\mathcal{C}$ and any object $L$ in the homotopy category of integer-indexed complexes, the induced map $\\\\text{Qh.map}$ from homotopy cl\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|finiteProduct|finite_product).*(derived|tensor)|mapDerivedCategory",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"16\", \"text\": \"`F.mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"36\", \"text\": \"noncomputable def mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂ :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"39\", \"text\": \"/-- The functor `F.mapDerivedCategory` is induced\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"42\", \"text\": \"    DerivedCategory.Q ⋙ F.mapDerivedCategory ≅\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"61\", \"text\": \"    dsimp% F.mapDerivedCategory.map (triangleOfSESδ hS) =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"65\", \"text\": \"          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"67\", \"text\": \"  rw [← cancel_epi (F.mapDerivedCategory.map\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Limits.lean\", \"line\": \"100\", \"text\": \"instance : PreservesFiniteProducts (tensorProd R S) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Limits.lean\", \"line\": \"199\", \"text\": \"  preservesFiniteLimits_of_preservesEqualizers_and_finiteProducts (tensorProd R S)\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category equivalence from exact additive equivalence of abelian categories preserves tensor products componentwise",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct_tensorHom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) {X₁ Y₁ X₂ Y₂ : D} (f : X₁ ⟶ Y₁) (g : X₂ ⟶ Y₂),\\n  CategoryTheory.MonoidalCategoryStruct.tensorHom f g =\\n    e.functor.map \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, for any morphisms $f: X_1 \\\\to Y_1$ and $g: X_2 \\\\to Y_2$ in $\\\\mathcal{D}$, the tensor p\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) (X Y : D),\\n  CategoryTheory.MonoidalCategoryStruct.tensorObj X Y =\\n    e.functor.obj (CategoryTheory.MonoidalCategoryStru\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, for any objects $X, Y \\\\in \\\\mathcal{D}$, the tensor product $X \\\\otimes Y$ in $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Equivalence.IsTriangulated.symm\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[E.IsTriangulated] : E.symm.IsTriangulated\", \"doc\": \"An equivalence between pretriangulated categories where the forward and inverse functors commute with integer-parameterized shift operations and preserve the triangulated structures of the categories.\"}\n  {\"name\": \"CategoryTheory.FreeMonoidalCategory.HomEquiv.below.tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Free.Basic\", \"type\": \"∀ {C : Type u}\\n  {motive :\\n    {X Y : CategoryTheory.FreeMonoidalCategory C} →\\n      (a a_1 : X.Hom Y) → CategoryTheory.FreeMonoidalCategory.HomEquiv a a_1 → Prop}\\n  {W X Y Z : CategoryTheory.FreeMonoidalCategory C} {f f' : W.Hom X} {g g' : Y.Hom Z}\\n  (a : CategoryTheory.FreeMonoidalCategory.HomEqui\", \"doc\": \"If $ f \\\\equiv f' $ and $ g \\\\equiv g' $, then $ f \\\\otimes g \\\\equiv f' \\\\otimes g' $.\"}\n  {\"name\": \"Algebra.TensorProduct.congr\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \"(f : A ≃ₐ[S] C) (g : B ≃ₐ[R] D) : A ⊗[R] B ≃ₐ[S] C ⊗[R] D\", \"doc\": \"Given $ S $-algebra equivalences $ f : A ≃ₐ[S] C $ and $ R $-algebra equivalences $ g : B ≃ₐ[R] D $, this constructs an $ S $-algebra equivalence between the tensor products $ A ⊗_R B $ and $ C ⊗_R D \"}\n  {\"name\": \"CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Free.Basic\", \"type\": \"∀ {C : Type u} {W X Y Z : CategoryTheory.FreeMonoidalCategory C} {f f' : W.Hom X} {g g' : Y.Hom Z},\\n  CategoryTheory.FreeMonoidalCategory.HomEquiv f f' →\\n    CategoryTheory.FreeMonoidalCategory.HomEquiv g g' →\\n      CategoryTheory.FreeMonoidalCategory.HomEquiv (f.tensor g) (f'.tensor g')\", \"doc\": \"If $ f \\\\equiv f' $ and $ g \\\\equiv g' $, then $ f \\\\otimes g \\\\equiv f' \\\\otimes g' $.\"}\n  {\"name\": \"CategoryTheory.abelianOfEquivalence\", \"module\": \"Mathlib.CategoryTheory.Abelian.Transfer\", \"type\": \"{C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasFiniteProducts C] {D : Type u₂} [Category.{v₂} D] [Abelian D]\\n  (F : C ⥤ D) [F.IsEquivalence] : Abelian C\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$ with finite products and an abelian category $\\\\mathcal{D}$, if there exists an equivalence $F : \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, then $\\\\mathcal{C}$ inherits \"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes and flat module sheaves on disjoint open closed components are detected by restriction and derived coefficient extension commutes with restriction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"CategoryTheory.compatiblePreservingOfFlat\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverPreserving\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} D]\\n  (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat G],\\n  CategoryTheory.CompatiblePreserving K G\", \"doc\": \"If a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then it preserves compatibility with any Grothendieck topology $ K $ on $ \\\\mathcal{D} $.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"CategoryTheory.lan_flat_of_flat\", \"module\": \"Mathlib/CategoryTheory/Functor/Flat\", \"type\": \"∀ {C D : Type u₁} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D] (E : Type u₂)\\n  [inst_2 : CategoryTheory.Category.{u₁, u₂} E] [inst_3 : CategoryTheory.HasForget E]\\n  [CategoryTheory.Limits.HasLimits E] [inst_5 : CategoryTheory.Limits.HasColimits E]\\n  [CategoryTheo\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then the left Kan extension of its opposite functor $ F^{\\\\text{op}} $ along the projection from the comma category $ \\\\mathcal{D}\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  (∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M}, x f = 0 → ∃ k a y, x = y ∘ₗ a ∧ a f = 0) → Module.Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite clopen decomposition of a ringed site gives an exact equivalence of module categories and a symmetric monoidal equivalence of unbounded derived categories via componentwise K-flat tensor products",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CochainComplex.IsKProjective.Qh_map_bijective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (L : HomotopyCategory C (ComplexShape.up ℤ))\\n  [K.IsKProjective], Function.Bijective DerivedCategory.Qh.map\", \"doc\": \"For any K-projective cochain complex $K$ in an abelian category $\\\\mathcal{C}$ and any object $L$ in the homotopy category of integer-indexed complexes, the induced map $\\\\text{Qh.map}$ from homotopy cl\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|finiteProduct|finite_product).*(derived|tensor)|mapDerivedCategory",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"16\", \"text\": \"`F.mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"36\", \"text\": \"noncomputable def mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂ :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"39\", \"text\": \"/-- The functor `F.mapDerivedCategory` is induced\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"42\", \"text\": \"    DerivedCategory.Q ⋙ F.mapDerivedCategory ≅\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"61\", \"text\": \"    dsimp% F.mapDerivedCategory.map (triangleOfSESδ hS) =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"65\", \"text\": \"          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"67\", \"text\": \"  rw [← cancel_epi (F.mapDerivedCategory.map\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Limits.lean\", \"line\": \"100\", \"text\": \"instance : PreservesFiniteProducts (tensorProd R S) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Limits.lean\", \"line\": \"199\", \"text\": \"  preservesFiniteLimits_of_preservesEqualizers_and_finiteProducts (tensorProd R S)\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category equivalence from exact additive equivalence of abelian categories preserves tensor products componentwise",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct_tensorHom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) {X₁ Y₁ X₂ Y₂ : D} (f : X₁ ⟶ Y₁) (g : X₂ ⟶ Y₂),\\n  CategoryTheory.MonoidalCategoryStruct.tensorHom f g =\\n    e.functor.map \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, for any morphisms $f: X_1 \\\\to Y_1$ and $g: X_2 \\\\to Y_2$ in $\\\\mathcal{D}$, the tensor p\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) (X Y : D),\\n  CategoryTheory.MonoidalCategoryStruct.tensorObj X Y =\\n    e.functor.obj (CategoryTheory.MonoidalCategoryStru\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, for any objects $X, Y \\\\in \\\\mathcal{D}$, the tensor product $X \\\\otimes Y$ in $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Equivalence.IsTriangulated.symm\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[E.IsTriangulated] : E.symm.IsTriangulated\", \"doc\": \"An equivalence between pretriangulated categories where the forward and inverse functors commute with integer-parameterized shift operations and preserve the triangulated structures of the categories.\"}\n  {\"name\": \"CategoryTheory.FreeMonoidalCategory.HomEquiv.below.tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Free.Basic\", \"type\": \"∀ {C : Type u}\\n  {motive :\\n    {X Y : CategoryTheory.FreeMonoidalCategory C} →\\n      (a a_1 : X.Hom Y) → CategoryTheory.FreeMonoidalCategory.HomEquiv a a_1 → Prop}\\n  {W X Y Z : CategoryTheory.FreeMonoidalCategory C} {f f' : W.Hom X} {g g' : Y.Hom Z}\\n  (a : CategoryTheory.FreeMonoidalCategory.HomEqui\", \"doc\": \"If $ f \\\\equiv f' $ and $ g \\\\equiv g' $, then $ f \\\\otimes g \\\\equiv f' \\\\otimes g' $.\"}\n  {\"name\": \"Algebra.TensorProduct.congr\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \"(f : A ≃ₐ[S] C) (g : B ≃ₐ[R] D) : A ⊗[R] B ≃ₐ[S] C ⊗[R] D\", \"doc\": \"Given $ S $-algebra equivalences $ f : A ≃ₐ[S] C $ and $ R $-algebra equivalences $ g : B ≃ₐ[R] D $, this constructs an $ S $-algebra equivalence between the tensor products $ A ⊗_R B $ and $ C ⊗_R D \"}\n  {\"name\": \"CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Free.Basic\", \"type\": \"∀ {C : Type u} {W X Y Z : CategoryTheory.FreeMonoidalCategory C} {f f' : W.Hom X} {g g' : Y.Hom Z},\\n  CategoryTheory.FreeMonoidalCategory.HomEquiv f f' →\\n    CategoryTheory.FreeMonoidalCategory.HomEquiv g g' →\\n      CategoryTheory.FreeMonoidalCategory.HomEquiv (f.tensor g) (f'.tensor g')\", \"doc\": \"If $ f \\\\equiv f' $ and $ g \\\\equiv g' $, then $ f \\\\otimes g \\\\equiv f' \\\\otimes g' $.\"}\n  {\"name\": \"CategoryTheory.abelianOfEquivalence\", \"module\": \"Mathlib.CategoryTheory.Abelian.Transfer\", \"type\": \"{C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasFiniteProducts C] {D : Type u₂} [Category.{v₂} D] [Abelian D]\\n  (F : C ⥤ D) [F.IsEquivalence] : Abelian C\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$ with finite products and an abelian category $\\\\mathcal{D}$, if there exists an equivalence $F : \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, then $\\\\mathcal{C}$ inherits \"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes and flat module sheaves on disjoint open closed components are detected by restriction and derived coefficient extension commutes with restriction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"CategoryTheory.compatiblePreservingOfFlat\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverPreserving\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} D]\\n  (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat G],\\n  CategoryTheory.CompatiblePreserving K G\", \"doc\": \"If a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then it preserves compatibility with any Grothendieck topology $ K $ on $ \\\\mathcal{D} $.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"CategoryTheory.lan_flat_of_flat\", \"module\": \"Mathlib/CategoryTheory/Functor/Flat\", \"type\": \"∀ {C D : Type u₁} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D] (E : Type u₂)\\n  [inst_2 : CategoryTheory.Category.{u₁, u₂} E] [inst_3 : CategoryTheory.HasForget E]\\n  [CategoryTheory.Limits.HasLimits E] [inst_5 : CategoryTheory.Limits.HasColimits E]\\n  [CategoryTheo\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then the left Kan extension of its opposite functor $ F^{\\\\text{op}} $ along the projection from the comma category $ \\\\mathcal{D}\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  (∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M}, x f = 0 → ∃ k a y, x = y ∘ₗ a ∧ a f = 0) → Module.Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide exact-functor localization, transported tensors, or ordinary flatness; none states this ringed-site clopen equivalence with K-flat tensor and arbitrary coefficient-change coherence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-clopen-derived-decomposition",
@@ -79,5 +336,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-product-derived-tensor-calculus",
+  "worker": "stage1",
+  "summary": "Proved the full unbounded finite-clopen calculus by localizing the exact module gluing equivalence, constructing the restriction tensorator with the bilinear universal property, testing flatness and K-flatness by zero insertion, and descending the signed tensor and coefficient comparisons. Reused existing general nodes; no new nodes. Checked empty partitions, zero rings, arbitrary unbounded complexes and nonflat coefficient quotient maps. Statement retained.",
+  "blueprint": "Realizes the final invertibility assertion of def-pur-section-invariant through its finite-clopen derived-decomposition auxiliary: the unbounded localization, bilinear tensor and K-flat scalar calculus identified as old steps 4-6. The main-20261015 ancestor is in sec-six-functors-basics/sk-def-purity-conv; its Picard assertion is supported without any change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact-functor cohomology comparison; the purity unit supplies no general exact-functor calculus."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact degreewise functors induce triangulated derived functors; used for restriction and insertion, without replacing a geometric purity step."
+   },
+   {
+    "node": "lem-sfb-product-localization",
+    "why": "Finite products of localizations used to localize the already fixed clopen equivalence, rather than assert a derived-product lemma anew."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Lifts natural transformations and equations through localization; a generic categorical tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Universal property of actual sheaf tensor, used to construct and verify the ordinary restriction tensorator."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Restriction preserves the small direct sums in total complexes, via its component-insertion right adjoint."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of K-flat flat-term models on each small ringed site, not a purity theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Localization of actual site K-flat models and extension of tensor natural transformations to derived morphisms."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Identifies the fixed derived constraints with their signed total-complex formulas; no geometric purity argument is replaced."
+   },
+   {
+    "node": "lem-sfb-scalar-tensor-cancellation-independent",
+    "why": "Balanced sheaf-tensor cancellation proves the K-flat/flat-term preservation needed for composing arbitrary coefficient changes."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Canonical comparison (C⊗^L S)⊗^L T≅C⊗^L T for composable ring-sheaf maps with its K-flat representative formula; the item's composite-compatibility clause refers to exactly this comparison, which no node of the purity unit states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-product-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-scalar-tensor-cancellation-independent",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-53719b0d5",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-53719b0d5 (reviewer sub-agent of L); spot-checked: I read the item in full: all 12 steps, the statement of every cited node, the parent, the unit route and the Stacks tag map. There are no new nodes and the statement is unchanged. The item is unsplit on live and side-live, is not on the dropped list, and has no re-split note of its own (the 2026-10-21 note concerns only its parent lem-pur-finite-clopen-derived-decomposition). Steps 1-10 and 12 are correct. Step 1 detects quasi-isomorphisms through the exact module equivalence. Step 2 localizes via lem-sfb-product-localization, which allows an empty finite J, with unit and counit lifted by localization clauses (2) and (3). Step 3 handles the cone matrices and detection. Step 4 builds the restriction tensorator from the bilinear universal property; ba=1 and ab=1 were checked using V x_X X_i = V. Step 5 shows r_i is left adjoint to e_i and checks the Koszul differential. Steps 6 and 7 test flatness and K-flatness by restriction and zero insertion. Step 8 descends along K-flat flat-term models by the bifunctor clause of the descent node. Step 9: the K-flat derived tensors of the sf-ringed monoidal node and the descent node agree on P_R x P_R. Step 10: derived change of rings holds for arbitrary R->S. Step 12 covers the coefficient identifications and the empty and zero cases. Edge cases tested: I empty, empty components, the singleton partition, a zero ring, and the non-flat quotient chain Z->Z/4->Z/2. Tags checked: 06YN and 0D6D (the report's corrections are right), 06YS, 0G7D, 06YU, 0GMW, 015F, 05RU, 05V4. No SGA source. All ten declared tool_uses are generic and accepted. I checked closures: no cycle. FIX (C5/B3, one fault): step 11, marked elementary, rebuilt by hand the 'canonical comparison for composites of coefficient ring maps' as (p@s)@t -> p@psi(s)t. The existing reviewed node lem-sfb-successive-derived-quotient-normalization (Q02 PASS 2026-10-17) states exactly this natural isomorphism with that representative formula. The corrected item cites it in step 11 (now non-elementary), adds it to proof_deps and declares it in split_report.tool_uses; the node has no cycle back to the item. The cancellation-based K-flatness argument is kept. The statement is untouched. Advisory: the proof is about 10.9k characters in one node, so the maintainer may want to re-split it later.; 1 file(s) fixed by the reviewer"
  }
 }
