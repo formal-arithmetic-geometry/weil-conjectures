@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-roots-coefficient-proximity",
+ "kind": "statement",
+ "title": "A quantitative nearby root from coefficient proximity",
+ "statement": "Let $L/K$ be a field extension [def-pc-field-extension] of normed fields, with the norm of $L$ extending the norm of $K$. A normed field here means a field with a real-valued norm satisfying $\\|z\\|\\geq0$, $\\|z\\|=0\\Leftrightarrow z=0$, $\\|1\\|=1$, $\\|zw\\|=\\|z\\|\\|w\\|$ and $\\|z+w\\|\\leq\\|z\\|+\\|w\\|$, with distance $d(z,w)=\\|z-w\\|$. Let $f,g\\in K[T]$ [def-weil-polynomial-ring] be monic of the same degree $n\\geq1$. Let $x\\in L$ satisfy $f(x)=0$, with evaluation as in [def-weil-polynomial-root]. Assume $g$ splits in $L[T]$, meaning it is a product of $n$ linear factors there. If $\\varepsilon>0$ and $\\|g_i-f_i\\|<\\varepsilon$ for every $i\\geq0$, then there is $b\\in L$ with $g(b)=0$ and\n$$\\|x-b\\|<\\big((n+1)\\varepsilon\\big)^{1/n}\\max\\{\\|x\\|,1\\}.$$",
+ "source": {
+  "document": "Mathlib/Analysis/Normed/Field/Approximation.lean",
+  "place": "Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt, lines 111–124."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-root"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of roots monic polynomials close coefficients root in a normed field extension bound distance epsilon degree",
+   "results": {
+    "t": "2026-10-21T19:46:17Z",
+    "tool": "leanfinder",
+    "query": "Continuity of roots monic polynomials close coefficients root in a normed field extension bound distance epsilon degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.cauchyBound",
+     "Polynomial.coeff_bdd_of_roots_le",
+     "norm_root_le_spectralValue",
+     "Polynomial.coeff_le_of_roots_le",
+     "Polynomial.IsRoot.norm_lt_cauchyBound",
+     "NormedAlgebra.Real.exists_isMonicOfDegree_two_and_aeval_eq_zero",
+     "hensels_lemma",
+     "Polynomial.one_le_prod_max_one_norm_roots"
+    ],
+    "digest": "138d00392b2284d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "match: specializes in one line, lines 114–119, with the stated monicity, degree, coefficient bound and splitting."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+   "results": {
+    "t": "2026-10-21T19:46:16Z",
+    "tool": "loogle",
+    "query": "Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt"
+    ],
+    "digest": "04ab18b98b0be316"
+   },
+   "date": "2026-10-22",
+   "verdict": "match: specializes in one line, lines 114–119, with the stated monicity, degree, coefficient bound and splitting."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+   "results": {
+    "t": "2026-10-21T19:46:15Z",
+    "tool": "grep",
+    "query": "theorem exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+    "sub": "Analysis/Normed/Field",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Approximation.lean"
+    ],
+    "digest": "2648b2e8ad197997"
+   },
+   "date": "2026-10-22",
+   "verdict": "match: specializes in one line, lines 114–119, with the stated monicity, degree, coefficient bound and splitting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If monic polynomials of equal degree have close coefficients each root has a nearby root when the second polynomial splits",
+   "results": {
+    "t": "2026-10-21T19:46:16Z",
+    "tool": "leansearch",
+    "query": "If monic polynomials of equal degree have close coefficients each root has a nearby root when the second polynomial splits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.rootOfSplits.congr_simp",
+     "Polynomial.rootOfSplits'",
+     "Polynomial.Splits.comp_of_natDegree_le_one_of_monic",
+     "Polynomial.resultant_eq_prod_roots_sub",
+     "Polynomial.aeval_root_derivative_of_splits",
+     "Polynomial.eval_rootOfSplits",
+     "Polynomial.splits_of_natDegree_le_one_of_monic",
+     "Polynomial.eval_eq_prod_roots_sub_of_monic_of_splits_id"
+    ],
+    "digest": "30b7f07b76eb5d07"
+   },
+   "date": "2026-10-22",
+   "verdict": "match: specializes in one line, lines 114–119, with the stated monicity, degree, coefficient bound and splitting."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+  "file": "Mathlib/Analysis/Normed/Field/Approximation.lean",
+  "line": 114,
+  "how": "specializes in one line: lines 114–119 with f.natDegree = n, ha = f(x)=0 and the stated monicity, same degree, coefficient bound and splitting. The extending multiplicative norm gives NormedAlgebra K L. Membership in g.aroots L yields g(b)=0 by Polynomial.mem_aroots (Mathlib/Algebra/Polynomial/Roots.lean:482–484), with the nonzero condition supplied by monicity. No completeness or separability is assumed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-padic-rational-algebraic-generator",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md: arithmetic coefficient-topology input beneath the continuous algebraic-closure comparison. A quantitative nearby root from coefficient proximity.",
+   "via": [
+    "lem-sfb-padic-rational-algebraic-generator",
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

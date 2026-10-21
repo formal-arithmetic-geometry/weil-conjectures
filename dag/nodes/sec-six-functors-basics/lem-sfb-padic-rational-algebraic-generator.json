@@ -12,9 +12,106 @@
   "def-weil-algebraic-closure",
   "def-weil-algebraic-element"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\mathbf Q_\\ell$. By [def-weil-l-adic-numbers], $k$ is complete, nonarchimedean and characteristic zero; its norm is nontrivial because $|\\ell|_\\ell=\\ell^{-1}\\ne1$. The same definition makes $k$ the completion of $\\mathbf Q$, so $\\mathbf Q$ is dense in $k$: a Cauchy sequence representing any $a\\in k$ has rational terms arbitrarily close to $a$. The given $\\Omega/k$ is algebraic by [def-weil-algebraic-closure]. Apply [lem-trf-spectral-norm-algebraic-extension] with $F=k$, $L=\\Omega$ to equip this field with a multiplicative nonarchimedean norm extending that of $k$.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-algebraic-closure",
+    "lem-trf-spectral-norm-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\Omega$. It is algebraic over $k$ by [def-weil-algebraic-closure]. Take its monic irreducible minimal polynomial $f\\in k[T]$ with $f(x)=0$, as in [def-weil-pbc-separable-algebraic-extension]. Its degree $n$ is positive, since a monic constant would be $1$ and could not vanish. Since $k$ has characteristic zero, the leading coefficient of $f'$ is $n\\ne0$, so $f'\\ne0$. Hence [lem-trf-irreducible-separable-derivative] gives that $f$ is separable. By [lem-pc-separable-polynomial-distinct-roots-alg-closed], $f$ has exactly $n$ distinct roots in $\\Omega$ and splits there.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-trf-irreducible-separable-derivative",
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  },
+  {
+   "text": "Let $S$ be the roots of $f$ in $\\Omega$ other than $x$. It is finite by step 2. If $S=\\varnothing$, set $\\delta=1$; otherwise let $\\delta$ be the minimum of the finite nonempty set $\\{\\|x-y\\|:y\\in S\\}$. Each value is positive, so $\\delta>0$, and $\\delta\\leq\\|x-y\\|$ for every $y\\in S$. This includes $n=1$ without taking a minimum of an empty set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  },
+  {
+   "text": "Set $M=\\max\\{\\|x\\|,1\\}$ and $\\varepsilon=(\\delta/M)^n/(n+1)>0$. Apply [lem-sfb-monic-dense-approximation] to $\\mathbf Q\\subseteq k$, $f$ and this $\\varepsilon$. It supplies a monic $g\\in\\mathbf Q[T]$ of degree $n$ whose image $h\\in k[T]$ satisfies $\\|h_i-f_i\\|<\\varepsilon$ for every $i$. Field inclusions preserve its leading coefficient $1$ and its zero coefficients above degree $n$, so $h$ is also monic of degree $n$.",
+   "uses": [
+    "lem-sfb-monic-dense-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  },
+  {
+   "text": "The image of $h$ in $\\Omega[T]$ splits by induction on its degree: degree zero is the monic polynomial $1$, an empty product; in positive degree [def-weil-algebraic-closure] gives a root $a$, and division by $T-a$ has remainder $h(a)=0$, leaving a monic quotient of degree one less. Thus induction factors it completely. Apply [lem-sfb-roots-coefficient-proximity] over $k\\subseteq\\Omega$ to $f,h,x,\\varepsilon$. The norm extension is step 1, and the root, monicity, common positive degree and coefficient bound are steps 2 and 4. We obtain $b\\in\\Omega$ with $h(b)=0$ and\n$$\\|x-b\\|<((n+1)\\varepsilon)^{1/n}M=((\\delta/M)^n)^{1/n}M=\\delta,$$\nsince $M\\geq1$, $\\delta>0$ and $n\\geq1$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-roots-coefficient-proximity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  },
+  {
+   "text": "For this $b$, $g(b)=h(b)=0$: writing $g=\\sum_i q_iT^i$, both evaluations are $\\sum_i q_i b^i$ in $\\Omega$, because $\\mathbf Q\\to k\\to\\Omega$ is the prime-field inclusion. The polynomial $g$ is nonzero since it is monic, so $b$ is algebraic over $\\mathbf Q$ by [def-weil-algebraic-element].",
+   "uses": [
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-complete-normed-krasner] with $K=k$, $L=\\Omega$ and $x,b$. Steps 1–2 give its base, extension, separability and splitting hypotheses. For every root $y\\ne x$, steps 3 and 5 give $\\|x-b\\|<\\delta\\leq\\|x-y\\|$. The lemma yields $x\\in k(b)$. Together with step 6 this proves the statement for the originally given $\\Omega$.",
+   "uses": [
+    "lem-sfb-complete-normed-krasner"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit argument from project Extension.lean:82–127."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-algebraic-element",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-pc-separable-polynomial-distinct-roots-alg-closed",
+  "lem-sfb-complete-normed-krasner",
+  "lem-sfb-monic-dense-approximation",
+  "lem-sfb-roots-coefficient-proximity",
+  "lem-trf-irreducible-separable-derivative",
+  "lem-trf-spectral-norm-algebraic-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9 first bullet; expanded from project Extension.lean:82–127."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -153,10 +250,146 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: PadicAlgCl.isAlgebraic, rational density, and IsKrasner.krasner are ingredients only. IsAlgClosed.of_denseRange has a different conclusion. The project theorem PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple states the canonical-closure version and is an attachment candidate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element in an algebraic closure of Q_p belongs to Q_p(b) for some b algebraic over Q",
+   "results": {
+    "t": "2026-10-21T19:46:06Z",
+    "tool": "leanfinder",
+    "query": "Every element in an algebraic closure of Q_p belongs to Q_p(b) for some b algebraic over Q",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl.isAlgebraic",
+     "PadicAlgCl.instCoePadic",
+     "PadicAlgCl",
+     "PadicAlgCl.coe_eq",
+     "PadicComplex.coe_eq",
+     "PadicComplex.instAlgebraPadic",
+     "NumberField.isAlgebraic",
+     "PadicComplex.instIsScalarTowerPadicPadicAlgCl"
+    ],
+    "digest": "23f00b83dec7a900"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for full item; ingredients only; project theorem is canonical-model-specific"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKrasner, IsAlgebraic",
+   "results": {
+    "t": "2026-10-21T19:46:06Z",
+    "tool": "loogle",
+    "query": "IsKrasner, IsAlgebraic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for full item; ingredients only; project theorem is canonical-model-specific"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isAlgebraic_mem_adjoin_simple|algebraic.*adjoin.*simple",
+   "results": {
+    "t": "2026-10-21T19:46:05Z",
+    "tool": "grep",
+    "query": "exists_isAlgebraic_mem_adjoin_simple|algebraic.*adjoin.*simple",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for full item; ingredients only; project theorem is canonical-model-specific"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krasner lemma rational polynomial approximation gives generators of p-adic extensions algebraic over Q",
+   "results": {
+    "t": "2026-10-21T19:46:06Z",
+    "tool": "leansearch",
+    "query": "Krasner lemma rational polynomial approximation gives generators of p-adic extensions algebraic over Q",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl.isAlgebraic",
+     "LaurentSeries.exists_ratFunc_val_lt",
+     "PadicInt.isFractionRing",
+     "Padic.field",
+     "PadicAlgCl",
+     "PadicAlgCl.instCoePadic",
+     "Padic.adicCompletionEquiv",
+     "Padic.denseRange_ratCast"
+    ],
+    "digest": "3e90e0aca74ded75"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for full item; ingredients only; project theorem is canonical-model-specific"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner approximation over a dense rational subfield generates p-adic extensions by algebraic numbers",
+   "results": {
+    "t": "2026-10-21T19:46:51Z",
+    "tool": "leanfinder",
+    "query": "Krasner approximation over a dense rational subfield generates p-adic extensions by algebraic numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl.isAlgebraic",
+     "Padic.denseRange_ratCast",
+     "Padic.rat_dense",
+     "Padic.rat_dense'",
+     "PadicAlgCl.instCoePadic",
+     "PadicAlgCl",
+     "Padic.isDenseInducing_cast_withVal",
+     "PadicAlgCl.coe_eq"
+    ],
+    "digest": "7a3a3c76fc187723"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for full item; ingredients only; project theorem is canonical-model-specific"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt|exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt|class IsKrasner",
+   "results": {
+    "t": "2026-10-21T19:46:50Z",
+    "tool": "grep",
+    "query": "exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt|exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt|class IsKrasner",
+    "sub": "Analysis/Normed/Field",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Krasner.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean"
+    ],
+    "digest": "1d285dabfbd3b8af"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for full item; ingredients only; project theorem is canonical-model-specific"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-algcl-countable-closed-finite-cover",
@@ -196,5 +429,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-padic-rational-algebraic-generator",
+  "worker": "stage1",
+  "summary": "Statement preserved. Seven explicit steps use the spectral norm, irreducible separability, distinct roots, and three Mathlib leaves for monic approximation, root proximity and Krasner. The conjugate gap and coefficient tolerance are written explicitly, including the degree-one edge case. The project theorem is model-specific and is not attached to this arbitrary-closure statement.",
+  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md: arithmetic coefficient-topology input beneath the continuous algebraic-closure comparison. The ancestor is null; inherited via retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-d3d009b3e",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d3d009b3e (reviewer sub-agent of L); spot-checked: PASS, no changes and no dropped nodes. I read the item and all three new nodes in full. The item statement is unchanged and true; edge case: if x is in Q_l but transcendental over Q, b=0 works because k(b) contains k. It is not a re-split item: the base had a statement only. L19 Prop 1.1.9 (p.3) only invokes countability, so proof_origin agent is correct. The project theorem PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple is stated for the fixed model only, so it stays as a lean_candidate. Steps: (1) Q_l is complete, nonarchimedean and nontrivial (|l|=1/l), with Q dense in it; lem-trf-spectral-norm-algebraic-extension gives an extending multiplicative norm on Omega. (2) The minimal polynomial has f' != 0 in characteristic 0, so it is separable by lem-trf-irreducible-separable-derivative; lem-pc-separable-polynomial-distinct-roots-alg-closed gives the distinct roots and the splitting. (3) delta is the minimum root gap, with an explicit empty-set branch. (4) I checked the approximation with eps=(delta/M)^n/(n+1). (5) The proximity bound ((n+1)eps)^(1/n)M equals delta. (6) g(b)=0 with g monic, so b is algebraic over Q. (7) Krasner gives x in k(b). Every hypothesis matches the Mathlib source I read: Approximation.lean:43-60 and 111-140, Krasner.lean:40-140 (the of_completeSpace instance needs NontriviallyNormedField, CompleteSpace, IsUltrametricDist, NormedAlgebra and Algebra.IsAlgebraic; IsConjRoot corresponds to the roots of the minimal polynomial). All three new nodes are exact or one-line Mathlib leaves, self-contained, strictly smaller than the item, and none restates a clause of it. The rg -L duplicate search found only lem-per-henselian-krasner-neighbourhood, lem-per-henselian-simple-root-stability and lem-trf-separable-monic-approximation, each a different statement and not a one-line specialization. Batch-5: both trf citations (lem-trf-irreducible-separable-derivative and lem-trf-spectral-norm-algebraic-extension) are general-algebra Mathlib leaves with empty proof_deps. Neither is part of the trace formula or Poincare duality or their proofs, so both are accepted. No SGA citations and no tool_uses needed."
  }
 }

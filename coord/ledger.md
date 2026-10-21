@@ -23592,3 +23592,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:56 L: returned deliver/NA/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4/C6 (circular in substance), C5 (generalizes an existing node), D2. Item Step 1 shows that after conservative scalar r)
 - 19:56 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 19:56 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 19:58 L: merged deliver/NZ/lem-sfb-padic-rational-algebraic-generator (reviewer PASS; first push; new nodes: 3)
