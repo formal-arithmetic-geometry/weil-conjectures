@@ -52,5 +52,15 @@ The previous worker ended with: re-split (decision of the human, 2026-10-17): st
 Compiler messages and attribution:
 re-split (decision of the human, 2026-10-17): step 2 (2653 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are; the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
 
+## lem-weil-pbc-reduction-pullback-derived-tower (2026-10-21 04:07 UTC, branch head 4d5a6e80d5)
 
+L: independent stage-2 immutable head 4d5a6e80d5ef: file-only compilation failed: overlay WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
+/home/ubuntu/weil-nt-overlay/snapshots/1551abdc811acbfebb1fd5e27f28a39d99b8e03de10f8cb0064bdbaaa4c00d58/lean/WeilConjectures/Mathlib/LinearAlgebra/TensorProduct/Basic.lean:6:0: error: unknown module prefix 'Mathlib'
 
+No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries:
+/home/ubuntu/weil-conjectures-sheaf/lean/.lake/build/lib/lean
+/home/ubuntu/.elan/toolchains/leanprover--lean4---v4.33.1/lib/lean
+
+[0.1 s]
+SERVER CONFIRMATION
+Live published library is unavailable
