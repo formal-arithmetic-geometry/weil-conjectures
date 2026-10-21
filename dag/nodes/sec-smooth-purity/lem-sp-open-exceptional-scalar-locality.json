@@ -25,9 +25,80 @@
   "det-sp-reduction-direct-image",
   "def-sp-constant-scalar-pullback-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $K$ and put $M=G_{f,A}K$ and $L=U_AM$. Use the adjunction-preserving composition identifications in the statement throughout; thus $F_{g,R}=F_{f,R}J_R$, $G_{g,R}=U_RG_{f,R}$. The composite-adjunction definition gives\n$$\\epsilon_{g,R,K}=\\epsilon_{f,R,K}\\circ F_{f,R}(v_{R,G_{f,R}K}).$$\nThe coefficient/composition square of [lem-sp-et-proet-coefficient-compatibility], applied to $U\\xrightarrow{j}X\\xrightarrow{f}Y$, gives, in these identifications,\n$$b_g(L)=F_{f,B}(b_j(L))\\circ b_f(J_AL).$$\nHere $b_j:T_XJ_A\\simeq J_BT_U$ is the normalized open tensor map. The refinement clause of that same node ensures this formula for the chosen compactifications, including comparison through a common refinement. All inputs are in the finite-Tor categories stipulated in the statement. That node states the pro-etale composition square for etale-origin objects; by [det-pe-finite-tor-comparison-noetherian] (the schemes are qcqs and $A,B$ are finite, hence Noetherian) $\\nu_U^*$ is an equivalence $D^b_{ctf}(U_{\\mathrm{et}},A)\\simeq\\mathcal C_{U,A}$, so $L\\simeq\\nu_U^*L'$ with $L'$ etale bounded constructible of finite Tor amplitude, and naturality of both sides of the square in $L$ transfers it to $L$. The site/composition identifications are thus the specified etale-origin ones of that node and the adjunction transfer, not arbitrary isomorphisms of the underlying functors.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-open-proetale-counit-scalar] to $M$. Its identity for the actual open counit is\n$$v_{B,T_XM}\\circ J_B(a_{j,M})\\circ b_j(L)=T_X(v_{A,M}).$$\nSince $b_j(L)$ is invertible, right-composition with its inverse gives the precisely typed equality\n$$v_{B,T_XM}\\circ J_B(a_{j,M})=T_X(v_{A,M})\\circ b_j(L)^{-1}.$$\nBoth sides go from $J_BT_UL$ to $T_XM$. This uses no inverse of an exceptional comparison.",
+   "uses": [
+    "lem-sp-open-proetale-counit-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+   }
+  },
+  {
+   "text": "Set $d_K=U_B(c_{f,K})\\circ a_{j,M}:T_UL\\to U_BG_{f,B}T_YK$ and take its counit transpose\n$$\\tau=\\epsilon_{g,B,T_YK}\\circ F_{f,B}J_B(d_K).$$\nNaturality of $v_B:J_BU_B\\to1$, evaluated at $c_{f,K}:T_XM\\to G_{f,B}T_YK$, says\n$$v_{B,G_{f,B}T_YK}\\circ J_BU_B(c_{f,K})=c_{f,K}\\circ v_{B,T_XM}.$$\nInsert the composite counit from step 1, then this equality, and then step 2. The defining counit equation for $c_f$ in the statement yields\n$$\\begin{aligned}\n\\tau&=\\epsilon_{f,B,T_YK}\\circ F_{f,B}(c_{f,K})\\circ F_{f,B}\\bigl(v_{B,T_XM}\\circ J_B(a_{j,M})\\bigr)\\\\\n&=T_Y(\\epsilon_{f,A,K})\\circ b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))\\circ F_{f,B}(b_j(L)^{-1}).\n\\end{aligned}$$\nThis is just naturality, functoriality and substitution of the displayed identities.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-sp-open-proetale-counit-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+   }
+  },
+  {
+   "text": "The comparison $b_f$ is natural by [det-sp-reduction-direct-image]. Apply its naturality square to $v_{A,M}:J_AL\\to M$ and compose with inverses of its two isomorphism components. This gives\n$$b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))=T_Y(F_{f,A}(v_{A,M}))\\circ b_f(J_AL)^{-1}.$$\nSubstitute in step 3. Functoriality of $T_Y$, the composite-counit equation in step 1, and inversion of the two-factor expression for $b_g(L)$ in step 1 give\n$$\\begin{aligned}\n\\tau&=T_Y\\bigl(\\epsilon_{f,A,K}\\circ F_{f,A}(v_{A,M})\\bigr)\\circ b_f(J_AL)^{-1}\\circ F_{f,B}(b_j(L)^{-1})\\\\\n&=T_Y(\\epsilon_{g,A,K})\\circ b_g(L)^{-1}.\n\\end{aligned}$$\nThe order of the inverse factors is reversed, so their composite has source $F_{g,B}T_UL$ and target $T_YF_{g,A}L$.",
+   "uses": [
+    "det-sp-reduction-direct-image",
+    "def-weil-pbc-composite-adjunction",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+   }
+  },
+  {
+   "text": "By definition in the statement, $c_{g,K}$ has counit transpose $T_Y(\\epsilon_{g,A,K})\\circ b_g(G_{g,A}K)^{-1}$; here $G_{g,A}K=L$. Step 4 proves that $d_K$ has this very transpose. The composite adjunction's Hom bijection in [def-weil-pbc-composite-adjunction] is a bijection, hence injective. Therefore $d_K=c_{g,K}$, which is the required equality for each $K$. No assertion about smoothness, a chart, or invertibility of either right mate enters this argument.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-sp-open-proetale-counit-scalar",
+  "det-sp-reduction-direct-image",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument; composite counit formula from Stacks Tag 0DV0 (lemma-compose-counits)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +134,45 @@
    "results": "{\"t\": \"2026-10-21T03:27:38Z\", \"tool\": \"leansearch\", \"query\": \"The counit transpose exceptional coefficient comparison commutes with restriction to a quasi compact open subset of the source under the specified compact support composition comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CompHausLike.LocallyConstant.counit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit\", \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f\"], \"digest\": \"e73c4dd10f0b4b8f\"}",
    "date": "2026-10-21",
    "verdict": "no match: results concern general algebra/category theory or unrelated geometry, not the stated finite-ring geometric comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_counit|exceptional.*scalar",
+   "results": "{\"t\": \"2026-10-21T03:50:31Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv_counit|exceptional.*scalar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"68f04ad68dd855df\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general mate identities are proof tools, not the specified geometric normalization; read Mathlib/CategoryTheory/Adjunction/Mates.lean lines 123-132 and 209-217"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image coefficient comparison commutes with restriction to an open subset of the source",
+   "results": "{\"t\": \"2026-10-21T03:50:31Z\", \"tool\": \"leansearch\", \"query\": \"Exceptional inverse image coefficient comparison commutes with restriction to an open subset of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp\"], \"digest\": \"cfc1eac9f983a86c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern module extension/restriction or scheme open restriction, not the specified compact-support/exceptional scalar maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-21T03:50:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general mate identities are proof tools, not the specified geometric normalization; read Mathlib/CategoryTheory/Adjunction/Mates.lean lines 123-132 and 209-217"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right mate of scalar extension comparison for compact support commutes with open source restriction using the composite adjunction counit",
+   "results": "{\"t\": \"2026-10-21T03:50:32Z\", \"tool\": \"leanfinder\", \"query\": \"Right mate of scalar extension comparison for compact support commutes with open source restriction using the composite adjunction counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.extendRestrictScalarsAdj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"LightCondensed.ihomPoints_symm_comp\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\"], \"digest\": \"92aa4527bbf5603b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern module extension/restriction or scheme open restriction, not the specified compact-support/exceptional scalar maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit transpose of coefficient change for exceptional inverse image agrees with open restriction of the transpose for the whole morphism",
+   "results": "{\"t\": \"2026-10-21T03:50:45Z\", \"tool\": \"leanfinder\", \"query\": \"Counit transpose of coefficient change for exceptional inverse image agrees with open restriction of the transpose for the whole morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Γ_map_morphismRestrict\"], \"digest\": \"4f7dc302fa002227\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern module extension/restriction or scheme open restriction, not the specified compact-support/exceptional scalar maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-exceptional",
@@ -83,5 +189,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-open-exceptional-scalar-locality",
+  "worker": "stage1",
+  "summary": "Expanded the Locality paragraph into the actual open-counit equation, the coefficient/composition square and a typed counit-transpose cancellation. Reused existing nodes; no new nodes, no statement change, no geometric or Tor hypotheses added. Searched the project and Mathlib; general mate calculus is available but not the normalized geometric assertion. Maintainer reader (Q10): step 1 now cites det-pe-finite-tor-comparison-noetherian for the etale origin of the pro-etale input L, which the composition square of lem-sp-et-proet-coefficient-compatibility requires.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md, Locality paragraph: steps 1-2 give the composition and open counit identities, steps 3-4 calculate their transpose, step 5 proves equality by the adjunction bijection."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-290a13ef8",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-290a13ef8 (reviewer sub-agent of L); spot-checked: Read the Locality paragraph of the blueprint sk-lem-sp-reduction-exceptional (lines 12-18), Stacks 0DV0 (lemma-compose-counits) and the statements of every cited node. The delivery is a one-level split with no new nodes and no statement change; it answers no repair note and the item is not dropped. All five steps are correct. I recomputed each one with types: the composite counit eps_f F_f(v); b_g(L) = F_f(b_j(L)) b_f(J_A L) from the (j,f) composition clause of lem-sp-et-proet-coefficient-compatibility; the open-counit equation of lem-sp-open-proetale-counit-scalar with right-composition by b_j^{-1}; naturality of v at c_f and of b_f at v_{A,M}, with the inverse order correct; and injectivity of the composite Hom bijection. Only b_f, b_j and b_g are inverted, never c_f, so the proof holds for arbitrary f and a non-flat A to B. Edge cases checked: j = id, U empty, phi = id, Z/l^2 to Z/l. One C1/C4 fault, fixed: the composition square of lem-sp-et-proet-coefficient-compatibility is stated only for etale-origin pro-etale objects, but step 1 used it for an arbitrary L in C_{U,A} with no citation. I added det-pe-finite-tor-comparison-noetherian (nu^* : D^b_ctf(et) to D^b_ctf(proet) is an equivalence for qcqs X and Noetherian Lambda) to step 1 and to proof_deps; it creates no cycle and is already an accepted tool_use of the parent det-sp-reduction-exceptional. Accepted tool uses: lem-sp-et-proet-coefficient-compatibility, def-weil-pbc-composite-adjunction and det-pe-finite-tor-comparison-noetherian, all already parent tool_uses. No SGA citation. Maintainer note: O2 delivered a parallel zero-new-node split of the same item (e1ed043b); whichever lands second is superseded.; 1 file(s) fixed by the reviewer"
  }
 }
