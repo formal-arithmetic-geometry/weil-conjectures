@@ -1,0 +1,153 @@
+{
+ "id": "lem-sp-canonical-open-scalar-tensor-models",
+ "kind": "statement",
+ "title": "Canonical scalar tensor models compatible with open inverse image",
+ "statement": "There exist presentations $m$ of the existing ordinary unbounded constant-coefficient pro-etale derived tensor/scalar adjunctions and normalized tensor comparison choices $c$ [def-sp-open-scalar-tensor-data], such that scalar projection $K\\otimes_A^L\\operatorname{Res}(B)\\to\\operatorname{Res}(S_TK)$ is invertible for every finite commutative $A,B$, coefficient map $A\\to B$, scheme $T$, and arbitrary derived $K$. Moreover, for every open immersion $j:U\\to X$ [def-weil-open-immersion] and arbitrary $F,Q\\in D(X,A)$, the inverse scalar/inverse-image comparison $\\lambda^{-1}$ is tensor compatible: writing $t_T$ for scalar tensorators and $a_A,a_B$ for inverse-image tensorators, $(\\lambda_F^{-1}\\otimes\\lambda_Q^{-1});a_B^{-1};j_B^{-1}(t_X^{-1})=t_U^{-1};S_U(a_A^{-1});\\lambda_{F\\otimes Q}^{-1}$. The choices include strong monoidal open inverse image with tensorator precisely the canonical restriction tensor comparison. No boundedness or flatness of the coefficient map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "stmt_deps": [
+  "def-sp-open-scalar-tensor-data",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical closed symmetric monoidal derived structures and their representative coherence, then the normalized scalar adjunction pairs and scalar tensor comparisons. The choice uses proved constructions, not an arbitrary witness of mere existence.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-scalar-tensor-comparison",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "Descend the ordinary restriction tensor and unit comparisons on flat-term K-flat representatives. Their pure-tensor associativity and unit diagrams give the strong monoidal structure with exactly the prescribed restriction tensorator. The two ringed-topos factorizations have the same balanced representative map, giving the displayed inverse tensor equation.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "The scalar projection adjunct on a K-flat representative is x tensor b mapped to b tensor x, so it is the usual scalar-extension identification and is invertible. Descend to all derived objects.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-scalar-tensor-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor and scalar extension commute with open restriction; open projection formula and composition of adjunction mates",
+   "results": "8 hits, including ModuleCat.Tilde.toOpen_res and Scheme.Modules.restrictAdjunction; these concern ordinary Zariski modules and do not give the normalized unbounded pro-etale comparisons.",
+   "verdict": "No exact match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "Loogle is currently under load, please try again later.",
+   "verdict": "unavailable",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*[Ss]calar|[Ss]calar.*[Oo]pen",
+   "results": "25 hits, mostly open IsScalarTower and unrelated ring-theoretic scalar towers. Local rg additionally found Adjunction.Unique, Adjunction.Mates, DerivedExactSquareComposition, OpenTensorNormalization and ScalarHomTensorComparison; these were read.",
+   "verdict": "No exact complete comparison in these presentations; the formal mate calculus is used in the parent proof.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar tensor comparison commutes with open restriction and normalized open projection in unbounded proetale module categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.map_smul, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.toOpen_res, instSeminormedAddCommGroupRestrictScalars, AlgebraicGeometry.Scheme.Modules.restrict_map, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.restrictScalarsObj.",
+   "verdict": "No exact match: ordinary restriction and section compatibility do not state the normalized unbounded proetale comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenScalarTensorNormalization",
+  "date": "2026-10-21",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Open-immersion factor of the compactification: compatibility of the specified scalar map with projection, coefficient associativity and counit identities.",
+   "via": [
+    "lem-fix-open-scalar-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenScalarTensorModels",
+  "file": "lean/Sheaf/SixFunctors/OpenScalarTensorModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_tensor_models",
+  "statement": "theorem open_scalar_tensor_models :\n    ∃ m : Models.{u}, ∃ c : Choices m, Nonempty (TensorCompatibility m c)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.TensorCompatibility",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_tensor_models"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
+ }
+}

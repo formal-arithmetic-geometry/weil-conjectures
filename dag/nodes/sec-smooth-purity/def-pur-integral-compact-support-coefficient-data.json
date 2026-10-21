@@ -55,7 +55,6 @@
   "declaration": "WeilConjectures.PurCompactSupport.completed",
   "declarations": [
    "WeilConjectures.PurCompactSupport.Change",
-   "WeilConjectures.PurCompactSupport.Coefficients",
    "WeilConjectures.PurCompactSupport.ProjectionComparisons",
    "WeilConjectures.PurCompactSupport.comparison",
    "WeilConjectures.PurCompactSupport.completed",
@@ -67,11 +66,6 @@
    "WeilConjectures.PurCompactSupport.geometricPullComposition",
    "WeilConjectures.PurCompactSupport.image",
    "WeilConjectures.PurCompactSupport.modulePushComposition_existsUnique",
-   "WeilConjectures.PurCompactSupport.openAdjunction",
-   "WeilConjectures.PurCompactSupport.openDerivedAdjunction",
-   "WeilConjectures.PurCompactSupport.openExtension",
-   "WeilConjectures.PurCompactSupport.openProjectionInverse",
-   "WeilConjectures.PurCompactSupport.openProjectionInverse_isIso",
    "WeilConjectures.PurCompactSupport.openProjectionIso",
    "WeilConjectures.PurCompactSupport.openRestriction",
    "WeilConjectures.PurCompactSupport.openRestrictionMap",
@@ -80,7 +74,6 @@
    "WeilConjectures.PurCompactSupport.projectionComparisons_existsUnique",
    "WeilConjectures.PurCompactSupport.projectionMap",
    "WeilConjectures.PurCompactSupport.projectionOpenFactor",
-   "WeilConjectures.PurCompactSupport.pull",
    "WeilConjectures.PurCompactSupport.push",
    "WeilConjectures.PurCompactSupport.restriction",
    "WeilConjectures.PurCompactSupport.tensorCurried"
@@ -90,7 +83,7 @@
   "by": "NQ",
   "date": "2026-10-18",
   "existing": false,
-  "note": "declarations moved unchanged from the lemma's module (maintenance, 2026-10-18) Compilation-only repair: wrap the two overlong prose lines reported by the compiler; all declarations, canonical maps, signatures and bodies are unchanged. Remove the stale declaration-list entry PurCompactSupport.maps: it was prose misread as a declaration and does not exist in the module.",
+  "note": "C6: the six general open-adjunction definitions and the existing projection-invertibility theorem are reattached to def-sp-open-coefficient-adjunction-data and lem-sp-intrinsic-open-projection-invertible. Their Lean code is unchanged. All integral/completed coefficient data stays here.",
   "statement": "def completed : Coefficients.{u}"
  },
  "reviewed_lean": {
@@ -101,5 +94,15 @@
   "result": "fix",
   "note": "Item module and node byte-identical to PASSed 5f0862896f26 (landing return was an unrelated PbcScalarExtension 60 s load timeout); re-checked hypotheses (p≠l, N=m+1≥j=n+1, separated finite-type X0, Over endomorphism h without properness, arbitrary alg. closed Omega, y≫h=y), iota = eqToIso(hy.symm)≪≫sfIntrinsicDerivedPullbackComp with node direction, sigma pinned componentwise (tau ≫ counit-compatible presentation iso ≫ S(mu_y)), final square r(iota_A)≫sigma_{H_A K}≫S_B(mu_h)=sigma_K≫iota_B; gates OK. New DerivedPullbackTensorHom options repair has no effect (back to back live 37.6/35.8 s vs delivered 37.0/35.0 s) and only adds landing risk on a 100+-importer module → FIX fixes/DerivedPullbackTensorHom.lean = current live text (record statement verbatim in it, all declarations present). Dep record def-weil-derived-pullback-tensor-hom note/by rewritten (same declarations; maintainer may --revert-nodes). IntegralCompactSupportCoefficientData line wraps accepted (live gives 2 longLine warnings). EtaleFiniteCoefficientHomArrow repair unchanged, accepted. nt_compile --json: delivery as is rc=0 clean (DPTH 45.0, ICSC 8.4, EFCHA 29.5, item 4.7 s); with fix rc=0 clean (36.4/8.0/27.9/5.3 s). Land at lower load."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
+ }
 }

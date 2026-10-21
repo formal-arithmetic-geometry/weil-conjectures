@@ -22945,3 +22945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:39 L: merged deliver/NG/lem-sfb-condensed-internal-bar-resolution (reviewer FIX; first push; new nodes: 0)
 - 15:39 L: returned deliver/J4/Sheaf.Paper.IntegralTwistBaseChange (reviewer RETURN: (reviewer C-e0c24, head e0c244931) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralTwistB)
 - 15:40 L: returned deliver/H1/Sheaf.Paper.SpecifiedPullbackComparisonAlpha (reviewer RETURN: (the landing tools, head 737fd1e48) the delivery did not land: lean/Sheaf/Paper/SpecifiedPullbackComparisonAlpha.lean: <)
+- 15:40 L: merged deliver/C6/Sheaf.SixFunctors.OpenScalarTensorNormalization (stage 3; reviewer PASS; first push; landing 20261021T154013-L-2748125 (interface); batch 20261021T154012; modules 5; new nodes 6; change records: coord/changes/C6-intrinsic-open-projection-attachment.md, coord/changes/C6-open-scalar-tensor-data.md)

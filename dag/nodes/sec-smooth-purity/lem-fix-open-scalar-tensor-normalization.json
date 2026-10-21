@@ -23,133 +23,61 @@
  ],
  "proof": [
   {
-   "text": "Write $e_R=j_!^R$, $r_R=j_R^{-1}$, $u^R:1\\to r_Re_R$ for the open unit, and $\\nu_T:1\\to U_TS_T$ for the scalar unit. Scalar restriction commutes with $r$ by the identified-coefficient inverse-image comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. Its scalar mate is $\\lambda^{-1}:S_Ur_A\\to r_BS_X$ by [lem-sfb-kflat-scalar-comparison-normalization]. Thus, with the restriction identification understood,\n$$U_U(\\lambda_N)\\,r_A(\\nu_{X,N})=\\nu_{U,r_AN}.$$\nHere scalar units are the specified insertion $x\\mapsto x\\otimes1$ of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to the two ringed-topos factorizations from $(U,B)$ to $(X,A)$: one changes coefficients on $X$ and then restricts, the other restricts and then changes coefficients on $U$. Their structural ring maps agree. The resulting $\\lambda$ is monoidal and respects tensor units; its K-flat balanced map is the same one fixed above. Denote the scalar tensorators by $t_T:S_T(F\\otimes_A^LG)\\to S_TF\\otimes_B^LS_TG$ and the inverse-image tensorators by $a_R:r_R(F\\otimes_R^LG)\\to r_RF\\otimes_R^Lr_RG$.",
+   "text": "Obtain canonical scalar and tensor presentations, normalized open monoidal choices, scalar projection invertibility and the inverse tensor compatibility equation.",
    "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-sfb-kflat-scalar-comparison-normalization",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-sp-canonical-open-scalar-tensor-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
+   "elementary": false
   },
   {
-   "text": "The exact open adjunctions [lem-cbc-proetale-extension-zero] and the scalar adjunctions [lem-pur-sheaf-ring-derived-coefficient-adjunction], composed using [def-weil-pbc-composite-adjunction], give, naturally in $K,H$,\n$$\\operatorname{Hom}_B(S_Xe_AK,H)\\cong\\operatorname{Hom}_A(e_AK,U_XH)\\cong\\operatorname{Hom}_A(K,r_AU_XH)$$\nand\n$$\\operatorname{Hom}_B(e_BS_UK,H)\\cong\\operatorname{Hom}_B(S_UK,r_BH)\\cong\\operatorname{Hom}_A(K,U_Ur_BH).$$\nIdentify the last objects by step 1. The common-right-adjoint uniqueness theorem [lem-weil-pbc-conjugate-iso-unit-equation] supplies the natural isomorphism $\\beta:S_Xe_A\\to e_BS_U$. All Hom sets here are in module derived categories, so its components are B-linear.",
+   "text": "Construct the inverse projection by transposing the natural map given by the open unit tensor identity followed by the inverse restriction tensorator. Naturality follows from unit and tensorator naturality. Instantiate PurCompactSupport.openProjectionInverse_isIso with the constant-ring coefficient system and tensorModel m to get componentwise invertibility; assemble the natural isomorphism. Its inverse adjunct is the Hom equivalence inverse law. Then obtain its scalar-restriction interpretation. Also obtain the coefficient composition and identity equations for inverse lambda, before taking any open adjunct.",
    "uses": [
-    "lem-cbc-proetale-extension-zero",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sp-intrinsic-open-projection-invertible",
+    "lem-sp-open-projection-scalar-comparison",
+    "lem-sp-open-scalar-coefficient-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand composite adjunction units in the common-right-adjoint definition of beta. Scalar unit naturality and the defining mate equation identify the open adjunct of beta inverse with scalar extension of the open unit followed by lambda inverse. Transport across scalarIso by naturality. This is scalarOpenTranspose, transported_open_unit and beta_inverse_aux in Lean.",
+   "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $b_K=\\beta_K^{-1}$. The unit equation in [lem-weil-pbc-conjugate-iso-unit-equation], with the composite-unit formula [def-weil-pbc-composite-adjunction], says that the scalar adjunct of the open adjunct of $b_K$ is\n$$K\\xrightarrow{u^A_K}r_Ae_AK\\xrightarrow{r_A\\nu_{X,e_AK}}r_AU_XS_Xe_AK.$$\nOn the other hand the scalar adjunct of $\\lambda_{e_AK}^{-1}S_U(u^A_K)$ is\n$$U_U(\\lambda_{e_AK}^{-1})\\,U_US_U(u^A_K)\\,\\nu_{U,K}\n=U_U(\\lambda_{e_AK}^{-1})\\,\\nu_{U,r_Ae_AK}\\,u^A_K\n=r_A(\\nu_{X,e_AK})\\,u^A_K,$$\nby scalar-unit naturality and step 1. Injectivity of the scalar Hom bijection [lem-pur-sheaf-ring-derived-coefficient-adjunction] proves\n$$r_B(b_K)\\,u^B_{S_UK}=\\lambda_{e_AK}^{-1}S_U(u^A_K).\\tag{*}$$\nThe open Hom bijection, equivalently [lem-weil-pbc-adjunct-counit-identity], now gives exactly the asserted open adjunct formula for $b$.",
+   "text": "For coefficient composition, compare inverse beta routes after postcomposition by the scalar associator and applying the open C Hom bijection. Move the open unit across the inverse scalar associator, substitute the inverse beta adjunct twice, and use naturality of inverse lambda to combine the two open B maps. The inverse-lambda coefficient cocycle replaces the remaining three maps. Naturality of the scalar associator at the open unit then cancels that associator and its inverse, leaving exactly the composite-coefficient inverse beta adjunct. Invert the equality of isomorphisms. For the identity coefficient map, the same argument uses the inverse-lambda identity equation and scalar unitor naturality. These are the complete private coefficient_comp and coefficient_id calculations in Lean.",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-composite-adjunction",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sp-open-scalar-coefficient-coherence",
     "lem-weil-pbc-adjunct-counit-identity"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
+   "elementary": true
   },
   {
-   "text": "For clarity fix the canonical open projection normalization: put $\\delta^R_{M,N}=(\\gamma^R_{M,N})^{-1}$. The canonical map in [lem-cbc-extension-zero-projection-formula] has inverse the open adjunct of\n$$M\\otimes_R^Lr_RN\\xrightarrow{u^R_M\\otimes1}r_Re_RM\\otimes_R^Lr_RN\\xrightarrow{a_R^{-1}}r_R(e_RM\\otimes_R^LN).\\tag{**}$$\nThis describes the canonical map, rather than choosing an isomorphism of its endpoints: in the Hom calculation of sites-modules.tex Tag 0E8I it is the image of the identity, and its derived version is Tag 0GL1. The derived open adjunction used here is [lem-cbc-proetale-extension-zero]; the tensorators and unitors are those of [lem-sfb-ringed-derived-monoidal-comparisons]. We will compare morphisms by this open Hom bijection [lem-weil-pbc-adjunct-counit-identity].",
-   "uses": [
-    "lem-cbc-extension-zero-projection-formula",
-    "lem-cbc-proetale-extension-zero",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
-  },
-  {
-   "text": "Restrict (*) to A-modules. Identify $U_TS_TF$ with $F\\otimes_A^LB_T$: both are computed by the same tensor of a K-flat representative in [lem-pur-derived-change-of-rings], forgetting only the target-ring action [def-pc-sheaf-restrict-scalars]. Identify $U_Xe_B$ with $e_AU_U$ by [lem-cbc-proetale-extension-zero]. The open units agree under this identification: they are the termwise extension/restriction units, identity on sections over U, and scalar restriction changes only the ring action. In these identifications the right side of (*) is\n$$K\\otimes_A^LB_U\\xrightarrow{u^A_K\\otimes1}r_Ae_AK\\otimes_A^LB_U\\xrightarrow{a_A^{-1}}r_A(e_AK\\otimes_A^LB_X).$$\nIndeed the balanced pullback comparison retains the B factor, and scalar extension sends a morphism to its tensor with $1_B$; these are the K-flat maps fixed in [lem-sfb-kflat-scalar-comparison-normalization]. By (**) and injectivity of the open Hom bijection, $U_Xb$ is $\\delta^A_{K,B_X}$. Inverting proves that the restricted $\\beta$ is exactly $\\gamma^A_{K,B_X}$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-cbc-proetale-extension-zero",
-    "lem-sfb-kflat-scalar-comparison-normalization",
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
-  },
-  {
-   "text": "For $A\\to B\\to C$, write $\\alpha_T:S_T^{B,C}S_T^{A,B}\\to S_T^{A,C}$ for [lem-sfb-successive-derived-quotient-normalization]. Consider\n$$e_CS_U^{A,C}\\xrightarrow{e_C\\alpha_U^{-1}}e_CS_U^{B,C}S_U^{A,B}\\xrightarrow{b^{B,C}_{S_U^{A,B}K}}S_X^{B,C}e_BS_U^{A,B}\\xrightarrow{S_X^{B,C}b^{A,B}_K}S_X^{B,C}S_X^{A,B}e_A\\xrightarrow{\\alpha_X}S_X^{A,C}e_A.$$\nIts common-right-adjoint Hom correspondence is the two scalar Hom bijections with the open Hom bijection moved past each in turn. The coefficient-unit clause of [lem-sfb-successive-derived-quotient-normalization] identifies the two successive scalar bijections with the single one for $A\\to C$: expanding the composite units [def-weil-pbc-composite-adjunction] inserts $x\\mapsto(x\\otimes1)\\otimes1\\mapsto x\\otimes1$. Restriction changes the action by the composite ring map on both sides [def-pc-sheaf-restrict-scalars]. Thus the displayed map and $b^{A,C}$ have the same unit equation, and uniqueness [lem-weil-pbc-conjugate-iso-unit-equation] identifies them. For an identity ring map the same computation uses $x\\otimes a\\mapsto ax$ and the tensor unitor, giving identity $b$. Inverting gives the asserted coefficient cocycle and identities for $\\beta$.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "def-weil-pbc-composite-adjunction",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
-  },
-  {
-   "text": "To prove the mixed tensor square, it suffices to prove its inverse form. Suppress only canonical associators and write $K\\otimes r_AQ$ for $K\\otimes_A^Lr_AQ$. The required inverse equality is\n$$S_X(\\delta^A_{K,Q})\\,b_{K\\otimes r_AQ}\\,e_B\\bigl(t_U^{-1}(1\\otimes\\lambda_Q)\\bigr)\n=t_X^{-1}(b_K\\otimes1)\\,\\delta^B_{S_UK,S_XQ}.\\tag{***}$$\nBoth sides have source $e_B(S_UK\\otimes_B^Lr_BS_XQ)$ and target $S_X(e_AK\\otimes_A^LQ)$. Take the open adjunct, using [lem-weil-pbc-adjunct-counit-identity]. By (**) the adjunct of the right side is\n$$r_B(t_X^{-1})\\,a_B^{-1}\\bigl((r_Bb_K\\,u^B_{S_UK})\\otimes1\\bigr)\n=r_B(t_X^{-1})\\,a_B^{-1}\\bigl((\\lambda_{e_AK}^{-1}S_Uu^A_K)\\otimes1\\bigr),\\tag{J}$$\nwhere the first equality uses naturality of $a_B$ and the second uses (*). These are equalities of derived morphisms, not tests on ordinary geometric stalks.",
+   "text": "Compare the inverse tensor-square routes using the open B Hom bijection. Move the open unit across the first route by naturality, substitute beta_inverse, move inverse lambda across inverse projection, and substitute the inverse projection adjunct. Tensorator naturality then moves the open unit through the inverse scalar tensorator. The inverse lambda tensor equation identifies the remaining composites, after which lambda at Q cancels. On the other route substitute beta_inverse at K and the B inverse projection adjunct. Naturality of the B inverse restriction tensorator gives exactly the same adjunct. Injectivity of the Hom equivalence, then inversion of the resulting isomorphism equality, proves the forward tensor square for arbitrary K,Q. This is the complete private tensor_square proof in Lean.",
    "uses": [
     "lem-weil-pbc-adjunct-counit-identity",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-sp-canonical-open-scalar-tensor-models",
+    "lem-sp-intrinsic-open-projection-invertible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
-  },
-  {
-   "text": "The adjunct of the left side of (***) is, by naturality of the open unit and (*) at $K\\otimes r_AQ$,\n$$r_BS_X(\\delta^A_{K,Q})\\,\\lambda_{e_A(K\\otimes r_AQ)}^{-1}S_U(u^A_{K\\otimes r_AQ})\\,t_U^{-1}(1\\otimes\\lambda_Q).$$\nNaturality of $\\lambda$ moves its inverse to the left. Equation (**) replaces $r_A(\\delta^A)u^A$ by $a_A^{-1}(u^A_K\\otimes1)$. The result is\n$$\\lambda_{e_AK\\otimes Q}^{-1}S_U(a_A^{-1})S_U(u^A_K\\otimes1)\\,t_U^{-1}(1\\otimes\\lambda_Q).$$\nTensorator naturality moves $S_U(u^A_K\\otimes1)$ through $t_U^{-1}$. Monoidality of $\\lambda$ from [lem-sfb-ringed-derived-monoidal-comparisons] then replaces\n$$\\lambda_{F\\otimes Q}^{-1}S_U(a_A^{-1})t_U^{-1}\n\\quad\\text{by}\\quad r_B(t_X^{-1})a_B^{-1}(\\lambda_F^{-1}\\otimes\\lambda_Q^{-1}),\\qquad F=e_AK.$$\nCancel $\\lambda_Q^{-1}\\lambda_Q$. This is exactly (J). Injectivity of the open Hom bijection [lem-weil-pbc-adjunct-counit-identity] proves (***). All maps in (***) are isomorphisms by steps 1--4; invert the equality to obtain the two forward routes in the statement for arbitrary K and Q. Unitor coherence in [lem-sfb-ringed-derived-monoidal-comparisons] includes the unit-normalized case. No boundedness, flatness of $A\\to B$, or quasi-compactness of j has entered.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-sfb-kflat-scalar-comparison-normalization",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-cbc-proetale-extension-zero",
+  "lem-sp-canonical-open-scalar-tensor-models",
+  "lem-sp-intrinsic-open-projection-invertible",
+  "lem-sp-open-projection-scalar-comparison",
+  "lem-sp-open-scalar-coefficient-coherence",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "lem-cbc-extension-zero-projection-formula",
-  "lem-pur-derived-change-of-rings",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-sfb-successive-derived-quotient-normalization"
+  "lem-weil-pbc-adjunct-counit-identity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)",
+  "note": "C6: constructed the normalized projection from its existing intrinsic isIso theorem; proved beta adjunct, beta coefficient laws, and mixed tensor square formally. Three separate source comparisons remain."
  },
  "mathlib_searches": [
   {
@@ -314,30 +242,6 @@
   "module": "Sheaf.SixFunctors.OpenScalarTensorNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_tensor_normalization",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Models",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarPair",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalar",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarIso",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.tensor",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.unit",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.coefficient",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.openAdj",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.rightSquare",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.lambda",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.beta",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.restrictionOpen",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.tensorModel",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.restrictionTensor",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.OpenMonoidal",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.openDelta",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.openUnit",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Choices",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarProjection",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.coefficientPullback",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Projection",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarComp",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarId",
-   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Normalization",
    "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_tensor_normalization"
   ],
   "file": "lean/Sheaf/SixFunctors/OpenScalarTensorNormalization.lean",
@@ -346,7 +250,7 @@
   "by": "Q154",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Canonical scalar and tensor operations are expressed through the recorded ScalarHomModels presentations; the theorem supplies these presentations existentially, without adding hypotheses. Site-object universe u+1 and site-Hom universe u remain distinct. Repair of return 0dc45a25334e: beta transports the recorded openScalarIso by scalarIso; the existing scalar/open definitions are cited through def-sp-open-scalar-operations, with no dependency on openScalarExchange or the two proof-only existence theorems."
+  "note": "C6: existing definitions moved verbatim to the publicly re-exported OpenScalarTensorData module; signatures and mathematical meaning are unchanged. The original theorem is proved from the three source comparison lemmas by explicit adjunction and inverse-tensor calculations."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -355,5 +259,15 @@
   "group": "Q154",
   "result": "pass",
   "note": "Re-delivery of RETURN 0dc45a25334e. Lean delta: beta = isoWhiskerLeft(scalarIso X) ≫ openScalarIso ≫ isoWhiskerRight(scalarIso U).symm; openScalarIso is the same leftAdjointUniq construction with the same adjunctions and right square, so the map and all clauses are unchanged. Two theorem-only imports and stmt_deps (scalar-tensor-comparison, dc-hom-scalar-adjunction) dropped. New def-sp-open-scalar-operations is existing:true on the unchanged OpenScalarExchange (six data decls, theorem excluded): it lists every owner decl the item uses, has no competing owner, its TeX matches the bodies, check_existing reports no failures (noncomputable note only), no cycle, not dropped. Item node differs from live only in lean/stmt_deps and the 11 dependency records are identical. Clause table re-checked (beta_inverse, restricted_beta, coefficient_comp/id, tensor_square for arbitrary Q, unit normalization); existentials pinned (generators/K-flat square, open_normalization, Projection adjunct); edge cases empty U, j=id, A=B, zero rings, Z/4→Z/2. One sorry, verbatim signature, docstrings present. Advisories: new node cites by notion, not Lean-level owners four-corners/projection-compactification; openScalarIso docstring blueprint tag; redundant citation imports. No compile (no file changed); report records clean 47 s compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
  }
 }

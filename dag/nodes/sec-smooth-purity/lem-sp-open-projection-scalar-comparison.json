@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-open-projection-scalar-comparison",
+ "kind": "statement",
+ "title": "Scalar restriction of the normalized open projection",
+ "statement": "Fix any presentations $m$ and normalized comparison choices $c$ [def-sp-open-scalar-tensor-data]. Suppose for each finite commutative ring $A$ and open immersion $j:U\\to X$ [def-weil-open-immersion] a natural forward projection isomorphism $\\gamma^A:(j_!^AK)\\otimes_A^LQ\\cong j_!^A(K\\otimes_A^Lj_A^{-1}Q)$ is supplied, whose inverse is the open adjunct of the open unit tensor the identity followed by the inverse canonical restriction tensorator. For every map of finite commutative rings $\\varphi:A\\to B$, the specified mate $\\rho:j_!^A\\operatorname{Res}_U\\to\\operatorname{Res}_Xj_!^B$ is invertible, and the specified scalar projection $s$ identifies the scalar-restricted $\\beta$ with $\\gamma^A$ at the B coefficient: $s_X;\\operatorname{Res}_X(\\beta_K)=\\gamma^A_{K,B_X};j_!^A((1\\otimes\\text{coefficientPullback});s_U);\\rho_{S_UK}$. The equality uses exactly the coefficient pullback determined by the identity-on-actions square and the chosen open unit comparison, for arbitrary unbounded $K,Q$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "stmt_deps": [
+  "def-sp-open-scalar-tensor-data",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The supplied inverse-adjunct equation uniquely identifies each projection with the canonical open projection. Scalar restriction changes only actions on the open extension presheaf, and hence commutes with its sheafification. Its invertible identity comparison obeys the open-unit equation, which identifies it with the specified mate restrictionOpen.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "The scalar and open Hom bijections identify restricted inverse beta with inverse projection at the B unit: on K-flat representatives each scalar unit inserts 1, and the pullback comparison retains B. Naturality of the normalized open unit provides coefficientPullback. Equality of adjuncts after representative descent gives equality of the inverse maps, then inversion gives restricted_beta.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proetale-extension-zero",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor and scalar extension commute with open restriction; open projection formula and composition of adjunction mates",
+   "results": "8 hits, including ModuleCat.Tilde.toOpen_res and Scheme.Modules.restrictAdjunction; these concern ordinary Zariski modules and do not give the normalized unbounded pro-etale comparisons.",
+   "verdict": "No exact match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "Loogle is currently under load, please try again later.",
+   "verdict": "unavailable",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*[Ss]calar|[Ss]calar.*[Oo]pen",
+   "results": "25 hits, mostly open IsScalarTower and unrelated ring-theoretic scalar towers. Local rg additionally found Adjunction.Unique, Adjunction.Mates, DerivedExactSquareComposition, OpenTensorNormalization and ScalarHomTensorComparison; these were read.",
+   "verdict": "No exact complete comparison in these presentations; the formal mate calculus is used in the parent proof.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar tensor comparison commutes with open restriction and normalized open projection in unbounded proetale module categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.map_smul, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.toOpen_res, instSeminormedAddCommGroupRestrictScalars, AlgebraicGeometry.Scheme.Modules.restrict_map, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.restrictScalarsObj.",
+   "verdict": "No exact match: ordinary restriction and section compatibility do not state the normalized unbounded proetale comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenScalarTensorNormalization",
+  "date": "2026-10-21",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Open-immersion factor of the compactification: compatibility of the specified scalar map with projection, coefficient associativity and counit identities.",
+   "via": [
+    "lem-fix-open-scalar-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenScalarProjectionCompatibility",
+  "file": "lean/Sheaf/SixFunctors/OpenScalarProjectionCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_projection_compatibility",
+  "statement": "theorem open_scalar_projection_compatibility (m : Models.{u}) (c : Choices m)\n    (projection : ∀ (A : Type u) [CommRing A] [Finite A]\n      {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j], Projection m A j) :\n    Nonempty (ProjectionCompatibility m c projection)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.ProjectionCompatibility",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_projection_compatibility"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
+ }
+}

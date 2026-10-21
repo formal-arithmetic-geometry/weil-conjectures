@@ -1,0 +1,113 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor and scalar extension commute with open restriction; open projection formula and composition of adjunction mates",
+   "results": "8 hits, including ModuleCat.Tilde.toOpen_res and Scheme.Modules.restrictAdjunction; these concern ordinary Zariski modules and do not give the normalized unbounded pro-etale comparisons.",
+   "verdict": "No exact match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "Loogle is currently under load, please try again later.",
+   "verdict": "unavailable",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*[Ss]calar|[Ss]calar.*[Oo]pen",
+   "results": "25 hits, mostly open IsScalarTower and unrelated ring-theoretic scalar towers. Local rg additionally found Adjunction.Unique, Adjunction.Mates, DerivedExactSquareComposition, OpenTensorNormalization and ScalarHomTensorComparison; these were read.",
+   "verdict": "No exact complete comparison in these presentations; the formal mate calculus is used in the parent proof.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar tensor comparison commutes with open restriction and normalized open projection in unbounded proetale module categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.map_smul, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.toOpen_res, instSeminormedAddCommGroupRestrictScalars, AlgebraicGeometry.Scheme.Modules.restrict_map, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.restrictScalarsObj.",
+   "verdict": "No exact match: ordinary restriction and section compatibility do not state the normalized unbounded proetale comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenScalarTensorNormalization",
+  "date": "2026-10-21",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "The open projection map used to interpret the open scalar comparison; this node isolates existing intrinsic open-adjunction definitions from the integral coefficient setting.",
+   "via": [
+    "lem-fix-open-scalar-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "id": "def-sp-open-coefficient-adjunction-data",
+ "kind": "definition",
+ "title": "Intrinsic open coefficient adjunction data",
+ "statement": "For each scheme W [def-weil-pbc-proetale-site], a coefficient family consists of a sheaf of commutative rings R_W and an inverse-image identification f^{-1}R_V ≅ R_U for each scheme map f:U→V. No composition axiom is imposed on this organizing record. For an open immersion j:U→X [def-weil-open-immersion], use the exact ring-module extension j_! and restriction j^{-1}, with the ordinary adjunction localized degreewise to unbounded derived categories [def-weil-pbc-proetale-modules, lem-cbc-proetale-extension-zero]. Given the two actual tensor presentations, define the inverse projection j_!(K ⊗ j^{-1}Q) → j_!K ⊗ Q as the open adjunct of unit tensor identity followed by the inverse canonical tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. These are exactly the existing general definitions Coefficients, openExtension, openAdjunction, pull, openDerivedAdjunction and openProjectionInverse, independent of the later completed coefficient systems.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-modules",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_match": null,
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCompactSupportCoefficientData",
+  "declaration": "WeilConjectures.PurCompactSupport.Coefficients",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.Coefficients",
+   "WeilConjectures.PurCompactSupport.openExtension",
+   "WeilConjectures.PurCompactSupport.openAdjunction",
+   "WeilConjectures.PurCompactSupport.pull",
+   "WeilConjectures.PurCompactSupport.openDerivedAdjunction",
+   "WeilConjectures.PurCompactSupport.openProjectionInverse"
+  ],
+  "statement": "structure Coefficients where\n  ring : ∀ W : Scheme.{u}, Sheaf (ProEt.topology W) CommRingCat.{u + 1}\n  pull : ∀ {U V : Scheme.{u}} (g : U ⟶ V),\n    (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (ring V) ≅ ring U",
+  "existing": true,
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-21",
+  "note": "Existing definitions, unchanged. Their old broad owner also covered Frobenius and integral coefficient data; this attachment isolates the general open notions to remove a spurious dependency on their own consumers."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
+ }
+}

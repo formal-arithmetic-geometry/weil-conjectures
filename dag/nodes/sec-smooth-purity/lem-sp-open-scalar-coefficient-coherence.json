@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-open-scalar-coefficient-coherence",
+ "kind": "statement",
+ "title": "Coefficient coherence of scalar pullback",
+ "statement": "Fix any presentations $m$ of the normalized scalar derived adjunctions [def-sp-open-scalar-tensor-data]. For finite commutative rings $A\\xrightarrow{\\varphi}B\\xrightarrow{\\psi}C$, any open immersion $j:U\\to X$ [def-weil-open-immersion], and arbitrary $Q\\in D(X,A)$, put $S_T^\\varphi=-\\otimes_A^LB$ and $r_R=j_R^{-1}$. Let $\\lambda^\\varphi:S_X^\\varphi;r_B\\cong r_A;S_U^\\varphi$ be the specified scalar/inverse-image comparison, with semicolon denoting functor application in order. For the recorded scalar composition isomorphisms $\\alpha_T:S_T^\\varphi;S_T^\\psi\\cong S_T^{\\psi\\varphi}$, including constant-sheaf composition transports, one has $S_U^\\psi((\\lambda^\\varphi_Q)^{-1});(\\lambda^\\psi_{S_X^\\varphi Q})^{-1};r_C(\\alpha_{X,Q})=\\alpha_{U,r_AQ};(\\lambda^{\\psi\\varphi}_Q)^{-1}$. For the identity coefficient map, with the recorded scalar unitor $\\iota_T$, one has $(\\lambda^{\\mathrm{id}}_Q)^{-1};r_A(\\iota_{X,Q})=\\iota_{U,r_AQ}$. This assertion involves no extension by zero or beta comparison and assumes no tensor choices, boundedness or coefficient flatness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "stmt_deps": [
+  "def-sp-open-scalar-tensor-data",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "At the ordinary module-sheaf level the restriction/inverse-image square commutes with coefficient composition and identities on every section. Localize these equalities with the exact-functor composition comparisons, retaining their associators and the constant-sheaf transports.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pod-derived-exact-square-composition",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "Take scalar adjunction mates of the coefficient-composition and identity diagrams for exact restriction and inverse image. Mate pasting identifies the scalar compositors with scalarHomExtensionComp and the identity comparison with scalarHomExtensionId, since both are the conjugates of the same restriction comparison. The scalar-presentation changes are compatible by naturality of the scalar units. Finally insert the constant-sheaf composition and identity equality transports used in scalarComp and scalarId. This gives precisely the two inverse-lambda equations, with no open extension functor.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pod-derived-exact-square-composition",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor and scalar extension commute with open restriction; open projection formula and composition of adjunction mates",
+   "results": "8 hits, including ModuleCat.Tilde.toOpen_res and Scheme.Modules.restrictAdjunction; these concern ordinary Zariski modules and do not give the normalized unbounded pro-etale comparisons.",
+   "verdict": "No exact match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "Loogle is currently under load, please try again later.",
+   "verdict": "unavailable",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*[Ss]calar|[Ss]calar.*[Oo]pen",
+   "results": "25 hits, mostly open IsScalarTower and unrelated ring-theoretic scalar towers. Local rg additionally found Adjunction.Unique, Adjunction.Mates, DerivedExactSquareComposition, OpenTensorNormalization and ScalarHomTensorComparison; these were read.",
+   "verdict": "No exact complete comparison in these presentations; the formal mate calculus is used in the parent proof.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar tensor comparison commutes with open restriction and normalized open projection in unbounded proetale module categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.map_smul, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.toOpen_res, instSeminormedAddCommGroupRestrictScalars, AlgebraicGeometry.Scheme.Modules.restrict_map, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.restrictScalarsObj.",
+   "verdict": "No exact match: ordinary restriction and section compatibility do not state the normalized unbounded proetale comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenScalarTensorNormalization",
+  "date": "2026-10-21",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Open-immersion factor of the compactification: compatibility of the specified scalar map with projection, coefficient associativity and counit identities.",
+   "via": [
+    "lem-fix-open-scalar-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenScalarCoefficientCoherence",
+  "file": "lean/Sheaf/SixFunctors/OpenScalarCoefficientCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalar_pullback_coefficient_coherence",
+  "statement": "theorem scalar_pullback_coefficient_coherence (m : Models.{u}) :\n    Nonempty (ScalarPullbackCoefficientCoherence m)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.ScalarPullbackCoefficientCoherence",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalar_pullback_coefficient_coherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2bbfa",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T154013-L-2748125",
+  "kind": "interface",
+  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
+ }
+}
