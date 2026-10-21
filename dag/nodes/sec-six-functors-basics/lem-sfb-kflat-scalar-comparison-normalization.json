@@ -17,7 +17,9 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-sfb-derived-change-of-rings-cochain-model"
  ],
  "proof": [
   {
@@ -275,5 +277,43 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-5beb2d5db (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, all 11 cited nodes and blueprint main-20261015 det-prop-scalar-six-pullback.proof.md (1) with unit sk-prop-scalar-six step 2. The statement is the live text plus the justified def-weil-pbc-adjunction-mate citation and stmt_dep. No new nodes, no repair note, not dropped, no SGA. Checks: step 1 gives exactness of h_A^*/h_B^* on transported modules (04JC), the termwise unbounded model, and a_h as an equality of restricted actions. Step 2 is the 03EL pairing comparison with R=A_Y, M=B_Y; B_X-linearity and unit insertion are correct. Step 3 is 0G7E with c=id, then derived change of rings on both sites. Step 4: the mate direction checks out (L1=T_Y, L2=T_X, G=h_A^*, H=h_B^*); by the triangle identities the transpose of θ is a_h∘h_A^*η_Y, which equals the transpose of Q(χ^{-1}) by adjunction clause (1) and step 2, so injectivity pins the mate. Step 5 extends invertibility to unbounded objects by naturality on a K-flat resolution. Step 6: mate pasting (1) with (L1,L2,L3)=(T_Z,T_Y,T_X) gives mate (a_f g_B^*)(f_A^*a_g)=a_gf. Step 7 is clause (4). Edge cases checked: h=id, non-flat Z→Z/n, zero ring, unbounded complexes, topoi without points. No duplicates (ringed-topoi derived tensor pullback, pur constant-ring and pc ringed-space nodes are not substitutes). FIX: step 2 used the AlgebraicInverseImage presentation of the transported inverse image without a citation; I added lem-weil-pbc-geometric-module-construction (use, proof_dep, tool_use) and one sentence. Batch-5: lem-trf-geometric-inverse-image-exact is the generic 04JC exactness, not a trace-formula step, and is already in the batch-5 closure via non-trf citers; the closure with and without the item's proof edges is 17903 nodes either way (diff 0), so accepted. The added node is likewise already in the closure.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.KFlatScalarComparisonNormalization",
+  "declaration": "SheafOfModules.ScalarPullback.kflat_scalar_comparison_normalization",
+  "declarations": [
+   "SheafOfModules.ScalarPullback.Modules",
+   "SheafOfModules.ScalarPullback.underlying",
+   "SheafOfModules.ScalarPullback.restriction",
+   "SheafOfModules.ScalarPullback.InverseImage",
+   "SheafOfModules.ScalarPullback.inverseModules",
+   "SheafOfModules.ScalarPullback.inverseRing",
+   "SheafOfModules.ScalarPullback.inverseUnderlying",
+   "SheafOfModules.ScalarPullback.pure",
+   "SheafOfModules.ScalarPullback.mate",
+   "SheafOfModules.ScalarPullback.AdjunctionNormalized",
+   "SheafOfModules.ScalarPullback.action_existsUnique",
+   "SheafOfModules.ScalarPullback.a_h",
+   "SheafOfModules.ScalarPullback.aD_h",
+   "SheafOfModules.ScalarPullback.θ_h",
+   "SheafOfModules.ScalarPullback.kflat_scalar_comparison_normalization",
+   "SheafOfModules.ScalarPullback.compositionDerived",
+   "SheafOfModules.ScalarPullback.θ_composition",
+   "SheafOfModules.ScalarPullback.θ_identity"
+  ],
+  "file": "lean/Sheaf/Paper/KFlatScalarComparisonNormalization.lean",
+  "statement": "theorem kflat_scalar_comparison_normalization {C D : Type u} [Category.{u} C] [Category.{u} D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify K AddCommGrpCat.{u}] [K.WEqualsLocallyBijective AddCommGrpCat.{u}] {AY BY : Sheaf J CommRingCat.{u}} {AX BX : Sheaf K CommRingCat.{u}} (φY : AY ⟶ BY) (φX : AX ⟶ BX) (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (R : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ R) [PreservesFiniteLimits L] (IA : InverseImage L AY AX) (IB : InverseImage L BY BX) (ring_compat : L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map φY) ≫ (inverseRing IB).hom = (inverseRing IA).hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map φX) [HasDerivedCategory.{w} (Modules AY)] [HasDerivedCategory.{w} (Modules BY)] [HasDerivedCategory.{w} (Modules AX)] [HasDerivedCategory.{w} (Modules BX)] (mY : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} φY) (mX : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} φX) : ∃ (_ : (inverseModules IA).Additive) (_ : (inverseModules IB).Additive) (_ : PreservesFiniteLimits (inverseModules IA)) (_ : PreservesFiniteColimits (inverseModules IA)) (_ : PreservesFiniteLimits (inverseModules IB)) (_ : PreservesFiniteColimits (inverseModules IB)) (_ : PreservesFiniteLimits (restriction φY)) (_ : PreservesFiniteColimits (restriction φY)) (_ : PreservesFiniteLimits (restriction φX)) (_ : PreservesFiniteColimits (restriction φX)), ∃ (aY : mY.E ⊣ restriction φY) (aX : mX.E ⊣ restriction φX) (dY : mY.T ⊣ (restriction φY).mapDerivedCategory) (dX : mX.T ⊣ (restriction φX).mapDerivedCategory) (χ : mY.E ⋙ (inverseModules IB) ≅ (inverseModules IA) ⋙ mX.E), AdjunctionNormalized mY aY dY ∧ AdjunctionNormalized mX aX dX ∧ (∀ (H : Modules BY) (U : Dᵒᵖ) (x : ((inverseModules IA).obj ((restriction φY).obj H)).val.obj U), ((a_h IA IB ring_compat inferInstance).hom.app H).val.app U x = (((inverseUnderlying IB).inv.app H).hom.app U (((inverseUnderlying IA).hom.app ((restriction φY).obj H)).hom.app U (ULift.up x))).down) ∧ (∀ (H : CochainComplex (Modules BY) ℤ), (aD_h IA IB ring_compat inferInstance).hom.app (DerivedCategory.Q.obj H) = (inverseModules IA).mapDerivedCategory.map ((restriction φY).mapDerivedCategoryFactors.hom.app H) ≫ (inverseModules IA).mapDerivedCategoryFactors.hom.app (((restriction φY).mapHomologicalComplex (.up ℤ)).obj H) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (a_h IA IB ring_compat inferInstance) (.up ℤ)).hom.app H) ≫ (restriction φX).mapDerivedCategoryFactors.inv.app (((inverseModules IB).mapHomologicalComplex (.up ℤ)).obj H) ≫ (restriction φX).mapDerivedCategory.map ((inverseModules IB).mapDerivedCategoryFactors.inv.app H)) ∧ (∀ (M : Modules AY) (Z : Sheaf J (Type u)) (b : Z ⟶ (sheafCompose J (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj BY) (x : Z ⟶ (underlying AY).obj M) (z : Z ⟶ (underlying BY).obj (mY.E.obj M)), (∀ (U : Cᵒᵖ) (t : Z.obj.obj U), @id ((mY.E.obj M).val.obj U) (z.hom.app U t).down = pure mY M U (@id (BY.obj.obj U) (b.hom.app U t).down) (@id (M.val.obj U) (x.hom.app U t).down)) → ∀ (U : Dᵒᵖ) (t : (L.obj Z).obj.obj U), (χ.hom.app M).val.app U (((inverseUnderlying IB).inv.app (mY.E.obj M)).hom.app U ((L.map z).hom.app U t)).down = pure mX ((inverseModules IA).obj M) U (@id (BX.obj.obj U) ((L.map b ≫ (inverseRing IB).hom).hom.app U t).down) (((inverseUnderlying IA).inv.app M).hom.app U ((L.map x).hom.app U t)).down) ∧ (∀ M : Modules AY, (inverseModules IA).map (aY.unit.app M) ≫ (a_h IA IB ring_compat inferInstance).hom.app (mY.E.obj M) ≫ (restriction φX).map (χ.hom.app M) = aX.unit.app ((inverseModules IA).obj M)) ∧ (∀ (P : CochainComplex (Modules AY) ℤ), CochainComplex.IsKFlatIndependentCoefficients.{u, u, u} (J := J) (R := AY) P → (∀ n : ℤ, IsFlatOnSite.{u, u, u, u} (J := J) (R := AY) (P.X n)) → IsIso (mX.ε.app (((inverseModules IA).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (θ_h IA IB ring_compat inferInstance dY dX).app (DerivedCategory.Q.obj P) ≫ (inverseModules IB).mapDerivedCategory.map (mY.ε.app P) ≫ (inverseModules IB).mapDerivedCategoryFactors.hom.app ((mY.E.mapHomologicalComplex (.up ℤ)).obj P) = mX.T.map ((inverseModules IA).mapDerivedCategoryFactors.hom.app P) ≫ mX.ε.app (((inverseModules IA).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex χ (.up ℤ)).inv.app P)) ∧ IsIso (θ_h IA IB ring_compat inferInstance dY dX)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36502b07f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery repairs both RETURN findings of c8ca664. F1: θ_h is now a def (mateEquiv.symm of aD_h). a_h is chosen from an ∃! pinned via moduleUnderlying; aD_h comes from mapDerivedCategoryNatIso/CompIso. θ_composition uses actual geometric Lg⊣Rg, Lf⊣Rf, Lh⊣Rf⋙Rg with the leftAdjointUniq composite, pinned ring equations and underlying-pinned cA/cB; its equation is exactly θ_gf=(f_B^*θ_g)(θ_f g_A^*) with associators. It holds for arbitrary adjunctions (mateEquiv_vcomp). θ_identity uses the 𝟭 topos with pinned iA/iB and unitors. F2: stmt_deps now carry the landed def-sfb-derived-change-of-rings-cochain-model and def-weil-pbc-algebraic-inverse-image (both reviewed_lean pass); the theorem dep is dropped and kept in proof_deps. Node differs from live only in lean/stmt_deps; statement verbatim. Clauses checked: χ pairing formula, unit equation, AdjunctionNormalized, K-flat representative equation (types checked), global IsIso, mate direction, no flatness/boundedness, universes u/w. 4 sorrys, all theorems; no hollow defs; docstrings present. nt_compile --json: 40.2 s, exit 0, clean. Advisory: AdjunctionNormalized restates the coefficient-adjunction normalization."
+ }
 }

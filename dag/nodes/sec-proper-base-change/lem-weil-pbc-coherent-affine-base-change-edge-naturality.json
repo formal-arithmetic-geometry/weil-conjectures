@@ -25,7 +25,10 @@
   "pqf-def-cohomology",
   "def-weil-pbc-module-cohomology-fmap",
   "lem-pc-module-pullback-identity-composition",
-  "lem-pc-module-pullback-adjunction"
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-derived-open-restriction-maps",
+  "def-weil-pbc-pinned-single-degree-tensor-comparison",
+  "def-weil-pbc-single-degree-module-base-change-composite"
  ],
  "proof": [
   {
@@ -316,5 +319,39 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-ce4555e31 (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged, true), all 7 steps, both new nodes and every cited statement. Sources checked: Stacks 05TC derived.tex:5497, 01E4 cohomology.tex:592, 0ATM cohomology.tex:6699 (its Lh_* is a typo for Lh^*, as the report says) and 08HY. No SGA source is used. Two citation faults, both fixed in the item. (1) C1/C4, step 1: lem-sc-local-kflat-pullback-model needs the whole morphism T to factor through the open, which a general g does not, and the restriction (Lg^*K)|_{g^{-1}V_i} = Lg_i^*(K|_{V_i}) was not cited. The step now cites lem-pc-derived-pullback-open-restriction-universes and def-pc-derived-pullback (termwise on the K-flat free model). (2) C1/C5, step 4: the identity c_{vw}=c_w Lw^*(c_v) was proved by transposing, which needs the derived composition isomorphism to be compatible with the adjunctions, and no cited node states that. The existing node lem-pc-canonical-single-pullback-composition states the identity itself, so the step now cites it and spells out the pasting and cancellation. Steps 2, 3, 5, 6 and 7 are correct: I redid the beta algebra of step 5 and the unit-naturality cancellation of step 7, and in step 3 the cocycle maps eps and theta are the same map, which gives linearity. New nodes are kept. lem-weil-pbc-derived-pullback-top-cohomology is true: Lg^* is right t-exact, and the n=0 case Spec F_p -> Spec Z (Tor in degree -1), C=0 and empty T all check; no duplicate found. lem-weil-pbc-top-base-change-presheaf is true by reducing to the ordinary adjoint through tau_{>=q} and naturality of theta; no duplicate (the flat-sections node assumes flatness). Inherited advisory: def-pc-derived-base-change-map is stated only for D_QCoh while the module base-change definition applies it to any module. tool_uses: dropped local-kflat, derived-adjoint and fmap-functorial; added open-restriction-universes and canonical-single-pullback-composition. Cycle check is clean.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge",
+  "declaration": "AlgebraicGeometry.coherent_affine_base_change_edge_naturality",
+  "declarations": [
+   "AlgebraicGeometry.coherentEdgeK",
+   "AlgebraicGeometry.coherentEdgeCohomology",
+   "AlgebraicGeometry.coherentEdgeCoefficient",
+   "AlgebraicGeometry.coherentEdgeDelta",
+   "AlgebraicGeometry.coherentEdgeGamma",
+   "AlgebraicGeometry.coherentEdgeEpsilon",
+   "AlgebraicGeometry.coherentEdgeH",
+   "AlgebraicGeometry.coherentEdgeSectionPullback",
+   "AlgebraicGeometry.coherentEdgeRho",
+   "AlgebraicGeometry.coherentEdgeXMap",
+   "AlgebraicGeometry.coherentEdgeCoefficientIso",
+   "AlgebraicGeometry.coherentEdgePullback",
+   "AlgebraicGeometry.coherent_affine_base_change_edge_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentAffineBaseChangeEdge.lean",
+  "statement": "theorem coherent_affine_base_change_edge_naturality {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [IsSeparated f] (G : X.Modules) [G.IsQuasicoherent] [SheafOfModules.IsFiniteLocallyFree (coherentEdgeCohomology f G 0)] [SheafOfModules.IsFiniteLocallyFree (coherentEdgeCohomology f G 1)] (hsplit : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ Nonempty ((schemeOpenRestriction S U).mapDerivedCategory.obj (coherentEdgeK f G) ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj ((schemeOpenRestriction S U).obj (coherentEdgeCohomology f G 0)) ⊞ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 1).obj ((schemeOpenRestriction S U).obj (coherentEdgeCohomology f G 1)))) (hbc : ∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso (coherentEdgeDelta f G g)) : ∃ τ : coherentEdgeK f G ⟶ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 1).obj (coherentEdgeCohomology f G 1), ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 1).map τ ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 1).hom.app (coherentEdgeCohomology f G 1) = 𝟙 _) ∧ (∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso (coherentEdgeGamma g (coherentEdgeK f G) τ)) ∧ ∃ β : ∀ (T : Scheme.{u}) (g : T ⟶ S), (Scheme.Modules.tensorPullback g).obj (coherentEdgeCohomology f G 1) ≅ coherentEdgeCohomology (pullback.snd f g) (coherentEdgeCoefficient f G g) 1, (∀ (T : Scheme.{u}) (g : T ⟶ S), coherentEdgeGamma g (coherentEdgeK f G) τ ≫ (β T g).hom = (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 1).map (coherentEdgeDelta f G g)) ∧ ∃ e : ∀ (T : Scheme.{u}) (g : T ⟶ S) (_ : IsAffine T), coherentEdgeH f G g ≃ₗ[Γ(T, ⊤)] (RingedSpace.globalSectionsFunctor T.toRingedSpace).obj ((Scheme.Modules.tensorPullback g).obj (coherentEdgeCohomology f G 1)), (∀ (T : Scheme.{u}) (g : T ⟶ S) (hT : IsAffine T), IsIso (coherentEdgeEpsilon (pullback.snd f g) (coherentEdgeCoefficient f G g)) ∧ ∀ x : coherentEdgeH f G g, e T g hT x = (RingedSpace.globalSectionsFunctor T.toRingedSpace).map (β T g).inv (coherentEdgeEpsilon (pullback.snd f g) (coherentEdgeCoefficient f G g) x)) ∧ ∀ (T T' : Scheme.{u}) (g : T ⟶ S) (h : T' ⟶ T) (hT : IsAffine T) (hT' : IsAffine T') (x : coherentEdgeH f G g), e T' (h ≫ g) hT' (coherentEdgePullback f G g h x) = coherentEdgeRho g h (coherentEdgeCohomology f G 1) (e T g hT x)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The existential normalized truncation map is the unique canonical projection for K in D≤1. Gamma, beta, epsilon and e are pinned to the specified counit and cocycle maps; the coefficient iso and scalar restriction are explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca29cd83f",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after the RETURN on c19c2cada59d. Lean module byte-identical to the one judged faithful there; item changes only stmt_deps. H2 repaired: new existing:true def nodes def-weil-pbc-pinned-single-degree-tensor-comparison (pinnedSingleDegreeTensorComparison) and def-weil-pbc-single-degree-module-base-change-composite (singleDegreeBaseChangeSource/Target/Composite) replace theorem node lem-pc-open-pinned-single-degree-square. Signatures verbatim, texts match bodies, the theorem stmt_dep lem-pc-ringed-spaces-derived-pullback-composition is justified by .choose of exists_derivedPullbackComposition, citations equal stmt_deps, no other definition node owns the decls, no cycle, both decls used by coherentEdgeDelta/Gamma. H13 repaired: def-pc-derived-module-base-change-map record byte-identical to live. Compile: nt_compile 60 s and lcompile 600 s timed out under load ~155; relied on the identical file's clean 263 s lcompile in the prior review plus the delivery's clean scompile and passing dry run. Second reading is a labelled self-audit (observation only)."
  }
 }

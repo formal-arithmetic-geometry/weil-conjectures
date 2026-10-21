@@ -21,7 +21,9 @@
   "def-pc-perfect-complex",
   "pqf-def-coherent",
   "def-sc-finite-locally-free-sheaf",
-  "def-pc-derived-module-base-change-map"
+  "def-pc-derived-module-base-change-map",
+  "def-weil-pbc-canonical-single-direct-image-map",
+  "def-weil-pbc-canonical-single-pullback-map"
  ],
  "proof": [
   {
@@ -248,5 +250,31 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-c9e7d9056 (reviewer sub-agent of L); spot-checked: I read the whole item. This is a zero-new-node split. The statement is byte-identical to the version Q05 created, and the item is still unsplit in live and side, so no other group has done it. Source: Stacks 0GKA, statement and proof, read in full. The 4 steps follow its proof exactly, with the nodal and connected hypotheses replaced by the facts actually used (proper flat finite presentation, kappa(s) = H^0 of the fibre, fibre dimension at most 1); nothing is weakened. Step 1: 0B91 (lem-pc-rf-perfect-base-change) applies to G = O_X, which is finitely presented and S-flat; it gives perfectness and the canonical def-pc-derived-module-base-change-map isomorphism for arbitrary g, and G_T = O_{X_T}. Step 2: the 0E62 unit lemma (f is quasi-compact separated flat) and the degree-zero criterion give H^0(a) iso and K = O_S + P locally, P of tor amplitude [1,inf). H^0(u) is invertible because H^0(a)e_1 = e_0 f# with e_i isomorphisms; the step's wording is slightly loose but the inference is valid. Step 3: the fibre is finite type over a Noetherian field spectrum, hence Noetherian; 02UZ with topological dimension at most 1 kills H^q for q > 1, and base change along i_s identifies these groups with H^i of the pulled-back complex. Step 4: only d_1 can be nonzero; the 0BCD residue model gives P = O^{d_1}[-1] locally, so E is finite locally free. Edge cases checked: empty base or fibre, X = S, P^1 and elliptic families, degree-2 etale cover excluded, disconnected base, non-flat g. No duplicate: the proper-flat-global-sections nodes give only f_*O = O_S. No SGA source. The tool_uses entries for 0B91, perfect quasi-coherence, the 0E62 unit and criterion, 02UZ and 0BCD are accepted as generic coherent inputs. Batch 5: in the closures of both flagged citations (degree-zero-fibre-criterion and finite-free-residue-model), the only pod or trf node is def-pod-ring-scalar-extension. It is a general definition of scalar extension, not part of the proof of either assumption, so both flags are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatCurveDerivedStructureModel",
+  "declaration": "AlgebraicGeometry.flatCurve_derivedStructure_model",
+  "declarations": [
+   "AlgebraicGeometry.derivedStructureImage",
+   "AlgebraicGeometry.derivedStructureUnit",
+   "AlgebraicGeometry.derivedStructureH1",
+   "AlgebraicGeometry.derivedStructureBaseChangeMap",
+   "AlgebraicGeometry.flatCurve_derivedStructure_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatCurveDerivedStructureModel.lean",
+  "statement": "theorem flatCurve_derivedStructure_model {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] [∀ U : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (hdim : ∀ s : S, topologicalKrullDim (f.fiber s) ≤ 1) (hconstants : ∀ s : S, IsIso (f.fiberToSpecResidueField s).appTop) : S.IsPerfect (derivedStructureImage f) ∧ IsIso ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map (derivedStructureUnit f)) ∧ (derivedStructureH1 f).IsQuasicoherent ∧ (derivedStructureH1 f).IsFiniteLocallyFree ∧ (∀ s : S, ∃ U : S.Opens, s ∈ U ∧ Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj (derivedStructureImage f) ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj (SheafOfModules.unit ((moduleRings S.toRingedSpace).over U)) ⊞ ((DerivedCategory.singleFunctor (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj ((derivedStructureH1 f).over U))⟦(-1 : ℤ)⟧)) ∧ (∀ i : ℤ, i ≠ 0 → i ≠ 1 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i).obj (derivedStructureImage f))) ∧ (∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso (derivedStructureBaseChangeMap f g))",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four auxiliary declarations name the objects and canonical arrows of this statement. Base change uses the pinned tensor-pullback comparison transported by the unique adjunction-preserving isomorphism to ordinary pullback, then its adjoint unit identification. No arbitrary comparison map or splitting is chosen. The single-comparison constructors are owned by the two new existing-definition nodes, rather than by the invertibility theorem nodes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4e96b88b",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery of the ab7ba9f8 H2 RETURN. Item Lean byte-identical (sha f3397746…), substance re-read and correct vs Stacks 0GKA: proper/flat/LOFP, fibre dim ≤1, appTop iso κ(s)→Γ(X_s), K=Rf_*O_X[0], unit = single(f♯)≫canonicalSingleDirectImageMap, perfect, H0(u) iso, E=H1 qcoh + finite locally free with variable rank, local K≅O[0]⊞E|_U[0]⟦-1⟧, H^i=0 off {0,1}, base change δ_g iso for all g. stmt_deps now cite new def-weil-pbc-canonical-single-direct-image-map and def-weil-pbc-canonical-single-pullback-map (existing:true on unchanged Picard/CanonicalSingle*Comparison modules) instead of the two theorem nodes; records verbatim, decls complete, body owners cited (pullback-composition and tensor-pullback-adjunction .choose), check_existing and check_new_node clean, ids new, no cycle. nt_compile --json clean in 34.1 s. Advisory: tensorPullback owner def-pc-module-pullback reached via the adjunction node; item reaches schemeDerivedBaseChangeMap/derivedPullback via def-pc-derived-module-base-change-map."
  }
 }

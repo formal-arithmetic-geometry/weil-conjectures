@@ -21097,3 +21097,13 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T08:17:21Z L: superseded stage-1 delivery Q02/lem-sf-adjunct-conjugate-open-factor at ef21d542716445f7aaf5cc4fe821d63316d15318; current completion retained; packet archived at refs/superseded/Q02/lem-sf-adjunct-conjugate-open-factor/ef21d542716445f7aaf5cc4fe821d63316d15318; stale return retired.
 - 08:17 L: returned deliver/Q94/lemma-nagata-scheme-image-of-closed-immersion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-scheme-image-of-closed-immersion: cited n)
 - 08:17 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A7/B10, superseded by the live Lean closure (brief l.103: live finished nodes win and are never split). The human re-spl)
+- 08:17 L: merged deliver/NE/lem-pur-quotient-scalar-comparison-descent (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/NL/lem-coef-sequence-pushforward-limit-projections (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/NC/lem-coef-sequence-global-sections-evaluation (stage 2; reviewer FIX; parallel immutable checks)
+- 08:17 L: merged deliver/NZ/lem-sfb-kflat-scalar-comparison-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/Q07/lem-weil-pbc-flat-constant-tensor-pro-zero-cones (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/NA/lem-weil-pbc-stratum-completion-unit-restriction (stage 2; reviewer FIX; parallel immutable checks)
+- 08:17 L: merged deliver/NP/def-sfb-qlbar-subextension-map (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/NB/def-sfb-padic-integers-condensed-ring (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/NG/lem-weil-pbc-coherent-affine-base-change-edge-naturality (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: merged deliver/NG/lem-weil-pbc-flat-curve-derived-structure-model (stage 2; reviewer PASS; parallel immutable checks)

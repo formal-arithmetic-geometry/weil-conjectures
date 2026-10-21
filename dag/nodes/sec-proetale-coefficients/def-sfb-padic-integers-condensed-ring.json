@@ -201,5 +201,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-170aad351 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all six steps, cited statements, blueprint route, and Mathlib Ultra.lean:140–143. Arguments and edge cases pass; no duplicate or cycle found. Repaired only the new leaf’s missing created.by/date metadata. Details in review.md; corrected JSON under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic",
+  "declaration": "Profinite.padicIntegersCondensedRing",
+  "declarations": [
+   "Profinite.padicIntegersCondensedRing",
+   "Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing",
+   "Profinite.padicIntegersRingObj",
+   "Profinite.isCommMonObj_padicIntegersRingObj",
+   "Profinite.padicIntCondensedRingToPadicIntegersCondensedRing"
+  ],
+  "statement": "abbrev padicIntegersCondensedRing :\n    Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}",
+  "branch": "slopmaster2",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing live upstream construction, lines 118–150. Surrounding binders are (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]. It installs PadicAlgCl.normedFieldOfAlgebra and applies continuousMapRingSheaf to PadicAlgCl.integers ℓ E, the norm-at-most-one valuation subring with subspace topology. It is definitionally the recorded continuousMapRingSheafOfUniverse.{u, 0} specialization. The recorded inclusion maps are definitionally continuousMapRingSheafMapOfUniverse.{u, 0}; only the map from ℤ_[ℓ] additionally assumes [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]. The actual underlying abelian sheaf has the stated commutative ring-object structure. An embedded field in any universe is Small.{0}, so the small subfield model excludes no case. The scratch server consumer checks these identifications, section formulas, restrictions, commutativity and smallness. No new module or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4c9d2c91",
+  "group": "NB",
+  "result": "pass",
+  "note": "existing:true attachment of upstream Profinite.padicIntegersCondensedRing (EllAdic.lean:116-152) plus its ring object, commutativity instance and both inclusion maps. Only lean differs from live; the item is not dropped and live lean is null. All 4 stmt_deps landed and reviewed_lean pass. Every clause matches: induced norm/topology on E : Type (same small-subfield model as the landed subfield record), O_E = PadicAlgCl.integers (norm <= 1 by Iff.rfl), sheaf, commutative ring object, O_E->E postcomposition, Z_l->O_E only under the IsScalarTower (Q_l-linearity) clause. Scratch consumer via nt_compile --json: rfl/HEq.rfl equalities with the recorded continuousMapRingSheafOfUniverse/ObjOfUniverse/SheafMapOfUniverse at {u,0} and both section formulas; 22.3 s, exit 0, no errors. Statement verbatim from abbrev. No duplicate definition in lean/Sheaf. No findings."
+ }
 }

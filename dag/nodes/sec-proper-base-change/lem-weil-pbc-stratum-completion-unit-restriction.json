@@ -16,7 +16,11 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-constant-completion-equivalence",
   "def-weil-pbc-intrinsic-completion",
-  "def-constructible-stratification"
+  "def-constructible-stratification",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-completed-pullback",
+  "def-pur-completed-rlim-functor",
+  "def-weil-pbc-ring-restriction-pullback-comparison"
  ],
  "proof": [
   {
@@ -274,5 +278,45 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-6f7228b0d (reviewer sub-agent of L); spot-checked: Q32 6f7228b0: the item (statement unchanged; compared with the live node, only status/proof/proof_deps/proof_origin/split_report/mathlib_searches differ) gets an 8-step proof with no new nodes. Source checked: Bhatt–Scholze Lemma 6.5.8(1),(2) and its proof (k^* commutes with limits and with ⊗R/m), Prop. 6.6.11 reverse direction ('complete by 6.5.8 and standard sequences'), and Remark 6.5.10. Each step checked against the cited statements. S1: constant-ring-map applies because each A/I^n is finite and u is arbitrary; the immersion and weakly-étale limit lemmas give c_u; its projections and transitions are the specified ones. S2: the immersion lemma's transported-scalar clause; slice identification plus restriction exactness plus sectionwise limits for U. S3: every hypothesis of reduction-pullback-derived-tower holds, and Q_X=((A/I^n)_Y) with π_n. S4 (elementary): the balancing formulas of the adic datum and of τ agree; a genuine representative calculation. S5: products are exact on every scheme; exact-product strict-limit hypotheses hold. S6: its augmentation clause with γ=i_{X,K} and τF(i)=i_{FK} gives F(η_K)=η_{FK}; no arbitrary cone isomorphism. S7: Koszul Q_m of the intrinsic-completion definition equals Q_m(Â) of constant-completion-equivalence, whose units agree. S8: Noetherian stratum detection with R=B_X on the single morphism η_K. Implicit and accepted as elementary: inverse image along a pro-étale object equals slice restriction (initial object of I_W in def-weil-proetale-inverse-image). Edge cases checked: empty strata/members, I=A, I=0, unbounded K, non-Noetherian U. check_dag: no cycle or route error through the item. No duplicates; no SGA. Accepted tool_uses: lem-weil-proetale-weakly-etale-localization, lem-sfb-ringed-site-restriction-kflat, lem-weil-proetale-countable-products-exact, lem-cbc-exact-product-functor-strict-limit (generic, needed, no unit node gives them)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.StratumCompletionUnitRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.stratum_completion_unit_restriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsAdicStratumRestriction",
+   "AlgebraicGeometry.Scheme.stratumModulePull",
+   "AlgebraicGeometry.Scheme.stratumModuleReductionIso_exists",
+   "AlgebraicGeometry.Scheme.stratumModuleReductionIso",
+   "AlgebraicGeometry.Scheme.StratumReductionFormula",
+   "AlgebraicGeometry.Scheme.stratumReductionIso_exists",
+   "AlgebraicGeometry.Scheme.stratumReductionIso",
+   "AlgebraicGeometry.Scheme.stratumRlimComparison",
+   "AlgebraicGeometry.Scheme.stratumCompletionComparison",
+   "AlgebraicGeometry.Scheme.stratumFiniteCoefficient_naturality",
+   "AlgebraicGeometry.Scheme.stratumQuotientChi",
+   "AlgebraicGeometry.Scheme.stratumReduction_normalization",
+   "AlgebraicGeometry.Scheme.stratumTowerEvaluationIso",
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation",
+   "AlgebraicGeometry.Scheme.stratumReduction_augmentation",
+   "AlgebraicGeometry.Scheme.stratumRestriction_limits",
+   "AlgebraicGeometry.Scheme.stratumRlimComparison_isIso",
+   "AlgebraicGeometry.Scheme.stratumCompletionComparison_unit",
+   "AlgebraicGeometry.Scheme.stratumIntrinsicComplete_preserved"
+  ],
+  "file": "lean/Sheaf/Paper/StratumCompletionUnitRestriction.lean",
+  "statement": "theorem stratum_completion_unit_restriction (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (S : FiniteLocallyClosedStratification X) (V : ∀ i : Fin S.n, Scheme.Cover.{w} proetalePrecoverage (S.domain i)) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : d.derived X) (C : CochainComplex (reductionModules X (d.completedRing X)) ℤ) (eC : DerivedCategory.Q.obj C ≅ K) : IsDerivedCompleteIntrinsic X d r a ha K C eC ↔ ∀ (i : Fin S.n) (j : (V i).I₀), ∀ (D : CochainComplex (reductionModules ((V i).X j) (d.completedRing ((V i).X j))) ℤ) (eD : DerivedCategory.Q.obj D ≅ (d.pull ((V i).f j ≫ S.immersion i)).obj K), IsDerivedCompleteIntrinsic ((V i).X j) d r a ha ((d.pull ((V i).f j ≫ S.immersion i)).obj K) D eD",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses are rendered by the listed declarations: the canonical coefficient projection square and exact module restriction; normalized comparison of the actual strict reduction towers; finite evaluation and quotient-normalization equations; the constant/derived-limit mate and its invertibility for the specified restrictions; the actual quotient completion-unit equation; intrinsic preservation and detection by every chosen pro-etale cover of every finite locally closed stratum. The original statement is unchanged. IntrinsicCompletion supplies the existing canonical transport of the recorded intrinsic predicate to the actual continuous-function coefficient presentation. No arbitrary endpoint or cone comparison is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89a010fad",
+  "group": "NA",
+  "result": "fix",
+  "note": "Re-delivery, byte-identical in Lean/item/new-node to 7603bd08 and ac665650 (both FIXed; fixes lost on landing). Independent re-read: item vs live differs only in lean/stmt_deps (9 base deps kept, 4 def-node additions, no theorem stmt_deps); clauses match BS 6.5.8(1),(2)/6.6.11: Noetherian hypotheses on X only, IsAdicStratumRestriction covers immersion/weakly-etale/both composites, ∃!-pinned ordinary and derived tower comparisons, explicit Rlim adjunction mate, unit equation from (d.pull f).obj K, all-level normalization, intrinsic predicate preserved and detected over arbitrary covers of a finite locally closed stratification; edge cases allowed; 11 sorry, signature verbatim. nt_compile --json clean 26.6 s exit 0. FIX fixes/def-weil-pbc-ring-restriction-pullback-comparison.json (re-applied): lean.statement starts at def (verbatim in live ProEtaleRingSheafChangeAdjunction), declarations add proEtaleRingRestrictionDirectImage and its _existsUnique. MAINTAINER: the earlier landing refusals ('def-weil-pbc-ring-restriction-pullback-comparison is not reached from a target') happen because the item itself is orphaned in live: its only citer lem-weil-pbc-perfect-strata-uniform-reductions is no longer cited by lem-weil-pbc-integral-stratified-perfect-characterization (NF re-split reopened; live proof is K2's 6-step version). No group change can fix this (import_flags is maintainer-owned; dropping the node reopens H2). Hold dispatch until the parent re-split re-cites the chain or the orphans are flagged, then land this FIX. Advisories: ProEtaleOperations pullback/adjunction have no DAG owner; Q33 lem-sfb-adic-stratum-completion-unit near-duplicate."
+ }
 }

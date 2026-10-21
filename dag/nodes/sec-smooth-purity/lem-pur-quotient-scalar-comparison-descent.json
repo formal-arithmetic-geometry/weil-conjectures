@@ -15,7 +15,8 @@
   "def-weil-inverse-system",
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
-  "def-weil-strict-roos-model"
+  "def-weil-strict-roos-model",
+  "def-pe-principal-power-ring-quotients"
  ],
  "proof": [
   {
@@ -296,5 +297,33 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-644f83870 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps in full, every cited statement and the sources (BS 3.4.10 and 3.5.1(1), pp. 22-24; Stacks 06YS/06YT at sites-cohomology.tex l. 3207/3233). The statement is unchanged from the NQ base. Two stmt_deps were added and the statement uses both: flat modules and the strict Roos model. There are no new nodes. The closure has 181 nodes and no cycle, and there is no SGA citation. Steps 1-2: the balanced maps, t_n c_{n+1}=c_n, (1-s)alpha=0 and the chain map (0,alpha) all match the coordinates and augmentation of def-weil-strict-roos-model. Step 3: the strict Roos homotopy lemma applies, since its levelwise homotopies commute with the transitions. Step 4 supplies 06YS resolutions and saturated right fractions. Step 5: change of rings for a K-flat quasi-isomorphism holds for any ring map; restriction keeps the underlying sheaves, so it keeps cohomology. Step 6: exact products give a product quasi-isomorphism. Step 7: the sign is right; reordering gives (dx,-(1-s)x-dy), so the lemma's endomorphism is -(1-s). Step 8 applies essential constancy, then the pointwise-Kan bridge, then the total derived leaf. The leaf's Mathlib match includes the pointwise RKE, which together with limit-cone uniqueness gives an invertible counit on P. This is the same chain as the accepted lem-pur-left-derived-from-kflat-class, and it avoids that node's exactness premise. Steps 9-10: the RKE universal property is used in the correct direction, and uniqueness follows by resolution. Step 11: the quotient unit for S=R matches what the citer's step 5 uses. Edge cases checked: P=0, B_n=0, B_n=S, Z to Z_p, a=0 or a unit, a non-surjective S to B_n, unbounded complexes. No duplicate found: lem-pe-kflat-roos-representative-invariance covers only S=R. The tool uses lem-pc-kflat-resolution and lem-pe-roos-coordinates-quasi-iso are accepted. Advisory only: step 8 could spell out the limit-cone uniqueness sentence. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientScalarComparisonDescent",
+  "declaration": "SheafOfModules.quotient_scalar_comparison_descent",
+  "declarations": [
+   "SheafOfModules.ScalarTowerTensorModel",
+   "SheafOfModules.ScalarTowerTensorModel.F",
+   "SheafOfModules.ScalarTowerTensorModel.G",
+   "SheafOfModules.ScalarTowerTensorModel.AugmentationCoordinates",
+   "SheafOfModules.ScalarTowerTensorModel.DerivedDescent",
+   "SheafOfModules.quotient_scalar_comparison_descent",
+   "SheafOfModules.quotient_scalar_comparison_unit"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientScalarComparisonDescent.lean",
+  "statement": "theorem quotient_scalar_comparison_descent (φ : R ⟶ S) (c : ∀ n, S ⟶ B n) (b : ∀ n, B (n + 1) ⟶ B n) (hc : ∀ n, c (n + 1) ≫ b n = c n) [HasCountableProducts (ringedSiteModules.{u} (𝓡 S))] [HasDerivedCategory.{w} (ringedSiteModules.{u} (𝓡 R))] [HasDerivedCategory.{w} (ringedSiteModules.{u} (𝓡 S))] (hexact : exactFunctor _ _ (Pi.functor ℕ : (ℕ → ringedSiteModules.{u} (𝓡 S)) ⥤ _)) : ∃ M : ScalarTowerTensorModel φ c b, (∃! β : M.F ⟶ M.G, M.AugmentationCoordinates β) ∧ ∀ β : M.F ⟶ M.G, M.AugmentationCoordinates β → M.DerivedDescent β",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The ordinary tensor presentations fix objects by canonical isomorphisms and maps by the existing sheafified tensor generators, inlined through changeOfRings, changeOfRingsPresheaf, toSheafify and restrictScalars. The main theorem asserts their existence; no arbitrary functor or augmentation is assumed. The second theorem states the principal-power quotient-unit normalization using the existing roosAugment. The sole added statement dependency is the already-landed principal-power quotient definition. The returned theorem statement dependency is removed, and no declaration of CompatibleCoefficientTower is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12ababbf9",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of the H2-RETURNed ea19ee12. It drops the theorem stmt_dep lem-pur-compatible-coefficient-tower and inlines coefficientTensorRing/coefficientTensorLevel/coefficientTowerGenerator by their literal bodies: sheafCompose forget₂; restrictScalars∘changeOfRings; toSheafify of z⊗x in changeOfRingsPresheaf. Checked against live CompatibleCoefficientTower.lean; argument order and ring maps are preserved in V_map, transition, AugmentationCoordinates and the unit m/γ formulas. Only lean and stmt_deps differ from the live node (adds the landed def-pe-principal-power-ring-quotients, used by the unit theorem). Every clause still matches: strict tower hc; Pi.functor ℕ exactness; ∃! β with zero roosχ fst component and roosEval generator formula; IsLeftDerivedFunctor plus pointwise Kan; IsIso on flat-term K-flat P; χ normalized on all P and unique from the resolving class; unit specialization = roosAugment. The model pins mean no hollow defs; edge cases covered. lean.statement verbatim; all 7 declarations present; not dropped, no repair note, no live module. nt_compile --json 38.2 s, EXIT 0, clean. Advisory: ∃ M rather than ∀ M (equivalent)."
  }
 }

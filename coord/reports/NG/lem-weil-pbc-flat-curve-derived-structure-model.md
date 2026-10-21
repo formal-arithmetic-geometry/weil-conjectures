@@ -1,33 +1,269 @@
 ## Worker report
 
-1. Files written: `dag/nodes/sec-proper-base-change/lem-weil-pbc-flat-curve-derived-structure-model.json`, the item, statement, split into four proof steps; no Mathlib match. No new nodes. `citations.json` records every step/node pair with text copied from that node's statement. `searches.jsonl` contains the actual Mathlib search records.
-2. Attachments: none. Searches in `lean/WeilConjectures/` for the exact blueprint id, flat curve families, derived structure and perfect/base-change direct images found no declaration proving all the clauses. The coherent finite-free/base-change declarations do not include the degree-zero structural isomorphism and the one-degree positive summand required here.
-3. WANTED: none. The needed Stacks sources are present.
-4. The item had a statement and searches but no proof. Its statement is unchanged. Its source is an explicitly identified generalization of the proof of 0GKA, not an application of the nodal-family statement without its nodal hypothesis. No source error was found: the proof uses nodality and connected geometric fibres only to obtain the proper-flat finite-presentation and fibrewise H0 assumptions already stated here. The added proof obtains the missing degree-one conclusion by the existing residue normal form; it does not create a node restating that conclusion.
-5. Nothing remains unfinished in this one-level split. The existing cited inputs retain their own statuses; this delivery does not claim their proofs are newly completed.
+Item: `lem-weil-pbc-flat-curve-derived-structure-model`. Module:
+`Sheaf.AlgebraicGeometry.FlatCurveDerivedStructureModel`. The main statement is
+`AlgebraicGeometry.flatCurve_derivedStructure_model`. Its sole proof is `sorry`.
+Four auxiliary declarations name the objects and arrows explicitly introduced by
+the node; they contain real constructions and no postponed proofs.
 
-## Searches and reuse
+The source was read in `literature/stacks-project/curves.tex`, the full statement
+and proof of `lemma-genus-in-nodal-family-of-curves` (Tag 0GKA). The node isolates
+the proof's proper-flat finite-presentation, fibrewise H0, and dimension inputs;
+it does not assume nodal singularities or geometrically connected fibres.
+The source proves the local positive summand is H1 placed in degree one by
+the residue finite-free model. This is precisely the splitting stated here.
+No statement correction is needed.
 
-Read the chapter `sec-proper-base-change`, unit `sk-thm-properbasechange`, GOAL.md, the worker/stage-1 contract, the three-level restrictions in SETUP.md and delivery-errors B–E. The obsolete reference to `coord/dag-sync.md` in the standing brief names a file absent from this shared repository; the dispatcher's current read-only and direct-delivery instructions govern this task.
+Hypotheses and clauses, in their original order:
 
-The full-DAG searches included 0GKA, 0B91, 0E62, 0BCD, and the Stacks labels `lemma-flat-proper-perfect-direct-image-general`, `lemma-proper-flat-h0`, `lemma-lift-perfect-from-residue-field` and `proposition-vanishing-Noetherian`. Blueprint searches used perfect, degree-zero, residue and 0GKA; none supplied a duplicate of this entire item. `blueprint_refs.py ancestor` confirms `thm-weil-pbc-direct-image-finiteness-proper`. The item's existing precise `from.place` and its `via` chain are retained, and `same_as` remains empty.
+* A morphism of schemes is `{X S : Scheme.{u}} (f : X ⟶ S)`.
+  `[IsProper f]`, `[Flat f]`, and `[LocallyOfFinitePresentation f]` express
+  proper, flat, finite presentation. Properness already implies quasi-compactness
+  and separatedness, hence quasi-separatedness, so this is the finite-presentation
+  convention of the node with no added geometric condition.
+* The residue fibre is `f.fiber s`, definitionally the chosen pullback of `f`
+  along `S.fromSpecResidueField s`. The dimension assumption is
+  `hdim : ∀ s : S, topologicalKrullDim (f.fiber s) ≤ 1`.
+* The structural map on fibre functions is
+  `(f.fiberToSpecResidueField s).appTop`. Its source is the global sections
+  of `Spec (S.residueField s)`, canonically the residue field, and its target
+  is the global functions of the fibre. `hconstants` requires `IsIso` of this
+  ring map, equivalently bijectivity. Degree-zero structure-sheaf cohomology
+  is global sections, so this is the stated H0 assumption.
+* `derivedStructureImage f` is exactly
+  `(schemeDerivedDirectImage f).obj (single_0.obj (SheafOfModules.unit X.ringCatSheaf))`.
+  This is the node's K, not an arbitrary derived object.
+* `derivedStructureUnit f` is `single_0.map` of
+  `SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom`, followed by
+  `Scheme.Modules.canonicalSingleDirectImageMap f` at the structure sheaf.
+  This is the canonical derived structural unit. The source's
+  `Scheme.Modules.canonicalDirectImageH0Unit` identifies H0 of its second
+  factor with the canonical H0 identification; naturality identifies H0 of
+  the full composite with structural function pullback. No arbitrary H0
+  comparison or unspecified morphism is a hypothesis.
+* Perfectness is `S.IsPerfect (derivedStructureImage f)`.
+* Invertibility of H0(u) is the `IsIso` conjunct for
+  `(DerivedCategory.homologyFunctor ... 0).map (derivedStructureUnit f)`.
+* `derivedStructureH1 f` is definitionally H1(K). Its two conjuncts are
+  `.IsQuasicoherent` and `.IsFiniteLocallyFree`. The latter is the shared
+  variable-rank definition, not finite locally free of one globally fixed rank.
+* Zariski locality is `∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ...`.
+  The left side of the local isomorphism is restriction of K by the shared
+  `(SheafOfModules.overFunctor ... U).mapDerivedCategory`. The two summands
+  are the unit on the localized open site placed in degree zero and
+  `(derivedStructureH1 f).over U` placed in degree zero then shifted by -1.
+  Cohomological shift -1 puts E in degree one. Thus the second summand is
+  the restriction of the specified E, not an independently chosen locally
+  free module. `Nonempty (A ≅ B)` states existence of the isomorphism.
+* The vanishing clause is over all integers:
+  `∀ i : ℤ, i ≠ 0 → i ≠ 1 → IsZero (H_i.obj K)`.
+  In particular negative degrees are included.
+* Arbitrary base change is `∀ (T : Scheme.{u}) (g : T ⟶ S),
+  IsIso (derivedStructureBaseChangeMap f g)`.
+  The square is the chosen pullback with `f_T = pullback.snd f g` and
+  `g_X = pullback.fst f g`. The arrow is `schemeDerivedBaseChangeMap`
+  followed by derived direct image of the pinned derived-to-ordinary
+  comparison at O_X and the canonical identification of its ordinary
+  pullback with O_{X_T}. The target is exactly `derivedStructureImage f_T`.
+  The recorded `canonicalSinglePullbackMap` internally uses tensorPullback's
+  pinned left-derived counit, followed by the unique adjunction-preserving
+  comparison to Mathlib's abstract pullback. The following
+  `SheafOfModules.pullbackObjUnitToUnit` is the transpose of the same
+  structural map. Consequently their composite is precisely the canonical
+  tensor-pullback comparison followed by its structural-unit identification;
+  no second pullback notion is defined. This is the normalized map of
+  `def-pc-derived-module-base-change-map`.
+* There is no flatness assumption on g, no reducedness or Noetherian assumption
+  on S, no fixed global rank, and no nonempty-scheme assumption.
 
-Reused `lem-pc-rf-perfect-base-change`, rather than adding a second coherent base-change theorem. Reused `lem-sc-perfect-degree-zero-fibre-criterion` and `lem-sc-perfect-finite-free-residue-model` rather than adding the clauses of the item as new lemmas. The former is more general than the geometric degree-zero input; the latter is a general local model for any perfect complex. For vanishing, used `lem-sc-noetherian-cohomology-above-dimension`, whose hypotheses allow arbitrary Noetherian fibres. In particular `lem-pc-vanishing-above-dim`, which assumes a smooth projective curve, cannot be applied to the present possibly singular zero-dimensional or one-dimensional fibres.
+The universally quantified `HasDerivedCategory.{w}` instances select shared
+derived-category realizations on schemes. The localized-site instances on opens
+of S are needed by the recorded `Scheme.IsPerfect` definition and by restriction.
+These are foundational localization choices, not additional geometric hypotheses.
+All variables and universes are explicitly bound; `autoImplicit` is disabled.
+There is no file-local notation, private definition, or local instance.
 
-Ran the required msearch commands for the item: LeanFinder with the full geometric statement; Loogle `AlgebraicGeometry.Scheme.Modules, DerivedCategory`; grep for proper/flat perfect cohomology and finite-free direct images; LeanSearch for the proper-flat curve structure complex; and a second LeanFinder phrasing in terms of the splitting of H0 and the shifted vector bundle. Read the returned types: flatness and normalization statements do not prove this result; the abstract complex splitting lemmas require an injective or projective object and do not supply the geometric perfectness, residue comparison or fibre vanishing. There is no matching Mathlib leaf. Existing search records from the repository are retained, and the searches actually run in this session are appended with their exact query texts and returned hit names. No new nodes require searches or duplicate-pair exclusions.
+Dependency declarations read and used (module followed by declarations):
 
-## Review by NG
+* `Mathlib.AlgebraicGeometry.Scheme`: `AlgebraicGeometry.Scheme`, `Scheme.Hom`.
+* `Mathlib.AlgebraicGeometry.Morphisms.Proper`: `AlgebraicGeometry.IsProper`.
+* `Mathlib.AlgebraicGeometry.Morphisms.Flat`: `AlgebraicGeometry.Flat`.
+* `Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation`:
+  `AlgebraicGeometry.LocallyOfFinitePresentation`; together with properness
+  this implements the conventions-only `def-weil-pbc-scheme-conventions`.
+* `WeilConjectures.AlgebraicGeometry.BaseChangeConventions`:
+  chosen `Limits.pullback`, its projections, and the module base-change convention.
+  Its imported `Mathlib.AlgebraicGeometry.Fiber` supplies `Scheme.Hom.fiber`
+  and `Scheme.Hom.fiberToSpecResidueField`.
+* `Mathlib.AlgebraicGeometry.ResidueField`: `Scheme.residueField`,
+  `Scheme.fromSpecResidueField`.
+* `Mathlib.Topology.KrullDimension`: `topologicalKrullDim`.
+* `WeilConjectures.AlgebraicGeometry.PQFCohomology`:
+  `sheafCohomologyAndHigherDirectImages`, with the ordinary degree-zero
+  global-sections interpretation used in the hypothesis.
+* `WeilConjectures.AlgebraicGeometry.DerivedCategory`: `schemeDerivedCategory`;
+  `WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage`:
+  `schemeDerivedDirectImage`, with Mathlib's `DerivedCategory.homologyFunctor`.
+* `WeilConjectures.AlgebraicGeometry.PerfectComplex`: `Scheme.IsPerfect`.
+* `Sheaf.AlgebraicGeometry.CoherentFiniteType` publicly supplies Mathlib's
+  `SheafOfModules.IsQuasicoherent`; only quasi-coherence is required here,
+  not the conjunction with finite type introduced by that dependency module.
+* `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree`:
+  `SheafOfModules.IsFiniteLocallyFree`, imported publicly by the recorded
+  canonical pullback module.
+* `WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap`:
+  `IsDerivedModulePullbackComparison`, `IsDerivedModuleBaseChangeMap`; the
+  arrow's explicit construction specializes their defining composite with
+  the pinned counit and the unit identification, as explained above.
+* `WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison`:
+  `Scheme.Modules.canonicalSingleDirectImageMap`.
+* `WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison`:
+  `Scheme.Modules.canonicalSinglePullbackMap` and
+  `Scheme.Modules.canonicalTensorPullbackAdditive`. The two new definition nodes
+  below own these constructors and the direct-image constructor. They replace
+  the two invertibility-theorem ids in stmt_deps; neither invertibility theorem
+  is used in the statement or the four-step proof plan, so neither is added to
+  proof_deps.
 
-I read `literature/stacks-project/curves.tex`, label `lemma-genus-in-nodal-family-of-curves` (0GKA), statement and entire proof. I also read `perfect.tex`, labels `lemma-flat-proper-perfect-direct-image-general` (0B91) and `lemma-proper-flat-h0` (0E62), including their hypotheses and proofs; `more-algebra.tex`, label `lemma-lift-perfect-from-residue-field` (0BCD), statement and proof; `cohomology.tex`, label `proposition-vanishing-Noetherian` (02UZ), statement and beginning of its proof; and `morphisms.tex`, labels `lemma-base-change-finite-type` (01T4) and `lemma-finite-type-noetherian` (01T6). There are no new nodes whose sources need separate review. The item is not the key node of its unit, so no unit realization record is changed.
+All eight recorded proof-dependency modules are imported without `public`.
+Their full signatures and docstrings were read, including the affine Cech
+formulation recorded for `lem-pc-rf-perfect-base-change` and the localized-site
+formulation of `exists_finiteFreeResidueModel`. The docstring gives all four
+proof steps and explains the geometric specializations and the canonical maps.
+No dependency interface is repaired or duplicated in this delivery.
 
-For step 1 I opened the statements of `lem-pc-rf-perfect-base-change` and `lem-sc-perfect-qcoherent`. The former states both perfectness and invertibility of the canonical *module* comparison, explicitly referring to `def-pc-derived-module-base-change-map`; it is not merely an existence of unrelated isomorphisms on cohomology. Its module G is finitely presented and flat over the base. Here O_X has its rank-one presentation, and flatness over S is exactly flatness of f. The explicit multiplication isomorphism identifies the ordinary pulled-back O_X with O_XT. The latter node states quasi-coherence of every cohomology sheaf of a perfect complex, so it supplies both E's quasi-coherence and the D_QCoh hypothesis of step 2.
+Edge cases checked before writing:
 
-For step 2 I opened `lem-sc-flat-derived-structure-unit` and `lem-sc-perfect-degree-zero-fibre-criterion`. Properness gives the quasi-compact and separated hypotheses of the unit lemma, and flatness is already assumed. This node states existence of a with structural H0, negative residue vanishing and invertible residue H0 under the hypothesis made for every fibre. I corrected a potential overstatement in the proof before writing it: I apply the criterion to the supplied a, not to a map whose equality with a has not been proved. The criterion states precisely the H0 isomorphism and the local perfect positive summand P. Since the item defines H0(u) to be the same structural function pullback, invertibility transfers on H0 without asserting equality of a and u in the derived category. No reducedness or hypothesis on ranks enters this criterion.
+* Empty base: the pointwise hypotheses and local splitting are vacuous, the
+  module category is zero, and every T mapping to it is empty. All asserted
+  conclusions remain valid; no artificial nonempty hypothesis appears.
+* Empty fibre over a point: its dimension is minus infinity, so the dimension
+  bound allows it, but the map from a nonzero residue field to zero sections
+  is not bijective. Exactly the existing constants assumption excludes it.
+* Dimension-zero fibres and genus zero: E can be zero and has rank zero;
+  neither the finite-local-freeness predicate nor the splitting excludes this.
+* Disconnected base with different genera: finite local ranks can differ on
+  components. No choice of a common rank occurs anywhere in the signature.
+* Nonreduced and non-Noetherian bases and nonflat base-change maps are allowed.
+  Finite presentation plus properness, not a hidden base condition, is used.
+* The vanishing statement includes negative cohomology, and the shift is -1,
+  not +1. No global splitting is asserted.
 
-For step 3 I opened `lem-sfb-finite-type-composition-base-change`, `lem-weil-pbc-finite-type-over-noetherian` and `lem-sc-noetherian-cohomology-above-dimension`, and read the canonical base-change statement again. The first explicitly allows arbitrary base change. The second assumes a Noetherian target and finite type; the target here is the spectrum of a field, whose one-point space and two ideals verify Noetherianity directly. This argument puts no Noetherian condition on S. The third allows all quasi-coherent modules on a Noetherian scheme and uses topological Krull dimension, the exact dimension in the item. It therefore applies to O_Xs in degrees greater than one. Taking direct image to the one-point residue spectrum is global sections by definition, explaining the comparison between the derived module fibre and the fibre's cohomology.
+Searches performed with the prescribed wrapper:
 
-For step 4 I opened the whole statement of `lem-sc-perfect-finite-free-residue-model`. Its ranks are the residue Betti numbers at the chosen point, and it gives a bounded finite free representative on an actual affine open neighbourhood, not just at a stalk. After the positive summand from step 2 and the vanishing from step 3, all its terms except degree one are zero. Thus the differential is zero and computing its cohomology really yields the local free module E and the asserted direct sum. The change from a normal form for P to E[-1] is the computation of a complex with only one nonzero term, not a hidden formality lemma. Since the neighbourhoods cover S, the vanishing sheaves are zero globally and the local ranks are allowed to vary on different components.
+* LeanFinder: "For a proper flat finitely presented family with fibres of
+  dimension at most one and only constant global functions the derived
+  structure direct image is locally O plus a finite locally free module in
+  degree one". Eight hits, concerning flatness, universal openness, and
+  finite presentation; none states this structure model.
+* Loogle: `AlgebraicGeometry.Scheme.Modules, DerivedCategory`. Zero hits.
+* Mathlib grep: `flat.*curve.*derived|derived.*structure.*model|proper.*flat.*locallyFree`.
+  Zero hits.
+* LeanSearch: "A proper flat family of curves has a perfect derived structure
+  direct image locally O plus a finite locally free module in degree one".
+  Eight hits concerning flatness and stalks; no matching theorem.
+* `rg` over both `lean/WeilConjectures` and `lean/Sheaf` for the preceding
+  patterns and `flat_curve_derived_structure_model`: no matching statement.
+  Exact node-id grep over `lean/WeilConjectures`: no hits.
+* Searches for `structureUnit`, `unitToPushforwardObjUnit`, and the canonical
+  single comparisons found the shared unit and pinned pullback constructors
+  used here. The existing local degree-zero criterion and finite-free residue
+  model are ingredients, not duplicates of this complete theorem.
+* The four new auxiliary names and main theorem name were searched in both
+  project source roots and were absent.
 
-I checked delivery-errors B–E against the written files. The item introduces every object, preserves its definition dependencies, has no altered hypotheses or conclusions, and each proof step has the full list of non-elementary inputs in `uses`. `proof_deps` is their union. Every quoted node was opened and its statement, rather than its proof, supplies the fact used. Generic inputs outside this unit are recorded in `split_report.tool_uses`: coherent base change, perfect quasi-coherence, the structural-unit and residue criteria, Noetherian permanence, dimension vanishing and the residue normal form. They supply the coherent machinery used in the same 0GKA route, rather than replacing a step of the proper-base-change unit. No SGA source is used.
+No `STATEMENT-DISPUTED` issue or node fault was found.
 
-I tested the boundary cases against the proof: on the empty base all local assertions and sheaf isomorphisms are vacuous; an empty fibre over an actual point fails the stated H0 assumption, as the map from a field to zero is not bijective. A dimension-zero fibre is allowed and produces d1=0 in the residue model. Genus-zero families give E=0. Positive-genus fibres give a positive rank on their open neighbourhoods. A disconnected base with different genera causes no problem because ranks are chosen locally. A nonreduced or non-Noetherian base is allowed by 0B91, 0E62 and 0BCD; the only Noetherian schemes used are the finite-type residue fibres. Nonflat base changes are covered by the canonical comparison theorem without adding flatness of g. All four steps are below 2000 characters, and none hides a further independent comparison or sublemma. No statement dispute, new-node duplication, unsupported elementary assertion, or circular use of this item was found.
+## Second reading by NG
+
+A separate clause-by-clause rereading of the node and completed source checked
+the actual definition bodies, not merely their names. This was an in-thread
+second pass; the dispatcher explicitly forbids starting another agent, and the
+maintainer supplies independent review after delivery.
+
+The pass verified the fibre's appTop direction is residue-field functions to
+fibre functions, the unit is the explicit structural composite, the local H1
+summand is the restriction of H1(K) itself, the shift places it in degree one,
+and the normalized base-change target is the structure sheaf of the chosen
+fibre product. It also checked that proper plus locally finite presentation
+is finite presentation in the stated convention and that the rank is allowed
+to vary. No mathematical mismatch was found. The initial compile identified
+a missing terminator for the noncomputable section; that syntax defect was
+repaired before the clean compile. The main statement and all helper
+signatures are checked with auto-implicit variables disabled.
+
+Repair reading (2026-10-21), with the return for immutable head ab7ba9f8967e,
+retained source, current-main node, and both upstream constructor modules open:
+the return's H2 finding is correct. The retained packet differed from current
+main only in `lean` and the two added theorem ids in `stmt_deps`. The source
+uses the plain constructors, not choices of those invertibility theorems.
+I replaced those two ids by the two definition ids below. One record per
+existing module keeps each declaration attached to the module that defines it.
+Their combined dependencies include exactly the four foundational interfaces
+requested in the return: derived pullback composition, derived pullback,
+derived direct image, and the pinned module-pullback adjunction; scheme and
+derived-category definitions are also cited where used.
+
+The direct-image record's arbitrary module `M` matches the actual map's signature;
+it adds no acyclicity assumption. Its formula uses the inverse single-complex
+identification followed by the right-derived unit, in the source's order.
+The pullback record owns both the additive abbreviation and the arbitrary-module
+comparison; its formula uses the same chosen composition counit, then the
+single-complex identification, then `leftAdjointUniq` from the pinned tensor
+adjunction to ordinary pullback. It adds no invertibility or flatness assumption.
+Both records are `existing: true`, so no source module or declaration is copied
+or modified. Empty schemes, zero modules and nonflat morphisms are admitted by
+both definitions. The main Lean file, its signature, hypotheses, conclusion,
+proof docstring, and single `sorry` are unchanged. The original clause-by-clause
+reading and edge-case assessment above therefore still apply.
+
+## New nodes
+
+`def-weil-pbc-canonical-single-direct-image-map` owns the already existing
+`AlgebraicGeometry.Scheme.Modules.canonicalSingleDirectImageMap` in
+`WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison`.
+It defines `(f_*M)[0] → Rf_*(M[0])` for every module by the localized
+single-complex identification followed by the right-derived unit (Stacks 079V,
+`cohomology.tex`, section-unbounded). Its `lean.statement` is the exact defining
+signature from that unchanged module. The old theorem node asserts invertibility
+under positive acyclicity, and therefore cannot own this unrestricted notion as
+a theorem dependency. No new Lean module is supplied or needed.
+
+`def-weil-pbc-canonical-single-pullback-map` owns the already existing
+`AlgebraicGeometry.Scheme.Modules.canonicalTensorPullbackAdditive` and
+`AlgebraicGeometry.Scheme.Modules.canonicalSinglePullbackMap` in
+`WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison`.
+It records the exact selected composition additive structure and the explicit
+derived counit / single-complex / adjunction-preserving comparison composite,
+for every module, without an invertibility hypothesis. Sources: Stacks 06YJ,
+08HY and 0D5S, the derived-pullback construction and its base-change and
+composition normalization, read in `cohomology.tex`. The exact map signature is
+recorded, with both names in `lean.declarations`. No new Lean module is needed.
+
+For both nodes the prescribed searches were repeated during repair and their
+outputs are retained verbatim in `mathlib_searches`: LeanSearch for the ordinary
+and derived single-module comparisons returned eight generic pullback/adjunction
+hits; Loogle `Functor.rightDerivedFunctorUnit, Adjunction.leftAdjointUniq`
+returned zero hits with the unknown-identifier note; Mathlib grep for the three
+constructor names, `rightDerivedFunctorUnit`, and `singleMapHomologicalComplex`
+returned one generic single-complex hit. Project `rg` found the existing
+constructors in precisely the two upstream modules; Sheaf supplies compatibility
+imports and users. A search of all DAG definition statements and `lean` records
+found no definition node owning any of the three constructors. The matching
+theorem nodes state invertibility instead. `tools/blueprint_refs.py search
+canonicalSingle` returned zero blueprint nodes. Thus these are new ownership
+nodes for existing constructions, not second definitions.
+
+## Repair validation
+
+The initial required dry run on the saved packet passed mechanically at
+681de9d25f0. It did not address the independent review's H2 finding, so the
+ownership repair above was made before delivery. The unchanged delivered Lean
+file was compiled again through `scompile.py` against the live published build:
+the sandbox check and library-module check were clean (15.7 s and 18.7 s).
+
+The repaired packet's first preflight required the schema's `slopmaster2`
+branch label for the two existing `WeilConjectures` declarations. Both new
+records were corrected accordingly; their source modules remain the live
+upstream modules compiled by the authorized wrapper. The new statements also
+explicitly introduce the localization Q and the tensor-pullback functor P_f.

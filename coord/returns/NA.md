@@ -67,6 +67,3 @@ L: independent stage-2 immutable head 3f532b32d618: H4: head 3f532b32 (module by
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-coherence: lem-weil-pbc-proetale-projection-formula-tensor-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-weil-pbc-stratum-completion-unit-restriction (2026-10-21 07:58 UTC, branch head ac665650e32)
-
-L: independent stage-2 immutable head ac665650e32a: incremental DAG validation: reach: def-sfb-fixed-scalar-geometric-adjunction is not reached from a target and is not flagged unreachable | reach: def-weil-pbc-ring-restriction-pullback-comparison is not reached from a target and is not flagged unreachable

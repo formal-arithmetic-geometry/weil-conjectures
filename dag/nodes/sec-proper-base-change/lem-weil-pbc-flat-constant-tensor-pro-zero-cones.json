@@ -17,7 +17,9 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-derived-change-of-rings-model"
  ],
  "proof": [
   {
@@ -265,5 +267,45 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-1ef844f66 (reviewer sub-agent of L); spot-checked: Read in full the item at 1ef844f6, its nine steps and the statement of every cited node; the delivery has no new nodes. The statement and stmt_deps are identical to the live copy, so nothing was weakened (A Noetherian is kept even though unused); there is no repair note, the item is not marked dropped, there is no SGA citation, and no cycle (BFS over 194 nodes). Sources checked: proetale.tex 099M l.4305 (its proof ends 'Thus the lemma follows', which is the transport this item makes explicit), sites-modules 093J l.8196 and 03ER(2)/(3) l.4243, sites-cohomology 06YN and 0941 l.5067 (R lim on C×N by a K-injective representative and the termwise limit). Step by step: S1, exactness of E: the constant-module functor is exact for every ring, tensor with O is exact by flatness, and the faithful forgetful functor that preserves kernels and cokernels reflects exactness. S2, the exact-functor leaf gives E_D, which kills zero maps. S3 uses K-flatness only: I recomputed the swap signs ((-1)^{ij}(dc⊗p+(-1)^i c⊗dp) on both sides), and the tensor-cone node has P on the left as in T; the report is right not to use kflat-fixed-tensor-triangulated, which needs flat terms. S4, the localization universal property applies. S5, theta is natural for the strict cone maps diag(b,a[1]). S6 is elementary, with the same m and the case m=n covered. S7 is the last clause of ringed-strict-tower-homotopy-limit, with no exact products or bounds. S8 and S9: the units go through K-injective tower resolutions; the K-injective Hom bijection holds in Tow(Mod O) and lim preserves homotopies, which gives the unit equality. The parent constant-completion-equivalence Step 7 uses the item for O=R and O=Â, consistent with the flatness its statement asserts. Route: the two Mathlib leaves come from sk-def-exchange and the forgetful lemma from sk-thm-reduction, both in the unit's uses; the cone-acyclic and tensor-cone lemmas are Lean-closed; the rest are definitions. No tool_uses accepted or needed. Duplicate scan (pro-zero, pro-isomorph, K-flat with limit): only levelwise Koszul nodes and Tor-type nodes, none of which states this transport. Advisory: the existing node lem-weil-pbc-finite-type-constant-exact cites 093U where 093J is the exact tag. No fixes written."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatConstantTensorProZeroCones",
+  "declaration": "CategoryTheory.flatConstantTensorProZeroCones",
+  "declarations": [
+   "CategoryTheory.flatConstantTowerComplex",
+   "CategoryTheory.flatConstantStrictConeMap",
+   "CategoryTheory.flatConstantPointedLimitMap",
+   "CategoryTheory.FlatConstantConeProZero",
+   "CategoryTheory.flatConstantHasSheafCompose",
+   "CategoryTheory.flatConstantModulesAbelian",
+   "CategoryTheory.flatConstantModulesLimits",
+   "CategoryTheory.flatConstantSourceHasDerivedCategory",
+   "CategoryTheory.flatConstantExtensionModel",
+   "CategoryTheory.flatConstantExtension",
+   "CategoryTheory.flatConstantCochainMonoidal",
+   "CategoryTheory.flatConstantCochainMonoidalStruct",
+   "CategoryTheory.flatConstantExtensionAdditive",
+   "CategoryTheory.flatConstantTensorFunctor",
+   "CategoryTheory.flatConstantRegularSection",
+   "CategoryTheory.FlatConstantUnitNormalized",
+   "CategoryTheory.flatConstantTensorUnit",
+   "CategoryTheory.flatConstantTensorCoaugmentation",
+   "CategoryTheory.flatConstantUnitLimitMap",
+   "CategoryTheory.flatConstantTensorProZeroCones"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatConstantTensorProZeroCones.lean",
+  "statement": "theorem flatConstantTensorProZeroCones [IsNoetherianRing A] [HasDerivedCategory.{wA} (ModuleCat.{max u v} A)] [HasDerivedCategory.{wO} (ℕᵒᵖ ⥤ SheafOfModules.{max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O))] (hflat : SheafOfModules.IsFlatOnSite.{u, v, max u v, max u v} (C := C) (J := J) (R := realizationRing J A) ((SheafOfModules.restrictScalars.{max u v, v, max u v, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj (SheafOfModules.unit.{v, u, max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)))) (X Y : ℕᵒᵖ ⥤ CochainComplex (ModuleCat.{max u v} A) ℤ) (v : X ⟶ Y) (hv : FlatConstantConeProZero.{(max u v) + 1, max u v, wA} v) (P : CochainComplex (SheafOfModules.{max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients.{u, v, max u v} (C := C) (J := J) (R := O) P) : FlatConstantConeProZero.{(max u v) + 1, max u v, wO} (Functor.whiskerRight v (flatConstantTensorFunctor J A φ P)) ∧ ∃ i : (flatConstantExtension J A φ).obj (ModuleCat.of A A) ≅ SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O), FlatConstantUnitNormalized J A φ i ∧ ∀ (RF : DerivedCategory (ℕᵒᵖ ⥤ SheafOfModules.{max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) ⥤ DerivedCategory (SheafOfModules.{max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O))) (η : Functor.mapHomologicalComplex (lim : (ℕᵒᵖ ⥤ SheafOfModules.{max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) ⥤ SheafOfModules.{max u v} (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso _ (.up ℤ)) → IsIso (RF.map (DerivedCategory.Q.map (flatConstantTowerComplex.map (Functor.whiskerRight v (flatConstantTensorFunctor J A φ P))))) ∧ ∀ (α : (Functor.const ℕᵒᵖ).obj ((HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) 0).obj (ModuleCat.of A A)) ⟶ X) (β : (Functor.const ℕᵒᵖ).obj ((HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) 0).obj (ModuleCat.of A A)) ⟶ Y), α ≫ v = β → flatConstantUnitLimitMap J A φ RF η P i α ≫ RF.map (DerivedCategory.Q.map (flatConstantTowerComplex.map (Functor.whiskerRight v (flatConstantTensorFunctor J A φ P)))) = flatConstantUnitLimitMap J A φ RF η P i β",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b07fb4e0",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Timeout-return re-delivery of 2ae01143 (PASSed, landing timed out). Only lean.statement/declarations changed vs 2ae01143; NL statement, 9 steps, stmt_deps, proof_deps unchanged; live diff = lean + 2 used def stmt_deps. Delta: (sheafCompose J forget₂).obj O → derivedChangeRingIndependentCoefficients.{max u v,u,v} J O (reducible abbrev with that exact body, already in the def-zl model's field types); 6 instance aliases (HasSheafCompose, Abelian, ℕᵒᵖ limits, cochain Monoidal + its struct projection, Additive), registered as local instances; explicit result types; flatConstantPointedLimitMap unfolds literally to the old flatConstantUnitLimitMap body (constComp.inv ≫ whiskerRight = old coaugmentation), so no new choice; η notation only. H3 table re-confirmed (03ER flatness, ∀n∃m≥n incl. m=n, arbitrary K-flat P, universal RF/η, normalized i, canonical unit maps); statement verbatim, 20 declarations = record, sole sorry. nt_compile --json rc 0 clean 45.7 s at load ~140. Advisories: flatConstantTensorCoaugmentation now unused; aliases may still export to importers (defeq aliases, harmless); base 093U/093J; retry landing at lower load if it times out."
+ }
 }

@@ -166,5 +166,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-8093ca7f3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited nodes, blueprint proof sources, unit/chapter route, delivery rules, and archived master target declarations. Verified inherited-topology continuity, postcomposition on every profinite section, underlying ring-object morphism, strict identity/composition, edge cases, acyclicity, duplicate/generalization candidates, Mathlib searches, coefficient categories, and base-change morphisms. No new nodes or repairs are needed; review.md records the checks."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+  "declaration": "Profinite.padicSubfieldRingObjMap",
+  "declarations": [
+   "Profinite.padicSubfieldRingObjMap",
+   "Profinite.padicSubfieldCondensedRingMap",
+   "Profinite.padicSubfieldRingObjMap_id",
+   "Profinite.padicSubfieldRingObjMap_comp"
+  ],
+  "statement": "noncomputable def padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :\n    continuousMapRingObj.{u} E ⟶ continuousMapRingObj F",
+  "branch": "slopmaster2",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing finite-subextension inclusion, with prime ℓ and arbitrary profinite universe u. FiniteIntermediateField ℓ packages an intermediate field of PadicAlgCl ℓ and its finite dimension over ℚ_[ℓ]. The condensed ring map postcomposes with IntermediateField.inclusion h and the ring-object map forgets to abelian sheaves; its IsMonHom instance and strict identity/composition lemmas are in the same module. A clean server consumer checks the recorded padicSubfieldCondensedRing endpoints definitionally and identifies the condensed ring map with continuousMapRingSheafMapOfUniverse at coefficient universe zero. No duplicate module or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9353b8cf0",
+  "group": "NP",
+  "result": "pass",
+  "note": "Existing attachment Profinite.padicSubfieldRingObjMap (FiniteSubextension l.86-104). The delivery adds only the lean field; the statement is verbatim. My consumer compile (42 s) checks: endpoints rfl = padicSubfieldCondensedRing; HEq.rfl with continuousMapRingSheafMapOfUniverse.{u,0} and continuousMapRingObjMapOfUniverse.{u,0} of IntermediateField.inclusion; section formula rfl; IsMonHom; _id and _comp strict rfl equalities. FiniteIntermediateField = finite-dimensional intermediate fields with no extra hypotheses; universe u arbitrary; E=F, ⊥ and empty S covered. The scheme-level map owned by def-sfb-subfield-coefficient-map is a different notion, so this is not a duplicate. Report sections present; item not dropped. No findings."
+ }
 }

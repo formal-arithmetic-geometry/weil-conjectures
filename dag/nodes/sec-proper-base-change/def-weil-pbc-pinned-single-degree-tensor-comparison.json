@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-pinned-single-degree-tensor-comparison",
+ "kind": "definition",
+ "title": "Composition-pinned tensor comparison on a single complex",
+ "status": "split",
+ "statement": "Let schemes and module sheaves be as in [def-pc-scheme] and [def-weil-sheaf-of-modules-category], with derived module categories [def-pc-derived-category], tensor pullback [def-pc-module-pullback], and derived pullback [def-pc-derived-pullback]. Fix the left-derived counit family $\\epsilon_k:Q_h\\circ Lk^*\\to k^*\\circ Q_h$ selected together with the composition structure in [lem-pc-ringed-spaces-derived-pullback-composition]. For every scheme morphism $k:X\\to Y$ with additive tensor pullback, every $\\mathcal O_Y$-module $M$, and every integer $n$, define $d_k(M,n):Lk^*(M[-n])\\to(k^*M)[-n]$ as $\\epsilon_k$ at the homotopy single complex of $M$ in degree $n$, followed by $Q_h$ of the termwise single-complex tensor-pullback identification. Here $M[-n]$ denotes $M$ placed in cohomological degree $n$. This is the specified component of the composition-pinned counit, with no independently chosen comparison map and no flatness, nonemptiness, or quasi-coherence hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, remark-base-change; Tag 0ATM, remark-compose-base-change-horizontal; the derived-to-termwise tensor counit with the composition normalization of lem-pc-ringed-spaces-derived-pullback-composition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pinnedSingleDegreeTensorComparison|singleDegreeBaseChangeComposite",
+   "results": "[grep] OK 0 hit(s); []",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition pinned tensor counit on single complexes and derived module base change composite",
+   "results": "[leansearch] OK 8 hit(s); [\"IsBaseChange.of_comp\", \"Pi.counit_comp_single\", \"IsBaseChange.comp\", \"TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange\", \"IsBaseChange.comp_iff\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\"]",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition pinned tensor counit on single complexes and derived module base change composite",
+   "results": "[leanfinder] OK 8 hit(s); [\"Rep.standardComplex.εToSingle₀_comp_eq\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.rightUnitor'_inv\", \"HomologicalComplex.rightUnitor\", \"HomologicalComplex.rightUnitor'_inv_comm\"]",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "pinnedSingleDegreeTensorComparison|singleDegreeBaseChangeComposite in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search pinned single; blueprint_refs.py search single complex",
+   "results": "Blueprint searches: 0 matches each. DAG hits are theorem nodes lem-pc-open-pinned-single-degree-square and lem-pc-pinned-single-base-change-shift and their consumers; no definition node owns the two plain definitions. The source defines pinnedSingleDegreeTensorComparison at OpenPinnedSingleDegreeSquare.lean:32 and singleDegreeBaseChangeComposite at PinnedSingleBaseChangeShift.lean:53, with its source and target functors at lines 28 and 41. Sheaf has no duplicate.",
+   "date": "2026-10-21",
+   "verdict": "existing source definitions; no owning definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+  "date": "2026-10-21",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "0GKA structure-cohomology input in the 0GKV case (b) used by the classical torsion constructibility proof: canonical affine Leray/derived-base-change identifications and their compatibility with an arrow W to V of etale base objects (former proof steps 4 and 5). The pinned single-module counit and its derived base-change composite specify gamma and delta in this affine edge naturality lemma.",
+   "via": [
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeSquare",
+  "declaration": "AlgebraicGeometry.pinnedSingleDegreeTensorComparison",
+  "declarations": [
+   "AlgebraicGeometry.pinnedSingleDegreeTensorComparison"
+  ],
+  "statement": "def pinnedSingleDegreeTensorComparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (k : X ⟶ Y) [(Scheme.Modules.tensorPullback k).Additive]\n    (M : Y.Modules) (n : ℤ) :\n    (derivedPullback k).obj ((DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj M) ⟶\n    (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj\n        ((Scheme.Modules.tensorPullback k).obj M)",
+  "branch": "slopmaster2",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership added at the maintainer return on c19c2cada59d. Reuses the unchanged source construction, not the theorem in its source module. No new Lean declaration or postponed theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca29cd83f",
+  "group": "NG",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca29cd83f",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after the RETURN on c19c2cada59d. Lean module byte-identical to the one judged faithful there; item changes only stmt_deps. H2 repaired: new existing:true def nodes def-weil-pbc-pinned-single-degree-tensor-comparison (pinnedSingleDegreeTensorComparison) and def-weil-pbc-single-degree-module-base-change-composite (singleDegreeBaseChangeSource/Target/Composite) replace theorem node lem-pc-open-pinned-single-degree-square. Signatures verbatim, texts match bodies, the theorem stmt_dep lem-pc-ringed-spaces-derived-pullback-composition is justified by .choose of exists_derivedPullbackComposition, citations equal stmt_deps, no other definition node owns the decls, no cycle, both decls used by coherentEdgeDelta/Gamma. H13 repaired: def-pc-derived-module-base-change-map record byte-identical to live. Compile: nt_compile 60 s and lcompile 600 s timed out under load ~155; relied on the identical file's clean 263 s lcompile in the prior review plus the delivery's clean scompile and passing dry run. Second reading is a labelled self-audit (observation only)."
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "def-coef-system-derived-transition",
+ "kind": "definition",
+ "title": "Canonical localized semilinear transitions of strict coefficient systems",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site [def-weil-pbc-sites-and-cohomology] and let $B:\\mathbf N^{op}\\to\\operatorname{Sh}(\\mathcal C,\\operatorname{CommRing})$ be an inverse sequence [def-weil-inverse-system] of sheaves of commutative rings. Use the category $\\mathscr S(B)$ of strict semilinear systems, its exact evaluations $e_n$ and scalar-restriction functors $r_{n,m}:\\operatorname{Mod}(B_m)\\to\\operatorname{Mod}(B_n)$ for $m\\le n$ from [def-pur-system-level-left-extension-basic]. The module categories are [def-weil-sheaf-of-modules-category] and scalar restriction is [def-pc-sheaf-restrict-scalars]. Use the unbounded derived categories and their localization functors $Q$ [def-weil-abstract-derived-category]. Define the actual derived transition $\\delta_{n,m}:D(e_n)\\Rightarrow D(r_{n,m})\\circ D(e_m)$ by localizing the degreewise strict transition $e_n\\Rightarrow r_{n,m}\\circ e_m$ through $Q$, then composing with the canonical exact-functor composition isomorphism $D(r_{n,m}\\circ e_m)\\cong D(r_{n,m})\\circ D(e_m)$. This definition applies to every $m\\le n$, including $m=n$; natural-number index $n$ denotes positive level $n+1$.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-inverse-system",
+  "def-pur-system-level-left-extension-basic",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, strict coefficient systems and their transitions; Stacks derived.tex Tag 015F (lemma-right-derived-exact-functor), localization of the exact evaluations and scalar restriction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localize semilinear transition natural transformations of strict systems of sheaf modules over an inverse sequence of rings",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SemilinearMapClass.semilinearMap",
+     "PresheafOfModules.Hom.casesOn",
+     "SheafOfModules.pushforwardNatTrans_app_val_app",
+     "SheafOfModules.pushforwardNatTrans",
+     "SheafOfModules.pushforwardNatTrans_app_val_app_apply",
+     "PresheafOfModules.Hom.mk",
+     "SemilinearEquivClass.semilinearEquiv",
+     "PresheafOfModules.Hom.rec"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib construction; reuse the existing project definition, without restating it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize semilinear transition natural transformations of strict systems of sheaf modules over an inverse sequence of rings",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.Presentation.map",
+     "SheafOfModules.Presentation.mapGenerators",
+     "SheafOfModules.Presentation.mapRelations",
+     "SheafOfModules.Presentation.map_π_eq",
+     "CategoryTheory.Localization.functor_linear_iff",
+     "ModuleCat.Tilde.openToLocalization",
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "PresheafOfModules.Sheafify.SMulCandidate.mk'"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib construction; reuse the existing project definition, without restating it."
+  },
+  {
+   "tool": "grep",
+   "query": "systemDerivedTransition|strictSystemTransition",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib construction; reuse the existing project definition, without restating it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n systemDerivedTransition|strictSystemTransition lean/WeilConjectures lean/Sheaf; rg in dag/nodes; blueprint_refs.py search derived transition / derived evaluation transition / strict systems / tower evaluation",
+   "results": "No occurrence in WeilConjectures. The existing project declaration is SheafOfModules.systemDerivedTransition in Sheaf.CategoryTheory.SystemDerivedTransition. DAG references occur in theorem nodes, with no definition node owning this map. All four blueprint text searches returned zero matches.",
+   "date": "2026-10-21",
+   "verdict": "Existing project definition matched exactly; add an existing:true definition node to own it, as required by the H2 return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-sequence-global-sections-evaluation",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last mapping-complex comparisons: actual transition maps in the finite evaluations of derived termwise global sections, through the returned calculus step 12, first half.",
+   "via": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemDerivedTransition",
+  "declaration": "SheafOfModules.systemDerivedTransition",
+  "statement": "def systemDerivedTransition {m n : ℕ} (h : m ≤ n) :\n    derivedSystemEvaluation B n ⟶\n      derivedSystemEvaluation B m ⋙ (systemRestriction B h).mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Owns the unchanged explicit Localization.liftNatTrans definition already in the published project module. The theorem in that module is not used to select this map. Added on maintainer H2 return; no Lean source is copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28bced48f",
+  "group": "NC",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28bced48f",
+  "group": "NC",
+  "result": "fix",
+  "note": "H2 repair verified. New existing:true definition nodes def-coef-system-derived-transition and def-coef-tower-derived-evaluation-transition own the plain Localization.liftNatTrans defs systemDerivedTransition and towerDerivedEvaluationTransition; their lean.statement fields match the live signatures verbatim. The item cites them instead of the two theorem nodes and adds def-pur-system-level-left-extension-basic. The item uses no other decls from those modules, no competing owner exists, no cycle, and the snapshot is otherwise identical to side-live. The Lean is byte-identical to the module previously checked clause by clause. FIX: def-coef-system-derived-transition writes the target as D(e_m)∘D(r_{n,m}), which does not typecheck; the Lean and the same sentence give D(r_{n,m})∘D(e_m). Full node JSON with the composite reordered in fixes/. Compile: nt_compile timed out at 60 s at load 131; lcompile 560 s waited for a slot the whole time; with linters off the module compiled clean in 52.7 s (15 s CPU, load 139). Land at lower load. Advisories: sheafification instances not stated in the new node, docstring blueprint tags still name the theorem nodes, Sheaf.Γ spelling, duplicate HasDerivedCategory instance."
+ }
+}

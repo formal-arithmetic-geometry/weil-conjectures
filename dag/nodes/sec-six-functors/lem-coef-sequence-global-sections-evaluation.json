@@ -14,7 +14,10 @@
   "def-weil-inverse-system",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
-  "lem-pur-system-ringed-sequence-site"
+  "lem-pur-system-ringed-sequence-site",
+  "def-coef-system-derived-transition",
+  "def-coef-tower-derived-evaluation-transition",
+  "def-pur-system-level-left-extension-basic"
  ],
  "proof": [
   {
@@ -297,5 +300,48 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-982b24941 (reviewer sub-agent of L); spot-checked: I read the item and every cited node statement in full. Statement is byte-identical to the base (unsplit live, not superseded); no new nodes; no repair note; not dropped; no SGA. Sources checked: Stacks 0941 (sites-cohomology l.5067) gives exact i_{n,!} for constant-ring evaluation only, and the item uses it only for constant-A towers through lem-weil-tower-evaluation-kinjective. Stacks 0D6E (l.4011) is used through the K-injective normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition with f=(Sh C,S)->(Sh C,R) and g=global sections; ring-map directions are correct. Steps 1-3 are correct: exact restriction gives U; Fun(N^op,Mod A) is Grothendieck, so functorial K-injectives exist; the additive H^0 gives a triangulated K(V)->D(Tow Ab). Step 4: beta_n comes from evaluating the same tower resolution, with naturality from the Hom bijection. Step 5: sigma comes from the universal unit and is invertible by Gamma(j) being a quasi-isomorphism. I checked the Step 6 cocycle and the Step 7 cancellation algebraically. Edge cases (zero rings and inputs, identity and non-flat maps, unbounded inputs, zero transitions) are fine. No duplicates: lem-coef-semilinear-derived-sections pulls rings back instead of restricting to a constant A, and lem-pe-left-module-derived-evaluation-forget is bounded below with a constant Lambda. FIX repairs two C1 citation gaps. Step 4 now cites lem-weil-pbc-exact-functor-derived-factorization for derived evaluation e_n on D(Tow Ab). Step 5 now writes out the global-sections ringed-topos morphism, citing def-weil-pbc-ringed-topos-morphism, def-weil-pbc-constant-sheaf and lem-weil-pbc-singleton-site-module-comparison. proof_deps is recomputed and split_report.tool_uses gets one added entry. Accepted generic tool_uses: the pbc/pur K-injective and ringed-topos nodes plus the singleton-site comparison.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoefficientSequenceGlobalSections",
+  "declaration": "SheafOfModules.coefficientSequenceGlobalSectionsEvaluation",
+  "declarations": [
+   "SheafOfModules.sequenceCoefficientModules",
+   "SheafOfModules.sequenceCoefficientRestriction",
+   "SheafOfModules.sequenceAbSiteLimits",
+   "SheafOfModules.sequenceCoefficientSections",
+   "SheafOfModules.sequenceCoefficientSectionsAdditive",
+   "SheafOfModules.sequenceTowerSections",
+   "SheafOfModules.sequenceConstantTowerHasDerived",
+   "SheafOfModules.sequenceAbHasDerived",
+   "SheafOfModules.sequenceAbTowerHasDerived",
+   "SheafOfModules.SequenceSectionsDerivedPair",
+   "SheafOfModules.SequenceCoefficientRestrictionData",
+   "SheafOfModules.sequenceRestrictionAdditive",
+   "SheafOfModules.sequenceRestrictionLimits",
+   "SheafOfModules.sequenceRestrictionColimits",
+   "SheafOfModules.sequenceTowerSectionsAdditive",
+   "SheafOfModules.sequenceRestrictionDerivedEvaluation",
+   "SheafOfModules.SequenceSectionsComparisons",
+   "SheafOfModules.SequenceSectionsComparisons.global",
+   "SheafOfModules.SequenceSectionsComparisons.restrictedEvaluation",
+   "SheafOfModules.SequenceSectionsComparisons.finiteEvaluation",
+   "SheafOfModules.SequenceSectionsComparisons.Normalized",
+   "SheafOfModules.coefficientSequenceGlobalSectionsEvaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoefficientSequenceGlobalSections.lean",
+  "statement": "theorem coefficientSequenceGlobalSectionsEvaluation (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (A : Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) : ∃ d : SequenceSectionsComparisons B A α, d.Normalized",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the live strict-system interface and canonical localized transitions. The existential package includes exact scalar restriction, universal derived units, both normalized evaluation isomorphisms and all actual transition equations. Helper constructions contain no sorry; the single named theorem is postponed. H2 repair: canonical transition definitions are owned by the two new existing:true definition nodes; StrictRingSystem and exact evaluations are cited directly through def-pur-system-level-left-extension-basic."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28bced48f",
+  "group": "NC",
+  "result": "fix",
+  "note": "H2 repair verified. New existing:true definition nodes def-coef-system-derived-transition and def-coef-tower-derived-evaluation-transition own the plain Localization.liftNatTrans defs systemDerivedTransition and towerDerivedEvaluationTransition; their lean.statement fields match the live signatures verbatim. The item cites them instead of the two theorem nodes and adds def-pur-system-level-left-extension-basic. The item uses no other decls from those modules, no competing owner exists, no cycle, and the snapshot is otherwise identical to side-live. The Lean is byte-identical to the module previously checked clause by clause. FIX: def-coef-system-derived-transition writes the target as D(e_m)∘D(r_{n,m}), which does not typecheck; the Lean and the same sentence give D(r_{n,m})∘D(e_m). Full node JSON with the composite reordered in fixes/. Compile: nt_compile timed out at 60 s at load 131; lcompile 560 s waited for a slot the whole time; with linters off the module compiled clean in 52.7 s (15 s CPU, load 139). Land at lower load. Advisories: sheafification instances not stated in the new node, docstring blueprint tags still name the theorem nodes, Sheaf.Γ spelling, duplicate HasDerivedCategory instance."
  }
 }
