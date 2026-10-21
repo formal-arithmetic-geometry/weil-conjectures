@@ -21330,3 +21330,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:46 L: returned deliver/NR/lem-sfb-grothendieck-sheafification (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-grothendieck-sheafification: lem-sfb-grothendi)
 - 08:46 L: returned deliver/NP/lem-sfb-kinjective-hom-scalar-telescope (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-kinjective-hom-scalar-telescope: lem-sfb-kinje)
 - 08:47 L: returned deliver/Q40/lem-weil-ramified-pullback-tower-identification (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-ramified-pullback-tower-identification: lem-w)
+- 08:47 L: returned deliver/Q42/lem-weil-scalar-pullback-strict-cone-naturality (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-scalar-pullback-strict-cone-naturality: lem-w)
