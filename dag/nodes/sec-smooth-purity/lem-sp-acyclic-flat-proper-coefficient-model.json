@@ -1,370 +1,306 @@
 {
-  "id": "lem-sp-acyclic-flat-proper-coefficient-model",
-  "kind": "statement",
-  "title": "Bounded acyclic flat models represent the proper coefficient map termwise",
-  "statement": "Let $r:W\\to V$ be a proper morphism [def-weil-proper-morphism] of Noetherian schemes [def-pc-scheme], meaning schemes admitting finite affine covers by spectra of Noetherian rings [def-weil-pbc-noetherian-ring], and let $A\\to B$ be a unital homomorphism of finite commutative rings. Work with sheaves of modules over the constant ring sheaves on the small etale sites and their ordinary unbounded derived categories [def-weil-pbc-derived-categories]. Write $T_T=-\\otimes^L_{A_T}B_T$ and $\\lambda:T_Wr_A^*\\xrightarrow{\\sim}r_B^*T_V$ for the canonical tensor/pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $q_r:T_VRr_{*,A}\\to Rr_{*,B}T_W$ as the adjoint transpose under $r_B^*\\dashv Rr_{*,B}$ of $T_W(\\varepsilon_A)\\circ\\lambda^{-1}$, where $\\varepsilon_A:r_A^*Rr_{*,A}\\to1$ is the counit [prop-weil-pbc-inverse-image-modules-exact, def-weil-pbc-direct-image].\n\nLet $C$ be a cochain complex of $A_W$-module sheaves, zero outside a finite interval, and put $C_B=C\\otimes_{A_W}B_W$ termwise. Assume each $C^n$ is flat over $A_W$, meaning tensoring with it is exact; assume each $r_{*,A}C^n$ is flat over $A_V$; and assume for every $n$ and every $a>0$ that\n$$R^ar_{*,A}(C^n)=0,\\qquad R^ar_{*,B}(C^n\\otimes_{A_W}B_W)=0.$$\nThen the canonical acyclic-complex comparison maps identify $Rr_{*,A}C$ and $Rr_{*,B}C_B$ with the degreewise complexes $r_{*,A}C$ and $r_{*,B}C_B$, respectively. The complexes $C$ and $r_{*,A}C$ are K-flat (tensoring them with any acyclic complex gives an acyclic total tensor complex). Under these specified identifications and the flat-model identifications for $T$, the named map $q_r(C)$ is represented by the termwise sheaf projection morphism\n$$\\pi_C:(r_{*,A}C)\\otimes_{A_V}B_V\\longrightarrow r_{*,B}(C\\otimes_{A_W}B_W),$$\nwhose degree-$n$ morphism is adjoint to\n$$r_B^*((r_{*,A}C^n)\\otimes_{A_V}B_V)\\cong(r_A^*r_{*,A}C^n)\\otimes_{A_W}B_W\n\\xrightarrow{\\varepsilon_{A,C^n}\\otimes1}C^n\\otimes_{A_W}B_W.$$\nThe identifications and this representation are natural in chain maps between complexes satisfying these hypotheses. No flatness or finite projective dimension of $B$ over $A$ is assumed.",
-  "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), proper coefficient transformation. Agent-stated bounded acyclic-flat model calculation of the counit transpose; the acyclic-complex computation itself is lemma-weil-pbc-leray-acyclicity clause (3)."
-  },
-  "stmt_deps": [
-    "def-weil-pbc-derived-categories",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-direct-image",
-    "def-pc-scheme",
-    "def-weil-proper-morphism",
-    "def-weil-pbc-noetherian-ring"
-  ],
-  "proof": [
-    {
-      "text": "Put $D=r_{*,A}C$, $E=C_B$, $H=r_{*,B}E$, and let $Q$ denote the relevant derived localization. For $R=A,B$, the module categories on $W_{\\mathrm{Et}}$ and $V_{\\mathrm{Et}}$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian] and have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. The functors $r_{*,R}$ are additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. By [prop-weil-pbc-inverse-image-modules-exact], $r_R^*$ is the exact module inverse image, left adjoint to $r_{*,R}$; its derived functor is therefore represented termwise. In particular the ordinary adjunction induces the adjunction on homotopy categories to which [lem-pc-pre-derived-adjoint-functors-general] applies. We always use its canonical derived adjunction, the one specified in the statement.",
-      "uses": [
-        "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-        "lem-weil-pbc-module-sheaves-enough-injectives",
-        "lem-weil-pbc-module-direct-image-left-exact",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-pc-pre-derived-adjoint-functors-general"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 07A6 (lemma-adjoint), with derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)"
-      }
-    },
-    {
-      "text": "Both $C$ and $E$ vanish outside the given finite interval. Apply clause (3) of [lemma-weil-pbc-leray-acyclicity] to the identity quasi-isomorphism of $C$, with $v=r_{*,A}$, and separately to the identity of $E$, with $v=r_{*,B}$. The two acyclicity assumptions are precisely its hypotheses on their terms. Consequently the canonical comparisons\n$$\\alpha_A:QD\\longrightarrow Rr_{*,A}(QC),\\qquad \\alpha_B:QH\\longrightarrow Rr_{*,B}(QE)$$\ninduce isomorphisms on every cohomology sheaf and hence are isomorphisms in the derived categories. These are the natural comparison transformations of [def-weil-pbc-direct-image], not arbitrary isomorphisms with the same objects. All complexes here are bounded below, so their canonical bounded-below computations are also the K-injective computations in the ordinary unbounded category.",
-      "uses": [
-        "lemma-weil-pbc-leray-acyclicity",
-        "def-weil-pbc-direct-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 015E (lemma-leray-acyclicity), applied to bounded complexes"
-      }
-    },
-    {
-      "text": "The bounded complexes $C$ and $D$ have flat terms by the two flatness assumptions. Apply [lem-pc-bounded-above-flat-kflat-site] on $(W_{\\mathrm{Et}},A_W)$ and $(V_{\\mathrm{Et}},A_V)$ respectively: both are K-flat. Thus the construction of [def-kun-derived-tensor] computes $T_W(QC)$ by $QE$ and $T_V(QD)$ by $Q(D\\otimes_{A_V}B_V)$, naturally in maps of these flat models. This construction resolves the first factor only; it makes no flatness assumption on the second factor $B_T$. For the $B_T$-module typing, view $T_T$ as derived module pullback for the identity topos equipped with $A_T\\to B_T$: [lem-weil-pbc-ringed-topoi-derived-pullback] gives exactly these scalar-extension complexes in $D(B_T)$.",
-      "uses": [
-        "lem-pc-bounded-above-flat-kflat-site",
-        "def-kun-derived-tensor",
-        "lem-weil-pbc-ringed-topoi-derived-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 06YQ (lemma-bounded-flat-K-flat) and the construction of derived tensor"
-      }
-    },
-    {
-      "text": "Let $e_C:r_A^*D\\to C$ be the chain map whose components are the ordinary counits. In [lem-pc-pre-derived-adjoint-functors-general], set $F=r_{*,A}$, $G=r_A^*$, $K=C$, $M=D$, $s=1_C$, $t=1_D$ and $f=1_D:D\\to r_{*,A}C$. Its representing cocone component $p_{1_C}$ is $\\alpha_A$, and its cone component $u_{1_D}$ is the exact-pullback comparison $Lr_A^*(QD)\\simeq Q(r_A^*D)$. Its displayed characterization of the hom bijection therefore says that $\\alpha_A$ has adjunct $Q(e_C)$. Equivalently,\n$$\\varepsilon_{A,QC}\\circ r_A^*(\\alpha_A)=Q(e_C).$$\nHere and below the canonical exact-pullback comparison is understood. This establishes the counit normalization for the specified acyclic comparison, rather than inferring it from the existence of an isomorphism $QD\\simeq Rr_{*,A}QC$.",
-      "uses": [
-        "lem-pc-pre-derived-adjoint-functors-general",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), hom-bijection formula at identity denominators"
-      }
-    },
-    {
-      "text": "Pullback carries $D$ to a flat-term K-flat complex by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus $T_W(Q(e_C))$ is represented by $e_C\\otimes1:r_A^*D\\otimes_{A_W}B_W\\to E$, using the flat models of [def-kun-derived-tensor] and their naturality [lem-weil-pbc-ringed-topoi-derived-pullback]. At $QD$ the canonical comparison $\\lambda^{-1}$ is represented by ordinary pullback/tensor reassociation\n$$\\rho_D:r_B^*(D\\otimes_{A_V}B_V)\\xrightarrow{\\sim}(r_A^*D)\\otimes_{A_W}B_W.$$\nIndeed module pullback is inverse image followed by tensor over the pulled-back ring, and the identified constant rings in [prop-weil-pbc-inverse-image-modules-exact] make both sides the same base-extended inverse-image complex. Reassociation sends each local tensor to the same local tensor, in each degree; it commutes with the differentials. This is the flat-model construction of the canonical comparison in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Naturality of $\\lambda$, followed by the equation of Step 4, shows that the adjunct of\n$$q_r(QC)\\circ T_V(\\alpha_A)$$\nis represented by the chain map\n$$a=(e_C\\otimes1)\\rho_D:r_B^*(D\\otimes_{A_V}B_V)\\longrightarrow E.$$",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "def-kun-derived-tensor",
-        "lem-weil-pbc-ringed-topoi-derived-pullback",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A6 (lemma-adjoint) and 06YY (lemma-derived-base-change); ordinary pullback/tensor reassociation on flat models"
-      }
-    },
-    {
-      "text": "The degree-$n$ adjunct under the ordinary $B$-module adjunction of $a^n$ is exactly the displayed morphism $\\pi_C^n$ in the statement. These degreewise adjuncts form a chain map: naturality of the hom bijection applied to $d_C^n$ gives\n$$r_{*,B}(d_E^n)\\pi_C^n=\\pi_C^{n+1}(d_D^n\\otimes1).$$\nNow apply the formula of [lem-pc-pre-derived-adjoint-functors-general] with $F=r_{*,B}$, $G=r_B^*$, $K=E$, $M=D\\otimes_{A_V}B_V$, $s=1_E$, $t=1_M$ and $f=\\pi_C$. The cocone component is $p_{1_E}=\\alpha_B$, and exactness of $r_B^*$ again identifies $u_{1_M}$ with termwise pullback. The formula says precisely that\n$$\\alpha_B\\circ Q(\\pi_C):Q(D\\otimes_{A_V}B_V)\\longrightarrow Rr_{*,B}(QE)$$\nhas adjunct $Q(a)$. This application needs no flatness of $M$ as a $B_V$-complex, because $r_B^*$ itself is exact [prop-weil-pbc-inverse-image-modules-exact].",
-      "uses": [
-        "lem-pc-pre-derived-adjoint-functors-general",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), applied directly to the chain map pi_C"
-      }
-    },
-    {
-      "text": "Steps 5 and 6 give the same adjunct. Injectivity of the hom bijection [lem-pc-pre-derived-adjoint-functors-general] implies\n$$q_r(QC)\\circ T_V(\\alpha_A)=\\alpha_B\\circ Q(\\pi_C).$$\nSince the two $\\alpha$ maps are the specified isomorphisms of Step 2, this equality is exactly the asserted representation of $q_r(C)$ under those identifications and the flat-model identifications of Step 3.",
-      "uses": [
-        "lem-pc-pre-derived-adjoint-functors-general"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), injectivity of the hom bijection"
-      }
-    },
-    {
-      "text": "For a chain map $h:C\\to C'$ between complexes in the statement, the maps $\\alpha_A,\\alpha_B$ commute with $h$ and $h\\otimes1$ by naturality of the comparison in [def-weil-pbc-direct-image]. The flat-model identifications commute with $h$ and $r_{*,A}h$ by [lem-weil-pbc-ringed-topoi-derived-pullback]. Naturality of the ordinary counit gives $h e_C=e_{C'}r_A^*(r_{*,A}h)$, and naturality of $\\rho$ then gives $(h\\otimes1)a_C=a_{C'}r_B^*((r_{*,A}h)\\otimes1)$. Taking ordinary adjuncts yields\n$$r_{*,B}(h\\otimes1)\\pi_C=\\pi_{C'}((r_{*,A}h)\\otimes1).$$\nThus the comparison equality of Step 7 and all its specified identifications are natural. Only boundedness, the two termwise flatness assumptions and the two acyclicity assumptions were used; no flatness or finite projective dimension of $B$ over $A$ enters.",
-      "uses": [
-        "def-weil-pbc-direct-image",
-        "lem-weil-pbc-ringed-topoi-derived-pullback",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), naturality of the coefficient transformation"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sp-acyclic-flat-proper-coefficient-model",
+ "kind": "statement",
+ "title": "Bounded acyclic flat models represent the proper coefficient map termwise",
+ "statement": "Let $r:W\\to V$ be a proper morphism [def-weil-proper-morphism] of Noetherian schemes [def-pc-scheme], meaning schemes admitting finite affine covers by spectra of Noetherian rings [def-weil-pbc-noetherian-ring], and let $A\\to B$ be a unital homomorphism of finite commutative rings. Work with sheaves of modules over the constant ring sheaves on the small etale sites and their ordinary unbounded derived categories [def-weil-pbc-derived-categories]. Write $T_T=-\\otimes^L_{A_T}B_T$ and $\\lambda:T_Wr_A^*\\xrightarrow{\\sim}r_B^*T_V$ for the canonical tensor/pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $q_r:T_VRr_{*,A}\\to Rr_{*,B}T_W$ as the adjoint transpose under $r_B^*\\dashv Rr_{*,B}$ of $T_W(\\varepsilon_A)\\circ\\lambda^{-1}$, where $\\varepsilon_A:r_A^*Rr_{*,A}\\to1$ is the counit [prop-weil-pbc-inverse-image-modules-exact, def-weil-pbc-direct-image].\n\nLet $C$ be a cochain complex of $A_W$-module sheaves, zero outside a finite interval, and put $C_B=C\\otimes_{A_W}B_W$ termwise. Assume each $C^n$ is flat over $A_W$, meaning tensoring with it is exact; assume each $r_{*,A}C^n$ is flat over $A_V$; and assume for every $n$ and every $a>0$ that\n$$R^ar_{*,A}(C^n)=0,\\qquad R^ar_{*,B}(C^n\\otimes_{A_W}B_W)=0.$$\nThen the canonical acyclic-complex comparison maps identify $Rr_{*,A}C$ and $Rr_{*,B}C_B$ with the degreewise complexes $r_{*,A}C$ and $r_{*,B}C_B$, respectively. The complexes $C$ and $r_{*,A}C$ are K-flat (tensoring them with any acyclic complex gives an acyclic total tensor complex). Under these specified identifications and the flat-model identifications for $T$, the named map $q_r(C)$ is represented by the termwise sheaf projection morphism\n$$\\pi_C:(r_{*,A}C)\\otimes_{A_V}B_V\\longrightarrow r_{*,B}(C\\otimes_{A_W}B_W),$$\nwhose degree-$n$ morphism is adjoint to\n$$r_B^*((r_{*,A}C^n)\\otimes_{A_V}B_V)\\cong(r_A^*r_{*,A}C^n)\\otimes_{A_W}B_W\n\\xrightarrow{\\varepsilon_{A,C^n}\\otimes1}C^n\\otimes_{A_W}B_W.$$\nThe identifications and this representation are natural in chain maps between complexes satisfying these hypotheses. No flatness or finite projective dimension of $B$ over $A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), proper coefficient transformation. Agent-stated bounded acyclic-flat model calculation of the counit transpose; the acyclic-complex computation itself is lemma-weil-pbc-leray-acyclicity clause (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=r_{*,A}C$, $E=C_B$ and $H=r_{*,B}E$. The module categories are Grothendieck abelian with enough injectives by [lem-weil-pbc-module-sheaves-grothendieck-abelian] and [lem-weil-pbc-module-sheaves-enough-injectives]; direct images are additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Both $C,E$ are bounded below and their terms are acyclic for the respective direct images. Clause (3) of [lemma-weil-pbc-leray-acyclicity], applied to their identity quasi-isomorphisms, makes the canonical comparisons $\\alpha_A:QD\\to Rr_{*,A}QC$ and $\\alpha_B:QH\\to Rr_{*,B}QE$ isomorphisms. Bounded-below injective representatives are K-injective by [lem-weil-pbc-dplus-injective-representative], so these are also the unbounded comparisons.",
+   "uses": [
     "lem-weil-pbc-module-sheaves-grothendieck-abelian",
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-module-direct-image-left-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pc-pre-derived-adjoint-functors-general",
     "lemma-weil-pbc-leray-acyclicity",
-    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E (lemma-leray-acyclicity), canonical comparison on bounded-below acyclic complexes"
+   }
+  },
+  {
+   "text": "The complexes $C,D$ are bounded with flat terms, so [lem-pc-bounded-above-flat-kflat-site] makes them K-flat. The canonical scalar-extension computations of [lem-pur-derived-change-of-rings] identify $T_W(QC)=QE$ and $T_V(QD)=Q(D\\otimes_{A_V}B_V)$ naturally. They resolve the first factor and require no flatness of $B$.",
+   "uses": [
     "lem-pc-bounded-above-flat-kflat-site",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6; explicit bounded-flat model calculation using derived.tex Tags 015E and 0FND and sites-cohomology.tex Tag 06YQ."
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat) and 06YY (lemma-derived-base-change)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "acyclic|KFlat|projectionFormula",
-      "results": "{\"t\": \"2026-10-17T09:39:54Z\", \"tool\": \"grep\", \"query\": \"acyclic|KFlat|projectionFormula\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"dc813f49a4c53bc7\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes",
-      "subdirectory": "Algebra/Homology"
-    },
-    {
-      "tool": "leansearch",
-      "query": "For a proper map and a bounded complex of flat sheaves whose terms and scalar extensions are direct image acyclic and whose direct images are flat the derived coefficient comparison is represented termwise",
-      "results": "{\"t\": \"2026-10-17T09:39:55Z\", \"tool\": \"leansearch\", \"query\": \"For a proper map and a bounded complex of flat sheaves whose terms and scalar extensions are direct image acyclic and whose direct images are flat the derived coefficient comparison is represented termwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.recOn\", \"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"RingHom.Flat\", \"instRepresentablyFlatOpensCarrierMap\"], \"digest\": \"02776080dfad032c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.DerivedCategory, CategoryTheory.NatTrans",
-      "results": "{\"t\": \"2026-10-17T09:39:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.DerivedCategory, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Right derived functor evaluated on an acyclic flat bounded complex and its derived tensor coefficient transformation is the ordinary natural transformation on that complex",
-      "results": "{\"t\": \"2026-10-17T09:40:02Z\", \"tool\": \"leanfinder\", \"query\": \"Right derived functor evaluated on an acyclic flat bounded complex and its derived tensor coefficient transformation is the ordinary natural transformation on that complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\"], \"digest\": \"549b890176697af4\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A bounded termwise flat complex of sheaves acyclic for a proper pushforward computes the derived scalar extension comparison by its termwise sheaf projection map",
-      "results": "{\"t\": \"2026-10-17T09:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded termwise flat complex of sheaves acyclic for a proper pushforward computes the derived scalar extension comparison by its termwise sheaf projection map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardNatIso_hom\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardNatIso_inv\"], \"digest\": \"76736eb9ce75b0bf\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.rightDerived",
-      "results": "{\"t\": \"2026-10-17T09:40:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.NatTrans.rightDerived\"], \"digest\": \"fbdb177a91ae8c23\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
-    },
-    {
-      "tool": "grep",
-      "query": "acyclic|rightDerived.*NatTrans|rightDerived.*map",
-      "results": "{\"t\": \"2026-10-17T09:40:55Z\", \"tool\": \"grep\", \"query\": \"acyclic|rightDerived.*NatTrans|rightDerived.*map\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"dd9ca69cf011e143\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes",
-      "subdirectory": "CategoryTheory/Abelian"
-    },
-    {
-      "tool": "grep",
-      "query": "def Functor.rightDerived|def NatTrans.rightDerived|mapDerivedCategoryFactors",
-      "results": "{\"t\": \"2026-10-17T09:41:31Z\", \"tool\": \"grep\", \"query\": \"def Functor.rightDerived|def NatTrans.rightDerived|mapDerivedCategoryFactors\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"a4090cab375c8927\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes",
-      "subdirectory": "CategoryTheory/Abelian"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "On bounded flat pushforward acyclic complexes the derived change of coefficients map is the termwise projection morphism",
-      "results": "{\"t\": \"2026-10-17T14:12:33Z\", \"tool\": \"leanfinder\", \"query\": \"On bounded flat pushforward acyclic complexes the derived change of coefficients map is the termwise projection morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.leftDerived_map_eq\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"CategoryTheory.Functor.mapProjectiveResolution_complex\", \"CategoryTheory.ProjectiveResolution.leftDerived_app_eq\"], \"digest\": \"ceca355f5878b39a\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
-    },
-    {
-      "tool": "grep",
-      "query": "derived_counit|projectionFormula|KFlat",
-      "results": "{\"t\": \"2026-10-17T14:12:39Z\", \"tool\": \"grep\", \"query\": \"derived_counit|projectionFormula|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived tensor change of rings on a bounded flat acyclic direct image model is computed by the ordinary sheaf projection map",
-      "results": "{\"t\": \"2026-10-17T14:12:39Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor change of rings on a bounded flat acyclic direct image model is computed by the ordinary sheaf projection map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.FaithfullyFlat.instTensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"IsBaseChange\", \"Module.Flat.isBaseChange\", \"Module.Flat.baseChange\", \"PresheafOfModules.Derivation\"], \"digest\": \"e544f309d9f88003\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.derived_counit",
-      "results": "{\"t\": \"2026-10-17T14:12:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derived_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_counit\"], \"digest\": \"e208e68c4b04c522\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The derived adjunction counit on a complex of right acyclic objects is the termwise counit via the acyclic comparison",
-      "results": "{\"t\": \"2026-10-17T14:12:50Z\", \"tool\": \"leanfinder\", \"query\": \"The derived adjunction counit on a complex of right acyclic objects is the termwise counit via the acyclic comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.toRightDerivedZero\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"a2d464116c9eb341\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
-    },
-    {
-      "tool": "grep",
-      "query": "derived_counit|derivedε",
-      "results": "{\"t\": \"2026-10-17T14:12:52Z\", \"tool\": \"grep\", \"query\": \"derived_counit|derivedε\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"b17ef9f31c848daa\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent.",
-      "subdirectory": "CategoryTheory/Functor/Derived"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-sp-et-proet-coefficient-compatibility",
-    "date": "2026-10-17",
-    "group": "Q115"
+  {
+   "text": "Let $e_C:r_A^*D\\to C$ be the termwise counit. Apply [lem-sp-etale-derived-chain-transpose] with $K=C,M=D,f=1_D$: $\\alpha_A$ has inverse transpose $Q(e_C)$. The canonical comparison $\\lambda$ of the statement is the inverse of the normalized scalar/pullback isomorphism $\\operatorname{scalarPullbackIso}(\\varphi,r)$ of [def-pur-etale-scalar-pullback-iso] (on K-flat representatives it is the ordinary reassociation fixed by that normalization), which is exactly the $\\lambda$ of [lem-sp-flat-coefficient-chain-transpose]. By the definition of $q_r$ and naturality of $\\lambda$, the inverse transpose of $q_r(QC)T_V(\\alpha_A)$ is $T_W(Q(e_C))\\lambda^{-1}_{QD}$. Apply [lem-sp-flat-coefficient-chain-transpose] with $P=D,K=C,h=e_C$. Its ordinary adjunct is precisely the displayed $\\pi_C$, degree by degree, and its derived adjunct is $\\alpha_B Q\\pi_C$. Injectivity of the same Hom bijection gives\n$$q_r(QC)T_V(\\alpha_A)=\\alpha_B Q\\pi_C.$$\nThe isomorphisms of Steps 1 and 2 give the claimed representation.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-sp-etale-derived-chain-transpose",
+    "lem-sp-flat-coefficient-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), more-etale.tex 0GL6, assembly of the two chain-transpose calculations"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-sf-compatibility",
-  "blueprint": {
-    "from": {
-      "node": "det-sp-reduction-exceptional",
-      "place": "Charts, summation over geometric fibres commutes with coefficients: the acyclic flat model needed to identify the derived coefficient map with the representing sheaf map (former Step 10).",
-      "via": [
-        "lem-sp-et-proet-coefficient-compatibility"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sp-acyclic-flat-proper-coefficient-model",
-    "worker": "stage1",
-    "summary": "Kept the statement unchanged and gave eight steps: canonical acyclic comparisons, bounded-flat K-flatness, two explicit applications of the existing localized adjunction hom formula, and equality of the named coefficient map with the termwise projection. No new nodes or Mathlib leaves. All actual searches and inherited results retained.",
-    "blueprint": "det-sp-reduction-exceptional, Charts paragraph: coefficient compatibility of summation over fibres; realizes the bounded acyclic-flat proper model calculation isolated by lem-sp-et-proet-coefficient-compatibility, without altering the purity route.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-enough-injectives",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "lem-weil-pbc-module-direct-image-left-exact",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "prop-weil-pbc-inverse-image-modules-exact",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "lem-pc-pre-derived-adjoint-functors-general",
-        "why": "Generic explicit localization formula for the canonical adjunction hom bijection, needed to retain the specified counit normalization; the unit does not supply this foundational calculation."
-      },
-      {
-        "node": "lemma-weil-pbc-leray-acyclicity",
-        "why": "Generic bounded-below acyclic-complex computation, used for the two fixed coefficient pushforwards; no unit step is replaced."
-      },
-      {
-        "node": "def-weil-pbc-direct-image",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "lem-pc-bounded-above-flat-kflat-site",
-        "why": "Generic bounded-flat K-flatness on ringed sites, a foundational tensor computation rather than a replacement of the coefficient-compatibility route."
-      },
-      {
-        "node": "def-kun-derived-tensor",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Foundational ringed-site module/derived-functor interface used to compute the fixed acyclic-flat model; the compatibility unit supplies no replacement and its route is unchanged."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-        "why": "Generic K-flat computation of derived module pullback, applied to the identity topos with coefficient ring change, retains the B-module action on scalar extensions."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lemma-weil-pbc-leray-acyclicity",
-    "def-weil-pbc-direct-image",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q92-87559bb27",
-    "group": "Q92",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-87559bb27 (reviewer sub-agent of L); spot-checked: Read the item, all eight proof steps, every cited node statement, exact Stacks passages, route documents, packet, and report. Checked hypotheses, coefficient categories, base-change morphism direction, adjunction transposes, K-flat models, naturality, duplicate/cycle risks, and edge cases including non-flat Z/4→F₂. No repairable fault found. Review written to review.md."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-38e363716",
-    "group": "NA",
-    "result": "fix",
-    "note": "Read the node, all 7 statement-dependency records, Stacks 0GL6 context, the module, the report, and the reused scalarExtension/scalarPullbackIso/scalarMate interfaces. Hypotheses, conclusions (4 comparison isos, B-linear representing square, 6 naturality equations), q_r direction, universes and edge cases (empty interval, zero rings, non-flat Z/4->F2) all match the node. Delivered module compiles clean with nt_compile.py (10.2 s). Fixes: (F1, H4/H9) the new etaleFlat/etaleKFlat clash with the existing full names AlgebraicGeometry.Etale.etaleFlat/etaleKFlat in the landed Sheaf.SixFunctors.EtaleOpenTensor, and etaleKFlat duplicates the project's K-flat notion (quasiIso).kFlat used by scalarPullbackIso_existsUnique; both defs removed, hypotheses use exactFunctor (tensorRight _) inline per the def-pc-flat-sheaf-modules record, conclusions use (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat. (F2, H8) properCoefficientPullbackComparison was lambda^{-1} although documented as lambda; now (scalarPullbackIso φ r).symm. The fixed module compiles clean (5.9 s); a scratch check confirmed the lambda type, inv = scalarPullbackIso.hom by rfl, and that the kFlat conclusion feeds scalarPullbackIso_existsUnique. Fixes: complete module, item lean-record.json (statement verbatim, declarations updated), report.md with a maintainer-fix section."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.AcyclicFlatProperCoefficientModel",
-    "file": "lean/Sheaf/Paper/AcyclicFlatProperCoefficientModel.lean",
-    "declaration": "AlgebraicGeometry.Etale.acyclicFlatProperCoefficientModel",
-    "declarations": [
-      "AlgebraicGeometry.Etale.properCoefficientTensor",
-      "AlgebraicGeometry.Etale.properCoefficientPullbackComparison",
-      "AlgebraicGeometry.Etale.properCoefficientMap",
-      "AlgebraicGeometry.Etale.coefficientExtendedComplex",
-      "AlgebraicGeometry.Etale.acyclicFlatProperCoefficientModel",
-      "AlgebraicGeometry.Etale.properAcyclicComparison",
-      "AlgebraicGeometry.Etale.properSheafCoefficientMap",
-      "AlgebraicGeometry.Etale.properCoefficientComplexMap",
-      "AlgebraicGeometry.Etale.IsAcyclicFlatProperCoefficientModel"
-    ],
-    "statement": "theorem acyclicFlatProperCoefficientModel {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] {W V : Scheme.{u}} (r : W ⟶ V) [IsProper r] [IsNoetherian W] [IsNoetherian V] (φ : A →+* B) (C : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (hC : IsAcyclicFlatProperCoefficientModel φ r C) : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat C ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ∧ IsIso (properAcyclicComparison A r C) ∧ IsIso (properAcyclicComparison B r (coefficientExtendedComplex φ W C)) ∧ IsIso (scalarExtensionRepresentative φ W C) ∧ IsIso (scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C)) ∧ ((properCoefficientTensor φ V).map (properAcyclicComparison A r C) ≫ (properCoefficientMap φ r).app (DerivedCategory.Q.obj C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map (scalarExtensionRepresentative φ W C) = scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫ DerivedCategory.Q.map (properCoefficientComplexMap φ r C) ≫ properAcyclicComparison B r (coefficientExtendedComplex φ W C)) ∧ (∀ (C' : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hC' : IsAcyclicFlatProperCoefficientModel φ r C') (h : C ⟶ C'), (properCoefficientMap φ r).app (DerivedCategory.Q.obj C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map ((properCoefficientTensor φ W).map (DerivedCategory.Q.map h)) = (properCoefficientTensor φ V).map ((rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map (DerivedCategory.Q.map h)) ≫ (properCoefficientMap φ r).app (DerivedCategory.Q.obj C') ∧ DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h) ≫ properAcyclicComparison A r C' = properAcyclicComparison A r C ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map (DerivedCategory.Q.map h) ∧ DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h)) ≫ properAcyclicComparison B r (coefficientExtendedComplex φ W C') = properAcyclicComparison B r (coefficientExtendedComplex φ W C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map (DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h)) ∧ (properCoefficientTensor φ W).map (DerivedCategory.Q.map h) ≫ scalarExtensionRepresentative φ W C' = scalarExtensionRepresentative φ W C ≫ DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h) ∧ (properCoefficientTensor φ V).map (DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h)) ≫ scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C') = scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫ DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h)) ∧ ((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h) ≫ properCoefficientComplexMap φ r C' = properCoefficientComplexMap φ r C ≫ ((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h))",
-    "branch": "newtargets-dag",
-    "existing": false,
-    "by": "NA",
-    "date": "2026-10-18",
-    "fixed_by": "NT-stage2-cc-38e363716"
+  {
+   "text": "For $h:C\\to C'$, naturality of the ordinary counit gives $h e_C=e_{C'}r_A^*(r_{*,A}h)$. The naturality clause of [lem-sp-flat-coefficient-chain-transpose] applies to $(r_{*,A}h,h)$, so the representing $\\pi$ square commutes. Naturality of $\\alpha$ in [lem-sp-etale-derived-chain-transpose] and of the scalar computations in [lem-pur-derived-change-of-rings] gives all the specified identification squares. Thus the equality in Step 3 is natural in $h$.",
+   "uses": [
+    "lem-sp-etale-derived-chain-transpose",
+    "lem-sp-flat-coefficient-chain-transpose",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, naturality of adjunction and coefficient representatives"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-sp-etale-derived-chain-transpose",
+  "lem-sp-flat-coefficient-chain-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), short assembly using 015E and the two statement-only chain-transpose nodes and the normalized scalar/pullback isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "acyclic|KFlat|projectionFormula",
+   "results": "{\"t\": \"2026-10-17T09:39:54Z\", \"tool\": \"grep\", \"query\": \"acyclic|KFlat|projectionFormula\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"dc813f49a4c53bc7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper map and a bounded complex of flat sheaves whose terms and scalar extensions are direct image acyclic and whose direct images are flat the derived coefficient comparison is represented termwise",
+   "results": "{\"t\": \"2026-10-17T09:39:55Z\", \"tool\": \"leansearch\", \"query\": \"For a proper map and a bounded complex of flat sheaves whose terms and scalar extensions are direct image acyclic and whose direct images are flat the derived coefficient comparison is represented termwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.recOn\", \"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"RingHom.Flat\", \"instRepresentablyFlatOpensCarrierMap\"], \"digest\": \"02776080dfad032c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-17T09:39:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.DerivedCategory, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor evaluated on an acyclic flat bounded complex and its derived tensor coefficient transformation is the ordinary natural transformation on that complex",
+   "results": "{\"t\": \"2026-10-17T09:40:02Z\", \"tool\": \"leanfinder\", \"query\": \"Right derived functor evaluated on an acyclic flat bounded complex and its derived tensor coefficient transformation is the ordinary natural transformation on that complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\"], \"digest\": \"549b890176697af4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded termwise flat complex of sheaves acyclic for a proper pushforward computes the derived scalar extension comparison by its termwise sheaf projection map",
+   "results": "{\"t\": \"2026-10-17T09:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded termwise flat complex of sheaves acyclic for a proper pushforward computes the derived scalar extension comparison by its termwise sheaf projection map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardNatIso_hom\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardNatIso_inv\"], \"digest\": \"76736eb9ce75b0bf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "{\"t\": \"2026-10-17T09:40:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.NatTrans.rightDerived\"], \"digest\": \"fbdb177a91ae8c23\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|rightDerived.*NatTrans|rightDerived.*map",
+   "results": "{\"t\": \"2026-10-17T09:40:55Z\", \"tool\": \"grep\", \"query\": \"acyclic|rightDerived.*NatTrans|rightDerived.*map\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"dd9ca69cf011e143\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes",
+   "subdirectory": "CategoryTheory/Abelian"
+  },
+  {
+   "tool": "grep",
+   "query": "def Functor.rightDerived|def NatTrans.rightDerived|mapDerivedCategoryFactors",
+   "results": "{\"t\": \"2026-10-17T09:41:31Z\", \"tool\": \"grep\", \"query\": \"def Functor.rightDerived|def NatTrans.rightDerived|mapDerivedCategoryFactors\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"a4090cab375c8927\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: right-derived functors of degree-zero objects and exact-functor descent do not give the total-derived tensor/direct-image comparison on acyclic flat complexes",
+   "subdirectory": "CategoryTheory/Abelian"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On bounded flat pushforward acyclic complexes the derived change of coefficients map is the termwise projection morphism",
+   "results": "{\"t\": \"2026-10-17T14:12:33Z\", \"tool\": \"leanfinder\", \"query\": \"On bounded flat pushforward acyclic complexes the derived change of coefficients map is the termwise projection morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.leftDerived_map_eq\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"CategoryTheory.Functor.mapProjectiveResolution_complex\", \"CategoryTheory.ProjectiveResolution.leftDerived_app_eq\"], \"digest\": \"ceca355f5878b39a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|projectionFormula|KFlat",
+   "results": "{\"t\": \"2026-10-17T14:12:39Z\", \"tool\": \"grep\", \"query\": \"derived_counit|projectionFormula|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor change of rings on a bounded flat acyclic direct image model is computed by the ordinary sheaf projection map",
+   "results": "{\"t\": \"2026-10-17T14:12:39Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor change of rings on a bounded flat acyclic direct image model is computed by the ordinary sheaf projection map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.FaithfullyFlat.instTensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"IsBaseChange\", \"Module.Flat.isBaseChange\", \"Module.Flat.baseChange\", \"PresheafOfModules.Derivation\"], \"digest\": \"e544f309d9f88003\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "{\"t\": \"2026-10-17T14:12:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derived_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_counit\"], \"digest\": \"e208e68c4b04c522\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjunction counit on a complex of right acyclic objects is the termwise counit via the acyclic comparison",
+   "results": "{\"t\": \"2026-10-17T14:12:50Z\", \"tool\": \"leanfinder\", \"query\": \"The derived adjunction counit on a complex of right acyclic objects is the termwise counit via the acyclic comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.toRightDerivedZero\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"a2d464116c9eb341\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|derivedε",
+   "results": "{\"t\": \"2026-10-17T14:12:52Z\", \"tool\": \"grep\", \"query\": \"derived_counit|derivedε\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"b17ef9f31c848daa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor localization and generic derived-adjunction counits do not state the bounded flat sheaf coefficient projection calculation; ordinary module flatness is only a constituent.",
+   "subdirectory": "CategoryTheory/Functor/Derived"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-et-proet-coefficient-compatibility",
+  "date": "2026-10-17",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, summation over geometric fibres commutes with coefficients: the acyclic flat model needed to identify the derived coefficient map with the representing sheaf map (former Step 10).",
+   "via": [
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-acyclic-flat-proper-coefficient-model",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return of 2026-10-21, following its clarified route note: preserve the item statement, replace its 6345-character argument with a 2165-character four-step assembly, and extract two genuinely smaller chain-transpose lemmas as statement-only unsplit nodes. Earlier helper arguments are retained in report.md for the next stage-1 workers; logged searches and citations are preserved.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: coefficient compatibility of summation over fibres; realizes the bounded acyclic-flat proper model calculation isolated by lem-sp-et-proet-coefficient-compatibility, without altering the purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic acyclic-complex or scalar-extension tool in the fixed coefficient-compatibility route; no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-weil-pbc-direct-image",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-3cb1ad8a6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-3cb1ad8a6 (reviewer sub-agent of L); spot-checked: This is the human re-split of 2026-10-21; the repair note was read in the live clone, the base 8-step proof was read from the live node, and the statement is byte-identical to the base. Step-by-step mapping from the base proof: old steps 1 and 4 go to the new node lem-sp-etale-derived-chain-transpose (the canonical derived adjunction and the formula e_R(alpha_K Qf)=Q(eps^0_K r^*f)); old steps 5 and 6 go to the new node lem-sp-flat-coefficient-chain-transpose (m_h is represented by a_h=(h⊗1)rho_P, and e_B^{-1}(m_h)=alpha Q pi_h); old steps 2 and 3 become item Steps 1-2, which cite existing nodes; old steps 7 and 8 become Steps 3-4. No argument was dropped or made vaguer. The item proof is now a short assembly (about 2.2k characters), and the two new nodes are of comparable size. Each is a strict generalization (any morphism r, any rings, arbitrary complexes and chain map), neither restates the item, and both are statement-only and unsplit as brief §3 requires. Checks on node A: I verified it with a K-injective resolution, and it holds for unbounded K without alpha invertible. Stacks 0FPI (sites-cohomology l.4129) is exactly its f=1 case. It generalizes lem-asd-derived-counit-k-injective-termwise, which covers only K-injective inputs, so it is not a duplicate. Small cases r=id and K=0 hold. Checks on node B: directions agree with def-pur-etale-scalar-pullback-iso (lambda=c^{-1}). The K-flat models come from lem-pur-derived-change-of-rings (2), and pullback stays K-flat with flat terms by lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The adjunct identity is node A with R=B and f=pi_h. Cases phi=id and the non-flat Z/4->Z/2 hold, with no flatness of B used. Checks on the item: Step 1 applies Leray clause (3) to the identity maps of C and C_B, each with its own ring's acyclicity hypothesis, and dplus (2) identifies this with the unbounded comparison; this agrees with Stacks 015E. Step 2 uses bounded flat => K-flat; the existing node's tag 06YS should be 06YQ per tags/tags, which is an advisory slip in an existing node. Step 3's transpose calculation and the injectivity of e_B are correct. Step 4's naturality pair (r_*h,h) satisfies node B's hypothesis. One fault (C4), repaired: the item's lambda is cited to lem-weil-pbc-ringed-topoi-derived-tensor-pullback, a tensor-product compatibility, while node B's lambda is the inverse of def-pur-etale-scalar-pullback-iso, and Step 3 silently treated them as the same map. The base Step 5 had carried this identification and the delivery dropped it; in Lean, lambda=(scalarPullbackIso φ r).symm. The fix adds an explicit sentence to Step 3 and adds def-pur-etale-scalar-pullback-iso to uses and proof_deps; it is a definition node, listed in the unit's uses, and creates no cycle. I also corrected proof_origin, which called the two statement-only nodes 'fully proved'. Accepted tool_uses: the generic homological and scalar-extension nodes listed in split_report. No SGA source is used, and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38e363716",
+  "group": "NA",
+  "result": "fix",
+  "note": "Read the node, all 7 statement-dependency records, Stacks 0GL6 context, the module, the report, and the reused scalarExtension/scalarPullbackIso/scalarMate interfaces. Hypotheses, conclusions (4 comparison isos, B-linear representing square, 6 naturality equations), q_r direction, universes and edge cases (empty interval, zero rings, non-flat Z/4->F2) all match the node. Delivered module compiles clean with nt_compile.py (10.2 s). Fixes: (F1, H4/H9) the new etaleFlat/etaleKFlat clash with the existing full names AlgebraicGeometry.Etale.etaleFlat/etaleKFlat in the landed Sheaf.SixFunctors.EtaleOpenTensor, and etaleKFlat duplicates the project's K-flat notion (quasiIso).kFlat used by scalarPullbackIso_existsUnique; both defs removed, hypotheses use exactFunctor (tensorRight _) inline per the def-pc-flat-sheaf-modules record, conclusions use (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat. (F2, H8) properCoefficientPullbackComparison was lambda^{-1} although documented as lambda; now (scalarPullbackIso φ r).symm. The fixed module compiles clean (5.9 s); a scratch check confirmed the lambda type, inv = scalarPullbackIso.hom by rfl, and that the kFlat conclusion feeds scalarPullbackIso_existsUnique. Fixes: complete module, item lean-record.json (statement verbatim, declarations updated), report.md with a maintainer-fix section."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AcyclicFlatProperCoefficientModel",
+  "file": "lean/Sheaf/Paper/AcyclicFlatProperCoefficientModel.lean",
+  "declaration": "AlgebraicGeometry.Etale.acyclicFlatProperCoefficientModel",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properCoefficientTensor",
+   "AlgebraicGeometry.Etale.properCoefficientPullbackComparison",
+   "AlgebraicGeometry.Etale.properCoefficientMap",
+   "AlgebraicGeometry.Etale.coefficientExtendedComplex",
+   "AlgebraicGeometry.Etale.acyclicFlatProperCoefficientModel",
+   "AlgebraicGeometry.Etale.properAcyclicComparison",
+   "AlgebraicGeometry.Etale.properSheafCoefficientMap",
+   "AlgebraicGeometry.Etale.properCoefficientComplexMap",
+   "AlgebraicGeometry.Etale.IsAcyclicFlatProperCoefficientModel"
+  ],
+  "statement": "theorem acyclicFlatProperCoefficientModel {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] {W V : Scheme.{u}} (r : W ⟶ V) [IsProper r] [IsNoetherian W] [IsNoetherian V] (φ : A →+* B) (C : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (hC : IsAcyclicFlatProperCoefficientModel φ r C) : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat C ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ∧ IsIso (properAcyclicComparison A r C) ∧ IsIso (properAcyclicComparison B r (coefficientExtendedComplex φ W C)) ∧ IsIso (scalarExtensionRepresentative φ W C) ∧ IsIso (scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C)) ∧ ((properCoefficientTensor φ V).map (properAcyclicComparison A r C) ≫ (properCoefficientMap φ r).app (DerivedCategory.Q.obj C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map (scalarExtensionRepresentative φ W C) = scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫ DerivedCategory.Q.map (properCoefficientComplexMap φ r C) ≫ properAcyclicComparison B r (coefficientExtendedComplex φ W C)) ∧ (∀ (C' : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hC' : IsAcyclicFlatProperCoefficientModel φ r C') (h : C ⟶ C'), (properCoefficientMap φ r).app (DerivedCategory.Q.obj C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map ((properCoefficientTensor φ W).map (DerivedCategory.Q.map h)) = (properCoefficientTensor φ V).map ((rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map (DerivedCategory.Q.map h)) ≫ (properCoefficientMap φ r).app (DerivedCategory.Q.obj C') ∧ DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h) ≫ properAcyclicComparison A r C' = properAcyclicComparison A r C ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map (DerivedCategory.Q.map h) ∧ DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h)) ≫ properAcyclicComparison B r (coefficientExtendedComplex φ W C') = properAcyclicComparison B r (coefficientExtendedComplex φ W C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map (DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h)) ∧ (properCoefficientTensor φ W).map (DerivedCategory.Q.map h) ≫ scalarExtensionRepresentative φ W C' = scalarExtensionRepresentative φ W C ≫ DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h) ∧ (properCoefficientTensor φ V).map (DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h)) ≫ scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C') = scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫ DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h)) ∧ ((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h) ≫ properCoefficientComplexMap φ r C' = properCoefficientComplexMap φ r C ≫ ((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h))",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "by": "NA",
+  "date": "2026-10-18",
+  "fixed_by": "NT-stage2-cc-38e363716"
+ }
 }
