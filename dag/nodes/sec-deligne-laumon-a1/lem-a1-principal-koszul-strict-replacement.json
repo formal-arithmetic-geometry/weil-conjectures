@@ -16,9 +16,130 @@
   "def-pc-tensor-complex-sheaves",
   "def-weil-pbc-adic-coefficient-datum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient-extension datum and its DVR theorem give that $A$ is a principal ideal domain, that $(t)$ is its maximal ideal, and that $t\\ne0$. Every ideal is therefore finitely generated, so $A$ is Noetherian by definition. The finite-quotient theorem gives finiteness of $A/t^n$ for every $n\\geq1$. Moreover $|\\ell|_E=|\\ell|_\\ell<1$, so $\\ell\\in(t)$ and multiplication by the positive integer $\\ell$ kills $A/(t)$. Thus its additive group is torsion.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr; the extending absolute value and finite quotients are supplied by the cited coefficient nodes."
+   }
+  },
+  {
+   "text": "Since $A$ is a domain and $t\\ne0$, multiplication by $t^n$ is injective. The quotient map has kernel $t^nA$, hence $0\\to A\\xrightarrow{t^n}A\\to A/t^n\\to0$ is exact. The two copies of $A$ are finite projective: an $A$-linear map from $A$ through a surjection lifts by choosing a preimage of the image of $1$, and extending $A$-linearly. Thus $[A\\xrightarrow{t^n}A]$ in degrees $[-1,0]$ is a bounded finite-projective resolution of $A/t^n$. By the definition of perfectness, every $A/t^n$ is perfect. Together with step 1 these verify all the ring hypotheses of the adic datum for $I=(t)$; the equality $I^n=t^nA$ follows by multiplying principal ideals.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0657, definition-perfect; explicit one-generator resolution."
+   }
+  },
+  {
+   "text": "Work on the agreed small skeleton of $W_{\\mathrm{proet}}$, and put $\\underline A=A_W^{\\mathrm{const}}$. The exact constant-module functor carries the short exact sequence of step 2 to a short exact sequence of $\\underline A$-module sheaves. Apply the completed-constant-algebra flat-quotient theorem with $I=(t)$, $B=S=R_W$ and the identity presentation of the limit. Its hypothesis on the scalar map holds because its $n$-th composite sends $a$ to its constant class modulo $t^n$. Exact extension of scalars gives $0\\to R_W\\xrightarrow{t^n}R_W\\to R_W\\otimes_{\\underline A}\\underline{A/t^n}\\to0$. The theorem identifies the last tensor with $S_{W,n}$ by $b\\otimes\\bar a\\mapsto\\pi_n(b)\\bar a$. Under $R_W\\otimes_{\\underline A}\\underline A\\cong R_W$, $b\\otimes a\\mapsto ba$, the map from the middle term sends $b$ to $\\pi_n(b)$. Consequently the resulting sequence is exact through the specified projection $\\pi_n$, not merely through an unspecified quotient isomorphism.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J, lemma-constant-exact, and 093M, lemma-completion-flat, applied at every ideal power."
+   }
+  },
+  {
+   "text": "The only nonzero cohomology of $Q_{W,n}$ can be in degrees $-1,0$. Step 3 makes the former zero and identifies the latter with $S_{W,n}$ by the degree-zero projection. Hence the specified augmentation $\\epsilon_n$ is a quasi-isomorphism. Both nonzero terms of $Q_{W,n}$ are flat: tensoring with the unit module $R_W$ is naturally the identity, hence exact; zero terms are flat as well. The bounded-above flat-complex theorem now makes $Q_{W,n}$ K-flat. This uses a theorem for ringed sites, with no assumption that the site has enough points.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; cohomology and augmentation computed from step 3."
+   }
+  },
+  {
+   "text": "The principal Koszul tower definition applies to $\\mathcal O=R_W$. Its cokernel $B_n$ is identified with $S_{W,n}$ by step 3. The map $Q_{W,n+1}\\to Q_{W,n}$ is a chain map because $t^n t=t^{n+1}$. Its augmentation square commutes: in degree zero the two maps are $\\pi_n=q_{n+1,n}\\pi_{n+1}$, the defining limit equation, and in degree $-1$ both augmentations are zero. More generally the composite from level $b$ to $a$ has components $(t^{b-a},1)$, and quotient transitions compose as actual quotient maps. Tensoring these equalities with $P$ gives the strict tower morphism $a_P$, with exactly the source and target transitions in the statement. These are equalities of chain maps before localization.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, principal tower; explicit augmentation and transition calculation."
+   }
+  },
+  {
+   "text": "Apply K-flat tensor invariance to the quasi-isomorphism $\\epsilon_n$ and the given K-flat complex $P$. It gives a quasi-isomorphism $\\epsilon_n\\otimes1_P:Q_{W,n}\\otimes P\\to S_{W,n}[0]\\otimes P$. To use the order in the statement, conjugate by the signed interchange $p\\otimes q\\mapsto(-1)^{ij}q\\otimes p$ for degrees $i,j$. Its inverse has the same sign. In the differential formula, the $d_P$ contributions have sign $(-1)^{(i+1)j}$ on either side, and the $d_Q$ contributions have sign $(-1)^{ij}$ on either side, so this is a chain isomorphism. It is natural for degree-zero chain maps, so the conjugate is exactly $1_P\\otimes\\epsilon_n=a_{P,n}$. Thus each level of the strict tower map is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism; signed interchange checked with the total differential."
+   }
+  },
+  {
+   "text": "The total-tensor model theorem applies to $P$ and $Q_{W,n}$: $P$ is K-flat with flat terms by hypothesis, and $Q_{W,n}$ has both properties by step 4. It gives that every $P\\otimes Q_{W,n}$ is K-flat with flat terms, without any boundedness hypothesis on $P$. In this case its degree-$i$ term is explicitly $P^{i+1}\\oplus P^i$, because $Q_{W,n}$ is supported in degrees $-1,0$.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2, lemma-tensor-product-K-flat; flat tensor terms from sites-modules.tex Tag 0G6Q, lemma-tensor-flats."
+   }
+  },
+  {
+   "text": "Since every $A/t^n$ is finite (step 1), the completed-constant-sheaf reduction theorem identifies the sheafified constant $(A/t^n)_W=S_{W,n}$ with the coefficient sheaf $(P_n)_W$ of the adic datum, compatibly with the quotient maps, so its completed sheaf $A_W$ is $R_W$ with the same projections $\\pi_n$. For $K=[P]\\in D(R_W)$, the adic datum defines the strict reduction tower on this K-flat representative by $P\\otimes_{R_W}S_{W,n}$ with transitions $1_P\\otimes q_{n+1,n}$, all restricted to $R_W$ via $\\pi_n$. Step 5 supplies a strict map to that very tower, step 6 supplies its levelwise quasi-isomorphisms, and step 7 supplies flat-term K-flat source levels. This is the asserted objectwise K-flat replacement. For a chain map $f:P\\to P'$ between the given kinds of representatives, the induced source and target maps are $f\\otimes1$. On a homogeneous tensor, either composite with an augmentation sends $p\\otimes q$ to $f(p)\\otimes\\epsilon_n(q)$; either composite with a transition sends it to $f(p)\\otimes\\tau_n(q)$. The equalities extend through the balanced sheaf tensor and the total direct sums, by tensor functoriality. They prove the claimed naturality simultaneously at every level and for all strict tower maps.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099L, section-derived-completion-noetherian, reduction-tower context; the strict completed-ring convention is the cited adic datum."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M with Tags 093J, 06YQ, 06YP and 07A2 in the indicated Stacks files; explicit principal-Koszul and strict-tower assembly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +189,45 @@
    "results": "Hits: CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|Kflat|IsKFlat|koszul.*[Tt]ower|[Kk]oszul.*[Qq]uotient",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict tower of K-flat replacements from principal Koszul resolutions of completed quotient coefficient sheaves",
+   "results": "Hits: Module.Flat.rTensor_shortComplex_exact, CochainComplex.cm5b.instIsStrictlyGEI, RingHom.Flat.isStableUnderBaseChange, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, LinearMap.tensorKerEquiv_apply, Module.Flat.of_projective, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, QuasiIso",
+   "results": "Hits: QuasiIso, HomotopyEquiv.quasiIso_hom, HomotopyEquiv.quasiIso_inv, QuasiIso.quasiIsoAt, quasiIso_iff, quasiIso_of_isIso, QuasiIso.mk, HomologicalComplex.mem_quasiIso_iff",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex tensored with two term Koszul resolutions of powers of a regular element gives compatible K-flat replacements of quotient reductions",
+   "results": "Hits: RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor, RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor, Module.Flat.tfae_equational_criterion, Module.Flat.rTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.lTensor_exact, Module.Flat.iff_lTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring by a homotopically flat complex preserves quasi-isomorphisms and the tensor product of homotopically flat complexes is homotopically flat",
+   "results": "Hits: HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.Tor'_obj_obj, Module.Flat.lTensor_exact, CategoryTheory.Tor_obj",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-integral-pullback-completed-comparison",
@@ -92,5 +248,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-principal-koszul-strict-replacement",
+  "worker": "stage1",
+  "summary": "Q65 split without changing the statement and without creating nodes. Verified DVR coefficient hypotheses, explicit perfect quotient resolutions, exactness through the actual completed projection, strict tower identities, signed tensor invariance, unbounded K-flat closure and representative-level naturality. All non-elementary inputs reuse existing nodes; searches found no project attachment or Mathlib theorem covering the item.",
+  "blueprint": "lem-a1-finite-map-purity, proof first paragraph: geometric-fibre restriction in the finite-stalk formula; through lem-a1-integral-pullback-completed-comparison, this realizes the extracted old steps 1, 2 and 5 concerning coefficient hypotheses and one strict objectwise principal-Koszul replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The coefficient DVR and nonzero uniformizer theorem; this is generic local-field input to the affine-line coefficient datum, absent from its weight-estimate unit."
+   },
+   {
+    "node": "def-sfb-site-derived-constant-module-functor",
+    "why": "Only its stated exactness of the constant module functor is used to sheafify the explicit free resolution; the affine-line unit contains no such generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "why": "Exact scalar extension and the projection-normalized quotient formula for a Noetherian completed coefficient sheaf, used as a generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "The generic bounded-above flat-complex criterion on a site, applied to the explicit two-term complex."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "The generic ringed-site invariance of tensor by a fixed K-flat complex under arbitrary quasi-isomorphisms."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "The generic unbounded total-tensor closure theorem for flat-term K-flat complexes."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Its last clause identifies the sheafified constant quotient sheaves and their limit with the coefficient sheaves (P_n)_T and A_T of the adic datum, so the datum's strict reduction tower is the tower over R_W, S_{W,n} named in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-25bc05c20",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-25bc05c20 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with every cited statement. No new nodes; the statement is unchanged; live and side-live still have the item unsplit; no repair note; no SGA (the Stacks tags 00PD/0657/093J/093M/06YQ/06YP/07A2/0A0E/099L were checked at their labels). Steps 1-7 are correct. Step 1: |ℓ|_E<1 puts ℓ in (t), so A/(t) is torsion; finite quotients come from lem-weil-valued-dvr-finite-quotients. Step 2: [A→A] resolves A/t^n, so A/t^n is perfect. Step 3: constant-module exactness plus the flat-quotient theorem with the identity presentation gives exactness through π_n. Step 4: bounded flat ⇒ K-flat. Step 5: the Koszul tower definition with the π_m transitions. Step 6: the right arbitrary-qis K-flat invariance; I rechecked the swap sign (-1)^{ij} against the total differential. Step 7: the total-tensor model applies with no boundedness on P. Small cases tested: n=1, ramified E, W empty, P=0, P unbounded. Fault, C1/C4 in step 8: the adic datum's (P_n)_T and A_T are built from Cont(π_0|U|,P_n), and that node explicitly asserts no identification with the constant conventions. The step read the datum's tower as P⊗_{R_W}S_{W,n} (sheafified constants, def-weil-completed-integral-coefficients) without citing that identification. FIX: step 8 now cites the existing lem-weil-pbc-completed-constant-sheaf-reduction, whose last clause gives (P_n)_T = constant A/I^n and B = A_T. No cycle (closure checked). Step 8 is now marked non-elementary, and the node is added to proof_deps and to split_report.tool_uses. I accept the declared generic tool uses.; 1 file(s) fixed by the reviewer"
  }
 }
