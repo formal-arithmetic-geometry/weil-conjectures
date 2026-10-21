@@ -15,9 +15,124 @@
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat $B_T$-complex $P$ representing $K$ by [lem-pc-kflat-resolution]. The flatness of $B_T$ over $R_T$ in [lem-weil-pbc-constant-completion-equivalence] implies that $\\operatorname{Res}P$ is K-flat over $R_T$: for an acyclic $R_T$-complex $E$, $B_T\\otimes_{R_T}E$ is acyclic, and $P\\otimes_{R_T}E=P\\otimes_{B_T}(B_T\\otimes_{R_T}E)$ is acyclic by [def-pc-kflat-complex]. Its terms are $R_T$-flat because the functor $P^i\\otimes_{R_T}-$ is the composite of the two exact tensor functors. This uses no completeness of $K$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), together with the flat coefficient extension specified in the cited node."
+   }
+  },
+  {
+   "text": "Put $P_n=P\\otimes_{B_T}S_{n,T}$ and $U=g_R^*\\operatorname{Res}P$. By [lem-weil-pbc-ringed-pullback-preserves-kflat], applied also to identity-topos scalar extension, $P_n$, $U$, $U\\otimes_{R_{T'}}S_{n,T'}$ and $V_n=g_n^*P_n$ are K-flat with flat terms over their respective rings. By [lem-pur-derived-change-of-rings] and [lem-weil-pbc-ringed-topoi-derived-pullback] these represent $K_n,N,N_n,H_n$, respectively. The coefficient identifications and quotient maps are those of [def-weil-pbc-adic-coefficient-datum]. Thus all successive scalar extensions below are computed on these same complexes; no flatness of $S_{b,T}\\to S_{a,T}$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "Write $[x]$ for a local inverse-image generator of a section $x$ of $P$, and $[x\\otimes1]$ for the corresponding generator in $V_n$. If $r$ is a local $R_{T'}$-section, write $\\bar r_n$ for its image in $S_{n,T'}$. By [lem-weil-pbc-pulled-reduction-strict-tower-comparison], $\\tau_n$ is specifically pullback/scalar comparison followed by the finite constant-to-completed comparison. The latter is $x\\otimes t\\mapsto x\\otimes t$ by [lem-weil-pbc-flat-coefficient-reduction-adjunct]; its hypotheses hold here by the flatness and finite-reduction isomorphisms in [lem-weil-pbc-constant-completion-equivalence]. The former is the ordinary balanced comparison on K-flat representatives by [lem-sfb-kflat-scalar-comparison-normalization]. Consequently its chain-level formula is\n$$\\tau_n:([x]\\otimes r)\\otimes t\\longmapsto[x\\otimes1]\\bar r_n t.$$\nThese are maps of actual sheaf tensor complexes: the local formulas are balanced and restriction-compatible, and the pure tensors determine maps by [def-weil-pbc-ringed-tensor-section-calculus].",
+   "uses": [
+    "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+    "lem-weil-pbc-flat-coefficient-reduction-adjunct",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); ordinary balanced comparison: sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-kflat-scalar-comparison-normalization] to the constant coefficient map $S_{b,T}\\to S_{a,T}$ and inverse image $g^{-1}$. The ring sheaves on $T'$ are their inverse images by the constant-sheaf identifications of [lem-weil-pbc-constant-completion-equivalence]. In the orientation used in the statement, its comparison identifies $V_b\\otimes_{S_{b,T'}}S_{a,T'}$ with $g_a^*(P_b\\otimes_{S_{b,T}}S_{a,T})$. Follow by $g_a^*$ of the normalization in [def-weil-pbc-adic-coefficient-datum]. Both arrows are isomorphisms, so this is the specified invertible $\\theta^H_{b,a}$. Explicitly,\n$$([x\\otimes1]t)\\otimes s\\longmapsto[x\\otimes1]q_{b,a}(t)s,$$\nwith inverse $[x\\otimes1]s\\mapsto[x\\otimes1]\\otimes s$. For $N$, [lem-sfb-successive-derived-quotient-normalization] gives $(u\\otimes t)\\otimes s\\mapsto u\\otimes q_{b,a}(t)s$, the specified $\\theta^N_{b,a}$.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+   }
+  },
+  {
+   "text": "Evaluate the two sides of the desired square on $(([x]\\otimes r)\\otimes t)\\otimes s$. The upper route gives $[x\\otimes1]q_{b,a}(\\bar r_b t)s$; the lower route gives $[x\\otimes1]\\bar r_a q_{b,a}(t)s$. These agree because $q_{b,a}$ is a ring map and $q_{b,a}(\\bar r_b)=\\bar r_a$. The latter identity follows from the compatible coefficient quotient maps of [def-weil-pbc-adic-coefficient-datum]. Additivity and balancing, followed by sheafification, prove equality on the whole complexes by [def-weil-pbc-ringed-tensor-section-calculus]. Hence $\\theta^H_{b,a}(\\tau_b\\otimes1)=\\tau_a\\theta^N_{b,a}$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Explicit balancing calculation for the canonical maps in Tags 03EL and 0D6D."
+   }
+  },
+  {
+   "text": "For $c\\ge b\\ge a$, the route through $b$ sends $(([x\\otimes1]t)\\otimes s)\\otimes v$ to\n$$[x\\otimes1]q_{b,a}(q_{c,b}(t)s)v=[x\\otimes1]q_{c,a}(t)q_{b,a}(s)v.$$\nThe direct route first reassociates the two coefficient tensors and has exactly the latter value. Here $q_{b,a}q_{c,b}=q_{c,a}$ is part of [def-weil-pbc-adic-coefficient-datum], and the canonical scalar associators and their generator formulas are [lem-sfb-successive-derived-quotient-normalization]. For $b=a$, the same formula is $h\\otimes s\\mapsto hs$, with inverse $h\\mapsto h\\otimes1$, so it is the scalar-extension unit identification. The calculation before inverse image is identical with $[x\\otimes1]$ replaced by $x\\otimes1$; the balancing formula then is precisely $(x\\otimes t)\\otimes s\\mapsto x\\otimes q_{b,a}(t)s$. The local tensor generators determine these chain maps by [def-weil-pbc-ringed-tensor-section-calculus].",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition) and 03EL, with the explicit triple and unit balancing calculations."
+   }
+  },
+  {
+   "text": "For a chain map $f:P\\to P'$, each formula above changes only $x$ to $f(x)$, proving naturality on flat-term K-flat models. These formulas commute with differentials because the coefficient sheaves are in degree zero and their multiplications commute with the tensor differential of [def-pc-tensor-complex-sheaves]. Scalar extension preserves quasi-isomorphisms between K-flat complexes and has canonical, composable resolution comparisons by [lem-pur-derived-change-of-rings]; pullback has the same property on the chosen flat-term class by [lem-weil-pbc-ringed-topoi-derived-pullback]. Finally [lem-weil-pbc-site-derived-tensor-descent] identifies the localization of this class with $D(B_T)$. Thus the natural chain maps, their inverse maps, the square, the triple equality and the unit equality all descend through quasi-isomorphisms, and their values are independent of $P$. This proves all clauses for arbitrary $K$ in the stated derived categories.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), 0G7D (lemma-factor-through-K-flat)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+  "lem-weil-pbc-flat-coefficient-reduction-adjunct",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0G7E, 0D6D and 07A4; explicit quotient square, triple and unit calculations refining the current blueprint ancestor."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +175,45 @@
    "results": "8 hits: AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.comap_comp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
    "date": "2026-10-21",
    "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|extendScalars_assoc|derived.*[Tt]ensor",
+   "results": "14 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these results give underived module/sheaf pullback and scalar associators, not derived quotient normalization together with the specified constant/completed tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings for sheaf modules is compatible with quotient associativity and pullback",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pushforward_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: these results give underived module/sheaf pullback and scalar associators, not derived quotient normalization together with the specified constant/completed tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-21",
+   "verdict": "no match: these results give underived module/sheaf pullback and scalar associators, not derived quotient normalization together with the specified constant/completed tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves of modules commutes with successive extension of scalars along quotient rings, naturally and with associativity and unit coherence",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: these results give underived module/sheaf pullback and scalar associators, not derived quotient normalization together with the specified constant/completed tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived extension of scalars for ring sheaves satisfies the transitivity isomorphism and commutes with inverse image under a morphism of topoi",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward, SheafOfModules.pushforwardCongr, SheafOfModules.restrictScalars, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardNatIso, SheafOfModules.pullback, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-21",
+   "verdict": "no match: these results give underived module/sheaf pullback and scalar associators, not derived quotient normalization together with the specified constant/completed tower comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lemma-weil-pbc-completed-pullback-reduction",
@@ -81,5 +231,44 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-pulled-reduction-normalization-comparison",
+  "worker": "stage1",
+  "summary": "NP supplies seven proof steps on a common flat-term K-flat representative, using existing general scalar and pullback comparisons. The square and the triple/unit equations are checked explicitly on balanced sheaf tensor generators, then localized. No statement change and no new nodes.",
+  "blueprint": "The current main-20261015 ancestor lemma-weil-pbc-completed-pullback-reduction, proof paragraph 1 (normalization cocycles), is refined by steps 4–6; paragraph 2 (pulled-back reduction comparison) supplies the specified tau whose representative formula is checked in steps 1–3; step 7 establishes naturality and independence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat representatives for unbounded sheaf complexes; no resolution existence theorem in this unit replaces it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat scalar derivation and its resolution comparisons, needed for quotient tensor models and their independence."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic inverse-image/scalar mate with its precise balanced representative formula; used only as a coefficient comparison, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic scalar associativity, its balancing formula and iterated comparisons, used for thetaN and the canonical associators."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-341ac5beb",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-341ac5beb (reviewer sub-agent of L); spot-checked: First split of an item that had no proof. Live still has it unsplit and there is no repair note. Statement, stmt_deps and blueprint are byte-identical to live, and there are no new nodes and no cycle. I read the 15 cited statements. Step 1: Res P is K-flat over R_T by the flatness of Â over A in lem-weil-pbc-constant-completion-equivalence plus the K-flatness of P over B_T. Step 2: the flat-term K-flat models come from lem-weil-pbc-ringed-pullback-preserves-kflat, including u=id for scalar extension. Step 3: the formula for tau_n is chi_g^{-1} from lem-sfb-kflat-scalar-comparison-normalization composed with kappa from lem-weil-pbc-flat-coefficient-reduction-adjunct. Kappa's hypotheses hold: B is R-flat and B/I^nB is S_n. Step 4: theta^H is chi^{-1} followed by g_a^* of the datum's balancing isomorphism, so it is invertible with no flatness of S_b->S_a; its orientation matches the mate theta_h. Steps 5 and 6: I recomputed the square, the triple and the unit on generators; they need only that q is a ring map and the cocycle, so they are elementary. Step 7 descends through lem-weil-pbc-site-derived-tensor-descent. Tested on g=id, A=Z_l with I=(l) (non-flat quotient map), K=0, and b=a. The Stacks tags 07A4, 0D6D, 0G7E, 06YS, 06YY, 06YT, 0G7D and 03EL match their labels in tags/tags, and no SGA is cited. I accept the 4 generic tool_uses (lem-pc-kflat-resolution, lem-pur-derived-change-of-rings, lem-sfb-kflat-scalar-comparison-normalization, lem-sfb-successive-derived-quotient-normalization). They serve the parent lemma-weil-pbc-completed-pullback-reduction step 6. Advisory only: the map A->P_n used in step 5 lives in the constant-completion node, and the report mentions a citations.json that is not in the commit."
+ }
 }
