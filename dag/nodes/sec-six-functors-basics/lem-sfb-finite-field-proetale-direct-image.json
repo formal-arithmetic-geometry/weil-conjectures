@@ -20,81 +20,75 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian and its spectrum is quasi-compact. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure morphisms: $T,V$ are Noetherian, hence quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated] they are quasi-separated. Then [lem-weil-pbc-qcqs-morphism-permanence] (1) makes $f$ qcqs; no separatedness is needed.",
+   "text": "The source T is locally Noetherian by finite type over Spec k. A locally Noetherian scheme is quasi-separated; hence f is quasi-separated by qcqs morphism permanence. Quasi-compactness of f is already a hypothesis. This supplies precisely the hypotheses of direct-image comparison without separatedness.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01OY (lemma-locally-Noetherian-quasi-separated); finite-type permanence and qcqs morphism permanence as in the cited nodes"
-   }
+   "elementary": false
   },
   {
-   "text": "Over the finite field $A$, finitely generated, finitely presented and finite-dimensional modules coincide and are finite sets. Apply [lem-sfb-noetherian-global-constructibility] on both sites of $T,V$: the affine-local constructibility condition and the global finite-stratification condition defining $\\mathcal B_A$ agree.",
+   "text": "Use the proved exact constant-scalar restriction equivalence proEtaleModuleRestriction with lifted coefficients ULift A. Its homology comparison preserves vanishing and its constructibility equivalence identifies the global finite-stratification predicates. Apply the already proved general fixedDerivedOrigin helper in ProEtaleConstructibleOrigin to descend the resulting bounded fixed-module complex to a bounded constructible etale complex J. The helper works for every finite commutative coefficient ring; no finite-field datum, adic coefficient presentation, or affine-local stratification is used.",
    "uses": [
-    "lem-sfb-noetherian-global-constructibility"
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-sf-proetale-constructible-origin"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AJ (definition-constructible), 09AK (lemma-compare-constructible), 09AL (lemma-compare-constructible-derived); global stratification gluing as in the cited node"
-   }
+   "elementary": false
   },
   {
-   "text": "For $K\\in\\mathcal B_A(T)$, [sk-thm-pe-constructible-comparison] gives $G\\in D^b_c(T_{\\mathrm{et}},A)$ and $\\alpha:\\nu_T^*G\\xrightarrow{\\sim}K$. Step 2 matches its constructibility convention. The comparison inverse image $\\nu_T^*$ used here is canonically isomorphic to the intrinsic constant-section inverse image by the adjoint-uniqueness clause of [lem-sfb-ordinary-proetale-direct-image-plus-comparison] (with $B=A$, $X=T$); hence by [lem-pe-coefficient-comparison-derived-functor] it is the ordinary termwise inverse image followed by localization and it commutes with cohomology.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "lem-pe-coefficient-comparison-derived-functor",
-    "lem-sfb-ordinary-proetale-direct-image-plus-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AK and 09AL; the actual module derived inverse image as in the cited coefficient-comparison node"
-   }
-  },
-  {
-   "text": "The finite ring $A$ is killed by $\\ell$, and $\\ell$ is invertible in $k$ since $p\\ne\\ell$. Thus [thm-dg-finite-type-constructibility] applies to $f,G$ and gives $H:=Rf_{\\mathrm{et},*}G\\in D^b_c(V_{\\mathrm{et}},A)$. Its statement allows arbitrary $k$ and non-separated $f$.",
+   "text": "The positive characteristic p of the field k is prime. If ell vanished in k, p would divide the prime ell, so p=1 or p=ell, both impossible. Therefore ell is a unit in k; it annihilates A and ULift A. Transport the unit to global sections of Spec k and apply the existing arbitrary-field finite-type etale finiteness theorem to J. It gives an output interval [aO,bO] and constructible etale cohomology.",
    "uses": [
     "thm-dg-finite-type-constructibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.md",
-    "place": "statement (ordinary étale finite-type direct-image finiteness, without separatedness); finite-field input in Bhatt–Scholze Theorem 6.7.1"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-ordinary-proetale-direct-image-plus-comparison] with $B=A$: it supplies the full ordinary K-injective direct images, identifies both comparison inverse images, and gives $\\nu_V^*H\\cong Rf_{\\mathrm{proet},*}\\nu_T^*G$. Composing with $Rf_*(\\alpha)$ identifies this with $Rf_*K$. By [lem-pe-coefficient-comparison-derived-functor], $\\mathcal H^q(\\nu_V^*H)\\cong\\nu_V^*\\mathcal H^q(H)$, so the finite vanishing interval of $H$ is preserved. By [sk-thm-pe-constructible-comparison] these sheaves are constructible; step 2 gives the global convention. Hence $Rf_*K\\in\\mathcal B_A(V)$.",
+   "text": "Regard J as bounded below using its given lower cohomological bound. Apply the canonical qcqs direct-image comparison on D-plus. Compose its isomorphism with the full/plus compatibility isomorphisms, the antecedent isomorphism, and the already proved restrictionDerivedDirectImageIso helper of ProEtaleClassicalDirectImagePreservation. This identifies comparison pullback of the ordinary etale direct image with scalar restriction of the ordinary intrinsic pro-etale direct image of K. The helper is the exact equivalence compatibility of direct images, and does not invoke a constructible finiteness assertion.",
    "uses": [
-    "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
-    "lem-pe-coefficient-comparison-derived-functor",
-    "sk-thm-pe-constructible-comparison"
+    "prop-weil-pbc-comparison-direct-image",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-pe-classical-direct-image-preservation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.4.3 on bounded-below inputs; ordinary total-derived interpretation using Stacks Tag 070K (derived.tex, lemma-enough-K-injectives-implies) and Tag 070J (derived.tex, lemma-bounded-below-injectives-K-injective); compare Tag 099R (proetale.tex, lemma-morphism-comparison)."
-   }
+   "elementary": false
+  },
+  {
+   "text": "The module categories have the recorded K-injective resolutions. Choose a K-injective representative I of K using exists_iso_Q_obj_of_isKInjective. The standard derived direct image at Q I is Q(f_* I) by rightDerivedFunctorObjQIso. The arbitrary-resolution derived functor in the assertion has the same value by rightDerivedFunctorOfQuasiIsoResolutionsObjIso applied to the identity resolution of I. Compose these isomorphisms and the images of K isomorphic to Q I. Thus the two full-category functors agree on this input without choosing any new functor or coefficient object.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact etale-to-pro-etale comparison commutes with homology and sends zero objects to zero objects. Apply homology to the isomorphisms of the preceding two steps, then reflect zero objects through scalar restriction. This gives vanishing outside [aO,bO]. Comparison carries each constructible etale homology sheaf to a constructible fixed-module sheaf; transport it through the same homology isomorphisms and use proEtaleModuleRestriction_constructible_iff to recover intrinsic global constructibility. Pair the interval certificate with the degreewise constructibility certificates.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-sfb-noetherian-global-constructibility",
-  "sk-thm-pe-constructible-comparison",
-  "lem-pe-coefficient-comparison-derived-functor",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-sf-proetale-constructible-origin",
   "thm-dg-finite-type-constructibility",
-  "lem-sfb-ordinary-proetale-direct-image-plus-comparison"
+  "prop-weil-pbc-comparison-direct-image",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-pe-classical-direct-image-preservation",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proof of Lemma 6.7.2 specialized to the finite field R=A and maximal ideal m=0: descend to the étale site, use finite-coefficient finiteness, and apply Lemma 5.4.3. The arbitrary-field étale input is the existing thm-dg-finite-type-constructibility; constructible comparison is Stacks Tags 09AK and 09AL."
+  "place": "Bhatt--Scholze Lemma 6.7.2, finite-field case, using Lemma 5.4.3; Stacks Tags 09AK and 09AL. Formalized by F4 through the proved fixedDerivedOrigin and restrictionDerivedDirectImageIso helpers, arbitrary-field etale finiteness, full/plus compatibility, and both K-injective resolution computation isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -223,15 +217,8 @@
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-etale-stratification-local-gluing-core",
-  "sk-thm-pe-constructible-comparison",
-  "lem-pe-coefficient-comparison-derived-functor",
   "thm-dg-finite-type-constructibility",
-  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-sfb-grothendieck-k-injective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
   "prop-weil-pbc-comparison-direct-image",
   "lem-sfb-noetherian-global-constructibility"
  ],
@@ -261,5 +248,15 @@
   "result": "pass",
   "note": "Every hypothesis and both conclusion clauses match the node: ℓ prime, char k = p > 0 with p ≠ ℓ, A a finite field of char ℓ, finite-type T, V and f over k, no extra assumptions on k or separatedness; the ordinary pro-étale derived category over the constant ring; bounded cohomology plus the recorded IsConstructibleProEtaleModuleSheaf on T and on V; Rf_* = recorded rightDerivedFunctorOfQuasiIsoResolutions of recorded proEtaleConstantModuleDirectImage. The resolution proof term only drops Mono and chooses no data. No universe restriction beyond those forced by Spec k and the dependency APIs. Edge cases checked: empty scheme, zero complex, ℓ = 2, imperfect k, non-separated f. lean.statement is verbatim; docstrings carry the source, blueprint id and all seven steps; no hollow definitions, no proof beyond sorry. Node copy differs from the landed Q115 split only in lean; first stage-2 delivery; item not in the dropped list. nt_compile --json: 6.4 s, exit 0, clean. Advisory: the def-sfb Rf_* is canonically isomorphic to proEtaleConstantDerivedDirectImage, as the node prescribes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5790c",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T111053-L-4013292",
+  "kind": "proof",
+  "note": "independent cc review: delivered FiniteFieldProEtaleDirectImage.lean (signature byte-identical to live, compiles clean, axioms only via upstream sorry deps) and node lem-sfb-finite-field-proetale-direct-image proof/proof_deps vs the Lean proof; unit sk-def-sfb-dc-restricted-functors realized is empty; 0 importers"
+ }
 }

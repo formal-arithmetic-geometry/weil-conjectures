@@ -11,19 +11,12 @@ public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedFunctor
+import all Sheaf.Paper.ProEtaleConstructibleOrigin
+import all Sheaf.AlgebraicGeometry.ProEtaleClassicalDirectImagePreservation
+import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonData
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # Finite-field pro-etale direct-image finiteness
@@ -54,37 +47,26 @@ field coefficients of characteristic invertible in the base field.
 Source: Bhatt--Scholze, Lemmas 6.7.2 and 5.4.3, Theorem 6.7.1, finite-field case
 (blueprint: lem-sfb-finite-field-proetale-direct-image).
 
-Proof plan, following the seven steps of the node:
-1. Finite-type schemes over a field are Noetherian and quasi-compact
-   (lem-weil-pbc-finite-type-over-noetherian), hence quasi-separated
-   (lem-weil-pbc-locally-noetherian-quasi-separated). The morphism is qcqs by
-   lem-weil-pbc-qcqs-morphism-permanence, without separatedness.
-2. Finite modules over the finite field are precisely finite-dimensional vector spaces.
-   On these qcqs schemes, the affine-local constructibility condition agrees with the
-   global finite stratification condition: glue the local stratum maps using
-   lem-weil-pbc-etale-stratification-local-gluing-core, and pull back the constant models.
-3. By sk-thm-pe-constructible-comparison, descend K to a bounded constructible etale
-   complex G. The exact inverse image of lem-pe-coefficient-comparison-derived-functor
-   commutes with cohomology. Identify its intrinsic module presentation with the module
-   inverse image of def-weil-pbc-site-comparison-morphism by uniqueness of left adjoints
-   to the same sectionwise direct image (lem-pe-coefficient-comparison-data).
-4. The coefficient field is killed by ell, which is invertible in k. Apply
-   thm-dg-finite-type-constructibility to G. Its ordinary etale direct image is bounded
-   constructible over the arbitrary field k, also for a non-separated morphism.
-5. Module sheaves form Grothendieck abelian categories
-   (lem-pur-ringed-site-grothendieck-abelian); lem-sfb-grothendieck-k-injective gives
-   K-injective resolutions. Apply lem-weil-pbc-kinjective-total-derived to degreewise
-   direct image followed by localization. It computes the full derived value on a
-   K-injective resolution.
-6. Enough injectives (lem-sp-grothendieck-enough-injectives) and
-   lem-weil-pbc-dplus-injective-representative give a bounded-below injective, hence
-   K-injective, representative. Thus the full functor of def-sfb-right-derived-functor
-   agrees on this input with the bounded-below direct image.
-7. Apply prop-weil-pbc-comparison-direct-image to G and the qcqs morphism. It identifies
-   the pro-etale direct image of K with the inverse image of the etale direct image of G.
-   Exact cohomology comparison preserves its finite interval of vanishing, and
-   sk-thm-pe-constructible-comparison preserves constructibility. Step 2 converts this
-   back to the intrinsic global stratification convention asserted here. -/
+Proof:
+1. The source is locally Noetherian, hence quasi-separated; the given quasi-compact
+   morphism is therefore qcqs. No separatedness is required.
+2. Restrict to constant scalars using `proEtaleModuleRestriction_isEquivalence` and
+   `proEtaleModuleRestriction_constructible_iff`. Exactness transports the input bounds
+   and constructibility. The proved `fixedDerivedOrigin` helper of
+   `lem-sf-proetale-constructible-origin` supplies a bounded constructible etale antecedent.
+   This uses global finite stratifications directly, avoiding affine-local gluing.
+3. Positive characteristic of k is prime. If ell vanished in k, its characteristic
+   would divide ell and hence equal ell, contrary to the hypothesis. Thus ell is a unit
+   in k and annihilates A. Apply `thm-dg-finite-type-constructibility` to the antecedent.
+4. Apply `prop-weil-pbc-comparison-direct-image` in the bounded-below category. The
+   full/plus compatibility isomorphisms and the proved `restrictionDerivedDirectImageIso`
+   helper identify its value with the intrinsic ordinary derived direct image.
+5. Choose a K-injective representative of K. Both the standard derived functor and the
+   specified arbitrary-resolution functor evaluate to the direct image of this same
+   representative, giving an isomorphism between their values.
+6. Apply the homology comparison isomorphisms. Exact comparison preserves zero homology
+   and constructibility, and scalar restriction reflects them. This transports the
+   output interval and each constructible cohomology sheaf to the asserted value. -/
 theorem finiteField_proEtale_directImage_bounded_constructible
     (ell p : ℕ) (hell : ell.Prime) (hp : 0 < p) (hne : p ≠ ell)
     (k : Type u) [Field k] [CharP k p]
@@ -111,6 +93,90 @@ theorem finiteField_proEtale_directImage_bounded_constructible
         (fun C ↦ (Abelian.HasKInjectiveResolutions.exists_isKInjective C).elim
           (fun I hI ↦ hI.elim (fun hI hs ↦ hs.elim
             (fun s hs ↦ ⟨I, s, hI, hs.2⟩))))).obj K) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian aT
+  let B := ULift.{u + 1, u} A
+  let RX := proEtaleModuleRestriction T A
+  let RY := proEtaleModuleRestriction V A
+  have : RX.Additive := { map_add := by intros; rfl }
+  have : RY.Additive := { map_add := by intros; rfl }
+  have : RX.IsEquivalence := proEtaleModuleRestriction_isEquivalence T A
+  have : RY.IsEquivalence := proEtaleModuleRestriction_isEquivalence V A
+  let M := RX.mapDerivedCategory.obj K
+  have hc (q : ℤ) : ProEtale.IsConstructible B
+      ((DerivedCategory.homologyFunctor _ q).obj M) := by
+    exact ProEtale.isConstructible_of_iso
+      ((RX.mapDerivedCategoryHomologyFunctorIso q).app K)
+      ((proEtaleModuleRestriction_constructible_iff T A _).mp (hconstructible q))
+  obtain ⟨a, b, _, hv⟩ := hbounded
+  obtain ⟨J, hJ, ⟨eJ⟩⟩ := ProEtale.fixedDerivedOrigin T B M hc a b
+    (fun q hq ↦ RX.isZero_homologyFunctor_mapDerivedCategory_obj (hv q hq))
+  have hellk : IsUnit (ell : k) := by
+    apply isUnit_iff_ne_zero.mpr
+    intro h
+    have hdvd := (CharP.cast_eq_zero_iff k p ell).mp h
+    rcases (Nat.dvd_prime hell).mp hdvd with he | he
+    · have hpprime : p.Prime := (CharP.char_is_prime_or_zero k p).resolve_right hp.ne'
+      exact hpprime.ne_one he
+    · exact hne he
+  have hB : Etale.IsSmoothBaseChangeCoefficients ell B (Spec (.of k)) := by
+    refine ⟨hell.pos, inferInstance, ?_, ?_⟩
+    · apply ULift.down_injective
+      exact CharP.cast_eq_zero A ell
+    · simpa only [map_natCast] using hellk.map (Scheme.ΓSpecIso (.of k)).inv.hom
+  let νX := ProEtale.comparisonUpperStar (ModuleCat B) T
+  let νY := ProEtale.comparisonUpperStar (ModuleCat B) V
+  let F := Etale.lowerStar (ModuleCat B) f
+  let G := ProEtale.lowerStar (ModuleCat B) f
+  have hFJ := Etale.isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
+    k B ell hB aT aV f hf J hJ
+  obtain ⟨aJ, bJ, _, hvJ⟩ := hJ.2
+  let Jp : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat B)) :=
+    ⟨J, ⟨aJ, (DerivedCategory.isGE_iff J aJ).2
+      (fun q hq ↦ hvJ q (Or.inl hq))⟩⟩
+  have : IsIso (Functor.rightDerivedFunctorPlusBaseChange
+      (ProEtale.lowerStarComparisonUpperStarBaseChange f (ModuleCat B))) :=
+    ProEtale.isIso_comparisonDirectImagePlus B f
+  let e := asIso (Functor.rightDerivedFunctorPlusBaseChange
+    (ProEtale.lowerStarComparisonUpperStarBaseChange f (ModuleCat B)))
+  let er := (ProEtale.restrictionDerivedDirectImageIso f A).app K
+  let eOut : νY.mapDerivedCategory.obj (F.rightDerivedFunctor.obj J) ≅
+      RY.mapDerivedCategory.obj ((proEtaleConstantDerivedDirectImage f A).obj K) :=
+    νY.mapDerivedCategory.mapIso (F.rightDerivedFunctorPlusCompatibility.app Jp).symm ≪≫
+      (νY.mapDerivedCategoryPlusCompatibility.app (F.rightDerivedFunctorPlus.obj Jp)).symm ≪≫
+      DerivedCategory.Plus.ι.mapIso (e.app Jp) ≪≫
+      G.rightDerivedFunctorPlusCompatibility.app (νX.mapDerivedCategoryPlus.obj Jp) ≪≫
+      G.rightDerivedFunctor.mapIso (νX.mapDerivedCategoryPlusCompatibility.app Jp) ≪≫
+      G.rightDerivedFunctor.mapIso eJ ≪≫ er.symm
+  let P := proEtaleConstantModuleDirectImage f A
+  let hres : ∀ C : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ,
+      ∃ (I : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
+        (s : C ⟶ I), I.IsKInjective ∧ QuasiIso s :=
+    fun C ↦ (Abelian.HasKInjectiveResolutions.exists_isKInjective C).elim
+    (fun I hI ↦ hI.elim (fun hI hs ↦ hs.elim (fun s hs ↦ ⟨I, s, hI, hs.2⟩)))
+  obtain ⟨I, hI, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  have := hI
+  let eTotal : (proEtaleConstantDerivedDirectImage f A).obj K ≅
+      (P.rightDerivedFunctorOfQuasiIsoResolutions hres).obj K :=
+    P.rightDerivedFunctor.mapIso eI ≪≫ P.rightDerivedFunctorObjQIso I ≪≫
+      (P.rightDerivedFunctorOfQuasiIsoResolutionsObjIso hres (𝟙 I)).symm ≪≫
+      (P.rightDerivedFunctorOfQuasiIsoResolutions hres).mapIso eI.symm
+  obtain ⟨aO, bO, habO, hvO⟩ := hFJ.2
+  refine ⟨⟨aO, bO, habO, fun q hq ↦ ?_⟩, fun q ↦ ?_⟩
+  · apply RY.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    exact (νY.map_isZero (hvO q hq)).of_iso
+      ((νY.mapDerivedCategoryHomologyFunctorIso q).app _ ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso
+          (eOut ≪≫ RY.mapDerivedCategory.mapIso eTotal)).symm
+  · apply (proEtaleModuleRestriction_constructible_iff V A _).mpr
+    have hq : Scheme.IsConstructibleSheaf
+        ((DerivedCategory.homologyFunctor _ q).obj (F.rightDerivedFunctor.obj J)) :=
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hFJ.1 q)
+    exact ProEtale.isConstructible_of_iso
+      ((νY.mapDerivedCategoryHomologyFunctorIso q).app _ ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso
+          (eOut ≪≫ RY.mapDerivedCategory.mapIso eTotal) ≪≫
+        (RY.mapDerivedCategoryHomologyFunctorIso q).symm.app _)
+      (ProEtale.isConstructible_comparisonUpperStar_obj _)
 
 end AlgebraicGeometry.Scheme

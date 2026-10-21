@@ -1,0 +1,486 @@
+## What changed
+
+Proved `AlgebraicGeometry.Scheme.finiteField_proEtale_directImage_bounded_constructible`
+in `Sheaf.AlgebraicGeometry.FiniteFieldProEtaleDirectImage`. Its existing signature,
+universes, visibility, attributes and all public imports are unchanged. Only this Lean
+module and its DAG node are delivered, besides this report.
+
+The proof follows descent to the etale site, arbitrary-field etale finiteness, and
+qcqs direct-image comparison. It uses the already proved `fixedDerivedOrigin` helper
+from `Sheaf.Paper.ProEtaleConstructibleOrigin`, rather than passing through the larger
+coefficient-sized affine-local comparison interface. Constant-scalar restriction
+identifies the global intrinsic and fixed-module constructibility predicates, so no
+new gluing lemma or coefficient identification is necessary. The proved
+`restrictionDerivedDirectImageIso` helper from
+`Sheaf.AlgebraicGeometry.ProEtaleClassicalDirectImagePreservation` identifies ordinary
+direct images in these encodings. Both private helpers are accessed with proof-only
+`import all`, as in the existing proved `Sheaf.Paper.DirectImagesConstructible`.
+No dependency module is modified and no new public or private declaration is added.
+
+Positive characteristic is prime, and divisibility of ell by that characteristic
+would contradict their distinctness. This supplies the coefficient-unit condition
+for `isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field`.
+The full/plus compatibility isomorphisms lift the bounded-below comparison to the
+ordinary unbounded derived categories. A K-injective representative then identifies
+the library's standard derived value with precisely the arbitrary-resolution value
+in the theorem statement. Homology comparison transfers the etale output bounds and
+constructibility, and scalar restriction reflects them.
+
+Updated `proof`, `proof_deps`, and `proof_origin` of
+`lem-sfb-finite-field-proetale-direct-image` to describe the actual argument; removed
+only obsolete entries from its top-level `tool_uses`. The unit record has no realized
+node for this item, and the unit's restrictions and preservation route are unchanged.
+The newly cited nodes serve as generic presentation/comparison tools: constant-scalar
+encoding and constructibility identify the exact input and output categories;
+constructible origin supplies the already proved general finite-ring helper;
+classical direct-image preservation supplies only its proved encoding comparison;
+full/plus compatibility is the already proved source-library declaration. They replace
+presentation glue, not the etale geometric finiteness step or a unit-level argument.
+
+Validation: the final module compiled cleanly through `lcompile.py` in 8.1 seconds,
+with zero warnings. The initial successful proof compiled in 7.9 seconds. The theorem
+signature was compared verbatim with the repository source and is unchanged. Both new
+proof imports passed `import_direction.py may`; a dependency traversal found no path
+from any updated proof dependency back to the item. All Lean lines have at most 100
+characters. Empty schemes, zero input, arbitrary positive characteristic, ell = 2,
+imperfect or infinite k, and non-separated f require no additional hypotheses: the
+proof transports the given predicates and never assumes nonempty strata or schemes,
+a nonzero input, separatedness, or finiteness of k. Delivery preflight performs the
+independent compiler/axiom checks before pushing.
+
+## Proved and sorry left
+
+Closed 1 of 1 existing holes:
+`AlgebraicGeometry.Scheme.finiteField_proEtale_directImage_bounded_constructible`
+(node `lem-sfb-finite-field-proetale-direct-image`).
+
+Added 0 holes; split off 0 statements. No `sorry` remains in the delivered Lean module.
+This is a proof from existing declarations, not a decomposition. Existing dependencies
+may themselves depend on unresolved statements; none is introduced or modified here.
+
+## No longer needed
+
+Removed direct imports (all proof-only):
+
+- `Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives`
+- `Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated`
+- `Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives`
+- `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison`
+- `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonData`
+- `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedFunctor`
+- `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison`
+- `Sheaf.CategoryTheory.KInjectiveTotalDerived`
+- `WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore`
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`
+- `WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian`
+
+The corresponding planned dependencies below are no longer separately required by
+this node. The global constructibility/scalar-restriction route avoids affine-local
+gluing and the coefficient-sized comparison model; the existing standard/full/plus
+and resolution APIs encapsulate the foundational constructions. Any such dependency
+still imported by an existing construction remains required there.
+
+- `def-weil-pbc-site-comparison-morphism`
+- `lem-pe-coefficient-comparison-data`
+- `lem-pe-coefficient-comparison-derived-functor`
+- `lem-pur-ringed-site-grothendieck-abelian`
+- `lem-sp-grothendieck-enough-injectives`
+- `lem-weil-pbc-dplus-injective-representative`
+- `lem-weil-pbc-etale-stratification-local-gluing-core`
+- `lem-weil-pbc-kinjective-total-derived`
+- `sk-thm-pe-constructible-comparison`
+
+No Lean file is withdrawn. No module leaves the current overall `TargetsCheck`
+import closure from this packet alone: other target branches still import them.
+For completeness, the following 365 project modules leave this item's transitive
+import closure (computed by comparing the repository imports with the final sandbox
+imports, treating Mathlib as leaves). This list is local to the item; it does not
+request deletion of any module or any source-library declaration.
+
+```text
+Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison
+Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
+Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlatLimits
+Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+Sheaf.Algebra.Homology.AcyclicKFlatTensor
+Sheaf.Algebra.Homology.BilinearHomComplex
+Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+Sheaf.Algebra.Homology.ChangeOfRingsAcyclicKFlat
+Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+Sheaf.Algebra.Homology.DerivedChangeOfRings
+Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+Sheaf.Algebra.Homology.DerivedTensor
+Sheaf.Algebra.Homology.DiagramKFlatReplacements
+Sheaf.Algebra.Homology.KFlatClosure
+Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+Sheaf.Algebra.Homology.KFlatResolution
+Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+Sheaf.Algebra.Homology.KFlatTelescopeClosure
+Sheaf.Algebra.Homology.KFlatTensorQuasiIso
+Sheaf.Algebra.Homology.KInjectiveHomComplex
+Sheaf.Algebra.Homology.LocalCoefficientTelescopeDual
+Sheaf.Algebra.Homology.NormalizedRingHomExtension
+Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
+Sheaf.Algebra.Homology.RingBoundedProjectiveExtension
+Sheaf.Algebra.Homology.RingHomExtensionDefs
+Sheaf.Algebra.Homology.RingHomExtensionDegrees
+Sheaf.Algebra.Homology.RingHomExtensionDifferential
+Sheaf.Algebra.Homology.RingHomExtensionTransport
+Sheaf.Algebra.Homology.RingProjectiveInternalHomExact
+Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+Sheaf.Algebra.Homology.RingedToposAcyclicKFlatPullback
+Sheaf.Algebra.Homology.RingedToposAdaptedFlatResolution
+Sheaf.Algebra.Homology.RingedToposPullbackFilteredColimits
+Sheaf.Algebra.Homology.SliceModuleSheafification
+Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+Sheaf.AlgebraicGeometry.AffineLocallyConstructibleProEtaleModules
+Sheaf.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
+Sheaf.AlgebraicGeometry.CoefficientBoundedClassicalDescent
+Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+Sheaf.AlgebraicGeometry.CoefficientClassicalSingle
+Sheaf.AlgebraicGeometry.CoefficientComparisonConstructibilityTest
+Sheaf.AlgebraicGeometry.CoefficientComparisonModuleCriteria
+Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules
+Sheaf.AlgebraicGeometry.CoefficientProEtaleConstructibleIso
+Sheaf.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
+Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+Sheaf.AlgebraicGeometry.CoefficientStratifiedContinuity
+Sheaf.AlgebraicGeometry.ConstructibleNoetherianEtaleModules
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonClassical
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonData
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedEquivalence
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedFunctor
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonLocal
+Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonModuleEquivalence
+Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
+Sheaf.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
+Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
+Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
+Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
+Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+Sheaf.AlgebraicGeometry.ProEtaleRingedComparisonInjectiveAcyclicity
+Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison
+Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
+Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+Sheaf.CategoryTheory.AdjunctionRingOperations
+Sheaf.CategoryTheory.AlgebraicInverseImage
+Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
+Sheaf.CategoryTheory.AugmentedComplexGluing
+Sheaf.CategoryTheory.CoefficientFiniteLocalSystemsPullback
+Sheaf.CategoryTheory.ConstantCoefficientScalarExtension
+Sheaf.CategoryTheory.DerivedAdjunctionHomDiagram
+Sheaf.CategoryTheory.DerivedAdjunctionSourceColimit
+Sheaf.CategoryTheory.DerivedAdjunctionTargetColimit
+Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
+Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors
+Sheaf.CategoryTheory.DoubleComplexTotal
+Sheaf.CategoryTheory.FiniteSectionsEpiLift
+Sheaf.CategoryTheory.GeometricModuleConstruction
+Sheaf.CategoryTheory.GeometricModuleTransport
+Sheaf.CategoryTheory.GeometricRingTransport
+Sheaf.CategoryTheory.LocalCoefficientLocalization
+Sheaf.CategoryTheory.LocalExtendedCechDescription
+Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
+Sheaf.CategoryTheory.ModuleInverseImageUnitComparison
+Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+Sheaf.CategoryTheory.ModuleSheafificationLocalIso
+Sheaf.CategoryTheory.ModuleSheafificationRestriction
+Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+Sheaf.CategoryTheory.PresheafTensorInternalHom
+Sheaf.CategoryTheory.RingedCechKoszulColimitIso
+Sheaf.CategoryTheory.RingedCompletionUnit
+Sheaf.CategoryTheory.RingedExtendedCech
+Sheaf.CategoryTheory.RingedIdealGenerators
+Sheaf.CategoryTheory.RingedKoszulFactorColimit
+Sheaf.CategoryTheory.RingedKoszulSystem
+Sheaf.CategoryTheory.RingedSectionLocalization
+Sheaf.CategoryTheory.RingedSiteCompleteElement
+Sheaf.CategoryTheory.RingedSiteCompleteElementAddition
+Sheaf.CategoryTheory.RingedSiteCompleteElementMultiplication
+Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
+Sheaf.CategoryTheory.RingedSiteCompleteElementsLocal
+Sheaf.CategoryTheory.RingedSiteDerivedRestriction
+Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+Sheaf.CategoryTheory.RingedSiteLocalization
+Sheaf.CategoryTheory.RingedSiteLocalizationCech
+Sheaf.CategoryTheory.RingedSliceExtensionExactness
+Sheaf.CategoryTheory.RingedSliceExtensionPreservesExact
+Sheaf.CategoryTheory.RingedSliceExtensionReflectsExact
+Sheaf.CategoryTheory.RingedSliceExtensionTensor
+Sheaf.CategoryTheory.RingedSliceExtensionTensorHomData
+Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
+Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+Sheaf.CategoryTheory.RingedToposKFlatPullback
+Sheaf.CategoryTheory.RingedToposMorphism
+Sheaf.CategoryTheory.RingedToposRingData
+Sheaf.CategoryTheory.RingedTowerPushforwardLimitAcyclic
+Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+Sheaf.CategoryTheory.SheafTensor
+Sheaf.CategoryTheory.SheafTensorStructure
+Sheaf.CategoryTheory.SheafificationTensorLocalIso
+Sheaf.CategoryTheory.SiteModuleCompatibleTuples
+Sheaf.CategoryTheory.Sites.InverseImageLocalFamilies
+Sheaf.CategoryTheory.SliceAwayLocalization
+Sheaf.CategoryTheory.SliceAwayLocalizationFreeResolution
+Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
+Sheaf.Paper.CoefficientHomAugmentation
+Sheaf.Paper.CohomologyInWeakSerreSubcategory
+Sheaf.Paper.CompletedIntegralCoefficients
+Sheaf.Paper.CondensedConstantConstructibility
+Sheaf.Paper.ConstantCompletionEquivalence
+Sheaf.Paper.DerivedHomMayerVietoris
+Sheaf.Paper.ExtendedCechCompletionModel
+Sheaf.Paper.ExtendedCechReflectorCore
+Sheaf.Paper.ExtendedLocalizationCech
+Sheaf.Paper.FiniteGeneratorsLocalSpan
+Sheaf.Paper.FiniteIdealGeneratingCover
+Sheaf.Paper.FiniteOrderedCechCoefficientMap
+Sheaf.Paper.FiniteOrderedCechTotalMap
+Sheaf.Paper.FiniteOrderedFlasqueCechComparison
+Sheaf.Paper.FiniteOrderedFlasqueCechComparisonAlpha
+Sheaf.Paper.FiniteOrderedFlasqueCechComparisonBeta
+Sheaf.Paper.FlasqueAlternatingCechRowAugmentation
+Sheaf.Paper.FlatLocalizationKoszulCohomologyComparison
+Sheaf.Paper.FlatLocalizationKoszulHomotopy
+Sheaf.Paper.FlatRingedCechBaseChange
+Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso
+Sheaf.Paper.FlatRingedCechLocalComparison
+Sheaf.Paper.FlatRingedIdealCompleteEquivalence
+Sheaf.Paper.FunctorialRingComplexCechComparison
+Sheaf.Paper.FunctorialRingComplexDescentData
+Sheaf.Paper.FunctorialRingComplexIdealDescent
+Sheaf.Paper.FunctorialRingComplexSheaf
+Sheaf.Paper.KFlatRingedToposPullback
+Sheaf.Paper.LocalCompletenessModels
+Sheaf.Paper.LocalHomTowerCriterion
+Sheaf.Paper.ModuleCupAWComponents
+Sheaf.Paper.ModuleCupCosimplicialFMapSummands
+Sheaf.Paper.ModuleCupFlasqueAcyclicity
+Sheaf.Paper.ModuleCupGodementAugmentation
+Sheaf.Paper.ModuleCupGodementBetaExists
+Sheaf.Paper.ModuleCupGodementCodegeneracies
+Sheaf.Paper.ModuleCupGodementCosimplicialExists
+Sheaf.Paper.ModuleCupGodementCosimplicialInput
+Sheaf.Paper.ModuleCupGodementFMapModels
+Sheaf.Paper.ModuleCupGodementIteratePairings
+Sheaf.Paper.ModuleCupGodementIteratePairingsCanonical
+Sheaf.Paper.ModuleCupGodementIteratePairingsCanonicalCollapse
+Sheaf.Paper.ModuleCupGodementModel
+Sheaf.Paper.ModuleCupGodementModelPairing
+Sheaf.Paper.ModuleCupGodementModelQuasiIso
+Sheaf.Paper.ModuleCupGodementModelsExist
+Sheaf.Paper.ModuleCupGodementObjectFlasque
+Sheaf.Paper.ModuleCupGodementPairingForModels
+Sheaf.Paper.ModuleCupGodementPairingsFromBeta
+Sheaf.Paper.ModuleCupGodementRelations
+Sheaf.Paper.ModuleCupGodementStalkContraction
+Sheaf.Paper.ModuleCupGodementTensorCoordinates
+Sheaf.Paper.ModuleCupGodementTensorCoordinatesExists
+Sheaf.Paper.ModuleCupGodementTensorMapOfPairingExists
+Sheaf.Paper.ModuleCupGodementTensorStalkPairingExists
+Sheaf.Paper.ModuleCupResolutionData
+Sheaf.Paper.OrderedKoszulHomologyTorsion
+Sheaf.Paper.RestrictedCoefficientHom
+Sheaf.Paper.RestrictedCoefficientHomComplex
+Sheaf.Paper.RestrictionDerivedProducts
+Sheaf.Paper.RestrictionLocalCompleteness
+Sheaf.Paper.RestrictionSectionCompleteness
+Sheaf.Paper.RingComplexCechBaseChange
+Sheaf.Paper.RingComplexCechData
+Sheaf.Paper.RingComplexGodementCech
+Sheaf.Paper.RingComplexGodementConstruction
+Sheaf.Paper.RingComplexGodementFunctorial
+Sheaf.Paper.RingComplexGodementModelMaps
+Sheaf.Paper.RingComplexSemilinearExtension
+Sheaf.Paper.RingFamilyLocallyEqualModels
+Sheaf.Paper.RingFamilyRestriction
+Sheaf.Paper.RingedGeneratingListsLocalEquality
+Sheaf.Paper.RingedIdealQuotientComparison
+Sheaf.Paper.RingedScalarExtensionComplexAdjunction
+Sheaf.Paper.RingedSiteIdeal
+Sheaf.Paper.RingedTopoiDerivedPullback
+Sheaf.Paper.RingedTopoiTensorSections
+Sheaf.Paper.StrictPerfectCoefficientPackage
+Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+Sheaf.RingTheory.ModuleLocalizationFilteredColimit
+Sheaf.RingTheory.ModuleLocalizationTowerVanishing
+Sheaf.RingTheory.TwoLocalizationExact
+WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomTensorPair
+WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomTensorReversePair
+WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
+WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomProduct
+WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
+WeilConjectures.Algebra.Homology.FiniteStripAugmentation
+WeilConjectures.Algebra.Homology.FiniteStripConeFiltration
+WeilConjectures.Algebra.Homology.FiniteStripConeFiltrationGradedPoint
+WeilConjectures.Algebra.Homology.FiniteStripConeGradedMap
+WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapDifferential
+WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapEpi
+WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapIsIso
+WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapMono
+WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
+WeilConjectures.Algebra.Homology.HomComplexProjections
+WeilConjectures.Algebra.Homology.HomComplexUnitEvaluation
+WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationComm
+WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationIsIso
+WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
+WeilConjectures.Algebra.Homology.HomTensorComparisonNaturality
+WeilConjectures.Algebra.Homology.HomTensorCurryNaturalPure
+WeilConjectures.Algebra.Homology.HomTensorDegreewise
+WeilConjectures.Algebra.Homology.HomTensorDegreewiseConstruction
+WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
+WeilConjectures.Algebra.Homology.HomTensorDegreewiseIso
+WeilConjectures.Algebra.Homology.HomTensorDifferential
+WeilConjectures.Algebra.Homology.HomTensorDifferentialComponent
+WeilConjectures.Algebra.Homology.HomTensorDifferentialSummand
+WeilConjectures.Algebra.Homology.HomTensorDifferentialSummandPure
+WeilConjectures.Algebra.Homology.HomTensorLocalizedExt
+WeilConjectures.Algebra.Homology.HomTensorNaturality
+WeilConjectures.Algebra.Homology.HomTensorNaturalityComponent
+WeilConjectures.Algebra.Homology.HomTensorReverseConstruction
+WeilConjectures.Algebra.Homology.HomTensorSectionNaturality
+WeilConjectures.Algebra.Homology.HomTensorSummandLocalizedExt
+WeilConjectures.Algebra.Homology.HomTensorSummandRestriction
+WeilConjectures.Algebra.Homology.HomTensorTotal
+WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
+WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
+WeilConjectures.Algebra.Homology.RoosComparisonHomotopies
+WeilConjectures.Algebra.Homology.RoosComparisonHomotopyRetract
+WeilConjectures.Algebra.Homology.RoosComparisonMaps
+WeilConjectures.Algebra.Homology.RoosComplex
+WeilConjectures.Algebra.Homology.RoosSplitComparison
+WeilConjectures.Algebra.Homology.SingleDegreeExactTermHomQuasiIso
+WeilConjectures.Algebra.Homology.StupidTailHomShortExact
+WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+WeilConjectures.Algebra.Homology.TowerSplitComplexReplacement
+WeilConjectures.AlgebraicGeometry.AffineBasisAcyclicSectionsPreservesHomology
+WeilConjectures.AlgebraicGeometry.AffineBasisDerivedSectionsLowerTailVanishing
+WeilConjectures.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology
+WeilConjectures.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction
+WeilConjectures.AlgebraicGeometry.AffineBasisLowerTailSectionsStep
+WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
+WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBoundAux
+WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit
+WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi
+WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono
+WeilConjectures.AlgebraicGeometry.AffineDerivedCounitHomologyFactorization
+WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison
+WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom
+WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsTruncationIso
+WeilConjectures.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso
+WeilConjectures.AlgebraicGeometry.AffineDerivedUnitIsomorphism
+WeilConjectures.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
+WeilConjectures.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction
+WeilConjectures.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit
+WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift
+WeilConjectures.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated
+WeilConjectures.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
+WeilConjectures.AlgebraicGeometry.DerivedFunctorTruncationStabilization
+WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationCycleFormula
+WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationUnitBridge
+WeilConjectures.AlgebraicGeometry.DerivedSectionPresheaf
+WeilConjectures.AlgebraicGeometry.DerivedSectionsLeftExactBottom
+WeilConjectures.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
+WeilConjectures.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation
+WeilConjectures.AlgebraicGeometry.IntegerSectionAcyclicIncomingKernelImage
+WeilConjectures.AlgebraicGeometry.LeftExactTruncationCycleFormula
+WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
+WeilConjectures.AlgebraicGeometry.OpenRestrictionModuleCohomology
+WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparison
+WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparisonSections
+WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparisonSheafification
+WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsTruncationIso
+WeilConjectures.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
+WeilConjectures.AlgebraicGeometry.QCohInverseAffineOpenVanishing
+WeilConjectures.AlgebraicGeometry.QCohTruncationDerivedLimit
+WeilConjectures.AlgebraicGeometry.RingedSpaceSheafificationCohomology
+WeilConjectures.AlgebraicGeometry.TruncationDerivedLimit
+WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
+WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
+WeilConjectures.CategoryTheory.InjectiveSplitTower
+WeilConjectures.CategoryTheory.InjectiveSplitTowerExtension
+WeilConjectures.CategoryTheory.InjectiveTowerEmbedding
+WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
+WeilConjectures.CategoryTheory.MittagLefflerLimitExact
+WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+WeilConjectures.CategoryTheory.ModuleObjects.Free
+WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
+WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
+WeilConjectures.CategoryTheory.RoosAcyclicResolution
+WeilConjectures.CategoryTheory.RoosFinitePrefixLimits
+WeilConjectures.CategoryTheory.RoosFinitePrefixes
+WeilConjectures.CategoryTheory.RoosPrefixAcyclic
+WeilConjectures.CategoryTheory.SimplexPresentationFaithful
+WeilConjectures.CategoryTheory.Sites.LocallyBijectiveFiniteLimit
+WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+WeilConjectures.CategoryTheory.TowerSplitEnvelope
+WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
+WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTower
+WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerCone
+WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerProperty
+WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerRoosTriangle
+WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
+WeilConjectures.CategoryTheory.Triangulated.MilnorBoundaryFactorization
+WeilConjectures.CategoryTheory.Triangulated.MilnorProjectionFactorization
+WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
+WeilConjectures.CategoryTheory.Triangulated.PBCDerivedLimitTowerCone
+WeilConjectures.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts
+WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
+WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+WeilConjectures.Topology.CohomologyPresheafDerivedSectionsEvaluation
+WeilConjectures.Topology.DerivedLimitStalkInjective
+WeilConjectures.Topology.OpenModuleDerivedSections
+WeilConjectures.Topology.PointwiseTruncationLimit
+WeilConjectures.Topology.PointwiseTruncationLimitExists
+WeilConjectures.Topology.PointwiseTruncationLimitIsIso
+WeilConjectures.Topology.PointwiseTruncationOpenStabilization
+WeilConjectures.Topology.RingedSpaceRGammaDerivedLimit
+```
+
+## Where the brief, the DAG or earlier work was wrong
+
+The mathematical argument is sound, but the original seven-step plan required more
+presentation changes than necessary. The existing proved general `fixedDerivedOrigin`
+helper already accepts every finite commutative coefficient ring and global fixed-module
+constructibility. Although the parent public origin theorem is phrased for adic
+coefficient rings, this helper is genuinely general and its proof is complete.
+Similarly, the encoding/direct-image comparison needed here is already proved privately
+in the classical direct-image module. Their actual signatures were checked and used;
+neither theorem is restated or assumed under a new name.
+
+The source-local Noetherian hypothesis suffices for quasi-separatedness of f; the
+assertion already supplies quasi-compactness. The proof needs no separate global
+Noetherian certificate or explicit finite affine-cover gluing. There is no statement
+repair, no target change, no definition change, and no forced adaptation.
+
+## Second reading by F4
+
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.
