@@ -12,9 +12,60 @@
  "stmt_deps": [
   "def-sfb-monoidal-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T_{A,N}$ for the given transposition bijection, and write $E_N=\\lambda_N\\circ(e\\otimes1_N)\\circ\\alpha_{P,D,N}^{-1}$, so $\\phi_N=T_{D\\otimes N,N}(E_N)$. Since $\\phi_P\\circ c=u_P$, naturality of $T$ in its source variable gives\n$$T_{\\mathbf1,P}\\bigl(E_P\\circ(1_P\\otimes c)\\bigr)=\\phi_P\\circ c=u_P=T_{\\mathbf1,P}(\\rho_P).$$\nInjectivity gives $E_P\\circ(1_P\\otimes c)=\\rho_P$. Precomposing with $\\rho_P^{-1}$ proves $t:=\\lambda_P\\circ(e\\otimes1_P)\\circ\\alpha_{P,D,P}^{-1}\\circ(1_P\\otimes c)\\circ\\rho_P^{-1}=1_P$. This uses only the supplied adjunction naturality and inverse identities; [def-sfb-monoidal-category] specifies the displayed associator and unitors.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPU, example-dual-derived: fill in the omitted triangle verifications, abstracted from the derived category; monoidal constraints as in categories.tex, Tag 0FFK, definition-monoidal-category."
+   }
+  },
+  {
+   "text": "Put $a=\\phi_{\\mathbf1}\\circ\\rho_D^{-1}:D\\to H(P,\\mathbf1)$. It is an isomorphism. Naturality of transposition gives $a=T_{D,\\mathbf1}(E_{\\mathbf1}\\circ(1_P\\otimes\\rho_D^{-1}))=T_{D,\\mathbf1}(e)$. For the last equality, substitute $E_{\\mathbf1}$: naturality of the right unitor and the unit identities give\n$$\\lambda_{\\mathbf1}\\circ(e\\otimes1_{\\mathbf1})=e\\circ\\rho_{P\\otimes D},\\qquad\n\\rho_{P\\otimes D}\\circ\\alpha_{P,D,\\mathbf1}^{-1}=1_P\\otimes\\rho_D,$$\nso the adjacent $\\rho_D$ and $\\rho_D^{-1}$ cancel. These are the unit identities obtained by naturality and the monoidal unit triangle of [def-sfb-monoidal-category] (in particular $\\lambda_{\\mathbf1}=\\rho_{\\mathbf1}$).",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPU, example-dual-derived: fill in the omitted triangle verifications, abstracted from the derived category; monoidal constraints as in categories.tex, Tag 0FFK, definition-monoidal-category."
+   }
+  },
+  {
+   "text": "Let $g=\\rho_D\\circ(1_D\\otimes e)\\circ\\alpha_{D,P,D}\\circ(c\\otimes1_D)\\circ\\lambda_D^{-1}:D\\to D$. Expand this composite inside $e\\circ(1_P\\otimes g)$. Suppressing only the displayed associators and unitors, tensor bifunctoriality in [def-sfb-monoidal-category] gives the two contractions\n$$e\\circ\\rho_{P\\otimes D}\\circ(1_{P\\otimes D}\\otimes e)=\\lambda_{\\mathbf1}\\circ(e\\otimes e)=e\\circ\\lambda_{P\\otimes D}\\circ(e\\otimes1_{P\\otimes D}).$$\nIndeed both are the tensor of the two copies of $e$, followed by the common unit identification $\\mathbf1\\otimes\\mathbf1\\to\\mathbf1$. Inserting $1_P\\otimes c\\otimes1_D$ before these equal composites, and using naturality of the associator and unitors, gives\n$$e\\circ(1_P\\otimes g)=e\\circ(t\\otimes1_D)=e.$$\nThe last equality is Step 1. No tensor factors have been permuted: the two evaluations contract the disjoint consecutive pairs in $P\\otimes D\\otimes P\\otimes D$.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPU, example-dual-derived: fill in the omitted triangle verifications, abstracted from the derived category; monoidal constraints as in categories.tex, Tag 0FFK, definition-monoidal-category."
+   }
+  },
+  {
+   "text": "By naturality of the given bijection in its source variable, Step 2 and Step 3 imply\n$$a\\circ g=T_{D,\\mathbf1}\\bigl(e\\circ(1_P\\otimes g)\\bigr)=T_{D,\\mathbf1}(e)=a.$$\nCompose on the left with $a^{-1}$ to obtain $g=1_D$. Together with $t=1_P$ this is exactly the two requested triangle identities for the specified $e,c$; thus they form the asserted dual pair. Cancellation uses the two-sided inverse in [def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPU, example-dual-derived: fill in the omitted triangle verifications, abstracted from the derived category; monoidal constraints as in categories.tex, Tag 0FFK, definition-monoidal-category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPU, example-dual-derived: the source explicitly omits these checks; the four steps supply the formal monoidal and adjunction calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +115,45 @@
    "results": "2 hits; ; CategoryTheory.ExactPairing.ofFullyFaithful; CategoryTheory.ExactPairing.ofFaithful",
    "date": "2026-10-21",
    "verdict": "no match: returned dual structures assume the triangle identities; adjunction triangle lemmas do not construct a dual pair from the evaluation-isomorphism hypothesis; faithful transport requires an already existing exact pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal category with evaluation P tensor D to the unit whose transposes D tensor N to internal Hom P N are isomorphisms has a dual pair with coevaluation inverse transpose identity",
+   "results": "{\"t\": \"2026-10-21T06:41:12Z\", \"tool\": \"leanfinder\", \"query\": \"A monoidal category with evaluation P tensor D to the unit whose transposes D tensor N to internal Hom P N are isomorphisms has a dual pair with coevaluation inverse transpose identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.coevaluation_evaluation''\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation''\", \"CategoryTheory.ExactPairing.evaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation_assoc\"], \"digest\": \"13e727e078634d4f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactPairing results assume the dual pair; adjunction triangle identities concern the adjunction unit, not the specified c; no arbitrary-evaluation criterion is returned"
+  },
+  {
+   "tool": "grep",
+   "query": "exactPairingOfIsIso|coevaluationOfIsIso|evaluation_coevaluationOfIsIso",
+   "results": "{\"t\": \"2026-10-21T06:41:22Z\", \"tool\": \"grep\", \"query\": \"exactPairingOfIsIso|coevaluationOfIsIso|evaluation_coevaluationOfIsIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no criterion in the pinned Mathlib source; the single evaluation-isomorphism hit in Cartesian/GrpLimits is unrelated"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactPairing\", \"Closed\"",
+   "results": "{\"t\": \"2026-10-21T06:41:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExactPairing\\\", \\\"Closed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactPairing results assume the dual pair; adjunction triangle identities concern the adjunction unit, not the specified c; no arbitrary-evaluation criterion is returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible tensor evaluation comparison D tensor N to internal Hom P N gives coevaluation and both triangle identities in a closed monoidal category",
+   "results": "{\"t\": \"2026-10-21T06:41:23Z\", \"tool\": \"leansearch\", \"query\": \"An invertible tensor evaluation comparison D tensor N to internal Hom P N gives coevaluation and both triangle identities in a closed monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_coev_assoc\", \"CategoryTheory.exp.ev_coev_assoc\", \"CategoryTheory.exp.coev_ev_assoc\", \"CategoryTheory.exp.coev_ev\", \"CategoryTheory.ihom.ev_coev\", \"CategoryTheory.ihom.coev_ev\", \"CategoryTheory.exp.ev_coev\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\"], \"digest\": \"868ee8b3493faf99\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactPairing results assume the dual pair; adjunction triangle identities concern the adjunction unit, not the specified c; no arbitrary-evaluation criterion is returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an exact pairing from arbitrary evaluation P tensor D to unit when D tensor N represents internal Hom from P for every N",
+   "results": "{\"t\": \"2026-10-21T06:41:42Z\", \"tool\": \"leanfinder\", \"query\": \"Construct an exact pairing from arbitrary evaluation P tensor D to unit when D tensor N represents internal Hom from P for every N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing.evaluation'\", \"CategoryTheory.ExactPairing.evaluation\", \"CategoryTheory.ExactPairing\", \"CategoryTheory.HasRightDual.exact\", \"CategoryTheory.HasLeftDual.exact\", \"CategoryTheory.ExactPairing.coevaluation\", \"CategoryTheory.ExactPairing.coevaluation'\", \"CategoryTheory.exactPairingUnit\"], \"digest\": \"11873b0942f3a384\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactPairing results assume the dual pair; adjunction triangle identities concern the adjunction unit, not the specified c; no arbitrary-evaluation criterion is returned"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-site-perfect-scalar-hom",
@@ -84,5 +170,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-closed-evaluation-dual-criterion",
+  "worker": "stage1",
+  "summary": "Verified the fully general monoidal statement and supplied both omitted triangle calculations. The first is the transpose of phi_P c = u_P; the second follows by interchanging disjoint evaluations and cancellation of the isomorphism phi_1 composed with the inverse right unitor. No new nodes: all operations are elementary consequences of the adjunction hypotheses and the tensor bifunctor/unit axioms. No exact finished project attachment or Mathlib match was found.",
+  "blueprint": "Nearest ancestor lem-fix-operation-reduction, paragraph 1: the actual evaluation maps for a site-perfect first variable. This criterion supplies the precise dual pair used by lem-fix-site-perfect-scalar-hom, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-077602a9f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-077602a9f (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and its report, and no new nodes. Stacks 0FPU (sites-cohomology.tex l.13149-13183, example-dual-derived) leaves out both triangle checks, so this split supplies them (D5). Step 1: injectivity of the transposition T applied to phi_P c = u_P gives E_P(1_P⊗c) = rho_P, which is the first triangle t = 1_P. Step 2: a = phi_1 rho_D^{-1} is an iso and equals T(e); this uses lambda_1 = rho_1 (Mathlib unitors_equal, CoherenceLemmas.lean:58) and rho_{P⊗D} alpha^{-1} = 1_P⊗rho_D (rightUnitor_tensor_hom, Category.lean:694), both under the cited Mathlib leaf def-sfb-monoidal-category. Step 3: interchange of the two disjoint evaluations gives e(1_P⊗g) = e(t⊗1_D) = e, with no braiding; I checked the strict computation and the coherence suppression is routine. Step 4: a g = T(e(1_P⊗g)) = a, so g = 1_D. The statement is correct and was not weakened. I tested it on Vect with e = r·mult (r≠0 gives c = r^{-1}; r = 0 fails the hypothesis), on zero objects, on finite-dimensional V with V*, and on infinite-dimensional V, where the hypothesis fails. The only citer, lem-fix-site-perfect-scalar-hom, uses the same c = phi_P^{-1}u_P and the same tensor order. Duplicate search (rg -L over dag/nodes): lem-pc-dualizable-evaluation-criterion and its second-triangle helper are the D(O_X)-only special case; lem-sfb-dual-tensor-adjunctions and lem-trf-exact-pairing-iso-transport assume an exact pairing. None of them is a duplicate. There is no SGA citation, no repair note, the item is not on a dropped list, there is no route departure and no tool_uses. No fixes."
  }
 }
