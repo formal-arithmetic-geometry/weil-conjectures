@@ -64,6 +64,21 @@ theorem weaklyContractible_basis (X : Scheme.{u}) :
         ∃ s : (topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f) ⟶ F,
           s ≫ φ = 𝟙 _) ∧
       Projective ((topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f))) := by
-  sorry
+  constructor
+  · intro U
+    obtain ⟨I, W, f, hcover, hW⟩ := exists_wContractible_affine_cover X U
+    refine ⟨I, W, f, hcover, ?_⟩
+    intro i
+    obtain ⟨D, hD, e, _⟩ := hW i
+    exact ⟨D, hD, ⟨e⟩⟩
+  · intro D _ _ f _
+    obtain ⟨hsplit, hsurj⟩ := proetale_wContractible_projective X D f
+    refine ⟨hsplit, ⟨?_⟩⟩
+    intro F G g φ _
+    obtain ⟨x, hx⟩ := hsurj F G φ ((topology X).uliftYonedaEquiv g)
+    refine ⟨(topology X).uliftYonedaEquiv.symm x, ?_⟩
+    apply (topology X).uliftYonedaEquiv.injective
+    rw [GrothendieckTopology.uliftYonedaEquiv_comp, Equiv.apply_symm_apply]
+    exact hx
 
 end AlgebraicGeometry.Scheme.ProEt
