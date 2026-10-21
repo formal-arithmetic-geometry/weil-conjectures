@@ -20735,3 +20735,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:36 L: returned deliver/Q33/lem-sfb-adic-stratum-completion-unit (reviewer RETURN: L: independent stage-2 immutable head 335822fa56e1: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
 - 07:37 L: returned deliver/Q86/lem-sfb-ring-isomorphism-tensor-transport (reviewer RETURN: L: independent stage-2 immutable head 34ed7f399cbb: Statement correct in substance. Clauses checked: equivalence, invers)
 - 07:37 L: returned deliver/Q74/lem-sfb-scalar-presentation-cokernel (reviewer RETURN: L: independent stage-2 immutable head 3bf39c79b1f5: H13: item scalar_presentation_cokernel is correct vs node (local-mod)
+- 07:37 L: returned deliver/Q64/lem-pd-ringed-tensor-adjunction-mate (reviewer RETURN: L: independent stage-2 immutable head 413f37dfba29: H13/H4: the delivery rebinds two landed dependency lean records. (1))
