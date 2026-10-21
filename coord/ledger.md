@@ -23380,3 +23380,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:45 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 18:46 L: merged deliver/N5/sk-thm-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
 - 18:46 L: returned deliver/Q16/lem-sfb-acyclic-hypercover-pullback-normalization (reviewer RETURN: L: independent stage-2 immutable head a0d47048ff73: H2/H13 theorem-stmt_dep rule: stmt_deps lem-weil-pbc-site-hypercover)
+- 18:47 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
