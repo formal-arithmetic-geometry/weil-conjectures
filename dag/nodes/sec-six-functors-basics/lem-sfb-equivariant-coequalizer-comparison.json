@@ -1,0 +1,85 @@
+{
+ "id": "lem-sfb-equivariant-coequalizer-comparison",
+ "kind": "statement",
+ "title": "Natural linear comparison of equivariant coequalizer presentations",
+ "statement": "Let $\\mathcal D$ be a monoidal category [def-sfb-monoidal-category], $A$ a monoid object [sk-def-sfb-ring-object], and $J$ a category. Write $U:\\operatorname{Mod}_A(\\mathcal D)\\to\\mathcal D$ for the forgetful functor [sk-def-sfb-module-objects]. Let $H:J\\to\\mathcal D$ and $B,P,Q:J\\to\\operatorname{Mod}_A(\\mathcal D)$ be functors, and let $a,b:H\\Rightarrow U\\circ B$ be natural transformations. Suppose $q:U\\circ B\\Rightarrow U\\circ P$ and $r:U\\circ B\\Rightarrow U\\circ Q$ are natural transformations such that, for every $j\\in J$:\n(1) $q_j:B_j\\to P_j$ and $r_j:B_j\\to Q_j$ are coequalizers of $a_j,b_j$ in $\\mathcal D$; explicitly $q_ja_j=q_jb_j$, and every $h:B_j\\to T$ equalizing $a_j,b_j$ factors uniquely as $h=kq_j$, and likewise for $r_j$;\n(2) writing $\\beta_j,\\delta^P_j,\\delta^Q_j$ for the $A$-actions, one has\n\\[\nq_j\\circ\\beta_j=\\delta^P_j\\circ(1_A\\otimes q_j),\\qquad r_j\\circ\\beta_j=\\delta^Q_j\\circ(1_A\\otimes r_j);\n\\]\n(3) $A\\otimes-$ preserves these coequalizers, meaning $1_A\\otimes q_j$ and $1_A\\otimes r_j$ are coequalizers of $1_A\\otimes a_j,1_A\\otimes b_j$.\nThere is a unique natural isomorphism $c:Q\\xrightarrow{\\sim}P$ of $A$-module-valued functors whose underlying components satisfy $c_j\\circ r_j=q_j$. Its inverse $d:P\\xrightarrow{\\sim}Q$ satisfies $d_j\\circ q_j=r_j$. In particular,\n\\[\nc_j\\delta^Q_j=\\delta^P_j(1_A\\otimes c_j),\\quad d_j\\delta^P_j=\\delta^Q_j(1_A\\otimes d_j),\\quad P(u)c_j=c_kQ(u)\n\\]\nfor every $u:j\\to k$ in $J$, and $d_jc_j=1_{Q_j}$, $c_jd_j=1_{P_j}$. No colimit indexed by $J$, smallness of $J$, or module structure on $H_j$ is required.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002A, definition-coequalizers and following uniqueness paragraph; equivariant and natural refinement for the quotient comparisons in the final clause of lem-sfb-extend-to-qlbar-constructible.proof.md"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two equivariant coequalizers of the same parallel pair in a monoidal category have a unique natural isomorphism of module objects when tensor preserves coequalizers",
+   "results": "8 hits: id_tensor_π_preserves_coequalizer_inv_desc, π_tensor_id_preserves_coequalizer_inv_desc, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, Bimod.tensorBimod_X, Bimod.tensorBimod_actLeft, Bimod.tensorBimod_actRight, Bimod.TensorBimod.actRight",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coequalizer\", \"Mod_\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unique comparison of two coequalizer module quotients is linear and natural if tensoring preserves the coequalizer",
+   "results": "8 hits: TensorProduct.tensorQuotientEquiv_apply_mk_tmul, id_tensor_π_preserves_coequalizer_inv_desc, Submodule.linearMap_qext, LinearMap.tensorEqLocus_coe, TensorProduct.tensorQuotientEquiv, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, LinearMap.tensorEqLocusEquiv, lTensor.toFun",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural family of coequalizer presentations of internal left module objects has a canonical linear natural isomorphism when the underlying parallel pairs agree",
+   "results": "8 hits: ModuleCat.instHasCoequalizers, ModuleCat.Iso.homCongr_eq_arrowCongr, Module.Relations.Solution.IsPresentation.uniq, ModuleCat.FilteredColimits.M.mk_eq, fromModuleCatToModuleCatLinearEquivtoModuleCatObj, CategoryTheory.Linear.homCongr, Module.Relations.Solution.IsPresentation.linearMapEquiv_apply, Module.Relations.Solution.IsPresentation.postcomp_uniq_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|IsColimit|CreatesColimit|PreservesColimit",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma",
+   "subdirectory": "CategoryTheory/Monoidal/Mod.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|IsColimit|CreatesColimit",
+   "results": "20 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma",
+   "subdirectory": "CategoryTheory/Monoidal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-extension-inverse-image",
+  "date": "2026-10-21",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-extend-to-qlbar-constructible",
+   "place": "Final sentence: tensoring local finite presentations on strata; uniqueness, module linearity and naturality of the comparison between balancing quotients",
+   "via": [
+    "lem-sfb-internal-extension-inverse-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

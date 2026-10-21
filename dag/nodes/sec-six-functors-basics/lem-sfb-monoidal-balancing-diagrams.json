@@ -1,0 +1,86 @@
+{
+ "id": "lem-sfb-monoidal-balancing-diagrams",
+ "kind": "statement",
+ "title": "Strong monoidal transport of balancing and quotient-action diagrams",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories and $F:\\mathcal C\\to\\mathcal D$ a strong monoidal functor with tensorator $t_{U,V}:FU\\otimes FV\\xrightarrow{\\sim}F(U\\otimes V)$ [def-sfb-strong-monoidal-functor]. Let $R,S$ be monoid objects, $\\varphi:R\\to S$ a monoid morphism [sk-def-sfb-ring-object], and $M$ a left $R$-module with action $\\gamma_M$ [sk-def-sfb-module-objects]. Write $m_S$ for multiplication on $S$ and $\\alpha^{\\mathcal C},\\alpha^{\\mathcal D}$ for the associators. Set\n\\[\na_M=(m_S\\circ(1_S\\otimes\\varphi))\\otimes1_M,\\quad b_M=(1_S\\otimes\\gamma_M)\\circ\\alpha^{\\mathcal C}_{S,R,M}:\n(S\\otimes R)\\otimes M\\rightrightarrows S\\otimes M.\n\\]\nEquip $FR,FS,FM$ with the transported monoid and module structures [def-sfb-modobj-transport], so $m_{FS}=F(m_S)\\circ t_{S,S}$ and $\\gamma_{FM}=F(\\gamma_M)\\circ t_{R,M}$. Define $a'_M,b'_M$ by the same displayed formulas in $\\mathcal D$, using $F\\varphi$, $m_{FS}$, $\\gamma_{FM}$ and $\\alpha^{\\mathcal D}$. Then the isomorphisms\n\\[\nt_{0,M}=t_{S,M},\\qquad t_{1,M}=t_{S\\otimes R,M}\\circ(t_{S,R}\\otimes1_{FM})\n\\]\nsatisfy $F(a_M)\\circ t_{1,M}=t_{0,M}\\circ a'_M$ and $F(b_M)\\circ t_{1,M}=t_{0,M}\\circ b'_M$.\nMoreover, let $P$ be any $S$-module with action $\\delta_P$, and let $q:S\\otimes M\\to P$ satisfy\n\\[\n\\delta_P\\circ(1_S\\otimes q)=q\\circ(m_S\\otimes1_M)\\circ(\\alpha^{\\mathcal C}_{S,S,M})^{-1}.\n\\]\nFor the transported action $\\delta_{FP}=F(\\delta_P)\\circ t_{S,P}$, the morphism $\\widehat q=F(q)\\circ t_{0,M}$ satisfies\n\\[\n\\delta_{FP}\\circ(1_{FS}\\otimes\\widehat q)=\\widehat q\\circ(m_{FS}\\otimes1_{FM})\\circ(\\alpha^{\\mathcal D}_{FS,FS,FM})^{-1}.\n\\]\nNo preservation of colimits by $F$, commutativity of $R,S$, or choice of a quotient object is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+  "place": "Final clause: restricting the extended presentation to a stratum and then to a pro-étale cover; inverse image of the balancing coequalizer"
+ },
+ "stmt_deps": [
+  "def-sfb-strong-monoidal-functor",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-transport"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor identifies the two balancing arrows for extension of scalars of internal module objects and transports equivariance of the quotient map",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction_smul, CategoryTheory.Mod_.Hom.mk'', Rep.instMonoidalActionTypeLinearization, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.instMonoidalLinear, ModuleCat.monoidalCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\", \"μ\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|tensorObjπ|coequalizer.*[Mm]od",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensorator coherence transports the multiplication action and balancing parallel pair of internal module objects",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.tensor_μ, CategoryTheory.MonoidalCategory.term_⊗ᵢ_, PiTensorProduct.mul, CategoryTheory.MonoidalCategory.tensorMonoidal, TensorProduct.instDistribMulAction, CategoryTheory.MonObj.tensorObj.instTensorObj, CategoryTheory.MonObj.instIsMonHomTensorHom, Algebra.TensorProduct.instMul.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and associativity of a monoidal tensorator identify transported relative tensor balancing arrows and the left multiplication on a tensor presentation",
+   "results": "8 hits: Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.MonoidalCategory.tensorμ_natural_left, CategoryTheory.MonoidalCategory.tensorμ_natural, Mathlib.Tactic.Monoidal.normalizeIsoComp, CategoryTheory.MonoidalCategory.tensorμ_natural_right, Mathlib.Tactic.Monoidal.structuralIsoOfExpr_horizontalComp, CategoryTheory.MonoidalCategory.tensor_inv_hom_id, CategoryTheory.MonoidalCategory.tensor_hom_inv_id",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "μ_natural|associativity|mapMod",
+   "results": "5 hits: 60, 70, 74, 78, 79",
+   "date": "2026-10-21",
+   "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma",
+   "subdirectory": "CategoryTheory/Monoidal/Functor.lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-extension-inverse-image",
+  "date": "2026-10-21",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-extend-to-qlbar-constructible",
+   "place": "Final sentence: tensoring local finite presentations on strata; tensorator identification of the two balancing arrows and transport of the first-factor multiplication equation",
+   "via": [
+    "lem-sfb-internal-extension-inverse-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

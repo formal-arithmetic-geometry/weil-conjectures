@@ -18,84 +18,63 @@
  ],
  "proof": [
   {
-   "text": "Fix an $R$-module $M$ with action $\\gamma_M$. By [sk-def-sfb-change-of-scalars](2), the underlying object $P_M$ of $\\operatorname{Ext}_{\\varphi}M$ has a coequalizer map $q_M:S\\otimes M\\to P_M$ for $a=(\\mu_S\\circ(1\\otimes\\varphi))\\otimes1$ and $b=(1\\otimes\\gamma_M)\\circ\\alpha$, from $(S\\otimes R)\\otimes M$ to $S\\otimes M$. Its $S$-action is induced by multiplication on the first factor. Use [lem-sfb-finite-upper-star-braided] to obtain commutative $F(R),F(S)$. Transport the multiplication, $\\varphi$, and the module action by [def-sfb-modobj-transport]. Thus, writing $\\mu^F$ for the tensorator, $\\mu_{FS}=F(\\mu_S)\\circ\\mu^F_{S,S}$, $\\varphi'=F\\varphi$, and $\\gamma_{FM}=F(\\gamma_M)\\circ\\mu^F_{R,M}$. Let $q'_M:FS\\otimes FM\\to Q_M$ be the balancing coequalizer for these data, with arrows $a',b'$ and its induced $FS$-action. This is precisely $\\operatorname{Ext}_{F\\varphi}(F_RM)$, with the actual rings $FR,FS$.",
+   "text": "Put $F=g^{-1}$, $G=g_*$. For each $R$-module $M$, [sk-def-sfb-change-of-scalars](2) gives the balancing quotient $q_M:S\\otimes M\\to P_M=\\operatorname{Ext}_{\\varphi}M$ and its induced $S$-action. It also gives $q'_M:FS\\otimes FM\\to Q_M=\\operatorname{Ext}_{F\\varphi}(F_RM)$, with its induced $FS$-action; the inverse-image rings are commutative by [lem-sfb-finite-upper-star-braided]. By [def-sfb-finite-upper-lower-star-adjunction] and [lem-weil-pbc-left-adjoint-preserves-colimits], $F(q_M)$ coequalizes $F(a_M),F(b_M)$ universally. The index is the finite parallel-pair category, so the cited smallness hypothesis holds.",
    "uses": [
     "sk-def-sfb-change-of-scalars",
     "lem-sfb-finite-upper-star-braided",
-    "def-sfb-modobj-transport"
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact(1), applied to the balancing coequalizer"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-monoidal-balancing-diagrams] to $F$, strong monoidal by [def-sfb-finite-upper-star-monoidal], and to $q_M$. Its tensorator isomorphisms identify both image balancing arrows with $a'_M,b'_M$. Thus $\\widehat q_M=F(q_M)t_{S,M}$ is a coequalizer of the same pair as $q'_M$: any equalizing map can be composed with $t_{S,M}^{-1}$, factored uniquely through $F(q_M)$, then composed back. The lemma's last equation says $\\widehat q_M$ is $FS$-linear for the action transported by [def-sfb-modobj-transport]. The quotient $q'_M$ is linear by [sk-def-sfb-change-of-scalars]. For any $R$-linear $u:M\\to N$, the defining equation $\\operatorname{Ext}_{\\varphi}(u)q_M=q_N(1_S\\otimes u)$ and tensorator naturality [def-sfb-strong-monoidal-functor] give\n\\[\nF(\\operatorname{Ext}_{\\varphi}u)\\widehat q_M=\\widehat q_N(1_{FS}\\otimes F(u)).\n\\]\nThe defining equation for the other extension similarly makes $q'_M$ natural.",
+   "uses": [
+    "lem-sfb-monoidal-balancing-diagrams",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-strong-monoidal-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "Final sentence: tensoring local finite presentations on the strata; unpack the internal extension coequalizer"
+    "place": "Final clause: restricting the extended presentation to a stratum and then to a pro-étale cover; inverse image of the balancing coequalizer"
    }
   },
   {
-   "text": "The map $F(q_M)$ is a coequalizer of $F(a),F(b)$. Here is the universal-property argument, rather than an additional preservation assertion. Put $G=g_*$ and use [def-sfb-finite-upper-lower-star-adjunction]. For every abelian sheaf $T$ on $Z$, its natural adjunction bijections identify\n\\[\n\\Hom(FP_M,T)\\cong\\Hom(P_M,GT)\\cong\\{h:S\\otimes M\\to GT\\mid h a=h b\\}\\cong\\{k:F(S\\otimes M)\\to T\\mid kF(a)=kF(b)\\}.\n\\]\nThe middle bijection is the coequalizer property supplied by [sk-def-sfb-change-of-scalars]. Naturality of the adjunction says that the resulting bijection is precomposition with $F(q_M)$, as required. This only uses a finite parallel-pair diagram.",
+   "text": "Use [lem-sfb-equivariant-coequalizer-comparison] with $J=\\operatorname{Mod}_R$, $A=FS$, $B_M=FS\\otimes FM$ with first-factor multiplication, $P_M=F_S(\\operatorname{Ext}_{\\varphi}M)$, $Q_M=\\operatorname{Ext}_{F\\varphi}(F_RM)$, and quotient maps $\\widehat q_M,q'_M$. The balancing pairs are natural by the module-map equation and tensor functoriality; their coequalizer and linearity hypotheses were checked above. Tensoring by $FS$ preserves them by [sk-def-sfb-sheaf-tensor](2). The lemma supplies the natural $FS$-linear isomorphism $Q\\cong P$ characterized by $c_Mq'_M=\\widehat q_M$. Invert it to obtain the requested $P\\cong Q$; evaluation at $M$ is the displayed relative-tensor formula.",
    "uses": [
-    "def-sfb-finite-upper-lower-star-adjunction",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0038, lemma-adjoint-exact(1), its Hom-set proof specialized to a coequalizer"
-   }
-  },
-  {
-   "text": "Set $t_0=\\mu^F_{S,M}$ and $t_1=\\mu^F_{S\\otimes R,M}\\circ(\\mu^F_{S,R}\\otimes1)$. These are isomorphisms by [def-sfb-finite-upper-star-monoidal]. Naturality and the associativity identity in [def-sfb-strong-monoidal-functor], with the transported actions of [def-sfb-modobj-transport], give\n\\[\nF(a)t_1=t_0a',\\qquad F(b)t_1=t_0b'.\n\\]\nIndeed the first equality replaces $\\mu_{FS}(1\\otimes F\\varphi)$ by $F(\\mu_S(1\\otimes\\varphi))\\mu^F_{S,R}$ and then uses naturality in the first tensor factor; the second uses the associativity identity to move $t_1$ past $F\\alpha$ and replaces $\\gamma_{FM}$ by $F\\gamma_M\\,\\mu^F_{R,M}$. Thus $\\widehat q_M=F(q_M)t_0$ and $q'_M$ are coequalizers of the same pair. Their universal properties give unique maps $c_M:Q_M\\to FP_M$ and $d_M:FP_M\\to Q_M$ with $c_Mq'_M=\\widehat q_M$ and $d_M\\widehat q_M=q'_M$. Uniqueness gives $d_Mc_M=1$ and $c_Md_M=1$.",
-   "uses": [
-    "def-sfb-finite-upper-star-monoidal",
-    "def-sfb-strong-monoidal-functor",
-    "def-sfb-modobj-transport"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 002A, definition-coequalizers and uniqueness, applied after the two displayed tensorator identities"
-   }
-  },
-  {
-   "text": "These underlying isomorphisms are $FS$-linear. Write $\\delta$ for the action on $FP_M$ from [def-sfb-modobj-transport] and $\\delta'$ for the action on $Q_M$ from [sk-def-sfb-change-of-scalars]. Both quotient maps respect multiplication on the first $FS$ factor: for $q'_M$ this is its defining induced action, and for $\\widehat q_M$ it follows by applying $F$ to the defining action equation for $q_M$ and using the tensorator's naturality and associativity identity [def-sfb-strong-monoidal-functor]. Consequently, after precomposition with $1_{FS}\\otimes q'_M$, both $c_M\\delta'$ and $\\delta(1_{FS}\\otimes c_M)$ equal $\\widehat q_M(\\mu_{FS}\\otimes1)$, with the same associator. By [sk-def-sfb-sheaf-tensor](2), $FS\\otimes-$ preserves this coequalizer, so $1\\otimes q'_M$ is a coequalizer map. Such a map is epic: two maps equal after it are the unique factorization of the same map. Cancel it to obtain $c_M\\delta'=\\delta(1\\otimes c_M)$. Multiplying this equation by $d_M$ and $1\\otimes d_M$ shows $d_M$ is linear as well.",
-   "uses": [
-    "def-sfb-modobj-transport",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-strong-monoidal-functor",
+    "lem-sfb-equivariant-coequalizer-comparison",
     "sk-def-sfb-sheaf-tensor"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "Final sentence, restriction of extended presentations; verification of linearity of the coequalizer comparison"
-   }
-  },
-  {
-   "text": "For an $R$-linear map $u:M\\to N$, the two functors send it to the maps induced by $1_S\\otimes u$ and $1_{FS}\\otimes F(u)$ on the respective coequalizers, by [sk-def-sfb-change-of-scalars] and [def-sfb-modobj-transport]. Precomposing the desired equality $F(\\operatorname{Ext}_{\\varphi}u)c_M=c_N\\operatorname{Ext}_{F\\varphi}(F_Ru)$ with $q'_M$ gives, on both sides, $F(q_N)\\mu^F_{S,N}(1\\otimes Fu)$: this uses $\\operatorname{Ext}_{\\varphi}(u)q_M=q_N(1\\otimes u)$ and tensorator naturality [def-sfb-strong-monoidal-functor]. Cancel the coequalizer map $q'_M$. Hence the $c_M$ form a natural isomorphism $\\operatorname{Ext}_{F\\varphi}\\circ F_R\\cong F_S\\circ\\operatorname{Ext}_{\\varphi}$. Its inverse is the displayed isomorphism in the statement, including the formula on objects.",
-   "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-modobj-transport",
-    "def-sfb-strong-monoidal-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "Final sentence: functorial restriction of extended local presentations to strata and pro-étale covers"
+    "place": "Final clause: restricting the extended presentation to a stratum and then to a pro-étale cover; inverse image of the balancing coequalizer"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-change-of-scalars",
   "lem-sfb-finite-upper-star-braided",
-  "def-sfb-modobj-transport",
   "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-monoidal-balancing-diagrams",
   "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-modobj-transport",
   "def-sfb-strong-monoidal-functor",
+  "lem-sfb-equivariant-coequalizer-comparison",
   "sk-def-sfb-sheaf-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-  "place": "Final sentence, expanded by the balancing coequalizer argument; elementary universal-property arguments also follow Stacks Tags 0038 and 002A"
+  "place": "Final sentence, expanded via strong-monoidal balancing diagrams and equivariant coequalizer comparison; colimit preservation is Stacks Tag 0038"
  },
  "mathlib_searches": [
   {
@@ -201,8 +180,8 @@
   "date": "2026-10-21",
   "item": "lem-sfb-internal-extension-inverse-image",
   "worker": "stage1",
-  "summary": "Expanded inverse-image compatibility by the actual balancing diagram: adjunction proves preservation of its coequalizer, monoidal coherence identifies both arrows, quotient universality constructs inverse maps, and explicit cancellation proves module linearity and naturality. No new nodes, statement changes, or coefficient-ring identifications.",
-  "blueprint": "Realizes the final sentence of lem-sfb-extend-to-qlbar-constructible.proof.md (tensoring local finite presentations on strata), supplying its inverse-image comparison before the finite-presentation argument.",
+  "summary": "Repair of the 2026-10-21 human re-split: unchanged statement; extracted two independent, statement-only lemmas, one for tensorator transport of the balancing/action diagrams and one for natural linear comparison of equivariant coequalizers. Reused the existing Mathlib leaf for left-adjoint colimit preservation. The item is now a short assembly; the report maps and retains every argument of the returned proof.",
+  "blueprint": "Final sentence of lem-sfb-extend-to-qlbar-constructible.proof.md: restriction of scalar-extended finite presentations to strata and pro-etale covers. The first new node carries the balancing/action calculations; the second carries quotient uniqueness, linearity and naturality.",
   "tool_uses": [
    {
     "node": "lem-sfb-finite-upper-star-braided",
@@ -216,10 +195,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-O3-0f0d2d9a1",
-  "group": "O3",
+  "reviewer": "NT-cc-Q29-b863f2cfb",
+  "group": "Q29",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-0f0d2d9a1 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is a one-level split of lem-sfb-internal-extension-inverse-image with no new nodes and the statement unchanged. There is no repair note for this item, it is not on a dropped list, and no SGA is used. The blueprint source (the final clause of lem-sfb-extend-to-qlbar-constructible.proof.md: tensoring local finite presentations on strata) needs this comparison, and the actual rings F(R),F(S) are used. I read every cited statement and recomputed each step. Step 1: the hypotheses of Ext in change-of-scalars (2) hold on Z (braided, coequalizers, tensor preserving colimits, F(R) commutative by the braided lemma). Step 2: F(q) is a coequalizer, by the Hom-chain through the g^*⊣g_* adjunction, natural in the first variable. Step 3: F(a)t1=t0a' (naturality) and F(b)t1=t0b' (associativity axiom and the transported action) both hold, so F(q)t0 and q' coequalize the same pair and give inverse maps c,d. Step 4: linearity, by cancelling the epi 1⊗q', which is a coequalizer by sheaf-tensor (2); I checked δ(1⊗F(q)t0)=F(q)t0(μ⊗1)α^{-1}. Step 5: naturality, both sides equal F(q_N)μ_{S,N}(1⊗Fu) after q'_M. Edge cases checked: identity g and φ, zero module or ring, non-flat Z→Z/2. No duplicate: def-sfb-pull-iso is a condensed coefficient change, def-sfb-module-upper-star only uses Ext∘mapMod, and the restricted-transport and finite-free transport lemmas differ. I accept the tool_use of lem-sfb-finite-upper-star-braided; it is already in stmt_deps and needed for the commutativity of F(R)."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-b863f2cfb (reviewer sub-agent of L); spot-checked: PASS, no changes. This answers the human's re-split note of 2026-10-21. Live and side-live still hold the unsplit 5-step O3 split, and the item and new nodes are not on the dropped list. The item statement is byte-identical to live. The assembly is 3 steps and 2228 characters. Mapping of the old proof: old step 1 is new step 1. Old step 2 (the Hom-chain) is now the existing Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits; WalkingParallelPair is small. Old step 3 is the two tensorator identities of the new node lem-sfb-monoidal-balancing-diagrams. Old step 3's end and steps 4–5 (c, d, linearity by cancelling the epi 1⊗q', naturality by cancelling q') are the new node lem-sfb-equivariant-coequalizer-comparison. Nothing was summarised away. Both new nodes are statement-only, of comparable size and independent, and neither restates the item. I recomputed F(a)t1=t0a' (naturality twice) and F(b)t1=t0b' (the associativity axiom of def-sfb-strong-monoidal-functor plus the transported action F(γ)μ^F). I also recomputed the transported action equation via the inverse associativity axiom. For the comparison lemma I rechecked existence, uniqueness, inverse, linearity (cancelling 1⊗r, an epi by hypothesis (3)) and naturality (cancelling r_j). Edge cases: J empty, q=r, F=id, R=S=unit, zero modules. Source is Stacks 002A, categories.tex:1155-1168. The assembly's hypotheses all check: change-of-scalars (2) on Z via sheaf-tensor (2), the braided lemma for commutativity, the adjunction for every g, naturality of q̂ and q', and naturality of the pairs a', b'. Duplicate search (rg -L, coequalizer/tensorator/equivariant) found def-sfb-extend-scalars-iso-of-eq, comap-mapmod-square, scalar-matrix-inverse-image, independent-inverse-image-tensor-comparison and flat-scalar-tower-coherence; none is a duplicate. Mathlib searches cover all three kinds. No SGA is used. I accept the tool use lem-sfb-finite-upper-star-braided. Advisory: the balancing node cites monoidal category only through strong-monoidal-functor."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.InternalExtensionInverseImage",
