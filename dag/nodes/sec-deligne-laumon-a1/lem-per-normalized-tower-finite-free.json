@@ -1,0 +1,122 @@
+{
+ "id": "lem-per-normalized-tower-finite-free",
+ "kind": "statement",
+ "title": "Finite free limit of normalized free stalk towers",
+ "statement": "Let l be prime, E/Q_l finite, A its recorded valuation ring and p its uniformizer [def-weil-l-adic-coefficient-extension]. Let F be a tower of A-modules with F_n isomorphic to (A/(p^(n+1)))^r_n. Assume each adjacent transition is surjective with kernel p^(n+1)F_(n+1). Its compatible-sections module and its categorical inverse limit are finite free A-modules; the two are canonically A-linearly isomorphic.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Corollary 6.8.5 and Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite normalized module limit theorem to obtain finite generation of compatible sections.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over the DVR, a class killed by p in A/(p^(n+2)) is a multiple of p^(n+1): lift to A and cancel nonzero p. Apply the finite-free coordinate isomorphism at level n+1. The transition kills all p^(n+1) multiples, so a compatible family killed by p has zero n-th component for every n. Every nonzero scalar is a unit times a power of p, so this limit is torsion-free. Finite torsion-free modules over the DVR are free.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projections from compatible sections form a limiting cone: any cone sends x to its tuple of projected elements; uniqueness is coordinatewise. Transport finite generation and freeness through the resulting limit isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Corollary 6.8.5 and Lemma 6.8.7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact jointly conservative family of additive functors between abelian categories detects exact short complexes",
+   "results": "8 hits including Functor.exact_tfae, ShortComplex.exact_map_iff_of_faithful, Functor.reflects_exact_of_faithful; these supply single-functor APIs, not joint zero detection.",
+   "date": "2026-10-21",
+   "verdict": "use generic exact-functor API"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated torsion free module over a discrete valuation ring is free",
+   "results": "8 hits including Module.free_of_finite_type_torsion_free, Module.free_iff_isTorsionFree and Module.basisOfFiniteTypeTorsionFree. The PID instance is used after proving torsion-freeness.",
+   "date": "2026-10-21",
+   "verdict": "use generic PID module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*(fibre|fiber)|exact_family_detection",
+   "results": "0 hits. Local search of all DAG titles found the parent and normalized derived-tower nodes but none of the separated algebra, categorical or intrinsic local comparison results.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedFibreExactness",
+  "date": "2026-10-21",
+  "group": "B9"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "via": "lem-per-adic-normalized-fibre-exactness",
+   "place": "Finite free limit of normalized free stalk towers"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedTowerFree",
+  "file": "lean/Sheaf/Paper/NormalizedTowerFree.lean",
+  "declaration": "Padic.normalized_tower_finite_free",
+  "declarations": [
+   "Padic.normalized_tower_finite_free",
+   "Padic.towerLimitEquivSections",
+   "Padic.normalized_tower_limit_finite_free"
+  ],
+  "statement": "theorem normalized_tower_finite_free (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (F : ℕᵒᵖ ⥤ ModuleCat.{v} (coefficientExtensionIntegers l E))\n    (hf : ∀ n : ℕ, ∃ r : ℕ, Nonempty\n      (F.obj (op n) ≃ₗ[coefficientExtensionIntegers l E]\n        (Fin r → coefficientExtensionRing l E (n + 1))))\n    (ht : ∀ n : ℕ,\n      Function.Surjective (F.map (homOfLE (Nat.le_succ n)).op).hom ∧\n      LinearMap.ker (F.map (homOfLE (Nat.le_succ n)).op).hom =\n        coefficientExtensionIdeal l E (n + 1) •\n          (⊤ : Submodule (coefficientExtensionIntegers l E) (F.obj (op (n + 1))))) :\n    Module.Finite (coefficientExtensionIntegers l E) (ModuleCat.sectionsSubmodule F) ∧\n      Module.Free (coefficientExtensionIntegers l E) (ModuleCat.sectionsSubmodule F)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0b5cc",
+  "group": "B9",
+  "result": "fix",
+  "landing": "20261021T192917-L-762138",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0b5cc",
+  "group": "B9",
+  "result": "fix",
+  "landing": "20261021T192917-L-762138",
+  "kind": "interface",
+  "note": "independent cc review: AdicNormalizedFibreData vs live item module (verbatim move of 22 decls); item theorem statement unchanged; two sorry halves vs the item's Assertions (true consequences, strictly weaker); unit node det-lem-coefficient-heart-common-stratification kept in the new sorry nodes' proof_deps"
+ }
+}

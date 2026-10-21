@@ -1,0 +1,107 @@
+{
+ "id": "lem-per-normalized-lattice-finite-free",
+ "kind": "statement",
+ "title": "Finite dimensionality from normalized local lattices",
+ "statement": "For any recorded lattice [def-per-adic-normalized-fibre-data], its integral fibre at any algebraically closed geometric point is a finite free A-module and its rationalized fibre is finite dimensional over E. If LocalLattices exists for a rational realization, all its intrinsic heart fibres are finite dimensional.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Corollary 6.8.5 and Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-per-adic-normalized-fibre-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply normalized tower finite freeness to the actual stalk tower. Its finiteFree and lisse fields give exactly the freeness, surjectivity and kernel hypotheses. Tensor extension preserves finite generation. Choose a local lattice chart through a specified point and transfer finite dimensionality across its normalization isomorphism.",
+   "uses": [
+    "lem-per-normalized-tower-finite-free"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-normalized-tower-finite-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Corollary 6.8.5 and Lemma 6.8.7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact jointly conservative family of additive functors between abelian categories detects exact short complexes",
+   "results": "8 hits including Functor.exact_tfae, ShortComplex.exact_map_iff_of_faithful, Functor.reflects_exact_of_faithful; these supply single-functor APIs, not joint zero detection.",
+   "date": "2026-10-21",
+   "verdict": "use generic exact-functor API"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated torsion free module over a discrete valuation ring is free",
+   "results": "8 hits including Module.free_of_finite_type_torsion_free, Module.free_iff_isTorsionFree and Module.basisOfFiniteTypeTorsionFree. The PID instance is used after proving torsion-freeness.",
+   "date": "2026-10-21",
+   "verdict": "use generic PID module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*(fibre|fiber)|exact_family_detection",
+   "results": "0 hits. Local search of all DAG titles found the parent and normalized derived-tower nodes but none of the separated algebra, categorical or intrinsic local comparison results.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedFibreExactness",
+  "date": "2026-10-21",
+  "group": "B9"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "via": "lem-per-adic-normalized-fibre-exactness",
+   "place": "Finite dimensionality from normalized local lattices"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedLatticeFiniteFree",
+  "file": "lean/Sheaf/Paper/NormalizedLatticeFiniteFree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.lattice_fiber_finite_free",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.lattice_fiber_finite_free",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.lattice_rationalFiber_finite",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.intrinsic_fiber_finite"
+  ],
+  "statement": "theorem lattice_fiber_finite_free {T : Scheme.{u}} (N : Lattice l E T)\n    (κ : Type u) [Field κ] [IsAlgClosed κ] (x : Spec (.of κ) ⟶ T) :\n    Module.Finite (Padic.coefficientExtensionIntegers l E) (N.fiber l E κ x) ∧\n      Module.Free (Padic.coefficientExtensionIntegers l E) (N.fiber l E κ x)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0b5cc",
+  "group": "B9",
+  "result": "fix",
+  "landing": "20261021T192917-L-762138",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0b5cc",
+  "group": "B9",
+  "result": "fix",
+  "landing": "20261021T192917-L-762138",
+  "kind": "interface",
+  "note": "independent cc review: AdicNormalizedFibreData vs live item module (verbatim move of 22 decls); item theorem statement unchanged; two sorry halves vs the item's Assertions (true consequences, strictly weaker); unit node det-lem-coefficient-heart-common-stratification kept in the new sorry nodes' proof_deps"
+ }
+}

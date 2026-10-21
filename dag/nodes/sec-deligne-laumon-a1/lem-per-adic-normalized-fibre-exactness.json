@@ -24,133 +24,43 @@
  ],
  "proof": [
   {
-   "text": "Put $s=\\operatorname{Spec}\\Omega$ for the fixed geometric point $x:s\\to X$, and write $F^c=J_X(F)$. The finite-type hypotheses give a Noetherian finite-dimensional $X$, so the continuous rational realization applies. Define, without choosing a stratification or lattice,\n$$\\omega_{x,E}(F)=\\Gamma\\bigl(s,E_s\\otimes_{x^{-1}E_X}x^{-1}F^c\\bigr).$$\nThe coefficient map is pullback of continuous functions. This is an additive $E$-linear functor to $E$-modules. We will prove that its values are finite-dimensional. The ordinary module inverse images compose: on local pure tensors the comparison is $b\\otimes(c\\otimes m)\\mapsto bc\\otimes m$, with inverse $b\\otimes m\\mapsto b\\otimes(1\\otimes m)$. Inverse image commutes with tensor products and its composition comparisons, so these mutually inverse balanced maps give the required comparison on sheaves. We use the coefficient and composition comparisons of the continuous realization. In particular, if $x$ factors through a locally closed stratum, its module fibre is the fibre of the restriction to that stratum.",
+   "text": "Use intrinsic local lattice comparison to obtain LocalLattices, and the intrinsic constructible-fibre theorem for additivity, linearity, ambient short-exactness and zero-object detection. Take each Point.functor to be omega itself, with identity intrinsic isomorphism.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-per-continuous-rational-derived-realization",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "lem-per-intrinsic-local-lattice-comparison",
+    "lem-per-intrinsic-constructible-fibre-exactness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2, Definitions 6.8.3 and 6.8.6, and Proposition 6.8.14(2); intrinsic fibre construction and balanced module comparisons"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a stratum $S$ containing $x$ on which $F^c$ is lisse. There is an etale covering with lisse integral lattices; refine it to affine charts and choose a geometric lift of $x$ to a chart $T$. Here $S,T,s$ are Noetherian separated schemes with $\\ell$ invertible. For a lattice $N$ on $T$, the reduction equivalence gives its normalized etale system $(N_n)$, and commutes with module pullback. At $s$, finite-level pullback has stalk $(N_n)_x$ by the etale inverse-image stalk comparison, and every etale sheaf on $s$ is constant with that stalk. Thus the pulled-back integral lattice is canonically the inverse limit of the constant sheaves with values $(N_n)_x$. Rational realization is localization of this integral lattice. Consequently its rational module pullback is the sheaf associated to the finite-module limit $M_x=\\varprojlim_n(N_n)_x$ after inverting $\\varpi_E$. The next step identifies $M_x$ as finite free; the corresponding finite free sheaf on $s$ has sections $M_x\\otimes_{A_E}E$, since $E_s(s)=E$. Hence the functor of step 1 has precisely the asserted lattice-limit normalization. No assertion that a geometric stalk commutes with arbitrary inverse limits is used.",
+   "text": "Apply finite-free lattice fibres to every recorded chart lattice. On a chosen chart through each point its normalization transfers finite dimensionality to omega. Reuse the local-chart, normalization and fractional-map data without choices of a different fibre.",
    "uses": [
-    "lem-weil-pbc-lisse-lattice-etale-local",
-    "lem-per-lisse-completed-system-comparison",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "lem-pod-adic-limit-finite-modules",
-    "lem-per-continuous-rational-derived-realization"
+    "lem-per-normalized-lattice-finite-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1),(4),(6), Lemma 6.8.2 and Corollary 5.1.5; pull back the normalized system before taking its inverse limit"
-   }
+   "elementary": false
   },
   {
-   "text": "The modules $M_n=(N_n)_x$ are finite free over $A_E/\\varpi_E^n$ and satisfy $M_{n+1}/\\varpi_E^n M_{n+1}\\cong M_n$. Their ranks are all the rank of $M_1$. The finite-module limit theorem says that $M_x$ is finitely generated over $A_E$ and $M_x/\\varpi_E^nM_x\\cong M_n$. It is torsion-free: if $\\varpi_E m=0$, then in the free $A_E/\\varpi_E^{n+1}$-module $M_{n+1}$ the component of $m$ belongs to $\\varpi_E^n M_{n+1}$, because in a DVR the elements of $A_E/\\varpi_E^{n+1}$ killed by $\\varpi_E$ are exactly its multiples of $\\varpi_E^n$. Its image in $M_n$ is therefore zero for every $n$, so $m=0$. Every nonzero scalar is a unit times a power of the uniformizer, giving torsion-freeness. A finitely generated torsion-free module over the DVR $A_E$ is finite free. This also proves finite-dimensionality of $\\omega_{x,E}(F)$, including rank zero.",
+   "text": "Heart realization is faithful and preserves short exact sequences. The intrinsic fibres are consequently exact functors from the abelian heart. Index them by bundled geometric points and apply exact-family detection. Faithful exact realization identifies heart exactness and short exactness with the ambient-realized versions. Unpack the point index to obtain all detection clauses and assemble Assertions.",
    "uses": [
-    "lem-pod-adic-limit-finite-modules",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sc-dvr-fg-torsionfree-free"
+    "lem-per-normalized-heart-realization",
+    "lem-per-exact-family-detection",
+    "lem-weil-heart-short-exact-triangles"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1); finite-free consequence of normalized lattice stalks"
-   }
-  },
-  {
-   "text": "On a common affine etale lattice chart for source and target, full faithfulness of raw rational realization writes a sheaf map as $u/\\varpi_E^a$ for an integral map of lattices. Reduction and its inverse equivalence identify $u$ with its compatible maps $u_n$ of normalized systems. Pulling these to $s$ and taking the limit therefore gives $\\varpi_E^{-a}\\varprojlim_n(u_n)_x$ on the fibre. If $u/\\varpi_E^a=v/\\varpi_E^b$, the definition of raw localization gives some $c$ with $\\varpi_E^c(\\varpi_E^b u-\\varpi_E^a v)=0$; the same equation holds on the limit maps, and inversion of $\\varpi_E$ makes their two fractions equal. Integral naturality gives naturality for all fractional maps. Each lattice calculation identifies with the single functor defined in step 1. Hence the comparison between two choices is the first identification followed by the inverse of the second; on three choices these comparisons compose by cancellation. Different charts compare on their etale fibre product, and different adapted stratifications compare on a common refinement. Exact immersion restriction and the pullback-compatible reduction equivalence give the same identifications there. Thus the comparisons are natural and independent of all choices, without requiring any global lisse integral lattice.",
-   "uses": [
-    "lem-per-lisse-completed-system-comparison",
-    "def-weil-pbc-rational-category",
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-per-continuous-rational-derived-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1),(4),(6); functoriality of limits and localization and refinement of Definition 6.8.6"
-   }
-  },
-  {
-   "text": "Consider a short exact sequence of constructible continuous $E_X$-module sheaves. Choose a common finite stratification on which its three terms are lisse. Restriction to each stratum is exact. On a pro-etale covering of a stratum the quotient is finite free; the free-quotient local-splitting lemma gives a further covering on which the sequence splits. Any additive module inverse-image functor preserves a split sequence: if $p\\sigma=1$, applying the functor preserves this equation and the biproduct decomposition. Pull back these covers along the geometric point in that stratum. They cover $s$, and the pulled-back sequence is locally split exact, hence exact as a sequence of sheaves on $s$. Equivalently kernels agree locally by uniqueness, and surjectivity is local lifting of sections. Exactness of $\\Gamma(s,-)$ now proves that its sequence of $E$-vector spaces is short exact. The heart is identified by $J_X$ with these constructible sheaves, so this is exactness for the exact structure specified in the statement.",
-   "uses": [
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-weil-pbc-proetale-free-epi-local-splitting",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-per-continuous-rational-derived-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 6.8.5 and Lemma 6.8.7; local splitting proves exactness of the normalized geometric fibre"
-   }
-  },
-  {
-   "text": "Suppose all geometric fibres of $F$ vanish. Restrict to a lisse stratum $S$. The etale-local monodromy realization gives an etale cover by connected qcqs topologically Noetherian $T$ and presentations $F^c|_T\\cong J_T(V)$. Such $T$ is Noetherian (quasi-compact and etale over the Noetherian $S$) but need not be separated, so choose an affine open neighbourhood $U\\subseteq T$ of the image of the chosen geometric base point $\\bar t$; $U$ is affine and etale over the separated finite-type $k$-scheme $S$, hence Noetherian and separated with $\\ell$ invertible. Restriction to the site object $U$ commutes with $\\nu^*$, inverse limits and localization, and $\\ell$ is a unit times a power of $\\varpi_E$, so the invariant-lattice normalization of $J_T$ gives $F^c|_U\\cong(\\varprojlim_n\\nu_U^*(\\mathcal L(B/\\varpi_E^nB)|_U))[1/\\varpi_E]$, where the finite locally constant sheaf $\\mathcal L(B/\\varpi_E^nB)$ has stalk $B/\\varpi_E^nB$ at $\\bar t$ by the correspondence named in that normalization. At $\\bar t$ the calculation of steps 2--3, applied on the separated chart $U$ with the normalized system $(\\mathcal L(B/\\varpi_E^nB)|_U)_n$, identifies the fibre with the underlying vector space $V$: for an invariant lattice $B$, the finite-level fibres are $B/\\varpi_E^nB$, whose limit is $B$, and $B\\otimes_{A_E}E=V$. This point, composed with $T\\to S\\to X$, is one of the geometric points in the hypothesis. Thus $V=0$ and additivity of $J_T$ gives $F^c|_T=0$. Sheaf restriction to a covering jointly reflects isomorphisms, applied to $0\\to F^c|_S$, so $F^c|_S=0$. Restriction to every stratum detects injectivity and surjectivity, hence $0\\to F^c$ is an isomorphism. Finally $J_X$ is an equivalence, so $F=0$. The empty scheme uses the empty cover and empty stratification and has only the zero module sheaf.",
-   "uses": [
-    "lem-sfb-etale-local-monodromy-realization",
-    "lem-per-lisse-completed-system-comparison",
-    "lem-pod-adic-limit-finite-modules",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-per-continuous-rational-derived-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 6.8.5 proof, Proposition 6.8.4 and Definition 6.8.6; monodromy on local lattice charts and stratified detection"
-   }
-  },
-  {
-   "text": "The constructible continuous module sheaves are closed under ambient kernels, cokernels and extensions, and their inclusion is exact. For a morphism $u:F\\to G$, exactness of every fibre identifies its kernel and cokernel fibres with the corresponding kernels and cokernels of $\\omega(u)$. If all $\\omega(u)$ are isomorphisms, both objects have zero fibres; step 6 makes them zero, and $u$ is an isomorphism. If all $\\omega(u)$ are zero, apply exactness to $F\\twoheadrightarrow\\operatorname{im}u\\hookrightarrow G$. The resulting image fibres are zero; the image is constructible because it is the kernel of $G\\to\\operatorname{coker}u$. Step 6 gives $\\operatorname{im}u=0$, hence $u=0$.\n\nFor a short complex $F'\\xrightarrow{a}F\\xrightarrow{b}F''$ with $ba=0$, the three defects $\\ker a$, $\\ker b/\\operatorname{im}a$ and $\\operatorname{coker}b$ are constructible by the same closure properties. Exactness of the fibre functor identifies their fibres with the three vector-space defects. If every fibre sequence is short exact, all defects vanish by step 6, proving short exactness in the ambient module sheaves and hence in the heart. The forward implication is step 5. This proves all four detection assertions.",
-   "uses": [
-    "det-lem-coefficient-heart-closure",
-    "lem-per-continuous-rational-derived-realization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.7, using exactness and zero-object detection already proved above"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-rational-category",
-  "def-weil-proetale-inverse-image",
-  "det-lem-coefficient-heart-closure",
-  "det-lem-coefficient-heart-common-stratification",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-per-continuous-rational-derived-realization",
-  "lem-per-lisse-completed-system-comparison",
-  "lem-pod-adic-limit-finite-modules",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sfb-etale-local-monodromy-realization",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-lisse-lattice-etale-local",
-  "lem-weil-pbc-proetale-free-epi-local-splitting",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "lem-weil-point-proetale-sections-exact",
-  "lemma-openclosed-stalk-upperstar"
+  "lem-per-intrinsic-local-lattice-comparison",
+  "lem-per-intrinsic-constructible-fibre-exactness",
+  "lem-per-normalized-lattice-finite-free",
+  "lem-per-normalized-heart-realization",
+  "lem-per-exact-family-detection",
+  "lem-weil-heart-short-exact-triangles"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4, Corollary 6.8.5 and Lemma 6.8.7, expanded using the existing lattice-system and local-monodromy nodes"
+  "place": "Proposition 6.8.4(1),(4),(6), Corollary 6.8.5 and Lemma 6.8.7",
+  "note": "B9: normalized-tower algebra and exact-family detection proved in Lean; geometric lattice comparison and intrinsic exactness/zero detection separated as proper subresults."
  },
  "mathlib_searches": [
   {
@@ -376,28 +286,6 @@
   "module": "Sheaf.Paper.AdicNormalizedFibreExactness",
   "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.adic_normalized_fibre_exactness",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.coefficient",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.pointConstants",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.ambient",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Heart",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.realize",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.realizeAdditive",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.omega",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.integerScalar",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.forgetIntegral",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.proSystem",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice.rational",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice.fiber",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice.rationalFiber",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart.map",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart.Adapted",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart.restrict",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.rationalLimitMap",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Represents",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Point",
-   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Assertions",
    "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.adic_normalized_fibre_exactness"
   ],
   "file": "lean/Sheaf/Paper/AdicNormalizedFibreExactness.lean",
@@ -406,7 +294,7 @@
   "by": "Q13",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The helpers unpack this node’s intrinsic fibre, local normalized lattice chart and assertion package. The source heart and its field action are the recorded raw localization and localized t-structure; realization is H⁰ of the recorded J. Finite-dimensional vector spaces are encoded by ModuleCat E together with Point.finite. The background algebraic closure, L and pair category impose no additional conclusion in this finite-E statement; arbitrary finite E/ℚ_l is quantified. No global lisse lattice is assumed."
+  "note": "The helpers unpack this node’s intrinsic fibre, local normalized lattice chart and assertion package. The source heart and its field action are the recorded raw localization and localized t-structure; realization is H⁰ of the recorded J. Finite-dimensional vector spaces are encoded by ModuleCat E together with Point.finite. The background algebraic closure, L and pair category impose no additional conclusion in this finite-E statement; arbitrary finite E/ℚ_l is quantified. No global lisse lattice is assumed. Existing supporting definitions moved verbatim to publicly re-exported AdicNormalizedFibreData; their new node retains every declaration attachment."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -415,5 +303,15 @@
   "group": "Q13",
   "result": "pass",
   "note": "Item node changed only by its lean record; 13 stmt_dep copies match side-live; lean.statement matches the file signature. Heart = localizedT heart, realize = ι⋙At.J⋙H⁰ with J pinned by the realization dependency. Point.functor is pinned to the intrinsic Γ(s,E_s⊗x⁻¹F) fibre built with the continuous coefficient pullback; Lattice is tied to the actual integral lattice via ν*-limit cone, ϖ^{n+1} cokernels and scalar equations. Normalization, finite-free limit, fractions (all u/ϖ^b), Point.exact (ambient short exact) and all detection clauses (zero, iso, zero map, exact iff, short exact iff) match the node. Base hypotheses follow from finite type plus ℓ invertible; edge cases (empty X, rank 0, level n ↦ ϖ^{n+1}, b=0, universes) checked. Plain imports equal the stated proof_dep modules; docstrings carry source, blueprint tag and 7-step plan; no line over 100 characters, only the theorem is sorry, no hollow definitions. Advisories: owner decls outside stmt_deps (continuousCoefficientPullback, supportSiteComparisonCoefficientPullback, pbcModules etc.); parent AdicHeartPullbackFibres.heartFiber is a cycle-blocked second fibre functor on the same heart; normalization isos pinned by naturality only. No compile run (no file changed; worker clean 14.9 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0b5cc",
+  "group": "B9",
+  "result": "fix",
+  "landing": "20261021T192917-L-762138",
+  "kind": "interface",
+  "note": "independent cc review: AdicNormalizedFibreData vs live item module (verbatim move of 22 decls); item theorem statement unchanged; two sorry halves vs the item's Assertions (true consequences, strictly weaker); unit node det-lem-coefficient-heart-common-stratification kept in the new sorry nodes' proof_deps"
  }
 }
