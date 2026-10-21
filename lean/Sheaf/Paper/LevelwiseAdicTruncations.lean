@@ -19,28 +19,6 @@ public import Sheaf.Paper.CompletedConstantSheafReduction
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
-import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
-import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.ScalarExtensionUnitTriangles
-import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 
 /-!
 # Levelwise truncations of an adic reduction tower
@@ -58,7 +36,6 @@ only for normalization, never for the unconditional strict-tower cohomology form
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option warn.sorry false
 set_option synthInstance.maxSize 2048
 
 universe u
@@ -244,6 +221,18 @@ private lemma truncLE_restriction_counit
   apply (cancel_epi ((F.mapDerivedCategoryTruncLEIso m).hom.app X)).mp
   simp only [Iso.hom_inv_id_app_assoc]
   exact (DerivedCategory.TStructure.t.liftTruncLE_ι _ m).symm
+
+private lemma truncLE_comparison_counit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (X : DerivedCategory C) (m : ℤ) :
+    (F.mapDerivedCategoryTruncLEIso m).hom.app X ≫
+        (DerivedCategory.TStructure.t.truncLEι m).app (F.mapDerivedCategory.obj X) =
+      F.mapDerivedCategory.map ((DerivedCategory.TStructure.t.truncLEι m).app X) := by
+  apply (cancel_epi ((F.mapDerivedCategoryTruncLEIso m).inv.app X)).mp
+  simp only [Iso.inv_hom_id_app_assoc]
+  exact (truncLE_restriction_counit F X m).symm
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma truncGE_restriction_unit
@@ -466,16 +455,17 @@ theorem pbc_levelwise_truncation_naturality {M M' : AdicTower T d} {m : ℤ}
     CategoryTheory.Pretriangulated.isomorphic_distinguished _
       (DerivedCategory.TStructure.t.triangleLEGE_distinguished m (m + 1) rfl (M.level a))
       _ e
+  have hmid : τ₁.hom₂ = τ₂.hom₂ := by
+    change F.map (f b) ≫ e'.hom.hom₂ = e.hom.hom₂ ≫ f a
+    rw [he.2.1, he'.2.1]
+    exact _hf b a hab
   have hτ : τ₁ = τ₂ := by
-    refine DerivedCategory.TStructure.t.triangle_map_ext hdist
+    exact DerivedCategory.TStructure.t.triangle_map_ext hdist
       (DerivedCategory.TStructure.t.triangleLEGE_distinguished m (m + 1) rfl (M'.level a))
       m (m + 1) hLE (by
         change DerivedCategory.TStructure.t.IsGE
           ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M'.level a)) (m + 1)
-        infer_instance) ?_ (by omega)
-    change F.map (f b) ≫ e'.hom.hom₂ = e.hom.hom₂ ≫ f a
-    rw [he.2.1, he'.2.1]
-    exact _hf b a hab
+        infer_instance) hmid (by omega)
   constructor
   · have h := congrArg (fun τ ↦ τ.hom₁) hτ
     change F.map ((DerivedCategory.TStructure.t.truncLE m).map (f b)) ≫ e'.hom.hom₁ =
@@ -898,6 +888,115 @@ def pbcLevelwiseProEtaleStepGE (W : PbcWitnessedTower T d) (m : ℤ) (n : ℕ) :
         (m + 1)).inv.app
         (W.K n)
 
+set_option backward.isDefEq.respectTransparency false in
+private lemma witness_semilinear_compatibility (W : PbcWitnessedTower T d) (n : ℕ) :
+    (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T).mapDerivedCategory.map
+        ((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology
+          (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)))).unit.app
+            (W.origin (n + 1)).L.obj ≫
+          (Sheaf.derivedRestrictScalars T.smallEtaleTopology
+            (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))).map (W.beta n).hom) ≫
+      (pbcDerivedComparisonRestrict T
+        (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))).inv.app (W.origin n).L.obj ≫
+      (Sheaf.derivedRestrictScalars (ProEt.topology T)
+        (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))).map (W.alpha n).hom =
+    (W.alpha (n + 1)).hom ≫
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (ProEt.topology T)
+        (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)))).unit.app (W.K (n + 1)) ≫
+      (Sheaf.derivedRestrictScalars (ProEt.topology T)
+        (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))).map (W.theta n).hom := by
+  -- Taking adjuncts turns the normalization square into the semilinear square.
+  let φ := pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)
+  let adjE := Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)
+  let adjP := Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars (ProEt.topology T) φ)
+  have hu := unit_mateEquiv_symm adjE adjP
+    (TwoSquare.mk _ _ _ _ (pbcDerivedComparisonRestrict T φ).inv)
+    (W.origin (n + 1)).L.obj
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := (pbcDerivedComparisonRestrict T φ).inv.naturality (W.beta n).hom
+  dsimp only [Functor.comp_map, φ] at hn
+  rw [reassoc_of% hn]
+  change _ ≫ (pbcDerivedComparisonRestrict T φ).inv.app _ =
+    _ ≫ (Sheaf.derivedRestrictScalars (ProEt.topology T) φ).map
+      ((pbcComparisonReduction T φ).hom.app (W.origin (n + 1)).L.obj) at hu
+  dsimp only [φ, adjE, adjP] at hu
+  dsimp only [pbcWitnessEtaleReduction]
+  rw [reassoc_of% hu]
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  have hc := W.compatibility n
+  change _ = (pbcComparisonReduction T φ).inv.app _ ≫ _ at hc
+  change _ ≫ (W.alpha n).hom = _ at hc
+  dsimp only [φ] at hc
+  rw [hc]
+  simp only [Iso.hom_inv_id_app_assoc, Functor.map_comp]
+  have ha := adjP.unit.naturality (W.alpha (n + 1)).hom
+  dsimp only [Functor.comp_map, Functor.id_map, φ, adjP, PbcWitnessedTower.alpha] at ha
+  dsimp only [pbcWitnessReduction, pbcFixedScalarExtension, PbcWitnessedTower.alpha]
+  rw [← reassoc_of% ha]
+
+private lemma truncGE_comparison_unit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (X : DerivedCategory C) (m : ℤ) :
+    F.mapDerivedCategory.map ((DerivedCategory.TStructure.t.truncGEπ m).app X) ≫
+        (F.mapDerivedCategoryTruncGEIso m).hom.app X =
+      (DerivedCategory.TStructure.t.truncGEπ m).app (F.mapDerivedCategory.obj X) := by
+  apply (cancel_mono ((F.mapDerivedCategoryTruncGEIso m).inv.app X)).mp
+  simp only [Category.assoc, Iso.hom_inv_id_app]
+  dsimp only [Functor.comp_obj]
+  simpa only [Category.comp_id] using (truncGE_restriction_unit F X m).symm
+
+private lemma originGE_unit (W : PbcWitnessedTower T d) (m : ℤ) (n : ℕ) :
+    (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+        ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin n).L.obj) ≫
+      (pbcLevelwiseOriginGE T d W m n).hom =
+        (W.alpha n).hom ≫ (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.K n) := by
+  simp only [pbcLevelwiseOriginGE, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
+  rw [← Category.assoc, truncGE_comparison_unit]
+  exact ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).naturality (W.alpha n).hom).symm
+
+private lemma truncated_stepGE_unit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (U : C ⥤ D) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    {X : DerivedCategory D} {Y : DerivedCategory C}
+    (f : X ⟶ U.mapDerivedCategory.obj Y) (m : ℤ) :
+    (DerivedCategory.TStructure.t.truncGEπ m).app X ≫
+        (DerivedCategory.TStructure.t.truncGE m).map f ≫
+          (U.mapDerivedCategoryTruncGEIso m).inv.app Y =
+      f ≫ U.mapDerivedCategory.map ((DerivedCategory.TStructure.t.truncGEπ m).app Y) := by
+  rw [← Category.assoc, ← (DerivedCategory.TStructure.t.truncGEπ m).naturality f]
+  rw [Category.assoc, truncGE_restriction_unit]
+  rfl
+
+private lemma originLE_counit (W : PbcWitnessedTower T d) (m : ℤ) (n : ℕ) :
+    (pbcLevelwiseOriginLE T d W m n).hom ≫
+        (DerivedCategory.TStructure.t.truncLEι m).app (W.K n) =
+      (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+        ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin n).L.obj) ≫
+          (W.alpha n).hom := by
+  simp only [pbcLevelwiseOriginLE, Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  rw [(DerivedCategory.TStructure.t.truncLEι m).naturality]
+  simp only [Iso.app_hom, Functor.id_map]
+  rw [← Category.assoc, truncLE_comparison_counit]
+
+private lemma truncated_stepLE_counit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (U : C ⥤ D) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    {X : DerivedCategory D} {Y : DerivedCategory C}
+    (f : X ⟶ U.mapDerivedCategory.obj Y) (m : ℤ) :
+    (DerivedCategory.TStructure.t.truncLE m).map f ≫
+        (U.mapDerivedCategoryTruncLEIso m).inv.app Y ≫
+          U.mapDerivedCategory.map ((DerivedCategory.TStructure.t.truncLEι m).app Y) =
+      (DerivedCategory.TStructure.t.truncLEι m).app X ≫ f := by
+  rw [truncLE_restriction_counit]
+  exact (DerivedCategory.TStructure.t.truncLEι m).naturality f
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Without (TC), the truncated etale antecedents give the retained levelwise origin
 pairs, with the stated isomorphisms and compatibility with strict transitions only.
 Source: blueprint order 1429, final paragraph
@@ -956,7 +1055,147 @@ theorem pbc_levelwise_truncation_origins (W : PbcWitnessedTower T d) (m : ℤ) :
             (pbcLevelwiseOriginGE T d W m n).hom =
       (pbcLevelwiseOriginGE T d W m (n + 1)).hom ≫
         pbcLevelwiseProEtaleStepGE T d W m n) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro n
+    -- Choose only bounds; both the object and its origin isomorphism are explicit.
+    obtain ⟨k, hk⟩ := W.boundedBelow n
+    let F := finiteCoefficientRealization T (PbcQuotient d n)
+    have htr : (DerivedCategory.TStructure.t.IsGE (F.mapDerivedCategory.obj
+        ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n))) k) := by
+      have : DerivedCategory.TStructure.t.IsGE (F.mapDerivedCategory.obj (W.K n)) k := hk
+      have : DerivedCategory.TStructure.t.IsGE
+          ((DerivedCategory.TStructure.t.truncLE m).obj (F.mapDerivedCategory.obj (W.K n))) k :=
+        inferInstance
+      let e : F.mapDerivedCategory.obj
+          ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n)) ≅
+          (DerivedCategory.TStructure.t.truncLE m).obj (F.mapDerivedCategory.obj (W.K n)) :=
+        (F.mapDerivedCategoryTruncLEIso m).app (W.K n)
+      exact DerivedCategory.TStructure.t.isGE_of_iso e.symm k
+    let h : DerivedCategory.TStructure.t.plus (F.mapDerivedCategory.obj
+        ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n))) := ⟨k, htr⟩
+    let L : DerivedCategory.Plus
+        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (PbcQuotient d n))) :=
+      ⟨(DerivedCategory.TStructure.t.truncLE m).obj (W.origin n).L.obj, by
+        obtain ⟨j, hj⟩ := (W.origin n).L.property
+        have := hj
+        exact ⟨j, inferInstance⟩⟩
+    let V : ProEtale.EtaleOriginWitness T (PbcQuotient d n)
+        ⟨F.mapDerivedCategory.obj ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n)), h⟩ :=
+      { L := L
+        alpha := DerivedCategory.Plus.ι.preimageIso
+          ((Functor.mapDerivedCategoryCompIso
+            (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T) F).app L.obj ≪≫
+              F.mapDerivedCategory.mapIso (pbcLevelwiseOriginLE T d W m n)) }
+    refine ⟨h, V, rfl, ?_⟩
+    simp only [eqToHom_refl]
+    apply F.mapDerivedCategory.map_injective
+    dsimp [pbcFixedOriginAlpha, V]
+    change F.mapDerivedCategory.map (F.mapDerivedCategory.preimage _) = _
+    rw [Functor.map_preimage]
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.preimageIso_hom]
+    rw [Functor.map_preimage]
+    simp [F]
+  · intro n
+    obtain ⟨k, hk⟩ := W.boundedBelow n
+    let F := finiteCoefficientRealization T (PbcQuotient d n)
+    have htr : (DerivedCategory.TStructure.t.IsGE (F.mapDerivedCategory.obj
+        ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n))) k) := by
+      have : DerivedCategory.TStructure.t.IsGE (F.mapDerivedCategory.obj (W.K n)) k := hk
+      have : DerivedCategory.TStructure.t.IsGE
+          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj
+            (F.mapDerivedCategory.obj (W.K n))) k :=
+        inferInstance
+      let e : F.mapDerivedCategory.obj
+          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n)) ≅
+          (DerivedCategory.TStructure.t.truncGE (m + 1)).obj (F.mapDerivedCategory.obj (W.K n)) :=
+        (F.mapDerivedCategoryTruncGEIso (m + 1)).app (W.K n)
+      exact DerivedCategory.TStructure.t.isGE_of_iso e.symm k
+    let h : DerivedCategory.TStructure.t.plus (F.mapDerivedCategory.obj
+        ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n))) := ⟨k, htr⟩
+    let L : DerivedCategory.Plus
+        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (PbcQuotient d n))) :=
+      ⟨(DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin n).L.obj, by
+        obtain ⟨j, hj⟩ := (W.origin n).L.property
+        have := hj
+        exact ⟨j, inferInstance⟩⟩
+    let V : ProEtale.EtaleOriginWitness T (PbcQuotient d n)
+        ⟨F.mapDerivedCategory.obj
+          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n)), h⟩ :=
+      { L := L
+        alpha := DerivedCategory.Plus.ι.preimageIso
+          ((Functor.mapDerivedCategoryCompIso
+            (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T) F).app L.obj ≪≫
+              F.mapDerivedCategory.mapIso (pbcLevelwiseOriginGE T d W m n)) }
+    refine ⟨h, V, rfl, ?_⟩
+    simp only [eqToHom_refl]
+    apply F.mapDerivedCategory.map_injective
+    dsimp [pbcFixedOriginAlpha, V]
+    change F.mapDerivedCategory.map (F.mapDerivedCategory.preimage _) = _
+    rw [Functor.map_preimage]
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.preimageIso_hom]
+    rw [Functor.map_preimage]
+    simp [F]
+  · intro n
+    let φ := pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)
+    let F := comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T
+    let U := Sheaf.restrictScalars (ProEt.topology T) φ
+    have : DerivedCategory.TStructure.t.IsLE
+        (F.mapDerivedCategory.obj
+          ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj)) m :=
+      F.isLE_mapDerivedCategory_obj _ m
+    apply (cancel_mono ((U.mapDerivedCategoryTruncLEIso m).hom.app (W.K n))).mp
+    -- The counit characterizes a map into the lower truncation.
+    apply DerivedCategory.TStructure.t.to_truncLE_obj_ext
+    simp only [Category.assoc, truncLE_comparison_counit]
+    dsimp only [U, φ]
+    simp only [← Functor.map_comp, originLE_counit]
+    dsimp only [pbcLevelwiseProEtaleStepLE]
+    simp only [Category.assoc]
+    rw [truncated_stepLE_counit]
+    rw [reassoc_of% originLE_counit T d W m (n + 1)]
+    simp only [Functor.map_comp]
+    have hn := (pbcDerivedComparisonRestrict T φ).inv.naturality
+      ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin n).L.obj)
+    dsimp only [Functor.comp_map, φ] at hn
+    rw [← reassoc_of% hn]
+    rw [← Category.assoc, ← Functor.map_comp]
+    dsimp only [pbcLevelwiseEtaleStepLE]
+    rw [Category.assoc, truncated_stepLE_counit]
+    simp only [Functor.map_comp, Category.assoc]
+    have hs := witness_semilinear_compatibility T d W n
+    simp only [Functor.map_comp, Category.assoc] at hs
+    rw [hs]
+  · intro n
+    let φ := pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)
+    let F := comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T
+    let U := Sheaf.restrictScalars (ProEt.topology T) φ
+    have : DerivedCategory.TStructure.t.IsGE
+        (U.mapDerivedCategory.obj
+          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n))) (m + 1) :=
+      U.isGE_mapDerivedCategory_obj _ (m + 1)
+    apply (cancel_epi
+      ((F.mapDerivedCategoryTruncGEIso (m + 1)).inv.app (W.origin (n + 1)).L.obj)).mp
+    -- Dually, the unit characterizes a map from the upper truncation.
+    apply DerivedCategory.TStructure.t.from_truncGE_obj_ext
+    simp only [← Category.assoc, truncGE_restriction_unit]
+    dsimp only [F]
+    rw [originGE_unit]
+    simp only [Category.assoc]
+    dsimp only [pbcLevelwiseProEtaleStepGE]
+    rw [truncated_stepGE_unit]
+    rw [← Category.assoc, ← Category.assoc, ← Functor.map_comp]
+    dsimp only [pbcLevelwiseEtaleStepGE]
+    rw [Category.assoc, truncated_stepGE_unit]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := (pbcDerivedComparisonRestrict T φ).inv.naturality
+      ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin n).L.obj)
+    dsimp only [Functor.comp_map, φ] at hn
+    rw [reassoc_of% hn]
+    rw [← Functor.map_comp, originGE_unit]
+    simp only [Functor.map_comp]
+    have hs := witness_semilinear_compatibility T d W n
+    simp only [Functor.map_comp, Category.assoc] at hs
+    rw [← reassoc_of% hs]
 
 /-- The canonical realization of a truncated witnessed level, transported to the
 specified quotient-linear truncation of M. All four factors are recorded canonical maps.
