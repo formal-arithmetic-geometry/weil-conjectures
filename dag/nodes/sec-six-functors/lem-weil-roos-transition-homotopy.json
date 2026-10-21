@@ -13,11 +13,140 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-weil-inverse-system",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All coordinate formulas are identities of morphisms after projection to each product factor, not an assumption that cohomology is computed sectionwise. By [def-weil-inverse-system], $T_{a,b}T_{b,c}=T_{a,c}$ and $dT_{a,b}=T_{a,b}d$. By the universal property in [def-weil-category-product], each displayed finite sum of composites with projections defines a unique product map. Each commutes with $d$, since every summand does. Write $V=\\prod_nK_{en}$, $(s_ez)_n=T_{en,e(n+1)}z_{n+1}$ and $f_e=1-s_e$. The equality\n$$(sTz)_n=t_nT_{n+1,e(n+1)}z_{n+1}=T_{n,e(n+1)}z_{n+1}=(Ts_ez)_n$$\ngives $fT=Tf_e$. The cone differential of [def-weil-abstract-derived-category] now gives $d(Ty,Tx)=(-Tdy-Tf_ex,Tdx)=\\Delta d(y,x)$, so $\\Delta$ is a chain map.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "Compute the square for the other comparison, using $T_{en,i}t_i=T_{en,i+1}$:\n$$(b_efx)_n=\\sum_{i=en}^{e(n+1)-1}(T_{en,i}x_i-T_{en,i+1}x_{i+1})=x_{en}-T_{en,e(n+1)}x_{e(n+1)}=(f_ea_ex)_n.$$\nSuccessive intermediate terms cancel, including when $e=1$, when the block has one term. Thus $b_ef=f_ea_e$. Substitution in the shifted-cone differential gives\n$$d(b_ey,a_ex)=(-b_edy-b_efx,a_edx)=r_ed(y,x).$$\nThis proves that $r_e$ is the stated chain map, with different maps on the two coordinates.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "The composites on the two product coordinates are\n$$(Ta_ex)_n=T_{n,en}x_{en}=\\varphi(x)_n,$$\n$$(Tb_ey)_n=\\sum_{i=en}^{e(n+1)-1}T_{n,en}T_{en,i}y_i=\\sum_{i=en}^{e(n+1)-1}T_{n,i}y_i=\\psi(y)_n.$$\nConsequently $\\Delta r_e(y,x)=(\\psi y,\\varphi x)$. These are componentwise product identities by [def-weil-category-product].",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "The first telescoping identity is\n$$(hfx)_n=\\sum_{i=n}^{en-1}(T_{n,i}x_i-T_{n,i+1}x_{i+1})=x_n-T_{n,en}x_{en}.$$\nIt follows that $hf=1-\\varphi$. For $e=1$ this sum is empty and its right side is also zero; otherwise the cancellation is the same adjacent-term cancellation as in Step 2. This uses only composition of the transitions of [def-weil-inverse-system].",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "For the other identity subtract the two finite intervals:\n$$(fhy)_n=\\sum_{i=n}^{en-1}T_{n,i}y_i-\\sum_{i=n+1}^{e(n+1)-1}T_{n,i}y_i\n=y_n-\\sum_{i=en}^{e(n+1)-1}T_{n,i}y_i.$$\nThe equality follows by adding $\\sum_{i=en}^{e(n+1)-1}T_{n,i}y_i$ to the first sum: their joined interval is $[n,e(n+1))$, and removing $[n+1,e(n+1))$ leaves only the $n$th term. This also handles $en=n$ without an overlap assumption. Hence $fh=1-\\psi$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "Because $dh=hd$, the degree $-1$ map $H(y,x)=(0,-hy)$ satisfies, in the displayed convention,\n$$dH(y,x)=(fhy,-dhy),\\qquad Hd(y,x)=(0,hdy+hfx).$$\nTheir sum is $(fhy,hfx)=((1-\\psi)y,(1-\\varphi)x)=(1-\\Delta r_e)(y,x)$. This explicitly verifies both the negative sign in $H$ and the negative signs in the first component of the shifted-cone differential of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "We also need the opposite composite, rather than inferring invertibility from just one homotopy. Put $L_n=K_{en}$ and $S_{a,b}=T_{ea,eb}$. Direct substitution gives\n$$(r_e\\Delta)(y,x)_n=\\left(\\sum_{i=en}^{e(n+1)-1}T_{en,ei}y_i,\\ T_{en,e^2n}x_{en}\\right).$$\nThese are exactly $(\\psi_Ly,\\varphi_Lx)$, where $\\psi_L,\\varphi_L$ are the formulas of Step 3 with transitions $S$. Define\n$$(h_Ly)_n=\\sum_{i=n}^{en-1}S_{n,i}y_i,\\qquad G(y,x)=(0,-h_Ly).$$\nThe cancellations of Steps 4 and 5, with $S$ in place of $T$, give $h_Lf_e=1-\\varphi_L$ and $f_eh_L=1-\\psi_L$. Expanding as in Step 6 gives $dG+Gd=1-r_e\\Delta$. This repeats the already proved finite-sum identities for the tower $L$; it does not assume the lemma being proved for $L$.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "For completeness, a difference $u-v=dB+Bd$ induces zero on cohomology: on $Z^q=\\ker d^q$ the term $Bd$ vanishes, and $dB$ factors through the boundary subobject $\\operatorname{im}d^{q-1}$, so it is zero in $H^q=Z^q/\\operatorname{im}d^{q-1}$ [def-weil-abstract-derived-category]. This is the elementary kernel-and-image argument for Stacks Tag 00LR (algebra.tex, lemma-homotopic-equal-homology), and applies in the abelian sheaf category itself. Apply it to $H$ and $G$: $H^q(\\Delta)H^q(r_e)=1$ and $H^q(r_e)H^q(\\Delta)=1$. Thus each $H^q(\\Delta)$ is an isomorphism with inverse $H^q(r_e)$, so $\\Delta$ and $r_e$ are quasi-isomorphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LR (lemma-homotopic-equal-homology); elementary kernel/image proof supplied here for the abelian category of sheaves"
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], the localization can equivalently be taken from the homotopy category, so the two homotopies already proved imply $[\\Delta][r_e]=1$ and $[r_e][\\Delta]=1$. Alternatively the cohomology calculation in Step 8 makes both arrows invertible at localization. Therefore $[\\Delta]=[r_e]^{-1}$. No identification with an unspecified cofinality isomorphism is involved: these are the images of the specified chain maps.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "Let $u_i:K_i\\to K'_i$ be a strict tower morphism. Repeatedly using $u_it_i=t'_iu_{i+1}$ gives $u_aT_{a,b}=T'_{a,b}u_b$. Thus, with $P(u)=\\prod_i u_i$ and $P_e(u)=\\prod_nu_{en}$,\n$$P_e(u)a_e=a'_eP(u),\\quad P_e(u)b_e=b'_eP(u),\\quad P(u)T=T'P_e(u),\\quad P(u)h=h'P(u).$$\nEach equality follows by substituting the preceding transition identity into each finite summand. They prove naturality of $r_e,\\Delta,\\varphi,\\psi$ and $H$ (and likewise $G$). If the tower is a tower of $\\mathcal R$-module complexes, projections and transitions are $\\mathcal R$-linear; their composites and finite sums remain $\\mathcal R$-linear by [def-weil-sheaf-of-modules-category]. Explicitly, on an object $W$ of the site set $P(W)=\\prod_i K_i(W)$, with restrictions and $\\mathcal R(W)$-action componentwise. A matching family in $P$ glues uniquely in each $K_i$, hence uniquely in $P$; so $P$ is a sheaf. Coordinatewise lifting gives exactly the product universal property in [def-weil-category-product]. Thus these products exist in the $\\mathcal R$-module category and the same formulas define maps there. Repeat Steps 1–9 there to obtain the quasi-isomorphism and localized inverse identity in $D(\\mathcal R)$. This repetition needs existence of products, but not exactness of products of $\\mathcal R$-modules; no derived-product claim was used.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-category-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; explicit finite-block computation by Q41, not an assertion quoted from that lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "def-weil-category-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), shifted Roos model only; Q41 supplies all finite-block and both homotopy computations. Tag 00LR (algebra.tex, lemma-homotopic-equal-homology) is expanded by its kernel/image argument."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -53,10 +182,45 @@
    "results": "Homotopy.mkInductiveAux₃; Homotopy.mkCoinductiveAux₃; Homotopy.mkInductiveAux₂; AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant; Homotopy.mkInductiveAux₂_add_one; Homotopy.mkInductiveAux₁; Homotopy.mkCoinductiveAux₂_add_one; Homotopy.mkCoinductiveAux₂",
    "date": "2026-10-21",
    "verdict": "no match: Generic homotopy constructors do not give the finite-block homotopy or the specified forward Roos transition."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|homotopyLimit|cofinal.*homotopy",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: searched the full explicit Roos subsequence comparison; hits concern generic cone/homotopy constructions, elementary telescoping sums, or ordinary inverse systems, not this chain-map formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A telescoping finite sum is a homotopy between the identity and the subsequence transition map on the Roos complex of an inverse sequence.",
+   "results": "Finset.sum_range_sub'; Finset.sum_Ico_sub; List.sum_range_sub'; HomotopyEquiv.homotopyInvHomId; CategoryTheory.ShortComplex.HomotopyEquiv.homotopyInvHomId; Finset.sum_range_sub; List.sum_range_sub; Homotopy",
+   "date": "2026-10-21",
+   "verdict": "no match: searched the full explicit Roos subsequence comparison; hits concern generic cone/homotopy constructions, elementary telescoping sums, or ordinary inverse systems, not this chain-map formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, CochainComplex",
+   "results": "Homotopy.mkCoinductive; CochainComplex.HomComplex.Cochain.ofHomotopy; CochainComplex.HomComplex.δ_ofHomotopy; CochainComplex.HomComplex.Cochain.equivHomotopy; CochainComplex.HomComplex.Cochain.equivHomotopy_apply_coe; CochainComplex.HomComplex.Cochain.equivHomotopy_apply_of_eq; CochainComplex.HomComplex.Cochain.equivHomotopy_symm_apply_hom; Homotopy.shift",
+   "date": "2026-10-21",
+   "verdict": "no match: searched the full explicit Roos subsequence comparison; hits concern generic cone/homotopy constructions, elementary telescoping sums, or ordinary inverse systems, not this chain-map formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite block sum and subsequence restriction on the mapping fiber of one minus shift are homotopy inverse to the forward transition map of an inverse tower of cochain complexes.",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom; CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId; CochainComplex.mappingConeCompHomotopyEquiv_comm₁; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f; CochainComplex.MappingConeCompHomotopyEquiv.hom_inv_id_assoc; CochainComplex.mappingConeCompHomotopyEquiv_hom_inv_id_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: searched the full explicit Roos subsequence comparison; hits concern generic cone/homotopy constructions, elementary telescoping sums, or ordinary inverse systems, not this chain-map formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sequential inverse system, multiplication of indices by a positive integer induces explicit inverse maps up to chain homotopy on the shifted cone of the product transition endomorphism.",
+   "results": "InverseSystem.pEquivOnLim; InverseSystem.pEquivOnSucc; LightProfinite.transitionMap; InverseSystem.globalEquiv; CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_pos; InverseSystem.globalEquiv_compatibility; LightProfinite.transitionMapLE; CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg",
+   "date": "2026-10-21",
+   "verdict": "no match: searched the full explicit Roos subsequence comparison; hits concern generic cone/homotopy constructions, elementary telescoping sums, or ordinary inverse systems, not this chain-map formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-specified-pullback-comparison-alpha",
@@ -77,5 +241,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-roos-transition-homotopy",
+  "worker": "stage1",
+  "summary": "Q41 supplies the explicit componentwise finite-sum calculation, both inverse homotopies, cohomology/localization argument, naturality and ring-sheaf linearity. No new nodes: each calculation is elementary with the cited definitions. Statement unchanged; product definition added to statement dependencies. The coefficient clause explicitly constructs the product sheaf and its scalar action by coordinatewise gluing; it makes no exactness assertion for products in that category.",
+  "blueprint": "Realizes the forward-transition and finite-block-homotopy subargument of the resolution-level scalar compatibility in the stated ancestor place: the cohomology transport arrow in def-weil-global-geometric-frobenius, through lem-weil-specified-pullback-comparison-alpha. This is a generic tool below the unit route, not a replacement for a unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-727351683",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-727351683 (reviewer sub-agent of L); spot-checked: PASS. I read the whole delivery and wrote no fixes. This head re-delivers f61a9aab, whose mathematics was PASSed; landing then refused it with the systemic 'completed in this project's DAG but not in the live DAG' error (svc.log:84360, 118 such returns machine-wide), which is not a fault of this delivery. Shape: one commit touching only the item and its report, with no new nodes. The item is still unsplit in live and side-live, is not on the dropped list, and has no repair note. The statement is byte-identical to live. stmt_deps adds def-weil-category-product, which is justified because the statement forms the products and product maps. proof_deps equals the union of the step uses. No SGA is cited and there are no tool_uses. A JSON diff against f61a9aab shows two changes: Step 10 now builds the product sheaf of R-modules explicitly (sectionwise product, coordinatewise gluing and R-action, universal property), which is correct; and the split_report wording changed. Steps 1-9 are identical. I recomputed every step. Cone convention: C(f)[-1] gives d(y,x)=(-dy-fx,dx), matching def-weil-abstract-derived-category. The identities fT=Tf_e, b_e f=f_e a_e, Delta r_e=(psi,phi), hf=1-phi and fh=1-psi hold, including the e=1 empty sums. dH+Hd=(fhy,hfx) for H=(0,-hy). Step 7 identifies r_e Delta with (psi_L,phi_L) for L_n=K_{en}, S=T_{ea,eb}; this is not circular. The 00LR kernel/image argument, localization through K(A), naturality and R-linearity are all correct. I also checked the zero-transition and e=1 edge cases. Sources: sites-cohomology.tex:5067 (Tag 0941, Roos context only, honestly attributed) and algebra.tex:17490 (Tag 00LR, proof omitted there and written out here). lem-fix-cofinal-roos-restriction is not a duplicate: it lacks Delta, the homotopies and the inverse identity."
  }
 }

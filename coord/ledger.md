@@ -21524,3 +21524,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:00 L: merged deliver/N6/lem-weil-pbc-quotient-diagram-scalar-projection (reviewer FIX; first push; new nodes: 0)
 - 09:00 L: merged deliver/Q83/lem-pur-lifted-external-evaluation-chain-model (reviewer PASS; first push; new nodes: 0)
 - 09:00 L: merged deliver/Q08/lem-sfb-locally-closed-generator-tensor-intersection (reviewer FIX; first push; new nodes: 0)
+- 09:00 L: merged deliver/Q41/lem-weil-roos-transition-homotopy (reviewer PASS; after a return; new nodes: 0)
