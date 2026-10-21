@@ -19854,3 +19854,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:36 L: merged deliver/NH/lem-cbc-ringed-open-extension-products (stage 2; reviewer PASS; parallel immutable checks)
 - 03:36 L: merged deliver/N5/lem-sfb-proper-open-boundary-zero (reviewer FIX; first push; new nodes: 0)
 - 03:36 L: merged deliver/Q75/lem-sfb-etale-proetale-scalar-counit-transposes (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T03:37:05Z L: superseded stage-1 delivery Q60/det-ctf-finite-proper-localizing at 3bf827d5d10ad68e5d7fcd25f48c8d397df26266; current completion retained; packet archived at refs/superseded/Q60/det-ctf-finite-proper-localizing/3bf827d5d10ad68e5d7fcd25f48c8d397df26266; stale return retired.
