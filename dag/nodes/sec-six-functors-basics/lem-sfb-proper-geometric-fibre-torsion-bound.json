@@ -218,5 +218,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-9436720e0 (reviewer sub-agent of L); spot-checked: Read in full: the item JSON, the report, all 12 cited node statements, the unit, blueprint paragraph (1) of sk-thm-sfb-proper-base-change-finite.proof.md, and Stacks 0A3V (morphisms.tex l.5487), 0F0V (etale-cohomology.tex l.19763) and 0F10. Statement unchanged; no new nodes; no repair note applies; no SGA citation. Step 1: proper implies finite type; lem-fin-finite-type-fibre-dimension-bound (finite type, Y quasi-compact) gives a uniform bound e on fibre dimensions; c=2e. Step 2: the geometric point plus the def-pc-base-change iterated base change identify X_ybar with X_y over Omega; finite type comes from proper base change; the first clause of lem-kun-dimension-extension holds for any field extension, so a transcendental Omega is fine. Step 3: d lies in [0,e]; algebraically closed implies separably closed; lem-sf-separably-closed-torsion-cd gives field cd 0; thm-sc-finite-type-torsion-cd with c=0 gives cd_tor at most 2d, for all torsion sheaves with no constructibility or characteristic condition. The item's torsion class is contained in the def-sc class. Step 4 (empty site: the empty family covers, so F=0 and cohomology is 0) is genuinely elementary. Small cases checked: empty base, empty fibres, P^n (2e sharp), p-torsion, unbounded exponents. proof_deps equals the union of uses; no cycle; source paths exist. The four declared tool_uses (fibre-dimension bound, kun dimension extension, separably-closed cd, finite-type cd) are generic and accepted. Maintainer note: lem-sfb-finite-proper-geometric-cd-bound (unsplit, Q60, same day, unit sk-prop-ctf-finite-proper) has a second clause that generalizes this item (separably closed Omega). These are parallel creations; the delivered proof is complete and correct, and its argument would serve the sibling's split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.ProperGeometricFibreTorsionBound",
+  "declaration": "AlgebraicGeometry.exists_proper_geometricFibre_torsion_cohomology_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/ProperGeometricFibreTorsionBound.lean",
+  "statement": "theorem exists_proper_geometricFibre_torsion_cohomology_bound {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] [CompactSpace Y] : ∃ c : ℕ, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (ybar : Spec (.of Ω) ⟶ Y) (F : Sheaf (pullback p ybar).smallEtaleTopology AddCommGrpCat.{u + 1}), (∀ (U : (pullback p ybar).Etaleᵒᵖ) (s : F.obj.obj U), ∃ n : ℤ, n ≠ 0 ∧ n • s = 0) → ∀ i : ℤ, (c : ℤ) < i → Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} (pullback p ybar) i).obj ((DerivedCategory.singleFunctor _ 0).obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ad96b4b2",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Every clause matches the node and the six stmt_dep records: IsProper, CompactSpace Y, uniform ∃ c : ℕ before all quantifiers, arbitrary alg-closed Ω : Type u with Spec(.of Ω) ⟶ Y, fibre = pullback p ybar, Sheaf smallEtaleTopology AddCommGrpCat.{u+1}, sectionwise torsion with the annihilator chosen per section (literal to the node, which defines torsion inline and does not cite def-weil-pbc-torsion-etale-sheaf), ∀ i : ℤ > c, Subsingleton of Etale.cohomology(single 0 F). No extra hypotheses; empty base/fibres, c=0 and unbounded orders covered. No duplicate (fin4 fibrewise lemma is constructible/finite-coefficient only; sibling cd-bound has no lean). Not dropped. Node differs from live only in lean; statement verbatim; one sorry; docstrings carry source and blueprint id and all 4 steps. nt_compile --json clean, 2.5 s. Second-reading section is an honest self-check, accepted. Maintainer note: sibling lem-sfb-finite-proper-geometric-cd-bound is the stronger, local-torsion statement."
  }
 }

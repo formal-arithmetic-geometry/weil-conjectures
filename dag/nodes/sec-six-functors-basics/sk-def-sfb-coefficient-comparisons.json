@@ -720,5 +720,40 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-a17acfaba (reviewer sub-agent of L); spot-checked: I read the item, the unit, the 5-paragraph blueprint proof (main-20261015) and the statements of all 34 cited nodes. The statement is identical to the blueprint's, there are no new nodes and no cycle, proof_deps equals the union of the step uses, and the unit realized fields map paragraphs 1–5 to steps 1/2–3/4/5/6–7. The live item is still imported and there is no repair or re-split note. The directions of the underived and derived conjugates and mates match def-sfb-pull-iso/push-hom and derived-pull-iso/push-hom: Pull is E_X f^*≅f'^*E_Y and Push is E_Y f_*→f'_*E_X via unit, c^{-1} and counit. The coefficient-change squares instantiate def-sfb-comap-mapmod-square and def-sfb-extend-comap-iso-of-iso correctly. Flatness gives the finite-limit hypotheses of the homology and K-injective lemmas. The extension-by-zero conjugates need no flatness, which I checked (j_! of a K-flat complex is K-flat). The Shriek composite has the right whiskered endpoints for the same chosen compactification. The one change replaces sk-prop-sfb-cartesian-coefficients, whose clause (1) covers only admissible rings, with lem-sfb-alpha-iso (any condensed ring, reviewed N0 pass, proof c_f at Λ). This is correct, and I accept that tool use because the base citation was already off-route and the lemma is a generic black box. Edge cases f=id, a=id, U=∅ and non-flat Z→Z/2 are all fine. Advisory: the report's attachment of AddCommGrpCat.hasFunctorialFlatResolution to lem-sfb-abelian-functorial-flat-resolution looks right, but it sits at live Basic.lean:150, not 148."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedPullIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.comapLowerStarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.pullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.pushHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.comapUpperStarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedComapUpperStarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.preservesHomology_extendScalars_coefficientMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.preservesKInjectiveComplexes_comap_coefficientMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedComapLowerStarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.comapOpenImmersionLowerShriekIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenImmersionShriekIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedLowerShriekHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedLowerShriekHom"
+  ],
+  "statement": "noncomputable def derivedPullIso :\n    L((f)^*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a X)) ≅\n      L(Mod.extendScalars (coefficientMap a Y)) ⋙ L((f)^*⟦Λ'⟧)",
+  "branch": "slopmaster2",
+  "by": "Q58",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact aggregate match in the published live WeilConjectures module, read locally and confirmed with scompile.py --source. The listed declarations construct the restriction squares, underived conjugate pull isomorphism and mate push transformation, derived conjugate pull and mate push under precisely scheme-wise flatness, open extension-by-zero isomorphisms without flatness (underived and unbounded derived), and the chosen-compactification shriek transformation with its conditional isomorphism instance. Their bodies use the prescribed adjunction conjugates, mates and whiskered composite, not arbitrary comparisons. The derived pushpull dependency specializations unfold to the same generic total derived functors used here. This is an existing statement/construction attachment; inherited sorry dependencies are not claimed proved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63be5ac3e",
+  "group": "Q58",
+  "result": "pass",
+  "note": "existing:true aggregate attachment to 15 live ChangeOfCoefficients declarations (module identical in side-live and live). Only the item's lean field changed. Clause-by-clause check: Res commutes with f_*/f^* (comapLowerStarIso/comapUpperStarIso); open j_! underived and derived isos with no flatness binder; derived Pull iso, Push hom with no IsIso, Shriek = Push_g then the open iso for i of the same chosen compactification, IsIso under exactly IsIso Push_g; underived pull/push without flatness. Directions correct; flatness = ∀X PreservesFiniteLimits (Ext a_X) = exactness. Bodies are canonical conjugateIsoEquiv/mateEquiv constructions, not hollow. R/L = the dependency's (lowerStar).rightDerivedFunctor etc., checked by rfl. Scratch type-check of all node types via lcompile 560 s: rc 0 (nt_compile timed out at 60 s under load 113). check_existing: no failures, branch slopmaster2 correct. Sibling def-sfb-* nodes own the same decls: no duplicate notion. Advisories: noncomputable prefix in lean.statement (note-only); second reading is a self-check."
  }
 }

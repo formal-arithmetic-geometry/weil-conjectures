@@ -13,7 +13,8 @@
   "def-weil-abstract-derived-category",
   "def-weil-inverse-system",
   "def-weil-category-product",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-weil-strict-roos-model"
  ],
  "proof": [
   {
@@ -243,5 +244,43 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-dd5acf449 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, all 9 cited statements, the blueprint main-20261015 Cones paragraph of det-pe-derived-nakayama-first-reduction, the unit sk-lem-pe-derived-nakayama, and Stacks 014E (cone) and 011G (shift sign). The delivery creates no new nodes. The statement and stmt_deps are identical to every earlier snapshot, and this is not a re-split. I recomputed every step myself. Step 1: Cone(s)[-1] reordered gives d(v,u)=(dv,-du-s v), and d^2=0. Step 2: lem-pe-roos-coordinates-quasi-iso applies with endomorphism -s_N, and the product of quasi-isomorphisms comes from the last clause of det-pe-products-derived. Step 3: inverse rotation by TR2 gives first map p[-1] with positive projection and last map w↦(0,w), and Q(s_N) is the transition endomorphism of def-weil-derived-limit on the product QP(N). Step 4: σ(v,u)=(v,(-1)^r u) satisfies σd=dσ and composes to (-1)^{r+s}. Step 5: ΦD=D'Φ=(db+Fa, -db'-Fa'-S_Bb, -da, -da'+S_Aa); the sign -a' is forced. Step 6: the cone inclusion is preserved, and σ_{N,1}H(-p)=(-a,a')=-pΦ. Steps 7-8: s_N J=0, and the cone augmentation goes to (J'm',0,Jm,0)=Cone(η_{j'},η_j). Edge cases tried: zero tower, constant tower, f=0 and f=id, r=0, r=-1 and odd r. I accept the tool use of det-pe-products-derived (unit sk-prop-pe-products, off the item's unit route) because the blueprint paragraph itself cites sk-prop-pe-products for exactly this fact. No existing node duplicates the item: lem-weil-roos-comm-shift covers only the shift clause; lem-weil-derived-limit-tower-roos-triangle, lem-pur-roos-additive-comparison and the Milnor and kflat Roos nodes state other things. Maintainer notes: (1) def-weil-strict-roos-model (Lean CategoryTheory.roosF) defines the same object Cone(u)[-1] in matching coordinates, together with the (0,γ) augmentation. Stage 2 must reuse it and lem-weil-roos-comm-shift and not define a second Roos functor. (2) lem-pe-kflat-roos-representative-invariance uses the opposite coupling sign (dx,(1-s)x-dy). It is isomorphic to this H by (x,y)↦(x,-y), and the downstream lem-pe-completion-triangle-comparison must insert that sign when it mixes the two. No fixes were written."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RoosConeCalculus",
+  "file": "lean/Sheaf/Algebra/Homology/RoosConeCalculus.lean",
+  "declaration": "CategoryTheory.RoosConeCalculus.roos_cone_calculus",
+  "declarations": [
+   "CategoryTheory.RoosConeCalculus.π",
+   "CategoryTheory.RoosConeCalculus.v",
+   "CategoryTheory.RoosConeCalculus.ucoord",
+   "CategoryTheory.RoosConeCalculus.coneTarget",
+   "CategoryTheory.RoosConeCalculus.coneSource",
+   "CategoryTheory.RoosConeCalculus.ConeFormula",
+   "CategoryTheory.RoosConeCalculus.ShiftFormula",
+   "CategoryTheory.RoosConeCalculus.augmentation",
+   "CategoryTheory.RoosConeCalculus.AugmentedSquare",
+   "CategoryTheory.RoosConeCalculus.AugmentationNaturality",
+   "CategoryTheory.RoosConeCalculus.ConeCompatibility",
+   "CategoryTheory.RoosConeCalculus.ConeAugmentation",
+   "CategoryTheory.RoosConeCalculus.ShiftAugmentation",
+   "CategoryTheory.RoosConeCalculus.CoordinateCalculus",
+   "CategoryTheory.RoosConeCalculus.DerivedRoos",
+   "CategoryTheory.RoosConeCalculus.roos_cone_calculus"
+  ],
+  "statement": "theorem roos_cone_calculus (X : AlgebraicGeometry.Scheme.{t}) (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) RingCat.{max u (t + 1)}) [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} R)] : (roosF (A := ringedSiteModules.{max u (t + 1)} R)).Additive ∧ CoordinateCalculus (ringedSiteModules.{max u (t + 1)} R) ∧ (∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max u (t + 1)} R) ℤ} (f : N ⟶ N'), (∀ n : ℕ, QuasiIso ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f).app (op n))) → QuasiIso (roosF.map f)) ∧ (∀ N : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max u (t + 1)} R) ℤ, DerivedRoos N) ∧ ∃ (cs : (roosF (A := ringedSiteModules.{max u (t + 1)} R)).CommShift ℤ) (e : ∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max u (t + 1)} R) ℤ} (f : N ⟶ N'), roosF.obj (mappingCone f) ≅ mappingCone (roosF.map f)) (hnat : AugmentationNaturality (ringedSiteModules.{max u (t + 1)} R)), ShiftFormula cs ∧ (∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max u (t + 1)} R) ℤ} (f : N ⟶ N'), ConeFormula f (e f)) ∧ ConeCompatibility cs e ∧ ConeAugmentation e hnat ∧ ShiftAugmentation cs",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-21",
+  "note": "Reuses CategoryTheory.roosF, roosP, roosU, roosPmap, roosProj and roosAugment from def-weil-strict-roos-model, added as an already landed statement dependency. Helper predicates express each clause with actual component maps; no second Roos functor or arbitrary unspecified comparison is introduced. Coherent shifts are required jointly with the cone and augmentation compatibility equations.",
+  "fixed_by": "NT-stage2-cc-c2d3aa63e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2d3aa63e",
+  "group": "N7",
+  "result": "fix",
+  "note": "Read item node, all stmt_deps, StrictRoosModel, TowerTransitionEndomorphism (s=1-T), DerivedLimit, Mathlib MappingCocone/leftShift signs. Lean coordinates: roosProj=+v, mappingCocone.snd=+u, so CoordinateCalculus = d(v,u)=(dv,-du-s v). Recomputed ConeFormula Φ(b,a,b',a')=(b,b',a,-a') (ΦD=D'Φ), ShiftFormula (v,(-1)^r u) chain map and coherent, boundary/inclusion compatibility (linear in Mathlib's mor3 sign), cone/shift augmentation identities, DerivedRoos (mappingCocone_triangle_distinguished in Mathlib); existentials e and cs pinned. Reuses landed roosF/roosAugment; adding def-weil-strict-roos-model to stmt_deps allowed and required by stage-1 note; lean.statement verbatim; universes are those of det-pe-products-derived. FIX (H9): removed 3 unused proof-only imports (ProEtaleProductsDerived, RoosCoordinatesQuasiIso, RoosCommShift); fixes/RoosConeCalculus.lean compiles clean 13.2 s (delivered 15.3 s clean). Advisory: public import ProEtaleSurjectiveTowerDerivedLimit is needed for its HasSheafify instances (removing it fails at 263)."
  }
 }

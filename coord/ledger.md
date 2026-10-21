@@ -20028,3 +20028,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:52 L: merged deliver/Q19/lem-cbc-derived-tower-evaluation-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q31/lem-sfb-common-field-lattice-generators (reviewer FIX; first push; new nodes: 0); claim not held by Q31: not your claim
 - 2026-10-21T03:52:24Z L: superseded stage-1 delivery Q26/lem-cbc-strict-quotient-pullback-computation at 6ccfd3feaba9f080648e76e843cff2f422acc016; current completion retained; packet archived at refs/superseded/Q26/lem-cbc-strict-quotient-pullback-computation/6ccfd3feaba9f080648e76e843cff2f422acc016; stale return retired.
+- 03:52 L: merged deliver/Q08/lem-sfb-proper-geometric-fibre-torsion-bound (stage 2; reviewer PASS; parallel immutable checks)
+- 03:52 L: merged deliver/Q58/sk-def-sfb-coefficient-comparisons (stage 2; reviewer PASS; parallel immutable checks)
+- 03:52 L: merged deliver/N7/lem-pe-roos-cone-calculus (stage 2; reviewer FIX; parallel immutable checks)
+- 03:52 L: merged deliver/Q15/lem-sfb-finite-proper-classical-coproducts (stage 2; reviewer PASS; parallel immutable checks)
