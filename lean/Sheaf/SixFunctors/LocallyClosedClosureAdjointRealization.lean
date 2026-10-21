@@ -9,9 +9,7 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.SixFunctors.EtaleLocallyClosedExtensionComparison
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient
-public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
-public import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
+public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
@@ -20,12 +18,13 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.CategoryTheory.ExactDerivedAdjunctionBounds
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.SixFunctors.Finite.Exact
 
 /-! # Closure realization of a locally closed exceptional adjoint
 
@@ -461,6 +460,156 @@ class SfLocallyClosedClosureRealization
   conjugation : SfClosureEtaleConjugationCompatibility
     (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) s c v hs
 
+/-- Normalize a comparison by its induced automorphism on the source. -/
+private theorem closure_normalized_iso_exists
+    {C D : Type*} [Category C] [Category D]
+    (F G : C ⥤ D) (R : D ⥤ C)
+    (α : F ⋙ R ≅ 𝟭 C) (β : G ⋙ R ≅ 𝟭 C) (e₀ : F ≅ G) :
+    ∃ e : F ≅ G, Functor.isoWhiskerRight e R ≪≫ β = α := by
+  let γ := Functor.isoWhiskerRight e₀ R ≪≫ β
+  let τ := γ.symm ≪≫ α
+  let θ := (Functor.leftUnitor F).symm ≪≫
+    Functor.isoWhiskerRight τ F ≪≫ Functor.leftUnitor F
+  refine ⟨θ ≪≫ e₀, ?_⟩
+  apply Iso.ext
+  ext X
+  change R.map (θ.hom.app X ≫ e₀.hom.app X) ≫ β.hom.app X = α.hom.app X
+  rw [R.map_comp, Category.assoc]
+  have hθ : θ.hom.app X = F.map (τ.hom.app X) := by simp [θ]
+  rw [hθ]
+  change (F ⋙ R).map (τ.hom.app X) ≫ γ.hom.app X = α.hom.app X
+  calc
+    _ = γ.hom.app X ≫ τ.hom.app X := γ.hom.naturality (τ.hom.app X)
+    _ = _ := by simp [τ]
+
+/-- Finite constant-coefficient realization reflects natural isomorphisms. -/
+private def closure_untransport_iso
+    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}}
+    (F G : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} A)) ⥤
+      Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} A)))
+    (e : sfIntrinsicTransport A F ≅ sfIntrinsicTransport A G) : F ≅ G :=
+  (((sfIntrinsicModuleEquivalence X A).congrLeft).trans
+    ((sfIntrinsicModuleEquivalence Y A).congrRight)).functor.preimageIso e
+
+/-- Proper/open interchange specialized to the Cartesian closure square. -/
+private theorem closure_proetale_iso
+    (A : Type u) [CommRing A] [Finite A] {S V T : Scheme.{u}}
+    (s : S ⟶ T) [IsImmersion s] [QuasiCompact s]
+    (c : S ⟶ V) (v : V ⟶ T) [IsClosedImmersion c] [IsOpenImmersion v]
+    (hs : c ≫ v = s) :
+    Nonempty ((ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) c ⋙
+      ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} A)) v) ≅
+      (ProEtale.openImmersionLowerShriek
+        (ModuleCat.{u + 1} (ULift.{u + 1} A)) s.toImage ⋙
+        ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) s.imageι)) := by
+  let M := ModuleCat.{u + 1} (ULift.{u + 1} A)
+  have sq : IsPullback s.toImage c s.imageι v := by
+    have sq' : IsPullback (𝟙 S) c s v :=
+      IsPullback.of_horiz_isIso_mono ⟨by simpa using hs.symm⟩
+    apply (isPullback_of_isClosedImmersion c s.imageι s.toImage v
+      (by simpa using hs) ?_).flip
+    simpa only [Scheme.Hom.imageι, Scheme.IdealSheafData.ker_subschemeι] using
+      (Scheme.Hom.ker_of_isPullback s v sq').symm
+  let r := pullback.snd s.imageι v
+  let k := pullback.fst s.imageι v
+  have := sfProperOpenSheafComparison_isIso A s.imageι v
+  let e := asIso (sfProperOpenSheafComparison A r k v s.imageι
+    (IsPullback.of_hasPullback s.imageι v).flip)
+  let et : sfIntrinsicTransport A (ProEtale.lowerStar M r ⋙
+      ProEtale.openImmersionLowerShriek M v) ≅
+      sfIntrinsicTransport A (ProEtale.openImmersionLowerShriek M k ⋙
+        ProEtale.lowerStar M s.imageι) :=
+    sfIntrinsicTransportComp A _ _ ≪≫
+      Functor.isoWhiskerRight (sfProperOpenDirectImageCoordinates A r).symm _ ≪≫ e ≪≫
+      Functor.isoWhiskerLeft _ (sfProperOpenDirectImageCoordinates A s.imageι) ≪≫
+      (sfIntrinsicTransportComp A _ _).symm
+  let ef := closure_untransport_iso A _ _ et
+  let q := sq.isoPullback
+  let aq : ProEtale.lowerStar M q.hom ⊣ ProEtale.upperStar M q.hom :=
+    (ProEtale.lowerStarEquivalence M q).toAdjunction.ofNatIsoRight
+      (ProEtale.upperStarIsoLowerStarInv M q).symm
+  let aj := (aq.comp (ProEtale.openImmersionLowerShriekUpperStarAdjunction M k)).ofNatIsoRight
+    ((ProEtale.upperStarComp M q.hom k).symm ≪≫
+      ProEtale.upperStarCongr M sq.isoPullback_hom_fst)
+  let eqj : ProEtale.lowerStar M q.hom ⋙ ProEtale.openImmersionLowerShriek M k ≅
+      ProEtale.openImmersionLowerShriek M s.toImage :=
+    aj.leftAdjointUniq (ProEtale.openImmersionLowerShriekUpperStarAdjunction M s.toImage)
+  refine ⟨?_⟩
+  exact Functor.isoWhiskerRight
+      ((ProEtale.lowerStarComp M q.hom r ≪≫
+        ProEtale.lowerStarCongr M sq.isoPullback_hom_snd).symm) _ ≪≫
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ ef ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eqj _
+
+/-- Closed direct image is exact with the canonical quasi-compact open complement. -/
+private theorem closure_proetale_exact
+    (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}} [IsNoetherian X]
+    (i : Z ⟶ X) [IsClosedImmersion i] :
+    PreservesFiniteColimits (ProEtale.lowerStar (ModuleCat.{u + 1} A) i) := by
+  let W : X.Opens := ⟨(Set.range i)ᶜ,
+    (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩
+  apply ProEtale.preservesFiniteColimits_lowerStar_of_isCompl (R := A) i W.ι
+  rw [Scheme.Opens.range_ι]
+  exact isCompl_compl
+
+/-- The same closed image has its ordinary unbounded right adjoint. -/
+private theorem closure_proetale_adjoint
+    (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}} [IsNoetherian X]
+    (i : Z ⟶ X) [IsClosedImmersion i] :
+    (ProEtale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor.IsLeftAdjoint := by
+  let W : X.Opens := ⟨(Set.range i)ᶜ,
+    (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩
+  have hij : IsCompl (Set.range i) (Set.range W.ι) := by
+    rw [Scheme.Opens.range_ι]
+    exact isCompl_compl
+  exact (ProEtale.derivedLowerStarClosedUpperShriekAdjunction (R := A) i W.ι hij).isLeftAdjoint
+
+/-- Exactness gives both lower-bound fields without imposing bounds on the input. -/
+@[instance_reducible]
+private def closure_extension_comparison
+    {C : Type c₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{d₁} C]
+    {D : Type c₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{d₂} D]
+    (F E : C ⥤ D) [F.Additive] [E.Additive] (R : D ⥤ C)
+    (α : F ⋙ R ≅ 𝟭 C) (β : E ⋙ R ≅ 𝟭 C)
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (e : F ≅ E) (he : Functor.isoWhiskerRight e R ≪≫ β = α) :
+    SfClosureExtensionComparison F E R α β where
+  sheafIso := e
+  normalization := he
+  lowerF K a h := by
+    have := h
+    exact F.isGE_mapDerivedCategory_obj K a
+  lowerE K a h := by
+    have := h
+    exact E.isGE_mapDerivedCategory_obj K a
+
+/-- The unit and counit identities for conjugation of an invertible left comparison. -/
+private theorem closure_conjugation
+    {C D : Type*} [Category C] [Category D]
+    {F E : C ⥤ D} {R R' : D ⥤ C} (a : F ⊣ R) (b : E ⊣ R') (q : F ≅ E) :
+    (∀ L, a.unit.app L ≫ R.map (q.hom.app L) ≫
+      (conjugateIsoEquiv a b q.symm).hom.app (E.obj L) = b.unit.app L) ∧
+    (∀ M, q.hom.app (R.obj M) ≫
+      E.map ((conjugateIsoEquiv a b q.symm).hom.app M) ≫ b.counit.app M =
+        a.counit.app M) := by
+  let r := conjugateIsoEquiv a b q.symm
+  have hu (L : C) : a.unit.app L ≫ r.hom.app (F.obj L) =
+      b.unit.app L ≫ R'.map (q.inv.app L) :=
+    unit_conjugateEquiv a b q.inv L
+  have hc (M : D) : E.map (r.hom.app M) ≫ b.counit.app M =
+      q.inv.app (R.obj M) ≫ a.counit.app M :=
+    conjugateEquiv_counit a b q.inv M
+  constructor
+  · intro L
+    change a.unit.app L ≫ R.map (q.hom.app L) ≫ r.hom.app (E.obj L) = _
+    rw [r.hom.naturality, ← Category.assoc, hu, Category.assoc, ← R'.map_comp]
+    simp
+  · intro M
+    change q.hom.app (R.obj M) ≫ E.map (r.hom.app M) ≫ b.counit.app M = _
+    rw [hc, ← Category.assoc]
+    simp
+
 /-- The closure compactification realizes the locally closed functor and its adjoint.
 
 Source: blueprint main-20261015, site-comparison proof, second paragraph; component
@@ -475,10 +624,11 @@ makes the canonical factor to the image a quasi-compact open immersion.
 Composition gives separated finite type V and closure over k and the compactification.
 4. The closure is Noetherian; its open complements are quasi-compact. Finite type over
 k gives the finite dimension bound, with D=0 for the empty closure.
-5. Closed direct images and open extensions are exact on both ordinary sites, so their
-termwise derived functors preserve every lower cohomological bound.
-6. The normalized closed/open interchange comparisons give the sheaf isomorphisms;
-localization of the degreewise isomorphisms gives q_e and q_p on unbounded categories.
+5. Finite etale direct image and pro-etale closed direct image with quasi-compact
+complement are exact. Exact open extensions and all composites preserve lower bounds.
+6. Use the etale normalized comparison and pro-etale proper/open interchange for the
+Cartesian closure square. Reflect the latter through canonical coefficient realization
+and normalize its restriction. Termwise localization gives q_e and q_p.
 7. Exactness of the closed image identifies ordinary compact support with E_e; ambient
 exceptional-adjoint existence applies to this same compactification and finite ring.
 8. Conjugate q_e inverse under the pasted and ambient adjunctions. The mate identities
@@ -487,8 +637,8 @@ are precisely preservation of units and counits.
 bounds of M, so v* M is bounded constructible.
 10. The right adjoint to the exact termwise closed pushforward preserves every lower
 bound (lem-pur-exact-derived-adjunction-bounds), hence J_e M is bounded below.
-11. Exact open/closed extensions retain this lower bound; the closed maps are qcqs, so
-the bounded-below direct-image comparison applies to H and to every bounded-below L.
+11. Exact open/closed extensions retain this lower bound for every bounded-below L,
+giving the two comparison-domain fields required by the conclusion bundle.
 -/
 theorem locallyClosedClosureAdjointRealization
     (D : WeilConjectures.FiniteFieldDatum.{u})
@@ -505,6 +655,90 @@ theorem locallyClosedClosureAdjointRealization
     (c : S ⟶ V) (v : V ⟶ T) [IsClosedImmersion c] [IsOpenImmersion v]
     (hs : c ≫ v = s) :
     Nonempty (SfLocallyClosedClosureRealization D l E n s c v hs) := by
-  sorry
+  have : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n _hn
+  have : IsNoetherian T := {
+    __ := LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (.of D.k))
+    __ := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of D.k)) }
+  have : IsNoetherian S := {
+    __ := LocallyOfFiniteType.isLocallyNoetherian (S ↘ Spec (.of D.k))
+    __ := QuasiCompact.compactSpace_of_compactSpace (S ↘ Spec (.of D.k)) }
+  have : TopologicalSpace.NoetherianSpace V := v.isEmbedding.isInducing.noetherianSpace
+  have : IsNoetherian V := isNoetherian_of_locallyOfFiniteType v
+  have : IsNoetherian s.image := isNoetherian_of_locallyOfFiniteType s.imageι
+  have : QuasiCompact s := inferInstance
+  have : IsOpenImmersion s.toImage := inferInstance
+  have : IsSeparated s := IsSeparated.of_comp s (T ↘ Spec (.of D.k))
+  let geometry : SfLocallyClosedClosureGeometry s c v (T ↘ Spec (.of D.k)) := {
+    compactComplementsV := fun Z i _ ↦ TopologicalSpace.NoetherianSpace.isCompact _
+    compactComplementsClosure := fun Z i _ ↦
+      TopologicalSpace.NoetherianSpace.isCompact _
+    dimensionBound := exists_topologicalKrullDim_le (s.imageι ≫ T ↘ Spec (.of D.k))
+    imageKernel := fun U ↦ Scheme.Hom.ker_apply s U }
+  let A := ULift.{u + 1} (Padic.coefficientExtensionRing l E n)
+  have : PreservesFiniteColimits (Etale.lowerStar (ModuleCat.{u + 1} A) c) := inferInstance
+  have : PreservesFiniteColimits (Etale.lowerStar (ModuleCat.{u + 1} A) s.imageι) :=
+    inferInstance
+  have : PreservesFiniteColimits (ProEtale.lowerStar (ModuleCat.{u + 1} A) c) :=
+    closure_proetale_exact A c
+  have : PreservesFiniteColimits (ProEtale.lowerStar (ModuleCat.{u + 1} A) s.imageι) :=
+    closure_proetale_exact A s.imageι
+  obtain ⟨_, he, -⟩ :=
+    (etale_locallyClosed_extension_comparison (A := A) T (𝟙 T) (𝟙 T)).2 s
+  obtain ⟨ee, -, -⟩ := he c v hs
+  obtain ⟨ee', hee'⟩ := closure_normalized_iso_exists _ _ _
+    (etaleFactorizationRestrictionIso (A := A) s c v hs)
+    (etaleLocallyClosedExtensionRestrictionIso (A := A) s inferInstance) ee.symm
+  obtain ⟨ep⟩ := closure_proetale_iso (Padic.coefficientExtensionRing l E n) s c v hs
+  obtain ⟨ep', hep'⟩ := closure_normalized_iso_exists _ _ _
+    (sfProEtaleClosedOpenRestrictionIso A s c v hs)
+    (sfProEtaleClosureRestrictionIso A s) ep
+  let sites : SfLocallyClosedClosureSites A s c v hs := {
+    etale := closure_extension_comparison _ _ _ _ _ ee' hee'
+    proetale := closure_extension_comparison _ _ _ _ _ ep' hep' }
+  have : (ProEtale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor.IsLeftAdjoint :=
+    closure_proetale_adjoint A c
+  have : (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
+      (sfClosureCompactification s)).IsLeftAdjoint :=
+    Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A (sfClosureCompactification s)
+  let adjoints : SfLocallyClosedClosureAdjoints A s c v hs := {
+    boundedRestriction := by
+      intro M hM
+      obtain ⟨hc, a, b, -, hz⟩ := hM
+      have hsource : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) T M := by
+        refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun i ↦
+          (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc i)⟩
+        · exact (DerivedCategory.isGE_iff M a).2 (fun i hi ↦ hz i (.inl hi))
+        · exact (DerivedCategory.isLE_iff M b).2 (fun i hi ↦ hz i (.inr hi))
+      obtain ⟨⟨⟨a', ha'⟩, ⟨b', hb'⟩⟩, hc'⟩ := hsource.mapDerivedCategory_upperStar v
+      refine ⟨fun i ↦
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc' i),
+        min a' b', b', min_le_right _ _, fun i hi ↦ ?_⟩
+      rcases hi with hi | hi
+      · exact (DerivedCategory.isGE_iff _ a').1 ha' i (hi.trans_le (min_le_left _ _))
+      · exact (DerivedCategory.isLE_iff _ b').1 hb' i hi
+    boundedAdjoint := by
+      intro M hM
+      obtain ⟨a, b, hab, hz⟩ := hM.2
+      have : M.IsGE a := (DerivedCategory.isGE_iff M a).2 (fun i hi ↦ hz i (.inl hi))
+      have : ((Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory.obj M).IsGE a :=
+        Functor.isGE_mapDerivedCategory_obj _ M a
+      refine ⟨a, ?_⟩
+      exact exactDerivedAdjunction_isGE (Etale.lowerStar (ModuleCat.{u + 1} A) c)
+        (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor
+        ((Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorIsoMapDerivedCategory |>
+          Functor.isoWhiskerLeft DerivedCategory.Q |>.trans
+            (Etale.lowerStar (ModuleCat.{u + 1} A) c).mapDerivedCategoryFactors)
+        (Adjunction.ofIsLeftAdjoint
+          (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor) _ a
+    comparisonDomain := by
+      intro L a hL
+      have := hL
+      exact ⟨Functor.isGE_mapDerivedCategory_obj _ L a,
+        Functor.isGE_mapDerivedCategory_obj _ L a⟩ }
+  refine ⟨{ conjugation := ?_ }⟩
+  exact closure_conjugation (sfClosureEtalePastedAdjunction A c v)
+    (sfClosureEtaleAmbientAdjunction A s c v hs)
+    (Functor.mapDerivedCategoryNatIso sites.etale.sheafIso)
 
 end AlgebraicGeometry

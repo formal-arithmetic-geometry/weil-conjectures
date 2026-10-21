@@ -90,13 +90,11 @@
    }
   },
   {
-   "text": "On the etale site, the abelian direct images $c_{e,*},i_{e,*}$ are exact by [lem-pur-etale-supported-kernel-adjunction]. The constant-$A$ module direct image has the same sections and commutes with the forgetful functors to abelian sheaves [def-weil-pbc-direct-image]; module kernels are sectionwise and module cokernels are the sheafified sectionwise ones, as for abelian sheaves [def-weil-sheaf-of-modules-category]. So forgetting scalars is exact and faithful, hence reflects exactness, and the module functors $c_{e,*},i_{e,*}$ are exact as well. The open functors $v_{e,!},u_{e,!}$ are exact by [lem-weil-pbc-extension-by-zero-exact]. On the pro-etale site, apply [lem-exc-proetale-closed-exact] to $c$ and $i$; their open complements are quasi-compact by Steps 1 and 4. The functors $v_{p,!},u_{p,!}$ are exact by [lem-weil-extension-by-zero-exact]. Each composite $F_\\tau$ and $E_\\tau$ is therefore exact: applying its two factors successively to a short exact sequence gives a short exact sequence. By [lem-weil-pbc-exact-functor-derived-factorization] they induce termwise functors on the ordinary unbounded derived categories. By [lem-weil-pbc-exact-functor-complex-cohomology], $\\mathcal H^r(GK)\\cong G\\mathcal H^r(K)$ for each such exact factor or composite $G$. Consequently each preserves every lower bound, with no restriction on upper cohomology.",
+   "text": "On etale ModuleCat A sheaves, closed direct image preserves finite colimits by [lemma-weil-pbc-finite-direct-image-exact], since a closed immersion is finite. Its finite-limit preservation is the ordinary right-adjoint instance. On the pro-etale site take the canonical complementary open in each Noetherian ambient scheme; it is quasi-compact. Apply [lem-exc-proetale-closed-exact] to c and the image inclusion. The published fixed-scalar open-extension instances give [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact]. Composition proves exactness of both factorizations. The exact termwise functor and its cohomology comparison [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-exact-functor-complex-cohomology], via Functor.isGE_mapDerivedCategory_obj, preserve every lower bound.",
    "uses": [
-    "lem-pur-etale-supported-kernel-adjunction",
-    "def-weil-pbc-direct-image",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-extension-by-zero-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
     "lem-exc-proetale-closed-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
     "lem-weil-extension-by-zero-exact",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-complex-cohomology"
@@ -108,12 +106,13 @@
    }
   },
   {
-   "text": "On etale module sheaves, apply [lem-sfb-etale-locally-closed-extension-comparison] with $X=T$, $a=s$, $W=V$, $h=c$ and with the canonical closure $\\bar S$. Its normalized identification $i_{e,*}u_{e,!}\\cong v_{e,!}c_{e,*}$ has an inverse $q_e:F_e\\to E_e$, still restricting to the identity on $S$. On pro-etale module sheaves, [lem-sfb-locally-closed-extension-coherence] gives precisely the normalized identification $q_p:v_{p,!}c_{p,*}\\cong i_{p,*}u_{p,!}$. For each immersion involved, [prop-weil-pbc-proetale-constant-ring-map] identifies the inverse image of the finite constant-$A$ ring sheaf with the specified constant ring sheaf on its source. Thus the coefficients satisfy the pulled-back-ring hypothesis of that node, including its canonical scalar maps. Apply these natural transformations in every degree of a complex. Naturality makes them chain maps and their inverses remain chain maps. Step 5 ensures that all four functors invert quasi-isomorphisms after localization; [lem-weil-pbc-localization-universal-property], clause (2), descends the two isomorphisms and their inverses to the unbounded derived categories. These are the required $q_\\tau$, with the specified sheaf normalization.",
+   "text": "Apply [lem-sfb-etale-locally-closed-extension-comparison] to s,c,v and invert its sheaf comparison. For pro-etale sheaves, scheme-image ideal base change identifies the square (s.toImage,c,s.imageι,v) as Cartesian. Specialize [lem-exc-proetale-proper-open-sheaf-comparison] to the proper closed map s.imageι and the open v. Its canonical coefficient realization gives an isomorphism in intrinsic coordinates; full faithfulness of the equivalences in [def-weil-proetale-inverse-image] reflects it back to fixed-scalar sheaves. Identify the specified square with the categorical pullback, compose direct images, and identify the resulting open extension using uniqueness of its left adjunction. This yields F_p ≅ E_p. For either site, any initial isomorphism e can be normalized as follows: if gamma is its restriction identification and alpha is the specified F restriction, the automorphism tau=gamma^{-1} alpha of the identity acts via F. Precomposing e with F(tau) makes its restriction exactly alpha, by naturality of gamma. This supplies the required normalization against the specified unit/counit restriction isomorphisms. Derived comparisons are already defined in the module by exact termwise localization [lem-weil-pbc-localization-universal-property].",
    "uses": [
     "lem-sfb-etale-locally-closed-extension-comparison",
-    "lem-sfb-locally-closed-extension-coherence",
-    "lem-weil-pbc-localization-universal-property",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "def-nagata-scheme-theoretic-image",
+    "lem-exc-proetale-proper-open-sheaf-comparison",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
@@ -122,12 +121,13 @@
    }
   },
   {
-   "text": "Use the compactification $(u,i)$ from Step 3 in [def-amb-etale-compact-support]. It gives $Rs_!^{(u,i)}=Ri_{e,*}\\,u_{e,!}$. The module sheaf functor $i_{e,*}$ is exact by Step 5 (via [lem-pur-etale-supported-kernel-adjunction]), so [lem-weil-pbc-exact-functor-derived-factorization] identifies its total right derived functor with its termwise functor on every unbounded complex. Therefore $Rs_!^{(u,i)}=i_{e,*}u_{e,!}=E_e$ under the specified canonical identifications. The hypotheses of [thm-amb-etale-exceptional-adjoint] hold: $S,\\bar S,T$ are Noetherian, $u$ is open, $i$ is proper of finite type and $A$ is a finite commutative ring. Hence its chosen ambient right adjoint $s^\\times$ is a right adjoint to this same $E_e$.",
+   "text": "The existing sfClosureEtaleCompactSupportIso identifies ordinary compact support at the canonical closure compactification with the exact termwise closure extension, using [def-amb-etale-compact-support, lem-weil-pbc-exact-functor-derived-factorization] and Step 5 exactness. Apply [thm-amb-etale-exceptional-adjoint] to this compactification and finite coefficient ring. Supply the etale closed right-adjoint instance from [lem-exc-closed-ambient]. On the pro-etale site, use [lem-exc-proetale-closed-support] in its published fixed-scalar ordinary-unbounded realization with the canonical quasi-compact open complement. These are the precise adjoints appearing in the conclusion bundle.",
    "uses": [
     "def-amb-etale-compact-support",
-    "lem-pur-etale-supported-kernel-adjunction",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "thm-amb-etale-exceptional-adjoint"
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-exc-closed-ambient",
+    "lem-exc-proetale-closed-support"
    ],
    "elementary": false,
    "source": {
@@ -147,8 +147,9 @@
    }
   },
   {
-   "text": "Let $M\\in D^b_c(T_e,A)$, and choose $a\\le b$ outside which its cohomology sheaves vanish. By [prop-weil-pbc-inverse-image-modules-exact] the constant-coefficient inverse image $v_e^*$ is exact. The cohomology identification of [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^r(v_e^*M)\\cong v_e^*\\mathcal H^r(M)$, so it vanishes outside the same interval. For each of the finitely many relevant cohomology sheaves, intersect its finite constructible locally closed stratification with $V$. The resulting strata remain locally closed and are constructible in $V$ by [lem-weil-pbc-constructible-open-restriction]. Restrict each etale cover trivializing the finite locally constant $A$-module on a stratum to its open intersection with $V$; it still trivializes the same finite module. Thus this is a finite lisse stratification on $V$, as required by [def-weil-pbc-constructible-complexes]. Consequently $N=v_e^*M\\in D^b_c(V_e,A)$, with lower bound $a$.",
+   "text": "Translate the project bounded-constructible predicate to the equivalent source-library predicate: [lem-weil-pbc-constructible-etale-module-sheaf-comparison] identifies each cohomology constructibility condition, and DerivedCategory.isGE_iff and isLE_iff identify the interval bounds. The existing source theorem Etale.DerivedCategory.boundedConstructible.mapDerivedCategory_upperStar applies to v. It uses exact inverse image [prop-weil-pbc-inverse-image-modules-exact], the exact cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology], and pullback of constructible stratifications [lem-weil-pbc-constructible-open-restriction]. Translate back; the converse translation takes the interval from min a b to b, so also covers the zero complex and unrelated presentations of the two bounds.",
    "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-constructible-open-restriction",
@@ -161,10 +162,10 @@
    }
   },
   {
-   "text": "The adjunction $c_{e,*}\\dashv Rc_e^!$ is the one on ordinary unbounded derived categories of [lem-exc-closed-ambient]. Its left functor is the termwise module direct image, exact by Step 5 (abelian exactness of [lem-pur-etale-supported-kernel-adjunction] transported through the forgetful functor), with the required localization factorization from [lem-weil-pbc-exact-functor-derived-factorization]. Apply clause (1) of [lem-pur-exact-derived-adjunction-bounds]: $Rc_e^!$ preserves every standard lower cohomological bound. Since Step 9 gives $N\\in D^{\\ge a}(V_e,A)$, it follows that $H=Rc_e^!N=J_eM\\in D^{\\ge a}(S_e,A)\\subset D^+(S_e,A)$. Only the bounded-below assertion is needed here; no constructibility claim about this value of the closed right adjoint is used.",
+   "text": "Choose a lower bound a directly from the bounded-constructible interval for M. Exact v* preserves it. Apply clause (1) of [lem-pur-exact-derived-adjunction-bounds] to F=c_* and FD=Rc_* with its chosen right adjoint. The factorization required by that theorem is Q FD ≅ Q D(c_*) ≅ c_*^C Q, obtained from rightDerivedFunctorIsoMapDerivedCategory and mapDerivedCategoryFactors. Exactness of c_* is Step 5; the ordinary unbounded adjunction is [lem-exc-closed-ambient]. Hence the actual chosen J_e M lies in degrees at least a.",
    "uses": [
     "lem-exc-closed-ambient",
-    "lem-pur-etale-supported-kernel-adjunction",
+    "lemma-weil-pbc-finite-direct-image-exact",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-pur-exact-derived-adjunction-bounds"
    ],
@@ -175,11 +176,11 @@
    }
   },
   {
-   "text": "For any $L\\in D^+(S_e,A)$ choose a lower bound for $L$. Step 5 preserves this bound under $c_{e,*},u_{e,!}$ and either further extension $v_{e,!},i_{e,*}$. The same holds for $H$ by Step 10. The closed immersions $c,i$ are quasi-compact by Steps 1--4 and separated by [lem-weil-pbc-separated-cancellation], hence quasi-separated by [lem-pc-separated-quasi-separated]. Thus [prop-weil-pbc-comparison-direct-image] is defined for $c$ at $L,H$, giving $\\nu_V^*Rc_{e,*}L\\cong Rc_{p,*}\\nu_S^*L$ and the same formula for $H$. It is also defined for $i$ at $u_{e,!}L,u_{e,!}H$, which are bounded below, and gives $\\nu_T^*Ri_{e,*}u_{e,!}L\\cong Ri_{p,*}\\nu_{\\bar S}^*u_{e,!}L$, likewise for $H$. More generally the open immersions $u,v$ are quasi-compact and separated by the same geometry, so the cited comparison can be applied at every intervening bounded-below source as well. This verifies the domain assertion after either factorization of the immersion.",
+   "text": "For every L in degrees at least a, Step 5 exactness gives the same bound after etale closed direct image c_* and open extension along s.toImage. These are the comparisonDomain fields of the existing conclusion bundle. The corresponding lowerF/lowerE fields also give bounds after either full factorization. Quasi-compactness and separatedness of the intervening immersions follow from Steps 1--4 and [lem-weil-pbc-separated-cancellation, lem-pc-separated-quasi-separated]. Thus the bounded-below comparison domain mentioned in the mathematical statement needs no further direct-image-comparison theorem to prove these bound fields.",
    "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-separated-cancellation",
-    "lem-pc-separated-quasi-separated",
-    "prop-weil-pbc-comparison-direct-image"
+    "lem-pc-separated-quasi-separated"
    ],
    "elementary": false,
    "source": {
@@ -202,33 +203,32 @@
   "lem-kun-dimension-finite-type",
   "def-kun-dimension",
   "def-kun-topological-krull-dimension",
-  "lem-pur-etale-supported-kernel-adjunction",
-  "def-weil-pbc-direct-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-extension-by-zero-exact",
+  "lemma-weil-pbc-finite-direct-image-exact",
   "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-sfb-etale-locally-closed-extension-comparison",
-  "lem-sfb-locally-closed-extension-coherence",
+  "lem-exc-proetale-proper-open-sheaf-comparison",
+  "def-weil-proetale-inverse-image",
   "lem-weil-pbc-localization-universal-property",
-  "prop-weil-pbc-proetale-constant-ring-map",
   "def-amb-etale-compact-support",
   "thm-amb-etale-exceptional-adjoint",
+  "lem-exc-closed-ambient",
+  "lem-exc-proetale-closed-support",
   "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-constructible-open-restriction",
   "def-weil-pbc-constructible-complexes",
-  "lem-exc-closed-ambient",
   "lem-pur-exact-derived-adjunction-bounds",
-  "lem-pc-separated-quasi-separated",
-  "prop-weil-pbc-comparison-direct-image"
+  "lem-pc-separated-quasi-separated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-  "place": "Second paragraph, locally closed Rs^! comparison: explicit geometric and bounded-input prerequisites, closure compactification and adjunction conjugation; component Stacks places are given in the proof steps."
+  "place": "Second paragraph, locally closed Rs^! comparison. Lean proof by S8: canonical Noetherian closure geometry; published finite closed exactness and proper/open pro-etale comparison in canonical realization coordinates; normalized exact comparisons; exact-derived lower bounds and Mathlib mate unit/counit identities. All existing declaration signatures and the unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -400,18 +400,14 @@
  },
  "tool_uses": [
   "lem-kun-dimension-finite-type",
-  "lem-pur-etale-supported-kernel-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-exc-proetale-closed-exact",
   "lem-weil-extension-by-zero-exact",
   "lem-sfb-etale-locally-closed-extension-comparison",
-  "lem-sfb-locally-closed-extension-coherence",
   "thm-amb-etale-exceptional-adjoint",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-exc-closed-ambient",
-  "lem-pur-exact-derived-adjunction-bounds",
-  "prop-weil-pbc-comparison-direct-image",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-pur-exact-derived-adjunction-bounds"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -463,5 +459,15 @@
   "group": "Q39",
   "result": "pass",
   "note": "Read node, all stmt_dep records, module in full and side-live sources of etaleLocallyClosedExtension/restriction isos, sfIntrinsicExtensionByZero/Transport. Only the lean field changed vs live; no name clash; statement verbatim; all 22 declarations present; one sorry; docstrings carry source and blueprint tags plus the 11 steps. Hypotheses match the node with no stronger assumptions (IsImmersion s redundant). All conclusion clauses present: scheme image with ideal=kernel; Noetherian and qc-complement geometry; compactification; dim bound with D:ℕ; exactness and lower bounds for F,E on both sites; q_tau = mapDerivedCategoryNatIso of sheafIso pinned uniquely by restriction-to-S normalization (etale: inverse of dep's equation; pro-etale: open unit/closed counit, transported to intrinsic categories via the published equivalence); Rs_!≅E_e canonical; J_e≅s^x via conjugateIsoEquiv(q_e.symm), direction and unit/counit equations checked; D^b_c restriction, J_eM bounded below, comparison-domain bounds. Edge cases (empty, identity, nilpotent, negative bounds, n=1) covered. Advisory only: J_p via fixed-scalar closed adjoint (setup only), unused private imports. Not recompiled per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261021T130149-L-2576697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
