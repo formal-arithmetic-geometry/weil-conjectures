@@ -20958,3 +20958,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q16/lem-trf-site-one-sided-tensor-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/NC/lem-sfb-ringed-site-bounded-dual-components (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/NM/lem-weil-pbc-kinjective-fiber-triangle-comparison (reviewer FIX; first push; new nodes: 0)
+- 08:09 L: merged deliver/NH/lem-weil-pbc-tensor-arrow-mate-right-unit (reviewer PASS; first push; new nodes: 0)

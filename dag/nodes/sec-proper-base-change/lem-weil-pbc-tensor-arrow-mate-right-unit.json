@@ -10,9 +10,45 @@
  "stmt_deps": [
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Bifunctoriality gives $(1_E\\otimes u)(c\\otimes1_{L\\mathbf1_{\\mathcal C}})=(c\\otimes1_{\\mathbf1_{\\mathcal D}})(1_{LK}\\otimes u)$: both sides are $c\\otimes u$. Naturality of $\\rho^{\\mathcal D}$ at $c:LK\\to E$ says $\\rho^{\\mathcal D}_E(c\\otimes1_{\\mathbf1_{\\mathcal D}})=c\\rho^{\\mathcal D}_{LK}$. Thus, by the definition of $k$, $k_E(c\\otimes1_{L\\mathbf1_{\\mathcal C}})=c k_{LK}$, as maps $LK\\otimes L\\mathbf1_{\\mathcal C}\\to E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map and its adjunct description; agent-written right-action calculation from the hypotheses."
+   }
+  },
+  {
+   "text": "Compose the preceding equality on the right with $\\mu_{K,\\mathbf1_{\\mathcal C}}$. By the defining formula for $\\beta^c$ and the assumed right-action equation at $M=K$, $$k_E\\beta^c_{\\mathbf1_{\\mathcal C}}=c\\rho^{\\mathcal D}_{LK}(1_{LK}\\otimes u)\\mu_{K,\\mathbf1_{\\mathcal C}}=cL(\\rho^{\\mathcal C}_K).$$ Each expression has source $L(K\\otimes\\mathbf1_{\\mathcal C})$ and target $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map and its adjunct description; agent-written right-action calculation from the hypotheses."
+   }
+  },
+  {
+   "text": "Use the natural unit supplied in [lem-weil-pbc-adjunction-of-natural-bijection]. Its naturality at $\\rho^{\\mathcal C}_K:K\\otimes\\mathbf1_{\\mathcal C}\\to K$ reads $RL(\\rho^{\\mathcal C}_K)\\eta_{K\\otimes\\mathbf1_{\\mathcal C}}=\\eta_K\\rho^{\\mathcal C}_K$. Functoriality of $R$, the definition of $\\alpha^c$, and step 2 now give $$R(k_E)\\alpha^c_{\\mathbf1_{\\mathcal C}}=R(k_E\\beta^c_{\\mathbf1_{\\mathcal C}})\\eta_{K\\otimes\\mathbf1_{\\mathcal C}}=R(c)RL(\\rho^{\\mathcal C}_K)\\eta_{K\\otimes\\mathbf1_{\\mathcal C}}=R(c)\\eta_K\\rho^{\\mathcal C}_K.$$ This is the required equality from $K\\otimes\\mathbf1_{\\mathcal C}$ to $RE$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph: naturality of the adjunction unit and the formula for an adjunct; agent-written substitution at the right action."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+  "place": "First paragraph, first sentence (P=A); elementary expansion of right-action normalization for the arbitrary-arrow tensor mate, guided by Stacks Tags 0B56 and 0037."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +91,45 @@
    "results": "5 hits: 143, 521, 525, 1024, 1031",
    "date": "2026-10-21",
    "verdict": "no match: monoidal adjunction and right-unitor identities require full monoidal structures or concern functor composition units; they do not state the two arbitrary-arrow equalities for bifunctors with only natural right actions."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_app_tensor_comp_map_δ|rightAdjointLaxMonoidal_μ|rightUnitor_naturality",
+   "results": "25 hits; Mathlib/CategoryTheory/Dialectica/Monoidal.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: returned monoidal adjunction/action or bicategorical mate statements require additional monoidal structure or concern different unitors; none states both displayed arbitrary-arrow identities for the given bare tensor bifunctors. Candidate source read in Mathlib/CategoryTheory/Monoidal/Functor.lean, lines 940–1040, and Monoidal/Category.lean, lines 180–198."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For arbitrary tensor bifunctors with natural right unitors and a right-unital tensor comparison, the mate of c tensor identity at the unit is the adjunct R(c) eta followed by the right unitor",
+   "results": "8 hits; CategoryTheory.Bicategory.mateEquiv_id_comp_right, Mathlib.Tactic.Monoidal.evalWhiskerRight_id, CategoryTheory.Functor.LaxMonoidal.ofBifunctor.topMapᵣ, CategoryTheory.Bicategory.mateEquiv_leftUnitor_hom_rightUnitor_inv, CategoryTheory.Bicategory.mateEquiv_comp_id_right, CategoryTheory.MonoidalCategory.tensoringRight_η, HomologicalComplex.rightUnitor', CategoryTheory.mateEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: returned monoidal adjunction/action or bicategorical mate statements require additional monoidal structure or concern different unitors; none states both displayed arbitrary-arrow identities for the given bare tensor bifunctors. Candidate source read in Mathlib/CategoryTheory/Monoidal/Functor.lean, lines 940–1040, and Monoidal/Category.lean, lines 180–198."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between categories with tensor bifunctors and natural right actions: the adjunct of c tensor identity evaluated at the unit equals R(c) after the adjunction unit and right action",
+   "results": "8 hits; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.tensorRightAdjunction, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.unit_app_unit_comp_map_η, CategoryTheory.tensorLeftAdjunction, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.FunctorToTypes.adj",
+   "date": "2026-10-21",
+   "verdict": "no match: returned monoidal adjunction/action or bicategorical mate statements require additional monoidal structure or concern different unitors; none states both displayed arbitrary-arrow identities for the given bare tensor bifunctors. Candidate source read in Mathlib/CategoryTheory/Monoidal/Functor.lean, lines 940–1040, and Monoidal/Category.lean, lines 180–198."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_app_tensor_comp_map_δ|rightAdjointLaxMonoidal_μ|unit_app_unit_comp_map_η",
+   "results": "5 hits; 1019, 1024, 1121, 1145, 1169",
+   "date": "2026-10-21",
+   "verdict": "no match: returned monoidal adjunction/action or bicategorical mate statements require additional monoidal structure or concern different unitors; none states both displayed arbitrary-arrow identities for the given bare tensor bifunctors. Candidate source read in Mathlib/CategoryTheory/Monoidal/Functor.lean, lines 940–1040, and Monoidal/Category.lean, lines 180–198."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the right action X tensor unit to X and of an adjunction unit computes R(k) R(beta) eta when k beta equals c L(rho), for tensor bifunctors without associators",
+   "results": "8 hits; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionUnitIso_hom_naturality, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionUnitIso_inv_naturality_assoc, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionUnitIso_inv_naturality, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionUnitIso_hom_naturality_assoc, CategoryTheory.MonoidalCategory.MonoidalRightAction.unit_actionHomRight, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.MonoidalCategory.MonoidalRightAction.unit_actionHomRight_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: returned monoidal adjunction/action or bicategorical mate statements require additional monoidal structure or concern different unitors; none states both displayed arbitrary-arrow identities for the given bare tensor bifunctors. Candidate source read in Mathlib/CategoryTheory/Monoidal/Functor.lean, lines 940–1040, and Monoidal/Category.lean, lines 180–198."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-formal-exact-projection-mate",
@@ -78,5 +149,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-tensor-arrow-mate-right-unit",
+  "worker": "stage1",
+  "summary": "Proved both arbitrary-arrow right-action equations in three elementary steps: interchange for the tensor bifunctor and naturality of the right action, the assumed comparison unit equation, and functoriality plus naturality of the adjunction unit. The statement and its hypotheses are unchanged. No new nodes or Mathlib leaves are needed. Checked the current project source and the stronger monoidal projection-map unit lemma, all cited statements, and two phrasings of the Mathlib search.",
+  "blueprint": "Realizes the first sentence of the first paragraph of the current perfect-projection-formula proof, P=A is the canonical tensor identity, through its extracted formal exact projection mate and ringed projection mate nodes. The arbitrary-arrow version is retained; the parent specializes c to the counit and applies the triangle identity."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NH-7f715ab8c",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7f715ab8c (reviewer sub-agent of L); spot-checked: The statement is unchanged; it is byte-identical in side-live and live, where the item is unsplit, and the only fields that changed are the proof, the split record and five added searches. There is no repair note, the item is not on the dropped list, and there is no SGA citation. All three steps are correct and I re-derived each. Step 1: the interchange (1⊗u)(c⊗1)=c⊗u=(c⊗1)(1⊗u) plus naturality of ρ^D at c gives k_E(c⊗1)=c·k_{LK}. Step 2: precomposing with μ_{K,1} and using the hypothesis at M=K gives k_Eβ^c_1=cL(ρ_K). Step 3: functoriality of R plus naturality of η at ρ_K (from the statement of the cited lem-weil-pbc-adjunction-of-natural-bijection, a Mathlib leaf via mkOfHomEquiv, so no tool_uses entry is needed) gives R(k_E)α^c_1=R(c)η_Kρ_K. proof_deps equals the union of the step uses. The parent lem-weil-pbc-formal-exact-projection-mate uses the item with K=RE and c=ε_E plus the triangle identity, and its α matches α^c exactly. I tested a cartesian example in Sets and a scaled example in Q-vector spaces (ρ_C=2, ρ_D=3, u=5, μ=2/15), and no invertibility is used anywhere. The Stacks Tag 0B56 lines 13660-13680 and the blueprint first sentence are checked and correct, and proof_origin is correctly agent-written. The delivery has no new nodes and my rg -L search found no duplicate."
  }
 }
