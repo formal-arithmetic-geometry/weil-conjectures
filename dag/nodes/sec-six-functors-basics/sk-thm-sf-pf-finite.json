@@ -24,124 +24,52 @@
  ],
  "proof": [
   {
-   "text": "Use the chosen compactification underlying the compact-support functor in the statement, and write it as $X\\xrightarrow{j}Z\\xrightarrow{p}Y$. Thus $Rf_!K=Rp_*M$, where $M=j_!K$, as in [def-weil-pbc-projection-compactification]. Spell out the defining composite of the projection transformation in the blueprint: it is $\\pi_{p;M,L}$ followed by $Rp_*(\\gamma_{K,L})$, where $\\pi$ is the counit-defined direct-image projection map of [def-kun-projection-formula-map], and $\\gamma_{K,L}$ is the inverse of the canonical open-extension tensor map, followed by $Lj^*Lp^*L\\cong Lf^*L$. The open map has orientation $\\sigma_{j;K,N}:j_!(K\\otimes^L j^{-1}N)\\to j_!K\\otimes^L N$, with $N=p^{-1}L$. Its underived map is given by $s\\otimes t\\mapsto s\\otimes t$ on objects over the open and then sheafification, and its derived map is the corresponding map on K-flat representatives for the tensor construction [def-kun-derived-tensor]. Concretely resolve $N$ by a K-flat complex $Q$ with flat terms. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $j^{-1}Q$ is K-flat too; hence $j_!K\\otimes Q$ and $j_!(K\\otimes j^{-1}Q)$ compute the two sides, using exactness of $j_!$ from Step 2. The underived comparison applied termwise defines the derived map, naturally under replacement of representatives by the localization/descent statement of [lem-weil-pbc-site-derived-tensor-descent]. Equivalently this is the projection map adjoint to the unit tensored with the identity under the open-extension adjunction [lem-weil-pbc-extension-by-zero-adjunction]; the explicit sheafification and counit formulas in that statement identify the same map. This is a description of the actual canonical transformation, not a choice of an unrelated isomorphism. Constant-coefficient inverse images are exact module pullbacks by [prop-weil-pbc-inverse-image-modules-exact], so $Lu^*=u^{-1}$ and the composition comparison is the canonical inverse-image comparison.",
-   "uses": [
-    "def-weil-pbc-projection-compactification",
-    "def-kun-projection-formula-map",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/sk-thm-sf-pf-finite.proof.md",
-    "place": "first sentence: compactification and defining projection composite"
-   }
-  },
-  {
-   "text": "The open-extension map $\\sigma_{j;K,N}$ is invertible. Extension by zero is exact and applied termwise on derived categories by [lem-weil-pbc-extension-by-zero-exact]. Its geometric stalks are the original stalks on the open and zero off the open, naturally, by [lem-weil-pbc-extension-by-zero-stalks]. Stalks are exact by [prop-weil-pbc-geometric-stalks-exact]; [lem-kun-stalk-as-pullback] and [lem-kun-inverse-image-monoidal] identify stalks of derived tensor products with tensor products of the inverse images at the geometric point. On the open, both sides of $\\sigma$ therefore identify with $K_{\\bar x}\\otimes^L N_{j\\bar x}$, and the described map is the identity. Off the open both sides are zero, including the tensor product with the zero stalk. For each degree the induced map of cohomology sheaves is consequently an isomorphism at every geometric stalk, hence is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. This proves invertibility of $\\sigma$ in the derived category, so also of $\\gamma_{K,L}$ and of its image under $Rp_*$. It remains to prove that $\\pi_{p;M,L}$ is invertible.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-kun-stalk-as-pullback",
-    "lem-kun-inverse-image-monoidal",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/sk-thm-sf-pf-finite.proof.md",
-    "place": "first sentence: open-extension identification checked on etale stalks"
-   }
-  },
-  {
-   "text": "Fix a geometric point $g:\\operatorname{Spec}\\Omega\\to Y$ and put $P=L_{\\bar y}\\in D(\\Lambda)$. Apply the small-etale clause of [fix-lem-finite-tor-perfect] with $M=L$: its hypotheses are precisely bounded constructibility and finite Tor amplitude on that site, which are imposed here. It gives a bounded complex $F^\\bullet$ of finite free $\\Lambda$-modules representing $P$. By [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], every sheaf on $\\operatorname{Spec}\\Omega$ is canonically constant with value its stalk. The isomorphism is natural, so it commutes with the scalar action and all differentials; it gives the same assertion for module sheaves and complexes. Exactness of the stalk functor [prop-weil-pbc-geometric-stalks-exact] makes this a derived identification $g^{-1}L\\cong\\underline P\\cong\\underline{F^\\bullet}$. Only this perfect stalk $P$ will be used, not an arbitrary complex of coefficient modules.",
-   "uses": [
-    "fix-lem-finite-tor-perfect",
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "prop-weil-pbc-geometric-stalks-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/sk-thm-sf-pf-finite.proof.md",
-    "place": "choose a bounded complex of finite free modules representing P; P is the stalk of L"
-   }
-  },
-  {
-   "text": "Write $p':Z_{\\bar y}\\to\\operatorname{Spec}\\Omega$ and $g':Z_{\\bar y}\\to Z$ for the base-change square of $p$, and put $M'=g'^{-1}M$. The ring $\\Lambda=A_{E,n}$ is finite by [def-weil-l-adic-coefficient-extension]; among the multiples of $1$ in this finite ring two coincide, so a positive integer annihilates $1$ and therefore all of $\\Lambda$. Thus it is a commutative torsion ring. Apply [lem-kun-proper-base-change-torsion-ring] to the proper map $p$ and separately to $M$ and $M\\otimes^L p^{-1}L$. Both are allowed, since the theorem is on the unbounded small-etale derived categories and requires no constructibility or boundedness. The compatibility square of [lem-kun-proj-formula-natural], with its monoidal inverse-image identifications [lem-kun-inverse-image-monoidal], shows that these two exchange isomorphisms carry $g^{-1}\\pi_{p;M,L}$ to the actual projection component $\\pi_{p';M',g^{-1}L}$. In particular invertibility of the latter implies invertibility of the former; no claim about the projection map is inferred merely from an isomorphism between its endpoints. In addition, [cor-cbc-derived-extension-zero-base-change] applies to the open square and to $K\\in D^+(X_{\\Et},\\Lambda)$: it identifies $M'=g'^{-1}j_!K$ with $j'_!K^{\\mathrm{fib}}_{\\bar y}$. Thus $Rp'_*M'$ is precisely $R\\Gamma_c(X_{\\bar y},K^{\\mathrm{fib}}_{\\bar y})$, with the geometric-point constant identification of Step 3. We need only invertibility of the proper projection component: Step 2 already proves that the other factor in the defining compact-support projection composite is invertible. The identification of the fibre object above realizes the compact-support fibre reduction of the blueprint.",
+   "text": "The coefficient ring A_(E,n) is finite by Padic.finite_coefficientExtensionRing and therefore IsAddTorsion by isAddTorsion_of_finite. Apply the existing unbounded torsion-ring proper projection theorem isIso_rightDerivedLowerStarProjectionMap_of_isProper to the proper factor c.g. The existing hasProjectionFormulaOfCompactification_of_isIso assembles the open comparison with this proper projection: its component is this proper projection followed by proper pushforward of the inverse open-extension tensor comparison and the pullback-composition comparison. Both later factors are already canonical isomorphisms, so the specified projection component is invertible. This uses the existing geometric-fibre proper projection argument as a tool, rather than repeating its stalk calculation and finite-free devissage.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-kun-proj-formula-natural",
-    "lem-kun-inverse-image-monoidal",
-    "cor-cbc-derived-extension-zero-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, geometric-fibre reduction; Tag 0F0C, lemma-proper-base-change-mod-n"
-   }
-  },
-  {
-   "text": "For fixed $M'$, set $A(Q)=Rp'_*M'\\otimes^L Q$ and $B(Q)=Rp'_*(M'\\otimes^L(p')^{-1}Q)$ on the small-etale derived category of $\\operatorname{Spec}\\Omega$. By [lem-weil-pbc-ringed-projection-mate-exact] these functors are exact and their counit projection transformation $\\alpha:A\\to B$ respects shifts and distinguished triangles, with $\\alpha_\\Lambda=1$. Hence its components at integer shifts of the unit are invertible. Exact functors are additive; naturality with the finite biproduct inclusions and projections identifies the component at a finite sum with the diagonal sum of the components, also invertible. For a triangle, two invertible components imply the third is invertible by [lem-sf-triangle-morphism-iso]. Induct on the number of nonzero terms of the finite-free complex $F$ from Step 3, starting with zero. For the highest nonzero degree $b$, let $T=F^b[-b]$ and let $C$ be $F$ below $b$ and zero in degrees at least $b$. The inclusion $a:T\\to F$ and quotient $q:F\\to C$ are chain maps. Their degreewise retraction $\\pi:F\\to T$ and section $s:C\\to F$ satisfy $\\pi a=1$, $qs=1$, $a\\pi+sq=1$. By [lem-weil-pbc-degreewise-split-derived-triangle], $T\\to F\\to C\\to T[1]$ is distinguished, with connecting map $d_F^{b-1}$ in degree $b-1$ and zero otherwise. Since $F^b\\cong\\Lambda^r$ for finite $r$, $T$ is a finite sum of unit shifts. The induction applies to $C$, which has one fewer nonzero term; two-out-of-three proves invertibility at $F$. The natural constant-sheaf equivalence of Step 3 is exact and carries this triangle to the identical triangle of constant complexes. Naturality across $g^{-1}L\\cong\\underline F$ now proves invertibility of $\\pi_{p';M',g^{-1}L}$.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-triangle-morphism-iso",
-    "lem-weil-pbc-degreewise-split-derived-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, finite-free complex and stupid-truncation argument; equation-projection-formula-map"
-   }
-  },
-  {
-   "text": "Step 5 and the compatibility in Step 4 make every geometric inverse image of $\\pi_{p;M,L}$ invertible. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] therefore makes every stalk of each cohomology sheaf of its cone zero. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the map from the zero sheaf to each such cohomology sheaf: all are zero, so the cone is acyclic and $\\pi_{p;M,L}$ is an isomorphism. Step 2 then makes the defining composite $Rp_*(\\gamma_{K,L})\\circ\\pi_{p;M,L}$ an isomorphism; an inverse is $\\pi_{p;M,L}^{-1}\\circ Rp_*(\\gamma_{K,L}^{-1})$. This is the specified $\\operatorname{PF}_{f,K,L}$. Its source and target are the objects of $D^+(Y_{\\Et},\\Lambda)$ specified by [sk-def-sf-exchanges]; this is a full subcategory of the ambient derived category by [def-weil-pbc-derived-categories], so the inverse also lies there. Naturality of the canonical transformation is part of [sk-def-sf-exchanges] and also follows directly from the natural counit projection map and the natural open-extension identifications used above. Inverting its components preserves naturality by multiplying each naturality square by the component inverses.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-kun-0f0g",
     "sk-def-sf-exchanges",
-    "def-weil-pbc-derived-categories"
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/sk-thm-sf-pf-finite.proof.md",
-    "place": "last sentence: conservative geometric stalks and naturality"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The lower cohomology bound in hKb and DerivedCategory.isGE_iff give K in degrees at least k. Exact open extension preserves this bound by Functor.isGE_mapDerivedCategory_obj. The right derived direct image preserves it by Functor.isGE_rightDerivedFunctor_obj. Their composition is the chosen rightDerivedLowerShriekOfCompactification, hence Rf!K has the same lower bound. No Noetherian or constructibility hypothesis is required.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the recorded hasTorAmplitudeIn hypothesis of L to the generic torAmplitudeIn with hasTorAmplitudeIn_iff_torAmplitudeIn. Choose a lower bound d for Rf!K from the preceding step and the Tor interval [a,b] of L. DerivedCategory.isGE_tensor_of_torAmplitudeIn gives L tensor Rf!K in degrees at least a+d. The derived braiding transports this bound to Rf!K tensor L, which is the source of the specified projection. Finally ObjectProperty.prop_of_iso transports D+ membership along the actual projection isomorphism to its target. Combine the two memberships and IsIso as the stated conjunction. The bifunctor transformation supplies naturality, and fullness of D+ includes the inverse.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "def-kun-derived-tensor",
+    "def-weil-pbc-derived-categories",
+    "sk-def-sf-exchanges"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projection-compactification",
-  "def-kun-projection-formula-map",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "def-kun-derived-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-kun-stalk-as-pullback",
-  "lem-kun-inverse-image-monoidal",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "fix-lem-finite-tor-perfect",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
   "def-weil-l-adic-coefficient-extension",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-kun-proj-formula-natural",
-  "cor-cbc-derived-extension-zero-base-change",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-kun-0f0g",
   "sk-def-sf-exchanges",
-  "def-weil-pbc-derived-categories"
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-amb-etale-compact-support",
+  "def-kun-tor-amplitude",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "def-kun-derived-tensor"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/sk-thm-sf-pf-finite.proof.md",
-  "place": "compactification, open-stalk calculation, proper-part base change to the geometric point, finite-free devissage, conservative stalks; details from Stacks Tags 0944, 0F0C, 0F0G"
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Kunneth/ProperProjectionFormula.lean",
+  "place": "R9, 2026-10-22: existing torsion-ring proper projection theorem (Stacks 0F0G), canonical compactification composition, exact open extension, left t-exact right derived direct image, and FlatModel.lean tensor lower-bound estimate with derived braiding. No unit statement or prescribed unit dependency is changed."
  },
  "mathlib_searches": [
   {
@@ -373,27 +301,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-kun-stalk-as-pullback",
-  "lem-kun-inverse-image-monoidal",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "fix-lem-finite-tor-perfect",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-kun-proj-formula-natural",
-  "cor-cbc-derived-extension-zero-base-change",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-degreewise-split-derived-triangle",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-cbc-extension-zero-base-change"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -420,5 +328,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Item statement verbatim with main-20261015 order 1706. Lean matches each clause: Λ=coefficientExtensionRing l E n (n≥1); f IsSeparated+LocallyOfFiniteType+QuasiCompact with no ℓ-invertibility, field or qcqs assumption; small-étale DerivedCategoryModule; K bounded and constructible via recorded IsConstructibleEtaleSheafOfSets; L bounded constructible with hasTorAmplitudeIn; conclusion t.plus on both endpoints plus IsIso of the canonical upstream projectionMapOfCompactification component (direction checked; naturality from the bifunctor transformation), for every Compactification c. Universes u/u+1 as in landed thm-sf-pf-finite; all bound. Upstream hasProjectionFormula_of_boundedConstructible adds HasInvertibleExponent, so not reused; thm-sf-pf-finite is a finite-field special case, not a duplicate. §1(B) SfEtaleExchanges publicly re-exports SfExchanges and adds only the canonical étale specialization; only lean changed in both nodes; statements verbatim in files. nt_compile --json of both files rc 0 (4.8/3.5/4.1 s), no errors. No hollow defs, sorry only, docstrings with source and blueprint and the six proof steps. Observations: the sk-def-sf-exchanges record now lists only the étale PF (old decls kept by public import and named in the note; tool limitation); no independent group second reading, per the 2026-10-17 direct-delivery policy, which this review covers."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261021T194242-L-1516806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
