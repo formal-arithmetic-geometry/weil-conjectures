@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathcal O_E$, $B=\\mathcal O_{E,X}$, $k=R/\\pi_E$, and $L=\\operatorname{Res}K$. The coefficient map is $c:R_X\\to B$. The completed coefficient identification in [det-prop-sfb-qlbar-colimit-x-integral-limit] and parts (1), (3) of [det-prop-integral-criterion-constant-coefficients] identify $B/\\pi_E^n$ with $(R/\\pi_E^n)_X$ and give, for every $n\\geq1$, a canonical isomorphism\n$$L\\otimes_{R_X}^{\\mathbf L}(R/\\pi_E^n)_X\\simeq K\\otimes_B^{\\mathbf L}(R/\\pi_E^n)_X.$$\nIn particular the first reduction on the two sides is one and the same object $M$ of $D(X_{\\mathrm{proét}},k_X)$. This uses derived relative tensor products, not an ordinary quotient of the cohomology sheaves.",
+   "text": "Put $R=\\mathcal O_E$, $B=\\mathcal O_{E,X}$, $k=R/\\pi_E$ and $L=\\operatorname{Res}K$. The completed coefficient identification [det-prop-sfb-qlbar-colimit-x-integral-limit] and part (3) of [det-prop-integral-criterion-constant-coefficients] identify both first derived reductions with the same object $M=K\\otimes_B^L k_X\\simeq L\\otimes_{R_X}^L k_X$.",
    "uses": [
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
     "det-prop-integral-criterion-constant-coefficients"
@@ -36,69 +36,57 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Proof, reduction compatibility sentence"
+    "place": "Unit proof (1)–(2), coefficient map and residue identification"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-restriction-local-completeness] to $c:R_X\\to B$ and to the ideal subsheaf $(\\pi_E)\\subset R_X$. Its extended ideal is $(\\pi_E)B$. Thus $K$ is derived $(\\pi_E)B$-complete if and only if $L$ is derived $(\\pi_E)$-complete. This applies to the arbitrary complex $K$ in the statement: it is not inferred merely from an equivalence already restricted to complete objects. To relate this local definition to the quotient-tower completeness used in [det-prop-integral-criterion-constant-coefficients], apply [lem-weil-pbc-constant-completion-equivalence] with $A=R$ and $I=(\\pi_E)$. The ring $R$ is a discrete valuation ring by [lem-weil-l-adic-extension-integers-dvr]; every ideal is principal, hence finitely generated, so $R$ is Noetherian. The ideal $I$ has the single generator $\\pi_E$, and $B$ is precisely its completed constant sheaf by step 1. The last paragraph of that theorem identifies the local completeness condition with the quotient-tower completion unit for both $R_X$ and $B$. Thus the same equivalence of completeness conditions holds with either convention; in particular it applies to the complete subcategories used in step 6.",
+   "text": "By [lem-weil-pbc-restriction-local-completeness], applied to $R_X\\to B$ and $(\\pi_E)$, $K$ is locally derived complete exactly when $L$ is. The DVR statement [lem-weil-l-adic-extension-integers-dvr] makes $R$ Noetherian: every ideal has one generator. Thus [lem-weil-pbc-constant-completion-equivalence] applies to $R$, $(\\pi_E)$ and the completion $B$ of step 1; its unit compatibility identifies local and quotient-tower completeness on both sides. This checks the conventions needed for the complete-object equivalence below.",
    "uses": [
     "lem-weil-pbc-restriction-local-completeness",
-    "det-prop-integral-criterion-constant-coefficients",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-constant-completion-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099C, lemma-restriction-derived-complete; quotient-tower/local-completeness compatibility: Tags 0A0E and 099M, as stated by lem-weil-pbc-constant-completion-equivalence"
+    "place": "Tag 099C, lemma-restriction-derived-complete; completion conventions: proetale.tex Tag 099M, lemma-naive-completion"
    }
   },
   {
-   "text": "The residue ring $k$ is a finite discrete field [def-weil-l-adic-coefficient-extension], hence Noetherian (its only ideals are $0$ and $k$). Choose a finite affine cover of $X$ by spectra of Noetherian rings. Each member has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. An increasing chain of opens of $X$ stabilizes on each cover member and hence, taking the maximum of finitely many stabilization indices, on $X$. Thus every open of $X$ is quasi-compact: the finite unions of any open covering have a maximal member by the ascending-chain condition, and that member must contain every covering open. In particular $X$ is quasi-compact and intersections of two affine opens are quasi-compact, so $X$ is quasi-separated. For any $M\\in D(X_{\\mathrm{proét}},k_X)$, finite Tor amplitude in $[a,b]$ implies $H^i(M)=0$ off $[a,b]$ by taking the tensor test module to be $k_X$, the unit of the derived tensor structure [sk-def-sfb-derived-tensor-hom]. Consequently [sk-thm-pe-constructible-comparison] and [det-pe-finite-tor-comparison-noetherian] give the equivalence of the following conditions: $M$ has constructible cohomology and finite Tor amplitude; and $M\\simeq\\nu_X^*C$ for a bounded constructible étale $k$-complex $C$ of finite Tor amplitude. The first cited comparison supplies the bounded étale object, and the second preserves and reflects its Tor interval; it is not enough to cite only a definition of flatness or only a sheaf comparison.",
+   "text": "Noetherian $X$ is quasi-compact and locally Noetherian; [lem-weil-pbc-locally-noetherian-quasi-separated] supplies quasi-separatedness. The residue $k$ is a finite field [def-weil-l-adic-coefficient-extension], hence discrete Noetherian (its only ideals are $0,k$). Apply [lem-sfb-constructible-local-tor-etale-origin] to $M$: its constructible cohomology and local finite Tor dimension are equivalent to bounded constructible étale origin with finite Tor amplitude.",
    "uses": [
-    "sk-def-sfb-derived-tensor-hom",
-    "sk-thm-pe-constructible-comparison",
-    "det-pe-finite-tor-comparison-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "def-weil-l-adic-coefficient-extension",
-    "lem-sc-affine-noetherian-underlying-space"
+    "lem-sfb-constructible-local-tor-etale-origin"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C1, definition-Dbc; Tag 09AI, section-constructible; Tor convention Tag 08FZ, sites-cohomology.tex, definition-tor-amplitude"
+    "place": "Tag 09C1, definition-Dbc, residue condition; étale origin supplied by the extracted lemma"
    }
   },
   {
-   "text": "Apply [lem-sfb-proetale-tor-local-global] to the constant coefficient ring $A=k$ and the complex $M$ of step 1; quasi-compactness of $X$ was checked in step 3. It identifies the local finite Tor dimension of Stacks Tag 09C1 with the existence of a single global Tor interval used in step 3. In particular the slice test modules are arbitrary slice modules, not merely restrictions of global modules. Consequently $M$ has constructible cohomology and locally finite Tor dimension if and only if $M\\simeq\\nu_X^*C$ for an étale bounded constructible $k$-complex $C$ of finite Tor amplitude. This conclusion does not use completeness of $K$ or $L$.",
+   "text": "[lem-sfb-integral-cohomological-adic-criterion] says $K\\in\\Dbc(X,R)$ exactly when $K$ is locally derived complete and its first reduction has the étale origin of step 3. Substitute the reduction identification of step 1, the completeness equivalence of step 2, and the residue criterion of step 3. The étale constructibility conventions agree: over the field $k$, finitely generated means finite-dimensional, and on Noetherian $X$ the affine-local strata of [def-pe-etale-constructible-module] give one global stratification by [lem-sfb-noetherian-global-constructibility] (étale site, $R=k$), the converse being restriction to affine opens. The resulting conjunction is precisely the definition of $L\\in\\Dc(X,R)$, proving both implications for arbitrary $K$.",
    "uses": [
-    "lem-sfb-proetale-tor-local-global"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C1, definition-Dbc, and Tag 09C2, lemma-describe-constructible-complexes, uniform Tor interval argument"
-   }
-  },
-  {
-   "text": "By [lem-sfb-integral-cohomological-adic-criterion], the bounded constructible cohomology condition $K\\in\\Dbc(X,\\mathcal O_E)$ is equivalent to derived completeness of $K$ together with the condition that its first reduction $M$ is $\\nu_X^*C$ for an étale bounded constructible complex $C$ of finite Tor amplitude. Step 1 identifies the first reduction with that of $L$, step 2 identifies derived completeness of $K$ with that of $L$, and steps 3 and 4 replace the residue condition by constructible cohomology and finite Tor amplitude of $L\\otimes_{R_X}^{\\mathbf L}k_X$. These are exactly the two defining conditions for $L\\in\\Dc(X,\\mathcal O_E)$. This proves both implications without assuming at the outset that $K$ is complete.",
-   "uses": [
-    "lem-sfb-integral-cohomological-adic-criterion"
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-noetherian-global-constructibility",
+    "def-pe-etale-constructible-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Proof, first sentence (integral criterion) and hence the two conditions are equivalent"
+    "place": "Unit proof (1)–(2), comparison with the integral criterion"
    }
   },
   {
-   "text": "Part (2) of [det-prop-integral-criterion-constant-coefficients] makes $\\operatorname{Res}$ an equivalence between the full subcategories of derived complete complexes. By step 5 the selected bounded constructible objects correspond precisely under this equivalence. Its restriction is fully faithful because its Hom maps are unchanged. For essential surjectivity, take $L\\in\\Dc(X,\\mathcal O_E)$ and a derived complete preimage $K$ supplied by that equivalence; step 5 then gives $K\\in\\Dbc(X,\\mathcal O_E)$. Thus restriction of scalars gives the claimed equivalence of full subcategories.",
+   "text": "Part (2) of [det-prop-integral-criterion-constant-coefficients], with the convention check of step 2, gives an equivalence on complete objects. Step 4 identifies the selected full subcategories. Restriction is fully faithful on them since the Hom maps are unchanged. Given $L\\in\\Dc(X,R)$, its complete preimage $K$ lies in $\\Dbc(X,R)$ by step 4. This proves essential surjectivity and the asserted equivalence induced by $\\operatorname{Res}$.",
    "uses": [
     "det-prop-integral-criterion-constant-coefficients"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Proof, final sentence"
+    "place": "Unit proof (1)–(2), equivalence restricted to the selected objects"
    }
   }
  ],
@@ -106,20 +94,19 @@
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "det-prop-integral-criterion-constant-coefficients",
   "lem-weil-pbc-restriction-local-completeness",
-  "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-l-adic-extension-integers-dvr",
-  "sk-def-sfb-derived-tensor-hom",
-  "sk-thm-pe-constructible-comparison",
-  "det-pe-finite-tor-comparison-noetherian",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
   "def-weil-l-adic-coefficient-extension",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-proetale-tor-local-global",
-  "lem-sfb-integral-cohomological-adic-criterion"
+  "lem-sfb-constructible-local-tor-etale-origin",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "lem-sfb-noetherian-global-constructibility",
+  "def-pe-etale-constructible-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-  "place": "Proof, with the missing integral criterion exposed as Bhatt–Scholze Proposition 6.8.11(3) and completeness reflection from Stacks Tag 099C"
+  "place": "Unit sk-lem-integral-models proof (1)–(2), retaining the existing reduction/completeness route and extracting the combined residue descent argument."
  },
  "mathlib_searches": [
   {
@@ -197,11 +184,11 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-lem-integral-models-stacks",
   "worker": "stage1",
-  "summary": "Reused the retained coefficient and completeness proof after rereading all cited statements. Extracted the hidden local-to-global Tor comparison from the 3,685-character step as one statement-only node, searched the whole DAG, blueprint, source Lean and Mathlib, and retained the existing constructible and finite-Tor comparison nodes. The item now has six explicit steps, all under 2,000 characters. Checked the empty scheme, zero complex, residue field, finite-cover, and arbitrary-complex completeness cases.",
-  "blueprint": "Proof: finite-reduction identification (step 1), completeness reflection and quotient/Koszul comparison (step 2), constructible étale/pro-étale comparison and uniform/local Tor interpretation (steps 3–4), integral criterion (step 5), and restriction of the complete-object equivalence (step 6).",
+  "summary": "Finer stage-1 repair of the 5280-character proof. The statement is unchanged. Extracted the local finite-Tor constructible étale-origin bridge as one new statement-only node, with its complete short natural-language proof in report.md. Reused the existing general completeness and quotient-unit theorems rather than creating duplicate specializations. Replaced the inline Noetherian-topology proof by the existing Mathlib leaf for locally Noetherian quasi-separatedness. The item now has five short assembly steps, totalling 2199 characters.",
+  "blueprint": "Unit sk-lem-integral-models, proof (1)–(2): coefficient and finite reduction (step 1), completeness conventions (step 2), residue condition and extracted descent bridge (step 3), integral criterion membership test (step 4), and restriction of the complete-object equivalence (step 5).",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-restriction-local-completeness",
@@ -214,20 +201,16 @@
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
     "why": "Coefficient algebra giving the DVR and Noetherian hypotheses for completion; independent of the integral-model argument."
-   },
-   {
-    "node": "lem-sc-affine-noetherian-underlying-space",
-    "why": "Generic affine scheme topology to check quasi-compactness and quasi-separatedness required by the comparison; independent of the integral-model argument."
    }
   ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q34-1d94c80c1",
-  "group": "Q34",
+  "reviewer": "NT-cc-Q48-7e268ba0b",
+  "group": "Q48",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-1d94c80c1 (reviewer sub-agent of L); spot-checked: Independent full review completed. The item and sole new locality lemma match their stated routes and sources; coefficient restriction, derived reductions, completeness reflection, constructible/Tor comparisons, and the restricted equivalence are correctly typed and justified. Edge cases, hypotheses, duplicates, searches, citations, and route-lock compliance were checked. Review written to review.md; no repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-7e268ba0b (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-constructible-local-tor-etale-origin and every cited statement, along with Stacks proetale 09C1, 09AJ, 09C2 (2),(4) with its proof, and 09AL, the blueprint proof and unit step (1)-(2), and the repair note. The item statement is byte-identical to the previous split. The re-split note is answered: one new statement-only node, and five short steps (2199 characters). Steps 1, 2, 3 and 5 are correct. Step 1 uses part (3) of the proposition with n=1. Step 2 uses the restriction reflection for arbitrary complexes, the PID property for Noetherianity and the Koszul/quotient unit identification. Step 3 gives qcqs and k a Noetherian field. Step 5 is elementary. The new node (Stacks 09C2 at n=1) is true. One direction is local-to-global Tor, the unit test for boundedness, the constructible comparison, then Tor reflection; the other is the converse. Tested on X empty, M=0, the zero ring, nu^*Z/l and the unbounded sum of k[n]. It is not a duplicate (09C2 and local-Tor candidates in the DAG and blueprint were read), it does not restate an item clause, and there is no cycle. Three repairs, written to fixes/dag/nodes/sec-six-functors-basics/. (1) C1/C4 in item step 4: the criterion's étale constructibility (global stratification, finite-dimensional values) differs from def-pe-etale-constructible-module (affine-local strata, finitely generated values). Step 4 now cites lem-sfb-noetherian-global-constructibility and def-pe-etale-constructible-module, and proof_deps is updated. (2) B3 in the new node: nu_X^* now cites the defining node def-weil-pbc-site-comparison-morphism, with det-pe-classical-sheaves-modules kept for exactness. (3) B5 in the new node: the source is now Tag 09C2 (2),(4) with 09AL, instead of 09AL alone, and the missing lean_audit field is added. No SGA source is cited. Accepted tool_uses: restriction-local-completeness, constant-completion-equivalence and the l-adic DVR lemma.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
