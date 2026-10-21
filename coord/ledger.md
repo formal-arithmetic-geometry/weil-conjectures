@@ -20675,3 +20675,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:30 L: merged deliver/Q17/sk-d-real-weights (reviewer PASS; first push; new nodes: 1)
 - 07:30 L: merged deliver/Q55/sk-def-sf-kv-maps (reviewer PASS; first push; new nodes: 0); claim not held by Q55: not your claim
 - 07:30 L: merged deliver/Q12/lem-sfb-base-change-identity-open-restriction (reviewer FIX; after a return; new nodes: 2)
+- 07:30 L: merged deliver/Q70/def-wf-iota-real (reviewer FIX; first push; new nodes: 0); claim not held by Q70: not your claim
