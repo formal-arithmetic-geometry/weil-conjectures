@@ -22011,3 +22011,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:57 L: merged deliver/NJ/lem-sfb-scalar-reduction-unit-triangle (stage 2; reviewer PASS; parallel immutable checks)
 - 09:57 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 09:59 L: merged deliver/Q84/lem-pod-isomorphism-scalar-comparison-agreement (reviewer PASS; first push; new nodes: 0); claim not held by Q84: not your claim
+- 09:59 L: merged deliver/NF/lem-weil-pbc-ringed-common-quotient-pullback-comparison (stage 2; reviewer PASS; parallel immutable checks)
