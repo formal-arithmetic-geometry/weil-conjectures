@@ -14,6 +14,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import all Sheaf.Paper.KFlatRingedToposPullback
 import all Sheaf.CategoryTheory.FlatRestrictionOrdinaryComparisons
+import all Sheaf.CategoryTheory.SiteAlgebraicCompositionUnit
+import Sheaf.CategoryTheory.DerivedCategory.ExactRestrictionComposition
+import all Sheaf.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Normalization of scalar pullback on K-flat representatives
 
@@ -198,6 +201,116 @@ private noncomputable def unliftInverseImage
     simpa [er, em, eR, eS, eM, eN, SheafOfModules.sheafUliftIso, uliftTrivial,
       Functor.map_comp] using hr
 
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def compositeInverseImage
+    {C D E : Type u} [Category.{u} C] [Category.{u} D] [Category.{u} E]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D} {H : GrothendieckTopology E}
+    {F : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {G : Sheaf K (Type u) ⥤ Sheaf H (Type u)}
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    {S : Sheaf H CommRingCat.{u}}
+    (I : InverseImage F A B) (I' : InverseImage G B S) : InverseImage (F ⋙ G) A S := by
+  let er := G.mapIso I.ringUnderlying ≪≫ I'.ringUnderlying
+  let em : (I.modules ⋙ I'.modules) ⋙ underlying S ≅ underlying A ⋙ (F ⋙ G) :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft I.modules I'.moduleUnderlying ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight I.moduleUnderlying G ≪≫ Functor.associator _ _ _
+  refine
+    { ringUnderlying := er
+      modules := I.modules ⋙ I'.modules
+      moduleUnderlying := em
+      ringAdd := ?_
+      ringMul := ?_
+      ringZero := ?_
+      ringOne := ?_
+      moduleAdd := ?_
+      moduleZero := ?_
+      moduleSMul := ?_ }
+  · intro T a b t h V x
+    have hr := I'.ringAdd (F.obj T) (F.map a ≫ I.ringUnderlying.hom)
+      (F.map b ≫ I.ringUnderlying.hom) (F.map t ≫ I.ringUnderlying.hom)
+      (I.ringAdd T a b t h) V x
+    simpa [er, Functor.map_comp] using hr
+  · intro T a b t h V x
+    have hr := I'.ringMul (F.obj T) (F.map a ≫ I.ringUnderlying.hom)
+      (F.map b ≫ I.ringUnderlying.hom) (F.map t ≫ I.ringUnderlying.hom)
+      (I.ringMul T a b t h) V x
+    simpa [er, Functor.map_comp] using hr
+  · intro T a h V x
+    have hr := I'.ringZero (F.obj T) (F.map a ≫ I.ringUnderlying.hom)
+      (I.ringZero T a h) V x
+    simpa [er, Functor.map_comp] using hr
+  · intro T a h V x
+    have hr := I'.ringOne (F.obj T) (F.map a ≫ I.ringUnderlying.hom)
+      (I.ringOne T a h) V x
+    simpa [er, Functor.map_comp] using hr
+  · intro M T a b t h V x
+    have hr := I'.moduleAdd (I.modules.obj M) (F.obj T)
+      (F.map a ≫ I.moduleUnderlying.inv.app M)
+      (F.map b ≫ I.moduleUnderlying.inv.app M)
+      (F.map t ≫ I.moduleUnderlying.inv.app M) (I.moduleAdd M T a b t h) V x
+    simpa [em, Functor.map_comp] using hr
+  · intro M T a h V x
+    have hr := I'.moduleZero (I.modules.obj M) (F.obj T)
+      (F.map a ≫ I.moduleUnderlying.inv.app M) (I.moduleZero M T a h) V x
+    simpa [em, Functor.map_comp] using hr
+  · intro M T a b t h V x
+    have hr := I'.moduleSMul (I.modules.obj M) (F.obj T)
+      (F.map a ≫ I.ringUnderlying.hom)
+      (F.map b ≫ I.moduleUnderlying.inv.app M)
+      (F.map t ≫ I.moduleUnderlying.inv.app M) (I.moduleSMul M T a b t h) V x
+    simpa [er, em, Functor.map_comp] using hr
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def moduleComparison
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {F G : Sheaf J (Type u) ⥤ Sheaf K (Type u)} [PreservesFiniteLimits F]
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    (γ : F ≅ G) (I : InverseImage F A B) (I' : InverseImage G A B)
+    (hr : γ.hom.app _ ≫ (inverseRing I').hom = (inverseRing I).hom) :
+    inverseModules I ≅ inverseModules I' := by
+  let f (M : Modules A) : (inverseModules I).obj M ⟶ (inverseModules I').obj M :=
+    { val :=
+      { app := fun U ↦ ModuleCat.ofHom
+          { toFun := ((CategoryTheory.moduleComparisonApp γ I I' M).hom.app U)
+            map_add' := ((CategoryTheory.moduleComparisonApp γ I I' M).hom.app U).hom.map_add
+            map_smul' := by
+              intro r x
+              have h := CategoryTheory.module_compare_smul γ.hom I I' M U r x
+              have he : CategoryTheory.compareMap γ.hom I.ringUnderlying I'.ringUnderlying =
+                  𝟙 _ := by
+                dsimp [CategoryTheory.compareMap]
+                rw [hr, Iso.inv_hom_id]
+              rw [he] at h
+              exact h }
+        naturality := by
+          intro U V g
+          ext x
+          exact CategoryTheory.congr_fun
+            ((CategoryTheory.moduleComparisonApp γ I I' M).hom.naturality g) x } }
+  have hf (M : Modules A) : (underlying B).map (f M) =
+      I.moduleUnderlying.hom.app M ≫ γ.hom.app _ ≫ I'.moduleUnderlying.inv.app M := by
+    exact CategoryTheory.moduleComparisonApp_underlying γ I I' M
+  let β : inverseModules I ⟶ inverseModules I' :=
+    { app := f
+      naturality := by
+        intro M N g
+        apply (underlying B).map_injective
+        rw [Functor.map_comp, Functor.map_comp, hf, hf]
+        have h := (I.moduleUnderlying ≪≫
+          Functor.isoWhiskerLeft (underlying A) γ ≪≫ I'.moduleUnderlying.symm).hom.naturality g
+        simpa only [Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
+          NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+          Functor.whiskerLeft_app, Functor.comp_map, Category.assoc] using h }
+  have hi (M : Modules A) : IsIso (β.app M) := by
+    have h : (underlying B).map (β.app M) =
+        I.moduleUnderlying.hom.app M ≫ γ.hom.app _ ≫ I'.moduleUnderlying.inv.app M := by
+      exact CategoryTheory.moduleComparisonApp_underlying γ I I' M
+    have : IsIso ((underlying B).map (β.app M)) := by rw [h]; infer_instance
+    exact isIso_of_reflects_iso _ (underlying B)
+  exact NatIso.ofComponents (fun M ↦ asIso (β.app M)) (fun g ↦ β.naturality g)
+
 section Action
 
 variable {C D : Type u} [Category.{u} C] [Category.{u} D]
@@ -326,6 +439,17 @@ Source: Stacks 03D2, blueprint det-prop-scalar-six-pullback (1)
 noncomputable def a_h (leftExact : PreservesFiniteLimits L) :
     restriction φY ⋙ (inverseModules IA) ≅ (inverseModules IB) ⋙ restriction φX :=
   Classical.choose (action_existsUnique IA IB ring_compat leftExact).exists
+
+private theorem a_h_spec (leftExact : PreservesFiniteLimits L)
+    (H : Modules BY) (U : Dᵒᵖ)
+    (x : ((inverseModules IA).obj ((restriction φY).obj H)).val.obj U) :
+    ((a_h IA IB ring_compat leftExact).hom.app H).val.app U x =
+      (((inverseUnderlying IB).inv.app H).hom.app U
+        (((inverseUnderlying IA).hom.app ((restriction φY).obj H)).hom.app U
+          (ULift.up x))).down := by
+  unfold a_h
+  exact (Classical.choose_spec
+    (action_existsUnique IA IB ring_compat leftExact).exists) H U x
 
 variable [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasSheafify K AddCommGrpCat.{u}] [K.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -512,6 +636,190 @@ noncomputable def compositionDerived
   exact (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
     Functor.mapDerivedCategoryNatIso c
 
+private theorem mate_identity_square
+    {A B : Type*} [Category A] [Category B]
+    {T : A ⥤ B} {r : B ⥤ A} (d : T ⊣ r)
+    {F : A ⥤ A} {G : B ⥤ B} (i : F ≅ 𝟭 A) (j : G ≅ 𝟭 B)
+    (a : r ⋙ F ⟶ G ⋙ r)
+    (ha : ∀ M : B, a.app M ≫ r.map (j.hom.app M) = i.hom.app (r.obj M)) :
+    Functor.whiskerRight i.inv T ≫ mate d d a ≫ Functor.whiskerLeft T j.hom =
+      (Functor.leftUnitor T).hom ≫ (Functor.rightUnitor T).inv := by
+  have ht (X : A) : (mate d d a).app X ≫ j.hom.app (T.obj X) = T.map (i.hom.app X) := by
+    apply (d.homEquiv _ _).injective
+    rw [d.homEquiv_unit, d.homEquiv_unit, r.map_comp, ← Category.assoc]
+    have hu : F.map (d.unit.app X) ≫ a.app (T.obj X) =
+        d.unit.app (F.obj X) ≫ r.map ((mate d d a).app X) :=
+      unit_mateEquiv_symm d d (TwoSquare.mk _ _ _ _ a) X
+    rw [← hu, Category.assoc, ha]
+    have hn : F.map (d.unit.app X) ≫ i.hom.app (r.obj (T.obj X)) =
+        i.hom.app X ≫ d.unit.app X := i.hom.naturality (d.unit.app X)
+    rw [hn]
+    exact d.unit.naturality (i.hom.app X)
+  ext X
+  change T.map (i.inv.app X) ≫ (mate d d a).app X ≫ j.hom.app (T.obj X) = 𝟙 _ ≫ 𝟙 _
+  rw [ht, ← T.map_comp, Iso.inv_hom_id_app]
+  erw [T.map_id, Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem derived_identity_square
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : A ⥤ A) (G : B ⥤ B) (r : B ⥤ A)
+    [F.Additive] [G.Additive] [r.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits r] [PreservesFiniteColimits r]
+    (i : F ≅ 𝟭 A) (j : G ≅ 𝟭 B) (a : r ⋙ F ≅ G ⋙ r)
+    (ha : ∀ M : B, a.hom.app M ≫ r.map (j.hom.app M) = i.hom.app (r.obj M)) :
+    ∀ H : DerivedCategory B,
+      (Functor.mapDerivedCategorySquareIso a).hom.app H ≫
+        r.mapDerivedCategory.map
+          ((Functor.mapDerivedCategoryNatIso j ≪≫ Functor.mapDerivedCategoryIdIso B).hom.app H) =
+      (Functor.mapDerivedCategoryNatIso i ≪≫ Functor.mapDerivedCategoryIdIso A).hom.app
+        (r.mapDerivedCategory.obj H) := by
+  let cF := Functor.exactDerivedRestrictionUnit F i
+  let cG := Functor.exactDerivedRestrictionUnit G j
+  let τ₁ : r.mapDerivedCategory ⋙ F.mapDerivedCategory ⟶ r.mapDerivedCategory :=
+    (Functor.mapDerivedCategorySquareIso a).hom ≫ Functor.whiskerRight cG.hom r.mapDerivedCategory
+  let τ₂ : r.mapDerivedCategory ⋙ F.mapDerivedCategory ⟶ r.mapDerivedCategory :=
+    Functor.whiskerLeft r.mapDerivedCategory cF.hom
+  let := comp_preservesFiniteLimits r F
+  let := comp_preservesFiniteColimits r F
+  let := comp_preservesFiniteLimits G r
+  let := comp_preservesFiniteColimits G r
+  have h : a ≪≫ Functor.isoWhiskerRight j r = Functor.isoWhiskerLeft r i := by
+    apply Iso.ext
+    ext M
+    exact ha M
+  have he : τ₁ = τ₂ := by
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso r F).hom).1
+    dsimp only [τ₁, τ₂, cF, cG, Functor.exactDerivedRestrictionUnit,
+      Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
+    simp only [Functor.whiskerRight_comp, Functor.whiskerLeft_comp,
+      Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight j r),
+      Functor.mapDerivedCategoryCompIso_id_comp]
+    erw [Category.comp_id]
+    rw [← Functor.mapDerivedCategoryNatIso_trans, h]
+    rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft r i),
+      Functor.mapDerivedCategoryCompIso_comp_id]
+    erw [Category.comp_id]
+  intro H
+  exact congr_app he H
+
+private theorem derived_composition_square {A₀ A₁ A₂ B₀ B₁ B₂ : Type u₁}
+    [Category.{v₁} A₀] [Category.{v₁} A₁] [Category.{v₁} A₂]
+    [Category.{v₁} B₀] [Category.{v₁} B₁] [Category.{v₁} B₂]
+    [Abelian A₀] [Abelian A₁] [Abelian A₂]
+    [Abelian B₀] [Abelian B₁] [Abelian B₂]
+    [HasDerivedCategory.{w} A₀] [HasDerivedCategory.{w} A₁] [HasDerivedCategory.{w} A₂]
+    [HasDerivedCategory.{w} B₀] [HasDerivedCategory.{w} B₁] [HasDerivedCategory.{w} B₂]
+    (r₀ : B₀ ⥤ A₀) (r₁ : B₁ ⥤ A₁) (r₂ : B₂ ⥤ A₂)
+    (gA : A₀ ⥤ A₁) (gB : B₀ ⥤ B₁)
+    (fA : A₁ ⥤ A₂) (fB : B₁ ⥤ B₂)
+    (hA : A₀ ⥤ A₂) (hB : B₀ ⥤ B₂)
+    [r₀.Additive] [r₁.Additive] [r₂.Additive]
+    [gA.Additive] [gB.Additive] [fA.Additive] [fB.Additive] [hA.Additive] [hB.Additive]
+    [PreservesFiniteLimits r₀] [PreservesFiniteColimits r₀]
+    [PreservesFiniteLimits r₁] [PreservesFiniteColimits r₁]
+    [PreservesFiniteLimits r₂] [PreservesFiniteColimits r₂]
+    [PreservesFiniteLimits gA] [PreservesFiniteColimits gA]
+    [PreservesFiniteLimits gB] [PreservesFiniteColimits gB]
+    [PreservesFiniteLimits fA] [PreservesFiniteColimits fA]
+    [PreservesFiniteLimits fB] [PreservesFiniteColimits fB]
+    [PreservesFiniteLimits hA] [PreservesFiniteColimits hA]
+    [PreservesFiniteLimits hB] [PreservesFiniteColimits hB]
+    (cA : gA ⋙ fA ≅ hA) (cB : gB ⋙ fB ≅ hB)
+    (ag : r₀ ⋙ gA ≅ gB ⋙ r₁) (af : r₁ ⋙ fA ≅ fB ⋙ r₂)
+    (ah : r₀ ⋙ hA ≅ hB ⋙ r₂)
+    (ha : ∀ M : B₀, cA.hom.app (r₀.obj M) ≫ ah.hom.app M =
+      fA.map (ag.hom.app M) ≫ af.hom.app (gB.obj M) ≫ r₂.map (cB.hom.app M))
+    (M : DerivedCategory B₀) :
+    (compositionDerived gA fA hA cA).hom.app (r₀.mapDerivedCategory.obj M) ≫
+        (Functor.mapDerivedCategorySquareIso ah).hom.app M =
+      fA.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso ag).hom.app M) ≫
+        (Functor.mapDerivedCategorySquareIso af).hom.app (gB.mapDerivedCategory.obj M) ≫
+        r₂.mapDerivedCategory.map ((compositionDerived gB fB hB cB).hom.app M) := by
+  let := comp_preservesFiniteLimits gA fA
+  let := comp_preservesFiniteColimits gA fA
+  let := comp_preservesFiniteLimits gB fB
+  let := comp_preservesFiniteColimits gB fB
+  have hi : ∀ N : B₀, ah.hom.app N ≫ r₂.map (cB.inv.app N) =
+      cA.inv.app (r₀.obj N) ≫ fA.map (ag.hom.app N) ≫ af.hom.app (gB.obj N) := by
+    intro N
+    apply (cancel_epi (cA.hom.app (r₀.obj N))).1
+    simp only [Iso.hom_inv_id_app_assoc]
+    rw [← Category.assoc, ha]
+    simp only [Category.assoc, ← r₂.map_comp, Iso.hom_inv_id_app]
+    erw [r₂.map_id, Category.comp_id]
+  have hd := Functor.exactSquare_comp_inverse gB fB hB gA fA hA r₀ r₁ r₂
+    ag af ah cB.symm cA.symm hi M
+  have heA : (Functor.mapDerivedCategoryNatIso cA.symm ≪≫
+      Functor.mapDerivedCategoryCompIso gA fA).hom = (compositionDerived gA fA hA cA).inv := by
+    simp only [compositionDerived, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv,
+      Functor.mapDerivedCategoryNatIso_symm]
+  have heB : (Functor.mapDerivedCategoryNatIso cB.symm ≪≫
+      Functor.mapDerivedCategoryCompIso gB fB).hom = (compositionDerived gB fB hB cB).inv := by
+    simp only [compositionDerived, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv,
+      Functor.mapDerivedCategoryNatIso_symm]
+  change _ ≫ r₂.mapDerivedCategory.map ((Functor.mapDerivedCategoryNatIso cB.symm ≪≫
+    Functor.mapDerivedCategoryCompIso gB fB).hom.app M) =
+      (Functor.mapDerivedCategoryNatIso cA.symm ≪≫
+        Functor.mapDerivedCategoryCompIso gA fA).hom.app (r₀.mapDerivedCategory.obj M) ≫ _ at hd
+  rw [heA, heB] at hd
+  have he := congrArg (fun t ↦
+    (compositionDerived gA fA hA cA).hom.app (r₀.mapDerivedCategory.obj M) ≫ t ≫
+      r₂.mapDerivedCategory.map ((compositionDerived gB fB hB cB).hom.app M)) hd
+  simpa only [Category.assoc, Iso.hom_inv_id_app_assoc,
+    ← r₂.mapDerivedCategory.map_comp, Iso.inv_hom_id_app, r₂.mapDerivedCategory.map_id,
+    Category.comp_id] using he
+
+private theorem mate_composition_square
+    {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
+    [Category A₀] [Category A₁] [Category A₂]
+    [Category B₀] [Category B₁] [Category B₂]
+    {T₀ : A₀ ⥤ B₀} {r₀ : B₀ ⥤ A₀} (d₀ : T₀ ⊣ r₀)
+    {T₁ : A₁ ⥤ B₁} {r₁ : B₁ ⥤ A₁} (d₁ : T₁ ⊣ r₁)
+    {T₂ : A₂ ⥤ B₂} {r₂ : B₂ ⥤ A₂} (d₂ : T₂ ⊣ r₂)
+    {gA : A₀ ⥤ A₁} {gB : B₀ ⥤ B₁}
+    {fA : A₁ ⥤ A₂} {fB : B₁ ⥤ B₂}
+    {hA : A₀ ⥤ A₂} {hB : B₀ ⥤ B₂}
+    (cA : gA ⋙ fA ≅ hA) (cB : gB ⋙ fB ≅ hB)
+    (ag : r₀ ⋙ gA ⟶ gB ⋙ r₁) (af : r₁ ⋙ fA ⟶ fB ⋙ r₂)
+    (ah : r₀ ⋙ hA ⟶ hB ⋙ r₂)
+    (ha : ∀ M : B₀, cA.hom.app (r₀.obj M) ≫ ah.app M =
+      fA.map (ag.app M) ≫ af.app (gB.obj M) ≫ r₂.map (cB.hom.app M))
+    (X : A₀) :
+    T₂.map (cA.hom.app X) ≫ (mate d₀ d₂ ah).app X ≫ cB.inv.app (T₀.obj X) =
+      (mate d₁ d₂ af).app (gA.obj X) ≫ fB.map ((mate d₀ d₁ ag).app X) := by
+  apply (cancel_mono (cB.hom.app (T₀.obj X))).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  apply (d₂.homEquiv _ _).injective
+  rw [d₂.homEquiv_unit, d₂.homEquiv_unit]
+  simp only [Functor.map_comp]
+  have uh := unit_mateEquiv_symm d₀ d₂ (TwoSquare.mk _ _ _ _ ah) X
+  have uf := unit_mateEquiv_symm d₁ d₂ (TwoSquare.mk _ _ _ _ af) (gA.obj X)
+  have ug := unit_mateEquiv_symm d₀ d₁ (TwoSquare.mk _ _ _ _ ag) X
+  change hA.map (d₀.unit.app X) ≫ ah.app (T₀.obj X) =
+    d₂.unit.app (hA.obj X) ≫ r₂.map ((mate d₀ d₂ ah).app X) at uh
+  change fA.map (d₁.unit.app (gA.obj X)) ≫ af.app (T₁.obj (gA.obj X)) =
+    d₂.unit.app (fA.obj (gA.obj X)) ≫
+      r₂.map ((mate d₁ d₂ af).app (gA.obj X)) at uf
+  change gA.map (d₀.unit.app X) ≫ ag.app (T₀.obj X) =
+    d₁.unit.app (gA.obj X) ≫ r₁.map ((mate d₀ d₁ ag).app X) at ug
+  rw [d₂.unit_naturality_assoc]
+  rw [← uh,
+    ← reassoc_of% (cA.hom.naturality (d₀.unit.app X)), ha]
+  dsimp only [Functor.comp_obj]
+  rw [← reassoc_of% uf]
+  have hn := af.naturality ((mate d₀ d₁ ag).app X)
+  change fA.map (r₁.map ((mate d₀ d₁ ag).app X)) ≫ af.app (gB.obj (T₀.obj X)) =
+    af.app (T₁.obj (gA.obj X)) ≫ r₂.map (fB.map ((mate d₀ d₁ ag).app X)) at hn
+  rw [← reassoc_of% hn]
+  rw [← fA.map_comp_assoc, ug, fA.map_comp]
+  simp only [Category.assoc]
+
 section Composition
 
 variable {CZ CY CX : Type u}
@@ -568,6 +876,8 @@ variable {CZ CY CX : Type u}
   [PreservesFiniteLimits (restriction φY)] [PreservesFiniteColimits (restriction φY)]
   [PreservesFiniteLimits (restriction φX)] [PreservesFiniteColimits (restriction φX)]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Geometric composition of the specified scalar comparisons.
 The composite topos morphism has right adjoint Rf ⋙ Rg. Its chosen inverse image
 Lh is canonically identified with Lg ⋙ Lf by leftAdjointUniq for adjg.comp adjf
@@ -634,7 +944,80 @@ theorem θ_composition
         (inverseModules IfB).mapDerivedCategory ≫
       (Functor.associator mZ.T (inverseModules IgB).mapDerivedCategory
         (inverseModules IfB).mapDerivedCategory).hom := by
-  sorry
+  let cA := moduleComparison ((adjg.comp adjf).leftAdjointUniq adjh)
+    (compositeInverseImage IgA IfA) IhA ringA
+  let cB := moduleComparison ((adjg.comp adjf).leftAdjointUniq adjh)
+    (compositeInverseImage IgB IfB) IhB ringB
+  refine ⟨cA, cB, ?_, ?_, ?_⟩
+  · intro M U x
+    simp [cA, moduleComparison, CategoryTheory.moduleComparisonApp,
+      CategoryTheory.compareMap, compositeInverseImage]
+    rfl
+  · intro M U x
+    simp [cB, moduleComparison, CategoryTheory.moduleComparisonApp,
+      CategoryTheory.compareMap, compositeInverseImage]
+    rfl
+  · have ha : ∀ M : Modules BZ,
+        cA.hom.app ((restriction φZ).obj M) ≫ (a_h IhA IhB hh inferInstance).hom.app M =
+          (inverseModules IfA).map ((a_h IgA IgB hg inferInstance).hom.app M) ≫
+            (a_h IfA IfB hf inferInstance).hom.app ((inverseModules IgB).obj M) ≫
+            (restriction φX).map (cB.hom.app M) := by
+      intro M
+      apply (underlying AX).map_injective
+      have hcA := CategoryTheory.moduleComparisonApp_underlying
+        ((adjg.comp adjf).leftAdjointUniq adjh) (compositeInverseImage IgA IfA) IhA
+        ((restriction φZ).obj M)
+      have hcB := CategoryTheory.moduleComparisonApp_underlying
+        ((adjg.comp adjf).leftAdjointUniq adjh) (compositeInverseImage IgB IfB) IhB M
+      have hact (N : Modules BY) : (underlying AX).map
+          ((a_h IfA IfB hf inferInstance).hom.app N) =
+          IfA.moduleUnderlying.hom.app ((restriction φY).obj N) ≫
+            IfB.moduleUnderlying.inv.app N := by
+        ext U x
+        exact congrArg ULift.up (a_h_spec IfA IfB hf inferInstance N U x.down)
+      have hactg : (underlying AY).map ((a_h IgA IgB hg inferInstance).hom.app M) =
+          IgA.moduleUnderlying.hom.app ((restriction φZ).obj M) ≫
+            IgB.moduleUnderlying.inv.app M := by
+        ext U x
+        exact congrArg ULift.up (a_h_spec IgA IgB hg inferInstance M U x.down)
+      have hacth : (underlying AX).map ((a_h IhA IhB hh inferInstance).hom.app M) =
+          IhA.moduleUnderlying.hom.app ((restriction φZ).obj M) ≫
+            IhB.moduleUnderlying.inv.app M := by
+        ext U x
+        exact congrArg ULift.up (a_h_spec IhA IhB hh inferInstance M U x.down)
+      simp only [Functor.map_comp]
+      rw [hacth, hact]
+      change _ = _ ≫ _ ≫ (underlying BX).map (cB.hom.app M)
+      change (underlying AX).map (cA.hom.app ((restriction φZ).obj M)) = _ at hcA
+      change (underlying BX).map (cB.hom.app M) = _ at hcB
+      rw [hcA, hcB]
+      dsimp only [CategoryTheory.compareMap, compositeInverseImage, Iso.app_hom, Iso.app_inv,
+        Iso.symm_inv, Iso.symm_hom, Iso.trans_hom, NatTrans.comp_app,
+        Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app,
+        Functor.associator_hom_app, Functor.associator_inv_app]
+      simp only [Category.id_comp, Category.comp_id, Category.assoc,
+        Iso.inv_hom_id_app_assoc]
+      erw [reassoc_of% (IfA.moduleUnderlying.hom.naturality
+        ((a_h IgA IgB hg inferInstance).hom.app M))]
+      change _ = IfA.moduleUnderlying.hom.app _ ≫
+        Lf.map ((underlying AY).map ((a_h IgA IgB hg inferInstance).hom.app M)) ≫ _
+      rw [hactg, Functor.map_comp]
+      simp only [Category.assoc, ← Lf.map_comp_assoc, Iso.inv_hom_id_app]
+      rfl
+    unfold θ_h
+    ext X
+    dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app]
+    simp only [Category.id_comp, Category.comp_id]
+    apply mate_composition_square dZ dY dX
+    intro M
+    unfold aD_h
+    exact derived_composition_square (restriction φZ) (restriction φY) (restriction φX)
+      (inverseModules IgA) (inverseModules IgB) (inverseModules IfA) (inverseModules IfB)
+      (inverseModules IhA) (inverseModules IhB) cA cB
+      (a_h IgA IgB hg inferInstance) (a_h IfA IfB hf inferInstance)
+      (a_h IhA IhB hh inferInstance) ha M
 
 end Composition
 
@@ -655,6 +1038,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [PreservesFiniteLimits (inverseModules IB)] [PreservesFiniteColimits (inverseModules IB)]
   [PreservesFiniteLimits (restriction φ)] [PreservesFiniteColimits (restriction φ)]
 
+set_option linter.flexible false in
 /-- Identity normalization with canonical underlying ring and module identifications.
 The geometric inverse image is the identity functor of the sheaf topos, with its
 identity adjunction. The module identifications iA and iB are fixed on underlying
@@ -686,7 +1070,46 @@ theorem θ_identity
         (Functor.mapDerivedCategoryNatIso iB ≪≫
           Functor.mapDerivedCategoryIdIso (Modules B)).hom =
       (Functor.leftUnitor m.T).hom ≫ (Functor.rightUnitor m.T).inv := by
-  sorry
+  let iA := moduleComparison (Iso.refl _) IA (CategoryTheory.identityPresentation A) (by
+    change 𝟙 _ ≫ 𝟙 _ = _
+    simpa using ringA.symm)
+  let iB := moduleComparison (Iso.refl _) IB (CategoryTheory.identityPresentation B) (by
+    change 𝟙 _ ≫ 𝟙 _ = _
+    simpa using ringB.symm)
+  refine ⟨iA, iB, ?_, ?_, ?_⟩
+  · intro M U x
+    simp [iA, moduleComparison, CategoryTheory.moduleComparisonApp,
+      CategoryTheory.compareMap, CategoryTheory.identityPresentation]
+    rfl
+  · intro M U x
+    simp [iB, moduleComparison, CategoryTheory.moduleComparisonApp,
+      CategoryTheory.compareMap, CategoryTheory.identityPresentation]
+    rfl
+  · have ha : ∀ M : Modules B,
+        (a_h IA IB h inferInstance).hom.app M ≫ (restriction φ).map (iB.hom.app M) =
+          iA.hom.app ((restriction φ).obj M) := by
+      intro M
+      ext U x
+      change (iB.hom.app M).val.app U
+        (((a_h IA IB h inferInstance).hom.app M).val.app U x) = _
+      rw [a_h_spec]
+      simp [iA, iB, moduleComparison, CategoryTheory.moduleComparisonApp,
+        CategoryTheory.compareMap, CategoryTheory.identityPresentation,
+        inverseUnderlying]
+      change ((IB.moduleUnderlying.hom.app M).hom.app U
+        (ULift.up (((IB.moduleUnderlying.inv.app M).hom.app U
+          ((IA.moduleUnderlying.hom.app ((restriction φ).obj M)).hom.app U
+            (ULift.up x))).down))).down = _
+      have he := congrArg (fun q ↦ (q.hom.app U
+        ((IA.moduleUnderlying.hom.app ((restriction φ).obj M)).hom.app U (ULift.up x))).down)
+          (IB.moduleUnderlying.inv_hom_id_app M)
+      exact he
+    unfold θ_h
+    apply mate_identity_square d _ _ _
+    intro M
+    unfold aD_h
+    exact derived_identity_square (inverseModules IA) (inverseModules IB)
+      (restriction φ) iA iB (a_h IA IB h inferInstance) ha M
 
 end Identity
 

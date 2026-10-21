@@ -85,10 +85,12 @@
    }
   },
   {
-   "text": "For $X\\xrightarrow fY\\xrightarrow gZ$, the action square $a_{gf}$ is the pasted action square $(a_f g_B^*)\\circ(f_A^*a_g)$ after the canonical composition identifications. Indeed both carry the $A_Z$-action to its inverse image under $f^{-1}g^{-1}$ and then restrict along the same ring map; the canonical ring and inverse-image composition maps identify these actions. Apply mate pasting, clause (1), to $T_Z\\dashv r_Z$, $T_Y\\dashv r_Y$, $T_X\\dashv r_X$, with vertical functors $g_A^*,g_B^*$ then $f_A^*,f_B^*$. The mates of $\\theta_g$ and $\\theta_f$ are $a_g$ and $a_f$ by their definition, so the mate of $(f_B^*\\theta_g)\\circ(\\theta_f g_A^*)$ is exactly $a_{gf}$. Bijectivity of the mate correspondence gives the asserted formula for $\\theta_{gf}$, with the stated canonical composition maps.",
+   "text": "For the composite geometric inverse image, construct its algebraic presentation concretely: compose the module functors and paste their underlying sheaf isomorphisms. The generalized graph equations of the two presentations prove the composite graph equations. Compare this presentation with the specified presentation for the composite adjunction using the underlying geometric composition isomorphism. The ring equations make the comparison maps linear; faithfulness proves naturality and reflection of isomorphisms makes them isomorphisms cA and cB. Their underlying formulas are the displayed ones. The pinned underlying formula for a_h and naturality of the underlying module identification show that cA followed by a_h equals the pasted action maps followed by restriction of cB. Apply the exact-square localization composition theorem to this ordinary equation. Its inverse compositors are exactly compositionDerived cA and compositionDerived cB, by preservation of inverse natural isomorphisms. The adjunction Hom equivalence then proves the stated mate equation: insert the unit, use unit_mateEquiv_symm for the three action squares, and use naturality and the ordinary pasting equation. Cancel the invertible B-compositor. This proves the specified composition identity without any coefficient flatness or boundedness hypothesis.",
    "uses": [
     "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting"
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-site-algebraic-composition-unit",
+    "lem-pod-derived-exact-square-composition"
    ],
    "elementary": false,
    "source": {
@@ -97,12 +99,14 @@
    }
   },
   {
-   "text": "For the identity inverse image the transported action identification is the identity of scalar restriction, after the canonical identity identifications. Clause (4) of mate pasting says that the mate of $\\mathrm{id}_{T}$ is $\\mathrm{id}_{r}$. Bijectivity therefore gives $\\theta_{\\mathrm{id}}=\\mathrm{id}_{T}$. This also agrees with the ordinary coequalizer comparison in step 2, which preserves every tensor pairing for the identity.",
+   "text": "For the identity inverse image, compare each given algebraic presentation with the explicit identity presentation. The generalized operation transport in lem-pur-site-algebraic-composition-unit gives additive comparison maps; the pinned ring identity makes these maps linear over the unchanged ring. Faithfulness gives naturality and reflection of isomorphisms gives module isomorphisms iA and iB. The specified underlying formula for a_h, followed by cancellation of the underlying isomorphism of IB, proves a_h followed by restriction of iB equals iA on restricted modules. Apply naturality of the exact-functor composition comparison under left and right whiskering, its unit coherence, and preservation of composition of natural isomorphisms (lem-pur-exact-restriction-composition) to obtain the identical equation after exact localization. Transpose the mate through the scalar adjunction using unit_mateEquiv_symm; the localized action equation and naturality of the unit identify its transpose with that of T(iA). Injectivity of the Hom equivalence and cancellation of iA then give the displayed unitors.",
    "uses": [
     "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting"
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-site-algebraic-composition-unit",
+    "lem-pur-exact-restriction-composition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
     "place": "mateEquiv identity case, clause (4) of lem-weil-pbc-mate-pasting"
@@ -114,8 +118,11 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-adjunction-mate",
   "lem-pc-kflat-resolution",
+  "lem-pod-derived-exact-square-composition",
   "lem-pur-derived-change-of-rings",
+  "lem-pur-exact-restriction-composition",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-site-algebraic-composition-unit",
   "lem-trf-geometric-inverse-image-exact",
   "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-weil-pbc-exact-functor-derived-factorization",
@@ -127,7 +134,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting; V1 ordinary action proof reuses the proved generalized-graph helper inverse_change_hom after removing trivial ULift presentations"
+  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting; V1 ordinary action proof reuses the proved generalized-graph helper inverse_change_hom after removing trivial ULift presentations; X7 proves identity normalization by explicit algebraic identity transport, exact-localization unit coherence, and the adjunction Hom equivalence. X7 also proves composition by concrete composite algebraic presentations, the pinned action formula, exact-square composition localization, and injectivity of the scalar adjunction Hom equivalence."
  },
  "mathlib_searches": [
   {
@@ -322,9 +329,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "X7",
   "result": "pass",
-  "landing": "20261021T130222-L-2631201",
+  "landing": "20261021T225238-L-3805585",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
