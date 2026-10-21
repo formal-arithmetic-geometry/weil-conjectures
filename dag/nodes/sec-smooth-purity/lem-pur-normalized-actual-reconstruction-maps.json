@@ -17,9 +17,101 @@
   "def-coef-normalized-dvr-tower",
   "def-weil-derived-complete"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the single flat-term K-flat representative $Q\\to P$ supplied by [lem-coef-derived-system-evaluation-calculus]. Its strict quotient system represents $\\mathcal R_WP$. By [lem-pur-kflat-change-of-rings], $Q\\otimes_{\\widehat R_W}B_m$ is K-flat over $B_m$; hence [lem-pur-derived-change-of-rings] computes its next derived reduction by ordinary tensor. The adjoint of the actual quotient transition is the balancing isomorphism\n$$(Q\\otimes_{\\widehat R_W}B_m)\\otimes_{B_m}B_n\\longrightarrow Q\\otimes_{\\widehat R_W}B_n,\\quad (x\\otimes b)\\otimes a\\longmapsto x\\otimes q_{m,n}(b)a.$$\nIts inverse is $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. Both composites are identities by balancing, and these formulas commute with differentials and restrictions. For three indices both composites multiply the two quotient scalars in the same order. Thus these are the adjoints of the specified transitions, with their cocycle, so $\\mathcal R_WP$ is normalized as defined in [def-coef-normalized-dvr-tower].",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+   }
+  },
+  {
+   "text": "For normalized $N\\in D(\\mathscr S_W)$, its restriction $U_WN$ is the coherent underlying $\\widehat R_W$-tower required by [def-coef-normalized-dvr-tower]: the coherence is supplied by the strict system itself. Its levels and transition adjoints are exactly the ones in that definition. By [lem-coef-derived-system-evaluation-calculus], its total limit is $M=\\mathcal L_WN$. Apply [lem-coef-normalized-dvr-effectivity] to this tower. It says that $M$ is derived complete and that, for each $n\\geq1$, the scalar-extension adjunct $c_n:M\\otimes^L_{\\widehat R_W}B_n\\to N_n$ of the specified total-limit projection is an isomorphism. This is its canonical counit comparison, rather than an arbitrarily chosen finite-level isomorphism. The lemma imposes no boundedness or constructibility condition.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+   }
+  },
+  {
+   "text": "The actual counit $e_N$ is already a morphism in $D(\\mathscr S_W)$, by [lem-coef-derived-system-evaluation-calculus]. The same statement identifies its $n$th evaluation with the scalar-extension adjunct of the total-limit projection, hence with $c_n$ from Step 2, for the specified adjunction. Every such evaluation is invertible. The joint detection of isomorphisms by derived evaluations, asserted in that node, therefore makes $e_N$ itself invertible. This establishes invertibility in the derived strict-system category without attempting to lift an arbitrary compatible family of level maps.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+   }
+  },
+  {
+   "text": "The coefficient hypotheses needed to apply [lem-pur-roos-intrinsic-completeness-equivalence] hold for $A=R$, $t=\\varpi$, $T=W$. Indeed [lem-weil-l-adic-extension-integers-dvr] says that $R$ is a principal ideal domain and $\\varpi\\ne0$, so every ideal is finitely generated and multiplication by $\\varpi^n$ is injective. By [lem-weil-valued-dvr-finite-quotients], all $R/(\\varpi^n)$ are finite; in particular $R/(\\varpi)$ is torsion as an additive group. The exact sequence $0\\to R\\xrightarrow{\\varpi^n}R\\to R/(\\varpi^n)\\to0$ represents each quotient by a bounded complex of finite free modules, hence makes it perfect by [def-pc-perfect-ring-complex]. These verify precisely the Noetherian, finite-quotient, perfect-quotient and torsion assumptions of [def-weil-pbc-adic-coefficient-datum]. The auxiliary prime $p\\ne\\ell$ in the completeness-equivalence lemma can be chosen arbitrarily; its statement imposes no characteristic condition on $W$. Its completed sheaf and strict reductions are expressly the constant-quotient presentation used here.",
+   "uses": [
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+   }
+  },
+  {
+   "text": "Let $K$ be derived complete and put $N=\\mathcal R_WK$; it is normalized by Step 1, so Steps 2--3 make $e_N$ invertible. The triangle identity $\\mathcal L_W(e_N)\\circ u_{\\mathcal L_WN}=1$ of [lem-coef-derived-system-evaluation-calculus] then shows that $u_{\\mathcal L_WN}=\\mathcal L_W(e_N)^{-1}$ is an isomorphism. Next, by the same node $N$ is the strict system $(Q\\otimes_{\\widehat R_W}B_n)_n$ on one flat-term K-flat representative $Q\\to K$, and $\\mathcal L_WN=R\\lim U_WN$ is the total derived limit of exactly the strict reductions $\\operatorname{Res}_nK_n$ formed on that same $Q$ in [lem-pur-roos-intrinsic-completeness-equivalence]. With the coefficient hypotheses verified in Step 4, the implication (i)$\\Rightarrow$(v) of that lemma makes the canonical augmentation $\\varphi=\\operatorname{comp}_K:K\\to\\mathcal L_WN$ an isomorphism. Only its invertibility is used; $\\varphi$ is not identified with $u_K$. Naturality of $u$ applied to $\\varphi$ gives $\\mathcal L_W\\mathcal R_W(\\varphi)\\circ u_K=u_{\\mathcal L_WN}\\circ\\varphi$. The right side and $\\mathcal L_W\\mathcal R_W(\\varphi)$ are isomorphisms, hence $u_K=\\mathcal L_W\\mathcal R_W(\\varphi)^{-1}\\circ u_{\\mathcal L_WN}\\circ\\varphi$ is an isomorphism. Thus the actual unit is invertible without comparing two maps into a homotopy limit through their projections, and without identifying the specified adjunction with another one.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+   }
+  },
+  {
+   "text": "The transformations used throughout are the unit $u$ and counit $e$ of the one adjunction of [lem-coef-derived-system-evaluation-calculus], which already asserts their naturality and triangle identities in the derived system categories. Thus for $a:N\\to N'$ and $b:K\\to K'$ their squares read $a\\circ e_N=e_{N'}\\circ\\mathcal R_W\\mathcal L_W(a)$ and $\\mathcal L_W\\mathcal R_W(b)\\circ u_K=u_{K'}\\circ b$. Its identities remain $e_{\\mathcal R_WP}\\circ\\mathcal R_W(u_P)=1$ and $\\mathcal L_W(e_N)\\circ u_{\\mathcal L_WN}=1$. Steps 1–5 show that the relevant objects lie in the stated full subcategories and that these same components are invertible there. Restricting these equalities proves all requested naturality and triangle assertions, with no additional hypotheses.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +147,45 @@
    "results": "8 hits: BDeRhamPlus, localCohomology.isoSelfLERadical, localCohomology.diagram, BDeRham, AdicCompletion.eval_comp_of, AdicCompletion.eval_of, localCohomology, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
    "date": "2026-10-21",
    "verdict": "no match: ordinary adic completions and condensed/local-cohomology examples do not identify the actual unit and counit of this unbounded sheaf-system adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized inverse system of unbounded derived modules over powers of a regular element is reconstructed from its derived inverse limit via the actual counit, and the unit is invertible on derived complete complexes",
+   "results": "8 hits: AdicCompletion.eval_lift, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.eval_comp_of, AdicCompletion.eval_of, AdicCompletion.ofLinearEquiv_apply, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state this unbounded normalized sheaf-system reconstruction theorem or identify its actual maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state this unbounded normalized sheaf-system reconstruction theorem or identify its actual maps."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*system|derivedComplete.*counit|reduction.*limit.*adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state this unbounded normalized sheaf-system reconstruction theorem or identify its actual maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete unbounded sheaf complexes are recovered by the canonical unit to the total inverse limit of their quotient reductions",
+   "results": "8 hits: SheafOfModules.hasLimitsOfShape, SheafOfModules.hasLimit, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.quotientCompQhIso, CategoryTheory.Sheaf.ΓNatIsoLim, TopCat.instHasLimitsOfShapeSheaf, SheafOfModules.Finite.hasFiniteLimits, CategoryTheory.Sheaf.instHasLimitsOfShape",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state this unbounded normalized sheaf-system reconstruction theorem or identify its actual maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical reduction and derived inverse limit adjunction for complete complexes of module sheaves has invertible unit on derived complete objects and counit on normalized coefficient systems",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.of_bijective",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state this unbounded normalized sheaf-system reconstruction theorem or identify its actual maps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-normalized-reconstruction-adjunction-calculus",
@@ -77,5 +204,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-normalized-actual-reconstruction-maps",
+  "worker": "stage1",
+  "summary": "Reused the existing unbounded normalized-DVR effectivity and actual-augmentation completeness-equivalence nodes. Proved normalization by the explicit K-flat balancing map, identified the finite evaluations of the specified counit, used joint conservativity in the strict-system derived category, verified the DVR adic coefficient hypotheses, and proved invertibility of the actual unit on derived-complete objects from the triangle identity, naturality of the unit and invertibility of the canonical augmentation (used only as an object isomorphism; maintainer repair of Step 5). No statement change or new node.",
+  "blueprint": "The sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence, especially “counit of the realized adjunction and its transport is included in the same reconstruction”; this provides the normalization and actual unit/counit part of that reconstruction, within unit sk-thm-purity-transport Step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Uses the specified unbounded system adjunction, actual projection formulas and conservative evaluations as a generic categorical tool; this unit has no separate construction of them."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "K-flat preservation under coefficient extension is the generic resolution tool for normalization, not a replacement of the purity-transport route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes successive derived scalar extensions on K-flat complexes; a generic ringed-site tool."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Its canonical finite counit isomorphisms and completeness are the normalized-tower reconstruction tool expressly needed in the unit adic step."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Converts the stated Roos completeness into invertibility of the specified quotient augmentation; no node of this unit supplies this canonical-map comparison."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Verifies the coefficient-ring regularity and Noetherian hypotheses of the generic reconstruction tool; no geometric change of route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-06471558f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-06471558f (reviewer sub-agent of L); spot-checked: Read the item's 6 steps and every cited statement. Sources: Bhatt-Scholze 3.5.7(1)-(5) in the PDF (regular m=(varpi), unbounded case (5)) and the main-20261015 prop-pur-adic-reconstruction-trace-coherence paragraph. The route is unit Step 2; no SGA. Statement and stmt_deps are identical to the O3-created node; 0 new nodes. Step 1: normalization through the flat-term K-flat Q of the calculus node, then kflat-change-of-rings, derived-change-of-rings, the balancing isomorphism and the cocycle; correct. Step 2: unbounded lem-coef-normalized-dvr-effectivity applied to U_W N; correct. Step 3: e_N's evaluations are the adjoints of the projections, and joint detection of isomorphisms makes e_N invertible; correct, no level-map lifting. Step 4: PID, varpi nonzero, finite quotients, torsion and the perfect two-term resolution meet def-weil-pbc-adic-coefficient-datum; the auxiliary p is free; correct. Step 5 had a C3/C4 fault: it claimed the calculus adjunction's unit is the transported sequence-topos unit and equals Roos comp_K, which no cited statement says (maps into R lim are not pinned by their projections). Repaired: the triangle identity L(e_N) u_{LN}=1 makes u_{LN} invertible; Roos (i)=>(v) gives an isomorphism phi:K->L_W R_W K (same strict reductions on the same Q); naturality of u then makes u_K invertible. The step now uses only the calculus and Roos nodes; the two unsplit sequence-topos nodes are dropped from the step, proof_deps and tool_uses. Step 6: restriction of the calculus node's naturality and triangle identities; correct. Edge cases checked: zero objects, empty W, n=m, n=1, unbounded complexes. det-sp-normalized-equivalence overlaps but is not a duplicate; no cycle. Fix file: fixes/dag/nodes/sec-smooth-purity/lem-pur-normalized-actual-reconstruction-maps.json; 1 file(s) fixed by the reviewer"
  }
 }
