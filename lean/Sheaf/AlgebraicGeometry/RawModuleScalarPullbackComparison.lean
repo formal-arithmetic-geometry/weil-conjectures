@@ -5,7 +5,7 @@ Authors: SHEAF group M4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Limits
