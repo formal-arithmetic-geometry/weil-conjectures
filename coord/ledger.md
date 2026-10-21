@@ -22954,3 +22954,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/K7/Sheaf.Paper.AdicConstructibilityPredicateComparison (stage 3; reviewer PASS; first push; landing 20261021T154033-L-2771458 (proof); batch 20261021T154012; modules 1; new nodes 0)
 - 15:40 L: merged deliver/M4/Sheaf.Paper.PowerTorsionSheafLimitComplete (stage 3; reviewer PASS; first push; landing 20261021T154037-L-2774221 (proof); batch 20261021T154012; modules 1; new nodes 0)
 - 15:40 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.CartierKummerMap (stage 3; reviewer FIX; first push; landing 20261021T154041-L-2777332 (interface); batch 20261021T154012; modules 4; new nodes 3; change records: coord/changes/cartier-kummer-data-extraction.md)
+- 15:40 L: merged deliver/Q4/Sheaf.RingTheory.IntegralComponentHenselianPermanence (stage 3; reviewer PASS; first push; landing 20261021T154045-L-2779419 (proof); batch 20261021T154012; modules 1; new nodes 0)
