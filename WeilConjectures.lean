@@ -12300,7 +12300,6 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
-public import WeilConjectures.ZZAudit
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
