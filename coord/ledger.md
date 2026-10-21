@@ -20197,3 +20197,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:06 L: merged deliver/NN/lem-weil-pbc-formal-exact-projection-mate (stage 2; reviewer PASS; parallel immutable checks)
 - 04:06 L: merged deliver/Q04/lem-sfb-square-zero-periodic-tensor (stage 2; reviewer PASS; parallel immutable checks)
 - 04:06 L: returned deliver/NB/lem-cbc-finite-constant-map-naturality (reviewer RETURN: L: independent stage-2 immutable head 15d7dc1c1918: H2/stmt_deps (mechanical finding upheld): the item cites theorem nod)
+- 04:06 L: returned deliver/NY/lem-sfb-adic-perfect-model-complete-reduction (reviewer RETURN: L: independent stage-2 immutable head 83b51364a1e0: H2 (mechanical finding upheld): stmt_dep lem-weil-pbc-constant-compl)
