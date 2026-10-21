@@ -38,120 +38,88 @@
  ],
  "proof": [
   {
-   "text": "The universe hypothesis makes the two ringed sites small. Apply [prop-pur-kinjective-resolutions-exist] to their constant commutative ring sheaves: the module categories are Grothendieck abelian and have functorial K-injective resolutions. For these coefficients, [def-weil-pbc-proetale-operations] gives the exact inverse image $f^*$, its module direct-image right adjoint $f_*$, and the total derived adjunction $D(f^*)\\dashv G$. The additive direct image is left exact (kernels of module sheaves are sectionwise and $(f_*M)(V)=M(X\\times_YV)$). Thus [lem-pc-right-derived-functor-triangulated] applies and proves that $G$ carries distinguished triangles to distinguished triangles and commutes with integer shifts. Since $A$ is finite and discrete, [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant] identify the coefficient ring $A_T$ of the statement with the sheafified constant ring, i.e. with $\\nu_T^*A_{T,\\mathrm{\\acute et}}$ as in [det-pe-classical-sheaves-modules]; so the constant-coefficient classical and comparison statements used in steps 5 and 6 apply to $\\mathcal A_T$.",
+   "text": "Apply the ringed-site Grothendieck and K-injective existence theorem to the actual constant ring sheaves. The canonical constant-ring pullback/direct-image adjunction agrees with the sectionwise coefficient direct image: this follows from the hom-equivalence inverse equations and the defining coefficient map. Derive that adjunction. Its right adjoint preserves all existing products. Generic K-injective derived products supply countable products in both derived categories, and the additive total derived functor is triangulated and commutes with integer shifts.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "def-weil-pbc-proetale-operations",
-    "def-weil-sheaf-of-modules-category",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "det-pe-classical-sheaves-modules"
+    "lem-pc-right-derived-functor-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Setup for Transfer: total derived module direct image"
+    "place": "Setup and Transfer: total derived module direct image and its canonical products"
    }
   },
   {
-   "text": "Products of module sheaves exist: take the product of sections with componentwise scalar multiplication and restriction; a matching family glues uniquely in each component, so this presheaf is a sheaf, with the product universal property [def-weil-sheaf-of-modules-category]. Choose K-injective representatives for a countable family. Their termwise product represents its derived product by [lem-pc-ringed-space-product-kinjective]; hence products exist in both derived categories. The adjunction of [def-weil-pbc-proetale-operations] gives, for every $M\\in D_Y$,\n$$\\operatorname{Hom}(M,G\\prod_iL_i)\\cong\\operatorname{Hom}(D(f^*)M,\\prod_iL_i)\\cong\\prod_i\\operatorname{Hom}(D(f^*)M,L_i)\\cong\\prod_i\\operatorname{Hom}(M,GL_i).$$\nThese bijections are induced by $G$ of the product projections, so they are exactly the universal property that $G$ preserves the product, including its canonical projections.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: product preservation of total direct image"
-   }
-  },
-  {
-   "text": "If $L\\in D_X^{\\ge a}$, then $L$ belongs to the bounded-below subcategory, regardless of any upper bound. Apply [lem-weil-pbc-derived-functor-negative-vanishing] to the left exact additive $f_*$ between the Grothendieck categories obtained in step 1. Its bounded-below derived image has no cohomology below $a$. The comparison [src-right-derived-functor-plus-compatibility] identifies that image, after inclusion in the unbounded category, with $GL$. Therefore $GL\\in D_Y^{\\ge a}$.",
+   "text": "For a complex L bounded below by a, regard L as an object of the bounded-below derived category. Negative vanishing for the additive direct image kills homology below a. Transport this vanishing along the canonical total/bounded-below derived-functor compatibility. Thus the total direct image has the same lower bound.",
    "uses": [
     "lem-weil-pbc-derived-functor-negative-vanishing",
     "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TC, lemma-negative-vanishing (1); bounded-below compatibility"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Stacks Tag 05TC; bounded-below compatibility"
    }
   },
   {
-   "text": "Choose a positive integer $n$ with $n1_A=0$: among the finitely many multiples of $1_A$, two coincide, and their positive index difference works. Thus the underlying abelian sheaf of every étale $A$-module sheaf $F$ is killed by $n$. The identity base change in the assumed dimension bound supplies the fibre bound $e$ for $f$ itself. Apply [lem-kun-proper-torsion-cd-bound] to this torsion abelian sheaf. It gives $R^qf_*U(F)=0$ for $q>2e$. The comparison [lem-sbc-higher-direct-image-forget-comparison] identifies the underlying abelian sheaf of the module $R^qf_*F$ with the same abelian derived cohomology. A module sheaf with zero underlying abelian sheaf is zero, so $R^qf_{\\mathrm{\\acute et},*}F=0$ for $q>2e$. This argument uses neither quasi-compactness of $Y$ nor invertibility of $n$.",
+   "text": "The underlying additive group of a finite coefficient ring is torsion, and every module over it is torsion. Apply this sectionwise to any etale coefficient module sheaf. The identity base change identifies the original fibres with those in the assumed base-change bound, by the canonical fibre isomorphism. Proper torsion vanishing therefore applies. The higher-direct-image forgetful comparison identifies the forgotten module higher image with the vanishing abelian higher image. Faithful additive forgetting reflects the zero object by reflecting the equality identity = zero. This gives etale vanishing for every integer q > 2e.",
    "uses": [
     "lem-kun-proper-torsion-cd-bound",
     "lem-sbc-higher-direct-image-forget-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095U, lemma-cohomological-dimension-proper; module forgetful comparison"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Etale statements: uniform 2e vanishing; Stacks Tags 095U and 0D6J"
    }
   },
   {
-   "text": "Properness gives finite type and separatedness [def-weil-proper-morphism]. Finite type includes quasi-compactness [def-weil-finite-type-morphism], and separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. If $H$ is a classical pro-étale $A$-module sheaf, [det-pe-classical-sheaves-modules] writes $H\\cong\\nu_X^*F$ for an étale $A$-module sheaf $F$, with $\\nu_T^*$ exact. Apply the bounded-below comparison [sk-thm-pe-direct-image-comparison] to $F[0]$; use [src-right-derived-functor-plus-compatibility] to interpret it for the total direct image. Then\n$$G(H[0])\\cong\\nu_Y^*Rf_{\\mathrm{\\acute et},*}(F[0]).$$\nThe sheaf-case derived identification [lem-sp-kinjective-computes] identifies the $q$-th cohomology on the right before pullback with $R^qf_{\\mathrm{\\acute et},*}F$. Step 4 kills it for $q>2e$; exactness of $\\nu_Y^*$ commutes with kernels, images and cokernels, so also with cohomology. Hence $G(H[0])\\in D_Y^{\\le2e}$.",
+   "text": "Use the proved exact restriction equivalence along constant scalar sections and its derived direct-image comparison, supplied by the private helpers of the classical-direct-image-preservation module. A classical intrinsic module sheaf H restricts to a classical fixed-ring module sheaf. The essential-image characterization writes it as comparison pullback of an etale sheaf E. Properness supplies qcqs, so the bounded-below direct-image comparison applies to E[0]. Compose it with exact restriction/single-functor compatibility and total/bounded-below compatibility. Exact comparison pullback preserves the upper bound 2e proved in the previous step. Faithful exact restriction reflects vanishing of each homology object. Hence the intrinsic total image of H[0] is bounded above by 2e.",
    "uses": [
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
     "lem-pc-separated-quasi-separated",
     "det-pe-classical-sheaves-modules",
     "sk-thm-pe-direct-image-comparison",
-    "src-right-derived-functor-plus-compatibility",
-    "lem-sp-kinjective-computes"
+    "lem-pe-classical-direct-image-preservation",
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: bounded-below étale/pro-étale comparison and heart bound"
+    "place": "Transfer: classical heart objects and bounded-below comparison"
    }
   },
   {
-   "text": "Let $P$ be the class of classical $A$-module sheaves. It is replete by its definition as an essential image, and contains zero since $\\nu_X^*0=0$ [det-pe-classical-sheaves-modules]. Step 5 supplies the heart bound $2e$, and step 1 supplies triangulatedness and shift commutation. Apply [lem-sfb-bounded-heart-amplitude-devissage] with this $P$ and $d=2e$. It follows that for every bounded classical-cohomology $K\\in D_X^{\\le b}$, one has $GK\\in D_Y^{\\le b+2e}$.",
+   "text": "Products of pro-etale modules are exact. Thus the ordinary derived category is left complete: every complex is the homotopy limit of its truncations in degrees at least -n. Use the existing homotopy-limit lemma with the chosen product fan, and identify its lift and tower shift with the canonical Pi.lift and towerTransitionEndomorphism by their projection equations. Apply the left-complete heart upper-bound theorem to the class of classical module sheaves, the heart bound 2e above, and product preservation. It combines finite Postnikov induction with eventual invertibility of homology transitions, giving the sharp bound b + 2e for every classical-cohomology complex bounded above by b, without a lower bound.",
    "uses": [
-    "det-pe-classical-sheaves-modules",
-    "lem-sfb-bounded-heart-amplitude-devissage"
+    "det-pe-products-exact",
+    "lem-sfb-derived-left-complete-truncation-bound",
+    "lem-sfb-left-complete-heart-upper-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: finite Postnikov dévissage of the heart bound"
+    "place": "Transfer and truncation argument; Stacks Tags 07KC, 08TB, 08TC and 0H72"
    }
   },
   {
-   "text": "Now let $L\\in D_X^{\\le b}$ have classical cohomology, with no lower bound, and fix $m>b+2e$. Put $N=\\min(b,m-2e-2)$. Then $N<m-2e-1$, and $K=\\tau_{\\ge N}L$ has cohomology in $[N,b]$, still classical: retained cohomology is unchanged and discarded cohomology is zero [def-kun-truncations]. Step 6 gives $\\mathcal H^mGK=0$. Apply [lem-sfb-finite-proper-classical-truncation] with $S=Y$ and the identity base change, identifying $X\\times_YY$ with $X$ by its canonical projection. Its hypotheses are exactly the given properness, finite ring, uniform base-change fibre bound and classical cohomology, and its inequality is the chosen inequality on $N$. It identifies $\\mathcal H^mGL$ with $\\mathcal H^mGK=0$. Since this holds for every $m>b+2e$, the required sharp upper bound follows for the unbounded-below $L$.",
-   "uses": [
-    "def-kun-truncations",
-    "lem-sfb-finite-proper-classical-truncation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: output cohomology depends only on a bounded-below truncation; Transfer"
-   }
-  },
-  {
-   "text": "Finally apply [lem-exc-direct-image-coproducts] to the small étale sites, $u=f$ and $c=2e$. Step 5 has checked that $f$ is quasi-compact and quasi-separated, and step 4 gives the vanishing for every étale $A$-module sheaf required by that criterion. It therefore gives the assertion for every small family of unbounded complexes, including the empty family. Its comparison is explicitly the map from the coproduct of the images to the image of the coproduct induced by applying $E$ to each coprojection, so it gives the specified canonical comparison, not just an abstract isomorphism. All families are small in the common universe fixed in the statement.",
+   "text": "Apply the finite-relative-cohomological-dimension etale coproduct criterion with c = 2e. Properness supplies qcqs. Convert the integer vanishing on the degree-zero single functor to the natural-degree right-derived-functor formulation by the standard homology/right-derived isomorphism. The criterion gives preservation of every small coproduct, through its canonical comparison, including empty families.",
    "uses": [
     "lem-exc-direct-image-coproducts"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: arbitrary unbounded direct sums, Tag 0F0D"
+    "place": "Etale statements: arbitrary unbounded direct sums; Stacks Tag 0F0D"
    }
   }
  ],
  "proof_deps": [
   "prop-pur-kinjective-resolutions-exist",
   "def-weil-pbc-proetale-operations",
-  "def-weil-sheaf-of-modules-category",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-pc-ringed-space-product-kinjective",
   "lem-weil-pbc-derived-functor-negative-vanishing",
   "src-right-derived-functor-plus-compatibility",
   "lem-kun-proper-torsion-cd-bound",
@@ -161,16 +129,17 @@
   "lem-pc-separated-quasi-separated",
   "det-pe-classical-sheaves-modules",
   "sk-thm-pe-direct-image-comparison",
-  "lem-sp-kinjective-computes",
-  "lem-sfb-bounded-heart-amplitude-devissage",
-  "def-kun-truncations",
-  "lem-sfb-finite-proper-classical-truncation",
+  "lem-pe-classical-direct-image-preservation",
+  "det-pe-products-exact",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "lem-sfb-left-complete-heart-upper-bound",
   "lem-exc-direct-image-coproducts"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "Y9",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-  "place": "Étale statements and Transfer; explicit assembly from the cited Stacks and existing DAG inputs, using the established classical truncation window"
+  "place": "Etale statements and Transfer; existing exact-product left completeness and sharp heart-bound theorem replace the separate bounded-heart and finite-proper truncation-window steps."
  },
  "mathlib_searches": [
   {
@@ -357,9 +326,7 @@
  "tool_uses": [
   "prop-pur-kinjective-resolutions-exist",
   "def-weil-pbc-proetale-operations",
-  "def-weil-sheaf-of-modules-category",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-ringed-space-product-kinjective",
   "lem-weil-pbc-derived-functor-negative-vanishing",
   "src-right-derived-functor-plus-compatibility",
   "lem-kun-proper-torsion-cd-bound",
@@ -369,12 +336,7 @@
   "lem-pc-separated-quasi-separated",
   "det-pe-classical-sheaves-modules",
   "sk-thm-pe-direct-image-comparison",
-  "lem-sp-kinjective-computes",
-  "lem-sfb-bounded-heart-amplitude-devissage",
-  "def-kun-truncations",
-  "lem-exc-direct-image-coproducts",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  "lem-exc-direct-image-coproducts"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -401,5 +363,15 @@
   "group": "Q52",
   "result": "pass",
   "note": "Only the lean field is new, plus one sorry-proved theorem; no new defs or nodes. Every clause matches the node: proper f; uniform fibre bound over all base changes (verbatim as PASSed sibling finiteProper_classical_truncation); G = canonical proEtaleConstantDerivedDirectImage, triangulated with canonical CommShift; countable products and canonical-cone preservation; IsGE a preserved for all L; IsLE b to b+2e for IsClassicalModuleComplex L with no lower bound; etale R^q (rightDerivedLowerStarPlus, H^q of F[0]) zero for q>2e; small-coproduct preservation of rightDerivedLowerStar. No qc of Y or field hypotheses. Universes u/u+1 not collapsed; free w is stronger than 'small' but true. Edge cases ok (A=0, empty, e=0, empty families). No duplicate in Mathlib or the side tree. lean.statement verbatim; docstrings carry source, blueprint and 8 proof steps. nt_compile --json rc=0 in 41.5 s, clean. Advisories: Nonempty CommShift/HasCountableProducts conjuncts are weak forms; constant-ring encoding of D_T instead of FiniteCoefficientDerivedCategory, justified by the node's 'ordinary constant-A', proof step 1 bridges and the sibling's encoding."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261021T121013-L-4040420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
