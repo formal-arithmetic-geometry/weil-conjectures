@@ -1,84 +1,75 @@
 ## What changed
 
-Fully proved the original coefficient naturality theorem by constructing its explicit
-common-resolution natural isomorphism. Generic resolutionSectionsObjIso and
-resolutionSectionsNatIso package exact forgetting, the identity section-complex
-identification and the acyclic-resolution comparison. The original Ext.precompAddEquiv handles the terminal source change,
-with its naturality supplied by Mathlib Ext.comp_assoc_of_third_deg_zero; identity natural isomorphisms identify its
-Ext functor with the existing evaluated cohomology and Sheaf.functorH.
-The original equivalence now reads the same component maps from this construction.
-Its public signature and the theorem's signature are unchanged. The definition
-refactor is recorded in coord/changes/moduleCohomologyExtResolutionEquiv-section-identification.md.
+Repair the returned delivery at `dfe7664f3`, rebased on the current `sheaf-dag`.
+Retire the proved duplicate
+`Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality` through
+`deleted.txt`. Its existing upstream declaration and companion extension keep
+the complete comparison API available.
 
-Removed the first worker's equivalent function-equality hole and its proposed node.
-Added a plain proof-only AcyclicComparisonNatural import. All public imports
-remain needed by definition data, including Ext.Basic for extSourceNatIso.
-No downstream module is delivered or adapted.
+The current base includes B2's reviewed consumer migration (landing
+`20261020T230711-L-602865`). All eight consumer adaptations from the old F2
+packet are therefore superseded. This packet preserves their current sources,
+including B2's new proofs and component API, and changes no consumer or adopted
+source-library file. The node copy retains its current statement, dependencies,
+proof steps and review data; its Lean note and proof-origin description now
+record the retirement of the remaining duplicate.
+
+The change record is
+`coord/changes/retire-module-cohomology-ext-resolution-naturality-F2.md`.
+It is complete in this packet; no reviewer fix file is required.
+
+Server validation through `lcompile.py --all` compiled the empty withdrawal
+module and a scratch module importing all eight live consumers together with
+the adopted owner and extension (0.3 s and 2.6 s). The helper-cache, naturality
+and current component APIs resolve. `#print axioms` for the adopted naturality
+theorem reports only `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## Proved and sorry left
 
-Closed the one original hole:
-AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_naturality.
-One of one original holes proved; zero holes added; zero split off; no sorry remains
-in the item. All new constructions have explicit data and proved laws.
-The proposed moduleCohomologyExtResolutionEquiv_naturality_hom hole is removed,
-not moved or counted as a second baseline hole closed.
+Item baseline: zero holes. Holes proved: zero of zero. Holes added: zero.
+Split off: zero. No delivered declaration contains `sorry`.
+The already proved
+`AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_naturality`
+remains the node's declaration in the adopted source module.
 
+The old consumer snapshots are not delivered, so this packet changes no
+consumer hole or proof. In particular the current proved
+`exists_unique_qcoherentNormalizedComparison` is preserved.
 
 ## No longer needed
 
-No original dependency or module is pruned. All three original proof_deps remain
-used: acyclic comparison naturality, forgotten-injective acyclicity and
-injective-resolution lift naturality. The unit's realized route is unchanged.
-The unlanded equivalent-restatement node
-new-module-cohomology-ext-resolution-naturality-hom is removed.
+Only the duplicate module
+`Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality` is pruned.
+No current live library file directly imports it. The quarantine archives for
+`CoherentFrobeniusPullback`, `QcoherentNormalizedComparison`, and
+`QcoherentNormalizedPullbackSquare` retain their historical imports; their
+restored live versions already carry the reviewed migrations and are preserved.
+The eight consumer migrations in the retained packet are no longer needed in
+this delivery because they are already on the current base; the stale snapshots
+and compiled overlay are archived under the sandbox's scratchpad.
+
+No mathematical node, parent reference, proof dependency or unit step is
+pruned. The node stays attached to the same upstream naturality theorem. Its
+three declared proof dependencies are preserved. The existing source extension
+continues to supply `comparisonHasSheafify`, `comparisonHasExt`, and
+`ExtEdgeResolution.sectionsComparisonNatIso`.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The first worker's function-equality square was equivalent to the original theorem
-by funext/congrFun. Moving its entire hole there was not a strictly simpler
-reduction and did not prove the item. Removed it and completed the actual
-common-resolution argument. Generic construction and Mathlib's functorial Ext
-source map resolve the elaboration timeout without introducing any new hole.
+This is an explicitly listed zero-hole duplicate retirement, rather than a
+new proof obligation. The prior mathematical review passed, but the landing
+rejected a reviewer fix named
+`retire-module-cohomology-ext-resolution-naturality-F2.md`. The stage-3 fix
+lookup in `tools/batch_land.py` expects a change-record fix to be named
+`retire-module-cohomology-ext-resolution-naturality-F2.change.md`; its delivered
+repository path remains the ordinary `.md` path above. This packet includes the
+complete record and needs no external fix, avoiding that mismatch.
+
+Since the returned head, B2's reviewed delivery migrated all eight consumers
+and reattached the node to the adopted source declaration. Replaying the old
+F2 consumer snapshots would undo those later proofs and APIs. This repair
+therefore retains only the actual remaining retirement and its records.
 
 ## Second reading by F2
 
-1. Compared the entire delivered item against the repository. All 18 existing declaration signatures are unchanged; the equivalence
-and theorem signatures are also byte-for-byte identical. Earlier declarations stay
-unchanged. The equivalence data refactor preserves each component function and
-inverse as explained in the change record; no hypothesis or target meaning changes.
-No downstream module is edited.
-2. Compiled the complete item locally without errors or warnings, below 60 seconds.
-No sorry, axiom, unsafe, opaque, implemented_by, extern or hollow definition occurs
-in it. Scratch #print axioms checks cover the original theorem/equivalence and the
-new natural comparison and generic resolution construction: each uses only
-propext, Classical.choice and Quot.sound; no sorryAx. The final axiom scratch (including extSourceNatIso)
-compiled cleanly in 59.7 seconds. The delivery probe checks every declaration
-and the dry run passed.
-3. Removed the equivalent-restatement split rather than accepting it. No split-off
-statement remains. Alternative searches used mapHomologyIso naturality,
-isoRightDerivedObj naturality and acyclic-resolution terms through loogle,
-leanfinder and grep; the existing primitive results are used directly. The generic
-argument covers degree zero, zero objects/morphisms and empty schemes and adds
-no scheme or coefficient assumptions.
-4. Read the proof from the target downward. The concrete common-resolution route
-is retained; terminal-source naturality is Mathlib Ext associativity rather than a
-new associativity lemma. Checked the imports, all original proof dependencies,
-and sk-thm-p1's realized route. No old proof dependency is unused.
-5. The existing node's proof, proof_deps, proof_origin and declaration list now
-match the completed Lean construction. Statement/dependencies and unit realization
-remain unchanged; there are no new nodes. All new definitions contain real maps
-and proved naturality, with source docstrings.
-
-Second reading replaced the bogus split with a complete proof, retained the
-resolution-normalized comparison, and packaged the original precompAddEquiv
-component using Mathlib's Ext.comp_assoc_of_third_deg_zero.
-
-
-The first dry run exposed a deliver3.py diagnostic-parser fault: after a trial
-removal of Ext.Basic, the normalization file correctly failed with
-error(lean.unknownIdentifier), but forced_adaptations recognizes only error: or
-error[. No script is modified. The final construction instead uses the original
-precompAddEquiv in extSourceNatIso's data, so Ext.Basic is needed and retained;
-there is no adaptation to classify or deliver. Its final naturality proof uses
-Ext.comp_assoc_of_third_deg_zero directly after extensionality.
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.
