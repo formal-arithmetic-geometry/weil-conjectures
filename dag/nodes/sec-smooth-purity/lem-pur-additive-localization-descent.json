@@ -12,9 +12,86 @@
   "def-weil-pbc-additive-functor",
   "lem-weil-pbc-localization-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=G\\circ q$. Naturality of $e:H\\xrightarrow{\\sim}U$ gives $H(f)=e_Y^{-1}\\circ U(f)\\circ e_X$ for $f:X\\to Y$. Thus $H(f+g)=e_Y^{-1}\\circ(U(f)+U(g))\\circ e_X=H(f)+H(g)$ by bilinearity of composition. Hence $H$ is additive. An additive Hom map sends zero to zero, since $H(0)=H(0)+H(0)$ implies $H(0)=0$ by cancellation; the same holds for $q$.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY (definition-preadditive); elementary conjugation calculation"
+   }
+  },
+  {
+   "text": "For $X,Y\\in\\mathcal C$, choose $B=X\\oplus Y$ with injections $i_1,i_2$ and projections $p_1,p_2$. Apply either $T=q$ or $T=H$ to its relations. Functoriality and $T(0)=0$ give $T(p_r)\\circ T(i_r)=1$ and $T(p_r)\\circ T(i_s)=0$ for $r\\ne s$. Additivity gives $T(i_1)\\circ T(p_1)+T(i_2)\\circ T(p_2)=T(i_1\\circ p_1+i_2\\circ p_2)=1$. These are the biproduct relations in $\\mathcal D$ and $\\mathcal E$, respectively.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0103 (remark-direct-sum), 0105 (lemma-additive-additive); their displayed relations"
+   }
+  },
+  {
+   "text": "The relations just obtained give the product universal property explicitly. Given $a:Z\\to T(X)$ and $b:Z\\to T(Y)$, set $t=T(i_1)\\circ a+T(i_2)\\circ b$. Then $T(p_1)\\circ t=a$ and $T(p_2)\\circ t=b$. Any $t$ with these projections satisfies $t=(T(i_1)\\circ T(p_1)+T(i_2)\\circ T(p_2))\\circ t=T(i_1)\\circ a+T(i_2)\\circ b$, proving uniqueness. Therefore $(qB,q(p_1),q(p_2))$ is a product cone and its image under $G$, namely $(HB,H(p_1),H(p_2))$, is a product cone as well.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 00ZY (definition-preadditive), 0103 (remark-direct-sum); explicit product lift and uniqueness"
+   }
+  },
+  {
+   "text": "Let $A_1,A_2\\in\\mathcal D$. By the explicit essential-surjectivity hypothesis choose isomorphisms $a:qX\\xrightarrow{\\sim}A_1$ and $b:qY\\xrightarrow{\\sim}A_2$. The cone with vertex $qB$ and legs $a\\circ q(p_1)$, $b\\circ q(p_2)$ is a product: to lift a pair, first compose with $a^{-1},b^{-1}$ and use step 3. Its image under $G$ is a product for the same reason, since $G(a^{-1})$ and $G(b^{-1})$ are inverses of $G(a),G(b)$. For any other product cone $(P,r_1,r_2)$ of $A_1,A_2$, the two product universal properties give mutually inverse maps $c:P\\to qB$ and $d:qB\\to P$ commuting with the legs: each composite is the identity by uniqueness of a map with its two projections. Applying $G$ gives inverse comparison maps $G(c),G(d)$ commuting with the image legs. Thus the image cone with vertex $GP$ is a product too. This proves preservation of binary products by $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent argument continuing Tag 0103: explicit transport of product cones along isomorphisms and uniqueness"
+   }
+  },
+  {
+   "text": "For $X,Y\\in\\mathcal C$, $G(0_{qX,qY})=G(q(0_{X,Y}))=H(0_{X,Y})=0$ by step 1. For arbitrary $A_1,A_2$ choose $a:qX\\xrightarrow{\\sim}A_1$, $b:qY\\xrightarrow{\\sim}A_2$. Bilinearity gives $0_{A_1,A_2}=b\\circ0_{qX,qY}\\circ a^{-1}$. Applying $G$ and using the image-object case gives $G(0_{A_1,A_2})=G(b)\\circ0\\circ G(a^{-1})=0$. Thus $G$ preserves zero morphisms on all Hom groups.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY (definition-preadditive); zero-composition identities and essential-surjectivity transport"
+   }
+  },
+  {
+   "text": "The categories $\\mathcal D$ and $\\mathcal E$ are preadditive, and $\\mathcal D$ has binary products because it is additive. Steps 4 and 5 establish precisely binary-product and zero-morphism preservation for $G$. Apply [lem-sfb-products-zero-additive] to conclude $G(f+g)=G(f)+G(g)$ for every pair $f,g:A_1\\to A_2$. This is the required additivity. The localization hypothesis imposes no further step on this argument; in particular no fraction representation of a morphism has been used.",
+   "uses": [
+    "def-weil-additive-category",
+    "lem-sfb-products-zero-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0DLP (lemma-additive-functor), product criterion; Mathlib Functor.additive_of_preserves_binary_products, AdditiveFunctor.lean:234–239"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-additive-functor",
+  "def-weil-preadditive-category",
+  "def-weil-additive-category",
+  "lem-sfb-products-zero-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 00ZY (definition-preadditive), 0103 (remark-direct-sum), 0104 (definition-additive-category), 0105 (lemma-additive-additive), 0DLP (lemma-additive-functor); agent essential-surjectivity argument using the existing product/zero criterion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +127,45 @@
    "results": "; CategoryTheory.Localization.Preadditive.add'_map, CategoryTheory.Localization.instAdditiveLocalizationQ, IsLocalizedModule.mk'_add, CategoryTheory.Localization.functor_additive, CategoryTheory.Localization.instAdditiveLocalization'Q', CategoryTheory.Localization.instPreadditiveLocalization, ModuleCat.instAdditiveLocalizationLocalizedModule_functor, CategoryTheory.Localization.Preadditive.map_add",
    "date": "2026-10-21",
    "verdict": "no match: Localization.functor_additive_iff assumes a left calculus of fractions; additive_of_full_essSurj_comp assumes fullness. Neither is assumed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor G is additive if q is additive and essentially surjective between additive categories and the composite q followed by G is additive",
+   "results": "8 hits: CategoryTheory.Functor.additive_of_full_essSurj_comp, CategoryTheory.Localization.functor_additive_iff, CategoryTheory.Functor.Additive, CategoryTheory.Functor.additive_of_comp_faithful, CategoryTheory.additiveFunctor, CategoryTheory.Functor.instAdditiveComp, CategoryTheory.Functor.inducedFunctor_additive, CategoryTheory.additiveFunctor_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: additive_of_full_essSurj_comp needs Full q; functor_additive_iff needs a calculus of fractions. Product-preservation criteria apply only after the argument of steps 1–5; the existing node lem-sfb-products-zero-additive is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Functor.EssSurj",
+   "results": "11 hits: CategoryTheory.Functor.hasFiniteProducts_of_additive_of_essSurj, CategoryTheory.Functor.additive_of_full_essSurj_comp, CategoryTheory.Functor.isTriangulated_of_precomp, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.isTriangulated_of_precomp_iso, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.Functor.distTriang_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: additive_of_full_essSurj_comp needs Full q; functor_additive_iff needs a calculus of fractions. Product-preservation criteria apply only after the argument of steps 1–5; the existing node lem-sfb-products-zero-additive is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "additive_of.*comp|additive_of_iso|additive_iff.*preserv|preserv.*biproduct.*additive",
+   "results": "13 hits: Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean, Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: additive_of_full_essSurj_comp needs Full q; functor_additive_iff needs a calculus of fractions. Product-preservation criteria apply only after the argument of steps 1–5; the existing node lem-sfb-products-zero-additive is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor descends along an essentially surjective additive functor between additive categories without a fullness or calculus of fractions assumption",
+   "results": "8 hits: CategoryTheory.Functor.additive_of_full_essSurj_comp, CategoryTheory.Localization.functor_additive, CategoryTheory.Localization.functor_additive_iff, CategoryTheory.additiveFunctor_iff, CategoryTheory.additiveFunctor, CategoryTheory.Functor.EssSurj.mk, CategoryTheory.leftExactFunctor_le_additiveFunctor, CategoryTheory.Functor.additive_of_iso",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: additive_of_full_essSurj_comp needs Full q; functor_additive_iff needs a calculus of fractions. Product-preservation criteria apply only after the argument of steps 1–5; the existing node lem-sfb-products-zero-additive is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an additive essentially surjective functor F preserves biproducts and F composed with G is additive then G preserves binary products and is additive without F being full",
+   "results": "8 hits: CategoryTheory.Functor.additive_of_full_essSurj_comp, CategoryTheory.Limits.preservesBinaryProduct_of_preservesBinaryBiproduct, CategoryTheory.Functor.additive_of_preserves_binary_products, CategoryTheory.Limits.preservesBinaryProducts_of_preservesBinaryBiproducts, CategoryTheory.Functor.additive_of_preservesBinaryBiproducts, CategoryTheory.Limits.preservesProduct_of_preservesBiproduct, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CategoryTheory.Limits.preservesBinaryBiproduct_of_preservesBinaryProduct",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: additive_of_full_essSurj_comp needs Full q; functor_additive_iff needs a calculus of fractions. Product-preservation criteria apply only after the argument of steps 1–5; the existing node lem-sfb-products-zero-additive is reused."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-scalar-extension-well-defined",
@@ -73,5 +185,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-additive-localization-descent",
+  "worker": "stage1",
+  "summary": "Six-step biproduct proof, preserving the statement verbatim. Conjugation by e proves additivity of Gq; the biproduct relations give product cones before and after G; explicit essential-surjectivity and product uniqueness extend preservation to all objects and all binary product cones. Zero morphisms are checked separately. Reuses the existing Mathlib leaf lem-sfb-products-zero-additive; no new nodes. Neither fullness nor a calculus of fractions nor natural-transformation descent is needed.",
+  "blueprint": "Final completed integral scalar-extension paragraph of def-weil-rationalization-karoubi in main-20261015: additivity of the functor induced by an additive K-flat presentation, through lem-weil-integral-scalar-extension-well-defined and def-weil-integral-scalar-extension."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O2-6e2244ff3",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6e2244ff3 (reviewer sub-agent of L); spot-checked: I read all six steps of the split in full. The statement and stmt_deps are byte-identical to the base, and the item is still unsplit in clones/live and clones/side-live. There are no new nodes, no repair note and no dropped-list entry. Step 1: conjugating by e (H(f)=e_Y^-1 U(f) e_X) makes Gq additive, by bilinearity of composition (00ZY). Steps 2-3: q and Gq carry the X⊕Y relations (0103/0104) to biproduct relations in D and E. The product lift t=T(i1)a+T(i2)b has the right projections and is unique by the identity Σi_r p_r=1. Step 4: essential surjectivity gives isomorphisms qX≅A1 and qY≅A2. Every product cone of A1,A2 is cone-isomorphic to the transported one, and G keeps cone isomorphisms, so G preserves all binary product cones. Fullness is never used and the transport is written out. Step 5: 0=b∘0∘a^-1, so G(0)=0 on every Hom group. Step 6: lem-sfb-products-zero-additive is a Mathlib leaf for Functor.additive_of_preserves_binary_products (AdditiveFunctor.lean:234). Its hypotheses are binary products in D (D is additive), preservation of binary products and preservation of zero morphisms, exactly what steps 4-5 supply. All cited nodes are Mathlib leaves or definitions, so no route or tool_uses question arises. The one citer (lem-weil-integral-scalar-extension-well-defined) uses the item as stated. Edge cases checked: zero category, zero summands, q the identity, q killing nonzero maps. Stacks tags 00ZY/0103/0104/0105/0DLP resolve to the cited labels, there is no SGA, the blueprint from-chain matches the created.item ancestry, and the three kinds of Mathlib search are recorded. Advisory: the item's maintainer-owned source.place still cites 04VG and 'full faithfulness on natural transformations', which the proof no longer uses."
  }
 }
