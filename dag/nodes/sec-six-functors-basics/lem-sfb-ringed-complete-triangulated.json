@@ -15,9 +15,121 @@
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "def-weil-triangulated-subcategory"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the Koszul tower $Q_m$ of the statement, which is the tower of the reflector. Each $Q_m^q$ is a finite direct sum of copies of $\\mathcal O$: expand the $r$ two-term factors, with a summand in degree $-s$ for each $s$-element subset. Such a term is flat [def-pc-flat-sheaf-modules], since tensoring with it is a finite direct sum of copies of $\\mathcal G\\otimes_{\\mathcal O}\\mathcal O\\cong\\mathcal G$, hence exact. Since $Q_m$ is concentrated in degrees $[-r,0]$, it is a bounded-above complex with flat terms, hence K-flat by the bounded-above flat lemma [lem-pc-bounded-above-flat-kflat-site]. No comparison with the dual tower $\\mathcal Hom^\\bullet(P_m,\\mathcal O[0])$ is needed for this. The transitions ($b_j$ in degree $-1$, identity in degree $0$, tensored over the factors) and the degree-zero augmentation $\\mathcal O[0]\\to Q_m$ are chain maps between such complexes. Thus the fixed-K-flat-tensor lemma [lem-weil-pbc-kflat-fixed-tensor-triangulated] applies to every $-\\otimes Q_m$, including $r=0$, when $Q_m=\\mathcal O[0]$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat (bounded-above complexes of flat modules are K-flat); algebraization.tex Tag 0A0E, lemma-derived-completion-koszul (finite free Koszul terms)"
+   }
+  },
+  {
+   "text": "For a complex $N$, let $T(N)_m=\\operatorname{Tot}(N\\otimes Q_m)$, retaining the actual transition chain maps, so that $T(N)$ is a complex of strict towers, not just a diagram in $D(\\mathcal O)$. The fixed-K-flat-tensor lemma says that $T(f)_m$ is a quasi-isomorphism whenever $f$ is. Kernels and cokernels in the tower category are levelwise, so cohomology is levelwise too; consequently $T(f)$ is a quasi-isomorphism of tower complexes. Hence $T$ descends through the derived localization. It is additive and exact: the unsigned first-variable shift comparison gives $T(N[n])\\cong T(N)[n]$, and the cone comparison is the direct reindexing\n$$\\operatorname{Tot}(\\operatorname{Cone}(f)\\otimes Q_m)^k=\\bigoplus_{p+q=k}(Y^p\\oplus X^{p+1})\\otimes Q_m^q\\cong T(Y)_m^k\\oplus T(X)_m^{k+1}.$$\nOn the second summand the differential of the tensor factor has sign $(-1)^p=-(-1)^{p+1}$; hence this reindexing has exactly the differential of $\\operatorname{Cone}(T(f))$, and it preserves the inclusion and the negative projection of the cone triangle. Every comparison is natural in $Q_m$, so the equalities hold in strict towers. Every distinguished triangle is isomorphic to a localized cone triangle; therefore $T:D(\\mathcal O)\\to D(\\operatorname{Tow}(\\operatorname{Mod}(\\mathcal O)))$ is exact.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding cone/localization construction; derived.tex definition-cone and definition-distinguished-triangle; homology.tex Tag 02MZ"
+   }
+  },
+  {
+   "text": "The strict-tower derived-limit lemma supplies an exact functor $R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(\\mathcal O)))\\to D(\\mathcal O)$, without requiring exact products. Compose it with the exact functor $T$ of Step 2. The resulting exact functor is precisely $\\Lambda(N)=R\\lim_m(N\\otimes^L Q_m)$: Step 1 identifies the tensor representatives with the derived tensors and the reflector statement uses this strict derived-limit construction. Its integer-shift comparison $s_{N,n}:\\Lambda(N[n])\\xrightarrow{\\sim}\\Lambda(N)[n]$ is obtained by the first-variable tensor comparison followed by the derived-limit shift comparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective strict-tower computation; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul"
+   }
+  },
+  {
+   "text": "Check the unit against this specific shift comparison. Write $a_N:cN\\to T(N)$ for the degree-zero augmentation of the constant tower. The first-variable tensor shift map is unsigned, so its composite with $a_{N[n]}$ is exactly $a_N[n]$. Choose a K-injective tower resolution $u:T(N)\\to I$. For the shifted input use $T(N[n])\\cong T(N)[n]\\xrightarrow{u[n]}I[n]$; this is a K-injective resolution by the K-injective-shift lemma, applied in the abelian tower category. The unit is represented by\n$$N\\longrightarrow\\lim T(N)\\xrightarrow{\\lim u}\\lim I.$$\nTermwise inverse limit commutes with the reindexing and the sign $(-1)^n$ in the shift differential. The same displayed chain map shifted by $n$ therefore represents the unit for $N[n]$. The natural K-injective computation of $R\\lim$ identifies these representatives independently of resolution, giving\n$$s_{N,n}\\circ\\eta_{N[n]}=\\eta_N[n].$$\nThe zero-shift and composition laws are those of the unsigned tensor comparison and ordinary shifts of $I$. This proves compatibility for every integer $n$, not merely positive shifts.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok: computation by lim of a K-injective strict tower; derived.tex Tag 070H, definition-K-injective and following shift remark; more-algebra.tex Tag 0FNH, item-shift-tensor"
+   }
+  },
+  {
+   "text": "The reflector gives naturality of $\\eta$ for every derived morphism. Combine this with Step 4 and apply the shift-compatible-transformation triangle-morphism lemma to $\\operatorname{Id}$, $\\Lambda$, and $\\eta$. Explicitly, for $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1]$, the first two squares are naturality for $u,v$, and the last square is\n$$\\eta_X[1]\\circ w=s_{X,1}\\circ\\eta_{X[1]}\\circ w=s_{X,1}\\circ\\Lambda(w)\\circ\\eta_Z.$$\nThus the unit gives a morphism from this distinguished triangle to its distinguished image under $\\Lambda$. The construction is natural in maps of triangles, since each of its three components is a component of the natural transformation $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099B, lemma-derived-completion, functorial unit; derived.tex Tags 0144 and 014V, morphisms of triangles and exact functors"
+   }
+  },
+  {
+   "text": "By the reflector criterion, the local completeness condition is equivalent to invertibility of $\\eta_N$. Since $T(0)=0$ and $R\\lim$ is additive and exact, $\\Lambda(0)=0$, so $\\eta_0$ is invertible. For an isomorphism $f:N\\to N'$, naturality gives $\\eta_{N'}=\\Lambda(f)\\circ\\eta_N\\circ f^{-1}$, proving invariance under isomorphism. Step 4 gives $\\eta_{N[n]}=s_{N,n}^{-1}\\circ\\eta_N[n]$, so completeness is preserved by every integer shift. These are statements about the local condition itself, not about completion of section modules.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099B, lemma-derived-completion; Tag 0999, definition-derived-complete and following paragraph"
+   }
+  },
+  {
+   "text": "For any distinguished triangle, apply the exact-functor natural-transformation two-out-of-three lemma to $\\operatorname{Id}$, $\\Lambda$, and $\\eta$. Its exactness hypotheses are Step 3 and its shift-compatibility hypothesis is Step 4. If any two vertices are locally complete, their unit components are isomorphisms by the reflector criterion; the cited lemma makes the remaining component an isomorphism, hence the third vertex is locally complete. Together with Step 6, the full subcategory on the objects satisfying the local condition is strictly full and satisfies the triangulated-subcategory definition. The argument used only smallness of the site, finitely many generators, K-flat Koszul terms and the total derived limit. It applies to unbounded inputs, the empty list and non-Noetherian ring sheaves.",
+   "uses": [
+    "lem-sf-triangle-two-out-of-three",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0999, paragraph after definition-derived-complete; derived.tex Tag 014A, lemma-third-isomorphism-triangle, and Tag 05QM, definition-triangulated-subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-triangulated-subcategory",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B, 0A0E, with the omitted exactness and unit-compatibility arguments supplied explicitly from the strict tower and cone constructions (sites-cohomology.tex Tags 06YU and 0941)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +165,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂'\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"[P.IsTriangulatedClosed₂] (T : Triangle C) (hT : T ∈ distTriang C) (h₁ : P T.obj₁) (h₃ : P T.obj₃) :\\n  P.isoClosure T.obj₂\", \"doc\": \"If a property $P$ on objects of a triangulated category is closed under shifts and cones, then for any distinguished triangle $T$ with $P$ holding for the first and third objects, the second object li\"}\n  {\"name\": \"CategoryTheory.Triangulated.Subcategory.ext₁\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"For a triangulated closed property $ P $ on objects of a category $ \\\\mathcal{C} $ that is also closed under isomorphisms, every distinguished triangle $ T $ in $ \\\\mathcal{C} $ satisfies that if the se\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"[P.IsTriangulatedClosed₃] [P.IsClosedUnderIsomorphisms] (T : Triangle C) (hT : T ∈ distTriang C) (h₁ : P T.obj₁)\\n  (h₂ : P T.obj₂) : P T.obj₃\", \"doc\": \"If a property $P$ is closed under triangulated operations (shifts, cones, direct summands) and isomorphisms, then for any distinguished triangle in the category, if the first two objects satisfy $P$, \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"Given a category $\\\\mathcal{C}$ with category structure, zero object, integer shift, preadditive structure, and pretriangulated structure, if a predicate $P$ on objects satisfies that for every disting\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₃\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.HasShift C ℤ] →\\n        [inst_3 : CategoryTheory.Preadditive C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"A predicate asserting that an object property in a category with zero object, integer-indexed shift operation, preadditive structure, and pretriangulated structure is closed under the operations defin\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₁\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.HasShift C ℤ] →\\n        [inst_3 : CategoryTheory.Preadditive C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"A property $P$ on objects of a category $\\\\mathcal{C}$ is triangulated closed if it is closed under shifts by integers $\\\\mathbb{Z}$, contains the zero object, and is closed under distinguished triangle\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.distinguishedTriangles\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Pretriangulated\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {inst_1 : CategoryTheory.Limits.HasZeroObject C} →\\n      {inst_2 : CategoryTheory.HasShift C ℤ} →\\n        {inst_3 : CategoryTheory.Preadditive C} →\\n          {inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive} →\\n          \", \"doc\": \"The set of distinguished triangles in the category $\\\\mathcal{C}$, forming part of the pretriangulated category structure which requires all integer-shift functors to be additive.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero object, integer shift, preadditive and pretriangulated structures, this constructor establishes that a property $P$ on objects is triangulated closed if for ev\"}",
    "date": "2026-10-21",
    "verdict": "no match: the printed hits give ordinary module completion, abstract triangulated categories, constant sheaves, or cohomological bounds; none states this ringed pro-étale comparison and locality assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion on a ringed site is an exact functor and locally derived complete objects are closed under shifts and distinguished triangles",
+   "results": "OK 8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, HasDerivedCategory.standard, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general exact-functor, triangulated-subcategory and cohomological-bound declarations do not construct ringed-site Koszul completion or identify its local complete fixed locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsAdicComplete\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general exact-functor, triangulated-subcategory and cohomological-bound declarations do not construct ringed-site Koszul completion or identify its local complete fixed locus."
+  },
+  {
+   "tool": "grep",
+   "query": "(derived.*complet|complet.*triangulat|triangulat.*complet)",
+   "results": "OK 4 hits: Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/WeakKernels.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general exact-functor, triangulated-subcategory and cohomological-bound declarations do not construct ringed-site Koszul completion or identify its local complete fixed locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete objects on a ringed site form a triangulated subcategory and Koszul completion preserves distinguished triangles",
+   "results": "OK 8 hits: CategoryTheory.Triangulated.Subcategory, DerivedCategory.instIsTriangulated, DerivedCategory.mem_distTriang_iff, CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, DerivedCategory.triangleOfSES_distinguished, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, CategoryTheory.ObjectProperty.IsTriangulated.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general exact-functor, triangulated-subcategory and cohomological-bound declarations do not construct ringed-site Koszul completion or identify its local complete fixed locus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed objects of the Koszul completion unit on complexes of sheaves of modules are stable under shifts and cones",
+   "results": "OK 8 hits: DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.instIsKInjectiveObjIntShiftFunctor, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isGE_Q_obj_iff, CochainComplex.instIsKProjectiveObjIntShiftFunctor, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general exact-functor, triangulated-subcategory and cohomological-bound declarations do not construct ringed-site Koszul completion or identify its local complete fixed locus."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-stratified-perfect",
@@ -76,5 +223,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-complete-triangulated",
+  "worker": "stage1",
+  "summary": "Proved exactness by descent of the actual Koszul tensor tower, with the cone differential and connecting arrow checked. Computed the unit on shifted K-injective tower resolutions, then used the reflector fixed-object criterion and the existing triangle two-out-of-three lemma. No statement change, no new nodes, no Lean attachment. Maintainer reader fix: Step 1 obtains K-flatness of the displayed Koszul complexes from the bounded-above flat lemma instead of an unstated identification of the dual tower Hom(P_m,O[0]) with the tensor of factor duals.",
+  "blueprint": "Realizes the exact-completion/triangulated-complete-locus input to the first sentence of det-lem-integral-models-stacks (invoking sk-prop-integral-criterion), through the parent lem-sfb-adic-stratified-perfect. The chapter and unit route are unchanged. The source paragraph after Tag 0999 asserts the closure but omits its proof; Steps 1–7 supply it in the existing Koszul/strict-tower model.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Supplies the generic isomorphism two-out-of-three argument for the exact completion unit."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "Converts the checked unit shift equation into a natural morphism of image triangles."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Supplies quasi-isomorphism preservation and exactness for each fixed Koszul tensor factor."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Allows the shifted tower resolution to compute the shifted derived limit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Identifies the specified completion unit and characterizes the local complete locus as its invertible components."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies exact total derived inverse limit of strict towers without an exact-products assumption."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-integer-shifts",
+    "why": "Supplies the coherent unsigned first-variable shift comparison and naturality in the fixed factor."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Supplies abelianness and levelwise cohomology of strict towers."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Supplies K-flatness of the bounded flat-term Koszul complexes Q_m on the ringed site (Stacks 06YQ); no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-triangle-two-out-of-three",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-ab028e365",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-ab028e365 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 7 steps, the statement of every cited node, Stacks 0999 with its following paragraph, 099B/0A0E, and 06YQ, plus the Lean definition of ringedKoszulDualTower. The statement and stmt_deps are unchanged from side-live, the target is not weakened, there are no new nodes, the item is not on the drop list and is still unsplit on live/side, and there is no re-split note. One fault, fixed. C4/E5 in Step 1: K-flatness of the displayed Koszul Q_m was taken from lem-weil-pbc-ringed-cech-koszul-dual-kflat, whose object is Hom(P_m,O[0]) of the tensor P_m (indexed with b^{m+1}). The step identified factor duals and said 'tensor these identifications', which assumes the unstated signed isomorphism Hom(⊗P_i,O)≅⊗Hom(P_i,O). The fix gets K-flatness from lem-pc-bounded-above-flat-kflat-site (Stacks 06YQ), since Q_m is in degrees [-r,0] with finite free terms; it drops the dual-kflat citation and the koszul-system citation from Step 1 and updates proof_deps and tool_uses. The cycle check is clean. Steps 2–7 verified: levelwise quasi-isomorphisms and descent to D(Tow); the unsigned first-variable shift; the cone sign (-1)^p=-(-1)^{p+1} with the -p projection; exactness of R lim∘T; the unit shift equation via the K-injective shift lemma in Tow; the explicit last square of the triangle morphism; elementary zero, isomorphism and shift closure via the reflector criterion; and two-out-of-three giving def-weil-triangulated-subcategory. Edge cases checked: r=0 (everything complete), a unit generator (only 0 complete), a zero generator. No duplicate: the module-level and pro-étale completion nodes differ. Generic tool uses accepted. Maintainer note: lem-pc-bounded-above-flat-kflat-site has source tag 06YS, which should be 06YQ.; 1 file(s) fixed by the reviewer"
  }
 }
