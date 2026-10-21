@@ -56,27 +56,25 @@
    }
   },
   {
-   "text": "Use the natural maps $t_{F,G}$ from the objectwise tensor presheaf into the sheaf tensor in [lem-sfb-braided-sheaf-tensor-generators]. At each object $U$, define $ab$ in a ring object $A$ as $\\mu_A(t_{A,A}(a\\otimes b))$ and $1$ from its unit on the integer $1$; these are just evaluations of the ring structure maps [sk-def-sfb-ring-object]. Naturality of $t$ gives $r(t_{S,R}(b\\otimes a))=b\\varphi(a)$, so $q\\pi=r$ proves the forward generator equation. By [det-def-sfb-sheaf-tensor-structure] the associator, unitors and symmetry of the sheaf tensor are exactly the maps $\\alpha^\\star,\\lambda^\\star,\\rho^\\star,\\beta^\\star$ of [lem-sfb-sheaf-tensor-unit-comparison], and its unit map $\\eta_I$ is the map $u$ of the generator lemma, so that $d(f,g)=t_{F,G}\\circ(f\\otimes_pg)$. The right-unitor identity of [lem-sfb-sheaf-tensor-unit-comparison], with $F=S$ and $f=\\mathrm{id}_{US}$, identifies $\\rho_S^{-1}$ on a section $b$ with $t_{S,\\mathbf 1}(b\\otimes u(1))$. Following with $S\\otimes\\eta_R$ and $\\pi$ in the formula for $j$ therefore gives $j(b)=\\pi t_{S,R}(b\\otimes1)$. These are identities after the indicated presheaf-to-sheaf maps. The bijections in the generator lemma detect equality of maps out of a sheaf tensor; they make no assertion that its sections are pure tensors.",
+   "text": "For the specified localized monoidal structure [det-def-sfb-sheaf-tensor-structure], give the sheaf inclusion the lax monoidal structure right-adjoint to strong monoidal sheafification. Its tensorator is definitionally the map toSheafify followed by the inverse canonical tensor comparison in [sk-def-sfb-sheaf-tensor]. Lax tensorator naturality, evaluated on a presheaf pure tensor, gives (f tensor g)t(a tensor b)=t(f(a) tensor g(b)). Hence q pi=r yields the forward generator equation. The lax right-unitor inverse law gives rho_F inverse followed by F tensor t, on a section a, as the generator a tensor t_U, where t_U is t applied to the actual sheafification unit on the integer 1. This gives the inverse generator formula. These are equations after the canonical presheaf-to-sheaf map, without any claim that all sheaf tensor sections are pure tensors.",
    "uses": [
-    "lem-sfb-braided-sheaf-tensor-generators",
-    "sk-def-sfb-ring-object",
-    "lem-sfb-sheaf-tensor-unit-comparison",
-    "det-def-sfb-sheaf-tensor-structure"
+    "sk-def-sfb-sheaf-tensor",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
-    "place": "Second paragraph: structure maps are conjugates of objectwise maps by canonical unit comparisons"
+    "document": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+    "place": "Adjunction.rightAdjointLaxMonoidal, Functor.LaxMonoidal.μ_natural and right_unitality_inv; the canonical comparison of SheafTensor.lean."
    }
   },
   {
-   "text": "Define the underlying sheaf map $\\iota=\\pi\\circ(\\eta_S\\otimes R)\\circ\\lambda_R^{-1}:R\\to Q$. It is the map $a\\mapsto1\\otimes a$: the left-unitor identity of [lem-sfb-sheaf-tensor-unit-comparison] with $F=R$, $f=\\mathrm{id}_{UR}$, read through [det-def-sfb-sheaf-tensor-structure] as in step 4, gives $\\lambda_R^{-1}(a)=t_{\\mathbf 1,R}(u(1)\\otimes a)$, and naturality of $t$ in [lem-sfb-braided-sheaf-tensor-generators] sends this under $\\eta_S\\otimes R$ to $t_{S,R}(1\\otimes a)$. Then\n$$q\\iota=\\mu_S(S\\otimes\\varphi)(\\eta_S\\otimes R)\\lambda_R^{-1}=\\mu_S(\\eta_S\\otimes S)\\lambda_S^{-1}\\varphi=\\varphi.$$\nThe middle equality is tensor bifunctoriality and naturality of the left unitor, and the last is the left unit law of [sk-def-sfb-ring-object]. This computation uses $q\\pi=r$ from step 3 and the unit insertion in the coequalizer [def-sfb-modobj-extension].",
+   "text": "The lax left-unitor inverse law for the same inclusion gives lambda_R inverse followed by eta_S tensor R, on a section a, as the generator 1_S tensor a. Composing with the balancing projection gives exactly extendUnitHom and its section formula. Combining q pi=r with the monoid left unit law and naturality of the left unitor gives extendUnitHom followed by q equal to phi (MonObj.leftUnitor_inv_one_whiskerRight_whiskerLeft_mul).",
    "uses": [
     "sk-def-sfb-ring-object",
     "def-sfb-modobj-extension",
-    "lem-sfb-sheaf-tensor-unit-comparison",
     "det-def-sfb-sheaf-tensor-structure",
-    "lem-sfb-braided-sheaf-tensor-generators"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
@@ -85,18 +83,17 @@
    }
   },
   {
-   "text": "A compatible family $t_U$ gives a natural map from the constant integer presheaf to $UR$, sending $n$ to $nt_U$. Conversely such a map is determined by the images of $1$, which form a compatible family. The unit Hom bijection of [lem-sfb-braided-sheaf-tensor-generators] identifies this with $t:I\\to R$, $t\\circ u(1)=t_U$, even when the site has no final object. Put $m_t=\\mu_R(t\\otimes R)\\lambda_R^{-1}$. At $U$ it sends $a$ to $t_Ua=\\mu_R(t_{R,R}(t_U\\otimes a))$: by step 5, $\\lambda_R^{-1}(a)=t_{\\mathbf 1,R}(u(1)\\otimes a)$ ([lem-sfb-sheaf-tensor-unit-comparison] with [det-def-sfb-sheaf-tensor-structure]), and naturality of $t$ moves $t\\otimes R$ inside. So $m_t$ is the sheaf map of the statement. Its $R$-linearity is checked on morphisms, without sectionwise ring laws. Associativity, naturality of $\\lambda$ and $\\alpha$, and the coherence $\\alpha^{-1}_{\\mathbf 1,R,R}\\lambda^{-1}_{R\\otimes R}=\\lambda_R^{-1}\\otimes R$ give $m_t\\mu_R=\\mu_R(t\\otimes\\mu_R)\\lambda^{-1}_{R\\otimes R}=\\mu_R(m_t\\otimes R)$. The triangle identity $\\alpha^{-1}_{R,\\mathbf 1,R}(R\\otimes\\lambda_R^{-1})=\\rho_R^{-1}\\otimes R$ and associativity give $\\mu_R(R\\otimes m_t)=\\mu_R((\\mu_R(R\\otimes t)\\rho_R^{-1})\\otimes R)$, and commutativity $\\mu_R\\beta_{R,R}=\\mu_R$ with naturality of $\\beta$ and $\\beta_{R,\\mathbf 1}\\rho_R^{-1}=\\lambda_R^{-1}$ gives $\\mu_R(R\\otimes t)\\rho_R^{-1}=m_t$. Hence $$m_t\\mu_R=\\mu_R(R\\otimes m_t).$$This is exactly the morphism condition in [sk-def-sfb-module-objects], so $m_t$ is $R$-linear. The identical argument for the commutative ring object $S$ and $\\varphi t:I\\to S$, whose family is $\\varphi_U(t_U)$, defines the $S$-linear map $m_{\\varphi(t)}$.",
+   "text": "Use the existing Mod.regularLift to construct an R-linear map from regular R to itself from t:I to R. Its underlying map is rho_R inverse followed by R tensor t and multiplication. Insert the commutative multiplication identity, use braiding naturality and rho inverse followed by beta_(R,I)=lambda inverse: this identifies it with lambda_R inverse followed by t tensor R and multiplication. The lax left-unitor section formula from step 5 then evaluates it to multiplication by t_U. Apply the same construction to S and t followed by phi; its section is phi_U(t_U). Thus both required module endomorphisms are actual constructed linear maps.",
    "uses": [
-    "lem-sfb-braided-sheaf-tensor-generators",
-    "sk-def-sfb-ring-object",
     "sk-def-sfb-module-objects",
-    "lem-sfb-sheaf-tensor-unit-comparison",
-    "det-def-sfb-sheaf-tensor-structure"
+    "sk-def-sfb-ring-object",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/_section.md",
-    "place": "Module morphism condition, specialized to regular modules; global-family interpretation expanded by the agent"
+    "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Mod.lean",
+    "place": "Mod.regularLift; commutative specialization using Mathlib braiding naturality and unit coherence."
    }
   },
   {
@@ -122,14 +119,12 @@
   "sk-def-sfb-ring-object",
   "sk-def-sfb-module-objects",
   "lem-sfb-mixed-bimodule-right-unitor",
-  "lem-sfb-braided-sheaf-tensor-generators",
-  "lem-sfb-sheaf-tensor-unit-comparison",
   "det-def-sfb-sheaf-tensor-structure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
-  "place": "Regular-module specialization of the blueprint balancing construction, using the existing mixed-bimodule right unitor and explicit sheaf generator/unit comparisons; Stacks Tags 002A, 002F, 00WH for universal properties."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+  "place": "Regular-module specialization, implemented with the Mathlib mixed right unitor and existing Mod.regularLift. The canonical sheafification adjunction induces the lax monoidal tensorator of the inclusion, definitionally equal to the specified generator; its proved naturality and inverse-unit laws replace the separate generator and unit-comparison dependencies."
  },
  "mathlib_searches": [
   {
@@ -281,10 +276,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-braided-sheaf-tensor-generators",
-  "lem-sfb-sheaf-tensor-unit-comparison"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -320,5 +312,15 @@
   "group": "Q68",
   "result": "pass",
   "note": "Read the item, its 4 stmt_deps and their Lean (SheafTensor comparison/properties, ExtendScalars ofMonHom/extendπ/extendScalars/extendUnitHom, Mathlib Mod, RingPresheaf), SheafTensorStructure (monoidal = Sheaf.monoidalCategory), BraidedSheafTensorGenerators and the Bimod.rightUnitorBimod leaf. Every node clause is rendered: ∃! S-linear q pinned by π≫q = S◁φ≫μ and q⁻¹ = ρ⁻¹≫S◁η≫π (= RightUnitorBimod hom/inv); section formulas via toSheafify≫comparison.inv (canonical t_{F,G}); ι = recorded extendUnitHom with q∘ι = φ; t : 𝟙 ⟶ R evaluated at u(1) (node permits this); m_t and m_{φt} pinned by formula with existence = linearity; conjugation in the right order; no assumptions on φ; independent universes. Edge cases checked: φ=id, Z→Z/n, S=0, t=0/1/non-unit, no final object. Node diff is lean only; statement verbatim; helpers have real data; sorry only in the proof; docstrings complete; imports = proof-dep modules; lines ≤ 91. No duplicate declaration (InternalExtensionFinitePresentation's e₀ is a clause of a different pro-étale theorem). No recompile per the 2026-10-21 rule. Advisory: global instances overlap Defs.lean:96 monoidalCategory_sheaf_of_essentiallySmall (both unfold to Sheaf.monoidalCategory); generator docstring could cite lem-sfb-braided-sheaf-tensor-generators."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261021T111025-L-3924974",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
