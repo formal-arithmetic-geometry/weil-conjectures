@@ -43,22 +43,21 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
-| `lem-sfb-cech-localization-unit-totalization` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 4012 | none |
 | `lem-sfb-snc-universal-residual-charts` | 4012 | none |
 | `lem-sfb-bicosimplicial-shuffle-totalization` | 4013 | none |
+| `lem-sfb-nonnegative-derived-totalization` | 4013 | none |
 | `lem-sfb-snc-root-limit-normal-charts` | 4013 | none |
 | `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (26)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 5 |
-| `lem-sfb-integral-quotient-direct-image-comparison` | 1 | state | 2 |
 | `lem-sfb-pointed-finite-etale-limit-cover` | 1 | state | 2 |
 | `det-lem-stratified-lattice-scheme` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
@@ -67,6 +66,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
 | `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
+| `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-condensed-internal-bar-resolution` | 1 | state | 0 |
@@ -74,6 +74,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
+| `lem-sfb-integral-quotient-exchange-comparison` | 1 | state | 0 |
 | `lem-sfb-internal-action-site-presentation` | 1 | state | 0 |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
@@ -82,10 +83,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
 | `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
+| `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 107 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 105 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (127)
+## Stage 3: modules to prove (125)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -127,14 +129,12 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 10 | proof | 4 |
 | `Sheaf.Paper.PbcAutomorphismTransport` | - | 13 | proof | 4 |
 | `Sheaf.Paper.RegularQuotientCompletionUnit` | - | 1 | proof | 4 |
-| `Sheaf.Paper.RingedSliceComparisonsShift` | - | 1 | proof | 4 |
 | `Sheaf.Paper.StrictQuotientExchangeUnitEquation` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison` | 5 | 9 | proof | 5 |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 6 | proof | 5 |
 | `Sheaf.Algebra.Homology.LineUnboundedDerivedTensor` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSiteStrictPerfectHom` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
-| `Sheaf.Algebra.Homology.SliceTensorIntegerShiftCompatibility` | - | 3 | proof | 5 |
 | `Sheaf.CategoryTheory.FlatScalarTowerExchange` | - | 1 | proof | 5 |
 | `Sheaf.CategoryTheory.FlatScalarTowerLimitSquare` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedLineTensorCoherence` | - | 23 | proof | 5 |
