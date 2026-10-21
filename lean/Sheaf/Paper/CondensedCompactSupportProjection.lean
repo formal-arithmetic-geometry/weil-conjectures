@@ -12,6 +12,7 @@ public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import all Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 
 /-! # CondensedCompactSupportProjection
 
@@ -119,6 +120,52 @@ private theorem rightCompExactIso_shift
     (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F G) _
   simp [Functor.rightDerivedFunctorCompMapDerivedCategoryIso, Functor.rightDerivedUnique,
     Functor.rightDerivedNatIso]
+
+private theorem identity_comparison
+    {C D : Type (u + 2)} [Category.{u + 1} C] [Category.{u + 1} D]
+    {F F' : C ⥤ D} {L : D ⥤ D} (h : F' = F) (τ : F' ⟶ F ⋙ L)
+    (idIso : L ≅ 𝟭 D)
+    (hτ : ∀ M, τ.app M ≫ idIso.hom.app (F.obj M) =
+      eqToHom (congrArg (fun V : C ⥤ D ↦ V.obj M) h)) :
+    eqToHom h.symm ≫ τ = (Functor.rightUnitor F).inv ≫
+      Functor.whiskerLeft F idIso.inv := by
+  subst h
+  ext M
+  apply (cancel_mono (idIso.hom.app (F'.obj M))).1
+  simpa only [NatTrans.comp_app, eqToHom_refl, NatTrans.id_app,
+    Category.id_comp, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
+    Category.assoc, Iso.inv_hom_id_app, Functor.id_obj] using hτ M
+
+private theorem conjugate_index_eq
+    {I : Type*} {C D : Type (u + 2)} [Category.{u + 1} C] [Category.{u + 1} D]
+    (L : I → C ⥤ D) (R : I → D ⥤ C) (ad : ∀ i, L i ⊣ R i)
+    {i j : I} (h : i = j) :
+    conjugateEquiv (ad i) (ad j) (eqToHom (congrArg L h.symm)) =
+      eqToHom (congrArg R h) := by
+  subst h
+  simp
+
+private theorem conjugate_rightUnitor_inv
+    {C D : Type (u + 2)} [Category.{u + 1} C] [Category.{u + 1} D]
+    {F : C ⥤ D} {G : D ⥤ C} (ad : F ⊣ G) :
+    conjugateEquiv (ad.comp Adjunction.id) ad (Functor.rightUnitor F).inv =
+      (Functor.leftUnitor G).hom := by
+  have h : conjugateIsoEquiv ad (ad.comp Adjunction.id) (Functor.rightUnitor F) =
+      (Functor.leftUnitor G).symm := by
+    apply Iso.ext
+    exact conjugateEquiv_rightUnitor_hom ad
+  exact congrArg Iso.inv h
+
+private theorem conjugate_identity_comp
+    {C D : Type (u + 2)} [Category.{u + 1} C] [Category.{u + 1} D]
+    {L R : D ⥤ D} (ad : L ⊣ R) (idIso : L ≅ 𝟭 D)
+    {F : C ⥤ D} {G : D ⥤ C} (ag : F ⊣ G) :
+    conjugateEquiv (ag.comp ad) ag
+        ((Functor.rightUnitor F).inv ≫ Functor.whiskerLeft F idIso.inv) =
+      Functor.whiskerRight (conjugateEquiv ad Adjunction.id idIso.inv) G ≫
+        (Functor.leftUnitor G).hom := by
+  rw [← conjugateEquiv_comp (ag.comp ad) (ag.comp Adjunction.id) ag,
+    conjugateEquiv_whiskerLeft, conjugate_rightUnitor_inv]
 
 namespace WeilConjectures.CompactSupportCondensedRealization
 
@@ -415,6 +462,16 @@ def fieldProperOpen {X Y : Scheme.{u}} {f : X ⟶ Y}
         ((CondensedRing.openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K.obj) :=
   (fieldProperOpen_existsUnique Λ r K).exists.choose
 
+private theorem fieldProperOpen_spec {X Y : Scheme.{u}} {f : X ⟶ Y}
+    {c d : Compactification f} (r : c.Refinement d)
+    (K : BoundedConstructible (condensedRingObj Λ X)) :
+    (fieldOpenAdjunction Λ d.i).homEquiv _ _ (fieldProperOpen Λ r K) ≫
+        fieldProperOpenRestriction Λ r K.obj =
+      (fieldOpenAdjunction Λ c.i).unit.app K.obj :=
+  (fieldProperOpen_existsUnique Λ r K).exists.choose_spec
+
+attribute [local irreducible] fieldProperOpen fieldOpenAdjunction
+
 /-- Proper-image composition is the conjugate of the actual pullback composition.
 Source: archived module-object derived operations; blueprint Step 15
 (blueprint: def-pur-condensed-compact-support-projection). -/
@@ -507,6 +564,96 @@ namespace WeilConjectures.CompactSupportCondensedRealization
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+attribute [local irreducible] CondensedRing.derivedUpperStarLowerStarAdjunction
+  CondensedRing.leftDerivedUpperStarComp
+
+private def fieldPushId (Z : Scheme.{u}) :
+    (CondensedRing.lowerStar Λ (𝟙 Z)).rightDerivedFunctor ≅ 𝟭 _ :=
+  conjugateIsoEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (𝟙 Z))
+    Adjunction.id (CondensedRing.leftDerivedUpperStarId Λ Z).symm
+
+private theorem fieldProperOpenRestriction_id {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    fieldProperOpenRestriction Λ (Compactification.Refinement.id c) K =
+      (CondensedRing.upperStar Λ c.i).leftDerivedFunctor.map
+        ((fieldPushId Λ c.Z).hom.app
+          ((CondensedRing.openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K)) := by
+  let U := (CondensedRing.upperStar Λ c.i).leftDerivedFunctor
+  let R := (CondensedRing.lowerStar Λ (𝟙 c.Z)).rightDerivedFunctor
+  let J := (CondensedRing.openImmersionLowerShriek Λ c.i).mapDerivedCategory
+  let α := (eqToIso (congrArg (fun h : X ⟶ c.Z ↦
+    (CondensedRing.upperStar Λ h).leftDerivedFunctor) (Category.comp_id c.i).symm)) ≪≫
+      CondensedRing.leftDerivedUpperStarComp Λ c.i (𝟙 c.Z)
+  have ha (M : DerivedCategory (Mod (Sheaf (ProEt.topology c.Z) Ab.{u + 1})
+      (condensedRingObj Λ c.Z))) : α.hom.app M = U.map
+      ((CondensedRing.leftDerivedUpperStarId Λ c.Z).inv.app M) := by
+    have hm : α.hom.app M ≫ U.map
+        ((CondensedRing.leftDerivedUpperStarId Λ c.Z).hom.app M) = 𝟙 (U.obj M) := by
+      dsimp only [α, Iso.trans_hom, NatTrans.comp_app]
+      rw [Category.assoc, CondensedRing.leftDerivedUpperStarComp_id_right_app]
+      simp only [eqToIso.hom, eqToHom_refl, NatTrans.id_app]
+      rw [Category.comp_id]
+    exact (Iso.comp_hom_eq_id
+      (U.mapIso ((CondensedRing.leftDerivedUpperStarId Λ c.Z).app M))).1 hm
+  unfold fieldProperOpenRestriction
+  change α.hom.app (R.obj (J.obj K)) ≫ U.map
+    ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ (𝟙 c.Z)).counit.app (J.obj K)) = _
+  rw [ha, ← U.map_comp]
+  congr 1
+  exact (conjugateEquiv_adjunction_id
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (𝟙 c.Z))
+    (CondensedRing.leftDerivedUpperStarId Λ c.Z).inv (J.obj K)).symm
+
+private theorem fieldPushComp_id_left {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (M : DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) :
+    (fieldPushComp Λ (𝟙 Z) g).hom.app M ≫
+        (eqToIso (congrArg (fun h : Z ⟶ Y ↦
+          (CondensedRing.lowerStar Λ h).rightDerivedFunctor) (Category.id_comp g))).hom.app M =
+      (CondensedRing.lowerStar Λ g).rightDerivedFunctor.map ((fieldPushId Λ Z).hom.app M) := by
+  let L := fun h : Z ⟶ Y ↦ (CondensedRing.upperStar Λ h).leftDerivedFunctor
+  let R := fun h : Z ⟶ Y ↦ (CondensedRing.lowerStar Λ h).rightDerivedFunctor
+  let ad := fun h : Z ⟶ Y ↦ CondensedRing.derivedUpperStarLowerStarAdjunction Λ h
+  let ai := CondensedRing.derivedUpperStarLowerStarAdjunction Λ (𝟙 Z)
+  let τ := (CondensedRing.leftDerivedUpperStarComp Λ (𝟙 Z) g).hom
+  let e := eqToHom (congrArg L (Category.id_comp g).symm)
+  have ht := conjugate_index_eq L R ad (Category.id_comp g)
+  have hn : e ≫ τ = (Functor.rightUnitor (L g)).inv ≫
+      Functor.whiskerLeft (L g) (CondensedRing.leftDerivedUpperStarId Λ Z).inv :=
+    identity_comparison (F := L g) (F' := L (𝟙 Z ≫ g))
+      (L := (CondensedRing.upperStar Λ (𝟙 Z)).leftDerivedFunctor)
+      (congrArg L (Category.id_comp g)) τ
+      (CondensedRing.leftDerivedUpperStarId Λ Z)
+      (fun N ↦ CondensedRing.leftDerivedUpperStarComp_id_left_app Λ g N)
+  change (conjugateEquiv ((ad g).comp ai) (ad (𝟙 Z ≫ g)) τ).app M ≫
+      (eqToHom (congrArg R (Category.id_comp g))).app M = _
+  rw [← ht]
+  have hc := NatTrans.congr_app
+    (conjugateEquiv_comp ((ad g).comp ai) (ad (𝟙 Z ≫ g)) (ad g) τ e) M
+  change _ = (R g).map _
+  rw [show (conjugateEquiv ((ad g).comp ai) (ad (𝟙 Z ≫ g)) τ).app M ≫
+      (conjugateEquiv (ad (𝟙 Z ≫ g)) (ad g) e).app M =
+      (conjugateEquiv ((ad g).comp ai) (ad g) (e ≫ τ)).app M from hc]
+  rw [hn, conjugate_identity_comp]
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app]
+  exact Category.comp_id ((R g).map ((fieldPushId Λ Z).hom.app M))
+
+private theorem fieldProperOpen_id {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (K : BoundedConstructible (condensedRingObj Λ X)) :
+    fieldProperOpen Λ (Compactification.Refinement.id c) K =
+      (fieldPushId Λ c.Z).inv.app
+        ((CondensedRing.openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K.obj) := by
+  symm
+  apply (fieldProperOpen_existsUnique Λ (Compactification.Refinement.id c) K).unique
+  · rw [fieldProperOpenRestriction_id]
+    rw [(fieldOpenAdjunction Λ c.i).homEquiv_unit]
+    rw [Category.assoc, ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app]
+    simp only [Functor.id_obj, CategoryTheory.Functor.map_id]
+    exact Category.comp_id _
+  · exact fieldProperOpen_spec Λ (Compactification.Refinement.id c) K
+
 /-- The field refinement construction respects identities with its original unit.
 Source: blueprint proof Steps 15--16; Stacks 0F7B
 (blueprint: def-pur-condensed-compact-support-projection).
@@ -515,7 +662,16 @@ normalization is the original open unit, so the unique arrow and the proper
 identity compositor reduce to the identity transformation. -/
 theorem fieldRefinement_id {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     fieldRefinement Λ (Compactification.Refinement.id c) = 𝟙 _ := by
-  sorry
+  ext K
+  change (CondensedRing.lowerStar Λ c.g).rightDerivedFunctor.map
+      (fieldProperOpen Λ (Compactification.Refinement.id c) K) ≫
+    (fieldPushComp Λ (𝟙 c.Z) c.g).hom.app _ ≫
+      (eqToIso (congrArg (fun h : c.Z ⟶ Y ↦
+        (CondensedRing.lowerStar Λ h).rightDerivedFunctor)
+          (Category.id_comp c.g))).hom.app _ = 𝟙 _
+  rw [fieldProperOpen_id, fieldPushComp_id_left, ← Functor.map_comp,
+    Iso.inv_hom_id_app]
+  exact (CondensedRing.lowerStar Λ c.g).rightDerivedFunctor.map_id _
 
 /-- The field and closure refinements have the same composition normalization.
 Source: blueprint proof Steps 15--16; Stacks 0F7B and 07A7
