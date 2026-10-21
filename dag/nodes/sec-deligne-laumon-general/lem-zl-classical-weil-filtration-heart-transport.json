@@ -14,9 +14,175 @@
   "lem-tw-lisse-rational-realization",
   "def-weil-local-frobenius-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The geometric scheme $Y$ is Noetherian and finite-dimensional by [lem-weil-pbc-finite-type-over-noetherian] and [lem-kun-dimension-finite-type]; $\\ell$ is invertible since $\\ell\\ne p$. There are finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Partition this finite set by chains of nonempty intersections. Each union in a part is connected, closed, and has closed complement, so these unions are precisely finitely many clopen connected components. Thus the connected comparison statements below apply on each component, and their objects and maps assemble on $Y$. Empty $Y$ requires no component.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Hypotheses of §6.8; elementary decomposition using finite irreducible components"
+   }
+  },
+  {
+   "text": "Choose a finite coefficient field for each classical term $L_j$ and quotient $S_j$. The Hom-colimit definition in [def-pod-lisse-l-adic-sheaves] represents their finitely many inclusions, quotient maps, Weil maps, inverse Weil maps, and the specified identification of the top object over a common finite extension $E$. Enlarge $E$ for the finitely many equations: inverse identities, commutativity with Weil maps, zero composites, and the filtration endpoint identifications. Equality in each directed Hom colimit means equality after some finite enlargement; a compositum handles all of them. Pullback and coefficient extension in [lem-per-lisse-completed-system-comparison] use the canonical comparisons, so sources of the Weil maps are the actual Frobenius pullbacks of these models.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4); Weil II (1.1.1)d): finite models and maps"
+   }
+  },
+  {
+   "text": "We may replace the integral representatives of these lisse $E$-sheaves by finite locally free reduction systems. Indeed, on a connected component [cor-galois-lisse-representations](2) identifies each with a continuous finite-dimensional representation of the profinite fundamental group. By [lem-pod-profinite-stable-lattice] choose a finite free stable lattice in that representation, and use the integral equivalence of [cor-galois-lisse-representations](2) to return its reduction system to $Y_{\\mathrm{et}}$. Its rationalization is the prescribed classical object. Assemble over the clopen components of Step 1. This chooses lattices for the underlying sheaves only: the Weil maps and all other arrows remain rational arrows, and are not assumed to preserve these lattices.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, stable-lattice and finite-quotient bullets, pp. 2–3"
+   }
+  },
+  {
+   "text": "For each chosen system $N=(N_n)$ form $\\widehat N=\\varprojlim_n\\nu_Y^*N_n$ and then $\\widehat N[1/\\varpi_E]$. By [lem-per-lisse-completed-system-comparison] these are lisse completed modules and their rational realization is fully faithful on the classical category. By [lem-tw-lisse-rational-realization] each resulting rational module has a preimage in the sf lisse heart, and maps lift uniquely. Compose these two Hom identifications to realize the prescribed inclusions and quotient maps. Realize the Weil isomorphism $g_Y^*N\\to N$ using the pullback comparisons of both cited nodes; lift its inverse as well. Their composites are identities by faithfulness, so the lifted maps really are isomorphisms. The same faithfulness proves every lifted arrow satisfies $u\\theta=\\theta' Lg_Y^*u$. Thus they are Weil morphisms in [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-tw-lisse-rational-realization",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), Proposition 6.8.14(2), Remark 6.8.15; lift maps through the two fully faithful realizations"
+   }
+  },
+  {
+   "text": "We identify fibres, separately for the two fibre functors used below. (a) Step 6's point functor. Let $\\bar y:s=\\operatorname{Spec}k\\to Y$ and $N=(N_n)$ a model of Step 3. By the point-fibre clause of [lem-tw-lisse-rational-realization], $\\operatorname{Fib}_s L\\bar y^*$ of the realized object is the sections at $s$ of $\\bar y^*(\\widehat N[1/\\varpi_E])$, then $\\otimes\\Qlb$. By the pullback clause of [lem-per-lisse-completed-system-comparison] for $\\bar y$ ($s$ is Noetherian separated), $\\bar y^*\\widehat N\\cong\\varprojlim_n\\nu_s^*\\bar y^*N_n$, with $\\bar y^*N_n$ constant on the finite free stalk $(N_n)_{\\bar y}$. Limits are sectionwise, so sections at the final object $s$ give $\\varprojlim_n(N_n)_{\\bar y}$, finite free; thus $\\bar y^*\\widehat N\\cong B_s^{\\,r}$ and, as $\\Gamma(s,E_s)=E$ by [lem-per-continuous-rational-derived-realization], the fibre is $(\\varprojlim_n(N_n)_{\\bar y})\\otimes_{\\mathcal O_E}E$. The comparisons come from finite-level maps, so $\\varpi_E^{-a}f$ induces $\\varpi_E^{-a}\\varprojlim_n(f_n)_{\\bar y}$: Step 4's maps induce exactly the classical fibre maps. (b) Step 7's finite-stage fibre. [lem-fd-rational-coefficient-category-comparison] is the identity on the common integral category and localized maps, so the isomorphism-closure formulas of [def-weil-constructible-standard-tstructure] and [prop-weil-localized-tstructure] identify the finite-stage hearts. The realization of [lem-per-continuous-rational-derived-realization] is the same scalar extension on the same representative, so $J$ of a realized object has lattice $\\widehat N$, and the normalized and fractional-map formulas of [lem-per-adic-normalized-fibre-exactness] give the same fibres and maps. Coefficient compatibility in [lem-per-lisse-completed-system-comparison] keeps (a), (b) after enlarging $E$.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-weil-constructible-standard-tstructure",
+    "prop-weil-localized-tstructure",
+    "lem-per-adic-normalized-fibre-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4); normalized inverse-limit geometric fibres"
+   }
+  },
+  {
+   "text": "Write $G_j$ and $T_j$ for the realized terms and quotients. Their short complexes have zero composite by Step 4. On every geometric fibre, $0\\to(G_{j-1})_{\\bar y}\\to(G_j)_{\\bar y}\\to(T_j)_{\\bar y}\\to0$ is the specified classical exact sequence by Step 5 and the hypothesis. The exactness criterion [lem-dl-a1-constructible-fibres-exact] consequently makes each $0\\to G_{j-1}\\to G_j\\to T_j\\to0$ short exact in the actual constructible heart. Thus every first arrow is monic and every $T_j$ is its cokernel, with exactly the realized Weil structure. Use the given Weil isomorphism at the top to take $G_r=\\mathcal G$ and conjugate the last inclusion and quotient map by it. The zero endpoint realizes to zero, since the fully faithful additive realization sends its identity to zero. This gives the required filtration of $\\mathcal G$.",
+   "uses": [
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, Lemma 6.8.7, Proposition 6.8.14; exactness detected by normalized adic fibres"
+   }
+  },
+  {
+   "text": "These short exact sequences can also be realized at one finite stage. The sf/PBC equivalence [lem-fd-rational-coefficient-category-comparison] is the identity on the common integral category and its localized maps. Comparing the two isomorphism-closure formulas in [def-weil-constructible-standard-tstructure] and [prop-weil-localized-tstructure], it identifies their finite-stage hearts. Therefore apply the finite-stage fibre criterion [lem-per-adic-normalized-fibre-exactness] to the models of Step 4. Their fibre sequences become the exact sequences of Step 6 after tensoring $E\\subset\\Qlb$. This implies they were already exact over $E$: scalar extension is exact by [lem-weil-field-scalar-extension-exact], so it takes kernel, middle homology and cokernel to those after extension, and a nonzero $E$-vector remains nonzero after extension (extend it to a basis). Hence these three obstruction spaces vanish. This proves finite-stage short exactness; no exactness of the chosen integral lattices has been assumed.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-weil-constructible-standard-tstructure",
+    "prop-weil-localized-tstructure",
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); finite-stage heart comparison and faithful extension of fibre vector spaces"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-common-stage-calculus] via the equivalence of [lem-fd-rational-coefficient-category-comparison] to the finite diagram consisting of all lifted terms, quotients, inclusions, quotient maps, Weil maps and inverse Weil maps, including their equations and the top identification. It has a representative over one larger finite coefficient field. Every object has a lisse heart model from Step 4; retain those models and enlarge only to represent arrows and equations. Scalar extension respects their normalized fibre identifications, so the argument of Step 7 proves short exactness there as well. Thus all the asserted data, including the exact sequences and inverses, exist simultaneously at a common finite stage.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite common-stage diagram calculus; Proposition 6.8.4 and Proposition 6.8.14"
+   }
+  },
+  {
+   "text": "Let $x\\in Y_0(\\mathbf F_{q^n})$, with geometric point $\\bar x:s\\to Y$. Under Step 5, point transport is the classical one: on an integral system each finite projection is restriction along $g_s$ followed by the inverse-image coprojection; inverse-limit extensionality identifies the resulting integral maps, and localization identifies their rational maps. [lem-tw-lisse-rational-realization] identifies precisely this restriction-and-coprojection transport, including its iterates, and its pullback-composition comparisons; [lem-per-lisse-completed-system-comparison] identifies the classical finite-level pullbacks. The equality of the two local operators now follows factor by factor in [def-weil-local-frobenius-trace]: the $n$ point transports agree, the comparison for $g_Y^n\\bar x=\\bar x g_s^n$ agrees, and the final map induced by $\\theta^{[n]}$ agrees. For the last assertion use $\\theta^{[n+1]}=\\theta^{[n]} L(g_Y^n)^*\\theta$ and induction. Thus the fibre isomorphism $c$ satisfies $cF^{(n)}_{\\mathrm{heart}}=F^{(n)}_{\\mathrm{classical}}c$, with no scalar ambiguity.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
+    "lem-per-lisse-completed-system-comparison",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4 and Remark 6.8.15; normalized pullbacks and point transports; explicit local composite"
+   }
+  },
+  {
+   "text": "At a closed point take $n=[\\kappa(x):k_0]$ in Step 9. The intertwiner and its inverse send nonzero eigenvectors to nonzero eigenvectors with the same eigenvalue. Thus the eigenvalue sets agree; the residue cardinality $q_x$ is unchanged by the coefficient realization. The equality $|\\iota(\\alpha)|=q_x^{w/2}$ in [def-weil-punctual-weights] holds on one corresponding quotient if and only if it holds on the other, for each specified real $w$. This includes the zero quotient, on which the condition is vacuous; it does not assert uniqueness of a weight for that quotient.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.2.6), p. 154: punctual iota-purity applied to the identical local spectra"
+   }
+  },
+  {
+   "text": "Replace $k_0$ by $k_m=\\mathbf F_{q^m}$. Its geometric Frobenius on $Y$ is $g_Y^m$, and its prescribed Weil isomorphism is $\\theta^{[m]}$, the composite already treated in Step 9. The identity $\\theta^{[m(n+1)]}=\\theta^{[mn]}L(g_Y^{mn})^*\\theta^{[m]}$ follows by grouping the factors in the defining iterate. Group the point transports into the same blocks; composition compatibility in [lem-tw-lisse-rational-realization] then identifies the new local composite with the old composite for the total number of factors. All comparison results used above allow arbitrary scheme maps, so the non-$k$-linear Frobenius causes no extra hypothesis. Repeat the finite-diagram construction with these iterates. Finally for $\\mathcal G=0$ and $r=0$ take the empty filtration, with no quotient sequences or eigenvalue checks; it is represented by zero at any finite coefficient stage.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; grouping iterated Weil maps and point transports for a constant extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-per-lisse-completed-system-comparison",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-tw-lisse-rational-realization",
+  "def-weil-weil-sheaf-complex",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-weil-constructible-standard-tstructure",
+  "prop-weil-localized-tstructure",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-per-adic-normalized-fibre-exactness",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-field-scalar-extension-exact",
+  "prop-weil-pbc-common-stage-calculus",
+  "def-weil-local-frobenius-trace",
+  "def-weil-punctual-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, Proposition 6.8.4(1),(4), Corollary 6.8.5, Proposition 6.8.14(2), Remark 6.8.15; assembly with the existing normalized comparisons for the actual filtration in blueprint paragraph 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +218,124 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.Filtration.Stable.bounded_difference\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M},\\n  F.Stable → F'.Stable → F.N 0 = F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n ∧ F'.N (n + n₀) ≤ F.N n\", \"doc\": \"Given two stable filtrations $\\\\{I^n M\\\\}$ and $\\\\{I'^n M\\\\}$ of an $R$-module $M$ by powers of ideals $I$ and $I'$, if their initial submodules $I^0 M = I'^0 M$ coincide, then there exists an integer $n_\"}\n  {\"name\": \"Ideal.Filtration.ext\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_3} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  {x y : I.Filtration M}, x.N = y.N → x = y\", \"doc\": \"Two ideal filtrations on an $ R $-module $ M $ are equal if their sequences of submodules $ I^n M $ for all natural numbers $ n $ are equal.\"}\n  {\"name\": \"Ideal.Filtration.ext_iff\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_3} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  {x y : I.Filtration M}, x = y ↔ x.N = y.N\", \"doc\": \"Two filtrations associated with an ideal $ I $ on an $ R $-module $ M $ are equal if and only if their corresponding sequences of submodules $ I^n M $ (generated by powers of $ I $) are equal for all \"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_forall_le\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M}, F.Stable → F.N 0 ≤ F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ and another filtration $\\\\{I'^n M\\\\}$ with $I^0 M \\\\subseteq I'^0 M$, there exists an integer $n_0$ such that for all $n \\\\geq 0$, the inclusion $I\"}\n  {\"name\": \"Ideal.Filtration.mk.inj\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_3} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  {N : ℕ → Submodule R M} {mono : ∀ (i : ℕ), N (i + 1) ≤ N i} {smul_le : ∀ (i : ℕ), I • N i ≤ N (i + 1)}\\n  {N_1 : ℕ → Submodule R M} {mono_1 : ∀ (i : ℕ), N_1 (i + 1) ≤ N_1 i} {smul_le_1 \", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if two decreasing sequences of submodules $ (N_i) $ and $ (N'_i) $ satisfy $ N_{i+1} \\\\subseteq N_i $, $ N'_{i+1} \\\\subs\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ (k : ℕ), F.N (n₀ + k) = I ^ k • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$, there exists an integer $n_0$ such that for all $k \\\\geq 0$, the equality $I^k \\\\bullet\"}\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} [inst : Semiring R] [inst_1 : SetLike σ R]\\n  [inst_2 : AddCommMonoid M] [inst_3 : Module R M] [inst_4 : SetLike σM M] (F : ℤ → σ) (mono : Monotone F)\\n  [inst_5 : SetLike.GradedMonoid F] (F' : ℤ → σM),\\n  Monotone F' → ∀ [SetLike.GradedSMu\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}",
    "date": "2026-10-21",
    "verdict": "no match: the displayed hits do not state this classical adic/constructible Weil-heart assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a finite filtration of classical lisse adic Weil sheaves to an exact constructible heart filtration with normalized Frobenius fibres",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Ideal.Filtration.Stable.bounded_difference",
+     "Ideal.Filtration.Stable.exists_pow_smul_eq",
+     "Ideal.Filtration.Stable.exists_forall_le",
+     "IsModuleFiltration.toIsFiltration",
+     "Ideal.Filtration.Stable",
+     "localCohomology.ofSelfLERadical",
+     "Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge",
+     "localCohomology"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern abstract fully faithful functors or ordinary algebraic filtrations; none states this classical adic Weil-heart comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|lisse.*realization|classical.*adic",
+   "results": {
+    "ok": true,
+    "n_hits": 18,
+    "top": [
+     "Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/Logic/Basic.lean",
+     "Mathlib/Logic/Basic.lean",
+     "Mathlib/Algebra/Polynomial/Degree/Defs.lean",
+     "Mathlib/Topology/Order/Compact.lean"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern abstract fully faithful functors or ordinary algebraic filtrations; none states this classical adic Weil-heart comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful realization of lisse adic sheaves respects geometric fibres and Frobenius structures",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondSet.LocallyConstant.functorFullyFaithful",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "CategoryTheory.fullyFaithfulSheafCompose",
+     "CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val",
+     "AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace",
+     "AlgebraicGeometry.Spec.fullyFaithful",
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern abstract fully faithful functors or ordinary algebraic filtrations; none states this classical adic Weil-heart comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Equivalence",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern abstract fully faithful functors or ordinary algebraic filtrations; none states this classical adic Weil-heart comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classical lisse adic inverse systems have fully faithful rational realization with exact geometric fibre functors",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "lightToProfiniteFullyFaithful",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "lightProfiniteToLightCondSetFullyFaithful",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "FintypeCat.toLightProfiniteFullyFaithful",
+     "LightCondSet.fullyFaithfulSequentialToLightCondSet",
+     "LightCondSet.LocallyConstant.functorFullyFaithful"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern abstract fully faithful functors or ordinary algebraic filtrations; none states this classical adic Weil-heart comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern abstract fully faithful functors or ordinary algebraic filtrations; none states this classical adic Weil-heart comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-zl-real-mixed-by-curves",
@@ -72,5 +352,91 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-classical-weil-filtration-heart-transport",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Realized the given classical filtration through normalized reduction systems and the sf lisse-heart realization; checked exactness on actual adic fibres, finite-stage exactness by faithful field extension, inverse Weil maps and normalized local Frobenius factor by factor. Reused existing comparison nodes; no new nodes.",
+  "blueprint": [
+   "thm-zl-real-mixed-by-curves.proof.md paragraph 1: actual geometric-constituent filtration, and paragraph 4: actual filtration proves mixedness; supply its raw/common-stage realization."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-per-adic-normalized-fibre-exactness",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "lem-weil-field-scalar-extension-exact",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Generic coefficient, realization, fibre, or finiteness comparison used to transport the given classical filtration; no node of sk-i-dl-general-real supplies this comparison, and the geometric-constituent/curve route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-per-lisse-completed-system-comparison",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-tw-lisse-rational-realization",
+  "lem-fd-rational-coefficient-category-comparison",
+  "prop-weil-localized-tstructure",
+  "lem-per-adic-normalized-fibre-exactness",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-field-scalar-extension-exact",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-97680f768",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-97680f768 (reviewer sub-agent of L); spot-checked: Read the item in full (statement unchanged vs live; 11 steps; no new nodes; no repair note, so the re-split rules do not apply), every cited statement, and blueprint thm-zl-real-mixed-by-curves paragraph 1. Steps 1-4 and 6-11 are correct. Step 1: finitely many irreducible components give clopen connected pieces. Step 3: cor-galois(2) plus a stable lattice gives locally free normalized systems, with arrows kept rational. Step 4: lem-per-lisse-completed full faithfulness (Hom⊗E = def-pod(2)) composed with the lem-tw equivalence; inverses and Weil equations follow by faithfulness. Step 6: lem-dl-a1-constructible-fibres-exact on the sf heart. Step 7: exactness descends from Q̄ℓ to E. Step 9: each factor of the local-Frobenius composite is matched using lem-tw, which allows non-k-linear maps. Steps 10-11 are elementary. Edge cases checked: empty Y, G=0, zero and repeated quotients. One fault, fixed (C4/E6): Step 5 used the PBC finite-stage fibre functor ω of lem-per-adic-normalized-fibre-exactness to justify the sf point fibre Fib_s Lȳ^* that Step 6 uses; no node identifies the two. It also used lem-per-continuous-rational-derived-realization without citing it. The rewritten Step 5 has two parts. (a) The Fib_s side, from the lem-tw point clause, the lem-per-lisse-completed pullback along ȳ, sectionwise limits and Γ(s,E_s)=E. (b) The ω side, through J of lem-fd (same integral cohomology-sheaf t-structures, iso-closure hearts) for Step 7. lem-per-continuous is added to the Step 5 uses and to proof_deps. Step 8 is redundant but harmless (advisory). Batch-5 flags are all generic and accepted: lem-per-lisse-completed reaches only def-pod-lisse, def-pod-ring-scalar-extension and stalk algebra; cor-galois-lisse-representations is the π1 correspondence, not trace-formula or Poincaré-duality content; lem-pod-profinite-stable-lattice is topological algebra; lem-dl-a1-constructible-fibres-exact reaches def-pod-lisse only through the conventions remark and is already in the batch-5 closure. No SGA citation. No duplicate: lem-zl-raw-heart-adic-lisse-stratification is the converse direction. The declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
