@@ -14,9 +14,104 @@
   "def-pc-fibre-product",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}A$, $U=\\operatorname{Spec}B$, and $V_a=\\operatorname{Spec}C_a$. By [def-weil-pbc-ind-etale-basis], $B$ and $C_a$ are ind-etale $A$-algebras. The $A$-algebra map $B\\to C_a$ is ind-etale by the algebra-map clause of [lem-weil-pbc-ind-etale-stability]. Hence [def-weil-pbc-ind-etale-algebra] presents $V_a$ as an inverse limit of affine etale finite-presentation $U$-schemes. Apply [lem-weil-pbc-filtered-category-directed-cofinal] to the filtered algebra diagram, or its opposite scheme diagram, to replace its index category by a nonempty directed set $J_a$ without changing its colimit or limit. All diagrams and directed replacements are small in the universe fixed by [def-weil-size-convention]. Denote the resulting projections by $q_{a,i}:V_a\\to V_{a,i}$.",
+   "uses": [
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first-limit presentations; ind-etale permanence: Tag 097M (lemma-ind-etale-permanence); directed replacement: categories.tex Tag 0032 (lemma-directed-category-system)"
+   }
+  },
+  {
+   "text": "The finite product $J=\\prod_{a=1}^mJ_a$ is small and nonempty: choose one element in each factor. Given $j,k\\in J$, choose an upper bound of $j_a,k_a$ in each $J_a$, giving an upper bound in $J$. The original basis covering is jointly surjective by [def-weil-pbc-ind-etale-basis] and [def-weil-pbc-proetale-covering]. For any $u\\in U$, choose $v\\in V_a$ mapping to $u$. Its image $q_{a,j_a}(v)\\in V_{a,j_a}$ also maps to $u$. Thus every chosen stage family is jointly surjective, and its arrows are etale by construction; [def-weil-pbc-etale-site] makes it an etale covering. This uses no surjectivity of an individual limit projection.",
+   "uses": [
+    "def-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), observation that every simultaneous finite choice of stages covers U"
+   }
+  },
+  {
+   "text": "Each stage $V_{a,i}\\to U$ is ind-etale, using its one-object etale presentation in [def-weil-pbc-ind-etale-algebra]. Compose with $U\\to X$ by [lem-weil-pbc-ind-etale-stability]; since $V_{a,i}$ is affine, [def-weil-pbc-ind-etale-basis] puts it in $\\mathcal B_X$. Repeated application of the fibre-product clause of [lem-weil-pbc-ind-etale-basis] now puts both $T_\\alpha$ and $T_{\\alpha,j}$ in $\\mathcal B_X$, including tuples with repetitions. Every transition in a factor system or an intersection system is a morphism between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]. This also makes the limit-to-stage projections affine.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), basis stability and the first-limit intersections"
+   }
+  },
+  {
+   "text": "Fix $a$. Reindex the cone for $V_a$ along $J\\to J_a$. It is still a limit, as follows directly from the dual universal property in [def-weil-pbc-category-colimit]. For a compatible family $h_j:Z\\to V_{a,j_a}$, the map at $j$ depends only on $j_a$: if $j_a=k_a=i$, take an upper bound $l\\ge j,k$ with $l_a=i$; both maps equal $h_l$, since the transition at coordinate $a$ is the identity. Write this map as $h_i$. If $i\\le i'$, choose $j\\le k$ with $j_a=i$, $k_a=i'$ by holding the other coordinates fixed. Compatibility gives a cone $(h_i)$ over $J_a$, hence a unique map $Z\\to V_a$. Conversely this map recovers every $h_j$. Thus $V_a=\\varprojlim_{j\\in J}V_{a,j_a}$ with exactly the original projections.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), product directed index set; explicit verification of coordinate reindexing"
+   }
+  },
+  {
+   "text": "For a tuple $\\alpha=(a_0,\\ldots,a_p)$, define $t_{\\alpha,j}:T_\\alpha\\to T_{\\alpha,j}$ by the maps $q_{a_r,j_{a_r}}$ on the respective factors. Existence, uniqueness and compatibility with transitions follow from the fibre-product universal property [def-pc-fibre-product]. A cone $h_j:Z\\to T_{\\alpha,j}$ gives, by each factor projection, a cone $Z\\to V_{a_r,j_{a_r}}$. Step 4 gives a unique map $h_r:Z\\to V_{a_r}$. All $h_r$ have the same composite to $U$: at each stage this follows from the fibre product, and any two stage indices have a common upper bound. Therefore the $h_r$ give a unique map $h:Z\\to T_\\alpha$. Its composite with $t_{\\alpha,j}$ is $h_j$, since they have equal projections to every factor. The same uniqueness proves that $h$ is the only such map. This is the limit universal property [def-weil-pbc-category-colimit]. If $a_r=a_s$, the two factor cones and the maps $h_r,h_s$ remain separate; the argument never identifies them.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), displayed inverse-limit identity for all finite intersections; universal-property proof including repeated indices"
+   }
+  },
+  {
+   "text": "Let $d_r:T_\\alpha\\to T_{\\alpha\\setminus r}$ and $d_{r,j}:T_{\\alpha,j}\\to T_{\\alpha\\setminus r,j}$ delete the $r$th factor. Then $d_{r,j}t_{\\alpha,j}=t_{\\alpha\\setminus r,j}d_r$: composing either side with any remaining factor projection gives $q_{a_s,j_{a_s}}\\operatorname{pr}_s$ for $s\\ne r$, so [def-pc-fibre-product] gives equality. The same calculation proves commutation with every transition. Consequently the limit identifications in step 5 commute with deletion, by uniqueness in [def-weil-pbc-category-colimit]. For deletion from a one-factor product take the empty product to be $U$; the equation is equality of the structure maps to $U$, and the constant $U$-diagram has limit $U$ since $J$ is nonempty and directed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), functoriality of the displayed intersection limits; deletion maps written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-size-convention",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-morphism-affine-schemes-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U (lemma-affine-vanishing), first-limit paragraph and displayed intersection identity; universal-property details written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +154,45 @@
    "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale; Algebra.FormallyEtale.instForallOfFinite; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
    "date": "2026-10-21",
    "verdict": "no match: the listed declarations do not assert this finite-cover comparison or descent statement"
+  },
+  {
+   "tool": "grep",
+   "query": "indEtale|IndEtale|proAffineEtale|RelativeLimitPresentation",
+   "results": "No hits (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not provide ind-etale covering presentations together with the stated intersection limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coverings by affine ind etale schemes are inverse limits of etale finite presentation coverings and fiber products commute with their directed limits",
+   "results": "AlgebraicGeometry.AffineScheme.hasLimits; AlgebraicGeometry.Scheme.isAffine_of_isLimit; AlgebraicGeometry.AffineScheme.hasColimits; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.directedAffineCover; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not provide ind-etale covering presentations together with the stated intersection limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsLimit",
+   "results": "AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit; AlgebraicGeometry.Scheme.Pullback.gluedIsLimit; AlgebraicGeometry.Scheme.isAffine_of_isLimit; AlgebraicGeometry.isLimitOpensCone; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc; AlgebraicGeometry.Scheme.compactSpace_of_isLimit; AlgebraicGeometry.Scheme.nonempty_of_isLimit; AlgebraicGeometry.isAffineHom_π_app",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not provide ind-etale covering presentations together with the stated intersection limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite jointly surjective family of affine ind etale morphisms over an affine base admits simultaneous etale finite presentation inverse systems whose finite repeated fiber products have the original intersections as limits",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not provide ind-etale covering presentations together with the stated intersection limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous affine etale finite presentation approximations of a finite covering by ind etale affine schemes preserve the covering and all Cech intersections",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not provide ind-etale covering presentations together with the stated intersection limits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-comparison-injective-acyclicity",
@@ -79,5 +209,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-finite-intersection-limit-compatibility",
+  "worker": "stage1",
+  "summary": "Split the first-limit geometry into six steps, reusing existing ind-etale permanence, directed reindexing, basis closure, and affineness nodes. Wrote the product-index cone argument and the repeated-factor and deletion-map calculations explicitly. No statement correction, attachment, or new node is needed. Preserved prior search records and added only searches logged for this item.",
+  "blueprint": "Realizes the first-limit paragraph of lem-weil-pbc-comparison-injective-acyclicity in main-20261015: presentations (step 1), every finite choice still covers U (step 2), basis membership (step 3), and intersection limits and face compatibility (steps 4-6). The second limit and Cech continuity remain with their existing separate nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic indexing theorem replaces small filtered algebra diagrams by small directed systems while preserving their limits; it implements the stated first-limit presentation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-category-directed-cofinal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-3dd0640f0",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-3dd0640f0 (reviewer sub-agent of L); spot-checked: Read the item's six steps in full against every cited statement, Stacks proetale Tag 099U (lemma-affine-vanishing, first-limit paragraph and intersection display), Tag 097M, Categories Tag 0032, and the main-20261015 blueprint first-limit paragraph of lem-weil-pbc-comparison-injective-acyclicity. Statement unchanged; it matches the Stacks source, and its extra clauses (B_X membership, affine transitions, face compatibility, no étaleness over X) are true and are exactly what parent step 2 and lem-weil-pbc-finite-basis-cech-first-limit use. Step 1: ind-étale B->C_a from the algebra-map clause of stability, presentation from def-ind-etale-algebra, directed replacement by clause (2) of directed-cofinal. Step 2: joint surjectivity from the fpqc clause on U, with lifting through q_{a,j_a}. Step 3: stages are ind-étale over U and then over X; fibre-product clause of the finished node lem-weil-pbc-ind-etale-basis (slopmaster2 closed, a tool not route); affine-to-affine leaf. Steps 4-6 are universal-property arguments written out in full: product reindexing via an upper bound with a fixed a-coordinate, factorwise cone reconstruction with repeated factors kept separate, and deletion including the p=0 empty product U. Elementary flags accepted. Declared tool use filtered-category-directed-cofinal (generic Tag 0032 reindexing) accepted. review_split PASS, no cycle, no SGA. Duplicate search: lem-cbc-affine-etale-cech-presentation / AffineEtaleCechSystem is a different Lean-shaped form over an abstract cofiltered I, so it is not a substitute. Edge cases checked: U or V_a empty, m=1, p=0, tuple (a,a), singleton J_a, Spec F_p / Spec F̄_p. Advisory only: step 3 could name the ind-étale implies weakly étale clause when it places the stages in X_proet."
  }
 }
