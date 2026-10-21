@@ -13,9 +13,116 @@
   "det-def-sfb-filtered-two-colimit-model",
   "det-def-sfb-filtered-two-colimit-conditions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each comparable pair define $T'_{ij}=\\mathrm{Id}_{\\mathcal C_i}$ if $i=j$ and $T'_{ij}=T_{ij}$ otherwise, and define $\\beta_{ii}=\\epsilon_i^{-1}$ and $\\beta_{ij}=\\mathrm{id}$ otherwise. Equal-index cases are read after substituting $j=i$. These are functors and natural isomorphisms in the original universes. Keep $\\Phi_i$ and $\\mathcal D$ and put $\\theta'_{ij}=\\theta_{ij}\\circ\\Phi_j(\\beta_{ij})$. This gives exactly the transition, vertex-functor and natural-isomorphism data of [det-def-sfb-filtered-two-colimit-cocone].",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-cocone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, cocone data and normalization; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "Write products of morphisms or natural transformations in right-to-left order, suppressing functor associators and unitors as in the statement. Define\n$$B_{ijk}=(T_{jk}\\beta_{ij})(\\beta_{jk}T'_{ij}):T'_{jk}T'_{ij}\\longrightarrow T_{jk}T_{ij},\\qquad \\tau'_{ijk}=\\beta_{ik}^{-1}\\tau_{ijk}B_{ijk}.$$\nWhiskering a natural isomorphism gives a natural isomorphism: for example, its naturality square is the image under the whiskering functor of the original square, or that square evaluated on the image of a morphism. Composition and inversion preserve naturality by composing squares and cancelling invertible components. Hence these formulas give natural isomorphisms of the required types, and\n$$\\beta_{ik}\\tau'_{ijk}=\\tau_{ijk}B_{ijk}.$$\nThis equality will be used componentwise in the following calculations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, cocycle and compatibility: definition of the transported comparisons; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "Fix $i\\le j\\le k\\le l$ and set\n$$B_{ijkl}=(T_{kl}T_{jk}\\beta_{ij})(T_{kl}\\beta_{jk}T'_{ij})(\\beta_{kl}T'_{jk}T'_{ij}).$$\nExpand the left side of the desired pentagon and use naturality of $\\beta_{kl}$ on $\\tau'_{ijk}$:\n$$\\begin{aligned}\n\\beta_{il}\\tau'_{ikl}(T'_{kl}\\tau'_{ijk})\n&=\\tau_{ikl}(T_{kl}\\beta_{ik})(\\beta_{kl}T'_{ik})(T'_{kl}\\tau'_{ijk})\\\\\n&=\\tau_{ikl}T_{kl}(\\beta_{ik}\\tau'_{ijk})(\\beta_{kl}T'_{jk}T'_{ij})\\\\\n&=\\tau_{ikl}(T_{kl}\\tau_{ijk})B_{ijkl}.\n\\end{aligned}$$\nAll expressions are natural transformations from $T'_{kl}T'_{jk}T'_{ij}$ to $T_{il}$, so the substitutions are typed even when indices coincide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, cocycle: first pentagon composite; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "For the other pentagon composite, the same definitions and naturality of $\\tau_{jkl}$ on $\\beta_{ij}$ give\n$$\\begin{aligned}\n\\beta_{il}\\tau'_{ijl}(\\tau'_{jkl}T'_{ij})\n&=\\tau_{ijl}(T_{jl}\\beta_{ij})\\bigl((\\beta_{jl}\\tau'_{jkl})T'_{ij}\\bigr)\\\\\n&=\\tau_{ijl}(T_{jl}\\beta_{ij})(\\tau_{jkl}T'_{ij})(B_{jkl}T'_{ij})\\\\\n&=\\tau_{ijl}(\\tau_{jkl}T_{ij})B_{ijkl}.\n\\end{aligned}$$\nThe original pentagon equates the final expressions of this step and step 3. Cancel the invertible $\\beta_{il}$ to obtain $\\tau'_{ikl}(T'_{kl}\\tau'_{ijk})=\\tau'_{ijl}(\\tau'_{jkl}T'_{ij})$. This uses only the given pentagon and the displayed naturality square, including repeated-index cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, cocycle: second composite and cancellation; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "Since $T'_{ii}=\\mathrm{Id}$, the first unit identity and the formula for $\\tau'$ give\n$$\\tau'_{iij}=\\beta_{ij}^{-1}(T_{ij}\\epsilon_i)(T_{ij}\\epsilon_i^{-1})\\beta_{ij}=\\mathrm{id}.$$\nThis calculation also covers $i=j$: the factor $\\beta_{ij}T'_{ii}$ is just $\\beta_{ij}$ after removing the identity functor, so no separate assumption about $\\epsilon_i$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, normalization: first repeated-index comparison; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "For the second unit identity use naturality of $\\epsilon_j:T_{jj}\\cong\\mathrm{Id}$ on $\\beta_{ij}$:\n$$(\\epsilon_jT_{ij})(T_{jj}\\beta_{ij})=\\beta_{ij}(\\epsilon_jT'_{ij}).$$\nSubstitute this into the defining formula, using $\\beta_{jj}=\\epsilon_j^{-1}$:\n$$\\tau'_{ijj}=\\beta_{ij}^{-1}(\\epsilon_jT_{ij})(T_{jj}\\beta_{ij})(\\epsilon_j^{-1}T'_{ij})=\\mathrm{id}.$$\nThe same equality applies when $i=j$ and proves the second unit clause also in the fully diagonal case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, normalization: second repeated-index comparison; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "Naturality of $\\theta_{jk}:\\Phi_kT_{jk}\\cong\\Phi_j$ on $\\beta_{ij}$ and the original cocone identity give\n$$\\begin{aligned}\n\\theta'_{ik}\\Phi_k(\\tau'_{ijk})\n&=\\theta_{ik}\\Phi_k(\\tau_{ijk}B_{ijk})\\\\\n&=\\theta_{ij}(\\theta_{jk}T_{ij})\\Phi_k(T_{jk}\\beta_{ij})\\Phi_k(\\beta_{jk}T'_{ij})\\\\\n&=\\theta_{ij}\\Phi_j(\\beta_{ij})(\\theta_{jk}T'_{ij})\\Phi_k(\\beta_{jk}T'_{ij})\\\\\n&=\\theta'_{ij}(\\theta'_{jk}T'_{ij}).\n\\end{aligned}$$\nAlso $\\theta'_{ii}=\\Phi_i(\\epsilon_i)\\Phi_i(\\epsilon_i^{-1})=\\mathrm{id}$. Thus steps 3--6 and this step verify precisely the normalization, cocycle and compatibility hypotheses stated in [det-def-sfb-filtered-two-colimit-model]. Here compatibility can equivalently be written by composing on the right with $\\Phi_k(\\tau'_{ijk})^{-1}$; we do not invoke any theorem about the colimit category.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, normalization, cocycle and compatibility; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "For $k\\ge i,j$, $x\\in\\mathcal C_i$ and $y\\in\\mathcal C_j$, write $b_x=\\beta_{ik,x}$ and $b_y=\\beta_{jk,y}$. The map\n$$g\\longmapsto\\widehat g=b_y^{-1}gb_x$$\nis a bijection from $\\operatorname{Hom}(T_{ik}x,T_{jk}y)$ to $\\operatorname{Hom}(T'_{ik}x,T'_{jk}y)$, with inverse $h\\mapsto b_yhb_x^{-1}$; the two composites are identities by cancellation. Its image in $\\mathcal D$ is unchanged, since\n$$\\begin{aligned}\n\\theta'_{jk,y}\\Phi_k(\\widehat g)(\\theta'_{ik,x})^{-1}\n&=\\theta_{jk,y}\\Phi_k(b_y)\\Phi_k(b_y^{-1}gb_x)\\Phi_k(b_x)^{-1}\\theta_{ik,x}^{-1}\\\\\n&=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}.\n\\end{aligned}$$\nThis proves the stated arrow correspondence, in both directions and also when $k=i$ or $k=j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Statement, comparison-functor formula: preservation of finite-stage images; explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "The condition (Obj) of [det-def-sfb-filtered-two-colimit-conditions] involves only $\\mathcal D$ and the $\\Phi_i$, which were kept exactly, so its witnesses agree. For (Hom-surj), keep the indices $i,j,k$, the objects $x,y$, and the morphism $\\varphi$. Replace a witness $g$ by $\\widehat g$ from step 8. The image equality there proves that it is a witness for the normalized condition. Conversely replace a normalized witness $h$ by $b_yhb_x^{-1}$ and use the same equality. Thus (Hom-surj) holds for one cocone exactly when it holds for the other.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Filtered 2-colimit conditions, (Obj) and (Hom-surj); explicit agent calculation, not a proof asserted by the source"
+   }
+  },
+  {
+   "text": "For (Hom-inj) of [det-def-sfb-filtered-two-colimit-conditions], its quantified morphisms $g,g':x\\to y$ at stage $k$ and its premise $\\Phi_k(g)=\\Phi_k(g')$ are unchanged. At every possible witness $l\\ge k$, naturality of $\\beta_{kl}$ gives\n$$T_{kl}(g)=\\beta_{kl,y}T'_{kl}(g)\\beta_{kl,x}^{-1},\\qquad T_{kl}(g')=\\beta_{kl,y}T'_{kl}(g')\\beta_{kl,x}^{-1}.$$\nCancelling the same isomorphisms shows $T_{kl}(g)=T_{kl}(g')$ if and only if $T'_{kl}(g)=T'_{kl}(g')$. Consequently exactly the same witness indices work in the two versions, proving (Hom-inj) in both directions and completing every clause.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "Filtered 2-colimit conditions, (Hom-inj); explicit agent calculation, not a proof asserted by the source"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-filtered-two-colimit-cocone",
+  "det-def-sfb-filtered-two-colimit-model",
+  "det-def-sfb-filtered-two-colimit-conditions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+  "place": "Explicit normalization calculation from the cocone data and the three hypotheses in the statement; the blueprint specifies the normalized model but does not supply this normalization proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +172,31 @@
    "results": "13 hits in CategoryTheory: Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Bicategory/Coherence.lean, Mathlib/CategoryTheory/Bicategory/Coherence.lean, Mathlib/CategoryTheory/Bicategory/Coherence.lean. Free-bicategory normalization and pseudofunctor constructors; no normalization of an arbitrary unital category cocone preserving finite-stage arrows.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent cocone on a unital diagram of categories can be normalized to have identity diagonal transitions without changing finite stage morphism conditions",
+   "results": "8 hits: CategoryTheory.Limits.Cocone.category, CategoryTheory.Functor.diag_η, CategoryTheory.Limits.DiagramOfCocones.id, Mathlib.Tactic.BicategoryLike.NormalizedHom, Mathlib.Tactic.BicategoryLike.normalize, CategoryTheory.Limits.Cocone.category_id_hom, CategoryTheory.Limits.Cocones.eta_hom_hom, CategoryTheory.idLiftsCocone. Related constructions only; none states diagonal normalization and preservation of the three cocone conditions.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a unital pseudofunctor of categories on a poset by replacing diagonal transition functors with identity functors and transport its coherent cocone",
+   "results": "8 hits: CategoryTheory.FreeBicategory.normalize, PrincipalSeg.cocone, CategoryTheory.Pseudofunctor.Grothendieck, CategoryTheory.WithInitial.pseudofunctor, CategoryTheory.SmallObject.SuccStruct.ofCocone, CategoryTheory.Pseudofunctor.CoGrothendieck, CategoryTheory.SmallObject.coconeOfLE, CategoryTheory.LocallyDiscrete.mkPseudofunctor. Related constructions only; none states diagonal normalization and preservation of the three cocone conditions.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the composition and identity isomorphisms of a pseudofunctor along invertible natural transformations of its transition functors",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso, CategoryTheory.LocallyDiscrete.mkPseudofunctor_mapComp, CategoryTheory.Pseudofunctor.Grothendieck.mapCompIso, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_map₂, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp_inv_app, CategoryTheory.pseudofunctorOfIsLocallyDiscrete_mapComp, CategoryTheory.LocallyDiscrete.mkPseudofunctor_map, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp. Related constructions only; none states diagonal normalization and preservation of the three cocone conditions.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-qbar-condensed-two-colimit",
@@ -87,5 +215,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-coherent-cocone-normalization",
+  "worker": "stage1",
+  "summary": "Constructed the diagonal replacement and proved the transported pentagon, both repeated-index unit identities and the cocone identity by explicit naturality and cancellation. Proved the arrow bijection and unchanged images, then checked Obj, Hom-surj and Hom-inj separately. No new node is needed: each calculation is elementary from the hypotheses. Read all four statement dependencies, the main-20261015 model and conditions sources, searched the blueprint and project Lean, and ran the logged Mathlib searches. Statement unchanged.",
+  "blueprint": "Serves thm-weil-pbc-qbar, final independence sentence, via prop-weil-pbc-qbar-condensed-two-colimit: supplies strict normalization required by det-def-sfb-filtered-two-colimit-model without changing the finite-stage representatives or any of the three conditions."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NA-bf5483d50",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-bf5483d50 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit containing the item, which is now split into 10 steps with no new nodes and an unchanged statement, plus the report with its Review by NA section. No repair note exists for this item, so no re-split rule applies. The cited statements match what the steps take from them. det-def-sfb-filtered-two-colimit-model is verbatim the main-20261015 text in sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md, which states the normalization, cocycle and compatibility hypotheses but does not prove a normalization, so proof_origin agent is right. The cocone node gives the data only, and the conditions node gives Obj, Hom-surj and Hom-inj with exactly the quantifiers steps 9 and 10 use. I redid every computation. Steps 3 and 4: the interchange law, plus naturality of beta_kl and of tau_jkl on beta_ij, reduce both pentagon composites to the original pentagon followed by B_ijkl; cancelling beta_il finishes it. Steps 5 and 6: tau'_iij and tau'_ijj are identities, step 6 through naturality of epsilon_j on beta_ij; both also hold when i=j. Step 7: naturality of theta_jk on beta_ij gives the model's compatibility, and theta'_ii = Phi_i(eps_i)Phi_i(eps_i^-1) = id. Step 8: the arrow bijection leaves the image in D unchanged, including when k=i or k=j. Step 10: naturality of beta_kl means the same witnesses l work for Hom-inj in both cocones. Because I is a poset, the case split i=j versus i!=j for T' is well defined. The hypotheses are consistent: T_ii eps_i = eps_i T_ii follows from naturality. Edge cases checked: empty I, a singleton I with nontrivial eps, and fully repeated indices. Every step is a written-out naturality or cancellation argument, correctly marked elementary, with no unexplained transport. The proof cites only definition nodes, so there is no route issue and no tool_uses are needed; no SGA is cited. Duplicate search with rg -L over dag/nodes found only the parent prop-weil-pbc-qbar-condensed-two-colimit, whose step 7 uses exactly this lemma, and the sfb unit nodes. The characterization node is the equivalence criterion for an already-normalized cocone, not a duplicate. Four kinds of Mathlib search are recorded, with no match. No fixes written."
  }
 }

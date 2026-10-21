@@ -20999,3 +20999,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:10 L: merged deliver/Q52/lem-sf-cbc-extension-zero-completion (reviewer FIX; after a return; new nodes: 1)
 - 08:10 L: merged deliver/Q100/lem-sf-pf-open-factor-coherence (reviewer FIX; after a return; new nodes: 4)
 - 08:10 L: merged deliver/Q06/lem-sfb-finite-proper-classical-bounded-sums (reviewer PASS; first push; new nodes: 0)
+- 08:10 L: merged deliver/NA/lem-weil-pbc-coherent-cocone-normalization (reviewer PASS; first push; new nodes: 0)
