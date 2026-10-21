@@ -23345,3 +23345,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:30 L: merged deliver/Q01/lem-sfb-root-coordinate-supported-vanishing (stage 2; reviewer PASS; parallel immutable checks)
 - 18:30 L: returned deliver/O1/lem-sfb-snc-tame-finite-fibre-classification (reviewer RETURN: L: independent stage-2 immutable head 508ed569d1bf: Main statement correct: hypotheses carried by SNCResidualChart plus )
 - 18:31 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 18:32 L: merged deliver/Q12/lem-sfb-polynomial-translation-acyclic (reviewer PASS; first push; new nodes: 1)

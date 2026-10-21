@@ -16,9 +16,70 @@
   "def-weil-size-convention",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove the assertion by induction on $r$, simultaneously for every $m\\geq0$. If $r=0$, $L=1$ and the identity axiom forces every action to be trivial, so fixed sections and their inclusion are the identity functor and identity map. Its derived functor is again the identity; a module in degree zero has zero positive cohomology. This proves the base case for all polynomial spectator modules, including $m=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of polynomial translation acyclicity, rank-zero base case"
+   }
+  },
+  {
+   "text": "Suppose $r>0$ and the assertion holds for $r-1$ and every spectator count. Put $H=\\mathbf Z_\\ell$ for translation in $y_1$ and $G=\\mathbf Z_\\ell^{r-1}$ for translations in $y_2,\\ldots,y_r$; reorder factors to write $L=G\\times H$. For $n\\geq0$ let $V_n$ be the finite-dimensional $E$-space of polynomials of total degree at most $n$ in all $r+m$ variables. Inclusions are injective, all translations preserve $V_n$, and $D_n=-\\partial/\\partial y_1$ satisfies $D_n^{n+1}=0$. The $G$-action commutes with $D_n$ since it substitutes only the other $y$ coordinates. In the monomial basis its matrix entries are polynomials in the $G$ coordinates, hence continuous. Finite Taylor expansion gives $\\exp(tD_n)f=f(y_1-t,y_2,\\ldots,z)$, so this is exactly the specified $H$-action. Thus the finite stages meet every algebraic and continuity hypothesis of [lem-sfb-ind-unipotent-procyclic-difference].",
+   "uses": [
+    "lem-sfb-ind-unipotent-procyclic-difference"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of polynomial translation acyclicity, finite polynomial stages and nilpotent translation"
+   }
+  },
+  {
+   "text": "Each $M_n(S)=C(S,F\\otimes_E V_n)$ is the finite direct sum of copies of $A$ on its monomials: the coefficient projections and assembly are inverse continuous maps for the finite product topology. The colimit of these finite direct sums is the internal direct sum on all monomials, because a map out of either is precisely a compatible family of maps from its individual copies of $A$. These identifications intertwine the stage actions, so $\\operatorname{colim}M_n=T_{r,m}$ as an action module. Apply [lem-sfb-ind-unipotent-procyclic-difference] with these stages, retaining the $G$-action. It gives $R\\Gamma_H^G(T_{r,m}[0])\\cong Q([T_{r,m}\\xrightarrow{\\Delta}T_{r,m}])$, where $\\Delta f=f(y_1-1,y_2,\\ldots,z)-f(y_1,y_2,\\ldots,z)$. This is the asserted derived comparison for the whole sheaf colimit; no interchange of a derived functor with that colimit is inferred here.",
+   "uses": [
+    "lem-sfb-ind-unipotent-procyclic-difference"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of polynomial translation acyclicity, application of the rank-one analytic comparison"
+   }
+  },
+  {
+   "text": "Set $B=A[y_2,\\ldots,y_r,z_1,\\ldots,z_m]$, the polynomial direct sum in the remaining variables. In $B[y_1]$ put $b_0=1$ and $b_n=(-1)^n y_1(y_1+1)\\cdots(y_1+n-1)/n!$ for $n>0$. Their degrees are $n$ with invertible rational leading coefficients, so triangular elimination expresses each polynomial uniquely as a finite sum $\\sum_n c_nb_n$, $c_n\\in B$. Subtract the two products at $y_1-1$ and $y_1$: factoring their $n-1$ common factors gives $\\Delta b_n=b_{n-1}$ for $n>0$, while $\\Delta b_0=0$. Define $J(b_n)=b_{n+1}$ $B$-linearly, $p(f)=f(0)$, and $i:B\\to B[y_1]$ by constants. Then $\\Delta J=1$, $J\\Delta=1-ip$, and $pi=1$. Every image of a monomial is finite, so all these formulas define internal maps of direct sums. They commute with the $G$-action, which acts on $B$ alone. Thus $i:B[0]\\to[T_{r,m}\\xrightarrow{\\Delta}T_{r,m}]$ is a chain homotopy equivalence in $\\mathcal A_G(A)$, with inverse $p$ and homotopy $J$ in degree one. By step 3, $R\\Gamma_H^G(T_{r,m}[0])\\cong B[0]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of polynomial translation acyclicity, explicit finite-difference contraction"
+   }
+  },
+  {
+   "text": "For the exact inflations from ordinary internal modules to $G$-action modules and then to $(G\\times H)$-action modules, [lem-sfb-condensed-product-action-inflation] gives Grothendieck abelian categories, the specified right adjoints $\\Gamma_G,\\Gamma_H^G,\\Gamma_{G\\times H}$, and the conjugate equality $\\Gamma_{G\\times H}=\\Gamma_G\\Gamma_H^G$. Apply [lem-sfb-derived-composition-adjunction-normalization] to these two exact left adjoints and their composite. Its hypotheses are exactly those just stated, and it yields $R\\Gamma_{G\\times H}(T_{r,m}[0])\\cong R\\Gamma_G R\\Gamma_H^G(T_{r,m}[0])$. By step 4 this is $R\\Gamma_G(B[0])$. As a $G$-module $B$ is $T_{r-1,m}$, with the same $m$ spectator variables and translations in the remaining $r-1$ variables. The induction hypothesis therefore makes every positive cohomology object vanish. The induction proves the item for all $r,m$, for both choices of $F$.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of polynomial translation acyclicity, successive derived invariants and induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ind-unipotent-procyclic-difference",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent one-coordinate reduction with explicit polynomial difference contraction; the cited blueprint paragraph delegates this analytic input and does not prove it."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +115,80 @@
    "results": "{\"t\": \"2026-10-21T17:45:54Z\", \"tool\": \"leanfinder\", \"query\": \"Higher derived invariants vanish on the direct sum of polynomial functions with p adic lattice acting by translation over a normed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.fwdDiff_tendsto_zero\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.fwdDiff_mahlerSeries\", \"PadicInt.mahlerTerm\", \"PadicInt.hasSum_mahler\", \"PadicInt.mahlerTerm_apply\", \"PadicInt.fwdDiff_iter_le_of_forall_le\", \"PadicInt.mahlerSeries\"], \"digest\": \"001c91d7494f9c50\"}",
    "date": "2026-10-21",
    "verdict": "no match: polynomial translation automorphisms, Mahler expansions with completeness hypotheses, and abstract group resolutions do not assert internal derived acyclicity of this polynomial direct sum with all-continuous norm coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived internal invariants of a p adic lattice acting by polynomial translations vanish for the polynomial direct sum",
+   "results": "{\"t\": \"2026-10-21T18:12:04Z\", \"tool\": \"leanfinder\", \"query\": \"Higher derived internal invariants of a p adic lattice acting by polynomial translations vanish for the polynomial direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PadicInt.fwdDiff_tendsto_zero\", \"PadicInt.fwdDiff_mahlerSeries\", \"PadicInt.mahlerEquiv_apply\", \"Algebra.Generators.H1Cotangent.δAux_X\", \"PadicInt.coe_dpow_eq\", \"instCommRingBDeRhamPlus\"], \"digest\": \"2af8f22e23fa3890\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(polynomial|MvPolynomial).*(acyclic|invariant|cohomolog)|(acyclic|invariant|cohomolog).*(polynomial|MvPolynomial)",
+   "results": "{\"t\": \"2026-10-21T18:13:21Z\", \"tool\": \"grep\", \"query\": \"(polynomial|MvPolynomial).*(acyclic|invariant|cohomolog)|(acyclic|invariant|cohomolog).*(polynomial|MvPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Fixed.lean\", \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\"], \"digest\": \"7779b65a2ef665c3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial functions with p adic translation action have zero higher condensed group cohomology",
+   "results": "{\"t\": \"2026-10-21T18:13:21Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial functions with p adic translation action have zero higher condensed group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H0Iso\", \"PadicInt.mahlerTerm\", \"PadicInt.mahlerSeries\", \"PadicInt.fwdDiff_tendsto_zero\", \"WittVector.zeroIsPoly\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerEquiv\", \"groupCohomology.instPreservesZeroMorphismsRepModuleCatFunctor\"], \"digest\": \"59441871caa46bfb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-21T18:13:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"continuousCohomology\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translation of polynomial functions over a noncomplete p adic norm field gives an acyclic module for internal derived lattice invariants",
+   "results": "{\"t\": \"2026-10-21T18:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"Translation of polynomial functions over a noncomplete p adic norm field gives an acyclic module for internal derived lattice invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerEquiv\", \"PadicInt.mahlerTerm\", \"Profinite.NobelingProof.succ_exact\", \"instCommRingBDeRhamPlus\", \"Profinite.NobelingProof.Nobeling_aux\"], \"digest\": \"828c4b5911afb484\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived internal invariants of a p adic lattice acting by polynomial translations vanish for the polynomial direct sum",
+   "results": "{\"t\": \"2026-10-21T18:12:04Z\", \"tool\": \"leanfinder\", \"query\": \"Higher derived internal invariants of a p adic lattice acting by polynomial translations vanish for the polynomial direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PadicInt.fwdDiff_tendsto_zero\", \"PadicInt.fwdDiff_mahlerSeries\", \"PadicInt.mahlerEquiv_apply\", \"Algebra.Generators.H1Cotangent.δAux_X\", \"PadicInt.coe_dpow_eq\", \"instCommRingBDeRhamPlus\"], \"digest\": \"2af8f22e23fa3890\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(polynomial|MvPolynomial).*(acyclic|invariant|cohomolog)|(acyclic|invariant|cohomolog).*(polynomial|MvPolynomial)",
+   "results": "{\"t\": \"2026-10-21T18:13:21Z\", \"tool\": \"grep\", \"query\": \"(polynomial|MvPolynomial).*(acyclic|invariant|cohomolog)|(acyclic|invariant|cohomolog).*(polynomial|MvPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Fixed.lean\", \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\"], \"digest\": \"7779b65a2ef665c3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial functions with p adic translation action have zero higher condensed group cohomology",
+   "results": "{\"t\": \"2026-10-21T18:13:21Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial functions with p adic translation action have zero higher condensed group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H0Iso\", \"PadicInt.mahlerTerm\", \"PadicInt.mahlerSeries\", \"PadicInt.fwdDiff_tendsto_zero\", \"WittVector.zeroIsPoly\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerEquiv\", \"groupCohomology.instPreservesZeroMorphismsRepModuleCatFunctor\"], \"digest\": \"59441871caa46bfb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-21T18:13:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"continuousCohomology\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translation of polynomial functions over a noncomplete p adic norm field gives an acyclic module for internal derived lattice invariants",
+   "results": "{\"t\": \"2026-10-21T18:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"Translation of polynomial functions over a noncomplete p adic norm field gives an acyclic module for internal derived lattice invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerEquiv\", \"PadicInt.mahlerTerm\", \"Profinite.NobelingProof.succ_exact\", \"instCommRingBDeRhamPlus\", \"Profinite.NobelingProof.Nobeling_aux\"], \"digest\": \"828c4b5911afb484\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern abstract or finite cyclic group cohomology, topological continuous cochains, solid modules, or complete-space Mahler theory; none gives this ordinary internal condensed derived comparison for countable ind-unipotent modules and all-continuous noncomplete coefficients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-polynomial-derived-bar-comparison",
@@ -83,5 +214,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-polynomial-translation-acyclic",
+  "worker": "stage1",
+  "summary": "Reduced the whole polynomial direct sum to one rank-one ind-unipotent derived difference comparison, wrote a finite rational polynomial contraction, and used exact inflation adjunctions to induct on the lattice rank. No statement change, no completion, no assumption that derived invariants commute with filtered colimits, and no circular citation of the dense-lattice ancestor.",
+  "blueprint": "Realizes the agent-created polynomial translation acyclicity obligation below paragraph (3), open direct image, of det-thm-sf-ctf-stability-direct-images; the current blueprint paragraph only delegates the coefficient theorem. The existing ancestor tool reports from.node = None; its recorded via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic composition of right derived functors for two exact inflation left adjoints; no theorem of the polynomial-translation unit gives this general adjunction comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-c7b0bb0dd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-c7b0bb0dd (reviewer sub-agent of L); spot-checked: I read in full the item, the new node lem-sfb-ind-unipotent-procyclic-difference, every cited statement, the ancestor chain (polynomial-derived-bar-comparison, trivial-ladic-derived-exterior, dense-lattice) and main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). That paragraph only delegates the analytic input, so the agent proof origin and the WANTED reference are correct, and no SGA is cited. The item statement is unchanged; this is a first split (the item was created by Q06 today), not a re-split. Step 1 (r=0): invariants for the trivial group are the identity functor, so there is nothing in positive degrees. Step 2: degree-<=n polynomials are finite-dimensional with injective inclusions; D=-d/dy1 has D^{n+1}=0; finite Taylor expansion gives exp(tD)f=f(y1-t); the G-action is continuous and commutes with D. Step 3: the sheaf colimit of the finite sums C(S,F(x)V_n)=A^k is the internal direct sum T_{r,m} with the same action, and the node's isomorphism in D(A_G) is applied with exp(D)-1=Delta; no derived functor is commuted with a colimit. Step 4: I recomputed Delta b_n=b_{n-1}, Delta J=1, J Delta=1-ip and pi=1 for the binomial basis; the maps are G-equivariant and finite on monomials, so B[0] is homotopy equivalent to [T->T] in A_G. Step 5: product-action-inflation gives Grothendieck categories, exact inflations and M^{GxH}=(M^H)^G. The declared tool use derived-composition-adjunction-normalization (unit sk-thm-sf-comp-composition) gives RGamma_{GxH}=RGamma_G RGamma_H^G, and the induction on T_{r-1,m} with the same m is well-founded. I accept that tool use. New node: B1-B9 hold, including searches with all three tool kinds. I tested G=1, M=0, D=0 (H^1=A, not acyclicity) and finite-dimensional unipotent V. If the item holds, the node's D=0 case follows from the exact sequence 0->A->A[y]->Delta->A[y]->0, so its noncomplete-Omega risk is the item's own. The rest of the node is plausible (filtration by D on each stage, plus colimit commutation on the coherent site). It is a genuine rank-one generic lemma, not a relabelling (D1/D2), and the polynomial content stays in the item. No duplicate: lem-exc-procyclic-two-term has finite discrete coefficients, and dense-lattice and trivial-exterior are ancestors, so citing them would be circular, as the report says. Note for the maintainer: the node's rank-one content overlaps those ancestors, so their analytic core now sits in this one unsplit obligation; there is no cycle. No fixes."
  }
 }
