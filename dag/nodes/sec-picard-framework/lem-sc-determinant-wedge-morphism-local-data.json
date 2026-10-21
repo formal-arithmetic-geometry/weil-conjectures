@@ -12,22 +12,29 @@
  ],
  "proof": [
   {
-   "text": "Choose local lifts using the epimorphism property, prove independence by finite locally free basis expansion and alternation, then use exterior-power and tensor universal properties.",
+   "text": "For each open U, apply the official determinant_wedgeMorphism_local_data_at to the same short exact complex, ranks and rank equation. This gives a morphism between the native exterior powers with the desired formula on lifted wedge sections.",
    "uses": [
-    "lem-weil-pbc-exterior-power-free-basis",
-    "def-sc-sheaf-exterior-power"
+    "new-local-wedge-at"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Precompose this morphism with the tensor of the hom maps of exteriorSheafPowerIso for S.X₁ and S.X₃, and postcompose with its inverse for S.X₂. The inverse wedge formula and the isomorphism identities give the forward wedge formula. tensorHom_app_tmulSection sends each legacy wedge tensor to the native wedge tensor; apply the official formula and then the inverse comparison wedge formula. The resulting morphism has exactly the original legacy section formula for every a, b, c and lift equation.",
+   "uses": [
+    "lem-sc-exterior-sheaf-power-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-sheaf-exterior-power",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "new-local-wedge-at",
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "B3 stage3",
+  "by": "V4 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "local construction and gluing split"
+  "place": "Proof of (*), determinant paragraph",
+  "note": "Retain the local wedge construction, using its proved official implementation and a fully proved comparison transport. No public signature or unit step changes."
  },
  "mathlib_searches": [
   {
@@ -92,19 +99,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "C-974ea",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T184311-L-4007442",
+  "landing": "20261021T011045-L-2034162",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.determinant_wedgeMorphism_local_data",
-   "AlgebraicGeometry.Scheme.Modules.determinant_wedgeMorphism_of_local_data"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: delivered stub + adapted consumer DeterminantWedgeMorphismLocal + 2 node files + change record against live clone, retire-items row 1206 and WC twin DeterminantWedgeMorphismLocalAt (node lean.statement verbatim); --all compile clean, importer DeterminantWedgeMorphism compiles, axioms clean"
  },
  "lean_audit": {
   "master": {

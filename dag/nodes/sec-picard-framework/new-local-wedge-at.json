@@ -12,47 +12,42 @@
  ],
  "proof": [
   {
-   "text": "Identify the retained exteriorSheafPresheaf with the upstream exterior-power presheaf by identity isomorphisms on section modules: uniqueness of exterior restrictions proves naturality. Sheafify this isomorphism. Naturality of the sheafification unit shows that its hom and inv preserve wedge sections. Conjugate the upstream exteriorSheaf_map_exists morphism for S.g by these isomorphisms to obtain the map e on the retained exteriorSheaf objects. Form q as identity tensor e. The tensor-section naturality lemma and the transferred pure-wedge formula prove the formula for q.",
+   "text": "Apply exteriorSheaf_map_exists to S.g and degree r₃. Tensor the resulting morphism with the identity of exteriorPower S.X₁ r₁ to form q. tensorHom_app_tmulSection and the pure-wedge formula give the required formula for q on every open.",
    "uses": [
-    "def-sc-sheaf-exterior-power",
     "lem-sc-exterior-sheaf-map-exists"
    ],
    "elementary": true
   },
   {
-   "text": "Obtain the pre-quotient wedge map psi from exteriorSheaf_wedgeMap_exists, applied to S.f. The upstream theorem uses native exterior powers. Identify each legacy exterior presheaf with its native counterpart by identity maps on objects; restriction compatibility follows from the unique pure-wedge restriction formula. Sheafify these isomorphisms, use naturality of the unit to check their hom and inverse on pure wedges, and conjugate the upstream wedge map by the tensor of the two source comparisons and the inverse target comparison. tensorHom_app_tmulSection gives exactly the legacy wedge formula.",
+   "text": "Apply exteriorSheaf_wedgeMap_exists to S.f, r₁, r₃ and r₂ = r₁ + r₃, giving the pre-quotient wedge map psi with its concatenation formula.",
    "uses": [
-    "lem-sc-exterior-sheaf-wedge-map",
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-exterior-sheaf-wedge-map"
    ],
    "elementary": true
   },
   {
-   "text": "Conjugate q by the tensor of canonical exteriorSheafPowerIso maps, and conjugate the pre-quotient wedge by the source tensor inverse and target comparison. tensorHom_app_tmulSection and the inverse and forward comparison formulas verify the official pure-wedge hypotheses. Apply the proved official determinant_wedge_quotient_factor. Transport the resulting factorization back with the target comparison inverse; exteriorSheafTensor_lift_hom_ext checks its equation on pure-wedge generators. This fully proved private bridge preserves the consumer signature and factorization argument.",
+   "text": "Apply determinant_wedge_quotient_factor to q and psi and their generator formulas. Obtain phi with q followed by phi equal to psi.",
    "uses": [
-    "lem-sc-determinant-wedge-quotient-factor",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-determinant-wedge-quotient-factor"
    ],
    "elementary": true
   },
   {
-   "text": "Evaluate q followed by phi equals psi on the tensor of the wedge of a and the wedge of c. Substitute the pure-wedge formulas for q and psi, and replace the tuple S.g(c) by b using the given lift equations. This yields the required value of phi on U.",
+   "text": "Evaluate this factorization on the tensor of the wedge of a and the wedge of c over U. Rewrite using the formulas for q and psi, and use function extensionality on the lift equations to replace S.g(c) by b. This gives the required formula for phi.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-sheaf-exterior-power",
   "lem-sc-exterior-sheaf-map-exists",
   "lem-sc-exterior-sheaf-wedge-map",
-  "lem-sc-determinant-wedge-quotient-factor",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-determinant-wedge-quotient-factor"
  ],
  "proof_origin": {
-  "by": "agent K8",
+  "by": "V4 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Determinant paragraph: retain the local quotient construction and transport the upstream exterior-power map across the explicit identity-on-sections presheaf comparison.",
-  "note": "A5 retirement: private proved comparison bridge applies the official exteriorPower quotient-factor theorem and transports its factorization to exteriorSheaf, with no new assumption or change to the public signature."
+  "place": "Proof of (*), determinant paragraph",
+  "note": "The node now records the existing official theorem and its unchanged proof. The canonical exterior-sheaf comparison is used only in the retained legacy consumer, not in this official construction. The determinant unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -97,14 +92,15 @@
  "title": "Local wedge morphism on a fixed open",
  "statement": "For fixed U, the local wedge morphism and its prescribed pure-wedge formula exist.",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocalAt",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantWedgeMorphismLocalAt.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocalAt",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantWedgeMorphismLocalAt.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_wedgeMorphism_local_data_at",
   "branch": "sheaf-dag",
   "by": "J3",
   "date": "2026-10-13",
-  "statement": "theorem determinant_wedgeMorphism_local_data_at {X : Scheme.{v}} (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁] (U : X.Opens) : ∃ φU : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂, ∀ (a : Fin r₁ → S.X₁.val.obj (op U)) (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)), (∀ i, S.g.val.app (op U) (c i) = b i) → φU.val.app (op U) (tmulSection (exteriorSheafSection S.X₁ r₁ U a) (exteriorSheafSection S.X₃ r₃ U b)) = exteriorSheafSection S.X₂ r₂ U (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))"
+  "statement": "theorem determinant_wedgeMorphism_local_data_at {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] (U : X.Opens) :\n    ∃ φU : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶\n      exteriorPower S.X₂ r₂,\n      ∀ (a : Fin r₁ → S.X₁.val.obj (op U))\n        (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),\n        (∀ i, S.g.val.app (op U) (c i) = b i) →\n        φU.val.app (op U)\n          (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)\n            (wedge (M := S.X₃) (r := r₃) (U := U) b)) =\n          wedge (M := S.X₂) (r := r₂) (U := U)\n            (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
+  "note": "V4 retirement: the duplicate exteriorSheaf theorem is withdrawn in favor of the proved official exteriorPower theorem. The only direct consumer retains its complete legacy signature by composing this morphism with the existing exteriorSheafPowerIso comparisons, whose wedge formulas are proved."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -119,12 +115,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-efb71",
-  "group": "A5",
+  "reviewer": "C-974ea",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261021T003458-L-1642022",
+  "landing": "20261021T011045-L-2034162",
   "kind": "interface",
-  "note": "independent cc review: delivered stub + 2 adapted consumers + 3 node files against the live clone, retire-items row 1047 and the WC twin (node lean.statement verbatim); --all compile clean, importers Glue/Local compile, axioms clean"
+  "note": "independent cc review: delivered stub + adapted consumer DeterminantWedgeMorphismLocal + 2 node files + change record against live clone, retire-items row 1206 and WC twin DeterminantWedgeMorphismLocalAt (node lean.statement verbatim); --all compile clean, importer DeterminantWedgeMorphism compiles, axioms clean"
  },
  "lean_audit": {
   "master": {
