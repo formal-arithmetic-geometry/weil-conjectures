@@ -33,6 +33,11 @@ minimal prime belongs to `D(a)` and hence to the localization image. -/
 theorem dense_basicOpen_of_mem_nonZeroDivisors
     (A : Type u) [CommRing A] (a : A) (ha : a ∈ nonZeroDivisors A) :
     Dense (↑(basicOpen a) : Set (PrimeSpectrum A)) := by
-  sorry
+  rw [← localization_away_comap_range (Localization.Away a) a]
+  apply (denseRange_comap_iff_minimalPrimes (algebraMap A (Localization.Away a))).2
+  intro I hI
+  rw [localization_away_comap_range (Localization.Away a) a]
+  change a ∉ I
+  exact fun haI ↦ notMem_nonZeroDivisors_of_mem_mem_minimalPrimes haI hI ha
 
 end PrimeSpectrum
