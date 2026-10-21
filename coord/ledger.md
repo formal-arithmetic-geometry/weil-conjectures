@@ -23194,3 +23194,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T17:31:01Z L: superseded stage-1 delivery N9/lem-sfb-nonnegative-derived-totalization at a9347aa67bbe85536506690df4afe6984c4b83b3; current completion retained; packet archived at refs/superseded/N9/lem-sfb-nonnegative-derived-totalization/a9347aa67bbe85536506690df4afe6984c4b83b3; stale return retired.
 - 17:31 L: merged deliver/NR/lem-sfb-norm-algcl-cohomology-topology-comparison (reviewer FIX; first push; new nodes: 3)
 - 17:32 L: merged deliver/Q09/lem-sfb-trivial-ladic-derived-exterior (reviewer FIX; first push; new nodes: 3)
+- 17:32 L: merged deliver/NU/lem-sfb-wstrict-lisse-component-cohomology (reviewer FIX; first push; new nodes: 1)

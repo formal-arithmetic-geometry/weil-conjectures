@@ -18,9 +18,140 @@
   "lem-pe-spectral-components-profinite",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\pi_0(X)$ and identify $\\pi_0(X')$ with $P$ using the given homeomorphism. If $P$ is empty, both schemes are empty, their section complexes are zero and the asserted map is the identity of zero. Otherwise work in the compatible small-site universes. The point-pullback comparisons give $h^{-1}\\Lambda_X\\cong\\Lambda_{X'}$ with the specified identity/composition normalization. The exactness theorem makes module pullback exact, so $h^*M[0]$ is the degree-zero pullback and the ordinary derived adjunction in the statement applies. No completeness of coefficients enters here. The exact internal-to-section-module equivalences identify both pullback/direct-image adjunctions, including units and counits, so the sectionwise ringed-site computations below compute the stated internal module operations.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.2, functoriality of the pro-etale topos; HRS Example 3.1 and construction (4.1)."
+   }
+  },
+  {
+   "text": "On the category of profinite spaces over $P$, use finite jointly surjective families as coverings and extremally disconnected spaces as the basis. Every object has a singleton basis covering by the Stonean-cover theorem. Adjoining an additional arrow to a jointly surjective family preserves joint surjectivity. Thus the finite-basis hypercover theorem supplies a simplicial formal finite family of basis objects resolving $P$. In degree $n$, take its finite disjoint union $S_n$. It is again profinite and extremally disconnected: the closure of an open subset is the union of its closures in the finitely many clopen summands, each open. The simplicial family maps give actual maps between these unions. Finite matching limits distribute over these disjoint summands: a compatible tuple lies in precisely the tuple of summands indexed by its faces; this identifies the matching space with the disjoint union of the corresponding formal matching objects. Hence $S_\\bullet\\to P$ is a hypercover by actual profinite spaces, not an arbitrary triangulated diagram. Each $S_n\\to P$ is surjective: $S_0\\to P$ is surjective and any degeneracy from degree zero to degree $n$ lies over $P$.",
+   "uses": [
+    "det-pe-stonean-cover",
+    "lem-weil-pbc-site-finite-basis-hypercover-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, label lemma-hypercovering-object, finite-basis construction, applied to profinite spaces; BS Example 2.4.6."
+   }
+  },
+  {
+   "text": "Apply the relative component construction to form $U_n=X\\times_P S_n$ and $V_n=X'\\times_P S_n$. Its finite-limit and covering assertions carry the matching coverings of step 2 to pro-etale matching coverings, so these are hypercovers of $X$ and $X'$. They are affine, with component spaces $S_n$. For each of the surjections $S_n\\to P$, the second-stage w-contractible-cover theorem identifies the component lift over a w-strictly local affine with a w-contractible affine: its underlying space is $|X|\\times_P S_n$, its local rings are those of $X$, and its closed points are $S_n$; the same applies to $X'$. Thus all $U_n,V_n$ are weakly contractible in the respective full sites. The two constructions give maps $g_n:V_n\\to U_n$ over $h$. Indeed at each finite clopen stage pullback of the corresponding clopen subscheme of $X$ is that of $X'$; affine limits give the same assertion for $S_n$. The projections determine the maps uniquely, hence they commute with every face, degeneracy and augmentation. Their maps on components are the identity of $S_n$. Concretely, for a finite clopen partition of S_n its summands lie over closed subsets of P; the corresponding lift rings are the colimits of the clopen neighborhoods of those subsets in X. Taking the filtered colimit over refinements is exactly the ring D in the second-stage theorem. This identifies that theorem’s constructed cover with the relative component lift used here.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "det-pe-wc-cover-second-stage",
+    "det-pe-weak-contractible-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8 and Lemma 2.4.8; HRS Proposition 4.3(1), proof of w-contractibility of component lifts."
+   }
+  },
+  {
+   "text": "The pullbacks $M_n=M|_{U_n}$ are finite-rank lisse: pull back a trivializing cover and its finite free presentations; the same holds for $g_n^*M_n$. They are in particular locally retracts of finite free modules (use the identity as the retraction), so the finite-locally-projective duality theorem gives ordinary module duals. These duals are locally finite free as well. Tensoring with either module is exact: on each trivializing slice it is a finite direct sum of the identity, and exactness of sheaves is local. Consequently the degree-zero complexes of both modules are K-flat, since tensor with an acyclic complex is still acyclic. Their ordinary evaluation and coevaluation therefore define derived evaluation and coevaluation, with the same two triangle identities. In particular $M_n[0]$ and $g_n^*M_n[0]$ are dualizable objects, as required by the lisse evaluation equivalence; the sheaf-theoretic and derived meanings of lisse have not been silently identified.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-proetale-finite-projective-dualizable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3 and Lemma 4.5, finite free degree-zero case; ordinary duality lifted using local exactness of tensor."
+   }
+  },
+  {
+   "text": "Fix $n$ and write $S=S_n$, $U=U_n$, $V=V_n$, $g=g_n$. The component pullbacks $\\pi_U^*$ and $\\pi_V^*$ are equivalences on dualizable objects and preserve the coefficient unit. Moreover $g^*\\pi_U^*\\cong\\pi_V^*$ with these unit identifications. To verify this last comparison, for a profinite $E\\to S$ the finite-clopen-stage argument of step 3 gives $V\\times_S E\\cong V\\times_U(U\\times_S E)$ with both projections fixed. Thus restriction along the component test-object functors commutes with $g_*$; taking left adjoints gives $g^{-1}\\pi_U^{-1}\\cong\\pi_V^{-1}$. The factorization of the point morphisms identifies the ring maps. Exact pullback and the ringed-derived comparison theorem then give the stated derived comparison, normalized by these adjunctions. Choose a dualizable $N$ and an isomorphism $\\pi_U^*N\\cong M_n[0]$ using essential surjectivity. Full faithfulness of both component functors now makes\n$$\\operatorname{Hom}_{D(U)}(\\Lambda_U[0],M_n[0])\\longrightarrow\\operatorname{Hom}_{D(V)}(\\Lambda_V[0],g^*M_n[0])$$\na bijection: under the two component equivalences it is the identity of $\\operatorname{Hom}_{D(S)}(\\Lambda_S[0],N)$. This is the actual pullback on morphisms, since the comparison sends $g^*\\pi_U^*$ to $\\pi_V^*$ with its specified unit.",
+   "uses": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-component-relative-profinite-site",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(3) and its proof; construction (4.1); explicit naturality for maps of component lifts."
+   }
+  },
+  {
+   "text": "The displayed Hom bijection is exactly the underived section pullback $M_n(U)\\to(g^*M_n)(V)$. Apply the ringed-site derived-Hom formula with $P=\\Lambda_U$, respectively $\\Lambda_V$, $K=M_n[0]$, respectively $g^*M_n[0]$, and shift zero. The unit has rank one and its dual is itself. The evaluation normalization identifies a map from the unit with its value on $1$; pulling back a map pulls back this value, since the coefficient comparison carries $1$ to $1$. Thus the actual section pullback is bijective. Equivalently these are the degree-zero cohomology maps of derived sections. The contractible derived-sections theorem says that both derived section objects here are these section modules in degree zero, so there is no unproved higher-cohomology assertion in this reduction.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-locally-free-derived-hom",
+    "lem-zl-contractible-derived-sections-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1(1) and Proposition 4.3(3); section normalization via Stacks sites-cohomology.tex Tag 08JJ."
+   }
+  },
+  {
+   "text": "Let $C^n=M_n(U_n)$ and $C'{}^n=(g_n^*M_n)(V_n)$, with alternating face restrictions. The maps of step 6 commute with every face by the pullback composition comparisons, and hence define a map of nonnegative cochain complexes $c:C\\to C'$. Every $c^n$ is bijective. Its degreewise inverses commute with the differentials by multiplying $d'c=cd$ on both sides by those inverses. Therefore $c$ is an isomorphism of complexes, including degree zero and rank zero, and remains an isomorphism in $D(\\mathbf{Ab})$.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8 functoriality; HRS Corollary 4.7 descent, specialized to degree-zero complexes."
+   }
+  },
+  {
+   "text": "Apply the acyclic-hypercover pullback normalization theorem to the two full hypercovers of step 3, their maps $g_n$, and $M$. Its hypotheses hold: both sites are small in the containing coefficient universe, both coefficients are cartesian by step 1, every matching arrow is a cover, and every term is weakly contractible. The theorem identifies $c$ with the specific map induced by $M[0]\\to Rh_*h^*M[0]$, under the augmentation-normalized comparisons $R\\Gamma(X,M[0])\\cong C$ and $R\\Gamma(X',h^*M[0])\\cong C'$. Step 7 therefore proves that specified map is an isomorphism. This uses bounded-below section complexes of degree-zero modules, so it makes no assumption about arbitrary unbounded totalizations or hypercomplete enhancements.",
+   "uses": [
+    "lem-sfb-acyclic-hypercover-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, label lemma-compute-cohomology; functorial module-coefficient refinement recorded in the cited node."
+   }
+  },
+  {
+   "text": "The map used throughout is induced by the actual adjunction unit, so it is natural in $M$. For two composable scheme maps, the unit for the composite adjunction is $\\eta_f$ followed by $Rf_*\\eta_g$, under the canonical pullback and pushforward composition comparisons. The ringed-derived comparison theorem identifies precisely these adjunctions. Thus the map for a composite is the composite of the section pullbacks; identity maps give identity maps. Applying this equality to the two factorizations in a commutative diagram gives the claimed diagram naturality. The auxiliary resolution was used only to test this canonical map, so no choice of hypercover is part of the asserted isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-acyclic-hypercover-pullback-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.7; canonical unit/composition normalization of derived pullbacks and direct images."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "det-pe-stonean-cover",
+  "det-pe-wc-cover-second-stage",
+  "det-pe-weak-contractible-equivalences",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-proetale-finite-projective-dualizable",
+  "lem-sfb-acyclic-hypercover-pullback-normalization",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-site-locally-free-derived-hom",
+  "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "lem-zl-component-relative-profinite-site",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1, Proposition 4.3 and Corollary 4.7; w-strictly local extension via BS Lemma 2.2.8 and acyclic hypercover descent (Stacks Tag 09A2)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +201,45 @@
    "results": "8 hits: AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.LocallyRingedSpace.Γ, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.LocallyRingedSpace.Γ_def, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.StructureSheaf.to_global_factors",
    "date": "2026-10-21",
    "verdict": "no match: the results do not state the asserted geometric or condensed-coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of lisse condensed modules on w strictly local affine schemes are invariant under morphisms inducing a homeomorphism on connected components",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.ofSheafCompHaus, LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: no w-strictly local component-invariance theorem for arbitrary condensed coefficients was found"
+  },
+  {
+   "tool": "grep",
+   "query": "(wStrict|w_strict|wContractible).*(lisse|cohomology)|(lisse|cohomology).*(wStrict|w_strict)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no w-strictly local component-invariance theorem for arbitrary condensed coefficients was found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no w-strictly local component-invariance theorem for arbitrary condensed coefficients was found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology of finite locally free condensed coefficient sheaves is unchanged by a morphism of w strictly local schemes with the same components",
+   "results": "8 hits: LightCondSet.LocallyConstant.iso, CondensedSet.LocallyConstant.iso, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, HasDerivedCategory.standard, Condensed.lanCondensedSet, Condensed.freeForgetAdjunction, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+   "date": "2026-10-21",
+   "verdict": "no match: no w-strictly local component-invariance theorem for arbitrary condensed coefficients was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale cohomology of locally free sheaves with arbitrary condensed ring coefficients depends only on connected components for w strictly local affines",
+   "results": "8 hits: CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafProfinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondAb.ofSheafLightProfinite, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: no w-strictly local component-invariance theorem for arbitrary condensed coefficients was found"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-coordinate-face",
@@ -99,5 +265,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-wstrict-lisse-component-cohomology",
+  "worker": "stage1",
+  "summary": "Retained the full statement and all coefficient generality. Proved the extension by a common profinite hypercover, component-lift weak contractibility, the existing component lisse equivalence, and an augmentation-normalized section-complex comparison. One new unsplit functorial hypercover lemma; no Mathlib leaves. Explicitly cited the exact internal/section-module transport preserving adjunction units.",
+  "blueprint": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. The nine steps realize the derived-sections invariance input used by coordinate-face restriction; the root-tower ancestor has no imported blueprint id (ancestor tool returns None).",
+  "tool_uses": [
+   {
+    "node": "def-sfb-lisse-coefficient-module",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "det-pe-stonean-cover",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "det-pe-wc-cover-second-stage",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "det-pe-weak-contractible-equivalences",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-proetale-finite-projective-dualizable",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-locally-free-derived-hom",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-zl-contractible-derived-sections-tensor",
+    "why": "Generic component geometry, module duality, or derived section/pullback tool used with its stated hypotheses; it does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-lisse-coefficient-module",
+  "det-pe-stonean-cover",
+  "det-pe-wc-cover-second-stage",
+  "det-pe-weak-contractible-equivalences",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-proetale-finite-projective-dualizable",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-site-locally-free-derived-hom",
+  "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "lem-zl-component-relative-profinite-site",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-53603522a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-53603522a (reviewer sub-agent of L); spot-checked: Read in full: the item (9 steps), the new helper lem-sfb-acyclic-hypercover-pullback-normalization, every cited statement, and HRS §4.1 (Lemma 4.1, construction (4.1), Prop 4.3). The item's statement is unchanged and true. Small cases: a point component space (strictly henselian local affines, M globally free), empty P, and Cantor P with X'=X^c; no t-exactness is used, consistent with HRS Ex. 4.2. Route: a Stonean hypercover S_n of P from the Stonean cover and finite-basis hypercover existence; component lifts U_n, V_n, shown w-contractible via det-pe-wc-cover-second-stage, whose D is one presentation of the relative lift (cofinality checked); per-term Hom bijection via the component lisse equivalence, with g^*π_U^*≅π_V^* by left adjoints; sections via derived-Hom with P=Λ; termwise isomorphism of complexes; then the helper. All hypotheses checked. The helper is true (functoriality of Stacks 09A2) and is not a duplicate of det-pe-hypercover-complex, computes-bounded-complex, grothendieck-hypercover-pullback or derived-cech-image-totalization. FIX (B2/B3): the helper identified c_g 'under the augmentation-normalized acyclic-hypercover comparisons' without defining them or citing a node that does. I pinned them as the zigzags C_U(M)→T_U(I)←I(X) through bounded-below injective resolutions, citing def-weil-pbc-proetale-hypercover-total and def-weil-pbc-proetale-hypercover-augmentation; both are added to stmt_deps and create no cycle. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-acyclic-hypercover-pullback-normalization.json. Batch-5: both flagged cites (component-relative-profinite-site, wcontractible-lisse-evaluation) reach sec-trace-formula only via def-trf-geometric-morphism, a general definition. The full closure's trf/pod nodes are generic topos/derived tools with no trace-formula or Poincaré-duality step, so they are accepted. Declared tool_uses accepted. Not in the 2026-10-19 drop list; side-live node still unsplit; no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
