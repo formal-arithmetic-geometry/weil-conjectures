@@ -22108,3 +22108,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:11 L: merged deliver/H3/Sheaf.Algebra.Homology.RoosConeCalculus (stage 3; reviewer PASS; first push; landing 20261021T101122-L-12295 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/H3-roos-cone-calculus-local-proof-scopes.md)
 - 10:11 L: merged deliver/H3/Sheaf.AlgebraicGeometry.NilpotentCoefficientDirectImageBound (stage 3; reviewer PASS; first push; landing 20261021T101127-L-14523 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:11 L: merged deliver/H5/Sheaf.SixFunctors.FrobeniusPointTransportNatural (stage 3; reviewer PASS; first push; landing 20261021T101133-L-15749 (proof); batch 20261021T100250; modules 1; new nodes 0)
+- 10:11 L: merged deliver/H8/Sheaf.Paper.AmbientCompleteRawSystem (stage 3; reviewer PASS; first push; landing 20261021T101138-L-16881 (proof); batch 20261021T100250; modules 1; new nodes 0)
