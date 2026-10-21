@@ -11038,7 +11038,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CompactSupportCoefficien
 public import WeilConjectures.SixFunctors.Etale.Derived.CompactSupportIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationLowerStarBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.ConstantTensorProjection
