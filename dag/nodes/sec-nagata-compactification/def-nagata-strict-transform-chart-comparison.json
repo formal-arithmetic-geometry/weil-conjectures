@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-nagata-strict-transform-chart-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Strict-transform chart comparison",
@@ -14,14 +14,59 @@
  },
  "stmt_deps": [
   "def-nagata-strict-chart-to-extended-blowup-chart",
-  "def-nagata-strict-transform-chart-ring"
+  "def-nagata-strict-transform-chart-ring",
+  "lemma-nagata-strict-chart-to-extended-blowup-chart",
+  "lemma-nagata-strict-chart-map-kernel"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictChartComparison|StrictChart|strict.transform|def liftₐ",
+   "results": "RingCon.liftₐ and RingCon.liftₐEquiv, Mathlib/RingTheory/Congruence/Hom.lean:482,517; generic congruence quotient lifts only; no strict-chart or strict-transform hit.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.liftₐ",
+   "results": "Ideal.Quotient.liftₐ, Ideal.Quotient.liftₐ_comp, Ideal.Quotient.liftₐ_apply in Mathlib.RingTheory.Ideal.Quotient.Operations. Generic quotient construction requires a supplied vanishing proof; it does not supply the chart map or its power-torsion vanishing.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic quotient APIs do not supply the chart map and its power-torsion vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra homomorphism from a tensor product blowup chart descends to its quotient by power torsion to the blowup chart of the extended ideal",
+   "results": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk; AlgebraicGeometry.Scheme.Hom.liftQuotient and liftQuotient_comp; Algebra.Presentation.tensorModelOfHasCoeffsInv and tensorModelOfHasCoeffsHom; Algebra.Extension.tensorCotangentInvFun; Algebra.Generators.map_comp_cotangentCompAwaySec; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul. None defines the strict-transform chart comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftₐ|lift_mk|algHom_ext",
+   "results": "Returned kerLift_mk and uses of Ideal.Quotient.lift_mk at lines 45,46,54,74,151 of the requested Operations.lean; output was capped and its file/line fields are malformed for this single-file search. Direct reading of the live Mathlib source verifies Ideal.Quotient.liftₐ at line 471, liftₐ_apply at 484, and liftₐ_comp at 489.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra homomorphism vanishing on an ideal descends to the quotient algebra",
+   "results": "Ideal.Quotient.liftₐ, lift, lift_mk, liftₐ_apply, liftₐ_comp; RingCon.liftₐ; Ideal.quotientMapₐ and quotient_map_mkₐ. These descend a given map with an explicit vanishing hypothesis; none supplies the chart-specific hypothesis.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic quotient APIs do not supply the chart map and its power-torsion vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transform chart ring comparison induced map from quotient by a power torsion ideal",
+   "results": "AdicCompletion.transitionMapₐ and transitionMap_ideal_mk; Ideal.powQuotSuccInclusion, powQuotSuccInclusion_apply_coe, quotientToQuotientRangePowQuotSuccAux, quotientToQuotientRangePowQuotSucc_mk, quotientToQuotientRangePowQuotSuccAux_mk, Quotient.factorPowSucc. Power-quotient transition maps, not the chart comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -51,5 +96,20 @@
   "statement": "Define\n\n$$\n\\overline\\sigma_a\\colon\nC_a^{\\mathrm{st}}(A,B,I)\\longrightarrow B[IB/b]\n$$\n\nto be the map induced by $\\sigma_a$ on the power-torsion quotient.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-strict-transform-chart-comparison",
+  "worker": "stage1",
+  "summary": "Definition split, with no new nodes and unchanged statement. Retained the original map and strict-chart quotient definitions; added the existing theorem that the map is a B-algebra homomorphism and the existing kernel-identification theorem as well-definedness dependencies. On quotient classes set sigma-bar([z])=sigma(z): if z-z-prime belongs to the power-torsion ideal, the kernel theorem gives sigma(z-z-prime)=0, hence independence of representatives; ring operations and B-scalars descend from sigma. The report writes out this elementary construction. All Mathlib searches were run through msearch.py; generic quotient lifts require the supplied vanishing theorem and are not an exact match for this entire chart-specific definition. The requested split is delivered rather than a renewed attachment claim. Repair of the 2026-10-21 return at 8f6cf6cef31: reread all four current cited statements. The revised chart-ring definition specifies alpha as the structural image of a in C and T=Gamma_(alpha)(C) as an ideal; the existing kernel statement identifies exactly this T with ker(sigma). Construct the same quotient map [z] to sigma(z), with no new hypothesis, statement change or node. The report records the current citations and the revalidation.",
+  "blueprint": "Current main-20261015 definition, order 158: the sole clause \"the map induced by sigma_a on the power-torsion quotient\"; realizes the quotient-of-pulled-back-chart description in the blow-up/strict-transform unit. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-671f1bf6c",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-671f1bf6c (reviewer sub-agent of L); spot-checked: Read in full; the item is a definition with an empty proof. The delivery has 0 new nodes, and its statement is verbatim the main-20261015 order-158 text and is unchanged. stmt_deps keeps the two blueprint uses: sigma_a (def-nagata-strict-chart-to-extended-blowup-chart, a real three-step construction) and C^st=C/Gamma_(alpha)(C) (def-nagata-strict-transform-chart-ring, with alpha the image of a in C). It adds lemma-nagata-strict-chart-to-extended-blowup-chart (sigma_a is a B-algebra map) and lemma-nagata-strict-chart-map-kernel (ker sigma_a = Gamma_(a)(C)). On C, a acts as alpha, so the kernel lemma's ideal is the same T. The descent [z]->sigma(z) uses only the inclusion T in ker, which is in the lemma's statement (C3 fine); the quotient lift itself is elementary (Ideal.Quotient.liftₐ). Citing a well-definedness theorem by name follows stages/1-dag §2, and that theorem is about sigma_a, not the item. Over the transitive closure (29 nodes) there is no cycle and no missing or merged dependency. The two citers (comparison-localized, chart-iso) use the map as defined. Edge cases checked: a=0; a a unit; Z, (2), B=Z/4 with nilpotent b (both sides 0); and B=Z/2xZ, where T=Z/2x0 and sigma-bar=id_Z. There are six Mathlib searches of three kinds, all correctly no match. same_as=[] is consistent with an rg over dag/nodes. No SGA, no tool_uses, no re-split note, no unit edits. The earlier landing return (changed chart-ring statement) is addressed: the item cites the current text without modifying that node. No fixes."
  }
 }
