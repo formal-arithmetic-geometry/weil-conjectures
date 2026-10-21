@@ -23009,3 +23009,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:12 L: returned deliver/NO/lem-sfb-condensed-internal-bar-resolution (reviewer RETURN: L: independent stage-2 immutable head 5f61e04a9f33: H2 theorem-stmt_dep fault, confirmed: the statement uses lem-pe-inte)
 - 16:12 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 16:13 L: merged deliver/NQ/lem-sfb-pointed-finite-etale-limit-cover (stage 2; reviewer PASS; parallel immutable checks)
+- 16:14 L: merged deliver/A4/Sheaf.CategoryTheory.InternalSectionScalarAdjunction (stage 3; reviewer PASS; first push; landing 20261021T161401-L-4160359 (interface); batch 20261021T161357; modules 2; new nodes 1; change records: coord/changes/A4-internal-section-scalar-proof-commands.md)

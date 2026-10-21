@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-derived-section-scalar-transport",
+ "kind": "statement",
+ "title": "Localization transport of the normalized scalar adjunction",
+ "statement": "Given the exact section reconstruction equivalences E_R and E_S of [def-weil-pbc-internal-abelian-sheaf-module-equivalence], an internal ring map a, a section-ring map φ, and a normalized section scalar pair [def-sfb-scalar-hom-comparison-data], suppose ordinary restriction and extension squares are isomorphisms and identify the ordinary Hom transposes. Then conjugation transports the universal left derived scalar pair to internal modules, computed on sectionwise K-flat complexes. The internal derived adjunction has unit induced by the internal ordinary chain unit on every complex. Its restriction square is the canonical localization of the ordinary square, its extension square is the localization of the ordinary extension square on flat-term K-flat representatives, and the derived Hom transposes agree. This result assumes the ordinary comparison squares and does not construct their section formulas or balanced generators.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5, derived adjunction; sites-cohomology.tex Tags 06YY and 07A6; localization steps 4–6 of lem-sfb-internal-section-scalar-adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-scalar-hom-comparison-data",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the section derived extension by the exact derived equivalences. Construct its counit by the termwise ordinary extension square and localization factorizations. Right Kan extension universal properties are invariant under equivalences in source, localization target, and value category; precomposition by the full homotopy quotient also preserves this property. Reflect component isomorphisms through E_S to get computation on every sectionwise K-flat complex.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the normalized unit equation first on flat-term K-flat section complexes by transposing the ordinary unit in the normalization of the given scalar pair. Extend it to every complex by a flat-term K-flat resolution (convert categorical flatness to site flatness using the site/monoidal tensor isomorphism): both sides are natural transformations, and the localization of the resolution is invertible. Restrict the section derived adjunction along the fully faithful exact derived equivalences. The canonical localized restriction square, its factorization identity, and the ordinary Hom transpose square transport this unit equation to the internal unit equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The definition of the transported counit gives the representative extension square, in fact on all complexes. The Hom equivalence of the restricted adjunction gives the derived transpose identity.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5; categorical transport of the original node steps 4–6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a universal derived adjunction through exact equivalences with a normalized restriction square",
+   "results": "Adjunction.derived, derivedη, derivedε, derivedη_fac_app and related declarations",
+   "date": "2026-10-21",
+   "verdict": "These provide abstract derived adjunction construction; the concrete section localization squares and their normalization still require transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isRightKanExtension_iff_precomp",
+   "results": "0 hits (identifier not in remote search index)",
+   "date": "2026-10-21",
+   "verdict": "Local Mathlib source has the Kan extension precomposition API used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isRightKanExtension_iff_postcomp|derivedMate_comparison",
+   "results": "Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean isRightKanExtension_iff_postcomp₁",
+   "date": "2026-10-21",
+   "verdict": "Use the general Kan extension equivalence lemmas and exact localization factorization identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence transports a universal left derived functor and its normalized derived adjunction",
+   "results": "8 hits: Functor.leftDerivedNatIso; Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; Functor.isLeftKanExtensionAlongEquivalence'; Abelian.LeftResolution.transport; Adjunction.leftAdjointOfEquiv; Adjunction.adjunctionOfEquivLeft; Functor.leftDerivedNatTrans.congr_simp; Equivalence.toAdjunction",
+   "date": "2026-10-21",
+   "verdict": "The general Kan-extension and adjunction APIs are used; none supplies the concrete reconstruction squares and the specified all-complex derived unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalSectionScalarAdjunction",
+  "date": "2026-10-21",
+  "group": "A4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-internal-section-scalar-adjunction",
+   "place": "proof steps 4–6",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedSectionScalarTransport",
+  "file": "lean/Sheaf/CategoryTheory/DerivedSectionScalarTransport.lean",
+  "declaration": "CategoryTheory.InternalAbelianSheafModule.derived_section_scalar_transport",
+  "statement": "theorem derived_section_scalar_transport\n    (φ : sectionRingSheaf J R ⟶ sectionRingSheaf J S)\n    (sectionPair : SheafOfModules.ScalarDerivedPair φ)\n    (restriction : Mod.comap a ⋙ (sectionModuleEquivalence J R).functor ≅\n      (sectionModuleEquivalence J S).functor ⋙ SheafOfModules.scalarRestriction φ)\n    (extension : Mod.extendScalars a ⋙ (sectionModuleEquivalence J S).functor ≅\n      (sectionModuleEquivalence J R).functor ⋙ sectionPair.extension)\n    (htranspose : ∀ (M : Mod (Sheaf J AddCommGrpCat.{u}) R)\n      (N : Mod (Sheaf J AddCommGrpCat.{u}) S) (f : (Mod.extendScalars a).obj M ⟶ N),\n      (sectionModuleEquivalence J R).functor.map\n          ((Mod.extendRestrictAdjunction a).homEquiv M N f) ≫ restriction.hom.app N =\n        sectionPair.ordinaryAdjunction.homEquiv _ _\n          (extension.inv.app M ≫ (sectionModuleEquivalence J S).functor.map f)) :\n  -- The internal unbounded derived scalar extension.\n  ∃ internalDerived : (DerivedCategory (Mod (Sheaf J AddCommGrpCat.{u}) R) ⥤\n    DerivedCategory (Mod (Sheaf J AddCommGrpCat.{u}) S)),\n  -- Its comparison on the actual complexes.\n  ∃ internalCounit : (DerivedCategory.Q ⋙ internalDerived ⟶\n    (Mod.extendScalars a).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q),\n  -- This is the universal left derived functor, not an arbitrary left adjoint.\n  (internalDerived.IsLeftDerivedFunctor internalCounit\n    (HomologicalComplex.quasiIso (Mod (Sheaf J AddCommGrpCat.{u}) R) (.up ℤ))) ∧\n  -- K-flat complexes compute the internal universal pair. K-flatness is transported\n  -- by the recorded equivalence, as in internal_section_tensor_comparison.\n  (∀ (P : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (R := sectionRingSheaf J R)\n      (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (.up ℤ)).obj P) →\n        IsIso (internalCounit.app P)) ∧\n  -- The specified internal derived extension/exact restriction adjunction.\n  ∃ internalAdjunction : (internalDerived ⊣ (Mod.comap a).mapDerivedCategory),\n  -- The internal derived unit is induced by the specified ordinary internal unit.\n  -- This pins the derived adjunction independently of section reconstruction.\n  (∀ (P : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ),\n    internalAdjunction.unit.app (DerivedCategory.Q.obj P) ≫\n        (Mod.comap a).mapDerivedCategory.map (internalCounit.app P) ≫\n        (Mod.comap a).mapDerivedCategoryFactors.hom.app\n          (((Mod.extendScalars a).mapHomologicalComplex (.up ℤ)).obj P) =\n      DerivedCategory.Q.map\n        (((Mod.extendRestrictAdjunction a).mapHomologicalComplex (.up ℤ)).unit.app P)) ∧\n  -- The termwise equivalences identify derived restrictions.\n  ∃ derivedRestriction : ((Mod.comap a).mapDerivedCategory ⋙\n      (sectionModuleEquivalence J R).functor.mapDerivedCategory ≅\n    (sectionModuleEquivalence J S).functor.mapDerivedCategory ⋙\n      SheafOfModules.scalarDerivedRestriction (φ)),\n  -- Restriction comparison is precisely localization of the ordinary one.\n  (derivedRestriction =\n    (Functor.mapDerivedCategoryCompIso (Mod.comap a)\n      (sectionModuleEquivalence J R).functor).symm ≪≫\n    Functor.mapDerivedCategoryNatIso restriction ≪≫\n    Functor.mapDerivedCategoryCompIso (sectionModuleEquivalence J S).functor\n      (SheafOfModules.scalarRestriction (φ))) ∧\n  -- The comparison of the universal derived extensions.\n  ∃ derivedExtension : (internalDerived ⋙\n      (sectionModuleEquivalence J S).functor.mapDerivedCategory ≅\n    (sectionModuleEquivalence J R).functor.mapDerivedCategory ⋙ sectionPair.derived),\n  -- On flat-term K-flat representatives, this is the localized termwise comparison.\n  (∀ (P : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (R := sectionRingSheaf J R)\n      (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (.up ℤ)).obj P) →\n    (∀ n : ℤ, SheafOfModules.IsFlatOnSite (R := sectionRingSheaf J R)\n      ((sectionModuleEquivalence J R).functor.obj (P.X n))) →\n    (sectionModuleEquivalence J S).functor.mapDerivedCategory.map (internalCounit.app P) ≫\n        (sectionModuleEquivalence J S).functor.mapDerivedCategoryFactors.hom.app\n          (((Mod.extendScalars a).mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex extension (.up ℤ)).hom.app P) =\n      derivedExtension.hom.app (DerivedCategory.Q.obj P) ≫\n        sectionPair.derived.map\n          ((sectionModuleEquivalence J R).functor.mapDerivedCategoryFactors.hom.app P) ≫\n        SheafOfModules.scalarPairComplexComparison sectionPair.extension\n          sectionPair.extension_additive sectionPair.derived sectionPair.counit\n          (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (.up ℤ)).obj P)) ∧\n  -- Agreement of the specified derived transposes includes derived units and counits.\n  ∀ (M : DerivedCategory (Mod (Sheaf J AddCommGrpCat.{u}) R))\n      (N : DerivedCategory (Mod (Sheaf J AddCommGrpCat.{u}) S)) (f : internalDerived.obj M ⟶ N),\n      (sectionModuleEquivalence J R).functor.mapDerivedCategory.map\n          (internalAdjunction.homEquiv M N f) ≫ derivedRestriction.hom.app N =\n        sectionPair.adjunction.homEquiv _ _ (derivedExtension.inv.app M ≫\n          (sectionModuleEquivalence J S).functor.mapDerivedCategory.map f)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261021T161401-L-4160359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261021T161401-L-4160359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
