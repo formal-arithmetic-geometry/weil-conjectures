@@ -17,9 +17,102 @@
   "det-def-sfb-constructible-local-model",
   "def-sfb-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=h^{-1}$ for inverse image on abelian sheaves, $H=h^*$ for module pullback, and $\\alpha=\\alpha_h$. For $a\\in R$, let $t_a:\\Lambda\\to\\Lambda$ be multiplication by the section $a$ in the condensed ring: explicitly $t_a=\\mu_\\Lambda\\circ(a\\otimes1)\\circ\\lambda_\\Lambda^{-1}$, with $a:\\mathbf1\\to\\Lambda$. Put $t_{a,W}:\\Lambda_W\\to\\Lambda_W$ for multiplication by its canonical scalar image, for $W=U,V$. The transported multiplication and unit in the pulled-back coefficient ring give $p_W^*(t_a)=t_{a,W}$: substitute the displayed formula into the strong monoidal comparison. The comparison $c:Fp_U^*\\cong p_V^*$ is natural in all condensed abelian sheaves, and $c_\\Lambda=\\alpha$. Its naturality square for $t_a$ therefore gives $\\alpha\\circ F(t_{a,U})=t_{a,V}\\circ\\alpha$. This uses the canonical scalar maps, rather than arbitrary sections of $\\Lambda_U$.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
+    "place": "The monoidal natural isomorphism; naturality at multiplication by a section, using the transported coefficient-ring structure"
+   }
+  },
+  {
+   "text": "The formula for transport of module actions identifies $\\operatorname{mapMod}(F)(\\Lambda_U)$ with the regular module over $T=F\\Lambda_U$: both actions are $F(\\mu_{\\Lambda_U})$ preceded by the tensor comparison. Hence $H\\Lambda_U=S\\otimes_T T$, where $S=\\Lambda_V$ has right $T$-action $b\\cdot x=b\\alpha(x)$. Apply the mixed-bimodule right unitor with $P=S$, left ring $S$, and right ring $T$. It gives the canonical regular-module isomorphism $e_1:S\\otimes_T T\\cong S$ with $e_1\\circ q=\\mu_S\\circ(1\\otimes\\alpha)$ and inverse $b\\mapsto q(b\\otimes1_T)$. The ring-homomorphism property of $\\alpha$ gives the commuting actions required here. All tensor and coequalizer hypotheses hold for abelian sheaves: their sheaf tensor product preserves colimits in both variables, and the ambient abelian category has coequalizers. The expression $q(b\\otimes x)$ denotes the map from $S\\otimes T$ into the balancing coequalizer, not a claim that sections of a sheafified tensor product are all simple tensors.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-mixed-bimodule-right-unitor",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Last sentence, finite free modules; regular-module case supplied by the existing mixed-bimodule right-unitor node"
+   }
+  },
+  {
+   "text": "By the module adjunction $H\\dashv h_*$ and preservation of colimits by a left adjoint, $H$ preserves the initial object, each finite coproduct, and every coequalizer. Only finite small indexing categories are needed. In the abelian module categories the initial object is zero, so $H(0)=0$ up to its unique isomorphism, and $H$ preserves zero morphisms because they factor through zero. Define $e_r:H(\\Lambda_U^r)\\cong\\Lambda_V^r$ by the coproduct comparison and $r$ copies of $e_1$. It is characterized by $e_r H(\\iota_{j,U})=\\iota_{j,V}e_1$. For each $i$, one also has $\\pi_{i,V}e_r=e_1H(\\pi_{i,U})$: precompose with every $H(\\iota_{j,U})$ and use $\\pi_i\\iota_j=\\delta_{ij}$ and preservation of zero. Equality follows from the coproduct universal property. This includes $r=0$, where $e_0$ is the unique isomorphism of zero objects.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), lines 3472 ff.; finite discrete diagrams and the parallel-pair diagram"
+   }
+  },
+  {
+   "text": "The definition of extension of scalars sends a map $f$ to the map induced by $1_S\\otimes F(f)$. For $f=t_{a,U}$, precompose both $e_1H(t_{a,U})$ and $t_{a,V}e_1$ with the balancing coequalizer map $q:S\\otimes T\\to S\\otimes_T T$. The first composite is $\\mu_S\\circ(1\\otimes(\\alpha F(t_{a,U})))$; step 1 makes it $\\mu_S\\circ(1\\otimes(t_{a,V}\\alpha))$. This equals $t_{a,V}\\circ\\mu_S\\circ(1\\otimes\\alpha)$ by associativity and commutativity of multiplication in $S$. Thus the second composite agrees. Uniqueness in the coequalizer universal property gives $e_1H(t_{a,U})=t_{a,V}e_1$.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "The map induced by tensoring a morphism; explicit calculation using steps 1 and 2"
+   }
+  },
+  {
+   "text": "For each input $j<m$ and output $i<n$, the matrix definitions say $\\pi_{i,U} A_U\\iota_{j,U}=t_{a_{ij},U}$ and $\\pi_{i,V} A_V\\iota_{j,V}=t_{a_{ij},V}$. Using the projection and injection equations of step 3 and then step 4, compute $\\pi_{i,V}e_n H(A_U)H(\\iota_{j,U})=e_1H(\\pi_{i,U}A_U\\iota_{j,U})=t_{a_{ij},V}e_1=\\pi_{i,V}A_V e_mH(\\iota_{j,U})$. The coproduct property of the family $H(\\iota_{j,U})$ and the product property of the projections $\\pi_{i,V}$ yield $e_nH(A_U)=A_Ve_m$. For $m=0$ the domain is zero by step 3; for $n=0$ the codomain is zero. Thus the empty-index cases follow by the same universal properties. This argument needs no assertion that $F$ is linear over an untransported scalar ring.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "'Constructible complexes', local coefficient models on strata: entrywise calculation, filling the omitted scalar-matrix argument"
+   }
+  },
+  {
+   "text": "Let $q_U:\\Lambda_U^n\\to Q_U$ and $q_V:\\Lambda_V^n\\to Q_V$ be the cokernel projections. A cokernel is the coequalizer of its map and zero. By step 3, $H(q_U)$ is therefore a cokernel of $H(A_U)$. The matrix square of step 5 gives $q_Ve_nH(A_U)=0$ and $H(q_U)e_n^{-1}A_V=0$. The two cokernel universal properties give unique maps $u:H(Q_U)\\to Q_V$ and $v:Q_V\\to H(Q_U)$ satisfying $uH(q_U)=q_Ve_n$ and $vq_V=H(q_U)e_n^{-1}$. Their composites satisfy $uvq_V=q_V$ and $vuH(q_U)=H(q_U)$; uniqueness of the respective cokernel factorizations yields $uv=1$ and $vu=1$. Thus $u$ is the required isomorphism, and its defining equation is precisely compatibility with the cokernel projections.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "'Constructible complexes', local coefficient models on strata: cokernel universal property after the finite scalar-matrix comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-modobj-transport",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-mixed-bimodule-right-unitor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-finitely-presented-module",
+  "def-sfb-modobj-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+  "place": "Paragraph 'Constructible complexes', 'via the local coefficient models on strata'; explicit naturality and universal-property argument using the cited existing nodes and Stacks Tag 0038"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -76,10 +169,45 @@
    "results": "Logged 0 hits: ",
    "date": "2026-10-21",
    "verdict": "no match: supporting general category/module declarations do not state the specified condensed scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|pullback_map_ιFree|freeFunctorCompPullbackIso",
+   "results": "Logged 5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Search scope: Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaf pullback and its generator equations are supporting facts; no hit gives the canonical condensed-point scalar comparison and all cokernel clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pullback functor on module sheaves preserves constant scalar matrices between finite free modules and their cokernels",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaf pullback and its generator equations are supporting facts; no hit gives the canonical condensed-point scalar comparison and all cokernel clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "Logged 5 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaf pullback and its generator equations are supporting facts; no hit gives the canonical condensed-point scalar comparison and all cokernel clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of condensed coefficient module sheaves preserves finite scalar matrices and their cokernels",
+   "results": "Logged 8 hits: Condensed.finFree, CondensedMod.LocallyConstant.functor, Condensed.profiniteSolid, Condensed.free, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, CondensedMod.IsSolid",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaf pullback and its generator equations are supporting facts; no hit gives the canonical condensed-point scalar comparison and all cokernel clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of monoidal inverse image from the condensed point respects multiplication by scalar sections",
+   "results": "Logged 8 hits: LightCondensed.ihomPoints_symm_comp, CondensedMod.hom_naturality_apply, LightCondensed.ihom_map_val_app, CondensedSet.hom_naturality_apply, LightCondMod.hom_naturality_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondSet.hom_naturality_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaf pullback and its generator equations are supporting facts; no hit gives the canonical condensed-point scalar comparison and all cokernel clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-pullback-constant-model-constructible",
@@ -98,5 +226,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-matrix-inverse-image",
+  "worker": "stage1",
+  "group": "Q72",
+  "summary": "Kept the statement unchanged. Gave six steps: scalar naturality from the condensed point, the regular-module tensor unitor, coproduct and coequalizer preservation, scalar intertwining, matrix entries, and the two inverse cokernel maps. Reused existing nodes; no new nodes. Checked all ranks including zero and arbitrary commutative condensed rings without admissibility or scheme finiteness assumptions.",
+  "blueprint": "Realizes the phrase 'via the local coefficient models on strata' in the Constructible complexes paragraph of det-proper-base-change-unbounded-pullback, through the scalar-matrix comparison used by lem-sfb-pullback-constant-model-constructible."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-f898bd62d",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-f898bd62d (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 steps in full, along with every cited node's statement. No new nodes, statement unchanged; it gives exactly what the parent lem-sfb-pullback-constant-model-constructible takes from it. It holds for any commutative condensed Λ and any morphism h, because sk-def-sfb-coefficient-morphisms makes α_h a ring iso unconditionally. The base change is Ext_α∘mapMod(h^{-1}) of sk-def-sfb-module-pushforward-pullback, in the module category of def-sfb-finitely-presented-module. Step checks: (1) naturality of pullback-from-point-comp at t_a with c_Λ=α_h gives α F(t_{a,U}) = t_{a,V} α; transported unit and multiplication match the canonical scalar of det-def-sfb-constructible-local-model. (2) mapMod(F)Λ_U is the regular T-module; the Ext_α coequalizer is that of lem-sfb-mixed-bimodule-right-unitor (Mathlib Bimod.rightUnitorBimod) with ρ=μ_S(S⊗α), and the colimit hypotheses come from sk-def-sfb-sheaf-tensor(2). (3) The adjunction plus the Stacks 0038 leaf (categories.tex 3472, read) give preservation of the initial object, finite coproducts, coequalizers and zero maps; I verified the e_r injection and projection identities. (4) Coequalizer calculation via commutativity, correct. (5) Entrywise matrix square via joint epi and mono, correct, including m=0 and n=0. (6) Cokernel comparison u,v with both inverses, correct. Edge cases zero matrix, identity, Λ(*)=0 and h=id are fine. Blueprint sources read: the Constructible complexes paragraph l.9-13 and the last sentence of lem-sfb-dc-upper-star-preserves. No SGA. Off-unit citations are Mathlib leaves only, so no tool_uses are needed. Duplicate search: lem-sfb-monoidal-finite-free-transport (mapMod only), the O_X-module node new-sbc-pullback-free-coordinates-naturality and the admissible-only sk-prop-sfb-cartesian-coefficients are not duplicates. Advisory: step 4 does not say that t_{a,U} is Λ_U-linear; this is immediate from commutativity and from A_U being a module morphism by the statement."
  }
 }

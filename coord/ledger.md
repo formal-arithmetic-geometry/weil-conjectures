@@ -19861,3 +19861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:37 L: merged deliver/Q44/lem-sp-finite-ring-action-local-constancy (reviewer PASS; first push; new nodes: 0)
 - 03:37 L: merged deliver/Q14/det-thm-sfb-proper-base-change-rational (reviewer FIX; after a return; new nodes: 4)
 - 03:37 L: merged deliver/NW/lem-cbc-adic-pullback-presentation-transport (reviewer FIX; after a return; new nodes: 7)
+- 03:37 L: merged deliver/Q72/lem-sfb-scalar-matrix-inverse-image (reviewer PASS; first push; new nodes: 0)
