@@ -20,9 +20,170 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S_{W,n}=(A_n)_W$, $\\pi_{W,n}:R_W\\to S_{W,n}$, and $\\rho_{W,n}:S_{W,n+1}\\to S_{W,n}$. Let $c_n:f^{-1}S_{Y,n}\\to S_{X,n}$ be the constant-coefficient structure maps. They commute with $\\rho_n$: both composites send a constant section $a$ to its image modulo $t^n$, and sheafification determines the maps. The maps $c_nf^{-1}(\\pi_{Y,n})$ therefore form a cone. The limit universal property of $R_X$ defines $c:f^{-1}R_Y\\to R_X$ with $\\pi_{X,n}c=c_nf^{-1}(\\pi_{Y,n})$. Thus the coefficient square at each $n$ commutes. This construction uses inverse image on the projections and then the universal property on $X$; it never interchanges inverse image with an inverse limit.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; constant-section structure maps and limit cone"
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions $P\\to K$, $U\\to M$, $V\\to N$. The ambient pullback $F_fK$ is represented by $f^*P$, which is itself K-flat with flat terms. Put $T=\\operatorname{Tot}(U\\otimes_{R_W}V)$; this is a flat-term K-flat representative of $M\\otimes^L_{R_W}N$. Hence the strict completion towers of these two ambient objects are represented, without any additional resolutions depending on $n$, by $(f^*P)\\otimes_{R_X}S_{X,n}$ and $T\\otimes_{R_W}S_{W,n}$. This follows by computing derived scalar extension on a K-flat complex. All these assertions hold for unbounded complexes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A2 (lemma-tensor-product-K-flat), 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "Apply the ordinary scalar-association isomorphism $\\kappa$ for the coefficient square of Step 1. Its inverse gives, degreewise, an $S_{X,n}$-linear isomorphism\n$$b_n:(f^*P)\\otimes_{R_X}S_{X,n}\\longrightarrow f_n^*(P\\otimes_{R_Y}S_{Y,n}).$$\nWith the scalar written first, its formula on local generalized generators is\n$$(r\\otimes x)\\otimes a\\longmapsto \\pi_{X,n}(r)a\\otimes(x\\otimes1),$$\nand its inverse sends $a\\otimes(x\\otimes b)$ to $(1\\otimes x)\\otimes a c_n(b)$, where $b$ is a section of $f^{-1}S_{Y,n}$. These are the normalized $\\kappa$ and its inverse, not maps using an identification of the completed rings. The commuting coefficient square is precisely the balancing relation needed for these formulas. Since they commute with the differential of $P$, they give chain isomorphisms natural in chain maps $P\\to P'$.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EL; normalized scalar-association construction"
+   }
+  },
+  {
+   "text": "The existing strict tensor-reduction comparison applies to $U,V$ on $W$. Its normalized degree-$(p,q)$ constituent can be written\n$$d_n:(x\\otimes y)\\otimes a\\longmapsto(x\\otimes a)\\otimes(y\\otimes1),$$\nwith inverse $(x\\otimes a)\\otimes(y\\otimes b)\\mapsto(x\\otimes y)\\otimes ab$. Balancing makes both formulas well defined and their two composites the identity. The sheaf-tensor universal property extends these formulas from bilinear local generators. Scalar extension preserves the direct sums over $p+q=i$, so these constituents define the displayed total-complex isomorphism. The differential calculation on both sides is $dx\\otimes y+(-1)^p x\\otimes dy$, with unchanged coefficient $a$; thus no boundedness or rearrangement of infinite products is involved.",
+   "uses": [
+    "lem-pur-integral-tensor-reduction-tower-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, scalar-extension formula; sites-cohomology.tex Tag 07A4, homogeneous total tensor calculation"
+   }
+  },
+  {
+   "text": "The maps in Steps 3–4 are isomorphisms of whole strict towers, not merely isomorphisms of their evaluated objects in a derived category. Indeed, applying $\\rho_{X,n}$ before or after $b$ sends $(r\\otimes x)\\otimes a$ to $\\pi_{X,n}(r)\\rho_{X,n}(a)\\otimes(x\\otimes1)$. Compatibility of the $c_n$ with reduction gives the same value when the source coefficient of $P_{n+1}$ is reduced first. For $d$, the two paths send $(x\\otimes y)\\otimes a$ to $(x\\otimes\\rho_{W,n}(a))\\otimes(y\\otimes1)$. Linearity, balancing and the universal property give equality on sheaves in every degree. Adjacent transition equations imply all $m\\to n$ equations by composition. Because $\\pi_n=\\rho_n\\pi_{n+1}$, these are equations of $R_X$- or $R_W$-linear maps after restriction of scalars.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, tensor universal property and the scalar-extension formula; explicit quotient transition calculation"
+   }
+  },
+  {
+   "text": "The right-hand towers are the finite-operation towers in the stated definitions: $P_n,U_n,V_n$ are flat-term K-flat over $S_n$ by change of rings, so $f_n^*P_n$ computes $L(f_n)^*K_n$ and $\\operatorname{Tot}(U_n\\otimes_{S_n}V_n)$ computes $M_n\\otimes^L_{S_n}N_n$. The natural comparisons for ambient pullback and total tensor therefore identify the left towers with the completion towers of Step 2 and the right towers with those defining $\\widehat F_fK$ and $\\widehat T_W(M,N)$. Restriction of scalars is exact, so it does not change these quasi-isomorphism computations.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-kflat-total-tensor-model",
+    "def-pur-integral-derived-operations",
+    "lem-weil-restriction-of-scalars-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 06YY and 07A4; finite-quotient operation definitions"
+   }
+  },
+  {
+   "text": "Apply the functor $R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R)))\\to D(R)$ to the strict isomorphisms of Step 5. A functor carries an isomorphism and its inverse to mutually inverse maps. Step 6 identifies the resulting sources and targets as $C_XF_fK,\\widehat F_fK$ and $C_W(M\\otimes^L_{R_W}N),\\widehat T_W(M,N)$, respectively. This produces both asserted isomorphisms by the strict-tower derived-limit functor, rather than by choosing morphisms between abstract Roos triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; derived functor on strict towers"
+   }
+  },
+  {
+   "text": "Check the augmentations before taking limits. For pullback, the quotient map is $f^*P\\to(f^*P)\\otimes S_{X,n}$, $r\\otimes x\\mapsto(r\\otimes x)\\otimes1$; under $b_n$ it becomes $\\pi_{X,n}(r)\\otimes(x\\otimes1)$, exactly scalar insertion into $f_n^*P_n$. For tensor, $x\\otimes y\\mapsto(x\\otimes y)\\otimes1$ becomes $(x\\otimes1)\\otimes(y\\otimes1)$ under $d_n$, the defining finite tensor augmentation. These are compatible families by Step 5. In the strict Roos coordinates consisting of the shifted-product coordinate followed by the unshifted-product coordinate, the associated chain augmentation is $z\\mapsto(0,(\\gamma_nz)_n)$. A strict tower map acts by the same product map diagonally on both coordinates, hence carries this augmentation to $(0,(b_n\\gamma_nz)_n)$, or the expression with $d_n$. In particular the shifted-product component remains zero.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, proof: explicit shifted cone coordinates and strict augmentations"
+   }
+  },
+  {
+   "text": "Countable products of $R_W$-module sheaves on $W_{\\mathrm{proet}}$ are exact. The strict Roos derivation theorem therefore identifies the localized functorial cone model with total right derived inverse limit, compatibly with its ordinary-limit inclusion. Apply it to the augmented towers of Step 8: their cone maps are exactly the representatives of the maps obtained in Step 7. Thus the augmentation equalities hold for the specified derived limits as well as for their cone representatives. Choose all small-site and localization universes inside a single larger universe, as permitted by the small-site convention; the theorem's size and sheafification hypotheses are then the usual module-sheaf hypotheses. No product-preservation assertion for $f^{-1}$ is used.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-derivation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, strict naturality refinement; exact pro-etale products as recorded in the cited node"
+   }
+  },
+  {
+   "text": "Every formula above is natural in chain maps of the chosen flat-term K-flat representatives. The derived pullback and scalar-extension comparisons are natural in maps of resolutions; the finite operations descend independently of resolutions. For completeness, on a quasi-isomorphism between such representatives the ambient pullback, scalar-extension towers and finite-operation towers all give invertible maps after localization by the cited results. The commuting naturality square for that chain map therefore also commutes for its inverse: multiply the square by the inverse maps on both sides. Quasi-isomorphisms in the homotopy category admit a right calculus of fractions. The full subcategory of flat-term K-flat complexes resolves every complex by Step 2; the functor from complexes to the homotopy category is full and surjective on objects. The resolving-representative restriction theorem therefore descends the comparison uniquely (using an unused second variable for the unary case). Its hypotheses are exactly these resolution and fraction properties. It follows that both comparisons descend naturally to all derived morphisms and commute with the canonical changes of resolutions. This argument also applies with both tensor variables varying. Step 8's strict naturality gives the same conclusion for the augmentation equalities. No completeness, constructibility, or cohomological boundedness was used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-abstract-derived-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4, localization on flat-term K-flat representatives; derived.tex Tag 05RU (definition-derived-category)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-integral-derived-operations",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-weil-strict-roos-model",
+  "lem-pc-kflat-resolution",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-weil-strict-roos-derivation",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E, 07A4 and 0941, combined with explicit coefficient-square, quotient-transition and zero-component calculations in sites-modules.tex Section 03EK",
+  "note": "An assembly of the existing K-flat, coefficient-association, strict-tower and Roos results; the complete simultaneous normalization argument is written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +219,45 @@
    "results": "[leanfinder] OK 8 hit(s); AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, Ideal.pi_mkQ_rTensor, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct",
    "date": "2026-10-21",
    "verdict": "no match: the sheaf pullback hits are ordinary sheaf operations and AdicCompletion concerns modules; no hit identifies these two unbounded completed-coefficient operations with the specified strict quotient completion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of ambient ringed topos pullback and tensor product is the inverse limit of finite quotient operations via K-flat complexes",
+   "results": "8 hits; AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, SheafOfModules.freeFunctorCompPullbackIso, AdicCompletion.ofTensorProduct_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, profinite limits and ordinary module adic completion do not give the unbounded strict-tower completion presentations with their normalized augmentations"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCompletion|completedTensor|completedPullback",
+   "results": "Mathlib/CategoryTheory: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, profinite limits and ordinary module adic completion do not give the unbounded strict-tower completion presentations with their normalized augmentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit of finite quotient pullbacks agrees with completion of derived pullback of module sheaves",
+   "results": "8 hits; AdicCompletion, ProfiniteGrp.isIso_toLimit, Profinite.lim, Profinite.lim', Profinite.asLimit', SheafOfModules.pullbackIso, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, profinite limits and ordinary module adic completion do not give the unbounded strict-tower completion presentations with their normalized augmentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"completion\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, profinite limits and ordinary module adic completion do not give the unbounded strict-tower completion presentations with their normalized augmentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map of ringed topoi pullback followed by reduction is naturally isomorphic to pullback of the reduction and tensor product commutes with change of rings",
+   "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, profinite limits and ordinary module adic completion do not give the unbounded strict-tower completion presentations with their normalized augmentations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-integral-operations-scalar-extension",
@@ -80,5 +276,125 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-integral-ambient-operation-models",
+  "worker": "stage1",
+  "group": "NW",
+  "summary": "No statement correction or new node. Proved both ambient completion presentations using flat-term K-flat models, normalized scalar association and the existing tensor-reduction comparison. Wrote the strict quotient-transition and augmentation calculations and used the strict Roos derivation for the zero shifted-product normalization. Checked cited statements and source tags and searched the project source and Mathlib.",
+  "blueprint": "Realizes def-weil-derived-pullback-tensor-hom, final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E', through the integral-completion clauses of lem-pur-integral-operations-scalar-extension; ordinary ambient models are compared before strict derived inverse limit.",
+  "tool_uses": [
+   {
+    "node": "def-pur-cochain-coefficient-arrows",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "def-pur-integral-derived-operations",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "def-weil-completed-integral-coefficients",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "def-weil-strict-roos-model",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides flat-term K-flat representatives in the full unbounded module category. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-pur-integral-tensor-reduction-tower-comparison",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Allows direct-sum totalization to commute with scalar extension. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-resolving-representative-whiskering",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies a functor on derived strict towers, not a noncanonical morphism between limit triangles. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Computes ambient and finite ringed pullback, with natural resolution comparisons. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Makes ambient pullback itself a valid K-flat representative for every quotient simultaneously. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-restriction-of-scalars-exact",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   },
+   {
+    "node": "lem-weil-strict-roos-derivation",
+    "why": "Identifies the normalized chain cone construction with total right derived strict-tower limit. No step of this unit is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-integral-derived-operations",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-weil-strict-roos-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-weil-strict-roos-derivation",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NW-851f5ae87",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-851f5ae87 (reviewer sub-agent of L); spot-checked: The statement and stmt_deps are byte-identical to live. The item is unsplit in live, not on the 10-19 drop list and has no repair note, so the re-split rule does not apply. There are no new nodes and no SGA source. The pullback clause rests on Step 1's structural map: c is built from the constant maps c_n by the limit property, never by commuting inverse image with the limit. Step 3's map b_n is the inverse of the scalar-association isomorphism κ of def-pur-cochain-coefficient-arrows for the square (R_Y,S_{Y,n},R_X,S_{X,n}); I checked both formulas by hand, balancing over f^{-1}R_Y (using the square) and both composites. For the tensor clause, Step 4 constructs d_n and proves it invertible itself, using bilinear universality, tensor commuting with direct sums and the Koszul sign. Step 5's transitions and Step 8's augmentations, whose shifted-product coordinate stays 0, are verified. Step 9 identifies the cone model (u equals 1−s) with R lim through the strict Roos derivation and exact countable products; Step 10 descends the comparison uniquely through resolving-representative whiskering. Stacks 0G7E, 06YY, 07A4 and 0941 were read at their labels. No existing node states the item (lem-pur-coefficient-pullback-comparison is the generic κ, def-weil-pbc-completed-pullback a different presentation). Small cases checked: f = id, empty scheme, n = 1, degree-0 free modules, unbounded U and V. Generic cross-unit tool_uses accepted. Advisory: Step 4's cited tensor-reduction node gives no normalization, but the step does not need one."
  }
 }

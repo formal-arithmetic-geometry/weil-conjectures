@@ -20093,3 +20093,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: merged deliver/Q64/lem-sfb-integral-constructible-completion-bridge (reviewer PASS; first push; new nodes: 0)
 - 03:58 L: merged deliver/Q14/lem-pur-torsion-line-system-base-change (reviewer PASS; first push; new nodes: 0)
 - 03:58 L: merged deliver/N7/lem-pur-site-representable-algebraic-pullback (reviewer PASS; first push; new nodes: 0)
+- 03:58 L: merged deliver/NW/lem-pur-integral-ambient-operation-models (reviewer PASS; first push; new nodes: 0)
