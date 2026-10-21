@@ -16,4 +16,9 @@ that implementation so the old import path shares the canonical derived pullback
 Source: Stacks Project, Tags 09RE, 06Y1 and 0D5S.
 (blueprint: lem-pc-affine-model-coherent-object-comparisons). -/
 
+/- The re-exported existence theorem constructs stage and cocone comparisons directly.
+Its proof uses the one-model chart cocycle and projection-comparison triangle, without
+the simultaneous affine coordinate comparison family. The source proof and its DAG
+record are delivered together; this compatibility import keeps the public API. -/
+
 @[expose] public section

@@ -17,19 +17,26 @@
  ],
  "proof": [
   {
-   "text": "Obtain the simultaneous affine-coordinate comparison family. Supply the original coordinate equivalences, localization comparisons and explicit localized tilde functors. Preserve K-flatness by scalar extension. Specialize the family to the finite-stage and cocone arrows to obtain natural θ and θlim on the full two-label categories.",
+   "text": "Form the supplied affineModelLocalizedTilde coordinates a(j) and z. Extend E and K to each stage, preserving acyclic-tensor K-flatness. Define only the required stage and cocone natural isomorphisms θ and θlim by specializing the explicit affineCoordinateDerivedComparison constructor to the two labelled extended models. Its naturality retains every cross-label morphism, including coincident models. No simultaneous comparison-family existence theorem is used.",
    "uses": [
-    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-coordinate-derived-comparison",
     "lem-pc-kflat-extension-of-scalars"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved affine-coordinate transport-family wrapper to each bottom→j→k and bottom→j→cocone triangle. Construct αE,αK,βE,βK by composing the bottom comparison, pullback of aE,aK, and inverse perfectHomComparison. Spec.map_comp with F.map_comp and C.w proves the two over-arrow composite equations. The proved perfectHomComparison_triangle supplies the projection equation. Apply the generic transport predicate to aE and aK in each case; normalize scalar reassociation and association of isomorphism composition. Package the eight explicitly constructed fields into AffineModelCoherentObjects.",
+   "text": "Construct αE(j), αK(j), βE and βK directly from the one-model affineCoordinateChartObjectComparison for each bottom arrow, pullback of aE or aK, and inverse perfectHomComparison. No bottom-arrow two-label natural isomorphisms are constructed.",
    "uses": [
-    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-coordinate-derived-comparison",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each bottom-to-j-to-k or bottom-to-j-to-cocone triangle, prove the over-arrow composition equation using Spec.map_comp and R.map_comp or c.w; the ring equality is F.map_comp or C.w. Apply the one-model chart cocycle separately to E and K. A proved private elementary naturality calculation transports the cocycle through the supplied bottom identification, and perfectHomComparison_triangle supplies its projection-comparison equation. The private object constructors and named equation types retain explicit geometric arguments. The labelled equation keeps the actual two-label natural comparison; its two Bool cases reduce to the one-model equation. Express scalar reassociation by affineModelScalarAssocIso and package the eight fields. The existing scalar-conjugation API is preserved.",
+   "uses": [
+    "lem-pc-affine-coordinate-comparison-chart-cocycle",
     "lem-pc-perfect-hom-comparison-triangle",
-    "lem-pc-perfect-hom-transport",
     "def-pc-complex-scalar-extension-hom"
    ],
    "elementary": false
@@ -38,7 +45,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "U2: explicit diagram specialization and bottom-object propagation, using the proved categorical transport wrapper of the affine-coordinate composition family and the proved projection comparison triangle."
+  "place": "P2: explicit stage and cocone two-label comparisons; direct one-model bottom object comparisons; four triangles from the proved one-model chart cocycle, projection triangle and private elementary naturality. Both comparison-family existence theorems are unnecessary."
  },
  "mathlib_searches": [
   {
@@ -126,10 +133,11 @@
  },
  "proof_deps": [
   "def-pc-complex-scalar-extension-hom",
-  "lem-pc-affine-coordinate-comparison-coherence",
+  "lem-pc-affine-coordinate-comparison-chart-cocycle",
+  "lem-pc-affine-coordinate-derived-comparison",
   "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-perfect-hom-comparison-triangle"
+  "lem-pc-perfect-hom-comparison-triangle",
+  "lem-pc-perfect-hom-transport"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -142,14 +150,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-4f95b",
-  "group": "W4",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261020T211847-L-3511307",
-  "kind": "proof",
-  "note": "independent cc review: delivered Sheaf re-export module and node lean record (existing:true → WeilConjectures.AlgebraicGeometry.AffineModelCoherentObjectComparisons) against the live source module: 18 declarations present, theorem signature identical, axioms clean; files identical to previously passed b6d4b6a629"
+  "landing": "20261021T012419-L-2186971",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
