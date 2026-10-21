@@ -22290,3 +22290,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:16 L: merged deliver/S1/Sheaf.Paper.PuritySupportCommonInjectives (stage 3; reviewer PASS; first push; landing 20261021T111601-L-352144 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:16 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FiniteEtaleTraceImage (stage 3; reviewer FIX; first push; landing 20261021T111606-L-368636 (interface); batch 20261021T110859; modules 4; new nodes 3; change records: coord/changes/S2-finite-etale-trace-data.md)
 - 11:16 L: merged deliver/S3/Sheaf.CategoryTheory.KInjectiveExactSquareComparison (stage 3; reviewer PASS; first push; landing 20261021T111609-L-380983 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:16 L: merged deliver/S4/Sheaf.AlgebraicGeometry.SfEtaleOriginPushforwardAmplitude (stage 3; reviewer PASS; first push; landing 20261021T111614-L-396304 (proof); batch 20261021T110859; modules 1; new nodes 0)

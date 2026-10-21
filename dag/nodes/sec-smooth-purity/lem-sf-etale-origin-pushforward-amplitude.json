@@ -18,97 +18,66 @@
  ],
  "proof": [
   {
-   "text": "For either $T=X$ or $T=Y$, comparison inverse image on $B$-modules is exact and fully faithful by [det-pe-classical-sheaves-modules]. It is applied termwise on derived categories by [def-weil-pbc-proetale-modules]. Exactness preserves the kernels, images and quotients defining cohomology [def-weil-abstract-derived-category], so $\\mathcal H^r(\\nu_T^*K)\\cong\\nu_T^*\\mathcal H^r(K)$. It also reflects zero objects: if $\\nu_T^*M=0$, faithfulness applied to $1_M$ and $0$ gives $1_M=0$, hence $M=0$. Apply this with $T=X$ and $K=L$ to deduce $\\mathcal H^r(L)=0$ outside $[a,b]$.",
+   "text": "The comparison unit is invertible by lem-weil-pbc-comparison-grothendieck-unit, so comparison inverse image on fixed-scalar module sheaves is faithful. The canonical intrinsic coefficient realization is an exact equivalence by def-weil-pbc-proetale-modules. Their composite is therefore exact and faithful. The existing exact-functor homology comparison and its zero-reflection lemma transfer the assumed range [a,b] of the intrinsic comparison image back to L. In particular L is bounded below by a; the separately supplied boundedness witness is unnecessary.",
    "uses": [
-    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-comparison-grothendieck-unit",
     "def-weil-pbc-proetale-modules",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099T, lemma-fully-faithful; exact module inverse image and the termwise cohomology calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(X_{\\mathrm{et}},B)$ and $\\mathcal B=\\operatorname{Mod}(Y_{\\mathrm{et}},B)$. These are Grothendieck abelian categories admitting K-injective resolutions by [prop-pur-kinjective-resolutions-exist], applied in the small-site universe of the given module categories. The functor $f_{\\mathrm{et},*}:\\mathcal A\\to\\mathcal B$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Its ordinary total right derived functor $T=Rf_{\\mathrm{et},*}$ is triangulated and commutes with all integer shifts by [lem-pc-right-derived-functor-triangulated]. Its restriction to bounded-below objects is the derived direct image of [def-weil-pbc-direct-image]: both are computed by applying $f_{\\mathrm{et},*}$ to a K-injective resolution. Thus the heart cohomology of $T(M[0])$ is exactly the $R^qf_{\\mathrm{et},*}M$ in the hypothesis.",
+   "text": "Let F be the ordinary unbounded etale right derived direct image of def-weil-pbc-direct-image. It is triangulated and commutes with integer shifts by lem-pc-right-derived-functor-triangulated. On a degree-zero sheaf its negative cohomology vanishes: use the existing source lemma isGE_rightDerivedFunctor_obj_singleFunctor from the PlusCompatibility module, the unbounded injective-resolution form of lem-weil-pbc-derived-functor-negative-vanishing. The ordinary ModuleCat-valued sheaf categories already have the necessary Grothendieck and K-injective instances, so no separate ringed-module construction is used.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-module-direct-image-left-exact",
+    "def-weil-pbc-direct-image",
     "lem-pc-right-derived-functor-triangulated",
-    "def-weil-pbc-direct-image"
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "src-right-derived-functor-plus-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05SE, proposition-derived-functor (exactness); 05SU, lemma-derived-shift; ordinary K-injective computation"
-   }
+   "elementary": false
   },
   {
-   "text": "Suppose $N\\geq0$. Apply [lem-weil-pbc-derived-functor-negative-vanishing] to $f_{\\mathrm{et},*}$ and $M[0]$: $\\mathcal H^q(T(M[0]))=0$ for $q<0$. For $q>N$, we have $q\\geq0$, so the assumed higher-direct-image bound gives the remaining vanishing. Hence every object of the heart is sent into $[0,N]$.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-negative-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TC, lemma-negative-vanishing (1), applied to a sheaf in degree zero"
-   }
-  },
-  {
-   "text": "Still with $N\\geq0$, apply [lem-pur-bounded-heart-amplitude] to the triangulated functor $T$ of Step 2, the class $\\mathcal S$ of all objects of $\\mathcal A$, and $c=0$, $d=N$. The class contains zero and is closed under isomorphism; the heart hypothesis is Step 3, and $L$ has range $[a,b]$ by Step 1. The lemma gives $\\mathcal H^i(Rf_{\\mathrm{et},*}L)=0$ outside $[a+0,b+N]=[a,b+N]$. This uses only the finite cohomology tower of the bounded input, with no completeness or infinite-product assumption.",
+   "text": "Apply lem-pur-bounded-heart-amplitude to F and the class of all heart objects. If N is nonnegative, negative vanishing and the supplied bound together put every derived heart image in [0,N], so the lemma gives the range [a,b+N] for F(L).",
    "uses": [
     "lem-pur-bounded-heart-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle: finite successive-cohomology devissage, as encapsulated by the cited amplitude lemma"
-   }
+   "elementary": false
   },
   {
-   "text": "Suppose instead $N<0$. Taking $q=0>N$ in the hypothesis gives $R^0f_{\\mathrm{et},*}M=0$ for every $M\\in\\mathcal A$. The natural identification $R^0v\\cong v$ of [lem-weil-pbc-right-derived-universal-delta-functor], applied to the additive left exact functor of Step 2, therefore gives $f_{\\mathrm{et},*}M=0$ for every $M$. Choose a K-injective resolution of $L$. In the resolution formula for derived direct image [def-weil-pbc-direct-image], every term of its direct image is now zero. That complex is zero, so $Rf_{\\mathrm{et},*}L=0$.",
+   "text": "If N<0, all cohomology of every derived heart image vanishes: negative degrees by Step 2, and nonnegative degrees by the supplied hypothesis, since each is greater than N. Fix an output degree i and apply the same bounded-heart amplitude theorem with c=d=i-a+1. Its heart hypothesis holds because all heart-image cohomology is zero; i<a+c gives vanishing in degree i of F(L). Since i was arbitrary, the existing source theorem DerivedCategory.isZero_of_forall_isZero_homology gives F(L)=0. This is exactly finite successive-cohomology devissage, without a degree-zero delta-functor or a new unproved statement.",
    "uses": [
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "def-weil-pbc-direct-image"
+    "lem-pur-bounded-heart-amplitude",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015B, lemma-higher-derived-functors (2), and 05TE, lemma-right-derived-delta-functor; K-injective formula for ordinary derived direct image"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $L$ is bounded it is bounded below. Apply [sk-thm-pe-direct-image-comparison] with the discrete commutative ring $B$ and the qcqs morphism $f$ to obtain $\\nu_Y^*Rf_{\\mathrm{et},*}L\\cong Rf_{\\mathrm{proet},*}\\nu_X^*L=Rf_{\\mathrm{proet},*}C$. In the case $N\\geq0$, Step 1 at $Y$ identifies the cohomology of the left side with $\\nu_Y^*\\mathcal H^i(Rf_{\\mathrm{et},*}L)$, which is zero outside $[a,b+N]$ by Step 4. In the case $N<0$, Step 5 makes the left side zero (an additive exact functor preserves zero), so $Rf_{\\mathrm{proet},*}C=0$ as well. A zero object has zero cohomology in every degree, which implies the stated interval assertion even if $b+N<a$. The comparison has been used only on the bounded-below etale complex $L$.",
+   "text": "View L as an object of D+ using the lower bound from Step 1. The canonical qcqs comparison prop-weil-pbc-comparison-direct-image is invertible. Compose it with the exact-comparison D+/D compatibility and src-right-derived-functor-plus-compatibility on both sites, obtaining comparison of the unbounded direct images at L. Apply the canonical intrinsic realization and the section-normalized K-injective derived direct-image comparison supplied by def-weil-proetale-inverse-image to identify the result with the stated intrinsic pro-etale direct image. Exact comparison preserves homology vanishing and zero objects. Transport the range of Step 3 when N is nonnegative, and the zero object of Step 4 when N is negative. The latter also gives vanishing in every degree even when b+N<a.",
    "uses": [
-    "sk-thm-pe-direct-image-comparison",
-    "det-pe-classical-sheaves-modules",
+    "prop-weil-pbc-comparison-direct-image",
+    "src-right-derived-functor-plus-compatibility",
+    "def-weil-proetale-inverse-image",
     "def-weil-pbc-proetale-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison, in its bounded-below module-complex form in sk-thm-pe-direct-image-comparison"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-comparison-grothendieck-unit",
   "def-weil-pbc-proetale-modules",
   "def-weil-abstract-derived-category",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-pc-right-derived-functor-triangulated",
   "def-weil-pbc-direct-image",
+  "lem-pc-right-derived-functor-triangulated",
   "lem-weil-pbc-derived-functor-negative-vanishing",
+  "src-right-derived-functor-plus-compatibility",
   "lem-pur-bounded-heart-amplitude",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "sk-thm-pe-direct-image-comparison"
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Composition of the exact module comparison and Tag 09A6 with the finite-truncation argument of Tag 08J5 via lem-pur-bounded-heart-amplitude, the negative vanishing of Tag 05TC, and the degree-zero identification in Tag 015B. No new analytic or geometric input."
+  "place": "Tags 08J5 (remark-truncation-distinguished-triangle) and 05TC (lemma-negative-vanishing), via the proved bounded_heart_amplitude theorem; canonical qcqs comparison through prop-weil-pbc-comparison-direct-image, D+/D compatibility, and the existing section-normalized intrinsic coefficient transport. For N<0 apply the same finite amplitude argument with c=d=i-a+1 in each degree, then use detection of zero by homology."
  },
  "mathlib_searches": [
   {
@@ -281,5 +250,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Statement matches node clause by clause: f qcqs on Scheme.{u}; finite comm B : Type u via ULift convention; _hN for all M, all q≥0 with q>N (q=0 kept), H^q of R(Etale.lowerStar f) on M[0]; a≤b; L bounded via ∃[c,d]; _hC on canonical finiteCoefficientIntrinsicDerivedComparison (comparisonUpperStar ⋙ intrinsic realization, termwise); conclusions: L range [a,b], proEtaleConstantDerivedDirectImage of C range [a,b+N], N<0 ⇒ both direct images zero. No extra hypotheses; universes standard; edge cases L=0, B=0, empty X/Y, a=b, N=0, N<0, b+N<a covered. No definitions, proof sorry only, docstrings with source and blueprint tag plus 6 proof steps, lean.statement verbatim, only the lean field changed vs side-live, both report sections present. nt_compile --json rc 0, 34.6 s, clean. Advisory: intrinsic comparison and constant derived direct image are not listed in their owner nodes' lean.declarations; second reading done by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261021T111614-L-396304",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

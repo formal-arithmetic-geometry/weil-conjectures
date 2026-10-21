@@ -16,14 +16,13 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.CategoryTheory.BoundedHeartAmplitude
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 
 /-!
 # Direct-image amplitude for bounded complexes of etale origin
@@ -103,6 +102,86 @@ theorem etaleOrigin_pushforward_amplitude
         ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f).rightDerivedFunctor.obj L) ∧
       IsZero ((Scheme.proEtaleConstantDerivedDirectImage f B).obj
         ((finiteCoefficientIntrinsicDerivedComparison X B).obj L))) := by
-  sorry
+  let A := ULift.{u + 1, u} B
+  let ν := fun T : Scheme.{u} ↦ comparisonUpperStar (ModuleCat.{u + 1} A) T
+  let R := fun T : Scheme.{u} ↦ finiteCoefficientIntrinsicRealization T B
+  let Cp := fun T : Scheme.{u} ↦ finiteCoefficientIntrinsicDerivedComparison T B
+  let re := Etale.lowerStar (ModuleCat.{u + 1} A) f
+  let rp := lowerStar (ModuleCat.{u + 1} A) f
+  let F := re.rightDerivedFunctor
+  let : (R X).IsEquivalence := (finiteCoefficientIntrinsicRealization_exact X B).1
+  have : (finiteCoefficientIntrinsicComparison X B).Faithful :=
+    inferInstanceAs ((ν X) ⋙ R X).Faithful
+  have hL (r : ℤ) (hr : r < a ∨ b < r) :
+      IsZero ((DerivedCategory.homologyFunctor _ r).obj L) :=
+    (finiteCoefficientIntrinsicComparison X B)
+      |>.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj (_hC r hr)
+  have hPlus : DerivedCategory.TStructure.t.plus L :=
+    ⟨a, (DerivedCategory.isGE_iff L a).mpr (fun i hi ↦ hL i (Or.inl hi))⟩
+  let J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+    ⟨L, hPlus⟩
+  let := isIso_comparisonDirectImagePlus A f
+  -- First compare the fixed-scalar direct images through their bounded-below models.
+  let efix : (ν Y).mapDerivedCategory.obj (F.obj L) ≅
+      rp.rightDerivedFunctor.obj ((ν X).mapDerivedCategory.obj L) :=
+    (ν Y).mapDerivedCategory.mapIso (re.rightDerivedFunctorPlusCompatibility.app J).symm ≪≫
+      ((ν Y).mapDerivedCategoryPlusCompatibility.app
+        (re.rightDerivedFunctorPlus.obj J)).symm ≪≫
+      DerivedCategory.Plus.ι.mapIso
+        ((asIso (Functor.rightDerivedFunctorPlusBaseChange
+          (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} A)))).app J) ≪≫
+      (rp.rightDerivedFunctorPlusCompatibility.app ((ν X).mapDerivedCategoryPlus.obj J)) ≪≫
+      rp.rightDerivedFunctor.mapIso ((ν X).mapDerivedCategoryPlusCompatibility.app J)
+  let eC (T : Scheme.{u}) (K : FiniteCoefficientEtaleDerivedCategory T A) :
+      (Cp T).obj K ≅ (R T).mapDerivedCategory.obj ((ν T).mapDerivedCategory.obj K) :=
+    (Functor.mapDerivedCategoryCompIso (ν T) (R T)).app K
+  let direct := Scheme.proEtaleConstantDerivedDirectImage f B
+  -- Then change to the canonical intrinsic constant-ring presentation.
+  let e : (Cp Y).obj (F.obj L) ≅ direct.obj ((Cp X).obj L) :=
+    eC Y (F.obj L) ≪≫ (R Y).mapDerivedCategory.mapIso efix ≪≫
+      (Scheme.sfIntrinsicDerivedDirectImageComparison f B).symm.app
+        ((ν X).mapDerivedCategory.obj L) ≪≫
+      direct.mapIso (eC X L).symm
+  have hneg (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (i : ℤ) (hi : i < 0) :
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        (F.obj ((DerivedCategory.singleFunctor _ 0).obj M))) := by
+    have := re.isGE_rightDerivedFunctor_obj_singleFunctor M
+    exact (DerivedCategory.isGE_iff _ 0).mp this i hi
+  have hamp (c d : ℤ) (hcd : c ≤ d)
+      (hh : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (i : ℤ),
+        i < c ∨ d < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj
+          (F.obj ((DerivedCategory.singleFunctor _ 0).obj M)))) :
+      ∀ i : ℤ, i < a + c ∨ b + d < i →
+        IsZero ((DerivedCategory.homologyFunctor _ i).obj (F.obj L)) :=
+    DerivedCategory.bounded_heart_amplitude _ _ F (fun _ ↦ True)
+      (fun _ _ _ _ ↦ trivial) trivial c d hcd
+      (fun M _ i hi ↦ hh M i hi) a b _hab L hL (fun _ ↦ trivial)
+  have hzero (hN : N < 0) : IsZero (F.obj L) := by
+    apply DerivedCategory.isZero_of_forall_isZero_homology
+    intro i
+    -- Every heart image is zero, so any singleton heart interval is available.
+    exact hamp (i - a + 1) (i - a + 1) le_rfl (fun M q _ ↦ by
+      by_cases hq : q < 0
+      · exact hneg M q hq
+      · exact _hN M q (by omega) (by omega)) i (Or.inl (by omega))
+  refine ⟨hL, ?_, ?_⟩
+  · intro i hi
+    by_cases hN : N < 0
+    · exact (DerivedCategory.homologyFunctor _ i).map_isZero
+        (((finiteCoefficientIntrinsicComparison Y B).mapDerivedCategory.map_isZero
+          (hzero hN)).of_iso e.symm)
+    · have hi' : i < a + 0 ∨ b + N < i := by simpa using hi
+      have hv := hamp 0 N (by omega) (fun M q hq ↦ by
+        rcases hq with hq | hq
+        · exact hneg M q hq
+        · exact _hN M q (by omega) hq) i hi'
+      exact ((finiteCoefficientIntrinsicComparison Y B)
+        |>.isZero_homologyFunctor_mapDerivedCategory_obj hv).of_iso
+          ((DerivedCategory.homologyFunctor _ i).mapIso e).symm
+  · intro hN
+    exact ⟨hzero hN,
+      ((finiteCoefficientIntrinsicComparison Y B).mapDerivedCategory.map_isZero
+        (hzero hN)).of_iso e.symm⟩
 
 end AlgebraicGeometry.ProEtale
