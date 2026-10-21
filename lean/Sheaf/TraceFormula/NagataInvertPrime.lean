@@ -3,6 +3,8 @@ module
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Localization.Basic
 
+import Mathlib.GroupTheory.MonoidLocalization.UniqueFactorization
+
 /-!
 # Prime elements and localization at a multiplicative set
 
@@ -53,4 +55,45 @@ theorem nagata_invert_prime
     Prime x ↔
       Prime (algebraMap A (Localization (Submonoid.closure P)) x) ∨
         IsUnit (algebraMap A (Localization (Submonoid.closure P)) x) := by
-  sorry
+  let S := Submonoid.closure P
+  let L := Localization S
+  let f := IsLocalization.toLocalizationMap S L
+  have hS : S ≤ nonZeroDivisors A :=
+    Submonoid.closure_le.mpr fun p hp ↦
+      mem_nonZeroDivisors_iff_ne_zero.mpr (hP p hp).ne_zero
+  constructor
+  · intro hp
+    by_cases hu : IsUnit (f x)
+    · exact Or.inr hu
+    · exact Or.inl (f.map_prime hp
+        (by simpa only [f, IsLocalization.coe_toLocalizationMap, map_zero] using
+          (IsLocalization.injective L hS).ne hp.ne_zero) hu)
+  · intro h
+    by_contra hn
+    -- A prime denominator can divide x only if x is itself prime.
+    have hsaturate : ∀ s ∈ S, ∀ y : A, x ∣ s * y → x ∣ y := by
+      intro s hs
+      induction hs using Submonoid.closure_induction with
+      | mem p hp =>
+          intro y hxy
+          apply ((hP p hp).left_dvd_or_dvd_right_of_dvd_mul hxy).resolve_left
+          intro hpx
+          exact hn (((hP p hp).irreducible.associated_of_dvd hx hpx).prime (hP p hp))
+      | one => simpa only [one_mul] using (fun y (hy : x ∣ y) ↦ hy)
+      | mul a b ha hb iha ihb =>
+          intro y hxy
+          exact ihb y (iha (b * y) (by simpa only [mul_assoc] using hxy))
+    -- Clearing denominators therefore reflects divisibility by x.
+    have hdescend : ∀ a : A, f x ∣ f a → x ∣ a := by
+      intro a ha
+      obtain ⟨s, hs, hsa⟩ := f.map_dvd_map.mp ha
+      exact hsaturate s hs a hsa
+    rcases h with hp | hu
+    · apply hn
+      refine ⟨hx.ne_zero, hx.not_isUnit, fun a b hab ↦ ?_⟩
+      have hab' : f x ∣ f a * f b := by simpa only [map_mul] using map_dvd f hab
+      exact (hp.dvd_or_dvd hab').imp (hdescend a) (hdescend b)
+    · have hunitdvd : f x ∣ f 1 := by
+        simpa only [f, IsLocalization.coe_toLocalizationMap, map_one] using
+          hu.dvd (a := (1 : L))
+      exact hx.not_isUnit (isUnit_of_dvd_one (hdescend 1 hunitdvd))

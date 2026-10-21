@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Preliminaries and the cancellation claim. Every $p\\in P$ is prime, hence nonzero and a nonunit; as $A$ is a domain, every $s\\in S$ is nonzero, so by the equality criterion of [def-weil-pbc-module-localization] ($a/s=b/t$ iff $u(ta-sb)=0$ for some $u\\in S$) we have $a/s=b/t$ in $S^{-1}A$ iff $ta=sb$ in $A$, and $A\\to S^{-1}A$ is injective. Since $x$ is irreducible, $x\\ne0$ and $x$ is a nonunit. If $x=pc$ with $p\\in P$, irreducibility makes $p$ or $c$ a unit, and $p$ is not, so $x$ and $p$ are associates and $x$ is prime (an associate of a prime element is prime). Claim: if $x$ is not an associate of any element of $P$, then for every $s\\in S$ and $z\\in A$, $s\\mid xz$ implies $s\\mid z$. Proof by induction on the length $r$ of a factorization $s=p_1\\cdots p_r$ with $p_i\\in P$. For $r=0$, $s=1$ divides $z$. For $r\\ge1$ write $s=p_1s_1$ with $s_1=p_2\\cdots p_r$, and $xz=sw$ with $w\\in A$. Then $p_1\\mid xz$; $p_1\\nmid x$ (otherwise $x=p_1c$ and $x$ would be an associate of $p_1$, as just shown), so $p_1\\mid z$ by primality, $z=p_1z_1$. From $p_1s_1w=xp_1z_1$ and $p_1\\ne0$ in the domain $A$ we get $s_1w=xz_1$, so $s_1\\mid xz_1$, hence $s_1\\mid z_1$ by induction and $s=p_1s_1\\mid p_1z_1=z$.",
+   "text": "Set S = Submonoid.closure P and let f : A → S⁻¹A be the localization map of [def-weil-pbc-module-localization]. Every generator is nonzero by primality, so closure_le puts S inside the non-zero-divisors and IsLocalization.injective gives injectivity of f. If x is prime, split on whether f(x) is a unit. In the nonunit case f(x) is nonzero by injectivity, and Mathlib Submonoid.LocalizationMap.map_prime proves f(x) prime by clearing denominators and applying primality in A. This proves the forward implication without forming a quotient ring.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
@@ -23,7 +23,7 @@
    }
   },
   {
-   "text": "Assume $x$ is prime in $A$. Then $A/(x)$ is a domain. The map $S^{-1}A\\to S^{-1}(A/(x))$, $a/s\\mapsto\\bar a/s$, of [def-weil-pbc-module-localization] is surjective, and $\\bar a/s=0$ iff $ua\\in(x)$ for some $u\\in S$, i.e. iff $a/s=(ua)/(us)\\in x\\,S^{-1}A$; so $(S^{-1}A)/(x/1)\\cong S^{-1}(A/(x))$. A localization of a domain $D$ at a multiplicative set $\\bar S$ is zero if $0\\in\\bar S$ and otherwise a domain (if $(\\bar a/s)(\\bar b/t)=0$ then $u\\bar a\\bar b=0$ with $u\\ne0$, so $\\bar a=0$ or $\\bar b=0$), and it is nonzero in the latter case since $1/1\\ne0$. Hence either the quotient $(S^{-1}A)/(x/1)$ is a nonzero domain, so $(x/1)$ is a proper prime ideal and, as $x/1\\ne0$ (Step 1, $x\\ne0$ and $A\\to S^{-1}A$ injective), $x/1$ is a prime element; or the quotient is zero and $x/1$ is a unit.",
+   "text": "For the converse, suppose for contradiction that x is not prime. Prove by Submonoid.closure_induction on s ∈ S that, for every y ∈ A, x ∣ s*y implies x ∣ y. For a generator p, Mathlib Prime.left_dvd_or_dvd_right_of_dvd_mul gives p ∣ x or x ∣ y. The former makes p and x associated by their irreducibility, so x is prime, a contradiction. The base s = 1 is immediate. For a product a*b, apply the induction hypothesis first for a to x ∣ a*(b*y), then for b to x ∣ b*y. This handles repeated prime factors as well.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "Conversely, suppose the image of $x$ is a unit: $(x/1)(y/t)=1$, so by Step 1 $xy=s$ in $A$ for some $y\\in A$, $s=t\\in S$. If $x$ is an associate of some $p\\in P$, it is prime (Step 1). Otherwise the claim of Step 1 applied to $s\\mid xy$ gives $s\\mid y$, $y=sy'$; then $s=xsy'$ and cancelling $s\\ne0$ gives $xy'=1$, contradicting that the irreducible $x$ is a nonunit. Thus $x$ is prime.",
+   "text": "Mathlib Submonoid.LocalizationMap.map_dvd_map, the fraction-clearing divisibility criterion for [def-weil-pbc-module-localization], says f(x) ∣ f(a) iff x ∣ s*a for some s ∈ S. Combining it with the preceding closure induction shows that f(x) ∣ f(a) implies x ∣ a. If f(x) is prime and x ∣ a*b, map the divisibility into the localization, apply primality there, and descend the resulting divisibility of f(a) or f(b). Together with hx.ne_zero and hx.not_isUnit this proves x prime, contradicting the assumption.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "Finally suppose the image of $x$ is a prime element of $S^{-1}A$, and let $a,b\\in A$ with $ab\\in(x)$. Then $(a/1)(b/1)\\in(x/1)$, so one of them, say $a/1$ (the case of $b$ is symmetric), lies in $(x/1)$: $a/1=(x/1)(y/s)$ for some $y\\in A$, $s\\in S$, hence $sa=xy$ in $A$ by Step 1. If $x$ is an associate of some $p\\in P$, it is prime (Step 1). Otherwise the claim of Step 1 applied to $s\\mid xy$ gives $y=sy'$, and cancelling $s\\ne0$ in $sa=xsy'$ gives $a=xy'\\in(x)$. Also $x\\ne0$ and $x$ is a nonunit (Step 1), so $x$ is a prime element of $A$.",
+   "text": "If f(x) is a unit, it divides f(1). Descending divisibility gives x ∣ 1, so x is a unit by isUnit_of_dvd_one, contradicting irreducibility. The two cases exhaust the hypothesis and prove the converse.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
@@ -62,7 +62,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 0AFU, lemma-invert-prime-elements proof"
+  "place": "Tag 0AFU, lemma-invert-prime-elements, clause (2); fraction-clearing argument implemented using Mathlib's monoid localization API, with closure induction for denominator cancellation"
  },
  "mathlib_searches": [
   {
@@ -154,5 +154,15 @@
   "existing": false,
   "fixed_by": "NT-stage2-cc-cd2eb65c8"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261021T151135-L-1142650",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -22890,3 +22890,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:11 L: merged deliver/H4/Sheaf.Algebra.Homology.KInjectiveHomScalarTelescope (stage 3; reviewer PASS; first push; landing 20261021T151123-L-1136553 (interface); batch 20261021T151059; modules 1; new nodes 0; change records: coord/changes/kinjective-hom-scalar-telescope-proof-imports.md)
 - 15:11 L: merged deliver/M4/Sheaf.Topology.FiniteQuotientFiberProduct (stage 3; reviewer PASS; first push; landing 20261021T151127-L-1137960 (proof); batch 20261021T151059; modules 1; new nodes 0)
 - 15:11 L: merged deliver/M7/Sheaf.Paper.RingedTopoiDerivedPullbackIndependent (stage 3; reviewer PASS; first push; landing 20261021T151131-L-1140026 (proof); batch 20261021T151059; modules 1; new nodes 0)
+- 15:11 L: merged deliver/M8/Sheaf.TraceFormula.NagataInvertPrime (stage 3; reviewer PASS; first push; landing 20261021T151135-L-1142650 (proof); batch 20261021T151059; modules 1; new nodes 0)
