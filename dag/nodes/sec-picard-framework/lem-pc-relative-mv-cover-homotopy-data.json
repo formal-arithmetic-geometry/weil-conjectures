@@ -28,7 +28,7 @@
    "elementary": false
   },
   {
-   "text": "The global identity is the first row-component identity. Combine the two local identities by biprod.hom_ext and biprod.map_fst/map_snd to obtain the prescribed middle biproduct map. Mathlib mappingCone.map_eq_mapOfHomotopy identifies the chosen homotopy cone map with the strict cone map. Apply mappingCone.map_descShortComplex to m, map the equation by Q, and postcompose with e₃′. Functor.map_comp and the quotient-component identity give exactly the overlap equation. This is an explicit naturality calculation, not an arbitrary completion of a triangle square.",
+   "text": "The global identity is the first row-component identity. Combine the two local identities by biprod.hom_ext and biprod.map_fst/map_snd to obtain the prescribed middle biproduct map. Apply congrArg (fun k ↦ DerivedCategory.Q.map k ≫ e₃′.hom) to mappingCone.map_descShortComplex P P′ m. Simplify that equation using map_eq_mapOfHomotopy, Functor.map_comp, associativity and the quotient-component identity hγ. This gives the overlap equation directly, without backward rewriting inside the expanded cone map or an arbitrary completion of a triangle square.",
    "uses": [],
    "elementary": true
   }
@@ -40,7 +40,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Tags 08BV, 08HZ, 08FE and 08HY; Mathlib homotopy-category ShortExact and Pretriangulated",
-  "place": "Resolved row construction followed by quasiIso_descShortComplex, map_descShortComplex and map_eq_mapOfHomotopy; cone conversion formalized by P3."
+  "place": "Resolved row construction followed by quasiIso_descShortComplex, map_descShortComplex and map_eq_mapOfHomotopy; cone conversion formalized by P3. P2 repair, 2026-10-21: map the explicit cone-naturality equality by congrArg before simplification, avoiding the heartbeat timeout in the backward rewrite chain."
  },
  "mathlib_searches": [
   {
@@ -124,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261014T050218-L-1647485",
-  "kind": "interface",
+  "landing": "20261021T140850-L-2765260",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
