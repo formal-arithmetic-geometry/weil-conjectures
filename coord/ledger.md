@@ -20849,3 +20849,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q110/lem-pur-adic-scalar-trace-coherence (reviewer PASS; after a return; new nodes: 2)
 - 08:07 L: merged deliver/Q37/lem-sfb-internal-hom-localization-comparison (reviewer PASS; after a return; new nodes: 2)
 - 08:07 L: merged deliver/Q28/lem-sfb-continuous-frame-sheaf-comparison (reviewer PASS; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q52/lem-sfb-finite-field-proetale-direct-image (reviewer FIX; after a return; new nodes: 1)

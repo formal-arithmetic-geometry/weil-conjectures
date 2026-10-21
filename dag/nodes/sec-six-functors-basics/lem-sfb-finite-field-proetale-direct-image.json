@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "First check the geometric hypotheses for comparison. A field is Noetherian (its only ideals are $(0)$ and $(1)$), and $\\operatorname{Spec}k$ is quasi-compact. By [lem-weil-pbc-finite-type-over-noetherian], both $T$ and $V$ are Noetherian, hence quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated], both are quasi-separated. Finally [lem-weil-pbc-qcqs-morphism-permanence] (1), applied to $f:T\\to V$, makes $f$ quasi-compact and quasi-separated. These implications require no separatedness of $f$ or of the structure morphisms.",
+   "text": "A field is Noetherian and its spectrum is quasi-compact. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure morphisms: $T,V$ are Noetherian, hence quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated] they are quasi-separated. Then [lem-weil-pbc-qcqs-morphism-permanence] (1) makes $f$ qcqs; no separatedness is needed.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
@@ -33,10 +33,9 @@
    }
   },
   {
-   "text": "We identify the constructibility convention before using comparison. Since $A$ is a finite field, it is Noetherian and its finitely generated modules are precisely its finite-dimensional vector spaces, which are finite sets. On either site, a finite global constructible locally closed stratification is in particular such a stratification locally. Conversely, on a qcqs scheme choose a finite affine open cover carrying the local stratifications. Apply [lem-weil-pbc-etale-stratification-local-gluing-core] to obtain a finite global stratification whose stratum maps factor through the local stratum maps. Pull back each local constant model along this factorization: its trivializing covering pulls back to a covering, on which the same finite $A$-module is constant. Thus the local and global constructibility conditions agree. The argument uses actual stratum morphisms, not only inclusions of their images. In particular the intrinsic pro-étale category $\\mathcal B_A(W)$, for $W=T,V$, is the bounded constructible category appearing in [sk-thm-pe-constructible-comparison].",
+   "text": "Over the finite field $A$, finitely generated, finitely presented and finite-dimensional modules coincide and are finite sets. Apply [lem-sfb-noetherian-global-constructibility] on both sites of $T,V$: the affine-local constructibility condition and the global finite-stratification condition defining $\\mathcal B_A$ agree.",
    "uses": [
-    "lem-weil-pbc-etale-stratification-local-gluing-core",
-    "sk-thm-pe-constructible-comparison"
+    "lem-sfb-noetherian-global-constructibility"
    ],
    "elementary": false,
    "source": {
@@ -45,12 +44,11 @@
    }
   },
   {
-   "text": "Take $K\\in\\mathcal B_A(T)$. Apply the bounded constructible equivalence of [sk-thm-pe-constructible-comparison] with the discrete Noetherian coefficient ring $\\Lambda=A$. It gives $G\\in D^b_c(T_{\\mathrm{et}},A)$ and an isomorphism $\\alpha:\\nu_T^*G\\xrightarrow{\\sim}K$ in the ordinary pro-étale derived category. Here $\\nu_T^*$ is the actual intrinsic module inverse image, not a change to condensed or completed coefficients: [lem-pe-coefficient-comparison-derived-functor] identifies its derived functor with termwise inverse image and says that it commutes with every cohomology functor. The module inverse image $\\nu_W^*$ of [def-weil-pbc-site-comparison-morphism], used by the comparison theorem and in step 7, and the intrinsic module pullback along the constant-section ring map of [lem-pe-coefficient-comparison-data] are both left adjoint to the same module direct image $\\nu_{W,*}$ (sections on étale objects, with the $A$-action through the constant-section map), so they are canonically isomorphic by uniqueness of adjoints; we use this identification for $W=T,V$ throughout. All comparison hypotheses hold by step 1; $G$ is in particular bounded below.",
+   "text": "For $K\\in\\mathcal B_A(T)$, [sk-thm-pe-constructible-comparison] gives $G\\in D^b_c(T_{\\mathrm{et}},A)$ and $\\alpha:\\nu_T^*G\\xrightarrow{\\sim}K$. Step 2 matches its constructibility convention. The comparison inverse image $\\nu_T^*$ used here is canonically isomorphic to the intrinsic constant-section inverse image by the adjoint-uniqueness clause of [lem-sfb-ordinary-proetale-direct-image-plus-comparison] (with $B=A$, $X=T$); hence by [lem-pe-coefficient-comparison-derived-functor] it is the ordinary termwise inverse image followed by localization and it commutes with cohomology.",
    "uses": [
     "sk-thm-pe-constructible-comparison",
     "lem-pe-coefficient-comparison-derived-functor",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-pe-coefficient-comparison-data"
+    "lem-sfb-ordinary-proetale-direct-image-plus-comparison"
    ],
    "elementary": false,
    "source": {
@@ -59,7 +57,7 @@
    }
   },
   {
-   "text": "The coefficient ring $A$ is finite and is annihilated by $\\ell$. The image of $\\ell$ in the field $k$ is nonzero since $p\\ne\\ell$, hence is invertible. Apply [thm-dg-finite-type-constructibility] to the given morphism between finite-type $k$-schemes, with this ring $A$ and the complex $G$. It gives $H:=Rf_{\\mathrm{et},*}G\\in D^b_c(V_{\\mathrm{et}},A)$ in the ordinary derived category. The cited statement explicitly allows $f$ not separated and places no finiteness, perfection, or separable closedness assumption on $k$.",
+   "text": "The finite ring $A$ is killed by $\\ell$, and $\\ell$ is invertible in $k$ since $p\\ne\\ell$. Thus [thm-dg-finite-type-constructibility] applies to $f,G$ and gives $H:=Rf_{\\mathrm{et},*}G\\in D^b_c(V_{\\mathrm{et}},A)$. Its statement allows arbitrary $k$ and non-separated $f$.",
    "uses": [
     "thm-dg-finite-type-constructibility"
    ],
@@ -70,42 +68,16 @@
    }
   },
   {
-   "text": "We also verify that the derived direct image in the assertion exists on the full ordinary category. Use the small-site universe convention already included in the item. For each of the étale and pro-étale constant-ring sites, [lem-pur-ringed-site-grothendieck-abelian] makes the category of $A_W$-module sheaves Grothendieck abelian. By [lem-sfb-grothendieck-k-injective] every complex has a K-injective resolution. Applying [lem-weil-pbc-kinjective-total-derived] to degreewise $f_*$ followed by derived localization constructs $Rf_*$ and computes it as $f_*I$ on a K-injective representative $I$. Degreewise application of the additive functor $f_*$ respects homotopies, shifts and mapping cones, which is exactly the exact-functor hypothesis on the homotopy categories in the cited theorem.",
+   "text": "Apply [lem-sfb-ordinary-proetale-direct-image-plus-comparison] with $B=A$: it supplies the full ordinary K-injective direct images, identifies both comparison inverse images, and gives $\\nu_V^*H\\cong Rf_{\\mathrm{proet},*}\\nu_T^*G$. Composing with $Rf_*(\\alpha)$ identifies this with $Rf_*K$. By [lem-pe-coefficient-comparison-derived-functor], $\\mathcal H^q(\\nu_V^*H)\\cong\\nu_V^*\\mathcal H^q(H)$, so the finite vanishing interval of $H$ is preserved. By [sk-thm-pe-constructible-comparison] these sheaves are constructible; step 2 gives the global convention. Hence $Rf_*K\\in\\mathcal B_A(V)$.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sfb-grothendieck-k-injective",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A5 (section-unbounded), opening paragraphs; Injectives Tag 079P; Derived Categories Tag 070K (lemma-enough-K-injectives-implies)"
-   }
-  },
-  {
-   "text": "On a bounded-below input, this full-category functor agrees with the usual bounded-below right derived direct image. Indeed, the Grothendieck categories in step 5 have enough injectives by [lem-sp-grothendieck-enough-injectives]. By [lem-weil-pbc-dplus-injective-representative], any bounded-below input on either site has a bounded-below complex $I$ of injectives representing it, and this $I$ is K-injective. The usual bounded-below derived value is represented by $f_*I$; the full-category value is represented by the same $f_*I$ by [def-sfb-right-derived-functor]. Therefore comparison on $D^+$ computes the ordinary uncompleted $Rf_*$ of the item on $K$, and the ordinary étale $Rf_*$ on $G$.",
-   "uses": [
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-sfb-right-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 070K; Injectives Tag 079H"
-   }
-  },
-  {
-   "text": "Apply [prop-weil-pbc-comparison-direct-image] to the qcqs morphism $f$ and the bounded-below étale complex $G$. Together with $Rf_{\\mathrm{proet},*}(\\alpha)$ and step 6, it gives an isomorphism in the full ordinary derived category\n$$\\nu_V^*H=\\nu_V^*Rf_{\\mathrm{et},*}G\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}\\nu_T^*G\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}K.$$\nBy [lem-pe-coefficient-comparison-derived-functor], $\\mathcal H^q(\\nu_V^*H)\\cong\\nu_V^*\\mathcal H^q(H)$. By the forward direction of [sk-thm-pe-constructible-comparison], these are constructible and vanish outside the finite cohomological interval for $H$ from step 4. Step 2 identifies this constructibility with the global finite-stratification condition defining $\\mathcal B_A(V)$. Hence $Rf_*K\\in\\mathcal B_A(V)$, as required.",
-   "uses": [
-    "prop-weil-pbc-comparison-direct-image",
+    "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
     "lem-pe-coefficient-comparison-derived-functor",
     "sk-thm-pe-constructible-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.4.3; the finite-field case of the proof of Lemma 6.7.2, using the existing arbitrary-field étale finiteness theorem"
+    "place": "Lemma 5.4.3 on bounded-below inputs; ordinary total-derived interpretation using Stacks Tag 070K (derived.tex, lemma-enough-K-injectives-implies) and Tag 070J (derived.tex, lemma-bounded-below-injectives-K-injective); compare Tag 099R (proetale.tex, lemma-morphism-comparison)."
    }
   }
  ],
@@ -113,19 +85,11 @@
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-sfb-noetherian-global-constructibility",
   "sk-thm-pe-constructible-comparison",
   "lem-pe-coefficient-comparison-derived-functor",
   "thm-dg-finite-type-constructibility",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sfb-grothendieck-k-injective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-sfb-right-derived-functor",
-  "prop-weil-pbc-comparison-direct-image",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-pe-coefficient-comparison-data"
+  "lem-sfb-ordinary-proetale-direct-image-plus-comparison"
  ],
  "proof_origin": {
   "by": "document",
@@ -222,60 +186,36 @@
   "date": "2026-10-21",
   "item": "lem-sfb-finite-field-proetale-direct-image",
   "worker": "stage1",
-  "summary": "Split into seven steps using existing nodes only. Checked qcqs hypotheses without separatedness; reconciled local and global finite constructibility; descended the complex to the ordinary étale site; applied the existing arbitrary-field étale finiteness statement; identified K-injective total direct images with their D+ restrictions; and used comparison to return to the pro-étale site. No statement change or new node.",
-  "blueprint": "Realizes the finite-field geometric finiteness input extracted from the internal-Hom finiteness sentence of lem-sfb-dc-hom-preserves, via lem-sfb-finite-field-internal-hom-finiteness. It expands the ordinary Rf_* input using the finite-field specialization of Bhatt–Scholze Lemma 6.7.2 and the current blueprint thm-dg-finite-type-constructibility. The former same_as pointer to lem-sfb-dc-lower-star-preserves was removed because that node has a separated standing setting and condensed-module coefficients; it is not the same statement.",
+  "summary": "Repair of the explicit human re-split request: extract the ordinary K-injective / bounded-below intrinsic site-comparison argument into a new statement-only node. Reuse the existing global constructibility theorem for the stratification argument. Preserve the item statement and Lean record. The remaining proof is a five-step assembly under 3000 characters. Complete returned arguments and their new/existing destinations are retained in report.md.",
+  "blueprint": "Realizes the finite-field geometric finiteness input extracted from the internal-Hom finiteness sentence of lem-sfb-dc-hom-preserves, via lem-sfb-finite-field-internal-hom-finiteness. It expands the ordinary Rf_* input using the finite-field specialization of Bhatt–Scholze Lemma 6.7.2 and the current blueprint thm-dg-finite-type-constructibility. The former same_as pointer to lem-sfb-dc-lower-star-preserves was removed because that node has a separated standing setting and condensed-module coefficients; it is not the same statement. Re-split the ordinary direct-image interface into lem-sfb-ordinary-proetale-direct-image-plus-comparison; reuse lem-sfb-noetherian-global-constructibility for the local/global convention.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Geometric Noetherianity input checks the qcqs hypotheses of the comparison argument; it does not replace a finiteness step."
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    },
    {
     "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Generic geometric permanence input supplies quasi-separatedness without assuming separatedness."
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    },
    {
     "node": "lem-weil-pbc-qcqs-morphism-permanence",
-    "why": "Generic qcqs permanence gives the exact morphism hypotheses of the direct-image comparison."
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    },
    {
-    "node": "lem-weil-pbc-etale-stratification-local-gluing-core",
-    "why": "Finite global stratification gluing reconciles the item with the comparison theorem; it does not change the unit route."
+    "node": "lem-sfb-noetherian-global-constructibility",
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    },
    {
     "node": "sk-thm-pe-constructible-comparison",
-    "why": "The existing intrinsic finite-coefficient constructible comparison supplies descent to and ascent from the étale site in the finite-field finiteness argument."
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    },
    {
     "node": "lem-pe-coefficient-comparison-derived-functor",
-    "why": "The actual module inverse image and its cohomology compatibility keep the coefficient category and finite cohomological interval explicit."
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    },
    {
     "node": "thm-dg-finite-type-constructibility",
-    "why": "Existing arbitrary-field ordinary étale finiteness is precisely the geometric input to the finite-field proof of Bhatt–Scholze Lemma 6.7.2."
-   },
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Generic module-sheaf foundations justify the full ordinary derived category used in the assertion."
-   },
-   {
-    "node": "lem-sfb-grothendieck-k-injective",
-    "why": "Generic K-injective existence justifies the specified ordinary total derived functor."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Generic total-derived-functor computation identifies the K-injective construction, without a completed replacement."
-   },
-   {
-    "node": "lem-sp-grothendieck-enough-injectives",
-    "why": "Generic enough-injectives theorem is used only to compare the full and bounded-below derived constructions."
-   },
-   {
-    "node": "lem-weil-pbc-dplus-injective-representative",
-    "why": "Generic bounded-below K-injective representatives identify the two direct-image constructions on the inputs used here."
-   },
-   {
-    "node": "prop-weil-pbc-comparison-direct-image",
-    "why": "The qcqs comparison is the direct-image comparison step of the finite-coefficient Bhatt–Scholze argument."
+    "why": "Generic geometric, constructibility, or ordinary etale finiteness input in the unchanged finite-field comparison route; the new node handles only the ordinary derived comparison interface."
    }
   ]
  },
@@ -292,15 +232,16 @@
   "lem-weil-pbc-kinjective-total-derived",
   "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-dplus-injective-representative",
-  "prop-weil-pbc-comparison-direct-image"
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-sfb-noetherian-global-constructibility"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q115-f124618d7",
-  "group": "Q115",
+  "reviewer": "NT-cc-Q52-0cd3caef8",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-f124618d7 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, whose statement is unchanged, and its seven steps. There are no new nodes. I read every cited statement: the Bhatt–Scholze specialization (Lemmas 5.4.3 and 6.7.2, Theorem 6.7.1) and the current blueprint thm-dg-finite-type-constructibility, which allows an arbitrary field and non-separated f. Neither the item nor its parent is on the 2026-10-19 drop list, and no SGA source is cited. There is no cycle. No existing DAG node states the item: lem-sfb-dc-lower-star-preserves and cor-sf-direct-image-ctf-* need a separated setting, k = F̄_q or A_{E,n}, and lem-sf-integral-direct-image-constructible only covers reductions of an integral complex. Step checks: step 1 gives Noetherian and qcqs schemes and a qcqs f without separatedness. Step 2 reconciles the global-partition definition with the affine-local one on both sites, using the factorizing gluing-core statement. Steps 3, 4 and 7 descend to the étale site, apply thm-dg (ℓA = 0, ℓ is a unit in k) and come back through prop-weil-pbc-comparison-direct-image for D^+ input. Steps 5 and 6 build Rf_* with K-injectives and identify it with the D^+ functors. Fix: steps 3 and 7 used two module inverse images ν^* without any cited statement identifying them. The site-comparison one is used by the comparison theorem and the prop; the intrinsic pullback along the constant-section map is used by lem-pe-coefficient-comparison-derived-functor. I added one sentence to step 3 saying both are left adjoint to the same module ν_*, so they are canonically isomorphic. I also added the definitions def-weil-pbc-site-comparison-morphism and lem-pe-coefficient-comparison-data to its uses and proof_deps. I accept all 13 declared tool uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-0cd3caef8 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, the new node lem-sfb-ordinary-proetale-direct-image-plus-comparison, every cited statement, and the 2026-10-21 re-split note. The note asks for at least 1 new node, an assembly of at most 3000 characters, and every old argument moved into a node. The note is met, step by step. Old steps 1 and 4 are unchanged. Old step 2's gluing argument is carried by the existing lem-sfb-noetherian-global-constructibility (split and reviewed; its proof cites the factorizing gluing core). Its condition (i) is Stacks 09AJ verbatim, and over the finite field A finitely presented means finite. Old steps 5–6, the adjoint-uniqueness identification of the two ν^* from step 3, and the comparison arrow of step 7 are now clauses of the new node. The assembly is 1855 characters (2120 after my fix). The new node has no constructibility, finiteness or field content, so it does not restate the item (D1/D2 fine). The new node is true: Bhatt–Scholze Lemma 5.4.3 covers a qcqs f and D^+ input, and Remark 5.4.4 is why unbounded inputs are excluded, as the node says. The full derived functor exists because the sites are small, the module categories are Grothendieck with K-injective resolutions, and lem-weil-pbc-kinjective-total-derived applies; agreement on D^+ follows from 070J. I tested B=0, X empty, f=id and a constant sheaf over a finite field. Existing nodes do not duplicate it: prop-weil-pbc-comparison-direct-image and the canonical-mate node are D^+-only, and lem-sfb-unbounded-direct-image-comparison needs k finite or algebraically closed. In the item, step 4's thm-dg allows any k and non-separated f, with ℓ killing A and invertible in k. Step 5 composes the new node with Rf_*(α), then uses lem-pe-coefficient-comparison-derived-functor for the cohomology and sk-thm-pe for constructibility. There is no cycle, nothing cited is on the dropped list, no SGA is cited, and the 7 declared tool_uses are accepted. Fixes in fixes/dag/nodes/sec-six-functors-basics/: (1) C3: step 3 relied on the ν^* identification without citing the new node; it now cites the node's adjoint-uniqueness clause and adds it to uses. (2) B3: the new node named 'the usual bounded-below right derived direct images' and 'the usual comparison' without citing them; they now cite def-weil-pbc-direct-image, def-weil-pbc-proetale-operations and prop-weil-pbc-comparison-direct-image, and both new ids are in stmt_deps. The snapshot's dagsnap symlinks vanished during the review; I read the remaining existing nodes from clones/side-live.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FiniteFieldProEtaleDirectImage",
