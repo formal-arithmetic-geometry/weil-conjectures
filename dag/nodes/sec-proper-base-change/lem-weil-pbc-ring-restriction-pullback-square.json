@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-ring-restriction-pullback-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences (strict exchange coherence before Rlim): restriction of coefficients must preserve the pullback composition square.",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction respects the ordinary ringed pullback square",
+ "statement": "Let sq be a chosen cartesian scheme square and r,s its two coherent ringed coefficient squares [def-weil-pbc-strict-tower-operations]. Let a at each corner map the r coefficient ring to the s coefficient ring, compatibly with the four inverse-image coefficient isomorphisms [lem-weil-pbc-ring-sheaf-change-adjunction]. For every s-module M on Y, the two composites formed from r and s ordinary inverse-image square comparisons and the four restriction/pullback inverse comparisons agree. No flatness or properness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03D8: restriction and module pullback; composition coherence; lean/Sheaf/AlgebraicGeometry/ProEtaleRingRestrictionSquare.lean:250"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-tower-operations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The normalized direct-image restriction comparisons compose: unfold the sheaf restriction action and use naturality of Over.pullbackComp. The equality is sectionwise identity on the underlying modules.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take adjunction mates to identify the pullback comparisons for composites. Apply the ordinary restriction cube, including transport along the equality of the two composite coefficient maps.",
+   "uses": [
+    "lem-fix-ordinary-restriction-pullback-square",
+    "def-weil-pbc-strict-tower-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the pointwise equality in strict diagram categories via a shared termwise square construction. The exact-localization cube follows from the generic derivedCube calculation and the defining towerSquare_localization equation. These interfaces retain all strict transitions without expanding completed coefficient functors.",
+   "uses": [
+    "lem-fix-tensor-pullback-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-ordinary-restriction-pullback-square",
+  "def-weil-pbc-strict-tower-operations",
+  "lem-fix-tensor-pullback-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03D8: restriction and module pullback; composition coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules commutes with the canonical pullback compositor of a commutative square of ringed sites.",
+   "results": "SheafOfModules.restrictScalars; ModuleCat.restrictScalars; PresheafOfModules.restrictScalarsObj; ModuleCat.RestrictScalars.obj'; PresheafOfModules.restrictScalars; PresheafOfModules.map_comp; RestrictScalars.moduleOrig; RingCat.moduleCatRestrictScalarsPseudofunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical reduction pullback comparison commutes with composition of inverse images of sheaves of modules and strict towers",
+   "results": "SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-20",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionTowerPullbackIso|restriction.*[Cc]omp|scalarTensorPullbackSquare",
+   "results": "Mathlib/InformationTheory/KullbackLeibler/DataProcessing.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Topology/Algebra/ValuativeRel/ValuativeTopology.lean; Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean; Mathlib/Topology/IsClosedRestrict.lean",
+   "date": "2026-10-20",
+   "verdict": "no match: the specific normalized square is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingRestrictionSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingRestrictionSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingRestriction_square",
+  "statement": "theorem proEtaleRingRestriction_square\n    (r s : StrictTowerRingedSquare sq)\n    (aY : r.RY ⟶ s.RY) (aX : r.RX ⟶ s.RX)\n    (aY' : r.RY' ⟶ s.RY') (aX' : r.RX' ⟶ s.RX')\n    (hf : r.cf.hom ≫ aX =\n      (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map aY ≫ s.cf.hom)\n    (hg : r.cg.hom ≫ aY' =\n      (proEtaleSheafInverseImage g CommRingCat.{t + 1}).map aY ≫ s.cg.hom)\n    (hg' : r.cg'.hom ≫ aX' =\n      (proEtaleSheafInverseImage g' CommRingCat.{t + 1}).map aX ≫ s.cg'.hom)\n    (hf' : r.cf'.hom ≫ aX' =\n      (proEtaleSheafInverseImage f' CommRingCat.{t + 1}).map aY' ≫ s.cf'.hom)\n    (M : proEtaleRingModules Y s.RY) :\n    r.exchangeModuleSquare.hom.app ((proEtaleRingRestrictScalars aY).obj M) ≫\n      (proEtaleRingModulePullback g' r.RX r.RX' r.cg').map\n        ((proEtaleRingRestrictionPullbackInv f r.RY s.RY r.RX s.RX\n          aY aX r.cf s.cf hf).app M) ≫\n      (proEtaleRingRestrictionPullbackInv g' r.RX s.RX r.RX' s.RX'\n        aX aX' r.cg' s.cg' hg').app\n        ((proEtaleRingModulePullback f s.RY s.RX s.cf).obj M) =\n    (proEtaleRingModulePullback f' r.RY' r.RX' r.cf').map\n        ((proEtaleRingRestrictionPullbackInv g r.RY s.RY r.RY' s.RY'\n          aY aY' r.cg s.cg hg).app M) ≫\n      (proEtaleRingRestrictionPullbackInv f' r.RY' s.RY' r.RX' s.RX'\n        aY' aX' r.cf' s.cf' hf').app\n        ((proEtaleRingModulePullback g s.RY s.RY' s.cg).obj M) ≫\n      (proEtaleRingRestrictScalars aX').map (s.exchangeModuleSquare.hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage3 N2",
+  "summary": "The stated comparison is proved in Lean from the cited declarations and categorical identities.",
+  "blueprint": "Completed exchange coherence, first two proof sentences, strict normalization before Rlim.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-ordinary-restriction-pullback-square",
+    "why": "Generic coefficient restriction, exact localization, or resolution tool used on the particular pro-etale module/tower categories; it supplies no alternate geometric unit route."
+   },
+   {
+    "node": "lem-fix-tensor-pullback-square",
+    "why": "Generic exact-localization cube, used to descend the ordinary strict restriction square; no geometric unit is bypassed."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

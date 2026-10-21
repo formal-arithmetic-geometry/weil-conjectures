@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-finite-reduction-pullback-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences (strict exchange coherence before Rlim): finite coefficient reduction comparisons before passing to strict tower maps.",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite reduction respects the inverse-image square",
+ "statement": "For an adic coefficient datum d and chosen cartesian square sq [def-weil-pbc-four-corners], fix a coefficient level n and M in D(A_Y). The four normalized finite reduction/pullback isomorphisms χ commute with the integral and finite canonical ambient inverse-image squares. Explicitly χ_g then χ_f′ then reduction of the integral square equals the finite square then χ_f then χ_g′, with whiskering as in the Lean signature. No properness, completeness, or etale-origin hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0E48: inverse-image composition and compatible coefficient change; lean/Sheaf/Paper/FiniteReductionPullbackSquare.lean:251"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary restriction pullback square to the integral and quotient ringed coefficient systems. Invert its geometric compositors and localize its exact functors.",
+   "uses": [
+    "lem-weil-pbc-ring-restriction-pullback-square",
+    "lem-fix-tensor-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take mates under the derived extension/restriction adjunctions. Naturality of mates gives the reduction square, and ambientSquare_localization identifies its exact and canonical geometric faces.",
+   "uses": [
+    "lem-weil-pbc-ringed-square-localization",
+    "lem-fix-tensor-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize to the four completed coefficient projections d.projection. Their compatibility is d.projection_comm. The defined finite χ is the resulting normalized mate.",
+   "uses": [
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-restriction-pullback-square",
+  "lem-fix-tensor-pullback-square",
+  "lem-weil-pbc-ringed-square-localization",
+  "def-weil-pbc-four-corners"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0E48: inverse-image composition and compatible coefficient change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension and normalized reduction of strict towers commute with composition of inverse images of sheaves of modules.",
+   "results": "SheafOfModules.sheafificationCompPullback; PresheafOfModules.pullback; LinearEquiv.extendScalarsOfIsLocalizationEquiv; Derivation.instIsScalarTower; SheafOfModules.restrictScalars_map_val; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars; Algebra.Extension.instIsScalarTowerRing",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient reduction pullback comparisons commute around a cartesian square of schemes",
+   "results": "AlgebraicGeometry.Scheme.Pullback.t'_fst_snd; AlgebraicGeometry.Scheme.Pullback.t'; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst; AlgebraicGeometry.Scheme.Pullback.t'_snd_snd; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionPullbackIso|conjugateEquiv_pullbackComp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionPullbackSquare",
+  "file": "lean/Sheaf/Paper/FiniteReductionPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteReductionPullback_square",
+  "statement": "theorem finiteReductionPullback_square\n    (sq : ChosenCartesianSquare g' f' f g) (n : ℕ) (M : d.derived Y) :\n    (d.finitePull f' n).map ((d.chi g n).hom.app M) ≫\n      (d.chi f' n).hom.app ((d.pull g).obj M) ≫\n      (d.reduction X' n).map\n        ((proEtaleAmbientRingedPullbackComparison sq\n          (d.completedRing X) (d.completedRing Y)\n          (d.completedRing X') (d.completedRing Y')\n          (d.integralRingIso f) (d.integralRingIso g)\n          (d.integralRingIso g') (d.integralRingIso f')\n          (d.integral_coherent sq)).hom.app M) =\n    (proEtaleAmbientRingedPullbackComparison sq\n        (d.finiteRing X n) (d.finiteRing Y n)\n        (d.finiteRing X' n) (d.finiteRing Y' n)\n        (d.finiteRingIso f n) (d.finiteRingIso g n)\n        (d.finiteRingIso g' n) (d.finiteRingIso f' n)\n        (d.finite_coherent sq n)).hom.app ((d.reduction Y n).obj M) ≫\n      (d.finitePull g' n).map ((d.chi f n).hom.app M) ≫\n      (d.chi g' n).hom.app ((d.pull f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage3 N2",
+  "summary": "The stated comparison is proved in Lean from the cited declarations and categorical identities.",
+  "blueprint": "Completed exchange coherence, first two proof sentences, strict normalization before Rlim.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-tensor-pullback-square",
+    "why": "Generic coefficient restriction, exact localization, or resolution tool used on the particular pro-etale module/tower categories; it supplies no alternate geometric unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

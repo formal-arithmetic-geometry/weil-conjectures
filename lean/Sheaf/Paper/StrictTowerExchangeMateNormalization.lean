@@ -11,8 +11,13 @@ public import Sheaf.Paper.CompletedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import all Sheaf.CategoryTheory.ExchangeMateCube
+import all Sheaf.AlgebraicGeometry.ProEtaleRingRestrictionSquare
+import Sheaf.Paper.CompletedReductionPullbackSquare
+import all Sheaf.Paper.FiniteReductionExchangeRectangle
 import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
 import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
@@ -41,11 +46,17 @@ comparisons retain their normalization on ordinary modules and K-injectives.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+-- Avoid replaying the large dependent coefficient transports for tactic linting.
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
+attribute [local irreducible] completedAdicDerivedChange
+
 
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
@@ -76,6 +87,7 @@ private theorem exchangeAdjunctCompComparison {C D E : Type*}
     adjg.homEquiv_naturality_right, Equiv.apply_symm_apply]
   simp only [Category.assoc]
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem exchangeConstantComparisonComp {X Y Z : Scheme.{t}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (A : CommRingCat.{t + 1}) :
     (proEtaleConstantComparison (f ≫ g)).app A =
@@ -336,6 +348,26 @@ abbrev exchangeConstantPush {U V : Scheme.{t}} (f : U ⟶ V) :=
   exchangeTowerPush f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
+/-- The ordinary scalar-restriction comparison before forming strict diagrams.
+Source: Stacks Tag 0D6D
+(blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
+def exchangeOrdinaryResPull {U V : Scheme.{t}} (f : U ⟶ V) :
+    proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
+        (d.integralRingIso f) ⋙ proEtaleRingRestrictScalars (exchangeScalar d U) ≅
+      proEtaleRingRestrictScalars (exchangeScalar d V) ⋙
+        proEtaleRingModulePullback f (exchangeConstantRing V A)
+          (exchangeConstantRing U A) (exchangeConstantIso f A) :=
+  (@asIso _ _ _ _ (proEtaleRingRestrictionPullbackInv f
+    (exchangeConstantRing V A) (d.completedRing V)
+    (exchangeConstantRing U A) (d.completedRing U)
+    (exchangeScalar d V) (exchangeScalar d U)
+    (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f))
+    (proEtaleRingRestrictionPullbackInv_isIso f
+      (exchangeConstantRing V A) (d.completedRing V)
+      (exchangeConstantRing U A) (d.completedRing U)
+      (exchangeScalar d V) (exchangeScalar d U)
+      (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f))).symm
+
 /-- The ordinary restriction/pullback comparison is the termwise normalized module mate.
 Source: strict normalization, proof step 5; Stacks 0D6D
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
@@ -343,17 +375,12 @@ def exchangeModuleResPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerModulePull f ⋙ exchangeTowerModuleRes d U ≅
       exchangeTowerModuleRes d V ⋙ exchangeTowerModulePull f
         (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A) :=
-  ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
-    (@asIso _ _ _ _ (proEtaleRingRestrictionPullbackInv f
-      (exchangeConstantRing V A) (d.completedRing V)
-      (exchangeConstantRing U A) (d.completedRing U)
-      (exchangeScalar d V) (exchangeScalar d U)
-      (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f))
-      (proEtaleRingRestrictionPullbackInv_isIso f
-        (exchangeConstantRing V A) (d.completedRing V)
-        (exchangeConstantRing U A) (d.completedRing U)
-        (exchangeScalar d V) (exchangeScalar d U)
-        (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f)))).symm
+  NatIso.ofComponents
+    (fun M ↦ Functor.isoWhiskerLeft M (exchangeOrdinaryResPull d f)) (by
+      intro M N a
+      apply NatTrans.ext
+      funext n
+      exact (exchangeOrdinaryResPull d f).hom.naturality (a.app n))
 
 /-- The derived comparison is exact descent of the ordinary identity on inverse-image sheaves.
 Source: strict normalization, proof step 5; Stacks 0D6D
@@ -361,12 +388,7 @@ Source: strict normalization, proof step 5; Stacks 0D6D
 def exchangeResPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerPull f ⋙ exchangeTowerRes d U ≅
       exchangeTowerRes d V ⋙ exchangeConstantPull (A := A) f :=
-  (Functor.mapDerivedCategoryCompIso (d.towerModulePull f)
-    (exchangeTowerModuleRes d U)).symm ≪≫
-  Functor.mapDerivedCategoryNatIso (exchangeModuleResPull d f) ≪≫
-  Functor.mapDerivedCategoryCompIso (exchangeTowerModuleRes d V)
-    (exchangeTowerModulePull f (exchangeConstantRing V A) (exchangeConstantRing U A)
-      (exchangeConstantIso f A))
+  Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d f)
 
 /-- The canonical right-derived unit on strict tower complexes, using complex localization.
 Source: strict normalization, proof step 5; Stacks 07A5
@@ -398,6 +420,43 @@ def exchangeModuleResPush {U V : Scheme.{t}} (f : U ⟶ V) :
       (exchangeScalar d V) (exchangeScalar d U)
       (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f))
 
+/-- The complex-level unit of a total right derived functor.
+Source: Stacks Tag 07A5
+(blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
+def exchangeDerivedUnit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
+    (R : C ⥤ D) [R.Additive] (K : CochainComplex C ℤ) :
+    DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj K) ⟶
+      R.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) :=
+  (DerivedCategory.quotientCompQhIso D).inv.app _ ≫
+    R.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
+    R.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app K)
+
+/-- Unit normalization of exact descent of a right-adjoint comparison.
+Source: Stacks Tags 07A5 and 099M
+(blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
+def ExchangeDerivedPushNormalized
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D]
+    (R : B ⥤ A) (R' : D ⥤ C) (G : A ⥤ C) (H : B ⥤ D)
+    [R.Additive] [R'.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (τ : R ⋙ G ≅ H ⋙ R')
+    (e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
+      H.mapDerivedCategory ⋙ R'.rightDerivedFunctor) : Prop :=
+  ∀ K : CochainComplex B ℤ,
+    G.mapDerivedCategory.map (exchangeDerivedUnit R K) ≫
+      e.hom.app (DerivedCategory.Q.obj K) ≫
+      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
+    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
+      exchangeDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K)
+
 /-- Normalization of the direct-image comparison by the universal right-derived units.
 It records the identity on the full diagram before deriving, rather than evaluations alone.
 Source: strict normalization, proof step 5; Stacks 0D6E
@@ -405,20 +464,77 @@ Source: strict normalization, proof step 5; Stacks 0D6E
 def ExchangeResPushNormalized {U V : Scheme.{t}} (f : U ⟶ V)
     (e : d.towerPush f ⋙ exchangeTowerRes d V ≅
       exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f) : Prop :=
-  ∀ C : CochainComplex (exchangeTowers U (d.completedRing U)) ℤ,
-    (exchangeTowerRes d V).map
-        (exchangeTowerDerivedUnit f (d.completedRing V) (d.completedRing U)
-          (d.integralRingIso f) C) ≫
-      e.hom.app (DerivedCategory.Q.obj C) ≫
-      (exchangeConstantPush (A := A) f).map
-        ((exchangeTowerModuleRes d U).mapDerivedCategoryFactors.hom.app C) =
-    (exchangeTowerModuleRes d V).mapDerivedCategoryFactors.hom.app
-        (((d.towerModulePush f).mapHomologicalComplex (.up ℤ)).obj C) ≫
+  ExchangeDerivedPushNormalized (d.towerModulePush f)
+    (exchangeTowerModulePush f (exchangeConstantRing V A) (exchangeConstantRing U A)
+      (exchangeConstantIso f A))
+    (exchangeTowerModuleRes d V) (exchangeTowerModuleRes d U) (exchangeModuleResPush d f) e
+
+
+section ExactDerivedMate
+
+variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+
+@[irreducible] private def exactDerivedMate
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H) :
+    R.rightDerivedFunctor ⋙ G.mapDerivedCategory ⟶
+      H.mapDerivedCategory ⋙ R'.rightDerivedFunctor :=
+  (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+    adj'.mapDerivedCategoryRightDerivedAdjunction
+    (TwoSquare.mk _ _ _ _
+      (Functor.mapDerivedCategorySquareIso s).hom)).natTrans
+
+omit [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D] in
+private theorem exactDerivedSquare_symm
+    (s : G ⋙ L' ≅ L ⋙ H) :
+    (Functor.mapDerivedCategorySquareIso s.symm).hom =
+      (Functor.mapDerivedCategorySquareIso s).inv := by
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
+
+private theorem exactDerivedMate_factors
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
+    (τ : R ⋙ G ≅ H ⋙ R')
+    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom)
+    (K : CochainComplex B ℤ) :
+    G.mapDerivedCategory.map (exchangeDerivedUnit R K) ≫
+      (exactDerivedMate adj adj' s).app (DerivedCategory.Q.obj K) ≫
+      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
+    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex (exchangeModuleResPush d f) (.up ℤ)).hom.app C) ≫
-      exchangeTowerDerivedUnit f (exchangeConstantRing V A) (exchangeConstantRing U A)
-        (exchangeConstantIso f A)
-        (((exchangeTowerModuleRes d U).mapHomologicalComplex (.up ℤ)).obj C)
+        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
+      exchangeDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
+  rw [exactDerivedMate]
+  have h := derived_mate_factors adj adj' s K
+  rw [hs] at h
+  exact h
+
+private theorem exactDerivedMate_eq
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
+    (τ : R ⋙ G ≅ H ⋙ R')
+    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom)
+    (e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
+      H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
+    (he : ExchangeDerivedPushNormalized R R' G H τ e) :
+    e.hom = exactDerivedMate adj adj' s := by
+  apply derived_comp_ext R G (H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
+  intro K
+  apply (cancel_mono (R'.rightDerivedFunctor.map
+    (H.mapDerivedCategoryFactors.hom.app K))).mp
+  simpa only [exchangeDerivedUnit, chainDerivedUnit, Category.assoc] using
+    (he K).trans (exactDerivedMate_factors adj adj' s τ hs K).symm
+
+end ExactDerivedMate
 
 set_option backward.isDefEq.respectTransparency.types false in
 -- A normalized ordinary mate descends uniquely when the exact vertical functor
@@ -441,42 +557,20 @@ private theorem exactDerivedMate_existsUnique
     (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom) :
     ∃! e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
         H.mapDerivedCategory ⋙ R'.rightDerivedFunctor,
-      ∀ K : CochainComplex B ℤ,
-    G.mapDerivedCategory.map (chainDerivedUnit R K) ≫
-      e.hom.app (DerivedCategory.Q.obj K) ≫
-      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
-    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
-      chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
-  let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-    adj'.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _
-      ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans
-  have hn (K : CochainComplex B ℤ) :
-    G.mapDerivedCategory.map (chainDerivedUnit R K) ≫
-      m.app (DerivedCategory.Q.obj K) ≫
-      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
-    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
-      chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
-    have h := derived_mate_factors adj adj' s K
-    rw [hs] at h
-    exact h
+      ExchangeDerivedPushNormalized R R' G H τ e := by
+  let m := exactDerivedMate adj adj' s
+  have hn := exactDerivedMate_factors adj adj' s τ hs
   have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
       IsIso (m.app (DerivedCategory.Q.obj I)) := by
-    have : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
-    have : IsIso (chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I)) :=
+    have : IsIso (exchangeDerivedUnit R I) := chainDerivedUnit_isIso R I
+    have : IsIso (exchangeDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I)) :=
       chainDerivedUnit_isIso R' _
-    have : IsIso (G.mapDerivedCategory.map (chainDerivedUnit R I) ≫
+    have : IsIso (G.mapDerivedCategory.map (exchangeDerivedUnit R I) ≫
         m.app (DerivedCategory.Q.obj I) ≫
         R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I)) := by
       rw [hn I]
       infer_instance
-    have := IsIso.of_isIso_comp_left (G.mapDerivedCategory.map (chainDerivedUnit R I))
+    have := IsIso.of_isIso_comp_left (G.mapDerivedCategory.map (exchangeDerivedUnit R I))
       (m.app (DerivedCategory.Q.obj I) ≫
         R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I))
     exact IsIso.of_isIso_comp_right _
@@ -494,7 +588,8 @@ private theorem exactDerivedMate_existsUnique
   intro K
   apply (cancel_mono (R'.rightDerivedFunctor.map
     (H.mapDerivedCategoryFactors.hom.app K))).mp
-  simpa only [Category.assoc, asIso_hom] using (he K).trans (hn K).symm
+  simpa only [exchangeDerivedUnit, chainDerivedUnit, Category.assoc, asIso_hom] using
+    (he K).trans (hn K).symm
 
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem exchangeModuleResPull_mate {U V : Scheme.{t}} (f : U ⟶ V) :
@@ -532,7 +627,9 @@ theorem exchangeResPush_existsUnique {U V : Scheme.{t}} (f : U ⟶ V) :
       ExchangeResPushNormalized d f e := by
   have : (exchangeTowerModuleRes d U).PreservesKInjectiveComplexes :=
     exchangeTowerModuleRes_kinjective d U
-  exact exactDerivedMate_existsUnique (d.towerModuleAdjunction f)
+  exact exactDerivedMate_existsUnique
+    (G := exchangeTowerModuleRes d V) (H := exchangeTowerModuleRes d U)
+    (d.towerModuleAdjunction f)
     (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
       (exchangeConstantRing U A) (exchangeConstantIso f A))
     (exchangeModuleResPull d f).symm (exchangeModuleResPush d f)
@@ -545,6 +642,39 @@ def exchangeResPush {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerPush f ⋙ exchangeTowerRes d V ≅
       exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f :=
   (exchangeResPush_existsUnique d f).choose
+
+private theorem exchangeResPull_eq {U V : Scheme.{t}} (f : U ⟶ V) :
+    exchangeResPull d f = Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d f) :=
+  rfl
+
+private theorem integralTowerAdjunction_eq {U V : Scheme.{t}} (f : U ⟶ V) :
+    d.towerAdjunction f = (d.towerModuleAdjunction f).mapDerivedCategoryRightDerivedAdjunction :=
+  rfl
+
+private theorem constantTowerAdjunction_eq {U V : Scheme.{t}} (f : U ⟶ V) :
+    exchangeTowerAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso f A) =
+      (exchangeTowerModuleAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso f A)).mapDerivedCategoryRightDerivedAdjunction := rfl
+
+private theorem exchangeResPush_mate {U V : Scheme.{t}} (f : U ⟶ V) :
+    (exchangeResPush d f).hom =
+      (mateEquiv (d.towerAdjunction f)
+        (exchangeTowerAdjunction f (exchangeConstantRing V A)
+          (exchangeConstantRing U A) (exchangeConstantIso f A))
+        (TwoSquare.mk _ _ _ _ (exchangeResPull d f).inv)).natTrans := by
+  have h := exactDerivedMate_eq
+    (G := exchangeTowerModuleRes d V) (H := exchangeTowerModuleRes d U)
+    (d.towerModuleAdjunction f)
+    (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso f A))
+    (exchangeModuleResPull d f).symm (exchangeModuleResPush d f)
+    (exchangeModuleResPull_mate d f) (exchangeResPush d f)
+    (exchangeResPush_existsUnique d f).choose_spec.1
+  rw [exactDerivedMate, exactDerivedSquare_symm] at h
+  rw [exchangeResPull_eq, integralTowerAdjunction_eq, constantTowerAdjunction_eq]
+  exact h
+
 
 /-- The left strict corner comparison, natural in the complete input tower.
 Source: strict normalization, final paragraph; Stacks 0D6D--0D6E
@@ -628,6 +758,240 @@ def exchangeStrictNatTrans (sq : ChosenCartesianSquare g' f' f g) :
   app K := d.towerV' sq K
   naturality _K _L a := exchangeStrict_naturality d sq a
 
+private theorem towerProjection_mate {U V : Scheme.{t}} (u : U ⟶ V)
+    (E : d.derived U) :
+    (mateEquiv
+      (proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+        (d.integralRingIso u)) (d.towerAdjunction u)
+      (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso u).hom)).app E =
+      d.towerProjection u E :=
+  mate_app_eq_adjunct
+    (proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+      (d.integralRingIso u)) (d.towerAdjunction u)
+    (d.reductionTowerPullbackIso u).hom E
+
+private theorem integralTowerExchange_mate_nat
+    (sq : ChosenCartesianSquare g' f' f g) :
+    (mateEquiv (d.towerAdjunction f) (d.towerAdjunction f')
+      (TwoSquare.mk (d.towerPull g) (d.towerPull f) (d.towerPull f') (d.towerPull g')
+        (d.integralTowerRingedSquare sq).exchangeTowerSquare.hom)).natTrans =
+      (d.integralTowerRingedSquare sq).exchangeTowerMate := rfl
+
+private theorem constantTowerExchange_mate_nat
+    (sq : ChosenCartesianSquare g' f' f g) :
+    (mateEquiv
+      (exchangeTowerAdjunction f (exchangeConstantRing Y A)
+        (exchangeConstantRing X A) (exchangeConstantIso f A))
+      (exchangeTowerAdjunction f' (exchangeConstantRing Y' A)
+        (exchangeConstantRing X' A) (exchangeConstantIso f' A))
+      (TwoSquare.mk (exchangeConstantPull (A := A) g) (exchangeConstantPull (A := A) f)
+        (exchangeConstantPull (A := A) f') (exchangeConstantPull (A := A) g')
+        (exchangeConstantSquare (A := A) sq).exchangeTowerSquare.hom)).natTrans =
+      (exchangeConstantSquare (A := A) sq).exchangeTowerMate := rfl
+
+private def towerProjectionNat {U V : Scheme.{t}} (u : U ⟶ V) :
+    d.push u ⋙ completedReductionTower V d ⟶
+      completedReductionTower U d ⋙ d.towerPush u where
+  app E := d.towerProjection u E
+  naturality E E' a := (d.towerProjection_properties u E).2.1 E' a
+
+private theorem towerProjectionNat_mate {U V : Scheme.{t}} (u : U ⟶ V) :
+    (mateEquiv
+      (proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+        (d.integralRingIso u)) (d.towerAdjunction u)
+      (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso u).hom)).natTrans =
+      towerProjectionNat d u := by
+  apply NatTrans.ext
+  funext E
+  exact towerProjection_mate d u E
+
+private theorem completedRectangle_nat (sq : ChosenCartesianSquare g' f' f g) :
+    Functor.whiskerRight (towerProjectionNat d f) (d.towerPull g) ≫
+      Functor.whiskerLeft (completedReductionTower X d)
+        (d.integralTowerRingedSquare sq).exchangeTowerMate =
+    Functor.whiskerLeft (d.push f) (d.reductionTowerPullbackIso g).hom ≫
+      Functor.whiskerRight (d.integralExchange sq) (completedReductionTower Y' d) ≫
+      Functor.whiskerLeft (d.pull g') (towerProjectionNat d f') ≫
+      Functor.whiskerRight (d.reductionTowerPullbackIso g').inv (d.towerPush f') := by
+  exact exchangeMate_forward_nat_coherent
+    (F := d.pull f) (R := d.push f) (K := d.pull f') (S := d.push f')
+    (F' := d.towerPull f) (R' := d.towerPush f)
+    (K' := d.towerPull f') (S' := d.towerPush f')
+    (G := d.pull g) (H := d.pull g') (G' := d.towerPull g) (H' := d.towerPull g')
+    (proEtaleRingDerivedAdjunction f (d.completedRing Y) (d.completedRing X)
+      (d.integralRingIso f))
+    (proEtaleRingDerivedAdjunction f' (d.completedRing Y') (d.completedRing X')
+      (d.integralRingIso f'))
+    (d.towerAdjunction f) (d.towerAdjunction f')
+    (completedReductionTower Y d) (completedReductionTower X d)
+    (completedReductionTower Y' d) (completedReductionTower X' d)
+    (d.reductionTowerPullbackIso f) (d.reductionTowerPullbackIso g)
+    (d.reductionTowerPullbackIso g') (d.reductionTowerPullbackIso f')
+    (proEtaleAmbientRingedPullbackComparison sq
+      (d.completedRing X) (d.completedRing Y) (d.completedRing X') (d.completedRing Y')
+      (d.integralRingIso f) (d.integralRingIso g) (d.integralRingIso g')
+      (d.integralRingIso f') (d.integral_coherent sq)).hom
+    (d.integralTowerRingedSquare sq).exchangeTowerSquare.hom
+    (completedReductionPullback_square d sq)
+    (towerProjectionNat d f) (towerProjectionNat d f')
+    (d.integralExchange sq) (d.integralTowerRingedSquare sq).exchangeTowerMate
+    (integralExchange_mate d sq) (integralTowerExchange_mate_nat d sq)
+    (towerProjectionNat_mate d f) (towerProjectionNat_mate d f')
+
+private theorem completedExchange_mate
+    (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
+    d.towerV' sq K = (d.integralTowerRingedSquare sq).exchangeTowerMate.app
+      ((completedReductionTower X d).obj K) := by
+  have h := congrArg (fun z ↦ z.app K) (completedRectangle_nat d sq)
+  apply (cancel_epi (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom).1
+  simp only [AdicCoefficientDatum.towerV', Iso.hom_inv_id_assoc]
+  simpa only [AdicCoefficientDatum.towerV, AdicCoefficientDatum.towerH,
+    AdicCoefficientDatum.towerH', Iso.trans_hom, asIso_hom, Functor.mapIso_hom,
+    Iso.app_hom, Iso.symm_hom, Iso.symm_inv, Category.assoc,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    towerProjectionNat] using h.symm
+
+private theorem termwisePull_additive {U V : Scheme.{t}} (u : U ⟶ V)
+    (R : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
+    (S : Sheaf (ProEt.topology U) CommRingCat.{t + 1})
+    (e : (proEtaleSheafInverseImage u CommRingCat.{t + 1}).obj R ≅ S) :
+    (exchangeTowerModulePull u R S e).Additive := by
+  infer_instance
+
+attribute [local instance] termwisePull_additive
+
+-- Keep the standard tower localization visible when specializing the ringed square.
+attribute [local instance 2000] exchangeTowers_hasDerived
+
+private theorem exchangeResPull_square
+    (sq : ChosenCartesianSquare g' f' f g) :
+    Functor.whiskerRight (exchangeResPull d g).inv (exchangeConstantPull (A := A) f') ≫
+      Functor.whiskerLeft (d.towerPull g) (exchangeResPull d f').inv ≫
+      Functor.whiskerRight (d.integralTowerRingedSquare sq).exchangeTowerSquare.hom
+        (exchangeTowerRes d X') =
+    Functor.whiskerLeft (exchangeTowerRes d Y)
+        (exchangeConstantSquare (A := A) sq).exchangeTowerSquare.hom ≫
+      Functor.whiskerRight (exchangeResPull d f).inv (exchangeConstantPull (A := A) g') ≫
+      Functor.whiskerLeft (d.towerPull f) (exchangeResPull d g').inv := by
+  let r := exchangeConstantSquare (A := A) sq
+  let s := d.integralTowerRingedSquare sq
+  have ho := restrictionTowerCube_nat r s
+    (exchangeScalar d Y) (exchangeScalar d X)
+    (exchangeScalar d Y') (exchangeScalar d X')
+    (exchangeScalar_comm d f) (exchangeScalar_comm d g)
+    (exchangeScalar_comm d g') (exchangeScalar_comm d f')
+  have hd := derivedCube_nat
+    (C₀ := exchangeTowers Y (exchangeConstantRing Y A))
+    (C₁ := exchangeTowers Y' (exchangeConstantRing Y' A))
+    (C₂ := exchangeTowers X (exchangeConstantRing X A))
+    (C₃ := exchangeTowers X' (exchangeConstantRing X' A))
+    (D₀ := exchangeTowers Y (d.completedRing Y))
+    (D₁ := exchangeTowers Y' (d.completedRing Y'))
+    (D₂ := exchangeTowers X (d.completedRing X))
+    (D₃ := exchangeTowers X' (d.completedRing X'))
+    (R₀ := exchangeTowerModuleRes d Y) (R₁ := exchangeTowerModuleRes d Y')
+    (R₂ := exchangeTowerModuleRes d X) (R₃ := exchangeTowerModuleRes d X')
+    (J := exchangeTowerModulePull g (exchangeConstantRing Y A)
+      (exchangeConstantRing Y' A) (exchangeConstantIso g A))
+    (H := exchangeTowerModulePull f' (exchangeConstantRing Y' A)
+      (exchangeConstantRing X' A) (exchangeConstantIso f' A))
+    (G := exchangeTowerModulePull f (exchangeConstantRing Y A)
+      (exchangeConstantRing X A) (exchangeConstantIso f A))
+    (I := exchangeTowerModulePull g' (exchangeConstantRing X A)
+      (exchangeConstantRing X' A) (exchangeConstantIso g' A))
+    (J' := d.towerModulePull g) (H' := d.towerModulePull f')
+    (G' := d.towerModulePull f) (I' := d.towerModulePull g')
+    (exchangeModuleResPull d g).symm (exchangeModuleResPull d f').symm
+    (exchangeModuleResPull d f).symm (exchangeModuleResPull d g').symm
+    (termwiseSquareIso r.exchangeModuleSquare)
+    (termwiseSquareIso s.exchangeModuleSquare) ho
+  erw [towerSquare_localization r, towerSquare_localization s] at hd
+  simpa only [exchangeResPull, exactDerivedSquare_symm, r, s] using hd.symm
+
+private theorem restrictedExchange_mate
+    (sq : ChosenCartesianSquare g' f' f g)
+    (M : DerivedCategory (exchangeTowers X (d.completedRing X))) :
+    (exchangeTowerRes d Y').map
+        ((d.integralTowerRingedSquare sq).exchangeTowerMate.app M) ≫
+      (exchangeCornerD d g' f').hom.app M =
+    (exchangeCornerB d f g).hom.app M ≫
+      (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
+        ((exchangeTowerRes d X).obj M) := by
+  have h := exchangeMate_cube_nat_coherent
+    (F := d.towerPull f) (R := d.towerPush f)
+    (K := d.towerPull f') (S := d.towerPush f')
+    (G := d.towerPull g) (H := d.towerPull g')
+    (F' := exchangeConstantPull (A := A) f)
+    (R' := exchangeConstantPush (A := A) f)
+    (K' := exchangeConstantPull (A := A) f')
+    (S' := exchangeConstantPush (A := A) f')
+    (G' := exchangeConstantPull (A := A) g)
+    (H' := exchangeConstantPull (A := A) g')
+    (d.towerAdjunction f) (d.towerAdjunction f')
+    (exchangeTowerAdjunction f _ _ (exchangeConstantIso f A))
+    (exchangeTowerAdjunction f' _ _ (exchangeConstantIso f' A))
+    (exchangeTowerRes d Y) (exchangeTowerRes d X)
+    (exchangeTowerRes d Y') (exchangeTowerRes d X')
+    (exchangeResPull d f) (exchangeResPull d g)
+    (exchangeResPull d g') (exchangeResPull d f')
+    (d.integralTowerRingedSquare sq).exchangeTowerSquare.hom
+    (exchangeConstantSquare (A := A) sq).exchangeTowerSquare.hom
+    (exchangeResPull_square d sq)
+    (exchangeResPush d f).hom (exchangeResPush d f').hom
+    (d.integralTowerRingedSquare sq).exchangeTowerMate
+    (exchangeConstantSquare (A := A) sq).exchangeTowerMate
+    (integralTowerExchange_mate_nat d sq)
+    (constantTowerExchange_mate_nat (A := A) sq)
+    (exchangeResPush_mate d f).symm (exchangeResPush_mate d f').symm
+  have hM := congrArg (fun z ↦ z.app M) h
+  simpa only [exchangeCornerB, exchangeCornerD, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Iso.symm_hom,
+    Category.id_comp, Category.comp_id, Category.assoc] using hM
+
+private theorem comparisonNaturality
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    (T : C ⥤ D) (Q : C ⥤ E) (ev : D ⥤ F) (res : E ⥤ F)
+    (β : T ⋙ ev ⟶ Q ⋙ res) {M N : C} (e : M ⟶ N)
+    {U : D} {V : E} (a : U ≅ T.obj M) (b : V ≅ Q.obj M) :
+    ev.map (a.hom ≫ T.map e) ≫ β.app N =
+      (ev.map a.hom ≫ β.app M ≫ res.map b.inv) ≫
+        res.map (b.hom ≫ Q.map e) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← res.map_comp_assoc, b.inv_hom_id, res.map_id, Category.id_comp]
+  exact congrArg (fun z ↦ ev.map a.hom ≫ z) (β.naturality e)
+
+private theorem fourCornerTransport
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (ev : C ⥤ E) (res : D ⥤ E) (c : Fin 4 → C) (d : Fin 4 → D)
+    (h : c 0 ≅ c 1) (h' : c 2 ≅ c 3) (v : c 0 ⟶ c 2)
+    (H : d 0 ≅ d 1) (H' : d 2 ≅ d 3) (V : d 0 ⟶ d 2) (V' : d 1 ⟶ d 3)
+    (hr : H.hom ≫ V' = V ≫ H'.hom)
+    (a0 : ev.obj (c 0) ≅ res.obj (d 0))
+    (a2 : ev.obj (c 2) ≅ res.obj (d 2))
+    (hv : ev.map v ≫ a2.hom = a0.hom ≫ res.map V) :
+    ∃ α : ∀ i, ev.obj (c i) ≅ res.obj (d i),
+      ev.map h.hom ≫ (α 1).hom = (α 0).hom ≫ res.map H.hom ∧
+      ev.map h'.hom ≫ (α 3).hom = (α 2).hom ≫ res.map H'.hom ∧
+      ev.map v ≫ (α 2).hom = (α 0).hom ≫ res.map V ∧
+      ev.map (h.inv ≫ v ≫ h'.hom) ≫ (α 3).hom =
+        (α 1).hom ≫ res.map V' := by
+  let a1 := ev.mapIso h.symm ≪≫ a0 ≪≫ res.mapIso H
+  let a3 := ev.mapIso h'.symm ≪≫ a2 ≪≫ res.mapIso H'
+  let α : ∀ i, ev.obj (c i) ≅ res.obj (d i) :=
+    Fin.cases a0 (Fin.cases a1 (Fin.cases a2 (Fin.cases a3 (fun i ↦ Fin.elim0 i))))
+  refine ⟨α, ?_, ?_, hv, ?_⟩
+  · change ev.map h.hom ≫ a1.hom = a0.hom ≫ res.map H.hom
+    simp [a1, ← ev.map_comp_assoc]
+  · change ev.map h'.hom ≫ a3.hom = a2.hom ≫ res.map H'.hom
+    simp [a3, ← ev.map_comp_assoc]
+  · change ev.map (h.inv ≫ v ≫ h'.hom) ≫ a3.hom = a1.hom ≫ res.map V'
+    simp only [Functor.map_comp, a1, a3, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.symm_hom, Category.assoc]
+    rw [← ev.map_comp_assoc h'.hom h'.inv, h'.hom_inv_id, ev.map_id, Category.id_comp]
+    rw [reassoc_of% hv, ← res.map_comp, ← hr, res.map_comp]
+
 /-- Strict tower exchange, normalized by projection formulas, agrees with the
 canonical constant-coefficient mate under the specified corner comparisons.
 The first conjunct explicitly fixes v prime as H inverse, R(e), H prime, with
@@ -707,6 +1071,41 @@ theorem strictTowerExchangeMateNormalization
       (exchangeCornerB d f g).hom.app ((completedReductionTower X d).obj K) ≫
         (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
           ((exchangeTowerRes d X).obj ((completedReductionTower X d).obj K)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · simp only [AdicCoefficientDatum.towerV', AdicCoefficientDatum.towerH,
+      AdicCoefficientDatum.towerV, AdicCoefficientDatum.towerH',
+      exchangeRealizationH, exchangeRealizationHPrime, Iso.trans_inv, Iso.trans_hom,
+      Iso.app_inv, Iso.symm_inv, Category.assoc]
+  · intro n
+    let ev := reductionTowerDerivedEvaluation Y'
+      (reductionModuleRing Y' (d.completedRing Y')) n
+    let res := reductionDerivedRestrict Y' (d.projection Y' n)
+    let a0 := ev.mapIso ((d.reductionTowerPullbackIso g).app ((d.push f).obj K)) ≪≫
+      (asIso (completedReductionEvaluation Y' d n)).app
+        ((d.pull g).obj ((d.push f).obj K)) ≪≫
+      res.mapIso ((d.chi g n).symm.app ((d.push f).obj K))
+    let a2 := (asIso (completedReductionEvaluation Y' d n)).app
+      ((d.push f').obj ((d.pull g').obj K))
+    have hv : ev.map (d.towerV sq K) ≫ a2.hom =
+        a0.hom ≫ res.map (d.fourArrows sq K hK W n).v := by
+      exact comparisonNaturality (completedReductionTower Y' d) (d.reduction Y' n)
+        ev res (completedReductionEvaluation Y' d n) ((d.integralExchange sq).app K)
+        ((d.reductionTowerPullbackIso g).app ((d.push f).obj K))
+        ((d.chi g n).app ((d.push f).obj K))
+    have hr : (d.fourArrows sq K hK W n).h.hom ≫
+        (d.fourArrows sq K hK W n).v'.hom =
+        (d.fourArrows sq K hK W n).v ≫ (d.fourArrows sq K hK W n).h'.hom := by
+      simpa only [AdicCoefficientDatum.fourArrows, AdicCoefficientDatum.finiteExchangeIso,
+        AdicCoefficientDatum.delta, asIso_hom, Iso.symm_hom, Iso.app_hom,
+        Category.assoc] using finiteReductionExchange_rectangle d sq K n
+    exact fourCornerTransport ev res
+      (d.fourTowerCorners (f := f) (f' := f') (g := g) (g' := g') K)
+      (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n)
+      (d.towerH (f := f) (f' := f') (g := g) (g' := g') K)
+      (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K) (d.towerV sq K)
+      (d.fourArrows sq K hK W n).h (d.fourArrows sq K hK W n).h'
+      (d.fourArrows sq K hK W n).v (d.fourArrows sq K hK W n).v'.hom hr a0 a2 hv
+  · rw [completedExchange_mate d sq K]
+    exact restrictedExchange_mate d sq ((completedReductionTower X d).obj K)
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences (strict exchange coherence before Rlim): the finite-level rectangle for the specified intrinsic projection-formula maps.",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite exchange rectangle for intrinsic coefficient reduction",
+ "statement": "For an adic coefficient datum d, a chosen cartesian square sq, K in D(A_X), and n, the following rectangle commutes: finite pullback of the canonical finite projection map followed by finite exchange equals χ_g followed by reduction of integral exchange followed by the finite projection map for f′ and finite pushforward of χ_g′ inverse. The projection maps are the specified adjuncts [def-weil-pbc-four-corners], and exchange is the ambient mate [def-weil-pbc-ambient-ringed-exchange]. There are no properness or finiteness assumptions on K.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7, 0E48: base-change mate and coefficient compatibility; lean/Sheaf/Paper/FiniteReductionExchangeRectangle.lean:152"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Package the finite projection components as a natural transformation. Its mate is exactly the finite reduction/pullback comparison by the defining adjunct formula.",
+   "uses": [
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized mate cube to the finite reduction inverse-image square. Substitute the integral and finite exchange definitions, and evaluate the natural-transformation equality at K.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube",
+    "lem-weil-pbc-finite-reduction-pullback-square",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-four-corners",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-finite-reduction-pullback-square",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7, 0E48: base-change mate and coefficient compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite coefficient exchange mate is compatible with the derived scalar extension projection formula maps.",
+   "results": "Module.Basis.restrictScalars_repr_apply; ModuleCat.CoextendScalars.map'_hom_apply_apply; LinearMap.extendScalarsOfIsLocalizationEquiv; ModuleCat.restrictCoextendScalarsAdj; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; LinearMap.compBilinForm; ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exchange of adjunction mates is natural under change of coefficients and projection formulas",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.ParametrizedAdjunction.homEquiv_symm_naturality_two_assoc; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two_assoc; CategoryTheory.ParametrizedAdjunction.homEquiv_symm_naturality_one_assoc; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one_assoc; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|unit_mateEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionExchangeRectangle",
+  "file": "lean/Sheaf/Paper/FiniteReductionExchangeRectangle.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteReductionExchange_rectangle",
+  "statement": "theorem finiteReductionExchange_rectangle\n    (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) (n : ℕ) :\n    (d.finitePull g n).map (d.finiteProjection f K n) ≫\n        (d.finiteExchange sq n).app ((d.reduction X n).obj K) =\n      (d.chi g n).hom.app ((d.push f).obj K) ≫\n        (d.reduction Y' n).map ((d.integralExchange sq).app K) ≫\n        d.finiteProjection f' ((d.pull g').obj K) n ≫\n        (d.finitePush f' n).map ((d.chi g' n).inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage3 N2",
+  "summary": "The stated comparison is proved in Lean from the cited declarations and categorical identities.",
+  "blueprint": "Completed exchange coherence, first two proof sentences, strict normalization before Rlim.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-ringed-square-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences (strict exchange coherence before Rlim): identification of the ordinary localized and canonical derived inverse-image squares.",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ambient ringed square is exact localization of its ordinary square",
+ "statement": "For a chosen cartesian scheme square with coherent ring sheaves r [def-weil-pbc-strict-tower-operations], its canonical ambient derived inverse-image comparison equals Functor.mapDerivedCategorySquareIso of r.exchangeModuleSquare. Thus the normalized geometric square and exact localization use precisely the same compositor and equality transport.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D: composition of derived pullback; lean/Sheaf/AlgebraicGeometry/ProEtaleRingedSquareLocalization.lean:82"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-tower-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use canonical derived pullback normalization on each composable pair. The conjugateEquiv characterization identifies its ordinary left comparison with exchangeModuleComposition.",
+   "uses": [
+    "lem-sp-canonical-derived-pullback-normalization",
+    "def-weil-pbc-strict-tower-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization preserves the inverse, composite, and equality transport. Substitute the preceding identities in the two definitions of the square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-canonical-derived-pullback-normalization",
+  "def-weil-pbc-strict-tower-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D: composition of derived pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact localization of a square of inverse image functors for sheaves of modules agrees with the canonical derived pullback composition square.",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition commutes with exact localization of ringed inverse image functors",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; PresheafOfModules.pullback_assoc; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|proEtaleAmbientRingedPullbackComparison",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedSquareLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedSquareLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.StrictTowerRingedSquare.ambientSquare_localization",
+  "statement": "theorem StrictTowerRingedSquare.ambientSquare_localization\n    {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}\n    (r : StrictTowerRingedSquare sq) :\n    proEtaleAmbientRingedPullbackComparison sq r.RX r.RY r.RX' r.RY'\n        r.cf r.cg r.cg' r.cf' r.coherent =\n      Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage3 N2",
+  "summary": "The stated comparison is proved in Lean from the cited declarations and categorical identities.",
+  "blueprint": "Completed exchange coherence, first two proof sentences, strict normalization before Rlim.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-canonical-derived-pullback-normalization",
+    "why": "Generic coefficient restriction, exact localization, or resolution tool used on the particular pro-etale module/tower categories; it supplies no alternate geometric unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

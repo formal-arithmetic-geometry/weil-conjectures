@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-exchange-mate-cube",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences (strict exchange coherence before Rlim): naturality of the unit-square-counit mate under normalized comparison squares.",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality of the adjunction mate across a cube",
+ "statement": "For eight categories and four adjunctions F ⊣ R, K ⊣ S, F′ ⊣ R′, K′ ⊣ S′, let a,b,c,d connect corresponding categories, and let pF,pG,pH,pK be invertible comparison squares. Suppose θ:G⋙K → F⋙H and θ′:G′⋙K′ → F′⋙H′ have equal composites around the inverse-image cube. Then the mates of θ and θ′ satisfy the corresponding right-adjoint cube equation, where the comparisons on R and S are the mates of pF.inv and pK.inv. The displayed Lean signature specifies all domains and orientations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7: unit-square-counit exchange construction; categorical naturality argument; lean/Sheaf/CategoryTheory/ExchangeMateCube.lean:42"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Transpose both sides by K′ ⊣ S′. Expand the two mate components using unit-square-counit. Apply naturality of pH, the counits and the comparison mates; substitute the inverse-image cube equation. The triangle identities identify the resulting composites.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7: unit-square-counit exchange construction; categorical naturality argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A commuting cube of functor squares is preserved by taking adjunction mates, with the comparison maps normalized by counits.",
+   "results": "CategoryTheory.CommSq.map; CategoryTheory.CatCommSq.iso; CategoryTheory.CatCommSq.ctorIdx; CategoryTheory.CatCommSq.noConfusion; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.CommSq.right_adjoint; CategoryTheory.CatCommSq.mk.noConfusion",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-20",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*comp|mate.*whisker",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "no match: the specific normalized square is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExchangeMateCube",
+  "file": "lean/Sheaf/CategoryTheory/ExchangeMateCube.lean",
+  "declaration": "CategoryTheory.exchangeMate_cube",
+  "statement": "theorem exchangeMate_cube\n    {A B C D A' B' C' D' : Type*}\n    [Category A] [Category B] [Category C] [Category D]\n    [Category A'] [Category B'] [Category C'] [Category D']\n    {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D}\n    {K : C ⥤ D} {S : D ⥤ C}\n    {F' : A' ⥤ B'} {R' : B' ⥤ A'} {G' : A' ⥤ C'} {H' : B' ⥤ D'}\n    {K' : C' ⥤ D'} {S' : D' ⥤ C'}\n    (adj : F ⊣ R) (adjK : K ⊣ S) (adj' : F' ⊣ R') (adjK' : K' ⊣ S')\n    (a : A ⥤ A') (b : B ⥤ B') (c : C ⥤ C') (d : D ⥤ D')\n    (pF : F ⋙ b ≅ a ⋙ F') (pG : G ⋙ c ≅ a ⋙ G')\n    (pH : H ⋙ d ≅ b ⋙ H') (pK : K ⋙ d ≅ c ⋙ K')\n    (θ : G ⋙ K ⟶ F ⋙ H) (θ' : G' ⋙ K' ⟶ F' ⋙ H')\n    (hc : ∀ X : A,\n      K'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =\n        θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))\n    (E : B) :\n    c.map ((mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).app E) ≫\n        (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).app (H.obj E) ≫\n        S'.map (pH.hom.app E) =\n      pG.hom.app (R.obj E) ≫\n        G'.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).app E) ≫\n        (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).app (b.obj E)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage3 N2",
+  "summary": "The stated comparison is proved in Lean from the cited declarations and categorical identities.",
+  "blueprint": "Completed exchange coherence, first two proof sentences, strict normalization before Rlim.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

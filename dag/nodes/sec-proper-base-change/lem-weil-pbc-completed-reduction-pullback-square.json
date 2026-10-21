@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-completed-reduction-pullback-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences (strict exchange coherence before Rlim): completed reduction/pullback coherence as strict tower maps, before taking mates.",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed reduction respects the strict inverse-image square",
+ "statement": "For an adic coefficient datum d and chosen cartesian scheme square sq [def-weil-pbc-four-corners], the four normalized completed reduction/pullback comparisons [prop-weil-pbc-direct-image-limits] commute with the integral ambient inverse-image square and the exact termwise integral tower square [def-weil-pbc-strict-tower-operations]. This is equality of natural transformations to the derived category of strict towers, before taking any mates or evaluations. No properness, completeness, or etale-origin witness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0E48: composition and coherent tensor comparison on strict diagrams; lean/Sheaf/Paper/CompletedReductionPullbackSquare.lean:59"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-four-corners",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-strict-tower-operations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative P on Y. The two successive inverse images remain flat-term K-flat. At each quotient level tensor balancing and compatibility of the projections prove equality of the ordinary strict tower-complex maps; the equality retains all quotient transitions.",
+   "uses": [
+    "lem-weil-pbc-ring-restriction-pullback-square",
+    "def-weil-pbc-four-corners",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalization equations fixing completedReductionPullbackIso on all four edges. Localize the ordinary compositor and cancel the invertible K-flat comparison counits to obtain the square on Q(P). Resolve an arbitrary object and apply naturality; no faithfulness of derived evaluations is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-square-localization",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-restriction-pullback-square",
+  "def-weil-pbc-four-corners",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-square-localization",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0E48: composition and coherent tensor comparison on strict diagrams"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension and normalized reduction of strict towers commute with composition of inverse images of sheaves of modules.",
+   "results": "SheafOfModules.sheafificationCompPullback; PresheafOfModules.pullback; LinearEquiv.extendScalarsOfIsLocalizationEquiv; Derivation.instIsScalarTower; SheafOfModules.restrictScalars_map_val; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars; Algebra.Extension.instIsScalarTowerRing",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed reduction of module towers commutes coherently with composition of inverse images",
+   "results": "AdicCompletion.transitionMap_comp_reduceModIdeal; ModuleCat.restrictScalarsComp'App_inv_naturality; AdicCompletion.map_comp; ModuleCat.restrictScalarsComp'App_inv_naturality_assoc; AdicCompletion.map_comp_apply; ModuleCat.restrictScalarsComp'_inv_app; ModuleCat.restrictScalarsComp'App_inv_apply; ModuleCat.restrictScalarsComp'App_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "whiskerRight.*comp|mapDerivedCategoryNatIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the specific normalized square is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedReductionPullbackSquare",
+  "file": "lean/Sheaf/Paper/CompletedReductionPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedReductionPullback_square",
+  "statement": "theorem completedReductionPullback_square\n    (sq : ChosenCartesianSquare g' f' f g) :\n    Functor.whiskerRight (d.reductionTowerPullbackIso g).hom (d.towerPull f') ≫\n      Functor.whiskerLeft (d.pull g) (d.reductionTowerPullbackIso f').hom ≫\n      Functor.whiskerRight\n        (proEtaleAmbientRingedPullbackComparison sq\n          (d.completedRing X) (d.completedRing Y) (d.completedRing X') (d.completedRing Y')\n          (d.integralRingIso f) (d.integralRingIso g) (d.integralRingIso g')\n          (d.integralRingIso f') (d.integral_coherent sq)).hom\n        (completedReductionTower X' d) =\n    Functor.whiskerLeft (completedReductionTower Y d)\n        (d.integralTowerRingedSquare sq).exchangeTowerSquare.hom ≫\n      Functor.whiskerRight (d.reductionTowerPullbackIso f).hom (d.towerPull g') ≫\n      Functor.whiskerLeft (d.pull f) (d.reductionTowerPullbackIso g').hom",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.integralTowerRingedSquare",
+   "AlgebraicGeometry.Scheme.completedReductionPullback_square"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage3 N2",
+  "summary": "Lean proof supplied, except for the completed reduction square whose exact K-flat normalization argument is documented and remains open.",
+  "blueprint": "Completed exchange coherence, first two proof sentences, strict normalization before Rlim.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient restriction, exact localization, or resolution tool used on the particular pro-etale module/tower categories; it supplies no alternate geometric unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T012414-L-2186301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
