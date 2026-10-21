@@ -17,3 +17,11 @@ L: the delivery could not be prepared for review: NOT MERGED def-weil-pbc-bounde
 
 L (re-issued by the launcher; the entry had been lost): very.py return N3 thm-cbc-finite-level-proetale E1 and 7b: the delivery adds a supplied compactification and quasi-compact open hypothesis, weakening the exact master theorem. The exact blueprint source is present but the report incorrectly says it is absent. The conditional proof checks out, but the target-level source defect must be resolved without silently weakening the target. Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+
+
+## lem-pe-comparison-injective-left-modules-acyclic (dedicated repair handoff; head 100b8fa832869045abf34c00f31fca7b56574dfe)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 4757 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 2 (1369 characters); step 4 (804 characters); step 5 (1270 characters). Lean module: WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic.
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-21): the proof in words is 4757 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 2 (1369 characters); step 4 (804 characters); step 5 (1270 characters). Lean module: WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic.

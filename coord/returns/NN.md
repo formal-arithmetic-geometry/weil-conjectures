@@ -110,3 +110,11 @@ L: independent stage-2 immutable head b648c9e43b8e: Sheaf.Paper.FourierConvoluti
   WeilConjectures.fourierKernelConvolutionIso: also in Sheaf.Paper.FourierKernelConvolution
 Import and reuse the existing declaration. Renaming yours only hides the collision and leaves the same fact proved twice; rename only when the two declarations say different things.
 
+
+
+## lem-weil-pbc-smooth-curve-etale-structure-direct-images (dedicated repair handoff; head 100b8fa832869045abf34c00f31fca7b56574dfe)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 8850 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 3 (1157 characters); step 4 (1082 characters); step 5 (1709 characters); step 6 (1452 characters); step 7 (1920 characters). Lean module: Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages.
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-21): the proof in words is 8850 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 3 (1157 characters); step 4 (1082 characters); step 5 (1709 characters); step 6 (1452 characters); step 7 (1920 characters). Lean module: Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages.
