@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q29
+Authors: SHEAF groups Q29 and E9
 -/
 module
 
@@ -13,26 +13,19 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
-import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
-import Sheaf.AlgebraicGeometry.EtaleHigherDirectImageStalkCriterion
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.RingTheory.Etale.LocalDimension
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.RestrictionOfScalarsExact
-import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.ProEtaleConstructibleOrigin
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
+import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.CoefficientHigherDirectImageZero
+import Sheaf.Paper.SfCompleteDirectImageReduction
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.AlgebraicGeometry.NilpotentCoefficientDirectImageBound
+import Sheaf.AlgebraicGeometry.SfEtaleOriginPushforwardAmplitude
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Sheaf.Paper.FiniteProEtalePushforwardConstructible
+import all Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison
+import Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import all Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 
 /-!
 # Integral direct image preserves bounded constructibility
@@ -48,124 +41,260 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
+private theorem intrinsic_iso
+    (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
+    {C D : proEtaleDerivedCategory T B} (e : C ≅ D)
+    (h : (Set.Finite (proEtaleCohomologicalSupport C)) ∧
+      ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf T B
+        ((DerivedCategory.homologyFunctor _ i).obj C)) :
+    Set.Finite (proEtaleCohomologicalSupport D) ∧
+      ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf T B
+        ((DerivedCategory.homologyFunctor _ i).obj D) := by
+  constructor
+  · apply h.1.subset
+    intro i hi
+    exact fun hz ↦ hi (hz.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e).symm)
+  · intro i
+    have hc := h.2 i
+    rw [proEtaleModuleRestriction_constructible_iff] at hc ⊢
+    exact ProEtale.isConstructible_of_iso
+      ((proEtaleModuleRestriction T B).mapIso
+        ((DerivedCategory.homologyFunctor _ i).mapIso e)) hc
+
+private theorem support_iso
+    (T : Scheme.{u}) (B : Type u) [CommRing B]
+    {C D : proEtaleDerivedCategory T B} (e : C ≅ D) :
+    proEtaleCohomologicalSupport C = proEtaleCohomologicalSupport D := by
+  ext i
+  exact not_congr ((DerivedCategory.homologyFunctor _ i).mapIso e).isZero_iff
+
+private theorem coefficient_killed (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
+    ((l ^ n : ℕ) : ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) = 0 := by
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have habv : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
+    calc
+      Padic.coefficientExtensionAbsoluteValue l E (l : E) = ‖(l : Padic l)‖ := by
+        change spectralNorm (Padic l) E (l : E) = ‖(l : Padic l)‖
+        simpa only [map_natCast] using
+          (spectralNorm_extends (K := Padic l) (L := E) (l : Padic l))
+      _ < 1 := Padic.norm_p_lt_one
+  have hlm : (l : Padic.coefficientExtensionIntegers l E) ∈
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    (h.2.1 _).2 (by simpa only [SubringClass.coe_natCast] using habv)
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hpow : (l : Padic.coefficientExtensionIntegers l E) ^ n ∈
+      Padic.coefficientExtensionIdeal l E n := by
+    change _ ∈ Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) ^ n
+    rw [hgen]
+    exact Ideal.pow_mem_pow hlm n
+  apply ULift.down_injective
+  change ((l ^ n : ℕ) :
+    Padic.coefficientExtensionIntegers l E ⧸ Padic.coefficientExtensionIdeal l E n) = 0
+  rw [← map_natCast (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)),
+    Ideal.Quotient.eq_zero_iff_mem]
+  simpa only [Nat.cast_pow] using hpow
+
+private theorem residue_bound_all_levels
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (N : ℤ)
+    (hN : ∀ (q : ℕ), N < (q : ℤ) →
+      ∀ M : Sheaf X.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))),
+      IsZero (((Etale.lowerStar
+        (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)))
+        f).rightDerived q).obj M)) (n : ℕ) :
+    ∀ M : Sheaf X.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))),
+      ∀ q : ℤ, 0 ≤ q → N < q →
+        IsZero (Etale.higherDirectImage
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) f q M) := by
+  let A := Padic.coefficientExtensionIntegers l E
+  let J : Ideal A := Ideal.span {Padic.coefficientExtensionUniformizer l E}
+  let R := ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))
+  let S := ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)
+  have hle : J ^ (n + 1) ≤ J ^ 1 := Ideal.pow_le_pow_right (by omega)
+  let p₀ : Padic.coefficientExtensionRing l E (n + 1) →+*
+      Padic.coefficientExtensionRing l E 1 := Ideal.Quotient.factor hle
+  let eR : R ≃+* Padic.coefficientExtensionRing l E (n + 1) := ULift.ringEquiv
+  let eS : S ≃+* Padic.coefficientExtensionRing l E 1 := ULift.ringEquiv
+  let p : R →+* S := eS.symm.toRingHom.comp (p₀.comp eR.toRingHom)
+  have hp : Function.Surjective p :=
+    eS.symm.surjective.comp ((Ideal.Quotient.factor_surjective hle).comp eR.surjective)
+  have hker₀ : RingHom.ker p₀ = (J ^ 1).map (Ideal.Quotient.mk (J ^ (n + 1))) := by
+    change RingHom.ker (Ideal.Quotient.lift _ (Ideal.Quotient.mk _) _) = _
+    rw [Ideal.ker_quotient_lift, Ideal.mk_ker]
+    rfl
+  have hnil₀ : (RingHom.ker p₀) ^ (n + 1) = ⊥ := by
+    rw [hker₀, ← Ideal.map_pow, pow_one, Ideal.map_mk_eq_bot_of_le le_rfl]
+  have hker : RingHom.ker p = (RingHom.ker p₀).comap eR.toRingHom := by
+    dsimp only [p]
+    rw [RingHom.ker_equiv_comp, RingHom.comap_ker]
+  have hnil : (RingHom.ker p) ^ (n + 1) = ⊥ := by
+    apply le_antisymm _ bot_le
+    rw [hker]
+    apply (Ideal.le_comap_pow eR.toRingHom (n + 1)).trans
+    rw [hnil₀]
+    exact le_of_eq ((RingHom.injective_iff_ker_eq_bot eR.toRingHom).mp eR.injective)
+  let e : R ⧸ RingHom.ker p ≃+* S := RingHom.quotientKerEquivOfSurjective hp
+  apply Etale.isZero_higherDirectImage_of_nilpotent_quotient_bound
+    f R (RingHom.ker p) (n + 1) (by omega) hnil N
+  intro Q q hq hNq
+  let Q' := (Sheaf.restrictScalars X.smallEtaleTopology e.symm.toRingHom).obj Q
+  have hz : IsZero (Etale.higherDirectImage S f q Q') := by
+    lift q to ℕ using hq
+    exact (hN q hNq Q').of_iso
+      ((Etale.lowerStar (ModuleCat.{u + 1} S)
+        f).homologyRightDerivedFunctorPlusObjSingleFunctorIso Q' q)
+  exact (Etale.isZero_higherDirectImage_restrictScalars_iff e.symm.toRingHom f q Q).mp hz
+
+private theorem finite_image_constructible
+    (k : Type u) [Field k] (B : Type u) [CommRing B] [Finite B]
+    (m : ℕ) (hm : 0 < m) (hB : (m : ULift.{u + 1} B) = 0)
+    (hk : IsUnit (m : k))
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) (C : proEtaleDerivedCategory X B)
+    (hc : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X B
+      ((DerivedCategory.homologyFunctor _ i).obj C))
+    (a b : ℤ) (hab : a ≤ b)
+    (hv : ∀ i : ℤ, i < a ∨ b < i →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj C)) :
+    Set.Finite (proEtaleCohomologicalSupport
+      ((proEtaleConstantDerivedDirectImage f B).obj C)) ∧
+      ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y B
+        ((DerivedCategory.homologyFunctor _ i).obj
+          ((proEtaleConstantDerivedDirectImage f B).obj C)) := by
+  classical
+  let R := fun T : Scheme.{u} ↦ ProEtale.finiteCoefficientIntrinsicRealization T B
+  have hR (T : Scheme.{u}) : (R T).IsEquivalence :=
+    (ProEtale.finiteCoefficientIntrinsicRealization_exact T B).1
+  let := hR X
+  let := hR Y
+  let J := (R X).mapDerivedCategory.objPreimage C
+  let eJ : (R X).mapDerivedCategory.obj J ≅ C :=
+    (R X).mapDerivedCategory.objObjPreimageIso C
+  have hJ (i : ℤ) : (R X).obj ((DerivedCategory.homologyFunctor _ i).obj J) ≅
+      (DerivedCategory.homologyFunctor _ i).obj C :=
+    ((R X).mapDerivedCategoryHomologyFunctorIso i).app J ≪≫
+      (DerivedCategory.homologyFunctor _ i).mapIso eJ
+  have hcJ (i : ℤ) : IsConstructibleProEtaleFixedModuleSheaf X (ULift.{u + 1} B)
+      ((DerivedCategory.homologyFunctor _ i).obj J) := by
+    apply (ProEtale.fixed_constructible_iff _ _ _).mpr
+    apply (intrinsicRealization_constructible_iff X B _).mp
+    exact intrinsicConstructible_of_iso X B (hJ i).symm (hc i)
+  have hvJ (i : ℤ) (hi : i < a ∨ b < i) :
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj J) := by
+    have hz := (hv i hi).of_iso (hJ i)
+    rw [IsZero.iff_id_eq_zero] at hz ⊢
+    exact (R X).map_injective (by simpa using hz)
+  obtain ⟨L, hL, α, hα, hcF, c, d, hcd, hvF⟩ :=
+    ProEtale.finite_proetale_pushforward_constructible k (ULift.{u + 1} B)
+      m hm hB hk aX aY f hf J hcJ ⟨a, b, hab, hvJ⟩
+  let F := (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f).rightDerivedFunctor
+  let e : (R Y).mapDerivedCategory.obj (F.obj J) ≅
+      (proEtaleConstantDerivedDirectImage f B).obj C :=
+    (sfIntrinsicDerivedDirectImageComparison f B).symm.app J ≪≫
+      (proEtaleConstantDerivedDirectImage f B).mapIso eJ
+  have he (i : ℤ) : (R Y).obj ((DerivedCategory.homologyFunctor _ i).obj (F.obj J)) ≅
+      (DerivedCategory.homologyFunctor _ i).obj
+        ((proEtaleConstantDerivedDirectImage f B).obj C) :=
+    ((R Y).mapDerivedCategoryHomologyFunctorIso i).app (F.obj J) ≪≫
+      (DerivedCategory.homologyFunctor _ i).mapIso e
+  constructor
+  · apply (Set.finite_Icc c d).subset
+    intro i hi
+    by_contra hout
+    have ho : i < c ∨ d < i := by simpa only [Set.mem_Icc, not_and_or, not_le] using hout
+    exact hi (((R Y).map_isZero (hvF i ho)).of_iso (he i).symm)
+  · intro i
+    apply intrinsicConstructible_of_iso Y B (he i)
+    apply (intrinsicRealization_constructible_iff Y B _).mpr
+    exact (ProEtale.fixed_constructible_iff _ _ _).mp (hcF i)
+
+private theorem finite_image_support
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (B : Type u) [CommRing B] [Finite B] (N : ℤ)
+    (hN : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} B)))
+      (q : ℤ), 0 ≤ q → N < q →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B))
+          f).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj M))))
+    (C : proEtaleDerivedCategory X B)
+    (hc : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X B
+      ((DerivedCategory.homologyFunctor _ i).obj C))
+    (hbounded : ∃ c d : ℤ, c ≤ d ∧ ∀ i : ℤ, i < c ∨ d < i →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj C))
+    (a b : ℤ) (hs : proEtaleCohomologicalSupport C ⊆ Set.Icc a b) :
+    proEtaleCohomologicalSupport ((proEtaleConstantDerivedDirectImage f B).obj C) ⊆
+      Set.Icc a (b + N) := by
+  obtain ⟨L, ⟨e⟩⟩ := ((finiteRing_constructibleDerived_origin X B).2.2.1 C).mpr
+    ⟨hc, hbounded⟩
+  have hL := L.property.2
+  have he := (proEtaleConstantDerivedDirectImage f B).mapIso e
+  have hamp (c d : ℤ) (hcd : c ≤ d)
+      (hv : ∀ i : ℤ, i < c ∨ d < i →
+        IsZero ((DerivedCategory.homologyFunctor _ i).obj C))
+      (i : ℤ) (hi : i < c ∨ d + N < i) :
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        ((proEtaleConstantDerivedDirectImage f B).obj C)) := by
+    have hC (r : ℤ) (hr : r < c ∨ d < r) :=
+      (hv r hr).of_iso ((DerivedCategory.homologyFunctor _ r).mapIso e)
+    have hz := (ProEtale.etaleOrigin_pushforward_amplitude f B N hN c d hcd
+      L.obj hL hC).2.1 i hi
+    exact hz.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso he).symm
+  intro i hi
+  by_contra hout
+  have ho : i < a ∨ b + N < i := by
+    simpa only [Set.mem_Icc, not_and_or, not_le] using hout
+  by_cases hab : a ≤ b
+  · exact hi (hamp a b hab (fun r hr ↦ by
+      by_contra hz
+      obtain ⟨h₁, h₂⟩ := hs hz
+      rcases hr with hr | hr <;> exact (by omega)) i ho)
+  · exact hi (hamp (i + 1) (i + 1) le_rfl (fun r _ ↦ by
+      by_contra hz
+      obtain ⟨h₁, h₂⟩ := hs hz
+      exact (by omega)) i (Or.inl (by omega)))
+
+set_option linter.unusedVariables false in
 /-- Preservation of constructibility, every canonical reduction comparison, and uniform
 cohomological bounds, including the dimension and empty-source cases.
 Source: Bhatt--Scholze, Lemma 6.7.2; Stacks Tag 0F10
 (blueprint: lem-sf-integral-direct-image-constructible).
-Proof plan:
-Negative qualifying bounds are retained: if N < 0, the bound includes degree zero.
-Then pushforward annihilates every residue-coefficient sheaf, hence by the finite
-coefficient filtration every finite-level sheaf. Finite truncation devissage makes
-the images of bounded complexes zero, so every stated support inclusion holds.
+Proof: the derived category has countable products, so completing the prescribed
+one-minus-transition map to a distinguished triangle gives an integral direct image.
+The geometry-independent complete direct-image and reduction theorem gives completeness
+and identifies the canonical finite reductions of every such triangle.
 
-1. Set $A=\mathcal O_E$, $I=(\varpi_E)$, $P_n=A/I^n$. The coefficient facts
-[lem-weil-l-adic-extension-integers-dvr, lem-weil-valued-dvr-finite-quotients] make $A$ a
-Noetherian domain and every $P_n$ a finite ring. Indeed every ideal in the principal ideal domain
-$A$ is generated by one element, so it is Noetherian. The resolution
-$[A\xrightarrow{\varpi_E^n}A]$ in degrees $[-1,0]$ is a finite free resolution of $P_n$, since
-multiplication by the nonzero element $\varpi_E^n$ is injective. Thus every $P_n$ is perfect over
-$A$, as required in [def-weil-pbc-adic-coefficient-datum]. Its additive group is killed by a power
-of $\ell$: $\ell$ has positive valuation in $E$, so $\ell=u\varpi_E^e$ with $u$ a unit and $e>0$,
-and $\ell^r\in I^n$ for $er\geq n$. This order is invertible in $K_0$. The datum therefore applies
-to exactly the completed coefficient sheaves of the item, rather than to discrete constant
-$A$-sheaves.
+For finite constructibility, use the exact equivalence between fixed-coefficient and
+intrinsic finite-ring module sheaves. It commutes with homology and intertwines the two
+actual derived direct images. The finite-coefficient constructibility theorem therefore
+gives finite intrinsic cohomological support and constructible cohomology at every level.
+The quotient O_E/varpi^(n+1) is killed by l^(n+1), since l lies in the maximal ideal;
+this annihilator is invertible in the base field.
 
-2. Write $\widehat f_*$ for the ordinary unbounded derived pushforward for the completed ring
-sheaves $\widehat A_X,\widehat A_Y$, as distinct from the integral functor defined by the tower.
-Their pullback identification is [lem-weil-pbc-profinite-coefficient-inverse-image]. For a
-$P_n$-complex $C$, apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the square
-consisting of $f$ and the identity morphisms of underlying topoi with ring maps $\widehat
-A_T\to(P_n)_T$. Both composites have the same underlying topos morphism and the same structural
-ring map, since the finite projections commute with pullback. The identity-topos direct images are
-restriction of scalars and are exact [lem-weil-restriction-of-scalars-exact], so their right
-derived functors are termwise restriction. The two composition isomorphisms give $\widehat
-f_*\operatorname{Res}_n C\cong\operatorname{Res}_n Rf_{*,n}C$. Naturality identifies the maps
-induced by $P_{n+1}\to P_n$ with precisely the tower maps in [def-weil-derived-direct-image].
-
-3. The hypothesis on $K$ says that its reduction tower has a Roos triangle with first map the
-family of reductions [def-weil-derived-complete]. Apply [prop-weil-pbc-direct-image-limits] to
-this adic datum and $K$. Its commutation with derived limits and the isomorphisms in step 2
-identify $\widehat f_*K$ with the tower-defined $Rf_*K$. The same cited statement says that
-$\widehat f_*K$ is derived complete and that its reduction to $P_n$ is $Rf_{*,n}K_n$, compatibly
-with quotient transitions. These are the required finite-reduction comparisons: under the limit
-identification their adjuncts are the $n$-th projections, because the comparison is induced by the
-reduction unit $K\to\operatorname{Res}_nK_n$ and the direct-image/scalar-extension adjunction.
-Thus it is the comparison specified in [def-weil-derived-direct-image], not merely an unspecified
-isomorphism between the objects. Transport the Roos triangle through this identification to obtain
-derived completeness of the tower-defined object.
-
-4. Fix $n$. The complex $K_n$ is bounded intrinsically constructible by hypothesis. By clause (ii)
-of [lem-sf-proetale-constructible-origin], choose $L_n\in D^b_c(X_{\mathrm{et}},P_n)$ with
-$\nu_X^*L_n\cong K_n$. This origin lemma allows an arbitrary scheme $T$: its auxiliary global
-finite-field notation imposes no finite-field structure on $X$ or $Y$. By
-[lem-weil-pbc-finite-type-over-noetherian], applied over the spectrum of the field $K_0$, $X,Y$
-are Noetherian. The inverse image of an affine open under $f$, or under its diagonal, is an open
-subset of the Noetherian scheme $X$ and hence quasi-compact. Thus $f$ is quasi-compact and
-quasi-separated; it need not be separated. Apply [thm-dg-finite-type-constructibility] with the
-finite ring $P_n$, killed by a power of the invertible prime $\ell$, to get
-$Rf_{\mathrm{et},*}L_n\in D^b_c(Y_{\mathrm{et}},P_n)$. The bounded-below comparison
-[prop-weil-pbc-comparison-direct-image] gives $Rf_{*,n}K_n\cong\nu_Y^*Rf_{\mathrm{et},*}L_n$. The
-origin equivalence on $Y$ now makes this bounded intrinsically constructible. No finite Tor
-amplitude over $P_n$ or finite cohomological dimension on all pro-etale sheaves is assumed.
-
-5. There is an integer $N\geq0$ bounding $R^qf_*$ on every torsion etale sheaf by [lem-kun-0f10]
-(1) and the definition [def-kun-cd]. For any coefficient ring $B$, forgetting $B$-module structure
-is exact: kernels and cokernels have the same underlying abelian sheaves. Apply
-[lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $f$ and the identity-topos ring
-maps $\mathbf Z\to B$. Both composites have the same structural map, so the underlying abelian
-complex of $Rf_*^B M$ is the ordinary abelian derived image of the underlying sheaf of $M$. In
-particular the torsion bound applies to every $P_1$-module sheaf; no bound on the absolute
-cohomological dimension of $K_0$ is needed. More generally, start with any $N\geq0$ satisfying the
-$P_1$-module bound in the statement. For a $P_n$-module sheaf $M$, the finite filtration
-$M\supset\varpi_EM\supset\cdots\supset\varpi_E^nM=0$ has $P_1$-module subquotients. The same
-composition argument for the quotient map $P_n\to P_1$ identifies their derived images as
-$P_n$-modules with the exact restrictions of their derived images as $P_1$-modules. Thus the
-assumed $P_1$ bound applies to these terms in the $P_n$-module derived category. Apply the
-triangulated derived functor and the long exact cohomology sequence
-[lem-pc-right-derived-functor-triangulated, lem-sf-derived-homology-long-exact] to each short
-exact sequence of this filtration. Downward induction on its length gives $R^qf_*M=0$ for all
-$q>N$. Thus the SAME $N$ works at every finite coefficient level, even though the length of the
-filtration grows with $n$.
-
-6. If every $K_n$ has cohomology in $[a,b]$, the exact pullback in the origin equivalence
-identifies the cohomology of $L_n$ with that of $K_n$, and clause (i) of the origin equivalence
-reflects zero constructible sheaves, so $L_n$ also has this range
-[lem-sf-proetale-constructible-origin, lem-weil-pbc-site-pullback-abelian-exact]. Use the
-canonical truncation triangle [lem-sf-derived-truncation-triangle] to $\tau_{\leq r}L_n$ for
-$r=a,a+1,\ldots,b$. Smart truncation leaves cohomology unchanged in the retained degrees and kills
-the other degrees: at the cut the complex uses the kernel or cokernel of the differential. Hence
-its upper term has only $\mathcal H^r(L_n)$ in degree $r$; truncating above and below $r$ gives a
-quasi-isomorphism with the one-term complex. Its upper term is $\mathcal H^r(L_n)[-r]$
-(represented by the one-term complex), and the lower term has range $[a,r-1]$. The derived image
-of a sheaf in degree $r$ has range $[r,r+N]$, by left exactness and step 5. Apply the triangulated
-functor and [lem-sf-derived-homology-long-exact]. Starting with zero below $a$, induction shows
-that the image of the truncation through degree $r$ has range $[a,r+N]$: outside this interval
-both outside terms of the long exact sequence vanish. At $r=b$ this proves $Rf_{\mathrm{et},*}L_n$
-has range $[a,b+N]$. Pullback is exact and the comparison in step 4 identifies it with
-$Rf_{*,n}K_n$, giving the desired uniform interval. This is a finite truncation argument; it uses
-no unbounded spectral-sequence convergence assertion.
-
-7. Suppose $K_0$ is algebraically closed and $X$ is nonempty, of dimension $d$. It is separably
-closed, so [lem-sf-separably-closed-torsion-cd] gives base-field torsion cohomological dimension
-zero. For a geometric point of $Y$, the pointed etale neighbourhoods may be chosen affine and of
-finite presentation over $Y$. Then $X_W=X\times_YW$ is finite-type over $K_0$ and etale over $X$.
-If $X_W$ is empty its cohomology groups are zero, since its abelian sheaf category is zero.
-Otherwise apply the following dimension argument to this nonempty $X_W$. The local dimension
-equality [lem-sc-etale-local-dimension] gives $\dim\mathcal O_{X_W,x'}=\dim\mathcal O_{X,x}\leq
-d$. A chain of specializations is counted in the local ring at its last point, so the supremum of
-these local dimensions bounds the dimension of $X_W$ by $d$. By [thm-sc-finite-type-torsion-cd],
-$H^q((X_W)_{\mathrm{et}},M)=0$ for every torsion sheaf and $q>2d$. Each group in the stalk test
-[lem-kun-cd-stalk-criterion] is therefore zero in those degrees. The test proves $R^qf_*M=0$ for
-$q>2d$, so one may choose $N=2d$. For $X=\varnothing$ all direct images are zero and one takes
-$N=0$; this is the separate empty-case bound in the corrected statement, since the Krull dimension
-of the empty space is $-\infty$ [def-kun-topological-krull-dimension].
-
-8. Finally, the definition [def-weil-derived-complete-integral-detailed] requires precisely
-derived completeness, constructibility of every finite reduction, and one finite cohomological
-interval containing all reductions. Step 3 supplies completeness and identifies these reductions
-with the complexes of step 4; step 6 supplies the interval $[a,b+N]$, with $[a,b]$ provided by the
-hypothesis $K\in D^b_c(X,\mathcal O_E)$. Hence the tower-defined $Rf_*K$ lies in $D^b_c(Y,\mathcal
-O_E)$, and all the more precise clauses hold. -/
+The proved torsion-module dimension theorem and the uniform dimension bound after field
+extension give a nonnegative residue-coefficient bound N. For any qualifying integer N,
+the surjection O_E/varpi^(n+1) -> O_E/varpi has nilpotent kernel. Nilpotent coefficient
+devissage, followed by coefficient change along the resulting quotient-ring isomorphism,
+gives this same N at every level. The finite-ring origin equivalence and the etale-origin
+amplitude theorem now give support [a,b+N] from [a,b]. If a>b, the input is zero in every
+degree; apply that amplitude theorem with an interval above the degree being tested.
+This argument also retains negative qualifying bounds. Transport constructibility and
+support through the canonical reduction isomorphisms and use the definition of integral
+constructibility. Over an algebraically closed field, the explicit torsion-module bound
+is 2 dim X. For empty X its discrete topology has Krull dimension at most zero, giving
+the stated bound zero without assigning the empty scheme a natural-number dimension.
+-/
 theorem sfIntegralDirectImage_constructible
     (K₀ : Type u) [Field K₀] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀))
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -216,6 +345,139 @@ theorem sfIntegralDirectImage_constructible
         IsZero (((Etale.lowerStar
             (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)))
             f).rightDerived q).obj M)) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K₀))
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of K₀))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of K₀))
+  have : QuasiCompact f := inferInstance
+  have : QuasiSeparated f := inferInstance
+  have : LocallyOfFiniteType (f ≫ (Y ↘ Spec (.of K₀))) := by
+    rw [comp_over f _]
+    infer_instance
+  have : LocallyOfFiniteType f := locallyOfFiniteType_of_comp f (Y ↘ Spec (.of K₀))
+  let B := ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)
+  have : Finite (Padic.coefficientExtensionRing l E 1) :=
+    Padic.finite_coefficientExtensionRing l E 1 le_rfl
+  have : Finite B := inferInstance
+  have hbound : ∃ N : ℤ, 0 ≤ N ∧ ∀ q : ℕ, N < (q : ℤ) →
+      ∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B),
+        IsZero (((Etale.lowerStar (ModuleCat.{u + 1} B) f).rightDerived q).obj M) := by
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le_of_isPullback
+      (X ↘ Spec (.of K₀))
+    refine ⟨2 * d, by positivity, fun q hq M ↦ ?_⟩
+    have hz := Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le B
+      isAddTorsion_of_finite (X ↘ Spec (.of K₀)) (Y ↘ Spec (.of K₀)) f
+      (comp_over f _) d hd M q hq
+    exact hz.of_iso
+      ((Etale.lowerStar (ModuleCat.{u + 1} B)
+        f).homologyRightDerivedFunctorPlusObjSingleFunctorIso M q).symm
+  have hAmplitude : ∀ N : ℤ,
+      (∀ (q : ℕ), N < (q : ℤ) →
+        ∀ M : Sheaf X.smallEtaleTopology
+          (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))),
+          IsZero (((Etale.lowerStar
+            (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)))
+            f).rightDerived q).obj M)) →
+      ∀ a b : ℤ,
+        (∀ n : ℕ, proEtaleCohomologicalSupport
+          ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) ⊆ Set.Icc a b) →
+        ∀ n : ℕ, proEtaleCohomologicalSupport (sfFiniteDerivedDirectImage l E f K n) ⊆
+          Set.Icc a (b + N) := by
+    intro N hN a b hs n
+    let Bn := Padic.coefficientExtensionRing l E (n + 1)
+    let : Finite Bn := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+    obtain ⟨c, d, hcd, hKcd⟩ := _hK.2
+    apply finite_image_support f Bn N _ ((scalarReductionDerivedExtension l E X n).obj K)
+      (hKcd n).1.2 ⟨c, d, hcd, ?_⟩ a b (hs n)
+    · intro M q hq hNq
+      have hz := residue_bound_all_levels l E f N hN n M q hq hNq
+      lift q to ℕ using hq
+      have hz' := hz.of_iso
+        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} Bn))
+          f).homologyRightDerivedFunctorPlusObjSingleFunctorIso M q).symm
+      exact hz'.of_iso
+        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} Bn))
+          f).homologyRightDerivedFunctorObjSingleFunctorIso M q)
+    · intro i hi
+      by_contra hz
+      obtain ⟨h₁, h₂⟩ := (hKcd n).2 hz
+      rcases hi with hi | hi <;> omega
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · let A := scalarReductionSource l E Y
+    let : HasCountableProducts A := (ProEt.countableProducts_exact.{u, u, 0} Y
+      (completedIntegralCommRingSheafUnrestricted l E Y)).1
+    let : HasFiniteBiproducts A := Abelian.hasFiniteBiproducts
+    have : (lim (J := Discrete ℕ) (C := A)).PreservesEpimorphisms :=
+      { preserves := by
+          intro F G g hg
+          have h := (ProEt.countableProducts_exact.{u, u, 0} Y
+            (completedIntegralCommRingSheafUnrestricted l E Y)).2.2
+            ℕ (fun n ↦ F.obj ⟨n⟩) (fun n ↦ G.obj ⟨n⟩)
+            (fun n ↦ g.app ⟨n⟩) (fun n ↦ inferInstance)
+          have he : lim.map g = (Limits.Pi.isoLimit _).inv ≫
+              Limits.Pi.map (fun n ↦ g.app ⟨n⟩) ≫ (Limits.Pi.isoLimit _).hom := by
+            apply limit.hom_ext
+            intro ⟨n⟩
+            simp
+          rw [he]
+          infer_instance }
+    have := hasExactLimitsOfShape_of_preservesEpi A (Discrete ℕ)
+    have := CountableAB4Star.of_hasExactLimitsOfShape_nat A
+    let : HasCountableProducts (DerivedCategory A) :=
+      (derivedCategory_countableProducts_core.{0} A).choose
+    let : HasProduct (sfDirectImageTerm l E f K) := inferInstance
+    obtain ⟨L, p, δ, h⟩ := Pretriangulated.distinguished_cocone_triangle₁
+      (towerTransitionEndomorphism (sfDirectImageTransition l E f K))
+    exact ⟨inferInstance, ⟨⟨L, p, δ, h⟩⟩⟩
+  · intro hp L
+    obtain ⟨hcomplete, hred⟩ := sfCompleteDirectImage_reduction l E f K _hK.1 L
+    obtain ⟨a, b, hab, hKn⟩ := _hK.2
+    obtain ⟨N, hNnonneg, hN⟩ := hbound
+    have hfinite (n : ℕ) : intrinsicFiniteTorsionConstructible l E (n + 1)
+        (Nat.succ_le_succ (Nat.zero_le n)) Y (sfFiniteDerivedDirectImage l E f K n) := by
+      let Bn := Padic.coefficientExtensionRing l E (n + 1)
+      let : Finite Bn := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+      apply finite_image_constructible K₀ Bn (l ^ (n + 1))
+        (pow_pos (Fact.out : l.Prime).pos _) (coefficient_killed l E _)
+        (by simpa only [Nat.cast_pow] using _hl.pow (n + 1))
+        (X ↘ Spec (.of K₀)) (Y ↘ Spec (.of K₀)) f (comp_over f _) _
+        (hKn n).1.2 a b hab
+      intro i hi
+      by_contra hz
+      obtain ⟨h₁, h₂⟩ := (hKn n).2 hz
+      rcases hi with hi | hi <;> omega
+    refine ⟨⟨hcomplete, a, b + N, by omega, fun n ↦ ?_⟩, hcomplete, hred, hfinite⟩
+    let : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+      Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+    have := hred n
+    let e := asIso (sfDirectImageReductionComparison l E f L n)
+    exact ⟨intrinsic_iso Y _ e.symm (hfinite n), fun i hi ↦
+      hAmplitude N hN a b (fun n ↦ (hKn n).2) n
+        (by rwa [support_iso Y _ e] at hi)⟩
+  · obtain ⟨N, _, hN⟩ := hbound
+    exact ⟨N, hN⟩
+  · exact hAmplitude
+  · intro hclosed d _ hd q hq M
+    let : IsAlgClosed K₀ := hclosed
+    have hz := Etale.isZero_higherDirectImage_of_two_mul_lt (Λ := B)
+      isAddTorsion_of_finite f (X ↘ Spec (.of K₀)) (Y ↘ Spec (.of K₀))
+      (comp_over f _) d hd.le M q (by exact_mod_cast hq)
+    exact hz.of_iso
+      ((Etale.lowerStar (ModuleCat.{u + 1} B)
+        f).homologyRightDerivedFunctorPlusObjSingleFunctorIso M q).symm
+  · intro hclosed hempty q hq M
+    let : IsAlgClosed K₀ := hclosed
+    let : IsEmpty X := hempty
+    have hdim : topologicalKrullDim X ≤ (0 : WithBot ℕ∞) := by
+      exact topologicalKrullDim_zero_of_discreteTopology X
+    have hz := Etale.isZero_higherDirectImage_of_two_mul_lt (Λ := B)
+      isAddTorsion_of_finite f (X ↘ Spec (.of K₀)) (Y ↘ Spec (.of K₀))
+      (comp_over f _) 0 hdim M q (by exact_mod_cast hq)
+    exact hz.of_iso
+      ((Etale.lowerStar (ModuleCat.{u + 1} B)
+        f).homologyRightDerivedFunctorPlusObjSingleFunctorIso M q).symm
 
 end WeilConjectures

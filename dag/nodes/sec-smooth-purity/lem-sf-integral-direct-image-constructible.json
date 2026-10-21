@@ -39,138 +39,115 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E$, $P_n=A/(\\varpi_E^n)$. The coefficient lemmas give a DVR and finite quotients. Its ideals are principal, hence $A$ is Noetherian; $[A\\xrightarrow{\\varpi_E^n}A]$ is a finite free resolution of $P_n$. Also $\\ell=u\\varpi_E^e$, $e>0$, so a power of $\\ell$ kills $P_n$. Thus the adic datum applies and the annihilator is invertible on $X,Y$.",
+   "text": "Use exact countable products of pro-etale modules, convert epimorphism preservation to CountableAB4Star, and apply the proved derived-product theorem. Complete the specified one-minus-transition map to a distinguished triangle, obtaining an integral image. This avoids importing the high-level integral-operations package just for its product instance.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-weil-pbc-adic-coefficient-datum"
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   },
   {
-   "text": "The completed-coefficient comparison identifies ordinary completed-ring pushforward $F(K)$ with the specified $R\\varprojlim_n\\operatorname{Res}_nRf_{*,n}K_n$, including strict transitions and projections, and preserves completeness.",
+   "text": "Use lem-sf-complete-direct-image-reduction for completeness and the specified projection adjuncts. This is an arbitrary-morphism statement with no constructibility or amplitude hypothesis. The remaining steps prove the geometric and bounded-constructible assertions.",
    "uses": [
-    "lem-pur-completed-coefficient-pushforward-comparison"
+    "lem-sf-complete-direct-image-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   },
   {
-   "text": "The perfect-quotient projection formula identifies $F(K)\\otimes^L P_n$ with $Rf_{*,n}K_n$. Its compatibility with the reduction unit and the projections of step 2 identifies this map with the finite-reduction comparison in the statement.",
+   "text": "The integer ell lies in the maximal ideal of O_E, so ell^(n+1) kills P_(n+1); this exponent is invertible in the base field. Use the exact fixed/intrinsic coefficient equivalence and its normalized direct-image comparison to transport the finite-coefficient constructibility theorem. Its finite output interval gives finite intrinsic support.",
    "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-derived-direct-image"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-sf-finite-proetale-pushforward-constructible",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   },
   {
-   "text": "Finite-type schemes over a field are Noetherian; inverse images of affine opens under $f$ and its diagonal are quasi-compact, so $f$ is qcqs. Apply the finite-coefficient constructibility lemma to each $P_n$ and $K_n$, obtaining bounded constructible etale origins $L_n$ and bounded intrinsic constructibility of the finite images.",
+   "text": "Finite-type schemes over a field are locally Noetherian and quasi-compact, and f is qcqs and locally of finite type. Apply the proved torsion-module dimension estimates in WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension: a uniform bound after field extension gives N>=0 for residue-module sheaves. The Plus single-object comparison converts higherDirectImage to classical rightDerived. This bypasses the abelian-sheaf coefficient-forgetting detour.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sf-finite-proetale-pushforward-constructible"
+    "lem-etale-finite-type-sep-closed-derived-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   },
   {
-   "text": "The finite relative torsion cohomological dimension supplies some $N\\geq0$ with $R^qf_*F=0$ for $q>N$ and every torsion abelian etale sheaf $F$; $f$ is qcqs by step 4. Every $P_1$-module sheaf $M$ is torsion, since a power of $\\ell$ kills $P_1$. Coefficient-change vanishing for the ring map $\\mathbf Z\\to P_1$ says $R^qf_*M=0$ as a $P_1$-module sheaf exactly when it vanishes for the underlying abelian sheaf; equivalently, ringed-topos composition for the identity-topos maps $\\mathbf Z\\to P_1$, whose direct images are exact restrictions, identifies the underlying abelian derived images. So this $N$ bounds every $P_1$-module sheaf.",
+   "text": "The surjection P_(n+1)->P_1 has nilpotent kernel: its unlifted kernel is the image of (varpi) in O_E/(varpi^(n+1)), whose (n+1)-st power is zero. Transfer this identity through ULift. Nilpotent coefficient devissage and change of scalars along R/ker(p) ~= P_1 give every qualifying integer residue bound at every level.",
    "uses": [
-    "lem-kun-0f10",
-    "def-kun-cd",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-nilpotent-coefficient-direct-image-bound",
     "lem-sbc-coefficient-higher-direct-image-zero"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   },
   {
-   "text": "For any integer $N$ satisfying the residue bound, apply nilpotent-coefficient devissage with $R=P_n$, $I=(\\varpi_E)$ and $I^n=0$. This same $N$ bounds all $P_n$-module etale sheaves.",
+   "text": "Take a bounded constructible etale origin of each intrinsic reduction. The etale-origin amplitude theorem and the preceding higher-image bound give [a,b+N] when a<=b. If a>b all input cohomology is zero; apply the same theorem with [i+1,i+1] to kill output degree i. This retains negative N. The explicit torsion-module dimension estimate gives 2 dim X over an algebraically closed field; the discrete empty source has Krull dimension <=0 and gives zero.",
    "uses": [
-    "lem-sf-nilpotent-coefficient-direct-image-bound"
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-etale-origin-pushforward-amplitude",
+    "lem-etale-finite-type-sep-closed-derived-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   },
   {
-   "text": "If $a>b$, each $K_n=0$ and its derived image is zero. For $a\\leq b$, apply the etale-origin amplitude lemma to $L_n$ from step 4 and the bound of step 6. If all $K_n$ have range $[a,b]$, it gives range $[a,b+N]$ for every $Rf_{*,n}K_n$, also when $N<0$.",
-   "uses": [
-    "lem-sf-etale-origin-pushforward-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
-   }
-  },
-  {
-   "text": "For nonempty $X$ of dimension $d$, dimension invariance under every field extension and the torsion-abelian dimension bound give $2d$. Every $P_1$-module sheaf is torsion, and coefficient-change vanishing for $\\mathbf Z\\to P_1$, as in step 5, gives the module bound. For empty $X$ every input sheaf is zero, so take $N=0$.",
-   "uses": [
-    "lem-kun-dimension-extension",
-    "lem-kun-torsion-abelian-direct-image-dimension-bound",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-sbc-coefficient-higher-direct-image-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
-   }
-  },
-  {
-   "text": "Completeness, the identified constructible reductions and their common finite interval satisfy exactly the defining conditions of $D^b_c(Y,\\mathcal O_E)$.",
+   "text": "Transport finite constructibility and the common support interval through the canonical reduction isomorphisms. Combine them with completeness in the definition of integral constructibility.",
    "uses": [
     "def-weil-derived-complete-integral-detailed"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2; finite-stalk, uniformly bounded version of the pushforward argument"
+    "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients"
    }
   }
  ],
  "proof_deps": [
-  "def-kun-cd",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-direct-image",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-kun-0f10",
-  "lem-kun-dimension-extension",
-  "lem-kun-torsion-abelian-direct-image-dimension-bound",
-  "lem-pur-completed-coefficient-pushforward-comparison",
+  "def-weil-proetale-inverse-image",
+  "lem-etale-finite-type-sep-closed-derived-dimension",
   "lem-sbc-coefficient-higher-direct-image-zero",
+  "lem-sf-complete-direct-image-reduction",
   "lem-sf-etale-origin-pushforward-amplitude",
   "lem-sf-finite-proetale-pushforward-constructible",
   "lem-sf-nilpotent-coefficient-direct-image-bound",
+  "lem-weil-derived-limit-products-core",
   "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-valued-dvr-finite-quotients",
-  "prop-weil-pbc-direct-image-limits"
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-valued-dvr-finite-quotients"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11. Three statement-only subproblems carry old steps 4, 5 (coefficient filtration), and 6. Existing completed-coefficient and dimension lemmas carry old steps 2-3 and 7."
+  "place": "Lemma 6.7.2, using Lemmas 6.5.9 and 6.5.11; Stacks 099N and 0944 for completion and perfect coefficients",
+  "note": "E9: explicit Lean assembly, nilpotent quotient computation and fixed/intrinsic transport. Completion/reduction normalization is the separate arbitrary-morphism source result lem-sf-complete-direct-image-reduction. No unit step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -284,28 +261,9 @@
   ]
  },
  "tool_uses": [
-  "lem-kun-0f10",
-  "lem-kun-cd-stalk-criterion",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-sc-etale-local-dimension",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-separably-closed-torsion-cd",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-restriction-of-scalars-exact",
   "lem-weil-valued-dvr-finite-quotients",
-  "prop-weil-pbc-comparison-direct-image",
-  "prop-weil-pbc-direct-image-limits",
-  "thm-dg-finite-type-constructibility",
-  "thm-sc-finite-type-torsion-cd",
-  "lem-kun-dimension-extension",
-  "lem-kun-torsion-abelian-direct-image-dimension-bound",
-  "lem-pur-completed-coefficient-pushforward-comparison",
   "lem-sbc-coefficient-higher-direct-image-zero"
  ],
  "reviewed": {
@@ -336,5 +294,15 @@
   "group": "Q29",
   "result": "pass",
   "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T134337-L-877594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

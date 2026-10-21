@@ -1,0 +1,159 @@
+{
+ "id": "lem-sf-complete-direct-image-reduction",
+ "kind": "statement",
+ "title": "Canonical finite reductions of complete direct-image Roos limits for arbitrary morphisms",
+ "statement": "Let ell be prime, E/Q_ell a finite extension, and f:X->Y any morphism of schemes [def-weil-scheme-morphism-properties, def-weil-l-adic-coefficient-extension]. Let K be a derived-complete complex over the completed integral coefficient sheaf [def-weil-derived-complete]. Form the finite direct images of its canonical positive reductions and their restricted inverse tower [def-weil-derived-direct-image]. For every chosen product witness and every SfIntegralDirectImage Roos triangle L for this prescribed tower [def-weil-derived-limit], L.obj is derived complete, and for every n>=0 the canonical scalar-extension adjunct of its n-th limit projection, sfDirectImageReductionComparison l E f L n, is an isomorphism. There is no finite-type, field-of-definition, constructibility or cohomological-dimension hypothesis.",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-pushforward-Noetherian-case (Tag 099N), parts (1),(3),(4), and lemma-naive-completion; with the perfect-coefficient projection formula of Tag 0944",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-projection-formula (Tag 0944)"
+   },
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.5.9(2), 6.5.11(3)"
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "The coefficient ring is a DVR with nonzero uniformizer. Its positive quotients have two-term finite free resolutions, hence are perfect. The normalized coefficient presentation comparison identifies the completed and finite sheaves and every quotient projection and scalar-adjunction unit.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the completed-coefficient pushforward comparison, including its universal derived units, strict diagram comparison and normalized limit projections. The structural maps equal the sf structural maps after all finite projections, hence equal. Uniqueness of right derived functors and of the normalized restriction comparison identifies the completed and finite functors with sfCompletedDerivedDirectImage and sfFiniteDerivedDirectImage, including their transition maps.",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed direct-image/limit theorem carries the canonical completion unit to direct image of that unit followed by its limit isomorphism, so a complete input has complete completed direct image. Its perfect-quotient projection formula identifies the adjunct of every projected image of the unit with an isomorphism. Transport the completeness convention using the legacy/intrinsic augmented-tower comparison.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "This yields a Roos triangle with object F(K) and projections F(unit_n) followed by the normalized derived restriction comparison. Rotate this and the prescribed triangle of L, extend the identities on the two product terms using TR3, and apply the triangle five lemma. The resulting L~=F(K) commutes with every projection. Completeness is invariant under isomorphism. Naturality of the scalar adjunction identifies each specified comparison for L with extension of this isomorphism followed by the perfect-quotient comparison; therefore it is invertible.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-derived-complete",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-limit",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(1),(3),(4), with Tag 0944; normalization to the specified sf quotient projections by the universal derived units"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a derived complete complex is complete and commutes with finite adic reduction",
+   "results": "Eight unrelated AdicCompletion hits: map_val_apply, map_exact, IsAdicComplete.of_comp_lift, map_of, map_mk, map, of_lift, transition. No sheaf derived direct-image statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSfDerivedComplete\"",
+   "results": "No hits; project identifier unknown to the Mathlib search index.",
+   "date": "2026-10-21",
+   "verdict": "no indexed match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfCompleteDirectImage|sfDirectImageReductionComparison",
+   "results": "0 hits in Mathlib. Local project search finds only the original constructibility theorem and its consumers; the generic comparison data and adic theorem use different normalized coefficient models.",
+   "date": "2026-10-21",
+   "verdict": "no direct application; this statement records the missing specialized normalized source result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward of a derived complete complex commutes with finite adic reduction and preserves completeness",
+   "results": "Eight hits: AdicCompletion.map_exact, AdicCompletion.map_val_apply, AdicCompletion.map_mk, AdicCompletion, AdicCompletion.map_of, AdicCompletion.instCommRing, AdicCompletion.map_comp, IsAdicComplete. All are algebraic module completion, not ringed-topos derived direct image.",
+   "date": "2026-10-21",
+   "verdict": "no match for the specified sheaf derived direct-image and finite-reduction comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfIntegralDirectImageConstructible",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "The integral constructible codomain of Ra_{Y*} in RGamma(Y,K)=Fib_s(Ra_{Y*}K): the completeness and canonical quotient-comparison part of the direct-image preservation argument, before its geometric finiteness and uniform-amplitude steps.",
+   "via": [
+    "lem-sf-integral-direct-image-constructible",
+    "lem-weil-structure-direct-images-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCompleteDirectImageReduction",
+  "file": "lean/Sheaf/Paper/SfCompleteDirectImageReduction.lean",
+  "declaration": "WeilConjectures.sfCompleteDirectImage_reduction",
+  "statement": "theorem sfCompleteDirectImage_reduction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))\n    (hK : IsSfDerivedComplete l E X K)\n    [HasProduct (sfDirectImageTerm l E f K)] (L : SfIntegralDirectImage l E f K) :\n    IsSfDerivedComplete l E Y L.obj ∧\n      ∀ n : ℕ, IsIso (sfDirectImageReductionComparison l E f L n)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T134337-L-877594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T134337-L-877594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
