@@ -19,9 +19,146 @@
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the graded map before imposing any flatness hypotheses. For each $p,q,a$, and on every localized site over $U$, send $(y,\\phi)$ to the map $x\\mapsto y\\phi(x)$ if $a+q=0$, and to zero otherwise. Here $y$ is restricted along every object over $U$ before multiplication. This is bilinear over $\\mathcal O|_U$, commutes with restrictions, and is linear in $x$, hence gives a section of the sheaf Hom. The presheaf tensor universal property followed by the unique sheafification factorization gives $F^p\\otimes D^q\\to\\mathcal Hom(E^a,F^{a+p+q})$. The Hom-product universal property and then the total-coproduct universal property assemble these into $a^n$ for $n=p+q$. Those same universal properties imply uniqueness: equality can be checked after each total-summand inclusion, each Hom projection, and the presheaf-tensor sheafification unit. This uses all localized sections, not an assumption that every section of a sheaf tensor is globally a pure tensor.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04TT/03EM (section-internal-hom), 03EK (section-tensor-product), and 03CY (lemma-sheafification-presheaf-modules); degreewise construction."
+   }
+  },
+  {
+   "text": "Check the chain-map equation on the generators and projections of step 1. Regard $\\phi$ as a homogeneous graded map $E\\to O$ of degree $q$, zero in every unsupported component; since $d_O=0$, $d_D\\phi=-(-1)^q\\phi d_E$. Thus, writing $n=p+q$,\n$$a(d_Fy\\otimes\\phi+(-1)^py\\otimes d_D\\phi)(x)=d_Fy\\,\\phi(x)-(-1)^{p+q}y\\,\\phi(d_Ex)=d_{\\mathcal Hom(E,F)}(a(y\\otimes\\phi))(x).$$\nThe formula includes the case $a+q+1=0$, where the second term can be nonzero even though $\\phi(x)=0$; all other unsupported terms vanish. By step 1's detecting maps this proves the chain equation and the asserted uniqueness as a chain map. The sign in the second term comes from the differentials, with no sign multiplying $y\\phi(x)$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "section-hom-complexes, differential formula; Tag 08JE (equation-eval), ordinary representative calculation."
+   }
+  },
+  {
+   "text": "Now assume $F,D$ are K-flat and $\\mathcal Hom^\\bullet(E,\\eta_O)$, $\\mathcal Hom^\\bullet(E,\\eta_F)$ are quasi-isomorphisms, and choose a K-flat flat-term resolution $s:L\\to E$ using [lem-pc-kflat-resolution]. Put $T=\\operatorname{Tot}(F\\otimes D)$ and $W=\\operatorname{Tot}(D\\otimes L)$. The fixed model [def-coef-ringed-tensor-hom-model] says that $T$ and $W$ are K-flat. Also $O$ is K-flat: its degree-zero unit identifies $\\operatorname{Tot}(A\\otimes O)$ with $A$, so it preserves acyclicity. Write $\\mu_{X,Y}:Q\\operatorname{Tot}(X\\otimes Y)\\xrightarrow{\\sim}QX\\otimes^{\\mathbf L}QY$ for the fixed model on K-flat pairs, so $\\mu_{F,D}$ is the specified $\\mu$. The associator and unit constraints are induced by ordinary total-tensor constraints. We use the model on K-flat pairs as stated; we do not infer that $F$ or $D$ has flat terms from its K-flatness.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pc-kflat-complex",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), Tag 0FPT (lemma-symmetric-monoidal-derived), and fixed representative model for Tag 08J9."
+   }
+  },
+  {
+   "text": "Let $h_G=\\mathcal Hom^\\bullet(E,\\eta_G)$, for $G=O,F$, and $h_{G,s}=\\mathcal Hom^\\bullet(s,I(G))h_G$. In the fixed representative coordinates the morphism\n$$g_G:=H(Qs,1)\\gamma_{E,G}:QD\\to H(QL,QO)\\quad(G=O)$$\n(and with domain $Q\\mathcal Hom^\\bullet(E,F)$ and target $H(QL,QF)$ for $G=F$) is precisely $Qh_{G,s}$ followed by the fixed derived-Hom comparison. This is the functoriality of the recorded Hom construction in its first variable. The assumptions on $h_O,h_F$ make the two original $\\gamma$ maps isomorphisms; $Qs$ is invertible because $s$ is a quasi-isomorphism, and $H(Qs,1)$ is invertible because $H$ is a functor. In particular no claim that $\\mathcal Hom(E,-)$ preserves every quasi-isomorphism is being made.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "section-internal-hom, construction and localization factorization of RHom; fixed augmentations."
+   }
+  },
+  {
+   "text": "Define $v_s:W\\to O$ by $v_s(\\phi\\otimes z)=\\phi(sz)$ for homogeneous $z\\in L^a$, interpreted as zero unless $a+q=0$. This is a chain map: on each tensor generator its differential condition is\n$$(d_D\\phi)(sz)+(-1)^q\\phi(s\\,d_Lz)=-(-1)^q\\phi(d_Esz)+(-1)^q\\phi(s\\,d_Lz)=0.$$\nIt descends and is detected by the same sheafification and coproduct maps as in step 1. The actual uncurrying of $h_{O,s}:D\\to\\mathcal Hom^\\bullet(L,I(O))$ sends $\\phi\\otimes z$ to $\\eta_O(\\phi(sz))$, so it equals $\\eta_Ov_s$. Apply the fixed uncurrying equation to the K-flat pair $(D,L)$. If $\\operatorname{untr}$ denotes inverse closed transposition, it gives\n$$\\operatorname{untr}(g_O)=(Q\\eta_O)^{-1}Q(\\eta_Ov_s)\\mu_{D,L}^{-1}=Qv_s\\mu_{D,L}^{-1}=:e_s.$$\nThe cancellation uses the fixed augmentation, with no substitute choice of an identification of $QD$ with the dual.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-hom-representative-evaluation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose) and 08J9 (lemma-internal-hom), fixed uncurrying normalization; evaluation calculation."
+   }
+  },
+  {
+   "text": "Apply the same fixed uncurrying equation to the K-flat pair $(T,L)$ and the chain map $h_{F,s}a:T\\to\\mathcal Hom^\\bullet(L,I(F))$. It supplies a chain map $b:\\operatorname{Tot}(T\\otimes L)\\to I(F)$ with its actual tensor-summand components prescribed by\n$$b((y\\otimes\\phi)\\otimes z)=\\eta_F\\bigl(y\\phi(sz)\\bigr).$$\nIndeed this is exactly the evaluation of the Hom section $h_{F,s}(a(y\\otimes\\phi))$ at $z$, first applying $s$ and then the actual coefficient augmentation. Consequently\n$$\\operatorname{untr}(g_F\\,Q(a))=(Q\\eta_F)^{-1}Qb\\,\\mu_{T,L}^{-1}.$$\nThis use of the model has K-flat tensor source $T$ and K-flat second input $L$, and K-injective target $I(F)$; it does not assume $F$ is K-injective.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-hom-representative-evaluation",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), representative uncurrying into the fixed K-injective target; Tag 08JE (equation-eval)."
+   }
+  },
+  {
+   "text": "Write $\\alpha^{\\rm ord}:\\operatorname{Tot}(T\\otimes L)\\to\\operatorname{Tot}(F\\otimes W)$ and $\\rho_F^{\\rm ord}:\\operatorname{Tot}(F\\otimes O)\\to F$ for the ordinary associator and coefficient unit action, and put\n$$c=\\rho_F^{\\rm ord}\\operatorname{Tot}(1_F\\otimes v_s)\\alpha^{\\rm ord}.$$\nBoth $b$ and $\\eta_Fc$ send $((y\\otimes\\phi)\\otimes z)$ to $\\eta_F(y\\phi(sz))$. The ordinary associator only changes parentheses and the right unitor acts by the actual coefficient action; neither exchanges factors. Apply the detecting maps of step 1 twice to obtain $b=\\eta_Fc$. Thus step 6 simplifies to\n$$\\operatorname{untr}(g_F Q(a))=Qc\\,\\mu_{T,L}^{-1}.$$\nAll cancellations are of localized augmentations, not chain-level inverses.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EK (section-tensor-product), 0FPT (lemma-symmetric-monoidal-derived), and 08JE (equation-eval); actual associator and coefficient unit calculation."
+   }
+  },
+  {
+   "text": "Let $A=QE$, $B=QF$. By the definition of $\\theta$ and naturality of the right-tensor adjunction in its source and tensor parameter, the inverse transpose of\n$$H(Qs,1)\\theta_{A,B}(1\\otimes\\gamma_{E,O})\\mu_{F,D}$$\nis\n$$\\rho_B(1_B\\otimes e_s)\\alpha_{B,QD,QL}(\\mu_{F,D}\\otimes1_{QL}).$$\nHere counit naturality in the tensor parameter identifies the evaluation after $Qs$ with $\\operatorname{untr}(H(Qs,1)\\gamma_{E,O})=e_s$ from step 5. To compute this composite, use the induced associator constraint, naturality of the fixed tensor comparison on $v_s:W\\to O$, and the induced right-unit constraint, respectively:\n$$\\alpha(\\mu_{F,D}\\otimes1)\\mu_{T,L}=(1\\otimes\\mu_{D,L})\\mu_{F,W}Q\\alpha^{\\rm ord},$$\n$$(1\\otimes Qv_s)\\mu_{F,W}=\\mu_{F,O}Q\\operatorname{Tot}(1_F\\otimes v_s),\\qquad \\rho_B\\mu_{F,O}=Q\\rho_F^{\\rm ord}.$$\nSubstitution of $e_s=Qv_s\\mu_{D,L}^{-1}$ cancels $\\mu_{D,L}^{-1}\\mu_{D,L}$ and makes the displayed inverse transpose exactly $Qc\\mu_{T,L}^{-1}$. Every comparison in these equations is on K-flat pairs from step 3. This writes out the compatibility with both augmentation comparisons rather than asserting an unspecified transport.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom) and 0FPT (lemma-symmetric-monoidal-derived), natural adjunction and induced associator/unit constraints; equation-eval (08JE)."
+   }
+  },
+  {
+   "text": "Steps 7 and 8 have equal inverse transposes. The closed adjunction is a bijection, hence their maps into $H(QL,QF)$ agree. Cancel the isomorphism $H(Qs,1)$ of step 4 to obtain\n$$\\theta_{QE,QF}(1\\otimes\\gamma_{E,O})\\mu_{F,D}=\\gamma_{E,F}Q(a_{E,F}).$$\nThe construction in steps 1-2 did not need any flatness. In the comparison, only $F,D$ and the auxiliary resolution $L$ were required to be K-flat. The two stated augmentation quasi-isomorphisms supply exactly the two $\\gamma$ isomorphisms; neither K-flatness of $E$ nor K-injectivity of $F$ entered.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (equation-internal-hom and lemma-internal-hom), injectivity of transposition; Tag 08JE (equation-eval)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JD/08JE (lemma-dual/equation-eval), 0A90 (lemma-compose), 08J9 (lemma-internal-hom), and 0FPT (lemma-symmetric-monoidal-derived); explicit fixed-augmentation representative calculation supplied by Q116."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +187,52 @@
    "results": "PresheafOfModules.sheafificationAdjunction_homEquiv_apply; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.sheafifyHomEquiv; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; LightCondensed.ihomPoints; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
    "date": "2026-10-21",
    "verdict": "no match: module dual-tensor maps, total tensors and underived sheafification do not give the fixed-augmentation ringed-site derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the map F tensor Hom(E,O) to Hom(E,F) is unsigned and agrees with the closed derived adjunction via fixed K-injective augmentations",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; PresheafOfModules.sheafificationAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; PresheafOfModules.sheafifyHomEquiv; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected results concern ordinary modules, sheafification, or total tensor construction; none states the ringed-site cochain formula together with fixed-augmentation derived normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|uncurry.*[Ee]val|[Ee]val.*uncurry",
+   "results": "No hits. Directory: Mathlib/CategoryTheory/",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected results concern ordinary modules, sheafification, or total tensor construction; none states the ringed-site cochain formula together with fixed-augmentation derived normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cochain complex evaluation map from F tensor Hom(E,R) to Hom(E,F) represents derived evaluation under K-flat replacements and K-injective augmentations",
+   "results": "FGModuleCat.FGModuleCatEvaluation; Module.Dual.eval; ContinuousAlternatingMap.apply; FGModuleCat.FGModuleCatEvaluation_apply; FGModuleCat.FGModuleCatEvaluation_apply'; ModuleCat.ihom_coev_app; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; CochainComplex.shiftEval",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected results concern ordinary modules, sheafification, or total tensor construction; none states the ringed-site cochain formula together with fixed-augmentation derived normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"tensor\"",
+   "results": "HomologicalComplex.tensorUnit; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.tensorUnitIso; HomologicalComplex.HasTensor; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; HomologicalComplex.instHasTensorXTensorUnit_1",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected results concern ordinary modules, sheafification, or total tensor construction; none states the ringed-site cochain formula together with fixed-augmentation derived normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "def tensorObj|def.*[Ee]val|def.*[Cc]urry|lemma.*[Cc]urry|theorem.*[Cc]urry",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/Algebra/Homology/Double.lean; Mathlib/Algebra/Homology/Double.lean; Mathlib/Algebra/Homology/Double.lean; Mathlib/Algebra/Homology/Double.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplexLimits.lean Directory: Mathlib/Algebra/Homology/",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected results concern ordinary modules, sheafification, or total tensor construction; none states the ringed-site cochain formula together with fixed-augmentation derived normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complexes of sheaves of modules, total tensor with the ordinary dual maps to the Hom complex; localizing the unsigned coefficient multiplication gives the derived evaluation transpose",
+   "results": "FGModuleCat.FGModuleCatEvaluation_apply'; ModuleCat.ihom_ev_app; FGModuleCat.FGModuleCatEvaluation_apply; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply; dualTensorHom; ModuleCat.ihom_coev_app; lTensorHomEquivHomLTensor; TensorProduct.dualDistrib",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected results concern ordinary modules, sheafification, or total tensor construction; none states the ringed-site cochain formula together with fixed-augmentation derived normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-duality-maps",
@@ -65,7 +244,7 @@
  "blueprint": {
   "from": {
    "node": "det-thm-sf-ctf-stability-internal-hom",
-   "place": "Proof, second paragraph, final sentence: the coefficient-dual evaluation comparison in the internal-Hom tensor-with-dual identification; Unsigned ordinary evaluation and its localization through the two augmentation comparisons.",
+   "place": "Displayed second isomorphism RHom_S(P,a^!L) = P^vee tensor^L a^!L in det-thm-sf-ctf-stability-internal-hom; representative normalization of the tensor-with-dual evaluation map. The current main-20261015 file contains this statement and no proof paragraphs.",
    "via": [
     "lem-sfb-ringed-site-duality-maps",
     "lem-sfb-ringed-site-perfect-duality"
@@ -73,5 +252,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-ordinary-evaluation-localization",
+  "worker": "stage1",
+  "summary": "Constructed the ordinary map by actual sheafified tensor generators, checked its differential including the adjacent unsupported degree, and compared both fixed augmentations after a K-flat replacement of E. The comparison is proved by two explicitly normalized inverse transposes and tensor-comparison coherence. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the tensor-with-dual second displayed isomorphism of det-thm-sf-ctf-stability-internal-hom at the level of its evaluation map; the current blueprint file has no proof, so this representative argument is agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site K-flat replacement is used only to replace E by an auxiliary L; no coefficient restriction or unit-route replacement."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site closed adjunction and the induced associator/unit constraints are the structure already assumed by the item; no result of constructibility or perfectness is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-9b9016bb0",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-9b9016bb0 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to NS's re-split creation and it has no new nodes. All 9 steps are recomputed. Step 2 chain map: d_Dφ=−(−1)^qφd_E, both sides dy·φ(x)−(−1)^{p+q}yφ(dx), no Koszul sign, the neighbouring degree a+q+1=0 included. Step 5: v_s is a chain map and untr(g_O)=Qv_sμ_{D,L}^{-1} by the model's ψ=η_Ov_s. Steps 6–7: b=η_F c. Step 8: the inverse transpose is ρ(1⊗e_s)α(μ⊗1) by α naturality and ε extranaturality, then the associator equation, μ naturality and the unitor give Qc μ_{T,L}^{-1}. Step 9 cancels a bijection and the iso H(Qs,1). Cited statements read in full (def-coef-ringed-tensor-hom-model, def-coef-hom-representative-evaluation, lem-sf-ringed-derived-closed-symmetric-monoidal, def-pur-derived-internal-hom, lem-pc-kflat-resolution, the elementary module definitions); each says what its step takes. Every model application is to a K-flat pair (T, W, O[0], L). Stacks 08JD/08JE (sites-cohomology lines 9114ff) and 0A98 match θ; tags 08J9/0A90/06YS/0FPT/03EK/03EM/04TT/03CY checked. Blueprint ancestor file read: statement only, so from.place is accurate. The closure has no cycle (BFS, 260 nodes). The two declared tool uses (K-flat resolution, closed symmetric monoidal) are accepted. No duplicate among the 08JD/08JE citers. No SGA. Edge cases: O[0], rank-one degree −1, zero objects, unbounded E. Remark, not a fault: the inherited statement attributes μ to the flat-term descent node, but F and D are only K-flat, so the item's fixed K-flat model comparison is the operative reading (worker documented it; the citer uses it the same way)."
  }
 }
