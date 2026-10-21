@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.LisseIntegralSmallCoefficients
 public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import Sheaf.Paper.LisseAdicSheaves
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Mathlib.CategoryTheory.Functor.OfSequence
@@ -24,11 +25,15 @@ balanced tensors. Algebraic coefficients use the same operation on coefficient p
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u
+universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-attribute [local instance] lisseModuleSheafify lisseIntegralPreadditive lisseIntegralLinear
+-- Use the category's direct quiver, avoiding conversion through a reflexive quiver.
+attribute [-instance] CategoryTheory.catToReflQuiver
+
+attribute [local instance] lisseCoefficientFieldModule lisseModuleSheafify
+  lisseIntegralPreadditive lisseIntegralLinear
   lisseIntegralHomAddCommGroup lisseIntegralHomModule
   lisseSheafHomAddCommGroup lisseSheafHomModule
 
@@ -608,9 +613,8 @@ underlying data. This is only a definitional transport, with no new choice.
 Source: Weil II (1.1.1) d) (blueprint: def-wf-lisse-adic-automorphism-pullback). -/
 def automorphismScalarLevelIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     ((lisseIntegralScalarExtension l E Y L ι).obj F).obj.obj (op m) ≅
-      lisseIntegralScalarLevel l E Y L ι F m := by
-  unfold lisseIntegralScalarExtension
-  exact (lisseIntegralScalarExtensionData l E Y L ι).levelIso F m
+      lisseIntegralScalarLevel l E Y L ι F m :=
+  lisseScalarLevelIso l E Y L ι F m
 
 section IntegralComparisonConstruction
 
@@ -1164,6 +1168,167 @@ def lisseRationalAutomorphismScalarIso :
     lisseRationalAutomorphismPullback h l E ⋙ lisseRationalScalarExtension l E Y L ι ≅
       lisseRationalScalarExtension l E Y L ι ⋙ lisseRationalAutomorphismPullback h l L :=
   (lisseRationalAutomorphismScalarIso_exists h l E L ι).exists.choose
+
+section Coherence
+set_option backward.isDefEq.respectTransparency true
+attribute [local irreducible] lisseScalarSourceIndex lisseRamificationIndex
+  lisseIntegerInclusion Padic.coefficientExtensionIntegers
+attribute [local instance] lisseCoefficientIntegersCommRing lisseCoefficientIntegersAlgebra
+  lisseCoefficientIntegersModule lisseCoefficientQuotientCommRing lisseCoefficientQuotientAlgebra
+
+private theorem integralAutomorphismScalar_generator
+    (F : LisseIntegralSheaf l E Y) (m : ℕ) (U : Y.Etale)
+    (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj
+      (op ((automorphismEtaleReindex h).obj U))) :
+    (((lisseIntegralAutomorphismScalarIso h l E L ι).hom.app F).hom.app
+      (op m)).hom.app (op U)
+      (lisseScalarGenerator l E Y L ι
+        ((lisseIntegralAutomorphismPullback h l E).obj F) m U 1 x) =
+    lisseScalarGenerator l E Y L ι F m
+      ((automorphismEtaleReindex h).obj U) 1 x := by
+  have hp := (lisseIntegralAutomorphismScalarIso_exists h l E L ι).exists.choose_spec
+    F m U 1 x
+  change (automorphismScalarLevelIso l E L ι F m).hom.hom.app
+      (op ((automorphismEtaleReindex h).obj U)) _ = _ at hp
+  exact (sheafIso_cancel_hom (automorphismScalarLevelIso l E L ι F m) _ _).symm.trans
+    (congrArg ((automorphismScalarLevelIso l E L ι F m).inv.hom.app
+      (op ((automorphismEtaleReindex h).obj U))) hp)
+
+private theorem integralAutomorphism_index_cast (F : LisseIntegralSheaf l E Y)
+    {m n : ℕ} (e : m = n) (U : Y.Etale)
+    (x : (F.obj.obj (op m)).obj.obj (op ((automorphismEtaleReindex h).obj U))) :
+    (eqToHom (congrArg (fun k ↦ F.obj.obj (op k)) e)).hom.app
+      (op ((automorphismEtaleReindex h).obj U)) x =
+    (eqToHom (congrArg (fun k ↦
+      ((lisseIntegralAutomorphismPullback h l E).obj F).obj.obj (op k)) e)).hom.app
+      (op U) x := by
+  cases e
+  rfl
+
+private theorem integralAutomorphismScalar_unit (F : LisseIntegralSheaf l E Y) :
+    (lisseIntegralAutomorphismScalarIso h l E E (AlgHom.id ℚ_[l] E)).hom.app F ≫
+      (lisseIntegralAutomorphismPullback h l E).map
+        ((lisseIntegralScalarIdentityIso l E Y).hom.app F) =
+    (lisseIntegralScalarIdentityIso l E Y).hom.app
+      ((lisseIntegralAutomorphismPullback h l E).obj F) := by
+  apply lisseScalarHom_ext l E Y E (AlgHom.id ℚ_[l] E)
+    ((lisseIntegralAutomorphismPullback h l E).obj F)
+  intro m U x
+  change (((lisseIntegralScalarIdentityIso l E Y).hom.app F).hom.app (op m)).hom.app
+      (op ((automorphismEtaleReindex h).obj U))
+      ((((lisseIntegralAutomorphismScalarIso h l E E (AlgHom.id ℚ_[l] E)).hom.app F).hom.app
+        (op m)).hom.app (op U)
+        (lisseScalarGenerator l E Y E (AlgHom.id ℚ_[l] E)
+          ((lisseIntegralAutomorphismPullback h l E).obj F) m U 1 x)) = _
+  erw [integralAutomorphismScalar_generator, lisseIntegralScalarIdentityIso_formula,
+    lisseIntegralScalarIdentityIso_formula]
+  exact integralAutomorphism_index_cast h l E F (lisseScalarSourceIndex_id l E m) U x
+
+private theorem integralAutomorphismScalar_comp
+    (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
+    (κ : L →ₐ[ℚ_[l]] M) (F : LisseIntegralSheaf l E Y) :
+    (lisseIntegralAutomorphismScalarIso h l E M (κ.comp ι)).hom.app F ≫
+      (lisseIntegralAutomorphismPullback h l M).map
+        ((lisseIntegralScalarCompositeIso l E Y L ι M κ).hom.app F) =
+    (lisseIntegralScalarCompositeIso l E Y L ι M κ).hom.app
+        ((lisseIntegralAutomorphismPullback h l E).obj F) ≫
+      (lisseIntegralScalarExtension l L Y M κ).map
+        ((lisseIntegralAutomorphismScalarIso h l E L ι).hom.app F) ≫
+      (lisseIntegralAutomorphismScalarIso h l L M κ).hom.app
+        ((lisseIntegralScalarExtension l E Y L ι).obj F) := by
+  apply lisseScalarHom_ext l E Y M (κ.comp ι)
+    ((lisseIntegralAutomorphismPullback h l E).obj F)
+  intro m U x
+  change (((lisseIntegralScalarCompositeIso l E Y L ι M κ).hom.app F).hom.app
+      (op m)).hom.app (op ((automorphismEtaleReindex h).obj U))
+      ((((lisseIntegralAutomorphismScalarIso h l E M (κ.comp ι)).hom.app F).hom.app
+        (op m)).hom.app (op U)
+        (lisseScalarGenerator l E Y M (κ.comp ι)
+          ((lisseIntegralAutomorphismPullback h l E).obj F) m U 1 x)) =
+    (((lisseIntegralAutomorphismScalarIso h l L M κ).hom.app
+        ((lisseIntegralScalarExtension l E Y L ι).obj F)).hom.app (op m)).hom.app (op U)
+      ((((lisseIntegralScalarExtension l L Y M κ).map
+          ((lisseIntegralAutomorphismScalarIso h l E L ι).hom.app F)).hom.app
+          (op m)).hom.app (op U)
+        ((((lisseIntegralScalarCompositeIso l E Y L ι M κ).hom.app
+            ((lisseIntegralAutomorphismPullback h l E).obj F)).hom.app
+            (op m)).hom.app (op U)
+          (lisseScalarGenerator l E Y M (κ.comp ι)
+            ((lisseIntegralAutomorphismPullback h l E).obj F) m U 1 x)))
+  erw [integralAutomorphismScalar_generator, lisseIntegralScalarCompositeIso_formula,
+    lisseIntegralScalarCompositeIso_formula, lisseScalarGenerator_map,
+    integralAutomorphismScalar_generator, integralAutomorphismScalar_generator]
+  congr 2
+  exact integralAutomorphism_index_cast h l E F
+    (lisseScalarSourceIndex_comp l E L ι M κ m).symm U x
+
+end Coherence
+
+section RationalCoherence
+attribute [local irreducible] lisseIntegralAutomorphismPullback
+set_option backward.isDefEq.respectTransparency true
+attribute [local irreducible] lisseIntegralHomModule lisseIntegralHomAddCommGroup
+  lisseIntegralLinear lisseIntegralPreadditive
+
+private theorem rationalAutomorphismScalar_formula (F : LisseRationalSheaf l E Y) :
+    (lisseRationalAutomorphismScalarIso h l E L ι).hom.app F =
+      rationalTmul l L
+        ((lisseRationalAutomorphismPullback h l E ⋙
+          lisseRationalScalarExtension l E Y L ι).obj F)
+        ((lisseRationalScalarExtension l E Y L ι ⋙
+          lisseRationalAutomorphismPullback h l L).obj F) 1
+        ((lisseIntegralAutomorphismScalarIso h l E L ι).hom.app F.integral) := by
+  have hp := (lisseRationalAutomorphismScalarIso_exists h l E L ι).exists.choose_spec F
+  exact hp.trans (mapIdentityFormula (lisseRationalScalarExtension l E Y L ι)
+    (rationalTmul l L
+      ((lisseRationalAutomorphismPullback h l E ⋙
+        lisseRationalScalarExtension l E Y L ι).obj F)
+      ((lisseRationalScalarExtension l E Y L ι ⋙
+        lisseRationalAutomorphismPullback h l L).obj F) 1
+      ((lisseIntegralAutomorphismScalarIso h l E L ι).hom.app F.integral))).symm
+
+private theorem rationalAutomorphismScalar_unit (F : LisseRationalSheaf l E Y) :
+    (lisseRationalAutomorphismScalarIso h l E E (AlgHom.id ℚ_[l] E)).hom.app F ≫
+      (lisseRationalAutomorphismPullback h l E).map
+        ((lisseRationalScalarIdentityIso l E Y).hom.app F) =
+    (lisseRationalScalarIdentityIso l E Y).hom.app
+      ((lisseRationalAutomorphismPullback h l E).obj F) := by
+  rw [rationalAutomorphismScalar_formula, lisseRationalScalarIdentityIso_formula,
+    lisseRationalScalarIdentityIso_formula]
+  change rationalTmul l E _ _ 1 _ ≫
+    (lisseRationalAutomorphismPullback h l E).map (rationalTmul l E _ _ 1 _) = _
+  erw [rationalPullbackTmul, rationalTmul_comp, one_mul]
+  exact congrArg (fun f ↦ TensorProduct.tmul (Padic.coefficientExtensionIntegers l E)
+    (1 : E) f) (integralAutomorphismScalar_unit h l E F.integral)
+
+private theorem rationalAutomorphismScalar_comp
+    (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
+    (κ : L →ₐ[ℚ_[l]] M) (F : LisseRationalSheaf l E Y) :
+    (lisseRationalAutomorphismScalarIso h l E M (κ.comp ι)).hom.app F ≫
+      (lisseRationalAutomorphismPullback h l M).map
+        ((lisseRationalScalarCompositeIso l E Y L ι M κ).hom.app F) =
+    (lisseRationalScalarCompositeIso l E Y L ι M κ).hom.app
+        ((lisseRationalAutomorphismPullback h l E).obj F) ≫
+      (lisseRationalScalarExtension l L Y M κ).map
+        ((lisseRationalAutomorphismScalarIso h l E L ι).hom.app F) ≫
+      (lisseRationalAutomorphismScalarIso h l L M κ).hom.app
+        ((lisseRationalScalarExtension l E Y L ι).obj F) := by
+  rw [rationalAutomorphismScalar_formula, rationalAutomorphismScalar_formula,
+    rationalAutomorphismScalar_formula, lisseRationalScalarCompositeIso_formula,
+    lisseRationalScalarCompositeIso_formula]
+  change rationalTmul l M _ _ 1 _ ≫
+      (lisseRationalAutomorphismPullback h l M).map (rationalTmul l M _ _ 1 _) =
+    rationalTmul l M _ _ 1 _ ≫
+      (lisseRationalScalarExtension l L Y M κ).map (rationalTmul l L _ _ 1 _) ≫
+      rationalTmul l M _ _ 1 _
+  erw [rationalPullbackTmul, scalarTmul, map_one, rationalTmul_comp, rationalTmul_comp,
+    rationalTmul_comp]
+  simp only [one_mul]
+  exact congrArg (fun f ↦ TensorProduct.tmul (Padic.coefficientExtensionIntegers l M)
+    (1 : M) f) (integralAutomorphismScalar_comp h l E L ι M κ F.integral)
+
+end RationalCoherence
+
 end ScalarExtension
 
 section AlgebraicCoefficients
@@ -1180,6 +1345,79 @@ def automorphismLisseCoefficientStage (E₀ : Padic.FiniteCoefficientFields l K)
     lisseRationalAutomorphismPullback h l E₀.val ⋙
       (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀).symm).toFunctor
 
+private theorem inverse_three_square {C : Type*} [Category C]
+    {X A B D Z : C} (e : X ≅ A) (f : B ≅ D) (g : D ≅ Z)
+    (u : A ⟶ Z) (v : X ⟶ B)
+    (h : e.hom ≫ u = v ≫ f.hom ≫ g.hom) :
+    e.inv ≫ v = u ≫ g.inv ≫ f.inv := by
+  apply e.inv_comp_eq.mpr
+  rw [← Category.assoc, ← Category.assoc, h]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
+private def coherentCategoryDiagramStrongTrans {B : Type u} [Preorder B]
+    (C : B → Type w) [∀ b, Category.{v} (C b)]
+    (map : ∀ {b c : B}, (b ⟶ c) → (C b ⥤ C c))
+    (mapId : ∀ b, map (𝟙 b) ≅ 𝟭 (C b))
+    (mapComp : ∀ {b c d : B} (f : b ⟶ c) (g : c ⟶ d),
+      map (f ≫ g) ≅ map f ⋙ map g)
+    (assoc : ∀ {b c d e : B} (f : b ⟶ c) (g : c ⟶ d) (h : d ⟶ e) (F : C b),
+      (mapComp (f ≫ g) h).hom.app F ≫
+        (map h).map ((mapComp f g).hom.app F) =
+      (mapComp f (g ≫ h)).hom.app F ≫
+        (mapComp g h).hom.app ((map f).obj F))
+    (leftUnit : ∀ {b c : B} (f : b ⟶ c) (F : C b),
+      (mapComp (𝟙 b) f).hom.app F ≫
+        (map f).map ((mapId b).hom.app F) = 𝟙 ((map f).obj F))
+    (rightUnit : ∀ {b c : B} (f : b ⟶ c) (F : C b),
+      (mapComp f (𝟙 c)).hom.app F ≫
+        (mapId c).hom.app ((map f).obj F) = 𝟙 ((map f).obj F))
+    (P : ∀ b, C b ⥤ C b)
+    (t : ∀ {b c : B} (f : b ⟶ c), P b ⋙ map f ≅ map f ⋙ P c)
+    (unit : ∀ b (F : C b),
+      (t (𝟙 b)).hom.app F ≫ (P b).map ((mapId b).hom.app F) =
+        (mapId b).hom.app ((P b).obj F))
+    (comp : ∀ {b c d : B} (f : b ⟶ c) (g : c ⟶ d) (F : C b),
+      (t (f ≫ g)).hom.app F ≫ (P d).map ((mapComp f g).hom.app F) =
+        (mapComp f g).hom.app ((P b).obj F) ≫
+          (map g).map ((t f).hom.app F) ≫ (t g).hom.app ((map f).obj F)) :
+    lisseCoherentCategoryDiagram C map mapId mapComp assoc leftUnit rightUnit ⟶
+      lisseCoherentCategoryDiagram C map mapId mapComp assoc leftUnit rightUnit := by
+  refine
+    { app := fun b ↦ (P b.as).toCatHom
+      naturality := fun f ↦ Cat.Hom.isoMk (t f.as).symm
+      naturality_naturality := ?_
+      naturality_id := ?_
+      naturality_comp := ?_ }
+  · intro b c f g η
+    obtain rfl := LocallyDiscrete.eq_of_hom η
+    have hη : η = 𝟙 f := Subsingleton.elim _ _
+    subst η
+    simp only [PrelaxFunctor.map₂_id, Bicategory.id_whiskerRight,
+      Bicategory.whiskerLeft_id, Category.id_comp, Category.comp_id]
+  · intro b
+    apply Cat.Hom₂.ext
+    apply NatTrans.ext
+    funext F
+    change (t (𝟙 b.as)).inv.app F ≫ (mapId b.as).hom.app ((P b.as).obj F) =
+      (P b.as).map ((mapId b.as).hom.app F) ≫ 𝟙 _ ≫ 𝟙 _
+    simp only [Category.comp_id]
+    exact ((t (𝟙 b.as)).app F).inv_comp_eq.mpr (unit b.as F).symm
+  · intro b c d f g
+    apply Cat.Hom₂.ext
+    apply NatTrans.ext
+    funext F
+    change (t (f.as ≫ g.as)).inv.app F ≫
+        (mapComp f.as g.as).hom.app ((P b.as).obj F) =
+      (P d.as).map ((mapComp f.as g.as).hom.app F) ≫ 𝟙 _ ≫
+        (t g.as).inv.app ((map f.as).obj F) ≫ 𝟙 _ ≫
+        (map g.as).map ((t f.as).inv.app F) ≫ 𝟙 _
+    simp only [Category.comp_id, Category.id_comp]
+    exact inverse_three_square ((t (f.as ≫ g.as)).app F)
+      ((map g.as).mapIso ((t f.as).app F)) ((t g.as).app ((map f.as).obj F))
+      _ _ (comp f.as g.as F)
+
+-- Preserve the original algebraic-closure hypothesis in this public interface.
+set_option linter.unusedSectionVars false in
 /-- The coefficient transformation has the specified stage functors and the canonical
 identity-on-tensors scalar constraints, rather than arbitrary coherence isomorphisms.
 Source: Weil II (1.1.1) d) (blueprint: def-wf-lisse-adic-automorphism-pullback).
@@ -1189,9 +1427,6 @@ Their identity and composition constraints hold because all integral comparisons
 a ⊗ s to a ⊗ s; this agrees with the coefficient diagram's tensor associativity.
 Rationalization preserves these equalities. Thus the indicated transformation exists;
 its components and all naturality constraints are completely specified. -/
--- STATEMENT-DISPUTED: LisseCoefficientDiagramData specifies objects and functors, but
--- not the canonical unit/composition constraints needed here. Twisting the unit by
--- a componentwise scalar automorphism need not commute with h; see report.md.
 theorem automorphismLisseCoefficientTransformation_exists :
     ∃ α : (lisseCoefficientDiagramData l Y K).diagram ⟶
         (lisseCoefficientDiagramData l Y K).diagram,
@@ -1220,7 +1455,48 @@ theorem automorphismLisseCoefficientTransformation_exists :
               eqToIso e₂ =
             (lisseRationalAutomorphismScalarIso h l E₀.val L₀.val
               (IntermediateField.inclusion i)).symm := by
-  sorry
+  let α : (lisseCoefficientDiagramData l Y K).diagram ⟶
+      (lisseCoefficientDiagramData l Y K).diagram := by
+    unfold lisseCoefficientDiagramData
+    refine coherentCategoryDiagramStrongTrans
+      (fun E₀ : Padic.FiniteCoefficientFields l K ↦ LisseRationalSheaf l E₀.val Y)
+      (fun {E₀ L₀} f ↦ lisseRationalScalarExtension l E₀.val Y L₀.val
+        (IntermediateField.inclusion (leOfHom f)))
+      (fun E₀ ↦ lisseRationalScalarIdentityIso l E₀.val Y)
+      (fun {E₀ L₀ M₀} f g ↦ lisseRationalScalarCompositeIso l E₀.val Y L₀.val
+        (IntermediateField.inclusion (leOfHom f)) M₀.val
+        (IntermediateField.inclusion (leOfHom g)))
+      (fun {E₀ L₀ M₀ N₀} f g k F ↦ lisseRationalScalarComposite_assoc l E₀.val Y L₀.val
+        (IntermediateField.inclusion (leOfHom f)) M₀.val
+        (IntermediateField.inclusion (leOfHom g)) N₀.val
+        (IntermediateField.inclusion (leOfHom k)) F)
+      (fun {E₀ L₀} f F ↦ lisseRationalScalarComposite_left_unit l E₀.val Y L₀.val
+        (IntermediateField.inclusion (leOfHom f)) F)
+      (fun {E₀ L₀} f F ↦ lisseRationalScalarComposite_right_unit l E₀.val Y L₀.val
+        (IntermediateField.inclusion (leOfHom f)) F)
+      (fun E₀ ↦ lisseRationalAutomorphismPullback h l E₀.val)
+      (fun {E₀ L₀} i ↦ lisseRationalAutomorphismScalarIso h l E₀.val L₀.val
+        (IntermediateField.inclusion (leOfHom i))) ?_ ?_
+    · intro E₀ F
+      exact rationalAutomorphismScalar_unit h l E₀.val F
+    · intro E₀ L₀ M₀ i j F
+      exact rationalAutomorphismScalar_comp h l E₀.val L₀.val
+        (IntermediateField.inclusion (leOfHom i)) M₀.val
+        (IntermediateField.inclusion (leOfHom j)) F
+  refine ⟨α, ?_, ?_⟩
+  · intro E₀
+    rfl'
+  · intro E₀ L₀ i
+    refine ⟨by rfl', by rfl', ?_⟩
+    apply Iso.ext
+    apply NatTrans.ext
+    funext F
+    with_unfolding_all
+      change 𝟙 _ ≫
+        (lisseRationalAutomorphismScalarIso h l E₀.val L₀.val
+          (IntermediateField.inclusion i)).inv.app F ≫ 𝟙 _ = _
+    simp only [Category.id_comp, Category.comp_id]
+    rfl
 
 /-- The coefficient transformation fixed on components and scalar constraints.
 Source: Weil II (1.1.1) d) (blueprint: def-wf-lisse-adic-automorphism-pullback). -/
@@ -1336,3 +1612,6 @@ def lisseAlgebraicAutomorphismFiberIso (F : LisseAlgebraicSheaf l Y K) :
 end AlgebraicCoefficients
 
 end AlgebraicGeometry.Scheme
+
+-- Restore the imported instance after elaborating this file.
+attribute [instance] CategoryTheory.catToReflQuiver
