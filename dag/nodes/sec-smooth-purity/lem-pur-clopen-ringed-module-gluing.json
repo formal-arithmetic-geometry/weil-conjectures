@@ -15,9 +15,139 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$ and $U_i=U\\times_X X_i$ for a site object $U\\to X$. By [lem-weil-proetale-weakly-etale-localization], $X_{i,\\mathrm{proet}}$ is the localized site $\\mathcal C/X_i$, with its actual covering families; restriction of any ring or module sheaf is therefore evaluation on objects over $X_i$, as in [def-pur-localized-ringed-site]. Each $j_i$ and each $U_i\\to U$ is an open immersion (a pullback of an open subscheme is its inverse-image open subscheme), hence etale by [lem-weil-pbc-open-immersion-etale]. They cover by the hypothesis on the images, so [lem-pur-etale-proetale-cover] makes both $(X_i\\to X)_i$ and $(U_i\\to U)_i$ pro-etale coverings. The intersections $U_i\\times_U U_j$ are empty when $i\\ne j$ and are $U_i$ when $i=j$: maps into an open subscheme have at most one factorization, and disjoint opens have no common point. All objects, finite products of section sets, and localized sites remain within the fixed universes.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-pur-etale-proetale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition 098K, definition-big-small-proetale; localization as in Definition 09AE, definition-extension-zero; agent finite-clopen specialization"
+   }
+  },
+  {
+   "text": "The empty family covers the empty scheme: the covering condition of [def-weil-pbc-proetale-site] is vacuous there. The sheaf axiom for this cover says that every module sheaf has exactly one section over the empty object, hence its sections there are the zero module. The same argument for a sheaf of rings gives the one-element ring. Thus restrictions of two component sheaves to an off-diagonal overlap have a unique module isomorphism, while on a diagonal overlap use the identity. These maps satisfy the cocycle condition: either all three components agree, when it is the identity, or the triple intersection is empty, when every map is unique.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, lemma-glue-sheaves: gluing datum preceding the lemma; empty-overlap specialization"
+   }
+  },
+  {
+   "text": "Define $G(F_i)(U)=\\prod_i F_i(U_i)$ as an abelian group, with $a(x_i)_i=(a|_{U_i}x_i)_i$ for $a\\in R(U)$. For $v:V\\to U$ restrict the $i$th coordinate along $V\\times_X X_i\\to U\\times_X X_i$. The module laws and semilinearity hold in each coordinate by [def-weil-sheaf-of-modules-category], so this is a presheaf of $R$-modules. For a tuple of module morphisms $(f_i)_i$ set $G(f_i)_U=\\prod_i(f_i)_{U_i}$. The coordinate identities show functoriality and additivity. Restriction $r$ is also additive, since it evaluates the same morphisms on a smaller collection of objects.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, lemma-glue-sheaves: compatible-tuples formula; componentwise module operations"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-module-sheaf-gluing] to the covering $(X_i\\to X)_i$, the ring sheaf $R$, and the overlap data in step 2. Here $X$ is terminal in $\\mathcal C$, so $\\mathcal C/X$ is canonically $\\mathcal C$. It gives an actual $R$-module sheaf $H$ and module isomorphisms $H|_{X_i}\\cong F_i$. For every $U$, the sheaf axiom for $(U_i\\to U)_i$ gives a bijection $H(U)\\to\\prod_i H(U_i)$: the off-diagonal matching conditions are vacuous by step 2, and the diagonal ones are identities. Compose with the local isomorphisms to obtain $H(U)\\cong\\prod_iF_i(U_i)$. These maps are $R(U)$-linear and commute with restriction because both restriction maps and the local isomorphisms do. Thus the prescribed presheaf $G(F_i)$ is isomorphic to the sheaf $H$ and is a sheaf. The auxiliary $H$ proves sheafness; it is not a choice in the definition of $G$.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, lemma-glue-sheaves; compatible-tuples construction, with empty-overlap matching conditions written out"
+   }
+  },
+  {
+   "text": "For $F\\in\\operatorname{Mod}(R)$ let $\\eta_F(U):F(U)\\to G(rF)(U)$ be $(x|_{U_i})_i$. The same disjoint-cover sheaf axiom gives a bijection, and the component restrictions make it linear; hence $\\eta_F$ is an isomorphism. For an object $W\\to X_i$, $W\\times_X X_i\\cong W$ and $W\\times_X X_j=\\varnothing$ for $j\\ne i$. Projection gives $\\epsilon_i(W):r_iG(F_j)(W)\\to F_i(W)$ with inverse $x\\mapsto(0,\\ldots,x,\\ldots,0)$. It is a linear isomorphism, using the zero values in step 2. Both comparisons commute with restrictions and module morphisms by their formulas. After applying $r_i$, $\\epsilon_i\\circ r_i\\eta$ sends $x$ to $x$. The other triangle sends a tuple $(x_i)_i$ to itself in every coordinate. Thus $r,G,\\eta,\\epsilon$ give the asserted additive equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TQ and 04TS, lemma-glue-maps and lemma-mapping-property-glue; explicit finite-disjoint unit and counit"
+   }
+  },
+  {
+   "text": "Define $e_iM$ by applying $G$ to $M$ in coordinate $i$ and zero elsewhere. The counit formula gives $r_ie_iM\\cong M$; for $k\\ne i$ the same formula gives $r_ke_iM=0$ (canonically the zero module sheaf). There are inclusion maps $e_ir_iF\\to F$: under $\\eta_F$ they send a section in coordinate $i$ to the tuple with all other entries zero. Their sum gives $\\bigoplus_i e_ir_iF\\to F$. Its inverse sends $x\\in F(U)$ to the finite sum of the inclusions of $x|_{U_i}$ into that direct sum. The two composites are identities coordinatewise, because a finite tuple is the sum of its coordinate tuples. These formulas also prove naturality and the direct-sum universal property (a map out is uniquely the sum of the component maps).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS, lemma-mapping-property-glue; agent finite-coordinate additive calculation"
+   }
+  },
+  {
+   "text": "By [def-weil-sheaf-of-modules-category] all the module categories in question are abelian. In their product the tuple of kernels is a kernel and the tuple of cokernels is a cokernel: the factorization through each component is unique, hence the tuple factorization is unique. By [lem-galois-equivalence-preserves-limits], both functors of the equivalence preserve limits and colimits, in particular kernels and cokernels, so both are exact. This also proves detection, including the universal-property meaning: a proposed kernel or cokernel cone is universal precisely when its image under the equivalence is, since the inverse transports the factorization and its uniqueness back. The homology object $\\ker(g)/\\operatorname{im}(f)$ of a complex $F\\xrightarrow f H\\xrightarrow g K$ is therefore zero precisely when all its component homology objects are zero. This is exactly componentwise detection of exact sequences. No sectionwise surjectivity assertion about a sheaf epimorphism is used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits; categorical preservation of limits and colimits by equivalences (Categories Tag 0038)"
+   }
+  },
+  {
+   "text": "For any constant coefficient ring $A$, clause (2) of [lem-weil-proetale-weakly-etale-localization] identifies $A_{X_i}$ with $r_iA_X$ as sheaves of rings by the map that is the identity on constant sections. These identifications are natural in homomorphisms $A\\to B$: the two composites out of the constant sheaf $A_{X_i}$ agree on the constant-presheaf sections, so agree by the universal property of sheafification [def-weil-pbc-sheafification], since $A_{X_i}$ is the sheafification of the constant presheaf [def-weil-pbc-constant-sheaf]. For $A=A_{E,n}$ this proves the finite-coefficient identification. Taking $A_{E,n+1}\\to A_{E,n}$, and their composites, proves compatibility with every transition map, with no choice of an isomorphism at different levels.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Localization Section 00XZ; constant-ring localization as in clause (2) of the cited node"
+   }
+  },
+  {
+   "text": "By [def-weil-completed-integral-coefficients] the completed ring is $\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n(A_{E,n})_X$. By the ring clause of [def-pur-sheaf-inverse-limit] this limit is evaluated sectionwise. Thus for $W\\to X_i$, restriction and step 8 give the ring isomorphism\n$$\n (r_i\\widehat{\\mathcal O}_{E,X})(W)=\\varprojlim_n (A_{E,n})_X(W)\\ \\cong\\ \\varprojlim_n(A_{E,n})_{X_i}(W)=\\widehat{\\mathcal O}_{E,X_i}(W).\n$$\nIt sends a compatible tuple $(a_n)_n$ to the tuple obtained by applying the finite-level comparison to each $a_n$. Step 8 ensures compatibility with the transitions, and taking the $n$th coordinate is exactly the comparison with the projection $\\pi_n$. A constant $a\\in\\mathcal O_E$ corresponds to its compatible residues, each of which is preserved in step 8, so these constant sections are preserved too. The formulas commute with restrictions in $W$. This proves the completed identification with all the required normalizations; it does not replace the completed sheaf by the discrete constant $\\mathcal O_E$-sheaf.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CO (2) and 03DB, lemma-limits-colimits-abelian-sheaves and lemma-limits-colimits; coordinatewise ring limit"
+   }
+  },
+  {
+   "text": "If $X_i=\\varnothing$, every object over it is empty and step 2 makes every module sheaf zero, with exactly one morphism between any two such sheaves. Such a factor is therefore equivalent to the one-object, one-arrow category and has no effect on the equivalence. If $I=\\varnothing$, the covering assumption forces $X=\\varnothing$; the product defining $G$ is the one-element abelian group, with its unique module structure. Step 2 then says that every module sheaf on $X$ is uniquely isomorphic to it and all morphisms are unique. This verifies the asserted empty-index equivalence as well as all the zero-factor conventions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, lemma-glue-sheaves; empty covering and empty-product cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-pur-etale-proetale-cover",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-galois-equivalence-preserves-limits",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 04TQ/04TR/04TS, finite-disjoint module expansion, including explicit comparisons, coefficient limits, and empty cases"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +183,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)}\\n  (s : (j : D.J) → F.val.obj (Opposite.op (D.U j)))\\n  (h :\\n    ∀ (i j : D.J),\\n      F.val.map (D.f i j).op (s i) = F.val.map (CategoryTheory.CategoryStruct.comp (D.f j i).op (D.t i \", \"doc\": \"For a sheaf $ F $ on the Zariski topology and gluing data $ D $ for schemes, given compatible sections $ s_j $ over the indexing category $ J $ satisfying the sheaf condition, the constructed global s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)} →\\n    (s : (j : D.J) → F.val.obj (Opposite.op (D.U j))) →\\n      (∀ (i j : D.J),\\n          F.val.map (D.f i j).op (s i) =\\n            F.val.map (CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given gluing data $ D $ for schemes and a sheaf $ F $ on the Zariski topology with values in a category of types, this constructs the value of $ F $ at the glued scheme $ D.\\text{glued} $ by applying t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (U : (X ⨿ Y).Opens) →\\n    (X ⨿ Y).presheaf.obj (Opposite.op U) ≅\\n      X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits.coprod.inl.base).obj U)) ⨯\\n        Y.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits\", \"doc\": \"For any two schemes $X$ and $Y$, and for any open subset $U$ of their coproduct (disjoint union) $X \\\\amalg Y$, the ring of sections of the structure sheaf of $X \\\\amalg Y$ over $U$ is isomorphic to the\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"{X : TopCat} →\\n  (F : TopCat.Sheaf CommRingCat X) →\\n    (U V : TopologicalSpace.Opens ↑X) →\\n      F.val.obj (Opposite.op (U ⊔ V)) ≅\\n        {\\n          carrier :=\\n            ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                    (RingHom.fst ↑(F.val.obj (Opposit\", \"doc\": \"For a sheaf $ F $ on a topological space $ X $ and open subsets $ U, V \\\\subseteq X $, there is an isomorphism between the sections $ F(U \\\\cup V) $ and the equalizer of the product $ F(U) \\\\times F(V) $\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X)\\n  (x : ↑(F.val.obj (Opposite.op (U ⊔ V)))),\\n  (↑((CategoryTheory.ConcreteCategory.hom (F.objSupIsoProdEqLocus U V).hom) x)).1 =\\n    (CategoryTheory.ConcreteCategory.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)) x\", \"doc\": \"For a sheaf $ F $ on a topological space $ X $ and open subsets $ U, V \\\\subseteq X $, the first component of the isomorphism between $ F(U \\\\cup V) $ and the equalizer of $ F(U) \\\\times F(V) $ correspon\"}\n  {\"name\": \"TopCat.Sheaf.isProductOfDisjoint\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : TopCat} →\\n      (F : TopCat.Sheaf C X) →\\n        (U V : TopologicalSpace.Opens ↑X) →\\n          U ⊓ V = ⊥ →\\n            CategoryTheory.Limits.IsLimit\\n              (CategoryTheory.Limits.BinaryFan.mk (F.val.map (CategoryTheor\", \"doc\": \"For a sheaf $ F $ on a topological space $ X $ with values in a category $ \\\\mathcal{C} $, if $ U $ and $ V $ are disjoint open subsets of $ X $, then the cone formed by the restriction maps $ F(U \\\\cup\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j : ι),\\n  (AlgebraicGeometry.Scheme.LocalRe\", \"doc\": \"Given a sheaf $ F $ on the category of schemes with the Zariski topology, and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $ in the presheaf category, the transpose morphism $ t_{i,j} : \"}",
    "date": "2026-10-21",
    "verdict": "No match: condensed modules, Zariski structure-sheaf sections and TopCat.Sheaf.isProductOfDisjoint do not give the pro-etale arbitrary-ring module equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(module|sheaf)|disjoint.*(equivalence|sheaf)|isProductOfDisjoint",
+   "results": "Search ran: 7 hits; Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean, Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/MeasureTheory/MeasurableSpace/Embedding.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/Order/DirectedInverseSystem.lean, Mathlib/Data/Set/Lattice.lean; ",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern Zariski structure-sheaf restriction, topological-space binary disjoint section products, or generic sheaf limits/free modules; none gives this arbitrary-ring pro-etale equivalence with normalized completed coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves to finite clopen components is an exact equivalence",
+   "results": "Search ran: 8 hits; AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, ModuleCat.Tilde.toOpen, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.SheafedSpace.restrictTopIso; ",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern Zariski structure-sheaf restriction, topological-space binary disjoint section products, or generic sheaf limits/free modules; none gives this arbitrary-ring pro-etale equivalence with normalized completed coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"disjoint\"",
+   "results": "Search ran: 1 hits; TopCat.Sheaf.isProductOfDisjoint; ",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern Zariski structure-sheaf restriction, topological-space binary disjoint section products, or generic sheaf limits/free modules; none gives this arbitrary-ring pro-etale equivalence with normalized completed coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules over an arbitrary sheaf of rings on a finite disjoint open cover form the product of the component module categories",
+   "results": "Search ran: 8 hits; SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.freeCofan, TopCat.Sheaf.isProductOfDisjoint, TopCat.Sheaf.objSupIsoProdEqLocus, SheafOfModules.free, CategoryTheory.Sheaf.instHasFiniteProducts, SheafOfModules.mapFree, SheafOfModules.isColimitFreeCofan; ",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern Zariski structure-sheaf restriction, topological-space binary disjoint section products, or generic sheaf limits/free modules; none gives this arbitrary-ring pro-etale equivalence with normalized completed coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary ringed site split by finitely many disjoint subterminal objects has its module sheaf category equivalent to the product of the localized module categories",
+   "results": "Search ran: 8 hits; SheafOfModules.isFinitePresentation, SheafOfModules.mapFree, SheafOfModules.IsFinitePresentation, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete; ",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern Zariski structure-sheaf restriction, topological-space binary disjoint section products, or generic sheaf limits/free modules; none gives this arbitrary-ring pro-etale equivalence with normalized completed coefficients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-clopen-derived-decomposition",
@@ -75,5 +240,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-clopen-ringed-module-gluing",
+  "worker": "stage1",
+  "summary": "Gave the explicit product-of-sections functor and all comparison maps, using existing arbitrary-ring module gluing and site localization; proved exactness categorically and normalized completed coefficients by compatible sectionwise limits. No statement change and no new nodes.",
+  "blueprint": "Realizes the finite-clopen module descent and coefficient identification underlying def-pur-section-invariant final invertibility assertion, via lem-pur-finite-clopen-derived-decomposition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of localized pro-etale sites and constant-ring restriction; no purity result is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme fact making the component inclusions etale, used only to verify the covering hypothesis."
+   },
+   {
+    "node": "lem-pur-etale-proetale-cover",
+    "why": "Generic comparison of etale and pro-etale covers, used only for the finite component cover."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Effective descent for modules over an arbitrary ring sheaf on any site; the purity unit has no separate descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-pur-etale-proetale-cover",
+  "lem-weil-pbc-site-module-sheaf-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-ea2915bec",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-ea2915bec (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full, and every cited node statement. No new nodes; the statement is unchanged from the base. The item is a live-unsplit node created by the Q37 re-split. The re-split note covers the parent, not this item, so this is an ordinary split. It is not dropped and cites no SGA source. The statement covers everything the parent's step 1 and lem-pur-finite-product-derived-tensor-calculus take from it, including r_i, G and the zero insertion e_i. Small cases tested: I=∅ (X=∅, both sides the one-point category), |I|=1, empty components, two components (the counit is a projection because W×_X X_j=∅), and the zero ring sheaf. Step checks: (1) the localization lemma's clauses (1) and (4), open immersions étale, and étale jointly surjective families being pro-étale covers give the covers; overlaps are empty off the diagonal and U_i on it. (2) The empty family covers ∅ (the only affine open of ∅ is the empty union), so F(∅)=0 and the cocycle condition is trivial. (3)-(6) G, η, ε, e_i and ⊕e_i r_i≅1 are explicit and correct. The gluing node's hypotheses hold exactly (X is terminal, so C/X=C). G≅H is derived from the statement of the gluing node, not its proof. (7) The equivalence preserves limits and colimits, hence is exact, and in the product category kernels and cokernels are componentwise. (8)-(9) The constant-ring clause (2), naturality via sheafification, and the sectionwise ring limit give compatibility with π_n and with the transition maps. (10) Empty cases. No duplicate of Mod(R)≃∏Mod(R_i) for arbitrary pro-étale ring sheaves exists in the DAG. I accept the generic tool uses (module-sheaf gluing, localization; the latter is on route via sk-def-sf-operations anyway). FIX (two faults): step 1 source cited Stacks 09A3, which is a qcqs direct-sums lemma; definition-big-small-proetale is 098K. Step 8 (C1/C4) used the universal property of sheafification without citing it; I added def-weil-pbc-sheafification and def-weil-pbc-constant-sheaf to the text, uses and proof_deps.; 1 file(s) fixed by the reviewer"
  }
 }
