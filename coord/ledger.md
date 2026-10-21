@@ -22304,3 +22304,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:27 L: merged deliver/Q68/lem-sfb-scalar-hom-chain-coefficient-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 11:27 L: merged deliver/Q65/lem-sf-perfect-tensor-roos-completion (stage 2; reviewer FIX; parallel immutable checks)
 - 11:28 L: returned deliver/Q95/lem-pur-quotient-expression-kflat-normalization (reviewer RETURN: L: independent stage-2 immutable head 08225af3e60d: H3 (weaker conclusion, missing clauses). F1: the derived-tensor clau)
+- 11:29 L: merged deliver/Q87/lem-pur-finite-open-product-swap (stage 2; reviewer FIX; parallel immutable checks)
