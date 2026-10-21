@@ -22808,3 +22808,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:29 L: merged deliver/NU/lem-sfb-tame-stratum-kummer-descent (reviewer PASS; first push; new nodes: 5)
 - 14:29 L: merged deliver/NJ/lem-dl-a1-integral-finite-residue-model (stage 2; reviewer PASS; parallel immutable checks)
 - 14:31 L: merged deliver/NP/lem-sfb-relative-single-tensor-cohomology (stage 2; reviewer PASS; parallel immutable checks)
+- 14:31 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
