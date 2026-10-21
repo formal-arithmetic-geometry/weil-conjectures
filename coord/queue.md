@@ -1,8 +1,8 @@
 # Work queue
 
-130 items; claim with `tools/claim.py next <group> [--stage N]`.
+127 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (13 clusters, 705 modules)
+## Rework: quarantined by the upstream sync (12 clusters, 705 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,7 +10,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -24,7 +23,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 63, stage 3 2 items.
 
-## Stage 1: nodes to split (17)
+## Stage 1: nodes to split (16)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -38,7 +37,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-torsion-acyclic-norm-coefficient-test` | 4013 | none |
 | `lem-sfb-field-action-derived-section-transport` | 4014 | none |
-| `lem-sfb-internal-bar-roof-adjunction` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
 | `lem-sfb-ind-unipotent-procyclic-difference` | 4015 | none |
 | `lem-sfb-internal-homogeneous-functions-injective` | 4015 | none |
@@ -46,7 +44,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-qcqs-zero-dimensional-affine` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (29)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -57,7 +55,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
 | `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
 | `lem-sfb-condensed-galois-global-descent` | 1 | state | 2 |
-| `lem-sf-open-tensor-quotient-augmentation` | 1 | state | 1 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
@@ -65,7 +62,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-pur-dualizing-unit-composite` | 1 | state | 0 |
-| `lem-pur-finite-site-counit-projection-transport` | 1 | state | 0 |
+| `lem-sf-open-projection-roos-completion` | 1 | state | 0 |
 | `lem-sfb-action-topos-geometric-restriction` | 1 | state | 0 |
 | `lem-sfb-acyclic-hypercover-pullback-normalization` | 1 | state | 0 |
 | `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
@@ -81,7 +78,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 15 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (63)
 
