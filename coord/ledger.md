@@ -22006,3 +22006,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:53 L: merged deliver/Q49/lem-weil-scalar-pullback-strict-cone-naturality (stage 2; reviewer PASS; parallel immutable checks)
 - 09:55 L: merged deliver/Q74/lem-trf-section-rees-noetherian-geometry (stage 2; reviewer FIX; parallel immutable checks)
 - 09:55 L: merged deliver/O4/lem-zl-bertini-finite-cover-irreducible-system (stage 2; reviewer PASS; parallel immutable checks)
+- 09:56 L: merged deliver/Q79/lem-pc-tate-residue-exact-sequence (reviewer PASS; first push; new nodes: 0)

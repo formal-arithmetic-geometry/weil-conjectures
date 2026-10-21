@@ -10,9 +10,76 @@
  "stmt_deps": [
   "lem-pc-tate-abstract-residue-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $N=i(V_1)=\\ker q$, $I=A\\cap N$, and let $p:V\\to V/N$ be the quotient map. The admissibility definition in [lem-pc-tate-abstract-residue-calculus] applies to $I\\subset N$: for each $r\\in R$, the inclusion induces an injection $(rI+I)/I\\hookrightarrow(rA+A)/A$, since $rI+I\\subset N$ and $A\\cap N=I$. Its target is finite-dimensional. Likewise $(r p(A)+p(A))/p(A)$ is a quotient of $(rA+A)/A$, by the map induced by $p$, and is finite-dimensional. Thus $I\\subset N$ and $p(A)\\subset V/N$ are admissible. The maps $i:V_1\\to N$ and $\\bar q:V/N\\to V_3$, $v+N\\mapsto q(v)$, are $R$-linear isomorphisms: injectivity uses respectively the given injectivity of $i$ and $\\ker q=N$, and surjectivity uses the definitions of $N$ and the surjectivity of $q$. They carry $i^{-1}(A)$ to $I$ and $p(A)$ to $q(A)$. The same quotient spaces under these isomorphisms prove both admissibility clauses in the item.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, admissibility condition preceding Theorem 1; elementary subspace and quotient argument"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-vector-subspace-complement] to choose $k$-linear complements $A=I\\oplus B$, $N=I\\oplus C$, and $V=(A+N)\\oplus D$. Then $A+N=I\\oplus B\\oplus C$: if $u+b+c=0$ with $u\\in I$, $b\\in B$, $c\\in C$, then $b=-(u+c)\\in A\\cap N=I$, hence $b=0$, and then $u=c=0$. Define the $k$-linear projection $\\pi$ on $V=I\\oplus B\\oplus C\\oplus D$ by $\\pi(u+b+c+d)=u+b$. It has image $A$, fixes $A$, and preserves $N$. Its restriction $\\pi_N$ is a projection of $N$ onto $I$. The formula $\\bar\\pi(v+N)=\\pi(v)+N$ is well-defined, has image $p(A)$, and fixes $p(A)$, so is a projection on $V/N$. No $R$-linear splitting of the exact sequence is used.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1 (T2), p. 150, and §2 Theorem 1, pp. 151–152; compatible projections constructed by vector-space complements"
+   }
+  },
+  {
+   "text": "Fix $f,g\\in R$ and write $m_f,m_g$ for their multiplication operators. By [lem-pc-tate-abstract-residue-calculus], $T=[\\pi m_f,m_g]$ is finite-potent and $\\operatorname{res}_{V,A}(f\\,dg)=\\operatorname{Tr}_{\\mathrm{fp},V}(T)$. Because $N$ is an $R$-submodule and $\\pi(N)\\subset N$, $T(N)\\subset N$. Restricting the expression $\\pi(fgv)-g\\pi(fv)$ to $N$ gives $T|_N=[\\pi_N m_f,m_g]$, with multiplication now on $N$. Applying $p$ to that expression gives $\\overline T=[\\bar\\pi m_f,m_g]$ on $V/N$. The same cited residue formula, using the admissibility proved in step 1 and the projections in step 2, identifies their finite-potent traces with $\\operatorname{res}_{N,I}(f\\,dg)$ and $\\operatorname{res}_{V/N,p(A)}(f\\,dg)$.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2 Theorem 1 and Remark, pp. 151–152, commutator formula for a projection"
+   }
+  },
+  {
+   "text": "Apply the stable-subspace additivity clause of [lem-pc-finite-potent-trace-calculus] to the finite-potent $T$ and its stable subspace $N$. It yields $\\operatorname{Tr}_{\\mathrm{fp},V}(T)=\\operatorname{Tr}_{\\mathrm{fp},N}(T|_N)+\\operatorname{Tr}_{\\mathrm{fp},V/N}(\\overline T)$. Substituting step 3 proves the desired residue equality on $f\\,dg$ for the pairs $(N,I)$ and $(V/N,p(A))$. Invariance under $R$-linear isomorphisms of pairs in [lem-pc-tate-abstract-residue-calculus], applied to the two explicit isomorphisms of step 1, replaces these residues by $\\operatorname{res}_{V_1,i^{-1}(A)}$ and $\\operatorname{res}_{V_3,q(A)}$.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus",
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1 property (T2), p. 150; §2 Theorem 1 and invariance of the residue, pp. 151–152"
+   }
+  },
+  {
+   "text": "All three residue maps are $k$-linear by [lem-pc-tate-abstract-residue-calculus]. By the generators-and-relations description in [def-weil-pbc-kahler-differentials], every differential is a finite sum $\\sum_j f_j\\,dg_j$: an $R$-linear combination of the generators $dg$ has exactly this form. Applying the equality of step 4 to every term and adding proves equality of the maps on $\\Omega^1_{R/k}$.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2 Theorem 1, pp. 151–152, surjectivity of the map sending f tensor g to f dg"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tate-abstract-residue-calculus",
+  "lem-trf-vector-subspace-complement",
+  "lem-pc-finite-potent-trace-calculus",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§1 (T2), p. 150 and §2 Theorem 1 and projection formula, pp. 151–152; exact-sequence consequence proved by compatible projections"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +115,45 @@
    "results": "Read actual hits: LieSubmodule.trace_eq_trace_restrict_of_le_idealizer, LieModule.trace_toEnd_genWeightSpace, LieModule.trace_comp_toEnd_genWeightSpace_eq, LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero, LinearMap.trace_restrict_eq_of_forall_mem, LieSubmodule.traceForm_eq_zero_of_isTrivial, Algebra.trace_quotient_mk, LieModule.traceForm_genWeightSpace_eq. No abstract residue additivity in Mathlib: the hits concern snake-lemma maps, dimensions, ordinary traces, or Lie modules. The exact residue declaration is in the project instead.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateResidue|res_eq_add_of_exact|finite.?potent",
+   "results": "{\"t\": \"2026-10-21T09:25:48Z\", \"tool\": \"grep\", \"query\": \"TateResidue|res_eq_add_of_exact|finite.?potent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: ordinary finite-module traces, exactness/cotangent modules, and module length do not construct Tate residues or state this additivity with admissible subspaces.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Additivity of the abstract Tate residue in an exact sequence of modules",
+   "results": "{\"t\": \"2026-10-21T09:25:49Z\", \"tool\": \"leansearch\", \"query\": \"Additivity of the abstract Tate residue in an exact sequence of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_eq_add_of_exact\", \"ModuleCat.instAdditiveLocalizationLocalizedModule_functor\", \"Algebra.Extension.Cotangent.of_add\", \"Module.Flat.rTensor_exact\", \"Algebra.Extension.Cotangent.val_add\", \"CategoryTheory.ShortComplex.leftHomologyFunctor_additive\", \"CategoryTheory.ShortComplex.cyclesFunctor_additive\", \"CategoryTheory.ProjectiveResolution.add_extMk\"], \"digest\": \"01687295fee1bce8\"}; Read the hits: ordinary finite-module traces, exactness/cotangent modules, and module length do not construct Tate residues or state this additivity with admissible subspaces.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, LinearMap.restrict",
+   "results": "{\"t\": \"2026-10-21T09:25:49Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.trace, LinearMap.restrict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_sum_trace_restrict\", \"LinearMap.trace_eq_sum_trace_restrict'\", \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup\", \"LinearMap.trace_restrict_eq_of_forall_mem\", \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\"], \"digest\": \"caf9588f993245c9\"}; Read the hits: ordinary finite-module traces, exactness/cotangent modules, and module length do not construct Tate residues or state this additivity with admissible subspaces.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abstract Tate residue is additive in a short exact sequence of modules with admissible subspaces",
+   "results": "{\"t\": \"2026-10-21T09:25:51Z\", \"tool\": \"leanfinder\", \"query\": \"Abstract Tate residue is additive in a short exact sequence of modules with admissible subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SnakeLemma.δ\", \"Profinite.NobelingProof.succ_exact\", \"SnakeLemma.δ'\", \"SnakeLemma.δ_aux\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Extension.H1Cotangent.val_add\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\"], \"digest\": \"388ef165064aeef1\"}; Read the hits: ordinary finite-module traces, exactness/cotangent modules, and module length do not construct Tate residues or state this additivity with admissible subspaces.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite potent trace of a commutator on an invariant subspace and its quotient defines additive residues",
+   "results": "{\"t\": \"2026-10-21T09:26:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite potent trace of a commutator on an invariant subspace and its quotient defines additive residues\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\", \"LieModule.trace_toEnd_genWeightSpace\", \"LieModule.trace_comp_toEnd_genWeightSpace_eq\", \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LinearMap.trace_restrict_eq_of_forall_mem\", \"LieSubmodule.traceForm_eq_zero_of_isTrivial\", \"Algebra.trace_quotient_mk\", \"LieModule.traceForm_genWeightSpace_eq\"], \"digest\": \"45d01c58f4192c68\"}; Read the hits: ordinary finite-module traces, exactness/cotangent modules, and module length do not construct Tate residues or state this additivity with admissible subspaces.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-tate-residue-field-extension",
@@ -70,5 +172,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-residue-exact-sequence",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and proved all clauses using existing nodes only. The project res_eq_add_of_exact proves the identity but does not state the inherited admissibility clauses; therefore it is only a partial attachment candidate. Proved admissibility explicitly, constructed a projection preserving im(i) from complements, and applied Tate T2 to the residue commutator. No new nodes.",
+  "blueprint": "det-picard-rr-duality proof (4), compatibility of residues with extension of scalars, via lem-pc-tate-residue-field-extension; supplies exact-sequence additivity for the finite local-algebra filtration, following the Tate residue route of sk-thm-picard-duality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-2ff05be00",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-2ff05be00 (reviewer sub-agent of L); spot-checked: Statement is byte-identical to the base (base: unsplit, empty proof). No new nodes and no repair note. Step 1: I=A∩N is admissible because (rI+I)/I injects into (rA+A)/A, using rI+I⊂N and A∩N=I. p(A) is admissible because its quotient space is a quotient of (rA+A)/A. i:V1→N and q̄:V/N→V3 are R-isomorphisms carrying i⁻¹A to I and p(A) to q(A). Step 2: I⊕B⊕C is direct (b∈A∩N=I∩B=0). π(u+b+c+d)=u+b fixes A and sends N to I, so π_N and π̄ are well-defined projections. Step 3: T=[πm_f,m_g] preserves N, with T|_N=[π_N m_f,m_g] and the induced map on V/N equal to [π̄ m_f,m_g]. This sign matches Tate Thm 1 and abstract-residue-calculus. Step 4: Tate T2 (pp. 150) is the stable-subspace clause of finite-potent-trace-calculus, followed by isomorphism-of-pairs invariance. Step 5: Ω is generated by f dg (kahler-differentials presentation) and all three residues are k-linear. Edge cases checked: N=0, N=V, A a submodule, and k((t))² with res(t⁻¹dt)=2=1+1 including characteristic 2. No duplicate exact-sequence node was found. Batch-5 flag: lem-trf-vector-subspace-complement is a Mathlib-leaf linear-algebra fact (vector-space complements) depending only on def-weil-field. It is not a step of the trace formula or Poincaré duality proof, so it is accepted. No fixes."
  }
 }
