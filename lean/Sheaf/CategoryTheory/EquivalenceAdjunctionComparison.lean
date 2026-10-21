@@ -71,7 +71,23 @@ theorem exists_equivalenceAdjunctionComparison
         EA.functor.map (adj.unit.app X) ≫ u.hom.app (J.obj X)) ∧
       (∀ Y : B, j.inv.app (U.obj Y) ≫ EB.functor.map (adj.counit.app Y) =
         Jb.map (u.hom.app Y) ≫ adjb.counit.app (EB.functor.obj Y)) := by
-  sorry
+  let alpha := ((mateEquiv adj adjb).symm u.hom).natTrans
+  let : IsIso alpha := isIso_inverseMate_of_equivalences adj adjb u
+  let j : J ⋙ EB.functor ≅ EA.functor ⋙ Jb := (asIso alpha).symm
+  have hj : (mateEquiv adj adjb j.inv).natTrans = u.hom := by
+    exact congrArg TwoSquare.natTrans ((mateEquiv adj adjb).apply_symm_apply u.hom)
+  refine ⟨j, hj, ?_, ?_, ?_, ?_⟩
+  · intro k hk
+    have h : k.inv = j.inv := by
+      apply (mateEquiv adj adjb).injective
+      exact hk.trans hj.symm
+    exact Iso.ext_inv h
+  · intro X Y f
+    exact adjunctionMate_transpose adj adjb u.hom X Y f
+  · intro X
+    exact (unit_mateEquiv_symm adj adjb u.hom X).symm
+  · intro Y
+    exact (mateEquiv_counit_symm adj adjb u.hom Y).symm
 
 /-- Clause (2): normalized left comparisons preserve the specified adjoint compositors.
 All equivalences, comparisons, and composite/direct adjunctions remain specified data.
@@ -116,7 +132,44 @@ theorem equivalenceAdjunctionComparison_compositor
     ∀ X : A, E2.functor.map (a.hom.app X) ≫ c02.hom.app X =
       c12.hom.app (L01.obj X) ≫ Lb12.map (c01.hom.app X) ≫
         ab.hom.app (E0.functor.obj X) := by
-  sorry
+  let alpha : TwoSquare E0.functor (L01 ⋙ L12) (Lb01 ⋙ Lb12) E2.functor :=
+    TwoSquare.vComp c01.inv c12.inv
+  have hm : mateEquiv (adj01.comp adj12) (adjb01.comp adjb12) alpha =
+      TwoSquare.hComp r12.hom r01.hom := by
+    rw [mateEquiv_hcomp]
+    change TwoSquare.hComp ((mateEquiv adj12 adjb12 c12.inv).natTrans)
+      ((mateEquiv adj01 adjb01 c01.inv).natTrans) = _
+    rw [h01, h12]
+  have hl := conjugateEquiv_mateEquiv_vcomp adj02 (adj01.comp adj12)
+    (adjb01.comp adjb12) a.hom alpha
+  have hr := mateEquiv_conjugateEquiv_vcomp adj02 adjb02
+    (adjb01.comp adjb12) c02.inv ab.hom
+  rw [hm, ha] at hl
+  change mateEquiv adj02 adjb02 c02.inv = r02.hom at h02
+  rw [h02, hab] at hr
+  have he : alpha.whiskerLeft a.hom = TwoSquare.whiskerRight c02.inv ab.hom := by
+    apply (mateEquiv adj02 (adjb01.comp adjb12)).injective
+    rw [hl, hr]
+    ext Z
+    dsimp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp]
+    simp only [Category.id_comp, Category.comp_id]
+    change E0.functor.map (delta.inv.app Z) ≫
+        (r01.hom.app (R21.obj Z) ≫ Rb10.map (r12.hom.app Z)) =
+      r02.hom.app Z ≫ deltab.inv.app (E2.functor.obj Z)
+    apply (cancel_mono (deltab.hom.app (E2.functor.obj Z))).1
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    rw [hdelta Z, ← Category.assoc, ← E0.functor.map_comp]
+    simp
+  intro X
+  have hx := congrArg (fun t ↦ t.natTrans.app X) he
+  dsimp [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, alpha, TwoSquare.vComp] at hx
+  simp only [Category.id_comp, Category.comp_id] at hx
+  change (Lb12.map (c01.inv.app X) ≫ c12.inv.app (L01.obj X)) ≫
+      E2.functor.map (a.hom.app X) =
+    ab.hom.app (E0.functor.obj X) ≫ c02.inv.app X at hx
+  apply (cancel_epi (Lb12.map (c01.inv.app X) ≫ c12.inv.app (L01.obj X))).1
+  simp only [← Category.assoc, hx]
+  simp [← Lb12.map_comp, Category.assoc]
 
 /-- Clause (3): a compatible square of right-adjoint transformations transports the
 actual inverse mates, and invertibility is equivalent on the two sides.
@@ -166,6 +219,90 @@ theorem equivalenceAdjunctionComparison_inverseMate
           ((mateEquiv adjb adjb').symm bb).app (EA.functor.obj X)) ∧
       (IsIso (((mateEquiv adj adj').symm b).natTrans) ↔
         IsIso (((mateEquiv adjb adjb').symm bb).natTrans)) := by
-  sorry
+  let beta := ((mateEquiv adj adj').symm b).natTrans
+  let betab := ((mateEquiv adjb adjb').symm bb).natTrans
+  have halpha : ((mateEquiv adj adjb).symm u.hom).natTrans = j.inv := by
+    rw [← hj]
+    exact congrArg TwoSquare.natTrans ((mateEquiv adj adjb).symm_apply_apply j.inv)
+  have halpha' : ((mateEquiv adj' adjb').symm u'.hom).natTrans = j'.inv := by
+    rw [← hj']
+    exact congrArg TwoSquare.natTrans ((mateEquiv adj' adjb').symm_apply_apply j'.inv)
+  have hu (X : A) : EA.functor.map (adj.unit.app X) ≫ u.hom.app (J.obj X) =
+      adjb.unit.app (EA.functor.obj X) ≫ Ub.map (j.inv.app X) := by
+    simpa only [halpha, Functor.id_obj] using unit_mateEquiv_symm adj adjb u.hom X
+  have ht (X : A) :
+      j'.inv.app (P.obj X) ≫ ED.functor.map (beta.app X) ≫ q.hom.app (J.obj X) =
+        Jb'.map (p.hom.app X) ≫ betab.app (EA.functor.obj X) ≫
+          Qb.map (j.inv.app X) := by
+    apply (adjb'.homEquiv _ _).injective
+    rw [← Category.assoc, adjb'.homEquiv_naturality_right]
+    have hn := adjunctionMate_transpose adj' adjb' u'.hom
+      (P.obj X) (Q.obj (J.obj X)) (beta.app X)
+    change adjb'.homEquiv _ _
+      ((((mateEquiv adj' adjb').symm u'.hom).natTrans).app (P.obj X) ≫
+        ED.functor.map (beta.app X)) = _ at hn
+    rw [halpha'] at hn
+    rw [hn]
+    have hbeta : adj'.homEquiv (P.obj X) (Q.obj (J.obj X)) (beta.app X) =
+        P.map (adj.unit.app X) ≫ b.app (J.obj X) := by
+      rw [Adjunction.homEquiv_unit]
+      exact (unit_mateEquiv_symm adj adj' b X).symm
+    have hbetab : adjb'.homEquiv (Pb.obj (EA.functor.obj X))
+        (Qb.obj (Jb.obj (EA.functor.obj X))) (betab.app (EA.functor.obj X)) =
+        Pb.map (adjb.unit.app (EA.functor.obj X)) ≫
+          bb.app (Jb.obj (EA.functor.obj X)) := by
+      rw [Adjunction.homEquiv_unit]
+      exact (unit_mateEquiv_symm adjb adjb' bb (EA.functor.obj X)).symm
+    rw [hbeta, EC.functor.map_comp]
+    simp only [Category.assoc]
+    rw [← hb (J.obj X)]
+    have hp := p.hom.naturality (adj.unit.app X)
+    change EC.functor.map (P.map (adj.unit.app X)) ≫ p.hom.app (U.obj (J.obj X)) =
+      p.hom.app X ≫ Pb.map (EA.functor.map (adj.unit.app X)) at hp
+    rw [← Category.assoc, ← Category.assoc, hp]
+    simp only [Category.assoc]
+    rw [← Pb.map_comp_assoc, hu X, Pb.map_comp]
+    simp only [Category.assoc]
+    have hn' := bb.naturality (j.inv.app X)
+    change Pb.map (Ub.map (j.inv.app X)) ≫ bb.app (EB.functor.obj (J.obj X)) =
+      bb.app (Jb.obj (EA.functor.obj X)) ≫ Ub'.map (Qb.map (j.inv.app X)) at hn'
+    rw [hn']
+    rw [adjb'.homEquiv_naturality_left, adjb'.homEquiv_naturality_right]
+    simp only [Functor.comp_obj]
+    rw [hbetab]
+    simp [Category.assoc]
+  have heq (X : A) :
+      ED.functor.map (beta.app X) ≫ q.hom.app (J.obj X) ≫ Qb.map (j.hom.app X) =
+        j'.hom.app (P.obj X) ≫ Jb'.map (p.hom.app X) ≫
+          betab.app (EA.functor.obj X) := by
+    apply (cancel_epi (j'.inv.app (P.obj X))).1
+    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+    calc
+      _ = (j'.inv.app (P.obj X) ≫ ED.functor.map (beta.app X) ≫
+          q.hom.app (J.obj X)) ≫ Qb.map (j.hom.app X) := by
+        simp only [Category.assoc]
+      _ = _ := by rw [ht X]; simp [← Qb.map_comp, Category.assoc]
+  refine ⟨heq, ?_⟩
+  have hi (X : A) : IsIso (ED.functor.map (beta.app X)) ↔
+      IsIso (betab.app (EA.functor.obj X)) := by
+    have h := congrArg IsIso (heq X)
+    simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using h.to_iff
+  constructor
+  · intro h
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro Z
+    have hZ := (hi (EA.inverse.obj Z)).mp (by infer_instance)
+    let e := EA.counitIso.app Z
+    have hn := betab.naturality e.hom
+    simp only [Functor.id_obj, Functor.comp_obj] at hn
+    have : IsIso ((Pb ⋙ Jb').map e.hom ≫ betab.app Z) := by
+      rw [hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_left ((Pb ⋙ Jb').map e.hom) (betab.app Z)
+  · intro h
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro X
+    have := (hi X).mpr (by infer_instance)
+    exact isIso_of_fully_faithful (ED.functor) (beta.app X)
 
 end CategoryTheory
