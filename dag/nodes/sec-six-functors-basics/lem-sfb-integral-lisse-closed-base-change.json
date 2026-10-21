@@ -19,9 +19,128 @@
   "def-sfb-profinite-test-objects",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $\\Lambda=C_F$. Cover the affine ind-etale basis of $Z$ by affine ind-etale objects $V=\\operatorname{Spec}\\overline C$ whose rings are w-contractible: apply [sk-thm-pe-wc-cover] to the coordinate ring of each basis object and compose the ind-etale maps, using [lem-weil-pbc-ind-etale-stability]. This suffices to detect isomorphisms of cohomology sheaves by [lem-weil-pbc-ind-etale-basis]. The lift $W=v(V)=\\operatorname{Spec}C$ of [lem-weil-pbc-affine-closed-site-functor-properties] satisfies $W\\times_U Z=V$; [lem-zl-henselian-indetale-closed-lift] makes $(C,IC)$ henselian. By [lem-zl-condensed-henselian-lisse-rigidity], $W$ is w-contractible because $V$ is. Thus these are admissible tests for [lem-sfb-closed-test-derived-exchange-model].",
+   "uses": [
+    "sk-thm-pe-wc-cover",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "lem-zl-henselian-indetale-closed-lift",
+    "lem-zl-condensed-henselian-lisse-rigidity",
+    "lem-sfb-closed-test-derived-exchange-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2); closed lifts: Bhatt–Scholze Lemmas 6.1.1–6.1.2, and Stacks 09BK"
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}(A/I)$, $X=\\operatorname{Spec}B$, and $D=B\\otimes_A C$. Then $T=X\\times_UW=\\operatorname{Spec}D$ and $T_0=X\\times_UV=\\operatorname{Spec}(D/ID)$. By [lem-weil-pbc-integral-base-change], $D$ is integral over $C$. Apply [lem-weil-pbc-integral-over-henselian-pair] to the henselian pair $(C,IC)$ of step 1 and this integral algebra: $(D,(IC)D)=(D,ID)$ is henselian. The closed immersion in these coordinates is $a:T_0\\hookrightarrow T$.",
+   "uses": [
+    "lem-weil-pbc-integral-base-change",
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09XK, lemma-integral-over-henselian-pair; base change of integrality is algebra.tex Tag 02JK, lemma-base-change-integral (1)."
+   }
+  },
+  {
+   "text": "The affine scheme $W=\\operatorname{Spec}C$ is quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs]. Apply clause (2) of [lem-weil-pbc-integral-algebra-directed-colimit-finite] to the quasi-coherent algebra associated to the integral $C$-algebra $D$. It gives a small directed system of finite, finitely presented quasi-coherent algebras on $W$ with colimit the algebra associated to $D$. Evaluating on the affine $W$ gives $C$-algebras $D_i$ finite as $C$-modules and finitely presented as $C$-algebras, and $D=\\varinjlim_i D_i$: evaluation of this colimit is the ring colimit by [lem-weil-pbc-quasi-coherent-algebra-colimit]. The directed index is nonempty, and its transition maps are unital $C$-algebra maps; they need not be injective. Since $C$ is w-contractible by step 1, [lem-sfb-indfinite-contractible-base-wstrict] applies and makes $D$ w-strictly local. This uses finite presentation of the approximating algebras, not finite presentation of $D/C$, and makes no w-contractibility claim about $D$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "lem-sfb-indfinite-contractible-base-wstrict"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite (2), specialized to the affine base; combined with lem-sfb-indfinite-contractible-base-wstrict (Bhatt–Scholze Lemma 2.1.9 and Example 2.2.2; finite-stage Stacks Tag 0986)."
+   }
+  },
+  {
+   "text": "Apply [lem-zl-henselian-wstrict-local-invariance] to the henselian pair $(D,ID)$: since $D$ is w-strictly local, so is $D/ID$. Independently, the first clause of [lem-zl-condensed-henselian-lisse-rigidity] gives that the actual map $\\pi_0(a):\\pi_0(T_0)\\to\\pi_0(T)$ is a homeomorphism; this clause needs only henselianity, so no w-contractibility of $T$ is required. Put $M=\\mathcal L|_T$. Pulling a pro-etale finite-free trivializing cover and its finite bases back along $T\\to X$ proves that $M$ is finite-rank lisse, in precisely the sense of [def-sfb-lisse-coefficient-module]. The coefficient ring is still the pulled-back commutative condensed ring $C_F$ [def-sfb-continuous-map-condensed-ring].",
+   "uses": [
+    "lem-zl-henselian-wstrict-local-invariance",
+    "lem-zl-condensed-henselian-lisse-rigidity",
+    "def-sfb-lisse-coefficient-module",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(1) for the component homeomorphism, and Bhatt–Scholze Lemma 2.2.13 for henselian weak strict locality."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-wstrict-lisse-component-cohomology] with $h=a:T_0\\to T$, $\\Lambda=C_F$ and the lisse module $M$. Both schemes are affine and w-strictly local, and $\\pi_0(a)$ is a homeomorphism by steps 3–4. The theorem says exactly that the canonical restriction $R\\Gamma(T,M[0])\\to R\\Gamma(T_0,a^*M[0])$ induced by the actual adjunction unit is an isomorphism in $D(\\mathbf{Ab})$. Its arbitrary-condensed-ring hypothesis applies to all continuous $\\Omega$-valued functions with the extended norm topology. Thus no completeness or finite-subextension replacement of coefficients is used. This is the derived restriction appearing in [lem-sfb-closed-test-derived-exchange-model].",
+   "uses": [
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-closed-test-derived-exchange-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1, Proposition 4.3, equation (4.2), and Corollary 4.7, through the existing agent-formulated w-strictly local extension lem-sfb-wstrict-lisse-component-cohomology."
+   }
+  },
+  {
+   "text": "By [lem-sfb-closed-test-derived-exchange-model], the map just proved invertible is $R\\Gamma(V,\\beta_{q,s,\\mathcal L})$. On every chosen $V$, evaluation is exact [lem-zl-contractible-derived-sections-tensor], so the cone of $\\beta$ has zero evaluated cohomology. These tests cover the affine ind-etale basis; hence each cohomology sheaf of that cone vanishes by [lem-weil-pbc-ind-etale-basis]. The cone is acyclic, proving that the specified derived mate $\\beta$ is an isomorphism. The test-model lemma identifies the arrow, not just its source and target. All complexes started in degree zero and all derived direct images of these modules are bounded below; the conclusion is their isomorphism in the ordinary unbounded derived category.",
+   "uses": [
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Derived closed-test model and exact contractible evaluation; ordinary bounded-below computations embedded in the unbounded derived category"
+   }
+  },
+  {
+   "text": "The naturality in $\\mathcal L$, square isomorphisms and pro-etale base change is the naturality of the derived restriction in [lem-sfb-closed-test-derived-exchange-model]. The model uses the canonical adjunction and composition identifications, so it gives equalities for the specified mate independently of the test choices used to prove invertibility. A profinite parameter $Q$ gives a pro-etale object $U[Q]\\to U$ by [def-sfb-profinite-test-objects]; the same naturality applies on that entire object, not just after evaluation at points of $Q$. For $E\\to\\Omega$, ordinary scalar extension of a locally finite free module is locally finite free, by applying the tensor relation to a finite basis. Apply the coefficient-map clause of the test-model lemma to the actual section map $x\\mapsto1\\otimes x$. On each test its two composites are the same restriction of $1\\otimes x$; the derived comparison clause gives equality of the derived morphisms after scalar restriction. The comparison maps in that square are the canonical right-derived coefficient comparisons; their invertibility is not needed. This proves precisely the scalar compatibility asserted in the item.",
+   "uses": [
+    "lem-sfb-closed-test-derived-exchange-model",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Naturality of derived restriction and coefficient-map clause of the closed-test model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-wc-cover",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-zl-henselian-indetale-closed-lift",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-sfb-closed-test-derived-exchange-model",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-sfb-indfinite-contractible-base-wstrict",
+  "lem-zl-henselian-wstrict-local-invariance",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-sfb-wstrict-lisse-component-cohomology",
+  "lem-zl-contractible-derived-sections-tensor",
+  "def-sfb-profinite-test-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent proof using the existing ind-finite weak-strict-locality and w-strict lisse component-cohomology nodes, henselian invariance (Bhatt–Scholze Lemma 2.2.13), HRS Corollary 4.4(1), and the closed lifted-test identification; no new hypercover construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +197,31 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.instFullPushforward",
    "date": "2026-10-21",
    "verdict": "no match: the hits give integrality and stability of scheme morphisms, or Zariski module restriction; none gives this continuous-coefficient pro-etale derived exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsIntegralHom|[Ii]ntegral).*(derivedBaseChange|derived_base_change|proEtale)|(proEtale|derivedBaseChange).*IsIntegralHom",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-morphism base-change and integrality declarations do not state continuous-coefficient internal pro-etale derived exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change along closed immersion for integral morphisms and lisse modules over continuous condensed norm topological fields",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-morphism base-change and integrality declarations do not state continuous-coefficient internal pro-etale derived exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed base change for derived direct image along integral affine morphisms of finite rank lisse modules over all continuous functions to a normed l adic algebraic closure on small pro etale sites",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-morphism base-change and integrality declarations do not state continuous-coefficient internal pro-etale derived exchange"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-boundary-acyclicity",
@@ -105,5 +245,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-lisse-closed-base-change",
+  "worker": "stage1",
+  "summary": "Repair of the C5 return: deleted the redundant integral-locality and henselian-component-hypercover nodes, used integral finite-presentation approximation and the existing ind-finite weak-strict-locality theorem, then henselian invariance and the existing component-cohomology theorem for the actual restriction map. Trimmed the one remaining formal test-model node by removing its hypercover clause. Statement unchanged.",
+  "blueprint": "Paragraph (3) of the current direct-images proof: supplies the closed restriction for the full integral root morphism before its boundary is removed. Its chain has no imported blueprint ancestor; from.node is retained as null.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-pe-wc-cover",
+    "why": "Existence of w-contractible ind-etale covering algebras for the closed tests. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Composition preserves the ind-etale tests used to cover the basis. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Conservativity of the affine ind-etale basis for the evaluated cone. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-closed-site-functor-properties",
+    "why": "The actual closed-test lift is cartesian over the closed immersion. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-zl-henselian-indetale-closed-lift",
+    "why": "Henselianity of the ring pair of that lift. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-zl-condensed-henselian-lisse-rigidity",
+    "why": "The lift is w-contractible, and the henselian quotient induces a component homeomorphism. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-base-change",
+    "why": "Integrality of the tensor algebra D over the lifted test ring C. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-over-henselian-pair",
+    "why": "Henselianity of (D,ID) after the integral extension. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "why": "Clause (2) gives finite, finitely presented approximating C-algebras for arbitrary integral D. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "why": "Evaluation on the affine W turns the quasi-coherent algebra colimit into the ring colimit D. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-zl-henselian-wstrict-local-invariance",
+    "why": "Weak strict locality of the quotient D/ID of the henselian pair. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "lem-zl-contractible-derived-sections-tensor",
+    "why": "Exact evaluation on the contractible tests detects vanishing cohomology of the cone. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   },
+   {
+    "node": "def-sfb-profinite-test-objects",
+    "why": "The entire profinite parametrization U[Q] is a pro-etale test object. This is a generic algebraic, site, or derived-evaluation tool; the direct-images unit provides no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-pe-wc-cover",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-zl-henselian-indetale-closed-lift",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-zl-henselian-wstrict-local-invariance",
+  "lem-zl-contractible-derived-sections-tensor",
+  "def-sfb-profinite-test-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-817f9f5cc",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-817f9f5cc (reviewer sub-agent of L); spot-checked: Re-delivery after the C5 RETURN of 5fc3874d; all requested repairs are done. The item's statement, stmt_deps, source and blueprint fields are byte-identical to the returned head; only proof, proof_deps and split_report changed. (a) The integral-locality node is dropped. Step 3 uses clause (2) of lem-weil-pbc-integral-algebra-directed-colimit-finite (0817) on the affine, hence qcqs, Spec C. Evaluating on Spec C with the quasi-coherent-algebra-colimit node gives finite, finitely presented D_i with colimit D, and lem-sfb-indfinite-contractible-base-wstrict then makes D w-strictly local. (b) The hypercover node is dropped. lem-zl-henselian-wstrict-local-invariance applied to the henselian pair (D,ID) makes D/ID w-strictly local. The rigidity node's unconditional first clause gives the pi_0 homeomorphism. lem-sfb-wstrict-lisse-component-cohomology then gives the unit-induced restriction RΓ(T,L|_T)→RΓ(T_0,a^*L|_T) as an isomorphism for any condensed Λ, so the all-continuous Ω coefficients are kept. (c) The hypercover clause and the det-pe-hypercover-complex dependency were removed from lem-sfb-closed-test-derived-exchange-model. (d) The kept node is true: by Stacks 09BL(2) (proetale.tex lemma-closed-immersion-affines-apply), with K-injective restriction to slices and transposition of h^*ε. It identifies the arrow, assumes neither integrality nor lisseness, and asserts no invertibility, so it is not a restatement of the item (D1). A search of all chapters found only underived pbc closed-immersion nodes. Coordinate-face proves a special case inline in its step 6 and has no node, so this is not a C5 duplicate. Steps 1, 2, 6 and 7 were checked against the cited statements: the henselian closed lift, w-contractibility of the lift, integrality and henselian base change, exact evaluation plus conservativity of the basis via the sheaf axiom, the naturality clauses on U[Q], and the coefficient clause for C_E→C_Ω with x↦1⊗x. Edge cases checked: I=0, I=A, empty spectra or D=0, non-finite integral q, rank 0, and incomplete Ω. Batch-5 flags: lem-trf-henselian-smooth-algebra-lifting (the target of both zl flags) is generic henselian algebra, and def-trf-geometric-morphism (target of the component-cohomology flag) is a general definition; neither is part of the trace formula or Poincaré duality, so all three are accepted. No SGA is cited, and nothing cited is dropped or merged. Two advisories, no faults: step 3 could also cite integral base change for integrality on affine opens, and the locality stmt_dep in the new node is slightly odd but harmless."
  }
 }

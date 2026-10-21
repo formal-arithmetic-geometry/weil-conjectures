@@ -23216,3 +23216,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/NW/lem-sfb-lattice-supported-hom-finite-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 17:41 L: merged deliver/Q04/lem-sfb-condensed-derived-restriction-calculus (reviewer FIX; first push; new nodes: 1)
 - 17:41 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 17:42 L: merged deliver/NB/lem-sfb-integral-lisse-closed-base-change (reviewer PASS; after a return; new nodes: 1)
