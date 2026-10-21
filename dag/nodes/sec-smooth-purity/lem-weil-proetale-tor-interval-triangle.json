@@ -15,12 +15,11 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary degree-zero $A_Y$-module sheaf $N$. Apply [lem-pc-kflat-resolution] on the ringed site $(Y_{\\mathrm{proet}},A_Y)$ to $N[0]$, obtaining a quasi-isomorphism $P\\to N[0]$ with $P$ K-flat and every term flat. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], $K\\mapsto K\\otimes_{A_Y}P$ preserves quasi-isomorphisms and descends to an exact functor $T_P$ on $D(Y_{\\mathrm{proet}},A)$, together with its shift comparison $T_P(K[1])\\cong T_P(K)[1]$. Compare $T_P$ with the tensor of [def-weil-derived-tensor], which resolves the first argument: for a complex $K$ choose, again by [lem-pc-kflat-resolution], a quasi-isomorphism $P_K\\to K$ with $P_K$ K-flat with flat terms; by [lem-weil-derived-tensor-resolution-independent], $K\\otimes_A^LN$ is $P_K\\otimes_AN$ up to canonical isomorphism, whatever K-flat resolution was chosen. Applying [lem-weil-pbc-kflat-fixed-tensor-triangulated] to the fixed argument $P_K$ shows that $P_K\\otimes P\\to P_K\\otimes N$ is a quasi-isomorphism, and applying it to $P$ shows that $P_K\\otimes P\\to K\\otimes P$ is one. Hence $K\\otimes_A^LN\\cong T_P(K)$ in $D(Y_{\\mathrm{proet}},A)$ for every $K$, and $T_P$ supplies the tensor image $K\\mapsto K\\otimes_A^LN$ on morphisms. Therefore the given distinguished triangle is sent to a distinguished triangle with vertices $U\\otimes_A^L N$, $V\\otimes_A^L N$, $W\\otimes_A^L N$, and the shift comparison of $T_P$ identifies its last vertex with $(U\\otimes_A^L N)[1]$.",
+   "text": "Fix a module sheaf N. Use exists_coefficientModelFlatKFlatRepresentative attached to [lem-pe-coefficient-tor-flat-model] to choose a flat-term K-flat representative P of N[0]. This proved representative theorem is obtained from [lem-pc-kflat-resolution] and localization. The coherent CommShift₂Int and the exactness clause of [lem-weil-pbc-kflat-fixed-tensor-triangulated] make tensor with Q(P) triangulated. Apply the derived tensor bifunctor to the supplied isomorphism Q(P) ≅ N[0]. Its naturality in the fixed argument commutes with shifts, so Functor.isTriangulated_of_iso transports triangulatedness to the published functor coefficientProEtaleTorTensor N. No new tensor or resolution data is defined. Flatness is translated between monoidal and sheafified sectionwise tensor using siteSheafTensorRightIso of [lem-weil-pbc-independent-sheaf-tensor-colimits].",
    "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-pe-coefficient-tor-flat-model",
     "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "def-weil-derived-tensor",
-    "lem-weil-derived-tensor-resolution-independent"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
@@ -29,10 +28,13 @@
    }
   },
   {
-   "text": "Apply [lem-sf-derived-homology-long-exact] to the distinguished triangle of step 1 in the abelian category of $A_Y$-module sheaves. Its cohomology functors are the cohomology sheaves of [def-weil-derived-cohomology-sheaves]. In each integer degree $i$, the long exact sequence contains the exact segment $\\mathcal H^i(U\\otimes_A^L N)\\to\\mathcal H^i(V\\otimes_A^L N)\\to\\mathcal H^i(W\\otimes_A^L N)$. This proves the first assertion for every $N$ and $i$.",
+   "text": "The proved representative and tensor-test comparison lemmas attached to [lem-pe-coefficient-tor-flat-model] identify the quantified coefficient-model Tor predicate with vanishing of the cohomology of coefficientProEtaleTorTensor N for every N outside the interval. Explicitly choose a flat-term K-flat representative S of each K. The left resolving comparison cL of [lem-weil-pbc-kflat-fixed-tensor-triangulated], evaluated at N[0], identifies the published tensor with Q(S tensor N[0]); apply homologyFunctorFactors of [def-weil-derived-cohomology-sheaves]. Conversely transfer an arbitrary K-flat test P to S by coefficientModelTensorTest_iso. Separately apply [lem-sf-derived-homology-long-exact] to the tensor image of the given distinguished triangle. HomologySequence.exact₂ gives precisely the stated exact short complex, including the zero-composite witness.",
    "uses": [
+    "lem-pe-coefficient-tor-flat-model",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
     "lem-sf-derived-homology-long-exact",
-    "def-weil-derived-cohomology-sheaves"
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-tor-amplitude"
    ],
    "elementary": false,
    "source": {
@@ -62,10 +64,9 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
+  "lem-pe-coefficient-tor-flat-model",
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-  "def-weil-derived-tensor",
-  "lem-weil-derived-tensor-resolution-independent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-sf-derived-homology-long-exact",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-proetale-tor-amplitude"
@@ -73,7 +74,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08G2, lemma-cone-tor-amplitude, proof hint for (2), expanded using 06YS, 06YU and derived.tex 0147/05RS; unequal intervals by elementary endpoint inequalities."
+  "place": "Tag 08G2(2), its tensor-exactness/long-exact-sequence proof hint; 06YS and 06YU for K-flat exact descent and the already proved coefficient-model comparison lemmas for representative independence. Unequal interval endpoints by elementary inequalities."
  },
  "mathlib_searches": [
   {
@@ -191,8 +192,7 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-  "lem-weil-derived-tensor-resolution-independent"
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -226,5 +226,15 @@
   "group": "Q34",
   "result": "fix",
   "note": "Re-delivery after the H13 RETURN of 7f8cef57: def-weil-derived-cohomology-sheaves, def-weil-derived-tensor and def-weil-proetale-tor-amplitude are byte-identical to live and side-live; the item's .lean is byte-identical to the returned head and only lean.note changed. Maths re-read: coefficient-sized pro-etale model and constant ring as in HasCoefficientProEtaleTorAmplitude; exact segment for every N and i with genuine ShortComplex.Exact via coefficientModelCohomology = homologyFunctor and K ⊗^L N[0] = flip of curry siteDerivedTensorIndependentCoefficients (pinned .choose); min/max and common-interval clauses per Stacks 08G2(2)/08FZ; edge cases N=0, zero ring, empty scheme, [0,0]/[2,2]->[0,2], negative endpoints, unbounded vertices, non-flat N covered; one sorry; docstrings and statement verbatim OK. FIX F1: lean.note wrongly says def-sfb-derived-tensor-sheaves owns siteDerivedTensorIndependentCoefficients (it records ProEtale.derivedTensor); a note-only lean-record.json corrects it, checked with refit_record (no refusals). Not compiled: no Lean file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261021T121020-L-4047375",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
