@@ -1,0 +1,114 @@
+{
+ "id": "def-kun-filtered-tensor-representative-interface",
+ "kind": "definition",
+ "title": "Canonical representative identifications for convolution localization",
+ "statement": "Use the finite filtered homotopy category [def-kun-finite-filtered-module-homotopy], its good subcategory [lem-kun-finite-filtered-kflat-replacement], and convolution [lem-kun-filtered-tensor-graded-comparison]. The finite representative is the same filtered complex with the proof of finite filtration; its good representative is its homotopy class with its goodness proof. Representative maps are the corresponding quotient maps. The convolution representative carries the supplied goodness proof. Localized representatives are their images under the fixed replacement equivalence. The lift identification is the composite of its inclusion square, the single-variable localization witness, the representative object equality and the ordinary quotient-to-derived comparison. The star identification is the composite of the transport comparison, inverse equivalence units, the two-variable localization witness and the representative object equality. The graded comparison is exactly the residue-class comparison selected by [lem-kun-filtered-tensor-graded-comparison], whose equation determines it uniquely. These are the existing ten definitions, moved unchanged in meaning into a common interface module.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7Y (proposition-kunneth-filtered), convolution construction preceding Tag 0H7W (lemma-kunneth-converges), with Tag 0H7X (lemma-resolution-filtered-complex); explicit homotopy/localization extension of those constructions. Derived Categories Tag 05S2 (definition-filtered-derived)."
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "lem-kun-finite-filtered-kflat-replacement",
+  "lem-kun-filtered-tensor-graded-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor product homotopies with respect to inclusions of subcomplexes",
+   "results": "Found HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁; the other hits concern simplicial homotopies.",
+   "date": "2026-10-21",
+   "verdict": "Use Mathlib signed tensor homotopies; filtered image preservation needs a proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatIso",
+   "results": "CategoryTheory.Localization.lift₂NatIso, lift₂NatIso_hom and lift₂NatIso_inv.",
+   "date": "2026-10-21",
+   "verdict": "The localization API supplies extension of bifunctor isomorphisms; it does not include convolution or finite support normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "lift₂NatIso|tensor.*homotopy|homotopy.*tensor",
+   "results": "Localization/Bifunctor.lean and Localization/Monoidal/Functor.lean; no filtered tensor localization theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic localization API with explicit filtered representative data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical representative maps and isomorphisms for homotopy localization of finite filtered complexes",
+   "results": "8 hits, including HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso and Q_map_eq_of_homotopy (Mathlib.Algebra.Homology.Localization). No filtered representative interface.",
+   "date": "2026-10-21",
+   "verdict": "no match: the generic categorical APIs do not supply the stated filtered construction and normalization; use them in the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredTensorLocalization",
+  "date": "2026-10-21",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Proof of lem-kun-filtered-tensor-localization: Canonical representative identifications for convolution localization",
+   "via": [
+    "lem-kun-filtered-tensor-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredTensorLocalizationSetup",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredTensorLocalizationSetup.lean",
+  "declaration": "CochainComplex.kunnethFiniteRepresentative",
+  "statement": "abbrev kunnethFiniteRepresentative\n    (P : KunnethFilteredComplex R) : FiniteFilteredModuleComplex R",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-21",
+  "declarations": [
+   "CochainComplex.kunnethFiniteRepresentative",
+   "CochainComplex.kunnethGoodRepresentative",
+   "CochainComplex.kunnethRepresentativeMap",
+   "CochainComplex.kunnethGoodRepresentativeMap",
+   "CochainComplex.kunnethConvolutionRepresentative",
+   "CochainComplex.kunnethConvolutionRepresentativeMap",
+   "CochainComplex.kunnethLocalizedRepresentative",
+   "CochainComplex.kunnethRepresentativeLiftIso",
+   "CochainComplex.kunnethStarRepresentativeIso",
+   "CochainComplex.kunnethRepresentativeGradedComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f156a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261021T013351-L-2291591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f156a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261021T013351-L-2291591",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (compiled --all, clean) and 6 node files against live FilteredTensorLocalization.lean, the item node and the lem-kun-* dependency nodes; statement alpha-equal, moved def bodies identical, axioms only via the stated open deps"
+ }
+}

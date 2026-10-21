@@ -5,11 +5,11 @@ Authors: SHEAF group Q109
 -/
 module
 
-public import Sheaf.Algebra.Homology.FiniteFilteredKFlatReplacement
-public import Sheaf.Algebra.Homology.FilteredTensorGradedComparison
-public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-public import Mathlib.CategoryTheory.Localization.Bifunctor
-import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
+public import Sheaf.Algebra.Homology.FilteredTensorLocalizationSetup
+import Sheaf.Algebra.Homology.FiniteFilteredGradedComparison
+import all Sheaf.Algebra.Homology.FilteredQuasiIsoTwoOutOfThree
+import Sheaf.Algebra.Homology.FilteredTensorHomotopy
+import Sheaf.Algebra.Homology.FilteredTensorComparisonDescent
 
 /-!
 # Convolution tensor on the finite filtered localization
@@ -25,170 +25,313 @@ set_option autoImplicit false
 
 universe u w
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 open CategoryTheory.MonoidalCategory
 open CochainComplex
 
 namespace CochainComplex
 
 variable {R : Type u} [CommRing R]
-variable [HasDerivedCategory.{w} (ModuleCat.{u} R)]
 
-/-! The following wrappers make the representative-to-homotopy passage explicit in the
-statement below.  They are the canonical quotient maps, rather than choices of
-representatives. -/
+private theorem kunneth_filtered_congruence :
+    Congruence (finiteFilteredModuleHomotopyRel R) where
+  equivalence := {
+    refl := by
+      intro f
+      refine ⟨Homotopy.refl _, ?_⟩
+      intro i n m
+      exact ⟨0, by simp [Homotopy.refl, Homotopy.ofEq]⟩
+    symm := by
+      rintro f g ⟨h, hh⟩
+      refine ⟨h.symm, ?_⟩
+      intro i n m
+      obtain ⟨l, hl⟩ := hh i n m
+      exact ⟨-l, by simpa using congrArg Neg.neg hl⟩
+    trans := by
+      rintro f g k ⟨h, hh⟩ ⟨h', hh'⟩
+      refine ⟨h.trans h', ?_⟩
+      intro i n m
+      obtain ⟨l, hl⟩ := hh i n m
+      obtain ⟨l', hl'⟩ := hh' i n m
+      exact ⟨l + l', by simpa using congrArg₂ HAdd.hAdd hl hl'⟩ }
+  comp_left := by
+    rintro K L M f g g' ⟨h, hh⟩
+    refine ⟨h.compLeft f.hom.hom, ?_⟩
+    intro i n m
+    obtain ⟨l, hl⟩ := hh i n m
+    refine ⟨(FilteredObject.restrictionSteps f.hom i).f n ≫ l, ?_⟩
+    rw [Category.assoc, hl, ← Category.assoc]
+    have he := HomologicalComplex.congr_hom (restriction_arrow f.hom i) n
+    simpa using congrArg (· ≫ h.hom n m) he
+  comp_right := by
+    rintro K L M f f' g ⟨h, hh⟩
+    refine ⟨h.compRight g.hom.hom, ?_⟩
+    intro i n m
+    obtain ⟨l, hl⟩ := hh i n m
+    refine ⟨l ≫ (FilteredObject.restrictionSteps g.hom i).f m, ?_⟩
+    have he := HomologicalComplex.congr_hom (restriction_arrow g.hom i) m
+    simp only [HomologicalComplex.comp_f] at he
+    rw [Category.assoc, he, ← Category.assoc, hl]
+    rfl
 
-/-- A good filtered complex viewed as a finite filtered complex.
-Source: Stacks, Tags 0H7W and 05S2, representative passage in localization
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethFiniteRepresentative
-    (P : KunnethFilteredComplex R) : FiniteFilteredModuleComplex R :=
-  ⟨P.obj, P.property.1⟩
+private abbrev kunnethHomObj (P : GoodFiniteFilteredModuleHomotopy R) :
+    KunnethFilteredComplex R := ⟨P.obj.as.obj, P.property⟩
 
-/-- The homotopy class of a good filtered complex in the good full subcategory.
-Source: Stacks, Tags 0H7W and 05S2, representative passage in localization
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethGoodRepresentative
-    (P : KunnethFilteredComplex R) : GoodFiniteFilteredModuleHomotopy R :=
-  ⟨(finiteFilteredModuleHomotopyQuotient R).obj (kunnethFiniteRepresentative P), P.property⟩
-
-/-- A filtered chain map viewed in the finite filtered category.
-Source: Stacks, Tags 0H7W and 05S2, representative passage in localization
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethRepresentativeMap
-    {P P' : KunnethFilteredComplex R} (f : P ⟶ P') :
-    kunnethFiniteRepresentative P ⟶ kunnethFiniteRepresentative P' :=
-  ObjectProperty.homMk f.hom
-
-/-- The filtered homotopy class of a map of good representatives.
-Source: Stacks, Tags 0H7W and 05S2, representative passage in localization
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethGoodRepresentativeMap
-    {P P' : KunnethFilteredComplex R} (f : P ⟶ P') :
-    kunnethGoodRepresentative P ⟶ kunnethGoodRepresentative P' :=
+private noncomputable abbrev kunnethHomMap
+    {P P' : GoodFiniteFilteredModuleHomotopy R} (f : P ⟶ P') :
+    kunnethHomObj P ⟶ kunnethHomObj P' :=
   ObjectProperty.homMk
-    ((finiteFilteredModuleHomotopyQuotient R).map (kunnethRepresentativeMap f))
+    (((CategoryTheory.Quotient.functor (finiteFilteredModuleHomotopyRel R)).preimage
+      f.hom).hom)
 
-/-- The convolution complex, with its supplied proof of goodness.
-Source: Stacks, Tags 0H7W and 05S2, representative passage in localization
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethConvolutionRepresentative
-    (h : ∀ P Q : KunnethFilteredComplex R,
-      HasKunnethFiltration (kunnethConvolutionObject P.obj Q.obj))
-    (P Q : KunnethFilteredComplex R) : KunnethFilteredComplex R :=
-  ⟨kunnethConvolutionObject P.obj Q.obj, h P Q⟩
+private theorem kunnethHomMap_spec
+    {P P' : GoodFiniteFilteredModuleHomotopy R} (f : P ⟶ P') :
+    kunnethGoodRepresentativeMap (kunnethHomMap f) = f := by
+  apply ObjectProperty.hom_ext
+  change (CategoryTheory.Quotient.functor (finiteFilteredModuleHomotopyRel R)).map
+    ((CategoryTheory.Quotient.functor (finiteFilteredModuleHomotopyRel R)).preimage
+      f.hom) = f.hom
+  exact (CategoryTheory.Quotient.functor (finiteFilteredModuleHomotopyRel R)).map_preimage _
 
-/-- The convolution chain map viewed in the good full subcategory.
-Source: Stacks, Tags 0H7W and 05S2, representative passage in localization
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethConvolutionRepresentativeMap
-    (h : ∀ P Q : KunnethFilteredComplex R,
-      HasKunnethFiltration (kunnethConvolutionObject P.obj Q.obj))
-    {P P' Q Q' : KunnethFilteredComplex R}
-    (f : kunnethConvolutionObject P.obj Q.obj ⟶
-      kunnethConvolutionObject P'.obj Q'.obj) :
-    kunnethConvolutionRepresentative h P Q ⟶
-      kunnethConvolutionRepresentative h P' Q' :=
-  ObjectProperty.homMk f
+@[simp] private theorem kunnethGoodMap_comp
+    {P P' P'' : KunnethFilteredComplex R} (f : P ⟶ P') (g : P' ⟶ P'') :
+    kunnethGoodRepresentativeMap (f ≫ g) =
+      kunnethGoodRepresentativeMap f ≫ kunnethGoodRepresentativeMap g := by
+  apply ObjectProperty.hom_ext
+  change (finiteFilteredModuleHomotopyQuotient R).map
+    (kunnethRepresentativeMap f ≫ kunnethRepresentativeMap g) = _
+  exact (finiteFilteredModuleHomotopyQuotient R).map_comp _ _
 
-/-- The image of a good representative under the replacement equivalence.
-Source: Stacks, Tags 0H7X and 05S2, inclusion-induced equivalence
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethLocalizedRepresentative
-    (E : (goodFiniteFilteredModuleQuasiIso R).Localization ≌
-      (finiteFilteredModuleQuasiIso R).Localization)
-    (P : KunnethFilteredComplex R) : (finiteFilteredModuleQuasiIso R).Localization :=
-  E.functor.obj ((goodFiniteFilteredModuleQuasiIso R).Q.obj (kunnethGoodRepresentative P))
+private theorem kunnethGoodMap_surjective
+    {P P' : GoodFiniteFilteredModuleHomotopy R} (f : P ⟶ P') :
+    ∃ f' : kunnethHomObj P ⟶ kunnethHomObj P', kunnethGoodRepresentativeMap f' = f :=
+  ⟨kunnethHomMap f, kunnethHomMap_spec f⟩
 
-/-- The canonical identification of a localized representative after forgetting or grading.
-It is the composite of the inclusion square `eE`, the localization witness `hH`, the
-representative object equality, and the ordinary quotient-to-derived-category comparison.
-Source: Stacks, Tags 05S2 and 0H7Y, descent of forgetting and associated graded
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethRepresentativeLiftIso
-    (E : (goodFiniteFilteredModuleQuasiIso R).Localization ≌
-      (finiteFilteredModuleQuasiIso R).Localization)
-    (eE : (goodFiniteFilteredModuleQuasiIso R).Q ⋙ E.functor ≅
-      goodFiniteFilteredModuleInclusion R ⋙ (finiteFilteredModuleQuasiIso R).Q)
-    (H : (finiteFilteredModuleQuasiIso R).Localization ⥤ DerivedCategory (ModuleCat.{u} R))
-    (FH : FiniteFilteredModuleHomotopy R ⥤ DerivedCategory (ModuleCat.{u} R))
-    (hH : Localization.Lifting (finiteFilteredModuleQuasiIso R).Q
-      (finiteFilteredModuleQuasiIso R) FH H)
-    (C : FiniteFilteredModuleHomotopy R → CochainComplex (ModuleCat.{u} R) ℤ)
-    (hobj : ∀ K : FiniteFilteredModuleHomotopy R,
-      FH.obj K = HomologicalComplexUpToQuasiIso.Qh.obj
-        ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj (C K)))
-    (P : KunnethFilteredComplex R) :
-    H.obj (kunnethLocalizedRepresentative E P) ≅
-      DerivedCategory.Q.obj (C ((goodFiniteFilteredModuleInclusion R).obj
-        (kunnethGoodRepresentative P))) :=
-  H.mapIso (eE.app (kunnethGoodRepresentative P)) ≪≫
-    (@Localization.Lifting.iso _ _ _ _ _ _
-      (finiteFilteredModuleQuasiIso R).Q (finiteFilteredModuleQuasiIso R) FH H hH).app
-        ((goodFiniteFilteredModuleInclusion R).obj (kunnethGoodRepresentative P)) ≪≫
-    eqToIso (hobj ((goodFiniteFilteredModuleInclusion R).obj
-      (kunnethGoodRepresentative P))) ≪≫
-    (DerivedCategory.quotientCompQhIso (ModuleCat.{u} R)).app
-      (C ((goodFiniteFilteredModuleInclusion R).obj (kunnethGoodRepresentative P)))
-
-/-- The canonical convolution identification on a pair of localized representatives.
-Transport by `τ`, then the inverse unit of `E` in each variable, then the bifunctor
-localization witness `hB`, and finally the representative object equality. These fixed
-composites prevent a free isomorphism from absorbing the comparison being characterized.
-Source: Stacks, Tags 05S2--05S3 and the convolution before Tag 0H7W
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethStarRepresentativeIso
-    (E : (goodFiniteFilteredModuleQuasiIso R).Localization ≌
-      (finiteFilteredModuleQuasiIso R).Localization)
-    (F : GoodFiniteFilteredModuleHomotopy R ⥤ GoodFiniteFilteredModuleHomotopy R ⥤
-      (goodFiniteFilteredModuleQuasiIso R).Localization)
-    (B : (goodFiniteFilteredModuleQuasiIso R).Localization ⥤
-      (goodFiniteFilteredModuleQuasiIso R).Localization ⥤
-      (goodFiniteFilteredModuleQuasiIso R).Localization)
-    (hB : Localization.Lifting₂ (goodFiniteFilteredModuleQuasiIso R).Q
-      (goodFiniteFilteredModuleQuasiIso R).Q (goodFiniteFilteredModuleQuasiIso R)
-      (goodFiniteFilteredModuleQuasiIso R) F B)
+private theorem kunneth_tensor_homotopy_bifunctor
     (hconv : ∀ P Q : KunnethFilteredComplex R,
       HasKunnethFiltration (kunnethConvolutionObject P.obj Q.obj))
-    (hrep : ∀ P Q : KunnethFilteredComplex R,
-      (F.obj (kunnethGoodRepresentative P)).obj (kunnethGoodRepresentative Q) =
-        (goodFiniteFilteredModuleQuasiIso R).Q.obj
-          (kunnethGoodRepresentative (kunnethConvolutionRepresentative hconv P Q)))
-    (star : (finiteFilteredModuleQuasiIso R).Localization ⥤
-      (finiteFilteredModuleQuasiIso R).Localization ⥤
-      (finiteFilteredModuleQuasiIso R).Localization)
-    (τ : ∀ U V : (finiteFilteredModuleQuasiIso R).Localization,
-      (star.obj U).obj V ≅
-        E.functor.obj ((B.obj (E.inverse.obj U)).obj (E.inverse.obj V)))
-    (P Q : KunnethFilteredComplex R) :
-    (star.obj (kunnethLocalizedRepresentative E P)).obj
-      (kunnethLocalizedRepresentative E Q) ≅
-        kunnethLocalizedRepresentative E (kunnethConvolutionRepresentative hconv P Q) :=
-  τ _ _ ≪≫ E.functor.mapIso
-    (((B.mapIso (E.unitIso.symm.app
-      ((goodFiniteFilteredModuleQuasiIso R).Q.obj (kunnethGoodRepresentative P)))).app
-        (E.inverse.obj (kunnethLocalizedRepresentative E Q))) ≪≫
-      (B.obj ((goodFiniteFilteredModuleQuasiIso R).Q.obj
-        (kunnethGoodRepresentative P))).mapIso (E.unitIso.symm.app
-          ((goodFiniteFilteredModuleQuasiIso R).Q.obj (kunnethGoodRepresentative Q))) ≪≫
-      ((@Localization.Lifting₂.iso _ _ _ _ _ _ _ _ _ _
-        (goodFiniteFilteredModuleQuasiIso R).Q (goodFiniteFilteredModuleQuasiIso R).Q
-        (goodFiniteFilteredModuleQuasiIso R) (goodFiniteFilteredModuleQuasiIso R) F B hB).app
-          (kunnethGoodRepresentative P)).app (kunnethGoodRepresentative Q) ≪≫
-      eqToIso (hrep P Q))
+    (m : ∀ (P P' Q Q' : KunnethFilteredComplex R) (_f : P ⟶ P') (_g : Q ⟶ Q'),
+      kunnethConvolutionObject P.obj Q.obj ⟶ kunnethConvolutionObject P'.obj Q'.obj)
+    (hm : ∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'),
+      (m P P' Q Q' f g).hom = f.hom.hom ⊗ₘ g.hom.hom)
+    (mid : ∀ P Q : KunnethFilteredComplex R, m P P Q Q (𝟙 P) (𝟙 Q) = 𝟙 _)
+    (mcomp : ∀ (P P' P'' Q Q' Q'' : KunnethFilteredComplex R)
+      (f : P ⟶ P') (f' : P' ⟶ P'') (g : Q ⟶ Q') (g' : Q' ⟶ Q''),
+      m P P'' Q Q'' (f ≫ f') (g ≫ g') =
+        m P P' Q Q' f g ≫ m P' P'' Q' Q'' f' g')
+    (mW : ∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'),
+      (∀ i : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom i)) →
+      (∀ j : ℤ, QuasiIso (FilteredObject.gradedMapSteps g.hom j)) →
+        ∀ a : ℤ, QuasiIso (FilteredObject.gradedMapSteps (m P P' Q Q' f g) a)) :
+    ∃ (G : GoodFiniteFilteredModuleHomotopy R ⥤ GoodFiniteFilteredModuleHomotopy R ⥤
+        GoodFiniteFilteredModuleHomotopy R),
+      (∀ P Q, ((G.obj P).obj Q).obj.as.obj =
+        kunnethConvolutionObject P.obj.as.obj Q.obj.as.obj) ∧
+      (∃ hrep : ∀ P Q : KunnethFilteredComplex R,
+        (G.obj (kunnethGoodRepresentative P)).obj (kunnethGoodRepresentative Q) =
+          kunnethGoodRepresentative (kunnethConvolutionRepresentative hconv P Q),
+      (∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'),
+        (G.map (kunnethGoodRepresentativeMap f)).app (kunnethGoodRepresentative Q) ≫
+          (G.obj (kunnethGoodRepresentative P')).map (kunnethGoodRepresentativeMap g) =
+        eqToHom (hrep P Q) ≫ kunnethGoodRepresentativeMap
+          (kunnethConvolutionRepresentativeMap hconv (m P P' Q Q' f g)) ≫
+            eqToHom (hrep P' Q').symm) ∧
+      ∀ (P P' Q Q' : GoodFiniteFilteredModuleHomotopy R) (f : P ⟶ P') (g : Q ⟶ Q'),
+        goodFiniteFilteredModuleQuasiIso R f → goodFiniteFilteredModuleQuasiIso R g →
+        goodFiniteFilteredModuleQuasiIso R
+          ((G.map f).app Q ≫ (G.obj P').map g)) := by
+  classical
+  let := kunneth_filtered_congruence (R := R)
+  let := HasDerivedCategory.standard (ModuleCat.{u} R)
+  let conv (P Q : GoodFiniteFilteredModuleHomotopy R) :=
+    kunnethGoodRepresentative (kunnethConvolutionRepresentative hconv
+      (kunnethHomObj P) (kunnethHomObj Q))
+  let t {P P' Q Q' : GoodFiniteFilteredModuleHomotopy R} (f : P ⟶ P') (g : Q ⟶ Q') :
+      conv P Q ⟶ conv P' Q' :=
+    kunnethGoodRepresentativeMap (kunnethConvolutionRepresentativeMap hconv
+      (m _ _ _ _ (kunnethHomMap f) (kunnethHomMap g)))
+  have ht {P P' Q Q' : GoodFiniteFilteredModuleHomotopy R}
+      (f : kunnethHomObj P ⟶ kunnethHomObj P')
+      (g : kunnethHomObj Q ⟶ kunnethHomObj Q') :
+      t (kunnethGoodRepresentativeMap f) (kunnethGoodRepresentativeMap g) =
+        kunnethGoodRepresentativeMap
+          (kunnethConvolutionRepresentativeMap hconv (m _ _ _ _ f g)) := by
+    apply ObjectProperty.hom_ext
+    apply (CategoryTheory.Quotient.functor_map_eq_iff _ _ _).2
+    apply kunnethConvolution_filtered_homotopy hconv m hm
+    · apply (CategoryTheory.Quotient.functor_map_eq_iff _ _ _).1
+      simpa only [kunnethGoodRepresentativeMap, ObjectProperty.homMk_hom,
+        finiteFilteredModuleHomotopyQuotient, CategoryTheory.Quotient.functor] using
+        congrArg (fun f ↦ f.hom) (kunnethHomMap_spec (kunnethGoodRepresentativeMap f))
+    · apply (CategoryTheory.Quotient.functor_map_eq_iff _ _ _).1
+      simpa only [kunnethGoodRepresentativeMap, ObjectProperty.homMk_hom,
+        finiteFilteredModuleHomotopyQuotient, CategoryTheory.Quotient.functor] using
+        congrArg (fun g ↦ g.hom) (kunnethHomMap_spec (kunnethGoodRepresentativeMap g))
+  have tid (P Q : GoodFiniteFilteredModuleHomotopy R) : t (𝟙 P) (𝟙 Q) = 𝟙 _ := by
+    change t (kunnethGoodRepresentativeMap (𝟙 (kunnethHomObj P)))
+      (kunnethGoodRepresentativeMap (𝟙 (kunnethHomObj Q))) = _
+    rw [ht, mid]
+    change ObjectProperty.homMk ((finiteFilteredModuleHomotopyQuotient R).map (𝟙 _)) = _
+    apply ObjectProperty.hom_ext
+    change (finiteFilteredModuleHomotopyQuotient R).map (𝟙 _) = 𝟙 _
+    exact (finiteFilteredModuleHomotopyQuotient R).map_id _
+  have tcomp {P P' P'' Q Q' Q'' : GoodFiniteFilteredModuleHomotopy R}
+      (f : P ⟶ P') (f' : P' ⟶ P'') (g : Q ⟶ Q') (g' : Q' ⟶ Q'') :
+      t (f ≫ f') (g ≫ g') = t f g ≫ t f' g' := by
+    obtain ⟨f, rfl⟩ := kunnethGoodMap_surjective f
+    obtain ⟨f', rfl⟩ := kunnethGoodMap_surjective f'
+    obtain ⟨g, rfl⟩ := kunnethGoodMap_surjective g
+    obtain ⟨g', rfl⟩ := kunnethGoodMap_surjective g'
+    erw [← kunnethGoodMap_comp, ← kunnethGoodMap_comp, ht, ht, ht, mcomp]
+    exact kunnethGoodMap_comp
+      (kunnethConvolutionRepresentativeMap hconv (m _ _ _ _ f g))
+      (kunnethConvolutionRepresentativeMap hconv (m _ _ _ _ f' g'))
+  let G : GoodFiniteFilteredModuleHomotopy R ⥤ GoodFiniteFilteredModuleHomotopy R ⥤
+      GoodFiniteFilteredModuleHomotopy R :=
+    { obj := fun P ↦
+        { obj := conv P
+          map := fun g ↦ t (𝟙 P) g
+          map_id := fun Q ↦ tid P Q
+          map_comp := fun g g' ↦ by simpa using tcomp (𝟙 P) (𝟙 P) g g' }
+      map := fun f ↦
+        { app := fun Q ↦ t f (𝟙 Q)
+          naturality := fun _ _ g ↦ by
+            simpa using (tcomp (𝟙 _) f g (𝟙 _)).symm.trans
+              (tcomp f (𝟙 _) (𝟙 _) g) }
+      map_id := fun P ↦ NatTrans.ext (funext (fun Q ↦ tid P Q))
+      map_comp := fun f f' ↦ NatTrans.ext (funext (fun Q ↦ by
+        simpa using tcomp f f' (𝟙 Q) (𝟙 Q))) }
+  have htG {P P' Q Q' : GoodFiniteFilteredModuleHomotopy R}
+      (f : P ⟶ P') (g : Q ⟶ Q') :
+      (G.map f).app Q ≫ (G.obj P').map g = t f g := by
+    exact (tcomp f (𝟙 _) (𝟙 _) g).symm.trans (by simp)
+  refine ⟨G, fun _ _ ↦ rfl, fun _ _ ↦ rfl, ?_, ?_⟩
+  · intro P P' Q Q' f g
+    simpa only [eqToHom_refl, Category.id_comp, Category.comp_id,
+      kunnethHomObj, kunnethGoodRepresentative, kunnethFiniteRepresentative,
+      finiteFilteredModuleHomotopyQuotient, CategoryTheory.Quotient.functor] using
+      (htG _ _).trans (ht (P := kunnethGoodRepresentative P)
+      (P' := kunnethGoodRepresentative P') (Q := kunnethGoodRepresentative Q)
+      (Q' := kunnethGoodRepresentative Q') f g)
+  · intro P P' Q Q' f g hf hg
+    rw [htG]
+    obtain ⟨f, rfl⟩ := kunnethGoodMap_surjective f
+    obtain ⟨g, rfl⟩ := kunnethGoodMap_surjective g
+    erw [ht]
+    have hff : ∀ i : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom i) := by
+      intro i
+      apply (DerivedCategory.isIso_Q_map_iff_quasiIso (ModuleCat R) _).1
+      have he := ((quasiIso_iff _).1 hf) i
+      exact he
+    have hgg : ∀ i : ℤ, QuasiIso (FilteredObject.gradedMapSteps g.hom i) := by
+      intro i
+      apply (DerivedCategory.isIso_Q_map_iff_quasiIso (ModuleCat R) _).1
+      have he := ((quasiIso_iff _).1 hg) i
+      exact he
+    exact ⟨kunnethRepresentativeMap
+      (kunnethConvolutionRepresentativeMap hconv (m _ _ _ _ f g)), rfl,
+      mW _ _ _ _ f g hff hgg⟩
 
-/-- The graded comparison `e` supplied by `filteredTensor_graded_comparison`.
-Its tensor-of-residue-classes equation uniquely determines this isomorphism; the
-choice only postpones the proof of that canonical property, never the choice of a
-mathematically unspecified object. In particular this is the dependency's `e`, rather
-than an independently quantified isomorphism with the same endpoints.
-Source: Stacks, convolution comparison preceding Tag 0H7W
-(blueprint: lem-kun-filtered-tensor-localization). -/
-noncomputable def kunnethRepresentativeGradedComparison
-    (P Q : KunnethFilteredComplex R) (a : ℤ) :
-    (∐ kunnethTensorGraded P.obj Q.obj a) ≅
-      (kunnethConvolution P.obj Q.obj).gradedPiece a :=
-  (filteredTensor_graded_comparison (R := R)).choose_spec.choose_spec.choose P Q a
+variable [HasDerivedCategory.{w} (ModuleCat.{u} R)]
+
+private theorem kunneth_graded_homotopy
+    (i : ℤ) (K L : FiniteFilteredModuleComplex R) (f g : K ⟶ L)
+    (h : finiteFilteredModuleHomotopyRel R f g) :
+    (gradedFunctor R i ⋙ DerivedCategory.Q).map f =
+      (gradedFunctor R i ⋙ DerivedCategory.Q).map g := by
+  classical
+  change DerivedCategory.Q.map (FilteredObject.gradedMapSteps f.hom i) =
+    DerivedCategory.Q.map (FilteredObject.gradedMapSteps g.hom i)
+  obtain ⟨h, hh⟩ := h
+  let h' := restrictedHomotopy h hh i
+  let jK := Subobject.ofLE (K.obj.filtration.step (i + 1))
+    (K.obj.filtration.step i) (K.obj.filtration.antitone_step (by omega))
+  let jL := Subobject.ofLE (L.obj.filtration.step (i + 1))
+    (L.obj.filtration.step i) (L.obj.filtration.antitone_step (by omega))
+  let πK := cokernel.π jK
+  let πL := cokernel.π jL
+  have hres (j n m : ℤ) : (restrictedHomotopy h hh j).hom n m ≫
+      (L.obj.filtration.step j).arrow.f m =
+      (K.obj.filtration.step j).arrow.f n ≫ h.hom n m :=
+    Classical.choose_spec (hh j n m)
+  have hcompat (n m : ℤ) : jK.f n ≫ h'.hom n m =
+      (restrictedHomotopy h hh (i + 1)).hom n m ≫ jL.f m := by
+    apply (cancel_mono ((L.obj.filtration.step i).arrow.f m)).1
+    simp only [Category.assoc, h', hres]
+    rw [← Category.assoc, ← HomologicalComplex.comp_f, Subobject.ofLE_arrow]
+    dsimp only [jL]
+    rw [← HomologicalComplex.comp_f, Subobject.ofLE_arrow, hres]
+  have hz (n m : ℤ) : jK.f n ≫ h'.hom n m ≫ πL.f m = 0 := by
+    rw [← Category.assoc, hcompat, Category.assoc]
+    have hc := HomologicalComplex.congr_hom (cokernel.condition jL) m
+    change jL.f m ≫ πL.f m = 0 at hc
+    rw [hc, comp_zero]
+  let lift (n m : ℤ) : (cokernel jK).X n ⟶ (cokernel jL).X m :=
+    (PreservesCokernel.iso
+      (HomologicalComplex.eval (ModuleCat R) (ComplexShape.up ℤ) n) jK).hom ≫
+      cokernel.desc (jK.f n) (h'.hom n m ≫ πL.f m) (hz n m)
+  have hlift (n m : ℤ) : πK.f n ≫ lift n m = h'.hom n m ≫ πL.f m := by
+    dsimp [lift, πK]
+    have he := PreservesCokernel.π_iso_hom
+      (HomologicalComplex.eval (ModuleCat R) (ComplexShape.up ℤ) n) jK
+    change (cokernel.π jK).f n ≫ _ = cokernel.π (jK.f n) at he
+    rw [← Category.assoc, he, cokernel.π_desc]
+  apply DerivedCategory.Q_map_eq_of_homotopy
+  refine ⟨lift, ?_, ?_⟩
+  · intro n m hnm
+    apply (cancel_epi (πK.f n)).1
+    rw [hlift, h'.zero n m hnm, zero_comp, comp_zero]
+  · intro n
+    apply (cancel_epi (πK.f n)).1
+    have hf := HomologicalComplex.congr_hom (graded_projection f.hom i) n
+    have hg := HomologicalComplex.congr_hom (graded_projection g.hom i) n
+    simp only [HomologicalComplex.comp_f] at hf hg
+    have hc := h'.comm n
+    simp only [dNext, prevD, AddMonoidHom.mk'_apply] at hc ⊢
+    simp only [Preadditive.comp_add, ← Category.assoc]
+    erw [πK.comm, Category.assoc, hlift, hlift, Category.assoc, πL.comm]
+    erw [hg]
+    simpa only [Preadditive.add_comp, Category.assoc, πK, πL, gradedFunctor] using
+      hf.trans (congrArg (· ≫ πL.f n) hc)
+
+private noncomputable def kunnethForgetComplex :
+    FiniteFilteredModuleComplex R ⥤ CochainComplex (ModuleCat.{u} R) ℤ where
+  obj K := K.obj.obj
+  map f := f.hom.hom
+
+private theorem kunneth_evaluation_descent
+    (T : FiniteFilteredModuleComplex R ⥤ CochainComplex (ModuleCat.{u} R) ℤ)
+    (hT : ∀ (K L : FiniteFilteredModuleComplex R) (f g : K ⟶ L),
+      finiteFilteredModuleHomotopyRel R f g →
+        DerivedCategory.Q.map (T.map f) = DerivedCategory.Q.map (T.map g))
+    (hW : ∀ (K L : FiniteFilteredModuleComplex R) (f : K ⟶ L),
+      (∀ a : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom a)) →
+        QuasiIso (T.map f)) :
+    ∃ (H : (finiteFilteredModuleQuasiIso R).Localization ⥤
+        DerivedCategory (ModuleCat.{u} R))
+      (FH : FiniteFilteredModuleHomotopy R ⥤ DerivedCategory (ModuleCat.{u} R))
+      (_hH : Localization.Lifting (finiteFilteredModuleQuasiIso R).Q
+        (finiteFilteredModuleQuasiIso R) FH H)
+      (hobj : ∀ K : FiniteFilteredModuleHomotopy R,
+        FH.obj K = HomologicalComplexUpToQuasiIso.Qh.obj
+          ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj (T.obj K.as))),
+      ∀ (K L : FiniteFilteredModuleHomotopy R) (f : K.as ⟶ L.as),
+        FH.map ((finiteFilteredModuleHomotopyQuotient R).map f) =
+          eqToHom (hobj ((finiteFilteredModuleHomotopyQuotient R).obj K.as)) ≫
+            HomologicalComplexUpToQuasiIso.Qh.map
+              ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map (T.map f)) ≫
+            eqToHom (hobj ((finiteFilteredModuleHomotopyQuotient R).obj L.as)).symm := by
+  let G := T ⋙ DerivedCategory.Q
+  let FH := CategoryTheory.Quotient.lift (finiteFilteredModuleHomotopyRel R) G hT
+  have hi : (finiteFilteredModuleQuasiIso R).IsInvertedBy FH := by
+    rintro K L q ⟨f, rfl, hf⟩
+    change IsIso (DerivedCategory.Q.map (T.map f))
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso (ModuleCat.{u} R) _).2 (hW _ _ f hf)
+  refine ⟨Localization.lift FH hi (finiteFilteredModuleQuasiIso R).Q, FH,
+    inferInstance, fun _ ↦ rfl, ?_⟩
+  intro K L f
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  rfl
 
 /-- The convolution tensor descends through filtered homotopy localizations, and its
 underlying and associated-graded comparisons are natural in both localized variables.
@@ -249,7 +392,7 @@ theorem filteredTensor_localization :
                     (goodFiniteFilteredModuleQuasiIso R).Q.obj
                       (kunnethGoodRepresentative (kunnethConvolutionRepresentative hconv P Q))),
               ∃ (m : ∀ (P P' Q Q' : KunnethFilteredComplex R)
-                    (f : P ⟶ P') (g : Q ⟶ Q'),
+                    (_f : P ⟶ P') (_g : Q ⟶ Q'),
                   kunnethConvolutionObject P.obj Q.obj ⟶
                     kunnethConvolutionObject P'.obj Q'.obj),
                 (∀ (P P' Q Q' : KunnethFilteredComplex R)
@@ -313,7 +456,7 @@ theorem filteredTensor_localization :
                           ∃ (gr : ℤ →
                           (finiteFilteredModuleQuasiIso R).Localization ⥤
                             DerivedCategory (ModuleCat.{u} R)),
-                          ∃ (Fgr : ∀ a : ℤ, FiniteFilteredModuleHomotopy R ⥤
+                          ∃ (Fgr : ∀ _a : ℤ, FiniteFilteredModuleHomotopy R ⥤
                             DerivedCategory (ModuleCat.{u} R)),
                             ∃ hgr : ∀ a : ℤ, Localization.Lifting
                               (finiteFilteredModuleQuasiIso R).Q
@@ -441,6 +584,62 @@ theorem filteredTensor_localization :
                                     (DerivedCategory.Q.mapIso
                                       (kunnethRepresentativeGradedComparison P Q a)).inv))
               := by
-  sorry
+  classical
+  obtain ⟨_, ⟨E, ⟨eE⟩⟩, _⟩ := finiteFiltered_kFlat_replacement R
+  obtain ⟨m, l, e, c, cgr, hconv, hl, he, hm, hen, mid, mcomp, hc, hcg, hcol, hdn, mW⟩ :=
+    filteredTensor_graded_comparison (R := R)
+  obtain ⟨G, hGobj, hGrep, hGmap, hGW⟩ :=
+    kunneth_tensor_homotopy_bifunctor hconv m hm mid mcomp mW
+  let Qg := (goodFiniteFilteredModuleQuasiIso R).Q
+  let F := G ⋙ (whiskeringRight _ _ _).obj Qg
+  have hrep (P Q : KunnethFilteredComplex R) :
+      (F.obj (kunnethGoodRepresentative P)).obj (kunnethGoodRepresentative Q) =
+        Qg.obj (kunnethGoodRepresentative (kunnethConvolutionRepresentative hconv P Q)) :=
+    congrArg Qg.obj (hGrep P Q)
+  have hFmap (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q') :
+      (F.map (kunnethGoodRepresentativeMap f)).app (kunnethGoodRepresentative Q) ≫
+        (F.obj (kunnethGoodRepresentative P')).map (kunnethGoodRepresentativeMap g) =
+      eqToHom (hrep P Q) ≫ Qg.map (kunnethGoodRepresentativeMap
+        (kunnethConvolutionRepresentativeMap hconv (m P P' Q Q' f g))) ≫
+        eqToHom (hrep P' Q').symm := by
+    simpa only [F, whiskeringRight, Functor.whiskerRight, Functor.comp_obj,
+      Functor.comp_map, Functor.map_comp, eqToHom_map] using congrArg Qg.map
+      (hGmap P P' Q Q' f g)
+  let : (goodFiniteFilteredModuleQuasiIso R).ContainsIdentities :=
+    { id_mem := fun P ↦ finiteFilteredModuleQuasiIso_id R P.obj }
+  have hF : MorphismProperty.IsInvertedBy₂ (goodFiniteFilteredModuleQuasiIso R)
+      (goodFiniteFilteredModuleQuasiIso R) F := by
+    rintro ⟨P, Q⟩ ⟨P', Q'⟩ ⟨f, g⟩ ⟨hf, hg⟩
+    change IsIso (Qg.map ((G.map f).app Q) ≫ Qg.map ((G.obj P').map g))
+    rw [← Functor.map_comp]
+    exact Localization.inverts Qg (goodFiniteFilteredModuleQuasiIso R) _
+      (hGW P P' Q Q' f g hf hg)
+  let B := Localization.lift₂ F hF Qg Qg
+  let hB : Localization.Lifting₂ Qg Qg (goodFiniteFilteredModuleQuasiIso R)
+      (goodFiniteFilteredModuleQuasiIso R) F B := inferInstance
+  let star := E.inverse ⋙ B ⋙ (whiskeringLeft _ _ _).obj E.inverse ⋙
+    (whiskeringRight _ _ _).obj E.functor
+  let τ (U V : (finiteFilteredModuleQuasiIso R).Localization) :
+      (star.obj U).obj V ≅ E.functor.obj
+        ((B.obj (E.inverse.obj U)).obj (E.inverse.obj V)) := Iso.refl _
+  have hτ (U U' V V' : (finiteFilteredModuleQuasiIso R).Localization)
+      (f : U ⟶ U') (g : V ⟶ V') :
+      (τ U V).hom ≫ E.functor.map
+        ((B.map (E.inverse.map f)).app (E.inverse.obj V) ≫
+          (B.obj (E.inverse.obj U')).map (E.inverse.map g)) =
+        (star.map f).app V ≫ (star.obj U').map g ≫ (τ U' V').hom := by
+    simp [τ, star, Functor.map_comp]
+  obtain ⟨omega, Fω, hω, hωobj, hωmap⟩ :=
+    kunneth_evaluation_descent (kunnethForgetComplex (R := R))
+      (fun K L f g h ↦ DerivedCategory.Q_map_eq_of_homotopy (ModuleCat R) h.choose)
+      (fun K L f hf ↦ (finiteFilteredModule_graded_comparison f hf).1)
+  have hgrades (a : ℤ) := kunneth_evaluation_descent (gradedFunctor R a)
+    (kunneth_graded_homotopy a) (fun K L f hf ↦ hf a)
+  choose gr Fgr hgr hgro hgrmap using hgrades
+  refine ⟨E, eE, F, B, hB, hconv, (fun P Q ↦ (G.obj P).obj Q),
+    (fun _ _ ↦ rfl), hGobj, hrep, m, hm, mid, mcomp, hFmap, star, τ, hτ,
+    omega, Fω, hω, hωobj, hωmap, gr, Fgr, hgr, hgro, hgrmap, ?_⟩
+  exact filteredTensor_localized_comparisons E eE F B hB hconv hrep m hm hFmap
+    star τ hτ omega Fω hω hωobj hωmap gr Fgr hgr hgro hgrmap
 
 end CochainComplex

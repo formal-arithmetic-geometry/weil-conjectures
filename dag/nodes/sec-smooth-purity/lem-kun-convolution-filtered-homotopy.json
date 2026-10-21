@@ -1,0 +1,133 @@
+{
+ "id": "lem-kun-convolution-filtered-homotopy",
+ "kind": "statement",
+ "title": "Convolution tensor preserves filtered chain homotopies",
+ "statement": "Let R be a commutative ring, and let P,P′,Q,Q′ be good finite filtered cochain complexes [lem-kun-filtered-tensor-graded-comparison]. Suppose m is a family of convolution maps whose underlying maps are the signed total tensor maps. If f and f′, and respectively g and g′, are related by filtration-preserving chain homotopies [def-kun-finite-filtered-module-homotopy], then m(f,g) and m(f′,g′) are related by a filtration-preserving chain homotopy, viewed via [def-kun-filtered-tensor-representative-interface]. No boundedness of cochain degrees is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7Y (proposition-kunneth-filtered), convolution construction preceding Tag 0H7W (lemma-kunneth-converges), with Tag 0H7X (lemma-resolution-filtered-complex); explicit homotopy/localization extension of those constructions. Derived Categories Tag 05S2 (definition-filtered-derived)."
+ },
+ "stmt_deps": [
+  "def-kun-filtered-tensor-representative-interface",
+  "def-kun-finite-filtered-module-homotopy",
+  "lem-kun-filtered-tensor-graded-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Restrict each filtered homotopy to each filtration step by its component lift. Monicity of the inclusion proves the homotopy identities after restriction. Use Mathlib mapBifunctorMapHomotopy₁ and mapBifunctorMapHomotopy₂ for the two signed tensor homotopies.",
+   "uses": [
+    "def-kun-finite-filtered-module-homotopy",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a homogeneous total-complex summand, the tensor homotopy commutes with the tensor inclusions of filtration steps. Check this using ιMapBifunctor_hom₁ and ιMapBifunctor_hom₂, naturality of the curried tensor, and the two restricted-component equations; the zero off-diagonal case is immediate.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A convolution step is the image of the coproduct of diagonal tensor inclusions. Its factor-through-image map is degreewise epi. The preceding naturality makes its composite with the target inclusion cokernel zero on every coproduct leg. Degreewise coproduct universality gives zero on the whole source, and the epi gives zero on the image. Abelian.monoLift factors the homotopy through the target convolution step. Add the two resulting lifts and conjugate the tensor maps by hm.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-pc-tensor-complex-sheaves",
+  "lem-kun-filtered-tensor-graded-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stage-3 realization of lem-kun-filtered-tensor-localization; Tag 0H7Y (proposition-kunneth-filtered), convolution construction preceding Tag 0H7W (lemma-kunneth-converges), with Tag 0H7X (lemma-resolution-filtered-complex); explicit homotopy/localization extension of those constructions. Derived Categories Tag 05S2 (definition-filtered-derived)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor product homotopies with respect to inclusions of subcomplexes",
+   "results": "Found HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁; the other hits concern simplicial homotopies.",
+   "date": "2026-10-21",
+   "verdict": "Use Mathlib signed tensor homotopies; filtered image preservation needs a proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatIso",
+   "results": "CategoryTheory.Localization.lift₂NatIso, lift₂NatIso_hom and lift₂NatIso_inv.",
+   "date": "2026-10-21",
+   "verdict": "The localization API supplies extension of bifunctor isomorphisms; it does not include convolution or finite support normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "lift₂NatIso|tensor.*homotopy|homotopy.*tensor",
+   "results": "Localization/Bifunctor.lean and Localization/Monoidal/Functor.lean; no filtered tensor localization theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic localization API with explicit filtered representative data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of filtration preserving chain homotopies preserves convolution filtrations",
+   "results": "8 hits, including HomologicalComplex.tensorHom and tensorObj (Mathlib.Algebra.Homology.Monoidal), plus unrelated coalgebra convolution results. No preservation of convolution filtrations by tensor homotopies.",
+   "date": "2026-10-21",
+   "verdict": "no match: the generic categorical APIs do not supply the stated filtered construction and normalization; use them in the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredTensorLocalization",
+  "date": "2026-10-21",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Proof of lem-kun-filtered-tensor-localization: Convolution tensor preserves filtered chain homotopies",
+   "via": [
+    "lem-kun-filtered-tensor-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredTensorHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredTensorHomotopy.lean",
+  "declaration": "CochainComplex.kunnethConvolution_filtered_homotopy",
+  "statement": "theorem kunnethConvolution_filtered_homotopy\n    (hconv : ∀ P Q : KunnethFilteredComplex R,\n      HasKunnethFiltration (kunnethConvolutionObject P.obj Q.obj))\n    (m : ∀ (P P' Q Q' : KunnethFilteredComplex R) (_f : P ⟶ P') (_g : Q ⟶ Q'),\n      kunnethConvolutionObject P.obj Q.obj ⟶ kunnethConvolutionObject P'.obj Q'.obj)\n    (hm : ∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'),\n      (m P P' Q Q' f g).hom = f.hom.hom ⊗ₘ g.hom.hom)\n    (P P' Q Q' : KunnethFilteredComplex R) (f f' : P ⟶ P') (g g' : Q ⟶ Q')\n    (hf : finiteFilteredModuleHomotopyRel R\n      (kunnethRepresentativeMap f) (kunnethRepresentativeMap f'))\n    (hg : finiteFilteredModuleHomotopyRel R\n      (kunnethRepresentativeMap g) (kunnethRepresentativeMap g')) :\n    finiteFilteredModuleHomotopyRel R\n      (kunnethRepresentativeMap\n        (kunnethConvolutionRepresentativeMap hconv (m P P' Q Q' f g)))\n      (kunnethRepresentativeMap\n        (kunnethConvolutionRepresentativeMap hconv (m P P' Q Q' f' g')))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f156a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261021T013351-L-2291591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f156a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261021T013351-L-2291591",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (compiled --all, clean) and 6 node files against live FilteredTensorLocalization.lean, the item node and the lem-kun-* dependency nodes; statement alpha-equal, moved def bodies identical, axioms only via the stated open deps"
+ }
+}

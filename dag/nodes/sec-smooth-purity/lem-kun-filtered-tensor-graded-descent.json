@@ -1,0 +1,133 @@
+{
+ "id": "lem-kun-filtered-tensor-graded-descent",
+ "kind": "statement",
+ "title": "Canonical finite-support graded comparison for the localized convolution tensor",
+ "statement": "Fix R, the inclusion-compatible good replacement equivalence E, the homotopy convolution bifunctor F, its localized lift B and a naturally transported bifunctor star as in [def-kun-filtered-tensor-representative-interface]. Give each localized grading functor gr an explicit single-variable lifting witness and its canonical representative object and map formulas. Assume convolution goodness and the representative tensor-map formula for F. Then grᵃ(star(U,V)) is canonically the finite biproduct of grⁱ(U) tensorᴸ grᵃ⁻ⁱ(V) on every finite support. A finite support exists for every U,V,a. These isomorphisms are natural on common supports and commute with canonical support enlargement, including empty support. On good representatives their cocone legs are precisely the lax monoidal quotient comparisons followed by the localized complex coprojections, and their composite is the inverse of the fixed residue-class comparison [lem-kun-filtered-tensor-graded-comparison]. No forgetting functor or underlying tensor comparison is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7Y (proposition-kunneth-filtered), convolution construction preceding Tag 0H7W (lemma-kunneth-converges), with Tag 0H7X (lemma-resolution-filtered-complex); explicit homotopy/localization extension of those constructions. Derived Categories Tag 05S2 (definition-filtered-derived)."
+ },
+ "stmt_deps": [
+  "def-kun-filtered-tensor-representative-interface",
+  "lem-kun-filtered-tensor-graded-comparison",
+  "lem-kun-finite-filtered-kflat-replacement"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized colimiting graded cocone on the localized convolution tensor. For a family vanishing outside a finite set, the cofan on the finite biproduct, with zero omitted legs, is colimiting by its explicit universal property. Uniqueness of colimits makes the finite coproduct-to-convolution map an isomorphism; define the required comparison as its inverse.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-cocone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite filtration, below its lower whole bound and at or above its upper zero bound the successive steps coincide, so their cokernel is zero. A localization object is the image of a finite filtered homotopy object. Its grading lift identifies each grading with Q of the representative graded piece, giving finite support. Tensoring a zero factor is zero by additivity.",
+   "uses": [
+    "def-sp-filtration",
+    "def-kun-finite-filtered-module-homotopy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the naturality equation with the inverse finite-support comparison and postcompose with the target inverse. The biproduct universal property reduces it to naturality of each cocone leg. The same coprojection calculation proves compatibility with support enlargement, also for an empty support. On good representatives, the normalized leg pin gives the final equality after precomposing with the inverse finite-support comparison and applying biproduct hom extensionality.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-cocone"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-filtered-tensor-graded-cocone",
+  "def-sp-filtration",
+  "def-kun-finite-filtered-module-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stage-3 realization of lem-kun-filtered-tensor-localization; Tag 0H7Y (proposition-kunneth-filtered), convolution construction preceding Tag 0H7W (lemma-kunneth-converges), with Tag 0H7X (lemma-resolution-filtered-complex); explicit homotopy/localization extension of those constructions. Derived Categories Tag 05S2 (definition-filtered-derived)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct with all but finitely many summands zero is a finite biproduct",
+   "results": "HasBiproduct.of_hasCoproduct and HasFiniteBiproducts.of_hasFiniteCoproducts; no exact normalized finite-support cocone theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use finite biproduct universal properties and prove the omitted-zero-leg reduction explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatTrans",
+   "results": "lift₂NatTrans, lift₂NatTrans_app_app, lift₂NatIso_hom and lift₂NatIso_inv.",
+   "date": "2026-10-21",
+   "verdict": "Use the natural-transformation extension and its component formula to descend the individual graded coproduct legs."
+  },
+  {
+   "tool": "grep",
+   "query": "lift₂NatIso|tensor.*homotopy|homotopy.*tensor",
+   "results": "Localization/Bifunctor.lean and Localization/Monoidal/Functor.lean; no filtered tensor localization theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic localization API with explicit filtered representative data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coproduct with finite support gives a natural finite biproduct comparison",
+   "results": "8 hits, including HasBiproduct.of_hasCoproduct and HasFiniteBiproducts.of_hasFiniteCoproducts (Mathlib.CategoryTheory.Preadditive.Biproducts), biprod.isoCoprod, and direct-sum equivalences. No finite-support comparison for a possibly infinite family in the filtered localization.",
+   "date": "2026-10-21",
+   "verdict": "no match: the generic categorical APIs do not supply the stated filtered construction and normalization; use them in the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredTensorLocalization",
+  "date": "2026-10-21",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Proof of lem-kun-filtered-tensor-localization: Canonical finite-support graded comparison for the localized convolution tensor",
+   "via": [
+    "lem-kun-filtered-tensor-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredTensorGradedDescent",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredTensorGradedDescent.lean",
+  "declaration": "CochainComplex.filteredTensor_localized_graded_comparison",
+  "statement": "theorem filteredTensor_localized_graded_comparison\n    (E :\n    (goodFiniteFilteredModuleQuasiIso R).Localization ≌\n      (finiteFilteredModuleQuasiIso R).Localization)\n    (eE :\n    (goodFiniteFilteredModuleQuasiIso R).Q ⋙ E.functor ≅\n      goodFiniteFilteredModuleInclusion R ⋙ (finiteFilteredModuleQuasiIso R).Q)\n    (F :\n    GoodFiniteFilteredModuleHomotopy R ⥤\n      GoodFiniteFilteredModuleHomotopy R ⥤\n        (goodFiniteFilteredModuleQuasiIso R).Localization)\n    (B :\n    (goodFiniteFilteredModuleQuasiIso R).Localization ⥤\n      (goodFiniteFilteredModuleQuasiIso R).Localization ⥤\n        (goodFiniteFilteredModuleQuasiIso R).Localization)\n    (hB : Localization.Lifting₂\n    (goodFiniteFilteredModuleQuasiIso R).Q\n    (goodFiniteFilteredModuleQuasiIso R).Q\n    (goodFiniteFilteredModuleQuasiIso R)\n    (goodFiniteFilteredModuleQuasiIso R) F B)\n    (hconv : ∀ P Q : KunnethFilteredComplex R,\n    HasKunnethFiltration (kunnethConvolutionObject P.obj Q.obj))\n    (hrep : ∀ P Q : KunnethFilteredComplex R,\n    (F.obj (kunnethGoodRepresentative P)).obj (kunnethGoodRepresentative Q) =\n      (goodFiniteFilteredModuleQuasiIso R).Q.obj\n        (kunnethGoodRepresentative (kunnethConvolutionRepresentative hconv P Q)))\n    (m : ∀ (P P' Q Q' : KunnethFilteredComplex R)\n      (_f : P ⟶ P') (_g : Q ⟶ Q'),\n    kunnethConvolutionObject P.obj Q.obj ⟶\n      kunnethConvolutionObject P'.obj Q'.obj)\n    (hm : ∀ (P P' Q Q' : KunnethFilteredComplex R)\n      (f : P ⟶ P') (g : Q ⟶ Q'),\n    (m P P' Q Q' f g).hom = f.hom.hom ⊗ₘ g.hom.hom)\n    (hFmap : ∀ (P P' Q Q' : KunnethFilteredComplex R)\n      (f : P ⟶ P') (g : Q ⟶ Q'),\n    (F.map (kunnethGoodRepresentativeMap f)).app\n          (kunnethGoodRepresentative Q) ≫\n        (F.obj (kunnethGoodRepresentative P')).map\n          (kunnethGoodRepresentativeMap g) =\n      eqToHom (hrep P Q) ≫\n        (goodFiniteFilteredModuleQuasiIso R).Q.map\n          (kunnethGoodRepresentativeMap\n            (kunnethConvolutionRepresentativeMap hconv\n              (m P P' Q Q' f g))) ≫\n        eqToHom (hrep P' Q').symm)\n    (star :\n    (finiteFilteredModuleQuasiIso R).Localization ⥤\n      (finiteFilteredModuleQuasiIso R).Localization ⥤\n        (finiteFilteredModuleQuasiIso R).Localization)\n    (τ : ∀ U V : (finiteFilteredModuleQuasiIso R).Localization,\n    (star.obj U).obj V ≅\n      E.functor.obj ((B.obj (E.inverse.obj U)).obj (E.inverse.obj V)))\n    (hτ : ∀ (U U' V V' : (finiteFilteredModuleQuasiIso R).Localization)\n      (f : U ⟶ U') (g : V ⟶ V'),\n    (τ U V).hom ≫\n        E.functor.map ((B.map (E.inverse.map f)).app (E.inverse.obj V) ≫\n          (B.obj (E.inverse.obj U')).map (E.inverse.map g)) =\n      (star.map f).app V ≫ (star.obj U').map g ≫ (τ U' V').hom)\n    (gr : ℤ →\n    (finiteFilteredModuleQuasiIso R).Localization ⥤\n      DerivedCategory (ModuleCat.{u} R))\n    (Fgr : ∀ _a : ℤ, FiniteFilteredModuleHomotopy R ⥤\n    DerivedCategory (ModuleCat.{u} R))\n    (hgr : ∀ a : ℤ, Localization.Lifting\n    (finiteFilteredModuleQuasiIso R).Q\n    (finiteFilteredModuleQuasiIso R)\n    (Fgr a) (gr a))\n    (hgro : ∀ (a : ℤ) (K : FiniteFilteredModuleHomotopy R),\n    (Fgr a).obj K =\n      HomologicalComplexUpToQuasiIso.Qh.obj\n        ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n          (K.as.obj.filtration.gradedPiece a)))\n    (hgrmap : ∀ (a : ℤ) (K L : FiniteFilteredModuleHomotopy R)\n      (f : K.as ⟶ L.as),\n    (Fgr a).map ((finiteFilteredModuleHomotopyQuotient R).map f) =\n      eqToHom\n        (hgro a ((finiteFilteredModuleHomotopyQuotient R).obj K.as)) ≫\n        HomologicalComplexUpToQuasiIso.Qh.map\n          ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n            (FilteredObject.gradedMapSteps f.hom a)) ≫\n        eqToHom\n          (hgro a\n            ((finiteFilteredModuleHomotopyQuotient R).obj L.as)).symm\n        ) :\n    ∃ (e : ∀ (a : ℤ)\n        (U V : (finiteFilteredModuleQuasiIso R).Localization)\n        (s : Finset ℤ),\n        (∀ i : ℤ, i ∉ s →\n          IsZero (((gr i).obj U) ⊗ ((gr (a - i)).obj V))) →\n        ((gr a).obj ((star.obj U).obj V) ≅\n          (⨁ fun i : ↥s =>\n            ((gr i.1).obj U) ⊗ ((gr (a - i.1)).obj V)))),\n      (∀ (a : ℤ) (U V : (finiteFilteredModuleQuasiIso R).Localization),\n        ∃ s : Finset ℤ,\n          (∀ i : ℤ, i ∉ s →\n            IsZero (((gr i).obj U) ⊗ ((gr (a - i)).obj V)))) ∧\n      (∀ (a : ℤ)\n          (U U' V V' : (finiteFilteredModuleQuasiIso R).Localization)\n          (f : U ⟶ U') (g : V ⟶ V') (s : Finset ℤ)\n          (hs : ∀ i : ℤ, i ∉ s →\n            IsZero (((gr i).obj U) ⊗ ((gr (a - i)).obj V)))\n          (hs' : ∀ i : ℤ, i ∉ s →\n            IsZero (((gr i).obj U') ⊗ ((gr (a - i)).obj V'))),\n        (e a U V s hs).hom ≫ biproduct.map (fun i : ↥s =>\n          (gr i.1).map f ⊗ₘ (gr (a - i.1)).map g) =\n          (gr a).map ((star.map f).app V ≫\n            (star.obj U').map g) ≫ (e a U' V' s hs').hom)\n      ∧ (∀ (a : ℤ) (U V : (finiteFilteredModuleQuasiIso R).Localization)\n          (s t : Finset ℤ) (hst : s ⊆ t)\n          (hs : ∀ i : ℤ, i ∉ s →\n            IsZero (((gr i).obj U) ⊗ ((gr (a - i)).obj V)))\n          (ht : ∀ i : ℤ, i ∉ t →\n            IsZero (((gr i).obj U) ⊗ ((gr (a - i)).obj V))),\n        ∃ (ι :\n            (⨁ fun i : ↥s =>\n              ((gr i.1).obj U) ⊗ ((gr (a - i.1)).obj V)) ⟶\n            (⨁ fun i : ↥t =>\n              ((gr i.1).obj U) ⊗ ((gr (a - i.1)).obj V))),\n          (∀ i : ↥s,\n            biproduct.ι (fun j : ↥s =>\n              ((gr j.1).obj U) ⊗ ((gr (a - j.1)).obj V)) i ≫ ι =\n            biproduct.ι (fun j : ↥t =>\n              ((gr j.1).obj U) ⊗ ((gr (a - j.1)).obj V))\n              ⟨i.1, hst i.2⟩) ∧\n          (e a U V s hs).hom ≫ ι =\n            (e a U V t ht).hom)\n      ∧ (∀ (P Q : KunnethFilteredComplex R) (a : ℤ)\n          (s : Finset ℤ)\n          (hs : ∀ i : ℤ, i ∉ s →\n            IsZero (((gr i).obj (kunnethLocalizedRepresentative E P)) ⊗\n              ((gr (a - i)).obj (kunnethLocalizedRepresentative E Q)))),\n        ∃ (cgr : ∀ i : ℤ,\n          kunnethDerivedGraded P.obj Q.obj a i ≅\n            DerivedCategory.Q.obj\n              (kunnethTensorGraded P.obj Q.obj a i)),\n        (∀ i : ℤ, (cgr i).hom =\n          Functor.LaxMonoidal.μ DerivedCategory.Q\n            (P.obj.filtration.gradedPiece i)\n            (Q.obj.filtration.gradedPiece (a - i))) ∧\n        (e a (kunnethLocalizedRepresentative E P)\n            (kunnethLocalizedRepresentative E Q) s hs).hom ≫\n          biproduct.desc (fun i : ↥s ↦\n            ((kunnethRepresentativeLiftIso E eE (gr i.1) (Fgr i.1)\n              (hgr i.1) (fun K ↦ K.as.obj.filtration.gradedPiece i.1)\n              (hgro i.1) P).hom ⊗ₘ\n            (kunnethRepresentativeLiftIso E eE (gr (a - i.1))\n              (Fgr (a - i.1)) (hgr (a - i.1))\n              (fun K ↦ K.as.obj.filtration.gradedPiece (a - i.1))\n              (hgro (a - i.1)) Q).hom) ≫\n            (cgr i.1).hom ≫ DerivedCategory.Q.map\n              (Sigma.ι (kunnethTensorGraded P.obj Q.obj a) i.1)) =\n          (gr a).map\n            (kunnethStarRepresentativeIso E F B hB hconv hrep\n              star τ P Q).hom ≫\n          (kunnethRepresentativeLiftIso E eE (gr a) (Fgr a) (hgr a)\n            (fun K ↦ K.as.obj.filtration.gradedPiece a) (hgro a)\n            (kunnethConvolutionRepresentative hconv P Q)).hom ≫\n          (DerivedCategory.Q.mapIso\n            (kunnethRepresentativeGradedComparison P Q a)).inv)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f156a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261021T013351-L-2291591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f156a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261021T013351-L-2291591",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (compiled --all, clean) and 6 node files against live FilteredTensorLocalization.lean, the item node and the lem-kun-* dependency nodes; statement alpha-equal, moved def bodies identical, axioms only via the stated open deps"
+ }
+}
