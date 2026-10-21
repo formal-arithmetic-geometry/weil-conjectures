@@ -19,9 +19,137 @@
   "def-weil-pbc-constant-sheaf",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The constant module sheaf functor $M\\mapsto\\underline M$ is exact by [lem-weil-pbc-finite-type-constant-exact], whose statement applies to every module over every commutative ring, without finite-generation hypotheses. By [def-pc-flat-sheaf-modules], tensoring with the flat $R$-module $\\mathcal O$ is exact in $\\operatorname{Mod}(R)$. The tensor has its usual $\\mathcal O$-action, so its value is $E(M)$ in $\\operatorname{Mod}(\\mathcal O)$. The forgetful functor to abelian sheaves preserves kernels and cokernels and is faithful [lem-weil-pbc-module-sheaves-colimits-forgetful]. It therefore detects exactness: a homology object with zero underlying sheaf is zero, since faithfulness detects its zero identity. Thus $E:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(\\mathcal O)$ is an exact additive functor.",
+   "uses": [
+    "lem-weil-pbc-finite-type-constant-exact",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact), Tag 03ER (definition-flat), items (3)-(4), and Tag 03DA (lemma-abelian)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functor $E$ of Step 1. Its termwise functor on unbounded complexes preserves quasi-isomorphisms and induces $E_D:D(A)\\to D(\\mathcal O)$ with a natural comparison $E_DQ_A\\cong Q_{\\mathcal O}E$. It sends the zero object to zero, as $E(0)=0$. A zero morphism factors through the zero object, so $E_D$ sends zero morphisms to zero. In particular no choice of a null homotopy for a map zero only in $D(A)$ is needed.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), unbounded exact-functor computation."
+   }
+  },
+  {
+   "text": "Put $T(B)=P\\otimes_{\\mathcal O}B$ with the direct-sum total differential of [def-pc-tensor-complex-sheaves]. If $f:B\\to B'$ is a quasi-isomorphism, $C(f)$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. The definition [def-pc-kflat-complex] makes $C(f)\\otimes P$ acyclic. The signed interchange $p\\otimes c\\mapsto(-1)^{ij}c\\otimes p$ in bidegree $(i,j)$ identifies $P\\otimes C(f)$ with $C(f)\\otimes P$: the two differential components agree using $(-1)^{(i+1)j}=(-1)^{ij+j}$ and $(-1)^{i(j+1)}=(-1)^{ij+i}$. This is a map on the direct sums with its inverse given by the same signs. The natural tensor-cone isomorphism [lem-pc-tensor-mapping-cone-iso] identifies $P\\otimes C(f)$ with $C(T(f))$. Thus $C(T(f))$ is acyclic, and the same cone criterion makes $T(f)$ a quasi-isomorphism. This uses K-flatness alone, with no hypothesis on the individual terms of $P$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YM (lemma-derived-tor-exact), 06YN (definition-K-flat), 06YP (lemma-K-flat-quasi-isomorphism); derived.tex Tag 05RT (lemma-acyclic)."
+   }
+  },
+  {
+   "text": "The complex functor $Q_{\\mathcal O}T$ now inverts quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] to the localization of complexes defining $D(\\mathcal O)$ [def-weil-abstract-derived-category]. It supplies $T_D:D(\\mathcal O)\\to D(\\mathcal O)$ and a natural isomorphism $T_DQ_{\\mathcal O}\\cong Q_{\\mathcal O}T$. Since $T(0)=0$, this comparison at the zero complex shows that $T_D$ sends the zero object to zero and hence sends every zero morphism to zero by its factorization through that object. Composing the comparisons of Steps 2 and 4 gives a natural identification $(T_DE_D)Q_A\\cong Q_{\\mathcal O}TE$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 05RR, Definition 05RU: localization at quasi-isomorphisms; categories.tex Tag 04VG (lemma-properties-left-localization)."
+   }
+  },
+  {
+   "text": "Write $C_n=C(v_n)$ and $w_n=T(E(v_n))$. The cone formula in [def-weil-abstract-derived-category] is $C(v_n)^r=Y_n^r\\oplus X_n^{r+1}$ with differential $\\left(\\begin{smallmatrix}d_Y&v_n\\\\0&-d_X\\end{smallmatrix}\\right)$. Since $E$ is additive, applying it gives $E(C_n)\\cong C(E(v_n))$, with the same matrix after applying $E$ to each entry. A strictly commuting square with vertical maps $a:X_m\\to X_n$, $b:Y_m\\to Y_n$ has cone map $\\operatorname{diag}(b,a[1])$; the biproduct comparison just described commutes with this map. Next use the natural isomorphism of [lem-pc-tensor-mapping-cone-iso] for the fixed complex $P$. Consequently\n$$\\theta_n:T(E(C_n))\\xrightarrow{\\sim}C(w_n)$$\nis natural for every strict tower transition. In particular these are isomorphisms of strict towers, not unrelated isomorphisms at individual levels.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), Tag 014F (lemma-functorial-cone) for strictly commuting squares; sites-cohomology.tex Tag 06YM (lemma-derived-tor-exact)."
+   }
+  },
+  {
+   "text": "Fix $n$ and choose $m\\geq n$ such that the given transition $c_{mn}:C_m\\to C_n$ has $Q_A(c_{mn})=0$. Steps 2 and 4 give $(T_DE_D)(Q_A(c_{mn}))=0$. By their natural comparisons, this says $Q_{\\mathcal O}(TE(c_{mn}))=0$. The naturality in Step 5 identifies the transition $C(w_m)\\to C(w_n)$ with $\\theta_n\\circ TE(c_{mn})\\circ\\theta_m^{-1}$, so its localization is zero as well. This proves the required pro-zero property with the very same $m$ as for the original cone tower. If $m=n$, the hypothesis says that $C_n$ is a zero object and the argument still applies.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), transport of the pro-isomorphism: explicit application of the localized functors and natural cone comparison."
+   }
+  },
+  {
+   "text": "Let $Z_\\bullet=TE(X_\\bullet)$ and $W_\\bullet=TE(Y_\\bullet)$, with strict map $w:Z_\\bullet\\to W_\\bullet$. By Step 6 its strict cone tower is pro-zero in $D(\\mathcal O)$. Apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] on the given small site with coefficient ring sheaf $\\mathcal O$. It states precisely that the canonical map\n$$u=R\\lim(w):R\\lim Z_\\bullet\\longrightarrow R\\lim W_\\bullet$$\nis an isomorphism. This is the total right derived functor on the category of strict towers; the cited statement does not require exactness of countable products, boundedness of the complexes, or a uniform bound on the zero transitions.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), Tag 0941 (lemma-derived-limit-is-ok); pro-zero consequence as stated in the cited strict-tower theorem."
+   }
+  },
+  {
+   "text": "Suppose the unit chain maps are given. The tensor unit identifications $E(A[0])=\\mathcal O[0]$ and $P\\otimes_{\\mathcal O}\\mathcal O[0]\\cong P$ are degreewise multiplication, with inverse $p\\mapsto p\\otimes1$ [def-pur-sheaf-tensor-product], [def-pc-tensor-complex-sheaves]. Applying $TE$ to the given maps produces strict maps $\\alpha:\\Delta P\\to Z_\\bullet$, $\\beta:\\Delta P\\to W_\\bullet$ with $w\\alpha=\\beta$ as chain maps. To check the specified derived-limit maps, choose tower K-injective resolutions $j_Z:Z_\\bullet\\to I$, $j_W:W_\\bullet\\to J$ computing the total derived functor as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The canonical maps from $P$ are the localizations of $\\lim(j_Z\\alpha):P=\\lim\\Delta P\\to\\lim I$ and $\\lim(j_W\\beta):P\\to\\lim J$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits) and Tag 0941 (lemma-derived-limit-is-ok), K-injective computation applied to the strict coaugmentations; sites-modules.tex Section 03EK (section-tensor-product)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] in the abelian category of strict $\\mathcal O$-module towers to the K-injective target $J$. Represent the derived map $Q(j_W)Q(w)Q(j_Z)^{-1}:QI\\to QJ$ by a chain map $h:I\\to J$. Injectivity of the same Hom comparison for source $Z_\\bullet$ says that $hj_Z$ and $j_Ww$ are homotopic as tower maps. Composing this tower homotopy with $\\alpha$ gives a homotopy from $hj_Z\\alpha$ to $j_W\\beta$. Termwise inverse limit preserves that homotopy: applying its additive functor to $f-g=dH+Hd$ gives the identical equation for $\\lim H$. Thus\n$$Q(\\lim h)\\,Q(\\lim(j_Z\\alpha))=Q(\\lim(j_W\\beta)).$$\nBy the K-injective computation of the total derived functor [lem-weil-pbc-ringed-strict-tower-homotopy-limit], $Q(\\lim h)$ is the map $R\\lim(w)=u$ of Step 7 under these resolution comparisons. The equality therefore proves that this particular isomorphism carries the specified unit for $X_\\bullet$ to the specified unit for $Y_\\bullet$. No map between abstract triangulated cones has been selected.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), Hom into K-injectives; sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok), strict tower resolution computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-constant-exact",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion): explicit general transport argument from exact constant extension, K-flat tensor and total derived inverse limit, with strict-unit normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +192,45 @@
    "results": "CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Tor', Condensed.hasExactLimitsOfShape, localCohomology.diagramComp, CategoryTheory.Tor, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
    "date": "2026-10-21",
    "verdict": "no match: generic exact-functor derived comparison and ordinary Tor do not assert transport of strict pro-zero cones and completion units."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?zero|proZero|KFlat|K.flat",
+   "results": "OK 7 hit(s); Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/BicartesianSq.lean, Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the seven hits are prodZero/coproduct zero-object declarations, not pro-zero towers or K-flat tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on complexes and tensoring by a K-flat complex carry pro-zero cones of strict inverse sequences to pro-zero cones and derived limits",
+   "results": "OK 8 hit(s); CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor.of, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, CategoryTheory.ExactFunctor, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.Functor.exact_tfae, CategoryTheory.ShortComplex.Exact.map",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide only exact-functor or ordinary flat-module ingredients, not the strict unbounded ringed-site cone-tower and unit-compatible derived-limit statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"quasiIso\"",
+   "results": "OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide only exact-functor or ordinary flat-module ingredients, not the strict unbounded ringed-site cone-tower and unit-compatible derived-limit statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat constant sheaf extension followed by tensor with a K-flat complex preserves pro-zero mapping cone towers and induces a unit-compatible derived inverse limit isomorphism",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.mapDerivedCategoryFactors, CochainComplex.mappingCone.mapHomologicalComplexXIso', CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide only exact-functor or ordinary flat-module ingredients, not the strict unbounded ringed-site cone-tower and unit-compatible derived-limit statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial derived inverse limits send a map of inverse towers with eventually zero cone transition maps to an isomorphism after any exact scalar extension and K-flat tensor",
+   "results": "OK 8 hit(s); ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.rTensor_reflects_exact, CategoryTheory.PreservesFiniteLimitsOfFlat.lift",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide only exact-functor or ordinary flat-module ingredients, not the strict unbounded ringed-site cone-tower and unit-compatible derived-limit statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-constant-completion-equivalence",
@@ -86,5 +249,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "worker": "stage1",
+  "summary": "Q17 writes the general flat-extension and K-flat tensor argument using existing exactness, cone, localization and strict-tower nodes. No new nodes or hypotheses are introduced. The proof treats arbitrary K-flat P, including complexes without flat terms, and verifies the strict coaugmentation through K-injective tower maps.",
+  "blueprint": "Current main-20261015 def-weil-pbc-completed-pullback, order 1329, final equality and assertion that the comparison is the completion map; realizes the transport used in lem-weil-pbc-constant-completion-equivalence, proof Step 7 (original brief Step 8)."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-1ef844f66",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-1ef844f66 (reviewer sub-agent of L); spot-checked: Read in full the item at 1ef844f6, its nine steps and the statement of every cited node; the delivery has no new nodes. The statement and stmt_deps are identical to the live copy, so nothing was weakened (A Noetherian is kept even though unused); there is no repair note, the item is not marked dropped, there is no SGA citation, and no cycle (BFS over 194 nodes). Sources checked: proetale.tex 099M l.4305 (its proof ends 'Thus the lemma follows', which is the transport this item makes explicit), sites-modules 093J l.8196 and 03ER(2)/(3) l.4243, sites-cohomology 06YN and 0941 l.5067 (R lim on C×N by a K-injective representative and the termwise limit). Step by step: S1, exactness of E: the constant-module functor is exact for every ring, tensor with O is exact by flatness, and the faithful forgetful functor that preserves kernels and cokernels reflects exactness. S2, the exact-functor leaf gives E_D, which kills zero maps. S3 uses K-flatness only: I recomputed the swap signs ((-1)^{ij}(dc⊗p+(-1)^i c⊗dp) on both sides), and the tensor-cone node has P on the left as in T; the report is right not to use kflat-fixed-tensor-triangulated, which needs flat terms. S4, the localization universal property applies. S5, theta is natural for the strict cone maps diag(b,a[1]). S6 is elementary, with the same m and the case m=n covered. S7 is the last clause of ringed-strict-tower-homotopy-limit, with no exact products or bounds. S8 and S9: the units go through K-injective tower resolutions; the K-injective Hom bijection holds in Tow(Mod O) and lim preserves homotopies, which gives the unit equality. The parent constant-completion-equivalence Step 7 uses the item for O=R and O=Â, consistent with the flatness its statement asserts. Route: the two Mathlib leaves come from sk-def-exchange and the forgetful lemma from sk-thm-reduction, both in the unit's uses; the cone-acyclic and tensor-cone lemmas are Lean-closed; the rest are definitions. No tool_uses accepted or needed. Duplicate scan (pro-zero, pro-isomorph, K-flat with limit): only levelwise Koszul nodes and Tor-type nodes, none of which states this transport. Advisory: the existing node lem-weil-pbc-finite-type-constant-exact cites 093U where 093J is the exact tag. No fixes written."
  }
 }
