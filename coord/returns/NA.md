@@ -71,6 +71,3 @@ L: independent stage-2 immutable head 624ffde843d6: H2: the delivery added theor
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-coherence: lem-weil-pbc-proetale-projection-formula-tensor-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## prop-weil-pbc-qbar-condensed-two-colimit (2026-10-21 06:06 UTC, branch head b96a3ae6ad)
-
-L: approved by the reader, but the landing refused it: NOT MERGED prop-weil-pbc-qbar-condensed-two-colimit: check_dag.py: cycles: 17 nodes depend on each other: def-pur-condensed-tate-twists, det-cor-coefficient-heart-ii-generation, det-def-localizing-closure-ctf-equals-bc, det-def-sp-tate-twist-locally-free, det-lem-coefficient-heart-filtration, det-lem-constructible-ext-continuity-devissage, det-prop-sfb-cartesian-coefficients-twists, lem-poincare-compatible-primitive-roots, lem-poincare-integral-residue-free-comparison, lem-sfb-coefficient-heart-lisse-extension-constructible, lem-sfb-coefficient-heart-sheaf-cone-witness, lem-sfb-condensed-bound Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.

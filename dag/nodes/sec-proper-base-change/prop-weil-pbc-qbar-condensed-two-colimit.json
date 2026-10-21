@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "The coefficient calculus gives exact scalar extension and coherent tensor comparisons. Apply bounded-constructible preservation to restrict these functors and comparisons to the full subcategories. Finite-field constructible complexes are triangulated by the existing finite-model API.",
+   "text": "Exact coefficient extension preserves finite limits in the abelian module categories, so bounded-constructible preservation restricts it and its tensor comparisons. The coefficient calculus gives coherence; the finite-model API makes the finite-field constructible categories triangulated.",
    "uses": [
     "lem-weil-pbc-condensed-flat-coefficient-calculus",
     "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "Let P(A) be the property of [def-weil-pbc-hom-colimit-property] for the diagram QN and cocone Q(c) in D(Mod_{E_T^c}). Identify c.pt with the termwise sheaf colimit by the unique colimit isomorphism; with the uniform bound a and noetherian T, sheaf Ext continuity gives P(M[0]) for every constructible E_T^c-module sheaf M. P is isomorphism closed, contains 0, and is shift stable by Hom(A[m],Z[n])=Hom(A,Z[n-m]); the Hom-colimit extension lemma makes it extension closed, so P is triangulated. The cohomology sheaves of K are constructible in the devissage sense (same strata, pro-etale locally cokernels of finite free maps), so bounded devissage gives P(K). For n=0, a stage representative in the directed colimit factors every K -> Q(c.pt) through some Q(c.iota_H).",
+   "text": "Let P(A) be the property of [def-weil-pbc-hom-colimit-property] for the diagram QN and cocone Q(c) in D(Mod_{E_T^c}). Identify c.pt with the termwise sheaf colimit by the unique colimit isomorphism; with the uniform bound a and noetherian T, sheaf Ext continuity gives P(M[0]) for every constructible E_T^c-module sheaf M. P is isomorphism closed, contains 0, and is shift stable by $\\operatorname{Hom}(A[m],Z[n])=\\operatorname{Hom}(A,Z[n - m])$; the Hom-colimit extension lemma makes it extension closed, so P is triangulated. The cohomology sheaves of K are constructible in the devissage sense (same strata, pro-etale locally cokernels of finite free maps), so bounded devissage gives P(K). For n=0, a stage representative in the directed colimit factors every $K\\to Q(c.\\mathrm{pt})$ through some $Q(c.\\iota_H)$.",
    "uses": [
     "lem-weil-pbc-condensed-sheaf-ext-continuity",
     "def-weil-pbc-hom-colimit-property",
@@ -103,16 +103,17 @@
    }
   },
   {
-   "text": "Normalize identity transitions by their tensor unit comparisons. Tensor coherence gives the directed pair-category model. Object descent and the two Hom clauses give its comparison equivalence by the filtered-two-colimit characterization, with precisely the representative maps in the statement.",
+   "text": "Apply coherent-cocone normalization to the tensor unit and pentagon comparisons from step 1. The normalized cocone has the same three descent properties and the same Omega images of representative arrows. Its pair-category model and the filtered-two-colimit characterization therefore give the comparison equivalence, with exactly the objects, morphisms and composition stated.",
    "uses": [
     "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-weil-pbc-coherent-cocone-normalization",
     "det-def-sfb-filtered-two-colimit-model",
     "det-def-sfb-filtered-two-colimit-characterization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, Sorried input (Obj), (Hom), lines 73-86; comparison theorem lines 258-262"
    }
   }
  ],
@@ -131,13 +132,14 @@
   "lem-weil-pbc-directed-triangulated-image",
   "lem-weil-pbc-condensed-finite-presentation-descent",
   "lem-weil-pbc-condensed-coefficient-derived-faithful",
+  "lem-weil-pbc-coherent-cocone-normalization",
   "det-def-sfb-filtered-two-colimit-model",
   "det-def-sfb-filtered-two-colimit-characterization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "module docstring (Obj), (Hom); 2026-10-21 re-split using the Hom-colimit extension lemma and existing bounded devissage"
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Live module docstring (Obj), (Hom); cycle repair retains the same-unit Hom-colimit extension route and extracts unital cocone normalization."
  },
  "mathlib_searches": [
   {
@@ -205,38 +207,38 @@
   "date": "2026-10-21",
   "item": "prop-weil-pbc-qbar-condensed-two-colimit",
   "worker": "stage1",
-  "summary": "Dedicated re-split repair: statement unchanged. Hom descent now uses the existing Hom-colimit property and its extension lemma with bounded devissage (maintainer reader FIX: the delivered monic-cocone node was dropped as unneeded); implementation references replaced by cited statements for scalar calculus, bounded devissage and the coherent pair-category characterization. Proof text below 3000 characters.",
-  "blueprint": "thm-weil-pbc-qbar, proof first sentence, common-stage colimit: steps 1-4 establish finite-stage Hom descent, step 5 object descent, step 6 eventual equality, step 7 the pair comparison.",
+  "summary": "Rebased on the current live item, preserving its statement and metadata. The retained bounded-Hom helper is dropped as a duplicate of lem-sfb-condensed-bounded-hom-continuity; that existing node is not cited because its current dependency closure returns to this item through coefficient-heart generation and Tate twists. Hom descent instead retains the current acyclic same-unit sheaf-continuity/extension/devissage route. One new statement-only node extracts coherent unital cocone normalization. No old argument is dropped; parent proof remains below 3000 characters.",
+  "blueprint": "Current main-20261015 thm-weil-pbc-qbar proof: common-stage colimit and independence of representatives. Steps 2-4 give finite morphism representatives, step 5 gives object representatives, step 6 eventual equality and step 7 the normalized pair-category model; step 1 supplies scalar functors.",
   "tool_uses": [
    {
     "node": "def-weil-finite-subextension-directed-set",
-    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+    "why": "Small directed system of finite coefficient fields; notation and indexing only."
    },
    {
     "node": "def-weil-directed-colimit-abelian-groups",
-    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+    "why": "Stage representatives of a directed abelian-group colimit."
    },
    {
     "node": "lem-sfb-dc-module-devissage",
-    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+    "why": "Generic bounded module-object devissage, applied with the identical local-finite-presentation constructibility notion."
    },
    {
     "node": "det-def-sfb-filtered-two-colimit-model",
-    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+    "why": "Generic pair-category construction after normalization, without replacing a geometric unit-route step."
    },
    {
     "node": "det-def-sfb-filtered-two-colimit-characterization",
-    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+    "why": "Generic full/faithful/essentially-surjective characterization for that pair category."
    }
   ]
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NC-f46ff14ab",
-  "group": "NC",
+  "reviewer": "NT-cc-NA-1ce0d4572",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f46ff14ab (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the live source lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean (docstring and lines 165-262). The archived upstream copy is absent, as the report says. The source matches the item: prime ell, topologically noetherian X, padicAlgClRingObj with finite-subfield-valued functions, no completeness condition, and Obj/Hom-surj/Hom-inj = IsFilteredTwoColimit. The statement is byte-identical to live. The item is not on the dropped list, and no cited closure reaches the item, so there is no cycle. The route is the common-stage descent of thm-weil-pbc-qbar. Step checks. Step 1: flat calculus gives exactness, which meets the finite-limit hypothesis of bounded-constructible-exact-scalar-extension; the proof API is cited only for finite-field triangulation. Step 2: the tail {H containing EF} is small, directed and final, and L is bounded below, as the presentation requires. Step 4: the presentation comparison equation plus injectivity of the adjunction gives exactly (Hom-surj) with theta = the fixed tensor comparisons. Step 5: directed-image lemma with target the ambient D(Mod_Omega), finite-presentation descent and termwise tensor give M[0] in P, then devissage gives (Obj). Step 6: derived-faithful at H gives (Hom-inj). Step 7: unit normalization plus pentagon gives the coherent model, and the characterization gives the item's pair category. Fault (C5): the new node is true (its triangle argument is correct) but unneeded. The same-unit lem-weil-pbc-hom-colimit-extension with def-weil-pbc-hom-colimit-property (Lean homColimitProperty_extensions) already gives a stronger triangulated property, Hom-colimit bijectivity for every shift. Sheaf-ext-continuity gives that property on M[0], and the sibling lem-sfb-constructible-cocone-hom-surj uses this route. FIX: step 3 is rewritten to cite sheaf-ext-continuity, hom-colimit-property, hom-colimit-extension, devissage and directed colimits, and it now states the constructibility identification for devissage (def-sfb-constructible-module / locally finitely presented = pro-etale-local cokernel of finite free maps, same as def-weil-pbc-condensed-e-module-category). The monic-leg argument in step 2 is no longer needed and is removed. proof_deps, proof_origin.place and the split_report summary are updated; the proof is now 2592 characters. Accepted tool uses: def-weil-finite-subextension-directed-set, def-weil-directed-colimit-abelian-groups, lem-sfb-dc-module-devissage, det-def-sfb-filtered-two-colimit-model and det-def-sfb-filtered-two-colimit-characterization, all generic.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-1ce0d4572 (reviewer sub-agent of L); spot-checked: This repairs the return of NA b96a3ae6: landing refused my FIX, which cited lem-sfb-condensed-bounded-hom-continuity, because check_dag found a 17-node cycle. A BFS on the live clone confirms the cycle path: bounded-hom-continuity -> det-lem-constructible-ext-continuity-devissage -> coefficient-heart-ii-generation -> sk-lem-coefficient-heart -> sk-prop-sfb-cartesian-coefficients -> cartesian-coefficients-twists -> det-def-sp-tate-twist-locally-free -> lem-poincare-compatible-primitive-roots -> def-pur-condensed-tate-twists -> item. The delivery drops that citation. The closure of the item plus the new node has 834 nodes, no missing ids and no item, both on the snapshot and on the live clone with the delivered files overlaid. Diff against live: statement, stmt_deps, blueprint and lean_audit are byte-identical. Steps 2, 4, 5 and 6 are verbatim the landed NC route. Step 3 changes only TeX. Step 1 is reworded to name the finite-limit hypothesis of bounded-constructible-exact-scalar-extension. Step 7 now cites the new node instead of a one-sentence normalization. The new node lem-weil-pbc-coherent-cocone-normalization is byte-identical to the one accepted in b96a3ae6. Its types are theta' : Phi_j T'_ij -> Phi_i and tau' : T'_jk T'_ij -> T'_ik. theta'_ii, tau'_iij, tau'_ijj and tau'_iii are identities, using tau_iii = T_ii eps = eps T_ii. The Obj, Hom-surj and Hom-inj equivalences hold via beta^-1 g beta and faithfulness of T_kk. The orientation matches det-def-sfb-filtered-two-colimit-model. No duplicate exists among model, characterization, cocone or sfb tower coherence. The re-split note (at least 1 node, at most 3000 characters) is met: 1 node, 2726 characters. Every old argument is placed. All cited statements were reread and none changed since b96a3ae6. Step 3: P = H(QN,Qc). Shift stability holds via Hom(A[m],Z[n]) = Hom(A,Z[n-m]). Extension plus rotation gives a triangulated P. Sheaf-ext-continuity with the uniform bound a, noetherian T and the termwise colimit gives P(M[0]), and devissage gives P(K). Step 7: theta is the G = Omega tensor comparison and tau the finite ones. The cocone identity is the pentagon with l = Omega, and theta_ii = Phi_i(eps_i) is the unit identity. The item is not on the dropped list and nothing cites SGA. Accepted tool uses: def-weil-finite-subextension-directed-set, def-weil-directed-colimit-abelian-groups, lem-sfb-dc-module-devissage, det-def-sfb-filtered-two-colimit-model, det-def-sfb-filtered-two-colimit-characterization."
  },
  "lean": {
   "branch": "slopmaster2",
