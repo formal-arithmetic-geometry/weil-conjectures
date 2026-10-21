@@ -217,5 +217,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-6f80e5f58 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the sources in full: pione.tex 0BST and 0BSS, more-algebra 0BRH/0BRI/0BRJ, more-morphisms 0BSR. The statement is unchanged against live, which is still unsplit, and agrees with 0BST (arbitrary ring, no Noetherian or tame hypothesis). This is the first delivery, with no re-split note, and the item is not on the dropped list. Steps: (1) the leaf gives integrality, a single finite orbit and normal residue fields with surjective stabilizer, hence finite Aut, which is exactly the hypothesis of the splitting node. (2) The inertia criterion g(r)-r in Q is checked in both directions, using g^-1 for preservation of Q; it is elementary and replaces 0BSS, which has no node. (3) The flat node applied with H=Gamma and H=I over A=R^Gamma gives a cartesian square; base change is etale by 02GO. (4) I checked that the atoms of the Gamma-translates are permuted, that the image of Z is closed by the integral closed-map leaf, the principal localization, and orthogonality of the idempotents. (5) Purely inseparable residue fields give D=I, the stabilizer of factor 1 is I, and the tuple map g_j(a) is invariant and independent of representatives. (6) The component W is iso to Spec B; W->V is etale and surjective, and descent gives V->Spec A etale. New nodes: the leaf's 4 declarations were read at Basic.lean:139/147/353 and Galois.lean:85 and the lines are correct. The flat-invariants node is true (finite kernel sequence, modular actions allowed) and is not lem-per-tame-invariants-arbitrary-base-change, which needs |G| invertible; Mathlib has no IsInvariant flat/tensor result. The 0BSR variant (normal residue fields with finite Aut give a finite separable part, and q' lifts through the nonzero tensor product) is not lem-weil-pbc-integral-fibre-etale-splitting, which needs finite-dimensional residue fields; here the inseparable part can be infinite. All three new nodes are statement-only, introduce their own objects and are strictly smaller than the item, so this is not a relabelling. Small cases checked: swap on kxk, Artin-Schreier, x->-x, trivial action. Batch-5 flag: lem-trf-etale-descent-through-source-cover is generic descent (036W/02K6). Its 219-node closure contains no other sec-trace-formula node and no poincare, sk-thm-trace-transport or nt-* node, so it is outside both assumptions; accepted. Its split_report tool_use is accepted as a generic black-box tool. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupInertiaInvariantsEtale",
+  "declaration": "AlgebraicGeometry.exists_etale_neighborhood_inertia_invariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupInertiaInvariantsEtale.lean",
+  "statement": "theorem exists_etale_neighborhood_inertia_invariants (G : Type v) [Group G] [Finite G] (R : Type u) [CommRing R] [MulSemiringAction G R] (q : PrimeSpectrum R) : ∃ U : (Spec (.of (FixedPoints.subring R (q.asIdeal.inertia G)))).Opens, PrimeSpectrum.comap (FixedPoints.subring R (q.asIdeal.inertia G)).subtype q ∈ U ∧ Etale (U.ι ≫ Spec.map (CommRingCat.ofHom (Subring.inclusion (fun (x : R) (hx : x ∈ FixedPoints.subring R G) (g : q.asIdeal.inertia G) ↦ hx g.1) : FixedPoints.subring R G →+* FixedPoints.subring R (q.asIdeal.inertia G))))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98c69caff",
+  "group": "ND",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0BST pione.tex l.2664: finite G, arbitrary CommRing R, MulSemiringAction, prime q; Mathlib AddSubgroup.inertia (g•x−x∈q) = node's I (preserves q via g⁻¹, identity on Frac(R/q) via domain embedding); FixedPoints.subring for R^G, R^I; canonical Subring.inclusion; q_I = comap along subtype; ∃ open U ∋ q_I with Etale (U.ι ≫ Spec.map) = étale at q_I. No extra hypotheses; universes u,v independent and bound. lean.statement verbatim in file; stmt_deps (Spec, Etale) used as recorded; no duplicate project notion; not dropped; no competing delivery; live has no module. No defs, sorry proof, source and blueprint docstrings, 6-step proof docstring. Advisories only: docstring step 6 calls the image U (node: V), unused proof imports, single-worker second reading. No recompile per instructions; worker reports a clean compile."
  }
 }

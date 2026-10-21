@@ -21,7 +21,9 @@
   "lem-pd-section-derived-pushpull-normalization",
   "lem-pd-section-ordinary-oplax-normalization",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data"
  ],
  "proof": [
   {
@@ -303,5 +305,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-dabfd05c2 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full against every cited statement, Stacks 07A4 (sites-cohomology l.3684-3724) and the Lean statement of tensorComparisonDescent. Statement, stmt_deps and metadata are unchanged from the parent split (4c966032); there are no new nodes. The steps carry the old parent Step 7 argument as a real proof. Step 2: theta_T is the localized total comparison t conjugated by the two representative tensor isomorphisms, extended by full faithfulness in two variables. Step 3: the degree-0 regular module is K-flat, and the constraints are checked one variable at a time. Step 4: the totalized oplax b has differential sign (-1)^p on both sides, and F commutes with sums as a left adjoint. Step 5: a = eps_Tot∘LF(r_Y^-1) and c = r_X^-1∘(eps_P⊗eps_Q) match the descent square exactly (eps direction q⋙LF⟶F⋙q'). Its hypotheses hold: pullback preserves K-flat complexes with flat terms, and eps is invertible on representatives and their Tot. Step 6: the actual internal delta_f satisfies the same representative square, so equality follows by faithfulness, not by an 'any two isos agree' argument. Step 7: inverse, scalar unit and constraints. Edge cases checked: f=id, Lambda=0, odd/negative degrees, unbounded complexes. One fault fixed: Step 1 did not discharge the sheaf-tensor hypotheses (sheafification, monoidal local equivalences, closed sheafified tensor) of lem-pe-internal-section-tensor-comparison. Added a sentence citing sk-def-sfb-sheaf-tensor clauses 1-2 for the pro-étale site; it is a definition node, so there is no route issue; uses and proof_deps updated. All 9 declared tool_uses are accepted as generic K-flat, localization or total-tensor tools; no SGA is used. Advisory 1: the statement of lem-weil-pbc-ringed-topoi-derived-tensor-pullback says only 'a canonical isomorphism'; its proof and Lean pin it by the same descent of the canonical ordinary comparison, which is the map used here. Advisory 2: def-pd-section-derived-realization already defines this tensor-pullback isomorphism by the same representative square, so stage 2 should reuse it. It is a definition, not a duplicate of this equality statement.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.SectionDerivedTensorNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_derived_tensor_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.TensorConstraintCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedAssociator",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedLeftUnitor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedRightUnitor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedRegularUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedSectionUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedInternalMu",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationDerivedInternalUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_derived_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/SectionDerivedTensorNormalization.lean",
+  "statement": "theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) : (∀ T : Scheme.{u}, TensorRepresentativeCondition Λ T (qTensor Λ T)) ∧ (∀ T : Scheme.{u}, TensorConstraintCondition (derivedFunctor Λ T) (Functor.uncurry.obj (CondensedRing.derivedTensor Λ T)) (tensor Λ T) (𝟙_ (DerivedCategory (internalModules Λ T))) (tensorUnit Λ T) (fun M N P ↦ α_ M N P) (fun M ↦ λ_ M) (fun M ↦ ρ_ M) (normalizationDerivedAssociator Λ T) (normalizationDerivedLeftUnitor Λ T) (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom (𝟙 _)) ∧ (∀ M N : DerivedCategory (internalModules Λ Y), (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫ (tensorComparison Λ X).hom.app ((internalDerivedPullback Λ f).obj M, (internalDerivedPullback Λ f).obj N) ≫ (tensor Λ X).map (Prod.mkHom ((derivedPullComparison Λ f).hom.app M) ((derivedPullComparison Λ f).hom.app N)) = (derivedPullComparison Λ f).hom.app (M ⊗ N) ≫ (derivedPullback Λ f).map ((tensorComparison Λ Y).hom.app (M, N)) ≫ (tensorPullComparison Λ f).hom.app ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N)) ∧ (∀ M N : DerivedCategory (internalModules Λ Y), (tensor Λ X).map (Prod.mkHom ((derivedPullComparison Λ f).inv.app M) ((derivedPullComparison Λ f).inv.app N)) ≫ (tensorComparison Λ X).inv.app ((internalDerivedPullback Λ f).obj M, (internalDerivedPullback Λ f).obj N) ≫ (derivedEquivalence Λ X).functor.map (((normalizationDerivedInternalMu Λ f).app M).app N) = (tensorPullComparison Λ f).inv.app ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N) ≫ (derivedPullback Λ f).map ((tensorComparison Λ Y).inv.app (M, N)) ≫ (derivedPullComparison Λ f).inv.app (M ⊗ N)) ∧ ((derivedEquivalence Λ X).functor.map (normalizationDerivedInternalUnit Λ f).hom = (derivedPullComparison Λ f).hom.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫ normalizationDerivedSectionUnit Λ f) ∧ TensorConstraintCondition (derivedPullback Λ f) (tensor Λ Y) (tensor Λ X) (tensorUnit Λ Y) (tensorUnit Λ X) (normalizationDerivedAssociator Λ Y) (normalizationDerivedLeftUnitor Λ Y) (normalizationDerivedRightUnitor Λ Y) (normalizationDerivedAssociator Λ X) (normalizationDerivedLeftUnitor Λ X) (normalizationDerivedRightUnitor Λ X) (tensorPullComparison Λ f).hom (normalizationDerivedSectionUnit Λ f)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses canonical SectionDerivedRealization tensor, qTensor, internalDelta, pullback comparison and representative-normalized tensorPullComparison. Helpers only expose transported constraints, the localized ordinary regular unit and scalar unit, and the inverse of the actual internal delta. The conjunction gives both actual-map squares, unit equality and all associator/unitor compatibility diagrams."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d7c64e7e",
+  "group": "Q01",
+  "result": "pass",
+  "note": "All six statement parts match the node: K-flat tensor identification via qTensor; associator/unitor compatibility of the tensor comparison; the actual internal δ_f square equal to the separately pinned ringed tensor-pullback map; the inverse μ_f square; the actual internal derived unit equal to the localized ordinary scalar-multiplication unit; associator/unitor diagrams for the ringed map, checked against the oplax-monoidal axioms. Recorded statement matches the file exactly; 9 declarations with docstrings; only proof is sorry; helpers are real constructions. The two added stmt_deps are landed definition nodes the statement uses, with no cycle; no dependency record changed; all imports exist. Not recompiled (no file changed). Advisories: parts 1-2 restate what the added definition nodes already give; normalizationDerivedInternalMu duplicates the parent's per-entry internalMu; ordinaryUnitComparison/pullOplax are reached only through def-pd-proetale-section-module-functors; the section-side constraints are the transported ones."
+ }
 }

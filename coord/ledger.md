@@ -22453,3 +22453,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:10 L: merged deliver/Z5/Sheaf.AlgebraicGeometry.TensorPullbackQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261021T121017-L-4044150 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:10 L: merged deliver/Z7/Sheaf.AlgebraicGeometry.ProEtaleTorIntervalTriangle (stage 3; reviewer PASS; first push; landing 20261021T121020-L-4047375 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:12 L: merged deliver/NR/lem-sfb-grothendieck-sheafification (reviewer PASS; after a return; new nodes: 1)
+- 12:16 L: merged deliver/Q01/lem-pd-section-derived-tensor-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 12:16 L: merged deliver/ND/lem-dl-a1-finite-group-inertia-invariants-etale (stage 2; reviewer PASS; parallel immutable checks)
+- 12:16 L: merged deliver/Q22/lem-per-constructible-rational-hom-comparison (stage 2; reviewer PASS; parallel immutable checks)

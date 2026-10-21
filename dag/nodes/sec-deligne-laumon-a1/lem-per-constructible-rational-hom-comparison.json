@@ -214,5 +214,29 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-a686c55af (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement, and Bhatt–Scholze pp. 61–62 (Lemma 6.8.12 and Prop 6.8.14(2), where full faithfulness follows from 6.8.12). The proof expands exactly that implication. The delivery is one commit with no new nodes; statement, stmt_deps and blueprint are byte-identical to the unsplit live node; there is no cycle (closure of 2722 nodes); and the item is not superseded, has no repair note and is not on the drop list. Step 1: lem-weil-pbc-integral-constructible-hom-sums states the first assertion verbatim (same E, A, ϖ, noetherian finite-dimensional X with ℓ invertible, K in the complete category, small countable families with a common lower bound, every q, shifted coprojections). The coefficient identification B_X=C(|−|,A) comes from the realization-functor node through the same continuous-coefficients node. Step 2: (i)⇒(iii) of the integral stratified-perfect characterization gives L bounded, and the same node gives closure under shifts. Step 3: I checked every hypothesis of the scalar-localization theorem: small site, t=ϖ, R=B_X, R_t=E_X as the sheafified section localization, the K-hypothesis at every q from Step 1, L bounded below from Step 2, and F equal to the actual scalar localization by the realization-functor node. Its conclusion is the item's display, with naturality, shifts and composition. Step 4 is elementary: the complete category is a full subcategory of D(B_X), and the rational category has the same objects with Hom⊗E and no Karoubi envelope, so the q=0 maps are those of J_X and J_X is fully faithful. Edge cases are consistent: empty family, K=0 or L=0, negative q, and ϖ-torsion K (both sides 0). Neither the cited nodes nor the item claim anything for families unbounded below. I accept the tool_uses of the three generic pbc nodes; the parent already carries two of them. No duplicate: the condensed-e-realization node is for separated finite-type k-schemes into condensed modules, and the lisse-rational-realization node covers lisse objects only. Advisory for the maintainer: the item's first assertion restates hom-sums verbatim; that statement was written by Q115 and is unchanged by this delivery. No SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleRationalHomComparison",
+  "declaration": "AlgebraicGeometry.Scheme.constructibleRationalHomComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalRealizationLocalizedLinear",
+   "AlgebraicGeometry.Scheme.ConstructibleRationalHomComparison",
+   "AlgebraicGeometry.Scheme.constructibleRationalHomComparison"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleRationalHomComparison.lean",
+  "statement": "theorem constructibleRationalHomComparison : (∀ (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)) (I : Type (u + 1)) [Countable I] (M : I → PbcCompletedDerived X (pbcIntegralDatum l E)), (∃ n : ℤ, ∀ i : I, (M i).IsGE n) → ∀ (q : ℤ) (s : Cofan M), IsColimit s → Function.Bijective (DirectSum.toModule (PbcIntegralRing l E) I (K.obj ⟶ s.pt⟦q⟧) (fun i : I ↦ Linear.rightComp (PbcIntegralRing l E) K.obj ((shiftFunctor (PbcCompletedDerived X (pbcIntegralDatum l E)) q).map (s.inj i))))) ∧ ∀ R : RationalModuleRealization l E X, ConstructibleRationalHomComparison l E X R ∧ R.J.Full ∧ R.J.Faithful",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The first conjunct verifies the actual shifted-coprojection map for every small countable family, including the empty family. The second specializes the published scalarLocalizationHomComparison predicate, retaining all fraction, naturality, identity, composition and simultaneous-shift equations, and asserts full faithfulness of the normalized realization into the actual ambient rational-coefficient derived category. The auxiliary linear structure restricts the realization field action along the existing canonical coefficient ring equivalence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ceea0cc5b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Item node differs from live only in the lean record; lean.statement exactly matches the signature. Hypotheses equal those of RationalModuleRealization. Conjunct 1 has the same form as integralConstructible_hom_sums: every countable I : Type (u+1), empty family allowed, common IsGE bound, every q, coprojection map under the canonical A-action. Conjunct 2 specializes scalarLocalizationHomComparison with F = pbcDerivedExtend(R.integralIso.hom ≫ R.inclusion) and P = B = PbcIsBoundedConstructibleComplete; the target action is restricted along the canonical pbcRationalCoefficientEquiv from the pinned R.moduleLinear. The existential CommShift is not hollow: the fraction formula fixes e, bijectivity does not depend on the shift choice, and the other clauses follow from the CommShift axioms. Full faithfulness is stated as R.J.Full ∧ R.J.Faithful. Helpers have real data and source/blueprint docstrings; the docstring follows the four proof steps; the proof is sorry only. Edge cases checked. No compile (no file changed). Advisories: the snapshot has the older Q20 record of def-weil-derived-cohomology-sheaves (same declaration as live Q34, not changed by the delivery); the first conjunct restates hom-sums as the node does."
  }
 }
