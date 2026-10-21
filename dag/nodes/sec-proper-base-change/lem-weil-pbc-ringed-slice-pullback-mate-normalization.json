@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-pullback-mate-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form, 'Hence it contains every perfect complex': identification of the derived slice comparisons with the base change map of the ringed localization square, used in the ringed-site localization argument behind the first locality sentence of Stacks 0944.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Slice pullback comparison is induced by the ringed localization square",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology], let $u:\\mathcal D\\to\\mathcal C$ be a continuous functor defining a morphism $f:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ whose inverse image preserves finite limits, and let $R$ on $\\mathcal D$ and $S$ on $\\mathcal C$ be sheaves of commutative rings with a ring map $c:f^{-1}R\\to S$. For $V\\in\\mathcal D$ put $U=u(V)$, give $\\mathcal D/V$ and $\\mathcal C/U$ the localized topologies and restricted rings [def-pur-localized-ringed-site], and let $f_V$, the commutative ringed localization square and the ordinary module comparison $\\sigma:(f_V)^*j_V^*\\cong j_U^*f^*$ be those of [lem-weil-pbc-localize-ringed-site-morphism]. Use the unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] with localization functor $q$, the exact derived restrictions $j_V^*,j_U^*$ [def-weil-pbc-ringed-derived-restriction], the derived pullbacks $Lf^*,Lf_V^*$ computed on K-flat complexes with flat terms [def-pc-kflat-complex, lem-pc-kflat-resolution, lem-weil-pbc-ringed-topoi-derived-pullback], and the derived adjunctions $Lf^*\\dashv Rf_*$, $Lf_V^*\\dashv R(f_V)_*$. Let $\\beta:j_V^*Rf_*\\cong R(f_V)_*j_U^*$ and $\\theta:Lf_V^*j_V^*\\cong j_U^*Lf^*$ be the canonical comparisons of [lem-weil-pbc-ringed-derived-slice-localization]. Then for every K-flat complex $P$ of $R$-modules with flat terms, under the identifications $Lf^*(qP)\\cong q(f^*P)$ and $Lf_V^*(q\\,j_V^*P)\\cong q((f_V)^*j_V^*P)$ (the restriction $j_V^*P$ is again K-flat with flat terms) and the termwise identifications $j_V^*(qP)=q(j_V^*P)$, $j_U^*(q f^*P)=q(j_U^*f^*P)$, the component $\\theta_{qP}$ equals $q(\\sigma_P)$. Consequently $\\theta$ is the derived pullback comparison induced by the commutative ringed localization square, and $\\beta$ is its exchange mate [def-weil-pbc-adjunction-mate], that is, the base change map of this square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7 (remark-base-change: base change map of a commutative square of ringed topoi), applied to the localization square of sites-modules.tex Tag 04J0 (lemma-localize-morphism-ringed-sites); the comparison j_V^*Rf_* = R(f_V)_*j_U^* of sites-cohomology.tex Tag 08FI (lemma-restrict-K-injective-to-open). The agreement of the two comparisons is agent-written (the counit calculation on generators of the inverse-image presheaf, then K-injective/K-flat descent)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'mateEquiv' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib has no mate/base-change identification for localized module-sheaf derived functors"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'baseChange.*over\\|over.*baseChange' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Functor.Derived\\|derivedCategory' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: no derived categories of module sheaves with derived pullback/pushforward in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-projection-restriction",
+  "date": "2026-10-21",
+  "group": "NK"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,361 +1,304 @@
 {
-  "id": "lem-weil-pbc-ringed-projection-restriction",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-perfect-projection-formula",
-      "place": "Detailed form: 'Hence it contains every perfect complex'; restores the locality step of Stacks 0944 before the finite-complex argument",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-ringed-projection-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form: 'Hence it contains every perfect complex'; restores the locality step of Stacks 0944 before the finite-complex argument",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Localization comparisons for the ringed projection mate",
-  "statement": "Let $f:X\\to Y$ be a morphism of schemes with small pro-etale sites [def-weil-pbc-proetale-site, def-weil-proetale-inverse-image]. Let $R_Y$ be a sheaf of commutative rings and fix an identification $f^{-1}R_Y\\cong R_X$. Use the ordinary unbounded derived operations [def-weil-pbc-proetale-operations] and derived tensor computed by K-flat total complexes [def-pc-kflat-complex, lem-pc-kflat-resolution, def-pc-tensor-complex-sheaves]. For an object $V\\to Y$ of $Y_{\\mathrm{proet}}$, put $U=X\\times_YV$ and let $f_V$ be the induced morphism from the localized topos of $X_{\\mathrm{proet}}$ at $U$ to that of $Y_{\\mathrm{proet}}$ at $V$. Write $j_V^*$ and $j_U^*$ for restriction to these localized sites and restrict the coefficient sheaves there. For $E\\in D(R_X)$ and $P,M,N\\in D(R_Y)$ there are canonical natural isomorphisms\n$$j_V^*Rf_*E\\cong R(f_V)_*j_U^*E,\\qquad j_U^*Lf^*P\\cong Lf_V^*j_V^*P,\\qquad j_V^*(M\\otimes^L N)\\cong j_V^*M\\otimes^L j_V^*N.$$\nUnder these isomorphisms, restriction of the adjoint-of-counit projection map for $(f,E,P)$ is exactly the adjoint-of-counit projection map for $(f_V,j_U^*E,j_V^*P)$, including the canonical shift comparisons. A morphism in $D(R_Y)$ is an isomorphism if, for every site object $V$, some covering $\\{V_i\\to V\\}$ makes all its restrictions to $V_i$ isomorphisms. No quasi-compactness or uniform cohomological bound is required.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0FN5 (lemma-localize-cartesian-square-modules), 07A4 (lemma-pullback-tensor-product); slice-topos restriction of the counit map 0B56."
-  },
-  "stmt_deps": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-proetale-operations",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "def-pur-localized-ringed-site"
-  ],
-  "proof": [
-    {
-      "text": "Apply [lem-weil-pbc-localize-ringed-site-morphism] to the base-change functor $u_f$ of [def-weil-proetale-inverse-image]. Its object $u_f(V)$ is exactly $U=X\\times_YV$, an object of $X_{\\mathrm{proet}}$, not an assumed open subscheme. We obtain the ringed localization square, the ordinary pullback comparison $f_V^*j_V^*\\cong j_U^*f^*$, and the ordinary direct-image comparison $\\beta^0:j_V^*f_*\\cong(f_V)_*j_U^*$. For $W\\to V$ the latter identifies both module sections with $G(X\\times_YW)$; the $R_Y(W)$-actions agree because the localized ring map is the restriction of the specified map $f^{-1}R_Y\\cong R_X$. That same pullback square restricts this ring isomorphism to $(f_V)^{-1}(R_Y|_V)\\cong R_X|_U$.",
-      "uses": [
-        "lem-weil-pbc-localize-ringed-site-morphism",
-        "def-weil-proetale-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tags 03CF and 04J0, localization of the site morphism"
-      }
-    },
-    {
-      "text": "Restriction on module sheaves is exact by [lem-pur-site-restriction-module-adjunction-exact]. Thus $H^q(j_T^*A)=j_T^*H^q(A)$, directly by its preservation of kernels and cokernels, and termwise restriction induces the derived restriction functors. The pullbacks $f^*$ and $f_V^*$ are also exact: their coefficient maps are isomorphisms (Step 1), so their underlying abelian functors are inverse image, exact by [lem-weil-pbc-site-pullback-abelian-exact]; kernels and cokernels of module sheaves are computed on underlying abelian sheaves [def-weil-sheaf-of-modules-category]. Consequently the ordinary square of Step 1, applied termwise to any representative of $P$, induces $j_U^*Lf^*P\\cong Lf_V^*j_V^*P$. Here $Lf^*$ is exactly the termwise exact functor specified in [def-weil-pbc-proetale-operations]; the same construction applies on the localized sites. Naturality for derived morphisms follows by inversion of quasi-isomorphisms from naturality of the ordinary square.",
-      "uses": [
-        "lem-pur-site-restriction-module-adjunction-exact",
-        "lem-weil-pbc-site-pullback-abelian-exact",
-        "def-weil-sheaf-of-modules-category",
-        "def-weil-pbc-proetale-operations",
-        "lem-weil-pbc-localization-universal-property"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Restriction discussion immediately before 08FI; 04J0 with isomorphic coefficient maps"
-      }
-    },
-    {
-      "text": "Choose a K-injective resolution $E\\to I$ in module sheaves using [prop-pur-kinjective-resolutions-exist]. Exact restriction sends it to a quasi-isomorphism $j_U^*E\\to j_U^*I$, and [lem-pur-kinjective-restrict-localized] makes $j_U^*I$ K-injective. The definition [def-weil-pbc-proetale-operations] represents $Rf_*E$ by $f_*I$, and [lem-weil-pbc-kinjective-total-derived] represents $R(f_V)_*j_U^*E$ by $(f_V)_*j_U^*I$. Restricting the former complex gives exactly the latter by $\\beta^0$ of Step 1 in every degree. This is the desired $\\beta:j_V^*Rf_*E\\cong R(f_V)_*j_U^*E$. Maps between K-injective representatives give the same comparison: [lem-weil-pbc-kinjective-hom-derived] represents all derived morphisms into them by homotopy classes, and additive restriction and pushforward preserve these homotopies. Thus the comparison is natural and independent of the resolution.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-pur-kinjective-restrict-localized",
-        "lem-pur-site-restriction-module-adjunction-exact",
-        "def-weil-pbc-proetale-operations",
-        "lem-weil-pbc-kinjective-total-derived",
-        "lem-weil-pbc-kinjective-hom-derived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "08FI, lemma-restrict-K-injective-to-open; proof method of 0FN5, lemma-localize-cartesian-square-modules (the site morphism is the one from Step 1)"
-      }
-    },
-    {
-      "text": "The restriction morphism of ringed topoi has module pullback $j_V^*$, since its ring map identifies the restricted ring with $R_Y|_V$. It is exact by Step 2, so $Lj_V^*=j_V^*$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism to obtain the canonical natural comparison $j_V^*(M\\otimes^LN)\\cong j_V^*M\\otimes^Lj_V^*N$. More explicitly, choose flat K-flat representatives of $M,N$; the cited theorem preserves their K-flatness under pullback and its tensor comparison is induced on their direct-sum total tensor complexes. Restriction preserves the bidegrees and the tensor differential $d_M\\otimes1+(-1)^a1\\otimes d_N$. The same construction applies to $j_U^*$.",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "def-pc-tensor-complex-sheaves"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "07A4, lemma-pullback-tensor-product"
-      }
-    },
-    {
-      "text": "The comparison $\\beta$ from Step 3 is the exchange mate of the pullback square from Step 2. Verify its counit equation first on an ordinary module $G$. In the local inverse-image presheaf, a generator at $W\\to U$ is represented by $T\\to V$, an arrow $W\\to u_f(T)$ over $U$, and a section $m\\in G(u_f(T))$. Via the canonical pullback square [lem-weil-pbc-localize-ringed-site-morphism], it is the same generator in the global inverse image with the map to $V$ forgotten. The local counit and the restriction of the global counit both send it to the restriction of $m$ along $W\\to u_f(T)$. Hence their maps agree after sheafification; the coefficient actions agree by Step 1. The presheaf formula is [def-weil-pbc-sites-and-cohomology], and the linear adjuncts are [lem-weil-pbc-ringed-topoi-module-adjunction]. Apply this equality degreewise to the K-injective $I$ of Step 3. The termwise adjunction and its counit descend to homotopy classes by [lem-weil-pbc-termwise-adjunction-homotopy]. Since exact pullback preserves quasi-isomorphisms and $I,j_U^*I$ are K-injective, the Hom bijections of [lem-weil-pbc-kinjective-hom-derived] identify these with the canonical derived adjunctions. Writing $\\theta:Lf_V^*j_V^*\\cong j_U^*Lf^*$ and $\\varepsilon,\\varepsilon_V$ for the derived counits, we therefore have\n$$\\varepsilon_{V,j_U^*E}\\,Lf_V^*(\\beta_E)=j_U^*(\\varepsilon_E)\\,\\theta_{Rf_*E}.$$\nBy the bijection defining the mate [def-weil-pbc-adjunction-mate], this identifies $\\beta$ with that mate, rather than just some isomorphism between its source and target.",
-      "uses": [
-        "lem-weil-pbc-localize-ringed-site-morphism",
-        "def-weil-pbc-sites-and-cohomology",
-        "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "lem-weil-pbc-termwise-adjunction-homotopy",
-        "lem-weil-pbc-kinjective-hom-derived",
-        "def-weil-pbc-adjunction-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "04J0 and 03CF with the counit evaluation; 07A6, lemma-adjoint, computed on K-injective representatives"
-      }
-    },
-    {
-      "text": "Use [lem-weil-pbc-ringed-exchange-tensor-coherence] for the ringed square of Step 1, with $g=j_V$, $g'=j_U$, $f'=f_V$ and $Q=P$. Steps 2 and 4 supply its canonical derived pullback and tensor comparisons, and Step 5 identifies its exchange with $\\beta$. Its equality of the two composites says precisely that the restriction of $\\pi_{f,E,P}$, under the comparisons of Steps 2--4, is $\\pi_{f_V,j_U^*E,j_V^*P}$. No projection-formula isomorphism is assumed. All comparisons commute with integer shifts: the exact restriction and pullback squares are termwise and send the shifted differential $-d$ to $-j^*d$; the pushforward square on $I[n]$ is the same degreewise identity; and the tensor comparison preserves the bidegrees, hence the usual shift sign $(-1)^{na}$ on the second tensor variable. [lem-weil-pbc-ringed-projection-mate-exact] gives the canonical tensor and projection-mate shift structures for $f$ and $f_V$. The preceding termwise checks identify these structures with their restricted ones, so the equality includes the shift comparisons.",
-      "uses": [
-        "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "lem-weil-pbc-ringed-projection-mate-exact",
-        "def-pc-tensor-complex-sheaves",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0B56, equation-projection-formula-map; 0E48, remark-compatible-with-diagram; canonical shifts"
-      }
-    },
-    {
-      "text": "Finally let $a:A\\to B$ satisfy the stated local isomorphism condition. Represent it as $Q(h)Q(s)^{-1}$ with $s:C\\to A$ a quasi-isomorphism and $h:C\\to B$ a cochain map, using the right calculus of fractions [lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-right-fraction-representation]. By exactness of restriction from Step 2, for each $q$ the map $H^q(a)$ restricts to an isomorphism on every member of the specified covering of every $V$. Its inverse section maps are natural on the slices, hence agree after further restriction to $V_i\\times_VV_j$ (both are inverses to the same map). The sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] glues these inverses, giving an inverse to $H^q(a)$ on $V$. Thus $H^q(a)$ is an isomorphism of module sheaves for all $q$. Since $H^q(s)$ is already invertible, $H^q(h)$ is invertible; $h$ is a quasi-isomorphism by [def-weil-abstract-derived-category]. Both $Q(h)$ and $Q(s)$ are invertible, so $a$ is invertible. This checks every degree separately; no uniform bound, quasi-compactness, or enough-points assumption has been used.",
-      "uses": [
-        "lem-pc-quasi-isomorphisms-multiplicative-system",
-        "lem-pc-right-fraction-representation",
-        "def-weil-pbc-sites-and-cohomology",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944, lemma-projection-formula, first locality sentence; derived.tex 05RT and 05RU for the fraction argument"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization comparisons for the ringed projection mate",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes with small pro-etale sites [def-weil-pbc-proetale-site, def-weil-proetale-inverse-image]. Let $R_Y$ be a sheaf of commutative rings and fix an identification $f^{-1}R_Y\\cong R_X$. Use the ordinary unbounded derived operations [def-weil-pbc-proetale-operations] and derived tensor computed by K-flat total complexes [def-pc-kflat-complex, lem-pc-kflat-resolution, def-pc-tensor-complex-sheaves]. For an object $V\\to Y$ of $Y_{\\mathrm{proet}}$, put $U=X\\times_YV$ and let $f_V$ be the induced morphism from the localized topos of $X_{\\mathrm{proet}}$ at $U$ to that of $Y_{\\mathrm{proet}}$ at $V$. Write $j_V^*$ and $j_U^*$ for restriction to these localized sites and restrict the coefficient sheaves there. For $E\\in D(R_X)$ and $P,M,N\\in D(R_Y)$ there are canonical natural isomorphisms\n$$j_V^*Rf_*E\\cong R(f_V)_*j_U^*E,\\qquad j_U^*Lf^*P\\cong Lf_V^*j_V^*P,\\qquad j_V^*(M\\otimes^L N)\\cong j_V^*M\\otimes^L j_V^*N.$$\nUnder these isomorphisms, restriction of the adjoint-of-counit projection map for $(f,E,P)$ is exactly the adjoint-of-counit projection map for $(f_V,j_U^*E,j_V^*P)$, including the canonical shift comparisons. A morphism in $D(R_Y)$ is an isomorphism if, for every site object $V$, some covering $\\{V_i\\to V\\}$ makes all its restrictions to $V_i$ isomorphisms. No quasi-compactness or uniform cohomological bound is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0FN5 (lemma-localize-cartesian-square-modules), 07A4 (lemma-pullback-tensor-product); slice-topos restriction of the counit map 0B56."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-localize-ringed-site-morphism] to $u_f(V)=X\\times_YV$ from [def-weil-proetale-inverse-image]. This gives the ringed localization square and the restricted coefficient identification. By [lem-pur-site-restriction-module-adjunction-exact], both restrictions are exact, hence their termwise functors are their derived functors [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
     "lem-weil-pbc-localize-ringed-site-morphism",
     "def-weil-proetale-inverse-image",
     "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-localization-universal-property",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-abstract-derived-category",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-right-fraction-representation"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "08FI and 07A4, with 04J0/03CF for the ordinary localization square; explicit counit and shift checks supply the locality used by 0944"
+    "place": "Exact restriction discussion before lemma-restrict-K-injective-to-open; sites-modules.tex lemma-localize-morphism-ringed-sites"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Restriction to slice sites commutes with derived tensor pullback and derived direct image and detects isomorphisms locally",
-      "results": "8 hits: ['SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal', 'SheafOfModules.pullbackComp', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'SheafOfModules.pullbackIso', 'SheafOfModules.conjugateEquiv_pullbackComp_inv', 'CategoryTheory.GrothendieckTopology.overMapPullbackComp', 'CategoryTheory.Presieve.isSheafFor_over_map_op_comp_iff']; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "K injective restriction to a localized site computes the restriction of a derived pushforward with arbitrary ring sheaves",
-      "results": "8 hits: ['CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff', 'CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW', 'PresheafOfModules.instIsLocallyInjectiveToSheafify', \"CategoryTheory.Presheaf.isLocallyInjective_toSheafify'\", 'CategoryTheory.Presheaf.isLocallyInjective_of_whisker', 'CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val', 'CategoryTheory.Presheaf.isLocallyInjective_whisker_iff']; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"SheafOfModules\", \"restrict\"",
-      "results": "12 hits: ['PresheafOfModules.restrictₛₗ', 'PresheafOfModules.restriction', 'PresheafOfModules.restriction_app', 'PresheafOfModules.restrictₛₗ_apply', 'PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat', 'PresheafOfModules.restrictScalarsObj']; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
-    },
-    {
-      "tool": "grep",
-      "query": "(restrict|localiz).*(KInjective|KFlat)|ringed.*(localiz|restrict)",
-      "results": "17 hits: ['Mathlib/Geometry/RingedSpace/OpenImmersion.lean', 'Mathlib/Geometry/RingedSpace/OpenImmersion.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean']; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Localization of a ringed topos commutes with derived direct image and tensor product",
-      "results": "0 hits: []; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "(restrict|overFunctor).*(KInjective|KFlat)|projectionFormula",
-      "results": "0 hits: []; ",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Ringed derived projection formula map commutes with restriction to a localized site",
-      "results": "0 hits: []; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"KInjective\", \"SheafOfModules\"",
-      "results": "0 hits: []; ",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Restriction to slice sites commutes with unbounded derived direct image and with the adjoint projection formula map",
-      "results": "8 hits: ['CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq', \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", 'CategoryTheory.sheafComposeNatTrans_fac', 'CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc', 'CategoryTheory.RanIsSheafOfIsCocontinuous.fac', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", 'CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map']; ",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "K injective resolutions compute derived pushforward on slice sites and restriction preserves the counit tensor mate",
-      "results": "8 hits: ['SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app', 'SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val', 'SheafOfModules.pushforwardPushforwardAdj', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility', 'PresheafOfModules.pushforward₀CompToPresheaf', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso']; ",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lemma-weil-pbc-perfect-projection-formula",
-    "by": "worker",
-    "date": "2026-10-14"
+  {
+   "text": "Apply [lem-weil-pbc-ringed-derived-slice-localization] to this small ringed-site morphism. Its two canonical comparisons $\\beta,\\theta$ give the required pushforward and pullback isomorphisms, and their compatibility with the derived units and counits makes $\\beta$ the exchange mate of $\\theta$ under the defining adjunction bijection [def-weil-pbc-adjunction-mate]. By [lem-weil-pbc-ringed-slice-pullback-mate-normalization], this $\\theta$ is the derived comparison of the ordinary localization square of Step 1: on every flat-term K-flat representative it is the localization of that termwise module square. Hence $\\beta$ is the exchange mate of the pullback comparison induced by the commutative ringed square of Step 1, not merely some isomorphism between the same functors.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-ringed-slice-pullback-mate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-restrict-K-injective-to-open and lemma-adjoint; canonical localized adjunction"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-ringed-projection-restriction",
-    "worker": "stage1",
-    "summary": "Split all three derived comparisons on ordinary localization, exact restriction, K-injective and K-flat representatives. Identified the direct-image comparison as the exchange mate by checking its counit on local section generators; applied the existing generic tensor/exchange coherence and checked shift signs. Proved local detection with sheaf gluing and fractions. One new statement-only node for 04J0; no new elementary or derived-clause restatements.",
-    "blueprint": "Detailed form of lemma-weil-pbc-perfect-projection-formula: 'Hence it contains every perfect complex'; restores the local restriction step explicitly used in the first sentence of Stacks 0944 before strict-perfect reduction.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-site-restriction-module-adjunction-exact",
-        "why": "Generic ringed-site or derived-category infrastructure used for the canonical localization comparisons; no statement of this proper-base-change unit supplies this general input."
-      },
-      {
-        "node": "lem-weil-pbc-site-pullback-abelian-exact",
-        "why": "Generic ringed-site or derived-category infrastructure used for the canonical localization comparisons; no statement of this proper-base-change unit supplies this general input."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Generic ringed-site or derived-category infrastructure used for the canonical localization comparisons; no statement of this proper-base-change unit supplies this general input."
-      },
-      {
-        "node": "lem-pur-kinjective-restrict-localized",
-        "why": "Generic ringed-site or derived-category infrastructure used for the canonical localization comparisons; no statement of this proper-base-change unit supplies this general input."
-      },
-      {
-        "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-        "why": "Generic ringed-site or derived-category infrastructure used for the canonical localization comparisons; no statement of this proper-base-change unit supplies this general input."
-      }
-    ]
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $j_V$ and $j_U$. Their coefficient maps are identities and their pullbacks are exact restrictions by Step 1, so its comparison is precisely the asserted restriction/tensor isomorphism. [lem-weil-pbc-ringed-slice-comparisons-shift] supplies the shift normalization of these and the two comparisons of Step 2.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-slice-comparisons-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-pullback-tensor-product and its total-complex construction"
+   }
   },
-  "tool_uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NG-39ba659a2",
-    "group": "NG",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-39ba659a2 (reviewer sub-agent of L); spot-checked: Read and checked all seven steps, the new node, cited statements, Stacks 03CF/04J0, 08FI, 07A4, 0944, and archived master targets. Mathematics accepted without target weakening. Corrected the new node’s incomplete creation/audit metadata; review.md records source checks, edge cases, accepted tool uses, and withdrawn preliminary objections.; 1 file(s) fixed by the reviewer"
+  {
+   "text": "In [lem-weil-pbc-ringed-exchange-tensor-coherence] set $g=j_V$, $g'=j_U$, $f'=f_V$ and $Q=P$. Step 1 supplies its ringed square; by Step 2 its pullback comparison induced by that square is the $\\theta$ of the slice theorem, so its exchange mate is $\\beta$; Step 3 supplies its canonical tensor comparisons. Its equality is the required equality of restricted projection maps. The comparisons commute with shifts by Step 3, and the projection maps do so by [lem-weil-pbc-ringed-projection-mate-exact]; thus this equality includes the canonical shift comparisons.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "equation-projection-formula-map and remark-compatible-with-diagram"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-45964bd4e",
-    "group": "NC",
-    "result": "pass",
-    "note": "Reviewed packet, node, dependencies, source citations, Lean declarations, edge cases, docstrings, and pro-etale framework. Reproduced scompile successfully; no findings or fixes required."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.RingedProjectionRestriction",
-    "declaration": "AlgebraicGeometry.Scheme.ringedProjectionRestriction",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Mod",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.derived",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Der",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.tensor",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.total",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.resolving",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorModel",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorShiftFirst",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorShiftSecond",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorShifts",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.pure",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.ExactModel",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pullback",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pushforward",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.left",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.right",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModel",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModelShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightComparison",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.moduleAdjunction",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedAdjunction",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedCounit",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.DerivedAdjunction",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.OrdinaryTensor",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.totalComponent",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.totalMap",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonCore",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonCore.Representative",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparison",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonShifts",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction.model",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction.modelShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Global",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Local",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.sourceIso",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.targetIso",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.ProjectionCompatible",
-      "AlgebraicGeometry.Scheme.ringedProjectionRestriction"
-    ],
-    "file": "lean/Sheaf/Paper/RingedProjectionRestriction.lean",
-    "statement": "theorem ringedProjectionRestriction {X Y : Scheme.{u}} (f : X ⟶ Y) (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) : ∃ g : Global f R_Y R_X c, ∃ data : ∀ V : Y.ProEt, Local f R_Y R_X c g V, (∀ V : Y.ProEt, (data V).ProjectionCompatible) ∧ (∀ {A B : Der R_Y} (a : A ⟶ B), (∀ V : Y.ProEt, ∃ S : Sieve V, S ∈ ProEt.topology Y V ∧ ∀ (W : Y.ProEt) (h : W ⟶ V), S.arrows h → IsIso (((data W).restrictionY.model).functor.map a)) → IsIso a)",
-    "branch": "newtargets-dag",
-    "by": "NC",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "H3/H5 repair of returned head 40e52a6f4e32: restriction is overFunctor.mapDerivedCategory; pullback and K-injective direct image are constructed module operations for the fixed coefficient adjunct and its sectionwise localization. Tensor functors and comparisons are normalized naturally on all flat K-flat signed total complexes, with descent uniqueness. Projection maps are the actual derived adjoint-of-counit mates; source/target identifications are explicit composites. Canonical shift equations retained. Original node statement unchanged."
+  {
+   "text": "For the last assertion, exact restriction commutes naturally with cohomology by [lem-weil-pbc-exact-functor-complex-cohomology]; the same equality on derived arrows follows by [lem-weil-pbc-localization-universal-property]. Thus every $H^q(a)$ is invertible on the assumed covering slices. Collect all their domains as a small family; its sieve covers every object. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the underlying abelian sheaves. The inverse is module-linear since $H^q(a)$ is module-linear and bijective. Now [lem-weil-pbc-unbounded-derived-iso-cohomology] makes $a$ invertible. This uses each integer $q$ separately, with no bound or finiteness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-projection-formula, first locality sentence; sites.tex lemma-glue-maps; derived.tex lemma-acyclic"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-slice-pullback-mate-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-slice-comparisons-shift",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Short assembly of existing generic derived-slice and tensor-coherence results, with a separately stated shift-normalization lemma. Follows the first locality sentence of lemma-projection-formula, using exact restriction and cohomology detection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to slice sites commutes with derived tensor pullback and derived direct image and detects isomorphisms locally",
+   "results": "8 hits: ['SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal', 'SheafOfModules.pullbackComp', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'SheafOfModules.pullbackIso', 'SheafOfModules.conjugateEquiv_pullbackComp_inv', 'CategoryTheory.GrothendieckTopology.overMapPullbackComp', 'CategoryTheory.Presieve.isSheafFor_over_map_op_comp_iff']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective restriction to a localized site computes the restriction of a derived pushforward with arbitrary ring sheaves",
+   "results": "8 hits: ['CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff', 'CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW', 'PresheafOfModules.instIsLocallyInjectiveToSheafify', \"CategoryTheory.Presheaf.isLocallyInjective_toSheafify'\", 'CategoryTheory.Presheaf.isLocallyInjective_of_whisker', 'CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val', 'CategoryTheory.Presheaf.isLocallyInjective_whisker_iff']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrict\"",
+   "results": "12 hits: ['PresheafOfModules.restrictₛₗ', 'PresheafOfModules.restriction', 'PresheafOfModules.restriction_app', 'PresheafOfModules.restrictₛₗ_apply', 'PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat', 'PresheafOfModules.restrictScalarsObj']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrict|localiz).*(KInjective|KFlat)|ringed.*(localiz|restrict)",
+   "results": "17 hits: ['Mathlib/Geometry/RingedSpace/OpenImmersion.lean', 'Mathlib/Geometry/RingedSpace/OpenImmersion.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a ringed topos commutes with derived direct image and tensor product",
+   "results": "0 hits: []; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrict|overFunctor).*(KInjective|KFlat)|projectionFormula",
+   "results": "0 hits: []; ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed derived projection formula map commutes with restriction to a localized site",
+   "results": "0 hits: []; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjective\", \"SheafOfModules\"",
+   "results": "0 hits: []; ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to slice sites commutes with unbounded derived direct image and with the adjoint projection formula map",
+   "results": "8 hits: ['CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq', \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", 'CategoryTheory.sheafComposeNatTrans_fac', 'CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc', 'CategoryTheory.RanIsSheafOfIsCocontinuous.fac', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", 'CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective resolutions compute derived pushforward on slice sites and restriction preserves the counit tensor mate",
+   "results": "8 hits: ['SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app', 'SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val', 'SheafOfModules.pushforwardPushforwardAdj', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility', 'PresheafOfModules.pushforward₀CompToPresheaf', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary pullback composition, restriction functors and their adjunctions do not establish localization of an arbitrary morphism of ringed sites with the canonical commuting inverse-image square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lemma-weil-pbc-perfect-projection-formula",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-ringed-projection-restriction",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: statement unchanged. Reused the existing more general derived-slice localization theorem for the former exact pullback, K-injective comparison and counit calculations. Separated shift normalization into one general ringed-site helper, with its complete short proof in report.md as required for new statement-only nodes. Replaced the fraction/gluing argument with the existing exact-cohomology, cover-local sheaf-isomorphism and derived-cohomology criteria. Parent proof is under 3000 characters.",
+  "blueprint": "Detailed form of lemma-weil-pbc-perfect-projection-formula: 'Hence it contains every perfect complex'; restores the local restriction step explicitly used in the first sentence of Stacks 0944 before strict-perfect reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site or derived-category infrastructure for localization and local detection; it replaces no proper-base-change unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a2ab539ec",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a2ab539ec (reviewer sub-agent of L); spot-checked: I read the re-split in full against the side-live node. The statement and stmt_deps are byte-identical, and the proof dropped from 6953 to 2253 characters with no step over 2000. The DAG stays acyclic, including the new nodes. The item is not on the dropped list. Sources checked: Stacks 04J0 (sites-modules l.2368), 07A7 remark-base-change (sites-cohomology l.4033), and 08FI, 07A4, 0E48 and 0944 by their tags. Step 1 (localize-ringed-site-morphism with u_f(V)=X×_YV, exact restriction, termwise derived functors) is correct. Step 3 (tensor-pullback applied to j_V and j_U with identity coefficients, Lj^*=j^*) is correct. Step 5 is correct: the domains of the coverings form a small family whose sieve covers every V, so Sheaf.isIso_of_coversTop applies to the underlying abelian H^q(a); the inverse is linear, and the unbounded cohomology criterion finishes it with no boundedness hypothesis. Gap fixed (C3/E5): in lem-weil-pbc-ringed-derived-slice-localization, β is fixed by the right-derived unit square and θ is defined as its inverse mate (proof, ofMate). Its statement never ties θ to the ordinary localization square. Step 2's sentence 'counit compatibility makes β the mate of θ' is therefore a tautology. Step 4 needs θ to be the pullback comparison induced by the ringed commutation isomorphism, normalized on flat-term K-flat complexes as def-weil-pbc-ringed-tensor-square-presentation and lem-weil-pbc-ringed-square-tensor-compatibility require. That argument was the old Step 5, which the re-split dropped, and no cited statement supplies it. I added the statement-only node lem-weil-pbc-ringed-slice-pullback-mate-normalization (unsplit, created.item = the item, source 07A7+04J0+08FI). It states θ_qP = q(σ_P) on flat-term K-flat P, so β is the 07A7 base change map. Steps 2 and 4 and proof_deps are edited to cite it (proof now 2778 characters). New node lem-weil-pbc-ringed-slice-comparisons-shift: it is statement-only, its form is correct and its searches are logged. I checked its sign convention against def-pc-tensor-complex-sheaves: the A[n]⊗B map is the identity and the A⊗B[n] map is (-1)^{np}, and both differential parts commute for all n and p, so the statement is true. It does not restate the parent. Its tensor clause overlaps the μ-shift clause of lem-weil-pbc-ringed-projection-mate-exact for f=j_V; this is advisory only, since that node's 'presented by small ringed sites' hypothesis is unclear for localizations of general sites. Tool use lem-pur-site-restriction-module-adjunction-exact (Lean-closed) is accepted; the other off-unit citations are Mathlib leaves. Maintainer note: the item still carries the stale top-level tool_uses and the reviewed/reviewed_lean fields from the 2026-10-14 split.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45964bd4e",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source citations, Lean declarations, edge cases, docstrings, and pro-etale framework. Reproduced scompile successfully; no findings or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedProjectionRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.ringedProjectionRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Mod",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derived",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Der",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.tensor",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.total",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.resolving",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorShiftFirst",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorShiftSecond",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorShifts",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.pure",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.ExactModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pullback",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pushforward",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.left",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.right",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModelShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightComparison",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.moduleAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedCounit",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.DerivedAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.OrdinaryTensor",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.totalComponent",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.totalMap",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonCore",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonCore.Representative",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparison",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonShifts",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction.model",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction.modelShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Global",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.sourceIso",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.targetIso",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.ProjectionCompatible",
+   "AlgebraicGeometry.Scheme.ringedProjectionRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/RingedProjectionRestriction.lean",
+  "statement": "theorem ringedProjectionRestriction {X Y : Scheme.{u}} (f : X ⟶ Y) (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) : ∃ g : Global f R_Y R_X c, ∃ data : ∀ V : Y.ProEt, Local f R_Y R_X c g V, (∀ V : Y.ProEt, (data V).ProjectionCompatible) ∧ (∀ {A B : Der R_Y} (a : A ⟶ B), (∀ V : Y.ProEt, ∃ S : Sieve V, S ∈ ProEt.topology Y V ∧ ∀ (W : Y.ProEt) (h : W ⟶ V), S.arrows h → IsIso (((data W).restrictionY.model).functor.map a)) → IsIso a)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "H3/H5 repair of returned head 40e52a6f4e32: restriction is overFunctor.mapDerivedCategory; pullback and K-injective direct image are constructed module operations for the fixed coefficient adjunct and its sectionwise localization. Tensor functors and comparisons are normalized naturally on all flat K-flat signed total complexes, with descent uniqueness. Projection maps are the actual derived adjoint-of-counit mates; source/target identifications are explicit composites. Canonical shift equations retained. Original node statement unchanged."
+ }
 }
