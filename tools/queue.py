@@ -205,7 +205,7 @@ def main() -> int:
         rw_open = [c["item"] for c in rw_clusters]
         blocked_n, blocked_m, _ = rework.blocked(g, imports, rw_rows)
         nb = (len(s1), len(s2), len(items3))
-        s1 = [x for x in s1 if x[1] not in blocked_n]
+        # 2026-10-21 (the human): stage 1 is work in words, it needs no compiled Lean: a rework does not hold it back
         s2 = [x for x in s2 if x[2] not in blocked_n]
         items3 = [x for x in items3 if x[2] not in blocked_m and x[2] not in rw_rows]
         STATE["blocked"] = (nb[0] - len(s1), nb[1] - len(s2), nb[2] - len(items3))

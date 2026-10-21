@@ -482,6 +482,9 @@ def hold_set(rows=None) -> tuple[set[str], dict[str, str], set[str]]:
     items |= set(first)   # retire-first items are queued even when blocked (tools/queue.py): never held
     nodes, mods, why = blocked(None, None, rows)
     hold = (set(m for m in rows if not landed(m)) | nodes | mods) - items
+    # 2026-10-21 (the human): a node owed to stage 1 (a re-split in words) is never held by a Lean rework
+    import dag_queue as dq
+    hold -= {n for n in nodes if dq.stage1_repair_owed(n)}
     for m in rows:
         why.setdefault(m, m)
     return hold, why, items
