@@ -65,11 +65,9 @@
    }
   },
   {
-   "text": "Fix $i$. The injection $C/\\mathfrak s_i\\hookrightarrow D/\\mathfrak r_i$ induces an injection of fraction fields into $E_i$, by $\\overline c/\\overline e\\mapsto\\overline c/\\overline e$; denominators stay nonzero and cross multiplication proves well-definedness and injectivity. Write $L_i=\\operatorname{Frac}(C/\\mathfrak s_i)\\subseteq E_i$. The map $A/\\mathfrak p\\to C/\\mathfrak s_i$ is injective, so this identifies $k$ with a subfield of $L_i$. Choose finite $A$-module generators $c_1,\\ldots,c_N$ of $C$. Inside $E_i$ let $V_i$ be the $k$-span of their images. The image of $C$ lies in $V_i$, and $1\\in V_i$. Products $\\overline c_a\\overline c_b$ are $k$-linear combinations of these images because $c_ac_b$ is an $A$-linear combination of the $c_h$. Thus $V_i$ is a finite-dimensional commutative $k$-algebra and a domain, being a subring of the field $E_i$. By [lem-weil-pbc-finite-dimensional-domain-is-field], $V_i$ is a field. It contains the image of $C/\\mathfrak s_i$, hence all its fractions, so $L_i\\subseteq V_i$. Conversely $k\\subseteq L_i$ and all $\\overline c_h\\in L_i$, so $V_i\\subseteq L_i$. Therefore $L_i=V_i$ is finite-dimensional over $k$.",
-   "uses": [
-    "lem-weil-pbc-finite-dimensional-domain-is-field"
-   ],
-   "elementary": false,
+   "text": "Fix i and put s_i = r_i ∩ C. The inclusion induces the canonical map of residue fields Ideal.ResidueField.map. Its composite with the residue-field map from A agrees with the given k-embedding, checked on A by Ideal.ResidueField.ringHom_ext and map_algebraMap. Since C is module-finite over A, the Mathlib instance Algebra.QuasiFinite.instFiniteResidueField gives that kappa(s_i) is finite-dimensional over k. The private helper residue_finite identifies its scalar module with the explicit map.toAlgebra.toModule by Module.ext' and quotient representatives. Form the algebra homomorphism f : kappa(s_i) →ₐ[k] E_i and take its fieldRange as L_i. AlgHom.equivFieldRange transports finite-dimensionality to L_i; its underlying subfield is definitionally the required fieldRange. This is the existing finite-residue-field API for the span argument in the original plan.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
     "place": "Tag 0BSR, lemma-etale-makes-integral-split, first proof, finite-model residue fields; Algebra Tag 00GS, lemma-integral-over-field, first assertion, and the explicit span of module generators."
@@ -92,13 +90,14 @@
   "def-weil-finite-dimensional-subspace",
   "lem-sc-finite-generated-integral-subring",
   "lem-weil-pbc-integral-injective-lying-over",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "E3",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0BSR, lemma-etale-makes-integral-split, first proof, finite intermediate model S-prime. The item explicitly requests the fraction-numerator/denominator variant: finite spanning families and pairwise incomparability witnesses avoid localizing the base or applying CRT. The finite-dimensional residue-field argument is written out using Algebra Tag 00GS."
+  "place": "Tag 0BSR first proof, fraction-representative variant. Steps 1–5 and 7 are implemented as planned; step 6 uses the proved Mathlib finite-residue-field API and the canonical field-range equivalence."
  },
  "mathlib_searches": [
   {
@@ -239,5 +238,15 @@
   "group": "NJ",
   "result": "pass",
   "note": "Checked the item node, its 7 proof steps and source place (Stacks 0BSR, fraction-numerator/denominator variant), the stmt_dep def-weil-pbc-finite-purely-inseparable-extension, the delivered module and report.md. Clause by clause: arbitrary A→D, Algebra.IsIntegral, finite primesOver fibre with t=0 allowed, the k-embedding is Ideal.ResidueField.map p r (over_def), F is an IntermediateField with FiniteDimensional, IsSeparable and IsPurelyInseparable. The conclusion has Subalgebra C, Module.Finite, Set.BijOn on primesOver, L pinned to the fieldRange of ResidueField.map (r.comap C.val) r C.val, F ≤ L, L finite over k, E/L purely inseparable, and Algebra.IsIntegral C D. Nothing is stronger than the node and the universes are independent. Edge cases hold: empty fibre, D=0, char 0/p, infinite purely inseparable E/F, C not a domain. No duplicate in Mathlib or side-live (WeaklyEtaleFiniteResidueModel and IntegralNormalResidueEtaleSplitting differ). lean.statement is verbatim, stmt_deps are unchanged, there are no definitions and the proof is sorry. Docstrings carry the source, blueprint tag and proof steps. No fixes, so no compile; the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T171737-L-3121882",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
