@@ -23359,3 +23359,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:36 L: merged deliver/Q10/lem-sfb-equivariant-resolution-bar-normalization (reviewer PASS; first push; new nodes: 1)
 - 18:37 L: merged deliver/NZ/lem-sfb-wcontractible-component-derived-hom (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T18:37:56Z L: superseded stage-1 delivery NV/lem-zl-raw-heart-adic-lisse-stratification at 64d1240629c6b726660395ff3b1477c82b01420c; current completion retained; packet archived at refs/superseded/NV/lem-zl-raw-heart-adic-lisse-stratification/64d1240629c6b726660395ff3b1477c82b01420c; stale return retired.
+- 18:38 L: merged deliver/NS/lem-sfb-snc-finite-root-face-regular (stage 2; reviewer PASS; parallel immutable checks)

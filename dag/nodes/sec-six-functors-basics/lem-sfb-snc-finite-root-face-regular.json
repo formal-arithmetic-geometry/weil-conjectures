@@ -266,5 +266,23 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-a1e5b9d1e (reviewer sub-agent of L); spot-checked: I read all 7 steps in full against the statements of all 13 cited nodes and the sources: ILO IX Prop 2.1 pp.133-134 (the root algebra is displayed but regularity is left implicit, so proof_origin=agent is honest), Stacks 0BIA etale.tex:2419 and 07PF more-algebra.tex:11798. The induction claim is stated explicitly (B_{L,K} regular for all L⊆S, K⊆I∖L, induction on |K|) and is not circular. Step 4 gets t_i≠0 in R_L from the SNC dimension equalities and then uses the domain node plus the free monomial basis. Step 5 meets all four hypotheses of lem-sbc-root-algebra-regular-at-root, with D/(t_i)≅B_{L∪i,K'} as an admissible index. Step 6 is the unit-derivative criterion on F[T]/(T^n−t_i), F=D[1/t_i]. Step 7 is a localization assembly and is fairly marked elementary. Small cases check out: r=0, A=0, n=1, k[s,t] with n=2, disjoint branches giving the zero ring, and transverse s, s−t(t−1) giving k[t]/(t(t−1)). The statement is unchanged and there are no new nodes. lem-sfb-snc-finite-root-regular-ring is the J=∅ special case, not a duplicate. Batch-5 flag: lem-trf-polynomial-ring-regular-base is a Mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing) with no deps; the 148-node closure has no cycle and its only trf nodes are this leaf and the SNC definition. It is generic algebra outside both assumptions, so I accept it. The five tool_uses are generic algebra and accepted; under C8 the worker should not record them, which is advisory. Maintainer note: the J=∅ node could become a corollary of this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCFiniteRootFaceRegular",
+  "declaration": "AlgebraicGeometry.isRegularRing_snc_finiteRoot_face",
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCFiniteRootFaceRegular.lean",
+  "statement": "theorem isRegularRing_snc_finiteRoot_face (A : Type u) [CommRing A] (hA : IsRegularScheme (Spec (.of A))) (r : ℕ) (t : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hreduced : ∀ i : Fin r, _root_.IsReduced (A ⧸ Ideal.span ({t i} : Set A))) (hdistinct : Function.Injective (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A))) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (n : ℕ) (hn : 0 < n) (hnunit : IsUnit (n : A)) (J : Set (Fin r)) : IsRegularRing ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ (MvPolynomial.X i : MvPolynomial (Fin r) A) ^ n - MvPolynomial.C (t i)))) ⧸ Ideal.map (Ideal.Quotient.mk (Ideal.span (Set.range (fun i : Fin r ↦ (MvPolynomial.X i : MvPolynomial (Fin r) A) ^ n - MvPolynomial.C (t i))))) (Ideal.span ((fun j : Fin r ↦ (MvPolynomial.X j : MvPolynomial (Fin r) A)) '' J)))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b71119e50",
+  "group": "NS",
+  "result": "pass",
+  "note": "Only the lean record changes and lean.statement is verbatim in the file. Hypotheses match the node with no extras: regular Spec A (IsRegularScheme); t : Fin r → A with r = 0 allowed; IsStrictNormalCrossingsBoundary H; the reduced/distinct/precise-branch hypotheses are the same interface as the landed sibling isRegularRing_snc_finiteRoot. n > 0 and IsUnit (n : A). The conclusion is IsRegularRing of the literal MvPolynomial root quotient modulo Ideal.map mk (span (X '' J)), with J : Set (Fin r) universally quantified; IsRegularRing extends IsNoetherianRing. Edge cases J = ∅, r = 0, A = 0, n = 1 and empty or disconnected strata are covered. No duplicate in side-live lean or dag; the sibling is only the J = ∅ case. No definitions, proof is sorry, source and blueprint docstrings present with all 7 proof steps, imports identical to the sibling and covering every proof dep. Not recompiled per instruction."
  }
 }
