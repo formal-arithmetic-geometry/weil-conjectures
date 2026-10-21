@@ -1,8 +1,8 @@
 # Work queue
 
-186 items; claim with `tools/claim.py next <group> [--stage N]`.
+296 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (13 clusters, 1358 modules)
+## Rework: quarantined by the upstream sync (12 clusters, 1358 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -19,213 +19,358 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.DerivedTensorTruncationWindow` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.EllAdicBoundedConstructibleProperAdjoint` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 27, stage 3 353 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 55, stage 3 267 items.
 
-## Stage 1: nodes to split (102)
+## Stage 1: nodes to split (152)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `prop-weil-pbc-qbar-condensed-two-colimit` | 0 | rests_on_sorry |
-| `lem-pd-module-ringed-topos-derived-comparison` | 1 | none |
 | `prop-weil-pbc-scalar-extension` | 1 | none |
-| `def-pd-proetale-section-module-functors` | 2 | none |
-| `lem-weil-pbc-constant-completion-equivalence` | 2 | none |
-| `lem-weil-pbc-integral-stratified-perfect-characterization` | 2 | none |
-| `lem-weil-pbc-ringed-projection-mate-exact` | 2 | none |
-| `lemma-weil-pbc-perfect-projection-formula` | 2 | none |
-| `prop-weil-pbc-direct-image-limits` | 2 | none |
+| `lem-pd-monoidal-adjunction-equivalence-transport` | 3 | none |
+| `lem-pd-ringed-direct-image-pairing-lax` | 3 | none |
+| `lem-pd-ringed-tensor-adjunction-mate` | 3 | none |
 | `lem-pur-finite-coefficient-adjoint-comparisons` | 3 | none |
-| `lem-weil-pbc-comparison-injective-acyclicity` | 3 | rests_on_sorry |
-| `lem-weil-pbc-condensed-e-realization` | 3 | none |
-| `lem-weil-pbc-ringed-projection-restriction` | 3 | none |
-| `lem-weil-pbc-lisse-e-constructible-integral-lattice` | 4 | none |
+| `lem-weil-pbc-bounded-complex-triangulated-devissage` | 3 | none |
+| `lem-weil-pbc-flat-scalar-restriction-kflat` | 3 | none |
+| `lem-weil-pbc-formal-exact-projection-mate` | 3 | none |
+| `lem-weil-pbc-pullback-tensor-canonical-shift-unit` | 3 | none |
+| `lem-weil-pbc-ringed-common-quotient-pullback-comparison` | 3 | none |
+| `lem-weil-pbc-strict-perfect-ringed-pullback-model` | 3 | none |
+| `lem-weil-pbc-finite-basis-cech-first-limit` | 4 | none |
+| `lem-weil-pbc-finite-etale-cover-cech-stage-comparison` | 4 | none |
+| `lem-weil-pbc-finite-intersection-limit-compatibility` | 4 | none |
+| `lem-weil-pbc-realization-adjoint-comparisons` | 4 | none |
 | `lemma-weil-pbc-completed-pullback-reduction` | 4 | none |
-| `sk-thm-properbasechange` | 4 | rests_on_sorry |
 | `lem-sbc-completed-operations-linear-natural-exchange` | 5 | none |
-| `lem-weil-pbc-scalar-localization-sheaf-exact` | 5 | none |
+| `lem-weil-pbc-discrete-exchange-site-comparison` | 5 | none |
+| `lem-weil-pbc-heart-test-bounded-below` | 5 | none |
+| `lem-weil-pbc-lisse-e-constructible-integral-lattice` | 9 | none |
+| `lem-weil-pbc-smooth-curve-etale-structure-direct-images` | 16 | none |
 | `lem-weil-pbc-coherent-affine-base-change-edge-naturality` | 17 | none |
-| `lem-sfb-filtered-ring-object-cocone-colimit` | 1001 | none |
+| `sk-prop-sfb-qlbar-colimit-x` | 1000 | rests_on_sorry |
 | `lem-weil-finite-free-completed-scalar-comparison` | 1001 | none |
 | `lem-sf-compact-support-restriction-of-scalars` | 1002 | none |
 | `lem-sf-integral-compact-support-constructible` | 1002 | none |
 | `lem-weil-compact-support-reduction-tower-functor` | 1002 | none |
 | `lem-weil-integral-scalar-extension-well-defined` | 1002 | none |
-| `det-sf-comp-composition-interchange` | 1004 | none |
-| `lem-pur-completed-coefficient-pushforward-comparison` | 1004 | none |
+| `lem-pur-diagram-ring-restriction-pushforward` | 1005 | none |
+| `lem-pur-roos-intrinsic-completeness-equivalence` | 1005 | none |
+| `def-weil-common-stage-derived-direct-image` | 1016 | none |
 | `det-def-sp-tate-twist-locally-free` | 2000 | none |
 | `lem-sf-integral-direct-image-constructible` | 2002 | none |
-| `det-prop-sfb-cartesian-coefficients-twists` | 2003 | none |
 | `det-sf-comp-coherence-cocycle` | 2003 | none |
 | `lem-cbc-completed-extension-zero-comparison` | 2003 | none |
-| `lem-cbc-adic-pullback-presentation-transport` | 2004 | none |
-| `lem-cbc-ringed-open-extension-products` | 2004 | none |
-| `lem-pe-comparison-injective-left-modules-acyclic` | 2004 | sorry_here |
 | `det-sf-existence-brown` | 2005 | none |
+| `lem-cbc-constant-derived-limit-resolution-unit` | 2005 | none |
+| `lem-cbc-derived-constant-tower-normalization` | 2005 | none |
+| `lem-cbc-derived-finite-quotient-coherence` | 2005 | none |
+| `lem-cbc-derived-tower-evaluation-normalization` | 2005 | none |
+| `lem-cbc-finite-constant-map-naturality` | 2005 | none |
+| `lem-cbc-open-localized-counit-comparison` | 2005 | none |
+| `lem-cbc-strict-quotient-pullback-computation` | 2005 | none |
+| `lem-pe-left-module-comparison-vanishing-criterion` | 2005 | none |
+| `lem-pe-ringed-site-derived-evaluation-slice` | 2005 | none |
+| `lem-pur-adic-line-system-base-change` | 2005 | none |
 | `lem-pur-etale-compact-scalar-coherence` | 2005 | none |
+| `lem-pur-signed-line-derived-base-change` | 2005 | none |
+| `lem-pur-site-representable-algebraic-pullback` | 2005 | none |
+| `lem-pur-torsion-line-system-base-change` | 2005 | none |
 | `lem-fix-operation-reduction` | 3002 | none |
+| `lem-sfb-transfinite-plus-finite-limits` | 3005 | none |
+| `lem-sfb-transfinite-plus-sheaf-convergence` | 3005 | none |
+| `lem-sfb-transfinite-plus-sheaf-orthogonality` | 3005 | none |
 | `lem-coef-derived-system-evaluation-calculus` | 5002 | none |
 | `lem-fix-compact-support-coefficient-change` | 5003 | none |
-| `lem-sf-module-object-ordinary-coefficient-equivalence` | 5004 | none |
-| `sk-prop-sf-rf-shriek-preservation` | 5004 | rests_on_sorry |
-| `det-def-sfb-filtered-two-colimit-characterization` | - | none |
-| `det-thm-sfb-proper-base-change-rational` | - | none |
-| `def-sfb-module-linear-open-lower-shriek` | - | rests_on_sorry |
-| `def-sfb-module-open-lower-shriek` | - | rests_on_sorry |
-| `det-lem-integral-models-generators` | - | none |
-| `det-lem-integral-models-operations` | - | none |
-| `det-prop-scalar-six-pullback` | - | none |
+| `lem-sf-bounded-below-hom-test` | 5005 | none |
+| `lem-sfb-constant-scalar-geometric-adjunctions` | 5005 | none |
+| `lem-sfb-constant-scalar-restriction-tensor` | 5005 | none |
+| `lem-sfb-ring-isomorphism-tensor-transport` | 5005 | none |
+| `lem-sfb-scalar-normalized-constant-models` | 5005 | none |
 | `det-prop-sfb-cartesian-coefficients-finite-free` | - | none |
-| `det-thm-sfb-proper-base-change-integral` | - | none |
-| `lem-pur-integral-operations-scalar-extension` | - | none |
-| `lem-sfb-dc-lower-star-preserves` | - | none |
-| `lem-sfb-dc-open-lower-shriek-preserves` | - | none |
+| `lem-sfb-coefficient-projection-square` | - | none |
+| `lem-sfb-coefficient-push-filtered-legs` | - | none |
+| `lem-sfb-common-field-lattice-generators` | - | none |
 | `lem-sfb-dc-upper-star-preserves` | - | none |
-| `lem-sfb-extend-to-qlbar-constructible` | - | sorry_here |
-| `lem-sfb-internal-module-operations-transport` | - | none |
+| `lem-sfb-derived-exchange-exact-normalization` | - | none |
+| `lem-sfb-subfield-push-iso` | - | sorry_here |
 | `sk-def-sfb-module-lower-shriek` | - | sorry_here |
-| `sk-prop-sfb-cartesian-coefficients` | - | rests_on_sorry |
-| `det-def-localizing-closure-ctf-equals-bc` | - | none |
-| `det-lem-coefficient-heart-filtration` | - | none |
-| `det-pe-derived-nakayama-first-reduction` | - | none |
-| `det-prop-integral-criterion-reductions` | - | none |
-| `det-sp-reduction-direct-image` | - | none |
-| `det-sp-reduction-exceptional` | - | none |
 | `det-sp-scalar-extension-functor` | - | none |
-| `det-thm-sfb-proper-base-change-finite` | - | none |
-| `lem-sfb-dc-hom-small-coefficients` | - | none |
-| `lem-sfb-qlbar-tail-module-colimit` | - | none |
-| `prop-sfb-module-left-derived-upper-star-comp` | - | none |
+| `lem-pur-finite-free-completion-exchange` | - | none |
+| `lem-pur-finite-free-completion-exchange-coherence` | - | none |
+| `lem-pur-integral-ambient-operation-models` | - | none |
+| `lem-pur-scalar-hom-comparison-tower` | - | none |
+| `lem-sfb-closed-supported-scalar-comparison` | - | none |
+| `lem-sfb-equivalence-square-inverse-mate-coherence` | - | none |
+| `lem-sfb-exact-open-closed-unbounded-calculus` | - | none |
+| `lem-sfb-filtered-colimit-flat-module-sheaves` | - | none |
+| `lem-sfb-finite-discrete-constructible-model` | - | none |
+| `lem-sfb-integral-ambient-tower-comparison` | - | none |
+| `lem-sfb-integral-constructible-completion-bridge` | - | none |
+| `lem-sfb-integral-quotient-direct-image-comparison` | - | none |
+| `lem-sfb-integral-quotient-exchange-comparison` | - | none |
+| `lem-sfb-integral-quotient-projection-comparison` | - | none |
+| `lem-sfb-internal-scalar-extension-section-test` | - | none |
+| `lem-sfb-internal-section-scalar-adjunction` | - | none |
+| `lem-sfb-kflat-scalar-comparison-normalization` | - | none |
+| `lem-sfb-lfp-scalar-isomorphism` | - | none |
+| `lem-sfb-localized-direct-image-comparison` | - | none |
+| `lem-sfb-modobj-restriction-finite-exact` | - | none |
+| `lem-sfb-normalized-immersion-comparison-coherence` | - | none |
+| `lem-sfb-normed-coefficient-realization` | - | none |
+| `lem-sfb-open-module-restriction-identities` | - | none |
+| `lem-sfb-open-scalar-conjugate-normalization` | - | none |
+| `lem-sfb-qlbar-direct-image-comparison` | - | none |
+| `lem-sfb-scalar-inverse-image-tower-diagram` | - | none |
+| `lem-sfb-section-ring-lax-pushforward-coherence` | - | none |
 | `sk-def-pe-derived-completion` | - | none |
 | `sk-lem-integral-models` | - | none |
-| `sk-lem-stratified-lattice` | - | none |
-| `det-lem-integral-models-stacks` | - | none |
-| `det-pe-derived-nakayama-resolution` | - | none |
-| `lem-sf-semilinear-proper-open-mate-pasting` | - | none |
-| `lem-sfb-abelian-functorial-flat-resolution` | - | none |
-| `lem-sfb-adic-constructibility-predicate-comparison` | - | none |
-| `lem-sfb-condensed-subfield-basis` | - | none |
-| `lem-sfb-constructible-cocone-obj` | - | sorry_here |
-| `lem-sfb-constructible-internal-hom-continuity` | - | none |
-| `lem-sfb-dc-hom-filtered-colimit` | - | none |
-| `lem-sfb-finite-field-internal-hom-finiteness` | - | none |
-| `lem-sfb-finite-free-scalar-coordinates` | - | none |
-| `lem-sfb-integral-cohomological-adic-criterion` | - | none |
-| `lem-sfb-monoidal-finite-free-transport` | - | none |
-| `lem-sfb-pullback-constant-model-constructible` | - | none |
-| `lem-sfb-sheaf-pushforward-generator-comparison` | - | none |
-| `lem-sp-direct-image-change-ring-transpose` | - | none |
-| `lem-sp-et-proet-coefficient-compatibility` | - | none |
-| `thm-sfb-extend-scalars-localization` | - | sorry_here |
-| `det-ctf-finite-proper-localizing` | - | none |
-| `lem-sfb-adic-stratified-perfect` | - | none |
-| `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
-| `lem-sfb-etale-proetale-scalar-mate` | - | none |
-| `lem-sfb-exact-derived-composition` | - | none |
-| `lem-sfb-exact-derived-natural-iso` | - | none |
-| `lem-sfb-internal-scalar-extension-finite-presentation` | - | none |
+| `sk-prop-sfb-cartesian-coefficients` | - | rests_on_sorry |
+| `lem-pe-finite-scalar-restriction-constructible` | - | none |
+| `lem-sfb-adic-proper-localizing-adjunction-comparison` | - | none |
+| `lem-sfb-projection-comparison-etale-proetale` | - | none |
+| `lem-sfb-scalar-coordinate-limit-criterion` | - | none |
+| `lem-sfb-scalar-presentation-cokernel` | - | none |
+| `lem-sfb-stratified-local-cohomological-bounds` | - | none |
+| `lem-sfb-tor-interval-local-detection` | - | none |
+| `lem-sp-chart-counit-scalar-transport` | - | none |
+| `lem-sp-chart-finite-ring-adjunction` | - | none |
+| `lem-sp-chart-left-scalar-normalization` | - | none |
+| `lem-sp-etale-ctf-chart-domain` | - | none |
+| `lem-sp-open-exceptional-scalar-locality` | - | none |
+| `lem-sp-open-proetale-counit-scalar` | - | none |
+| `lem-sp-smooth-admissible-coordinate-cover` | - | none |
+| `lem-sf-adjunct-conjugate-open-factor` | - | none |
+| `lem-sf-semilinear-alpha-pullback` | - | none |
+| `lem-sf-semilinear-clopen-unit-projector` | - | none |
+| `lem-sf-semilinear-compositor-coherence` | - | none |
+| `lem-sf-semilinear-scalar-derived-comparison` | - | none |
+| `lem-sf-semilinear-scalar-ordinary-comparison` | - | none |
+| `lem-sfb-closed-support-bounded-continuity` | - | none |
+| `lem-sfb-constructible-local-tor-etale-origin` | - | none |
+| `lem-sfb-finite-etale-trace-image` | - | none |
+| `lem-sfb-finite-field-stratified-generation` | - | none |
+| `lem-sfb-finite-local-model-rhom-continuity` | - | none |
+| `lem-sfb-finite-sum-lattice` | - | none |
+| `lem-sfb-integral-derived-extension-comparison` | - | none |
+| `lem-sfb-lattice-pullback` | - | none |
+| `lem-sfb-local-integral-perfect-model-cohomology` | - | none |
 | `lem-sfb-module-object-ringed-site-derived-comparison` | - | none |
-| `lem-sp-acyclic-flat-proper-coefficient-model` | - | none |
-| `lem-sp-varying-ring-proper-open-pasting` | - | none |
+| `lem-sfb-rational-derived-scalar-invertible` | - | none |
+| `lem-sfb-rhom-continuity-open-extension` | - | none |
+| `lem-sfb-rhom-continuity-triangle-closure` | - | none |
+| `lem-sfb-subfield-extension-local-presentation` | - | none |
+| `lem-sfb-subobject-inclusion-cokernel` | - | none |
 | `det-brown-hypotheses-small` | - | none |
+| `lem-sfb-adic-perfect-model-complete-reduction` | - | none |
+| `lem-sfb-base-coefficient-condensed-identification` | - | none |
+| `lem-sfb-finite-classical-localizing` | - | none |
+| `lem-sfb-ringed-complete-triangulated` | - | none |
+| `lem-sfb-shriek-coefficient-isomorphism` | - | none |
+| `lem-sp-exact-derived-transformation-pasting` | - | none |
+| `lem-sp-ordinary-horizontal-pasting-transport` | - | none |
+| `lem-sp-ordinary-vertical-pasting-transport` | - | none |
+| `lem-sp-varying-ring-cartesian-comparison-lift-relabelling` | - | none |
+| `lem-sp-varying-ring-cartesian-lift-pullback-equivalence` | - | none |
+| `lem-sp-varying-ring-open-unit-coherence` | - | none |
+| `lem-sp-varying-ring-pullback-unit-coherence` | - | none |
+| `lem-sfb-finite-proper-classical-neighborhood-vanishing` | - | none |
+| `lem-sp-etale-derived-chain-transpose` | - | none |
+| `lem-sp-flat-coefficient-chain-transpose` | - | none |
 
-## Stage 2: nodes to state (0)
+## Stage 2: nodes to state (50)
 
+| node | distance to Mathlib | kind | blockers |
+|---|---|---|---|
+| `sk-def-sfb-coefficient-comparisons` | 1 | state | 0 |
+| `lem-weil-pbc-realization-scalar-functor` | 1 | state | 3 |
+| `lem-weil-pbc-tower-derived-evaluation-normalization` | 1 | state | 2 |
+| `lem-pe-roos-cone-calculus` | 1 | state | 1 |
+| `lem-weil-pbc-kflat-fixed-tensor-triangulated` | 1 | state | 1 |
+| `lem-weil-pbc-reduction-pullback-derived-tower` | 1 | state | 1 |
+| `lem-pe-comparison-etale-slice-abelian-pullback` | 1 | state | 0 |
+| `lem-pe-profinite-sections-finite-quotient` | 1 | state | 0 |
+| `lem-pe-scalar-cone-tensor-model` | 1 | state | 0 |
+| `lem-pe-successive-quotient-linear-triangle` | 1 | state | 0 |
+| `lem-pur-ringed-derived-composition-cocycle` | 1 | state | 0 |
+| `lem-sf-etale-chart-adjoint-comparison` | 1 | state | 0 |
+| `lem-sf-etale-stalk-tor-test` | 1 | state | 0 |
+| `lem-sf-localizing-hom-test` | 1 | state | 0 |
+| `lem-sf-normalized-derived-comparison-composition` | 1 | state | 0 |
+| `lem-sfb-adic-stratum-completion-unit` | 1 | state | 0 |
+| `lem-sfb-bounded-bifunctor-devissage` | 1 | state | 0 |
+| `lem-sfb-coefficient-cocone-comparison-agreement` | 1 | state | 0 |
+| `lem-sfb-constructible-cocone-ambient-realization` | 1 | state | 0 |
+| `lem-sfb-continuous-lattice-sum` | 1 | state | 0 |
+| `lem-sfb-etale-proetale-scalar-counit-transposes` | 1 | state | 0 |
+| `lem-sfb-etale-proetale-scalar-pullback-cube` | 1 | state | 0 |
+| `lem-sfb-finite-field-closed-support` | 1 | state | 0 |
+| `lem-sfb-finite-field-proetale-direct-image` | 1 | state | 0 |
+| `lem-sfb-finite-proper-classical-coproducts` | 1 | state | 0 |
+| `lem-sfb-finite-proper-classical-truncation` | 1 | state | 0 |
+| `lem-sfb-finite-proper-geometric-cd-bound` | 1 | state | 0 |
+| `lem-sfb-flat-dvr-scalar-tensor` | 1 | state | 0 |
+| `lem-sfb-flat-scalar-cyclic-resolution` | 1 | state | 0 |
+| `lem-sfb-grothendieck-sheafification` | 1 | state | 0 |
+| `lem-sfb-hom-flat-evaluation-roof` | 1 | state | 0 |
+| `lem-sfb-hom-kflat-chain-transpose` | 1 | state | 0 |
+| `lem-sfb-hom-scalar-chain-identification` | 1 | state | 0 |
+| `lem-sfb-internal-hom-localization-comparison` | 1 | state | 0 |
+| `lem-sfb-locally-free-derived-scalars` | 1 | state | 0 |
+| `lem-sfb-proper-geometric-fibre-torsion-bound` | 1 | state | 0 |
+| `lem-sfb-scalar-matrix-inverse-image` | 1 | state | 0 |
+| `lem-sfb-scalar-model-finite-flat-resolution` | 1 | state | 0 |
+| `lem-sfb-square-zero-periodic-tensor` | 1 | state | 0 |
+| `lem-sp-etale-sum-coefficient-computation` | 1 | state | 0 |
+| `lem-sp-finite-compact-site-coherence` | 1 | state | 0 |
+| `lem-sp-finite-ring-action-local-constancy` | 1 | state | 0 |
+| `lem-sp-open-scalar-site-coherence` | 1 | state | 0 |
+| `lem-weil-pbc-direct-image-roos-normalization` | 1 | state | 0 |
+| `lem-weil-pbc-finite-field-stratified-perfect-models` | 1 | state | 0 |
+| `lem-weil-pbc-flat-common-quotient-reduction-tower` | 1 | state | 0 |
+| `lem-weil-pbc-flat-constant-tensor-pro-zero-cones` | 1 | state | 0 |
+| `lem-weil-pbc-ringed-slice-comparisons-shift` | 1 | state | 0 |
+| `lem-weil-pbc-ringed-slice-pullback-mate-normalization` | 1 | state | 0 |
+| `lem-weil-pbc-stratum-completion-unit-restriction` | 1 | state | 0 |
 
-Not open yet: 301 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up), 15 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 300 nodes that below a finished node, not needed, 90 nodes that wait for a statement dependency (bottom-up), 120 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (61)
+## Stage 3: modules to prove (72)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `Sheaf.AlgebraicGeometry.RelativeProjExists` | 10 | 1 | repair | route |
-| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 10 | 1 | repair | route |
-| `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
-| `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` | 1 | 2 | proof | route |
-| `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 2 | 10 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 4 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 10 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 5 | 1 | proof | route |
-| `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 5 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 7 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.SingleProperOpenFiniteNormalization` | 8 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek` | 8 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.StrictTowerAlphaEvaluation` | 9 | 1 | proof | route |
-| `Sheaf.Paper.FiniteComparisonPresentation` | 9 | 1 | proof | route |
-| `WeilConjectures.WeilSheaf.PoincareDualityLisse` | 9 | 1 | proof | route |
-| `Sheaf.Paper.AdicConstructibleFiniteReductions` | 11 | 1 | proof | route |
-| `Sheaf.Paper.CompletedDirectImageLimits` | 3 | 2 | proof | 1 |
-| `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 2 | proof | 1 |
-| `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 2 | proof | 1 |
-| `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 1 |
-| `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 1 |
-| `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 1 |
-| `Sheaf.Paper.ConstantCompletionEquivalence` | 4 | 15 | proof | 2 |
-| `Sheaf.CategoryTheory.SheafificationTensorLocalIso` | 6 | 1 | proof | 2 |
-| `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | 6 | 5 | proof | 2 |
-| `Sheaf.Paper.IntegralOperationsWellDefined` | 6 | 2 | proof | 2 |
-| `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | 7 | 11 | proof | 2 |
-| `Sheaf.Paper.ProEtaleConstantReductionTower` | 8 | 7 | proof | 2 |
-| `Sheaf.Paper.PointSectionsScalarExtension` | 9 | 14 | proof | 2 |
+| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 11 | 1 | repair | route |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | - | 4 | proof | route |
+| `Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison` | - | 1 | proof | 1 |
+| `Sheaf.Paper.CohomologyTorInterval` | - | 1 | proof | 1 |
+| `Sheaf.Paper.CompletedDirectImageLimits` | - | 2 | proof | 1 |
+| `Sheaf.Paper.DerivedInternalHomFilteredColimit` | - | 2 | proof | 1 |
+| `Sheaf.Paper.ProEtaleConstructibleExactClosure` | - | 1 | proof | 1 |
+| `Sheaf.Paper.ProjectionMateExact` | - | 1 | proof | 1 |
+| `Sheaf.Paper.SfIntegralDirectImageConstructible` | - | 1 | proof | 1 |
+| `Sheaf.AlgebraicGeometry.InternalExtensionInverseImage` | - | 1 | proof | 2 |
+| `Sheaf.CategoryTheory.FilteredRingObjectCoconeColimit` | - | 2 | proof | 2 |
 | `Sheaf.CategoryTheory.ScalarLocalizationDerivedHom` | - | 2 | proof | 2 |
+| `Sheaf.CategoryTheory.ScalarLocalizationSheafExact` | - | 1 | proof | 2 |
+| `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | proof | 2 |
+| `Sheaf.Paper.ConstantCompletionEquivalence` | - | 15 | proof | 2 |
+| `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 2 |
+| `Sheaf.Paper.IntegralOperationsWellDefined` | - | 2 | proof | 2 |
+| `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | - | 2 | proof | 2 |
 | `Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.PerfectProjectionFormula` | - | 3 | proof | 2 |
+| `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | proof | 2 |
+| `Sheaf.Paper.ProEtaleConstantReductionTower` | - | 7 | proof | 2 |
+| `Sheaf.Paper.RingedProjectionRestriction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.WeilTensorProduct` | - | 4 | proof | 2 |
-| `Sheaf.CategoryTheory.RingedSiteDualityMaps` | 4 | 4 | proof | 3 |
-| `Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction` | 5 | 1 | proof | 3 |
-| `Sheaf.Paper.DerivedNakayamaResolution` | 5 | 1 | proof | 3 |
-| `Sheaf.Paper.IntegralScalarExtensionWellDefined` | 6 | 2 | proof | 3 |
-| `Sheaf.Paper.CoefficientExtensionReductionModel` | 7 | 1 | proof | 3 |
-| `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | 11 | 1 | proof | 3 |
-| `Sheaf.Paper.ExceptionalCoefficientComparison` | 11 | 3 | proof | 3 |
+| `Sheaf.CategoryTheory.SheafificationTensorLocalIso` | 10 | 1 | proof | 3 |
+| `Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction` | - | 1 | proof | 3 |
+| `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 3 |
+| `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | - | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk` | - | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.ProEtaleAmbientOperationsScalarLinearity` | - | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProducts` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.FilteredTwoColimitCharacterization` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.FilteredTwoColimitModel` | - | 15 | proof | 3 |
+| `Sheaf.CategoryTheory.FiniteFreeScalarCoordinates` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.MonoidalFiniteFreeTransport` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.RationalizationLocalizationHomCriterion` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.RingedSiteDualityMaps` | - | 4 | proof | 3 |
+| `Sheaf.CategoryTheory.ScalarUnitEqualityDetection` | - | 1 | proof | 3 |
+| `Sheaf.FieldTheory.CondensedSubfieldBasis` | - | 1 | proof | 3 |
+| `Sheaf.Paper.CoefficientExtensionReductionModel` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CondensedCompactSupportProjection` | - | 7 | proof | 3 |
+| `Sheaf.Paper.DerivedNakayamaResolution` | - | 1 | proof | 3 |
 | `Sheaf.Paper.EtaleCompactScalarCoherence` | - | 4 | proof | 3 |
+| `Sheaf.Paper.ExceptionalCoefficientComparison` | - | 3 | proof | 3 |
+| `Sheaf.Paper.IntegralScalarExtensionWellDefined` | - | 2 | proof | 3 |
+| `Sheaf.Paper.LevelwiseAdicTruncations` | - | 5 | proof | 3 |
+| `Sheaf.Paper.QlbarTailModuleColimit` | - | 1 | proof | 3 |
 | `Sheaf.Paper.ShiftedTensorMorphismCalculus` | - | 4 | proof | 3 |
 | `Sheaf.SixFunctors.SchemeGeometricFrobenius` | - | 1 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 9 | proof | 3 |
-| `Sheaf.Paper.CompletedProjectionCoherence` | 7 | 1 | proof | 4 |
-| `Sheaf.Paper.EtaleProEtaleScalarMate` | 8 | 3 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.VaryingRingOperations` | 9 | 4 | proof | 4 |
+| `Sheaf.AlgebraicGeometry.AffineRootsRepresentability` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting` | - | 1 | proof | 4 |
+| `Sheaf.CategoryTheory.ExactDerivedComposition` | - | 1 | proof | 4 |
+| `Sheaf.CategoryTheory.ExactFaithfulTorsion` | - | 5 | proof | 4 |
 | `Sheaf.CategoryTheory.RingedToposBinaryDescent` | - | 1 | proof | 4 |
-| `Sheaf.Paper.AcyclicFlatProperCoefficientModel` | - | 1 | proof | 4 |
+| `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | proof | 4 |
+| `Sheaf.Paper.EtaleProEtaleScalarMate` | - | 3 | proof | 4 |
+| `Sheaf.Paper.FiniteSubextensionsDirected` | - | 1 | proof | 4 |
 | `Sheaf.Paper.PointSectionsFiniteReduction` | - | 2 | proof | 4 |
+| `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.SupportQuotientProduct` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.SupportedProductLocalization` | - | 2 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution` | - | 2 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.VaryingRingOperations` | - | 4 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation` | - | 1 | proof | 5 |
+| `Sheaf.Paper.AcyclicFlatProperCoefficientModel` | - | 1 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison` | - | 9 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.SupportedCoefficientOpenTensor` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.SupportedCoefficientSecondOpenTensor` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ExternalRHomConePairing` | - | 1 | proof | 6 |
 
-## Stage 3: waiting for statements of dependencies (14)
+## Stage 3: waiting for statements of dependencies (47)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `lem-sfb-adic-constructibility-predicate-comparison` |
-| `Sheaf.Paper.CompletedCondensedCoefficients` | 3 | 2 | `lem-sfb-filtered-ring-object-cocone-colimit` |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | 5 | 5 | `det-def-sfb-filtered-two-colimit-characterization` |
-| `Sheaf.Paper.CompletedOpenExchangeTransport` | 6 | 1 | `lem-cbc-ringed-open-extension-products` |
-| `Sheaf.SixFunctors.IntegralRestrictionLine` | 6 | 1 | `det-prop-diagonal-tower-coefficients` |
-| `Sheaf.Targets.AffineSpaceRationalLine` | 8 | 1 | `det-prop-p1-adjunction-rational-triangle` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | - | 1 | `lem-sfb-adic-proper-localizing-adjunction-comparison` |
+| `Sheaf.AlgebraicGeometry.IntegralModelsStacks` | - | 1 | `lem-sfb-constructible-local-tor-etale-origin` |
+| `Sheaf.AlgebraicGeometry.InternalExtensionFinitePresentation` | - | 1 | `lem-sfb-grothendieck-sheafification` |
+| `Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible` | - | 1 | `lem-sfb-scalar-matrix-inverse-image` |
+| `Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages` | - | 1 | `lem-weil-pbc-coherent-affine-base-change-edge-naturality` |
+| `Sheaf.Paper.AdicPullbackPresentationTransport` | - | 4 | `lem-cbc-finite-constant-map-naturality` |
+| `Sheaf.Paper.CartesianCoefficientTwists` | - | 5 | `lem-pur-adic-line-system-base-change` |
+| `Sheaf.Paper.CoefficientHeartFiltration` | - | 1 | `lem-sfb-subobject-inclusion-cokernel` |
+| `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | `lem-pur-diagram-ring-restriction-pushforward` |
+| `Sheaf.Paper.CondensedERealization` | - | 1 | `det-sp-rational-localized-hom` |
+| `Sheaf.Paper.ConstructibleInternalHomContinuity` | - | 1 | `lem-sfb-bounded-finite-model-generation` |
+| `Sheaf.Paper.DerivedNakayamaFirstReduction` | - | 1 | `lem-pe-completion-triangle-comparison` |
+| `Sheaf.Paper.DirectImageChangeRingTranspose` | - | 1 | `lem-sp-proetale-scalar-tensor-normalization` |
 | `Sheaf.Paper.DlConstructibleFibresExact` | - | 1 | `lem-tw-lisse-rational-realization` |
+| `Sheaf.Paper.EtaleProEtaleCoefficientCompatibility` | - | 3 | `lem-sp-finite-coefficient-input-models` |
+| `Sheaf.Paper.ExceptionalInverseImageExistence` | - | 1 | `lem-sfb-base-coefficient-condensed-identification` |
 | `Sheaf.Paper.FiniteFreeCompactComposition` | - | 8 | `lem-pur-system-level-projection-formula-coherence` |
+| `Sheaf.Paper.FiniteLocalizingExceptionalPreservation` | - | 1 | `lem-sf-bounded-below-hom-test` |
+| `Sheaf.Paper.FiniteProperBaseChange` | - | 1 | `lem-sfb-proper-geometric-fibre-torsion-bound` |
+| `Sheaf.Paper.FiniteProperLocalizing` | - | 3 | `lem-sfb-finite-classical-localizing` |
 | `Sheaf.Paper.FiniteTorStability` | - | 15 | `cor-pur-affine-space-zero-section-purity` |
+| `Sheaf.Paper.IntegralCohomologicalAdicCriterion` | - | 1 | `lem-sfb-local-integral-perfect-model-cohomology` |
+| `Sheaf.Paper.IntegralCriterionReductions` | - | 8 | `lem-pe-finite-coefficient-model-comparison` |
+| `Sheaf.Paper.IntegralModels` | - | 1 | `lem-sfb-constant-field-tor-bounds` |
+| `Sheaf.Paper.IntegralModelsOperations` | - | 1 | `lem-sfb-scalar-model-immersion-extension` |
+| `Sheaf.Paper.IntegralOperationsScalarComparisons` | - | 13 | `lem-pur-finite-free-completion-exchange` |
+| `Sheaf.Paper.IntegralProperBaseChange` | - | 1 | `lem-sfb-integral-quotient-direct-image-comparison` |
+| `Sheaf.Paper.LocalizingClosureCtfEqualsBc` | - | 1 | `lem-sfb-scalar-model-finite-flat-resolution` |
+| `Sheaf.Paper.ModuleRingedToposDerivedComparison` | - | 3 | `lem-pd-section-derived-pushpull-normalization` |
+| `Sheaf.Paper.ProEtaleProperOpenInterchange` | - | 1 | `lem-sfb-derived-open-square-restriction` |
+| `Sheaf.Paper.ProEtaleSectionModuleFunctors` | - | 3 | `lem-pd-ringed-direct-image-pairing-lax` |
+| `Sheaf.Paper.ProperBaseChangeRational` | - | 6 | `lem-sfb-coefficient-push-filtered-legs` |
 | `Sheaf.Paper.RelativeSupportCoordinateModel` | - | 7 | `cor-pur-affine-space-zero-section-purity` |
+| `Sheaf.Paper.StratifiedLattice` | - | 1 | `lem-sfb-lattice-pullback` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `sk-thm-sf-tensor-hom` |
+| `Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction` | - | 1 | `lem-sf-normalized-derived-comparison-composition` |
+| `Sheaf.SecSmoothPurity.ReductionDirectImage` | - | 2 | `lem-sp-supported-etale-tensor-origin` |
+| `Sheaf.SecSmoothPurity.ReductionExceptional` | - | 2 | `lem-sp-smooth-admissible-coordinate-cover` |
+| `Sheaf.SecSmoothPurity.ScalarExtensionFunctor` | - | 15 | `lem-sp-finite-ring-action-local-constancy` |
 | `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | - | 8 | `lem-coef-finite-scalar-mate-realization` |
+| `Sheaf.SixFunctors.IntegralModelsGenerators` | - | 1 | `lem-sfb-lattice-subquotient-filtration` |
 | `Sheaf.SixFunctors.RationalOperations` | - | 1 | `lem-coef-finite-scalar-mate-realization` |
+| `Sheaf.SixFunctors.ScalarSixPullback` | - | 1 | `lem-sfb-closed-supported-scalar-comparison` |
 | `Sheaf.SmoothPurity.NormalizedWitness` | - | 1 | `lem-pur-condensed-exceptional-reconstruction` |
+| `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization` | - | 2 | `lem-sfb-integral-derived-extension-comparison` |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | - | 5 | `lem-sfb-condensed-bounded-hom-continuity` |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | - | 2 | `lem-sfb-finite-discrete-constructible-model` |
 
-## Stage 3: held for an open upstream PR (19)
+## Stage 3: held for an open upstream PR (18)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
@@ -236,7 +381,6 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.Compactification.Refinement` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1 |
-| `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | bundle/sec-smooth-purity-d2,prove2/sk-prop-sf-kunneth-ordinary |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar` | bundle/sec-smooth-purity-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | bundle/sec-smooth-purity-d3 |

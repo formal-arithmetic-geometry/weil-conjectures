@@ -61,14 +61,31 @@ def key(d) -> str:
     return d["name"] or "instance " + " ".join((d["statement"] or "").split())
 
 
+PREFIX = re.compile(r"^(?:(?:omit|include|open|set_option|variable)\b.*\bin|@\[[^\n]*\]|--.*"
+                    r"|(?:private|protected|noncomputable|public|meta|unsafe|partial|nonrec)"
+                    r"(?:[ \t]+(?:private|protected|noncomputable|public|meta|unsafe|partial|nonrec))*)[ \t]*$")
+
+
 def span(text: str, d) -> tuple[int, int]:
-    """[start, end) of a declaration with its docstring"""
+    """[start, end) of a declaration with its docstring and the lines that belong to it: `omit/open/include/set_option/
+    variable ... in`, attribute lines and modifier lines above it (2026-10-21: left behind, they broke the companion
+    files: `omit ... in` followed by `end`, orphaned docstrings)."""
     s = d["start"]
-    before = text[:s].rstrip()
-    if d.get("docstring") and before.endswith("-/"):
-        o = before.rfind("/--")
-        if o >= 0:
-            s = o
+    while True:
+        before = text[:s].rstrip()
+        if not before:
+            break
+        if before.endswith("-/"):
+            o = before.rfind("/--")
+            if o >= 0 and before.rfind("/-!", o) < 0 and before.find("-/", o) == len(before) - 2:
+                s = o
+                continue
+            break
+        line = before[before.rfind("\n") + 1:]
+        if PREFIX.match(line):
+            s = before.rfind("\n") + 1
+            continue
+        break
     return s, d["end"]
 
 

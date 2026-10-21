@@ -1585,6 +1585,28 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
                   and (s.get('kind') == 'interface' or set(s.get('fails') or []) & set(s.get('modules') or []))})
     if not ids:
         return False
+    # 2026-10-21 (the human): the importers of a dropped module go out with it. Lake does not attempt the importers of a
+    # failed module, so they are not named as failing; left in the candidate they fail the next build on their import
+    # of the dropped file ("bad import"), one layer per build (938-landing build of 993813cbe8: 404 bad imports after
+    # 12 restores were dropped alone).
+    _imports = library_imports()
+    _recs = {r['id']: r for r in ld.records(ld.REQUESTS)}
+    _mod_of = {f['module']: r['id'] for r in _recs.values() if r['id'] not in batch_ids
+               for f in r.get('files') or [] if f.get('module')}
+    _importers = {}
+    for _m, _deps in _imports.items():
+        for _d in _deps:
+            _importers.setdefault(_d, set()).add(_m)
+    _gone = {f['module'] for i in ids if i in _recs for f in _recs[i].get('files') or [] if f.get('module')}
+    _seen, _todo = set(_gone), list(_gone)
+    while _todo:
+        for _x in _importers.get(_todo.pop(), ()):
+            if _x not in _seen:
+                _seen.add(_x); _todo.append(_x)
+    _extra = sorted({_mod_of[_m] for _m in _seen if _m in _mod_of} - set(ids))
+    if _extra:
+        log(f"red build {last.get('time')}: {len(_extra)} landing(s) whose modules import a dropped module go out with it")
+        ids = ids + _extra
     t0 = time.time()
     reason = f"the global build of {str(last.get('commit'))[:10]} failed in {' '.join(failures[:6])}; this change is a possible cause"
     with md.merge_lock():

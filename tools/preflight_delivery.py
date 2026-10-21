@@ -117,6 +117,15 @@ def git(*args: str, check: bool = True) -> str:
     return r.stdout.rstrip("\n")
 
 
+_ND: dict = {}
+
+
+def _node_dirs(ref: str) -> list:
+    if ref not in _ND:
+        _ND[ref] = sorted(x.split("/")[-1] for x in git("ls-tree", "--name-only", f"{ref}:dag/nodes").split())
+    return _ND[ref]
+
+
 def exists_at(ref: str, path: str) -> bool:
     return subprocess.run(["git", "cat-file", "-e", f"{ref}:{path}"], cwd=ROOT, capture_output=True).returncode == 0
 
@@ -356,23 +365,31 @@ def main() -> int:
         if _L > 3000:
             f(f"re-split (the human, 2026-10-21): the item's proof in words is still {_L} characters; split further until it "
               "is at most 3000 characters (each non-elementary argument a new statement-only node the step cites)")
-        if not new_paths:
-            f("re-split (the human, 2026-10-21): the delivery adds no new node; the finer split needs new nodes")
         # the purpose is to spread the work: the arguments leave this node as new nodes others can take at once; a
         # shorter text without new nodes only hides the same work in vaguer words
-        _b = load_at(base, item_path) if exists_at(base, item_path) else {}
-        _bp = _b.get("proof")
-        _L0 = sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in _bp) if isinstance(_bp, list) else len(_bp or "")
+        # the length is the one the note measured (the proof before any re-split landed), and new nodes already landed
+        # for this note since it was issued (commit 4e02d2fdfc, 2026-10-21 02:53Z) and cited by the item count too
+        _m0 = re.search(r"is (\d+) characters", str(_rn.get("note", "")))
+        if _m0:
+            _L0 = int(_m0.group(1))
+        else:
+            _b = load_at(base, item_path) if exists_at(base, item_path) else {}
+            _bp = _b.get("proof")
+            _L0 = sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in _bp) if isinstance(_bp, list) else len(_bp or "")
         _need = max(1, -(-_L0 // 3000) - 1)
-        if len(new_paths) < _need:
-            f(f"re-split (the human, 2026-10-21): the proof was {_L0} characters; carry its work into at least {_need} new "
-              f"nodes (this delivery adds {len(new_paths)}). Shortening the text is not a split: every non-elementary "
-              "argument must become a node of its own that another worker can take")
         _new_ids = {pathlib.PurePosixPath(x).stem for x in new_paths}
         _uses = set()
         for _st in (_p if isinstance(_p, list) else []):
             if isinstance(_st, dict):
                 _uses |= set(_st.get("uses") or [])
+        _at_note = {pathlib.PurePosixPath(x).stem for x in git("ls-tree", "-r", "--name-only", "4e02d2fdfc", "--", "dag/nodes").split()}
+        _prior = {u for u in _uses if u not in _at_note and u not in _new_ids
+                  and any(exists_at(base, f"dag/nodes/{d}/{u}.json") for d in _node_dirs(base))}
+        if len(new_paths) + len(_prior) < _need:
+            f(f"re-split (the human, 2026-10-21): the proof was {_L0} characters; carry its work into at least {_need} new "
+              f"nodes (this delivery adds {len(new_paths)}; {len(_prior)} cited new node(s) landed for this note before). "
+              "Shortening the text is not a split: every non-elementary argument must become a node of its own that "
+              "another worker can take")
         _uncited = sorted(_new_ids - _uses)
         if _uncited:
             f("re-split (the human, 2026-10-21): new node(s) not cited by any step of the item's proof: " + ", ".join(_uncited))
