@@ -1,8 +1,8 @@
 # Work queue
 
-154 items; claim with `tools/claim.py next <group> [--stage N]`.
+153 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (11 clusters, 711 modules)
+## Rework: quarantined by the upstream sync (10 clusters, 711 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -14,7 +14,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -22,7 +21,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 63, stage 3 2 items.
 
-## Stage 1: nodes to split (21)
+## Stage 1: nodes to split (20)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -42,13 +41,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-polynomial-derived-bar-comparison` | 4013 | none |
 | `lem-sfb-profinite-algcl-derived-invariants-comparison` | 4013 | none |
 | `lem-sfb-rational-polynomial-bar-contraction` | 4013 | none |
-| `lem-sfb-wcontractible-component-derived-hom` | 4013 | none |
 | `lem-sfb-acyclic-hypercover-pullback-normalization` | 4014 | none |
 | `lem-sfb-filtered-colimit-strictly-henselian-local` | 4014 | none |
 | `lem-sfb-integral-closure-ind-etale-base-change` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (53)
+## Stage 2: nodes to state (54)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -90,6 +88,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-snc-tame-root-etale-extension` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
+| `lem-sfb-wcontractible-component-derived-hom` | 1 | state | 0 |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 1 | state | 0 |
 | `lem-sp-finite-coefficient-input-models` | 1 | state | 0 |
 | `lem-trf-bounded-below-derived-mate-model` | 1 | state | 0 |
@@ -106,7 +105,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-wf-tate-twist-compatibility` | 2 | state | 0 |
 | `lem-wf-tate-twist-frobenius` | 2 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 104 nodes that wait for a statement dependency (bottom-up), 20 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 104 nodes that wait for a statement dependency (bottom-up), 19 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (62)
 
