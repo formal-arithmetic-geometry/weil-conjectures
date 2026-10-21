@@ -19826,3 +19826,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:32 L: merged deliver/Q19/det-lem-integral-models-operations (reviewer FIX; after a return; new nodes: 4)
 - 03:32 L: merged deliver/NV/lem-weil-pbc-exact-faithful-torsion (reviewer PASS; first push; new nodes: 0)
 - 03:33 L: merged deliver/NG/lem-sf-normalized-derived-comparison-composition (reviewer PASS; first push; new nodes: 0)
+- 03:33 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
