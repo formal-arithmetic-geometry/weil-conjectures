@@ -36,107 +36,112 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\widehat{\\mathcal O}_{E,Y}$, $S=\\widehat{\\mathcal O}_{L,Y}$ and $B_m=(A_{L,m})_Y$. Absolute-value uniqueness gives $\\varpi_E\\in\\varpi_L\\mathcal O_L$. Hence taking powers defines the compatible quotient maps. Constant sheafification and limit projections give $r_m=\\rho_m$, $p_m=\\pi^L_m$. Write $T(P)=\\operatorname{Cone}(1-s_{V(P)})[-1]$ and let $Q$ denote derived localization. Apply the compatible coefficient-tower lemma to obtain $V(P)=(\\operatorname{Res}^L_mP_{L,m})_m$ with its prescribed transitions.",
+   "text": "Write $R=\\widehat{\\mathcal O}_{E,Y}$, $S=\\widehat{\\mathcal O}_{L,Y}$ and $B_m=(A_{L,m})_Y$. The absolute-value uniqueness in [lem-weil-l-adic-extension-absolute-value] identifies the restriction from $L$ with that on $E$. By the definition of uniformizer in [def-weil-l-adic-coefficient-extension], $\\varpi_E\\in\\mathfrak m_L=\\varpi_L\\mathcal O_L$, so $\\varpi_E^m\\mathcal O_L\\subseteq\\varpi_L^m\\mathcal O_L$. Thus the quotient map sends the class of $a$ to its class modulo $\\varpi_L^m$; reducing either before or after this map gives that same class. Functorial constant sheafification and the limit projections give the asserted compatible $\\rho_m$. The transition on tensor generators is $x\\otimes b\\mapsto x\\otimes\\bar b$; the equality $\\rho_m=\\mathrm{red}\\circ\\rho_{m+1}$ makes this balanced. Restricting along the projections from $S$ makes it $S$-linear. All identities descend from presheaf tensors to their sheafifications.",
    "uses": [
     "lem-weil-l-adic-extension-absolute-value",
     "def-weil-l-adic-coefficient-extension",
     "def-weil-pbc-constant-sheaf",
     "def-weil-completed-integral-coefficients",
-    "lem-pur-compatible-coefficient-tower"
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product); elementary quotient specialization"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Termwise coefficient change preceding Tag 06YT; elementary quotient and tensor identities"
    }
   },
   {
-   "text": "For good $u$, change-of-rings and restriction give levelwise quasi-isomorphisms $a_m$. Strict compatibility gives $gv=v'g$ for $g=\\prod_m a_m$. The strict Roos model supplies the diagonal chain map; strict Roos comparison identifies it with $R\\lim V(u)$. Exact pro-etale products satisfy its hypothesis. Levelwise exactness makes $V(u)$ a tower quasi-isomorphism, hence its derived image and $QT(u)$ are invertible. Applying cohomology proves (1). The ringed tower theorem supplies the Roos triangle, with the shifted-cone signs, proving the derived-limit assertion.",
+   "text": "Construct the ordinary coefficient-change functor by sectionwise scalar extension followed by sheafification, so its objects and maps are the specified sheafified tensors. The public functor is uniquely fixed by equality to this constructed functor. Its proved equality and comparison isomorphism identify the tensor sections and transition maps with the explicit sheafified constructions; no arbitrary existence data is chosen. Apply [lem-pur-change-of-rings-kflat-quasi-iso] on $Y_{\\mathrm{proet}}$ to the sheaf-ring map $\\rho_m:R\\to B_m$. It gives that $u\\otimes_R B_m$ is a quasi-isomorphism. This needs no flatness of $B_m$ over $R$. Restriction of scalars in [def-pc-sheaf-restrict-scalars] preserves the underlying abelian sheaf, kernels, images and cokernels: these acquire the restricted action, so cohomology also has the same underlying sheaf and restriction preserves this quasi-isomorphism. The resulting maps $a_m$ commute strictly with transitions, since both orders send $x\\otimes b$ to $u(x)\\otimes\\bar b$.",
    "uses": [
     "lem-pur-change-of-rings-kflat-quasi-iso",
-    "lem-pur-compatible-coefficient-tower",
-    "lem-weil-proetale-countable-products-exact",
-    "def-weil-strict-roos-model",
-    "lem-weil-strict-roos-comparison",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-derived-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014E (definition-cone), 07KC (lemma-products), 08TC (definition-derived-limit); sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok), through the cited strict Roos comparison."
-   }
-  },
-  {
-   "text": "Coefficient change takes a homotopy $h$ to the compatible tower homotopy $(h\\otimes1)_m$. The strict Roos homotopy lemma therefore makes $U=QT$ an additive functor on the full homotopy subcategory $\\mathcal P_R$ of K-flat flat-term complexes. The linear-derived-category lemma makes both module-derived localization functors additive.",
-   "uses": [
-    "lem-pur-compatible-coefficient-tower",
-    "lem-pur-strict-roos-homotopy-functor",
-    "lem-weil-linear-abelian-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014E (definition-cone), 08TC; strict homotopy refinement"
-   }
-  },
-  {
-   "text": "Finite sums of good complexes are good: tensor distributes over the sum, so acyclicity is preserved. The small-site K-flat localization equivalence makes $q:\\mathcal P_R\\to D(R)$ a localization. Step 2 lets $U$ descend to $F$ with $Fq\\cong U$. The additive-localization lemma makes $F$ additive: $q$ is additive by the induced linear localization structure, and its essential surjectivity is exactly the existence of K-flat flat-term resolutions.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pur-additive-localization-descent",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-weil-linear-abelian-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG (lemma-properties-left-localization); ringed-site localization from Tags 06YS, 06YT"
-   }
-  },
-  {
-   "text": "For $q_K:P_K\\to K$, comparisons and $F(Qq_K)^{-1}$ give $i_K:F(K)\\cong QT(P_K)$. Assign $f$ the conjugate $i_{K'}F(f)i_K^{-1}$. Cancellation proves identities and composition; bilinearity proves additivity. A second choice gives the natural comparison $i'_Ki_K^{-1}$. Localization clause (2) proves uniqueness compatible with the K-flat comparisons. Step 2 gives the derived-limit property.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-localization-universal-property"
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution); categories Tag 04VG for compatible uniqueness"
+    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side, coefficient-change specialization"
    }
   },
   {
-   "text": "Shifts preserve flat terms and K-flatness since tensoring a shifted complex shifts the total tensor. The coefficient functors have coherent termwise shifts; the native Roos shift lemma gives coherent shifts for $T$. Localization uniqueness descends this comparison to $F$ and then conjugation transports it through $i_K$.",
+   "text": "For any resulting tower $C_m=\\operatorname{Res}^L_m P_{L,m}$ put $A=\\prod_m C_m$ and $v=1-s$. By [lem-weil-proetale-countable-products-exact] and [lem-weil-derived-limit-existence] (2), this termwise product represents the derived-category product. The rotated cone triangle of [def-weil-abstract-derived-category] for $v$ is a Roos triangle, so $T(P)=\\operatorname{Cone}(v)[-1]$ is a derived limit in exactly the sense of [def-weil-derived-limit]. For the strict tower map of step 2, $g=\\prod_m a_m$ satisfies $gv=v\\prime g$. The diagonal map on the two cone summands gives a morphism of Roos triangles. All its level maps are isomorphisms in the derived category; the two-out-of-three isomorphism criterion for a morphism of distinguished triangles [lem-sf-triangle-morphism-iso] says that its cone map is an isomorphism. Applying every cohomology functor proves that $T(u)$ is a quasi-isomorphism, completing (1). The Lean proof reuses the proved Roos-invariance and derived-limit lemmas of [lem-pur-integral-operations-well-defined] for the target completed-coefficient module category.",
    "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit",
+    "lem-sf-triangle-morphism-iso",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 07KC (lemma-products), 08TC (definition-derived-limit), 014A (lemma-third-isomorphism-triangle)"
+   }
+  },
+  {
+   "text": "Coefficient extension and restriction are additive functors of module sheaves. Form their termwise countable product and the natural endomorphism one minus the transition shift. Applying this additive module functor termwise to complexes agrees naturally with the product of the individual termwise functors, by the universal property of products. This comparison intertwines the two one-minus-shift maps. The diagonal mapping-cone construction and shift by minus one are additive. The universal-property comparison identifies this cone functor with the specified Roos functor, whose map uses homotopyCofiber.mapArrowHom; the latter agrees with mappingCone.map on both summands. Hence the actual complex-level scalar extension is additive.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Explicit cochain calculation for the shifted cone of Tag 08TC"
+   }
+  },
+  {
+   "text": "Use the proved good-complex localization lemma of [lem-pur-integral-operations-well-defined] for the source completed-coefficient module category. Its proof uses the functorial flat resolution of [lem-pc-kflat-resolution] and the functorial-left-resolutions criterion; no intervening homotopy-subcategory presentation is needed. Step 3 shows that the specified Roos functor followed by Q inverts the induced quasi-isomorphisms. The localization universal property [lem-weil-pbc-localization-universal-property] produces F and its comparison e. Good complexes are closed under binary biproducts: tensoring preserves finite sums and flat terms are closed under finite sums. Additivity descends because the localization functor is additive and essentially surjective; preserve zero and transport the binary-biproduct product cone to prove binary-product preservation. Fully faithful precomposition gives the unique comparison isomorphism compatible with e and any e-prime.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property",
     "def-pc-kflat-complex",
-    "lem-pur-compatible-coefficient-tower",
-    "lem-weil-roos-comm-shift",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; site K-flat localization following Tag 06YT"
+   }
+  },
+  {
+   "text": "For any good complex P and supplied isomorphism q:QP ≅ K, the composite m=(F(q))⁻¹ followed by e at P gives F(K) ≅ QT(P). Step 3 supplies the derived-limit property for QT(P). Transport its Roos-triangle witness along m, using the proved derived-limit transport lemma of [lem-pur-integral-operations-well-defined]. This gives the two assertions for every supplied model, without choosing chain-map lifts for arbitrary derived morphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), followed by Tag 06YT; Tag 04VG for comparison uniqueness"
+   }
+  },
+  {
+   "text": "Shift preserves flat terms, and K-flatness follows from the natural comparison between tensor with a shifted complex and the shifted tensor. Termwise additive functors commute coherently with all integer shifts. Transfer these comparisons to the product functor by the product comparison of step 4. For a natural transformation commuting with shifts, the standard mappingCone.shiftIso and the comparisons of its source and target define a shift comparison for the cone functor. Verify naturality and the zero and addition coherence equations on the two cone summands; the only signs are the powers of minus one, whose multiplication is controlled by the addition law. Shift by minus one also commutes with all shifts, so the actual Roos functor has CommShift over the integers. Transfer this structure to the localization lift using shift stability of the induced quasi-isomorphisms and the localization universal property.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Explicit shifted-cone signs in Tag 08TC, using the cochain shift convention"
+   }
+  },
+  {
+   "text": "Constant sections give $\\mathcal O_E$-linear structures on both module-sheaf categories, on the target through $\\mathcal O_E\\subset\\mathcal O_L$: sums and composition are bilinear sectionwise. By [lem-weil-linear-abelian-derived-category], these induce the asserted scalar actions on the derived categories and linear localization functors. For $a\\in\\mathcal O_E$, tensor balancing gives $(ax)\\otimes b=x\\otimes\\iota_m(a)b$. Thus $T(a\\,\\mathrm{id}_P)=a\\,\\mathrm{id}_{T(P)}$, on both product and cone summands, since the $S$-action projects to $a\\bmod\\varpi_L^m$ in every coordinate. These are equal natural endomorphisms on K-flat representatives. By [lem-weil-pbc-localization-universal-property] (3), their descended endomorphisms coincide on every object: $F(a\\,\\mathrm{id}_K)=a\\,\\mathrm{id}_{F(K)}$. Hence $F(af)=F((a\\,\\mathrm{id})f)=aF(f)$; conjugating by the $S$-linear $i_K$ preserves this equality. This proves (3) without imposing an unrelated characteristic $p$ or using the narrower constructible-linearity lemma. The Lean action definition is proved equal to this canonical fully faithful lift. Its named component formula and a parametric localization comparison establish linearity before substituting the concrete descended functor.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "def-pur-sheaf-tensor-product",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011G (definition-shift-cochain); derived Tag 014E and the native Roos shift comparison"
-   }
-  },
-  {
-   "text": "Constant sections make both module categories $\\mathcal O_E$-linear; derived localization preserves these actions. The coefficient-tower and Roos lemmas make $U$ scalar linear. Apply the linear-localization lift lemma to $Fq\\cong U$. Conjugating by the $S$-linear $i_K$ preserves this equality, proving (3).",
-   "uses": [
-    "lem-weil-linear-abelian-derived-category",
-    "lem-pur-compatible-coefficient-tower",
-    "lem-pur-strict-roos-homotopy-functor",
-    "lem-pur-linear-localization-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Mathlib/CategoryTheory/Localization/Linear.lean",
-    "place": "functor_linear_iff, lines 69-93"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, natural-transformation uniqueness; Mathlib Algebra/Homology/DerivedCategory/Linear.lean, lines 24-39"
    }
   }
  ],
@@ -145,30 +150,24 @@
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-constant-sheaf",
   "def-weil-completed-integral-coefficients",
-  "lem-pur-compatible-coefficient-tower",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
   "lem-pur-change-of-rings-kflat-quasi-iso",
   "lem-weil-proetale-countable-products-exact",
-  "def-weil-strict-roos-model",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-derived-limit-existence",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-weil-derived-limit",
-  "lem-pur-strict-roos-homotopy-functor",
-  "lem-weil-linear-abelian-derived-category",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-pur-additive-localization-descent",
+  "lem-sf-triangle-morphism-iso",
   "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property",
   "def-pc-kflat-complex",
-  "lem-weil-roos-comm-shift",
-  "lem-pur-linear-localization-lift"
+  "lem-weil-linear-abelian-derived-category",
+  "lem-pur-integral-operations-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YT, 014E, 07KC, 08TC, 0941 and 04VG; existing strict Roos comparison and ringed tower theorem carry the former step-3 argument. Four extracted generic nodes carry the long coefficient, homotopy, additive and linear arguments."
+  "place": "Tags 06YS and 06YT; derived Tags 07KC, 08TC and 014A; categories Tag 04VG. U2: direct localization from functorial flat resolutions, product/cone comparisons and coherent integer shifts. Reuse the proved integral-operation localization, exact restriction, Roos invariance and derived-limit lemmas; construct the scalar-specific coherent shift and action comparisons."
  },
  "mathlib_searches": [
   {
@@ -262,10 +261,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-derived-limit-existence",
-  "lem-weil-derived-limit-levelwise-iso",
   "lem-pc-kflat-resolution",
   "def-weil-derived-limit",
   "lem-weil-roos-comm-shift",
@@ -293,9 +290,15 @@
    "WeilConjectures.integralScalarQuotientSheafMap",
    "WeilConjectures.integralScalarRho",
    "WeilConjectures.integralScalarReductionWitness",
+   "WeilConjectures.integralScalarReductionConcrete",
+   "WeilConjectures.integralScalarReductionConcrete_additive",
    "WeilConjectures.integralScalarReduction",
+   "WeilConjectures.integralScalarReduction_eqConcrete",
+   "WeilConjectures.integralScalarReductionIso",
    "WeilConjectures.integralScalarReduction_additive",
    "WeilConjectures.integralScalarFiniteComplex",
+   "WeilConjectures.integralScalarOrdinaryLevel",
+   "WeilConjectures.integralScalarOrdinaryLevel_additive",
    "WeilConjectures.integralScalarLevel",
    "WeilConjectures.integralScalarTensorSection",
    "WeilConjectures.integralScalarTransition_existsUnique",
@@ -327,27 +330,13 @@
   "note": "Statement, dependencies, constructions, universes, edge cases, documentation, and per-file scompile evidence checked; no findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "P4",
+  "reviewer": "C-a97e7",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261019T005357-L-2761013",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.integralScalarChainAction_existsUnique",
-   "WeilConjectures.integralScalarConstant_existsUnique",
-   "WeilConjectures.integralScalarExtensionWellDefined",
-   "WeilConjectures.integralScalarQuotientMap_transition",
-   "WeilConjectures.integralScalarTransition_existsUnique",
-   "WeilConjectures.integralScalar_absoluteValue",
-   "WeilConjectures.integralScalar_integer_mem",
-   "WeilConjectures.integralScalar_quotient_kernel"
-  ],
-  "sorry_after": [
-   "WeilConjectures.integralScalarExtensionWellDefined",
-   "WeilConjectures.integralScalarTransition_existsUnique"
-  ]
+  "landing": "20261021T140929-L-2776424",
+  "kind": "interface",
+  "note": "independent cc review: delivered module/node/change record vs live clone and the witness spec of derivedChangeOfRingsIndependentCoefficients; 18 direct importers compiled against the delivered olean, the failing one against the published build"
  }
 }
