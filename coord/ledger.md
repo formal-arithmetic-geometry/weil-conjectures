@@ -20184,3 +20184,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:05:10Z L: superseded stage-1 delivery Q88/lem-pe-integral-completion-presentation at bc2c4c237454b23e5fd35ac7810e2c3b8962c084; current completion retained; packet archived at refs/superseded/Q88/lem-pe-integral-completion-presentation/bc2c4c237454b23e5fd35ac7810e2c3b8962c084; stale return retired.
 
 - 12:05 L: batch 20261021T024139 dependency take-out
+- 2026-10-21T04:05:26Z L: superseded stage-1 delivery NC/lem-cbc-derived-finite-quotient-coherence at 69ff31162c917ac1c05933afab803eeb769ee422; current completion retained; packet archived at refs/superseded/NC/lem-cbc-derived-finite-quotient-coherence/69ff31162c917ac1c05933afab803eeb769ee422; stale return retired.
