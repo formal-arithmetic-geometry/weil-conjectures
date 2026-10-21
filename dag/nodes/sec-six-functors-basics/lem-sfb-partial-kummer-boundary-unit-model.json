@@ -21,7 +21,11 @@
   "lem-weil-pbc-proetale-ringed-open-closed",
   "def-weil-pbc-proetale-site",
   "lem-sfb-condensed-product-action-inflation",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-all-continuous-scalar-mate",
+  "def-sfb-condensed-action-module",
+  "def-sfb-norm-continuous-monodromy-data"
  ],
  "proof": [
   {
@@ -245,5 +249,55 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-924507437 (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, the four new nodes in full, every cited statement, and main-20261015 direct-images.proof.md paragraph (3); that source is agent-formulated with the exact reference WANTED, which this item inherits. Compared with the returned head 296c13790e1: the four new nodes and the item statement and stmt_deps are byte-identical; only step 2 (two sentences: it keeps the coherent first-quadrant resolution, and coefficient naturality is not used as invertibility) and the split_report summary changed. The earlier FIX that declared a tool use was lost, so I re-apply it. There is no repair note, nothing in the item's closure is in route-pivot-dropped, there is no SGA citation and no cycle. Step 1: the hypotheses of tame-root-tower-extension (I=J) hold, and the scalar extension to Omega is a finite-basis computation. Step 2: the item's T_alpha is the node's S_alpha. Cech terms are T°[(G_o x G_i)^n]. The current derived-cech-image-totalization hypotheses hold (Cartesian p^*C_F, K=L_F[0]). Boundary-acyclicity's v_P is the composite of a and f_P, and its family clause gives the action face. Step 3: ringed-open-closed applies because the open complement is quasi-compact (Noetherian V, finitely many branches); cech-localization-unit-totalization is then used with f=b, g=j, t=s_J v_alpha. Step 4: Z is the union of the inner branches, and sigma_P composed with s^*Ra_*(eta) equals alpha_P, termwise and cosimplicially. Step 5: the augmentation clause of product-bar-comparison turns the arrow into theta. Step 6: theta's normalization comes from product-action-inflation and derived-composition; naturality in L comes from morphism extension. Step 7: the edge cases hold. New nodes: all four are true, strictly smaller than the item and not duplicates. root-tower-inner-support was tested with one inner branch, two inner branches, and inner t1 with outer t2 (Hochschild-Serre-consistent). condensed-product-bar-comparison is formal Eilenberg-Zilber plus Hochschild-Serre. cech-localization-unit-totalization follows from finite diagonals. root-tower-lisse-morphism-extension holds because the local rings are normal domains, T° is dense since U->B is flat, and pi_0(W°)=pi_0(W) for w-contractible W. Batch 5: lem-trf-topos-localization-site-presentation, reached through lem-sfb-derived-cech-image-totalization, is a general topos-presentation fact; its closure adds only def-trf-geometric-morphism. def-trf-strict-normal-crossings-boundary is a general definition already in the base stmt_deps. Neither belongs to the trace-formula or Poincare-duality statements or proofs, so both are accepted. Tool uses: the declared weakly-etale-localization and ringed-open-closed are accepted. FIX: steps 3 and 6 cite lem-sfb-derived-composition-adjunction-normalization (unit sk-thm-sf-comp-composition) without declaring it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-partial-kummer-boundary-unit-model.json, the same repair as 296c; no other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PartialKummerBoundaryUnitModel",
+  "declaration": "AlgebraicGeometry.ProEtale.PartialKummer.partial_kummer_boundary_unit_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PartialKummer.SchemeModules",
+   "AlgebraicGeometry.ProEtale.PartialKummer.Inertia",
+   "AlgebraicGeometry.ProEtale.PartialKummer.FiniteRepresentation",
+   "AlgebraicGeometry.ProEtale.PartialKummer.FiniteRepresentation.action",
+   "AlgebraicGeometry.ProEtale.PartialKummer.diagonal",
+   "AlgebraicGeometry.ProEtale.PartialKummer.diagonal_isMonHom",
+   "AlgebraicGeometry.ProEtale.PartialKummer.coordinateModule",
+   "AlgebraicGeometry.ProEtale.PartialKummer.Condensation",
+   "AlgebraicGeometry.ProEtale.PartialKummer.unitArrow",
+   "AlgebraicGeometry.ProEtale.PartialKummer.ActionAbelianData",
+   "AlgebraicGeometry.ProEtale.PartialKummer.actionAbelian",
+   "AlgebraicGeometry.ProEtale.PartialKummer.theta",
+   "AlgebraicGeometry.ProEtale.PartialKummer.DerivedInvariants",
+   "AlgebraicGeometry.ProEtale.PartialKummer.DerivedInvariants.comparison",
+   "AlgebraicGeometry.ProEtale.PartialKummer.pointPull",
+   "AlgebraicGeometry.ProEtale.PartialKummer.pointPull_finiteLimits",
+   "AlgebraicGeometry.ProEtale.PartialKummer.pointPull_finiteColimits",
+   "AlgebraicGeometry.ProEtale.PartialKummer.pointPull_additive",
+   "AlgebraicGeometry.ProEtale.PartialKummer.sourceFunctor",
+   "AlgebraicGeometry.ProEtale.PartialKummer.targetFunctor",
+   "AlgebraicGeometry.ProEtale.PartialKummer.LocalModel",
+   "AlgebraicGeometry.ProEtale.PartialKummer.components",
+   "AlgebraicGeometry.ProEtale.PartialKummer.stratumSet",
+   "AlgebraicGeometry.ProEtale.PartialKummer.CompatibleRoots",
+   "AlgebraicGeometry.ProEtale.PartialKummer.ChartModel",
+   "AlgebraicGeometry.ProEtale.PartialKummer.HasMatrix",
+   "AlgebraicGeometry.ProEtale.PartialKummer.ModelNatural",
+   "AlgebraicGeometry.ProEtale.PartialKummer.ChartModelsNatural",
+   "AlgebraicGeometry.ProEtale.PartialKummer.partial_kummer_boundary_unit_model"
+  ],
+  "file": "lean/Sheaf/Paper/PartialKummerBoundaryUnitModel.lean",
+  "statement": "theorem partial_kummer_boundary_unit_model (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : PadicAlgCl.FiniteIntermediateField ℓ) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (_hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (out J : Finset (Fin hD.2.2.choose)) (_hJi : (J \\ out).Nonempty) (W V Z S : Scheme.{u}) (b : W ⟶ V) (j : V ⟶ Y) (h : Z ⟶ V) (s : S ⟶ Y) [IsOpenImmersion b] [IsOpenImmersion j] [IsClosedImmersion h] [IsReduced Z] [IsImmersion s] [IsReduced S] (_hW : Set.range (b ≫ j) = (D.support : Set Y)ᶜ) (_hV : Set.range j = (⋃ a ∈ out, ((components D hD a).support : Set Y))ᶜ) (_hZ : Set.range h = (Set.range b)ᶜ) (_hS : Set.range s = stratumSet D hD J) (L : SchemeModules (Profinite.continuousMapRingObj E.1) W) (_hL : IsLisseCoefficientModule (Profinite.continuousMapRingObj E.1) L) (_htame : IsStrictLocalKummerTameModule p (Profinite.continuousMapRingObj E.1) D (b ≫ j) L) : ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage S, (∀ a : U.I₀, Nonempty (ChartModel p ℓ E b j h (U.f a ≫ s) L (J ∩ out) (J \\ out))) ∧ ∀ (L' : SchemeModules (Profinite.continuousMapRingObj E.1) W), IsLisseCoefficientModule (Profinite.continuousMapRingObj E.1) L' → IsStrictLocalKummerTameModule p (Profinite.continuousMapRingObj E.1) D (b ≫ j) L' → ∀ f : L ⟶ L', ∃ U' : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ a : U'.I₀, ∃ (C : ChartModel p ℓ E b j h (U'.f a ≫ s) L (J ∩ out) (J \\ out)) (C' : ChartModel p ℓ E b j h (U'.f a ≫ s) L' (J ∩ out) (J \\ out)), ChartModelsNatural f C C'",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper structures package this node's local arrow model and finite-basis presentations of existing continuous representations. The actual closed-unit arrow and normalized derived comparison have explicit constructions; the only postponed theorem is the item itself. Both coefficient fields use the all-continuous rings. Added four already landed definition nodes for the exact tame predicate, scalar map, condensed action interface and norm-continuous representations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e459d929",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read item, all 18 stmt_deps, the module, the main-20261015 source place and the side-live sources of CondensedActionModule, ProductActionInflation, NormContinuousRepresentations, StrictLocalKummerTame, SNC and Mathlib proetalePrecoverage. Node differs from live only in lean and stmt_deps; the 4 added deps are landed def nodes with identical records; statement verbatim and declarations set checked by script; no plain def from a theorem module. Clauses match: actual Rj_*(unit of upperStarLowerStarAdjunction h) at Rb_*L[0]; θ = conjugateIsoEquiv of derived product and composite invariant adjunctions at derivedCompositionLeftIso(eqToIso inflation_eq.symm); all-continuous E and Ω rings; extendScalars for L_Ω; genuine pro-étale cover of the whole stratum; landed NormContinuousRepresentations with a basis; condensed action pinned by matrix on every profinite family; J_i nonempty, J_o = J∩out; stratumSet correct; reduced Z and S. Edge cases OK. Free sourceIso/targetIso accepted: θ is an Iso, so the clause is invertibility plus object model, exactly what the only citer (transverse-tame step 5) uses; nerve augmentation not statement-expressible. Advisory: pairwise naturality, unused CompatibleRoots, unused plain imports, infrastructure decls outside the dep records. No recompile (no fix)."
  }
 }

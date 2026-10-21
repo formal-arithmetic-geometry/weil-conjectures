@@ -23144,3 +23144,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:08 L: merged deliver/X7/Sheaf.Paper.IntegralConstructibleCompactness (stage 3; reviewer PASS; first push; landing 20261021T170812-L-2762439 (proof); batch 20261021T170712; modules 1; new nodes 0; change records: coord/changes/X7-integral-compactness-canonical-import.md)
 - 17:08 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 17:08 L: merged deliver/NU/lem-sfb-condensed-derived-invariant-bar (stage 2; reviewer FIX; parallel immutable checks)
+- 17:10 L: merged deliver/O3/lem-sfb-partial-kummer-boundary-unit-model (stage 2; reviewer PASS; parallel immutable checks)
