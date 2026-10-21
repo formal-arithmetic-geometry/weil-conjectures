@@ -22624,3 +22624,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:41 L: returned deliver/NQ/lem-sfb-finite-local-model-rhom-continuity (reviewer RETURN: L: independent stage-2 immutable head 87d1ccfe9637: H2 / mechanical theorem-stmt_dep finding upheld: the delivery added )
 - 13:41 L: returned deliver/NI/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (reviewer RETURN: L: independent stage-2 immutable head d1ea899b0964: Not a stage-2 delivery: S1 re-split on the S2 lane. No .lean module,)
 - 13:41 L: returned deliver/NE/lem-pur-normalized-operation-system-models (reviewer RETURN: L: independent stage-2 immutable head f91cca039d52: H2: delivery adds theorem node lem-pur-system-cochain-tensor-reducti)
+- 13:42 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: A7/B10, superseded because the item is Lean-closed. Live ledger l.22504 (13:02Z) shows deliver/U3/Sheaf.Topology.Profini)
