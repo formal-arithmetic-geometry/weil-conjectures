@@ -20,9 +20,121 @@
   "def-weil-pbc-proetale-site",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $I$. If $S_I$ is empty, take the empty covering. Otherwise apply the equivariant extension input to $L$. It gives charts $U_\\alpha\\to Y$ with $S_\\alpha=U_\\alpha\\times_Y S_I$ covering $S_I$, full root towers $T_\\alpha$, extensions $\\widetilde L_\\alpha$, roots of unity, and equivariant boundary models $M_\\alpha$. The tower over $U_\\alpha^\\circ=U_\\alpha\\times_Y W$ is pro-etale: each finite root algebra is finite free and etale there since every $n$ and every parameter are units. On its $(n+1)$-fold fibre product the ratios of the roots relative to the first point give $n$ elements of $G_I$. Conversely these ratios multiply the first set of roots to recover all other points, giving $T_\\alpha^\\circ\\times_{U_\\alpha^\\circ}\\cdots\\times_{U_\\alpha^\\circ}T_\\alpha^\\circ=T_\\alpha^\\circ[G_I^n]$. This is the actual covering nerve, not the ramified root map on the boundary.",
+   "uses": [
+    "lem-sfb-tame-root-tower-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 1"
+   }
+  },
+  {
+   "text": "The group $H_I=(\\prod_{q\\ne p,\\ell}\\mathbf Z_q)^I$ has only finite quotients of order prime to $\\ell$: the kernel of a map to a finite discrete group contains a basic open subgroup, which restricts finitely many $q$-adic coordinates modulo powers of those $q$. The map therefore factors through a finite product of $q$-power groups with $q\\ne\\ell$. Restrict the continuous representation on $M_\\alpha$ to $H_I$ and apply the prime-to-ell linear-image lemma. This supplies precisely the finite prime-to-$\\ell$ image required in the item; no semisimplicity or quasi-unipotence assertion is needed.",
+   "uses": [
+    "lem-sfb-prime-to-ell-linear-image-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 2"
+   }
+  },
+  {
+   "text": "For $F=E,\\Omega$ extend $\\widetilde L_\\alpha$ by ordinary scalar extension to $C_{F,T_\\alpha}$. On a finite-free trivialization this operation is $C_E^d\\mapsto C_F^d$, so it remains lisse and its restriction is the actual pullback of $L_F$. The boundary becomes $p_{S_\\alpha}^*M_{\\alpha,F}$: choose an $E$-basis of $M_\\alpha$, use $C(P,E^d)=C(P,E)^d$ and $C(P,F^d)=C(P,F)^d$, and apply the balanced tensor formula on these finite sums. The coefficient inclusion is $x\\mapsto1\\otimes x$. Thus the same geometric tower, cover and representation work for both fields.",
+   "uses": [
+    "lem-sfb-tame-root-tower-extension",
+    "def-sfb-lisse-coefficient-module",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 3"
+   }
+  },
+  {
+   "text": "First use the coefficient-section localization statement to identify $U_\\alpha$ with the pro-etale slice of $Y$, and the derived slice-localization isomorphism to identify $(Ra_*L_F)|_{U_\\alpha}$ with $R(a_\\alpha)_*(L_F|_{U_\\alpha^\\circ})$, preserving its counit. Apply normalized derived Cech descent to $a_\\alpha:U_\\alpha^\\circ\\to U_\\alpha$, the root covering of step 1, and $h:S_\\alpha\\to U_\\alpha$. It gives the restriction $(s_Iu_\\alpha)^*Ra_*L_F$ as the total of its derived nerve terms. Localizations are taken before the boundary pullback, so the boundary has not been base changed into the empty open. The hypotheses are the actual pro-etale root cover of step 1 and the exact Cartesian-coefficient inverse images stipulated in the item. All inputs are sheaves in degree zero; resolve in nonnegative degrees. The total is first quadrant and has finite diagonals, so exact restriction commutes with it. Its augmentation retains the restriction-of-sections normalization and its evaluation on the cover retains the direct-image counit.",
+   "uses": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-coefficient-sections-localization",
+    "lem-weil-pbc-ringed-derived-slice-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 4"
+   }
+  },
+  {
+   "text": "For Cech degree $n$ put $P=G_I^n$. The nerve identification in step 1 and the extension in step 3 meet the hypotheses of the relative root-tower term calculation. That calculation identifies its boundary derived image with $p_{S_\\alpha}^*R\\underline{\\operatorname{Hom}}_{C_F}(C_F[\\underline G_I^n],M_{\\alpha,F})$. Its naturality in $P$ gives all the projection and multiplication faces. For the first face, changing the distinguished first lift acts by $\\rho(g_1)$ on $M_\\alpha$; hence it gives the action face of the inhomogeneous bar nerve. The other faces multiply adjacent ratios or forget the last ratio, and degeneracies insert the identity. Thus these are identifications of the full cosimplicial derived diagram, not independent isomorphisms of its cohomology objects.",
+   "uses": [
+    "lem-sfb-root-tower-boundary-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 5"
+   }
+  },
+  {
+   "text": "Apply the internal derived bar lemma with $A=C_F$, $G=G_I$ and $N=M_{\\alpha,F}$. Step 5 has identified exactly its terms and cosimplicial arrows. Pullback $p_{S_\\alpha}^*$ is exact; on a nonnegative resolution the first-quadrant total has finite diagonals, so it commutes with this total. Combining with step 4 gives $(s_Iu_\\alpha)^*Ra_{*,C_F}(L_F[0])\\cong p_{S_\\alpha}^*R\\Gamma_{G_I}(M_{\\alpha,F})$. Using derived internal Hom throughout avoids assuming that profinite free condensed modules are projective or replacing ordinary derived invariants by a topological cochain complex.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 6"
+   }
+  },
+  {
+   "text": "For $E\\to\\Omega$ use in every nerve degree the map from the scalar unit $\\widetilde L_\\alpha\\to\\operatorname{Res}\\widetilde L_{\\alpha,\\Omega}$. The term comparison sends it to the derived internal-Hom map induced by $M_{\\alpha,E}\\to\\operatorname{Res}M_{\\alpha,\\Omega}$. The ring-sheaf change-of-coefficients adjunction comparison identifies scalar restriction of the derived images with the derived images of the restricted modules, preserving the counit. Both descent augmentations commute with these maps; the bar lemma identifies their total with the map on ordinary derived invariants. This proves the specified coefficient compatibility, after scalar restriction. In degree zero the two augmentations take invariant sections to their restrictions. On the punctured strict-local root cover this restriction is evaluation of the original section, which is the actual direct-image counit by the descent lemma's normalization. Refining $S_\\alpha$ restricts the same nerve and all its augmentation maps, so the identifications are natural for restrictions.",
+   "uses": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 7"
+   }
+  },
+  {
+   "text": "For $I=\\varnothing$, $G_I=1$ and the root tower is the identity. The chosen cover trivializes $L$ and therefore also $L_F$. The augmented nerve of the identity is split; its positive normalized degrees vanish. Invariants for the trivial group are the identity, so the displayed formula reduces to this actual trivialization of $L_F[0]$, with the usual open unit and counit. Rank zero gives the zero sheaf and the zero vector space in every step. This also shows that empty boundary components or an empty whole divisor introduce no excluded case.",
+   "uses": [
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tame-root-tower-extension",
+  "lem-sfb-prime-to-ell-linear-image-finite",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-derived-cech-image-totalization",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-sfb-root-tower-boundary-acyclicity",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; formal assembly, with missing all-continuous geometric inputs isolated as statement-only nodes and WANTED in the report"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +170,45 @@
    "results": "8 hits: Algebra.Etale.exists_subalgebra_fg; Algebra.Etale.formallyEtale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Etale; Algebra.FormallyEtale.of_isSeparable; Algebra.FormallyEtale.iff_exists_algEquiv_prod; RingHom.Etale.propertyIsLocal",
    "date": "2026-10-21",
    "verdict": "no match: the returned constructions do not state this coefficient-specific condensed tame cohomology or geometric exchange assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer descent of tame lisse condensed modules on a strict normal crossings boundary stratum",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.IsSolid, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: no whole-stratum all-continuous condensed Kummer-descent theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Kummer\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no whole-stratum all-continuous condensed Kummer-descent theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a closed stratum of an open direct image is computed by the augmented Cech nerve of the tame parameter root cover",
+   "results": "8 hits: AlgebraicGeometry.opensDiagram, AlgebraicGeometry.opensCone, AlgebraicGeometry.Scheme.OpenCover.restrict_I₀, AlgebraicGeometry.opensDiagramι, AlgebraicGeometry.Scheme.OpenCover.restrict_X, AlgebraicGeometry.Scheme.OpenCover.restrict, AlgebraicGeometry.Scheme.OpenCover.restrict_f, AlgebraicGeometry.opensCone_π_app",
+   "date": "2026-10-21",
+   "verdict": "no match: no whole-stratum all-continuous condensed Kummer-descent theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|tame).*(descent|stratum|Condensed)|(Condensed|stratum).*(Kummer|tame)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no whole-stratum all-continuous condensed Kummer-descent theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame Kummer descent for derived open direct images with continuous p adic coefficient sheaves",
+   "results": "8 hits: cyclotomicCharacter.continuous, PadicInt.continuousAddCharEquiv, SheafOfModules.pushforwardPushforwardAdj, PadicInt.continuousAddCharEquiv_of_norm_mul, Padic.adicCompletionEquiv, CategoryTheory.Functor.IsCoverDense.full_sheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, mahler",
+   "date": "2026-10-21",
+   "verdict": "no match: no whole-stratum all-continuous condensed Kummer-descent theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-algcl-tame-boundary-comparison",
@@ -83,5 +230,41 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-tame-stratum-kummer-descent",
+  "worker": "stage1",
+  "summary": "Expose equivariant extension, relative derived root-tower term comparison, normalized Cech descent, derived internal bar invariants, and prime-to-ell finite image separately. Assemble their cosimplicial diagrams with the prescribed scalar unit and counit; no finite-coefficient-to-condensed identification is assumed. Five statement-only nodes; no Mathlib leaf.",
+  "blueprint": [
+   "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; realizes the geometric Kummer step inside the tame-boundary comparison, with the whole-stratum requirement retained."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Identify an actual pro-etale object with the localized site; this is generic coefficient localization, not another geometric proof route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-slice-localization",
+    "why": "Restrict the actual derived open direct image to the pro-etale chart with its actual counit; no unit node supplies this generic ringed-site comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Pass scalar restriction through ordinary derived direct image with counit compatibility; generic ring-sheaf tool, not finite-coefficient comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-coefficient-sections-localization",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-81f850b7b",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-81f850b7b (reviewer sub-agent of L); spot-checked: There is no twin delivery and nothing has landed (the live item is unsplit; svc.log has only this START). The item statement and stmt_deps are byte-identical to live, the source is the agent-expanded §(3) of sk-thm-sf-ctf-stability-direct-images, and no node cites SGA. I read all 8 steps. Step 1: the nerve T°[G_I^n] follows from iterating the torsor isomorphism of the extension node, and over U° the levels are finite étale because n is prime to p and t is a unit. Step 2: finite quotients of H_I are prime to ℓ. Step 3: scalar extension is elementary, C(P,F)⊗C(P,E)^d = C(P,F)^d. Step 4: slice localization and the derived slice comparison with counits come before the new Čech descent node, with X=U°, V=T° and h=S_α; the boundary is pulled back after localizing. Step 5: the root-tower term node's hypotheses all hold, and the first face is ρ(g_1) because root automorphisms fix S. Step 6: the condensed bar node applies with A=C_F and G=G_I. Step 7: ring-sheaf-change-adjunction gives the E→Ω compatibility, and the counit and refinement clauses are cited. Step 8: I=∅ and rank 0 work. New nodes: (1) Čech totalization is true (v_{n*} preserves injectives, first-quadrant Tot, exact h^* commutes) and is not a duplicate of Stacks 03FC or det-pe-hypercover-complex. (2) The condensed bar node is true (free condensed modules are flat, so restriction preserves injectives) and is distinct from the discrete bar-resolution-cochains node. (3) Prime-to-ℓ finite image is true: the stable lattice from L19 Prop. 1.1.9, plus a pro-ℓ congruence kernel and an open preimage whose finite quotients are prime to ℓ. (4) The tame extension node is geometric input only and is not the potential-kummer-tameness node. (5) The root-tower term node checks out for finite P, r=0 and empty S. For r=1, P=* with finite coefficients it gives M[0] by absolute purity plus integral base change. The incomplete-Ω all-continuous case is the inherited open core of the parent family, isolated as WANTED, and is not a split fault. None of the new nodes restates the item. Batch-5 flags: def-trf-strict-normal-crossings-boundary is a general definition, already in the base stmt_deps, and is not part of the trace formula or Poincaré duality, so I accepted it for both citing nodes. I accept the declared tool_uses: coefficient-sections-localization, ringed-derived-slice-localization and ring-sheaf-change-adjunction are generic. Minor B2 nit not repaired: the root-tower node leaves D unnamed, but the meaning is unambiguous."
  }
 }
