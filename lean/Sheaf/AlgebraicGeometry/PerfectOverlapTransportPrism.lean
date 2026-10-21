@@ -6,7 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomCompositionPrism
-public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreBase
+public import WeilConjectures.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreBase
 
 /-! # Cartesian transport and the fixed composition prism -/
 

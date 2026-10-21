@@ -2,7 +2,7 @@
 
 128 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (5 clusters, 533 modules)
+## Rework: quarantined by the upstream sync (4 clusters, 533 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -11,7 +11,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.RelativeSupportBottomDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 52, stage 3 3 items.
@@ -27,16 +26,16 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-prime-to-ell-cochain-finite-quotient-descent` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-torsion-acyclic-norm-coefficient-test` | 4013 | none |
-| `lem-sfb-continuous-cochain-finite-index-transfer` | 4014 | none |
 | `lem-sfb-finite-subfield-continuous-linear-retraction` | 4014 | none |
 | `lem-sfb-local-norm-algcl-cocycle-descent` | 4014 | none |
 | `lem-sfb-normed-scalar-profinite-cech-exact` | 4014 | none |
 | `lem-sfb-profinite-derived-functions-filtered-colimit` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
 | `lem-sfb-ind-unipotent-procyclic-difference` | 4015 | none |
+| `lem-sfb-topological-homogeneous-cochain-coordinates` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (39)
+## Stage 2: nodes to state (40)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -57,6 +56,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-package-compactified-tower-comparisons` | 1 | state | 0 |
 | `lem-sfb-acyclic-hypercover-pullback-normalization` | 1 | state | 0 |
 | `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
+| `lem-sfb-continuous-cochain-finite-index-transfer` | 1 | state | 0 |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 1 | state | 0 |
 | `lem-sfb-field-profinite-galois-site` | 1 | state | 0 |
 | `lem-sfb-integral-cubical-chain-diagonal` | 1 | state | 0 |
