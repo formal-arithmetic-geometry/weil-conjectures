@@ -25,6 +25,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+open Modules
+
+attribute [local instance 3000] CategoryStruct.toQuiver
+attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
+attribute [local instance 2000]
+  instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf
+
 private theorem coordinateMatrix (R : Type u) [CommRing R] (p n : ℕ)
     (f : (Fin n → R) →+ (Fin n → R))
     (hf : ∀ (a : R) (v : Fin n → R), f (a • v) = a ^ p • f v)
@@ -91,6 +98,101 @@ private theorem charSections (p : ℕ) (T : Scheme.{u})
     exact ZMod.natCast_self p
   rw [← map_natCast φ.hom, hz, map_zero]
 
+private theorem coordinateSemilinear {R : Type u} [CommRing R]
+    {B : Type (u + 1)} [AddCommGroup B] (p n : ℕ)
+    (e : B ≃+ (Fin n → R)) (ρ : B → B) (act : R → B → B)
+    (hlin : ∀ a s, e (act a s) = a • e s)
+    (hρ : ∀ a s, ρ (act a s) = act (a ^ p) (ρ s))
+    (a : R) (v : Fin n → R) :
+    e (ρ (e.symm (a • v))) = a ^ p • e (ρ (e.symm v)) := by
+  have hs : e.symm (a • v) = act a (e.symm v) := by
+    apply e.injective
+    rw [e.apply_symm_apply, hlin, e.apply_symm_apply]
+  rw [hs, hρ, hlin]
+
+private theorem sectionsSemilinear (S : Scheme.{u})
+    (P : ∀ U : S.Etale, U.left.Modules) (p : ℕ)
+    (ρ : ∀ U : S.Etaleᵒᵖ, ULift.{u + 1} Γ(P U.unop, ⊤) →
+      ULift.{u + 1} Γ(P U.unop, ⊤))
+    (hρ : ∀ (U : S.Etaleᵒᵖ) (a : ULift.{u + 1} Γ(U.unop.left, ⊤))
+        (s : ULift.{u + 1} Γ(P U.unop, ⊤)),
+      ρ U (ULift.up (a.down • s.down)) =
+        ULift.up (a.down ^ p • (@id Γ(P U.unop, ⊤) (ρ U s).down)))
+    (V : S.Etale) (b : Γ(V.left, ⊤)) (s : ULift.{u + 1} Γ(P V, ⊤)) :
+    ρ (op V) (ULift.up (b • s.down)) =
+      ULift.up (b ^ p • (@id Γ(P V, ⊤) (ρ (op V) s).down)) := by
+  exact hρ (op V) (ULift.up b) s
+
+private theorem naturalMatrixCoordinates_exists
+    (X : Scheme.{u}) (p n : ℕ)
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (F : G ⟶ G)
+    (e : ∀ V : X.Etale, G.obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)))
+    (hp : (p : Γ(X, ⊤)) = 0)
+    (hnat : ∀ (V W : X.Etale) (g : W ⟶ V) (s : G.obj.obj (op V)),
+      ∀ i, e W (G.obj.map g.op s) i = g.left.appTop (e V s i))
+    (hf : ∀ (V : X.Etale) (a : Γ(V.left, ⊤)) (v : Fin n → Γ(V.left, ⊤)),
+      e V (F.hom.app (op V) ((e V).symm (a • v))) =
+        a ^ p • e V (F.hom.app (op V) ((e V).symm v))) :
+    ∃ (c : Fin n → Fin n → Γ(X, ⊤))
+      (e : ∀ V : X.Etale, G.obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤))),
+      (p : Γ(X, ⊤)) = 0 ∧
+      (∀ (V W : X.Etale) (g : W ⟶ V) (s : G.obj.obj (op V)),
+        ∀ i, e W (G.obj.map g.op s) i = g.left.appTop (e V s i)) ∧
+      (∀ (V : X.Etale) (s : G.obj.obj (op V)),
+        ∀ i, e V (F.hom.app (op V) s) i =
+          ∑ j, (@id Γ(V.left, ⊤) (V.hom.appTop (c i j))) * (e V s j) ^ p) := by
+  obtain ⟨c, heq⟩ := naturalMatrixCoordinates X p n G F e hnat hf
+  exact ⟨c, e, hp, hnat, heq⟩
+
+private theorem coordinates_of_frame
+    (p : ℕ) (S T : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent]
+    (F : (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
+        (Modules.etaleTensorSectionsSheaf E) ⟶
+      (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
+        (Modules.etaleTensorSectionsSheaf E))
+    (hF : ∀ (U : S.Etaleᵒᵖ) (a : ULift.{u + 1} Γ(U.unop.left, ⊤))
+        (s : ULift.{u + 1} Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)),
+      F.hom.app U (ULift.up (a.down • s.down)) =
+        ULift.up (a.down ^ p • (@id Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)
+          (F.hom.app U s).down)))
+    (f : T ⟶ S) [Etale f] (n : ℕ) :
+    let M : T.Etale ⥤ S.Etale :=
+      MorphismProperty.Over.map (Y := S) ⊤ (inferInstance : Etale f)
+    let L := Etale.localizationRestriction (U := S) AddCommGrpCat.{u + 1} f inferInstance
+    let G := (sheafCompose S.smallEtaleTopology
+      AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)
+    let act (V : T.Etale) (b : Γ(V.left, ⊤))
+        (s : (Modules.etaleTensorSectionsSheaf E).obj.obj (op (M.obj V))) :=
+      (@id Γ((M.obj V).left, ⊤) b) •
+        (@id Γ((Modules.tensorPullback (M.obj V).hom).obj E, ⊤) s)
+    (∃ e : ∀ V : T.Etale, (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)),
+      (∀ (V W : T.Etale) (g : W ⟶ V) (s : (L.obj G).obj.obj (op V)) (i : Fin n),
+        e W ((L.obj G).obj.map g.op s) i = g.left.appTop (e V s i)) ∧
+      (∀ (V : T.Etale) (a : Γ(V.left, ⊤)) (s : (L.obj G).obj.obj (op V)),
+        e V (ULift.up (act V a s.down)) = a • e V s)) →
+    (p : Γ(T, ⊤)) = 0 →
+    ∃ (c : Fin n → Fin n → Γ(T, ⊤))
+      (e : ∀ V : T.Etale, (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤))),
+      (p : Γ(T, ⊤)) = 0 ∧
+      (∀ (V W : T.Etale) (g : W ⟶ V) (s : (L.obj G).obj.obj (op V)) (i : Fin n),
+        e W ((L.obj G).obj.map g.op s) i = g.left.appTop (e V s i)) ∧
+      (∀ (V : T.Etale) (s : (L.obj G).obj.obj (op V)) (i : Fin n),
+        e V ((L.map F).hom.app (op V) s) i =
+          ∑ j, (@id Γ(V.left, ⊤) (V.hom.appTop (c i j))) * (e V s j) ^ p) := by
+  intro M L G act hframe hp
+  obtain ⟨e, hnat, hlin⟩ := hframe
+  have hf (V : T.Etale) (a : Γ(V.left, ⊤)) (v : Fin n → Γ(V.left, ⊤)) :
+      e V ((L.map F).hom.app (op V) ((e V).symm (a • v))) =
+        a ^ p • e V ((L.map F).hom.app (op V) ((e V).symm v)) := by
+    let act' (b : Γ(V.left, ⊤)) (s : (L.obj G).obj.obj (op V)) :=
+      ULift.up (act V b s.down)
+    refine coordinateSemilinear p n (e V) (fun z ↦ (L.map F).hom.app (op V) z)
+      act' (hlin V) ?_ a v
+    intro b z
+    exact sectionsSemilinear S (fun U ↦ (Modules.tensorPullback U.hom).obj E) p
+      (fun U z ↦ F.hom.app U z) hF (M.obj V) (@id Γ((M.obj V).left, ⊤) b) z
+  exact naturalMatrixCoordinates_exists T p n (L.obj G) (L.map F) e hp hnat hf
+
 /-- Finite affine coordinates for a Frobenius-semilinear vector-bundle endomorphism.
 
 Source: Stacks Project, Tag 0GKU, lemma-frobenius-linear-on-vb, the choice of an affine
@@ -123,7 +225,7 @@ theorem frobenius_vectorBundle_local_coordinates
     ∀ (U : S.Etale) (x : U.left),
       ∃ (A : U.left.Opens) (_ : IsAffineOpen A), x ∈ A ∧
       ∃ (n : ℕ) (c : Fin n → Fin n → Γ(A.toScheme, ⊤)),
-      let L := Etale.localizationRestriction AddCommGrpCat.{u + 1}
+      let L := Etale.localizationRestriction (U := S) AddCommGrpCat.{u + 1}
         (A.ι ≫ U.hom) inferInstance
       let G := (sheafCompose S.smallEtaleTopology
         AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)
@@ -137,30 +239,9 @@ theorem frobenius_vectorBundle_local_coordinates
             ∑ j, (@id Γ(V.left, ⊤) (V.hom.appTop (c i j))) * (e V s j) ^ p) := by
   classical
   intro U x
-  obtain ⟨A, hA, hxA, n, e, hnat, hlin⟩ := frobenius_vectorBundle_local_frames p S E U x
-  let L := Etale.localizationRestriction AddCommGrpCat.{u + 1}
-    (A.ι ≫ U.hom) inferInstance
-  let G := (sheafCompose S.smallEtaleTopology
-    AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)
-  let M := MorphismProperty.Over.map ⊤ (inferInstance : Etale (A.ι ≫ U.hom))
-  have hp : (p : Γ(A.toScheme, ⊤)) = 0 :=
-    charSections p A.toScheme ((A.ι ≫ U.hom) ≫ (S ↘ Spec (.of (ULift.{u} (ZMod p)))))
-  have hf (V : A.toScheme.Etale) (a : Γ(V.left, ⊤)) (v : Fin n → Γ(V.left, ⊤)) :
-      e V ((L.map F).hom.app (op V) ((e V).symm (a • v))) =
-        a ^ p • e V ((L.map F).hom.app (op V) ((e V).symm v)) := by
-    have ha := hlin V a ((e V).symm v)
-    rw [AddEquiv.apply_symm_apply] at ha
-    have heSymm := congrArg (e V).symm ha
-    rw [AddEquiv.symm_apply_apply] at heSymm
-    change e V (F.hom.app (op (M.obj V)) ((e V).symm (a • v))) =
-      a ^ p • e V (F.hom.app (op (M.obj V)) ((e V).symm v))
-    have h₁ := congrArg (fun s ↦ e V (F.hom.app (op (M.obj V)) s)) heSymm.symm
-    have hFs := hF (op (M.obj V))
-      (ULift.up (@id Γ((M.obj V).left, ⊤) a)) ((e V).symm v)
-    refine h₁.trans ((congrArg (e V) hFs).trans ?_)
-    convert hlin V (a ^ p) (F.hom.app (op (M.obj V)) ((e V).symm v)) using 1; rfl
-  obtain ⟨c, heq⟩ := naturalMatrixCoordinates A.toScheme p n (L.obj G) (L.map F) e hnat hf
-  exact ⟨A, hA, hxA, n, c, e, hp, hnat, heq⟩
-
+  obtain ⟨A, hA, hxA, n, hframe⟩ := frobenius_vectorBundle_local_frames p S E U x
+  refine ⟨A, hA, hxA, n, ?_⟩
+  exact coordinates_of_frame p S A.toScheme E F hF (A.ι ≫ U.hom) n hframe
+    (charSections p A.toScheme ((A.ι ≫ U.hom) ≫ (S ↘ Spec (.of (ULift.{u} (ZMod p))))))
 
 end AlgebraicGeometry.Scheme

@@ -39,9 +39,10 @@
   "lem-weil-pbc-frobenius-vector-bundle-local-frames"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "W7",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+  "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof",
+  "note": "Preserve the shared frame lets in a private proved helper, transfer semilinearity through scalar-compatible additive coordinates, and use the existing finite coordinate matrix argument. The localization base is written explicitly as S, a definitionally equal presentation."
  },
  "mathlib_searches": [
   {
@@ -106,10 +107,10 @@
   "module": "Sheaf.AlgebraicGeometry.FrobeniusVectorBundleLocalCoordinates",
   "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusVectorBundleLocalCoordinates.lean",
   "declaration": "AlgebraicGeometry.Scheme.frobenius_vectorBundle_local_coordinates",
-  "statement": "theorem frobenius_vectorBundle_local_coordinates\n    (p : ℕ) [Fact p.Prime] (S : Scheme.{u})\n    [S.Over (Spec (.of (ULift.{u} (ZMod p))))] [CompactSpace S] [IsLocallyNoetherian S]\n    (E : S.Modules) [E.IsFiniteLocallyFree]\n    (F : (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf E) ⟶\n      (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf E))\n    (hF : ∀ (U : S.Etaleᵒᵖ) (a : ULift.{u + 1} Γ(U.unop.left, ⊤))\n        (e : ULift.{u + 1} Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)),\n      F.hom.app U (ULift.up (a.down • e.down)) =\n        ULift.up (a.down ^ p • (@id Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)\n          (F.hom.app U e).down))) :\n    ∀ (U : S.Etale) (x : U.left),\n      ∃ (A : U.left.Opens) (_ : IsAffineOpen A), x ∈ A ∧\n      ∃ (n : ℕ) (c : Fin n → Fin n → Γ(A.toScheme, ⊤)),\n      let L := Etale.localizationRestriction AddCommGrpCat.{u + 1}\n        (A.ι ≫ U.hom) inferInstance\n      let G := (sheafCompose S.smallEtaleTopology\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)\n      ∃ e : ∀ V : A.toScheme.Etale,\n          (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)),\n        (p : Γ(A.toScheme, ⊤)) = 0 ∧\n        (∀ (V W : A.toScheme.Etale) (g : W ⟶ V) (s : (L.obj G).obj.obj (op V)),\n          ∀ i, e W ((L.obj G).obj.map g.op s) i = g.left.appTop (e V s i)) ∧\n        (∀ (V : A.toScheme.Etale) (s : (L.obj G).obj.obj (op V)),\n          ∀ i, e V ((L.map F).hom.app (op V) s) i =\n            ∑ j, (@id Γ(V.left, ⊤) (V.hom.appTop (c i j))) * (e V s j) ^ p)",
+  "statement": "theorem frobenius_vectorBundle_local_coordinates\n    (p : ℕ) [Fact p.Prime] (S : Scheme.{u})\n    [S.Over (Spec (.of (ULift.{u} (ZMod p))))] [CompactSpace S] [IsLocallyNoetherian S]\n    (E : S.Modules) [E.IsFiniteLocallyFree]\n    (F : (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf E) ⟶\n      (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf E))\n    (hF : ∀ (U : S.Etaleᵒᵖ) (a : ULift.{u + 1} Γ(U.unop.left, ⊤))\n        (e : ULift.{u + 1} Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)),\n      F.hom.app U (ULift.up (a.down • e.down)) =\n        ULift.up (a.down ^ p • (@id Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)\n          (F.hom.app U e).down))) :\n    ∀ (U : S.Etale) (x : U.left),\n      ∃ (A : U.left.Opens) (_ : IsAffineOpen A), x ∈ A ∧\n      ∃ (n : ℕ) (c : Fin n → Fin n → Γ(A.toScheme, ⊤)),\n      let L := Etale.localizationRestriction (U := S) AddCommGrpCat.{u + 1}\n        (A.ι ≫ U.hom) inferInstance\n      let G := (sheafCompose S.smallEtaleTopology\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)\n      ∃ e : ∀ V : A.toScheme.Etale,\n          (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)),\n        (p : Γ(A.toScheme, ⊤)) = 0 ∧\n        (∀ (V W : A.toScheme.Etale) (g : W ⟶ V) (s : (L.obj G).obj.obj (op V)),\n          ∀ i, e W ((L.obj G).obj.map g.op s) i = g.left.appTop (e V s i)) ∧\n        (∀ (V : A.toScheme.Etale) (s : (L.obj G).obj.obj (op V)),\n          ∀ i, e V ((L.map F).hom.app (op V) s) i =\n            ∑ j, (@id Γ(V.left, ⊤) (V.hom.appTop (c i j))) * (e V s j) ^ p)",
   "branch": "sheaf-dag",
-  "by": "V8",
-  "date": "2026-10-18"
+  "by": "W7",
+  "date": "2026-10-20"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -122,14 +123,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V8",
+  "reviewer": "C-2be56",
+  "group": "W7",
   "result": "pass",
-  "landing": "20261018T091415-L-3259664",
+  "landing": "20261021T120900-L-3982172",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: frobenius_vectorBundle_local_frames proof and the two adapted consumers vs live LocalFrames/LocalCoordinates/AffineKernelModels and nodes lem-weil-pbc-frobenius-vector-bundle-local-frames/-coordinates; importers LocalLifts and Kernel compiled"
  },
  "lean_audit": {}
 }

@@ -28,6 +28,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+open Modules
+attribute [local instance 3000] CategoryStruct.toQuiver
+attribute [local instance 2000]
+ instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf
+
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
 
 private theorem kernelLift {X : Scheme.{u}}
@@ -164,7 +169,7 @@ private theorem affineKernelModelsOfCoordinates
     ∀ (U : S.Etale) (x : U.left),
       ∃ (A : U.left.Opens) (_ : IsAffineOpen A), x ∈ A ∧
       ∃ (n : ℕ) (c : Fin n → Fin n → Γ(A.toScheme, ⊤)),
-      let L := Etale.localizationRestriction AddCommGrpCat.{u + 1}
+      let L := Etale.localizationRestriction (U := S) AddCommGrpCat.{u + 1}
         (A.ι ≫ U.hom) inferInstance
       ∃ e : ∀ V : A.toScheme.Etale,
           (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)),

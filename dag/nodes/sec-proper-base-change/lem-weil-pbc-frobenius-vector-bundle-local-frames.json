@@ -15,9 +15,8 @@
  ],
  "proof": [
   {
-   "text": "Pull E back to U, choose a finite free trivialization near x, and refine to an affine open A. Reindex its finite basis by Fin n. Tensoring this basis along V→A defines the coordinate equivalences for every etale V.",
+   "text": "Use the existing preservation of finite local freeness under module pullback. Choose a finite free trivialization of the pullback of E on an open B of U containing x, refine B to an affine open A, and reindex its finite basis by ULift (Fin n). Pull this isomorphism to every etale V over A using the modules pseudofunctor and pullHom. The construction uses the abstract module pullback and does not need the separate tensor-section adjunction wrapper.",
    "uses": [
-    "def-pc-module-pullback",
     "def-sc-etale-qcoherent-module"
    ],
    "elementary": true,
@@ -27,9 +26,10 @@
    }
   },
   {
-   "text": "The unit-normalized composition isomorphism for tensor pullback identifies further pullback of each basis vector with the same pulled-back vector. This gives naturality of the coordinate equivalences; alternatively use the natural tensor-sections evaluation comparison with module homomorphisms. The free-module section coordinate equivalence and tensor pullback are linear, giving scalar compatibility.",
+   "text": "Transport the pulled-back free frame to tensor sections through tensorSectionsPullbackComparison. Evaluation from etaleHom of the unit is surjective: a section determines the homomorphism sending 1 to that section. Evaluation naturality and pullHom composition reduce coordinate naturality to the existing theorem that finite free coordinates commute with pullback through a factorization. Compose the resulting linear coordinates with the additive ULift equivalence and reindex ULift (Fin n) by Fin n. Linearity proves scalar compatibility, including rank zero.",
    "uses": [
-    "lem-sc-etale-tensor-sections-evaluation-naturality"
+    "lem-sc-etale-tensor-sections-evaluation-naturality",
+    "new-sbc-pullback-free-coordinates-naturality"
    ],
    "elementary": false,
    "source": {
@@ -39,14 +39,15 @@
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
   "def-sc-etale-qcoherent-module",
-  "lem-sc-etale-tensor-sections-evaluation-naturality"
+  "lem-sc-etale-tensor-sections-evaluation-naturality",
+  "new-sbc-pullback-free-coordinates-naturality"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "W7",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+  "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof",
+  "note": "Implemented from existing finite-local-freeness, abstract pullback, tensor comparison, evaluation naturality and finite free coordinate naturality APIs. Transparent local lets share the existing scalar action so kernel conversion does not unfold tensor pullback."
  },
  "mathlib_searches": [
   {
@@ -111,10 +112,10 @@
   "module": "Sheaf.AlgebraicGeometry.FrobeniusVectorBundleLocalFrames",
   "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusVectorBundleLocalFrames.lean",
   "declaration": "AlgebraicGeometry.Scheme.frobenius_vectorBundle_local_frames",
-  "statement": "theorem frobenius_vectorBundle_local_frames\n    (p : ℕ) [Fact p.Prime] (S : Scheme.{u})\n    [S.Over (Spec (.of (ULift.{u} (ZMod p))))] [CompactSpace S] [IsLocallyNoetherian S]\n    (E : S.Modules) [E.IsFiniteLocallyFree] :\n    ∀ (U : S.Etale) (x : U.left),\n      ∃ (A : U.left.Opens) (_ : IsAffineOpen A), x ∈ A ∧\n      ∃ n : ℕ,\n      let L := Etale.localizationRestriction AddCommGrpCat.{u + 1}\n        (A.ι ≫ U.hom) inferInstance\n      let G := (sheafCompose S.smallEtaleTopology\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)\n      ∃ e : ∀ V : A.toScheme.Etale,\n          (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)),\n        (∀ (V W : A.toScheme.Etale) (g : W ⟶ V) (s : (L.obj G).obj.obj (op V)),\n          ∀ i, e W ((L.obj G).obj.map g.op s) i = g.left.appTop (e V s i)) ∧\n        (∀ (V : A.toScheme.Etale) (a : Γ(V.left, ⊤))\n          (s : (L.obj G).obj.obj (op V)),\n          e V (ULift.up ((@id Γ(((MorphismProperty.Over.map ⊤\n              (inferInstance : Etale (A.ι ≫ U.hom))).obj V).left, ⊤) a) •\n            (@id Γ((Modules.tensorPullback ((MorphismProperty.Over.map ⊤\n              (inferInstance : Etale (A.ι ≫ U.hom))).obj V).hom).obj E, ⊤) s.down))) =\n                a • e V s)",
+  "statement": "theorem frobenius_vectorBundle_local_frames\n    (p : ℕ) [Fact p.Prime] (S : Scheme.{u})\n    [S.Over (Spec (.of (ULift.{u} (ZMod p))))] [CompactSpace S] [IsLocallyNoetherian S]\n    (E : S.Modules) [E.IsFiniteLocallyFree] :\n    ∀ (U : S.Etale) (x : U.left),\n      ∃ (A : U.left.Opens) (_ : IsAffineOpen A), x ∈ A ∧\n      ∃ n : ℕ,\n      let f : A.toScheme ⟶ S := A.ι ≫ U.hom\n      let M : A.toScheme.Etale ⥤ S.Etale :=\n        MorphismProperty.Over.map (Y := S) ⊤\n          (inferInstance : Etale f)\n      let L := Etale.localizationRestriction (U := S) AddCommGrpCat.{u + 1}\n        f inferInstance\n      let G := (sheafCompose S.smallEtaleTopology\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf E)\n      let act (V : A.toScheme.Etale) (b : Γ(V.left, ⊤))\n          (s : (Modules.etaleTensorSectionsSheaf E).obj.obj (op (M.obj V))) :=\n        (@id Γ((M.obj V).left, ⊤) b) •\n          (@id Γ((Modules.tensorPullback (M.obj V).hom).obj E, ⊤) s)\n      ∃ e : ∀ V : A.toScheme.Etale,\n          (L.obj G).obj.obj (op V) ≃+ (Fin n → Γ(V.left, ⊤)),\n        (∀ (V W : A.toScheme.Etale) (g : W ⟶ V) (s : (L.obj G).obj.obj (op V)),\n          ∀ i, e W ((L.obj G).obj.map g.op s) i = g.left.appTop (e V s i)) ∧\n        (∀ (V : A.toScheme.Etale) (a : Γ(V.left, ⊤))\n          (s : (L.obj G).obj.obj (op V)),\n          e V (ULift.up (act V a s.down)) =\n                a • e V s)",
   "branch": "sheaf-dag",
-  "by": "V8",
-  "date": "2026-10-18"
+  "by": "W7",
+  "date": "2026-10-20"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -127,14 +128,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V8",
+  "reviewer": "C-2be56",
+  "group": "W7",
   "result": "pass",
-  "landing": "20261018T091415-L-3259664",
+  "landing": "20261021T120900-L-3982172",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: frobenius_vectorBundle_local_frames proof and the two adapted consumers vs live LocalFrames/LocalCoordinates/AffineKernelModels and nodes lem-weil-pbc-frobenius-vector-bundle-local-frames/-coordinates; importers LocalLifts and Kernel compiled"
  },
  "lean_audit": {}
 }
