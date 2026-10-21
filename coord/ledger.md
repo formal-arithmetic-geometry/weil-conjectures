@@ -20423,3 +20423,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: returned deliver/Q34/lem-sfb-cohomology-tor-interval (reviewer RETURN: Superseded by live (A7, B10, C5); the maths itself is sound. Delivery: one new statement-only node, lem-sfb-bounded-post)
 - 06:29 L: returned deliver/NP/lem-weil-proetale-constructible-exact-closure (reviewer RETURN: Superseded by a live stage-3 Lean landing (A7, B10, C5). This S1 re-split was committed 2026-10-21 05:54 UTC on base ecf)
 - 06:32 L: merged deliver/Q66/lem-coef-site-closed-counit-transport (reviewer PASS; after a return; new nodes: 1)
+- 06:32 L: merged deliver/Q17/lem-sf-etale-chart-adjoint-comparison (reviewer PASS; after a return; new nodes: 2)
