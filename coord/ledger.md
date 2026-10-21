@@ -21626,3 +21626,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:03 L: returned deliver/Q40/lem-pur-line-zero-class-exchange (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pur-line-zero-class-exchange: cited node lem-pur-l)
 - 09:03 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 09:03 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 09:04 L: returned deliver/Q06/lem-sf-completed-coefficient-pullback-linearity (reviewer RETURN: L: independent stage-2 immutable head af4f9f84d1df: H2 (mechanical finding confirmed): stmt_deps add theorem nodes lem-w)
