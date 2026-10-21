@@ -1,0 +1,84 @@
+{
+ "id": "lem-sfb-finite-local-model-rhom-continuity",
+ "kind": "statement",
+ "title": "Finite constant local models have bounded-target internal-Hom continuity",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, and choose $A=\\mathcal O_E$, $\\Lambda=\\underline{\\mathcal O_E}$ or $A=E$, $\\Lambda=\\underline E$ [sk-def-sfb-condensed-ring]. Let $T$ be any scheme and $B_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Use $D(B_T)$ as in [sk-def-sfb-derived-categories]. Let $L$ be a $B_T$-module sheaf with a finite constant local model [sk-def-sfb-constructible]: on a pro-étale cover $W_\\alpha\\to T$ it is $B_{W_\\alpha}\\otimes_{\\underline A}\\underline{P_\\alpha}$, with $P_\\alpha$ a finitely presented $A$-module. All sites and indexing categories are small in the fixed module universe [def-weil-size-convention, def-weil-pbc-proetale-site, def-weil-pbc-category-colimit]. Filtered colimits below are termwise sheaf colimits of functorial complex representatives, and all comparison maps are induced by the original cocone. For every small filtered diagram $(N_i^\\bullet)$ of $B_T$-module complexes [def-pc-cochain-complex-modules] with $H^r(N_i)=0$ for all $i$ and $r<c$, the evaluation-induced map\n$$\\varinjlim_i R\\mathcal Hom_{B_T}(L[0],N_i)\\longrightarrow R\\mathcal Hom_{B_T}(L[0],\\varinjlim_iN_i)$$\nis an isomorphism [sk-def-sfb-derived-tensor-hom]. Moreover $R\\mathcal Hom_{B_T}(L[0],N)\\in D^{\\ge c}(B_T)$ whenever $N\\in D^{\\ge c}(B_T)$, where $D^{\\ge c}$ means vanishing cohomology in degrees $<c$ [def-sbc-standard-tstructure-derived-category]. No Noetherianity of $T$ or torsion-freeness of $P_\\alpha$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free); agent local-to-global filtered-colimit extraction of Bhatt–Scholze Lemmas 6.3.14(1),(3) and 6.8.12."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-category-colimit",
+  "def-pc-scheme",
+  "sk-def-sfb-constructible",
+  "def-pc-cochain-complex-modules",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf internal Hom from a locally finitely presented constant integral adic module commutes with filtered colimits of uniformly bounded below complexes",
+   "results": "Hits read: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.Presentation.isColimit, SheafOfModules.Presentation.map, SheafOfModules.Presentation.map_π_eq, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints, localCohomology.diagram, instAbelianCondensedMod",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not local-model comparison and common lower bound (returned step 2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally admitting a two term finite free resolution has derived internal Hom preserving filtered direct limits and connective targets",
+   "results": "Hits read: SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.ab5ofSize",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not local-model comparison and common lower bound (returned step 2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafHom\", \"colimit\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not local-model comparison and common lower bound (returned step 2)"
+  },
+  {
+   "tool": "grep",
+   "query": "(RHom|derivedHom|internalHom|sheafHom).*(filtered|colimit)|(filtered|colimit).*(RHom|derivedHom|internalHom|sheafHom)",
+   "results": "Hits read: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean:319:     suffices PreservesColimit (parallelPair (F.map WalkingParallelPairHom.left), Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean:16: This file provides instances for when OrderHom.toFunctor preserves limits/colimits., Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean:18: then `(toOrderHom f).toFunctor` preserves finite limits/colimits. If `f` preserves, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean:57:     [FinCategory J] (K : J ⥤ α) : PreservesColimit K (toOrderHom f).toFunctor :=, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean:63:     [FinCategory J] : PreservesColimitsOfShape J (toOrderHom f).toFunctor where, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean:65: instance : PreservesFiniteColimits (toOrderHom f).toFunctor where, Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean:85: points, then the cofan constructed from `combPairHoms` is a colimit cocone. -/, Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean:86: def combPairIsColimit : IsColimit (Cofan.mk bc.pt (combPairHoms c₁ c₂ bc)) :=, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean:826:   rw [(colimit.w (parallelPair f 0) WalkingParallelPairHom.left).symm]",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not local-model comparison and common lower bound (returned step 2)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal sheaf Hom from a locally perfect sheaf preserves filtered colimits of bounded below complexes",
+   "results": "Hits read: HomologicalComplex.instHasFilteredColimitsOfSize, instPreservesHomologyFunctorAddCommGrpCatColim, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.sheafHom, CategoryTheory.Sheaf.hasExactColimitsOfShape",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not local-model comparison and common lower bound (returned step 2)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-internal-hom-continuity",
+  "date": "2026-10-21",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "lem-sfb-dc-hom-preserves.proof.md, last sentence 'The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ... see Bhatt–Scholze, §6.8': compatibility of internal Hom with inverting $\\ell$ and with the filtered coefficient colimit (parent steps 5 and 8). Extracted from returned continuity proof: local-model comparison and common lower bound (returned step 2)",
+   "via": [
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

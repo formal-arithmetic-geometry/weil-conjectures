@@ -28,133 +28,92 @@
  ],
  "proof": [
   {
-   "text": "Work in the fixed small-site universe. Apply [lem-sfb-module-object-ringed-site-derived-comparison] to identify the module-object derived tensor over $B$ and evaluation-defined internal Hom with the ordinary ringed-site models, preserving evaluation. By [lem-pur-ringed-site-grothendieck-abelian], filtered colimits of module sheaves are exact. Consequently the termwise colimit of complexes commutes with kernels, images, cokernels and cohomology, and preserves objectwise quasi-isomorphisms of diagrams: apply exactness to $0\\to\\ker d^n\\to M^n\\to\\operatorname{im}d^n\\to0$ and $0\\to\\operatorname{im}d^{n-1}\\to\\ker d^n\\to H^nM\\to0$. Use the functorial complex model in [def-pur-derived-internal-hom]; its invariance under quasi-isomorphisms and [lem-weil-pbc-unbounded-derived-iso-cohomology] allow us to test each comparison on cohomology sheaves. We will also use diagrams with a common cohomological lower bound, by the following explicit reduction: for any functorial complex model $A_i$ with $H^n(A_i)=0$ for $n<c$, replace it by $T_c A_i$, with zero terms below $c$, term $\\operatorname{coker}(d^{c-1})$ in degree $c$, and unchanged terms above $c$. The natural maps $A_i\\to T_cA_i$ are quasi-isomorphisms. This operation commutes with filtered colimits by exactness, so every termwise bounded-below comparison we prove also applies to these uniformly cohomologically bounded-below diagrams. In what follows, say a source $A$ has property $P$ if its canonical internal-Hom comparison is an isomorphism for all such diagrams and there is an integer $d_A$, independent of the diagram and $c$, for which $R\\mathcal Hom(A,N_i)\\in D^{\\ge c+d_A}$ whenever $N_i\\in D^{\\ge c}$.",
+   "text": "By [lem-sfb-module-object-ringed-site-derived-comparison] work in ordinary ringed-site models preserving evaluation. Use the property $P$ of [lem-sfb-rhom-continuity-triangle-closure], which includes a diagram-independent lower bound. Exact filtered colimits [lem-pur-ringed-site-grothendieck-abelian] commute with cohomology by applying exactness to the kernel/image sequences of each differential; hence they preserve quasi-isomorphisms and commute with the smart truncation having $\\operatorname{coker}d^{c-1}$ in degree $c$. Thus uniformly cohomologically bounded targets may be replaced functorially by termwise bounded targets. The model invariance of [def-pur-derived-internal-hom] justifies these choices.",
    "uses": [
     "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-rhom-continuity-triangle-closure",
     "lem-pur-ringed-site-grothendieck-abelian",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JA, 08JC for the functorial Hom model; the module-object comparison is the separately stated lemma cited here, and the exact filtered-colimit/truncation argument is written out."
+    "place": "Section 08J7; exact-colimit and truncation setup of returned step 1."
    }
   },
   {
-   "text": "First prove $P$ with $d_L=0$ for a sheaf $L$ having a finite constant local model on any scheme $T$ [sk-def-sfb-constructible]. On each model chart write $L=B_T\\otimes_{\\underline A}\\underline P$, where $A=\\mathcal O_E$ or $E$ and $P$ is finitely presented. By [lem-sfb-finite-constant-model-two-term-free-resolution], choose a resolution $[B_T^a\\to B_T^b]\\to L[0]$ in degrees $[-1,0]$; rationally one may take $a=0$. The model [lem-weil-pbc-ringed-site-bounded-free-rhom-model] now computes internal Hom into every target complex bounded below by $c$. Each term is a finite sum of target terms; the differential is $d_Nf-(-1)^nf d_P$. Taking a filtered colimit commutes with these finite sums and with this differential, giving an isomorphism of complexes on the chart, and these Hom complexes vanish in degrees below $c$. The chart restriction of the actual canonical comparison is this calculation, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. For a chart $f:W\\to T$, [sk-prop-sfb-cartesian-coefficients] identifies coefficient pullback with exact inverse image. This pullback is left adjoint to direct image by [def-sfb-module-upper-lower-adjunction], so commutes with all small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. Under the slice-site identification this is precisely the restriction used here. The charts are slice sites by [lem-weil-proetale-weakly-etale-localization], with the correct coefficient rings by [sk-prop-sfb-cartesian-coefficients]. They form a pro-étale cover, hence cover every object after base change; [lem-sfb-sheaf-cover-local-isomorphism] applied to each cohomology sheaf, then [lem-weil-pbc-unbounded-derived-iso-cohomology], gives the global comparison and its common bound. For uniformly cohomologically bounded targets use the reduction of step 1. No finite upper bound on the targets or global bound on chart ranks is used.",
+   "text": "By [lem-sfb-finite-local-model-rhom-continuity], $P_T(L[0])$ holds with bound $d_L=0$ for every finite constant local model $L$ on every scheme $T$, including integral torsion models.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "lem-sfb-finite-constant-model-two-term-free-resolution",
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-sfb-module-upper-lower-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-proetale-weakly-etale-localization",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-sfb-finite-local-model-rhom-continuity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free); the scalar resolution is the separately stated lemma cited here. The finite Hom-complex calculation and cover descent remain explicit."
+    "place": "Tag 08JI; returned step 2 is now the cited local-model lemma."
    }
   },
   {
-   "text": "Let $i:Z\\hookrightarrow T$ be closed with qcqs open complement $j:U\\hookrightarrow T$, where the underlying space of $T$ is Noetherian. The condensed open-closed recollement [lem-weil-pbc-condensed-open-closed-recollement] makes $i^*,j^*$ exact and colimit-preserving, gives $Ri^!$ and $Rj_*$ models preserving a common lower bound, and gives the natural support triangle $i_*Ri^!N\\to N\\to Rj_*j^*N\\to i_*Ri^!N[1]$. For a diagram $N_i$ with common lower bound $c$, [det-pe-bounded-continuity-direct-image] applies to $j$ and the complexes $j^*N_i$, and asserts all cohomology-sheaf comparisons for $Rj_*$ are isomorphisms. Step 1 and the cohomology isomorphism criterion turn this into derived continuity of $Rj_*$; the same reasoning, using $T_c$ on the functorial models, applies to any uniformly cohomologically bounded-below diagram on $U$. Apply filtered colimit to the support triangles. Exactness makes their cohomology long sequences exact. Comparing these rows with the support triangle for $N=\\varinjlim_iN_i$, the middle and direct-image terms are isomorphic, so the five lemma in the appropriate five-term windows gives $\\varinjlim_i i_*Ri^!N_i\\cong i_*Ri^!N$. Apply exact colimit-preserving $i^*$ and use $i^*i_*\\cong\\mathrm{id}$ to obtain $\\varinjlim_iRi^!N_i\\cong Ri^!N$. All these maps are induced by the original diagram's cocone. Their terms $Ri^!N_i$ remain in $D^{\\ge c}$. The cited direct-image theorem needs qcqs, not a finite-dimensional or locally Noetherian scheme; a Noetherian underlying space makes each open subset and each intersection of affine opens quasi-compact, so every scheme and immersion here is qcqs.",
+   "text": "Let $i:Z\\hookrightarrow T$ be closed with open complement and $T$ topologically Noetherian. By [lem-sfb-closed-support-bounded-continuity], $Ri^!$ commutes with our colimits and preserves their common lower bound. The functor $Ri^!=R\\underline\\Gamma_Z$ of [lem-sfb-open-closed-internal-hom-formulas] and the $Ri^!$ of [lem-sfb-closed-support-bounded-continuity] are both right adjoints of $i_*$ on bounded-below objects, so they are canonically isomorphic by uniqueness of adjoints, compatibly with the counits; we identify them. The closed formula [lem-sfb-open-closed-internal-hom-formulas] then gives $R\\mathcal Hom_T(i_*L,N_i)\\cong i_*R\\mathcal Hom_Z(L,Ri^!N_i)$. Step 2 applies on $Z$. Closed $i_*$ is exact and commutes with filtered colimits by [lem-weil-pbc-proetale-ringed-open-closed]; its qcqs hypothesis follows from [lem-sfb-noetherian-space-compact-subsets]. The natural formulas therefore prove $P_T(i_*L)$ with bound zero.",
    "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "det-pe-bounded-continuity-direct-image",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-five-lemma",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 6.3.14 and 6.8.12: bounded-below continuity route; support triangle and filtered-colimit argument made internal here. Stacks proetale Tag 09BM for the open-closed setting."
-   }
-  },
-  {
-   "text": "For the closed immersion $i$ of step 3 and a finite constant local model $L$ on $Z$, the closed formula of [lem-sfb-open-closed-internal-hom-formulas] gives $R\\mathcal Hom_T(i_*L,N_i)\\cong i_*R\\mathcal Hom_Z(L,Ri^!N_i)$. By step 3 the diagram $Ri^!N_i$ has common cohomological lower bound $c$ and its colimit is $Ri^!N$. Step 2 on $Z$ computes the colimit of the internal Hom terms and gives them common bound $c$. The exact closed direct image $i_*$ commutes with filtered colimits by [lem-weil-pbc-proetale-ringed-open-closed], whose qcqs hypothesis on $T$ was verified in step 3. Thus these identifications give exactly the canonical comparison for $i_*L$, and show $P(i_*L)$ with $d_{i_*L}=0$. Notice that this uses the internal closed formula, not merely an adjunction of global Hom groups.",
-   "uses": [
+    "lem-sfb-closed-support-bounded-continuity",
     "lem-sfb-open-closed-internal-hom-formulas",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-noetherian-space-compact-subsets"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.13, internal closed-support calculation; no constructibility-preservation conclusion or excellence hypothesis is invoked."
+    "place": "Lemma 6.7.13, internal support calculation; returned steps 3–4."
    }
   },
   {
-   "text": "If $v:V\\hookrightarrow T$ is an open immersion of schemes with Noetherian underlying spaces and a source $A\\in D(B_V)$ has $P$ with bound $d_A$, the open formula of [lem-sfb-open-closed-internal-hom-formulas] gives $R\\mathcal Hom_T(v_!A,N_i)\\cong Rv_*R\\mathcal Hom_V(A,v^*N_i)$. The targets $v^*N_i$ have common lower bound $c$ and colimit $v^*N$. The property $P(A)$ identifies the colimit of the internal Hom objects with $R\\mathcal Hom_V(A,v^*N)$ and supplies their common lower bound $c+d_A$. The bounded-below direct-image continuity argument of step 3 therefore applies to $Rv_*$ and this diagram, after the explicit functorial truncation of step 1 if necessary. It gives the comparison for $v_!A$. The common bound for the output is still $c+d_A$, because the right derived direct image is represented by bounded-below injective models with that common lower bound in [lem-weil-pbc-condensed-open-closed-recollement]. All uses of this recollement can be made with the reduced closed complement of $v$. Thus $P(v_!A)$ holds with the same $d_A$. In particular step 4 followed by this step covers $v_!t_*L$ for $t$ closed in $V$ and $L$ with a finite constant local model.",
+   "text": "By [lem-sfb-rhom-continuity-open-extension], every open $v:V\\hookrightarrow X$ carries sources with $P_V$ to sources with $P_X$. Apply this to the sources $t_*L$ of step 3 inside $V$. Every open subspace of the Noetherian space $X$ is Noetherian, so the hypotheses hold. Thus $P_X(v_!t_*L)$ for every generator used below.",
    "uses": [
-    "lem-sfb-open-closed-internal-hom-formulas",
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "det-pe-bounded-continuity-direct-image"
+    "lem-sfb-rhom-continuity-open-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.3.14, preservation by open extension; sheaf-valued adjunction and the lower bound are made explicit."
+    "place": "Lemma 6.3.14(2); returned step 5."
    }
   },
   {
-   "text": "The sources having $P$ are closed under shifts and finite distinguished triangles. Indeed, derived internal Hom sends a triangle in its first variable to a triangle with reversed order, and commutes with shifts, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Apply the comparisons to this triangle; the long cohomology sequences [lem-sf-derived-homology-long-exact] remain exact under filtered colimit by [lem-pur-ringed-site-grothendieck-abelian]. If two comparisons are isomorphisms, [lem-weil-pbc-five-lemma] applied degree by degree makes the third one an isomorphism, then [lem-weil-pbc-unbounded-derived-iso-cohomology] gives the derived assertion. To see the colimit rows arise from triangles, represent the fixed source triangle by a chain-map cone: the Hom complex of that cone is the shifted cone of the reversed Hom map. Its terms use only the two corresponding Hom terms and a finite direct sum, so termwise filtered colimit commutes with that cone and its differential. The functorial target models of step 1 then make the cocone maps a morphism of these triangles and their long exact rows. The common-bound condition is also closed: for a source shift $A[n]$ the target Hom shifts by $[-n]$, so $d_{A[n]}=d_A+n$; in a triangle the long exact sequence gives a lower bound for the remaining term by taking the minimum of the two known bounds and, when the rotation introduces a shift, decreasing this minimum by one. Hence the bound still depends only on the finitely many fixed sources, and is independent of the target diagram.",
+   "text": "The class of sources with $P_X$ contains zero and is closed under isomorphisms, shifts and triangles by [lem-sfb-rhom-continuity-triangle-closure]. Apply [lem-sfb-bounded-finite-model-generation] and step 4: all its generators have $P_X$, so the given bounded constructible $K$ has $P_X$.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sf-derived-homology-long-exact",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-five-lemma",
+    "lem-sfb-rhom-continuity-triangle-closure",
+    "lem-sfb-bounded-finite-model-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3) and Lemma 6.8.12; returned steps 6–7."
+   }
+  },
+  {
+   "text": "The given diagram has the common termwise lower bound $c$, hence also the common cohomological bound required by $P_X(K)$. Its comparison is therefore an isomorphism. All comparison maps above are evaluation-induced. Exact filtered colimits preserve the quasi-isomorphisms of the models, by step 1, giving the asserted independence; by [lem-weil-pbc-unbounded-derived-iso-cohomology] a morphism of $D(\\operatorname{Mod}_B)$ is an isomorphism exactly when it is so on all cohomology sheaves, which is the equivalent cohomology-sheaf formulation.",
+   "uses": [
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (RHom-triangulated), and derived Tags 05RS, 0147; explicit filtered long-exact-sequence/five-lemma argument."
-   }
-  },
-  {
-   "text": "For each nonzero constructible cohomology sheaf $H^q(K)$, apply [lem-sfb-finite-model-stratum-filtration]. Every quotient of its finite filtration has the form $v_!t_*L$ handled by steps 4 and 5: the reduced locally closed strata have Noetherian underlying spaces, all open complements are qcqs, and $L$ has precisely the finite constant local model of step 2, including possible $\\mathcal O_E$-torsion. Each short exact sequence in the filtration gives a distinguished triangle by [lem-sf-derived-ses-triangle]. Step 6 therefore proves $P(H^qK)$. Finally the standard truncations [def-sbc-standard-tstructure-derived-category] give the triangles $\\tau_{\\le q-1}K\\to\\tau_{\\le q}K\\to H^q(K)[-q]\\to\\tau_{\\le q-1}K[1]$: their last term description follows directly by computing the quotient of consecutive smart truncations. Since $K$ has cohomology in a finite interval $[a,b]$, start with $\\tau_{\\le a-1}K\\cong0$ and end with $\\tau_{\\le b}K\\cong K$. Step 6 along these finitely many triangles proves $P(K)$. The originally given $M_i^\\bullet$ satisfy the required common bound $c$, so the requested comparison is an isomorphism. Every map used was natural in the targets and induced by evaluation or the original cocone; thus the resulting comparison is the evaluation-induced map in the statement. Exact filtered colimits preserve all the quasi-isomorphisms used in changing the functorial models (step 1), proving the asserted independence and the equivalent formulation on cohomology sheaves.",
-   "uses": [
-    "lem-sfb-finite-model-stratum-filtration",
-    "lem-sf-derived-ses-triangle",
-    "def-sbc-standard-tstructure-derived-category",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 6.3.3, 6.3.14 and 6.8.12, finite devissage pattern. The finite-model filtration is independently sourced to Stacks Tag 09Y5 and open-closed localization, and the internal filtered-colimit conclusion is an agent elaboration."
+    "place": "Lemma 6.8.12, conclusion of the internal filtered-colimit elaboration."
    }
   }
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-sfb-module-upper-lower-adjunction",
-  "det-pe-bounded-continuity-direct-image",
   "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-ses-triangle",
-  "lem-sfb-finite-constant-model-two-term-free-resolution",
-  "lem-sfb-finite-model-stratum-filtration",
+  "lem-sfb-bounded-finite-model-generation",
+  "lem-sfb-closed-support-bounded-continuity",
+  "lem-sfb-finite-local-model-rhom-continuity",
   "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-noetherian-space-compact-subsets",
   "lem-sfb-open-closed-internal-hom-formulas",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-rhom-continuity-open-extension",
+  "lem-sfb-rhom-continuity-triangle-closure",
   "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-proetale-weakly-etale-localization",
-  "sk-def-sfb-constructible",
-  "sk-prop-sfb-cartesian-coefficients"
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
@@ -314,79 +273,19 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-constructible-internal-hom-continuity",
   "worker": "stage1",
-  "summary": "Q26 repaired the human return on the two long non-elementary steps: the module-object/ringed-site closed derived comparison and the finite scalar-model length-one free resolution are now separate statement-only nodes. Steps 1 and 2 cite them and retain the explicit exact-colimit/truncation, finite Hom-complex, and cover-descent arguments. The item statement, route, steps 3–7, Lean record and maintainer fields are unchanged. Re-read sources and cited statements, checked small cases and logged actual Mathlib searches.",
-  "blueprint": "lem-sfb-dc-hom-preserves.proof.md, last sentence 'The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ... see Bhatt–Scholze, §6.8': compatibility of internal Hom with inverting $\\ell$ and with the filtered coefficient colimit (parent steps 5 and 8). Steps 1–7 supply the constructible-source continuity required by localization and coefficient passage in parent steps 5 and 8; the parent itself is not cited, avoiding a cycle.",
+  "summary": "Q51 implements the clarified human re-split instruction of 2026-10-21 without changing the statement or Lean record. Five NEW statement-only unsplit nodes isolate local-model continuity, bounded closed-support continuity, open-extension stability, triangle closure with uniform lower bounds, and finite-model generation. The parent is their short assembly (2503 proof-text characters). Prior helper proofs are retained only as report sketches and sandbox history; they are not delivered as split nodes.",
+  "blueprint": "lem-sfb-dc-hom-preserves.proof.md, last sentence 'The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ... see Bhatt–Scholze, §6.8': compatibility of internal Hom with inverting $\\ell$ and with the filtered coefficient colimit (parent steps 5 and 8). Returned steps 2, 3, 5, 6 and 7 are now five independent statement-only helper nodes; parent uses their statements.",
   "tool_uses": [
    {
-    "node": "def-pur-derived-internal-hom",
-    "why": "Functorial ordinary internal-Hom complex model and invariance under quasi-isomorphisms. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "def-sbc-standard-tstructure-derived-category",
-    "why": "Standard smart truncations giving a finite reconstruction from bounded cohomology. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "def-sfb-module-upper-lower-adjunction",
-    "why": "The actual coefficient-compatible chart pullback is a left adjoint. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "det-pe-bounded-continuity-direct-image",
-    "why": "Generic qcqs bounded-below direct-image continuity, applied only with its common lower-bound hypothesis verified. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
     "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Exact filtered colimits in any small ringed-site module category; supplies the abelian-category infrastructure, not a six-functor preservation route. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-sf-derived-homology-long-exact",
-    "why": "Generic long exact cohomology sequence of a distinguished triangle. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-sf-derived-ses-triangle",
-    "why": "The generic distinguished triangle attached to a short exact sequence of sheaves. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-sfb-sheaf-cover-local-isomorphism",
-    "why": "Detecting cohomology-sheaf comparison isomorphisms on a pro-etale cover. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-open-closed-recollement",
-    "why": "Ordinary bounded-below open/closed support adjunctions, exact colimit-preserving pullback and common lower bounds; no preservation theorem is imported. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-five-lemma",
-    "why": "Generic five lemma in the abelian category of module sheaves. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Generic preservation of small colimits by that chart pullback. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
+    "why": "Generic Sheaves of modules on a small ringed site are Grothendieck abelian infrastructure used with its stated hypotheses; the finite-local-model devissage of this unit supplies no replacement."
    },
    {
     "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Exact closed direct image and filtered-colimit preservation on qcqs schemes. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Generic slice restriction, triangulatedness and shift rules for internal Hom. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "why": "Explicit bounded-free internal-Hom complex on each local-model chart. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "why": "Generic derived-category cohomology criterion for an isomorphism. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identification of each pro-etale model chart with the corresponding slice site. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Correct coefficient rings and exact pullback on every stratum and model chart. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
+    "why": "Generic Ringed pro-etale open-closed localization infrastructure used with its stated hypotheses; the finite-local-model devissage of this unit supplies no replacement."
    }
   ]
  },
@@ -417,12 +316,12 @@
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q26-6b9497bb6",
-  "group": "Q26",
+  "reviewer": "NT-cc-Q51-6f5dd5cc2",
+  "group": "Q51",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-6b9497bb6 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, both new nodes, the statement of every cited node, the parent lem-sfb-dc-hom-preserves (steps 7 and 10) and the unit. Sources checked at the cited places: Bhatt–Scholze 6.3.14/6.3.15/6.8.2/6.8.11(3)/6.8.12, Stacks 093J, 093M, 08J9, 08JB. No SGA is cited. The item statement is unchanged and not weakened: it keeps the common lower bound, on ordinary layer-B D(Mod_{Λ_X}) for O_E or E. Step 1: the T_c truncation is a quasi-isomorphism when H^{<c}=0 and commutes with filtered colimits. Step 2: the bounded-free model on [B^a→B^b] gives terms N^n⊕N^{n-1}, a finite sum vanishing below c, so d_L=0 (checked on O_E/π^n); the cover hypothesis of the local-isomorphism lemma holds. Steps 3–7: the recollement is used on D^+ only; qcqs follows from the Noetherian space; Ri^! agrees with RΓ_Z as right adjoints of i_*; d_{A[n]}=d_A+n; the filtration plus truncation triangles finish. New node lem-sfb-finite-constant-model-two-term-free-resolution is true (PID kernel; B_T=lim(O_E/π^n)_T is flat over the constant sheaf by 093M; a=0 rationally; checked P=0, P=A, P=O_E/π^n, empty T), is not a duplicate, and does not restate the item. One fault, C5: new node lem-sfb-module-object-ringed-site-derived-comparison re-defined the existing equivalence def-weil-pbc-internal-abelian-sheaf-module-equivalence and re-asserted the monoidal/K-flat clauses of the existing lem-pe-internal-section-tensor-comparison without citing either; the report's not-duplicates list missed both. Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-object-ringed-site-derived-comparison.json: the node now cites both, adds them to stmt_deps (no cycle), and states only the new derived internal-Hom comparison with evaluation and slice compatibility. The item file is unchanged and step 1 still reads correctly. I accept all 17 declared tool_uses as generic infrastructure.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-6f5dd5cc2 (reviewer sub-agent of L); spot-checked: This head's six DAG files are byte-identical to the Q51 delivery ef3e32db. That delivery was reviewed FIX at 11:26, but its landing was logged 'superseded' by this head, and the live item still has the 7-step Q26 proof, so the fix is lost. I re-read the mathematics in full and re-applied the same fix. Item statement, stmt_deps and lean record equal base; proof_deps equals the union of step uses. Re-split check: base step 2 becomes finite-local-model-rhom-continuity, step 3 closed-support-bounded-continuity, step 5 rhom-continuity-open-extension, step 6 rhom-continuity-triangle-closure, step 7 bounded-finite-model-generation. Base steps 1 and 4 and the end of step 7 remain as short assembly steps. Nothing was dropped or blurred, the five nodes are of comparable size, and none restates the item. All five are true. Local model: the two-term resolution gives Hom terms N^n⊕N^{n-1}, so d_L=0; checked O_E/π^n, E (a=0) and T=∅. Closed support: holds for any condensed Λ, since a Noetherian space makes j qcqs and det-pe-bounded-continuity-direct-image, the recollement support triangle and the five lemma apply; checked Z=∅ and Z=T. Open extension: RHom(v_!A,N)=Rv_*RHom(A,v^*N) keeps the bound c+d_A. Triangle closure: d_{A[n]}=d_A+n, d_B=min(d_A,d_C), d_C=min(d_A+1,d_B), d_A=min(d_B,d_C−1). Generation: stratum filtration for any Λ, then truncation triangles. Sources checked: Stacks 09BM, 08JI, 08JC, 08J5 and 09Y5 resolve to the cited labels, and Bhatt–Scholze 6.3.14 (proof steps 1–4), 6.3.15 and 6.8.12 match the route. No SGA is cited. No duplicates, including the 78 nodes landed since the previous base (Q62 condensed-bounded-hom-continuity is global Hom for E only; Q40 internal-hom-localization-comparison assumes continuity) and the étale F_ℓ per-chapter nodes. Accepted tool_uses: lem-pur-ringed-site-grothendieck-abelian and lem-weil-pbc-proetale-ringed-open-closed. Faults fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-constructible-internal-hom-continuity.json: (C1/C2) step 6 was elementary but used the cohomology-sheaf isomorphism criterion; it now cites lem-weil-pbc-unbounded-derived-iso-cohomology, is non-elementary, and proof_deps is updated. (C3) step 3 now identifies R\\underline\\Gamma_Z of the formulas node with the recollement's Ri^! (both are right adjoints of i_*). New nodes, statement and lean record are unchanged.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
