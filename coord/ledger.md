@@ -23447,3 +23447,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T19:13:28Z L: superseded stage-1 delivery NL/lem-sfb-action-topos-geometric-restriction at af5c3acf104ca411e64804eb433171d33f3ff122; current completion retained; packet archived at refs/superseded/NL/lem-sfb-action-topos-geometric-restriction/af5c3acf104ca411e64804eb433171d33f3ff122; stale return retired.
 - 19:14 L: merged deliver/ND/lem-sfb-normed-scalar-profinite-cech-exact (reviewer PASS; first push; new nodes: 1)
 - 19:14 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 19:15 L: merged deliver/Q03/lem-sfb-finite-subfield-continuous-linear-retraction (reviewer PASS; first push; new nodes: 1)

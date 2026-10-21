@@ -11,9 +11,69 @@
   "def-weil-l-adic-coefficient-extension",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The restriction of the given absolute value to $E$ is its extending $\\ell$-adic absolute value by [lem-weil-l-adic-extension-absolute-value]. It is nonarchimedean by that same node, and $E$ is complete by [lem-weil-l-adic-extension-complete]. By [def-weil-l-adic-numbers], $0<|\\ell|_E=\\ell^{-1}<1$. By [lem-weil-l-adic-extension-proper], every closed ball in $E$ is compact. The absolute value on $\\Omega$ is also nonarchimedean: for $x,y\\in\\Omega$, [def-weil-finite-subextension-directed-set] puts both in a common finite intermediate field $L$, and [lem-weil-l-adic-extension-absolute-value] applies to the restriction on $L$. Thus $\\Omega$, with $\\|x\\|=|x|$, is an ultrametric normed $E$-vector space; scalar homogeneity is the multiplicativity of its given absolute value. Restrictions of that absolute value induce exactly the stated topologies on $E$ and $F$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-complete",
+    "def-weil-l-adic-numbers",
+    "lem-weil-l-adic-extension-proper",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient-topology expansion: check the scalar and ambient hypotheses Agent expansion; not a proof supplied by the blueprint."
+   }
+  },
+  {
+   "text": "Since $E\\subseteq F$ are finite intermediate fields, $F$ is finite-dimensional over $E$ by the final assertion of [def-weil-finite-subextension-directed-set]. Choose an $E$-basis $b_1,\\ldots,b_d$ and let $\\lambda_i:F\\to E$ be its coordinate linear maps, so $a=\\sum_{i=1}^d\\lambda_i(a)b_i$ for $a\\in F$. The norm topology on $F$ makes it a Hausdorff topological $E$-vector space: addition and scalar multiplication are continuous by the norm inequalities and multiplicativity. Since $E$ is complete and nontrivially normed by step 1, [lem-sfb-finite-dimensional-linear-map-continuous] says that every $\\lambda_i$ is continuous. The domain topology is the subspace topology from $\\Omega$, since both use the same absolute value.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient-topology expansion: continuous finite-field coordinates Agent expansion; not a proof supplied by the blueprint."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-ultrametric-scalar-extension] to $K=E$, $V=\\Omega$, $W=F$ and $f=\\lambda_i$, separately for each $1\\leq i\\leq d$. Step 1 verifies nontriviality, the strong triangle inequalities, scalar homogeneity and compactness of every scalar closed ball; step 2 verifies continuity on the induced subspace. Obtain continuous $E$-linear maps $\\widetilde\\lambda_i:\\Omega\\to E$ satisfying $\\widetilde\\lambda_i|_F=\\lambda_i$. This extension theorem has no completeness hypothesis on $V$, so none is imposed on $\\Omega$.",
+   "uses": [
+    "lem-sfb-proper-ultrametric-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient-topology expansion: nonarchimedean scalar-functional extension Agent expansion; not a proof supplied by the blueprint."
+   }
+  },
+  {
+   "text": "Define $p_F(x)=\\sum_{i=1}^d\\widetilde\\lambda_i(x)b_i\\in F$. Each summand is continuous as a map to $F$: it is the composite of the continuous $\\widetilde\\lambda_i$ with $E\\to F$, $c\\mapsto cb_i$, whose norm difference is $|b_i||c-c'|$. A finite sum is continuous by the triangle inequality. Additivity and $E$-homogeneity hold termwise. For $a\\in F$, step 3 and the basis expansion in step 2 give $p_F(a)=\\sum_i\\lambda_i(a)b_i=a$. This proves all required clauses; the construction makes no assertion about multiplicativity, Galois equivariance or an operator norm bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient-topology expansion: assemble the retraction and check its identity on F Agent expansion; not a proof supplied by the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "def-weil-l-adic-numbers",
+  "lem-weil-l-adic-extension-proper",
+  "def-weil-finite-subextension-directed-set",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-sfb-proper-ultrametric-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient-topology expansion: the scalar-functional extension input for the continuous retraction used in finite-field boundary detection; agent argument, absent from the blueprint proof itself. The blueprint supplies the direct-image use, not the functional-analytic proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -161,10 +221,124 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: ClosedComplemented.of_finiteDimensional and exist_extension_of_finiteDimensional_range were read in Analysis/Normed/Module/HahnBanach.lean and require IsRCLikeNormedField; linearProjOfClosedCompl assumes an already closed complement and a complete ambient space; neither applies to Omega over E"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_extension\", \"StrongDual\"",
+   "results": {
+    "t": "2026-10-21T18:58:41Z",
+    "tool": "loogle",
+    "query": "\"exists_extension\", \"StrongDual\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "StrongDual.exists_extension"
+    ],
+    "digest": "ff48d4497762501a"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: source read at Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 and Mathlib/Analysis/LocallyConvex/HahnBanach.lean:92-96 requires IsRCLikeNormedField; dense extension hits assume DenseRange and do not extend a functional on an arbitrary subspace. No nonarchimedean functional-extension theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean Hahn Banach theorem extend continuous scalar valued linear functional from a subspace over a proper ultrametric normed field without completeness of the ambient vector space",
+   "results": {
+    "t": "2026-10-21T18:58:42Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean Hahn Banach theorem extend continuous scalar valued linear functional from a subspace over a proper ultrametric normed field without completeness of the ambient vector space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_norm_eq",
+     "Real.exists_extension_norm_eq",
+     "ContinuousLinearMap.extend",
+     "LinearMap.extendOfNorm",
+     "ContinuousLinearMap.extend_eq",
+     "exists_extension_of_le_sublinear",
+     "LinearMap.extendOfNorm_eq",
+     "LinearEquiv.extend"
+    ],
+    "digest": "ad934f675dd11da5"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: source read at Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 and Mathlib/Analysis/LocallyConvex/HahnBanach.lean:92-96 requires IsRCLikeNormedField; dense extension hits assume DenseRange and do not extend a functional on an arbitrary subspace. No nonarchimedean functional-extension theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a continuous linear functional from a subspace of an ultrametric normed vector space to the whole space over a nonarchimedean locally compact field",
+   "results": {
+    "t": "2026-10-21T18:58:42Z",
+    "tool": "leansearch",
+    "query": "Extend a continuous linear functional from a subspace of an ultrametric normed vector space to the whole space over a nonarchimedean locally compact field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "ContinuousLinearMap.extend_eq",
+     "ContinuousLinearMap.extend_unique",
+     "exists_extension_norm_eq",
+     "Real.exists_extension_norm_eq",
+     "ContinuousLinearMap.extend",
+     "ContinuousLinearMap.extendTo𝕜",
+     "ContinuousLinearMap.norm_extendTo𝕜"
+    ],
+    "digest": "4d52d76ff8f67bd5"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: source read at Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 and Mathlib/Analysis/LocallyConvex/HahnBanach.lean:92-96 requires IsRCLikeNormedField; dense extension hits assume DenseRange and do not extend a functional on an arbitrary subspace. No nonarchimedean functional-extension theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a locally compact ultrametric normed field every continuous linear form on an arbitrary vector subspace extends continuously to the ambient nonarchimedean normed vector space",
+   "results": {
+    "t": "2026-10-21T19:00:52Z",
+    "tool": "leanfinder",
+    "query": "Over a locally compact ultrametric normed field every continuous linear form on an arbitrary vector subspace extends continuously to the ambient nonarchimedean normed vector space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_norm_eq",
+     "RCLike.instTietzeExtensionTVS",
+     "ContinuousLinearMap.extend",
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "ContinuousLinearMap.extend_eq",
+     "ContinuousLinearMap.extend_unique",
+     "ContinuousLinearMap.extend_zero",
+     "LinearMap.extendOfNorm"
+    ],
+    "digest": "08a9d112e6c30cca"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: source read at Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 and Mathlib/Analysis/LocallyConvex/HahnBanach.lean:92-96 requires IsRCLikeNormedField; dense extension hits assume DenseRange and do not extend a functional on an arbitrary subspace. No nonarchimedean functional-extension theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bspherically|\\bIngleton|nonarchimedean.*(functional|Hahn)|ultrametric.*functional",
+   "results": {
+    "t": "2026-10-21T19:03:44Z",
+    "tool": "grep",
+    "query": "\\bspherically|\\bIngleton|nonarchimedean.*(functional|Hahn)|ultrametric.*functional",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: source read at Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 and Mathlib/Analysis/LocallyConvex/HahnBanach.lean:92-96 requires IsRCLikeNormedField; dense extension hits assume DenseRange and do not extend a functional on an arbitrary subspace. No nonarchimedean functional-extension theorem found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-algcl-derived-invariants-comparison",
@@ -190,5 +364,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-subfield-continuous-linear-retraction",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing finite-dimensional continuity, finite-subextension, absolute-value, completeness and properness nodes; reduced the analytic input to one statement-only nonarchimedean scalar-functional extension lemma over a field with compact closed balls. Explicitly constructed the finite coordinate sum and checked continuity, E-linearity and restriction to F. Mathlib real/complex Hahn-Banach and dense-extension candidates do not apply.",
+  "blueprint": "Realizes the arithmetic coefficient-topology expansion of paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md, specifically the continuous retraction used in step 6 of lem-sfb-profinite-algcl-derived-invariants-comparison to detect finite-field boundaries. The created.item ancestry currently ends at the module Sheaf.SixFunctors.CtfStabilityDirectImages, so tools/blueprint_refs.py ancestor returns None; from.node is preserved as null and the exact textual place is supplied."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-bc844f459",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-bc844f459 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement: the absolute-value, completeness, l-adic, properness and directed-set nodes, and the finite-dimensional-continuity Mathlib leaf. Also read blueprint direct-images.proof paragraph (3) and the parent's step 6, which uses the item exactly as stated. Step 1: uniqueness of the extended absolute value gives |.|_E; t=ell has |t|=ell^-1; closed balls are compact by properness, including radius r=0; Omega is ultrametric because x and y lie in a common finite L. Step 2: F/E is finite; the coordinate maps are continuous via LinearMap.continuous_of_finiteDimensional, and the topology on F is the subspace topology from Omega. Step 3: the hypotheses of the new node match exactly; neither node assumes completeness. Step 4 is an elementary assembly with p_F|F=id. Edge case F=E checked. The normalised-trace alternative is not continuous on Omega because |1/[L:F]| is unbounded, so the Hahn-Banach input is genuinely needed. The new node is Ingleton's non-archimedean Hahn-Banach theorem: compact closed balls imply spherical completeness, and I re-derived the Zorn plus nested-ball argument. It is true as stated without closedness of W or completeness of V, carries a statement only, introduces its own objects, and is a general lemma rather than a restatement of the item. Mathlib's StrongDual.exists_extension and exists_extension_norm_eq need IsRCLikeNormedField, and Mathlib has no SphericallyComplete, so the node is correctly unsplit. rg -L over the DAG for Hahn, Ingleton, spherically and retraction found no duplicate. The unit route is respected: every off-unit citation is a Mathlib leaf, and no tool_uses are needed. No SGA is cited. blueprint ancestor prints None, so from.node=null is correct. The WANTED line for Ingleton 1952 is appropriate, since literature/ has no non-archimedean functional analysis text. Advisory only: the item and new node have no lean_audit field. No fixes written."
  }
 }
