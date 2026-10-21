@@ -22329,3 +22329,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 19:56 L: batch 20261021T110859 dependency take-out
 - 11:58 L: merged deliver/NA/lem-sfb-reduction-single-cohomology-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 11:59 L: returned deliver/Q71/lem-sfb-continuous-algcl-stratified-finite-models (reviewer RETURN: (the landing tools, head 014fddc25) the delivery did not land: (merge queue) your landing 20261021T112402-Q71-771501-312)
