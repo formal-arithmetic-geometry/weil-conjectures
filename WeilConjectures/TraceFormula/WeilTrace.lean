@@ -82,9 +82,9 @@ condensed `ℚ̲̄_ℓ`-modules (`isEquivalence_upperStarFromPointMod`) this rin
   finite type and unramified over `k`. The resulting `Fintype` structure
   `ProEtale.CondensedRing.fintypeFrobeniusFixedPoints` is a local instance where sums over
   points are taken.
-- `ProEtale.CondensedRing.nonempty_hasRightDual_frobeniusStalk_homology`: the stalks of the
-  homology sheaves of a bounded constructible complex are dualizable, that is
-  finite-dimensional over `ℚ̄_ℓ`.
+- `ProEtale.CondensedRing.hasRightDual_frobeniusStalk_homology`: the stalks of the homology
+  sheaves of a bounded constructible complex are dualizable, that is finite-dimensional over
+  `ℚ̄_ℓ`.
 - `ProEtale.CondensedRing.finite_support_categoricalTrace_frobeniusStalk_homology`: only finitely
   many homology sheaves of a bounded complex contribute to the local trace.
 - `ProEtale.CondensedRing.categoricalTrace_frobeniusStalk_add`: the trace of the Frobenius on the
@@ -164,9 +164,13 @@ noncomputable def WeilSheaf.frobeniusStalk (F : WeilSheaf ℓ e) :
     (WeilSheaf.pow ℓ F n)
 
 /-- The trace of the Frobenius on the stalk only depends on the Weil sheaf up to isomorphism. -/
-lemma categoricalTrace_frobeniusStalk_congr {F G : WeilSheaf ℓ e} (i : F ≅ G) :
-    categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom =
-      categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx G).str.hom :=
+lemma categoricalTrace_frobeniusStalk_congr {F G : WeilSheaf ℓ e} (i : F ≅ G)
+    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier]
+    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx G).carrier] :
+    categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier)
+        (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom =
+      categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx G).carrier)
+        (WeilSheaf.frobeniusStalk ℓ n x hx G).str.hom :=
   sorry
 
 /-- The trace of the Frobenius on the stalks is additive in short exact sequences
@@ -174,37 +178,48 @@ lemma categoricalTrace_frobeniusStalk_congr {F G : WeilSheaf ℓ e} (i : F ≅ G
 `Tr(Fr_{x̄,n} | F_x̄) = Tr(Fr_{x̄,n} | F'_x̄) + Tr(Fr_{x̄,n} | F''_x̄)`. -/
 theorem categoricalTrace_frobeniusStalk_add {F' F F'' : WeilSheaf ℓ e} (i : F' ⟶ F)
     (p : F ⟶ F'') (w : (IsoAlgebra.forget _).map i ≫ (IsoAlgebra.forget _).map p = 0)
-    (hS : (ShortComplex.mk _ _ w).ShortExact) :
-    categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom =
-      categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx F').str.hom +
-        categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx F'').str.hom :=
+    (hS : (ShortComplex.mk _ _ w).ShortExact)
+    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F').carrier]
+    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier]
+    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F'').carrier] :
+    categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier)
+        (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom =
+      categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F').carrier)
+          (WeilSheaf.frobeniusStalk ℓ n x hx F').str.hom +
+        categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F'').carrier)
+          (WeilSheaf.frobeniusStalk ℓ n x hx F'').str.hom :=
   sorry
 
 variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- The stalks of the homology sheaves of a bounded constructible complex at a geometric point
+are dualizable, that is finite-dimensional over `ℚ̄_ℓ`. -/
+noncomputable instance hasRightDual_frobeniusStalk_homology (K : WeilBoundedConstructible ℓ e)
+    (j : ℤ) : HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier :=
+  sorry
 
 /-- The local trace `tₙ(K; x̄) = ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n} | Hʲ(K)_x̄)` of a Weil object `K` of
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄`: the alternating sum of the
 traces of the `n`-th Frobenius on the stalks of the Weil homology sheaves. -/
 noncomputable def weilStalkTraceAlternatingSum (K : WeilBoundedConstructible ℓ e) :
     End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
-  ∑ᶠ j : ℤ, (j.negOnePow : ℤ) • categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx
-    ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom
-
-/-- The stalks of the homology sheaves of a bounded constructible complex at a geometric point
-are dualizable, that is finite-dimensional over `ℚ̄_ℓ`, so that the local traces are not the
-junk value `0` of `categoricalTrace`. -/
-theorem nonempty_hasRightDual_frobeniusStalk_homology (K : WeilBoundedConstructible ℓ e) (j : ℤ) :
-    Nonempty (HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx
-      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier) :=
-  sorry
+  ∑ᶠ j : ℤ, (j.negOnePow : ℤ) •
+    categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx
+        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier)
+      (WeilSheaf.frobeniusStalk ℓ n x hx
+        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom
 
 /-- Only finitely many homology sheaves of a bounded complex contribute to the local trace, so
 that the `finsum` defining it is a finite sum. -/
 theorem finite_support_categoricalTrace_frobeniusStalk_homology
     (K : WeilBoundedConstructible ℓ e) :
-    (Function.support fun j : ℤ ↦ categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx
-      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom).Finite :=
+    (Function.support fun j : ℤ ↦
+      categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx
+          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier)
+        (WeilSheaf.frobeniusStalk ℓ n x hx
+          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom).Finite :=
   sorry
 
 end Local
