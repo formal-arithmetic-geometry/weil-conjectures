@@ -19961,3 +19961,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:46:09Z L: superseded stage-1 delivery NV/lem-weil-pbc-realization-completed-pull at 8abafae6a3331f2abaf7a7161db1aa2918bb4d7b; current completion retained; packet archived at refs/superseded/NV/lem-weil-pbc-realization-completed-pull/8abafae6a3331f2abaf7a7161db1aa2918bb4d7b; stale return retired.
 - 03:46 L: merged deliver/NI/lem-weil-pbc-constant-tower-pushforward-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:46 L: merged deliver/Q102/sk-thm-existence (reviewer PASS; after a return; new nodes: 2)
+- 03:46 L: merged deliver/Q63/lem-sf-etale-chart-adjoint-comparison (reviewer FIX; first push; new nodes: 0)

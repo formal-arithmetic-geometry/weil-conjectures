@@ -10,11 +10,110 @@
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
   "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the immersion factors first. For an open $w$ equal to $s$ or $v$, the compactification $(w,\\mathrm{id})$ in [def-amb-etale-compact-support] computes $Rw_!=Dw_!$: direct image by the identity is the identity, including on a K-injective representative. For $i$, which is proper by [lem-weil-pbc-closed-immersion-proper], use $(\\mathrm{id},i)$ to compute $Ri_!=Ri_*$. The closed immersion is finite by [lem-weil-pbc-closed-immersion-finite], so [lemma-weil-pbc-finite-direct-image-exact] gives exactness and $Ri_*H=i_*H$ for bounded-below $H$. Although that node is stated for abelian sheaves, it applies to the underlying abelian sheaves of a short exact sequence of $A$-module sheaves: direct image is the same section functor with its $A$-action, and kernels and cokernels have the underlying abelian kernels and cokernels. Thus $i_*$ is exact also with these coefficients. Exactness gives $\\mathcal H^q(i_*H)=i_*\\mathcal H^q(H)$ and, by [lem-weil-pbc-extension-by-zero-exact], $\\mathcal H^q(s_!H)=s_!\\mathcal H^q(H)$, so both inputs remain bounded below. The natural comparisons of [lem-amb-etale-compact-comparisons] transport these computations to the chosen compactifications; their domains are bounded-below inputs, which is all that is used here.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F51 (lemma-proper-f-shriek); open normalization by (w,id). Closed exactness: etale-cohomology.tex Tag 04FX; extension exactness: Tag 03S5."
+   }
+  },
+  {
+   "text": "The open immersion $s$ is étale [lem-weil-pbc-open-immersion-etale] and, being displayed, separated of finite type by hypothesis. By [lem-amb-etale-adjoint-locality] the termwise derived étale sum extension $Ds_{\\Sigma!}$ is left adjoint to $s^*$ on the whole unbounded ordinary categories $D(-_{\\mathrm{et}},A)$. By [lem-cbc-open-extension-zero-etale-adjunction-agreement] the natural isomorphism $\\kappa:s_!\\xrightarrow{\\sim}s^{\\mathrm{et}}_!$ of exact sheaf functors identifies the extension-by-zero adjunction $s_!\\dashv s^{-1}$ with the sum-extension adjunction; applied degreewise, $\\kappa$ is an isomorphism $Ds_!\\cong Ds_{\\Sigma!}$ of the induced derived functors, and precomposing the derived transposes with $\\kappa$ gives the derived adjunction $Ds_!\\dashv s^*$, with no boundedness condition. Apply it in its inverse Hom direction, followed by the inverse Hom direction of $Rf_!\\dashv f^\\times$ from [thm-amb-etale-exceptional-adjoint]. This gives natural bijections $\\operatorname{Hom}(H,s^*f^\\times K)\\cong\\operatorname{Hom}(s_!H,f^\\times K)\\cong\\operatorname{Hom}(Rf_!s_!H,K)$. The latter adjunction applies because the given compactification is between Noetherian schemes. Both permit the arbitrary object $K$ in the statement.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-amb-etale-adjoint-locality",
+    "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Opening and final paragraphs: open locality of adjunctions; formal Hom adjunction expansion."
+   }
+  },
+  {
+   "text": "Write $\\alpha_{b,a}:Rb_!Ra_!\\xrightarrow{\\sim}R(ba)_!$ for the natural compositor of [lem-amb-etale-compact-comparisons]. Apply it to $(s,f)$, $(i,p)$ and $(pi,v)$. All these morphisms and composites have exactly the compactifiability, separated finite-type, Noetherian and finite-ring hypotheses required by that node. Starting with the bounded-below $H$, its values and the intermediate compact-support values are bounded below, since that node works on $D^+$. After the normalizations in step 1, the equality $fs=vpi$ gives the isomorphism $\\gamma_H:Rf_!s_!H\\xrightarrow{\\sim}v_!Rp_!i_*H$, namely $\\gamma_H=(\\alpha_{v,pi,H}\\circ v_!(\\alpha_{p,i,H}))^{-1}\\circ\\alpha_{f,s,H}$ with transport along the displayed equality understood. Precomposition by $\\gamma_H^{-1}$ gives $\\operatorname{Hom}(Rf_!s_!H,K)\\cong\\operatorname{Hom}(v_!Rp_!i_*H,K)$. Its inverse is precomposition by $\\gamma_H$. This uses composition only on bounded-below inputs; precomposition makes sense for every target $K$.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition; Tag 0F7K, lemma-pseudo-functor (coherent choice of the compositors)."
+   }
+  },
+  {
+   "text": "Put $T=Rp_!i_*H$. The open immersion $v$ is étale [lem-weil-pbc-open-immersion-etale] and separated of finite type by hypothesis, so, exactly as in step 2, [lem-amb-etale-adjoint-locality] and the adjunction identification of [lem-cbc-open-extension-zero-etale-adjunction-agreement] give the unbounded ordinary derived adjunction $Dv_!\\dashv v^*$ and $\\operatorname{Hom}(v_!T,K)\\cong\\operatorname{Hom}(T,v^*K)$, natural in $T$ and $K$. Substitution of the functorial value $T$ preserves naturality in $H$. This ambient adjunction imposes no bounded-below condition on $K$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-amb-etale-adjoint-locality",
+    "lem-cbc-open-extension-zero-etale-adjunction-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Final paragraph: open locality of adjunctions, expanded at v."
+   }
+  },
+  {
+   "text": "Apply [thm-amb-etale-exceptional-adjoint] to $p$ and $i$, whose compactifications and Noetherian hypotheses are assumed. The Hom bijections for $Rp_!\\dashv p^\\times$ and $Ri_!\\dashv i^\\times$, together with $Ri_!H\\cong i_*H$ from step 1, give $\\operatorname{Hom}(Rp_!i_*H,v^*K)\\cong\\operatorname{Hom}(i_*H,p^\\times v^*K)\\cong\\operatorname{Hom}(H,i^\\times p^\\times v^*K)$. These are the ambient adjunctions, so the input $p^\\times v^*K$ for the last adjunction need not be bounded below. Their naturality holds for all morphisms of $K$ and of bounded-below $H$.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Opening and final paragraphs: closed/projection factorization and composition of adjunctions."
+   }
+  },
+  {
+   "text": "Compose the bijections of steps 2 through 5 to obtain $\\Theta_{H,K}:\\operatorname{Hom}(H,s^*f^\\times K)\\cong\\operatorname{Hom}(H,B)$. Define the asserted comparison to be $\\Theta_{H,K}^{-1}$, the reverse composite of those same bijections. Each Hom adjunction commutes with precomposition in its source and postcomposition in its target. For step 3, naturality is exactly $\\gamma_H\\circ Rf_!s_!(a)=(v_!Rp_!i_*)(a)\\circ\\gamma_{H\\prime}$ for $a:H\\prime\\to H$, and associativity of composition handles postcomposition by any $K\\to K\\prime$. Substituting these equalities consecutively proves naturality of $\\Theta$. Inverting a commuting square of bijections proves naturality of its inverse. The two inverse identities are obtained by cancelling each adjacent bijection with its inverse. Hence the comparison is precisely the inverse of the chain in the statement, with neither representing target required to lie in $D^+$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Formal composition and inversion of the displayed Hom bijections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-amb-etale-adjoint-locality",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement",
   "thm-amb-etale-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Opening and final paragraphs, expanded into the ambient ordinary-etale Hom chain using Stacks Tags 0F7I, 0F7J and 0F7K."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +184,45 @@
    "results": "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, TopologicalSpace.Opens.mapComp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.Scheme.Hom.appIso_inv_app, TopologicalSpace.Opens.mapComp_inv_app",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural Hom bijections comparing exceptional inverse image on a factored open chart by compact support composition on bounded below complexes",
+   "results": "ComplexShape.Embedding.homEquiv, ComplexShape.Embedding.liftExtendfArrowIso, HomologicalComplex.pOpcycles_restrictionOpcyclesIso_inv, ComplexShape.Embedding.homEquiv_symm_apply, ComplexShape.Embedding.liftExtend.f_eq, ComplexShape.Embedding.homEquiv_apply_coe, ComplexShape.Embedding.homRestrict_comp_extendMap_assoc, ComplexShape.Embedding.AreComplementary.hom_ext'",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "CategoryTheory.Adjunction.CoreHomEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.homEquiv', CategoryTheory.Adjunction.CoreHomEquiv.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*[Aa]djoint|compactSupport",
+   "results": "none (searched CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural Hom comparison for exceptional inverse image on an open chart using composition of compact support functors",
+   "results": "HasCompactSupport.comp_homeomorph, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, CompactlySupportedContinuousMap.comp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, TopologicalSpace.Opens.mapComp, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of adjunction Hom equivalences with natural isomorphisms of compact support functors for ordinary etale module sheaves",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.PullbackConstruction.adjunction, LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sf-rf-shriek-preservation",
@@ -105,5 +239,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-chart-adjoint-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the exact Hom chain into six steps using existing ordinary-etale nodes only. Checked normalization of the closed factor, module coefficients, all bounded-below compositor inputs, arbitrary K, and naturality. No new nodes or statement changes. Maintainer reader FIX (2026-10-21): steps 2 and 4 cited prop-weil-open-closed-recollement-adjunctions, a pro-etale A_{E,n}, ell-invertible statement; replaced by the ordinary-etale unbounded adjunction of lem-amb-etale-adjoint-locality with lem-cbc-open-extension-zero-etale-adjunction-agreement and lem-weil-pbc-open-immersion-etale.",
+  "blueprint": "Realizes the opening and final paragraphs of sk-prop-sf-rf-shriek-preservation: composition and open locality after closed/projection factorization. This auxiliary item establishes the Hom comparison only; it does not infer an object isomorphism from bounded-below tests.",
+  "tool_uses": [
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Chosen-compactification formula normalizes open and closed factors. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Allows the compactification (id,i) of the closed chart factor. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Reduces the closed factor to the existing finite-direct-image exactness theorem. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exactness identifies the closed derived image with termwise i_* on bounded-below H. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Keeps s_!H bounded below for the compositor. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Supplies canonical composition on D+ and choice-independence; no such ordinary-etale tool is stated in this unit. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Supplies ambient ordinary-etale compact-support Hom adjunctions for f,p,i. This is a generic tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Supplies the unbounded ordinary-etale derived adjunction Du_!-| u^* for the separated etale finite-type open immersions s and v; no node of this unit states it. Added by the maintainer reader in place of the pro-etale recollement adjunction."
+   },
+   {
+    "node": "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "why": "Identifies extension by zero and its adjunction with the etale sum extension used by the adjoint-locality node; no node of this unit states it. Added by the maintainer reader."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Open immersions are etale, the hypothesis of the adjoint-locality node (Mathlib leaf). Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-amb-etale-compact-comparisons",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-c93322ac7",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-c93322ac7 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement and the blueprint main-20261015 proof of sk-prop-sf-rf-shriek-preservation (final paragraph, composition and open locality). The statement is correct and unchanged; I tested the cases H=0, identity charts, empty U and A=0. Steps 1, 3, 5 and 6 check. Normalization: Rw_!=Dw_! via compactification (w,id) and Ri_!=i_*, using the closed immersion being proper and finite with exact direct image (the blueprint_update statement covers Mod_Λ). The compositor γ_H has the right direction, and lem-amb-etale-compact-comparisons applies on D+ to (s,f), (i,p) and (pi,v). The exceptional adjoints are unbounded, so K is arbitrary. One fault, C4/E4, which I repaired. Steps 2 and 4 took s_!⊣s^* and v_!⊣v^* from prop-weil-open-closed-recollement-adjunctions. Through def-weil-open-closed-recollement, that node is set on pro-étale sites with A=O_E/ϖ^n and ℓ invertible, not the ordinary étale categories with an arbitrary finite A that the item uses; the report misread 'ordinary' there. The FIX replaces it with lem-weil-pbc-open-immersion-etale, lem-amb-etale-adjoint-locality (unbounded ordinary-étale Du_!⊣u^* for separated étale finite-type u) and lem-cbc-open-extension-zero-etale-adjunction-agreement (the isomorphism κ: j_!≅j^et_! identifies the two adjunctions). It also recomputes proof_deps and replaces that tool_uses entry with the three new nodes. No cycles: none of the three new nodes depends on the item or its parent. All declared tool_uses are accepted. No new nodes, and the item duplicates no existing node.; 1 file(s) fixed by the reviewer"
  }
 }
