@@ -49,39 +49,15 @@
    }
   },
   {
-   "text": "For arbitrary objects $i,j\\in I$, choose $k$ and arrows $u:i\\to k$, $v:j\\to k$, using filteredness as written in the statement and [def-weil-pbc-category-colimit]. The cocone equations and tensor bifunctoriality give $c_i\\otimes c_j=(c_k\\otimes c_k)\\circ(D(u)\\otimes D(v))$. Precomposing the equality of step 3 with $D(u)\\otimes D(v)$ therefore gives $f\\circ(c_i\\otimes c_j)=g\\circ(c_i\\otimes c_j)$ for every pair $i,j$. No equalization of parallel arrows is needed for this calculation.",
+   "text": "Apply [lem-sfb-diagonal-tensor-colimit-hom-ext] to $X(i)=D(i)$, the underlying cocone $(A,c_i)$, $T=B$, and $f,g$ from step 3. Filteredness supplies its nonempty common-successor hypothesis. The image cocones in its hypotheses are colimiting because $D(i)\\otimes-$ and $-\\otimes A$ preserve the assumed underlying colimit. Step 3 supplies every diagonal-leg equality, so the lemma gives $f=g$, namely $b\\circ\\mu_A=\\mu_B\\circ(b\\otimes b)$. Together with the unit equation of step 2, this makes $b$ a morphism of ring objects [sk-def-sfb-ring-object].",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 002V, definition-directed, common successor condition; Tag 0FFK, definition-monoidal-category, tensor as a bifunctor. Elementary expansion of the blueprint third isomorphism."
-   }
-  },
-  {
-   "text": "Fix $i$. By the assumed preservation of $I$-indexed colimits by $D(i)\\otimes-$, the cocone with vertex $D(i)\\otimes A$ and legs $\\mathrm{id}_{D(i)}\\otimes c_j$ is a colimit of $j\\mapsto D(i)\\otimes D(j)$. Here preservation means precisely that the image of a colimit cocone is a colimit cocone. The maps $f\\circ(c_i\\otimes\\mathrm{id}_A)$ and $g\\circ(c_i\\otimes\\mathrm{id}_A)$ agree after each such leg by step 4 and bifunctoriality. They are thus two mediating morphisms for the same cocone, so uniqueness in [def-weil-pbc-category-colimit] makes them equal.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 002F, definition-colimit, uniqueness applied to the cocone preserved by D(i) tensor -; Tag 0FFK, definition-monoidal-category. Elementary expansion of the blueprint third isomorphism."
-   }
-  },
-  {
-   "text": "By the assumed preservation of $I$-indexed colimits by $-\\otimes A$, the cocone with vertex $A\\otimes A$ and legs $c_i\\otimes\\mathrm{id}_A$ is a colimit of $i\\mapsto D(i)\\otimes A$. Step 5 says that $f$ and $g$ agree after all its legs. Uniqueness in [def-weil-pbc-category-colimit] gives $f=g$, that is, $b\\circ\\mu_A=\\mu_B\\circ(b\\otimes b)$. Along with step 2 this is exactly the definition of a morphism of ring objects in [sk-def-sfb-ring-object].",
-   "uses": [
-    "def-weil-pbc-category-colimit",
+    "lem-sfb-diagonal-tensor-colimit-hom-ext",
     "sk-def-sfb-ring-object"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 002F, definition-colimit, uniqueness applied to the cocone preserved by - tensor A; ring-object morphism definition from the blueprint sk-def-sfb-ring-object. Elementary expansion of the third isomorphism."
+    "place": "Agent-formulated equality-detection lemma combining Tag 002F (definition-colimit, uniqueness), Tag 002V (definition-directed, common-successor clause only), and Tag 0FFK (definition-monoidal-category, tensor bifunctor). Extracts the common-successor and two successive colimit-uniqueness arguments in original steps 4-6 of lem-sfb-filtered-ring-object-cocone-colimit, serving the Third isomorphism paragraph of blueprint main-20261015 sk-prop-sfb-qlbar-colimit-x."
    }
   },
   {
@@ -100,12 +76,13 @@
  "proof_deps": [
   "def-weil-pbc-category-colimit",
   "sk-def-sfb-ring-object",
-  "def-sfb-monoidal-category"
+  "def-sfb-monoidal-category",
+  "lem-sfb-diagonal-tensor-colimit-hom-ext"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-  "place": "Third isomorphism, final sentence: explicit generic ring-object upgrade by the colimit universal property and the tensor-preservation hypotheses. Read also Stacks Tags 002F, 002V and 0FFK; the seven elementary steps expand the argument without invoking a separate tensor-colimit theorem."
+  "place": "Third isomorphism, final sentence: retain the explicit mediator, unit, diagonal multiplication and uniqueness/full-subcategory arguments; extract original steps 4-6 as lem-sfb-diagonal-tensor-colimit-hom-ext. Stacks Tags 002F, 002V and 0FFK supply the universal-property and bifunctor definitions."
  },
  "mathlib_searches": [
   {
@@ -215,17 +192,17 @@
   "date": "2026-10-21",
   "item": "lem-sfb-filtered-ring-object-cocone-colimit",
   "worker": "stage1",
-  "group": "NC",
-  "summary": "No exact project attachment or Mathlib match was found. Seven elementary steps construct the underlying mediator, check units by nonemptiness, check multiplication on diagonal and mixed stages, and apply two separately preserved colimit universal properties. The argument uses only the three existing definition nodes, creates no new nodes, and keeps the statement unchanged. The commutative clause follows from fullness.",
-  "blueprint": "Realizes the ring-object colimit assertion in the Third isomorphism paragraph of sk-prop-sfb-qlbar-colimit-x. The abelian-to-ring upgrade is proved directly, without replacing the unit route or introducing siftedness as an extra hypothesis."
+  "group": "NI",
+  "summary": "Deliberate re-split requested by the human on 2026-10-21. Statement and Lean metadata unchanged. The common-successor mixed-leg argument and the two successive preserved-colimit uniqueness arguments (old steps 4-6) become the independent statement-only unsplit node lem-sfb-diagonal-tensor-colimit-hom-ext. Old steps 1-3 and 7 remain verbatim; one new application step assembles the multiplication argument. All prior searches and review metadata are retained. Repair of A7/B10: the current dispatcher brief explicitly reissues the deliberate stage-1 re-split after presenting the E4 closure and this return, stating that an already split and reviewed live item is deliberately being re-split. This current instruction, rather than the pre-landing generic note, authorizes this extraction; the completed Lean binding and all live review records remain intact.",
+  "blueprint": "The Third isomorphism paragraph of sk-prop-sfb-qlbar-colimit-x is realized by the same ring-object upgrade. The new node isolates equality detection on the tensor square, not a ring-object colimit clause; it depends on neither ring objects nor this item. The item now has five steps with total proof text below 3000 characters."
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NC-cedf9018b",
-  "group": "NC",
+  "reviewer": "NT-cc-NI-a6671570d",
+  "group": "NI",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-cedf9018b (reviewer sub-agent of L); spot-checked: I read the whole item. It has 7 elementary steps, no new nodes, and the statement is unchanged; the base proof was statement-only and no re-split note applies. I checked the three cited statements: def-weil-pbc-category-colimit gives the unique mediator and filteredness per Stacks 002V, sk-def-sfb-ring-object gives the monoid-object μ/η equations and commutativity, and def-sfb-monoidal-category gives tensor bifunctoriality. Step 1: the underlying mediator b is correct. Step 2: unit preservation needs nonemptiness, which filteredness supplies (with I empty, A would be initial). Step 3: f and g agree on c_k⊗c_k; I checked each equality. Step 4: the mixed pairs follow from c_i⊗c_j=(c_k⊗c_k)(D(u)⊗D(v)), using only the common-successor clause. Steps 5 and 6: the two colimit-uniqueness arguments use D(i)⊗− and −⊗A, both preserved by hypothesis. Step 7: uniqueness in Mon(C), and fullness gives the commutative case. Test cases: singleton I and directed limits of rings in Ab both hold. The only citer, sk-prop-sfb-qlbar-colimit-x step 4, checks every hypothesis (filtered poset, tensor preserves colimits via adjoints, commutative). Grepping the DAG found no duplicate. The source is the blueprint main-20261015 sk-prop-sfb-qlbar-colimit-x proof, Third isomorphism paragraph, plus Stacks 002F/002V/0FFK. No SGA is cited. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-a6671570d (reviewer sub-agent of L); spot-checked: I read the maths in full. The re-split note (live and side-live coord/repair-notes) is still released, so under the 10:58Z maintenance withdrawal of the 'note older than landing' rule (243a4db5baf) this delivery is judged on its merits, not as A7/B10 superseded. Live still has the NC 7-step split; the delivery changes only split-owned fields. The new node is byte-identical to the one in e9dfa1ae, which was RETURNed only for supersession. Base vs delivery: old steps 1-3 and 7 are new steps 1-3 and 5 verbatim (mediator, unit via nonempty I, diagonal equality by bifunctoriality, uniqueness and the full commutative subcategory). Old steps 4-6 (common-successor mixed legs, then cancellation along D(i)⊗− and along −⊗A) are now the statement of lem-sfb-diagonal-tensor-colimit-hom-ext, applied in step 4. Nothing was shortened or dropped. The item proof is 2416 characters (≤3000) and its remaining steps are genuinely elementary. Step 4 meets every hypothesis of the new node: nonempty I and common successors come from filteredness, and the two image cocones are colimits because Y⊗− and −⊗Y preserve I-colimits for Y=D(i) and Y=A. With step 2, f=g is the definition of a morphism in sk-def-sfb-ring-object. The new node is true: c_i⊗c_j=(c_k⊗c_k)(X(u)⊗X(v)), then two colimit cancellations. I checked it on singleton I and on the non-sifted BG. It is self-contained, cites only its two definitions, has no ring structure (so it is not a clause of the item), and is not a duplicate (rg -L over dag/nodes). Mathlib's IsColimit.tensor (Monoidal/Limits/Colimits.lean:76) needs IsSifted and PreservesColimit₂, so it is correctly recorded as a candidate, not a match. The search record covers all three kinds. Sources checked: Stacks categories.tex 002F (l.1310), 002V (l.2131) and 0FFK (l.9170); main-20261015 sk-prop-sfb-qlbar-colimit-x, Third isomorphism. No SGA, no tool_uses, unit route unchanged. Advisory: the new node lacks lean_audit, as many recent nodes do. Maintainer: if the Lean-closed node should not be re-split, retire the note."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FilteredRingObjectCoconeColimit",

@@ -22609,3 +22609,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:37 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 13:38 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 13:39 L: merged deliver/NI/lem-sfb-internal-extension-finite-presentation (reviewer PASS; after a return; new nodes: 2)
+- 13:39 L: merged deliver/NI/lem-sfb-filtered-ring-object-cocone-colimit (reviewer PASS; after a return; new nodes: 1)

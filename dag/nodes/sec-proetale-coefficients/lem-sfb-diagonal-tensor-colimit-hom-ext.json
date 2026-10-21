@@ -1,0 +1,92 @@
+{
+ "id": "lem-sfb-diagonal-tensor-colimit-hom-ext",
+ "kind": "statement",
+ "title": "Diagonal tensor legs detect morphisms from a separately preserved colimit",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf1)$ be a monoidal category [def-sfb-monoidal-category]. Let $I$ be a small nonempty category such that for every pair of objects $i,j$ there are an object $k$ and morphisms $i\\to k$ and $j\\to k$. No equalization condition on parallel arrows is assumed. Let $X:I\\to\\mathcal C$ be a functor and $(A,(c_i:X(i)\\to A)_{i\\in I})$ a colimit cocone [def-weil-pbc-category-colimit]. Assume the following image cocones are colimit cocones:\n\n1. For every $i\\in I$, the cocone on $j\\mapsto X(i)\\otimes X(j)$ with vertex $X(i)\\otimes A$ and legs $\\mathrm{id}_{X(i)}\\otimes c_j$.\n2. The cocone on $i\\mapsto X(i)\\otimes A$ with vertex $A\\otimes A$ and legs $c_i\\otimes\\mathrm{id}_A$.\n\nThen for every object $T$ and all morphisms $f,g:A\\otimes A\\to T$, if\n$$\nf\\circ(c_i\\otimes c_i)=g\\circ(c_i\\otimes c_i)\\qquad\\text{for every }i\\in I,\n$$\nthen $f=g$. Thus the diagonal tensor legs $c_i\\otimes c_i$ are jointly epimorphic, meaning exactly the displayed test for equality of morphisms with domain $A\\otimes A$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Agent-formulated equality-detection lemma combining Tag 002F (definition-colimit, uniqueness), Tag 002V (definition-directed, common-successor clause only), and Tag 0FFK (definition-monoidal-category, tensor bifunctor). Extracts the common-successor and two successive colimit-uniqueness arguments in original steps 4-6 of lem-sfb-filtered-ring-object-cocone-colimit, serving the Third isomorphism paragraph of blueprint main-20261015 sk-prop-sfb-qlbar-colimit-x."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hom_ext|IsColimit.tensor|PreservesColimit",
+   "results": "{\"t\": \"2026-10-21T12:12:36Z\", \"tool\": \"grep\", \"query\": \"hom_ext|IsColimit.tensor|PreservesColimit\", \"sub\": \"CategoryTheory/Monoidal/Limits\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\"], \"digest\": \"736d97be66a348f0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: tensor/tensor₂ colimit results require PreservesColimit₂ and the diagonal result also requires IsSifted; other hits concern special tensors or jointly reflecting functors, not this equality test under common successors alone",
+   "sub": "CategoryTheory/Monoidal/Limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of morphisms out of a tensor square can be tested on diagonal tensor legs of a colimit cocone indexed by a category in which every pair of objects has a common successor",
+   "results": "{\"t\": \"2026-10-21T12:12:37Z\", \"tool\": \"leansearch\", \"query\": \"Equality of morphisms out of a tensor square can be tested on diagonal tensor legs of a colimit cocone indexed by a category in which every pair of objects has a common successor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Multicofork.IsColimit.hom_ext\", \"CategoryTheory.Limits.IsColimit.uniq_cocone_morphism\", \"CategoryTheory.Limits.IsColimit.descCoconeMorphism\", \"CategoryTheory.Limits.Cotrident.IsColimit.mk\", \"CategoryTheory.Square.hom_ext_iff\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.desc.congr_simp\", \"CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists\", \"CategoryTheory.Limits.Cotrident.IsColimit.mk'\"], \"digest\": \"a39f6c14e9e1c3ab\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned coequalizer tensor formulas, ordinary colimit uniqueness, concrete filtered monoids or sifted product comparison; none states diagonal tensor equality detection with common successors alone"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.MonoidalCategory.tensorHom",
+   "results": "{\"t\": \"2026-10-21T12:12:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsColimit, CategoryTheory.MonoidalCategory.tensorHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalCategory.tensorHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "invalid query: tensorHom identifier was rejected; superseded by the successful IsColimit.tensor Loogle query, not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal category, diagonal tensor legs of a colimit cocone are jointly epimorphic if the index has common successors and tensoring separately preserves that cocone",
+   "results": "{\"t\": \"2026-10-21T12:12:38Z\", \"tool\": \"leanfinder\", \"query\": \"In a monoidal category, diagonal tensor legs of a colimit cocone are jointly epimorphic if the index has common successors and tensoring separately preserves that cocone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"CategoryTheory.Limits.colimitQuotientCoproduct_epi\", \"π_tensor_id_preserves_coequalizer_inv_desc\", \"id_tensor_π_preserves_coequalizer_inv_desc\", \"CategoryTheory.Limits.colim.map_epi'\", \"CategoryTheory.Limits.epi_of_isColimit_parallelFamily\", \"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\"], \"digest\": \"d0ea4549fe32c5e7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned coequalizer tensor formulas, ordinary colimit uniqueness, concrete filtered monoids or sifted product comparison; none states diagonal tensor equality detection with common successors alone"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.tensor",
+   "results": "{\"t\": \"2026-10-21T12:13:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsColimit.tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.tensor\"], \"digest\": \"441366b16d2525ca\"}",
+   "date": "2026-10-21",
+   "verdict": "candidate only: IsColimit.tensor requires IsSifted I; a category with common successors need not be sifted, so it does not specialize to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "jointly.*epi|tensor_hom_ext|diagonal.*hom_ext|IsColimit.tensor",
+   "results": "{\"t\": \"2026-10-21T12:13:21Z\", \"tool\": \"grep\", \"query\": \"jointly.*epi|tensor_hom_ext|diagonal.*hom_ext|IsColimit.tensor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\"], \"digest\": \"83b06868c994f1f9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: tensor/tensor₂ colimit results require PreservesColimit₂ and the diagonal result also requires IsSifted; other hits concern special tensors or jointly reflecting functors, not this equality test under common successors alone",
+   "sub": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Suppose every pair of objects of an indexing category has a common target, without requiring equalization of parallel arrows. Two morphisms from a tensor square of a colimit agree if they agree on each diagonal tensor of a cocone leg, when the colimit is preserved in each tensor variable",
+   "results": "{\"t\": \"2026-10-21T12:13:22Z\", \"tool\": \"leanfinder\", \"query\": \"Suppose every pair of objects of an indexing category has a common target, without requiring equalization of parallel arrows. Two morphisms from a tensor square of a colimit agree if they agree on each diagonal tensor of a cocone leg, when the colimit is preserved in each tensor variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"CategoryTheory.IsSifted.factorization_prodComparison_colim\", \"id_tensor_π_preserves_coequalizer_inv_desc\", \"π_tensor_id_preserves_coequalizer_inv_desc\", \"MonCat.FilteredColimits.colimitMulAux_eq_of_rel_right\", \"MonCat.FilteredColimits.colimitMulAux_eq_of_rel_left\", \"CategoryTheory.Limits.colimit_obj_ext\"], \"digest\": \"1f843ccd80145447\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned coequalizer tensor formulas, ordinary colimit uniqueness, concrete filtered monoids or sifted product comparison; none states diagonal tensor equality detection with common successors alone"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "CategoryTheory.Limits.IsColimit.tensor, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:76-87, yields the equality test when I is sifted. It cannot be applied under only the common-successor hypothesis (e.g. the one-object category of a nontrivial group is not sifted). IsColimit.tensor₂ at lines 51-54 supplies the external tensor colimit, but passing from mixed tensor legs to diagonal ones remains an argument.",
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-filtered-ring-object-cocone-colimit",
+  "date": "2026-10-21",
+  "group": "NI"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sfb-qlbar-colimit-x",
+   "place": "Proof paragraph Third isomorphism, final sentence: upgrade the underlying abelian colimit cocone to a ring-object colimit; equality of the two multiplication composites is detected on diagonal tensor legs. This extracts original steps 4-6 of lem-sfb-filtered-ring-object-cocone-colimit.",
+   "via": [
+    "lem-sfb-filtered-ring-object-cocone-colimit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
