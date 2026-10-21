@@ -81,11 +81,26 @@ def RingedTensorCorner.projectionCoefficientDiagram (A : RingedTensorCorner.{u, 
     A.projectionCoefficients ⥤ (ℕᵒᵖ ⥤ CochainComplex A.mateModules ℤ) :=
   A.projectionCoefficientProperty.ι ⋙ Under.forget _
 
+open MonoidalCategory in
+private theorem tensorComplexHasTotal
+    {C : Type uB} [Category.{vB} C] [Preadditive C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [HasCoproducts.{0} C] :
+    ∀ (K L : CochainComplex C ℤ),
+      HomologicalComplex.HasMapBifunctor K L (curriedTensor C) (.up ℤ) := by
+  intro K L
+  infer_instance
+
 /-- The direct-sum total tensor bifunctor of the recorded module category.
 Source: Stacks 0943 (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
-abbrev RingedTensorCorner.projectionTotal (A : RingedTensorCorner.{u, w}) :=
-  A.mateTensor.map₂HomologicalComplex
-    (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+@[no_expose]
+def RingedTensorCorner.projectionTotal (A : RingedTensorCorner.{u, w}) :
+    CochainComplex A.mateModules ℤ ⥤
+      CochainComplex A.mateModules ℤ ⥤ CochainComplex A.mateModules ℤ :=
+  letI : ∀ K L : CochainComplex A.mateModules ℤ,
+      HomologicalComplex.HasMapBifunctor K L A.mateTensor (.up ℤ) :=
+    @tensorComplexHasTotal A.mateModules _ _ (monoidalCategory A.ring)
+      (ringedTensorPreadditive A.ring) _
+  A.mateTensor.map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)
 
 /-- Tensor every coefficient level, functorially in the complex and the whole coefficient tower.
 Source: Stacks 0943 (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
@@ -219,6 +234,7 @@ abbrev StrictProjectionDirectImage {Y X : RingedTensorCorner.{u, w}}
 
 /-- The canonical right unitor of total tensor, using Mathlib's signed total complex.
 Source: Stacks 0943 (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
+@[no_expose]
 def RingedTensorCorner.projectionRightUnitor (A : RingedTensorCorner.{u, w})
     (N : CochainComplex A.mateModules ℤ) :
     (A.projectionTotal.obj N).obj A.mateUnitComplex ≅ N :=
@@ -229,13 +245,32 @@ def RingedTensorCorner.projectionRightUnitor (A : RingedTensorCorner.{u, w})
 /-- The uniquely normalized ordinary pullback of the coefficient ring.
 Source: Stacks 0943, 03EL
 (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
+@[no_expose]
 def RingedTensorEdge.projectionUnit {Y X : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge Y X) :=
   Classical.choose (canonicalRingedTensorComparison_unit Y.ring X.ring e.inverseRing
     e.inverse e.algebraic e.ringMap e.pullback e.object_eq e.map_eq e.ordinaryTensor).exists
 
+/-- The defining normalization of the uniquely chosen coefficient-ring pullback.
+Source: Stacks 03EL (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism).
+Proof: extract the ordinary unit's chosen normalization by `Classical.choose_spec`.
+This factors the normalization proof already used in the two projection constructions. -/
+theorem RingedTensorEdge.projectionUnit_normalized
+    {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) :
+    ∀ M : Y.mateModules,
+      (e.ordinaryTensor.mu M (unit ((sheafCompose Y.topology
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring))).hom ≫
+        (monoidalCategory X.ring).tensorHom (𝟙 (e.pullback.obj M)) e.projectionUnit.hom ≫
+          ((monoidalCategory X.ring).rightUnitor (e.pullback.obj M)).hom =
+        e.pullback.map (((monoidalCategory Y.ring).rightUnitor M).hom) := by
+  with_unfolding_all
+    exact Classical.choose_spec (canonicalRingedTensorComparison_unit Y.ring X.ring
+      e.inverseRing e.inverse e.algebraic e.ringMap e.pullback
+      e.object_eq e.map_eq e.ordinaryTensor).exists
+
 /-- Termwise pullback of the degree-zero ring, with its canonical scalar-extension unit.
 Source: Stacks 0943 (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
+@[no_expose]
 def RingedTensorEdge.projectionUnitComplex {Y X : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge Y X) :
     (e.pullback.mapHomologicalComplex (ComplexShape.up ℤ)).obj Y.mateUnitComplex ≅
@@ -258,7 +293,23 @@ def ProjectionCoaugmentation {A : RingedTensorCorner.{u, w}}
     i.f r ≫ limit.π (C.X r) n ≫ (c.hom.app n).f r =
       ((A.projectionRightUnitor N).inv ≫ (A.projectionTotal.obj N).map (z.app n)).f r
 
-private def towerProjectionResult
+/-- The canonical mixed tensor representative, with the total tensor kept abstract.
+Source: Stacks 0943 and the mixed K-flat representative comparison
+(blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
+@[no_expose]
+def RingedTensorCorner.projectionMixedTensorRepresentative
+    (A : RingedTensorCorner.{u, w}) (a : RingedTensorModel A)
+    (N F : CochainComplex A.mateModules ℤ) (hF : A.mateFlat F) :
+    A.tensor.obj (DerivedCategory.Q.obj N, DerivedCategory.Q.obj F) ≅
+      DerivedCategory.Q.obj ((A.projectionTotal.obj N).obj F) := by
+  with_unfolding_all
+    exact mixedTensorRepresentative A.ring A.mateFlat (fun _ ↦ Iff.rfl)
+      A.tensor a.representative N F hF
+
+/-- The complete strict-tower projection assertion with its eleven normalization clauses.
+Source: Stacks 0943, 0A07, 0A0G
+(blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
+def RingedTensorEdge.StrictTowerProjectionResult
     {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X)
     (a : RingedTensorModel Y) (b : RingedTensorModel X)
     [e.pushforward.Additive]
@@ -296,8 +347,7 @@ private def towerProjectionResult
             (ly.ev.map ((s.hom.app N).app P)).app n ≫
             (ly.evaluation.hom.app ((CY.obj N).obj P)).app n ≫
             DerivedCategory.Q.map (((cy.hom.app N).app P).app n) =
-          (mixedTensorRepresentative Y.ring Y.mateFlat (fun _ ↦ Iff.rfl)
-            Y.tensor a.representative N (P.obj.right.obj n) (hf P n).1).hom) ∧
+          (Y.projectionMixedTensorRepresentative a N (P.obj.right.obj n) (hf P n).1).hom) ∧
       (∀ (K : CochainComplex X.mateModules ℤ) (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
         (tEv (DerivedCategory.Q.obj K) P n).hom ≫
             (lx.ev.map ((t.hom.app K).app P)).app n ≫
@@ -306,8 +356,7 @@ private def towerProjectionResult
           X.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj K))
             (derivedPullbackComplexComparison e.pullback e.left e.epsilon
               (P.obj.right.obj n))) ≫
-          (mixedTensorRepresentative X.ring X.mateFlat (fun _ ↦ Iff.rfl)
-            X.tensor b.representative K ((e.projectionCoefficientDiagram.obj P).obj n)
+          (X.projectionMixedTensorRepresentative b K ((e.projectionCoefficientDiagram.obj P).obj n)
               (hf P n).2).hom) ∧
       (∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ) {M M' : Y.mateDerived} (g : M ⟶ M'),
         Y.tensor.map (Prod.mkHom g (𝟙 (DerivedCategory.Q.obj (P.obj.right.obj n)))) ≫
@@ -368,14 +417,6 @@ private def towerProjectionResult
           ly.delta ((S.obj (e.right.obj E)).obj P) ≫
             (ly.L.map ((u.app E).app P))⟦(1 : ℤ)⟧')
 
-open MonoidalCategory in
-private theorem tensorComplexHasTotal
-    {C : Type uB} [Category.{vB} C] [Preadditive C] [MonoidalCategory C]
-    [MonoidalPreadditive C] [HasCoproducts.{0} C] :
-    ∀ (K L : CochainComplex C ℤ),
-      HomologicalComplex.HasMapBifunctor K L (curriedTensor C) (.up ℤ) := by
-  intro K L
-  infer_instance
 
 section ProjectionProof
 set_option backward.isDefEq.respectTransparency.types false
@@ -877,10 +918,6 @@ private theorem mixedTensorNatIso (A : RingedTensorCorner.{u, w}) (a : RingedTen
       A.projectionTotal.flip.obj F ⋙ DerivedCategory.Q.{w},
       ∀ K, m.hom.app K = (mixedTensorRepresentative A.ring A.mateFlat
         (fun _ ↦ Iff.rfl) A.tensor a.representative K F hF).hom := by
-  -- Cache the direct additive parent of the existing sheaf abelian instance.
-  let : Abelian A.mateModules :=
-    { (inferInstance : Abelian A.mateModules) with
-      toPreadditive := (inferInstance : Preadditive A.mateModules) }
   let : ∀ K L : CochainComplex A.mateModules ℤ,
       HomologicalComplex.HasMapBifunctor K L A.mateTensor (.up ℤ) :=
     @tensorComplexHasTotal A.mateModules _ _ (monoidalCategory A.ring)
@@ -2014,13 +2051,6 @@ private theorem canonicalProjectionChainSquare
         DerivedCategory.Q.map f ≫
         δ.app ((X.projectionTotal.obj K).obj
           ((e.pullback.mapHomologicalComplex (.up ℤ)).obj F)) := by
-  -- Cache the direct additive parent of the existing sheaf abelian instance.
-  let : Abelian Y.mateModules :=
-    { (inferInstance : Abelian Y.mateModules) with
-      toPreadditive := (inferInstance : Preadditive Y.mateModules) }
-  let : Abelian X.mateModules :=
-    { (inferInstance : Abelian X.mateModules) with
-      toPreadditive := (inferInstance : Preadditive X.mateModules) }
   let := monoidalCategory Y.ring
   let := monoidalCategory X.ring
   let := ringedTensorPreadditive Y.ring
@@ -2059,9 +2089,7 @@ private theorem canonicalProjectionChainSquare
     e.pushforward e.moduleAdjunction e.right η hη computeR' computeL
     e.derivedAdjunction ca (DerivedCategory.Q.obj K) K hK (Iso.refl _) F P hb
   let j := e.projectionUnit
-  have hj := Classical.choose_spec (canonicalRingedTensorComparison_unit
-    Y.ring X.ring e.inverseRing e.inverse e.algebraic e.ringMap e.pullback
-    e.object_eq e.map_eq e.ordinaryTensor).exists
+  have hj := e.projectionUnit_normalized
   let J := CochainComplex.mapBifunctor K
     ((e.pullback.mapHomologicalComplex (.up ℤ)).obj F)
     (MonoidalCategory.curriedTensor X.mateModules)
@@ -2532,8 +2560,7 @@ private theorem nativeProjectionMate
   with_unfolding_all
     exact existsTotalProjectionMate e.pullback e.pushforward
       e.moduleAdjunction e.ordinaryTensor.mu e.ordinaryTensor.naturality e.projectionUnit
-      (Classical.choose_spec (canonicalRingedTensorComparison_unit Y.ring X.ring e.inverseRing
-        e.inverse e.algebraic e.ringMap e.pullback e.object_eq e.map_eq e.ordinaryTensor).exists)
+      e.projectionUnit_normalized
 
 private theorem buildTowerProjection
     {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X)
@@ -2544,9 +2571,8 @@ private theorem buildTowerProjection
     [HasCountableProducts X.mateDerived] [HasCountableProducts Y.mateDerived]
     (lx : StrictProjectionLimit X) (ly : StrictProjectionLimit Y)
     (d : StrictProjectionDirectImage e lx ly) :
-    towerProjectionResult e a b lx ly d := by
-  change let Result : Prop := _; Result
-  intro Result
+    e.StrictTowerProjectionResult a b lx ly d := by
+  unfold RingedTensorEdge.StrictTowerProjectionResult
   classical
   -- Cache the direct additive parent of the existing sheaf abelian instance.
   let : Abelian Y.mateModules :=
@@ -2703,107 +2729,9 @@ theorem ringedStrictTowerProjectionMorphism
     [HasCountableProducts X.mateDerived] [HasCountableProducts Y.mateDerived]
     (lx : StrictProjectionLimit X) (ly : StrictProjectionLimit Y)
     (d : StrictProjectionDirectImage e lx ly) :
-    ∃ (CY : CochainComplex Y.mateModules ℤ ⥤
-        Y.projectionCoefficients ⥤ CochainComplex Y.projectionTowers ℤ)
-      (CX : CochainComplex X.mateModules ℤ ⥤
-        Y.projectionCoefficients ⥤ CochainComplex X.projectionTowers ℤ)
-      (cy : CY ⋙ projectionPost HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅
-        Y.projectionTensorDiagrams)
-      (cx : CX ⋙ projectionPost HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅
-        e.projectionTensorDiagrams)
-      (S : Y.mateDerived ⥤ Y.projectionCoefficients ⥤ DerivedCategory Y.projectionTowers)
-      (T : X.mateDerived ⥤ Y.projectionCoefficients ⥤ DerivedCategory X.projectionTowers)
-      (s : DerivedCategory.Q ⋙ S ≅ CY ⋙ projectionPost DerivedCategory.Q)
-      (t : DerivedCategory.Q ⋙ T ≅ CX ⋙ projectionPost DerivedCategory.Q)
-      (hf : ∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
-        Y.mateFlat (P.obj.right.obj n) ∧
-          X.mateFlat ((e.projectionCoefficientDiagram.obj P).obj n))
-      (sEv : ∀ (M : Y.mateDerived) (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
-        Y.tensor.obj (M, DerivedCategory.Q.obj (P.obj.right.obj n)) ≅
-          (ly.ev.obj ((S.obj M).obj P)).obj n)
-      (tEv : ∀ (E : X.mateDerived) (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
-        X.tensor.obj (E, e.left.obj (DerivedCategory.Q.obj (P.obj.right.obj n))) ≅
-          (lx.ev.obj ((T.obj E).obj P)).obj n)
-      (u : e.right ⋙ S ⟶ T ⋙ projectionPost d.Rt)
-      (zY : ∀ P : Y.projectionCoefficients, 𝟭 Y.mateDerived ⟶ (S.flip.obj P) ⋙ ly.L)
-      (zX : ∀ P : Y.projectionCoefficients, 𝟭 X.mateDerived ⟶ (T.flip.obj P) ⋙ lx.L),
-      (∀ (N : CochainComplex Y.mateModules ℤ) (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
-        (sEv (DerivedCategory.Q.obj N) P n).hom ≫
-            (ly.ev.map ((s.hom.app N).app P)).app n ≫
-            (ly.evaluation.hom.app ((CY.obj N).obj P)).app n ≫
-            DerivedCategory.Q.map (((cy.hom.app N).app P).app n) =
-          (mixedTensorRepresentative Y.ring Y.mateFlat (fun _ ↦ Iff.rfl)
-            Y.tensor a.representative N (P.obj.right.obj n) (hf P n).1).hom) ∧
-      (∀ (K : CochainComplex X.mateModules ℤ) (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
-        (tEv (DerivedCategory.Q.obj K) P n).hom ≫
-            (lx.ev.map ((t.hom.app K).app P)).app n ≫
-            (lx.evaluation.hom.app ((CX.obj K).obj P)).app n ≫
-            DerivedCategory.Q.map (((cx.hom.app K).app P).app n) =
-          X.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj K))
-            (derivedPullbackComplexComparison e.pullback e.left e.epsilon
-              (P.obj.right.obj n))) ≫
-          (mixedTensorRepresentative X.ring X.mateFlat (fun _ ↦ Iff.rfl)
-            X.tensor b.representative K ((e.projectionCoefficientDiagram.obj P).obj n)
-              (hf P n).2).hom) ∧
-      (∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ) {M M' : Y.mateDerived} (g : M ⟶ M'),
-        Y.tensor.map (Prod.mkHom g (𝟙 (DerivedCategory.Q.obj (P.obj.right.obj n)))) ≫
-            (sEv M' P n).hom =
-          (sEv M P n).hom ≫ (ly.ev.map ((S.map g).app P)).app n) ∧
-      (∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ) {E E' : X.mateDerived} (g : E ⟶ E'),
-        X.tensor.map (Prod.mkHom g
-            (𝟙 (e.left.obj (DerivedCategory.Q.obj (P.obj.right.obj n))))) ≫
-            (tEv E' P n).hom =
-          (tEv E P n).hom ≫ (lx.ev.map ((T.map g).app P)).app n) ∧
-      (∀ (E : X.mateDerived) (P : Y.projectionCoefficients) (n : ℕᵒᵖ),
-        (sEv (e.right.obj E) P n).hom ≫
-            (ly.ev.map ((u.app E).app P)).app n ≫
-            (d.evaluation.hom.app ((T.obj E).obj P)).app n =
-          derivedProjectionFormulaMate e.left e.right e.derivedAdjunction Y.tensor X.tensor
-            (e.tensorComparison a b) E (DerivedCategory.Q.obj (P.obj.right.obj n)) ≫
-              e.right.map (tEv E P n).hom) ∧
-      (∀ (N : CochainComplex Y.mateModules ℤ) (P : Y.projectionCoefficients),
-        ∃ i : N ⟶ ((lim : Y.projectionTowers ⥤ Y.mateModules).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj ((CY.obj N).obj P),
-          ProjectionCoaugmentation N P.obj.right P.obj.hom ((CY.obj N).obj P)
-            ((Functor.mapIso ((CategoryTheory.evaluation Y.projectionCoefficients _).obj P)
-              (cy.app N))) i ∧
-          (zY P).app (DerivedCategory.Q.obj N) ≫ ly.L.map ((s.hom.app N).app P) =
-            DerivedCategory.Q.map i ≫ ly.eta.app ((CY.obj N).obj P)) ∧
-      (∀ (K : CochainComplex X.mateModules ℤ) (P : Y.projectionCoefficients),
-        ∃ (z : (Functor.const ℕᵒᵖ).obj X.mateUnitComplex ⟶
-            e.projectionCoefficientDiagram.obj P)
-          (i : K ⟶ ((lim : X.projectionTowers ⥤ X.mateModules).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj ((CX.obj K).obj P)),
-          (∀ n : ℕᵒᵖ, z.app n = e.projectionUnitComplex.inv ≫
-            (e.pullback.mapHomologicalComplex (ComplexShape.up ℤ)).map (P.obj.hom.app n)) ∧
-          ProjectionCoaugmentation K (e.projectionCoefficientDiagram.obj P) z
-            ((CX.obj K).obj P)
-            ((Functor.mapIso ((CategoryTheory.evaluation Y.projectionCoefficients _).obj P)
-              (cx.app K))) i ∧
-          (zX P).app (DerivedCategory.Q.obj K) ≫ lx.L.map ((t.hom.app K).app P) =
-            DerivedCategory.Q.map i ≫ lx.eta.app ((CX.obj K).obj P)) ∧
-      (∀ (E : X.mateDerived) (P : Y.projectionCoefficients),
-        (zY P).app (e.right.obj E) ≫ ly.L.map ((u.app E).app P) =
-          e.right.map ((zX P).app E) ≫ d.a.hom.app ((T.obj E).obj P)) ∧
-      (∀ (E : X.mateDerived) (P : Y.projectionCoefficients),
-        ly.L.map ((u.app E).app P) ≫ ly.p (d.Rt.obj ((T.obj E).obj P)) =
-          ly.p ((S.obj (e.right.obj E)).obj P) ≫
-            Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n))) ∧
-      (∀ (E : X.mateDerived) (P : Y.projectionCoefficients),
-        Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n)) ≫
-            towerTransitionEndomorphism (fun n : ℕ ↦
-              (ly.ev.obj (d.Rt.obj ((T.obj E).obj P))).map
-                (homOfLE (Nat.le_succ n)).op) =
-          towerTransitionEndomorphism (fun n : ℕ ↦
-            (ly.ev.obj ((S.obj (e.right.obj E)).obj P)).map
-              (homOfLE (Nat.le_succ n)).op) ≫
-            Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n))) ∧
-      (∀ (E : X.mateDerived) (P : Y.projectionCoefficients),
-        Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n)) ≫
-            ly.delta (d.Rt.obj ((T.obj E).obj P)) =
-          ly.delta ((S.obj (e.right.obj E)).obj P) ≫
-            (ly.L.map ((u.app E).app P))⟦(1 : ℤ)⟧') := by
+    e.StrictTowerProjectionResult a b lx ly d := by
   exact buildTowerProjection e a b lx ly d
 
 
 end SheafOfModules
+
