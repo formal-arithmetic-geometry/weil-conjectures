@@ -17,9 +17,125 @@
   "def-sfb-internal-hom-strict-models",
   "def-sfb-internal-hom-strict-roof"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $N=T\\otimes_R J$ and $E=I_R(N)$. The fixed augmentation gives K-injective $J$ and $E$, and isomorphisms $[\\eta_C]$ and $[\\eta_N]$. Apply [lem-sfb-hom-kflat-chain-transpose] to the arbitrary complex $B$ and $1_B:B\\to\\mathcal Hom_R^\\bullet(P,J)$. Its transpose is $[\\operatorname{ev}_J]$, with $\\operatorname{ev}_J(f\\otimes p)=f(p)$. The fixed representative factorization and inverse augmentation of [def-coef-hom-representative-evaluation] identify evaluation into $QC$ with $[\\eta_C]^{-1}[\\operatorname{ev}_J]$. This uses the K-injective representative $J$ of $QC$, not a new resolution of it.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-hom-kflat-chain-transpose",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom); agent strict-model calculation."
+   }
+  },
+  {
+   "text": "For $f$ of degree $n$ and $p\\in P^m$, the balanced assignment $((t,f),p)\\mapsto t\\otimes f^m(p)$ respects restrictions on every slice. The universal properties of the two sheaf tensor products extend it uniquely to $(T\\otimes B^n)\\otimes P^m\\to T\\otimes J^{n+m}$; the total direct-sum inclusions define $h_T$. To check the chain condition, the image of the source differential on this summand is\n$$t\\otimes(d_B f)(p)+(-1)^n t\\otimes f(d_Pp)=t\\otimes d_Jf(p),$$\nbecause $(d_Bf)(p)=d_Jf(p)-(-1)^nf(d_Pp)$. This is the target differential, since $T$ has degree zero. The summand coproduct and sheafification universal properties extend the equality to all sections; no assertion that all sheaf-tensor sections are global pure tensors is used. There is no permutation of $f,p$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom); agent strict-model calculation."
+   }
+  },
+  {
+   "text": "The normalized comparison is the fixed one in [def-sfb-internal-hom-strict-roof]. Its normalization in [def-sfb-internal-hom-strict-models] says, after the actual $(m,m+n)$ product-Hom projection and evaluation on the identity of each slice,\n$$a_T(t\\otimes f)(p)=\\eta_N(t\\otimes f(p)).$$\nThus the chain uncurrying of $a_T$ and $\\eta_N\\circ h_T$ agree after each total summand inclusion and each sheafification unit, by step 2. First the tensor-product universal property, then the sheafification adjunction, and finally the total coproduct universal property make these maps equal. Product projections specify the actual value of $a_T$; no alternate Hom model is substituted.",
+   "uses": [
+    "def-sfb-internal-hom-strict-models",
+    "def-sfb-internal-hom-strict-roof",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom); agent strict-model calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hom-kflat-chain-transpose] to $A$, $E=I_R(N)$ and $f=a_T$. The hypotheses are precisely the given flat-term K-flatness of $P$, the K-injectivity from step 1 and no restriction on $A$. It identifies $Q(A\\otimes_R P)$ with $QA\\otimes_R^{\\mathbf L}QP$ and represents the transpose into $QE$ by $[\\eta_N\\circ h_T]$ using step 3. For the fixed representative of $H_R(QP,QN)$, [def-coef-hom-representative-evaluation] prescribes the inverse localized augmentation on the output. Hence the requested transpose is\n$$[\\eta_N]^{-1}[\\eta_N\\circ h_T]=[h_T].$$\nIn particular we have never asserted that tensoring with the possibly non-flat $T$ preserves arbitrary quasi-isomorphisms.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "def-coef-hom-representative-evaluation",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom); agent strict-model calculation."
+   }
+  },
+  {
+   "text": "For $u:T\\to T'$, the two routes in the evaluation square send $((t\\otimes f)\\otimes p)$ to $u(t)\\otimes f(p)$. For $v:P'\\to P$, precomposition gives $h_{T,P'}((t\\otimes(f\\circ v))\\otimes p')=t\\otimes f(vp')=h_{T,P}((t\\otimes f)\\otimes vp')$. For $w:C\\to C'$, postcomposition gives $(1_T\\otimes I_R(w))h_{T,C}((t\\otimes f)\\otimes p)=t\\otimes I_R(w)(f(p))=h_{T,C'}((t\\otimes(I_R(w)\\circ f))\\otimes p)$. The tensor and sheafification universal properties used in step 2 give these as chain-map equalities. The augmentation equation $I_R(z)\\eta=\\eta z$ makes the corresponding squares for $a_T$ commute by step 3. The natural comparisons and transposition in [lem-sfb-hom-kflat-chain-transpose], with the fixed natural augmentation, therefore give the asserted derived squares.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-hom-kflat-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom); agent strict-model calculation."
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism in $C$, two-out-of-three for the natural augmentations makes $I_R(w)$ a quasi-isomorphism between K-injectives. For a quasi-isomorphism between the allowed $P$ representatives, [lem-pur-rhom-well-defined] applies with the identity on $J$. The resulting maps of $B$ are quasi-isomorphisms between K-injectives, since [lem-pur-hom-kflat-into-kinjective] applies to each $P,J$. By [lem-weil-pbc-kinjective-hom-derived] all these maps, and $I_R(w)$ itself, are homotopy equivalences. Tensoring with $T[0]$ preserves them: a homotopy $s$ is sent to $1_T\\otimes s$, and $d(1_T\\otimes s)+(1_T\\otimes s)d=1_T\\otimes(ds+sd)$. Thus the induced changes of $A,N$ are invertible after localization even for non-flat $T$. Step 5's commutative squares remain commutative on inverting these isomorphisms (multiply the square equation by the two inverses). The representative tensor comparisons also commute with inversion by [lem-sfb-hom-kflat-chain-transpose].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-hom-kflat-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective); derived.tex Tag 070I (lemma-K-injective). Agent application to the representative changes."
+   }
+  },
+  {
+   "text": "Finally a compatible coefficient map means the given maps on the coefficient modules and Hom representatives respect evaluation and the fixed augmentation comparisons. On every slice, if the induced semilinear maps are denoted by $\\alpha_T,\\alpha_P,\\alpha_J,\\alpha_B$, compatibility says $\\alpha_B(f)(\\alpha_P(p))=\\alpha_J(f(p))$. The two paths for $h$ are therefore both $\\alpha_T(t)\\otimes\\alpha_J(f(p))$. This proves the coefficient square on the actual generators and hence on sheafified total tensors by step 2. The compatible augmentation square gives the same equality for $a$, by step 3; applying its inverse after localization gives the same square for the transpose, by step 4. Identity maps and successive coefficient maps obey the same equation by substitution. This is compatibility with supplied evaluation-preserving coefficient comparisons, and makes no claim that arbitrary extension of scalars commutes with infinite Hom products. All calculations apply in every integer degree; none requires boundedness, finite generation or continuity.",
+   "uses": [
+    "def-sfb-internal-hom-strict-models",
+    "def-coef-hom-representative-evaluation",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom); agent strict-model calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "def-coef-hom-representative-evaluation",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-sfb-internal-hom-strict-models",
+  "def-sfb-internal-hom-strict-roof",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9 (lemma-internal-hom) and Tags 0A95, 0A96, with derived.tex Tag 070I; strict normalized numerator, generator calculation and cancellation written out by Q30."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +178,52 @@
    "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.tensorHom, HomologicalComplex.HasTensor, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, Module.Flat.rTensor_shortComplex_exact",
    "date": "2026-10-21",
    "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary module sheaf T and K flat complex P the tensor Hom transpose of the normalized comparison T tensor Hom(P,I(C)) is scalar evaluation followed by inverse augmentation",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.instHasTensorXTensorUnit, HomologicalComplex.leftUnitor'_inv_comm, HomologicalComplex.rightUnitor, HomologicalComplex.rightUnitor', CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: generic graded tensor inclusions and monoidal closed uncurry laws do not give the fixed unbounded ringed-site representative comparison and its inverse-augmentation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"uncurry\"",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.uncurry', CategoryTheory.MonoidalClosed.uncurry'_curry', CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.MonoidalClosed.uncurry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.curry'_uncurry', CategoryTheory.MonoidalClosed.uncurry_id_eq_ev",
+   "date": "2026-10-21",
+   "verdict": "no match: generic graded tensor inclusions and monoidal closed uncurry laws do not give the fixed unbounded ringed-site representative comparison and its inverse-augmentation normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(transpose|uncurry)|internalHom.*(transpose|uncurry)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic graded tensor inclusions and monoidal closed uncurry laws do not give the fixed unbounded ringed-site representative comparison and its inverse-augmentation normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized tensor Hom comparison of unbounded sheaf complexes has derived transpose evaluation without flatness of its source",
+   "results": "8 hits: transpose_dualTensorHom, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CategoryTheory.sheafHomSectionsEquiv, CategoryTheory.ShortComplex.leftRightHomologyComparison, HomologicalComplex.forgetEval, CategoryTheory.ShortComplex.leftRightHomologyComparison', CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: generic graded tensor inclusions and monoidal closed uncurry laws do not give the fixed unbounded ringed-site representative comparison and its inverse-augmentation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying a chain map into a product Hom complex and evaluating after tensoring with a degree zero module equals evaluation followed by the resolution unit",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor', HomologicalComplex.leftUnitor', HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic graded tensor inclusions and monoidal closed uncurry laws do not give the fixed unbounded ringed-site representative comparison and its inverse-augmentation normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_id_eq_ev|uncurry_natural|ιTensorObj|monoidalClosed_uncurry",
+   "results": "25 hits: Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic graded tensor inclusions and monoidal closed uncurry laws do not give the fixed unbounded ringed-site representative comparison and its inverse-augmentation normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-hom-flat-evaluation-roof",
@@ -85,5 +243,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-hom-strict-numerator-transpose",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing arbitrary-source K-flat chain-transpose theorem; construct h_T and verify the differential and strict normalization on the actual generators, then cancel the inverse augmentation. Spell out naturality, non-flat coefficient representative inversion via homotopy equivalences, and evaluation-compatible coefficient squares. No new nodes.",
+  "blueprint": "Final paragraph, 'descending to a finite extension E': coefficient-passage argument, via lem-sfb-dc-hom-filtered-colimit, old steps 7 and 10 (evaluation roof and canonical comparison) and step 11 (derived naturality).",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Functorial K-injective replacements and natural quasi-isomorphic augmentations, needed for the existing fixed strict models."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic invariance of Hom for quasi-isomorphisms of its complex representatives, used before tensoring with a non-flat module."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic Hom K-flat into K-injective theorem makes both Hom representatives K-injective; no coefficient continuity theorem is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic quasi-isomorphism between K-injectives is a homotopy equivalence, which can be tensored with a non-flat module."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-aa44c69ff",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-aa44c69ff (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no re-split note; the item is still unsplit on live and side-live. 0 new nodes, statement unchanged, proof_deps equals the union of uses, no cycle (the only citer is lem-sfb-hom-flat-evaluation-roof), no SGA. Source Stacks 08J9 (sites-cohomology lemma-internal-hom, l.8896) and its proof read; tags 0A95, 0A96 and 070I checked against tags/tags. Checked that a_T has the source and target given by def-sfb-internal-hom-strict-models Normalized and lem-sfb-internal-hom-comparison-exists. Step 1: chain-transpose with A=B, E=J, f=1_B gives ev_J, then the inverse augmentation of def-coef-hom-representative-evaluation. Step 2: Koszul sign recomputed, (d_B f)(p)+(-1)^n f(d_P p)=d_J f(p) with T in degree 0. Steps 3-4: Normalized gives the uncurried a_T = η_N∘h_T, and [η_N]^{-1} cancels; the chain-transpose hypotheses hold (A arbitrary, P flat-term K-flat, I_R(N) K-injective). Step 5: the three naturality squares recomputed. Step 6: rhom-well-defined (K-injective targets), hom-kflat-into-kinjective and the final sentence of kinjective-hom-derived give homotopy equivalences, and T⊗- preserves them via 1⊗s, so non-flat T is handled correctly. Step 7: the coefficient square recomputed on generators. Edge cases: T=0, T=R, T=Z/2 over Z, P in one degree. Not a duplicate of chain-transpose or of the flat-scalar-evaluation model. The 4 declared tool_uses (generic K-injective and Hom facts) are accepted."
  }
 }
