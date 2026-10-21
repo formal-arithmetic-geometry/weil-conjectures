@@ -21,9 +21,105 @@
   "def-pc-flat-sheaf-modules",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each integer $r$, apply [lem-sfb-ringed-site-finite-retract-dual-exact] with $R=B$, $T=E^r$, $i=i_r$ and $p=p_r$. Its hypotheses are precisely the given finite rank and $p_ri_r=1$. Its exact-Hom clause proves that $\\mathcal Hom_B(E^r,-)$ sends short exact sequences to short exact sequences. This is internal Hom exactness; no assertion about projectivity for global sections is needed.",
+   "uses": [
+    "lem-sfb-ringed-site-finite-retract-dual-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand calculation; exact-Hom retract as in Tag 08JH"
+   }
+  },
+  {
+   "text": "Here is the elementary tensor counterpart. For any finite-free retract $T\\xrightarrow{i}B^{\\oplus N}\\xrightarrow{p}T$, the maps $i\\otimes1$ and $p\\otimes1$ give a natural retract of $T\\otimes_B-$ from $B^{\\oplus N}\\otimes_B-\\cong(-)^{\\oplus N}$. The last isomorphism is induced by $(b_j)\\otimes m\\mapsto(b_jm)_j$, with inverse $(m_j)\\mapsto\\sum_j e_j\\otimes m_j$, first on presheaves and then on their sheafifications [def-pur-sheaf-tensor-product]. A finite direct sum of a short exact sequence is short exact: kernels are coordinatewise and local lifts for finitely many coordinates exist on a common refinement. Exactness passes to the displayed natural retract: include a kernel element in the finite-power sequence, lift it from the previous term locally, and project that lift by $p\\otimes1$; naturality and $(p\\otimes1)(i\\otimes1)=1$ give the required preimage. The same inclusion/projection proves injectivity on the left and local surjectivity on the right. Thus $T\\otimes_B-$ is exact. Taking $T=E^r$ proves its tensor exactness and hence flatness [def-pc-flat-sheaf-modules]; commutativity of $B$ interchanges the tensor factors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free retract calculation; elementary exactness argument using sites-modules.tex definition-flat"
+   }
+  },
+  {
+   "text": "Let $f:B[0]\\to I^\\bullet$ be any of the K-injective resolutions in the statement. It is a quasi-isomorphism. Apply [lem-pc-bounded-exact-term-hom-quasi-iso] with $P=E^\\bullet$, $M=B[0]$ and $N=I^\\bullet$: the finite interval is $[a,b]$, and the exact-term hypothesis is step 1. It gives exactly the asserted quasi-isomorphism $D^\\bullet\\to\\mathcal Hom_B^\\bullet(E^\\bullet,I^\\bullet)$, even if $I^\\bullet$ is unbounded in both directions. In particular take the fixed K-injective resolution used in [def-pur-derived-internal-hom]. For that choice the target represents $E^\\vee$ by definition, so $D^\\bullet$ represents it as well. The comparison assertion already proved holds for every choice of $f$.",
+   "uses": [
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect, K-injective comparison; section-internal-hom, K-injective construction"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-site-bounded-dual-components] with $R=B$ and the given bounds. Projection to the unique possibly nonzero factor gives $D^n=\\mathcal Hom_B(E^{-n},B)$ under the canonical identification and $D^n=0$ outside $[-b,-a]$. Its differential formula is $d_D^n(\\phi)=(-1)^{n+1}\\phi d_E^{-n-1}$, exactly the sign in the statement. In particular there is no extra differential term from $B[0]$.",
+   "uses": [
+    "lem-sfb-ringed-site-bounded-dual-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, dual terms in degree -n; section-hom-complexes, signed differential"
+   }
+  },
+  {
+   "text": "For each $n$, apply [lem-sfb-ringed-site-finite-retract-dual-exact] to $T=E^{-n}$ with its specified splitting. Its dual splitting is precisely precomposition by $p_{-n}$ followed by precomposition by $i_{-n}$, and $i_{-n}^*p_{-n}^*=(p_{-n}i_{-n})^*=1$. Its coordinate-dual isomorphism identifies the intervening sheaf with $B^{\\oplus N_{-n}}$. Under step 4 this gives the claimed finite-free retract structure on $D^n$. Apply the tensor argument of step 2 to that retract: $D^n\\otimes_B-$ is exact, so each $D^n$ is flat as asserted.",
+   "uses": [
+    "lem-sfb-ringed-site-finite-retract-dual-exact",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, dual of a finite-free direct summand"
+   }
+  },
+  {
+   "text": "Both complexes now have flat terms and are bounded above: $E^r=0$ for $r>b$ and $D^n=0$ for $n>-a$. Apply [lem-weil-pbc-independent-bounded-flat-kflat] separately to $E^\\bullet$ and $D^\\bullet$, on the original small ringed site. They are K-flat for the sheaf tensor used here. For any module sheaf $M$, [lem-sf-ringed-kflat-single-tensor-comparison] therefore identifies their derived tensors with $M[0]$ with the ordinary complexes having terms $E^q\\otimes_B M$ and $D^q\\otimes_B M$, and differentials $d_E^q\\otimes1$ and $d_D^q\\otimes1$. In the second case use step 3 to identify the first derived factor with $E^\\vee$. There is no flatness assumption on $M$.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-sf-ringed-kflat-single-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 06YU, definition-derived-tor and preceding K-flat construction"
+   }
+  },
+  {
+   "text": "The two ordinary tensor complexes from step 6 vanish termwise outside $[a,b]$ and $[-b,-a]$, respectively, since the tensor product of the zero sheaf with $M$ is zero by its defining universal property. For a degree $q$ outside the appropriate interval their degree-$q$ term is zero, so both its kernel of the outgoing differential and the image of the incoming differential are zero. The quotient $\\ker(d^q)/\\operatorname{im}(d^{q-1})$ is therefore zero. The definition of cohomology sheaves [def-weil-derived-cohomology-sheaves] and the representing isomorphisms in step 6 yield both displayed Tor-window vanishings. This works for every $M$ on the site itself.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1, lemma-tor-amplitude, proof of (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-bounded-dual-components",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ, bounded finite-free-retract Hom and dual calculation; Tag 06YQ for K-flatness; Tag 08G1, proof (2) implies (1)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -128,10 +224,103 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: ordinary Module.Flat.of_retract/of_projective and dualTensorHomEquiv concern modules, and KProjective concerns global categorical projectivity; none states the sheaf-internal signed K-injective comparison together with the reflected universal Tor interval."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite free retract sheaves has an internal derived dual given by signed ordinary Hom and reflected Tor amplitude",
+   "results": {
+    "hits": [
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "Ext",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module flatness, generic cohomological support or global categorical K-projectivity, and do not state the ringed-site internal Hom comparison, signed dual splitting and both universal Tor windows."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|strictlyPerfect|strictPerfect|KFlat",
+   "results": {
+    "hits": [],
+    "note": "",
+    "subdirectory": "Algebra/Homology"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module flatness, generic cohomological support or global categorical K-projectivity, and do not state the ringed-site internal Hom comparison, signed dual splitting and both universal Tor windows."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of sheaves with finite free retract terms has flat terms and its derived internal Hom dual has Tor amplitude in the reflected degree interval",
+   "results": {
+    "hits": [
+     "Module.Flat.of_retract",
+     "HomologicalComplex.instIsStableUnderRetractsQuasiIso",
+     "HomologicalComplex.instHasFiniteLimits",
+     "CategoryTheory.ShortComplex.hasLeftHomology_iff_op",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "Module.Flat.of_free",
+     "Module.Flat.of_projective",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module flatness, generic cohomological support or global categorical K-projectivity, and do not state the ringed-site internal Hom comparison, signed dual splitting and both universal Tor windows."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex",
+   "results": {
+    "hits": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module flatness, generic cohomological support or global categorical K-projectivity, and do not state the ringed-site internal Hom comparison, signed dual splitting and both universal Tor windows."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*homComplex|homComplex.*quasiIso|[Ss]trictly[Pp]erfect|[Tt]or[Aa]mplitude",
+   "results": {
+    "hits": [],
+    "note": "",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module flatness, generic cohomological support or global categorical K-projectivity, and do not state the ringed-site internal Hom comparison, signed dual splitting and both universal Tor windows."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a bounded complex of sheaves with projective finite rank terms preserves quasi-isomorphisms and computes its perfect dual without enough points",
+   "results": {
+    "hits": [
+     "Ext",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "CategoryTheory.hasExt_of_enoughProjectives",
+     "CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+     "CochainComplex.IsKProjective.leftOrthogonal",
+     "CategoryTheory.hasExt_of_hasDerivedCategory"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module flatness, generic cohomological support or global categorical K-projectivity, and do not state the ringed-site internal Hom comparison, signed dual splitting and both universal Tor windows."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-hom-dual-tor-amplitude",
@@ -150,5 +339,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-split-perfect-dual-tor-window",
+  "worker": "stage1",
+  "summary": "Seven-step split reusing existing exact-Hom, signed dual, bounded Hom comparison and K-flat tensor nodes. Tensor exactness is proved explicitly as a finite-power retract and the final cohomology vanishing is written out. No new nodes and no statement changes. Checked the arbitrary small ringed-site hypotheses, arbitrary K-injective resolution, all signs, both degree intervals and rank-zero cases.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom.proof.md, The formula paragraph final sentence (perfect dual) and Membership paragraph first sentence (perfect factor lies in Dctf): realizes exact terms, signed dual representative and the reflected numerical Tor interval.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "Generic bounded internal-Hom quasi-isomorphism comparison on any small ringed site; the unit has no separate exact-term comparison, and this supplies the finite-total calculation underlying its perfect-dual step."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic bounded-above flat sheaf complex K-flatness for the exact same sheaf tensor, needed for the perfect-factor tensor calculation."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "Generic K-flat tensor comparison with an arbitrary degree-zero module sheaf, providing the representing complexes for the two universal Tor tests."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-kflat-single-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-6df92a1c5",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-6df92a1c5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps and every cited statement; no new nodes. The statement is unchanged (sha a5cbcc0e matches the unsplit version). It is a first split, not a re-split; the item came from Q95 2c51add3. Source checks in sites-cohomology.tex: 08JH l.11912, 08JJ l.13048, 06YQ l.3120, 08G1 l.12432 (2)=>(1). Step 1 uses finite-retract-dual-exact (finite r, pi=1); its last clause gives exactness of Hom(T,-). Step 2, accepted as elementary: tensor with a finite free module is a finite power, and a retract of an exact functor is exact. Step 3 uses bounded-exact-term-hom-quasi-iso, which allows arbitrary complexes and so covers any K-injective resolution; D represents E^vee through the fixed resolution of def-pur-derived-internal-hom. Step 4 uses bounded-dual-components; I re-derived its sign (-1)^{n+1} from def-pur-hom-complex with target B[0]. Step 5 takes the dual splitting p*,i* and coordinate dual from finite-retract-dual-exact, and step 2 then gives flatness. Step 6: E and D are bounded above with flat terms, so bounded-flat-kflat makes them K-flat; kflat-single-tensor-comparison then allows any M. Step 7 is termwise vanishing. Edge cases tested: E=0, N=0, a single degree, two-term sign checks in degrees [-1,0] and [0,1], B=0. Advisory: partial overlap with lem-sfb-ringed-site-strict-perfect-hom. Tool_uses accepted: three generic tools from other units (exact-term Hom quasi-iso, 06YQ K-flatness on a site, K-flat tensor with a single sheaf). Batch-5 flag: lem-sf-ringed-kflat-single-tensor-comparison reaches only lem-trf-site-functorial-flat-resolution (functorial flat resolutions on a site) and lem-trf-localization-essentially-surjective (localizations are essentially surjective, 04VH/04VK). Both are generic homological/categorical facts, not steps of the trace formula or Poincare duality, so the citation is accepted. No SGA. Cosmetic: the report mentions citations.json and searches.jsonl, which are not in the commit."
  }
 }
