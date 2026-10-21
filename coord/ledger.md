@@ -21238,3 +21238,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/NW/lem-weil-pbc-completed-realization-derived-cohomology (reviewer FIX; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q124/lem-trf-section-coordinate-counit-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q106/lem-cbc-completed-open-strict-mate-identification (reviewer FIX; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q121/lem-pur-common-line-positive-scalar-powers (reviewer FIX; first push; new nodes: 0)

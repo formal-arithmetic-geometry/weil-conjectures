@@ -13,9 +13,112 @@
   "def-weil-size-convention",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the tensor construction of [def-pur-sheaf-tensor-product]. The bijection of [lem-pc-sites-sheaf-tensor-bilinear-universal] constructs a map out of a sheaf tensor from a restriction-compatible balanced bilinear formula and detects equality on pure tensors. For tensors over different rings, first apply the ordinary balanced tensor universal property sectionwise, then the factorization and uniqueness of [def-weil-presheaf-modules-sheafification]. For a nested tensor, or a product of two sheafified tensors, a factor $\\mathcal F^\\#$ is the module sheafification of a presheaf tensor $\\mathcal F$; a formula given on its presheaf sections is a bilinear map of presheaves $\\mathcal F\\times\\mathcal G\\to\\mathcal H$, which extends to a bilinear map $\\mathcal F^\\#\\times\\mathcal G^\\#\\to\\mathcal H$ by [lem-pc-sites-module-sheafification-bilinear-extension-existence] (with $\\mathcal G=\\mathcal G^\\#$ when the other factor is already a sheaf), and two such extensions agreeing on presheaf sections are equal by [lem-pc-sites-module-sheafification-bilinear-extension-uniqueness]. The bijection above then turns the extended bilinear map into a map out of the sheaf tensor. Repeat this one factor at a time for nested tensors. Thus each formula below is a map of sheaves, and checking inverse composites or commutative diagrams on the displayed nested pure tensors suffices. No assertion that every section is globally a pure tensor is used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  },
+  {
+   "text": "Construct the stated ring and module structures using this procedure: the multiplication and the action are the bilinear extensions [lem-pc-sites-module-sheafification-bilinear-extension-existence] of the sectionwise formulas on the presheaf tensors $A(V)\\otimes_{B(V)}C_i(V)$ and $T(V)\\otimes_{B(V)}C_i(V)$, and each identity below holds after sheafification by [lem-pc-sites-module-sheafification-bilinear-extension-uniqueness] once it holds on presheaf sections. For each $i$, the product on $R_i$ sends $(a\\otimes c,a^{\\prime}\\otimes c^{\\prime})$ to $aa^{\\prime}\\otimes cc^{\\prime}$, and its action on $L_i$ sends $(a\\otimes c,t\\otimes d)$ to $at\\otimes cd$. These formulas are additive and $B$-balanced in each original tensor: moving $b\\in B$ between either pair of factors has the same image, because the $B$-actions on $A,C_i,T$ agree. Associativity, commutativity and unit for the product, and the module axioms for the action, reduce respectively to the corresponding identities in $A,C_i,T$; the unit is $1\\otimes1$. The map induced by $C_0\\to C_1$ preserves these formulas, so is the ring map $\\iota$ and induces the compatible semilinear map $L_0\\to L_1$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  },
+  {
+   "text": "Define $i_i$ and $j_i$ by $i_i(t\\otimes(a\\otimes c))=at\\otimes c$ and $j_i(t\\otimes c)=t\\otimes(1\\otimes c)$. For $i_i$, balancing over $A$ is $(a^{\\prime}t)\\otimes(a\\otimes c)=t\\otimes(a^{\\prime}a\\otimes c)$, and both images are $a^{\\prime}at\\otimes c$; balancing over $B$ in the inner tensor is the $B$-relation in $L_i$. For $j_i$ the $B$-relation follows from $(bt)\\otimes(1\\otimes c)=t\\otimes(b\\otimes c)=t\\otimes(1\\otimes bc)$. Multiplication of a generator by $a^{\\prime}\\otimes c^{\\prime}$ shows that both maps are $R_i$-linear. Their composites are the identity: $i_i j_i(t\\otimes c)=t\\otimes c$, while $j_i i_i(t\\otimes(a\\otimes c))=at\\otimes(1\\otimes c)=t\\otimes(a\\otimes c)$. The universal properties in step 1 extend these equalities to the sheaf tensors. This proves the common presentations without any local-freeness assumption.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  },
+  {
+   "text": "Write $\\phi:C_0\\to C_1$. Both paths in the common-presentation square send $t\\otimes(a\\otimes c)$ to $at\\otimes\\phi(c)$; hence the $i_i$ commute with coefficient change. Through these presentations define $b_1$ by $((t\\otimes r)\\otimes s)\\mapsto t\\otimes\\iota(r)s$ and its inverse by $t\\otimes s\\mapsto(t\\otimes1)\\otimes s$. The $A$-balance and $R_0$-balance hold because $\\iota$ commutes with $A\\to R_i$; both maps are $R_1$-linear. One composite fixes $t\\otimes s$; the other sends $(t\\otimes r)\\otimes s$ to $(t\\otimes1)\\otimes\\iota(r)s=(t\\otimes r)\\otimes s$. By step 1 these are inverse sheaf maps. The same formulas show naturality in $T$ and in a commuting diagram of the coefficient algebra maps.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  },
+  {
+   "text": "For degree zero set $b_0(r\\otimes s)=\\iota(r)s$, with inverse $s\\mapsto1\\otimes s$; the composites are identities by the balanced relation. For $n\\geq1$, suppose $b_n$ has been constructed. Apply [lem-sp-scalar-extension-binary-coherence] to $R_0\\to R_1$, $N=P_0(n)$ and $P=L_0$. Its binary isomorphism, written with the scalar on the right by commutativity, is\n$$((x\\otimes y)\\otimes s)\\longmapsto(x\\otimes s)\\otimes(y\\otimes1).$$\nFollow this with $b_n\\otimes b_1$ to define $b_{n+1}$. Each constituent is an isomorphism, so this proves the claim by induction from $b_1$. It is precisely the relative tensor comparison of the statement, using the left-associated recursion of [def-pur-sheaf-tensor-product]. The cited binary comparison is natural in both module factors, so induction with step 4 proves naturality of every $b_n$. The passage between left and right scalars is the symmetry of the sheaf tensor, given by swapping the two arguments of the bilinear maps of [lem-pc-sites-sheaf-tensor-bilinear-universal]. The right-scalar form can also be checked directly: its inverse before applying the $b$ maps sends $(x\\otimes s)\\otimes(y\\otimes u)$ to $(x\\otimes y)\\otimes su$; the two composites use only balancing. Thus no unspecified choice of comparison enters the recursion.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  },
+  {
+   "text": "Now assume that $T|_U\\cong A|_U$ on the given covering, with generator $e$ and coefficient map $q:T|_U\\to A|_U$ inverse to $a\\mapsto ae$. By [lem-sfb-localized-site-tensor-restriction], all tensors and change-of-ring tensors above restrict to the corresponding tensors on $\\mathcal C/U$, preserving their pure-tensor formulas. In this slice, step 3 identifies $L_i|_U$ with $T|_U\\otimes_{A|_U}R_i|_U$. This is freely generated by $e_i=i_i(e\\otimes1)$: $r\\mapsto r e_i$ has inverse induced by $t\\otimes s\\mapsto q(t)s$. In degree zero $P_i(0)|_U=R_i|_U$. If $P_i(n)|_U$ is freely generated by $e_i^{\\otimes n}$, the next tensor is freely generated by $e_i^{\\otimes n}\\otimes e_i$: multiplication of coefficients $(r,u)\\mapsto ru$ has inverse $v\\mapsto v(e_i^{\\otimes n}\\otimes e_i)$. Balancing proves the two composites are identities. This induction proves local freeness of rank one for every degree on the original covering itself.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  },
+  {
+   "text": "Finally check the normalized generator formula. Degree zero is the definition of $b_0$. In degree one, $b_1(e_0\\otimes1)=e_1$ by step 4 and $R_1$-linearity gives $b_1((r e_0)\\otimes s)=\\iota(r)s e_1$. Suppose the formula holds in degree $n\\geq1$. The binary comparison in step 5 sends $((r e_0^{\\otimes n}\\otimes e_0)\\otimes s)$ to $((r e_0^{\\otimes n})\\otimes s)\\otimes(e_0\\otimes1)$. Applying $b_n\\otimes b_1$ gives $(\\iota(r)s e_1^{\\otimes n})\\otimes e_1=\\iota(r)s e_1^{\\otimes(n+1)}$. This is the required induction. Every defining formula applies only module operations, coefficient maps and tensor formation to its input; these commute with restriction. The slice comparison of [lem-sfb-localized-site-tensor-restriction] preserves those same pure tensors, so the formulas and their equalities hold after any restriction.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product: sheafified tensor definition, associativity and change-of-rings formulas, and Hom/Bilin universal property following Tag 0GMW; Tag 03EL, lemma-tensor-product-pullback."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +161,52 @@
    "results": "0 hit(s): ",
    "date": "2026-10-21",
    "verdict": "no match: Algebraic module tensor equivalences and presheaf tensor definitions do not give sheafified nonnegative powers with the common coefficient presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|tensorPower|distribBaseChange",
+   "results": "0 hit(s): . Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected algebraic TensorProduct.AlgebraTensorModule.assoc and distribBaseChange (Tower.lean:402,441) and abstract SheafOfModules.pullback (PullbackContinuous.lean:53); none states the sheafified common presentation plus powers and local generator formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of rings for sheaves of modules commutes with iterated tensor powers of a line bundle",
+   "results": "8 hit(s): LinearEquiv.baseChange_pow, LinearEquiv.rTensor_pow, LinearEquiv.baseChange_zpow, LinearMap.baseChange_pow, TensorProduct.AlgebraTensorModule.distribBaseChange, LinearMap.liftBaseChange_tmul, LinearEquiv.lTensor_zpow, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected algebraic TensorProduct.AlgebraTensorModule.assoc and distribBaseChange (Tower.lean:402,441) and abstract SheafOfModules.pullback (PullbackContinuous.lean:53); none states the sheafified common presentation plus powers and local generator formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "12 hit(s): SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected algebraic TensorProduct.AlgebraTensorModule.assoc and distribBaseChange (Tower.lean:402,441) and abstract SheafOfModules.pullback (PullbackContinuous.lean:53); none states the sheafified common presentation plus powers and local generator formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified extension of scalars of module sheaves preserves tensor products, units and nonnegative tensor powers",
+   "results": "8 hit(s): PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.module, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Sheafify.instNonemptySMulCandidate, PresheafOfModules.Sheafify.smulCandidate, SheafOfModules.mapFree",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected algebraic TensorProduct.AlgebraTensorModule.assoc and distribBaseChange (Tower.lean:402,441) and abstract SheafOfModules.pullback (PullbackContinuous.lean:53); none states the sheafified common presentation plus powers and local generator formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of change of rings for sheaves of modules and strong monoidal scalar extension",
+   "results": "8 hit(s): SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pushforward_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, SheafOfModules.comp_val_assoc, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected algebraic TensorProduct.AlgebraTensorModule.assoc and distribBaseChange (Tower.lean:402,441) and abstract SheafOfModules.pullback (PullbackContinuous.lean:53); none states the sheafified common presentation plus powers and local generator formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange|extendScalars_assoc|def assoc",
+   "results": "6 hit(s): Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean. Subdirectory: LinearAlgebra/TensorProduct",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected algebraic TensorProduct.AlgebraTensorModule.assoc and distribBaseChange (Tower.lean:402,441) and abstract SheafOfModules.pullback (PullbackContinuous.lean:53); none states the sheafified common presentation plus powers and local generator formulas."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-twist-base-change",
@@ -80,5 +225,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-common-line-positive-scalar-powers",
+  "worker": "stage1",
+  "summary": "Q121: statement unchanged. Wrote balanced common-presentation inverses, the exponent-one transitivity map, a nonnegative-degree induction using the existing binary scalar-extension isomorphism, and the same-cover rank-one and generator inductions. Reused existing universal-property, sheafification and slice-tensor nodes; no new nodes. Logged all four Mathlib search methods and a second semantic phrasing; candidates cover algebraic modules or abstract sheaf pullback, not this statement. Maintainer reader FIX (2026-10-21): steps 1-2 now cite the existing bilinear-extension existence/uniqueness nodes for formulas on nested sheafified tensors and on the ring product; step 5 cites the Hom/Bilin node for the left/right scalar symmetry.",
+  "blueprint": "prop-weil-twist-preserves.proof.md, first sentence (tensor products and scalar extension) and last integral-coefficient sentence, through lem-weil-integral-twist-base-change: this item realizes its old steps 1-3 only.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor Hom/Bilin universal property used to construct and compare the explicit maps; the unit has no replacement for it."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Generic module sheafification factorization handles mixed-ring nested tensor formulas."
+   },
+   {
+    "node": "lem-sp-scalar-extension-binary-coherence",
+    "why": "Generic ordinary binary scalar-extension tensor comparison supplies the induction step, with no tensor-power assertion assumed."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic restriction-to-slice tensor isomorphism preserves pure tensors and lets the original cover trivialize all powers."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+    "why": "Generic extension of a presheaf-bilinear formula along module sheafification; needed for the nested sheafified tensors and the ring multiplication of A tensor_B C_i, which no node of the unit gives."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+    "why": "Generic uniqueness of such bilinear extensions; detects equalities of the nested formulas on presheaf sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-752a19877",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-752a19877 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item plus its report, no new nodes and the statement unchanged from base. The item is not in the route-pivot drop list, has no repair note and is still unsplit on live and side-live. Sources check out: Stacks 03EL (lemma-tensor-product-pullback, sites-modules.tex:3649), 03EK and 0GMW, and the main-20261015 proof of prop-weil-twist-preserves (scalar-extension/tensor-power sentence); no SGA. The statement is true. I tested it at n=0,1,2, T=0, non-free T, Z->Z/2, the zero ring, and a change of generator (both sides scale by iota(u)^n). Steps 3-7 are correct: the A- and B-balance, the R_i-linearity and the inverse composites for i_i, j_i and b_1; the binary node (E(N tensor P) = E(N) tensor E(P), s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), natural in both factors) applied to R_0->R_1 with an explicit induction; slice restriction (no flatness) for rank one on the same covering; and the generator formula recomputed. lem-sp-invertible-tensor-scalar-extension covers only rank-one M, so it is a neighbour, not a duplicate. I made two citation repairs (C4/C1). (1) Steps 1-2 build maps on nested sheafified tensors and the product R_i x R_i from formulas on presheaf sections, which needs bilinear extension along sheafification; the cited Hom/Bilin and linear-factorization nodes do not state that. I added the existing lem-pc-sites-module-sheafification-bilinear-extension-existence and -uniqueness, with O already a sheaf and alpha=id. (2) Step 5 switches between left and right scalars by tensor symmetry without a citation; I added lem-pc-sites-sheaf-tensor-bilinear-universal to its uses. proof_deps is now the union of all uses, and split_report.tool_uses has the two new picard-framework tool entries. I accept the four declared tool_uses. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; review.md has the details.; 1 file(s) fixed by the reviewer"
  }
 }
