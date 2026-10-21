@@ -18,9 +18,80 @@
   "def-pur-hom-complex",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J=I(P)$, $a=I(s_P)$ and $b=s_J$. Naturality of the augmentation and $R$-linearity of its components give $a i_P=i_P s_P=b i_P$. Since $i_P$ is a quasi-isomorphism, cancellation of the invertible $Q(i_P)$ gives $Q(a)=Q(b)$. Apply [lem-weil-pbc-kinjective-hom-derived] with source and target both $J$: the target is K-injective by the fixed resolution hypothesis, so injectivity of the map from homotopy classes to derived morphisms yields a degree $-1$ sheaf-module map $h:J\\to J$ with $a-b=d_Jh+hd_J$. This uses naturality of $i$, with no scalar-linearity assumption on $I$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (1) implies (3); naturality of the fixed resolution augmentation."
+   }
+  },
+  {
+   "text": "For a degree $n$ local section $f=(f^p)_p$ of $X$, define $H(f)^p=h^{p+n}f^p$. This defines an $R$-linear degree $-1$ map of sheaves and commutes with restriction, component by component. Using the differential in [def-pur-hom-complex], $d_X(Hf)=d_Jhf+(-1)^n hf d_A$ and $H(d_Xf)=hd_Jf-(-1)^n hf d_A$. Adding gives $(d_XH+Hd_X)f=(d_Jh+hd_J)f=(a-b)f$. Postcomposition with $a$ is $t_1$, and postcomposition with $b=s_J$ is multiplication by $s$ on $X$, namely $t_2$. Thus $t_1-t_2=d_XH+Hd_X$. No interchange of a product with a colimit is used.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), displayed differential d(f)=d_M f-(-1)^n f d_L; explicit agent calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-complex-colimit-hocolim] to each sequential system $(X,t_k)$ of $R$-module sheaves. The indexing category $\\mathbf N$ is small in the module universe and filtered, so the assumed exact filtered colimits apply to this sequence. Its termwise colimit is the specified $C_k$; neither boundedness nor monic transitions are required. Write $B=\\bigoplus_{n\\geq0}X$, with inclusions $e_n$, and $u_ke_n=e_n-e_{n+1}t_k$. In the cone convention of [def-weil-abstract-derived-category], put $T_k=\\operatorname{Cone}(u_k)$, with $T_k^r=B^r\\oplus B^{r+1}$ and $d_k(b,c)=(d_Bb+u_kc,-d_Bc)$. The cited telescope lemma supplies the canonical quasi-isomorphism $p_k:T_k\\to C_k$ which equals the map $q_k:B\\to C_k$, $q_ke_n=j_n^{(k)}$, on the unshifted summand and zero on the shifted summand. Hence, for $v_k:B\\to T_k$, $v_k(b)=(b,0)$, one has $p_kv_ke_n=j_n^{(k)}$ for every $n\\geq0$.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 093W (lemma-compute-colimit) and 0949 (lemma-colim-hocolim); canonical cone-to-colimit map."
+   }
+  },
+  {
+   "text": "Define $K^r:B^r\\to B^{r-1}$ by $K^re_n^r=-e_{n+1}^{r-1}H^r$, using the coproduct universal property in each degree. On every summand, $(d_BK+Kd_B)e_n=-e_{n+1}(t_1-t_2)=(u_1-u_2)e_n$, so $d_BK+Kd_B=u_1-u_2$. The triangular map $F:T_1\\to T_2$, $F^r(b,c)=(b+K^{r+1}c,c)$, is a chain map: its two differential composites have first coordinates $d_Bb+d_BKc+u_2c$ and $d_Bb+u_1c-Kd_Bc$, equal by that identity, and both have second coordinate $-d_Bc$. Its inverse is $(b,c)\\mapsto(b-Kc,c)$. Moreover $Fv_1e_n=v_2e_n$ identically for every $n$, including $n=0$. These are direct matrix and coproduct calculations with the displayed cone differential.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), in the convention of def-weil-abstract-derived-category; explicit agent comparison and localization calculation."
+   }
+  },
+  {
+   "text": "Because $p_1,p_2$ are quasi-isomorphisms and $F$ is a chain isomorphism, $\\gamma=Q(p_2)\\circ Q(F)\\circ Q(p_1)^{-1}$ is an isomorphism $Q(C_1)\\to Q(C_2)$. For each $n\\geq0$, step 3 gives $Q(p_1)^{-1}Q(j_n^{(1)})=Q(v_1e_n)$, and step 4 then gives $\\gamma Q(j_n^{(1)})=Q(p_2Fv_1e_n)=Q(p_2v_2e_n)=Q(j_n^{(2)})$. This proves the required normalization on every leg. All constructions use arbitrary integer degrees, so no boundedness or continuity hypothesis is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), in the convention of def-weil-abstract-derived-category; explicit agent comparison and localization calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pur-hom-complex",
+  "lem-kun-complex-colimit-hocolim",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070I (lemma-K-injective) and Tag 0949 (lemma-colim-hocolim); explicit Hom differential and triangular cone calculation supplied by NP, using sites-cohomology.tex Tag 0A8X."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -123,10 +194,139 @@
    },
    "date": "2026-10-21",
    "verdict": "No match: the results supply K-injective comparison, homotopy invariance of Q, individual mapping-cone maps, or existence of sheaf colimits; none gives the functorial-resolution scalar-tower comparison with all colimit legs."
+  },
+  {
+   "tool": "grep",
+   "query": "(homotop|Homotop).*(telescope|[Cc]olimit)|(telescope|[Cc]olimit).*(homotop|Homotop)",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"colimit\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functorial K injective resolution commutes with scalar multiplication up to chain homotopy and gives a leg compatible isomorphism of telescope colimits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.iso_hom_naturality",
+     "CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.iso"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic endomorphisms of an unbounded sheaf complex have isomorphic sequential colimits in the derived category compatible with every colimit injection",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.Q_map_eq_of_homotopy",
+     "ComplexShape.QFactorsThroughHomotopy",
+     "instQFactorsThroughHomotopyDown",
+     "instQFactorsThroughHomotopyIntUp",
+     "ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization",
+     "Homotopy.map_eq_of_inverts_homotopyEquivalences",
+     "ComplexShape.QFactorsThroughHomotopy_of_exists_prev",
+     "HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural quasi isomorphism to a K injective resolution identifies the resolution of a scalar endomorphism with scalar multiplication up to homotopy",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'",
+     "CategoryTheory.InjectiveResolution.quasiIso",
+     "CategoryTheory.InjectiveResolution.ι'_f_zero",
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso",
+     "CategoryTheory.InjectiveResolution.ι'_f_zero_assoc",
+     "CategoryTheory.InjectiveResolution.mk.inj",
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXIso",
+     "CategoryTheory.InjectiveResolution.iso"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|Q_map_eq_of_homotopy|mapOfHomotopy",
+   "results": {
+    "hits": 20,
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean"
+    ],
+    "note": "",
+    "subdirectory": "Algebra/Homology"
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CochainComplex.IsKInjective",
+     "CochainComplex.isKInjective_of_injective",
+     "HomotopyEquiv.isKInjective",
+     "CochainComplex.isKInjective_of_iso",
+     "CochainComplex.isKInjective_iff_of_iso",
+     "CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX",
+     "CochainComplex.instIsKInjectiveObjIntShiftFunctor",
+     "CochainComplex.isKInjective_shift_iff"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: hits concern homotopy invariance, K-injective mapping classes, or individual cone maps; none supplies the functorial scalar-Hom telescope comparison normalized on every colimit leg."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-hom-localization-comparison",
@@ -144,5 +344,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-kinjective-hom-scalar-telescope",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Naturality plus K-injective detection produces the homotopy; the Hom differential and an explicit triangular cone isomorphism prove the scalar telescope comparison, normalized on every leg. Reused existing general telescope and K-injective nodes; created no new nodes. Checked signs, arbitrary unbounded degrees, scalar edge cases, and the statements of all citations. Repair of returned head 28a07bb245b: rebased the retained split onto the current live unsplit node, re-read every cited statement, and made the small filtered indexing hypothesis and degree of the cone comparison explicit in steps 3-4.",
+  "blueprint": "No imported blueprint ancestor exists (blueprint_refs ancestor returns None). Realizes the scalar-Hom telescope comparison extracted from parent lem-sfb-internal-hom-localization-comparison step 3 (formerly returned step 5), in the rational finite-extension passage below lem-sfb-dc-hom-small-coefficients, without changing the restricted-functors unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic canonical cone-to-termwise-colimit quasi-isomorphism for unbounded module-sheaf complexes; the restricted-functors unit has no such telescope lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-complex-colimit-hocolim"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-939022a99",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-939022a99 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, and its statement and stmt_deps are identical to live and side-live, where the item is still unsplit. It is not in the dropped list. The 10-21 re-split note belongs to the parent lem-sfb-internal-hom-localization-comparison, not to this item. The previous head 28a07bb245b was approved by the reader and returned only because the landing refused an unpromoted side completion. This head changes only the proof text of steps 3-4 and split_report. Step 1: naturality of i and R-linearity of i_P give Q(I(s_P))=Q(s_J) once the invertible Q(i_P) is cancelled. lem-weil-pbc-kinjective-hom-derived (Stacks 070I (1)=>(3), derived.tex l.9632) with N=I=J then gives h. I is not assumed linear. Step 2: I re-derived the signs from the def-pur-hom-complex differential: with H(f)^p=h^{p+n}f^p, dH+Hd=t1-t2. Step 3: lem-kun-complex-colimit-hocolim applies to arbitrary unbounded sequences of module sheaves with non-monic transitions. Its cone matrix matches def-weil-abstract-derived-category, and p|_A=q, so p_k v_k e_n=j_n^(k). Step 4: with K e_n=-e_{n+1}H, dK+Kd=u1-u2 holds. F(b,c)=(b+K^{r+1}c,c) is a chain isomorphism with inverse b-Kc, and F v1 e_n=v2 e_n for all n including n=0. Step 5: gamma=Q(p2)Q(F)Q(p1)^{-1} satisfies the condition on every leg. The elementary flags are correct, proof_deps equals the union of the uses, there is no cycle (345-node closure) and no SGA. Small case: on a point site with R=Z, s=2 and I(Z)=Q->Q/Z, both telescopes give Z[1/2]. The duplicate scan (telescope, homotopy with colimit, Hom-complex homotopy) found no duplicate. The tool use of lem-kun-complex-colimit-hocolim is accepted: it is the generic cone-to-colimit quasi-isomorphism, and the restricted-functors unit has no telescope lemma. No changes."
  }
 }
