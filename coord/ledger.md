@@ -20147,3 +20147,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:02 L: merged deliver/Q10/def-weil-common-stage-derived-direct-image (reviewer FIX; first push; new nodes: 1); claim not held by Q10: not your claim
 - 04:02 L: merged deliver/Q109/lem-sfb-open-module-restriction-identities (reviewer PASS; first push; new nodes: 0)
 - 04:02 L: merged deliver/NN/lem-pur-adic-line-system-base-change (reviewer FIX; first push; new nodes: 0)
+- 04:02 L: merged deliver/NR/lem-sbc-reflected-compositor-unit-normalization (reviewer PASS; first push; new nodes: 0)

@@ -11,9 +11,69 @@
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\eta_{ij}$ for the ambient adjunction units and $\\Phi_{ij}$ for their Hom bijections, so $\\Phi_{ij}(a)=R_{ji}(a)\\eta_{ij,M}$. All compositions below are read right to left. By the specified reflected Hom bijection, for $M\\in\\mathcal C_i$, $N\\in\\mathcal C_j$ and $t:P_{ij}M\\to N$, its adjunct is\n$$\\Phi^c_{ij}(t)=\\Phi_{ij}(t k_{ij,M}).$$\nThis is a natural bijection: its first factor is precomposition with the natural reflector unit and its second is the given adjunction bijection; fullness identifies the ambient Hom sets with those in the subcategories. The right-adjoint preservation assumption ensures $R_{ji}N\\in\\mathcal C_i$. In particular the reflected unit is $\\eta^c_{ij,M}=R_{ji}(k_{ij,M})\\eta_{ij,M}$, by applying this formula to $t=1_{P_{ij}M}$. These are computations with the Hom bijections specified in the hypothesis, and require no additivity or invertibility of $k_{ij,M}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit formulas; Tag 0DV0, lemma-compose-counits; explicit reflector calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "The natural isomorphism $d$ restricts to $D_{20}\\xrightarrow{\\sim}D_{10}D_{21}$ on the full subcategories, where $D_{ji}=R_{ji}|$: preservation puts both endpoints there, and fullness includes both $d_N$ and its inverse. Use [def-weil-pbc-composite-adjunction] for $P_{12}P_{01}\\dashv D_{10}D_{21}$ and apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=P_{12}P_{01}$, $L_2=P_{02}$ and $\\delta=d|$. It gives the specified natural isomorphism $c^c$, characterized by\n$$\\Phi^c_{01}(\\Phi^c_{12}(c^c_M))=d_{P_{02}M}\\eta^c_{02,M}.$$\nHere the left side is precisely the composite-adjunction transpose, since the composite Hom bijection is the successive pair of Hom bijections in [def-weil-pbc-composite-adjunction].",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit formulas; Tag 0DV0, lemma-compose-counits; explicit reflector calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "Fix $M\\in\\mathcal C_0$ and $N\\in\\mathcal C_2$, and put $s_M=k_{12,P_{01}M}L_{12}(k_{01,M})$. For any $t:P_{12}P_{01}M\\to N$, set $u=t k_{12,P_{01}M}$. Naturality of the ambient unit $\\eta_{12}$ at $k_{01,M}:L_{01}M\\to P_{01}M$ gives the three-line calculation\n$$\\begin{aligned}\n\\Phi_{12}(t s_M)&=R_{21}(u)R_{21}L_{12}(k_{01,M})\\eta_{12,L_{01}M}\\\\\n&=R_{21}(u)\\eta_{12,P_{01}M}k_{01,M}\\\\\n&=\\Phi^c_{12}(t)k_{01,M}.\n\\end{aligned}$$\nApply $\\Phi_{01}$ and use step 1 once more. Since $R_{21}N\\in\\mathcal C_1$, that step applies to the map $\\Phi^c_{12}(t):P_{01}M\\to R_{21}N$. Thus\n$$\\Phi_{01}(\\Phi_{12}(t s_M))=\\Phi^c_{01}(\\Phi^c_{12}(t)).$$\nBoth sides are now the specified composite transposes, by [def-weil-pbc-composite-adjunction]. This computation only reassociates maps and uses unit naturality; it never cancels a completion unit.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit formulas; Tag 0DV0, lemma-compose-counits; explicit reflector calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "Take $N=P_{02}M$ and $t=c^c_M$ in step 3. By step 2, the ordinary composite transpose of $c^c_M s_M$ is $d_N\\eta^c_{02,M}$. The ambient application of [lem-weil-pbc-conjugate-iso-unit-equation], with $L_1=L_{12}L_{01}$ and $L_2=L_{02}$, says that the ordinary composite transpose of $c_M$ is $d_{L_{02}M}\\eta_{02,M}$. Put $R=R_{10}R_{21}$. Postcomposition of a morphism $a$ by $k_{02,M}$ changes its ordinary transpose $R(a)\\eta_{\\mathrm{comp},M}$ to $R(k_{02,M})R(a)\\eta_{\\mathrm{comp},M}$, simply by functoriality. Therefore the transpose of $k_{02,M}c_M$ is\n$$R(k_{02,M})d_{L_{02}M}\\eta_{02,M}\n=d_N R_{20}(k_{02,M})\\eta_{02,M}\n=d_N\\eta^c_{02,M}.$$\nThe first equality is naturality of $d$ at the ambient morphism $k_{02,M}$; the second is step 1. The ordinary composite Hom bijection is injective, so the two morphisms $L_{12}L_{01}M\\to P_{02}M$ coincide. This proves $c^c_M k_{12,P_{01}M}L_{12}(k_{01,M})=k_{02,M}c_M$, and also proves the stated equivalent inverse-transpose description.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit formulas; Tag 0DV0, lemma-compose-counits; explicit reflector calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "For completeness check naturality of this equation explicitly. If $a:M\\to M'$ in $\\mathcal C_0$, naturality of the two reflector units gives\n$$P_{12}P_{01}(a)s_M\n=k_{12,P_{01}M'}L_{12}(P_{01}(a))L_{12}(k_{01,M})\n=s_{M'}L_{12}L_{01}(a).$$\nNaturality of $c^c$ then gives\n$$P_{02}(a)c^c_Ms_M=c^c_{M'}s_{M'}L_{12}L_{01}(a).$$\nFor the other side, naturality of $k_{02}$ and $c$ gives\n$$P_{02}(a)k_{02,M}c_M\n=k_{02,M'}L_{02}(a)c_M\n=k_{02,M'}c_{M'}L_{12}L_{01}(a).$$\nThus the displayed equality is an equality of natural transformations from the restricted ambient functor $L_{12}L_{01}|_{\\mathcal C_0}$ to $P_{02}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit formulas; Tag 0DV0, lemma-compose-counits; explicit reflector calculation supplied by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0037 (definition-adjoint), 0DV0 (lemma-compose-counits), 0B65 (lemma-transformation-between-functors-and-adjoints); explicit two-transpose reflection calculation supplementing Tag 099N(2), proetale.tex, lemma-pushforward-Noetherian-case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +109,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with chosen pullbacks, and let $f: I \\\\to J$ and $g: J \\\\to K$ be composable exponentiable morphisms. For an exponentiable morphism $p$, let $p^*$ be the pullback functor\"}\n  {\"name\": \"CategoryTheory.unit_conjugateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"(α : R₁ ⟶ R₂) (c : C) :\\n  adj₁.unit.app _ ≫ α.app _ = adj₂.unit.app c ≫ R₂.map (((conjugateEquiv adj₁ adj₂).symm α).app _)\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, for any natural transformation $ α : R₁ → R₂ $ and object $ c $ in category $ \\\\mathcal{C} $, the composition of the unit of $ L₁ ⊣ R₁ $ with $ α $ at $ c\"}\n  {\"name\": \"CategoryTheory.Over.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [HasPullbacksAlong f] [HasPullbacksAlong g] :\\n  pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"Let $f: X \\\\to Y$ and $g: Y \\\\to Z$ be composable morphisms in a category $\\\\mathcal{C}$ which has pullbacks along $f$ and $g$. For a morphism $h: A \\\\to B$, the pullback functor $\\\\text{pullback } h$ maps\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {E : Type u₃}\\n  [ℰ : CategoryTheory.Category.{v₃, u₃} E] {H : CategoryTheory.Functor D E} {I : CategoryTheory.Fu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, $H : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and $I : \\\\mathcal{E} \\\\to \\\\ma\"}\n  {\"name\": \"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[IsIso h.unit] : L ⋙ R ⋙ L ≅ L\", \"doc\": \"For an adjunction between functors `L: \\\\mathcal{C} \\\\to \\\\mathcal{D}` and `R: \\\\mathcal{D} \\\\to \\\\mathcal{C}`, where `L` is the left adjoint to `R`, if the unit of the adjunction `η: \\\\mathrm{Id}_{\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(X : C) : (adj₁.comp adj₂).unit.app X = adj₁.unit.app X ≫ G.map (adj₂.unit.app (F.obj X))\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the unit of the composed adjunction $\\\\text{adj}_1 \\\\circ \\\\text{adj}_2$ at $X$ is equal to the composition of $\\\\eta_1(X): X \\\\to G_1F_1(X)$ followed by $G_1$\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)] :\\n  (mapPullbackAdj (f ≫ g)).unit ≫ (Over.map (f ≫ g)).whiskerLeft (pullbackComp f g).hom = (comp f g).mapPullbackAdj.unit\", \"doc\": \"Let $\\\\mathcal{C}$ be a category. For morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$, suppose we have chosen pullbacks along $f$, $g$, and their composition $g \\\\circ f$. This means that for any such morphism \"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.comp_unit\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \"∀ {B : Type u} [inst : CategoryTheory.Bicategory B] {a b c : B} {f₁ : a ⟶ b} {g₁ : b ⟶ a} {f₂ : b ⟶ c} {g₂ : c ⟶ b}\\n  (adj₁ : CategoryTheory.Bicategory.Adjunction f₁ g₁) (adj₂ : CategoryTheory.Bicategory.Adjunction f₂ g₂),\\n  (adj₁.comp adj₂).unit = adj₁.compUnit adj₂\", \"doc\": \"In a bicategory $\\\\mathcal{B}$, given adjunctions $f_1 \\\\dashv g_1$ between objects $a$ and $b$, and $f_2 \\\\dashv g_2$ between objects $b$ and $c$, the unit of the composed adjunction $f_1 \\\\circ f_2 \\\\das\"}",
    "date": "2026-10-21",
    "verdict": "no match: leftAdjointCompIso and unit_conjugateEquiv_symm describe one conjugacy of adjunctions. They do not identify the ambient and reflected conjugates across the three noninvertible completion units in the displayed equation. The two successive transpose computation is additional."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the conjugate composition isomorphism of reflected left adjoints with the reflector units",
+   "results": "8 hits; CategoryTheory.unit_obj_eq_map_unit, CategoryTheory.unitCompPartialBijectiveAux_symm_apply, CategoryTheory.unitCompPartialBijective_symm_natural, CategoryTheory.unit_conjugateEquiv, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.unitCompPartialBijective_natural, CategoryTheory.unitCompPartialBijective_symm_apply, CategoryTheory.unit_conjugateEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide reflector Hom bijections or a single ambient conjugacy/composite-adjunction formula; none states the comparison of ambient and reflected conjugates across the three completion units. Their combination requires the two-transpose calculation in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_conjugateEquiv_symm|leftAdjointCompIso|homEquiv.*naturality|homEquiv_unit",
+   "results": "25 hits; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide reflector Hom bijections or a single ambient conjugacy/composite-adjunction formula; none states the comparison of ambient and reflected conjugates across the three completion units. Their combination requires the two-transpose calculation in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Reflective",
+   "results": "3 hits; CategoryTheory.reflectorAdjunction, CategoryTheory.Reflective.adj, CategoryTheory.Reflective.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide reflector Hom bijections or a single ambient conjugacy/composite-adjunction formula; none states the comparison of ambient and reflected conjugates across the three completion units. Their combination requires the two-transpose calculation in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two successive adjunction transposes compare a reflected left adjoint compositor with the ambient conjugate via completion units",
+   "results": "8 hits; CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp, CategoryTheory.Bicategory.Adjunction.compUnit, CategoryTheory.Adjunction.Triple.rightToLeft_app_adj₂_unit_app, CategoryTheory.Adjunction.comp_unit, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.Bicategory.Adjunction.comp_unit, CategoryTheory.Adjunction.Triple.leftToRight_app_map_adj₁_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide reflector Hom bijections or a single ambient conjugacy/composite-adjunction formula; none states the comparison of ambient and reflected conjugates across the three completion units. Their combination requires the two-transpose calculation in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflection of adjoint functors and compatibility of composition with the unit of a reflective full subcategory",
+   "results": "8 hits; CategoryTheory.unit_obj_eq_map_unit, CategoryTheory.unitCompPartialBijective_symm_apply, CategoryTheory.unitCompPartialBijective_natural, CategoryTheory.unitCompPartialBijectiveAux_symm_apply, CategoryTheory.unitCompPartialBijective_symm_natural, CategoryTheory.unitCompPartialBijectiveAux, CategoryTheory.unitCompPartialBijective, CategoryTheory.Adjunction.Triple.leftToRight_app_map_adj₁_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide reflector Hom bijections or a single ambient conjugacy/composite-adjunction formula; none states the comparison of ambient and reflected conjugates across the three completion units. Their combination requires the two-transpose calculation in this split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sbc-completed-operations-linear-natural-exchange",
@@ -71,5 +166,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-reflected-compositor-unit-normalization",
+  "worker": "stage1",
+  "summary": "Proved the normalization by expanding the specified reflected Hom bijections, transposing twice, using the existing conjugacy unit equation in both ambient and reflected categories, and applying naturality of d at the noninvertible reflector unit. The last step writes out naturality. No additive hypotheses were imported and no new nodes are needed.",
+  "blueprint": "sbc-thm-e-coefficient-smooth-base-change.proof.md, central-localization sentence: supplies the normalization of the integral composition comparisons used before localization; through lem-sbc-completed-operations-linear-natural-exchange, step 3 (inherited old step 5).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e8bb531ce",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e8bb531ce (reviewer sub-agent of L); spot-checked: Read the whole item and all 5 steps and re-derived every step. The statement and stmt_deps are byte-identical to the NN creation snapshot. No new nodes, no unit change, no SGA. The two cited nodes are Mathlib leaves. def-weil-pbc-composite-adjunction gives the composite Hom bijection as the two bijections in succession. lem-weil-pbc-conjugate-iso-unit-equation gives a unique iso c with R1(c)η1 = δη2. The orientation δ:R2→R1, c:L1→L2 matches both uses (reflected in step 2 with δ = d restricted to the subcategories, ambient in step 4). Step 1 is the specified reflected Hom bijection Φ^c(t) = Φ(t k), and η^c = R(k)η is elementary. It correctly avoids lem-sbc-reflector-adjunction-unit-formulas, which assumes additive categories. Step 3: naturality of η12 at k01, then step 1 twice; R21N lies in C1. Correct, and no completion unit is inverted. Step 4: R(k02) d η02 = d R20(k02) η02 = d η^c02, then injectivity of the composite bijection. Correct. Step 5 checks naturality. Parent step 3/4 use: the identity is the building block of the hypothesis of lem-sbc-reflector-square-mate-factorization, and its setting matches Stacks 099N(2) (Lf*_comp = completion∘Lf* ⊣ Rf_*). Duplicate search with rg over dag/nodes (reflector, conjugate, completed pullback composition) found nothing that states this item. Small cases: Ab with C1 = Z/9-modules and C2 = Z/3-modules, M = Z, d = ±id; both sides are ±(quotient Z→Z/3). M = 0 is trivial. No fixes, no tool_uses."
  }
 }
