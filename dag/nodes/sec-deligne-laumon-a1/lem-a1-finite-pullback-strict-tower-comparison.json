@@ -21,9 +21,150 @@
   "def-a1-integral-completed-pullback-interfaces",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal P_T$ be the flat-term K-flat complexes over $R_T$. On all complexes define $B_g^0(P)_n=\\operatorname{Res}_n g_n^*(P\\otimes_{R_T}S_{T,n})$, using the quotient transitions and their compatible coefficient maps. This additive construction commutes with shifts and mapping-cone complexes: it acts on each differential and each of the two summands of a cone. A quasi-isomorphism between objects of $\\mathcal P_T$ remains a quasi-isomorphism after tensoring with each $S_{T,n}$ by change of rings, and then after $g_n^*$ by finite-coefficient exactness. Restriction of scalars leaves the underlying abelian sheaves unchanged. Exactness in towers is levelwise, so $B_g^0$ takes these quasi-isomorphisms to quasi-isomorphisms of tower complexes. Flat-term K-flat resolutions exist for every complex. The resolving-class theorem therefore supplies an everywhere defined functor $B_g:D(R_T)\\to D(\\operatorname{Tow}_{R_{T'}})$, with its canonical computation isomorphism $B_g(QP)\\cong Q B_g^0(P)$ for $P\\in\\mathcal P_T$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT/06YY (change-of-rings quasi-isomorphism invariance), and derived.tex 06XN (lemma-find-existence-computes); finite exactness as cited."
+   }
+  },
+  {
+   "text": "For $P\\in\\mathcal P_T$ put $F(P)=(P\\otimes S_{T,n})_n$ and $H(P)=(P\\otimes Q_{T,n})_n$. The principal-Koszul strict replacement lemma gives a natural strict quasi-isomorphism $a_P:H(P)\\to F(P)$ whose source levels are K-flat with flat terms. Its source transitions are $1_P\\otimes(t,1)$ and its target transitions are the actual quotients. Thus $QF(P)$ is the specified reduction tower $(QP)_\\bullet$. By the definition of $V_g$ and its diagram resolving class, $GH(P)$ computes $V_g((QP)_\\bullet)$: use $V_g(Qa_P)^{-1}$ followed by the computation isomorphism at $H(P)$. These identifications are natural for chain maps $P\\to P'$. The index category is the small category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$, so the diagram replacement statement applies.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS and the strict principal-Koszul replacement; Tag 06YY and the small-diagram construction specified in completed pullback."
+   }
+  },
+  {
+   "text": "Apply preservation of K-flat complexes with flat terms under ringed-topos pullback to $(g,c_g)$, first to $P$ and then to each $P\\otimes Q_{T,n}$ supplied in Step 2. It follows that $GP$ and every $G(P\\otimes Q_{T,n})$ are K-flat with flat terms. The morphism of topoi is presented by the chosen small pro-etale sites, and $c_g:g^{-1}R_T\\to R_{T'}$ is a map of commutative ring sheaves, precisely the hypotheses of that preservation theorem. This argument imposes no flatness or invertibility condition on $c_g$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat), as included in the ringed-topoi tensor/pullback statement."
+   }
+  },
+  {
+   "text": "The ordinary cochain tensor comparison gives $G(P\\otimes Q_{T,n})\\cong GP\\otimes GQ_{T,n}$. Under the action unitor $GR_T\\cong R_{T'}$, the map $G(t^n)$ is multiplication by $t^n$: the components defining $c_g$ preserve the constant scalar $t$. Consequently $GQ_{T,n}\\cong Q_{T',n}$. These isomorphisms identify $G(t,1)$ with $(t,1)$ and hence give the first isomorphism of strict towers in the statement, not just separate isomorphisms of derived evaluations. The cochain comparison is natural and respects action unitors; no quasi-isomorphism preservation is needed for this ordinary chain isomorphism.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EL (sites-modules, lemma-tensor-product-pullback) and 07A4 (lemma-pullback-tensor-product); cochain comparison and action unitors."
+   }
+  },
+  {
+   "text": "Apply the principal-Koszul strict replacement lemma on $T'$ to the complex $GP$, whose flat-term K-flat hypotheses were checked in Step 3. It gives the strict quotient augmentation $(GP\\otimes Q_{T',n})_n\\to(GP\\otimes S_{T',n})_n$, and every component is a quasi-isomorphism. Levelwise exactness in the tower category makes this a quasi-isomorphism of tower complexes. This proves the assertion about the middle arrow; it does not result from applying the possibly nonexact functor $G$ to an arbitrary quasi-isomorphism.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Principal-Koszul augmentation over the target completed coefficient sheaf; Tag 02MZ (homology, lemma-inverse-systems-abelian)."
+   }
+  },
+  {
+   "text": "Put $R=R_T$, $R'=R_{T'}$, $S_n=S_{T,n}$ and $S'_n=S_{T',n}$. Finite constant coefficient transport identifies $g^{-1}S_n$ with $S'_n$. The coefficient square commutes because $\\pi'_n c_g$ is, by definition, $g^{-1}R\\to g^{-1}S_n\\to S'_n$. Apply the cochain scalar-association comparison to $R\\to S_n$, $R'\\to S'_n$ and this square. Both $GP\\otimes_{R'}S'_n$ and $g_n^*(P\\otimes_R S_n)$ identify with $g^{-1}P\\otimes_{g^{-1}R}S'_n$. On the first the identification is $(x\\otimes b)\\otimes a\\mapsto x\\otimes\\pi'_n(b)a$, with inverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. On the second it is $(x\\otimes z)\\otimes a\\mapsto x\\otimes c_{g,n}(z)a$, with inverse inserting $1$ in the $g^{-1}S_n$ factor. The commuting coefficient square makes these formulas balanced; the two composites are identities by the tensor relations. The formulas commute with restrictions and degreewise differentials and therefore induce inverse maps of sheaf tensor complexes. Composing the first identification with the inverse of the second gives the last isomorphism in the statement.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EK (sites-modules, section-tensor-product) and 03EL; scalar-association map kappa in the cochain coherence statement."
+   }
+  },
+  {
+   "text": "All formulas of Step 6 commute with quotient transitions. For example reducing $(x\\otimes b)\\otimes a$ from level $n+1$ to $n$ gives $x\\otimes q'_{n+1,n}(\\pi'_{n+1}(b)a)=x\\otimes\\pi'_n(b)q'_{n+1,n}(a)$ along either path. The corresponding formula on the finite pullback side follows from $q'c_{g,n+1}=c_{g,n}g^{-1}q$. Together with Step 4 this proves strictness of the entire displayed zigzag. Let $C_n:G(P\\otimes S_n)\\cong B_g^0(P)_n$ be the same scalar-association map. The zigzag at level $n$ is also $C_nG(a_{P,n})$: on a degree-zero Koszul generator the augmentation is the quotient $R\\to S_n$, and on the degree-minus-one generator it is zero. On the inverse-image quotient-unit generator $b\\otimes g^{-1}(x\\otimes1)$, $C_n$ gives the finite pullback generator with scalar $\\pi'_n(b)$. This is exactly the pure-tensor and K-flat representative normalization of the fixed interface. Hence evaluation of our zigzag is the specified finite comparison, rather than an arbitrary isomorphism with the same source and target.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-weil-pbc-completed-pullback",
+    "def-a1-integral-completed-pullback-interfaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03EL and the quotient scalar-association formulas; the fixed interface definitions, read with CompletedPullbackReduction.lean, ordinary and derived generator normalizations."
+   }
+  },
+  {
+   "text": "Every arrow constructed in Steps 2 and 4--7 is natural in a chain map $f:P\\to P'$: its local tensor formulas replace $x$ by $g^{-1}f(x)$ on both paths. The augmentation is $1\\otimes\\epsilon_n$, so it has the same property. Thus they define a natural isomorphism between the restrictions of $V_g\\circ(-)_\\bullet$ and $B_g$ to the homotopy category of flat-term K-flat complexes. These functors already exist on derived categories by Step 1 and the specified tower definitions. The localization equivalence $W_T^{-1}\\mathcal P_T\\simeq D(R_T)$ in the site tensor-descent statement extends this natural isomorphism uniquely. Explicitly the chain-map naturality equation for a quasi-isomorphism $s$ can be multiplied by the two inverse images of $s$ to give naturality for $s^{-1}$; the equivalence says these localized maps give all derived morphisms. Every object has a representative in $\\mathcal P_T$, so all components are invertible. This defines $b_g$, proves naturality for all derived morphisms, and proves independence of representatives. Each map is $R_{T'}$-linear by its balanced formula.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 0G7D (lemma-factor-through-K-flat), via the flat-term K-flat localization equivalence; the displayed natural cochain maps."
+   }
+  },
+  {
+   "text": "Fix $r\\in\\mathbf Z$. The tensor comparison extracting a shift from the first argument is unsigned: $(P[r]\\otimes Q_{T,n})\\cong(P\\otimes Q_{T,n})[r]$ sends each tensor to itself in the reindexed summand. For $x$ of degree $p$ in $P[r]$, its differential is $(-1)^r dx\\otimes y+(-1)^p x\\otimes dy$ on both sides, since the shifted total differential has second coefficient $(-1)^r(-1)^{p+r}=(-1)^p$. The same comparison applies to $S_n[0]$. Termwise $G$ and $g_n^*$ commute with shifts by the identity on terms. The balanced maps, the quotient augmentation and the transitions have degree zero, so the resulting shift squares for every arrow of the zigzag commute already as chain maps. The canonical resolving-class shift comparisons for reduction and $V_g$ are computed by these termwise shifts; flat-term K-flat classes are stable under them. Thus on $\\mathcal P_T$ the resulting equality is $s^B_{K,r}b_{g,K[r]}=b_{g,K}[r]s^V_{K,r}$. The localization equivalence of Step 8 extends this equality to every $K$. This proves precisely the asserted shift compatibility for all integers.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FNH (more-algebra, item-shift-tensor); canonical exact left-derived comparisons from derived.tex 06XN/05SE."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-pur-sheaf-tensor-product",
+  "def-a1-integral-completed-pullback-interfaces",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; explicit strict-Koszul, balanced-generator, localization and shift refinement using sites-cohomology Tags 0G7E, 07A4, 06YS, 0G7D and derived Tag 06XN. The Stacks formula is motivation; the strict normalization argument is written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +207,52 @@
    "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*[Tt]ower|[Tt]ower.*[Pp]ullback|[Ss]trict.*[Rr]eduction",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Group/Affine.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse image of the strict tower of reductions modulo powers of a uniformizer equals the tower of finite coefficient inverse images",
+   "results": "Hits: AdicCompletion, Perfection.coeff_frobeniusEquiv_symm, PreTilt.coeff_iterate_frobeniusEquiv_symm, Padic.coe_withValRingEquiv_symm, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.congr_symm_apply, AdicCompletion.transitionMap_comp_eval_apply. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "Hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict derived reduction towers of sheaf modules commute with ringed topos pullback via principal Koszul resolutions naturally in derived morphisms",
+   "results": "Hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.conjugateEquiv_pullbackComp_inv. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and shift compatibility of derived tensor reduction along pullback of ringed topoi using flat complexes",
+   "results": "Hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat",
+   "results": "No hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-integral-pullback-completed-comparison",
@@ -90,5 +273,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-finite-pullback-strict-tower-comparison",
+  "worker": "stage1",
+  "summary": "Q59 writes nine proof steps with no new nodes. Existing principal-Koszul replacement, K-flat pullback, cochain coherence and localization results give the whole strict-tower comparison. The proof checks quotient transitions, the prescribed finite generator normalization and unsigned first-variable integer shifts explicitly. Statement unchanged; completed and constant coefficient sheaves remain distinct.",
+  "blueprint": "lem-a1-finite-map-purity, proof first paragraph: geometric-stalk restriction in the finite-stalk formula. This item realizes the finite tower comparison extracted from lem-a1-integral-pullback-completed-comparison; it refines that parent step 2 and the finite comparisons used in steps 4 and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions on any ringed site, used to descend the finite tower construction; no local affine-line node states this generic resolution theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Quasi-isomorphism invariance of quotient tensoring on K-flat complexes; generic change-of-rings tool, not a replacement for a unit proof step."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness of the specified finite constant-coefficient pullback for arbitrary schemes, needed levelwise; no local node supplies this general tool."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic resolving-class existence/computation theorem used for B and canonical shifts; the affine-line unit has no localization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic strict small-diagram resolving class computing V; no unrelated objectwise choices are substituted."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Preservation of K-flat complexes with flat terms under an arbitrary ringed-topos pullback, including a noninvertible structural map."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic ordinary cochain tensor comparison, action unitors and coefficient scalar-association maps; keeps the specified finite-map restriction route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical finite constant ring-sheaf transport; only the finite structural map is invertible."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Flat-term K-flat localization equivalence, used to extend chain naturality and shift equations to all derived morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-eab6cbf37",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-eab6cbf37 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has 9 steps and no new nodes. The statement is unchanged and the base proof was empty, so no re-split note applies. proof_deps equals the union of the step uses, and there is no cycle (the only citer is the parent lem-a1-integral-pullback-completed-comparison). Coefficient category and base change: R_W is the completed sheaf, kept distinct from the constant S_{W,n}. c_g is the projection-induced map of def-weil-pbc-completed-pullback and is not assumed invertible. G is module pullback along c_g, V_g is Lg^*_Tow, and g_n^* is the exact finite pullback; all of this matches the definitions. Steps: S1 checks both hypotheses of the resolving class (kflat-resolution, change-of-rings (1), constant-exact, levelwise towers). S2 uses the principal-Koszul strict replacement with the objectwise diagram K-flat class. S3 uses the ringed-topoi node's sentence that u^* preserves flat-term K-flat complexes. S4 uses the cochain coherence c_{u;P,Q}, its unitors, and c_g(t)=t. S5 applies Koszul on T' to GP. S6 uses the κ scalar-association map and the constant ring-map isomorphism; I checked the balanced formulas and inverses. S7 checks quotient compatibility and zigzag = C_n G(a_{P,n}). I checked that against the fixed interface in lean/Sheaf/Paper/CompletedPullbackReduction.lean lines 210-334 (HasCompletedReductionFiniteEvaluationNormalization and the ordinary-comparison generator normalization π_n(b)), and it matches. S8 extends naturality through the localization equivalence of site-derived-tensor-descent. S9: I recomputed the shift sign; the first-variable comparison is unsigned, as total-tensor-integer-shifts states. Source: Stacks proetale.tex 099N(5) (lines 4351-4353, proof at 4376) as motivation, with proof_origin agent; no SGA. Duplicates: lem-weil-pbc-pulled-reduction-strict-tower-comparison only compares after restriction to the constant ring R_{T'}, with no interface normalization and no shifts, so it is not a duplicate. Edge cases checked: g=id, T'=∅, n=1, r=0,±1, non-invertible c_g. I accept the nine declared generic tool_uses. Advisory: step 4 could also cite prop-weil-pbc-proetale-constant-ring-map for c_g(t)=t, a one-line consequence of the definition that is already in proof_deps."
  }
 }
