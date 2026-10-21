@@ -14,9 +14,128 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=R_{\\mathrm{sec}}$, $B=S_{\\mathrm{sec}}$, and $V:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$ for sectionwise restriction. The equivalences $E_R,E_S$ preserve underlying sheaves and section maps. The internal restricted action evaluates to $r\\cdot n=\\varphi_{\\mathrm{sec}}(r)n$, exactly the action defining $V$. Thus the identity on sections gives $E_R\\operatorname{Res}_\\varphi\\cong VE_S$, naturally in the module. Put $Q(F)=(U\\mapsto B(U)\\otimes_{A(U)}F(U))^\\#$, with $B$ acting on the first factor, and $Q(f)$ induced by $s\\otimes m\\mapsto s\\otimes f(m)$. This is the sheaf change-of-rings construction; the identity and composition laws hold on pure tensors and hence after sheafification.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-change-of-scalars",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Sections 03CS and 03CX: restriction and sheafified change of rings; definition of the section action in the cited internal-module equivalence."
+   }
+  },
+  {
+   "text": "For an $A$-module sheaf $F$ and a $B$-module sheaf $N$, a map $h:F\\to VN$ induces $B(U)\\otimes_{A(U)}F(U)\\to N(U)$ by $s\\otimes m\\mapsto s h_U(m)$. It is balanced since $s\\varphi(r)h_U(m)=s h_U(rm)$, is $B(U)$-linear, and commutes with restriction since $h$ and the actions do. The module-sheafification universal property extends it uniquely to $QF\\to N$. Conversely evaluate a map $g:QF\\to N$ on $1\\otimes m$. The two constructions are inverse: $h(m)$ is recovered from $1h(m)$, and $g(s\\otimes m)=s g(1\\otimes m)$. Both commute with precomposition in $F$ and postcomposition in $N$. Consequently $Q\\dashv V$, with unit $j_F(m)=[1\\otimes m]$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict: write out the two inverse maps using the balanced tensor and Tag 03CY, lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "The closed sheaf tensor preserves colimits in either variable, so the hypotheses of the internal extension-restriction adjunction hold. Its unit $u_M$ is insertion of the unit of $S$ followed by the coequalizer map. Transport this adjunction through $E_R,E_S$, inserting their unit and counit isomorphisms; step 1 identifies its right adjoint with $V$. Uniqueness of left adjoints, in its unit-compatible form, therefore gives a natural $B$-linear isomorphism $c_M:E_S\\operatorname{Ext}_\\varphi(M)\\xrightarrow{\\sim}Q(E_RM)$ satisfying $V(c_M)E_R(u_M)=j_{E_RM}$, under the restriction identification. Thus $c_M([1\\otimes m])=[1\\otimes m]$. In the internal coequalizer the $S$-action is on the first factor, so $[s\\otimes m]=s[1\\otimes m]$; $B$-linearity gives $c_M([s\\otimes m])=[s\\otimes m]$. This fixes the direction and normalization of the comparison, rather than merely identifying its two objects.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Internal adjunction and unit: cited blueprint definition; comparison: Tag 0B65, categories-lemma-transformation-between-functors-and-adjoints, applied after the elementary Hom-set transport."
+   }
+  },
+  {
+   "text": "As an $A$-module sheaf, $VQ(F)$ is $T(F)=B\\otimes_A F$. Indeed both are the abelian sheafification of the identical presheaf $U\\mapsto B(U)\\otimes_{A(U)}F(U)$; the restricted $A$-action in both constructions is the unique extension of $r(s\\otimes m)=\\varphi(r)s\\otimes m=s\\otimes rm$. Hence the identity on presheaf tensors extends to a natural $A$-linear isomorphism $VQ\\cong T$. Compose this with $V(c_M)$ and the step-1 restriction identification to obtain the asserted $\\theta_M:E_R\\operatorname{Res}_\\varphi\\operatorname{Ext}_\\varphi(M)\\cong T(E_RM)$. Its pure-tensor formula follows from step 3. For $u:M\\to N$, naturality of $c$ gives $\\theta_N E_R\\operatorname{Res}_\\varphi\\operatorname{Ext}_\\varphi(u)=T(E_Ru)\\theta_M$, where $T(E_Ru)=1\\otimes E_Ru$ by the defining tensor map. Equality is tested on presheaf pure tensors using tensor generation and the uniqueness in sheafification.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, and Tag 03CY, lemma-sheafification-presheaf-modules: the two module structures extend the same presheaf action."
+   }
+  },
+  {
+   "text": "The categories $\\operatorname{Mod}(A)$ and $\\operatorname{Mod}(B)$ have finite limits computed sectionwise, with the same underlying abelian-sheaf limits. Since $V$ changes only scalar action, the $A$-action on the limit of $VN_j$ is the restriction of the coordinatewise $B$-action on the limit of $N_j$. Thus $V$ preserves finite limits, including the empty one. It also reflects isomorphisms: if a $B$-linear map $f$ has inverse $g$ as an $A$-linear sheaf map, then on sections $f(g(sn))=sn=f(sg(n))$, so $g(sn)=sg(n)$, and $g$ is $B$-linear. Apply the conservative left-exact reflection criterion to conclude that $V$ reflects finite limits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sfb-conservative-left-exact-reflects-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits; reflection of finite limits is the cited generic categorical criterion."
+   }
+  },
+  {
+   "text": "Equivalences and their quasi-inverses preserve limits; their unit and counit isomorphisms and invariance under natural isomorphism show that $\\operatorname{Ext}_\\varphi$ preserves finite limits if and only if $Q$ does, using $E_S\\operatorname{Ext}_\\varphi\\cong QE_R$ from step 3. Explicitly, a diagram of $A$-module sheaves can be pulled back along the quasi-inverse of $E_R$ and returned along its counit; the same applies to cones, so no restriction to diagrams already presented as $E_R$-images is imposed. If $Q$ preserves finite limits, so does $VQ$ by step 5, and hence so does $T$ by step 4. Conversely, if $T$ preserves finite limits, the natural isomorphism $VQ\\cong T$ gives finite-limit preservation of $VQ$; cancel the reflecting functor $V$ by the finite-limit cancellation lemma to get preservation by $Q$. This proves $\\operatorname{Ext}_\\varphi$ preserves finite limits if and only if $T$ does.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-sfb-finite-exactness-nat-iso",
+    "lem-sfb-finite-limit-preservation-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0038, categories-lemma-adjoint-exact, for equivalences; natural-isomorphism invariance and reflection cancellation are the two cited categorical tools."
+   }
+  },
+  {
+   "text": "The sheaf tensor result makes $T=B\\otimes_A-$ a left adjoint, and therefore $T$ preserves finite colimits. Its symmetry isomorphism $B\\otimes_A F\\cong F\\otimes_A B$, induced by $s\\otimes m\\mapsto m\\otimes s$, is natural in $F$. Thus the right-exact functor in the definition of flatness is isomorphic to $T$. By the definition of exactness as preservation of finite limits and finite colimits, $B$ is a flat $A$-module sheaf if and only if $T$ preserves finite limits. Combine this with step 6. All tensor factors and section modules used above lie in $w$; only finite diagrams are used for the exactness test, so the stipulated small-site and coefficient-universe hypotheses suffice.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-flat-sheaf-modules",
+    "def-galois-exact-functor",
+    "lem-sfb-finite-exactness-nat-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; Tag 0038, categories-lemma-adjoint-exact; Tag 03ER, definition-flat, item (3); Tag 0034, categories-definition-exact."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-change-of-scalars",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-conservative-left-exact-reflects-finite-limits",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-sfb-finite-exactness-nat-iso",
+  "lem-sfb-finite-limit-preservation-cancellation",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-flat-sheaf-modules",
+  "def-galois-exact-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03CZ, 03DB, 03EK, 03EO and 03ER(3), with an agent comparison through the internal-module equivalences and unit-normalized uniqueness of left adjoints (categories.tex, Tag 0B65)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +178,52 @@
    "results": "{\"t\": \"2026-10-21T03:28:08Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.extendScalars, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"9659f7d7c8f8f04b\"}",
    "date": "2026-10-21",
    "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|restrictScalars|tensor",
+   "results": "{\"t\": \"2026-10-21T03:45:35Z\", \"tool\": \"grep\", \"query\": \"extendScalars|restrictScalars|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"d6440073342ced2b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat flatness, presheaf tensor and module sheafification/restriction are component facts; none identifies internal ring-object scalar extension with the sheafified sectionwise tensor. Read Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, Presheaf/Sheafify.lean:364-384 and RingTheory/Flat/CategoryTheory.lean:79-95."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal module objects in abelian sheaves change of rings tensor scalar extension flatness",
+   "results": "{\"t\": \"2026-10-21T03:45:35Z\", \"tool\": \"leansearch\", \"query\": \"Internal module objects in abelian sheaves change of rings tensor scalar extension flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.isBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"RingHom.Flat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"36ead90fa19e763e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat flatness, presheaf tensor and module sheafification/restriction are component facts; none identifies internal ring-object scalar extension with the sheafified sectionwise tensor. Read Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, Presheaf/Sheafify.lean:364-384 and RingTheory/Flat/CategoryTheory.lean:79-95."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"extendScalars\"",
+   "results": "{\"t\": \"2026-10-21T03:45:35Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"extendScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat flatness, presheaf tensor and module sheafification/restriction are component facts; none identifies internal ring-object scalar extension with the sheafified sectionwise tensor. Read Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, Presheaf/Sheafify.lean:364-384 and RingTheory/Flat/CategoryTheory.lean:79-95."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal extension of scalars for modules in abelian sheaves agrees with sheafified sectionwise tensor product and detects flat module sheaves",
+   "results": "{\"t\": \"2026-10-21T03:45:36Z\", \"tool\": \"leanfinder\", \"query\": \"Internal extension of scalars for modules in abelian sheaves agrees with sheafified sectionwise tensor product and detects flat module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.mul_smul\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"PresheafOfModules.Sheafify.smulCandidate\", \"PresheafOfModules.Sheafify.smul\", \"PresheafOfModules.Sheafify.module\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.Sheafify.one_smul\"], \"digest\": \"bdfe2b49c664caa0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat flatness, presheaf tensor and module sheafification/restriction are component facts; none identifies internal ring-object scalar extension with the sheafified sectionwise tensor. Read Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, Presheaf/Sheafify.lean:364-384 and RingTheory/Flat/CategoryTheory.lean:79-95."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "results": "{\"t\": \"2026-10-21T03:45:47Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.Flat.iff_preservesFiniteLimits_tensorLeft\"], \"digest\": \"8974908fc937f991\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat flatness, presheaf tensor and module sheafification/restriction are component facts; none identifies internal ring-object scalar extension with the sheafified sectionwise tensor. Read Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, Presheaf/Sheafify.lean:364-384 and RingTheory/Flat/CategoryTheory.lean:79-95."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between internal module objects over sheaf ring objects and sectionwise module sheaves preserves balanced tensor change of rings",
+   "results": "{\"t\": \"2026-10-21T03:45:49Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence between internal module objects over sheaf ring objects and sectionwise module sheaves preserves balanced tensor change of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.tensorEquiv\", \"PresheafOfModules.Monoidal.tensorObj\", \"SheafOfModules.restrictScalars_obj_val\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"SheafOfModules.restrictScalars\"], \"digest\": \"1da60b85cec326ba\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat flatness, presheaf tensor and module sheafification/restriction are component facts; none identifies internal ring-object scalar extension with the sheafified sectionwise tensor. Read Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, Presheaf/Sheafify.lean:364-384 and RingTheory/Flat/CategoryTheory.lean:79-95."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qlbar-flat",
@@ -79,5 +240,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-scalar-extension-section-test",
+  "worker": "stage1",
+  "summary": "Proved the natural internal/sectionwise scalar-extension comparison by an explicit sheaf tensor adjunction and unit-compatible uniqueness of left adjoints; checked the pure-tensor formula and naturality. Proved the flatness equivalence using sectionwise limits, conservative restriction, finite-limit cancellation, and right exactness of the sheaf tensor. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the relative-tensor sentence and the final exactness conclusion in lem-sfb-qlbar-flat.proof.md, through the internal/sectionwise bridge extracted into this item; retains the finite-extension-compatibility unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic small-site module-sheaf limits computed sectionwise and preserved by forgetting coefficients; needed only to test the scalar restriction functor, not to replace any finite-extension argument."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic closed symmetric tensor structure for module sheaves on any site, giving tensor symmetry and the tensor-Hom adjunction for right exactness; no finite-extension-specific argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-f025566ed",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-f025566ed (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, plus the statements of all 18 cited nodes, the unit sk-prop-sfb-finite-extension-compatibility and the parent lem-sfb-qlbar-flat. There are no new nodes and no repair note. The statement and stmt_deps are unchanged against live and side-live, where the item is still unsplit. There is no cycle: neither the item nor its parent is in the item's dependency closure. Step checks: (1) the restricted action on sections is φ_sec(r)n, which matches def-pc-sheaf-restrict-scalars. (2) Q⊣V is built by an explicit balanced map plus the unique factorization of def-weil-presheaf-modules-sheafification, with unit [1⊗m]. (3) Uniqueness of left adjoints (lem-weil-pbc-conjugate-iso-unit-equation) applied to the transported internal adjunction gives c with c[1⊗m]=[1⊗m], and B-linearity gives c[s⊗m]=[s⊗m], so the direction is correct. (4) VQ≅T because both are the sheafification of the same presheaf and the action extension is unique. (5) V preserves finite limits (sectionwise limits, lem-weil-pbc-module-sheaves-colimits-forgetful) and reflects isomorphisms (correct calculation), so it reflects finite limits. (6) Equivalence and natural-isomorphism invariance plus finite-limit cancellation give both directions. (7) T is a left adjoint, so right exact, and symmetry identifies it with the flatness functor. Small cases tested on the one-point site: Z→Q, Z→Z/2, R→0 and the identity. I accept both declared tool uses as generic. Maintainer note: lem-sfb-internal-section-scalar-adjunction (unsplit, created 2026-10-21 by Q20, unit sk-prop-scalar-six) already states the comparison E_S Ext ≅ Ext_sec E_R of steps 1–3. The report missed it, but the item proves it inline, so this is a parallel-creation overlap and only advisory. A second advisory: step 3 assumes coequalizers in Sh(C,Ab) without a citation. No fixes."
  }
 }
