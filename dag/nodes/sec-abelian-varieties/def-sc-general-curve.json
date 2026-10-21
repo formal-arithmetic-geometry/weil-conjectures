@@ -3,29 +3,183 @@
  "blueprint": {
   "is": "def-sc-general-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Curves over an arbitrary field",
- "statement": "Let $k$ be a field. A *geometrically integral smooth projective curve\nover $k$* is a scheme $C$ over $k$ which is\nsmooth and projective over $k$\nand geometrically integral over\n$k$. Its *genus* is\n\n$$\ng(C):=\\dim_kH^1(C,\\mathcal O_C),\n$$\n\nfinite because coherent cohomology of a proper scheme over a field is\nfinite-dimensional, and invariant under base change,\n$g(C_{k'})=g(C)$ for every field extension $k'/k$, by flat base change\nalong the base change of [def-pc-base-change]. For an algebraically\nclosed extension $k'/k$ the base change $C_{k'}$ is a\nproper smooth connected curve in the sense of the\nalgebraically closed conventions of the smooth-curve chapter, and\n$g(C)=g(C_{k'})$ with the genus of [def-sc-genus]; in particular the\ndegree and $\\operatorname{Pic}^0$ conventions of [def-sc-pic0] apply to\n$C_{k'}$. The statements of the present chapter that are formulated over an\narbitrary field use this definition; the algebraically closed statements use\n[def-sc-curves].",
+ "statement": "Let $k$ be a field. A *geometrically integral smooth projective curve over $k$* is a smooth projective curve $C$ over $k$ in the sense of [def-pc-smooth-projective-curve] (in particular of dimension exactly $1$), which is geometrically integral over $k$ in the sense of [def-pc-geometrically-irreducible]. Its *genus* is\n$$g(C):=\\dim_k H^1(C,\\mathcal O_C)\\in\\mathbf Z_{\\geq0},$$\nwhere $H^1$ denotes cohomology of the structure sheaf as an $\\mathcal O_C$-module [pqf-def-cohomology] and dimension is as in [def-weil-vector-space-dimension]. This cohomology group is finite-dimensional.\n\nFor every field extension $K/k$ [def-pc-field-extension], put $C_K=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change]. Then $C_K$ is again a geometrically integral smooth projective curve over $K$ and $g(C_K)=g(C)$.\n\nIf $K$ is algebraically closed, $C_K$ is a proper smooth connected curve in the sense of [def-sc-curves], and its genus of [def-sc-genus] equals $g(C)$. Thus the degree and $\\operatorname{Pic}^0$ conventions of [def-sc-pic0] apply to $C_K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-sc-general-curve.md",
   "place": "node def-sc-general-curve, order 463"
  },
  "stmt_deps": [
-  "def-pc-base-change",
-  "def-sc-genus",
-  "def-sc-pic0",
-  "def-sc-curves",
+  "def-pc-smooth-projective-curve",
   "def-pc-geometrically-irreducible",
-  "def-pc-smooth-projective-curve"
+  "pqf-def-cohomology",
+  "def-weil-vector-space-dimension",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-pic0"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "The dimension-one condition makes $C$ a curve in [def-pc-smooth-projective-curve]. Geometric integrality implies geometric irreducibility: for each field extension the resulting integral scheme is irreducible, by the equivalent characterization in [def-pc-integral-scheme] and the definitions in [def-pc-geometrically-irreducible]. Hence [lem-pc-genus-well-defined] applies over the arbitrary field $k$ and gives $\\dim_kH^1(C,\\mathcal O_C)<\\infty$. This defines a finite nonnegative integer genus.",
+   "uses": [
+    "def-pc-smooth-projective-curve",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-genus-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-sc-general-curve.proof.md",
+    "place": "First sentence: finiteness of the genus; the dimension-one hypothesis is restored from the unit and def-pc-smooth-projective-curve."
+   }
+  },
+  {
+   "text": "Fix a field extension $K/k$, and write $p:C_K\\to C$ for the projection. The structure morphism of $C$ is proper by [lem-pc-projective-proper]. The $k$-module $K$ is free on a vector-space basis, so tensoring with $K$ is a direct sum of copies of the identity functor and preserves injections; thus $K$ is flat over $k$. The structure sheaf is quasi-coherent: on any affine $\\operatorname{Spec}A$ it is the module sheaf associated to $A$, as in [pqf-def-coherent]. Apply [lem-sc-flat-base-change-coherent] with $X=C$, $k'=K$, $\\mathcal F=\\mathcal O_C$, and $i=1$. It gives the canonical $K$-linear isomorphism $H^1(C_K,p^*\\mathcal O_C)\\cong H^1(C,\\mathcal O_C)\\otimes_kK$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "pqf-def-coherent",
+    "lem-sc-flat-base-change-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, affine-base formula (2); blueprint proof, second sentence."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-pullback-structure-sheaf] for $p$, the canonical morphism $p^*\\mathcal O_C\\to\\mathcal O_{C_K}$ is an isomorphism. Applying the cohomology functor [pqf-def-cohomology] to it in degree $1$ and combining with step 2 gives $H^1(C_K,\\mathcal O_{C_K})\\cong H^1(C,\\mathcal O_C)\\otimes_kK$. These are $K$-linear identifications, with scalar action on the tensor factor $K$. Swapping tensor factors and applying [lem-pc-finrank-field-base-change] to the finite-dimensional space from step 1 proves $\\dim_KH^1(C_K,\\mathcal O_{C_K})=\\dim_kH^1(C,\\mathcal O_C)$, and finiteness on the left.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "pqf-def-cohomology",
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology (2), with the pullback of the structure sheaf and the dimension of scalar extension made explicit."
+   }
+  },
+  {
+   "text": "Smoothness of $C_K/K$ follows from [lem-pc-proper-base-change](2), and projectivity from [lem-pc-projective-base-change]. Its dimension is $1$ by [lem-pc-dim-base-change], applied to the curve $C/k$. By [def-pc-geometrically-irreducible], $C_K$ is integral. Its structure morphism is proper by [lem-pc-projective-proper] and [lem-pc-proper-base-change](1), hence separated and of finite type by [def-weil-proper-morphism]. These are all the conditions of [def-pc-smooth-projective-curve] over $K$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-projective-base-change",
+    "lem-pc-dim-base-change",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "def-pc-smooth-projective-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-sc-general-curve.md",
+    "place": "The phrase g(C_K) in the arbitrary-field-extension assertion requires verifying that C_K is a curve of the same kind."
+   }
+  },
+  {
+   "text": "For any further field extension $L/K$, the iterated base change $(C_K)_L$ identifies with $C_L$: both fibre products have the universal property of $C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ ([def-pc-base-change]). The composite $k\\to K\\to L$ is a field extension, so $C_L$ is integral by [def-pc-geometrically-irreducible]. Thus $C_K$ is geometrically integral over $K$. Together with step 4 this makes its genus defined by the displayed formula, and step 3 gives $g(C_K)=g(C)$.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-sc-general-curve.md",
+    "place": "Arbitrary field extensions: stability of geometric integrality and the meaning of g(C_K)."
+   }
+  },
+  {
+   "text": "If $K$ is algebraically closed, apply [lem-pc-curves-are-sc] to the smooth projective curve $C_K/K$ of step 4. It is a smooth connected curve in the conventions of [def-sc-curves], and it is proper by step 4. The definition [def-sc-genus] is precisely $\\dim_KH^1(C_K,\\mathcal O_{C_K})$, which equals $g(C)$ by step 3. The hypotheses of [def-sc-pic0] are exactly a proper smooth connected curve over an algebraically closed field; they now hold, so its degree and kernel-of-degree conventions apply.",
+   "uses": [
+    "lem-pc-curves-are-sc",
+    "def-sc-curves",
+    "def-sc-genus",
+    "def-sc-pic0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-sc-general-curve.md",
+    "place": "Final paragraph: proper smooth connected geometric curve, agreement of genera, and applicability of the degree/Pic^0 conventions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-smooth-projective-curve",
+  "def-pc-integral-scheme",
+  "def-pc-geometrically-irreducible",
+  "lem-pc-genus-well-defined",
+  "lem-pc-projective-proper",
+  "pqf-def-coherent",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "pqf-def-cohomology",
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-proper-base-change",
+  "lem-pc-projective-base-change",
+  "lem-pc-dim-base-change",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "lem-pc-curves-are-sc",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-pic0"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-sc-general-curve.proof.md",
+  "place": "Expanded blueprint proof: finiteness and flat base change; final paragraph of the definition checked using base-change stability and lem-pc-curves-are-sc. Stacks 02KH and 02O5 were read locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically integral smooth projective curve over a field the genus is the finite dimension of H1 of its structure sheaf and is invariant under every field extension",
+   "results": "Hits: FunctionField.classNumber, WeierstrassCurve.instInhabitedSubtypeIsElliptic, WeierstrassCurve.IsElliptic, WeierstrassCurve.instIsEllipticOfJ, WeierstrassCurve.IsIntegral, WeierstrassCurve.IsIntegral.integral, Algebra.IsStandardSmooth.relativeDimension, WeierstrassCurve.isIntegral_iff",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "arithmeticGenus|genus_baseChange|finiteDimensional.*H|IsSmoothProjectiveCurve",
+   "results": "No hits. Mathlib/AlgebraicGeometry searched.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Genus of a smooth projective geometrically integral curve is finite and invariant under extension of the ground field",
+   "results": "Hits: AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, Field.finInsepDegree, WeierstrassCurve.IsIntegral.integral, FiniteField.instFiniteExtension, AlgebraicGeometry.instIsProperOfIsFinite, FGAlgCatSkeleton.n, AlgebraicGeometry.IsProper.instOfIsFinite, WeierstrassCurve.j",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.GeometricallyIntegral",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|cohomology.*base.change|finrank.*pullback",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean Mathlib/AlgebraicGeometry searched.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology H1 of the structure sheaf of a proper smooth algebraic curve commutes with scalar extension and has finite dimension",
+   "results": "Hits: Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.H1Cotangent, Algebra.Extension.tensorH1Cotangent, Algebra.Extension.instIsScalarTowerH1CotangentOfCotangent, groupCohomology.H1ofAutOnUnitsUnique, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.Extension.instAddCommGroupH1Cotangent",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -58,5 +212,54 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-sc-general-curve",
+  "worker": "stage1",
+  "summary": "Q131: STATEMENT-DISPUTED: the imported and current-blueprint text omits dimension 1, admitting Spec k and P^2_k although their geometric base changes are not connected curves in def-sc-curves. Restored the unit's smooth projective curve convention explicitly. Retained and proved finiteness, arbitrary field-extension invariance, and algebraically closed comparison. Reused existing nodes only. Existing Lean declarations in Curve/SmoothProjective.lean cover the corrected intended clauses but require the missing dimension-one hypothesis; no exact attachment of the literal imported statement. All cited statements were opened, hypotheses and cycles checked, and logged Mathlib search results read.",
+  "blueprint": "Steps 1-3 realize the two sentences of def-sc-general-curve.proof.md (finite coherent cohomology, flat scalar extension). Steps 4-5 make g(C_K) well-typed and show geometric integrality after arbitrary base change. Step 6 realizes the final paragraph of def-sc-general-curve.md. The dimension-one correction follows sk-def-av-jacobian and def-pc-smooth-projective-curve; it does not change the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-genus-well-defined",
+    "why": "Finiteness of H^1 on an arbitrary-field smooth projective geometrically irreducible curve; no theorem in this definition unit supplies coherent-cohomology finiteness."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "The generic projective-implies-proper theorem supplies properness for flat base change and for the geometric curve."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "The generic coherent-cohomology base-change theorem is exactly the blueprint proof's flat-base-change input."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "The generic stability of smoothness and properness supplies the geometric curve's structure morphism properties."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "The generic stability of projectivity supplies the curve convention over the extended field."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "The field-extension dimension theorem verifies dimension exactly 1 after scalar extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-genus-well-defined",
+  "lem-pc-projective-proper",
+  "lem-sc-flat-base-change-coherent",
+  "lem-pc-proper-base-change",
+  "lem-pc-projective-base-change",
+  "lem-pc-dim-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-e2dcde28a",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-e2dcde28a (reviewer sub-agent of L); spot-checked: I read the whole item. The added dimension-one hypothesis is a justified correction and is reported under 'Statement corrected'. Both source texts, master order 463 and main-20261015 order 469, say only 'a scheme smooth, projective, geometrically integral'. With that wording P^2_k or Spec k (k algebraically closed, K=k) makes the final clause false, because C_K is then not a connected curve in the sense of def-sc-curves. The new wording matches the title, the unit sk-def-av-jacobian ('smooth projective geometrically integral curve'), and both citers, def-sc-jacobian and lem-sc-jacobian-unique, neither of which breaks. All source conclusions are kept, so the target is not weakened. I checked all 6 steps against the cited statements. Step 1: geometric integrality gives geometric irreducibility via def-pc-integral-scheme, so lem-pc-genus-well-defined applies over any k. Step 2: lem-pc-projective-proper gives properness, a field extension is free hence flat, and lem-sc-flat-base-change-coherent applies; Stacks 02KH (coherent.tex lemma-flat-base-change-cohomology) shows this isomorphism is linear over the new field. Step 3: pullback of the structure sheaf gives O_{C_K}, then lem-pc-finrank-field-base-change gives the dimensions. Step 4: smoothness, projectivity, dimension 1 (lem-pc-dim-base-change), integrality, and separatedness and finite type from properness. Step 5: (C_K)_L is C_L by def-pc-base-change; this step is genuinely elementary. Step 6: lem-pc-curves-are-sc plus def-sc-genus and def-sc-pic0. No cycle; proof_deps is the union of the step uses. I tested K=k, P^1, an elliptic curve, a pointless conic, and inseparable K. No new nodes. lem-pc-genus-base-change overlaps but carries an extra H^0=k hypothesis, so it is not a duplicate. I accept the 6 declared tool_uses as generic black boxes. Batch-5 flag on lem-pc-genus-well-defined: its closure reaches sec-poincare-duality only through def-pod-ring-scalar-extension (a general definition of scalar extension) and lem-pod-separated-finite-type-base-change (generic stability under base change). Neither is a step of the trace formula or of Poincaré duality; the lemma is genus finiteness. Accepted. Minor: the report mentions a citations.json that is not in the commit, and the uses_not_cited field is stale; both are harmless."
  }
 }
