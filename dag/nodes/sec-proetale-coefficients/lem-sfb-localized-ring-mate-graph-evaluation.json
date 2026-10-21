@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Write $L_p=u_{u,p}$ and let $j_{T,\\phi}:R(T)\\to L_pR(W)$ denote the Kan coprojection for $(T,\\phi:W\\to T\\times_BV)$. The presheaf adjunction sends $t:L_pR\\to H$ to $\\alpha_T=t_{T\\times_BV}j_{T,\\mathrm{id}}$. Its inverse sends $\\alpha:R\\to u_*H$ to the map $j_{T,\\phi}(a)\\mapsto H(\\phi)(\\alpha_T(a))$. The latter respects the cocone relations by naturality of $\\alpha$, and the two formulas are inverse by naturality of $t$. Taking $t$ to be the identity, then composing with the sheafification unit, shows that the specified sheaf adjunction unit $e_{u,T}$ is $j_{T,\\mathrm{id}}$ followed by sheafification. This computes the composite adjunction in the cited statement, rather than choosing a different adjunction on an isomorphic functor. The inverse image $u^{-1}$ of [def-sfb-finite-upper-star] used for the domain of $\\beta$ is the same functor: it is the left Kan extension along the opposite of the same base-change functor $T\\mapsto T\\times_BV$, followed by sheafification, and we take that Kan extension by the pointwise colimit formula of [def-weil-proetale-inverse-image] (the two chosen product orders differ by the canonical swap, which induces an isomorphism of the indexing categories $\\mathcal I_W$). Hence $u_*\\beta\\circ e_u$ is defined, and its ring-object version is the one obtained by applying this functor to the ring structure maps.",
+   "text": "Expand the specified sheafified-left-Kan adjunction using restrictFullyFaithful and composition of adjunctions. Its underlying presheaf unit is the left Kan unit followed by the whiskered sheafification unit. This computes the existing proEtaleSheafAdjunction, without replacing it by an isomorphic adjunction.",
    "uses": [
     "def-weil-proetale-inverse-image",
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "Fix $T$ and put $W=T\\times_BV$, $p=\\operatorname{pr}_T$ and $v=\\operatorname{pr}_V$. The distinguished initial index for $W/V$ in clause (1) of the restriction lemma is $q=(W,\\gamma)$, where $\\gamma=(\\mathrm{id}_W,v):W\\to W\\times_BV$; use the canonical swap if the chosen base-change product has the opposite order. The arrow $p:W\\to T$ is a morphism $q\\to (T,\\mathrm{id}_W)$ of $\\mathcal I_W$, since $(p\\times_B\\mathrm{id}_V)\\gamma=\\mathrm{id}_W$. The colimit cocone relation is therefore $j_{T,\\mathrm{id}}(a)=j_{W,\\gamma}(R(p)(a))$. By clause (1), $j_{W,\\gamma}$ followed by sheafification is exactly the inverse of the stated restriction identification at $W/V$. Thus that identification sends $e_{u,T}(a)$ to $R(p)(a)$. It also respects ring operations by the ring clause of the same statement.",
+   "text": "Write F for composition with V → B and G for base change, with adjunction a : F ⊣ G. Cancel the component of the inverse normalized sheaf comparison. Its sheafIso_inv and coprojection fields express it as the Kan unit at F(G(T)), restriction along the site-adjunction unit at G(T), and sheafification. Naturality of the Kan unit along the site counit F(G(T)) → T, followed by the right triangle identity of a, identifies this composite with the specified sheaf unit. Thus the normalized sheaf unit is restriction along the site counit (the first projection).",
    "uses": [
     "def-weil-proetale-inverse-image",
     "lem-sfb-proetale-object-inverse-image-restriction"
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "Direct image evaluates a sheaf map at $T\\times_BV$, by its definition. Hence the definition $\\eta^\\beta=u_*\\beta\\circ e_u$ and Step 2 give $\\eta^\\beta_T(a)=\\bar\\beta_{T\\times_BV}(R(\\operatorname{pr}_T)(a))$. For $U/V$ and the stated $B$-map $b:U\\to T$, the pair $\\gamma_b=(b,U\\to V)$ is a morphism over $V$. Naturality of the sheaf map $\\bar\\beta:R|_V\\to S$ and functoriality of restriction give\n$$S(\\gamma_b)\\eta^\\beta_T(a)=\\bar\\beta_U\\bigl(R(\\gamma_b)R(\\operatorname{pr}_T)(a)\\bigr)=\\bar\\beta_U(R(b)(a)),$$\nsince $\\operatorname{pr}_T\\gamma_b=b$. The restrictions of $R|_V$ are precisely those of $R$.",
+   "text": "Compose the normalized-unit equation with the inverse comparison and β to obtain the mate formula. Apply naturality of the localized isomorphism along the graph. The inverse Hom-equivalence identity for F ⊣ G gives F(γ_b) followed by the counit equals b. Contravariant functoriality of R then gives the graph formula as an equality of ring homomorphisms, hence on every section.",
    "uses": [
     "def-weil-proetale-inverse-image",
     "def-pur-localized-ringed-site"
@@ -55,7 +55,7 @@
    }
   },
   {
-   "text": "Set $T=V$, $U=V/V$ and $b=\\mathrm{id}_V$ in Step 3. Then $\\gamma_b=\\delta$ and $R(b)=\\mathrm{id}$, so $S(\\delta)\\eta^\\beta_V=\\bar\\beta_{V/V}$. The object $V/V$ is terminal in $V_{\\mathrm{pro\\acute et}}$: the only arrow to it from $U/V$ is the structure arrow. Thus evaluation there is $\\Gamma(V,S)$. A sheaf isomorphism of rings has inverse components given by its inverse sheaf map, so $\\bar\\beta_{V/V}$ is the asserted ring isomorphism. No claim that $S(\\delta)$ itself is invertible is needed.",
+   "text": "Specialize the graph formula to T = V, U = V/V and the identity-object isomorphism b. Both R(b) and the component of the localized ring-sheaf isomorphism are invertible, so their composite is invertible. This proves the diagonal identity and isomorphism assertion without requiring the diagonal restriction alone to be invertible.",
    "uses": [
     "def-pur-localized-ringed-site"
    ],
@@ -66,10 +66,9 @@
    }
   },
   {
-   "text": "Let $z_r:\\underline{\\mathbf Z}_B\\to R$ be the additive sheaf map with $z_r(1)=r$ at $B/B$. Naturality along $u$ gives $(z_r)_V(1)=R(u)(r)$. Clause (1) of the restriction lemma identifies $u^{-1}z_r$ with the restriction of $z_r$, so its value on the restricted constant section $1$ at $V/V$ is $R(u)(r)$. For the source of this map use clause (2) of that lemma with $A=\\mathbf Z$: the coefficient isomorphism $c^u_{\\mathbf Z}:u^{-1}\\underline{\\mathbf Z}_B\\to\\underline{\\mathbf Z}_V$ identifies the restricted constant section $1$ with $1$. The canonical monoidal-unit map $\\underline{\\mathbf Z}_V\\to u^{-1}\\underline{\\mathbf Z}_B$ is its inverse: in the canonical inverse-image tensor structure it is the unital map from the integer ring object, hence it sends $1$ to the pulled-back $1$. Under restriction these two maps are inverse since both preserve every integer section, and constant sheaf sections locally are integer sections. Therefore $\\beta\\circ u^{-1}z_r$, with this unit comparison, has global value $\\bar\\beta_{V/V}(R(u)(r))$, as required.",
+   "text": "For the constant-sheaf/restriction/sheafification comparison E, its compatibility with toSheafify identifies E on constant sections. In the inverse-image adjunction, apply injectivity of homEquiv and sheafification uniqueness to prove c.hom followed by E.inv is the specified constant inverse-image map: the normalized-unit formula and naturality of toSheafify identify both adjoints on every constant section. Consequently E.hom followed by c.inv is inverse to that specified map. For a section r, naturality of the additive restriction comparison cancels the inverse-image comparisons in the definition of the pulled section. What remains is E.hom, ordinary restriction of the integer-to-R map, and the additive map of the localized ring isomorphism. The composite constant-presheaf/sheafification adjunction evaluates the integer-to-R map at an arbitrary object as n ↦ R(U → B)(n • r). The compatibility of E with toSheafify and evaluation at 1 therefore give the final formula.",
    "uses": [
     "lem-sfb-proetale-object-inverse-image-restriction",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true,
@@ -85,13 +84,12 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-proetale-inverse-image",
   "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00VE (lemma-adjoints-u), 00WX (lemma-adjoint-sheaves), 03CE (lemma-localize-given-products) and restriction after 00Y0 (definition-localize); ring-isomorphism and graph specialization written out here. Tensor-unit normalization: sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+  "place": "Tags 00VE, 00WX and 03CE: specified Kan/sheafification unit and the composition/base-change adjunction; restriction after Tag 00Y0. Constant-section sheafification compatibility and the constant-sheaf/evaluation adjunction supply the integer-unit and global-section calculation. Formal proof by Q8, 2026-10-21, using the normalized comparison fields and Mathlib adjunction identities."
  },
  "mathlib_searches": [
   {
@@ -219,7 +217,6 @@
  "tool_uses": [
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
   "def-weil-proetale-inverse-image"
  ],
  "reviewed": {
@@ -258,5 +255,15 @@
   "group": "Q67",
   "result": "pass",
   "note": "Only the item lean record, one module and the report are delivered; statement verbatim; 9 declarations present; single sorry; item and deps not dropped. proEtaleSheafInverseImage is the same sheafPullback along Over.pullback as ProEtale.upperStar (one definition). c/cA are fully pinned normalized restriction comparisons (coprojection + sheafIso_inv fields; existence from proEtaleObjectInverseImageRestriction), so not free maps or extra hypotheses. Every node clause checked and true: unit = R(pr_T) via the j_{T,id}=j_{W,(id,v)}R(p) cocone relation; mate formula; graph = mapPullbackAdj.homEquiv (b,U->V); diagonal equality plus IsIso; integer unit pinned as inverse of proEtaleConstantInverseImageMap; additive z_r global-section formula. Edge cases empty/zero/r=0/u=id/non-mono covered; no universe restriction; docstrings carry sources, blueprint tags and the 5 proof steps. Not recompiled (worker scompile clean). Advisory: two imports unused by name; second reading is a brief self-review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261021T120500-L-3900850",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
