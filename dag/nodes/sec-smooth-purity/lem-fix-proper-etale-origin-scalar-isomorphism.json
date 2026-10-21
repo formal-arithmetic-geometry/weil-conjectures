@@ -205,5 +205,34 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-ebd36b72a (reviewer sub-agent of L); spot-checked: I read the item and its five steps, the full statements of all ten cited nodes, Stacks 0F0G (etale-cohomology.tex lemma-projection-formula-proper-mod-n), and the step-source tags 09A6, 0E48, 0B56, 0D6D, 0D6E, 07A6, 0H7J and 00YV (each checked against tags/tags). I also read the unit (it has no steps) and the parent's step 2, which cites the item. The delivery has no new nodes, the statement is unchanged and not weakened, and no SGA is cited. Step 1: proper implies qcqs, and the constant-module lemma for the geometric morphisms p_et and nu_T gives L = H_e, so both D+ hypotheses of lem-sfb-projection-comparison-etale-proetale hold. Step 2: a finite ring is torsion, and lem-kun-0f0g has no boundedness or Tor condition, so it applies to N = B_Y and makes the named PF_f invertible. Step 3: the specialized equation matches the node's display in variables and direction. pi_p is the transpose alpha of ringed-projection-mate-exact, carried to B_{Y,proet} by naturality in P. Step 4: I checked the domains of each inverse, and every factor is invertible (b at E_e and H_e is invertible on D+). The step is correctly marked elementary. Step 5: lem-fix-proetale-scalar-mate-normalization identifies the restriction of chi with pi_p, and lem-weil-pbc-ring-sheaf-change-adjunction (R=A_T, S=B_T) says restriction reflects isomorphisms, so chi is an isomorphism. Every node works in the same ordinary uncompleted unbounded constant-coefficient derived categories. Edge cases: p = id, B = 0, E_e = 0 and A = B all hold. For A = Z/4, B = Z/2, E_e = Z/2, the module H_e is not in D+, so the hypothesis excludes this case as it should. Four other DAG nodes looked like possible duplicates (scalar-mate equation, etale-proper-projection-formula-finite, sp-finite-ring-compact-support-projection, finite-compact-support-scalar-transport); none states the item. A dependency BFS finds no cycle. I accept all seven declared tool_uses as generic black boxes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperEtaleOriginScalarIsomorphism",
+  "declaration": "AlgebraicGeometry.ProEtale.properEtaleOriginScalarIsomorphism",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.properOriginPushIso",
+   "AlgebraicGeometry.ProEtale.properOriginRestrictionIso",
+   "AlgebraicGeometry.ProEtale.properOriginEtaleTensor",
+   "AlgebraicGeometry.ProEtale.properOriginScalarTensorImage",
+   "AlgebraicGeometry.ProEtale.properOriginTensorIso",
+   "AlgebraicGeometry.ProEtale.properOriginFixedMateIso",
+   "AlgebraicGeometry.ProEtale.properOriginMateIso",
+   "AlgebraicGeometry.ProEtale.properOriginEtaleProjection",
+   "AlgebraicGeometry.ProEtale.properEtaleOriginScalarIsomorphism"
+  ],
+  "file": "lean/Sheaf/Paper/ProperEtaleOriginScalarIsomorphism.lean",
+  "statement": "theorem properEtaleOriginScalarIsomorphism {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p] (E : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (hH : ∃ n : ℤ, (properOriginEtaleTensor (RingHom.ulift.{u + 1, u + 1, u, u} φ) Z E.obj).IsGE n) : IsIso ((directImageScalarComparison φ p).app ((finiteCoefficientIntrinsicDerivedComparison Z A).obj E.obj)) ∧ (scalarMateRestriction φ Y).mapDerivedCategory.map ((directImageScalarComparison φ p).app ((finiteCoefficientIntrinsicDerivedComparison Z A).obj E.obj)) ≫ (scalarMateRestrictionPush φ p).hom.app ((directImageScalarExtension φ Z).obj ((finiteCoefficientIntrinsicDerivedComparison Z A).obj E.obj)) = (directImageScalarExtension φ Y ⋙ (scalarMateRestriction φ Y).mapDerivedCategory).map (properOriginMateIso A p E).inv ≫ (properOriginTensorIso φ Y ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p).rightDerivedFunctor.obj E.obj)).inv ≫ (finiteCoefficientIntrinsicDerivedComparison Y A).map (properOriginEtaleProjection (RingHom.ulift.{u + 1, u + 1, u, u} φ) p E.obj) ≫ (properOriginMateIso A p ⟨properOriginEtaleTensor (RingHom.ulift.{u + 1, u + 1, u, u} φ) Z E.obj, hH⟩).hom ≫ (directImageConstantPush A p).map (properOriginTensorIso φ Z E.obj).hom",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f339671b",
+  "group": "NO",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the statement in the record matches the file verbatim; one module, theorem proof sorry, helpers canonical with real data, docstrings with source and blueprint and steps 1-5 present. H3: proper p, finite A→B (ULift size convention), E_e in D+ as DerivedCategory.Plus, hH = H_e (Etale.derivedTensor with scalarCoefficient) IsGE n, ν via finiteCoefficientIntrinsicDerivedComparison, χ = directImageScalarComparison (the same χ as the normalization stmt_dep); conjunct 1 IsIso; conjunct 2 = US(b_E⁻¹)≫q_Y⁻¹≫ν(π_e)≫b_H≫R_p(q_Z) with π_e = rightDerivedLowerStarProjectionMap at B_Y plus p*B_Y=B_Z, b = fixedComparisonDirectImageMatePlus at E_e and H_e; types checked end to end, no flatness or extra hypotheses; edge cases including Z/4→Z/2 exclusion fine. Not recompiled (no file changed; worker clean 6.7 s). Advisories: A1 q uses scalarTensorIso+siteScalarIso (theorem module lem-finite-compact-support-scalar-transport, not a stmt_dep) instead of the ringed-topoi tensor comparison, canonical and equivalent, stage 3 needs the routine q = scalarMateDerivedTensorIso∘t coherence; A2 report claims ringedTopoiCanonicalDerivedTensorComparison is used but it is not referenced (redundant public import)."
  }
 }
