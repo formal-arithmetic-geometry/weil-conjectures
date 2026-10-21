@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-normalized-scalar-restriction",
+ "kind": "definition",
+ "title": "Normalized completed-coefficient scalar and restriction comparison",
+ "status": "split",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes with its small pro-etale inverse-image/direct-image adjunction [def-weil-proetale-inverse-image]. Let $d_A,d_B$ be adic coefficient data with completed ring sheaves $R_W,S_W$ for $W=X,Y$ [def-weil-pbc-adic-coefficient-datum], and let $c_W:R_W\\to S_W$ be ring-sheaf maps satisfying the square $g_*c_X\\circ a_R=a_S\\circ c_Y$, where $a_R:R_Y\\to g_*R_X$ and $a_S:S_Y\\to g_*S_X$ are the canonical completed structure maps of [def-weil-pbc-completed-pullback]. Scalar extension $c^*$ along a ring-sheaf map, its adjunction with restriction of scalars, the derived scalar extension $Lc^*$ computed on K-flat representatives and its cochain counit are those of [def-weil-pbc-bounded-constructible-tower]. Use ordinary module pullback as inverse image followed by sheaf tensor [def-pur-sheaf-tensor-product], with its tensor-unit-normalized adjunction, and the associated unbounded derived categories [def-weil-abstract-derived-category]. Define the right-adjoint comparison $\\operatorname{Res}_{c_Y}\\circ g_{*,S}\\cong g_{*,R}\\circ\\operatorname{Res}_{c_X}$ from $S_X$-modules to $R_Y$-modules to be identity on every underlying section. Define $\\beta^{\\mathrm{ord}}:g_S^*c_Y^*\\cong c_X^*g_R^*$ to be the inverse of the adjunction conjugate of this right comparison. Apply this map degreewise to complexes. Define $\\beta^L:Lg_S^*Lc_Y^*\\cong Lc_X^*Lg_R^*$ to be the unique natural isomorphism characterized on every K-flat complex $P$ with flat terms [def-pc-kflat-complex] and [def-pc-flat-sheaf-modules] by the equation $\\beta^L_{QP};Lc_X^*(\\epsilon_{g,R,P});\\epsilon_{c_X,g_R^*P}=Lg_S^*(\\epsilon_{c_Y,P});\\epsilon_{g,S,c_Y^*P};Q(\\beta^{\\mathrm{ord}}_P)$, where each $\\epsilon$ is the canonical derived-to-ordinary cochain counit and semicolon denotes composition in displayed order. No completed structure map is assumed invertible.",
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-completed-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; ordinary adjunction conjugate from sites-modules.tex Tag 03EL, lemma-tensor-product-pullback."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical completed coefficient sheaf maps for finite p-adic field embeddings with normalized derived scalar restriction comparison",
+   "results": "8 hits: ContinuousAlternatingMap.restrictScalarsLI, ContinuousLinearMap.coe_restrictScalarsIsometry, AbstractCompletion.compare, SheafOfModules.restrictScalars_map_val, AbsoluteValue.Completion.instCoe, IntermediateField.coe_restrictScalars, AbstractCompletion.compare_coe, ContinuousLinearMap.restrictScalarsL; no complete actual PBC coefficient-transport interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*coefficient|scalar.*(pull|restriction)|IntegerInclusion",
+   "results": "0 hits: ; no match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical completed coefficient sheaf maps for finite p-adic field embeddings with normalized derived scalar restriction comparison",
+   "results": "8 hits: BDeRhamPlus, BDeRham, NumberField.FinitePlace.embedding, Padic.adicCompletionEquiv, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, PadicInt.coe_adicCompletionIntegersEquiv_apply, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, PadicInt.coe_adicCompletionIntegersEquiv_symm_apply; no complete actual PBC coefficient-transport interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralScalarIntegerInclusion|integralScalarQuotientMap|pbcActualScalarDerivedPullIso|finiteFreeCompletedCoefficientMap in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search completed.*coefficient|scalar.*restriction|integer.*inclusion",
+   "results": "No WeilConjectures completed PBC map or normalized comparison. Sheaf.Paper.IntegralScalarExtensionWellDefined has the integer and quotient inclusions; reused. Sheaf.Paper.PbcActualScalarPullback has the normalized comparison; reused. No definition node owns those exact interfaces. def-weil-pbc-finite-completed-coefficient-map has the shrunk/lifted intermediate-field presentation, not the supplied fields actual valuation rings. blueprint_refs search: 0 matches.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inclusions and normalized comparison; add actual-ring completed-map interface"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-free-constructible-scalar-transport",
+  "date": "2026-10-21",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Canonical integral coefficient inclusion and normalized local scalar-transport comparison in the exactness clause.",
+   "via": [
+    "lem-weil-pbc-finite-free-constructible-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcActualScalarPullback",
+  "declaration": "AlgebraicGeometry.Scheme.pbcActualScalarDerivedPullIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcActualCoefficientRingMap",
+   "AlgebraicGeometry.Scheme.pbcActualScalarRightIso_exists",
+   "AlgebraicGeometry.Scheme.pbcActualScalarRightIso",
+   "AlgebraicGeometry.Scheme.pbcActualScalarOrdinaryPullIso",
+   "AlgebraicGeometry.Scheme.pbcActualScalarOrdinaryPullComplexIso",
+   "AlgebraicGeometry.Scheme.pbcActualScalarDerivedPullIso_exists",
+   "AlgebraicGeometry.Scheme.pbcActualScalarDerivedPullIso"
+  ],
+  "statement": "def pbcActualScalarDerivedPullIso",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing construction, with the identity-on-sections right comparison, ordinary adjunction conjugate and unique flat-term K-flat normalization. The previous ringed-topoi theorem record owns a different tensor-pullback theorem. This definition node owns the actual scalar/restriction comparison used here without restating any declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311d45fde",
+  "group": "Q134",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311d45fde",
+  "group": "Q134",
+  "result": "fix",
+  "note": "Re-delivery of the d04022 H2 RETURN. Item Lean signature and statement are unchanged, and that mathematics was already reviewed. Seven declarations moved byte-identical into FiniteFreeCoefficientTransport, owned by the new def-weil-pbc-actual-finite-coefficient-transport; its H4 check against def-weil-pbc-finite-completed-coefficient-map and WeilConjectures.completedCoefficientMap passes (different coefficient sheaf types). The two theorem stmt_deps are replaced by def-weil-pbc-integer-quotient-inclusions (existing:true integralScalarIntegerInclusion; check_existing note: noncomputable kept) and def-weil-pbc-normalized-scalar-restriction (existing:true pbcActualScalarDerivedPullIso; statement matches the right-iso, conjugate and K-flat equation). check_new_node is clean on all three; no cycle. FIX: the normalized-restriction node's Lean uses pbcExtend, pbcDerivedExtend, pbcScalarAdjunction and pbcComplexCounit, owned by def-weil-pbc-bounded-constructible-tower, which is outside its closure. fixes/def-weil-pbc-normalized-scalar-restriction.json adds that stmt_dep and a citing sentence. Records-only fix, no compile needed. Advisories: finiteFreeCoefficientQuotientMap is defeq to integralScalarQuotientMap; pbcActualDerivedPull and pbcActualStructureMap have no owner record (inherited); the transport node cites the theorem lem-pur-derived-change-of-rings as the item base does; the item imports the theorem module IntegralStratifiedPerfectCharacterization; the second reading is the author's own."
+ }
+}

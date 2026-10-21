@@ -28,7 +28,10 @@
   "def-pc-perfect-ring-complex",
   "def-weil-pbc-projective-module",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-integral-stratified-perfect-models"
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-actual-finite-coefficient-transport",
+  "def-weil-pbc-integer-quotient-inclusions",
+  "def-weil-pbc-normalized-scalar-restriction"
  ],
  "proof": [
   {
@@ -250,5 +253,37 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-0ed7b11c7 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement, Bhatt–Scholze Prop. 6.6.11 (reverse direction), Stacks 08H3, 03EL and 05CF at their labels, and the main-20261015 scalar-extension ancestor. Preconditions: the item is unsplit on live and side-live, it is not on the 10-19 drop list, it has no repair note, and its only citer is the reviewed parent prop-weil-pbc-scalar-extension. The statement is unchanged from the base. The 4 added stmt_deps are all used. proof_deps equals the union of the uses, and there is no cycle. Steps: S1 is (i)⇒(ii) of the integral stratified-perfect characterization; its hypotheses (T noetherian, finite-dimensional, ℓ invertible) are exactly the item's. S2 is elementary: finite generators plus the projective lifting clause give a splitting, tensoring with B keeps it, and the amplitude is unchanged since B is free over A. S3 applies the strict-perfect ringed pullback model along the identity topos with ring map \\underline A→R; it gives K-flatness, the package and ε_F, and the same over B. S4: stratum-completion restriction gives u^{-1}R_T≅R and u^{-1}S_T≅S, the ring maps agree after every finite projection, and the kflat scalar comparison applies because A_X=h^{-1}A_Y. That comparison is a declared generic off-unit tool use (sk-prop-scalar-six), accepted as the ND parent reviewer did. S5 applies C to the given model and composes with ε_F. S6 is explicit balancing; I checked the inverse maps and the balancing relations. S7 is (ii)⇒(i) over B with v and the same T, which gives the full three-clause category. Duplicates: lem-weil-integral-scalar-extension-constructible works in the detailed category and does not give the strata/local-model clause, so it is advisory only. The other candidates are different statements. Edge cases checked: E'=E, ramified E', P=A[0], P=[A→A] (multiplication by t), P=0, rank-0 terms. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeConstructibleScalarTransport",
+  "declaration": "AlgebraicGeometry.Scheme.finiteFreeConstructibleScalarTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteFreeCoefficientExtension",
+   "AlgebraicGeometry.Scheme.finiteFreeCoefficientExtension_additive",
+   "AlgebraicGeometry.Scheme.finiteFreeCoefficientComplex",
+   "AlgebraicGeometry.Scheme.finiteFreeConstantTensor",
+   "AlgebraicGeometry.Scheme.finiteFreeConstantBalance_existsUnique",
+   "AlgebraicGeometry.Scheme.finiteFreeConstantBalance",
+   "AlgebraicGeometry.Scheme.finiteFreeConstantComplexBalance",
+   "AlgebraicGeometry.Scheme.finiteFreeConstantFactors",
+   "AlgebraicGeometry.Scheme.finiteFreeDerivedModelMap",
+   "AlgebraicGeometry.Scheme.finiteFreeLocalModelMap",
+   "AlgebraicGeometry.Scheme.finiteFreeConstructibleScalarTransport"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeConstructibleScalarTransport.lean",
+  "statement": "theorem finiteFreeConstructibleScalarTransport (T : Scheme.{u}) [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (_hl : IsUnit (l : Γ(T, ⊤))) (K : PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) (hK : PbcIsBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E) K) : PbcIsBoundedConstructibleComplete T (pbcPadicCoefficientDatum l F) ((finiteFreeCompletedScalar l E F i T).obj K) ∧ ∀ (s : FiniteLocallyClosedStratification T) (V : ∀ k : Fin s.n, Sieve (⊤_ (s.domain k).ProEt)), (∀ k : Fin s.n, V k ∈ ProEt.topology (s.domain k) (⊤_ (s.domain k).ProEt)) → ∀ (P : ∀ (k : Fin s.n) (U : (s.domain k).ProEt) (f : U ⟶ ⊤_ (s.domain k).ProEt), V k f → CochainComplex (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)) ℤ) (a b : ∀ (k : Fin s.n) (U : (s.domain k).ProEt) (f : U ⟶ ⊤_ (s.domain k).ProEt), V k f → ℤ), (∀ (k : Fin s.n) (U : (s.domain k).ProEt) (f : U ⟶ ⊤_ (s.domain k).ProEt) (hf : V k f), (P k U f hf).IsStrictlyGE (a k U f hf) ∧ (P k U f hf).IsStrictlyLE (b k U f hf) ∧ ∀ q : ℤ, Module.Projective (Padic.coefficientExtensionIntegers l E) ((P k U f hf).X q) ∧ Module.Finite (Padic.coefficientExtensionIntegers l E) ((P k U f hf).X q)) → ∀ e : ∀ (k : Fin s.n) (U : (s.domain k).ProEt) (f : U ⟶ ⊤_ (s.domain k).ProEt) (hf : V k f), (pbcActualDerivedPull (U.hom ≫ s.immersion k) (pbcPadicCoefficientDatum l E)).obj K ≅ (integralConstantDerived U.left (pbcPadicCoefficientDatum l E)).obj ((completedConstantQ _).obj (P k U f hf)), ∀ (k : Fin s.n) (U : (s.domain k).ProEt) (f : U ⟶ ⊤_ (s.domain k).ProEt) (hf : V k f), CochainComplex.IsStrictlyGE ((finiteFreeCoefficientComplex l E F i).obj (P k U f hf)) (a k U f hf) ∧ CochainComplex.IsStrictlyLE ((finiteFreeCoefficientComplex l E F i).obj (P k U f hf)) (b k U f hf) ∧ (∀ q : ℤ, Module.Projective (Padic.coefficientExtensionIntegers l F) (((finiteFreeCoefficientComplex l E F i).obj (P k U f hf)).X q) ∧ Module.Finite (Padic.coefficientExtensionIntegers l F) (((finiteFreeCoefficientComplex l E F i).obj (P k U f hf)).X q)) ∧ IsIso (finiteFreeLocalModelMap l E F i (U.hom ≫ s.immersion k) K (P k U f hf) (e k U f hf))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Returned-delivery repair: the theorem statement is unchanged. The actual finite coefficient maps and their naturality and restriction comparison are owned by def-weil-pbc-actual-finite-coefficient-transport. The reused integer and quotient inclusions and the existing K-flat-normalized scalar/restriction comparison have explicit definition-node records. The two unrelated theorem stmt_deps were removed; all constructions and the specified local-model morphism are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311d45fde",
+  "group": "Q134",
+  "result": "fix",
+  "note": "Re-delivery of the d04022 H2 RETURN. Item Lean signature and statement are unchanged, and that mathematics was already reviewed. Seven declarations moved byte-identical into FiniteFreeCoefficientTransport, owned by the new def-weil-pbc-actual-finite-coefficient-transport; its H4 check against def-weil-pbc-finite-completed-coefficient-map and WeilConjectures.completedCoefficientMap passes (different coefficient sheaf types). The two theorem stmt_deps are replaced by def-weil-pbc-integer-quotient-inclusions (existing:true integralScalarIntegerInclusion; check_existing note: noncomputable kept) and def-weil-pbc-normalized-scalar-restriction (existing:true pbcActualScalarDerivedPullIso; statement matches the right-iso, conjugate and K-flat equation). check_new_node is clean on all three; no cycle. FIX: the normalized-restriction node's Lean uses pbcExtend, pbcDerivedExtend, pbcScalarAdjunction and pbcComplexCounit, owned by def-weil-pbc-bounded-constructible-tower, which is outside its closure. fixes/def-weil-pbc-normalized-scalar-restriction.json adds that stmt_dep and a citing sentence. Records-only fix, no compile needed. Advisories: finiteFreeCoefficientQuotientMap is defeq to integralScalarQuotientMap; pbcActualDerivedPull and pbcActualStructureMap have no owner record (inherited); the transport node cites the theorem lem-pur-derived-change-of-rings as the item base does; the item imports the theorem module IntegralStratifiedPerfectCharacterization; the second reading is the author's own."
  }
 }

@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-integer-quotient-inclusions",
+ "kind": "definition",
+ "title": "Actual integer and quotient inclusions for finite coefficient embeddings",
+ "status": "split",
+ "statement": "For a prime $\\ell$ and finite extensions $E,F$ of $\\mathbf Q_\\ell$, with a $\\mathbf Q_\\ell$-algebra embedding $i:E\\to F$, use their actual valuation rings, uniformizers and finite quotients from [def-weil-l-adic-coefficient-extension]. Define $i_{\\mathcal O}:\\mathcal O_E\\to\\mathcal O_F$ by restriction of $i$, namely $x\\mapsto i(x)$; preservation of the extended absolute values makes its codomain restriction well-defined. For every $n\\geq0$ define $i_n:\\mathcal O_E/(\\varpi_E^{n+1})\\to\\mathcal O_F/(\\varpi_F^{n+1})$ by $[x]\\mapsto[i(x)]$. The image of the source maximal ideal is contained in the target maximal ideal, so the quotient maps are well-defined and commute with reduction. These are the existing integer and quotient inclusions, with no change of coefficient fields or valuation rings.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(1), coefficient extension; valuation and quotient constructions used by the scalar-extension blueprint."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical completed coefficient sheaf maps for finite p-adic field embeddings with normalized derived scalar restriction comparison",
+   "results": "8 hits: ContinuousAlternatingMap.restrictScalarsLI, ContinuousLinearMap.coe_restrictScalarsIsometry, AbstractCompletion.compare, SheafOfModules.restrictScalars_map_val, AbsoluteValue.Completion.instCoe, IntermediateField.coe_restrictScalars, AbstractCompletion.compare_coe, ContinuousLinearMap.restrictScalarsL; no complete actual PBC coefficient-transport interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*coefficient|scalar.*(pull|restriction)|IntegerInclusion",
+   "results": "0 hits: ; no match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical completed coefficient sheaf maps for finite p-adic field embeddings with normalized derived scalar restriction comparison",
+   "results": "8 hits: BDeRhamPlus, BDeRham, NumberField.FinitePlace.embedding, Padic.adicCompletionEquiv, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, PadicInt.coe_adicCompletionIntegersEquiv_apply, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, PadicInt.coe_adicCompletionIntegersEquiv_symm_apply; no complete actual PBC coefficient-transport interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralScalarIntegerInclusion|integralScalarQuotientMap|pbcActualScalarDerivedPullIso|finiteFreeCompletedCoefficientMap in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search completed.*coefficient|scalar.*restriction|integer.*inclusion",
+   "results": "No WeilConjectures completed PBC map or normalized comparison. Sheaf.Paper.IntegralScalarExtensionWellDefined has the integer and quotient inclusions; reused. Sheaf.Paper.PbcActualScalarPullback has the normalized comparison; reused. No definition node owns those exact interfaces. def-weil-pbc-finite-completed-coefficient-map has the shrunk/lifted intermediate-field presentation, not the supplied fields actual valuation rings. blueprint_refs search: 0 matches.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inclusions and normalized comparison; add actual-ring completed-map interface"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-free-constructible-scalar-transport",
+  "date": "2026-10-21",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Canonical integral coefficient inclusion and normalized local scalar-transport comparison in the exactness clause.",
+   "via": [
+    "lem-weil-pbc-finite-free-constructible-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralScalarExtensionWellDefined",
+  "declaration": "WeilConjectures.integralScalarIntegerInclusion",
+  "declarations": [
+   "WeilConjectures.integralScalarIntegerInclusion",
+   "WeilConjectures.integralScalarQuotientMap",
+   "WeilConjectures.integralScalar_integer_mem",
+   "WeilConjectures.integralScalar_quotient_kernel",
+   "WeilConjectures.integralScalarQuotientMap_transition"
+  ],
+  "statement": "noncomputable def integralScalarIntegerInclusion :\n    Padic.coefficientExtensionIntegers l E →+* Padic.coefficientExtensionIntegers l L",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing definitions: codomain restriction of the supplied algebra embedding and its quotient lifts. This definition node gives the reused constructions a definition-level DAG owner; the scalar-extension theorem is not a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311d45fde",
+  "group": "Q134",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311d45fde",
+  "group": "Q134",
+  "result": "fix",
+  "note": "Re-delivery of the d04022 H2 RETURN. Item Lean signature and statement are unchanged, and that mathematics was already reviewed. Seven declarations moved byte-identical into FiniteFreeCoefficientTransport, owned by the new def-weil-pbc-actual-finite-coefficient-transport; its H4 check against def-weil-pbc-finite-completed-coefficient-map and WeilConjectures.completedCoefficientMap passes (different coefficient sheaf types). The two theorem stmt_deps are replaced by def-weil-pbc-integer-quotient-inclusions (existing:true integralScalarIntegerInclusion; check_existing note: noncomputable kept) and def-weil-pbc-normalized-scalar-restriction (existing:true pbcActualScalarDerivedPullIso; statement matches the right-iso, conjugate and K-flat equation). check_new_node is clean on all three; no cycle. FIX: the normalized-restriction node's Lean uses pbcExtend, pbcDerivedExtend, pbcScalarAdjunction and pbcComplexCounit, owned by def-weil-pbc-bounded-constructible-tower, which is outside its closure. fixes/def-weil-pbc-normalized-scalar-restriction.json adds that stmt_dep and a citing sentence. Records-only fix, no compile needed. Advisories: finiteFreeCoefficientQuotientMap is defeq to integralScalarQuotientMap; pbcActualDerivedPull and pbcActualStructureMap have no owner record (inherited); the transport node cites the theorem lem-pur-derived-change-of-rings as the item base does; the item imports the theorem module IntegralStratifiedPerfectCharacterization; the second reading is the author's own."
+ }
+}

@@ -15,7 +15,8 @@
   "def-coef-hom-representative-evaluation",
   "def-pur-derived-internal-hom",
   "def-sfb-internal-hom-strict-models",
-  "def-sfb-internal-hom-strict-roof"
+  "def-sfb-internal-hom-strict-roof",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -282,5 +283,41 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-aa44c69ff (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no re-split note; the item is still unsplit on live and side-live. 0 new nodes, statement unchanged, proof_deps equals the union of uses, no cycle (the only citer is lem-sfb-hom-flat-evaluation-roof), no SGA. Source Stacks 08J9 (sites-cohomology lemma-internal-hom, l.8896) and its proof read; tags 0A95, 0A96 and 070I checked against tags/tags. Checked that a_T has the source and target given by def-sfb-internal-hom-strict-models Normalized and lem-sfb-internal-hom-comparison-exists. Step 1: chain-transpose with A=B, E=J, f=1_B gives ev_J, then the inverse augmentation of def-coef-hom-representative-evaluation. Step 2: Koszul sign recomputed, (d_B f)(p)+(-1)^n f(d_P p)=d_J f(p) with T in degree 0. Steps 3-4: Normalized gives the uncurried a_T = η_N∘h_T, and [η_N]^{-1} cancels; the chain-transpose hypotheses hold (A arbitrary, P flat-term K-flat, I_R(N) K-injective). Step 5: the three naturality squares recomputed. Step 6: rhom-well-defined (K-injective targets), hom-kflat-into-kinjective and the final sentence of kinjective-hom-derived give homotopy equivalences, and T⊗- preserves them via 1⊗s, so non-flat T is handled correctly. Step 7: the coefficient square recomputed on generators. Edge cases: T=0, T=R, T=Z/2 over Z, P in one degree. Not a duplicate of chain-transpose or of the flat-scalar-evaluation model. The 4 declared tool_uses (generic K-injective and Hom facts) are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictHomNumeratorTranspose",
+  "declaration": "WeilConjectures.SfbHomFilteredColimit.strict_numerator_transpose",
+  "declarations": [
+   "WeilConjectures.SfbHomFilteredColimit.numeratorHomMap",
+   "WeilConjectures.SfbHomFilteredColimit.numeratorTotalMap",
+   "WeilConjectures.SfbHomFilteredColimit.numeratorTensorMap",
+   "WeilConjectures.SfbHomFilteredColimit.StrictNumeratorData",
+   "WeilConjectures.SfbHomFilteredColimit.StrictNumeratorLaws",
+   "WeilConjectures.SfbHomFilteredColimit.StrictNumeratorNaturality",
+   "WeilConjectures.SfbHomFilteredColimit.numeratorSource",
+   "WeilConjectures.SfbHomFilteredColimit.numeratorTarget",
+   "WeilConjectures.SfbHomFilteredColimit.numeratorRestriction",
+   "WeilConjectures.SfbHomFilteredColimit.numeratorRestrictionComplex",
+   "WeilConjectures.SfbHomFilteredColimit.StrictNumeratorCoefficientMaps",
+   "WeilConjectures.SfbHomFilteredColimit.StrictNumeratorCoefficientCompatible",
+   "WeilConjectures.SfbHomFilteredColimit.StrictNumeratorCoefficientSquares",
+   "WeilConjectures.SfbHomFilteredColimit.strict_numerator_transpose"
+  ],
+  "file": "lean/Sheaf/Paper/StrictHomNumeratorTranspose.lean",
+  "statement": "theorem strict_numerator_transpose (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u, v, r, w} J R)) (M : CoefficientTensorModels.{r, u, v, w} J R S) (P L : CochainComplex (Modules.{u, v, r} J R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) (hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u, v, max u v r, max u v r} (J := J) (R := R) (P.X n)) : ∃ d : StrictNumeratorData.{u, v, r, w} J R S P L, StrictNumeratorLaws.{u, v, r, w} J R S M P L hP d ∧ (∀ (P' L' : CochainComplex (Modules.{u, v, r} J R) ℤ) (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P') (_hflat' : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u, v, max u v r, max u v r} (J := J) (R := R) (P'.X n)) (d' : StrictNumeratorData.{u, v, r, w} J R S P' L'), StrictNumeratorLaws.{u, v, r, w} J R S M P' L' hP' d' → ∀ (b : P' ⟶ P) (c : L ⟶ L'), StrictNumeratorNaturality.{u, v, r, w} J R S P L P' L' d d' b c) ∧ (∀ (R' : Sheaf J CommRingCat.{max u v r}) [HasDerivedCategory.{w2} (Modules.{u, v, r} J R')] (S' : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u, v, r, w2} J R')) (M' : CoefficientTensorModels.{r, u, v, w2} J R' S') (P' L' : CochainComplex (Modules.{u, v, r} J R') ℤ) (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R') P') (_hflat' : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u, v, max u v r, max u v r} (J := J) (R := R') (P'.X n)) (d' : StrictNumeratorData.{u, v, r, w2} J R' S' P' L'), StrictNumeratorLaws.{u, v, r, w2} J R' S' M' P' L' hP' d' → ∀ (T : Modules.{u, v, r} J R) (T' : Modules.{u, v, r} J R') (φ : R ⟶ R') (a : StrictNumeratorCoefficientMaps.{u, v, r} J R R' φ P L P' L' T T'), StrictNumeratorCoefficientCompatible.{u, v, r} J R R' φ P L P' L' T T' a → StrictNumeratorCoefficientSquares.{u, v, r, w, w2} J R S R' S' P L P' L' d d' T T' φ a)",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper records expand the full chain formulas, one-sided tensor normalization, naturality, invertibility of representative changes and compatibility with supplied evaluation-preserving coefficient maps. No replacement tensor, Hom or resolution is defined. Adds the already-landed flat-sheaf definition to stmt_deps for the explicit flat-term hypothesis.",
+  "fixed_by": "NT-stage2-cc-76164953a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76164953a",
+  "group": "Q80",
+  "result": "fix",
+  "note": "F1 (H3): StrictNumeratorCoefficientSquares had a false 'comparison' conjunct a_T ≫ augmentedHomMap = sourceMap ≫ restrict(a'_T'). augmentedHomMap is a supplied map constrained only by evaluation at the image of inputMap: with φ=𝟙, all supplied maps 0 and augmentedHomMap = the restriction iso, every compatibility clause holds and the square forces a_T=0, false for T=R, P=L=R[0]. Fix: deleted that conjunct, the augmentedHomMap field and the augmented_evaluation hypothesis; the uncurry and scalar squares still render node step 7 and the transpose square. Theorem signature, lean.statement, declarations and stmt_deps unchanged; report fix adjusts two sentences and adds a correction section. Rest verified against the dependency source: hypotheses exact (P flat-term K-flat, T and C arbitrary); data pinned by generator formulas and K-flat normalization of tensorIso; signs match HomComplex d_M f − (−1)^n f d_L; coefficientHomResolutionIso.inv and inverse-augmentation orientation correct; naturality squares recomputed on generators; invertible_changes holds via homotopy equivalences, cone K-flatness and K-flat resolutions. Fixed file compiled clean once via nt_compile --json (57.1 s, limit 60 s). Advisory: homComplexFunctor is owned by def-pur-hom-complex, which is not a stmt_dep."
  }
 }

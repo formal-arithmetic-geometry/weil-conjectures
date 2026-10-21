@@ -343,5 +343,28 @@
   "group": "Q146",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-aafc19813 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and the report. Statement, stmt_deps, blueprint, source and created are unchanged from the side-live base. The item is unsplit on live and side-live, has no repair note and is not in route-pivot-dropped. Sources read: Stacks categories.tex 0037 definition-adjoint l.3344 (unit/counit are the images of the identities, matching the item's convention), 07RB lemma-adjoint-fully-faithful l.3440 and 0DV0 lemma-compose-counits l.3576. proof_origin 'agent' is correct; no SGA. Both cited nodes are Mathlib leaves, so they are tools and not route. lem-weil-pbc-adjunction-of-natural-bijection (mkOfHomEquiv) states Psi(a)=G(a)∘eta, the counit as Psi^-1(id) and both naturality laws, which is what Steps 1, 2 and 4 use. lem-sp-adjunction-unit-fully-faithful-left (unit_isIso_of_L_fully_faithful) gives j invertible for C_T ⊣ R (Step 3). Checked on paper: the four-arrow types; naturality in H through b and the left naturality of alpha and beta; naturality in L through R(s) and G_eR(s), giving G_p(s); alpha(C_T v)=RC_T(v)∘j=j_N∘v; beta(j_N∘v)=G_e(j_N)∘beta(v), so h(q)=o_N∘C_Z beta(v); v=mu gives h(C_T mu∘b^-1)=o_N, and the preimage is unique by injectivity. Edge cases: all functors identities; one-object BG with central b=g (preimage g^-1, so the b^-1 direction is right); the report's Set / Set×Set example, which confirms that restricting to origin objects is needed. Duplicate search (rg -L over 'fully faithful' + counit + b-composites, and Q103's comparison list) found no node stating this abstract transport. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FullyFaithfulExceptionalHomTransport",
+  "declaration": "CategoryTheory.ExceptionalHomTransport.fullyFaithful_transport",
+  "declarations": [
+   "CategoryTheory.ExceptionalHomTransport.homMap",
+   "CategoryTheory.ExceptionalHomTransport.originMap",
+   "CategoryTheory.ExceptionalHomTransport.fullyFaithful_transport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FullyFaithfulExceptionalHomTransport.lean",
+  "statement": "theorem fullyFaithful_transport (CZ : Xe ⥤ Xp) (CT : Te ⥤ Tp) [CZ.Full] [CZ.Faithful] [CT.Full] [CT.Faithful] (Fe : Xe ⥤ Te) (Ge : Te ⥤ Xe) (R : Tp ⥤ Te) (Fp : Xp ⥤ Tp) (adjT : CT ⊣ R) (adjE : Fe ⊣ Ge) (b : Fe ⋙ CT ≅ CZ ⋙ Fp) : (∀ (H : Xe) (L : Tp), Function.Bijective (homMap CZ adjT adjE b H L)) ∧ (∀ (H' H : Xe) (L : Tp) (a : H' ⟶ H) (q : Fp.obj (CZ.obj H) ⟶ L), homMap CZ adjT adjE b H' L (Fp.map (CZ.map a) ≫ q) = CZ.map a ≫ homMap CZ adjT adjE b H L q) ∧ (∀ (H : Xe) (L L' : Tp) (q : Fp.obj (CZ.obj H) ⟶ L) (s : L ⟶ L'), homMap CZ adjT adjE b H L' (q ≫ s) = homMap CZ adjT adjE b H L q ≫ (R ⋙ Ge ⋙ CZ).map s) ∧ (∀ N : Te, IsIso (originMap CZ Ge adjT N) ∧ homMap CZ adjT adjE b (Ge.obj N) (CT.obj N) (b.inv.app (Ge.obj N) ≫ CT.map (adjE.counit.app N)) = originMap CZ Ge adjT N ∧ (∀ (H : Xe) (q : Fp.obj (CZ.obj H) ⟶ CT.obj N), homMap CZ adjT adjE b H (CT.obj N) q ≫ inv (originMap CZ Ge adjT N) = CZ.map (adjE.homEquiv H N (CT.preimage (b.hom.app H ≫ q)))) ∧ (∀ q : Fp.obj (CZ.obj (Ge.obj N)) ⟶ CT.obj N, homMap CZ adjT adjE b (Ge.obj N) (CT.obj N) q = originMap CZ Ge adjT N ↔ q = b.inv.app (Ge.obj N) ≫ CT.map (adjE.counit.app N)) ∧ (∀ q : Fp.obj (CZ.obj (Ge.obj N)) ⟶ CT.obj N, homMap CZ adjT adjE b (Ge.obj N) (CT.obj N) q ≫ inv (originMap CZ Ge adjT N) = 𝟙 (CZ.obj (Ge.obj N)) ↔ q = b.inv.app (Ge.obj N) ≫ CT.map (adjE.counit.app N)))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16a218913",
+  "group": "NM",
+  "result": "pass",
+  "note": "Only the lean field differs from side-live; lean.statement is a verbatim substring of the file. Every clause matches the node: homMap is the exact four-step map (b.hom then adjT.homEquiv then adjE.homEquiv then CZ.map); bijectivity and naturality in H and L; originMap = CZ(Ge(j_N)) with IsIso; h(b.inv ≫ CT μ) = o_N (order checked); h ≫ inv o_N = CZ(β(CT.preimage(b_H ≫ q))); unique-preimage and identity-preimage iffs. All checked true on paper via h(q) = CZ β(v) ≫ o_N. No stronger hypotheses; 8 independent universes; sources only from objects CZ.obj H. Not a duplicate: Mathlib restrictFullyFaithful is a different statement; side-live BoundaryExceptionalComparisonData is the derived-sheaf special case. Docstrings have Stacks 0037/07RB/0DV0, the blueprint tag and the 5 proof steps; single sorry; report sections present. No fixes; no compile needed."
  }
 }

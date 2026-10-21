@@ -22,7 +22,9 @@
   "lem-sfb-quasifinite-compact-support-exact",
   "def-weil-pbc-adjunction-conjugate",
   "lem-amb-unbounded-compact-support-comparisons",
-  "def-weil-pbc-composite-adjunction"
+  "def-weil-pbc-composite-adjunction",
+  "def-sp-etale-compact-support-normalization",
+  "def-pur-etale-horizontal-support-comparisons"
  ],
  "proof": [
   {
@@ -271,5 +273,33 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-0cc8a56a8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item has 8 steps and there are no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the live side node; only split-owned fields changed. Live the item is still unsplit, it is not on the route-pivot drop list, there is no repair note, and there is no cycle. Typing checks: rho_a=(d_a^{-1})^c is G_a->a^*, c_{b,a} is G_{ba}->G_aG_b, and b_K is e'^*G_hK->G_{h'}e^*K. Step 2: tau^c=c_{e,h'}c_{h,e'}^{-1} by contravariance. Step 3: tau-hat=delta^{-1} factor by factor, and the conjugate equals b_K, using (d_e^{-1}F_{h'})^c=G_{h'}rho_e and (F_h d_{e'})^c=rho_{e'}^{-1}G_h (mate-pasting clauses 2/3). Step 4: the composite counits follow from def-weil-pbc-composite-adjunction. Step 5 cites the statement of lem-pur-etale-horizontal-support-mate with (h,h',e,e') and M=G_hK; its hypotheses, d, alpha, delta and C match literally. Step 6 cancels the S_e-adjunction bijection; the single-counit formula is the counit form of the mate of C^{-1}. Step 7: refinement invariance uses the independence statements of lem-amb-unbounded-compact-support-comparisons and lem-sfb-quasifinite-compact-support-exact. Step 8: open restriction uses C's compatibility with composite base change, mate pasting, and clause (1) of lem-pur-etale-support-map-compatibility. Edge cases checked: h=id, e=id, open e, K=0, empty schemes, A=0. Sources checked: Stacks 0037, 0DV0, 0F7J, 0F7K, 0F7L, 03S6, and blueprint main-20261015 lem-pur-co-smooth-etale-locality Step 1; no SGA is used. No duplicate in the DAG; the support-mate node is strictly smaller. Batch 5: the support-mate path to lem-pod-lisse-module-sheaves-as-module-objects runs through proper-base-change foundations and is already in the base closure via the stmt_dep lem-sfb-quasifinite. The support-map-compatibility path reaches lem-pod-etale-stalk-tensor-scalar, a generic sheaf tensor fact. Neither is part of PD or the trace formula, so both are accepted. The worker wrote tool_uses entries for lem-sfb-quasifinite and support-map-compatibility, which C8 reserves for the maintainer; both are general foundations and I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleHorizontalDoubleCounit",
+  "declaration": "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleHorizontalCounitRightExchange",
+   "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounitIso",
+   "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounit",
+   "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounit_compositors",
+   "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounit_exchange",
+   "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounit_refinement",
+   "AlgebraicGeometry.Etale.etaleHorizontalDoubleCounit_openRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleHorizontalDoubleCounit.lean",
+  "statement": "theorem etaleHorizontalDoubleCounit : ∀ K : DerivedCategoryModule A Y, ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) h').map ((etaleHorizontalDoubleCounitIso A sq N adj adj').hom.app K) ≫ adj'.counit.app ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app K = (etaleHorizontalSupportMateDelta A (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd) N).inv.app ((upperStar (ModuleCat.{u + 1} A) e').mapDerivedCategory.obj (G.obj K)) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) h).map ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e' inferInstance).counit.app (G.obj K)) ≫ adj.counit.app K) ∧ ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) h').map ((etaleHorizontalDoubleCounitIso A sq N adj adj').hom.app K) ≫ adj'.counit.app ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) = (etaleHorizontalSupportBaseChangeIso A (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)).inv.app (G.obj K) ≫ (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map (adj.counit.app K)) ∧ (adj'.homEquiv _ _ ((etaleHorizontalSupportBaseChangeIso A (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)).inv.app (G.obj K) ≫ (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map (adj.counit.app K)) = (etaleHorizontalDoubleCounitIso A sq N adj adj').hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The two counit equations and adjunct identity are etaleHorizontalDoubleCounit. The isomorphism is constructed by conjugating the specified inverse delta under the normalized sum/evaluation composite adjunctions; etaleHorizontalDoubleCounit_compositors identifies it with the exact rho/c compositor formula for every choice of the intermediate right adjoints. The exchange, proper-refinement, and Cartesian open-restriction clauses are separate theorems of this same node. Reuses the landed graph-normalized comparison interface N and support-mate delta/exchange; stmt_deps cites def-sp-etale-compact-support-normalization for N and def-pur-etale-horizontal-support-comparisons for the three existing comparison definitions. The support-mate theorem remains in proof_deps only; its conclusion is not used to state this node. All definitions have real data and every theorem is intentionally sorry at stage 2."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-306868fc2",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 9574abe22c2c, with the Lean module byte-identical (sha256 ba190eb8). stmt_deps: dropped the theorem nodes support-mate and lem-asd-normalization, added def-sp-etale-compact-support-normalization and the new def-pur-etale-horizontal-support-comparisons; support-mate stays in proof_deps. Item differs from live only in lean/stmt_deps and lean.statement is verbatim. New node: existing:true ownership of etaleCanonicalCompactSupportComparison, etaleHorizontalSupportMateDelta and etaleHorizontalSupportBaseChangeIso. Clauses (1) d=(rightDerivedLowerShriekIso)^-1 then N.comparison, (2) delta five factors with congr, (3) C=asIso of the exchange via the base-cited unbounded-comparisons theorem; each matches the live Lean and its hypotheses. H12 fields ok (id, chapter, status split, empty proof, created, blueprint.from/via, three search kinds, lean_audit none); deps exist, none dropped, no cycle, no other owner. Re-read the Lean: hypotheses, b direction, compositor formula, double/single/adjunct clauses, exchange, refinement and open-restriction cube, edge cases, docstrings, sorry-only theorems. Advisory: two plain imports not used by any statement; unused _r/_r' binders; inherited theorem stmt_deps supplying plain defs; snapshot's def-weil-compactifications-refinements is the stale pre-Q52 base copy and the merge must not revert Q52's landed record. No compile (no file changed)."
  }
 }

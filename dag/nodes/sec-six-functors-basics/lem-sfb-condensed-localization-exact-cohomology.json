@@ -286,5 +286,38 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-1e572bfb5 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited node's statement, the sources at the cited places (Stacks 03CE sites.tex:6094; 04IX sites-modules.tex:2019; 010N homology.tex:1545; 015F derived.tex:5884) and det-prop-scalar-six-ctf.proof paragraph (2), 'Local models'. Zero new nodes, statement unchanged. The statement is true for any commutative condensed Γ because α_u is invertible. Tested V empty, V=S (identity), a ring automorphism (the action must use α^{-1}, and does), and complexes unbounded in both directions. No duplicate: lem-sfb-coefficient-sections-localization gives only θ_V. No cycle, no SGA, every tool_use generic and accepted. One fault (C4/C1, Steps 2/4): Step 4 read the internal module-object pullback of sk-def-sfb-module-pushforward-pullback (Ext_α∘mapMod(f^*_Ab), a coequalizer of internal tensors with the action transported through the strong monoidal structure) as the sectionwise sheaf tensor B⊗_R F|_V. Step 2 likewise read the ring-object iso α_u as a section-ring iso. No cited node gives either identification. Fixed by citing lem-sfb-internal-module-operations-transport (reviewed PASS Q77: E_{T'}f^*_int≅f^*_sec E_T, ring iso f^{-1}B_T≅B_{T'} induced by α_f; no cycle) in Steps 2 and 4, declared as a tool_use; Step 2 is now non-elementary. Step 4 also now says why the u^{-1}Γ_S-action is the restricted action: u^{-1} of the action map, and the clause (1) coprojection iso commutes with finite products. Step 1 now notes that the sfb sheafified Lan u^{-1} has the same index category I_W as def-weil-proetale-inverse-image, so clause (1) of lem-sfb-proetale-object-inverse-image-restriction applies. Steps 3, 5, 6 and 7 were checked as written: transport equivalence, exact restriction plus equivalence plus nat-iso invariance, exact-functor derived factorization, inverted c^q_K descended by localization UP (2). proof_deps recomputed; largest step 1587 chars.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedLocalizationExactCohomology",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedLocalization.localization_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.pullback",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.restrictedRing",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.restriction",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.actionTransport",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localizedPullback",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localizedPullback_additive",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.pullback_additive",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.pullback_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.pullback_preservesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localization_comparison",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localized_complex_represents",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.cohomology_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedLocalizationExactCohomology.lean",
+  "statement": "theorem localization_comparison : (∀ (W : V.left.ProEt) (R : Sieve W), R ∈ Scheme.ProEt.topology V.left W ↔ R.functorPushforward (Scheme.ProEt.sliceEquiv S V).inverse ∈ (Scheme.ProEt.topology S).over V ((Scheme.ProEt.sliceEquiv S V).inverse.obj W)) ∧ Nonempty (ProEtale.upperStar Ab.{u + 1} V.hom ≅ localizationRestriction Ab.{u + 1} V.hom V.prop) ∧ ∃ (e : restrictedRing Λ V ≅ ring Λ V.left), (∀ (W : V.left.ProEt) (a : (restrictedRing Λ V).obj.obj (op W)), (e.hom.hom.app (op W)).hom a = ((condensedPullbackHom Λ V.hom).hom.app (op W)).hom (((upperStarIsoLocalizationRestriction Ab.{u + 1} V.hom V.prop).inv.app (condensedRingObj Λ S)).hom.app (op W) a)) ∧ (actionTransport Λ V e).IsEquivalence ∧ ∃ rho : pullback Λ V ≅ localizedPullback Λ V e, ∀ (F : SheafOfModules.{u + 1} (ring Λ S)) (W : V.left.ProEt) (m : F.val.obj (op ((MorphismProperty.Over.map (f := V.hom) ⊤ V.prop).obj W))), (rho.inv.app F).val.app (op W) m = ((pullback Λ V).obj F).val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ V.hom V.prop trivial).unit.app W).op (((adjunction Λ V.hom).unit.app F).val.app (op ((MorphismProperty.Over.map (f := V.hom) ⊤ V.prop).obj W)) m)",
+  "branch": "sheaf-dag",
+  "by": "Q126",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations jointly state both clauses: canonical site and coefficient localization, sectionwise action transport and its equivalence, tensor-unit-normalized actual module pullback comparison, finite exactness, every unbounded complex representative, and natural derived cohomology with the kernel/image quotient normalization. The helpers only specialize existing constructions; every theorem proof is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dfde25f2",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Lean-only stage-2 delivery (item changes only lean; 9 stmt_dep files identical to live). Every clause checked: sliceEquiv covering iff; abelian u^{-1} = localizationRestriction via upperStarIsoLocalizationRestriction (no Mono needed); e : Γ_S|_V ≅ Γ_V pinned sectionwise to condensedPullbackHom ∘ restriction-iso inverse; actionTransport = restrictScalars e.inv (correct α^{-1} direction) with IsEquivalence; rho uniquely pinned by rho.inv = adjunction unit at Over.map W then graph restriction (m ↦ 1⊗m); additive/finite-limit/finite-colimit instances on the actual sectionwise pullback InternalModuleOperations.upperStar (η-based coefficientMap, compared with CondensedRing.upperStar by upperComparison); termwise mapDerivedCategory; representative for every unbounded K and every Q.obj K ≅ Q; natural H^q iso pinned via mapHomologyIso.inv on every complex. No extra hypotheses; independent derived universes wS/wV; edge cases V empty, V=S, non-mono V, zero ring, all q covered. Gates OK: real helper data, 7 sorry theorems, source/blueprint/step docstrings, lean.statement verbatim, both report sections. Advisories only: theorem-owned InternalModuleOperations.*/sliceEquiv outside stmt_deps; covering-iff and abelian Nonempty conjuncts restate existing declarations (node recall sentences, not hollow); restriction via pushforward along Over.map instead of overFunctor, equivalent through sliceEquiv. No recompile (no FIX); worker scompile clean 14.1/17.1 s, deliver2 dry run OK."
  }
 }

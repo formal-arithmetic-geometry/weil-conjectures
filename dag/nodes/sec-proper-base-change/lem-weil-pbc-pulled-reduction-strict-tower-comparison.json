@@ -14,7 +14,9 @@
   "def-weil-pbc-completed-pullback",
   "def-weil-pbc-complete-coefficient-datum",
   "def-pc-kflat-complex",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-sp-constant-reduction-models",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison"
  ],
  "proof": [
   {
@@ -308,5 +310,44 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-cc11cf080 (reviewer sub-agent of L); spot-checked: Read the item's 9 steps in full, the statement of each of the 20 cited nodes, Stacks 099N proof of (5), 08BJ, and blueprint main-20261015 lemma-weil-pbc-completed-pullback-reduction proof paragraph 2. Shape: 0 new nodes, statement and stmt_deps unchanged, proof_deps equal the union of step uses, no cycle (DFS over 1154 nodes), and the sibling normalization-comparison, which cites the item, is not used. Live and side-live still show the item unsplit, so it is not superseded; a parallel Q43 head 0e4fa6bc exists but has not landed. Step 1: flat-term K-flat P; Res P stays K-flat because the completed ring is flat over the constant one; pullback preserves K-flat with no flatness of c needed. Step 2: the common-quotient node gives a strict tower iso including the cone; tensor coherence gives c_n; exact finite pullback gives T_n = Lg_n^*K_n. Step 3: the augmented category J (objects * and n≥1) is resolved strictly. This is needed because F_n is not K-flat over B. The E_j are flat-term K-flat by change-of-rings and the total-tensor-model node. Step 4: I checked by hand that g^*E_j ≅ Tot(Q⊗_C(D⊗_{R'}V'_j)). Flatness of D over R' and K-flatness of Q over C give quasi-isomorphisms onto (g^*P, T_•), because UB→D→S_n' equals U(B→S_n). Step 5: the pure-tensor identities for transitions and augmentation hold, and the source map is the scalar-extension comparison of constant-completion-equivalence. Step 6: descent through roofs via the resolving-class node. Step 7: Res' has an exact left adjoint (by flatness), so 08BJ applies levelwise on towers and lim commutes with restriction literally. Step 8: the type check gives Res'p_n^H = τ_n p_n ρ. Step 9: η comes from the units computed on the shared restricted resolution, and p_nη = u_n. Edge cases K=0, g=id, I=0 and unbounded K are all fine. The six declared tool_uses are generic tools and accepted; right-adjoint-preserves-kinjective is in sk-def-exchange, which the unit cites, so it is on the route. No SGA is cited. Minor point, not a fault: step 2 leaves implicit that P^p⊗_B S_n is flat over S_n (elementary base change)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PulledReductionStrictTowerComparison",
+  "declaration": "AlgebraicGeometry.Scheme.PulledReduction.strictTowerComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PulledReduction.res",
+   "AlgebraicGeometry.Scheme.PulledReduction.pull",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinarySource",
+   "AlgebraicGeometry.Scheme.PulledReduction.source",
+   "AlgebraicGeometry.Scheme.PulledReduction.tower",
+   "AlgebraicGeometry.Scheme.PulledReduction.tres",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionSource",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionTarget",
+   "AlgebraicGeometry.Scheme.PulledReduction.insertion",
+   "AlgebraicGeometry.Scheme.PulledReduction.IsOrdinaryNormalized",
+   "AlgebraicGeometry.Scheme.PulledReduction.IsStrictNormalized",
+   "AlgebraicGeometry.Scheme.PulledReduction.targetCounit",
+   "AlgebraicGeometry.Scheme.PulledReduction.evaluationRes",
+   "AlgebraicGeometry.Scheme.PulledReduction.diagonalRes",
+   "AlgebraicGeometry.Scheme.PulledReduction.pulledAugmentation",
+   "AlgebraicGeometry.Scheme.PulledReduction.limitComparison",
+   "AlgebraicGeometry.Scheme.PulledReduction.strictTowerComparison",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryComplexComparison"
+  ],
+  "file": "lean/Sheaf/Paper/PulledReductionStrictTowerComparison.lean",
+  "statement": "theorem strictTowerComparison : ∃ (s : ordinarySource d g ⟶ completedModulePullback g d ⋙ res d X) (δ : source d g ⟶ completedOrdinaryPullback g d ⋙ (res d X).mapDerivedCategory) (e : ordinaryReductionSource d g ≅ ordinaryReductionTarget d g) (τ : source d g ⋙ OrderedExchange.reduction d X ≅ tower d g ⋙ (tres d X).mapDerivedCategory), IsOrdinaryNormalized d g s ∧ IsStrictNormalized d g e ∧ (∀ P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ, CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1} (R := d.completedRing Y) P → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1} (R := d.completedRing Y) (P.X i)) → δ.app (DerivedCategory.Q.obj P) ≫ (res d X).mapDerivedCategory.map (completedOrdinaryPullbackComplexCounit g d P) ≫ (res d X).mapDerivedCategoryFactors.hom.app (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) = (ordinarySource d g).mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map (ordinaryComplexComparison d g s P)) ∧ (∀ P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ, CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1} (R := d.completedRing Y) P → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1} (R := d.completedRing Y) (P.X i)) → IsIso (targetCounit d g P) ∧ τ.hom.app (DerivedCategory.Q.obj P) ≫ targetCounit d g P = (OrderedExchange.reduction d X).map ((ordinarySource d g).mapDerivedCategoryFactors.hom.app P) ≫ OrderedExchange.reductionComplexCounit d X (((ordinarySource d g).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P)) ∧ (∀ K : reductionDerivedCategory Y (d.completedRing Y), (OrderedExchange.augmentation d X).app ((source d g).obj K) ≫ τ.hom.app K = (OrderedExchange.diagonal (A := A) X).map (δ.app K) ≫ (diagonalRes d X).hom.app ((completedOrdinaryPullback g d).obj K) ≫ (tres d X).mapDerivedCategory.map (pulledAugmentation d g K)) ∧ (∀ (K : reductionDerivedCategory Y (d.completedRing Y)) (n : ℕ), (res d X).mapDerivedCategory.map ((completedRlimProjection X (d.completedRing X) n).app ((tower d g).obj K)) = (limitComparison d g τ K).hom ≫ (completedRlimProjection X (exchangeConstantRing X A) n).app ((OrderedExchange.reduction d X).obj ((source d g).obj K)) ≫ (reductionTowerDerivedEvaluation X (reductionModuleRing X (exchangeConstantRing X A)) n).map (τ.hom.app K) ≫ (evaluationRes d X n).hom.app ((tower d g).obj K)) ∧ (∀ K : reductionDerivedCategory Y (d.completedRing Y), δ.app K ≫ (res d X).mapDerivedCategory.map (completedPullbackComparison g d K) ≫ (limitComparison d g τ K).hom = (OrderedExchange.unit d X).app ((source d g).obj K)) ∧ (∀ (K : reductionDerivedCategory Y (d.completedRing Y)) (n : ℕ), (OrderedExchange.unit d X).app ((source d g).obj K) ≫ (completedRlimProjection X (exchangeConstantRing X A) n).app ((OrderedExchange.reduction d X).obj ((source d g).obj K)) = (OrderedExchange.diagonalAdjunction (A := A) X).unit.app ((source d g).obj K) ≫ (completedRlimProjection X (exchangeConstantRing X A) n).app ((OrderedExchange.diagonal (A := A) X).obj ((source d g).obj K)) ≫ (reductionTowerDerivedEvaluation X (reductionModuleRing X (exchangeConstantRing X A)) n).map ((OrderedExchange.augmentation d X).app ((source d g).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The full augmented strict-tower comparison, normalized on a single flat-term K-flat completed representative, with the induced restriction/derived-limit isomorphism and its projections and unit. Reuses the published original-site reduction and normalized limit comparison; no completeness assumption, boundedness assumption, or invertibility of the completed coefficient structure map. Repair of da9b673d70a6: insertion evaluates the actual model-site pullback adjunction unit at AsSmall.up.op.obj U, then inserts coefficient one; it no longer chooses an adjunction from a bare existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-125b99240",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery of da9b673d70a6 RETURN F1. The only change is insertion, which now evaluates Mathlib's SheafOfModules.pullbackPushforwardAdjunction unit (ofIsRightAdjoint of pushforward; pullback := leftAdjoint, the functor inside proEtaleModuleInverseImage) at AsSmall.up.op.obj U, then inserts 1 via reductionTensorSection into completedModulePullback = inverse image ⋙ reductionChange(completedCoefficientMap). It agrees sectionwise with the private proEtaleModuleInverseImageAdjunction: pushforwardPushforwardEquivalence units are M.map(𝟙) and ofNatIsoRight uses Iso.refl. So s and e are canonically pinned and the −1 twist is excluded. The LHS proEtaleRingModuleAdjunction is ∃!-pinned. Statement and the other declarations are byte-identical to the reviewed version; the node differs from side-live only in lean and the 2 accepted stmt_deps; all 9 dep records are identical to side-live. Theorem stmt_dep ordered-exchange is genuine: lambda = lambda_existsUnique.exists.choose. Edge cases g=id, empty schemes, A=0, I=0/unit ideal, unbounded/noncomplete K are admitted. No compile (no file changed); worker's scompile is clean. Advisories A1, A2, A4, A5 carried over."
  }
 }

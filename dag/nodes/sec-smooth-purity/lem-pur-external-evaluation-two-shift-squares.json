@@ -15,7 +15,8 @@
   "def-pur-hom-complex",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-constant-sheaf",
-  "def-sf-site-constant-module-functor"
+  "def-sf-site-constant-module-functor",
+  "def-sfb-site-derived-constant-module-functor"
  ],
  "proof": [
   {
@@ -248,5 +249,49 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-0dd593f35 (reviewer sub-agent of L); spot-checked: Shape: one commit, item and report only, 0 new nodes. The item is not on the 2026-10-21 drop list, is still unsplit live/side, and has no re-split note of its own (it was created by Q87's re-split of lem-pur-external-rhom-cone-pairing). The statement is mathematically unchanged from the base. The étale-only def-kun-constant-sheaf is correctly replaced by the general-site def-weil-pbc-constant-sheaf and def-sf-site-constant-module-functor, and the global Hom complex is now written out with def-pur-hom-complex's differential; nothing is weakened. I re-derived all 7 steps. Step 2: the d_G terms (exponents sq+r, sq+r+q+s mod 2) cancel the de and dh terms, leaving p(dw,z)+(-1)^r p(w,dz). Step 3: θ(df)^j=(-1)^{n+1}d_J f^{j-1}-f^j d_B^j, which equals -d of θf. Step 4: η coefficients (-1)^r and -1 match. Step 5: X[a]⊗Y is unsigned and X⊗Y[a] has sign (-1)^{ak}; both commute with d, giving τ1, τ2, κE, κH. Steps 6 and 7: left sq+r+0+(r+s)≡sq+s versus right s(q+1); left sq+s+q+(r+s)≡sq+q+r versus right r+(s-1)q. Step 1 uses constant sections, the presheaf-tensor, sheafification and direct-sum universal properties for the equality test; the cited statements say exactly that. All cites are definitions, every step is genuinely elementary, proof_deps equals the union of uses, TeX is single-escaped, and the 3 search kinds are recorded. Sources checked: Stacks sites-cohomology.tex Tag 0A8X at line 8570 and 0A90 lemma-compose at line 8616; proof_origin=agent is right. No duplicate: total-tensor-signed-coherence only gives the general t_{a,b} rule, and lifted-external-evaluation-chain-model needs K-injective/K-flat hypotheses. No SGA. Advisory only: the A-module complex tensor U⊗_A V has no definition node (inherited from the base; its differential is given inline)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ExternalEvaluationTwoShiftSquares",
+  "declaration": "CategoryTheory.ExternalEvaluation.external_evaluation_two_shift_squares",
+  "declarations": [
+   "CategoryTheory.ExternalEvaluation.Modules",
+   "CategoryTheory.ExternalEvaluation.Complex",
+   "CategoryTheory.ExternalEvaluation.Coeff",
+   "CategoryTheory.ExternalEvaluation.constantComplex",
+   "CategoryTheory.ExternalEvaluation.underlying",
+   "CategoryTheory.ExternalEvaluation.constantSection",
+   "CategoryTheory.ExternalEvaluation.tensorSection",
+   "CategoryTheory.ExternalEvaluation.tensorComplex",
+   "CategoryTheory.ExternalEvaluation.tensorComplexSection",
+   "CategoryTheory.ExternalEvaluation.coefficientTensor",
+   "CategoryTheory.ExternalEvaluation.evaluate",
+   "CategoryTheory.ExternalEvaluation.unsignedEvaluation",
+   "CategoryTheory.ExternalEvaluation.IsLinearHomMap",
+   "CategoryTheory.ExternalEvaluation.IsExternalPairing",
+   "CategoryTheory.ExternalEvaluation.IsBalancingShift",
+   "CategoryTheory.ExternalEvaluation.IsHomShift",
+   "CategoryTheory.ExternalEvaluation.precomposeCochain",
+   "CategoryTheory.ExternalEvaluation.tensorShift₁",
+   "CategoryTheory.ExternalEvaluation.tensorShift₂",
+   "CategoryTheory.ExternalEvaluation.coefficientShift₁",
+   "CategoryTheory.ExternalEvaluation.coefficientShift₂",
+   "CategoryTheory.ExternalEvaluation.external_evaluation_two_shift_squares"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ExternalEvaluationTwoShiftSquares.lean",
+  "statement": "theorem external_evaluation_two_shift_squares (U V : Coeff A) (E H N M J : Complex S A) (u : tensorComplex S A ((constantComplex S A).obj U) E ⟶ N) (v : tensorComplex S A ((constantComplex S A).obj V) H ⟶ M) (i : tensorComplex S A N M ⟶ J) : ∃ θ : ∀ B : Complex S A, CochainComplex.HomComplex (B⟦(1 : ℤ)⟧) J ≅ (CochainComplex.HomComplex B J)⟦(-1 : ℤ)⟧, (∀ B : Complex S A, IsHomShift S A B J (θ B)) ∧ ∃ (ηU : tensorComplex S A ((constantComplex S A).obj (U⟦(-1 : ℤ)⟧)) (E⟦(1 : ℤ)⟧) ≅ tensorComplex S A ((constantComplex S A).obj U) E) (ηV : tensorComplex S A ((constantComplex S A).obj (V⟦(-1 : ℤ)⟧)) (H⟦(1 : ℤ)⟧) ≅ tensorComplex S A ((constantComplex S A).obj V) H), IsBalancingShift S A U E ηU ∧ IsBalancingShift S A V H ηV ∧ ∃ (p : (underlying A).obj (U ⊗ V) ⟶ CochainComplex.HomComplex (tensorComplex S A E H) J) (pE : (underlying A).obj (U⟦(-1 : ℤ)⟧ ⊗ V) ⟶ CochainComplex.HomComplex (tensorComplex S A (E⟦(1 : ℤ)⟧) H) J) (pH : (underlying A).obj (U ⊗ V⟦(-1 : ℤ)⟧) ⟶ CochainComplex.HomComplex (tensorComplex S A E (H⟦(1 : ℤ)⟧)) J) (ρE : CochainComplex.HomComplex (tensorComplex S A (E⟦(1 : ℤ)⟧) H) J ≅ (CochainComplex.HomComplex (tensorComplex S A E H) J)⟦(-1 : ℤ)⟧) (ρH : CochainComplex.HomComplex (tensorComplex S A E (H⟦(1 : ℤ)⟧)) J ≅ (CochainComplex.HomComplex (tensorComplex S A E H) J)⟦(-1 : ℤ)⟧), IsExternalPairing S A U V E H N M J u v i p ∧ IsExternalPairing S A (U⟦(-1 : ℤ)⟧) V (E⟦(1 : ℤ)⟧) H N M J (ηU.hom ≫ u) v i pE ∧ IsExternalPairing S A U (V⟦(-1 : ℤ)⟧) E (H⟦(1 : ℤ)⟧) N M J u (ηV.hom ≫ v) i pH ∧ (∀ (n : ℤ) (f : CochainComplex.HomComplex.Cochain (tensorComplex S A (E⟦(1 : ℤ)⟧) H) J n), (ρE.hom.f n) f = ((θ (tensorComplex S A E H)).hom.f n) (precomposeCochain S A (tensorShift₁ S A E H 1).inv f)) ∧ (∀ (n : ℤ) (f : CochainComplex.HomComplex.Cochain (tensorComplex S A E (H⟦(1 : ℤ)⟧)) J n), (ρH.hom.f n) f = ((θ (tensorComplex S A E H)).hom.f n) (precomposeCochain S A (tensorShift₂ S A E H 1).inv f)) ∧ pE ≫ ρE.hom = (underlying A).map (coefficientShift₁ A U V (-1)).hom ≫ (((underlying A).commShiftIso (-1)).inv.app (U ⊗ V)) ≫ p⟦(-1 : ℤ)⟧' ∧ pH ≫ ρH.hom = (underlying A).map (coefficientShift₂ A U V (-1)).hom ≫ (((underlying A).commShiftIso (-1)).inv.app (U ⊗ V)) ≫ p⟦(-1 : ℤ)⟧' ∧ (∀ (r s q t : ℤ) (W : Cᵒᵖ) (w : (U⟦(-1 : ℤ)⟧).X r) (z : V.X s) (e : ((E⟦(1 : ℤ)⟧).X q).val.obj W) (h : (H.X t).val.obj W), ((((((pE ≫ ρE.hom).f (r + s)) (coefficientTensor A (U⟦(-1 : ℤ)⟧) V r s w z)).v ((q + t) + 1) (((q + t) + 1) + ((r + s) + -1)) rfl).val.app W) (tensorComplexSection S A E H (q + 1) t ((q + t) + 1) (by omega) W e h)) = (s * q + s).negOnePow • unsignedEvaluation S A U V E H N M J u v i (r + -1) s (q + 1) t (((q + t) + 1) + ((r + s) + -1)) (by omega) W w z e h) ∧ (∀ (r s q t : ℤ) (W : Cᵒᵖ) (w : U.X r) (z : (V⟦(-1 : ℤ)⟧).X s) (e : (E.X q).val.obj W) (h : ((H⟦(1 : ℤ)⟧).X t).val.obj W), ((((((pH ≫ ρH.hom).f (r + s)) (coefficientTensor A U (V⟦(-1 : ℤ)⟧) r s w z)).v ((q + t) + 1) (((q + t) + 1) + ((r + s) + -1)) rfl).val.app W) (tensorComplexSection S A E H q (t + 1) ((q + t) + 1) (by omega) W e h)) = (s * q + q + r).negOnePow • unsignedEvaluation S A U V E H N M J u v i r (s + -1) q (t + 1) (((q + t) + 1) + ((r + s) + -1)) (by omega) W w z e h)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The global Hom is Mathlib CochainComplex.HomComplex on the actual module-sheaf category. IsLinearHomMap records A-linearity on every local component, so the additive presentation forgets no scalar requirement. The commutative constant-ring presentation is the canonical recorded transport of the constant module functor. All comparison witnesses are fixed by component formulas; none is an arbitrary map assumption.",
+  "fixed_by": "NT-stage2-cc-283f5e952"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-283f5e952",
+  "group": "Q108",
+  "result": "fix",
+  "note": "All clauses of the node match the Lean: the existentials θ, ηU/ηV, p/pE/pH and ρE/ρH are each fixed uniquely by IsHomShift, IsBalancingShift, IsExternalPairing (with linearity) and the ρ component equations. Re-derived: p, η and θ are chain maps; square E sign sq+s = s(q+1); square H sign sq+q+r = r+(s-1)q. Mathlib mapBifunctorShift₁ is unsigned and mapBifunctorShift₂ has sign (p*y).negOnePow, as the node says. Global Hom is Mathlib CochainComplex.HomComplex with δ = d_J f - (-1)^n f d_B; the recorded homComplex is the internal Hom, a different object. The added stmt_dep def-sfb-site-derived-constant-module-functor is a landed owner of the decls used (allowed). lean.statement verbatim; declarations = file; one sorry; docstrings with 7 steps; no line over 100; no duplicate (ExternalRHomConePairing is etale-only). H9: import WeilConjectures.Algebra.Homology.HomComplex is unused and outside the transitive closure. FIX: fixes/ExternalEvaluationTwoShiftSquares.lean drops it; nt_compile --json clean, 42.6 s. Advisory: 6 redundant transitive imports; commShiftIso inv.app direction is cosmetic (identity components)."
  }
 }

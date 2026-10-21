@@ -278,5 +278,30 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-23c1e0a68 (reviewer sub-agent of L); spot-checked: The delivery is one commit containing only the item and the report, with no new nodes. The item is unsplit with an empty proof in live and side-live, has no repair note, and neither it nor any node it cites is on the route-pivot drop list. Its statement, stmt_deps, source and blueprint from are unchanged from live. I read all 7 steps against the statements of every cited node and against Stacks sites-modules 03CZ (l.933, proof via the presheaf tensor plus the sheaf property), 03CY, 03DH and 04IX, and sites-cohomology 0A8X (l.8571; the sign d(f)^p=d^{p+n}f^p-(-1)^n f^{p+1}d matches def-pur-hom-complex). Step 1: j_W is continuous and cocontinuous (the same arrows composed to W generate the sieve), and the comparison from lem-weil-pbc-slice-module-sheafification is the transpose of the restricted unit, so 1⊗x goes to 1⊗x. Step 2: E_W is additive; s·h(x) is balanced because s·h(rx)=s·φ(r)h(x); the tensor and module-sheafification universal properties give the map, and its adjunct is h, so it is the inverse of the bijection stated by the ordinary-adjunction node. Steps 3–7 are elementary and I recomputed each: R(W)-linearity; naturality b(g(1⊗a x)); ν as one abelian sheafification with a unique R-action; θ as a coordinatewise product, so E is never applied to a product; the differential θ(dg)^i(p)=d_N g^i(1⊗p)-(-1)^n g^{i+1}(1⊗d_P p); and two-variable naturality. Every argument from the parent's base steps 1–5 and the ν/θ part of step 10 is covered. Edge cases checked: S=0, R=S, Z→F_2, unbounded constant complexes, characteristic 2. The duplicate search found no existing node stating the item; the siblings cite it. I accept the two tool_uses, both generic other-unit tools: the slice sheafification comparison and the ordinary scalar adjunction. Advisory only: step 4 could also cite lem-weil-pbc-extension-tensor-comparison and step 1 could cite lem-sfb-localized-site-tensor-restriction; mathlib_searches has duplicate entries. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SliceScalarHomChainAdjunction",
+  "declaration": "SheafOfModules.StrictScalarHom.exists_sliceScalarHomChainAdjunction",
+  "declarations": [
+   "SheafOfModules.StrictScalarHom.NormalizedOrdinaryAdjunction",
+   "SheafOfModules.StrictScalarHom.ScalarHomAdjunctionChains",
+   "SheafOfModules.StrictScalarHom.SliceScalarHomAdjunction",
+   "SheafOfModules.StrictScalarHom.exists_sliceScalarHomChainAdjunction"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SliceScalarHomChainAdjunction.lean",
+  "statement": "theorem exists_sliceScalarHomChainAdjunction {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) : Nonempty (SliceScalarHomAdjunction.{c, v, u} φ)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses the existing StrictScalarHom canonical extension, tensor and actual product-evaluation helpers. The three structures specify exactly the normalized ordinary slice adjunctions, restriction comparisons, and nu/theta chain isomorphisms. Their existence is the sole postponed theorem. No construction is selected from an unnormalized existence statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff54abeb",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Only the item lean record changes (7 stmt_dep records identical to side-live). All 10 node clauses match: Extension pinned to changeOfRingsOfUniverses/HomOfUniverses; slice adjunctions pinned by forward g(1⊗x), inverse s·h(x) and additive; overIso/furtherIso pinned on pure tensors for arbitrary slice modules (overMap); nu pinned on tensorSection; theta is an iso in CochainComplex R over homComplex, with theta_forward/theta_inverse by slice-identity evaluation and theta_natural contra/covariant. No hollow fields, no extra assumptions (sheafification Prop instances hold for small sites), slice universe kept as max c v. Statement verbatim, one sorry, H8 7-step docstring, proof imports non-public. Edge cases R=S, S=0, Z→F2, char 2, unbounded/zero complexes, empty site checked. No recompile; worker reports clean compile (16.2 s / 20.4 s). Advisory: public import of parent StrictScalarHomChain (owner lem-sfb-hom-scalar-chain-identification, whose proof_deps cite the item) closes a stage-3 import cycle; same as sibling Q76 PASS; maintainer should split the helpers into a def-node interface module."
  }
 }

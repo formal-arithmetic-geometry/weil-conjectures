@@ -378,5 +378,30 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-e4ed04651 (reviewer sub-agent of L); spot-checked: Read the item in full: an unchanged statement (byte-identical to its Q87 re-split creation, not weakened), 10 steps, 0 new nodes. Also read the statement of every cited node, Stacks 0G7D (sites-cohomology lemma-factor-through-K-flat, including the flat-terms clause) and 07A6, and resolved all step-source tags in tags/tags. There is no SGA. The node is still unsplit in live and side-live. The closure check finds no cycle. Steps checked: 1 (unbounded K-injective; bounded-above flat is K-flat); 3 (lem-pc-kflat-resolution on the one-object trivial site, plus constant K-flat/flat preservation); 4 (termwise adjunction); 5 (recomputed: d_I(α(w)(e))=α(dw)(e)+(-1)^nα(w)(d_E e) matches the total-tensor sign, with no Koszul swap; checked for n=-1,0,1); 6 (total-tensor model); 8 (hom-kflat chain transpose with A=U̲, P=E, target I K-injective, so Q(t)=ev∘(ε⊗1)); 9 (0G7D, and Q factors through K). Edge cases E=0, X=∅, A=0, f=id are fine. Two missing citations repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-global-hom-evaluation-flat-lift.json. First, C4: step 2 claims Γ(X,H) canonically represents C, but def-kun-rgamma-unbounded leaves independence of the choice to lem-kun-rgamma-unbounded-well-defined, which is now cited. Second, C4: in step 10, lem-weil-pbc-ringed-topos-kflat-pullback needs a morphism of topoi (f^{-1} on sheaves of sets preserving finite limits), which prop-weil-pbc-inverse-image-modules-exact does not state; lem-weil-pbc-etale-inverse-image-algebraic-structures (1) is now cited. Step 7 also gained one sentence explaining why the normalization fixes the adjunction of def-kun-constant-projection-morphism uniquely. proof_deps is again the union of the uses lists, and two generic tool_uses were added. The 13 declared generic tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GlobalHomEvaluationFlatLift",
+  "declaration": "AlgebraicGeometry.Etale.ExternalRHom.globalHom_evaluation_flat_lift",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExternalRHom.IsFlatKFlatEtaleComplex",
+   "AlgebraicGeometry.Etale.ExternalRHom.IsFlatKFlatCoefficientComplex",
+   "AlgebraicGeometry.Etale.ExternalRHom.IsResolvedGlobalEvaluation",
+   "AlgebraicGeometry.Etale.ExternalRHom.globalHom_evaluation_flat_lift"
+  ],
+  "file": "lean/Sheaf/Paper/GlobalHomEvaluationFlatLift.lean",
+  "statement": "theorem globalHom_evaluation_flat_lift (X : Scheme.{u}) (E : Complexes A X) (K : DerivedCategoryModule A X) (hE : IsBoundedFlat A E) (hK : IsPlus A K) : (∃ I : Complexes A X, I.IsKInjective ∧ Nonempty ((siteQ A X).obj I ≅ K)) ∧ ∀ (I : Complexes A X) [I.IsKInjective] (_i : (siteQ A X).obj I ≅ K), ∃ m : HomModel A E I, (∃ (U : CochainComplex (ModuleCat.{u + 1} A) ℤ) (alpha : U ⟶ homComplex A E I), QuasiIso alpha ∧ IsFlatKFlatCoefficientComplex A U) ∧ ∀ (U : CochainComplex (ModuleCat.{u + 1} A) ℤ) (alpha : U ⟶ homComplex A E I), QuasiIso alpha → IsFlatKFlatCoefficientComplex A U → (∃ t : chainEvaluationSource A X U E ⟶ I, IsChainEvaluation A E I U alpha t) ∧ ∀ (t : chainEvaluationSource A X U E ⟶ I), IsChainEvaluation A E I U alpha t → IsFlatKFlatEtaleComplex A X ((constantComplex A X).obj U) ∧ IsFlatKFlatEtaleComplex A X E ∧ IsFlatKFlatEtaleComplex A X (chainEvaluationSource A X U E) ∧ IsResolvedGlobalEvaluation A E I m U alpha t ∧ ∃ (N : Complexes A X) (v : chainEvaluationSource A X U E ⟶ N) (c : N ⟶ I), IsFlatKFlatEtaleComplex A X N ∧ QuasiIso c ∧ Nonempty (Homotopy (v ≫ c) t) ∧ (siteQ A X).map v ≫ (siteQ A X).map c = (siteQ A X).map t ∧ ∀ (Z : Scheme.{u}) (f : Z ⟶ X) (P : Complexes A X), P ∈ [((constantComplex A X).obj U), E, chainEvaluationSource A X U E, N] → IsFlatKFlatEtaleComplex A Z ((pullComplex A f).obj P) ∧ IsIso (pullModel A f P)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing ordinary-etale global cochains, normalized HomModel and chain evaluation helpers from ExternalRHomConePairing, without using its theorem. Every K-injective representative and every flat-term K-flat coefficient resolution are quantified. Canonical comparison is the normalized derived transpose; the localization equality is transported along any given representative isomorphism. The two flat/K-flat predicates only bundle the recorded predicates in the existing scalar realizations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72efd5489",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read the node, all 15 stmt_deps, the item module and the ExternalRHomConePairing helpers it uses. Only the lean record changed; lean.statement is verbatim in the file. Clause-by-clause match: every K-injective I with every iso to K; ∃ m : HomModel is uniquely pinned (U=C_E, f=𝟙), so the canonical evaluation transpose is an iso; Hom differential d_I f − (−1)^n f d_E matches Mathlib δ; ∃ then ∀ U, α (quasi-iso, K-flat, flat terms); t fixed on pure tensors with no extra sign; flat K-flat constant(U), E and source; derived evaluation as a transpose equality in D(A); N, v, c with homotopy and localized equality; for every f, pullbacks of the 4 complexes are flat K-flat and pullModel is an iso. Edge cases and universes fine; new predicates only combine recorded predicates, no duplicate found; docstrings and 10 proof steps present; one sorry. Maintainer note: ExternalRHomConePairing belongs to the downstream lem-pur-external-rhom-cone-pairing, whose proof_deps cite this item, so the stage-3 import closes a cycle; split its helpers into a def-node interface module (same as earlier sibling PASSes). Advisories: IsResolvedGlobalEvaluation follows from m's property (redundant but correct); C_E uses the parent's global homComplex, related to def-pur-hom-complex by lem-pur-hom-complex-global-cochains. No fixes, no compile (2026-10-21 rule)."
  }
 }

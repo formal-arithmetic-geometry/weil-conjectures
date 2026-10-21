@@ -195,5 +195,44 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-66570d8de (reviewer sub-agent of L); spot-checked: Read in full. The item is not dropped and is not superseded (still imported live), and there is no re-split note. Source: main-20261015 sk-d-real-operations, order 2929. The statement is the main-20261015 text word for word plus bracket citations; nothing is weakened. Step 1: sum, tensor, ∧^r and det come from sk-d-linear. I checked the dual action by hand (g(hλ)(v)=λ(h⁻¹g⁻¹v)), and irreducible = simple. Step 2: existence of a composition series comes from lem-mg-composition-series-exists, with V=0 handled by the empty series. For N⊊M with M/N irreducible, the step concatenates a series of N, then M, then π⁻¹ of a series of V/M; the factor isomorphism (π⁻¹B)/(π⁻¹A)≅B/A is correct and the edge cases N=0 and M=V work. lem-mg-jordan-holder then puts M/N among the factors of every series, and V^ss is def-mg-weil-semisimplification. FIX (C5): the closing sentence re-proved lem-mg-semisimplification-independent inline. The step now cites it, with uses, proof_deps and a tool_uses entry updated. Step 3: V^I is a subspace and V_I is a quotient by a span; no normality or W-action is claimed. Step 4: deg is a homomorphism by the exact degree sequence, B_b is trivial on P so it is lisse, and Q̄ℓ(n)=B_{q^{-n}} makes geometric Frobenius act by q^{-n}, the correct convention. Small cases checked: V=0, rank 1, a unipotent rank-2 representation through deg (two trivial factors, V^ss≇V), I={1}, n=0,1. Batch-5: def-mg-weil-composition-series, def-mg-weil-semisimplification, lem-mg-composition-series-exists and lem-mg-jordan-holder are generic linear algebra. They reach sec-poincare-duality only through the definition def-pod-lisse-l-adic-sheaves, they are not steps of the trace formula or Poincaré duality, and the batch-5 closure diff is 0 for both the delivery and the fix. All four are accepted. Advisory: the mg nodes are written for monodromy data of lisse Weil sheaves; I accept their generic use here because the DAG already uses them that way and the algebra needs no continuity. No cycle. The snapshot's dagsnap symlinks dangled midway, so the closure checks ran on clones/side-live.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra",
+  "declaration": "AlgebraicGeometry.WeilGroup.detLine",
+  "declarations": [
+   "AlgebraicGeometry.WeilGroup.detLine",
+   "Representation.directSum",
+   "Representation.prod",
+   "Representation.tprod",
+   "Representation.exteriorPower",
+   "Representation.dual",
+   "Representation.IsIrreducible",
+   "Representation.isIrreducible_iff",
+   "Representation.IsConstituent",
+   "Representation.CompositionSeries",
+   "Representation.CompositionSeries.factor",
+   "Representation.CompositionSeries.semisimplification",
+   "Representation.CompositionSeries.isIrreducible_factor",
+   "Representation.exists_compositionSeries",
+   "Representation.CompositionSeries.jordanHolder",
+   "Representation.CompositionSeries.nonempty_semisimplification_equiv",
+   "Representation.invariants",
+   "AlgebraicGeometry.WeilGroup.constLine",
+   "AlgebraicGeometry.WeilGroup.tateLine"
+  ],
+  "statement": "abbrev detLine : Representation (PadicAlgCl l) W.carrier ↥(⋀[PadicAlgCl l]^(Module.finrank (PadicAlgCl l) V) V)",
+  "branch": "slopmaster2",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "This multi-notion definition sketch is realized clause by clause by existing declarations, as for its dependency sk-d-linear; detLine is the attachment anchor, not a claim that the determinant alone is the whole item. The listed declarations are available from LinearAlgebra. For I : Subgroup W.carrier, use (ρ.comp I.subtype).invariants and (ρ.comp I.subtype).Coinvariants; the latter requires Mathlib.RepresentationTheory.Coinvariants, whose Coinvariants.ker is exactly the span of ρ(g)v-v. Subrepresentation.exists_equiv_of_isIrreducible_subquotient in WeilConjectures.RepresentationTheory.CompositionFactors identifies every irreducible subquotient with a factor of any chosen series. That theorem, existence, jordanHolder, factor and semisimplification give the complete finite-dimensional constituent/multiplicity clause. constLine and tateLine in RealSheaves.Basic give precisely b^deg and B_(q^(-n)). Generic operations specialize to the Weil group and coefficient field of sk-d-real-weil; no extra lissity, normality or semisimplicity assumption is imposed. See the report for exact declaring modules, signatures, source correspondence, and edge cases. No new definition or theorem is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00e51853e",
+  "group": "Q13",
+  "result": "pass",
+  "note": "existing:true attachment anchored at AlgebraicGeometry.WeilGroup.detLine; the only change is the item's lean field. Read every declaration: directSum/prod/tprod, exteriorPower, detLine=exteriorPower finrank, Mathlib dual (f∘ρ g⁻¹), isIrreducible_iff (Nontrivial ∧ invariant U = ⊥∨⊤), IsConstituent (irreducible ∧ N≤M ∧ k[G]-equiv to M/N), exists_compositionSeries, isIrreducible_factor, exists_equiv_of_isIrreducible_subquotient (any series), CompositionSeries.semisimplification/jordanHolder/nonempty_semisimplification_equiv (Fin-indexed multiplicity), invariants and Coinvariants of ρ.comp I.subtype (span of ρgv−v, no normality), constLine b^deg with b a unit, tateLine Units.mk0 (card K)^(−n); deg = geometric-Frobenius exponent, so the convention is correct. The anchor's import closure contains CompositionSeries, Irreducible and RealSheaves.Basic; Coinvariants and CompositionFactors are named in the note. Statement field in canonical form; the four stmt_deps are used as recorded; same group as sk-d-real-weil. Edge cases V=0, N=0/M=V, repeated factors, I trivial or non-normal, b=1, n≤0, universes all fine. No hollow def, no proof or sorry, no compile needed. Advisory: upstream also has a chain-based WeilGroup.semisimplification; the record correctly cites the dependency's CompositionSeries.semisimplification."
  }
 }

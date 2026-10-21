@@ -19,7 +19,9 @@
   "def-pur-sheaf-tensor-product",
   "pqf-def-locnoeth",
   "def-constructible-stratification",
-  "lem-sf-immersion-completed-pullback-comparison"
+  "lem-sf-immersion-completed-pullback-comparison",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-weil-pbc-integral-stratified-perfect-models"
  ],
  "proof": [
   {
@@ -357,5 +359,51 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-b9753c2f0 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement; there are no new nodes and the statement is unchanged. Sources: Bhatt–Scholze Prop 6.6.11 and Rem 6.8.15 (proof_origin agent is correct); no SGA. Step 1: strata base change, 054I constructible preimage, and weakly étale + fpqc base change (094U, 022D) give the pro-étale site covers; OK. Step 2: I recomputed π_T c_h h^{-1}c_k = π_T c_{kh}; it is correct for finite R/t^n, and uniqueness comes from the sectionwise limit. Step 3: the weakly-étale localization and 04J0 localized ring map agree with c_v at every projection. Step 4: the composition and 2-isomorphism transport of lem-sfb-ringed-derived-monoidal-comparisons; immersion exactness uses only the unconditional clause, and its coefficient iso is the same projection-defined map. Steps 6-8: retract flatness, bounded flat ⇒ K-flat counit, and the basis/idempotent map; all verified, including the small cases L=0, L=R, L=eR^2 and X empty. One fault (C1/E5), repaired in step 5: it used f_i^{-1}h_{U_ia}≅h_{V_ia} and identified the topos-slice morphism with v without citing anything. I added lem-weil-pbc-proetale-subcanonical, lem-pur-site-representable-algebraic-pullback, def-weil-proetale-inverse-image and the 2-isomorphism transport of lem-sfb-ringed-derived-monoidal-comparisons, plus a tool_uses entry; there is no cycle and no new trace-formula or Poincaré node in the closure. Batch 5: lem-trf-constant-coefficient-composition is a generic constant-coefficient coherence result (Stacks 03CB/0H7J). Its 219-node closure contains no other trace-formula, Poincaré or nt-* node, and it is not part of the proof of either assumption, so it is accepted. Advisory: lem-pc-bounded-above-flat-kflat-site's source.place says 06YS but the label is 06YQ.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryPullbackStratifiedModels",
+  "declaration": "WeilConjectures.OrdinaryStratifiedModels.ordinaryPullbackStratifiedModels",
+  "declarations": [
+   "WeilConjectures.OrdinaryStratifiedModels.coefficientMap",
+   "WeilConjectures.OrdinaryStratifiedModels.inverseComp",
+   "WeilConjectures.OrdinaryStratifiedModels.coefficientMap_comp",
+   "WeilConjectures.OrdinaryStratifiedModels.scalar",
+   "WeilConjectures.OrdinaryStratifiedModels.modelModule",
+   "WeilConjectures.OrdinaryStratifiedModels.modelModule_additive",
+   "WeilConjectures.OrdinaryStratifiedModels.modelComplex",
+   "WeilConjectures.OrdinaryStratifiedModels.modelModule_obj",
+   "WeilConjectures.OrdinaryStratifiedModels.modelSection",
+   "WeilConjectures.OrdinaryStratifiedModels.modelPullback_existsUnique",
+   "WeilConjectures.OrdinaryStratifiedModels.modelPullback",
+   "WeilConjectures.OrdinaryStratifiedModels.modelPullbackComplex",
+   "WeilConjectures.OrdinaryStratifiedModels.perfectModelPullback",
+   "WeilConjectures.OrdinaryStratifiedModels.squareSite",
+   "WeilConjectures.OrdinaryStratifiedModels.pullGenerator",
+   "WeilConjectures.OrdinaryStratifiedModels.moduleSquare_existsUnique",
+   "WeilConjectures.OrdinaryStratifiedModels.moduleSquare",
+   "WeilConjectures.OrdinaryStratifiedModels.complexSquare",
+   "WeilConjectures.OrdinaryStratifiedModels.derivedSquare_existsUnique",
+   "WeilConjectures.OrdinaryStratifiedModels.derivedSquare",
+   "WeilConjectures.OrdinaryStratifiedModels.immersionExact",
+   "WeilConjectures.OrdinaryStratifiedModels.weaklyEtaleExact",
+   "WeilConjectures.OrdinaryStratifiedModels.localExchange",
+   "WeilConjectures.OrdinaryStratifiedModels.localComparison",
+   "WeilConjectures.OrdinaryStratifiedModels.ordinaryPullbackStratifiedModels"
+  ],
+  "file": "lean/Sheaf/Paper/OrdinaryPullbackStratifiedModels.lean",
+  "statement": "theorem ordinaryPullbackStratifiedModels {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) (K : DerivedCategory (integralTowerModules l E Y)) (s : FiniteLocallyClosedStratification Y) (_hs : ∀ i : Fin s.n, Topology.IsConstructible (s.stratum i)) (A : Fin s.n → Type v) (U : ∀ i : Fin s.n, A i → (s.domain i).ProEt) (_hcover : ∀ i : Fin s.n, Sieve.generate (Presieve.ofArrows (U i) (fun a ↦ terminal.from (U i a))) ∈ ProEt.topology (s.domain i) (⊤_ (s.domain i).ProEt)) (L : ∀ (i : Fin s.n) (a : A i), CochainComplex (ModuleCat.{u + 1} (PbcIntegralRing l E)) ℤ) (_hfinite : ∀ (i : Fin s.n) (a : A i) (q : ℤ), Module.Finite (PbcIntegralRing l E) ((L i a).X q)) (_hprojective : ∀ (i : Fin s.n) (a : A i) (q : ℤ), Module.Projective (PbcIntegralRing l E) ((L i a).X q)) (_hbounded : ∀ (i : Fin s.n) (a : A i), ∃ b c : ℤ, ∀ q : ℤ, q < b ∨ c < q → IsZero ((L i a).X q)) (e : ∀ (i : Fin s.n) (a : A i), (ordinaryIntegralDerivedPull l E (U i a).hom).obj ((ordinaryIntegralDerivedPull l E (s.immersion i)).obj K) ≅ DerivedCategory.Q.obj ((modelComplex l E (U i a).left).obj (L i a))) : (∃ sX : FiniteLocallyClosedStratification X, ∃ b : Fin sX.n ≃ {i : Fin s.n // Nonempty (pullback f (s.immersion i) : Scheme.{u})}, (∀ k : Fin sX.n, Topology.IsConstructible (sX.stratum k)) ∧ (∀ k : Fin sX.n, sX.stratum k = f.base ⁻¹' s.stratum (b k).val) ∧ ∀ k : Fin sX.n, ∃ α : sX.domain k ≅ pullback f (s.immersion (b k).val), α.hom ≫ pullback.fst f (s.immersion (b k).val) = sX.immersion k) ∧ ∀ i : Fin s.n, Nonempty (pullback f (s.immersion i) : Scheme.{u}) → (Sieve.generate (Presieve.ofArrows (fun a : A i ↦ (proEtaleBaseChange (pullback.snd f (s.immersion i))).obj (U i a)) (fun a : A i ↦ terminal.from ((proEtaleBaseChange (pullback.snd f (s.immersion i))).obj (U i a)))) ∈ ProEt.topology (pullback f (s.immersion i)) (⊤_ (pullback f (s.immersion i)).ProEt)) ∧ ∀ a : A i, IsIso (localComparison l E f (s.immersion i) (U i a) K (L i a) (e i a))",
+  "branch": "sheaf-dag",
+  "by": "Q85",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The full statement is carried jointly by ordinaryPullbackStratifiedModels, coefficientMap_comp, derivedSquare_existsUnique, immersionExact, weaklyEtaleExact, modelPullback_existsUnique and perfectModelPullback. The remaining helpers construct these canonical maps from existing ordinary pullback, adjunction units, scalar realizations and universal counits. The added statement dependencies are already landed definition nodes for the reused ordinary construction and constant-model components. No constructibility theorem or completed comparison of the importing construction module is invoked."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12beb8b46",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Clause-by-clause check of OrdinaryPullbackStratifiedModels against the node and BS 6.6.11/6.8.15: IsNoetherian X,Y; arbitrary K; FiniteLocallyClosedStratification + IsConstructible; per-chart covers with independent index universe v; bounded finite projective L; chart iso e through immersionExact (dep clause transported from pbcActualModulePull) and weaklyEtaleExact (slice restriction). Conclusion: sX with bijection to nonempty X_i, preimage strata and pullback.fst-compatible domain iso; base-changed covers; coefficientMap_comp (canonical inverseComp mate, finite projections); derivedSquare pinned by the counit equation (unique on K-flat reps); modelPullback pinned on 1⊗x through the adjunction unit (naturality gives idempotent/differential compatibility); perfectModelPullback counit iso; main clause IsIso of the specified localComparison. stmt_deps gained only landed def nodes (allowed); lean.statement verbatim; 25 declarations match; docstrings, imports, line widths and sorry-only all OK; edge cases OK. No compile (no file changed; worker compile clean). Advisories: A1 ordinaryIntegralDerivedPull/PullCounit/PullComplexCounit/_hasLeftDerived are owned by parent theorem lem-tw-ordinary-completed-integral-pullback, so extend def-sf-ordinary-integral-pullback-construction declarations; A2 item imports the parent module, giving a stage-3 import cycle; A3 fibre-product order differs between the cover clause and localComparison (canonically isomorphic)."
  }
 }

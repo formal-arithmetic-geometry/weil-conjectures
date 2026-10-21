@@ -1,0 +1,116 @@
+{
+ "id": "def-sp-canonical-scalar-extension-maps",
+ "kind": "definition",
+ "title": "Canonical unit, tensor, dual and tower maps for scalar extension",
+ "statement": "Let $\\mathcal C$ be a site with topology $J$, and let $R\\xrightarrow{\\alpha}S\\xrightarrow{\\beta}T$ be sheaves of commutative rings. Use the actual sheaf tensor, scalar-extension sections, and module sheafification of [def-sp-scalar-tensor-comparison-data], and the slice internal Hom of [def-pur-sheaf-hom]. Use a coefficient universe $u$ independent of the two site universes, and module sheaves in $u$ for the unit, binary and internal-dual input constructions. Internal Hom has universe $\\max(u_{\\mathcal C},v_{\\mathcal C},u)$. Assume sheafification and its locally bijective characterization in the coefficient, module and internal-Hom universes used below, and on slices as needed for internal Hom; the object and morphism universes of the site are independent. Write $E_\\alpha M=M\\otimes_R S$, with the scalar-first section convention $s\\otimes x$. Define the following existing canonical maps by the balanced section formulas descended through module sheafification. The unit isomorphism $u_\\alpha:E_\\alpha R\\simeq S$ sends $s\\otimes r$ to $s\\alpha(r)$. For arbitrary $R$-module sheaves $M,N$, the binary isomorphism $\\sigma_\\alpha:E_\\alpha(M\\otimes_R N)\\simeq E_\\alpha M\\otimes_S E_\\alpha N$ sends $s\\otimes(x\\otimes y)$ to $(s\\otimes x)\\otimes(1\\otimes y)$, with inverse $(s\\otimes x)\\otimes(t\\otimes y)\\mapsto st\\otimes(x\\otimes y)$. For arbitrary $M$, the internal-dual morphism $d_{\\alpha,M}:E_\\alpha\\mathcal Hom_R(M,R)\\to\\mathcal Hom_S(E_\\alpha M,S)$ sends $s\\otimes\\varphi$ to the slice functional $t\\otimes x\\mapsto st\\alpha(\\varphi(x))$. It is a morphism, without any assertion here that it is invertible. Finally, for every module sheaf $M$ in a universe containing the coefficient universe, define the tower isomorphism $A_{\\alpha,\\beta,M}:E_\\beta E_\\alpha M\\simeq E_{\\alpha\\gg\\beta}M$ by $t\\otimes(s\\otimes x)\\mapsto(t\\beta(s))\\otimes x$, with inverse $t\\otimes x\\mapsto t\\otimes(1\\otimes x)$. These definitions require neither flatness nor local freeness.",
+ "stmt_deps": [
+  "def-sp-scalar-tensor-comparison-data",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Tensor-power/internal-Hom and final common-finite-stage sentences, canonical coefficient maps; Stacks 03EK (balanced tensors and scalar-extension reassociation), 04TT (slice internal Hom), 0GMX (evaluation comparison)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension maps for module sheaves unit binary tensor internal dual and composition of ring maps",
+   "results": "8 hit(s): ModuleCat.ExtendScalars.map', ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', ModuleCat.ExtendScalars.map'_comp, LinearMap.ltoFun, ModuleCat.ExtendScalars.map_tmul, ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars",
+   "date": "2026-10-21",
+   "verdict": "Ordinary-module constructions, not the sheaf comparisons. Reuse the existing Sheaf declarations unchanged."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "11 hit(s): ModuleCat.extendScalarsComp, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-21",
+   "verdict": "Ordinary-module constructions, not the sheaf comparisons. Reuse the existing Sheaf declarations unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|baseChange.*[Dd]ual",
+   "results": "6 hit(s): Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "Ordinary-module constructions, not the sheaf comparisons. Reuse the existing Sheaf declarations unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"scalarExtensionUnitIso|scalarTensorBinaryIso|scalarExtensionDualMap|scalarExtensionTowerIso\" lean/WeilConjectures/Algebra/Category/ModuleCat lean/Sheaf/Paper --glob \"*.lean\"",
+   "results": "No upstream WeilConjectures match; Sheaf.Paper.ScalarExtensionBinaryCoherence defines scalarExtensionUnitIso and scalarTensorBinaryIso; ScalarExtensionDualEvaluation defines scalarExtensionDualMap; ScalarExtensionDualTowerCore defines scalarExtensionTowerIso.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing definitions: record them with existing: true, without new Lean code."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"scalarExtensionUnitIso|scalarTensorBinaryIso|scalarExtensionDualMap|scalarExtensionTowerIso\" dag/nodes --glob \"*.json\"; python3 tools/blueprint_refs.py search scalarExtensionTowerIso",
+   "results": "lem-sp-scalar-extension-dual-tower-core, lem-sp-scalar-extension-dual-evaluation, lem-sp-scalar-extension-dual-local-iso, lem-sp-scalar-extension-binary-coherence (all statement nodes); 0 blueprint nodes match scalarExtensionTowerIso.",
+   "date": "2026-10-21",
+   "verdict": "No definition node owns the canonical maps. Add this definition-node binding as required by return H2/H4."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-signed-line-scalar-tensor-tower",
+  "date": "2026-10-21",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Tensor-power/internal-Hom sentence and final common-finite-stage sentence; old steps 4-7: dual pairing and its local inverse, signed contractions, evaluation and coefficient towers. Stacks 0GMX, sites-modules.tex, remark-pullback-internal-hom, specialized to a locally free line and iterated with evaluation.",
+   "via": [
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-weil-integral-twist-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "module": "Sheaf.Paper.ScalarExtensionDualTowerCore",
+  "declaration": "SheafOfModules.scalarExtensionTowerIso",
+  "declarations": [
+   "SheafOfModules.scalarExtensionUnitIso",
+   "SheafOfModules.scalarTensorBinaryIso",
+   "SheafOfModules.scalarExtensionDualMap",
+   "SheafOfModules.scalarExtensionTowerIso"
+  ],
+  "statement": "def scalarExtensionTowerIso {R S T : Sheaf J CommRingCat.{u}}\n    (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J\n      (forget₂ CommRingCat RingCat)).obj R)) :\n    changeOfRingsOfUniverses β (changeOfRingsOfUniverses α N) ≅\n      changeOfRingsOfUniverses (α ≫ β) N",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition-node ownership of four unchanged canonical constructions, exposed by ScalarExtensionDualTowerCore and its public imports. scalarExtensionUnitIso and scalarTensorBinaryIso are defined in Sheaf.Paper.ScalarExtensionBinaryCoherence; scalarExtensionDualMap is defined in Sheaf.Paper.ScalarExtensionDualEvaluation; scalarExtensionTowerIso is defined in Sheaf.Paper.ScalarExtensionDualTowerCore. They were previously listed only by theorem nodes. No module or definition is copied. The primary signature is verbatim from scalarExtensionTowerIso; the other three definitions are read in their respective modules."
+ },
+ "status": "split",
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69f6c5c3c",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69f6c5c3c",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 67b6ac920743. H2 fixed: stmt_deps now cite only definition nodes; the new def-sp-canonical-scalar-extension-maps (existing:true, module ScalarExtensionDualTowerCore, which reaches the other two modules through public imports) owns scalarExtensionUnitIso, scalarTensorBinaryIso, scalarExtensionDualMap and scalarExtensionTowerIso. Its statement is verbatim the scalarExtensionTowerIso signature, its formulas and universes match the live defs and _tmul lemmas, no other def node owns them and there is no cycle. The theorem nodes stay in proof_deps. H4 fixed: the tower associator family A/hA and exists_signedLineTowerAssociator were removed; hb and the all-m conclusion use scalarExtensionTowerIso.{uC,vC,max uC vC u,max uC vC u} directly, with no universe restriction. Diff against the previous delivery shows only these changes; statement, proof and proof_deps match live. Item lean.statement is verbatim; all 11 declarations exist; 7 sorry, no other proofs. The previous clause-by-clause check still holds (signed powers, B normalization, beta IsIso, evaluation and basis formulas, mu, sigma square, tower, identity; edge cases m=0/±1, mixed signs, zero ring, empty cover, non-flat iota). No compile (no file changed). Advisories: signedLineDual_isIso overlaps lem-sp-scalar-extension-dual-local-iso; changeOfRingsOfUniverses and siteSheafTensor* are older helpers that no cited node records."
+ }
+}

@@ -302,5 +302,49 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-25bc05c20 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with every cited statement. No new nodes; the statement is unchanged; live and side-live still have the item unsplit; no repair note; no SGA (the Stacks tags 00PD/0657/093J/093M/06YQ/06YP/07A2/0A0E/099L were checked at their labels). Steps 1-7 are correct. Step 1: |ℓ|_E<1 puts ℓ in (t), so A/(t) is torsion; finite quotients come from lem-weil-valued-dvr-finite-quotients. Step 2: [A→A] resolves A/t^n, so A/t^n is perfect. Step 3: constant-module exactness plus the flat-quotient theorem with the identity presentation gives exactness through π_n. Step 4: bounded flat ⇒ K-flat. Step 5: the Koszul tower definition with the π_m transitions. Step 6: the right arbitrary-qis K-flat invariance; I rechecked the swap sign (-1)^{ij} against the total differential. Step 7: the total-tensor model applies with no boundedness on P. Small cases tested: n=1, ramified E, W empty, P=0, P unbounded. Fault, C1/C4 in step 8: the adic datum's (P_n)_T and A_T are built from Cont(π_0|U|,P_n), and that node explicitly asserts no identification with the constant conventions. The step read the datum's tower as P⊗_{R_W}S_{W,n} (sheafified constants, def-weil-completed-integral-coefficients) without citing that identification. FIX: step 8 now cites the existing lem-weil-pbc-completed-constant-sheaf-reduction, whose last clause gives (P_n)_T = constant A/I^n and B = A_T. No cycle (closure checked). Step 8 is now marked non-elementary, and the node is added to proof_deps and to split_report.tool_uses. I accept the declared generic tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrincipalKoszulStrictReplacement",
+  "declaration": "WeilConjectures.PrincipalKoszulStrictReplacement.principal_koszul_strict_replacement",
+  "declarations": [
+   "WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.abSheafify",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.abLocallyBijective",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.Modules",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.uniformizer",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.residue",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.projection",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.koszul",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.multiplication",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.multiplication_projection",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.quotientComparison",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.augmentation",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.tensorWith",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.sourceTower",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.residueStep",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.targetTower",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.augmentation_compatible",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.comparison",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.coefficient_datum",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.completed_exact",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.principal_koszul_strict_replacement",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.sourceTowerMap",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.targetTowerMap",
+   "WeilConjectures.PrincipalKoszulStrictReplacement.comparison_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/PrincipalKoszulStrictReplacement.lean",
+  "statement": "theorem principal_koszul_strict_replacement (P : CochainComplex (Modules l E W) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E W) P) (hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (R := completedIntegralCommRingSheafUnrestricted l E W) (P.X i)) : ∀ n : ℕ, QuasiIso ((comparison l E W P).app (op n)) ∧ CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E W) ((sourceTower l E W P).obj (op n)) ∧ ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (R := completedIntegralCommRingSheafUnrestricted l E W) (((sourceTower l E W P).obj (op n)).X i)",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b173b5c2b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_dep records and their exact declarations in side-live, the module, the report and the citers. Every clause is matched: the adic datum with d.ideal=span{t} (other fields are Props), the explicit two-term resolution, ShortExact through the actual limit projection pi_n, epsilon_n pinned by cokernel.desc of the unit-Hom of 1, the source tower principalKoszulTower (t,1) tensored by P on the left, the target tower with the actual integralCoefficientSheafTransition maps, and comparison = ofOpSequence of 1_P tensor epsilon_n. The main theorem gives QuasiIso plus K-flat and flat source levels for all n (n means exponent n+1, consistent with every dependency). Strict naturality holds for all chain maps. Universes t and u are independent; IsFlatOnSite universes are right; no extra hypotheses. H5/H6/H8 ok; the recorded statement is verbatim and the declaration list matches. Advisories only: principalKoszul* and the KFlatTotalTensorModel.tensor wrapper come from nodes that are proof_deps only. uniformizer has the same values as integralCompletionScalarValue. The bridges from targetTower to def-weil-integral-reduction-tower and to the adic datum's completedReductionTower are left to the citers. No compile: no file changed."
  }
 }

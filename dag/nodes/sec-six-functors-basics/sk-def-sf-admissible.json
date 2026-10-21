@@ -122,5 +122,28 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-2655e1f5d (reviewer sub-agent of L); spot-checked: Read the main-20261015 source sk-def-sf-admissible/_section.md (order 1702), the base item (imported, source text verbatim, in_cycle via sk-def-sf-operations), all 13 delivered stmt_deps, def-weil-full-cohomological-dimension, def-weil-exceptional-adjoint-admissibility, def-weil-ambient-exceptional-adjoint, lem-sp-fullcd-ambient-adjoint, thm-sf-ambient-adjoint-class, and upstream ExceptionalAdjoint.lean:100-200. Preliminary checks: item not dropped, no repair note, not superseded (still imported on side-live; parallel NO delivery not landed), no SGA citation. The delivered definition is faithful. The setting (k=F̄_q, ℓ≠p0, A=A_{E,n}) comes from the chapter and the detailed definitions. Clause (1) is FullCD only, as in main-20261015: Brown existence is a consequence, and refinement compatibility is no longer required. Clauses (2) and (3) keep every right adjoint, signed c± independent of a,b, D^b_c, intervals and D^b_ctf, all in D(T_proet,A). ∃c∀G versus ∀G∃c does not matter because adjoints are unique up to isomorphism. Moving the exposition to the report is acceptable: Brown existence is lem-sp-fullcd-ambient-adjoint, the comparison is thm-sf-ambient-adjoint-class (2) plus Yoneda, and the warning is a remark. The cycle is gone (closure recomputed). def-weil-exceptional-adjoint-admissibility adds refinement data, so it is not a duplicate. Fixes: (1) B3/C5: clause (1) wrote FullCD inline because the worker claimed a 'genuine quantifier mismatch' with def-weil-full-cohomological-dimension (pulled-back g_V^*F versus arbitrary G on X̄×_YV). The two are equivalent: X̄_V is weakly étale over X̄, so (X̄_V)_proet is the localization and g_V^*g_{V!}G≅G. Upstream HasUniformCohomologicalDimensionLE says it is that node. Clause (1) now cites the node over S=Spec k (its hypotheses checked); unused def-pc-fibre-product removed. (2) E6: D_T cited def-weil-pbc-proetale-modules, while every other cited node uses the categories of def-weil-pbc-proetale-site; now cites the latter. split_report summary updated. Maintainer notes: the report's mismatch paragraph is wrong. The unit record is still master-era. The snapshot's dagsnap e3ececac was deleted mid-review (dangling chapter links); the checks were finished on side-live.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfExceptionalAdjointAdmissibility",
+  "declaration": "WeilConjectures.IsSfExceptionalAdjointAdmissible",
+  "declarations": [
+   "WeilConjectures.HasSfAmbientExceptionalDatum",
+   "WeilConjectures.IsSfExceptionalAdjointAdmissible"
+  ],
+  "file": "lean/Sheaf/Paper/SfExceptionalAdjointAdmissibility.lean",
+  "statement": "def IsSfExceptionalAdjointAdmissible (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Finite-stage definition of the current main-20261015 unit: FullCD alone is the ambient condition; admissibility adds preservation by every right adjoint for the specified compactification, with signed bounds uniform in both adjoint and interval. The older refinement-coherent datum is not used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd37340bd",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of c9664d83. Item module byte-identical (sha256 a2faef8b) and item node identical to the previously verified faithful version; re-read: FullCD (∃ cCD:ℕ) for (1), every right adjoint preserves D^b_c, one signed (c-,c+) chosen before G and a≤b with empty output interval allowed, D^b_ctf preservation; hypotheses no stronger than the node; edge cases ok; no sorry; docstrings and verbatim statement ok. H13 repair as requested: def-weil-finite-tor-amplitude keeps NW's module FiniteTorAmplitudeSites, primary finiteTorConstructibleEtale and verbatim statement; declarations are a strict superset (+5 real decls from FiniteTorAmplitude); Sites diff vs live = one added public import; no name clashes, no import cycle, no other node owns either module; existing:false+file is correct since the file changes. Live item still split with lean null (not superseded). No compile run (no fix); worker scompile clean (7.2/8.8 s) and final deliver2 dry run OK."
  }
 }

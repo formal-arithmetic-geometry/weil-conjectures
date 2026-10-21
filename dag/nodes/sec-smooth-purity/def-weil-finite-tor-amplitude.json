@@ -77,22 +77,28 @@
   "module": "Sheaf.Paper.FiniteTorAmplitudeSites",
   "declaration": "WeilConjectures.finiteTorConstructibleEtale",
   "declarations": [
-   "WeilConjectures.finiteTorConstructibleEtale"
+   "WeilConjectures.finiteTorConstructibleEtale",
+   "WeilConjectures.finiteTorConstructible",
+   "WeilConjectures.finiteTorConstructibleCategory",
+   "WeilConjectures.finiteTorConstructibleIntegral",
+   "WeilConjectures.finiteTorConstructibleIntegralCategory",
+   "WeilConjectures.finiteTorFieldCoefficientCategory"
   ],
-  "statement": "def finiteTorConstructibleEtale\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :\n    ObjectProperty (Etale.DerivedCategoryModule\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y)",
+  "statement": "def finiteTorConstructibleEtale (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y)",
   "branch": "newtargets-dag",
-  "by": "NW",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "§1(B), returned H4/H13: the recorded intrinsic finiteTorConstructible has proEtaleDerivedCategory as its domain and cannot be applied to the ordinary etale DerivedCategoryModule of this item. Reuse the already published ordinary-etale presentation finiteTorConstructibleEtale, rather than an arbitrary predicate. Its body is exactly the recorded finite-value bounded constructibility and one ordered Tor interval, tested against every degree-zero module sheaf through hasTorAmplitudeIn. It uses the canonical ULift of the identical positive-level quotient ring. Original pro-etale, integral and field-stage definitions remain unchanged in Sheaf.Paper.FiniteTorAmplitude; no new definition is introduced."
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Section 1(B), returned H13 repair: retain the landed ordinary-etale primary declaration finiteTorConstructibleEtale and its unchanged signature, and restore the original pro-etale, integral and field-stage declaration family as a superset record. The etale predicate cannot accept this consumer’s proEtaleDerivedCategory objects, so this item uses the original finiteTorConstructible. FiniteTorAmplitudeSites now publicly imports Sheaf.Paper.FiniteTorAmplitude, exposing every declaration listed here while retaining all old imports and the unchanged etale definition. No mathematical definition or dependency statement changes.",
+  "file": "lean/Sheaf/Paper/FiniteTorAmplitudeSites.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3f43e3118",
-  "group": "NW",
+  "reviewer": "NT-stage2-cc-cd37340bd",
+  "group": "NP",
   "result": "pass",
-  "note": "Every object, hypothesis and conclusion clause matches the node, through the recorded declarations: D_T=verdierDual into dualizingComplex=R(aT)^! of the unit; G=rightAdjoint of R(i_*) via the closed-ambient instance; D_Z=RHom into G omega_T; the 4 ctf memberships and D_Z preservation use finiteTorConstructibleEtale; hPF is IsIso of the canonical rightDerivedLowerStarProjectionMap, equivalent to the node's opposite-order PF by two symmetries. q, r_K and alpha were recomputed against node steps 2 and 4. boundaryAlphaHomChain is 7 Equiv factors independent of alpha and matches the displayed chain with the step-1 uncurrying convention. Clauses: IsIso, chain = b >> alpha for all ctf B, contravariant naturality for every admissible K'. No extra hypotheses; universes Scheme.{u}, ModuleCat.{u+1}. Level n+1 covers every n>=1. Edge cases K=0, B=0, Z empty, i=id and signs checked; no pro-etale substitute. Dependency repairs: DualityPairing keeps all old declarations and adds IsEtaleKoszulSymmetry/etaleKoszulSymmetry (HEq-pinned to the Koszul braiding, sorry'd existence theorem, same pattern as the landed bidualityMap); DerivedInternalHomOfUniverses adds only a public import of Etale.Derived.Hom. No hollow definitions; sorry only as the whole proof of two named theorems; docstrings with source and blueprint present; lean.statement verbatim. nt_compile --json of all 3 files: rc 0, no errors (3.7/10.7/13.6 s). Observation, not blocking: the def-weil-finite-tor-amplitude record is rebound to the etale finiteTorConstructibleEtale and drops the pro-etale/integral/field declarations from its list (permitted by section 1(B); flagged for the lead)."
+  "note": "Re-delivery after H13 RETURN of c9664d83. Item module byte-identical (sha256 a2faef8b) and item node identical to the previously verified faithful version; re-read: FullCD (∃ cCD:ℕ) for (1), every right adjoint preserves D^b_c, one signed (c-,c+) chosen before G and a≤b with empty output interval allowed, D^b_ctf preservation; hypotheses no stronger than the node; edge cases ok; no sorry; docstrings and verbatim statement ok. H13 repair as requested: def-weil-finite-tor-amplitude keeps NW's module FiniteTorAmplitudeSites, primary finiteTorConstructibleEtale and verbatim statement; declarations are a strict superset (+5 real decls from FiniteTorAmplitude); Sites diff vs live = one added public import; no name clashes, no import cycle, no other node owns either module; existing:false+file is correct since the file changes. Live item still split with lean null (not superseded). No compile run (no fix); worker scompile clean (7.2/8.8 s) and final deliver2 dry run OK."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

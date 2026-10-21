@@ -12,7 +12,10 @@
   "def-weil-size-convention",
   "def-weil-pbc-sites-and-cohomology",
   "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-sp-scalar-tensor-comparison-data",
+  "def-pur-localized-ringed-site",
+  "def-sp-canonical-scalar-extension-maps"
  ],
  "proof": [
   {
@@ -296,5 +299,37 @@
   "group": "Q132",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-4e2331e96 (reviewer sub-agent of L); spot-checked: Ordinary one-level split (no re-split note on this item; it is Q42's statement-only child of lem-weil-integral-twist-base-change), with no new nodes. Live copy still unsplit; neither the item nor any cited node is in route-pivot-dropped. Statement, source, stmt_deps and blueprint are unchanged; the 6 old searches are kept and 5 new ones added; proof_deps equals the union of uses. I read all 10 steps in full and every cited statement: localized-site tensor restriction, sheaf-Hom slice definition, Hom cover gluing (existence and uniqueness), binary scalar coherence (sigma s(x⊗y)↦(s⊗x)⊗(1⊗y), unitors), sheaf bilinear universal property, and scalar-extension dual evaluation (construction and formula only, not used for invertibility). Every clause is proved: beta invertible by local basis-to-basis plus a glued inverse, with no flatness (right for Z→Z/2) (step 4); the signed evaluation formula (5); mu^{a,b} with chart independence under e'=ue for negative exponents and uniqueness (6); the contraction description in all sign cases, symmetric on a line so no sign issue (7); the sigma-square coefficients ι(rq)s = ι(r)sι(q) (8); the associator balances and inverse (9); the tower via e_2=b02(e_0⊗1) from the hypothesis, and the identity case equal to the unitor for every signed m (10). Checked on a one-object site, Z→Z/2, the zero ring, (a,b)=(0,0),(1,-1),(-2,1),(2,-1) and basis change by a unit. Stacks tags 03EK/03EL/03EM/04TT/0GMX/0FNY/04TQ match their labels; 0GMX is used only as a canonical map. No SGA source. The 5 declared tool_uses are generic sheaf-module infrastructure from other units; I accept them, and there is no cycle. Advisory: overlap with lem-sp-invertible-tensor-scalar-extension (non-negative powers and one dual) and lem-asd-int-tensor-family-comparison (generic monoidal integer families). It predates this split (Q42 created the item); worth a maintainer de-duplication note. The proof is about 8.1k characters with no new nodes, which is allowed without a note; the natural cut points if a re-split is ever ordered are steps 4-5, 6-7 and 9-10. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SignedLineScalarTensorTower",
+  "declaration": "SheafOfModules.signedLineComparison_tower",
+  "declarations": [
+   "SheafOfModules.signedLinePower",
+   "SheafOfModules.SignedLineBasisPowers",
+   "SheafOfModules.SignedLineComparisonNormalized",
+   "SheafOfModules.SignedLineProductNormalized",
+   "SheafOfModules.existsUnique_signedLineBasisPowers",
+   "SheafOfModules.signedLineDual_isIso",
+   "SheafOfModules.exists_signedLineComparison",
+   "SheafOfModules.existsUnique_signedLineProduct",
+   "SheafOfModules.signedLineComparison_tensor",
+   "SheafOfModules.signedLineComparison_tower",
+   "SheafOfModules.signedLineComparison_identity"
+  ],
+  "file": "lean/Sheaf/Paper/SignedLineScalarTensorTower.lean",
+  "statement": "theorem signedLineComparison_tower [HasFiniteLimits C] {R S T : Sheaf J CommRingCat.{max uC vC u}} (α : R ⟶ S) (β : S ⟶ T) (L : ringedSiteModules.{max uC vC u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (K : ringedSiteModules.{max uC vC u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S)) (N : ringedSiteModules.{max uC vC u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj T)) (hL : ∃ (I : Type uC) (X : I → C), J.CoversTop X ∧ ∀ i : I, Nonempty (L.over (X i) ≅ unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over (X i)))) (hK : ∃ (I : Type uC) (X : I → C), J.CoversTop X ∧ ∀ i : I, Nonempty (K.over (X i) ≅ unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).over (X i)))) (hN : ∃ (I : Type uC) (X : I → C), J.CoversTop X ∧ ∀ i : I, Nonempty (N.over (X i) ≅ unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj T).over (X i)))) (b01 : changeOfRingsOfUniverses α L ≅ K) (b12 : changeOfRingsOfUniverses β K ≅ N) (b02 : changeOfRingsOfUniverses (α ≫ β) L ≅ N) (B01 : ∀ m : ℤ, changeOfRingsOfUniverses α (signedLinePower.{uC, vC, u} L m) ≅ signedLinePower.{uC, vC, u} K m) (B12 : ∀ m : ℤ, changeOfRingsOfUniverses β (signedLinePower.{uC, vC, u} K m) ≅ signedLinePower.{uC, vC, u} N m) (B02 : ∀ m : ℤ, changeOfRingsOfUniverses (α ≫ β) (signedLinePower.{uC, vC, u} L m) ≅ signedLinePower.{uC, vC, u} N m) (h01 : SignedLineComparisonNormalized.{uC, vC, u} α L K b01 B01) (h12 : SignedLineComparisonNormalized.{uC, vC, u} β K N b12 B12) (h02 : SignedLineComparisonNormalized.{uC, vC, u} (α ≫ β) L N b02 B02) (hb : (scalarExtensionTowerIso.{uC, vC, max uC vC u, max uC vC u} α β L).hom ≫ b02.hom = changeOfRingsHomOfUniverses β _ b01.hom ≫ b12.hom) : ∀ m : ℤ, (scalarExtensionTowerIso.{uC, vC, max uC vC u, max uC vC u} α β (signedLinePower.{uC, vC, u} L m)).hom ≫ (B02 m).hom = changeOfRingsHomOfUniverses β _ (B01 m).hom ≫ (B12 m).hom",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Seven theorem clauses state the signed comparisons, evaluation and basis formulas, signed product and scalar square, canonical tower equation and identity case. The tower equation uses the existing scalarExtensionTowerIso directly; its definition-node dependency owns this map, scalarExtensionUnitIso, scalarTensorBinaryIso and scalarExtensionDualMap. No reassociation object is redefined or chosen by existence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69f6c5c3c",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 67b6ac920743. H2 fixed: stmt_deps now cite only definition nodes; the new def-sp-canonical-scalar-extension-maps (existing:true, module ScalarExtensionDualTowerCore, which reaches the other two modules through public imports) owns scalarExtensionUnitIso, scalarTensorBinaryIso, scalarExtensionDualMap and scalarExtensionTowerIso. Its statement is verbatim the scalarExtensionTowerIso signature, its formulas and universes match the live defs and _tmul lemmas, no other def node owns them and there is no cycle. The theorem nodes stay in proof_deps. H4 fixed: the tower associator family A/hA and exists_signedLineTowerAssociator were removed; hb and the all-m conclusion use scalarExtensionTowerIso.{uC,vC,max uC vC u,max uC vC u} directly, with no universe restriction. Diff against the previous delivery shows only these changes; statement, proof and proof_deps match live. Item lean.statement is verbatim; all 11 declarations exist; 7 sorry, no other proofs. The previous clause-by-clause check still holds (signed powers, B normalization, beta IsIso, evaluation and basis formulas, mu, sigma square, tower, identity; edge cases m=0/±1, mixed signs, zero ring, empty cover, non-flat iota). No compile (no file changed). Advisories: signedLineDual_isIso overlaps lem-sp-scalar-extension-dual-local-iso; changeOfRingsOfUniverses and siteSheafTensor* are older helpers that no cited node records."
  }
 }

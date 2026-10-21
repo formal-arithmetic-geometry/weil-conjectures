@@ -22,7 +22,10 @@
   "lem-pur-conormal-graded-algebra",
   "def-asd-compactifiable",
   "def-weil-etale-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-pur-rees-cone-normalization",
+  "def-pur-normal-bundle"
  ],
  "proof": [
   {
@@ -365,5 +368,36 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-a20a6cf51 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps and the statements of all 15 cited nodes. No new nodes. The statement is byte-identical to live, the item is still unsplit live, it was created by the Q58 re-split on 2026-10-21 and is not dropped, and there is no cycle (BFS over 1152 nodes). Source: main-20261015 sk-thm-dnc.proof.md 'Local construction' (lines 13-24), with étale maps of pairs whose square of centres is Cartesian and x_i=t u_i; it matches the item's Cartesian-centre hypothesis. No SGA is used. The base change is an arbitrary morphism of Noetherian schemes, with no flatness used. Accepted tool_uses: smooth permanence, étale Rees chart, Rees associated-graded chart, relative Spec, and the Mathlib-leaf tensor/gluing tools. Checked: Step 3 reassociation (B⊗_P C)⊗_R R'≅B'⊗_{P'}C'; the Step 4 cover, which the geometry node states; Step 8 flat injectivity with image B1[t,I1/t] using I1=IB1; Step 9 gr base change through the general Rees-gr node. Small cases: A^d with the zero section over Z→F_p, d=0, an extra étale component, and non-Cartesian centres, which fail as expected. Fixes, 3 faults: (C4) Steps 2 and 9 obtained étaleness as 'smooth of relative dimension 0' through lem-sbc-smooth-relative-dimension-permanence, but the chart lemma and the statement use def-weil-etale-morphism, which no cited node equates with it; now lem-weil-pbc-etale-ring-base-change (with B'≅P'⊗_P B) and lem-weil-pbc-etale-scheme-base-change. (C1) Step 8 used flatness of B→B1 from étale h without lem-weil-pbc-flat-morphism-affine-criterion, which is now added. (C3) Step 6 applied the centred-coordinate basis to the base-changed chart, which that statement does not cover; added the argument that [x'_j] generate I'/I'^2, E' is locally free of rank d, and a surjective endomorphism of a finite module is bijective (lem-weil-pbc-finite-module-surjective-endomorphism-bijective). proof_deps recomputed and the tool_uses note updated; the corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-section-rees-base-change-etale.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionReesBaseChangeEtale",
+  "declaration": "AlgebraicGeometry.SectionReesBaseChange.base_change",
+  "declarations": [
+   "AlgebraicGeometry.SectionReesBaseChange.conormalMap",
+   "AlgebraicGeometry.SectionReesBaseChange.pairMap",
+   "AlgebraicGeometry.SectionReesBaseChange.zeroAlgebraMap",
+   "AlgebraicGeometry.SectionReesBaseChange.Compatible",
+   "AlgebraicGeometry.SectionReesBaseChange.base_change",
+   "AlgebraicGeometry.SectionReesBaseChange.base_change_geometry",
+   "AlgebraicGeometry.SectionReesBaseChange.etale",
+   "AlgebraicGeometry.SectionReesBaseChange.affine_base_change",
+   "AlgebraicGeometry.SectionReesBaseChange.affine_etale",
+   "AlgebraicGeometry.SectionReesBaseChange.normal_bundle"
+  ],
+  "file": "lean/Sheaf/Paper/SectionReesBaseChangeEtale.lean",
+  "statement": "theorem base_change {V S S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S'] (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (b : S' ⟶ S) : ∃ (s' : S' ⟶ pullback g b) (_ : IsClosedImmersion s') (w : s' ≫ pullback.fst g b = b ≫ s), s' = Scheme.Hom.baseChangeSection g s hs b ∧ IsPullback (pairMap s s' (pullback.fst g b) b w) (s'.ker.deformationSpaceProj ≫ pullback.snd g b) (s.ker.deformationSpaceProj ≫ g) b ∧ Compatible g (pullback.snd g b) s s' (pullback.fst g b) b (pairMap s s' (pullback.fst g b) b w) ∧ IsIso (conormalMap s s' (pullback.fst g b) b w) ∧ ∃ ν : s'.ker.normalCone ⟶ s.ker.normalCone, ν ≫ s.ker.normalConeToDeformationSpace = s'.ker.normalConeToDeformationSpace ≫ pairMap s s' (pullback.fst g b) b w ∧ IsPullback ν (Scheme.Hom.normalConeProj (pullback.snd g b) s') (Scheme.Hom.normalConeProj g s) b",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The six sorry-only theorem clauses jointly state the node: arbitrary base change, its geometry, etale maps of pairs, both affine algebra formulas, and the canonical symmetric-algebra normal-bundle identification. Four helper definitions fix the existing coefficientwise and adjunction-characterized maps; Compatible includes their formulas on every affine restriction. Added only the already-landed statement dependencies owning conormal functoriality and the normalized Rees cone."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a52b949f1",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Mechanical theorem stmt_dep finding: genuine dependency. conormalMap is Classical.choose of the ∃! c of closedImmersion_conormal_functorial, whose module holds only that theorem, and pairMap uses its clause (1); PASS on that point. All node clauses match: arbitrary non-flat base change as IsPullback of the upstream deformationSpaceMap; Compatible (t, augmentation, one fibre, punctured l and zero-fibre ν pinned on all affine charts); IsIso conormal map; N' = N ×_S S'; normal_bundle Sym ≅ gr with ReesConeNormalized; affine pushouts; base-change geometry with compactifiability; étale pair with Cartesian centres giving pullback, Etale, iso ν; affine_etale generalised truthfully. Statement verbatim, only stmt_deps/lean changed, added landed stmt_deps create no cycle, no hollow defs, sorry-only proofs, docstrings ok. Parent FiniteRingSectionDeformation and NoetherianEtaleSectionSpecialization modules are quarantined, so no live duplicate. Advisory: upstream deformation-space/Rees declarations have no owning DAG node. No compile, since no file was changed."
  }
 }

@@ -246,5 +246,38 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-23e6342ea (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, and the statement of every node it cites. The statement and its 11 stmt_deps are unchanged and there are no new nodes. The live and side-live copies are still unsplit, so nothing supersedes it; there is no cycle (the item is not in the closure of its deps) and no SGA citation. Steps 1-2: I_T has the initial index (B_T=(T,g∘t), β_T=(t,id)) and the unique arrow is the second projection. The presheaf F∘Φ_g is a sheaf because Φ_g is a covering-preserving equivalence (lem-weil-proetale-isomorphism-inverse-image (1)); the inverse to sheafification follows from the universal property. So σ is restriction along g:V→U. Step 3: c_A=ε∘G(ρ) with the explicit 00VE counit, which I checked at sites.tex lines 594-607; this gives c_Aσ(b)=b, and lemma (3) gives invertibility. Step 4 uses π_m c_O = c_{A_m}G(π_m) and invertibility from def-weil-inverse-image-pullback-comparison, plus sectionwise limits from def-pur-sheaf-inverse-limit; the completed sheaf is used throughout, not a discrete constant sheaf. Steps 5-6 are elementary semilinearity, chain-map and naturality computations, degreewise for unbounded complexes. Step 7: sections are exact at an algebraically closed k, G is exact on transported completed modules (comparison definition), and the transformation descends by localization-universal-property leaf clause (2). Hypotheses check out: ℓ≠p makes ℓ invertible on s, k is algebraically closed, and nothing assumes g fixes k_0. I accept the three declared tool_uses (two generic sk-def-sf-admissible lemmas and one Mathlib adjunction leaf). The citer lem-weil-frobenius-point-transport-natural uses the item for its clause 1 unchanged. Advisory, not a fault: the statement attributes 'the natural evaluation identification' to the iso lemma, whose statement only asserts that some natural iso exists; step 2 constructs the explicit one."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointAutomorphismRestrictionNatural",
+  "declaration": "AlgebraicGeometry.ProEtale.point_automorphism_restriction_natural",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pointRestrictionScalars",
+   "AlgebraicGeometry.ProEtale.pointRestrictionRing",
+   "AlgebraicGeometry.ProEtale.pointRestrictionCoefficientMap",
+   "AlgebraicGeometry.ProEtale.pointRestrictionCoefficientMapIsIso",
+   "AlgebraicGeometry.ProEtale.pointRestrictionScalarAt",
+   "AlgebraicGeometry.ProEtale.pointRestrictionSections",
+   "AlgebraicGeometry.ProEtale.pointRestrictionInverseImage",
+   "AlgebraicGeometry.ProEtale.pointRestrictionArrow",
+   "AlgebraicGeometry.ProEtale.pointRestrictionRaw",
+   "AlgebraicGeometry.ProEtale.pointRestrictionSectionsAdditive",
+   "AlgebraicGeometry.ProEtale.pointRestrictionScalarDerived",
+   "AlgebraicGeometry.ProEtale.point_automorphism_restriction_natural"
+  ],
+  "file": "lean/Sheaf/Paper/PointAutomorphismRestrictionNatural.lean",
+  "statement": "theorem point_automorphism_restriction_natural (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p) (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g] (a : Option ℕ) : (∀ b : pointRestrictionScalars.{t, u} l E a, (pointRestrictionRing l E (Spec (.of D.k)) a).obj.map (pointRestrictionArrow g).op (pointRestrictionScalarAt l E (Spec (.of D.k)) a (ProEt.mk (𝟙 _)) b) = (inv (pointRestrictionCoefficientMap l E g a)).hom.app (op (ProEt.mk (𝟙 _))) (pointRestrictionScalarAt l E (Spec (.of D.k)) a (ProEt.mk (𝟙 _)) b)) ∧ (∀ (M : SheafOfModules.{max u (t + 1)} (pointRestrictionRing l E (Spec (.of D.k)) a)) (b : pointRestrictionScalars.{t, u} l E a) (x : M.val.obj (op (ProEt.mk (𝟙 _)))), pointRestrictionRaw l E g a M (pointRestrictionScalarAt l E (Spec (.of D.k)) a (ProEt.mk (𝟙 _)) b • x) = @SMul.smul _ (M.val.obj (op ((proEtaleIsoPostcompose g).obj (ProEt.mk (𝟙 _))))) inferInstance ((inv (pointRestrictionCoefficientMap l E g a)).hom.app (op (ProEt.mk (𝟙 _))) (pointRestrictionScalarAt l E (Spec (.of D.k)) a (ProEt.mk (𝟙 _)) b)) (pointRestrictionRaw l E g a M x)) ∧ ∃ σ : pointRestrictionSections l E D.k a ⟶ pointRestrictionInverseImage l E g a ⋙ pointRestrictionSections l E D.k a, (∀ (M : SheafOfModules.{max u (t + 1)} (pointRestrictionRing l E (Spec (.of D.k)) a)) (x : M.val.obj (op (ProEt.mk (𝟙 _)))), σ.app M x = pointRestrictionRaw l E g a M x) ∧ ∃ (F H : DerivedCategory (SheafOfModules.{max u (t + 1)} (pointRestrictionRing l E (Spec (.of D.k)) a)) ⥤ DerivedCategory (ModuleCat.{max u (t + 1)} (pointRestrictionScalars.{t, u} l E a))) (eF : DerivedCategory.Q ⋙ F ≅ (pointRestrictionSections l E D.k a).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (eH : DerivedCategory.Q ⋙ H ≅ Functor.mapHomologicalComplex (pointRestrictionInverseImage l E g a ⋙ pointRestrictionSections l E D.k a) (.up ℤ) ⋙ DerivedCategory.Q), ∃ τ : F ⟶ H, ∀ N : CochainComplex (SheafOfModules.{max u (t + 1)} (pointRestrictionRing l E (Spec (.of D.k)) a)) ℤ, τ.app (DerivedCategory.Q.obj N) ≫ eH.hom.app N = eF.hom.app N ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex σ (.up ℤ)).app N)",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the recorded canonical sectionwise inverse-image model: the distinguished coprojection is identity in its normalized evaluation coordinates. Option ℕ records the two allowed coefficient choices, some n meaning exponent n+1 and none meaning the completed integral sheaf. The derived functors and transformation are specified by their localization factorization and component formula, so no exactness, boundedness, constructibility, completeness or chosen derived map is an added hypothesis. Site and coefficient universes are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d4cf3ae",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Only the item lean record changed vs side-live/live; the item is unsplit there, so nothing supersedes it. statement is verbatim in the file; one sorry (main theorem); report has Worker report + Second reading by Q57. G = isoSectionwiseInverseImage, tied to proEtaleSheafInverseImage by proEtaleIsoInverseImageIdentification, whose uniqueness clause pins the coprojection at (V,(id,id)), so ins = id as the node says. c_Λ = isoSectionwiseConstantMap (unique, fixes constants) / limit lift of G(π_m)≫c_{A_m}, on the real inverse-limit sheaf. Constants: sheafified const, plus integralConstantToCompletionOfUniverses at integral level. Conjuncts 1-2 = σ(b)=c⁻¹(b), σ(bx)=c⁻¹(b)σ(x). ∃σ NatTrans with components pinned to restriction gives Λ-linearity and naturality; mapHomologicalComplex gives chain maps on unbounded complexes. Derived: ∃F,H with Q⋙F≅Γ⋙Q and Q⋙H≅(G⋙Γ)⋙Q (exactness content) and τ:F⟶H pinned by its component equation, so natural for every derived morphism. ℓ≠p kept, k alg closed via FiniteFieldDatum, g any IsIso with no k₀ condition, n≥1 via Option ℕ (some n ↦ n+1), independent universes t,u, no bounded/constructible/complete hypothesis. No hollow or duplicate defs; docstrings carry sources and the blueprint id; no recompile (no file changed). Advisory: unused plain proof-only imports."
  }
 }

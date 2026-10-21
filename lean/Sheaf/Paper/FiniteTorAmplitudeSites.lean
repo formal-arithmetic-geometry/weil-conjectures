@@ -5,6 +5,7 @@ Authors: SHEAF group Q11
 -/
 module
 
+public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories

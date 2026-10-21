@@ -14,7 +14,9 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-inverse-system",
   "def-weil-abstract-derived-category",
-  "def-weil-category-product"
+  "def-weil-category-product",
+  "def-weil-strict-roos-model",
+  "def-sp-strict-tower-arithmetic-restriction-data"
  ],
  "proof": [
   {
@@ -256,5 +258,31 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-727351683 (reviewer sub-agent of L); spot-checked: PASS. I read the whole delivery and wrote no fixes. This head re-delivers f61a9aab, whose mathematics was PASSed; landing then refused it with the systemic 'completed in this project's DAG but not in the live DAG' error (svc.log:84360, 118 such returns machine-wide), which is not a fault of this delivery. Shape: one commit touching only the item and its report, with no new nodes. The item is still unsplit in live and side-live, is not on the dropped list, and has no repair note. The statement is byte-identical to live. stmt_deps adds def-weil-category-product, which is justified because the statement forms the products and product maps. proof_deps equals the union of the step uses. No SGA is cited and there are no tool_uses. A JSON diff against f61a9aab shows two changes: Step 10 now builds the product sheaf of R-modules explicitly (sectionwise product, coordinatewise gluing and R-action, universal property), which is correct; and the split_report wording changed. Steps 1-9 are identical. I recomputed every step. Cone convention: C(f)[-1] gives d(y,x)=(-dy-fx,dx), matching def-weil-abstract-derived-category. The identities fT=Tf_e, b_e f=f_e a_e, Delta r_e=(psi,phi), hf=1-phi and fh=1-psi hold, including the e=1 empty sums. dH+Hd=(fhy,hfx) for H=(0,-hy). Step 7 identifies r_e Delta with (psi_L,phi_L) for L_n=K_{en}, S=T_{ea,eb}; this is not circular. The 00LR kernel/image argument, localization through K(A), naturality and R-linearity are all correct. I also checked the zero-transition and e=1 edge cases. Sources: sites-cohomology.tex:5067 (Tag 0941, Roos context only, honestly attributed) and algebra.tex:17490 (Tag 00LR, proof omitted there and written out here). lem-fix-cofinal-roos-restriction is not a duplicate: it lacks Delta, the homotopies and the inverse identity."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RoosTransitionHomotopy",
+  "declaration": "CategoryTheory.RoosTransition.roos_transition_homotopy",
+  "declarations": [
+   "CategoryTheory.RoosTransition.forward",
+   "CategoryTheory.RoosTransition.telescope",
+   "CategoryTheory.RoosTransition.phi",
+   "CategoryTheory.RoosTransition.psi",
+   "CategoryTheory.RoosTransition.TransitionHomotopy",
+   "CategoryTheory.RoosTransition.roos_transition_homotopy"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RoosTransitionHomotopy.lean",
+  "statement": "theorem roos_transition_homotopy {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J RingCat.{max uC vC r}] [HasSheafify J AddCommGrpCat.{max uC vC r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}] (A : Type (max uC vC r)) [CommRing A] [HasDerivedCategory.{w} (ringedSiteModules.{max uC vC r} ((constantSheaf J RingCat).obj (RingCat.of A)))] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} ((constantSheaf J RingCat).obj (RingCat.of A)))] : TransitionHomotopy.{_, _, w} (ringedSiteModules.{max uC vC r} ((constantSheaf J RingCat).obj (RingCat.of A))) ∧ ∀ (R : Sheaf J RingCat.{max uC vC r}) (_algebra : (constantSheaf J RingCat).obj (RingCat.of A) ⟶ R) (_comm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{w} (ringedSiteModules.{max uC vC r} R)], TransitionHomotopy.{_, _, w} (ringedSiteModules.{max uC vC r} R)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b26a84683",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read node, 10 steps, 7 stmt_dep records, module, report (Worker report + Second reading by Q23 present), StrictRoosModel and StrictTowerArithmeticRestrictionDefs sources. lean.statement verbatim in file. roosχ = shift(-1) cone + braiding gives d(y,x)=(-dy-fx,dx) as in the node. forward/telescope/phi/psi are real defs. Ran no compile because no file was changed; the worker reports a clean scompile. Recomputed in Lean index n=paper n+1 (q_e(n)=e(n+1)-1): fT=Tf_e, b_e f=f_e a_e, Δr_e=(ψ,φ), hf=1-φ, fh=1-ψ, including e=1 empty sum. The res/delta existentials are pinned in every degree via roosχ; H is pinned at all adjacent components to (0,-hy), and Mathlib comm gives dH+Hd=1-Δr_e. QuasiIso both, plus iso in D with hom=Q(res), inv=Q(delta). Naturality for all maps and H. Exact products = HasExactLimitsOfShape (Discrete ℕ). The R clause repeats the predicate in ringedSiteModules R with no exactness. Universes general. No duplicate found in side-live Roos/arithmetic modules or the roos-comparison nodes. Gates: sorry only, docstrings with source and blueprint, statement unchanged, no SGA, no pro-etale substitute. Advisory: the R-clause maps are not stated to agree with the A-clause maps under restriction of scalars; not a gap in substance."
  }
 }
