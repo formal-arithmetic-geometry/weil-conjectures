@@ -12,9 +12,87 @@
   "def-weil-derived-tensor",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the ringed-site results to $\\mathcal C=Y_{\\mathrm{proet}}$ and $R=A_Y$, using a small site in the module-sheaf universe. For an arbitrary $N[0]$, choose a flat-term K-flat resolution $P\\to N[0]$ by [lem-pc-kflat-resolution]. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], the functor $B\\mapsto\\operatorname{Tot}(B\\otimes_R P)$ descends to $F_N:D(R)\\to D(R)$, canonically identified with $K\\mapsto K\\otimes_A^L N$ of [def-weil-derived-tensor], and its integer-shift comparison gives $F_N(K[m])\\cong F_N(K)[m]$. This is the first asserted isomorphism. It is natural in $K$ as a functor shift comparison. It is natural in $N$ as well: the fixed-tensor lemma states that transformations induced by chain maps between flat-term K-flat fixed arguments and by their localization commute with these comparisons; [lem-weil-pbc-site-derived-tensor-descent] identifies that localization with all of $D(R)$. Thus every derived morphism between the degree-zero coefficients, in particular every module-sheaf morphism $N\\to N\\prime$, satisfies the naturality square. The canonical identifications with derived tensor give independence of the chosen replacement. No boundedness or cohomological flatness has been assumed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), specialized to the ringed site (Y_proet,A_Y); Tag 08FZ (definition-tor-amplitude)."
+   }
+  },
+  {
+   "text": "Apply the cohomology functor $\\mathcal H^i$ of [def-weil-derived-cohomology-sheaves] to the isomorphism in Step 1, then apply [lem-sp-derived-cohomology-shift] with the abelian category $\\Mod(A_Y)$, $M=K\\otimes_A^L N$, $k=m$, $a=i$, and $a\\prime=i+m$. The required equation $k+a=a\\prime$ holds by commutativity of integer addition. This gives $\\mathcal H^i((K[m])\\otimes_A^L N)\\cong\\mathcal H^{i+m}(K\\otimes_A^L N)$. Naturality follows by composing the natural comparison in Step 1 with the cohomology-shift isomorphism, which is natural for all objects of the unbounded derived category.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011G (definition-shift-cochain) and 011H (definition-cohomology-shift), applied after the derived tensor comparison of Step 1."
+   }
+  },
+  {
+   "text": "Unfold Tor amplitude using [def-weil-proetale-tor-amplitude]. For each integer $i$, one has $i\\notin[a-m,b-m]$ if and only if $i+m\\notin[a,b]$. If $K$ has amplitude in $[a,b]$, the right-hand cohomology sheaf of Step 2 therefore vanishes for every $N$ and every $i\\notin[a-m,b-m]$, proving the forward implication. Conversely, suppose $K[m]$ has amplitude in $[a-m,b-m]$. Given any $N$ and $j\\notin[a,b]$, put $i=j-m$. Then $i\\notin[a-m,b-m]$ and $i+m=j$, so Step 2 identifies $\\mathcal H^j(K\\otimes_A^L N)$ with zero. This is amplitude in $[a,b]$. Also $a-m\\le b-m$ because $a\\le b$. The argument covers every integer $m$, including negative $m$.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), specialized to the ringed site (Y_proet,A_Y); Tag 08FZ (definition-tor-amplitude)."
+   }
+  },
+  {
+   "text": "Let $e:K\\cong L$. For every $N$, use the functor $F_N$ of Step 1 supplied by [lem-weil-pbc-kflat-fixed-tensor-triangulated]. The maps $F_N(e)$ and $F_N(e^{-1})$ are inverse, because a functor preserves compositions and identities. Applying the cohomology functors of [def-weil-derived-cohomology-sheaves] gives isomorphisms $\\mathcal H^i(K\\otimes_A^L N)\\cong\\mathcal H^i(L\\otimes_A^L N)$ for all $i$. An object is zero if and only if an isomorphic object is zero, by composing its universal maps with the isomorphism and inverse. Hence the vanishing tests in [def-weil-proetale-tor-amplitude] are equivalent, with the same interval $[a,b]$ and all the same test sheaves $N$.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), specialized to the ringed site (Y_proet,A_Y); Tag 08FZ (definition-tor-amplitude)."
+   }
+  },
+  {
+   "text": "For the resolution $P\\to N[0]$ in Step 1, the fixed-tensor comparison of [lem-weil-pbc-kflat-fixed-tensor-triangulated] computes $0\\otimes_A^L N$ by $\\operatorname{Tot}(0\\otimes_R P)$. The formula of [def-pc-tensor-complex-sheaves] gives degree $r$ equal to $\\bigoplus_{p+q=r}0\\otimes_R P^q=0$: a bilinear map out of a zero factor is uniquely zero, so its tensor product is zero, and a coproduct of zero objects is zero. Its differentials are the unique maps between zero objects. Consequently this is the zero complex and represents the zero derived object. By the kernel/image formula in [def-weil-derived-cohomology-sheaves], all its cohomology sheaves vanish. In particular the tests outside $[0,0]$ in [def-weil-proetale-tor-amplitude] vanish for every $N$, giving the last assertion.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), specialized to the ringed site (Y_proet,A_Y); Tag 08FZ (definition-tor-amplitude)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sp-derived-cohomology-shift",
+  "def-weil-proetale-tor-amplitude",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and preceding construction), specialized to the ringed site (Y_proet,A_Y); Tag 08FZ (definition-tor-amplitude)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +128,52 @@
    "results": "Hits: CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, Rep.torIso, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass. ",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not assert the Tor-amplitude predicate for arbitrary ordinary constant-ring module sheaves, its quantified tensor tests, and the stated quantitative interval conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?[Aa]mplitude|HasTorAmplitude|derivedTensor",
+   "results": "No hits. Searched Mathlib/CategoryTheory.",
+   "date": "2026-10-21",
+   "verdict": "no match: these declarations do not state the complete ordinary ringed-site derived tensor and Tor-amplitude assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: these declarations do not state the complete ordinary ringed-site derived tensor and Tor-amplitude assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of sheaves commutes with shifts and Tor amplitude interval translates by the negative shift",
+   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Adjunction.RightAdjointCommShift.iso, DerivedCategory.instAdditiveShiftFunctorInt",
+   "date": "2026-10-21",
+   "verdict": "no match: these declarations do not state the complete ordinary ringed-site derived tensor and Tor-amplitude assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex of ordinary module sheaves is shifted from the interval a b to a minus m b minus m under cohomological shift by m",
+   "results": "CochainComplex.isLE_shift, CochainComplex.isGE_shift, CochainComplex.isStrictlyLE_shift, CochainComplex.isStrictlyGE_shift, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.isKInjective_shift_iff, CochainComplex.instIsKInjectiveObjIntShiftFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: these declarations do not state the complete ordinary ringed-site derived tensor and Tor-amplitude assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of derived tensor with a module after shifting a complex by m is the original tensor cohomology in degree i plus m; zero has Tor amplitude zero",
+   "results": "DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, CategoryTheory.isZero_Tor_succ_of_projective, CochainComplex.instIsKProjectiveObjIntShiftFunctor, CategoryTheory.isZero_Tor'_succ_of_projective, CochainComplex.isLE_shift, CochainComplex.HomComplex.Cocycle.rightUnshift, CochainComplex.homologyFunctor_shift",
+   "date": "2026-10-21",
+   "verdict": "no match: these declarations do not state the complete ordinary ringed-site derived tensor and Tor-amplitude assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "instShiftSequenceHomologyFunctor|isLE_shift|isGE_shift|instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "results": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean Searched Mathlib/Algebra/Homology.",
+   "date": "2026-10-21",
+   "verdict": "no match: these declarations do not state the complete ordinary ringed-site derived tensor and Tor-amplitude assertions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-ctf-triangulated",
@@ -70,9 +190,41 @@
     "lem-weil-integral-ctf-triangulated"
    ]
   },
-  "same_as": [
-   "det-def-sfb-constructible-tor-amplitude"
-  ],
+  "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-proetale-tor-interval-shift",
+  "worker": "stage1",
+  "summary": "Proved all quantitative interval, naturality, isomorphism and zero clauses using the existing ordinary ringed-site K-flat replacement and fixed-tensor descent statements and the existing unbounded cohomology-shift leaf. No new nodes. Kept the statement unchanged and removed an inaccurate same_as to the condensed-coefficient constructibility definition. Checked both interval implications and all cited statement excerpts.",
+  "blueprint": "The finite and integral paragraphs of def-weil-finite-tor-amplitude in main-20261015: Tor-amplitude tests, and one common interval for all integral reductions. This generic lemma supplies the shift, isomorphism and zero calculations used by lem-weil-integral-ctf-triangulated, with shifts translating that common interval by minus m.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions on any ringed site; supplies a resolution of each test coefficient N, with no boundedness hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic ringed-site exact tensor descent and its natural shift comparisons; the unit has no ordinary pro-etale result giving these comparisons for arbitrary coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site K-flat localization equivalence ensures that the fixed-argument shift naturality covers every derived map of coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-10c644db6",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-10c644db6 (reviewer sub-agent of L); spot-checked: First split; the live side node is still unsplit with no repair note, so the 10-21 re-split rules do not apply. Neither the item nor any cited node is dropped or retired. No new nodes: five steps assemble existing generic ringed-site statements. Step 1: lem-pc-kflat-resolution gives a flat-term K-flat resolution P->N[0]. lem-weil-pbc-kflat-fixed-tensor-triangulated gives the exact functor -(x)^L QP, its shift comparison, and naturality for fixed-argument chain maps and their localizations. lem-weil-pbc-site-derived-tensor-descent (W^-1 P_R equivalent to D(R)) extends naturality to every map N->N'; R=A_Y is commutative and the site small. Step 2: lem-sp-derived-cohomology-shift with k=m, a=i, a'=i+m holds for unbounded M. Step 3: both directions written out (i not in [a-m,b-m] iff i+m not in [a,b]; converse via i=j-m), negative m included. Step 4: functors preserve isos and zero objects are closed under iso. Step 5: Tot(0(x)P)=0 by def-pc-tensor-complex-sheaves. Sources checked: Stacks 06YU (sites-cohomology l.3300), 08FZ (l.12377), 011G/011H (homology l.3427/3462). Small cases: A_Y[0] has amplitude [0,0] and A_Y[0][1] has [-1,-1]; m=0 and m=-1, a=b, A=0 and Y empty are fine. Removing same_as det-def-sfb-constructible-tor-amplitude is correct (condensed Lambda_X setting). Overlaps: lem-weil-finite-ctf-triangulated has only the forward implication and only for A=O_E/varpi^n, so it is an overlap, not a duplicate. Live Lean ProEtale.DerivedCategory.torAmplitudeIn.shift (FiniteCoefficient/Derived/Shift.lean:99) is forward-only in an abstract coefficient category, so not B10 (stage-2 hint). Advisory: def-weil-derived-tensor resolves the first argument while the fixed-tensor/descent tensor is Tot(P(x)Q); matching them is the standard one-line K-flat quasi-iso, and the DAG already uses this identification. I accept the tool_uses of lem-pc-kflat-resolution, lem-weil-pbc-kflat-fixed-tensor-triangulated and lem-weil-pbc-site-derived-tensor-descent (generic black boxes; unit sk-def-sf-operations has no ordinary tensor-shift node). The only citer of the item is lem-weil-integral-ctf-triangulated, so there is no cycle. No SGA used."
  }
 }
