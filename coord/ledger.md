@@ -21984,3 +21984,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:40 L: returned deliver/N6/lem-trf-counit-realization-substitution (reviewer RETURN: L: independent stage-2 immutable head 77cf1cdafe09: Item module correct clause by clause (Letter.r = b then realized O(e)
 - 09:43 L: merged deliver/Q07/lem-pod-pullback-identities-scalar-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 09:44 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A6/A7/B10/G4: superseded by the live Lean closure; this is the 5th push. Earlier heads: 34c7d1f PASS refused at landing;)
+- 09:44 L: returned deliver/Q13/lem-asd-affine-roots-representability (reviewer RETURN: A6/A7/B10/G4, superseded (fifth push). Earlier pushes: 47ba9ce8 PASSed, then the landing refused it (ledger l.20800); 57)
