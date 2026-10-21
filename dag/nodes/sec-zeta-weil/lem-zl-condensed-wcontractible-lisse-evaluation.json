@@ -27,140 +27,50 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal O=\\Lambda_T$ and $A=A_T$. For either of the two allowed kinds of $T$, [lem-zl-contractible-derived-sections-tensor] gives an exact, colimit-preserving module evaluation and its termwise unbounded derived functor $G=R\\Gamma(T,-)$; in particular $G$ is strong symmetric monoidal. Thus its application to evaluation and coevaluation maps preserves both triangle identities. This uses the derived tensor comparison, not a claim that scalar realization is t-exact.",
+   "text": "Extract the current restored canonical data verbatim in their shared model module. Obtain the sectionwise module Grothendieck property and the small derived localization needed by the normalized contractible evaluation theorem.",
    "uses": [
-    "lem-zl-contractible-derived-sections-tensor"
+    "def-zl-condensed-lisse-evaluation-model",
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.1(1), coherent contractible evaluation"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the global-sections geometric morphism to the one-point topos, equipped with the constant-section map $\\underline A\\to\\mathcal O$. By [lem-weil-pbc-ringed-topoi-module-adjunction], $E(M)=\\mathcal O\\otimes_{\\underline A}\\underline M$ is left adjoint to $\\Gamma(T,-)$ on modules. Its total left derived functor exists and is computed on K-flat complexes with flat terms by [lem-weil-pbc-ringed-topoi-derived-pullback]. It is exactly $F_T$: the constant realization is termwise exact by [def-sfb-site-derived-constant-module-functor]. Apply [lem-sc-derived-adjunction-from-underived], with the exact right functor of step 1, to obtain $F_T\\dashv G$ with the derived underived unit and counit. The derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and $F_T(A)=\\mathcal O$ give its strong symmetric monoidal structure. As a derived pullback $F_T$ is exact for distinguished triangles.",
+   "text": "Specialize normalized contractible evaluation to both allowed bases. Apply the proved abstract perfect/lisse equivalence, including the actual G inverse comparison. This proves each Evaluation.Statement.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "def-sfb-site-derived-constant-module-functor",
-    "lem-sc-derived-adjunction-from-underived",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-contractible-lisse-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Equations (3.1)–(3.2), Remark 3.2 and Lemma 4.1(1)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a free $A$-module $A^{(I)}$, the unit $A^{(I)}\\to\\Gamma(T,E(A^{(I)}))$ is the identity after identifying both sides with $A^{(I)}$: $E(A)=\\mathcal O$ and both functors preserve coproducts. For an arbitrary module take a presentation $A^{(J)}\\to A^{(I)}\\to M\\to0$. Since $E$ preserves cokernels as a left adjoint and $\\Gamma(T,-)$ is exact and preserves coproducts by [lem-zl-contractible-derived-sections-tensor], the same unit is an isomorphism for $M$. This is a natural comparison, as it is the adjunction unit, independent of the presentation.",
+   "text": "Construct continuity, braidedness and exactness for the fixed component inverse image. Supply these instances to the coefficient and scalar compatibility lemma and assemble componentClause.",
    "uses": [
-    "lem-zl-contractible-derived-sections-tensor"
+    "lem-zl-condensed-component-inverse-image",
+    "lem-zl-condensed-component-pullback-compatibility"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Equation (3.2) at the terminal object; ordinary free-presentation calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "For arbitrary $Q\\in D(A)$ choose a K-flat complex $P$ with flat terms representing it by [lem-pc-kflat-resolution], applied on the one-object site. The comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] represents $F_T(Q)$ by $E(P)$. Termwise evaluation computes $G$ by step 1. Step 3 in each degree gives the chain isomorphism $P\\to\\Gamma(T,E(P))$; its compatibility with the differential is naturality of the unit. By the derived-adjunction normalization in step 2 this represents $Q\\to GF_T(Q)$, so the derived unit is invertible. Consequently the adjunction bijection $\\operatorname{Hom}(F_TQ,F_TQ')=\\operatorname{Hom}(Q,GF_TQ')$ identifies the map induced by $F_T$ with composition by an invertible unit. This proves full faithfulness on all of $D(A)$.",
+   "text": "Apply scalar associativity on the profinite slice. Combine these clauses by conjunction introduction and universal introduction; the original quantified statement is unchanged.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-zl-condensed-profinite-scalar-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Equation (3.2), Remark 3.2 and Lemma 4.1(1), unbounded unit comparison"
-   }
-  },
-  {
-   "text": "For dualizable $M,N\\in D(T,\\Lambda)$, write $M^\\vee$ for a chosen dual. The two triangle identities give mutually inverse transpositions\n$$\\operatorname{Hom}(M,N)\\cong\\operatorname{Hom}(\\mathcal O,M^\\vee\\otimes^L_{\\mathcal O}N).$$\nExplicitly send $f$ to coevaluation followed by $1\\otimes f$ (using symmetry to order the factors); the inverse tensors with $M$ and evaluates its $M^\\vee$ factor. Applying $G$, the unit and tensor isomorphisms of step 1 take these same formulas to those for $(GM,G(M^\\vee))$. The adjunction of step 2 at $A$ identifies $\\operatorname{Hom}(\\mathcal O,Z)$ with $\\operatorname{Hom}(A,GZ)$. Therefore these transpositions give a bijection $\\operatorname{Hom}(M,N)\\cong\\operatorname{Hom}(GM,GN)$, and the explicit formulas show that it is the map induced by $G$. Thus $G$ is fully faithful on dualizable objects.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.1(2), the duality transposition after applying symmetric monoidal sections"
-   }
-  },
-  {
-   "text": "By [lem-zl-ring-derived-dualizable-perfect], the dualizable objects of $D(A)$ are exactly $\\operatorname{Perf}(A)$. The two strong symmetric monoidal functors therefore restrict to $F_T:\\operatorname{Perf}(A)\\rightleftarrows D_{\\mathrm{lis}}(T,\\Lambda):G$. The unit is invertible by step 4. For dualizable $M$, the triangle identity gives $G(\\epsilon_M)\\eta_{GM}=1$, hence $G(\\epsilon_M)=\\eta_{GM}^{-1}$. Both $F_TGM$ and $M$ are dualizable, and full faithfulness of $G$ from step 5 reflects isomorphisms (lift the inverse and use faithfulness on both composites). Thus $\\epsilon_M$ is invertible. The restricted unit and counit prove the claimed equivalence with inverse $R\\Gamma(T,-)$.",
-   "uses": [
-    "lem-zl-ring-derived-dualizable-perfect"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.1(2); scalar dualizability is Stacks Tag 0FNS, lemma-have-dual-derived"
-   }
-  },
-  {
-   "text": "Now let $T$ be w-contractible affine and put $S=\\pi_0(T)$. By [sk-def-pe-wlocal], $S$ is extremally disconnected. Apply [lem-zl-component-relative-profinite-site] to obtain the specified component site morphism $\\pi_T$ and $p_T\\cong q_S\\pi_T$. Inverse images of this factorization identify $\\pi_T^{-1}\\Lambda_S$ with $\\Lambda_T$, preserving the constant sections. By [lem-trf-geometric-inverse-image-exact] this identified-coefficient module inverse image is exact. Its termwise derived functor $\\pi_T^*$ is strong symmetric monoidal by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Finally [lem-weil-pbc-condensed-point-basis-evaluation], applied with $X=T,U=T,F=\\Lambda$, gives the natural ring isomorphism $A_T\\cong\\Gamma(S,\\Lambda)$. The geometric w-contractibility hypothesis here implies the weak contractibility required in that evaluation statement by the covering-refinement theorem [det-pe-wcb-clopen-partition]: local lifts on a finite clopen partition glue to a section.",
-   "uses": [
-    "sk-def-pe-wlocal",
-    "lem-zl-component-relative-profinite-site",
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-condensed-point-basis-evaluation",
-    "det-pe-wcb-clopen-partition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Equation (4.1), Proposition 4.3(3) and coefficient evaluation; clopen refinement is Bhatt–Scholze Lemma 2.4.9"
-   }
-  },
-  {
-   "text": "Identify the two scalar rings by the canonical isomorphism of step 7 and call the result $A$. Inverse image preserves constant module sheaves, by composition of the constant geometric inverse image with $\\pi_T^{-1}$. For a K-flat, flat-term representative $P$ over $A$, [lem-weil-pbc-ringed-pullback-preserves-kflat] computes both scalar realizations after this pullback. The coefficient identification and the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give naturally\n$$\\pi_T^* F_S(P)\\cong\\pi_T^*(\\Lambda_S\\otimes^L_{\\underline A}\\underline P)\\cong\\Lambda_T\\otimes^L_{\\underline A}\\underline P=F_T(P).$$\nThe comparison is induced by the identical constant sections and the map $p_T\\cong q_S\\pi_T$; its representative maps are natural in chain maps and invert quasi-isomorphisms. They descend naturally on $D(A)$ by [lem-weil-pbc-site-derived-tensor-descent]. On perfect objects the two horizontal scalar functors are equivalences by step 6 for $S$ and $T$. Therefore this commuting square identifies $\\pi_T^*$ on dualizable objects with the identity equivalence on $\\operatorname{Perf}(A)$; it is the claimed exact symmetric monoidal equivalence, with $\\pi_T^*\\Lambda_S\\cong\\Lambda_T$.",
-   "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Commutative square in the proof of Proposition 4.3(3), and Remark 3.2"
-   }
-  },
-  {
-   "text": "For the final scalar formula let $R=\\Gamma(*,\\Lambda)$ and choose a K-flat, flat-term $R$-complex $P$ representing the given object by [lem-pc-kflat-resolution]. The ringed pullback result [lem-weil-pbc-ringed-pullback-preserves-kflat], first on the point site along $R\\to A_T$ and then for the constant-section morphisms, says that $A_T\\otimes_R P$ and the corresponding constant sheaf complexes are valid K-flat models. Hence the comparison in question is represented by the chain isomorphism\n$$\\Lambda_T\\otimes_{\\underline {A_T}}\\underline{(A_T\\otimes_R P)}\\longrightarrow\\Lambda_T\\otimes_{\\underline R}\\underline P,\\qquad b\\otimes(a\\otimes p)\\longmapsto ba\\otimes p.$$\nIts inverse sends $b\\otimes p$ to $b\\otimes(1\\otimes p)$; both are balanced, commute with $1\\otimes d_P$, and commute with every map of representatives. Constants commute with the first scalar extension by [lem-sfb-constant-realization-derived-scalar-extension]. Localization of these K-flat models by [lem-weil-pbc-site-derived-tensor-descent] proves the natural isomorphism $F_T(A_T\\otimes_R^L P)\\cong\\Lambda_T\\otimes^L_{\\underline R}\\underline P$ for all $P\\in D(R)$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-sfb-constant-realization-derived-scalar-extension",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Remark 3.2 and equations (3.1)–(3.2), associativity of scalar realization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "prop-pur-kinjective-resolutions-exist",
   "lem-zl-contractible-derived-sections-tensor",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "def-sfb-site-derived-constant-module-functor",
-  "lem-sc-derived-adjunction-from-underived",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-zl-ring-derived-dualizable-perfect",
-  "sk-def-pe-wlocal",
-  "lem-zl-component-relative-profinite-site",
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-weil-pbc-condensed-point-basis-evaluation",
-  "det-pe-wcb-clopen-partition",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-sfb-constant-realization-derived-scalar-extension"
+  "lem-zl-contractible-lisse-evaluation",
+  "lem-zl-condensed-component-inverse-image",
+  "lem-zl-condensed-component-pullback-compatibility",
+  "lem-zl-condensed-profinite-scalar-compatibility"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Section 3 (3.1)–(3.2), Remark 3.2; Lemma 4.1(1)–(2), construction (4.1), proof of Proposition 4.3(3)"
+  "place": "Lemma 4.1(1)-(2), construction (4.1), Proposition 4.3(3), Remark 3.2; S1 implements the duality/restricted-adjunction argument and separates the normalized realization and comparison results."
  },
  "mathlib_searches": [
   {
@@ -333,38 +243,8 @@
   "date": "2026-10-18",
   "existing": false,
   "file": "lean/Sheaf/AlgebraicGeometry/CondensedWContractibleLisseEvaluation.lean",
-  "note": "Return repair: lem-zl-component-relative-profinite-site is a statement dependency because componentTests selects its universally characterized functor and affineComponentSpace is its declaration. Derived change of rings is cited through def-zl-derived-change-of-rings-model. Ordinary module scalar extension is cited through def-zl-ring-derived-scalar-extension, which records its published owner.",
+  "note": "Return repair: lem-zl-component-relative-profinite-site is a statement dependency because componentTests selects its universally characterized functor and affineComponentSpace is its declaration. Derived change of rings is cited through def-zl-derived-change-of-rings-model. Ordinary module scalar extension is cited through def-zl-ring-derived-scalar-extension, which records its published owner. S1 reapplies the reviewed proof to the current restored theorem with unchanged signature. Its data declarations move verbatim to def-zl-condensed-lisse-evaluation-model, publicly re-exported here to avoid an import cycle in the separated proof lemmas.",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.ringSheaf",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.D",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.A",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.scalarMap",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.constantHasDerived",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sectionHasDerived",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.extensionModel",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.F",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sections",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sectionsAdditive",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.G",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.lisse",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.perfect",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.strongSymmetric",
-   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.Statement",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficient",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficientMon",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficientComm",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteSectionRingIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarMap",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarRealization",
-   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarClause",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentTests",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentInverse",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentModules",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentModulesAdditive",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentDerived",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentSymmetric",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentComparisons",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentClause",
    "AlgebraicGeometry.ProEtale.CondensedRing.condensed_wcontractible_lisse_evaluation"
   ]
  },
@@ -376,5 +256,15 @@
   "result": "pass",
   "note": "Re-delivery after 07f043deb8be RETURN; Lean byte-identical, only records/report changed: lem-zl-component-relative-profinite-site restored to stmt_deps, false lem-pur claim corrected, def-zl-ring-derived-scalar-extension now cites its owner lem-sfb-constant-realization-derived-scalar-extension. Mechanical theorem-stmt_dep finding: PASS on this point, since componentTests := Classical.choose (component_relative_profinite_site T) (lines 229-231) is the theorem-constructed test functor (characterized by its ∃! mapping property) that underlies componentInverse/Modules/Derived/componentClause. Re-checked all hypotheses and conclusion clauses against the node (both bases, canonical A_T/F/G/perfect/lisse, component pullback, α/β coefficient compatibility, A_T≅Γ(S,Λ), both squares, final scalar formula, profinite clause), edge cases, universes, docstrings with nine proof steps, single sorry, lean.statement verbatim, all 31 declarations present, report sections present. nt_compile --json on the local side overlay with all three modules together: exit 0, no errors or warnings (item 6.3 s)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
 }

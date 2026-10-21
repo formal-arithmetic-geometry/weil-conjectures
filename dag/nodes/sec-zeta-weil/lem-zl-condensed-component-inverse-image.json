@@ -1,0 +1,116 @@
+{
+ "id": "lem-zl-condensed-component-inverse-image",
+ "kind": "statement",
+ "title": "Exact symmetric monoidal component inverse image",
+ "statement": "For an affine scheme T [def-pc-scheme], the fixed component test functor and Lan/sheafification inverse image [def-zl-condensed-lisse-evaluation-model] are continuous and exact on abelian sheaves. The actual inverse image has a strong braided structure for the usual sheaf tensors; no w-contractibility hypothesis is required.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), the induced morphism of sites and its inverse image"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof": [
+  {
+   "text": "The relative test theorem presents direct image as precomposition and gives preservation of finite limits. Sheaf preservation along the displayed natural isomorphism proves continuity.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The profinite slice has finite limits. Thus the test functor is representably flat. Its opposite Kan extension and sheafification preserve finite limits. The explicit constructed adjunction gives preservation of colimits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Filtered Kan extension and tensor cocontinuity make the canonical oplax tensor comparisons invertible. The right adjoint is lax braided, so transposition through the monoidal adjunction proves braidedness of its strong monoidal left adjoint.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-relative-profinite-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), the induced morphism of sites and its inverse image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact strong monoidal right adjoint with fully faithful left adjoint gives an equivalence on dualizable objects",
+   "results": "ExactPairing.ofFaithful, ExactPairing.ofFullyFaithful, tensorRightHomEquiv, tensorRightAdjunction; none constructs this restricted equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizable objects are equivalent under a monoidal adjunction with invertible unit if both adjoints are strong monoidal",
+   "results": "hasRightDualOfEquivalence, leftDualIso, rightDualIso, hasLeftDualOfEquivalence, rigidCategoryOfEquivalence; these presuppose an equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*(adjunction|Adjunction)|(adjunction|Adjunction).*dualiz|profinite.*(scalar|realization)|constant.*derived.*(sections|evaluation)",
+   "results": "rg over Mathlib: no matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Construction (4.1), the induced morphism of sites and its inverse image",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedComponentInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_component_inverse_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedComponentInverseImage.lean",
+  "statement": "theorem condensed_component_inverse_image (T : Scheme.{u}) [IsAffine T] : ∃ (_ : (componentTests T).IsContinuous ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) (Scheme.ProEt.topology T)), Nonempty (componentInverse T).Braided ∧ PreservesFiniteLimits (componentInverse T) ∧ PreservesFiniteColimits (componentInverse T)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
+}

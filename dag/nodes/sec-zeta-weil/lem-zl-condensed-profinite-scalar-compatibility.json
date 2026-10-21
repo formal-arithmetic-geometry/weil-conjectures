@@ -1,0 +1,124 @@
+{
+ "id": "lem-zl-condensed-profinite-scalar-compatibility",
+ "kind": "statement",
+ "title": "Scalar associativity on the profinite slice",
+ "statement": "For every commutative condensed ring Lambda [sk-def-sfb-condensed-ring] and every profinite S, the fixed profiniteScalarRealization [def-zl-condensed-lisse-evaluation-model] is naturally isomorphic to moduleDerivedExtension along the actual profiniteScalarMap followed by Evaluation.F on the slice over S. No extremal disconnectedness assumption is imposed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Equations (3.1)-(3.2) and Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "Restriction to the slice preserves constants. Its monoidal restriction comparison identifies the point coefficient map with the terminal scalar counit after the actual scalar map R to A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a flat-term K-flat representative. Constants commute with scalar extension. Pullback preserves K-flatness, and the balanced tensor maps b tensor (a tensor p) to ba tensor p and b tensor p to b tensor (1 tensor p) are inverse natural chain maps.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor descent localizes these comparisons to every unbounded complex. On the empty slice A is the zero ring and both sides are zero, so no nonempty hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Equations (3.1)-(3.2) and Remark 3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Condensed scalar realization on a profinite slice agrees with derived extension to the section ring followed by coefficient realization",
+   "results": "profiniteToCondensed, Condensed.profiniteSolidCounit, Profinite.toCondensed, Condensed.ofSheafProfinite; no scalar realization comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar realization for a condensed ring restricted to a profinite slice factors through extension of scalars to the ring of sections",
+   "results": "Condensed.profiniteSolid, profiniteSolidCounit, profiniteFree, profiniteSolidification, LightCondensed.ihomPoints; no scalar derived comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*(adjunction|Adjunction)|(adjunction|Adjunction).*dualiz|profinite.*(scalar|realization)|constant.*derived.*(sections|evaluation)",
+   "results": "rg over Mathlib: no matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Equations (3.1)-(3.2) and Remark 3.2",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedProfiniteScalarCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_profinite_scalar_compatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedProfiniteScalarCompatibility.lean",
+  "statement": "theorem condensed_profinite_scalar_compatibility (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (S : Profinite.{u}) : profiniteScalarClause Λ.X S",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
+}

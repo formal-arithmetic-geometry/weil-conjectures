@@ -1,0 +1,130 @@
+{
+ "id": "lem-zl-contractible-lisse-evaluation",
+ "kind": "statement",
+ "title": "Perfect/lisse equivalence under contractible evaluation",
+ "statement": "For J,O,U and the fixed canonical F,G [def-zl-condensed-lisse-evaluation-model], assume the small sectionwise derived category and normalized contractible evaluation data [lem-zl-contractible-derived-sections-tensor]. Then F is fully faithful, triangulated, and strong symmetric monoidal, and it identifies perfect scalar complexes with lisse O-complexes. The inverse restriction is the actual G, with both inclusion comparison isomorphisms.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1)-(2), the duality argument in the proof of (2)"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Obtain F left adjoint to G, invertible unit, braided F and monoidal G. Full faithfulness follows from the invertible unit.",
+   "uses": [
+    "lem-zl-contractible-realization-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact constant functor, universal derived extension and exact coefficient equivalence make their composite triangulated.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "def-zl-derived-change-of-rings-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For dualizable X, transpose Hom(X,Y) to Hom(1,Y tensor X-dual). The monoidal functor transports the exact pairing, so the two transpositions intertwine its map on morphisms. Apply the adjunction at the unit, transported through F(1) isomorphic to 1, to prove G induces a bijection on these Hom sets.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Convert the recorded evaluation/coevaluation criterion for perfect ring complexes into IsDualizable. Both monoidal functors preserve duals. Restrict the adjunction to perfect and lisse full subcategories; both restricted functors are fully faithful and hence give an equivalence, with literal inclusion squares.",
+   "uses": [
+    "lem-zl-ring-derived-dualizable-perfect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-contractible-realization-adjunction",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-derived-change-of-rings-model",
+  "lem-zl-ring-derived-dualizable-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1)-(2), the duality argument in the proof of (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact strong monoidal right adjoint with fully faithful left adjoint gives an equivalence on dualizable objects",
+   "results": "ExactPairing.ofFaithful, ExactPairing.ofFullyFaithful, tensorRightHomEquiv, tensorRightAdjunction; none constructs this restricted equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizable objects are equivalent under a monoidal adjunction with invertible unit if both adjoints are strong monoidal",
+   "results": "hasRightDualOfEquivalence, leftDualIso, rightDualIso, hasLeftDualOfEquivalence, rigidCategoryOfEquivalence; these presuppose an equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*(adjunction|Adjunction)|(adjunction|Adjunction).*dualiz|profinite.*(scalar|realization)|constant.*derived.*(sections|evaluation)",
+   "results": "rg over Mathlib: no matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Lemma 4.1(1)-(2), the duality argument in the proof of (2)",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContractibleLisseEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.contractible_lisse_evaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContractibleLisseEvaluation.lean",
+  "statement": "theorem contractible_lisse_evaluation {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal] (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O] (U : C) (hU : IsTerminal U) [HasDerivedCategory.{u + 1} (SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Evaluation.ringSheaf J O)))] (heval : ContractibleDerivedSectionsTensor.{u + 1, u, 0} J (Evaluation.ringSheaf J O) (op U)) : Evaluation.Statement J O U hU",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
+}

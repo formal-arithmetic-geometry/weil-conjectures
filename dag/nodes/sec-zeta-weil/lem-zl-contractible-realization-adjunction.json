@@ -1,0 +1,136 @@
+{
+ "id": "lem-zl-contractible-realization-adjunction",
+ "kind": "statement",
+ "title": "The contractible scalar realization adjunction",
+ "statement": "Let J be an essentially small site with C in Type(u+1), Hom in Type u, and let O be a commutative abelian-sheaf ring object. Let U be terminal. Use the actual functors F and G of [def-zl-condensed-lisse-evaluation-model] and assume the small sectionwise derived category exists. If terminal evaluation has the exact cocontinuous, representative-normalized derived tensor data [lem-zl-contractible-derived-sections-tensor], then there is an adjunction F left adjoint to G with invertible unit; F is strong symmetric monoidal for the ordinary Koszul braidings and G is strong monoidal.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Transport exact cocontinuous sections through the section-module equivalence. The constant-section counit defines the ringed-topos realization/sections adjunction.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit is identity on a rank-one free module. Coproduct preservation extends this to all free modules; a free presentation and exact sections prove it for every module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Derive using flat-term K-flat resolutions. Uniqueness of universal derived pairs identifies the chosen F and G and the derived unit with the degreewise ordinary unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Canonical derived tensor pullback gives the strong symmetric structure on F. Transport the normalized monoidal evaluation data to G, using localization uniqueness also across localization universes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-zl-contractible-derived-sections-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant realization followed by derived extension of coefficients is left adjoint to derived global sections of module sheaves",
+   "results": "constantSheafΓAdj, constantSheafAdj, SheafOfModules.PullbackConstruction.adjunction; the fixed derived composite and unit comparison are not stated.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant realization derived tensor with the coefficient ring is fully faithful on a ringed site when sections are exact and preserve colimits",
+   "results": "CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, SheafOfModules.fullyFaithfulForget; no general ringed-site derived comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*(adjunction|Adjunction)|(adjunction|Adjunction).*dualiz|profinite.*(scalar|realization)|constant.*derived.*(sections|evaluation)",
+   "results": "rg over Mathlib: no matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContractibleEvaluationAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.contractible_realization_adjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContractibleEvaluationAdjunction.lean",
+  "statement": "theorem contractible_realization_adjunction {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal] (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O] (U : C) (hU : IsTerminal U) [HasDerivedCategory.{u + 1} (SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (ringSheaf J O)))] (heval : ContractibleDerivedSectionsTensor.{u + 1, u, 0} J (ringSheaf J O) (op U)) : ∃ adj : F J O U hU ⊣ G J O U, IsIso adj.unit ∧ strongSymmetric J O U hU ∧ Nonempty (G J O U).Monoidal",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
+}

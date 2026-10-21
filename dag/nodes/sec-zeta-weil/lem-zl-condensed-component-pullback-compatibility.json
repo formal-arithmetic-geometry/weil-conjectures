@@ -1,0 +1,150 @@
+{
+ "id": "lem-zl-condensed-component-pullback-compatibility",
+ "kind": "statement",
+ "title": "Component pullback coefficient and scalar comparison squares",
+ "statement": "Let Lambda be a commutative condensed ring [sk-def-sfb-condensed-ring] and T a w-contractible affine scheme [sk-def-pe-wlocal]. For the fixed relative test inverse image [def-zl-condensed-lisse-evaluation-model], assume continuity, braidedness and preservation of finite limits and colimits. Then there is a ring-object coefficient isomorphism alpha and a monoidal factorization beta from restriction to pi_0(T) followed by component inverse image to the actual point inverse image, with alpha induced by beta at Lambda. The corresponding componentComparisons hold: triangulated strong symmetric component pullback preserves the unit, induces the lisse equivalence, and carries the actual section-ring realization and both point-scalar realizations to one another by the displayed natural isomorphisms.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-pe-wlocal"
+ ],
+ "proof": [
+  {
+   "text": "Use the relative-site factorization and take its adjunction mate on abelian sheaves. Its uniqueness gives monoidal beta and its value at Lambda gives alpha.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-zl-condensed-component-inverse-image",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Termwise coefficient module pullback is exact. Canonical tensor pullback gives derived strong symmetry and the unit comparison. Clopen refinement and point-basis evaluation identify the two section rings with Lambda(pi_0 T), including constants.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-pe-wcb-clopen-partition",
+    "lem-weil-pbc-condensed-point-basis-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On flat-term K-flat complexes compare pulled-back scalar realizations by the ordinary balanced tensor maps. K-flat preservation and tensor descent give the natural realization square on the whole unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The component space is extremally disconnected. Apply contractible evaluation on both sites and identify the component functor with scalar transport between perfect categories. This gives the lisse equivalence. Compose the point factorization with the scalar square for the final scalar formula.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-contractible-lisse-evaluation",
+    "lem-zl-condensed-profinite-scalar-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-relative-profinite-site",
+  "lem-zl-condensed-component-inverse-image",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-pe-wcb-clopen-partition",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "sk-def-pe-wlocal",
+  "lem-zl-contractible-derived-sections-tensor",
+  "lem-zl-contractible-lisse-evaluation",
+  "lem-zl-condensed-profinite-scalar-compatibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Connected components pullback induces an equivalence on dualizable condensed coefficient sheaves on a weakly contractible affine scheme",
+   "results": "SheafOfModules.pullbackComp, pullbackIso, pullbackObjFreeIso, Scheme.Modules.pullbackPushforwardAdjunction; no condensed component equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The component space inverse image identifies lisse condensed module sheaves with perfect complexes over global sections on a weakly contractible affine scheme",
+   "results": "LightCondMod, CondensedMod, CondensedMod.LocallyConstant.functor, LocallyConstant.functorIsoDiscreteComponents; no such derived comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*(adjunction|Adjunction)|(adjunction|Adjunction).*dualiz|profinite.*(scalar|realization)|constant.*derived.*(sections|evaluation)",
+   "results": "rg over Mathlib: no matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Construction (4.1), Proposition 4.3(3), Remark 3.2",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedComponentPullbackCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_component_pullback_compatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedComponentPullbackCompatibility.lean",
+  "statement": "theorem condensed_component_pullback_compatibility (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)] [(componentTests T).IsContinuous ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) (Scheme.ProEt.topology T)] [(componentInverse T).Braided] [PreservesFiniteLimits (componentInverse T)] [PreservesFiniteColimits (componentInverse T)] : ∃ α : (componentInverse T).mapMon.obj (Mon.mk (profiniteCoefficient Λ.X (affineComponentSpace T))) ≅ Mon.mk (condensedRingObj Λ.X T), (∃ β : (coherentTopology Profinite.{u}).overPullback Ab.{u + 1} (affineComponentSpace T) ⋙ componentInverse T ≅ upperStarFromPoint T, NatTrans.IsMonoidal β.hom ∧ α.hom.hom = β.hom.app Λ.X) ∧ componentComparisons Λ.X T α",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
+}

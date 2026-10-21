@@ -1,0 +1,141 @@
+{
+ "id": "def-zl-condensed-lisse-evaluation-model",
+ "kind": "definition",
+ "title": "Canonical functors for condensed lisse evaluation",
+ "statement": "For a commutative condensed ring [sk-def-sfb-condensed-ring], use its pulled-back coefficient [sk-def-sfb-pulled-back-coefficients] and section-ring presentation. On a ringed site define A=O(U), F as exact constant realization [def-sfb-site-derived-constant-module-functor] followed by the fixed universal derived coefficient extension [def-zl-derived-change-of-rings-model] and the section-module equivalence, and G as total right derived terminal evaluation. Define perfect objects [def-pc-perfect-ring-complex], lisse objects as dualizable objects, and Statement as full faithfulness, triangulated strong symmetry, and the specified perfect/lisse equivalence with inverse G. On a profinite slice define the restricted coefficient, actual scalar homomorphism, and point-realization restriction using [def-zl-condensed-scalar-realization] and [def-zl-ring-derived-scalar-extension]. For an affine scheme use the uniquely characterized relative test functor [lem-zl-component-relative-profinite-site] to define the actual inverse image, its coefficient-transported derived module functor, and the component/scalar comparison propositions. These are exactly the data definitions of the restored evaluation module; no data or formula changes.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "sk-def-pe-wlocal",
+  "def-pc-perfect-ring-complex",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pe-spectral-components-profinite",
+  "def-zl-derived-change-of-rings-model",
+  "def-zl-condensed-scalar-realization",
+  "def-zl-ring-derived-scalar-extension",
+  "lem-zl-component-relative-profinite-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact strong monoidal right adjoint with fully faithful left adjoint gives an equivalence on dualizable objects",
+   "results": "ExactPairing.ofFaithful, ExactPairing.ofFullyFaithful, tensorRightHomEquiv, tensorRightAdjunction; none constructs this restricted equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizable objects are equivalent under a monoidal adjunction with invertible unit if both adjoints are strong monoidal",
+   "results": "hasRightDualOfEquivalence, leftDualIso, rightDualIso, hasLeftDualOfEquivalence, rigidCategoryOfEquivalence; these presuppose an equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*(adjunction|Adjunction)|(adjunction|Adjunction).*dualiz|profinite.*(scalar|realization)|constant.*derived.*(sections|evaluation)",
+   "results": "rg over Mathlib: no matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem; reuse the named generic adjunction and duality interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3)",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedLisseEvaluationModel",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.F",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedLisseEvaluationModel.lean",
+  "statement": "def F (U : C) (hU : IsTerminal U) : DerivedCategory (ModuleCat.{u + 1} (A J O U)) ⥤ D J O",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.ringSheaf",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.D",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.A",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.scalarMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.constantHasDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sectionHasDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.extensionModel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.F",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sectionsAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.G",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.lisse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.perfect",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.strongSymmetric",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.Statement",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficientMon",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficientComm",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteSectionRingIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarRealization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarClause",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentTests",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentInverse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentModulesAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentSymmetric",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentComparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentClause"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c6182",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T061639-L-1805080",
+  "kind": "interface",
+  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+ }
+}
