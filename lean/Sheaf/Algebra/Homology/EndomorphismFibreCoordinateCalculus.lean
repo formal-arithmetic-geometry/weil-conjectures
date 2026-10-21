@@ -36,6 +36,33 @@ namespace CochainComplex
 
 variable {A : Type u} [Category.{v} A] [Abelian A]
 
+private lemma fibre_ext_to {K L : CochainComplex A ℤ} (φ : K ⟶ L)
+    (q : ℤ) {T : A} {f g : T ⟶ (mappingCocone φ).X q}
+    (h₁ : f ≫ (mappingCocone.fst φ).f q = g ≫ (mappingCocone.fst φ).f q)
+    (h₂ : f ≫ (mappingCocone.snd φ).v q (q - 1) (by omega) =
+      g ≫ (mappingCocone.snd φ).v q (q - 1) (by omega)) : f = g := by
+  calc
+    f = f ≫ ((mappingCocone.fst φ).f q ≫
+        (mappingCocone.inl φ).v q q (add_zero q) +
+        (mappingCocone.snd φ).v q (q - 1) (by omega) ≫
+          (mappingCocone.inr φ).1.v (q - 1) q (by omega)) := by
+      rw [mappingCocone.id_X, Category.comp_id]
+    _ = g ≫ ((mappingCocone.fst φ).f q ≫
+        (mappingCocone.inl φ).v q q (add_zero q) +
+        (mappingCocone.snd φ).v q (q - 1) (by omega) ≫
+          (mappingCocone.inr φ).1.v (q - 1) q (by omega)) := by
+      simp only [Preadditive.comp_add, ← Category.assoc, h₁, h₂]
+    _ = g := by rw [mappingCocone.id_X, Category.comp_id]
+
+private lemma fibre_zero_second {K L M : CochainComplex A ℤ} (φ : K ⟶ L)
+    (b : M ⟶ mappingCocone φ) (q : ℤ)
+    (hz : b.f q ≫ (mappingCocone.snd φ).v q (q - 1) (by omega) = 0) :
+    b.f q = (b ≫ mappingCocone.fst φ).f q ≫
+      (mappingCocone.inl φ).v q q (add_zero q) := by
+  apply fibre_ext_to φ q
+  · simp
+  · simp [hz]
+
 /-- The tautological endomorphism on the forgetful functor from endomorphism pairs.
 Source: Stacks Tag 014E, functorial cone square; main-20261015, first reduction, Cones.
 (blueprint: lem-pe-endomorphism-fibre-coordinate-calculus) -/
@@ -64,7 +91,15 @@ The forgetful shift comparison is the identity. Hence the required square is
 @[instance]
 theorem endomorphismPairTransformation_commShift :
     NatTrans.CommShift (endomorphismPairTransformation (A := A)) ℤ := by
-  sorry
+  constructor
+  intro r
+  ext X
+  simp only [Functor.comp_obj, shiftFunctor_obj_X', NatTrans.comp_app,
+    Endofunctor.Algebra.forget_commShiftIso_hom_app, Functor.whiskerRight_app,
+    HomologicalComplex.comp_f, HomologicalComplex.id_f, shiftFunctor_map_f',
+    Functor.whiskerLeft_app]
+  erw [Category.id_comp, Category.comp_id]
+  simp [endomorphismPairTransformation, Endofunctor.Algebra.shift_str]
 
 /-- The specified natural signed shift comparison for the endomorphism-fibre functor.
 Source: Stacks Tags 011G and 014E; main-20261015, first reduction, Cones paragraph.
@@ -97,7 +132,38 @@ theorem endomorphismFibre_coordinates
           (mappingCocone.snd X.str).v (q + 1) q (by omega) =
         -((mappingCocone.snd X.str).v q (q - 1) (by omega) ≫ X.a.d (q - 1) q) -
           (mappingCocone.fst X.str).f q ≫ X.str.f q := by
-  sorry
+  refine ⟨?_, ((mappingCocone.fst X.str).comm q (q + 1)).symm, ?_⟩
+  · let e : (mappingCocone X.str).X q ≅ X.a.X q ⊞ X.a.X (q - 1) :=
+      { hom := biprod.lift ((mappingCocone.fst X.str).f q)
+          ((mappingCocone.snd X.str).v q (q - 1) (by omega))
+        inv := biprod.desc ((mappingCocone.inl X.str).v q q (add_zero q))
+          ((mappingCocone.inr X.str).1.v (q - 1) q (by omega))
+        hom_inv_id := by simp [biprod.lift_desc, mappingCocone.id_X]
+        inv_hom_id := by ext <;> simp }
+    exact e.isIso_hom
+  · suffices h :
+        -((mappingCone X.str).d (q - 1) q ≫ (mappingCone.snd X.str).v q q (add_zero q)) =
+          -((mappingCone.snd X.str).v (q - 1) (q - 1) (add_zero _) ≫ X.a.d (q - 1) q) -
+            (mappingCone.fst X.str).1.v (q - 1) q (by omega) ≫ X.str.f q by
+      simpa only [Functor.id_obj, mappingCocone, Int.reduceNeg, shiftFunctor_obj_X',
+        shiftFunctor_obj_d', Int.negOnePow_neg, Int.negOnePow_one, Units.neg_smul,
+        one_smul, mappingCocone.snd,
+        Cochain.leftShift_v (n := 0) _ (-1) (-1) (zero_add _) (q + 1) q
+          (by omega) q (by omega),
+        mul_neg, mul_one, neg_neg, Int.reduceSub, neg_mul, one_mul, ne_eq,
+        OfNat.ofNat_ne_zero, not_false_eq_true, Int.ediv_self, Int.reduceAdd,
+        Int.negOnePow_even 2 ⟨1, rfl⟩, shiftFunctorObjXIso, Preadditive.neg_comp,
+        HomologicalComplex.d_comp_XIsoOfEq_hom_assoc,
+        Cochain.leftShift_v (n := 0) _ (-1) (-1) (zero_add _) q (q - 1)
+          (by omega) (q - 1) (add_zero _),
+        HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.assoc,
+        Category.id_comp, mappingCocone.fst, HomologicalComplex.neg_f_apply,
+        Cocycle.homOf_f, Cocycle.leftShift_coe,
+        Cochain.leftShift_v (n := 1) _ (-1) 0 (add_neg_cancel 1) q q
+          (add_zero _) (q - 1) (by omega), mul_zero, zero_add,
+        sub_eq_add_neg] using! h
+    rw [mappingCone.d_snd_v X.str (q - 1) q (by omega)]
+    abel
 
 /-- The diagonal fibre functor is additive.
 Source: Stacks Tag 014E; main-20261015, first reduction, Cones paragraph.
@@ -109,7 +175,23 @@ On each cone component the induced map is a, so the chain equation follows from
 componentwise; addition and zero likewise hold on both projections. -/
 theorem endomorphismFibre_additive :
     (endomorphismFibreFunctor (A := A)).Additive := by
-  sorry
+  constructor
+  intro X Y a b
+  apply HomologicalComplex.hom_ext
+  intro q
+  apply CategoryTheory.SignedCoconeShift.cocone_ext_from
+  · simp only [endomorphismFibreFunctor, CategoryTheory.SignedCoconeShift.coconeFunctor,
+      HomologicalComplex.add_f_apply, Preadditive.comp_add]
+    rw [CategoryTheory.SignedCoconeShift.coconeMap_inl,
+      CategoryTheory.SignedCoconeShift.coconeMap_inl,
+      CategoryTheory.SignedCoconeShift.coconeMap_inl]
+    simp
+  · simp only [endomorphismFibreFunctor, CategoryTheory.SignedCoconeShift.coconeFunctor,
+      HomologicalComplex.add_f_apply, Preadditive.comp_add]
+    rw [CategoryTheory.SignedCoconeShift.coconeMap_inr,
+      CategoryTheory.SignedCoconeShift.coconeMap_inr,
+      CategoryTheory.SignedCoconeShift.coconeMap_inr]
+    simp
 
 /-- The fibre functor sends an intertwiner a to `(v,u) ↦ (av,au)`.
 Source: Stacks Tag 014E; main-20261015, first reduction, Cones paragraph.
@@ -126,7 +208,13 @@ theorem endomorphismFibre_map_coordinates
       ((endomorphismFibreFunctor (A := A)).map a).f q ≫
           (mappingCocone.snd Y.str).v q (q - 1) (by omega) =
         (mappingCocone.snd X.str).v q (q - 1) (by omega) ≫ a.f.f (q - 1) := by
-  sorry
+  constructor <;> apply CategoryTheory.SignedCoconeShift.cocone_ext_from
+  all_goals
+    simp only [endomorphismFibreFunctor, CategoryTheory.SignedCoconeShift.coconeFunctor]
+    first
+    | rw [CategoryTheory.SignedCoconeShift.coconeMap_inl_assoc]
+    | rw [CategoryTheory.SignedCoconeShift.coconeMap_inr_assoc]
+    simp [endomorphismPairTransformation]
 
 /-- Forward and inverse signed shift comparisons have coordinates `(v,(-1)^r u)`.
 Source: Stacks Tags 011G and 014E; main-20261015, first reduction, Cones paragraph.
@@ -156,7 +244,27 @@ theorem endomorphismFibreShift_coordinates
           (shiftFunctorObjXIso (mappingCocone X.str) r q (q + r) rfl).inv ≫
           ((endomorphismFibreShift r).inv.app X).f q =
         r.negOnePow • (mappingCocone.inr (X⟦r⟧).str).1.v (q - 1) q (by omega) := by
-  sorry
+  have h₁ := CategoryTheory.SignedCoconeShift.coconeFunctorShiftIso_inl
+    (Endofunctor.Algebra.forget (𝟭 (CochainComplex A ℤ)))
+    (Endofunctor.Algebra.forget (𝟭 (CochainComplex A ℤ)))
+    endomorphismPairTransformation X r q
+  have h₂ := CategoryTheory.SignedCoconeShift.coconeFunctorShiftIso_inr
+    (Endofunctor.Algebra.forget (𝟭 (CochainComplex A ℤ)))
+    (Endofunctor.Algebra.forget (𝟭 (CochainComplex A ℤ)))
+    endomorphismPairTransformation X r (q - 1) q (by omega)
+  simp only [Endofunctor.Algebra.forget_commShiftIso_hom_app,
+    HomologicalComplex.id_f, endomorphismPairTransformation] at h₁ h₂
+  erw [Category.id_comp] at h₁ h₂
+  refine ⟨h₁, h₂, ?_, ?_⟩
+  · apply (cancel_mono (((endomorphismFibreShift r).hom.app X).f q)).mp
+    simp only [Category.assoc, ← HomologicalComplex.comp_f, Iso.inv_hom_id_app,
+      HomologicalComplex.id_f]
+    erw [Category.comp_id]
+    exact h₁.symm
+  · apply (cancel_mono (((endomorphismFibreShift r).hom.app X).f q)).mp
+    simp only [Category.assoc, ← HomologicalComplex.comp_f, Iso.inv_hom_id_app,
+      HomologicalComplex.id_f, Linear.units_smul_comp]
+    erw [Category.comp_id, h₂, smul_smul, Int.units_mul_self, one_smul]
 
 /-- The specified signed comparisons satisfy zero and successive-shift coherence.
 Source: Stacks Tag 011G; main-20261015, first reduction, Cones paragraph.
@@ -170,7 +278,8 @@ theorem endomorphismFibreShift_coherence :
         Functor.CommShift.isoZero (endomorphismFibreFunctor (A := A)) ℤ ∧
       ∀ r r' : ℤ, endomorphismFibreShift (A := A) (r + r') =
         Functor.CommShift.isoAdd (endomorphismFibreShift r) (endomorphismFibreShift r') := by
-  sorry
+  exact ⟨CategoryTheory.SignedCoconeShift.coconeFunctorShiftNatIso_zero _ _ _,
+    fun r r' ↦ CategoryTheory.SignedCoconeShift.coconeFunctorShiftNatIso_add _ _ _ r r'⟩
 
 /-- A strictly annihilated map satisfies the mapping-cocone lift equation.
 Source: Stacks Tag 014E; main-20261015, first reduction, Cones paragraph.
@@ -182,7 +291,7 @@ theorem endomorphismFibreAugmentation_condition
     (X : Endofunctor.Algebra (𝟭 (CochainComplex A ℤ))) {M : CochainComplex A ℤ}
     (J : M ⟶ X.a) (hJ : J ≫ X.str = 0) :
     δ (-1) 0 (0 : Cochain M X.a (-1)) + Cochain.ofHom (J ≫ X.str) = 0 := by
-  sorry
+  simp [hJ]
 
 /-- The strict augmentation into the fibre, constructed by the canonical cocone lift.
 Source: Stacks Tag 014E; main-20261015, first reduction, Cones paragraph.
@@ -205,7 +314,7 @@ theorem endomorphismFibreAugmentation_coordinates
     (endomorphismFibreAugmentation X J hJ).f q ≫ (mappingCocone.fst X.str).f q = J.f q ∧
       (endomorphismFibreAugmentation X J hJ).f q ≫
         (mappingCocone.snd X.str).v q (q - 1) (by omega) = 0 := by
-  sorry
+  simp [endomorphismFibreAugmentation]
 
 /-- Strict augmentations are natural in a commuting square.
 Source: main-20261015, first reduction, Cones paragraph; Stacks Tag 014E.
@@ -220,7 +329,18 @@ theorem endomorphismFibreAugmentation_naturality
     (hsquare : J ≫ a.f = g ≫ J') :
     endomorphismFibreAugmentation X J hJ ≫ (endomorphismFibreFunctor (A := A)).map a =
       g ≫ endomorphismFibreAugmentation Y J' hJ' := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro q
+  apply fibre_ext_to Y.str q
+  · simp only [HomologicalComplex.comp_f, Category.assoc]
+    rw [(endomorphismFibre_map_coordinates a q).1]
+    simp only [← Category.assoc, (endomorphismFibreAugmentation_coordinates X J hJ q).1,
+      (endomorphismFibreAugmentation_coordinates Y J' hJ' q).1]
+    exact congrArg (fun f ↦ f.f q) hsquare
+  · simp only [HomologicalComplex.comp_f, Category.assoc]
+    rw [(endomorphismFibre_map_coordinates a q).2]
+    simp only [← Category.assoc, (endomorphismFibreAugmentation_coordinates X J hJ q).2,
+      (endomorphismFibreAugmentation_coordinates Y J' hJ' q).2, zero_comp, comp_zero]
 
 /-- Strict annihilation persists under every integer shift.
 Source: Stacks Tag 011G; main-20261015, first reduction, Cones paragraph.
@@ -232,7 +352,8 @@ theorem endomorphismFibreAugmentation_shift_condition
     (X : Endofunctor.Algebra (𝟭 (CochainComplex A ℤ))) {M : CochainComplex A ℤ}
     (J : M ⟶ X.a) (hJ : J ≫ X.str = 0) (r : ℤ) :
     J⟦r⟧' ≫ (X⟦r⟧).str = 0 := by
-  sorry
+  simpa [Endofunctor.Algebra.shift_str] using
+    congrArg (fun f ↦ f⟦r⟧') hJ
 
 /-- The same specified signed shift comparison preserves the strict augmentation.
 Source: Stacks Tags 011G and 014E; main-20261015, first reduction, Cones paragraph.
@@ -248,6 +369,17 @@ theorem endomorphismFibreAugmentation_shift
         (endomorphismFibreAugmentation_shift_condition X J hJ r) ≫
           (endomorphismFibreShift r).hom.app X =
       (endomorphismFibreAugmentation X J hJ)⟦r⟧' := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro q
+  simp only [HomologicalComplex.comp_f, shiftFunctor_map_f']
+  rw [fibre_zero_second (X⟦r⟧).str _ q
+    (endomorphismFibreAugmentation_coordinates (X⟦r⟧) (J⟦r⟧') _ q).2,
+    fibre_zero_second X.str _ (q + r)
+      (endomorphismFibreAugmentation_coordinates X J hJ (q + r)).2]
+  rw [Category.assoc, (endomorphismFibreShift_coordinates X r q).1]
+  simp only [shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl, Iso.refl_inv,
+    Category.comp_id, HomologicalComplex.comp_f,
+    (endomorphismFibreAugmentation_coordinates (X⟦r⟧) (J⟦r⟧') _ q).1,
+    (endomorphismFibreAugmentation_coordinates X J hJ (q + r)).1, shiftFunctor_map_f']
 
 end CochainComplex

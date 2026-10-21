@@ -14,67 +14,46 @@
  ],
  "proof": [
   {
-   "text": "Work throughout with biproduct component morphisms: a displayed pair denotes the two projections of a map from an arbitrary object, not elements of an object of $\\mathcal A$. By [def-sp-abelian] finite biproducts and bilinear composition exist. For intertwining chain maps $a,b$, the identities $(ba)s=b(ta)=(bt)a$ and $(a+a')s=ta+ta'=t(a+a')$ show closure under composition and addition; identities and zero maps intertwine as well. Associativity, units and the abelian-group laws on morphisms are inherited componentwise from complexes [def-weil-abstract-derived-category]. This gives the stated preadditive category of pairs.",
+   "text": "Use the existing Endofunctor.Algebra of the identity, its preadditive structure, and its shifts. The tautological structure natural transformation commutes with shifts because the forgetful comparisons are identities and the shifted structure map is the shifted endomorphism.",
    "uses": [
     "def-sp-abelian",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone: the two by two cone differential"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, functorial fibre and shifts. Coordinate conventions: Stacks Tag 014E (derived.tex, definition-cone) and Tag 011G (homology.tex, definition-shift-cochain)."
    }
   },
   {
-   "text": "By the cone convention in [def-weil-abstract-derived-category], $\\operatorname{Cone}(s)^{q-1}=V^{q-1}\\oplus V^q$ has differential $(u,v)\\mapsto(du+sv,-dv)$. The shift $[-1]$ negates this differential. Reordering its two summands therefore gives $K(V,s)^q=V^q\\oplus V^{q-1}$ and $D(v,u)=(dv,-du-sv)$. Directly, $D^2(v,u)=(0,dsv-sdv)=(0,0)$ since $s$ is a chain map. Reordering is the biproduct permutation, whose inverse is the same permutation.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone: the two by two cone differential"
-   }
-  },
-  {
-   "text": "For an intertwiner $a:(V,s)\\to(W,t)$, put $K(a)=\\operatorname{diag}(a,a)$. Then $D_WK(a)(v,u)=(d_Wav,-d_Wau-tav)$ and $K(a)D_V(v,u)=(ad_Vv,-ad_Vu-asv)$. They agree by the chain-map identity for $a$ and $ta=as$, so $K(a)$ is a chain map [def-weil-abstract-derived-category]. On both biproduct components, $K(1)=1$, $K(ba)=K(b)K(a)$, $K(a+a')=K(a)+K(a')$ and $K(0)=0$. Thus these object and morphism formulas give an additive functor; these equalities use only bilinearity and biproduct projections [def-sp-abelian].",
+   "text": "The cocone projections and inclusions give an explicit biproduct isomorphism: lift the two projections and descend the two inclusions. Their four composites and the cocone identity decomposition prove the inverse equations. The first differential coordinate is the chain-map equation for fst. Expand the shifted mapping-cone second projection and apply Mathlib mappingCone.d_snd_v to obtain the second differential coordinate.",
    "uses": [
     "def-sp-abelian",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone: the two by two cone differential"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, functorial fibre and shifts. Coordinate conventions: Stacks Tag 014E (derived.tex, definition-cone) and Tag 011G (homology.tex, definition-shift-cochain)."
    }
   },
   {
-   "text": "Let $\\epsilon_r=(-1)^r$ for an arbitrary integer $r$, so $\\epsilon_r^2=1$. Using the shift convention of [def-weil-abstract-derived-category] and Tag 011G, at the reindexed degrees the source $K(V[r],s[r])$ has differential $(v,u)\\mapsto(\\epsilon_r dv,-\\epsilon_r du-sv)$ and the target $K(V,s)[r]$ has differential $(v,u)\\mapsto(\\epsilon_r dv,-\\epsilon_r du-\\epsilon_r sv)$. For $\\sigma_r(v,u)=(v,\\epsilon_r u)$, both $D_{\\mathrm{target}}\\sigma_r(v,u)$ and $\\sigma_rD_{\\mathrm{source}}(v,u)$ equal $(\\epsilon_r dv,-du-\\epsilon_r sv)$. Hence $\\sigma_r$ is a chain map; its square on components is $(v,\\epsilon_r^2u)=(v,u)$, giving the specified inverse.",
+   "text": "Specialize the diagonal cocone map inclusion formulas of [lem-weil-signed-mapping-cocone-shift]. Testing on both inclusions proves preservation of addition and the two projection coordinates of every intertwiner. Specialize its signed comparison inclusion formulas to the identity forgetful comparisons. Cancel the forward isomorphism to deduce the inverse formulas, using the square of the parity sign. Its zero and addition laws give the required coherence.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-weil-signed-mapping-cocone-shift"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011G, definition-shift-cochain: integer shift differential and shifted maps"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, functorial fibre and shifts. Coordinate conventions: Stacks Tag 014E (derived.tex, definition-cone) and Tag 011G (homology.tex, definition-shift-cochain)."
    }
   },
   {
-   "text": "For each intertwiner $a$, both $K(a)[r]\\sigma_{(V,s),r}$ and $\\sigma_{(W,t),r}K(a[r])$ send $(v,u)$ to $(av,\\epsilon_r au)$, proving naturality. The shift maps simply reindex the components of $a$ [def-weil-abstract-derived-category]. At $r=0$, $\\epsilon_0=1$, so the comparison is the identity. Starting at $K(V[r][r'],s[r][r'])$, first apply $\\sigma_{(V[r],s[r]),r'}$, then $\\sigma_{(V,s),r}[r']$. The resulting coordinates are $(v,\\epsilon_r\\epsilon_{r'}u)=(v,\\epsilon_{r+r'}u)$, since $(-1)^{r+r'}=(-1)^r(-1)^{r'}$ for all integers. Under the canonical reassociation of degree indices this is exactly $\\sigma_{(V,s),r+r'}$, as required.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011G, definition-shift-cochain: integer shift differential and shifted maps"
-   }
-  },
-  {
-   "text": "For $J:M\\to V$ with $sJ=0$, $D\\eta_J(m)=(d_VJm,-sJm)=(Jd_Mm,0)=\\eta_Jd_M(m)$; thus $\\eta_J$ is a chain map [def-weil-abstract-derived-category]. Given $aJ=J'g$ and $tJ'=0$, the two maps $K(a)\\eta_J$ and $\\eta_{J'}g$ have components $(aJ,0)=(J'g,0)$. Finally $s[r]J[r]=(sJ)[r]=0$, and $\\sigma_{(V,s),r}\\eta_{J[r]}$ has components $(J[r],\\epsilon_r0)=(J[r],0)$, which are precisely those of $\\eta_J[r]$. Equality of the two biproduct projections gives each claimed equality of morphisms [def-sp-abelian]. All arguments are degreewise finite biproduct calculations; they impose no boundedness or exactness conditions.",
+   "text": "The annihilation equation makes the zero-second-cochain mappingCocone.lift condition vanish. Mathlib lift projection equations give augmentation coordinates (J,0). The cocone identity decomposition proves that projections jointly determine an incoming map; together with the intertwiner coordinates this proves augmentation naturality. Shift the annihilation equation by the additive shift functor. A map with zero second projection equals its first projection followed by the first inclusion; applying the forward signed comparison inclusion equation then identifies the shifted augmentation with the shift of the original lift.",
    "uses": [
     "def-sp-abelian",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-weil-signed-mapping-cocone-shift"
    ],
    "elementary": true,
    "source": {
@@ -85,12 +64,13 @@
  ],
  "proof_deps": [
   "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-weil-signed-mapping-cocone-shift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-  "place": "Cones paragraph: explicit degreewise verification of functoriality, integer shifts and strict augmentations, using Stacks Tags 014E and 011G for conventions."
+  "place": "Cones paragraph, functorial fibre and shifts. Coordinate conventions: Stacks Tag 014E (derived.tex, definition-cone) and Tag 011G (homology.tex, definition-shift-cochain). Lean proof by W2: specialize the proved signed cocone calculus and use Mathlib cocone coordinate/lift equations."
  },
  "mathlib_searches": [
   {
@@ -248,7 +228,7 @@
   "by": "Q22",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The complete statement is carried by the listed declarations. The existing Endofunctor.Algebra identity category and its preadditive and shift structures are reused. The canonical fibre functor and signed natural comparisons specialize the definitions owned by def-weil-signed-mapping-cocone-functor; no conclusion or choice from lem-weil-signed-mapping-cocone-shift is used. The strict augmentation is mappingCocone.lift with zero second cochain. The Lean module is unchanged from the returned delivery."
+  "note": "The complete statement is carried by the listed declarations. Reuses the existing identity Endofunctor.Algebra category and its preadditive and shift structures. The fibre functor and signed natural comparisons specialize def-weil-signed-mapping-cocone-functor; their inclusion formulas and coherence specialize the proved lem-weil-signed-mapping-cocone-shift. The strict augmentation is mappingCocone.lift with zero second cochain. All signatures and definitions are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -257,5 +237,15 @@
   "group": "Q22",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of 876ef0d8. Item Lean module byte-identical (sha256 b07c226d); prior clause-by-clause reading and clean compile stand, re-read confirms node match (pair category Endofunctor.Algebra, Cone(s)[-1] coords (dv,-du-sv), diag K(a), additive, sigma_r NatIso with (v,(-1)^r u) hom/inv, isoZero/isoAdd coherence, eta_J=mappingCocone.lift J 0, naturality, shift compatibility). Item node vs side-live differs only in lean record and stmt_deps swap to new def-weil-signed-mapping-cocone-functor (existing:true on unchanged Sheaf.Algebra.Homology.SignedMappingCoconeShift) owning coconeMap/coconeFunctor/signedCoconeShiftIso/coconeFunctorShiftIso/coconeFunctorShiftNatIso; read module source: definitions match node statement, real data, statement verbatim, universes bound. Item uses only coconeFunctor and coconeFunctorShiftNatIso, so H2 resolved. No competing ownership or re-split note. Advisory: existing module docstring names only theorem blueprint; coneMap still owned only by theorem node; lem-weil-roos-comm-shift may need same H2 check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261021T120830-L-3956917",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
