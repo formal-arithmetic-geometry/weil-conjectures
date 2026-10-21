@@ -19736,3 +19736,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:20 L: merged deliver/N7/def-pd-proetale-section-module-functors (reviewer FIX; after a return; new nodes: 3)
 - 03:20 L: merged deliver/Q37/det-sp-scalar-extension-functor (reviewer PASS; after a return; new nodes: 1)
 - 03:20 L: merged deliver/NK/lem-weil-pbc-ringed-projection-restriction (reviewer FIX+NODE(1); after a return; new nodes: 2)
+- 03:20 L: merged deliver/Q18/det-lem-integral-models-generators (reviewer FIX; after a return; new nodes: 2)
