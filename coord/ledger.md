@@ -21159,3 +21159,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:34 L: merged deliver/Q66/lem-sfb-geometric-two-iso-scalar-pairing (reviewer PASS; first push; new nodes: 0)
 - 08:34 L: merged deliver/O3/lem-pod-formal-verdier-exchange-equivariance (reviewer FIX; first push; new nodes: 0); claim not held by O3: not your claim
 - 08:34 L: merged deliver/Q22/lem-weil-pbc-normalized-adjunction-square-transpose (reviewer PASS; first push; new nodes: 0)
+- 08:34 L: merged deliver/Q90/lem-pur-proetale-support-global-boundary (reviewer PASS; first push; new nodes: 0)
