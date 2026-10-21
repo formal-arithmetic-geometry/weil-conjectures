@@ -19552,3 +19552,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 10:08 L: batch 20261021T020043 dependency take-out
 - 02:09 L: merged deliver/A2/Sheaf.Paper.IntegralTStructure (stage 3; reviewer PASS; first push; landing 20261021T020956-L-2685354 (proof); batch 20261021T020952; modules 1; new nodes 0)
+- 02:09 L: merged deliver/A7/Sheaf.Paper.CondensedPointDiscreteConstantComparison (stage 3; reviewer PASS; first push; landing 20261021T020957-L-2685553 (proof); batch 20261021T020952; modules 1; new nodes 0; change records: coord/changes/A7-restore-condensed-point-discrete-constant-comparison.md)
