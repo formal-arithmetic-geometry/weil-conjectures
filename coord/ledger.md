@@ -19717,3 +19717,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:19 L: merged deliver/Q32/det-def-localizing-closure-ctf-equals-bc (reviewer PASS; after a return; new nodes: 5)
 - 03:19 L: merged deliver/Q59/thm-sfb-extend-scalars-localization (reviewer FIX; after a return; new nodes: 5)
 - 03:20 L: merged deliver/Q27/lem-sfb-internal-module-operations-transport (reviewer FIX; after a return; new nodes: 0)
+- 03:20 L: merged deliver/Q12/lem-sf-module-object-ordinary-coefficient-equivalence (reviewer FIX; after a return; new nodes: 1)
