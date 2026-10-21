@@ -21025,3 +21025,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:13 L: returned deliver/NM/lem-weil-pbc-strict-perfect-ringed-pullback-model (reviewer RETURN: L: independent stage-2 immutable head e7865176011d: Item statement correct clause by clause vs node and Stacks 08H3/06YQ)
 - 08:13 L: returned deliver/Q05/lem-sfb-hom-kflat-chain-transpose (reviewer RETURN: L: independent stage-2 immutable head fb99135d5498: incremental DAG validation: reach: def-sfb-tensor-symmetry-pure-equa)
 - 08:13 L: returned deliver/NR/lem-sfb-grothendieck-sheafification (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-grothendieck-sheafification: lem-sfb-grothendi)
+- 08:13 L: returned deliver/Q89/lemma-nagata-immersion-open-in-scheme-image (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-immersion-open-in-scheme-image: cited nod)
