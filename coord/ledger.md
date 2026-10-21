@@ -20215,3 +20215,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: returned deliver/Q23/lem-sfb-flat-dvr-scalar-tensor (reviewer RETURN: L: independent stage-2 immutable head 9abb3a3eea3a: file-only compilation failed: overlay Sheaf.CategoryTheory.SiteConst)
 - 04:07 L: returned deliver/Q15/lem-sfb-projection-comparison-etale-proetale (reviewer RETURN: L: independent stage-2 immutable head c32fe4567e82: file-only compilation failed: overlay WeilConjectures.FromJoel.Categ)
 - 04:07 L: returned deliver/N6/lem-sfb-finite-field-stratified-generation (reviewer RETURN: L: independent stage-2 immutable head e0cdd9d12471: file-only compilation failed: overlay WeilConjectures.Mathlib.Catego)
+- 04:07 L: returned deliver/NE/lem-cbc-open-localized-counit-comparison (reviewer RETURN: L: independent stage-2 immutable head ebdeae754d6f: Sheaf.Paper.OpenLocalizedCounitComparison declares names that other )
