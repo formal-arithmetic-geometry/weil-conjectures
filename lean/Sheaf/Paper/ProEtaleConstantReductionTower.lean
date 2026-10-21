@@ -9,24 +9,8 @@ public import Sheaf.Paper.StrictTowerExchangeMateNormalization
 public import Sheaf.Paper.CompletionMateComparison
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.Paper.CompletedPullbackAdjunction
-import Sheaf.Paper.ProEtaleProjectionFormulaArrows
-import Sheaf.Paper.ProjectionFormulaTotalization
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 /-! # Constant-coefficient strict reduction on the original pro-etale site
 
 Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint, fix-lem-exchanges,
@@ -56,7 +40,8 @@ theorem quotient_comm {U V : Scheme.{t}} (f : U ⟶ V) (n : ℕ) :
       (proEtaleSheafInverseImage.{t, t + 2} f CommRingCat.{t + 1}).map
         (exchangeScalar.{t} d V ≫ AdicCoefficientDatum.projection.{t} d V n) ≫
           (AdicCoefficientDatum.finiteRingIso.{t} d f n).hom := by
-  sorry
+  rw [← Category.assoc, exchangeScalar_comm d f, Category.assoc,
+    d.projection_comm f n, ← Category.assoc, ← Functor.map_comp]
 
 /-- The existing ambient constant-coefficient derived category.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -109,12 +94,91 @@ Proof: evaluate at each index. Both scalar extension and scalar restriction pres
 addition. Joint faithfulness of ordinary diagram evaluations proves the assertion. -/
 @[instance]
 theorem reductionModule_additive (T : Scheme.{t}) : (reductionModule d T).Additive := by
-  sorry
+  constructor
+  intro M N a b
+  apply NatTrans.ext
+  funext n
+  change (level d T n.unop).map (a + b) =
+    (level d T n.unop).map a + (level d T n.unop).map b
+  have : (level d T n.unop).Additive := by
+    dsimp [level]
+    infer_instance
+  exact (level d T n.unop).map_add
 
 /-- The homotopy functor of the actual strict quotient construction.
 Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
 def reductionHomotopy (T : Scheme.{t}) :=
   (reductionModule d T).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+
+/-- Scalar extension on K-flat models followed by exact restriction preserves
+quasi-isomorphisms. Keeping the coefficient map abstract avoids expanding quotient data. -/
+private theorem scalarReduction_map_quasiIso (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    {P Q : CochainComplex (reductionModules T R) ℤ} (a : P ⟶ Q)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q)
+    (ha : QuasiIso a) :
+    QuasiIso (((reductionChange T φ ⋙ reductionRestrict T φ).mapHomologicalComplex
+      (.up ℤ)).map a) := by
+  have : PreservesFiniteLimits (reductionRestrict T φ) :=
+    proEtaleRingRestrictScalars_preservesFiniteLimits φ
+  have : PreservesFiniteColimits (reductionRestrict T φ) :=
+    proEtaleRingRestrictScalars_preservesFiniteColimits φ
+  have : QuasiIso (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map a) :=
+    (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.1
+      a hP hQ ha
+  exact inferInstanceAs (QuasiIso
+    (((reductionRestrict T φ).mapHomologicalComplex (.up ℤ)).map
+      (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map a)))
+
+/-- The resolving-class construction with an abstract target category and additive functor.
+This keeps its kernel check independent of the concrete quotient-tower expressions. -/
+private theorem kFlat_leftDerived_exists (T : Scheme.{t})
+    (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
+    {E : Type (t + 2)} [Category.{t + 1} E] [Abelian E] [HasDerivedCategory.{t + 2} E]
+    (F₀ : reductionModules T R ⥤ E) [F₀.Additive]
+    (hF : ∀ {P Q : CochainComplex (reductionModules T R) ℤ} (a : P ⟶ Q),
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) Q → QuasiIso a →
+        QuasiIso ((F₀.mapHomologicalComplex (.up ℤ)).map a)) :
+    ∃ (LF : DerivedCategory (reductionModules T R) ⥤ DerivedCategory E)
+      (ε : DerivedCategory.Qh ⋙ LF ⟶ F₀.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
+      LF.IsLeftDerivedFunctor ε
+        (HomotopyCategory.quasiIso (reductionModules T R) (.up ℤ)) ∧
+      ∀ P : CochainComplex (reductionModules T R) ℤ,
+        CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
+        IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+  let C := reductionModules T R
+  let H := HomotopyCategory.quotient C (.up ℤ)
+  let F := F₀.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let S : Set (HomotopyCategory C (.up ℤ)) :=
+    {X | ∃ P : CochainComplex C ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
+        H.obj P = X}
+  have hres (X : HomotopyCategory C (.up ℤ)) :
+      ∃ (X' : HomotopyCategory C (.up ℤ)) (s : X' ⟶ X),
+        X' ∈ S ∧ HomotopyCategory.quasiIso C (.up ℤ) s := by
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := R) G
+    exact ⟨H.obj P, H.map s, ⟨P, hP, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hinv (X Y : HomotopyCategory C (.up ℤ)) (s : X ⟶ Y)
+      (hX : X ∈ S) (hY : Y ∈ S) (hs : HomotopyCategory.quasiIso C (.up ℤ) s) :
+      IsIso (F.map s) := by
+    obtain ⟨P, hP, rfl⟩ := hX
+    obtain ⟨Q, hQ, rfl⟩ := hY
+    obtain ⟨a, rfl⟩ := H.map_surjective s
+    have ha := (HomotopyCategory.quotient_map_mem_quasiIso_iff a).1 hs
+    have hEa : QuasiIso ((F₀.mapHomologicalComplex (.up ℤ)).map a) :=
+      hF a hP hQ ha
+    dsimp only [F, Functor.comp_map, Functor.mapHomotopyCategory_map]
+    apply Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso E (.up ℤ))
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hEa
+  obtain ⟨_, R, ε, hR, _, hcompute⟩ :=
+    Functor.leftDerived_from_resolvingClass C (DerivedCategory E) F S hres hinv
+  exact ⟨R, ε, hR, fun P hP ↦ hcompute (H.obj P) ⟨P, hP, rfl⟩⟩
 
 /-- The reduction functor is specified by its universal derived counit and K-flat models.
 Source: Stacks 099M, 06YY (blueprint: lem-sp-completion-mate-comparison).
@@ -133,7 +197,12 @@ theorem reduction_exists (T : Scheme.{t}) :
         CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
           (R := exchangeConstantRing T A) P →
         IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
-  sorry
+  apply kFlat_leftDerived_exists T _ (reductionModule d T)
+  intro P Q a hP hQ ha
+  apply (HomologicalComplex.quasiIso_iff_evaluation _).2
+  intro n
+  exact scalarReduction_map_quasiIso T (quotient d T n.unop) a hP hQ ha
+
 
 /-- The canonical total left derived strict reduction, chosen with its universal counit.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -144,6 +213,8 @@ Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
 def reductionCounit (T : Scheme.{t}) :
     DerivedCategory.Qh ⋙ reduction d T ⟶ reductionHomotopy d T :=
   (reduction_exists d T).choose_spec.choose
+
+attribute [local irreducible] reduction reductionCounit
 
 /-- The reduction counit at an actual cochain complex.
 Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
@@ -263,6 +334,8 @@ def ordinaryReductionPullInv (n : ℕ) :
         (exchangeConstantRing U A) (d.finiteRing U n) (quotient d V n) (quotient d U n)
           (exchangeConstantIso f A) (d.finiteRingIso f n) (quotient_comm d f n))
 
+attribute [local irreducible] ordinaryReductionPullInv
+
 /-- The normalized ordinary mate is the invertible tensor balancing map.
 Source: blueprint tower compatibility; Stacks 03EL and 06YY
 (blueprint: lem-sp-completion-mate-comparison).
@@ -300,6 +373,8 @@ def levelPullIso (n : ℕ) :
       (proEtaleRingRestrictScalars (quotient d U n)) ≪≫
     Functor.associator _ _ _
 
+attribute [local irreducible] levelPullIso
+
 /-- The level tensor comparisons commute with every quotient transition, including identities.
 Source: blueprint tower compatibility, step 1 (blueprint: lem-sp-completion-mate-comparison).
 Proof: both composites send a local pure tensor to its pullback with the quotient image
@@ -331,6 +406,8 @@ def ordinaryReductionPullIso :
       funext n
       exact (levelPullIso d f n.unop).hom.naturality a)
 
+attribute [local irreducible] ordinaryReductionPullIso
+
 set_option linter.defProp false in
 /-- The strict ordinary comparison and universal counits fix the derived comparison.
 Source: blueprint tower compatibility, steps 1--3; Stacks 06YY and 0D6D
@@ -355,6 +432,8 @@ def ReductionPullNormalized
             DerivedCategory.Q.map
               ((NatIso.mapHomologicalComplex (ordinaryReductionPullIso d f)
                 (.up ℤ)).hom.app P)
+
+attribute [local irreducible] ReductionPullNormalized
 
 /-- The canonical derived comparison is uniquely fixed on K-flat representatives by the
 strict ordinary comparison and the two universal derived counits.
@@ -383,6 +462,8 @@ def reductionPullIso :
 
 
 
+attribute [local irreducible] reductionPullIso
+
 /-- The strict projection is the adjunct of reduction of the ambient counit.
 Source: Stacks 0B56, 099M (blueprint: lem-sp-completion-mate-comparison). -/
 def projection (K : D (A := A) U) :
@@ -393,6 +474,8 @@ def projection (K : D (A := A) U) :
       ((reductionPullIso d f).hom.app ((push (A := A) f).obj K) ≫
         (reduction d U).map ((proEtaleRingDerivedAdjunction f (exchangeConstantRing V A)
           (exchangeConstantRing U A) (exchangeConstantIso f A)).counit.app K))
+
+attribute [local irreducible] projection
 
 /-- Perfect quotients make the strict projection invertible, on all ambient inputs.
 Source: Stacks 0944, 099M (blueprint: lem-sp-completion-mate-comparison).
@@ -424,6 +507,8 @@ def diagonalPullIso :
     Functor.mapDerivedCategoryNatIso (ordinaryDiagonalPullIso (A := A) f) ≪≫
       Functor.mapDerivedCategoryCompIso _ _
 
+attribute [local irreducible] diagonalPullIso
+
 /-- The direct-image/limit comparison is the adjunction conjugate of the identity square.
 It is the same K-injective comparison used by comparisonT in the generic interface.
 Source: Stacks 0A07 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -437,12 +522,16 @@ def directLimitIso :
       (exchangeTowerAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
         (exchangeConstantIso f A))) (diagonalPullIso (A := A) f)
 
+attribute [local irreducible] directLimitIso
+
 /-- The prescribed reconstruction of constant-coefficient completed pullback.
 Source: Stacks 099M, 099N (blueprint: lem-sp-completion-mate-comparison). -/
 def reconstruction (K : D (A := A) V) :
     (completePull d f).obj K ≅
       (rlim (A := A) U).obj ((exchangeConstantPull (A := A) f).obj ((reduction d V).obj K)) :=
   (rlim (A := A) U).mapIso ((reductionPullIso d f).symm.app K)
+
+attribute [local irreducible] reconstruction
 
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -455,6 +544,8 @@ def H (K : D (A := A) X) :
         ((exchangeConstantPush (A := A) f).obj ((reduction d X).obj K)) :=
   (reductionPullIso d g).symm.app _ ≪≫
     (exchangeConstantPull (A := A) g).mapIso (asIso (projection d f K))
+
+attribute [local irreducible] H
 
 /-- Exactly the prescribed s: derived strict inverse limit of H after reconstruction.
 Source: Stacks 099M, 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
