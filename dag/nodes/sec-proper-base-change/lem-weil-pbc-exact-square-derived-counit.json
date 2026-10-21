@@ -15,72 +15,75 @@
  ],
  "proof": [
   {
-   "text": "For either adjunction, [lem-weil-pbc-termwise-adjunction-homotopy] supplies the specified termwise adjunction on complexes and homotopy categories, including the ordinary counit and transpose. By [lem-weil-pbc-exact-functor-derived-factorization], exactness of $F$ makes its termwise functor preserve quasi-isomorphisms and supplies $D(F)$ and $\\varphi$. By [lem-weil-pbc-exact-functor-derived-functor](1), this factorization is a universal left derived pair. Here one can use the homotopy localization: the definition of the derived category identifies it with complex localization, and the termwise functors and comparisons factor through homotopy. Apply [lem-sfb-resolving-derived-adjunction-normalization] with its $A=\\mathcal B$, $B=\\mathcal A$, $G=F$, its right adjoint equal to $G$, and its resolving class the whole $K(\\mathcal B)$. The identity represents every complex in this class, and exactness gives the required inversion of quasi-isomorphisms. The target has K-injective resolutions by hypothesis. Work in a common ambient universe containing the fixed categories and their chosen derived Hom sets. The lemma gives $D(F)\\dashv RG$ with exactly the stated Hom formula for every chain map $f:F(M)\\to I$. Apply the same argument to the primed pair. The universal right pairs in that lemma are the independently fixed pairs in the statement, so no change of $RG,RG',\\eta,\\eta'$ is made.",
+   "text": "For a supplied quasi-isomorphism q: K → I with I K-injective, put T = Cone(id_K). The inclusion K → T is a monomorphism in each degree, and T is contractible. The map (inclusion,q): K → T ⊕ I is therefore monomorphic. Projection T ⊕ I → I is a homotopy equivalence, so T ⊕ I is K-injective and the two-out-of-three property makes the displayed monomorphism a quasi-isomorphism. Thus the stated arbitrary-resolution hypothesis supplies the monomorphic resolutions used by the K-injective derivability structure. A quasi-isomorphism between K-injectives is a homotopy equivalence; any additive functor preserves it. Consequently the K-injective localizer derives the termwise functor followed by Q. Its derived comparison is invertible on K-injectives, and postcomposition of the fixed right-derived pair by any functor remains right derived. These constructions do not identify the independent derived Hom universes.",
    "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "def-weil-abstract-derived-category",
-    "lem-sfb-resolving-derived-adjunction-normalization"
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), with Tag 070Y (lemma-K-injective-defined); agent exact-square extraction of tower normalization old steps 6-8"
    }
   },
   {
-   "text": "Take $M=G(I)$ and $f=\\varepsilon^0_I:F G(I)\\to I$ in Step 1. Its ordinary transpose is $1_{G(I)}$ by the adjunction triangle identity. Thus the derived transpose of $Q(\\varepsilon^0_I)\\circ\\varphi_{G(I)}$ is $\\eta_I$. The inverse derived transpose sends $h$ to $\\varepsilon^D_{QI}\\circ D(F)(h)$, so\n$$\\varepsilon^D_{QI}\\circ D(F)(\\eta_I)=Q(\\varepsilon^0_I)\\circ\\varphi_{G(I)}.$$\nThis is the required counit equation with its localization comparison written explicitly. The calculation holds for every complex $I$, in particular for K-injectives. Repeating it for $F'\\dashv G'$ gives the primed equation.",
-   "uses": [],
+   "text": "Use [lem-weil-pbc-termwise-adjunction-homotopy] for the adjunction on complexes. The exact factorization [lem-weil-pbc-exact-functor-derived-factorization] is an isomorphism, hence directly gives a left-derived pair by Mathlib Functor.isLeftDerivedFunctor_of_inverts. Its postcomposition by RG is still left derived for the same reason. Step 1 gives right-derivedness of RG followed by D(F). Apply Mathlib Adjunction.derived to these four fixed pairs. Its unit factorization, followed by naturality of eta and the formula for the ordinary transpose, proves precisely the displayed Hom formula. Do this for both adjunctions. This is the exact-left specialization of the normalized derived-adjunction construction; no common-universe resolving-class theorem is required.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), with Tag 070Y (lemma-K-injective-defined); agent exact-square extraction of tower normalization old steps 6-8"
+   }
+  },
+  {
+   "text": "Apply each Hom formula to the ordinary counit. The ordinary triangle identity says its transpose is the identity. Apply the inverse derived Hom equivalence: D(F)(eta_I) followed by the derived counit equals the localization factor followed by Q of the ordinary counit, for every complex I. For any two normalized adjunctions these equations coincide. The right-derived universal property of RG followed by D(F), proved in Step 1, then makes their counits equal. Adjunction.ext_counit makes the adjunctions equal. Repeat for the primed pair.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), with Tag 070Y (lemma-K-injective-defined); agent exact-square extraction of tower normalization old steps 6-8"
    }
   },
   {
-   "text": "The fixed universal right pairs have $\\eta_I$ and $\\eta'_J$ invertible whenever $I,J$ are K-injective, by [def-sfb-right-derived-functor]. Consequently Step 2 determines the counit at each such $QI$ uniquely, by cancelling $D(F)(\\eta_I)$. By [def-weil-abstract-derived-category], every derived object has a complex representative and localization inverts its quasi-isomorphism to a K-injective resolution. Hence every object is isomorphic to some $QI$. Naturality determines the counit everywhere from its values on these representatives. Two adjunctions on the fixed functors satisfying the Hom formula therefore have equal counits and equal inverse Hom maps $h\\mapsto\\varepsilon^D\\circ D(F)(h)$; their Hom bijections and units agree. This proves the asserted canonical specification, and the same reasoning applies to the primed adjunction.",
+   "text": "At a K-injective J, eta-prime_J is invertible by Step 1. Precompose the proposed square equality with D(r)D(F-prime)(eta-prime_J), and postcompose with the canonical factor D(r)(QJ) → Q(rJ). For the first side use the primed counit normalization and naturality of the factor for r. For the second side move the square comparison across eta-prime by naturality, move the factor for r across the unprimed counit, combine the three D(F)-images, and apply exactly h-beta at J. Use the unprimed counit normalization (valid on every complex) and naturality of the factor for F. The canonical square comparison is compatible with both termwise factorizations: this follows from mapDerivedCategoryCompIso_hom_app_factors and mapDerivedCategoryNatIso_fac. After these rewrites both composites are Q of the two ordinary-counit arrows; they agree degree by degree by h-epsilon. Cancel the invertible precomposition and postcomposition. The hypothesis that r preserves K-injectives supplies the specialization of the unprimed normalization at rJ.",
    "uses": [
-    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), with Tag 070Y (lemma-K-injective-defined); agent exact-square extraction of tower normalization old steps 6-8"
+   }
+  },
+  {
+   "text": "Write the two square arrows as natural transformations from RG-prime followed by D(F-prime) and D(r) to D(r). Choose a complex representing any derived object N and its supplied K-injective resolution J; localization gives an isomorphism N → QJ. Naturality transports their equality at QJ from Step 4 to equality after postcomposition with D(r) of this isomorphism. Cancel it. Only the given normalization of beta on K-injectives was used.",
+   "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
-   }
-  },
-  {
-   "text": "Fix a K-injective $J$ of $\\mathcal A'$. Suppress only the canonical localization/composition isomorphisms, which are natural and induced by the strict functor identities. Put $a_J=D(s)(\\eta'_J)$ and $\\lambda_J=D(F)(a_J)$; it is an isomorphism by Step 3. The two proposed counit-square arrows at $QJ$ have the same source, using $D(r)D(F')=D(F)D(s)$. Precompose the first with $\\lambda_J$. Step 2 and the termwise ordinary-counit hypothesis give\n$$D(r)(\\varepsilon'^{D}_{QJ})\\circ\\lambda_J=Q(r(\\varepsilon'^0_J))=Q(\\varepsilon^0_{rJ}).$$\nFor the second arrow use the assumed normalization $\\beta_{QJ}\\circ a_J=\\eta_{rJ}$ and then Step 2:\n$$\\varepsilon^D_{Q(rJ)}\\circ D(F)(\\beta_{QJ})\\circ\\lambda_J=\\varepsilon^D_{Q(rJ)}\\circ D(F)(\\eta_{rJ})=Q(\\varepsilon^0_{rJ}).$$\nHere $rJ$ is K-injective by the stated preservation hypothesis, and $D(r)(QJ)=Q(rJ)$ under the localization comparison. Cancelling the isomorphism $\\lambda_J$ proves the square equation at $QJ$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
-   }
-  },
-  {
-   "text": "Write $T=D(r)D(F')RG'$, identified with $D(F)D(s)RG'$ by the specified exact-functor composition comparisons, and put $L_N=D(r)(\\varepsilon'^{D}_N)$ and $R_N=\\varepsilon^D_{D(r)N}\\circ D(F)(\\beta_N)$. Both are natural transformations $T\\to D(r)$: this follows directly from naturality of the two counits, $\\beta$, and the comparison isomorphisms. For arbitrary $N$, choose an isomorphism $u:N\\xrightarrow{\\sim}QJ$ as in Step 3. Naturality gives\n$$D(r)(u)\\circ L_N=L_{QJ}\\circ T(u),\\qquad D(r)(u)\\circ R_N=R_{QJ}\\circ T(u).$$\nStep 4 makes the right sides equal; cancel $D(r)(u)$ to obtain $L_N=R_N$. Thus only normalization on K-injectives was used. No postcomposition universality of $D(s)RG'$ and no normalization on another complex enters this argument.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), with Tag 070Y (lemma-K-injective-defined); agent exact-square extraction of tower normalization old steps 6-8"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-sfb-right-derived-functor",
   "def-weil-abstract-derived-category",
-  "lem-sfb-resolving-derived-adjunction-normalization",
-  "def-sfb-right-derived-functor"
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 015F, 09T5, 0DVC and 070Y; normalized adjunction via the existing resolving-class lemma, followed by the explicit counit and exact-square cancellation in Steps 2-5"
+  "place": "Tags 09T5 and 070Y; D6 exact-left specialization using Mathlib Adjunction.derived, the identity-cone monomorphism construction and explicit comparison/naturality calculations."
  },
  "mathlib_searches": [
   {
@@ -204,8 +207,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-resolving-derived-adjunction-normalization",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
@@ -239,5 +240,15 @@
   "group": "NO",
   "result": "fix",
   "note": "All hypotheses and conclusions match the node; mathematics checked against Steps 1-5: hβ pins β on K-injectives, the uniqueness clauses follow from η invertible on K-injectives, and the edge cases and independent universes are fine. Using Mathlib IsRightDerivedFunctor for the arbitrary fixed pairs is equivalent to the def-sfb-right-derived-functor universal property. H4: the helper Functor.exactSquareDerivedComparison duplicated the existing CategoryTheory.Functor.mapDerivedCategorySquareIso (WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate:69, same body). FIX: fixes/ExactSquareDerivedCounit.lean drops the helper, imports MapDerivedCategoryMate and uses mapDerivedCategorySquareIso (eqToIso hF) in the final clause; fixes/lem-weil-pbc-exact-square-derived-counit.lean-record.json gives the new verbatim statement and declarations (refit_record: no notes or refusals). The fixed file compiled clean via nt_compile --json in 7.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261021T111022-L-3913629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
