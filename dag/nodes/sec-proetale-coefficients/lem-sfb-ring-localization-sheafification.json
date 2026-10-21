@@ -2,7 +2,7 @@
  "id": "lem-sfb-ring-localization-sheafification",
  "kind": "statement",
  "title": "Sectionwise presheaf model for localization of a ring object",
- "statement": "Let $C$ be a small site, with presheaf values in a universe containing its objects and arrows. Give abelian sheaves the sheafified tensor product [sk-def-sfb-sheaf-tensor]. Let $R$ be a commutative ring object [sk-def-sfb-ring-object] and $t$ a global section of $R$, with restriction $t_U\\in R(U)$ on each object $U$.\n\nDefine a presheaf of commutative rings $P$ by $P(U)=R(U)[1/t_U]$. Explicitly its elements are fractions $r/t_U^n$, for $r\\in R(U)$ and $n\\geq0$, with relation\n$$r/t_U^n=r'/t_U^m\\quad\\Longleftrightarrow\\quad\\exists k\\geq0:\\ t_U^k(t_U^m r-t_U^n r')=0.$$\nAddition and multiplication are $(r/t_U^n)+(r'/t_U^m)=(t_U^m r+t_U^n r')/t_U^{n+m}$ and $(r/t_U^n)(r'/t_U^m)=rr'/t_U^{n+m}$; restriction sends $r/t_U^n$ to $(r|_V)/t_V^n$ along $V\\to U$.\n\nThe ring sheafification $aP$ [def-weil-pbc-sheafification], viewed as a commutative ring object with the sheafified tensor product, has a canonical ring map $\\eta:R\\to aP$, $r\\mapsto r/1$. The section $\\eta(t)$ is invertible. For every commutative ring object $D$ and ring map $f:R\\to D$ such that $f(t)$ is invertible, there is a unique ring map $\\widetilde f:aP\\to D$ with $\\widetilde f\\eta=f$.\n\nConsequently, if $j:R\\to L$ is any ring map with this same universal property and with $j(t)$ invertible, there is a unique ring-object isomorphism $\\gamma:aP\\xrightarrow{\\sim}L$ satisfying $\\gamma\\eta=j$. No nonzero-divisor assumption on $t$ and no enough-points assumption on $C$ is required.",
+ "statement": "Let $C$ be a small site [def-weil-pbc-sites-and-cohomology], with presheaf values in a universe containing its objects and arrows. Give abelian sheaves the sheafified tensor product [sk-def-sfb-sheaf-tensor]. Let $R$ be a commutative ring object [sk-def-sfb-ring-object] and $t$ a global section of $R$, with restriction $t_U\\in R(U)$ on each object $U$.\n\nDefine a presheaf of commutative rings $P$ by $P(U)=R(U)[1/t_U]$ [def-weil-ring-localization-away]. Explicitly its elements are fractions $r/t_U^n$, for $r\\in R(U)$ and $n\\geq0$, with relation\n$$r/t_U^n=r'/t_U^m\\quad\\Longleftrightarrow\\quad\\exists k\\geq0:\\ t_U^k(t_U^m r-t_U^n r')=0.$$\nAddition and multiplication are $(r/t_U^n)+(r'/t_U^m)=(t_U^m r+t_U^n r')/t_U^{n+m}$ and $(r/t_U^n)(r'/t_U^m)=rr'/t_U^{n+m}$; restriction sends $r/t_U^n$ to $(r|_V)/t_V^n$ along $V\\to U$.\n\nThe ring sheafification $aP$ [def-weil-pbc-sheafification], viewed as a commutative ring object with the sheafified tensor product, has a canonical ring map $\\eta:R\\to aP$, $r\\mapsto r/1$. The section $\\eta(t)$ is invertible. For every commutative ring object $D$ and ring map $f:R\\to D$ such that $f(t)$ is invertible, there is a unique ring map $\\widetilde f:aP\\to D$ with $\\widetilde f\\eta=f$.\n\nConsequently, if $j:R\\to L$ is any ring map with this same universal property and with $j(t)$ invertible, there is a unique ring-object isomorphism $\\gamma:aP\\xrightarrow{\\sim}L$ satisfying $\\gamma\\eta=j$. No nonzero-divisor assumption on $t$ and no enough-points assumption on $C$ is required.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 0EMC, lemma-simple-invert, applied to the subpresheaf of powers of a global section; ring-object formulation via the sheafified tensor product."
@@ -10,11 +10,97 @@
  "stmt_deps": [
   "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-ring-object",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the section-ring reconstruction in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] for each commutative ring object in the statement: the section product is $r s=\\mu(r\\otimes s)$ and the section unit is $\\eta(1)$. Its size hypotheses hold because the coefficient universe contains the site data. Its monoidal-local-equivalence hypothesis follows from [sk-def-sfb-sheaf-tensor]: $a(q\\otimes_p H)\\cong a(q)\\otimes a(H)$, so a map inverted by $a$ remains inverted after tensoring. An internal ring morphism is a sectionwise ring map by evaluating its multiplication and unit equations on $r\\otimes s$ and $1$. Conversely, [det-def-sfb-ring-object-sheaf] gives the internal structure on every sheaf of rings and sends sheaf ring maps to internal ring morphisms. These operations recover the starting internal structure: its multiplication is the unique extension of the displayed sectionwise bilinear map through $a(R\\otimes_pR)$, and its unit is the unique extension of $n\\mapsto n\\cdot1$ through $a(\\underline{\\mathbf Z})$, by [def-weil-pbc-sheafification]. Thus all subsequent sectionwise ring constructions and factorizations give exactly the ring-object constructions and factorizations asserted here.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-sheaf-tensor",
+    "det-def-sfb-ring-object-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.md",
+    "place": "Unique extension of the sectionwise multiplication and unit; section-ring reconstruction and its morphism equations."
+   }
+  },
+  {
+   "text": "For each $U$ form the actual ring $R(U)[1/t_U]$ of [def-weil-ring-localization-away]. Its fraction relation and addition and multiplication are exactly the formulas in the statement, with $0=0/1$ and $1=1/1$. For $v:V\\to U$ write $\\rho_v:R(U)\\to R(V)$ for restriction. The map $\\rho_v$ followed by $R(V)\\to R(V)[1/t_V]$ sends $t_U$ to the invertible image of $t_V$, since $\\rho_v(t_U)=t_V$. Apply [lem-weil-pbc-localization-away-universal-property] to obtain a ring map $P(v)$, whose fraction formula is $P(v)(r/t_U^n)=\\rho_v(r)/t_V^n$. The identity restriction and $P(\\mathrm{id})$ agree on every $r/1$; for composable $v,w$, $P(w)P(v)$ and $P(vw)$ agree on every $r/1$ by the presheaf law for $R$. The uniqueness clause of the same node proves both presheaf laws. Also $i_U:r\\mapsto r/1$ commutes with restrictions, so these maps give a presheaf ring morphism $i:R\\to P$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization and its preceding fraction construction; Tag 00CP, proposition-universal-property-localization. Applied objectwise as in sites-modules.tex, Tag 0EMC."
+   }
+  },
+  {
+   "text": "Let $\\sigma:P\\to aP$ be ring sheafification [def-weil-pbc-sheafification] and put $\\eta=\\sigma i$. This is a ring sheaf morphism because $R$ is already a sheaf. Apply [det-def-sfb-ring-object-sheaf] to equip the ring sheaf $aP$ with the commutative ring-object structure for the sheafified tensor product; by step 1 the map $\\eta$ is an internal ring morphism from the original $R$. The sections $u_U=1/t_U\\in P(U)$ commute with every restriction. In $P(U)$ one has $(t_U/1)u_U=u_U(t_U/1)=1$, by [def-weil-ring-localization-away]. Applying $\\sigma_U$ gives a compatible global inverse for $\\eta(t)$ in $aP$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-ring-object-sheaf",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert (proof omitted); explicit argument for powers of a global section."
+   }
+  },
+  {
+   "text": "Let $f:R\\to D$ be a ring-object morphism with $f(t)$ invertible. By step 1 it is a morphism of reconstructed ring sheaves, and its sectionwise maps are $f_U:R(U)\\to D(U)$. A global inverse for $f(t)$ restricts to an inverse for $f_U(t_U)$ on every $U$. Apply [lem-weil-pbc-localization-away-universal-property] to obtain the unique ring homomorphism\n$$g_U:P(U)\\longrightarrow D(U),\\qquad g_U(r/t_U^n)=f_U(r)f_U(t_U)^{-n}.$$\nFor $v:V\\to U$, the two ring maps $D(v)g_U$ and $g_VP(v)$ from $P(U)$ to $D(V)$ agree on $r/1$: both values are $f_V(\\rho_v(r))$ by naturality of $f$. The uniqueness clause of the same node makes these maps equal. Hence $(g_U)$ is a presheaf ring morphism $g:P\\to D$ with $gi=f$.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert (proof omitted); explicit argument for powers of a global section."
+   }
+  },
+  {
+   "text": "The sheafification universal property [def-weil-pbc-sheafification], in commutative rings, extends $g$ uniquely to a ring sheaf morphism $\\widetilde f:aP\\to D$ with $\\widetilde f\\sigma=g$. Consequently $\\widetilde f\\eta=\\widetilde f\\sigma i=gi=f$. By [det-def-sfb-ring-object-sheaf] this is a ring-object morphism. If $h:aP\\to D$ is any other ring-object morphism with $h\\eta=f$, step 1 makes it a ring sheaf morphism; each $(h\\sigma)_U:P(U)\\to D(U)$ agrees with $f_U$ on $r/1$. By [lem-weil-pbc-localization-away-universal-property] it equals $g_U$, so $h\\sigma=g$. Uniqueness in sheafification then gives $h=\\widetilde f$. This proves exactly the asserted ring-object universal property.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-ring-object-sheaf",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert (proof omitted); explicit argument for powers of a global section."
+   }
+  },
+  {
+   "text": "Apply step 5 with $D=L$ and $f=j$ to obtain $\\gamma:aP\\to L$ satisfying $\\gamma\\eta=j$. The assumed universal property of $j$ applied to $\\eta:R\\to aP$ gives $\\delta:L\\to aP$ with $\\delta j=\\eta$. Then $(\\delta\\gamma)\\eta=\\eta$, so uniqueness in step 5 gives $\\delta\\gamma=\\mathrm{id}_{aP}$. Likewise $(\\gamma\\delta)j=j$, so uniqueness for $j$ gives $\\gamma\\delta=\\mathrm{id}_L$. Thus $\\gamma$ is an isomorphism, and step 5 also proves its asserted uniqueness. The argument used inversion only in the target of a ring map; it never cancelled a power of $t$ in $R$ and never used stalks or points of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert (proof omitted); explicit argument for powers of a global section."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "det-def-sfb-ring-object-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0EMC, lemma-simple-invert: proof supplied because Stacks omits it; ordinary fractions and universal property from algebra.tex Tags 00CO and 00CP; the internal formulation uses the existing section-ring reconstruction and unique-extension nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +143,52 @@
    "results": "{\"t\": \"2026-10-21T04:09:58Z\", \"tool\": \"grep\", \"query\": \"localizationPresheaf|toLocalizationPresheaf|[Ll]ocal.*[Ff]raction\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\"], \"digest\": \"41dc8f99d0aab870\"}",
    "date": "2026-10-21",
    "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  },
+  {
+   "tool": "grep",
+   "query": "localizationPresheaf|sheaf.*localiz|localiz.*sheaf",
+   "results": "{\"t\": \"2026-10-21T07:22:06Z\", \"tool\": \"grep\", \"query\": \"localizationPresheaf|sheaf.*localiz|localiz.*sheaf\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\"], \"digest\": \"e92f515e0126a816\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: semantic hits concern scheme structure sheaves or ordinary rings; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) only constructs a presheaf on topological spaces. Sites/Localization concerns localization of categories. Read these hits; none supplies the arbitrary-site ring-object universal property and canonical comparison. Ordinary IsLocalization.Away.lift is reused through the existing Mathlib leaf lem-weil-pbc-localization-away-universal-property."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, \"lift\"",
+   "results": "{\"t\": \"2026-10-21T07:22:07Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.Away, \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.lift\", \"IsLocalization.Away.lift_comp\", \"IsLocalization.Away.liftAlgHom\", \"IsLocalization.Away.lift_eq\", \"IsLocalization.Away.liftAlgHom_toRingHom\", \"IsLocalization.Away.coe_liftAlgHom\", \"IsLocalization.Away.liftAlgHom_apply\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\"], \"digest\": \"43cca7152caf8288\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: semantic hits concern scheme structure sheaves or ordinary rings; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) only constructs a presheaf on topological spaces. Sites/Localization concerns localization of categories. Read these hits; none supplies the arbitrary-site ring-object universal property and canonical comparison. Ordinary IsLocalization.Away.lift is reused through the existing Mathlib leaf lem-weil-pbc-localization-away-universal-property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of sheaves of commutative rings by sheafification of localizations on sections",
+   "results": "{\"t\": \"2026-10-21T07:22:07Z\", \"tool\": \"leansearch\", \"query\": \"Localization of sheaves of commutative rings by sheafification of localizations on sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"AlgebraicGeometry.structureSheafInType\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"PresheafOfModules.sheafify\", \"AlgebraicGeometry.commRingStructureSheafInTypeObj\", \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf\"], \"digest\": \"5c63644e88a8aeb1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: semantic hits concern scheme structure sheaves or ordinary rings; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) only constructs a presheaf on topological spaces. Sites/Localization concerns localization of categories. Read these hits; none supplies the arbitrary-site ring-object universal property and canonical comparison. Ordinary IsLocalization.Away.lift is reused through the existing Mathlib leaf lem-weil-pbc-localization-away-universal-property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of sectionwise localization of a commutative ring sheaf at a global section has the universal property of inverting that section",
+   "results": "{\"t\": \"2026-10-21T07:22:08Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of sectionwise localization of a commutative ring sheaf at a global section has the universal property of inverting that section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.StructureSheaf.localization_toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen\", \"AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_to_map\", \"TopCat.Presheaf.toTotalQuotientPresheaf\"], \"digest\": \"c4ead51b71e68deb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: semantic hits concern scheme structure sheaves or ordinary rings; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) only constructs a presheaf on topological spaces. Sites/Localization concerns localization of categories. Read these hits; none supplies the arbitrary-site ring-object universal property and canonical comparison. Ordinary IsLocalization.Away.lift is reused through the existing Mathlib leaf lem-weil-pbc-localization-away-universal-property."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*[Ss]heaf|[Ss]heaf.*localization|localization.*[Rr]ing",
+   "results": "{\"t\": \"2026-10-21T07:22:39Z\", \"tool\": \"grep\", \"query\": \"localization.*[Ss]heaf|[Ss]heaf.*localization|localization.*[Rr]ing\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/PreservesSheafification.lean\"], \"digest\": \"49957c4d93e006f8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: semantic hits concern scheme structure sheaves or ordinary rings; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) only constructs a presheaf on topological spaces. Sites/Localization concerns localization of categories. Read these hits; none supplies the arbitrary-site ring-object universal property and canonical comparison. Ordinary IsLocalization.Away.lift is reused through the existing Mathlib leaf lem-weil-pbc-localization-away-universal-property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism from the sheafification of the presheaf U maps to R(U)[1/t] is uniquely determined by a homomorphism from R sending t to a unit",
+   "results": "{\"t\": \"2026-10-21T07:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"A ring homomorphism from the sheafification of the presheaf U maps to R(U)[1/t] is uniquely determined by a homomorphism from R sending t to a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.toOpen\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.StructureSheaf.localization_toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.const\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_to_map\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.StructureSheaf.to_global_factors\"], \"digest\": \"8f924f1b62c2b86d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: semantic hits concern scheme structure sheaves or ordinary rings; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) only constructs a presheaf on topological spaces. Sites/Localization concerns localization of categories. Read these hits; none supplies the arbitrary-site ring-object universal property and canonical comparison. Ordinary IsLocalization.Away.lift is reused through the existing Mathlib leaf lem-weil-pbc-localization-away-universal-property."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-localized-basis-coefficients",
@@ -79,5 +207,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ring-localization-sheafification",
+  "worker": "stage1",
+  "summary": "Supplied the proof omitted in Stacks 0EMC: reconstruct section rings, construct natural sectionwise localizations, invert the global section, extend natural objectwise localization lifts through ring sheafification, and compare two universal objects. Reused existing nodes throughout; no new node, Lean writing, or compilation. Added explicit definition citations without changing any mathematical hypothesis or conclusion.",
+  "blueprint": "Realizes the finite-free blueprint proof sentence “Inverting ell ... gives E_X^d ≅ F_X, and the two isomorphisms are compatible with O to E by construction”, via lem-sfb-localized-basis-coefficients: supplies the canonical ring-localization model and uniqueness used for that rational comparison.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-sheaf",
+    "why": "Generic passage from a sectionwise sheaf of rings to its ring object, including morphisms and the normalization by section multiplication; the coefficient-basis unit has no such generic comparison."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Uses only its explicitly stated reconstruction of the section-ring sheaf of an internal commutative ring; the coefficient-basis unit does not construct section rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-sheaf",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-97bf6af07",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-97bf6af07 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has no new nodes. The statement is the base text verbatim plus two added definition citations, and stmt_deps matches. Source checked: Stacks sites-modules.tex 0EMC (lemma-simple-invert, proof 'Omitted'). Taking S = powers of t, 'local sections become invertible' is equivalent to a global inverse of f(t), so the item is that lemma restated for ring objects; tags 00CO and 00CP confirmed in tags/tags. Steps: (1) The section-ring reconstruction comes from the statement of def-weil-pbc-internal-abelian-sheaf-module-equivalence. Its 'monoidal local equivalences' hypothesis follows from the strong monoidality in sk-def-sfb-sheaf-tensor. Uniqueness of extension in det-def-sfb-ring-object-sheaf, through a(R⊗pR) and a(Z), recovers the original mu and eta. (2) Restrictions of P and both presheaf laws follow from the localization-away universal-property leaf; its uniqueness is checked on r/1. (3) sigma(1/t) inverts eta(t). I read aP as sheafification in commutative rings (allowed by def-weil-pbc-sheafification, and step 5 says so). (4) Naturality of the g_U is proved by uniqueness, not assumed. (5) Existence and uniqueness through sheafification are proved in the same morphism category. (6) Uniqueness of universal objects, genuinely elementary. Small cases: t=1; t=0 or nilpotent (Z/4, t=2) give the zero sheaf; the empty site works. Duplicate search over the side-live DAG: def-weil-pbc-ringed-section-localization and its citers are module-sheafification and derived-category statements, not this ring universal property, so same_as [] is right. The declared tool uses (det-def-sfb-ring-object-sheaf, the internal-abelian reconstruction) are accepted. No SGA citation. No cycle. proof_deps equals the union of uses."
  }
 }
