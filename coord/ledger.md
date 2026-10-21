@@ -21831,3 +21831,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: returned deliver/Q52/lem-sfb-finite-flat-constructible-total-tensor (reviewer RETURN: L: independent stage-2 immutable head 41777ce65ea0: H13: the delivery overwrites two landed dependency records. (1) def-)
 - 09:17 L: returned deliver/Q53/lem-pur-clopen-finite-constructibility-bounds (reviewer RETURN: L: independent stage-2 immutable head 5f1d0861b0ab: H13: the delivery overwrites two dependency lean records that other )
 - 09:17 L: returned deliver/Q27/lem-weil-coefficient-complex-rationalization (reviewer RETURN: L: independent stage-2 immutable head 818d69d5aba1: H2 / theorem-stmt_dep finding upheld: delivery added stmt_dep lem-we)
+- 09:17 L: returned deliver/NY/lem-weil-point-finite-free-sections-tensor (reviewer RETURN: L: independent stage-2 immutable head a12ed8e1fadd: H2: stmt_deps gained theorem nodes lem-weil-finite-free-completed-sc)
