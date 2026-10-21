@@ -20458,3 +20458,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: merged deliver/NE/lem-fix-compactification-completed-realization (reviewer PASS; first push; new nodes: 0); claim not held by NE: not your claim
 - 06:36 L: merged deliver/NU/lem-pur-etale-injective-support-sequence (reviewer FIX; first push; new nodes: 0)
 - 06:36 L: merged deliver/Q111/def-wf-tate-twist (reviewer PASS; first push; new nodes: 0)
+- 06:36 L: merged deliver/Q34/lem-sf-reduction-flat-model (reviewer FIX; after a return; new nodes: 1)

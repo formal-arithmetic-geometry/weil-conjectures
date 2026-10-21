@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Work on either of the two sites, and put $R=(A_{E,n})_T$ and $S=(A_{E,m})_T$. The quotient homomorphism $A_{E,n}\\to A_{E,m}$ is induced by the identity of $\\mathcal O_E$, since $\\varpi_E^n=\\varpi_E^m\\varpi_E^{n-m}$ gives $(\\varpi_E^n)\\subseteq(\\varpi_E^m)$ for $m\\le n$; it induces the coefficient-ring-sheaf morphism $\\varphi:R\\to S$. Choose the site skeleton and module values in the ambient coefficient universe of [def-weil-size-convention]. The site is therefore essentially small in that universe, as required by the K-flatness lemma; the finite coefficient rings are viewed in the same universe. The given $P$ is bounded above by $b$ and has flat terms. Apply [lem-weil-pbc-independent-bounded-flat-kflat] on this ringed site to conclude that $P$ is K-flat. This is the precise bounded-above-flat result needed in the first sentence of the blueprint proof; no assertion about arbitrary unbounded double complexes is used.",
+   "text": "On either site put $R=(A_{E,n})_T$ and $S=(A_{E,m})_T$. Since $\\varpi_E^n=\\varpi_E^m\\varpi_E^{n-m}$, the identity of $\\mathcal O_E$ induces $A_{E,n}\\to A_{E,m}$ and hence $\\varphi:R\\to S$ [def-weil-l-adic-coefficient-extension]. Use a skeleton and module values in the coefficient universe of [def-weil-size-convention]; the site is essentially small there. The complex $P$ is bounded above by $b$ with flat terms, so [lem-weil-pbc-independent-bounded-flat-kflat] makes it K-flat.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
     "def-weil-size-convention",
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "Let $Q_R,Q_S$ denote passage from complexes to the corresponding derived categories. By [lem-pur-derived-change-of-rings], derived extension of scalars along $\\varphi$ is computed by ordinary termwise change of rings on the K-flat complex $P$. Apply the derived functor to the given isomorphism $K\\cong Q_R(P)$, and compute its value at $P$ (using the identity K-flat resolution of $P$). This gives, in $D(S)$, $K_m\\cong Q_S(P\\otimes_R S)$. Thus the reduction retains its $S$-module structure; we do not identify an object of $D(S)$ with its restriction to $D(R)$. This proves the displayed derived-category isomorphism.",
+   "text": "Let $Q_R,Q_S$ be the localizations. By [lem-pur-derived-change-of-rings], the identity K-flat resolution of $P$ computes $L\\varphi^*Q_R(P)$ as $Q_S(P\\otimes_R S)$. Applying $L\\varphi^*$ to the given $K\\cong Q_R(P)$ gives $K_m\\cong Q_S(P\\otimes_R S)$ in $D(S)$, with its target $S$-module structure.",
    "uses": [
     "lem-pur-derived-change-of-rings"
    ],
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "Set $P_m=P\\otimes_R S$ with termwise differentials $d_P^q\\otimes1$. Apply [lem-pur-kflat-change-of-rings] to the same $\\varphi$ and $P$: the K-flatness proved in step 1 and the assumed flatness of every $P^q$ give that $P_m$ is K-flat over $S$ and every $P_m^q=P^q\\otimes_R S$ is a flat $S$-module sheaf. The support assertion is elementary from the sheafified sectionwise tensor definition [def-pur-sheaf-tensor-product]: if $q\\notin[a,b]$, then $P^q=0$, so the presheaf with sections $P^q(U)\\otimes_{R(U)}S(U)$ is zero and its sheafification is zero. Therefore $P_m^q=0$ outside $[a,b]$. Together with step 2 this is exactly the required bounded flat model.",
+   "text": "Set $P_m=P\\otimes_R S$, with differentials $d_P^q\\otimes1$. The K-flatness of step 1 and termwise flatness of $P$ meet both hypotheses of [lem-pur-kflat-change-of-rings], so $P_m$ is K-flat over $S$ and each $P_m^q$ is flat over $S$. If $q\\notin[a,b]$, then $P^q=0$; the sectionwise tensor presheaf $P^q(U)\\otimes_{R(U)}S(U)$ is zero, and so is its sheafification [def-pur-sheaf-tensor-product]. Thus $P_m$ is supported in $[a,b]$; with step 2 it is the asserted bounded flat model.",
    "uses": [
     "lem-pur-kflat-change-of-rings",
     "def-pur-sheaf-tensor-product"
@@ -64,8 +64,9 @@
    }
   },
   {
-   "text": "For any sheaf $M$ of $S$-modules placed in degree zero, use the K-flat representative $P_m$ of step 3 in the derived-tensor construction: [def-weil-derived-tensor] on the pro-etale site, or [def-kun-derived-tensor] on the etale site. It computes $K_m\\otimes_S^L M$ as $Q_S(P_m\\otimes_S M[0])$. By [def-pc-tensor-complex-sheaves] the degree-$q$ term is $P_m^q\\otimes_S M$, because the only nonzero degree of $M[0]$ is zero. This term vanishes when $q\\notin[a,b]$. In such a degree its cohomology is zero: its kernel is a subobject of the zero degree-$q$ term and the quotient by the incoming image is therefore zero, by [def-weil-derived-cohomology-sheaves]. This is the defining test for Tor amplitude in $[a,b]$, [def-weil-proetale-tor-amplitude] or [def-kun-tor-amplitude], respectively. It establishes the last assertion, in fact from the supplied bounded flat model alone.",
+   "text": "Assume the original Tor-amplitude hypothesis, so $a\\le b$ on the pro-etale branch [def-weil-proetale-tor-amplitude]. Let $M$ be any $S$-module sheaf. The tensor tested there is that of [def-weil-derived-tensor] or [def-kun-derived-tensor]: for any K-flat model $P'$ of $K_m$ it is $Q_S(\\operatorname{Tot}(P'\\otimes_S M[0]))$, and since $M[0]$ has only degree zero, by [def-pc-tensor-complex-sheaves] this total complex is $T_M(P')$, with differential $d_{P'}\\otimes1+(-1)^q1\\otimes0=d_{P'}\\otimes1$. Apply [lem-sf-ringed-kflat-single-tensor-comparison] to $P'$ and to $P_m$ (K-flat over $S$ by step 3): $Q_S(T_M(P'))\\cong Q_S(P')\\otimes_S^L M[0]\\cong Q_S(P_m)\\otimes_S^L M[0]\\cong Q_S(T_M(P_m))$, the middle map induced by the isomorphisms of step 2. So whichever model the definition chooses, $K_m\\otimes_S^L M$ is $Q_S(T_M(P_m))$, whose degree-$q$ term is $P_m^q\\otimes_S M$. Outside $[a,b]$ this term is zero; its cohomology, a quotient of a kernel in that zero term [def-weil-derived-cohomology-sheaves], is zero. This is Tor amplitude in $[a,b]$ by [def-weil-proetale-tor-amplitude] or [def-kun-tor-amplitude].",
    "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
     "def-weil-derived-tensor",
     "def-kun-derived-tensor",
     "def-pc-tensor-complex-sheaves",
@@ -73,7 +74,7 @@
     "def-weil-proetale-tor-amplitude",
     "def-kun-tor-amplitude"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 06YU, definition-derived-tor and preceding construction; Tag 08FZ, definition-tor-amplitude"
@@ -87,9 +88,10 @@
   "lem-pur-derived-change-of-rings",
   "lem-pur-kflat-change-of-rings",
   "def-pur-sheaf-tensor-product",
-  "def-weil-derived-tensor",
-  "def-kun-derived-tensor",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
   "def-pc-tensor-complex-sheaves",
+  "def-kun-derived-tensor",
+  "def-weil-derived-tensor",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-proetale-tor-amplitude",
   "def-kun-tor-amplitude"
@@ -97,7 +99,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/lem-sf-reduction-flat-model.proof.md",
-  "place": "Complete proof, made precise using Stacks Tags 06YQ, 06YY, 0G7E, 06YU and 08FZ"
+  "place": "Current blueprint proof: bounded flat K-flatness, derived coefficient change, reduced-term flatness, and the extracted arbitrary-test-sheaf tensor comparison followed by degreewise support."
  },
  "mathlib_searches": [
   {
@@ -229,11 +231,11 @@
   "note": "Reviewed node, dependencies, source locations, declarations, docstrings, edge cases, universes, and canonical reduction constructions. scompile.py passed sandbox and library checks with exit 0; no substantive or mechanical defects found."
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sf-reduction-flat-model",
   "worker": "stage1",
-  "summary": "Kept the source statement. Checked both upstream attachment candidates against the recorded ringed-site coefficient and constructibility interfaces; neither supplies the exact whole item. Replaced the imported single paragraph by four steps using existing general ringed-site results, with direct degreewise support and Tor-amplitude arguments. No new nodes. Removed the citation to inverse-image flatness, whose statement does not assert change-of-rings preservation, and supplied the missing bounded-flat K-flatness theorem. Kept coefficient reduction in the target module category.",
-  "blueprint": "Current main-20261015 proof: step 1 realizes bounded flat implies K-flat; step 2 realizes the computation of reduction; step 3 realizes termwise flatness and support; step 4 realizes the final Tor-amplitude implication.",
+  "summary": "Human-requested re-split. Preserved the statement and every original argument. Added one statement-only arbitrary-ringed-site K-flat tensor-with-single comparison, separating the derived-to-termwise identification from the elementary support/cohomology calculation. Reused existing general K-flatness and coefficient-change nodes instead of making duplicates. The four-step assembly is below 3000 characters; the interval-order premise in the final pro-etale implication is explicit.",
+  "blueprint": "First sentence: step 1 (bounded flat implies K-flat). Derived reduction sentence: step 2. Termwise flatness and support sentences: step 3. Final Tor-amplitude sentence: new lem-sf-ringed-kflat-single-tensor-comparison plus step 4. No change of route or of the statement.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-independent-bounded-flat-kflat",
@@ -255,11 +257,11 @@
   "lem-pur-kflat-change-of-rings"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q62-258d6d4f8",
-  "group": "Q62",
+  "reviewer": "NT-cc-Q34-ece606fe3",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-258d6d4f8 (reviewer sub-agent of L); spot-checked: Read the item, all four steps and every cited node's statement in full. The statement is unchanged: verbatim equal to current main-20261015 lem-sf-reduction-flat-model.md and to the base and live node. There are no new nodes. stmt_deps already had lem-pur-derived-change-of-rings in the base, so K_m is read in D(A_{E,m}); read via restriction of scalars to A_{E,n} instead, the Tor-amplitude conclusion would be false (Z/l is not flat over Z/l^2). The derived category is D(Mod(A_T)) on both sites (def-weil-finite-torsion-constructibility, def-weil-pbc-derived-categories), matching the change-of-rings lemma. Step 1: lem-weil-pbc-independent-bounded-flat-kflat agrees with Stacks 06YQ (lemma-bounded-flat-K-flat). Its hypotheses hold: P^i=0 for i>b, flat terms in the def-pc-flat-sheaf-modules sense, and essential smallness via def-weil-size-convention. The quotient map A_{E,n}->A_{E,m} is elementary from def-weil-l-adic-coefficient-extension. Step 2: lem-pur-derived-change-of-rings clause (2), applied to the identity K-flat resolution, agrees with Stacks 06YY and assumes no flatness of R->S. Step 3: lem-pur-kflat-change-of-rings agrees with Stacks 0G7E for the identity topos; both hypotheses are present. Support follows from the sheafified-presheaf definition in def-pur-sheaf-tensor-product. Step 4 is genuinely elementary: degree q of Tot(P_m (x) M[0]) is P_m^q (x) M, and this is exactly the Tor-amplitude test in def-weil-proetale-tor-amplitude and def-kun-tor-amplitude (blueprint updates checked). It correctly avoids applying the lem-sf-flat-model equivalence to K_m, whose constructibility is unproved. The route matches the unit step (ii)=>(i). Dropping lem-exc-constant-inverse-image-flat fixes a C4 citation fault. Edge cases checked: m=n; P=0 or T empty; a=b; an acyclic flat complex over Z/l^2 reduced to F_l; A[0] reduced to F_l[0]. Upstream Etale.reductionModIdeal_flatModel (Sheaf(ModuleCat), a different constructibility predicate, etale site only, restriction-of-scalars output) is not an exact attachment. Accepted tool_uses: lem-weil-pbc-independent-bounded-flat-kflat, lem-pur-derived-change-of-rings and lem-pur-kflat-change-of-rings, all generic ringed-site black boxes. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-ece606fe3 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited node's statement in full, and compared the proof step by step with the PASSed base proof (side-live, 3083 characters). The statement is byte-identical. The item is not in any route-pivot drop list. The repair note asks for at least 1 new statement-only node. Steps 1-3 keep their arguments and remain short assemblies of existing generic nodes: 06YQ bounded flat implies K-flat (ideal containment holds for m=n), 06YY derived change of rings in D(S), and 0G7E K-flat with flat terms plus zero sheafification. The old step-4 derived-to-termwise argument is now lem-sf-ringed-kflat-single-tensor-comparison. That node is true: choose resolutions of P and of M[0]; cone(P''->P) tensored with a K-flat C is acyclic; P K-flat makes Tot(P⊗C)->Tot(P⊗M[0]) a quasi-isomorphism; Tot(P⊗M[0]) equals the termwise complex with differential d⊗1. Its source is Stacks 06YU and the construction before it (sites-cohomology.tex l.3270-3311). Small cases tested: R[0], 0, acyclic K-flat P, shifted flat module, non-flat M. It is not a duplicate of the ring-module versions (lem-weil-pbc-source-kflat-tensor-single-model, lem-pc-source-kflat-module-tensor-model), lem-pc-kflat-single-tensor-representative, lem-kun-derived-tensor-well-defined, lem-pur-kflat-cone-comparison or lem-sf-ringed-derived-closed-symmetric-monoidal. lem-sp-ringed-site-tor-flat-model (2)=>(1) would also close the step; it is noted only. Fault C: the delivered step 4 dropped def-weil-derived-tensor, def-kun-derived-tensor and def-pc-tensor-complex-sheaves. It identified K_m⊗^L M only for the descent bifunctor of lem-weil-pbc-site-derived-tensor-descent, not for the tensor that def-weil-proetale-tor-amplitude and def-kun-tor-amplitude test. FIX: step 4 now computes the defining tensor for any chosen K-flat model P' as Q(T_M(P')) and uses the helper with step 2 to get Q(T_M(P'))≅Q(T_M(P_m)). The three definitions are restored to the step's uses and to proof_deps; all were in the base proof_deps, so there is no cycle. The step is 1115 characters and the proof 2375. Accepted tool_uses unchanged: lem-weil-pbc-independent-bounded-flat-kflat, lem-pur-derived-change-of-rings, lem-pur-kflat-change-of-rings.; 1 file(s) fixed by the reviewer"
  }
 }
