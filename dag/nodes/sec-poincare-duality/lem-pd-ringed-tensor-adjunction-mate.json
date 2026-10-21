@@ -15,9 +15,88 @@
   "lem-sfb-adjunction-oplax-mate",
   "def-weil-pbc-canonical-ringed-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=RI$ and $T=S\\otimes_A-$. By [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] choose the natural normalized isomorphism $a_{M,N}:I(M\\otimes_RN)\\cong IM\\otimes_AIN$. By [lem-weil-pbc-scalar-extension-tensor-comparison] choose $b_{H,K}:T(H\\otimes_AK)\\cong TH\\otimes_STK$. Define $k_{M,N}=b_{IM,IN}\\circ T(a_{M,N})$. It is a natural isomorphism from $L(M\\otimes_RN)$ to $LM\\otimes_SLN$, since the action of $L$ on morphisms is the stipulated scalar extension of $I$. Let $q_H:H\\to T(H)$ denote scalar insertion. Naturality of $q$, followed by the two cited pure-tensor normalizations, says that $k_{M,N}\\circ q_{I(M\\otimes_RN)}$ takes the inverse image of every generalized source pure tensor to the tensor of its two inserted inverse images. Thus $q$ and $k$ satisfy exactly the normalized comparison definition [def-weil-pbc-canonical-ringed-tensor-comparison].",
+   "uses": [
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-weil-pbc-scalar-extension-tensor-comparison",
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; inverse-image and scalar-extension factors; agent expansion of normalization"
+   }
+  },
+  {
+   "text": "Let $\\Phi_{X,H}:\\operatorname{Hom}_S(LX,H)\\cong\\operatorname{Hom}_R(X,PH)$ be the specified adjunction [lem-weil-pbc-ringed-topoi-module-adjunction], and let $\\eta$ be its unit. Naturality of the Hom bijection gives $\\Phi(f)=P(f)\\circ\\eta_X$: apply naturality in the target to $f:LX\\to H$ and to $\\Phi(\\mathrm{id}_{LX})=\\eta_X$. Denote the stipulated lax tensor maps of $P$ by $p$. By [lem-sfb-adjunction-oplax-mate] the actual oplax maps are characterized by\n$$\\Phi(d_{M,N})=p_{LM,LN}\\circ(\\eta_M\\otimes\\eta_N),\\qquad \\Phi(d_0)=c.$$\nThis uses the specified adjunction and lax structure, so identifying these adjoints identifies their actual mates.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; agent application of the oplax mate formula"
+   }
+  },
+  {
+   "text": "Let $\\mu$ be any normalized comparison [def-weil-pbc-canonical-ringed-tensor-comparison], including $k$ of Step 1. For $U\\in C$, $m\\in M(U)$ and $n\\in N(U)$, apply its generalized normalization with $Z=|M|\\times|N|$, the projections $x,y$, and the pure pairing $z$. Naturality of the geometric adjunction unit gives $u_*u^{-1}(z)\\eta_Z=\\eta_{|M\\otimes_RN|}z$; naturality for the two projections identifies the two components of $\\eta_Z$ with $\\eta_{|M|},\\eta_{|N|}$. The algebraic inverse-image identifications [def-weil-pbc-algebraic-inverse-image] and the assumed formula for the module unit therefore give, on the sections over $v(U)$,\n$$\\mu\\bigl(\\eta_{M\\otimes_RN}(m\\otimes n)\\bigr)=\\eta_M(m)\\otimes\\eta_N(n).$$\nThe right side is exactly $p_{LM,LN}(\\eta_M(m)\\otimes\\eta_N(n))$, interpreted as a section of the direct image, by the stipulated local pairing. Hence $P(\\mu)\\eta_{M\\otimes_RN}$ and $p_{LM,LN}(\\eta_M\\otimes\\eta_N)$ agree after the pure pairing on every object of $C$. The sheaf tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] makes them equal as $R$-linear maps; it does not require every tensor section to be globally pure. Injectivity of the bijection in Step 2 gives $\\mu=d_{M,N}$. In particular $d=k$, is invertible, and equals every normalized canonical comparison.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, Hom/bilinear chain; agent identification by units and injectivity"
+   }
+  },
+  {
+   "text": "After identifying $I(M\\otimes_RN)$ with $IM\\otimes_AIN$ using Step 1, the map $d=k$ is $b_{IM,IN}$. Put $H=IM$, $K=IN$. Its normalization and $S$-linearity give\n$$b\\bigl(s\\otimes(m\\otimes n)\\bigr)=(s\\otimes m)\\otimes(1\\otimes n).$$\nIndeed multiply its insertion formula by $s$. Define the reverse pairing before sheafification by $((s\\otimes m),(t\\otimes n))\\mapsto st\\otimes(m\\otimes n)$. It is additive in all four entries. The $A$-relations in the first input hold because $s\\alpha(a)t\\otimes(m\\otimes n)=st\\otimes(am\\otimes n)$, and those in the second because $st\\alpha(a)\\otimes(m\\otimes n)=st\\otimes(m\\otimes an)$. The $S$-balancing relation is $(rs)t=s(rt)$; commutativity of $S$ makes both input actions compatible. These formulas commute with restrictions. Extend this presheaf pairing to the two scalar-extension sheaves by [lem-pc-sites-module-sheafification-bilinear-extension], then to their tensor by [lem-pc-sites-sheaf-tensor-bilinear-universal]. The two composites on generators are $s\\otimes(m\\otimes n)$ and $(st\\otimes m)\\otimes(1\\otimes n)=(s\\otimes m)\\otimes(t\\otimes n)$. Additivity, the same two uniqueness properties, and the sheafification universal property [def-weil-presheaf-modules-sheafification] prove the inverse identities on the sheaves. This proves both scalar formulas, with no flatness assumption.",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-tensor-comparison",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, scalar-extension equality, and Tag 0GMW, lemma-sheafification-tensor; agent balancing and inverse calculations"
+   }
+  },
+  {
+   "text": "For the tensor unit, the algebraic inverse-image identifications identify $I(R)$ with the regular $A$-module: transport of multiplication is exactly its scalar action [def-weil-pbc-algebraic-inverse-image]. Thus $L(R)=S\\otimes_AA$. Multiplication $h(s\\otimes a)=s\\alpha(a)$ is balanced, since $s\\alpha(r)\\alpha(a)=s\\alpha(ra)$, and commutes with restrictions; it therefore defines a morphism of $S$-module sheaves by [def-weil-presheaf-modules-sheafification]. Its adjoint under Step 2 is $P(h)\\eta_R$. On $r\\in R(U)$ this is $\\alpha(\\eta^{\\rm geom}_R(r))=c_U(r)$, by the assumed insertion formula and the definition of $c$ as the geometric adjunct of $\\alpha$. Hence $\\Phi(h)=c=\\Phi(d_0)$, and $h=d_0$. The map $j(s)=s\\otimes1$ is $S$-linear and commutes with restrictions. On sections $hj(s)=s$, and on presheaf tensors $jh(s\\otimes a)=s\\alpha(a)\\otimes1=s\\otimes a$ by balancing. The sheafification uniqueness property gives $jh=\\mathrm{id}$ on all sections. Thus $j$ is the asserted inverse of the oplax unit, also for the zero ring.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules, scalar extension/restriction adjunction; agent unit mate and inverse calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-scalar-extension-tensor-comparison",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-adjunction-oplax-mate",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EL and Section 03EK; explicit identification of the mates for the specified unit, and balanced scalar formulas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +132,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).unit.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"For a commutative ring homomorphism $ f : R \\\\to S $, the unit of the adjunction between the extension of scalars functor and the restriction of scalars functor, when applied to an element $ m $ of an \"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {M : ModuleCat R}\\n  {N : ModuleCat S} (φ : (ModuleCat.extendScalars f).obj M ⟶ N) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom (((ModuleCat.extendRestrictScalarsAdj f).homEquiv M N) φ)) m =\\n    (CategoryTheory.\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the adjunction between the extension of scalars functor and the restriction of scalars functor establishes a natural bijec\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) (x : ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars f g)) x =\\n    (CategoryTheory.Concrete\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the natural bijection between $ R $-linear maps $ X → Y^{\\text{res}} $ and $ S $-linear maps $ X^{\\text{ext}} → Y $ sends an\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {X : ModuleCat R} → X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat R),\\n  (ModuleCat.ExtendRestrictScalarsAdj.unit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Unit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\\\to S $, and for any $ R $-module $ X $, applying the unit natural transformation of the extension-restriction adjunction at $ X \"}",
    "date": "2026-10-21",
    "verdict": "No complete match: Mathlib has the canonical adjunction and unit mate, but not equality of the actual oplax tensor mate with the sheafified scalar-extension tensor isomorphism. The unit isomorphism in PullbackFree additionally assumes F.Final."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The oplax tensor comparison on ringed module pullback obtained by adjunction from the local pure tensor pairing on pushforward is the scalar extension tensor isomorphism",
+   "results": "{\"t\": \"2026-10-21T03:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"The oplax tensor comparison on ringed module pullback obtained by adjunction from the local pure tensor pairing on pushforward is the scalar extension tensor isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"ee5a5ac37dfaecca\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: the hits give the abstract oplax mate, the sheaf module adjunction/unit mate, or ordinary ring scalar extension. They do not identify the specified sheaf tensor mate with the normalized comparison for the supplied algebraic inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "{\"t\": \"2026-10-21T03:24:56Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"89e277e5458598cf\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: the hits give the abstract oplax mate, the sheaf module adjunction/unit mate, or ordinary ring scalar extension. They do not identify the specified sheaf tensor mate with the normalized comparison for the supplied algebraic inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|homEquiv.*unitToPushforwardObjUnit|[Oo]plax|[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-21T03:25:08Z\", \"tool\": \"grep\", \"query\": \"pullbackObjUnitToUnit|homEquiv.*unitToPushforwardObjUnit|[Oo]plax|[Mm]onoidal\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"3a5effdf7f862b7e\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: the hits give the abstract oplax mate, the sheaf module adjunction/unit mate, or ordinary ring scalar extension. They do not identify the specified sheaf tensor mate with the normalized comparison for the supplied algebraic inverse image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "SheafOfModules pullback adjunction oplax monoidal tensor comparison invertible",
+   "results": "{\"t\": \"2026-10-21T03:25:08Z\", \"tool\": \"leansearch\", \"query\": \"SheafOfModules pullback adjunction oplax monoidal tensor comparison invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\"], \"digest\": \"43a8a3138fb57e7c\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: the hits give the abstract oplax mate, the sheaf module adjunction/unit mate, or ordinary ring scalar extension. They do not identify the specified sheaf tensor mate with the normalized comparison for the supplied algebraic inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointOplaxMonoidal|extendRestrictScalarsAdj_unit_app_apply|extendRestrictScalarsAdj_homEquiv_apply",
+   "results": "{\"t\": \"2026-10-21T03:25:33Z\", \"tool\": \"grep\", \"query\": \"leftAdjointOplaxMonoidal|extendRestrictScalarsAdj_unit_app_apply|extendRestrictScalarsAdj_homEquiv_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"68c299a4c88525e5\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: the hits give the abstract oplax mate, the sheaf module adjunction/unit mate, or ordinary ring scalar extension. They do not identify the specified sheaf tensor mate with the normalized comparison for the supplied algebraic inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension sheaf tensor comparison is the adjunction mate of the direct image bilinear map and its unit is multiplication",
+   "results": "{\"t\": \"2026-10-21T03:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension sheaf tensor comparison is the adjunction mate of the direct image bilinear map and its unit is multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"ModuleCat.instIsRightAdjointCoextendScalars\"], \"digest\": \"79937a119b3eb182\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: the hits give the abstract oplax mate, the sheaf module adjunction/unit mate, or ordinary ring scalar extension. They do not identify the specified sheaf tensor mate with the normalized comparison for the supplied algebraic inverse image."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pd-proetale-section-module-functors",
@@ -77,5 +198,50 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pd-ringed-tensor-adjunction-mate",
+  "worker": "stage1",
+  "group": "Q39",
+  "summary": "Kept the statement. Built the normalized tensor isomorphism from the existing inverse-image and scalar-extension comparisons; compared its actual adjoint on source pure tensors with the given lax pairing; proved the scalar and unit inverse formulas with balanced sheaf maps. No new nodes. No complete project declaration or Mathlib match.",
+  "blueprint": "No imported blueprint ancestor: preserve the seeded nt-target-poincare-isiso chain. Realizes parent def-pd-proetale-section-module-functors original Steps 3 and 7 / retained completion Steps 4–5, proving equality of the actual mates before invertibility; supports Verdier exchange Step 2 without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generic underived ringed-site module tensor/adjunction tool used to identify the specified mate; this unit supplies no replacement for this module-level universal property or normalized tensor construction."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-extension-tensor-comparison",
+    "why": "Generic underived ringed-site module tensor/adjunction tool used to identify the specified mate; this unit supplies no replacement for this module-level universal property or normalized tensor construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic underived ringed-site module tensor/adjunction tool used to identify the specified mate; this unit supplies no replacement for this module-level universal property or normalized tensor construction."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic underived ringed-site module tensor/adjunction tool used to identify the specified mate; this unit supplies no replacement for this module-level universal property or normalized tensor construction."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic underived ringed-site module tensor/adjunction tool used to identify the specified mate; this unit supplies no replacement for this module-level universal property or normalized tensor construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-scalar-extension-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-9ee53a248",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-9ee53a248 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and all 11 cited statements in full. The statement and stmt_deps are identical to live (live is still unsplit with an empty proof), there are no new nodes and no repair note, nothing in the item's closure is on the route-pivot dropped list, and there is no SGA citation. Sources: Stacks 03D7 (lemma-adjoint-pullback-pushforward-modules) and 03EL (lemma-tensor-product-pullback) are correct, and 03EK/0GMW match tags/tags. The mate identification is correctly marked as agent work. Step 1: k = b∘T(a) is a natural iso, and it satisfies the generalized pure-tensor equation of def-weil-pbc-canonical-ringed-tensor-comparison by naturality of q. Step 2: Φ(f) = P(f)η, so the oplax-mate lemma gives Φ(d) = p∘(η⊗η) and Φ(d0) = c. Step 3: with Z = |M|×|N|, naturality of the geometric unit gives μ(η(m⊗n)) = η(m)⊗η(n) on local pure tensors. Bilinear universality and injectivity of Φ then give μ = d, so d is invertible and unique. The proof never uses global pure tensors. Step 4: b(s⊗(m⊗n)) = (s⊗m)⊗(1⊗n) by S-linearity. The inverse pairing is A-balanced in each slot and S-bilinear, it extends through the sheafification-bilinear lemma and the tensor universal property, and both composites are checked on generators. Step 5: I(R) ≅ A via e_M and e_R, and h(s⊗a) = sα(a) has adjunct c, so h = d0. Its inverse s ↦ s⊗1 holds by balancing, including for the zero ring. Small cases checked: point site, the non-flat map Z→Z/2, zero module, zero ring, and α = id. The parent's Step 3 supplies the unit and lax hypotheses through lem-pod-canonical-module-adjunction-unit and lem-pd-ringed-direct-image-pairing-lax. No duplicate: lem-weil-pbc-ringed-topoi-module-pullback-tensor gives existence only, and the sfb upper-star tensor nodes are point or condensed specific. I accept the 5 tool_uses as generic underived module infrastructure for unit sk-thm-sf-verdier-exchange. No fixes."
  }
 }
