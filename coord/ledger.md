@@ -19844,3 +19844,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:35 L: merged deliver/Q34/lem-pe-roos-cone-calculus (reviewer PASS; first push; new nodes: 0)
 - 03:35 L: merged deliver/N6/lem-sp-proetale-scalar-tensor-normalization (reviewer PASS; first push; new nodes: 0); claim not held by N6: not your claim
 - 03:35 L: merged deliver/Q30/lem-sfb-integral-localization-hom-colimit (reviewer PASS; first push; new nodes: 0); claim not held by Q30: not your claim
+- 03:36 L: merged deliver/NB/lem-pe-completion-triangle-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
