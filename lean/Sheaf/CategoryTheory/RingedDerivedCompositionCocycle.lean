@@ -5,14 +5,12 @@ Authors: SHEAF group NG
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 
 /-! # Coherence of normalized ringed-topos derived composition
 
@@ -43,6 +41,7 @@ open CategoryTheory
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The cocycle law for the K-injective normalized direct-image comparisons.
 Source: Stacks Project, Cohomology on Sites, Tag 0D6E
 (blueprint: lem-pur-ringed-derived-composition-cocycle).
@@ -169,8 +168,27 @@ theorem ringedDerivedComposition_cocycle
     : κh_gf.hom ≫ Functor.whiskerRight κgf.hom Rh ≫
         (Functor.associator Rf Rg Rh).hom =
       κhg_f.hom ≫ Functor.whiskerLeft Rf κhg.hom := by
-  sorry
+  -- The normalization equations determine both composites by the universal property.
+  apply Rhgf.rightDerived_ext ηhgf
+    (HomologicalComplex.quasiIso _ (.up ℤ))
+  apply NatTrans.ext
+  funext M
+  change ηhgf.app M ≫ (κh_gf.hom.app _ ≫
+      Rh.map (κgf.hom.app _) ≫ 𝟙 _) =
+    ηhgf.app M ≫ κhg_f.hom.app _ ≫ κhg.hom.app _
+  rw [Category.comp_id, ← Category.assoc, hκh_gf M]
+  have hgf := congrArg (fun a ↦ Rh.map a) (hκgf M)
+  simp only [Functor.map_comp] at hgf
+  rw [Category.assoc, hgf]
+  conv_rhs => rw [← Category.assoc, hκhg_f M, Category.assoc]
+  have hn := κhg.hom.naturality (ηf.app M)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn
+  rw [hn]
+  conv_rhs => rw [← Category.assoc,
+    hκhg ((f.modules.mapHomologicalComplex (.up ℤ)).obj M)]
+  exact (Category.assoc _ _ _).symm
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The normalized identity comparisons and both unit laws for derived direct image.
 Source: Stacks Project, Cohomology on Sites, Tag 0D6E
 (blueprint: lem-pur-ringed-derived-composition-cocycle).
@@ -249,6 +267,40 @@ theorem ringedDerivedComposition_units
         η1.app M ≫ ε1.hom.app (DerivedCategory.Q.{w}.obj M) = 𝟙 _) ∧
       κleft.hom ≫ Functor.whiskerLeft Rf ε1.hom ≫ (Functor.rightUnitor Rf).hom = 𝟙 Rf ∧
       κright.hom ≫ Functor.whiskerRight ε0.hom Rf ≫ (Functor.leftUnitor Rf).hom = 𝟙 Rf := by
-  sorry
+  -- The identity derives the localization itself; compare it with each given representative.
+  have identityComparison {C D : Type _} [Category C] [Category D]
+      (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]
+      (R : D ⥤ D) (η : L ⟶ L ⋙ R) [R.IsRightDerivedFunctor η W] :
+      ∃ ε : R ≅ 𝟭 D, ∀ M, η.app M ≫ ε.hom.app (L.obj M) = 𝟙 _ := by
+    let : (𝟭 D).IsRightDerivedFunctor (Functor.rightUnitor L).inv W :=
+      Functor.isRightDerivedFunctor_of_inverts W _ (Functor.rightUnitor L)
+    let ε := R.rightDerivedUnique (𝟭 D) η (Functor.rightUnitor L).inv W
+    refine ⟨ε, fun M ↦ ?_⟩
+    simp [ε]
+  obtain ⟨ε0, hε0⟩ := identityComparison DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ)) R0 η0
+  obtain ⟨ε1, hε1⟩ := identityComparison DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ)) R1 η1
+  refine ⟨ε0, ε1, hε0, hε1, ?_, ?_⟩
+  · apply Rf.rightDerived_ext ηf (HomologicalComplex.quasiIso _ (.up ℤ))
+    apply NatTrans.ext
+    funext M
+    change ηf.app M ≫ (κleft.hom.app _ ≫ ε1.hom.app _ ≫ 𝟙 _) = ηf.app M ≫ 𝟙 _
+    rw [Category.comp_id, Category.comp_id, ← Category.assoc, hκleft M]
+    have hn := ε1.hom.naturality (ηf.app M)
+    dsimp only [Functor.id_map, Functor.comp_obj] at hn
+    rw [Category.assoc, hn]
+    change η1.app _ ≫ (ε1.hom.app _ ≫ ηf.app M) = ηf.app M
+    rw [← Category.assoc, hε1, Category.id_comp]
+  · apply Rf.rightDerived_ext ηf (HomologicalComplex.quasiIso _ (.up ℤ))
+    apply NatTrans.ext
+    funext M
+    change ηf.app M ≫ (κright.hom.app _ ≫ Rf.map (ε0.hom.app _) ≫ 𝟙 _) =
+      ηf.app M ≫ 𝟙 _
+    rw [Category.comp_id, Category.comp_id, ← Category.assoc, hκright M]
+    have hε := congrArg (fun a ↦ Rf.map a) (hε0 M)
+    simp only [Functor.map_comp, Functor.map_id] at hε
+    rw [Category.assoc, hε]
+    exact Category.comp_id _
 
 end CategoryTheory

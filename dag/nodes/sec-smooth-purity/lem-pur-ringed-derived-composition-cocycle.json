@@ -17,66 +17,56 @@
  ],
  "proof": [
   {
-   "text": "At $Q_0I$ for K-injective $I$, choose $j:f_*I\\to J$, $k:g_*J\\to K$, $t:g_*f_*I\\to T$ using [prop-pur-kinjective-resolutions-exist]. Apply [lem-pur-ringed-triple-resolution-formulas]: in its common source and target coordinates, the two cocycle paths are $Q_3(h_*u)Q_3(h_*t)$ and $Q_3(h_*k)Q_3(h_*g_*j)$, with $ut\\simeq kg_*j$. The additive module direct image of [def-weil-pbc-ringed-topos-morphism] preserves this homotopy: applying $h_*$ to $ut-kg_*j=ds+sd$ gives the same equation for $h_*s$. Functoriality of $Q_3$ therefore identifies the two paths.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-ringed-triple-resolution-formulas",
-    "def-weil-pbc-ringed-topos-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; common-resolution assembly using derived.tex Tag 070Y"
-   }
-  },
-  {
-   "text": "For an arbitrary complex $M$ choose $a:M\\to I$ as in [prop-pur-kinjective-resolutions-exist]. Write the two natural paths as $\\alpha,\\beta$ and their source and target functors as $S,T$. Naturality gives $T(Q_0a)\\alpha_{Q_0M}=\\alpha_{Q_0I}S(Q_0a)$ and the same equation for $\\beta$. Since $Q_0a$ is invertible and Step 1 gives $\\alpha_{Q_0I}=\\beta_{Q_0I}$, cancel $T(Q_0a)$ to obtain equality at $Q_0M$. Every derived object is represented by a complex. The canonical change-of-resolution formulas in [lem-sf-kinjective-derived-map-computation] ensure that the coordinates used in Step 1 are the specified ones.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sf-kinjective-derived-map-computation"
-   ],
+   "text": "Use the assumed total-right-derived universal property for (Rhgf, eta_hgf), via Mathlib Functor.rightDerived_ext. It suffices to show that the two transformations agree after whiskering by Q0 and precomposition with eta_hgf. Evaluate this equality at each complex M. The functor associator has identity components, so only associativity of composition remains to track.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; common-resolution assembly using derived.tex Tag 070Y"
+    "document": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+    "place": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, rightDerived_ext"
    }
   },
   {
-   "text": "For termwise identity, [lem-weil-pbc-exact-functor-derived-functor] says its derived unit $\\eta_N:QN\\to R_{\\mathrm{id}}(QN)$ is invertible for every complex. Thus $\\epsilon_{QN}=\\eta_N^{-1}$ is the induced natural identity comparison. For a resolution $a:N\\to I$, naturality of $\\eta$ gives $\\eta_I Qa=R_{\\mathrm{id}}(Qa)\\eta_N$, so $\\epsilon_{QN}=(Qa)^{-1}c_a$ with $c_a=\\eta_I^{-1}R_{\\mathrm{id}}(Qa)$. This also proves independence of $a$, naturality for every derived morphism, and $\\epsilon_{QI}=c_{1_I}$ in resolution coordinates. For K-injective $I$ choose $j:f_*I\\to J$. The normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] with $g=\\mathrm{id}$ represents $\\kappa_{\\mathrm{id},f}$ by $Q_1j$, while the new identity formula represents $\\epsilon_{X_1,Q_1(f_*I)}$ by $(Q_1j)^{-1}$; their composite is $1$. For $\\kappa_{f,\\mathrm{id}}$, use the identity resolution $I\\to I$ of the identity direct image. Its representative is $f_*1_I$, and $R_f(\\epsilon_{X_0,Q_0I})$ is the identity in these coordinates by the same identity formula. Their composite is again $1$. The naturality and cancellation equations of Step 2 give both unit laws at every derived object.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor, (3)-(4); Tag 070Y, lemma-K-injective-defined; sites-cohomology.tex Tag 0D6E normalization for the two unit cancellations"
-   }
-  },
-  {
-   "text": "A coefficient change on the identity underlying topos is a ringed-topos morphism whose module direct image is restriction of scalars along the structural ring map [def-weil-pbc-ringed-topos-morphism]. Every resolution above is in the module category for the ring at that vertex. The preceding arguments apply to these morphisms as well: none requires flatness of the structural map or preservation of K-injectives.",
-   "uses": [
-    "def-weil-pbc-ringed-topos-morphism"
-   ],
+   "text": "Expand the left path with h_kappa_(h,gf) and apply Rh to h_kappa_(g,f). Functoriality gives eta_h(gf M), followed by Rh(eta_g(f M)), followed by Rh(Rg(eta_f(M))). Expand the right path with h_kappa_(hg,f). Naturality of kappa_(h,g) on the derived morphism eta_f(M) moves this comparison before Rh(Rg(eta_f(M))). Now use h_kappa_(h,g) at f M. Both sides are exactly the same triple composite, since termwise application of a composite additive functor is definitionally the successive termwise application. This proves the cocycle law.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; common-resolution assembly using derived.tex Tag 070Y"
+    "document": "Mathlib/CategoryTheory/NatTrans.lean",
+    "place": "Mathlib/CategoryTheory/NatTrans.lean, NatTrans.naturality; the four normalization equations in the Lean statement"
+   }
+  },
+  {
+   "text": "For any localization L:C -> D, the identity functor on D with unit the inverse right unitor of L is a total right derived functor of L. This is Mathlib Functor.isRightDerivedFunctor_of_inverts, applied to the right-unitor isomorphism L composed with id is isomorphic to L. If (R,eta) is any other total right derived functor of L, Functor.rightDerivedUnique gives epsilon:R isomorphic to id_D. Its unit compatibility, rightDerivedNatTrans_app, says eta_M followed by epsilon_(LM) is the identity for every M. Apply this construction to Q0 and Q1 to obtain epsilon0 and epsilon1. The data are determined by the universal property up to the required unique unit-compatible isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+    "place": "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, isRightDerivedFunctor_of_inverts; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, rightDerivedUnique and rightDerivedNatTrans_app"
+   }
+  },
+  {
+   "text": "For the left unit law use rightDerived_ext for (Rf,eta_f), and evaluate at M. The assumed equation h_kappa_left rewrites the resulting composite as eta1_(f M), followed by R1(eta_f(M)), followed by epsilon1_(Rf(Q0 M)). Naturality of epsilon1 rewrites the latter two factors as epsilon1_(Q1(f M)), followed by eta_f(M). The normalization eta1 epsilon1 = id cancels the first two factors, giving eta_f(M), which is the precomposition of the identity transformation. Thus the left unit law holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+    "place": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, rightDerived_ext; NatTrans.naturality and the assumed left comparison equation"
+   }
+  },
+  {
+   "text": "For the right unit law again use rightDerived_ext for (Rf,eta_f). The assumed equation h_kappa_right rewrites the component after precomposition with eta_f as eta_f(M), followed by Rf(eta0(M)), followed by Rf(epsilon0_(Q0 M)). Functoriality and eta0 epsilon0 = id reduce this to eta_f(M). This is the required right unit law. All arguments hold for arbitrary ringed-topos module functors and in particular for coefficient changes, without using preservation of K-injectives or flatness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+    "place": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, rightDerived_ext; Functor.map_comp, Functor.map_id and the assumed right comparison equation"
    }
   }
  ],
- "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-ringed-triple-resolution-formulas",
-  "def-weil-pbc-ringed-topos-morphism",
-  "lem-sf-kinjective-derived-map-computation",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit common-resolution proof of coherence for the K-injective normalized comparison of Tag 0D6E; uses derived.tex Tags 070I and 070Y and injectives.tex Tag 079P."
+  "place": "Coherence of the normalized comparison of Tag 0D6E, proved directly from the total-right-derived universal property and the normalization equations already assumed in the Lean statements; Mathlib Functor.rightDerived_ext, rightDerivedUnique, and isRightDerivedFunctor_of_inverts. No resolution calculation is needed."
  },
  "mathlib_searches": [
   {
@@ -203,11 +193,6 @@
   ]
  },
  "tool_uses": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sf-kinjective-derived-map-computation",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-weil-pbc-ringed-topos-morphism",
   "lem-weil-pbc-exact-functor-derived-functor"
  ],
  "reviewed": {
@@ -241,5 +226,15 @@
   "result": "pass",
   "note": "Clause-by-clause check of ringedDerivedComposition_cocycle/_units against the node and dep ringedToposDerivedPushforwardComposition: κ hypotheses are exactly the dep's unique-characterizing unit equation, instantiated at (f,g),(g,h),(gf,h),(f,hg); cocycle and both unit laws match the node with associator/unitors explicit; ε pinned by η≫ε=𝟙 for all complexes; both laws checked true via universal property; coefficient-change and identity edge cases covered; no extra assumptions or universe restriction; no duplicate found; docstrings and source/blueprint present; statement verbatim; nt_compile --json clean 14.9 s. Advisory: proof-only imports (H9)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T111412-L-108279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
