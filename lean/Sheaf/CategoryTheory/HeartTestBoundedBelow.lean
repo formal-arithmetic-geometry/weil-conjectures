@@ -90,6 +90,58 @@ theorem heart_test_bounded_below
             (η.app ((DerivedCategory.TStructure.t.onPlus.truncLE m).obj E)) ≫
           (homologyFunctor B m).map
             (Ψ.map ((DerivedCategory.TStructure.t.onPlus.truncLEι m).app E)) := by
-  sorry
+  let t := (DerivedCategory.TStructure.t (C := A)).onPlus
+  have hc (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B)
+      [F.CommShift ℤ] [F.IsTriangulated]
+      (hF : ∀ (M : DerivedCategory.Plus A) (n : ℤ),
+        (∀ (q : ℤ), q < n → IsZero ((homologyFunctor A q).obj M)) →
+          ∀ (q : ℤ), q < n → IsZero ((homologyFunctor B q).obj (F.obj M)))
+      (m : ℤ) :
+      IsIso ((homologyFunctor B m).map (F.map ((t.truncLEι m).app E))) := by
+    have hT := ι.map_distinguished _
+      (F.map_distinguished _ (t.triangleLEGE_distinguished m (m + 1) rfl E))
+    have htail (q : ℤ) (hq : q < m + 1) :
+        IsZero ((homologyFunctor B q).obj (F.obj ((t.truncGE (m + 1)).obj E))) := by
+      exact hF _ (m + 1)
+        (fun i hi ↦ isZero_homology_of_isGE _ (m + 1) i hi) q hq
+    have : Mono ((homologyFunctor B m).map (F.map ((t.truncLEι m).app E))) :=
+      (DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff _ hT
+        (m - 1) m (by omega)).2 ((htail (m - 1) (by omega)).eq_of_src _ _)
+    have : Epi ((homologyFunctor B m).map (F.map ((t.truncLEι m).app E))) :=
+      (DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff _ hT m).2
+        ((htail m (by omega)).eq_of_tgt _ _)
+    exact isIso_of_mono_of_epi _
+  obtain ⟨a₀, ha₀⟩ := E.2
+  have : E.IsGE a₀ := ⟨ha₀.1⟩
+  have ht (m : ℤ) : IsIso (η.app ((t.truncLE m).obj E)) := by
+    refine isIso_app_truncLE_of_isIso_app_homology Φ Ψ η hη E (min a₀ (m + 1)) m
+      (by omega) ?_ (fun q _ _ ↦ hH q)
+    intro q hq
+    exact isZero_homology_of_isGE E a₀ q (lt_of_lt_of_le hq (min_le_left _ _))
+  have hf (m : ℤ) :
+      (homologyFunctor B m).map (Φ.map ((t.truncLEι m).app E)) ≫
+        (homologyFunctor B m).map (η.app E) =
+      (homologyFunctor B m).map (η.app ((t.truncLE m).obj E)) ≫
+        (homologyFunctor B m).map (Ψ.map ((t.truncLEι m).app E)) := by
+    simpa only [Functor.map_comp, Functor.id_obj] using
+      (homologyFunctor B m).congr_map (η.naturality ((t.truncLEι m).app E))
+  have hformula (m : ℤ) :
+      (homologyFunctor B m).map (η.app E) =
+        @CategoryTheory.inv B _ _ _
+          ((homologyFunctor B m).map (Φ.map ((t.truncLEι m).app E))) (hc Φ hΦ m) ≫
+        (homologyFunctor B m).map (η.app ((t.truncLE m).obj E)) ≫
+        (homologyFunctor B m).map (Ψ.map ((t.truncLEι m).app E)) := by
+    have := hc Φ hΦ m
+    rw [← hf m, IsIso.inv_hom_id_assoc]
+  constructor
+  · rw [isIso_iff]
+    intro m
+    have := hc Φ hΦ m
+    have := hc Ψ hΨ m
+    have := ht m
+    rw [hformula m]
+    infer_instance
+  · intro m
+    exact ⟨hc Φ hΦ m, hc Ψ hΨ m, ht m, hformula m⟩
 
 end DerivedCategory.Plus
