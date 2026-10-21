@@ -28,9 +28,151 @@
   "def-weil-etale-morphism",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_f=Rf_!\\dashv G_f=f^\\times$, with counit $\\epsilon_f$, and $C_{f,v}:v^*P_f\\xrightarrow{\\sim}P_{f'}r^*$ for compact-support exchange, where $r$ is the upper arrow. Put $\\beta_{f,v,K}:r^*G_fK\\to G_{f'}v^*K$. Its defining equation is\n$$\\epsilon_{f',v^*K}\\circ P_{f'}(\\beta_{f,v,K})=v^*\\epsilon_{f,K}\\circ C_{f,v,G_fK}^{-1}.$$\nAt $K=A$ insert $v^*A\\cong A$; section pullback gives exactly the maps in the statement. All structural sources, including the primed fibres, are Noetherian by finite type over the Noetherian base; $X$ and $X'$ are affine lines over those bases. Smooth relative dimension is preserved by base change, so the smooth exceptional-base-change theorem applies to $q,g,\\pi$ and all their base changes: finite $A$, $NA=0$, invertible $N$, Noetherian schemes, and compactifiable separated structural maps are precisely the hypotheses here. It makes $b_C,b_F,b_H,\\theta,\\eta$ isomorphisms. Throughout the proof use the canonical inverse-image compositors and constant-unit comparisons; their associativity and unit compatibility are those of the cited unbounded pullback-composition lemma.",
+   "uses": [
+    "def-asd-smooth-dualizing-base-change-arrows",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "prop-asd-smooth-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Opening paragraph (fibre restrictions); ordinary-etale formulation via prop-asd-smooth-base-change"
+   }
+  },
+  {
+   "text": "For successive base changes $v:B'\\to B$, $w:B''\\to B'$, write $r,r'$ for the upper arrows and $f',f''$ for the structural maps. Compact-support pasting says\n$$C_{f,vw}=C_{f',w,r^*(-)}\\circ w^*C_{f,v}.$$\nApply the mate-pasting identity (1) to the inverse exchanges, with left adjoints $P_f,P_{f'},P_{f''}$ and right adjoints $G_f,G_{f'},G_{f''}$. It gives, naturally in $K$,\n$$\\beta_{f,vw,K}=\\beta_{f',w,v^*K}\\circ r'^*\\beta_{f,v,K}.$$\nThis is an equality of the counit-defined maps of Step 1, not a choice of isomorphisms. At $K=A$, the pullback-unit coherence removes the intermediate $v^*A$; pulling back by compatible sections gives $b_{vw}=b'_w\\circ w^*b_v$.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L (lemma-base-change-shriek), compatibility with composite base changes; mateEquiv_vcomp"
+   }
+  },
+  {
+   "text": "For $t=0,1$ put $q_t:D_t\\to S$ and $\\sigma_t:S\\to D_t$. The two paths from $S'$ to $X$ are $i_t\\circ v$ and $\\bar v\\circ i_t'$. Their pullback diagrams have the same outer rectangle. Step 2 applied to the first factorization gives $\\beta_{q_t,v}\\circ r_t^*\\beta_{q,i_t}$; applied to the second gives $\\beta_{q',i_t'}\\circ j_t'^*\\beta_{q,\\bar v}$. Both are $\\beta$ of that rectangle. Pull this equality back by $\\sigma_t'$ and use the section equalities. For $t=1$ it reads $\\theta'\\circ i_1'^*b_F=b_C\\circ v^*\\theta$; for $t=0$ it reads $\\eta'\\circ i_0'^*b_F=b_H\\circ v^*\\eta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Opening fibre restrictions and Gluing; apply the preceding transitivity equation to the two factorizations"
+   }
+  },
+  {
+   "text": "Here is the normalization needed for the etale-family maps. For a separated etale finite-type $e:T_1\\to T$ over $B$, put $f_1=fe$, $E=De_{\\Sigma!}$ and $\\operatorname{ev}_e:Ee^*\\to1$. The graph-normalized comparison identifies $P_e$ with $E$, so compact-support composition supplies $\\alpha:P_fE\\xrightarrow{\\sim}P_{f_1}$. The locality isomorphism $\\lambda_{e,K}:e^*G_fK\\xrightarrow{\\sim}G_{f_1}K$ is characterized by\n$$\\epsilon_{f_1,K}\\circ P_{f_1}(\\lambda_{e,K})=\\epsilon_{f,K}\\circ P_f(\\operatorname{ev}_{e,G_fK})\\circ\\alpha^{-1}_{e^*G_fK}=:t_K.$$\nIndeed the right side is exactly the composite-adjunction counit for $P_fE\\dashv e^*G_f$, transported through $\\alpha$. Thus this equation specifies the locality map in the question, including its counit normalization. No claim about the mate of an arbitrary isomorphism being invertible is used: invertibility comes from etale adjoint locality and adjunction-preserving right-adjoint uniqueness.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
+    "place": "Second paragraph: the three Hom bijections and compatibility with counits"
+   }
+  },
+  {
+   "text": "Base change $e$ along $r:T'\\to T$ to $e':T_1'\\to T'$, with upper arrow $r_1$ and square identification $\\vartheta:r_1^*e^*\\xrightarrow{\\sim}e'^*r^*$. Let $\\beta:E'r_1^*\\to r^*E$ be the specified sum-extension comparison, invertible by the etale-shriek base-change lemma, and $B_e=\\beta^{-1}$. On module sheaves we show\n$$r^*\\operatorname{ev}_{e,M}\\circ\\beta_{e^*M}=\\operatorname{ev}_{e',r^*M}\\circ E'(\\vartheta_M),$$\nthat is, $r^*\\operatorname{ev}_{e,M}=\\operatorname{ev}_{e',r^*M}\\circ B_{e,e^*M}$ with $\\vartheta$ inserted. Compare transposes under the composite adjunction $L_2=E'r_1^*\\dashv R_2=r_{1*}e'^*$, with $L_1=r^*E\\dashv R_1=e^*r_*$. By its definition, the transpose of $\\beta_X$ is $\\operatorname{Ex}^0_{L_1X}\\circ\\eta_{1,X}$. Naturality of $\\operatorname{Ex}^0$ and the triangle identity $e^*\\operatorname{ev}_e\\circ\\eta_{e,e^*M}=1$ turn the transpose of the left side into $\\operatorname{Ex}^0_{r^*M}\\circ e^*\\eta_{r,M}$. Expanding $\\operatorname{Ex}^0$ as the transpose of $e'^*\\varepsilon_r\\circ\\vartheta_{r_*}$, naturality of $\\vartheta$ and the triangle identity of $r^*\\dashv r_*$ make this $r_{1*}(\\vartheta_M)\\circ\\eta_{r_1,e^*M}$. By the triangle identity of $E'\\dashv e'^*$, the transpose of the right side is the same map. Exactness of sum extension and inverse image gives the equality term by term on every complex, and then in the unbounded derived category, where the counit of $DE\\dashv e^*$ is termwise evaluation. The graph-normalization theorem identifies this $B_e$ with compact-support exchange for $e$, including its sum/evaluation adjunction; thus the calculation applies to the specified compactification maps.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-etale-compact-support-normalization",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change): the comparison of left adjoints obtained from the right adjoints; counit calculation by transposition"
+   }
+  },
+  {
+   "text": "Retain $e,f$ of Step 4, base-change the whole diagram along $v:B'\\to B$, and use primed notation. Compatibility of compact exchange with composition and its graph normalization give\n$$C_{f_1,v}\\circ v^*\\alpha=\\alpha'\\circ P_{f'}(B_e)\\circ C_{f,v,E(-)}.$$\nTake transposes under $P_{f_1'}\\dashv G_{f_1'}$ of the two maps\n$$\\lambda_{e',v^*K}\\circ e'^*\\beta_{f,v,K},\\qquad\n\\beta_{f_1,v,K}\\circ r_1^*\\lambda_{e,K}.$$\nFor the second map, naturality of $C_{f_1,v}^{-1}$ and Step 1 give $v^*t_K\\circ C_{f_1,v,e^*G_fK}^{-1}$. For the first map substitute Step 4's composite counit, move $\\beta_{f,v,K}$ across $\\operatorname{ev}_{e'}$ by naturality, and substitute Step 1's transpose. Replace $\\alpha'^{-1}C_{f_1,v}$ using the displayed composition equation, and replace $\\operatorname{ev}_{e'}B_e$ by Step 5. The result is again $v^*t_K\\circ C_{f_1,v,e^*G_fK}^{-1}$. The adjunction Hom bijection is injective, so\n$$\\lambda_{e',v^*K}\\circ e'^*\\beta_{f,v,K}=\\beta_{f_1,v,K}\\circ r_1^*\\lambda_{e,K}.$$\nThe cited mate-pasting rules (2),(3) are precisely these substitutions for a composite adjunction and its conjugate; all inverse-image compositors are inserted as in Step 1.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7L (lemma-base-change-shriek), composition/base-change compatibility; composite-adjunction mate calculation"
+   }
+  },
+  {
+   "text": "Apply Step 6 with $f=q$, $e=h_D$, and $v=i_t$ for each $t=0,1$. Their base-changed etale maps are exactly $h_V$ and $h_E$. Evaluate at the constant object and pull back by the sections on the source family. Because the sections are carried to one another, $\\sigma_1^*h_D^*=\\sigma^*$, and likewise on the two fibres. Consequently the pulled-back locality maps are exactly $b_F,b_C,b_H$ of the question; Step 4 and etale locality make them isomorphisms. For $t=1$ the resulting equation is $\\theta_1\\circ i_1^*b_F=b_C\\circ\\theta$, and for $t=0$ it is $\\eta_1\\circ i_0^*b_F=b_H\\circ\\eta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction and Gluing: etale maps of pairs, fibre identifications, and normalized comparison"
+   }
+  },
+  {
+   "text": "Assume the unique normalized isomorphisms in the last paragraph of the statement exist. For base change define\n$$\\widetilde\\kappa=a'^*b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}:F'\\xrightarrow{\\sim}a'^*C'.$$\nThe canonical comparison $\\bar v^*a^*\\cong a'^*v^*$ is inserted. On the unit section its restriction is\n$$i_1'^*\\widetilde\\kappa=b_C\\circ v^*\\theta\\circ(i_1'^*b_F)^{-1}=\\theta'$$\nby Step 3. Hence $\\widetilde\\kappa$ satisfies the required normalization, and uniqueness for the primed family forces $\\kappa'=\\widetilde\\kappa$. This uses uniqueness only after constructing an isomorphism with the prescribed restriction; it assumes no full faithfulness of affine-line pullback.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing: uniqueness of the isomorphism normalized at t=1; its application to a base-changed family"
+   }
+  },
+  {
+   "text": "Restrict Step 8 to the zero section, where $i_0'^*a'^*$ is the identity up to the canonical unit. Invert the resulting equality to obtain\n$$(i_0'^*\\kappa')^{-1}\\circ b_C=i_0'^*b_F\\circ v^*(i_0^*\\kappa)^{-1}.$$\nCompose with $\\eta'$ on the left and apply Step 3 at $t=0$. The result is\n$$\\delta'\\circ b_C=\\eta'\\circ i_0'^*b_F\\circ v^*(i_0^*\\kappa)^{-1}=b_H\\circ v^*\\eta\\circ v^*(i_0^*\\kappa)^{-1}=b_H\\circ v^*\\delta.$$\nAll factors have source $v^*C$ and target $H'$ after the indicated compositions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Last paragraph: restrict the normalized comparison to t=0 and take its inverse"
+   }
+  },
+  {
+   "text": "For the etale-family map define $\\widetilde\\kappa_1=a^*b_C\\circ\\kappa\\circ b_F^{-1}$. Step 7 at $t=1$ gives $i_1^*\\widetilde\\kappa_1=b_C\\theta(i_1^*b_F)^{-1}=\\theta_1$, so uniqueness implies $\\kappa_1=\\widetilde\\kappa_1$. At $t=0$ its inverse gives $(i_0^*\\kappa_1)^{-1}b_C=i_0^*b_F(i_0^*\\kappa)^{-1}$. Compose with $\\eta_1$ and use Step 7 at zero to get $\\delta_1b_C=b_H\\delta$. This proves both remaining identities for exactly the counit-normalized etale comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction and Gluing: uniqueness under etale maps of pairs and zero-fibre specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-smooth-dualizing-base-change-arrows",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-underived-exchange",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "prop-asd-smooth-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Opening fibre restrictions, Local construction and Gluing; expanded ordinary-etale counit calculations using Stacks 0F7J, 0F7L and 03S6 and the existing mate-pasting leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +208,45 @@
    "results": "[grep] OK 13 hit(s)\nMathlib/CategoryTheory/Adjunction/Mates.lean:169: /-- The mates equivalence commutes with vertical composition. -/\nMathlib/CategoryTheory/Adjunction/Mates.lean:208: /-- The mates equivalence commutes with horizontal composition of squares. -/\nMathlib/CategoryTheory/Adjunction/Mates.lean:242: /-- The mates equivalence commutes with composition of squares of squares. These results form the\nMathlib/CategoryTheory/Adjunction/Mates.lean:485: /-- The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`. -/\nMathlib/CategoryTheory/Adjunction/Mates.lean:504: /-- The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`. -/\nMathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:215: /-- The mates equivalence commutes with vertical composition. -/\nMathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:273: /-- The mates equivalence commutes with horizontal composition of squares. -/\nMathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:359: /-- The mates equivalence commutes with composition of a square of squares. These results form the\nMathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:683: /-- The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`. -/\nMathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:721: /-- The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`. -/\nMathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:27: * `comp_rightAdjointMate`: The adjoint mates of the composition is the composition of\nMathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:335: /-- The composition of right adjoint mates is the adjoint mate of the composition. -/\nMathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:356: /-- The composition of left adjoint mates is the adjoint mate of the composition. -/",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit defined exceptional base change for smooth section families commutes with fibre restriction and etale locality",
+   "results": "8 hits: smoothSheaf.ι_evalHom_assoc, smoothSheaf.ι_evalHom, smoothSheaf.ι_evalHom_apply, smoothSheafCommRing.ι_evalHom, smoothSheafCommRing.ι_evalHom_assoc, smoothSheafCommRing.ι_evalHom_apply, smoothSheafCommRing.ι_forgetStalk_inv_assoc, smoothSheafCommRing.ι_forgetStalk_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: smoothness and ordinary sheaf adjunction hits do not state section-family coherence; mateEquiv_vcomp/hcomp supply only the generic pasting already represented by lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(vcomp|hcomp)|[Ee]xceptional.*[Bb]ase[Cc]hange",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: smoothness and ordinary sheaf adjunction hits do not state section-family coherence; mateEquiv_vcomp/hcomp supply only the generic pasting already represented by lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image base change for smooth morphisms commutes with etale localization and composition",
+   "results": "8 hits: RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.isStandardSmooth_stableUnderCompositionWithLocalizationAway, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, Algebra.Smooth.baseChange",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: smoothness and ordinary sheaf adjunction hits do not state section-family coherence; mateEquiv_vcomp/hcomp supply only the generic pasting already represented by lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: smoothness and ordinary sheaf adjunction hits do not state section-family coherence; mateEquiv_vcomp/hcomp supply only the generic pasting already represented by lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image right adjoint compact support smooth etale base change transitive counit mate",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: smoothness and ordinary sheaf adjunction hits do not state section-family coherence; mateEquiv_vcomp/hcomp supply only the generic pasting already represented by lem-weil-pbc-mate-pasting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -91,5 +268,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-section-exceptional-fibre-coherence",
+  "worker": "stage1",
+  "summary": "Completed the ten-step counit-normalized coherence argument using existing nodes only. Proved transitivity by mates, fibre base-change squares by two factorizations, and etale locality compatibility by an explicit compact-support/composite-counit calculation. Derived normalized-family and specialization equations from the stated uniqueness. Preserved the statement and all original metadata/searches; no new nodes or Lean edits.",
+  "blueprint": "Ancestor lem-trf-local-term-locality, proof (2), normal-cone specialization in the contracting-correspondence argument. The extracted DNC opening fibre identifications and Local construction/Gluing are realized by Steps 1–7 (counit-normalized base change and locality), Steps 8 and 10 (uniqueness at t=1), and Steps 9–10 (restriction/inversion at t=0).",
+  "tool_uses": [
+   {
+    "node": "def-asd-smooth-dualizing-base-change-arrows",
+    "why": "Definition of the counit-defined exceptional comparison; the trace unit has no separate definition of this ordinary-etale map."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Adjunction-preserving right-adjoint uniqueness and conjugation of the etale compact-support comparison."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "The explicit composite-adjunction counit used to normalize etale locality."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "The actual summand construction used to check evaluation compatibility, not an unproved locality theorem."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "The ordinary-etale sum-extension adjunction and counit-normalized structural right-adjoint locality."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Unbounded ordinary-etale compact-support exchange, composition and their compatibility are generic tools for the specified maps; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Identification of the actual compactification exchange and adjunction for an etale map with sum extension and its evaluation, including arbitrary base change."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Coherence of exact ordinary-etale derived inverse-image compositors and constant-unit comparisons; no pro-etale or constructible comparison is substituted."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Preservation of smooth pure relative dimension under the two fibre restrictions and base changes."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "The specified sum-extension comparison is invertible, giving its termwise derived base-change map."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of structural sources and fibres after arbitrary Noetherian base change; finite type is supplied by compactifiability."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Invertibility of the actual exceptional comparison for a smooth compactifiable structural map over a Noetherian base, in the exact coefficient category of the item."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Sheaf-level sum-extension/evaluation adjunction whose triangle identity Step 5 uses; it is the adjunction in the definition of the specified etale-shriek comparison, and no node of the trace unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-asd-smooth-dualizing-base-change-arrows",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-asd-smooth-base-change",
+  "lem-weil-pbc-etale-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-137e5d5f4",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-137e5d5f4 (reviewer sub-agent of L); spot-checked: Read the item in full: all 10 steps, the statements of all cited nodes, the main-20261015 sk-thm-dnc proof and Stacks 03S6. The statement is unchanged from the version Q58 created; only proof, proof_deps, proof_origin, searches and split_report changed. There are no new nodes and no SGA citations. The item is unsplit in both live and side-live, so the delivery is not superseded. The proof expands old parent Steps 12-14 without dropping anything: 12 becomes Steps 1-3, 14 becomes Steps 4-7 and 10, 13 becomes Steps 8-9. Coefficient category and base-change map: ordinary unbounded D(T_et,A) with the counit-defined beta, which matches prop-asd-smooth-base-change and def-asd-smooth-dualizing-base-change-arrows exactly. Checks: Step 2 mate pasting (1) applied to C^{-1} gives beta_{f,vw}=beta_{f',w}v^* o r'^*beta_{f,v}. Step 3's two factorizations give theta' i1'^*b_F=b_C v^*theta. Step 4 defines lambda as the conjugate of alpha^{-1}; the statement prescribes this counit normalization, and the conjugate of an isomorphism is invertible. I recomputed both transposes in Step 6 and both equal v^*t_K o C^{-1}_{f1,v}. Step 7 gives h_V and h_E as base changes of h_D. Steps 8-10 are checked by hand. Edge cases checked: A=0, d=0, empty base, identity maps. No duplicate nodes found. Fault repaired (C3/E5): Step 5 derived r^*ev_e = ev_{e'} o B_e from a summand-by-summand formula for the etale-shriek comparison beta, but def-weil-pbc-etale-shriek-base-change-map defines beta only as the conjugate of Ex^0. I rewrote Step 5 to prove the identity formally by comparing transposes under E'r1^* -| r1_*e'^*, using the definition of beta, naturality of Ex^0 and three triangle identities. The step now cites the shriek-map definition, the underived-exchange definition, the restriction-injectives lemma and the composite-adjunction definition. It is marked non-elementary with its source set to 03S6. I recomputed proof_deps and declared restriction-injectives in tool_uses. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
