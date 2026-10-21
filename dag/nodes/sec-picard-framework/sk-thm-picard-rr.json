@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-picard-rr",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Riemann–Roch and coherent Serre duality",
@@ -23,59 +23,250 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-av-jacobian",
-  "sk-def-av-pic"
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
+  "def-sc-invertible-module",
+  "def-pc-genus",
+  "def-pc-euler-characteristic",
+  "def-sc-kahler-differentials",
+  "pqf-def-coherent",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "def-sc-ample",
+  "def-weil-affine-spectrum",
+  "lem-pc-regular-curve-divisor-calculus"
  ],
  "proof": [
   {
-   "text": "This is coherent duality and Riemann–Roch for smooth curves (Stacks\nProject, Tag 0B5B); the duality is given by the residue trace on\ndifferentials ([sk-thm-picard-duality], with $n=1$, $q=1$, $\\cF=\\cL$).",
+   "text": "The curve C is integral of dimension one by [def-pc-smooth-projective-curve], regular by [lem-sc-smooth-regular], and proper by [lem-pc-projective-proper]. Its regularity includes local Noetherianness and hence reducedness; quasi-compactness follows from projectivity. The coherent cohomology groups are finite-dimensional by [lem-pc-euler-characteristic-well-defined], and vanish above degree one by [lem-pc-vanishing-above-dim]. Thus the alternating Euler characteristic is h^0-h^1. By [sbc-lem-smooth-geometrically-reduced], smoothness gives geometric reducedness directly. Apply [lem-pc-h0-geom-connected] to obtain H^0(C,O_C)=k. Consequently chi(O_C)=1-g. The parenthetical inclusion of proper curves uses [lem-sc-proper-dim-one-projective]: smoothness gives regularity and hence reducedness, and a proper curve has dimension one.",
    "uses": [
-    "sk-thm-picard-duality"
+    "def-pc-smooth-projective-curve",
+    "lem-sc-smooth-regular",
+    "lem-pc-projective-proper",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-pc-vanishing-above-dim",
+    "lem-pc-h0-geom-connected",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-proper-dim-one-projective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Section Riemann–Roch, equation-degree and equation-rr; blueprint RR preliminaries"
+   }
   },
   {
-   "text": "*Riemann–Roch.* By additivity of $\\chi$ in short exact sequences, the\ntorsion part of a coherent $\\cF$ (for which $\\chi=h^0$ is the length,\ni.e. the degree) and a filtration of the locally free quotient by line\nbundles (along which $\\deg\\det$ is additive) reduce the formula to line\nbundles $\\cO_C(D)$. There\n$0\\to\\cO_C(D-x)\\to\\cO_C(D)\\to\\kappa(x)\\to0$ gives\n$\\chi(\\cO_C(D))=\\chi(\\cO_C(D-x))+[\\kappa(x):k]$ (coherent cohomology\nvanishes in degrees $\\ge2$ on the one-dimensional noetherian space $C$,\nso $\\chi=h^0-h^1$ throughout); applied to $D$ when $n_x>0$ and to $D+x$\nwhen $n_x<0$, it lowers $\\sum_x|n_x|$ by one and leaves $\\chi-\\deg$\nunchanged, so by induction $\\chi(\\cO_C(D))=\\deg D+\\chi(\\cO_C)$, and\n$\\chi(\\cO_C)=h^0-h^1=1-g$ because $H^0(C,\\cO_C)=k$ ($C$ geometrically\nconnected and geometrically reduced).",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-pc-regular-curve-divisor-calculus] to C. For a divisor D and closed point x it gives 0 -> O_C(D-x) -> O_C(D) -> i_{x,*}V -> 0 with dim_{kappa(x)} V=1. By [lem-pc-closed-immersion-coherent-cohomology], the last sheaf is coherent; it is supported at x and its global sections are V. Hence [lem-pc-chi-zero-dim-support] gives chi(i_{x,*}V)=dim_k V=[kappa(x):k]. By [lem-pc-euler-additive], chi(O_C(D))-chi(O_C(D-x))=[kappa(x):k]. Induct on the nonnegative integer sum_x |n_x| for D=sum_x n_x[x]. The base D=0 was computed in step 1. If n_x>0, replace D by D-x and use this identity; if n_x<0, replace D by D+x and use the identity with D+x in place of D. In both cases the induction parameter decreases by one, and chi(O_C(D))-sum_x n_x[kappa(x):k] is unchanged. Thus chi(O_C(D))=sum_x n_x[kappa(x):k]+1-g.",
+   "uses": [
+    "lem-pc-regular-curve-divisor-calculus",
+    "lem-pc-chi-zero-dim-support",
+    "lem-pc-euler-additive",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Part (1), divisor induction made explicit; Stacks varieties.tex Tag 0AYY, lemma-degree-effective-Cartier-divisor"
+   }
   },
   {
-   "text": "*Canonical degree.* Duality with $\\cL=\\cO_C$ gives $h^0(\\omega_{C/k})=g$\nand $h^1(\\omega_{C/k})=h^0(\\cO_C)=1$, so\n$\\deg\\omega_{C/k}=\\chi(\\omega_{C/k})-\\chi(\\cO_C)=(g-1)-(1-g)=2g-2$.",
-   "uses": [],
-   "elementary": null
+   "text": "Every line bundle L is O_C(D) by [lem-pc-regular-curve-divisor-calculus]. Step 2 therefore gives chi(L)=deg D+1-g. Applied to a principal divisor, the same calculation and O_C(div(f))=O_C give deg div(f)=0. Thus the weighted divisor degree depends only on L and equals chi(L)-chi(O_C); this proves both its well-definedness and line-bundle Riemann–Roch. Multiplication O_C(D) tensor O_C(E)=O_C(D+E) also shows deg(L tensor M)=deg L+deg M, and deg(L^{-1})=-deg L. In particular this degree is exactly the cohomological degree of [def-pc-degree-line-bundle], so that subsequent degree-base-change statements apply to the degree of this item.",
+   "uses": [
+    "lem-pc-regular-curve-divisor-calculus",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Part (1), concluding formula and degree convention"
+   }
   },
   {
-   "text": "*Field extension.* For $K/k$, flat base change identifies\n$H^i(C_K,\\cL_K)=H^i(C,\\cL)\\otimes_kK$, degrees and the genus are\npreserved, $\\omega_{C_K/K}=(\\omega_{C/k})_K$, and the residue trace is\ncompatible with base change, so all three identifications commute with\nextension of the ground field.",
-   "uses": [],
-   "elementary": null
+   "text": "For coherent F let T be its torsion subsheaf. By [lem-sc-torsion-subsheaf-quotient] it is quasi-coherent, T_eta=0, and E=F/T is torsion-free. On the Noetherian C, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] makes T and E coherent. By [lem-weil-pbc-module-support-proper-over-base] Supp(T) is closed. It omits the generic point, so on the integral one-dimensional curve it has dimension at most zero. Hence [lem-pc-chi-zero-dim-support] gives chi(T)=dim_k H^0(C,T). By [lem-sc-regular-curve-torsionfree-free], E is finite locally free, of constant rank r=dim_{k(C)} F_eta. Euler additivity gives chi(F)=dim_k H^0(C,T)+chi(E).",
+   "uses": [
+    "lem-sc-torsion-subsheaf-quotient",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-pc-chi-zero-dim-support",
+    "lem-sc-regular-curve-torsionfree-free",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "The torsion part and the torsion-free quotient"
+   }
   },
   {
-   "text": "*Vanishing.* If $\\deg\\cL>2g-2$, the dual sheaf\n$\\omega_{C/k}\\otimes\\cL^{-1}$ has negative degree. A nonzero section of\nan invertible sheaf on an integral curve has an effective zero divisor,\nof degree $\\ge0$, so a negative-degree sheaf has no nonzero section.\nHence $H^1(C,\\cL)=0$, and Riemann–Roch gives\n$h^0(C,\\cL)=\\chi(C,\\cL)=\\deg\\cL+1-g$.",
-   "uses": [],
-   "elementary": null
+   "text": "For every vector bundle E of rank r, prove chi(E)=deg(det E)+r(1-g) by induction on r. For r=0 it is the zero bundle and det(0)=O_C, so both sides are zero. For r=1 this is step 3. For r>=2 choose a nonzero vector in E_eta. The saturation construction in [lem-sc-vector-bundle-line-subbundle] gives a line subbundle L with vector-bundle quotient Q of rank r-1. By [lem-sc-determinant-short-exact], det E is L tensor det Q. Euler additivity, the induction hypothesis for Q, step 3 for L and degree additivity from step 3 give chi(E)=chi(L)+chi(Q)=deg L+deg(det Q)+r(1-g)=deg(det E)+r(1-g). Substitute this in step 4 and use the stated definition deg F=dim_k H^0(C,T)+deg(det E). This gives coherent Riemann–Roch with exactly the rank and degree of the statement.",
+   "uses": [
+    "lem-sc-vector-bundle-line-subbundle",
+    "lem-sc-determinant-short-exact",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*) by induction on r"
+   }
   },
   {
-   "text": "*(G).* Ampleness descends along $\\Spec\\bar k\\to\\Spec k$ and degree is\npreserved by flat base change, so we may take $k$ algebraically closed,\nwhere every closed point is rational. For $m\\deg\\cL\\ge2g+1$ and closed\npoints $P,Q$ (possibly equal), the range $\\deg>2g-2$ above gives\n$h^0(\\cL^{\\otimes m}(-P))=h^0(\\cL^{\\otimes m})-1$ and\n$h^0(\\cL^{\\otimes m}(-P-Q))=h^0(\\cL^{\\otimes m})-2$, i.e.\n$\\cL^{\\otimes m}$ is base-point free and separates points and tangent\nvectors; hence $\\cL^{\\otimes m}$ is very ample and $\\cL$ is ample.",
-   "uses": [],
-   "elementary": null
+   "text": "The smooth-differential statement [lem-sc-smooth-omega-finite-locally-free] with d=1 makes omega invertible. Apply [sk-thm-picard-duality] with n=1 and q=1 to L. The perfect trace pairing identifies H^1(C,L)^vee with H^0(C,L^vee tensor omega). The inverse of an invertible module is its dual by [lem-sc-pic-group], and symmetry of tensor product gives the displayed isomorphism. With L=O_C the same duality for q=1 and q=0 gives h^0(omega)=g and h^1(omega)=h^0(O_C)=1. Thus chi(omega)=g-1, and step 3 applied to omega gives deg omega=(g-1)-(1-g)=2g-2.",
+   "uses": [
+    "sk-thm-picard-duality",
+    "lem-sc-pic-group",
+    "lem-sc-smooth-omega-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
+    "place": "Proof (1) and (2)"
+   }
   },
   {
-   "text": "*(H).* Classical: the complement of the support of an ample effective\nCartier divisor $D$ is the non-vanishing locus of the canonical section\nof $\\cO_X(D)$, and non-vanishing loci of sections of an ample sheaf on a\nproper scheme are affine.",
-   "uses": [],
-   "elementary": null
+   "text": "For deg L>2g-2, put M=omega tensor L^{-1}. Its degree is 2g-2-deg L<0 by steps 3 and 6. If M had a nonzero global section, [lem-pc-regular-curve-divisor-calculus] would identify M with O_C(D) for its effective zero divisor D. Step 3 would then give deg M=sum_x n_x[kappa(x):k]>=0, a contradiction. Therefore H^0(C,M)=0; step 6 gives H^1(C,L)=0, and step 3 gives h^0(C,L)=deg L+1-g.",
+   "uses": [
+    "lem-pc-regular-curve-divisor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
+    "place": "Proof (3)"
+   }
+  },
+  {
+   "text": "Let K/k be any field extension. Clause (4) of [det-picard-rr-duality] gives that C_K is a smooth projective geometrically connected curve with the same genus, identifies its canonical sheaf with omega_K and its degree with that of L, and states that the trace-pairing duality isomorphism itself extends by scalars. This last assertion is used explicitly, rather than inferred merely from equality of dimensions or naturality in L. The degree in that node agrees with the present degree by step 3. Independently [lem-sc-flat-base-change-coherent] identifies H^i(C_K,L_K) with H^i(C,L) tensor_k K; [lem-pc-finrank-field-base-change] preserves each finite dimension. Thus chi, g, degree, the RR identity and the canonical-degree identity are unchanged, and the duality isomorphism is the scalar extension of the original one. This proves the field-extension clause.",
+   "uses": [
+    "det-picard-rr-duality",
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
+    "place": "Statement (4) and Proof (4)"
+   }
+  },
+  {
+   "text": "Suppose deg L>0. Extend scalars to an algebraic closure Omega of k. Step 8 preserves degree and g. Choose m>=1 with m deg L>=2g+1, and set M=L_Omega^{tensor m}. For any closed points P,Q of C_Omega, including P=Q, their residue fields are Omega by [lem-weil-pbc-closed-point-residue-field-base]. By step 3, M, M(-P), M(-P-Q) have degrees m deg L, m deg L-1, m deg L-2, all strictly greater than 2g-2. Step 7 gives h^0(M(-P))=h^0(M)-1 and h^0(M(-P-Q))=h^0(M)-2. Apply [lem-sc-very-ample-separation-criterion] to conclude that M is very ample. Iterating [lem-weil-pbc-module-pullback-tensor] identifies M with the pullback of L^{tensor m}; so [lem-pc-very-ample-descends] makes L^{tensor m} very ample over k. By [def-sc-ample], L is ample. This proves (G) without subtracting nonrational points as if they had degree one.",
+   "uses": [
+    "lem-sc-very-ample-separation-criterion",
+    "lem-pc-very-ample-descends",
+    "def-sc-ample",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+    "place": "Proof, dimension-drop argument and descent as in the unit proof (G)"
+   }
+  },
+  {
+   "text": "For (H) let X be the proper k-scheme in that clause, of arbitrary dimension, and D its effective Cartier divisor. Its associated invertible module is O_X(D)=I_D^vee, and it is ample by hypothesis. These are precisely the hypotheses of [lem-sc-ample-complement-affine]. Its conclusion X minus D is affine means X minus Supp(D) is affine, since an open complement only depends on the underlying support. This proves (H), including D empty whenever the ampleness hypothesis is satisfied.",
+   "uses": [
+    "lem-sc-ample-complement-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-ample-complement-affine.md",
+    "place": "Statement and Proof"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-picard-duality"
+  "def-pc-smooth-projective-curve",
+  "lem-sc-smooth-regular",
+  "lem-pc-projective-proper",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-vanishing-above-dim",
+  "lem-pc-h0-geom-connected",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-proper-dim-one-projective",
+  "lem-pc-regular-curve-divisor-calculus",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "def-pc-degree-line-bundle",
+  "lem-sc-torsion-subsheaf-quotient",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-sc-regular-curve-torsionfree-free",
+  "lem-sc-vector-bundle-line-subbundle",
+  "lem-sc-determinant-short-exact",
+  "sk-thm-picard-duality",
+  "lem-sc-pic-group",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "det-picard-rr-duality",
+  "lem-sc-flat-base-change-coherent",
+  "lem-pc-finrank-field-base-change",
+  "lem-sc-very-ample-separation-criterion",
+  "lem-pc-very-ample-descends",
+  "def-sc-ample",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-sc-ample-complement-affine"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "RR proof; supplemented by the current blueprint duality detail and the divisor-calculus Stacks sources"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch theorem coherent sheaves smooth projective curves Serre duality",
+   "results": "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul; FunctionField.classNumber; WeierstrassCurve.Affine.Point.toClass_some; WeierstrassCurve.Affine.FunctionField; AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict; Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential; WeierstrassCurve.Affine.CoordinateRing.XYIdeal'",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, IsAmple",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann.Roch|eulerChar.*degree|Serre.duality",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Riemann Roch theorem for smooth projective curves",
+   "results": "Algebra.FormallySmooth.projective_kaehlerDifferential; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; WeierstrassCurve.Projective.Point.ext_iff; WeierstrassCurve.natDegree_preΨ₄_pos; Algebra.FormallySmooth.iff_subsingleton_and_projective; WeierstrassCurve.Projective.Point.nonsingular; WeierstrassCurve.Affine.degree_polynomial; Algebra.smoothLocus_eq_univ",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic of a line bundle equals divisor degree plus one minus genus",
+   "results": "WeierstrassCurve.natDegree_ΨSq; WeierstrassCurve.natDegree_preΨ'; locallyFinsuppWithin.logCounting_divisor; WeierstrassCurve.natDegree_preΨ; WeierstrassCurve.natDegree_Φ; ValueDistribution.logCounting_top; ValueDistribution.characteristic_sub_characteristic_inv; MeromorphicOn.divisor_sub_const_self",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\"",
+   "results": "ComplexShape.EulerCharSigns; ComplexShape.EulerCharSigns.χ; GradedObject.eulerChar; HomologicalComplex.eulerChar; ComplexShape.EulerCharSigns.mk; ComplexShape.EulerCharSigns.χ_next; HomologicalComplex.homologyEulerChar; ComplexShape.eulerCharSignsDownNat",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "RiemannRoch|SerreDuality|degree.*[Ii]nvertible|[Ii]nvertible.*degree",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/Algebra/Polynomial/Splits.lean; Mathlib/Algebra/Polynomial/Splits.lean; Mathlib/Algebra/Polynomial/Splits.lean; Mathlib/Algebra/Polynomial/Splits.lean; Mathlib/Algebra/Polynomial/Splits.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: No scheme Riemann–Roch or trace-duality theorem among the returned declarations."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -115,5 +306,74 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-thm-picard-rr",
+  "worker": "stage1",
+  "summary": "Replaced uncited imported arguments with divisor induction over arbitrary fields, coherent torsion reduction and vector-bundle rank induction, explicit duality and negative-degree arguments, the existing precise field-extension comparison, point-and-tangent ampleness and the existing arbitrary-dimensional affine-complement theorem. One new regular-curve divisor-calculus input; no Lean written or compiled. Statement unchanged.",
+  "blueprint": "Realizes the old unit RR/G/H proof and all seven imported proof paragraphs; the current blueprint duality detail supplies its field-extension comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic tool used for Projective morphisms are proper; its precise statement supplies the cited step, with no replacement of the RR/G/H unit route."
+   },
+   {
+    "node": "lem-pc-vanishing-above-dim",
+    "why": "Generic tool used for Vanishing above the dimension of a curve; its precise statement supplies the cited step, with no replacement of the RR/G/H unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic tool used for Coherent modules on a locally Noetherian scheme: kernels, cokernels, sums, quasi-coherent sub- and quotient modules; its precise statement supplies the cited step, with no replacement of the RR/G/H unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-support-proper-over-base",
+    "why": "Generic tool used for Support of a finite type quasi-coherent module: closed, and proper over the base iff the module lives on a closed subscheme proper over the base; its precise statement supplies the cited step, with no replacement of the RR/G/H unit route."
+   },
+   {
+    "node": "lem-sc-pic-group",
+    "why": "Generic tool used for $\\operatorname{Pic}(C)$ is a group; its precise statement supplies the cited step, with no replacement of the RR/G/H unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic tool for Smooth morphisms have geometrically reduced fibres in the cited step, without replacing the RR/G/H unit route."
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Generic tool for A proper scheme of dimension at most one over a field is projective in the cited step, without replacing the RR/G/H unit route."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic tool for Coherent modules under a closed immersion in the cited step, without replacing the RR/G/H unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic tool for Residue fields of closed points over an algebraically closed field in the cited step, without replacing the RR/G/H unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic tool for Pullback of modules commutes with tensor products, compatibly with sections in the cited step, without replacing the RR/G/H unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-pc-vanishing-above-dim",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-sc-pic-group",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-proper-dim-one-projective",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-7fa8e8d4d",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-7fa8e8d4d (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no fixes. The item statement is unchanged from live, and live is still 'imported', so nothing has superseded it. There is no repair note, so this is an ordinary one-level split. All 10 steps check out against the cited statements. Steps 1-3: χ(O)=1-g, the divisor induction through the new node's exact sequence (the point contributes [κ(x):k]), and the proof that the divisor degree equals the cohomological degree. Steps 4-5: coherent RR through the torsion subsheaf and a rank induction with line subbundles and determinants. Steps 6-7: Serre duality (sk-thm-picard-duality with n=1, q=0,1), deg ω=2g-2, and the no-sections argument in negative degree. Step 8: field-extension compatibility, taken from clause (4) of det-picard-rr-duality, which really states that the duality isomorphism extends by scalars. Step 9: (G) by passing to the algebraic closure, using the separation criterion (edge case g=0 checked) and very-ample descent. Step 10: (H) is exactly lem-sc-ample-complement-affine. The new node lem-pc-regular-curve-divisor-calculus is true; I checked the DVR stalks, the sign convention, the skyscraper quotient, Spec of a DVR, and O(n) on P^1. It is not a duplicate: the existing rational-section and divisor-module nodes assume an algebraically closed field or effective divisors, and lem-sc-divisor-sequence-general is the étale G_m sequence. The Stacks tags are correct and there is no SGA. Batch-5: def-pod-ring-scalar-extension is the general definition of scalar extension, and lem-trf-proper-finite-fibre-finite-near is the generic fact that a proper map with a finite fibre is finite nearby. Neither is the trace formula, Poincaré duality, or a step of their proofs, so I accepted both. The declared tool uses are generic, and a closure traversal finds no cycle. Maintainer notes: (1) det-picard-rr-duality's imported Step 0 relies in prose on the RR proved in this item, so whoever splits det must not cite sk-thm-picard-rr. Its clauses (2) and (3) can be done without it, using the cohomological degree and lem-pc-degree-base-change (2). (2) lem-pc-ample-positive-degree already states (G) for any field; step 9 re-proves it along the unit's route, which is also valid. (3) The item has a stmt_dep on a lemma node for the signed O_C(D) over an arbitrary field, and def-sc-kahler-differentials is written for an algebraically closed field. Stage 2 may need a definition node for these."
+ }
 }
