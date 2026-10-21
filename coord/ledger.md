@@ -19973,3 +19973,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/N5/lem-pe-profinite-sections-finite-quotient (reviewer PASS; first push; new nodes: 0)
 - 03:48 L: merged deliver/Q95/lem-pd-section-ordinary-oplax-normalization (reviewer FIX; first push; new nodes: 0); claim not held by Q95: not your claim
 - 2026-10-21T03:48:02Z L: superseded stage-1 delivery Q09/lem-sfb-lattice-subquotient-filtration at 05bcd9d95c250da2996e810c0ab978d5cc05667b; current completion retained; packet archived at refs/superseded/Q09/lem-sfb-lattice-subquotient-filtration/05bcd9d95c250da2996e810c0ab978d5cc05667b; stale return retired.
+- 2026-10-21T03:48:03Z L: superseded stage-1 delivery Q121/lem-sp-finite-coefficient-input-models at 10f30c6fd37808d0e5b66cc831978faff97a0518; current completion retained; packet archived at refs/superseded/Q121/lem-sp-finite-coefficient-input-models/10f30c6fd37808d0e5b66cc831978faff97a0518; stale return retired.
