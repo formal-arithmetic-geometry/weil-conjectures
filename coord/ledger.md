@@ -20808,3 +20808,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:52 L: returned deliver/Q128/lemma-nagata-strict-transform-chart-localization-data (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-transform-chart-localization-data:)
 - 07:52 L: returned deliver/Q94/lemma-nagata-scheme-image-of-closed-immersion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-scheme-image-of-closed-immersion: cited n)
 - 07:52 L: returned deliver/Q68/lem-weil-finite-duality-locally-closed-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-finite-duality-locally-closed-comparison: cit)
+- 07:52 L: returned deliver/Q07/lem-weil-pbc-exact-faithful-torsion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-exact-faithful-torsion: lem-weil-pbc-exac)
