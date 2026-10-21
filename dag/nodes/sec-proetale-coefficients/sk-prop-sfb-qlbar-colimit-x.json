@@ -21,9 +21,11 @@
  ],
  "proof": [
   {
-   "text": "Apply clause (3) of the integral-limit lemma to $E,X,\\pi_E$. It gives the first canonical ring-sheaf isomorphism, with the specified reduction projections; clauses (1) and (2) identify its represented underlying sheaf.",
+   "text": "Use the integral-limit detail module’s underlying-set pullback comparison and representable pullback construction. For the specified powers of the uniformizer, compactness of the integer ring and surjectivity of reduction give a compatible preimage by nested closed fibres; adic separatedness gives uniqueness. The relative profinite test functor preserves this tower limit, and Yoneda transports it to the underlying sheaves. The ring-object limit property follows by checking unit and multiplication against the jointly distinguishing projections. The finite discrete point comparison and the constant-sheaf pullback comparison identify every level with its constant ring, naturally in the actual quotient transitions.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
    ],
    "elementary": false,
    "source": {
@@ -82,7 +84,7 @@
    }
   },
   {
-   "text": "Specialize the first two comparisons to $E=\\mathbf Q_\\ell$ and $\\pi_E=\\ell$. Its integers are $\\mathbf Z_\\ell$, and the residue identifications with $\\mathbf Z/\\ell^n$ send the class of an integer to its class modulo $\\ell^n$; these commute with reductions. This gives both stated specializations.",
+   "text": "Apply the same represented compact-tower construction directly to the usual maps PadicInt.toZModPow with values ZMod (ell^(n+1)). Their standard compatibility, surjectivity and joint injectivity give the normalized integral limit. The finite constant comparisons are natural in the cast homomorphisms. Transport the normalized cones along the monoidal coefficient pullback compositor to obtain preservation by every scheme inverse image; naturality of the reductions is the compositor naturality equation. The rational specialization uses the existing continuous-integral telescope for Q_ell.",
    "uses": [
     "def-weil-l-adic-numbers"
    ],
@@ -95,6 +97,8 @@
  ],
  "proof_deps": [
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-sfb-qlbar-point-abelian-colimit",
   "sk-def-sfb-pullback-from-point",
@@ -110,7 +114,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-  "place": "Assembly of the existing integral, localization and pullback detail nodes, the extracted point-colimit statement (with its existing project declaration seeded for audit), and the filtered ring-object cocone lemma landed for this repair. No argument is removed: pointwise factorization and universal-property work now belong to the point-colimit node."
+  "place": "Assembly of the existing integral, localization and pullback detail nodes, the extracted point-colimit statement (with its existing project declaration seeded for audit), and the filtered ring-object cocone lemma landed for this repair. No argument is removed: pointwise factorization and universal-property work now belong to the point-colimit node. K1 proves the two retained integral clauses using the same representing-scheme route, specialized to the actual uniformizer quotient and ZMod towers; finite constant identifications are the existing finite discrete ring comparisons. No new holed results."
  },
  "mathlib_searches": [
   {
@@ -314,12 +318,12 @@
   "note": "The six theorem declarations jointly state all three comparisons, arbitrary inverse-image compatibility, and the explicit Z_l/Q_l specializations. Integral comparisons use normalized IsLimit cones in ring objects; rational comparisons use the canonical module-colimit universal property on the existing rational ring; the finite-field ring cocone is an IsColimit. Helper definitions only bundle existing coefficient objects and their actual maps."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261020T132011-L-1400682",
+  "landing": "20261021T190519-L-3625615",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -17,9 +17,12 @@ import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
+import Mathlib.Topology.Algebra.Ring.Compact
+import all Sheaf.Paper.FiniteDiscreteCondensedRing
+import all Sheaf.Paper.FiniteDiscreteSchemeRing
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import all Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 import Sheaf.Paper.ContinuousIntegralCoefficients
 
@@ -479,14 +482,535 @@ private theorem completedScalarIso
 
 end CondensedRing
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+-- The underlying limit determines the unit and multiplication of every lift.
+open scoped MonObj MonoidalCategory in
+private noncomputable def completedRingLimit
+    {C : Type*} [Category C] [MonoidalCategory C]
+    {J : Type*} [Category J] {D : J ⥤ Mon C} (c : Cone D)
+    (hc : IsLimit ((Mon.forget C).mapCone c)) : IsLimit c := by
+  let lift (s : Cone D) : s.pt ⟶ c.pt := by
+    let a : s.pt.X ⟶ c.pt.X := hc.lift ((Mon.forget C).mapCone s)
+    have ha (j : J) : a ≫ (c.π.app j).hom = (s.π.app j).hom :=
+      hc.fac ((Mon.forget C).mapCone s) j
+    have : IsMonHom a := by
+      constructor
+      · apply hc.hom_ext
+        intro j
+        change (η[s.pt.X] ≫ a) ≫ (c.π.app j).hom = η[c.pt.X] ≫ (c.π.app j).hom
+        rw [Category.assoc, ha j]
+        exact (s.π.app j).isMonHom_hom.one_hom.trans
+          (c.π.app j).isMonHom_hom.one_hom.symm
+      · apply hc.hom_ext
+        intro j
+        change (μ[s.pt.X] ≫ a) ≫ (c.π.app j).hom =
+          ((a ⊗ₘ a) ≫ μ[c.pt.X]) ≫ (c.π.app j).hom
+        rw [Category.assoc, ha j, (s.π.app j).isMonHom_hom.mul_hom,
+          Category.assoc, (c.π.app j).isMonHom_hom.mul_hom, ← Category.assoc,
+          MonoidalCategory.tensorHom_comp_tensorHom, ha j]
+    exact Mon.Hom.mk a
+  refine { lift := lift, fac := ?_, uniq := ?_ }
+  · intro s j
+    apply Mon.Hom.ext
+    exact hc.fac ((Mon.forget C).mapCone s) j
+  · intro s m hm
+    apply Mon.Hom.ext
+    apply hc.hom_ext
+    intro j
+    exact (congrArg Mon.Hom.hom (hm j)).trans
+      (hc.fac ((Mon.forget C).mapCone s) j).symm
+
+private noncomputable abbrev completedProfinite (R : Type) [TopologicalSpace R]
+    [CompactSpace R] [T2Space R] [TotallyDisconnectedSpace R] : Profinite.{u} :=
+  letI : TotallyDisconnectedSpace (ULift.{u} R) :=
+    Homeomorph.ulift.isEmbedding.isTotallyDisconnected_range.mp
+      (isTotallyDisconnected_of_totallyDisconnectedSpace _)
+  Profinite.of (ULift.{u} R)
+
+private noncomputable def completedPointRepresentation (R : Type) [TopologicalSpace R]
+    [Ring R] [IsTopologicalRing R] [CompactSpace R] [T2Space R]
+    [TotallyDisconnectedSpace R] :
+    (sheafCompose (coherentTopology Profinite.{u}) (forget Ab.{u + 1})).obj
+        (Profinite.continuousMapRingObj R) ≅
+      (coherentTopology Profinite.{u}).uliftYoneda.{u + 1}.obj (completedProfinite R) :=
+  (fullyFaithfulSheafToPresheaf _ _).preimageIso
+    (NatIso.ofComponents (fun S ↦ Equiv.toIso
+      { toFun := fun x ↦ ULift.up (show S.unop ⟶ completedProfinite R from
+          ConcreteCategory.ofHom ⟨fun t ↦ ULift.up (x.down t),
+            continuous_uliftUp.comp x.down.continuous⟩)
+        invFun := fun x ↦ ULift.up
+          (show C(S.unop, R) from
+            ⟨fun t ↦ ((show S.unop ⟶ completedProfinite R from x.down).hom.hom t).down,
+            continuous_uliftDown.comp
+              (show S.unop ⟶ completedProfinite R from x.down).hom.hom.continuous⟩)
+        left_inv := fun x ↦ by rfl
+        right_inv := fun x ↦ by rfl }) (by intro S T f; rfl))
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def completedRepresentation (X : Scheme.{u})
+    (R : Type) [TopologicalSpace R] [Ring R] [IsTopologicalRing R]
+    [CompactSpace R] [T2Space R] [TotallyDisconnectedSpace R] :
+    ((completedCoefficient X (Profinite.continuousMapRingSheaf R)).X).obj ⋙
+        forget Ab.{u + 1} ≅
+      uliftYoneda.{u + 1}.obj ((profiniteToProEtOf X).obj (completedProfinite R)) := by
+  let U := profiniteToProEtOf X
+  let J := coherentTopology Profinite.{u}
+  let K := Scheme.ProEt.topology X
+  let L := Functor.sheafPullbackConstruction.sheafPullback U (Type (u + 1)) J K
+  exact (sheafToPresheaf K (Type (u + 1))).mapIso
+    ((integralPullbackForgetIso X).app (Profinite.continuousMapRingObj R) ≪≫
+      L.mapIso (completedPointRepresentation R) ≪≫
+      representablePullbackIso J K U L
+        (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous U (Type (u + 1)) J K)
+        (completedProfinite R))
+
+private noncomputable def completedProfiniteMap
+    {R S : Type} [TopologicalSpace R] [TopologicalSpace S]
+    [CompactSpace R] [T2Space R] [TotallyDisconnectedSpace R]
+    [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S]
+    (f : R → S) (hf : Continuous f) : completedProfinite.{u} R ⟶ completedProfinite S :=
+  ConcreteCategory.ofHom ⟨fun x ↦ ULift.up (f x.down),
+    continuous_uliftUp.comp (hf.comp continuous_uliftDown)⟩
+
+private theorem completedRepresentablePullbackNaturality
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    [J.Subcanonical] [K.Subcanonical] (U : C ⥤ D) [U.IsContinuous J K]
+    (L : Sheaf J (Type (u + 1)) ⥤ Sheaf K (Type (u + 1)))
+    (adj : L ⊣ U.sheafPushforwardContinuous (Type (u + 1)) J K)
+    {S T : C} (f : S ⟶ T) :
+    L.map (J.uliftYoneda.{u + 1}.map f) ≫
+        (representablePullbackIso J K U L adj T).hom =
+      (representablePullbackIso J K U L adj S).hom ≫
+        K.uliftYoneda.{u + 1}.map (U.map f) := by
+  let t (V : C) : J.uliftYoneda.{u + 1}.obj V ⟶
+      (U.sheafPushforwardContinuous (Type (u + 1)) J K).obj
+        (K.uliftYoneda.{u + 1}.obj (U.obj V)) :=
+    ⟨{ app := fun W ↦ ↾fun g ↦ ULift.up (U.map g.down)
+       naturality := by
+         intro W Z g
+         ext h
+         apply ULift.ext
+         change U.map (g.unop ≫ h.down) = U.map g.unop ≫ U.map h.down
+         exact U.map_comp _ _ }⟩
+  have hm (V : C) : adj.homEquiv _ _
+      (representablePullbackIso J K U L adj V).hom = t V :=
+    (adj.homEquiv _ _).apply_symm_apply (t V)
+  apply (adj.homEquiv _ _).injective
+  rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right, hm, hm]
+  ext V x
+  change ULift.up (U.map (x.down ≫ f)) = ULift.up (U.map x.down ≫ U.map f)
+  rw [U.map_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem completedRepresentation_naturality (X : Scheme.{u})
+    {R S : Type} [TopologicalSpace R] [Ring R] [IsTopologicalRing R]
+    [CompactSpace R] [T2Space R] [TotallyDisconnectedSpace R]
+    [TopologicalSpace S] [Ring S] [IsTopologicalRing S]
+    [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S]
+    (f : R →+* S) (hf : Continuous f) :
+    Functor.whiskerRight
+        (completedCoefficientMap X (Profinite.continuousMapRingSheafMap f hf)).hom.hom
+        (forget Ab.{u + 1}) ≫ (completedRepresentation X S).hom =
+      (completedRepresentation X R).hom ≫
+        uliftYoneda.{u + 1}.map ((profiniteToProEtOf X).map (completedProfiniteMap f hf)) := by
+  let U := profiniteToProEtOf X
+  let J := coherentTopology Profinite.{u}
+  let K := Scheme.ProEt.topology X
+  let L := Functor.sheafPullbackConstruction.sheafPullback U (Type (u + 1)) J K
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    U (Type (u + 1)) J K
+  let g := (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+    (Profinite.continuousMapRingSheafMap f hf)
+  have hp : (sheafCompose J (forget Ab.{u + 1})).map g ≫
+        (completedPointRepresentation S).hom =
+      (completedPointRepresentation R).hom ≫
+        J.uliftYoneda.{u + 1}.map (completedProfiniteMap f hf) := by
+    apply Sheaf.hom_ext
+    ext V x
+    apply ULift.ext
+    change (show V.unop ⟶ completedProfinite S from _) = _
+    ext t
+    rfl
+  have hn := (integralPullbackForgetIso X).hom.naturality g
+  change (sheafCompose K (forget Ab.{u + 1})).map ((sfbPullbackFromPoint X).map g) ≫
+      ((integralPullbackForgetIso X).app _).hom =
+    ((integralPullbackForgetIso X).app _).hom ≫
+      L.map ((sheafCompose J (forget Ab.{u + 1})).map g) at hn
+  have hr := completedRepresentablePullbackNaturality J K U L adj (completedProfiniteMap f hf)
+  apply (sheafToPresheaf K (Type (u + 1))).congr_map
+    (f := (sheafCompose K (forget Ab.{u + 1})).map ((sfbPullbackFromPoint X).map g) ≫
+      ((integralPullbackForgetIso X).app _ ≪≫ L.mapIso (completedPointRepresentation S) ≪≫
+        representablePullbackIso J K U L adj (completedProfinite S)).hom)
+    (g := ((integralPullbackForgetIso X).app _ ≪≫
+      L.mapIso (completedPointRepresentation R) ≪≫
+        representablePullbackIso J K U L adj (completedProfinite R)).hom ≫
+      K.uliftYoneda.{u + 1}.map (U.map (completedProfiniteMap f hf))) ?_
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  erw [reassoc_of% hn]
+  erw [← L.map_comp_assoc, hp, L.map_comp]
+  simp only [Category.assoc]
+  erw [hr]
+
+private theorem completedTowerTotallyDisconnected
+    {R : Type} [TopologicalSpace R] [CompactSpace R] [T2Space R]
+    (Q : ℕ → Type) [∀ n, TopologicalSpace (Q n)] [∀ n, T2Space (Q n)]
+    [∀ n, TotallyDisconnectedSpace (Q n)] (q : ∀ n, C(R, Q n))
+    (hinj : ∀ x y : R, (∀ n, q n x = q n y) → x = y) :
+    TotallyDisconnectedSpace R := by
+  let f : R → ∀ n, Q n := fun x n ↦ q n x
+  have hf : Continuous f := continuous_pi fun n ↦ (q n).continuous
+  have hi : Function.Injective f := fun x y h ↦ hinj x y (congrFun h)
+  exact (hf.isClosedEmbedding hi).isEmbedding.isTotallyDisconnected_range.mp
+    (isTotallyDisconnected_of_totallyDisconnectedSpace _)
+
+-- Positive quotient levels avoid any special convention at the trivial level.
+private noncomputable def completedProfiniteTowerCone
+    (R : Type) [TopologicalSpace R] [CompactSpace R] [T2Space R]
+    [TotallyDisconnectedSpace R]
+    (Q : ℕ → Type) [∀ n, TopologicalSpace (Q n)] [∀ n, CompactSpace (Q n)]
+    [∀ n, T2Space (Q n)] [∀ n, TotallyDisconnectedSpace (Q n)]
+    (q : ∀ n, C(R, Q n)) (t : ∀ n, C(Q (n + 1), Q n))
+    (hqt : ∀ n x, t n (q (n + 1) x) = q n x)
+    : Cone (Functor.ofOpSequence
+        (X := fun n ↦ completedProfinite.{u} (Q n))
+        (fun n ↦ completedProfiniteMap (t n) (t n).continuous)) where
+  pt := completedProfinite R
+  π := NatTrans.ofOpSequence (fun n ↦ completedProfiniteMap (q n) (q n).continuous)
+    (fun n ↦ by
+      simp only [Functor.const_obj_map, Functor.ofOpSequence_map_homOfLE_succ]
+      ext x
+      exact congrArg ULift.up (hqt n x.down).symm)
+
+-- Compact nested fibres give existence; joint injectivity gives uniqueness.
+private noncomputable def completedProfiniteTowerLimit
+    (R : Type) [TopologicalSpace R] [CompactSpace R] [T2Space R]
+    [TotallyDisconnectedSpace R]
+    (Q : ℕ → Type) [∀ n, TopologicalSpace (Q n)] [∀ n, CompactSpace (Q n)]
+    [∀ n, T2Space (Q n)] [∀ n, TotallyDisconnectedSpace (Q n)]
+    (q : ∀ n, C(R, Q n)) (t : ∀ n, C(Q (n + 1), Q n))
+    (hqt : ∀ n x, t n (q (n + 1) x) = q n x)
+    (hinj : ∀ x y : R, (∀ n, q n x = q n y) → x = y)
+    (hsurj : ∀ n, Function.Surjective (q n)) :
+    IsLimit (completedProfiniteTowerCone.{u} R Q q t hqt) := by
+  let P := {b : ∀ n, Q n // ∀ n, t n (b (n + 1)) = b n}
+  let f : R → P := fun x ↦ ⟨fun n ↦ q n x, fun n ↦ hqt n x⟩
+  have hf : Continuous f := continuous_induced_rng.mpr (continuous_pi fun n ↦ (q n).continuous)
+  have hi : Function.Injective f := fun x y h ↦ hinj x y
+    (fun n ↦ congrArg (fun b : P ↦ b.val n) h)
+  have hs : Function.Surjective f := by
+    intro b
+    let S (n : ℕ) : Set R := {x | q n x = b.val n}
+    have hcl (n : ℕ) : IsClosed (S n) := isClosed_singleton.preimage (q n).continuous
+    have hne (n : ℕ) : (S n).Nonempty := hsurj n (b.val n)
+    have hstep (n : ℕ) : S (n + 1) ⊆ S n := by
+      intro x hx
+      exact (hqt n x).symm.trans ((congrArg (t n) hx).trans (b.property n))
+    obtain ⟨x, hx⟩ := IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed
+      S hstep hne (hcl 0).isCompact hcl
+    exact ⟨x, Subtype.ext (funext fun n ↦ Set.mem_iInter.mp hx n)⟩
+  let e : R ≃ₜ P := IsHomeomorph.homeomorph f
+    (isHomeomorph_iff_continuous_bijective.mpr ⟨hf, hi, hs⟩)
+  let D := Functor.ofOpSequence
+    (X := fun n ↦ completedProfinite.{u} (Q n))
+    (fun n ↦ completedProfiniteMap (t n) (t n).continuous)
+  let b (s : Cone D) (x : s.pt) : P :=
+    ⟨fun n ↦ (s.π.app (op n) x).down, fun n ↦ by
+      have h := ConcreteCategory.congr_hom (s.w (homOfLE (Nat.le_succ n)).op) x
+      dsimp only [D] at h
+      simp only [Functor.ofOpSequence_map_homOfLE_succ] at h
+      change ULift.up (t n ((s.π.app (op (n + 1)) x).down)) =
+        s.π.app (op n) x at h
+      exact congrArg ULift.down h⟩
+  refine { lift := fun s ↦ ?_
+           fac := ?_
+           uniq := ?_ }
+  · refine ConcreteCategory.ofHom
+      (show C(s.pt, completedProfinite R) from
+        ⟨fun x ↦ ULift.up (e.symm (b s x)), ?_⟩)
+    apply continuous_uliftUp.comp
+    apply e.symm.continuous.comp
+    exact continuous_induced_rng.mpr
+      (continuous_pi fun n ↦ continuous_uliftDown.comp (s.π.app (op n)).hom.hom.continuous)
+  · intro s n
+    ext x
+    exact congrArg (fun a : P ↦ ULift.up (a.val n.unop)) (e.apply_symm_apply (b s x))
+  · intro s m hm
+    ext x
+    apply congrArg ULift.up
+    apply e.injective
+    apply Subtype.ext
+    funext n
+    exact (congrArg (fun h : s.pt ⟶ D.obj (op n) ↦ (h x).down) (hm (op n))).trans
+      (congrArg (fun a : P ↦ a.val n) (e.apply_symm_apply (b s x))).symm
+
+private noncomputable def completedRingTowerCone
+    (X : Scheme.{u}) (R : Type) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    (Q : ℕ → Type) [∀ n, CommRing (Q n)] [∀ n, TopologicalSpace (Q n)]
+    [∀ n, IsTopologicalRing (Q n)] (q : ∀ n, R →+* Q n)
+    (hq : ∀ n, Continuous (q n)) (t : ∀ n, Q (n + 1) →+* Q n)
+    (ht : ∀ n, Continuous (t n)) (hqt : ∀ n x, t n (q (n + 1) x) = q n x) :
+    Cone (Functor.ofOpSequence
+      (X := fun n ↦ completedCoefficient X (Profinite.continuousMapRingSheaf (Q n)))
+      (fun n ↦ completedCoefficientMap X (Profinite.continuousMapRingSheafMap (t n) (ht n))))
+    where
+  pt := completedCoefficient X (Profinite.continuousMapRingSheaf R)
+  π := NatTrans.ofOpSequence
+    (fun n ↦ completedCoefficientMap X (Profinite.continuousMapRingSheafMap (q n) (hq n)))
+    (fun n ↦ by
+      simp only [Functor.const_obj_map, Functor.ofOpSequence_map_homOfLE_succ]
+      erw [Category.id_comp]
+      change (sfbPullbackFromPoint X).mapMon.map _ =
+        (sfbPullbackFromPoint X).mapMon.map _ ≫
+        (sfbPullbackFromPoint X).mapMon.map _
+      erw [← Functor.map_comp]
+      congr 1
+      apply Mon.Hom.ext
+      apply Sheaf.hom_ext
+      ext S x
+      change ULift.up _ = ULift.up _
+      congr 1
+      ext y
+      exact (hqt n (x.down y)).symm)
+
+-- Preserve the represented tower, rather than arbitrary limits of inverse images.
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def completedRingTowerLimit
+    (X : Scheme.{u}) (R : Type) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [CompactSpace R] [T2Space R] [TotallyDisconnectedSpace R]
+    (Q : ℕ → Type) [∀ n, CommRing (Q n)] [∀ n, TopologicalSpace (Q n)]
+    [∀ n, IsTopologicalRing (Q n)] [∀ n, CompactSpace (Q n)] [∀ n, T2Space (Q n)]
+    [∀ n, TotallyDisconnectedSpace (Q n)]
+    (q : ∀ n, R →+* Q n) (hq : ∀ n, Continuous (q n))
+    (t : ∀ n, Q (n + 1) →+* Q n) (ht : ∀ n, Continuous (t n))
+    (hqt : ∀ n x, t n (q (n + 1) x) = q n x)
+    (hinj : ∀ x y : R, (∀ n, q n x = q n y) → x = y)
+    (hsurj : ∀ n, Function.Surjective (q n)) :
+    IsLimit (completedRingTowerCone X R Q q hq t ht hqt) := by
+  let a := completedProfiniteTowerCone.{u} R Q
+    (fun n ↦ ⟨q n, hq n⟩) (fun n ↦ ⟨t n, ht n⟩) hqt
+  let ha := completedProfiniteTowerLimit.{u} R Q
+    (fun n ↦ ⟨q n, hq n⟩) (fun n ↦ ⟨t n, ht n⟩) hqt hinj hsurj
+  let D := Functor.ofOpSequence
+    (X := fun n ↦ completedProfinite.{u} (Q n))
+    (fun n ↦ completedProfiniteMap (t n) (ht n))
+  let U := profiniteToProEtOf X
+  let : profiniteToCommRingCatOp.{u}.IsRightAdjoint :=
+    profiniteToCommRingCatOp_isRightAdjoint
+  let : (Over.forget specZ.{u}).IsEquivalence :=
+    (Over.equivalenceOfIsTerminal specULiftZIsTerminal).isEquivalence_functor
+  let : PreservesLimitsOfSize.{0, 0} profiniteToScheme.{u} := by
+    unfold profiniteToScheme
+    infer_instance
+  let : PreservesLimit D
+      ((profiniteToProEt.{u} ⋙ Scheme.ProEt.forget specZ) ⋙ Over.forget specZ) :=
+    inferInstanceAs (PreservesLimit D profiniteToScheme.{u})
+  let : PreservesLimit D (profiniteToProEt.{u} ⋙ Scheme.ProEt.forget specZ) :=
+    preservesLimit_of_reflects_of_preserves _ (Over.forget specZ)
+  let hOver := isLimitOfPreserves
+    ((profiniteToProEt ⋙ Scheme.ProEt.forget specZ) ⋙ Over.pullback (toSpecZ X)) ha
+  let hsch := isLimitOfPreserves (Over.forget X) hOver
+  let hu : IsLimit (U.mapCone a) :=
+    isLimitOfReflects (Scheme.ProEt.forget X)
+      (isLimitOfReflects (Over.forget X) hsch)
+  let hy := isLimitOfPreserves uliftYoneda.{u + 1} hu
+  let T := Functor.ofOpSequence
+    (X := fun n ↦ completedCoefficient X (Profinite.continuousMapRingSheaf (Q n)))
+    (fun n ↦ completedCoefficientMap X (Profinite.continuousMapRingSheafMap (t n) (ht n)))
+  let c := completedRingTowerCone X R Q q hq t ht hqt
+  let W := sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1} ⋙
+    (Functor.whiskeringRight _ _ _).obj (forget Ab.{u + 1})
+  let F := Mon.forget (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ⋙ W
+  let β : T ⋙ F ⟶ D ⋙ U ⋙ uliftYoneda.{u + 1} :=
+    NatTrans.ofOpSequence (fun n ↦ (completedRepresentation X (Q n)).hom) (fun n ↦ by
+      dsimp only [T, D, Functor.comp_map]
+      simp only [Functor.ofOpSequence_map_homOfLE_succ]
+      exact completedRepresentation_naturality X (t n) (ht n))
+  have hβ (n : ℕᵒᵖ) : IsIso (β.app n) := by
+    change IsIso (completedRepresentation X (Q n.unop)).hom
+    infer_instance
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  have hw (n : ℕᵒᵖ) : F.map (c.π.app n) ≫ β.app n =
+      (completedRepresentation X R).hom ≫
+        (uliftYoneda.{u + 1}.mapCone (U.mapCone a)).π.app n := by
+    exact completedRepresentation_naturality X (q n.unop) (hq n.unop)
+  let h : IsLimit (F.mapCone c) :=
+    (IsLimit.equivOfNatIsoOfIso (asIso β) (F.mapCone c)
+      (uliftYoneda.{u + 1}.mapCone (U.mapCone a))
+      (Cone.ext (completedRepresentation X R) hw)).symm hy
+  let : ReflectsLimitsOfShape ℕᵒᵖ W := reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact completedRingLimit c (isLimitOfReflects W h)
+
+-- Use the explicit constant-function map to retain naturality in coefficient maps.
+private noncomputable def completedFinitePointIso (R : Type) [CommRing R]
+    [TopologicalSpace R] [IsTopologicalRing R] [DiscreteTopology R] [Finite R] :
+    Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
+        ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} R))) ≅
+      Profinite.continuousMapRingObj R := by
+  let J := coherentTopology Profinite.{u}
+  let φ := Functor.whiskerRight (Profinite.constantToContinuousRing.{u} R)
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})
+  have hφ : J.W (A := Ab.{u + 1}) φ := J.W_of_isLocallyBijective φ
+  have : IsIso ((presheafToSheaf J Ab.{u + 1}).map φ) := (J.W_iff φ).mp hφ
+  exact asIso ((presheafToSheaf J Ab.{u + 1}).map φ) ≪≫
+    Sheaf.sheafifyRingPresheafIso.{u + 1, u, u + 1} J (Profinite.continuousMapRingSheaf R)
+
+private instance completedFinitePointIso_isMonHom (R : Type) [CommRing R]
+    [TopologicalSpace R] [IsTopologicalRing R] [DiscreteTopology R] [Finite R] :
+    IsMonHom (completedFinitePointIso.{u} R).hom := by
+  dsimp only [completedFinitePointIso, Iso.trans_hom, asIso_hom]
+  infer_instance
+
+private noncomputable def completedConstantPresentationIso (X : Scheme.{u})
+    (R : Type) [Ring R] :
+    Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} R))) ≅
+      (completedConstantRing X R).X := by
+  let K := Scheme.ProEt.topology X
+  let P := (Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} R))
+  let S := (constantSheaf K RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} R))
+  let φ := Functor.whiskerRight (toSheafify K P) (forget₂ RingCat.{u + 1} Ab.{u + 1})
+  let : K.PreservesSheafification (forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
+    GrothendieckTopology.instPreservesSheafification K _
+  have hφ : K.W (A := Ab.{u + 1}) φ :=
+    K.W_of_preservesSheafification (forget₂ RingCat.{u + 1} Ab.{u + 1}) _
+      (K.W_toSheafify P)
+  have : IsIso ((presheafToSheaf K Ab.{u + 1}).map φ) := (K.W_iff φ).mp hφ
+  exact asIso ((presheafToSheaf K Ab.{u + 1}).map φ) ≪≫
+    Sheaf.sheafifyRingPresheafIso.{u + 1, u, u + 1} K S
+
+private instance completedConstantPresentationIso_isMonHom (X : Scheme.{u})
+    (R : Type) [Ring R] : IsMonHom (completedConstantPresentationIso X R).hom := by
+  dsimp only [completedConstantPresentationIso, Iso.trans_hom, asIso_hom]
+  infer_instance
+
+private noncomputable def completedFiniteIso (X : Scheme.{u}) (R : Type) [CommRing R]
+    [TopologicalSpace R] [IsTopologicalRing R] [DiscreteTopology R] [Finite R] :
+    completedCoefficient X (Profinite.continuousMapRingSheaf R) ≅ completedConstantRing X R := by
+  let e := (completedConstantPresentationIso X R).symm ≪≫
+    finiteDiscreteSchemeRingIso R X (completedFinitePointIso R)
+  have : IsMonHom e.hom := by dsimp only [e, Iso.trans_hom, Iso.symm_hom]; infer_instance
+  exact (Mon.mkIso e (IsMonHom.one_hom e.hom) (IsMonHom.mul_hom e.hom)).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem completedFinitePointIso_naturality
+    {R S : Type} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [DiscreteTopology R] [Finite R]
+    [CommRing S] [TopologicalSpace S] [IsTopologicalRing S]
+    [DiscreteTopology S] [Finite S] (f : R →+* S) :
+    (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map
+        (AddCommGrpCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+          (f.comp ULift.ringEquiv.toRingHom)).toAddMonoidHom) ≫
+        (completedFinitePointIso S).hom =
+      (completedFinitePointIso R).hom ≫
+        (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+          (Profinite.continuousMapRingSheafMap f continuous_of_discreteTopology) := by
+  let J := coherentTopology Profinite.{u}
+  let L := presheafToSheaf J Ab.{u + 1}
+  let g := (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+    (Profinite.continuousMapRingSheafMap f continuous_of_discreteTopology)
+  have hn := (sheafificationAdjunction J Ab.{u + 1}).counit.naturality g
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  change L.map _ ≫ (L.map _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _) =
+    (L.map _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _) ≫ g
+  erw [← Category.assoc, ← L.map_comp]
+  change _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _ =
+    _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _ ≫ g
+  erw [← hn, ← Category.assoc, ← L.map_comp]
+  congr 2
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem completedConstantPresentationIso_naturality (X : Scheme.{u})
+    {R S : Type} [Ring R] [Ring S] (f : R →+* S) :
+    (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).map
+        (AddCommGrpCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+          (f.comp ULift.ringEquiv.toRingHom)).toAddMonoidHom) ≫
+        (completedConstantPresentationIso X S).hom =
+      (completedConstantPresentationIso X R).hom ≫ (completedConstantMap X f).hom := by
+  let K := Scheme.ProEt.topology X
+  let L := presheafToSheaf K Ab.{u + 1}
+  let g := (completedConstantMap X f).hom
+  have hn := (sheafificationAdjunction K Ab.{u + 1}).counit.naturality g
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  change L.map _ ≫ (L.map _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _) =
+    (L.map _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _) ≫ g
+  erw [← Category.assoc, ← L.map_comp]
+  change _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _ =
+    _ ≫ (sheafificationAdjunction _ Ab.{u + 1}).counit.app _ ≫ g
+  erw [← hn, ← Category.assoc, ← L.map_comp]
+  apply congrArg (fun h ↦ L.map h ≫
+    (sheafificationAdjunction K Ab.{u + 1}).counit.app _)
+  let a : RingCat.of (ULift.{u + 1} R) ⟶ RingCat.of (ULift.{u + 1} S) :=
+    RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+      (f.comp ULift.ringEquiv.toRingHom))
+  have h := toSheafify_naturality K ((Functor.const X.ProEtᵒᵖ).map a)
+  ext V x
+  exact congrArg (fun h ↦ (h.app V).hom x) h
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem completedFiniteIso_naturality (X : Scheme.{u})
+    {R S : Type} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [DiscreteTopology R] [Finite R]
+    [CommRing S] [TopologicalSpace S] [IsTopologicalRing S]
+    [DiscreteTopology S] [Finite S] (f : R →+* S) :
+    completedCoefficientMap X
+        (Profinite.continuousMapRingSheafMap f continuous_of_discreteTopology) ≫
+        (completedFiniteIso X S).hom =
+      (completedFiniteIso X R).hom ≫ completedConstantMap X f := by
+  apply Mon.Hom.ext
+  change _ ≫ ((completedConstantPresentationIso X S).symm ≪≫
+      finiteDiscreteSchemeRingIso S X (completedFinitePointIso S)).inv =
+    ((completedConstantPresentationIso X R).symm ≪≫
+      finiteDiscreteSchemeRingIso R X (completedFinitePointIso R)).inv ≫ _
+  erw [Iso.comp_inv_eq]
+  apply (cancel_epi (((completedConstantPresentationIso X R).symm ≪≫
+    finiteDiscreteSchemeRingIso R X (completedFinitePointIso R)).hom)).mp
+  simp only [Iso.hom_inv_id_assoc, Category.assoc]
+  let F := upperStarFromPoint X
+  let A := AddCommGrpCat.of (ULift.{u + 1} R)
+  let B := AddCommGrpCat.of (ULift.{u + 1} S)
+  let a : A ⟶ B := AddCommGrpCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+    (f.comp ULift.ringEquiv.toRingHom)).toAddMonoidHom
+  let g := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+      (Profinite.continuousMapRingSheafMap f continuous_of_discreteTopology)
+  let C := constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}
+  let D := constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
+  let pR := completedConstantPresentationIso X R
+  let pS := completedConstantPresentationIso X S
+  have hp : pR.inv ≫ C.map a = (completedConstantMap X f).hom ≫ pS.inv := by
+    apply (cancel_mono pS.hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    erw [completedConstantPresentationIso_naturality, Iso.inv_hom_id_assoc]
+  have hq : F.map (completedFinitePointIso R).hom ≫ F.map g =
+      F.map (D.map a) ≫ F.map (completedFinitePointIso S).hom := by
+    rw [← F.map_comp, ← F.map_comp]
+    exact congrArg F.map (completedFinitePointIso_naturality f).symm
+  have hs : ((constantSchemeIso X).app A).hom ≫ F.map (D.map a) =
+      C.map a ≫ ((constantSchemeIso X).app B).hom :=
+    ((constantSchemeIso X).hom.naturality a).symm
+  simp only [Iso.trans_hom, Iso.symm_hom, finiteDiscreteSchemeRingIso_eq,
+    Functor.mapIso_hom]
+  change pR.inv ≫ ((constantSchemeIso X).app A).hom ≫
+      F.map (completedFinitePointIso R).hom ≫ F.map g =
+    (completedConstantMap X f).hom ≫ pS.inv ≫
+      ((constantSchemeIso X).app B).hom ≫ F.map (completedFinitePointIso S).hom
+  erw [hq, reassoc_of% hs, ← Category.assoc pR.inv (C.map a), hp]
+  simp only [Category.assoc]
+
 /-- Integral comparison with the inverse limit of the finite constant quotient rings.
 A uniformizer is specified by generating the maximal ideal. Each pulled-back quotient
 is identified as the constant sheaf with that finite quotient ring as value.
 Source: blueprint comparison with completed coefficients, first display
 (blueprint: sk-prop-sfb-qlbar-colimit-x).
 
-Proof: Apply det-prop-sfb-qlbar-colimit-x-integral-limit. Finite constant sheaves
-are represented by the disjoint unions of copies of X. The profinite test scheme
+Proof: Reuse the underlying-set and representable pullback comparisons of
+det-prop-sfb-qlbar-colimit-x-integral-limit. Compactness and adic separatedness
+identify the integer ring with the tower of the specified positive quotient rings.
+Finite constant sheaves are represented by the disjoint unions of copies of X.
+The profinite test scheme
 X[O_E] represents both the inverse limit of those sheaves and the pullback of the
 condensed integers. The representing maps are precisely the reductions used here;
 the representing addition, multiplication, zero and unit give the ring universal
@@ -509,7 +1033,64 @@ theorem completedCondensedIntegral (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       ∀ n, completedCoefficientMap X (completedResidueTransition l E π n) ≫ (k n).hom =
         (k (n + 1)).hom ≫ completedConstantMap X
           (Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.le_succ (n + 1)))) := by
-  sorry
+  classical
+  let := PadicAlgCl.normedFieldOfAlgebra l E.1
+  let : NormedAlgebra ℚ_[l] E.1 :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E.1 (PadicAlgCl l) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E.1 (PadicAlgCl l) x‖
+        erw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  let : ProperSpace E.1 := FiniteDimensional.proper ℚ_[l] E.1
+  let R := PadicAlgCl.integers l E
+  have hball : (R : Set E.1) = Metric.closedBall 0 1 := by
+    ext x
+    change ‖x‖₊ ≤ 1 ↔ dist x 0 ≤ 1
+    simp only [dist_zero_right, ← NNReal.coe_le_coe, NNReal.coe_one]
+    rfl
+  let : CompactSpace R := isCompact_iff_compactSpace.mp
+    (hball ▸ isCompact_closedBall (0 : E.1) 1)
+  let Q := completedResidue l E π
+  let : ∀ n, Finite (Q n) := fun n ↦ by
+    change Finite (R ⧸ (Ideal.span {π}) ^ (n + 1))
+    erw [hπ]
+    infer_instance
+  let : ∀ n, DiscreteTopology (Q n) := fun n ↦ by
+    apply QuotientAddGroup.discreteTopology
+    change IsOpen (X := R) ↑(Ideal.span {π} ^ (n + 1))
+    erw [hπ]
+    exact IsLocalRing.isOpen_maximalIdeal_pow R (n + 1)
+  let q (n : ℕ) : R →+* Q n := Ideal.Quotient.mk _
+  let t (n : ℕ) : Q (n + 1) →+* Q n :=
+    Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.le_succ (n + 1))
+  have hqt (n : ℕ) (x : R) : t n (q (n + 1) x) = q n x := rfl
+  have hinj (x y : R) (h : ∀ n, q n x = q n y) : x = y := by
+    apply (IsHausdorff.eq_iff_smodEq
+      (I := IsLocalRing.maximalIdeal R)).mpr
+    intro n
+    cases n with
+    | zero => simp
+    | succ n =>
+      have hh := (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mp (h n)
+      simpa only [q, hπ, Ideal.smul_eq_mul, Ideal.mul_top, SModEq.sub_mem] using hh
+  let : ∀ n, T2Space (Q n) := fun n ↦ @DiscreteTopology.toT2Space
+    (Q n) _ (inferInstanceAs (DiscreteTopology (Q n)))
+  let : ∀ n, TotallyDisconnectedSpace (Q n) := fun n ↦
+    @TotallySeparatedSpace.totallyDisconnectedSpace (Q n) _
+      (@TotallySeparatedSpace.of_discrete (Q n) _ inferInstance)
+  let : TotallyDisconnectedSpace R := completedTowerTotallyDisconnected (R := R) Q
+    (fun n ↦ ⟨q n, continuous_quot_mk⟩) hinj
+  have hsurj (n : ℕ) : Function.Surjective (q n) := Ideal.Quotient.mk_surjective
+  let c := completedRingTowerCone X R Q q (fun _ ↦ continuous_quot_mk) t
+    (fun _ ↦ continuous_of_discreteTopology) hqt
+  refine ⟨⟨c, Iso.refl _, ?_, ⟨?_⟩⟩, inferInstance, ?_⟩
+  · intro n
+    exact Category.id_comp _
+  · exact completedRingTowerLimit X R Q q (fun _ ↦ continuous_quot_mk) t
+      (fun _ ↦ continuous_of_discreteTopology) hqt hinj hsurj
+  · refine ⟨fun n ↦ completedFiniteIso X (Q n), ?_⟩
+    intro n
+    exact completedFiniteIso_naturality X (t n)
 
 private theorem completedRationalOfTelescope (l : ℕ)
     (R S : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) (φ : R ⟶ S)
@@ -797,11 +1378,13 @@ The specified cone remains a limit after every scheme inverse image.
 Source: blueprint comparison with completed coefficients, final paragraph
 (blueprint: sk-prop-sfb-qlbar-colimit-x).
 
-Proof: Take E = Q_l in the integral comparison. Its ring of integers is Z_l,
-l generates its maximal ideal, and PadicInt.toZModPow identifies its quotient by
-l^n with Z/l^n. The identifications commute with reduction because they send every
-integer class to itself. Thus they identify the reduction cones, their ring
-structures and their inverse images. This is step 9 of the node's proof.
+Proof: Use the integral comparison's represented compact-tower argument directly
+with Z_l and the standard reductions PadicInt.toZModPow to Z/l^(n+1). The reductions
+are surjective, jointly injective, and compatible with the cast homomorphisms.
+Finite discrete condensed coefficients give the naturally identified constant rings.
+Transport these normalized limit cones along the monoidal coefficient pullback
+compositor; its naturality also gives the displayed reduction equation.
+This is the integral part of step 9 of the node's proof.
 -/
 theorem completedCondensedPadicIntegral (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
     (∃ (c : Cone (Functor.ofOpSequence
@@ -828,7 +1411,61 @@ theorem completedCondensedPadicIntegral (X : Scheme.{u}) (l : ℕ) [Fact l.Prime
       ((coefficientPullbackIso f
         (Mon.mk (Profinite.continuousMapRingObj ℤ_[l]))).hom).hom ≫
           (completedCoefficientMap Y (completedPadicReduction l n)).hom) := by
-  sorry
+  classical
+  let Q (n : ℕ) := ZMod (l ^ (n + 1))
+  let (n : ℕ) : NeZero (l ^ (n + 1)) := ⟨pow_ne_zero _ (Fact.out : l.Prime).ne_zero⟩
+  let q (n : ℕ) : ℤ_[l] →+* Q n := PadicInt.toZModPow (n + 1)
+  let t (n : ℕ) : Q (n + 1) →+* Q n :=
+    ZMod.castHom (pow_dvd_pow l (Nat.le_succ (n + 1))) _
+  have hq (n : ℕ) : Continuous (q n) := PadicInt.continuous_toZModPow (n + 1)
+  have hqt (n : ℕ) (x : ℤ_[l]) : t n (q (n + 1) x) = q n x :=
+    PadicInt.castHom_toZModPow_succ (n + 1) x
+  have hinj (x y : ℤ_[l]) (h : ∀ n, q n x = q n y) : x = y := by
+    apply PadicInt.ext_of_toZModPow.mp
+    intro n
+    cases n with
+    | zero =>
+      have h0 : l ^ 0 = 1 := pow_zero l
+      have : Subsingleton (ZMod (l ^ 0)) := h0 ▸ inferInstance
+      exact Subsingleton.elim _ _
+    | succ n => exact h n
+  have hsurj (n : ℕ) : Function.Surjective (q n) := ZMod.ringHom_surjective _
+  let : TotallyDisconnectedSpace ℤ_[l] := completedTowerTotallyDisconnected Q
+    (fun n ↦ ⟨q n, hq n⟩) hinj
+  let c (Y : Scheme.{u}) := completedRingTowerCone Y ℤ_[l] Q q hq t
+    (fun _ ↦ continuous_of_discreteTopology) hqt
+  have hc (Y : Scheme.{u}) : IsLimit (c Y) :=
+    completedRingTowerLimit Y ℤ_[l] Q q hq t
+      (fun _ ↦ continuous_of_discreteTopology) hqt hinj hsurj
+  refine ⟨⟨c X, Iso.refl _, fun _ ↦ Category.id_comp _, ⟨hc X⟩, ?_⟩, ?_, ?_⟩
+  · intro Y f
+    let P := (upperStarFromPoint X).mapMon
+    let G := (upperStarFromPoint Y).mapMon
+    let H := ((f)^*[Ab.{u + 1}]).mapMon
+    let e : P ⋙ H ≅ G :=
+      (Functor.mapMonCompIso (F := upperStarFromPoint X)
+        (G := (f)^*[Ab.{u + 1}])).symm ≪≫
+        Functor.mapMonNatIso (upperStarFromPointComp f)
+    let A := Mon.mk (Profinite.continuousMapRingObj.{u} ℤ_[l])
+    let T (n : ℕ) := Mon.mk (Profinite.continuousMapRingObj.{u} (Q n))
+    let t' (n : ℕ) : T (n + 1) ⟶ T n :=
+      Mon.Hom.mk ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (completedPadicTransition l n))
+    let r (n : ℕ) : A ⟶ T n :=
+      Mon.Hom.mk ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (completedPadicReduction l n))
+    exact completedLimitTransport P G H e T t' r (c X) (c Y)
+      (Iso.refl _) (Iso.refl _) (fun _ ↦ Category.id_comp _)
+      (fun _ ↦ Category.id_comp _) (hc Y)
+  · refine ⟨fun n ↦ completedFiniteIso X (Q n), fun n ↦ ?_⟩
+    exact completedFiniteIso_naturality X (t n)
+  · intro Y f n
+    exact completedRingComparisonNaturality (upperStarFromPoint X)
+      ((f)^*[Ab.{u + 1}]) (upperStarFromPoint Y) (upperStarFromPointComp f)
+      (Mon.mk (Profinite.continuousMapRingObj.{u} ℤ_[l]))
+      (Mon.mk (Profinite.continuousMapRingObj.{u} (Q n)))
+      ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (completedPadicReduction l n))
 
 /-- The base-field rationalization formula Q_l,X = Z_l,X[1/l], including its
 canonical module-colimit legs and their inverse-image compatibility.
