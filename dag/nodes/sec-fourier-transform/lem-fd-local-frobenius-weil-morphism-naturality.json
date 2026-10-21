@@ -18,9 +18,88 @@
   "def-weil-finite-coefficient-point",
   "lem-weil-frobenius-point-transport-natural"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work at the fixed finite field extension $F/\\Ql$. By clause 3 of [def-weil-finite-coefficient-point], $Q$ is a functor on the raw rationalized point category. Put $T=S_1$. Clause 2 of [lem-weil-frobenius-point-transport-natural], with $E=F$ and $\\Lambda=F$, gives, for every morphism $w:N\\to N'$ in that category,\n$$Q(Tw)\\iota_N=\\iota_{N'}Q(w).$$\nThis assertion already applies to every rational constructible morphism; it is not restricted to integral maps. In particular it applies to $T^j(w)$ for each $j\\geq0$.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula; agent-supplied starting naturality square for its local operator."
+   }
+  },
+  {
+   "text": "We prove naturality of the iterated point transport by induction, including its specified composition comparison. Set $J_{1,N}=\\iota_N$ and $J_{r+1,N}=\\iota_{T^rN}J_{r,N}$, so $J_{r,N}:Q(N)\\to Q(T^rN)$. The base $Q(Tw)J_{1,N}=J_{1,N'}Q(w)$ is step 1. If $Q(T^rw)J_{r,N}=J_{r,N'}Q(w)$, then step 1 applied to $T^rw$, followed by the induction hypothesis, gives\n$$Q(T^{r+1}w)J_{r+1,N}\n=\\iota_{T^rN'}Q(T^rw)J_{r,N}\n=J_{r+1,N'}Q(w).$$\nLet $c_r:S_r\\xrightarrow{\\sim}T^r$ be the iterated pullback-composition comparison. By [lem-trf-integral-pullback-comparison-realization] its rationalization is natural and respects finite iterations. The definition in [def-weil-local-frobenius-trace] is exactly $I_N^{[r]}=Q(c_{r,N}^{-1})J_{r,N}$. Naturality of $c_r^{-1}$ now gives\n$$Q(S_rw)I_N^{[r]}=Q(c_{r,N'}^{-1})Q(T^rw)J_{r,N}=I_{N'}^{[r]}Q(w).$$\nThus the induction proves the first asserted equation for every positive $r$.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula; agent-supplied induction for the point-transport factor in local Frobenius."
+   }
+  },
+  {
+   "text": "Write $H=L(g_X^n\\bar x)^*_F=L(\\bar xg_s^n)^*_F$, where the equality is precisely the return equality stipulated in the statement. The specified comparisons give natural isomorphisms $a:H\\xrightarrow{\\sim}S_nP$ and $b:H\\xrightarrow{\\sim}PG_n$. Indeed these are the two composition comparisons in [lem-trf-integral-pullback-comparison-realization], whose rationalizations respect equality of scheme morphisms. Consequently the specified return map is $\\rho_M=b_Ma_M^{-1}$, not a newly chosen isomorphism. For $v:M\\to M'$, the two naturality squares give\n$$PG_n(v)b_M=b_{M'}H(v),\\qquad H(v)a_M^{-1}=a_{M'}^{-1}S_nP(v).$$\nMultiplying these equations yields $PG_n(v)\\rho_M=\\rho_{M'}S_nP(v)$, which is the asserted return-comparison naturality. We used $g_X^n\\bar x=\\bar xg_s^n$, and did not replace it by the generally false equality $g_X^n\\bar x=\\bar x$.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula; agent-supplied calculation for the semilinear geometric-point return."
+   }
+  },
+  {
+   "text": "Apply $Q$ to step 3 and use step 2 with $w=P(v)$ and $r=n$. Functoriality, the definition $R(M)=Q(\\rho_M)I_{P(M)}^{[n]}$, and these two equations give\n$$\\begin{aligned}\nD(G_nv)R(M)&=Q(PG_n(v))Q(\\rho_M)I_{P(M)}^{[n]}\\\\\n&=Q(\\rho_{M'})Q(S_nP(v))I_{P(M)}^{[n]}\\\\\n&=Q(\\rho_{M'})I_{P(M')}^{[n]}Q(P(v))=R(M')D(v).\n\\end{aligned}$$\nThis proves the asserted naturality of $R$ for every underlying morphism $v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula; agent-supplied multiplication of the point-transport and return squares."
+   }
+  },
+  {
+   "text": "For the Weil-pair morphism $v$, [def-weil-weil-sheaf-complex] gives $v\\alpha=\\beta G_1(v)$. This is the base $r=1$ of the desired induction. Let $k_r:G_{r+1}\\xrightarrow{\\sim}G_rG_1$ be the specified natural composition comparison of [lem-trf-integral-pullback-comparison-realization]. The recursion of [def-weil-local-frobenius-trace], with comparisons written in, is $\\alpha^{[r+1]}=\\alpha^{[r]}G_r(\\alpha)k_{r,A}$ and likewise for $\\beta$. Assume $v\\alpha^{[r]}=\\beta^{[r]}G_r(v)$. Then\n$$\\begin{aligned}\nv\\alpha^{[r+1]}&=\\beta^{[r]}G_r(v)G_r(\\alpha)k_{r,A}\\\\\n&=\\beta^{[r]}G_r(\\beta)G_rG_1(v)k_{r,A}\\\\\n&=\\beta^{[r]}G_r(\\beta)k_{r,B}G_{r+1}(v)\n=\\beta^{[r+1]}G_{r+1}(v).\n\\end{aligned}$$\nThe middle equalities use functoriality and the one-step intertwining equation, then naturality of $k_r$. This proves the asserted intertwining for all $r\\geq1$.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula; agent-supplied induction on its iterated Weil-structure factor."
+   }
+  },
+  {
+   "text": "Finally apply the functor $D$ to the equality of step 5 at $r=n$, and multiply by $R(A)$. Step 4 applied to the underlying map of the Weil-pair morphism gives\n$$\\begin{aligned}\nD(v)\\mathcal F_{F,x,n}(A,\\alpha)\n&=D(v)D(\\alpha^{[n]})R(A)\\\\\n&=D(\\beta^{[n]})D(G_nv)R(A)\\\\\n&=D(\\beta^{[n]})R(B)D(v)\n=\\mathcal F_{F,x,n}(B,\\beta)D(v).\n\\end{aligned}$$\nThese are the local operators of [def-weil-local-frobenius-trace]. No inverse of $v$ was used in any step. Every equality was obtained in the full rational constructible categories from the cited naturality and coherent-composition statements, so no Weil-stable integral lattice or condition on the Tor amplitude of finite reductions is needed.",
+   "uses": [
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula; agent-supplied assembly proving naturality of the entire local operator."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-coefficient-point",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-local-frobenius-trace",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Displayed local alternating-trace formula, expanded by explicit naturality squares and two inductions; this proof is not stated verbatim in the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +135,52 @@
    "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
    "date": "2026-10-21",
    "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "localFrobenius|localExtensionFrobenius|WeilComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract naturality and endofunctor-algebra identities do not state the conjunction for the specified rational constructible point transport, return comparison and iterated Weil maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated pullback equivariance of a morphism between objects with a Weil Frobenius structure",
+   "results": "8 hits: iterateFrobeniusEquiv_def, iterateFrobeniusEquiv_apply, WittVector.IsocrystalEquiv.frob_equivariant, iterateFrobeniusEquiv_eq_pow, coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv, CategoryTheory.Functor.IsFibered.pullbackPullbackIso, iterateFrobenius_eq_pow",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract naturality and endofunctor-algebra identities do not state the conjunction for the specified rational constructible point transport, return comparison and iterated Weil maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract naturality and endofunctor-algebra identities do not state the conjunction for the specified rational constructible point transport, return comparison and iterated Weil maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated point transport and local Frobenius are natural in all morphisms of constructible Weil complexes",
+   "results": "8 hits: WittVector.IsocrystalHom.frob_equivariant, RingHom.map_iterate_frobeniusEquiv_symm, MonoidHom.map_iterate_frobeniusEquiv_symm, RingHom.iterateFrobenius_comm, WittVector.StandardOneDimIsocrystal.frobenius_apply, iterateFrobeniusEquiv_add, RingHom.map_iterateFrobenius, RingHom.map_iterate_frobenius",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract naturality and endofunctor-algebra identities do not state the conjunction for the specified rational constructible point transport, return comparison and iterated Weil maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism intertwining endofunctor algebra structure maps intertwines their iterates with coherent functor composition",
+   "results": "8 hits: CategoryTheory.Endofunctor.Algebra.Hom.h, CategoryTheory.Endofunctor.Algebra.Hom.h_assoc, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_str, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_a, AlgHom.coe_pow, CategoryTheory.Monad.Algebra.Hom.h, CategoryTheory.Endofunctor.Algebra.Hom.comp, CategoryTheory.Endofunctor.Algebra",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract naturality and endofunctor-algebra identities do not state the conjunction for the specified rational constructible point transport, return comparison and iterated Weil maps"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem naturality|naturality :|def vcomp|def iterate|structure Hom",
+   "results": "25 hits: Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/WithTerminal/Basic.lean, Mathlib/CategoryTheory/WithTerminal/Basic.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Whiskering.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract naturality and endofunctor-algebra identities do not state the conjunction for the specified rational constructible point transport, return comparison and iterated Weil maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-local-weil-model-trace-independence",
@@ -78,5 +199,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-local-frobenius-weil-morphism-naturality",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its full raw-rationalized constructible domain. Proved single and iterated point-transport naturality, the specified semilinear return comparison and R naturality, iterated Weil-map intertwining, and the local-operator identity in six explicit steps. Reused the existing point-transport naturality and integral pullback comparison nodes; no new nodes were necessary. No Lean declaration covers every clause.",
+  "blueprint": "def-fd-trace-function displayed local alternating-trace formula: steps 1-2 treat point transport; steps 3-4 the return comparison; step 5 the iterated Weil structure; step 6 the resulting local operator.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Clause 2 supplies single-step rational point-transport naturality on the entire constructible domain. It is a generic input for the local operator, not a replacement route; sk-def-trace has no such lemma."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Supplies the specified natural pullback-composition comparisons, including rationalized equality-of-scheme-morphisms and finite-iteration compatibility. These are generic comparison tools needed by the local-operator definition, absent from sk-def-trace."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-trf-integral-pullback-comparison-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-0c0cb4dba",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-0c0cb4dba (reviewer sub-agent of L); spot-checked: Six-step split, no new nodes; the statement and stmt_deps match the live unsplit node exactly. The item was created by Q128 when the parent lem-fd-local-weil-model-trace-independence was re-split; the re-split note is for that parent, not this item. The item is not on the dropped list. I read every cited statement in full. Step 1: clause 2 of lem-weil-frobenius-point-transport-natural (Λ=E) and clause 3 of def-weil-finite-coefficient-point give one-step naturality of ι at the rational level. Step 2: the induction J_{r+1}=ι_{T^rN}J_r has a stated base and step; I = Q(c_r^{-1})J_r, where c_r is the iterated natural c^E of lem-trf-integral-pullback-comparison-realization, and the direction F_{kh}→F_hF_k checks. Step 3: a=c_{g_s^n,x̄} and b=c_{x̄,g_X^n} share the source H by the return equality g^n x̄=x̄ g_s^n (which the trf node's 'respect equality of scheme morphisms' covers), so ρ=ba^{-1}: S_nP→PG_n is the definition's middle isomorphism. Step 4: three-line calculation with Q. Step 5: the recursion α^{[r+1]}=α^{[r]}G_r(α)k_{r,A} with k_r=c_{g^r,g}; the induction goes through the IH, the base square and naturality of k_r, and never inverts v. Step 6 checked. Edge cases checked: n=r=1, X_0=Spec k_0, v=0, a noninvertible v between Jordan blocks, period dividing n. Overlaps: lem-trf-iterated-weil-cocycle (strict finite coefficients, a cocycle identity) and lem-trf-frobenius-transport-induction (two forms of the transport) are not duplicates. Advisory: the first clause of lem-trf-local-frobenius-transport-normalization already states naturality of t_{y,m} at E, which is essentially the item's R-naturality; the item has further clauses, so it is not a duplicate. Both declared tool_uses (point-transport-natural, trf comparison realization) are generic black-box inputs, already stmt_deps; I accept them. No SGA. No changes."
  }
 }
