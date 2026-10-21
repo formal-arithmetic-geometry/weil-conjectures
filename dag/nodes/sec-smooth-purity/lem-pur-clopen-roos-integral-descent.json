@@ -25,9 +25,152 @@
   "def-weil-integral-derived-reduction",
   "def-weil-integral-reduction-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-clopen-ringed-module-gluing] with $R=\\widehat{\\mathcal O}_{E,X}$. Its exact restriction/gluing equivalence identifies the coefficient rings, their quotient projections and all coefficient transitions. Apply the two functors degreewise and at each tower level; give the glued tower transition $G((t_{i,n})_i)$ and a glued tower morphism $G((f_{i,n})_i)$. The chain-map and transition-compatibility equations hold because they hold in every component and the module equivalence is faithful. Its natural unit and counit commute with these maps by naturality, so they give inverse equivalences on strict towers, including their morphisms.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "Countable products are sectionwise by [lem-weil-proetale-countable-products-exact]. For $U\\to X_i$, its pullback to $X_j$ is empty for $j\\ne i$, while its pullback to $X_i$ is $U$. Thus restriction identifies $(\\prod_n C_n)^m(U)$ with $\\prod_n(r_iC_n)^m(U)$, with the same projections and differential. Conversely the product reindexing $\\prod_n\\prod_i F_{i,n}(U\\times_X X_i)\\cong\\prod_i\\prod_n F_{i,n}(U\\times_X X_i)$ identifies products under gluing. Each reindexing is the identity on its $(i,n)$ coordinate; hence it preserves restriction maps, module actions and every product projection.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "Put $P_C=\\prod_nC_n$ and $v_C=1-s_C$. The $n$th projection of $r_iv_C$ is $r_i\\operatorname{pr}_n-r_it_n\\,r_i\\operatorname{pr}_{n+1}$, so under step 2 it is exactly the $n$th projection of $v_{r_iC}$. Use the explicit model [def-weil-strict-roos-model]: in degree $m$ its shifted cone is $P_C^{m-1}\\oplus P_C^m$ with $d(y,x)=(-dy-v_Cx,dx)$. Apply the product comparisons of step 2 separately to $y$ and $x$. Additivity of restriction and the displayed equality for $v$ make this a chain isomorphism with inverse the two inverse product comparisons. A strict tower map $f$ acts diagonally by $(\\prod_nf_n,\\prod_nf_n)$, so both orders of composing the comparisons have the same two coordinates. The cone projection to $P_C$ is $(y,x)\\mapsto x$ and the connecting map $P_C\\to\\operatorname{Cone}(v_C)[-1][1]$ is $z\\mapsto(-z,0)$ with this Roos-triangle convention. These formulas commute with restriction, retaining every level projection. This is strict-complex functoriality.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "The exact countable products supplied by [lem-weil-proetale-countable-products-exact] meet the hypothesis of [lem-weil-derived-limit-products-core], on $X$ and on each $X_i$. Therefore the termwise product cones of step 2 represent the actual products in the derived categories. The triangulated restriction equivalence of [lem-pur-finite-product-derived-tensor-calculus] sends distinguished triangles to the component distinguished triangles. Applying it to the triangle in [def-weil-derived-limit], with the same product projections, sends $1-s$ to $1-s$ by step 3 and retains both triangle maps. Conversely a tuple of such distinguished Roos triangles is a distinguished triangle in the product triangulated category, and its inverse image is distinguished under the inverse equivalence. Thus the derived-limit property with its specified triangle is preserved in both directions.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "Represent $K$ by $q:P\\to K$ as in [def-weil-integral-reduction-tower]. The K-flatness and flat-term assertions in [lem-pur-finite-product-derived-tensor-calculus] show that $r_iP\\to r_iK$ is an admissible resolution. Its termwise change-of-rings comparison identifies $r_i(P\\otimes_R(A_{E,n})_X)$ with $r_iP\\otimes_{R_i}(A_{E,n})_{X_i}$. On tensors it sends $p\\otimes a$ to $r_ip\\otimes r_ia$. Consequently it sends $\\gamma_n(p)=p\\otimes1$ to the component $\\gamma_n$, and $\\tau_n(p\\otimes a)=p\\otimes\\rho_n(a)$ to the component $\\tau_n$, because the coefficient identifications preserve $1$ and $\\rho_n$. Exact restriction also sends $[q]^{-1}$ to $[r_iq]^{-1}$. Hence the actual $c_n=[\\gamma_n][q]^{-1}$, not merely their source and target objects, and the transitions $t_n=[\\tau_n]$ are identified. This proves the required reduction comparison on objects and maps.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "In [def-weil-derived-complete] the first triangle map is the fixed $c=(c_n)_n$. Step 5 and the product projections identify $r_ic$ with $(c_{i,n})_n$. If $K$ is complete, step 4 restricts its witnessing distinguished triangle to the required one on each component. Conversely choose the witnessing connecting map $\\delta_i$ for each complete $r_iK$. The full and faithful derived equivalence of [lem-pur-finite-product-derived-tensor-calculus] gives a unique morphism $\\delta:\\prod_nK_n\\to K[1]$ corresponding to this tuple, using the product and shift identifications. The triangle with maps $c,1-s,\\delta$ corresponds to the tuple of the witnessing distinguished triangles, so is distinguished by that equivalence. This proves completeness without changing $c$ or choosing a functorial cone in the bare triangulated category.",
+   "uses": [
+    "def-weil-derived-complete",
+    "lem-pur-finite-product-derived-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "For every $n\\ge1$, step 5 identifies the restriction of the $n$th reduction with the $n$th component reduction. Apply [lem-pur-clopen-finite-constructibility-bounds] to these finite coefficients: constructibility and cohomological vanishing in a fixed interval are detected componentwise, as is Tor amplitude in a fixed interval. By [def-weil-derived-complete-integral-detailed], the integral constructible condition is exactly completeness, constructibility of all reductions, and one cohomological interval independent of $n$. If component $i$ has interval $[a_i,b_i]$ independent of $n$, choose $a=\\min_i a_i$, $b=\\max_i b_i$; this interval works on $X$ for every $n$. Any larger common interval also works. The same argument with the Tor intervals $[u_i,v_i]$ and [def-weil-finite-tor-amplitude] proves the integral $ctf$ assertion. Restricting global intervals gives the converse. The derived equivalence therefore restricts to both full subcategories: its inverse glues tuples that satisfy these conditions.",
+   "uses": [
+    "lem-pur-clopen-finite-constructibility-bounds",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "For the completed tensor of [def-pur-integral-derived-operations], choose its K-flat flat-term resolutions $P,Q$. By [lem-pur-finite-product-derived-tensor-calculus] their restrictions are such resolutions on every component, and its termwise tensor comparison identifies the reduction-level complex $P_n\\otimes_{A_{E,n}}Q_n$ with the tensor of the two component reductions. On pure tensors the transition is $(p\\otimes a)\\otimes(q\\otimes b)\\mapsto(p\\otimes\\rho_n a)\\otimes(q\\otimes\\rho_n b)$; restriction gives exactly this formula on $X_i$. Thus this is an isomorphism of strict towers, including all transitions and maps. Apply the natural strict-cone comparison of step 3 to obtain the completed tensor comparison; the well-defined operation of the cited definition makes it independent of the resolutions. The coefficient unit restricts to the coefficient unit since $r_iR=R_i$ with its section $1$ by [lem-pur-clopen-ringed-module-gluing]; its finite quotient units and all transitions are preserved as well. This proves preservation of the completed tensor and its coefficient units.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "For $E\\subset L$, use exactly the maps $\\rho_m:\\widehat{\\mathcal O}_{E,X}\\to(A_{L,m})_X$ and complexes $P_{L,m}=P\\otimes_{\\widehat{\\mathcal O}_{E,X}}(A_{L,m})_X$ in [def-weil-integral-scalar-extension]. The coefficient identifications of [lem-pur-clopen-ringed-module-gluing] for $E$ and $L$ preserve quotient projections and the maps induced by the constant coefficient inclusion. The derived extension-of-scalars and termwise tensor comparisons of [lem-pur-finite-product-derived-tensor-calculus] consequently identify $r_iP_{L,m}$ with $(r_iP)_{L,m}$. Their pure-tensor formula sends $p\\otimes a$ to $r_ip\\otimes r_ia$, so commutes with the map $p\\mapsto p\\otimes1$ at every level and with each transition $p\\otimes a\\mapsto p\\otimes\\bar a$. Restriction of scalars here merely reads the same complex via the corresponding coefficient projection, so these comparisons also identify the strict towers of $\\widehat{\\mathcal O}_{L}$-modules. Step 3 for the $L$-coefficient ring gives the scalar-extension comparison. Its diagonal formula on strict tower maps, together with the well-defined scalar-extension functor in the cited definition, gives naturality on derived morphisms.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$, the covering hypothesis forces $X=\\varnothing$. By [lem-pur-clopen-ringed-module-gluing] its module category is zero, as are its complex and derived categories. All towers, maps and Roos triangles are the zero ones. The zero object has every cohomological and Tor interval, so take $[0,0]$ when no component supplies bounds. Empty individual components contribute only zero factors and may be omitted. Thus all comparisons, completeness conditions, full-subcategory equivalences and uniform-bound assertions above include the empty partition.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC/07KC, definition-derived-limit and lemma-products; explicit finite-clopen application by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-weil-proetale-countable-products-exact",
+  "def-weil-strict-roos-model",
+  "lem-weil-derived-limit-products-core",
+  "lem-pur-finite-product-derived-tensor-calculus",
+  "def-weil-derived-limit",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete",
+  "lem-pur-clopen-finite-constructibility-bounds",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 08TC/07KC (definition-derived-limit, lemma-products), expanded by the finite-clopen restriction calculation; Bhatt--Scholze Definitions 3.4.10/3.5.2 for the coefficient constructions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +206,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"LightCondensed.instCountableAB4StarLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.CountableAB4Star (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules satisfies the countable AB4* axiom. This means the category has countable products and the product of a family of epimorphisms is itse\"}\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}",
    "date": "2026-10-21",
    "verdict": "No match: ordinary adic completion, condensed AB4Star and derived-category existence are different from strict Roos comparison and integral derived-complete gluing."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen.*(Roos|roos|derivedComplete)|roos.*clopen|derivedComplete.*(partition|clopen))",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state clopen integral derived-complete descent; mapping cones alone are only one ingredient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete integral constructible complexes on a finite disjoint union of schemes are equivalent to tuples of complexes on its components",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state clopen integral derived-complete descent; mapping cones alone are only one ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"mappingCone\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.mappingCone.snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.descCochain\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.liftCochain_snd\", \"CochainComplex.mappingCone.inl_descCochain\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state clopen integral derived-complete descent; mapping cones alone are only one ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a finite clopen partition preserves the strict Roos cone of one minus shift and detects derived completeness of reduction towers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"Profinite.NobelingProof.CC_exact\", \"Profinite.exists_isClopen_of_cofiltered\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state clopen integral derived-complete descent; mapping cones alone are only one ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaf categories on disjoint open and closed components commutes with homotopy inverse limits and adic completed tensor products",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"CondensedMod.LocallyConstant.functorIsoDiscreteComponents\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondMod.LocallyConstant.functorIsoDiscreteComponents\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state clopen integral derived-complete descent; mapping cones alone are only one ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexIso|def mappingCone",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"57\", \"593\", \"639\", \"664\", \"667\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state clopen integral derived-complete descent; mapping cones alone are only one ingredient."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-clopen-derived-decomposition",
@@ -85,5 +270,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-clopen-roos-integral-descent",
+  "worker": "stage1",
+  "summary": "Q156: retained the statement and all prior search records; proved the strict-tower and signed-cone comparisons explicitly, then checked the actual reduction augmentation, the specified completeness triangle, uniform bounds, completed tensor and scalar-extension towers. Reused existing clopen module, derived tensor and finite-bound statements; no new nodes.",
+  "blueprint": "def-pur-section-invariant, final invertibility assertion in the current main-20261015 text: supplies the integral finite-clopen passage in its expanded well-definedness proof (parent lem-pur-finite-clopen-derived-decomposition, old steps 7 and 9).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Generic exact-product derived-category result used only to identify termwise products with derived products; no replacement of the purity unit route."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic countable-product exactness on pro-etale module sheaves needed for the explicit Roos model; the purity unit has no competing product-exactness assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-076983b17",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-076983b17 (reviewer sub-agent of L); spot-checked: The item and all 13 cited statements were read in full, along with Stacks derived.tex 08TC/07KC (labels and text checked) and the parent's old steps 7 and 9 from the Q109 base. The delivery is one commit with the item and its report. It has no new nodes, and the statement and stmt_deps are byte-identical to base. The item is not dropped, has no own repair note, and is still unsplit live. proof_deps equals the union of the step uses, there is no cycle, and there is no SGA citation. Step checks: 1 strict-tower gluing via lem-pur-clopen-ringed-module-gluing, which covers any ring sheaf. 2 sectionwise products, using U×_X X_j=∅ for j≠i. 3 the strict-roos-model coordinates; the connecting-map sign does not affect the restriction comparison. 4 products-core plus an exact equivalence onto the product triangulated category reflects distinguished triangles. 5 the actual c_n=[γ_n][q]^{-1} and τ_n are identified through K-flat restriction and the coefficient identifications. 6 the converse keeps the fixed first map c by lifting the tuple (δ_i). 7 fixed-interval detection at each A_{E,n}, then min/max over the finite I for the uniform cohomological and Tor bounds. 8 the completed tensor tower with its unit. 9 the scalar-extension tower along ρ_m=ι_mπ_m, with ramification harmless. 10 the empty partition. Edge cases tested: I=∅, |I|=1, empty components, unequal bounds, a constant tower, ramified E⊂L. No duplicate in the DAG: open-exchange-roos-restriction, int-restriction-glue and clopen-lisse-complete-localization are different statements. Accepted tool_use: lem-weil-derived-limit-products-core, the generic Stacks 07KC product fact. lem-weil-proetale-countable-products-exact is already on the route through sk-def-sf-operations. Advisories: every step carries the same source place, and Res_n is only implicit in step 8. No fixes."
  }
 }
