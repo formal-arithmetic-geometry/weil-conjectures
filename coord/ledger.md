@@ -20830,3 +20830,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:58 L: returned deliver/Q26/lem-sfb-internal-section-scalar-adjunction (reviewer RETURN: L: independent stage-2 immutable head 8c16bc95777c: H3 (H4 aspect): internalAdjunction is a free field constrained only )
 - 07:58 L: returned deliver/NA/lem-weil-pbc-stratum-completion-unit-restriction (reviewer RETURN: L: independent stage-2 immutable head ac665650e32a: incremental DAG validation: reach: def-sfb-fixed-scalar-geometric-ad)
 - 07:58 L: returned deliver/N0/lem-sfb-constant-scalar-geometric-adjunctions (reviewer RETURN: L: independent stage-2 immutable head c93c257a0f60: incremental DAG validation: reach: def-sfb-fixed-scalar-geometric-ad)
+- 07:58 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (reviewer C-8c082, head 8c0827607) the reviewer passed it, but the landing failed: calizing (mentions AlgebraicGeometry.)
