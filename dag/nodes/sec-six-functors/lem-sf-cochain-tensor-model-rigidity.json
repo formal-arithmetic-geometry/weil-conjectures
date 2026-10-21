@@ -17,9 +17,69 @@
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal H$ be the full subcategory of $K(R)$ used in [lem-weil-pbc-site-derived-tensor-descent]. Its objects are precisely the same complexes as those of $\\mathcal P$: K-flatness and flatness of terms have literally the predicates of [def-pc-kflat-complex] and [def-pc-flat-sheaf-modules]. Use the presentation of the homotopy category with complexes as objects and homotopy classes of chain maps as morphisms. The restricted quotient $p:\\mathcal P\\to\\mathcal H$ is identity on these objects and surjective on every morphism set. For functors $A,B:\\mathcal H\\times\\mathcal H\\to\\mathcal E$, a transformation between their restrictions along $p\\times p$ defines its component at $(P_1,P_2)$ by that same component. Its naturality for a pair of homotopy classes follows by representing each class by a chain map and applying the given naturality square; the images under $A$ and $B$ depend only on the classes. Conversely restriction keeps every component. Thus precomposition with $p\\times p$ is fully faithful, for arbitrary $\\mathcal E$. This is the direct quotient-definition argument, not an assertion that $p$ is faithful.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013H (definition-complexes-notation, clause (5)): homotopy classes of maps; restriction to the same objects"
+   }
+  },
+  {
+   "text": "Write $\\kappa:\\mathcal H\\to K(R)$ and $\\ell=Q_h\\kappa$. The last clause of [lem-weil-pbc-site-derived-tensor-descent] states that, for every $\\mathcal E$, restriction along $\\ell\\times\\ell$ gives a bijection on natural transformations between any two functors $D(R)\\times D(R)\\to\\mathcal E$. Compose this bijection with the bijection in Step 1. The result is full faithfulness of restriction along $(\\ell p)\\times(\\ell p)$. The cochain/homotopy factorization of [def-weil-abstract-derived-category] gives $\\alpha:Q\\xrightarrow{\\sim}Q_h\\pi$, hence $\\alpha\\iota:q\\xrightarrow{\\sim}\\ell p$. Conjugation by the images of $(\\alpha\\iota)\\times(\\alpha\\iota)$ under the two target functors is a bijection between the corresponding sets of transformations. This proves the claimed full faithfulness for $q\\times q$, including arbitrary transformations and arbitrary target categories.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); homotopy representative transformation descent in lem-weil-pbc-site-derived-tensor-descent"
+   }
+  },
+  {
+   "text": "Let $t_h:K(R)\\times K(R)\\to K(R)$ be the homotopy total tensor and let $\\rho:Q_h t_h(\\kappa\\times\\kappa)\\xrightarrow{\\sim}T(\\ell\\times\\ell)$ be the given natural representative comparison of [lem-weil-pbc-site-derived-tensor-descent]. That node uses the signed direct-sum tensor of [def-pc-tensor-complex-sheaves]; therefore $\\pi t\\cong t_h(\\pi\\times\\pi)$ is its cochain-to-homotopy tensor comparison. Define the component $r_{P_1,P_2}$ as the composite $$Q t(P_1,P_2)\\xrightarrow{\\alpha_{t(P_1,P_2)}}Q_h\\pi t(P_1,P_2)\\xrightarrow{\\sim}Q_h t_h(pP_1,pP_2)\\xrightarrow{\\rho_{pP_1,pP_2}}T(\\ell pP_1,\\ell pP_2)\\xrightarrow{T(\\alpha_{P_1}^{-1},\\alpha_{P_2}^{-1})}T(qP_1,qP_2).$$ Every arrow is a component of a natural isomorphism, so their composite is a natural isomorphism with the required source and target. Both tensor constructions use the sheafification of sectionwise tensor in [def-pur-sheaf-tensor-product] and differential $d_1\\otimes1+(-1)^i1\\otimes d_2$; the representative categories in Step 1 use the same flatness predicate. Thus the construction changes neither tensor nor representative conditions.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), the given natural tensor comparison; Tag 013H (derived.tex, definition-complexes-notation), whiskering along the homotopy quotient"
+   }
+  },
+  {
+   "text": "Fix $(T\\prime,r\\prime)$ as in the statement, and put $F=q\\times q$. In usual composition notation let $a=r\\prime\\circ r^{-1}:T\\circ F\\xrightarrow{\\sim}T\\prime\\circ F$. By the fullness proved in Step 2 there are natural transformations $e:T\\to T\\prime$ and $d:T\\prime\\to T$ restricting respectively to $a$ and $a^{-1}$. Restriction takes their composites to $a^{-1}\\circ a$ and $a\\circ a^{-1}$, which are identities. Faithfulness from Step 2 therefore gives $d\\circ e=1_T$ and $e\\circ d=1_{T\\prime}$. Hence $e$ is a natural isomorphism. Its restriction is $r\\prime\\circ r^{-1}$, so $r;eF=r\\prime$. Any other compatible natural isomorphism has that same restriction by cancellation of $r$ and equals $e$ by faithfulness; equality of the forward transformations determines equality of the isomorphisms. The argument uses the already given homotopy tensor model and natural comparison, quotient classes, and bijections on transformation sets. At no stage does it choose K-flat resolutions functorially.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor, preceding independence argument); explicit full-faithfulness argument of Steps 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and preceding construction), with Tag 013H (derived.tex, definition-complexes-notation). Explicit cochain-quotient and normalized-isomorphism argument using the existing homotopy descent theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +129,59 @@
    "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, HomologicalComplex.HasGoodTensor₁₂",
    "date": "2026-10-21",
    "verdict": "no match: ordinary sheaf monoidal structures, Tor and uniqueness of already derived functors do not identify the cochain flat-K-flat restriction and its normalized tensor model"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|flatRepresentatives|resolvingRepresentatives",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of a tensor model on the derived category of module sheaves from its comparison on K-flat cochain representatives",
+   "results": "8 hits; CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.rightDerivedUnique, ModuleCat.MonoidalCategory.tensor_ext₃, CategoryTheory.Functor.rightDerivedUnique.congr_simp, Rep.coinvariantsTensor_hom_ext, Module.Flat.rTensor_shortComplex_exact, SheafOfModules.Presentation.noConfusion, CategoryTheory.InjectiveResolution.mk.noConfusion",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bifunctor on the unbounded derived category of sheaves of modules is uniquely determined by its tensor comparison on flat term K-flat cochain complexes",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|leftDerivedUnique|mapDerivedCategoryFactorsh",
+   "results": "7 hits; Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"fullyFaithfulWhiskeringLeft\"",
+   "results": "2 hits; CategoryTheory.Localization.fullyFaithfulWhiskeringLeft, CategoryTheory.ObjectProperty.SerreClassLocalization.fullyFaithfulWhiskeringLeft",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition with the cochain localization restricted to flat K-flat complexes is fully faithful on bifunctors from the derived category",
+   "results": "8 hits; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.instFullSingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected localization full-faithfulness and derived-functor uniqueness APIs do not identify the flat-term K-flat cochain restriction or construct its specified tensor comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-tensor-product",
@@ -89,5 +198,30 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-cochain-tensor-model-rigidity",
+  "worker": "stage1",
+  "group": "Q33",
+  "summary": "Preserved the full statement. Factored the restriction through the identity-on-objects homotopy quotient, proved quotient restriction fully faithful directly on components, invoked existing homotopy representative descent, constructed the cochain comparison with both factorization isomorphisms, and lifted a comparison and its inverse to prove normalized uniqueness. No new nodes.",
+  "blueprint": "def-wf-tensor-product, first sentence (K-flat first-argument computation), and the old live Step 4 wfTensorRepresentative_exists: explicit cochain/homotopy comparison and uniqueness of a normalized tensor model.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site homotopy representative tensor and arbitrary natural-transformation descent are used exactly as stated; this unit has no separate localization theorem. The argument supplies the cochain quotient and normalized uniqueness, not a replacement of the projection-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-f5380e07f",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-f5380e07f (reviewer sub-agent of L); spot-checked: PASS, no changes. I read all four steps against every cited statement; no faults. Shape: one commit; only fields owned by the split changed; statement and stmt_deps are byte-identical to live; live item is unsplit with no proof; not in the dropped list; no SGA. The def-wf-tensor-product re-split note is about the parent, and this item had no base proof. Step 1 (quotient p: P→H is identity on objects and full, so restriction along p×p is fully faithful into any E) is correct and does not claim p is faithful. Step 2 combines that bijection with the last clause of lem-weil-pbc-site-derived-tensor-descent (bijection along Q_R|P×Q_R|P, reviewed NI PASS), then conjugates by αι: q≅ℓp, with α: Q≅Q_hπ from def-weil-abstract-derived-category. It uses only cited statements. Step 3: r = T(α⁻¹,α⁻¹)∘ρ∘(πt≅t_h)∘α, directions checked, natural. Step 4: lift r'∘r⁻¹ and its inverse; faithfulness gives an isomorphism and uniqueness with r;eF=r'. The hypotheses (site small for w, flat-term K-flat predicates, sheaf tensor, signed Tot) match the descent node exactly; the coefficient category is the same Mod(R) and no base change is involved. Sources checked: Stacks 013H/06YS/06YT/06YU labels, 06YT and the 06YU construction (sites-cohomology.tex 3233-3300), and the blueprint def-wf-tensor-product first sentence. Edge cases: zero ring or empty site; one-object field site (homotopy quotient still needed); unbounded complexes; arbitrary E. No duplicate: lem-pe-coefficient-tor-flat-model and lem-sc-localized-open-kflat-tensor-restriction state different things. Accepted tool use: the descent node, a generic localization black box; unit sk-rem-sf-pf-done has no steps or uses."
  }
 }
