@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.IrreducibleLisseRefinement
+import WeilConjectures.AlgebraicGeometry.IrreducibleLisseRefinement
 
 /-!
 # Irreducible lisse strata
