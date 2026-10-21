@@ -1,6 +1,6 @@
 # Work queue
 
-380 items; claim with `tools/claim.py next <group> [--stage N]`.
+379 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (13 clusters, 2095 modules)
 
@@ -24,7 +24,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 187, stage 3 472 items.
 
-## Stage 1: nodes to split (12)
+## Stage 1: nodes to split (11)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -37,7 +37,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pod-stratified-dualizable-bounded` | - | none |
 | `lem-pod-stratified-dualizable-hom-continuity` | - | none |
 | `def-per-support-condition` | - | none |
-| `lem-dl-a1-flat-base-change-finite-invariants` | - | none |
 | `lem-dl-a1-galois-prime-residue-lifting` | - | none |
 | `lem-dl-a1-integral-normal-residue-etale-splitting` | - | none |
 
@@ -75,7 +74,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-zl-dualizable-categorical-trace-conjugacy` | 1 | state | 0 |
 | `sk-thm-picard-rr` | 1 | state | 0 |
 
-Not open yet: 355 nodes that below a finished node, not needed, 9 nodes that wait for stage 1 (statement downstream not grounded), 124 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 355 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 124 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (317)
 
