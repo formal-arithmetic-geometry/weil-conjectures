@@ -11,9 +11,154 @@
   "def-galois-finite-limits-colimits",
   "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a finite diagram $D$ and an underlying limiting cone $(L,p_j)$ as in the statement. Write $M_j=U_{\\mathcal C}D(j)$ and $(m_j,e_j,i_j)$ for its operations. Here the limit universal property means: every compatible family $t_j:T\\to M_j$ has a unique factorization $u:T\\to L$ with $p_ju=t_j$. For maps $a,b:T\\to L$, if $p_j a=p_j b$ for every $j$, then $a=b$: both are factorizations of the same cone with vertex $T$, so the uniqueness clause of the defining limit universal property applies. We will use this equality test for $T=L$, $L\\times L$, $*$ and $(L\\times L)\\times L$. It also applies when the diagram is empty: there is exactly one map $T\\to L$.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "For an arrow $\\alpha:j\\to k$ of $I$, put $d=U_{\\mathcal C}D(\\alpha)$, so $dp_j=p_k$. Operation preservation gives\n$$d m_j(p_j\\times p_j)=m_k(dp_j\\times dp_j)=m_k(p_k\\times p_k),\\quad de_j=e_k,\\quad d i_jp_j=i_kdp_j=i_kp_k.$$\nThus $m_j(p_j\\times p_j)$, $e_j$, and $i_jp_j$ are cones on $U_{\\mathcal C}D$ with vertices $L\\times L$, $*$, and $L$, respectively. The limit supplies unique maps $m_L:L\\times L\\to L$, $e_L:*\\to L$, and $i_L:L\\to L$ with\n$$p_jm_L=m_j(p_j\\times p_j),\\qquad p_je_L=e_j,\\qquad p_ji_L=i_jp_j.$$\nThese equations will make every $p_j$ an operation-preserving map once the laws on $L$ are checked.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "For the source $T=(L\\times L)\\times L$, let $x,y,z:T\\to L$ be its three projections. For each $j$, the defining equations of step 2 and the two projection equations for pairing give\n$$p_jm_L\\langle m_L\\langle x,y\\rangle,z\\rangle\n=m_j\\langle m_j\\langle p_jx,p_jy\\rangle,p_jz\\rangle\n=m_j\\langle p_jx,m_j\\langle p_jy,p_jz\\rangle\\rangle\n=p_jm_L\\langle x,m_L\\langle y,z\\rangle\\rangle.$$\nThe middle equality is associativity in $M_j$; the equality test of step 1 gives associativity on $L$. For the two projections $x,y:L\\times L\\to L$, commutativity follows from\n$$p_jm_L\\langle x,y\\rangle=m_j\\langle p_jx,p_jy\\rangle=m_j\\langle p_jy,p_jx\\rangle=p_jm_L\\langle y,x\\rangle,$$\nagain using that equality test. All products and pairings here have the cited product universal property.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "Write $!_T:T\\to *$ for the unique terminal map. For every $j$ the left and right unit equations and the two inverse equations are\n$$\\begin{aligned}\np_jm_L\\langle e_L!_L,1_L\\rangle&=m_j\\langle e_j!_L,p_j\\rangle=p_j,\\\\\np_jm_L\\langle 1_L,e_L!_L\\rangle&=m_j\\langle p_j,e_j!_L\\rangle=p_j,\\\\\np_jm_L\\langle 1_L,i_L\\rangle&=m_j\\langle p_j,i_jp_j\\rangle=e_j!_L=p_je_L!_L,\\\\\np_jm_L\\langle i_L,1_L\\rangle&=m_j\\langle i_jp_j,p_j\\rangle=e_j!_L=p_je_L!_L.\n\\end{aligned}$$\nHere $!_{M_j}p_j=!_L$ by terminal uniqueness. Step 1 therefore gives all four laws on $L$. This makes $L$ an abelian group object. If another such structure makes all $p_j$ morphisms, its three operations satisfy exactly the three equations in step 2, so limit uniqueness makes them $m_L,e_L,i_L$. Equality of proof witnesses adds no further structure data.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "Let $(A,q_j)$ be any cone of abelian group objects. Its underlying cone factors uniquely as $q_j=p_ju$ with $u:U_{\\mathcal C}A\\to L$. Since $q_j$ preserves the operations, step 2 gives\n$$\\begin{aligned}\np_jum_A&=q_jm_A=m_j(q_j\\times q_j)=p_jm_L(u\\times u),\\\\\np_jue_A&=q_je_A=e_j=p_je_L,\\\\\np_jui_A&=q_ji_A=i_jq_j=p_ji_Lu.\n\\end{aligned}$$\nStep 1 gives $um_A=m_L(u\\times u)$, $ue_A=e_L$, $ui_A=i_Lu$. Hence $u$ is a group-object morphism. Equality of these morphisms is equality of underlying maps, so their uniqueness follows from the same underlying limit. This proves that the lifted cone is limiting. For any given group cone whose underlying cone is limiting, structure uniqueness in step 4 identifies its operations with this lift; hence the given cone is limiting too.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "Conversely suppose a group-object cone $(A,q_j)$ is limiting. Choose an underlying limit $(L,p_j)$, which exists since $I$ is finite and $\\mathcal C$ has finite limits, and equip it as above. Step 5 gives a group map $a:A\\to L$ with $p_ja=q_j$, while the assumed group limit gives a group map $b:L\\to A$ with $q_jb=p_j$. Underlying limit uniqueness gives $ab=1_L$, and group limit uniqueness gives $ba=1_A$. For any underlying cone $(T,t_j)$, let $v:T\\to L$ be its unique underlying factorization. Then $bv:T\\to A$ factors $(t_j)$. Any other factorization $w$ has $aw=v$, hence $w=baw=bv$. Thus $(U_{\\mathcal C}A,q_j)$ is limiting. Together with steps 2–5, this proves creation, preservation and reflection of the finite limits claimed.",
+   "uses": [
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "For clarity, when $I$ is empty, $L$ is terminal in $\\mathcal C$. The three operations in step 2 are the unique maps to $L$ from $L\\times L$, $*$ and $L$; every law is equality of two maps into $L$. Every $A$ has a unique underlying map to $L$, and its operation-preservation equations are likewise equalities into $L$. Thus the lifted group object is terminal, and the preceding proof includes the empty limit without assuming that $I$ is nonempty.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "Now let $F:\\mathcal C\\to\\mathcal D$ preserve finite limits. In particular $(F(X\\times Y),F\\mathrm{pr}_1,F\\mathrm{pr}_2)$ is a product cone and $F(*)$ is terminal. Their universal properties give inverses $k_{X,Y}=\\lambda_{X,Y}^{-1}:FX\\times FY\\to F(X\\times Y)$ and $k_0=\\lambda_*^{-1}:*_{\\mathcal D}\\to F(*)$. Each inverse identity follows by composing with both projections, or by terminal uniqueness. The same tests give, for $u:Z\\to X$, $v:Z\\to Y$, and $a:X\\to X'$, $b:Y\\to Y'$,\n$$F\\langle u,v\\rangle=k_{X,Y}\\langle Fu,Fv\\rangle,\\quad\nF(a\\times b)k_{X,Y}=k_{X',Y'}(Fa\\times Fb),\\quad\nF(!_Z)=k_0!_{FZ}.$$\nFor example the projections of the first equality are $Fu,Fv$; those of the second are $Fa\\,\\mathrm{pr}_1,Fb\\,\\mathrm{pr}_2$. The third compares two maps into the terminal object $F(*)$.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "On $FM$ define $\\mu=F(m)k_{M,M}$, $\\epsilon=F(e)k_0$, $\\nu=F(i)$ as in the statement. Put $M^0=*$, $M^1=M$, and $M^{n+1}=M^n\\times M$ for $n\\geq1$, and similarly in $\\mathcal D$. Define $\\kappa_0=k_0$, $\\kappa_1=1_{FM}$, $\\kappa_{n+1}=k_{M^n,M}(\\kappa_n\\times1)$ for $n\\geq1$. The projection equations in step 8 give $F(\\mathrm{pr}_r)\\kappa_n=\\mathrm{pr}_r$ for every variable projection. For terms $t,s:M^n\\to M$, let $\\widetilde t,\\widetilde s:(FM)^n\\to FM$ be the corresponding composites using $\\mu,\\epsilon,\\nu$. Starting with variables, substitution of the pairing identity in step 8 gives the three constructor calculations\n$$\\begin{aligned}\nF(e!_{M^n})\\kappa_n&=\\epsilon!_{(FM)^n},\\\\\nF(it)\\kappa_n&=\\nu(Ft\\kappa_n),\\\\\nF(m\\langle t,s\\rangle)\\kappa_n&=F(m)k_{M,M}\\langle Ft\\kappa_n,Fs\\kappa_n\\rangle.\n\\end{aligned}$$\nThus whenever $Ft\\kappa_n=\\widetilde t$ and $Fs\\kappa_n=\\widetilde s$, these calculations give the same identity for their zero, inverse and sum terms. This is direct substitution in composites, not an appeal to a theorem about algebraic theories.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "Apply the calculations of step 9 to the two sides of each defining group equation on $M$. For associativity take the terms $m\\langle m\\langle x,y\\rangle,z\\rangle$ and $m\\langle x,m\\langle y,z\\rangle\\rangle$ on $M^3$; both are equal, so applying $F$ and precomposing with $\\kappa_3$ gives the associativity equation for $\\mu$. For commutativity use $m\\langle x,y\\rangle=m\\langle y,x\\rangle$ on $M^2$ and $\\kappa_2$. On $M^1=M$ the two unit equations use $m\\langle e!_M,1\\rangle=1=m\\langle1,e!_M\\rangle$, and the inverse equations use $m\\langle1,i\\rangle=e!_M=m\\langle i,1\\rangle$. Since $\\kappa_1=1$, their images give both unit and both inverse laws for $\\mu,\\epsilon,\\nu$. Hence the operations on $FM$ satisfy precisely every law required in the statement.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "If $h:M\\to N$ preserves the three operations, the naturality identity of step 8 gives\n$$\\begin{aligned}\nFh\\,\\mu_M&=F(hm_M)k_{M,M}=F(m_N(h\\times h))k_{M,M}=\\mu_N(Fh\\times Fh),\\\\\nFh\\,\\epsilon_M&=F(he_M)k_0=F(e_N)k_0=\\epsilon_N,\\\\\nFh\\,\\nu_M&=F(hi_M)=F(i_Nh)=\\nu_NFh.\n\\end{aligned}$$\nThus $h\\mapsto Fh$ gives group-object morphisms. Identities and composition are preserved because $F$ preserves them, and group-object maps are determined by their underlying maps. Therefore this is the asserted functor $F^{\\mathrm{ab}}$, with the literal underlying equality $U_{\\mathcal D}F^{\\mathrm{ab}}=FU_{\\mathcal C}$.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  },
+  {
+   "text": "Finally take any limiting group-object cone over a finite diagram in $\\operatorname{AbObj}(\\mathcal C)$. By step 6 its underlying cone is limiting in $\\mathcal C$. The hypothesis on $F$ makes its image limiting in $\\mathcal D$. By step 11 this image is exactly the underlying cone of the $F^{\\mathrm{ab}}$-image group cone, so the implication proved in step 5, now in $\\mathcal D$, makes that group cone limiting. This proves preservation of every finite limit by $F^{\\mathrm{ab}}$, including the empty one.",
+   "uses": [
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion; explicit agent extraction of the finite-limit universal-property argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi and preceding quadruple discussion; universal-property details written out for arbitrary finite-limit categories"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -77,10 +222,66 @@
    "results": "Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean; Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
    "date": "2026-10-21",
    "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp.*(Creates|Preserves|Reflects)|(Creates|Preserves|Reflects).*CommGrp|def mapCommGrp",
+   "results": "7 hits; top results: Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Preadditive/Yoneda/Injective.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Limits of internal abelian group objects are created by the forgetful functor and transport by a left exact functor preserves finite limits",
+   "results": "8 hits; top results: GrpCat.forget_preservesLimits; AddGrpCat.forget_preservesLimits; AddCommGrpCat.forget₂AddGroup_preservesLimits; GrpCat.forget_preservesLimitsOfShape; AddCommGrpCat.forget_preservesLimitsOfSize; AddGrpCat.forget_createsLimit; AddCommGrpCat.forget_createsLimitsOfShape; AddGrpCat.forget_createsLimitsOfShape",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommGrp\", \"Limits\"",
+   "results": "12 hits; top results: AddCommGrpCat.FilteredColimits.G; AddCommGrpCat.FilteredColimits.colimit; CommGrpCat.FilteredColimits.G; CommGrpCat.FilteredColimits.colimit; AddCommGrpCat.FilteredColimits.colimitCocone; CommGrpCat.FilteredColimits.colimitCocone; AddCommGrpCat.FilteredColimits.colimitAddCommGroup; CommGrpCat.FilteredColimits.colimitCommGroup",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from internal commutative group objects in a category with finite limits creates finite limits and a finite limit preserving functor induces a finite limit preserving functor on commutative group objects",
+   "results": "8 hits; top results: CommGrpCat.Forget₂.createsLimit; CommGrpCat.forget_createsLimit; CommGrpCat.forget_createsLimitsOfShape; CommGrpCat.forget_createsLimitsOfSize; CommGrpCat.forget_preservesLimits; CommGrpCat.forget₂Group_preservesLimits; CommGrpCat.forget_preservesLimitsOfSize; CommGrpCat.forget₂Group_preservesLimitsOfSize",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
+  },
+  {
+   "tool": "grep",
+   "query": "CreatesLimitsOfShape|ReflectsLimits|PreservesLimits|limitAux",
+   "results": "0 hits; top results: none; searched Mathlib/CategoryTheory/Monoidal/Cartesian/CommGrpLimits.lean",
+   "date": "2026-10-21",
+   "verdict": "No source at this guessed path; zero hits is not evidence of absence. Other source reads and searches locate the partial results in GrpLimits.lean and CommGrp_.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "CreatesLimitsOfShape|ReflectsLimits|PreservesLimits|limitAux",
+   "results": "5 hits; top results: 30; 31; 32; 33; 36; searched Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCommGrp\"",
+   "results": "12 hits; top results: CategoryTheory.Functor.mapCommGrp; CategoryTheory.Functor.mapCommGrpIdIso; CategoryTheory.Functor.mapCommGrpFunctor; CategoryTheory.Functor.Faithful.mapCommGrp; CategoryTheory.Functor.FullyFaithful.mapCommGrp; CategoryTheory.Functor.Full.mapCommGrp; CategoryTheory.Equivalence.mapCommGrp; CategoryTheory.Functor.mapCommGrp_obj_X",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian monoidal category the forgetful functor from commutative internal groups creates limits, and the functor mapCommGrp induced by a left exact functor preserves limits",
+   "results": "8 hits; top results: CommGrpCat.forget_createsLimit; CommGrpCat.forget_createsLimitsOfShape; CommGrpCat.Forget₂.createsLimit; CommGrpCat.forget_preservesLimits; CommGrpCat.forget₂CommMon_preservesLimitsAux; CommGrpCat.forget_createsLimitsOfSize; CommGrpCat.forget_preservesLimitsOfShape; CommGrpCat.forget₂Group_preservesLimit",
+   "date": "2026-10-21",
+   "verdict": "Partial matches only: concrete CommGrpCat limits do not cover internal group objects in arbitrary categories; mapCommGrp supplies operation transport but not the limit-creation and preservation clauses. No exact match for the whole item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sfb-cartesian-coefficients",
@@ -97,5 +298,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-abelian-finite-limit-creation",
+  "worker": "stage1",
+  "summary": "Gave twelve explicit universal-property/equational steps for the full statement: operations on an underlying limit, all group laws, uniqueness, cone factorization, preservation/reflection including the empty diagram, comparison maps, transport of every law and morphism, and finite-limit preservation of the induced functor. No new nodes: each local calculation is a direct application of the defining product/limit universal property or substitution in the displayed equations. Existing statement, dependencies, source and prior searches retained; new actual searches appended.",
+  "blueprint": "Realizes the final exactness sentence of sk-prop-sfb-cartesian-coefficients through its split step 6: the finite-limit universal-property/operation-lifting argument, before the separate binary-product/zero additivity criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-1a29c3c5e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-1a29c3c5e (reviewer sub-agent of L); spot-checked: Read the whole item, all 12 steps, the statements of both cited Mathlib leaves (def-galois-finite-limits-colimits, def-weil-category-product) and Stacks sites.tex Tag 00YV (the D1-D4/A1-A3 quadruple passage and the proof of (2)). Compared with side-live and live, which both have the item unsplit: the statement, stmt_deps, source and blueprint are unchanged; only the proof, proof_deps, proof_origin (agent-extracted, stated honestly), status, split_report and appended searches changed. There is no repair note and the item is not on the dropped list. The parent sk-prop-sfb-cartesian-coefficients (Q03 PASS) step 6 uses exactly the binary-product and terminal preservation of F^ab. I recomputed every step. The operations on L come from cone compatibility. The laws hold by componentwise testing; the unit and inverse laws use !_{M_j} p_j = !_L. The structure is unique by limit uniqueness. The factor u is a group morphism, which gives creation and reflection. Preservation is proved by the a/b comparison maps, with ab = 1 and ba = 1. The empty diagram is covered. The comparison identities F<u,v> = k<Fu,Fv>, F(a×b)k = k'(Fa×Fb) and F(!) = k_0! hold, and the term induction over κ_n has its base and three constructor steps written out. The transported laws need no faithfulness. F^ab is a functor with U_D F^ab = F U_C, and it preserves finite limits by steps 6 and 5. Small cases checked: empty I, singleton I, an equalizer in Set, identity F and constant-terminal F. Mathlib has only GrpLimits.lean:46-52 (creation for non-commutative Grp), so mathlib_match = null is correct. No new nodes, no SGA citation, no route or tool_uses issue. Advisory: the base-era created.item is a unit id."
  }
 }
