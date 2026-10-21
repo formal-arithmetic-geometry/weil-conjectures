@@ -22709,3 +22709,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:55 L: merged deliver/Q02/lem-pur-finite-expression-reduction-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 13:55 L: merged deliver/Q17/lem-per-rational-realization-scalar-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 13:55 L: merged deliver/NC/det-picard-rr-duality (stage 2; reviewer PASS; parallel immutable checks)
+- 13:55 L: returned deliver/Q27/sk-lem-as-properties (reviewer RETURN: L: independent stage-2 immutable head 155fabd72c24: H2: two theorem nodes in stmt_deps supply only plain defs. lem-a1-ar)
