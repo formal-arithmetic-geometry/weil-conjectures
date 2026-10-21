@@ -13,11 +13,136 @@
   "def-sbc-affine-space",
   "def-weil-etale-morphism",
   "def-weil-open-immersion",
-  "def-weil-finite-type-morphism"
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The only ideals of the field $k$ are $0$ and $k$, so $\\operatorname{Spec}k$ is Noetherian (its one-point space is quasi-compact and its single affine chart has a Noetherian ring). Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure maps of $X$ and $Y$: both schemes are Noetherian. Also [lem-weil-pbc-qcqs-over-affine] applies to these separated finite-type maps to $\\operatorname{Spec}k$, giving quasi-compactness and quasi-separatedness of $X$ and $Y$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Schemes Tags 01K4, 01KN, 01KU (qcqs over an affine base)"
+   }
+  },
+  {
+   "text": "For each $x\\in X$, apply [lem-sc-standard-smooth-local-relative-dimension] to obtain affine opens $U_x=\\operatorname{Spec}A_x\\subseteq X$ and $V_x=\\operatorname{Spec}R_x\\subseteq Y$, with $x\\in U_x$, $f(U_x)\\subseteq V_x$, and induced ring map $R_x\\to A_x$ standard smooth of relative dimension exactly $d$. By [lem-sc-standard-smooth-etale-polynomial-chart] choose an etale $R_x$-algebra map $\\psi_x:R_x[t_1,\\ldots,t_d]\\to A_x$ whose restriction to constants is that induced ring map. Its map on spectra is etale, as that cited statement explicitly asserts. The affine-space description [def-sbc-affine-space] identifies its target with $\\mathbf A^d_{V_x}$. Define $e_x^0$ by this map of spectra. Its composite with the projection has ring map $R_x\\to A_x$; [lem-weil-pbc-affine-opens-induced-ring-map-spec-square] identifies this composite, followed by $V_x\\hookrightarrow Y$, with $f|_{U_x}$.",
+   "uses": [
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-sc-standard-smooth-etale-polynomial-chart",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L, lemma-smooth-etale-over-affine-space, proof (last d variables); Tags 01V7 and 02G1 for the prescribed relative dimension; Schemes Tag 01I1 for the affine square"
+   }
+  },
+  {
+   "text": "The opens $U_x$ cover $X$ because each contains its indexing point. By Step 1 and the definition [def-weil-pbc-quasi-compact-scheme], this open cover has a finite subcover $U_a$; retain each selected $V_a$ and $e_a^0$. If $X=\\varnothing$, instead take the empty indexing set. This is just the finite-subcover clause of quasi-compactness and introduces no additional geometric assertion.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005A, definition-quasi-compact (1)"
+   }
+  },
+  {
+   "text": "For every retained chart, [lem-weil-pbc-noetherian-open-subscheme-noetherian] shows that $U_a$ and $V_a$ are Noetherian, hence quasi-compact. Their inclusions $j_a:U_a\\hookrightarrow X$ and $v_a:V_a\\hookrightarrow Y$ are open immersions by [def-weil-open-immersion]. Since $X,Y$ are quasi-separated by Step 1, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $j_a,v_a$ quasi-compact. Thus [lem-weil-pbc-qc-open-immersion-finite-type] makes both inclusions of finite type. Clause (a) of [lem-weil-pbc-separated-cancellation] makes them separated. Composing them with the structure maps to $\\operatorname{Spec}k$, use [lem-sfb-finite-type-composition-base-change] (1) and [lem-weil-pbc-proper-fp-permanence] (e) to conclude that $U_a,V_a$ are separated and finite type over $k$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW, 01OZ (open subschemes of Noetherian schemes); Schemes Tags 03GI, 01L7, 01KU; Morphisms Tags 01T2, 01T3"
+   }
+  },
+  {
+   "text": "For $S=Y$ and $S=V_a$, the projection $p_{d,S}:\\mathbf A^d_S\\to S$ is affine: over every affine open $W=\\operatorname{Spec}R\\subseteq S$, its preimage is $\\operatorname{Spec}R[t_1,\\ldots,t_d]$, by [def-sbc-affine-space] and [pqf-def-affine-morphism]. By [lem-weil-pbc-affine-morphism-permanence] (3), $p_{d,S}$ is separated and quasi-compact. It is locally of finite type directly from [def-weil-finite-type-morphism]: the displayed ring is generated over $R$ by the $d$ variables, and this single affine open covers the preimage of $W$. Thus $p_{d,S}$ is of finite type. Composing with $S\\to\\operatorname{Spec}k$, [lem-sfb-finite-type-composition-base-change] (1) and [lem-weil-pbc-proper-fp-permanence] (e) show that $\\mathbf A^d_Y$ and $\\mathbf A^d_{V_a}$ are separated and finite type over $k$. Applying [lem-weil-pbc-finite-type-over-noetherian] to these structure maps proves that both are Noetherian.",
+   "uses": [
+    "def-sbc-affine-space",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S6 (definition-affine), 01S7 (lemma-affine-separated), 01T1/01T2 (finite type), 01T3 (composition), 01T6 (Noetherianity); affine-space polynomial description"
+   }
+  },
+  {
+   "text": "The restriction of $\\mathbf A^d_Y$ over $V_a$ is $\\mathbf A^d_{V_a}$, by [def-sbc-affine-space]. Thus $\\rho_a:\\mathbf A^d_{V_a}\\hookrightarrow\\mathbf A^d_Y$ is the inclusion of the open inverse image $p_{d,Y}^{-1}(V_a)$, an open immersion by [def-weil-open-immersion]. Set $e_a=\\rho_a e_a^0$. The restriction identity $p_{d,Y}\\rho_a=v_a p_{d,V_a}$ and Step 2 give $p_{d,Y}e_a=fj_a$. By [lem-weil-pbc-etale-composition-cancellation] (1),(2), $\\rho_a$ is etale and $e_a$ is etale. This constructs the maps over the original base $Y$, without changing that base.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale); restriction of affine space to an open of its base"
+   }
+  },
+  {
+   "text": "Every target $\\mathbf A^d_Y$ or $\\mathbf A^d_{V_a}$ is quasi-separated by Step 5 and [lem-weil-pbc-qcqs-over-affine]. Each chart source $U_a$ is affine. Therefore the explicit affine-source clause of [lem-weil-pbc-qcqs-morphism-permanence] (1) applies to the etale maps $e_a$ and $e_a^0$ and makes both of finite presentation. In particular they are quasi-compact and locally of finite type: in the presentation of [def-sbc-locally-finite-presentation], a quotient of a polynomial ring in finitely many variables is generated by the images of those variables, so local finite presentation implies local finite type. Hence they are of finite type as well. Their composites with the target structure maps to $\\operatorname{Spec}k$ equal the structure map of $U_a$, separated by Step 4. Cancellation [lem-weil-pbc-separated-cancellation] (b) makes both chart maps separated. All schemes and maps in the claimed charts now have the required Noetherian, separated and finite-type properties. When $d=0$, the polynomial algebra has no variables and $\\mathbf A^0_S=S$ by [def-sbc-affine-space]; every preceding construction and finiteness argument still applies.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-separated-cancellation",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 03GI (lemma-quasi-compact-permanence), 01KV (lemma-compose-after-separated); Morphisms Tag 01TP (definition-finite-presentation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L, lemma-smooth-etale-over-affine-space, with prescribed-dimension standard-smooth charts (01V7, 02G1), finite subcover (Topology 005A), and the cited separation, finite-type, Noetherian and quasi-compactness permanence lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +178,45 @@
    "results": "{\"t\": \"2026-10-21T03:26:55Z\", \"tool\": \"leansearch\", \"query\": \"A smooth pure dimensional morphism of separated finite type schemes over a field admits affine open charts etale separated and finite presentation over affine space of the fixed dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"8d81dd4ac8935f15\"}",
    "date": "2026-10-21",
    "verdict": "no exact match: standard smooth algebra charts found, but conversion to the original-base separated finite-presentation scheme cover and admissibility remain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of pure relative dimension d between separated finite type schemes over a field admits a finite affine open cover with separated etale finitely presented maps to affine d space over the original base",
+   "results": "{\"t\": \"2026-10-21T03:51:58Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism of pure relative dimension d between separated finite type schemes over a field admits a finite affine open cover with separated etale finitely presented maps to affine d space over the original base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"d687835fe8f9835a\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: fixed-dimension standard-smooth charts and etale polynomial ring maps are existing DAG dependencies; the finite original-base admissible cover is a multi-step assembly, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_to_affineSpace|exists_isStandardSmoothOfRelativeDimension|exists_etale_mvPolynomial",
+   "results": "{\"t\": \"2026-10-21T03:52:17Z\", \"tool\": \"grep\", \"query\": \"exists_etale_to_affineSpace|exists_isStandardSmoothOfRelativeDimension|exists_etale_mvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\"], \"digest\": \"cac2a1135570113e\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: fixed-dimension standard-smooth charts and etale polynomial ring maps are existing DAG dependencies; the finite original-base admissible cover is a multi-step assembly, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism of relative dimension d has a finite affine coordinate cover etale over affine space with separated finite presentation chart maps",
+   "results": "{\"t\": \"2026-10-21T03:52:18Z\", \"tool\": \"leansearch\", \"query\": \"A smooth morphism of relative dimension d has a finite affine coordinate cover etale over affine space with separated finite presentation chart maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"f4624e8cce24eafa\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: fixed-dimension standard-smooth charts and etale polynomial ring maps are existing DAG dependencies; the finite original-base admissible cover is a multi-step assembly, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-21T03:52:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.SmoothOfRelativeDimension, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero\"], \"digest\": \"5019317a65b5c9c5\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: fixed-dimension standard-smooth charts and etale polynomial ring maps are existing DAG dependencies; the finite original-base admissible cover is a multi-step assembly, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open coordinate charts for a smooth equidimensional scheme morphism, with quasi compact inclusions and etale maps to affine space",
+   "results": "{\"t\": \"2026-10-21T03:52:19Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine open coordinate charts for a smooth equidimensional scheme morphism, with quasi compact inclusions and etale maps to affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"b4482c6d0ceaac91\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: fixed-dimension standard-smooth charts and etale polynomial ring maps are existing DAG dependencies; the finite original-base admissible cover is a multi-step assembly, not a one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-exceptional",
@@ -68,10 +228,34 @@
  "blueprint": {
   "from": {
    "node": "det-sp-reduction-exceptional",
-   "place": "Charts, admissibility; retained Step 13",
+   "place": "Charts paragraph: coordinate charts f|_U=p_d composed with e cover X; original-base admissibility elaboration of retained Step 13 in det-sp-reduction-exceptional",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-smooth-admissible-coordinate-cover",
+  "worker": "stage1",
+  "summary": "Seven-step split using only existing DAG nodes. Construct fixed-dimension affine standard-smooth charts and their etale polynomial maps, take a finite subcover, and verify Noetherianity, separation, finite type and finite presentation. The open base restriction is composed into affine space over the original Y. Checked the empty scheme and relative dimension zero; no new nodes or statement correction.",
+  "blueprint": "Realizes det-sp-reduction-exceptional, Charts paragraph and concluding sentence that coordinate charts cover X (the admissibility expansion of retained Step 13); keeps the unit chart route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-standard-smooth-local-relative-dimension",
+    "why": "Generic geometric tool providing standard-smooth affine charts of precisely the prescribed fibre dimension d; it supplies a prerequisite for, and does not replace, the unit coefficient-comparison chart route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-standard-smooth-local-relative-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-94bb758cc",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-94bb758cc (reviewer sub-agent of L); spot-checked: Read the item, the statement of all 19 cited nodes, Stacks 054L (morphisms.tex:8543) and the cited tags. The statement is identical to live. Only def-sbc-locally-finite-presentation was added to stmt_deps, which is justified because the statement asserts finite presentation. The item is still unsplit in live and side-live, so the delivery is not superseded. There are no new nodes, no cycle, proof_deps equals the union of the step uses, and no SGA is cited. Step 2 gets charts of the exact dimension d from lem-sc-standard-smooth-local-relative-dimension, whose hypothesis (pure relative dimension d) the item has. It then uses the stated etale polynomial-chart leaf and the affine-opens Spec square, and correctly avoids sbc-thm-etale-local-normal-form, which leaves d unspecified. Step 3 takes a finite subcover. Steps 4-5 check open subschemes Noetherian, qc inclusions via qcqs-permanence (1), qc open immersion of finite type, affine projection that is separated, qc and locally of finite type, and the compositions. Step 6 composes into A^d over the original base Y with p e_a = f j_a. Step 7 gets finite presentation from the affine-source clause, finite type, and separation by cancellation (b) against U_a over Spec k. These meet the hypotheses of the citer's chart nodes (chart-finite-ring-adjunction, chart-left-scalar-normalization, etale-sum-counit-scalar, open-exceptional-scalar-locality). Edge cases checked: X empty, Y empty, d=0, imperfect k. No duplicate in the DAG. The declared tool use of lem-sc-standard-smooth-local-relative-dimension is accepted as generic geometry. No changes."
  }
 }
