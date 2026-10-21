@@ -22603,3 +22603,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:37 L: merged deliver/NM/lem-pur-support-comparison-section-model (stage 2; reviewer FIX; parallel immutable checks)
 - 13:37 L: merged deliver/NG/lem-sf-open-quotient-koszul-completeness (stage 2; reviewer PASS; parallel immutable checks)
 - 13:37 L: merged deliver/Q03/lem-sfb-stratified-tor-interval-devissage (stage 2; reviewer PASS; parallel immutable checks)
+- 13:37 L: returned deliver/ND/lem-coef-enriched-sequence-projection-formula (reviewer RETURN: L: independent stage-2 immutable head 4dac5291bc35: H3 (F1): the node's last clause (degree-zero Hom of the global map, )
