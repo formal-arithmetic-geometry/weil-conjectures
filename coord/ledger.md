@@ -20981,3 +20981,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:10 L: merged deliver/Q19/lem-amb-tate-root-projection-reduction (reviewer FIX; first push; new nodes: 0)
 - 08:10 L: merged deliver/Q23/lem-sfb-qcqs-proper-localizing-coproducts (reviewer PASS; first push; new nodes: 1)
 - 08:10 L: merged deliver/Q30/lem-sfb-hom-strict-numerator-transpose (reviewer PASS; first push; new nodes: 0)
+- 08:10 L: merged deliver/Q26/lem-weil-isomorphism-derived-pullback-comparison-normalization (reviewer FIX; after a return; new nodes: 2)

@@ -24,138 +24,62 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex representing $N$ and a flat-term K-flat quasi-isomorphism $q:Q\\to N$ by [lem-pc-kflat-resolution]. Set $Q_n=Q\\otimes_{\\widehat R_Y}B_{Y,n}$, $r_n(x)=x\\otimes1$, and $\\tau_n=1\\otimes(B_{Y,n+1}\\to B_{Y,n})$. The simultaneous reduction of [lem-coef-derived-system-evaluation-calculus] is represented by the strict semilinear complex $TQ=(Q_n,\\tau_n)$, not merely by its evaluations. Put $D=U_Y(TQ)$ and $C_n=\\operatorname{Res}_n g^*Q_n$, with the strict transitions of [def-pur-integral-derived-operations]. Products in both completed module categories are exact by [lem-weil-proetale-countable-products-exact]. For any of these strict towers $Z$ write $H(Z)=\\operatorname{Cone}(1-s_Z)[-1]$. In coordinates $H(Z)^i=(\\prod_n Z_n^{i-1})\\oplus(\\prod_n Z_n^i)$, its differential is $d(b,a)=(-db-(1-s_Z)a,da)$. By [lem-weil-strict-roos-comparison], $H(D)$ realizes $\\widehat N$ and $H(C)$ realizes $P_gN$, with the normalized total-limit identifications. Since $\\tau_nr_{n+1}=r_n$, the formula $v_Q(z)=(0,(r_nz)_n)$ is a chain map $Q\\to H(D)$.",
+   "text": "Choose $q:Q\\to N$ flat-term K-flat by [lem-pc-kflat-resolution]; for the formula of step 3 take the resolution with which $P_gN$ is formed in [def-weil-inverse-image-pullback-comparison] (b), other choices being compared in step 2. Set $Q_n=Q\\otimes B_{Y,n}$, $r_n(z)=z\\otimes1$, $D=U_Y(Q_n)_n$ and $C_n=\\operatorname{Res}_ng_n^*Q_n$ with its strict transitions. By [lem-trf-completion-unit-strict-quotient-model], the normalized quotient cone $H(D)$ realizes $\\widehat N$ and its augmentation $v_Q(z)=(0,(r_nz)_n)$ represents the actual $u_N$ after $[q]^{-1}$. This fixes the entire cone map.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-pur-integral-derived-operations",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison"
+    "lem-trf-completion-unit-strict-quotient-model",
+    "def-weil-inverse-image-pullback-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clauses (2)-(3): simultaneous quotient model; Stacks Tags 06YS (lemma-K-flat-resolution), 08TC (definition-derived-limit), 0941 (lemma-derived-limit-is-ok)."
+    "place": "Clauses (2)-(3); assembly after the Q26 re-split, step 1"
    }
   },
   {
-   "text": "Identify the actual unit, rather than selecting a lift of its projections. In the sequence ringed site [def-coef-ringed-sequence-site], let $T$ denote simultaneous underived extension and $V=\\lim U$. Their ordinary adjunction sends $f=(f_n):TQ\\to M$ to $z\\mapsto(f_n(z\\otimes1))_n\\in VM$; its inverse sends $h:Q\\to VM$ to $z\\otimes a\\mapsto a h_n(z)$. These formulas are balanced, respect transitions and are inverse. Choose $a:TQ\\to I$ K-injective with injective terms in the semilinear category and $j:UI\\to J$ K-injective with injective terms in the constant-ring tower category; these are ringed-site resolutions by [prop-pur-kinjective-resolutions-exist]. The derived-adjunction fraction formula [lem-pc-pre-derived-adjoint-functors-general], applied to the canonical adjunction of [lem-coef-derived-system-evaluation-calculus], transposes the identity of $\\mathcal R_YN$, represented by $a$ on this left-derived model, to $Q\\to VI$, $z\\mapsto(a_nr_nz)_n$, followed by $VI\\to\\lim J$. This last map is the canonical right-derived composition comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]: factor the sequence projection as restriction of rings (direct image $U$) followed by the constant-ring sequence projection (direct image $\\lim$). Its normalization is exactly $\\lim j$, so the composite represents $u_N$ after $[q]^{-1}$. All sites are small in the fixed module universe. No preservation of K-injectives by $U$ is assumed.",
+   "text": "By [lem-trf-isomorphism-multiplication-cone-descent], $j_n(x\\otimes a)=ax$ gives $j:C\\simeq GD$, with inverse $i_n(x)=x\\otimes1$, and $\\eta_D:GH(D)\\simeq H(GD)$ is the product comparison on both coordinates. Set $\\theta=\\eta_D^{-1}H(j)$. The same lemma identifies its source with $P_gN$ and gives its naturality for all derived morphisms and independence under the canonical resolution comparisons. All hypotheses hold: $g$ is a scheme isomorphism, the sites are small and coefficients and quotient transitions are the specified ones.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-trf-isomorphism-multiplication-cone-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): agent refinement identifying the canonical derived adjunction unit; Bhatt-Scholze Definition 3.5.2 and Lemma 3.5.7(1); normalized derived-adjunction fraction calculation."
+    "place": "Clauses (2)-(3); assembly after the Q26 re-split, step 2"
    }
   },
   {
-   "text": "Let $b= j\\circ U(a):D\\to J$. This is a quasi-isomorphism of entire strict towers. On both cone coordinates $H(b)$ is the product of the $b_n$. Therefore $H(b)v_Q(z)=(0,(j_na_nr_nz)_n)$. The composite $Q\\to VI\\xrightarrow{\\lim j}\\lim J\\to H(J)$ of step 2 has exactly this same formula: the last map is the inclusion of the ordinary limit with zero shifted-product component. By [lem-weil-strict-roos-comparison], that inclusion for $J$ is the normalization of $H(D)\\simeq R\\lim D$. It follows that $u_N$ is precisely $[v_Q][q]^{-1}$ under the identification $H(D)\\simeq\\widehat N$. This is an equality of whole cone maps; equality of the projections alone is not used.",
+   "text": "By [def-weil-inverse-image-pullback-comparison] (b), $\\kappa^g_N$ is represented on $GQ$ by $w\\mapsto(0,(i_nG(r_n)w)_n)$, then $[Gq]^{-1}$. Multiplication cancels each $i_n$ ($j_ni_n=\\mathrm{id}$), so $H(j)$ sends this chain map to $w\\mapsto(0,(G(r_n)w)_n)$. The latter is exactly $\\eta_DG(v_Q)$: by [lem-trf-isomorphism-multiplication-cone-descent] $\\eta_D$ is $\\phi_D$ on both coordinates, so the shifted coordinate stays zero and the unshifted product has components $\\mathrm{pr}_n\\phi_DG((r_n)_n)=G(r_n)$. Applying $\\eta_D^{-1}$ gives $G(v_Q)$ as an actual chain map. Hence, by [lem-trf-completion-unit-strict-quotient-model] and functoriality of the exact $G$, $\\theta\\kappa^g_N=G([v_Q][q]^{-1})=G(u_N)$. This checks both coordinates. Since $\\kappa=\\theta^{-1}G(u)$ and the adjunction unit of [lem-coef-derived-system-evaluation-calculus] is natural, this equality also gives naturality and resolution independence of the specified $\\kappa$.",
    "uses": [
-    "lem-weil-strict-roos-comparison"
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-trf-isomorphism-multiplication-cone-descent",
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): zero shifted-coordinate normalization of the unit, using Stacks Tag 0941 (lemma-derived-limit-is-ok) and its normalized strict-cone refinement."
+    "place": "Clauses (2)-(3); assembly after the Q26 re-split, step 3"
    }
   },
   {
-   "text": "By [lem-weil-proetale-isomorphism-inverse-image], inverse image along $g$ is reindexing by the site equivalence, and its constant-coefficient structure maps $c_n: g^{-1}B_{Y,n}\\simeq B_{X,n}$ commute with all coefficient reductions. The completed structure map $c:g^{-1}\\widehat R_Y\\simeq\\widehat R_X$ has $\\pi_{X,n}c=c_n g^{-1}(\\pi_{Y,n})$. The completed-module functor $G$ transported along $c$ is exact by [def-weil-inverse-image-pullback-comparison]. It also preserves countable products: reindexing and the sectionwise computation of products [lem-weil-proetale-countable-products-exact] give $G(\\prod M_n)(U)=\\prod G(M_n)(U)$ on the underlying sheaves, and the module actions on both sides are transported by the same $c^{-1}$. Thus its canonical comparison $\\phi_D:G(\\prod D_n)\\to\\prod GD_n$, characterized by the projections, is an isomorphism. Additivity holds since reindexing preserves addition and zero sectionwise.",
+   "text": "For derived-complete $N$, apply [lem-weil-finite-free-completed-scalar-comparison] with $L=E$. Its canonical completion map is invertible and is represented, after $N\\otimes^L_{\\widehat R_Y}\\widehat R_Y\\simeq N$, by $v_Q$. By [lem-trf-completion-unit-strict-quotient-model] this is the actual $u_N$. Consequently $G(u_N)$ is invertible, and $G(u_N)^{-1}\\theta$ is a two-sided inverse of $\\kappa^g_N=\\theta^{-1}G(u_N)$ by cancellation. Completeness is used only here; the ambient normalization makes no invertibility claim for incomplete $N$.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-proetale-countable-products-exact"
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-trf-completion-unit-strict-quotient-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (2): pullback under a scheme isomorphism and completed coefficient transport; the structure isomorphism and projection square in def-weil-inverse-image-pullback-comparison."
-   }
-  },
-  {
-   "text": "For each $n$ the termwise map $j_n:C_n\\to GD_n$ is multiplication $x\\otimes a\\mapsto ax$, with the scalar action transported through $c_n$. Its inverse is $i_n:x\\mapsto x\\otimes1$. Indeed $j_ni_n(x)=x$ and $i_nj_n(x\\otimes a)=ax\\otimes1=x\\otimes a$ by balancing. These maps respect restrictions, so the formulas pass from the presheaf tensors to their sheafifications [def-pur-sheaf-tensor-product]. They are $\\widehat R_X$-linear because $\\pi_{X,n}c=c_nG(\\pi_{Y,n})$, and commute with differentials. On a transition, both composites send $x\\otimes a$ to $\\bar a\\,G(\\tau_n)x$, since the coefficient structure maps commute with reduction. Thus $j:C\\xrightarrow{\\sim}GD$ is an isomorphism of strict tower complexes, not only a list of derived isomorphisms. It is natural in chain maps $Q\\to Q'$.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-proetale-isomorphism-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (2): multiplication inverse to the tensor-unit map of def-weil-inverse-image-pullback-comparison (a), compatibly with the transitions of (b)."
-   }
-  },
-  {
-   "text": "Apply [lem-cbc-exact-product-functor-strict-limit] to $G$, using exactness and product preservation from step 4 and exact countable products from step 1. It supplies the specified natural comparison $\\eta_D:GH(D)\\xrightarrow{\\sim}H(GD)$. By its normalization and [lem-weil-strict-roos-comparison], this map is $\\phi_D$ on both cone coordinates, without an off-diagonal entry. In particular, $\\phi_DG(1-s_D)=(1-s_{GD})\\phi_D$, because projection to $n$ on either side is $G(\\mathrm{pr}_n)-G(\\tau_n)G(\\mathrm{pr}_{n+1})$. Since $j$ commutes strictly with transitions, $H(j):H(C)\\xrightarrow{\\sim}H(GD)$ is the product of the $j_n$ on both coordinates. Define $\\theta_{g,N}=\\eta_D^{-1}H(j):H(C)\\xrightarrow{\\sim}GH(D)$, read through the normalized identifications of step 1. This is the required direction $P_gN\\to G\\widehat N$.",
-   "uses": [
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clauses (2)-(3): specified product/cone comparison on the entire strict quotient tower; Stacks Tag 0941 and the exact-product comparison refinement."
-   }
-  },
-  {
-   "text": "By [def-weil-inverse-image-pullback-comparison] (b), the specified $\\kappa^g_N$ is represented on $GQ$ by $w\\mapsto(0,(i_nG(r_n)w)_n)$, followed by $[Gq]^{-1}$. Multiplication cancels each $i_n$, so $H(j)$ sends this chain map to $w\\mapsto(0,(G(r_n)w)_n)$. The latter is exactly $\\eta_DG(v_Q)$: its shifted coordinate is zero and its unshifted product has components $G(r_n)$. Applying $\\eta_D^{-1}$ gives $G(v_Q)$ as an actual chain map. Step 3 and functoriality of exact $G$ therefore give $\\theta_{g,N}\\kappa^g_N=G([v_Q][q]^{-1})=G(u_N)$. This calculation fixes the shifted coordinate as well as the ordinary projections.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-cbc-exact-product-functor-strict-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): explicit comparison with the specified map in def-weil-inverse-image-pullback-comparison (b), on both coordinates."
-   }
-  },
-  {
-   "text": "For a chain map $f:Q\\to Q'$ of flat-term K-flat complexes, the reductions satisfy $r'_nf=f_nr_n$, and multiplication gives $j'_ng^*(f_n)=G(f_n)j_n$. Consequently the square for $\\theta$ commutes on each of the two product summands, by naturality of $\\phi$; the square for the specified augmentation commutes by the first equality. The strict reduction construction is a derived functor by [lem-coef-derived-system-evaluation-calculus]. The integral pullback descends from these representatives with its canonical resolution comparisons by [lem-pur-integral-operations-well-defined]. The normalized limit comparison is natural on the derived tower category by [lem-cbc-exact-product-functor-strict-limit]. Thus the chain-level squares descend to the localization at quasi-isomorphisms [def-weil-abstract-derived-category]: the equalities persist for inverses of inverted maps and for their composites. They give naturality for derived morphisms and identify $\\theta$ under the canonical resolution comparisons for any two choices of $Q$. The specified $\\kappa$ has the same independence and naturality, since $\\kappa=\\theta^{-1}G(u)$ and the actual adjunction unit $u$ is natural.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-integral-operations-well-defined",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clauses (2)-(3): resolution independence and naturality on entire derived systems; no uniqueness inferred from levelwise evaluations."
-   }
-  },
-  {
-   "text": "Suppose $N$ is derived complete in the stated sense. Specialize [lem-weil-finite-free-completed-scalar-comparison] to $L=E$ and $Y$ unchanged. It asserts that the canonical completion map is an isomorphism for every such ambient complex; no boundedness or constructibility assumption occurs. After the multiplication identification $N\\otimes^L_{\\widehat R_Y}\\widehat R_Y\\simeq N$, its representative on $Q$ is $z\\mapsto(0,(r_nz)_n)$, hence it is the actual $u_N$ by step 3. Therefore $G(u_N)$ and $\\theta$ are isomorphisms, and $\\kappa^g_N=\\theta^{-1}G(u_N)$ is invertible with inverse $G(u_N)^{-1}\\theta$. Both inverse identities follow by cancelling the adjacent inverse pairs. The completeness hypothesis is used only here; for an incomplete object the formula still holds but supplies no inverse to $u_N$.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3): Bhatt-Scholze Definition 3.5.2 and Proposition 3.5.1; L=E specialization of the existing scalar comparison identifies the actual canonical completion map."
+    "place": "Clauses (2)-(3); assembly after the Q26 re-split, step 4"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-kflat-resolution",
-  "lem-coef-derived-system-evaluation-calculus",
-  "def-pur-integral-derived-operations",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "def-coef-ringed-sequence-site",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-trf-isomorphism-multiplication-cone-descent",
   "def-weil-inverse-image-pullback-comparison",
-  "def-pur-sheaf-tensor-product",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-pur-integral-operations-well-defined",
-  "def-weil-abstract-derived-category",
+  "lem-coef-derived-system-evaluation-calculus",
   "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "proof_origin": {
@@ -279,20 +203,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
   "worker": "stage1",
-  "summary": "Retained the ambient statement and computed the specified comparison on both coordinates of the strict quotient cone. Identified the actual derived-adjunction unit by its resolution-normalized transpose, constructed multiplication inverses on the whole tower, applied the existing exact-product total-limit comparison, and used the L=E scalar-comparison theorem only for derived-complete inputs. Proved naturality and resolution independence by descent of the strict construction. No new nodes.",
+  "summary": "Human-requested re-split: unchanged statement; two comparable statement-only tasks isolate the actual-unit computation (old steps 1-3) and multiplication/product-cone comparison with derived descent (old steps 4-6,8). Parent retains explicit two-coordinate cancellation and completeness specialization. Every old argument is retained verbatim in the report with its new owner.",
   "blueprint": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), compatibility with composition before rationalization, via the comparison prerequisite in prop-trf-rational-frobenius-integral-model.proof.md clauses (2)-(3). The present item proves the normalization prerequisite, not the later composition identity.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NJ-faa0d5422",
-  "group": "NJ",
+  "reviewer": "NT-cc-Q26-aa57037cd",
+  "group": "Q26",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-faa0d5422 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the full statement of every cited node (including the blueprint_update texts), source clauses (2)-(3) of main-20261015 prop-trf-rational-frobenius-integral-model.proof.md, and Stacks 08TC and 0941. The statement is unchanged by this delivery and true. Test cases: g=id gives kappa=u_N; N=0 is trivial; N=R̂_Y gives v_Q as the inclusion of lim B_n, a quasi-isomorphism; for N=R̂_Y[1/ϖ] the completion is 0 and kappa is not invertible, which is why invertibility is only claimed for derived-complete N. The base-change map is exactly the specified kappa of def-weil-inverse-image-pullback-comparison (b), and the coefficient category is the completed Ô_E-modules that P_g uses. Checks: the cone sign agrees with def-weil-abstract-derived-category, and v_Q is a chain map. Step 2: the underived T ⊣ lim U transposes are correct; the fraction formula with s=a, t=id gives the unit; pushforward-composition normalizes it as lim j; no preservation of K-injectives by U is assumed. Step 3 is an equality of whole cone maps via the strict-Roos normalization. Step 5: multiplication and x⊗1 are inverse by balancing, and they are linear and compatible with transitions. Step 6: all hypotheses of lem-cbc-exact-product-functor-strict-limit hold, and its coordinates (x,y) are the item's (a,-b). Step 7: theta∘kappa=G(u_N) on both cone coordinates. Step 8: naturality via roofs of K-flat representatives. Step 9: the L=E clause of lem-weil-finite-free-completed-scalar-comparison applies to derived-complete N. No cycle; every proof dependency is on the unit route; no tool_uses are needed and none were accepted; no new nodes; no SGA. One repair (C1): step 4 used the sectionwise computation of products without citing lem-weil-proetale-countable-products-exact; I added it to the step's text and uses in fixes/dag/nodes/sec-trace-formula/lem-weil-isomorphism-derived-pullback-comparison-normalization.json, and proof_deps is unchanged. Side remark for the owners, not a fault here: the old wording of def-weil-derived-complete alone does not force the canonical map to be invertible; the cited scalar-comparison node asserts it, and the definition's blueprint_update makes it the definition.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-aa57037cd (reviewer sub-agent of L); spot-checked: Human re-split (repair note 2026-10-21, at least 2 nodes, assembly of at most 3000 characters): the item statement is byte-identical to the base and the item is not on the dropped list. I checked the base's 9 steps one by one against the delivery: old steps 1-3 (K-flat quotient cone, the T ⊣ lim U transpose with K-injectives a and j, the normalization lim j, whole-cone equality) are in new node lem-trf-completion-unit-strict-quotient-model. Old steps 4-6 and 8 (G exact and product-preserving, the multiplication isomorphisms j_n and i_n, the cbc η_D equal to φ_D on both coordinates, descent and independence) are in lem-trf-isomorphism-multiplication-cone-descent. Old steps 7 and 9 stay as parent steps 3 and 4. Nothing was dropped, and the two nodes have comparable size (2.8k and 3.3k characters). Neither mentions κ, so neither restates the item. Both statements are true: I checked them against Roos (K-injective normalization), cbc (its (x,y)=(a,-b) coordinates and differentials match), def-weil-inverse-image-pullback-comparison (b) (θ_m = i_m G(r_m)), lem-weil-proetale-isomorphism-inverse-image (2)-(3), and finite-free scalar comparison at L=E (zero-shifted representative, needs derived completeness). Small cases checked: g=id, N=0, N=R̂, N=R̂[1/ϖ], degree-0 Q. No duplicates found by rg -L over dag/nodes, and the Mathlib searches are logged. No SGA reference. Batch-5: both flagged citations are in sec-trace-formula only because the item lives there (ancestor thm-trf-l-function-euler-product). The closure of the item's dependencies is unchanged apart from the two new nodes, and their content is generic coefficient calculus, not a step of the trace formula or Poincaré duality proofs. Accepted. FIX (one repair) in fixes/dag/nodes/sec-trace-formula/lem-weil-isomorphism-derived-pullback-comparison-normalization.json: step 3 had compressed old step 7, so I restored its j_n i_n = id cancellation, the coordinate check pr_n φ_D G((r_n)) = G(r_n) from node B, the application of η_D^{-1}, and functoriality of the exact G. Step 1 now names the resolution of def (b) (added to uses; already a proof_dep). The assembly is 2614 characters. Statements and deps are unchanged.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization",
