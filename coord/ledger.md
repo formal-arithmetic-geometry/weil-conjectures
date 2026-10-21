@@ -21048,3 +21048,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q73/lem-a1-integral-pullback-completed-comparison (reviewer FIX; after a return; new nodes: 4)
 - 08:15 L: merged deliver/Q38/lem-pur-projection-formula-coefficient-coherence (reviewer PASS; after a return; new nodes: 3)
 - 08:15 L: merged deliver/Q30/def-kun-separably-closed (reviewer PASS; first push; new nodes: 0)
+- 08:15 L: merged deliver/Q26/lem-pur-comparison-direct-image-resolution-mate (reviewer PASS; first push; new nodes: 0)

@@ -23,9 +23,129 @@
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-comparison-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r=u_{\\mathrm{et},*}$ and $s=u_{\\mathrm{proet},*}$ for the ordinary direct images, reserving $Rr,Rs$ for their derived functors. On an etale object $W/V$, both $N_VsG$ and $rN_UG$ are $G(W\\times_VU)$. On an arrow $W'\\to W$ both use restriction along $W'\\times_VU\\to W\\times_VU$, and on coefficients both send a constant scalar to the same constant section. Thus the identity on these modules defines the natural, linear isomorphism $\\delta:N_Vs\\cong rN_U$ in the statement. These are identities of sheaf functors, so applying them termwise also gives an isomorphism of complexes.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, section-comparison; sectionwise definition of restriction and direct image (agent calculation)."
+   }
+  },
+  {
+   "text": "Use the composite adjunctions $A_Ul\\dashv rN_U$ and $pA_V\\dashv N_Vs$. Denote their Hom bijections by $\\Phi_1$ and $\\Phi_2$, respectively. The canonical comparison $a^0:A_Ul\\cong pA_V$ is the left-adjoint conjugate of the restriction identity $\\delta$; this is the normalization of the canonical pullback comparison. Explicitly, for $g:pA_VM\\to G$,\n$$\\Phi_1(g\\circ a^0_M)=\\delta_G\\circ\\Phi_2(g).$$\nIndeed the conjugate unit equation gives $rN_U(a^0_M)\\eta_{1,M}=\\delta_{pA_VM}\\eta_{2,M}$; compose with $rN_U(g)$ and use naturality of $\\delta$. This proves the displayed Hom equation from the cited unit equation, rather than assuming compatibility of arbitrary isomorphisms. The termwise-adjunction theorem gives these same adjunctions on complexes, with the ordinary units and counits in each degree. All ensuing equalities hold as chain maps, before passage to homotopy or localization.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65, lemma-transformation-between-functors-and-adjoints, and 0DV0, lemma-compose-counits; derived.tex Tag 0FND, fourth Hom identification."
+   }
+  },
+  {
+   "text": "Let $\\eta^A$ denote the comparison adjunction unit. Since $h=N_U(t)\\eta^A_I$, the transpose of $t\\circ A_U(\\varepsilon^e_I)$ under $A_U\\dashv N_U$ is $h\\circ\\varepsilon^e_I$, by naturality of $\\eta^A$. Its further transpose under $l\\dashv r$ is\n$$r(h)\\circ r(\\varepsilon^e_I)\\circ\\eta^e_{rI}=r(h),$$\nby the triangle identity. On the other hand put $g=\\varepsilon^p_J\\circ p(d):pA_VC\\to J$. Its $p\\dashv s$ transpose is $d$ by the triangle identity, and its further comparison transpose is $N_V(d)\\eta^A_C=k$. Step 2 therefore gives $\\Phi_1(g a^0_C)=\\delta_J k=r(h)=\\Phi_1(t A_U(\\varepsilon^e_I))$. Injectivity of the Hom bijection proves\n$$\\varepsilon^p_J\\circ p(d)\\circ a^0_C=t\\circ A_U(\\varepsilon^e_I),$$\nincluding every degree and differential. This uses precisely $k=\\delta_J^{-1}r(h)$, so the direction of the restriction isomorphism is fixed.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; the composite Hom bijections and triangle identities, calculated for t and d."
+   }
+  },
+  {
+   "text": "Both $l$ and $p$ are exact module inverse images: use the etale module exactness theorem and the pro-etale operations with the constant-ring identification. The comparison functors $A_T$ are exact as well. Consequently their derived functors and pullback comparisons are represented termwise, so the derived comparison $a$ on $QC$ is $Q(a^0_C)$ under the exact-localization identifications. Set $j=t\\circ A_U(i):A_UF[0]\\to J$. Exactness of $A_U$ makes $A_U(i)$ a quasi-isomorphism; hence $j$ is one. The supplied K-injective $I,J$ compute the derived direct images. Denote the canonical resolution isomorphisms by\n$$\\rho_e:QC\\xrightarrow{\\sim}Rr(F),\\qquad \\rho_p:QD\\xrightarrow{\\sim}Rs(A_UF).$$\nTheir augmentations are respectively $i$ and $j$. Computation on any supplied K-injective, not just a prechosen replacement, follows from the K-injective computation theorem; its existence hypothesis is supplied by the ringed-site K-injective existence theorem on the small sites in the statement.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K, lemma-enough-K-injectives-implies; 070Y, lemma-K-injective-defined; 015F, lemma-right-derived-exact-functor. Ringed-site existence: sites-cohomology.tex Tag 07A5, section-unbounded."
+   }
+  },
+  {
+   "text": "Apply the representative formula in the general pre-derived adjunction theorem, with the exact left adjoint computed without replacement. For the etale pair take the right resolution $i:F[0]\\to I$, the left replacement $\\mathrm{id}_C$, and the map $\\mathrm{id}_C:C\\to rI$. For the pro-etale pair take $j:A_UF[0]\\to J$, the left replacement $\\mathrm{id}_{A_VC}$, and the map $d:A_VC\\to sJ$. It gives, under the exact-localization comparisons,\n$$\\varepsilon^e_F\\circ l(\\rho_e)=Q(i)^{-1}\\circ Q(\\varepsilon^e_I),$$\n$$\\operatorname{adj}_p(\\rho_p\\circ Qd)=Q(j)^{-1}\\circ Q(\\varepsilon^p_J\\circ p(d)).$$\nThe cocones in that theorem are precisely the canonical derived-functor comparison followed by inverse derived image of the augmentation; Step 4 identifies them with $\\rho_e,\\rho_p$. Thus these formulas concern the specified derived adjunctions and their counits. They do not choose an unrelated adjunction on the same functors.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, its colimit-of-Hom construction; Tags 0DVC and 09T5 for the resulting canonical adjunction."
+   }
+  },
+  {
+   "text": "Localize the equality of Step 3 and apply Step 5. Since $Qj=Q(t)\\circ A_U(Qi)$, cancellation gives\n$$\\operatorname{adj}_p(\\rho_p Qd)\\circ Q(a^0_C)\n =Q(j)^{-1}Q(t)A_UQ(\\varepsilon^e_I)\n =A_U(\\varepsilon^e_F\\circ l(\\rho_e)).$$\nNaturality of the specified comparison says\n$$pA_V(\\rho_e)\\circ Q(a^0_C)=a_{u,RrF}\\circ A_Ul(\\rho_e).$$\nCombine these equations and cancel the isomorphism $A_Ul(\\rho_e)$ to obtain, for $B=\\rho_p\\circ Qd\\circ A_V(\\rho_e)^{-1}$,\n$$\\operatorname{adj}_p(B)\\circ a_{u,RrF}=A_U(\\varepsilon^e_F).$$\nHence $\\operatorname{adj}_p(B)=A_U(\\varepsilon^e_F)\\circ a_{u,RrF}^{-1}=q_{u,F}$. The canonical-mate node defines $b_{u,F}$ to be the unique transpose of exactly this $q_{u,F}$. Thus $B=b_{u,F}$, which is the claimed identification of $Qd$ and the claimed derived-transpose formula.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; cancellation in the specified counit normalization (agent calculation)."
+   }
+  },
+  {
+   "text": "Fix a degree $n$ and $z\\in C^n(V)=I^n(U)$. The restriction comparison $\\delta$ at the terminal object is the identity, so $k^n_V(z)=h^n_U(z)\\in J^n(U)$. The adjunction equation $N_V(d)\\circ\\eta^A_C=k$ evaluated on this same section gives $d^n(A_V(z))=k^n_V(z)=h^n_U(z)$. Here $A_V(z)$ denotes the section obtained by the comparison unit; the constant-ring unit identification is the one in the site-comparison module adjunction. These computations use no cocycle condition on $z$ and apply in every degree, proving the final clause.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, section-comparison; direct evaluation of restriction and the comparison adjunction unit on the terminal object (agent calculation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-weil-pbc-adjunction-mate",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Opening paragraph: etale-to-pro-etale transport. Detailed composite-adjunction and K-injective representative calculation, using Stacks Tags 0B65, 0DV0, 0FND, 070K."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +181,45 @@
    "results": "Actual hits: CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, PresheafOfModules.pullbackComp; full output read in search-results/.",
    "date": "2026-10-21",
    "verdict": "no match: generic mate identities and derived counit formulas do not identify the site restriction transpose with this normalized derived comparison on replacement complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "(proetale|proEtale).*(mate|counit|resolution)|(mate|counit|resolution).*(proetale|proEtale)",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction and mate formulas do not state the restriction-transpose resolution and terminal-section clauses on these two sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction mate on a bounded below injective resolution with exact comparison functors.",
+   "results": "CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Adjunction.derivedε",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction and mate formulas do not state the restriction-transpose resolution and terminal-section clauses on these two sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction and mate formulas do not state the restriction-transpose resolution and terminal-section clauses on these two sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor mate comparison formula with replacement of the image of an injective complex.",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction and mate formulas do not state the restriction-transpose resolution and terminal-section clauses on these two sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction transpose of direct images on etale and proetale sites computes the canonical derived comparison on injective resolutions.",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction and mate formulas do not state the restriction-transpose resolution and terminal-section clauses on these two sites."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-site-comparison-edge-section",
@@ -81,5 +236,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-comparison-direct-image-resolution-mate",
+  "worker": "stage1",
+  "summary": "Kept the statement; proved the ordinary chain identity by the two composite Hom bijections, computed the two specified derived transposes using the existing general pre-derived adjunction representative formula, and checked terminal sections. No new nodes; no preservation of injectives by comparison inverse image.",
+  "blueprint": "Opening paragraph of prop-pur-gm-relative-kummer.proof.md: transport of units and classes via the canonical comparison; resolves the restriction-chain-map and counit normalization subproblem of lem-pur-site-comparison-edge-section.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic adjunction, exactness, or resolution-computation tool for the specified site-comparison normalization; it does not replace the Kummer computation and the unit contains no equivalent generic interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sf-comparison-pullback-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-de1463500",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-de1463500 (reviewer sub-agent of L); spot-checked: I read the item in full: all 7 steps, every cited statement, and the sources (Stacks categories.tex lemma-transformation-between-functors-and-adjoints at l.3542; the opening paragraph of blueprint main-20261015 prop-pur-gm-relative-kummer.proof.md). Statement and stmt_deps are byte-identical to side-live. There are no new nodes, no repair note, and nothing in route-pivot-dropped. The item is still unsplit on live, so it is not superseded. Step 1: delta is the identity on the sections G(W x_V U) and is linear. Step 2: the conjugate-unit lemma with L1=A_U l, R1=rN_U, L2=pA_V, R2=N_V s gives Phi1(g a0)=delta Phi2(g), and the direction checks. Advisory, inherited: the statement of lem-weil-pbc-comparison-pullback only says 'there is a natural iso'; the normalization 'a0 = conjugate of delta' is in its proof. The Lean def supportSiteComparisonCoefficientPullbackIso is exactly that conjugateIsoEquiv, and the sibling open-unit node states it. Suggest adding the normalization to the comparison-pullback statement. Step 3: I re-derived both transposes, r(h) and k, and injectivity gives the chain identity. Step 4: exactness of l, p and A_T, the termwise derived a=Q(a0), j a quasi-isomorphism, and K-injective computation via kinjective-resolutions-exist plus kinjective-total-derived. No preservation of injectives is assumed. Step 5: checked against the lem-pc-pre-derived-adjoint-functors-general formula with s=i,f=id_C and s=j,f=d, the exact left adjoint taken without replacement; this is the same use accepted in canonical-mate step 9. Step 6: I redid the cancellation; it gives adj_p(B)=q_{u,F}, so B=b_{u,F}. It is not circular. Step 7: the terminal-section evaluation is correct. Edge cases U empty, Lambda=0 and u=id are consistent. The proof-dependency closure (505 nodes) does not reach the item or its parent, so there is no cycle, and no SGA is used. I accept the 9 declared generic tool_uses. Minor: the report mentions a citations.json that is not in the commit. No fixes."
  }
 }
