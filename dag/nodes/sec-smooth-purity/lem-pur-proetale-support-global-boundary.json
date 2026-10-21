@@ -36,9 +36,8 @@
    }
   },
   {
-   "text": "The ringed open-closed lemma supplies the exact left adjoint $j_!$ of $j^*$. Thus $j^*I$ is termwise injective by the right-adjoint injectivity lemma. Exactness of $j^*$ shows that it represents $j^*K$. Both $i_*$ and $j_*$ preserve injectives by the same lemma, since their left adjoints $i^*,j^*$ are exact. The injective support global model says that $i^!_0I$ is termwise injective and represents $SK$. Therefore $\\mathcal E,\\mathcal B,\\mathcal C$ are bounded-below complexes of injectives on $X$. The derived-unit comparisons for such complexes compute $R\\Gamma(X,-)$ by ordinary sections; they compute $R\\Gamma(U,j^*K)$ by $\\Gamma(U,j^*I)$ and $R\\Gamma_Z(X,K)$ by $\\Gamma_Z(X,I)$.",
+   "text": "The injective-support global model provides the support adjunction and preservation of injectives by the closed supported right adjoint. Direct images preserve injectives because their inverse images preserve finite limits. For the open inverse image, the published weakly-etale inverse-image injectivity theorem applies to the open immersion. All three additive functors preserve a common lower bound. Apply the bounded-below injective K-injectivity lemma to the three resulting complexes; their right-derived units therefore compute their derived sections.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
     "def-weil-pbc-proetale-operations",
     "lem-sp-right-adjoint-preserves-injectives",
     "lem-pur-proetale-injective-support-global-model",
@@ -52,9 +51,8 @@
    }
   },
   {
-   "text": "On the chosen small model of the pro-etale site, the complementary open $U\\to X$ is a monomorphism into the terminal object. Apply the ringed-site injective restriction lemma to each $I^r$, with the constant ring sheaf $A_X$: $I^r(X)\\to I^r(U)$ is surjective. This uses injectivity as an $A_X$-module, without asserting injectivity of the underlying abelian sheaf. Set $E=\\Gamma_Z(X,I)$, $F=I(X)$, and $G=\\Gamma(U,j^*I)$. Sections preserve the kernel in step 1, so $0\\to E\\xrightarrow{u_X}F\\xrightarrow{v_X}G\\to0$ is degreewise short exact. The equality $\\Gamma(X,j_*j^*I)=\\Gamma(U,j^*I)$ is the defining section formula for direct image, and identifies $\\Gamma(X,v)$ with restriction.",
+   "text": "Restriction of an injective module sheaf along the site monomorphism U -> X is surjective: the associated map between free module presheaves on representables is monic, sheafification is exact, and injectivity extends the section morphism across that monomorphism. Evaluate the extension at the identity generator. The supported-sections functor is literally the kernel of this restriction, so the row is termwise short exact. The actual open-section comparison uses the open-restriction comparison and the canonical isomorphism X times_X U = U; the adjunction-unit comparison identifies the evaluated sheaf unit with the specified restriction arrow.",
    "uses": [
-    "lem-pur-ringed-site-injective-mono-restriction",
     "def-pur-flasque-support",
     "def-weil-pbc-proetale-operations"
    ],
@@ -65,12 +63,13 @@
    }
   },
   {
-   "text": "Let $P=\\operatorname{Cone}(u)$ with the convention of the statement. Its terms $I^r\\oplus\\mathcal E^{r+1}$ are injective: given a map from a subobject into this finite direct sum, extend each component by injectivity and pair the two extensions. Thus $P$ too is a bounded-below injective complex. The derived-unit comparisons consequently identify $R\\Gamma(X,P)$ with $\\Gamma(X,P)=\\operatorname{Cone}(u_X)$, since sections preserve finite direct sums and the displayed differential matrix. They identify the cone inclusion with the inclusion of $F$ and the third map with $-\\operatorname{pr}_E$, including the shift: sections sends the shifted differential $-d$ to $-d$. The first term is $E$ by the sectionwise supported-kernel comparison. Hence these comparisons identify the entire derived-global cone triangle and its first two arrows, not just its three objects.",
+   "text": "The sheaf short exact sequence splits in every degree because its first term is injective. Map these splittings by evaluation at X; the mapped sequence remains short exact. The degreewise-split boundary theorem identifies each cone-to-quotient boundary with localization of the split connecting chain map. Additivity maps that connecting chain map, including its shift comparison, to the connecting chain map of the evaluated splittings. The unit of the unbounded right derived functor commutes with shifts: restrict it to K-injectives, express it through the K-injective equivalence and its unit, and use the equivalence triangle identity; extend along a K-injective resolution. Naturality and shift compatibility of this unit therefore give a triangle isomorphism from derived evaluation of the sheaf triangle to the quotient triangle of the evaluated row, with the three inverse-derived-unit components.",
    "uses": [
     "def-pur-support-triangle",
     "def-weil-abstract-derived-category",
     "lem-weil-pbc-right-derived-plus-injective",
-    "lem-pur-proetale-injective-support-global-model"
+    "lem-pur-proetale-injective-support-global-model",
+    "lem-sc-p1-split-ses-boundary-comparison"
    ],
    "elementary": false,
    "source": {
@@ -79,11 +78,12 @@
    }
   },
   {
-   "text": "The cone-to-quotient lemma applies to the sheaf sequence of step 1 and the module sequence of step 3. Their comparison maps are respectively $q:P\\to\\mathcal C$, $(b,a)\\mapsto v(b)$, and $q_X:\\operatorname{Cone}(u_X)\\to G$, $(b,a)\\mapsto v_X(b)$, and both are quasi-isomorphisms. The derived-unit comparisons are natural for $q$, so $R\\Gamma(X,q)$ is identified with $\\Gamma(X,q)=q_X$ between the injective models. Inverting these maps identifies the global third arrow with $(-\\operatorname{pr}_E)\\circ q_X^{-1}:G\\to E[1]$. Together with step 4 this gives the asserted identification of the whole support triangle with the global supported-cohomology triangle and the direct-image/sections comparison on its third object.",
+   "text": "The actual open-section comparison gives an isomorphism b from the third evaluated sheaf complex to the open section complex, commuting with restriction. The evaluated sheaf row and the sectionwise-kernel row are short exact. Their universal kernels therefore supply a unique first-term isomorphism a commuting with inclusion, with the identity in the middle. The induced morphism of short complexes gives an isomorphism of their canonical quotient triangles. Compose it with the derived-unit triangle isomorphism of step 4. Both cone quotient maps are quasi-isomorphisms by the short exact cone lemma. The cone homology-boundary comparison identifies the homology boundary of the final quotient triangle with the ordinary snake boundary, conjugated by the canonical localization homology comparisons.",
    "uses": [
     "lem-pc-cone-short-exact-quasi-iso",
     "lem-weil-pbc-right-derived-plus-injective",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-sc-p1-split-ses-boundary-comparison"
    ],
    "elementary": false,
    "source": {
@@ -117,11 +117,10 @@
    }
   },
   {
-   "text": "For a chain map $f:I\\to I\\prime$, restriction and the kernel inclusion give a morphism of the short exact sequences of steps 1 and 3. On cones it is $(b,a)\\mapsto(fb,fa)$; this commutes with $q_X$ and minus projection. On cocycles, $fb$ lifts $fc$ and $d(fb)=f(db)$, giving the boundary square explicitly; the general long-exact-sequence naturality lemma gives the same square. Finally each bounded-below injective complex is K-injective, and morphisms into a K-injective are computed in the homotopy category. Thus every derived morphism between the represented objects is given by such a chain map, uniquely up to homotopy. All additive functors here carry a homotopy to its termwise image, so the comparisons and squares are independent of that representative and natural in $K$, including comparison between two injective resolutions.",
+   "text": "For a chain map f:I -> J, prove naturality of the first-term identifications by composing with the monic sectionwise kernel inclusion. The normalized inclusion squares and naturality of the sheaf support inclusion identify the two composites. Prove naturality of the third-term identifications by precomposing with the epic evaluated sheaf restriction; the normalized restriction squares and naturality of the sheaf unit identify the two composites. Cancel the monomorphism and epimorphism respectively. The boundary supplied in step 7 is already a natural transformation on the whole derived category, so its naturality is built into the normalized-boundary interface. For exactness at an arbitrary bounded-below derived object, choose an injective representative using the injective homotopy-category equivalence and apply injectiveBoundary_exact.",
    "uses": [
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-pur-derived-injective-boundary",
     "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-pur-support-localization-triangle"
    ],
    "elementary": false,
@@ -135,26 +134,23 @@
   "def-pur-flasque-support",
   "lem-pur-support-exact",
   "lem-pur-support-localization-triangle",
-  "lem-weil-pbc-proetale-ringed-open-closed",
   "def-weil-pbc-proetale-operations",
   "lem-sp-right-adjoint-preserves-injectives",
   "lem-pur-proetale-injective-support-global-model",
   "lem-weil-pbc-right-derived-plus-injective",
   "def-pur-support-cohomology",
-  "lem-pur-ringed-site-injective-mono-restriction",
   "def-pur-support-triangle",
   "def-weil-abstract-derived-category",
+  "lem-sc-p1-split-ses-boundary-comparison",
   "lem-pc-cone-short-exact-quasi-iso",
   "lem-pur-derived-injective-boundary",
   "thm-pur-with-support-exactness",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-dplus-injective-representative"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results; derived.tex Tag 014Z, section-canonical-delta-functor for the explicit sign calculation"
+  "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results; derived.tex Tag 014Z, section-canonical-delta-functor for the explicit sign calculation; degreewise-split boundary normalization in derived.tex Tag 0152"
  },
  "mathlib_searches": [
   {
@@ -285,8 +281,6 @@
  "tool_uses": [
   "lem-pur-support-exact",
   "lem-pur-support-localization-triangle",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-pur-ringed-site-injective-mono-restriction",
   "lem-pur-derived-injective-boundary",
   "thm-pur-with-support-exactness"
  ],
@@ -332,5 +326,15 @@
   "group": "Q02",
   "result": "pass",
   "note": "Shape: node changed only in the lean field; statement verbatim; 14 declarations with Source/blueprint docstrings; 6 sorry theorems; defs carry real data. Triangle: RΓ applied to supportModelTriangle is iso to the section-level quotient triangle; components pinned by derived units and by a, b, which mono/epi equations make unique; third arrow is the 014Z −p∘q⁻¹, Mathlib's triangleOfSESδ form; δ clause true and unsigned by Mathlib homologySequenceδ_triangleh. Boundary: ∃ δ SupportSequenceBoundary on all of D⁺, exact, fixed on every injective model, so unique, not an unnormalized existential; cocycle formula [c]↦[db] for all q∈ℤ. Third term RΓ(U,j^*K) via canonical open-section and derived-composition isos. Naturality via comparison squares plus natural units. Edge cases: Z=X, Z=∅, A=0, negative q; no universe restriction beyond the dependency convention. Advisories: statement uses supportedSectionsComplex, injectiveBoundaryRow, supportAMap/supportCMap/SupportComplex, supportedSectionsFunctor from nodes outside stmt_deps; report's claim that the global-model proof dep has no Lean record is out of date (Q62 landed it); proof-only imports not tested one by one; thm-pur-with-support-exactness pro-étale part is A_{E,n}-only (inherited). No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261021T214826-L-1862675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
