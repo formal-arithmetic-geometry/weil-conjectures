@@ -23135,3 +23135,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:07 L: merged deliver/J1/Sheaf.Paper.CondensedLocalizationHom (stage 3; reviewer PASS; first push; landing 20261021T170732-L-2755733 (proof); batch 20261021T170712; modules 1; new nodes 0)
 - 17:07 L: merged deliver/J2/Sheaf.SixFunctors.SchemeGeometricFrobenius (stage 3; reviewer PASS; first push; landing 20261021T170736-L-2756523 (interface); batch 20261021T170712; modules 1; new nodes 0; change records: coord/changes/J2-scheme-geometric-frobenius-proof-context.md)
 - 17:07 L: merged deliver/J6/Sheaf.Paper.CompleteResidueCohomologyBounds (stage 3; reviewer PASS; first push; landing 20261021T170741-L-2756995 (proof); batch 20261021T170712; modules 1; new nodes 0)
+- 17:07 L: merged deliver/N1/Sheaf.Compactification.NagataDensityNormalizationSheaves (stage 3; reviewer PASS; first push; landing 20261021T170746-L-2757382 (proof); batch 20261021T170712; modules 1; new nodes 0)

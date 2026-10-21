@@ -27,135 +27,88 @@
  ],
  "proof": [
   {
-   "text": "The setup gives $\\overline X$ and $Z$ qcqs, $V$ an open with closed complement $i:Z\\hookrightarrow\\overline X$, and $j_Z:X\\hookrightarrow Z$ a quasi-compact open immersion. Quasi-compactness of the morphisms $j_V$ and $j$ is checked as follows. For an affine open $A\\subseteq\\overline X$, [def-weil-open-immersion] identifies $j_V^{-1}(A)$ and $j^{-1}(A)$ with the open subsets $V\\cap A$ and $j(X)\\cap A$ of the Noetherian scheme $\\overline X$; [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes these opens quasi-compact, and [def-weil-finite-type-morphism] then gives that $j_V$ and $j$ are quasi-compact. We read “condensed coefficient ring” in the module-object statement in the commutative sense required by [def-sfb-module-upper-star], [def-sfb-module-lower-star] and [sk-def-sfb-module-lower-shriek]; this is the standing coefficient convention and adds no geometric hypothesis.",
+   "text": "Use the canonical image factorization j_Z ; i = j and the complementary open V from the setup. Noetherianity makes this open complement quasi-compact. The range of j lies in the range of i, so its intersection with V is empty. The square (id_X,j_Z,j,i) is Cartesian because i is a monomorphism: IsPullback.of_horiz_isIso_mono supplies its universal property.",
    "uses": [
-    "det-nagata-density-normalization-setup",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-weil-finite-type-morphism",
-    "def-sfb-module-upper-star",
-    "def-sfb-module-lower-star",
+    "det-nagata-density-normalization-setup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1 and 3: the complementary open and the Cartesian image square"
+   }
+  },
+  {
+   "text": "The existing abelian extension-by-zero vanishing theorem makes j_V^* j_! M zero on underlying abelian sheaves. Apply abelian_closed_support to the complementary pair (i,j_V). This proves that the specified abelian closed unit at j_! M is invertible. On underlying sheaves the specified internal module unit is the abelian unit followed by i_* of the scalar-extension unit. The scalar-extension unit is invertible because alpha_i is an isomorphism: composing it with extendScalarsIsoComapInv is the identity. The module forgetful functor reflects isomorphisms, so the original specified module unit is invertible. This is the private supportedUnit helper, and proves the first clause without changing either adjunction.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "def-sfb-module-upper-lower-adjunction",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 3 and 4: vanishing and the actual supported closed unit"
+   }
+  },
+  {
+   "text": "For a Cartesian open square, the existing abelian open-extension base-change isomorphism identifies the underlying sheaf of g^* j_! M with an object in the image of jprime_!. This abelian isomorphism is the conjugate of weakly-etale base change under the composite adjunctions. The open counit is therefore invertible on that underlying sheaf. The counit of the linearized open adjunction has precisely that underlying map, so is invertible since forgetting reflects isomorphisms. Restriction and coextension along the invertible coefficient map form an equivalence, so its counit is invertible too. Expanding the specified module open adjunction shows that its counit on g^* j_! M is a composite of these invertible maps. The private cartesianCounit helper proves this. Similarly linearization of the fully faithful abelian open extension, followed by the coefficient restriction equivalence, is fully faithful; thus the specified module open unit is invertible (private openUnit).",
+   "uses": [
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-transport",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Step 2: base change used to detect the essential image"
+   }
+  },
+  {
+   "text": "Let t be the original open unit followed by nagataClosurePullbackComparison, as in the required formula. Define alpha componentwise as precisely the transpose displayed in the theorem. Apply the injective adjunction Hom bijection and its left and right naturality equations to reduce naturality of alpha to naturality of t. The private comparisonOfUnits theorem performs this construction for abstract adjunctions, so elaboration does not unfold the large sheaf-operation definitions. Adjunction.homEquiv_counit expresses alpha_M as j_Z,! applied to t_M followed by the open counit. The original open unit and pullback-composition map are invertible, and the counit at i^* j_! M is invertible by the preceding Cartesian argument, so alpha is a natural isomorphism. Set beta = alpha^{-1}. No equality between an arbitrary comparison and the normalized map is assumed.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
     "sk-def-sfb-module-lower-shriek"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 1: geometric quasi-compactness and the retained coefficient convention"
+    "place": "Step 2: the explicitly normalized inverse base-change map"
    }
   },
   {
-   "text": "For $T\\in\\{X,Z,V,\\overline X\\}$ choose the small skeleton and coefficient universes of [def-weil-pbc-proetale-site]. The monoidally stable local equivalences needed by [def-weil-pbc-internal-abelian-sheaf-module-equivalence] are supplied by [det-def-sfb-sheaf-tensor-local-iso](2), for abelian presheaves; [det-def-sfb-sheaf-tensor-structure] supplies the sheaf tensor and strong monoidal sheafification. The pulled-back coefficient object is commutative by [sk-def-sfb-pulled-back-coefficients]. Thus the canonical internal/sectionwise equivalence applies. In particular the internal module category is abelian, since its equivalence with the abelian category of [def-weil-sheaf-of-modules-category] is additive and exact by [lem-sfb-internal-module-operations-transport].",
+   "text": "Whisker the actual closed unit with j_! and convert it to an isomorphism using its proved components. Compose it with i_* of beta. The resulting theta has exactly the component formula in the statement, definitionally. Apply NatTrans.mapHomologicalComplex to this natural isomorphism, and then DerivedCategory.Q.map to each component. Both preserve isomorphisms. These are the very maps in the assertion; no boundedness is used. The stated derived clause is the image of a particular chain map under Q, so it does not require constructing or comparing descended derived functors.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "det-def-sfb-sheaf-tensor-local-iso",
-    "det-def-sfb-sheaf-tensor-structure",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-weil-sheaf-of-modules-category",
-    "lem-sfb-internal-module-operations-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 1: hypotheses for the internal/sectionwise equivalence"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-internal-module-operations-transport] to $j,j_Z,j_V,i$ with the coefficient isomorphisms $\\alpha_f$ of [sk-def-sfb-coefficient-morphisms]. It identifies the internal operations with sectionwise operations and their actual units. Clauses (1) and (2) of [det-sf-open-closed-sequence-ring-sheaf], for $(j_V,i)$ and for $j$ and $j_Z$ with their closed complements, give exact $i_*,j_!,j_{Z,!}$. Its clause (3) then gives the internal-module exact sequence\n$$0\\longrightarrow j_{V,!}j_V^*N\\longrightarrow N\\xrightarrow{\\eta_N}i_*i^*N\\longrightarrow0.$$\nThe map $\\eta_N$ is the specified unit of $i^*\\dashv i_*$, by the unit compatibility in the transport lemma. Exactness of $i^*$ follows from [det-sf-open-closed-pullback-limits](2) by the same transport.",
-   "uses": [
-    "lem-sfb-internal-module-operations-transport",
-    "sk-def-sfb-coefficient-morphisms",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "det-sf-open-closed-pullback-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 1: transport of the exact operations and the localization unit"
-   }
-  },
-  {
-   "text": "The square with top arrow $\\mathrm{id}_X$, bottom arrow $i:Z\\to\\overline X$, and vertical arrows $j_Z,j$ is cartesian by setup clause (3). In the sectionwise module category, clause (4) of [det-sf-open-closed-sequence-ring-sheaf] gives $i^*j_!\\cong j_{Z,!}$ because $Z$ is qcqs. The operation and adjunction compatibility of [lem-sfb-internal-module-operations-transport] carries this canonical base-change transformation to the internal-module pullback and internal extensions by zero. Hence the resulting canonical isomorphism is the module isomorphism $\\beta_M:i^*j_!M\\xrightarrow{\\sim}j_{Z,!}M$, natural in $M$.",
-   "uses": [
-    "det-nagata-density-normalization-setup",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "lem-sfb-internal-module-operations-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 2"
-   }
-  },
-  {
-   "text": "The setup gives $X\\times_{\\overline X}V=\\varnothing$, and $V$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], hence qcqs as in the setup. Apply clause (4) of [det-sf-open-closed-sequence-ring-sheaf] to $g=j_V$ and the open immersion $j$. The pullback open is the empty scheme, so the sectionwise extension by zero is the zero module sheaf. Through the operation comparisons of [lem-sfb-internal-module-operations-transport], this identifies the actual internal pullback $j_V^*j_!M$ with the zero internal module.",
-   "uses": [
-    "det-nagata-density-normalization-setup",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "lem-sfb-internal-module-operations-transport",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 3"
-   }
-  },
-  {
-   "text": "Apply the internal-module exact sequence from Step 3 to $N=j_!M$. Step 5 makes its first term zero, so $0\\to j_!M\\xrightarrow{\\eta_M}i_*i^*j_!M\\to0$. The category of sectionwise module sheaves of [def-weil-sheaf-of-modules-category] is abelian, and the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] makes the internal category $\\Mod_{\\Lambda_{\\overline X}}$ abelian with exact sequences corresponding (an equivalence of additive categories preserves kernels and cokernels); hence this unit is a monomorphism and an epimorphism in an abelian category, i.e. an isomorphism. It is the specified unit of $i^*\\dashv i_*$ by the identification in Step 3, rather than a unit from a different sectionwise adjunction. Composing it with $i_*\\beta_M$ gives the required natural isomorphism $j_!M\\xrightarrow{\\sim}i_*j_{Z,!}M$.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
     "def-sfb-module-upper-lower-adjunction",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-sfb-internal-module-operations-transport"
+    "def-sfb-module-lower-star",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 4"
-   }
-  },
-  {
-   "text": "For an arbitrary integer-indexed complex $K$, apply the natural isomorphism $\\theta=i_*\\beta\\circ\\eta$ in each degree. Naturality gives $\\theta_{K^{n+1}}j_!(d^n)=i_*j_{Z,!}(d^n)\\theta_{K^n}$; composing with inverse components shows that the inverses also commute with differentials. This is an isomorphism of complexes. By exactness from Step 3, [lem-weil-pbc-exact-functor-derived-factorization] applies to each of $j_!,j_{Z,!},i_*$ on the abelian module categories, with no boundedness assumption. These termwise functors preserve quasi-isomorphisms. Clause (2) of [lem-weil-pbc-localization-universal-property] descends the chain natural isomorphism to the localization of [def-weil-abstract-derived-category], giving exactly $j_!K\\simeq i_*j_{Z,!}K$ in the asserted unbounded derived category.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Step 5"
+    "place": "Steps 4 and 5: canonical composition and its termwise and localized images"
    }
   }
  ],
  "proof_deps": [
   "def-sfb-module-lower-star",
   "def-sfb-module-upper-lower-adjunction",
-  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-star-comp",
   "def-weil-abstract-derived-category",
-  "def-weil-finite-type-morphism",
-  "def-weil-open-immersion",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-pbc-proetale-site",
-  "def-weil-sheaf-of-modules-category",
-  "det-def-sfb-sheaf-tensor-local-iso",
-  "det-def-sfb-sheaf-tensor-structure",
   "det-nagata-density-normalization-setup",
-  "det-sf-open-closed-pullback-limits",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-sfb-internal-module-operations-transport",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "sk-def-sfb-change-of-scalars",
   "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-pulled-back-coefficients"
+  "sk-def-sfb-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-  "place": "Steps 1–5, with explicit geometric, coefficient and localization hypotheses"
+  "place": "Steps 1–5; direct lift of the existing abelian support and Cartesian essential-image results, with the original unit/counit-normalized maps. N1, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -316,13 +269,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "det-def-sfb-sheaf-tensor-local-iso"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -353,5 +300,15 @@
   "group": "Q106",
   "result": "pass",
   "note": "Read the item, all 11 stmt_dep records and both modules, plus the framework UpperLowerStar/LowerShriek/OpenClosed and Compactification sources. Clauses match: actual unit of upperStarLowerStarAdjunction(imageι) on j_!M is iso; β pinned via its inverse = j_Z,!⊣j_Z^* transpose of the j_!⊣j^* unit ≫ (eqToIso ≪≫ upperStarComp), the canonical base-change mate, so unique; θ = η ≫ i_*β; degreewise mapHomologicalComplex IsIso for unbounded ℤ complexes and the same map through DerivedCategory.Q. No added hypotheses ([IsNoetherian c.Z] only; toImage open immersion from Mathlib qc instance; IsCommMonObj is the accepted convention); framework universes; edge cases X=∅, j=id, non-reduced image, Λ=0 OK. lean.statement verbatim; only the lean field changed; sorry only; docstrings OK; no whole-item duplicate. Setup module, pruned by U 10-20 as dead, restored with the previously recorded statement (§1(B), Q42 precedent). Maintainer notes: item, unit, setup and pushforward sibling are all flagged unreachable live, so this should not have been a stage-2 item and U may prune both modules again; the Second reading section is in-thread only. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T170746-L-2757382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
