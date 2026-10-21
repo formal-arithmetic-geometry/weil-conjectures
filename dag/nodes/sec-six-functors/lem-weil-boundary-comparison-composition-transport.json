@@ -24,7 +24,8 @@
   "lem-sf-class-compact-support-comparison",
   "def-weil-pbc-etale-origin-witness",
   "lem-pur-bounded-site-adjunction-transpose",
-  "lem-pe-constant-left-module-inverse-image"
+  "lem-pe-constant-left-module-inverse-image",
+  "def-pur-conventions"
  ],
  "proof": [
   {
@@ -272,5 +273,42 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-e1ee1ded8 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are unchanged from the live side node, which is unsplit (a first split, not a re-split answer). The item is not on the drop list, the delivery adds no new nodes, and there is no cycle; its only citer is lem-weil-boundary-dualizing-composition, whose step 4 uses exactly the formula and normalization stated here. I checked the sources: BS Cor 5.1.6 (p. 35) proves the unit invertible only on D^+, and Rem 5.1.8 shows it fails for unbounded inputs, so the item correctly keeps every input in D^+. The cited statements say what the steps take from them. thm-weil-pbc-site-comparison applies because A=O_E/ϖ^n is a finite ring. In lem-pur-bounded-site-adjunction-transpose, Φ, ρ, B, the counit equation and the f^×K∈D^+ hypothesis match the item's R_h D^+ assumption. lem-pe-constant-left-module-inverse-image gives S_BA_e≅A_p. I redid steps 1–9 myself: the inverse ρ, the types in Ξ^{-1}v=Q_f(r)b S_X(t), the LHS reduction through step 2 at gf, the naturality of μ_f at r, and the three B-naturality squares at ε_{f,R_gH}, t and F_f t, all correctly oriented. Each object involved is in D^+ by the F/R hypotheses, and the result equals the mate normalization. Edge cases hold: identity B and ρ reduce the identity to the étale mate, f=id needs no extra input, H=0 or empty schemes give zero maps, and n=1 uses no field property. I accept the 4 declared tool_uses (site comparison, derived-pullback definition, bounded transpose, constant inverse image). No SGA source is cited. The searches are recorded, the steps are at most 715 characters, and I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryComparisonCompositionTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.F",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.rightPlus",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.leftPlus",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.Q",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.qObject",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.mu",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.S",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.support",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.B",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.originSource",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.originTarget",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.Leg.Normalized",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.constantEtalePlus",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.constantIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.transport"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryComparisonCompositionTransport.lean",
+  "statement": "theorem transport (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y B : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact aB] (f : X ⟶ Y) (g : Y ⟶ B) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (hf : f ≫ aY = aX) (hg : g ≫ aB = aY) (Lf : Leg P f) (Lg : Leg P g) (Lgf : Leg P (f ≫ g)) (alpha : _root_.DerivedCategory.Plus.ι ⋙ Lf.F ⋙ Lg.F ≅ _root_.DerivedCategory.Plus.ι ⋙ Lgf.F) (theta : _root_.DerivedCategory.Plus.ι ⋙ Lgf.right ≅ _root_.DerivedCategory.Plus.ι ⋙ Lg.right ⋙ Lf.right) (mate : ∀ H : DerivedCategory.Plus (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)), alpha.hom.app (Lgf.rightPlus.obj H) ≫ Lgf.adjunction.counit.app H.obj = Lg.F.map (Lf.F.map (theta.hom.app H)) ≫ Lg.F.map (Lf.adjunction.counit.app (Lg.right.obj H.obj)) ≫ Lg.adjunction.counit.app H.obj) : Lf.Normalized aX aY hf ∧ Lg.Normalized aY aB hg ∧ Lgf.Normalized aX aB ((Category.assoc f g aB).trans ((congrArg (fun t ↦ f ≫ t) hg).trans hf)) ∧ ∃ (rf : Lf.originSource ≅ Lf.originTarget) (rg : Lg.originSource ≅ Lg.originTarget) (rgf : Lgf.originSource ≅ Lgf.originTarget), (∀ J, rf.hom.app J = boundedSiteRho P.Coefficient Lf.right J.obj) ∧ (∀ J, rg.hom.app J = boundedSiteRho P.Coefficient Lg.right J.obj) ∧ (∀ J, rgf.hom.app J = boundedSiteRho P.Coefficient Lgf.right J.obj) ∧ ∃ (Xi : _root_.DerivedCategory.Plus.ι ⋙ S P B ⋙ Lg.Q ⋙ Lf.Q ≅ _root_.DerivedCategory.Plus.ι ⋙ S P B ⋙ Lgf.Q) (alphaP : _root_.DerivedCategory.Plus.ι ⋙ S P X ⋙ Lf.support ⋙ Lg.support ≅ _root_.DerivedCategory.Plus.ι ⋙ S P X ⋙ Lgf.support), (∀ H, Xi.hom.app H = Lf.Q.map (rg.inv.app H) ≫ rf.inv.app (Lg.rightPlus.obj H) ≫ (S P X).map (theta.inv.app H) ≫ rgf.hom.app H) ∧ (∀ G, alphaP.hom.app G = Lg.support.map (Lf.B.inv.app G) ≫ Lg.B.inv.app (Lf.leftPlus.obj G) ≫ (S P B).map (alpha.hom.app G) ≫ Lgf.B.hom.app G) ∧ (∀ H, alphaP.hom.app (Lgf.rightPlus.obj H) ≫ Lgf.support.map (rgf.hom.app H) ≫ Lgf.mu aX aB ((Category.assoc f g aB).trans ((congrArg (fun t ↦ f ≫ t) hg).trans hf)) ((siteComparisonDerivedPullbackPlus B P.Coefficient).obj H) = Lg.support.map (Lf.support.map (rgf.hom.app H ≫ Xi.inv.app H)) ≫ Lg.support.map (Lf.mu aX aY hf (Lg.qObject aY aB hg ((siteComparisonDerivedPullbackPlus B P.Coefficient).obj H))) ≫ Lg.mu aY aB hg ((siteComparisonDerivedPullbackPlus B P.Coefficient).obj H)) ∧ (Lg.Q ⋙ Lf.Q).map (constantIso P B).inv ≫ Xi.hom.app (constantEtalePlus P B) ≫ Lgf.Q.map (constantIso P B).hom = Lf.Q.map (Lg.Q.map (constantIso P B).inv ≫ rg.inv.app (constantEtalePlus P B)) ≫ rf.inv.app (Lg.rightPlus.obj (constantEtalePlus P B)) ≫ (S P X).map (theta.inv.app (constantEtalePlus P B)) ≫ (rgf.hom.app (constantEtalePlus P B) ≫ Lgf.Q.map (constantIso P B).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The given three compactifications and ambient etale adjunctions are packaged as Leg. Q is the explicit U-right-S composite for these specified adjoints; rho and mu reuse boundedSiteRho and boundedSiteCounit. Natural isomorphisms are existentially specified by their exact component formulas. The constant specialization uses the canonical degree-zero comparison, not an arbitrary isomorphism. PurityFiniteSetting bundles the recorded field and finite coefficient datum with its standard universe lift."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46efc3d64",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Each node clause matches the Lean. Setting: PurityFiniteSetting (k alg. closure of F_q, l≠p, E finite, level≥1; landed def-pur-conventions added to stmt_deps, which is allowed). X/Y/B and f/g separated finite type via instances. Leg holds the compactification, dimension bound, given right adjoint R_h with its adjunction, and the two D+ preservation assumptions, nothing more. alpha/theta/mate match the node's mate normalization. rho pinned to boundedSiteRho; B = compactSupportSiteComparison.symm (oriented S F→P S, checked in source); mu = boundedSiteCounit (inverse Hom transpose at identity, identity witness); Xi and alphaP pinned by their exact four-factor formulas; the pasted-counit identity is a genuine equation needing mate. The A_e clause is canonical (single-functor commutation to P.constant B = ν^*A_e) and is the node's own definitional specialization. Edge cases (empty schemes, n=1, f or g identity, H=0) covered; universes u/u+1 as in the landed dependency. Single sorry, no hollow defs, docstrings with source places and 9 proof steps, no line >100, record statement verbatim, only the item node changed. Advisories: redundant imports of dependency-record and proof modules; fixed-scalar pro-etale compact support is forced by the landed lem-pur-bounded-site-adjunction-transpose. No compile run (no files changed)."
  }
 }
