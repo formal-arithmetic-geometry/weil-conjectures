@@ -1,0 +1,92 @@
+{
+ "id": "lem-pur-good-truncation-exact-normalization",
+ "kind": "statement",
+ "title": "Good-truncation normalization and exact-functor compatibility",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be abelian categories [def-sp-abelian] with ordinary derived categories $D(\\mathcal C),D(\\mathcal D)$, localization functors $Q$, and cohomology functors $H^a$ [def-weil-abstract-derived-category]. Write $S_{\\mathcal C}(B)=B[0]$ for the single-complex functor, and use good truncations [def-kun-truncations]. Let $\\mathcal Z_{\\mathcal C}$ be the full subcategory of objects $K$ with $H^a(K)=0$ for $a\\ne0$; define $\\mathcal Z_{\\mathcal D}$ similarly.\nFor every representing complex $C^\\bullet$ of $K\\in\\mathcal Z_{\\mathcal C}$, let $c_C:\\tau_{\\le0}C\\to C$ be the truncation inclusion and let $p_C:\\tau_{\\le0}C\\to H^0(C)[0]$ have degree-zero component $\\ker d_C^0\\twoheadrightarrow\\ker d_C^0/\\operatorname{im}d_C^{-1}$ and zero components elsewhere. Both maps are quasi-isomorphisms, and, under the canonical comparison $H^0(QC)\\cong H^0(C)$, the formula\n$$\\epsilon_{QC}=Q(p_C)\\circ Q(c_C)^{-1}$$\ndefines a representative-independent natural isomorphism $\\epsilon_K:K\\xrightarrow{\\sim}S_{\\mathcal C}H^0(K)$ on $\\mathcal Z_{\\mathcal C}$. In particular, for every derived morphism $a:K\\to L$ in this subcategory,\n$$\\epsilon_L\\circ a=S_{\\mathcal C}(H^0(a))\\circ\\epsilon_K.$$\nFor $K,L\\in\\mathcal Z_{\\mathcal C}$, $a\\mapsto H^0(a)$ is a bijection from $\\operatorname{Hom}_{D(\\mathcal C)}(K,L)$ to $\\operatorname{Hom}_{\\mathcal C}(H^0(K),H^0(L))$; equivalently $H^0(a)$ is the unique $b$ with $S_{\\mathcal C}(b)=\\epsilon_La\\epsilon_K^{-1}$.\nLet $F:\\mathcal C\\to\\mathcal D$ be additive and preserve finite limits and colimits, and let $D(F)$ be its termwise derived functor [lem-sf-exact-functor-derived-triangulated]. Let $\\chi_{F,K}:FH^0(K)\\xrightarrow{\\sim}H^0(D(F)K)$ be induced by preservation of kernels, images and quotients, and let $\\sigma_{F,B}:D(F)S_{\\mathcal C}(B)\\xrightarrow{\\sim}S_{\\mathcal D}(FB)$ be the termwise single-complex comparison. Then $D(F)$ sends $\\mathcal Z_{\\mathcal C}$ into $\\mathcal Z_{\\mathcal D}$ and\n$$\\epsilon_{D(F)K}=S_{\\mathcal D}(\\chi_{F,K})\\circ\\sigma_{F,H^0(K)}\\circ D(F)(\\epsilon_K),$$\n$$H^0(D(F)a)\\circ\\chi_{F,K}=\\chi_{F,L}\\circ F(H^0(a)).$$\nFor identity functors these comparisons are identities under the canonical identification $D(\\operatorname{id})\\cong\\operatorname{id}$; for two composable exact functors their comparisons are the composites of the individual comparisons under the canonical termwise derived-composition isomorphism. The assertions also hold in the zero abelian category.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118, section-truncations, canonical cochain truncation at zero; Derived Categories Tag 06XS, lemma-negative-exts (2). Agent-formulated normalization and exact-functor compatibility, with inherited derivation and further localization references in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The good truncation roof identifies a derived object concentrated in degree zero naturally with its zeroth cohomology and commutes with exact functors",
+   "results": "[leanfinder] OK 8 hit(s). Read hits: CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.quasiIso_πTruncGE_iff; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.quasiIso_ιTruncLE_iff; CochainComplex.isIso_πTruncGE_iff; CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE; CochainComplex.isIso_ιTruncLE_iff; CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism from a complex with only zeroth cohomology to its single cohomology complex using cycles modulo boundaries is natural under exact additive functors",
+   "results": "[leanfinder] OK 8 hit(s). Read hits: DerivedCategory.singleFunctorCompHomologyFunctorIso; HomologicalComplex.homologyFunctorSingleIso; CochainComplex.isoHomologyπ₀; HomologicalComplex.singleObjCyclesSelfIso_hom_naturality_assoc; HomologicalComplex.homologyFunctorSingleIso_hom_app; HomologicalComplex.singleObjCyclesSelfIso_hom_naturality; HomologicalComplex.singleObjHomologySelfIso_hom_naturality; HomologicalComplex.singleObjHomologySelfIso_hom_naturality_assoc. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*[Hh]omology|[Hh]omology.*truncLE|mapDerivedCategorySingleFunctor",
+   "results": "[grep] OK 16 hit(s). Read hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:112; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:130; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:132; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:134; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:141; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:85; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:87; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:96; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:99; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:114; Mathlib/Algebra/Homology/Embedding/AreComplementary.lean:8; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean:9; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean:43; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean:50; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean:58; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean:65. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor|truncLE|homologyFunctor",
+   "results": "[grep] OK 5 hit(s). Read hits: 67:    have h ; 68:    refine ⟨Q.obj (K.truncLE 0), Q.obj (K.truncGE 1),; 70:      Q.map (K.ιTruncLE 0) ≫ e₂.hom, e₂.inv ≫ Q.map (K.πTruncGE 1),; 71:      inv (Q.map (K.shortComplexTruncLEX₃ToTruncGE 0 1 (by lia))) ≫ (triangleOfSES h).mor₃,; 74:      (asIso (Q.map (K.shortComplexTruncLEX₃ToTruncGE 0 1 (by lia)))) ?_ ?_ (by simp). Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural degree zero cohomology identification via good truncation is compatible with exact functors between abelian categories",
+   "results": "[leansearch] OK 8 hit(s). Read hits: CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.Abelian.Ext.mapExactFunctor_zero; CategoryTheory.instIsIsoFunctorFromLeftDerivedZero; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.Functor.leftDerivedZeroIsoSelf; CategoryTheory.Functor.fromLeftDerivedZero; CategoryTheory.instIsIsoAppFromLeftDerivedZero. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE, DerivedCategory.singleFunctor",
+   "results": "[loogle] OK 0 hit(s). Read hits: none. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "[loogle] OK 12 hit(s). Read hits: CochainComplex.truncLE; CochainComplex.acyclic_truncLE_iff; CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE; CochainComplex.isIso_ιTruncLE_iff; CochainComplex.truncLEXIsoCycles; CochainComplex.truncLEXIso; CochainComplex.instQuasiIsoAtIntιTruncLE; CochainComplex.ιTruncLE; CochainComplex.quasiIsoAt_ιTruncLE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.quasiIso_ιTruncLE_iff; CochainComplex.truncLEMap. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-degree-zero-derived-map-gluing",
+  "date": "2026-10-21",
+  "group": "Q36"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Statement of cor-pur-dualizing-object-purity: Every map involved was normalized by the Kummer generator; proof inverse diagonal identification, via lem-pur-vector-integration-site-comparison Step 9 and old lem-pur-degree-zero-derived-map-gluing Steps 4--6 (cycles-to-cohomology roof, localization naturality, exact restriction and the Hom correspondence).",
+   "via": [
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

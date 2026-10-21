@@ -1,0 +1,98 @@
+{
+ "id": "lem-pur-open-cover-cohomology-detection",
+ "kind": "statement",
+ "title": "Open-site cohomology comparisons and Zariski vanishing detection",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a finite commutative ring, and $T_\\tau$ either its small etale or its small pro-etale site [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], using small representatives in a common coefficient universe [def-weil-size-convention]. Let $A_T$ denote the constant sheaf of rings [def-weil-pbc-constant-sheaf]. Use module sheaves [def-weil-sheaf-of-modules-category] and their ordinary unbounded derived category $D(T_\\tau,A)$ [def-weil-abstract-derived-category], with cohomology sheaves $\\mathcal H^a$ [def-weil-derived-cohomology-sheaves]. Let $(U_i)_{i\\in I}$ be any set-indexed Zariski open cover of $T$.\nFor every open $U\\subseteq T$, the functor $(V\\to U)\\mapsto(V\\to T,V\\to U)$ identifies $U_\\tau$ with the localized site $T_\\tau/U$ [def-pur-localized-ringed-site], including its topology. Under this identification there is a canonical ring isomorphism $A_U\\cong A_T|_U$, the identity on constant sections, and restriction of module sheaves is the exact sectionwise functor $F|_U(V\\to U)=F(V\\to T)$. These identifications respect iterated open restriction. The family $(U_i\\to T)$ is a cover on $T_\\tau$, and for every object $V\\to T$ its pullback $(V\\times_T U_i\\to V)$ is a cover on $V_\\tau$ and on the corresponding localized site.\nWriting $r_U$ for this exact restriction and $D(r_U)$ for its termwise derived functor [lem-sf-exact-functor-derived-triangulated], there are canonical isomorphisms\n$$\\chi^a_{U,K}:r_U\\mathcal H^a(K)\\xrightarrow{\\sim}\\mathcal H^a(D(r_U)K)$$\nfor every $a\\in\\mathbf Z$ and $K\\in D(T_\\tau,A)$. They are induced by the kernel, image and quotient comparisons, are natural for all derived morphisms, and agree with the composite comparisons for nested opens. For every module sheaf $F$ one has $F=0$ if and only if $r_{U_i}F=0$ for every $i$. Consequently, for every integer $a$,\n$$\\mathcal H^a(K)=0\\quad\\Longleftrightarrow\\quad\\mathcal H^a(D(r_{U_i})K)=0\\text{ for every }i.$$\nThese assertions include $T=\\varnothing$ and the empty covering family; in that case every module sheaf is zero.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IX, definition-localize-ringed-site, part (4); Sites Tag 00VR, definition-sheaf. Agent-formulated combination with the two small-site localization equivalences; source details and the full inherited argument are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-localized-ringed-site",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Zariski open restriction on small etale and proetale module sheaves commutes with derived cohomology and detects vanishing of cohomology sheaves",
+   "results": "[leanfinder] OK 8 hit(s). Read hits: Algebra.etaleLocus_eq_compl_support; Algebra.basicOpen_subset_etaleLocus_iff; CategoryTheory.Sheaf.H; Algebra.FormallyEtale.of_restrictScalars; CategoryTheory.Sheaf.cohomologyPresheaf; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Zariski open cover is a covering on the small pro etale site and restriction of constant module sheaves gives natural cohomology comparisons and detects acyclicity",
+   "results": "[leanfinder] OK 8 hit(s). Read hits: AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.subcanonical_zariskiTopology; SheafOfModules.QuasicoherentData.coversTop; LightProfinite.instWEqualsLocallyBijectiveCoherentTopology; AlgebraicGeometry.Scheme.AffineZariskiSite.instIsLocallyFullOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat; TopCat.Presheaf.generateEquivalenceOpensLe; AlgebraicGeometry.Scheme.zero_of_zero_cover. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|isZero.*[Rr]estrict|[Rr]estrict.*isZero",
+   "results": "[grep] OK 0 hit(s). Read hits: none. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor|mapDerivedCategory",
+   "results": "[grep] OK 5 hit(s). Read hits: 16:`F.mapDerivedCategory ; 36:noncomputable def mapDerivedCategory ; 39:/-- The functor `F.mapDerivedCategory` is induced; 41:noncomputable def mapDerivedCategoryFactors ; 42:    DerivedCategory.Q ⋙ F.mapDerivedCategory ≅. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology sheaves commute with localization restriction on a site and vanishing is detected by an open cover",
+   "results": "[leansearch] OK 8 hit(s). Read hits: CategoryTheory.Sheaf.ΓRes; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec; TopCat.Presheaf.IsSheafOpensLeCover; TopCat.Presheaf.SheafConditionEqualizerProducts.w; AlgebraicGeometry.Γ_restrict_isLocalization; CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; ModuleCat.Tilde.openToLocalization; AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, homologyFunctor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.mapDerivedCategory'. Read hits: none. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "[loogle] OK 12 hit(s). Read hits: DerivedCategory.homologyFunctor; DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt; DerivedCategory.instIsHomologicalHomologyFunctor; DerivedCategory.shift_homologyFunctor; DerivedCategory.HomologySequence.δ; DerivedCategory.isIso_iff; DerivedCategory.homologyFunctorFactors; DerivedCategory.HomologySequence.exact₁; DerivedCategory.HomologySequence.exact₃; DerivedCategory.HomologySequence.exact₂; DerivedCategory.homologyFunctorFactorsh; DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-degree-zero-derived-map-gluing",
+  "date": "2026-10-21",
+  "group": "Q36"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Statement of cor-pur-dualizing-object-purity: Every map involved was normalized by the Kummer generator; proof inverse diagonal identification, via lem-pur-vector-integration-site-comparison Step 9 and old lem-pur-degree-zero-derived-map-gluing Steps 1--3 (site/coefficient localization, pulled-back covers, natural cohomology comparison and zero detection).",
+   "via": [
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
