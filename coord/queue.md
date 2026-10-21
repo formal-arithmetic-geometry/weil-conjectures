@@ -42,8 +42,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-trivial-ladic-derived-exterior` | 4012 | none |
 | `lem-sfb-snc-tame-root-etale-extension` | 4013 | none |
 | `lem-sfb-wcontractible-component-derived-hom` | 4013 | none |
-| `lem-sfb-indfinite-contractible-base-wstrict` | 4014 | none |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 4014 | none |
+| `lem-sfb-filtered-colimit-strictly-henselian-local` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (29)
@@ -62,6 +62,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
 | `lem-sfb-discrete-lattice-koszul-resolution` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
+| `lem-sfb-indfinite-contractible-base-wstrict` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-finite-comparison` | 1 | state | 0 |
@@ -74,7 +75,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sp-finite-coefficient-input-models` | 1 | state | 0 |
 | `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
-| `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 | `lem-wf-tate-twist-compatibility` | 2 | state | 0 |
