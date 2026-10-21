@@ -36,191 +36,86 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-continuous-coefficients-immersion-restriction], the rings in the statement are precisely the completed integral and continuous rational coefficient sheaves, $E_T=A_T[1/\\varpi]$, and restriction to any locally closed subscheme identifies the two coefficient rings with the corresponding rings there. Write $S(M)=E_T\\otimes_{A_T}M=M[1/\\varpi]$. As an underlying abelian sheaf this is the filtered colimit of $M\\xrightarrow{\\varpi}M\\xrightarrow{\\varpi}\\cdots$: the class of $m$ at stage $n$ is $m/\\varpi^n$, and the transition relation is precisely the fraction relation. The two colimit nodes identify module colimits with the underlying abelian colimits and make this functor exact. Restriction of scalars from $E_T$ to $A_T$ is exact because kernels and cokernels have their underlying abelian sheaves.",
+   "text": "Write $S(M)=E_T\\otimes_{A_T}M$. The coefficient theorem gives $E_T=A_T[1/\\varpi]$. The fraction relation expresses $S$ as the sequential colimit of multiplication by $\\varpi$; the two colimit nodes make it exact. For constructible integral $P,Q$, the integral characterization puts $P[0]$ in the bounded constructible complete category. The Hom-sum lemma verifies the countable bounded-below Hom hypothesis of the scalar-localization theorem. Apply the latter with $K=P[0],L=Q[0],q=1$ and [def-pc-ext]. It yields $\\operatorname{Ext}^1_{A_T}(P,Q)[1/\\varpi]\\cong\\operatorname{Ext}^1_{E_T}(SP,SQ)$, with $\\alpha/\\varpi^m\\mapsto\\varpi^{-m}S\\alpha$. Thus the integral extension criterion applies to every such pair on $T$ and on its noetherian finite-dimensional locally closed subschemes with $\\ell$ invertible.",
    "uses": [
     "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2; setup for the final paragraph of Lemma 6.8.13"
-   }
-  },
-  {
-   "text": "For constructible integral sheaves $P,Q$ as in the statement, [lem-weil-pbc-integral-stratified-perfect-characterization] puts $P[0],Q[0]$ in the bounded constructible complete category. Scalar extension $S$ is left adjoint to restriction of scalars $U$: the adjunction sends $\\phi$ to $m\\mapsto\\phi(1\\otimes m)$, with inverse $\\psi\\mapsto(e\\otimes m\\mapsto e\\psi(m))$. Both functors are exact by step 1. Apply [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] to identify their derived functors with termwise application. The derived adjunction [lem-pc-pre-derived-adjoint-functors-general] consequently gives $\\operatorname{Hom}_{D(E_T)}(S(P),S(Q)[1])\\cong\\operatorname{Hom}_{D(A_T)}(P,U S(Q)[1])$. The essential-constancy requirements of that node hold because exact functors invert every quasi-isomorphism, so all objects in each resolution diagram map isomorphically to its value on the original complex.",
-   "uses": [
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-weil-pbc-integral-constructible-hom-sums",
+    "lem-weil-pbc-scalar-localization-derived-hom",
+    "def-pc-ext",
+    "lem-weil-pbc-integral-models-extension-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
+    "place": "Lemmas 6.8.12 and 6.8.13, Ext formula in the last paragraph"
    }
   },
   {
-   "text": "Apply [lem-kun-complex-colimit-hocolim] to the sequence of $A_T$-module complexes $Q[0][1]\\xrightarrow{\\varpi}Q[0][1]\\to\\cdots$. Its termwise colimit is $U S(Q)[1]$ by step 1. Thus, with $B=\\bigoplus_{n\\geq0}Q[1]$ and $s\\iota_n=\\iota_{n+1}\\varpi$, there is the distinguished telescope triangle $B\\xrightarrow{1-s}B\\to U S(Q)[1]\\to B[1]$. The cited node supplies both the derived coproduct universal property and the cone-to-colimit quasi-isomorphism; the transition maps need not be injective.",
+   "text": "Use the closed-subsets-minimal theorem to induct over reduced induced closed subschemes $X\\subseteq T$, for every lisse rational sheaf on each $X$. Such $X$ is noetherian (ideal chains in an affine quotient lift to ideal chains upstairs), finite-dimensional (closed irreducible chains remain chains in $T$), and $\\ell$-coprime (an inverse maps to an inverse). Empty support has the zero model. For nonempty $X$, the reduced-open lemma gives a nonempty quasi-compact open $U$ with a lisse integral model $M_U$. The reduced induced closed complement $i:Z\\hookrightarrow X$ has strictly smaller support. The sheaf $i^{-1}L$ is lisse on $Z$: the inverse image of a pro-etale covering of $X$ trivializing $L$ is a pro-etale covering of $Z$, inverse image commutes with finite direct sums and with restriction to its members, and the coefficient theorem identifies $i^{-1}E_X$ with $E_Z$. So induction supplies a constructible integral model $M_Z$ of $i^{-1}L$, with $S_Z(M_Z)\\cong i^{-1}L$. A lisse finite free model is constructible using the single stratum and its local free modules.",
    "uses": [
-    "lem-kun-complex-colimit-hocolim"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
-   }
-  },
-  {
-   "text": "We identify the cohomology of global derived Hom with derived morphisms. For any $M$ and integer $r$, [lem-pur-derived-internal-hom-shift-right] identifies $R\\mathcal Hom(P,M)[r]$ with $R\\mathcal Hom(P,M[r])$. Derived sections commute with this shift: a K-injective resolution $I$ can be shifted by [lem-weil-pbc-kinjective-shift], and termwise sections give $\\Gamma(I[r])=\\Gamma(I)[r]$. Taking $H^0$ and applying [lem-pur-rhom-global-sections] therefore yields the natural identification $H^r R\\operatorname{Hom}_{A_T}(P,M)=\\operatorname{Hom}_{D(A_T)}(P,M[r])$. This uses global derived Hom as defined in [def-weil-pbc-adic-global-derived-hom], not sheaf-valued internal Hom.",
-   "uses": [
-    "lem-pur-derived-internal-hom-shift-right",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-pur-rhom-global-sections",
-    "def-weil-pbc-adic-global-derived-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-integral-constructible-bounded-below-compactness] to the copies of $Q[1]$ and to the copies of $Q[2]$. Each family has a common lower cohomological bound, respectively $-1$ and $-2$; no global compactness in the unbounded derived category is claimed. Taking degree zero and using the preceding identification gives the two bijections $\\bigoplus_n\\operatorname{Hom}(P,Q[1])\\cong\\operatorname{Hom}(P,B)$ and $\\bigoplus_n\\operatorname{Hom}(P,Q[2])\\cong\\operatorname{Hom}(P,B[1])$. To take degree zero of the coproduct of $A$-module complexes, use [lem-kun-derived-countable-sums-exact]: termwise sums represent derived sums. Their cohomology is the sum of the cohomologies, since exact sums preserve the short exact sequences defining cycles, boundaries and the quotients of cycles by boundaries. The shift $[1]$ preserves coproducts because its inverse is $[-1]$, identifying the second target with the indicated $B[1]$.",
-   "uses": [
-    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-    "lem-kun-derived-countable-sums-exact",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
-   }
-  },
-  {
-   "text": "The preceding two comparisons are exactly the hypotheses of [lem-weil-pbc-sequence-relative-hom-telescope] for $K=P[0]$ and $X_n=Q[0][1]$. Apply it to the telescope above, then use the derived adjunction and [def-pc-ext], to obtain\n$$\\varinjlim\\bigl(\\operatorname{Ext}^1_{A_T}(P,Q)\\xrightarrow{\\varpi}\\operatorname{Ext}^1_{A_T}(P,Q)\\to\\cdots\\bigr)\\cong\\operatorname{Ext}^1_{E_T}(S(P),S(Q)).$$\nThe left side is $\\operatorname{Ext}^1_{A_T}(P,Q)[1/\\varpi]$: $\\alpha$ at stage $n$ maps to $\\alpha/\\varpi^n$ and the colimit relation is the fraction relation. For a class $\\alpha:P\\to Q[1]$, the stage-zero morphism is $\\eta_Q[1]\\alpha$ for the localization unit $\\eta_Q:Q\\to U S(Q)$; the adjunction identifies it with $S(\\alpha)$. If $a_n$ is the stage-$n$ map, the colimit relation gives $\\varpi a_{n+1}=a_n$. Multiplication by $\\varpi$ is invertible on $U S(Q)$, so $a_n=\\varpi^{-n}a_0$. In particular every rational extension class is $S(\\alpha)/\\varpi^n$ for an integral class $\\alpha$ and $n\\geq0$.",
-   "uses": [
-    "lem-weil-pbc-sequence-relative-hom-telescope",
-    "def-pc-ext"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
-   }
-  },
-  {
-   "text": "Consequently the rationalizations of constructible integral sheaves are closed under extensions. Given $0\\to S(Q)\\to F\\to S(P)\\to0$, let its class be $S(\\alpha)/\\varpi^n$ as in step 6. Degree-one extension classification realizes $\\alpha$ by $0\\to Q\\to N\\to P\\to0$. The short-exact-complex triangle node identifies its middle term with the shifted cone of its connecting morphism. The integral characterization then makes $N$ constructible: its degree-zero complex is the shifted cone of $P[0]\\xrightarrow{\\alpha}Q[0][1]$, hence belongs to the integral category, and clause (iii) describes its cohomology $N$. Exact scalar extension sends this sequence to the class $S(\\alpha)$. Pushing its rational sequence out along the automorphism $\\varpi^{-n}$ of $S(Q)$ changes its class to $S(\\alpha)/\\varpi^n$; because this is an automorphism, its middle term is isomorphic to $S(N)$. The bijection in extension classification now identifies that sequence with the given sequence, so $S(N)\\cong F$. This is only an isomorphism of middle terms, as required; the chosen identification of the subobject has been scaled.",
-   "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-pc-ext"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, last paragraph; Stacks Tag 06XV (lemma-ext-1) for extension classification"
-   }
-  },
-  {
-   "text": "We prove the assertion for every reduced closed subscheme $X$ of $T$, and every lisse $E_X$-sheaf, by noetherian induction on its closed support. Such $X$ is noetherian, finite-dimensional and $\\ell$-coprime: affine rings are quotients of noetherian rings, strict chains of closed irreducible subsets are chains in $T$, and an inverse of $\\ell$ maps to an inverse in every quotient local ring. The minimal-closed-subset node supplies the induction, with empty support having the zero model. On a nonempty reduced $X$, use [lem-weil-pbc-lisse-lattice-etale-local] to obtain an etale covering with lisse integral models. Choose a finite affine Zariski covering of $X$ and apply etale affine refinement on each affine; the resulting finite disjoint union $Y$ of affine schemes is a jointly surjective etale cover carrying a lisse integral model. Both $X$ and $Y$ are qcqs: $X$ is noetherian, and $Y$ is a finite union of affine components. Apply etale stratified finiteness to $Y\\to X$. On each stratum the pullback is finite etale and surjective and the integral model pulls back to a lisse integral model. The coefficient restriction of step 1 identifies these as the required coefficient sheaves. Thus [lem-weil-pbc-lisse-lattice-finite-etale-descent] gives a lisse integral model for the restriction of $L$ to each of these strata.",
-   "uses": [
-    "lem-weil-pbc-lisse-lattice-etale-local",
-    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "lem-weil-pbc-etale-stratified-finite",
     "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-lisse-lattice-reduced-open",
+    "def-weil-pbc-continuous-constructible-module",
+    "def-weil-proetale-inverse-image",
     "lem-weil-pbc-continuous-coefficients-immersion-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, first paragraph; Stacks Tag 03S0 (lemma-etale-stratified-finite)"
+    "place": "Lemma 6.8.13, constructible filtration expressed by noetherian induction"
    }
   },
   {
-   "text": "Extract a nonempty open $U\\subseteq X$ on which such a model exists. There are finitely many irreducible components, each with a generic point. Choose a component $C$ and its generic point $\\eta$, and the stratum $Z\\hookrightarrow X$ containing $\\eta$. Write its image as $O\\cap F$ with $O$ open and $F$ closed. Since $F$ contains $\\eta$, it contains $C$. Remove all other components and intersect with $O$. The resulting nonempty open $U$ lies in $C\\cap O$, hence in the image of $Z$. It factors through $Z$ as a scheme: in the open part of the stratum immersion its ideal sections vanish at every point of the reduced open subscheme $U$, so lie in its nilradical and are zero. On affine charts this is exactly factorization of the ring map through the quotient defining the closed immersion. Pull back the stratum model along this open immersion $U\\to Z$ to get a lisse integral model $M_U$ of $L|_U$. The open is quasi-compact by the noetherian-open node.",
+   "text": "Apply [lem-weil-pbc-integral-model-open-closed-pieces] to $U,Z,M_U,M_Z$. It produces constructible integral sheaves $Q=j_!M_U$, $P=i_*M_Z$ and the exact sequence $0\\to S_XQ\\to L\\to S_XP\\to0$. Step 1 supplies the denominator hypothesis for this $P,Q$. [lem-weil-pbc-integral-models-extension-closed] gives a constructible integral $N_X$ with $S_XN_X\\cong L$. This proves the induction step.",
    "uses": [
-    "lem-sc-noetherian-finite-irreducible-components",
-    "lem-sc-scheme-sober",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-integral-models-extension-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, passage from a finite stratification to a constructible filtration; explicit reduced-scheme dense-open argument"
+    "place": "Lemma 6.8.13, last paragraph: gluing the two pieces via extension classes"
    }
   },
   {
-   "text": "Let $i:Z_0\\hookrightarrow X$ be the reduced induced closed subscheme of $X\\setminus U$ and $j:U\\hookrightarrow X$ the open immersion. Its support is strictly smaller. The induction hypothesis supplies a constructible integral model $M_Z$ for $i^{-1}L$. Put $Q=j_!M_U$ and $P=i_*M_Z$. The ringed open-closed node gives their restrictions $(M_U,0)$ and $(0,M_Z)$ on $U,Z_0$. Consequently adjoining the open stratum $U$ to the finitely many strata of $Z_0$ proves both $P$ and $Q$ are constructible integral sheaves. The local modules are finite free on $U$ and the given finitely presented modules on $Z_0$, with zero modules on the complementary pieces. Scalar localization commutes with $i_*$ because that node gives filtered-colimit preservation for qcqs $X$. It commutes with $j_!$ because $j_!$ is a left adjoint, hence preserves the sequential colimit expressing localization; the scalar multiplications and the coefficient identifications in step 1 identify these colimits as module sheaves. Therefore $S(Q)\\cong j_!j^{-1}L$ and $S(P)\\cong i_*i^{-1}L$. The same node gives $0\\to S(Q)\\to L\\to S(P)\\to0$. Step 7 now provides a constructible integral model for $L$ on $X$, completing the noetherian induction.",
+   "text": "Let $r:T_{\\mathrm{red}}\\hookrightarrow T$ be the reduced induced closed subscheme with full support. Inverse image preserves a finite free trivializing cover, and the coefficient theorem identifies its ring with $E_{T_{\\mathrm{red}}}$; thus $r^{-1}L$ is lisse. Induction gives it a constructible integral model $M$. Apply the open-closed pieces lemma with closed part $r$, empty complementary open, and zero open model. It gives constructible $N=r_*M$ and $0\\to0\\to L\\to S_TN\\to0$, hence $S_TN\\cong L$. This includes empty, rank-zero, disconnected and nonreduced cases.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-integral-model-open-closed-pieces"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, last paragraph; Stacks Tags 09AA, 09AH, 09BN and 03DI for open-closed assembly"
-   }
-  },
-  {
-   "text": "Finally let $r:T_{\\mathrm{red}}\\hookrightarrow T$ be the reduced induced closed subscheme with full support. The open-closed node applied with empty complementary open gives $L\\cong r_*r^{-1}L$ and $r^{-1}r_*\\cong1$. By step 1 its coefficient inverse images are $A_{T_{\\mathrm{red}}}$ and $E_{T_{\\mathrm{red}}}$. The preceding induction supplies a constructible integral model $N_{\\mathrm{red}}$ on $T_{\\mathrm{red}}$. Set $N=r_*N_{\\mathrm{red}}$. Its supporting strata, composed with $r$, are immersions into $T$, partition the same underlying space, and restrict $N$ to the corresponding restrictions of $N_{\\mathrm{red}}$ by $r^{-1}r_*\\cong1$. Hence they witness precisely the finite stratification required in the statement. Filtered-colimit preservation by $r_*$ gives $S(N)\\cong r_*S(N_{\\mathrm{red}})\\cong r_*r^{-1}L\\cong L$. This also covers the empty scheme, rank zero, disconnected schemes and nonreduced schemes, and asserts no global lissity of $N$.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13; reduction to the reduced scheme using Stacks Tag 09AH with empty complement"
+    "place": "Lemma 6.8.13, reduction to full reduced support and final integral structure"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-kun-complex-colimit-hocolim",
-  "lem-pur-derived-internal-hom-shift-right",
-  "lem-weil-pbc-kinjective-shift",
-  "lem-pur-rhom-global-sections",
-  "def-weil-pbc-adic-global-derived-hom",
-  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-  "lem-kun-derived-countable-sums-exact",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-sequence-relative-hom-telescope",
+  "lem-weil-pbc-integral-constructible-hom-sums",
+  "lem-weil-pbc-scalar-localization-derived-hom",
   "def-pc-ext",
-  "lem-weil-pbc-ext-one-extension-classification",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-lisse-lattice-etale-local",
-  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-integral-models-extension-closed",
   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-sc-noetherian-finite-irreducible-components",
-  "lem-sc-scheme-sober",
-  "def-weil-closed-immersion",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-weil-pbc-lisse-lattice-reduced-open",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-weil-pbc-integral-model-open-closed-pieces",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.13, with the Ext passage through Lemma 6.8.12 expanded via the sequential telescope and its sequence-relative Hom comparison; reduced-scheme noetherian induction and extension gluing retained."
+  "place": "Lemma 6.8.13, with the Ext comparison supplied by Lemma 6.8.12 and the existing scalar-localization theorem; the four extracted arguments have complete short proofs in the delivery report."
  },
  "mathlib_searches": [
   {
@@ -325,31 +220,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
   "worker": "stage1",
-  "summary": "Dedicated repair of the 2026-10-17 return: statement and Lean record unchanged, and the geometric steps retained. Replaced the long second step by five short steps. Reused the existing site-module telescope, exact-functor factorization, shifted internal-Hom and global Hom comparisons; isolated the sequence-relative Hom/telescope comparison as one new statement-only node. Distinguishes bounded-below coproduct compatibility from unbounded compactness.",
-  "blueprint": "Keeps the integral-lattice route in the historical ancestor proof, first sentence \"Choose an integral lattice for K\", and the existing Bhatt-Scholze 6.8.13 proof. The current main-20261015 ancestor file is statement-only. The repair elaborates the Ext-denominator step; it replaces no unit or chapter step.",
+  "summary": "Human-directed finer split of the returned 10453-character proof. Statement and Lean record unchanged. Four new statement-only lemma nodes isolate bounded-below derived Hom continuity, the Ext denominator criterion, a reduced nonempty-open lattice, and constructible open-closed pieces. The complete proofs in words for the new nodes are in the delivery report, each below 2800 characters. Full-support reduction is the empty-open specialization of the open-closed lemma, so no fifth node is created. The item is a short four-step assembly; the existing general scalar-localization theorem supplies the telescope and derived-adjunction arguments.",
+  "blueprint": "Realizes the historical ancestor first sentence \"Choose an integral lattice for K\" via Bhatt-Scholze Lemma 6.8.13, as before; no chapter or unit route change.",
   "tool_uses": [
    {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Exact scalar-extension/restriction derived adjunction; a generic categorical tool, with essential constancy verified in step 2."
-   },
-   {
-    "node": "lem-kun-complex-colimit-hocolim",
-    "why": "General module-sheaf sequential telescope and derived coproduct comparison in step 3, valid on the pro-etale ringed site; not a different geometric route."
-   },
-   {
-    "node": "lem-pur-derived-internal-hom-shift-right",
-    "why": "Shift compatibility of internal derived Hom on an arbitrary small ringed site, used only to read degree-zero global Hom in step 4."
-   },
-   {
-    "node": "lem-pur-rhom-global-sections",
-    "why": "Global H-zero/internal-Hom identification on an arbitrary small ringed site in step 4; the fixed unit has no such generic statement."
-   },
-   {
-    "node": "lem-kun-derived-countable-sums-exact",
-    "why": "Termwise computation of countable derived sums of ordinary A-modules in step 5; generic homological tool."
+    "node": "lem-weil-pbc-scalar-localization-derived-hom",
+    "why": "General ringed-site theorem converting the precisely checked bounded-below Hom continuity into actual scalar Ext localization; no geometric route replacement."
    }
   ]
  },
@@ -359,15 +238,16 @@
   "lem-kun-complex-colimit-hocolim",
   "lem-pur-derived-internal-hom-shift-right",
   "lem-pur-rhom-global-sections",
-  "lem-kun-derived-countable-sums-exact"
+  "lem-kun-derived-countable-sums-exact",
+  "lem-weil-pbc-scalar-localization-derived-hom"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q22-cdd689d84",
-  "group": "Q22",
+  "reviewer": "NT-cc-Q01-faa2fad54",
+  "group": "Q01",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-cdd689d84 (reviewer sub-agent of L); spot-checked: I read the full re-split against Bhatt–Scholze Lemmas 6.8.12–6.8.13, Definition 6.8.10, Proposition 6.8.11 and 6.8.4(6), and against Stacks 0CRK, 094A and 093W in derived.tex. Compared with the side-project copy, only proof, proof_deps, proof_origin, split_report and status changed. The statement, stmt_deps, blueprint and Lean record are unchanged, so nothing is weakened. The old 2865-character step 2 is now steps 2–6, and the other steps are kept word for word. Step 2: the derived S⊣U adjunction holds, because exact functors make the essential-constancy conditions hold trivially; P[0] and Q[0] are in Dbc by condition (iii). Step 3: the Kunneth telescope node applies to Mod(A_T) with E_n=Q[1] and u=1−s. Step 4: the shift identities and H0 RΓ RHom = Hom_D are valid; the pro-étale site is a small skeleton. Step 5: bounded-below compactness is used only for the uniformly bounded families Q[1] (bound −1) and Q[2] (bound −2), with no unbounded compactness claimed. Step 6: Ext^1 localization; the stage-n leg is ϖ^{-n} times the stage-0 leg, which matches S(α). Steps 7–11 are the previously accepted extension gluing, stratification and reduction; I re-checked hypotheses and orientations (Ext^1(end,start), 0→S(Q)→L→S(P)→0). New node lem-weil-pbc-sequence-relative-hom-telescope: I checked its proof sketch (five-term sequence, injectivity of 1−shift on direct sums, 093W) and tested K=0, X_n=0, u_n=0, u_n=id and non-injective u_n. It is statement-only and self-contained, with correct blueprint from/via and same_as=[]. It is not a duplicate: lem-pc-compact-hom-hocolim needs full compactness, which this K does not have. lem-weil-pbc-integral-constructible-sheaf-hom and the condensed telescope nodes use the condensed coefficient presentation with multiplication by ℓ, so they are correctly not identified with A_T. It does not restate a clause of the item. proof_deps equals the union of the uses, there is no cycle and no SGA. Accepted tool_uses: lem-kun-complex-colimit-hocolim, lem-pur-rhom-global-sections, lem-kun-derived-countable-sums-exact, and the already accepted lem-pc-pre-derived-adjoint-functors-general. lem-pur-derived-internal-hom-shift-right is already on the unit's route. The item's maintainer tool_uses field still lists prop-pur-kinjective-resolutions-exist, which the new proof no longer uses; replace it with the accepted list at merge. I ran tools/review_split.py on the snapshot; it calls git show internally (read-only). Its FAIL comes only from four nodes created for this item that landed on 2026-10-14 and are already split. No fixes, no nodes dropped."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-faa2fad54 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and Bhatt–Scholze Lemmas 6.8.12–6.8.13 (pp. 60–62). This head is byte-identical to delivery cb93b34c on the older base 48f7b55. That delivery was reviewed FIX, but its landing was superseded by this push, so its fix never landed. I re-reviewed everything against the landed 11-step base proof (Q22 cdd689) and the repair note 're-split (decision of the human, 2026-10-21)'. Statement, stmt_deps, blueprint and lean are unchanged, so nothing is weakened. Old step → carrier: old 2, 3 and 6 go to the existing reviewed lem-weil-pbc-scalar-localization-derived-hom, whose hypotheses hold (small site, R=A_T, t=ϖ, R_t=E_T by the coefficient node, K=P[0], L=Q[0] bounded below, q=1). Old 4–5 go to the new hom-sums, old 7 to extension-closed, old 8–9 to reduced-open, old 10 to open-closed-pieces plus item step 3, and old 11 to step 4 with U=∅. No argument was dropped. The four new nodes are of comparable size, statement-only, self-contained and true. I tested the empty family, U or Z empty, nonreduced T, rank 0 and torsion endpoints. Orientation is consistent: Ext¹(P,Q) for 0→SQ→L→SP→0. The item proof is ≤3000 characters, with no cycle (2589-node closure), no SGA and the route unchanged. The condensed internal-module nodes are a different coefficient category, so they are not duplicates. Fixes: (1) C2/E5: step 2 used the induction on Z without showing that i^{-1}L is lisse. I re-applied cb93's repair (pullback of a trivializing cover, plus the coefficient theorem), using nodes already in proof_deps. (2) hom-sums silently identified A_X=C(|V|,A) with the lim(A/ϖ^n) ring over which Dbc is defined. I added the explicit identification and the stmt_deps def-weil-pbc-adic-coefficient-datum and lem-weil-pbc-continuous-coefficients-immersion-restriction. Accepted tool_use: scalar-localization-derived-hom, which is in the item's own unit. Maintainer note: the item's legacy tool_uses field (lem-pc-pre-derived-adjoint-functors-general, prop-pur-kinjective-resolutions-exist, kun-complex-colimit-hocolim and the others) is no longer used by the proof and should be cleared at merge.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "reviewed_lean": {
