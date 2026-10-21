@@ -15,9 +15,138 @@
   "def-weil-constructible-standard-tstructure",
   "def-weil-finite-coefficient-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scheme $s=\\operatorname{Spec}k$ is Noetherian of dimension zero (its only local ring is the field $k$), and $\\ell$ is invertible because $\\ell\\ne p$. Apply [lem-weil-pbc-integral-stratified-perfect-characterization]: its last two sentences identify the completed integral category in this item with the category used in [prop-weil-pbc-integral-tstructure], and give closure under ambient standard truncations and cohomology. Thus that proposition supplies the bounded integral t-structure with its ambient truncation maps. Apply [prop-weil-localized-tstructure] to this same category: $Q$ is t-exact and its truncations are canonically the localizations of integral truncations. These are the halves of [def-weil-constructible-standard-tstructure]. No identification of a truncation with the inverse limit of levelwise truncations is needed, so the extra Tor-compatibility hypothesis of those propositions is not used.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "prop-weil-pbc-integral-tstructure",
+    "prop-weil-localized-tstructure",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "Write $G_EK=\\Gamma(s,K)$ on integral complexes. By [lem-weil-point-proetale-sections-exact], $G_E$ is exact on sheaves and derived categories, commutes with shifts, and has $H^j(G_EK)=\\Gamma(s,\\mathcal H^jK)$. The termwise functor $q_E=-\\otimes_{R_E}E$ is exact by [lem-weil-coefficient-complex-rationalization] (take $L=E$). Hence [lem-sp-exact-functor-preserves-homology] gives the natural cycle/quotient identification\n$$H^j(q_EG_EK)\\cong\\Gamma(s,\\mathcal H^jK)\\otimes_{R_E}E.$$\nTermwise tensor commutes with shifts and mapping cones: in a cone the differential is the same matrix of the two differentials and the map, tensored with $E$. It therefore takes distinguished triangles to distinguished triangles. The functor $q_EG_E$ kills uniformizer denominators by making them invertible, and its extension on a fraction $f/\\pi_E^n$ is $\\pi_E^{-n}q_EG_E(f)$. By [def-weil-rationalization-karoubi], every rational distinguished triangle is isomorphic to a localized integral triangle, so this extension is exact. It is precisely $F_E=\\operatorname{Fib}_{s,E}$ of [def-weil-finite-coefficient-point]; that definition supplies its bounded finite-dimensional target.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-coefficient-complex-rationalization",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-rationalization-karoubi",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "If $C$ lies in either rational half, [def-weil-constructible-standard-tstructure] writes it as isomorphic to $QK$ with $K$ in the corresponding integral half. Step 2 shows that $H^r(F_EQK)=0$ whenever $\\mathcal H^rK=0$. Thus $F_EC$ lies in the same half. Applying this to shifted objects proves preservation of both halves at every integer cut. In particular $F_E$ is t-exact.",
+   "uses": [
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "Apply [lem-pod-texact-truncation-comparison] to $F_E$, using Steps 1-3 and the bounded rational t-structure of [prop-constructible-truncations]. Compose its two comparisons at $j$ and the shift comparison to obtain\n$$\\delta_{E,C,j}:F_E\\mathcal H^jC\\xrightarrow{\\sim}H^j(F_EC).$$\nThe counit and unit characterizations in the lemma show that these are induced by the canonical truncation maps, and natural in $C$. Apply the same lemma to the t-exact localization $Q$ of Step 1. Its composition assertion identifies the comparison for $F_EQ$ with the composite comparison for $Q$ and $F_E$. On the integral category $F_EQ=q_EG_E$; its cycle/quotient comparison in Step 2 commutes with the truncation inclusion and projection, since an exact functor preserves their kernels, images and quotient maps. Uniqueness in the lemma therefore identifies the composite with that cycle/quotient comparison. This proves the required identification of both sides for $C=QC_0$ with $\\Gamma(s,\\mathcal H^jC_0)\\otimes_{R_E}E$. For a heart object, preservation of both halves says that all cohomology in degrees other than zero vanishes.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "For $E\\subset L$ use the canonical isomorphism of [lem-weil-point-sections-scalar-extension], namely the inverse of $\\Gamma(s,\\chi)\\theta$, followed after rationalization by the chain isomorphism $\\beta$ of [lem-weil-coefficient-complex-rationalization]. This gives exactly the specified $\\varphi_{L/E}:F_LT^{\\mathcal C}_{L/E}\\cong T^{\\mathcal V}_{L/E}F_E$, where $T^{\\mathcal C}$ is constructible scalar extension and $T^{\\mathcal V}=-\\otimes_E L$ on vector-space complexes. Naturality for integral maps extends to fractions: both composites multiply the image of $f/\\pi_E^n$ by the same scalar $\\pi_E^{-n}\\in L$. It is therefore natural on the rational stage. The map $\\chi$ commutes with shifts by [lem-weil-point-completed-scalar-shift], and $\\theta$ does so by [lem-weil-point-sections-tensor-shift]. The degreewise formula $((n\\otimes a)\\otimes b)\\mapsto(n\\otimes1)\\otimes ab$ for $\\beta$ also commutes with shifts. Consequently this particular $\\varphi$, including its inverse direction, commutes with the specified shifts.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-coefficient-complex-rationalization",
+    "lem-weil-point-completed-scalar-shift",
+    "lem-weil-point-sections-tensor-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "The functor $T^{\\mathcal C}_{L/E}$ commutes with truncations and their maps by [prop-constructible-truncations], so it preserves both halves. The functor $T^{\\mathcal V}_{L/E}$ is exact by [lem-weil-coefficient-complex-rationalization], and the cycle/quotient comparison of [lem-sp-exact-functor-preserves-homology] gives $H^j(V\\otimes_E L)\\cong H^j(V)\\otimes_E L$; it too preserves both halves. Apply [lem-pod-texact-truncation-comparison] to the exact t-exact functors $A=F_LT^{\\mathcal C}_{L/E}$, $B=T^{\\mathcal V}_{L/E}F_E$, and $\\eta=\\varphi_{L/E}:A\\Rightarrow B$. For each sign its natural-transformation assertion is\n$$\\alpha_{B,\\tau,C}\\circ\\varphi_{\\tau C}=\\tau(\\varphi_C)\\circ\\alpha_{A,\\tau,C},$$\nwhere $\\alpha_{A,\\tau,C}:A(\\tau C)\\to\\tau(AC)$ is the comparison at $C$ for the indicated truncation (and likewise for $B$). Compose the equations for $\\tau^{\\le j}$ and $\\tau^{\\ge j}$ and then shift by $[j]$. Step 5 permits moving $\\varphi$ through that shift. By the composition assertion of the lemma the resulting equation is precisely\n$$H^j(\\varphi_C)\\circ\\delta_{L,T^{\\mathcal C}C,j}=(\\delta_{E,C,j}\\otimes_E L)\\circ\\varphi_{\\mathcal H^jC},$$\nafter the canonical source-scalar/cohomology and vector-scalar/cohomology identifications. This is the asserted square with the specified maps.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-coefficient-complex-rationalization",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "By [lem-weil-point-sections-scalar-extension], $\\varphi_{E/E}$ is the identity and for $E\\subset L\\subset M$ its composite is $\\varphi_{M/E}$ after the two tensor associators. The rational tensor maps retain these identities by [lem-weil-coefficient-complex-rationalization]. Pasting the square of Step 6 for $L/E$ with its scalar-extended square for $M/L$ gives top edge $\\delta_{M,C\\otimes_E M,j}$, bottom edge $\\delta_{E,C,j}\\otimes_E M$, and side edges $\\varphi_{M/E}$ and $H^j(\\varphi_{M/E})$: use the tower equation for $\\varphi$ and apply the functor $H^j$ to that equation. The associators commute with cohomology because they are the termwise tensor associators; the composition part of [lem-pod-texact-truncation-comparison] identifies their truncation comparisons. This proves identity normalization and composition of the squares, including repeated fields.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-coefficient-complex-rationalization",
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  },
+  {
+   "text": "Use the pair-category descriptions of [def-weil-algebraically-closed-coefficients] and [def-weil-point-fd-qlbar-category]. The functor $F_\\Omega$ acts as in [def-weil-finite-coefficient-point], using Step 5's $\\varphi$ to conjugate the image of a common-stage arrow. A source distinguished triangle is isomorphic to one from some finite stage $L$. Its image is isomorphic, via those same $\\varphi$ at the vertices and their shift compatibility on the last arrow, to $F_L$ of that triangle. Step 2 makes the latter distinguished. Thus $F_\\Omega$ is exact. Each half is the isomorphism closure of finite-stage halves, so Step 3 gives t-exactness. By [prop-constructible-truncations], cohomology and its canonical truncation maps can be computed at a common finite stage. Represent $\\delta_{\\Omega,(E,C),j}$ there by $\\delta_{E,C,j}$. Step 6 identifies this representative with its image after every coefficient extension, and Step 7 gives the required successive-extension agreement. For any arrow represented over $L$, naturality reduces to the naturality of $\\delta_{L,-,j}$ and that square; hence the maps descend to natural isomorphisms in the Hom colimits. Their finite-stage inverses descend by the same equations. They are the canonical truncation-induced maps since their representatives are, and a common-stage heart object is sent to degree-zero cohomology.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category",
+    "def-weil-finite-coefficient-point",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "def-weil-constructible-standard-tstructure",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-coefficient-complex-rationalization",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-coefficient-point",
+  "lem-pod-texact-truncation-comparison",
+  "prop-constructible-truncations",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-point-completed-scalar-shift",
+  "lem-weil-point-sections-tensor-shift",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10, Proposition 6.8.11(3), Proposition 6.8.14; agent assembly of exact sections, localization, and canonical truncation comparisons (not a separate assertion in Bhatt-Scholze)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +175,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"{R : Type u} [CommRing R] [IsLocalRing R] (f : Spec (.of R) ⟶ X) : IsLocalHom (stalkClosedPointTo f).hom\", \"doc\": \"For a local ring $ R $ and a morphism $ f : \\\\operatorname{Spec}(R) \\\\to X $ to a scheme $ X $, the induced ring homomorphism from the stalk of the structure sheaf at the closed point of $ \\\\operatorname\"}\n  {\"name\": \"Algebra.Etale.recOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this recursor allows defining functions on the property that $ A $ is étale over $ R $ by specifying their behavior on\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"[IsStandardEtale R S] : Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}",
    "date": "2026-10-21",
    "verdict": "no match: The hits concern scheme residue-field evaluation or etale algebras, not this specified rational/common-stage point realization with standard t-structure and scalar-cohomology square."
+  },
+  {
+   "tool": "grep",
+   "query": "pointFiber.*[Hh]omology|pointFiber.*[Tt]Exact|proetale.*[Cc]ohomology",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results are general truncation or homological-functor infrastructure, cotangent theory, or unrelated complexes; none states the specified point realization and its normalized coefficient/cohomology coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric point realization rational constructible complexes commutes with cohomology and coefficient field extension",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Geometry.SimplicialComplex.ext\", \"HomologicalComplex.extend.instHasHomologyF\", \"CochainComplex.HomComplex.Cochain.shift_smul\", \"ContinuousCohomology.MultiInd.complex\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"CochainComplex.HomComplex.Cochain.rightShift_units_smul\", \"NumberField.ComplexEmbedding.Extension\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results are general truncation or homological-functor infrastructure, cotangent theory, or unrelated complexes; none states the specified point realization and its normalized coefficient/cohomology coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"Functor\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.instIsIsoFunctorTruncGELTToLTGE\", \"CategoryTheory.Triangulated.TStructure.instAdditiveObjEIntFunctorETruncGE\", \"CategoryTheory.Triangulated.TStructure.instAdditiveObjEIntFunctorETruncLT\", \"CategoryTheory.Triangulated.TStructure.instIsGEObjEIntFunctorETruncGE\", \"CategoryTheory.Triangulated.TStructure.instIsLEObjEIntFunctorETruncLT\", \"CategoryTheory.Triangulated.TStructure.instIsIsoFunctorETruncGEπBotEInt\", \"CategoryTheory.Triangulated.TStructure.instIsIsoFunctorETruncLTιTopEInt\", \"CategoryTheory.Triangulated.TStructure.instIsGEObjEIntFunctorETruncLT\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results are general truncation or homological-functor infrastructure, cotangent theory, or unrelated complexes; none states the specified point realization and its normalized coefficient/cohomology coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact point sections and inversion of a uniformizer preserve standard cohomology with natural scalar extension comparisons",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentCompAwaySec_apply\", \"Algebra.SubmersivePresentation.sectionCotangent_eq_iff\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.Extension.H1Cotangent.val_smul\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results are general truncation or homological-functor infrastructure, cotangent theory, or unrelated complexes; none states the specified point realization and its normalized coefficient/cohomology coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t exact triangulated functor commutes with truncation cohomology naturally in a transformation of functors",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.truncGEδLT\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.comp_homologySequenceδ_assoc\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.comp_homologySequenceδ\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.distTriang_iff\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results are general truncation or homological-functor infrastructure, cotangent theory, or unrelated complexes; none states the specified point realization and its normalized coefficient/cohomology coherence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-constructible-pullback-t-exact",
@@ -69,5 +233,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-point-realization-standard-cohomology",
+  "worker": "stage1",
+  "summary": "Proved exactness and preservation of the standard halves from exact point sections and exact tensor, constructed the canonical cohomology comparison using truncation uniqueness, and proved the normalized coefficient square and its unit/tower compatibility before descent to common stages. Reused all required nodes; no new nodes and no statement changes. Explicitly used the stratified-perfect characterization to identify the two integral-category conventions before invoking the integral/localized t-structures.",
+  "blueprint": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Proposition 6.8.11(3), Proposition 6.8.14, and the pro-etale point setting of Section 4.1; agent exact-sections/localization/cohomology coherence argument extracted from returned proof Step 11, using the explicitly normalized point-section scalar comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient/point or truncation input: Stratified perfect description of the integral completed category. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Generic coefficient/point or truncation input: The standard t-structure on the integral category. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic coefficient/point or truncation input: The rational t-structure. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic coefficient/point or truncation input: Sections over an algebraically closed point are exact on the pro-etale site. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-weil-coefficient-complex-rationalization",
+    "why": "Generic coefficient/point or truncation input: Exact rationalization and coherent scalar extension of coefficient-module complexes. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic coefficient/point or truncation input: Exact functors preserve kernels, cokernels, images, inverse images and homology. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic coefficient/point or truncation input: Canonical truncation comparisons for t-exact triangulated functors. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic coefficient/point or truncation input: Construction of constructible truncations. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic coefficient/point or truncation input: Sections over the point commute with scalar extension. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-weil-point-completed-scalar-shift",
+    "why": "Generic coefficient/point or truncation input: Completed scalar extension comparison commutes with shifts. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   },
+   {
+    "node": "lem-weil-point-sections-tensor-shift",
+    "why": "Generic coefficient/point or truncation input: Sections-tensor comparison commutes with shifts. Used to realize the geometric-stalk interface below finite-map purity; it does not replace a step of the affine-line weight-estimate unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-coefficient-complex-rationalization",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-pod-texact-truncation-comparison",
+  "prop-constructible-truncations",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-point-completed-scalar-shift",
+  "lem-weil-point-sections-tensor-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-58a2021b8",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-58a2021b8 (reviewer sub-agent of L); spot-checked: PASS: I read the whole split, which has no new nodes, 8 steps and 16 cited statements, against the cited nodes and Bhatt–Scholze Example 4.1.10 and Props. 6.8.11(3)/6.8.14. Status: the item is still unsplit in live and side-live, has no re-split note, and is not in route-pivot-dropped. No proof_dep reaches the item, so there is no cycle. Step 1 uses the last two sentences of stratified-perfect-characterization to identify the derived-complete-integral category on Spec k with the category of pbc-integral-tstructure; Spec k is Noetherian of dimension 0 and ℓ≠p, and the Tor hypothesis is correctly avoided. localized-tstructure gives Q t-exact with halves equal to those of the standard-tstructure definition. Steps 2–3: Γ(s,−) is exact, ⊗E is termwise exact, and every rational triangle is isomorphic to Q of an integral triangle, so F_E is exact and t-exact. The action on morphisms, f/ϖ^n ↦ ϖ^{-n}qG(f), matches def-weil-finite-coefficient-point. Step 4: the composition and uniqueness clauses of pod-texact-truncation-comparison identify δ on QC₀ with the cycle/quotient comparison, as the statement requires. Steps 5–7: φ = β∘(Γχ∘θ)^{-1} is exactly the specified map. Its shift compatibility comes from completed-scalar-shift and sections-tensor-shift, and the square follows from the natural-transformation clause with η=φ. The unit and tower equations come from the statements of point-sections-scalar-extension and coefficient-complex-rationalization. Step 8: common-stage exactness, t-exactness and descent of δ in the pair categories are correct. Edge cases checked: C=0, torsion heart objects, L=E, repeated fields, negative j. Not a duplicate of point-fibre-equivalence, dl-a1-constructible-fibres-exact, pod-point-sections-derived-reduction or trf-point-exact-derived-model. All 11 declared tool_uses are generic coefficient/t-structure infrastructure and I accept them. Batch-5 flag: the closure of lem-pod-texact-truncation-comparison is only def-weil-t-structure and def-weil-triangulated-category, i.e. abstract t-exact functor theory. It is neither given by the Poincaré duality or trace-formula assumptions nor part of their proofs, so I accept it. The unflagged prop-constructible-truncations is the D^b_c t-structure itself and reaches only generic infrastructure. Advisory, not a fault: the bounded standard t-structure on D^b_fd(E) is fixed by the item's statement and is standard (Mathlib derived-category t-structure). No fixes."
  }
 }
