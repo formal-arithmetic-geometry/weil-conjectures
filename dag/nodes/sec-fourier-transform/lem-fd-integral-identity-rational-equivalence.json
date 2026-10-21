@@ -12,11 +12,82 @@
   "def-weil-rationalization-karoubi",
   "def-weil-pbc-rational-category",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "def-fd-coefficient-comparison-datum"
+  "def-fd-coefficient-comparison-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $E$ and write $A=\\mathcal O_E$, $\\varpi=\\varpi_E$. Apply [lem-weil-pbc-integral-coefficient-presentation-comparison] to obtain the unique coefficient isomorphism $e_T:B_T^p\\xrightarrow{\\sim}R_{E,T}$ with $\\pi_n^s e_T=\\bar e_n\\pi_n^p$. Restriction along $e_T$ goes from the framework presentation to the PBC presentation; restriction along $e_T^{-1}$ goes back. These derived equivalences identify all finite reductions and quotient transitions. To restrict their domains, apply [lem-weil-pbc-integral-stratified-perfect-characterization]: after this coefficient identification its conditions describe exactly both integral categories, including the PBC compatible etale-origin witnesses. Its hypotheses are precisely the assumed noetherian, finite-dimensional $T$ with $\\ell$ invertible, and finite $E/\\mathbf Q_\\ell$. Thus the restrictions are defined in both directions. In the common $D(\\operatorname{Mod}(R_{E,T}))$ realization they are identity on objects and arrows. Call the forward restriction $I_{T,E}$; it preserves the prescribed finite reductions, without choosing an arbitrary equivalence of their targets.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 coefficient convention; Definition 6.5.1; Proposition 6.6.11; Proposition 6.8.11(3). Explicit presentation normalization is the cited coefficient-presentation supplement; old parent proof step 1."
+   }
+  },
+  {
+   "text": "The integral shifts and triangles on each side are inherited from the ambient derived categories by [lem-weil-integral-constructible-triangulated] and [lem-weil-pbc-uniform-complete-triangulated]. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact coefficient restrictions of [lem-weil-pbc-integral-coefficient-presentation-comparison]. It gives triangulated derived functors and shift comparisons induced by degreewise identities: restricting a complex and shifting it gives the same terms and signed differentials as shifting first. Restriction also carries the cone with differential matrix $\\left(\\begin{smallmatrix}d_L&f\\\\0&-d_K\\end{smallmatrix}\\right)$ to the cone of the restricted $f$ with that same matrix. It preserves quasi-isomorphisms by exactness. Consequently the identity comparisons descend to the ambient derived categories and preserve their distinguished triangles, and then those in the full integral subcategories, in both directions. By [lem-weil-integral-constructible-linear], the $A$-action on the framework Hom groups is the constant-section action. The quotient formula for $e_T$ sends each constant scalar $a$ to that same scalar at every finite quotient, so its inverse does too. The coefficient restrictions therefore commute with the $A$-action on complexes and derived arrows. Hence $I_{T,E}$ and its inverse are exact $A$-linear functors with the stated identity-induced shifts.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sentence after Definition 6.5.1 (full triangulated subcategory); Section 6.5 coefficient convention. Termwise cone/shift and constant-scalar checks written by Q151, expanding old parent proof step 1."
+   }
+  },
+  {
+   "text": "Use the two raw rationalization definitions [def-weil-rationalization-karoubi], [def-weil-pbc-rational-category] and their scalar-localization operations [def-weil-linear-scalar-localization]. Define $J_{T,E}(K)=I_{T,E}K$ and $J_{T,E}(f\\otimes x)=I_{T,E}(f)\\otimes x$. This is balanced: $I(af)\\otimes x=aI(f)\\otimes x=I(f)\\otimes ax$; additivity gives a map on finite sums of pure tensors. It preserves identities because $I(\\mathrm{id}_K)\\otimes1=\\mathrm{id}_{IK}\\otimes1$. For composable $f,g$, its value on $(g\\otimes y)\\circ(f\\otimes x)=(gf)\\otimes yx$ is $I(g)I(f)\\otimes yx$, the composite of their images; bilinearity gives the assertion for arbitrary arrows. Also $J(z(f\\otimes x))=I(f)\\otimes zx=zJ(f\\otimes x)$ for $z\\in E$, hence $J$ is $E$-linear. Perform the identical construction with $I^{-1}$. In the common integral realization both composites are identity on objects and pure tensors, hence on all morphisms. In the concrete presentations the unit and counit are the localized restriction round trips, identity on the underlying modules. This proves equivalence and the inverse formulas. In the common realization $I(f)=f$, so these are exactly $K\\mapsto K$, $f\\otimes x\\mapsto f\\otimes x$ and the integral-object and tensor pins of [def-fd-coefficient-comparison-datum]. The definitions retain exactly the integral objects; no retracts are adjoined.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "def-weil-linear-scalar-localization",
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence, comparison of coefficient categories; old parent proof step 2. Explicit balanced-tensor calculation by Q151."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-linear-scalar-localization-triangulated] to the two integral categories: step 2 supplies their $A$-linear shifts. Their rational shifts act by $(f\\otimes x)[1]=f[1]\\otimes x$, as specified in [def-weil-linear-scalar-localization]. Thus the identity-induced integral shift comparison of step 2 localizes to the shift comparison for $J$, and likewise for its inverse. For any distinguished rational triangle $\\Delta$, the cited triangulated-localization statement gives a distinguished integral triangle $\\Delta_0$ and an isomorphism $\\Delta\\simeq Q_s\\Delta_0$. The formulas of step 3 give $JQ_s=Q_pI$ with these shift comparisons. Step 2 makes $I\\Delta_0$ distinguished; the same localization statement makes $Q_pI\\Delta_0$ distinguished. Applying $J$ to the displayed isomorphism shows that $J\\Delta$ is distinguished. Repeat with $I^{-1}$ and $J^{-1}$ to obtain exactness of the inverse. This proves all rational exactness and shift assertions while retaining the raw categories of step 3.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization: distinguished triangles in a triangulated localization are isomorphic to localized integral triangles; old parent proof step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "def-weil-linear-scalar-localization",
+  "def-fd-coefficient-comparison-datum",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence: coefficient comparison needed to interpret the trace function. Expanded old parent proof steps 1–2 using the existing normalized presentation lemma, integral characterization and Stacks 05R6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-rational-coefficient-category-comparison",
@@ -74,5 +145,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-integral-identity-rational-equivalence",
+  "worker": "stage1",
+  "summary": "Four explicit steps identify the integral full categories via the existing projection-normalized coefficient-presentation comparison, check linearity and inherited shifts/triangles, construct inverse tensor-Hom functors, and verify rational exactness from the localization triangle criterion. Statement unchanged; no new nodes. All non-elementary inputs are existing nodes.",
+  "blueprint": "Final sentence of def-fd-trace-function: interpreting the local Frobenius operators in the PBC coefficient category. This item realizes old proof steps 1–2 of lem-fd-rational-coefficient-category-comparison, without the later scalar or pullback coherence assertions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "why": "Generic comparison of two completed coefficient presentations, including exact restrictions and all reduction maps; the trace-function unit supplies no coefficient-presentation construction."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic membership characterization identifying the two full integral categories, with compatible etale-origin witnesses, under exactly this scheme hypothesis."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Framework integral shifts and triangles are inherited from the ambient derived category."
+   },
+   {
+    "node": "lem-weil-pbc-uniform-complete-triangulated",
+    "why": "PBC uniform integral shifts and triangles are inherited from the ambient derived category."
+   },
+   {
+    "node": "lem-weil-integral-constructible-linear",
+    "why": "Identifies the integral Hom action and linear shift with constant scalars."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic triangle criterion for scalar localization; the trace-function unit does not construct a triangulated localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-3de2eb02b",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-3de2eb02b (reviewer sub-agent of L); spot-checked: Read in full: the item and all 11 cited nodes, plus the framework definition and the completed-coefficient definition. There are no new nodes. The statement is byte-identical to live. The one stmt_dep added, lem-weil-pbc-integral-coefficient-presentation-comparison, is justified because the statement names its quotient-normalized isomorphism e_T. Sources checked: Bhatt–Scholze 6.5, 6.5.1 and 6.8.11(3) at the places cited, and Stacks 05R6 for the localization triangle criterion; no SGA. Step 1: restriction along e_T:B^pbc→B^det goes from framework (B^det) modules to PBC (B^pbc) modules, which is the correct direction. Membership comes from the characterization node's last clause, which says the same conditions describe the framework category, read through e_T. Its hypotheses (noetherian, finite-dimensional, ℓ invertible, ℓ≠p) are all in the item. Step 2: the Mathlib leaf mapDerivedCategoryFactors gives a triangulated functor with degreewise-identity shifts. The cone matrix is unchanged, and constant scalars go to constant scalars (e_n([x])=[x.down].up), so both functors are A-linear. Step 3: balancing, identities, composition, E-linearity, the inverse via I^{-1} and the round-trip identity are all elementary. No Karoubi completion or retracts are added, and the pins of def-fd-coefficient-comparison-datum are met. Step 4: from Δ≅Q_sΔ0 we get JΔ≅Q_pIΔ0, which is distinguished, and the same holds in reverse. Edge cases checked: empty T, E=Q_ℓ, torsion objects, all integer shifts, n≥1. There is no cycle (closure of 2981 nodes) and no node is merged or dropped. The item is still unsplit live. The parent's re-split note binds the parent only. The declared tool_uses (presentation comparison, characterization, the two triangulated-subcategory lemmas, integral linearity, scalar-localization triangulated) are generic black boxes, and I accept them."
  }
 }
