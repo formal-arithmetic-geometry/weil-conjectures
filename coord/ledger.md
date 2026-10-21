@@ -23618,3 +23618,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:11 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 20:11 L: merged deliver/N0/lem-per-adic-normalized-fibre-comparisons (stage 2; reviewer PASS; parallel immutable checks)
 - 20:11 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 2026-10-21T20:12:37Z L: superseded stage-1 delivery NJ/lem-a1-finite-pullback-strict-tower-comparison at 707f4fead3324dd43b525507d4579063cc7cba92; current completion retained; packet archived at refs/superseded/NJ/lem-a1-finite-pullback-strict-tower-comparison/707f4fead3324dd43b525507d4579063cc7cba92; stale return retired.
