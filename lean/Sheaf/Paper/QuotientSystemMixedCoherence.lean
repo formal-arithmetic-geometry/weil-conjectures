@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.IntegralComparisonSequenceSystems
 public import Mathlib.CategoryTheory.PathCategory.Basic
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 
 /-! # Mixed geometric and scalar coherence on strict quotient systems
 
@@ -32,6 +32,26 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 universe t u a v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
+
+private theorem sequenceDerived_ext
+    (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{t}) {D : Type a} [Category.{v} D]
+    {F G : coefficientSequenceDerived l E X ⥤ D} (α β : F ⟶ G)
+    (h : ∀ P : CochainComplex (coefficientSequenceModules l E X) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients
+        (R := coefficientSequenceCommRingSheaf l E X) P →
+      α.app (DerivedCategory.Q.obj P) = β.app (DerivedCategory.Q.obj P)) : α = β := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ))
+  intro K
+  obtain ⟨P, f, hP, _, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := coefficientSequenceCommRingSheaf l E X) K
+  let := hf
+  have : IsIso (DerivedCategory.Q.map f) := inferInstance
+  apply (cancel_epi (F.map (DerivedCategory.Q.map f))).mp
+  rw [α.naturality, β.naturality, h P hP]
 
 section ScalarComparisons
 
@@ -70,7 +90,65 @@ theorem integralComparisonSystemScalarComposition_existsUnique (X : Scheme.{t}) 
               ((NatIso.mapHomologicalComplex
                 (integralComparisonSequenceScalarComposition l E L ι M j X)
                   (.up ℤ)).hom.app P) := by
-  sorry
+  let A := coefficientSequenceModules l E X
+  let ma := integralComparisonSequenceScalarModel l E L ι X
+  let mb := integralComparisonSequenceScalarModel l L M j X
+  let mc := integralComparisonSequenceScalarModel l E M (j.comp ι) X
+  let e := integralComparisonSequenceScalarComposition l E L ι M j X
+  let δ : DerivedCategory.Q ⋙ (ma.T ⋙ mb.T) ⟶
+      mc.E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q := Functor.whiskerRight ma.ε mb.T ≫
+    Functor.whiskerLeft (ma.E.mapHomologicalComplex (.up ℤ)) mb.ε ≫
+    Functor.whiskerRight (NatIso.mapHomologicalComplex e (.up ℤ)).hom DerivedCategory.Q
+  let := mc.universal
+  let c := mc.T.leftDerivedLift mc.ε (HomologicalComplex.quasiIso A (.up ℤ))
+    (ma.T ⋙ mb.T) δ
+  have hc (P : CochainComplex A ℤ) :
+      c.app (DerivedCategory.Q.obj P) ≫ mc.ε.app P =
+        mb.T.map (ma.ε.app P) ≫ mb.ε.app
+          ((ma.E.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P) :=
+    mc.T.leftDerived_fac_app mc.ε (HomologicalComplex.quasiIso A (.up ℤ)) _ δ P
+  have hciso (P : CochainComplex A ℤ)
+      (hP : CochainComplex.IsKFlatIndependentCoefficients
+        (R := coefficientSequenceCommRingSheaf l E X) P)
+      (hflat : ∀ n : ℤ, exactFunctor _ _
+        (@MonoidalCategory.tensorRight _ _
+          (SheafOfModules.monoidalCategory (coefficientSequenceCommRingSheaf l E X)) (P.X n))) :
+      IsIso (c.app (DerivedCategory.Q.obj P)) := by
+    have hPa := (SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+      (integralComparisonSequenceScalarMap l E L ι X) P ma.E ma.obj_eq ma.map_eq hP hflat).1
+    have := ma.computes P hP
+    have := mb.computes _ hPa
+    have := mc.computes P hP
+    have : IsIso (c.app (DerivedCategory.Q.obj P) ≫ mc.ε.app P) := by
+      rw [hc]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (mc.ε.app P)
+  have : IsIso c := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    let P := DerivedCategory.Q.objPreimage K
+    rw [NatTrans.isIso_app_iff_of_iso c (DerivedCategory.Q.objObjPreimageIso K).symm]
+    obtain ⟨R, f, hR, hflat, hf, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := coefficientSequenceCommRingSheaf l E X) P
+    let := hf
+    have : IsIso (DerivedCategory.Q.map f) := inferInstance
+    have := hciso R hR hflat
+    have h := c.naturality (DerivedCategory.Q.map f)
+    have : IsIso (((ma.T ⋙ mb.T).map (DerivedCategory.Q.map f)) ≫
+        c.app (DerivedCategory.Q.obj P)) := by
+      rw [h]
+      infer_instance
+    exact IsIso.of_isIso_comp_left ((ma.T ⋙ mb.T).map (DerivedCategory.Q.map f)) _
+  refine ⟨asIso c, fun P _ ↦ hc P, ?_⟩
+  intro b hb
+  apply Iso.ext
+  apply sequenceDerived_ext l E X b.hom c
+  intro P hP
+  have := mc.computes P hP
+  apply (cancel_mono (mc.ε.app P)).mp
+  exact (hb P hP).trans (hc P).symm
 
 /-- The canonical derived associator, with multiplication normalization before localization.
 Source: Stacks 06YY, 0D6D
@@ -95,7 +173,29 @@ theorem integralComparisonSystemScalarUnit_existsUnique (X : Scheme.{t}) :
             DerivedCategory.Q.map
               ((NatIso.mapHomologicalComplex
                 (integralComparisonSequenceScalarUnit l E X) (.up ℤ)).hom.app P) := by
-  sorry
+  let A := coefficientSequenceModules l E X
+  let m := integralComparisonSequenceScalarModel l E E (AlgHom.id ℚ_[l] E) X
+  let e := integralComparisonSequenceScalarUnit l E X
+  let d : m.E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q :=
+    Functor.isoWhiskerRight (NatIso.mapHomologicalComplex e (.up ℤ)) DerivedCategory.Q
+  let β : DerivedCategory.Q ⋙ 𝟭 (coefficientSequenceDerived l E X) ⟶
+      m.E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q := d.inv
+  let := m.universal
+  let : (𝟭 (coefficientSequenceDerived l E X)).IsLeftDerivedFunctor β
+      (HomologicalComplex.quasiIso A (.up ℤ)) :=
+    Functor.isLeftDerivedFunctor_of_inverts _ _ (asIso β)
+  let c := Functor.leftDerivedNatIso m.T (𝟭 _) m.ε β
+    (HomologicalComplex.quasiIso A (.up ℤ)) (Iso.refl _)
+  have hc (P : CochainComplex A ℤ) :
+      c.hom.app (DerivedCategory.Q.obj P) = m.ε.app P ≫ d.hom.app P := by
+    have h := Functor.leftDerivedNatTrans_app m.T (𝟭 _) m.ε β
+      (HomologicalComplex.quasiIso A (.up ℤ)) (𝟙 _) P
+    change c.hom.app (DerivedCategory.Q.obj P) ≫ d.inv.app P = m.ε.app P ≫ 𝟙 _ at h
+    simpa using congrArg (fun f ↦ f ≫ d.hom.app P) h
+  refine ⟨c, fun P _ ↦ hc P, ?_⟩
+  intro b hb
+  apply Iso.ext
+  exact sequenceDerived_ext l E X b.hom c.hom (fun P hP ↦ (hb P hP).trans (hc P).symm)
 
 /-- The derived scalar multiplication unitor on the whole quotient diagram.
 Source: Stacks 06YY (blueprint: lem-trf-quotient-system-mixed-coherence). -/

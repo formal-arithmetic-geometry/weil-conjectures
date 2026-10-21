@@ -89,13 +89,14 @@
    }
   },
   {
-   "text": "For an arbitrary unbounded input choose one flat-term K-flat resolution on its entire ringed sequence site by [lem-pc-kflat-resolution]. This resolves the strict system as a single ringed-site module complex, rather than choosing unrelated resolutions at each level. By [lem-weil-pbc-ringed-topos-kflat-pullback], every ordinary geometric pullback and every scalar extension of this complex is again K-flat with flat terms: scalar extension is the special case with identity underlying topos and the actual quotient ring-sheaf map. Repeated application proves the assertion for every intermediate expression in the finite diagrams of Steps 2--5. The sites are the small sequence sites of [def-coef-ringed-sequence-site], and the geometric and coefficient ringed maps are those of [def-trf-integral-comparison-sequence-systems]; thus the cited preservation theorem applies with its actual hypotheses. By [lem-pur-derived-change-of-rings], the scalar functors and their resolution comparisons are computed on these models and are independent of the chosen K-flat resolution. The geometric functor is exact as specified in [def-trf-integral-comparison-sequence-systems], so its termwise action computes its derived functor. Accordingly the stipulated derived comparison components are precisely the localizations of the cochain maps checked above.",
+   "text": "For an arbitrary unbounded input choose one flat-term K-flat resolution on its entire ringed sequence site by [lem-pc-kflat-resolution]. This resolves the strict system as a single ringed-site module complex, rather than choosing unrelated resolutions at each level. By [lem-weil-pbc-ringed-topos-kflat-pullback], every ordinary geometric pullback and every scalar extension of this complex is again K-flat with flat terms: scalar extension is the special case with identity underlying topos and the actual quotient ring-sheaf map. Repeated application proves the assertion for every intermediate expression in the finite diagrams of Steps 2--5. The sites are the small sequence sites of [def-coef-ringed-sequence-site], and the geometric and coefficient ringed maps are those of [def-trf-integral-comparison-sequence-systems]; thus the cited preservation theorem applies with its actual hypotheses. By [lem-pur-derived-change-of-rings], the scalar functors and their resolution comparisons are computed on these models and are independent of the chosen K-flat resolution. The geometric functor is exact as specified in [def-trf-integral-comparison-sequence-systems], so its termwise action computes its derived functor. Accordingly the stipulated derived comparison components are precisely the localizations of the cochain maps checked above. The derived scalar associator is constructed as the universal left-derived lift of the ordinary tensor associator. On a flat-term K-flat resolution its component is invertible: the first scalar extension remains K-flat by lem-pur-kflat-change-of-rings-independent, so all three model counits are invertible. Naturality across resolution quasi-isomorphisms gives invertibility everywhere. The derived scalar unit is the uniqueness isomorphism between the given derived scalar model and the identity, using the localized ordinary multiplication unitor as counit. For uniqueness of both comparisons, equality on K-flat inputs extends to all inputs by naturality and cancellation of the resolution isomorphisms. These two existence-and-uniqueness assertions are proved in Lean; the combined mixed-coherence theorem retains its original proof obligation.",
    "uses": [
     "def-coef-ringed-sequence-site",
     "def-trf-integral-comparison-sequence-systems",
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings-independent"
    ],
    "elementary": false,
    "source": {
@@ -121,12 +122,13 @@
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-pur-derived-change-of-rings",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-pur-kflat-change-of-rings-independent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6D, 06YS, 0G7E, 06YT, 06YY for simultaneous models; mixed identities expanded from the prescribed sequence-system tensor formulas, not claimed as a verbatim Stacks theorem."
+  "place": "Tags 0D6D, 06YS, 0G7E, 06YT, 06YY for simultaneous models; mixed identities expanded from the prescribed sequence-system tensor formulas, not claimed as a verbatim Stacks theorem. C2: the derived scalar associator and unitor are proved by the universal left-derived lift and uniqueness APIs; flat-term preservation uses the existing independent-universe change-of-rings theorem. The remaining main theorem is unchanged."
  },
  "mathlib_searches": [
   {
@@ -283,5 +285,15 @@
   "group": "Q26",
   "result": "pass",
   "note": "Re-delivery after the H13 RETURN of 33e3f1b6: def-trf-integral-comparison-sequence-systems record is now byte-identical (cmp) to live and side-live (N2, IntegralComparisonSequenceSystems, 36 decls); the separate IntegralComparisonSequenceScalarDerived module is dropped; the derived alpha/e helpers (integralComparisonSystemScalarComposition/_existsUnique, integralComparisonSystemScalarUnit/_existsUnique) are moved verbatim into the item module in a closed section, retagged to the item and listed in lean.declarations. They are .choose of ∃! pinned via the universal cochain counits on K-flat representatives, the same pattern as live derived kappa, so not hollow. The rest of the item Lean is unchanged from the previously reviewed head. Re-read every clause (mixed square, scalar unit, scalar tower, associativity, both unit laws, finite bracketings; ordinary and derived): matches the node, with no added assumptions and independent universes t/u. lean.statement is verbatim; no name clashes in live or side-live; docstrings carry all 8 proof steps; report sections present. No compile run (2026-10-21 rule), no fixes. Advisory: proof-plan-only imports; Nonempty Invertible in the path predicate."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T170717-L-2752086",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
