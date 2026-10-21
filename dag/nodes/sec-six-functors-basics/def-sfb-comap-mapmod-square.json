@@ -182,5 +182,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-53d3520f3 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item def-sfb-comap-mapmod-square and its report, and no new nodes. The statement is word for word the main-20261015 blueprint source (def-sfb-comap-mapmod-square.md, order 1727). F is lax monoidal, and the square orientation and the direction of the isomorphism match the source. stmt_deps equal the source's uses (sk-def-sfb-transport, sk-def-sfb-change-of-scalars). The source proof credits 'mapMod(F) commutes with Res' to sk-def-sfb-transport, but that node's statement does not say it. The delivery correctly replaces this with an explicit calculation, which repairs C3/C4/E5. Step 1: the transport action Fγ∘μ^F (def-sfb-modobj-transport) followed by restriction precomposition (def-sfb-modobj-restriction) gives a_L with (η_S∘φ_Y)⊗1, by bifunctoriality of the tensor. Step 2: uses naturality of μ^F in its first variable, F(φ_X⊗1)∘μ_{R_X,M} = μ_{S_X,M}∘(Fφ_X⊗1); I checked the domains and codomains. Then the square Fφ_X∘η_R = η_S∘φ_Y, in its stated orientation, gives a_R = a_L, with no strength or inverse tensorator. Step 3: the identity components are linear by sk-def-sfb-module-objects clause 2, mutually inverse, and natural because both sides send h to Fh. All three steps are genuinely elementary. proof_deps equal the union of the steps' uses; all are definitions, so there is no route or tool_use issue. There is no cycle: the item does not cite lem-sfb-comap-mapmod-square-underlying, and no SGA source is cited. Small cases tested: F = id, identity φ's, noncommutative monoids in (Set,×), the lax power set functor, and the zero module. None gives a counterexample. rg over dag/nodes found no duplicate of the square isomorphism or a separate Res-composition node. The Mathlib searches record all three kinds, and the Loogle error is recorded as an error, not as absence. No fixes were made."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+  "declaration": "CategoryTheory.Mod.comapMapModComapIso",
+  "statement": "noncomputable def comapMapModComapIso :\n    (F.mapMod S_X ⋙ comap η_S) ⋙ comap φ_Y ≅ comap φ_X ⋙ (F.mapMod R_X ⋙ comap η_R)",
+  "branch": "slopmaster2",
+  "by": "Q46",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing declaration in the live WeilConjectures library, verified by reading scompile.py --source. Its section binds independent object/morphism universes, monoidal C and D, lax monoidal F, the four monoid objects, four monoid morphisms and precisely the commutative-square equation. The definition factors through comapComp, comapCongr sq and mapModComapIso, giving the specified common-composite comparison, with identity underlying components. No additional braided, commutative, closed, abelian, exactness or colimit hypotheses occur. No duplicate module or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e7078c08",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Existing-only delivery: only the item lean record and report differ from live. CategoryTheory.Mod.comapMapModComapIso (ChangeOfScalarsSquare l.71-92) matches every clause: lax monoidal F, four monoid objects and morphisms, sq φ_Y≫η_S=η_R≫F.map φ_X in the node's orientation, (F.mapMod S_X ⋙ comap η_S) ⋙ comap φ_Y ≅ comap φ_X ⋙ F.mapMod R_X ⋙ comap η_R. Body goes through comapComp/comapCongr sq/mapModComapIso (common composite, not hollow); components are the identity by the _hom_app_hom lemma. Independent universes, no extra hypotheses in the section. mapMod and comap are the declarations recorded by sk-def-sfb-transport and sk-def-sfb-change-of-scalars. No other node binds the declaration. Statement verbatim. nt_compile --json probe (#check, #print axioms with no sorryAx, 4-universe instantiation): EXIT 0, 22.5 s. Report sections present. No findings."
+ }
 }

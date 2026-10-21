@@ -170,5 +170,27 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-750c62df2 (reviewer sub-agent of L); spot-checked: PASS: I read the item and every step in full; there are no new nodes and no fixes. The statement, stmt_deps, source, created and blueprint fields are identical to the live unsplit node; only proof, proof_deps, proof_origin, status, split_report and the appended searches changed. The item has no repair note of its own: Q22 created it in the 2026-10-21 re-split of lem-sfb-finite-upper-star-braided, so this is an ordinary small split and the re-split rule does not apply. Neither the item nor the cited leaf is in route-pivot-dropped.txt. Hypothesis check: Mathlib Functor.LaxBraided.braided (Braided/Basic.lean:386-388), read in ordinary order, is R(β_{P,Q})∘m_{P,Q}=m_{Q,P}∘β_{RP,RQ}, which is what the item assumes. Step 1 (elementary) precomposes this identity with u⊗v. Step 2 cites the Mathlib leaf lem-sfb-braiding-naturality (BraidedCategory.braiding_naturality, Basic.lean:121-124) with f=u, g=v; its display gives exactly β_{RP,RQ}∘(u⊗v)=(v⊗u)∘β_{X,Y}. Step 3 (elementary) substitutes this to get b∘β_{X,Y}. Step 4 specializes to the units η_X:X→R(LX) and η_Y:Y→R(LY), the form parent step 1 cites. All sources and targets type-check, and the composition convention agrees with def-sfb-monoidal-category. Small cases: u=v=id gives the hypothesis, R=id with m=id gives braiding naturality, and no symmetry or invertibility is used. Source: the first paragraph of main-20261015 lem-sfb-finite-upper-star-braided.proof.md uses exactly 'naturality of the braiding and the compatibility of the lax structure of g_* with the braiding'; the transposition stays in the parent. No SGA source is used. Duplicate search over the DAG found only specific instances (lem-sc-boundary-pullback-tensor-braiding, lem-sfb-point-upper-star-braided, lem-pur-finite-forward-product-symmetry), none of which states this generic calculation. The leaf belongs to another unit, but it is a Mathlib leaf, so no tool_uses entry is needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Monoidal.UnitTensorBraiding",
+  "declaration": "CategoryTheory.Functor.LaxBraided.tensorHom_μ_braiding",
+  "declarations": [
+   "CategoryTheory.Functor.LaxBraided.tensorHom_μ_braiding",
+   "CategoryTheory.Adjunction.unit_tensor_μ_braiding"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Monoidal/UnitTensorBraiding.lean",
+  "statement": "theorem Functor.LaxBraided.tensorHom_μ_braiding {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C] {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [BraidedCategory D] (R : D ⥤ C) [R.LaxBraided] {X Y : C} {P Q : D} (u : X ⟶ R.obj P) (v : Y ⟶ R.obj Q) : ((u ⊗ₘ v) ≫ Functor.LaxMonoidal.μ R P Q) ≫ R.map (β_ P Q).hom = (β_ X Y).hom ≫ ((v ⊗ₘ u) ≫ Functor.LaxMonoidal.μ R Q P)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce9bbdac2",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Node clauses match: C,D Mathlib MonoidalCategory+BraidedCategory with independent universes; [R.LaxBraided] = lax structure + braided field μ≫R.map β = β≫μ (Braided/Basic.lean:386); u:X⟶R.obj P, v:Y⟶R.obj Q; conclusion ((u⊗ₘv)≫μ P Q)≫R.map(β_ P Q).hom = (β_ X Y).hom≫((v⊗ₘu)≫μ Q P); adjunction-unit specialization added as a separate theorem, general theorem kept, no assumptions on L. lean.statement verbatim; node differs from live only in lean; no new nodes/deps; not dropped. No name collisions in Mathlib/project; no existing composite lemma. sorry-only, source/blueprint docstrings with steps 1-4. nt_compile --json clean 18.6 s; a test copy with u and v swapped fails to type-check. Advisory: Q130's second-reading section is a self-pass."
  }
 }

@@ -235,5 +235,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-19dd9af05 (reviewer sub-agent of L); spot-checked: Read the whole item (7 steps, no new nodes) against Stacks sites-modules.tex 03ER(1) and 03ES (l.4241-4286). The statement is unchanged from base and asserts the finite-limit half of 03ER's exactness, which is what the parent scalar-localization-sheaf-exact step 2 uses. The inline flatness (⊗P(V) preserves injections) equals def-weil-pbc-flat-ring-map, the notion in the hypothesis of lem-weil-pbc-flat-tensor-exact. Steps 1-3 (functoriality via the balancing check, sectionwise kernels, finite products including I=∅) are elementary and correct. Step 4 applies the 'in particular' clause of flat-tensor-exact (rTensor_exact, Flat/Basic.lean:340) with R(V), P(V). Step 5 proves naturality of α by injectivity of j_W and pure tensors. Step 6 uses tensor-finite-product (piLeft, Pi.lean:115; t=0 allowed) with naturality of β. Step 7 writes the full equalizer-as-kernel argument (pr_a δ = D(a)pr_i − pr_j, J finite, empty diagram included). Edge cases checked: ℤ/2 with f=2 shows flatness is needed and is used only in step 4; restriction ring maps are arbitrary. Duplicate search (DAG with -R, Mathlib ModuleCat/Presheaf) found nothing; free-sheaf-flat and presheaf-finite-limits-objectwise are different statements. The item is not on the 2026-10-19 drop list and live is still unsplit. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SectionwiseFlatPresheafTensor",
+  "declaration": "PresheafOfModules.tensorRight_preservesFiniteLimits_of_sectionwise_flat",
+  "file": "lean/Sheaf/CategoryTheory/SectionwiseFlatPresheafTensor.lean",
+  "statement": "theorem tensorRight_preservesFiniteLimits_of_sectionwise_flat {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{w}) (P : PresheafOfModules.{w} (R.obj ⋙ forget₂ CommRingCat RingCat)) (hP : ∀ V : Cᵒᵖ, Module.Flat (R.obj.obj V) (P.obj V)) : PreservesFiniteLimits (tensorRight P) ∧ (∀ (A B : PresheafOfModules.{w} (R.obj ⋙ forget₂ CommRingCat RingCat)) (f : A ⟶ B), ∃ e : (tensorRight P).obj (kernel f) ≅ kernel ((tensorRight P).map f), e.hom ≫ kernel.ι ((tensorRight P).map f) = (tensorRight P).map (kernel.ι f)) ∧ (∀ (I : Type t) [Finite I] (A : I → PresheafOfModules.{w} (R.obj ⋙ forget₂ CommRingCat RingCat)), IsIso (piComparison (tensorRight P) A))",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ae9fad97",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Only change from live: new module SectionwiseFlatPresheafTensor.lean (one theorem, proof sorry) plus the item's lean record; no new nodes or statement change. Clause-by-clause: Precoverage+IsSiteForCoverings (recorded dep), R : Sheaf J.toGrothendieck CommRingCat.{w}, P : PresheafOfModules (R.obj ⋙ forget₂), hP = Module.Flat at every V (equivalent to the node's injectivity test, not stronger); conclusion PreservesFiniteLimits (tensorRight P) ∧ kernel iso pinned to the canonical map by e.hom ≫ kernel.ι = T.map (kernel.ι f) (kernel.ι monic) ∧ IsIso piComparison for every Finite I : Type t (Empty included). Universes: site u,v free; ring = module universe w is Mathlib Monoidal's convention, already recorded on def-pur-presheaf-tensor-product; index universe t free. Edge cases checked; flatness needed (Z, P = Z/2, f = 2). No duplicate in Mathlib Presheaf or side lean/Sheaf (flat_of_sectionwise_flat is a private scheme stalk lemma). Docstrings give source and blueprint id and carry all 7 steps; lean.statement verbatim; not on dropped list; report has Worker report and Second reading by Q69. nt_compile --json clean in 28.9 s; error-injected control copy reports the error. Advisory only: proof-only TensorProduct.Pi import; brief second reading."
  }
 }

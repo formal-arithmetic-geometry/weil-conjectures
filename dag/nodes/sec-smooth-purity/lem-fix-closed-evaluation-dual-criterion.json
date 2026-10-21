@@ -185,5 +185,28 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-077602a9f (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and its report, and no new nodes. Stacks 0FPU (sites-cohomology.tex l.13149-13183, example-dual-derived) leaves out both triangle checks, so this split supplies them (D5). Step 1: injectivity of the transposition T applied to phi_P c = u_P gives E_P(1_P⊗c) = rho_P, which is the first triangle t = 1_P. Step 2: a = phi_1 rho_D^{-1} is an iso and equals T(e); this uses lambda_1 = rho_1 (Mathlib unitors_equal, CoherenceLemmas.lean:58) and rho_{P⊗D} alpha^{-1} = 1_P⊗rho_D (rightUnitor_tensor_hom, Category.lean:694), both under the cited Mathlib leaf def-sfb-monoidal-category. Step 3: interchange of the two disjoint evaluations gives e(1_P⊗g) = e(t⊗1_D) = e, with no braiding; I checked the strict computation and the coherence suppression is routine. Step 4: a g = T(e(1_P⊗g)) = a, so g = 1_D. The statement is correct and was not weakened. I tested it on Vect with e = r·mult (r≠0 gives c = r^{-1}; r = 0 fails the hypothesis), on zero objects, on finite-dimensional V with V*, and on infinite-dimensional V, where the hypothesis fails. The only citer, lem-fix-site-perfect-scalar-hom, uses the same c = phi_P^{-1}u_P and the same tensor order. Duplicate search (rg -L over dag/nodes): lem-pc-dualizable-evaluation-criterion and its second-triangle helper are the D(O_X)-only special case; lem-sfb-dual-tensor-adjunctions and lem-trf-exact-pairing-iso-transport assume an exact pairing. None of them is a duplicate. There is no SGA citation, no repair note, the item is not on a dropped list, there is no route departure and no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ClosedEvaluationDualCriterion",
+  "declaration": "CategoryTheory.closed_evaluation_dual_criterion",
+  "declarations": [
+   "CategoryTheory.closedEvaluationComparison",
+   "CategoryTheory.closedEvaluationCoevaluation",
+   "CategoryTheory.closed_evaluation_dual_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ClosedEvaluationDualCriterion.lean",
+  "statement": "theorem closed_evaluation_dual_criterion {C : Type u} [Category.{v} C] [MonoidalCategory C] {H : Cᵒᵖ ⥤ C ⥤ C} (adj : curriedTensor C ⊣₂ H) (P D : C) (e : P ⊗ D ⟶ 𝟙_ C) [∀ N : C, IsIso (closedEvaluationComparison adj P D e N)] : ((ρ_ P).inv ≫ P ◁ closedEvaluationCoevaluation adj P D e ≫ (α_ P D P).inv ≫ e ▷ P ≫ (λ_ P).hom = 𝟙 P) ∧ ((λ_ D).inv ≫ closedEvaluationCoevaluation adj P D e ▷ D ≫ (α_ D P D).hom ≫ D ◁ e ≫ (ρ_ D).hom = 𝟙 D)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90f4db778",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Clause-by-clause match: arbitrary MonoidalCategory C (free universes u,v), specified H with curriedTensor C ⊣₂ H (naturality in all three variables, not stronger), φ_N = transpose of α⁻¹≫e▷N≫λ, ∀N IsIso, c = u_P ≫ inv φ_P as real data, both triangle identities with the correct constraints (ExactPairing D P orientation). Math re-derived (steps 1-4 sound); edge cases (unit object, zero objects, e=0) ok. Node record differs from live only in lean; lean.statement verbatim; docstrings carry source place, blueprint tag and proof steps; only sorry is the theorem proof; imports minimal. nt_compile --json clean 9.6 s (reproduces 7.5-7.7 s). Advisory only: upstream WeilConjectures MonoidalClosed.exactPairingOfIsIso (Rigid/Basic.lean:393-440) is the ihom special case, not a duplicate, and was not cited in the report; stage 3 can reuse its proof. No fixes."
  }
 }

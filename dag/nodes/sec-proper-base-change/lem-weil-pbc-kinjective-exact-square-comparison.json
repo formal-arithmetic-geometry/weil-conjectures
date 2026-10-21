@@ -196,5 +196,30 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-23ab849fc (reviewer sub-agent of L); spot-checked: This is the item's first split. It is unsplit with no proof in base, live and side-live; there is no repair note and the item is not dropped. The statement and stmt_deps are unchanged, there are no new nodes, and proof_deps equals the union of the step uses. Statement: A=D(s)RH' and B=RH D(r). The identifications suppressed by the statement are exactly the λ_s and λ_r of lem-weil-pbc-exact-functor-derived-factorization, and step 1 types them out. Every hypothesis is used: r and s exact, r preserving K-injectives, K-injective replacements in A' and A, and H, H' only additive. Steps 1-2: invertibility of the unit on K-injectives is a clause of def-sfb-right-derived-functor's statement, and I checked naturality of a, b along homotopy classes by hand from naturality of λ and η. Step 3: the Mathlib leaf lem-weil-pbc-kinjective-hom-derived (Qh_map_bijective) extends naturality to all derived maps between K-injectives, and essential surjectivity of the localization Q gives the existence of u. Steps 4-6: I checked the order of factors in the independence, naturality (t=vfu^{-1}) and uniqueness calculations. Sources: Stacks derived.tex 070I (l.9631), 070Y (l.9747) and 070K (l.9767), and the first sentence of the main-20261015 prop-weil-pbc-direct-image-limits proof. The parent applies the item with r=s=e_n and all hypotheses hold there. Duplicate search: the normalized-comparison identifications and common-resolution nodes take β as given, and the exact-square pasting and composition nodes cover only exact functors, so none is a duplicate. Mathlib's rightDerivedFunctorComparison and rightDerivedUnique are not one-line specializations. All cited nodes are definitions or Mathlib leaves, so there is no route or tool_use issue."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveExactSquareComparison",
+  "declaration": "CategoryTheory.KInjectiveExactSquare.existsUnique_normalized",
+  "declarations": [
+   "CategoryTheory.KInjectiveExactSquare.sourceIso",
+   "CategoryTheory.KInjectiveExactSquare.leftUnit",
+   "CategoryTheory.KInjectiveExactSquare.rightUnit",
+   "CategoryTheory.KInjectiveExactSquare.delta",
+   "CategoryTheory.KInjectiveExactSquare.existsUnique_normalized"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveExactSquareComparison.lean",
+  "statement": "theorem existsUnique_normalized (enough' : ∀ K : CochainComplex A' ℤ, ∃ (J : CochainComplex A' ℤ) (f : K ⟶ J), J.IsKInjective ∧ QuasiIso f) (enough : ∀ K : CochainComplex A ℤ, ∃ (J : CochainComplex A ℤ) (f : K ⟶ J), J.IsKInjective ∧ QuasiIso f) (preserves : ∀ J : CochainComplex A' ℤ, J.IsKInjective → CochainComplex.IsKInjective ((r.mapHomologicalComplex (.up ℤ)).obj J)) (universal' : ∀ G : DerivedCategory A' ⥤ DerivedCategory B', Function.Bijective (fun α : RH' ⟶ G ↦ η' ≫ Functor.whiskerLeft DerivedCategory.Qh α)) (universal : ∀ G : DerivedCategory A ⥤ DerivedCategory B, Function.Bijective (fun α : RH ⟶ G ↦ η ≫ Functor.whiskerLeft DerivedCategory.Qh α)) : ∃ (ha : ∀ J : CochainComplex A' ℤ, J.IsKInjective → IsIso (leftUnit H' H r s h RH' η' J)) (_hb : ∀ J : CochainComplex A' ℤ, J.IsKInjective → IsIso (rightUnit H r RH η J)) (β : RH' ⋙ s.mapDerivedCategory ≅ r.mapDerivedCategory ⋙ RH), (∀ (J : CochainComplex A' ℤ), J.IsKInjective → leftUnit H' H r s h RH' η' J ≫ β.hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient A' (.up ℤ)).obj J)) = rightUnit H r RH η J) ∧ (∀ γ : RH' ⋙ s.mapDerivedCategory ≅ r.mapDerivedCategory ⋙ RH, (∀ (J : CochainComplex A' ℤ), J.IsKInjective → leftUnit H' H r s h RH' η' J ≫ γ.hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient A' (.up ℤ)).obj J)) = rightUnit H r RH η J) → γ = β) ∧ (∀ (J J' : CochainComplex A' ℤ) (hJ : J.IsKInjective) (hJ' : J'.IsKInjective) (f : (HomotopyCategory.quotient A' (.up ℤ)).obj J ⟶ (HomotopyCategory.quotient A' (.up ℤ)).obj J'), (RH' ⋙ s.mapDerivedCategory).map (DerivedCategory.Qh.map f) ≫ delta H' H r s h RH' RH η' η J' (ha J' hJ') = delta H' H r s h RH' RH η' η J (ha J hJ) ≫ (r.mapDerivedCategory ⋙ RH).map (DerivedCategory.Qh.map f)) ∧ (∀ (M : DerivedCategory A') (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) (u : M ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient A' (.up ℤ)).obj J)), β.hom.app M = (RH' ⋙ s.mapDerivedCategory).map u.hom ≫ delta H' H r s h RH' RH η' η J (ha J hJ) ≫ (r.mapDerivedCategory ⋙ RH).map u.inv) ∧ (∀ (M : DerivedCategory A') (J J' : CochainComplex A' ℤ) (hJ : J.IsKInjective) (hJ' : J'.IsKInjective) (u : M ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient A' (.up ℤ)).obj J)) (v : M ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient A' (.up ℤ)).obj J')), (RH' ⋙ s.mapDerivedCategory).map u.hom ≫ delta H' H r s h RH' RH η' η J (ha J hJ) ≫ (r.mapDerivedCategory ⋙ RH).map u.inv = (RH' ⋙ s.mapDerivedCategory).map v.hom ≫ delta H' H r s h RH' RH η' η J' (ha J' hJ') ≫ (r.mapDerivedCategory ⋙ RH).map v.inv)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48791f762",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion clause matches the Lean: 4 abelian categories with independent universes; enough K-injectives via arbitrary quasi-isos; r, s exact; strict square h; r preserves K-injectives; universal pairs use the dependency's exact bijection formula; leftUnit/rightUnit are a_J/b_J with mapDerivedCategoryFactorsh.inv in the correct direction and a canonical sourceIso; delta = a⁻¹ ≫ b; normalization, uniqueness from K-injective normalization alone, homotopy-class naturality, formula and independence conjuncts all present. No extra assumptions; the theorem is true. Node record differs from side-live only by the lean field; statement verbatim; docstrings carry source and blueprint; proof is sorry only; no duplicate in side-live or Mathlib. nt_compile --json clean (16.1 s, exit 0)."
  }
 }

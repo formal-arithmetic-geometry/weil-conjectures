@@ -238,5 +238,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-aa0ebc390 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited node statements, the unit sk-def-sfb-coefficient-comparisons and the main-20261015 statement and proof.md for def-sfb-projection-formula-comap. The item statement is the source statement word for word and is not weakened. There are no new nodes. Step 1: clause 1 of det-def-sfb-ring-object-transport makes Sφ a monoid morphism (a strong monoidal functor is in particular lax monoidal). The two actions follow exactly from the restriction node (γ_N∘(φ⊗N)) and the linearization node (Pγ_M∘π^{-1}). Step 2: naturality of π in L at φ, with both sides typed as maps P(SB⊗M)→B'⊗PM, is the right identity. Conjugating it by π^{-1} and applying functoriality of P gives a_F=a_G, so marking the step elementary is fair. Steps 3 and 4: identity module isomorphisms and naturality on underlying morphisms, using the module-morphism definition and the facts that restriction is the identity on morphisms and linearization sends f to Pf. proof_deps is the union of the steps' uses. Edge case checked: φ=id gives the identity isomorphism. No hypothesis beyond the source is used. Route: unit step 1 names this node. Every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. Duplicate search (rg for projection formula, linearization, P_B): the nearest node, def-sfb-comap-mapmod-square, is a different construction (mapMod with a square of monoids, no projection formula). No SGA. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+  "declaration": "CategoryTheory.Functor.ProjectionFormula.mapModLeftComapIso",
+  "statement": "noncomputable def mapModLeftComapIso :\n    pf.mapModLeft B' ⋙ Mod.comap φ ≅ Mod.comap (S.map φ) ⋙ pf.mapModLeft B",
+  "branch": "slopmaster2",
+  "by": "Q47",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing construction in ChangeOfScalarsSquare.lean:172–191, confirmed against the live server source using scompile.py --source. The context has arbitrary monoidal C and D with independent object and morphism universes, S : D ⥤ C with S.Monoidal, P : C ⥤ D, pf : S.ProjectionFormula P, monoid objects B and B′, and a monoid morphism φ : B ⟶ B′. The two functor composites have exactly the source direction; NatIso.ofComponents uses Mod.isoMk (Iso.refl _), giving identity underlying components in both directions. No new module, dependency repair, new node, or statement change. The slopmaster2 branch label follows the convention for existing WeilConjectures declarations in the live library."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0705109e1",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Existing-only attachment of CategoryTheory.Functor.ProjectionFormula.mapModLeftComapIso (ChangeOfScalarsSquare.lean:184), which the blueprint lean tag names. Clause by clause: strong monoidal S, pf : S.ProjectionFormula P (landed def-sfb-projection-formula record), arbitrary MonObj B B' and IsMonHom φ, linearization pf.mapModLeft (landed def-sfb-modobj-linearization), restrictions Mod.comap φ / Mod.comap (S.map φ) (Mathlib match of def-sfb-modobj-restriction), S.map φ a monoid morphism via map.instIsMonHom (Mathlib match of det-def-sfb-ring-object-transport); pf.mapModLeft B' ⋙ Mod.comap φ ≅ Mod.comap (S.map φ) ⋙ pf.mapModLeft B has the source direction; identity underlying hom and inv checked by rfl. No extra hypotheses; four independent universes. Only the item lean field changed vs live; statement verbatim. nt_compile --json check: exit 0, 15 s, axioms propext/choice/Quot.sound. No findings."
+ }
 }

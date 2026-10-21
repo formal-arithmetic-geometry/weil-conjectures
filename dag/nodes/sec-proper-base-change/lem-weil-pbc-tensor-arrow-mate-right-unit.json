@@ -164,5 +164,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7f715ab8c (reviewer sub-agent of L); spot-checked: The statement is unchanged; it is byte-identical in side-live and live, where the item is unsplit, and the only fields that changed are the proof, the split record and five added searches. There is no repair note, the item is not on the dropped list, and there is no SGA citation. All three steps are correct and I re-derived each. Step 1: the interchange (1⊗u)(c⊗1)=c⊗u=(c⊗1)(1⊗u) plus naturality of ρ^D at c gives k_E(c⊗1)=c·k_{LK}. Step 2: precomposing with μ_{K,1} and using the hypothesis at M=K gives k_Eβ^c_1=cL(ρ_K). Step 3: functoriality of R plus naturality of η at ρ_K (from the statement of the cited lem-weil-pbc-adjunction-of-natural-bijection, a Mathlib leaf via mkOfHomEquiv, so no tool_uses entry is needed) gives R(k_E)α^c_1=R(c)η_Kρ_K. proof_deps equals the union of the step uses. The parent lem-weil-pbc-formal-exact-projection-mate uses the item with K=RE and c=ε_E plus the triangle identity, and its α matches α^c exactly. I tested a cartesian example in Sets and a scaled example in Q-vector spaces (ρ_C=2, ρ_D=3, u=5, μ=2/15), and no invertibility is used anywhere. The Stacks Tag 0B56 lines 13660-13680 and the blueprint first sentence are checked and correct, and proof_origin is correctly agent-written. The delivery has no new nodes and my rg -L search found no duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TensorArrowMateRightUnit",
+  "declaration": "CategoryTheory.Adjunction.tensorArrowMate_right_unit",
+  "file": "lean/Sheaf/CategoryTheory/TensorArrowMateRightUnit.lean",
+  "statement": "theorem tensorArrowMate_right_unit {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (TC : C × C ⥤ C) (TD : D × D ⥤ D) (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R) (mu : TC ⋙ L ≅ L.prod L ⋙ TD) (oneC : C) (oneD : D) (rhoC : (𝟭 C).prod' ((Functor.const C).obj oneC) ⋙ TC ≅ 𝟭 C) (rhoD : (𝟭 D).prod' ((Functor.const D).obj oneD) ⋙ TD ≅ 𝟭 D) (u : L.obj oneC ≅ oneD) (right_action : ∀ M : C, mu.hom.app (M, oneC) ≫ TD.map (Prod.mkHom (𝟙 (L.obj M)) u.hom) ≫ rhoD.hom.app (L.obj M) = L.map (rhoC.hom.app M)) (K : C) (E : D) (c : L.obj K ⟶ E) : (mu.hom.app (K, oneC) ≫ TD.map (Prod.mkHom c (𝟙 (L.obj oneC)))) ≫ (TD.map (Prod.mkHom (𝟙 E) u.hom) ≫ rhoD.hom.app E) = L.map (rhoC.hom.app K) ≫ c ∧ (adj.unit.app (TC.obj (K, oneC)) ≫ R.map (mu.hom.app (K, oneC) ≫ TD.map (Prod.mkHom c (𝟙 (L.obj oneC))))) ≫ R.map (TD.map (Prod.mkHom (𝟙 E) u.hom) ≫ rhoD.hom.app E) = rhoC.hom.app K ≫ adj.unit.app K ≫ R.map c",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1995fc17a",
+  "group": "NF",
+  "result": "pass",
+  "note": "Only the node's lean field changed versus side-live; lean.statement is verbatim in the file. Every object, hypothesis and both conclusion clauses match the node: TC/TD uncurried bifunctors, adj : L ⊣ R, natural iso mu : TC ⋙ L ≅ L.prod L ⋙ TD, rhoC/rhoD natural isos (prod' with const) ⋙ T ≅ 𝟭, u, right_action, beta/alpha/k_E expanded, all directions correct, c arbitrary, 4 independent universes, no extra coherence or instances. nt_compile --json EXIT 0 (14.5 s, no warnings); a control with the first conclusion reversed fails to typecheck; a scratch proof following node steps 1-3 compiles (not delivered), so the statement is true and its hypotheses are satisfiable. No Mathlib or project duplicate; the parent's formalProjectionBeta/Alpha fix c := counit. The only stmt_dep is the Mathlib adjunction leaf, with its module imported. Docstrings carry Tag 0B56/0037, the blueprint tag and all 3 proof steps; proof is sorry only. Report has both required sections. Advisory: the parent formalExactProjectionMate takes mu as a plain family over curried bifunctors, so its stage-3 proof will need to supply naturality and uncurrying to apply this lemma."
  }
 }

@@ -253,5 +253,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-06471558f (reviewer sub-agent of L); spot-checked: Read the item's 6 steps and every cited statement. Sources: Bhatt-Scholze 3.5.7(1)-(5) in the PDF (regular m=(varpi), unbounded case (5)) and the main-20261015 prop-pur-adic-reconstruction-trace-coherence paragraph. The route is unit Step 2; no SGA. Statement and stmt_deps are identical to the O3-created node; 0 new nodes. Step 1: normalization through the flat-term K-flat Q of the calculus node, then kflat-change-of-rings, derived-change-of-rings, the balancing isomorphism and the cocycle; correct. Step 2: unbounded lem-coef-normalized-dvr-effectivity applied to U_W N; correct. Step 3: e_N's evaluations are the adjoints of the projections, and joint detection of isomorphisms makes e_N invertible; correct, no level-map lifting. Step 4: PID, varpi nonzero, finite quotients, torsion and the perfect two-term resolution meet def-weil-pbc-adic-coefficient-datum; the auxiliary p is free; correct. Step 5 had a C3/C4 fault: it claimed the calculus adjunction's unit is the transported sequence-topos unit and equals Roos comp_K, which no cited statement says (maps into R lim are not pinned by their projections). Repaired: the triangle identity L(e_N) u_{LN}=1 makes u_{LN} invertible; Roos (i)=>(v) gives an isomorphism phi:K->L_W R_W K (same strict reductions on the same Q); naturality of u then makes u_K invertible. The step now uses only the calculus and Roos nodes; the two unsplit sequence-topos nodes are dropped from the step, proof_deps and tool_uses. Step 6: restriction of the calculus node's naturality and triangle identities; correct. Edge cases checked: zero objects, empty W, n=m, n=1, unbounded complexes. det-sp-normalized-equivalence overlaps but is not a duplicate; no cycle. Fix file: fixes/dag/nodes/sec-smooth-purity/lem-pur-normalized-actual-reconstruction-maps.json; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus",
+  "declaration": "WeilConjectures.purNormalizedReconstruction",
+  "statement": "theorem purNormalizedReconstruction\n    (_hl : IsUnit (l : Γ(W, ⊤))) (S : CoefficientDerivedSystemCalculus l E W) :\n    (∀ (N : coefficientSequenceDerived l E W), IsNormalizedCoefficientSequence l E W N →\n      IntegralOnSlice.IsComplete l E W none ((coefficientSequenceLimit l E W).obj N) ∧\n        IsIso (S.adjunction.counit.app N)) ∧\n    (∀ (K : DerivedCategory (scalarReductionSource l E W)),\n      IntegralOnSlice.IsComplete l E W none K → IsIso (S.adjunction.unit.app K))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing reconstruction theorem for the very specified CoefficientDerivedSystemCalculus adjunction: completeness of the normalized total limit and invertibility of its actual counit, and invertibility of its actual unit on complete objects. The remaining explicit clauses are already fields of its input calculus: reduction_normalized and counit_projection, with naturality and both triangle identities in S.adjunction. No replacement maps, boundedness, finite-field datum or Tor hypotheses are introduced. See the worker report for every clause and the positive-level indexing convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-caec40207",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Existing:true binding of WeilConjectures.purNormalizedReconstruction (Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus); statement verbatim in live source; only the node's lean field and the report changed. Clauses: completeness of L(N) and IsIso of the counit on normalized N, and IsIso of the unit on complete K, are in the theorem; normalization of R(P), counit evaluation = adjoint of the projection, naturality and triangle identities are fields of the specified S (reduction_normalized, counit_projection, adjunction); ∀ S is harmless since reduction is pinned by reductionModel and L is fixed. IsNormalizedCoefficientSequence = transition-adjoint invertibility via Yoneda, m=n included; IsComplete none = landed global predicate. Edge cases n=0, m=n, empty W, zero objects and unbounded complexes ok. No cycle (closure of 3009 nodes). nt_compile --json probe (#check + field terms) clean in 17.4 s. Advisory: the parent node also lists the declaration; decl owners outside stmt_deps (def-coef-ringed-sequence-site, def-coef-derived-system-calculus-data), stmt_deps unchanged; the docstring describes the older Nakayama route."
  }
 }

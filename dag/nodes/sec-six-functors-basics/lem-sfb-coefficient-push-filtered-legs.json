@@ -19,7 +19,9 @@
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-pd-module-ringed-topos-derived-comparison",
-  "sk-def-sfb-coefficient-morphisms"
+  "sk-def-sfb-coefficient-morphisms",
+  "new-integral-residue-tensor-presentation",
+  "def-weil-pbc-integral-residue-tensor-pull-presentation"
  ],
  "proof": [
   {
@@ -347,5 +349,33 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-2e4f845b6 (reviewer sub-agent of L); spot-checked: I read the full 7-step split and every cited statement. Statement unchanged from the base; the only stmt_deps addition is sk-def-sfb-coefficient-morphisms, which the statement uses implicitly. No new nodes. Step 1: the exact monoidal comparison and the scalar adjunction units agree; C and B are flat because scalar extension is exact. Step 2: L_R is a left adjoint, so it preserves the module colimit; a flat degree-0 module is K-flat; the termwise Tot colimit comes from lem-pc-module-filtered-colimits-tensor. Step 3: lem-weil-pbc-condensed-qcqs-pushforward-continuity fits (condensed Λ_X, common lower bound, canonical maps) and matches HRS Lemma 5.3(1) and (5.4); Remark 5.4 shows why the statement needs K in D+. Step 4: the ringed-square lemma's c is d of lem-weil-pbc-ring-sheaf-change-adjunction, which matches def-sfb-derived-comap-lower-star-iso on K-injectives; θ restricts to μ, checked on flat K-flat representatives where everything is underived. Step 5: the push-counit lemma with all predicates true and e=d (orientation checked against def-sfb-mate-push-hom), plus the adjoint compatibility, gives d∘Uγ = α_C as specified maps. Steps 6–7: naturality in P gives the leg formula; on cohomology the map is a colimit of isomorphisms; restriction reflects isomorphisms. Small cases checked: R=S (identity), the citer's O_E→E and Qbar presentations, zero coefficients. Route: the continuity node's unit sk-thm-properbasechange is in the unit's uses. Advisory only: det-pe-bounded-continuity-direct-image (sk-cor-pe-bounded-continuity) is the blueprint's literal citation. No SGA; no duplicate (lem-sfb-coefficient-projection-square is a different statement); no cycle; tool_uses accepted."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientPushFilteredLegs",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientPush_isIso_of_filtered_flat_legs",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.filteredCoefficientRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.filteredCoefficientExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.filteredCoefficientTensorIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.filteredCoefficientRestrictPushIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.filteredCoefficientPushHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.filteredCoefficientPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientPush_isIso_of_filtered_flat_legs"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientPushFilteredLegs.lean",
+  "statement": "theorem coefficientPush_isIso_of_filtered_flat_legs [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))] (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ) {X Y : Over (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) [QuasiCompact f.left] [QuasiSeparated f.left] (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (P : I ⥤ internalModules R Y.left) (_hP : ∀ i : I, ObjectProperty.flat (P.obj i)) (_hfP : ∀ i : I, ObjectProperty.flat ((upperStar R f.left).obj (P.obj i))) (v : P ⟶ (Functor.const I).obj ((Mod.comap (coefficientMap a Y.left)).obj (Mod.regular (condensedRingObj S Y.left)))) (_hv : IsColimit (Cocone.mk _ v)) (K : DerivedCategory (internalModules R X.left)) (_hK : ∃ n : ℤ, K.IsGE n) (_hδ : ∀ i : I, IsIso (internalProjection R f.left K ((DerivedCategory.singleFunctor (internalModules R Y.left) 0).obj (P.obj i)))) : IsIso ((filteredCoefficientPushHom a f.left).app K) ∧ ∀ i : I, ((derivedTensor R Y.left).obj ((internalDerivedPushforward R f.left).obj K)).map ((DerivedCategory.singleFunctor (internalModules R Y.left) 0).map (v.app i)) ≫ (filteredCoefficientTensorIso a Y.left).inv.app ((internalDerivedPushforward R f.left).obj K) ≫ (filteredCoefficientRestriction a Y.left).map ((filteredCoefficientPushHom a f.left).app K) ≫ (filteredCoefficientRestrictPushIso a f.left).hom.app ((filteredCoefficientExtension a X.left).obj K) = internalProjection R f.left K ((DerivedCategory.singleFunctor (internalModules R Y.left) 0).obj (P.obj i)) ≫ (internalDerivedPushforward R f.left).map (((derivedTensor R X.left).obj K).map ((internalDerivedPullback R f.left).map ((DerivedCategory.singleFunctor (internalModules R Y.left) 0).map (v.app i))) ≫ ((derivedTensor R X.left).obj K).map (filteredCoefficientPullIso a f.left).hom ≫ (filteredCoefficientTensorIso a X.left).inv.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper definitions are typed aliases of the existing total scalar functors and canonical comparisons; internalProjection is used directly. The two added statement dependencies already carry the generic balanced scalar-tensor and restricted-regular pullback interfaces. No independent construction or mathematical assumption is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f698a764",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause: dc-setting binders; qcqs f; arbitrary commutative condensed R→S with exact scalar extension on every scheme; I : Type (u+1), small and filtered (nonempty included); flat P_i and flat pullbacks of P_i; the actual cocone v with IsColimit; K bounded below via ∃ n, K.IsGE n; δ_i = internalProjection (adjunct of pullback-tensor comparison then ε_K⊗1). Conclusions: IsIso of derivedPushHom, and a leg equation with matching endpoints and derivedComapLowerStarIso in the node's direction. Helpers are typed aliases of canonical constructions (derivedPushHom, derivedComapLowerStarIso, Mod.residueDerivedTensorIso with the named sheaf braiding, residueRestrictedRegularPullIso); none is hollow; the only sorry is the main theorem. Statement field verbatim; 7 declarations exist; no name collisions. Added stmt_deps are two definition nodes with landed records, no theorem nodes. Advisories: internalProjection is owned by a base-era theorem stmt_dep; internalModules and internalDerived* come from def-pd nodes not in stmt_deps; the tensor-pull-presentation node is worded for E/Q_l but its Lean is generic. Compile at load 146-204: full file timed out at 60 s in 4 attempts (one with linters off); prefix through filteredCoefficientTensorIso clean in 60.0 s; full file with that body replaced by sorry clean in 46.8 s; delivery reports 34-39 s at normal load. Land at lower load: filteredCoefficientTensorIso costs about 30 s of kernel type checking under load."
+ }
 }

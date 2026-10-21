@@ -211,5 +211,33 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-15fb056dc (reviewer sub-agent of L); spot-checked: Read the item, all 10 cited node statements, Stacks 08H3 (sites-cohomology l.11755) and 06YQ (l.3120), and the ancestor lemma-weil-pbc-perfect-projection-formula; its step 6 cites this item for the pulled strict-perfect model. Statement and stmt_deps are unchanged against earlier snapshots (same sha1). There are no new nodes, no cycle (BFS over deps) and no SGA. Step 1 (elementary): H⊗R^N≅H^N naturally, so −⊗M is a retract of an exact functor and M is flat; the local-lift retract argument is correct and N=0 is covered. Step 2: the hypotheses of lem-weil-pbc-independent-bounded-flat-kflat match (small site, bounded above by b, flat terms). Step 3: γ and its inverse checked on generators; u^*0=0; p^u i^u=u^*(p i)=1, with degreewise splittings only. Step 4: the same argument over S plus the bounded-flat theorem; no flatness of A→S used (tested Z→Z/2). Step 5: ε from the statement of lem-weil-pbc-ringed-topoi-derived-pullback is an isomorphism at K-flat complexes with flat terms; the composite order is correct, and the chain-map naturality square is that of ε on K(R). Off-unit citations are definitions only, so no tool_uses are needed. No duplicate found by grep of 08H3, strictly perfect, and retract/summand flat. No changes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.StrictPerfectRingedPullbackModel",
+  "declaration": "SheafOfModules.strictPerfectRingedPullbackModel",
+  "declarations": [
+   "SheafOfModules.ringedPullbackTensorSection",
+   "SheafOfModules.IsRingedPullbackFiniteFreeComparison",
+   "SheafOfModules.existsUnique_ringedPullbackFiniteFreeIso",
+   "SheafOfModules.ringedPullbackFiniteFreeIso",
+   "SheafOfModules.ringedPullback_strictPerfect_splitting",
+   "SheafOfModules.ringedPullbackStrictPerfectPackage",
+   "SheafOfModules.ringedPullbackComplexComparison",
+   "SheafOfModules.strictPerfectRingedPullbackModel"
+  ],
+  "file": "lean/Sheaf/Paper/StrictPerfectRingedPullbackModel.lean",
+  "statement": "theorem strictPerfectRingedPullbackModel [LF.IsLeftDerivedFunctor epsilon (HomotopyCategory.quasiIso (ringedSiteModules.{r} ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ))] (F : CochainComplex (ringedSiteModules.{r} ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (package : StrictPerfectCoefficientPackageOnSite _ F) (a b : ℤ) (hbounded : ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n)) : (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (F.X n)) ∧ F.IsKFlatIndependentCoefficients ∧ (∀ n : ℤ, n < a ∨ b < n → IsZero (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj F).X n)) ∧ (∀ n : ℤ, IsFlatOnSite (J := JD) (R := S) (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj F).X n)) ∧ CochainComplex.IsKFlatIndependentCoefficients ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj F) ∧ IsIso ((ringedPullbackComplexComparison uStar LF epsilon).app F) ∧ (∀ (P : DerivedCategory (ringedSiteModules.{r} ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (e : DerivedCategory.Q.obj F ≅ P), IsIso (LF.map e.inv ≫ (ringedPullbackComplexComparison uStar LF epsilon).app F)) ∧ (∀ (G : CochainComplex (ringedSiteModules.{r} ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (_ : StrictPerfectCoefficientPackageOnSite _ G) (a' b' : ℤ) (_ : ∀ n : ℤ, n < a' ∨ b' < n → IsZero (G.X n)) (v : F ⟶ G), (ringedPullbackComplexComparison uStar LF epsilon).app F ≫ DerivedCategory.Q.map ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).map v) = LF.map (DerivedCategory.Q.map v) ≫ (ringedPullbackComplexComparison uStar LF epsilon).app G)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-881c8a5c4",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after e786 RETURN (H13 dep-record rebinding, H9 global instance priority). Diff vs e786: node JSON identical; module only swaps the OfUniverses import for the original Sheaf.Paper.RingedTopoiDerivedPullback plus the recorded KFlatIndependentCoefficients/FlatOnSite modules, and makes both hasSheafCompose priority attributes local; dep module and dep record copy removed, live NG dep record untouched. All signatures byte-identical to the 5178 PASS version; re-checked universes, uStar pinned to changeOfRings, bounds, flat/K-flat both sides, ∃!-pinned finite-free γ and transported package (same N), IsIso ε_F and ε_F∘LF(e⁻¹), naturality direction, edge cases. nt_compile --json clean in 42.3 s at load ~190. Advisory: no lean.note on the general-universe dep content (stage-3 concern); proof-only plain imports."
+ }
 }

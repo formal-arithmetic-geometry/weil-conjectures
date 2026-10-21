@@ -1,0 +1,153 @@
+{
+ "id": "def-sf-ringed-derived-adjoint-lift-data",
+ "kind": "definition",
+ "title": "Data of a normalized derived adjoint lift of a ringed-topos morphism",
+ "status": "split",
+ "statement": "Let $X,Y$ be small ringed-site presentations with commutative coefficient sheaves, their unbounded module derived categories, and fixed closed tensor structures, and let $f:X\\to Y$ be a ringed-topos morphism, all as in [def-sfb-ringed-derived-comparison-data]. An adjoint lift of $f$ is the following data. It has a scalar-extension edge $e$ from the tensor corner of $Y$ to that of $X$, including the ordinary module adjunction and universal left-derived pullback with comparison $\\epsilon$, a derived right adjoint and their adjunction. The inverse and direct image functors of $e$ equal those of $f$, its geometric adjunction agrees with that of $f$ after these identifications, its module pushforward equals that of $f$, and its structural ring map agrees with the given map of $f$ after the inverse-image identification. Its ordinary module Hom bijection, after forgetting coefficients and identifying pushforwards, is the geometric Hom bijection applied to scalar insertion followed by the underlying pullback morphism. The module pushforward is additive. A natural transformation $\\eta:Q_Y f_*\\to e_R Q_X$ makes $e_R$ the universal right-derived functor of module pushforward and is invertible on K-injective complexes. For every flat-term K-flat complex $P$ over $Y$, the comparison $\\alpha_P:e_L Q_Y P\\to Q_X f^*P$ induced by $\\epsilon$ is invertible. For every such $P$, every K-injective complex $I$ over $X$, and every chain map $b:P\\to f_*I$, the inverse derived-adjunction transpose of $Q_Y(b)$ followed by $\\eta_I$ equals $\\alpha_P$ followed by $Q_X$ of the inverse ordinary-adjunction transpose of $b$. This is a record of witnesses and normalization equations, with no existence or tensor-coherence assertion.",
+ "stmt_deps": [
+  "def-sfb-ringed-derived-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint), with Modules on Sites, sites-modules.tex, Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); normalized adjunction witness data."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AdjointLift|RingedTensorEdge|canonical_adjunction",
+   "results": {
+    "t": "2026-10-21T08:13:30Z",
+    "tool": "grep",
+    "query": "AdjointLift|RingedTensorEdge|canonical_adjunction",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/LiftingProperties/Adjunction.lean",
+     "Mathlib/CategoryTheory/LiftingProperties/Adjunction.lean"
+    ],
+    "digest": "841f50fb95a87e0f"
+   },
+   "date": "2026-10-21",
+   "verdict": "Generic derived-functor or ordinary adjunction interfaces only; reuse the existing project AdjointLift structure through an existing:true definition node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized derived adjunction lift of a morphism of ringed topoi on K flat and K injective complexes",
+   "results": {
+    "t": "2026-10-21T08:13:30Z",
+    "tool": "leansearch",
+    "query": "normalized derived adjunction lift of a morphism of ringed topoi on K flat and K injective complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derivedη",
+     "PresheafOfModules.sheafificationAdjunction",
+     "CategoryTheory.Functor.leftDerivedLift",
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "CategoryTheory.InjectiveResolution.desc",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "SheafOfModules.sheafificationCompPullback"
+    ],
+    "digest": "23173f2bfd50d682"
+   },
+   "date": "2026-10-21",
+   "verdict": "Generic derived-functor or ordinary adjunction interfaces only; reuse the existing project AdjointLift structure through an existing:true definition node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived adjunction lift of a morphism of ringed topoi on K flat and K injective complexes",
+   "results": {
+    "t": "2026-10-21T08:13:41Z",
+    "tool": "leanfinder",
+    "query": "normalized derived adjunction lift of a morphism of ringed topoi on K flat and K injective complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.sheafificationAdjunction",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+     "PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+     "CategoryTheory.sheafComposeNatTrans_fac",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "CategoryTheory.Adjunction.derivedη",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv"
+    ],
+    "digest": "8311ab4695589a58"
+   },
+   "date": "2026-10-21",
+   "verdict": "Generic derived-functor or ordinary adjunction interfaces only; reuse the existing project AdjointLift structure through an existing:true definition node."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n AdjointLift|RingedTensorEdge|canonical_adjunction in Mathlib/CategoryTheory, lean/WeilConjectures and lean/Sheaf/SixFunctors; rg in dag/nodes; blueprint_refs.py search adjoint lift",
+   "results": "Mathlib has only rightAdjointLiftStructEquiv (unrelated lifting squares). WeilConjectures has only unrelated canonical_adjunction_unit_commShift. Sheaf.SixFunctors.RingedDerivedAdjointLift defines AdjointLift at line 45; ComparisonData defines the stronger Lift with monoidal data. The existing DAG theorem lem-sfb-ringed-derived-adjoint-lift records Nonempty (AdjointLift f), not a definition node. No definition node for AdjointLift data; blueprint search: 0 blueprint nodes match adjoint lift.",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing structure without copying it; add only its definition-node attachment, as required by the independent return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-ringed-pullback-hom-evaluation-comparison",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last derived mapping-complex comparisons; normalized adjoint-lift witness for the evaluation-defined pullback Hom comparison.",
+   "via": [
+    "lem-coef-ringed-pullback-hom-evaluation-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RingedDerivedAdjointLift",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.AdjointLift",
+  "statement": "structure AdjointLift {X Y : Site.{u, w}} (f : Morphism X Y)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing structure in the unchanged published module. It records the adjunction data used as l : AdjointLift f; existence is the separate theorem lem-sfb-ringed-derived-adjoint-lift, retained only in the consumer proof_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-452048552",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-452048552",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 6bf4bda2: the Lean module is byte-identical (sha e05236e5). The item's stmt_deps swap the theorem lem-sfb-ringed-derived-adjoint-lift for the new def node def-sf-ringed-derived-adjoint-lift-data (existing:true on the unchanged Sheaf.SixFunctors.RingedDerivedAdjointLift, declaration CategoryTheory.RingedDerivedComparisons.AdjointLift, header verbatim at line 45). Its TeX matches all structure fields: edge, inverse/direct eqs, geometric adjunction, pushforward, structural map, ordinary Hom formula, additivity, eta right-derived/K-injective, epsilon_flat, canonical_adjunction. stmt_deps [def-sfb-ringed-derived-comparison-data]; sources 03D7/06YY/07A6; three search kinds; no duplicate def node in live. The theorem is kept in proof_deps. Re-checked H3: beta = transpose(inverse of the canonical ringedTopoiCanonicalDerivedTensorComparison followed by F(ev)); naturality contravariant in the first input; evaluation, transposition (arbitrary T) and composition (H(Q,T)⊗H(P,Q)) clauses correct; no IsIso. The 6 stmt_dep records are byte-identical to live; lean.statement verbatim; only the theorem has sorry; docstrings ok. nt_compile --json clean in 29.0 s, exit 0. Advisories: RingedHomSignedRepresentatives is not tied to X.closed.evaluation in the statement; the new node reaches the tensor-square presentation only transitively."
+ }
+}

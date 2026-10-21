@@ -241,5 +241,23 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-3b5c7f3f5 (reviewer sub-agent of L); spot-checked: Read the item's 8-step proof in full against Stacks categories.tex 002A (definition-coequalizers, lines 1153-1170, and the uniqueness paragraph after it), and read the complete statements of def-sfb-monoidal-category (bifunctor, which gives 1⊗(cr)=(1⊗c)(1⊗r)), sk-def-sfb-module-objects clause 2 (module morphisms are underlying maps with the action equation; composition as in D) and sk-def-sfb-ring-object (statement dependency only). The statement, stmt_deps and blueprint fields are unchanged from live and side-live, where the item is still unsplit. There is no repair note, and the item is not on the dropped or route-pivot lists. No SGA source. Step checks: step 1 derives cancellation from uniqueness for q_j, r_j, 1⊗q_j and 1⊗r_j. Step 2 builds c_j and d_j and their types are right. Step 3 gives both inverse identities. Steps 4 and 5 check both action chains A⊗B_j→P_j and A⊗B_j→Q_j and cancel the tensored quotient maps; that cancellation needs hypothesis (3), which is assumed. Steps 6 and 7 check both naturality squares using naturality of q and r. Step 8 assembles the isomorphism and proves uniqueness. Every elementary flag is justified. Edge cases: J empty, one-object J, a=b (c=q r^{-1}), noncommutative A and non-braided D; (3) is necessary. The parent lem-sfb-internal-extension-inverse-image applies the item with exactly hypotheses (1)-(3). The split adds no new nodes. I checked the DAG coequalizer hits (relative-tensor, extension-along-iso, quotient-formula, section-tensor comparison) and found no duplicate, so same_as=[] is correct. I accept the generic definition tool_use for sk-def-sfb-module-objects. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivariantCoequalizerComparison",
+  "declaration": "CategoryTheory.existsUnique_equivariant_coequalizer_comparison",
+  "file": "lean/Sheaf/CategoryTheory/EquivariantCoequalizerComparison.lean",
+  "statement": "theorem existsUnique_equivariant_coequalizer_comparison {D : Type uD} [Category.{vD} D] [MonoidalCategory D] (A : D) [MonObj A] {J : Type uJ} [Category.{vJ} J] (H : J ⥤ D) (B P Q : J ⥤ Mod D A) (a b : H ⟶ B ⋙ Mod.forget (D := D) A) (q : B ⋙ Mod.forget (D := D) A ⟶ P ⋙ Mod.forget (D := D) A) (r : B ⋙ Mod.forget (D := D) A ⟶ Q ⋙ Mod.forget (D := D) A) (hq : ∀ j : J, a.app j ≫ q.app j = b.app j ≫ q.app j) (hr : ∀ j : J, a.app j ≫ r.app j = b.app j ≫ r.app j) (hq_colimit : ∀ j : J, IsColimit (Cofork.ofπ (q.app j) (hq j))) (hr_colimit : ∀ j : J, IsColimit (Cofork.ofπ (r.app j) (hr j))) (hq_linear : ∀ j : J, IsModHom A (M := (B.obj j).X) (N := (P.obj j).X) (q.app j)) (hr_linear : ∀ j : J, IsModHom A (M := (B.obj j).X) (N := (Q.obj j).X) (r.app j)) (hq_tensor : ∀ j : J, IsColimit ((tensorLeft A).mapCocone (Cofork.ofπ (q.app j) (hq j)))) (hr_tensor : ∀ j : J, IsColimit ((tensorLeft A).mapCocone (Cofork.ofπ (r.app j) (hr j)))) : ∃! c : Q ≅ P, (∀ j : J, r.app j ≫ (c.hom.app j).hom = q.app j) ∧ (∀ j : J, q.app j ≫ (c.inv.app j).hom = r.app j)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3bd0196c2",
+  "group": "Q49",
+  "result": "pass",
+  "note": "The node differs from side-live only in its new lean record, and lean.statement appears verbatim in the file. Clauses: (1) hq/hr plus IsColimit of the given Cofork.ofπ; (2) IsModHom, which in Mod D A unfolds to γ≫q = A◁q≫γ, the node's direction; (3) the tensorLeft image of the same coforks is a colimit. The conclusion ∃! c : Q ≅ P in J ⥤ Mod D A gives linearity, naturality and the inverse identities; requiring both normalizations is equivalent for an iso. Universes are independent and no smallness, braiding or commutativity is assumed; empty J is covered. Searches of the project's Mod/Limits and Mod files and Mathlib Monoidal/Mod found no duplicate. Docstrings carry the source (Stacks 002A), the blueprint tag and the 8-step proof; the proof is sorry only. nt_compile --json: 29.0 s, clean. Advisory: the RingPresheaf import is not needed."
  }
 }

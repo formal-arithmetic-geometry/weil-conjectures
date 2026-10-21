@@ -12,7 +12,9 @@
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-pc-tensor-complex-sheaves",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "def-sfb-ringed-derived-comparison-data",
+  "def-sf-ringed-derived-adjoint-lift-data"
  ],
  "proof": [
   {
@@ -299,5 +301,32 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-9e7b0996f (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the NZ-created node and to live (live is still unsplit, so not superseded); stmt_deps equal live; there are no new nodes. Stacks tags checked in sites-cohomology.tex via tags/tags: 07A4, 08J9 (l.8896), 0A98 (l.8998), 0A8X, 0A90, 06YY and 0FPT are all correct. The blueprint route (prop-coef-integral-exceptional-adjoint, proof paragraph 2, first and last derived Hom comparisons) is consistent. Orientation of f against derived-pullback/tensor-pullback (u^{-1}R→S, u^{-1} left exact) matches, and the coefficient categories are plain unbounded D(A), D(B) throughout. Steps 3-7 recomputed: the evaluation equation; naturality, including the contravariant variable via e(H(a,b)⊗1)=b e(1⊗a); transposition for arbitrary X; composition, where both untransposes reduce to F(e_{Q,T})c_{U,Q}(1⊗F e_{P,Q})(1⊗c_{V,P})α_B (step 7 uses naturality of α tacitly, which is elementary). Step 2: associativity of c comes from the CoreMonoidal structure of lem-sfb-ringed-derived-tensor-lift, whose μIso.inv is the canonical tensorComparison; I read the Lean source of TensorLift and Site, which record the closed-symmetric-monoidal witnesses. The adjoint-lift supplies the edge, and hY/hX hold for the sites' own models. Step 8 signs checked against def-pur-hom-complex and def-pc-tensor-complex-sheaves for both evaluation and composition. No cycle (closure of 433 nodes); every cited node exists, is unmerged and reviewed. Off-unit statements (pbc derived and tensor pullback, sfb adjoint and tensor lift, pc K-flat resolution) are declared in tool_uses; I accept them as generic tools. Duplicate search over dag/nodes (closed-adjunction-naturality, enriched-isomorphism, parameter-composition, square-hom-transport, thm-trf-internal-hom-pullback, def-per-etale-hom-pullback-comparison, lem-sf-etale-hom-complex-pullback, self-enrichment base change) found only different results. Edge cases checked: f=id, zero inputs, Z→Z/2 on a point with β not invertible, odd degrees. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedPullbackHomEvaluationComparison",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.ringedPullbackHomEvaluationComparison",
+  "declarations": [
+   "CategoryTheory.RingedDerivedComparisons.pullbackHomFunctor",
+   "CategoryTheory.RingedDerivedComparisons.pullbackHomTensorModel",
+   "CategoryTheory.RingedDerivedComparisons.pullbackHomTensorator",
+   "CategoryTheory.RingedDerivedComparisons.ringedPullbackHomComparison",
+   "CategoryTheory.RingedDerivedComparisons.ringedHomSectionApply",
+   "CategoryTheory.RingedDerivedComparisons.RingedHomSignedRepresentatives",
+   "CategoryTheory.RingedDerivedComparisons.ringedPullbackHomEvaluationComparison"
+  ],
+  "file": "lean/Sheaf/Paper/RingedPullbackHomEvaluationComparison.lean",
+  "statement": "theorem ringedPullbackHomEvaluationComparison {X Y : Site.{u, w}} {f : Morphism X Y} (l : AdjointLift f) : (∀ (P P' Q Q' : Y.D) (a : P' ⟶ P) (b : Q ⟶ Q'), l.edge.left.map ((pullbackHomFunctor Y).map (Prod.mkHom a.op b)) ≫ ringedPullbackHomComparison l P' Q' = ringedPullbackHomComparison l P Q ≫ (pullbackHomFunctor X).map (Prod.mkHom (l.edge.left.map a).op (l.edge.left.map b))) ∧ (∀ P Q : Y.D, X.closed.tensor.map (X := (l.edge.left.obj ((pullbackHomFunctor Y).obj (op P, Q)), l.edge.left.obj P)) (Y := ((pullbackHomFunctor X).obj (op (l.edge.left.obj P), l.edge.left.obj Q), l.edge.left.obj P)) (Prod.mkHom (ringedPullbackHomComparison l P Q) (𝟙 (l.edge.left.obj P))) ≫ X.closed.evaluation (l.edge.left.obj P) (l.edge.left.obj Q) = pullbackHomTensorator l ((pullbackHomFunctor Y).obj (op P, Q)) P ≫ l.edge.left.map (Y.closed.evaluation P Q)) ∧ (∀ (T P Q : Y.D) (t : Y.closed.tensor.obj (T, P) ⟶ Q), l.edge.left.map (Y.closed.transpose T P Q t) ≫ ringedPullbackHomComparison l P Q = X.closed.transpose (l.edge.left.obj T) (l.edge.left.obj P) (l.edge.left.obj Q) (pullbackHomTensorator l T P ≫ l.edge.left.map t)) ∧ (∀ P Q T : Y.D, pullbackHomTensorator l ((pullbackHomFunctor Y).obj (op Q, T)) ((pullbackHomFunctor Y).obj (op P, Q)) ≫ l.edge.left.map (Y.closed.composition P Q T) ≫ ringedPullbackHomComparison l P T = X.closed.tensor.map (X := (l.edge.left.obj ((pullbackHomFunctor Y).obj (op Q, T)), l.edge.left.obj ((pullbackHomFunctor Y).obj (op P, Q)))) (Y := ((pullbackHomFunctor X).obj (op (l.edge.left.obj Q), l.edge.left.obj T), (pullbackHomFunctor X).obj (op (l.edge.left.obj P), l.edge.left.obj Q))) (Prod.mkHom (ringedPullbackHomComparison l Q T) (ringedPullbackHomComparison l P Q)) ≫ X.closed.composition (l.edge.left.obj P) (l.edge.left.obj Q) (l.edge.left.obj T)) ∧ RingedHomSignedRepresentatives X ∧ RingedHomSignedRepresentatives Y",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-452048552",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 6bf4bda2: the Lean module is byte-identical (sha e05236e5). The item's stmt_deps swap the theorem lem-sfb-ringed-derived-adjoint-lift for the new def node def-sf-ringed-derived-adjoint-lift-data (existing:true on the unchanged Sheaf.SixFunctors.RingedDerivedAdjointLift, declaration CategoryTheory.RingedDerivedComparisons.AdjointLift, header verbatim at line 45). Its TeX matches all structure fields: edge, inverse/direct eqs, geometric adjunction, pushforward, structural map, ordinary Hom formula, additivity, eta right-derived/K-injective, epsilon_flat, canonical_adjunction. stmt_deps [def-sfb-ringed-derived-comparison-data]; sources 03D7/06YY/07A6; three search kinds; no duplicate def node in live. The theorem is kept in proof_deps. Re-checked H3: beta = transpose(inverse of the canonical ringedTopoiCanonicalDerivedTensorComparison followed by F(ev)); naturality contravariant in the first input; evaluation, transposition (arbitrary T) and composition (H(Q,T)⊗H(P,Q)) clauses correct; no IsIso. The 6 stmt_dep records are byte-identical to live; lean.statement verbatim; only the theorem has sorry; docstrings ok. nt_compile --json clean in 29.0 s, exit 0. Advisories: RingedHomSignedRepresentatives is not tied to X.closed.evaluation in the statement; the new node reaches the tensor-square presentation only transitively."
  }
 }

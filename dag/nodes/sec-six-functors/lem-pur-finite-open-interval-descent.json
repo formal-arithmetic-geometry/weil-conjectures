@@ -364,5 +364,23 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-3c4a439fc (reviewer sub-agent of L); spot-checked: Q32 lem-pur-finite-open-interval-descent 3c4a439f. The statement is unchanged, the delivery creates no new nodes, the item is still unsplit on live and side-live, and there is no repair note. The proof follows Stacks 095E (2)=>(3) (finite affine refinement, local constructible decompositions, then a global refining stratification) and realizes Step 4 of blueprint main-20261015 thm-pur-general-admissibility and Step 4 of unit sk-prop-sf-rf-shriek-preservation. Every cited statement was read. Steps 1, 2, 3, 5, 6, 7 and 8 are correct. Step 2 uses exactness of localized restriction, so the cohomology comparison holds for unbounded F. Step 3 uses only clause (1) of lem-cbc-proetale-stalk-conservative, which applies because A is finite; it does not use geometric-stalk conservativity. Steps 5 and 6 take Z x_{U_t} W_a and the actual factorizations supplied by the J2 gluing core, so there is no E3 image-containment fault, and only quasi-separatedness of X is used. Step 8 handles empty X correctly: the empty family covers it, so F=0. Edge cases tested: X empty, J empty, empty members, non-separated X, r=s, and n>1 with no Tor hypothesis. lem-sf-finite-cover-ctf-locality needs Tor data, so it is not a duplicate (advisory overlap only). All 14 tool_uses are accepted; two are redundant on-route declarations. FIX (C4): Step 4 treated the localized restriction L|_{T_j} as an inverse image without a node saying so. Step 4 now cites lem-sfb-proetale-object-inverse-image-restriction(1),(3) to identify L|_{T_j} with r_j^{-1}L, and that node is added to its uses; proof_deps is unchanged and is still the union.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityFiniteOpenIntervalDescent",
+  "declaration": "WeilConjectures.purityFiniteOpenIntervalDescent",
+  "file": "lean/Sheaf/Paper/PurityFiniteOpenIntervalDescent.lean",
+  "statement": "theorem purityFiniteOpenIntervalDescent (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of P.field.k))] (J : Type v) [Finite J] (U : J → X.Opens) (hcover : ∀ x : X, ∃ t : J, x ∈ U t) (F : proEtaleDerivedCategory X P.Ring) : (∀ r s : ℤ, r ≤ s → (∀ t : J, constructibleInterval P.coefficients.l P.extension P.level P.level_pos (U t).toScheme r s ((proEtaleConstantRingDerivedPullback P.Ring (U t).ι).obj F)) → constructibleInterval P.coefficients.l P.extension P.level P.level_pos X r s F) ∧ ((∀ t : J, intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos (U t).toScheme ((proEtaleConstantRingDerivedPullback P.Ring (U t).ι).obj F)) → intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos X F) ∧ (IsEmpty X → IsZero F)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5cbc1659",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Clause-by-clause match: PurityFiniteSetting coefficients (P.Ring = coefficientExtensionRing); finite-type k-scheme via LocallyOfFiniteType+QuasiCompact, no separatedness; finite J:Type v with hcover, no Nonempty; arbitrary F in proEtaleDerivedCategory; Lu_t^* = mapDerivedCategory of canonical constant-ring module pullback; conjunct 1 uses constructibleInterval (= recorded intrinsicConstructibleIntervalCategory predicate, inclusive Icc, same endpoints); conjunct 2 intrinsicFiniteTorsionConstructible with per-chart intervals; conjunct 3 IsEmpty X -> IsZero F. Edge cases (J empty, X empty, r=s, empty members, universes) fine; docstrings carry source/blueprint and all 8 steps; no duplicate found; only the item node's lean field changed; statement verbatim. nt_compile --json clean 23.7 s exit 0. Advisory: proEtaleConstantRingDerivedPullback owner def-weil-pbc-proetale-operations not in stmt_deps (S2 cannot add an existing def node)."
  }
 }
