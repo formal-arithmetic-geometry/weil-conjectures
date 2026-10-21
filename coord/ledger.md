@@ -22712,3 +22712,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:55 L: returned deliver/Q27/sk-lem-as-properties (reviewer RETURN: L: independent stage-2 immutable head 155fabd72c24: H2: two theorem nodes in stmt_deps supply only plain defs. lem-a1-ar)
 - 13:55 L: returned deliver/NI/lem-sf-open-roos-unit-adjunction (reviewer RETURN: L: independent stage-2 immutable head 45a9246c0910: H2: the delivery adds theorem stmt_dep lem-pur-integral-operations-s)
 - 13:55 L: returned deliver/Q22/lem-sp-cofinal-finite-reduction-constructibility (reviewer RETURN: L: independent stage-2 immutable head d3c5c5c77552: H2: the delivery adds theorem node det-sp-coefficient-towers-abelian)
+- 13:55 L: returned deliver/NY/lem-weil-point-finite-free-sections-tensor (reviewer RETURN: L: independent stage-2 immutable head d3c85ff761ec: stage-2 fix of def-weil-completed-integral-scalar-data (existing: tr)
