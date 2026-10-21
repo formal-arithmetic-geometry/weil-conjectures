@@ -18,9 +18,157 @@
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "def-weil-pbc-ringed-tensor-section-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a complex representing $M$ and a quasi-isomorphism from a K-flat $B$-complex $P$ with flat terms by [lem-pc-kflat-resolution]. By [lem-weil-pbc-flat-scalar-restriction-kflat], $\\operatorname{Res}P$ is K-flat with flat $R$-terms, using the assumed flatness of $R\\to B$. Restriction itself is exact: it keeps the underlying abelian sheaf and each module kernel and cokernel, with the scalar action restricted through the ring map [def-pc-sheaf-restrict-scalars]. Thus $\\operatorname{Res}M$ is represented by $\\operatorname{Res}P$. All subsequent constructions use this single $P$, for every $n$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YN (definition-K-flat); flat scalar restriction as in the proof of Tag 06YY"
+   }
+  },
+  {
+   "text": "Put $A=u^{-1}B$ and $Q=u^{-1}P$, retaining the transported $A$-action on $Q$. Exactness of algebraic inverse image [lem-trf-geometric-inverse-image-exact] identifies $u^{-1}(R/J_n)$ with $R'/J_n'=S_n'$: apply it to the cokernel of $J_n\\to R$, whose image ideal is $J_n'$ by hypothesis. For $B$, let $J_nB\\subset B$ be the ideal sheaf of local finite sums $\\sum_i j_ib_i$; the sum-of-products map $\\coprod_{k\\geq1}(J_n\\times B)^k\\to J_nB$ is an epimorphism of sheaves. Since $u^{-1}$ preserves finite products (so commutes with the ring operations) and, as a left adjoint, coproducts and epimorphisms, and since it preserves the monomorphism $J_nB\\subset B$ by the cited exactness, $u^{-1}(J_nB)\\subset A$ is the image of $\\coprod_k(u^{-1}J_n\\times A)^k\\to A$, i.e. the ideal of local sums $\\sum_ij_ia_i$ with $j_i$ in the image $J_n'$ of $u^{-1}J_n$; thus $u^{-1}(J_nB)=J_n'A$. Cokernel preservation now gives $A/J_n'A\\cong u^{-1}(B/J_nB)\\cong u^{-1}(R/J_n)\\cong S_n'$ as ring sheaves. This isomorphism is the map induced by $A\\to B'\\to B'/J_n'B'=S_n'$: both are $R'$-algebra maps out of $A/J_n'A$, to which $R'$ surjects, so they agree; the same holds for the transitions. Inverse image of scalar multiplication identifies the underlying $R'$-complex of $Q$ with $u^{-1}\\operatorname{Res}P$. Since the coefficient map $u^{-1}R\\cong R'$ is an isomorphism, $u_R^*$ is this exact inverse-image functor. It therefore preserves quasi-isomorphisms and computes $Lu_R^*$ on every complex, including a quotient complex which need not be K-flat.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), first assertion; sites-cohomology.tex Tag 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "Let $F=B'\\otimes_A Q=u_B^*P$. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $F$ is K-flat over $B'$ with flat terms, without any flatness assumption on $A\\to B'$. By [lem-weil-pbc-ringed-topoi-derived-pullback], it represents $Lu_B^*M$. By [lem-weil-pbc-flat-scalar-restriction-kflat], using the separate assumed flatness of $R'\\to B'$, $\\operatorname{Res}'F$ is K-flat with flat $R'$-terms and represents $\\operatorname{Res}'Lu_B^*M$.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-flat-scalar-restriction-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat) and 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "On the models just obtained, define $\\alpha_P:u_R^*\\operatorname{Res}P\\to\\operatorname{Res}'F$ by $r'\\otimes q\\mapsto\\overline{r'}\\otimes q$. The tensor balancing relation is respected because the square of structural ring maps commutes. Bilinearity and the sheaf tensor universal property give an $R'$-linear map; it commutes with differentials since neither coefficient has nonzero degree. The scalar-extension adjunction unit is $q\\mapsto1\\otimes q$ by [def-weil-pbc-ringed-tensor-section-calculus], so this is precisely the scalar-insertion comparison, with the prescribed normalization. It is natural on complexes. The computations of derived pullback above and the localization equivalence on flat-term K-flat complexes [lem-weil-pbc-site-derived-tensor-descent] descend it to the claimed comparison on $D(B)$.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), scalar-extension unit; Tag 03EK (section-tensor-product); sites-cohomology.tex Tag 06YY"
+   }
+  },
+  {
+   "text": "Write $S=S_n'$. The source finite reduction is represented by $U_n=S\\otimes_{R'}u^{-1}\\operatorname{Res}P$: the unreduced source is K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat], and K-flat scalar extension computes derived reduction by [lem-pur-derived-change-of-rings]. Also $\\operatorname{Res}M\\otimes_R^L S_n$ is represented by $S_n\\otimes_R\\operatorname{Res}P$. Apply the exact $u_R^*$ of step 2. The normalized ordinary tensor comparison [lem-weil-pbc-canonical-ringed-tensor-comparison-construction, def-weil-pbc-canonical-ringed-tensor-comparison] identifies its image with $U_n$, with local inverse-image pure generators sent to the corresponding pure generators. Thus $U_n$ represents the right side of the asserted isomorphism, with its actual $S$-action.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tags 06YY, 0G7E and 06YU (definition-derived-tor)"
+   }
+  },
+  {
+   "text": "By step 3 and K-flat derived scalar extension [lem-pur-derived-change-of-rings], the target finite reduction is represented by $V_n=S\\otimes_{R'}\\operatorname{Res}'F$. Apply [lem-weil-pbc-flat-common-quotient-reduction-tower] to $R'\\to B'$ and $F$, using exactly $R'/J_n'=B'/J_n'B'=S$. The ordinary comparison on this single flat-term K-flat model identifies $V_n$ with $S\\otimes_{B'}F$, both through the sheaf quotient $F/J_n'F$; it sends $s\\otimes f$ to $s\\otimes f$ and $1\\otimes f$ to $1\\otimes f$. Thus it preserves the given $S$-action and the quotient-unit normalization, rather than merely giving an abstract derived isomorphism. There is a further ordinary chain isomorphism\n$$S\\otimes_{B'}(B'\\otimes_AQ)\\longrightarrow S\\otimes_AQ,\\qquad s\\otimes(b'\\otimes q)\\longmapsto s\\,\\overline{b'}\\otimes q.$$\nIts inverse sends $s\\otimes q$ to $s\\otimes(1\\otimes q)$. The two balanced tensor relations show these maps are well-defined and inverse. These are maps of sheaf tensors by their universal property, and their formulas commute with differentials.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-flat-common-quotient-reduction-tower",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), balanced tensor universal property; sites-cohomology.tex Tag 06YU (definition-derived-tor)"
+   }
+  },
+  {
+   "text": "The ordinary map $h_n:U_n=S\\otimes_{R'}\\operatorname{Res}_{R'}Q\\to S\\otimes_AQ$ sends $s\\otimes q$ to $s\\otimes q$. It is invertible because $A/J_n'A=S=R'/J_n'$. Explicitly $U_n$ is $Q/J_n'Q$: $1\\otimes q\\leftrightarrow[q]$, and $s\\otimes q\\mapsto s[q]$, with local lifts of $s$ to $R'$ independent modulo $J_n'$. The $A$-action on this quotient factors through $A/J_n'A=S$; hence this same formula is balanced over $A$ and defines the inverse of $h_n$. This argument is applied degreewise and sheafifies, so proves an $S$-linear chain isomorphism without assuming any surjectivity on sections of a quotient sheaf. Under steps 5 and 6 the reduced $\\alpha_P$ is $s\\otimes q\\mapsto s\\otimes(1\\otimes q)$, and its composite with the collapse in step 6 is exactly $h_n$. Therefore it is invertible. Its inverse $V_n\\to U_n$ represents the displayed isomorphism in $D(S_n')$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), quotient balancing using the stated common quotient hypotheses"
+   }
+  },
+  {
+   "text": "For any chain map $P\\to\\widetilde P$, every formula above takes $s\\otimes q$ to the same expression with the image of $q$; hence all comparison squares commute. The pullback and scalar-extension quasi-isomorphism assertions [lem-weil-pbc-ringed-topoi-derived-pullback, lem-pur-derived-change-of-rings] and exact restriction show that these diagrams also commute after inversion of quasi-isomorphisms. The equivalence $W_B^{-1}\\mathcal P_B\\simeq D(B)$ in [lem-weil-pbc-site-derived-tensor-descent] then proves independence of $P$ and naturality for every derived morphism, including roofs. Both $U_n,V_n$ are complexes of $S_n'$-modules and the formulas are $S_n'$-linear, so this is an isomorphism in $D(S_n')$, rather than merely an isomorphism after forgetting its quotient action.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), localization and naturality of the K-flat computation; Tag 06YU (definition-derived-tor)"
+   }
+  },
+  {
+   "text": "For a quotient transition $t:S_{n+1}'\\to S_n'$, the map of underlying $R'$-complexes sends $s\\otimes q$ to $t(s)\\otimes q$. The reduced insertion followed by this transition sends it to $t(s)\\otimes(1\\otimes q)$, which is also transition followed by insertion. The collapse and $h_n$ obey the same equality. Quotient units send $q$ to $1\\otimes q$; insertion sends this to $1\\otimes(1\\otimes q)$, whose collapse and $h_n^{-1}$ give $1\\otimes q$. Thus the inverse comparisons commute with all quotient transitions and quotient units. These are sheaf-map equalities by pure-tensor extensionality [def-weil-pbc-ringed-tensor-section-calculus], and hence remain equalities after localization.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), unit, and 03EK (section-tensor-product), pure-tensor extensionality"
+   }
+  },
+  {
+   "text": "For composable $u$ and $v$ with compatible data, use the canonical pullback compositors computed by ordinary pullback on flat-term K-flat complexes [lem-sfb-ringed-derived-monoidal-comparisons]. Such models remain eligible after each pullback by [lem-weil-pbc-ringed-pullback-preserves-kflat]. The ordinary compositor collapses $b''\\otimes(b'\\otimes q)$ to $b''v^{-1}(b')\\otimes q$. Inserting scalars twice sends $q$ to $1\\otimes(1\\otimes q)$, which collapses to $1\\otimes q$, exactly insertion for the composite. After reduction, both paths multiply the two coefficient sections in the common final quotient and leave $q$ fixed. Equality follows from associativity of coefficient multiplication and pure-tensor extensionality [def-weil-pbc-ringed-tensor-section-calculus]. For the identity morphism the canonical unitor collapses $1\\otimes q$ to $q$, so the comparison is the identity. Localizing gives the claimed coherence, and taking inverses preserves every commuting square, proving coherence for the displayed inverse isomorphisms too.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), proof on K-flat models; sites-modules.tex Tags 03EL and 03EK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-flat-common-quotient-reduction-tower",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7E, 06YY and 0D6D, with sites-modules.tex Tags 04JC, 03D7, 03EK and 03EL",
+  "note": "The Stacks passages supply K-flat models, exact inverse image and normalized tensor/pullback operations. The common-quotient collapse and its unit, transition and composition checks are the explicit agent-written balanced-tensor argument in steps 6–10."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +211,45 @@
    "results": "SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackComp, SheafOfModules.instIsLeftAdjointPullback, PresheafOfModules.pullback, SheafOfModules.sheafificationCompPullback",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module pullback and its compositor do not give this derived common-quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*restrictScalars|restrictScalars.*pullback|commonQuotient",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary presheaf/sheaf pullback, scalar restriction, categorical pullbacks or site flatness; none states the unbounded derived common-quotient scalar-insertion comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar insertion comparison between derived geometric pullback and scalar restriction becomes an isomorphism modulo compatible quotient ideals",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.arrowResLEAppIso, CategoryTheory.Limits.instIsIsoPullbackComparison, AlgebraicGeometry.pullbackRestrictIsoRestrict, ModuleCat.restrictScalarsCongr, Ideal.cotangentEquivIdeal, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, Submodule.Quotient.restrictScalarsEquiv_mk, Ideal.Quotient.isScalarTower_right",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary presheaf/sheaf pullback, scalar restriction, categorical pullbacks or site flatness; none states the unbounded derived common-quotient scalar-insertion comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrictScalars\"",
+   "results": "[loogle] OK 12 hit(s); PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, PresheafOfModules.instFaithfulRestrictScalars, PresheafOfModules.instAdditiveRestrictScalars, PresheafOfModules.restrictScalars_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary presheaf/sheaf pullback, scalar restriction, categorical pullbacks or site flatness; none states the unbounded derived common-quotient scalar-insertion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of ringed topoi commutes with restriction of flat scalars after reduction to a common quotient ring",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary presheaf/sheaf pullback, scalar restriction, categorical pullbacks or site flatness; none states the unbounded derived common-quotient scalar-insertion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat sheaf complexes base change and quotient reduction natural comparison under a geometric morphism",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.compatiblePreservingOfFlat, SheafOfModules.Presentation.map_π_eq, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, SheafOfModules.Presentation.map, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary presheaf/sheaf pullback, scalar restriction, categorical pullbacks or site flatness; none states the unbounded derived common-quotient scalar-insertion comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-constant-completion-equivalence",
@@ -85,5 +268,45 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+  "worker": "stage1",
+  "group": "Q33",
+  "summary": "Preserved the statement and gave a ten-step normalized K-flat proof using existing flat-restriction and common-quotient nodes. Checked each cited statement, quotient actions, all morphism directions, and explicit unit, transition and composition formulas. No new nodes or statement changes. Returned-citation repair: revalidated all 14 cited statements on the current DAG; refreshed the full common-quotient-tower quote and made its ordinary quotient-normalized application in step 6 explicit. Its added strict-tower definition imposes no new hypothesis.",
+  "blueprint": "Current main-20261015 def-weil-pbc-completed-pullback, order 1329: equality between the pulled-back finite reduction tower and the reductions of ordinary pullback, and the assertion that the comparison from ordinary pullback is its completion unit. This item proves the finite-stage comparison needed for that equality, through lem-weil-pbc-constant-completion-equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions on any ringed site; the present unit does not construct resolutions."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of derived scalar extension to the quotient ring sheaf; no node in this unit states the full scalar-extension theorem."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exact algebraic inverse image for an arbitrary geometric morphism, needed on quotient complexes; the etale site/scheme-specific exactness nodes in this unit do not cover the hypotheses."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical pullback compositors, normalized on K-flat models, and their identity normalization. Used only to check coherence of the explicit common-quotient map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-142aa242e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-142aa242e (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full against the complete statements of all 14 proof_deps; all of them, and the 9 stmt_deps, match live. The item statement is true. On a flat-term K-flat P, both finite reductions equal u^{-1}P/J_n'. This holds because A/J_n'A = u^{-1}(B/J_nB) = u^{-1}(R/J_n) = S_n', and the unreduced map is never claimed invertible. Small cases checked: J_n=R; u=id; R=B; J_n=0. The delivery has no new nodes, and the item's statement and stmt_deps are unchanged against live. There is no cycle; the only citer is lem-weil-pbc-constant-completion-equivalence, at step 4. The item is not dropped, has no repair note, and is still unsplit on live. Stacks tag/label pairs checked: 06YY, 0G7E, 06YS, 0D6D, 04JC, 03EL, 03EK, 03D7, 06YU, 06YN. Blueprint main-20261015 def-weil-pbc-completed-pullback (order 1329) needs exactly this finite-level identification. The changed tower dependency is quoted correctly in step 6, and its strict-tower sentence adds no hypothesis. I accept the four tool_uses (K-flat resolution, derived change of rings, geometric inverse-image exactness, ringed compositors) as generic infrastructure. The DAG duplicate candidates are lem-pur-coefficient-pullback-comparison, which concerns extension rather than restriction, and lem-pur-independent-normalized-scalar-composition and the one-site tower node, which state less; none duplicates the item. One fault (E5), fixed: step 2 derived A/J_n'A ≅ u^{-1}(B/J_nB) from cokernel exactness 'by the same argument'. That needs u^{-1}(J_nB)=J_n'A. The step now gives the argument: u^{-1} preserves finite products, coproducts, epimorphisms and the monomorphism J_nB⊂B, so the sum-of-products epimorphism pulls back onto J_n'A. It also checks that the resulting isomorphism agrees with the map induced by A→B'→S_n', since R' surjects onto A/J_n'A. Only step 2's text changed; uses, statement and stmt_deps are untouched.; 1 file(s) fixed by the reviewer"
  }
 }
