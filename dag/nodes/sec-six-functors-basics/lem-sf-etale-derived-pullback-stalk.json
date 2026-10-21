@@ -16,9 +16,70 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=u^*$, $S=s_{\\bar v}$ and $R=s_{u\\circ\\bar v}$. For an $A_T$-module sheaf $M$, [prop-weil-pbc-inverse-image-modules-exact] identifies the underlying abelian sheaf of $PM$ with $u^{-1}M$, naturally in $M$. Apply [lem-weil-pbc-inverse-image-stalk-germ] to obtain the canonical additive isomorphism $c_M:S(PM)\\xrightarrow{\\sim}R(M)$, natural in module morphisms. It is $A$-linear: for $a\\in A$, let $m_a:M\\to M$ be multiplication by its constant section. Naturality of the abelian comparison gives $c_M\\circ S(Pm_a)=R(m_a)\\circ c_M$. The action-transport and constant-ring identification in [prop-weil-pbc-inverse-image-modules-exact] identify $Pm_a$ with multiplication by $a$ on $PM$; [lem-sfb-etale-stalk-constant-complex-exactness] identifies constant-ring stalks with $A$ with its ordinary action. Thus this equation is precisely $c_M(ax)=a c_M(x)$. Consequently $c:SP\\xrightarrow{\\sim}R$ is a natural isomorphism of functors to $A$-modules.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-sfb-etale-stalk-constant-complex-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (3), with the constant-module action of prop-weil-pbc-inverse-image-modules-exact"
+   }
+  },
+  {
+   "text": "For any unbounded cochain complex $C$, define $(c_C)^n=c_{C^n}$. Naturality of the comparison of [lem-weil-pbc-inverse-image-stalk-germ], after the module identification just made, applied to $d_C^n:C^n\\to C^{n+1}$ says $c_{C^{n+1}}\\circ SP(d_C^n)=R(d_C^n)\\circ c_{C^n}$. This is the chain-map equation. The inverse components satisfy the reverse equation by multiplying this equality by the two inverses, so $c_C$ is a chain isomorphism. For a chain map $h:C\\to E$, the same naturality applied to each $h^n$ gives $c_E\\circ SP(h)=R(h)\\circ c_C$ degree by degree. These are exactly the degreewise canonical stalk comparisons, and their additivity and $A$-linearity are those established in step 1.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (3), with the constant-module action of prop-weil-pbc-inverse-image-modules-exact"
+   }
+  },
+  {
+   "text": "The functor $P$ is additive and exact by [prop-weil-pbc-inverse-image-modules-exact]. The stalk functors $S$ and $R$ are additive and exact by [lem-sfb-etale-stalk-constant-complex-exactness], applied to the two image geometric points. The composite $SP$ therefore preserves finite limits and finite colimits, by applying the two preservation properties successively. Apply [lem-weil-pbc-exact-functor-derived-factorization] to $P,S,R$ and $SP$. Their termwise functors preserve quasi-isomorphisms and induce $D(P),D(S),D(R)$ and $D(SP)$, with the comparison $a_{H,C}:D(H)(QC)\\xrightarrow{\\sim}Q(C(H)C)$ for each $H$. In particular every complex, including an unbounded one, represents its image by termwise application.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-etale-stalk-constant-complex-exactness",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor (3)-(4); stalk exactness is sites-modules.tex Tag 04EQ, lemma-stalk-exact-modules (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-exact-derived-natural-iso] to $c:SP\\xrightarrow{\\sim}R$ and [lem-sfb-exact-derived-composition] to $(P,S)$. Define the desired isomorphism to be $\\alpha=D(c)\\circ\\mu_{P,S}^{-1}:D(S)D(P)\\xrightarrow{\\sim}D(R)$. To check its prescribed representative, put $\\beta_C=a_{S,C(P)C}\\circ D(S)(a_{P,C})$. The composition lemma gives $\\beta_C\\circ\\mu_{P,S,QC}=a_{SP,C}$, whereas the natural-isomorphism lemma gives $a_{R,C}\\circ D(c)_{QC}=Q(c_C)\\circ a_{SP,C}$. Substitution yields $a_{R,C}\\circ\\alpha_{QC}=Q(c_C)\\circ\\beta_C$. Thus under the termwise representing identifications, $\\alpha$ is exactly the localization of the chain isomorphism of step 2. Both cited lemmas give natural isomorphisms on the entire derived categories, so this comparison is natural for every derived morphism. All hypotheses used were exactness and the scheme morphism and geometric-point hypotheses; no boundedness, finiteness, or extra condition on $u$ has entered.",
+   "uses": [
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization (3), applied with the natural-transformation enhancement explicitly stated in the two cited nodes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-sfb-etale-stalk-constant-complex-exactness",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Termwise extension of Tag 03Q1 (lemma-stalk-pullback) (3), using Tag 015F and localization as in Tag 04VG; explicit scalar-linearity and localization normalization supplied here"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +115,45 @@
    "results": "{\"t\": \"2026-10-21T05:49:21Z\", \"tool\": \"leanfinder\", \"query\": \"Derived inverse image of etale module sheaves commutes with geometric stalks for any scheme morphism and unbounded complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing.ι_forgetStalk_inv\", \"smoothSheafCommRing.ι_forgetStalk_inv_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"smoothSheafCommRing.ι_forgetStalk_hom\", \"AlgebraicGeometry.stalkMap_toStalk\"], \"digest\": \"294267844e2f449f\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of exact inverse image of etale module sheaves commutes with arbitrary unbounded derived complexes",
+   "results": "{\"t\": \"2026-10-21T07:33:18Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric stalk of exact inverse image of etale module sheaves commutes with arbitrary unbounded derived complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing.ι_forgetStalk_inv\", \"smoothSheafCommRing.ι_forgetStalk_inv_apply\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval_apply\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval_assoc\"], \"digest\": \"165df44e920002da\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryNatIso\"",
+   "results": "{\"t\": \"2026-10-21T07:33:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategoryNatIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|mapDerivedCategoryNatIso|mapDerivedCategoryComp",
+   "results": "{\"t\": \"2026-10-21T07:33:18Z\", \"tool\": \"grep\", \"query\": \"sheafFiberComapIso|mapDerivedCategoryNatIso|mapDerivedCategoryComp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"ae9eb76b80b546a1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of derived inverse image of a sheaf of modules at a geometric point is its derived stalk at the image point",
+   "results": "{\"t\": \"2026-10-21T07:34:23Z\", \"tool\": \"leansearch\", \"query\": \"The stalk of derived inverse image of a sheaf of modules at a geometric point is its derived stalk at the image point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"TopCat.Presheaf.stalk\", \"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.stalkPullbackHom\", \"TopCat.Presheaf.stalkPushforward\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply\"], \"digest\": \"247d72f5ca37d986\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor natural isomorphism between pullback then geometric stalk and image geometric stalk induces an isomorphism of derived functors",
+   "results": "{\"t\": \"2026-10-21T07:34:25Z\", \"tool\": \"leanfinder\", \"query\": \"An exact functor natural isomorphism between pullback then geometric stalk and image geometric stalk induces an isomorphism of derived functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.isIso_of_stalkFunctor_map_iso\", \"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\", \"TopCat.Presheaf.germ_stalkPullbackHom\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\"], \"digest\": \"85cf0f8a22ecb840\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-stalk-tor-test",
@@ -76,5 +172,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-derived-pullback-stalk",
+  "worker": "stage1",
+  "summary": "Proved the derived comparison from the existing abelian stalk-germ comparison: scalar naturality gives A-linearity, degreewise naturality gives a chain isomorphism, and exact-derived factorization, natural-isomorphism and composition nodes give its normalized descent. No new nodes and no statement changes.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation, step 3 (affine-space paragraph), sentence that pullback preserves a bounded constructible flat model: supplies its ordinary-etale derived stalk input through lem-sf-etale-stalk-tor-test.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Ordinary abelian stalk comparison with its naturality and unit normalization; a generic etale-site tool, not a replacement of the preservation route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Constant-module action transport and exact inverse image for any scheme morphism; the unit itself has no such site-level construction."
+   },
+   {
+    "node": "lem-sfb-etale-stalk-constant-complex-exactness",
+    "why": "Exact additive module stalk and ordinary constant-ring scalar action for an arbitrary commutative ring; no preservation or purity theorem is taken from its unit."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic normalized composition of functors induced by exact functors, used solely to identify D(SP) with D(S)D(P)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-etale-stalk-constant-complex-exactness",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-28b4208b7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-28b4208b7 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full; there are no new nodes. The statement is byte-identical to Q18's unsplit creation. It matches Stacks 03Q1(3) (etale-cohomology.tex l.4649), extended termwise; the route is correctly marked by:agent, and tags 03Q1/04EQ/015F/04VG exist with the labels given. The coefficient category is the exact constant-coefficient module u^* of prop-weil-pbc-inverse-image-modules-exact, the same functor the citer lem-sf-etale-stalk-tor-test uses. Step 1: the abelian iso and its naturality come from lem-weil-pbc-inverse-image-stalk-germ, the module compatibility from clause (2), and A-linearity from naturality at m_a, using c of clause (1) on constant sections and S(A_T)=A from lem-sfb-etale-stalk-constant-complex-exactness. Step 2 really is elementary (degreewise chain iso). Step 3: P is exact by clause (3) and S, R by the constant-complex node, and the factorization leaf applies with no boundedness. Step 4: I recomputed a_R∘D(c)∘μ^{-1}=Q(c_C)∘β with the directions right. Edge cases checked: A=0, empty U, u=id, a complex in one degree, non-flat u, unbounded complexes. The rg -L duplicate search (03Q1 and derived/stalk/pullback phrasings) found no equivalent node. The four declared tool_uses are generic and accepted; the other two cited nodes are Mathlib leaves. There is no cycle and no SGA citation. No changes made."
  }
 }

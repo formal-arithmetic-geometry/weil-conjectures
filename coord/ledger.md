@@ -20881,3 +20881,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/N7/lem-pur-etale-open-scalar-exchange (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q17/lem-sf-ringed-kflat-single-tensor-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q27/sk-d-geometry (reviewer FIX; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q12/lem-sf-etale-derived-pullback-stalk (reviewer PASS; first push; new nodes: 0)
