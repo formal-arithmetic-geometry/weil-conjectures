@@ -25,25 +25,14 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Mathlib.CategoryTheory.Limits.Types.Products
 import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback
-import Sheaf.Paper.DerivedNakayamaResolution
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.Paper.DerivedNakayamaResolution
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-!
 # Constructibility of all integral reductions from the first
@@ -65,6 +54,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+attribute [local irreducible] upperStarFromPoint
 
 /-- Derived completeness, constructibility of every positive reduction and a common
 finite cohomological interval. The reduction index n denotes the exponent n+1.
@@ -90,7 +81,45 @@ abbrev ContinuousIntegralConstructible (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) := (continuousIntegralConstructible l E X).FullSubcategory
 
+private theorem finiteConstantEndomorphism (X : Scheme.{u})
+    (h : sfbFiniteConstantSets X ⟶ sfbFiniteConstantSets X) : h = 𝟙 _ := by
+  let J := Scheme.ProEt.topology X
+  let O := FintypeCat.of (ULift.{u} Unit)
+  let F := sfbFiniteConstantSets X
+  have ht : IsTerminal (ULift.{u + 1, u} (ULift.{u} Unit)) :=
+    (Types.isTerminalEquivUnique _).symm inferInstance
+  have ht' : IsTerminal (F.obj O) :=
+    (ht.isTerminalObj (constantSheaf J (Type (u + 1))) _).isTerminalObj
+      (sheafToPresheaf J (Type (u + 1))) _
+  have hO : h.app O = 𝟙 _ := ht'.hom_ext _ _
+  apply NatTrans.ext
+  funext T
+  apply sheafify_hom_ext J _ _
+    (((constantSheaf J (Type (u + 1))).obj (ULift.{u + 1, u} T)).property)
+  ext V x
+  let k : O ⟶ T := FintypeCat.homMk fun _ ↦ x.down
+  let z := (toSheafify J ((Functor.const X.ProEtᵒᵖ).obj
+    (ULift.{u + 1, u} (ULift.{u} Unit)))).app V (ULift.up (ULift.up ()))
+  have hn := congrArg (fun t ↦ t.app V) (h.naturality k)
+  rw [hO, Category.id_comp] at hn
+  have hc : (F.map k).app V z =
+      (toSheafify J ((Functor.const X.ProEtᵒᵖ).obj (ULift.{u + 1, u} T))).app V x := by
+    exact (congrArg (fun t ↦ t.app V
+      (ULift.up (ULift.up () : ULift.{u} Unit))) (toSheafify_naturality J
+      ((Functor.const X.ProEtᵒᵖ).map
+        (uliftFunctor.{u + 1, u}.map ((forget FintypeCat).map k))))).symm
+  change (h.app T).app V
+      ((toSheafify J ((Functor.const X.ProEtᵒᵖ).obj (ULift.{u + 1, u} T))).app V x) =
+    (toSheafify J ((Functor.const X.ProEtᵒᵖ).obj (ULift.{u + 1, u} T))).app V x
+  rw [← hc]
+  exact congrArg (fun t ↦ t z) hn
 
+private theorem finiteRepresentation_unique (X : Scheme.{u})
+    (a b : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X) : a = b := by
+  apply Iso.ext
+  have h := finiteConstantEndomorphism X (a.hom ≫ b.inv)
+  have h' := congrArg (fun f ↦ f ≫ b.hom) h
+  simpa using h'
 
 /-- The projection-normalized comparison is independent of all auxiliary finite-set
 representations and limit-cone witnesses. SfbIntegralComparison retains the unit
@@ -111,7 +140,21 @@ theorem integralLimitAbComparison_existsUnique (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) :
     ∃! e : (coefficientRing X (sfbCondensedIntegers l E)).X ≅ sfbCompletedIntegersAb l E X,
       SfbIntegralComparison l E X e := by
-  sorry
+  obtain ⟨a, c, j, hq, hc, _, _, _, e, he, hu⟩ :=
+    sfb_integral_coefficient_limit l E X
+  refine ⟨e, ⟨he.1, he.2.1, a, c, j, hq, hc, he.2.2⟩, ?_⟩
+  intro e' he'
+  obtain ⟨hm, hi, b, d, k, hq', hd, hn⟩ := he'
+  have hab : b = a := finiteRepresentation_unique X b a
+  subst b
+  apply hu e'
+  refine ⟨hm, hi, ?_⟩
+  intro S f n
+  rw [hn]
+  congr 2
+  apply ConcreteCategory.hom_ext
+  intro x
+  exact (hq' n (f x)).trans (hq n (f x)).symm
 
 /-- The unique integral-limit comparison with the published adjunction-mate and
 finite-projection normalization. No finite representation or equivalence is selected
@@ -122,6 +165,37 @@ def integralLimitAbComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :=
   (integralLimitAbComparison_existsUnique l E X).exists.choose
+
+private theorem continuousRingSheaf_topology_eq (T : Type u) [Ring T]
+    (t₁ t₂ : TopologicalSpace T) (h : t₁ = t₂)
+    (h₁ : @IsTopologicalRing T t₁ _) (h₂ : @IsTopologicalRing T t₂ _) :
+    @Profinite.continuousMapRingSheafOfUniverse.{u, u} T t₁ _ h₁ =
+      @Profinite.continuousMapRingSheafOfUniverse.{u, u} T t₂ _ h₂ := by
+  subst t₂
+  rfl
+
+private theorem integralPointMon_eq (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
+    Mon.mk (DerivedNakayama.integerRing l E) = sfbCondensedIntegers l E := by
+  have hm : (spectralNorm.normedField (Padic l) E).toPseudoMetricSpace =
+      (Padic.coefficientExtensionAbsoluteValue l E).toNormedField.toPseudoMetricSpace :=
+    PseudoMetricSpace.ext (by
+      ext x y
+      change spectralNorm (Padic l) E (x - y) = spectralNorm (Padic l) E (-x + y)
+      rw [neg_add_eq_sub, ← neg_sub x y,
+        spectralNorm_neg (Algebra.IsAlgebraic.isAlgebraic _)])
+  have ht := congrArg (fun m : PseudoMetricSpace E ↦
+    m.toUniformSpace.toTopologicalSpace) hm.symm
+  have hti := congrArg (fun t : TopologicalSpace E ↦
+    TopologicalSpace.induced (fun x : Padic.coefficientExtensionIntegers l E ↦ (x : E)) t) ht
+  have hs := continuousRingSheaf_topology_eq
+    (Padic.coefficientExtensionIntegers l E) _ _ hti
+    (by let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField; infer_instance)
+    (by let := spectralNorm.normedField (Padic l) E; infer_instance)
+  let F : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} →
+      Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) := fun R ↦
+    Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R)
+  exact congrArg F hs
 
 /-- The coefficient presentations have the same underlying abelian sheaves.
 Source: blueprint integral-limit clause 3 and integral-criterion proof step 8
@@ -148,7 +222,12 @@ theorem integralSectionAbIdentifications (l : ℕ) [Fact l.Prime]
         forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
           (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E X) =
         sfbCompletedIntegersAb l E X := by
-  sorry
+  constructor
+  · change (upperStarFromPoint X).obj (DerivedNakayama.integerRing l E) =
+      (upperStarFromPoint X).obj (sfbCondensedIntegers l E).X
+    exact congrArg (fun R : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ↦
+      (upperStarFromPoint X).obj R.X) (integralPointMon_eq l E)
+  · rfl
 
 /-- Reconstructing section rings retains the unique projection-normalized coefficient
 comparison. After the endpoint identifications, forgetting to abelian sheaves fixes
@@ -199,6 +278,46 @@ def integralSectionFunctor (l : ℕ) [Fact l.Prime]
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
           (integralSectionRingIso l E X).inv)
 
+private noncomputable def restrictionRoundTrip
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) :
+    SheafOfModules.restrictScalars.{u + 1} c.hom ⋙
+      SheafOfModules.restrictScalars c.inv ≅ 𝟭 (SheafOfModules.{u + 1} S) :=
+  NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget S).preimageIso
+    (PresheafOfModules.isoMk (fun U ↦
+      (ModuleCat.restrictScalarsComp'App (c.inv.hom.app U).hom
+        (c.hom.hom.app U).hom (RingHom.id _) (by
+          have h := congr_app (congrArg (fun f : S ⟶ S ↦ f.hom) c.inv_hom_id) U
+          exact (congrArg RingCat.Hom.hom h).symm) (M.val.obj U)).symm ≪≫
+        ModuleCat.restrictScalarsId'App (RingHom.id _) rfl (M.val.obj U))
+      (by intro U V f; ext x; rfl)))
+    (by intro M N f; ext U x; rfl)
+
+private theorem restrictionTriangle
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) (M : SheafOfModules.{u + 1} S) :
+    (SheafOfModules.restrictScalars c.hom).map ((restrictionRoundTrip c).inv.app M) ≫
+      (restrictionRoundTrip c.symm).hom.app
+        ((SheafOfModules.restrictScalars c.hom).obj M) = 𝟙 _ := by
+  ext U x
+  rfl
+
+private noncomputable def restrictionEquivalence
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) :
+    SheafOfModules.{u + 1} S ≌ SheafOfModules.{u + 1} R where
+  functor := SheafOfModules.restrictScalars c.hom
+  inverse := SheafOfModules.restrictScalars c.inv
+  unitIso := (restrictionRoundTrip c).symm
+  counitIso := restrictionRoundTrip c.symm
+  functor_unitIso_comp := restrictionTriangle c
+
+private theorem restriction_isEquivalence
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) :
+    (SheafOfModules.restrictScalars.{u + 1} c.hom).IsEquivalence :=
+  (restrictionEquivalence c).isEquivalence_functor
+
 /-- The prescribed section-action comparison is an additive equivalence.
 Source: Stacks 00YV, 03DA; blueprint integral-criterion proof step 8
 (blueprint: det-prop-integral-criterion-reductions).
@@ -212,7 +331,17 @@ theorem integralSectionFunctor_properties (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) :
     (integralSectionFunctor l E X).Additive ∧
       (integralSectionFunctor l E X).IsEquivalence := by
-  sorry
+  let c := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (integralSectionRingIso l E X).symm
+  let : (SheafOfModules.restrictScalars c.hom).IsEquivalence := restriction_isEquivalence c
+  let F := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology X) (AdicCompletion.ring l E X)
+  let : F.functor.IsEquivalence := F.isEquivalence_functor
+  constructor
+  · dsimp only [integralSectionFunctor]
+    infer_instance
+  · exact inferInstanceAs (F.functor ⋙ SheafOfModules.restrictScalars c.hom).IsEquivalence
 
 /-- Additivity of the actual section-action functor.
 Source: blueprint integral-criterion proof step 8
@@ -333,8 +462,8 @@ theorem continuousIntegralConstructible_iff_first_reduction (l : ℕ) [Fact l.Pr
     continuousIntegralConstructible l E X K ↔
       constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
         ((AdicCompletion.derivedReduction l E X 0).obj K) := by
-  sorry
-
+  exact ⟨fun h ↦ (integral_reductions_constructible_iff l E X K _hK).mpr h.2,
+    fun h ↦ ⟨_hK, (integral_reductions_constructible_iff l E X K _hK).mp h⟩⟩
 
 /-- The first-reduction criterion in the existing sectionwise integral category.
 Source: blueprint integral-criterion final sentence
@@ -350,6 +479,7 @@ theorem sfIntegralConstructible_iff_first_reduction (l : ℕ) [Fact l.Prime]
         ((integralSectionDerivedEquivalence l E X).functor.obj K) ↔
       constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
         ((AdicCompletion.derivedReduction l E X 0).obj K) := by
-  sorry
+  exact (continuousIntegralConstructible_iff_sfIntegralConstructible l E X K).symm.trans
+    (continuousIntegralConstructible_iff_first_reduction l E X K _hK)
 
 end AlgebraicGeometry.ProEtale
