@@ -461,6 +461,11 @@ def reconcile(commit: bool = True) -> int:
                 f"rework: {len(done)} item(s) verified green, quarantined copies removed: " + ", ".join(done)[:300]
                 + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
                 "--", "coord/rework.tsv", "coord/rework-done.tsv", *[r for r in (qpath(m) for m in done)], check=False)
+    try:
+        import subprocess as _sp, sys as _sy
+        _sp.run([_sy.executable, str(ROOT / 'tools' / 'queue_mark.py'), 'done', '3', *done], capture_output=True, timeout=120)
+    except Exception:
+        pass
     print(f"rework: {len(done)} item(s) verified green and closed: {' '.join(done)}")
     return len(done)
 

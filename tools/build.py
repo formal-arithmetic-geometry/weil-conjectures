@@ -391,6 +391,27 @@ def publish():
         marker.unlink(missing_ok=True)
 
 
+def _mark_verified(included):
+    """the human, 2026-10-22: a landing the green build verified marks its item done (tools/queue_mark.py)"""
+    try:
+        import subprocess as _sp, sys as _sy
+        by_stage = {}
+        for r in included:
+            st = str(r.get("stage") or "-")
+            d = r.get("delivery") or {}
+            if isinstance(d, dict) and d.get("item") and "." not in str(d.get("item")):
+                by_stage.setdefault(st, set()).add(str(d["item"]))
+            for c in r.get("changed") or []:
+                mod = str(c).split()[0] if str(c).strip() else ""
+                if mod and "." in mod:
+                    by_stage.setdefault("3" if st == "-" else st, set()).add(mod)
+        for st, items in by_stage.items():
+            _sp.run([_sy.executable, str(li.ROOT / "tools" / "queue_mark.py"), "done", st, *sorted(items)],
+                    capture_output=True, timeout=120)
+    except Exception:
+        pass
+
+
 def close_verified(included: list[dict], commit):
     for r in included:
         r.update(result="verified", commit=commit, closed=ld.now())
@@ -535,6 +556,7 @@ def finish_result(included, commit, text, elapsed, preempted, source_id, red_tre
     if built:
         publish()
         close_verified(included, commit)
+        _mark_verified(included)
         if commit and ld.merge_queue():
             # the verified main advances to exactly the commit this green build built (merge queue)
             run(["git", "update-ref", ld.VERIFIED_REF, commit], cwd=li.ROOT)

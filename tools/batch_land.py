@@ -1573,6 +1573,21 @@ def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, c
     log(f"batch {b['id']}: conflict fallback done in {time.time() - t0:.1f} s; the next build verifies")
 
 
+def _qmark_rework(r):
+    """the human, 2026-10-22: a landing dropped on a red build marks its item rework (tools/queue_mark.py)"""
+    try:
+        import subprocess as _sp, sys as _sy, pathlib as _pl
+        d = r.get('delivery') or {}
+        items = [str(d['item'])] if isinstance(d, dict) and d.get('item') else []
+        items += [str(c).split()[0] for c in (r.get('changed') or []) if str(c).strip() and '.' in str(c).split()[0]]
+        if items:
+            root = _pl.Path(__file__).resolve().parent.parent
+            _sp.run([_sy.executable, str(root / 'tools' / 'queue_mark.py'), 'rework', str(r.get('stage') or '-'), *items],
+                    capture_output=True, timeout=60)
+    except Exception:
+        pass
+
+
 def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool = True, own_only: bool = False) -> bool:
     """Merge queue: a failure no delivery of the batch explains, while landings of other writers (U, PI, PR, the
     maintainer, stage 2) that the build names as possible causes were in it: drop those from the candidate (hard
@@ -1643,6 +1658,7 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
         elif r.get('delivery'):
             return_record(r, reason, log)
         log(f"batch {b['id']}: DROPPED from the candidate {r['id']} ({r['group']}: {r.get('note', '')[:100]})")
+        _qmark_rework(r)
     for x in notes:
         MQ_LOG('drop: ' + x)
     MQ_LOG(f"red build {last.get('time')}: {len(dropped)} landing(s) of other writers dropped, {len(restore_to)} file(s) restored, "

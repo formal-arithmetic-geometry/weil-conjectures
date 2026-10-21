@@ -663,6 +663,7 @@ def cmd_merge(o):
             raise
         sha = git("rev-parse", "--short", "HEAD")
         git("branch", "-D", br, check=False)
+        _qmark("done", "1", [item])
         refresh_queue(item)
     try:
         import dag_delta
@@ -697,6 +698,19 @@ def unbook(book):
                 added = [l for l in now[len(before):].splitlines(True) if f" {book['group']} done {book['item']} " not in l]
                 p.write_text(before + "".join(added))
         subprocess.run(["git", "reset", "-q", "--", "coord/deliveries.log", "coord/ledger.md"], cwd=ROOT, capture_output=True)
+
+
+def _qmark(state, stage, items):
+    """the human, 2026-10-22: mark the task list at the event (tools/queue_mark.py); never fails the caller"""
+    items = [x for x in items if x]
+    if not items:
+        return
+    try:
+        import subprocess as _sp, sys as _sy
+        _sp.run([_sy.executable, str(li.ROOT / "tools" / "queue_mark.py"), state, str(stage or "-"), *items],
+                capture_output=True, timeout=60)
+    except Exception:
+        pass
 
 
 def refresh_queue(item):
@@ -1140,6 +1154,7 @@ def cmd_merge2(o, batch=None):
             raise
         sha = git("rev-parse", "--short", "HEAD")
         git("branch", "-D", br, check=False)
+        _qmark("reviewed", str(getattr(o, "stage", "-")), [item])
         if _os.environ.get("SHEAF_STAGE2_DEFER_QUEUE") != "1":
             refresh_queue(item)
     print(f"MERGED {item} {sha}" + (f" (new nodes: {', '.join(new)})" if new else ""))
