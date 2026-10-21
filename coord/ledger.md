@@ -21611,3 +21611,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:02 L: returned deliver/Q52/lem-coef-finite-compact-support-uniform-tor (reviewer RETURN: L: independent stage-2 immutable head d3438d3454a7: Statement substance matches the node: all clauses, dense refinement,)
 - 09:02 L: returned deliver/NG/lem-weil-pbc-pulled-reduction-strict-tower-comparison (reviewer RETURN: L: independent stage-2 immutable head da9b673d70a6: H3 / arbitrary-map rule: `insertion` uses (proEtaleModuleInverseImag)
 - 09:02 L: returned deliver/Q03/lem-sf-strict-dvr-reduction-triangles (reviewer RETURN: L: independent stage-2 immutable head df60101867dc: H2/C3 (mechanical theorem stmt_dep finding upheld): the statement us)
+- 09:02 L: returned deliver/NH/lem-pur-comparison-direct-image-resolution-mate (reviewer RETURN: L: independent stage-2 immutable head e56170a8f46a: Sheaf.AlgebraicGeometry.ComparisonDirectImageResolutionMate declares)
