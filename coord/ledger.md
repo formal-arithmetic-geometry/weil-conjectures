@@ -21073,3 +21073,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:16 L: merged deliver/Q06/lem-pur-scalar-extension-tower-coherence (reviewer FIX; after a return; new nodes: 2)
 - 08:16 L: merged deliver/NP/prop-weil-pbc-descent-functors (reviewer PASS; after a return; new nodes: 1)
 - 08:16 L: merged deliver/Q19/lem-sfb-flat-constant-module-scalar-mono (reviewer FIX; first push; new nodes: 0)
+- 08:16 L: merged deliver/Q92/prop-functor-package (reviewer FIX; after a return; new nodes: 7)
