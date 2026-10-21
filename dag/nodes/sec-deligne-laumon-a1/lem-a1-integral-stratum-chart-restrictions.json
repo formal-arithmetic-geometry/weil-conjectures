@@ -20,9 +20,147 @@
   "def-weil-proetale-inverse-image",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-stratified-perfect-characterization] to $T=X$, $A=R$ and $\\varpi=\\pi$. Its final category-identification clause identifies the category in the question with condition (i), and (i) implies (ii). Thus choose its finite stratification and, on each stratum, a pro-etale trivializing cover. The strata are constructible: on each member of a finite Noetherian affine cover of $X$, [lem-sc-affine-noetherian-underlying-space] gives a Noetherian underlying space, so by [lem-sfb-noetherian-space-compact-subsets] every open subset is quasi-compact, hence retrocompact, and a locally closed subset is an open intersected with the complement of an open; constructibility is local on this finite open cover. Choose for each perfect value a bounded finite-projective representative $P_{\\alpha t}^\\bullet$. The scalar extension in (ii), computed on that representative, is $B_{V_{\\alpha t}}\\otimes_{\\underline R}\\underline{P_{\\alpha t}^\\bullet}$: the constant finite-projective terms are summands of finite free constant modules, hence flat (tensor with a finite free module is a finite direct sum). By [lem-pc-bounded-above-flat-kflat-site] this bounded-above constant complex is K-flat, so it computes the indicated derived scalar extension. This is exactly the requested chart isomorphism, with the completed coefficient restriction of (ii). The hypotheses needed by this characterization are precisely the assumed Noetherianity, finite dimension and invertibility of $\\ell$ on $X$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, p.54; its perfect-values convention and the existing integral-category comparison"
+   }
+  },
+  {
+   "text": "For a stratum immersion $u$, [lem-weil-pbc-proetale-immersion-limit-preservation] says its inverse image on module sheaves is exact and preserves all small limits. The canonical identification $u^{-1}B_T\\cong B_S$ and the comparisons with finite reductions are those of [lem-sf-immersion-completed-pullback-comparison]; that lemma also says ordinary restriction of a derived-complete complex stays derived complete and its specified completion comparison is invertible. Combine this comparison with $\\gamma_u$ from [lem-a1-integral-pullback-completed-comparison] to identify ordinary exact restriction with the specified integral pullback: the map from the latter to ordinary restriction is the inverse of the ordinary-to-completed comparison composed with $\\gamma_u$. Both comparisons identify each finite quotient projection with the actual quotient map. The same lemma on immersions places the restricted object in the integral constructible category, with the same uniform interval for the reductions.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-a1-integral-pullback-completed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8 and Remark 6.5.10, pp.50-51; proetale.tex Tag 09AA, lemma-closed-immersion"
+   }
+  },
+  {
+   "text": "For a chosen site-object arrow $v:V\\to S$, [lem-sfb-proetale-object-inverse-image-restriction] identifies its actual inverse image, on rings and underlying abelian sheaves, with restriction to $S_{\\mathrm{proet}}/V$. Module actions restrict under the same identification. By [lem-pur-site-restriction-module-adjunction-exact] this module restriction is exact and has a left adjoint, hence preserves small limits, including countable products. In particular it sends the coefficient limit to $B_V$. Apply [lem-sfb-adic-stratum-completion-unit] with the original Noetherian scheme $X$, the chosen stratum and its object $V$: it gives compatibility with finite derived reductions and the completion unit, and preservation of completeness. By [lem-sp-slice-restriction-strict-derived-limit] the derived-limit comparison commutes with every projection. Consequently the restricted completion unit identifies ordinary restriction with completed pullback; composing with $\\gamma_v$ of [lem-a1-integral-pullback-completed-comparison] identifies it with the specified integral pullback, including the finite projections. This argument needs no Noetherianity of $V$.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-sp-slice-restriction-strict-derived-limit",
+    "lem-a1-integral-pullback-completed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8 and Remark 6.5.10; sites.tex Tag 03CE, lemma-localize-given-products; sites-modules.tex Tag 03DJ, lemma-extension-by-zero"
+   }
+  },
+  {
+   "text": "Here the derived-limit comparisons are comparisons of the actual strict models. If $F$ is any restriction just obtained and $C_\\bullet$ a strict tower of complexes, its product comparison sends the $n$-th projection of $F(\\prod C_n)$ to $F(C_n)$. For the transition endomorphism $s$ this gives $F(s)$ equal to the endomorphism defined by the restricted transitions, since both have $n$-th coordinate $F(t_n)\\operatorname{pr}_{n+1}$. Applying [lem-pur-roos-additive-comparison] therefore identifies $F(\\operatorname{Cone}(1-s)[-1])$ with $\\operatorname{Cone}(1-s_F)[-1]$, by the product comparison in both coordinates. It is natural in strict tower maps. Exactness of $F$ permits passage to the derived categories. Thus the comparisons in Steps 2-3 commute with the strict-tower Roos construction, with its finite projections and with the quotient transitions, rather than just identifying the endpoints of triangles.",
+   "uses": [
+    "lem-pur-roos-additive-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent expansion of the strict quotient-tower compatibility in Lemma 6.5.8 and Remark 6.5.10"
+   }
+  },
+  {
+   "text": "For $g=i_\\alpha$ and $U=V_{\\alpha t}$ apply [lem-weil-pbc-local-derived-restriction-comparisons] with $R$ there equal to $B_X$. Its cohomology comparison gives $v_{\\alpha t}^{-1}i_\\alpha^{-1}\\mathcal H^j(K)\\cong\\mathcal H^j(v_{\\alpha t}^{-1}i_\\alpha^{-1}K)$. The coefficient identifications established above make these comparisons comparisons of modules over $B_{V_{\\alpha t}}$. Composing with the chart isomorphism from Step 1 proves the asserted cohomology compatibility. If $\\mathcal H^j(K)=0$ for $j\\notin[a,b]$, its exact restriction is zero, hence the displayed scalar complex has no cohomology in those degrees. This concerns the cohomology of the scalar model; no claim that its chosen finite-projective representative has terms only in $[a,b]$ is needed.",
+   "uses": [
+    "lem-weil-pbc-local-derived-restriction-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, perfect-values convention; exact restriction cohomology calculation"
+   }
+  },
+  {
+   "text": "Apply [lemma-constructible-pullback-stratification] to $h$ and the chosen finite stratification. It gives the actual locally closed immersions $S'_\\alpha=W\\times_X S_\\alpha\\to W$, whose pairwise disjoint images are $h^{-1}|S_\\alpha|$ and cover $W$. These subsets are constructible: on each member of a finite Noetherian affine cover of $W$, [lem-sc-affine-noetherian-underlying-space] gives a Noetherian topological space, so [lem-sfb-noetherian-space-compact-subsets] makes every open subset quasi-compact; express a locally closed subset as a closed subset intersected with such an open. Constructibility is local on this finite open cover. Discard empty strata. For each remaining stratum base change the chosen covering family along $S'_\\alpha\\to S_\\alpha$. The resulting arrows are weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change] and form an fpqc covering by [lem-galois-fpqc-covering-base-change], hence a pro-etale covering by the definition of the site. Its objects are exactly $V'_{\\alpha t}=W\\times_X V_{\\alpha t}$.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D, lemma-fpqc (3); weakly etale base change; finite constructible stratification pullback"
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-pur-integral-operations-preserve-constructible], $Lh^*K$ is integral constructible and its canonical $n$-th reduction is $h^{-1}K_n$. Apply Steps 2-4 to $W$, $i'_\\alpha$, and $v'_{\\alpha t}$: $W$ is Noetherian by hypothesis, $i'_\\alpha$ is a locally closed stratum immersion and $v'_{\\alpha t}$ is an object of its pro-etale site. This proves all the primed exact-restriction, coefficient, product and Roos assertions. The same preservation lemma applied to $i_\\alpha$ and to $v_{\\alpha t}$, together with Steps 2-3, places $i_\\alpha^{-1}K$ and $v_{\\alpha t}^{-1}i_\\alpha^{-1}K$ in their integral constructible categories. Thus the integral composition comparisons used next are applied only to objects in their stated domain, even when the chart schemes are not Noetherian.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(5), pp.50-51; Lemma 6.5.8 and localization for primed restrictions"
+   }
+  },
+  {
+   "text": "Write $q=i_\\alpha\\circ v_{\\alpha t}:V_{\\alpha t}\\to X$ and $q'=i'_\\alpha\\circ v'_{\\alpha t}:V'_{\\alpha t}\\to W$. The fibre-product square gives the equality $h\\circ q'=q\\circ g_{\\alpha t}$. Use [lem-pod-integral-pullback-composition], whose convention is $c_{a,b}:L(b\\circ a)^*\\xrightarrow{\\sim}La^*Lb^*$, to form the following natural isomorphisms. First Steps 2-3 and $c_{v',i'}$ identify the requested left side with $Lq'^*Lh^*K$. Apply $c_{q',h}^{-1}$ to reach $L(h\\circ q')^*K=L(q\\circ g)^*K$; apply $c_{g,q}$ to reach $Lg^*Lq^*K$; finally apply $Lg^*(c_{v,i})$ and the exact-restriction identifications to reach $Lg^*(v^{-1}i^{-1}K)$. This defines the desired comparison and proves its invertibility. The same composition lemma specifies that its reduction is the canonical finite-coefficient composition comparison. Since the restriction identifications preserve their finite projections, reducing this displayed composite gives precisely the two finite-coefficient factorizations of $V'_{\\alpha t}\\to X$. Its naturality follows from naturality of each factor. Empty strata require no comparisons.",
+   "uses": [
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5); composition of the reduction-tower integral pullbacks"
+   }
+  },
+  {
+   "text": "Finally use [lem-a1-integral-pullback-completed-comparison] for $h$ to identify the specified $Lh^*$ on derived-complete objects with the strict-tower completed pullback. It is an $R$-linear comparison. By [lem-cbc-completed-pullback-triangles], the latter has coherent integer-shift isomorphisms and preserves distinguished triangles of derived-complete objects with that shift comparison. Transport its shift comparison through $\\gamma_h$: the comparison for $K[r]$ followed by the completed shift map followed by $\\gamma_{h,K}[r]^{-1}$ is the shift map for the specified $Lh^*$, by the shift clause of the first cited lemma. Naturality then identifies the last arrow of the image of a triangle with the transported last arrow, so the specified functor preserves distinguished triangles. Its $R$-linearity can also be read on representatives: finite-coefficient inverse image, product, the transition map $1-s$, and both coordinates of the shifted cone commute with multiplication by every $r\\in R$. Step 7 ensures that this is a functor between the integral constructible subcategories, rather than just the ambient derived-complete categories.",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-cbc-completed-pullback-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4); proetale.tex Tag 099N, lemma-pushforward-Noetherian-case (2),(5); exactness of the strict completed construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-roos-additive-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemma 6.5.8, Lemma 6.5.9(4)-(5), Remark 6.5.10; explicit assembly using existing DAG statements, with strict-model and composition maps spelled out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +189,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} → [inst : Ring R] → [inst_1 : Ring S] → (R →+* S) → CategoryTheory.Functor (ModuleCat S) (ModuleCat R)\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $, this functor maps the category of left $ S $-modules to the category of left $ R $-modules by restricting scalar multiplication through $ f $. For an $ S $-m\"}\n  {\"name\": \"ModuleCat.RestrictScalars.obj'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} → {S : Type u₂} → [inst : Ring R] → [inst_1 : Ring S] → (R →+* S) → ModuleCat S → ModuleCat R\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $ and an $ S $-module $ M $, this functor constructs the corresponding $ R $-module structure on $ M $ by composing the scalar multiplication with $ f $, effect\"}\n  {\"name\": \"LinearMap.IsPerfPair.restrictScalars_of_field\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Restrict\", \"type\": \"(hij : p.IsPerfectCompl (span L <| LinearMap.range i) (span L <| LinearMap.range j))\\n  (hp : ∀ m n, p (i m) (j n) ∈ (algebraMap K L).range) :\\n  (LinearMap.restrictScalarsRange₂ i j (Algebra.linearMap K L) (FaithfulSMul.algebraMap_injective K L) p hp).IsPerfPair\", \"doc\": \"Let $ K $ be a field and $ L $ a field extension of $ K $. If $ p $ is a perfect pairing between the spans of the ranges of two $ L $-linear maps $ i $ and $ j $, and if $ p(i(m), j(n)) $ lies in the \"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(α : R ⟶ R') : PresheafOfModules.{v} R' ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between presheaves of rings on a category $\\\\mathcal{C}$, this defines a functor from the category of presheaves of modules over $R'$ to the category o\"}\n  {\"name\": \"RestrictScalars\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \"(_R _S M : Type*) : Type _\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module, given a ring homomorphism $ R \\\\to S $. This allows scalar multiplication by elements of $ R $ instead of $ \"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(M' : PresheafOfModules.{v} R') (α : R ⟶ R') : PresheafOfModules R\", \"doc\": \"Given a presheaf of modules $\\\\mathcal{M}'$ over a presheaf of rings $R'$ on a category $\\\\mathcal{C}$, and a natural transformation $\\\\alpha: R \\\\to R'$ between ring presheaves, this constructs a new pre\"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}\n  {\"name\": \"instSeminormedAddCommGroupRestrictScalars\", \"module\": \"Mathlib.Analysis.Normed.Module.Basic\", \"type\": \"[I : SeminormedAddCommGroup E] : SeminormedAddCommGroup (RestrictScalars 𝕜 𝕜' E)\", \"doc\": \"The restriction of scalars construction preserves the seminormed additive commutative group structure when viewing an $ S $-module as an $ R $-module via a ring homomorphism $ R \\to S $. Specifically, \"}",
    "date": "2026-10-21",
    "verdict": "no match: The hits concern algebraic adic completion, ordinary presheaf restriction and scheme approximation; none supplies completed integral stratum charts with the stated restriction and composition comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of derived complete adic constructible complexes to locally closed strata and pro etale charts compatible with integral pullback composition",
+   "results": "8 hits; Profinite.NobelingProof.CC_exact, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-21",
+   "verdict": "no match: none states stratified perfect charts with the exact completed-integral restrictions and composition square. The general presheaf pullback and algebraic completion hits do not supply this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "stratified|adic.*constructible|proetale.*[Pp]ullback",
+   "results": "Mathlib/AlgebraicGeometry: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: none states stratified perfect charts with the exact completed-integral restrictions and composition square. The general presheaf pullback and algebraic completion hits do not supply this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complete constructible adic complex has locally constant perfect values on a finite stratification and pullback commutes with restriction",
+   "results": "8 hits; LocallyConstant.comapₗ, LocallyConstant.comapₐ, IsAdicComplete.casesOn, AdicCompletion, IsAdicComplete.recOn, CompHausLike.LocallyConstant.functor_obj_val, IsAdicComplete.rec, CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-21",
+   "verdict": "no match: none states stratified perfect charts with the exact completed-integral restrictions and composition square. The general presheaf pullback and algebraic completion hits do not supply this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits; PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-21",
+   "verdict": "no match: none states stratified perfect charts with the exact completed-integral restrictions and composition square. The general presheaf pullback and algebraic completion hits do not supply this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible|proetale|ProEtale",
+   "results": "Mathlib/AlgebraicGeometry/Sites: 10 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: none states stratified perfect charts with the exact completed-integral restrictions and composition square. The general presheaf pullback and algebraic completion hits do not supply this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant perfect complexes on strata for adic sheaves with exact inverse image restriction and base change of completed derived pullback",
+   "results": "8 hits; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Profinite.NobelingProof.CC_exact, AdicCompletion.map_exact, CondensedMod.ofSheafProfinite, Profinite.NobelingProof.succ_exact, localCohomology.diagram, CondensedMod.IsSolid",
+   "date": "2026-10-21",
+   "verdict": "no match: none states stratified perfect charts with the exact completed-integral restrictions and composition square. The general presheaf pullback and algebraic completion hits do not supply this statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-constructible-pullback-t-exact",
@@ -74,5 +254,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-integral-stratum-chart-restrictions",
+  "worker": "stage1",
+  "summary": "Q92: retained the statement; supplied nine proof steps using existing DAG nodes only, after checking their full statements, the Bhatt-Scholze source, strict-tower projection compatibility, chart-domain hypotheses, edge cases and absence of dependency paths back to the item. No new nodes or Mathlib leaves.",
+  "blueprint": "lem-a1-finite-map-purity, first paragraph: restriction of a constructible coefficient complex to the geometric fibre and its charts. This elaborates the integral restriction/composition subargument reached through lem-a1-finite-etale-weil-fibre-comparison and lem-a1-constructible-pullback-t-exact, without changing the finite-stalk/Frobenius route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the specified integral category with stratified perfect completed-coefficient complexes; this is a generic coefficient tool needed for the unit's restriction-to-fibres argument. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic exact, limit-preserving restriction theorem for locally closed immersions, needed to justify chart restrictions. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Identifies ordinary stratum restriction with its specified strict completed pullback, including finite reductions. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies the actual scheme inverse image of a site-object cover with slice restriction. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness and the left adjoint for restriction of arbitrary ringed module sheaves to a covering slice. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-sfb-adic-stratum-completion-unit",
+    "why": "Compatibility of completion units and derived finite reductions with the stratum and covering slice. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-sp-slice-restriction-strict-derived-limit",
+    "why": "Canonical projection-preserving strict derived-limit comparison on a covering slice. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-pur-roos-additive-comparison",
+    "why": "Generic coordinate comparison for the actual Roos cone under an additive product-preserving functor. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-weil-pbc-local-derived-restriction-comparisons",
+    "why": "Exact cohomology comparison for actual inverse-image coefficients followed by slice restriction. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic geometric pullback of a finite stratification. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Checks the topological Noetherian hypothesis for affine pieces of W before using compactness of their subsets. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Makes the open in a locally closed subset quasi-compact, so the pulled-back strata are constructible. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "The fpqc covering part of the base-changed pro-etale chart family. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic integral pullback closure and canonical reduction comparison, required before composing chart pullbacks. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Natural composition isomorphisms with specified finite reductions for the two factorizations of the chart square. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "Coherent shifts and preservation of triangles for the actual strict completed pullback. The affine-line unit has no statement supplying this generic result."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "A bounded finite-projective constant complex is a bounded-above complex of flat sheaves, so this generic K-flat criterion computes its scalar extension termwise. The affine-line unit supplies no generic K-flat criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-pur-roos-additive-comparison",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "lemma-constructible-pullback-stratification",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-integral-pullback-composition",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-9b6900229",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-9b6900229 (reviewer sub-agent of L); spot-checked: Read the item's statement and all nine steps, the statement of every node they cite, and Bhatt–Scholze Prop. 6.6.11, Lemmas 6.5.8 and 6.5.9(4)-(5) and Remark 6.5.10 (via pdftotext). The statement is unchanged from base and the delivery has no new nodes. There is no cycle (closure check). The item is not in route-pivot-dropped and is still unsplit in live and side-live. It is a child node of the parent's re-split and carries no re-split note of its own. All 16 tool uses are generic, and I accept them; no SGA is cited. Steps 2-9 check out: immersion and slice restriction are exact and preserve limits, with coefficient and completion-unit identification (the Noetherian input is X or W, not V); γ directions are correct; Roos commutation follows from product comparisons; the H^j bound is a bound on cohomology only; the pulled-back strata are taken as fibre products, which avoids the E3 factorization error; base change keeps covers weakly étale and fpqc; D^b_c preservation means the composition lemma is used only on its domain; the c-chain orientations are consistent; triangles and shifts transport through γ_h. One fault, repaired (C4): in Step 1, characterization (ii) and def-constructible-stratification give only locally closed strata, but the step asserted constructible strata. I added the Noetherian-space argument (lem-sc-affine-noetherian-underlying-space, lem-sfb-noetherian-space-compact-subsets) to Step 1's uses; both were already in proof_deps. Edge cases checked: K=0, empty strata or empty W, h=id, and R/π (cohomology bound vs term bound).; 1 file(s) fixed by the reviewer"
  }
 }
