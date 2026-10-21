@@ -21273,3 +21273,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:44 L: merged deliver/NY/lem-weil-boundary-comparison-composition-transport (reviewer PASS; first push; new nodes: 0); claim not held by NY: not your claim
 - 08:44 L: merged deliver/Q82/lem-pur-classical-localization-triangle-transport (reviewer FIX; first push; new nodes: 0)
 - 08:44 L: merged deliver/NH/lem-sf-bounded-epimorphic-top-derived-limit (reviewer PASS; first push; new nodes: 0)
+- 08:44 L: merged deliver/Q44/lem-kun-kflat-short-exact-quotient (reviewer PASS; first push; new nodes: 0)

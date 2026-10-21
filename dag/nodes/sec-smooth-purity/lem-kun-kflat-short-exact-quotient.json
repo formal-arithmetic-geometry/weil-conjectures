@@ -15,9 +15,79 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any complex $A^\\bullet$. For each $p,q\\in\\mathbf Z$, apply [lem-weil-pbc-site-flat-quotient-tensor-ses] to $0\\to L^p\\xrightarrow{f^p}K^p\\xrightarrow{g^p}P^p\\to0$ and $N=A^q$. The site is small, the rings are commutative, and the quotient $P^p$ is flat by hypothesis. Thus $0\\to L^p\\otimes A^q\\to K^p\\otimes A^q\\to P^p\\otimes A^q\\to0$ is short exact as a sequence of sheaves, for every pair $(p,q)$. No flatness of $A^q$, $L^p$, or $K^p$ is required.",
+   "uses": [
+    "lem-weil-pbc-site-flat-quotient-tensor-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), proof"
+   }
+  },
+  {
+   "text": "The same termwise conclusion holds with $A^q$ on the left. Indeed, for any module sheaf $M$, the sectionwise bilinear maps $m\\otimes a\\mapsto a\\otimes m$ and $a\\otimes m\\mapsto m\\otimes a$ give mutually inverse maps of presheaf tensor products, compatible with restrictions. Sheafifying gives $M\\otimes A^q\\cong A^q\\otimes M$ by [def-pur-sheaf-tensor-product]. These maps commute with $f^p$ and $g^p$ on pure tensors, hence on the sheafified tensors. Transport the exact sequence of step 1 through these isomorphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), proof"
+   }
+  },
+  {
+   "text": "Fix $n\\in\\mathbf Z$ and let $I_n=\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$. By [lem-pur-ringed-site-grothendieck-abelian], $\\Mod(\\mathcal O)$ is abelian, has small colimits, and filtered colimits are exact. A finite biproduct of short exact sequences is short exact: the kernel and cokernel universal properties are checked component by component in the finite biproduct. Apply this to each finite subset $J\\subset I_n$ of the sequences in step 1. The finite subsets, ordered by inclusion, form a small filtered set (the empty subset is allowed and union gives an upper bound). Their colimit is the full coproduct: a compatible family of maps from finite subsums is exactly a family of maps from the individual summands. Exactness of filtered colimits therefore gives $0\\to\\bigoplus_{p+q=n}L^p\\otimes A^q\\to\\bigoplus_{p+q=n}K^p\\otimes A^q\\to\\bigoplus_{p+q=n}P^p\\otimes A^q\\to0$. The identical finite-subsum argument applied to step 2 gives the sequence with terms $\\bigoplus_{q+p=n}A^q\\otimes L^p$, and likewise for $K,P$. This uses sheaf coproducts, not sectionwise exactness or infinite products.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), exact filtered colimits; finite-subsum expansion of the total-tensor assertion in sites-cohomology.tex Tag 0G7B"
+   }
+  },
+  {
+   "text": "By [def-pc-tensor-complex-sheaves], the first sequence in step 3 is exactly degree $n$ of the total tensor sequence in the statement. The maps commute with its differential: on the $(p,q)$ summand the differential is $d_M\\otimes1+(-1)^p1\\otimes d_A$ for $M=L,K,P$; the chain-map identities $f^{p+1}d_L^p=d_K^pf^p$ and $g^{p+1}d_K^p=d_P^pg^p$ give commutation with the first term, and tensor functoriality gives commutation with the second, with the same sign. Thus these are short exact sequences of complexes. In the left-tensor orientation the differential is $d_A\\otimes1+(-1)^q1\\otimes d_M$, and the same two identities show that $1\\otimes f$ and $1\\otimes g$ are chain maps. Step 3 proves exactness in every degree in that orientation too. Every differential has only two outgoing components per summand, so unboundedness causes no infinite-sum issue.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), proof"
+   }
+  },
+  {
+   "text": "Now let $A^\\bullet$ be acyclic and write $T_M=\\operatorname{Tot}(A^\\bullet\\otimes M^\\bullet)$ for $M=L,K,P$. By [def-pc-kflat-complex], K-flatness of any two of $L,K,P$ makes the corresponding two $T_M$ acyclic. Apply [lem-weil-pbc-complex-ses-homology-long-exact] to the left-tensor short exact sequence of step 4, in the abelian category $\\Mod(\\mathcal O)$. If $T_L,T_K$ are acyclic, exactness of $H^n(T_K)\\to H^n(T_P)\\to H^{n+1}(T_L)$ forces $H^n(T_P)=0$. If $T_K,T_P$ are acyclic, use $H^{n-1}(T_P)\\to H^n(T_L)\\to H^n(T_K)$; if $T_L,T_P$ are acyclic, use $H^n(T_L)\\to H^n(T_K)\\to H^n(T_P)$. In each case both neighboring objects vanish, so the middle object vanishes for every integer $n$. Thus the third $T_M$ is acyclic by [def-pc-acyclic-complex-modules]. Since $A^\\bullet$ was arbitrary acyclic, the definition [def-pc-kflat-complex] proves K-flatness of the third original complex. Together with step 4 this proves both assertions, with no boundedness or splitting assumption.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), proof; tensor exactness from 03EX and filtered-colimit expansion from 03DB"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +144,52 @@
    "results": "Mathlib/RingTheory/Flat/CategoryTheory.lean; Mathlib/RingTheory/Flat/CategoryTheory.lean; Mathlib/RingTheory/Flat/CategoryTheory.lean; Mathlib/RingTheory/Flat/CategoryTheory.lean Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: exactness after tensoring ordinary modules with a flat fixed module; no unbounded sheaf-complex total tensor or K-flat two-out-of-three result.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|shortExact.*[Tt]ensor|[Tt]ensor.*shortExact",
+   "results": "No hits. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: these are ordinary-module exactness results for a flat fixed tensor factor; they do not state flat-quotient sheaf-complex tensor exactness or K-flat two-out-of-three.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat complexes two out of three short exact sequence flat quotient",
+   "results": "CategoryTheory.ShortComplex.quasiIso_of_comp_right; HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso; CategoryTheory.ShortComplex.epi_of_epi_of_epi_of_epi; Module.Flat.lTensor_shortComplex_exact; Module.Flat.lTensor_exact; Module.Flat.rTensor_shortComplex_exact; CategoryTheory.ShortComplex.ShortExact.mk; Module.Flat.rTensor_exact Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: these are ordinary-module exactness results for a flat fixed tensor factor; they do not state flat-quotient sheaf-complex tensor exactness or K-flat two-out-of-three.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", \"tensor\"",
+   "results": "No hits. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: these are ordinary-module exactness results for a flat fixed tensor factor; they do not state flat-quotient sheaf-complex tensor exactness or K-flat two-out-of-three.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of sheaf complexes with degreewise flat quotient stays exact after total tensor with any complex and K-flatness satisfies two out of three",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_exact'; Module.Flat.iff_lTensor_exact'; Module.Flat.rTensor_exact; Module.Flat.iff_rTensor_exact Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: these are ordinary-module exactness results for a flat fixed tensor factor; they do not state flat-quotient sheaf-complex tensor exactness or K-flat two-out-of-three.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor purity of a short exact sequence with a flat cokernel, exactness of unbounded tensor total complexes, closure of K-flat objects under extensions and quotients",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; Module.Flat.lTensor_exact; Module.Flat.iff_rTensor_exact'; LinearMap.lTensor_injective_of_exact_of_flat Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: these are ordinary-module exactness results for a flat fixed tensor factor; they do not state flat-quotient sheaf-complex tensor exactness or K-flat two-out-of-three.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_shortComplex_exact|rTensor_shortComplex_exact|flat.*[Cc]okernel|[Cc]okernel.*flat",
+   "results": "Mathlib/RingTheory/Flat/CategoryTheory.lean; Mathlib/RingTheory/Flat/CategoryTheory.lean; Mathlib/RingTheory/Flat/CategoryTheory.lean; Mathlib/RingTheory/Flat/CategoryTheory.lean Searched subdirectory Mathlib/RingTheory/Flat. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:41-48: these are ordinary-module exactness results for a flat fixed tensor factor; they do not state flat-quotient sheaf-complex tensor exactness or K-flat two-out-of-three.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f1m",
@@ -89,10 +201,39 @@
  "blueprint": {
   "from": {
    "node": "lem-kun-0f1m",
-   "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), statement and proof invoked in the K-flatness paragraph of Tag 0F1M",
+   "place": "Proof of lem-kun-0f1m, amplitude gives the model: K-flatness of the flat-term quotient of 0 → L → K → E → 0; Stacks Tag 0F1M invokes Tag 0G7B here.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-kun-kflat-short-exact-quotient",
+  "worker": "stage1",
+  "summary": "Read Stacks 0G7B, 03EX, 03DB and 0117. Proved tensor exactness termwise, passed to total degrees using filtered finite subsums, checked both tensor orientations and chain-map signs, and proved all three K-flatness cases with the long exact cohomology sequence. Reused all supporting nodes; no new nodes and no statement changes.",
+  "blueprint": "Realizes the flat-quotient short-exact-sequence argument in the amplitude-to-model paragraph of lem-kun-0f1m (Stacks 0F1M via 0G7B). Current main-20261015 node has the same statement and no proof text; the stored source proof and current DAG parent identify this use.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Generic sheaf tensor exactness with flat quotient, needed termwise in 0G7B; this unit has no separate sheaf-level theorem for it."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic small colimits and exact filtered colimits of module sheaves, used for the finite-subsum proof of exact total degrees; not a replacement of the Kunneth unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-e9499ba4a",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-e9499ba4a (reviewer sub-agent of L); spot-checked: Read the item and all 7 cited statements in full, and checked the sources at Stacks sites-cohomology.tex l.3097 (0G7B), sites-modules.tex l.4457 (03EX(2)) and l.1358 (03DB). The proof follows 0G7B. Step 1: termwise 03EX via lem-weil-pbc-site-flat-quotient-tensor-ses; its hypotheses (small site, commutative O, flat quotient P^p, arbitrary A^q) hold. Step 2: tensor swap for the left orientation that def-pc-kflat-complex needs. Step 3: the infinite total-degree coproduct is handled as a filtered colimit of finite biproducts, using the exact filtered colimits of lem-pur-ringed-site-grothendieck-abelian. Step 4: checked the chain-map signs in both orientations. Step 5: all three long-exact-sequence segments are correct, including the H^{n-1}(T_P)→H^n(T_L) shift. The statement and stmt_deps are unchanged from live, and live is still unsplit. There is no repair note, no new nodes, no cycle and no SGA citation. lem-kun-kflat-criteria(2) is two-out-of-three for triangles in K(Mod), not for a degreewise SES, so it is not a duplicate. The parent lem-kun-0f1m case (L,K K-flat ⇒ P) is covered. Accepted the declared tool_uses: generic 03EX and 03DB nodes that no node of the Künneth unit provides."
  }
 }
