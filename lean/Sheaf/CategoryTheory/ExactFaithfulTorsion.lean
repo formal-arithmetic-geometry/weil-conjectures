@@ -13,7 +13,12 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import Mathlib.CategoryTheory.Category.Preorder
 public import WeilConjectures.Data.PNat.DvdOrder
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Integer torsion under an exact fully faithful left adjoint
@@ -46,7 +51,9 @@ Proof: write `m = n * k`. Composition with `m` identities is `k` times compositi
 `n` identities, which vanishes by the kernel condition. -/
 theorem integerKernelTransition_condition (F : E) (n m : PNat.DvdOrder)
     (h : n.val ∣ m.val) : kernel.ι (n.val • 𝟙 F) ≫ (m.val • 𝟙 F) = 0 := by
-  sorry
+  obtain ⟨k, hk⟩ := h
+  rw [hk, mul_comm n.val k, mul_smul, Preadditive.comp_nsmul,
+    kernel.condition, nsmul_zero]
 
 /-- The canonical inclusion between integer kernels for a divisibility relation.
 Source: Tags 03DA and 03DB (blueprint: lem-weil-pbc-exact-faithful-torsion), proof step 1. -/
@@ -61,7 +68,8 @@ Proof: compose both sides with the target kernel inclusion. The kernel lift equa
 that inclusion on both sides, so its monicity gives equality. -/
 theorem integerKernelTransition_id (F : E) (n : PNat.DvdOrder) :
     integerKernelTransition F n n (dvd_refl n.val) = 𝟙 _ := by
-  sorry
+  apply (cancel_mono (kernel.ι (n.val • 𝟙 F))).1
+  simp [integerKernelTransition]
 
 /-- Composition law for the integer-kernel inclusions.
 Source: Tags 03DA and 03DB (blueprint: lem-weil-pbc-exact-faithful-torsion), proof step 1.
@@ -71,7 +79,8 @@ theorem integerKernelTransition_comp (F : E) (n m k : PNat.DvdOrder)
     (hnm : n.val ∣ m.val) (hmk : m.val ∣ k.val) :
     integerKernelTransition F n k (dvd_trans hnm hmk) =
       integerKernelTransition F n m hnm ≫ integerKernelTransition F m k hmk := by
-  sorry
+  apply (cancel_mono (kernel.ι (k.val • 𝟙 F))).1
+  simp [integerKernelTransition, Category.assoc]
 
 /-- Positive integer kernels with the canonical inclusions, ordered by divisibility.
 Source: Tags 03DA and 03DB (blueprint: lem-weil-pbc-exact-faithful-torsion), proof step 1. -/
@@ -89,7 +98,7 @@ later inclusion is therefore the earlier inclusion by the kernel lift equation. 
 theorem integerKernelDiagram_inclusions (F : E) (n m : PNat.DvdOrder) (h : n ⟶ m) :
     (integerKernelDiagram F).map h ≫ kernel.ι (m.val • 𝟙 F) =
       kernel.ι (n.val • 𝟙 F) ≫ 𝟙 F := by
-  sorry
+  simp [integerKernelDiagram, integerKernelTransition]
 
 /-- The canonical cocone from all integer kernels to the original object.
 Source: Tags 03DA and 03DB (blueprint: lem-weil-pbc-exact-faithful-torsion), proof step 1. -/
@@ -108,6 +117,110 @@ def IsIntegerTorsion (F : E) : Prop :=
   ∃ c : ColimitCocone (integerKernelDiagram F), IsIso (c.isColimit.desc (integerKernelCocone F))
 
 end IntegerKernels
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem integerKernelComparison
+    {E : Type u} [Category.{v} E] [Preadditive E] [HasKernels E]
+    {G : Type uD} [Category.{vD} G] [Preadditive G] [HasKernels G]
+    (A : E ⥤ G) [A.Additive]
+    [∀ (X Y : E) (f : X ⟶ Y), PreservesLimit (parallelPair f 0) A]
+    (F : E) :
+    ∃ alpha : integerKernelDiagram F ⋙ A ≅ integerKernelDiagram (A.obj F),
+      ∀ n : PNat.DvdOrder,
+        alpha.hom.app n ≫ kernel.ι (n.val • 𝟙 (A.obj F)) =
+          A.map (kernel.ι (n.val • 𝟙 F)) := by
+  let e (n : PNat.DvdOrder) :
+      A.obj (kernel (n.val • 𝟙 F)) ≅ kernel (n.val • 𝟙 (A.obj F)) :=
+    PreservesKernel.iso A (n.val • 𝟙 F) ≪≫ kernelIsoOfEq (by simp)
+  have he (n : PNat.DvdOrder) :
+      (e n).hom ≫ kernel.ι (n.val • 𝟙 (A.obj F)) =
+        A.map (kernel.ι (n.val • 𝟙 F)) := by
+    simp [e]
+  refine ⟨NatIso.ofComponents e ?_, he⟩
+  intro n m h
+  apply (cancel_mono (kernel.ι (m.val • 𝟙 (A.obj F)))).1
+  simp only [Category.assoc, he]
+  rw [integerKernelDiagram_inclusions, Category.comp_id, he]
+  change A.map ((integerKernelDiagram F).map h) ≫ _ = _
+  rw [← A.map_comp, integerKernelDiagram_inclusions, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem integerKernelColimitComparison
+    {E : Type u} [Category.{v} E] [Preadditive E] [HasKernels E]
+    {G : Type uD} [Category.{vD} G] [Preadditive G] [HasKernels G]
+    (A : E ⥤ G) (F : E)
+    [PreservesColimit (integerKernelDiagram F) A]
+    (alpha : integerKernelDiagram F ⋙ A ≅ integerKernelDiagram (A.obj F))
+    (ha : ∀ n : PNat.DvdOrder,
+      alpha.hom.app n ≫ kernel.ι (n.val • 𝟙 (A.obj F)) =
+        A.map (kernel.ι (n.val • 𝟙 F)))
+    (c : ColimitCocone (integerKernelDiagram F))
+    (d : ColimitCocone (integerKernelDiagram (A.obj F))) :
+    ∃ theta : A.obj c.cocone.pt ≅ d.cocone.pt,
+      (∀ n : PNat.DvdOrder, A.map (c.cocone.ι.app n) ≫ theta.hom =
+        alpha.hom.app n ≫ d.cocone.ι.app n) ∧
+      theta.hom ≫ d.isColimit.desc (integerKernelCocone (A.obj F)) =
+        A.map (c.isColimit.desc (integerKernelCocone F)) := by
+  let hc := isColimitOfPreserves A c.isColimit
+  let hd := (IsColimit.precomposeHomEquiv alpha d.cocone).symm d.isColimit
+  let theta := hc.coconePointUniqueUpToIso hd
+  have ht (n : PNat.DvdOrder) :
+      A.map (c.cocone.ι.app n) ≫ theta.hom =
+        alpha.hom.app n ≫ d.cocone.ι.app n := by
+    exact hc.comp_coconePointUniqueUpToIso_hom hd n
+  refine ⟨theta, ht, ?_⟩
+  apply hc.hom_ext
+  intro n
+  change A.map (c.cocone.ι.app n) ≫ theta.hom ≫ _ = _
+  rw [← Category.assoc, ht, Category.assoc, d.isColimit.fac]
+  change alpha.hom.app n ≫ kernel.ι _ = _
+  rw [ha]
+  change _ = A.map (c.cocone.ι.app n) ≫ _
+  rw [← A.map_comp, c.isColimit.fac]
+  rfl
+
+private theorem integerTorsion_iff
+    {E : Type u} [Category.{v} E] [Preadditive E] [HasKernels E]
+    {G : Type uD} [Category.{vD} G] [Preadditive G] [HasKernels G]
+    (A : E ⥤ G) [A.Additive]
+    [∀ (X Y : E) (f : X ⟶ Y), PreservesLimit (parallelPair f 0) A]
+    (F : E)
+    [PreservesColimit (integerKernelDiagram F) A] [A.ReflectsIsomorphisms]
+    [HasColimit (integerKernelDiagram F)]
+    [HasColimit (integerKernelDiagram (A.obj F))] :
+    IsIntegerTorsion F ↔ IsIntegerTorsion (A.obj F) := by
+  obtain ⟨alpha, ha⟩ := integerKernelComparison A F
+  constructor
+  · rintro ⟨c, hi⟩
+    have := hi
+    let d : ColimitCocone (integerKernelDiagram (A.obj F)) :=
+      ⟨colimit.cocone _, colimit.isColimit _⟩
+    obtain ⟨theta, _, ht⟩ := integerKernelColimitComparison A F alpha ha c d
+    refine ⟨d, ?_⟩
+    apply (isIso_comp_left_iff theta.hom _).mp
+    rw [ht]
+    infer_instance
+  · rintro ⟨d, hi⟩
+    have := hi
+    let c : ColimitCocone (integerKernelDiagram F) :=
+      ⟨colimit.cocone _, colimit.isColimit _⟩
+    obtain ⟨theta, _, ht⟩ := integerKernelColimitComparison A F alpha ha c d
+    refine ⟨c, ?_⟩
+    apply (isIso_iff_of_reflects_iso _ A).mp
+    rw [← ht]
+    infer_instance
+
+private theorem torsion_wEqualsLocallyBijective
+    {C : Type uC} [Category.{vC} C] [Small.{w} C] [LocallySmall.{w} C]
+    (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{w}] :
+    J.WEqualsLocallyBijective AddCommGrpCat.{w} := by
+  have : PreservesFilteredColimitsOfSize.{w, w}
+      (CategoryTheory.forget AddCommGrpCat.{w}) := preservesFilteredColimitsOfSize_shrink _
+  have : ∀ X : Cᵒᵖ,
+      HasLimitsOfShape (StructuredArrow X (equivSmallModel.{w} C).inverse.op)
+        AddCommGrpCat.{w} := fun _ ↦ hasLimitsOfShape_of_essentiallySmall.{w} _ _
+  exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
+    J (A := AddCommGrpCat.{w})
 
 /-- An additive fully faithful functor preserving kernels and having a right adjoint
 preserves the entire integer-kernel colimit and reflects torsion of underlying abelian sheaves.
@@ -168,6 +281,25 @@ theorem exact_fullyFaithful_integerTorsion
             A.map (c.isColimit.desc (integerKernelCocone F))) ∧
       (IsIntegerTorsion ((SheafOfModules.toSheaf.{w} R).obj F) ↔
         IsIntegerTorsion ((SheafOfModules.toSheaf.{w} S).obj (A.obj F))) := by
-  sorry
+  classical
+  have := torsion_wEqualsLocallyBijective J
+  have := torsion_wEqualsLocallyBijective K
+  have : PreservesColimitsOfSize.{w, w} (SheafOfModules.toSheaf.{w} R) :=
+    { preservesColimitsOfShape := fun {I} _ ↦
+        ((moduleSheaves_colimits_forgetful R).2.2.2.2.2 I).2.1 }
+  have : PreservesColimitsOfSize.{w, w} (SheafOfModules.toSheaf.{w} S) :=
+    { preservesColimitsOfShape := fun {I} _ ↦
+        ((moduleSheaves_colimits_forgetful S).2.2.2.2.2 I).2.1 }
+  have : PreservesColimitsOfSize.{0, 0} (SheafOfModules.toSheaf.{w} R) :=
+    preservesSmallestColimits_of_preservesColimits _
+  have : PreservesColimitsOfSize.{0, 0} (SheafOfModules.toSheaf.{w} S) :=
+    preservesSmallestColimits_of_preservesColimits _
+  obtain ⟨alpha, ha⟩ := integerKernelComparison A F
+  refine ⟨alpha, ha, ?_, ?_, integerKernelColimitComparison A F alpha ha, ?_⟩
+  · exact ⟨⟨colimit.cocone _, colimit.isColimit _⟩⟩
+  · exact ⟨⟨colimit.cocone _, colimit.isColimit _⟩⟩
+  · exact (integerTorsion_iff (SheafOfModules.toSheaf.{w} R) F).symm.trans
+      ((integerTorsion_iff A F).trans
+        (integerTorsion_iff (SheafOfModules.toSheaf.{w} S) (A.obj F)))
 
 end CategoryTheory
