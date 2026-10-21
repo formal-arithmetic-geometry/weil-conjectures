@@ -21970,3 +21970,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/Q54/lem-pur-clopen-roos-integral-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 09:35 L: merged deliver/Q33/lem-weil-pbc-derived-square-shift-on-kinjectives (stage 2; reviewer PASS; parallel immutable checks)
 - 09:35 L: merged deliver/N9/lem-sfb-derived-scalar-localization-reflection (stage 2; reviewer PASS; parallel immutable checks)
+- 09:35 L: returned deliver/Q08/lem-sf-open-quotient-koszul-completeness (reviewer RETURN: L: independent stage-2 immutable head 1577a5dc5405: H3 universe too small: the module fixes E : Type u and T : Scheme.{u)
