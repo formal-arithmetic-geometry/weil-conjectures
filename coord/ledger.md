@@ -20738,3 +20738,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:37 L: returned deliver/Q64/lem-pd-ringed-tensor-adjunction-mate (reviewer RETURN: L: independent stage-2 immutable head 413f37dfba29: H13/H4: the delivery rebinds two landed dependency lean records. (1))
 - 07:37 L: returned deliver/N7/lem-sfb-stratified-local-cohomological-bounds (reviewer RETURN: L: independent stage-2 immutable head 46b27b34205e: H2: the item's stmt_deps adds the theorem node lem-weil-pbc-noetheri)
 - 07:37 L: returned deliver/Q08/lem-sfb-constant-scalar-restriction-tensor (reviewer RETURN: L: independent stage-2 immutable head 482787df52b5: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
+- 07:38 L: returned deliver/Q138/def-nagata-flat-pullback-rees-map (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-flat-pullback-rees-map: cited node def-naga)
