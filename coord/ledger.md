@@ -20170,3 +20170,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:03 L: merged deliver/NW/lem-sp-chart-finite-ring-adjunction (reviewer PASS; first push; new nodes: 0); claim not held by NW: not your claim
 - 04:03 L: merged deliver/Q18/lem-sfb-constant-scalar-geometric-adjunctions (reviewer FIX; first push; new nodes: 0)
 - 04:03 L: merged deliver/Q25/lem-sfb-integral-quotient-direct-image-comparison (reviewer PASS; first push; new nodes: 0); claim not held by Q25: not your claim
+- 2026-10-21T04:03:52Z L: superseded stage-1 delivery Q76/lem-sfb-extend-to-qlbar-constructible at 5afe923ada1f69b277b7891cf7c1b0a60c2cfce4; current completion retained; packet archived at refs/superseded/Q76/lem-sfb-extend-to-qlbar-constructible/5afe923ada1f69b277b7891cf7c1b0a60c2cfce4; stale return retired.
