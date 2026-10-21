@@ -20,7 +20,8 @@
   "def-weil-ring-localization-away",
   "def-weil-geometric-point",
   "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-strict-local-kummer-tame-module"
  ],
  "proof": [
   {
@@ -701,5 +702,38 @@
   "group": "O2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6ef02a3b7 (reviewer sub-agent of L); spot-checked: I read the item in full: 21 steps, no new nodes. It is live: not on the side-live route-pivot-dropped list, and its only citer, lem-sfb-tame-root-tower-extension, is live. This is a first split with no re-split repair note. No SGA source is used. I checked ILO IX Prop 2.1 (p.133, the strict-local algebra A[x]/(x_i^n-t_i) with t_i part of a regular system and n prime to char) and VIII Rem 4.2.2(i) against the statement and steps. The STATEMENT-DISPUTED change restricting n to integers prime to p is a genuine correction: for n=p, k[t^±] -> k[x^±] with x^p=t is not etale. The citer uses only (n,p)=1. Dropped cites, repaired: (1) lem-per-ind-etale-regular-coordinate-locus (Steps 1, 6). Step 1 is rebuilt from the SNC dimension formula, 00NR kernel parameters (c=1 for each component, then a comparison in m/m^2 plus Nakayama for the stratum) and the regular-sequence theorem. Step 6 is rebuilt from ind-etale => flat, lem-weil-pbc-weak-etale-field (092Q; the fibres are reduced and zero-dimensional, so their local rings are fields), lem-weil-pbc-regular-map-ascent (C_lambda regular), flat preservation of the t_i regular sequence, and lem-weil-pbc-flat-over-regular-with-regular-fibre (031E) for R/(t). (2) lem-per-snc-root-algebra-structure (Step 17, strict-local clause only). Step 17 now applies the item's own Steps 9-11 root-coordinate regular-sequence argument over the henselian local R; roots of unity are not needed, so the lem-sbc-strict-local-roots-of-unity cite is removed too. Steps 10 and 12 now draw their parameter facts from Step 6 (wording only). Batch 5: lem-exc-fields-excellent served only the dropped node's quasi-excellence hypothesis and is removed. lem-exc-regular-local-lift-regular-sequence-quotient (00NU) is kept: its only trf content is the Mathlib Krull-dimension leaf lem-trf-regular-sequence-dimension-formula, which is generic commutative algebra and neither assumed statement nor part of their proofs, so I accept it. The fixed closure has no dropped ids; its remaining trf nodes are generic or already present (the SNC definition and Stacks limit lemmas reached via finite-etale lifting). Artin-Gabber route check: the item is not that node or its children and uses no Qbar, adic, middle t-structure, Gabber finiteness or uniformization, alteration or stable-reduction input. Every other step checked: henselization, finite-etale lifting of the pointed Galois system, idempotents, the Jacobson radical, the monomial regular sequence, colimits of domains, standard etale punctures, faithfully flat colimit cover, the fpqc covering, overlap unit roots and the cocycle, and I empty. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-snc-universal-residual-charts.json, with proof_deps recomputed and tool_uses updated; the statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCUniversalResidualCharts",
+  "declaration": "AlgebraicGeometry.ProEtale.nonempty_sncResidualAtlas",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sncRootLevel",
+   "AlgebraicGeometry.ProEtale.sncRootCoordinate",
+   "AlgebraicGeometry.ProEtale.sncFullRootCoordinate",
+   "AlgebraicGeometry.ProEtale.SNCConnectedAffine",
+   "AlgebraicGeometry.ProEtale.SNCParameterTower",
+   "AlgebraicGeometry.ProEtale.sncStratumOpen",
+   "AlgebraicGeometry.ProEtale.sncStratumIdeal",
+   "AlgebraicGeometry.ProEtale.SNCResidualChart",
+   "AlgebraicGeometry.ProEtale.SNCResidualRefinement",
+   "AlgebraicGeometry.ProEtale.SNCResidualAtlas",
+   "AlgebraicGeometry.ProEtale.nonempty_sncResidualAtlas",
+   "AlgebraicGeometry.ProEtale.snc_strictLocal_roots_connected"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCUniversalResidualCharts.lean",
+  "statement": "theorem nonempty_sncResidualAtlas (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (a : ℕ) (C : Fin a → Y.IdealSheafData) (hC : Function.Injective (fun i ↦ (C i).support) ∧ (∀ i, IsIntegral (C i).subscheme ∧ IsRegularScheme (C i).subscheme) ∧ D.support = ⨆ i, (C i).support ∧ ∀ s : Finset (Fin a), ∀ z : (⨆ i ∈ s, C i).subscheme, IsRegularScheme (⨆ i ∈ s, C i).subscheme ∧ ringKrullDim (Y.presheaf.stalk ((⨆ i ∈ s, C i).subschemeι z)) = ringKrullDim ((⨆ i ∈ s, C i).subscheme.presheaf.stalk z) + (s.card : ℕ)) (I : Finset (Fin a)) : Nonempty (SNCResidualAtlas p C I)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem gives the atlas and all chart/refinement data through explicit structures. The companion theorem states the separate strict-local finite/full connectedness clause. Reuses tameRootAlgebra from def-sfb-strict-local-kummer-tame-module; ConnectedSpace includes nonemptiness. Root-map fields are fixed on coefficients and generators, and full_colimit/punctured_colimit state their universal properties."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eed303254",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node record differs from side-live only by the lean record and the added stmt_dep def-sfb-strict-local-kummer-tame-module, which owns TameRootOrder and tameRootAlgebra; all other snapshot nodes are identical to side-live. lean.statement matches the file verbatim. Every clause is rendered: hC is exactly the IsStrictNormalCrossingsBoundary witness body; Y_I and the reduced S use the radical of the comap of the sup (I=empty gives Y_I); charts are etale, regular, Noetherian, separated; equations use Mathlib comap = ofIdealTop(t_i); the parameter sublist of IsRegularSystemOfParameters at every prime is order-independent; the henselization is exactly the pair_henselization diagram; U is the upstream UniversalCover.cover via the lem-sfb-pointed-finite-etale-limit-cover node; S_U is identified over S_V, connected, a pro-etale cover; (H,JH) is henselian; zeta is primitive, compatible, with unit differences; the root tower, colimit universal properties and finite etale surjective punctured levels are all pinned by generator formulas; the T° to U° pro-etale cover, the atlas etale and pro-etale covers, the empty stratum, refinements with unit roots and I=empty all hold; the strict-local companion takes Mathlib IsRegularLocalRing and a partial RSOP. Spec A connected is a true intermediate needed for typing. No hollow definitions, docstrings and proof steps present, single universe u. Advisory: the uv clauses in refinements are implied by lift_base, so the H-lift is not pinned to a point (node asks only for compatible maps); the NL second reading is a self-review. No files changed, no compile."
  }
 }
