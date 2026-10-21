@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
-public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import Sheaf.Paper.LocalizingClosureExistence
 public import WeilConjectures.CategoryTheory.CompactObject
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
