@@ -27,77 +27,54 @@
  },
  "proof": [
   {
-   "text": "Work on the etale sites throughout; the pro-etale categories and $C_W$ in the statement provide notation only, and no ambient pro-etale adjunction is used. Abbreviate $L=i^*$ and suppress $\\otimes_A^L$ in formulas. On each small ringed site, [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives the natural currying isomorphism $H(P,H(Q,V))\\cong H(P\\otimes Q,V)$, where $H=R\\mathcal Hom_A$. Taking zeroth derived global sections and applying [lem-pur-rhom-global-sections] gives the canonical natural bijection\n$$\\operatorname{Hom}(P,H(Q,V))\\cong\\operatorname{Hom}(P\\otimes Q,V).$$\nIts uncurrying sends $f$ to $\\mathrm{ev}_{Q,V}\\circ(f\\otimes1_Q)$: evaluation is the image of $1_{H(Q,V)}$, and naturality in $P$ gives this formula. In particular this is the tensor-Hom transposition used in the statement, with $V=\\omega_W$.",
+   "text": "Use the canonical natural signed tensor symmetry derivedTensorSymmetry. It is the localization of the Koszul interchange, exactly the map characterized by the old etaleKoszulSymmetry witness. Opposite symmetries cancel by derivedTensorSymmetry_involutive. The definition boundarySigma now uses that real construction directly.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections"
+    "lem-kun-tensor-sym",
+    "lem-amb-derived-tensor-symmetry-involutive"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom) and 08JA (lemma-section-RHom-over-U), including the recovery of the tensor-Hom bijection"
-   }
+   "elementary": false
   },
   {
-   "text": "Keep the two tensor orders distinct. Write $\\pi_{B,M}:FB\\otimes M\\to F(B\\otimes LM)$ for the canonical projection map of [def-kun-projection-formula-map], and $P_{M,B}:M\\otimes FB\\to F(LM\\otimes B)$ for the order used in the question. By that order convention,\n$$P_{M,B}=F(\\sigma_{B,LM})\\circ\\pi_{B,M}\\circ\\sigma_{M,FB}.$$\nThus, whenever these maps are invertible,\n$$P_{M,B}^{-1}\\circ F(\\sigma_{B,LM})=\\sigma_{FB,M}\\circ\\pi_{B,M}^{-1}.$$\nIndeed substitute the first formula and cancel each symmetry with its inverse. The maps $\\pi$ are natural: their defining formula consists of the ordinary adjunction unit, pullback-tensor comparison and counit, each natural. Inverting the naturality equation proves naturality of $\\pi^{-1}$ on the stated domain. The assumed projection formula applies to every $B\\in D^b_{ctf}(Z,A)$ with $M=K$, and to $B=GD_TK$ because that object is assumed finite-Tor bounded constructible.",
+   "text": "Use the already constructed ordinary-etale derivedTensorHomAdjunction₂ and the ambient exceptional adjunction. Their unary Hom equivalences, symmetry conjugations and the inverse canonical projection component give exactly the existing independent boundaryAlphaHomChain. No generic ringed-site global-sections or restriction comparison is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For b:B→B′, invert the first-variable naturality square of the canonical projection map. Expand the seven Hom-chain factors. Apply naturality of the inverse symmetries, the tensor-Hom adjunctions and exceptional transposition. This proves theta_B(b followed by c)=b followed by theta_B′(c). The private abstract helper homChain_natural carries this calculation before specialization.",
    "uses": [
     "def-kun-projection-formula-map"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-    "place": "Second paragraph, evaluation normalization: explicit projection-map order convention before adjointing back"
-   }
+   "elementary": true
   },
   {
-   "text": "Set $X=GD_TK$ and $Y=D_ZLK$. For a test object $B\\in D^b_{ctf}(Z,A)$ and $b:B\\to X$, the first exceptional-adjunction transpose is $\\mu_{D_TK}\\circ F(b):FB\\to D_TK$. By step 1 its tensor-Hom transpose is\n$$h_b=\\mathrm{ev}_K\\circ((\\mu_{D_TK}\\circ F(b))\\otimes1_K):FB\\otimes K\\to\\omega_T.$$\nThe next arrow in the displayed Hom chain sends it to $h_b\\circ\\pi_{B,K}^{-1}$. Apply $F\\dashv G$ to obtain a map $B\\otimes LK\\to G\\omega_T=\\omega_Z$, and curry on $Z$ using step 1. Denote the result by $\\theta_B(b):B\\to Y$. Every operation here is a bijection, and is natural in $B$: the projection inverse is natural by step 2 and the other bijections are natural adjunctions. Therefore $\\theta_B$ is exactly the composite in the question, including its first arrow's implicit exceptional-adjunction bijection.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-    "place": "Second paragraph, adjointing back through tensor-Hom and the exceptional adjunction: formula on an arbitrary test morphism"
-   }
-  },
-  {
-   "text": "Write $e=\\mathrm{ev}_K$, $D=D_TK$, and $t=(1_K\\otimes\\mu_D)\\circ P_{K,X}^{-1}$. By definition $q_{K,D}$ is the exceptional adjunct of $t:F(LK\\otimes X)\\to K\\otimes D$. Naturality of exceptional transposition in its target and source says that the exceptional transpose of $r_K$ is\n$$e\\circ\\sigma_{K,D}\\circ(1_K\\otimes\\mu_D)\\circ P_{K,X}^{-1}\\circ F(\\sigma_{X,LK}).$$\nHere the transpose of $G(v)\\circ q\\circ u$ is $v\\circ t\\circ F(u)$, directly from the adjunction bijection. By step 2 the displayed map is\n$$e\\circ\\sigma_{K,D}\\circ(1_K\\otimes\\mu_D)\\circ\\sigma_{FX,K}\\circ\\pi_{X,K}^{-1}\n=e\\circ(\\mu_D\\otimes1_K)\\circ\\pi_{X,K}^{-1}.$$\nThe equality uses naturality and involutivity of tensor symmetry. The last expression is $h_{1_X}\\circ\\pi_{X,K}^{-1}$ from step 3. Since both exceptional transposition and tensor-Hom transposition are injective, the specified tensor-Hom transpose of $r_K$ is precisely $\\alpha_K=\\theta_X(1_X)$. This identifies the named map, without extracting a normalization from an existence-only costalk isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-    "place": "Second paragraph, both maps correspond to restriction of evaluation: counit and symmetry calculation for the specified alpha"
-   }
-  },
-  {
-   "text": "For $b:B\\to X$, naturality of $\\theta$ in its test object gives\n$$\\theta_B(b)=\\theta_X(1_X)\\circ b=\\alpha_K\\circ b.$$\nThis proves the more precise assertion. Both $X$ and $Y$ are admissible test objects: $X$ by hypothesis, and $Y=D_ZLK$ because $LK\\in D^b_{ctf}(Z,A)$ and $D_Z$ preserves that category. Put $\\gamma=\\theta_Y^{-1}(1_Y):Y\\to X$. The displayed identity gives $\\alpha_K\\gamma=1_Y$. Naturality with $b=\\gamma$ also gives\n$$\\theta_X(\\gamma\\alpha_K)=\\theta_Y(\\gamma)\\circ\\alpha_K=1_Y\\circ\\alpha_K=\\alpha_K=\\theta_X(1_X),$$\nInjectivity of $\\theta_X$ gives $\\gamma\\alpha_K=1_X$. Thus the particular $\\alpha_K$ is an isomorphism. This is an explicit inverse argument inside the full finite-Tor constructible subcategory; no assertion about arbitrary pro-etale test objects is needed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-    "place": "Second paragraph, isomorphism of the evaluation-normalized alpha: explicit representable-bijection inverse"
-   }
-  },
-  {
-   "text": "For a morphism $u:K\\to K'$ between inputs satisfying the hypotheses, evaluation naturality [lem-weil-duality-pairing] gives\n$$\\mathrm{ev}_K\\circ(D_Tu\\otimes1_K)=\\mathrm{ev}_{K'}\\circ(1_{D_TK'}\\otimes u).$$\nInsert this into $h_b$ in step 3 and use projection naturality in $K$ and the two adjunction naturality equations. The resulting Hom-chain identity is\n$$\\theta_B^K(G(D_Tu)\\circ b)=D_Z(Lu)\\circ\\theta_B^{K'}(b)\\qquad(b:B\\to GD_TK').$$\nTake $B=GD_TK'$ and $b=1$. Step 5 gives\n$$\\alpha_K\\circ G(D_Tu)=D_Z(Lu)\\circ\\alpha_{K'}.$$\nThis is contravariant naturality in $K$, and all components are isomorphisms by step 5. Tensor symmetry here is the signed symmetry already used in defining $r_K$; step 4 cancels two symmetries, so no sign is omitted.",
+   "text": "Evaluate the chain at identity of X=G RHom(K,W). Expand q, r, alpha and evaluation. Cancel the two opposite Z symmetries and the two opposite T symmetries, using the proved signed cancellation identity. Naturality of exceptional transposition moves the source symmetry and target evaluation through the adjunction. Uncurrying is tensoring with the exceptional counit followed by tensor-Hom evaluation, so the result is exactly alpha. This is homChain_identity and BoundaryData.alpha_eq_chain. Combined with the preceding step, theta_B(b)=b followed by alpha.",
    "uses": [
-    "lem-weil-duality-pairing"
+    "lem-amb-derived-tensor-symmetry-involutive"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-    "place": "Second paragraph, evaluation identities: naturality of the normalized comparison"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Let Y=RHom(LK,GW). The hypotheses make X and Y admissible. Put gamma=theta_Y inverse applied to identity_Y. The postcomposition identity gives gamma followed by alpha=identity_Y. Injectivity of theta_X then gives alpha followed by gamma=identity_X, by associativity. These two equations explicitly construct IsIso alpha.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For u:K→K′, invert the second-variable projection naturality square. Expand the Hom chain and use the parameter naturality of derivedTensorHomAdjunction₂ in each category and the ordinary adjunction naturality. This gives theta_B^K(b followed by G(Du))=theta_B^K′(b) followed by D_Z(Lu). Take B=G(DK′), b=identity and use the postcomposition identity and the identity-chain normalization. This proves exactly the displayed contravariant naturality equation.",
+   "uses": [
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "def-kun-projection-formula-map",
-  "lem-weil-duality-pairing"
+  "lem-kun-tensor-sym",
+  "lem-amb-derived-tensor-symmetry-involutive",
+  "def-kun-projection-formula-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-  "place": "Second proof paragraph; expanded formal Hom-chain and evaluation normalization, with Stacks Tags 08J9 and 08JA as ringed-site input"
+  "place": "Second paragraph; existing six-step evaluation-normalization argument, formalized by C6 using the canonical ordinary-etale tensor-Hom adjunction, signed symmetry, projection naturality and explicit inverse on the two admissible tests."
  },
  "mathlib_match": null,
  "status": "split",
@@ -235,10 +212,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -251,10 +225,43 @@
   "module": "Sheaf.SixFunctors.BoundaryAlphaNormalization",
   "declaration": "AlgebraicGeometry.Etale.boundaryAlphaNormalization",
   "declarations": [
+   "CategoryTheory.boundaryHomChain",
+   "CategoryTheory.boundaryNormalizationMap",
+   "CategoryTheory.BoundaryData",
+   "CategoryTheory.BoundaryData.ofFunctors",
+   "CategoryTheory.BoundaryData.chain",
+   "CategoryTheory.BoundaryData.alpha",
+   "CategoryTheory.BoundaryData.q",
+   "CategoryTheory.BoundaryData.evaluation",
+   "CategoryTheory.BoundaryData.r",
+   "CategoryTheory.BoundaryData.alphaWithFunctors",
+   "CategoryTheory.BoundaryData.chainWithFunctors",
+   "CategoryTheory.BoundaryData.qWithPullback",
+   "CategoryTheory.BoundaryData.rWithFunctors",
+   "AlgebraicGeometry.Etale.boundarySmallSheafify",
+   "AlgebraicGeometry.Etale.boundarySheafify",
+   "AlgebraicGeometry.Etale.boundarySheafGrothendieck",
+   "AlgebraicGeometry.Etale.boundaryMonoidalPreadditive",
+   "AlgebraicGeometry.Etale.boundaryCoproducts",
+   "AlgebraicGeometry.Etale.boundaryTensor4",
+   "AlgebraicGeometry.Etale.boundaryTensor12",
+   "AlgebraicGeometry.Etale.boundaryTensor23",
+   "AlgebraicGeometry.Etale.boundaryCountableColimits",
+   "AlgebraicGeometry.Etale.boundaryExactColimits",
+   "AlgebraicGeometry.Etale.boundaryLeftTensorColimits",
+   "AlgebraicGeometry.Etale.boundaryRightTensorColimits",
+   "AlgebraicGeometry.Etale.boundaryFlatResolution",
+   "AlgebraicGeometry.Etale.boundaryUpperStarAdditive",
+   "AlgebraicGeometry.Etale.boundaryUpperStarKFlat",
+   "AlgebraicGeometry.Etale.boundaryData",
    "AlgebraicGeometry.Etale.boundaryCoefficient",
    "AlgebraicGeometry.Etale.boundaryCoefficientFinite",
    "AlgebraicGeometry.Etale.boundarySigma",
+   "AlgebraicGeometry.Etale.boundaryHom",
+   "AlgebraicGeometry.Etale.boundaryMorphism",
    "AlgebraicGeometry.Etale.boundaryEvaluation",
+   "AlgebraicGeometry.Etale.boundaryData_H_eq",
+   "AlgebraicGeometry.Etale.boundaryData_L_eq",
    "AlgebraicGeometry.Etale.boundaryG",
    "AlgebraicGeometry.Etale.boundaryProjection",
    "AlgebraicGeometry.Etale.boundaryAlphaQ",
@@ -264,15 +271,17 @@
    "AlgebraicGeometry.Etale.boundaryOmegaT",
    "AlgebraicGeometry.Etale.boundaryDT",
    "AlgebraicGeometry.Etale.boundaryDZ",
+   "AlgebraicGeometry.Etale.boundaryNormalizationConclusions",
+   "AlgebraicGeometry.Etale.boundaryPFOnFiniteTor",
    "AlgebraicGeometry.Etale.boundaryAlphaNormalization"
   ],
   "file": "lean/Sheaf/SixFunctors/BoundaryAlphaNormalization.lean",
-  "statement": "theorem boundaryAlphaNormalization (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {Z T : Scheme.{u}} (aT : T ⟶ Spec (.of D.k)) [IsSeparated aT] [LocallyOfFiniteType aT] [QuasiCompact aT] (i : Z ⟶ T) [IsClosedImmersion i] (hPF : ∀ B : DerivedCategoryModule (boundaryCoefficient l E n) Z, DerivedCategory.isBoundedConstructible (boundaryCoefficient l E n) Z B → ∀ M : DerivedCategoryModule (boundaryCoefficient l E n) T, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T M → IsIso (boundaryProjection (boundaryCoefficient l E n) i B M)) (K : DerivedCategoryModule (boundaryCoefficient l E n) T) (hK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T K) (_hDK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K))) (_hiK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z (L(upperStar (ModuleCat.{u + 1} (boundaryCoefficient l E n)) i).obj K)) (hGDK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z ((boundaryG (boundaryCoefficient l E n) i).obj ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K)))) (_hdual : ∀ B : DerivedCategoryModule (boundaryCoefficient l E n) Z, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z B → WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z ((boundaryDZ (boundaryCoefficient l E n) i aT).obj (op B))) : IsIso (boundaryAlpha (boundaryCoefficient l E n) i (boundaryOmegaT (boundaryCoefficient l E n) aT) K (hPF _ hGDK.1 K hK)) ∧ (∀ (B : DerivedCategoryModule (boundaryCoefficient l E n) Z) (hB : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z B) (b : B ⟶ (boundaryG (boundaryCoefficient l E n) i).obj ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K))), boundaryAlphaHomChain (boundaryCoefficient l E n) i (boundaryOmegaT (boundaryCoefficient l E n) aT) K B (hPF B hB.1 K hK) b = b ≫ boundaryAlpha (boundaryCoefficient l E n) i (boundaryOmegaT (boundaryCoefficient l E n) aT) K (hPF _ hGDK.1 K hK)) ∧ (∀ (K' : DerivedCategoryModule (boundaryCoefficient l E n) T) (hK' : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T K') (_hDK' : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K'))) (_hiK' : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z (L(upperStar (ModuleCat.{u + 1} (boundaryCoefficient l E n)) i).obj K')) (hGDK' : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z ((boundaryG (boundaryCoefficient l E n) i).obj ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K')))) (u : K ⟶ K'), (boundaryG (boundaryCoefficient l E n) i).map ((boundaryDT (boundaryCoefficient l E n) aT).map u.op) ≫ boundaryAlpha (boundaryCoefficient l E n) i (boundaryOmegaT (boundaryCoefficient l E n) aT) K (hPF _ hGDK.1 K hK) = boundaryAlpha (boundaryCoefficient l E n) i (boundaryOmegaT (boundaryCoefficient l E n) aT) K' (hPF _ hGDK'.1 K' hK') ≫ (boundaryDZ (boundaryCoefficient l E n) i aT).map (L(upperStar (ModuleCat.{u + 1} (boundaryCoefficient l E n)) i).map u).op)",
+  "statement": "theorem boundaryAlphaNormalization\n    (D : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n : ℕ) {Z T : Scheme.{u}} (aT : T ⟶ Spec (.of D.k))\n    [IsSeparated aT] [LocallyOfFiniteType aT] [QuasiCompact aT]\n    (i : Z ⟶ T) [IsClosedImmersion i]\n    (hPF : ∀ B : DerivedCategoryModule (boundaryCoefficient l E n) Z,\n      DerivedCategory.isBoundedConstructible (boundaryCoefficient l E n) Z B →\n      ∀ M : DerivedCategoryModule (boundaryCoefficient l E n) T,\n      WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T M →\n      IsIso (boundaryProjection (boundaryCoefficient l E n) i B M))\n    (K : DerivedCategoryModule (boundaryCoefficient l E n) T)\n    (hK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T K)\n    (_hDK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T\n      ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K)))\n    (_hiK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z\n      (L(upperStar (ModuleCat.{u + 1} (boundaryCoefficient l E n)) i).obj K))\n    (hGDK : WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z\n      ((boundaryG (boundaryCoefficient l E n) i).obj\n        ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K))))\n    (_hdual : ∀ B : DerivedCategoryModule (boundaryCoefficient l E n) Z,\n      WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z B →\n      WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z\n        ((boundaryDZ (boundaryCoefficient l E n) i aT).obj (op B))) :\n    boundaryNormalizationConclusions (boundaryCoefficient l E n) i aT\n      (WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T)\n      (WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z)\n      (boundaryPFOnFiniteTor l E n i hPF) K hK hGDK",
   "branch": "newtargets-dag",
   "by": "NW",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Repair of returned f8683cb6bd52: actual ordinary-etale categories and quotient coefficients; canonical closed direct image and its ambient adjoint; structure-map dualizing object; canonical RHom, evaluation, normalized Koszul symmetry and projection components. The independently constructed Hom-chain Equiv does not refer to alpha. The theorem includes IsIso, postcomposition normalization on finite-Tor constructible tests, and contravariant naturality for every admissible K. Positive levels are indexed by n+1. Dependency record/module repairs supply the existing ordinary-etale presentations and the uniquely normalized standalone symmetry. Its closed-adjoint interface is imported from the already landed lem-exc-closed-ambient module."
+  "note": "C6 stage-3 proof of the same mathematical theorem, with its exact three-conclusion conjunction factored as boundaryNormalizationConclusions, from the canonical etale adjunctions, signed symmetry and projection map. Real categorical constructions preserve the q/r/evaluation normalization and independent Hom chain. Proved private helpers give normalization, parameter naturality and an explicit inverse on admissible tests. Canonical instance and functor interfaces avoid expanding derived constructions. No new holes or modules; definition changes require renewed meaning review."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -281,5 +290,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Every object, hypothesis and conclusion clause matches the node, through the recorded declarations: D_T=verdierDual into dualizingComplex=R(aT)^! of the unit; G=rightAdjoint of R(i_*) via the closed-ambient instance; D_Z=RHom into G omega_T; the 4 ctf memberships and D_Z preservation use finiteTorConstructibleEtale; hPF is IsIso of the canonical rightDerivedLowerStarProjectionMap, equivalent to the node's opposite-order PF by two symmetries. q, r_K and alpha were recomputed against node steps 2 and 4. boundaryAlphaHomChain is 7 Equiv factors independent of alpha and matches the displayed chain with the step-1 uncurrying convention. Clauses: IsIso, chain = b >> alpha for all ctf B, contravariant naturality for every admissible K'. No extra hypotheses; universes Scheme.{u}, ModuleCat.{u+1}. Level n+1 covers every n>=1. Edge cases K=0, B=0, Z empty, i=id and signs checked; no pro-etale substitute. Dependency repairs: DualityPairing keeps all old declarations and adds IsEtaleKoszulSymmetry/etaleKoszulSymmetry (HEq-pinned to the Koszul braiding, sorry'd existence theorem, same pattern as the landed bidualityMap); DerivedInternalHomOfUniverses adds only a public import of Etale.Derived.Hom. No hollow definitions; sorry only as the whole proof of two named theorems; docstrings with source and blueprint present; lean.statement verbatim. nt_compile --json of all 3 files: rc 0, no errors (3.7/10.7/13.6 s). Observation, not blocking: the def-weil-finite-tor-amplitude record is rebound to the etale finiteTorConstructibleEtale and drops the pro-etale/integral/field declarations from its list (permitted by section 1(B); flagged for the lead)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-50983",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T005730-L-1886275",
+  "kind": "interface",
+  "note": "independent cc review: 509835b13c80 delivered files vs PASSed de4c837830 (Lean, node, 12 change records byte-identical; only report.md gained a repair paragraph); live base unchanged since that review; module plus quarantined importer BoundaryDualityDischarge compiled; axioms: only sorryAx inherited from imports"
  }
 }
