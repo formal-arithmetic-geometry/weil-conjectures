@@ -22620,3 +22620,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:41 L: merged deliver/N7/lem-sfb-qlbar-direct-image-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 13:41 L: returned deliver/Q95/lem-pur-quotient-expression-kflat-normalization (reviewer RETURN: L: independent stage-2 immutable head 06e701ba3437: H2 (theorem-stmt_dep rule, new def node): def-pur-strict-quotient-ex)
 - 13:41 L: returned deliver/Q09/lem-sfb-common-field-lattice-generators (reviewer RETURN: L: independent stage-2 immutable head 70111c62c6e4: H2 / mechanical theorem-stmt_dep finding: the delivery adds theorem )
+- 13:41 L: returned deliver/NC/det-picard-rr-duality (reviewer RETURN: L: independent stage-2 immutable head 850e357f3fd5: Item maths correct on all four clauses: e in (1) pinned by trace∘eva)
