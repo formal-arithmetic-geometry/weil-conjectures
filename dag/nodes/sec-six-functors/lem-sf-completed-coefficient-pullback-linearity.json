@@ -2,7 +2,7 @@
  "id": "lem-sf-completed-coefficient-pullback-linearity",
  "kind": "statement",
  "title": "Scalar compatibility and linearity of completed coefficient automorphism pullback",
- "statement": "Let $X$ be a scheme and $d=(A,I)$ a Noetherian adic coefficient datum with finite perfect quotients as in [def-weil-pbc-adic-coefficient-datum]. Use its chosen small pro-etale site, $A_X=\\varprojlim_{n\\geq1}(A/I^n)_X$, and the coefficient map $s_X:\\underline A_X\\to A_X$ whose $n$-th projection is the constant quotient map. Let $e:X\\xrightarrow{\\sim}X$ be an automorphism. Write $\\rho_A:\\underline A_X\\to e_*\\underline A_X$ for the map sending every constant section to itself, and $c_A:e^{-1}\\underline A_X\\to\\underline A_X$ for its adjoint [def-weil-proetale-inverse-image]. Let $c_e:e^{-1}A_X\\xrightarrow{\\sim}A_X$ be induced by the canonical inverse-image limit comparison and the analogous maps for $A/I^n$ [lem-weil-proetale-isomorphism-inverse-image]. Write $c_e^\\#:A_X\\to e_*A_X$ for the adjunct of $c_e$.\n\nThe coefficient scalar squares commute:\n$$c_A;s_X=e^{-1}(s_X);c_e,\\qquad s_X;c_e^\\#=\\rho_A;e_*(s_X).$$\nIn particular, if $s_U(b)$ denotes the scalar section induced by $b\\in A$ on a pro-etale object $U$, the sectionwise adjoint equation is $(c_e^\\#)_U(s_U(b))=s_{u_e(U)}(b)$, where $u_e$ is base change along $e$. Give module Hom groups the $A$-action through these sections [def-weil-linear-category]. The module direct image with ring action via $c_e^\\#$, its specified left adjoint $e^*$ [lem-weil-pbc-ringed-topoi-module-adjunction], and their exact induced derived functors are additive and $A$-linear. For any finite tuple generating $I$, the full subcategory of intrinsically complete objects [def-weil-pbc-intrinsic-completion] is preserved by ordinary derived pullback, and its restriction $H_{\\mathrm{comp}}$ is additive and $A$-linear: $H_{\\mathrm{comp}}(bf)=bH_{\\mathrm{comp}}(f)$ and $H_{\\mathrm{comp}}(f+g)=H_{\\mathrm{comp}}(f)+H_{\\mathrm{comp}}(g)$.",
+ "statement": "Let $X$ be a scheme and $d=(A,I)$ a Noetherian adic coefficient datum with finite perfect quotients as in [def-weil-pbc-adic-coefficient-datum]. Use its chosen small pro-etale site, $A_X=\\varprojlim_{n\\geq1}(A/I^n)_X$, and the coefficient map $s_X:\\underline A_X\\to A_X$ whose $n$-th projection is the constant quotient map. Let $e:X\\xrightarrow{\\sim}X$ be an automorphism. Write $\\rho_A:\\underline A_X\\to e_*\\underline A_X$ for the map sending every constant section to itself, and $c_A:e^{-1}\\underline A_X\\to\\underline A_X$ for its adjoint [def-weil-proetale-inverse-image]. Let $c_e:e^{-1}A_X\\xrightarrow{\\sim}A_X$ be induced by the canonical inverse-image limit comparison [lem-weil-proetale-isomorphism-inverse-image] and the analogous structure isomorphisms $c_{P_n}:e^{-1}(P_n)_X\\to(P_n)_X$ for $P_n=A/I^n$; thus $c_e$ is the isomorphism $c_u$ of [lem-weil-pbc-profinite-coefficient-inverse-image] for $u=e$ and the system $(A/I^n)_n$. Write $c_e^\\#:A_X\\to e_*A_X$ for the adjunct of $c_e$.\n\nThe coefficient scalar squares commute:\n$$c_A;s_X=e^{-1}(s_X);c_e,\\qquad s_X;c_e^\\#=\\rho_A;e_*(s_X).$$\nIn particular, if $s_U(b)$ denotes the scalar section induced by $b\\in A$ on a pro-etale object $U$, the sectionwise adjoint equation is $(c_e^\\#)_U(s_U(b))=s_{u_e(U)}(b)$, where $u_e$ is base change along $e$. Give module Hom groups the $A$-action through these sections [def-weil-linear-category]. The module direct image with ring action via $c_e^\\#$, its specified left adjoint $e^*$ [lem-weil-pbc-ringed-topoi-module-adjunction], and their exact induced derived functors are additive and $A$-linear. For any finite tuple generating $I$, the full subcategory of intrinsically complete objects [def-weil-pbc-intrinsic-completion] is preserved by the ordinary K-flat derived pullback $Le^*$ along $c_e$ [lem-weil-pbc-ringed-topoi-derived-pullback], and its restriction $H_{\\mathrm{comp}}$ is additive and $A$-linear: $H_{\\mathrm{comp}}(bf)=bH_{\\mathrm{comp}}(f)$ and $H_{\\mathrm{comp}}(f+g)=H_{\\mathrm{comp}}(f)+H_{\\mathrm{comp}}(g)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
   "place": "second sentence, coefficient transport for tensor Frobenius; base proof Step 9 (wfCompletePullback_linear): actual quotient projections, adjunct scalar equation, and complete pullback linearity; Stacks 09A5 (proetale.tex, section-morphism), 0H7J (sites.tex, example-constant-sheaf), 03D7 (sites-modules.tex, lemma-adjoint-pullback-pushforward-modules); agent-written completed scalar-square argument"
@@ -13,11 +13,121 @@
   "lem-weil-proetale-isomorphism-inverse-image",
   "def-weil-linear-category",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "def-weil-pbc-intrinsic-completion"
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P_n=A/I^n$, write $r_n:\\underline A_X\\to(P_n)_X$ for the constant quotient map, and $\\pi_n:A_X\\to(P_n)_X$ for the actual limit projections. By definition $s_X;\\pi_n=r_n$. By the profinite-coefficient inverse-image theorem (system $Q_n=P_n$, finite by the datum), $c_e;\\pi_n=e^{-1}(\\pi_n);c_{P_n}$, where $(P_n)_X$ is the constant ring sheaf of $P_n$ (that theorem identifies it with the sheafified $\\operatorname{Cont}(\\pi_0(|U|),P_n)$ of the datum) and $c_{P_n}$ is adjoint to the map fixing constant sections, i.e. the structure map of [def-weil-proetale-inverse-image]. Under this identification $r_n$ is the constant-sheaf map of the quotient $A\\to P_n$, so clause 3 of the isomorphism inverse-image theorem gives $c_A;r_n=e^{-1}(r_n);c_{P_n}$. Consequently\n$$c_A;s_X;\\pi_n=c_A;r_n=e^{-1}(r_n);c_{P_n}=e^{-1}(s_X);e^{-1}(\\pi_n);c_{P_n}=e^{-1}(s_X);c_e;\\pi_n.$$\nThe projections of the sectionwise compatible-family limit are jointly injective, proving $c_A;s_X=e^{-1}(s_X);c_e$. All these are the actual coefficient maps in the statement.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: coefficient transport for tensor Frobenius; quotient projections; Stacks 09A5, 0H7J as recorded in the cited inverse-image node"
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the sheaf inverse-image adjunction unit. By the adjunct formulas $c_e^\\#=\\eta_{A_X};e_*(c_e)$ and $\\rho_A=\\eta_{\\underline A_X};e_*(c_A)$. Unit naturality and Step 1 give\n$$s_X;c_e^\\#=\\eta_{\\underline A_X};e_*(e^{-1}(s_X);c_e)=\\eta_{\\underline A_X};e_*(c_A;s_X)=\\rho_A;e_*(s_X).$$\nEvaluate this equality on a constant section $b\\in A$ over $U$. The defining formula for $\\rho_A$ sends it to the constant section $b$ over $u_e(U)$, so $(c_e^\\#)_U(s_U(b))=s_{u_e(U)}(b)$. This also fixes which scalar action is being used on direct image.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: adjunct scalar equation; Stacks 0H7J, constant sections, and the unit/counit definition of structure maps"
+   }
+  },
+  {
+   "text": "Write $G$ for module direct image. Its underlying section map on a module morphism $f:M\\to N$ is $(Gf)_U=f_{u_e(U)}$. The $A_X(U)$-action on $GM(U)$ is through $(c_e^\\#)_U$. Step 2 therefore identifies multiplication by $b$ on $GM(U)$ with multiplication by $s_{u_e(U)}(b)$ on $M(u_e(U))$. Hence for $x\\in M(u_e(U))$,\n$$(G(bf))_U(x)=s_{u_e(U)}(b)f_{u_e(U)}(x)=(bGf)_U(x).$$\nSimilarly $(G(f+g))_U(x)=f_{u_e(U)}(x)+g_{u_e(U)}(x)$ and $G(0)=0$. These identities commute with restriction because the sections $s_U(b)$ do. Thus $G$ is additive and $A$-linear for the stipulated Hom actions.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: scalar compatibility of the actual module direct image; Stacks 03D7 and its specified ring action"
+   }
+  },
+  {
+   "text": "Put $F=e^*$, the specified left adjoint of $G$, and let $\\zeta_M:M\\to GFM$ be its unit. For $h:FM\\to N$ its adjoint is $\\alpha(h)=\\zeta_M;G(h)$. Step 3 and bilinearity of composition make $\\alpha$ additive and $A$-linear; it is injective by the adjunction. For $u:M\\to M'$ unit naturality gives $\\alpha(Fu)=u;\\zeta_{M'}$. Since $\\zeta_{M'}$ is an $A_X$-module morphism, for parallel $u,v$ and $b\\in A$,\n$$\\alpha(F(bu))=(bu);\\zeta_{M'}=b(u;\\zeta_{M'})=\\alpha(bFu),$$\n$$\\alpha(F(u+v))=(u+v);\\zeta_{M'}=\\alpha(Fu+Fv).$$\nInjectivity yields $F(bu)=bFu$ and $F(u+v)=Fu+Fv$; the same calculation with zero gives $F(0)=0$. This proves linearity for the specified left adjoint without choosing a different presentation of it.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: module-adjunction linearity; Stacks 03D7, natural Hom bijection"
+   }
+  },
+  {
+   "text": "The underlying sheaf inverse image of $e$ is an equivalence by the isomorphism inverse-image theorem. The completed coefficient structure map $c_e$ is invertible by the profinite-coefficient inverse-image theorem: it is the inverse-image limit comparison followed by the limit of the constant quotient isomorphisms. Thus this is an equivalence of ringed topoi on the chosen small sites. Apply ringed-presentation transport with both rings equal to $A_X$ and structural map exactly $c_e$. Its module adjunction is the same $F\\dashv G$ as in Step 4, and is an exact equivalence. In particular $F$ and $G$ preserve finite limits and finite colimits, as required for the exact-functor derived-linearity theorem.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-ringed-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: exact coefficient transport; Stacks 03CR equivalence case and 03D7, via the existing ringed-presentation transport theorem"
+   }
+  },
+  {
+   "text": "Give $D(\\operatorname{Mod}(A_X))$ the induced $A$-linear structure from the linear-abelian-derived-category theorem. Apply the exact-linear-derived-functor theorem to each of $F,G$: the coefficient ring $A$ is commutative, the module categories are abelian, the small-site universes are those fixed in the datum, exactness is Step 5, and additivity and $A$-linearity are Steps 3 and 4. It follows that their termwise induced unbounded derived functors are additive and $A$-linear on all derived morphisms, not only on chain maps.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "lem-cbc-exact-linear-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: derived linearity; Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean, instance at lines 122-125, through the cited existing Mathlib leaf"
+   }
+  },
+  {
+   "text": "Fix any finite tuple generating $I$. Apply the automorphism-completion-unit comparison to this datum, $e$, and the coefficient map already used above. Its hypotheses are precisely the Noetherian datum, additive-torsion $A/I$, finite perfect quotients, and the chosen small site in the statement. It gives preservation of the full subcategory where the intrinsic completion unit is invertible, for this generating tuple and every representative. The functor of that theorem is the ordinary K-flat derived pullback $Le^*$ along $c_e$ of [lem-weil-pbc-ringed-topoi-derived-pullback], not the termwise functor of Step 6. It is $A$-linear by ringed derived-pullback linearity, with $R=A$ and $s_A=s_B$ the global scalar sections $b\\mapsto s_X(b)$: its hypothesis that $c_e$ carries $e^{-1}s_X(b)$ to $s_X(b)$ is the adjunct form of Step 2 on the final object, since $c_e^\\#=\\eta_{A_X};e_*(c_e)$ and $\\eta$ sends a global section to its inverse image. Restrict $Le^*$ to the preserved full subcategory. Its Hom sets, scalar actions and addition are inherited unchanged. Thus for parallel maps of complete objects, $H_{\\mathrm{comp}}(bf)=bH_{\\mathrm{comp}}(f)$ and $H_{\\mathrm{comp}}(f+g)=H_{\\mathrm{comp}}(f)+H_{\\mathrm{comp}}(g)$, as asserted.",
+   "uses": [
+    "lem-sf-automorphism-completion-unit-comparison",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-ringed-derived-pullback-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: complete pullback linearity; existing automorphism-completion comparison, with the actual intrinsic completion unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-linear-category",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-cbc-exact-linear-derived-functor",
+  "lem-sf-automorphism-completion-unit-comparison",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-ringed-derived-pullback-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "Second sentence, tensor Frobenius coefficient transport; quotient-projection and adjunction calculations, using existing exact transport and completion theorems"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +163,45 @@
    "results": "8 hits; AdicCompletion.val_smul_eq_evalₐ_smul, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap, AdicCompletion.smul_eval, AdicCompletion.mk_smul_mk, AdicCompletion.smul_mk, AdicCompletion.map_val_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm",
    "date": "2026-10-21",
    "verdict": "no match: module pullback additivity, ordinary module scalar formulas and adic-completion evaluations do not establish the completed sheaf scalar square or its adjoint section equation"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ll]inear|[Ll]inear.*pullback|completedScalar",
+   "results": "12 hits; Mathlib/Geometry/Manifold/VectorField/Pullback.lean, Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/Algebra/Module/Submodule/Map.lean, Mathlib/Algebra/Order/GroupWithZero/Canonical.lean, Mathlib/Analysis/Normed/Module/Alternating/Basic.lean, Mathlib/Topology/Algebra/Module/ModuleTopology.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean, Mathlib/Analysis/Calculus/FDeriv/ContinuousAlternatingMap.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed coefficient scalar square together with the adjoint scalar equation and complete derived pullback linearity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image commutes with constant scalar maps and derived pullback is linear on complete module sheaves",
+   "results": "8 hits; VectorField.mpullback_smul_apply, VectorField.mpullbackWithin_smul, Submodule.comap_smul, VectorField.mpullback_smul, VectorField.mpullbackWithin_smul_apply, Submodule.comap_smul', Submodule.comap_le_comap_smul, LocallyConstant.comapₗ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed coefficient scalar square together with the adjoint scalar equation and complete derived pullback linearity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Linear\"",
+   "results": "1 hits; SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed coefficient scalar square together with the adjoint scalar equation and complete derived pullback linearity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback by a scheme automorphism is linear over a constant ring acting on a completed inverse limit coefficient sheaf",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackId, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed coefficient scalar square together with the adjoint scalar equation and complete derived pullback linearity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of constant coefficient sheaf maps under an equivalence of sites and scalar linearity of an adjoint functor on derived module categories",
+   "results": "8 hits; SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, CondensedMod.hom_naturality_apply, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed coefficient scalar square together with the adjoint scalar equation and complete derived pullback linearity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-tensor-product",
@@ -73,5 +218,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-completed-coefficient-pullback-linearity",
+  "worker": "stage1",
+  "summary": "Proved the actual completed coefficient scalar square after every quotient projection; derived its adjunct and section formula; proved direct-image linearity sectionwise and specified-left-adjoint linearity by its unit; reused exact ringed transport, derived linearity and automorphism completion comparison. No new nodes or statement changes.",
+  "blueprint": "Realizes the second sentence of def-wf-tensor-product, coefficient transport for tensor Frobenius, and the parent split step wfCompletePullback_linear.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Uses only its exact-equivalence assertion for a ringed-topos equivalence; this generic exactness tool is not supplied by a node of the tensor-Frobenius unit."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Steps 1 and 5 take its inverse-image equivalence, limit comparison and constant-ring naturality for the automorphism e; no node of this unit gives them."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Steps 3-4 take the specified module pullback and its Hom bijection with the c_e^#-linear direct image; generic, no unit substitute."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Steps 1 and 5 take the projection identity and invertibility of the completed coefficient map c_e; generic, no unit substitute."
+   },
+   {
+    "node": "lem-pur-ringed-derived-pullback-linear",
+    "why": "Step 7 takes A-linearity of the K-flat derived pullback given a scalar-preserving structure map; generic, no unit substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-pur-ringed-derived-pullback-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-9ed5989df",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-9ed5989df (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps, no new nodes), every cited statement, the datum, inverse-image, completed-pullback and completion nodes, and the blueprint def-wf-tensor-product. Stacks labels checked: 09A5, 0H7J, 03D7, 03CR. No SGA. The statement adds no hypothesis and is not weakened. Steps 2-6 are correct as delivered: the adjunct identity s;c^#=ρ;e_*s gives (c^#)_U(s_U(b))=s_{u_e(U)}(b); direct image is linear sectionwise; the left adjoint is linear via α(h)=ζ;G(h) and injectivity; exactness comes from ringed-presentation transport; the Mathlib leaves give derived linearity. Three repairable faults, fixed in fixes/dag/nodes/sec-six-functors/lem-sf-completed-coefficient-pullback-linearity.json. (1) C4/E4: c_{P_n} was cited from lem-weil-proetale-isomorphism-inverse-image clause 3, which covers only constant sheaves, while the datum's (P_n)_X is the Cont(π_0) sheafification. The statement and Steps 1 and 5 now cite lem-weil-pbc-profinite-coefficient-inverse-image for the identification, the projection identity π_n c_e=c_{P_n}e^{-1}π_n and invertibility (stmt_dep added). (2) E5: Step 7 identified the termwise derived functor of Step 6 with the K-flat 'ordinary derived pullback' of lem-sf-automorphism-completion-unit-comparison without argument. The statement now names Le^* [lem-weil-pbc-ringed-topoi-derived-pullback], and Step 7 proves its A-linearity by lem-pur-ringed-derived-pullback-linear; that node's scalar hypothesis is Step 2 on the final object. (3) C8: off-unit tool uses were undeclared. Added declarations for isomorphism-inverse-image, ringed-topoi-module-adjunction, profinite-coefficient-inverse-image and ringed-derived-pullback-linear; all are accepted as generic tools, since the unit cites nothing. No cycle: the closures of the new citations contain neither the item nor its parent. Advisory: lem-sbc-completed-operations-linear-natural-exchange (O_E, completed pullback) overlaps but is not a duplicate. Small cases checked: e=id, I=A, the zero ring, I=0 with the empty tuple, b=0 or 1.; 1 file(s) fixed by the reviewer"
  }
 }
