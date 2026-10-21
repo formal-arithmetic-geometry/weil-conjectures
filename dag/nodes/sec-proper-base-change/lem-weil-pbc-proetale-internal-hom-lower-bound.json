@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-proetale-internal-hom-lower-bound",
+ "kind": "statement",
+ "title": "Cohomological lower bound for pro-etale internal Hom",
+ "statement": "Let T be a scheme [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site], and R an arbitrary commutative ring sheaf. Use module sheaves [def-weil-sheaf-of-modules-category], their ordinary unbounded derived category [def-weil-abstract-derived-category] and internal Hom [def-pur-derived-internal-hom], with the size convention [def-weil-size-convention]. If K is in D^{≤b} and M in D^{≥N} for integers b,N in the standard t-structure [def-sbc-standard-tstructure-derived-category], then Rℋom_R(K,M) is in D^{≥N-b}. No constructibility, Noetherian, rational-coefficient or dimension hypothesis is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.3.14, boundedness argument; Stacks Tag 08JA"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-size-convention",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The independent-universe module category is Grothendieck by [prop-pur-kinjective-resolutions-exist]. Choose a representative L of K vanishing above b and a representative P of M vanishing below N using [def-sbc-standard-tstructure-derived-category]. Resolve P by injectives with the same bound N using Mathlib CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective, the cochain version of [lem-weil-pbc-dplus-injective-representative]. The resulting I is K-injective. The independent-universe comparison of [def-pur-derived-internal-hom] identifies Rℋom(K,M) with Q Hom(L,I).",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.3.14, boundedness argument; Stacks Tag 08JA"
+   }
+  },
+  {
+   "text": "The product projections [lem-sc-hom-complex-projections] identify the degree n term with the product of Hom(L^p,I^{p+n}). For n<N-b, either p>b, so L^p=0, or p≤b, so p+n<N and I^{p+n}=0. The defining sectionwise pre/postcomposition formula shows internal Hom with a zero source or target is zero. A product of zero objects is zero. Thus the Hom complex vanishes below N-b, and transport through its representative isomorphism gives the desired cohomological bound.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.3.14, boundedness argument; Stacks Tag 08JA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-pur-derived-internal-hom",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.3.14, boundedness argument; Stacks Tag 08JA; D4 representative-level formalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a bounded above complex to a bounded below complex is bounded below by the difference of the bounds",
+   "results": "8 hits: CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.isZero_of_isGE, CochainComplex.HomComplex, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, HomologicalComplex.instHasFiniteLimits, CochainComplex.HomComplex_d_hom_apply",
+   "date": "2026-10-21",
+   "verdict": "No direct match; returned general derived-category or ordinary sheaf infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf Hom complex of a bounded above complex into a bounded below injective complex vanishes below the difference of the bounds",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.isKInjective_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKInjective_of_injective_aux, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-21",
+   "verdict": "No direct match; returned general derived-category or ordinary sheaf infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Bb]ound|homComplex.*[Ss]trictly|isGE.*[Hh]om",
+   "results": "8 hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Topology/Convenient/GeneratedBy.lean, Mathlib/Topology/Convenient/Category.lean, Mathlib/Topology/Convenient/Category.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct match; returned general derived-category or ordinary sheaf infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness",
+  "date": "2026-10-21",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; precise integral and rational coefficient realization needed for that passage",
+   "via": [
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ProEtaleInternalHomLowerBound",
+  "file": "lean/Sheaf/Algebra/Homology/ProEtaleInternalHomLowerBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_internalHom_isGE",
+  "statement": "theorem proEtale_internalHom_isGE (T : Scheme.{u})\n    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})\n    [HasDerivedCategory (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))]\n    (K M : DerivedCategory (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))\n    (b N : ℤ) [K.IsLE b] [M.IsGE N] :\n    ((derivedInternalHomOfUniverses.{u + 1, u, u + 1}\n      (ProEt.topology T) R).obj (op K, M)).IsGE (N - b)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261021T014213-L-2386750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261021T014213-L-2386750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

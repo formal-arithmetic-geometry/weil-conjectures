@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-adic-derived-sections-bounded-below-coproducts",
+ "kind": "statement",
+ "title": "Integral derived global sections preserve uniformly bounded-below coproducts",
+ "statement": "Let T be a quasi-compact quasi-separated scheme [def-pc-scheme] [def-weil-pbc-quasi-compact-scheme] [def-weil-pbc-scheme-conventions], R an arbitrary commutative ring sheaf on its pro-etale site [def-weil-pbc-proetale-site], A a commutative ring and φ:A→Γ(T,R) a scalar homomorphism. Use the ordinary module derived categories [def-weil-abstract-derived-category] with the size convention [def-weil-size-convention]. Assume these localizations are chosen and the source has K-injective resolutions [def-pur-kinjective-complex]. Let F be evaluation at the terminal object followed by scalar restriction along φ, with its canonical additive structure. Given a small family M_i with a common integer cohomological lower bound N [def-sbc-standard-tstructure-derived-category], the unbounded right derived functor RF preserves its coproduct. In particular this applies to the completed integral global sections functor [def-weil-pbc-adic-global-derived-hom]. No rational-algebra structure or constancy assumption on R is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.3.14(1); Stacks Tags 09A2 and 09A3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-adic-global-derived-hom",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved coefficient-general helper qcqs_evaluation_preservesCoproducts in the implementation of [lem-weil-pbc-proetale-module-cohomology-coproducts]. Its proof uses the affine weakly contractible hypercover and evaluation-colimit theorems; unlike that node's public direct-image theorem, this helper has no rational-algebra hypothesis. Evaluation is at a terminal pro-etale object, whose scheme is isomorphic to T and hence qcqs. Restriction of scalars along A→R(T) is both a left and a right adjoint, so exact and coproduct preserving. The proved helper rightDerivedExactCompIso gives coproduct preservation of every classical right derived functor of A-valued global sections.",
+   "uses": [
+    "lem-weil-pbc-proetale-module-cohomology-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.3.14(1); Stacks Tags 09A2 and 09A3"
+   }
+  },
+  {
+   "text": "The independent-universe Grothendieck theorem [prop-pur-kinjective-resolutions-exist] gives enough injectives. Choose injective representatives E_i vanishing below the common bound N, using [def-sbc-standard-tstructure-derived-category] and [lem-weil-pbc-dplus-injective-representative]. The termwise coproduct E has the same lower bound. For q>0 its terms satisfy R^qΓ(E^n)=⊕_i R^qΓ(E_i^n)=0 by step 1 and injectivity. Thus its terms are Γ-acyclic. Apply the already proved coefficient-general helpers unit_of_acyclic and uniformCoproduct in [lem-weil-pbc-proetale-bounded-below-coproducts]: they identify derived Γ of this termwise coproduct with termwise Γ and prove preservation of the coproduct of QE_i. These helpers also do not assume rational coefficients. Transport the resulting preservation instance through the chosen diagram isomorphism QE_i≅M_i.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-proetale-bounded-below-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.3.14(1); Stacks Tags 09A2 and 09A3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-module-cohomology-coproducts",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-proetale-bounded-below-coproducts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.3.14(1); Stacks Tags 09A2 and 09A3; D4 representative-level formalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on a quasi compact quasi separated pro etale site preserve uniformly bounded below coproducts of module sheaves",
+   "results": "8 hits: CategoryTheory.HasGlobalSectionsFunctor, CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal, CategoryTheory.Sheaf.instHasFiniteCoproducts, CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.preservesColimit_Γ, SheafOfModules.sections",
+   "date": "2026-10-21",
+   "verdict": "No direct match; returned general derived-category or ordinary sheaf infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left exact functor whose higher derived functors preserve coproducts preserves uniformly bounded below coproducts on the derived category",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-21",
+   "verdict": "No direct match; returned general derived-category or ordinary sheaf infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Cc]oproduct|rightDerived.*[Pp]reserves[Cc]olimit",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No direct match; returned general derived-category or ordinary sheaf infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness",
+  "date": "2026-10-21",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; precise integral and rational coefficient realization needed for that passage",
+   "via": [
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicDerivedGlobalSectionsCoproducts",
+  "file": "lean/Sheaf/Paper/AdicDerivedGlobalSectionsCoproducts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_derivedGlobalSections_boundedBelow_preservesColimit",
+  "statement": "theorem proEtale_derivedGlobalSections_boundedBelow_preservesColimit\n    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]\n    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})\n    {A : Type (u + 1)} [CommRing A]\n    (φ : A →+* R.obj.obj (op (⊤_ T.ProEt)))\n    [HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} A)]\n    [HasDerivedCategory (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))]\n    [Abelian.HasKInjectiveResolutions (SheafOfModules.{u + 1}\n      ((sheafCompose (ProEt.topology T)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))]\n    (I : Type (u + 1)) (M : I → DerivedCategory (SheafOfModules.{u + 1}\n      ((sheafCompose (ProEt.topology T)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))\n    (N : ℤ) (hM : ∀ i, (M i).IsGE N) :\n    letI : (SheafOfModules.evaluation.{u + 1} ((sheafCompose (ProEt.topology T)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)\n        (op (⊤_ T.ProEt))).Additive := ⟨by intros; rfl⟩\n    PreservesColimit (Discrete.functor M)\n      ((SheafOfModules.evaluation.{u + 1} ((sheafCompose (ProEt.topology T)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) (op (⊤_ T.ProEt)) ⋙\n          ModuleCat.restrictScalars φ).rightDerivedFunctor)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261021T014213-L-2386750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261021T014213-L-2386750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
