@@ -20283,3 +20283,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:11 L: merged deliver/Q01/lem-weil-pbc-lisse-e-constructible-integral-lattice (reviewer FIX; after a return; new nodes: 4)
 - 2026-10-21T04:11:41Z L: superseded stage-1 delivery Q13/lem-sp-proetale-scalar-tensor-normalization at 377723e71fca40f5b548b57897640d653724d434; current completion retained; packet archived at refs/superseded/Q13/lem-sp-proetale-scalar-tensor-normalization/377723e71fca40f5b548b57897640d653724d434; stale return retired.
 - 04:11 L: merged deliver/NS/lem-weil-pbc-coherent-affine-base-change-edge-naturality (reviewer FIX; first push; new nodes: 2)
+- 04:11 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
