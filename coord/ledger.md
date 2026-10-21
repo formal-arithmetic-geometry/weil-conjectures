@@ -23582,3 +23582,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:51 L: merged deliver/Q10/lem-trf-point-system-transport-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 19:51 L: merged deliver/NB/lem-sfb-algcl-countable-closed-finite-cover (stage 2; reviewer PASS; parallel immutable checks)
 - 19:51 L: merged deliver/Q02/lem-sfb-prime-to-ell-derived-invariants-reduction (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T19:52:30Z L: superseded stage-1 delivery NL/lem-sfb-normed-scalar-profinite-hom-acyclic at a6156469fb4d55de79f7f1eac588691ada5d4679; current completion retained; packet archived at refs/superseded/NL/lem-sfb-normed-scalar-profinite-hom-acyclic/a6156469fb4d55de79f7f1eac588691ada5d4679; stale return retired.
