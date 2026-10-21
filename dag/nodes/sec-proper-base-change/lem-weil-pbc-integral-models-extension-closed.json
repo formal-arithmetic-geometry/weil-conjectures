@@ -18,9 +18,92 @@
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the coefficient rings before using scalar extension. The canonical isomorphisms of [lem-weil-pbc-continuous-coefficients-immersion-restriction] identify $A_X$ with $\\varprojlim_n(A/\\varpi^n)_X$ and identify the actual inclusion $A_X\\to E_X$ with $A_X\\to A_X[1/\\varpi]$. Thus [lem-weil-pbc-scalar-localization-sheaf-exact], with $R=A_X$ and $s=\\varpi$, says that $S_X=E_X\\otimes_{A_X}-$ is an exact additive functor on the ambient abelian categories of module sheaves. The coefficient identifications apply because $X$ is noetherian; the localization exactness lemma has no additional geometric hypothesis.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-scalar-localization-sheaf-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+   }
+  },
+  {
+   "text": "Write the given sequence as $\\mathcal E:0\\to S_XQ\\xrightarrow{u}F\\xrightarrow{v}S_XP\\to0$. By [lem-weil-pbc-ext-one-extension-classification] it has a class $\\xi\\in\\operatorname{Ext}^1_{E_X}(S_XP,S_XQ)$. Surjectivity in the hypothesis supplies a preimage. Every element of the localized module is a fraction by [def-weil-pbc-module-localization-away], so choose $m\\geq0$ and $\\alpha\\in\\operatorname{Ext}^1_{A_X}(P,Q)$ with $\\xi=\\varpi^{-m}S_X(\\alpha)$. Consequently $S_X(\\alpha)=\\varpi^m\\xi$. This uses the specified scalar-extension map, rather than an unspecified isomorphism of Ext groups.",
+   "uses": [
+    "lem-weil-pbc-ext-one-extension-classification",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+   }
+  },
+  {
+   "text": "Apply the surjective direction of [lem-weil-pbc-ext-one-extension-classification] in the ambient category of $A_X$-module sheaves to $\\alpha$. Obtain an actual short exact sequence $\\mathcal A:0\\to Q\\xrightarrow{i}N\\xrightarrow{p}P\\to0$ whose connecting class is $\\alpha$. This assertion does not yet claim constructibility of $N$; that is checked separately in the next step.",
+   "uses": [
+    "lem-weil-pbc-ext-one-extension-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+   }
+  },
+  {
+   "text": "To verify the required notion of constructibility, use the completed-ring isomorphism in [lem-weil-pbc-continuous-coefficients-immersion-restriction]. The complexes $Q[0]$ and $P[0]$ satisfy condition (iii) of [lem-weil-pbc-integral-stratified-perfect-characterization]: they are bounded, their sole cohomology sheaves are $Q,P$, and their finite stratifications with local models $A_X\\otimes_A M$ are exactly those in the hypothesis. Here the coefficient restriction to each stratum agrees with the continuous coefficient ring by the same immersion-restriction lemma. Regard $\\mathcal A$ as a degreewise short exact sequence of degree-zero complexes. By [lem-weil-pbc-complex-ses-triangle] it gives a distinguished triangle $Q[0]\\to N[0]\\to P[0]\\to Q[0][1]$. The full subcategory in the characterization is closed under shifts and cones, hence contains $N[0]$ as well (rotate this triangle to $P[0][-1]\\to Q[0]\\to N[0]$). Applying condition (iii) back to $N[0]$ proves that $N$ is continuous-constructible with ordinary finitely presented $A$-module local models. The finite-extension, noetherian, finite-dimensional, and invertibility hypotheses of the characterization are precisely assumed here; no local freeness or torsion-freeness of $P,Q$ is used.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+   }
+  },
+  {
+   "text": "Exactness from step 1 sends $\\mathcal A$ to $0\\to S_XQ\\xrightarrow{S_Xi}S_XN\\xrightarrow{S_Xp}S_XP\\to0$. By the exact-functor compatibility in [lem-weil-pbc-ext-one-extension-classification], its class is $S_X(\\alpha)=\\varpi^m\\xi$. Define another short exact sequence $\\mathcal E_m$ with the same middle and quotient sheaves as $\\mathcal E$, but inclusion $u_m=u\\circ(\\varpi^{-m}\\operatorname{id}_{S_XQ})$. It is short exact because the scalar factor is an automorphism. The triple $(\\varpi^m\\operatorname{id}_{S_XQ},\\operatorname{id}_F,\\operatorname{id}_{S_XP})$ is a morphism $\\mathcal E\\to\\mathcal E_m$, since $u_m\\circ\\varpi^m=u$ and $v\\circ\\operatorname{id}_F=\\operatorname{id}_{S_XP}\\circ v$. Naturality of the connecting morphism in [lem-weil-pbc-complex-ses-triangle], applied to the corresponding degree-zero complexes, gives $[\\mathcal E_m]=(\\varpi^m\\operatorname{id}_{S_XQ})[1]\\circ\\xi=\\varpi^m\\xi$. Scalar multiplication here is postcomposition by the shifted scalar map, the usual module action on derived Ext.",
+   "uses": [
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+   }
+  },
+  {
+   "text": "The rationalization of $\\mathcal A$ and $\\mathcal E_m$ now have the same endpoints and the same degree-one Ext class. The injective direction of [lem-weil-pbc-ext-one-extension-classification] gives an isomorphism $h:S_XN\\xrightarrow{\\sim}F$ with $h\\circ S_Xi=u_m$ and $v\\circ h=S_Xp$. The constructibility of $N$ was proved in step 4, so this is the requested integral model. The formula for $u_m$ explains exactly why the result asserts no compatibility with the originally prescribed inclusion $u$.",
+   "uses": [
+    "lem-weil-pbc-ext-one-extension-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +153,45 @@
    "results": "[grep] OK 0 hit(s); searched Mathlib/CategoryTheory",
    "date": "2026-10-21",
    "verdict": "no match: zero hits in the relevant Mathlib subdirectory"
+  },
+  {
+   "tool": "grep",
+   "query": "(integralModel|integral.model|constructible).*(extension|Ext)|Ext.*(integralModel|integral.model)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection of Ext/ExtClass.lean and Ext/Map.lean gives class naturality and exact-functor compatibility, but no constructible integral-model existence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of rationalized constructible valuation ring sheaves has an integral model when its Ext one class has a denominator",
+   "results": "OK 8 hits: Valuation.Integers.isIntegrallyClosed_integers, ValuationSubring.isIntegral_of_mem_ringOfIntegers, Valuation.HasExtension.instIsTorsionFreeInteger, Valuation.HasExtension.ofComapInteger, Valuation.HasExtension.mk, Valuation.HasExtension.instIsLocalHomValuationInteger, Valuation.Integers.isIntegrallyClosed, Valuation.HasExtension.id",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection of Ext/ExtClass.lean and Ext/Map.lean gives class naturality and exact-functor compatibility, but no constructible integral-model existence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"extClass\"",
+   "results": "OK 11 hits: CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.ShortComplex.ShortExact.extClass_hom, CategoryTheory.ShortComplex.ShortExact.extClass_naturality, CategoryTheory.ShortComplex.ShortExact.comp_extClass_assoc, CategoryTheory.ShortComplex.ShortExact.extClass_comp_assoc, CategoryTheory.ShortComplex.ShortExact.comp_extClass, CategoryTheory.ShortComplex.ShortExact.extClass_comp, postcomp_extClass_surjective_of_projective_X₂",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection of Ext/ExtClass.lean and Ext/Map.lean gives class naturality and exact-functor compatibility, but no constructible integral-model existence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of localized Ext one under scalar extension gives an integral constructible model for an extension of rationalized sheaves",
+   "results": "OK 8 hits: surjective_of_isLocalized_span, IsLocalizedModule.map_surjective, SheafOfModules.LocalGeneratorsData.X, AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, ModuleCat.Tilde.exists_const, surjective_of_isLocalized_maximal, LocalizedModule.map_surjective",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection of Ext/ExtClass.lean and Ext/Map.lean gives class naturality and exact-functor compatibility, but no constructible integral-model existence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an exact linear functor and a surjective localized Ext1 map, its essential image on an extension closed subcategory is closed under extensions",
+   "results": "OK 8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.HasExt.standard, CategoryTheory.HasExt",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection of Ext/ExtClass.lean and Ext/Map.lean gives class naturality and exact-functor compatibility, but no constructible integral-model existence theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
@@ -94,5 +212,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-integral-models-extension-closed",
+  "worker": "stage1",
+  "summary": "Expanded the explicit Ext denominator hypothesis into an integral extension, verified its continuous constructibility through the existing stratified derived characterization, and rescaled the rational inclusion with the correct inverse power before applying degree-one extension classification. Reused existing nodes only; statement unchanged.",
+  "blueprint": "Historical integral-lattice sentence of thm-weil-pbc-finite-extension, through lem-weil-pbc-lisse-e-constructible-integral-lattice: realizes the final extension-closure argument of Bhatt-Scholze Lemma 6.8.13. The current main-20261015 finite-extension node has no such lattice proof; this item retains its recorded historical ancestry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-9023fab8c",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-9023fab8c (reviewer sub-agent of L); spot-checked: I read all six steps and the statements of every cited node, plus Bhatt–Scholze Def 6.8.10, Prop 6.8.11(1),(3) and Lemma 6.8.13 (last paragraph). Shape: one commit with the item and the report, no new nodes. The item is unsplit in live and side-live, not on the dropped list, has no repair note, and has no base proof, so the re-split rule does not apply. Every cited statement is in unit sk-thm-properbasechange; def-weil-pbc-module-localization-away is only a notion; no SGA is cited. proof_deps equals the union of the step uses. Step 1: the immersion-restriction node gives A_X≅lim(A/ϖⁿ)_X and the canonical A_X[1/ϖ]≅E_X, so the scalar-localization lemma (R=A_X, s=ϖ) makes S_X exact. Step 2: surjectivity of the specified map and the fraction form give ξ=ϖ^{-m}S_X(α). Step 3: the classification node, applied to α in Mod(A_X), gives 0→Q→N→P→0. Step 4: P[0] and Q[0] satisfy (iii) of the stratified characterization, whose hypotheses are all in the item. The ses-triangle node and closure under shifts and cones put N[0] in the subcategory, so N is constructible. Step 5: the exact-functor clause gives class ϖ^mξ. With u_m=u∘ϖ^{-m}, (ϖ^m,id,id) is a morphism E→E_m, and triangleOfSES naturality gives [E_m]=ϖ^m[1]∘ξ. The classification node's boundary is the same triangleOfSES δ (its steps 4–5, extClass_hom), and the direction of the rescaling is correct. Step 6: the injective half of classification gives S_XN≅F. Edge cases m=0, ξ=0, torsion α, P=0 or Q=0 and empty X are fine. The DAG search (rg -L for '6.8.13' and 'closed under extensions'+constructible) found no node stating this criterion. No changes, no tool_uses."
  }
 }
