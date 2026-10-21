@@ -22,22 +22,41 @@
  ],
  "proof": [
   {
-   "text": "Expand the definition of picardDirectImageDerivedTranspose. Its argument under the pinned inverse Hom equivalence is e.inv followed by zeta followed by B. Reassociate this to (e.inv followed by zeta) followed by B. Apply Adjunction.homEquiv_naturality_left_symm to factor out derived pullback of the normalized section. The remaining inverse Hom equivalence applied to B is precisely tau. No square composition or source restriction is involved.",
+   "text": "Unfold picardDirectImageDerivedTranspose, picardCoefficientTranspose and picardDerivedUnitNormalization. The normalized transpose is the pinned inverse Hom equivalence applied to e.inv followed by zeta followed by the canonical coefficient base-change morphism B. The same normalization and coefficient maps occur in the proposed factorization.",
    "uses": [
     "def-sc-picard-direct-image-derived-transpose",
-    "lem-pc-module-pullback-adjunction"
+    "def-sc-picard-derived-unit-normalization",
+    "def-sc-picard-coefficient-transpose"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private transpose_three_maps lemma now follows directly by rewriting Category.assoc backwards on a followed by zeta, then applying Mathlib Adjunction.homEquiv_naturality_left_symm. Apply it to factor out derived pullback of the normalized section. This removes the former explicit congrArg and equality-transitivity construction and does not need backward definition unfolding.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify the remaining transpose with the counit presentation of the coefficient transpose. Expand coefficientCounitTranspose_eq, tensorSingleCoefficientMap_eq and tensorCoefficientComparison_eq. Apply the retained proved typed coefficientMate_evaluation helper: inverse Hom naturality in the target moves the coefficient map outside, the counit formula and schemeDerivedMate_evaluation evaluate the base-change mate, and reassociation closes the equality. No composition theorem or inversion of a coefficient map is used. Zero modules, identity maps and empty schemes are included.",
+   "uses": [
+    "def-sc-tensor-single-coefficient-map",
+    "def-sc-tensor-coefficient-comparison",
+    "lem-pc-scheme-derived-mate-evaluation"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-picard-direct-image-derived-transpose",
-  "lem-pc-module-pullback-adjunction"
+  "def-sc-picard-derived-unit-normalization",
+  "def-sc-picard-coefficient-transpose",
+  "def-sc-tensor-single-coefficient-map",
+  "def-sc-tensor-coefficient-comparison",
+  "lem-pc-scheme-derived-mate-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 08HY; naturality of the Hom equivalence"
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 08HY; direct Mathlib inverse-Hom naturality followed by the existing canonical base-change mate evaluation and coefficient defining equations"
  },
  "mathlib_searches": [
   {
@@ -107,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T201738-L-3965222",
-  "kind": "interface",
+  "landing": "20261021T100941-L-4177378",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}

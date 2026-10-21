@@ -30,8 +30,7 @@ private theorem transpose_three_maps
     {A B E : C} {N : D} (a : B ⟶ A) (ζ : A ⟶ E) (b : E ⟶ G.obj N) :
     (adj.homEquiv B N).symm (a ≫ ζ ≫ b) =
       F.map (a ≫ ζ) ≫ (adj.homEquiv E N).symm b := by
-  exact (congrArg (adj.homEquiv B N).symm (Category.assoc a ζ b).symm).trans
-    (adj.homEquiv_naturality_left_symm (a ≫ ζ) b)
+  rw [← Category.assoc a ζ, adj.homEquiv_naturality_left_symm]
 
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -51,7 +50,6 @@ private theorem coefficientMate_evaluation
   rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_counit,
     schemeDerivedMate_evaluation, Category.assoc]
 
-set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 500000 in
 -- Keep the explicitly constructed coefficient comparison folded.
 /-- The normalized transpose factors through the coefficient transpose.
