@@ -20743,3 +20743,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:39 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 - 07:39 L: returned deliver/Q126/def-nagata-strict-transform-closed-chart-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-strict-transform-closed-chart-model: cited )
 - 07:39 L: returned deliver/NZ/sk-lem-nagata-sketch-dense-valuative (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-nagata-sketch-dense-valuative: cited node lemma)
+- 07:39 L: returned deliver/NM/lem-weil-pbc-strict-perfect-ringed-pullback-model (reviewer RETURN: L: independent stage-2 immutable head 5178b4c19696: file-only compilation failed: private overlay Sheaf.Paper.RingedTopo)

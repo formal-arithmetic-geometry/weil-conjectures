@@ -77,7 +77,19 @@ L: independent stage-2 immutable head 02300fc54238: H3. F1: IsClopenIntegralRest
 
 L: independent stage-2 immutable head 41ca8225942b: Compiles clean (nt_compile 5.0 s, no warnings); no hollow defs or proofs. RETURN for substance. H3: conclusion is a bare Nonempty iso per (M,N); the node's canonical iso natural in M,N and compatible with finite reduction, scalar extension and shifts is missing; state the natural iso (upstream derivedHomRightDerivedLowerShriekIsoOfFinite) with CommShift and coefficient-change squares. H3/H4/H7: only finite Λ, silently dropping the O_E, E and Q̄_ℓ stages the node and proof steps 2/6/15 cover, and M,N use the étale slopmaster2 constructibleFiniteTor instead of the node's pro-étale Dctf (landed WeilConjectures.finiteTorConstructible/…Integral/finiteTorFieldCoefficientCategory, stage interface in Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients); restate on those, adding landed stmt_deps. H3/H9: finite-type instances on free aX, aY unrelated to the X.Over structure used by f.IsOver; use X ↘ Spec (.of D.k) as in hasCompactification_of_finiteType_over_field, which also discharges HasCompactification f. H8: docstring lacks the 15 proof steps. H9 rule 7: none of the 41 landed proof-dependency modules imported. H11: second reading missed all of these.
 
+## lem-weil-pbc-strict-perfect-ringed-pullback-model (2026-10-21 07:39 UTC, branch head 5178b4c1969)
 
+L: independent stage-2 immutable head 5178b4c19696: file-only compilation failed: private overlay Sheaf.Paper.RingedTopoiDerivedPullbackOfUniverses
 
+[10.5 s]
+preliminary Sheaf.Paper.RingedTopoiDerivedPullbackOfUniverses
 
+[10.5 s]
+sandbox Sheaf.Stage2.Sandbox0
 
+[10.6 s]
+library Sheaf.Paper.RingedTopoiDerivedPullbackOfUniverses
+
+[10.5 s]
+sandbox Sheaf.Stage2.Sandbox1
+timeout after 60 s: the fault is usually a definition that is expensive to unfold, not the limit
