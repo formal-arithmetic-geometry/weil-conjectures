@@ -21,9 +21,57 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-proetale-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n\\geq1$, the definition of $D^b_c(X,R)$ makes $K_n$ and $L_n$ bounded constructible. The image of $\\ell$ in $k$ is nonzero since $\\ell\\ne p$, and its inverse in $k$ maps under the structure morphism to an inverse on $X$; thus $\\ell$ is invertible on $X$. Apply [lem-coef-integral-residue-tor] first to $K$ with $[a,b]=[\\alpha,\\beta]$ and then to $L$ with $[a,b]=[\\gamma,\\epsilon]$. Its hypotheses are exactly integral constructibility and the two given level-one cohomology bounds. It gives Tor amplitude $[\\alpha,\\beta]$ for every $K_n$ and $[\\gamma,\\epsilon]$ for every $L_n$, over their respective $B_n$. Together with bounded constructibility, these are the defining conditions for $K_n,L_n\\in D^b_{ctf}(X,A_n)$ [def-weil-finite-tor-amplitude].",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-coef-integral-residue-tor",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+    "place": "Sentence 2: input reductions are finite-Tor, retaining the residue intervals"
+   }
+  },
+  {
+   "text": "Fix an arbitrary $n\\geq1$. Apply the pro-etale clause of [cor-weil-finite-constructible-hom] to the coefficient stage $A=A_n$, the separated finite-type scheme $X$, the supplied bound $\\dim X\\leq d$, and the objects $K_n,L_n$ from step 1. Take $(a,b,c,e)=(\\alpha,\\beta,\\gamma,\\epsilon)$ in its quantitative clause. It gives that $T_n=R\\mathcal Hom_{B_n}(K_n,L_n)$ is bounded constructible and has Tor amplitude in $[\\gamma-\\beta-2d,\\epsilon-\\alpha+2d]=I$. This is on the given pro-etale site and over $B_n$, as required. The endpoints depend only on the four supplied residue bounds and on $d$, so the same interval works for all $n$.",
+   "uses": [
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+    "place": "Sentence 3: constructibility and the uniform finite internal-Hom interval"
+   }
+  },
+  {
+   "text": "Test the Tor-amplitude assertion of step 2 against the $B_n$-module sheaf $B_n$ placed in degree zero [def-weil-proetale-tor-amplitude]. The derived tensor in this test is $T_n\\otimes^L_{B_n}B_n\\cong T_n$: with the K-flat representative $P$ used in [def-weil-derived-tensor], the termwise maps $P\\otimes_{B_n}B_n\\to P$, $x\\otimes r\\mapsto rx$, and $P\\to P\\otimes_{B_n}B_n$, $x\\mapsto x\\otimes1$, are inverse chain maps by the tensor balancing relation and $B_n$-linearity of the differential. Thus $\\mathcal H^i(T_n)=0$ for $i\\notin I$. This argument applies to every $n\\geq1$.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+    "place": "Final sentence: the uniform cohomological-support condition follows by the tensor-unit test"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-integral-residue-tor",
+  "def-weil-finite-tor-amplitude",
+  "cor-weil-finite-constructible-hom",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+  "place": "Sentences 2–4: residue-Tor control followed by finite internal Hom; tensor-unit calculation written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,10 +121,52 @@
    "results": "8 hits: localCohomology.diagram; localCohomology; localCohomology.ofSelfLERadical; localCohomology.ofDiagram; LightCondensed.instIsGrothendieckAbelianLightCondMod; AdicCompletion.map_exact; CondensedMod.IsSolid; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
    "date": "2026-10-21",
    "verdict": "no match: returned declarations concern ordinary homological complexes, local cohomology, adic completion of modules, constructible subsets, or uniform topological spaces; none gives finite-level sheaf internal-Hom estimates from integral residue cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(torAmplitude|TorAmplitude)|constructible.*(internalHom|derivedHom)|uniform.*[Hh]om",
+   "results": "25 hits: Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/ModularForms/EisensteinSeries/UniformConvergence.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/Topology/Algebra/Algebra/Equiv.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern generic derived-category support, local cohomology, condensed limits, quasicoherent presentations or unrelated uniform-space bounds; none proves the residue-controlled finite sheaf internal-Hom estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniform bounds for finite quotient derived internal Hom of constructible integral adic sheaves",
+   "results": "8 hits: instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; WithIdeal.instIsUniformAddGroup; instHasFiniteLimitsCondensed; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; ModularGroup.exists_bound_of_subgroup_invariant; ModularGroup.exists_bound_of_invariant; MonoidHomClass.uniformContinuous_of_bound",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern generic derived-category support, local cohomology, condensed limits, quasicoherent presentations or unrelated uniform-space bounds; none proves the residue-controlled finite sheaf internal-Hom estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\", \"Hom\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern generic derived-category support, local cohomology, condensed limits, quasicoherent presentations or unrelated uniform-space bounds; none proves the residue-controlled finite sheaf internal-Hom estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform finite coefficient sheaf derived internal Hom Tor amplitude bounds from residue cohomology of integral adic complexes",
+   "results": "8 hits: localCohomology.diagram; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isGE_Q_obj_iff; CochainComplex.cm5b.instIsStrictlyGEI; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern generic derived-category support, local cohomology, condensed limits, quasicoherent presentations or unrelated uniform-space bounds; none proves the residue-controlled finite sheaf internal-Hom estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|derivedHom|internalHom|constructible",
+   "results": "0 hits:  (Mathlib subdirectory: Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern generic derived-category support, local cohomology, condensed limits, quasicoherent presentations or unrelated uniform-space bounds; none proves the residue-controlled finite sheaf internal-Hom estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible sheaf complexes finite Tor dimension closed under derived internal Hom with a cohomological dimension bound",
+   "results": "8 hits: DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.TStructure.t; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern generic derived-category support, local cohomology, condensed limits, quasicoherent presentations or unrelated uniform-space bounds; none proves the residue-controlled finite sheaf internal-Hom estimate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-coef-integral-internal-hom",
@@ -93,5 +183,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-residue-controlled-finite-homs",
+  "worker": "stage1",
+  "summary": "Expanded the finite-level estimate into residue-controlled input Tor bounds, the existing finite internal-Hom theorem, and an explicit tensor-unit test for cohomological support. Reused existing nodes throughout; no new nodes, statement changes, or integral-Hom reconstruction.",
+  "blueprint": "Realizes cor-coef-integral-internal-hom.proof.md sentences 2–3 and the finite-level support condition in its final sentence, before integral reconstruction."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-86f5dffda",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-86f5dffda (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. Shape: one commit holding the item and the report, with no new nodes. Statement, stmt_deps, blueprint and source are unchanged from side-live, where the item is still unsplit, so the delivery is not superseded. The item is not on the route-pivot dropped list and has no repair note. There is no cycle: the item is not in the closure of its proof_deps. The route is exactly sentences 2–3 of the main-20261015 cor-coef-integral-internal-hom.proof.md: residue-Tor lemma, then the finite internal-Hom corollary. Both cited nodes are in the item's own unit sk-prop-sf-biduality-general, so no tool_uses are needed. Step 1: lem-coef-integral-residue-tor's hypotheses hold. ℓ is invertible on a k-scheme because char k = p ≠ ℓ. K is integral D^b_c. Its K_n is K⊗^L over the completed coefficient sheaf with (A_n)_X, the same object as the item's K_n since B is that completed sheaf. The level-one cohomology bounds are given. So every K_n and L_n has the same Tor interval at every level, and with bounded constructibility from def-weil-derived-complete-integral-detailed this is D^b_ctf(X,A_n) by def-weil-finite-tor-amplitude. Step 2: the pro-étale clause of cor-weil-finite-constructible-hom has the same coefficient ring A_n, the same pro-étale site and the same hypotheses (separated, finite type, dim ≤ d). With (a,b,c,e) = (α,β,γ,ε) its quantitative clause gives exactly I = [γ−β−2d, ε−α+2d], with no n in the endpoints. Step 3: testing the Tor amplitude against B_n in degree 0 gives the support condition. It is elementary, with the unit isomorphism written out on a K-flat representative. Small cases: K = L = R/ϖ over a point gives [α,β] = [−1,0], and RHom(K_n,K_n) lies in [−1,1] = I, so the bound holds and is sharp. I also checked d = 0 (the perfect-complex duality bound), n = 1, X = ∅ and zero inputs. No SGA source is cited, and there are no duplicates. No changes or fixes."
  }
 }
