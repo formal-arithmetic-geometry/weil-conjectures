@@ -21975,3 +21975,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: returned deliver/NQ/sk-thm-picard-rr (reviewer RETURN: L: independent stage-2 immutable head 2b5c537b83d2: Statement maths matches the node on every clause and edge case (cano)
 - 09:38 L: merged deliver/NR/lem-weil-pbc-integral-coefficient-presentation-comparison (stage 2; reviewer FIX; parallel immutable checks)
 - 09:38 L: returned deliver/W4/Sheaf.Paper.IntegralComparisonSequenceSystems (reviewer RETURN: (reviewer C-6ca8d, head 6ca8dc27d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralCompar)
+- 09:39 L: returned deliver/R9/Sheaf.Paper.IntegralStratifiedPerfectCharacterization (reviewer RETURN: (reviewer C-a2e0d, head a2e0d2bee) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralStrati)
