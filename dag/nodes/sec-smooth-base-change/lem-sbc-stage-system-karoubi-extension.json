@@ -1,0 +1,164 @@
+{
+ "id": "lem-sbc-stage-system-karoubi-extension",
+ "kind": "lemma",
+ "title": "Supported Karoubi extension of stage systems",
+ "statement": "Let I be a preorder and C_i,D_i be families of categories. A scalar StageSystem [lem-sbc-coherent-pair-functor-descent] S on C_i has a StageSystem karSystem S on Kar(C_i) [def-weil-karoubi-envelope], with transitions functorExtension₂.obj S.T and associators functorExtension₂.mapIso S.assoc. Every StageSystem.Morphism F : S → T extends with stage functors functorExtension₂.obj F.Φ and comparisons functorExtension₂.mapIso F.β. Every compatible Hom extends with stage transformations functorExtension₂.map α.τ. These constructions satisfy the cocycle, morphism coherence and Hom commutation equations. The supported functor of an additive functor is additive. If the raw transition functors at identities are literal identities and F.β(id) is identity, the supported comparisons are identities as well. All these constructions and component formulas transport along equalities from karSystem S,T to other presentations of the same systems; KarMorphismSpec records the object, β and unit formulas.",
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "sbc-def-base-change-square",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-karoubi-envelope"
+ ],
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "proof": [
+  {
+   "text": "Apply functorExtension₂ to all transitions and associators. Whiskering by the identity-projector inclusion is fully faithful, so the raw cocycle proves the extended cocycle. The same argument proves morphism and Hom coherence.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On underlying arrows the extension is F.map, hence additive. If both transitions are equal to identity and the comparison is HEq to refl, substitute the endpoint equalities and apply mapIso_refl.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-karoubi-envelope",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStageRationalExchangeCoherence",
+  "date": "2026-10-22",
+  "group": "Y9"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-finite-stage-rational-exchange-coherence",
+   "place": "Supported Karoubi extension of stage systems",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StageSystemKaroubi",
+  "file": "lean/Sheaf/CategoryTheory/StageSystemKaroubi.lean",
+  "declaration": "CategoryTheory.StageSystem.karSystem",
+  "statement": "def karSystem (S : StageSystem C) : StageSystem (fun i ↦ Karoubi (C i))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-22",
+  "declarations": [
+   "CategoryTheory.StageSystem.karSystem",
+   "CategoryTheory.StageSystem.karMorphism",
+   "CategoryTheory.StageSystem.karHom",
+   "CategoryTheory.Idempotents.extension_additive",
+   "CategoryTheory.Idempotents.mapIso_unit",
+   "CategoryTheory.Idempotents.extension_map_heq",
+   "CategoryTheory.StageSystem.castMorphism",
+   "CategoryTheory.StageSystem.castMorphism_obj",
+   "CategoryTheory.StageSystem.castMorphism_beta",
+   "CategoryTheory.StageSystem.castHom",
+   "CategoryTheory.StageSystem.castHom_tau",
+   "CategoryTheory.StageSystem.system_ext",
+   "CategoryTheory.StageSystem.castKarMorphism_obj",
+   "CategoryTheory.StageSystem.castKarMorphism_beta",
+   "CategoryTheory.StageSystem.castKarMorphism_unit",
+   "CategoryTheory.StageSystem.castKarHom_tau",
+   "CategoryTheory.StageSystem.KarMorphismSpec",
+   "CategoryTheory.StageSystem.karMorphism_exists",
+   "CategoryTheory.StageSystem.karHom_exists"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding_map\", \"CategoryTheory.Idempotents.app_p_comm\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map_app_f\", \"CategoryTheory.Idempotents.app_p_comm_assoc\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.obj_map_f\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding\"], \"digest\": \"a943c3a809969f14\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\"], \"digest\": \"3cdde3b7c01c360f\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "karSystem|karMorphism|karHom",
+   "results": "{\"t\": \"2026-10-21T15:20:29Z\", \"tool\": \"grep\", \"query\": \"karSystem|karMorphism|karHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons",
+   "results": "{\"t\": \"2026-10-21T16:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"4ae61133a892d36d\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilConjectures.pbcScalarCompletedExchange",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"loogle\", \"query\": \"WeilConjectures.pbcScalarCompletedExchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeilConjectures.pbcScalarCompletedExchange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"grep\", \"query\": \"sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes",
+   "results": "{\"t\": \"2026-10-21T16:18:40Z\", \"tool\": \"leansearch\", \"query\": \"Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.functorExtension\\u2081\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.functorExtension\\u2081_map\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.obj\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map_app_f\", \"CategoryTheory.Idempotents.functorExtension\", \"CategoryTheory.Idempotents.Karoubi.coe\", \"CategoryTheory.Idempotents.functorExtension\\u2081_obj\"], \"digest\": \"978dd74f457914f3\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides functorExtension₂; the explicit normalized stage-system coherence is not a separate matched theorem."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "independent cc review: Y9 delivery bff0ec9e (verbatim move of 4 defs into FiniteStageRationalExchangeData, checked by diff against the live item; proved Karoubi extension and assemblies; 2 sorry raw halves) against node lem-sbc-finite-stage-rational-exchange-coherence and its original HasCoherence statement; 8-module sandbox compile rc 0 with #print axioms"
+ }
+}

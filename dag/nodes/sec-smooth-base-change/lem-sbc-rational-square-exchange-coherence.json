@@ -1,0 +1,139 @@
+{
+ "id": "lem-sbc-rational-square-exchange-coherence",
+ "kind": "lemma",
+ "title": "Supported extension of raw square exchange coherence",
+ "statement": "Fix a prime l and an algebraic closure Ω of Q_l. Index coefficients by the finite intermediate fields E of Ω/Q_l, as in [def-weil-finite-subextension-directed-set]. Let f : X → S, g : T → S, h : Y → X and e : Y → T be a chosen cartesian square [sbc-def-base-change-square], with all four schemes noetherian and of finite topological Krull dimension and with l invertible on each. Use the completed coefficient systems of [def-sbc-ambient-complete-coefficient-categories] and the operations and predicates of [def-sbc-finite-stage-rational-exchange-data]. For each of f,g,h,e, suppose integral comparisons pPush,pPull and raw scalar-system morphisms rPush,rPull are given, satisfying HasOperationCoherence. All the raw square conclusions of [lem-sbc-rational-raw-square-exchange-coherence] hold, and there are additionally Karoubi system morphisms extending F and G and a compatible Hom extending their canonical raw exchange. Their object functors, comparison isomorphisms and transformation components are functorExtension₂.obj, mapIso and map of the corresponding raw data; both Karoubi morphisms are additive and their reflexive comparisons are identities. This is precisely the square portion of HasCoherence.",
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "sbc-def-base-change-square",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-sbc-finite-stage-rational-exchange-data",
+  "lem-sbc-rational-raw-square-exchange-coherence"
+ ],
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "proof": [
+  {
+   "text": "Obtain the raw composite morphisms and all their normalization equations from rationalRawSquareExchangeCoherence. Extend both by completeKarMorphism and the compatible exchange by completeKarHom. Additivity follows on underlying arrows and raw normalized units persist by completeKarMorphism_unit. Transport the equality of the raw τ family through functorExtension₂.map using equality of both endpoint functors.",
+   "uses": [
+    "lem-sbc-rational-raw-square-exchange-coherence",
+    "lem-sbc-finite-stage-karoubi-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-rational-raw-square-exchange-coherence",
+  "lem-sbc-finite-stage-karoubi-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStageRationalExchangeCoherence",
+  "date": "2026-10-22",
+  "group": "Y9"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-finite-stage-rational-exchange-coherence",
+   "place": "Supported extension of raw square exchange coherence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalSquareExchangeCoherence",
+  "file": "lean/Sheaf/Paper/RationalSquareExchangeCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.rationalSquareExchangeCoherence",
+  "statement": "theorem rationalSquareExchangeCoherence\n    (cf_pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) f ⋙\n        pbcAmbientCompleteIntegralTransition l Ω S a ≅\n      pbcAmbientCompleteIntegralTransition l Ω X a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) f)\n    (cf_pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) f ⋙\n        pbcAmbientCompleteIntegralTransition l Ω X a ≅\n      pbcAmbientCompleteIntegralTransition l Ω S a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) f)\n    (cf_rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω X)\n    (pbcAmbientCompleteRawSystem l Ω S))\n    (cf_rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω S)\n    (pbcAmbientCompleteRawSystem l Ω X))\n    (cg_pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) g ⋙\n        pbcAmbientCompleteIntegralTransition l Ω S a ≅\n      pbcAmbientCompleteIntegralTransition l Ω T a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) g)\n    (cg_pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) g ⋙\n        pbcAmbientCompleteIntegralTransition l Ω T a ≅\n      pbcAmbientCompleteIntegralTransition l Ω S a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) g)\n    (cg_rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)\n    (pbcAmbientCompleteRawSystem l Ω S))\n    (cg_rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω S)\n    (pbcAmbientCompleteRawSystem l Ω T))\n    (ch_pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) h ⋙\n        pbcAmbientCompleteIntegralTransition l Ω X a ≅\n      pbcAmbientCompleteIntegralTransition l Ω Y a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) h)\n    (ch_pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) h ⋙\n        pbcAmbientCompleteIntegralTransition l Ω Y a ≅\n      pbcAmbientCompleteIntegralTransition l Ω X a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) h)\n    (ch_rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω Y)\n    (pbcAmbientCompleteRawSystem l Ω X))\n    (ch_rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω X)\n    (pbcAmbientCompleteRawSystem l Ω Y))\n    (ce_pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) e ⋙\n        pbcAmbientCompleteIntegralTransition l Ω T a ≅\n      pbcAmbientCompleteIntegralTransition l Ω Y a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) e)\n    (ce_pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) e ⋙\n        pbcAmbientCompleteIntegralTransition l Ω Y a ≅\n      pbcAmbientCompleteIntegralTransition l Ω T a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) e)\n    (ce_rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω Y)\n    (pbcAmbientCompleteRawSystem l Ω T))\n    (ce_rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)\n    (pbcAmbientCompleteRawSystem l Ω Y))\n    (hf : HasOperationCoherence l Ω f cf_pPush cf_pPull cf_rPush cf_rPull)\n    (hg : HasOperationCoherence l Ω g cg_pPush cg_pPull cg_rPush cg_rPull)\n    (hh : HasOperationCoherence l Ω h ch_pPush ch_pPull ch_rPush ch_rPull)\n    (he : HasOperationCoherence l Ω e ce_pPush ce_pPull ce_rPush ce_rPull) :\n  ∃ (rawF : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)\n    (pbcAmbientCompleteRawSystem l Ω X)),\n  ∃ (rawG : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)\n    (pbcAmbientCompleteRawSystem l Ω X)),\n  ∃ (_rawF_eq : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    rawF.Φ E = sbcRationalLeft l (pbcFiniteField.{u} l Ω E) (f := f) (g := g)),\n  ∃ (_rawG_eq : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    rawG.Φ E = sbcRationalRight l (pbcFiniteField.{u} l Ω E) (e := e) (h := h)),\n  ∃ (_rawF_additive : ∀ (E : Padic.FiniteCoefficientFields l Ω), (rawF.Φ E).Additive),\n  ∃ (_rawG_additive : ∀ (E : Padic.FiniteCoefficientFields l Ω), (rawG.Φ E).Additive),\n  ∃ (_rawF_unit : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    HEq (rawF.β (le_refl E)) (Iso.refl (rawF.Φ E))),\n  ∃ (_rawG_unit : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    HEq (rawG.β (le_refl E)) (Iso.refl (rawG.Φ E))),\n  ∃ (_rawF_composite : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)\n      (K : pbcAmbientCompleteStage l Ω T E),\n    HEq ((rawF.β a).hom.app K)\n      ((cf_rPull.β a).hom.app ((cg_rPush.Φ E).obj K) ≫\n        (cf_rPull.Φ M).map ((cg_rPush.β a).hom.app K))),\n  ∃ (_rawG_composite : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)\n      (K : pbcAmbientCompleteStage l Ω T E),\n    HEq ((rawG.β a).hom.app K)\n      ((ch_rPush.β a).hom.app ((ce_rPull.Φ E).obj K) ≫\n        (ch_rPush.Φ M).map ((ce_rPull.β a).hom.app K))),\n  ∃ (_rawF_normalization : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)\n      (K : PbcComplete l (pbcFiniteField.{u} l Ω E) T),\n    HEq ((rawF.β a).hom.app ((pbcAmbientCompleteLocalization l Ω T E).obj K))\n      ((pbcAmbientCompleteIntegralComparison l Ω X a).hom.app\n          ((sbcPull l (pbcFiniteField.{u} l Ω E) f).obj\n            ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K)) ≫\n        (pbcAmbientCompleteLocalization l Ω X M).map\n          ((cf_pPull a).hom.app\n              ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K) ≫\n            (sbcPull l (pbcFiniteField.{u} l Ω M) f).map\n              ((cg_pPush a).hom.app K)) ≫\n        (sbcRationalLeft l (pbcFiniteField.{u} l Ω M)\n          (f := f) (g := g)).map\n          ((pbcAmbientCompleteIntegralComparison l Ω T a).inv.app K))),\n  ∃ (_rawG_normalization : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)\n      (K : PbcComplete l (pbcFiniteField.{u} l Ω E) T),\n    HEq ((rawG.β a).hom.app ((pbcAmbientCompleteLocalization l Ω T E).obj K))\n      ((pbcAmbientCompleteIntegralComparison l Ω X a).hom.app\n          ((sbcPush l (pbcFiniteField.{u} l Ω E) h).obj\n            ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K)) ≫\n        (pbcAmbientCompleteLocalization l Ω X M).map\n          ((ch_pPush a).hom.app\n              ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K) ≫\n            (sbcPush l (pbcFiniteField.{u} l Ω M) h).map\n              ((ce_pPull a).hom.app K)) ≫\n        (sbcRationalRight l (pbcFiniteField.{u} l Ω M)\n          (h := h) (e := e)).map\n          ((pbcAmbientCompleteIntegralComparison l Ω T a).inv.app K))),\n  ∃ (rawAlpha : StageSystem.Morphism.Hom rawF rawG),\n  ∃ (_rawAlpha_eq : ∀ (E : Padic.FiniteCoefficientFields l Ω), HEq (rawAlpha.τ E)\n    (sbcRationalExchange l (pbcFiniteField.{u} l Ω E) sq)),\n  ∃ (karF : StageSystem.Morphism (pbcAmbientCompleteSystem l Ω T)\n    (pbcAmbientCompleteSystem l Ω X)),\n  ∃ (karG : StageSystem.Morphism (pbcAmbientCompleteSystem l Ω T)\n    (pbcAmbientCompleteSystem l Ω X)),\n  ∃ (_karF_eq : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    karF.Φ E = (functorExtension₂ _ _).obj (rawF.Φ E)),\n  ∃ (_karG_eq : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    karG.Φ E = (functorExtension₂ _ _).obj (rawG.Φ E)),\n  ∃ (_karF_additive : ∀ (E : Padic.FiniteCoefficientFields l Ω), (karF.Φ E).Additive),\n  ∃ (_karG_additive : ∀ (E : Padic.FiniteCoefficientFields l Ω), (karG.Φ E).Additive),\n  ∃ (_karF_beta : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    HEq (karF.β a) ((functorExtension₂ _ _).mapIso (rawF.β a))),\n  ∃ (_karG_beta : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    HEq (karG.β a) ((functorExtension₂ _ _).mapIso (rawG.β a))),\n  ∃ (_karF_unit : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    HEq (karF.β (le_refl E)) (Iso.refl (karF.Φ E))),\n  ∃ (_karG_unit : ∀ (E : Padic.FiniteCoefficientFields l Ω),\n    HEq (karG.β (le_refl E)) (Iso.refl (karG.Φ E))),\n  ∃ (karAlpha : StageSystem.Morphism.Hom karF karG),\n  ∀ (E : Padic.FiniteCoefficientFields l Ω), HEq (karAlpha.τ E)\n    ((functorExtension₂ _ _).map (sbcRationalExchange l (pbcFiniteField.{u} l Ω E) sq))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding_map\", \"CategoryTheory.Idempotents.app_p_comm\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map_app_f\", \"CategoryTheory.Idempotents.app_p_comm_assoc\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.obj_map_f\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding\"], \"digest\": \"a943c3a809969f14\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\"], \"digest\": \"3cdde3b7c01c360f\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "karSystem|karMorphism|karHom",
+   "results": "{\"t\": \"2026-10-21T15:20:29Z\", \"tool\": \"grep\", \"query\": \"karSystem|karMorphism|karHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons",
+   "results": "{\"t\": \"2026-10-21T16:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"4ae61133a892d36d\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilConjectures.pbcScalarCompletedExchange",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"loogle\", \"query\": \"WeilConjectures.pbcScalarCompletedExchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeilConjectures.pbcScalarCompletedExchange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"grep\", \"query\": \"sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes",
+   "results": "{\"t\": \"2026-10-21T16:18:40Z\", \"tool\": \"leansearch\", \"query\": \"Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.functorExtension\\u2081\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.functorExtension\\u2081_map\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.obj\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map_app_f\", \"CategoryTheory.Idempotents.functorExtension\", \"CategoryTheory.Idempotents.Karoubi.coe\", \"CategoryTheory.Idempotents.functorExtension\\u2081_obj\"], \"digest\": \"978dd74f457914f3\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides functorExtension₂; the explicit normalized stage-system coherence is not a separate matched theorem."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "independent cc review: Y9 delivery bff0ec9e (verbatim move of 4 defs into FiniteStageRationalExchangeData, checked by diff against the live item; proved Karoubi extension and assemblies; 2 sorry raw halves) against node lem-sbc-finite-stage-rational-exchange-coherence and its original HasCoherence statement; 8-module sandbox compile rc 0 with #print axioms"
+ }
+}

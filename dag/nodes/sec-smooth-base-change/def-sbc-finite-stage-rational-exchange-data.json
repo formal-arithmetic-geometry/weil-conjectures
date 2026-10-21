@@ -1,0 +1,138 @@
+{
+ "id": "def-sbc-finite-stage-rational-exchange-data",
+ "kind": "definition",
+ "title": "Data for finite-stage rational exchange coherence",
+ "statement": "Fix a prime l and an algebraic closure Ω of Q_l. Index coefficients by the finite intermediate fields E of Ω/Q_l, as in [def-weil-finite-subextension-directed-set]. Use the integral completed operations of [lem-sbc-completed-operations-linear-natural-exchange] and the ambient coefficient systems of [def-sbc-ambient-complete-coefficient-categories]. Define rawPull(E,q) and rawPush(E,q) by the Hom scalar localization of sbcPull and sbcPush at the uniformizer. For a morphism q : U → V of noetherian finite-dimensional schemes with l invertible on U,V, HasOperationCoherence is the explicit predicate asserting the specified integral tensor/model comparisons and units, the additive raw scalar-system morphisms with normalized β and units, and their supported Karoubi morphisms with the same formulas and units. HasRawOperationCoherence is exactly its integral/raw part, before either Karoubi morphism. For a cartesian square of four noetherian finite-dimensional schemes, HasCoherence packages four HasOperationCoherence witnesses and the raw and Karoubi composite comparisons, their integral/raw normalizations and compatible canonical exchange. The four existing definitions are moved verbatim, with their full formulas in the Lean declarations; only the raw-prefix predicate is new.",
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "sbc-def-base-change-square",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "proof": [
+  {
+   "text": "These are explicit definitions, copied verbatim from the parent. The raw prefix omits only the subsequent supported Karoubi clauses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Lines 1191-1228, 1262-1279 and 1291-1321; explicit semilinear localization and supported-idempotent calculations for the finite-stage coherence required in the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding_map\", \"CategoryTheory.Idempotents.app_p_comm\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map_app_f\", \"CategoryTheory.Idempotents.app_p_comm_assoc\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.obj_map_f\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding\"], \"digest\": \"a943c3a809969f14\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\"], \"digest\": \"3cdde3b7c01c360f\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "karSystem|karMorphism|karHom",
+   "results": "{\"t\": \"2026-10-21T15:20:29Z\", \"tool\": \"grep\", \"query\": \"karSystem|karMorphism|karHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons",
+   "results": "{\"t\": \"2026-10-21T16:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"4ae61133a892d36d\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilConjectures.pbcScalarCompletedExchange",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"loogle\", \"query\": \"WeilConjectures.pbcScalarCompletedExchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeilConjectures.pbcScalarCompletedExchange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"grep\", \"query\": \"sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes",
+   "results": "{\"t\": \"2026-10-21T16:18:40Z\", \"tool\": \"leansearch\", \"query\": \"Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.functorExtension\\u2081\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.functorExtension\\u2081_map\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.obj\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map_app_f\", \"CategoryTheory.Idempotents.functorExtension\", \"CategoryTheory.Idempotents.Karoubi.coe\", \"CategoryTheory.Idempotents.functorExtension\\u2081_obj\"], \"digest\": \"978dd74f457914f3\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides functorExtension₂; the explicit normalized stage-system coherence is not a separate matched theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStageRationalExchangeCoherence",
+  "date": "2026-10-22",
+  "group": "Y9"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-finite-stage-rational-exchange-coherence",
+   "place": "The unchanged coherence predicates and their raw prefix",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteStageRationalExchangeData",
+  "file": "lean/Sheaf/Paper/FiniteStageRationalExchangeData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasRawOperationCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.rawPull",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.rawPush",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasRawOperationCoherence",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasOperationCoherence",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasCoherence"
+  ],
+  "statement": "def HasRawOperationCoherence\n    (pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙\n        pbcAmbientCompleteIntegralTransition l Ω V a ≅\n      pbcAmbientCompleteIntegralTransition l Ω U a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) q)\n    (pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) q ⋙\n        pbcAmbientCompleteIntegralTransition l Ω U a ≅\n      pbcAmbientCompleteIntegralTransition l Ω V a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) q)\n    (rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω U)\n    (pbcAmbientCompleteRawSystem l Ω V))\n    (rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω V)\n    (pbcAmbientCompleteRawSystem l Ω U))\n    : Prop",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "independent cc review: Y9 delivery bff0ec9e (verbatim move of 4 defs into FiniteStageRationalExchangeData, checked by diff against the live item; proved Karoubi extension and assemblies; 2 sorry raw halves) against node lem-sbc-finite-stage-rational-exchange-coherence and its original HasCoherence statement; 8-module sandbox compile rc 0 with #print axioms"
+ }
+}

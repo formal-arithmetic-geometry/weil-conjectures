@@ -1,0 +1,190 @@
+{
+ "id": "lem-sbc-raw-operation-coherence",
+ "kind": "lemma",
+ "title": "Integral and raw coherence of one operation pair",
+ "statement": "Fix a prime l and an algebraic closure Ω of Q_l. Index coefficients by the finite intermediate fields E of Ω/Q_l, as in [def-weil-finite-subextension-directed-set]. Let q : U → V be a morphism of noetherian schemes of finite topological Krull dimension, with l invertible on both schemes. Use the actual completed operations of [lem-sbc-completed-operations-linear-natural-exchange], the ambient completed integral, raw rational and Karoubi coefficient systems of [def-sbc-ambient-complete-coefficient-categories], and the predicates of [def-sbc-finite-stage-rational-exchange-data]. There exist the integral comparison isomorphisms pPush and pPull and raw scalar-system morphisms rPush and rPull satisfying HasRawOperationCoherence. Thus the comparisons are exactly the scalar direct-image mate and completed pullback comparison transported by the specified ordinary/strict-tower model isomorphisms, with integral tensor-unit equations; the raw functors equal the scalar localizations of sbcPush and sbcPull, are additive, and their β are the normalized localizations of these integral comparisons. Their β satisfy the scalar tower equations and are identities at equal coefficient fields. No Karoubi extension is concluded.",
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "sbc-def-base-change-square",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-sbc-finite-stage-rational-exchange-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "proof": [
+  {
+   "text": "On each integral category $\\mathcal B_E(W)$, [lem-sbc-completed-operations-linear-natural-exchange] supplies the actual additive $\\mathcal O_E$-linear functors $P_E^u,D_E^u$ and the natural transformation $\\alpha_E^{\\mathrm{int}}:P_E^fD_E^g\\Rightarrow D_E^hP_E^e$. Its statement supplies naturality on every integral arrow, and identifies this transformation with the completed canonical mate. Thus the integral input here is defined on all derived-complete objects; neither a constructible restriction nor invertibility of the exchange is needed.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1218-1228: integral linear operations and their ambient extensions; specified integral mate"
+   }
+  },
+  {
+   "text": "For fixed $E$, apply the additive/semilinear part of [lem-pur-semilinear-scalar-localization] to each operation, taking $R=S=\\mathcal O_E$, $t=u=\\varpi_E$ and the identity coefficient homomorphism. By [lem-weil-l-adic-integers-localization-uniformizer], the localized coefficient ring is $E$, so its formula is $H^{\\mathrm{raw}}(v\\otimes c)=H(v)\\otimes c$. Apply its natural-transformation clause to $\\alpha_E^{\\mathrm{int}}$. The resulting component is $\\alpha_E^{\\mathrm{int}}(K)\\otimes1$, natural for every raw arrow. Its composition clause identifies the two extended composites with $F_E^{\\mathrm{raw}}$ and $G_E^{\\mathrm{raw}}$.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1193-1194 and 1218-1228: central localization of integral operations and exchange"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-scalar-extension], for each $E\\subset M$ the actual tensor functors $C_{M/E,W}$ preserve ambient completeness and carry the specified natural isomorphisms $p^u,d^u$. That statement gives their compatibility with successive coefficient extensions and identities. Write $H_E:\\mathcal B_E(A)\\to\\mathcal B_E(B)$ for either an individual operation and $b^H_{M/E}:C^B_{M/E}H_E\\to H_MC^A_{M/E}$ for its specified comparison. With integral tensor associators $a^A,a^B$, this successive-extension compatibility reads\n$$b^H_{P/E}(a^B_{P,M,E}H_E)=(H_Pa^A_{P,M,E})(b^H_{P/M}C^A_{M/E})(C^B_{P/M}b^H_{M/E}).$$\nUse the tensor-unit maps to identify $C_{E/E}$ with the identity, as required by [def-sbc-ambient-complete-coefficient-categories]; the identity comparison becomes $1_{H_E}$. The tower equation remains this equation under those identifications, by substitution of the tensor-unit isomorphisms on both sides. These are the specified tensor comparisons, rather than a new choice of isomorphisms.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1297-1321: actual integral tensor, tensor-unit normalization and associators"
+   }
+  },
+  {
+   "text": "For $E\\subset M$, integral tensor $C_{M/E,W}$ is semilinear for $\\mathcal O_E\\to\\mathcal O_M$: tensoring $av$ gives the same arrow as multiplication by the image of $a$ on the tensor, by the balancing relation. The image of $\\varpi_E$ is nonzero in the field $M$ and hence invertible; [lem-weil-l-adic-integers-localization-uniformizer] identifies $\\mathcal O_M[1/\\varpi_M]$ with $M$. Apply [lem-pur-semilinear-scalar-localization] to $C$, and to the composite functors at the two ends of $p^u,d^u$. This gives exactly the raw scalar transition of [def-sbc-ambient-complete-coefficient-categories], $v\\otimes c\\mapsto C(v)\\otimes c$ for $c\\in E\\subset M$. The same lemma localizes $p^u,d^u$, their inverses, the tensor associators, the unit equations and the operation tower equations of step 3; its preservation of whiskering and composition ensures these are equations with the actual extended operations.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1300-1321: localization between different coefficient rings and normalized coherent comparisons"
+   }
+  },
+  {
+   "text": "Proof: compare the two coefficient sheaf maps on every finite quotient and use\nuniqueness of the inverse-limit map. Transport the direct-image scalar mate by\nconjugateIsoEquiv and completed pullback by its unit-normalized strict-tower model.\nLift these comparisons and their inverses through the full complete subcategories.\nTheir inverse laws follow by faithfulness of the inclusions. The normalized\ncoefficient identity comparison, conjugated by the two model isomorphisms, gives\npPush(id); its composite with the source tensor unit is the target tensor unit.\nThe same argument with the completed pull comparison gives pPull(id). For three\nfields, expand the two successive comparisons. Naturality moves the intervening\nmodel maps, their inverses cancel, and the published scalar coefficient-tower\nequations identify the remaining path with the single comparison through the\ncanonical tensor associator.\nLocalize the two comparisons and their inverses, conjugating by the specified\nintegral/raw tensor comparisons, including the equal-field tensor-unit branch.\nEvery raw object is integral and every arrow is a fraction of an integral arrow,\nso these components determine the localized comparisons and all their equations.\nThe localized naturality and coefficient-tower equations give the raw system morphisms:\napply the source localization to each integral tower equation and substitute the\nnormalization of the raw associator. The adjacent inverse integral/raw comparisons\ncancel. At E=M substitute the integral unit equations and the equal-field\nnormalization of the integral/raw comparison; the resulting beta components are\nidentities. Every raw object is Q(K), so extensionality gives HEq beta refl.\nAdditivity follows directly on the tensor Hom maps.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-semilinear-scalar-localization",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "prop-weil-pbc-scalar-extension",
+  "def-sbc-ambient-complete-coefficient-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Parent proof steps 1 and 3: integral comparison composites, rationalization and finite-stage Karoubi extension; sketch32 lines 1191-1228, 1262-1279 and 1291-1321"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStageRationalExchangeCoherence",
+  "date": "2026-10-22",
+  "group": "Y9"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-finite-stage-rational-exchange-coherence",
+   "place": "Integral and raw coherence of one operation pair",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRawOperationCoherence",
+  "file": "lean/Sheaf/Paper/RationalRawOperationCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.rationalRawOperationCoherence",
+  "statement": "theorem rationalRawOperationCoherence :\n  ∃ (pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙\n        pbcAmbientCompleteIntegralTransition l Ω V a ≅\n      pbcAmbientCompleteIntegralTransition l Ω U a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) q),\n  ∃ (pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) q ⋙\n        pbcAmbientCompleteIntegralTransition l Ω U a ≅\n      pbcAmbientCompleteIntegralTransition l Ω V a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) q),\n  ∃ (rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω U)\n    (pbcAmbientCompleteRawSystem l Ω V)),\n  ∃ (rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω V)\n    (pbcAmbientCompleteRawSystem l Ω U)),\n    HasRawOperationCoherence l Ω q pPush pPull rPush rPull",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of indexed categories with coherent transition comparisons induces a morphism of Karoubi completed indexed categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding_map\", \"CategoryTheory.Idempotents.app_p_comm\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map_app_f\", \"CategoryTheory.Idempotents.app_p_comm_assoc\", \"CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.obj_map_f\", \"CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding\"], \"digest\": \"a943c3a809969f14\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful",
+   "results": "{\"t\": \"2026-10-21T15:08:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful\"], \"digest\": \"3cdde3b7c01c360f\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "karSystem|karMorphism|karHom",
+   "results": "{\"t\": \"2026-10-21T15:20:29Z\", \"tool\": \"grep\", \"query\": \"karSystem|karMorphism|karHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons",
+   "results": "{\"t\": \"2026-10-21T16:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"Completed sheaf pullback and pushforward commute with changing finite padic coefficient fields, including normalized identity and tower comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"4ae61133a892d36d\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilConjectures.pbcScalarCompletedExchange",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"loogle\", \"query\": \"WeilConjectures.pbcScalarCompletedExchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeilConjectures.pbcScalarCompletedExchange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "grep",
+   "query": "sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration",
+   "results": "{\"t\": \"2026-10-21T16:04:25Z\", \"tool\": \"grep\", \"query\": \"sbcExchange.*[Ss]calar|[Ss]calar.*sbcExchange|pbcAmbientComplete.*[Oo]peration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact result for the specified coefficient systems; use the componentwise extension API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes",
+   "results": "{\"t\": \"2026-10-21T16:18:40Z\", \"tool\": \"leansearch\", \"query\": \"Coherent scalar extension systems of functors and natural transformations extend to Karoubi envelopes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.functorExtension\\u2081\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map\", \"CategoryTheory.Idempotents.functorExtension\\u2081_map\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.obj\", \"CategoryTheory.Idempotents.FunctorExtension\\u2081.map_app_f\", \"CategoryTheory.Idempotents.functorExtension\", \"CategoryTheory.Idempotents.Karoubi.coe\", \"CategoryTheory.Idempotents.functorExtension\\u2081_obj\"], \"digest\": \"978dd74f457914f3\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides functorExtension₂; the explicit normalized stage-system coherence is not a separate matched theorem."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bff0e",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261021T214924-L-1893365",
+  "kind": "interface",
+  "note": "independent cc review: Y9 delivery bff0ec9e (verbatim move of 4 defs into FiniteStageRationalExchangeData, checked by diff against the live item; proved Karoubi extension and assemblies; 2 sorry raw halves) against node lem-sbc-finite-stage-rational-exchange-coherence and its original HasCoherence statement; 8-module sandbox compile rc 0 with #print axioms"
+ }
+}
