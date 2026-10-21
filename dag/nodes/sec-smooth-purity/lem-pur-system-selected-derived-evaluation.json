@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-system-selected-derived-evaluation",
+ "kind": "statement",
+ "title": "Derived evaluation of the subsequence left extension",
+ "statement": "For every m, the derived subsequence extension evaluated at m is naturally the derived tensor extension of evaluation at t_r(m) along B_r(t_r(m))→B_m. Its inverse comparison followed by the evaluated map intertwines the scalar derived Hom transpose with the actual subsequence adjunction transpose, selected-evaluation comparison, and actual derived transition from r(t_r(m)) to m.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [EssentiallySmall.{w} C]\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) (m : ℕ)\ntheorem systemSelectedDerivedTranspose\n    (P : DerivedCategory (StrictRingSystem (selectedSystemRings B r)))\n    (M : DerivedCategory (StrictRingSystem B))\n    (f : (systemSelectedDerivedExtension B r S T).derived.obj P ⟶ M) :\n    (systemDerivedTensorAdj S B (systemNextSelected_spec r m).1).homEquiv\n      ((derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).obj P)\n      ((derivedSystemEvaluation B m).obj M)\n      ((systemSelectedDerivedBelow B r m S T).inv.app P ≫\n        (derivedSystemEvaluation B m).map f) =\n    (derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).map\n      ((systemSelectedDerivedExtension B r S T).adjunction.homEquiv P M f) ≫\n      (systemDerivedSubsequenceEvaluation B r (systemNextSelected r m)).hom.app M ≫\n      (systemDerivedTransition B (systemNextSelected_spec r m).1).app M\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-selected-derived-extension",
+  "lem-pur-system-scalar-derived-extension",
+  "lem-pur-extension-evaluation-comparison",
+  "lem-pur-system-derived-transition",
+  "lem-pur-system-derived-subsequence"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "The right selected-evaluation square is exact selected evaluation followed by the actual derived transition. Its cochain representative is the same strict transition by the two factorization equations. The ordinary tensor comparison satisfies the unit-mate identity by the ordinary selected transpose theorem. The simultaneous componentwise flat-term K-flat resolving class is sent by evaluation into the scalar resolving class. Apply the general normalized evaluation-mate isomorphism theorem and its Hom transpose formula.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-selected-derived-extension",
+    "lem-pur-system-scalar-derived-extension",
+    "lem-pur-extension-evaluation-comparison",
+    "lem-pur-system-derived-transition",
+    "lem-pur-system-derived-subsequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-selected-derived-extension",
+  "lem-pur-system-scalar-derived-extension",
+  "lem-pur-extension-evaluation-comparison",
+  "lem-pur-system-derived-transition",
+  "lem-pur-system-derived-subsequence"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'_unit",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]ate|mate.*derived|derived.*[Ss]quare|derivedη_fac_app",
+   "date": "2026-10-21",
+   "results": "4 matching lines. /Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:30:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103:lemma derivedη_fac_app (X₁ : C₁) :\n/Mathlib/CategoryTheory/Abelian/RightDerived.lean:43:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Abelian/LeftDerived.lean:42:  material enters mathlib: derived categories, injective/projective derivability",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Derived evaluation of the subsequence left extension. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSelectedDerivedEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/SystemSelectedDerivedEvaluation.lean",
+  "declaration": "SheafOfModules.systemSelectedDerivedTranspose",
+  "declarations": [
+   "SheafOfModules.systemSelectedDerivedSquare_rep",
+   "SheafOfModules.systemSelectedOrdinaryUnitSquare",
+   "SheafOfModules.systemSelectedDerivedBelow",
+   "SheafOfModules.systemSelectedDerivedTranspose"
+  ],
+  "statement": "theorem systemSelectedDerivedTranspose\n    (P : DerivedCategory (StrictRingSystem (selectedSystemRings B r)))\n    (M : DerivedCategory (StrictRingSystem B))\n    (f : (systemSelectedDerivedExtension B r S T).derived.obj P ⟶ M) :\n    (systemDerivedTensorAdj S B (systemNextSelected_spec r m).1).homEquiv\n      ((derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).obj P)\n      ((derivedSystemEvaluation B m).obj M)\n      ((systemSelectedDerivedBelow B r m S T).inv.app P ≫\n        (derivedSystemEvaluation B m).map f) =\n    (derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).map\n      ((systemSelectedDerivedExtension B r S T).adjunction.homEquiv P M f) ≫\n      (systemDerivedSubsequenceEvaluation B r (systemNextSelected r m)).hom.app M ≫\n      (systemDerivedTransition B (systemNextSelected_spec r m).1).app M",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-derived-mate-comparison",
+ "kind": "statement",
+ "title": "Cochain representative formula for normalized derived mates",
+ "statement": "For two ordinary adjunctions and their normalized derived adjunctions, assume comparisons of the left functors and invertible comparisons of the exact right functors with their termwise cochain functors. A compatible ordinary square and derived right square determine a derived left mate. Its composite with the first left comparison and exact vertical factorization equals the second left comparison followed by localization of the ordinary left mate. This holds on every cochain complex, without requiring exactness of either ordinary left adjoint.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse a av b bv c cv d dv a' av' b' bv' c' cv' d' dv'\nvariable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]\n  {C : Type c} [Category.{cv} C] {D : Type d} [Category.{dv} D]\n  {AD : Type a'} [Category.{av'} AD] {BD : Type b'} [Category.{bv'} BD]\n  {CD : Type c'} [Category.{cv'} CD] {DD : Type d'} [Category.{dv'} DD]\n  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}\n  {LD₁ : AD ⥤ BD} {RD₁ : BD ⥤ AD} {LD₂ : CD ⥤ DD} {RD₂ : DD ⥤ CD}\n  {G : A ⥤ C} {H : B ⥤ D} {GD : AD ⥤ CD} {HD : BD ⥤ DD}\n  {QA : A ⥤ AD} {QB : B ⥤ BD} {QC : C ⥤ CD} {QD : D ⥤ DD}\ntheorem derivedMate_comparison\n    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (ad₁ : LD₁ ⊣ RD₁) (ad₂ : LD₂ ⊣ RD₂)\n    (ε₁ : QA ⋙ LD₁ ⟶ L₁ ⋙ QB) (ε₂ : QC ⋙ LD₂ ⟶ L₂ ⋙ QD)\n    (ρ₁ : QB ⋙ RD₁ ≅ R₁ ⋙ QA) (ρ₂ : QD ⋙ RD₂ ≅ R₂ ⋙ QC)\n    (γ : QA ⋙ GD ≅ G ⋙ QC) (η : QB ⋙ HD ≅ H ⋙ QD)\n    (h₁ : ∀ P K (f : L₁.obj P ⟶ K),\n      ad₁.homEquiv _ _ (ε₁.app P ≫ QB.map f) =\n        QA.map (a₁.homEquiv _ _ f) ≫ ρ₁.inv.app K)\n    (h₂ : ∀ P K (f : L₂.obj P ⟶ K),\n      ad₂.homEquiv _ _ (ε₂.app P ≫ QD.map f) =\n        QC.map (a₂.homEquiv _ _ f) ≫ ρ₂.inv.app K)\n    (τ : TwoSquare R₁ H G R₂) (τD : TwoSquare RD₁ HD GD RD₂)\n    (hτ : ∀ K,\n      τD.app (QB.obj K) ≫ RD₂.map (η.hom.app K) ≫ ρ₂.hom.app (H.obj K) =\n        GD.map (ρ₁.hom.app K) ≫ γ.hom.app (R₁.obj K) ≫ QC.map (τ.app K))\n    (ι : G ⋙ L₂ ⟶ L₁ ⋙ H)\n    (hι : ∀ P, a₂.homEquiv _ _ (ι.app P) = G.map (a₁.unit.app P) ≫ τ.app (L₁.obj P))\n    (P : A) :\n    ((mateEquiv ad₁ ad₂).symm τD).app (QA.obj P) ≫\n        HD.map (ε₁.app P) ≫ η.hom.app (L₁.obj P) =\n      LD₂.map (γ.hom.app P) ≫ ε₂.app (G.obj P) ≫ QD.map (ι.app P)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Transpose through the second derived adjunction. The derived right square representative equation and the two normalized Hom formulas identify the transpose with localization of the ordinary unit-mate equation. Naturality moves the comparison maps past the ordinary unit. Injectivity of the Hom equivalence proves equality.",
+   "uses": [
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-adjunction-mate-transpose"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'_unit",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]ate|mate.*derived|derived.*[Ss]quare|derivedη_fac_app",
+   "date": "2026-10-21",
+   "results": "4 matching lines. /Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:30:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103:lemma derivedη_fac_app (X₁ : C₁) :\n/Mathlib/CategoryTheory/Abelian/RightDerived.lean:43:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Abelian/LeftDerived.lean:42:  material enters mathlib: derived categories, injective/projective derivability",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Cochain representative formula for normalized derived mates. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.DerivedMateComparison",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/DerivedMateComparison.lean",
+  "declaration": "CategoryTheory.derivedMate_comparison",
+  "declarations": [
+   "CategoryTheory.derivedMate_comparison"
+  ],
+  "statement": "theorem derivedMate_comparison\n    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (ad₁ : LD₁ ⊣ RD₁) (ad₂ : LD₂ ⊣ RD₂)\n    (ε₁ : QA ⋙ LD₁ ⟶ L₁ ⋙ QB) (ε₂ : QC ⋙ LD₂ ⟶ L₂ ⋙ QD)\n    (ρ₁ : QB ⋙ RD₁ ≅ R₁ ⋙ QA) (ρ₂ : QD ⋙ RD₂ ≅ R₂ ⋙ QC)\n    (γ : QA ⋙ GD ≅ G ⋙ QC) (η : QB ⋙ HD ≅ H ⋙ QD)\n    (h₁ : ∀ P K (f : L₁.obj P ⟶ K),\n      ad₁.homEquiv _ _ (ε₁.app P ≫ QB.map f) =\n        QA.map (a₁.homEquiv _ _ f) ≫ ρ₁.inv.app K)\n    (h₂ : ∀ P K (f : L₂.obj P ⟶ K),\n      ad₂.homEquiv _ _ (ε₂.app P ≫ QD.map f) =\n        QC.map (a₂.homEquiv _ _ f) ≫ ρ₂.inv.app K)\n    (τ : TwoSquare R₁ H G R₂) (τD : TwoSquare RD₁ HD GD RD₂)\n    (hτ : ∀ K,\n      τD.app (QB.obj K) ≫ RD₂.map (η.hom.app K) ≫ ρ₂.hom.app (H.obj K) =\n        GD.map (ρ₁.hom.app K) ≫ γ.hom.app (R₁.obj K) ≫ QC.map (τ.app K))\n    (ι : G ⋙ L₂ ⟶ L₁ ⋙ H)\n    (hι : ∀ P, a₂.homEquiv _ _ (ι.app P) = G.map (a₁.unit.app P) ≫ τ.app (L₁.obj P))\n    (P : A) :\n    ((mateEquiv ad₁ ad₂).symm τD).app (QA.obj P) ≫\n        HD.map (ε₁.app P) ≫ η.hom.app (L₁.obj P) =\n      LD₂.map (γ.hom.app P) ≫ ε₂.app (G.obj P) ≫ QD.map (ι.app P)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

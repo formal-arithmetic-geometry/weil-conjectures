@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-system-selected-derived-composition",
+ "kind": "statement",
+ "title": "Canonical composition of derived subsequence extensions",
+ "statement": "The composite derived left extensions along s in B_r and then r in B are canonically isomorphic to the derived extension along s.trans r. Its inverse followed by an arbitrary map has the transpose obtained by the two actual extension adjunctions followed by the exact restriction compositor.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [EssentiallySmall.{w} C]\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r s : ℕ ↪o ℕ)\ntheorem systemSelectedDerivedComposition_mate\n    (P : DerivedCategory (StrictRingSystem (selectedSystemRings B (s.trans r))))\n    (M : DerivedCategory (StrictRingSystem B))\n    (f : (systemSelectedDerivedExtension B r S T).derived.obj\n      ((systemSelectedDerivedExtension (selectedSystemRings B r) s S T).derived.obj P) ⟶ M) :\n    (systemSelectedDerivedExtension B (s.trans r) S T).adjunction.homEquiv P M\n      ((systemSelectedDerivedComposition S T B r s).inv.app P ≫ f) =\n    (systemSelectedDerivedExtension (selectedSystemRings B r) s S T).adjunction.homEquiv P\n      ((derivedSystemSubsequence B r).obj M)\n      ((systemSelectedDerivedExtension B r S T).adjunction.homEquiv _ M f) ≫\n      (systemDerivedSubsequenceComposition B r s).hom.app M\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-selected-derived-extension",
+  "lem-pur-system-derived-subsequence"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Transfer the composite adjunction along the canonical exact restriction compositor and take its left-adjoint uniqueness isomorphism to the composite-selection adjunction. The inverse uniqueness map is the forward comparison for the reversed pair. Its Hom normalization identifies the transpose with the composite Hom equivalence; expanding that equivalence gives the stated mate formula.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-selected-derived-extension",
+    "lem-pur-system-derived-subsequence",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-selected-derived-extension",
+  "lem-pur-system-derived-subsequence",
+  "lem-pur-normalized-adjunction-composition"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_eq_iff; CategoryTheory.Bicategory.mateEquiv_comp_id_right; CategoryTheory.mateEquiv; CategoryTheory.Bicategory.mateEquiv_apply'",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(hcomp|vcomp)|homEquiv_leftAdjointUniq|leftAdjointUniq_trans",
+   "date": "2026-10-21",
+   "results": "31 matching lines. /Mathlib/CategoryTheory/Adjunction/Unique.lean:40:theorem homEquiv_leftAdjointUniq_hom_app {F F' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:49:  rw [NatTrans.comp_app, ← homEquiv_leftAdjointUniq_hom_app adj1 adj2]\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:82:theorem leftAdjointUniq_trans {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:89:theorem leftAdjointUniq_trans_app {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:93:  rw [← leftAdjointUniq_trans adj1 adj2 adj3]\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:170:theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:209:theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:251:    mateEquiv_vcomp (adj₁.comp adj₂) (adj₃.comp adj₄) (adj₅.comp adj₆) (α ≫ᵥ β) (γ ≫ᵥ δ)",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Canonical composition of derived subsequence extensions. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSelectedDerivedComposition",
+  "file": "lean/Sheaf/CategoryTheory/SystemSelectedDerivedComposition.lean",
+  "declaration": "SheafOfModules.systemSelectedDerivedComposition_mate",
+  "declarations": [
+   "SheafOfModules.systemSelectedDerivedComposition",
+   "SheafOfModules.systemSelectedDerivedComposition_mate"
+  ],
+  "statement": "theorem systemSelectedDerivedComposition_mate\n    (P : DerivedCategory (StrictRingSystem (selectedSystemRings B (s.trans r))))\n    (M : DerivedCategory (StrictRingSystem B))\n    (f : (systemSelectedDerivedExtension B r S T).derived.obj\n      ((systemSelectedDerivedExtension (selectedSystemRings B r) s S T).derived.obj P) ⟶ M) :\n    (systemSelectedDerivedExtension B (s.trans r) S T).adjunction.homEquiv P M\n      ((systemSelectedDerivedComposition S T B r s).inv.app P ≫ f) =\n    (systemSelectedDerivedExtension (selectedSystemRings B r) s S T).adjunction.homEquiv P\n      ((derivedSystemSubsequence B r).obj M)\n      ((systemSelectedDerivedExtension B r S T).adjunction.homEquiv _ M f) ≫\n      (systemDerivedSubsequenceComposition B r s).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

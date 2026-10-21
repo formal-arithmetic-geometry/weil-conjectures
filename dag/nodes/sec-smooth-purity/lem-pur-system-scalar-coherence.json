@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-system-scalar-coherence",
+ "kind": "statement",
+ "title": "Canonical scalar tensor unit and associators",
+ "statement": "For normalized scalar-extension models over sheaves of rings, restriction along a composite is canonically successive restriction, by identity maps on sections. The ordinary left-adjoint uniqueness comparisons give tensor units and associators, with formulas c⊗x↦c·x and c⊗(d⊗x)↦cφ(d)⊗x. Their derived uniqueness comparisons are compatible with every universal cochain comparison, and hence with the flat-term K-flat models in the main theory.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  [EssentiallySmall.{w} C]\ntheorem systemScalarModelDerivedComposition_rep {R S T : Sheaf J CommRingCat.{w}}\n    {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T} (hγ : γ = φ ≫ ψ)\n    (A : SystemScalarModel φ) (B : SystemScalarModel ψ) (D : SystemScalarModel γ)\n    (P : CochainComplex\n      (ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R)) ℤ) :\n    (systemScalarModelDerivedComposition hγ A B D).hom.app (DerivedCategory.Q.obj P) ≫\n        D.model.ε.app P =\n      B.model.T.map (A.model.ε.app P) ≫\n        B.model.ε.app ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex (systemScalarModelComposition hγ A B D)\n            (.up ℤ)).hom.app P)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "lem-pur-system-scalar-model",
+  "lem-pur-exact-restriction-composition"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Construct restriction unit and composition isomorphisms sectionwise. Transpose the left-adjoint uniqueness maps and use the normalized unit on x↦1⊗x to prove the pure-tensor formulas. Compose the normalized derived transpose equations and apply uniqueness with the canonical exact restriction comparisons. Degreewise the ordinary uniqueness equation is the same unit equation; localization of that equation proves the derived cochain representative formulas.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "lem-pur-exact-restriction-composition",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-scalar-model",
+  "lem-pur-exact-restriction-composition",
+  "lem-pur-normalized-adjunction-composition"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules scalar extension tensor generators associativity unit and normalized derived tensor adjunction",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) ModuleCat.extendRestrictScalarsAdj; SheafOfModules.pushforwardPushforwardAdj; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendScalars.obj'; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; TensorProduct.AlgebraTensorModule.distribBaseChange; SheafOfModules.PullbackConstruction.adjunction",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules scalar extension tensor generators associativity unit and normalized derived tensor adjunction",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.Presentation.mapRelations_mapGenerators_assoc; SheafOfModules.Presentation.mapGenerators; SheafOfModules.mapFree; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_freeMap_assoc",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj|PullbackConstruction.adjunction|extendScalars.*[Cc]omp",
+   "date": "2026-10-21",
+   "results": "66 matching lines. /Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:110:      exact Module.Baer.of_equiv (LinearEquiv.extendScalarsOfIsLocalization p.primeCompl\n/Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:272:      (mkLinearMap _ _) f |>.extendScalarsOfIsLocalization p.asIdeal.primeCompl _\n/Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:101:      exact Module.Projective.of_equiv (LinearEquiv.extendScalarsOfIsLocalization p.primeCompl\n/Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:67:    (fun f g ↦ Cat.Hom.isoMk <| extendScalarsComp f.hom g.hom) ?_ ?_ ?_\n/Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:69:  · intros; ext1; apply extendScalars_id_comp\n/Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:70:  · intros; ext1; apply extendScalars_comp_id\n/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:101:  (PullbackConstruction.adjunction.{v} φ).isRightAdjoint\n/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:111:    (PullbackConstruction.adjunction φ)",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Canonical scalar tensor unit and associators. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemScalarCoherence",
+  "file": "lean/Sheaf/CategoryTheory/SystemScalarCoherence.lean",
+  "declaration": "SheafOfModules.systemScalarModelDerivedComposition_rep",
+  "declarations": [
+   "SheafOfModules.systemScalarModel_transpose_tmul",
+   "SheafOfModules.systemScalarRestrictionComposition",
+   "SheafOfModules.systemScalarModelComposition",
+   "SheafOfModules.systemScalarModelComposition_tmul",
+   "SheafOfModules.systemScalarRestrictionUnit",
+   "SheafOfModules.systemScalarModelUnit",
+   "SheafOfModules.systemScalarModelUnit_tmul",
+   "SheafOfModules.systemScalarModelDerivedComposition",
+   "SheafOfModules.systemScalarModelDerivedComposition_rep",
+   "SheafOfModules.systemScalarModelDerivedUnit",
+   "SheafOfModules.systemScalarModelDerivedUnit_rep"
+  ],
+  "statement": "theorem systemScalarModelDerivedComposition_rep {R S T : Sheaf J CommRingCat.{w}}\n    {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T} (hγ : γ = φ ≫ ψ)\n    (A : SystemScalarModel φ) (B : SystemScalarModel ψ) (D : SystemScalarModel γ)\n    (P : CochainComplex\n      (ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R)) ℤ) :\n    (systemScalarModelDerivedComposition hγ A B D).hom.app (DerivedCategory.Q.obj P) ≫\n        D.model.ε.app P =\n      B.model.T.map (A.model.ε.app P) ≫\n        B.model.ε.app ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex (systemScalarModelComposition hγ A B D)\n            (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

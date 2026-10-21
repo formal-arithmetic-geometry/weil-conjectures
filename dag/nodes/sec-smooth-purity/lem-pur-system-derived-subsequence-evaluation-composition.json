@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-system-derived-subsequence-evaluation-composition",
+ "kind": "statement",
+ "title": "Subsequence evaluation respects restriction composition",
+ "statement": "For subsequences r,s and any index c, evaluation at c of the derived restriction compositor, followed by composite-selected evaluation, equals selected evaluation along s after restriction by r followed by evaluation along r at s(c), on every derived strict system.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\ntheorem systemDerivedSubsequenceEvaluation_composition (r s : ℕ ↪o ℕ) (c : ℕ)\n    (M : DerivedCategory (StrictRingSystem B)) :\n    (derivedSystemEvaluation (selectedSystemRings B (s.trans r)) c).map\n        ((systemDerivedSubsequenceComposition B r s).hom.app M) ≫\n      (systemDerivedSubsequenceEvaluation B (s.trans r) c).hom.app M =\n    (systemDerivedSubsequenceEvaluation (selectedSystemRings B r) s c).hom.app\n        ((derivedSystemSubsequence B r).obj M) ≫\n      (systemDerivedSubsequenceEvaluation B r (s c)).hom.app M\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-derived-subsequence"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Check equality after localization on complexes and cancel the final exact evaluation factorization. Expand the restriction compositor and selected evaluation representative equations. Naturality of the second evaluation comparison moves the first restriction factorization past it. Both sides then consist of the same three successive exact factorization maps.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-derived-subsequence",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-derived-subsequence",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_eq_iff; CategoryTheory.Bicategory.mateEquiv_comp_id_right; CategoryTheory.mateEquiv; CategoryTheory.Bicategory.mateEquiv_apply'",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(hcomp|vcomp)|homEquiv_leftAdjointUniq|leftAdjointUniq_trans",
+   "date": "2026-10-21",
+   "results": "31 matching lines. /Mathlib/CategoryTheory/Adjunction/Unique.lean:40:theorem homEquiv_leftAdjointUniq_hom_app {F F' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:49:  rw [NatTrans.comp_app, ← homEquiv_leftAdjointUniq_hom_app adj1 adj2]\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:82:theorem leftAdjointUniq_trans {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:89:theorem leftAdjointUniq_trans_app {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:93:  rw [← leftAdjointUniq_trans adj1 adj2 adj3]\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:170:theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:209:theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:251:    mateEquiv_vcomp (adj₁.comp adj₂) (adj₃.comp adj₄) (adj₅.comp adj₆) (α ≫ᵥ β) (γ ≫ᵥ δ)",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Subsequence evaluation respects restriction composition. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemDerivedSubsequenceEvaluationComposition",
+  "file": "lean/Sheaf/CategoryTheory/SystemDerivedSubsequenceEvaluationComposition.lean",
+  "declaration": "SheafOfModules.systemDerivedSubsequenceEvaluation_composition",
+  "declarations": [
+   "SheafOfModules.systemDerivedSubsequenceEvaluation_composition"
+  ],
+  "statement": "theorem systemDerivedSubsequenceEvaluation_composition (r s : ℕ ↪o ℕ) (c : ℕ)\n    (M : DerivedCategory (StrictRingSystem B)) :\n    (derivedSystemEvaluation (selectedSystemRings B (s.trans r)) c).map\n        ((systemDerivedSubsequenceComposition B r s).hom.app M) ≫\n      (systemDerivedSubsequenceEvaluation B (s.trans r) c).hom.app M =\n    (systemDerivedSubsequenceEvaluation (selectedSystemRings B r) s c).hom.app\n        ((derivedSystemSubsequence B r).obj M) ≫\n      (systemDerivedSubsequenceEvaluation B r (s c)).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

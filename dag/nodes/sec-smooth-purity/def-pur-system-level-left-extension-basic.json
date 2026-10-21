@@ -1,0 +1,182 @@
+{
+ "id": "def-pur-system-level-left-extension-basic",
+ "kind": "definition",
+ "title": "Strict systems and the unchanged left-extension interface",
+ "statement": "For a sheaf-ring sequence B on a site, define a strict system as B_n-module sheaves M_n with actual restriction-scalar transitions for every m≤n, satisfying identity and composition on sections. Morphisms are componentwise linear maps commuting with transitions. Construct its category, componentwise abelian structure and colimits, exact additive evaluation and exact subsequence restriction, derived evaluations and restrictions, next-selected indices and their composition identity. Define the unchanged predicates for flat-term independent K-flat representatives, normalized ordinary-derived left extension data, tensor coherence, and the full SystemLevelLeftExtensionTheory interface. All old public definition and structure signatures are retained.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w k kv\nuniverse ca cv da dv\nuniverse a av b bv dA dB\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\nvariable {B}\nvariable (B)\nvariable {B}\nvariable (B)\nvariable {B}\nvariable {A : Type ca} [Category.{cv} A] [Preadditive A]\n  [HasFiniteLimits A] [HasFiniteColimits A]\n  {D : Type da} [Category.{dv} D] [Abelian D]\nvariable (B)\nvariable {B}\nvariable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{dA} A]\n  {D : Type b} [Category.{bv} D] [Abelian D] [HasDerivedCategory.{dB} D]\n  (R : D ⥤ A) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]\n  (resolving : CochainComplex A ℤ → Prop)\nvariable [EssentiallySmall.{w} C]\nstructure SystemLevelLeftExtensionTheory where\n  scalar : SystemScalarAssignment (J := J)\n  tensor : SystemTensorCoherence scalar\n  grothendieck : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}),\n    IsGrothendieckAbelian.{w} (StrictRingSystem B)\n  [coproducts : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}),\n    HasCoproducts.{w} (StrictRingSystem B)]\n  [derivedCoproducts : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}),\n    HasCoproducts.{w} (DerivedCategory (StrictRingSystem B))]\n  [levelDerivedCoproducts : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ),\n    HasCoproducts.{w} (DerivedCategory (systemLevel B n))]\n  evaluationCoproducts : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) n (I : Type w),\n    PreservesColimitsOfShape (Discrete I) (systemEvaluation B n)\n  derivedEvaluationCoproducts : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) n (I : Type w),\n    PreservesColimitsOfShape (Discrete I) (derivedSystemEvaluation B n)\n  cohomology : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) n (q : ℤ),\n    DerivedCategory.homologyFunctor (StrictRingSystem B) q ⋙ systemEvaluation B n ≅\n      derivedSystemEvaluation B n ⋙ DerivedCategory.homologyFunctor (systemLevel B n) q\n  detectsIso : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\n    {M N : DerivedCategory (StrictRingSystem B)} (f : M ⟶ N),\n    IsIso f ↔ ∀ n : ℕ, IsIso ((derivedSystemEvaluation B n).map f)\n  detectsBounds : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\n    (M : DerivedCategory (StrictRingSystem B)) (q : ℤ),\n    (M.IsGE q ↔ ∀ n : ℕ, ((derivedSystemEvaluation B n).obj M).IsGE q) ∧\n    (M.IsLE q ↔ ∀ n : ℕ, ((derivedSystemEvaluation B n).obj M).IsLE q)\n  single : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ),\n    SystemDerivedLeftExtension (systemEvaluation B n) (systemLevelKFlat B n)\n  singleBelow : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n),\n    (single B n).ordinary ⋙ systemEvaluation B m ≅ systemTensor scalar B h\n  singleAbove : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) m n, n < m → ∀ P,\n    IsZero ((systemEvaluation B m).obj ((single B n).ordinary.obj P))\n  singleTranspose : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) P M\n    (f : (single B n).ordinary.obj P ⟶ M),\n    (systemTensorAdj scalar B h).homEquiv P (M.level m)\n      ((singleBelow B h).inv.app P ≫ (systemEvaluation B m).map f) =\n      (single B n).ordinaryAdj.homEquiv P M f ≫ M.transition h\n  singleDerivedBelow : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n),\n    (single B n).derived ⋙ derivedSystemEvaluation B m ≅ systemDerivedTensor scalar B h\n  singleDerivedAbove : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) m n, n < m → ∀ P,\n    IsZero ((derivedSystemEvaluation B m).obj ((single B n).derived.obj P))\n  transition : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n),\n    derivedSystemEvaluation B n ⟶\n      derivedSystemEvaluation B m ⋙ (systemRestriction B h).mapDerivedCategory\n  transition_rep : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) K,\n    (transition B h).app (DerivedCategory.Q.obj K) ≫\n      (systemRestriction B h).mapDerivedCategory.map\n        ((systemEvaluation B m).mapDerivedCategoryFactors.hom.app K) ≫\n      (systemRestriction B h).mapDerivedCategoryFactors.hom.app\n        (((systemEvaluation B m).mapHomologicalComplex (.up ℤ)).obj K) =\n      (systemEvaluation B n).mapDerivedCategoryFactors.hom.app K ≫\n        DerivedCategory.Q.map ((strictSystemTransition B h).mapHomologicalComplex (.up ℤ) |>.app K)\n  transition_identity : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) n M,\n    ((systemDerivedTensorAdj scalar B (Nat.le_refl n)).homEquiv _ _).symm\n      ((transition B (Nat.le_refl n)).app M) =\n        (tensor.derivedUnit B n).hom.app ((derivedSystemEvaluation B n).obj M)\n  singleDerivedTranspose : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) P M\n    (f : (single B n).derived.obj P ⟶ M),\n    (systemDerivedTensorAdj scalar B h).homEquiv P ((derivedSystemEvaluation B m).obj M)\n      ((singleDerivedBelow B h).inv.app P ≫ (derivedSystemEvaluation B m).map f) =\n      (single B n).adjunction.homEquiv P M f ≫ (transition B h).app M\n  selected : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ),\n    SystemDerivedLeftExtension (systemSubsequence B r)\n      (systemComponentwiseKFlat (selectedSystemRings B r))\n  selectedEvaluation : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r n,\n    derivedSystemSubsequence B r ⋙ derivedSystemEvaluation (selectedSystemRings B r) n ≅\n      derivedSystemEvaluation B (r n)\n  selectedEvaluation_rep : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r n K,\n    (selectedEvaluation B r n).hom.app (DerivedCategory.Q.obj K) ≫\n      (systemEvaluation B (r n)).mapDerivedCategoryFactors.hom.app K =\n    (derivedSystemEvaluation (selectedSystemRings B r) n).map\n      ((systemSubsequence B r).mapDerivedCategoryFactors.hom.app K) ≫\n    (systemEvaluation (selectedSystemRings B r) n).mapDerivedCategoryFactors.hom.app\n      (((systemSubsequence B r).mapHomologicalComplex (.up ℤ)).obj K)\n  selectedBelow : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r m,\n    (selected B r).ordinary ⋙ systemEvaluation B m ≅\n      systemEvaluation (selectedSystemRings B r) (systemNextSelected r m) ⋙\n        systemTensor scalar B (systemNextSelected_spec r m).1\n  selectedTranspose : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r m P M\n    (f : (selected B r).ordinary.obj P ⟶ M),\n    (systemTensorAdj scalar B (systemNextSelected_spec r m).1).homEquiv\n      (P.level (systemNextSelected r m)) (M.level m)\n      ((selectedBelow B r m).inv.app P ≫ (systemEvaluation B m).map f) =\n    (systemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).map\n      ((selected B r).ordinaryAdj.homEquiv P M f) ≫\n        M.transition (systemNextSelected_spec r m).1\n  selectedDerivedBelow : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r m,\n    (selected B r).derived ⋙ derivedSystemEvaluation B m ≅\n      derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m) ⋙\n        systemDerivedTensor scalar B (systemNextSelected_spec r m).1\n  selectedDerivedTranspose : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r m P M\n    (f : (selected B r).derived.obj P ⟶ M),\n    (systemDerivedTensorAdj scalar B (systemNextSelected_spec r m).1).homEquiv\n      ((derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).obj P)\n      ((derivedSystemEvaluation B m).obj M)\n      ((selectedDerivedBelow B r m).inv.app P ≫ (derivedSystemEvaluation B m).map f) =\n    (derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).map\n      ((selected B r).adjunction.homEquiv P M f) ≫\n    (selectedEvaluation B r (systemNextSelected r m)).hom.app M ≫\n      (transition B (systemNextSelected_spec r m).1).app M\n  selectedTransition : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r m N,\n    ((systemDerivedTensorAdj scalar B (Nat.le_succ m)).homEquiv _ _).symm\n      ((transition B (Nat.le_succ m)).app ((selected B r).derived.obj N)) =\n    (systemDerivedTensor scalar B (Nat.le_succ m)).map\n      ((selectedDerivedBelow B r (m + 1)).hom.app N) ≫\n    (tensor.derivedAssoc B (Nat.le_succ m) (systemNextSelected_spec r (m + 1)).1).hom.app\n      ((derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r (m + 1))).obj N) ≫\n    (tensor.derivedAssoc B (systemNextSelected_spec r m).1\n      (r.monotone (systemNextSelected_mono r m))).inv.app\n      ((derivedSystemEvaluation (selectedSystemRings B r) (systemNextSelected r (m + 1))).obj N) ≫\n    (systemDerivedTensor scalar B (systemNextSelected_spec r m).1).map\n      (((systemDerivedTensorAdj scalar (selectedSystemRings B r)\n          (systemNextSelected_mono r m)).homEquiv _ _).symm\n        ((transition (selectedSystemRings B r) (systemNextSelected_mono r m)).app N)) ≫\n    (selectedDerivedBelow B r m).inv.app N\n  restrictionComposition : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r s,\n    derivedSystemSubsequence B r ⋙ derivedSystemSubsequence (selectedSystemRings B r) s ≅\n      derivedSystemSubsequence B (s.trans r)\n  restrictionComposition_rep : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r s K,\n    (restrictionComposition B r s).hom.app (DerivedCategory.Q.obj K) ≫\n      (systemSubsequence B (s.trans r)).mapDerivedCategoryFactors.hom.app K =\n    (derivedSystemSubsequence (selectedSystemRings B r) s).map\n      ((systemSubsequence B r).mapDerivedCategoryFactors.hom.app K) ≫\n    (systemSubsequence (selectedSystemRings B r) s).mapDerivedCategoryFactors.hom.app\n      (((systemSubsequence B r).mapHomologicalComplex (.up ℤ)).obj K)\n  extensionComposition : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r s,\n    (selected (selectedSystemRings B r) s).derived ⋙ (selected B r).derived ≅\n      (selected B (s.trans r)).derived\n  composition_mate : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r s P M\n    (f : (selected B r).derived.obj ((selected (selectedSystemRings B r) s).derived.obj P) ⟶ M),\n    (selected B (s.trans r)).adjunction.homEquiv P M\n      ((extensionComposition B r s).inv.app P ≫ f) =\n    (selected (selectedSystemRings B r) s).adjunction.homEquiv P\n      ((derivedSystemSubsequence B r).obj M)\n      ((selected B r).adjunction.homEquiv _ M f) ≫\n        (restrictionComposition B r s).hom.app M\n  extensionComposition_eval : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) r s m P,\n    (derivedSystemEvaluation B m).map ((extensionComposition B r s).hom.app P) ≫\n      (selectedDerivedBelow B (s.trans r) m).hom.app P ≫\n        eqToHom (systemSelectedTensor_trans scalar B r s m P) =\n    (selectedDerivedBelow B r m).hom.app ((selected (selectedSystemRings B r) s).derived.obj P) ≫\n      (systemDerivedTensor scalar B (systemNextSelected_spec r m).1).map\n        ((selectedDerivedBelow (selectedSystemRings B r) s (systemNextSelected r m)).hom.app P) ≫\n      (tensor.derivedAssoc B (systemNextSelected_spec r m).1\n        (r.monotone (systemNextSelected_spec s (systemNextSelected r m)).1)).hom.app\n        ((derivedSystemEvaluation (selectedSystemRings B (s.trans r))\n          (systemNextSelected s (systemNextSelected r m))).obj P)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-system-scalar-model",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pur-system-scalar-coherence"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "The category laws hold componentwise. Kernels are computed on sections; cokernels and arbitrary small colimits are obtained by componentwise sheaf-module colimits, with transition maps induced by their universal properties. The resulting abelian structure and evaluation exactness agree with the original normalized structures. A map and a zero object are detected by their components. Strictly increasing natural-number embeddings are unbounded, so minimum selected indices exist; minimality proves monotonicity and composition of these indices. The remaining structures are explicit records of the same normalized adjunction and tensor statements.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-system-scalar-model",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-system-scalar-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pur-system-scalar-coherence"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck category of strict systems of sheaves of modules over an inverse sequence of rings equivalence modules on product site",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Equivalence.sheafCongr.inverse; SheafOfModules; SheafOfModules.mk; SheafOfModules.hom_ext; CategoryTheory.Sheaf.instIsGrothendieckAbelian; SheafOfModules.instCategory; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck category of strict systems of sheaves of modules over an inverse sequence of rings equivalence modules on product site",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CondensedMod.ofSheafProfinite; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.ofSheafLightProfinite; CondensedMod.LocallyConstant.functorIsoDiscrete; CondensedMod.ofSheafCompHaus; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.functorIsoDiscrete; instAbelianCondensedMod",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "isGrothendieckAbelian|sheafEquiv|HasSheafCompose",
+   "date": "2026-10-21",
+   "results": "94 matching lines. /Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:27:- `AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv`: The category of sheaves on the\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:29:- `AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`: The category of\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:140:def AffineEtale.sheafEquiv : Sheaf (AffineEtale.topology S) A ≌ Sheaf S.smallEtaleTopology A :=\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:144:instance isGrothendieckAbelian_sheaf_affineEtaleTopology\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:147:  Sheaf.isGrothendieckAbelian_of_essentiallySmall _ _\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:149:instance isGrothendieckAbelian_sheaf_smallEtaleTopology\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:152:  IsGrothendieckAbelian.of_equivalence (AffineEtale.sheafEquiv S A)\n/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:90:def continuousMapPresheafEquivOfTotallyDisconnectedSpace [TotallyDisconnectedSpace T]",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Strict systems and the unchanged left-extension interface. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemLevelLeftExtensionBasic",
+  "file": "lean/Sheaf/CategoryTheory/SystemLevelLeftExtensionBasic.lean",
+  "declaration": "SheafOfModules.SystemLevelLeftExtensionTheory",
+  "declarations": [
+   "SheafOfModules.systemLevel",
+   "SheafOfModules.systemRestriction",
+   "SheafOfModules.StrictRingSystem",
+   "SheafOfModules.StrictRingSystem.Hom",
+   "SheafOfModules.strictRingSystem_id_comm",
+   "SheafOfModules.strictRingSystem_comp_comm",
+   "SheafOfModules.StrictRingSystem.id",
+   "SheafOfModules.StrictRingSystem.Hom.comp",
+   "SheafOfModules.strictRingSystem_category_laws",
+   "SheafOfModules.strictRingSystemCategory",
+   "SheafOfModules.systemEvaluation",
+   "SheafOfModules.StrictRingSystem.AbelianNormalized",
+   "SheafOfModules.strictRingSystem_hasColimitsOfShape",
+   "SheafOfModules.systemEvaluation_colimitsOfShape",
+   "SheafOfModules.strictRingSystemColimits",
+   "SheafOfModules.strictRingSystem_abelian_exists",
+   "SheafOfModules.strictRingSystemAbelian",
+   "SheafOfModules.systemEvaluation_exact",
+   "SheafOfModules.systemEvaluationAdditive",
+   "SheafOfModules.systemEvaluationLimits",
+   "SheafOfModules.systemEvaluationColimits",
+   "SheafOfModules.strictRingSystem_hom_ext",
+   "SheafOfModules.strictRingSystem_isIso_iff",
+   "SheafOfModules.strictRingSystem_isZero_iff",
+   "SheafOfModules.strictRingSystemHasDerived",
+   "SheafOfModules.derivedSystemEvaluation",
+   "SheafOfModules.selectedSystemRings",
+   "SheafOfModules.systemSubsequence",
+   "SheafOfModules.systemSubsequence_exact",
+   "SheafOfModules.systemSubsequenceAdditive",
+   "SheafOfModules.systemSubsequenceLimits",
+   "SheafOfModules.systemSubsequenceColimits",
+   "SheafOfModules.derivedSystemSubsequence",
+   "SheafOfModules.systemNextSelected",
+   "SheafOfModules.systemNextSelected_spec",
+   "SheafOfModules.systemNextSelected_mono",
+   "SheafOfModules.systemNextSelected_trans",
+   "SheafOfModules.strictSystemTransition",
+   "SheafOfModules.SystemDerivedLeftExtension",
+   "SheafOfModules.systemLevelKFlat",
+   "SheafOfModules.systemComponentwiseKFlat",
+   "SheafOfModules.SystemScalarAssignment",
+   "SheafOfModules.systemTensor",
+   "SheafOfModules.systemDerivedTensor",
+   "SheafOfModules.systemTensorAdj",
+   "SheafOfModules.systemDerivedTensorAdj",
+   "SheafOfModules.SystemTensorCoherence",
+   "SheafOfModules.systemSelectedTensor_trans",
+   "SheafOfModules.SystemLevelLeftExtensionTheory"
+  ],
+  "statement": "structure SystemLevelLeftExtensionTheory",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

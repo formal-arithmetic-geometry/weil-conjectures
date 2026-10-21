@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-extension-evaluation-comparison",
+ "kind": "statement",
+ "title": "Evaluation comparison for derived left extensions",
+ "statement": "Let R1:B→A and R2:D→C be exact additive right adjoints with normalized derived left extensions on resolving classes p1 and p2. Let H:B→D be exact additive, G:A→C additive, and GD its specified derived cochain model. Given compatible ordinary and derived right squares, an ordinary left comparison isomorphism satisfying the unit-mate equation, and a resolving class for p1 carried by G to p2, the derived left mate is invertible. Its inverse gives D(H) after the first left extension isomorphic to the second left extension after GD, and this comparison intertwines every actual derived Hom transpose.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse a av b bv c cv d dv da db dc dd\nvariable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]\n  {B : Type b} [Category.{bv} B] [Abelian B] [HasDerivedCategory.{db} B]\n  {C : Type c} [Category.{cv} C] [Abelian C] [HasDerivedCategory.{dc} C]\n  {D : Type d} [Category.{dv} D] [Abelian D] [HasDerivedCategory.{dd} D]\n  {R₁ : B ⥤ A} [R₁.Additive] [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]\n  {R₂ : D ⥤ C} [R₂.Additive] [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]\n  {p₁ : CochainComplex A ℤ → Prop} {p₂ : CochainComplex C ℤ → Prop}\n  (d₁ : SystemDerivedLeftExtension R₁ p₁) (d₂ : SystemDerivedLeftExtension R₂ p₂)\n  (G : A ⥤ C) [G.Additive]\n  (H : B ⥤ D) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n  (GD : DerivedCategory A ⥤ DerivedCategory C)\n  (γ : (DerivedCategory.Q (C := A)) ⋙ GD ≅\n    G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n  (τD : R₁.mapDerivedCategory ⋙ GD ⟶\n    H.mapDerivedCategory ⋙ R₂.mapDerivedCategory)\nvariable\n    (τ : R₁ ⋙ G ⟶ H ⋙ R₂)\n    (hτ : ∀ K : CochainComplex B ℤ,\n      τD.app (DerivedCategory.Q.obj K) ≫\n          R₂.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app K) ≫\n          R₂.mapDerivedCategoryFactors.hom.app\n            ((H.mapHomologicalComplex (.up ℤ)).obj K) =\n        GD.map (R₁.mapDerivedCategoryFactors.hom.app K) ≫\n          γ.hom.app ((R₁.mapHomologicalComplex (.up ℤ)).obj K) ≫\n          DerivedCategory.Q.map ((τ.mapHomologicalComplex (.up ℤ)).app K))\n    (ι : G ⋙ d₂.ordinary ≅ d₁.ordinary ⋙ H)\n    (hι : ∀ P, d₂.ordinaryAdj.homEquiv _ _ (ι.hom.app P) =\n      G.map (d₁.ordinaryAdj.unit.app P) ≫ τ.app (d₁.ordinary.obj P))\ntheorem derivedExtensionEvaluationIso_transpose\n    (res : ∀ K : CochainComplex A ℤ,\n      ∃ (P : CochainComplex A ℤ) (f : P ⟶ K), p₁ P ∧ QuasiIso f)\n    (hp : ∀ P : CochainComplex A ℤ, p₁ P →\n      p₂ ((G.mapHomologicalComplex (.up ℤ)).obj P))\n    (P : DerivedCategory A) (M : DerivedCategory B) (f : d₁.derived.obj P ⟶ M) :\n    d₂.adjunction.homEquiv (GD.obj P) (H.mapDerivedCategory.obj M)\n      ((derivedExtensionEvaluationIso d₁ d₂ G H GD γ τD τ hτ ι hι res hp).inv.app P ≫\n        H.mapDerivedCategory.map f) =\n    GD.map (d₁.adjunction.homEquiv P M f) ≫ τD.app M\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "The normalized derived mate representative formula identifies its cochain value, after multiplication by comparison maps, with localization of the ordinary isomorphism. On p1 the two left comparison maps are invertible, so the mate is invertible. Every derived object has a quasi-isomorphic p1 representative; naturality transports invertibility to it. Take the inverse mate and apply the general mate-transpose formula.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-pur-derived-mate-comparison",
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-pur-derived-mate-comparison",
+  "lem-pur-adjunction-mate-transpose"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'_unit",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]ate|mate.*derived|derived.*[Ss]quare|derivedη_fac_app",
+   "date": "2026-10-21",
+   "results": "4 matching lines. /Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:30:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103:lemma derivedη_fac_app (X₁ : C₁) :\n/Mathlib/CategoryTheory/Abelian/RightDerived.lean:43:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Abelian/LeftDerived.lean:42:  material enters mathlib: derived categories, injective/projective derivability",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Evaluation comparison for derived left extensions. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ExtensionEvaluationComparison",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ExtensionEvaluationComparison.lean",
+  "declaration": "SheafOfModules.derivedExtensionEvaluationIso_transpose",
+  "declarations": [
+   "SheafOfModules.derivedExtensionMate",
+   "SheafOfModules.derivedExtensionMate_rep",
+   "SheafOfModules.derivedExtensionMate_isIso",
+   "SheafOfModules.derivedExtensionEvaluationIso",
+   "SheafOfModules.derivedExtensionEvaluationIso_transpose"
+  ],
+  "statement": "theorem derivedExtensionEvaluationIso_transpose\n    (res : ∀ K : CochainComplex A ℤ,\n      ∃ (P : CochainComplex A ℤ) (f : P ⟶ K), p₁ P ∧ QuasiIso f)\n    (hp : ∀ P : CochainComplex A ℤ, p₁ P →\n      p₂ ((G.mapHomologicalComplex (.up ℤ)).obj P))\n    (P : DerivedCategory A) (M : DerivedCategory B) (f : d₁.derived.obj P ⟶ M) :\n    d₂.adjunction.homEquiv (GD.obj P) (H.mapDerivedCategory.obj M)\n      ((derivedExtensionEvaluationIso d₁ d₂ G H GD γ τD τ hτ ι hι res hp).inv.app P ≫\n        H.mapDerivedCategory.map f) =\n    GD.map (d₁.adjunction.homEquiv P M f) ≫ τD.app M",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

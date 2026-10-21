@@ -28,192 +28,108 @@
  ],
  "proof": [
   {
-   "text": "For the abelian and finite-exactness part, add and negate compatible linear maps componentwise. Construct finite cones and cocones from the limits and colimits of the module-sheaf categories at each level; exact scalar restriction supplies their transition maps. Evaluation preserves these constructions. A compatible map whose components are invertible has the compatible componentwise inverse, so evaluation jointly reflects isomorphisms. Mathlib CategoryTheory.Abelian.PreservesCoimageImageComparison.iso identifies every evaluated coimage-image comparison with the invertible comparison in the component abelian category. Thus CategoryTheory.Abelian.ofCoimageImageComparisonIsIso gives an abelian structure with additive evaluations. The normalized additive evaluations fix every component of addition. AddCommGroup.ext and Preadditive.ext identify the preadditive structures of any two normalized abelian structures; the other abelian fields are propositions. This proves SheafOfModules.strictRingSystem_abelian_exists and supplies the finite-exactness witnesses of systemEvaluation_exact directly, using the proved SheafOfModules.preservesFiniteColimits_toSheaf instance for underlying module sheaves. Realize systems as modules on one small ringed site. Let $J$ be the ordered category of positive integers with one arrow $m\\to n$ for $m\\le n$, and give $\\mathcal C\\times J$ the coverings $\\{(U_i,n)\\to(U,n)\\}$ coming from coverings of $U$ in $\\mathcal C$. Pulling such a covering back along $(V,m)\\to(U,n)$ gives $\\{(V\\times_U U_i,m)\\to(V,m)\\}$, so the site axioms hold. Define $\\mathcal B(U,n)=B_n(U)$, with restriction along $(V,m)\\to(U,n)$ induced by $B_n\\to B_m$ and restriction to $V$. The sheaf condition is exactly the sheaf condition at each level. Consequently a $\\mathcal B$-module sheaf is exactly a strict semilinear system, and a complex of such sheaves is a strict complex of systems, including its maps. Apply [lem-pur-ringed-site-grothendieck-abelian] to this small site and sheaf of commutative rings. This proves that $\\mathscr S(B)$ is Grothendieck abelian. By [lem-weil-pbc-module-sheaves-colimits-forgetful], kernels are sectionwise, cokernels and colimits are sheafified sectionwise constructions. Since coverings never change the level, these constructions are the corresponding module-sheaf constructions at each level. Thus exactness, coproducts, and cohomology of complexes are componentwise.",
+   "step": 1,
+   "text": "Construct the normalized scalar assignment and its canonical tensor coherence.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-tensor-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); sites-cohomology.tex Tag 07A5 (section-unbounded). The product-site construction is written out here, generalizing Zheng Construction 4.1."
-   }
+   "elementary": false
   },
   {
-   "text": "Small coproducts of short exact sequences in $\\mathscr S(B)$ are exact: each coproduct is the filtered colimit, over finite subsets of its indexing set, of finite direct sums, and filtered colimits are exact by the Grothendieck property established in step 1. Hence termwise coproducts preserve quasi-isomorphisms. They also give coproducts in the unbounded derived category. Indeed for any family of complexes $K_i$ and target $M$, choose a K-injective resolution $M\\to I$ using [prop-pur-kinjective-resolutions-exist] on the product ringed site. By [lem-weil-pbc-kinjective-hom-derived], morphisms from any complex to $I$ in the derived category are chain maps modulo homotopy. A chain map $\\bigoplus_i K_i\\to I$ is exactly a family of chain maps $K_i\\to I$, and a homotopy is exactly a family of homotopies. Therefore $\\operatorname{Hom}_{D}(\\bigoplus_i K_i,M)=\\prod_i\\operatorname{Hom}_{D}(K_i,M)$, with the coprojections induced by those of complexes. This proof applies to every small indexing set, including the empty set; it does not apply a countable-sum lemma to an arbitrary family. Evaluation thus preserves these derived coproducts. Evaluations descend to exact triangulated functors by [lem-weil-pbc-exact-functor-derived-factorization]. For a morphism $h$, every $e_n h$ is an isomorphism if and only if every $e_n\\operatorname{Cone}(h)$ is acyclic, if and only if $\\operatorname{Cone}(h)$ is acyclic. Likewise $H^q(M)=0$ if and only if $H^q(e_nM)=0$ for every $n$. This proves joint detection of isomorphisms and of either cohomological bound, with one common bound for all levels.",
+   "step": 2,
+   "text": "Realize strict systems as modules on the ringed sequence site, giving the Grothendieck property, arbitrary small coproducts and exact evaluation.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-pur-system-grothendieck",
+    "lem-pur-system-coproducts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective); injectives.tex Tag 079P; derived.tex Tag 015F. The coproduct universal-property argument is written out for arbitrary small families."
-   }
+   "elementary": false
   },
   {
-   "text": "Construct the underived evaluation adjunction. For a $B_n$-module sheaf $P$ put $(E_nP)_m=B_m\\otimes_{B_n}P$ for $m\\le n$, and zero for $m>n$. Below $n$ use the coefficient-map-induced tensor transitions; the transition out of the zero region is zero. On a map use $1\\otimes h$. Ordinary tensor/restriction adjunction is [lem-weil-pbc-ringed-topoi-module-adjunction], applied to the identity topos and each map $B_n\\to B_m$. A map $h:P\\to M_n$ determines at $m\\le n$ the tensor-adjoint of $P\\xrightarrow{h}M_n\\to\\operatorname{Res}_{n,m}M_m$; above $n$ use zero. These components commute with transitions because the transitions of $M$ compose. Conversely a system map $E_nP\\to M$ has these components by naturality from level $n$. Evaluation there is its inverse, so this gives a bijection natural in $P,M$, hence $E_n\\dashv e_n$. The unit is $P\\cong B_n\\otimes_{B_n}P$, and the counit has at level $m\\le n$ the adjoint of the transition $M_n\\to\\operatorname{Res}_{n,m}M_m$, and zero above $n$. The same formulas degree by degree give the termwise adjunction on complexes.",
+   "step": 3,
+   "text": "Use exact evaluation and componentwise zero detection to obtain cohomology comparisons, joint isomorphism detection and common cohomological bounds.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-pur-system-derived-evaluation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Construction 4.1, printed p. 21; explicit adjunction verification for general sheaf rings, with Stacks Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)."
-   }
+   "elementary": false
   },
   {
-   "text": "Construct the underived subsequence adjunction. Unboundedness of $r$ makes $t(m)$ exist, and strict increase gives $t(r(i))=i$ and $t(m)\\le t(m+1)$. For a strict $B_r$-system $N$ set $(E_rN)_m=B_m\\otimes_{B_{r(a)}}N_a$, $a=t(m)$. When $b=t(m+1)$, take the transition adjunct to be $B_m\\otimes_{B_{r(b)}}N_b\\to B_m\\otimes_{B_{r(a)}}N_a$, obtained by tensoring the transition of $N$ and using the ordinary tensor associator; when $a=b$ use the identity transition of $N_a$. More generally use the same prescription for $m'\\ge m$. It composes because $N$'s transitions compose and both ways of multiplying three scalar factors give the same balanced tensor map. For a map $h:N\\to U_rM$, define $E_rN\\to M$ at $m$ as the scalar adjunct of $N_a\\xrightarrow{h_a}M_{r(a)}\\to\\operatorname{Res}_{r(a),m}M_m$. Write $\\tau^N_{j,i}$ and $\\tau^M_{v,u}$ for the iterated semilinear transitions. For $m'\\ge m$, put $a'=t(m')$ and $a=t(m)$. On a local pure tensor $c\\otimes x$, $x\\in N_{a'}$, both paths in the system-map square give $c\\,\\tau^M_{r(a'),m}h_{a'}(x)$: the path through level $m$ gives $c\\,\\tau^M_{r(a),m}h_a\\tau^N_{a',a}(x)$, which is the same by $h_a\\tau^N_{a',a}=\\tau^M_{r(a'),r(a)}h_{a'}$ and composition of $M$'s transitions. Pure tensors generate the tensor presheaf and then its sheafification, so this proves the square on module sheaves. Conversely evaluate a system map at $m=r(i)$, where $(E_rN)_{r(i)}=N_i$; its components at other $m$ are forced by the arrow from $r(t(m))$ to $m$. These constructions are inverse and natural, so $E_r\\dashv U_r$. The unit is the identity under $U_rE_rN=N$. The counit has components $B_m\\otimes_{B_{r(t(m))}}M_{r(t(m))}\\to M_m$ induced by the actual transitions. Evaluating this counit at selected levels is the identity; applying it to $E_rN$ is the identity because $t(r(t(m)))=t(m)$. These verify the two triangle identities. The construction is additive and gives the termwise adjunction on complexes.",
+   "step": 4,
+   "text": "Use the explicit ordinary singleton tensor-or-zero construction and its normalized derived extension, evaluation below, vanishing above, and transpose formula.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-pur-system-ordinary-single-extension",
+    "lem-pur-system-single-derived-extension",
+    "lem-pur-system-single-derived-evaluation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Adic-stage paragraph, before derived inverse limits: explicit subsequence left extension extending the evaluation construction of Zheng 4.1."
-   }
+   "elementary": false
   },
   {
-   "text": "Obtain simultaneous K-flat representatives on the tower site of step 1. Evaluation on sheaves of sets preserves finite limits, computed componentwise. Its right adjoint sends a sheaf $A$ to the tower with value $A$ at $m\\ge n$, terminal sheaf at $m<n$, identity transitions within each region, and the unique boundary transition: a map into this tower is uniquely its component $M_n\\to A$. Thus evaluation is the inverse image of a morphism of topoi. It sends the tower ring $\\mathcal B$ to $B_n$, with identity structural ring map, so its module pullback is exactly $e_n$. Apply [lem-pc-kflat-resolution] on the small ringed tower site to get $Q\\to N$ K-flat with flat terms and termwise surjective. By [lem-weil-pbc-ringed-pullback-preserves-kflat] applied to each evaluation morphism, every $Q_n$ is K-flat over $B_n$ with flat terms. Since evaluation is exact, every $Q_n\\to N_n$ is a quasi-isomorphism. The same construction applies to $B_r$. In particular every complex of systems has one strict representative with all these properties simultaneously; independently chosen level resolutions are not being assembled.",
+   "step": 5,
+   "text": "Localize the actual strict transitions and their identity equation, with the exact factorization representatives and canonical tensor unit.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-pur-system-derived-transition",
+    "lem-pur-system-derived-transition-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution) and 0G7E (lemma-pullback-K-flat); the evaluation geometric morphism is explicitly Construction 4.1 of Zheng, printed p. 21."
-   }
+   "elementary": false
   },
   {
-   "text": "For $E_n$ take the resolving class of flat-term K-flat $B_n$-complexes; it resolves every complex by [lem-pc-kflat-resolution]. For $E_r$ take the class of strict system complexes whose every component is flat-term K-flat; step 5 proves it resolves every complex. Both functors are additive. Hence they preserve homotopies, shifts and cones termwise: a cone has terms $Y^k\\oplus X^{k+1}$ and a matrix differential, and additivity preserves this direct sum and each matrix entry. Using [lem-pur-homotopy-category-triangulated], their composites from the homotopy categories to the target derived categories are exact. If $s$ is a quasi-isomorphism between objects of the relevant resolving class, every component of $E_ns$ or $E_rs$ is a change of rings of a quasi-isomorphism between K-flat complexes (or $0\\to0$). It is a quasi-isomorphism by [lem-pur-derived-change-of-rings](1). Componentwise cohomology from step 1 makes this a quasi-isomorphism of systems. Therefore [lem-pur-left-derived-from-kflat-class] gives everywhere-defined exact functors $L_n=\\mathbf L E_n$ and $L_r=\\mathbf L E_r$, with natural comparisons to $E_n$ and $E_r$ which are invertible on these resolving classes.",
+   "step": 6,
+   "text": "Use the explicit ordinary selected left extension, derive it on simultaneous componentwise flat-term K-flat representatives, and obtain its normalized evaluation and transpose formulas.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-homotopy-category-triangulated",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class"
+    "lem-pur-system-ordinary-selected-extension",
+    "lem-pur-system-selected-derived-extension",
+    "lem-pur-system-selected-derived-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 06XN (lemma-find-existence-computes), dual part, and 05SE (proposition-derived-functor), LF exactness; sites-cohomology.tex 06YS and 06YT."
-   }
+   "elementary": false
   },
   {
-   "text": "The exact functors $e_n$ and $U_r$ induce the termwise functors on derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. These are also their everywhere-defined right derived functors by [lem-weil-pbc-exact-functor-derived-functor]. In the ind-system convention of [lem-pc-derived-adjoint-functors], for a complex $K$ every quasi-isomorphism $K\\to K'$ is carried by $e_n$ or $U_r$ to a quasi-isomorphism, so every transition of the filtered system $(F(K'))_{K\\to K'}$ is an isomorphism in the target derived category. That system is therefore essentially constant with value $F(K)$, the identity stage giving the representing cocone; this is the right-hand existence hypothesis at every complex. To check the existence convention for deriving adjoints explicitly, quasi-isomorphisms in either source homotopy category have a right calculus of fractions and two-out-of-three by [lem-pur-quasi-isos-saturated-triangulated]. The resolving classes and invariance verified in step 6 therefore satisfy [lem-pur-resolving-class-essential-constancy]: the left-derived denominator pro-systems are essentially constant at every complex, with invertible identity leg on the resolving classes. By [lem-pur-left-derived-defined-pointwise-kan-bridge], these values and comparisons identify with the left derived functors of step 6, including their specified comparison on representatives. All hypotheses of [lem-pc-derived-adjoint-functors] now hold for each underived adjunction of steps 3 and 4. Consequently $L_n\\dashv e_n$ and $L_r\\dashv U_r$ on the ordinary unbounded derived categories. This produces natural units and counits satisfying the triangle identities; it never assumes that evaluation preserves K-injectives.",
+   "step": 7,
+   "text": "The right evaluation cocone commutes with actual transitions. Mates and canonical scalar adjoint uniqueness prove the specified selected derived transition formula, including equal consecutive indices.",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pur-quasi-isos-saturated-triangulated",
-    "lem-pur-resolving-class-essential-constancy",
-    "lem-pur-left-derived-defined-pointwise-kan-bridge",
-    "lem-pc-derived-adjoint-functors"
+    "lem-pur-system-selected-derived-transition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 06XN (lemma-find-existence-computes), 05S9 (definition-derived-functor), and 09T5 (lemma-derived-adjoint-functors)."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix the normalization of these adjunctions on representatives. By [lem-weil-pbc-termwise-adjunction-homotopy] the termwise adjunctions of steps 3 and 4 induce the Hom bijections on homotopy categories. Apply the explicit formula of [lem-pc-pre-derived-adjoint-functors-general] with the exact right functor, its identity-stage right-derived comparison, and the left-derived comparisons of step 7. For $P$ in the relevant resolving class and a chain map $g:P\\to R K$ ($E\\dashv R$ means either pair), take the two denominators to be identities. The formula says that the transpose of the class of $g$ is the class of its strict transpose $EP\\to K$, composed with $LE(QP)\\cong Q(EP)$. In particular the derived unit at $QP$ is represented by the strict unit $P\\to REP$. For a resolution $p:P\\to RK$, the derived counit at $QK$ is represented by the strict transpose $EP\\to K$, after identifying $LE(RQK)\\cong Q(EP)$ using $p$. Naturality extends these descriptions to all objects and morphisms. Thus the adjunctions have the specific tensor-adjoint units and counits, rather than merely some adjunction between the same functors.",
+   "step": 8,
+   "text": "Compose exact subsequence restrictions, then take the canonical left-adjoint uniqueness map between the composite extension and the composite-index extension; its Hom equation is the composition mate.",
    "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-pur-system-derived-subsequence",
+    "lem-pur-system-selected-derived-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND (lemma-pre-derived-adjoint-functors-general) and 09T5; use identity denominators and then a resolving denominator in the explicit formula."
-   }
+   "elementary": false
   },
   {
-   "text": "For $P\\in D(B_n)$ take a flat-term K-flat resolution $Q\\to P$. Step 6 represents $L_nP$ by $E_nQ$, so [lem-pur-derived-change-of-rings](2) gives $e_mL_nP=B_m\\otimes^L_{B_n}P$ below $n$ and zero above. For a system $N$ take the single strict resolution $Q\\to N$ of step 5 for $B_r$. Then $L_rN$ is represented by $E_rQ$ and $Q_a$ is flat-term K-flat for every $a$. Hence $e_mL_rN=B_m\\otimes^L_{B_{r(t(m))}}N_{t(m)}$, naturally in $N$. These are evaluations of one derived functor with the comparison of step 6. On maps of representatives the component is $1\\otimes h_{t(m)}$; the natural comparison and localization define the action on arbitrary derived morphisms. Moreover each component of $E_rQ$ is itself flat-term K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat], for the identity topos and the indicated ring map. Thus it is again an admissible representative for subsequent left extensions.",
+   "step": 9,
+   "text": "Reindex by t_(r∘s)(m)=t_s(t_r(m)). Right evaluation squares paste, so normalized evaluation mates identify the evaluated extension compositor with the canonical scalar associator and the specified equality transport. Package all fields of the unchanged theory record.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-pur-system-selected-derived-composition-evaluation",
+    "def-pur-system-level-left-extension-basic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), construction preceding 06YU, and 0G7E; Zheng Construction 4.1 gives the evaluation prototype."
-   }
-  },
-  {
-   "text": "Write $a=t(m)$ and $b=t(m+1)$. On the same $Q$ the strict transition of $E_rQ$ is precisely the tensor-adjoint of the selected transition $Q_b\\to\\operatorname{Res}_{B_{r(b)}\\to B_{r(a)}}Q_a$ used in step 4. By [lem-weil-pbc-ringed-pullback-preserves-kflat], both $Q_b$ and $B_{m+1}\\otimes_{B_{r(b)}}Q_b$ are flat-term K-flat over their respective rings. Consequently the ordinary chain isomorphism\n$$B_m\\otimes_{B_{m+1}}(B_{m+1}\\otimes_{B_{r(b)}}Q_b)\\cong B_m\\otimes_{B_{r(b)}}Q_b$$\ncomputes the derived associator. Explicitly $(c\\otimes d)\\otimes x$ maps to $c\\overline d\\otimes x$, with inverse inserting $1$ in the intermediate ring; these balanced formulas sheafify by [def-pur-sheaf-tensor-product]. By the normalized scalar transposition of [lem-pur-sheaf-ring-derived-coefficient-adjunction], the chain map induced from $Q_b\\to\\operatorname{Res}Q_a$ represents exactly the specified derived adjoint structure map of $N$. Its further scalar extension is therefore the arrow in the statement, including its source, target and canonical associators. If $a=b$ it uses the identity of $Q_a$; if $a<b$ it uses the actual iterated transition. This proves the transition formula, rather than testing equality of arbitrary system morphisms by evaluations.",
-   "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-pur-sheaf-tensor-product",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 03D7; normalized scalar transposition and explicit balanced tensor associators."
-   }
-  },
-  {
-   "text": "The left-extension terminology has its ordinary derived meaning here. For a singleton inclusion or the selected-index inclusion $r$, the strict left extension is the functor $E_n$ or $E_r$ of steps 3 and 4: its maps to a strict system are exactly the maps after restriction. Step 6 derives that functor, and step 7 gives its left-extension universal property on the ordinary derived categories. The unit description of step 8 fixes the restriction-to-extension map in that property. At $m$ the singleton comma category is empty for $m>n$ and has its sole object for $m\\le n$. For $r$ its objects are $i$ with $r(i)\\ge m$, with arrows from larger to smaller indices; its terminal object is $t(m)$. This accounts for the single tensor term in the formulas. None of this identifies $D(\\mathscr S(B))$ with a category of diagrams in the ordinary categories $D(B_n)$, nor requires an enhanced section equivalence.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Adic-stage paragraph before inverse limits; ordinary left-derived extension interpretation mandated by the 2026-10-18 route repair."
-   }
-  },
-  {
-   "text": "Let $s$ be a strictly increasing unbounded selection of $B_r$, put $a=t_r(m)$ and $c=t_s(a)$. Then $r(s(i))\\ge m$ if and only if $s(i)\\ge a$, if and only if $i\\ge c$, so $t_{r\\circ s}(m)=c$. Choose a strict componentwise flat-term K-flat resolution $Q\\to N$ over $B_{r\\circ s}$. Step 9 shows that $E_sQ$ is componentwise flat-term K-flat, so step 6 computes $L_rL_sN$ by $E_rE_sQ$. The strict tensor associator identifies its $m$th component\n$$B_m\\otimes_{B_{r(a)}}(B_{r(a)}\\otimes_{B_{r(s(c))}}Q_c)\\cong B_m\\otimes_{B_{r(s(c))}}Q_c.$$\nThis gives a map of strict system complexes to $E_{r\\circ s}Q$: each transition uses the same iterated transition of $Q$, and the associator multiplies the same scalar factors on either path. Its inverse inserts $1$; both formulas are balanced and sheafify by [def-pur-sheaf-tensor-product]. By [lem-weil-pbc-ringed-pullback-preserves-kflat], these chain associators compute the corresponding derived tensor associators. Thus the simultaneous representatives compute the proposed composite comparison.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E; explicit ordinary tensor associators on simultaneous K-flat representatives, extending Zheng Construction 4.1."
-   }
-  },
-  {
-   "text": "Define the composite comparison on all derived morphisms by adjunction. Both $L_rL_s$ and $L_{r\\circ s}$ are left adjoint to $U_sU_r=U_{r\\circ s}$. Define the comparison to be the unique map whose transpose is the unit of $L_{r\\circ s}$ under the composite Hom adjunction, and its inverse by the reverse prescription. The two composites transpose to the respective units, so are identities. The bijections are natural, so this is a natural isomorphism preserving the adjunction identifications, units and counits. On the simultaneous representatives of step 12, the normalized transposes of step 8 show that this is exactly the tensor associator there: restriction to selected indices is the identity and all other components are forced by the strict transitions. The composite-unit and composite-counit formulas and compatibility of transposition with composition are [lem-weil-pbc-mate-pasting](2). For three selections the two comparison paths transpose to the same triple composite unit by that formula, so they agree; the identity selection gives the identity unit and identity comparison. This proves composition compatibility in the ordinary derived categories. Exactness and shift compatibility already follow from step 6; no model-category suspension computation is needed. No flatness of coefficient maps, normalization, or boundedness was introduced.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5 for the adjunctions; Mathlib/CategoryTheory/Adjunction/Mates.lean mateEquiv_hcomp and identity for ordinary composite transposition."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pur-quasi-isos-saturated-triangulated",
-  "lem-pur-resolving-class-essential-constancy",
-  "lem-pur-left-derived-defined-pointwise-kan-bridge",
-  "lem-pc-derived-adjoint-functors",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-mate-pasting"
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-tensor-coherence",
+  "lem-pur-system-grothendieck",
+  "lem-pur-system-coproducts",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-system-ordinary-single-extension",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-system-single-derived-evaluation",
+  "lem-pur-system-derived-transition",
+  "lem-pur-system-derived-transition-unit",
+  "lem-pur-system-ordinary-selected-extension",
+  "lem-pur-system-selected-derived-extension",
+  "lem-pur-system-selected-derived-evaluation",
+  "lem-pur-system-selected-derived-transition",
+  "lem-pur-system-derived-subsequence",
+  "lem-pur-system-selected-derived-composition",
+  "lem-pur-system-selected-derived-composition-evaluation",
+  "def-pur-system-level-left-extension-basic"
  ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-  "place": "Adic-stage paragraph, with Zheng Construction 4.1 printed p. 21 as the evaluation prototype. Ordinary ringed-tower K-flat resolutions, Stacks 06YS/0G7E/06XN/09T5, and ordinary composite adjunction transposes replace the withdrawn enhanced/model-category route. Z7, 2026-10-21: the abelian foundation and finite evaluation exactness are realized directly by componentwise finite constructions and the Mathlib coimage-image criterion; the Grothendieck and derived-extension construction remains the stated route."
- },
+ "proof_origin": "R7, 2026-10-21: fully formalized the ordinary-derived ringed-sequence-site route of Zheng Construction 4.1. Normalized adjunction mates establish both final coherence identities directly, so no extra preservation theorem for twice-extended K-flat representatives is needed.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -397,20 +313,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-coef-sheaf-flat-model",
-  "lem-weil-pbc-site-flat-quotient-tensor-ses",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-coef-quillen-section-rectification",
-  "lem-coef-dg-derived-quillen-calculus",
-  "lem-coef-semilinear-derived-sections",
-  "lem-coef-pointed-model-stability",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pc-derived-adjoint-functors",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pc-pre-derived-adjoint-functors-general",
   "def-pur-sheaf-tensor-product"
  ],
  "reviewed": {
@@ -437,64 +342,15 @@
   "module": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
   "declaration": "SheafOfModules.systemLevelLeftExtensionTheory",
   "declarations": [
-   "SheafOfModules.systemLevel",
-   "SheafOfModules.systemRestriction",
-   "SheafOfModules.StrictRingSystem",
-   "SheafOfModules.StrictRingSystem.Hom",
-   "SheafOfModules.strictRingSystem_id_comm",
-   "SheafOfModules.strictRingSystem_comp_comm",
-   "SheafOfModules.StrictRingSystem.id",
-   "SheafOfModules.StrictRingSystem.Hom.comp",
-   "SheafOfModules.strictRingSystem_category_laws",
-   "SheafOfModules.strictRingSystemCategory",
-   "SheafOfModules.systemEvaluation",
-   "SheafOfModules.StrictRingSystem.AbelianNormalized",
-   "SheafOfModules.strictRingSystem_abelian_exists",
-   "SheafOfModules.strictRingSystemAbelian",
-   "SheafOfModules.systemEvaluation_exact",
-   "SheafOfModules.systemEvaluationAdditive",
-   "SheafOfModules.systemEvaluationLimits",
-   "SheafOfModules.systemEvaluationColimits",
-   "SheafOfModules.systemRingHasDerived",
-   "SheafOfModules.strictRingSystemHasDerived",
-   "SheafOfModules.derivedSystemEvaluation",
-   "SheafOfModules.selectedSystemRings",
-   "SheafOfModules.systemSubsequence",
-   "SheafOfModules.systemSubsequence_exact",
-   "SheafOfModules.systemSubsequenceAdditive",
-   "SheafOfModules.systemSubsequenceLimits",
-   "SheafOfModules.systemSubsequenceColimits",
-   "SheafOfModules.derivedSystemSubsequence",
-   "SheafOfModules.systemNextSelected",
-   "SheafOfModules.systemNextSelected_spec",
-   "SheafOfModules.systemNextSelected_mono",
-   "SheafOfModules.systemNextSelected_trans",
-   "SheafOfModules.strictSystemTransition",
-   "SheafOfModules.systemScalarRestriction_exact",
-   "SheafOfModules.systemScalarRestrictionLimits",
-   "SheafOfModules.systemScalarRestrictionColimits",
-   "SheafOfModules.SystemDerivedLeftExtension",
-   "SheafOfModules.systemModelTmul",
-   "SheafOfModules.SystemScalarModel",
-   "SheafOfModules.systemLevelKFlat",
-   "SheafOfModules.systemComponentwiseKFlat",
-   "SheafOfModules.SystemScalarAssignment",
-   "SheafOfModules.systemTensor",
-   "SheafOfModules.systemDerivedTensor",
-   "SheafOfModules.systemTensorAdj",
-   "SheafOfModules.systemDerivedTensorAdj",
-   "SheafOfModules.SystemTensorCoherence",
-   "SheafOfModules.systemSelectedTensor_trans",
-   "SheafOfModules.SystemLevelLeftExtensionTheory",
    "SheafOfModules.systemLevelLeftExtensionTheory"
   ],
   "file": "lean/Sheaf/CategoryTheory/SystemLevelLeftExtension.lean",
   "statement": "theorem systemLevelLeftExtensionTheory : Nonempty (SystemLevelLeftExtensionTheory (J := J))",
-  "branch": "newtargets-dag",
-  "by": "NH",
-  "date": "2026-10-17",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21",
   "existing": false,
-  "note": "General arbitrary ring-sheaf sequences. Strict systems and their actual restrictions are constructed here; the theorem concludes the ordinary-derived adjunctions, K-flat comparisons, canonical tensor associators, evaluation and selected-transition formulas, and subsequence composition. Existing constant-quotient system records do not cover arbitrary ring sheaves. The simultaneous family over all coefficient sequences permits the composition statement without assuming any of its functors.",
+  "note": "The original theorem statement and its complete interface are unchanged. Its definitions are publicly reexported from SystemLevelLeftExtensionBasic and SystemScalarModel. The theorem is proved from the explicit ordinary-derived constructions and normalized mate calculations in this delivery.",
   "fixed_by": "NT-stage2-cc-ee55394ca"
  },
  "reviewed_lean": {
@@ -506,13 +362,13 @@
   "note": "Read the node, 6 stmt deps (DerivedChangeOfRingsCochainModel with E pinned to changeOfRings; Mathlib Abelian, whose only data is Preadditive, so the ∃!-chosen abelian structure is unique, not hollow) and all 840 lines (identical to 8386e612; only report.md changed). Every clause matches: actual restrictScalars systems, IsGrothendieckAbelian.{w}, coproducts over any I including empty, componentwise cohomology, joint detection with one common bound, L_n/L_r as total left derived functors with transpose-normalized derived adjunctions, below/above/t(m) formulas, the selectedTransition arrow, a=b via transition_identity. No flatness/normalization/boundedness assumed; u, v, w independent; no duplicate notion (rg). Finding (H3, weaker conclusion): the node clause that the L_rL_s≅L_{r∘s} comparison is compatible with the canonical tensor associators was not stated (only composition_mate). FIX: added systemNextSelected_trans (t_{r∘s}=t_s∘t_r), systemSelectedTensor_trans (eqToHom witness) and the field extensionComposition_eval (e_m of the comparison = the derivedAssoc composite), all sorry theorems with source/blueprint/proof docstrings; main signature unchanged; lean-record lists all 50 declarations (script-checked against the file). nt_compile: delivered file clean 51.1 s, fixed file clean 41.6 s, no messages. Maintainer action: remove the four obsolete tool_uses ids inherited from main and reword 'enhanced section category' in source.place."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Z7",
-  "result": "pass",
-  "landing": "20261020T221409-L-4183604",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
  }
 }

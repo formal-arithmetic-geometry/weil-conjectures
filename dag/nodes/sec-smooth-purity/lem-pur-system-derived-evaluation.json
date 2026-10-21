@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-system-derived-evaluation",
+ "kind": "statement",
+ "title": "Cohomology and joint detection by system evaluations",
+ "statement": "For strict systems over any ring-sheaf sequence B, derived evaluation commutes naturally with every homology functor. A derived system morphism is invertible exactly when all evaluated morphisms are invertible. A derived system has a fixed lower or upper cohomological bound exactly when all its evaluations have that same bound. A cochain-system map is a quasi-isomorphism exactly when each component is.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\ntheorem systemDerivedEvaluation_bounds_iff\n    (M : DerivedCategory (StrictRingSystem B)) (q : ℤ) :\n    (M.IsGE q ↔ ∀ n, ((derivedSystemEvaluation B n).obj M).IsGE q) ∧\n      (M.IsLE q ↔ ∀ n, ((derivedSystemEvaluation B n).obj M).IsLE q)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Apply exact functor compatibility with homology. A strict system is zero exactly when each component is zero, so componentwise homology detects acyclicity and each cohomological bound. In an abelian derived category the cone criterion and homology detection characterize isomorphisms. Finally quasi-isomorphisms are exactly the maps inverted by Q, and the exact evaluation factorizations transfer this criterion to components.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functors between Grothendieck abelian categories preserve coproducts after localization to unbounded derived categories",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.exactFunctor; CategoryTheory.Functor.preservesMonomorphisms_of_map_exact; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapExtAddHom; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors between Grothendieck abelian categories preserve coproducts after localization to unbounded derived categories",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(Coproduct|Colimit)|preserves.*[Cc]oproduct|derived.*[Cc]oproduct",
+   "date": "2026-10-21",
+   "results": "119 matching lines. /Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:196:If `F` preserves coproducts and `unit S ≅ F.obj (unit R)`, then `F` preserves free sheaves of\n/Mathlib/Condensed/TopComparison.lean:91:If `G` preserves finite coproducts (which is the case when `C` is `CompHaus`, `Profinite` or\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:21:preserves binary coproducts. This means that, for all objects `X`, `Y`, and `Z` in `C`,\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:26:preserves binary coproducts. This means that, for all objects `X`, `Y`, and `Z` in `C`,\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:71:if the left tensor product functor preserves binary coproducts. -/\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:74:  preservesBinaryCoproducts_tensorLeft (X : C) :\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:78:if the right tensor product functor preserves binary coproducts. -/\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:81:  preservesBinaryCoproducts_tensorRight (X : C) :",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Cohomology and joint detection by system evaluations. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemDerivedEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/SystemDerivedEvaluation.lean",
+  "declaration": "SheafOfModules.systemDerivedEvaluation_bounds_iff",
+  "declarations": [
+   "SheafOfModules.systemDerivedCohomology",
+   "SheafOfModules.systemDerivedHomology_isZero_iff",
+   "SheafOfModules.systemDerivedEvaluation_isIso_iff",
+   "SheafOfModules.systemDerivedEvaluation_bounds_iff",
+   "SheafOfModules.strictRingSystem_quasiIso_iff"
+  ],
+  "statement": "theorem systemDerivedEvaluation_bounds_iff\n    (M : DerivedCategory (StrictRingSystem B)) (q : ℤ) :\n    (M.IsGE q ↔ ∀ n, ((derivedSystemEvaluation B n).obj M).IsGE q) ∧\n      (M.IsLE q ↔ ∀ n, ((derivedSystemEvaluation B n).obj M).IsLE q)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-normalized-adjunction-composition",
+ "kind": "statement",
+ "title": "Composition and uniqueness of normalized adjunction formulas",
+ "statement": "Normalized comparison equations between ordinary and derived Hom bijections compose through two adjunctions. A right comparison isomorphism compatible with those equations identifies the canonical derived left-adjoint uniqueness map with localization of the ordinary uniqueness map. More generally the transpose of an inverse left-adjoint compositor followed by two successive adjuncts is the composite of the given arrows followed by the right compositor.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u₁ u₂ u₃ u₄ u₅ u₆ v₁ v₂ v₃ v₄ v₅ v₆\nvariable {A : Type u₁} {B : Type u₂} {C : Type u₃}\n  {DA : Type u₄} {DB : Type u₅} {DC : Type u₆}\n  [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C]\n  [Category.{v₄} DA] [Category.{v₅} DB] [Category.{v₆} DC]\n  {F : A ⥤ B} {R : B ⥤ A} {G : B ⥤ C} {S : C ⥤ B}\n  {FD : DA ⥤ DB} {RD : DB ⥤ DA} {GD : DB ⥤ DC} {SD : DC ⥤ DB}\n  {QA : A ⥤ DA} {QB : B ⥤ DB} {QC : C ⥤ DC}\ntheorem normalizedAdjunction_uniqueness\n    {H : A ⥤ B} {U : B ⥤ A} {HD : DA ⥤ DB} {UD : DB ⥤ DA}\n    (a : F ⊣ R) (c : H ⊣ U) (ad : FD ⊣ RD) (cd : HD ⊣ UD)\n    (εF : ∀ P, FD.obj (QA.obj P) ⟶ QB.obj (F.obj P))\n    (εH : ∀ P, HD.obj (QA.obj P) ⟶ QB.obj (H.obj P))\n    (ρF : ∀ K, QA.obj (R.obj K) ⟶ RD.obj (QB.obj K))\n    (ρH : ∀ K, QA.obj (U.obj K) ⟶ UD.obj (QB.obj K))\n    (hF : ∀ P K (f : F.obj P ⟶ K),\n      ad.homEquiv _ _ (εF P ≫ QB.map f) = QA.map (a.homEquiv _ _ f) ≫ ρF K)\n    (hH : ∀ P K (f : H.obj P ⟶ K),\n      cd.homEquiv _ _ (εH P ≫ QB.map f) = QA.map (c.homEquiv _ _ f) ≫ ρH K)\n    (η : R ≅ U) (δ : RD ≅ UD) (ν : ∀ P, F.obj P ⟶ H.obj P)\n    (hν : ∀ P, a.homEquiv _ _ (ν P) ≫ η.hom.app (H.obj P) = c.unit.app P)\n    (hρ : ∀ K, ρF K ≫ δ.hom.app (QB.obj K) = QA.map (η.hom.app K) ≫ ρH K)\n    (P : A) :\n    ((ad.ofNatIsoRight δ).leftAdjointUniq cd).hom.app (QA.obj P) ≫ εH P =\n      εF P ≫ QB.map (ν P)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Transpose successively through the two Hom equivalences. Naturality in the source moves the first left comparison outside the second transpose, and naturality in the target moves the second right comparison outside the first. For uniqueness, apply the transferred Hom equivalence to both candidate maps and use its unit normalization. Expand the composite Hom equivalence to obtain the general composite adjunct formula.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_eq_iff; CategoryTheory.Bicategory.mateEquiv_comp_id_right; CategoryTheory.mateEquiv; CategoryTheory.Bicategory.mateEquiv_apply'",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(hcomp|vcomp)|homEquiv_leftAdjointUniq|leftAdjointUniq_trans",
+   "date": "2026-10-21",
+   "results": "31 matching lines. /Mathlib/CategoryTheory/Adjunction/Unique.lean:40:theorem homEquiv_leftAdjointUniq_hom_app {F F' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:49:  rw [NatTrans.comp_app, ← homEquiv_leftAdjointUniq_hom_app adj1 adj2]\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:82:theorem leftAdjointUniq_trans {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:89:theorem leftAdjointUniq_trans_app {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:93:  rw [← leftAdjointUniq_trans adj1 adj2 adj3]\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:170:theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:209:theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:251:    mateEquiv_vcomp (adj₁.comp adj₂) (adj₃.comp adj₄) (adj₅.comp adj₆) (α ≫ᵥ β) (γ ≫ᵥ δ)",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Composition and uniqueness of normalized adjunction formulas. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.NormalizedAdjunctionComposition",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/NormalizedAdjunctionComposition.lean",
+  "declaration": "CategoryTheory.normalizedAdjunction_uniqueness",
+  "declarations": [
+   "CategoryTheory.normalizedAdjunction_composition",
+   "CategoryTheory.leftAdjointUniq_homEquiv_comp",
+   "CategoryTheory.normalizedAdjunction_uniqueness",
+   "CategoryTheory.adjunctionComposition_transpose"
+  ],
+  "statement": "theorem normalizedAdjunction_uniqueness\n    {H : A ⥤ B} {U : B ⥤ A} {HD : DA ⥤ DB} {UD : DB ⥤ DA}\n    (a : F ⊣ R) (c : H ⊣ U) (ad : FD ⊣ RD) (cd : HD ⊣ UD)\n    (εF : ∀ P, FD.obj (QA.obj P) ⟶ QB.obj (F.obj P))\n    (εH : ∀ P, HD.obj (QA.obj P) ⟶ QB.obj (H.obj P))\n    (ρF : ∀ K, QA.obj (R.obj K) ⟶ RD.obj (QB.obj K))\n    (ρH : ∀ K, QA.obj (U.obj K) ⟶ UD.obj (QB.obj K))\n    (hF : ∀ P K (f : F.obj P ⟶ K),\n      ad.homEquiv _ _ (εF P ≫ QB.map f) = QA.map (a.homEquiv _ _ f) ≫ ρF K)\n    (hH : ∀ P K (f : H.obj P ⟶ K),\n      cd.homEquiv _ _ (εH P ≫ QB.map f) = QA.map (c.homEquiv _ _ f) ≫ ρH K)\n    (η : R ≅ U) (δ : RD ≅ UD) (ν : ∀ P, F.obj P ⟶ H.obj P)\n    (hν : ∀ P, a.homEquiv _ _ (ν P) ≫ η.hom.app (H.obj P) = c.unit.app P)\n    (hρ : ∀ K, ρF K ≫ δ.hom.app (QB.obj K) = QA.map (η.hom.app K) ≫ ρH K)\n    (P : A) :\n    ((ad.ofNatIsoRight δ).leftAdjointUniq cd).hom.app (QA.obj P) ≫ εH P =\n      εF P ≫ QB.map (ν P)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

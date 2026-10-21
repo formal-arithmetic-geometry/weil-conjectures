@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-adjunction-transition-coherence",
+ "kind": "statement",
+ "title": "Transition coherence for evaluation mates",
+ "statement": "For a left extension F:X→Y with right adjoint U, two evaluation isomorphisms νa:F⋅Vm≅Ga⋅Lp and νb:F⋅Vn≅Gb⋅Lq, scalar adjunctions Lp⊣Rp, Lq⊣Rq, Lh⊣Rh, Lk⊣Rk, Lt⊣Rt, and restriction comparators δ1:Rh⋅Rq≅Rt, δ2:Rp⋅Rk≅Rt, suppose νa and νb transpose to the extension unit followed by the corresponding evaluation-transition right squares. Assume those right squares compose compatibly with the transition τk:Gb→Ga⋅Rk and τh:Vn→Vm⋅Rh. Then the adjunct of τh(FN) equals Lh(νb), the first canonical scalar associator, the inverse second associator, Lp of the adjunct of τk(N), and νa inverse, in that order. The complete right-square equality and all functor types are the hypotheses of the attached Lean declaration.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nvariable {X Y A B C D : Type*}\n  [Category X] [Category Y] [Category A] [Category B] [Category C] [Category D]\n  {F : X ⥤ Y} {U : Y ⥤ X}\n  {Ga : X ⥤ A} {Gb : X ⥤ B}\n  {Va : Y ⥤ A} {Vb : Y ⥤ B} {Vm : Y ⥤ C} {Vn : Y ⥤ D}\n  {Lp : A ⥤ C} {Rp : C ⥤ A} {Lq : B ⥤ D} {Rq : D ⥤ B}\n  {Lh : D ⥤ C} {Rh : C ⥤ D} {Lk : B ⥤ A} {Rk : A ⥤ B}\n  {Lt : B ⥤ C} {Rt : C ⥤ B}\ntheorem adjunctionTransition_coherence\n    (a : F ⊣ U) (ap : Lp ⊣ Rp) (aq : Lq ⊣ Rq) (ah : Lh ⊣ Rh)\n    (ak : Lk ⊣ Rk) (ac : Lt ⊣ Rt)\n    (δ₁ : Rh ⋙ Rq ≅ Rt) (δ₂ : Rp ⋙ Rk ≅ Rt)\n    (γa : U ⋙ Ga ⟶ Va) (γb : U ⋙ Gb ⟶ Vb)\n    (τk : Gb ⟶ Ga ⋙ Rk) (τh : Vn ⟶ Vm ⋙ Rh)\n    (τp : Va ⟶ Vm ⋙ Rp) (τq : Vb ⟶ Vn ⋙ Rq)\n    (νa : F ⋙ Vm ≅ Ga ⋙ Lp) (νb : F ⋙ Vn ≅ Gb ⋙ Lq)\n    (hνa : ∀ N, ap.homEquiv _ _ (νa.inv.app N) =\n      Ga.map (a.unit.app N) ≫ γa.app (F.obj N) ≫ τp.app (F.obj N))\n    (hνb : ∀ N, aq.homEquiv _ _ (νb.inv.app N) =\n      Gb.map (a.unit.app N) ≫ γb.app (F.obj N) ≫ τq.app (F.obj N))\n    (hright : ∀ M, γb.app M ≫ τq.app M ≫ Rq.map (τh.app M) ≫ δ₁.hom.app (Vm.obj M) =\n      τk.app (U.obj M) ≫ Rk.map (γa.app M) ≫ Rk.map (τp.app M) ≫\n        δ₂.hom.app (Vm.obj M)) (N : X) :\n    (ah.homEquiv _ _).symm (τh.app (F.obj N)) =\n      Lh.map (νb.hom.app N) ≫\n      (((aq.comp ah).ofNatIsoRight δ₁).leftAdjointUniq ac).hom.app (Gb.obj N) ≫\n      (((ak.comp ap).ofNatIsoRight δ₂).leftAdjointUniq ac).inv.app (Gb.obj N) ≫\n      Lp.map ((ak.homEquiv _ _).symm (τk.app N)) ≫ νa.inv.app N\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Precompose with the inverse upper evaluation and inverse first associator, and transpose through Lt⊣Rt. Each inverse associator becomes its right restriction compositor by adjoint uniqueness. Apply the two normalized evaluation equations. The right-square composition law and naturality of τk with respect to the extension unit make both transposes equal. Cancel the two invertible precomposing maps.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-adjunction-composition"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and identity coherence of normalized adjunction mates and uniqueness of left adjoints",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_eq_iff; CategoryTheory.Bicategory.mateEquiv_comp_id_right; CategoryTheory.mateEquiv; CategoryTheory.Bicategory.mateEquiv_apply'",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(hcomp|vcomp)|homEquiv_leftAdjointUniq|leftAdjointUniq_trans",
+   "date": "2026-10-21",
+   "results": "31 matching lines. /Mathlib/CategoryTheory/Adjunction/Unique.lean:40:theorem homEquiv_leftAdjointUniq_hom_app {F F' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:49:  rw [NatTrans.comp_app, ← homEquiv_leftAdjointUniq_hom_app adj1 adj2]\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:82:theorem leftAdjointUniq_trans {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:89:theorem leftAdjointUniq_trans_app {F F' F'' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)\n/Mathlib/CategoryTheory/Adjunction/Unique.lean:93:  rw [← leftAdjointUniq_trans adj1 adj2 adj3]\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:170:theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:209:theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :\n/Mathlib/CategoryTheory/Adjunction/Mates.lean:251:    mateEquiv_vcomp (adj₁.comp adj₂) (adj₃.comp adj₄) (adj₅.comp adj₆) (α ≫ᵥ β) (γ ≫ᵥ δ)",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Transition coherence for evaluation mates. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.AdjunctionTransitionCoherence",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/AdjunctionTransitionCoherence.lean",
+  "declaration": "CategoryTheory.adjunctionTransition_coherence",
+  "declarations": [
+   "CategoryTheory.adjunctionTransition_coherence"
+  ],
+  "statement": "theorem adjunctionTransition_coherence\n    (a : F ⊣ U) (ap : Lp ⊣ Rp) (aq : Lq ⊣ Rq) (ah : Lh ⊣ Rh)\n    (ak : Lk ⊣ Rk) (ac : Lt ⊣ Rt)\n    (δ₁ : Rh ⋙ Rq ≅ Rt) (δ₂ : Rp ⋙ Rk ≅ Rt)\n    (γa : U ⋙ Ga ⟶ Va) (γb : U ⋙ Gb ⟶ Vb)\n    (τk : Gb ⟶ Ga ⋙ Rk) (τh : Vn ⟶ Vm ⋙ Rh)\n    (τp : Va ⟶ Vm ⋙ Rp) (τq : Vb ⟶ Vn ⋙ Rq)\n    (νa : F ⋙ Vm ≅ Ga ⋙ Lp) (νb : F ⋙ Vn ≅ Gb ⋙ Lq)\n    (hνa : ∀ N, ap.homEquiv _ _ (νa.inv.app N) =\n      Ga.map (a.unit.app N) ≫ γa.app (F.obj N) ≫ τp.app (F.obj N))\n    (hνb : ∀ N, aq.homEquiv _ _ (νb.inv.app N) =\n      Gb.map (a.unit.app N) ≫ γb.app (F.obj N) ≫ τq.app (F.obj N))\n    (hright : ∀ M, γb.app M ≫ τq.app M ≫ Rq.map (τh.app M) ≫ δ₁.hom.app (Vm.obj M) =\n      τk.app (U.obj M) ≫ Rk.map (γa.app M) ≫ Rk.map (τp.app M) ≫\n        δ₂.hom.app (Vm.obj M)) (N : X) :\n    (ah.homEquiv _ _).symm (τh.app (F.obj N)) =\n      Lh.map (νb.hom.app N) ≫\n      (((aq.comp ah).ofNatIsoRight δ₁).leftAdjointUniq ac).hom.app (Gb.obj N) ≫\n      (((ak.comp ap).ofNatIsoRight δ₂).leftAdjointUniq ac).inv.app (Gb.obj N) ≫\n      Lp.map ((ak.homEquiv _ _).symm (τk.app N)) ≫ νa.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

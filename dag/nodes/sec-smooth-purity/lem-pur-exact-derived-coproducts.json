@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-exact-derived-coproducts",
+ "kind": "statement",
+ "title": "Coproduct preservation by exact derived functors",
+ "statement": "In Grothendieck abelian categories with unbounded derived categories and the stated K-injective resolution hypotheses, the cochain localization preserves arbitrary small coproducts. An additive exact functor preserving those coproducts induces a functor on unbounded derived categories preserving them as well, in the same indexing universe.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v u' v' w w' s\ntheorem Functor.mapDerivedCategory_preservesCoproducts\n    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    {D : Type u'} [Category.{v'} D] [Abelian D] [HasDerivedCategory.{w'} D]\n    [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions D]\n    [HasCoproducts.{s} A] [HasCoproducts.{s} D]\n    (F : A ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (I : Type s) [PreservesColimitsOfShape (Discrete I) F] :\n    PreservesColimitsOfShape (Discrete I) F.mapDerivedCategory\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use the known coproduct cocone of the derived category obtained from termwise coproducts of complexes. Any family of derived objects is represented by a family of complexes. The exact functor factorization identifies its image cocone with localization of the termwise image coproduct; the ordinary preservation hypothesis and localization preservation make this a coproduct. Transport through the representing family isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functors between Grothendieck abelian categories preserve coproducts after localization to unbounded derived categories",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.exactFunctor; CategoryTheory.Functor.preservesMonomorphisms_of_map_exact; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapExtAddHom; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors between Grothendieck abelian categories preserve coproducts after localization to unbounded derived categories",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(Coproduct|Colimit)|preserves.*[Cc]oproduct|derived.*[Cc]oproduct",
+   "date": "2026-10-21",
+   "results": "119 matching lines. /Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:196:If `F` preserves coproducts and `unit S ≅ F.obj (unit R)`, then `F` preserves free sheaves of\n/Mathlib/Condensed/TopComparison.lean:91:If `G` preserves finite coproducts (which is the case when `C` is `CompHaus`, `Profinite` or\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:21:preserves binary coproducts. This means that, for all objects `X`, `Y`, and `Z` in `C`,\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:26:preserves binary coproducts. This means that, for all objects `X`, `Y`, and `Z` in `C`,\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:71:if the left tensor product functor preserves binary coproducts. -/\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:74:  preservesBinaryCoproducts_tensorLeft (X : C) :\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:78:if the right tensor product functor preserves binary coproducts. -/\n/Mathlib/CategoryTheory/Distributive/Monoidal.lean:81:  preservesBinaryCoproducts_tensorRight (X : C) :",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Coproduct preservation by exact derived functors. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ExactFunctorCoproducts",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ExactFunctorCoproducts.lean",
+  "declaration": "CategoryTheory.Functor.mapDerivedCategory_preservesCoproducts",
+  "declarations": [
+   "CategoryTheory.derived_Q_preservesCoproducts",
+   "CategoryTheory.Functor.mapDerivedCategory_preservesCoproducts"
+  ],
+  "statement": "theorem Functor.mapDerivedCategory_preservesCoproducts\n    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    {D : Type u'} [Category.{v'} D] [Abelian D] [HasDerivedCategory.{w'} D]\n    [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions D]\n    [HasCoproducts.{s} A] [HasCoproducts.{s} D]\n    (F : A ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (I : Type s) [PreservesColimitsOfShape (Discrete I) F] :\n    PreservesColimitsOfShape (Discrete I) F.mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

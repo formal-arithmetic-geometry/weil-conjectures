@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-system-ordinary-selected-extension",
+ "kind": "statement",
+ "title": "Ordinary subsequence left extension with actual transitions",
+ "statement": "For any increasing subsequence r and normalized scalar tensor assignment with its tensor coherence, the functor E_r left adjoint to strict restriction has level m equal to B_m tensor over B_r(t(m)) with N_t(m). Its actual transition is the scalar adjunct of the two tensor associators and extension of the actual transition of N. The comparison with this level tensor is natural, E_r is additive, and its ordinary Hom transpose is the specified component map followed by the strict transition from r(t(m)) to m.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [EssentiallySmall.{w} C]\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ)\ntheorem systemSelectedTranspose (m : ℕ) (P : StrictRingSystem (selectedSystemRings B r))\n    (M : StrictRingSystem B) (f : (systemSelectedFunctor S T B r).obj P ⟶ M) :\n    (systemTensorAdj S B (systemNextSelected_spec r m).1).homEquiv\n      (P.level (systemNextSelected r m)) (M.level m)\n      ((systemSelectedBelow S T B r m).inv.app P ≫ (systemEvaluation B m).map f) =\n    (systemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).map\n      ((systemSelectedAdjunction S T B r).homEquiv P M f) ≫\n        M.transition (systemNextSelected_spec r m).1\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use minimum selected indices and their monotonicity. Define transitions by scalar adjunction and tensor associators. On a local pure tensor c⊗x the transition is the image of c times the actual transition of x; unit tensor generators detect equality, proving identity, composition and naturality. At r(i), t(r(i))=i and the scalar tensor unit gives the unit of the subsequence adjunction. Construct the inverse Hom map componentwise by scalar transposition. Commutation, and the two inverse identities, follow on tensor generators from the strict system composition law. Evaluation at each level verifies additivity.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-scalar-generators",
+    "lem-pur-system-ordinary-single-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-scalar-generators",
+  "lem-pur-system-ordinary-single-extension"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Left adjoint to evaluation and subsequence restriction on strict semilinear inverse systems by tensor extension of scalars",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) ModuleCat.instIsLeftAdjointExtendScalars; CategoryTheory.evaluationAdjunctionRight; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.extendRestrictScalarsAdj; CategoryTheory.evaluationLeftAdjoint; ModuleCat.instIsLeftAdjointRestrictScalars; CategoryTheory.evaluationIsLeftAdjoint; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to evaluation and subsequence restriction on strict semilinear inverse systems by tensor extension of scalars",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) ModuleCat.restrictCoextendScalarsAdj; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.extendRestrictScalarsAdj; ModuleCat.instIsRightAdjointCoextendScalars; ModuleCat.instIsLeftAdjointRestrictScalars; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationLeftAdjoint|extendRestrictScalarsAdj|restrictCoextendScalarsAdj",
+   "date": "2026-10-21",
+   "results": "37 matching lines. /Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38:def evaluationLeftAdjoint (c : C) : D ⥤ C ⥤ D where\n/Mathlib/CategoryTheory/Adjunction/Evaluation.lean:54:def evaluationAdjunctionRight (c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c :=\n/Mathlib/CategoryTheory/Adjunction/Evaluation.lean:65:              evaluationLeftAdjoint_obj_map, colimit.ι_desc_assoc,\n/Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean:31:  EnoughInjectives.of_adjunction (ModuleCat.restrictCoextendScalarsAdj.{max v u} (algebraMap ℤ R))\n/Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:52:        ((extendRestrictScalarsAdj f).homEquiv _ _).injective\n/Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:55:        ((extendRestrictScalarsAdj f).homEquiv _ _).injective\n/Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:58:        ((extendRestrictScalarsAdj f).homEquiv _ _).injective\n/Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:116:  (extendRestrictScalarsAdj f).rightAdjointLaxMonoidal",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Ordinary subsequence left extension with actual transitions. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemOrdinarySelectedExtension",
+  "file": "lean/Sheaf/CategoryTheory/SystemOrdinarySelectedExtension.lean",
+  "declaration": "SheafOfModules.systemSelectedTranspose",
+  "declarations": [
+   "SheafOfModules.systemNextSelected_monotone",
+   "SheafOfModules.systemNextSelected_at",
+   "SheafOfModules.systemTensorAssoc_inv_tmul",
+   "SheafOfModules.systemSelectedLevel",
+   "SheafOfModules.systemSelectedTransition",
+   "SheafOfModules.systemSelectedTransition_tmul",
+   "SheafOfModules.systemSelectedTransition_identity",
+   "SheafOfModules.systemSelectedTransition_compose",
+   "SheafOfModules.systemSelectedObject",
+   "SheafOfModules.systemSelectedMapLevel",
+   "SheafOfModules.systemSelectedMap_comm",
+   "SheafOfModules.systemSelectedFunctor",
+   "SheafOfModules.systemSelectedBelow",
+   "SheafOfModules.systemSelectedIndexCast",
+   "SheafOfModules.systemSelectedEqualIndex",
+   "SheafOfModules.systemSelectedEqualIndex_inv_tmul",
+   "SheafOfModules.systemSelectedAtSelected",
+   "SheafOfModules.systemSelectedAtSelected_inv_tmul",
+   "SheafOfModules.systemSelectedIndexCast_transition",
+   "SheafOfModules.systemSelectedIndexCast_identity",
+   "SheafOfModules.systemSelectedUnit",
+   "SheafOfModules.systemSelectedAdjunctLevel",
+   "SheafOfModules.systemSelectedAdjunctLevel_tmul",
+   "SheafOfModules.systemSelectedAdjunct_comm",
+   "SheafOfModules.systemSelectedAdjunct",
+   "SheafOfModules.systemSelectedAdjunct_selected",
+   "SheafOfModules.systemSelectedAdjunct_right_inv",
+   "SheafOfModules.systemSelectedTransition_unit",
+   "SheafOfModules.systemSelectedAdjunct_left_inv",
+   "SheafOfModules.systemSelectedAdjunction",
+   "SheafOfModules.systemSelectedFunctorAdditive",
+   "SheafOfModules.systemSelectedTranspose"
+  ],
+  "statement": "theorem systemSelectedTranspose (m : ℕ) (P : StrictRingSystem (selectedSystemRings B r))\n    (M : StrictRingSystem B) (f : (systemSelectedFunctor S T B r).obj P ⟶ M) :\n    (systemTensorAdj S B (systemNextSelected_spec r m).1).homEquiv\n      (P.level (systemNextSelected r m)) (M.level m)\n      ((systemSelectedBelow S T B r m).inv.app P ≫ (systemEvaluation B m).map f) =\n    (systemEvaluation (selectedSystemRings B r) (systemNextSelected r m)).map\n      ((systemSelectedAdjunction S T B r).homEquiv P M f) ≫\n        M.transition (systemNextSelected_spec r m).1",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

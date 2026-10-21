@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-system-evaluation-kflat",
+ "kind": "statement",
+ "title": "Simultaneous componentwise K-flat representatives",
+ "statement": "For every complex K of strict systems over B, there is a quasi-isomorphism P→K of strict system complexes such that every evaluated complex P_n is independently K-flat over B_n and has flat terms. Evaluation of a K-flat flat-term module complex on the ringed sequence site has these properties at every level.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [EssentiallySmall.{w} C]\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\ntheorem strictRingSystem_kFlatResolution (K : CochainComplex (StrictRingSystem B) ℤ) :\n    ∃ (L : CochainComplex (StrictRingSystem B) ℤ) (f : L ⟶ K),\n      systemComponentwiseKFlat B L ∧ QuasiIso f\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "lem-pur-system-evaluation-topos"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Construct evaluation as the inverse image of the geometric morphism of the sequence site, with identity structural ring map. Apply the existing ringed-topos K-flat and flat-term pullback theorem. Resolve the module complex on the single ringed sequence site by a flat-term K-flat complex, then transport the augmentation and its quasi-isomorphism back along the explicit strict-system/module equivalence. Exactness of the equivalence and all evaluations gives the simultaneous property.",
+   "uses": [
+    "lem-pur-system-evaluation-topos",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-scalar-coherence",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-evaluation-topos",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-system-scalar-coherence",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K flat resolutions with flat terms simultaneously at every level of a strict inverse system of sheaves of modules",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) Module.Flat.tfae_equational_criterion; Module.Flat.iff_rTensor_preserves_shortComplex_exact; CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex; AlgebraicGeometry.Flat.iff_flat_stalkMap; Module.Flat.iff_lTensor_exact; Module.flat_of_isLocalized_span; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.of_flat_tensorProduct",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat resolutions with flat terms simultaneously at every level of a strict inverse system of sheaves of modules",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.compatiblePreservingOfFlat; Module.Flat.tfae_equational_criterion; Module.Flat.dfinsupp_iff; Module.FaithfullyFlat; CategoryTheory.lan_flat_of_flat; Module.FaithfullyFlat.toFlat; AdicCompletion.flat_of_isNoetherian; Module.Flat.iff_forall_exists_factorization",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlatResolution|preservesKFlat",
+   "date": "2026-10-21",
+   "results": "0 matching lines. ",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Simultaneous componentwise K-flat representatives. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemEvaluationKFlat",
+  "file": "lean/Sheaf/CategoryTheory/SystemEvaluationKFlat.lean",
+  "declaration": "SheafOfModules.strictRingSystem_kFlatResolution",
+  "declarations": [
+   "SheafOfModules.systemSequenceEvaluation_preservesKFlat",
+   "SheafOfModules.strictRingSystem_kFlatResolution"
+  ],
+  "statement": "theorem strictRingSystem_kFlatResolution (K : CochainComplex (StrictRingSystem B) ℤ) :\n    ∃ (L : CochainComplex (StrictRingSystem B) ℤ) (f : L ⟶ K),\n      systemComponentwiseKFlat B L ∧ QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

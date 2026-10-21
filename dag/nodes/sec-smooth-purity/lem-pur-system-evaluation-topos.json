@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-system-evaluation-topos",
+ "kind": "statement",
+ "title": "Evaluation as inverse image on the ringed sequence site",
+ "statement": "The vertical inclusion C→ℕ×C at n is continuous and cocontinuous for the sequence topology. Its inverse-image functor on sheaves has the canonical right Kan extension right adjoint. The induced module evaluation uses the actual identity structural ring map, is additive and exact, and preserves the stated small colimits. The strict-system/module equivalence is additive in both directions.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [EssentiallySmall.{w} C]\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)\ndef systemSequenceEvaluationToposAdjunction :\n    (Prod.sectR n C).sheafPushforwardContinuous (Type w) J (coefficientSequenceTopology J) ⊣\n      (Prod.sectR n C).sheafPushforwardCocontinuous (Type w) J\n        (coefficientSequenceTopology J)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "The vertical-cover description proves continuity and cocontinuity. Comma categories for vertical evaluation have small models, giving the needed right Kan extension. Identify inverse image with sheaf composition by the standard site adjunction, and identify module evaluation with restriction along the identity ring map. Sectionwise module linearity and componentwise colimit and limit formulas establish additivity and exactness, including both equivalence functors.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck category of strict systems of sheaves of modules over an inverse sequence of rings equivalence modules on product site",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Equivalence.sheafCongr.inverse; SheafOfModules; SheafOfModules.mk; SheafOfModules.hom_ext; CategoryTheory.Sheaf.instIsGrothendieckAbelian; SheafOfModules.instCategory; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck category of strict systems of sheaves of modules over an inverse sequence of rings equivalence modules on product site",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CondensedMod.ofSheafProfinite; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.ofSheafLightProfinite; CondensedMod.LocallyConstant.functorIsoDiscrete; CondensedMod.ofSheafCompHaus; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.functorIsoDiscrete; instAbelianCondensedMod",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "isGrothendieckAbelian|sheafEquiv|HasSheafCompose",
+   "date": "2026-10-21",
+   "results": "94 matching lines. /Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:27:- `AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv`: The category of sheaves on the\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:29:- `AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`: The category of\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:140:def AffineEtale.sheafEquiv : Sheaf (AffineEtale.topology S) A ≌ Sheaf S.smallEtaleTopology A :=\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:144:instance isGrothendieckAbelian_sheaf_affineEtaleTopology\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:147:  Sheaf.isGrothendieckAbelian_of_essentiallySmall _ _\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:149:instance isGrothendieckAbelian_sheaf_smallEtaleTopology\n/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:152:  IsGrothendieckAbelian.of_equivalence (AffineEtale.sheafEquiv S A)\n/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:90:def continuousMapPresheafEquivOfTotallyDisconnectedSpace [TotallyDisconnectedSpace T]",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Evaluation as inverse image on the ringed sequence site. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemEvaluationTopos",
+  "file": "lean/Sheaf/CategoryTheory/SystemEvaluationTopos.lean",
+  "declaration": "SheafOfModules.systemSequenceEvaluationToposAdjunction",
+  "declarations": [
+   "SheafOfModules.systemSequenceEvaluationCocontinuous",
+   "SheafOfModules.systemSequenceEvaluationRightKan",
+   "SheafOfModules.systemSequenceEvaluationAdditive",
+   "SheafOfModules.strictSystemToSequenceAdditive",
+   "SheafOfModules.sequenceToStrictSystemAdditive",
+   "SheafOfModules.systemSequenceEvaluationLimits",
+   "SheafOfModules.systemSequenceEvaluationColimits",
+   "SheafOfModules.systemSequenceEvaluationInverseImage",
+   "SheafOfModules.systemSequenceEvaluationToposAdjunction"
+  ],
+  "statement": "def systemSequenceEvaluationToposAdjunction :\n    (Prod.sectR n C).sheafPushforwardContinuous (Type w) J (coefficientSequenceTopology J) ⊣\n      (Prod.sectR n C).sheafPushforwardCocontinuous (Type w) J\n        (coefficientSequenceTopology J)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

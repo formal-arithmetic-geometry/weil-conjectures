@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-system-tensor-coherence",
+ "kind": "statement",
+ "title": "Canonical tensor coherence for a scalar assignment",
+ "statement": "For every normalized scalar assignment S on the site, there is explicit SystemTensorCoherence S. Its ordinary unit and associators are the scalar adjoint-uniqueness comparisons normalized on pure tensors, and its derived unit and associators are the derived scalar adjoint-uniqueness comparisons, compatible with the universal cochain comparisons on flat-term independent K-flat complexes. All choices are the specified scalar models, and no flatness of coefficient maps is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 03DA, 03DB, 06YT and 07D9"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Apply the ordinary and derived scalar coherence constructions to identity coefficient maps and composable coefficient maps of B. Functoriality of B supplies the ring-map equalities. The scalar pure-tensor and universal cochain equations supply every normalization field. This is an explicit record construction, and the Nonempty result is its inhabitedness.",
+   "uses": [
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-scalar-coherence"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules scalar extension tensor generators associativity unit and normalized derived tensor adjunction",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) ModuleCat.extendRestrictScalarsAdj; SheafOfModules.pushforwardPushforwardAdj; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendScalars.obj'; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; TensorProduct.AlgebraTensorModule.distribBaseChange; SheafOfModules.PullbackConstruction.adjunction",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules scalar extension tensor generators associativity unit and normalized derived tensor adjunction",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.Presentation.mapRelations_mapGenerators_assoc; SheafOfModules.Presentation.mapGenerators; SheafOfModules.mapFree; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_freeMap_assoc",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj|PullbackConstruction.adjunction|extendScalars.*[Cc]omp",
+   "date": "2026-10-21",
+   "results": "66 matching lines. /Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:110:      exact Module.Baer.of_equiv (LinearEquiv.extendScalarsOfIsLocalization p.primeCompl\n/Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:272:      (mkLinearMap _ _) f |>.extendScalarsOfIsLocalization p.asIdeal.primeCompl _\n/Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:101:      exact Module.Projective.of_equiv (LinearEquiv.extendScalarsOfIsLocalization p.primeCompl\n/Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:67:    (fun f g ↦ Cat.Hom.isoMk <| extendScalarsComp f.hom g.hom) ?_ ?_ ?_\n/Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:69:  · intros; ext1; apply extendScalars_id_comp\n/Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:70:  · intros; ext1; apply extendScalars_comp_id\n/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:101:  (PullbackConstruction.adjunction.{v} φ).isRightAdjoint\n/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:111:    (PullbackConstruction.adjunction φ)",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: coherent coefficient tensor units and associators; original item proof steps 8, 10 and 12.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemLevelLeftExtensionBasic",
+  "file": "lean/Sheaf/CategoryTheory/SystemLevelLeftExtensionBasic.lean",
+  "declaration": "SheafOfModules.systemTensorCoherence",
+  "declarations": [
+   "SheafOfModules.systemTensorCoherence",
+   "SheafOfModules.nonempty_systemTensorCoherence"
+  ],
+  "statement": "def systemTensorCoherence (S : SystemScalarAssignment (J := J)) :\n    SystemTensorCoherence S",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-cochain-adjunction-compatibility",
+ "kind": "statement",
+ "title": "Normalized derived Hom formulas on cochain complexes",
+ "statement": "For an additive adjunction between abelian categories equipped with unbounded derived categories, a left derived functor of the termwise left adjoint, and the exact right derived functor of the right adjoint, the normalized Hom-transpose formula on the homotopy category induces the corresponding formula on every cochain complex. The cochain and homotopy comparison maps are related by their factorization through the quotient to the homotopy category.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse a av b bv da db\nvariable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]\n  {B : Type b} [Category.{bv} B] [Abelian B] [HasDerivedCategory.{db} B]\n  (E : A ⥤ B) [E.Additive] (R : B ⥤ A) [R.Additive]\n  [PreservesFiniteLimits R] [PreservesFiniteColimits R]\ntheorem adjunction_cochain_transpose\n    (a : E ⊣ R) (T : DerivedCategory A ⥤ DerivedCategory B)\n    (εc : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : ∀ P : CochainComplex A ℤ,\n      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) = εc.app P)\n    (d : T ⊣ R.mapDerivedCategory)\n    (hd : ∀ (M : HomotopyCategory A (.up ℤ)) (N : HomotopyCategory B (.up ℤ))\n      (f : (E.mapHomotopyCategory (.up ℤ)).obj M ⟶ N),\n      d.homEquiv _ _ (ε.app M ≫ DerivedCategory.Qh.map f) =\n        DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).homEquiv M N f) ≫\n          R.mapDerivedCategoryFactorsh.inv.app N) :\n    ∀ (P : CochainComplex A ℤ) (K : CochainComplex B ℤ)\n      (f : (E.mapHomologicalComplex (.up ℤ)).obj P ⟶ K),\n      d.homEquiv _ _ (εc.app P ≫ DerivedCategory.Q.map f) =\n        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).homEquiv P K f) ≫\n          R.mapDerivedCategoryFactors.inv.app K\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Factor the cochain localization through the homotopy quotient. Apply the prescribed homotopy transpose formula to the quotient of the chain map. The quotient-to-derived comparison and the termwise adjunction quotient compatibility identify each side with its cochain version; cancellation of the identity comparison completes the calculation.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left derived adjunction from a resolving class comparison on cochain complexes and homotopy categories",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.Functor.leftDerived; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.ProjectiveResolution.leftDerived_app_eq; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp; HasDerivedCategory.standard",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized left derived adjunction from a resolving class comparison on cochain complexes and homotopy categories",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj; CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq; CategoryTheory.NatTrans.leftDerived",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedToHomotopyCategory|IsLeftDerivedFunctor|homEquiv.*derived",
+   "date": "2026-10-21",
+   "results": "53 matching lines. /Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:52:def derived' [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:92:variable [(G' ⋙ F').IsLeftDerivedFunctor\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144:noncomputable def derived [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:145:    [(G' ⋙ F').IsLeftDerivedFunctor\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:99:     [L.IsLocalization W] [F'.IsLeftDerivedFunctor α W] :\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:102:  have := IsLeftDerivedFunctor.isRightKanExtension F' α W\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:176:    F'.IsLeftDerivedFunctor e.hom W where\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:181:    (Localization.lift F hF L).IsLeftDerivedFunctor (Localization.fac F hF L).hom W :=",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Normalized derived Hom formulas on cochain complexes. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/CochainAdjunctionCompatibility.lean",
+  "declaration": "CategoryTheory.adjunction_cochain_transpose",
+  "declarations": [
+   "CategoryTheory.adjunction_cochain_transpose"
+  ],
+  "statement": "theorem adjunction_cochain_transpose\n    (a : E ⊣ R) (T : DerivedCategory A ⥤ DerivedCategory B)\n    (εc : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : ∀ P : CochainComplex A ℤ,\n      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) = εc.app P)\n    (d : T ⊣ R.mapDerivedCategory)\n    (hd : ∀ (M : HomotopyCategory A (.up ℤ)) (N : HomotopyCategory B (.up ℤ))\n      (f : (E.mapHomotopyCategory (.up ℤ)).obj M ⟶ N),\n      d.homEquiv _ _ (ε.app M ≫ DerivedCategory.Qh.map f) =\n        DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).homEquiv M N f) ≫\n          R.mapDerivedCategoryFactorsh.inv.app N) :\n    ∀ (P : CochainComplex A ℤ) (K : CochainComplex B ℤ)\n      (f : (E.mapHomologicalComplex (.up ℤ)).obj P ⟶ K),\n      d.homEquiv _ _ (εc.app P ≫ DerivedCategory.Q.map f) =\n        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).homEquiv P K f) ≫\n          R.mapDerivedCategoryFactors.inv.app K",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

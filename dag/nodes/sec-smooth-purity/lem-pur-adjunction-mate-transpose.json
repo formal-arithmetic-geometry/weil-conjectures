@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-adjunction-mate-transpose",
+ "kind": "statement",
+ "title": "Transpose formula for a general mate square",
+ "statement": "For adjunctions L1⊣R1 and L2⊣R2, functors G,H, and a right square τ:R1⋅G→H⋅R2, let α:G⋅L2→L1⋅H be its left mate. For every P,M and f:L1(P)→M, the L2⊣R2 transpose of α(P) followed by H(f) is G of the L1⊣R1 transpose of f, followed by τ(M).\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse a av b bv c cv d dv\nvariable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]\n  {C : Type c} [Category.{cv} C] {D : Type d} [Category.{dv} D]\n  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}\n  {G : A ⥤ C} {H : B ⥤ D}\ntheorem adjunctionMate_transpose (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)\n    (τ : TwoSquare R₁ H G R₂) (P : A) (M : B) (f : L₁.obj P ⟶ M) :\n    a₂.homEquiv (G.obj P) (H.obj M)\n      (((mateEquiv a₁ a₂).symm τ).app P ≫ H.map f) =\n    G.map (a₁.homEquiv P M f) ≫ τ.app M\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Expand the mate at the first adjunction unit, then use naturality in the target of the second Hom equivalence. The unit-mate identity and naturality of τ replace the composite by G applied to the first unit followed by R1(f), which is exactly the first transpose.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation isomorphism of a derived left adjoint determined by the right square mate and cochain comparisons",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'_unit",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]ate|mate.*derived|derived.*[Ss]quare|derivedη_fac_app",
+   "date": "2026-10-21",
+   "results": "4 matching lines. /Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:30:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103:lemma derivedη_fac_app (X₁ : C₁) :\n/Mathlib/CategoryTheory/Abelian/RightDerived.lean:43:  material enters mathlib: derived categories, injective/projective derivability\n/Mathlib/CategoryTheory/Abelian/LeftDerived.lean:42:  material enters mathlib: derived categories, injective/projective derivability",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Transpose formula for a general mate square. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.AdjunctionMateTranspose",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/AdjunctionMateTranspose.lean",
+  "declaration": "CategoryTheory.adjunctionMate_transpose",
+  "declarations": [
+   "CategoryTheory.adjunctionMate_transpose"
+  ],
+  "statement": "theorem adjunctionMate_transpose (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)\n    (τ : TwoSquare R₁ H G R₂) (P : A) (M : B) (f : L₁.obj P ⟶ M) :\n    a₂.homEquiv (G.obj P) (H.obj M)\n      (((mateEquiv a₁ a₂).symm τ).app P ≫ H.map f) =\n    G.map (a₁.homEquiv P M f) ≫ τ.app M",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}

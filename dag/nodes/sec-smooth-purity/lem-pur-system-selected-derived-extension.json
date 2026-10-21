@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-system-selected-derived-extension",
+ "kind": "statement",
+ "title": "Deriving the ordinary subsequence extension",
+ "statement": "The ordinary additive subsequence extension sends quasi-isomorphisms between strict complexes with all components flat-term independently K-flat to quasi-isomorphisms. Consequently it has a normalized everywhere-defined pointwise universal left derived functor, with the ordinary functor and adjunction retained exactly, comparison invertible on this resolving class, exact triangulated structure, shift compatibility, and adjunction to derived subsequence restriction.\n\nPrecise formal conclusion with its module-variable context (notation is that of the cited statement dependencies):\n```lean\nuniverse u v w\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [EssentiallySmall.{w} C]\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)\n  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ)\ndef systemSelectedDerivedExtension (S : SystemScalarAssignment (J := J))\n    (T : SystemTensorCoherence S) :\n    SystemDerivedLeftExtension (systemSubsequence B r)\n      (systemComponentwiseKFlat (selectedSystemRings B r))\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, ordinary evaluation left extension and the subsequence generalization; Stacks 0FND, 09T5 and 015F"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-normalized-left-extension",
+  "lem-pur-system-ordinary-selected-extension",
+  "lem-pur-system-evaluation-kflat"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "At each level the ordinary comparison identifies the extended map with scalar extension of the corresponding selected component. Independent K-flat change of rings preserves its quasi-isomorphism. Componentwise detection gives a quasi-isomorphism of systems. Simultaneous flat-term K-flat representatives resolve every strict complex, so apply the general normalized resolving-class left extension theorem.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-normalized-left-extension",
+    "lem-pur-system-ordinary-selected-extension",
+    "lem-pur-system-evaluation-kflat",
+    "lem-pur-system-derived-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-normalized-left-extension",
+  "lem-pur-system-ordinary-selected-extension",
+  "lem-pur-system-evaluation-kflat",
+  "lem-pur-system-derived-evaluation"
+ ],
+ "proof_origin": "Zheng Construction 4.1 and the ordinary-derived proof of [lem-pur-system-level-left-extension]; explicit Lean proof by R7, 2026-10-21. All newly stated components are proved in this packet.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left derived adjunction from a resolving class comparison on cochain complexes and homotopy categories",
+   "date": "2026-10-21",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.Functor.leftDerived; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.ProjectiveResolution.leftDerived_app_eq; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp; HasDerivedCategory.standard",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized left derived adjunction from a resolving class comparison on cochain complexes and homotopy categories",
+   "date": "2026-10-21",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj; CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq; CategoryTheory.NatTrans.leftDerived",
+   "verdict": "Related standard lemmas reused; no result for the full stated strict-system or normalized comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedToHomotopyCategory|IsLeftDerivedFunctor|homEquiv.*derived",
+   "date": "2026-10-21",
+   "results": "53 matching lines. /Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:52:def derived' [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:92:variable [(G' ⋙ F').IsLeftDerivedFunctor\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144:noncomputable def derived [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\n/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:145:    [(G' ⋙ F').IsLeftDerivedFunctor\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:99:     [L.IsLocalization W] [F'.IsLeftDerivedFunctor α W] :\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:102:  have := IsLeftDerivedFunctor.isRightKanExtension F' α W\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:176:    F'.IsLeftDerivedFunctor e.hom W where\n/Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:181:    (Localization.lift F hF L).IsLeftDerivedFunctor (Localization.fac F hF L).hom W :=",
+   "verdict": "Inspected the relevant signatures and used the standard localization, sheaf module, and adjunction APIs; no complete matching construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemLevelLeftExtension",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph before inverse limits: Deriving the ordinary subsequence extension. Construction 4.1 (printed p. 21), evaluation and its derived left adjoint; arbitrary sheaf-ring systems and subsequence inclusions are the ordinary K-flat left-extension construction on the ringed topos of towers, serving the adic-stage paragraph of def-weil-exceptional-inverse-image before inverse limits.",
+   "via": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSelectedDerivedExtension",
+  "file": "lean/Sheaf/CategoryTheory/SystemSelectedDerivedExtension.lean",
+  "declaration": "SheafOfModules.systemSelectedDerivedExtension",
+  "declarations": [
+   "SheafOfModules.systemSelected_preserves",
+   "SheafOfModules.systemSelectedDerivedExtension"
+  ],
+  "statement": "def systemSelectedDerivedExtension (S : SystemScalarAssignment (J := J))\n    (T : SystemTensorCoherence S) :\n    SystemDerivedLeftExtension (systemSubsequence B r)\n      (systemComponentwiseKFlat (selectedSystemRings B r))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "group": "R7",
+  "date": "2026-10-21",
+  "summary": "Fully proved needed component; no new sorry. Blueprint-wide duplicate searches: systems modules; normalized adjunction; coproduct derived; subsequence; flat. Existing quotient-tower nodes are special cases, and no blueprint node states this complete arbitrary-ring strict-system construction or normalized generic comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2493c",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261021T020134-L-2590046",
+  "kind": "interface",
+  "note": "independent cc review: item module + 39 new modules and 41 nodes vs the live SystemLevelLeftExtension (diff -w of all 49 moved declarations), the change record's user list, compiles of the 4 direct importers and 3 transitive users, and #print axioms of the item"
+ }
+}
