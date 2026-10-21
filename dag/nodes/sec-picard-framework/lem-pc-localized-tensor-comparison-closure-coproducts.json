@@ -131,14 +131,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonClosureCoproduct.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedTensorComparisonClosureCoproduct.lean",
   "declaration": "ModuleCat.localizedTensorComparisonProperty_closure_coproducts",
-  "statement": "theorem localizedTensorComparisonProperty_closure_coproducts\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    ∀ {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))\n      (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i, G i ⟶ S),\n      CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.Cofan.mk S ι) →\n      (∀ i, localizedTensorComparisonProperty R A B C Q N t (G i)) →\n      localizedTensorComparisonProperty R A B C Q N t S",
+  "statement": "theorem localizedTensorComparisonProperty_closure_coproducts\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    ∀ {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))\n      (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i, G i ⟶ S),\n      CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.Cofan.mk S ι) →\n      (∀ i, localizedTensorComparisonProperty R A B C Q N t (G i)) →\n      localizedTensorComparisonProperty R A B C Q N t S",
   "branch": "sheaf-dag",
-  "by": "K3",
-  "date": "2026-10-14"
+  "by": "T4",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate in favor of the adopted source theorem. The conclusion and all remaining binders are identical; the source drops only the unused hC flatness premise and therefore proves this node unchanged. All proof dependencies remain needed by the unchanged source proof."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -151,14 +152,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-03187",
-  "group": "C1",
+  "reviewer": "C-13b7b",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T190135-L-3214267",
+  "landing": "20261021T002151-L-1494865",
   "kind": "interface",
-  "note": "independent Codex review: Existing signatures and section binders are byte-identical; delivered statements match their nodes, proof records match the Lean, both modules and the sole direct importer compile cleanly, and axioms are permitted with documented sorry dependencies."
+  "note": "independent cc review: withdrawn Sheaf stub + nodes reattached vs WeilConjectures twin signatures (byte-identical lean.statement), retire-items.tsv row 1519, no importers"
  },
  "lean_audit": {
   "master": {
