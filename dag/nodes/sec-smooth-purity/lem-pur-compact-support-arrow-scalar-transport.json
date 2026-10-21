@@ -20,9 +20,45 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-compact-support-integral-coefficient-comparison] with its coefficient fields $(E,F,L)$ replaced by $(E_0,E,F)$. Its hypotheses hold: $f$ is separated of finite type between separated finite-type schemes, $M\\in D^b_{ctf}(X,\\mathcal O_{E_0})$, and the intermediate input $A_XM\\in D^b_{ctf}(X,\\mathcal O_E)$ is assumed. Set $c_A=c_{E/E_0,M}$, $c_B=c_{F/E,A_XM}$, $c_D=c_{F/E_0,M}$ and $a=\\alpha^Y_{P_{E_0}M}$. The cited composition law, for the very comparisons used in the statement, reads $$c_D\\circ a=P_F(\\alpha^X_M)\\circ c_B\\circ B_Y(c_A).$$ The three components $c_A,c_B,c_D$ are isomorphisms by that same cited statement. This equality has source $B_YA_YP_{E_0}M$ and target $P_FD_XM$; it requires no purity or smoothness.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport, expanded from sk-thm-purity-transport.proof.md Step 3; agent-written categorical calculation using the specified compact-support coefficient comparison"
+   }
+  },
+  {
+   "text": "Postcompose the equality of Step 1 with $c_D^{-1}$ and precompose it with $B_Y(c_A^{-1})$. Functoriality gives $B_Y(c_A)\\circ B_Y(c_A^{-1})=B_Y(c_A\\circ c_A^{-1})=1$, so cancellation yields $$c_D^{-1}\\circ P_F(\\alpha^X_M)\\circ c_B=a\\circ B_Y(c_A^{-1}).$$ Both sides are morphisms $B_YP_EA_XM\\to D_YP_{E_0}M$. Only associativity, the inverse identities and preservation of composition and identities by $B_Y$ are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport, expanded from sk-thm-purity-transport.proof.md Step 3; agent-written categorical calculation using the specified compact-support coefficient comparison"
+   }
+  },
+  {
+   "text": "The given natural associator $\\alpha^Y:B_YA_Y\\xrightarrow{\\sim}D_Y$, evaluated on the arbitrary arrow $t:P_{E_0}M\\to V$, satisfies its defining naturality equation $$D_Y(t)\\circ a=\\alpha^Y_V\\circ B_Y(A_Y(t)).$$ Compose Step 2 with $D_Y(t)$ and substitute this equation. The definitions of $\\tau_F$ and $\\tau_E$ and functoriality of $B_Y$ give $$\\tau_F\\circ P_F(\\alpha^X_M)\\circ c_B=D_Y(t)\\circ a\\circ B_Y(c_A^{-1})=\\alpha^Y_V\\circ B_Y(A_Y(t)\\circ c_A^{-1})=\\alpha^Y_V\\circ B_Y(\\tau_E),$$ as required. Naturality applies in the ambient derived category, so it does not require a coefficient-unit identification of $V$ or an additional constructibility assertion for $P_{E_0}M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport, expanded from sk-thm-purity-transport.proof.md Step 3; agent-written categorical calculation using the specified compact-support coefficient comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Explicit cancellation and naturality calculation expanding coefficient-extension transport, sk-thm-purity-transport Step 3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,10 +124,61 @@
    "date": "2026-10-21",
    "verdict": "no match",
    "directory": "Mathlib/CategoryTheory/NatIso.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Cc]oeff|[Cc]oeff.*compactSupport|compact.*scalar.*transport|scalar.*compact.*transport",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugation of a morphism by coherent coefficient change isomorphisms is compatible with composition of scalar extensions",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.extendScalarsComp, LinearMap.liftBaseChange_comp, IsBaseChange.of_comp, PolynomialLaw.comp_toFun', IsBaseChange.linearMapLeftRightHom_comp, LinearEquiv.conj_trans, ModuleCat.CoextendScalars.map'_hom_apply_apply; extendScalarsComp read at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-989: ordinary modules, without compact-support functors",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map; generic naturality is a defining property used in Step 3, not the whole coefficient comparison assertion",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For natural coefficient comparison isomorphisms commuting with a tower of scalar extensions, transporting an arbitrary compact support arrow in two steps equals direct scalar transport",
+   "results": "8 hits: ContDiffMapSupportedIn.structureMapLM_eq_of_scalars, ContDiffMapSupportedIn.structureMapCLM_eq_of_scalars, CompactlySupportedContinuousMap.instIsScalarTower, IsBaseChange.comp_iff, TestFunction.toBoundedContinuousFunctionCLM_eq_of_scalars, IsBaseChange.comp, ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars, ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|extendScalarsComp",
+   "results": "0 hits: ; invalid scope (Mathlib/ was prefixed twice); corrected follow-up used Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "invalid search scope; not evidence of absence",
+   "directory": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a tensor associator and the composition law for inverse compact support coefficient comparisons imply transitivity of scalar transport of an arbitrary morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, LightCondensed.ihomPoints_symm_comp, CondensedMod.hom_naturality_apply, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, TensorProduct.congr_trans, ModuleCat.restrictScalarsComp'App_inv_naturality, LightCondMod.hom_naturality_apply",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|extendScalarsComp",
+   "results": "5 hits: 222, 225, 228, 231, 275; file-scoped output prints line numbers as file keys; only ordinary module restriction naturality was found",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "directory": "Algebra/Category/ModuleCat/ChangeOfRings.lean"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-adic-scalar-trace-coherence",
@@ -110,5 +197,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-compact-support-arrow-scalar-transport",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-arrow statement unchanged. Applied the existing canonical compact-support comparison composition law, canceled the two invertible comparisons, and wrote the associator naturality calculation explicitly. No new nodes or Mathlib leaves are needed. Read the finite-quotient Lean comparison and rejected it as an attachment because it does not state this integral tower assertion.",
+  "blueprint": "thm-pur-rational-and-qbar-purity: finite coefficient-extension transport; sk-thm-purity-transport.proof.md Step 3: transitivity of coefficient transport. Steps 1-3 give the arbitrary compact-support arrow calculation isolated by lem-pur-adic-scalar-trace-coherence, without invoking purity."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-4a67d2b6a",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-4a67d2b6a (reviewer sub-agent of L); spot-checked: The item's statement, stmt_deps, source and blueprint are unchanged from live, and live still shows it unsplit. The item is not in route-pivot-dropped.txt, nor are its comparison dependency or its citer. No new nodes. Step 1 applies the stated composition law of lem-pur-compact-support-integral-coefficient-comparison with (E,F,L)→(E0,E,F): c_D∘α^Y = P_F(α^X)∘c_{F/E,A_XM}∘B_Y(c_A). The c_{F/E} term needs A_XM ∈ D^b_ctf(X,O_E), which the item assumes. The types check (B_Y A_Y P_{E0}M → P_F D_X M), and the isomorphisms come from the cited statement. Step 2 cancels c_A and c_D, which is elementary, with source B_Y P_E A_X M and target D_Y P_{E0} M. Step 3 uses naturality of α^Y at the arbitrary t, and I recomputed the identity τ_F P_F(α^X)c_B = α^Y_V B_Y(τ_E) myself. Edge cases hold: E=E0 or F=E, t=0, f=id. The citer adic-scalar-trace-coherence Step 1 fits the hypotheses (M=T_0, E0=Q_ℓ). The source is sk-thm-purity-transport Step 3, lines 31-42, on transitivity in coefficient extensions; it is an agent auxiliary with no SGA. No duplicate of the arbitrary-arrow identity exists in the DAG, and the Lean finite-quotient comparison was rightly not attached. No changes, no tool_uses."
  }
 }

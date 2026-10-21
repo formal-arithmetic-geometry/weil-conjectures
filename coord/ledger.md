@@ -21134,3 +21134,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:21 L: returned deliver/Q20/lem-sfb-bounded-bifunctor-devissage (reviewer RETURN: Superseded (A7/B10/C5). The delivery was committed at 05:51 UTC on base 7ffa57a. At 06:12 UTC the live ledger (line 2036)
 - 08:26 L: returned deliver/O2/lem-sfb-finite-free-scalar-coordinates (reviewer RETURN: I return this delivery as superseded (A7/B10). The same grounds applied to the 15:20 return of 861fd0ca. The re-split no)
 - 08:28 L: merged deliver/Q134/thm-nagata-blowup-flat-base-change (reviewer PASS; after a return; new nodes: 0)
+- 08:28 L: merged deliver/N6/lem-pur-compact-support-arrow-scalar-transport (reviewer PASS; first push; new nodes: 0); claim not held by N6: not your claim
