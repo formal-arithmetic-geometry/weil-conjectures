@@ -20,9 +20,146 @@
   "sk-def-sfb-module-derived-lower-shriek",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First the ambient categories have the small coproducts used in the statement. Apply the sheaf-tensor theorem to the small site $T_{\\mathrm{proét}}$ with $\\mathcal A=\\mathrm{Ab}$ (with its usual tensor, as specified in [sk-def-sfb-sheaf-tensor]). It makes $\\operatorname{Sh}(T_{\\mathrm{proét}},\\mathrm{Ab})$ a closed symmetric monoidal Grothendieck abelian category with additive tensor. The module-object Grothendieck theorem applies to each commutative ring object $\\Lambda_T,\\Lambda'_T$. The derived coproduct theorem then supplies ambient coproducts for every indexing set in the fixed universe, including the empty family. No change of universe or completion of the derived category is made.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products, assertions (1)-(2); module-object hypothesis supplied by the cited nodes."
+   }
+  },
+  {
+   "text": "Put $r_T=p_T^*(e^{-1}):\\Lambda'_T\\to\\Lambda_T$ and $s_T=p_T^*e$. Functoriality of pulled-back ring objects gives $r_Ts_T=1$ and $s_Tr_T=1$. Restriction along $r_T$ and $s_T$ therefore gives inverse additive exact equivalences of module categories by [sk-def-sfb-change-of-scalars]; the required closedness, equalizers and coequalizers were supplied in step 1. Apply [lem-weil-pbc-exact-functor-derived-factorization] to both functors. The resulting triangulated functors are $U_T$ and $V_T=D(\\operatorname{Res}_{s_T})$. Their two composites are naturally the identity: on complexes their actions and differentials are unchanged after the two scalar restrictions, and these identities descend through localization at quasi-isomorphisms. Thus $U_T$ is an exact equivalence with inverse $V_T$.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "The equivalence $U_T$ preserves all ambient small coproducts, by [lem-galois-equivalence-preserves-limits] applied to its derived equivalence; the same is true of $V_T$. For constructibility apply [lem-sfb-condensed-coefficient-iso-constructible] to $e$ and then to $e^{-1}$. It gives $U_T(\\mathcal C_T)\\subseteq\\mathcal C'_T$ and $V_T(\\mathcal C'_T)\\subseteq\\mathcal C_T$. Since the two composites are isomorphic to the identity and these full subcategories are replete, $U_T$ identifies $\\mathcal C_T$ with $\\mathcal C'_T$. This uses exactly finite constant local models and finite Tor amplitude of the item, with no admissibility or finite-type hypothesis on $T$.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "Consider the full replete class $\\mathcal S_T=\\{M:U_TM\\in\\mathcal L'_T\\}$ in the unprimed ambient category. It contains $\\mathcal C_T$ by step 3. It is triangulated because $U_T$ is exact, and closed under small coproducts because $U_T$ preserves them. The defining intersection for $\\mathcal L_T$ therefore gives $\\mathcal L_T\\subseteq\\mathcal S_T$, that is, $U_T\\mathcal L_T\\subseteq\\mathcal L'_T$. Interchanging $U_T,V_T$ gives $V_T\\mathcal L'_T\\subseteq\\mathcal L_T$. The inverse isomorphisms then restrict to these full replete subcategories. They give the asserted exact equivalence $\\mathcal L_T\\simeq\\mathcal L'_T$: their shifts and distinguished triangles are the ambient ones by [def-weil-triangulated-subcategory].",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "Apply [def-sfb-modobj-extension-along-iso] to $r_T$. It identifies $\\operatorname{Ext}_{r_T}$ with $\\operatorname{Res}_{s_T}$, which is exact by step 2. Thus extension of scalars along the condensed ring morphism $e^{-1}:\\Lambda'\\to\\Lambda$ preserves finite limits on every scheme, exactly the flatness hypothesis in [def-sfb-derived-comap-lower-star-iso]. Apply that node to $e^{-1}$ and $p:Z\\to Y$, with the roles of $\\Lambda,\\Lambda'$ interchanged. The resulting canonical natural isomorphism is\n$$d:U_YRp_{*,\\Lambda}\\xrightarrow{\\sim}Rp_{*,\\Lambda'}U_Z.$$\nIn particular this comparison is on the ordinary unbounded categories; no bounded-below reduction or finite cohomological dimension is used.",
+   "uses": [
+    "def-sfb-modobj-extension-along-iso",
+    "def-sfb-derived-comap-lower-star-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "Apply [def-sfb-comap-open-immersion-shriek-iso] to the same $e^{-1}$ and to $j:X\\hookrightarrow Z$. It gives $\\operatorname{Res}_{r_Z}j_{!,\\Lambda}\\cong j_{!,\\Lambda'}\\operatorname{Res}_{r_X}$. All functors in this square are exact: scalar restriction by step 2, and $j_!$ by the module-derived-lower-shriek convention. Applying the isomorphism termwise to complexes and then localizing gives\n$$h:U_ZD(j_{!,\\Lambda})\\xrightarrow{\\sim}D(j_{!,\\Lambda'})U_X.$$\nWhisker $d$ by $D(j_{!,\\Lambda})$ and $h$ by $Rp_{*,\\Lambda'}$. Their composite is\n$$U_YRp_{*,\\Lambda}D(j_{!,\\Lambda})\\xrightarrow{d}Rp_{*,\\Lambda'}U_ZD(j_{!,\\Lambda})\\xrightarrow{Rp_{*,\\Lambda'}h}Rp_{*,\\Lambda'}D(j_{!,\\Lambda'})U_X.$$\nBy the definition of $H$ this is the requested canonical $U_YH_\\Lambda\\cong H_{\\Lambda'}U_X$.",
+   "uses": [
+    "def-sfb-comap-open-immersion-shriek-iso",
+    "sk-def-sfb-module-derived-lower-shriek",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "Suppose $H_\\Lambda(\\mathcal L_X)\\subseteq\\mathcal L_Y$, and let $M'\\in\\mathcal L'_X$. Step 4 gives $V_XM'\\in\\mathcal L_X$. Hence $H_\\Lambda V_XM'\\in\\mathcal L_Y$ and $U_YH_\\Lambda V_XM'\\in\\mathcal L'_Y$. Step 6 and $U_XV_XM'\\cong M'$ identify this last object with $H_{\\Lambda'}M'$. Repleteness proves $H_{\\Lambda'}(\\mathcal L'_X)\\subseteq\\mathcal L'_Y$. The ambient comparison therefore restricts to $a:U_YF_\\Lambda\\cong F_{\\Lambda'}U_X$ on the full subcategories. The restrictions of $U_X,U_Y$ are those of step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "For brevity write $F=F_\\Lambda$, $F'=F_{\\Lambda'}$, $G=G_\\Lambda$, $G'=G_{\\Lambda'}$, and $\\varepsilon,\\varepsilon'$ for the given counits; write $\\eta'$ for the unit of $F'\\dashv G'$. For $N\\in\\mathcal L_Y$ put\n$$t_N=U_Y(\\varepsilon_N)\\circ a_{GN}^{-1}:F'U_XGN\\longrightarrow U_YN,$$\n$$b_N=G'(t_N)\\circ\\eta'_{U_XGN}:U_XGN\\longrightarrow G'U_YN.$$\nNaturality of $a,\\varepsilon,\\eta'$ makes $b$ natural. This is precisely the mate formula of [lem-weil-mate-iso-along-equivalences] with $L=F$, $R=G$, $L'=F'$, $R'=G'$, the vertical functors $U_X,U_Y$, and $\\theta=a^{-1}$. Step 4 makes $U_X$ an equivalence and $U_Y$ fully faithful, so that node proves that $b$ is a natural isomorphism. In particular we use the given adjunctions, without choosing new ones.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  },
+  {
+   "text": "For the adjunction $F'\\dashv G'$, the hom-bijection formulas in [lem-weil-pbc-adjunction-of-natural-bijection] say that $b_N$ just defined is the adjunct of $t_N$, and therefore\n$$\\varepsilon'_{U_YN}\\circ F'(b_N)=t_N.$$\nComposing with $a_{GN}$ gives exactly\n$$\\varepsilon'_{U_YN}\\circ F'(b_N)\\circ a_{GN}=U_Y(\\varepsilon_N).$$\nConversely any component $c_N$ satisfying this identity obeys $\\varepsilon'_{U_YN}\\circ F'(c_N)=t_N$ after composition with $a_{GN}^{-1}$. Injectivity of the same adjunction bijection gives $c_N=b_N$. Thus the counit equation determines every component and hence determines the natural comparison uniquely.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following adjunction-map formulas; specialize the bijection to t_N."
+   }
+  },
+  {
+   "text": "If $G(\\mathcal C_Y)\\subseteq\\mathcal C_X$, let $N'\\in\\mathcal C'_Y$. Step 3 gives $V_YN'\\in\\mathcal C_Y$, so $G V_YN'\\in\\mathcal C_X$ and $U_XG V_YN'\\in\\mathcal C'_X$. The component $b_{V_YN'}$ and $U_YV_YN'\\cong N'$ identify this object with $G'N'$, proving the primed inclusion. Conversely, for $N\\in\\mathcal C_Y$ the primed inclusion gives $G'U_YN\\in\\mathcal C'_X$. The isomorphism $b_N$ then puts $U_XGN$ in $\\mathcal C'_X$. Applying $V_X$, step 3 and $V_XU_XGN\\cong GN$ put $GN$ in $\\mathcal C_X$. This proves the claimed equivalence of restrictions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+    "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "def-weil-triangulated-subcategory",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-comap-open-immersion-shriek-iso",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+  "place": "Ring-isomorphism specialization of the coefficient comparisons; explicit argument written by NV."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -65,10 +202,45 @@
    "results": "{\"t\": \"2026-10-21T03:29:06Z\", \"tool\": \"grep\", \"query\": \"coefficientIso|coefficient.*shriek|shriek.*coefficient|Condensed.*Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Light/Module.lean\", \"Mathlib/Condensed/Light/Module.lean\", \"Mathlib/Condensed/Light/Module.lean\"], \"digest\": \"1ec28ad4165bcd85\"}",
    "date": "2026-10-21",
    "verdict": "No match: only free-forgetful or discrete condensed adjunctions, without compactification derived functors or coefficient-ring transport."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientIso|coefficient.*shriek|shriek.*coefficient|Condensed.*Adjunction",
+   "results": "{\"t\": \"2026-10-21T03:49:51Z\", \"tool\": \"grep\", \"query\": \"coefficientIso|coefficient.*shriek|shriek.*coefficient|Condensed.*Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Light/Module.lean\", \"Mathlib/Condensed/Light/Module.lean\", \"Mathlib/Condensed/Light/Module.lean\"], \"digest\": \"1ec28ad4165bcd85\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full statement: hits give ordinary scalar-change or sheaf-pushforward infrastructure, without this condensed-coefficient compactification comparison, localizing closures, and normalized given right adjoints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of condensed coefficient rings identifies constructible derived module categories and compactification pushforward",
+   "results": "{\"t\": \"2026-10-21T03:49:51Z\", \"tool\": \"leansearch\", \"query\": \"An isomorphism of condensed coefficient rings identifies constructible derived module categories and compactification pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.functorIsoDiscreteComponents\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardCongr\", \"CondensedSet.LocallyConstant.iso\", \"CondensedMod.isDiscrete_tfae\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₂\"], \"digest\": \"8cb10ae9dbe986e9\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full statement: hits give ordinary scalar-change or sheaf-pushforward infrastructure, without this condensed-coefficient compactification comparison, localizing closures, and normalized given right adjoints."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-21T03:49:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.toAdjunction\", \"CategoryTheory.Equivalence.toAdjunction'\", \"CategoryTheory.Equivalence.trans_toAdjunction\", \"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Equivalence.transportSheafificationAdjunction\", \"CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv\"], \"digest\": \"e0228ac4463035e1\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full statement: hits give ordinary scalar-change or sheaf-pushforward infrastructure, without this condensed-coefficient compactification comparison, localizing closures, and normalized given right adjoints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring-object isomorphism transports derived sheaves with compactly supported pushforward and counit-normalized right adjoints",
+   "results": "{\"t\": \"2026-10-21T03:49:52Z\", \"tool\": \"leanfinder\", \"query\": \"A ring-object isomorphism transports derived sheaves with compactly supported pushforward and counit-normalized right adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardCongr\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.sheafPushforwardContinuousIso\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardNatIso_hom\"], \"digest\": \"3120387849d4ddf1\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full statement: hits give ordinary scalar-change or sheaf-pushforward infrastructure, without this condensed-coefficient compactification comparison, localizing closures, and normalized given right adjoints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a ring isomorphism commutes with extension by zero and derived proper direct image",
+   "results": "{\"t\": \"2026-10-21T03:50:09Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars along a ring isomorphism commutes with extension by zero and derived proper direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.Algebra.restrictScalarsEquivalenceOfRingEquiv_linear\", \"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"ModuleCat.restrictScalarsComp'App_inv_naturality_assoc\", \"ModuleCat.restrictScalarsId'App_inv_naturality_assoc\", \"ModuleCat.restrictScalarsId'App_inv_naturality\", \"PresheafOfModules.restrictScalarsCompToPresheaf\"], \"digest\": \"cc064e92ab11a500\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full statement: hits give ordinary scalar-change or sheaf-pushforward infrastructure, without this condensed-coefficient compactification comparison, localizing closures, and normalized given right adjoints."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-existence",
@@ -85,5 +257,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-shriek-coefficient-isomorphism",
+  "worker": "stage1",
+  "summary": "Split without new nodes: verify ambient coproducts and the exact scalar equivalences, use the existing coefficient-isomorphism constructibility lemma in both directions, prove transport of the intersection-defined localizing closures, compose the existing unbounded scalar-restriction comparisons for proper direct image and open extension, and explicitly construct and normalize the right mate for the supplied adjunctions. The statement is unchanged.",
+  "blueprint": "sk-thm-existence, introductory coefficient specializations in det-existence-localizing and det-existence-restriction: identify the coefficient-ring-isomorphic compactification functors and their same right adjoint before restricting it; sk-def-sfb-coefficient-comparisons, extension by zero and (Push)/(Shriek).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Provides the Grothendieck, additive and closed tensor hypotheses for abelian sheaves on the small site; a generic sheaf-category tool, not a replacement of the existence unit route."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Provides ambient small coproducts on the ordinary unbounded module-derived categories; the item uses localizing closures rather than a new geometric route."
+   },
+   {
+    "node": "lem-sfb-condensed-coefficient-iso-constructible",
+    "why": "Gives constructible finite-Tor preservation under an arbitrary condensed coefficient isomorphism; applied to both e and its inverse."
+   },
+   {
+    "node": "def-sfb-modobj-extension-along-iso",
+    "why": "Identifies extension along an isomorphism with inverse restriction, supplying exactly the flatness hypothesis of the derived direct-image comparison."
+   },
+   {
+    "node": "def-sfb-derived-comap-lower-star-iso",
+    "why": "Generic coefficient/direct-image comparison applied to e inverse and the fixed proper map; implements the coefficient-comparison route stated in the item source."
+   },
+   {
+    "node": "def-sfb-comap-open-immersion-shriek-iso",
+    "why": "Generic open-extension scalar-restriction comparison for the fixed compactification; implements its open factor."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Formal category-theory invertibility of the explicitly written right mate; does not use the geometric restriction theorem of its filing unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-comap-open-immersion-shriek-iso",
+  "lem-weil-mate-iso-along-equivalences"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-406d9b3c6",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-406d9b3c6 (reviewer sub-agent of L); spot-checked: Read the item's 10 steps in full (no new nodes); review.md has the details. Statement and stmt_deps are byte-identical to live/side-live, where the item is still unsplit and has no repair note. proof_deps equals the union of step uses, every cited node exists and is unmerged, there is no cycle (closure of 727 nodes) and nothing cites SGA. Route checked against main-20261015 det-existence-restriction/localizing and the sk-def-sfb-coefficient-comparisons section ((Shriek) = Push on the proper part, then extension-by-zero iso). The citer sk-thm-existence step 11 uses exactly the item's iff and the identification of the given adjoints. Steps: (1) sheaf-tensor-closed + modobj-grothendieck + derived-coproducts give the ambient coproducts, including the empty one. (2) change-of-scalars (4)/(5) + exact-functor factorization make U_T an equivalence with inverse V_T. (3) coefficient-iso-constructible says exactly that U_T maps Dctf(Λ) into Dctf(Λ'), so it applies to e and to e^{-1}, in the same ordinary unbounded categories with the same Tor test. (4) the preimage of L' is a replete triangulated subcategory closed under coproducts, so minimality gives the restricted equivalence. (5) derived-comap-lower-star-iso with a=e^{-1} gives U_Y Rp_* ≅ Rp_* U_Z in the right direction; its flatness hypothesis holds because extension along an iso is restriction along the inverse, which is exact. (6) comap-open-immersion-shriek-iso descends termwise; derived-open-immersion-shriek-iso concerns T, not Res, so it is not a missed citation. (8) the mate lemma with θ=a^{-1}: α matches b_N componentwise. (9) the adjunction hom-bijection formulas give the counit equation exactly as printed and uniqueness by injectivity. (7) and (10) use repleteness. Edge cases e=id, zero ring, empty X and j=id are consistent. All seven declared tool_uses accepted as generic black boxes. No changes."
  }
 }
