@@ -21116,3 +21116,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:19 L: merged deliver/Q138/def-nagata-flat-pullback-rees-map (reviewer FIX; after a return; new nodes: 0)
 - 08:19 L: merged deliver/Q03/lemma-nagata-strict-transform-chart-cocycle (reviewer PASS; after a return; new nodes: 0)
 - 08:19 L: returned deliver/Q13/lem-asd-affine-roots-representability (reviewer RETURN: A7/B10, superseded. The human re-split note for this item (coord/repair-notes, mtime 2026-10-21 06:08:38 UTC) was releas)
+- 2026-10-21T08:19:42Z L: superseded stage-1 delivery Q51/lem-sfb-eta-id at 541dd51eada459a3161a41481ba60128ed052dd0; current completion retained; packet archived at refs/superseded/Q51/lem-sfb-eta-id/541dd51eada459a3161a41481ba60128ed052dd0; stale return retired.
