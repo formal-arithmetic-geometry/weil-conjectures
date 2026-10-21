@@ -80,6 +80,73 @@ theorem enriched_isomorphism
             adjointComparison tensorC tensorD HC HD θC θD F G μ adj P' N' =
           adjointComparison tensorC tensorD HC HD θC θD F G μ adj P N ≫
             G.map (HD.map (Prod.mkHom (F.map a).op v))) := by
-  sorry
+  constructor
+  · intro P N
+    let V := HC.obj (op P, G.obj N)
+    let J := HD.obj (op (F.obj P), N)
+    let δ := adjointComparison tensorC tensorD HC HD θC θD F G μ adj P N
+    let ev := evaluation tensorC HC θC P (G.obj N)
+    let k := (μ V P).hom ≫ F.map ev ≫ adj.counit.app N
+    -- Uncurrying is tensoring with the identity followed by evaluation.
+    have huncurry (T : C) (t : T ⟶ V) :
+        (θC T P (G.obj N)).symm t = tensorC.map (Prod.mkHom t (𝟙 P)) ≫ ev := by
+      apply (θC T P (G.obj N)).injective
+      have hθev : θC V P (G.obj N) ev = 𝟙 V := by
+        dsimp only [V, ev, evaluation]
+        exact (θC _ P (G.obj N)).apply_symm_apply _
+      have h := hθC V T P P (G.obj N) (G.obj N) ev t (𝟙 P) (𝟙 (G.obj N))
+      simpa only [Category.comp_id, hθev, Equiv.apply_symm_apply,
+        op_id, ← prod_id, Functor.map_id] using h.symm
+    -- This is the five-bijection composite in the node's proof.
+    let Φ (T : C) : (T ⟶ V) ≃ (T ⟶ G.obj J) :=
+      (θC T P (G.obj N)).symm |>.trans
+        ((adj.homEquiv (tensorC.obj (T, P)) N).symm) |>.trans
+        ({ toFun := fun f ↦ (μ T P).hom ≫ f
+           invFun := fun f ↦ (μ T P).inv ≫ f
+           left_inv := fun f ↦ by simp only [← Category.assoc, Iso.inv_hom_id,
+             Category.id_comp]
+           right_inv := fun f ↦ by simp only [← Category.assoc, Iso.hom_inv_id,
+             Category.id_comp] } :
+          (F.obj (tensorC.obj (T, P)) ⟶ N) ≃
+            (tensorD.obj (F.obj T, F.obj P) ⟶ N)) |>.trans
+        (θD (F.obj T) (F.obj P) N) |>.trans (adj.homEquiv T J)
+    have hΦ (T : C) (t : T ⟶ V) : Φ T t = t ≫ δ := by
+      have hk : (μ T P).hom ≫ F.map ((θC T P (G.obj N)).symm t) ≫
+          adj.counit.app N =
+            tensorD.map (Prod.mkHom (F.map t) (𝟙 (F.obj P))) ≫ k := by
+        have hμt : (μ T P).hom ≫ F.map (tensorC.map (Prod.mkHom t (𝟙 P))) =
+            tensorD.map (Prod.mkHom (F.map t) (𝟙 (F.obj P))) ≫ (μ V P).hom := by
+          simpa only [Functor.map_id] using hμ T V P P t (𝟙 P)
+        rw [huncurry, Functor.map_comp]
+        dsimp only [k]
+        simp only [← Category.assoc]
+        rw [hμt]
+      have htranspose :
+          θD (F.obj T) (F.obj P) N
+            (tensorD.map (Prod.mkHom (F.map t) (𝟙 (F.obj P))) ≫ k) =
+              F.map t ≫ comparison tensorC tensorD HC HD θC θD F G μ adj P N := by
+        change θD (F.obj T) (F.obj P) N
+          (tensorD.map (Prod.mkHom (F.map t) (𝟙 (F.obj P))) ≫ k) =
+            F.map t ≫ θD (F.obj V) (F.obj P) N k
+        simpa only [Category.comp_id, op_id, ← prod_id, Functor.map_id] using
+          hθD (F.obj V) (F.obj T) (F.obj P) (F.obj P) N N k
+            (F.map t) (𝟙 (F.obj P)) (𝟙 N)
+      change adj.homEquiv T J
+        (θD (F.obj T) (F.obj P) N
+          ((μ T P).hom ≫ (adj.homEquiv (tensorC.obj (T, P)) N).symm
+            ((θC T P (G.obj N)).symm t))) = t ≫ δ
+      rw [adj.homEquiv_counit, hk, htranspose, adj.homEquiv_naturality_left]
+      rfl
+    -- Surjectivity gives a right inverse, and injectivity gives the other identity.
+    obtain ⟨s, hs⟩ := (Φ (G.obj J)).surjective (𝟙 (G.obj J))
+    have hsδ : s ≫ δ = 𝟙 (G.obj J) := by rwa [hΦ] at hs
+    have hδs : δ ≫ s = 𝟙 V := by
+      apply (Φ V).injective
+      simp only [hΦ, Category.assoc, hsδ, Category.id_comp]
+      exact Category.comp_id δ
+    exact ⟨s, hδs, hsδ⟩
+  · intro P P' N N' a v
+    exact (naturality tensorC tensorD HC HD θC θD F G μ adj hθC hθD hμ
+      P P' N N' a v).2
 
 end CategoryTheory.ClosedAdjunctionComparison

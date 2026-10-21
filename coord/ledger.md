@@ -22115,3 +22115,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:11 L: merged deliver/J6/Sheaf.AlgebraicGeometry.RationalDerivedScalarInvertible (stage 3; reviewer PASS; first push; landing 20261021T101153-L-20727 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/rational-derived-scalar-imports.md)
 - 10:12 L: merged deliver/J6/Sheaf.CategoryTheory.ExtensionIsoQuotientFormula (stage 3; reviewer PASS; first push; landing 20261021T101157-L-21229 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:12 L: merged deliver/K1/Sheaf.Algebra.Homology.ScalarHomComparisonTower (stage 3; reviewer PASS; first push; landing 20261021T101201-L-22068 (proof); batch 20261021T100250; modules 1; new nodes 0)
+- 10:12 L: merged deliver/K1/Sheaf.CategoryTheory.ClosedAdjunctionEnrichedIsomorphism (stage 3; reviewer PASS; first push; landing 20261021T101204-L-22821 (proof); batch 20261021T100250; modules 1; new nodes 0)
