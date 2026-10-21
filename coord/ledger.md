@@ -20844,3 +20844,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:06 L: merged deliver/Q108/prop-weil-operations (reviewer PASS; after a return; new nodes: 5)
 - 08:06 L: merged deliver/Q53/lem-sf-complete-residue-cohomology-bounds (reviewer PASS; after a return; new nodes: 2)
 - 08:06 L: merged deliver/NK/lem-pur-normalized-actual-reconstruction-maps (reviewer FIX; first push; new nodes: 0)
+- 08:06 L: merged deliver/Q59/lem-sfb-admissible-direct-image (reviewer PASS; after a return; new nodes: 2)
