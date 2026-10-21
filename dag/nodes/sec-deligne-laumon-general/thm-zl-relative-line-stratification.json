@@ -3,64 +3,202 @@
  "blueprint": {
   "is": "thm-zl-relative-line-stratification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stratification of a sheaf on a relative line",
- "statement": "Let $Y_0$ be a separated finite-type $k_0$-scheme and let $\\mathcal F$\nbe a constructible Weil sheaf on $\\mathbf A^1_{Y_0}$ (in the\nconstructible conventions of [def-weil-pbc-constructible-complexes]).\nThere are finite stratifications of source and target such that\n$\\mathcal F$ is lisse on every source stratum and each induced map is\neither separated quasi-finite or smooth with one-dimensional affine\ngeometric fibers.",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ and a prime $\\ell\\ne\\operatorname{char}(k_0)$ [def-weil-finite-field-fiber]. Let $Y_0$ be a separated finite-type $k_0$-scheme [def-weil-pbc-scheme-conventions] and let $\\mathcal F$ be a constructible $\\overline{\\mathbf Q}_\\ell$-Weil sheaf on $\\mathbf A^1_{Y_0}$ [def-sbc-affine-space], with Weil sheaf understood in [def-weil-weil-sheaf-complex] and lisse in [def-pod-lisse-l-adic-sheaves]. There are finite stratifications of source and target by locally closed reduced [def-pc-reduced-scheme] subschemes [def-constructible-stratification], compatible with the projection, such that $\\mathcal F$ restricts to a lisse Weil sheaf on every source stratum and each induced map to its target stratum is either separated quasi-finite [pqf-def-quasifinite] or smooth [def-sbc-smooth-morphisms] with one-dimensional affine geometric fibres. All strata and their immersions are defined over $k_0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
   "place": "node thm-zl-relative-line-stratification, order 2847"
  },
  "stmt_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-affine-space",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pc-reduced-scheme",
+  "def-constructible-stratification",
+  "pqf-def-quasifinite",
+  "def-sbc-smooth-morphisms"
  ],
  "proof": [
   {
-   "text": "We work with reduced strata; by [i-topology], nilpotent thickenings do not change the\netale coefficient categories. We induct on closed subsets of the\nNoetherian target, and first explain the step on an integral affine\ntarget $Y=\\operatorname{Spec}B$. The scheme\n$\\mathbf A^1_Y$ is integral. Constructibility in\n[def-weil-pbc-constructible-complexes] gives a nonempty open\n$U\\subset\\mathbf A^1_Y$ on which $\\mathcal F$ is lisse.\nLet $Z=\\mathbf A^1_Y\\setminus U$, with its reduced closed structure.\nIf $Z$ is empty there is nothing to remove. Otherwise its ideal\n$I\\subset B[T]$ contains a nonzero polynomial $g$.\nThis is also nonzero over $\\operatorname{Frac}B$, since $B$ is a\ndomain. Let $b\\in B\\setminus\\{0\\}$ be its leading coefficient.\nOver $V=D(b)$, the polynomial $b^{-1}g$ is monic. Consequently\n\n$$\nB_b[T]/I B_b[T]\n$$\n\nis a finite $B_b$-module: it is a quotient of the module generated\nby $1,T,\\ldots,T^{\\deg(g)-1}$ using that monic relation.\nWhen $g$ has degree zero the quotient is zero. Thus $Z_V\\to V$\nis finite, including the empty case.",
+   "text": "Every scheme here is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over the field $k_0$, whose only ideals are $0$ and $k_0$. We use closed-subset induction, justified by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. The inductive assertion for a closed subset $T\\subseteq Y_0$ is the claimed pair of finite stratifications over its reduced closed subscheme $T_0$, for every restricted constructible Weil sheaf. The empty subset has the empty partitions. Restrictions to the reduced locally closed schemes below remain constructible Weil sheaves: [def-zl-weil-ind-sheaf-category] specifies inverse image on the existing constructible Weil heart for every finite-type $k_0$-morphism. We only restrict the sheaf; we do not assert a coefficient-category equivalence with the reduction.",
    "uses": [
-    "i-topology",
-    "def-weil-pbc-constructible-complexes"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-zl-weil-ind-sheaf-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 1, reduced strata and Noetherian induction"
+   }
   },
   {
-   "text": "The open complement $U_V=\\mathbf A^1_V\\setminus Z_V$ still has\n$\\mathcal F$ lisse. It is an open subscheme of the smooth projection\nof [def-sbc-affine-space], so $U_V\\to V$ is smooth of relative\ndimension one. Its geometric fibers are affine lines with finitely many\npoints removed. Such a fiber is affine: over the geometric residue\nfield it is a principal open defined by the product of the finitely\nmany linear factors of the removed points. It is nonempty and connected.\nChoose a finite lissity stratification of $\\mathcal F|_{Z_V}$.\nEvery resulting locally closed source stratum has finite geometric\nfibers over $V$, and hence is separated quasi-finite by\n[pqf-def-quasifinite]. We have obtained exactly the two asserted\ntypes over the nonempty target open $V$.",
+   "text": "We will also need a finite lissity partition on any reduced separated finite-type $k_0$-scheme $W_0$ carrying a constructible Weil sheaf $G$. Apply [lem-zl-weil-generic-lissity] to obtain a dense open $O_0$ on which $G$ is lisse. Apply the same assertion inductively to the reduced closed complement. The empty case and closed-subset induction give finitely many locally closed reduced pieces, all over $k_0$, with lisse restrictions. If affine pieces are needed, apply [lem-zl-affine-partition] separately to these finitely many Noetherian pieces. Restrictions of lisse adic sheaves to those reduced immersions are lisse: pull back their etale local trivializations at each finite coefficient level; the same tensor-transition isomorphisms remain isomorphisms after pullback, and rationalization and coefficient extension preserve these trivializations. The Frobenius isomorphism restricts along every $k_0$-immersion.",
+   "uses": [
+    "lem-zl-weil-generic-lissity",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-zl-affine-partition",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 2, choose a finite lissity stratification of the boundary"
+   }
+  },
+  {
+   "text": "For a nonempty reduced $T_0$, [lem-weil-pbc-noetherian-finitely-many-components] gives finitely many irreducible components $C_a$. Each contains a nonempty open of $T_0$ by [lem-sfb-noetherian-component-open]. Remove the other components from that open; the result still contains the generic point of $C_a$. Choose an affine open neighbourhood $A_a=\\operatorname{Spec}B_a$ of that point inside it, using the affine-open basis of a scheme. The $A_a$ are disjoint, and are integral because they are reduced and lie in one irreducible component. Their union is dense in $T_0$. It suffices to construct the strata over a smaller nonempty open $V_a\\subseteq A_a$ for each $a$; their union will still contain every generic point.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sfb-noetherian-component-open",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 3, disjoint integral affine opens"
+   }
+  },
+  {
+   "text": "Fix $A=\\operatorname{Spec}B$ among these integral affine opens. Its relative line is $\\operatorname{Spec}B[t]$ by [def-sbc-affine-space], and is integral by [lem-weil-pbc-polynomial-ring-domain]. Apply [lem-zl-weil-generic-lissity] to the restricted sheaf on this reduced separated finite-type scheme, obtaining a nonempty open $U_0\\subseteq\\mathbf A^1_A$, defined over $k_0$, with lisse restriction. Let $Z_0$ be the reduced closed complement, with ideal $I\\subseteq B[t]$. If $Z_0$ is empty, put $V=A$; otherwise its being proper in the spectrum of the domain implies $I\\ne0$.",
    "uses": [
     "def-sbc-affine-space",
-    "pqf-def-quasifinite"
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-zl-weil-generic-lissity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 1, integral affine base and lisse open"
+   }
   },
   {
-   "text": "For an arbitrary nonempty reduced target, choose in each of its finitely\nmany irreducible components an affine open avoiding all other components.\nThese disjoint integral opens contain all generic points. The affine\nrefinement can also be made using [lem-zl-affine-partition].\nPerform the preceding construction on each, and take the union of the\nresulting nonempty opens $V$. Its complement is a proper closed\nsubset of the target. Apply the induction hypothesis to the relative\naffine line and the restricted sheaf over that complement. This gives\nfinitely many further strata. Noetherian induction terminates, so the\ncombined source and target partitions are finite. Refining the lissity\npartitions of the quasi-finite pieces to open–closed filtrations does\nnot change their quasi-finiteness, and makes all gluing steps compatible\nwith localization.",
+   "text": "In the nonempty-boundary case choose $0\\ne g\\in I$, let $b\\ne0$ be its leading coefficient, and put $V=D(b)\\subset A$. Over $B_b$, $b^{-1}g$ is monic of degree $d$. In $B_b[t]/IB_b[t]$ its relation expresses $t^d$ as a linear combination of lower powers, and multiplying repeatedly reduces every power to the span of $1,t,\\ldots,t^{d-1}$. This quotient is therefore a finite $B_b$-module. If $d=0$ the quotient is zero. By [def-weil-finite-integral-morphism], $Z_V\\to V$ is finite. In the empty-boundary case it is the empty finite morphism. The open $V$ is nonempty since $B$ is a domain and $b\\ne0$.",
    "uses": [
-    "lem-zl-affine-partition"
+    "def-weil-finite-integral-morphism"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 1, leading coefficient and monic relation"
+   }
   },
   {
-   "text": "All lissity loci can be chosen over the finite-field model: lissity is\npreserved by the Weil isomorphism. Equivalently, descend the finitely\nmany constructible strata to a common finite constant extension and\nintersect their finitely many Frobenius conjugate dense opens; this\nretains the lisse open used above. The closed complements and their\nsuccessive strata are then Weil-stable. Thus the filtration is a\nfiltration by Weil sheaves, not just by unrelated geometric sheaves.\nAt no point is smoothness deduced merely from the set of points of a\nfiber; it comes from restricting the known smooth affine-line projection.",
+   "text": "Let $U_V=\\mathbf A^1_V\\setminus Z_V$. It carries a lisse restriction, since it is an open in $U_0$. The projection $\\mathbf A^1_V\\to V$ is smooth of relative dimension one by [sbc-lem-affine-space-smooth], and its restriction to $U_V$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. For a geometric point $\\bar v$ of $V$, the boundary is a finite closed subscheme of $\\mathbf A^1_{\\kappa(\\bar v)}$: the monic relation remains monic in every fibre. Its support is a finite set $\\{a_1,\\ldots,a_r\\}$. Thus the complementary geometric fibre is $D(\\prod_i(t-a_i))$, with the empty product $1$ if $r=0$. It is affine and nonempty, and its local rings are the same as those of the affine line, so it has pure dimension one. This proves the smooth-fibre clause over $V$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 2, smooth open and punctured affine-line fibres"
+   }
+  },
+  {
+   "text": "Apply step 2 to $Z_V$, obtaining a finite partition into reduced affine strata $S_b$ on which the sheaf is lisse. By [pqf-lem-finite-qf], the finite morphism $Z_V\\to V$ is quasi-finite, and [pqf-lem-qf-finitefibres] gives finite fibres. Each immersion $S_b\\to Z_V$ is injective on the points of each fibre; hence $S_b\\to V$ has finite fibres. Both $S_b$ and $V$ are affine of finite type over $k_0$; generators of the coordinate ring of $S_b$ over $k_0$ also generate it as an algebra over the coordinate ring of $V$. Thus $S_b\\to V$ is finite type and quasi-compact. Apply [pqf-lem-qf-finitefibres] again to conclude quasi-finiteness. It is separated by [lem-weil-pbc-affine-source-morphism-separated], since $S_b$ is affine. Together with $U_V$ these pieces partition the relative line over $V$.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-finitefibres",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 2, boundary strata are separated quasi-finite"
+   }
+  },
+  {
+   "text": "Perform steps 4-7 on the finitely many $A_a$ and let $V=\\coprod_aV_a$ be their union in $T_0$. This is an open containing every generic point; its complement $T'_0$ is a proper reduced closed subscheme of $T_0$. The induction hypothesis gives finite source and target stratifications over $T'_0$. Add the finitely many target pieces $V_a$ and their source pieces from steps 6-7. Every point of $T_0$ lies either in one $V_a$ or in $T'_0$, so the target pieces partition $T_0$, and the corresponding inverse-image source pieces partition $\\mathbf A^1_{T_0}$. All are locally closed reduced subschemes, their sheaf restrictions are lisse, and each induced map has the type proved above. Closed-subset induction, including its empty case, proves finiteness and the assertion over $(Y_0)_{\\mathrm{red}}$. Compose these reduced source and target immersions with the reduction immersions into $\\mathbf A^1_{Y_0}$ and $Y_0$; they still give the required locally closed partitions, since reduction does not change the points. No assertion that $\\mathcal F$ itself descends to the reduced scheme is used.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 3, reassembly and reduced strata"
+   }
+  },
+  {
+   "text": "Every scheme, polynomial, open, complement and immersion used in this construction is defined over $k_0$. In step 4 this is the finite-field-model conclusion of [lem-zl-weil-generic-lissity], and the same conclusion applies at each use in step 2. Geometric Frobenius on a base change commutes with every such immersion. Hence restricting the given isomorphism $\\Phi^*\\mathcal F\\cong\\mathcal F$ gives a Weil isomorphism on each source stratum. This verifies lissity as Weil sheaves and the claimed model compatibility without assuming that a Weil sheaf descends as an arithmetic etale sheaf, or that a chosen lattice is Frobenius-stable.",
+   "uses": [
+    "lem-zl-weil-generic-lissity",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
+    "place": "Proof paragraph 4, Weil-stable strata"
+   }
   }
  ],
  "proof_deps": [
-  "i-topology",
-  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-zl-weil-generic-lissity",
+  "lem-zl-affine-partition",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sfb-noetherian-component-open",
+  "def-pc-scheme",
   "def-sbc-affine-space",
-  "pqf-def-quasifinite",
-  "lem-zl-affine-partition"
+  "lem-weil-pbc-polynomial-ring-domain",
+  "def-weil-finite-integral-morphism",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.md",
-  "place": "## Proof"
+  "place": "Entire proof, expanded into closed-subset induction, monic finiteness, smooth open and lisse boundary arguments; coefficient-convention repair"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf on a relative affine line admits source and base stratifications with lisse restrictions and quasi finite or smooth affine curve pieces",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.reduce_to_affine_global, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource Read the returned signatures: the geometric affine-limit, locally quasi-finite, condensed locally constant, etale-locus, and Frobenius ring results do not state generic lissity of constructible Weil sheaves. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 defines ell-adic coefficient sheaves and their cohomology, not constructible Weil sheaves or their lisse loci.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "No hits. Read the returned signatures: the geometric affine-limit, locally quasi-finite, condensed locally constant, etale-locus, and Frobenius ring results do not state generic lissity of constructible Weil sheaves. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 defines ell-adic coefficient sheaves and their cohomology, not constructible Weil sheaves or their lisse loci.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|relativeLineStratification|relative_line_stratification",
+   "results": "No hits. Read the returned signatures: the geometric affine-limit, locally quasi-finite, condensed locally constant, etale-locus, and Frobenius ring results do not state generic lissity of constructible Weil sheaves. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 defines ell-adic coefficient sheaves and their cohomology, not constructible Weil sheaves or their lisse loci.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaf stratification over an affine line into quasi finite and smooth curves",
+   "results": "Hits: AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite.casesOn, smoothSheafCommGroup, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Scheme.sheaf, SheafOfModules.IsFiniteType.mk, smoothSheafCommRing Read the returned signatures: the geometric affine-limit, locally quasi-finite, condensed locally constant, etale-locus, and Frobenius ring results do not state generic lissity of constructible Weil sheaves. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 defines ell-adic coefficient sheaves and their cohomology, not constructible Weil sheaves or their lisse loci.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible l adic sheaf has a dense lisse open defined over the finite field and a stratification compatible with projection from relative affine one space",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_map_eq_top Read the returned signatures: the geometric affine-limit, locally quasi-finite, condensed locally constant, etale-locus, and Frobenius ring results do not state generic lissity of constructible Weil sheaves. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 defines ell-adic coefficient sheaves and their cohomology, not constructible Weil sheaves or their lisse loci.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -91,5 +229,74 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "thm-zl-relative-line-stratification",
+  "worker": "stage1",
+  "summary": "Corrected the finite-coefficient convention reference to the constructible Qlbar Weil heart and adic lissity, with explicit finite-field datum and reduced model strata. Extracted only generic Weil lissity over its model; proved the leading-coefficient finiteness calculation inline, used the actual finite-fibre theorem for quasi-finiteness and the actual affine-space smoothness theorem, and made both induction arguments explicit. The existing pure-weight Lean stratification is not an attachment for arbitrary constructible sheaves.",
+  "blueprint": "Steps 1,3-5 realize paragraph 1 and its integral-affine reduction; steps 2,6-7 realize paragraph 2; step 8 realizes paragraph 3; step 9 realizes paragraph 4. The unit route remains Noetherian base induction followed by smooth relative-line and quasi-finite pieces.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of finite-type schemes over a field; generic geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Minimal-closed-subset formulation of the two Noetherian inductions."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Finiteness of the component index set for the dense generic step."
+   },
+   {
+    "node": "lem-sfb-noetherian-component-open",
+    "why": "A nonempty open inside each component, needed to choose disjoint integral affine opens."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-domain",
+    "why": "Integrality of the affine line over an integral affine base."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Smoothness and relative dimension one of the affine-line projection, a generic geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Smoothness is preserved on the lisse open of the relative line."
+   },
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Finiteness implies quasi-finiteness for the monic boundary."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Finite-type finite-fibre criterion for boundary strata."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Separatedness of the affine boundary strata."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sfb-noetherian-component-open",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-affine-source-morphism-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-48c0eb975",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-48c0eb975 (reviewer sub-agent of L); spot-checked: I read the master and main-20261015 sources (identical, no blueprint_update), the unit sk-thm-dl-general-sheaf, the citer thm-zl-relative-line-step, Weil II (1.1.1) pp. 146–147, every cited node statement, and the item and new node in full. The item is not superseded: it is still imported and unsplit on live and side-live, not dropped, and has no repair note. Statement change accepted: the base's finite-ring convention (def-weil-pbc-constructible-complexes) cannot carry a Qlbar-Weil sheaf. Replacing it with def-weil-weil-sheaf-complex plus def-pod-lisse-l-adic-sheaves matches the unit, the citer and the chapter's reviewed nodes. Reduced strata over k_0 is a clarification, not a weakening. Steps checked: 1 Noetherian closed-subset induction; restriction via def-zl-weil-ind-sheaf-category, so i-topology is no longer needed. 2 lissity partition through the new lemma plus lem-zl-affine-partition. 3 disjoint integral affine opens through the component lemmas. 4 I≠0 because B[t] is a domain. 5 leading-coefficient monic finiteness; d=0 and empty cases checked. 6 sbc-lem-affine-space-smooth plus open restriction; the geometric fibre is D(∏(t−a_i)). 7 finite ⇒ quasi-finite, 02NH used in both directions, affine source ⇒ separated. 8 bookkeeping and reassembly. 9 Frobenius restriction along k_0-immersions. proof_deps equals the union of step uses. The new node lem-zl-weil-generic-lissity (dense lisse model open of a constructible Qlbar-Weil sheaf) is true: maximal lisse open, Φ-stable, defined over some F_{q^n}, Galois descent. Edge cases checked: empty, already lisse, skyscraper, mixed weights. It is strictly smaller than the item and duplicates nothing: I checked fin2-lem-lisse-dense-open, the etale generic-lisse lemmas, new-det-…-common-stratification-lisse, lisse-lattice-reduced-open and affine-line-lisse-finite-complement. Batch 5: def-pod-lisse-l-adic-sheaves is a pure definition (Weil II 1.1.1 systems), not a step of Poincaré duality or the trace formula, so it is accepted for both citations, as for NZ affine-curve-core. Accepted tool uses: sbc-lem-affine-space-smooth, pqf-lem-finite-qf, pqf-lem-qf-finitefibres and the Mathlib-leaf geometry nodes. No SGA is cited. FIX (B3): the item statement used 'reduced' without a definition; I added [def-pc-reduced-scheme] to the statement and stmt_deps in fixes/dag/nodes/sec-deligne-laumon-general/thm-zl-relative-line-stratification.json. Advisory: composition of immersions has no node (it is Mathlib IsImmersion.comp, Immersion.lean:146, through def-weil-closed-immersion's match); the new node has no lean_audit key; NQ and NY deliver a node with the same id in parallel.; 1 file(s) fixed by the reviewer"
  }
 }
