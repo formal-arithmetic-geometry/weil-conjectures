@@ -25,34 +25,20 @@
  ],
  "proof": [
   {
-   "text": "Use the small-site universe convention of [def-weil-size-convention] for the small etale site and its module sheaves. The hypotheses give $P^i=0$ for $i>b$ and $Q^j=0$ for $j>d$, and every term is flat in the exact-tensor sense. Apply [lem-weil-pbc-independent-bounded-flat-kflat], on the ringed site $(X_{\\mathrm{et}},A_X)$, separately to $P$ and $Q$. Both complexes are K-flat. Neither the finiteness of $A$ nor a lower bound on the complexes is needed for this step.",
+   "text": "Use braiding to turn the given exact tensorRight functors into categorical flat objects. Tensor products of flat objects are flat by composition of exact tensor functors. Finite biproducts of flat objects are flat: apply the source closedUnderLimitsOfShape_discrete_flat to the finite product cone of the biproduct. All these constructions remain in the stated category of etale sheaves valued in ModuleCat A; there is no conversion to SheafOfModules.",
    "uses": [
-    "def-weil-size-convention",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
+    "def-pc-flat-sheaf-modules"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
+    "document": "lean/WeilConjectures/FromJoel/CategoryTheory/Abelian/Flat/Basic.lean",
+    "place": "ObjectProperty.flat.IsMonoidal; KFlat.lean, closedUnderLimitsOfShape_discrete_flat"
    }
   },
   {
-   "text": "The complexes $P,Q$ now satisfy both hypotheses of [lem-pur-kflat-total-tensor-model]: they are K-flat and have flat terms, over the same commutative ring sheaf $A_X$. Consequently their actual signed direct-sum total tensor $T$ has flat terms and is K-flat. This is the ringed-site result, so it applies directly on the small etale site, without interpreting $A_X$ as a scheme structure sheaf or changing coefficient categories.",
+   "text": "The coproduct universal property identifies the degree-n total term [def-pc-tensor-complex-sheaves] with the finite coproduct of P^i tensor Q^(n-i), indexed by i in the integer interval [a,b]. Construct the two inverse maps using mapBifunctorDesc and the summand inclusions. Terms with i outside [a,b] vanish because tensorRight preserves zero. This is the proved private bounded_total_term_iso. The finite biproduct comparison and the preceding flatness facts give flatness of every total term. If n<a+c or n>b+d then every summand has a zero factor; the source isStrictlyGE_tensorObj and isStrictlyLE_tensorObj implement precisely this calculation.",
    "uses": [
-    "lem-pur-kflat-total-tensor-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A2, lemma-tensor-product-K-flat; flat terms: sites-modules.tex, Tag 0G6Q, lemma-tensor-flats"
-   }
-  },
-  {
-   "text": "In the total-term formula of [def-pc-tensor-complex-sheaves], a nonzero summand in degree $n$ must have $a\\le i\\le b$, $c\\le j\\le d$, and $i+j=n$. There are finitely many such pairs. If $n<a+c$ or $n>b+d$ there are none. Tensor with zero is zero, since the tensor functor preserves the initial object by [lem-weil-pbc-independent-sheaf-tensor-colimits] (for a zero left factor, [def-pur-sheaf-tensor-product] gives the sheafification of the sectionwise zero tensor presheaf, hence zero). A direct sum with all but finitely many zero summands is canonically the sum of the remaining summands, by its coproduct universal property. Thus $T^n=0$ outside $[a+c,b+d]$, and each $T^n$ is a finite direct sum of the indicated tensor sheaves. These are statements about terms, not merely cohomological bounds.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pur-sheaf-tensor-product"
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": true,
    "source": {
@@ -61,15 +47,14 @@
    }
   },
   {
-   "text": "Fix a pair $(i,j)$ in the two input intervals and put $F=P^i$, $G=Q^j$. Choose the finite constructible locally closed stratifications in [def-weil-pbc-etale-constructible-sheaf] for $F$ and $G$. The fibre-product intersection stratification of [lem-weil-pbc-constructible-stratification-intersection] refines both and still has constructible strata. By [lemma-constructible-of-refines], both restricted sheaves are finite locally constant on every new stratum. For its immersion $u:Z\\to X$, [prop-weil-pbc-inverse-image-modules-exact] identifies $u^{-1}A_X$ with $A_Z$ and identifies inverse image with module pullback. Therefore [lem-weil-pbc-ringed-topoi-module-pullback-tensor] gives $u^{-1}(F\\otimes_{A_X}G)\\cong u^{-1}F\\otimes_{A_Z}u^{-1}G$. The right side is locally constant by [lem-weil-pbc-flc-tensor-locally-constant-part] and finite by [lem-weil-pbc-flc-tensor-finite-part]. Here finite generation agrees with finite values because $A$ is a finite ring. Hence the displayed intersection stratification witnesses constructibility of $P^i\\otimes_{A_X}Q^j$. This argument uses the actual fibre products, not factorization of an immersion inferred from set-theoretic containment.",
+   "text": "Convert finite-value constructibility to the source predicate using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Apply the already proved Scheme.IsConstructibleSheaf.tensorObj to each tensor summand. Its proof is the fibre-product common-refinement argument: [lem-weil-pbc-constructible-stratification-intersection] and [lemma-constructible-of-refines] make both restrictions finite locally constant, the source monoidal etale pullback comparison carries tensor to the strata, and [lem-weil-pbc-flc-tensor-locally-constant-part] and [lem-weil-pbc-flc-tensor-finite-part] give finite local constancy of their tensor. The source IsConstructibleSheaf.biproduct theorem, deduced from the split-extension case of [thm-constructible-serre], gives constructibility of the finite sum and hence of each total term.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "lem-weil-pbc-constructible-stratification-intersection",
     "lemma-constructible-of-refines",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
     "lem-weil-pbc-flc-tensor-locally-constant-part",
-    "lem-weil-pbc-flc-tensor-finite-part"
+    "lem-weil-pbc-flc-tensor-finite-part",
+    "thm-constructible-serre"
    ],
    "elementary": false,
    "source": {
@@ -78,11 +63,11 @@
    }
   },
   {
-   "text": "By [thm-constructible-serre], constructible $A_X$-modules are closed under kernels, cokernels and extensions, in precisely the global finite-stratification convention used here. Zero is constructible (restrict the zero module on the one-stratum stratification; use the empty stratification if $X$ is empty). Finite sums are constructible by induction using the split short exact sequence $0\\to F\\to F\\oplus G\\to G\\to0$ and the extension clause. Steps 3 and 4 therefore show that every $T^n$ is constructible. For every $n$, the kernel clause gives constructible $Z^n=\\ker(d_T^n:T^n\\to T^{n+1})$. Since $d_T^n d_T^{n-1}=0$, the previous differential factors through $Z^n$, and the cokernel clause applied to $T^{n-1}\\to Z^n$ gives constructible $\\operatorname{coker}(T^{n-1}\\to Z^n)=\\mathcal H^n(T)$. The equality is the kernel/image definition of cohomology in [def-weil-derived-cohomology-sheaves]. In particular no claim that arbitrary subsheaves of constructible sheaves are constructible is used.",
+   "text": "For every degree n apply the kernel clause of [thm-constructible-serre] to the outgoing differential of the short complex T.sc n. Its cyclesIsKernel comparison makes the cycles constructible. Apply the cokernel clause to the map from the previous term into these cycles, and use homologyIsCokernel to obtain constructible homology. The homologyFunctorFactors comparison of [def-weil-derived-cohomology-sheaves] identifies this homology object with H^n(Q(T)). Convert back with [lem-weil-pbc-constructible-etale-module-sheaf-comparison].",
    "uses": [
     "thm-constructible-serre",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-derived-cohomology-sheaves"
+    "def-weil-derived-cohomology-sheaves",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
@@ -91,11 +76,12 @@
    }
   },
   {
-   "text": "Let $q$ denote localization to the ordinary unbounded derived category of $A_X$-modules. By step 1, $P,Q$ lie in the flat-term K-flat subcategory of [lem-weil-pbc-site-derived-tensor-descent]. Its specified comparison gives $q(T)\\cong q(P)\\otimes^{\\mathbf L}_{A_X}q(Q)$. This is the relative tensor of [def-kun-derived-tensor]: take the identity K-flat resolution $P\\to P$ in that definition. The independence statement of [lem-kun-derived-tensor-well-defined] identifies this computation with any other K-flat resolution used for that same tensor. All objects and comparisons are in the ordinary etale module-sheaf derived category, with the signed total differential already specified in the item.",
+   "text": "The upper support bounds and flat terms permit the generic source criterion [lem-sfb-bounded-above-flat-kflat], CochainComplex.kFlat_of_isStrictlyLE_of_flat, for P and T. Its categorical K-flatness predicate is definitionally the two-sided quasi-isomorphism predicate [def-sfb-preserves-kflat-quasi-iso] in the conclusion. The existing generic source comparison QObjTensorQObjIsoOfKFlatLeft (recorded by [lem-pc-source-kflat-module-tensor-model], here specialized to the etale sheaf category rather than its module-category example) gives Q(P) tensor-derived Q(Q) isomorphic to Q(T). Reverse it. This is the same derived tensor as [def-kun-derived-tensor], whose source definition is curriedTensor on this monoidal derived category.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-kun-derived-tensor",
-    "lem-kun-derived-tensor-well-defined"
+    "lem-sfb-bounded-above-flat-kflat",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-kun-derived-tensor"
    ],
    "elementary": false,
    "source": {
@@ -104,10 +90,9 @@
    }
   },
   {
-   "text": "For an arbitrary $A_X$-module sheaf $N$, step 2 permits [lem-sf-ringed-kflat-single-tensor-comparison] with $P$ there equal to $T$ here. Thus $q(T)\\otimes^{\\mathbf L}_{A_X}N[0]$ is represented by the complex with degree-$n$ term $T^n\\otimes_{A_X}N$ and differential $d_T^n\\otimes1_N$. By step 3 these terms vanish outside $[a+c,b+d]$; tensor with zero vanishes by [lem-weil-pbc-independent-sheaf-tensor-colimits]. At a degree outside the interval the cycles are a subobject of the zero term and hence zero, so the kernel/image formula in [def-weil-derived-cohomology-sheaves] gives zero cohomology there. This proves the asserted Tor interval for every $N$, without requiring $N$ to be flat or constructible.",
+   "text": "Apply the existing source theorem [lem-kun-flat-bounded-tor-amplitude], DerivedCategory.torAmplitudeIn_Q_obj_of_flat, to T with support interval [a+c,b+d] and the flatness proved above. For every arbitrary sheaf N in degree zero it gives both cohomological bounds. The isGE_iff and isLE_iff characterizations give exactly the required vanishing of derived cohomology outside this interval. Thus the single-sheaf computation is reused in the actual coefficient category without the separate independent-universe ringed-site comparison.",
    "uses": [
-    "lem-sf-ringed-kflat-single-tensor-comparison",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-kun-flat-bounded-tor-amplitude",
     "def-weil-derived-cohomology-sheaves"
    ],
    "elementary": false,
@@ -118,30 +103,25 @@
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-pur-kflat-total-tensor-model",
+  "def-pc-flat-sheaf-modules",
   "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lem-weil-pbc-constructible-stratification-intersection",
   "lemma-constructible-of-refines",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-flc-tensor-locally-constant-part",
   "lem-weil-pbc-flc-tensor-finite-part",
   "thm-constructible-serre",
   "def-weil-derived-cohomology-sheaves",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-pc-source-kflat-module-tensor-model",
   "def-kun-derived-tensor",
-  "lem-kun-derived-tensor-well-defined",
-  "lem-sf-ringed-kflat-single-tensor-comparison"
+  "lem-kun-flat-bounded-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Proof (1),(2), finite A, total-tensor sentence; expansion using Stacks 095I, 03RZ, 06YQ, 07A2, 0G6Q and 06YU"
+  "place": "Proof (1),(2), finite-coefficient total tensor; K8 Lean proof reuses existing source categorical K-flat, constructibility, and derived tensor comparisons in Sheaf(ModuleCat A)."
  },
  "mathlib_searches": [
   {
@@ -298,19 +278,11 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-constructible-stratification-intersection",
   "lemma-constructible-of-refines",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-flc-tensor-locally-constant-part",
   "lem-weil-pbc-flc-tensor-finite-part",
-  "thm-constructible-serre",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-kun-derived-tensor-well-defined",
-  "lem-sf-ringed-kflat-single-tensor-comparison"
+  "thm-constructible-serre"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -338,5 +310,15 @@
   "group": "Q52",
   "result": "fix",
   "note": "H13 repair verified: all 14 dep records byte-identical to live; item gains only def-sfb-preserves-kflat-quasi-iso in stmt_deps (owner of IsKFlatForTotalTensor, whose node defines K-flat by the two-sided quasi-iso test); signature unchanged and verbatim = lean.statement; docstring adds the acyclic-test equivalence. Substance correct: finite A in Type (u+1) without Nontrivial, CompactSpace+IsLocallyNoetherian, exactFunctor-tensorRight flatness, recorded constructibility, strict IsZero term bounds, T pinned to mapBifunctor curriedTensor, all 7 conclusions incl. Nonempty iso with recorded Etale.derivedTensor and the arbitrary-N degree-0 Tor interval; edge cases A=0, X empty, a=b, non-flat N covered. FIX (mechanical): private plan import Sheaf.CategoryTheory.ModulePullbackTensorIso was quarantined 2026-10-21T09:43Z (rework.tsv; rework-hold.txt:4470 holds this item), which would fail the landing compile; dropped that line in fixes/FiniteFlatConstructibleTotalTensor.lean, compiled via nt_compile --json in 6.5 s with no errors or warnings. Advisory: the RingedKFlatSingleTensorComparison proof-dep import is now recordable but has no published olean, left for stage 3; release the item from rework-hold after landing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261021T203703-L-3852797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
