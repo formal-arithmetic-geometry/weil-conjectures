@@ -21457,3 +21457,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:53 L: merged deliver/NQ/sk-lem-nagata-sketch-dense-valuative (stage 2; reviewer PASS; parallel immutable checks)
 - 08:53 L: returned deliver/NK/lem-weil-pbc-finite-free-completion-transport (reviewer RETURN: L: independent stage-2 immutable head 34d6bea90465: H2: stmt_deps add theorem nodes lem-pur-system-scalar-model (item us)
 - 08:53 L: returned deliver/NE/lem-sfb-etale-stalk-constant-complex-exactness (reviewer RETURN: L: independent stage-2 immutable head 3da47abf31bc: H2/H12: stmt_deps add theorem node lem-cbc-constant-ring-module-shea)
+- 08:53 L: returned deliver/Q51/lem-sfb-section-ring-lax-pushforward-coherence (reviewer RETURN: L: independent stage-2 immutable head 5d056c4632b3: H13/H4: the delivered dep record of lem-sfb-sheaf-pushforward-genera)
