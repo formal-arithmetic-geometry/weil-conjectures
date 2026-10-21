@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "The line-derived-tensor lemma, applied to $M_i$ and its dual, identifies $T_{i,m}$ with termwise tensor on arbitrary unbounded complexes and supplies its exact inverse and the specified evaluation. Choose a flat-term K-flat representative $P\\to K$. The complex $P\\otimes M_i$ is again flat-term K-flat: its terms are flat since tensor by $M_i$ is an exact equivalence, and for acyclic $A$ the complex $A\\otimes(P\\otimes M_i)\\cong(A\\otimes P)\\otimes M_i$ is acyclic. Change of rings preserves the flat-term K-flat class. The balanced map $((p\\otimes l)\\otimes s)\\mapsto(p\\otimes s)\\otimes b_{ji,m}(l\\otimes1)$ is consequently a chain isomorphism computing $B_{ji}T_{i,m}\\cong T_{j,m}B_{ji}$. Its inverse is the reverse tensor reassociation followed by $b_{ji,m}^{-1}$. These are maps of sheafified tensors by their bilinear universal property. They are natural in chain maps, commute with differentials (the line is in degree zero), and hence with the inverted quasi-isomorphisms. The K-flat localization equivalence therefore descends them to the asserted natural isomorphism $\\bar\\beta_{ji,m}$ on $D(R_i)$.",
+   "text": "The line-derived-tensor lemma, applied to $M_i$ and its dual, identifies $T_{i,m}$ with termwise tensor on arbitrary unbounded complexes and supplies its exact inverse and the specified evaluation. Choose a flat-term K-flat representative $P\\to K$. The complex $P\\otimes M_i$ is again flat-term K-flat: its terms are flat since tensor by $M_i$ is an exact equivalence, and for acyclic $A$ the complex $A\\otimes(P\\otimes M_i)\\cong(A\\otimes P)\\otimes M_i$ is acyclic. Change of rings preserves the flat-term K-flat class. The balanced map $((p\\otimes l)\\otimes s)\\mapsto(p\\otimes s)\\otimes b_{ji,m}(l\\otimes1)$ is consequently a chain isomorphism computing $B_{ji}T_{i,m}\\cong T_{j,m}B_{ji}$. Its inverse is the reverse tensor reassociation followed by $b_{ji,m}^{-1}$. These are maps of sheafified tensors by their bilinear universal property. They are natural in chain maps, commute with differentials (the line is in degree zero), and hence with the inverted quasi-isomorphisms. The K-flat localization equivalence therefore descends them to the asserted natural isomorphism $\\bar\\beta_{ji,m}$ on $D(R_i)$. Lean realization of exact: the already specified sheaf evaluations at m and -m give an equivalence by CategoryTheory.Equivalence.mk. Equivalences preserve finite limits and colimits, and finite-colimit preservation implies additivity. This avoids repeating the local rank-one argument for exactness; the later representative arguments remain as above.",
    "uses": [
     "lem-pur-line-unbounded-derived-tensor",
     "lem-pc-kflat-resolution",
@@ -90,7 +90,7 @@
    }
   },
   {
-   "text": "The finite-free completed-scalar comparison supplies natural $\\chi_{ji}:B_{ji}\\to C_{ji}$, invertible on complete inputs, and says that $B_{ji}K$ is complete for complete $K$. Consequently $C_{ji}K$ is complete as well. Step 4 makes $\\chi_{ji,T_{i,m}K}$ invertible. Define $\\beta_{ji,m,K}=T_{j,m}(\\chi_{ji,K})\\bar\\beta_{ji,m,K}\\chi_{ji,T_{i,m}K}^{-1}$. All three factors are invertible and natural on complete inputs, giving the asserted natural isomorphism with no choice of an inverse at chain level. For later calculations put $z_K=\\chi_{21,C_{10}K}\\,B_{21}(\\chi_{10,K}):B_{21}B_{10}K\\cong C_{21}C_{10}K$. The transported associator is precisely $a_K=\\chi_{20,K}d_Kz_K^{-1}$. All components in $z$ are invertible by completeness just established. In this and the following steps juxtaposition means composition, with the rightmost map applied first.",
+   "text": "The finite-free completed-scalar comparison supplies natural $\\chi_{ji}:B_{ji}\\to C_{ji}$, invertible on complete inputs, and says that $B_{ji}K$ is complete for complete $K$. Consequently $C_{ji}K$ is complete as well. Step 4 makes $\\chi_{ji,T_{i,m}K}$ invertible. Define $\\beta_{ji,m,K}=T_{j,m}(\\chi_{ji,K})\\bar\\beta_{ji,m,K}\\chi_{ji,T_{i,m}K}^{-1}$. All three factors are invertible and natural on complete inputs, giving the asserted natural isomorphism with no choice of an inverse at chain level. For later calculations put $z_K=\\chi_{21,C_{10}K}\\,B_{21}(\\chi_{10,K}):B_{21}B_{10}K\\cong C_{21}C_{10}K$. The transported associator is precisely $a_K=\\chi_{20,K}d_Kz_K^{-1}$. All components in $z$ are invertible by completeness just established. In this and the following steps juxtaposition means composition, with the rightmost map applied first. Lean realization of extension_complete: keep the same K-flat resolution and reduction tower, compose its representative isomorphism with chi, and postcompose the connecting map with the shifted chi. A triangle isomorphism, identity on both products, transports distinguishedness and preserves the canonical augmentation legs.",
    "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
     "def-weil-derived-complete"
@@ -132,7 +132,7 @@
    }
   },
   {
-   "text": "The normalized ordinary associators have coherent iteration by the successive-extension lemma. For any four-field chain indexed $0,1,2,3$, with the same notation for its coefficient maps, their pentagon can also be read on $(((p\\otimes s)\\otimes t)\\otimes u)$: either route gives $p\\otimesr_{31}(s)r_{32}(t)u$. Their multiplication units obey both unit laws by $s\\cdot1=s=1\\cdot s$. For any longer coefficient chain identify its ordinary composite with its completed composite by successive $\\chi$'s; for three arrows this identification is $\\chi_{32,C_{21}C_{10}K}\\,B_{32}(\\chi_{21,C_{10}K})\\,B_{32}B_{21}(\\chi_{10,K})$. Naturality cancels the intermediate comparisons at every edge of the completed pentagon, leaving the ordinary pentagon. Thus it commutes. If $\\lambda_i:B_{ii}\\cong1$ is multiplication, the completed unit is $u_{i,K}=\\lambda_{i,K}\\chi_{ii,K}^{-1}$. The same cancellation converts both completed unit laws to the ordinary laws. The finite-free comparison identifies $u_i^{-1}$ with the specified natural completeness map, so these are the required units even when uniformizers for repeated fields differ.",
+   "text": "The normalized ordinary associators have coherent iteration by the successive-extension lemma. For any four-field chain indexed $0,1,2,3$, with the same notation for its coefficient maps, their pentagon can also be read on $(((p\\otimes s)\\otimes t)\\otimes u)$: either route gives $p\\otimesr_{31}(s)r_{32}(t)u$. Their multiplication units obey both unit laws by $s\\cdot1=s=1\\cdot s$. For any longer coefficient chain identify its ordinary composite with its completed composite by successive $\\chi$'s; for three arrows this identification is $\\chi_{32,C_{21}C_{10}K}\\,B_{32}(\\chi_{21,C_{10}K})\\,B_{32}B_{21}(\\chi_{10,K})$. Naturality cancels the intermediate comparisons at every edge of the completed pentagon, leaving the ordinary pentagon. Thus it commutes. If $\\lambda_i:B_{ii}\\cong1$ is multiplication, the completed unit is $u_{i,K}=\\lambda_{i,K}\\chi_{ii,K}^{-1}$. The same cancellation converts both completed unit laws to the ordinary laws. The finite-free comparison identifies $u_i^{-1}$ with the specified natural completeness map, so these are the required units even when uniformizers for repeated fields differ. Lean realization of unit_normalization substitutes the normalized ordinary unit into the identity clause of finiteFreeCompletedScalarComparison; naturality is cancellation against chi. The repeated equality unfolds beta and unit and cancels inverse chi factors using functoriality.",
    "uses": [
     "lem-sfb-successive-derived-quotient-normalization",
     "lem-weil-finite-free-completed-scalar-comparison"
@@ -144,11 +144,12 @@
    }
   },
   {
-   "text": "Assume now the stated preservation of the integral constructible subcategories by $T_{i,m}$. Integral scalar extension preserves them by the cited constructibility theorem. Thus every object and component above lies in those full subcategories, so their equations restrict without alteration. The transformations are coefficient-linear: their chain formulas are linear over the target coefficient sheaf and all factors of $\\chi$ are morphisms in its module-derived category. Under rationalization each equation is sent to the same equation, since the localization sends composition to composition. On a morphism $\\sum_r f_r\\otimes a_r$ naturality is the sum of the integral naturality equations tensored by $a_r$ in the final field. Inverses remain inverses. The scalar associator and units just constructed are the ordinary tensor associator and multiplication transported by the specified completion comparison; their rationalizations are therefore the canonical scalar-extension comparisons of the cited scalar-composition theorem, using the integral-representative scalar functors in the rationalization definition.",
+   "text": "Assume now the stated preservation of the integral constructible subcategories by $T_{i,m}$. Integral scalar extension preserves them by the cited constructibility theorem. Thus every object and component above lies in those full subcategories, so their equations restrict without alteration. The transformations are coefficient-linear: their chain formulas are linear over the target coefficient sheaf and all factors of $\\chi$ are morphisms in its module-derived category. Under rationalization each equation is sent to the same equation, since the localization sends composition to composition. On a morphism $\\sum_r f_r\\otimes a_r$ naturality is the sum of the integral naturality equations tensored by $a_r$ in the final field. Inverses remain inverses. The scalar associator and units just constructed are the ordinary tensor associator and multiplication transported by the specified completion comparison; their rationalizations are therefore the canonical scalar-extension comparisons of the cited scalar-composition theorem, using the integral-representative scalar functors in the rationalization definition. For intrinsic_complete, choose a prime different from l and the finite field ZMod q with its algebraic closure, then apply sfDerivedComplete_iff_legacy to the intrinsic completeness component. Full-subcategory isoMk restricts evaluation and beta. For rationalEpsilon and rationalBeta, localize each integral component, conjugate by the specified object equalities, prove naturality by tensor induction, and use the integral representatives for uniqueness. The rational evaluation and tower equalities are the localized integral equalities, transported with those component formulas and the scalar extension formula on 1 tensor f. The repeated-field rational equality follows similarly, including the inverses of the specified scalar-unit components. These Lean deductions use the still-stated ambient coherence assertions; they do not assert those holes closed.",
    "uses": [
     "lem-weil-integral-scalar-extension-constructible",
     "def-weil-rationalization-karoubi",
-    "lem-weil-scalar-extension-composition"
+    "lem-weil-scalar-extension-composition",
+    "lem-sf-derived-complete-legacy-comparison"
    ],
    "elementary": true,
    "source": {
@@ -186,12 +187,13 @@
   "def-weil-integral-scalar-extension",
   "lem-weil-integral-scalar-extension-constructible",
   "def-weil-rationalization-karoubi",
-  "lem-weil-scalar-extension-composition"
+  "lem-weil-scalar-extension-composition",
+  "lem-sf-derived-complete-legacy-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "Proof (3), final sentence: explicit line scalar/evaluation coherence for the prescribed strict completion, using Stacks 03EL, 03EO, 06YY and 07A4 and Bhatt–Scholze §§3.4–3.5."
+  "place": "Proof (3), final sentence: explicit line scalar/evaluation coherence for the prescribed strict completion, using Stacks 03EL, 03EO, 06YY and 07A4 and Bhatt–Scholze §§3.4–3.5. J6 partial stage-3 realization: equivalence exactness, isomorphism transport of completeness, unit cancellation, full restriction and scalar localization of evaluation, beta, tower and repeated-field equations; remaining normalization and ambient coherence steps retain their original plan."
  },
  "mathlib_searches": [
   {
@@ -636,5 +638,15 @@
     }
    }
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261021T182318-L-1175256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
