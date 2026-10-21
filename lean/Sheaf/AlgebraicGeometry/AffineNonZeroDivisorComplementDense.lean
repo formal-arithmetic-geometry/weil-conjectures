@@ -6,8 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.PrincipalOpenDenseOfNonZeroDivisor
-import WeilConjectures.Blowup.BlowupUniversal
+import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Density of a principal nonzerodivisor complement
@@ -24,6 +23,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- For a nonzerodivisor `a`, the restriction of the structure sheaf of `Spec A` to
 the principal open `D(a)` is injective on every open, and `D(a)` is dense.
 
@@ -42,6 +42,29 @@ theorem PrimeSpectrum.basicOpen_app_injective_and_dense_of_nonZeroDivisor
       Function.Injective
         ((Scheme.Opens.ι (X := Spec (.of A)) (PrimeSpectrum.basicOpen a)).app V)) ∧
     DenseRange (Scheme.Opens.ι (X := Spec (.of A)) (PrimeSpectrum.basicOpen a)) := by
-  sorry
+  let φ : CommRingCat.of A ⟶ CommRingCat.of (Localization.Away a) :=
+    CommRingCat.ofHom (algebraMap A (Localization.Away a))
+  have hφ : Function.Injective φ :=
+    IsLocalization.injective _ (Submonoid.powers_le.mpr ha)
+  have hf : Function.Injective (Spec.map φ).appTop := by
+    have he : (Spec.map φ).appTop =
+        (Scheme.ΓSpecIso (.of A)).hom ≫ φ ≫ (Scheme.ΓSpecIso _).inv := by
+      rw [← Category.assoc, ← Scheme.ΓSpecIso_naturality, Category.assoc,
+        Iso.hom_inv_id, Category.comp_id]
+    rw [he]
+    exact ((ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso _).inv).1.comp hφ).comp
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of A)).hom).1
+  have : IsSchemeTheoreticallyDominant (Spec.map φ) := by
+    constructor
+    apply Scheme.IdealSheafData.ext_of_isAffine
+    simpa [(Spec.map φ).ker_apply ⟨⊤, isAffineOpen_top _⟩,
+      ← RingHom.injective_iff_ker_eq_bot] using hf
+  have : IsSchemeTheoreticallyDominant
+      (Scheme.Opens.ι (X := Spec (.of A)) (PrimeSpectrum.basicOpen a)) := by
+    rw [← basicOpenIsoSpecAway_hom_SpecMap (R := .of A) a]
+    infer_instance
+  have : IsAffine (Scheme.Opens.toScheme (X := Spec (.of A))
+      (PrimeSpectrum.basicOpen a)) := IsAffineOpen.Spec_basicOpen (R := .of A) a
+  exact ⟨fun V ↦ Scheme.Hom.app_injective _ V, Scheme.Hom.denseRange _⟩
 
 end AlgebraicGeometry

@@ -24,38 +24,26 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\operatorname{Spec}(A)$ and $U=D(a)=\\operatorname{Spec}(A_a)$. The restriction of the structure sheaf map $\\mathcal O_X\\to j_*\\mathcal O_U$ on the affine basis of principal opens is the canonical localization map $A_g\\to (A_g)_a$; the image of $a$ remains a non-zero-divisor after localizing at $g$ by [lem-pc-localization-preserves-nonzerodivisor], so [lem-pc-affine-localization-injective] applied to $A_g$ makes each such map injective. Hence the sheaf morphism is injective.",
+   "text": "The map A → A[1/a] is injective by [lem-pc-affine-localization-injective]. Via the natural global-sections isomorphisms Γ(Spec R, ⊤) ≅ R, the map on global sections induced by Spec(A[1/a]) → Spec(A) is injective. Since Spec(A) is affine, its kernel ideal sheaf is determined by its global-sections ideal, which is zero. Thus this map is scheme-theoretically dominant. Identify Spec(A[1/a]) with the open subscheme D(a) using Mathlib basicOpenIsoSpecAway, so the inclusion of D(a) is scheme-theoretically dominant as well. Mathlib Scheme.Hom.app_injective gives injectivity on every open and Scheme.Hom.denseRange gives topological density (the inclusion is quasi-compact because D(a) is affine).",
    "uses": [
-    "lem-pc-localization-preserves-nonzerodivisor",
     "lem-pc-affine-localization-injective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 07ZU, affine-local calculation: restriction to D(a) is localization and A embeds in A_a"
-   }
-  },
-  {
-   "text": "The underlying open $U=D(a)$ is topologically dense in $X=\\operatorname{Spec}(A)$ by [lem-pc-principal-open-dense-of-nonzerodivisor].",
-   "uses": [
-    "lem-pc-principal-open-dense-of-nonzerodivisor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 07ZU, affine-local calculation: a non-zero-divisor principal complement is dense"
+    "place": "Tag 07ZU (Divisors, Lemma effective Cartier complement is affine and scheme-theoretically dense), affine-local calculation"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-localization-preserves-nonzerodivisor",
-  "lem-pc-affine-localization-injective",
-  "lem-pc-principal-open-dense-of-nonzerodivisor"
+  "lem-pc-affine-localization-injective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "M9",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 07ZU (Divisors, Lemma effective Cartier complement is affine and scheme-theoretically dense), affine-local calculation"
+  "place": "Tag 07ZU, direct affine localization calculation with Mathlib kernel ideal-sheaf and scheme-theoretic dominance API"
  },
  "mathlib_searches": [
   {
@@ -123,5 +111,15 @@
   "result": "pass",
   "note": "A : Type u [CommRing A] arbitrary (no extra hyps); a with ha : a ∈ nonZeroDivisors A; X = Spec (.of A); U = PrimeSpectrum.basicOpen a, j = Scheme.Opens.ι; O_X -> j_*O_U injective = ∀ V, Injective (j.app V) (j.app V : Γ(X,V) -> Γ(U, j⁻¹V) = (j_*O_U)(V)); U dense = DenseRange j (range = D(a)); H4: no Mathlib statement (grep basicOpen+dense/Dominant in AlgebraicGeometry, RingTheory/Spectrum/Prime; only general IsSchemeTheoreticallyDominant API); source IsInvertible.isSchemeTheoreticallyDominant_compl_support (Blowup/Density.lean) is the invertible-ideal-sheaf generalization, not this statement; name ok (AlgebraicGeometry.PrimeSpectrum namespace exists in Mathlib), lines <= 100, import used, proof sorry"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261021T151138-L-1147313",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
