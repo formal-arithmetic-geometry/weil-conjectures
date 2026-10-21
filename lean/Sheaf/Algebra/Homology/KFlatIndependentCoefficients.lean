@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.QuasiIso
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Mathlib.CategoryTheory.Limits.EssentiallySmall
 
+-- DAG ownership: (blueprint: def-pc-kflat-complex).
+
 /-! # K-flat complexes with an independent coefficient universe
 
 The tensor product is the same sheafified tensor product as in `KFlat`. Relative
