@@ -23111,7 +23111,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:59 L: merged deliver/S9/Sheaf.Paper.CompletedExchangeCoherence (stage 3; reviewer PASS; first push; landing 20261021T165936-L-2309985 (interface); batch 20261021T165743; modules 5; new nodes 4; change records: coord/changes/CompletedOrdinaryComparisons.md)
 - 16:59 L: merged deliver/U5/Sheaf.Algebra.Homology.RHomColimitSourceTransport (stage 3; reviewer PASS; first push; landing 20261021T165940-L-2312331 (interface); batch 20261021T165743; modules 1; new nodes 0; change records: coord/changes/rhom-colimit-source-transport-private-proof.md)
 - 16:59 L: merged deliver/V5/Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre (stage 3; reviewer PASS; first push; landing 20261021T165943-L-2314343 (proof); batch 20261021T165743; modules 1; new nodes 0; change records: coord/changes/V5-affine-tilde-source-precomparison-rework.md)
-- 16:59 L: merged deliver/V8/Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology (stage 3; reviewer PASS; first push; landing 20261021T165946-L-2315925 (proof); batch 20261021T165743; modules 1; new nodes 0; change records: coord/changes/V8-strict-local-global-homology-restoration.md)
 - 16:59 L: merged deliver/Z8/Sheaf.CategoryTheory.Abelian.DerivedRepresentableTransport (stage 3; reviewer PASS; first push; landing 20261021T165949-L-2317612 (interface); batch 20261021T165743; modules 1; new nodes 0; change records: coord/changes/Z8-derived-representable-transport-proof-commands.md)
 - 17:00 L: returned deliver/S7/Sheaf.Paper.DeltaProperPushforward (reviewer RETURN: (reviewer C-abbd2, head abbd26fb1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.DeltaProperPus)
 - 17:00 L: returned deliver/N9/lem-sfb-prime-to-ell-derived-invariants-reduction (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-prime-to-ell-derived-invariants-reduction: cit)
@@ -23122,3 +23121,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:03 L: merged deliver/NK/lem-sfb-derived-cech-image-totalization (stage 2; reviewer PASS; parallel immutable checks)
 - 17:03 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 17:04 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+
+- 01:04 L: batch 20261021T165743 dependency take-out
