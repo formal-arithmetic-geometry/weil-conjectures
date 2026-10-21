@@ -24,124 +24,81 @@
  ],
  "proof": [
   {
-   "text": "Interpret each $B_S$-module-object category as ordinary modules over its section-ring sheaf using [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. The equivalence is the identity on underlying abelian sheaves and morphisms; by the universal properties of kernels, cokernels and colimits it preserves these, and hence cohomology and quasi-isomorphisms. Its degreewise extension therefore identifies the localizations defining the ordinary uncompleted derived categories. We may make all subsequent computations in these ringed-site module categories.",
-   "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (algebraic structures); passage to complexes is the localization universal property."
-   }
-  },
-  {
-   "text": "For any of the three small ringed sites, filtered sheaf colimits are exact by [lem-pc-module-filtered-colimits-tensor]. For a diagram of complexes $L_t$, apply exactness to $0\\to\\ker d_t^q\\to L_t^q\\to\\operatorname{im}d_t^q\\to0$ and $0\\to\\operatorname{im}d_t^{q-1}\\to\\ker d_t^q\\to H^q(L_t)\\to0$. These give the natural identity $H^q(\\varinjlim_t L_t)=\\varinjlim_tH^q(L_t)$ for every integer $q$. Thus termwise filtered colimits preserve quasi-isomorphisms and a common cohomological lower bound. This also proves independence of the functorial representative choices used in the question.",
-   "uses": [
-    "lem-pc-module-filtered-colimits-tensor",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB (lemma-limits-colimits); kernel/image computation of cohomology."
-   }
-  },
-  {
-   "text": "The descending-chain condition on closed subsets implies the ascending-chain condition on opens. Every union of opens is a finite subunion: otherwise successive choices of an open not covered by the preceding finite union give a strictly ascending chain. Thus every open subset of $T$, and every open of an affine open of $T$, is quasi-compact. In particular $U\\cap W$ is quasi-compact for every affine open $W\\subset T$, so $j$ is quasi-compact. An open immersion is a monomorphism, since two maps into $U$ agreeing in $T$ agree as maps into the open subscheme; consequently its diagonal is an isomorphism and is quasi-compact. Thus $j$ is also quasi-separated. The recollement hypothesis is now satisfied. Its common-bound injective models show $Rj_*D^{\\ge c}\\subset D^{\\ge c}$: a model zero below $c$ remains zero there after applying $j_*$ termwise. Its stated left t-exactness gives $Ri^!D^{\\ge c}\\subset D^{\\ge c}$.",
+   "text": "Every open subspace of the Noetherian underlying space of T is Noetherian. The open embedding j therefore has Noetherian source, and preimages of affine opens are compact; this gives QuasiCompact j. Open immersions are monomorphisms and hence quasi-separated. Rewrite the complement equality to the orientation range(i) = complement(range(j)) used by the closed-support API.",
    "uses": [
     "def-weil-open-immersion",
-    "def-weil-quasi-separated-morphism",
-    "lem-weil-pbc-condensed-open-closed-recollement"
+    "def-weil-quasi-separated-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BM (lemma-closed-immersion-complement-retrocompact-exact); elementary quasi-compactness check and the cited recollement bounds."
-   }
+   "elementary": true
   },
   {
-   "text": "To apply a theorem stated with a termwise bound to the present cohomological bound, replace each input $L$ functorially by $\\tau_{\\ge c}L$, with zero terms below $c$, term $\\operatorname{coker}(d_L^{c-1})$ in degree $c$, and terms $L^r$ in degrees $r>c$. The natural projection $L\\to\\tau_{\\ge c}L$ has $H^r$ equal to the identity for $r\\ge c$ and is a quasi-isomorphism when $H^{<c}(L)=0$. Cokernels commute with colimits, so this replacement commutes with the termwise colimit. By step 2 all replacement maps, including their colimit, are quasi-isomorphisms. Hence it suffices to prove the comparisons for these termwise bounded diagrams; the maps remain those induced by the original cocone.",
+   "text": "The internal module categories are Grothendieck by [lem-sfb-modobj-grothendieck], as specialized by supportModules_grothendieck. Thus filtered colimits are exact. The proved DegreewiseLimits homology-preservation instance identifies homology of a termwise filtered colimit with the filtered colimit of homology. Naturality of colimit.post then proves that colimMap of a pointwise quasi-isomorphism is a quasi-isomorphism (private helper quasiIso_colimMap).",
+   "uses": [
+    "lem-sfb-modobj-grothendieck",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a strictly bounded diagram E, the good-truncation projection is an actual isomorphism at each E_s, so the cocone condensedContinuityCocone E c is a colimit cocone. Its vertex comparison from colim E is therefore invertible. The identity colimit.post_desc transfers continuity for that cocone to continuity for colimit.cocone E (private helper comparison_of_strict_cocone). For a merely cohomologically bounded diagram D use alpha:D -> truncGE_c D. Each alpha_s is a quasi-isomorphism by isGE_Q_obj_iff and quasiIso_πTruncGE_iff; step 2 makes colimMap alpha a quasi-isomorphism. After any functor out of the derived localization, both these vertex and diagram comparisons are invertible. The naturality square for colimit.post transfers continuity from the strict diagram back to the original cocone (private helper comparison_of_cohomological_bound).",
    "uses": [
     "def-weil-abstract-derived-category",
-    "lem-pc-module-filtered-colimits-tensor"
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sfb-modobj-grothendieck"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (section-truncations), canonical cochain truncation tau_ge; displayed formula and its cohomology."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [det-pe-bounded-continuity-direct-image] to $f=j$, the ring sheaf $B_U$, and the termwise bounded diagram $(V_t)$ of step 4. Step 3 supplies quasi-compactness and quasi-separatedness. It gives $\\varinjlim_tH^q(Rj_*V_t)\\xrightarrow{\\sim}H^q(Rj_*(\\varinjlim_tV_t))$ for every $q$. Here the module-object $j_*$ is transport of the same sheaf pushforward followed by restriction of scalars along $B_T\\to j_*B_U$, as specified by [sk-def-sfb-module-pushforward-pullback]. The derived functor of this composite is computed on $B_U$-module K-injective resolutions [sk-def-sfb-module-derived-pushpull]. Use that same source-module resolution in the direct-image theorem: the resulting chain groups and differentials agree, with $B_T$ acting through $B_T\\to j_*B_U$. Restriction of that target scalar action changes neither kernels, cokernels nor sheaf colimits; the forgetful comparison [lem-weil-pbc-module-sheaves-colimits-forgetful] verifies this on underlying abelian sheaves and reflects invertibility. Thus the displayed maps are the maps for the precise $Rj_*$ of the item. By step 2 their sources equal $H^q(\\varinjlim_tRj_*V_t)$, so the canonical derived comparison is a quasi-isomorphism.",
+   "text": "Apply [lem-weil-pbc-condensed-closed-costalk-derived-continuity] on T to H=closedSupport Lambda i j, with the actual adjunction closedSupportAdjunction from [det-lem-formal-closed-support-adjunction]. This is already a theorem about the same internal module categories and the same ordinary rightDerivedFunctor. It gives the cohomology continuity comparisons for every strictly bounded diagram. Step 3 extends them to every input diagram N having the stated cohomological lower bound. This reuses the existing support-triangle and five-lemma argument, without reconstructing it or changing coefficient presentations.",
    "uses": [
-    "det-pe-bounded-continuity-direct-image",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
+    "det-lem-formal-closed-support-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
-    "place": "Both paragraphs: qcqs bounded direct-image continuity; coefficient action checked against module pushforward definitions."
-   }
+   "elementary": false
   },
   {
-   "text": "For every $K\\in D^{\\ge c}(B_T)$, take the natural distinguished triangle $i_*Ri^!K\\to K\\to Rj_*j^*K\\to i_*Ri^!K[1]$ of [lem-weil-pbc-condensed-open-closed-recollement]. Apply [lem-sf-derived-homology-long-exact] and then the exact sheaf functor $i^*$. Exactness makes $i^*H^q(L)=H^q(i^*L)$ by the kernel/image formula, and $i^*i_*\\cong\\mathrm{id}$ identifies the support term with $H^q(Ri^!K)$. In particular the resulting exact sequence has consecutive terms\n$$H^{q-1}(i^*K)\\to H^{q-1}(i^*Rj_*j^*K)\\to H^q(Ri^!K)\\to H^q(i^*K)\\to H^q(i^*Rj_*j^*K).$$\nThis sequence is natural in $K$: the given triangles are natural and shift compatible, and each connecting map is the cohomology of their fourth map, followed by $H^r(L[1])=H^{r+1}(L)$. Thus the connecting-map square also commutes for every arrow of the diagram and for every arrow of its cocone.",
+   "text": "Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to j and a strictly bounded diagram on U, using step 1. A strict bound implies vanishing of homology below c, as its hypothesis requires. Step 3 gives the cohomology continuity comparisons on the original cocone for every cohomologically bounded V. This theorem directly uses lowerStar Lambda j, so no change of section-ring presentation or scalar restriction comparison is necessary.",
    "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-sf-derived-homology-long-exact",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Equations (3.3)-(3.4), Lemma 3.4; cohomology sequence as in Stacks Tag 05RS."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $N=\\varinjlim_tN_t$. Take the filtered colimit of the exact sequences in step 6 for $K=N_t$ and compare it with the sequence for $K=N$. Both rows are exact, the top by [lem-pc-module-filtered-colimits-tensor]. Naturality in step 6 gives a commutative diagram of five consecutive terms. The four outer vertical maps are isomorphisms: for the terms $i^*N_t$ use exactness and colimit preservation of $i^*$ from [lem-weil-pbc-condensed-open-closed-recollement] and step 2; for the terms $i^*Rj_*j^*N_t$ first use the corresponding exactness and colimit preservation of $j^*$, then apply step 5 to $(j^*N_t)$, and finally apply $i^*$. The input $(j^*N_t)$ has the common lower bound $c$ because $j^*$ is exact. The middle vertical map is, by its cocone construction and step 2, $H^q$ of $\\varinjlim_tRi^!N_t\\to Ri^!N$.",
+   "text": "For any additive functor F out of a Grothendieck abelian category, construct a natural isomorphism Q followed by RF with the localization of the functorial K-injective replacement followed by F on complexes (private definition resolutionDerivedIso). The natural quasi-isomorphism to the replacement becomes invertible under Q. The derived unit on the replacement is invertible because that replacement is K-injective; compose these with the quotient/Qh factorization isomorphisms. This is a real construction from [lem-sfb-grothendieck-k-injective] and the right-derived unit, and includes naturality at every original cocone leg. In each degree compose with the localization/homology comparison. The colimit universal property transports the comparisons of steps 4 and 5 to the homology of the resolution-model comparisons. Homology preserves filtered colimits by step 2; cancel its colimit comparison using colimit.post_post. Every homology map of the resolution-model comparison is invertible, hence it is a quasi-isomorphism and its Q-image is an isomorphism. These are exactly the first two conjuncts (private helper resolutionComparison_isIso). Retain the import of [sk-def-sfb-module-derived-pushpull], which records this total derived functor and is part of the unit route.",
    "uses": [
-    "lem-pc-module-filtered-colimits-tensor",
-    "lem-weil-pbc-condensed-open-closed-recollement"
+    "lem-sfb-grothendieck-k-injective",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-modobj-grothendieck",
+    "sk-def-sfb-module-derived-pushpull"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Support fibre sequence (3.3)-(3.4); agent filtered-colimit comparison using Stacks Tag 03DB."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-five-lemma] to that five-term diagram in the abelian category of $B_Z$-module sheaves. Its first and fifth vertical maps, being isomorphisms, are respectively epimorphic and monomorphic; its second and fourth maps are isomorphisms. Therefore its middle map is an isomorphism for every integer $q$. This proves the closed-support comparison is a quasi-isomorphism and hence an isomorphism in the ordinary derived category [def-weil-abstract-derived-category]. Together with step 5 and the bounds of step 3, this is every assertion. All maps were induced by the original cocones, so the proof also preserves the specified comparisons. No upper cohomology bound was used.",
+   "text": "Closed direct image is exact by closedSupport_lowerStarExact, and its right derived adjoint is the rightDerivedFunctor of closedSupport, by [det-lem-formal-closed-support-adjunction]. Apply exactDerivedAdjunction_isGE from [lem-pur-exact-derived-adjunction-bounds] to this adjunction for the third conjunct. Apply the same theorem to the exact supportPullback Lambda j and closedSupportOpenDerivedAdjunction for the fourth conjunct. Both preserve the prescribed integer c without changing hypotheses.",
    "uses": [
-    "lem-weil-pbc-five-lemma",
-    "def-weil-abstract-derived-category"
+    "det-lem-formal-closed-support-adjunction",
+    "lem-pur-exact-derived-adjunction-bounds"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 05QB (lemma-five-lemma), applied to the five consecutive support-cohomology terms."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
   "def-weil-open-immersion",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "def-weil-quasi-separated-morphism",
-  "det-pe-bounded-continuity-direct-image",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-module-pushforward-pullback"
+  "det-lem-formal-closed-support-adjunction",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-modobj-grothendieck",
+  "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Equations (3.3)-(3.4), Lemma 3.4: agent support-triangle/long-exact-sequence extraction using det-pe-bounded-continuity-direct-image and Stacks 03DB, 0118, 05RS, 05QB, 09BM. Bhatt–Scholze 6.3.14 and 6.8.12 motivate the bounded route, but do not verbatim state this arbitrary-condensed-coefficient filtered-colimit assertion."
+  "place": "Lemma 5.3(1), and the final support-fibre-sequence paragraph of its proof, reused through condensed_qcqs_pushforward_continuity and condensed_closed_costalk_derived_continuity. Agent-written good-truncation, natural K-injective-resolution, and original-cocone comparison arguments; lower bounds by exact-derived adjunction orthogonality. Stacks 09BM supplies exactness of closed direct image through the existing closed-support API."
  },
  "mathlib_searches": [
   {
@@ -269,14 +226,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-bounded-continuity-direct-image",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -304,5 +254,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Re-delivery of b5d521be4a42 (H2 RETURN) is repaired: new existing:true definition node def-sfb-condensed-closed-support-functor owns supportModules…closedSupport_additive in the unchanged live module Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction (all 8 declarations exist; statement verbatim from `def closedSupport`; Γ_{i,j}=supportKernel⋙supportPullback, not hollow; text matches Λ only MonObj, α^{-1}/η restriction, unit kernel; source sk-lem-formal-closed-support-adjunction.md read; 11 stmt_deps live definitions). Item stmt_deps now cite it instead of the theorem; item Lean byte-identical (sha f53a9dfd), statement verbatim; only stmt_deps/lean differ from live; all clauses/edge cases re-checked (NoetherianSpace only, complement orientation, Type (u+1) filtered, cohomological IsGE, colimit.post on K-injective models, D≥c for all c). nt_compile --json clean 41.3 s. Advisory: lowerStar owners (sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star) are not item stmt_deps (inherited from stage-1); new def node could cite sk-def-sfb-module-pushforward-pullback."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T130210-L-2618787",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
