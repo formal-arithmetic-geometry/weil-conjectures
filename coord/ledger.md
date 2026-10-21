@@ -21886,3 +21886,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:25 L: returned deliver/Q107/lem-pur-etale-sum-right-adjoint-tensor (reviewer RETURN: L: independent stage-2 immutable head e72a9900089b: Sheaf.AlgebraicGeometry.EtaleSumRightAdjointTensor declares names th)
 - 09:25 L: returned deliver/NJ/lem-sf-derived-completed-tensor-bilinearity (reviewer RETURN: L: independent stage-2 immutable head e9f6c5282de0: H13/H4: the (B) record for lem-weil-pbc-ringed-koszul-completion-ref)
 - 09:25 L: returned deliver/NB/lem-pur-completed-primitive-counit-comparison (reviewer RETURN: L: independent stage-2 immutable head ed0adcb47716: H3 (hollow pin): the tensor realization rT, and so beta_T, is pinned)
+- 09:26 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
