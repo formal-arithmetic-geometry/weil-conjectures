@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-independent-bounded-exact-term-hom",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Bounded exact-term internal Hom comparison at independent universes",
+ "statement": "Let $C$ be a category with independent object and morphism universes, $J$ a Grothendieck topology, and $R$ a sheaf of commutative rings in an ambient universe containing both site universes [def-weil-size-convention]. Assume abelian sheafification and the locally bijective criterion in that ambient universe. Use module sheaves [def-weil-sheaf-of-modules-category] and their cochain complexes [def-pc-cochain-complex-modules]. Let $P$ be a complex supported in a finite interval: there exist integers $a,b$ such that $P^n=0$ if $n<a$ or $b<n$. Suppose internal Hom from each term $P^n$ [def-pur-sheaf-hom] preserves short exact sequences. Then, for every quasi-isomorphism $f:M^\\bullet\\to N^\\bullet$ of arbitrary, possibly unbounded complexes [def-pc-quasi-iso-modules], the map $\\mathcal Hom^\\bullet_R(P,f)$ of the recorded product Hom complexes [def-pur-hom-complex] is a quasi-isomorphism. No K-injectivity, flatness, termwise freeness, or equality of the site universes is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DM, lemma-Rhom-strictly-perfect, finite source filtration; homology.tex Tag 0117, lemma-long-exact-sequence-cochain; sites-cohomology.tex Section 0A8X, product Hom differential. This is the independent-universe extension of the existing proved bounded exact-term theorem, with its same finite-width induction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-sheaf-hom",
+  "def-pc-quasi-iso-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "For a source supported at one degree k, project the product Hom complex to its sole nonzero factor. All other factors are zero, so this projection is invertible. The Hom differential reduces to postcomposition. The exact additive functor Hom(P^k,-) preserves homology and quasi-isomorphisms, proving the base case. All maps are formed on the original site, in the ambient module universe.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each integer k, use the actual stupid-tail inclusion P^{>=k+1} to P and quotient map to P^k placed at k. Its degreewise splitting gives, by the product Hom universal property, natural short exact sequences after applying Hom(-,M) and Hom(-,N). This uses only split products, not exactness of infinite products. Construct the splitting maps degreewise and check their three identities by product projections.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the natural interval width d for a source supported in [a,a+d]. The stupid tail has width d-1 and its terms are either zero or isomorphic to the corresponding source terms, hence retain exact internal Hom. Apply induction to the tail and the single-degree result to P^a. The natural short exact sequences of the previous step give a morphism of short exact complexes. The long exact homology sequence, through the proved quasiIso_tau2 lemma, makes its middle arrow a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-five-lemma",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary integer bounds take the width (b-a).toNat. The original support implies support in [a,a+width], including an empty interval. Apply the finite-width induction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DM; A4 transports the actual proved SingleDegreeExactTermHomQuasiIso, StupidTailHomShortExact and BoundedExactTermHomQuasiIso proofs to independent universes in private helpers, preserving the adopted source modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with exact internal Hom in each term preserves quasi-isomorphisms for arbitrary sheaves on a site with independent universes",
+   "results": "HomologicalComplex.quasiIso_map_of_preservesHomology and short-complex homology preservation; no bounded product Hom comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these apply one exact functor degreewise, not a bounded-source total Hom bifunctor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom complex from a bounded complex of sheaves whose termwise internal Hom is exact preserves quasi-isomorphisms with independent site universes",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso, localization and CM5b quasi-isomorphisms; no bounded product Hom result.",
+   "date": "2026-10-21",
+   "verdict": "no match for the product Hom comparison at independent universes."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*QuasiIso|quasiIso.*homComplex",
+   "results": "0 hits from msearch grep. Local rg finds WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso, SingleDegreeExactTermHomQuasiIso and Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomMapQuasiIso; all require equal site and coefficient universes.",
+   "date": "2026-10-21",
+   "verdict": "generalize the existing proved induction; do not change its adopted source signature."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SplitPerfectDualTorWindow",
+  "date": "2026-10-21",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Split-perfect dual model in the site-perfect internal Hom step: comparison of ordinary bounded Hom with every K-injective resolution; lem-sfb-split-perfect-dual-tor-window proof step 3.",
+   "via": [
+    "lem-sfb-split-perfect-dual-tor-window"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.IndependentBoundedExactTermHom",
+  "file": "lean/Sheaf/Algebra/Homology/IndependentBoundedExactTermHom.lean",
+  "declaration": "CategoryTheory.SplitPerfectHom.quasiIso_homComplex_map_of_bounded_exact_terms",
+  "statement": "theorem quasiIso_homComplex_map_of_bounded_exact_terms\n    {C : Type c} [Category.{v} C]\n    (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    (P : CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hexact : ∀ (n : ℤ) (S : ShortComplex (SheafOfModules.{max c v r}\n        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))),\n      S.ShortExact → ∃ hz : SheafOfModules.homObjMap.{max c v r, v, c, max c v r} (R := R) (𝟙 (P.X\n        n)) S.f ≫\n          SheafOfModules.homObjMap.{max c v r, v, c, max c v r} (R := R) (𝟙 (P.X n)) S.g = 0,\n        (ShortComplex.mk (SheafOfModules.homObjMap.{max c v r, v, c, max c v r} (R := R) (𝟙 (P.X\n          n)) S.f)\n          (SheafOfModules.homObjMap.{max c v r, v, c, max c v r} (R := R) (𝟙 (P.X n)) S.g)\n            hz).ShortExact)\n    {M N : CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ}\n    (f : M ⟶ N) [QuasiIso f] :\n    QuasiIso (((homComplexFunctor.{c, v, max c v r, max c v r} (R := R)).obj (op P)).map f)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261021T140752-L-2742705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261021T140752-L-2742705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
