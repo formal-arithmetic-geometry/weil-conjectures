@@ -18,9 +18,163 @@
   "lem-sfb-slice-scalar-hom-chain-adjunction",
   "lem-sfb-scalar-hom-chain-evaluation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on every slice and in each degree. By [def-pur-sheaf-tensor-product] the scalar extensions are sheafifications of sectionwise tensors. The generation and uniqueness clauses of [def-weil-pbc-module-tensor-product], followed by the unique factorization in [def-weil-presheaf-modules-sheafification], allow us to construct linear sheaf maps from balanced formulas and test their equality on these generators. For an iterated tensor apply this argument first to the inner tensor and its sheafification, with the outer scalar fixed, and then to the outer tensor and its sheafification. For Hom-valued maps test every product coordinate [def-pur-hom-complex]; a coordinate is a map on the slice [def-pur-sheaf-hom], so test it over every object of that slice. Consequently the calculations below use arbitrary local homogeneous families, not finite-support families, and never identify a sheaf tensor's sections with the sectionwise tensor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "Construct the displayed formulas for $\\kappa_X$ and its proposed inverse by successive tensor linearization and sheafification [def-weil-pbc-module-tensor-product] [def-weil-presheaf-modules-sheafification]. Additivity is immediate. The outer $S$-balance for $\\kappa$ is $s'b(t)b(s)=s'b(ts)$; its inner $R$-balance is\n$$s'b(s)b\\varphi(r)\\otimes(1\\otimes x)=s'b(s)\\varphi'a(r)\\otimes(1\\otimes x)=s'b(s)\\otimes(1\\otimes rx).$$\nFor the inverse, outer $R'$-balance is multiplication by $\\varphi'(t')$; inner $R$-balance is the same equality $b\\varphi(r)=\\varphi'a(r)$ in reverse. Thus the two formulas define $S'$-linear maps. Their composites are\n$$s'\\otimes(s\\otimes x)\\longmapsto s'b(s)\\otimes(1\\otimes x)=s'\\otimes(s\\otimes x),$$\n$$s'\\otimes(r'\\otimes x)\\longmapsto s'\\varphi'(r')\\otimes(1\\otimes x)=s'\\otimes(r'\\otimes x).$$\nStep 1 promotes these to inverse sheaf maps. Replacing $x$ by $d_Xx$ on either side gives the chain equation; replacing it by $h(x)$ gives naturality for every chain map $h$. Restriction of sections preserves every formula, since the coefficient arrows are sheaf maps. This constructs the natural chain isomorphism $\\kappa$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "For $\\mu_N$, the $R$-balance is\n$$\\varphi'(r'a(r))\\otimes z=\\varphi'(r')b\\varphi(r)\\otimes z=\\varphi'(r')\\otimes\\varphi(r)z.$$\nThe formula is $R'$-linear when the target action is through $\\varphi'$ [def-pc-sheaf-restrict-scalars]. For $\\tau_X$, inner $R$-balance follows from $b\\varphi=\\varphi'a$; outer $R$-balance follows from the same equality, and $R'$-linearity follows from the target's $\\varphi'$-action. Explicitly the relation $r'a(r)\\otimes(s\\otimes x)=r'\\otimes(\\varphi(r)s\\otimes x)$ gives the common image $\\varphi'(r')b(s)b\\varphi(r)\\otimes(1\\otimes x)$; the inner relation moves $b\\varphi(r)=\\varphi'a(r)$ to $1\\otimes rx$ in $AX$. Tensor linearization and sheafification [def-weil-pbc-module-tensor-product] [def-weil-presheaf-modules-sheafification] therefore give $\\mu,\\tau$. Their formulas commute with restriction, with $d_N$ or $d_X$, and with a map of the last variable, by applying that map to $z$ or $x$. Hence these are natural chain maps.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "For the first equation, apply both composites to $r'\\otimes(s\\otimes x)$. The normalization of $\\nu$ [lem-sfb-slice-scalar-hom-chain-adjunction], and the formulas for $\\mu,\\kappa,\\tau$ in steps 2–3, give on both sides\n$$\\varphi'(r')b(s)\\otimes(1\\otimes x)\\quad\\text{in }U'E'AX.$$\nThe nested tensor uniqueness of step 1 [def-weil-pbc-module-tensor-product] [def-weil-presheaf-modules-sheafification] proves the equation in every degree, hence as chain maps.",
+   "uses": [
+    "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "For the $\\theta$ equation, take $r'\\otimes g$ with $g$ a degree-$n$ section of $H_S(EP,N)$, and evaluate coordinate $i$ at $r''\\otimes p$ in $AP^i$. The normalizations [lem-sfb-slice-scalar-hom-chain-adjunction] [lem-sfb-scalar-hom-chain-evaluation] give on the left $\\mu_N(r'r''\\otimes g^i(1\\otimes p))$, namely\n$$\\varphi'(r'r'')\\otimes g^i(1\\otimes p).$$\nOn the right, $\\mu$ first gives $\\varphi'(r')\\otimes g$; $\\theta_{\\varphi'}$ evaluates at $1\\otimes(r''\\otimes p)$, which $\\kappa_P^{-1}$ sends to $\\varphi'(r'')\\otimes(1\\otimes p)$. The $\\chi_b$ formula gives the same value. This calculation is on every further slice, so product-coordinate equality [def-pur-hom-complex] and the tensor/sheafification uniqueness of step 1 prove exactly the second displayed equation, with the contravariant Hom input $\\kappa_P^{-1}$.",
+   "uses": [
+    "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "lem-sfb-scalar-hom-chain-evaluation",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "For the $\\alpha$ equation, take $r'\\otimes(s\\otimes f)$ with $f$ of degree $n$ and evaluate coordinate $i$ at $r''\\otimes p$. By [lem-sfb-scalar-hom-chain-evaluation], the left side first gives $r'r''\\otimes(s\\otimes f^i(p))$ and then\n$$\\varphi'(r'r'')b(s)\\otimes(1\\otimes f^i(p)).$$\nOn the right, $\\tau$ gives $\\varphi'(r')b(s)\\otimes(1\\otimes f)$, and $\\chi_a(1\\otimes f)$ sends $r''\\otimes p$ to $r''\\otimes f^i(p)$. Applying $\\alpha_{\\varphi'}$ therefore gives $\\varphi'(r')b(s)\\otimes(r''\\otimes f^i(p))$, equal to the preceding expression by $R'$-balance [def-weil-pbc-module-tensor-product]. Equality on every slice and coordinate [def-pur-hom-complex], then step 1, gives the third equation.",
+   "uses": [
+    "lem-sfb-scalar-hom-chain-evaluation",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "For the $\\sigma$ equation, use $s'\\otimes(s\\otimes f)$ in $BEH_R(P,J)^n$ and evaluate coordinate $i$ at $t'\\otimes(r''\\otimes p)$ in $E'AP^i$. The formulas of [lem-sfb-scalar-hom-chain-evaluation] and step 2 give for the left composite\n$$s't'\\varphi'(r'')b(s)\\,w(1\\otimes q(1\\otimes f^i(p))).$$\nIndeed $\\kappa_P^{-1}$ sends that argument to $t'\\varphi'(r'')\\otimes(1\\otimes p)$, and $B(\\sigma_q)$ followed by $\\chi_b$ evaluates it as $s't'\\varphi'(r'')\\otimes s q(1\\otimes f^i(p))$ before applying $w$. On the right, $\\kappa_{H_R(P,J)}$ gives $s'b(s)\\otimes(1\\otimes f)$ and $E'(\\chi_a)$ gives $s'b(s)\\otimes F$, where $F^i(r''\\otimes p)=r''\\otimes f^i(p)$. Thus $\\sigma^{\\varphi'}_{q'}$ gives\n$$s'b(s)t'\\varphi'(r'')\\,q'(1\\otimes(1\\otimes f^i(p))).$$\nThe assumed equality $q'\\kappa_J=wB(q)$, applied to $1\\otimes(1\\otimes f^i(p))$ in $BEJ$, identifies the last factor with $w(1\\otimes q(1\\otimes f^i(p)))$. The scalars commute. Product coordinates [def-pur-hom-complex] and step 1 finish the fourth equation for arbitrary $q',w$, not just scalar-extended $q$.",
+   "uses": [
+    "lem-sfb-scalar-hom-chain-evaluation",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "For successive ring maps $u:K\\to L$, $v:L\\to M$, construct the extension associator by\n$$m\\otimes(l\\otimes x)\\longmapsto m v(l)\\otimes x,\\qquad m\\otimes x\\longmapsto m\\otimes(1\\otimes x).$$\nBoth are balanced, and their composites are the identity by the same relation $m v(l)\\otimes y=m\\otimes ly$ [def-weil-pbc-module-tensor-product]. They descend uniquely [def-weil-presheaf-modules-sheafification], commute with differentials and are natural by substitution in $x$. On three successive extensions, both contractions send $n\\otimes(m\\otimes(l\\otimes x))$ to $n w(m)w v(l)\\otimes x$, for $w:M\\to N$; thus associativity of multiplication proves coherence. For the identity ring map use $k\\otimes x\\mapsto kx$, inverse $x\\mapsto1\\otimes x$; its two unit equations follow from $1\\otimes kx=k\\otimes x$. These prove the specified associators and unit identifications without a separate associativity theorem.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "Add a second square $c:R'\\to R''$, $d:S'\\to S''$, $\\varphi'':R''\\to S''$ with $d\\varphi'=\\varphi''c$; put $C=E_c,D=E_d$. Compare the maps of the composite square $(ca,db)$ with the two successive squares, using step 8. For $\\kappa$, both paths on $s''\\otimes(s'\\otimes(s\\otimes x))$ give\n$$s''d(s')db(s)\\otimes(1\\otimes(1\\otimes x)),$$\nwhere direct contraction uses $d(s'b(s))=d(s')db(s)$. For $\\mu$, both paths on $r''\\otimes(r'\\otimes z)$ give\n$$\\varphi''(r''c(r'))\\otimes z,$$\nsince the successive path contracts $\\varphi''(r'')\\otimes(\\varphi'(r')\\otimes z)$ and $d\\varphi'=\\varphi''c$. For $\\tau$, both paths on $r''\\otimes(r'\\otimes(s\\otimes x))$ give\n$$\\varphi''(r''c(r'))db(s)\\otimes(1\\otimes(1\\otimes x)).$$\nHere the successive scalar is $\\varphi''(r'')d(\\varphi'(r')b(s))$, which is exactly the displayed scalar. Tensor uniqueness [def-weil-pbc-module-tensor-product] and sheafification uniqueness [def-weil-presheaf-modules-sheafification] extend these identities. If $a,b$ are identities, $\\kappa,\\mu,\\tau$ become the identity after the unit identifications, by the same formulas. This proves identity and composite compatibility for the new comparison maps.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "The supplied normalizations also respect these associators. For $u:K\\to L$, $v:L\\to M$ as in step 8, write a scalar-extension Hom generator as $m\\otimes(l\\otimes f)$ and an extended source generator as $t\\otimes(s\\otimes p)$. The successive $\\chi_v E_v(\\chi_u)$, contracted in its target, evaluates to $mt\\,v(ls)\\otimes f^i(p)$. Direct $\\chi_{vu}$ evaluates the contracted inputs $mv(l)\\otimes f$, $tv(s)\\otimes p$ to the same element, by [lem-sfb-scalar-hom-chain-evaluation]. Successive $\\theta$ evaluates a Hom family at $1\\otimes(1\\otimes p)$, which contracts to $1\\otimes p$, the direct $\\theta$ value [lem-sfb-slice-scalar-hom-chain-adjunction]. Successive $\\alpha$ gives $m\\otimes(l\\otimes f^i(p))$, contracting to $mv(l)\\otimes f^i(p)$; $\\nu$ leaves this tensor unchanged. For $\\sigma$, with $q:E_uJ\\to N$, $w:E_vN\\to N'$ and $q_{vu}=wE_v(q)$ after the associator, both successive and direct evaluation give\n$$mt\\,v(ls)\\,w(1\\otimes q(1\\otimes f^i(p))).$$\nThus all four normalizations compose, and for identity ring maps they reduce to evaluation at $p$, the identity on Hom, and postcomposition by $q$. Step 9 identifies the comparison maps in two stacked squares; the four equations in steps 4–7 can therefore be pasted, with adjacent Hom actions composed componentwise [def-pur-hom-complex], to give the equations for their composite. The just-computed normalization formulas identify their pasted boundaries with the direct boundaries. All equalities are tested by step 1. Induction on the number of squares gives every finite tower.",
+   "uses": [
+    "lem-sfb-scalar-hom-chain-evaluation",
+    "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  },
+  {
+   "text": "Finally a compatible $b$-semilinear chain map $h:N\\to N'$ induces $w:BN\\to N'$ by $w(s'\\otimes z)=s'h(z)$: the balance is $s'b(s)\\,h(z)=s'h(sz)$ and it commutes with differentials. The tensor and sheafification universal properties [def-weil-pbc-module-tensor-product] [def-weil-presheaf-modules-sheafification] give this map without any surjectivity or flatness hypothesis. Step 7 already allowed precisely this arbitrary $w$, subject only to $q'\\kappa_J=wB(q)$. For a further semilinear map the induced composite is $w_2E_d(w)$ after step 8, as both send $s''\\otimes(s'\\otimes z)$ to $s''d(s')h_2(h(z))$. Consequently step 10 applies to these target changes too. Every argument is degreewise and uses all Hom coordinates, so boundedness, product preservation by scalar extension, and invertibility of $\\chi$ were never needed.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sfb-slice-scalar-hom-chain-adjunction",
+  "lem-sfb-scalar-hom-chain-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +210,45 @@
    "results": "Returned SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.Monoidal.tensorObjMap, AdicCompletion.ofTensorProduct_naturality, SheafOfModules.Presentation.map_π_eq, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Module.Flat.toAlgebra, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module scalar associators, cochain scalar actions, and sheaf unit/free naturality do not state the four coefficient-square chain equations for arbitrary ring sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|restrictScalarsComp|tensorObjMap",
+   "results": "Returned Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean. Search directory: Mathlib/Algebra/Category/ModuleCat. Inspected ModuleCat/ChangeOfRings.lean lines 984–1032 and Sheaf/ChangeOfRings.lean lines 30–46: ordinary module associators and sheaf restriction, not this product-Hom chain-square assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: no theorem for all four normalized internal Hom chain equations for arbitrary sheaves of coefficient rings; alternate phrasing also checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension internal Hom chain comparison for sheaves of modules is compatible with a commuting coefficient square",
+   "results": "Returned LinearMap.instSMulCommClass, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, CategoryTheory.Abelian.Ext.smul_hom, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.extendScalarsComp. Inspected ModuleCat/ChangeOfRings.lean lines 984–1032 and Sheaf/ChangeOfRings.lean lines 30–46: ordinary module associators and sheaf restriction, not this product-Hom chain-square assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: no theorem for all four normalized internal Hom chain equations for arbitrary sheaves of coefficient rings; alternate phrasing also checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"comp\"",
+   "results": "Returned ModuleCat.extendScalarsComp, ModuleCat.ExtendScalars.map'_comp, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.homEquiv_extendScalarsComp. Inspected ModuleCat/ChangeOfRings.lean lines 984–1032 and Sheaf/ChangeOfRings.lean lines 30–46: ordinary module associators and sheaf restriction, not this product-Hom chain-square assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: no theorem for all four normalized internal Hom chain equations for arbitrary sheaves of coefficient rings; alternate phrasing also checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commuting square of ring sheaves, scalar extension of internal Hom complexes commutes with the normalized evaluation and restriction adjunction chain maps",
+   "results": "Returned LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, ModuleCat.homEquiv_extendScalarsComp, PresheafOfModules.Hom.naturality_assoc, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, SheafOfModules.unitHomEquiv_comp_apply. Inspected ModuleCat/ChangeOfRings.lean lines 984–1032 and Sheaf/ChangeOfRings.lean lines 30–46: ordinary module associators and sheaf restriction, not this product-Hom chain-square assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: no theorem for all four normalized internal Hom chain equations for arbitrary sheaves of coefficient rings; alternate phrasing also checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars through two different factorizations of a ring homomorphism yields the same internal Hom evaluation comparison on arbitrary unbounded sheaf complexes",
+   "results": "Returned LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_apply, ModuleCat.homEquiv_extendScalarsComp, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, CategoryTheory.Functor.mapExtLinearMap_coe, SheafOfModules.freeHomEquiv_comp_apply. Inspected ModuleCat/ChangeOfRings.lean lines 984–1032 and Sheaf/ChangeOfRings.lean lines 30–46: ordinary module associators and sheaf restriction, not this product-Hom chain-square assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: no theorem for all four normalized internal Hom chain equations for arbitrary sheaves of coefficient rings; alternate phrasing also checked."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-hom-scalar-chain-identification",
@@ -79,5 +268,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-hom-chain-coefficient-coherence",
+  "worker": "stage1",
+  "summary": "Constructed the balanced coefficient comparison maps and their inverses, evaluated all four chain equations on arbitrary local product coordinates, and expanded identity, composite-square and semilinear-target coherence. No new nodes: these are generator calculations from the existing definitions and the normalized maps assumed in the statement. The statement is unchanged.",
+  "blueprint": "lem-sfb-dc-hom-preserves final coefficient-passage paragraph (inverting ell and descending to a finite extension E), through lem-sfb-dc-hom-filtered-colimit and lem-sfb-hom-scalar-chain-identification: old step 11, all four coefficient equations, iterated-extension associators, restriction mate, and identity/composite compatibility."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-3e4f42fdc",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-3e4f42fdc (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery creates no new nodes. The statement and stmt_deps are byte-identical to the Q54 base. The item is not dropped, live and side-live still have it unsplit, and the 2026-10-21 re-split note is on the parent lem-sfb-hom-scalar-chain-identification, not on this item. There is no cycle: the two cited siblings are unsplit, same-unit (sk-def-sfb-dc-restricted-functors) nodes, every other citation is a definition, and no SGA source or tool_uses is involved. Sources checked: Stacks 03CY (sites-modules.tex:815), 03CZ (:933) and 0A8X (sites-cohomology.tex:8571). The proof expands every clause of old parent step 11. Cited statements checked against what each step takes: def-pur-sheaf-tensor-product, def-weil-pbc-module-tensor-product, def-weil-presheaf-modules-sheafification, def-pur-hom-complex, def-pur-sheaf-hom, def-pc-sheaf-restrict-scalars, and the sibling normalisations of nu, theta, alpha and sigma (chi = sigma_id). I redid every generator calculation. For kappa, both balances hold and both inverse composites are the identity. mu and tau are balanced by b phi = phi' a, with no flatness used. Equations 1-4 type-check, including the contravariant kappa_P^{-1}, and evaluate equal: eq2 gives phi'(r'r'') tensor g(1 tensor p); eq3 is equal by R'-balance; eq4 uses kappa_J(1 tensor (1 tensor y)) = 1 tensor (1 tensor y) and the hypothesis q' kappa_J = w B(q), for arbitrary (q', w). Associators, units, composite squares (d phi' = phi'' c), towers and semilinear w are all correct, and the composite-square equations also follow directly from steps 4-7. Edge cases checked: point site with Z -> Z/2, non-invertible mu for Z -> Z/4 -> Z/2, zero rings and complexes, and unbounded coordinates. No duplicate was found; the sec-smooth-base-change raw scalar nodes state something else. Fault B4, repaired: in steps 2-11 every TeX backslash was destroyed. \\varphi and \\nu became a newline plus letters, \\tau, \\theta, \\to and \\text became a tab plus letters, otimes, kappa, mu, chi, sigma, alpha and mapsto lost their backslash, and \\, became a bare comma ('b(s),w(', 'mt,v(ls)'). The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scalar-hom-chain-coefficient-coherence.json; it restores backslashes inside math only, verified by an exact round-trip against the delivered text for all 11 steps, and changes no other field. Advisory: the proof is about 10.3k characters, but no re-split note applies to this item.; 1 file(s) fixed by the reviewer"
  }
 }
