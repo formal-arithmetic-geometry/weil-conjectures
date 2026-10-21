@@ -45,6 +45,3 @@ F1/route-pivot. I confirmed the mechanical finding: Step 5 cites lem-per-snc-bou
 
 (the landing tools, head 1df3eea78) the delivery did not land: (merge queue) your landing 20261020T121954-NJ-450639-0 was taken out of the candidate: the global build of be2d44de55 failed in Sheaf.Algebra.Homology.DerivedEvaluationCanonicalMap Sheaf.Algebra.Homology.HomTensorTotal Sheaf.Algebra.Homology.KFlatConeTrianglePresentation job job computation; this change is a possible cause
 
-## lem-sfb-strict-local-prime-to-p-kummer-splitting (2026-10-21 21:06 UTC, branch head 45d5d59f833)
-
-L: independent stage-2 immutable head 45d5d59f833f: Stage-1 re-split sent on the S2 lane: no .lean module and no lean record; report is 'Stage-1 direct delivery' without '## Worker report'/'## Second reading by NJ' (H1). Node differs from live only in proof steps 6/13/15 and split_report (H2); statement/stmt_deps identical. NE d9fb4ae51 S1 PASS already landed live 04:56 (split, reviewed), so stage 1 is closed. No second reading of a Lean statement (H11). Correction: write the stage-2 Lean statement (all hypotheses incl. r=0 and disconnected P, G-equivariant trivialization over U_n, stmt_dep declarations), add a full lean record verbatim from the file, revert proof/split_report to live, and write the required report sections.

@@ -524,5 +524,30 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-d9fb4ae51 (reviewer sub-agent of L); spot-checked: This re-delivery fixes the 8e0034c8 RETURN (C1/F/G4). It no longer cites the dropped lem-per-snc-root-punctured-torsor-splitting and writes the simultaneous-root Abhyankar argument out in 20 steps, with no new nodes. The statement and stmt_deps match live exactly; the item is still unsplit on live and side-live, and no repair note applies. No cited node is on the drop list. The full stmt/proof closure (3108 nodes) contains no dropped node, no cycle and no SGA citation. Source: I read ILO IX 2.1 (pp.133-134), which uses the strict-local setting with t_i part of a regular system of parameters and the root covers A[x]/(x_i^n - t_i). The proof replaces SGA 1 XIII 5.3 by Stacks 0BRM (local Abhyankar) and 0BMA/0EY7 (purity, as the codimension-two extension node). Steps: (2) monic free basis gives R->B finite and injective. (3) by 04GH and the local closed fibre k[x]/(x^n), B is strictly henselian. (4) by 00KQ plus going up, B is regular with parameters (x, t_{>r}). (5) by 00NQ, B/(x_i) is free over R/(t_i), so q_i meets R in p_i. (6) V_i and A_i are DVRs, B tensor V_i = A_i, m_V A_i = m_A^n, and every height-one prime containing f is some q_i. (7) field torsor components L_j of degree dividing n. (8) 032L applies with no excellence needed. (9) the total-quotient argument holds and 033C/034M make T integrally closed in D. (10) by 0307, C[1/f] = T. (11) by 09EB, e and f divide n. (12) every hypothesis of the 0BRM tensor-factor node checks out, using L_j tensor over V_i with A_i = L_j tensor over K with E. (13) flatness over the PID A_i (0AUW), then 00RV/00RT and 00U6 (3)=>(2) give an etale neighbourhood. (14) W is open and contains U_B and every height-one point. (15) the codimension-two extension node applies to points of height at least 2, giving H. (16) H is surjective and a section exists over strictly henselian B. (17-20) the equivariant clopen trivialization and r=0. Edge cases tested: d=0, r=0, r=1, trivial G, disconnected P, y^d=t. Accepted tool_uses: the eight sk-prop-input-spreading lem-sbc generic algebra/etale tools listed in split_report. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictLocalPrimeToPKummerSplitting",
+  "declaration": "AlgebraicGeometry.strictLocalPrimeToPKummerSplitting",
+  "declarations": [
+   "AlgebraicGeometry.strictLocalParameterRootRing",
+   "AlgebraicGeometry.strictLocalBoundaryPuncture",
+   "AlgebraicGeometry.strictLocalParameterRootPuncture",
+   "AlgebraicGeometry.strictLocalParameterRootMap",
+   "AlgebraicGeometry.strictLocalPrimeToPKummerSplitting"
+  ],
+  "file": "lean/Sheaf/Paper/StrictLocalPrimeToPKummerSplitting.lean",
+  "statement": "theorem strictLocalPrimeToPKummerSplitting (p : ℕ) (hp : p.Prime) (R : Type u) [CommRing R] [CharP R p] [IsRegularLocalRing R] [IsStrictlyHenselianLocalRing R] (r : ℕ) (t : Fin r → R) (ht : Function.Injective t) (hparams : ∃ s : List R, IsLocalRing.IsRegularSystemOfParameters s ∧ ∀ i : Fin r, t i ∈ s) (G : Type v) [Group G] [Finite G] (hG : ¬ p ∣ Nat.card G) (P : Scheme.GaloisCoverAction G (strictLocalBoundaryPuncture t)) : ∃ n : ℕ, 1 ≤ n ∧ Nat.Coprime n p ∧ (r = 0 → n = 1) ∧ ∃ e : (∐ fun _ : G ↦ strictLocalParameterRootPuncture t n) ≅ pullback P.π (strictLocalParameterRootMap t n), e.hom ≫ pullback.snd P.π (strictLocalParameterRootMap t n) = Sigma.desc (fun _ : G ↦ 𝟙 (strictLocalParameterRootPuncture t n)) ∧ ∀ g h : G, Sigma.ι (fun _ : G ↦ strictLocalParameterRootPuncture t n) g ≫ e.hom ≫ pullback.fst P.π (strictLocalParameterRootMap t n) ≫ P.smul h = Sigma.ι (fun _ : G ↦ strictLocalParameterRootPuncture t n) (h * g) ≫ e.hom ≫ pullback.fst P.π (strictLocalParameterRootMap t n)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1ae88ca3",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Previous RETURN (H1/H2/H11) repaired: only lean differs from side-live node; module + record + both report sections present. Every hypothesis/conclusion matches the node via recorded stmt_dep decls (IsRegularLocalRing, CharP, IsStrictlyHenselianLocalRing, IsRegularSystemOfParameters with injective t, Localization.Away of ∏t, Scheme.GaloisCoverAction G, literal MvPolynomial root quotient, Spec.map of IsLocalization.Away.map, pullback ≅ ∐_G U_n over U_n). Equivariance formula checked against mul_smul (smul (g*h)=smul h≫smul g): ι_g≫e≫fst≫smul h=ι_{hg}≫e≫fst is the left regular action. r=0→n=1, dim 0, disconnected P, independent universes u/v covered. No duplicates (grep side-live; full-parameter-root tower is different). Helpers are real constructions in lean.declarations; docstrings carry source/blueprint and all 20 proof steps; statement verbatim; public/plain imports per brief §4, all 25 modules exist. No compile run (no file changed); worker reports clean scompile."
  }
 }
