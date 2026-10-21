@@ -71,8 +71,37 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-stratified-lattice",
- "lean": null,
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContinuousFrameModule",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousFramePresheaf",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousFramePresheaf",
+   "AlgebraicGeometry.ProEtale.continuousFrameSheaf",
+   "AlgebraicGeometry.ProEtale.continuousFrameCoefficientInclusion",
+   "AlgebraicGeometry.ProEtale.continuousFrameSectionsModule",
+   "AlgebraicGeometry.ProEtale.continuousFrameHasSheafify",
+   "AlgebraicGeometry.ProEtale.continuousFrameWEquals",
+   "AlgebraicGeometry.ProEtale.continuousFrameTensorPresheaf",
+   "AlgebraicGeometry.ProEtale.continuousFrameTensorSheaf",
+   "AlgebraicGeometry.ProEtale.continuousFrameTensorUnit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousFrameModule.lean",
+  "statement": "def continuousFramePresheaf (X : Scheme.{u}) (T M : Type v) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [AddCommGroup M] [TopologicalSpace M] [IsTopologicalAddGroup M] [Module T M] [ContinuousSMul T M] : PresheafOfModules.{max (u + 1) v} ((lisseContinuousCommRingSheafUniverses X T).obj ⋙ forget₂ CommRingCat.{max (u + 1) v} RingCat.{max (u + 1) v})",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Maintenance 8135d99d529 registers this prerequisite as an unstated DAG definition (lean: null), with maintainer-owned unreachable metadata. No recorded declaration exists yet. This dependency module supplies the actual continuous M-valued presheaf over variable continuous T-valued coefficients, its sheaf bundling, coefficient inclusion, and sectionwise/sheaf scalar extension with the canonical unit; the site and coefficient universes remain independent."
+ },
  "import_flags": [
   "unreachable"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e5947682",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Rebase of the PASSed a1245c02 after its reach landing refusal. Both Lean modules are byte-identical to a1245c02. Maintenance 8135d99d529 registered def-sfb-continuous-frame-module live (lean null) and flagged it and the item unreachable. The delivered def node differs from live only by its lean record (with lean.note); the item differs only by lean and the stmt_dep on that node; no other snapshot file differs from side-live, so H13 stays resolved. Re-read clause by clause: φ/φ⁻¹ pinned (β⁻¹) with restriction compatibility, e pinned to φ, ι postcomposition and injective, μ pure-tensor formula, μ⁻¹ = Σ(B⁻¹g)ᵢ⊗const bᵢ, J/matrix B, tensor presheaf is a sheaf, q pinned by the unit. Edge cases r=0, empty U/X, non-T2 K; independent universes; real ProEt site. No hollow defs; only sorry in the item; docstrings ok; statements verbatim; imports exist live. No compile (no file changed). No passing dry run is recorded for this exact head (last OK at d173f50565b), so landing acceptance is unconfirmed. Advisory: IsTopologicalDivisionRing is literal but slightly strong; Second-reading section is the placeholder; nodes are unreachable per maintainer."
+ }
 }

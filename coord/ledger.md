@@ -23091,3 +23091,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:52 L: merged deliver/Q22/lem-sp-cofinal-finite-reduction-constructibility (stage 2; reviewer PASS; parallel immutable checks)
 
 - 00:55 L: batch 20261021T163749 dependency take-out
+- 16:56 L: merged deliver/Q11/lem-sfb-continuous-frame-sheaf-comparison (stage 2; reviewer PASS; parallel immutable checks)

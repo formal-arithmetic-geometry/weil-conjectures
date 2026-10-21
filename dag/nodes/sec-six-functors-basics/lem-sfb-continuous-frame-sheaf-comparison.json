@@ -14,7 +14,8 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-lisse-lattice-coefficients",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-continuous-frame-module"
  ],
  "proof": [
   {
@@ -235,5 +236,26 @@
  },
  "import_flags": [
   "unreachable"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContinuousFrameSheafComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.continuous_frame_sheaf_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuous_frame_sheaf_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousFrameSheafComparison.lean",
+  "statement": "theorem continuous_frame_sheaf_comparison (X : Scheme.{u}) (K : Type v) [Field K] [TopologicalSpace K] [IsTopologicalDivisionRing K] (A : Subring K) (r : ℕ) (L : Submodule A (Fin r → K)) (b : Module.Basis (Fin r) A L) (c : Module.Basis (Fin r) K (Fin r → K)) (hc : ∀ i : Fin r, c i = (b i : Fin r → K)) (hβ : IsHomeomorph (b.equivFun.symm : (Fin r → A) → L)) : ∃ hP : Presheaf.IsSheaf (Scheme.ProEt.topology X) (continuousFramePresheaf X A (Fin r → A)).presheaf, ∃ hF : Presheaf.IsSheaf (Scheme.ProEt.topology X) (continuousFramePresheaf X A L).presheaf, ∃ hG : Presheaf.IsSheaf (Scheme.ProEt.topology X) (continuousFramePresheaf X K (Fin r → K)).presheaf, ∃ e : continuousFrameSheaf X A (Fin r → A) hP ≅ continuousFrameSheaf X A L hF, ∃ φ : ∀ U : X.ProEtᵒᵖ, (Fin r → (lisseContinuousCommRingSheafUniverses X A).obj.obj U) ≃ₗ[ (lisseContinuousCommRingSheafUniverses X A).obj.obj U] (ULift.{u + 1} C(U.unop.left, L)), ∃ ι : continuousFrameSheaf X A L hF ⟶ (SheafOfModules.restrictScalars ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{max (u + 1) v} RingCat.{max (u + 1) v})).map (continuousFrameCoefficientInclusion X K A))).obj (continuousFrameSheaf X K (Fin r → K) hG), ∃ μ : continuousFrameTensorPresheaf X K A (continuousFrameSheaf X A L hF) ≅ (continuousFrameSheaf X K (Fin r → K) hG).val, ∃ d : ∀ U : X.ProEtᵒᵖ, C(U.unop.left, Fin r → K) → Fin r → C(U.unop.left, K), ∃ J : ∀ U : X.ProEtᵒᵖ, (continuousFrameTensorPresheaf X K A (continuousFrameSheaf X A (Fin r → A) hP)).obj U ≃ₗ[ (lisseContinuousCommRingSheafUniverses X K).obj.obj U] (Fin r → (lisseContinuousCommRingSheafUniverses X K).obj.obj U), ∃ q : continuousFrameTensorSheaf X K A (continuousFrameSheaf X A L hF) ≅ continuousFrameSheaf X K (Fin r → K) hG, (∀ (U : X.ProEtᵒᵖ) (a : Fin r → (lisseContinuousCommRingSheafUniverses X A).obj.obj U) (x : U.unop.left), (φ U a).down x = ∑ i : Fin r, (a i).down x • b i) ∧ (∀ (U : X.ProEtᵒᵖ) (f : ULift.{u + 1} C(U.unop.left, L)) (i : Fin r) (x : U.unop.left), ((φ U).symm f i).down x = b.equivFun (f.down x) i) ∧ (∀ (U : X.ProEtᵒᵖ) (p : ULift.{u + 1} C(U.unop.left, Fin r → A)), e.hom.val.app U p = φ U (fun i ↦ ULift.up ((ContinuousMap.eval i).comp p.down))) ∧ (∀ {U V : X.ProEtᵒᵖ} (h : U ⟶ V) (a : Fin r → (lisseContinuousCommRingSheafUniverses X A).obj.obj U), φ V (fun i ↦ (lisseContinuousCommRingSheafUniverses X A).obj.map h (a i)) = ULift.up ((φ U a).down.comp h.unop.left.base.hom)) ∧ (∀ {U V : X.ProEtᵒᵖ} (h : U ⟶ V) (f : ULift.{u + 1} C(U.unop.left, L)) (i : Fin r), (φ V).symm (ULift.up (f.down.comp h.unop.left.base.hom)) i = (lisseContinuousCommRingSheafUniverses X A).obj.map h ((φ U).symm f i)) ∧ (∀ (U : X.ProEtᵒᵖ) (f : ULift.{u + 1} C(U.unop.left, L)) (x : U.unop.left), (ULift.down (ι.val.app U f)) x = (f.down x : Fin r → K)) ∧ (∀ U : X.ProEtᵒᵖ, Function.Injective (ι.val.app U)) ∧ (∀ (U : X.ProEtᵒᵖ) (a : (lisseContinuousCommRingSheafUniverses X K).obj.obj U) (f : ULift.{u + 1} C(U.unop.left, L)) (x : U.unop.left), (ULift.down (μ.hom.app U (a ⊗ₜ[(lisseContinuousCommRingSheafUniverses X A).obj.obj U, ((continuousFrameCoefficientInclusion X K A).hom.app U).hom] f))) x = a.down x • (f.down x : Fin r → K)) ∧ (∀ (U : X.ProEtᵒᵖ) (g : C(U.unop.left, Fin r → K)) (i : Fin r) (x : U.unop.left), d U g i x = c.equivFun (g x) i) ∧ (∀ (U : X.ProEtᵒᵖ) (g : ULift.{u + 1} C(U.unop.left, Fin r → K)), μ.inv.app U g = ∑ i : Fin r, (ULift.up (d U g.down i) : ULift.{u + 1} C(U.unop.left, K)) ⊗ₜ[ (lisseContinuousCommRingSheafUniverses X A).obj.obj U, ((continuousFrameCoefficientInclusion X K A).hom.app U).hom] ULift.up (ContinuousMap.const U.unop.left (b i))) ∧ (∀ {U V : X.ProEtᵒᵖ} (h : U ⟶ V) (g : C(U.unop.left, Fin r → K)) (i : Fin r), d V (g.comp h.unop.left.base.hom) i = (d U g i).comp h.unop.left.base.hom) ∧ (∀ (U : X.ProEtᵒᵖ) (a : (lisseContinuousCommRingSheafUniverses X K).obj.obj U) (p : ULift.{u + 1} C(U.unop.left, Fin r → A)) (i : Fin r) (x : U.unop.left), (J U (a ⊗ₜ[(lisseContinuousCommRingSheafUniverses X A).obj.obj U, ((continuousFrameCoefficientInclusion X K A).hom.app U).hom] p) i).down x = a.down x * (p.down x i : K)) ∧ (∀ (U : X.ProEtᵒᵖ) (a : (lisseContinuousCommRingSheafUniverses X K).obj.obj U) (p : ULift.{u + 1} C(U.unop.left, Fin r → A)) (x : U.unop.left) (j : Fin r), (ULift.down (μ.hom.app U (a ⊗ₜ[(lisseContinuousCommRingSheafUniverses X A).obj.obj U, ((continuousFrameCoefficientInclusion X K A).hom.app U).hom] e.hom.val.app U p))) x j = ∑ i : Fin r, a.down x * (p.down x i : K) * (b i : Fin r → K) j) ∧ Presheaf.IsSheaf (Scheme.ProEt.topology X) (continuousFrameTensorPresheaf X K A (continuousFrameSheaf X A L hF)).presheaf ∧ continuousFrameTensorUnit X K A (continuousFrameSheaf X A L hF) ≫ q.hom.val = μ.hom",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e5947682",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Rebase of the PASSed a1245c02 after its reach landing refusal. Both Lean modules are byte-identical to a1245c02. Maintenance 8135d99d529 registered def-sfb-continuous-frame-module live (lean null) and flagged it and the item unreachable. The delivered def node differs from live only by its lean record (with lean.note); the item differs only by lean and the stmt_dep on that node; no other snapshot file differs from side-live, so H13 stays resolved. Re-read clause by clause: φ/φ⁻¹ pinned (β⁻¹) with restriction compatibility, e pinned to φ, ι postcomposition and injective, μ pure-tensor formula, μ⁻¹ = Σ(B⁻¹g)ᵢ⊗const bᵢ, J/matrix B, tensor presheaf is a sheaf, q pinned by the unit. Edge cases r=0, empty U/X, non-T2 K; independent universes; real ProEt site. No hollow defs; only sorry in the item; docstrings ok; statements verbatim; imports exist live. No compile (no file changed). No passing dry run is recorded for this exact head (last OK at d173f50565b), so landing acceptance is unconfirmed. Advisory: IsTopologicalDivisionRing is literal but slightly strong; Second-reading section is the placeholder; nodes are unreachable per maintainer."
+ }
 }
