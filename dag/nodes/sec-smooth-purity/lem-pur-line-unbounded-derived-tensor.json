@@ -1,0 +1,95 @@
+{
+ "id": "lem-pur-line-unbounded-derived-tensor",
+ "kind": "statement",
+ "title": "Derived tensor by a locally free line is the exact termwise equivalence",
+ "statement": "Let $X$ be a scheme and $R$ a sheaf of commutative rings on its small pro-etale site [def-weil-pbc-proetale-site]. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category $D(R)$ [def-weil-abstract-derived-category], and the K-flat derived tensor [lem-weil-pbc-site-derived-tensor-descent]. Let $P$ be a locally free rank-one $R$-module sheaf, meaning it is isomorphic to $R$ on a covering, and put $P^\\vee=\\mathcal Hom_R(P,R)$ [def-pur-sheaf-hom]. Use the ordinary sheaf tensor and its constraints [def-pur-sheaf-tensor-product, lem-pc-sheaf-modules-tensor-closed].\n\nBoth $P$ and $P^\\vee$ are flat (their tensor functors are exact [def-pc-flat-sheaf-modules]), and $P[0]$ and $P^\\vee[0]$ are K-flat [def-pc-kflat-complex]. The functors $F_P(K)=K\\otimes_R^L P[0]$ and $F_{P^\\vee}$ are naturally isomorphic to the functors induced by termwise ordinary tensor on arbitrary unbounded complexes. Evaluation and the symmetry give natural isomorphisms $F_{P^\\vee}F_P\\cong1$ and $F_PF_{P^\\vee}\\cong1$; they give inverse equivalences, are compatible with shifts and distinguished triangles [def-weil-triangulated-category], and identify $\\mathcal H^i(F_PK)$ with $\\mathcal H^i(K)\\otimes_R P$ for every $i\\in\\mathbf Z$. The evaluation is the specified sheaf evaluation: on a local basis $p$ and its dual $p^\\vee$, it is $(ap)\\otimes(bp^\\vee)\\mapsto ab$, with inverse $a\\mapsto(ap)\\otimes p^\\vee$. These maps satisfy the inverse-pair triangle identities. If $R$ is a sheaf of algebras over a commutative ring $B$, the functors and both evaluation isomorphisms are $B$-linear [def-weil-linear-functor]. No boundedness assumption on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and its preceding K-flat construction), Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side); invertible degree-zero specialization, with derived.tex Tag 015F (lemma-right-derived-exact-functor) for the exact termwise functor",
+  "also": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), last two sentences: invertibility, flatness and termwise derived tensor; generic line argument extracted by the agent"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-triangulated-category",
+  "def-weil-linear-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor with a locally free rank one sheaf is an exact equivalence on unbounded derived categories computed termwise with inverse the dual line",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; DerivedCategory.instLinearCochainComplexIntQ; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; LightCondensed.internallyProjective_iff_tensor_condition'; CategoryTheory.Tor",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf line bundle is flat and its termwise tensor functor on chain complexes descends to a derived equivalence with the dual line",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.instLinearSingleFunctor; SheafOfModules.freeFunctorCompPullbackIso; CategoryTheory.Sheaf.symmetricCategory; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring complexes of sheaves with an invertible module is an equivalence of unbounded derived categories",
+   "results": "Module.Invertible.rTensorEquiv; HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences; Module.Invertible.instTensorProduct_2; Module.Invertible.instTensorProduct; Submodule.tensorInvEquiv; PresheafOfModules.sheafificationHomEquiv; CategoryTheory.Equivalence.mapHomologicalComplex_inverse; LinearEquiv.lTensor",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*derived|derived.*invertible|tensor.*mapDerivedCategory|mapDerivedCategory.*tensor",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "instLinearDerivedCategoryMapDerivedCategory|mapDerivedCategorySingleFunctor|mapHomologicalComplex_inverse",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-def-sp-tate-twist-locally-free",
+  "date": "2026-10-21",
+  "group": "Q03"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), last two sentences: an invertible module is flat, derived tensor is termwise, and opposite twists cancel",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

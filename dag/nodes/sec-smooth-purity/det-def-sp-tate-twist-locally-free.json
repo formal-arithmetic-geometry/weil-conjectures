@@ -20,132 +20,114 @@
  ],
  "proof": [
   {
-   "text": "Put $T=\\mathbf Z_\\ell(1)_X=\\varprojlim_n\\mu_{\\ell^n,X}$ and $R_0=\\widehat{\\mathbf Z}_{\\ell,X}$. Clause 2 of [lem-pur-twist-sheaf-locally-free] supplies a pro-etale trivializing cover $T|_{\\widetilde X}\\cong R_0|_{\\widetilde X}$ and the root-sheaf quotient identifications $T\\otimes_{R_0}(\\mathbf Z/\\ell^n)_X\\cong\\mu_{\\ell^n,X}$. Let $e$ be the image of $1$ under the inverse trivialization and let $\\zeta_n$ be its image under the inverse-limit projection to $\\mu_{\\ell^n}$. The quotient identifications identify $a\\mapsto a e$ modulo $\\ell^n$ with $a\\mapsto\\zeta_n^a$, so these maps are isomorphisms. The inverse-limit relations give $\\zeta_{n+1}^\\ell=\\zeta_n$. A covering family can be written as the disjoint union of its members; the sections and trivializations on that union are precisely the respective families. This proves clause 1.",
+   "text": "[lem-poincare-compatible-primitive-roots] trivializes the root diagram, transitions included, on one pro-étale covering family $(U_i)$; put $\\widetilde X=\\coprod_iU_i$, a pro-étale cover whose sections are families of sections. Images of $1$ give $\\zeta_n$ with $\\zeta_{n+1}^\\ell=\\zeta_n$; an abelian map killed by $\\ell^n$ is residue-linear. Its inverse limit [def-pur-sheaf-inverse-limit] trivializes $T=\\varprojlim\\mu_{\\ell^n}$ on that cover.",
    "uses": [
-    "lem-pur-twist-sheaf-locally-free"
+    "lem-poincare-compatible-primitive-roots",
+    "def-pur-sheaf-inverse-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (1): compatible generators, using the existing completed-root-line theorem"
+    "place": "Proof (1)"
    }
   },
   {
-   "text": "Define $A_X(1)=\\mu_{\\ell^r,X}\\otimes_{(\\mathbf Z/\\ell^r)_X}A_X$ for any finite commutative $A$ killed by $\\ell^r$, using [def-pur-sheaf-tensor-product]. On the cover of step 1 the map of clause 2 sends $\\zeta_{r'}\\otimes a$ to $\\zeta_r\\otimes a$, and hence is the identity of $A_{\\widetilde X}$ under the two free presentations. Its local inverses agree on overlaps, since two inverses $u,v$ of the same map $f$ satisfy $u=u f v=v$; the sheaf axiom glues them to a global inverse. For $r''\\ge r'\\ge r$ the transition exponents multiply to $\\ell^{r''-r}$; for equal indices the exponent is $1$. Thus the resulting canonical identifications have identity and composition, giving independence of the annihilating level.",
+   "text": "The Kummer map sends $\\zeta_{r\\prime}\\otimes a$ to $\\zeta_r\\otimes a$, hence is the identity in the two $A$-bases [def-pur-sheaf-tensor-product]. Local inverses glue uniquely ($u=ufv=v$). Multiplying transition exponents gives canonical level independence.",
    "uses": [
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (2): free generators and the Kummer transition formula"
+    "place": "Proof (2)"
    }
   },
   {
-   "text": "For integral coefficients use clause 3 of [lem-pur-twist-sheaf-locally-free] and [def-coefficient-twists-detailed]. It gives $R_0\\otimes_{(\\mathbf Z_\\ell)_X}(\\mathcal O_E)_X\\cong R_E=\\widehat{\\mathcal O}_{E,X}$ and $L_E=\\mathcal O_E(1)_X=T\\otimes_{(\\mathbf Z_\\ell)_X}(\\mathcal O_E)_X$. Restriction commutes with the sheaf tensor product by [lem-sfb-localized-site-tensor-restriction]. Consequently the SAME root-generator cover of step 1 trivializes $L_E$: send $e\\otimes a$ to $1\\otimes a$ in $R_E$; the inverse sends $z\\otimes a$ to $ze\\otimes a$. These maps respect the balanced relations. This also works for every finite coefficient extension using the same $T$ and $e$. For the coefficient convention of the current blueprint, [det-prop-sfb-qlbar-colimit-x-integral-limit] identifies $R_E$ with its continuous pulled-back coefficient sheaf. No interchange of tensor with an arbitrary inverse limit is used.",
+   "text": "Clause 3 of [lem-pur-twist-sheaf-locally-free] gives $L_E=T\\otimes_{\\widehat{\\mathbf Z}_{\\ell,X}}R_E$. Restrict tensors [lem-sfb-localized-site-tensor-restriction]: $e\\otimes a\\mapsto a$ trivializes every integral first line on the root cover.",
    "uses": [
     "lem-pur-twist-sheaf-locally-free",
-    "def-coefficient-twists-detailed",
-    "lem-sfb-localized-site-tensor-restriction",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+    "lem-sfb-localized-site-tensor-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3): integral trivialization on the root-generator cover"
+    "place": "Proof (3), integral first line"
    }
   },
   {
-   "text": "By [det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X=R_E[1/\\ell]$ and it is flat over $R_E$. Extending the preceding integral free presentation gives $E_X(1)|_{\\widetilde X}\\cong E_{\\widetilde X}$. At algebraically closed coefficients use the compatible common-finite-stage interpretation of [def-coefficient-twists-detailed]: the integral map $e\\otimes a\\mapsto a$ is compatible with every inclusion of coefficient rings, so each finite-stage rational representative is the unit on the same cover. This gives the asserted local presentation for the $\\overline{\\mathbf Q}_\\ell$-object in that convention. The finite $A$ presentation is already step 2. Thus all four first twist lines are free of rank one on one cover.",
+   "text": "Identify the continuous coefficient ring by [det-prop-sfb-qlbar-colimit-x-integral-limit], then invert $\\ell$ [det-prop-sfb-qlbar-colimit-x-invert-ell]. The same presentations at finite stages give the rational and $\\Qlb$ lines [def-coefficient-twists-detailed].",
    "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
     "det-prop-sfb-qlbar-colimit-x-invert-ell",
     "def-coefficient-twists-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3): finite, rational and common-stage first twists"
+    "place": "Proof (3), rational and common-stage first lines"
    }
   },
   {
-   "text": "For a coefficient ring sheaf $R$ and its first twist line $L$, apply [lem-weil-signed-line-tensor-equivalence] with $m=d$ and $m=-d$. This gives all signed powers locally free of rank one and inverse tensor functors. The signed powers are exactly those of [def-coefficient-twists-detailed]. To identify the inverse pairing with the claimed evaluation, write $p=e^{\\otimes d}$ locally and let $p^\\vee(p)=1$ in the sheaf dual [def-pur-sheaf-hom]; the evaluation sends $(a p)\\otimes(b p^\\vee)$ to $ab$. Its inverse is $a\\mapsto (a p)\\otimes p^\\vee$. Local inverses of this global evaluation glue as in step 2. For $d=0$ these maps are the tensor unit maps. This proves the tensor-inverse assertion with its specified evaluation, not just an abstract equivalence.",
+   "text": "[lem-weil-signed-line-tensor-equivalence] gives signed rank-one lines and opposite tensor inverses. In a local basis $p$, evaluation is $(ap)\\otimes(bp^\\vee)\\mapsto ab$, inverse $a\\mapsto(ap)\\otimes p^\\vee$ [def-pur-sheaf-hom]. These glue, including the unit at degree zero.",
    "uses": [
     "lem-weil-signed-line-tensor-equivalence",
-    "def-coefficient-twists-detailed",
     "def-pur-sheaf-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3): tensor powers, duals and evaluation"
+    "place": "Proof (3), signed lines and evaluation"
    }
   },
   {
-   "text": "Tensor by either signed line is an additive equivalence of module sheaves by step 5, hence exact: a kernel or cokernel universal problem is carried to the corresponding universal problem by the inverse equivalence. By [lem-sf-exact-functor-derived-triangulated] these functors apply termwise on unbounded derived categories. This is also the derived tensor with the degree-zero line: tensoring an acyclic complex by it stays acyclic by [lem-weil-pbc-exact-functor-complex-cohomology], so the line is K-flat, and the K-flat computation of [lem-weil-pbc-site-derived-tensor-descent] identifies the two tensor models. The inverse natural isomorphisms descend termwise. In particular no boundedness assumption on an $A$-complex is needed: the two composites are naturally the identity on all of $D(X_{\\mathrm{proet}},A)$.",
+   "text": "Apply [lem-pur-line-unbounded-derived-tensor] to each signed line. Its exact termwise model is derived tensor, and opposite evaluations give inverse functors on all of $D(X_{\\mathrm{proet}},A)$.",
    "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pur-line-unbounded-derived-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence: exact tensor and the unbounded finite-coefficient category"
+    "place": "Proof (3), final sentence, unbounded finite category"
    }
   },
   {
-   "text": "It remains to restrict these functors to the stated integral category. For any signed integral line, step 5 gives the rank-one hypothesis and step 6 gives additivity and preservation of finite limits and colimits. Apply [lem-weil-integral-line-tensor-completeness] to any derived-complete $K$: its twist remains derived complete. At each finite quotient $R_E\\to A_{E,n}$ the line reduces to the signed power of the corresponding finite first twist. For the first power this is clause 3 of [lem-pur-twist-sheaf-locally-free]; for positive powers the maps send $(x\\otimes y)\\otimes a$ to $(x\\otimes1)\\otimes(y\\otimes a)$, and for duals they send $\\varphi\\otimes a$ to $(x\\otimes b\\mapsto\\overline{\\varphi(x)}ab)$. On a free generator these have inverse free presentations, so are isomorphisms; all quotient transitions commute with these formulas. For derived reductions, apply [lem-weil-pbc-site-derived-tensor-descent] to flat-term K-flat representatives and rebracket the same tensors: the resulting reduction is the finite reduction of $K$ tensored with that finite line.",
-   "uses": [
-    "lem-weil-integral-line-tensor-completeness",
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence: completeness and the finite reductions of an integral twist"
-   }
-  },
-  {
-   "text": "By [lem-weil-finite-line-tensor-conditions], tensor with each of these finite lines preserves constructibility. Its exactness, supplied by step 6, gives $\\mathcal H^i(K\\otimes L)=\\mathcal H^i(K)\\otimes L$ by [lem-weil-pbc-exact-functor-complex-cohomology]; in particular the same vanishing interval is preserved. Thus if the reductions of $K$ have one cohomological interval valid for every $n$, so do the twisted reductions from step 7. Derived completeness and these constructible reductions are exactly the conditions in [def-weil-derived-complete-integral-detailed]. Both opposite twists therefore preserve $D^b_c(X,\\mathcal O_E)$, and the inverse isomorphisms of step 6 restrict to this full subcategory.",
-   "uses": [
-    "lem-weil-finite-line-tensor-conditions",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-derived-complete-integral-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence: constructibility and the uniform reduction interval"
-   }
-  },
-  {
-   "text": "The integral tensor functors and their inverse identifications are $\\mathcal O_E$-linear: scalar multiplication commutes with tensoring and evaluation. They are triangulated by step 6 and preserve the integral full subcategory by step 8. Apply [lem-weil-twist-rationalization] to this inverse pair. On a localized morphism it sends $f\\otimes a$ to $T_d(f)\\otimes a$; the inverse evaluation maps localize by the same formula. This proves the mutually inverse twists on $D^b_c(X,E)$ in the rationalization convention of [def-coefficient-twists-detailed].",
-   "uses": [
-    "lem-weil-twist-rationalization",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence: rationalization of the inverse integral pair"
-   }
-  },
-  {
-   "text": "Here are the coefficient comparisons needed at common finite stages. For $E\\subset F$, the defining formula $L_H=T\\otimes_{(\\mathbf Z_\\ell)_X}(\\mathcal O_H)_X$ and the completed-ring comparison in [lem-pur-twist-sheaf-locally-free] give $L_E\\otimes_{R_E}R_F\\cong L_F$ by $(t\\otimes a)\\otimes b\\mapsto t\\otimes ab$, with inverse $t\\otimes b\\mapsto(t\\otimes1)\\otimes b$. The tensor structure of [lem-pc-sheaf-modules-tensor-closed] extends it to positive powers. For dual powers use $\\varphi\\otimes b\\mapsto(x\\otimes c\\mapsto\\iota(\\varphi(x))bc)$; on a free generator this is an isomorphism and commutes with evaluation. These are elementary balanced-tensor calculations, with no geometric inverse-image assertion. On $T$'s trivializing cover they send $a e_E^m\\otimes b$ to $\\iota(a)b e_F^m$ for every sign of $m$. Hence the maps for a field tower compose and preserve the inverse evaluations. By [lem-weil-finite-free-completed-scalar-comparison], ordinary scalar extension of a complete complex agrees naturally with the specified completed scalar extension. Rebracketing its tensor with these line maps therefore gives the natural twist/scalar comparisons on the integral categories and, by step 9, on the rational categories. On pure tensors both tower paths send $((x\\otimes e_E^m)\\otimes b)\\otimes c$ to $(x\\otimes bc)\\otimes e_G^m$; the same formula for the quotient maps ensures the comparisons respect the specified completion maps.",
+   "text": "Clause 3 of [lem-pur-twist-sheaf-locally-free] supplies finite locally constant reductions of $L_E$. Apply [lem-pur-integral-line-reduction-restriction]: the completed signed twists preserve completeness, constructibility and one uniform interval; their evaluations restrict.",
    "uses": [
     "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-integral-line-reduction-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final sentence, integral restriction"
+   }
+  },
+  {
+   "text": "The integral inverse pair is exact, $\\mathcal O_E$-linear and inverse by step 6 and preserves $D^b_c(X,\\mathcal O_E)$ by step 7. [lem-weil-twist-rationalization] therefore gives the specified rational inverse pair.",
+   "uses": [
+    "lem-weil-twist-rationalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final sentence, rationalization"
+   }
+  },
+  {
+   "text": "For $E\\subset F$ use $(t\\otimes a)\\otimes b\\mapsto t\\otimes ab$ and inverse $t\\otimes b\\mapsto(t\\otimes1)\\otimes b$ [lem-pc-sheaf-modules-tensor-closed]. For the strict quotient-tower scalar extension [def-weil-integral-scalar-extension], [lem-pur-completed-line-tensor-coherence] gives normalized signed scalar comparisons, tower laws and evaluation compatibility. For $E=F$ the map is multiplication, and both tower composites send $((t\\otimes a)\\otimes b)\\otimes c$ to $t\\otimes abc$: these are the hypotheses on $b_{ji}$ there.",
+   "uses": [
     "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-pur-completed-line-tensor-coherence",
+    "def-weil-integral-scalar-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3): scalar extension and common finite stages, including the tower/evaluation checks"
+    "place": "Proof (3), final sentence, scalar coherence"
    }
   },
   {
-   "text": "Apply [lem-sbc-coherent-pair-functor-descent] to the rational twist functors $T_{E,d}$, with the comparisons $\\beta_{F/E}$ of step 10, on the common-stage category [def-weil-algebraically-closed-coefficients]. A representative $[F,f]:(E,K)\\to(E',K')$ is sent to $[F,\\beta_{F/E',K'}^{-1}\\,T_{F,d}(f)\\,\\beta_{F/E,K}]$. The identity and tower hypotheses are exactly those checked in step 10; the generic descent lemma proves independence of the representative and preservation of composition. Evaluation is compatible with these comparisons by that step, so the lemma also descends both inverse natural isomorphisms from step 9. Thus $T_d$ and $T_{-d}$ are mutually inverse on $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$. Together with steps 2, 4, 5, 6 and 8 this completes every clause in the coefficient conventions of the statement.",
+   "text": "[lem-sbc-coherent-pair-functor-descent] descends this normalized rational inverse pair and its evaluations to the common-stage category [def-weil-algebraically-closed-coefficients]. Thus the prescribed opposite twists are inverse also at $\\Qlb$.",
    "uses": [
     "lem-sbc-coherent-pair-functor-descent",
     "def-weil-algebraically-closed-coefficients"
@@ -153,35 +135,34 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence: well-defined common-stage functors and their two inverse identities"
+    "place": "Proof (3), final sentence, common-stage inverse pair"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-twist-sheaf-locally-free",
+  "lem-poincare-compatible-primitive-roots",
+  "def-pur-sheaf-inverse-limit",
   "def-pur-sheaf-tensor-product",
-  "def-coefficient-twists-detailed",
+  "lem-pur-twist-sheaf-locally-free",
   "lem-sfb-localized-site-tensor-restriction",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "def-coefficient-twists-detailed",
   "lem-weil-signed-line-tensor-equivalence",
   "def-pur-sheaf-hom",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-integral-line-tensor-completeness",
-  "lem-weil-finite-line-tensor-conditions",
-  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-integral-line-reduction-restriction",
   "lem-weil-twist-rationalization",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-completed-line-tensor-coherence",
+  "def-weil-integral-scalar-extension",
   "lem-sbc-coherent-pair-functor-descent",
   "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "## Proof"
+  "place": "Proof (1)-(3); short assembly after extraction of three independent generic arguments"
  },
  "mathlib_searches": [
   {
@@ -260,74 +241,74 @@
   "date": "2026-10-21",
   "item": "det-def-sp-tate-twist-locally-free",
   "worker": "stage1",
-  "summary": "Reused the live reviewed root-generator and common-cover argument; made the arbitrary finite-A construction explicit and expanded the derived-category conclusion using existing signed-line, finite-line, completeness and rationalization tools. Supplied coefficient tower/evaluation formulas and generic pair-functor descent without citing cyclic geometric twist lemmas. No new nodes.",
-  "blueprint": "Steps 1-2 realize clauses (1)-(2). Steps 3-5 realize clause (3) local lines and evaluation. Steps 6-11 expand the final derived-tensor sentence, retaining the integral/rational/common-stage interpretation already fixed in the live statement.",
+  "summary": "Human-requested repair: preserved the statement; extracted unbounded line tensor, signed integral reductions/restriction, and normalized completed scalar coherence into three statement-only nodes. Retained previous searches and completed-coherence work. Every earlier argument is either a cited generic theorem, an explicit elementary calculation, or one of these new obligations. Landing-return repair: re-read the current scalar-extension definition and comparison statements, made the same-index K-flat/flat-term quotient cone explicit in the coherence obligation, and cited that definition directly in assembly step 9; the parent statement is unchanged.",
+  "blueprint": "Steps 1-2 realize Proof (1)-(2); steps 3-5 its four coefficient lines and signed evaluations; steps 6-10 the final derived-tensor sentence in the integral/rational/common-stage conventions.",
   "tool_uses": [
    {
+    "node": "lem-poincare-compatible-primitive-roots",
+    "why": "Generic A single pro-etale cover gives compatible bases of the abelian root diagram input to the coefficient-line assembly; no affine-space purity unit step is replaced."
+   },
+   {
+    "node": "def-pur-sheaf-inverse-limit",
+    "why": "Generic Inverse limit of a sequence of sheaves of modules on a site input to the coefficient-line assembly; no affine-space purity unit step is replaced."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic Tensor product of sheaves of modules on a site input to the coefficient-line assembly; no affine-space purity unit step is replaced."
+   },
+   {
     "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Generic input for Proof (1): compatible generators, using the existing completed-root-line theorem; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
     "node": "lem-sfb-localized-site-tensor-restriction",
-    "why": "Generic input for Proof (3): integral trivialization on the root-generator cover; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic Restriction to a localized site commutes with the sheaf tensor product input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
     "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "why": "Generic input for Proof (3): integral trivialization on the root-generator cover; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic $\\mathcal O_{E,X}$ is the limit of its finite levels input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
     "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "why": "Generic input for Proof (3): finite, rational and common-stage first twists; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic $E_X$ is $\\mathcal O_{E,X}$ with $\\ell$ inverted input to the coefficient-line assembly; no affine-space purity unit step is replaced."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Generic Coefficient Tate twists input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
     "node": "lem-weil-signed-line-tensor-equivalence",
-    "why": "Generic input for Proof (3): tensor powers, duals and evaluation; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic Signed powers of a coefficient line give inverse tensor functors. input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic input for Proof (3), final sentence: exact tensor and the unbounded finite-coefficient category; no proof step of the affine-space purity unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
-    "why": "Generic input for Proof (3), final sentence: exact tensor and the unbounded finite-coefficient category; no proof step of the affine-space purity unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic input for Proof (3), final sentence: exact tensor and the unbounded finite-coefficient category; no proof step of the affine-space purity unit is replaced."
-   },
-   {
-    "node": "lem-weil-integral-line-tensor-completeness",
-    "why": "Generic input for Proof (3), final sentence: completeness and the finite reductions of an integral twist; no proof step of the affine-space purity unit is replaced."
-   },
-   {
-    "node": "lem-weil-finite-line-tensor-conditions",
-    "why": "Generic input for Proof (3), final sentence: constructibility and the uniform reduction interval; no proof step of the affine-space purity unit is replaced."
-   },
-   {
-    "node": "lem-weil-twist-rationalization",
-    "why": "Generic input for Proof (3), final sentence: rationalization of the inverse integral pair; no proof step of the affine-space purity unit is replaced."
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic Sheaf Hom of sheaves of modules on a site input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
     "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic input for Proof (3): scalar extension and common finite stages, including the tower/evaluation checks; no proof step of the affine-space purity unit is replaced."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic input for Proof (3): scalar extension and common finite stages, including the tower/evaluation checks; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic Sheaves of modules on a site form a symmetric monoidal closed category input to the coefficient-line assembly; no affine-space purity unit step is replaced."
    },
    {
     "node": "lem-sbc-coherent-pair-functor-descent",
-    "why": "Generic input for Proof (3), final sentence: well-defined common-stage functors and their two inverse identities; no proof step of the affine-space purity unit is replaced."
+    "why": "Generic Coherent functors and transformations on common-stage pair categories input to the coefficient-line assembly; no affine-space purity unit step is replaced."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic Algebraically closed coefficient category input to the coefficient-line assembly; no affine-space purity unit step is replaced."
+   },
+   {
+    "node": "def-weil-integral-scalar-extension",
+    "why": "Step 9 fixes the actual same-index quotient-tower cone scalar extension, rather than an unspecified completion; this is a coefficient construction, not a replacement of a unit purity step."
    }
   ]
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q07-00a1a1f64",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q03-3ef92e6cb",
+  "group": "Q03",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-00a1a1f64 (reviewer sub-agent of L); spot-checked: Re-split of an item that is already split and reviewed live (NY 2026-10-16; NW stage-2 Lean Sheaf.Paper.TateTwistLocallyFree). It is still in coord/preopen.txt, which is probably why it was re-dispatched. There are no new nodes, so nothing duplicates landed work. I judged it on its merits. Statement: the one change from live is the explicit definition A_X(1)=μ_{ℓ^r}⊗_{Z/ℓ^r}A_X, with stmt_dep def-pur-sheaf-tensor-product added. This is exactly the blueprint proof (3) formula (main-20261015) and the bound Lean tateFiniteLine (change of rings of purTwistRootsModule). No hypothesis or conclusion changed, the report records it, and the citers are unaffected. Edge cases checked: A=0, d=0, r'=r, empty X. Steps: (1) clause 2 of lem-pur-twist-sheaf-locally-free gives the generator e and a compatible ζ_n. (2) The Kummer map is the identity on the free presentations (elementary). (3) Clause 3, the def's formula O_E(1)=T⊗O_E and the restriction-tensor lemma show the SAME cover trivializes L_E, which improves on the live common-refinement argument. (4) invert-ell gives E, and Qbar uses the common-stage representative. (5) I checked the exact Lean type of the signed-line lemma, and coefficientTwistLine equals the def's Λ(m) (power, or dual Hom); evaluation is shown on a generator. (6) An equivalence is exact, so the line is K-flat with flat terms and the tensor is computed termwise on unbounded D. (7) The completeness lemma's instance hypotheses are supplied, and the signed-power reduction formulas are correct. (8) The finite-line lemma plus the exact-functor cohomology lemma preserve constructibility and one uniform interval. (9) The rationalization lemma's hypotheses hold: exact, O_E-linear, inverse pair. (10) The line comparisons and the completed-scalar comparison apply to complete K. (11) The pair-functor descent lemma applies to the raw common-stage category, with no Karoubi completion. BFS over the dependencies finds no cycle. All steps are under 2000 characters, each step's uses equal proof_deps, and the route lock holds (no SGA). I accept all 14 declared tool_uses as generic coefficient/category tools. Advisories, not faults: step 1 reads the clause-2 quotient iso as the one induced by the projection; that is true anyway because lim→μ_n is surjective on the replete site. lem-sbc assumes strict U_{E/E}=1, but the def's identity transition is the Rlim scalar extension, the identity only up to iso; every citer of lem-sbc shares this. Maintainer: remove the item from preopen/dispatch."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-3ef92e6cb (reviewer sub-agent of L); spot-checked: FIX on a redelivery after a landing refusal; the corrected item file is fixes/dag/nodes/sec-smooth-purity/det-def-sp-tate-twist-locally-free.json. I reviewed the previous head 7786c410 in full and gave it FIX. The landing refused it because the statement of def-weil-integral-scalar-extension had changed, and that change only swaps a citation for O_E-linearity. The worker's own changes are correct: step 9 now cites the definition, and lem-pur-completed-line-tensor-coherence now writes out the cone model. I checked that model against the definition clause by clause: rho_{ji,n}=iota_n∘pi_n, Q_{ji,n}=Res^j_n(P⊗(A_{j,n})_X), Cone(1-s)[-1] with s(q)_n=t_n(q_{n+1}), and the reduction tower when i=j. It also matches the chi of lem-weil-finite-free-completed-scalar-comparison, which is unchanged and has zero shifted-product component. Among the 40 dependencies of the four delivered nodes, no other statement changed since 7786c. Nodes A and B are byte-identical to the previous head. The live item is still the 11-step Q07 base with no landed split, the statement is byte-identical to it, and none of the new node ids exists live. The worker dropped my three earlier item fixes, and I re-applied them: step 1 takes X̃=⊔U_i, because the cited node gives a covering family; step 8 states that the inverse pair is exact, O_E-linear and inverse by step 6 and preserves D^b_c(X,O_E) by step 7; step 9 checks the b_ii=multiplication and cocycle hypotheses of node C. The proof is 2939 characters, under 3000. The re-split requirement still holds: old steps 6, 7–8 and 10 became the nodes A, B and C, of comparable size, and no argument was shortened or merged. I read the 120 nodes landed since 7786c for duplicates. lem-pur-signed-line-derived-base-change, lem-pur-adic/torsion-line-system-base-change, lem-pur-finite-free-completion-exchange(-coherence) and lem-pur-compatible-coefficient-tower are different statements: geometric pullback, completion exchange without lines, and the tower functor. No cycle, no SGA. Batch-5: I accept lem-poincare-compatible-primitive-roots again. It is a general twist foundation whose blueprint source is the Tate-twist section, and its proof has no duality step. The only sec-poincare-duality nodes it adds to the closure are two generic residue-module nodes, and it adds nothing from the trace-formula chapter or batch-4 targets. Clause 2 of lem-pur-twist-sheaf-locally-free would also prove step 1. All 14 tool_uses are accepted as generic.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
@@ -392,6 +373,13 @@
   "lem-weil-twist-rationalization",
   "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-sbc-coherent-pair-functor-descent"
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-poincare-compatible-primitive-roots",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-scalar-extension"
  ]
 }

@@ -1,0 +1,93 @@
+{
+ "id": "lem-pur-integral-line-reduction-restriction",
+ "kind": "statement",
+ "title": "Signed line reductions and restriction to the derived-complete integral category",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\pi$, and a scheme $X$ on which $\\ell$ is invertible. On $X_{\\mathrm{proet}}$ put $R=\\widehat{\\mathcal O}_{E,X}$ [def-weil-completed-integral-coefficients] and $R_n=(\\mathcal O_E/\\pi^n)_X$ for $n\\geq1$ [def-weil-pbc-constant-sheaf]. Use module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], for any $K\\in D(R)$ its derived reduction $K_n=K\\otimes_R^LR_n$ [def-weil-integral-derived-reduction], and the quotient-tower completed tensor [def-pur-integral-derived-operations]. Let $L$ be a locally free rank-one $R$-module sheaf. Suppose every $L_n=L\\otimes_R R_n$ is locally constant with finite stalks, meaning that on a pro-etale covering it is the constant sheaf associated to a finite $\\mathcal O_E/\\pi^n$-module. Set $L^{[0]}=R$, $L^{[m]}=L^{\\otimes m}$ for $m>0$, and $L^{[m]}=\\mathcal Hom_R(L^{[-m]},R)$ for $m<0$ [def-pur-sheaf-tensor-product, def-pur-sheaf-hom]; use the same signed powers for $L_n$.\n\nFor every integer $m$ there are natural isomorphisms, compatible with quotient transitions,\n$$L^{[m]}\\otimes_R R_n\\cong L_n^{[m]},\\qquad\n (K\\otimes_R^LL^{[m]})_n\\cong K_n\\otimes_{R_n}^LL_n^{[m]}.$$\nThe positive comparisons rebracket tensors, and the negative comparisons are the base-change maps on duals $\\varphi\\otimes a\\mapsto(x\\otimes b\\mapsto\\overline{\\varphi(x)}ab)$; these comparisons preserve evaluation.\n\nFor derived-complete $K$ [def-weil-derived-complete], the natural comparison from $K\\otimes_R^LL^{[m]}$ to the specified quotient-tower completed tensor is an isomorphism, and the tensor remains derived complete. If $K$ belongs to $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], then both this tensor and its completed model belong to that category. Every interval $[a,b]$ containing the cohomological support [def-weil-cohomological-support] of all $K_n$ also contains the support of all the twisted reductions, and their cohomology sheaves satisfy the finite-torsion constructibility condition [def-weil-finite-torsion-constructibility]. The ordinary opposite-line evaluation isomorphisms restrict to this full integral category and, through the specified completion comparisons, give inverse equivalences for its completed tensor functors.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1 / Definition 3.5.2, pp. 22-24; generic signed-line specialization with finite reduction conditions",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to a quotient map on the same topos"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), last sentence interpreted in the derived-complete integral coefficient convention; extracted generic reduction/restriction argument"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-cohomological-support",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed tensor powers of an integral line commute with all derived reductions and preserve constructible complexes with uniform cohomological bounds and derived completeness",
+   "results": "HomologicalComplex.HasTensor; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.ιTensorObj; HomologicalComplex.unit_tensor_d₁; ComplexShape.TensorSigns; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.tensorObj",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary modules, tensor totalization or sheaf limits, not derived-complete integral coefficient sheaves and uniform reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a signed power of a locally free integral line is the signed power of its reduction and tensor preserves uniform cohomological amplitude",
+   "results": "BDeRham; BDeRhamPlus; AlgebraicGeometry.Proj.pow_apply; PrimeSpectrum.mem_image_comap_basicOpen; isNilpotent_tensor_residueField_iff; IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar; IsPurelyInseparable.exists_pow_mem_range_tensorProduct; Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary modules, tensor totalization or sheaf limits, not derived-complete integral coefficient sheaves and uniform reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rank one integral module sheaf with locally constant finite reductions tensoring preserves derived complete constructible complexes and uniform bounds",
+   "results": "ModuleCat.tildeInModuleCat; Module.rankAtStalk_eq; SheafOfModules.hasLimit; Module.rankAtStalk_baseChange; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; Module.rankAtStalk_tensorProduct; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; SheafOfModules.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary modules, tensor totalization or sheaf limits, not derived-complete integral coefficient sheaves and uniform reductions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary modules, tensor totalization or sheaf limits, not derived-complete integral coefficient sheaves and uniform reductions"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complete|complete.*derived|constructible.*tensor|tensor.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary modules, tensor totalization or sheaf limits, not derived-complete integral coefficient sheaves and uniform reductions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-def-sp-tate-twist-locally-free",
+  "date": "2026-10-21",
+  "group": "Q03"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence, integral case: restricting tensor by the signed line to the bounded derived-complete coefficient category",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
