@@ -23,108 +23,52 @@
  ],
  "proof": [
   {
-   "text": "Fix a geometric point $x:s=\\operatorname{Spec}\\Omega\\to T$ with $\\Omega$ algebraically closed. By [lem-exc-abelian-sheaves-gmodules], applied to $K=K^{\\rm sep}=\\Omega$, stalk at the identity geometric point gives an additive equivalence $S:\\mathrm{Ab}(s_{\\Et})\\simeq\\mathrm{Ab}$: the Galois group is trivial. This equivalence is exact, since an equivalence preserves kernels and cokernels. It carries sheaf tensor to ordinary integer tensor: under its compatible equivalence on sheaves of sets and group laws, bilinear morphisms correspond to bilinear maps of groups, and hence the representing tensor objects correspond. As an equivalence it preserves direct sums. Thus its termwise extension preserves cohomology, total tensor complexes and K-flatness in both directions: test acyclicity after tensoring with an arbitrary complex, and use the inverse equivalence to range over all such complexes. The K-flat construction in [def-kun-derived-tensor] consequently identifies its derived tensor with the ordinary derived tensor of abelian groups. Now [lem-kun-stalk-as-pullback] and [lem-kun-inverse-image-monoidal], applied to $x$ and integer coefficients, identify the derived stalk of $A\\otimes^{\\mathbf L}_{\\mathbf Z}B$ with $A_x\\otimes^{\\mathbf L}_{\\mathbf Z}B_x$ in $D(\\mathbf Z)$. Exactness [prop-weil-pbc-geometric-stalks-exact] gives\n$$H^i(A_x)=\\mathcal H^i(A)_x,\\quad H^j(B_x)=\\mathcal H^j(B)_x,\\quad H^r(A_x\\otimes^{\\mathbf L}B_x)=\\mathcal H^r(A\\otimes^{\\mathbf L}B)_x.$$\nIn particular the two stalk complexes retain the bounds $a,b$. This stalk comparison imposes no characteristic restriction.",
+   "text": "Flat integer sheaves are closed under subobjects. Check flatness at geometric stalks using lem-sfb-etale-flat-geometric-fibers. Stalks preserve monomorphisms, and a submodule of a flat module over the principal ideal domain ULift Z is torsion free and hence flat. This argument includes the zero sheaf and needs no residue-characteristic assumption.",
    "uses": [
-    "lem-exc-abelian-sheaves-gmodules",
+    "lem-sfb-etale-flat-geometric-fibers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a flat K-flat resolution P of A using the existing generic source theorem exists_quasiIso_flat_kFlat (lem-sfb-abstract-kflat-resolution). Every complex of flat integer sheaves is K-flat: each upper good truncation is bounded above and flat, since its inclusion into the original complex is termwise mono, and the complex is their filtered colimit. Since P is exact in degree a-1, its opcycles in that degree embed in the next flat term. Thus its lower good truncation at a-1 is still flat and K-flat, is strictly zero below a-1, and represents A. Take a strict lower model L of B with bound b. The K-flat comparison identifies A tensor-derived B with Q(P-truncated tensor L), whose total tensor terms vanish below (a-1)+b. Transport the resulting cohomology bound across the comparison isomorphism.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "def-kun-truncations",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For torsion cohomology of A, use the exact equivalence from sheaves of modules over ULift Z to abelian sheaves, induced by integer coefficient restriction and the Z-module/abelian-group equivalence. The derived equivalence commutes with homology. Apply lem-trf-torsion-sheaf-complex-representative to obtain a complex L with torsion terms representing the underlying abelian derived object, and transport L back by the inverse equivalence. Its terms are torsion integer sheaves and Q(L) is isomorphic to A. No object is defined by choosing an arbitrary witness: all witnesses are eliminated only inside this theorem proof.",
+   "uses": [
+    "lem-trf-torsion-sheaf-complex-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve B by a flat K-flat complex P. The derived tensor is represented by L tensor P. A tensor product of a torsion module with an arbitrary module is torsion, because each pure tensor is the image of a torsion element under the additive map x maps to x tensor y, and finite sums of torsion elements are torsion. Strong monoidality of the geometric stalk functor transfers this to sheaf tensors. Torsion abelian groups are closed under arbitrary colimits: each colimit injection factors through the torsion subgroup of the colimit, yielding a retraction of its inclusion by the universal property, hence that subgroup is the whole group. Stalks preserve the small coproducts forming each total tensor term, so every term of L tensor P is a torsion sheaf. Its cycles are a subobject of its terms and its homology is a quotient of the cycles, so its homology is torsion. Transport along the derived tensor and homology comparison isomorphisms and use the local/stalkwise torsion criterion.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
     "def-kun-derived-tensor",
-    "lem-kun-stalk-as-pullback",
-    "lem-kun-inverse-image-monoidal",
     "prop-weil-pbc-geometric-stalks-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0F, lemma-projection-formula-proper, first stalk calculation; Tags 04JQ (lemma-equivalence-abelian-sheaves-point), 03Q1 (lemma-stalk-pullback), 03PT (lemma-stalk-exact); tensor comparison Tag 07A4"
-   }
-  },
-  {
-   "text": "Choose cochain representatives $C,D$ of $A_x,B_x$. Replace them by $\\tau_{\\ge a}C,\\tau_{\\ge b}D$, respectively. By the explicit good-truncation formulas in [def-kun-truncations], the maps from the original representatives to these are quasi-isomorphisms, because the removed cohomology is zero; hence we may take $C^i=0$ for $i<a$ and $D^j=0$ for $j<b$. For $m,n\\in\\mathbf N$ put $C_m=\\tau_{\\le a+m}C$ and $D_n=\\tau_{\\le b+n}D$. These are bounded complexes, retain the same lower cohomological bounds, and have transition maps to the next truncation. Their termwise colimits are $C,D$: in each fixed degree the system eventually consists of the original term and identity maps. No bounded-below flat or free replacement of the sheaf complexes is asserted.",
-   "uses": [
-    "def-kun-truncations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations, good truncations and their cohomology formulas"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-integral-bounded-kunneth-exact] to the bounded derived abelian groups $C_m,D_n$. For every $r\\in\\mathbf Z$ this gives\n$$0\\to\\bigoplus_{i+j=r}H^i(C_m)\\otimes H^j(D_n)\\to H^r(C_m\\otimes^{\\mathbf L}_{\\mathbf Z}D_n)\\to\\bigoplus_{i+j=r+1}\\operatorname{Tor}^{\\mathbf Z}_1(H^i(C_m),H^j(D_n))\\to0.$$\nThe nonzero summands can only have $i\\ge a,j\\ge b$. Therefore if $r<a+b-1$ both outer groups are zero: $r<a+b$ and $r+1<a+b$. Exactness forces $H^r(C_m\\otimes^{\\mathbf L}D_n)=0$. The lemma is only being applied to bounded objects, exactly as in its statement.",
-   "uses": [
-    "lem-kun-integral-bounded-kunneth-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H80, example-kunneth-dedekind; Tag 0H7Z, lemma-kunneth-spectral-sequence"
-   }
-  },
-  {
-   "text": "Use [lem-pc-filtered-colimit-derived-tensor] with $R=A=\\mathbf Z$ on the two sequential diagrams of step 2; $\\mathbf N$ with its usual order is a small filtered category. We need a symmetry natural in both ordinary derived factors. The equivalence $S$ of step 1 supplies it from the unit's own [lem-kun-tensor-sym], applied on $s=\\operatorname{Spec}\\Omega$ with integer coefficients: for inverse images $\\widetilde U,\\widetilde V$ of $U,V\\in D(\\mathbf Z)$, the composite\n$$U\\otimes^{\\mathbf L}V\\cong S(\\widetilde U\\otimes^{\\mathbf L}\\widetilde V)\\cong S(\\widetilde V\\otimes^{\\mathbf L}\\widetilde U)\\cong V\\otimes^{\\mathbf L}U$$\nis an isomorphism natural in $U,V$, since each comparison is natural. The filtered-colimit theorem denotes its value by $M\\otimes^{\\mathbf L}N:=N\\otimes^{\\mathbf L}M$. Thus its application with fixed $M=C$ and variable $N=D_n$ first gives\n$$H^r(D\\otimes^{\\mathbf L}C)\\cong\\varinjlim_n H^r(D_n\\otimes^{\\mathbf L}C).$$\nComposing with the symmetry above at the source and at every stage gives\n$$H^r(C\\otimes^{\\mathbf L}D)\\cong\\varinjlim_n H^r(C\\otimes^{\\mathbf L}D_n).$$\nFor each $n$, apply the theorem with fixed $M=D_n$ and variable $N=C_m$. Its reversed notation now gives directly\n$$H^r(C\\otimes^{\\mathbf L}D_n)\\cong\\varinjlim_m H^r(C_m\\otimes^{\\mathbf L}D_n).$$\nThe latter isomorphisms commute with $D_n\\to D_{n+1}$: the swaps are natural in both factors, and the colimit theorem is natural in its fixed complex $M$. They therefore give an isomorphism of the sequential diagrams indexed by $n$. Taking their colimit and composing yields\n$$H^r(C\\otimes^{\\mathbf L}D)\\cong\\varinjlim_n\\varinjlim_m H^r(C_m\\otimes^{\\mathbf L}D_n).$$\nAll groups on the right vanish when $r<a+b-1$ by step 3, so the group on the left vanishes. This proves the bounded-below conclusion from the bounded calculation.",
-   "uses": [
-    "lem-pc-filtered-colimit-derived-tensor",
-    "lem-kun-tensor-sym"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H80, bounded calculation; extension by filtered colimits as in the proof of lemma-colimit-K-flat in More on Algebra and Tag 06YR, sites-cohomology-lemma-colimit-K-flat"
-   }
-  },
-  {
-   "text": "Assume now that all $\\mathcal H^i(A)$ are torsion sheaves. By [lem-weil-pbc-torsion-sheaf-characterizations] and exactness in step 1, each $H^i(C)$, and hence each retained $H^i(C_m)$, is a torsion abelian group. For any torsion abelian group $M$ and abelian group $N$, the group $M\\otimes_{\\mathbf Z}N$ is torsion: a tensor is a finite sum $\\sum_\\ell m_\\ell\\otimes n_\\ell$, killed by the product of positive integers killing its finitely many $m_\\ell$. Also $\\operatorname{Tor}^{\\mathbf Z}_1(M,N)$ is torsion. Indeed [lem-weil-pbc-tor-symmetry] identifies it with $\\operatorname{Tor}^{\\mathbf Z}_1(N,M)$, and [def-weil-pbc-tor-modules] computes the latter as the first homology of $F_\\bullet\\otimes M$ for a free resolution $F_\\bullet$ of $N$. Every term is torsion by the preceding finite-tensor argument. Its homology is a quotient of a subgroup of a torsion group, and is torsion, because the integer killing a representative also kills its class. This proves the needed Tor assertion without bounded exponent or finite generation.",
-   "uses": [
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "lem-weil-pbc-tor-symmetry",
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0F, torsion-cohomology assertion, proved here by the integral Kunneth sequence rather than rationalization; Tor definition Tag 00LY, section-tor; symmetry Tag 00M3, lemma-tor-left-right"
-   }
-  },
-  {
-   "text": "For every $m,n,r$, both outer groups in the exact sequence of step 3 are torsion by step 5. A direct sum of torsion groups is torsion because its elements have finite support. An extension of two torsion groups is torsion: for an element $z$ of the middle group, choose $u>0$ killing its image in the quotient and then $v>0$ killing the resulting element $uz$ in the subgroup; $vu$ kills $z$. Thus $H^r(C_m\\otimes^{\\mathbf L}D_n)$ is torsion. By the colimit formula of step 4, $H^r(C\\otimes^{\\mathbf L}D)$ is torsion as well: an element in either sequential colimit is represented at one stage, and any positive integer annihilating that representative annihilates its image. The annihilating integer may depend on the element, on the stage and on $r$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H80, example-kunneth-dedekind; elementary torsion subgroup, quotient, extension and filtered-colimit calculations"
-   }
-  },
-  {
-   "text": "The geometric point $x$ was arbitrary. For $r<a+b-1$, step 4 and the cohomology-stalk identification of step 1 give zero geometric stalks of $\\mathcal H^r(A\\otimes^{\\mathbf L}B)$. By [lemma-weil-pbc-geometric-stalk-conservative], applied to its map to the zero sheaf, this sheaf is zero. Under the optional torsion hypothesis, step 6 gives torsion groups at all stalks of every cohomology sheaf. By [lem-weil-pbc-torsion-sheaf-characterizations] these sheaves are torsion in the locally-annihilated sense of the item. Neither argument asks for a common exponent, constructibility, any finiteness property of $T$, or invertibility in its residue fields.",
-   "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-torsion-sheaf-characterizations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0F, preliminary boundedness and torsion assertions; Tag 03PU, theorem-exactness-stalks. The torsion equivalence is the existing generic statement lem-weil-pbc-torsion-sheaf-characterizations, not the qcqs constructible-approximation assertion of Tag 03SA."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-exc-abelian-sheaves-gmodules",
-  "def-kun-derived-tensor",
-  "lem-kun-stalk-as-pullback",
-  "lem-kun-inverse-image-monoidal",
-  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-sfb-abstract-kflat-resolution",
   "def-kun-truncations",
-  "lem-kun-integral-bounded-kunneth-exact",
-  "lem-pc-filtered-colimit-derived-tensor",
-  "lem-kun-tensor-sym",
+  "def-kun-derived-tensor",
+  "lem-trf-torsion-sheaf-complex-representative",
   "lem-weil-pbc-torsion-sheaf-characterizations",
-  "lem-weil-pbc-tor-symmetry",
-  "def-weil-pbc-tor-modules",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F0F, lemma-projection-formula-proper, preliminary stalkwise assertions, expanded using the bounded integral Kunneth formula of Tag 0H80 and two filtered-colimit passages. Torsion is deduced elementwise from that formula, instead of the source rationalization argument."
+  "place": "Tag 0F0F preliminary lower-bound and torsion assertions. Direct hereditary-flat truncation argument replaces the bounded Kunneth calculation; torsion uses the existing bounded-below torsion-complex representative (Tags 0DD7 and 0DE5), followed by termwise tensor and homology."
  },
  "mathlib_searches": [
   {
@@ -284,9 +228,6 @@
   ]
  },
  "tool_uses": [
-  "lem-exc-abelian-sheaves-gmodules",
-  "lem-pc-filtered-colimit-derived-tensor",
-  "lem-weil-pbc-tor-symmetry",
   "lem-weil-pbc-torsion-sheaf-characterizations"
  ],
  "reviewed": {
@@ -315,5 +256,15 @@
   "existing": false,
   "note": "The integer coefficient category is encoded as ModuleCat (ULift ℤ), the canonical coefficient-side realization of D(T_et) used by the existing derived tensor; forgetting to AddCommGrpCat gives the abelian-sheaf formulation in the node.",
   "file": "lean/Sheaf/AlgebraicGeometry/IntegralDerivedTensorBoundedTorsion.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261021T134607-L-1383565",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
