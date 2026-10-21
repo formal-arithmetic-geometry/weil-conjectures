@@ -21,91 +21,63 @@
  ],
  "proof": [
   {
-   "text": "Write $M_n=P\\otimes_R B_n$ and $X=Q_R(P)$. The balanced map $p\\otimes s\\mapsto p\\otimes b_n(s)$ defines a morphism $M_{n+1}\\to\\operatorname{Res}_{b_n}M_n$: the balancing identity holds because $b_na_{n+1}=a_n$. Tensor here is sheafification of the sectionwise tensor, so the compatible sectionwise maps induce sheaf maps. They commute with differentials, since both differentials send $p\\otimes s$ to $d_P(p)\\otimes s$. Scalar restriction leaves the underlying abelian sheaf and map unchanged. Thus restriction gives exactly $t_n$, and $p\\mapsto p\\otimes1$ gives $c_n$. The identity $b_n(1)=1$ gives $t_nc_{n+1}=c_n$.",
+   "text": "Use the specified ordinary adjunction unit and ordinary tensor-composition formula in the normalization. Their composite sends s tensor x to b(s) tensor x; restrictionComp is the identity on sections. This proves the ordinary transition formula and preservation of the ordinary augmentation. Morphisms from a restricted scalar extension are determined by their pure sections: transport by obj_eq, forget to abelian sheaves, use sheafify_hom_ext, and apply tensor induction. Thus ordinary transitions preserve identities and compose according to composition of coefficient maps.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change, identity-topos specialization; sheaf tensor as defined in sites-modules.tex, Tag 03EK"
-   }
-  },
-  {
-   "text": "For each $n$, the K-flat computation of derived change of rings gives the canonical isomorphism $\\gamma_n:F_nX\\xrightarrow{\\sim}Q_{B_n}(M_n)$. Exact scalar restriction commutes with the localizations, as in the derived coefficient adjunction. Write $\\rho_n=r_n(\\gamma_n):r_nF_nX\\xrightarrow{\\sim}Q_R(T_n(P))$, using that comparison. Define $\\epsilon_n=\\rho_n\\circ r_nF_n(e^{-1})$. These are isomorphisms; no resolution of the coefficient sheaf $B_n$ is required, because $P$ is K-flat over $R$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint; canonical K-flat computation"
-   }
-  },
-  {
-   "text": "The normalized adjunction for $a_n$ identifies the unit at $X$ with $p\\mapsto p\\otimes1$; hence $\\rho_n\\circ u_n(X)=Q_R(c_n)$. Naturality of that unit at $e:X\\xrightarrow{\\sim}K$ gives $r_nF_n(e^{-1})\\circ u_n(K)\\circ e=u_n(X)$. Composing with $\\rho_n$ proves $\\epsilon_n\\circ u_n(K)\\circ e=Q_R(c_n)$.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint, normalized unit on a K-flat representative; derived.tex Tags 0FND and 09T5"
-   }
-  },
-  {
-   "text": "Apply K-flat pullback preservation to the identity topos with coefficient map $a_{n+1}$. Its hypotheses hold because $C$ is small and $P$ is K-flat with flat terms. It gives that $M_{n+1}$ is K-flat over $B_{n+1}$ with flat terms. Consequently both $G_nF_{n+1}X$ and $F_nX$ are computed on the ordinary complexes used in the scalar-composition comparison. Its representative is $A_n:(M_{n+1}\\otimes_{B_{n+1}}B_n)\\to M_n$, $(p\\otimes s)\\otimes t\\mapsto p\\otimes b_n(s)t$, with the inverse specified by that comparison. This is the stipulated $\\alpha_n(X)$ under the computation isomorphisms, rather than an arbitrary isomorphism between its source and target.",
-   "uses": [
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pc-sheaf-restrict-scalars",
     "lem-sfb-successive-derived-quotient-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, lemma-pullback-K-flat; Tag 0D6D, lemma-derived-pullback-composition"
-   }
+   "elementary": true
   },
   {
-   "text": "For an adjunction $G_n\\dashv j_n$, the adjunct of a map $h:G_nY\\to Z$ is $j_n(h)\\circ\\eta^b_Y$, where $\\eta^b$ is its unit. Apply this to $h=\\alpha_n(X)$. By the normalized unit formula, on the representative $M_{n+1}$ this composite sends $p\\otimes s$ first to $(p\\otimes s)\\otimes1$ and then, by $A_n$, to $p\\otimes b_n(s)$. Thus $\\delta_n(X)$ is the class of the sheaf map in Step 1 under $\\gamma_{n+1}$ and $\\gamma_n$. Restricting scalars therefore gives $\\rho_n\\circ d_n(X)=Q_R(t_n)\\circ\\rho_{n+1}$. Naturality of the Hom correspondence and of $\\alpha_n$ gives naturality of $\\delta_n$, hence of $d_n$. In particular $r_nF_n(e^{-1})\\circ d_n(K)=d_n(X)\\circ r_{n+1}F_{n+1}(e^{-1})$. Compose the preceding representative equality with $r_{n+1}F_{n+1}(e^{-1})$ to obtain $\\epsilon_n\\circ d_n(K)=Q_R(t_n)\\circ\\epsilon_{n+1}$.",
+   "text": "The computed field of the normalization makes the universal counit invertible on P. Mapping it under exact restriction and composing with right_factors gives the canonical computation isomorphism. The final identity-composition comparison in computation is the identity. Mapping e inverse and composing preserves invertibility. The adjunction_normalization field identifies the unit followed by computation with the localized ordinary unit. Naturality of the derived unit at e and e composed with e inverse equal to the identity prove the augmented equation.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
     "lem-sfb-successive-derived-quotient-normalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint, normalized unit and natural Hom correspondence; Tag 0D6D, lemma-derived-pullback-composition"
-   }
+   "elementary": true
   },
   {
-   "text": "For a chain map $f:P\\to P'$ between the stated representatives, the canonical K-flat computation comparison is natural: $Q_{B_n}(f\\otimes1)\\circ\\gamma_n(P)=\\gamma_n(P')\\circ F_n(Q_Rf)$. This is the comparison natural transformation of the left derived functor, restricted to K-flat objects. Restriction gives the same square for $\\rho_n$. The strict tensor maps commute as well: both orders send $p\\otimes s$ to $f(p)\\otimes b_n(s)$, and the unit square sends $p$ to $f(p)\\otimes1$. Transport along chosen representative isomorphisms therefore gives the asserted naturality of $\\epsilon_n$. For $m>n$, the strict composite sends $p\\otimes s$ to $p\\otimes(b_n\\cdots b_{m-1})(s)$. Inductively compose the adjacent equalities of Step 5 to get $\\epsilon_n d_{n,m}=Q_R(t_{n,m})\\epsilon_m$, with identities when $m=n$. The iterated scalar-composition comparisons agree and are natural in the ring maps, so this composite is also the transition defined directly using the comparison for $B_m\\to B_n$; the mate calculation is again $p\\otimes s\\mapsto p\\otimes(b_n\\cdots b_{m-1})(s)$. This proves compatibility for every composite, together with the augmentation identity of Step 1.",
+   "text": "Apply K-flat pullback preservation to the identity ringed topos and coefficient map a. It proves that the ordinary extension of P is K-flat with flat terms, so adjunction_normalization applies to the next coefficient map b.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-sfb-successive-derived-quotient-normalization",
-    "def-weil-inverse-system"
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change, computation comparison; Tag 0D6D, lemma-derived-pullback-composition, iterated identity-topos comparisons"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary a,b,a prime with a followed by b equal to a prime, substitute the equality. Expand derivedStep. Naturality of rightComp moves the universal counit across the restriction comparison. The representative field replaces the derived scalar-composition comparison followed by its counit with the two successive counits and the ordinary composition comparison. Naturality of the b-adjunction unit moves the first counit to the front. Rewrite rightComp_normalization, naturality of right_factors for b, the normalized b-unit on the extended P, and naturality of right_factors for a. The remaining equality in the homotopy category is the image of the termwise definition of ordinaryStep. Hence derivedStep followed by computation equals computation followed by the localized ordinaryStep. Naturality of derivedStep at e inverse proves the transported transition equation.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the universal counit, right_factors and the induced homotopy-composition comparison proves computation natural for every chain map. From Q(f) followed by e prime equal to e followed by g, cancel the representative isomorphisms to obtain g followed by e prime inverse equal to e inverse followed by Q(f). Functoriality and computation naturality give the asserted naturality of epsilon.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Build a natural transformation between the inverse-sequence functors from the adjacent epsilon squares. Its naturality proves the square for every finite composite. The coefficient maps a themselves form a natural transformation from the constant sequence, giving the equation for the composite coefficient map. Induction on n less than or equal to m, using the identity law and the ordinaryStep pure-section formula with pure-section extensionality, identifies the direct ordinary mate with the ordinary finite composite. Apply the general computation square to the composite coefficient map and cancel the invertible epsilon at n to identify the direct derived mate with its finite composite. The base case uses empty composites and identities, so m equals n is included.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
   "def-pc-sheaf-restrict-scalars",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
   "def-weil-inverse-system"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); explicit mate calculation and transport along e by Q108."
+  "place": "Tags 06YY, 0G7E, 0D6D and 07A6; E9 Lean proof from the fixed Normalization fields, tensor extensionality, and inverse-sequence naturality. Finite derived coherence follows by cancellation of the canonical computation maps."
  },
  "mathlib_searches": [
   {
@@ -238,8 +210,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-sfb-successive-derived-quotient-normalization"
  ],
@@ -280,5 +250,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Faithful statement of lem-pe-kflat-scalar-tower-realization. Node unchanged apart from the new lean record; lean.statement verbatim in the file; nt_compile --json clean (39.6 s, exit 0). All objects come from the landed lem-sfb-successive-derived-quotient-normalization interface (Presentation p, Normalization N, the same convention as RingedCoefficientScalarUnits): derivedStep = r(j(alpha)∘eta^b) followed by rightComp, the adjunct of the pinned N.derived; epsilon = derivedEnd.map e.inv followed by the restricted universal counit, right_factors and compIso; c_n is the ordinary unit (1⊗x); t_n has its section formula stated. Checked the truth of all 8 conjuncts, including the m=n and composite-ring-map identifications (unit_comp, rightComp normalization, IsIso of epsilon), and that they are unchanged under the free choices in Normalization (sign twist of right_factors). No flatness, surjectivity or boundedness binders; universes independent. No duplicate (the pro-etale derivedStep definitions are specific). Docstrings and tags ok; proof is sorry only; report has both sections. Advisory: the 00D3 citation on composite is cosmetic."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T111045-L-3980688",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
