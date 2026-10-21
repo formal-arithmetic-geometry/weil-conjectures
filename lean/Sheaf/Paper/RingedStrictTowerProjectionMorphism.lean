@@ -6,6 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.CategoryTheory.StrictProjectionLimitData
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Paper.RingedTensorSquarePresentation
@@ -115,42 +116,6 @@ def RingedTensorEdge.projectionTensorDiagrams
     (Functor.whiskeringLeft Y.projectionCoefficients
       (ℕᵒᵖ ⥤ CochainComplex X.mateModules ℤ)
       (ℕᵒᵖ ⥤ CochainComplex X.mateModules ℤ)).obj e.projectionCoefficientDiagram
-
-/-- Postcomposition on diagrams, retaining the original functor and natural transformations.
-Source: Stacks 0A07 (blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
-abbrev projectionPost {I : Type uI} {B : Type uB} {D : Type uD}
-    [Category.{vI} I] [Category.{vB} B] [Category.{vD} D] (F : B ⥤ D) :=
-  (Functor.whiskeringRight I B D).obj F
-
-/-- The derived limit, evaluation, and Roos data for an abelian category of strict towers.
-Source: Stacks 0A07, 0940, 0941
-(blueprint: lem-weil-pbc-ringed-strict-tower-projection-morphism). -/
-structure StrictProjectionLimitData (B : Type uB) [Category.{vB} B] [Abelian B]
-    [HasLimitsOfShape ℕᵒᵖ B]
-    {DB DT : Type*} [Category* DB] [Category* DT]
-    [HasZeroObject DB] [HasShift DB ℤ] [Preadditive DB]
-    [∀ n : ℤ, (shiftFunctor DB n).Additive] [Pretriangulated DB]
-    [HasCountableProducts DB]
-    (Q : CochainComplex B ℤ ⥤ DB) (QT : CochainComplex (ℕᵒᵖ ⥤ B) ℤ ⥤ DT)
-    [QT.IsLocalization (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ B) (.up ℤ))] where
-  L : DT ⥤ DB
-  eta : (lim : (ℕᵒᵖ ⥤ B) ⥤ B).mapHomologicalComplex
-    (ComplexShape.up ℤ) ⋙ Q ⟶ QT ⋙ L
-  ev : DT ⥤ (ℕᵒᵖ ⥤ DB)
-  evaluation : QT ⋙ ev ≅
-    HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ projectionPost Q
-  p : ∀ Z, L.obj Z ⟶ ∏ᶜ fun n : ℕ ↦ (ev.obj Z).obj (op n)
-  delta : ∀ Z, (∏ᶜ fun n : ℕ ↦ (ev.obj Z).obj (op n)) ⟶ (L.obj Z)⟦(1 : ℤ)⟧
-  derived : L.IsRightDerivedFunctor eta
-    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ B) (ComplexShape.up ℤ))
-  computes : ∀ I : CochainComplex (ℕᵒᵖ ⥤ B) ℤ, I.IsKInjective → IsIso (eta.app I)
-  roos : ∀ Z, IsDerivedLimitTriangle
-    (fun n : ℕ ↦ (ev.obj Z).map (homOfLE (Nat.le_succ n)).op) (L.obj Z) (p Z) (delta Z)
-  p_natural : ∀ {Z W} (v : Z ⟶ W),
-    L.map v ≫ p W = p Z ≫ Limits.Pi.map (fun n : ℕ ↦ (ev.map v).app (op n))
-  delta_natural : ∀ {Z W} (v : Z ⟶ W),
-    Limits.Pi.map (fun n : ℕ ↦ (ev.map v).app (op n)) ≫ delta W =
-      delta Z ≫ (L.map v)⟦(1 : ℤ)⟧'
 
 /-- The total right derived inverse limit with its comparison, evaluation and Roos triangle.
 This is precisely the data supplied by the strict-tower homotopy-limit dependency.
