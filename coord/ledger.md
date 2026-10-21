@@ -23014,3 +23014,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:14 L: merged deliver/K8/Sheaf.Paper.DirectImageChangeRingTranspose (stage 3; reviewer PASS; first push; landing 20261021T161409-L-4163546 (proof); batch 20261021T161357; modules 1; new nodes 0)
 - 16:14 L: merged deliver/S9/Sheaf.AlgebraicGeometry.FactorizedProEtalePullbackPasting (stage 3; reviewer PASS; first push; landing 20261021T161413-L-4165304 (interface); batch 20261021T161357; modules 1; new nodes 0; change records: coord/changes/s9-factorized-proetale-pasting-imports.md)
 - 16:14 L: merged deliver/T6/Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization (stage 3; reviewer PASS; first push; landing 20261021T161416-L-4166943 (proof); batch 20261021T161357; modules 1; new nodes 0)
+- 16:15 L: merged deliver/NC/lem-weil-point-derived-tensor-tower-coherence (stage 2; reviewer PASS; parallel immutable checks)
