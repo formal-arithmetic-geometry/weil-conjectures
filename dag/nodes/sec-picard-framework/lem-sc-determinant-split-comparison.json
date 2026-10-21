@@ -15,37 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Apply the proved upstream determinant_split_linear_maps_exists to construct its unique natural family on official exteriorPower sheaves. Conjugate each section map by the tensor of exteriorSheafPowerIso.hom on the sources and exteriorSheafPowerIso.inv on the target. The inverse wedge formula and the isomorphism identity give the forward wedge formula. tensorHom_app_tmulSection then transfers the arbitrary-lift formula, and naturality of the comparison morphisms transfers the restriction equation. Only existence of this transported family is needed here.",
+   "text": "Apply the proved adopted determinant_split_linear_maps_exists to obtain the natural family on canonical exteriorPower sheaves, together with its wedge formula for the supplied arbitrary right-inverse lifts.",
    "uses": [
-    "lem-sc-split-determinant-linear-maps",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-split-determinant-linear-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the adopted upstream local bijectivity theorem to the original canonical linear family d′ and its wedge formula. Evaluate the tensor of the outside canonical comparison isomorphisms to a linear equivalence a, and the middle comparison to b. The transported family d₀ is b inverse composed with d′ composed with a; composition of these bijections proves d₀ bijective. Combine its existing LinearMap with Equiv.ofBijective, preserving the forward function.",
+   "text": "Apply determinant_split_linear_maps_locally_bijective to that same family and its wedge formula. On each resulting neighborhood form LinearEquiv.ofBijective on every subopen. Its forward function is the original linear map, so its wedge formula is unchanged.",
    "uses": [
-    "lem-sc-split-determinant-linear-bijective",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-split-determinant-linear-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "The forward map of the constructed linear equivalence is definitionally the transported linear map. Apply its retained naturality equation directly on W and Z; proof irrelevance identifies the composite inclusion proofs.",
+   "text": "The restriction equation follows from the original natural family by substitution of the definitionally identical forward maps; the adopted restriction helper performs precisely this substitution.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-split-determinant-linear-maps",
-  "lem-sc-split-determinant-linear-bijective",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-split-determinant-linear-bijective"
  ],
  "proof_origin": {
-  "by": "C7",
+  "by": "W4",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; retain naturality while converting the original linear maps into equivalences; inline the definitional naturality step (K3 second reading)",
-  "note": "Repair of returned delivery: retain C8 landing 4453be244d6 verbatim except the private bijectivity import, proof-local transparency option, and canonical bijectivity plus sectionwise composition. No transport of the legacy family back to canonical powers is needed."
+  "place": "Proof of (*), determinant paragraph: local direct-sum exterior comparison",
+  "note": "Reuse the complete adopted upstream proof, without editing its source. Canonical comparison isomorphisms transfer its conclusion within the legacy parent proof."
  },
  "mathlib_searches": [
   {
@@ -106,14 +103,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantSplitComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_comparison_exists",
-  "statement": "theorem determinant_split_comparison_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
+  "statement": "theorem determinant_split_comparison_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)\n          (wedge (M := S.X₃) (r := r₃) (U := W) b)) =\n        wedge (M := S.X₂) (r := r₂) (U := W)\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n        (exteriorPower S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
   "branch": "sheaf-dag",
-  "by": "F3",
-  "date": "2026-10-13"
+  "by": "W4",
+  "date": "2026-10-21",
+  "note": "Retirement: the adopted upstream theorem constructs the same local comparison on canonical exteriorPower sheaves. The sole legacy consumer transports it through exteriorSheafPowerIso, preserving its signature, wedge formula and restriction equation. No upstream file changes."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -126,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-54f8f",
-  "group": "C7",
+  "reviewer": "C-8dacc",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261020T233108-L-893264",
+  "landing": "20261021T002938-L-1582174",
   "kind": "interface",
-  "note": "independent cc review: node lem-sc-split-determinant-linear-bijective lean.statement verbatim vs WC DeterminantSplitLinearBijective source; adapted DeterminantSplitComparison vs live text (only import, proof-local option, bijectivity block); retire-items.tsv:529"
+  "note": "independent cc review: Withdrawn Sheaf DeterminantSplitComparison and adapted DeterminantWedgeMorphismSplit (live diff: import, moved private helper, proof body only) vs WC twin determinant_split_comparison_exists (node lean.statement verbatim); compiled --all clean plus importer DeterminantShortExactExists; axioms standard"
  }
 }
