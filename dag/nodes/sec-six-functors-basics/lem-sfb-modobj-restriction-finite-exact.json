@@ -14,9 +14,77 @@
   "def-sfb-modobj-restriction",
   "def-galois-exact-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $A=R$ or $A=S$, and a finite category $J$. For any diagram $K:J\\to\\Mod_A(\\mathcal C)$ the underlying diagram $U_AK$ has a limit and a colimit by [def-galois-finite-limits-colimits]. Apply clauses 1 and 2 of [lem-sfb-modobj-forget-creates] to these cones and cocones: clause 2 applies because $A\\otimes-$ preserves finite colimits, and $J$ is finite. Their lifts are respectively a limit and a colimit of $K$. Thus both module categories have finite limits and finite colimits.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "lem-sfb-modobj-forget-creates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "First sentence; existence of finite module (co)limits, using the internal-module lifting construction, Limits.lean:109–125, 215–236."
+   }
+  },
+  {
+   "text": "Put $F=\\operatorname{Res}_{\\varphi}$. By [def-sfb-modobj-restriction], $F$ gives an $S$-module $(M,\\gamma_M)$ the $R$-action $\\gamma_M\\circ(\\varphi\\otimes M)$ and leaves every underlying object and morphism unchanged. Hence $U_RF=U_S$, on diagrams as well as on their cones and cocones. The linearity of the same legs after restriction is included in that definition.",
+   "uses": [
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "First sentence; scalar restriction does not change the underlying sheaf."
+   }
+  },
+  {
+   "text": "Let $K:J\\to\\Mod_S(\\mathcal C)$ be a finite diagram. Choose a limit cone $(L,p_j)$ of $U_SK$, and lift it by clause 1 of [lem-sfb-modobj-forget-creates] to an $S$-module limit cone. Its restriction is an $R$-module cone with exactly these underlying legs. By the uniqueness of the action in clause 1 for $FK$, this is the lifted $R$-module limit cone, so it is limiting. To check preservation for any other limiting cone $c$ of $K$, take the unique cone maps between $c$ and this chosen lift. Their composites are identities by the two limit universal properties. Applying $F$ leaves these inverse identities valid, so $Fc$ is isomorphic as a cone to the limiting restricted lift. Its universal factorization is obtained by composing the latter cone's unique factorization with that isomorphism. Thus $Fc$ is limiting and $F$ preserves finite limits.",
+   "uses": [
+    "lem-sfb-modobj-forget-creates",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "First sentence, finite-limit preservation; Limits.lean:44–115 and the restriction formula."
+   }
+  },
+  {
+   "text": "For the same finite diagram $K$, choose a colimit cocone $(Q,i_j)$ of $U_SK$. Clause 2 of [lem-sfb-modobj-forget-creates] lifts it to an $S$-module colimit because $S\\otimes-$ preserves these colimits. Restrict its action to $R$. The resulting cocone has underlying maps $i_j$ by [def-sfb-modobj-restriction]. Since $R\\otimes-$ also preserves $J$-colimits, clause 2 for $FK$ says there is a unique $R$-action making the $i_j$ linear and that this action makes the cocone colimiting. This identifies it with the restricted action, so the image of the chosen lift is colimiting. Any colimiting cocone of $K$ has mutually inverse canonical cocone maps to this lift, by uniqueness of universal factorizations. Applying $F$ preserves these inverse equations; composition with the resulting cocone isomorphism transfers the unique factorization to its image. Hence $F$ preserves every finite colimit.",
+   "uses": [
+    "lem-sfb-modobj-forget-creates",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "First sentence, finite-colimit preservation; Limits.lean:133–221 and the restriction formula."
+   }
+  },
+  {
+   "text": "Step 1 supplies the finite (co)limits required in [def-galois-exact-functor]. Steps 3 and 4 give both left and right exactness, so restriction of scalars is exact in the stated sense. The construction used only the monoidal action and preservation of finite colimits by the two left tensor functors; none of braiding, closedness, commutativity, or invertibility of $\\varphi$ entered.",
+   "uses": [
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "First sentence, exactness conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-limits-colimits",
+  "lem-sfb-modobj-forget-creates",
+  "def-sfb-modobj-restriction",
+  "def-galois-exact-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+  "place": "First sentence; universal-property proof using the explicit internal-module constructions in lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Limits.lean."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +141,80 @@
    "results": "8 hits; CategoryTheory.AddMod.scalarRestriction, CategoryTheory.Mod.scalarRestriction, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.AddMod.scalarRestriction_hom, CategoryTheory.Mod.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.AddMod.scalarRestriction_vadd, CategoryTheory.Mod.scalarRestriction_smul",
    "date": "2026-10-21",
    "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "grep",
+   "query": "comap.*[Ll]imit|comap.*[Cc]olimit|preserves.*restrictScalars",
+   "results": "0 hits;  (searched CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite limits and colimits of internal modules are preserved by restriction along a monoid morphism",
+   "results": "8 hits; ModuleCat.preservesLimit_restrictScalars, ModuleCat.preservesColimit_restrictScalars, Rep.instIsLeftAdjointActionModuleCatRes, Action.Functor.instPreservesFiniteColimitsMapActionOfHasFiniteColimits, MonCat.forget_preservesLimitsOfShape, MonCat.forget_preservesLimits, Rep.instIsRightAdjointActionModuleCatRes, ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a morphism of internal monoid objects preserves finite limits and finite colimits when tensoring with both monoids preserves finite colimits",
+   "results": "8 hits; CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.comap, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.comap_obj_mod, ModuleCat.preservesLimit_restrictScalars, ModuleCat.preservesColimit_restrictScalars, CategoryTheory.instPreservesColimitsTensorLeft, CategoryTheory.monoidalLinearOfFaithful",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "createsLimit|createsColimit|PreservesFinite|PreservesLimits|PreservesColimits",
+   "results": "0 hits;  (searched CategoryTheory/Monoidal/Mod.lean)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod.forget\", \"CreatesLimit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from modules over a monoid object creates all limits and the colimits preserved by tensoring with the monoid",
+   "results": "8 hits; Rep.instPreservesLimitsModuleCatForget₂, CategoryTheory.Mod_.forget, ModuleCat.forget_preservesLimits, Rep.instPreservesColimitsModuleCatForget₂, ModuleCat.forget_preservesLimitsOfSize, CategoryTheory.Mod_.forget_obj, ModuleCat.forget_reflectsLimits, AlgCat.forget₂Module_preservesLimits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an internal monoid A in a monoidal category, the forgetful functor from A modules creates limits and creates colimits if tensorLeft A preserves them",
+   "results": "8 hits; AddMonCat.forget_createsLimit, AddCommMonCat.forget_createsLimits, MonCat.forget_createsLimit, AddMonCat.forget_createsLimits, AddMonCat.forget_createsLimitsOfSize, AddMonCat.forget_createsLimitsOfShape, AddCommMonCat.forget_createsLimitsOfShape, AddCommMonCat.forget_createsLimitsOfSize",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct limits and colimits of internal module objects on the limit and colimit of the underlying diagram in a monoidal category",
+   "results": "8 hits; ModuleCat.limitModule, ModuleCat.hasLimit, ModuleCat.hasLimitsOfShape, ModuleCat.HasLimits.limitCone, ModuleCat.hasLimits, ModuleCat.hasLimits', ModuleCat.HasLimits.limitConeIsLimit, ModuleCat.HasColimit.instHasColimit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimit_restrictScalars|preservesColimit_restrictScalars",
+   "results": "2 hits; 932, 940 (searched Algebra/Category/ModuleCat/ChangeOfRings.lean)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimit_of_creates|reflectsLimit_of_creates|preservesColimit_of_creates|reflectsColimit_of_creates",
+   "results": "2 hits; 363, 483 (searched CategoryTheory/Limits/Creates.lean)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ModuleCat, monoids in Type, representations, or the definition of internal modules; none constructs (co)limits of modules over an arbitrary internal monoid. The internal construction is in the project, not Mathlib."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-sfb-module-open-lower-shriek",
@@ -96,5 +234,20 @@
    "det-prop-sfb-module-pullback-exact-lifted"
   ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-modobj-restriction-finite-exact",
+  "worker": "stage1",
+  "summary": "Kept the statement and its five statement dependencies. Isolated the arbitrary-diagram internal-module lifting construction, with the existing project createsLimit/createsColimit declarations recorded as attachment candidates. The item explicitly proves finite existence and preservation by restriction via uniqueness of lifted actions and of cone/cocone factorizations; no adjoint, braiding, additive or closed structure is used. Rechecked searches in the pinned Mathlib.",
+  "blueprint": "Realizes the first sentence of def-sfb-module-open-lower-shriek.proof.md: restriction leaves underlying sheaves unchanged and is exact. This is the finite universal-property subargument of that sentence."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-d9bc77301",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d9bc77301 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, the blueprint source (def-sfb-module-open-lower-shriek.proof.md, first sentence) and the project's Mod/Limits.lean lines 1-247 (sorry-free). New node lem-sfb-modobj-forget-creates: true, and not a restatement of its parent. It lifts underlying limits, and underlying colimits when A⊗- preserves J-colimits, to internal A-modules. Uniqueness of the action follows from joint mono/epi. No extra hypothesis is needed, since T² preserves J-colimits when T does (Lean isColimitTensorLeftTensorLeft). It holds in all the small cases tested: J empty, J a single object, M-sets in Set, and Ab, where it specializes the existing lem-sfb-modobj-kernels/cokernels. It is strictly smaller than the item, which still proves preservation by Res_φ through uniqueness of the restricted action (steps 3 and 4, using clause 2 for both S and R). The arbitrary-cone transfer is written out. Steps 2 and 5 really are elementary from def-sfb-modobj-restriction and def-galois-exact-functor. Duplicate scan of all module, ring and monoid-object nodes found nothing that states the new node; Mathlib has no internal-module (co)limit creation. The project's Mod.preservesFinite(Co)Limits_comap (DerivedExtendScalars.lean:63-94) needs an abelian C, so B10 does not apply to the item. First delivery: live item still unsplit, no repair note, not dropped, no SGA, nothing off-unit beyond mathlib definitions. Maintainer note: Mod.createsLimit and Mod.createsColimit (Limits.lean:109 and 215) are attachment candidates for the new node, whose lean_audit is absent and left to tooling."
  }
 }
