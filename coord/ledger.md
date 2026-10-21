@@ -19351,3 +19351,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:36 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 00:46 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 00:48 L: returned deliver/K2/Sheaf.Paper.LevelwiseAdicTruncations (reviewer RETURN: (reviewer C-6527b, head 6527b7c40) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.LevelwiseAdicT)
+- 00:48 L: merged deliver/A4/Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian (stage 3; reviewer PASS; first push; landing 20261021T004812-L-1789196 (proof); batch 20261021T004808; modules 1; new nodes 0)
