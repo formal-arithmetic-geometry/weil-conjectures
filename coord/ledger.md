@@ -19867,3 +19867,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/Q98/thm-sfb-extend-scalars-localization (reviewer PASS; after a return; new nodes: 1)
 - 03:38 L: merged deliver/Q104/lem-sfb-condensed-bounded-hom-continuity (reviewer PASS; first push; new nodes: 0)
 - 03:38 L: merged deliver/Q90/lem-sfb-extend-subfield-constructible (reviewer PASS; after a return; new nodes: 1)
+- 03:38 L: merged deliver/Q82/lem-sfb-module-upper-star-kflat-quasi-iso (reviewer PASS; after a return; new nodes: 1)

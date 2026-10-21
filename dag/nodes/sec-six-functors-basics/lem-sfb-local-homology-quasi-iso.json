@@ -1,0 +1,78 @@
+{
+ "id": "lem-sfb-local-homology-quasi-iso",
+ "kind": "statement",
+ "title": "Local preservation of homology carries homology isomorphisms to homology isomorphisms",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and let $F:\\mathcal A\\to\\mathcal B$ be additive [def-weil-pbc-additive-functor]. A short complex $V$ means three objects and maps $V^-\\xrightarrow{u_V}V^0\\xrightarrow{v_V}V^+$ with $v_Vu_V=0$. Choose a kernel $i_V:Z_V\\to V^0$ of $v_V$, let $\\bar u_V:V^-\\to Z_V$ be the unique map with $i_V\\bar u_V=u_V$, and choose a cokernel $q_V:Z_V\\to H(V)$ of $\\bar u_V$. A morphism $a:S\\to T$ of short complexes is a triple of maps commuting with $u$ and $v$; $H(a)$ is the induced map on these cokernels.\n\nLet $S,T$ be short complexes. For each $V=S,T$, assume that $F(i_V):F(Z_V)\\to F(V^0)$ is a kernel of $F(v_V)$ and that $F(q_V):F(Z_V)\\to F(H(V))$ is a cokernel of $F(\\bar u_V)$. These hypotheses concern only the two specified kernel and two specified cokernel diagrams; $F$ need not preserve any other kernel or cokernel.\n\nThere are canonical isomorphisms $c_V:H(FV)\\xrightarrow{\\sim}F(H(V))$ induced by these kernel and cokernel diagrams. For every morphism $a:S\\to T$ they satisfy\n$$\nc_T\\circ H(Fa)=F(H(a))\\circ c_S.\n$$\nIf $H(a)$ is an isomorphism, then $H(Fa)$ is an isomorphism, and\n$$\nH(Fa)=c_T^{-1}\\circ F(H(a))\\circ c_S.\n$$",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 010N (lemma-exact-functor), proof using preservation of kernels and cokernels; the local version for the specified short complexes is given precisely by Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:69-79, 283-310, 455-460, 616-624 and 811-820."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_preservesLeftHomology|mapHomologyIso_hom_naturality|PreservesLeftHomologyOf.mk",
+   "results": "5 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean. Search subdirectory: Algebra/Homology/ShortComplex",
+   "date": "2026-10-21",
+   "verdict": "match: local left-homology preservation, with comparison/naturality and quasi-isomorphism preservation; pinned source read at lines 69-79, 283-310, 455-460, 616-624 and 811-820"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a functor preserves the kernels and cokernels defining the homology of two short complexes then it maps their quasi-isomorphism to a quasi-isomorphism",
+   "results": "8 hits: HomologicalComplex.quasiIso_map_of_preservesHomology, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, HomologicalComplex.quasiIso_map_iff_of_preservesHomology, HomologicalComplex.quasiIsoAt_map_of_preservesHomology, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.ShortComplex.QuasiIso.isIso, CategoryTheory.ShortComplex.QuasiIso.mk",
+   "date": "2026-10-21",
+   "verdict": "match: local left-homology preservation, with comparison/naturality and quasi-isomorphism preservation; pinned source read at lines 69-79, 283-310, 455-460, 616-624 and 811-820"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology",
+   "results": "1 hits: CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology",
+   "date": "2026-10-21",
+   "verdict": "match: local left-homology preservation, with comparison/naturality and quasi-isomorphism preservation; pinned source read at lines 69-79, 283-310, 455-460, 616-624 and 811-820"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preservation of quasi-isomorphisms requires preservation of left homology only for the source and target short complexes, not exactness of the functor on every short exact sequence",
+   "results": "8 hits: CategoryTheory.ShortComplex.quasiIso_map_iff_of_preservesLeftHomology, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, CategoryTheory.ShortComplex.LeftHomologyMapData.quasiIso_map_iff, CategoryTheory.ShortComplex.quasiIso_map_iff_of_preservesRightHomology, CategoryTheory.ShortComplex.quasiIso_map_of_preservesRightHomology, CategoryTheory.ShortComplex.RightHomologyMapData.quasiIso_map_iff, HomologicalComplex.quasiIso_map_of_preservesHomology, HomologicalComplex.quasiIso_map_iff_of_preservesHomology",
+   "date": "2026-10-21",
+   "verdict": "match: local left-homology preservation, with comparison/naturality and quasi-isomorphism preservation; pinned source read at lines 69-79, 283-310, 455-460, 616-624 and 811-820"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor between abelian categories which preserves the cycle kernels and boundary cokernels of two short complexes preserves a homology isomorphism between them",
+   "results": "8 hits: CategoryTheory.ShortComplex.HomologyData.map_iso, CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.mapLeftHomologyIso, CategoryTheory.ShortComplex.mapCyclesIso, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "match: local left-homology preservation, with comparison/naturality and quasi-isomorphism preservation; pinned source read at lines 69-79, 283-310, 455-460, 616-624 and 811-820"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+  "line": 811,
+  "how": "specializes in one line for each clause: the chosen kernel/cokernel hypotheses are LeftHomologyData.IsPreservedBy (lines 69-79); CategoryTheory.Functor.PreservesLeftHomologyOf.mk' (line 303) converts each chosen datum into PreservesLeftHomologyOf. CategoryTheory.ShortComplex.mapHomologyIso (line 455) is c_V; mapHomologyIso_hom_naturality (line 616) is the displayed naturality formula. CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology (line 811) is the final implication, with ShortComplex.QuasiIso meaning invertibility of homologyMap. All four short complexes have homology because the categories are abelian. The conjugation formula is the naturality equality composed with c_T inverse."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-module-upper-star-kflat-quasi-iso",
+  "date": "2026-10-21",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-derived-pushpull",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-module-upper-star-kflat-quasi-iso",
+   "place": "Proof, clauses 'an exact functor applied termwise commutes with the cohomology of complexes; hence it sends every quasi-isomorphism': isolate the local kernel-cokernel comparison and its naturality for a morphism of three-term complexes.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

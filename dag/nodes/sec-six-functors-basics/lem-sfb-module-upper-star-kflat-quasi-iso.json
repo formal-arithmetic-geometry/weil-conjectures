@@ -42,9 +42,10 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this additive exact $f^*$. For every unbounded cochain complex $K$ and $n\\in\\mathbf Z$ it supplies $c^n_K:H^n(f^*K)\\xrightarrow{\\sim}f^*H^n(K)$, natural in $K$.",
+   "text": "Let $s:P\\to P'$ be a quasi-isomorphism and fix $n\\in\\mathbf Z$. Regard its three components in degrees $n-1,n,n+1$ as a morphism $a:S\\to T$ of short complexes. In the abelian categories of step 1, step 2 ensures that $f^*$ preserves the two cycle kernels and the cokernels of the two maps into cycles. Apply [lem-sfb-local-homology-quasi-iso] to these diagrams. It supplies $c_V:H(f^*V)\\xrightarrow{\\sim}f^*H(V)$ and the naturality identity $H(f^*a)=c_T^{-1}\\circ f^*(H(a))\\circ c_S$. Since $H(a)=H^n(s)$ is invertible, its final assertion gives invertibility of $H^n(f^*s)$.",
    "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-sfb-local-homology-quasi-iso",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +54,7 @@
    }
   },
   {
-   "text": "Let $s:P\\to P^{\\prime}$ be a quasi-isomorphism. By [def-weil-abstract-derived-category], each $H^n(s)$ is invertible. Naturality in step 3 gives $$H^n(f^*s)=(c^n_{P^{\\prime}})^{-1}\\circ f^*(H^n(s))\\circ c^n_P.$$ The middle factor has inverse $f^*((H^n(s))^{-1})$ by functoriality, so the displayed composite is invertible for every $n$. The same definition says that $f^*s$ is a quasi-isomorphism. Specialize to K-flat $P,P^{\\prime}$ to obtain the assertion.",
+   "text": "The preceding argument holds for every integer $n$. By [def-weil-abstract-derived-category], $f^*s$ is a quasi-isomorphism. This applies in particular when $P,P'$ are K-flat, giving the asserted restriction.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -69,13 +70,13 @@
   "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-modobj-abelian",
   "det-prop-sfb-module-pullback-exact-main",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-local-homology-quasi-iso",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/lem-sfb-module-upper-star-kflat-quasi-iso.proof.md",
-  "place": "Entire proof, unchanged route: exactness of module pullback, natural cohomology comparison, and elementary inversion. Exactness is now cited through the existing finer node det-prop-sfb-module-pullback-exact-main."
+  "place": "Entire blueprint proof: retain ambient abelianness and the existing exactness node, and extract the local homology-comparison/naturality argument into the new verified Mathlib leaf lem-sfb-local-homology-quasi-iso."
  },
  "mathlib_searches": [
   {
@@ -182,6 +183,41 @@
    "results": "instAbelianCondensedMod; instAbelianLightCondMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; SheafOfModules.instAbelian; Condensed.instAB4StarCondensedMod; Condensed.instAB4CondensedMod; Condensed.instAB5CondensedMod; AlgebraicGeometry.Scheme.Modules.instAbelian",
    "date": "2026-10-21",
    "verdict": "No item match: returned condensed-module abelianness and sectionwise module-sheaf facts, not this pro-etale internal-module pullback theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_preservesHomology|preservesHomologyOfExact|homologyFunctorIso",
+   "results": "17 hits: Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean. Search subdirectory: Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "No exact condensed-coefficient module-pullback match; generic homology preservation requires the functor-specific exactness already stated by det-prop-sfb-module-pullback-exact-main."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor between abelian categories applied termwise to unbounded cochain complexes preserves quasi-isomorphisms",
+   "results": "8 hits: HomologicalComplex.quasiIso_map_of_preservesHomology, HomologicalComplex.quasiIsoAt_map_of_preservesHomology, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.ShortComplex.quasiIso_map_of_preservesRightHomology, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-21",
+   "verdict": "No exact condensed-coefficient module-pullback match; generic homology preservation requires the functor-specific exactness already stated by det-prop-sfb-module-pullback-exact-main."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.quasiIso_map_of_preservesHomology",
+   "results": "1 hits: HomologicalComplex.quasiIso_map_of_preservesHomology",
+   "date": "2026-10-21",
+   "verdict": "No exact condensed-coefficient module-pullback match; generic homology preservation requires the functor-specific exactness already stated by det-prop-sfb-module-pullback-exact-main."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of internal modules over a commutative condensed ring on pro-etale sites preserves quasi-isomorphisms between K-flat complexes",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackComp",
+   "date": "2026-10-21",
+   "verdict": "No exact condensed-coefficient module-pullback match; generic homology preservation requires the functor-specific exactness already stated by det-prop-sfb-module-pullback-exact-main."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of abelian sheaves followed by extension of scalars along an isomorphism of coefficient ring objects preserves quasi-isomorphisms",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, HomologicalComplex.quasiIso_map_iff_of_preservesHomology, HomologicalComplex.quasiIso_map_of_preservesHomology, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplex.HomologySequence.quasiIso_τ₃",
+   "date": "2026-10-21",
+   "verdict": "No exact condensed-coefficient module-pullback match; generic homology preservation requires the functor-specific exactness already stated by det-prop-sfb-module-pullback-exact-main."
   }
  ],
  "mathlib_match": null,
@@ -210,8 +246,8 @@
   "date": "2026-10-21",
   "item": "lem-sfb-module-upper-star-kflat-quasi-iso",
   "worker": "stage1",
-  "summary": "Stage-1 repair of the 3974-character proof. Statement unchanged. Reused the current DAG exactness node det-prop-sfb-module-pullback-exact-main (its proof is 1706 characters) instead of duplicating its transport and coefficient-change arguments. Reused the natural cohomology comparison Mathlib leaf; kept only explicit abelian-category hypothesis checks and the elementary inversion argument. No new nodes, Lean writes, compiles, or statement changes. Earlier searches and metadata retained; fresh item searches recorded from searches.jsonl.",
-  "blueprint": "Step 1 checks the abelian-category setting; step 2 realizes the opening exactness sentence of the blueprint item proof using the existing detailed exactness node; step 3 realizes its cohomology comparison clause; step 4 realizes its quasi-isomorphism and K-flat specialization clause.",
+  "summary": "Re-split with statement unchanged. Added one statement-only node for the local kernel-cokernel homology comparison and preservation of homology isomorphisms; searches identify its exact Mathlib implementation, so it is honestly marked mathlib rather than unsplit. Retained the existing ambient-abelian and module-pullback-exactness arguments without duplicating their nodes. The item is a four-step assembly; the comparison and naturality argument now appears as an independently stated and cited leaf.",
+  "blueprint": "Step 1 verifies the ambient abelian categories. Step 2 supplies the opening exactness assertion. Step 3 realizes the middle cohomology-comparison and hence-quasi-isomorphisms clauses via the new local Mathlib leaf; step 4 realizes the final K-flat restriction. The chapter and unit route are unchanged.",
   "tool_uses": [
    {
     "node": "det-prop-sfb-module-pullback-exact-main",
@@ -238,10 +274,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q41-4efed9881",
-  "group": "Q41",
+  "reviewer": "NT-cc-Q82-1b38db76f",
+  "group": "Q82",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-4efed9881 (reviewer sub-agent of L); spot-checked: This is a re-split under the human's 2026-10-21 note on proof length (live proof 3974 chars). The statement and stmt_deps are unchanged and identical to blueprint main-20261015 order 1701. The new proof has 4 steps and 1487 chars, and every step was checked in full. Step 1: def-weil-pbc-proetale-site gives the V-small skeleton. lem-weil-pbc-sheaf-tensor-closed with A=Ab gives abelian Sh, an additive tensor, and Q⊗- preserving all colimits. That tensor is the same sheafified objectwise tensor as sk-def-sfb-sheaf-tensor. So the hypotheses of lem-sfb-modobj-abelian hold and Mod_{Λ_Z} is abelian. Step 2: the existing reviewed node det-prop-sfb-module-pullback-exact-main is about the same composite Ext_{α_f}∘mapMod(f^*_Ab), for arbitrary Λ and f, and says it is additive and preserves finite limits and colimits. It carries the statement of the unit sk-prop-sfb-module-pullback-exact that the blueprint proof and unit sk-def-sfb-module-derived-pushpull cite, so this is the blueprint route. Step 3: the Mathlib leaf lem-weil-pbc-exact-functor-complex-cohomology gives a natural c^r_K. I checked PreservesHomology.lean:60 and :777 and QuasiIso.lean:280. Step 4 is elementary: conjugate by c in the right direction, then a functor preserves inverses. Same coefficient category (internal modules over pulled-back condensed rings); no base-change morphism is involved. There is no cycle (closure of 321 nodes, none merged), nothing in the drop list, and no SGA. Edge cases checked: zero ring, X empty, f=id, unbounded complexes. The note says a delivery with no new node does not answer it. I accept the delivery anyway: every non-elementary argument is an existing node, a new exactness node would duplicate det-main (C5), and the report addresses the note explicitly. The three declared tool_uses are accepted. Maintainer: replace the stale node-level tool_uses (det-…-lifted, finite-upper-star-exact, alpha-iso, sheaf-tensor-closed) with det-main, sheaf-tensor-closed and modobj-abelian, and mark the note resolved. Separately, the leaf records the namespace Functor.homologyFunctorIso where the declaration is ShortComplex.homologyFunctorIso. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-1b38db76f (reviewer sub-agent of L); spot-checked: This is a re-split under the human's reopened 2026-10-21 note, which asks for at least one new node, a proof of at most 3000 chars, and no shortening. The base is the live Q41 split. The statement, stmt_deps, source and Lean metadata are byte-identical to live, which matches blueprint main-20261015 order 1701. Steps 1 and 2 are verbatim. Step 1 makes Mod_{Λ_Z} abelian via the pro-étale site, sheaf-tensor-closed with A=Ab and modobj-abelian. Step 2 cites the existing det-prop-sfb-module-pullback-exact-main for the same composite Ext_{α_f}∘mapMod(f^*_Ab), with arbitrary Λ and f: it is additive and preserves finite limits and colimits. Step 3 cites the new leaf on the degree n-1,n,n+1 short complexes. Step 4 is the definition of quasi-isomorphism plus the K-flat restriction. Total length is 1594 chars. Nothing from the base was dropped. The old transport and scalar-change exactness arguments are the statement of det-main, so a new node for them would duplicate it (C5). The new node lem-sfb-local-homology-quasi-iso is a true Mathlib leaf. I checked it against PreservesHomology.lean: IsPreservedBy at lines 69-79, PreservesLeftHomologyOf.mk' at 303, mapHomologyIso at 455, the naturality at 616 (same direction, c_T∘H(Fa)=F(Ha)∘c_S) and quasiIso_map_of_preservesLeftHomology at 811. I tested it with F=-⊗Z/2 on (0→Z→0) and (Z-2→Z→0): the local hypotheses hold and H(FS)=F(HS), so it is strictly weaker than global exactness. It does not restate the parent. No existing node states the local criterion. The nearest ones are exact-functor-complex-cohomology, exact-functor-derived-factorization and sp-exact-functor-preserves-homology, all of which assume global exactness. Its source is Stacks 010N (homology.tex line 1545). No SGA is cited, no node is on the drop list, and there is no cycle. Edge cases checked: Λ=0, X=∅, f=id, unbounded complexes. The three tool_uses are accepted. Maintainer notes: (1) mark the note resolved. The leaf is a local refinement of existing global leaves and spreads no work, because all substance is in det-main; further re-split requests cannot be answered without duplicating it. (2) Replace the stale node-level tool_uses (det-lifted, finite-upper-star-exact, alpha-iso). (3) Leaf lem-weil-pbc-exact-functor-complex-cohomology records Functor.homologyFunctorIso; the declaration is actually ShortComplex.homologyFunctorIso. No fixes."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-module-derived-pushpull",
