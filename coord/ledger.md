@@ -20726,3 +20726,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:34 L: returned deliver/Q13/lem-sfb-finite-field-lisse-internal-hom (reviewer RETURN: L: independent stage-2 immutable head 286e974576f7: H13 (H4): the delivery rebinds the statement-dependency record def-w)
 - 07:34 L: returned deliver/Q05/lem-pe-integral-completion-presentation (reviewer RETURN: L: independent stage-2 immutable head 2a6d22f27666: H2: stmt_deps adds theorem node lem-sf-finite-discrete-normalized-en)
 - 07:34 L: returned deliver/Q07/lem-weil-pbc-flat-constant-tensor-pro-zero-cones (reviewer RETURN: L: independent stage-2 immutable head 2ae01143c95e: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
+- 07:34 L: returned deliver/N9/lem-pd-section-derived-pushpull-normalization (reviewer RETURN: L: independent stage-2 immutable head 2cf4bf60e2f2: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
