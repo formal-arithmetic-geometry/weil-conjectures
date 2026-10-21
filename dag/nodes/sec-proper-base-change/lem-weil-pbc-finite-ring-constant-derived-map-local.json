@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-finite-ring-constant-derived-map-local",
+ "kind": "statement",
+ "title": "Algebraic local lifts of finite constant derived maps",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-etale-site], $B$ a finite commutative ring, and $E,G$ bounded cochain complexes of finite $B$-modules [def-pc-cochain-complex-modules]. For every etale object $V\\to X$ and every morphism $\\alpha$ in the derived category [def-weil-abstract-derived-category] between the restrictions of the termwise constant realizations of $E,G$ [def-kun-constant-sheaf], there is a covering sieve of $V$ on each member $W\\to V$ of which $\\alpha|_W$ is the restriction of the constant realization of a morphism $E\\to G$ in $D(B)$. Restriction is the one in [def-weil-pbc-etale-derived-map-presheaves].",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-etale-derived-map-presheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09BE, lemma-locally-constant-map; finite-source extension using Tag 08FR"
+ },
+ "proof": [
+  {
+   "text": "Finite terms give finite homology. A finite ring is Noetherian, so E is pseudo-coherent by the cohomology criterion. Obtain a bounded finite free approximation P to E inducing isomorphisms above m, with m two below a lower bound of G. The homology sequence makes its cone lie in degrees at most m.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Orthogonality and the exact Hom sequences of the approximation triangle and its inverse rotation identify maps E to G with maps P to G.",
+   "uses": [
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constants preserve finite limits and finite colimits by the existing preservesFiniteLimits_constantSheaf and preservesFiniteColimits_constantSheaf instances: constant presheaves preserve these pointwise, and sheafification is left exact and left adjoint. Exact inverse image and the exact-functor derived API preserve the triangle and its cohomological bounds. Applying the same Hom comparison gives the restricted bijection.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Local-actual represents maps from constant P by actual chain maps on an etale cover. Descend the finitely many components algebraically on a further covering sieve. Lift the algebraic class through the approximation bijection; injectivity of the restricted approximation bijection identifies its realization with the original morphism.",
+   "uses": [
+    "lem-weil-pbc-finite-free-etale-local-actual",
+    "lem-weil-pbc-bounded-constant-module-chain-map-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the constant inverse-image comparison on V. Form the image sieve of the constant algebraic Hom presheaf map. The pointwise local lifts just obtained show its arrows jointly cover V, hence it is a covering sieve.",
+   "uses": [
+    "def-weil-pbc-etale-derived-map-presheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-derived-map-presheaves",
+  "def-weil-pbc-etale-site",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-bounded-constant-module-chain-map-local",
+  "lem-weil-pbc-finite-free-etale-local-actual",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Finite-source proof of lem-weil-pbc-finite-ring-constant-derived-mapping-sheaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of derived Hom between bounded finite constant module complexes is a constant sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.H, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget",
+   "date": "2026-10-21",
+   "verdict": "No exact result; implement from the existing constant-sheaf and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*constant|constant.*derived.*[Hh]om",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact result; implement from the existing constant-sheaf and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"mapDerivedCategory\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact result; implement from the existing constant-sheaf and derived-category APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived morphism between bounded finite constant module complexes is locally induced by a derived morphism of modules",
+   "results": "8 hits: ModuleCat.localizedModuleMap, CategoryTheory.ShortComplex.homologyMap', CategoryTheory.ShortComplex.homologyMap, CategoryTheory.ShortComplex.rightHomologyMap, CategoryTheory.ShortComplex.leftHomologyMap, HomologicalComplex.homologyMap, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.ShortComplex.leftHomologyMap'",
+   "date": "2026-10-21",
+   "verdict": "No exact local algebraicity result; use existing constant-sheaf and localization APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingConstantDerivedMappingSheaves",
+  "date": "2026-10-21",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: derived transition maps between bounded finite constant complexes",
+   "via": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-finite-ring-constant-derived-mapping-sheaves"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingConstantDerivedMapLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingConstantDerivedMapLocal.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteRing_constant_derived_map_local",
+  "statement": "theorem finiteRing_constant_derived_map_local\n    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]\n    (E G : CochainComplex (ModuleCat.{u + 1} B) ℤ)\n    (hE : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n))\n    (hG : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    (hEfin : ∀ n : ℤ, Finite (E.X n)) (_hGfin : ∀ n : ℤ, Finite (G.X n))\n    (V : X.Etale)\n    (α : (upperStar (ModuleCat.{u + 1} B) V.hom).mapDerivedCategory.obj\n        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).mapDerivedCategory.obj\n          (DerivedCategory.Q.obj E)) ⟶\n      (upperStar (ModuleCat.{u + 1} B) V.hom).mapDerivedCategory.obj\n        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).mapDerivedCategory.obj\n          (DerivedCategory.Q.obj G))) :\n    ∃ S ∈ X.smallEtaleTopology V, ∀ (W : X.Etale) (f : W ⟶ V), S f →\n      ∃ a : DerivedCategory.Q.obj E ⟶ DerivedCategory.Q.obj G,\n        restrictDerivedMap B f α =\n          (upperStar (ModuleCat.{u + 1} B) W.hom).mapDerivedCategory.map\n            ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).mapDerivedCategory.map\n              a)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T134258-L-748474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T134258-L-748474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

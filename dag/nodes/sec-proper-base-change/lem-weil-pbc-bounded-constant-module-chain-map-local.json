@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-bounded-constant-module-chain-map-local",
+ "kind": "statement",
+ "title": "Bounded constant module chain maps are locally algebraic",
+ "statement": "Let $(C,J)$ be a site [def-weil-pbc-sites-and-cohomology] and $R$ a commutative ring. Assume module-valued sheafification and its identification of locally bijective maps with maps inverted by sheafification on $C$ and all slices. Assume constant sheaf and slice restriction functors are additive. Let $F,G$ be cochain complexes of $R$-modules [def-pc-cochain-complex-modules], with $F$ bounded and each $F^q$ finitely generated [def-weil-finitely-generated-module]. Every chain map $\\underline F\\to\\underline G$ between termwise constant complexes [def-kun-constant-sheaf], and every $T\\in C$, admits a covering sieve of $T$ on each member of which its slice restriction equals the slice restriction of $\\underline b$ for some algebraic chain map $b:F\\to G$.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-cochain-complex-modules",
+  "def-weil-finitely-generated-module",
+  "def-kun-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09BE, lemma-locally-constant-map; finite-source extension using Tag 08FR"
+ },
+ "proof": [
+  {
+   "text": "For every degree in the finite support of F, apply local algebraicity of constant-module maps and intersect the resulting covering sieves.",
+   "uses": [
+    "lemma-constructible-hom-constant-locally"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an object not covered by the empty sieve, the constant-section unit is injective: local equality of distinct constants would give an empty covering sieve. Naturality of the slice constant comparison therefore reflects each chain equation. Outside the source support use zero maps. On an object covered by the empty sieve every sheaf is zero; take the zero chain map.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lemma-constructible-hom-constant-locally"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Finite-source proof of lem-weil-pbc-finite-ring-constant-derived-mapping-sheaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"mapHomologicalComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact result; implement from the existing constant-sheaf and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*constant.*chain|constant.*module.*chain.*local",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact result; implement from the existing constant-sheaf and derived-category APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map between constant complexes with bounded finitely generated source is locally induced by a chain map of modules",
+   "results": "8 hits: HomologicalComplex.mkHomToSingle, HomologicalComplex.mkHomFromSingle, ComplexShape.Embedding.liftExtend.f, ComplexShape.Embedding.homRestrict_hasLift, ComplexShape.Embedding.liftExtend, ComplexShape.Embedding.HasLift, HomologicalComplex.mkHomFromSingle_f, HomologicalComplex.evalCompCoyonedaCorepresentative",
+   "date": "2026-10-21",
+   "verdict": "No exact result; implement from the existing constant-sheaf and derived-category APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain map between constant complexes with bounded finitely generated source is locally induced by a chain map of modules",
+   "results": "8 hits: groupHomology.chainsMap₁, ChainComplex.mkHom, AlgebraicTopology.AlternatingFaceMapComplex.map, HomologicalComplex.Hom.mk, ChainComplex.ofHom, HomologicalComplex.homologyMap, CochainComplex.HomComplex.Cocycle.homOf, CochainComplex.fromSingle₀Equiv",
+   "date": "2026-10-21",
+   "verdict": "No exact local algebraicity result; use existing constant-sheaf and localization APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingConstantDerivedMappingSheaves",
+  "date": "2026-10-21",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: derived transition maps between bounded finite constant complexes",
+   "via": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-finite-ring-constant-derived-mapping-sheaves"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BoundedConstantModuleChainMapLocal",
+  "file": "lean/Sheaf/CategoryTheory/BoundedConstantModuleChainMapLocal.lean",
+  "declaration": "CategoryTheory.exists_bounded_constant_module_chain_map_local",
+  "statement": "theorem exists_bounded_constant_module_chain_map_local\n    (F G : CochainComplex (ModuleCat.{w} R) ℤ)\n    (hF : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero (F.X q))\n    [∀ q : ℤ, Module.Finite R (F.X q)] (T : C)\n    (a : ((constantSheaf J (ModuleCat.{w} R)).mapHomologicalComplex (.up ℤ)).obj F ⟶\n      ((constantSheaf J (ModuleCat.{w} R)).mapHomologicalComplex (.up ℤ)).obj G) :\n    ∃ S ∈ J T, ∀ (V : C) (f : V ⟶ T), S f → ∃ b : F ⟶ G,\n      ((J.overPullback (ModuleCat.{w} R) V).mapHomologicalComplex (.up ℤ)).map a =\n        ((J.overPullback (ModuleCat.{w} R) V).mapHomologicalComplex (.up ℤ)).map\n          (((constantSheaf J (ModuleCat.{w} R)).mapHomologicalComplex (.up ℤ)).map b)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T134258-L-748474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T134258-L-748474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

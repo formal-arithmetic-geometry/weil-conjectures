@@ -16,108 +16,49 @@
  },
  "proof": [
   {
-   "text": "For bounded finite algebraic E,G choose a bounded-above finite free resolution P of E. The finite-cone hypothesis holds: a finite free complex and E have finite terms, so every mapping cone has finite cohomology.",
+   "text": "Define the natural maps from constant algebraic Hom and Isom presheaves to the derived mapping presheaves, using exact constant realization and etale inverse image.",
    "uses": [
-    "lem-pc-ring-finite-cone-free-model"
+    "def-weil-pbc-etale-derived-map-presheaves",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The local derived-map lifting theorem makes the Hom comparison locally surjective.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constant-derived-map-local"
    ],
    "elementary": false
   },
   {
-   "text": "With $P\\to E$ as above, let $N$ be an upper bound on the terms of $P$, and choose $e,g$ such that $E^i=0$ for $i<e$ and $G^i=0$ for $i<g$ and $m\\leq\\min(e,g-2)$. Let $F=\\sigma_{\\geq m}P$: it has the terms $P^i$ for $m\\leq i\\leq N$, and zero elsewhere. It is bounded finite free. The inclusion into $P$ is an isomorphism on cohomology for $i>m$ and surjective for $i=m$, directly from cycles modulo boundaries. Compose with $P\\to E$ and take its cone $C$. The long exact sequence gives $H^i(C)=0$ for $i\\geq m$. Orthogonality gives $\\operatorname{Hom}(C,G)=\\operatorname{Hom}(C[-1],G)=0$, because $C\\in D^{\\leq m-1}$ and $C[-1]\\in D^{\\leq m}$ while $G\\in D^{\\geq g}$. Exactness of Hom out of the cone triangle, and its rotations, now identifies $\\operatorname{Hom}_{D(B)}(E,G)$ with $\\operatorname{Hom}_{D(B)}(F,G)$ by precomposition.",
+   "text": "On a nonempty etale scheme choose a geometric point. Exactness of its module stalk and the constant-stalk retraction make the derived constant functor faithful. Thus equality of algebraic maps after constant realization implies equality. On an empty object the bottom sieve covers. This proves local injectivity for Hom and, by taking homs of isomorphisms, for Isom.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-sf-derived-homology-long-exact",
-    "lem-pc-derived-tstructure-orthogonality",
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 09BE, lemma-locally-constant-map: agent extension using a bounded finite-free approximation; cone calculation as in Tag 064U"
-   }
-  },
-  {
-   "text": "All terms of $F,E,C$ are finite. Apply exactness of constant finite-module sequences to the cycles, boundaries and cohomology sequences of $C$. It gives $H^i(\\underline C)=\\underline{H^i(C)}$. Termwise constant sheaves commute with the finite direct sums, differentials and signs in the cone. Thus the constant cone lies in $D^{\\leq m-1}$ on every localized etale site, while $\\underline G$ lies in $D^{\\geq g}$. The same orthogonality and Hom-out-of-triangle exactness as in the algebraic truncation argument give $\\operatorname{Hom}(\\underline E,\\underline G)\\simeq\\operatorname{Hom}(\\underline F,\\underline G)$ on every etale object. These bijections commute with restriction: they are all precomposition by the restriction of the single fixed map $\\underline F\\to\\underline E$. Here constant complexes and restrictions are those in the constant-complex and derived-map-presheaf definitions.",
-   "uses": [
-    "lem-constructible-constant-exact",
-    "def-kun-constant-sheaf",
-    "def-weil-pbc-etale-derived-map-presheaves",
-    "lem-pc-derived-tstructure-orthogonality",
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 09BE, lemma-locally-constant-map, finite-source extension; exact constant sequences from etale-cohomology.tex Tag 03RX"
-   }
-  },
-  {
-   "text": "Let $H=\\operatorname{Hom}_{D(B)}(F,G)$. Since each finite free $B$-module is projective (lift the images of its basis along any surjection), the bounded-projective derived-map-representative theorem identifies $H$ with chain maps $F\\to G$ modulo homotopy. Taking constant complexes gives a natural map from the constant presheaf $H$ to the derived Hom presheaf of $\\underline F,\\underline G$. It is locally surjective: local-actual (1) represents every derived morphism by a chain map after a cover. Apply the constant-sheaf morphism lemma to its finitely many components. On a common refinement every component is induced by a $B$-linear map $F^i\\to G^i$. On a nonempty member, taking any geometric stalk turns the chain equations into the same equations for these module maps, by the constant-stalk identification. They therefore form a chain map $F\\to G$, and its class in $H$ induces the original local derived morphism. Empty members contribute no sections to check.",
-   "uses": [
-    "lem-pc-ring-derived-map-representative",
-    "def-kun-constant-sheaf",
-    "lem-weil-pbc-finite-free-etale-local-actual",
-    "lemma-constructible-hom-constant-locally",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FR, lemma-local-actual (1); Tag 09BE, lemma-locally-constant-map, and sites-modules.tex Tag 093S"
-   }
-  },
-  {
-   "text": "For local injectivity, take two algebraic chain maps whose images agree in actual derived Hom on an etale object. Their difference becomes null-homotopic after a cover by local-actual (2). There are finitely many homotopy components $h^i:\\underline F^i\\to\\underline G^{i-1}$. The constant-sheaf morphism lemma makes them module maps on a common refinement. A geometric stalk on any nonempty member turns $\\alpha^i=d_G^{i-1}h^i+h^{i+1}d_F^i$ into an algebraic homotopy, so the two classes in $H$ agree. If their images agree only in sheafified Hom, the site sheafification-sections lemma first makes the equality actual after a cover. This proves local injectivity in that case as well. Together with the local chain representative argument and that lemma, the induced map of sheafifications is bijective: locally represent a target section, lift it by the local chain representative argument, and glue the lifts; on overlaps local injectivity makes their images agree in the source sheaf. Uniqueness follows in the same way. The set $H$ is finite since there are finitely many degreewise maps $F^i\\to G^i$ and only finitely many nonzero degrees. The algebraic and localized truncation comparisons identify this constant Hom sheaf with the constant finite set $\\operatorname{Hom}_{D(B)}(E,G)$. This proves the constant-complex Hom comparison.",
-   "uses": [
-    "lem-weil-pbc-finite-free-etale-local-actual",
-    "lemma-constructible-hom-constant-locally",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "prop-weil-pbc-geometric-stalks-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FR, lemma-local-actual (2); sites.tex Tags 00WB/00WK, theorem-plus and lemma-sections-sheafification; finite Hom calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Under the Hom-sheaf identification, the sheafification of the isomorphism presheaf is the constant subset $\\operatorname{Isom}_{D(B)}(E,G)$. Indeed an algebraic isomorphism and its inverse give inverse constant derived maps. Conversely, if a constant algebraic map represents an actual derived isomorphism on a nonempty etale object, an exact geometric stalk functor takes its inverse to an inverse in $D(B)$, so the map was an algebraic isomorphism. A germ coming from a sheafified isomorphism can be represented by an actual isomorphism after a cover by the site sheafification-sections lemma. Equalities with the local constant Hom representative can be made actual after a further cover, so the preceding test applies to germs as well. On overlaps the algebraic isomorphism representatives agree after refinement by the local injectivity proved for Hom; the same site-sections lemma then glues them to the constant isomorphism sheaf, with uniqueness. Hence the isomorphism sheaf is finite locally constant; its value is the empty set when the two model objects are not isomorphic. Exactness and the constant-stalk theorem are used on underlying abelian groups, and their naturality with multiplication by every $b\\in B$ makes the same maps $B$-linear.",
+   "text": "Locally lift an isomorphism and its inverse through Hom. On a common refinement, local injectivity makes the two algebraic composites identities, giving an algebraic isomorphism. The Hom and Isom comparison maps are therefore locally bijective and sheafification makes both invertible. Transport through the exact constant functor localization comparison.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-kun-constant-sheaf"
+    "lem-weil-pbc-finite-ring-constant-derived-map-local",
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094G, lemma-locally-constant, and agent finite-module Hom argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-kun-constant-sheaf",
-  "def-weil-abstract-derived-category",
   "def-weil-pbc-etale-derived-map-presheaves",
   "def-weil-pbc-sheafification",
-  "lem-constructible-constant-exact",
-  "lem-pc-derived-tstructure-orthogonality",
-  "lem-pc-ring-derived-map-representative",
-  "lem-pc-ring-finite-cone-free-model",
-  "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-finite-free-etale-local-actual",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lemma-constructible-hom-constant-locally",
+  "lem-weil-pbc-finite-ring-constant-derived-map-local",
   "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "The finite-source Hom argument in lem-weil-pbc-finite-ring-derived-local-constancy; Constant derived mapping sheaves of bounded finite complexes"
+  "place": "Tags 09BE and 08FR, finite-free approximation; geometric stalk faithfulness replaces local homotopy descent (B2, 2026-10-21)."
  },
  "mathlib_searches": [
   {
@@ -197,12 +138,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261018T071212-L-1674751",
+  "landing": "20261021T134258-L-748474",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
