@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Write $\\varphi:E_X\\to H_X$ and $\\psi:H_X\\to\\Omega_X$ for the coefficient inclusions fixed in the statement. Unfold [def-weil-pbc-finite-derived-tensor-comparison], [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar]. The finite coefficient extension and the cocone extension both have the expression $L(\\operatorname{Ext}_{\\varphi})$, and their algebraic-closure extensions both have the expression $L(\\operatorname{Ext}_{\\psi})$ (and $L(\\operatorname{Ext}_{E_X\\to\\Omega_X})$ for the direct extension). Thus the identifications in the statement identify their actual object and arrow assignments; they do not introduce an arbitrary automorphism of a derived extension functor. In all three expressions the coefficient ring at the closure is the specified $\\Omega_X$ with finite-subfield-valued sections.",
+   "text": "Use the common coefficient inclusions $\\varphi,\\psi,\\kappa$ of the statement. Unfold [def-weil-pbc-finite-derived-tensor-comparison], [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar]: the finite-coefficient and cocone functors are the same $LA,LB,LC$, on objects and arrows, with the same finite-subfield-valued $\\Omega_X$. Put $c:L(BA)\\cong(LB)(LA)$ and let $e:\\operatorname{Ext}_{\\psi\\varphi}\\cong C$ be their shared coefficient-map equality comparison. The first definition specifies $\\theta=L(e\\circ m_0)\\circ c^{-1}$.",
    "uses": [
     "def-weil-pbc-finite-derived-tensor-comparison",
     "def-sfb-derived-extend-subfield",
@@ -25,42 +25,34 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
-    "place": "First and last sentences, fixing the three extensions; the actual definitions are TwoColimit.lean, derivedExtendScalarsSubfield and derivedExtendScalarsToPadicAlgCl, and CondensedDerivedTensorComparison.lean, finiteCoefficientDerivedExtension and finiteCoefficientDerivedToAlgCl."
+    "place": "Returned step 1 and the defining formula for the finite coefficient comparison in step 2."
    }
   },
   {
-   "text": "Put $A=\\operatorname{Ext}_{\\varphi}$, $B=\\operatorname{Ext}_{\\psi}$, and $C=\\operatorname{Ext}_{E_X\\to\\Omega_X}$. Let $c:L(BA)\\xrightarrow{\\sim}(LB)(LA)$ denote the fixed exact-derived composition comparison, and let $m:BA\\xrightarrow{\\sim}C$ denote the fixed underived tensor multiplication comparison $m_0:BA\\xrightarrow{\\sim}\\operatorname{Ext}_{\\psi\\varphi}$ followed by the coefficient-map equality. The definition in [def-weil-pbc-finite-derived-tensor-comparison] is $\\theta=L(m)\\circ c^{-1}$. The construction of the canonical comparison $\\delta$ of [def-sfb-derived-extend-comp-iso] takes the same exact-derived composition comparison and the derived image of its underived isomorphism $\\theta_0:BA\\xrightarrow{\\sim}C$, where $\\theta_0$ is the unit-compatible isomorphism between the two left adjoints $BA$ and $\\operatorname{Ext}_{\\psi\\varphi}$ of $\\operatorname{Res}_{\\varphi}\\operatorname{Res}_{\\psi}=\\operatorname{Res}_{\\psi\\varphi}$, followed by the same coefficient-map equality. The tensor multiplication $m_0$, $s\\otimes(f\\otimes x)\\mapsto sf\\otimes x$, carries the composite unit $x\\mapsto1\\otimes(1\\otimes x)$ of $BA\\dashv\\operatorname{Res}_{\\varphi}\\operatorname{Res}_{\\psi}$ to the unit $x\\mapsto1\\otimes x$ of $\\operatorname{Ext}_{\\psi\\varphi}\\dashv\\operatorname{Res}_{\\psi\\varphi}$; so by the uniqueness clause of [lem-weil-pbc-conjugate-iso-unit-equation] (with $R_1=R_2$ and $\\delta=\\mathrm{id}$) it is that unit-compatible isomorphism, and $m=\\theta_0$. Hence $\\delta=L(m)\\circ c^{-1}$ as well. The source-library bodies agree literally ($\\texttt{Mod.extendScalarsComp}$ is the unit-compatible $\\texttt{leftAdjointUniq}$). Substitution of step 1 therefore gives $\\theta=\\delta$ as natural isomorphisms. No equality is inferred from the existential wording of the statement.",
+   "text": "Apply [lem-sfb-internal-tensor-composition-unit-normalization] to $E_X\\to H_X\\to\\Omega_X$. The sheaf tensor setting satisfies its coequalizer and colimit-preservation hypotheses by [sk-def-sfb-sheaf-tensor]. It identifies the specified multiplication $m_0$ with the unit-compatible comparison $u$, including the composite-unit equation and the inverse. By [lem-sfb-cocone-derived-comparison-normal-form], the fixed cocone comparison is $\\delta=L(e\\circ u)\\circ c^{-1}$. Substitution gives $\\theta=\\delta$ as natural isomorphisms; projecting and evaluating gives equality of both ambient component maps at every object.",
    "uses": [
-    "def-weil-pbc-finite-derived-tensor-comparison",
-    "def-sfb-derived-extend-comp-iso",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-sfb-internal-tensor-composition-unit-normalization",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-cocone-derived-comparison-normal-form"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
-    "place": "Exact-derived comparison followed by underived scalar-extension composition. Definitional expansion checked in lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean:135-147 and lean/Sheaf/AlgebraicGeometry/CondensedDerivedTensorComparison.lean:108-120; the two bodies are identical. The underived factor is matched by unit-compatibility uniqueness (def-sfb-derived-extend-comp-iso, construction step 3); lean/WeilConjectures/CategoryTheory/ModuleObjects/ExtendScalars.lean:462-466 defines Mod.extendScalarsComp as leftAdjointUniq."
+    "place": "Returned step 2: multiplication/unit normalization, followed by the derived normal form; returned step 3: evaluation."
    }
   },
   {
-   "text": "Evaluate the equality of natural isomorphisms from step 2 at any ambient derived object $K$, and project to the forward and inverse natural transformations. This gives $\\theta^{\\mathrm{hom}}_K=\\delta^{\\mathrm{hom}}_K$ and $\\theta^{\\mathrm{inv}}_K=\\delta^{\\mathrm{inv}}_K$. Equality of the inverse components follows by projection of the same isomorphism equality, so no independent choice of an inverse is made.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
-    "place": "Evaluation of the fixed natural isomorphism and its inverse."
-   }
-  },
-  {
-   "text": "Let $i_E$ and $i_\\Omega$ be the full inclusions of [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar], and write $\\alpha$ for [def-sfb-constructible-extend-comp-iso]. Its statement specifies $\\alpha$ as the restriction of $\\delta$. For $K\\in D_{\\mathrm{cons}}(X,E)$ this means $i_\\Omega(\\alpha^{\\mathrm{hom}}_K)=\\delta^{\\mathrm{hom}}_{i_EK}$ and $i_\\Omega(\\alpha^{\\mathrm{inv}}_K)=\\delta^{\\mathrm{inv}}_{i_EK}$: a full-subcategory arrow is the ambient arrow between the same endpoints. In the source construction the forward and inverse components are the preimages of precisely these two ambient arrows; the full inclusion sends each preimage back to that arrow. Substituting step 3 gives $i_\\Omega(\\alpha^{\\mathrm{hom}}_K)=\\theta^{\\mathrm{hom}}_{i_EK}$ and $i_\\Omega(\\alpha^{\\mathrm{inv}}_K)=\\theta^{\\mathrm{inv}}_{i_EK}$, as required. The restricted comparison already has endpoints in the constructible categories, so this step needs no new preservation assertion.",
+   "text": "Let $i_E,i_\\Omega$ be the full inclusions of [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar], and $\\alpha$ the restriction specified by [def-sfb-constructible-extend-comp-iso]. Apply [lem-sfb-fully-faithful-cancel-iso-components] with $J=i_\\Omega$ and $\\beta=\\delta$ restricted along $i_E$. Its component equations give $i_\\Omega(\\alpha^{\\mathrm{hom}}_K)=\\delta^{\\mathrm{hom}}_{i_EK}$ and $i_\\Omega(\\alpha^{\\mathrm{inv}}_K)=\\delta^{\\mathrm{inv}}_{i_EK}$. Substitute step 2 to obtain the required forward and inverse equalities with $\\theta$. The endpoints already lie in the constructible categories by the specified restriction.",
    "uses": [
     "def-sfb-dcons-subfield",
     "def-sfb-dcons-qlbar",
-    "def-sfb-constructible-extend-comp-iso"
+    "def-sfb-constructible-extend-comp-iso",
+    "lem-sfb-fully-faithful-cancel-iso-components"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.proof.md",
-    "place": "Both sentences: the restricted comparison is lifted through the full inclusion; evaluate both its forward and inverse components."
+    "place": "Returned step 4: both components of the full-faithful restriction."
    }
   }
  ],
@@ -68,16 +60,18 @@
   "def-weil-pbc-finite-derived-tensor-comparison",
   "def-sfb-derived-extend-subfield",
   "def-sfb-derived-extend-to-qlbar",
-  "def-sfb-derived-extend-comp-iso",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sfb-internal-tensor-composition-unit-normalization",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-cocone-derived-comparison-normal-form",
   "def-sfb-dcons-subfield",
   "def-sfb-dcons-qlbar",
-  "def-sfb-constructible-extend-comp-iso"
+  "def-sfb-constructible-extend-comp-iso",
+  "lem-sfb-fully-faithful-cancel-iso-components"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
-  "place": "Expand the specified canonical constructions literally, then apply the restriction specified by def-sfb-constructible-extend-comp-iso.proof.md. Read against the actual named source-library definitions."
+  "place": "Short assembly of the extracted underived unit normalization and canonical derived normal form, followed by full-faithful component formulas from def-sfb-constructible-extend-comp-iso.proof.md. Retains the returned proof route."
  },
  "mathlib_searches": [
   {
@@ -191,16 +185,16 @@
   "date": "2026-10-21",
   "item": "lem-sfb-coefficient-cocone-comparison-agreement",
   "worker": "stage1",
-  "summary": "Checked the actual formulas of the two named comparisons: they coincide by unfolding, including their orientations and the coefficient-map equality. Wrote the ambient equality and both full-subcategory component equalities explicitly. No new nodes: the work is substitution into the specified constructions and evaluation of a restricted natural isomorphism. The existential wording of the derived-comparison node is not used as a uniqueness assertion.",
-  "blueprint": "lem-sfb-constructible-cocone-hom-surj, paragraphs 1–2 (transitivity comparisons); the final cocone paragraph of sk-thm-sfb-qlbar-two-colimit; derived composition and constructible restriction definition/proof files."
+  "summary": "Repair of the human re-split request: extracted two independent statement-only unsplit arguments (internal multiplication with its unit equation, and the specified cocone derived normal form), plus a searched Mathlib leaf for both component maps of full-faithful cancellation. Preserved the item statement, coefficient rings, orientations and source route. Its proof is now a short assembly; the detailed former arguments are preserved as explicit obligations and in report.md.",
+  "blueprint": "lem-sfb-constructible-cocone-hom-surj first paragraph (transitivity isomorphisms), and sk-thm-sfb-qlbar-two-colimit final cocone paragraph: underived normalization, exact-derived comparison, and full-subcategory restriction."
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q103-632960e40",
-  "group": "Q103",
+  "reviewer": "NT-cc-Q59-0bde03d33",
+  "group": "Q59",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-632960e40 (reviewer sub-agent of L); spot-checked: Read the item in full; it is a first split with no new nodes. Its statement and stmt_deps are byte-identical to live (live node unsplit). It is not in route-pivot-dropped and has no repair note, so the 10-21 re-split rule does not apply. No SGA is cited. Its only citer is lem-sfb-constructible-cocone-hom-surj, and there is no cycle. Coefficient category: the pbc and sfb nodes give the same rings, E_X = p_X^*C(-,E) with p_X^* = pi_X^{-1} o sheafify o Lan along S -> Spec LC(S,Z), and the same finite-subfield-valued Omega (def-weil-pbc-condensed-e-module-category, def-sfb-padic-subfield-condensed-ring, sk-def-sfb-pullback-from-point, sk-def-sfb-qlbar-condensed). In Lean both sides are leftDerivedFunctor of Mod.extendScalars along the same padicSubfieldRingObj maps (CondensedDerivedTensorComparison.lean:31-45 = TwoColimit.lean:118-129). Step 1 is a correct unfolding. Step 2 (repaired, risk C3/E6): the delivery matched the pbc 'underived tensor multiplication iso' with delta only through the Lean bodies, but the DAG construction of def-sfb-derived-extend-comp-iso (steps 3-4) uses the unit-compatible iso of lem-weil-pbc-conjugate-iso-unit-equation. I added that m_0: s(x)(f(x)x) -> sf(x)x carries the composite unit to the unit of Ext_{psi phi}, so by the uniqueness clause of that Mathlib leaf m_0 = theta_0. I added the leaf to uses and proof_deps (Mathlib leaf, so no tool_use is needed); the step is now 1798 chars. Lean confirms the repair: Mod.extendScalarsComp and extendScalarsIsoOfEq are leftAdjointUniq (ExtendScalars.lean:462-466, ChangeOfScalarsSquare.lean:144), and the bodies at TwoColimit.lean:135-147 and CondensedDerivedTensorComparison.lean:108-120 are term-for-term identical with the same orientation. Step 3 is projection of an iso equality. Step 4: the statement of def-sfb-constructible-extend-comp-iso says 'restriction of' delta, and its construction steps 2-3 define both components from theta and theta^{-1}, matching fullyFaithfulCancelRight at TwoColimit.lean:198-213. Edge cases checked: E=H, empty X, zero complex; no hypothesis is weakened. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-coefficient-cocone-comparison-agreement.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-0bde03d33 (reviewer sub-agent of L); spot-checked: This delivery answers the human re-split note of 2026-10-21. Compared with live (the Q103 FIX), the item statement, stmt_deps, lean and blueprint fields are byte-identical; only the proof, proof_deps, proof_origin and split_report changed. Step by step: the old step 1 unfolding is kept as new step 1, which also takes the theta=L(e∘m0)∘c^-1 recipe from the statement of def-weil-pbc-finite-derived-tensor-comparison. The old step 2 is split. The fact that m0 sends the composite unit 1⊗(1⊗x) to 1⊗x, so that m0=u by the uniqueness in lem-weil-pbc-conjugate-iso-unit-equation, is now the unsplit node lem-sfb-internal-tensor-composition-unit-normalization. That node also gives the explicit coequalizer formulas for m0 and its inverse, and its hypotheses match sk-def-sfb-change-of-scalars(2). The formula delta=L(e∘u)∘c^-1 is now the unsplit node lem-sfb-cocone-derived-comparison-normal-form. I checked it against construction steps 3-4 of def-sfb-derived-extend-comp-iso and against TwoColimit.lean:135-147, and the orientation of c=mu_{A,B} matches lem-sfb-exact-derived-composition. The old step 3 projection is elementary in new step 2. The old step 4 is now the Mathlib leaf fullyFaithfulCancelRight; I verified FullyFaithful.lean lines 372/378/384 and map_preimage at line 87. It matches TwoColimit.lean:198-213. The item proof is 1795 characters with nothing dropped, and neither unsplit child restates the item or one of its clauses. I tested E=H (phi the identity), a zero module, a zero ring T and empty X. There is no cycle and no SGA. Blueprint sources were read: def-sfb-derived-extend-comp-iso.proof.md and def-sfb-constructible-extend-comp-iso.proof.md. Duplicate candidates were checked and are distinct: lem-sf-proetale-tensor-composition-unit, lem-weil-pbc-scalar-extension-unit-triangles, lem-cbc-fully-faithful-isomorphism-lift (the object-wise version, an accepted overlap) and lem-sfb-derived-composition-adjunction-normalization. Advisory: step 2 relies on coequalizers and commutativity of the coefficient rings in Sh(X_proet,Ab). These are implicit in the cited Ext definitions but not stated in sk-def-sfb-sheaf-tensor."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CoefficientCoconeComparisonAgreement",

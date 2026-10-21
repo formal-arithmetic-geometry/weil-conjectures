@@ -1,0 +1,73 @@
+{
+ "id": "lem-sfb-fully-faithful-cancel-iso-components",
+ "kind": "statement",
+ "title": "Forward and inverse components of full-faithful cancellation",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal D$ be categories [def-nagata-category], let $F,G:\\mathcal A\\to\\mathcal B$ be functors, and let $J:\\mathcal B\\to\\mathcal D$ be fully faithful, meaning that every map $\\operatorname{Hom}_{\\mathcal B}(B,B')\\to\\operatorname{Hom}_{\\mathcal D}(JB,JB')$ is bijective. Given a natural isomorphism $\\beta:JF\\xrightarrow{\\sim}JG$, write $\\operatorname{preim}_J$ for the inverse of this Hom bijection. Full-faithful cancellation gives a natural isomorphism $\\alpha:F\\xrightarrow{\\sim}G$ with, for every $K\\in\\mathcal A$,\n$$\\alpha^{\\mathrm{hom}}_K=\\operatorname{preim}_J(\\beta^{\\mathrm{hom}}_K),\\qquad \\alpha^{\\mathrm{inv}}_K=\\operatorname{preim}_J(\\beta^{\\mathrm{inv}}_K).$$\nConsequently its two components satisfy\n$$J(\\alpha^{\\mathrm{hom}}_K)=\\beta^{\\mathrm{hom}}_K,\\qquad J(\\alpha^{\\mathrm{inv}}_K)=\\beta^{\\mathrm{inv}}_K.$$\nThe chosen cancellation is $\\texttt{CategoryTheory.Functor.fullyFaithfulCancelRight}$, including both its specified component maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.proof.md",
+  "place": "Last sentence, lifting the natural isomorphism through the full inclusion; Mathlib/CategoryTheory/Functor/FullyFaithful.lean:372-387 (fullyFaithfulCancelRight and both component formulas), and line 87 (map_preimage)."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful functor maps both components of a lifted natural isomorphism back to the original natural isomorphism components",
+   "results": "CategoryTheory.Functor.FullyFaithful.preimageIso; CategoryTheory.Functor.preimageIso_hom; CategoryTheory.Functor.preimageIso; CategoryTheory.Functor.FullyFaithful.homNatIso; CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight; CategoryTheory.Functor.FullyFaithful.isoEquiv_apply; CategoryTheory.Functor.fullyFaithfulCancelRight; CategoryTheory.Functor.FullyFaithful.ofIso",
+   "date": "2026-10-21",
+   "verdict": "match: fullyFaithfulCancelRight gives the natural isomorphism; fullyFaithfulCancelRight_hom_app and fullyFaithfulCancelRight_inv_app give its component preimages, and map_preimage yields each displayed image equation in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.fullyFaithfulCancelRight",
+   "results": "CategoryTheory.Functor.fullyFaithfulCancelRight; CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app; CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app; CategoryTheory.equivEssImageOfReflective_counitIso",
+   "date": "2026-10-21",
+   "verdict": "match: fullyFaithfulCancelRight gives the natural isomorphism; fullyFaithfulCancelRight_hom_app and fullyFaithfulCancelRight_inv_app give its component preimages, and map_preimage yields each displayed image equation in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fully faithful functor H, cancelling H from a natural isomorphism has forward and inverse components whose H images are exactly the original components",
+   "results": "CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app; CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app; CategoryTheory.Functor.fullyFaithfulCancelRight; CategoryTheory.Functor.FullyFaithful.preimageIso_hom; CategoryTheory.Functor.FullyFaithful.homNatIso'_inv_app_down; CategoryTheory.Functor.FullyFaithful.isoEquiv_apply; CategoryTheory.Functor.FullyFaithful.preimageIso_inv; CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down",
+   "date": "2026-10-21",
+   "verdict": "match: fullyFaithfulCancelRight gives the natural isomorphism; fullyFaithfulCancelRight_hom_app and fullyFaithfulCancelRight_inv_app give its component preimages, and map_preimage yields each displayed image equation in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulCancelRight",
+   "results": "Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "date": "2026-10-21",
+   "verdict": "match: fullyFaithfulCancelRight gives the natural isomorphism; fullyFaithfulCancelRight_hom_app and fullyFaithfulCancelRight_inv_app give its component preimages, and map_preimage yields each displayed image equation in one line.",
+   "sub": "CategoryTheory"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.fullyFaithfulCancelRight",
+  "file": "Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+  "how": "Definition at line 372 constructs the specified natural isomorphism. Its forward component is fullyFaithfulCancelRight_hom_app (line 378), and its inverse component is fullyFaithfulCancelRight_inv_app (line 384). Applying CategoryTheory.Functor.map_preimage (line 87) to each formula gives the two image equations in one line each. All hypotheses are exactly functors between categories and Full/Faithful J.",
+  "line": 372
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-cocone-comparison-agreement",
+  "date": "2026-10-21",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-constructible-cocone-hom-surj",
+   "place": "Hom-surj proof, first paragraph: the constructible restriction of the transitivity comparison; both component maps of the full-faithful lift.",
+   "via": [
+    "lem-sfb-coefficient-cocone-comparison-agreement"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

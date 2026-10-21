@@ -1,0 +1,75 @@
+{
+ "id": "lem-sfb-internal-tensor-composition-unit-normalization",
+ "kind": "statement",
+ "title": "Internal tensor multiplication is the unit-normalized composition comparison",
+ "statement": "Let $\\mathcal C$ be a braided monoidal category with coequalizers, such that tensoring on either side preserves colimits. Let $R,S,T$ be commutative monoid objects and $\\varphi:R\\to S$, $\\psi:S\\to T$ morphisms of monoid objects. Use the internal module categories and coequalizer scalar-extension functors of [sk-def-sfb-change-of-scalars]. Write $A=\\operatorname{Ext}_{\\varphi}$, $B=\\operatorname{Ext}_{\\psi}$, $D=\\operatorname{Ext}_{\\psi\\varphi}$ and $U=\\operatorname{Res}_{\\psi\\varphi}$. Identify $\\operatorname{Res}_{\\varphi}\\operatorname{Res}_{\\psi}$ with $U$ by the canonical comparison that is the identity on underlying objects and arrows. Equip $BA\\dashv U$ with the composite scalar-extension adjunction transported along this comparison, and $D\\dashv U$ with the direct scalar-extension adjunction. Denote their units by $\\eta^{BA}$ and $\\eta^D$, and let $u:BA\\xrightarrow{\\sim}D$ be the unique unit-compatible isomorphism of [lem-weil-pbc-conjugate-iso-unit-equation].\n\nThere is a natural isomorphism $m_0:BA\\xrightarrow{\\sim}D$ induced on the defining coequalizers by multiplication in $T$, with component and inverse given in symbolic tensor notation by\n$$m_{0,M}:T\\otimes_S(S\\otimes_RM)\\longrightarrow T\\otimes_RM,\\quad t\\otimes(s\\otimes x)\\longmapsto t\\psi(s)\\otimes x,$$\n$$m_{0,M}^{-1}:t\\otimes x\\longmapsto t\\otimes(1\\otimes x).$$\nThese formulas mean maps induced from $T\\otimes S\\otimes M$ and $T\\otimes M$ through the relative-tensor coequalizers, with the monoidal associators and unitors inserted; they do not assume that $\\mathcal C$ is concrete. For every $R$-module object $M$,\n$$U(m_{0,M})\\circ\\eta^{BA}_M=\\eta^D_M.$$\nAs specified natural isomorphisms, $m_0=u$ (equivalently, $m_0$ is the inverse of the source-library $\\operatorname{Mod.extendScalarsComp}(\\varphi,\\psi)$).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Sentence \"Extension of scalars is compatible with composition\"; underived tensor/unit-normalization argument extracted from the returned item, proof step 2. Internal construction: lean/WeilConjectures/CategoryTheory/ModuleObjects/ExtendScalars.lean, extendHomEquiv and extendScalarsComp (lines 410-466)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendRestrictScalarsAdj_unit|unit_leftAdjointUniq_hom",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ModuleCat.extendScalarsComp and its unit formula concern ordinary modules over type-valued rings; the internal coequalizer multiplication and its unit normalization in an arbitrary braided monoidal category are not a one-line specialization. Generic adjoint uniqueness is already lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: ModuleCat.extendScalarsComp and its unit formula concern ordinary modules over type-valued rings; the internal coequalizer multiplication and its unit normalization in an arbitrary braided monoidal category are not a one-line specialization. Generic adjoint uniqueness is already lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal relative tensor product of sheaf module objects: successive scalar extension has multiplication comparison carrying the composite unit to the direct unit",
+   "results": "IsLocalization.moduleLid; TensorProduct.CompatibleSMul.unit; PiTensorProduct.instIsScalarTower; PresheafOfModules.Monoidal.tensorObj; TensorProduct.CompatibleSMul.mk; Submodule.tensorEquivMul; Algebra.TensorProduct.instMul.congr_simp; PiTensorProduct.isScalarTower'",
+   "date": "2026-10-21",
+   "verdict": "no match: ModuleCat.extendScalarsComp and its unit formula concern ordinary modules over type-valued rings; the internal coequalizer multiplication and its unit normalization in an arbitrary braided monoidal category are not a one-line specialization. Generic adjoint uniqueness is already lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules in sheaves, tensor multiplication in successive extension of scalars is the unique isomorphism between left adjoints compatible with the composite adjunction unit",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalars_assoc'; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.extendScalars_assoc; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; PresheafOfModules.Monoidal.tensorObj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: ModuleCat.extendScalarsComp and its unit formula concern ordinary modules over type-valued rings; the internal coequalizer multiplication and its unit normalization in an arbitrary braided monoidal category are not a one-line specialization. Generic adjoint uniqueness is already lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative tensor multiplication T tensor S tensor M to T tensor M is the canonical composition comparison for internal module scalar extension with inverse t tensor m to t tensor one tensor m",
+   "results": "TensorProduct.Algebra.moduleAux_apply; Algebra.TensorProduct.lmul''_eq_lid_comp_mapOfCompatibleSMul; TensorProduct.AlgebraTensorModule.cancelBaseChange; TensorProduct.AlgebraTensorModule.rTensor_tmul; TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul; TensorProduct.AlgebraTensorModule.rTensor_tensor; TensorProduct.AlgebraTensorModule.smul_eq_lsmul_rTensor; TensorProduct.mapOfCompatibleSMul_tmul",
+   "date": "2026-10-21",
+   "verdict": "no match: ModuleCat.extendScalarsComp and its unit formula concern ordinary modules over type-valued rings; the internal coequalizer multiplication and its unit normalization in an arbitrary braided monoidal category are not a one-line specialization. Generic adjoint uniqueness is already lem-weil-pbc-conjugate-iso-unit-equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-cocone-comparison-agreement",
+  "date": "2026-10-21",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-constructible-cocone-hom-surj",
+   "place": "Hom-surj proof, first paragraph: transitivity isomorphisms; underived multiplication and unit normalization needed to identify the specified transitivity comparison.",
+   "via": [
+    "lem-sfb-coefficient-cocone-comparison-agreement"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
