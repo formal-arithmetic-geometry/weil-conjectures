@@ -18,36 +18,66 @@
  ],
  "proof": [
   {
-   "text": "The standing scheme has quasi-compact open complement, and the admissible coefficient ring is covered by the situation of [det-lem-formal-closed-support-derived]. Its first assertion gives the derived right adjunction and the displayed derived-Hom identification; its distinguished triangle and consequence give $R\\underline\\Gamma_ZK=i^*\\fib(K\\to Rj_*j^*K)$. These are exactly all clauses of part (1), with the same $X,Z,i,j,\\Lambda$.",
+   "text": "Apply formal_closed_support_adjunction, the existing realization of det-lem-formal-closed-support-adjunction for the canonical formal support kernel. Reverse the complementary-range equality. Its normalized ordinary adjunction gives all the adjunction fields and the pointwise Hom-complex formula; substitute the recorded derived-adjunction equalities in its localization triangle. Exactness of the closed direct image is also a consequence of this ordinary adjunction.",
    "uses": [
-    "det-lem-formal-closed-support-derived"
+    "det-lem-formal-closed-support-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
-    "place": "*Adjunction.* and *Fiber formula.*"
+    "place": "Adjunction, fiber formula, and stratum formula"
    }
   },
   {
-   "text": "For $a=i\\circ u$ and finite locally projective $L$, the existing [det-lem-formal-closed-support-stratum] applies with the same $X,Z,S,\\Lambda,L$ and $K$. Its displayed chain identifies $R\\operatorname{Hom}_X(a_!L,K)$ with $R\\Gamma(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK)$, naturally in $K$, which is exactly part (2).",
+   "text": "Use openClosedInternalHomFormulas first for the closed immersion i and then for the open stratum v. Construct the complementary closed subscheme by its vanishing ideal. The standing scheme is Noetherian, hence the stratum inclusion is quasi-compact. Specializing first-variable naturality to the identity makes both objectwise formulas natural isomorphisms in K. Identify the two closed support right adjoints by uniqueness of right adjoints.",
    "uses": [
-    "det-lem-formal-closed-support-stratum"
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "det-lem-formal-closed-support-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
-    "place": "*The stratum formula.*"
+    "place": "Adjunction, fiber formula, and stratum formula"
+   }
+  },
+  {
+   "text": "On each member of the given pro-etale cover, the finite-free retract is dualizable. Weakly etale pullback commutes with internal Hom, and the covering pullbacks jointly reflect isomorphisms; consequently the canonical internal evaluation for L is invertible globally and L is dualizable. Use the internal dual D=Hom(L,1) to identify ihom L with tensorLeft D. Derive this identification. The derived tensor comparison for single complexes and uniqueness of right adjoints identify derivedHom(L[0],-) with derivedTensor(D[0],-).",
+   "uses": [
+    "lem-proetale-finite-projective-dualizable",
+    "lem-proetale-pullback-internal-hom",
+    "lem-weil-pbc-condensed-finite-free-internal-hom-colimits",
+    "new-integral-residue-tensor-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
+    "place": "Adjunction, fiber formula, and stratum formula"
+   }
+  },
+  {
+   "text": "Global sections of a direct image are the global sections on its source. Direct image preserves K-injective complexes because its inverse-image left adjoint is exact, so this identity derives to RΓ after derived direct image. Apply it to the closed and open internal-Hom formulas, use the single-complex comparisons for i_* and v_!, and compose with the dual tensor isomorphism. This yields exactly the stated natural stratum isomorphism using the actual derived global-section functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
+    "place": "Adjunction, fiber formula, and stratum formula"
    }
   }
  ],
  "proof_deps": [
-  "det-lem-formal-closed-support-derived",
-  "det-lem-formal-closed-support-stratum"
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-proetale-finite-projective-dualizable",
+  "lem-proetale-pullback-internal-hom",
+  "lem-weil-pbc-condensed-finite-free-internal-hom-colimits",
+  "new-integral-residue-tensor-presentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/_section.md",
-  "place": "## Proof"
+  "group": "B8",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
+  "place": "Adjunction, fiber formula, and stratum formula"
  },
  "mathlib_searches": [
   {
@@ -163,5 +193,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Repair of return 71b965d0290e: imports and uses the existing formalClosedSupport functor from Sheaf.AlgebraicGeometry.FormalClosedSupportAdjunction throughout. The new theorem formalClosedSupportAssertions asserts the two-clause paper result, including the stratum formula; it is a different declaration from the existing functor definition, not a renamed copy of that definition."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261021T165808-L-2246816",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
