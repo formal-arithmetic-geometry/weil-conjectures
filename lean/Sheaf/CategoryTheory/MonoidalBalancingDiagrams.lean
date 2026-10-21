@@ -6,7 +6,6 @@ Authors: SHEAF group Q59
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
-public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-!
@@ -84,6 +83,29 @@ theorem monoidal_balancing_diagrams
           γ[F.obj S,((F.mapMod S).obj P).X] =
         (α_ (F.obj S) (F.obj S) (F.obj M.X)).inv ≫
           μ[F.obj S] ▷ F.obj M.X ≫ (Monoidal.μIso F S M.X).hom ≫ F.map q := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · simp only [Iso.trans_hom, whiskerRightIso_hom, Monoidal.μIso_hom, Category.assoc]
+    rw [← LaxMonoidal.μ_natural_left, ← comp_whiskerRight_assoc]
+    congr 2
+    simp only [obj.μ_def, LaxMonoidal.μ_natural_right_assoc,
+      ← F.map_comp]
+  · change (LaxMonoidal.μ F S R ▷ F.obj M.X ≫
+        LaxMonoidal.μ F (S ⊗ R) M.X) ≫
+        F.map ((α_ S R M.X).hom ≫ S ◁ γ[R,M.X]) =
+      (α_ (F.obj S) (F.obj R) (F.obj M.X)).hom ≫
+        F.obj S ◁ (LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X]) ≫
+          LaxMonoidal.μ F S M.X
+    simp only [F.map_comp, Category.assoc, LaxMonoidal.associativity_assoc,
+      MonoidalCategory.whiskerLeft_comp, LaxMonoidal.μ_natural_right]
+  · intro P q hq
+    change F.obj S ◁ (LaxMonoidal.μ F S M.X ≫ F.map q) ≫
+        (LaxMonoidal.μ F S P.X ≫ F.map γ[S,P.X]) =
+      (α_ (F.obj S) (F.obj S) (F.obj M.X)).inv ≫
+        (LaxMonoidal.μ F S S ≫ F.map μ[S]) ▷ F.obj M.X ≫
+          LaxMonoidal.μ F S M.X ≫ F.map q
+    simp only [MonoidalCategory.whiskerLeft_comp, comp_whiskerRight, Category.assoc,
+      LaxMonoidal.μ_natural_right_assoc, LaxMonoidal.μ_natural_left_assoc]
+    rw [← LaxMonoidal.associativity_inv_assoc]
+    simp only [← F.map_comp, hq]
 
 end CategoryTheory.Functor
