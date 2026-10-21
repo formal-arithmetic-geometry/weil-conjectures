@@ -23188,3 +23188,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:27 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 17:28 L: returned deliver/NY/lem-sfb-root-tower-puncture-invariance (reviewer RETURN: L: independent stage-2 immutable head 47122defe385: H2 / mechanical theorem-stmt_dep finding: the delivery adds theorem )
 - 17:29 L: merged deliver/NW/lem-sfb-integral-general-lfp-hom-finiteness (stage 2; reviewer FIX; parallel immutable checks)
+- 17:30 L: merged deliver/Q08/lem-sfb-discrete-lattice-cup-exterior (reviewer FIX; first push; new nodes: 1)

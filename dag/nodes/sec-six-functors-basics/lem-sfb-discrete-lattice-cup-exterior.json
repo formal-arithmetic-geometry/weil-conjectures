@@ -15,9 +15,79 @@
   "def-weil-size-convention",
   "lem-sfb-condensed-derived-restriction-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-discrete-lattice-koszul-resolution] to the trivial action on $P=R$. Every $T_i-1$ is zero, so its displayed differential vanishes and $K_R(R;1)=\\mathcal E_{R,r}$ with exactly the subset indexing of the statement. Choose the comparison supplied by [lem-sfb-lattice-koszul-triangulated-cup-comparison]; denote its component on $R$ by $\\lambda_R$. It is an isomorphism and its restriction to the degree-zero summand is the invariant inclusion followed by the derived unit. Let $u_I:R[-|I|]\\to K_R(R;1)$ be the chain inclusion with coefficient $1$ on subset $I$ and zero on all other subsets of that size.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Step 1."
+   }
+  },
+  {
+   "text": "For each coordinate $i$, take the character extension $0\\to R\\xrightarrow{x\\mapsto(x,0)}E_i\\xrightarrow{(x,y)\\mapsto y}R\\to0$ from [lem-sfb-condensed-derived-restriction-calculus], where $E_i=R\\oplus R$ and the $j$th standard generator acts by $T_j(x,y)=(x+\\mathbf1_{j=i}y,y)$. These operators commute, since composing them adds their upper-right entries; they are invertible by negating that entry. The sequence is exact on underlying internal modules and therefore equivariantly exact by the same cited node. Applying the Koszul construction gives a degreewise split short exact sequence of complexes; in every subset component choose $s(y)=(0,y)$ and $\\pi(x,y)=x$. This splitting is needed only as a splitting of underlying modules, not of actions.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Step 2."
+   }
+  },
+  {
+   "text": "By [lem-sc-p1-split-ses-boundary-comparison], the actual derived connecting morphism for the sequence of step 2 is the localization of the split cochain boundary with component $\\pi^{n+1}d_{K(E_i)}^n s^n$. In degree zero its composite with $u_\\varnothing$ has component at $\\{j\\}$ equal to $\\pi(T_j-1)(0,1)=\\mathbf1_{j=i}1_R$. Thus, after shifting, this composite is precisely $u_{\\{i\\}}:R[-1]\\to K_R(R;1)$. This is equality of derived morphisms represented by chain maps, not only equality of degree-one cohomology classes. The connecting-morphism compatibility of [lem-sfb-lattice-koszul-triangulated-cup-comparison], together with the defining normalization of the character in [lem-sfb-condensed-derived-restriction-calculus], consequently gives $\\delta_i=\\lambda_R\\circ u_{\\{i\\}}$.",
+   "uses": [
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Step 3. The split-boundary formula is Stacks Tag 011J, homology.tex lemma-ses-termwise-split-cochain, with its derived comparison in the cited node."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-lattice-koszul-triangulated-cup-comparison] with the coefficient algebra $B=R$ and trivial action. Its flatness condition holds since $R\\otimes_R-$ is the identity functor. In its displayed pairing every $T_A$ is the identity. If $I=\\{i_1<\\cdots<i_q\\}$, multiplication of $u_{\\{i_1\\}},\\ldots,u_{\\{i_q\\}}$ in this order gives $u_I$: inductively, when appending $i_k$, the only nonzero decomposition has $A=\\{i_1,\\ldots,i_{k-1}\\}$ and $C=\\{i_k\\}$, and there are no pairs $c<a$, so its sign is $+1$ and its coefficient is $1$. All other subset components are zero. This proves the claim by induction, starting with the empty-subset unit. The derived pairing equality in the cited node and step 3 now give $\\delta_{i_1}\\smile\\cdots\\smile\\delta_{i_q}=\\lambda_R\\circ u_I$, using the canonical identifications of tensor products of the single-term shifts.",
+   "uses": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Step 4."
+   }
+  },
+  {
+   "text": "Step 4 identifies the specified morphism $\\chi_{R,r}$ with $\\lambda_R$ on every summand of the finite direct sum $\\mathcal E_{R,r}$, including the unit summand. The universal property of that direct sum gives $\\chi_{R,r}=\\lambda_R$, so it is an isomorphism. For $r=0$ there is only the empty subset and the chosen comparison is the identity. For the zero ring every term and every displayed morphism is the zero object and its unique identity; all computations remain valid. No integer has been divided out and no assumption on the characteristic or topology of $R$ entered the proof.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Explicit character-extension and ordered-subset calculation; exact internal multiplicative comparison reference WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +123,24 @@
    "results": "[leanfinder] OK 8 hit(s); groupHomology.inhomogeneousChainsIso, Rep.FiniteCyclicGroup.resolution.π_f, Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso, Rep.standardComplex.xIso, Rep.FiniteCyclicGroup.homResolutionIso, Rep.standardResolution.extIso, Rep.barComplex.isoStandardComplex, groupCohomology.inhomogeneousCochainsIso",
    "date": "2026-10-22",
    "verdict": "no match: the hits give exterior-power objects or ordinary group cohomology and cyclic resolutions, not the ordered-cup derived isomorphism for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trivial free abelian group action on internal ring modules has derived invariants the zero differential exterior complex with coordinate cup normalization",
+   "results": "{\"t\": \"2026-10-21T17:18:47Z\", \"tool\": \"leansearch\", \"query\": \"Trivial free abelian group action on internal ring modules has derived invariants the zero differential exterior complex with coordinate cup normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.d₁₀_eq_zero_of_isTrivial\", \"groupCohomology.d₀₁_eq_zero\", \"groupCohomology.H0IsoOfIsTrivial_hom\", \"groupCohomology.H0IsoOfIsTrivial.congr_simp\", \"groupHomology.H1CoresCoinfOfTrivial\", \"groupCohomology.coboundaries₁_eq_bot_of_isTrivial\", \"groupCohomology.H0IsoOfIsTrivial_inv_apply\", \"groupHomology.H1CoresCoinfOfTrivial_f\"], \"digest\": \"05b68369b45ebff0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary representations, continuous topological cochains, Laurent algebra or exterior powers; none supplies the triangulated internal-module Koszul comparison with its derived cup pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered cup products of integer coordinate characters give a derived exterior complex isomorphism for the trivial action of Z power r on an arbitrary condensed ring",
+   "results": "{\"t\": \"2026-10-21T17:18:48Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered cup products of integer coordinate characters give a derived exterior complex isomorphism for the trivial action of Z power r on an arbitrary condensed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.exteriorPower.natIso₀\", \"Rep.standardComplex.xIso\", \"ModuleCat.exteriorPower.natIso₁\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"Rep.barComplex.isoStandardComplex\"], \"digest\": \"1138adce4590033e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary representations, continuous topological cochains, Laurent algebra or exterior powers; none supplies the triangulated internal-module Koszul comparison with its derived cup pairing"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
@@ -68,7 +152,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), dense-lattice input: algebraic trivial-lattice cup normalization, strengthening the normalization needed from the discrete Koszul calculation. Agent formulation; exact internal-module reference WANTED.",
+   "place": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. The inherited ancestor lookup returns None; the retained via chain leads to the direct-images proof paragraph.",
    "via": [
     "lem-sfb-dense-lattice-derived-invariants-comparison",
     "lem-sfb-tame-inertia-continuous-koszul",
@@ -80,5 +164,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-discrete-lattice-cup-exterior",
+  "worker": "stage1",
+  "summary": "Kept the full derived-morphism assertion and every coefficient hypothesis. Reused the existing Koszul derived-invariants isomorphism and generic derived split-boundary comparison; isolated the missing triangulated multiplicative Koszul enhancement as one statement-only prerequisite. Calculated the character extensions and all ordered cup products at chain level, including rank zero and the zero ring. Normalized doubled TeX slashes only.",
+  "blueprint": "Paragraph (3), ordinary open direct image; algebraic discrete-lattice normalization in the tame-boundary calculation, below the unit route. Agent expansion, not an assertion proved in the blueprint paragraph. Steps 1--5 supply the discrete-lattice coordinate-cup normalization required by the inherited dense-lattice comparison. The mechanical ancestor command returns None; preserved the inherited null ancestry rather than inventing an imported ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-split-ses-boundary-comparison",
+    "why": "Generic comparison of a degreewise split complex boundary with the canonical derived boundary; the lattice unit has no such general boundary lemma, and this does not replace its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-79608c406",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-79608c406 (reviewer sub-agent of L); spot-checked: FIX: I read the item, the new node, all cited statements and the blueprint source in full. Item statement unchanged from the live/side-live text; not dropped or superseded; no repair note; no SGA. Source: blueprint main-20261015 direct-images proof paragraph (3), which assembles proper/open images and has no lattice calculation, so the agent proof_origin and the WANTED line are right. Step 1: Koszul resolution with T_i=1 has zero differential, so K_R(R;1)=E_{R,r} and lambda restricts to the unit in degree 0. Step 2: E_i matches the restriction-calculus extension j(x,y)=(x+a(j)y,y); split degreewise, not equivariantly. Step 3: I recomputed the split boundary s^0 d r^1 (diagrammatic): (T_j-1)(0,1)=(1_{j=i},0), so the Koszul boundary composed with u_empty is u_{i}[1]. With lem-sc-p1 (accepted generic tool use) and the new node's triangulated compatibility this gives delta_i=lambda u_{i} as derived maps. Step 4: with trivial action, u_A star u_C = eps(A,C) u_{A cup C}, and eps=+1 when appending a larger index; induction is fine. Step 5: biproduct universal property; r=0 and the zero ring checked. New node: statement only, self-contained, not a restatement of the item; DAG search found no duplicate. Truth: K_R = Hom_{R[D]}(Kos,-) is exact and agrees with Gamma on injectives, so the comparison is unique and triangulated. I checked by machine that the twisted pairing satisfies Leibniz and is associative and unital (r=3, B = Z-valued functions on (Z/3)^3 with translations). Change (B3/C4): added one sentence to lem-sfb-lattice-koszul-triangulated-cup-comparison saying that for B=R with trivial action cup_R is the unital derived cup of lem-sfb-condensed-derived-restriction-calculus, which item step 4 needs. Advisory: the identification R[-1]^{tensor q} = R[-q] in the inherited item statement is implicit; step 4 uses the same one on both sides.; 1 file(s) fixed by the reviewer"
  }
 }
