@@ -19,94 +19,47 @@
  ],
  "proof": [
   {
-   "text": "First use the constant sections of $A_T$ to regard every $A_T$-module sheaf as a sheaf of $A$-modules. The two sheaf tensor products agree: an $A$-bilinear map of sheaves is $A_T$-balanced because a section of $A_T$ is locally constant, so the balancing equation reduces on a cover to balancing by an element of $A$ and then glues. This uses the sheafified tensor universal property, not equality of the sectionwise tensor products. Apply clause (1) of lem-pod-etale-stalk-tensor-scalar with $\\Lambda=A$ and invert its isomorphism. It gives precisely $\\gamma_{M,N}:S(M\\otimes_{A_T}N)\\cong SM\\otimes_A SN$, natural in both module sheaves, with the required formula on pure tensor germs. Thus for maps $u:M\\to M'$ and $v:N\\to N'$,\n$\\gamma_{M',N'}S(u\\otimes v)=(Su\\otimes Sv)\\gamma_{M,N}$.\nThe coefficient action is the action of constant germs, so this is the stated $A$-linear comparison.",
+   "text": "Let S be the lifted geometric-point sheaf fiber with coefficients in A-modules. Its existing strong monoidal structure supplies the canonical oplax tensor comparison delta and its invertibility. The skyscraper sheaf adjunction makes S preserve coproducts; the proved Point.sheafFiber_additive lemma supplies additivity. These are the generic interfaces used below, without converting through abelian sheaves.",
    "uses": [
-    "def-kun-constant-sheaf",
-    "def-pur-sheaf-tensor-product",
-    "lem-pod-etale-stalk-tensor-scalar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback; sheaf tensor universal property immediately preceding it; geometric-point specialization"
-   }
-  },
-  {
-   "text": "For a small family $(M_i)$, the module-sheaf colimit theorem identifies the underlying abelian sheaf of $\\bigoplus_i M_i$ with the abelian-sheaf coproduct. Apply lem-kun-stalks-commute-colimits to this abelian diagram. Hence the canonical map\n$k:\\bigoplus_i SM_i\\longrightarrow S(\\bigoplus_i M_i)$, with $k j_i=S(\\iota_i)$, is bijective on underlying abelian groups. Its maps are $A$-linear because each stalk map sends $a m_{\\bar t}$ to $a(S\\iota_i)(m_{\\bar t})$; its inverse is therefore $A$-linear as well. Write $\\alpha=k^{-1}$. This explicitly obtains module coproduct preservation from abelian coproduct preservation. Also $S(u+v)=Su+Sv$ and $S(-u)=-Su$: on a germ $m_{\\bar t}$ both sides are respectively $(u(m)+v(m))_{\\bar t}$ and $(-u(m))_{\\bar t}$. Thus $S$ is additive and commutes with the signs used below.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-kun-stalks-commute-colimits",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB, label lemma-limits-colimits; Tags 04EN and 04EP, labels lemma-stalk-exact and lemma-stalk-exact-abelian; stalk module operations before Tag 04EQ"
-   }
+   "elementary": true
   },
   {
-   "text": "For each $n$, put $I_n=\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$. Define\n$\\theta^n=(\\bigoplus_{I_n}\\gamma_{C^p,D^q})\\alpha$.\nIt is an isomorphism: its inverse is the map $\\bigoplus_{I_n}SC^p\\otimes_A SD^q\\to S(\\bigoplus_{I_n}C^p\\otimes_{A_T}D^q)$ whose restriction to summand $(p,q)$ is $S(\\iota_{p,q})\\gamma_{C^p,D^q}^{-1}$. The two composites restrict to the identity on every coproduct summand and hence are identities by the colimit universal property. By construction\n$\\theta^n S(\\iota_{p,q})=\\iota'_{p,q}\\gamma_{C^p,D^q}$.\nIn particular the maps $S(\\iota_{p,q})$ jointly determine maps out of the source degree, since $k$ in step 2 is an isomorphism.",
+   "text": "For each pair C,D, take asIso of HomologicalComplex.mapBifunctorComparison applied to Functor.OplaxMonoidal.deltaNatTrans S and ComplexShape.up Z. The existing source-library construction descends the ordinary comparison from the total-tensor coproduct summands, checks the two signed differential terms using additivity and naturality, and constructs the inverse from the inverse ordinary comparisons. Its map_ιMapBifunctor_mapBifunctorComparisonX equation gives exactly the required normalization. The strong monoidal structure makes each component and hence this chain comparison invertible.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, last paragraph: constituents of the total comparison; explicit coproduct construction"
-   }
+   "elementary": true
   },
   {
-   "text": "Check the chain equation on the source coprojections. Abbreviate $\\gamma_{C^p,D^q}$ by $\\gamma_{p,q}$, and let $d_{\\rm tot}$ and $d'_{\\rm tot}$ be the two total differentials. For $p+q=n$, additivity from step 2 and the total differential formula give\n\\[\n\\begin{aligned}\n\\theta^{n+1}S(d_{\\rm tot}^n)S(\\iota_{p,q})\n&=\\iota'_{p+1,q}\\gamma_{p+1,q}S(d_C^p\\otimes1)\n +(-1)^p\\iota'_{p,q+1}\\gamma_{p,q+1}S(1\\otimes d_D^q)\\\\\n&=\\iota'_{p+1,q}(S(d_C^p)\\otimes1)\\gamma_{p,q}\n +(-1)^p\\iota'_{p,q+1}(1\\otimes S(d_D^q))\\gamma_{p,q}\\\\\n&=d_{\\rm tot}'{}^n\\iota'_{p,q}\\gamma_{p,q}\n=d_{\\rm tot}'{}^n\\theta^n S(\\iota_{p,q}).\n\\end{aligned}\n\\]\nThe middle equality is ordinary tensor naturality from step 1, separately for $(d_C^p,1)$ and $(1,d_D^q)$. Joint determination from step 3 proves the chain equation. Each $\\theta^n$ is invertible, and multiplying this equation by the degreewise inverses proves that they too form a chain map. Hence $\\theta$ is a chain isomorphism.",
+   "text": "Apply the proved HomologicalComplex.mapBifunctorComparison_naturality to the two chain maps f and g. This is the required simultaneous naturality equation, with the same signed total tensor on both sides.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pod-etale-stalk-tensor-scalar"
+    "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, total comparison; expanded check of the signed differential"
-   }
+   "elementary": true
   },
   {
-   "text": "For chain maps $f:C\\to C'$ and $g:D\\to D'$, the total tensor map restricts on bidegree $(p,q)$ to $f^p\\otimes g^q$. Therefore\n\\[\n\\begin{aligned}\n\\theta_{C',D'}^n S((f\\otimes g)^n)S(\\iota_{p,q})\n&=\\iota'_{C',D',p,q}\\gamma_{C'^p,D'^q}S(f^p\\otimes g^q)\\\\\n&=\\iota'_{C',D',p,q}(Sf^p\\otimes Sg^q)\\gamma_{C^p,D^q}\\\\\n&=((Sf\\otimes Sg)^n)\\theta_{C,D}^n S(\\iota_{p,q}).\n\\end{aligned}\n\\]\nThe middle equality is exactly step 1's simultaneous naturality. Joint determination gives equality in every degree, hence equality of chain maps. This proves naturality in both complexes with the specified normalization.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pod-etale-stalk-tensor-scalar"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, bifunctoriality; expanded coprojection equation"
-   }
-  },
-  {
-   "text": "Any chain isomorphism with the displayed normalization has the same composite with every $S(\\iota_{p,q})$ in each degree as $\\theta$. Step 3 and the coproduct universal property force its degree maps, and consequently the chain map, to equal $\\theta$. The construction uses only the small countable sets $I_n$ (each is indexed by $p\\in\\mathbf Z$ with $q=n-p$). Every differential sends one summand into just the two indicated summands. Thus all formulas define maps on direct sums even for unbounded complexes, and no flatness or boundedness was used.",
+   "text": "For any other normalized family, use function extensionality in C,D, Iso.ext, and chain-map extensionality degree by degree. HomologicalComplex.mapBifunctor.hom_ext_of_map says it suffices to precompose with S of every total-tensor coprojection. The two normalization equations have identical right hand sides, so their transitive equality proves uniqueness. The construction uses the same direct-sum totalization for arbitrary unbounded complexes and imposes no flatness hypothesis.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, direct-sum total comparison; uniqueness from normalization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-constant-sheaf",
-  "def-pur-sheaf-tensor-product",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-kun-stalks-commute-colimits",
   "def-weil-pbc-geometric-stalks",
   "def-pc-tensor-complex-sheaves",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, label lemma-pullback-tensor-product, last paragraph, together with sites-modules.tex Tags 03EL and 03DB. Explicit unbounded cochain normalization, signed differential, two-variable naturality and uniqueness are written out here."
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final paragraph; specialize the existing proved source-library HomologicalComplex.mapBifunctorComparison, its summand formula, naturality and coproduct extensionality. Ordinary monoidality is the existing geometric-point sheaf-fiber structure; coproduct preservation and additivity follow from the skyscraper adjunction."
  },
  "mathlib_searches": [
   {
@@ -250,11 +203,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-kun-stalks-commute-colimits",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -286,5 +235,15 @@
   "group": "Q103",
   "result": "pass",
   "note": "Clause-by-clause match with the node: Scheme.{u} T, A : Type (u+1) (project convention), geometric point t, A_T-module sheaves as Sheaf T.smallEtaleTopology (ModuleCat A) (landed encoding, same as parent), stalk = ulift sheafFiber of pointSmallEtale t, both totals = CochainComplex.mapBifunctor (curriedTensor _) with (-1)^p sign and coproducts. ∃! over the whole family of chain isos; summand normalization S(ι_pq)≫θ^n = δ≫ι'_pq for all p+q=n; naturality in f,g. Probes: the found sheaf monoidal instance is rfl to Sheaf.monoidalCategory; μ≫δ=𝟙 by Monoidal.μ_δ, so δ is the inverse of the germ-characterized μ from etale_stalk_tensor_unique. No flatness or boundedness assumed; no hollow defs (two Prop instances); docstrings OK; lean.statement verbatim; only the lean record changed; not dropped. Compile: delivered file timed out at 60 s three times at load 145-176 (10-15 s CPU each); probe with the same imports clean in 14.1 s; worker's compiles clean at 46.8/42.8 s with preflight OK, so retry landing at lower load if it times out. Advisory: coproduct instances duplicate the parent's (Prop-valued, acceptable); ulift vs un-lifted point differs from the parent; three proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T120927-L-4004145",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

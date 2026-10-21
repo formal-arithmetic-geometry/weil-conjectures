@@ -12,11 +12,11 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 /-!
 # Canonical geometric stalk comparison for signed total tensor complexes
@@ -125,6 +125,37 @@ theorem etale_stalk_total_tensor_comparison :
             ((((pointSmallEtale t).ulift.{u + 1}.sheafFiber
               (A := ModuleCat.{u + 1} A)).mapHomologicalComplex (.up ℤ)).map g)
             (curriedTensor _) (.up ℤ)) := by
-  sorry
+  let S := (pointSmallEtale t).ulift.{u + 1}.sheafFiber
+    (A := ModuleCat.{u + 1} A)
+  let : S.Additive := (pointSmallEtale t).ulift.{u + 1}.sheafFiber_additive
+  let : PreservesColimitsOfSize.{0, 0} S := inferInstance
+  let θ (C D : CochainComplex
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :=
+    asIso (HomologicalComplex.mapBifunctorComparison
+      (Functor.OplaxMonoidal.δNatTrans S) (.up ℤ) C D)
+  have hθ (C D : CochainComplex
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+      (p q n : ℤ) (h : p + q = n) :
+      S.map (CochainComplex.ιMapBifunctor C D (curriedTensor _) p q n h) ≫
+          (θ C D).hom.f n =
+        Functor.OplaxMonoidal.δ S (C.X p) (D.X q) ≫
+          CochainComplex.ιMapBifunctor
+            ((S.mapHomologicalComplex (.up ℤ)).obj C)
+            ((S.mapHomologicalComplex (.up ℤ)).obj D) (curriedTensor _) p q n h := by
+    exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
+      (Functor.OplaxMonoidal.δNatTrans S) (.up ℤ) C D p q n h
+  refine ⟨θ, ⟨hθ, ?_⟩, ?_⟩
+  · intro C C' D D' f g
+    exact HomologicalComplex.mapBifunctorComparison_naturality
+      (Functor.OplaxMonoidal.δNatTrans S) (.up ℤ) f g
+  · intro ψ hψ
+    funext C D
+    apply Iso.ext
+    apply HomologicalComplex.Hom.ext
+    funext n
+    apply HomologicalComplex.mapBifunctor.hom_ext_of_map
+      (K₁ := C) (K₂ := D) (F := curriedTensor _) (c := .up ℤ) S
+    intro p q h
+    exact (hψ.1 C D p q n h).trans (hθ C D p q n h).symm
 
 end AlgebraicGeometry.Scheme
