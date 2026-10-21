@@ -22,9 +22,68 @@
   "def-weil-pbc-proetale-operations",
   "lem-weil-proetale-direct-image-restriction-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D_n=Rp_{*,n}$ and $J_n=j_!$ at coefficient level $P_n$, and distinguish $S_n^X,S_n^V,S_n^Y$ when necessary. Let $k_n:K_{n+1}\\to S_n^XK_n$ be quotient reduction. The strict-system assertion of [lem-sf-integral-open-reduction-comparison], evaluated at the consecutive quotient, gives\n$$S_n^V(\\alpha_n)\\circ d_n=e_n(K_n)\\circ J_{n+1}(k_n)\\circ\\alpha_{n+1},$$\nwhere $e_n:J_{n+1}S_n^X\\xrightarrow{\\sim}S_n^VJ_n$ is the open-extension/scalar-restriction identification specified in [lem-sf-compact-support-restriction-of-scalars]. These are the same open identifications: both act as the identity on the underlying open sections with the quotient scalar action. Thus the displayed equation uses the canonical $\\alpha_n$ and actual quotient maps, rather than arbitrarily chosen levelwise isomorphisms. The open-comparison hypotheses hold because $j$ is quasi-compact, $K$ is derived complete, and $\\ell$ is invertible on all the schemes over $K_0$.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I; the specified strict quotient square of the cited open-reduction theorem"
+   }
+  },
+  {
+   "text": "Put $b_n=D_n(\\alpha_n)$, $u_n=C_n(L_n)\\circ D_{n+1}(d_n)$, and\n$$v_n=C_n(J_nK_n)\\circ D_{n+1}(e_n(K_n))\\circ D_{n+1}(J_{n+1}(k_n)).$$\nBy the formula specifying the comparison in [lem-sf-compact-support-restriction-of-scalars], $v_n$ is exactly the compact-support transition before restriction to $R_Y$; $u_n$ is the proper-image transition in the statement. The application uses the given separated finite-type $f$, its same compactification $c$, and the quotient homomorphism $P_{n+1}\\to P_n$ of finite commutative rings. Finiteness and these quotient maps are part of [def-weil-l-adic-coefficient-extension]. Hence $\\operatorname{Res}_{n+1}u_n=t_n^N$ and $\\operatorname{Res}_{n+1}v_n=t_n^M$, with the specified scalar-restriction identifications at their targets.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+    "place": "Integral compact-support formula: the finite-level quotient transitions, expanded by the defining composite in the scalar-restriction theorem"
+   }
+  },
+  {
+   "text": "Naturality in the argument of $C_n$ from [lem-weil-proetale-direct-image-restriction-of-scalars], applied to $\\alpha_n:L_n\\to J_nK_n$, says\n$$S_n^Y(b_n)\\circ C_n(L_n)=C_n(J_nK_n)\\circ D_{n+1}(S_n^V(\\alpha_n)).$$\nCompose with $D_{n+1}(d_n)$ and substitute Step 1. Functoriality of $D_{n+1}$ gives the entire transition calculation:\n$$\\begin{aligned}\nS_n^Y(b_n)\\circ u_n\n&=C_n(J_nK_n)\\circ D_{n+1}(S_n^V(\\alpha_n)\\circ d_n)\\\\\n&=C_n(J_nK_n)\\circ D_{n+1}(e_n(K_n))\\circ D_{n+1}(J_{n+1}(k_n))\\circ D_{n+1}(\\alpha_{n+1})\\\\\n&=v_n\\circ b_{n+1}.\n\\end{aligned}$$\nThe direct-image theorem allows every scheme morphism and these finite coefficient rings, so it applies to $p$ without any bound or constructibility condition on its arguments.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+    "place": "Integral compact-support formula: agent-written naturality calculation for its consecutive quotient transitions"
+   }
+  },
+  {
+   "text": "Restriction of scalars is termwise as in [def-weil-integral-derived-restriction-of-scalars]. The equality $\\operatorname{Res}_{n+1}S_n^Y=\\operatorname{Res}_n$ holds on objects and arrows: for $a\\in R_Y$ both actions are multiplication by its image in $(P_n)_Y$. Applying $\\operatorname{Res}_{n+1}$ to Step 3 therefore gives $\\beta_n\\circ t_n^N=t_n^M\\circ\\beta_{n+1}$. Each $\\beta_n$ is invertible, since functors carry the inverse of $\\alpha_n$ to an inverse. The consecutive equations are precisely a morphism of inverse systems [def-weil-inverse-system], and their composites give the equations for every $m\\ge n$. Composing the consecutive equation with the component inverses gives $t_n^N\\circ\\beta_{n+1}^{-1}=\\beta_n^{-1}\\circ t_n^M$. Thus the component inverses also form a system morphism, whose two composites with $\\beta$ are the identity componentwise. This proves the claimed system isomorphism. Every input used above holds for the arbitrary derived-complete $K$ of the statement.",
+   "uses": [
+    "def-weil-integral-derived-restriction-of-scalars",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0030 (definition-system-over-poset), componentwise morphisms and composition; scalar restriction as in the cited definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+  "place": "Integral derived-limit formula; explicit formal quotient-transition computation using the existing canonical open and direct-image comparisons, with Stacks Tags 0GL1 and 0E8I as source of the open tensor comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +126,45 @@
    "results": "0 hits: none; directory Mathlib/Algebra. Hits concern ordinary module completion, scalar restriction or compactly supported functions; none identifies these derived pro-etale coefficient towers.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ll]owerShriek|[Jj][Ss]hriek|[Ee]xtensionByZero|[Cc]ompactSupport).*([Tt]ower|[Rr]eduction)|([Tt]ower|[Rr]eduction).*([Ll]owerShriek|[Jj][Ss]hriek)",
+   "results": "0 hits: none. Read returned types: local cohomology diagrams, ordinary sheaf restriction, compactly supported functions, and general comparison functors do not state this pro-etale compact-support tower identification.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of coefficient restriction and open extension by zero identifies the derived direct image inverse system with compactly supported reductions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict_map, Finsupp.restrictSupportEquiv_symm_apply_coe, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.StructureSheaf.toOpen_res, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, CochainComplex.ConnectData.restrictionGEIso_inv_f. Read returned types: local cohomology diagrams, ordinary sheaf restriction, compactly supported functions, and general comparison functors do not state this pro-etale compact-support tower identification.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"NatIso\"",
+   "results": "0 hits: none. Read returned types: local cohomology diagrams, ordinary sheaf restriction, compactly supported functions, and general comparison functors do not state this pro-etale compact-support tower identification.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived proper direct image reduction tower of extension by zero is naturally isomorphic to the compact support reduction tower, respecting quotient transitions",
+   "results": "8 hits: ComplexShape.Embedding.extendHomotopyFunctorFactors, localCohomology.diagramComp, CompactlySupportedContinuousMap.compLinearMap, HomologicalComplex.pOpcycles_extendOpcyclesIso_hom, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, HomologicalComplex.pOpcycles_extendOpcyclesIso_inv, Condensed.profiniteSolidification, CondensedMod.IsSolid.isIso_solidification_map. Read returned types: local cohomology diagrams, ordinary sheaf restriction, compactly supported functions, and general comparison functors do not state this pro-etale compact-support tower identification.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of functors applied to coefficient quotient maps induces an isomorphism of inverse systems of derived sheaves",
+   "results": "8 hits: localCohomology.diagramComp, CategoryTheory.Functor.IsCoverDense.Types.appIso, CategoryTheory.GrothendieckTopology.diagramCompIso, CategoryTheory.Functor.IsCoverDense.sheafIso, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι, CategoryTheory.Functor.IsCoverDense.presheafIso, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso, CategoryTheory.Functor.IsCoverDense.Types.sheafIso. Read returned types: local cohomology diagrams, ordinary sheaf restriction, compactly supported functions, and general comparison functors do not state this pro-etale compact-support tower identification.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-compact-support-constructible",
@@ -90,5 +184,29 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-compact-support-proper-image-tower",
+  "worker": "stage1",
+  "summary": "No new nodes. Expanded the strict open-reduction quotient square, the specified compact-support restriction composite, and the direct-image naturality square into an explicit equality of consecutive transitions. Constructed the inverse system map componentwise. Statement and imported metadata are unchanged; no constructibility or Tor-amplitude assumption was added.",
+  "blueprint": "The ancestor def-weil-integral-rational-qbar-compact-support, current main-20261015 order 1849, integral formula Rf_!K=R lim Res_n Rf_{!,n}K_n: the steps justify replacing its compact-support tower by the proper-image tower of completed open extension (the original parent split step 8).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Its specified strict quotient-transition square supplies the canonical open reduction comparison. This is a generic coefficient-system comparison; the current unit does not give a second such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-open-reduction-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NA-51d6b12a8",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-51d6b12a8 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes and its statement is unchanged from side-live. Sources checked: Bhatt–Scholze Def 6.7.6 (PDF p.56) and the main-20261015 blueprint ancestor def-weil-integral-rational-qbar-compact-support (order 1849); the tower identity is not in BS, so proof_origin=agent is correct. Step 1: lem-sf-integral-open-reduction-comparison applies to j: X→V, since j is quasi-compact, K is derived complete and ℓ is invertible on X and V via Y→Spec K_0. Its strict quotient-transition clause gives S(α_n)∘d_n = e_n∘J(k_n)∘α_{n+1}; e_n is the same termwise j_!Res=Res j_! identification as in lem-sf-compact-support-restriction-of-scalars. Step 2: v_n is exactly that node's comparison for φ = P_{n+1}→P_n and f̄ = p, in the stated order. Step 3: naturality of C_n along α_n, then substituting Step 1, gives S(b_n)∘u_n = v_n∘b_{n+1}; recomputed and elementary. Step 4: Res_{n+1}∘S_n = Res_n holds on the nose, and applying it gives the def-weil-inverse-system morphism condition; the component inverses also commute. Edge cases checked: K=0, j=id, p=id, X empty, n=1, unbounded K; no boundedness or constructibility is needed anywhere. No cycle: the 3073-node closure does not reach the item. The item is not dropped, has no repair note and cites no SGA. Accepted tool_uses: lem-sf-integral-open-reduction-comparison (declared) and lem-weil-proetale-direct-image-restriction-of-scalars (undeclared; it is already a tool_use of the same-unit lem-sf-compact-support-restriction-of-scalars, so the maintainer should record it at merge). NE delivered the same item in parallel. No fixes written."
+ }
 }
