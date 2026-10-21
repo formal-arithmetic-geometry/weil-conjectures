@@ -2,7 +2,7 @@
  "id": "lem-sfb-kflat-scalar-comparison-normalization",
  "kind": "statement",
  "title": "Representative and adjunction normalization of scalar pullback comparison",
- "statement": "Let $h:\\operatorname{Sh}(C_X)\\to\\operatorname{Sh}(C_Y)$ be a morphism of topoi on sites small in the module universe [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Let $A_Y\\to B_Y$ be a map of commutative ring sheaves and set $A_X=h^{-1}A_Y$, $B_X=h^{-1}B_Y$. Write $h_R^*=h^{-1}$ on $R$-modules, $r_T$ for scalar restriction, and $T_T=B_T\\otimes_{A_T}^{\\mathbf L}-$ on ordinary unbounded module-sheaf derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-sheaf-restrict-scalars, lem-pur-sheaf-ring-derived-coefficient-adjunction]. Use sheafified balanced tensor [def-pur-sheaf-tensor-product]. The ordinary $B_X$-linear comparison\n$$\\chi_h:h_B^*(B_Y\\otimes_{A_Y}P)\\longrightarrow B_X\\otimes_{A_X}h_A^*P$$\nis the coequalizer comparison induced by inverse image of the two balancing arrows. It is invertible and preserves $p\\mapsto1\\otimes p$.\n\nFor every flat-term K-flat complex $P$ [def-pc-flat-sheaf-modules, def-pc-kflat-complex], the inverse of $Q(\\chi_h)_P$, under the canonical K-flat representative identifications, is exactly the scalar-adjunction mate $\\theta_h:T_Xh_A^*\\to h_B^*T_Y$ of the action identification $h_A^*r_Y=r_Xh_B^*$. Thus this mate is an isomorphism on the entire unbounded derived category. For two composable such inverse images $f,g$, using the canonical ring and inverse-image composition maps,\n$$\\theta_{gf}=(f_B^*\\theta_g)\\circ(\\theta_f g_A^*).$$\nThe comparison for the identity inverse image is the identity. No flatness of $A_Y\\to B_Y$ is assumed.",
+ "statement": "Let $h:\\operatorname{Sh}(C_X)\\to\\operatorname{Sh}(C_Y)$ be a morphism of topoi on sites small in the module universe [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Let $A_Y\\to B_Y$ be a map of commutative ring sheaves and set $A_X=h^{-1}A_Y$, $B_X=h^{-1}B_Y$. Write $h_R^*=h^{-1}$ on $R$-modules, $r_T$ for scalar restriction, and $T_T=B_T\\otimes_{A_T}^{\\mathbf L}-$ on ordinary unbounded module-sheaf derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-sheaf-restrict-scalars, lem-pur-sheaf-ring-derived-coefficient-adjunction]. Use sheafified balanced tensor [def-pur-sheaf-tensor-product]. The ordinary $B_X$-linear comparison\n$$\\chi_h:h_B^*(B_Y\\otimes_{A_Y}P)\\longrightarrow B_X\\otimes_{A_X}h_A^*P$$\nis the coequalizer comparison induced by inverse image of the two balancing arrows. It is invertible and preserves $p\\mapsto1\\otimes p$.\n\nFor every flat-term K-flat complex $P$ [def-pc-flat-sheaf-modules, def-pc-kflat-complex], the inverse of $Q(\\chi_h)_P$, under the canonical K-flat representative identifications, is exactly the scalar-adjunction mate $\\theta_h:T_Xh_A^*\\to h_B^*T_Y$ [def-weil-pbc-adjunction-mate] of the action identification $h_A^*r_Y=r_Xh_B^*$. Thus this mate is an isomorphism on the entire unbounded derived category. For two composable such inverse images $f,g$, using the canonical ring and inverse-image composition maps,\n$$\\theta_{gf}=(f_B^*\\theta_g)\\circ(\\theta_f g_A^*).$$\nThe comparison for the identity inverse image is the identity. No flatness of $A_Y\\to B_Y$ is assumed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
   "place": "(1), ordinary balanced coequalizer followed by K-flat derivation and geometric-composition normalization; agent-extracted technical lemma, supported by Stacks sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition)"
@@ -16,11 +16,115 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply exactness of geometric inverse image to the two ring sheaves $A_Y,B_Y$. Thus $h_A^*,h_B^*$ are exact additive functors with the transported actions, and their termwise functors induce functors on the unbounded derived categories. The exact-functor localization comparison identifies $h_R^*Q(K)$ with $Q(h_R^*K)$ for every complex $K$, without resolving $K$. Restricting the transported $B_X$-action along $A_X\\to B_X$ gives the same action as first restricting along $A_Y\\to B_Y$ and then applying $h^{-1}$: both action maps are the inverse image of the original action with its scalar argument restricted. This gives the natural action identification $a_h:h_A^*r_Y\\cong r_Xh_B^*$, on complexes and after localization.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), inverse-image assertion; Tag 03D2 (lemma-pullback-module), transported action; exact localization refinement"
+   }
+  },
+  {
+   "text": "The transported module inverse images $h_A^*,h_B^*$ of step 1 are algebraic inverse-image presentations of $h^{-1}$ for $A_Y$ in $A_X$ and $B_Y$ in $B_X$: the geometric module construction gives functors $I$ with $|I(M)|\\cong h^{-1}|M|$ transporting addition and scalar action through the ring identification. Use the inverse-image tensor comparison with $R=A_Y$, $M=B_Y$ (regarded as an $A_Y$-module), and $N=P^n$ in each degree. Its generalized-pairing formula is\n$h^{-1}(b\\otimes p)\\mapsto h^{-1}b\\otimes h^{-1}p$.\nIt is precisely the specified balanced coequalizer comparison: inverse image transports the action maps, and preserves their coequalizer, a cokernel of their difference, by step 1. Its tensor comparison identifies the two balancing diagrams. The $B_X$-action on either tensor is induced by multiplication on the first factor; the displayed pairing takes multiplication by $b'$ to multiplication by $h^{-1}b'$. Hence the comparison is $B_X$-linear, so its inverse as an $A_X$-linear isomorphism is also $B_X$-linear. The same formula with $b=1$ gives $\\chi_h h_A^*(\\iota_Y)=\\iota_X$, after $a_h$, where $\\iota_T(p)=1\\otimes p$. Naturality in $P^n$ makes these maps commute with differentials. This proves the ordinary assertion, including its unit normalization, for every complex, not just K-flat ones. Here formulas mean morphisms on generalized pairings, followed by sheafification, rather than a claim that inverse image is sectionwise evaluation.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), applied to inverse image with transported scalars, and its bilinear universal property"
+   }
+  },
+  {
+   "text": "Let $P$ now be K-flat with flat terms. Apply preservation of flat-term K-flat complexes to the ringed-topos morphism $(h,A_X=h^{-1}A_Y)$ with identity structural ring map. It gives that $h_A^*P$ is K-flat with flat terms. Derived change of rings therefore computes $T_Y(QP)$ by $Q(B_Y\\otimes_{A_Y}P)$ and $T_X(h_A^*QP)$ by $Q(B_X\\otimes_{A_X}h_A^*P)$. Combined with the exact localization comparisons of step 1, these are the canonical representative identifications on the two ends of $Q(\\chi_h)_P$. The derived change-of-rings computation is natural on these models and compatible with changing K-flat resolution; no exactness or flatness of $B_T\\otimes_{A_T}-$ is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat); Tag 06YY (lemma-derived-base-change), scalar specialization"
+   }
+  },
+  {
+   "text": "Write $c_{Y,P}$ and $c_{X,h_A^*P}$ for the representative identifications of step 3, with tensor factors reversed by $p\\otimes b\\mapsto b\\otimes p$ if necessary. Under them the scalar-adjunction units are $Q(\\iota_Y)$ and $Q(\\iota_X)$, by the normalized derived coefficient adjunction. Let $\\alpha_P:T_Xh_A^*(QP)\\to h_B^*T_Y(QP)$ be $Q(\\chi_h^{-1})_P$ transported by these identifications. The unit equation in step 2 gives\n$$r_X(\\alpha_P)\\circ\\eta_{X,h_A^*(QP)}=(a_h)_{T_Y(QP)}\\circ h_A^*(\\eta_{Y,QP}).$$\nThe left side is the $T_X\\dashv r_X$ transpose of $\\alpha_P$. By the defining inverse mate formula, the right side is the transpose of $\\theta_{h,QP}$: insert the $Y$-unit, apply $a_h$, then transpose under $T_X\\dashv r_X$. The adjunction Hom bijection is injective, so $\\alpha_P=\\theta_{h,QP}$. This identifies the specified mate, not just some isomorphism between its endpoints.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), normalized unit and transpose as in the cited derived coefficient adjunction; mate formula of Tag 07A7 (remark-base-change)"
+   }
+  },
+  {
+   "text": "For an arbitrary $K\\in D(A_Y)$, choose a complex representing $K$ and a flat-term K-flat resolution $P\\to K$ by the site resolution theorem. Its localization $e:QP\\xrightarrow{\\sim}K$ is invertible. Step 4 makes $\\theta_{h,QP}$ invertible. Naturality of the mate gives\n$$\\theta_{h,K}=h_B^*T_Y(e)\\circ\\theta_{h,QP}\\circ(T_Xh_A^*(e))^{-1}.$$\nAll three factors are isomorphisms, so $\\theta_h$ is invertible on the entire unbounded derived category. This argument does not assume that extension of scalars is exact or that $K$ is bounded.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "For $X\\xrightarrow fY\\xrightarrow gZ$, the action square $a_{gf}$ is the pasted action square $(a_f g_B^*)\\circ(f_A^*a_g)$ after the canonical composition identifications. Indeed both carry the $A_Z$-action to its inverse image under $f^{-1}g^{-1}$ and then restrict along the same ring map; the canonical ring and inverse-image composition maps identify these actions. Apply mate pasting, clause (1), to $T_Z\\dashv r_Z$, $T_Y\\dashv r_Y$, $T_X\\dashv r_X$, with vertical functors $g_A^*,g_B^*$ then $f_A^*,f_B^*$. The mates of $\\theta_g$ and $\\theta_f$ are $a_g$ and $a_f$ by their definition, so the mate of $(f_B^*\\theta_g)\\circ(\\theta_f g_A^*)$ is exactly $a_{gf}$. Bijectivity of the mate correspondence gives the asserted formula for $\\theta_{gf}$, with the stated canonical composition maps.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_vcomp (line 170); sites-cohomology.tex Tag 0D6D (lemma-derived-pullback-composition) supplies the K-flat composition normalization"
+   }
+  },
+  {
+   "text": "For the identity inverse image the transported action identification is the identity of scalar restriction, after the canonical identity identifications. Clause (4) of mate pasting says that the mate of $\\mathrm{id}_{T}$ is $\\mathrm{id}_{r}$. Bijectivity therefore gives $\\theta_{\\mathrm{id}}=\\mathrm{id}_{T}$. This also agrees with the ordinary coequalizer comparison in step 2, which preserves every tensor pairing for the identity.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv identity case, clause (4) of lem-weil-pbc-mate-pasting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +160,45 @@
    "results": "8 hits: KaehlerDifferential.tensorKaehlerEquiv, Algebra.IsPushout.cancelBaseChangeAux, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul, Algebra.IsPushout.cancelBaseChange, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Algebra.IsPushout.cancelBaseChange_symm_tmul, AlgebraicGeometry.pullbackSpecIso_hom_base, Algebra.IsPushout.cancelBaseChange_tmul",
    "date": "2026-10-21",
    "verdict": "no match: ordinary sheaf pullback composition and adjunction hits do not identify this non-flat derived scalar mate with its balanced representative"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*(scalar|mate)|derived.*(scalar|coequalizer)|conjugateEquiv_pullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/Algebra/Ring/Submonoid/Pointwise.lean (8 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module scalar adjunctions or ordinary site pullback composition, not the unbounded normalized scalar comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived change of rings comparison with geometric inverse image agrees with the scalar adjunction mate and respects composition",
+   "results": "ModuleCat.extendScalarsComp; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; SheafOfModules.PullbackConstruction.adjunction; ModuleCat.restrictScalarsComp'App_inv_naturality; ModuleCat.restrictScalarsComp'.congr_simp; ModuleCat.extendRestrictScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars (8 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module scalar adjunctions or ordinary site pullback composition, not the unbounded normalized scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.conjugateEquiv",
+   "results": "SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv (2 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module scalar adjunctions or ordinary site pullback composition, not the unbounded normalized scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves commutes with derived extension of scalars on K-flat complexes and the canonical comparison is the mate of restriction of scalars",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; CategoryTheory.sheafComposeIso_inv_fac; SheafOfModules.sheafificationCompPullback; CategoryTheory.sheafComposeIso_inv_fac_assoc; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforwardNatIso_inv (8 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module scalar adjunctions or ordinary site pullback composition, not the unbounded normalized scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image preserves balanced tensor products and the unit of derived extension restriction of scalars adjunction",
+   "results": "ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.unit_app; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.unit (8 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module scalar adjunctions or ordinary site pullback composition, not the unbounded normalized scalar comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -76,5 +215,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-kflat-scalar-comparison-normalization",
+  "worker": "stage1",
+  "summary": "Split into seven steps using existing general site-theoretic tensor, exactness, K-flat and normalized adjunction nodes. Proved B-linearity and the insertion-unit equation before deriving, identified the inverse comparison by the adjunction Hom bijection, extended invertibility to all unbounded objects, and proved composition and identity by mate pasting. No new nodes or mathematical statement changes. Added the missing mate definition dependency.",
+  "blueprint": "Realizes det-prop-scalar-six-pullback.proof.md (1): the ordinary inverse-image/tensor comparison, K-flat computation and compatibility with (gf)^-1=f^-1g^-1, refining it by the specified scalar-adjunction mate normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness on transported module sheaves for arbitrary geometric morphisms; the scalar-six unit has no generic exactness proof."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Termwise unbounded localization of the exact inverse-image functors; no bounded derived or specific-site substitute is used."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generalized-pairing normalized ordinary tensor inverse image; this is the general site-theoretic tensor tool required by unit step 2."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General ringed-topos preservation of flat-term K-flat complexes; this is exactly the preservation input prescribed by unit step 2."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Canonical K-flat computation of derived scalar extension for a possibly non-flat ring-sheaf map."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "The representative-normalized scalar unit is needed to identify the specified mate, and not just its endpoints."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General small-site flat-term K-flat resolution needed to pass from representatives to every unbounded object."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-construction",
+    "why": "Presents the transported module inverse image of a geometric morphism as an algebraic inverse-image presentation, the hypothesis of the generalized-pairing tensor comparison (added by the Q66 reviewer)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-geometric-module-construction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-5beb2d5db",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-5beb2d5db (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, all 11 cited nodes and blueprint main-20261015 det-prop-scalar-six-pullback.proof.md (1) with unit sk-prop-scalar-six step 2. The statement is the live text plus the justified def-weil-pbc-adjunction-mate citation and stmt_dep. No new nodes, no repair note, not dropped, no SGA. Checks: step 1 gives exactness of h_A^*/h_B^* on transported modules (04JC), the termwise unbounded model, and a_h as an equality of restricted actions. Step 2 is the 03EL pairing comparison with R=A_Y, M=B_Y; B_X-linearity and unit insertion are correct. Step 3 is 0G7E with c=id, then derived change of rings on both sites. Step 4: the mate direction checks out (L1=T_Y, L2=T_X, G=h_A^*, H=h_B^*); by the triangle identities the transpose of θ is a_h∘h_A^*η_Y, which equals the transpose of Q(χ^{-1}) by adjunction clause (1) and step 2, so injectivity pins the mate. Step 5 extends invertibility to unbounded objects by naturality on a K-flat resolution. Step 6: mate pasting (1) with (L1,L2,L3)=(T_Z,T_Y,T_X) gives mate (a_f g_B^*)(f_A^*a_g)=a_gf. Step 7 is clause (4). Edge cases checked: h=id, non-flat Z→Z/n, zero ring, unbounded complexes, topoi without points. No duplicates (ringed-topoi derived tensor pullback, pur constant-ring and pc ringed-space nodes are not substitutes). FIX: step 2 used the AlgebraicInverseImage presentation of the transported inverse image without a citation; I added lem-weil-pbc-geometric-module-construction (use, proof_dep, tool_use) and one sentence. Batch-5: lem-trf-geometric-inverse-image-exact is the generic 04JC exactness, not a trace-formula step, and is already in the batch-5 closure via non-trf citers; the closure with and without the item's proof edges is 17903 nodes either way (diff 0), so accepted. The added node is likewise already in the closure.; 1 file(s) fixed by the reviewer"
  }
 }
