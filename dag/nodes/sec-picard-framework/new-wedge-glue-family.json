@@ -19,9 +19,10 @@
    "elementary": false
   },
   {
-   "text": "Apply determinant_liftWedge_kernel_exists to construct the concatenated wedge map w on the source of q and prove kernel.ι q ≫ w = 0. This is the independence-of-lifts part of the determinant paragraph, before passage to the quotient.",
+   "text": "Conjugate q by the tensor comparison isomorphisms eAB and eAC to qprime = eAB.inv followed by q followed by eAC.hom. The comparison wedge formulas and tensorHom_app_tmulSection prove the official qprime formula. Apply the official determinant_liftWedge_kernel_exists to obtain wprime with its wedge formula and kernel annihilation. The map kernel.ι(q) followed by eAB.hom composes to zero with qprime, by cancellation of eAB.hom and eAB.inv and kernel.condition. Lift it through kernel(qprime) using kernel.lift. The equation kernel.lift_ι and annihilation for wprime show that kernel.ι(q) followed by eAB.hom followed by wprime is zero. Set w = eAB.hom followed by wprime followed by the inverse target comparison. Associativity proves annihilation for w, and the hom and inverse wedge formulas give its concatenated-wedge formula.",
    "uses": [
-    "new-determinant-lift-wedge-kernel"
+    "new-determinant-lift-wedge-kernel",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
@@ -33,12 +34,13 @@
  ],
  "proof_deps": [
   "lem-sc-exterior-sheaf-tensor-quotient-comparison",
-  "new-determinant-lift-wedge-kernel"
+  "new-determinant-lift-wedge-kernel",
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "V3 retirement",
+  "by": "U4 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; replace the retired quotient copy by the proved transport of its official twin"
+  "place": "Proof of (*), determinant paragraph; unchanged epimorphic quotient and Abelian.epiDesc construction, with kernel annihilation transported from the official theorem by the canonical exterior-power comparisons."
  },
  "mathlib_searches": [
   {
@@ -103,14 +105,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-6138b",
-  "group": "V3",
+  "reviewer": "C-c89b8",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261020T154054-L-3043145",
+  "landing": "20261021T011042-L-2033555",
   "kind": "interface",
-  "note": "independent cc review: retire-items.tsv row retire:Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved transport exteriorSheafTensor_quotient_exists (twin conjugated by exteriorSheafPowerIso tensors) and 2 unclaimed consumers (one import + one call each, signatures unchanged); --all compile + 3 second-level importers clean, axioms clean"
+  "note": "independent cc review: withdrawn stub + adapted Glue consumer + 2 node files + change record against live clone, retire-items row 1205 and the WC twin (node lean.statement verbatim); --all compile clean, importer DeterminantWedgeMorphismLocal compiles, axioms clean"
  },
  "lean_audit": {
   "master": {
