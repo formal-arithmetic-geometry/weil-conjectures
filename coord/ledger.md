@@ -23878,3 +23878,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:11 L: returned deliver/NA/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D1/D4 (circular relabelling), C5/C6. The new node lem-sfb-norm-scalar-geometric-proper-base-change (N) is unsourced and )
 - 22:11 L: returned deliver/NJ/def-per-support-condition (reviewer RETURN: I read the item, its 5 stmt_deps and the master source (order 2738). The delivery is definition-only with no new nodes. )
 - 22:12 L: returned deliver/NK/lem-pur-affine-translation-trace (reviewer RETURN: L: independent stage-2 immutable head 14f5203ab74f: F1/H2 repaired: def-trf-ambient-affine-translation-trace existing:tr)
+- 22:12 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
