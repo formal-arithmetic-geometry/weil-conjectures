@@ -276,5 +276,41 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-5d7e26b53 (reviewer sub-agent of L); spot-checked: First split of the Q106-created item, which is still unsplit in live and side-live, so the delivery is not superseded. One commit. The item's statement, stmt_deps and blueprint fields are byte-identical to live, there are no new nodes, proof_deps equals the union of uses, and no SGA is cited. I read every cited statement. lem-pur-site-restriction-module-adjunction-exact gives exact j^* and j_! and the Hom bijection for any object and comm ring sheaf. The special-case clause of def-weil-extension-by-zero-presheaf (at most one map to U) applies because Z and W are subterminal. lem-weil-pbc-module-sheafification-restriction needs continuous and cocontinuous functors between small sites; step 2 checks this for the slice forgetful functor, and it gives the unit-normalized comparison. The exact-functor H^q, homology and triangulated results are mathlib leaves. Step by step: (3) the restricted P_F equals F (module version of 0F6Z). (4) An arrow C→V is the same as the unique arrow C→W=U×V over U, so the presheaves agree before sheafification; the k_V^* value comes from relocalization. (5) The unit and counit are determined on summand generators; I checked j_U^*ε_V against the k_U counit. (6) Nested maps use uniqueness of left adjoints and relocalization. (7) The pulled-back cover {C×U,C×V} plus sheaf separation proves zero and zero-morphism detection, with no points used. (8) Homology detection. (9) H^q commutes with restriction, giving quasi-isomorphism detection and unbounded triangulated functors. Edge cases tested: U=V=1, U=1, disjoint U and V, objects locally but not globally over V (sheafification is taken before identification), zero ring. Sources checked: sites-modules 03DI, 03DJ (l.2160), 0F6Z (l.2338) and 04IY; sites 04B8; homology 010N; derived 015F; all tag→label pairs verified. No duplicate found: cbc open-localized-counit is scheme/pro-étale only, pbc site-extension-by-zero-exact is abelian only, and ringed-slice-extension-preserves-exact covers only exactness. The item's statement covers all three uses in the parent lem-sp-ringed-topos-binary-descent (steps 0, 2, 3). I accept the two declared tool_uses (site restriction adjunction, sheafification-restriction comparison) as generic tools that the unit sk-prop-sp-tower-geometric does not replace. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SubterminalModuleLocalCalculus",
+  "declaration": "SheafOfModules.SubterminalLocal.subterminal_module_local_calculus",
+  "declarations": [
+   "SheafOfModules.SubterminalLocal.coefficients",
+   "SheafOfModules.SubterminalLocal.sheafify",
+   "SheafOfModules.SubterminalLocal.Modules",
+   "SheafOfModules.SubterminalLocal.SliceModules",
+   "SheafOfModules.SubterminalLocal.jbang",
+   "SheafOfModules.SubterminalLocal.jstar",
+   "SheafOfModules.SubterminalLocal.adj",
+   "SheafOfModules.SubterminalLocal.nested",
+   "SheafOfModules.SubterminalLocal.SheafificationRestriction",
+   "SheafOfModules.SubterminalLocal.MapSheafificationRestriction",
+   "SheafOfModules.SubterminalLocal.PresheafFormula",
+   "SheafOfModules.SubterminalLocal.ExactRestriction",
+   "SheafOfModules.SubterminalLocal.DerivedExact",
+   "SheafOfModules.SubterminalLocal.Intersection",
+   "SheafOfModules.SubterminalLocal.JointDetection",
+   "SheafOfModules.SubterminalLocal.subterminal_module_local_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SubterminalModuleLocalCalculus.lean",
+  "statement": "theorem subterminal_module_local_calculus [J.Subcanonical] (U V : C) [Mono (terminal.from U)] [Mono (terminal.from V)] (hcover : Sieve.ofArrows (fun b : Bool ↦ if b then U else V) (fun b ↦ terminal.from (if b then U else V)) ∈ J (⊤_ C)) : Nonempty (Intersection.{c, v, r, w} R U V (U ⨯ V) prod.fst prod.snd) ∧ (∀ Z : C, Z = U ∨ Z = V ∨ Z = (U ⨯ V) → ExactRestriction (jstar.{c, v, r} R Z) ∧ ExactRestriction (jbang.{c, v, r} R Z) ∧ DerivedExact.{_, _, _, _, w, w} (jstar.{c, v, r} R Z) ∧ DerivedExact.{_, _, _, _, w, w} (jbang.{c, v, r} R Z) ∧ PresheafFormula.{c, v, r} R Z ∧ SheafificationRestriction.{c, v, r} R Z) ∧ JointDetection.{c, v, r, w} R U V",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c1a95770",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Clause-by-clause check of Q93 5c1a9577 against the node. jstar, jbang and adj are the actual localizedSystem restriction, the sheafified extensionByZeroPresheaf extension, and the unit-normalized adjunction (.choose of an ∃!). Intersection presents kU and kV through adjunctions to overMap f and g. selfU/V (inv = unit), exchangeU/V (fixed by kU ⊣ f^* transposition), composeU/V (fixed by the composite unit) and the nested self/cross/counit equations are pinned and were checked consistent by hand, including exchange_counit through the triangle identity. PresheafFormula pins the DirectSum.of injection. Both sheafification-restriction comparisons are unit-normalized. JointDetection covers zero objects, zero maps, short exact sequences, H^q, QuasiIso and derived H^q/IsIso. DerivedExact gives triangulated mapDerivedCategory for jstar, jbang, kU, kV and overMap. Hypotheses: finite limits, subcanonical, Mono terminal.from, Bool ofArrows sieve in J(⊤), W = U⨯V; independent site universes, no extra assumptions. Edge cases U=V, U=1, disjoint, zero ring and all q are covered. The record changes only lean; the statement is verbatim; one sorry; docstrings carry source, blueprint and all 9 steps; the report has both sections. No recompile, as no file was changed. Advisories: (1) localizedSystemAdjunction comes from theorem lem-pur-site-restriction-module-adjunction-exact, which is only a proof_dep and cannot be added to stmt_deps in S2; (2) Q92's landed SubterminalCover.nested is term-identical to this item's nested (downstream duplicate); (3) the H^q comparisons are Nonempty isos, which suffice for the node's 'commutes' and both citers' uses; (4) the plain ModuleSheafificationRestriction import looks unused by the statement."
  }
 }

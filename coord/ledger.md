@@ -22129,3 +22129,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:12 L: merged deliver/K3/Sheaf.CategoryTheory.Monoidal.ModuleRestrictionFiniteExact (stage 3; reviewer PASS; first push; landing 20261021T101226-L-36124 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:12 L: merged deliver/K4/Sheaf.Paper.FiniteStagePairCategory (stage 3; reviewer PASS; first push; landing 20261021T101230-L-40495 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/pbc-finite-stage-pair-category-proof-elaboration.md)
 - 10:12 L: merged deliver/K7/Sheaf.Topology.TopologicalBasisLiftSection (stage 3; reviewer PASS; first push; landing 20261021T101236-L-45561 (proof); batch 20261021T100250; modules 1; new nodes 0)
+- 10:13 L: merged deliver/NJ/lem-pc-tate-residue-exact-sequence (stage 2; reviewer PASS; parallel immutable checks)
+- 10:13 L: merged deliver/Q93/lem-sp-subterminal-module-local-calculus (stage 2; reviewer PASS; parallel immutable checks)
