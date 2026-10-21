@@ -11,9 +11,113 @@
   "sk-def-sfb-change-of-scalars",
   "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $M$ and put $P=S\\otimes_RM$, $Q=T\\otimes_SP$, $H=T\\otimes_RM$. Write their coequalizer projections as $q:S\\otimes M\\to P$, $p:T\\otimes P\\to Q$, $r:T\\otimes M\\to H$. These are the objects, actions and maps of [def-sfb-modobj-extension]. By [def-sfb-modobj-extend-restrict-adjunction] their unit maps are $a=q(\\eta_S\\otimes M)\\lambda_M^{-1}:M\\to P$, $b=p(\\eta_T\\otimes P)\\lambda_P^{-1}:P\\to Q$, and $c=r(\\eta_T\\otimes M)\\lambda_M^{-1}:M\\to H$. They are respectively $R$-, $S$-, and $R$-linear into the appropriate restrictions. Restriction is the identity on underlying arrows by [def-sfb-modobj-restriction]. The composite Hom bijection sends a $T$-linear $f:Q\\to N$ first to $fb$ and then to $fba$; evaluating at $f=\\mathrm{id}_Q$ shows that the transported composite unit has underlying arrow $ba$, while the direct unit has underlying arrow $c$.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: coequalizer notation and the two unit maps. Source-library ExtendScalars.lean:321-337, 348-350, 413-435. "
+   }
+  },
+  {
+   "text": "We will use the identities $q=\\gamma_P(S\\otimes a)$, $p=\\gamma_Q(T\\otimes b)$, and $r=\\gamma_H(T\\otimes c)$. Here is their direct verification, simultaneously for any one of the three extensions $F=V\\otimes_W L$, with projection $e$ and unit $d=e(\\eta_V\\otimes L)\\lambda_L^{-1}$. The first-factor action specified in [def-sfb-modobj-extension] means\n$$\\gamma_F(V\\otimes e)=e(\\mu_V\\otimes L)\\alpha_{V,V,L}^{-1}.$$\nConsequently\n$$\\gamma_F(V\\otimes d)=e(\\mu_V\\otimes L)\\alpha_{V,V,L}^{-1}(V\\otimes(\\eta_V\\otimes L))(V\\otimes\\lambda_L^{-1})=e.$$\nThe last equality uses the right-unit axiom $\\mu_V(V\\otimes\\eta_V)=\\rho_V$ from [sk-def-sfb-ring-object] and the monoidal triangle identity. Thus these identities are computations with the actual coequalizer and action morphisms, requiring no generators in a concrete category.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: insertion of the unit followed by the induced first-factor action. Compare ExtendScalars.lean:223-229, 341-346. "
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to the two adjunctions in the statement, after the stipulated restriction comparison, using the identity isomorphism of their common right adjoint $U$. It gives a natural isomorphism $v:BA\\xrightarrow{\\sim}D$ with $v_Mba=c$ on underlying arrows. All three extension adjunctions exist by [def-sfb-modobj-extend-restrict-adjunction]: $R$ is commutative for $A,D$, $S$ is commutative for $B$, and the ambient coequalizer and tensor-preservation assumptions are exactly theirs. No closedness or equalizers are being assumed. The comparison of restrictions changes neither underlying objects nor arrows, so the displayed equation is exactly its required unit equation, rather than an equation for a different adjunction.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: common-right-adjoint comparison and its unit equation (Stacks Categories Tag 0B65, lemma-transformation-between-functors-and-adjoints). "
+   }
+  },
+  {
+   "text": "Let $h=v_Mb:P\\to H$. It is $S$-linear for the restriction of the $T$-action on $H$: $b$ is $S$-linear and $v_M$ is $T$-linear, hence $S$-linear after [def-sfb-modobj-restriction]. Also $ha=c$. Using the identity for $q$ in step 2 and the definition of a module morphism in [sk-def-sfb-module-objects], we obtain\n$$hq=h\\gamma_P(S\\otimes a)=\\gamma_H(\\psi\\otimes h)(S\\otimes a)=\\gamma_H(\\psi\\otimes c).$$\nExpand $c=r(\\eta_T\\otimes M)\\lambda_M^{-1}$ and the first-factor action on $H$ from [def-sfb-modobj-extension]. Associator and unitor naturality give the typed equality\n$$\\gamma_H(\\psi\\otimes c)=r(\\mu_T\\otimes M)\\alpha_{T,T,M}^{-1}\\bigl(\\psi\\otimes((\\eta_T\\otimes M)\\lambda_M^{-1})\\bigr)=r(\\psi\\otimes M).$$\nIndeed, move $\\psi$ through the associator by naturality and use $\\mu_T(\\psi\\otimes\\eta_T)=\\psi\\rho_S$, followed by the monoidal triangle identity, exactly as in step 2. Thus $hq=r(\\psi\\otimes M)$ is an equality of maps $S\\otimes M\\to H$.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: determine the intermediate S-linear map from its value at the unit. "
+   }
+  },
+  {
+   "text": "By $T$-linearity of $v_M$ and step 2,\n$$v_Mp=v_M\\gamma_Q(T\\otimes b)=\\gamma_H(T\\otimes h).$$\nPrecomposing with $T\\otimes q$ and using step 4 and the induced action on $H$ yields the fully typed formula\n$$v_Mp(T\\otimes q)=r(\\mu_T\\otimes M)((T\\otimes\\psi)\\otimes M)\\alpha_{T,S,M}^{-1}:T\\otimes(S\\otimes M)\\to H.$$\nThis is the multiplication map required for $m_{0,M}$. It therefore factors through both defining coequalizers, with factor $v_M$; existence and $T$-linearity are already provided by this factor, so no elementwise balancing assertion is needed. This factor is unique: $q$ and $p$ are coequalizer maps, and $T\\otimes q$ is also a coequalizer map by the assumed preservation of colimits. For a coequalizer map $e$, if $fe=ge$, its universal property in [def-weil-pbc-category-colimit] says that $f$ and $g$ are the same factor of that coequalizing arrow. Apply this first to $T\\otimes q$ and then to $p$. Thus the natural isomorphism $v$ is exactly the coequalizer-induced multiplication comparison $m_0$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-extension",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: multiplication on the double coequalizer and uniqueness of its factor. "
+   }
+  },
+  {
+   "text": "Write $w_M=v_M^{-1}$. Composing $v_Mba=c$ with $w_M$ gives $w_Mc=ba$. Since $w_M$ is a morphism of $T$-modules, the identities of step 2 give\n$$w_Mr=w_M\\gamma_H(T\\otimes c)=\\gamma_Q(T\\otimes w_Mc)=\\gamma_Q(T\\otimes b)(T\\otimes a)=p(T\\otimes a).$$\nAfter substituting $a$, this is the actual arrow\n$$w_Mr=p(T\\otimes q)(T\\otimes(\\eta_S\\otimes M))(T\\otimes\\lambda_M^{-1}):T\\otimes M\\to Q.$$\nIt proves the claimed symbolic inverse $t\\otimes x\\mapsto t\\otimes(1\\otimes x)$, with all unitors displayed. The direct coequalizer universal property determines its factor uniquely. The two inverse identities hold because $w_M$ is the inverse component of $v$; this proves them as internal module morphisms, including any case with zero objects.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: inverse from insertion of the unit and the inverse normalization equation. "
+   }
+  },
+  {
+   "text": "The component calculation identifies $m_0=v$ as a natural transformation; thus its naturality and the natural inverse just computed follow from the natural isomorphism supplied in step 3. Moreover $U(m_{0,M})\\eta^{BA}_M=\\eta^D_M$, since the underlying arrows are $v_Mba=c$ and module morphisms are their underlying arrows with the linearity equation of [sk-def-sfb-module-objects]. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] gives $m_0=u$ as specified natural isomorphisms. Finally the source-library definition at ExtendScalars.lean:463-467 is the comparison from the direct adjunction to the transported composite adjunction. Its unit equation is the reverse one, so its inverse has $U(-)\\eta^{BA}=\\eta^D$ and is $m_0$ by the same uniqueness. The direction is therefore the inverse of $\\operatorname{Mod.extendScalarsComp}(\\varphi,\\psi)$ as asserted.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Compatibility with composition: equality of specified comparisons, with the source-library direction checked. "
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-ring-object",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Sentence \"Extension of scalars is compatible with composition\"; explicit underived coequalizer computation, checked against lean/WeilConjectures/CategoryTheory/ModuleObjects/ExtendScalars.lean:200-467 and Stacks Categories Tag 0B65."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +153,45 @@
    "results": "TensorProduct.Algebra.moduleAux_apply; Algebra.TensorProduct.lmul''_eq_lid_comp_mapOfCompatibleSMul; TensorProduct.AlgebraTensorModule.cancelBaseChange; TensorProduct.AlgebraTensorModule.rTensor_tmul; TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul; TensorProduct.AlgebraTensorModule.rTensor_tensor; TensorProduct.AlgebraTensorModule.smul_eq_lsmul_rTensor; TensorProduct.mapOfCompatibleSMul_tmul",
    "date": "2026-10-21",
    "verdict": "no match: ModuleCat.extendScalarsComp and its unit formula concern ordinary modules over type-valued rings; the internal coequalizer multiplication and its unit normalization in an arbitrary braided monoidal category are not a one-line specialization. Generic adjoint uniqueness is already lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendRestrictScalarsAdj_unit|unit_leftAdjointUniq_hom",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the full internal-module item: ModuleCat specializes to ordinary modules; Bimod coequalizer and action declarations give ingredients only; generic adjoint uniqueness is already the cited Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "no match for the full internal-module item: ModuleCat specializes to ordinary modules; Bimod coequalizer and action declarations give ingredients only; generic adjoint uniqueness is already the cited Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars for internal modules: multiplication T tensor S tensor M induces the composition comparison with inverse inserting the unit of S",
+   "results": "ModuleCat.ExtendScalars.map'; ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendScalars.smul_tmul; ModuleCat.ExtendScalars.map_tmul; Submodule.mulMap; ModuleCat.extendScalarsId_inv_app_apply; TensorProduct.Algebra.module; ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-21",
+   "verdict": "no match for the full internal-module item: ModuleCat specializes to ordinary modules; Bimod coequalizer and action declarations give ingredients only; generic adjoint uniqueness is already the cited Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module objects in a braided monoidal category: multiplication on iterated relative tensor products is the unique composition isomorphism preserving scalar-extension adjunction units",
+   "results": "ModuleCat.MonoidalCategory.tensorμ_eq_tensorTensorTensorComm; CategoryTheory.ModObj.smul_eq_mul; ModuleCat.MonoidalCategory.tensorμ_apply; CategoryTheory.ModObj.mul_smul; CategoryTheory.ModObj.mul_smul'; ModuleCat.MonoidalCategory.instBraidedCategory; CategoryTheory.Mod_.regular_mod_smul; ModuleCat.MonoidalCategory.braiding_hom_apply",
+   "date": "2026-10-21",
+   "verdict": "no match for the full internal-module item: ModuleCat specializes to ordinary modules; Bimod coequalizer and action declarations give ingredients only; generic adjoint uniqueness is already the cited Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coequalizer tensor product of internal modules over monoid objects: extension restriction adjunction composition comparison and multiplication formula",
+   "results": "π_tensor_id_preserves_coequalizer_inv_desc; id_tensor_π_preserves_coequalizer_inv_desc; Bimod.TensorBimod.X; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; Bimod.TensorBimod.actLeft; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; Rep.coinvariantsTensorIndHom_mk_tmul_indVMk",
+   "date": "2026-10-21",
+   "verdict": "no match for the full internal-module item: ModuleCat specializes to ordinary modules; Bimod coequalizer and action declarations give ingredients only; generic adjoint uniqueness is already the cited Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-coefficient-cocone-comparison-agreement",
@@ -71,5 +210,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-tensor-composition-unit-normalization",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Derived the multiplication and inverse formulas from the first-factor action, unit insertion, linearity and the existing unit-compatible adjoint uniqueness lemma; checked the nonconcrete meaning and the source-library inverse direction.",
+  "blueprint": "Realizes the transitivity comparisons in the first paragraph of lem-sfb-constructible-cocone-hom-surj and the sentence \"Extension of scalars is compatible with composition\" in def-sfb-derived-extend-comp-iso, inside unit sk-thm-sfb-qlbar-two-colimit.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-modobj-extension",
+    "why": "The unit calls on internal scalar extension; this node gives its coequalizer, induced action and arrow assignment, not a replacement route."
+   },
+   {
+    "node": "def-sfb-modobj-extend-restrict-adjunction",
+    "why": "The unit uses extension/restriction adjunctions; this node specifies their units and the actual Hom bijection needed for normalization."
+   },
+   {
+    "node": "def-sfb-modobj-restriction",
+    "why": "This node specifies the unchanged underlying arrows and the restricted action used in identifying the common right adjoint."
+   },
+   {
+    "node": "sk-def-sfb-module-objects",
+    "why": "This is the definition of internal module objects and of linear morphisms used in the two displayed linearity computations."
+   },
+   {
+    "node": "sk-def-sfb-ring-object",
+    "why": "This is the definition of the multiplication and unit axioms used in the unit-insertion calculations."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "This is the universal property of a coequalizer as a finite colimit, used only for uniqueness of the induced maps."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "This generic adjoint-uniqueness tool is explicitly in the item and supplies a specified natural isomorphism; the multiplication and inverse formulas are derived here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-ring-object",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-24314daec",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-24314daec (reviewer sub-agent of L); spot-checked: PASS; review.md is written and I made no fixes. Shape: one commit touching only the item and its report; statement and stmt_deps identical to the unsplit base; no new nodes. Live and side-live still have the item unsplit, it is in no dropped list, there is no repair note, no SGA is cited and there is no cycle (its only citer is lem-sfb-coefficient-cocone-comparison-agreement). Sources read: blueprint main-20261015 def-sfb-derived-extend-comp-iso.proof (sentence 'Extension of scalars is compatible with composition'); ExtendScalars.lean whiskerLeft_extendπ_smul l.224-229, extendUnitHom and whiskerLeft_extendUnitHom_smul' l.320-350, extendScalarsComp l.461-466; Mathlib leftAdjointUniq and unit_leftAdjointUniq_hom; the statements of all 8 cited nodes. Statement: Res_φRes_ψ equals U on objects, arrows and actions. The conjugate-iso lemma with L1=BA, L2=D, δ=id gives u:BA→D. extendScalarsComp is leftAdjointUniq(adj_D, adj_BA):D≅BA with η^D≫U(hom)=η^{BA}, so its inverse is m_0 and the stated direction is right. Steps: (1) the composite unit is ba via the Hom bijections and the direct unit is c. (2) γ_F(V⊗d)=e, recomputed by α-naturality, μ(V⊗η)=ρ and the triangle identity; this is the source lemma whiskerLeft_extendUnitHom_smul'. (3) All hypotheses hold, including S commutative for Ext_ψ. (4) h=v_M b is S-linear with ha=c, so hq=r(ψ⊗M). (5) v_M p(T⊗q) is the multiplication map; T⊗q is a coequalizer by the preservation hypothesis and cancellation uses the colimit uniqueness, so m_0=v. (6) w_M r=p(T⊗a), which is the stated inverse formula. (7) Naturality comes from v, and uniqueness gives m_0=u. All four elementary steps really are elementary. Dup search over the DAG found nothing equivalent. Small cases checked: identity morphisms, ModuleCat, zero M. I accept the declared tool uses (generic module-object definitions, colimit and conjugate-iso); the entries for the Mathlib leaves are redundant but harmless."
  }
 }
