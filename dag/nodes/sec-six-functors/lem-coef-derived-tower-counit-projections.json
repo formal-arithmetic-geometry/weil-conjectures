@@ -15,96 +15,70 @@
  ],
  "proof": [
   {
-   "text": "For an object $V$ and a tower $T$, a tower map $\\Delta V\\to T$ is exactly a family $h_n:V\\to T_n$ with $t_nh_{n+1}=h_n$. The inverse-limit universal property gives a unique $h:V\\to LT$ with $p_nh=h_n$. This constructs $\\Delta\\dashv L$, naturally in both variables, with ordinary counit $\\gamma_T:\\Delta LT\\to T$ having components $p_n$. The limit functor is additive: the composites of $L(a+b)$ and $La+Lb$ with every projection agree, hence the maps agree; likewise for zero. The constant functor is additive and exact because its value on a short exact sequence is that same sequence at every level, using [lem-weil-tower-category-levelwise-abelian]. Evaluation is exact by the same node. Thus [lem-weil-pbc-exact-functor-derived-factorization] gives their termwise derived functors without resolutions, and the termwise equality $e_n\\Delta=\\mathrm{id}$ gives the specified derived identification. The additive adjunction induces the homotopy-category adjunction, with counit the homotopy class of $\\gamma$, by [lem-weil-pbc-termwise-adjunction-homotopy].",
+   "text": "The constant tower and each evaluation are exact and additive by levelwise limits and colimits. Use their mapDerivedCategory functors and mapDerivedCategoryFactors. The limit functor is additive by preservation of binary products.",
    "uses": [
     "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), fourth equality; Tag 015F (lemma-right-derived-exact-functor). Ordinary tower adjunction expanded from the inverse-limit universal property."
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general); agent extraction of the constant-tower specialization and its projection normalization. Tower model: sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
    }
   },
   {
-   "text": "For a K-injective tower complex $I$, [lem-weil-pbc-right-adjoint-preserves-kinjective] applied to the exact left adjoint $\\Delta$ shows that $LI$ is K-injective in $\\mathcal A$. No K-injective resolutions in $\\mathcal A$ are required. Applying an additive functor termwise preserves shifts and mapping cones (their formulas use only signs and finite biproducts). Hence $Q_{\\mathcal A}L:K(\\mathcal T)\\to D(\\mathcal A)$ is exact. By [lem-weil-pbc-kinjective-total-derived], its derived comparison $\\kappa_I:Q_{\\mathcal A}(LI)\\to RL(Q_{\\mathcal T}I)$ is an isomorphism on K-injectives and is natural. For a resolution $q:M\\to I$, put $B=Q_{\\mathcal T}M$ and $\\rho_q=\\kappa_I^{-1}RL(Q_{\\mathcal T}q):RL(B)\\xrightarrow{\\sim}Q_{\\mathcal A}(LI)$. These are precisely the canonical resolution identifications of the statement.",
+   "text": "Upgrade each supplied quasi-isomorphism q:K to I to a monic quasi-isomorphism K to Cone(id_K) direct-sum I, given by the cone inclusion and q. The projection to I is a homotopy equivalence: contract Cone(id_K) using the identity, so the new target is K-injective. This supplies the existing monic K-injective resolution class without strengthening any hypothesis. The supplied natural-transformation bijections exhibit RL with kappa as a right derived functor. The K-injective right derivability structure and invertibility of kappa on its objects show that it remains right derived after postcomposition by the exact derived constant functor. This uses the existing derivability-structure library, whose K-injective lifting argument rests on the K-injective localization Hom bijection.",
    "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined)."
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general); agent extraction of the constant-tower specialization and its projection normalization. Tower model: sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
    }
   },
   {
-   "text": "Let $X=Q_{\\mathcal A}N$ and $B=Q_{\\mathcal T}M$, and choose $q:M\\to I$ as in step 2. There is a bijection\n$$\\operatorname{Hom}_{D(\\mathcal A)}(X,RL B)\\xrightarrow{\\rho_q\\circ-}\\operatorname{Hom}_{D(\\mathcal A)}(QN,QLI)\\cong\\operatorname{Hom}_{K(\\mathcal A)}(N,LI)\\cong\\operatorname{Hom}_{K(\\mathcal T)}(\\Delta N,I)\\cong\\operatorname{Hom}_{D(\\mathcal T)}(\\Delta X,QI)\\xrightarrow{(Qq)^{-1}\\circ-}\\operatorname{Hom}_{D(\\mathcal T)}(\\Delta X,B).$$\nBoth localization bijections are exactly [lem-weil-pbc-kinjective-hom-derived], applied to $LI$ and to $I$ respectively. The middle bijection is [lem-weil-pbc-termwise-adjunction-homotopy]. Explicitly, if $f:N\\to LI$ in the homotopy category represents $\\rho_qh$, this bijection sends $h$ to $(Qq)^{-1}Q(\\gamma_I\\circ\\Delta f)$. Denote this bijection by $E_{X,B}$.",
+   "text": "The comparison isomorphism for the exact derived constant functor exhibits it and every postcomposition as left derived. Apply Mathlib Adjunction.derived to the ordinary constant/limit adjunction on cochain complexes. Its derived-epsilon factorization gives Delta(kappa_I) followed by the derived counit equal to the exact-functor factorization followed by Q of the ordinary counit, for every complex I.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives), and 0FND (lemma-pre-derived-adjoint-functors-general). Agent expansion of the canonical Hom correspondence on K-injective representatives."
-   }
-  },
-  {
-   "text": "For $b:B\\to B'$ and resolutions $q:M\\to I$, $q':M'\\to I'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class $a:I\\to I'$ with $Q(a)=Q(q')\\,b\\,(Qq)^{-1}$. Naturality of the derived comparison in [lem-weil-pbc-kinjective-total-derived] gives $Q(La)\\rho_q=\\rho_{q'}RL(b)$. The ordinary counit is natural, so $a\\gamma_I=\\gamma_{I'}\\Delta(La)$ in the homotopy category. Substitute these two equalities into step 3: $E_{X,B'}(RL(b)h)=bE_{X,B}(h)$. With $b=1_B$, this proves independence of the resolution, including the canonical comparison of two choices; when both resolutions have source $M$, the comparison satisfies $aq=q'$ in the homotopy category by injectivity of localization into $I'$, hence is a quasi-isomorphism by applying cohomology and cancelling $H^r(q)$. It is a homotopy equivalence by the last clause of [lem-weil-pbc-kinjective-hom-derived]. The same computation with precomposition by a chain map $N'\\to N$ proves naturality in $X$ for chain maps. It holds also for inverses of quasi-isomorphisms, since the functors invert them, and hence for every derived morphism by the localization property [def-weil-abstract-derived-category]. Thus $E$ is natural in both derived variables, independently of representatives.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies), and 0FND (lemma-pre-derived-adjoint-functors-general), functoriality expanded explicitly."
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general); agent extraction of the constant-tower specialization and its projection normalization. Tower model: sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
    }
   },
   {
-   "text": "The natural Hom bijections $E$ define an adjunction $\\Delta\\dashv RL$: put $\\varepsilon_B=E_{RL B,B}(1_{RL B})$ and $\\nu_X=E_{X,\\Delta X}^{-1}(1_{\\Delta X})$. Naturality gives $E_{X,B}(h)=\\varepsilon_B\\circ\\Delta h$ and $E_{X,B}^{-1}(g)=RL(g)\\circ\\nu_X$. Substituting $g=1_{\\Delta X}$ in the first identity and $h=1_{RL B}$ in the second gives the two triangular identities. Since step 3 uses the ordinary termwise transpose and the localization maps, this is the adjunction induced by the original $\\Delta\\dashv L$, with its specified comparison identifications.",
+   "text": "Compose the exact constant and evaluation factorization isomorphisms; termwise evaluation of constants is definitionally the identity. Lift this isomorphism through Q to define c_n, with exactly the displayed component formula. Define pi_n by c_n inverse followed by evaluation of the derived counit. Naturality of c_n, the counit factorization, and naturality of the evaluation comparison show kappa_I followed by pi_n and the evaluation comparison is Q of the actual limit projection. The final identification is equality of the degreewise ordinary counit with the limit projection, not detection of derived tower maps by evaluation.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general); agent extraction of the constant-tower specialization and its projection normalization. Tower model: sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
+   }
+  },
+  {
+   "text": "For any resolution q:M to I, naturality of pi_n transports the projection identity from I to M. Naturality of the evaluation comparison identifies the evaluated Qq; cancel the invertible RL(Qq). For arbitrary J,C,B,lambda form eta by whiskering lambda with the derived constant functor, then composing with the whiskered counit. Naturality of c_n and the definition of pi_n give the component formula. This is a natural transformation in the derived tower category itself.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5 (lemma-derived-adjoint-functors); construction of unit and counit directly from the natural Hom bijections of steps 3–4."
-   }
-  },
-  {
-   "text": "First take $B=QI$ with $I$ K-injective and identify $RL(QI)$ with $QLI$ by $\\kappa_I$. In step 3 the identity of $QLI$ is represented by $1_{LI}$, whose ordinary transpose is $\\gamma_I$. Consequently $\\varepsilon_{QI}\\circ\\Delta(\\kappa_I)=Q(\\gamma_I)$, and evaluation gives $e_n(\\varepsilon_{QI})\\kappa_I=Q(p_{n,I})$. For general $q:M\\to I$, naturality of the counit yields\n$$\\varepsilon_{QM}=(Qq)^{-1}\\circ Q(\\gamma_I)\\circ\\Delta(\\rho_q).$$\nEvaluation, with the termwise identifications of step 1, therefore gives\n$$e_n(\\varepsilon_{QM})=(Qq_n)^{-1}\\circ Q(p_{n,I})\\circ\\rho_q=\\pi_{n,QM}.$$\nHere $q_n$ is a quasi-isomorphism because evaluation preserves them by step 1. The left side is already natural in $B$ and independent of resolutions by steps 4–5, so this proves precisely those properties for the displayed projection maps. It does not infer equality of tower morphisms merely from equality at every level.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND (lemma-pre-derived-adjoint-functors-general) and 09T5 (lemma-derived-adjoint-functors); sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok), termwise projection on a tower resolution. Agent calculation of the counit from step 3."
-   }
-  },
-  {
-   "text": "For $u:j\\to k$ in $\\mathcal J$, counit naturality and then naturality of $\\lambda$ give\n$$B(u)\\eta_j=\\varepsilon_{B_k}\\Delta(RL(B(u)))\\Delta(\\lambda_j)=\\varepsilon_{B_k}\\Delta(\\lambda_k)\\Delta(C(u))=\\eta_k\\Delta(C(u)).$$\nThus the specified $\\eta_j$ form a natural transformation in $D(\\mathcal T)$ itself. Apply evaluation to its defining composite and use step 6 and $e_n\\Delta=\\mathrm{id}$:\n$$e_n(\\eta_j)=e_n(\\varepsilon_{B_j})\\,e_n\\Delta(\\lambda_j)=\\pi_{n,B_j}\\lambda_j.$$\nThis is a calculation with the actual counit; no fullness of the evaluation functor on derived towers is used, and no smallness or limits indexed by $\\mathcal J$ are required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5 (lemma-derived-adjoint-functors); elementary counit naturality and composition after the preceding steps."
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general); agent extraction of the constant-tower specialization and its projection normalization. Tower model: sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-kinjective-hom-derived",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 070I, 08BJ, 070K, 070Y, 0FND and 09T5. Agent-written strict-tower specialization retaining the counit, with resolution comparisons and naturality expanded."
+  "place": "Tags 09T5 and 0FND; direct use of Mathlib abstract derived adjunction and the existing K-injective derivability structure. Explicit cone construction upgrades the weak resolution assumption; sites-cohomology.tex Tag 0941 supplies the tower projection normalization."
  },
  "mathlib_searches": [
   {
@@ -298,5 +272,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Only the lean field changed and its statement is verbatim in the file. Clause by clause: A abelian with ℕᵒᵖ limits, separate HasDerivedCategory universes, K-injective tower resolutions h, RL/κ/hRL/hκ encoded like the dependency exists_rightDerived_of_enough_isKInjective (hκ redundant, not stronger); c n pinned on Q-objects by the mapDerivedCategoryFactors; adj pinned by the counit on K-injectives against the termwise constLimAdj counit; π n pinned by the formula for every resolution q (arrow types checked, equals the node's formula after cancelling isos); e_n ε_B = c ≫ π; η over any J with free universes. Edge cases (empty J, n=0 as level 1, identity resolution) covered. Docstrings with 7 steps, ≤100-char lines, proof-plan imports allowed, only the theorem is sorry, no name clashes. Advisory: the const/lim Additive Prop instances duplicate Mathlib Sites/Abelian and live diagonalLimitAdditive; the landed citer CoefTowerCoaugmentation proves the ModuleCat special case. No recompile (per instruction)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261021T130214-L-2624013",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
