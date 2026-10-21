@@ -11,9 +11,95 @@
   "def-nagata-category",
   "def-weil-pbc-composite-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the right-to-left composition convention of the statement. For any adjunction $A\\dashv B$ with unit $\\eta$ and counit $\\varepsilon$, its Hom bijection sends $s:AX\\to Y$ to $B(s)\\circ\\eta_X$, and its inverse sends $t:X\\to BY$ to $\\varepsilon_Y\\circ A(t)$. These formulas follow directly from the unit/counit description: naturality and the triangles give $B(\\varepsilon_Y)\\circ BA(t)\\circ\\eta_X=B(\\varepsilon_Y)\\circ\\eta_{BY}\\circ t=t$ and $\\varepsilon_Y\\circ AB(s)\\circ A(\\eta_X)=s\\circ\\varepsilon_{AX}\\circ A(\\eta_X)=s$. All subsequent reassociations use the category laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "The original triangles and invertibility give $L_i(e_{i,P})=u_{i,L_iP}^{-1}$ and $R_i(u_{i,K})=e_{i,R_iK}^{-1}$. Consequently $u_{i,L_iP}^{-1}\\circ L_i(e_{i,P}^{-1})=1$ and $R_i(u_{i,K}^{-1})\\circ e_{i,R_iK}^{-1}=1$. These are exactly the two triangles for unit $e_i^{-1}$ and counit $u_i^{-1}$, whose naturality follows by inverting the given naturality equations. Thus they specify the reverse adjunction used in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "Compose $R_1\\dashv L_1$ with $F\\dashv G$ and then $L_2\\dashv R_2$, using [def-weil-pbc-composite-adjunction]. The first composition has counit $\\epsilon_Q\\circ F(e_{1,GQ})$. The second therefore has counit $u_{2,K}^{-1}\\circ L_2(\\epsilon_{R_2K}\\circ F(e_{1,GR_2K}))$. Functoriality of $L_2$ gives exactly the displayed formula for $\\bar\\epsilon_K$, and the left and right functors are $L_2FR_1$ and $L_1GR_2$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "The inverse of $c_{F,P}=L_jF(e_{i,P})$ is $L_jF(e_{i,P}^{-1})$, since functors preserve the two inverse equations. For $q:P\\to Q$, naturality of $e_i$ gives $L_jF(q)\\circ c_{F,P}=c_{F,Q}\\circ\\bar F(L_i(q))$. For $\\delta:F\\to F^{\\prime}$, naturality of $\\delta$ at $e_{i,P}$ gives $L_j(\\delta_P)\\circ c_{F,P}=c_{F^{\\prime},P}\\circ\\bar\\delta_{L_iP}$. These equations also apply to $G$ and to inverse comparisons, proving all the stated object-map and functor-transformation naturality of $c_F,c_G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "Put $Q=R_2L_2N$ and $b=c_{G,N}^{-1}\\circ L_1(a)=L_1(G(e_{2,N}^{-1})\\circ a)$. By the composite Hom-bijection clause of [def-weil-pbc-composite-adjunction], transpose $b$ successively across $R_1\\dashv L_1$, $F\\dashv G$, and $L_2\\dashv R_2$. The first inverse bijection sends it to $e_{1,GQ}\\circ R_1(b)=G(e_{2,N}^{-1})\\circ a\\circ e_{1,P}$, by naturality of $e_1$. The second sends this to $\\epsilon_Q\\circ FG(e_{2,N}^{-1})\\circ F(a)\\circ F(e_{1,P})=e_{2,N}^{-1}\\circ\\epsilon_N\\circ F(a)\\circ F(e_{1,P})$, by naturality of $\\epsilon$ at $e_{2,N}^{-1}:N\\to Q$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "Write $t=\\epsilon_N\\circ F(a)$. The third inverse Hom bijection sends the last map of Step 5 to $u_{2,L_2N}^{-1}\\circ L_2(e_{2,N}^{-1})\\circ L_2(t)\\circ L_2F(e_{1,P})$. The triangle identity from Step 2, $u_{2,L_2N}^{-1}=L_2(e_{2,N})$, cancels its first two factors. The result is $L_2(t)\\circ c_{F,P}$, precisely the asserted transpose. This proves the formula for the specified composite adjunction, with no replacement by an unspecified adjunction on the same functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "For arbitrary $F,H$, define $\\kappa_K=L_3H(e_{2,FR_1K})$ as in the statement. Its inverse is $L_3H(e_{2,FR_1K}^{-1})$. If $k:K\\to K^{\\prime}$, the naturality equation $FR_1(k)\\circ e_{2,FR_1K}=e_{2,FR_1K^{\\prime}}\\circ R_2L_2FR_1(k)$, after applying $L_3H$, reads $\\overline{HF}(k)\\circ\\kappa_K=\\kappa_{K^{\\prime}}\\circ\\bar H\\bar F(k)$. Hence $\\kappa$ is a natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  },
+  {
+   "text": "For the transformation square fix $K$ and put $Q=R_1K$, $T=FQ$, $T^{\\prime}=F^{\\prime}Q$, $x=\\alpha_Q:T\\to T^{\\prime}$. Horizontal composition means $(\\beta*\\alpha)_Q=\\beta_{T^{\\prime}}\\circ H(x)$. Naturality first of $e_2$ at $x$ and then of $\\beta$ at $e_{2,T^{\\prime}}$ gives the explicit equality\n$$\\beta_{T^{\\prime}}\\circ H(x)\\circ H(e_{2,T})=\\beta_{T^{\\prime}}\\circ H(e_{2,T^{\\prime}})\\circ H(R_2L_2(x))=H^{\\prime}(e_{2,T^{\\prime}})\\circ\\beta_{R_2L_2T^{\\prime}}\\circ H(R_2L_2(x)).$$\nApply $L_3$. The left side is $(\\overline{\\beta*\\alpha})_K\\circ\\kappa_{H,F,K}$; the right side is $\\kappa_{H^{\\prime},F^{\\prime},K}\\circ(\\bar\\beta*\\bar\\alpha)_K$. This proves the claimed equality componentwise. Every step used only the specified functors, natural transformations, inverses and triangles, so no additive structure, size beyond the fixed universes, or nonemptiness is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), discussion following it; Lemma 0DV0 (lemma-compose-counits); explicit agent calculations for conjugation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "sole paragraph, counit transport and coherence; explicit categorical calculations from Stacks 0037 and 0DV0, not a verbatim blueprint proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +135,45 @@
    "results": "8 hits: CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Equivalence.adjointify_η_ε_assoc, CategoryTheory.Equivalence.adjointifyη, CategoryTheory.Adjunction.leftAdjointCompNatTrans",
    "date": "2026-10-21",
    "verdict": "no match for the whole statement: Adjunction.comp and comp_counit_app supply the composite adjunction/counit, but the e-induced transpose identity and two-variable composition comparison require additional naturality and triangle-identity calculations; conjugateEquiv is about mates between parallel adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating functors by equivalences preserves adjunctions, their counits and adjoint transposes, naturally in transformations and composition",
+   "results": "8 hits: CategoryTheory.Equivalence.congrLeftFunctor, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.Bicategory.conjugateIsoEquiv, CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_comp, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.conjugateEquiv_symm_comp, CategoryTheory.Equivalence.congrLeft",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: composite adjunction and individual counit formulas exist, but transported transpose and two-variable compositor require the explicit naturality calculations in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: composite adjunction and individual counit formulas exist, but transported transpose and two-variable compositor require the explicit naturality calculations in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction through adjoint equivalences: explicit composite counit, transported adjoint transpose and naturality of the composition comparison",
+   "results": "8 hits: CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.conjugateIsoEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: composite adjunction and individual counit formulas exist, but transported transpose and two-variable compositor require the explicit naturality calculations in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|homEquiv_counit|homEquiv_symm_apply|ofUnitCounit",
+   "results": "21 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean [Mathlib/CategoryTheory/Adjunction]",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: composite adjunction and individual counit formulas exist, but transported transpose and two-variable compositor require the explicit naturality calculations in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For equivalences R left adjoint L, compute the counit and transpose of L F R left adjoint L G R by composing the Hom bijections; compare conjugation of composite functors using the equivalence counit",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_comm, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.conjugateEquiv_apply_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: composite adjunction and individual counit formulas exist, but transported transpose and two-variable compositor require the explicit naturality calculations in this split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-normalized-reconstruction-adjunction-calculus",
@@ -71,5 +192,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-adjoint-equivalence-conjugation-calculus",
+  "worker": "stage1",
+  "summary": "Preserved the statement and both statement dependencies. Expanded the abstract counit, transported-transpose and two-variable compositor calculations into eight steps; reused the existing composite-adjunction Mathlib leaf and category definition, and created no nodes. Checked naturality and triangle cancellations without geometric or nonemptiness assumptions.",
+  "blueprint": "Realizes the counit-of-the-realized-adjunction transport and coherence sentences of prop-pur-adic-reconstruction-trace-coherence.proof.md (main-20261015), specifically the abstract calculations formerly isolated from reconstruction proof steps 5–7."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-a1eb8df3f",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-a1eb8df3f (reviewer sub-agent of L); spot-checked: Shape: one commit on c1c2047 with only the item node and its report, and no new nodes. Compared with side-live, the item differs only in status, proof, proof_deps, proof_origin, mathlib_searches and split_report; the statement, stmt_deps, source and unit are unchanged. The item is still unsplit on live, is not in route-pivot-dropped.txt, has no repair note and cites no SGA. The steps cite only two existing Mathlib leaves, and proof_deps is exactly the set of nodes the steps cite. I read the statement of def-weil-pbc-composite-adjunction in full: it gives the counit formula and says the composite Hom bijection is the composite of the two bijections, which is what Steps 3 and 5 use. I redid every step. Step 2 checks the triangles of the reverse adjunction (L(e)=u^-1, R(u)=e^-1). Step 3 gets the counit u2^-1∘L2(ε∘F(e1)) by composing twice. Step 4 checks both naturalities of c. Steps 5–6 compute the transpose: e1-naturality, then ε-naturality at e2,N^-1, then the cancellation u2,L2N^-1=L2(e2,N). I checked this a second way as ε̄_{L2N}∘F̄(b) and got the same map. Step 7 checks the naturality of κ. Step 8 checks the horizontal-composition square: after applying L3, the right side is κ'∘β̄_{L2T'}∘H̄(ᾱ_K). Every step is a written-out few-line calculation with no hidden lemma. Small cases: identity equivalences; a one-object category from an abelian group with u=g and e=g^-1; empty categories. Searched the DAG with rg for possible duplicates (lem-sfb-equivalence-square-inverse-mate-coherence, lem-cbc-enhanced-equivalence-square-mates): none states the conjugated counit, the transpose or the κ compositor. Blueprint source paragraph and Stacks 0037/0DV0 labels checked. No fixes, no tool_uses."
  }
 }
