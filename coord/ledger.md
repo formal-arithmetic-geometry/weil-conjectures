@@ -22864,3 +22864,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:55 L: returned deliver/NM/lem-pur-affine-coordinate-support-stalk-continuity (reviewer RETURN: L: independent stage-2 immutable head 94c669a47203: H2: delivery adds theorem node lem-pur-supported-cup-functoriality t)
 - 14:57 L: merged deliver/NG/lem-weil-point-derived-sections-tensor-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 14:58 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 14:58 L: merged deliver/NB/lem-fd-frobenius-fixed-pair-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 14:58 L: merged deliver/ND/lem-coef-enriched-sequence-projection-formula (stage 2; reviewer PASS; parallel immutable checks)

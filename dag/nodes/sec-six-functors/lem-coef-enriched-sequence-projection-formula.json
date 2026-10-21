@@ -17,7 +17,9 @@
   "lem-coef-sequence-pushforward-limit-projections",
   "lem-coef-sequence-sections-limit-comparison",
   "lem-pur-system-level-left-extension",
-  "lem-pur-system-ringed-sequence-site"
+  "lem-pur-system-ringed-sequence-site",
+  "def-coef-hom-zero-cycle-class",
+  "def-coef-semilinear-system-models"
  ],
  "proof": [
   {
@@ -266,5 +268,51 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-fe60361ca (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, every cited statement in its current form, and Stacks 08JA in full (sites-cohomology.tex l.8874; 07A6/0D6E/07A4/08J9 labels also verified). This head re-pushes 584a12be. The review of 584a12be was a FIX (step 6 repaired), but the landing refused it: per returns/NV.md, the cited lem-coef-sequence-sections-limit-comparison statement had changed. This head changes only steps 1 and 5, and goes back to the unrepaired step 6. Against 584a12be, statement, stmt_deps, blueprint, source and proof_deps are identical. There are 0 new nodes. Neither the item nor any node it cites is in the dropped list, live or side-live. The item is unsplit in both. The 2026-10-21 re-split note belongs to the parent lem-coef-derived-system-evaluation-calculus, so it does not apply here. No SGA is cited. 𝓡P=(Q⊗_A B_n)_n is always cartesian, so the normalization hypotheses are harmless. Small cases checked: P=0, N=0, the constant identity sequence, and nonflat Z→Z/2. Step 1, revised: the current K-flat representative gives e_n𝓡=S_n, and naturality plus the unit projection gives q_n=U(b_n)η_V. Correct. Steps 2-4 are unchanged and correct. I recomputed step 4: the transpose of Θ_n^{-1}q_n is U(e_{N,n})η ev=π_n ev. Step 5, revised: c_J with projection pr_n c_J RΓ(δ)=κ_n RΓ(q_n) matches the changed comparison statement, and the second finite comparison is the composition comparison. Correct. Step 6 has fault C4, unchanged from 584a12be: no cited node identifies H^0 of RΓ(Θ_n), the composition comparison and the 08JA isomorphisms with the external scalar adjunction. FIX: I re-applied the earlier repair onto the current head node, changing only proof[5]. It uses 08JA class(g)↦Q(g) with K-flat Q and K-injective X; Θ_n^{-1} represented by φ↦(x↦φ(x⊗1)) via the uniqueness clause of lem-sfb-dc-hom-scalar-adjunction; normalization (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction; and the counit normalization. The step is 1974 characters, and its uses add two nodes already in proof_deps. I accept the four generic tool uses. No duplicate nodes were found in side-live.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedSequenceProjectionFormula",
+  "declaration": "SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula",
+  "declarations": [
+   "SheafOfModules.EnrichedSequenceProjection.homSections",
+   "SheafOfModules.EnrichedSequenceProjection.ordinarySectionsIso_exists",
+   "SheafOfModules.EnrichedSequenceProjection.ordinarySectionsIso",
+   "SheafOfModules.EnrichedSequenceProjection.sectionsResolutionIso",
+   "SheafOfModules.EnrichedSequenceProjection.sectionsH0Comparison_exists",
+   "SheafOfModules.EnrichedSequenceProjection.sectionsH0Comparison",
+   "SheafOfModules.EnrichedSequenceProjection.toStrict",
+   "SheafOfModules.EnrichedSequenceProjection.ordinaryEvaluationIso_exists",
+   "SheafOfModules.EnrichedSequenceProjection.ordinaryEvaluationIso",
+   "SheafOfModules.EnrichedSequenceProjection.toStrictEvaluation",
+   "SheafOfModules.EnrichedSequenceProjection.limitPushforward",
+   "SheafOfModules.EnrichedSequenceProjection.projection",
+   "SheafOfModules.EnrichedSequenceProjection.evaluatedTensorComparison",
+   "SheafOfModules.EnrichedSequenceProjection.sourceHom",
+   "SheafOfModules.EnrichedSequenceProjection.systemHom",
+   "SheafOfModules.EnrichedSequenceProjection.levelHom",
+   "SheafOfModules.EnrichedSequenceProjection.comparison",
+   "SheafOfModules.EnrichedSequenceProjection.delta",
+   "SheafOfModules.EnrichedSequenceProjection.homIdentification",
+   "SheafOfModules.EnrichedSequenceProjection.counitLevel",
+   "SheafOfModules.EnrichedSequenceProjection.reducedEvaluation",
+   "SheafOfModules.EnrichedSequenceProjection.internalScalarMap",
+   "SheafOfModules.EnrichedSequenceProjection.finiteProjection",
+   "SheafOfModules.EnrichedSequenceProjection.uncurried",
+   "SheafOfModules.EnrichedSequenceProjection.globalProjection",
+   "SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedSequenceProjectionFormula.lean",
+  "statement": "theorem enrichedSequenceProjectionFormula (s : SequenceSectionsComparisons (rings.{c, v, max c v r} J B τ) A α) (_hs : s.Normalized) (p : SequenceSectionsDerivedPair (sequenceProjectionDirectImage s)) (πP : ∀ n : ℕ, p.functor ⟶ s.restriction.functor.mapDerivedCategory ⋙ ((CategoryTheory.evaluation ℕᵒᵖ (sequenceCoefficientModules A)).obj (op n)).mapDerivedCategory) (_hπP : ∀ (X : CochainComplex (StrictRingSystem (rings.{c, v, max c v r} J B τ)) ℤ) (n : ℕ), p.unit.app X ≫ (πP n).app (DerivedCategory.Q.obj X) ≫ ((CategoryTheory.evaluation ℕᵒᵖ (sequenceCoefficientModules A)).obj (op n)).mapDerivedCategory.map (s.restriction.functor.mapDerivedCategoryFactors.hom.app X) ≫ ((CategoryTheory.evaluation ℕᵒᵖ (sequenceCoefficientModules A)).obj (op n)).mapDerivedCategoryFactors.hom.app ((s.restriction.functor.mapHomologicalComplex (.up ℤ)).obj X) = DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app ((s.restriction.functor.mapHomologicalComplex (.up ℤ)).obj X))) (hL : L ≅ limitPushforward.{c, v, r} J B τ A α s p) (π : ∀ n : ℕ, L ⟶ e.{c, v, max c v r} J B τ n ⋙ resD (α.app (op n))) (_hπ : ∀ n : ℕ, π n = hL.hom ≫ projection.{c, v, r} J B τ A α s p πP n) (_hunit : ∀ (X : D.{c, v, max c v r} J A) (n : ℕ), adj.unit.app X ≫ (π n).app (R.obj X) ≫ (resD (α.app (op n))).map ((ρ n).hom.app X) = (σ n).adjunction.unit.app X) (aModels : Models.{c, v, r} J A a) (_hμModel : ∀ n : ℕ, ScalarTensorComparisonModel.{c, v, r} J A (B n) (α.app (op n)) (σ n) a (d.levelClosed n) aModels (d.levelTensorModels n) (evaluatedTensorComparison.{c, v, r} J B τ A d a R μ α σ ρ n)) (ν : ∀ n : ℕ, a.tensor ⋙ (σ n).T ≅ ((σ n).T.prod (σ n).T) ⋙ (d.levelClosed n).tensor) (_hμ : ∀ (X Y : D.{c, v, max c v r} J A) (n : ℕ), (e.{c, v, max c v r} J B τ n).map (μ.hom.app (X, Y)) ≫ (d.tensorEvaluation n).hom.app (R.obj X, R.obj Y) ≫ (d.levelClosed n).tensor.map (Prod.mkHom ((ρ n).hom.app X) ((ρ n).hom.app Y)) = (ρ n).hom.app (a.tensor.obj (X, Y)) ≫ (ν n).hom.app (X, Y)) : ∃ (rl : SequenceSectionsDerivedPair (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{max c v r}) ⥤ AddCommGrpCat.{max c v r})) (πL : ∀ n : ℕ, rl.functor ⟶ ((CategoryTheory.evaluation ℕᵒᵖ AddCommGrpCat.{max c v r}).obj (op n)).mapDerivedCategory) (κ : p.functor ⋙ (s.finite A).functor ≅ s.global ⋙ rl.functor), (∀ (X : CochainComplex (ℕᵒᵖ ⥤ AddCommGrpCat.{max c v r}) ℤ) (n : ℕ), rl.unit.app X ≫ (πL n).app (DerivedCategory.Q.obj X) ≫ ((CategoryTheory.evaluation ℕᵒᵖ AddCommGrpCat.{max c v r}).obj (op n)).mapDerivedCategoryFactors.hom.app X = DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app X)) ∧ (∀ X : CochainComplex (StrictRingSystem (rings.{c, v, max c v r} J B τ)) ℤ, (s.finite A).unit.app (((sequenceProjectionDirectImage s).mapHomologicalComplex (.up ℤ)).obj X) ≫ (s.finite A).functor.map (p.unit.app X) ≫ κ.hom.app (DerivedCategory.Q.obj X) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (sequenceSectionsLimitOrdinary s) (.up ℤ)).hom.app X) ≫ rl.unit.app (((s.restriction.functor ⋙ sequenceTowerSections A).mapHomologicalComplex (.up ℤ)).obj X) ≫ rl.functor.map (s.tower.unit.app ((s.restriction.functor.mapHomologicalComplex (.up ℤ)).obj X)) ≫ rl.functor.map (s.tower.functor.map (s.restriction.functor.mapDerivedCategoryFactors.inv.app X))) ∧ ∀ (P : D.{c, v, max c v r} J A) (N : DS.{c, v, max c v r} J B τ) (hP : Normalized.{c, v, max c v r} J B τ d.scalar (R.obj P)) (_hN : Normalized.{c, v, max c v r} J B τ d.scalar N) (n : ℕ), (uncurried.{c, v, r} J B τ A d L α σ P N n (finiteProjection.{c, v, r} J B τ A d a R L adj μ α σ ρ π P N hP n) = reducedEvaluation.{c, v, r} J B τ A d a R L adj α σ ρ ν P N n) ∧ (∀ q : sourceHom.{c, v, r} J B τ A L P N ⟶ (resD (α.app (op n))).obj (levelHom.{c, v, r} J B τ A α σ P N n), uncurried.{c, v, r} J B τ A d L α σ P N n q = reducedEvaluation.{c, v, r} J B τ A d a R L adj α σ ρ ν P N n → q = finiteProjection.{c, v, r} J B τ A d a R L adj μ α σ ρ π P N hP n) ∧ (finiteProjection.{c, v, r} J B τ A d a R L adj μ α σ ρ π P N hP n = internalScalarMap.{c, v, r} J B τ A d a L α σ π ν P N n) ∧ (globalProjection.{c, v, r} J B τ A d a R L adj μ α σ ρ s p hL rl πL κ P N hP n = (s.finite A).functor.map (internalScalarMap.{c, v, r} J B τ A d a L α σ π ν P N n) ≫ (s.scalar (α.app (op n))).inv.app (levelHom.{c, v, r} J B τ A α σ P N n)) ∧ (∀ h : P ⟶ L.obj N, coefficientHomZeroEquiv.{r, c, v} J (B n) ((σ n).T.obj P) ((e.{c, v, max c v r} J B τ n).obj N) (((DerivedCategory.homologyFunctor AddCommGrpCat.{max c v r} 0).map (globalProjection.{c, v, r} J B τ A d a R L adj μ α σ ρ s p hL rl πL κ P N hP n) ≫ (sectionsH0Comparison.{c, v, r} J (B n) (s.finite (B n))).hom.app (levelHom.{c, v, r} J B τ A α σ P N n)) ((sectionsH0Comparison.{c, v, r} J A (s.finite A)).inv.app (sourceHom.{c, v, r} J B τ A L P N) ((coefficientHomZeroEquiv.{r, c, v} J A P (L.obj N)).symm h))) = (σ n).T.map h ≫ counitLevel.{c, v, r} J B τ A R L adj α σ ρ N n)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f205040d6",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery after 039c5222 RETURN (F1 H3/H5: free (μ,ν) sign flip). Fixed via option (a): new constructed def evaluatedTensorComparison (ρ⁻¹ ≫ e_n μ ≫ d.tensorEvaluation ≫ tensor(ρ,ρ)) and hypotheses aModels + _hμModel : ScalarTensorComparisonModel from the landed def node def-coef-semilinear-system-models (added to stmt_deps, no cycle). ordinary_pure + summand + derived (K-flat flat-term square) determine the evaluated μ uniquely; _hμ then forces ν = evaluatedTensorComparison; −μ is excluded except in char 2. All clauses depend on μ only through e_n (naturality of π_n), so no faithfulness is needed. The joint flips (a-adjunction, aModels) and (adj, hL) leave every clause invariant, so they are not counterexamples. The canonical Lp* comparison satisfies the model, so there is no stronger assumption. Conclusion textually unchanged; clauses 1-5 re-read and correct. Statement verbatim, 26 declarations present, 4 sorry in named theorems, max line 98, unused private import dropped; only the item node differs from side-live. No compile (no file changed; worker reports clean sandbox/library scompile). Advisories: aModels is a parameter, following the Data convention; second reading is a self-reading."
  }
 }

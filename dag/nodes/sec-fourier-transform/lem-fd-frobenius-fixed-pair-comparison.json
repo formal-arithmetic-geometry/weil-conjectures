@@ -275,5 +275,30 @@
   "group": "Q150",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-7b8a32029 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the source in full. The delivery is one commit containing only the item and its report: no new nodes, and the statement and stmt_deps are unchanged. The source is main-20261015 def-fd-trace-function, whose final sentence only motivates the comparison, so proof_origin=agent is correct. The cycle check is clean: neither the item nor its parent lem-fd-rational-coefficient-category-comparison is in the closure, and the parent's step 5 cites the item. Step-by-step checks: (1) the base-change leaf lem-pod-separated-finite-type-base-change covers an arbitrary field extension k/k0. (2) Spec k is Noetherian, so X is Noetherian by lem-weil-pbc-finite-type-over-noetherian. lem-kun-dimension-finite-type gives finite global Krull dimension, which matches the noetherian/finite-dimensional hypothesis of S; I accept its declared tool use (a generic fact outside trf/pod). (3) ell is invertible because char k = p differs from ell, and def-weil-frobenius-detailed gives g_X its inverse. (4-5) I verified the naturality identity for b: J F_s ≅ F_p J by hand; J's Hom bijection then gives a fully faithful functor with the restricted Hom bijection. The datum records the reverse orientation Lh^{*,pbc} I_T ≃ I_U Lh^{*,sf}, and the statement correctly says to invert it. (6) Essential surjectivity holds for a target H only isomorphic to JK, by conjugating psi by v. (7) Mathlib Functor.asEquivalence at Equivalence.lean:604-649 is checked. (8-9) I type-checked the mixed square, J_L T_s F_{s,E} K -> F_{p,L} T_p J_E K. I re-derived the intertwining equation for j from the naturality of j and the rearranged square; it is correct. (10) Finite-stage inclusions are the same equation with I in place of T, using the datum's pin at literal pairs. Coefficient categories match: raw rationalization and literal pairs map to the PBC raw rational and Qbar categories, with no Karoubi completion. Small cases checked: X empty, X0 = Spec k0 (no k-linearity needed), E = L, H only isomorphic to JK. Batch 5: the flagged citation lem-trf-fully-faithful-ess-surj-equivalence is accepted. It is a Mathlib leaf for the general category-theory equivalence criterion, filed in sec-trace-formula; it is neither part of the trace-formula or Poincare statements nor their proofs, and its closure is only def-nagata-category. No SGA citation. Advisory only: lem-sf-fixed-pair-adjunction-lift and def-weil-endofunctor-fixed-pair-category could also be cited, but this is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusFixedPairComparison",
+  "declaration": "WeilConjectures.frobeniusFixedPairComparison",
+  "declarations": [
+   "WeilConjectures.FdFixedPairSquare",
+   "WeilConjectures.FdFixedPairComparison",
+   "WeilConjectures.FdGeometricFixedPairComparison",
+   "WeilConjectures.frobeniusFixedPairComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusFixedPairComparison.lean",
+  "statement": "theorem frobeniusFixedPairComparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] : ∃ (_hN : IsNoetherian (D.geometricFiber X₀).left) (_hD : Fact (∃ n : ℕ, topologicalKrullDim (D.geometricFiber X₀).left ≤ n)) (_hI : Fact (∀ x : (D.geometricFiber X₀).left, IsUnit (l : (D.geometricFiber X₀).left.presheaf.stalk x))), @FdGeometricFixedPairComparison l _ Ω _ _ _ S D hl X₀ _ _ _ _hN _hD _hI",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The supplied comparison system is a hypothesis, not an existence conclusion. Canonical IsoAlgebra.mapOfNatIso transports retain the full underlying Hom map. Scalar and inclusion squares have the specified coefficient comparison as underlying components; HEq identifies the recorded dependent presentations without replacing the actual operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a6c5f45b",
+  "group": "NB",
+  "result": "pass",
+  "note": "Only the lean field differs from the live node, and lean.statement appears verbatim in the file. Every node clause maps to the Lean. The given system S is a hypothesis, not an existence claim. Noetherian, finite-dimension and stalk-unit facts are existential conclusions. mapOfNatIso of the recorded reverse-oriented comparisons gives exactly J(θ)∘b⁻¹ with arrow map J(u), and IsEquivalence holds on both finite and common stages. The HEq pins to sfWeilComplex/sfCommonStageWeilComplex differ only in residue-field Invertible instances (subsingleton), so they are provable. The existential b and c are uniquely fixed by HEq to finite(E).rational and pair. Scalar squares use β.symm (orientation checked) with components (family.β e).symm, which follow from S.mixed. Inclusion squares use ιCompFunctorIso, which follow from pair_components. Edge cases checked: empty X, E=L, semilinear g_X, infinite k/k0, separate universe for Ω. All stmt_dep modules are imported, no new nodes, docstrings and source/blueprint tags present, proof only sorry. Not recompiled (unchanged; the worker reports a clean 5.3 s compile). Advisory: the J clauses overlap the parent's FdFrobeniusComparison; defining them here is correct for DAG direction."
  }
 }
