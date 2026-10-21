@@ -20791,3 +20791,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:49 L: merged deliver/NV/lem-pur-ringed-derived-pushforward-linear (stage 2; reviewer PASS; parallel immutable checks)
 - 07:49 L: merged deliver/NK/lem-sf-etale-origin-pushforward-amplitude (stage 2; reviewer PASS; parallel immutable checks)
 - 07:49 L: merged deliver/NA/lem-coef-sequence-projection-derived-adjunction (stage 2; reviewer PASS; parallel immutable checks)
+- 07:49 L: returned deliver/NO/lem-weil-pbc-flat-coefficient-reduction-adjunct (reviewer RETURN: L: independent stage-2 immutable head 25cfb5719a85: Mechanical finding upheld. stmt_deps adds theorem node lem-sfb-succe)
