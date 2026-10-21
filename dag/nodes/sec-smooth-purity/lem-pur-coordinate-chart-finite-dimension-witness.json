@@ -15,9 +15,136 @@
   "def-sbc-affine-space",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $g:Z\\to\\mathbf A^a_S$ be the restriction of $h$. The scheme-theoretic inverse-image hypothesis identifies $g$ with the base change of $h$ along $\\mathbf A^a_S\\hookrightarrow\\mathbf A^{a+b}_S$. Thus $g$ is etale. Likewise $Z\\to Y$ is etale as the base change of $e$. Choose $z_0\\in Z$, and an affine open $S_0=\\operatorname{Spec}R$ containing its image in $S$. The map $g_0:Z\\times_SS_0\\to\\mathbf A^a_{S_0}$ is etale by base change. Its nonempty image $W$ is open. Identify $\\mathbf A^a_{S_0}$ with $\\operatorname{Spec}R[u_1,\\ldots,u_a]$ and let $P$ be the prime corresponding to $g(z_0)$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-sbc-affine-space",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO (lemma-base-change-etale); Tag 03WT (lemma-etale-open)"
+   }
+  },
+  {
+   "text": "Put $p=P\\cap R$. Choose a minimal prime $s\\subseteq p$ using the prime-contains-minimal-prime lemma with ideal $0$. The ideal $Q=sR[u_1,\\ldots,u_a]$ is prime, since its quotient is the polynomial ring over the domain $R/s$, and $Q\\subseteq P$. An open of a spectrum containing $P$ contains $Q$: choose a basic open $D(f)$ with $P\\in D(f)\\subseteq W$; then $f\\notin P$ implies $f\\notin Q$. Consequently $Q\\in W$, and the definition of the image $W$ supplies a point $t\\in Z\\times_SS_0$ with $g_0(t)=Q$. Its image in $S_0$ is exactly $s$. Regard $t$ also as a point of $Z$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), existence of a minimal prime below a prime; elementary polynomial and basic-open calculation"
+   }
+  },
+  {
+   "text": "Write $k_s=\\kappa(s)=\\operatorname{Frac}(R/s)$. This identification follows by reducing fractions in $R_s/sR_s$: the images of $R\\setminus s$ are exactly the nonzero elements of $R/s$. In the fibre $Z_s$, the chosen point maps to the zero prime of $k_s[u_1,\\ldots,u_a]$, because $Q=sR[u]$ becomes the zero ideal after first inverting $R\\setminus s$ and then reducing modulo $s$. The zero prime is the generic point: it lies below every prime, so its closure is the whole spectrum. Put $K=k_s(u_1,\\ldots,u_a)$, with $K=k_s$ if $a=0$. The affine-stalk localization lemma gives $\\mathcal O_{\\mathbf A^a_{k_s},g_s(t)}=k_s[u]_{(0)}=K$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), part (6); elementary localization calculations in polynomial rings"
+   }
+  },
+  {
+   "text": "In $\\mathbf A^{a+b}_{k_s}$ the image $h_s(t)$ is the prime $(v_1,\\ldots,v_b)$ of $k_s[u,v]$: its contraction to $k_s[u]$ is zero and its quotient on the coordinate subspace is the zero prime. Hence its affine local ring is $k_s[u,v]_{(v)}$. There is a canonical isomorphism $k_s[u,v]_{(v)}\\cong K[v]_{(v)}$. Indeed every nonzero polynomial in $u$ is already inverted on the left. The remaining denominators are exactly polynomials with nonzero constant coefficient in $v$, on both sides. Clearing the finitely many $u$-denominators in a fraction over $K[v]$ gives the inverse map. Thus the ambient fibre local ring has exactly the displayed form in the statement.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), part (6); elementary localization calculations in polynomial rings"
+   }
+  },
+  {
+   "text": "The field $K$ has dimension zero, since its only prime ideal is $(0)$. Apply the polynomial-origin local-ring lemma over $K$ with $d=b$. It states that $K[v_1,\\ldots,v_b]_{(v_1,\\ldots,v_b)}$ has dimension $b$. Combined with the preceding identifications, the target local rings of $g_s$ and $h_s$ have dimensions $0$ and $b$, respectively. This also covers $b=0$, when the second local ring is $K$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-origin-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OP (lemma-dim-affine-space), applied over the field kappa(s)(u_1,...,u_a)"
+   }
+  },
+  {
+   "text": "The fibre morphisms $g_s:Z_s\\to\\mathbf A^a_{k_s}$ and $h_s:T_s\\to\\mathbf A^{a+b}_{k_s}$ are etale by base change. Apply etale local dimension invariance to each at the chosen point. To apply the ring version, take affine target neighborhoods of the image and affine source neighborhoods inside their inverse images; the induced maps on coordinate rings are etale by the affine-local characterization of an etale morphism, and their prime localizations are the scheme stalks. Thus $\\dim\\mathcal O_{Z_s,t}=0$ and $\\dim\\mathcal O_{T_s,t}=b$, with no Noetherian assumption.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP (lemma-dimension-etale-extension), combined with morphisms.tex Tag 02GO"
+   }
+  },
+  {
+   "text": "By the minimal-prime localization lemma, every element of the maximal ideal $m_s=sR_s$ of $R_s$ is nilpotent. For any one of $V=Z,T,Y,X$ and its chosen point $v=t,t,y,x$ over $s$, its image in $\\mathcal O_{V,v}$ is nilpotent as well. The extended ideal $J=m_s\\mathcal O_{V,v}$ consists of nilpotent elements: if $z=\\sum_{j=1}^n c_j r_j$ with $r_j^{N_j}=0$, then $z^{1+\\sum_j(N_j-1)}=0$, since every monomial in the expansion contains some $r_j^{N_j}$. This proves nilness of $J$, without asserting any uniform nilpotence exponent for $J$ itself.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EU (lemma-minimal-prime-reduced-ring); elementary binomial argument for finite sums of nilpotent elements"
+   }
+  },
+  {
+   "text": "The fibre-stalk quotient lemma identifies $\\mathcal O_{V_s,v}$ with $\\mathcal O_{V,v}/J$ for each of these four $V$. Every prime ideal contains $J$, since a prime containing a power contains the element itself. Thus contraction along the quotient map is an inclusion-preserving bijection from primes of $\\mathcal O_{V,v}/J$ to all primes of $\\mathcal O_{V,v}$, with inverse $P\\mapsto P/J$. These inverse maps preserve strict inclusions, hence preserve every finite strict prime chain and its length. Their dimension suprema are equal, even when infinite. In particular $\\dim\\mathcal O_{Z,t}=0$ and $\\dim\\mathcal O_{T,t}=b$, and the asserted dimension preservation also holds for $Y$ and $X$.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre), first isomorphism; elementary prime-ideal correspondence for a quotient by a nil ideal"
+   }
+  },
+  {
+   "text": "Finally apply etale local dimension invariance to $Z\\to Y$ and $e:T\\to X$ at $t$, with images $y$ and $x$. As in Step 6, affine charts and the affine-stalk localization lemma reduce each application to the ring statement. This gives $\\dim\\mathcal O_{Y,y}=\\dim\\mathcal O_{Z,t}=0$ and $\\dim\\mathcal O_{X,x}=\\dim\\mathcal O_{T,t}=b$. The fibre-product relation defining $Z$ gives $x=i(y)$. Together with Steps 2--4 and 8 this supplies the chosen affine base, minimal prime, generic fibre image, explicit ambient fibre local ring, and all dimension assertions.",
+   "uses": [
+    "lem-sc-etale-local-dimension",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP (lemma-dimension-etale-extension), combined with morphisms.tex Tag 02GO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-sbc-affine-space",
+  "def-pc-scheme",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "def-weil-etale-morphism",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Witness argument assembled from Tags 00E0, 00EU, 00OP; morphisms.tex Tags 02GO and 03WT; more-algebra.tex Tag 07QP; schemes.tex Tags 01HV and 0HA1. Realizes the finite-dimension portion extracted from the coordinate-model argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +180,80 @@
    "results": "{\"t\": \"2026-10-21T06:19:03Z\", \"tool\": \"grep\", \"query\": \"Etale.*[Dd]im|[Dd]im.*[Ee]tale|minimalPrimes|height.*MvPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"72e753385040fd95\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebraic-geometry, sheaf or homological declarations do not state the complete supported-coordinate assertion; inspected the returned signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*[Dd]im|[Dd]im.*[Ee]tale|finiteDimensionWitness",
+   "results": "{\"t\": \"2026-10-21T08:25:02Z\", \"tool\": \"grep\", \"query\": \"Etale.*[Dd]im|[Dd]im.*[Ee]tale|finiteDimensionWitness\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"b95eac20b3913fab\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete witness: returned etale-locus, standard-smooth, minimal-prime or generic-point facts lack the combined coordinate-chart existence and local dimension assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale chart over minimal prime base local ring dimension codimension coordinate subspace",
+   "results": "{\"t\": \"2026-10-21T08:25:03Z\", \"tool\": \"leansearch\", \"query\": \"etale chart over minimal prime base local ring dimension codimension coordinate subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.KrullDimLE.of_isLocalization\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.Etale.formallyEtale\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"5c04be2044aa0638\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete witness: returned etale-locus, standard-smooth, minimal-prime or generic-point facts lack the combined coordinate-chart existence and local dimension assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, ringKrullDim",
+   "results": "{\"t\": \"2026-10-21T08:25:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete witness: returned etale-locus, standard-smooth, minimal-prime or generic-point facts lack the combined coordinate-chart existence and local dimension assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonempty etale coordinate subspace over arbitrary scheme has point over minimal base prime with local dimension zero and ambient local dimension equal to number of normal coordinates",
+   "results": "{\"t\": \"2026-10-21T08:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"Nonempty etale coordinate subspace over arbitrary scheme has point over minimal base prime with local dimension zero and ambient local dimension equal to number of normal coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"Algebra.etaleLocus\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"d37ba7a47b19daa5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete witness: returned etale-locus, standard-smooth, minimal-prime or generic-point facts lack the combined coordinate-chart existence and local dimension assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderBaseChange|IsStableUnderComposition|pullback",
+   "results": "{\"t\": \"2026-10-21T08:25:23Z\", \"tool\": \"grep\", \"query\": \"IsStableUnderBaseChange|IsStableUnderComposition|pullback\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"74\", \"75\", \"83\", \"84\", \"88\"], \"digest\": \"7162a9077a2778ad\"}",
+   "date": "2026-10-21",
+   "verdict": "supporting fact found: etale base change is already the existing DAG Mathlib leaf lem-weil-pbc-etale-scheme-base-change; this does not state the witness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale scheme morphisms are stable under base change",
+   "results": "{\"t\": \"2026-10-21T08:25:23Z\", \"tool\": \"leansearch\", \"query\": \"etale scheme morphisms are stable under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"Algebra.Etale.baseChange\"], \"digest\": \"2ebd9541d069810f\"}",
+   "date": "2026-10-21",
+   "verdict": "supporting fact found: etale base change is already the existing DAG Mathlib leaf lem-weil-pbc-etale-scheme-base-change; this does not state the witness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback.snd",
+   "results": "{\"t\": \"2026-10-21T08:25:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback.snd\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.instSndScheme\", \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"6451993676ad8629\"}",
+   "date": "2026-10-21",
+   "verdict": "supporting fact found: etale base change is already the existing DAG Mathlib leaf lem-weil-pbc-etale-scheme-base-change; this does not state the witness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change of an etale morphism of schemes is etale pullback first and second projection",
+   "results": "{\"t\": \"2026-10-21T08:25:24Z\", \"tool\": \"leanfinder\", \"query\": \"The base change of an etale morphism of schemes is etale pullback first and second projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"c50939e46c4d400e\"}",
+   "date": "2026-10-21",
+   "verdict": "supporting fact found: etale base change is already the existing DAG Mathlib leaf lem-weil-pbc-etale-scheme-base-change; this does not state the witness"
+  },
+  {
+   "tool": "grep",
+   "query": "etale_isStableUnderBaseChange|Etale \\(pullback\\.(fst|snd)",
+   "results": "{\"t\": \"2026-10-21T08:25:49Z\", \"tool\": \"grep\", \"query\": \"etale_isStableUnderBaseChange|Etale \\\\(pullback\\\\.(fst|snd)\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"c9fb4c5a62bc39d9\"}",
+   "date": "2026-10-21",
+   "verdict": "supporting fact found: etale base change is already the existing DAG Mathlib leaf lem-weil-pbc-etale-scheme-base-change; this does not state the witness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty open in relative affine space contains the generic point of a fibre over some minimal prime of an arbitrary base ring",
+   "results": "{\"t\": \"2026-10-21T08:25:50Z\", \"tool\": \"leanfinder\", \"query\": \"A nonempty open in relative affine space contains the generic point of a fibre over some minimal prime of an arbitrary base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"PrimeSpectrum.quasiSober\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"genericPoints.isGenericPoint\", \"genericPoints.component_surjective\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Opens.exists_toScheme\"], \"digest\": \"ec86011f02388a52\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete witness: returned etale-locus, standard-smooth, minimal-prime or generic-point facts lack the combined coordinate-chart existence and local dimension assertions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-support-coordinate-model",
@@ -76,5 +273,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-coordinate-chart-finite-dimension-witness",
+  "worker": "stage1",
+  "summary": "Proved the witness by lifting a polynomial prime above a minimal base prime through the open etale chart, identifying the two fibre local rings, comparing dimensions etale-locally, and preserving prime-chain dimension under the nil base ideal. Reused all required DAG facts; no new nodes and no statement changes.",
+  "blueprint": "lem-pur-frame-independence, proof first paragraph (etale-local supported-class comparison), through lem-pur-relative-support-bottom-descent and lem-pur-relative-support-coordinate-model: the finite local-dimension witness that identifies chart codimension without subtracting infinite dimensions.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic commutative-algebra tool: equality of dimensions of prime localizations under etale ring maps, for both fibre charts and the maps to X and Y; this unit has no other statement of it."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "why": "Generic polynomial-ring tool computing dimension b at the origin over the rational function field; the unit has no replacement for this commutative-algebra calculation."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic scheme-stalk tool identifying a fibre local ring with the quotient by the base maximal ideal; needed for dimension preservation over a minimal base prime."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-6a0eb7233",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-6a0eb7233 (reviewer sub-agent of L); spot-checked: I read all 9 steps in full. The statement and stmt_deps are unchanged against Q86's unsplit node, there are no new nodes and no SGA. Each cited statement matches its use: 02GO base change for g, Z→Y and the fibre maps; 03WT for the open image W; 00E0 with I=0 for the minimal prime s ⊆ P∩R; Q=sR[u] ⊆ P is a generization, so it lies in W; 01HV(c) for the stalks; 00OP over K=k_s(u) gives dim K[v]_(v)=b; 07QP (more-algebra l.10831, no Noetherian hypothesis) is used on the fibre charts and again on Z→Y and T→X; the first clause of 00EU makes m_s nil, and the finite-multinomial exponent proves J is nil; 0HA1 gives O_{V_s,v}=O_{V,v}/J, and the prime bijection preserves chain suprema, including the infinite case. I checked k_s[u,v]_(v) ≅ K[v]_(v), the edge cases a=0 and b=0, a nonreduced base and a non-Noetherian base with no uniform nil bound. The citer coordinate-model Step 3 uses exactly the dim 0 / dim b conclusions. No duplicate turned up in an rg search of the DAG. I accept the tool_uses (07QP, 00OP, 0HA1) as generic tools. No fixes."
  }
 }
