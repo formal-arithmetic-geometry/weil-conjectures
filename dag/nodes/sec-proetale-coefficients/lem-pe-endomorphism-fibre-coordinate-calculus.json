@@ -11,9 +11,86 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with biproduct component morphisms: a displayed pair denotes the two projections of a map from an arbitrary object, not elements of an object of $\\mathcal A$. By [def-sp-abelian] finite biproducts and bilinear composition exist. For intertwining chain maps $a,b$, the identities $(ba)s=b(ta)=(bt)a$ and $(a+a')s=ta+ta'=t(a+a')$ show closure under composition and addition; identities and zero maps intertwine as well. Associativity, units and the abelian-group laws on morphisms are inherited componentwise from complexes [def-weil-abstract-derived-category]. This gives the stated preadditive category of pairs.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone: the two by two cone differential"
+   }
+  },
+  {
+   "text": "By the cone convention in [def-weil-abstract-derived-category], $\\operatorname{Cone}(s)^{q-1}=V^{q-1}\\oplus V^q$ has differential $(u,v)\\mapsto(du+sv,-dv)$. The shift $[-1]$ negates this differential. Reordering its two summands therefore gives $K(V,s)^q=V^q\\oplus V^{q-1}$ and $D(v,u)=(dv,-du-sv)$. Directly, $D^2(v,u)=(0,dsv-sdv)=(0,0)$ since $s$ is a chain map. Reordering is the biproduct permutation, whose inverse is the same permutation.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone: the two by two cone differential"
+   }
+  },
+  {
+   "text": "For an intertwiner $a:(V,s)\\to(W,t)$, put $K(a)=\\operatorname{diag}(a,a)$. Then $D_WK(a)(v,u)=(d_Wav,-d_Wau-tav)$ and $K(a)D_V(v,u)=(ad_Vv,-ad_Vu-asv)$. They agree by the chain-map identity for $a$ and $ta=as$, so $K(a)$ is a chain map [def-weil-abstract-derived-category]. On both biproduct components, $K(1)=1$, $K(ba)=K(b)K(a)$, $K(a+a')=K(a)+K(a')$ and $K(0)=0$. Thus these object and morphism formulas give an additive functor; these equalities use only bilinearity and biproduct projections [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone: the two by two cone differential"
+   }
+  },
+  {
+   "text": "Let $\\epsilon_r=(-1)^r$ for an arbitrary integer $r$, so $\\epsilon_r^2=1$. Using the shift convention of [def-weil-abstract-derived-category] and Tag 011G, at the reindexed degrees the source $K(V[r],s[r])$ has differential $(v,u)\\mapsto(\\epsilon_r dv,-\\epsilon_r du-sv)$ and the target $K(V,s)[r]$ has differential $(v,u)\\mapsto(\\epsilon_r dv,-\\epsilon_r du-\\epsilon_r sv)$. For $\\sigma_r(v,u)=(v,\\epsilon_r u)$, both $D_{\\mathrm{target}}\\sigma_r(v,u)$ and $\\sigma_rD_{\\mathrm{source}}(v,u)$ equal $(\\epsilon_r dv,-du-\\epsilon_r sv)$. Hence $\\sigma_r$ is a chain map; its square on components is $(v,\\epsilon_r^2u)=(v,u)$, giving the specified inverse.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain: integer shift differential and shifted maps"
+   }
+  },
+  {
+   "text": "For each intertwiner $a$, both $K(a)[r]\\sigma_{(V,s),r}$ and $\\sigma_{(W,t),r}K(a[r])$ send $(v,u)$ to $(av,\\epsilon_r au)$, proving naturality. The shift maps simply reindex the components of $a$ [def-weil-abstract-derived-category]. At $r=0$, $\\epsilon_0=1$, so the comparison is the identity. Starting at $K(V[r][r'],s[r][r'])$, first apply $\\sigma_{(V[r],s[r]),r'}$, then $\\sigma_{(V,s),r}[r']$. The resulting coordinates are $(v,\\epsilon_r\\epsilon_{r'}u)=(v,\\epsilon_{r+r'}u)$, since $(-1)^{r+r'}=(-1)^r(-1)^{r'}$ for all integers. Under the canonical reassociation of degree indices this is exactly $\\sigma_{(V,s),r+r'}$, as required.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain: integer shift differential and shifted maps"
+   }
+  },
+  {
+   "text": "For $J:M\\to V$ with $sJ=0$, $D\\eta_J(m)=(d_VJm,-sJm)=(Jd_Mm,0)=\\eta_Jd_M(m)$; thus $\\eta_J$ is a chain map [def-weil-abstract-derived-category]. Given $aJ=J'g$ and $tJ'=0$, the two maps $K(a)\\eta_J$ and $\\eta_{J'}g$ have components $(aJ,0)=(J'g,0)$. Finally $s[r]J[r]=(sJ)[r]=0$, and $\\sigma_{(V,s),r}\\eta_{J[r]}$ has components $(J[r],\\epsilon_r0)=(J[r],0)$, which are precisely those of $\\eta_J[r]$. Equality of the two biproduct projections gives each claimed equality of morphisms [def-sp-abelian]. All arguments are degreewise finite biproduct calculations; they impose no boundedness or exactness conditions.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, functorial fibre and shifts. Coordinate conventions: Stacks Tag 014E (derived.tex, definition-cone) and Tag 011G (homology.tex, definition-shift-cochain)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Cones paragraph: explicit degreewise verification of functoriality, integer shifts and strict augmentations, using Stacks Tags 014E and 011G for conventions."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +133,59 @@
    "results": "20 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean Source inspected: MappingCocone.lean 29-60, 209-309; MappingCone.lean 630-648; Pretriangulated.lean 418-465.",
    "date": "2026-10-21",
    "verdict": "no match: mapping-cocone lifts supply individual maps, and ordinary additive-functor shift/cone results do not state the full endomorphism-fibre coordinate, coherence and augmentation contract."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone|CommShift",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\", \"shift\"",
+   "results": "0 hits: none Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping fibre of an endomorphism of cochain complexes is additive and commutes coherently with shifts",
+   "results": "8 hits: CochainComplex.mappingCone.map_δ, CochainComplex.HomComplex.Cochain.shift_add, CategoryTheory.Functor.commShiftMapCochainComplex, CochainComplex.HomComplex.Cochain.shiftAddHom, CochainComplex.instAdditiveIntShiftFunctor, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.HomComplex.Cochain.leftShiftAddEquiv, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping fibre Cone(s)[-1] of a chain endomorphism defines an additive functor with coherent integer shifts and natural strict kernel augmentations",
+   "results": "8 hits: HomotopyCategory.composableArrowsFunctor, CochainComplex.mappingCone.mapHomologicalComplexXIso, HomotopyCategory.spectralObjectMappingCone, HomotopyCategory.composableArrowsFunctor_obj, HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.instAdditiveIntFunctorSingleFunctors, CochainComplex.mappingCone.mapHomologicalComplexIso Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "def mappingCocone|def lift|def map|shiftIso",
+   "results": "4 hits: 33, 210, 269, 282 Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\", \"lift\"",
+   "results": "12 hits: CochainComplex.mappingCocone.liftCochain, CochainComplex.mappingCocone.liftCochain_comp_snd, CochainComplex.mappingCocone.liftCochain_comp_fst, CochainComplex.mappingCocone.liftCocycle, CochainComplex.mappingCocone.liftCochain_v_fst_f, CochainComplex.mappingCocone.liftCochain_v_snd_v, CochainComplex.mappingCocone.liftCochain_v_fst_f_assoc, CochainComplex.mappingCocone.liftCochain_v_snd_v_assoc Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy fibre of an endomorphism is functorial for commuting chain maps and has signed shift isomorphisms and zero second component lifts",
+   "results": "8 hits: CategoryTheory.Functor.mapHomotopy, HomotopyCategory.composableArrowsFunctor, HomologicalComplex.homotopyCofiber.desc, HomologicalComplex.homotopyCofiber, HomologicalComplex.HasHomotopyCofiber, HomologicalComplex.cylinder, HomologicalComplex.cylinder.desc, CategoryTheory.Functor.mapHomotopyEquiv Source inspected: MappingCocone.lean:29-60,209-309; Shift.lean:135-150,240-265; SpectralObject.lean:27-43; MappingCone.lean:630-650; Pretriangulated.lean:410-435.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide cone functors, individual lifts, or shifts of functors induced from coefficient categories, but not this combined endomorphism-pair functor with the specified coherent signed comparisons and strict augmentations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-roos-cone-calculus",
@@ -78,5 +204,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-endomorphism-fibre-coordinate-calculus",
+  "worker": "stage1",
+  "summary": "Read the current unit and Cones paragraph, the two cited definition statements, Stacks cone and shift definitions, project declarations and Mathlib candidates. Retained the statement and gave six direct component calculations covering the pair category, fibre signs, additive functor, signed chain isomorphisms, naturality and coherence, and strict augmentations. All steps are elementary computations from the two existing definitions; no subsidiary node is needed. Tested zero and identity endomorphisms, zero complexes, odd/even/negative shifts and nonzero differentials.",
+  "blueprint": "Realizes det-pe-derived-nakayama-first-reduction, Cones paragraph: “Both constructions are functorial on complexes” and “Shifts are clear”, through lem-pe-roos-cone-calculus, for the endomorphism-fibre functor and its strict augmentation. This is a tool below the unit, not its key statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-a5d7e3370",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-a5d7e3370 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged from side-live. The item is still unsplit with no proof on live and side-live, there is no re-split note for it, and the delivery has no new nodes. Sources checked: the main-20261015 first-reduction Cones paragraph ('functorial on complexes … Shifts are clear'); Stacks derived.tex definition-cone (014E: C(f)^n=L^n⊕K^{n+1}, d=[[d_L,f],[0,−d_K]]); homology.tex definition-shift-cochain (011G: d_{A[k]}=(−1)^k d, f[k] has no sign); and def-weil-abstract-derived-category, which carries the same cone and the [1]=−d shift. I recomputed every step. Step 1: intertwiners are closed under composition and sums. Step 2: Cone(s)[−1] reordered gives D(v,u)=(dv,−du−sv), and D²=(0,dsv−sdv)=0. Step 3: diag(a,a) is a chain map by ad=da and ta=as, and is additive. Step 4: both composites with σ_r give (εdv,−du−εsv), and ε²=1 gives the inverse. Step 5: naturality gives (av,εau), σ_0=id, and σ_r and σ_{r'} compose to σ_{r+r'}, including negative shifts. Step 6: η_J is a chain map by sJ=0, the naturality is (aJ,0)=(J'g,0), and σ η_{J[r]}=η_J[r]. Edge cases checked: V=0, s=0, s=1, r=−1, shifts 1 then −1, Z--2-->Z with s=3, and characteristic 2. The parent lem-pe-roos-cone-calculus steps 1 and 5 use exactly these clauses. lem-weil-signed-mapping-cocone-shift (another unit) generalizes only the shift clause, so this is not a duplicate. lem-amb-signed-fibre-shift concerns functors to Ab, and lem-pe-endomorphism-fibre-double-cone is a sibling. Calling all six steps elementary is right: each is a few-line biproduct calculation. All four search kinds are recorded. Delivery-errors A–F are clean. No fixes and no tool_uses."
  }
 }
