@@ -292,5 +292,36 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-346c5b8e7 (reviewer sub-agent of L); spot-checked: I read the whole item and the full statement of every cited node. Sources read: Bhatt–Scholze Lemma 6.5.9(4)-(5), Prop. 6.6.11 and Rem. 6.8.15; Stacks 06YS/0G7E/06YY/0D6D. This is a first split: the item is unsplit on live and side, there is no repair note, the statement and stmt_deps are unchanged, there are no new nodes, no cycle, no dropped nodes and no SGA citation. One fault, C4/E5, in Step 2. It takes eta from lem-tw-ordinary-completed-integral-pullback, which maps into the def-pur-integral-derived-operations Cone(1-s) model, and declares it equal to the def-weil-pbc-completed-pullback unit gamma. Neither cited node bridges the two models, and the only existing comparison (lem-a1-integral-pullback-completed-comparison) matches projections only; lim^1 means that does not determine the map. FIX: I rewrote Step 2 along the route of lem-weil-pbc-realization-completed-pull, using only nodes valid for any morphism. lem-weil-valued-dvr-finite-quotients gives finite A/varpi^n. lem-weil-pbc-profinite-coefficient-inverse-image shows c_g is an isomorphism; this is proved there, not assumed. lem-weil-pbc-reduction-pullback-derived-tower gives tau with tau·Lg*_Tow(i_K)=i_{P_gK}, so Rlim(tau)∘gamma equals the tower unit of P_gK as maps. That unit is invertible by lem-weil-pbc-intrinsic-to-tower-complete, since P_gK lies in C_{X'} by Step 1. I reworded Step 7's last sentence. proof_deps is now the union of the uses. In tool_uses I added the three pbc lemmas and removed lem-tw-ordinary-completed-integral-pullback and constant-completion-equivalence, which the proof no longer uses. Steps 1 and 3–7 were checked against the hypotheses of the cited nodes, and the balanced tensor and fraction maps were checked by hand. Edge cases checked: empty X', K=0, g=id, a free model, and the torsion cone. Tool uses accepted: kflat-resolution, ringed-derived-pullback-linear, tw stratified models, the integral stratified characterization, localization coherence, ringed-topoi derived pullback, ringed-topos kflat pullback, and the three new pbc lemmas. Advisory: lem-weil-pbc-realization-completed-pull is the finite-type-over-k special case; this item is the general version.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRealizationPullbackComparison",
+  "declaration": "AlgebraicGeometry.Scheme.rationalRealizationPullbackComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalPullScalar",
+   "AlgebraicGeometry.Scheme.rationalPullFraction",
+   "AlgebraicGeometry.Scheme.rationalPullModule",
+   "AlgebraicGeometry.Scheme.rationalPullDerived",
+   "AlgebraicGeometry.Scheme.rationalPullComplexCounit",
+   "AlgebraicGeometry.Scheme.RationalPullIntegral",
+   "AlgebraicGeometry.Scheme.RationalPullIntegral.completedFunctor",
+   "AlgebraicGeometry.Scheme.RationalRealizationPullbackComparison",
+   "AlgebraicGeometry.Scheme.rationalRealizationPullbackModel",
+   "AlgebraicGeometry.Scheme.rationalRealizationPullbackComparison"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRealizationPullbackComparison.lean",
+  "statement": "theorem rationalRealizationPullbackComparison (g : X ⟶ Y) (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y) : Nonempty (RationalRealizationPullbackComparison l E g sX sY)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem supplies the full normalized comparison record, including preservation of ordinary integral pullback, invertibility of the published strict quotient-tower unit, balanced tensor normalization on sections and derived representatives, and descent with the exact raw fraction formula. rationalRealizationPullbackModel states the local perfect-model clause on arbitrary pro-etale charts. The rational ringed pullback is exact inverse image followed by derived scalar extension along the canonical coefficient map; no coefficient-map isomorphism is assumed or included as an extra conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0924f5687",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Checked every clause against node and BS Rem 6.8.15/Prop 6.6.11/Lem 6.5.9. Only the item lean record and one module change; the other snapshot record diffs are live moving ahead. ordinary_mem uses the full complete predicate; unit_isIso is on the exact pbcActualStrictCompletedPullUnit. rationalPullDerived = exact inverse image then pbcDerivedExtend along the actual map, with no coefficient iso. All record data is pinned: rationalCoefficient (continuous adjunct + square with c_g), moduleComparison (generators 1⊗1⊗m), ordinaryComparison (derived_normalization; counits iso on K-flat), alpha (alpha_normalization; γ iso, objects all Q K), rawPull (every fraction). Model theorem holds for any h. Edge cases, universes, verbatim statement, declarations list, docstrings and sorry-only all ok. Advisories: rationalPullDerived duplicates parent derivedPull (downstream, cycle prevents reuse); theorem-owned plain decls with stmt_deps unchanged; RationalModuleRealizationFunctor still in rework-hold, item released 09:46Z. No compile run (no file changed)."
  }
 }
