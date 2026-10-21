@@ -19258,3 +19258,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:04 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 
 - 08:06 L: batch 20261020T235524 dependency take-out
+- 00:07 L: returned deliver/F5/Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget (reviewer RETURN: (reviewer C-73e81, head 73e817eac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
