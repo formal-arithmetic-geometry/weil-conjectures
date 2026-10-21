@@ -18,9 +18,143 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=\\pi_W^*$ and $G=\\pi_{W,*}$ on module sheaves. The factorization $p_W=q_S\\pi_W$ identifies $F\\Lambda_S$ with $p_W^*\\Lambda$, so the coefficient map is an isomorphism. The geometric inverse-image exactness theorem makes $F$ exact; the ringed-topos module adjunction supplies $F\\dashv G$. The derived tensor pullback theorem makes its termwise derived functor strong symmetric monoidal, with the usual unit comparison. Thus the comparison in the statement is defined by pulling back evaluation and taking its tensor-Hom transpose.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, derived pullback paragraph; construction (4.1), coefficient factorization and Proposition 4.3(1)"
+   }
+  },
+  {
+   "text": "Let $E\\to S$ be an extremally disconnected profinite test object and put $W_E=W\\times_S E$. The affine component-site theorem gives the affine scheme $W_E$, its component space $E$, and the locally ringed space $|W|\\times_S E$ with structure sheaf pulled back from $W$. Its closed points are precisely $(c,e)$ with $c$ closed in $W$: the closure of $(w,e)$ is $\\overline{\\{w\\}}\\times\\{e\\}$ inside this fibre product, since $E$ is Hausdorff and specialization stays in a component of $W$. Every $(w,e)$ therefore specializes to exactly $(c(w),e)$, and this closed-point locus is the closed subset $W^c\\times_S E$. Its local rings are the corresponding local rings of $W$, hence strictly henselian. Together with $\\pi_0(W_E)=E$, the definition of w-contractibility proves that $W_E$ is w-contractible. This includes $E=\\varnothing$.",
+   "uses": [
+    "lem-zl-affine-component-site-projection",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof: the paragraph proving that X times over pi_0(X) S is w-contractible; Bhatt–Scholze Lemmas 2.2.8 and 2.4.8"
+   }
+  },
+  {
+   "text": "Let $U\\to W$ be any w-contractible affine and put $T=\\pi_0(U)$. The clopen-partition theorem splits each finite qcqs covering family over $U$: glue the maps from its disjoint clopen pieces into the coproduct of the covering members. Thus $U$ satisfies the split-cover condition in the affine component-site theorem. For a module sheaf $M$ on $\\operatorname{Prof}/S$, that theorem gives $(FM)(U)=M(T)$ on underlying abelian groups. Its naturality in abelian sheaves and rings identifies the action too: apply it to the scalar-action map, so the two section groups have the same $\\Lambda(T)$-module structure. By the site-equivalence clause (1) of the weakly-etale localization theorem, evaluation at the object $U$ of $W_{\\mathrm{proet}}$ on module sheaves is evaluation of the restriction to $W_{\\mathrm{proet}}/U\\simeq U_{\\mathrm{proet}}$ at its terminal object, with the restricted ring sheaf; the contractible-sections theorem allows any ring sheaf. Evaluation at $U$ and at the extremally disconnected $T$ is therefore exact and its termwise functor computes unbounded derived sections by the contractible-sections theorem. Apply the preceding equality in each degree of an arbitrary complex representing $K$ to obtain the natural derived-category isomorphism\n$$R\\Gamma(U,FK)\\cong R\\Gamma(T,K|_T).$$\nThis is (4.2), with restriction to the profinite slice over $T$ understood; it is an isomorphism of entire derived objects, not merely of their cohomology groups.",
+   "uses": [
+    "det-pe-wcb-clopen-partition",
+    "lem-zl-affine-component-site-projection",
+    "sk-def-pe-wlocal",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-zl-contractible-derived-sections-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof through equation (4.2)"
+   }
+  },
+  {
+   "text": "Every profinite $S$-set is covered by an extremally disconnected one: use its Stonean cover and compose the map with its structure map to $S$. Such tests detect isomorphisms and zero sheaves, by the sheaf condition. By the definition of direct image for the component-site functor,\n$$(GN)(E)=N(W_E).$$\nFor a short exact sequence of module sheaves on $W$, evaluation at $W_E$ is exact by step 2 and step 3 (applied to the w-contractible object $W_E\\to W$). Hence $G$ carries it to a sequence exact on every extremally disconnected test, and therefore to an exact sequence of sheaves. In particular $G$ is exact. For every $M$, the ordinary adjunction unit $M\\to GFM$ evaluates at $E$ to\n$$M(E)\\longrightarrow(FM)(W_E)=M(\\pi_0(W_E))=M(E).$$\nThis is the identity: the component map of the test object $W_E$ is the identity of $E$. Hence the unit is an isomorphism.",
+   "uses": [
+    "det-pe-stonean-cover",
+    "lem-zl-component-relative-profinite-site",
+    "lem-zl-contractible-derived-sections-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof: evaluation of the unit on extremally disconnected profinite S"
+   }
+  },
+  {
+   "text": "Localize the exact adjunction $F\\dashv G$ degreewise, as in the exact-derived-adjunction definition. Both derived functors are induced termwise and the derived unit is the localized ordinary unit, hence an isomorphism by step 4. Consequently $D(F)$ is fully faithful. Explicitly the inverse to its map on Hom sets sends $a:FK\\to FL$ to $\\eta_L^{-1}\\circ D(G)(a)\\circ\\eta_K$; naturality of $\\eta$ and the adjunction triangle identities show both composites are identities. The argument in steps 1–5 applies to every w-contractible affine, so in particular it proves full faithfulness for $\\pi_U^*$ whenever $U$ is such an affine. This establishes that assertion before it is used below.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof: id to pi_* pi^* is an equivalence, which formally implies full faithfulness"
+   }
+  },
+  {
+   "text": "Taking $U=W$ in the derived evaluation isomorphism of step 3 yields\n$$R\\Gamma(W,\\pi_W^*K)\\cong R\\Gamma(S,K).$$\nThe inverse is the canonical pullback map on sections: the termwise evaluation equality was induced by the component-site adjunction unit. Thus this proves the requested comparison in the derived category, naturally in every unbounded $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equation (4.2), specialized to U=X"
+   }
+  },
+  {
+   "text": "Fix a w-contractible affine $U\\to W$ and put $T=\\pi_0(U)$. Identify $U_{\\mathrm{proet}}$ with $W_{\\mathrm{proet}}/U$ using the weakly-etale localization theorem (its site-equivalence clause does not require discrete coefficients). The profinite slice at $T\\to S$ is $\\operatorname{Prof}/T$. On every w-contractible affine $V\\to U$, both $(\\pi_W^*K)|_U$ and $\\pi_U^*(K|_T)$ evaluate, by step 3, to $R\\Gamma(\\pi_0(V),K|_{\\pi_0(V)})$. These identifications come from the same component maps $\\pi_0(V)\\to T\\to S$; they respect restrictions and scalar actions. The w-contractible affine covering basis therefore gives the canonical restriction identification\n$$(\\pi_W^*K)|_U\\cong\\pi_U^*(K|_T).$$\nIt is already an identification of exact functors on sheaves, so applying it termwise proves the displayed derived comparison and its naturality. Its tensor and evaluation normalizations are the canonical ones, since both are induced from the same inverse-image functors and coefficient identifications.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "sk-thm-pe-weakly-contractible-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), final sentence of proof, using (4.2) after restriction to U"
+   }
+  },
+  {
+   "text": "Write $H_S=R\\mathcal Hom_{\\Lambda_S}(K,L)$ and let $\\alpha:FH_S\\to R\\mathcal Hom(FK,FL)$ be the comparison of step 1. On the w-contractible $U$ of step 7, equation (4.2) and the restriction theorem for derived internal Hom identify its derived sections with a map\n$$R\\Gamma(T,R\\mathcal Hom(K|_T,L|_T))\\longrightarrow R\\Gamma(U,R\\mathcal Hom(\\pi_U^*K|_T,\\pi_U^*L|_T)).$$\nFor every $n\\in\\mathbf Z$, the derived-internal-Hom sections model identifies the $n$th cohomology groups with $\\operatorname{Hom}(K|_T,L|_T[n])$ and $\\operatorname{Hom}(\\pi_U^*K|_T,\\pi_U^*L|_T[n])$. Under these identifications the map is exactly pullback by $\\pi_U^*$. Indeed the comparison is the transpose of pulled-back evaluation; the slice-evaluation-transpose theorem identifies its restriction with that transpose on the slice. A class represented by $f:K|_T\\to L|_T[n]$ therefore goes to $\\pi_U^*f$, by the tensor-Hom counit formula. Full faithfulness proved in step 5 for $U$ makes this a bijection for every $n$, so $R\\Gamma(U,\\alpha)$ is an isomorphism of derived objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), final sentence: preservation of inner homomorphisms from full faithfulness and (4.2); expanded with Stacks Tags 08JA and 08JB"
+   }
+  },
+  {
+   "text": "Let $C$ be a cone of $\\alpha$. Step 8 gives $R\\Gamma(U,C)=0$ for every w-contractible affine $U\\to W$. Exact evaluation on each such $U$ (step 3) gives $\\Gamma(U,H^n(C))=H^nR\\Gamma(U,C)=0$ for all integers $n$. Every pro-etale object has a cover by these affines, so the sheaf condition gives $H^n(C)=0$. Thus $C=0$ and $\\alpha$ is an isomorphism in the ordinary unbounded derived category. All maps used above are induced by adjunction units, restriction, tensor and evaluation, hence are natural in both $K$ and $L$. The argument imposed only w-contractibility and the fixed universe conditions; no truncation, finite-generation or dualizability assumption has entered.",
+   "uses": [
+    "lem-zl-contractible-derived-sections-tensor",
+    "sk-thm-pe-weakly-contractible-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), completion of the internal-Hom comparison by testing on the w-contractible affine basis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-relative-profinite-site",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-zl-affine-component-site-projection",
+  "sk-def-pe-wlocal",
+  "det-pe-wcb-clopen-partition",
+  "lem-zl-contractible-derived-sections-tensor",
+  "det-pe-stonean-cover",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-thm-pe-weakly-contractible-basis",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), equation (4.2), and proof; expanded using the stated exact evaluation and ringed-site tensor-Hom lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -39,7 +173,7 @@
   {
    "tool": "grep",
    "query": "(component|[Ww]Contractible).*(internalHom|ihom|[Dd]erived)|(internalHom|ihom).*[Ww]Contractible",
-   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"]}",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\"]}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary pullback adjunctions, discrete condensed fully faithful functors and generic derived quotient functors do not assert closedness of component pullback on arbitrary unbounded module complexes."
   },
@@ -59,7 +193,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-constant-derived-functions",
@@ -84,5 +218,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-wcontractible-component-derived-hom",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Expanded Hemo–Richarz–Scholbach Proposition 4.3(1) into nine steps, deriving the unbounded evaluation formula termwise, proving exactness of the component direct image and invertibility of its unit, and checking the actual evaluation-adjoint internal-Hom map on the w-contractible basis. Reused existing nodes throughout; no new nodes or Mathlib leaves. Checked source, cited statements, universes, empty schemes and unbounded inputs.",
+  "blueprint": "The inherited provenance points to sk-thm-sf-ctf-stability, paragraph (3), open direct image, through lem-sfb-admissible-direct-image and the recorded via chain. This item supplies the general component theorem used in the unbounded internal-functions comparison. Its nine steps expand the external tool Proposition 4.3(1); they do not replace the unit route. blueprint_refs.py ancestor returns None for the existing historical created.item chain, so the existing null from.node and via list are retained. Whole-blueprint searches for component pullback, connected components, 4.2.13 and internal hom found no identical blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-zl-affine-component-site-projection",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "sk-def-pe-wlocal",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-zl-contractible-derived-sections-tensor",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "det-pe-stonean-cover",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "sk-thm-pe-weakly-contractible-basis",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic component-site, contractible-basis, exact derived functor or ringed-site tensor-Hom tool in the expansion of HRS Proposition 4.3(1); the constructible stability unit does not supply this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-component-relative-profinite-site",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-zl-affine-component-site-projection",
+  "sk-def-pe-wlocal",
+  "det-pe-wcb-clopen-partition",
+  "lem-zl-contractible-derived-sections-tensor",
+  "det-pe-stonean-cover",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-thm-pe-weakly-contractible-basis",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-c2a3df8cf",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c2a3df8cf (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and all 16 cited statements, and checked them against HRS 2305.18131 (4.1), Prop. 4.3(1) and (4.2). The statement is unchanged and matches 4.3(1) plus (4.2) at U=X. It uses the ordinary unbounded D with Λ_S=q_S^*Λ; no coefficient substitution and nothing weakened. The delivery has no new nodes and no cycle; proof_deps equals the union of the step uses, and there is no SGA citation. Step checks: step 2 (W×_S E is w-contractible: closure of (w,e) is cl{w}×{e}, closed points W^c×_S E, local rings from W, π_0=E) is correct. Step 3: the clopen partition gives the split-cover hypothesis of lem-zl-affine-component-site-projection. Step 4: Stonean covers, G exact, and the unit is the identity on E. Step 5 is the exact derived adjunction. Step 7 identifies the restriction to U on the contractible basis. Step 8: the sections model plus the slice transpose and counit formula identify H^n RΓ(U,α) with π_U^* on Hom(K|_T,L|_T[n]), which is bijective by step 5 for U. Step 9 kills the cone on the basis. Edge cases checked: empty W or E, S a point, Λ=0, unbounded K and L. No duplicate: I checked lem-zl-condensed-component-* , lem-zl-contractible-realization-adjunction and lem-zl-wcontractible-condensed-scalar-evaluation. FIX: lem-zl-contractible-derived-sections-tensor is stated for the w-contractible scheme's own site, while step 3 evaluates at an object of W_proet. I added clause (1) of lem-weil-proetale-weakly-etale-localization (W_proet/U ≃ U_proet) to step 3's uses and text; steps 4 and 9 now refer to step 3. That node was already in proof_deps and tool_uses. Batch 5: lem-trf-geometric-inverse-image-exact is generic exactness of a geometric-morphism inverse image; its closure reaches only trf definitions; it is not given by either assumption and is not a step of their proofs, so accepted. lem-zl-affine-component-site-projection and lem-zl-component-relative-profinite-site reach trf only through the definition def-trf-geometric-morphism, so accepted. The 16 declared tool uses are generic component-site, contractible-evaluation and tensor-Hom tools for an external tool lemma in sk-thm-sf-ctf-stability, so accepted.; 1 file(s) fixed by the reviewer"
  }
 }
