@@ -25,9 +25,184 @@
   "def-weil-site-perfect-complex",
   "def-weil-frobenius-cohomology-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the purity assertion choose a compactification over the finite base field. The target $Y_0$ is quasi-compact because its finite-type structure morphism to the affine $\\operatorname{Spec}k_0$ is quasi-compact [def-weil-finite-type-morphism]. It is quasi-separated because its structure morphism is separated, by [lem-pc-separated-quasi-separated]. Apply [thm-nagata-compactification] to the separated finite-type $f_0$ to obtain $X_0\\xrightarrow{j_0}\\bar X_0\\xrightarrow{\\bar f_0}Y_0$. Its base change to $k$ is a compactification $c=(j,\\bar f)$, since open immersions and proper morphisms are stable under base change [lem-weil-pbc-open-immersion-base-change, lem-weil-pbc-proper-base-change]. Here compactification has exactly the meaning of [def-weil-compactifications-refinements]. Thus the extra computational choice in the rational naturality/mate lemma is available; it is not an additional hypothesis on $f_0$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Use [lem-pur-rational-weil-naturality-mate] with $c$ from Step 1. Its hypotheses hold: $X_0,Y_0$ are separated finite type, $f$ is smooth of pure dimension $d$, and the coefficient category is rational or common-stage. Its $\\gamma$ is the transported canonical purity family, realized in our intrinsic categories as specified in [def-pur-canonical-rational-purity-realization]. It gives both naturality for every rational arrow and the equality of the displayed $e_K$ with the right mate of $\\beta^{-1}$, where $\\beta:P_YRf_!\\simeq Rf_!P_X$ is compact-support exchange. In particular it identifies the actual adjunction normalization, not just the endpoints of $e_K$. The comparison is invertible because the formula is a composite of three isomorphisms.",
+   "uses": [
+    "lem-pur-rational-weil-naturality-mate",
+    "def-pur-canonical-rational-purity-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Apply that naturality with $u=\\theta_K:P_YK\\to K$. Substitute the definition of $e_K$ and cancel the adjacent inverse factors:\n$$Rf^!(\\theta_K)e_KP_X\\gamma_{f,K}=Rf^!(\\theta_K)\\gamma_{f,P_YK}b_K=\\gamma_{f,K}H(\\theta_K)b_K.$$\nBy the arrow equation in [def-weil-weil-sheaf-complex], this says precisely that $\\gamma_{f,K}$ is a Weil morphism for the pullback/twist datum $H(\\theta_K)b_K$ and the specified exceptional datum $Rf^!(\\theta_K)e_K$. Naturality used here is the assertion for arbitrary rational arrows in [lem-pur-rational-weil-naturality-mate], not a restriction to integral Weil isomorphisms.",
+   "uses": [
+    "lem-pur-rational-weil-naturality-mate",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Write $F=Rf_!$, $G=Rf^!$ and denote the induced Weil data by $\\theta_{FH}$ and $\\theta_{FG}$. The functor on pairs in [lem-pod-semilinear-field-operation-lifts] carries Step 3 to\n$$F(\\gamma_K)\\theta_{FH}=\\theta_{FG}P_YF(\\gamma_K).$$\nFor the lifted adjunction [lem-pod-constructible-mate-coherence] gives $\\varepsilon_K\\theta_{FG}=\\theta_KP_Y\\varepsilon_K$. Consequently\n$$\\varepsilon_KF(\\gamma_K)\\theta_{FH}=\\theta_KP_Y\\varepsilon_K\\,P_YF(\\gamma_K)=\\theta_KP_Y(\\varepsilon_KF(\\gamma_K)).$$\nThis is the claimed smooth-trace equivariance, with exactly the trace composite in the statement. It also proves the trace assertion for $a_X$ at the coefficient unit, which is the trace used below.",
+   "uses": [
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-pod-constructible-mate-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Now assume the pairing hypotheses. All operations below have their stated constructible domains. At the field stages $D^b_{ctf}=D^b_c$ by [def-weil-finite-tor-amplitude]. Apply [thm-sf-ctf-stability], including its field-passage clause (vii), to $K$, the coefficient unit and the separated finite-type $a_X$. Internal Hom, tensor and the two direct images have bounded constructible outputs; thus $K^\\vee$, $K^\\vee(d)$ and the cohomology complexes used below are defined. The site-perfect first-variable condition required for the elementary coefficient-dual comparisons is exactly the hypothesis on $K$; it is not replaced by mere constructibility. The coefficient unit is site-perfect, and dualizing a bounded local finite-projective model again gives such a model, with the degrees reversed.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "thm-sf-ctf-stability",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Put $P=P_X$, and let $c:P\\Lambda_X\\simeq\\Lambda_X$ be the coefficient datum. The Hom formula of [lem-pod-semilinear-field-operation-lifts] gives the inverse contravariant datum $\\theta_{K^\\vee}=R\\mathcal Hom(\\theta_K^{-1},c)h_g$. The evaluation identity and preservation of tensor–Hom transposition in [lem-pod-derived-automorphism-hom-evaluation] give\n$$\\operatorname{ev}_K(\\theta_K\\otimes\\theta_{K^\\vee})\\mu_g=c\\,P(\\operatorname{ev}_K).$$\nIndeed precomposition by $\\theta_K^{-1}$ cancels the $\\theta_K$ on the first evaluation argument, and postcomposition gives $c$. Tensor evaluation and ordinary adjunction maps are Weil morphisms by [lem-pod-constructible-mate-coherence]. The coefficient bidual map is the transpose of evaluation after the tensor symmetry. Transpose the last equation with $K$ and $K^\\vee$ interchanged: the same preservation of transposition gives $\\delta_K\\theta_K=\\theta_{K^{\\vee\\vee}}P(\\delta_K)$. Thus evaluation and the canonical bidual map carry the rational Weil structures claimed, without choosing an integral datum for $K$.",
+   "uses": [
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-pod-constructible-mate-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Tensor the evaluation equation of Step 6 with the identity of the Tate line and insert the canonical associators. The twist rule in [def-weil-frobenius-coefficient-twists] makes $\\operatorname{ev}_K(d):K\\otimes^LK^\\vee(d)\\to\\Lambda_X(d)$ equivariant. Its line datum is the canonical roots-of-unity transport, not the trivial line datum. By [lem-pur-twist-frobenius-scalar] its point scalar is $q^{-d}$; the same lemma at $m=0$ says the target coefficient unit has Frobenius $1$. This checks both the sign of the twist and the scalar in the final pairing.",
+   "uses": [
+    "def-weil-frobenius-coefficient-twists",
+    "lem-pur-twist-frobenius-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Let $L=K^\\vee(d)$ and $a=a_X$. Before taking point fibers, the mixed-support cup product of [def-pod-mixed-support-cup-product] is\n$$Ra_!K\\otimes^LRa_*L\\xrightarrow{\\operatorname{PF}}Ra_!(K\\otimes^LLa^*Ra_*L)\\xrightarrow{Ra_!(1\\otimes\\varepsilon_L)}Ra_!(K\\otimes^LL).$$\nThe second projection input is $Ra_*L$. By [lem-pod-constructible-mate-coherence], the projection transformation and ordinary counit are Weil morphisms. Tensor and direct-image functoriality are [lem-pod-semilinear-field-operation-lifts]; composing their arrow equations therefore makes this particular cup product equivariant. This argument takes place in the rational category itself and uses neither a finite-coefficient cup theorem outside its domain nor a Frobenius-stable lattice.",
+   "uses": [
+    "def-pod-mixed-support-cup-product",
+    "lem-pod-constructible-mate-coherence",
+    "lem-pod-semilinear-field-operation-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Compose the cup morphism of Step 8, $Ra_!$ of twisted evaluation from Step 7, and the smooth trace from Step 4, with the canonical shift by $2d$. The result is the specified derived pairing $B:A\\otimes^LD[2d]\\to\\Lambda_s$, where $A=Ra_!K$ and $D=Ra_*K^\\vee(d)$. The pair functors and their shift/tensor comparisons are those of [lem-pod-semilinear-field-operation-lifts, lem-pod-derived-automorphism-hom-evaluation]. Composing Weil-morphism equations gives\n$$B(\\theta_A\\otimes\\theta_{D[2d]})\\mu_{g_s}=c_sP_s(B).$$\nUnder the canonical point tensor comparison of [lem-sf-point-fibre-derived-tensor] its fiber is exactly tensor product, mixed-support cup, evaluation and normalized trace in the statement. No comparison of ordinary and compact-support cohomology was used.",
+   "uses": [
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-sf-point-fibre-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Identify $H^i(\\operatorname{Fib}_sA)$ with $\\operatorname{Hom}(\\Lambda_s,A[i])$, and similarly for $D$, using the shift-preserving point equivalence [lem-weil-point-fibre-equivalence]. For a representative $x:\\Lambda_s\\to A[i]$, naturality [lem-weil-frobenius-point-transport-natural] says that its transported representative is $P_s(x)c_s^{-1}$: the point transport on the unit followed by $c_s$ is the identity by [lem-pur-twist-frobenius-scalar] at $m=0$. Hence $F_Ax=\\theta_A[i]P_s(x)c_s^{-1}$, and likewise for $y$. These are exactly the exchange-then-Weil-datum actions in [def-weil-frobenius-cohomology-transport]. Substitute these two formulas into the pairing of Step 9. Its Weil equation cancels the two input data; the unit compatibility of the pullback tensor comparison $\\mu_{g_s}$ [lem-pur-derived-pullback-tensor-iso] identifies $c_s^{-1}\\otimes c_s^{-1}$, composed with $\\mu_{g_s}$, with $P_s$ of the unit tensor constraint. The result is $c_sP_s(\\langle x,y\\rangle)c_s^{-1}=\\langle x,y\\rangle$, since the coefficient-unit Frobenius is $1$. The degrees are $i$ and $2d-i$, whose sum becomes zero after the shift $[2d]$ in $B$. This proves the displayed degreewise identity.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pur-twist-frobenius-scalar",
+    "def-weil-frobenius-cohomology-transport",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  },
+  {
+   "text": "Every equality above was an equality of rational arrows. For $\\overline{\\mathbf Q}_\\ell$, represent the finitely many objects, Weil isomorphisms, their inverses and vectors under consideration over one finite coefficient extension, as in [def-weil-weil-sheaf-complex]. The operation formulas and evaluation/transposition comparisons are common-stage formulas [lem-pod-semilinear-field-operation-lifts, lem-pod-derived-automorphism-hom-evaluation]; the purity/mate identities hold in that category by [lem-pur-rational-weil-naturality-mate], and point transport is scalar-compatible by [lem-weil-frobenius-point-transport-natural]. Apply Steps 1–10 over that finite field and pass to their morphism classes. This proves the same equations at the algebraically closed stage. On a point with $d=0$ and $\\theta_K=\\ell$, Step 6 gives dual datum $\\ell^{-1}$, so evaluation multiplies by $\\ell\\ell^{-1}=1$; the zero complex gives zero throughout. For a nonproper $X_0$, the two factors remain $Ra_!$ and $Ra_*$ throughout Steps 8–10. These checks explain why neither an invariant lattice nor properness has entered.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-pur-rational-weil-naturality-mate",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-compactifications-refinements",
+  "lem-pur-rational-weil-naturality-mate",
+  "def-pur-canonical-rational-purity-realization",
+  "def-weil-weil-sheaf-complex",
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-pod-constructible-mate-coherence",
+  "def-weil-finite-tor-amplitude",
+  "thm-sf-ctf-stability",
+  "def-weil-site-perfect-complex",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-pur-twist-frobenius-scalar",
+  "def-pod-mixed-support-cup-product",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-frobenius-cohomology-transport",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Sentences 3–4: geometric orientation, trace and smooth pairing; expanded using the rational/common-stage adjunctions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +238,45 @@
    "results": "8 hit(s): WittVector.IsocrystalEquiv.frob_equivariant; frobeniusEquiv_symm_apply_frobenius; frobeniusEquiv; frobeniusEquiv_apply; RingHom.map_frobeniusEquiv_symm; frobeniusEquiv.congr_simp; map_equiv_traceDual; coe_frobeniusEquiv_symm_comp_coe_frobenius",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|Verdier|smooth.*purity|WeilPairing",
+   "results": "25 hits: Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean; inspected returned signatures: unrelated to rational smooth purity and its cohomological pairing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariant trace evaluation and twisted cohomology pairing for rational adic sheaves",
+   "results": "8 hits: WittVector.IsocrystalEquiv.frob_equivariant, Algebra.traceForm_apply, WittVector.frobeniusEquiv, RootPairing.root'In_corootSpanMem_eq_pairingIn, coe_frobenius_comp_coe_frobeniusEquiv_symm, WittVector.inv_pair₂, Submodule.traceDual_eq_span_map_traceDual_of_linearDisjoint, map_equiv_traceDual; inspected returned signatures: unrelated to rational smooth purity and its cohomological pairing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity; inspected returned signatures: unrelated to rational smooth purity and its cohomological pairing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of rational smooth purity and the adjunction mate of Frobenius compact support exchange, equivariance of Tate twisted Poincare pairing for arbitrary rational Weil isomorphisms",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_naturality, LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality; inspected returned signatures: unrelated to rational smooth purity and its cohomological pairing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology pairing from compactly supported cup product evaluation and smooth trace is preserved by contragredient Frobenius and Tate twist",
+   "results": "8 hits: continuousCohomology, ContinuousCohomology.MultiInd.complex, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply, Rep.FiniteCyclicGroup.groupCohomologyπEven, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_iff, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply, groupCohomology.cochainsMap_f_3_comp_cochainsIso₃_apply, groupCohomology.comp_d₁₂_eq; inspected returned signatures: unrelated to rational smooth purity and its cohomological pairing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-operations",
@@ -83,5 +293,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pod-rational-purity-pairing",
+  "worker": "stage1",
+  "summary": "Reuse the existing rational purity naturality/mate lemma and the intrinsic operation lifts. Spell out cancellation for arbitrary rational theta, lifted trace, inverse-contravariant evaluation and biduality, projection-counit cup, and the point-Hom calculation of the degreewise pairing. No statement change and no new nodes.",
+  "blueprint": "prop-weil-operations.proof.md sentence 3 is realized by Steps 1–4; sentence 4 final smooth-pairing clause by Steps 5–11.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Use its stated A separated morphism of schemes is quasi-separated assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Use its stated Nagata compactification, [stacks-project] assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Use its stated Base change of an open immersion is an open immersion (Stacks 01JY) assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Use its stated Properness is stable under base change assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Use its stated Preservation on the proved finite-Tor domains assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-pod-derived-automorphism-hom-evaluation",
+    "why": "Use its stated Derived internal Hom and evaluation under an isomorphism of coefficient sites assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-pur-twist-frobenius-scalar",
+    "why": "Use its stated Geometric Frobenius acts on the Tate twist Lambda(m) by q^{-m} assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Use its stated The point fibre functor preserves derived tensor at all coefficient stages assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Use its stated The fibre functor at the geometric point is an equivalence assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Use its stated The point transport along Frobenius is linear and natural assertion as a generic tool in the indicated proof step; this unit does not reconstruct that underlying operation/category/geometric theorem."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Step 10 uses its stated compatibility of the derived-pullback tensor comparison with the unit isomorphisms (for g_s on the point) to identify c_s^{-1} tensor c_s^{-1}; no node of sk-lem-finite states this monoidal unit constraint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-separated-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "thm-sf-ctf-stability",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pur-twist-frobenius-scalar",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-203def226",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-203def226 (reviewer sub-agent of L); spot-checked: I read all 11 steps in full; the delivery has 0 new nodes. The statement is byte-identical to the Q108 statement-only node created in the 2026-10-21 re-split of prop-weil-operations. Q108's former Steps 7 and 10 are carried in full and in more detail by Steps 1-3 and 5-10. Source checked: main-20261015 prop-weil-operations.proof.md, sentence 3 (orientation and trace) and the final clause of sentence 4 (smooth pairing). No SGA is used, and the item is not in its own closure, so there is no cycle. Step 1: thm-nagata-compactification applies because Y_0 is qcqs (finite type over an affine base, separated). The base change of the compactification gives the c that the mate lemma needs. Steps 2-3: the hypotheses of lem-pur-rational-weil-naturality-mate hold (X_0 and Y_0 separated, f smooth of pure dimension d, rational or common-stage coefficients). Substituting u=theta_K gives the fixed-pair equation; I checked the algebra. Step 4: Step 2 identifies e with the mate b of a^{-1}, a=Ex_!, so the counit equation of lem-pod-constructible-mate-coherence and the F-lift give equivariance of Tr=eps Rf_!(gamma). Step 6: I verified the evaluation equation for the inverse-contravariant datum through the ev characterization in lem-pod-derived-automorphism-hom-evaluation. Advisory: h_g in the lifts node is tacitly taken to be c_{g;M,N}. Steps 7-9: the q^{-d} scalar and the unit scalar 1 come from lem-pur-twist-frobenius-scalar. The cup product matches def-pod-mixed-support-cup-product exactly (PF with second input Ra_*L), and the types of B check. Step 10: I derived <Fx,Fy> = c P(<x,y>) c^{-1} = <x,y> through the point Hom description and naturality of iota. Edge cases checked: theta=ell on a point with d=0, the zero complex, nonproper X_0, and f=id. FIX (C1): Step 10 used the unit compatibility of the pullback tensor comparison mu_{g_s} without citing any node. I added lem-pur-derived-pullback-tensor-iso, whose statement includes compatibility with the unit isomorphisms, to the step's uses, proof_deps and tool_uses. All declared tool uses are accepted as generic tools. thm-pf-ctf-stability is on the route through sk-thm-sf-ctf-stability.; 1 file(s) fixed by the reviewer"
  }
 }
