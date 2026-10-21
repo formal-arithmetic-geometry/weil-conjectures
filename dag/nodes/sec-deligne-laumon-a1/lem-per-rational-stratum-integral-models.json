@@ -26,9 +26,111 @@
   "lem-weil-pbc-lisse-e-constructible-integral-lattice",
   "lem-weil-pbc-proetale-ringed-open-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the canonical coefficient isomorphisms of [lem-weil-pbc-continuous-coefficients-immersion-restriction] to write $B_T=A_T=C(|-|,A)$ and $E_T=C(|-|,E)$ on $X$ and its locally closed subschemes. These isomorphisms preserve constant sections, localization and immersion restriction. Nonarchimedean balls separate points and are clopen, so $E$ is totally disconnected. By [lem-weil-pbc-continuous-coefficient-realizations], the pulled condensed ring for $C(-,E)$ is this continuous coefficient ring, compatibly with the integral-to-field map. The internal/sectionwise module equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] preserves the underlying sheaves. Thus a local finite free continuous model $E_T^a$ becomes precisely the finite constant model $p_T^*\\underline E\\otimes_E E^a$, and conversely. We use this identification solely to apply the finite-model filtration, then regard all its sheaves and functors as sectionwise module sheaves.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; paragraph before Definition 6.8.6; Definition 6.8.10"
+   }
+  },
+  {
+   "text": "The minimal-closed-subset property of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] rules out an infinite strictly descending chain of closed subsets of $X$, so its underlying space is Noetherian. Apply [lem-sfb-finite-model-stratum-filtration] to $F$ through Step 1. It gives $\\varnothing=V_0\\subset\\cdots\\subset V_m=X$, reduced closed $t_k:S_k\\hookrightarrow V_k$, qcqs $v_k:V_k\\hookrightarrow X$, and the monic counit-image filtration $F_k=v_{k!}v_k^*F$ with $F_k/F_{k-1}\\cong v_{k!}(t_k)_*L_k$, where $L_k=t_k^*(F|_{V_k})$ has finite constant local models. A finitely presented module over the field $E$ has a finite basis; its corresponding local model is $E_{S_k}^a$. Hence each $L_k$ is lisse in the required continuous sense.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-finite-model-stratum-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.6 and the filtration used in Lemma 6.8.13; topological refinement: Stacks Tag 09Y5, topology.tex, lemma-noetherian-partition-refined-by-stratification"
+   }
+  },
+  {
+   "text": "Check the geometric hypotheses before taking lattices. The immersions $V_k\\to X$ and $S_k\\to X$ are locally of finite type by [lem-weil-pbc-immersion-base-change-lft]; [pqf-lem-locnoeth-lft] makes their sources locally Noetherian. Every subset of the Noetherian space $|X|$ is quasi-compact by [lem-sfb-noetherian-space-compact-subsets], so both sources are quasi-compact and therefore Noetherian schemes. For a strict chain of irreducible closed subsets of either locally closed source, taking closures in $X$ gives a strict chain of irreducible closed subsets: intersecting each closure with the source recovers the original subset. This bounds their dimensions by $\\dim X$. Finally a local-ring homomorphism sends a unit to a unit, so invertibility of $\\ell$ restricts to both sources. The open complements of $t_k$ are qcqs as already supplied by the filtration lemma.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Geometric hypotheses of the finite-stratum reduction; Stacks Tags 01T5 (morphisms.tex, lemma-immersion-locally-finite-type), 01T6 (lemma-finite-type-noetherian); dimension and unit checks written out"
+   }
+  },
+  {
+   "text": "For each $k$, apply [lem-weil-pbc-lisse-e-constructible-integral-lattice] on the scheme $S_k$ verified in Step 3. It gives a continuous-constructible $B_{S_k}$-module $N_k$ with $E_{S_k}\\otimes_{B_{S_k}}N_k\\cong L_k$. Its finite-stratum models are exactly $B_S\\otimes_A P$ with $P$ finitely presented; no global local-freeness of $N_k$ is asserted. The same cited lemma applied directly on $X$ proves the additional assertion about every lisse $E_X$-sheaf.",
+   "uses": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, with Definition 6.8.10"
+   }
+  },
+  {
+   "text": "Set $P_k=(t_k)_*N_k$ and $M_k=v_{k!}P_k$, using the actual module functors. Apply [lem-weil-pbc-integral-model-open-closed-pieces] first on $V_k$, with closed part $S_k$, lattice $N_k$ there and zero on its complementary open. It proves that $P_k$ is continuous-constructible on $V_k$. Apply it again on $X$, with open part $V_k$, lattice $P_k$ there and zero on the closed complement. It proves that $M_k$ is continuous-constructible on $X$ and supplies the ordinary scalar-extension comparisons for both functors. Zero is an allowed integral model, represented by the finitely presented scalar module $0$; the zero choices impose no additional support assumption. The coefficient identifications are those fixed in Step 1, and the schemes satisfy the lemma's hypotheses by Step 3.",
+   "uses": [
+    "lem-weil-pbc-integral-model-open-closed-pieces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, finite-stratum pieces; ordinary open/closed integral-model lemma"
+   }
+  },
+  {
+   "text": "The complex $M_k[0]$ is bounded, has $M_k$ as its sole possibly nonzero cohomology sheaf, and all its cohomology sheaves have the finite-stratum scalar models established in Step 5. Apply condition (iii) implies (i) of [lem-weil-pbc-integral-stratified-perfect-characterization] on $X$. Thus $M_k[0]\\in\\mathcal C_X$, including derived completeness, a uniformly bounded constructible reduction tower, and compatible etale-origin witnesses. In particular this is membership in the completed category of the statement, rather than just constructibility in the ordinary module category. This argument also puts each lattice $N_k[0]$ in the corresponding completed category on $S_k$, when desired.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), using the completed-coefficient and compatible-witness characterization"
+   }
+  },
+  {
+   "text": "Verify the normalization of the scalar comparison rather than choosing an abstract isomorphism. By [lem-weil-pbc-scalar-localization-module-colimit], for any $B_T$-module $H$ its ordinary localization is the colimit of $H\\xrightarrow{\\varpi}H\\xrightarrow{\\varpi}\\cdots$, with the map from stage $n\\geq0$ given by $h\\mapsto\\varpi^{-n}\\otimes h$. By [lem-weil-pbc-proetale-ringed-open-closed], $(t_k)_*$ commutes with this small filtered colimit on the qcqs scheme $V_k$, and $v_{k!}$ commutes with it because it is a left adjoint. Their linearity sends the transition $\\varpi$ to $\\varpi$. Consequently the colimit comparisons give\n$$E_X\\otimes_{B_X}v_{k!}(t_k)_*N_k\\ \\cong\\ v_{k!}(t_k)_*(E_{S_k}\\otimes_{B_{S_k}}N_k).$$\nOn every stage both the composite comparison and the separate open/closed comparisons send a local section $h$ to the image of $\\varpi^{-n}\\otimes h$ under these same functors. The colimit universal property therefore makes them equal; the ring restrictions are precisely those of Step 1. Exactness of the actual open and closed module functors is part of the cited open-closed lemma, so these are the same functors as in the sheaf filtration. Compose with the lattice isomorphism from Step 4 to obtain $E_X\\otimes_{B_X}M_k\\cong v_{k!}(t_k)_*L_k$. Together with Steps 2 and 6 this proves every required clause.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-module-colimit",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(2) and Lemma 6.8.13; Stacks Tags 09BM, 03DI, 03DJ, 0738 for the actual module functors and their colimits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-integral-model-open-closed-pieces",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-scalar-localization-module-colimit",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.6 and 6.8.10; Proposition 6.8.11(3); Lemma 6.8.13. Expanded finite-stratum argument using existing DAG tools, including actual localization colimit normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +159,38 @@
    "results": "5 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:93; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:147; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:168; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:171; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:172; no hit states the completed integral/rational continuous-module assertion.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]attice.*[Ss]heaf|[Ss]tratum.*[Ff]iltrat|[Cc]onstructible.*[Ff]iltrat",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean. These concern general finite generators, limits, scalar modules or ideal-sheaf lattices, not continuous constructible integral stratum models.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible l-adic module sheaves admit integral lattices and finite locally closed stratum filtrations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.hasLimit, SheafOfModules.mk, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.IsFiniteType. These concern general finite generators, limits, scalar modules or ideal-sheaf lattices, not continuous constructible integral stratum models.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Localization",
+   "results": "0 hits: . These concern general finite generators, limits, scalar modules or ideal-sheaf lattices, not continuous constructible integral stratum models.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible continuous E module sheaf on a noetherian scheme has a finite stratum filtration whose extension by zero quotients have completed integral lattices",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, Ideal.Filtration.submodule_fg_iff_stable. These concern general finite generators, limits, scalar modules or ideal-sheaf lattices, not continuous constructible integral stratum models.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -81,5 +211,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-rational-stratum-integral-models",
+  "worker": "stage1",
+  "summary": "Q145: seven-step split using existing finite-model filtration, constructible lattice, integral open/closed models and completed-category characterization. No new nodes or statement changes. Read the actual cited statements and supplied a normalized sequential-localization comparison.",
+  "blueprint": "Ancestor lem-per-smooth-pullback-t-exact.proof.md, first paragraph cohomology-pullback claim; this item supplies the finite-stratum integral models needed by the continuous rational realization comparison, inherited parent steps 6 and 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Identify completed and continuous rings and their actual immersion restrictions. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Transport continuous finite free models to the pulled condensed coefficient ring for the filtration. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-sfb-finite-model-stratum-filtration",
+    "why": "Obtain the existing finite open filtration with reduced closed strata and actual module quotients. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "why": "Choose constructible integral lattices on the strata; no lisse lattice is assumed. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-model-open-closed-pieces",
+    "why": "Preserve finite scalar-model constructibility under the actual open and closed functors. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Promote degree-zero continuous-constructible sheaves to completed objects with compatible witnesses. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-module-colimit",
+    "why": "Identify ordinary scalar extension with the normalized repeated-uniformizer colimit. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Use adjunction, exactness and filtered-colimit preservation for the actual module functors. This is a generic coefficient or sheaf tool; the perverse Fourier unit does not state it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-integral-model-open-closed-pieces",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-scalar-localization-module-colimit",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-f1a7cdba8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-f1a7cdba8 (reviewer sub-agent of L); spot-checked: Q145 lem-per-rational-stratum-integral-models f1a7cdba is a seven-step split with no new nodes. Statement and stmt_deps are byte-identical to the live side tree, where the item is still unsplit. There is no re-split note and no SGA citation. Source read: Bhatt–Scholze 1309.1198 pp. 59–62. The route is Def 6.8.6/6.8.10, the lattice of Lemma 6.8.13 (constructible, not lisse), Prop 6.8.11(3) and the stratum reduction of 6.8.14(2), and the proof follows it. I read every cited statement. Step 1: realization iso for totally disconnected E plus the internal/sectionwise equivalence turns continuous-constructible E_X-modules into sfb-constructible ones over condensed E. Step 2: the minimal-closed-subsets property gives DCC, and lem-sfb-finite-model-stratum-filtration supplies qcqs v_k, reduced closed t_k, monic counit filtration and quotients v_!t_*L_k; f.p. over E means finite free, so L_k is lisse. Step 3: immersion lft (01T5), locally noetherian by 01T6 (blueprint_update identical) and noetherian-space compactness show S_k and V_k are noetherian; the closure argument bounds dimension; ℓ stays a unit. This covers the hypotheses of the lattice, open/closed and characterization lemmas. Step 4: lisse-e-constructible-integral-lattice exactly. Step 5: integral-model-open-closed-pieces applied on V_k (closed part S_k) and on X (open part V_k), with zero models allowed. Step 6: integral-stratified-perfect-characterization (iii)⇒(i) gives full completed membership with étale-origin witnesses. Step 7: the scalar-localization colimit lemma plus v_! as a left adjoint and t_* commuting with filtered colimits on qcqs V_k give the normalized comparison. Edge cases checked: X empty, F=0, a single stratum, torsion models, non-reduced X. No duplicate found: integral-stratum, -single, models-extension-closed and sfb stratified lattices each state less. I accept the 8 split_report.tool_uses (generic pbc/sfb coefficient tools). Advisory only: Step 1 attributes compatibility of the realization iso with stratum restriction to the immersion-restriction lemma, but it holds canonically on the same site objects."
  }
 }
