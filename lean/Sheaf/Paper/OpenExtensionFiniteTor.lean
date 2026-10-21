@@ -65,7 +65,7 @@ private theorem realization_constructible_iff (X : Scheme.{u})
   exact ⟨fun h ↦ ProEtale.isConstructible_of_iso (e.app F) h,
     fun h ↦ ProEtale.isConstructible_of_iso (e.app F).symm h⟩
 
-private theorem extension_constructible {U Y : Scheme.{u}} (j : U ⟶ Y)
+theorem extension_constructible {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] [QuasiCompact j] (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules U (proEtaleConstantRing U A))
     (hF : IsConstructibleProEtaleModuleSheaf U A F) :

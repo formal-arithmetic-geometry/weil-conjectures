@@ -108,7 +108,7 @@ private theorem constantPresheaf_zero (C : Type (u + 1)) [Category* C]
   intro U
   exact (isZero_zero _).eq_of_src _ _
 
-private theorem locallyConstant_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A]
+theorem locallyConstant_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) (hF : IsZero F) :
     IsLocallyConstantProEtaleModuleSheaf Y A F := by
   let : Zero (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) := HasZeroObject.zero' _
@@ -138,7 +138,7 @@ private theorem locallyConstant_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A
   obtain ⟨M, ⟨hM⟩⟩ := ht i
   exact ⟨M, ⟨(SheafOfModules.overFunctor _ (U i)).mapIso e.symm ≪≫ hM⟩⟩
 
-private theorem finite_stalk_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
+theorem finite_stalk_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
     {F G : proEtaleRingModules Y (proEtaleConstantRing Y A)} (e : F ≅ G)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     [Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)] :
@@ -155,7 +155,7 @@ private theorem finite_stalk_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
   exact Finite.of_injective (E.mapIso e.symm).toLinearEquiv
     (E.mapIso e.symm).toLinearEquiv.injective
 
-private theorem finite_stalk_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A]
+theorem finite_stalk_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) (hF : IsZero F)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
     Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) := by

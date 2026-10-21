@@ -25,77 +25,81 @@
  ],
  "proof": [
   {
-   "text": "For every affine open $W\\subseteq V$, the open subscheme $W\\cap U$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], applied to the Noetherian scheme $V$. Thus $j$ is quasi-compact by the affine-open criterion in [def-weil-finite-type-morphism]. Choose the reduced induced closed subscheme $i:Z\\hookrightarrow V$ on the closed set $V\\setminus U$: by clause (2) of [lem-weil-pbc-reduced-induced-closed-subscheme], $i$ is a closed immersion with image $V\\setminus U$ and $Z$ is reduced. For the constant ring sheaf $(P_n)_V$, [lem-pur-proetale-constant-coefficient-comparison] identifies its inverse images on $U$ and $Z$ with $(P_n)_U$ and $(P_n)_Z$. Hence the open-closed module identities of [lem-weil-pbc-proetale-ringed-open-closed] apply with precisely the coefficient sheaves of the statement.",
+   "text": "Apply the existing exactness instances of sfIntrinsicExtensionByZero. The exact-functor mapDerivedCategoryHomologyFunctorIso gives H^r(j_!C) ≅ j_!H^r(C), with the direction reversed from its standard H^r(-) followed by j_! orientation. This is the cohomology comparison already descended through localization; no new representative argument is needed.",
    "uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-pur-proetale-constant-coefficient-comparison",
-    "lem-weil-pbc-proetale-ringed-open-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BN (lemma-open-immersion); qc open and reduced complement hypotheses"
-   }
-  },
-  {
-   "text": "The functor $j_!$ is exact by [lem-weil-pbc-proetale-ringed-open-closed]. Apply [lem-sf-exact-functor-derived-triangulated] to obtain its termwise functor on the unbounded derived categories. If $K^\\bullet$ represents $C$, [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^r(j_!K^\\bullet)\\cong j_!H^r(K^\\bullet)$ for every integer $r$, naturally in the representative. In particular an acyclic complex remains acyclic and a quasi-isomorphism remains a quasi-isomorphism. The isomorphisms therefore give $\\mathcal H^r(j_!C)\\cong j_!\\mathcal H^r(C)$ in the localized category, independently of the representative.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-extension-by-zero-exact",
     "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N (lemma-exact-functor), degreewise; derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+    "place": "Tag 010N; derived.tex Tag 015F; existing exact-functor derived cohomology comparison"
    }
   },
   {
-   "text": "Fix $r$ and any given finite stratification $U=\\coprod_\\alpha S_\\alpha$ witnessing constructibility of $F=\\mathcal H^r(C)$ [def-weil-finite-torsion-constructibility]. Its strata remain locally closed in $V$: if their images are $O_\\alpha\\cap T_\\alpha$ with $O_\\alpha$ open and $T_\\alpha$ closed in $U$, write $T_\\alpha=U\\cap\\overline T_\\alpha$ with $\\overline T_\\alpha$ closed in $V$. Then $O_\\alpha$ is open in $V$ and the image is $O_\\alpha\\cap\\overline T_\\alpha$ [def-weil-locally-closed-subset]. The immersion $S_\\alpha\\to U$ factors as a closed immersion into an open of $U$; that open is open in $V$, giving the same immersion into $V$ [def-weil-closed-immersion]. The minimal-closed-subset property of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] implies the descending-chain condition: the set of terms of any descending chain has a minimal member, after which it is constant. Thus $|V|$ is Noetherian. By [def-weil-constructible-subset], every locally closed subset of $V$ is constructible. This applies both to the images of $S_\\alpha$ and to the closed subset $|Z|$. These subsets are disjoint and cover $V$, so, with the indicated immersions, they form a finite constructible locally closed stratification [def-constructible-stratification].",
+   "text": "Use the existing extension_constructible theorem in Sheaf.Paper.OpenExtensionFiniteTor, made public without changing its type or proof. It realizes the following etale-origin argument. For constructibility of each output cohomology sheaf, use proEtaleModuleRestriction_constructible_iff and intrinsicRealization_restriction to move to fixed-scalar sheaves. The fixed-module constructible-origin theorem gives a constructible etale model. The open immersion is quasi-compact on the locally Noetherian ambient scheme. Extend the etale model by zero using IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact, and apply the etale/pro-etale extension comparison. The same coefficient realization then gives constructibility of j_!H^r(C), and the cohomology isomorphism transports it to H^r(j_!C).",
    "uses": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-locally-closed-subset",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-weil-constructible-subset",
-    "def-constructible-stratification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 005L (lemma-constructible-Noetherian-space); properties.tex Tag 01OZ (lemma-Noetherian-topology); explicit extension of the partition"
-   }
-  },
-  {
-   "text": "For the immersion $s_\\alpha:S_\\alpha\\to U$, the canonical constant-coefficient composition isomorphism [lem-pur-proetale-module-pullback-composition] and the open unit isomorphism [lem-weil-pbc-proetale-ringed-open-closed] give\n$$(j\\circ s_\\alpha)^*(j_!F)\\cong s_\\alpha^*(j^*j_!F)\\cong s_\\alpha^*F.$$\nHere the inverse-image rings are identified by [lem-pur-proetale-constant-coefficient-comparison], so the isomorphisms are isomorphisms of $(P_n)_{S_\\alpha}$-modules. On the complementary stratum the same open-closed node gives $i^*(j_!F)=0$. No assertion about geometric stalks on the boundary is needed.",
-   "uses": [
-    "lem-pur-proetale-module-pullback-composition",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pur-proetale-constant-coefficient-comparison"
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-sf-intrinsic-realization-origin-comparison",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-fin-extension-by-zero",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-proetale-constructible-sheaf",
+    "lem-trf-open-ctf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BN and complementary restriction vanishing; sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)"
+    "place": "Tags 099Y and 09AK; etale-cohomology extension by zero; existing source-library constructibility argument"
    }
   },
   {
-   "text": "On $S_\\alpha$, compose each local constant-model isomorphism for $s_\\alpha^*F$ with the isomorphism of step 4. This uses exactly the same covering and constant module, and induces isomorphisms on all geometric stalks; their finiteness is unchanged. On $Z$, the zero module sheaf is constant with value the zero $P_n$-module: its constant presheaf is already the zero sheaf, and every stalk is the one-element zero module [def-weil-proetale-locally-constant-sheaf, def-weil-proetale-constructible-sheaf]. Consequently the stratification of step 3 witnesses constructibility of $j_!F$. The cohomology isomorphism of step 2 transports these same witnesses to $\\mathcal H^r(j_!C)$ [def-weil-finite-torsion-constructibility].",
+   "text": "For the restriction identities use the canonical openSquarePullbackModel (the unit-normalized coordinate comparison recorded with the open-square construction), sfIntrinsicPullbackComp, and the fully faithful open-extension adjunction unit. They give (s ≫ j)^*(j_!H) ≅ s^*H for every stratum map s. For a map g whose range misses the open, j^*g_*N has zero sections: its fibre-product objects are empty. The two adjunctions then make Hom(g^*j_!H,N) a singleton. Thus g^*j_!H is zero, exactly as in the existing isZero_upperStar_openImmersionLowerShriek. Transport this through the same coefficient equivalences to tensor pullback.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "def-weil-pbc-proetale-operations",
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "lem-sfb-proetale-open-disjoint-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN; sites-modules.tex Tags 03DI and 03D8; open unit and disjoint restriction adjunction argument"
+   }
+  },
+  {
+   "text": "For the supplied complement i:Z→V and supplied stratification S, define D on Option(Fin S.n) by D(none)=i and D(some k)=S.immersion k ≫ j, as objects of Over V. Their ranges cover V by the original coverage and the complementary-range identity. They are pairwise disjoint, using injectivity of j on two original strata and complementary ranges in the other cases. Retain exactly the subtype Q of indices not in omitted. Every point in a range forces its index to lie in Q, since an omitted domain is empty. Choose the ordinary finite-type equivalence Fin(card Q) ≃ Q. The resulting domains and immersions are the original D objects, so their required Over identifications are reflexivity isomorphisms. Immersion composition makes each range locally closed; NoetherianSpace makes it constructible.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "def-weil-locally-closed-subset",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005L; properties.tex Tag 01OZ; explicit finite partition and deletion of empty domains"
+   }
+  },
+  {
+   "text": "Compose the pullback of the cohomology comparison with the stratum restriction isomorphism. Transport each supplied local model across this isomorphism by overFunctor.mapIso. Applying the actual geometric-module-stalk functor gives an underlying linear equivalence, so the given finite stalks remain finite. On the complement use the zero restriction: the singleton identity cover and constant zero module witness local constancy, and the additive stalk functor sends zero to a zero module with a singleton underlying set. Apply these two properties as a predicate on the D objects in the preceding construction. Reuse the existing locallyConstant_of_isZero, finite_stalk_of_isZero and finite_stalk_of_iso theorems in Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated, made public without type or proof changes; the universe-flexible local models are transported directly.",
    "uses": [
     "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-geometric-stalk",
     "def-weil-proetale-constructible-sheaf",
-    "def-weil-finite-torsion-constructibility"
+    "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.7, open factor; finite-stage stratification argument supplied explicitly"
+    "place": "Lemma 6.7.7, open-factor local-model argument"
    }
   },
   {
-   "text": "If $r\\notin[a,b]$, then $\\mathcal H^r(C)=0$ by hypothesis, hence $\\mathcal H^r(j_!C)\\cong j_!0=0$ by step 2; an additive functor preserves the zero object. Thus the cohomological support stays in $[a,b]$ [def-weil-cohomological-support]. This interval contains only finitely many integers, and all cohomology sheaves are constructible by steps 3--5, so $j_!C\\in D^b_c(V,P_n)$ [def-weil-finite-torsion-constructibility]. If $U=\\varnothing$, the only stratum needed is $Z=V$ with the zero sheaf; if $U=V$, omit the empty complement. Empty original strata can also be omitted, since none contributes points or a nonvacuous restriction condition.",
+   "text": "Exact extension carries zero cohomology to zero cohomology. Hence output cohomological support is a subset of input support. The supplied finite input support remains finite, and its inclusion in [a,b] gives the same output interval. Combine this with constructibility of every output cohomology sheaf and with the explicit stratification conclusions. The subtype construction also allows zero strata when all domains are empty; the constructibility predicate itself retains its existing positive-stratification convention through the etale comparison.",
    "uses": [
     "def-weil-cohomological-support",
     "def-weil-finite-torsion-constructibility"
@@ -103,33 +107,41 @@
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.7, open factor; interval and empty-stratum conclusions"
+    "place": "Lemma 6.7.7, interval and bounded constructibility conclusions"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-extension-by-zero-exact",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-locally-closed-subset",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "def-weil-constructible-subset",
-  "def-constructible-stratification",
-  "lem-pur-proetale-module-pullback-composition",
-  "def-weil-proetale-locally-constant-sheaf",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-sf-intrinsic-realization-origin-comparison",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-fin-extension-by-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "def-weil-proetale-constructible-sheaf",
-  "def-weil-cohomological-support"
+  "lem-trf-open-ctf",
+  "lem-trf-open-square-exchange",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-sfb-proetale-open-disjoint-direct-image",
+  "def-constructible-stratification",
+  "def-weil-closed-immersion",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-cohomological-support",
+  "def-weil-finite-torsion-constructibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.7.7, open factor: explicit finite-stage proof of the classical argument omitted there, using Stacks 09AH, 09BN, 010N and 005L"
+  "place": "Lemma 6.7.7 open factor, implemented using existing finite-module etale comparison and explicit filtered immersed stratification; B9, 2026-10-21; returned duplicate helpers removed by reusing their canonical theorems in OpenExtensionFiniteTor and ProEtaleBoundedConstructibleTriangulated"
  },
  "mathlib_searches": [
   {
@@ -278,5 +290,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Read the node, all 14 stmt_dep records (identical to live side) and the live declarations used (intrinsicFiniteTorsionConstructible/IsConstructibleProEtaleModuleSheaf, sfIntrinsicExtensionByZero + exactness, FiniteLocallyClosedStratification, IsLocallyConstantProEtaleModuleSheafOfUniverses, proEtaleGeometricModuleStalk, proEtaleCohomologicalSupport). Item diff vs live: only the lean record and 4 added stmt_deps used in the signature; lean.statement verbatim. Every hypothesis and conclusion matches the node: Noetherian V, no extra QuasiCompact j, j_! = recorded intrinsic extension by zero with Mathlib mapDerivedCategory, interval, Nonempty H^r(j_!C)≅j_!H^r(C), strata kept up to iso over V plus reduced complement Z with IsZero restriction, optional omission of empty strata. Edge cases U=∅, U=V, V=∅, C=0, a=b, n=1 checked; provable as stated. Instance lambda supplies only Prop instances (finite ring, AddCommGrp locally bijective via a module the recorded dep already imports publicly); pattern already landed. Not a duplicate of the condensed, finite-Tor over a field, or étale theorems. Gates OK: no defs, one sorry, source and blueprint docstrings with the 6 steps. nt_compile --json: 19.0 s, exit 0, no errors or warnings. Advisories: proEtaleConstantModulePullback owner not in stmt_deps (inherited from the constructibility def); thin Second reading section; _hl unused, as in the node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261021T110953-L-3848931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
