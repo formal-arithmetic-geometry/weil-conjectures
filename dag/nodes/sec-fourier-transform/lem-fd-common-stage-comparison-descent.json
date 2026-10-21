@@ -21,9 +21,175 @@
   "def-fd-pullback-comparison-datum",
   "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $W$ and suppress it from the notation. All coefficient fields are subfields of the fixed $\\Omega$; the index and each overfield index are small directed sets, since a compositum is a finite common overfield. The literal pair constructions in [def-weil-algebraically-closed-coefficients] and [def-weil-pbc-qbar-category] use the same index. Apply the additive pair-functor lemma [lem-sbc-coherent-pair-functor-descent] with $U=S$, $V=P$, $\\Phi_E=J_E$, and its comparison $b_{L/E}=j_{L/E}^{-1}$. Inverting the stated scalar cocycle gives precisely that lemma's tower equation; identity normalization supplies its unit condition. It yields the functor on literal pairs with exactly the object and conjugation formulas in the statement. Only its pair-category conclusion is used, before its optional Karoubi extension.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-qbar-category",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "Here is the transport calculation, including the associators. For endpoints $X=(E,K)$ and $Y=(F,H)$ put $r_X=j_{M/E,K}$, $t_X=j_{N/M,S_{M/E}K}$, $s_X=j_{N/E,K}$, $A_X=a^s_{N,M,E,K}$, $B_X=a^p_{N,M,E,J_EK}$, and use the analogous symbols for $Y$. The scalar cocycle says $s_XJ_N(A_X)=B_XP_{N/M}(r_X)t_X$. Write $\\phi_M(u)=r_YJ_M(u)r_X^{-1}$. Since $u_N=A_YS_{N/M}(u)A_X^{-1}$, substitution gives\n$$\\phi_N(u_N)=B_YP(r_Y)t_YJ_N(Su)t_X^{-1}P(r_X)^{-1}B_X^{-1}=B_YP(\\phi_M(u))B_X^{-1}=(\\phi_M(u))_N.$$\nThe middle equality is naturality of $j_{N/M}$ at $u$. This proves the asserted commuting square on actual Hom transition maps, rather than on abstractly identified Hom groups.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "At a fixed common field $M$, $J_M$ is fully faithful by the assumed equivalence, and conjugation by $r_X,r_Y$ is invertible. Thus $\\phi_M$ is a bijection with inverse\n$$\\psi_M(v)=(J_M|_{\\operatorname{Hom}})^{-1}(r_Y^{-1}vr_X).$$\nThe preceding transport identity and injectivity of $\\phi_N$ give $\\psi_N(v_N)=\\psi_M(v)_N$. Therefore both maps respect eventual equality of representatives, the equality relation in the two pair categories. They descend to maps $[M,u]\\mapsto[M,\\phi_M(u)]$ and $[M,v]\\mapsto[M,\\psi_M(v)]$ on the two Hom colimits. Their composites are the identity on every representative. This proves both full faithfulness and the claimed inverse Hom-colimit maps without assuming any transition functor is faithful.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "For any target pair $(E,A)$, choose $K\\in\\mathcal C^s_E(W)$ and a finite-stage isomorphism $J_EK\\simeq A$ using essential surjectivity of $J_E$. Its class at $E$, with inverse represented by the inverse finite map, is an isomorphism $J_W(E,K)\\simeq(E,A)$. Together with the preceding Hom bijections, [lem-trf-fully-faithful-ess-surj-equivalence] now makes $J_W$ an equivalence (take a common sufficiently large universe for both pair categories). The object choices and Hom inverses describe its quasi-inverse: choose such a preimage for each target pair and lift morphisms uniquely through the Hom bijections after conjugating by these chosen isomorphisms.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "The functor is additive by step 1. For $\\lambda\\in\\Omega$ and $f=[M,u]$, choose a finite $N$ containing $M$ and $\\lambda$. The scalar action on both pair categories is represented by $\\lambda u_N$. Since $J_N$ is $N$-linear and composition in its target is bilinear,\n$$\\phi_N(\\lambda u_N)=j_YJ_N(\\lambda u_N)j_X^{-1}=\\lambda\\phi_N(u_N).$$\nStep 2 identifies this with the transport of $\\phi_M(u)$, so $J_W(\\lambda f)=\\lambda J_W(f)$. The inverse Hom bijections are also $\\Omega$-linear: apply the injective linear map $J_W$ to the proposed additive and scalar identities. Conjugating these inverse Hom maps by the chosen object isomorphisms preserves linearity, so the quasi-inverse is linear too.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "At stage $E$, the identity comparison $j_{E/E}=1$ makes $J_W\\iota^s_E=\\iota^p_EJ_E$ on objects and arrows. Let $\\delta_E:J_E(-[1])\\xrightarrow{\\sim}(J_E-)[1]$ be the given exact-functor shift comparison. Compatibility of $j$ with shifts is exactly the transformation-compatibility equation for the families $J_E\\circ[1]$ and $[1]\\circ J_E$. Apply the compatible-transformation clause of [lem-sbc-coherent-pair-functor-descent]: the classes $[E,\\delta_{E,K}]$ give the shift comparison of $J_W$, with inverse given by their inverse classes. Thus the comparison restricts to the specified finite-stage comparison, for the actual pair shifts.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "A distinguished source triangle is isomorphic to the inclusion of a distinguished triangle $D$ over a finite field $M$, by [def-weil-algebraically-closed-coefficients]. Step 6 identifies its image with the inclusion of $J_M(D)$ using the given shift comparison. The assumed exactness of $J_M$ makes this triangle distinguished, so the target definition [def-weil-pbc-qbar-category], whose distinguished triangles are those isomorphic to the common-stage cone triangles of [def-weil-pbc-common-stage-cones] (with $T_{M/M}=\\operatorname{id}$, a stage-$M$ distinguished triangle is its own cone triangle there), shows that $J_W$ preserves distinguished triangles. This proves exactness directly on the raw pair categories.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-common-stage-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "Conversely, let a triangle $D$ in the source have distinguished image. In the target pair category choose a finite-stage distinguished triangle $A$ and an isomorphism $J_WD\\simeq\\iota^p_M A$: by [def-weil-pbc-common-stage-cones] $J_WD$ is isomorphic to a common-stage cone triangle of some $[M,u]$, and the classes $[M,\\operatorname{id}]:(E,K)\\simeq(M,T_{M/E}K)$ identify that triangle with $\\iota^p_M$ of the stage-$M$ cone triangle of $u$, the third arrow by the shift comparison $\\sigma_{M/E}$. Choose an exact quasi-inverse $R_M$ of the assumed exact equivalence $J_M$. Then $R_M A$ is distinguished, and $J_MR_M A\\simeq A$ as triangles, with the exact-equivalence shift comparisons. Using step 6 gives $J_W\\iota^s_M R_M A\\simeq J_WD$. Lift the three component isomorphisms and their inverses through the Hom bijections of step 3. Faithfulness, together with the shift comparison, lifts all triangle commutativity equations and the inverse identities. Hence $D\\simeq\\iota^s_M R_M A$, so $D$ is distinguished by the source definition. Applying this to the chosen quasi-inverse proves reverse exactness. This argument uses only finite-stage exact equivalences already assumed, and never a Karoubi completion.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-common-stage-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "Fix $h:U\\simeq T$. To compare the actual composites, set $A_E=J_{U,E}F^s_{h,E}$ and $B_E=F^p_{h,E}J_{T,E}$. In the orientation required by the pair-functor lemma their scalar comparisons are\n$$a_{L/E}=J_{U,L}(\\alpha^s)\\circ j_{U,F^s_{h,E}K}^{-1},\\qquad c_{L/E}=F^p_{h,L}(j_T)^{-1}\\circ\\alpha^p_{J_{T,E}K}.$$\nIndeed both start with $P_{U,L/E}$ applied to the stage-$E$ composite and end with the stage-$L$ composite applied to $S_{T,L/E}$. The actual source pullback representative formula is specified in [def-weil-derived-pullback-tensor-hom]; the target scalar/pullback comparisons and their unit and tower equations are specified in [prop-weil-pbc-scalar-extension], and the actual target common-stage pullback $F^p_h$ is by [prop-weil-pbc-descent-functors] the functor descended from $(F^p_{h,E},\\alpha^p)$ by the same conjugation formula $[M,u]\\mapsto[M,(\\alpha^p)^{-1}F^p_{h,M}(u)\\alpha^p]$ as in the pair-functor lemma. Together with the assumed $j$ cocycle these give the composite stage families. The composition clause of [lem-sbc-coherent-pair-functor-descent] identifies their descended functors with the actual $J_UF_h^s$ and $F_h^pJ_T$, respectively.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-scalar-extension",
+    "lem-sbc-coherent-pair-functor-descent",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "Multiply the assumed mixed scalar square on the left by $F^p_{h,L}(j_T)^{-1}$ and on the right by $j_{U,F^s_{h,E}K}^{-1}$. With the comparisons just defined, it becomes\n$$b_{h,L,S_TK}\\circ a_{L/E}=c_{L/E}\\circ P_U(b_{h,E,K}).$$\nThis is exactly the compatible-transformation hypothesis of [lem-sbc-coherent-pair-functor-descent], so the components $[E,b_{h,E,K}]$ define a natural transformation $b_h:A\\Rightarrow B$. Each is invertible: $[E,b_{h,E,K}^{-1}]$ is its two-sided inverse since the composites are represented by the finite identity maps. Thus it is a natural isomorphism with precisely the claimed components.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "For completeness, the naturality calculation uses the mixed square at both endpoints, not only at objects with field label $L$. For $u:S_{T,M/E}K\\to S_{T,M/F}H$, suppress $h$ and write $a_E,c_E,a_F,c_F$ for the stage-$M$ comparisons. The representative of $B[u]\\circ b_{E,K}$ is\n$$c_F^{-1}B_M(u)c_EP_U(b_{E,K})=c_F^{-1}B_M(u)b_{M,S_EK}a_E=c_F^{-1}b_{M,S_FH}A_M(u)a_E=P_U(b_{F,H})a_F^{-1}A_M(u)a_E.$$\nThe middle equality is finite-stage naturality of $b_M$; the first and last use step 10. The last expression represents $b_{F,H}\\circ A[u]$. Equality of these representatives proves naturality for arbitrary common-stage arrows.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  },
+  {
+   "text": "The identity and composition clauses of [lem-sbc-coherent-pair-functor-descent] preserve composite stage families and equations of compatible transformations. Apply them to each finite identity or composition equation for $b$, retaining the actual pullback associators. Shift equations are equations of the shift comparisons descended in step 6, and scalar equations use the same compatible transformations and the scalar calculation of step 5. Thus every equation stipulated in the question descends; no new finite equation is being asserted. Finally [def-fd-coefficient-comparison-datum] asks, at common stage, for the field-preserving conjugation functor, its linearity, exactness in both directions and its induced shift comparisons, all proved in steps 1–8. [def-fd-pullback-comparison-datum] asks for the common-stage transformation of the two actual composites, with its prescribed finite components and mixed square, proved in steps 9–11. Under the stipulated normalized integral and finite rational data these supply exactly those common-stage fields; this does not construct the integral lifts.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-fd-coefficient-comparison-datum",
+    "def-fd-pullback-comparison-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-qbar-category",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-pbc-finite-stage-pair-category",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "def-weil-pbc-common-stage-cones",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors",
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-pullback-comparison-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence: comparison with the PBC coefficient category; explicit agent-written common-stage descent argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +225,45 @@
    "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback; CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver; CategoryTheory.Limits.map_lift_pullbackComparison; CategoryTheory.GlueData.mapGlueData_t'; CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.NatTrans.Equifibered; CategoryTheory.Limits.CategoricalPullback.mkNatIso",
    "date": "2026-10-21",
    "verdict": "no match: equivalence classes and ordinary filtered-colimit infrastructure do not give this exact linear comparison of the specified pair categories and pullback families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent exact linear equivalences between finite coefficient stages descend to an equivalence of pair categories with Hom colimits, and mixed scalar natural transformations descend",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, CategoryTheory.Functor.mapExactFunctor_smul, Function.Exact.iff_of_ladder_linearEquiv, fromModuleCatToModuleCatLinearEquivtoModuleCatObj, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.d, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.ι_d_assoc, CategoryTheory.Free.ext, Condensed.instAB5CondensedMod",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: ordinary Type-colimit recognition and triangulated-equivalence infrastructure do not construct the specified pair-category comparison or its mixed pullback descent"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|PairCategory|StageSystem|common.stage",
+   "results": "0 hits: none; scope CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: ordinary Type-colimit recognition and triangulated-equivalence infrastructure do not construct the specified pair-category comparison or its mixed pullback descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent family of equivalences induces a fully faithful essentially surjective functor on a filtered colimit of categories with compatible natural transformations",
+   "results": "8 hits: CategoryTheory.Limits.Types.FilteredColimit.isColimitOf', CategoryTheory.Limits.colimitLimitIso, CategoryTheory.createsColimitOfFullyFaithfulOfLift', CategoryTheory.Limits.fullyFaithful_reflectsColimits, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf, CategoryTheory.Equivalence.fullyFaithfulToEssImage, CategoryTheory.Comma.isEquivalenceMap, CategoryTheory.Limits.IsColimit.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: ordinary Type-colimit recognition and triangulated-equivalence infrastructure do not construct the specified pair-category comparison or its mixed pullback descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CategoryTheory.Linear",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: ordinary Type-colimit recognition and triangulated-equivalence infrastructure do not construct the specified pair-category comparison or its mixed pullback descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudonatural equivalence of filtered diagrams of linear triangulated categories induces an equivalence on their explicit common stage two colimits",
+   "results": "8 hits: CategoryTheory.Equivalence.IsTriangulated.mk', CategoryTheory.Equivalence.IsTriangulated.mk'', CategoryTheory.Equivalence.IsTriangulated.trans, CategoryTheory.Equivalence.IsTriangulated, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Equivalence.IsTriangulated.symm, CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedInverse",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: ordinary Type-colimit recognition and triangulated-equivalence infrastructure do not construct the specified pair-category comparison or its mixed pullback descent"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-rational-coefficient-category-comparison",
@@ -81,5 +282,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-common-stage-comparison-descent",
+  "worker": "stage1",
+  "summary": "Expanded the conditional common-stage comparison into explicit transport conjugation, inverse Hom-colimit maps, equivalence, linearity, shift and triangle arguments, and the two composite scalar systems for pullback descent. Reused the generic pair-functor lemma and existing equivalence criterion; no new nodes and no statement change.",
+  "blueprint": "Realizes the final sentence of def-fd-trace-function requiring local Frobenius to be computed in the PBC coefficient category, through the common-stage part extracted from lem-fd-rational-coefficient-category-comparison. The blueprint has no proof of this auxiliary claim; steps 1–8 supply coefficient descent and steps 9–12 supply the pullback comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic additive descent of coherent functor families and compatible transformations on explicit pair categories; the trace unit has no such generic categorical lemma. Uses only its pair-category part, never the Karoubi extension."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Step 9 reads the specified PBC scalar/pullback comparisons alpha^p and their unit and tower equations; the trace unit constructs no PBC scalar-extension data (added by the maintainer reader)."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Step 9 identifies the actual PBC common-stage pullback as the conjugation functor descended from the finite pullbacks; this is where that functor is defined, and the trace unit has no such construction (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-coherent-pair-functor-descent",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-16b3cdb12",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-16b3cdb12 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct, and I repaired three citation and declaration faults in fixes/dag/nodes/sec-fourier-transform/lem-fd-common-stage-comparison-descent.json. Shape: one commit with the item and the report, no new nodes. Compared with side-live (still unsplit, so not superseded, and not in the dropped lists), the statement, stmt_deps, source and blueprint are unchanged. No repair note applies to this item. The parent's old steps 5, 6 and 9 (2555 chars) are carried in full, and more explicitly, by the new steps 2–12 (8868 chars). Step 4 corrects the old literal-preimage claim to essential surjectivity up to isomorphism. Source: main-20261015 def-fd-trace-function, final sentence. It gives no proof, so proof_origin agent is correct. No SGA is used. Checks: (1) The pair lemma's b is j^{-1}. Its arrow formula then matches the item's conjugation, and the inverted tower equation is exactly the item's cocycle. (2) I recomputed the step-2 transport through the cocycle at both ends and naturality of j_{N/M}. (3) ψ_M = J_M^{-1}(r_Y^{-1} v r_X) and its compatibility follow by injectivity. (4) The equivalence comes from the Mathlib asEquivalence leaf. (5) Linearity holds at N ⊇ M, Ql(λ). (6) The shift comparison descends as a compatible transformation. (7–8) Reflection lifts a triangle isomorphism through the full faithfulness of J_W. (9) The orientations of a and c are correct. (10) The mixed square rearranges exactly to the lemma's compatibility equation. (11) Naturality holds for unequal endpoint fields. (12) The fields of both comparison-datum definitions are supplied. Faults repaired: C4/C1 in steps 7–8, which cited def-weil-pbc-qbar-category, but the triangles and the σ^{-1}p third arrow are defined in def-weil-pbc-common-stage-cones; I cited it and added the identification of a cone triangle with ι^p_M of a stage-M triangle. C1 in step 9, which identified 'the actual F^p_h' with no citation; that functor is defined only by prop-weil-pbc-descent-functors (β^{-1}Φβ, the same orientation as α^p), now cited. Route/C8: the off-route statements prop-weil-pbc-scalar-extension and prop-weil-pbc-descent-functors were not declared; I added them to split_report.tool_uses. Advisory: the pair lemma needs literal S_{E/E}=1 and the pentagon for the framework transitions. That is presupposed by base def-weil-algebraically-closed-coefficients, and the unit and pentagon are proved in the proof and Lean of lem-weil-scalar-extension-composition, not stated in its statement text. Batch-5 flag lem-trf-fully-faithful-ess-surj-equivalence: accepted. It is the generic Mathlib leaf Functor.asEquivalence (only stmt_dep def-nagata-category), neither the trace formula nor Poincaré duality nor a step of their proofs, and it is already in the closure of the base-cited qbar-category definitions. The added citations bring in no new trf or pod node and create no cycle. Duplicate candidates checked, none a duplicate: lem-sbc-coherent-pair-functor-descent, prop-weil-pbc-descent-functors, lem-sbc-common-stage-inverse-through-karoubi, lem-coef-qbar-adjunction-hom-descent.; 1 file(s) fixed by the reviewer"
  }
 }
