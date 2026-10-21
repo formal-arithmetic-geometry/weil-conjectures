@@ -21212,3 +21212,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/O4/lem-pod-rational-purity-pairing (reviewer FIX; first push; new nodes: 0); claim not held by O4: not your claim
 - 08:42 L: merged deliver/Q32/lem-sf-automorphism-completion-unit-comparison (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q128/lem-trf-section-rees-noetherian-geometry (reviewer PASS; first push; new nodes: 0)
+- 08:42 L: merged deliver/Q99/lem-pur-semilinear-tensor-presentation-transport (reviewer FIX; first push; new nodes: 0)
