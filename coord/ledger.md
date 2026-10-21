@@ -20764,3 +20764,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:40 L: returned deliver/NF/lem-weil-pbc-ringed-common-quotient-pullback-comparison (reviewer RETURN: L: independent stage-2 immutable head f953c76baa75: F1 (mandated theorem-stmt_dep finding): the item's Lean statement us)
 - 07:40 L: returned deliver/N0/lem-sfb-constant-scalar-geometric-adjunctions (reviewer RETURN: L: independent stage-2 immutable head 4c0b2d3d3b43: incremental DAG validation: reach: def-sfb-fixed-scalar-geometric-ad)
 - 07:40 L: returned deliver/NA/lem-weil-pbc-stratum-completion-unit-restriction (reviewer RETURN: L: independent stage-2 immutable head 7603bd08ea63: incremental DAG validation: reach: def-sfb-fixed-scalar-geometric-ad)
+- 07:40 L: returned deliver/NV/lem-sf-immersion-completed-pullback-comparison (reviewer RETURN: Faults C5, D1/D2 and the 2026-10-21 re-split note. The statement is unchanged and the assembly is 1963 characters. The m)
