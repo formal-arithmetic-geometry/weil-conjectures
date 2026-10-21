@@ -16,9 +16,10 @@
  ],
  "proof": [
   {
-   "text": "Apply determinant_dual_evaluation to M and hfree. This gives an ordinary sheaf tensor isomorphism L tensor F ≅ O_X for the two top exterior sheaves.",
+   "text": "Apply the adopted determinant_dual_evaluation to M and hfree to obtain exteriorPower(M^dual,d) tensor exteriorPower(M,d) ≅ O_X. Precompose with the tensor of exteriorSheafPowerIso (dual M) d and exteriorSheafPowerIso M d. This yields the original ordinary sheaf tensor isomorphism L tensor F ≅ O_X for the legacy exteriorSheaf determinant objects. Continue with the unchanged K-flat single-complex and shift comparisons below.",
    "uses": [
-    "lem-sc-determinant-dual-evaluation"
+    "lem-sc-determinant-dual-evaluation",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
@@ -41,12 +42,14 @@
  "proof_deps": [
   "lem-sc-determinant-dual-evaluation",
   "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BRT final determinant inversion; ordinary evaluation split off, K-flat localization and shift composition formalized by P3 using upstream Etale.Derived.Invertible and DerivedCategory.Monoidal.Shift"
+  "place": "Tag 0BRT final determinant inversion; ordinary evaluation split off, K-flat localization and shift composition formalized by P3 using upstream Etale.Derived.Invertible and DerivedCategory.Monoidal.Shift",
+  "note": "S4 retirement of the ordinary legacy determinant evaluation: the only consumer proof change is the tensor of the existing exterior-sheaf comparison isomorphisms before the adopted ordinary evaluation. Public signature and remaining derived argument are preserved."
  },
  "mathlib_searches": [
   {
@@ -129,14 +132,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "C-6e4ba",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T085319-L-31725",
+  "landing": "20261021T134536-L-1343342",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf item stub + adapted ShiftedDeterminantDualEvaluation (diff vs live: import swap + exteriorSheafPowerIso transport) against upstream WeilConjectures.AlgebraicGeometry.DeterminantDualEvaluation; node lean.statement verbatim vs upstream theorem; importer compiled (28.6 s, axioms standard)"
  },
  "lean_audit": {}
 }

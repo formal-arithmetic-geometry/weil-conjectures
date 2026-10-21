@@ -22654,3 +22654,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:45 L: merged deliver/R7/Sheaf.Paper.PointAutomorphismRestrictionNatural (stage 3; reviewer PASS; first push; landing 20261021T134525-L-1308901 (proof); batch 20261021T134254; modules 1; new nodes 0)
 - 13:45 L: merged deliver/R8/Sheaf.Paper.RealWeilSheaves (stage 3; reviewer PASS; first push; landing 20261021T134529-L-1318687 (proof); batch 20261021T134254; modules 1; new nodes 0)
 - 13:45 L: merged deliver/S3/Sheaf.Paper.CompleteCompactSupportProetale (stage 3; reviewer PASS; first push; landing 20261021T134533-L-1333060 (interface); batch 20261021T134254; modules 2; new nodes 1)
+- 13:45 L: merged deliver/S4/Sheaf.AlgebraicGeometry.DeterminantDualEvaluation (stage 3; reviewer PASS; first push; landing 20261021T134536-L-1343342 (interface); batch 20261021T134254; modules 2; new nodes 0; change records: coord/changes/S4-retire-determinant-dual-evaluation.md)

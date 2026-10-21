@@ -16,23 +16,22 @@
  ],
  "proof": [
   {
-   "text": "Construct the rank-zero free sheaf Z and the split short exact complex Z -> M -> M as before. Apply the adopted determinant_shortExact with ranks 0,d,d and extract invertibility of exteriorPower M d. Transfer it along (exteriorSheafPowerIso M d).symm by IsInvertible.of_iso, giving invertibility of the unchanged legacy determinant exteriorSheaf M d. The remaining dual-comparison and evaluation proof is unchanged.",
+   "text": "Construct the rank-zero free sheaf Z and its split short exact complex Z -> M -> M. Apply determinant_shortExact with ranks 0,d,d to obtain invertibility of F = exteriorPower M d. This is exactly the adopted proof; no legacy exterior-sheaf comparison is needed here.",
    "uses": [
     "lem-sc-determinant-short-exact",
-    "def-amb-finite-locally-free-module",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "def-amb-finite-locally-free-module"
    ],
    "elementary": false
   },
   {
-   "text": "Use exteriorSheaf_dual_iso to identify exteriorSheaf(M^dual,d) with Hom(exteriorSheaf(M,d),O_X).",
+   "text": "Apply the adopted exteriorSheaf_dual_iso to identify exteriorPower(M^dual,d) with the internal dual of F = exteriorPower(M,d).",
    "uses": [
     "lem-sc-determinant-dual-evaluation-dual-identification"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor this identification with the identity of F=exteriorSheaf(M,d). Use the braiding to put F first. For the invertible F, apply Scheme.Modules.nonempty_tensorObj_dual_iso_unit from the already proved module Dual, yielding F tensor F^dual ≅ O_X. Compose the three isomorphisms. This is the evaluation assertion contained in the same-unit invertible-dual node.",
+   "text": "Tensor this identification with the identity of F=exteriorPower(M,d). Use the braiding to put F first. For the invertible F, apply Scheme.Modules.nonempty_tensorObj_dual_iso_unit from the already proved module Dual, yielding F tensor F^dual ≅ O_X. Compose the three isomorphisms. This is the evaluation assertion contained in the same-unit invertible-dual node.",
    "uses": [
     "lem-sc-invertible-dual",
     "def-pur-sheaf-tensor-product"
@@ -45,14 +44,13 @@
   "def-pur-sheaf-tensor-product",
   "lem-sc-determinant-dual-evaluation-dual-identification",
   "lem-sc-determinant-short-exact",
-  "lem-sc-invertible-dual",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-invertible-dual"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0BRT final determinant inversion, reduced in Lean through dual determinant comparison, invertibility from the existing short-exact determinant theorem, and ordinary invertible-sheaf evaluation.",
-  "note": "Q2 retirement: use the adopted short-exact determinant theorem and transport only the needed invertibility clause through the existing exterior-sheaf comparison. All public signatures and public imports are preserved."
+  "note": "S4 retirement of the duplicate: the node now records the unchanged adopted proof on canonical exterior powers. The shifted legacy consumer performs the exterior-sheaf transport before the same derived argument; no unit step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -104,14 +102,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DeterminantDualEvaluation",
-  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualEvaluation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DeterminantDualEvaluation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualEvaluation.lean",
   "declaration": "AlgebraicGeometry.determinant_dual_evaluation",
-  "statement": "theorem determinant_dual_evaluation (X : Scheme.{u})\n    (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    let L : SheafOfModules.{u} (moduleRings X.toRingedSpace) :=\n      Scheme.Modules.exteriorSheaf\n        (SheafOfModules.homObj (R := X.sheaf) M\n          (SheafOfModules.unit X.ringCatSheaf)) d\n    let F : SheafOfModules.{u} (moduleRings X.toRingedSpace) :=\n      Scheme.Modules.exteriorSheaf M d\n    Nonempty (L ⊗ F ≅ 𝟙_ (SheafOfModules.{u} (moduleRings X.toRingedSpace)))",
+  "statement": "theorem determinant_dual_evaluation (X : Scheme.{u})\n    (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    let L : SheafOfModules.{u} (moduleRings X.toRingedSpace) :=\n      Scheme.Modules.exteriorPower\n        (SheafOfModules.homObj (R := X.sheaf) M\n          (SheafOfModules.unit X.ringCatSheaf)) d\n    let F : SheafOfModules.{u} (moduleRings X.toRingedSpace) :=\n      Scheme.Modules.exteriorPower M d\n    Nonempty (L ⊗ F ≅ 𝟙_ (SheafOfModules.{u} (moduleRings X.toRingedSpace)))",
   "branch": "sheaf-dag",
-  "by": "P3",
-  "date": "2026-10-12"
+  "by": "S4",
+  "date": "2026-10-21",
+  "note": "Retirement: the adopted theorem uses canonical exteriorPower; the legacy shifted consumer tensors the two exteriorSheafPowerIso comparisons before applying this evaluation. Its statement is unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -126,12 +125,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-a8239",
-  "group": "Q2",
+  "reviewer": "C-6e4ba",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261021T111434-L-136588",
+  "landing": "20261021T134536-L-1343342",
   "kind": "interface",
-  "note": "independent cc review: delivered stub + adapted DeterminantDualEvaluation (diff vs live: import swap + IsInvertible.of_iso transport) and node lean.statement vs WeilConjectures/AlgebraicGeometry/Modules/DeterminantShortExact.lean (verbatim); --all compile clean, axioms standard"
+  "note": "independent cc review: withdrawn Sheaf item stub + adapted ShiftedDeterminantDualEvaluation (diff vs live: import swap + exteriorSheafPowerIso transport) against upstream WeilConjectures.AlgebraicGeometry.DeterminantDualEvaluation; node lean.statement verbatim vs upstream theorem; importer compiled (28.6 s, axioms standard)"
  },
  "lean_audit": {}
 }

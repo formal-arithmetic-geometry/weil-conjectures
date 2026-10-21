@@ -8,7 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-import Sheaf.AlgebraicGeometry.DeterminantDualEvaluation
+import WeilConjectures.AlgebraicGeometry.DeterminantDualEvaluation
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 
@@ -159,7 +160,11 @@ theorem shiftedDeterminant_dual_evaluation
   have : CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
     CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u} _
-  obtain ⟨e⟩ := determinant_dual_evaluation X M d hfree
+  obtain ⟨ePower⟩ := determinant_dual_evaluation X M d hfree
+  let e := ((Scheme.Modules.exteriorSheafPowerIso
+    (SheafOfModules.homObj (R := X.sheaf) M
+      (SheafOfModules.unit X.ringCatSheaf)) d) ⊗ᵢ
+    (Scheme.Modules.exteriorSheafPowerIso M d)) ≪≫ ePower
   let L : SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.exteriorSheaf
     (SheafOfModules.homObj (R := X.sheaf) M
       (SheafOfModules.unit X.ringCatSheaf)) d
