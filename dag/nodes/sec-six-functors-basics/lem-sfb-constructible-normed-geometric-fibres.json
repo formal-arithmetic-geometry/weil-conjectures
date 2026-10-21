@@ -19,9 +19,192 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in compatible small-site/coefficient universes. Use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to express internal modules as ordinary module sheaves, retaining their underlying abelian sheaves, sections and restriction maps. Under this equivalence their relative tensor is the sheafified sectionwise balanced tensor: both represent balanced bilinear maps, by [def-sfb-modobj-relative-tensor] and [def-pur-sheaf-tensor-product]. The canonical comparison $F_Z=p_Z^*C_F\\to(U\\mapsto C(|U|,F))$ is an isomorphism of ring objects, preserving multiplication and unit, for the totally disconnected topological ring $F$ [lem-sfb-continuous-ring-universe-realization]; so the section-ring sheaf of $F_Z$ is $U\\mapsto C(|U|,F)$. Apply [lem-sfb-totally-disconnected-coefficient-realization] to the Hausdorff totally disconnected metric space underlying $F$: its naturality in continuous maps and its compatibility with scheme inverse images give the restriction and pullback formulas used below. The same identification respects continuous field inclusions. In particular for $s=\\operatorname{Spec}k_x$, the map by constant sections identifies $\\Gamma(s,F_s)=F$ as rings.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-modobj-relative-tensor",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-continuous-ring-universe-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; internal relative tensor via its balanced universal property"
+   }
+  },
+  {
+   "text": "An algebraically closed field $k_x$ is strictly henselian: its maximal ideal is zero, so every idempotent in $B/(0)B=B$ lifts uniquely, and its residue field is separably closed [def-weil-pbc-henselian-terminology]. The spectrum has one connected component, a one-point extremally disconnected space. Hence it is w-contractible by [det-pe-wlocal-strict-contractible]. Apply [det-pe-wc-sections-exact] on $s_{\\mathrm{proet}}$ with its coefficient ring $F_s$: $\\Gamma(s,-)$ is exact and additive. The module inverse image $x^*$ is exact and additive for this arbitrary condensed ring by [det-prop-sfb-module-pullback-exact-main]. Their composite $\\Phi_{x,F}$ is therefore exact and additive, and the coefficient comparison and step 1 identify $\\Phi_{x,F}(F_Z)=F$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "det-pe-wlocal-strict-contractible",
+    "det-pe-wc-sections-exact",
+    "det-prop-sfb-module-pullback-exact-main"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 and Lemma 4.1(1); strict henselian and w-contractible definitions"
+   }
+  },
+  {
+   "text": "At the terminal object of $s_{\\mathrm{proet}}$, sheafification of any abelian presheaf leaves sections unchanged [lem-trf-point-sheafification-final]. Its hypotheses hold for abelian groups: abelian sheafification has the sheafification of underlying sets, and the forgetful functor reflects bijections. Thus evaluating the sheafified balanced tensor gives the canonical isomorphism $\\Gamma(s,N)\\otimes_F\\Gamma(s,N')\\cong\\Gamma(s,N\\otimes_{F_s}N')$ [def-pur-sheaf-tensor-product]. Tensor pullback gives $x^*(M\\otimes_{F_Z}M')\\cong x^*M\\otimes_{F_s}x^*M'$ [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. The composite has tensorator induced by $m\\otimes m'\\mapsto m\\otimes m'$, with unit the constant-section identification in step 1. Associativity, unit and symmetry diagrams reduce to their equalities on pure tensors; pure tensors generate each algebraic tensor product. These maps make $\\Phi_{x,F}$ symmetric monoidal.",
+   "uses": [
+    "lem-trf-point-sheafification-final",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1(1), tensor computation; Stacks Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "Apply the exact functor $\\Phi_{x,F}$ degreewise. Exactness identifies $H^q(\\Phi_{x,F}K)$ with $\\Phi_{x,F}(H^qK)$, since kernels, images and their quotients are preserved. Consequently it carries quasi-isomorphisms to quasi-isomorphisms and factors through the ordinary localization defining $D$ [sk-def-sfb-derived-categories]. Vanishing in degrees $q<0$ or $q>0$ is preserved by the displayed cohomology formula. This proves the asserted t-exact derived functor, for unbounded complexes too.",
+   "uses": [
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, exact/t-exact pullback; ordinary localization and exact-functor argument"
+   }
+  },
+  {
+   "text": "Suppose $M$ has the stated stratification. Factor $x:s\\to Z$ through its stratum $S$; an immersion containing the image of a field-valued point admits this factorization, since every element of its defining ideal maps to zero in the field. On a covering $U_i\\to S$, write $M|_{U_i}\\cong F_{U_i}\\otimes_F P_i$ [det-def-sfb-constructible-local-model]. Each finitely presented $F$-module $P_i$ is $F^{r_i}$ for finite $r_i$, including $r_i=0$ [lem-sfb-scalar-finite-free-resolutions]. Pull back the cover to $s$. The clopen-partition lifting theorem [det-pe-wcb-clopen-partition] applies by step 2. A clopen partition of the nonempty one-point scheme has exactly one nonempty member, so some $s\\times_SU_i\\to s$ has a section. Pulling its finite free model back along that section identifies $x^*M\\cong F_s^{r_i}$, because exact additive pullback sends the coefficient ring to the coefficient ring and preserves finite sums [det-prop-sfb-module-pullback-exact-main, sk-def-sfb-module-pushforward-pullback]. Thus $\\Phi_{x,F}M\\cong F^{r_i}$ is finite-dimensional.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-scalar-finite-free-resolutions",
+    "det-pe-wcb-clopen-partition",
+    "det-prop-sfb-module-pullback-exact-main",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3; Lemma 4.1(2) at a geometric point; finite constant models and split covers"
+   }
+  },
+  {
+   "text": "Let $h:A\\to B$ be a morphism of sheaves of the stated kind whose geometric fibres are isomorphisms. Refine the two stratifications by their actual fibre-product intersections [lem-weil-pbc-constructible-stratification-intersection]. Their local models pull back to the refinement: pull back the covering and its isomorphism, and use the coefficient-preserving additive inverse image [det-prop-sfb-module-pullback-exact-main, sk-def-sfb-module-pushforward-pullback]. On a common covering $U$ of each new stratum both models are finite free by [lem-sfb-scalar-finite-free-resolutions]. For a nonempty such $U$, the restricted morphism is an $m$-by-$n$ matrix over $F_U(U)=C(|U|,F)$. For every $u\\in|U|$, choose an algebraic closure of its residue field. The composite geometric point of $Z$ pulls this matrix back to its value at $u$, by the naturality in [lem-sfb-totally-disconnected-coefficient-realization]. Thus its value is invertible, $m=n$, and its determinant never vanishes. The inverse matrix $\\det(A)^{-1}\\operatorname{adj}(A)$ has continuous entries: addition, multiplication and inversion on $F^\\times$ are continuous. It defines an inverse module-sheaf map on $U$. The empty $U$ contributes nothing. By [lem-sfb-sheaf-cover-local-isomorphism], $h$ is therefore an isomorphism on each refined stratum.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "det-prop-sfb-module-pullback-exact-main",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-scalar-finite-free-resolutions",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; agent matrix proof of conservativity on finite constant models"
+   }
+  },
+  {
+   "text": "Here is the passage from strata to $Z$, also for arbitrary sheaves that vanish on those strata. Take a finite good refinement of their underlying partition by [lem-sfb-noetherian-good-stratification-refinement]. Give each refined stratum its reduced locally closed scheme structure; it factors through the original stratum, since its reduced coordinate rings kill any ideal vanishing on that subset. Order the finite good strata with successive initial unions open: the complement of an upper set in the closure order is the finite union of the closures of its members, hence closed. For such an initial open union $V$ with previous open union $V'$ and last, closed stratum $T$, apply [lem-weil-pbc-proetale-ringed-open-closed] to $T\\hookrightarrow V$ and $V'\\hookrightarrow V$. All these open immersions are quasi-compact because $Z$ is Noetherian. Its short exact sequence says that a module zero on $V'$ and $T$ is zero on $V$. Starting with the empty union proves zero detection on $Z$. Apply this to the kernel and cokernel of $h$ from step 6. Exact inverse images [det-prop-sfb-module-pullback-exact-main] make both zero on every stratum, so $h$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-noetherian-good-stratification-refinement",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "det-prop-sfb-module-pullback-exact-main"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; topology.tex Tag 09Y5, lemma-noetherian-partition-refined-by-stratification"
+   }
+  },
+  {
+   "text": "For a derived morphism $f:K\\to L$ between the specified bounded constructible complexes, suppose every $\\Phi_{x,F}(f)$ is invertible. By step 4, every map $\\Phi_{x,F}(H^qf)$ is invertible. For each $q$, the sheaves $H^qK,H^qL$ have the finite local models required in steps 6 and 7, so $H^qf$ is an isomorphism. The cone of $f$ consequently has zero cohomology, hence is zero in the localization at quasi-isomorphisms [sk-def-sfb-derived-categories]. Thus $f$ is invertible. This uses finite models of the source and target cohomology sheaves, without assuming that the cone or its cohomology already has finite constant local models.",
+   "uses": [
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, ordinary derived category; agent application of steps 6–7"
+   }
+  },
+  {
+   "text": "For a continuous field inclusion $F\\hookrightarrow F'$, scalar restriction is the identity on underlying abelian sheaves and maps, with its action precomposed by the coefficient morphism [def-sfb-modobj-restriction]. Kernels and cokernels have the underlying abelian kernels and cokernels, by [lem-sfb-modobj-forget-left-exact, lem-sfb-modobj-forget-right-exact]; thus restriction is exact. Pullback has underlying abelian inverse image, with action through the inverse coefficient isomorphism [sk-def-sfb-module-pushforward-pullback]. Naturality of the coefficient identifications from step 1 shows that pulling back and restricting give the identical action $a\\cdot n$ obtained by $a\\mapsto a\\in F'$. Taking sections over $s$ therefore gives $\\Phi_{x,F}(\\operatorname{Res}N)\\cong\\operatorname{Res}_{F'/F}\\Phi_{x,F'}N$, with identity underlying additive map. The equality holds termwise on complexes and descends to $D$, since all functors here are exact.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "lem-sfb-modobj-forget-left-exact",
+    "lem-sfb-modobj-forget-right-exact",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, coefficient restriction and pullback; agent verification of the scalar action"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to K$ over the section-ring sheaf of $F_Z$ [lem-pc-kflat-resolution], using the tensor-compatible internal/sectionwise identification of step 1. The ordinary scalar-extension representative $F'_Z\\otimes_{F_Z}P$ computes $F'_Z\\otimes^{\\mathbf L}_{F_Z}K$. Inverse image commutes with scalar extension by [lem-sfb-internal-extension-inverse-image], with the canonical identifications of the pulled-back rings. Evaluate over $s$. Sheafification does not change terminal sections [lem-trf-point-sheafification-final], so the balanced tensor formula gives, in every degree,\n$$\\Phi_{x,F'}(F'_Z\\otimes_{F_Z}P)\\cong F'\\otimes_F\\Phi_{x,F}(P).$$\nThe functor $F'\\otimes_F-$ is exact [lem-weil-field-scalar-extension-exact], so its degreewise application computes its derived functor and carries $\\Phi_{x,F}(P)\\to\\Phi_{x,F}(K)$ to a quasi-isomorphism. The right side therefore represents $F'\\otimes_F^{\\mathbf L}\\Phi_{x,F}(K)$; the left represents the required $\\Phi_{x,F'}$ of derived scalar extension, because $\\Phi_{x,F'}$ is exact. This proves the claimed isomorphism for every unbounded $K$, without flatness of $F'_Z$ over $F_Z$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-internal-extension-inverse-image",
+    "lem-trf-point-sheafification-final",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, change of coefficients; Stacks Tag 06YS, lemma-K-flat-resolution; agent ordinary unbounded representative computation"
+   }
+  },
+  {
+   "text": "The isomorphism in step 10, oriented as in the statement, is induced in each degree by the ordinary balanced map $a\\otimes m\\mapsto a\\otimes m$: both the inverse-image scalar comparison and terminal evaluation use this same balancing quotient. These maps commute with differentials, since each sends $a\\otimes d(m)$ to $a\\otimes d(m)$, and with replacement maps. The insertion-of-one unit is $m\\mapsto1\\otimes m$ on both sides. Thus the comparison identifies the specified units already on representatives and hence in the ordinary derived categories. Continuity of field operations and exactness of abstract field scalar extension were the only field properties used; neither completeness nor condensed flatness was required.",
+   "uses": [
+    "lem-sfb-internal-extension-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, coefficient adjunction; explicit balancing and unit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-modobj-relative-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "lem-sfb-continuous-ring-universe-realization",
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wlocal-strict-contractible",
+  "det-pe-wc-sections-exact",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-trf-point-sheafification-final",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "sk-def-sfb-derived-categories",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "det-pe-wcb-clopen-partition",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sfb-modobj-restriction",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-internal-extension-inverse-image",
+  "lem-weil-field-scalar-extension-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1, Section 3 and Lemma 4.1, combined with Stacks Tags 03EL, 06YS, 09AH and 09Y5; explicit finite-model matrix and ordinary derived normalization arguments"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -169,10 +352,131 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: ordinary scheme stalk ranks, discrete condensed modules and general light-condensed tensor structures do not give this continuous-field constructible geometric-fibre interface."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*(fiber|fibre)|constructible.*[Cc]ondensed",
+   "results": {
+    "t": "2026-10-21T22:24:19Z",
+    "tool": "grep",
+    "query": "geometric.*(fiber|fibre)|constructible.*[Cc]ondensed",
+    "sub": "AlgebraicGeometry/Sites",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/Etale.lean"
+    ],
+    "digest": "344a74466dd31756"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general condensed tensor and ordinary etale fibre declarations do not state the continuous-field geometric-fibre interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact geometric fibre functors for continuous normed field coefficient pro etale sheaves detect bounded constructible complexes and commute with derived scalar extension",
+   "results": {
+    "t": "2026-10-21T22:24:20Z",
+    "tool": "leanfinder",
+    "query": "Exact geometric fibre functors for continuous normed field coefficient pro etale sheaves detect bounded constructible complexes and commute with derived scalar extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolid",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'"
+    ],
+    "digest": "09a54f92b3fdbd8c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general condensed tensor and ordinary etale fibre declarations do not state the continuous-field geometric-fibre interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves of vector spaces with continuous field coefficients are detected by evaluation at geometric points",
+   "results": {
+    "t": "2026-10-21T22:27:16Z",
+    "tool": "leansearch",
+    "query": "Constructible sheaves of vector spaces with continuous field coefficients are detected by evaluation at geometric points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.evalEquiv_apply",
+     "TopCat.Sheaf.forget",
+     "smoothSheaf.evalAt",
+     "AlgebraicGeometry.Scheme.evaluation",
+     "SheafOfModules.evaluation",
+     "smoothSheafCommRing.eval_germ",
+     "CategoryTheory.sheafSectionsNatIsoEvaluation",
+     "CategoryTheory.evalEquiv"
+    ],
+    "digest": "b8baa7600cd20aaa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general condensed tensor and ordinary etale fibre declarations do not state the continuous-field geometric-fibre interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"tensor\"",
+   "results": {
+    "t": "2026-10-21T22:27:16Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'"
+    ],
+    "digest": "676f9e694d9dff8b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general condensed tensor and ordinary etale fibre declarations do not state the continuous-field geometric-fibre interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections at algebraically closed pro etale geometric points give exact symmetric monoidal functors on continuous coefficient modules and reflect constructible isomorphisms",
+   "results": {
+    "t": "2026-10-21T22:27:16Z",
+    "tool": "leanfinder",
+    "query": "Global sections at algebraically closed pro etale geometric points give exact symmetric monoidal functors on continuous coefficient modules and reflect constructible isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "Condensed.profiniteSolid",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalCategoryLightCondMod",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'"
+    ],
+    "digest": "b36dcfde755b251d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general condensed tensor and ordinary etale fibre declarations do not state the continuous-field geometric-fibre interface."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-supported-lattice-norm-projection",
@@ -199,5 +503,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-constructible-normed-geometric-fibres",
+  "worker": "stage1",
+  "summary": "Statement retained. Reused existing continuous coefficient realization, algebraically closed terminal sheafification, exact inverse image, good stratification/open–closed localization, and K-flat resolution nodes. Wrote out finite-dimensional fibres, matrix detection on finite local models, finite strata induction, exact scalar restriction, and the actual balanced derived comparison including units. No new nodes.",
+  "blueprint": "Created-node ancestry has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). This split supplies the exact geometric-fibre and constructible detection interface used in the parent lem-sfb-supported-lattice-norm-projection paragraph (3); the inherited from.place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "steps 2, 5: exactness of sections over the w-contractible spectrum of an algebraically closed field for arbitrary ring sheaves; generic pro-étale tool, no node of sk-thm-sf-ctf-stability's route gives it"
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "steps 2, 5-7: exactness/additivity of module pullback for an arbitrary condensed ring; generic six-functor tool"
+   },
+   {
+    "node": "lem-trf-point-sheafification-final",
+    "why": "steps 3, 10: sheafification does not change sections over the final object of the pro-étale site of an algebraically closed field; generic site fact whose closure is definitions plus lem-trf-point-cover-identity, not trace-formula content"
+   },
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "step 5: a pro-étale cover of a w-contractible affine splits on a clopen partition; generic pro-étale tool"
+   },
+   {
+    "node": "lem-sfb-noetherian-good-stratification-refinement",
+    "why": "step 7: finite partitions of a Noetherian space refine to good stratifications; point-set topology tool"
+   },
+   {
+    "node": "lem-sfb-modobj-forget-left-exact",
+    "why": "step 9: forgetful functor from module objects preserves finite limits; generic module-object tool"
+   },
+   {
+    "node": "lem-sfb-modobj-forget-right-exact",
+    "why": "step 9: forgetful functor from module objects preserves finite colimits; generic module-object tool"
+   },
+   {
+    "node": "lem-sfb-internal-extension-inverse-image",
+    "why": "steps 10-11: inverse image commutes with extension of scalars along an arbitrary ring-object map; generic tool"
+   },
+   {
+    "node": "lem-sfb-continuous-ring-universe-realization",
+    "why": "step 1: p_X^*C(-,T) is the ring sheaf of continuous T-valued functions for totally disconnected T; generic coefficient tool"
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wc-sections-exact",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-trf-point-sheafification-final",
+  "det-pe-wcb-clopen-partition",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "lem-sfb-internal-extension-inverse-image",
+  "lem-sfb-continuous-ring-universe-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a3b193b24",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a3b193b24 (reviewer sub-agent of L); spot-checked: I read the whole delivery (item, eleven steps, no new nodes, statement unchanged), every cited statement, and HRS Example 3.1 and Lemma 4.1 with its proof (p.5, p.8). No SGA is used. The mathematics is correct. Fibres are exact because Spec of an algebraically closed field is w-contractible. Fibres are finite-dimensional because the stratum factorization holds (I_y in m_y) and covers split over the point. Sheaf conservativity holds: the morphism is a matrix of continuous functions with nowhere-zero determinant, and the adjugate inverse is continuous on F^x. The passage from strata to Z goes through a good stratification ordered by closure, using the quasi-compact open-closed sequence. Derived conservativity uses the finite models of the H^q of source and target only. The scalar comparison takes a K-flat resolution and uses exactness of abstract F'⊗_F, so it needs no flatness or completeness. Small cases checked: Z empty, rank 0, one point, non-complete F. Batch 5: lem-trf-point-sheafification-final is accepted. Its closure is definitions plus lem-trf-point-cover-identity (covering sieves of Spec K contain id), a generic site fact that is not trace-formula content. Fixes: (1) C4: step 1 derived the ring-object iso p_Z^*C_F ≅ C(|U|,F) from the set-valued realization node, so I added lem-sfb-continuous-ring-universe-realization (no cycle, adds no trf/pod node to the closure). (2) C8: nine generic off-route tools (det-pe-wc-sections-exact, det-prop-sfb-module-pullback-exact-main, lem-trf-point-sheafification-final, det-pe-wcb-clopen-partition, lem-sfb-noetherian-good-stratification-refinement, lem-sfb-modobj-forget-left-exact, lem-sfb-modobj-forget-right-exact, lem-sfb-internal-extension-inverse-image, lem-sfb-continuous-ring-universe-realization) were not declared, so I declared them in split_report.tool_uses. (3) source.place still pointed to an absent report.md; I corrected it. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
  }
 }
