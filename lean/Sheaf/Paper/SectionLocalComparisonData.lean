@@ -30,7 +30,7 @@ Proof: apply the global-sections ring map to the unit N; ring homomorphisms pres
 units and natural-number casts, including on the empty scheme. -/
 theorem invertibleOnSource (N : ℕ) {X T : Scheme.{u}} (v : X ⟶ T)
     (hT : IsUnit (N : Γ(T, ⊤))) : IsUnit (N : Γ(X, ⊤)) := by
-  sorry
+  simpa only [map_natCast] using hT.map v.appTop.hom
 
 /-- The degree-zero finite Tate sheaf with its even shift.
 Source: sk-thm-dnc, Local construction
@@ -118,7 +118,7 @@ Proof: local finite type preserves local Noetherianity, and quasi-compactness ov
 quasi-compact T makes the source quasi-compact. Apply IsNoetherian.mk. -/
 theorem noetherianSource {X T : Scheme.{u}} [IsNoetherian T] (v : X ⟶ T)
     [LocallyOfFiniteType v] [QuasiCompact v] : IsNoetherian X := by
-  sorry
+  exact isNoetherian_of_locallyOfFiniteType v
 
 /-- Restriction to compatible sections of the unique counit-compatible locality comparison.
 Source: sk-thm-dnc, Local construction
