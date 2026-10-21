@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Sheaf.AlgebraicGeometry.AffineNonZeroDivisorComplementDense
-import WeilConjectures.Blowup.BlowupUniversal
+import WeilConjectures.Blowup.Density
 
 /-!
 # The complement of an effective Cartier divisor is dense
@@ -46,6 +45,51 @@ theorem IsInvertible.compl_support_dense {Y : Scheme.{u}} {C : Y.IdealSheafData}
       IsSchemeTheoreticallyDominant (Scheme.Opens.ι C.support.compl) ∧
       Dense (C.support.compl : Set Y) ∧
       ∀ V : Y.Opens, (V : Set Y) ⊆ C.support → V = ⊥ := by
-  sorry
+  classical
+  have hdom := hC.isSchemeTheoreticallyDominant_compl_support
+  choose U hxU a ha hgen using hC
+  have hcover : ⨆ x : Y, (U x).1 = ⊤ := by
+    refine eq_top_iff.mpr fun x _ ↦ ?_
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxU x⟩
+  have hqc : QuasiCompact (Scheme.Opens.ι C.support.compl) := by
+    apply IsZariskiLocalAtTarget.of_iSup_eq_top (P := @QuasiCompact)
+      (fun x ↦ (U x).1) hcover
+    intro x
+    have himage : (Scheme.Opens.ι C.support.compl) ''ᵁ
+        ((Scheme.Opens.ι C.support.compl) ⁻¹ᵁ (U x).1) =
+        Y.basicOpen (a x) := by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
+      ext y
+      have hs := Set.ext_iff.mp (C.coe_support_inter (U x)) y
+      have hz : Y.zeroLocus (U := (U x).1) (C.ideal (U x) : Set _) =
+          (Y.basicOpen (a x) : Set Y)ᶜ := by
+        rw [hgen x, Y.zeroLocus_span, Y.zeroLocus_singleton]
+      rw [hz] at hs
+      constructor
+      · rintro ⟨hyc, hyU⟩
+        by_contra hyb
+        exact hyc ((hs.mpr ⟨hyb, hyU⟩).1)
+      · intro hyb
+        refine ⟨fun hyc ↦ (hs.mp ⟨hyc, Y.basicOpen_le (a x) hyb⟩).1 hyb,
+          Y.basicOpen_le (a x) hyb⟩
+    have hc : IsCompact ((Scheme.Opens.ι C.support.compl) ⁻¹ᵁ (U x).1 : Set C.support.compl) := by
+      apply (Scheme.Opens.ι C.support.compl).isOpenEmbedding.isEmbedding.isCompact_iff.mpr
+      change IsCompact ((Scheme.Opens.ι C.support.compl) ''ᵁ
+        ((Scheme.Opens.ι C.support.compl) ⁻¹ᵁ (U x).1) : Set Y)
+      rw [himage]
+      exact ((U x).2.basicOpen (a x)).isCompact
+    have : CompactSpace ((Scheme.Opens.ι C.support.compl) ⁻¹ᵁ (U x).1).toScheme :=
+      isCompact_iff_compactSpace.mp hc
+    have : IsAffine (U x).1.toScheme := (U x).2
+    exact HasAffineProperty.iff_of_isAffine.mpr (by infer_instance)
+  have hdense : Dense (C.support.compl : Set Y) := by
+    have := (Scheme.Opens.ι C.support.compl).denseRange
+    rwa [DenseRange, Scheme.Opens.range_ι] at this
+  refine ⟨hqc, hdom, hdense, ?_⟩
+  intro V hV
+  apply le_bot_iff.mp
+  intro y hy
+  obtain ⟨z, hzV, hzc⟩ := hdense.inter_open_nonempty V V.isOpen ⟨y, hy⟩
+  exact (hzc (hV hzV)).elim
 
 end AlgebraicGeometry.Scheme.IdealSheafData

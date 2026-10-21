@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-invertible-ideal-complement-schematic-dominance",
+ "kind": "statement",
+ "title": "The complement of an invertible ideal is scheme-theoretically dominant",
+ "statement": "Let Y be a scheme and let C be a quasi-coherent effective Cartier ideal [def-nagata-effective-cartier-ideal]. The inclusion of the open complement of its support has zero kernel on the structure sheaf, that is, it is scheme-theoretically dominant [def-nagata-scheme-theoretically-dense-open]. No quasi-compactness of Y is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 07ZU, Lemma complement-effective-Cartier-divisor, density assertion and proof"
+ },
+ "stmt_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-scheme-theoretically-dense-open"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine neighborhoods with regular principal generator a supplied by IsInvertible. On each such neighborhood identify the complement of the support with D(a) using the support and zero-locus formulas. Restriction to D(a) is localization away from a, injective by [lem-pc-affine-localization-injective]. Therefore the ideal of the kernel vanishes on each neighborhood. IdealSheafData.ext_of_iSup_eq_top then gives that the kernel ideal sheaf is zero. This is exactly the existing proved source-library theorem IsInvertible.isSchemeTheoreticallyDominant_compl_support.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "lem-pc-affine-localization-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZU, Lemma complement-effective-Cartier-divisor, density assertion and proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "lem-pc-affine-localization-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 07ZU, Lemma complement-effective-Cartier-divisor, density assertion and proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The complement of an invertible ideal is scheme theoretically dominant",
+   "results": "General IsDominant and quasi-compact-image results; no invertible-ideal complement theorem in Mathlib. Source search finds the exact existing theorem in WeilConjectures.Blowup.Density.",
+   "date": "2026-10-21",
+   "verdict": "existing proved source declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open complement of an invertible ideal sheaf is quasi-compact and dense",
+   "results": "isRetrocompact_basicOpen and isCompact_basicOpen give local compactness; no exact Mathlib theorem.",
+   "date": "2026-10-21",
+   "verdict": "use existing proved source declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "compl_support; IsInvertible.isSchemeTheoreticallyDominant_compl_support; blueprint_refs search invertible ideal and 07ZU",
+   "results": "Exact source theorem at WeilConjectures/Blowup/Density.lean:67, with complete proof at lines 70-112. No existing DAG attachment for that declaration; the broader CartierDivisorNowhereDense theorem also asks for quasi-compactness and topological conclusions. No exact imported blueprint duplicate.",
+   "date": "2026-10-21",
+   "verdict": "attach existing source theorem; no new Lean declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense",
+  "date": "2026-10-21",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-degree-base-change",
+   "place": "proof, part (2): the sentence 'Since D is nowhere dense in X'; scheme-theoretic density of the Cartier complement",
+   "via": [
+    "lem-pc-cartier-divisor-nowhere-dense",
+    "lem-pc-cartier-divisor-finite-over-field"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Blowup.Density",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isSchemeTheoreticallyDominant_compl_support",
+  "statement": "theorem IsInvertible.isSchemeTheoreticallyDominant_compl_support\n    {C : Y.IdealSheafData} (hC : C.IsInvertible) :\n    IsSchemeTheoreticallyDominant (Scheme.Opens.ι C.support.compl)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261021T165822-L-2255063",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261021T165822-L-2255063",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
