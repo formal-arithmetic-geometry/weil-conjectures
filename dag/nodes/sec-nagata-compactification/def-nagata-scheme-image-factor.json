@@ -3,19 +3,17 @@
  "blueprint": {
   "is": "def-nagata-scheme-image-factor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Canonical factor through a scheme-theoretic image",
- "statement": "Define\n\n$$\ng^{\\mathrm{im}}\\colon T\\longrightarrow\\operatorname{SIm}(g)\n$$\n\nto be `Scheme.Hom.toImage g`. Its factorization equality is the\nverified theorem `Scheme.Hom.toImage_imageι`.",
+ "statement": "Let $g:T\\to Y$ be a morphism of schemes, with scheme-theoretic image $\\operatorname{SIm}(g)$ [def-nagata-scheme-theoretic-image], defined by the largest quasi-coherent ideal contained in $\\ker(\\mathcal O_Y\\to g_*\\mathcal O_T)$, and its closed immersion $g_{\\mathrm{im}}:\\operatorname{SIm}(g)\\hookrightarrow Y$. Define the canonical factor map\n\n$$\ng^{\\mathrm{im}}:T\\longrightarrow\\operatorname{SIm}(g)\n$$\n\nto be `AlgebraicGeometry.Scheme.Hom.toImage g`. It satisfies $g_{\\mathrm{im}}\\circ g^{\\mathrm{im}}=g$, namely `AlgebraicGeometry.Scheme.Hom.toImage_imageι g`.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/def-nagata-scheme-image-factor.md",
   "place": "node def-nagata-scheme-image-factor, order 68"
  },
  "stmt_deps": [
-  "def-nagata-scheme-theoretic-closure",
-  "def-nagata-scheme-theoretic-image",
-  "lemma-nagata-scheme-image-ideal-qc"
+  "def-nagata-scheme-theoretic-image"
  ],
  "proof": [],
  "proof_deps": [],
@@ -28,10 +26,63 @@
     "Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme:710 (def)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical factorization morphism of a scheme morphism through its scheme theoretic image composed with the closed immersion equals the original morphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.toImage_imageι; AlgebraicGeometry.Scheme.Hom.toImage_imageι_assoc; AlgebraicGeometry.specTargetImageFactorization_comp; AlgebraicGeometry.Scheme.Hom.liftCoborder_ι; AlgebraicGeometry.specTargetImageFactorization_comp_assoc; AlgebraicGeometry.Scheme.Hom.toImage; AlgebraicGeometry.Scheme.Hom.imageι; AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc",
+   "date": "2026-10-21",
+   "verdict": "match: the canonical factor and its equality are supplied by Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "def toImage|lemma toImage_imageι|theorem toImage_imageι|instance.*imageι",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: this pattern omitted the Hom namespace in source declarations; refined below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism of schemes factors canonically through its scheme theoretic image",
+   "results": "AlgebraicGeometry.specTargetImageFactorization; AlgebraicGeometry.Scheme.Hom.toImage_imageι; AlgebraicGeometry.Scheme.Hom.toImage_app; AlgebraicGeometry.Scheme.Hom.toImage; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.Scheme.Hom.imageι; AlgebraicGeometry.Scheme.Hom.image; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+   "date": "2026-10-21",
+   "verdict": "match: the canonical factor and its equality are supplied by Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.toImage",
+   "results": "AlgebraicGeometry.Scheme.Hom.toImage; AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.Scheme.Hom.toImage_imageι; AlgebraicGeometry.Scheme.Hom.toImage_imageι_assoc; AlgebraicGeometry.Scheme.kerAdjunction_counit_app; AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective; AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+   "date": "2026-10-21",
+   "verdict": "match: the canonical factor and its equality are supplied by Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage",
+   "results": "Returned source line fragments at 688, 690, 701, 702, 705, including Hom.toImageAux and its specification; the wrapper printed the line numbers as its file field.",
+   "date": "2026-10-21",
+   "verdict": "candidate: auxiliary construction; refined directory search locates public declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "def Hom.toImage |lemma Hom.toImage_imageι|def Hom.image |def Hom.imageι|instance.*IsClosedImmersion.*imageι",
+   "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-21",
+   "verdict": "match: the canonical factor and its equality are supplied by Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion I.subschemeι|IsClosedImmersion f.imageι|abbrev Hom.image",
+   "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-21",
+   "verdict": "match: the canonical factor and its equality are supplied by Mathlib"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.toImage, AlgebraicGeometry.Scheme.Hom.toImage_imageι",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "how": "exact: Hom.toImage (line 710) is the factor T ⟶ g.image for any morphism g, and Hom.toImage_imageι (line 715) says g.toImage ≫ g.imageι = g. Hom.image (line 662) is g.ker.subscheme and Hom.imageι (line 665) is g.ker.subschemeι; the latter is a closed immersion by the instance at Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:94, applied to I = g.ker. No quasi-compactness or quasi-separatedness hypothesis is required. This is the image and inclusion in the current statement of def-nagata-scheme-theoretic-image: its kernel ideal is exactly Hom.ker (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:692-694), defined using IdealSheafData.ofIdeals (:104-105), whose largest-subideal property is le_ofIdeals_iff (:125-126). The ordinary sheaf kernel is not substituted for that quasi-coherent subideal; no quasi-compactness is added."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -74,5 +125,20 @@
   "statement": "Define\n\n$$\ng^{\\mathrm{im}}\\colon T\\longrightarrow\\operatorname{SIm}(g)\n$$\n\nto be the canonical factorization of $g$ through its scheme-theoretic\nimage, so that $g_{\\mathrm{im}}\\circ g^{\\mathrm{im}}=g$, where\n$g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ is the\nclosed immersion.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-scheme-image-factor",
+  "worker": "stage1",
+  "summary": "Q90 repair: revalidated the changed statement of def-nagata-scheme-theoretic-image against its current Mathlib-leaf construction and re-read all retained statement dependencies. Made the cited largest-quasi-coherent-kernel convention explicit in this definition and in mathlib_match, with the corresponding Basic.lean source lines. Hom.toImage and Hom.toImage_imageι still match the entire canonical factorization without extra hypotheses. Retained all previous actual search records and blueprint metadata; zero new nodes, one Mathlib leaf. Corrected the report's stale description of the cited definition and documented the return-point repair.",
+  "blueprint": "Realizes the whole defining display and factorization equality of main-20261015 def-nagata-scheme-image-factor (order 76) directly by Hom.toImage and Hom.toImage_imageι; no proof steps or unit route replacement."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-8a1fe2b73",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-8a1fe2b73 (reviewer sub-agent of L); spot-checked: PASS. Read in full. This re-delivery answers the 07:17 landing refusal, which said the cited node def-nagata-scheme-theoretic-image had changed. Gate checks: the item is not in side route-pivot-dropped.txt and is still imported on live and side-live, so it is not superseded. There is no re-split note. The three nodes it cites or used to cite are identical to their live and side-live text, all with status mathlib. The delivery has no new nodes. The item is a Mathlib leaf whose statement is the main-20261015 order-76 definition (g^im with g_im∘g^im=g), with objects introduced explicitly and the cited node's convention (largest quasi-coherent ideal inside ker(O_Y→g_*O_T)). Nothing was added or weakened and there is no qc hypothesis. Mathlib, read in the pinned checkout: Subscheme.lean:659 takes an arbitrary f; :662/:665 define Hom.image and Hom.imageι as f.ker.subscheme and its inclusion; :710 Hom.toImage and :715 Hom.toImage_imageι give f.toImage ≫ f.imageι = f; ClosedImmersion.lean:94 makes I.subschemeι a closed immersion for every I; Basic.lean:692 has Hom.ker = ofIdeals of the section kernels, with ofIdeals at :104 and le_ofIdeals_iff at :125, which is the node's convention. This matches Stacks 01R6/01R7 (morphisms.tex:803-826). stmt_deps were reduced to the image definition: the closure and ideal-qc clauses are unused, and there is no cycle. All three kinds of Mathlib search are recorded. Edge cases checked: empty T, identity, affine quotient, Spec k→Spec k[ε]/(ε²), non-qc g. Advisory only: source.place still says master order 68; lemma-nagata-scheme-image-ideal-qc also mentions the factor map (pre-existing bundle, so same_as=[] is acceptable); the 2026-10-08 search record lacks a verdict. No tool_uses and no SGA."
  }
 }
