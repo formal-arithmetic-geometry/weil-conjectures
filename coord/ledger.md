@@ -19677,3 +19677,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:09 L: merged deliver/Q66/sk-thm-existence (reviewer FIX; after a return; new nodes: 0)
 - 03:09 L: returned deliver/N7/def-pd-proetale-section-module-functors (reviewer RETURN: G1/A6/D: the delivery does not carry out the human's re-split order. coord/repair-notes/def-pd-proetale-section-module-f)
 - 03:10 L: merged deliver/Q02/lem-weil-pbc-scalar-localization-derived-hom (reviewer PASS; after a return; new nodes: 1)
+- 03:10 L: merged deliver/Q07/det-def-sp-tate-twist-locally-free (reviewer PASS; after a return; new nodes: 0)
