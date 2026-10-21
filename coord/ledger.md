@@ -21400,3 +21400,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/Q101/lem-pur-normalized-operation-system-models (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/N6/lem-pur-composite-left-projection-action (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q129/lem-trf-smooth-section-centred-coordinates (reviewer FIX; first push; new nodes: 0)
+- 08:52 L: merged deliver/Q55/lem-tw-ordinary-pullback-stratified-models (reviewer FIX; first push; new nodes: 0)
