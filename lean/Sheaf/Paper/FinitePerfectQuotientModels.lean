@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Ulift
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Noetherian
 
+import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import Mathlib.CategoryTheory.Abelian.ShortExact
+
 /-! # Uniform perfect models of finite quotients
 
 Source: Stacks Tags 09C2 and 094I
@@ -262,5 +265,166 @@ theorem finitePerfectModels_normalized_compatible (X : Scheme.{t})
     FinitePerfectModelsCompatible X d φ :=
   ⟨finitePerfectModelsComparison_step X d φ hnorm,
     finitePerfectModelsScalar_projection X d φ hnorm⟩
+
+/-- Further restriction is exact and preserves the representative-based derived
+restriction isomorphisms. Source: Stacks Tag 03DJ
+(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
+Proof: the underlying sheaf functor is pullback to the localized site. It preserves
+finite limits and colimits, and the faithful exact forgetful functor reflects short
+exactness. Derived composition and the representative localization factors then
+identify further restriction with restriction to the smaller chart. -/
+private theorem finitePerfectModelsOverMap_exact (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V) :
+    (SheafOfModules.overMap.{t + 1} R f).Additive ∧
+      PreservesFiniteLimits (SheafOfModules.overMap.{t + 1} R f) ∧
+      PreservesFiniteColimits (SheafOfModules.overMap.{t + 1} R f) := by
+  let F := SheafOfModules.overMap.{t + 1} R f
+  let H := (ProEt.topology X).overMapPullback AddCommGrpCat.{t + 1} f
+  have hAdd : F.Additive := ⟨fun {_ _} a b ↦ by ext V x; rfl⟩
+  let e : F ⋙ SheafOfModules.toSheaf.{t + 1} (R.over U) ≅
+      SheafOfModules.toSheaf.{t + 1} (R.over V) ⋙ H := Iso.refl _
+  have : PreservesFiniteLimits H := inferInstance
+  have : PreservesColimitsOfSize.{t + 1, t + 1} H :=
+    ((Over.map f).sheafAdjunctionCocontinuous AddCommGrpCat.{t + 1}
+      ((ProEt.topology X).over U) ((ProEt.topology X).over V)).leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits H :=
+    PreservesColimitsOfSize.preservesFiniteColimits H
+  have h (S : ShortComplex (SheafOfModules.{t + 1} (R.over V))) (hS : S.ShortExact) :
+      (S.map F).ShortExact := by
+    apply CategoryTheory.ShortExact.reflects_shortExact_of_faithful
+      (SheafOfModules.toSheaf.{t + 1} (R.over U))
+    exact ShortComplex.shortExact_of_iso (S.mapNatIso e.symm)
+      ((hS.map_of_exact (SheafOfModules.toSheaf.{t + 1} (R.over V))).map_of_exact H)
+  exact ⟨hAdd, (Functor.exact_tfae F).out 0 3 |>.mp h⟩
+
+/-- The exact derived restriction agrees with the chosen representative formula.
+Source: Stacks Tags 03DJ and 05RU
+(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+private def finitePerfectModelsRestrictionComparison (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
+    (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
+    (ringedDerivedRestrictionGeneral R U).obj M ≅
+      ringedSiteDerivedRestrictionOfUniverses R U M := by
+  let F := SheafOfModules.overFunctor.{t + 1} R U
+  have := (ringedOverFunctor_exactGeneral R U).1
+  have := (ringedOverFunctor_exactGeneral R U).2.1
+  have := (ringedOverFunctor_exactGeneral R U).2.2
+  exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
+    F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
+
+/-- A local isomorphism persists on every smaller chart.
+Source: Stacks Tag 03DJ
+(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+private theorem finitePerfectModelsRestrictIso_further (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V)
+    (M N : DerivedCategory (SheafOfModules.{t + 1} R))
+    (e : ringedSiteDerivedRestrictionOfUniverses R V M ≅
+      ringedSiteDerivedRestrictionOfUniverses R V N) :
+    Nonempty (ringedSiteDerivedRestrictionOfUniverses R U M ≅
+      ringedSiteDerivedRestrictionOfUniverses R U N) := by
+  let F := SheafOfModules.overMap.{t + 1} R f
+  let FV := SheafOfModules.overFunctor.{t + 1} R V
+  let FU := SheafOfModules.overFunctor.{t + 1} R U
+  have := (finitePerfectModelsOverMap_exact X R f).1
+  have := (finitePerfectModelsOverMap_exact X R f).2.1
+  have := (finitePerfectModelsOverMap_exact X R f).2.2
+  have := (ringedOverFunctor_exactGeneral R U).1
+  have := (ringedOverFunctor_exactGeneral R U).2.1
+  have := (ringedOverFunctor_exactGeneral R U).2.2
+  have := (ringedOverFunctor_exactGeneral R V).1
+  have := (ringedOverFunctor_exactGeneral R V).2.1
+  have := (ringedOverFunctor_exactGeneral R V).2.2
+  have c (K : DerivedCategory (SheafOfModules.{t + 1} R)) :
+      F.mapDerivedCategory.obj (ringedSiteDerivedRestrictionOfUniverses R V K) ≅
+        ringedSiteDerivedRestrictionOfUniverses R U K :=
+    F.mapDerivedCategory.mapIso (finitePerfectModelsRestrictionComparison X R V K).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso FV F).symm.app K ≪≫
+      (Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap R f)).app K ≪≫
+      finitePerfectModelsRestrictionComparison X R U K
+  exact ⟨(c M).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫ c N⟩
+/-- One step of the perfect-residue coefficient filtration preserves local models
+and their fixed Tor interval. No completeness or simultaneous trivialization is assumed.
+
+Source: Stacks Project, sites-cohomology.tex, Tag 094I; proetale.tex, Tag 09C2;
+connected etale perfect constancy.
+(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
+
+Proof: refine the two etale covers giving the residue and previous-level models to
+one cover. Tensor the constant quotient sequence with a flat K-flat representative
+of M. Its kernel term is the residue model tensored with I^(n+1)/I^(n+2), by
+balancing. This is a bounded constant complex with finite cohomology. The previous
+model supplies the other outer term. The weak Serre theorem over the Noetherian
+finite coefficient ring gives locally constant finite cohomology of the middle
+term, with the same bounds. Finite-ring constructible derived origin descends it to
+the etale site. Full faithfulness transports its residue marking. Nilpotent-reduction
+lissity makes its etale cohomology finite locally constant. For the Tor bound, tensor
+with an arbitrary module and use its finite ideal filtration: each quotient is an
+A/I-module, so balancing with the residue model gives vanishing outside [a,b].
+Connected etale perfect constancy now provides local perfect constant values.
+Represent them by finite-projective complexes in [a,b], using this Tor bound.
+The coefficient squares identify each tensor and reduction with the specified
+quotient functors. Compose the local coverings. Empty charts use empty covers. -/
+theorem residuePerfect_quotient_models_succ
+    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
+    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (_hφ : ∀ n : ℕ, IsIso (φ n)) (_hcompat : FinitePerfectModelsCompatible X d φ)
+    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
+    (a b : ℤ) (_hab : a ≤ b)
+    (_hresidue : FinitePerfectModelsOn X d φ M 0 V a b) (n : ℕ)
+    (_hprevious : FinitePerfectModelsOn X d φ M n V a b) :
+    FinitePerfectModelsOn X d φ M (n + 1) V a b := by
+  sorry
+
+/-- A perfect constant residue model gives uniformly bounded perfect constant models
+at all finite levels, on etale refinements. Completeness of M is not assumed.
+
+Source: Stacks Tags 094I and 09C2
+(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
+Proof: keep the given residue covering. Enlarge a possibly empty interval to
+[min a b,b]. Further exact slice restriction gives the same residue model on every
+smaller chart. This proves the zero-level case. Induct on the quotient level with
+the one-step coefficient-filtration theorem, preserving this fixed interval. -/
+theorem residuePerfect_finite_quotient_models
+    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
+    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
+    (M : DerivedCategory (CompletedAdicModules X d))
+    (hresidue : ∃ S : Sieve (⊤_ X.Etale), S ∈ X.smallEtaleTopology (⊤_ X.Etale) ∧
+      ∀ (V : X.Etale) (f : V ⟶ ⊤_ X.Etale), S f →
+        ∃ (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))) ℤ) (a b : ℤ),
+          P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+          (∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (0 + 1)) (P.X i) ∧
+            Module.Finite (A ⧸ d.ideal ^ (0 + 1)) (P.X i)) ∧
+          Nonempty
+            (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)
+                ((toProEt X).obj V) ((completedAdicQuotientReduction X d 0).obj M) ≅
+              ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)
+                ((toProEt X).obj V) ((completedAdicDerivedChange X (φ 0)).obj
+                  (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :
+    HasUniformFinitePerfectModels X d φ M := by
+  obtain ⟨S, hS, hlocal⟩ := hresidue
+  refine ⟨S, hS, ?_⟩
+  intro V f hf
+  obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := hlocal V f hf
+  have : P.IsStrictlyGE a := ha
+  have hzero : FinitePerfectModelsOn X d φ M 0 V (min a b) b := by
+    refine ⟨⊤, X.smallEtaleTopology.top_mem V, ?_⟩
+    intro W g _
+    refine ⟨P, P.isStrictlyGE_of_ge (min a b) a (min_le_left _ _), hb, hP, ?_⟩
+    exact finitePerfectModelsRestrictIso_further X (completedAdicFiniteRing X d 0)
+      ((toProEt X).map g) _ _ e
+  refine ⟨min a b, b, min_le_right _ _, ?_⟩
+  intro n
+  induction n with
+  | zero => exact hzero
+  | succ n ih =>
+    exact residuePerfect_quotient_models_succ X d φ hφ hcompat M V
+      (min a b) b (min_le_right _ _) hzero n ih
 
 end AlgebraicGeometry.Scheme

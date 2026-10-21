@@ -55,7 +55,85 @@ theorem completedAdicScalar_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A)
             ((koszulConstantUnit T A).app U a)) =
         (ProEtale.finiteCoefficientScalarMap T (completedAdicQuotient d n)).app U
           (ULift.up (Ideal.Quotient.mk (d.ideal ^ (n + 1)) a.down)) := by
-  sorry
+  let J := ProEt.topology T
+  let F := (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{t + 1} A))
+  let D := completedAdicRingSystem T d
+  let E := sheafToPresheaf J RingCat.{t + 1}
+  let q (n : ℕ) : ULift.{t + 1} A →+* completedAdicQuotient d n :=
+    RingHom.ulift (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  let σ (n : ℕ) : F ⟶ (completedAdicFiniteRing T d n).obj :=
+    (Functor.const T.ProEtᵒᵖ).map (RingCat.ofHom (q n)) ≫
+      ProEtale.finiteCoefficientScalarMap T (completedAdicQuotient d n)
+  have hσ (n : ℕ) : σ (n + 1) ≫ (completedAdicFiniteStep T d n).hom = σ n := by
+    ext U a
+    have hs := congrArg
+      (fun k ↦ (k.app U).hom
+        ((ProEtale.finiteCoefficientConstants T
+          (completedAdicQuotient d (n + 1))).app U (q (n + 1) a)))
+      (toSheafify_naturality J (completedAdicFinitePresheafStep T d n))
+    have hc : (completedAdicFinitePresheafStep T d n).app U
+        ((ProEtale.finiteCoefficientConstants T
+          (completedAdicQuotient d (n + 1))).app U (q (n + 1) a)) =
+      (ProEtale.finiteCoefficientConstants T
+        (completedAdicQuotient d n)).app U (q n a) := by
+      apply ContinuousMap.ext
+      intro x
+      rfl
+    simp only [NatTrans.comp_app, RingCat.comp_apply] at hs
+    rw [hc] at hs
+    exact hs.symm
+  let c : Cone (D ⋙ E) :=
+    { pt := F
+      π := NatTrans.ofOpSequence σ (fun n ↦ by
+        dsimp only [Functor.const_obj_map, Functor.comp_map, D, E,
+          completedAdicRingSystem]
+        rw [Functor.ofOpSequence_map_homOfLE_succ]
+        change 𝟙 F ≫ σ n = σ (n + 1) ≫ (completedAdicFiniteStep T d n).hom
+        simpa only [Category.id_comp] using (hσ n).symm) }
+  let L := isLimitOfPreserves E (limit.isLimit D)
+  let β : F ⟶ (completedAdicRing T d).obj := L.lift c
+  let F' := (Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1} A))
+  let β' : F' ⟶ (completedAdicCommRing T d).obj :=
+    { app := fun U ↦
+        letI := completedAdicCommRingStructure T d U
+        CommRingCat.ofHom (β.app U).hom
+      naturality := fun U V f ↦ (forget₂ CommRingCat RingCat).map_injective
+        (β.naturality f) }
+  let α : adicConstantRing T A ⟶ completedAdicCommRing T d :=
+    ((sheafificationAdjunction J CommRingCat.{t + 1}).homEquiv F'
+      (completedAdicCommRing T d)).symm β'
+  have hα : toSheafify J F' ≫ α.hom = β' :=
+    ((sheafificationAdjunction J CommRingCat.{t + 1}).homEquiv F'
+      (completedAdicCommRing T d)).apply_symm_apply β'
+  have hnorm (n : ℕ) (U : T.ProEtᵒᵖ) (a : ULift.{t + 1} A) :
+      (completedAdicProjection T d n).hom.app U
+        (((sheafCompose J (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map α).hom.app U
+          ((koszulConstantUnit T A).app U a)) =
+        (ProEtale.finiteCoefficientScalarMap T (completedAdicQuotient d n)).app U
+          (q n a) := by
+    have ha := congrArg (fun k : F' ⟶ (completedAdicCommRing T d).obj ↦
+      (k.app U).hom a) hα
+    change (α.hom.app U).hom ((toSheafify J F').app U a) = (β.app U).hom a at ha
+    change (completedAdicProjection T d n).hom.app U
+      ((α.hom.app U).hom ((toSheafify J F').app U a)) = _
+    rw [ha]
+    exact congrArg (fun k : F ⟶ (completedAdicFiniteRing T d n).obj ↦
+      (k.app U).hom a) (L.fac c (op n))
+  refine ⟨α, hnorm, ?_⟩
+  intro ψ hψ
+  have htest : toSheafify J F' ≫ ψ.hom = β' := by
+    apply ((Functor.whiskeringRight T.ProEtᵒᵖ CommRingCat RingCat).obj
+      (forget₂ CommRingCat RingCat)).map_injective
+    change Functor.whiskerRight (toSheafify J F' ≫ ψ.hom)
+      (forget₂ CommRingCat RingCat) = β
+    apply L.hom_ext
+    intro j
+    rw [L.fac c j]
+    ext U a
+    exact hψ j.unop U a
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext J _ _ (completedAdicCommRing T d).property
+  exact htest.trans hα.symm
 
 /-- The actual scalar map, with its unique residue normalization.
 Source: blueprint def-weil-pbc-intrinsic-completion
