@@ -209,11 +209,28 @@ def retire_items() -> set[str]:
     return _RETIRE["s"]
 
 
+def _quarantined(m: str) -> bool:
+    """the module has a row in coord/rework.tsv and its quarantined copy exists (tools/rework.py)"""
+    try:
+        for l in (li.ROOT / "coord" / "rework.tsv").read_text(errors="ignore").splitlines():
+            if l.startswith("#") or not l.strip():
+                continue
+            c = l.split("\t")
+            if c[0] == m:
+                return len(c) > 2 and bool(c[2]) and (li.ROOT / c[2]).is_file()
+    except OSError:
+        return False
+    return False
+
+
 def _withdrawn(m: str) -> bool:
     """the module is gone from lean/ or is the stub deliver3.py leaves when it withdraws a module (tools/rework.py _present)"""
     f = li.file_of(m)
     if not f.is_file():
-        return True
+        # 2026-10-21 (the human: quarantined roots were never dispatched): a module moved to quarantine/ by the rework
+        # (coord/rework.tsv, its quarantined copy present) is not withdrawn, it waits for its fix; without this every
+        # quarantined root that is also a retire item was refused as "already retired" and blocked its whole cluster
+        return not _quarantined(m)
     try:
         t = f.read_text(errors="ignore")
     except OSError:
