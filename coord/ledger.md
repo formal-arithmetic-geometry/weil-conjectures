@@ -20139,3 +20139,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:01 L: returned deliver/Q35/lem-sp-etale-sum-coefficient-computation (reviewer RETURN: L: independent stage-2 immutable head faee664b82df: H2: three of the four stmt_deps added by the delivery are theorem no)
 - 04:02 L: merged deliver/Q19/lem-sfb-constant-scalar-restriction-tensor (reviewer FIX; first push; new nodes: 0)
 - 04:02 L: merged deliver/Q02/lem-sp-chart-left-scalar-normalization (reviewer FIX; first push; new nodes: 0); claim not held by Q02: not your claim
+- 04:02 L: merged deliver/Q26/lem-pe-ringed-site-derived-evaluation-slice (reviewer PASS; first push; new nodes: 0)

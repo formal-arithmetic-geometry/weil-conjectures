@@ -15,9 +15,67 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] at the object $W$. Its smallness, common-universe and enough-injectives hypotheses are precisely those of the item; its ring sheaf is arbitrary and its modules are left modules, with no commutativity or flatness requirement. It supplies canonical additive isomorphisms $\\alpha^q_M:R^q\\Gamma_{\\mathrm{Mod},W}(M)\\xrightarrow{\\sim}H^q(W,M_{ab})$, natural in $M$, with $\\alpha^0_M$ the identity under the usual degree-zero evaluation identifications.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, second equality and proof"
+   }
+  },
+  {
+   "text": "Put $G=M_{ab}$. By [def-weil-pbc-sites-and-cohomology] the abelian sheaf category has enough injectives; choose an injective resolution $G\\to J^\\bullet$ as in [def-sp-injective-resolutions]. Restriction $j_W^*$ to the slice is exact by [lem-weil-pbc-site-restriction-injectives] and sends injective abelian sheaves to injective abelian sheaves by [lem-weil-pbc-cohomology-over-object-localization]. Thus $G|_W\\to J^\\bullet|_W$ is an injective resolution: exactness preserves its augmented exact sequence, and every restricted term is injective. This uses an abelian resolution of $G$, not a claim that the forgotten terms of a module resolution are injective.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-site-restriction-injectives",
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3, lemma-cohomology-of-open (1) and proof; exact restriction and extension by zero: sites-modules.tex Tags 03DI and 03DJ"
+   }
+  },
+  {
+   "text": "The object $\\operatorname{id}_W$ is terminal in $\\mathcal C/W$: the only morphism from $V\\to W$ to it is the structure arrow. By [def-pur-localized-ringed-site], $\\Gamma(\\operatorname{id}_W,J^n|_W)=J^n(W)$ and this equality respects both differentials and augmentations. The cohomology definition [def-weil-pbc-sites-and-cohomology] therefore computes $H^q(W,G)$ and $H^q(\\mathcal C/W,G|_W)$ by the identical complex $J^\\bullet(W)$. Let $\\beta^q_G$ be its identity-induced additive isomorphism. A comparison chain map over the identity of $G$ restricts to the same evaluated chain map; hence the resolution-independence identifications specified in that definition agree on both sides. Likewise a chain map lifting $G\\to G'$ evaluates to the same map on both sides, proving naturality of $\\beta$. In degree zero, both augmentations are the same $G(W)\\to J^0(W)$, so $\\beta^0_G$ identifies $G(W)$ with $G|_W(\\operatorname{id}_W)$ by the identity.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3, lemma-cohomology-of-open (2), proof: equality of the section complexes"
+   }
+  },
+  {
+   "text": "Define the asserted comparison as $\\beta^q_{M_{ab}}\\circ\\alpha^q_M$. Its source and target are the two groups in the statement. It is an additive isomorphism as a composite of additive isomorphisms. For a module morphism $f:M\\to N$, the naturality squares for $\\alpha$ and for $\\beta$ at $f_{ab}$ paste to the naturality square for this composite. When $q=0$ each factor is the identity of $M(W)$ under the evaluation identifications established above. The construction imposes neither injectivity of $M_{ab}$ nor flatness of $\\mathcal O$ over the integer sheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD and 03F3, composition of the normalized comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-site-restriction-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FD (module/abelian comparison) and 03F3 (abelian localization, identity of section complexes)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +111,52 @@
    "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, SheafOfModules.sections, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.sectionsFunctor_obj, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsMap, SheafOfModules.unitHomEquiv_comp_apply",
    "date": "2026-10-21",
    "verdict": "no match: underived evaluation and its limit preservation, module restriction to a slice, and Ext-based abelian cohomology definitions do not give the derived module-to-slice-abelian comparison; read Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:93-103, Sheaf/Limits.lean:70-75, and CategoryTheory/Sites/SheafCohomology/Basic.lean:32-35 (comparison is a TODO)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation of a sheaf of left modules over a ring sheaf equals cohomology of its underlying abelian sheaf on the slice site",
+   "results": "8 hits: SheafOfModules.evaluation, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, CategoryTheory.Sheaf.H, SheafOfModules.over, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.QuasicoherentData.I, SheafOfModules.sectionsFunctor_obj, SheafOfModules.sectionsFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived evaluation/restriction or abelian Ext-cohomology, not the module-to-slice comparison; Mathlib CategoryTheory/Sites/SheafCohomology/Basic.lean:32-36 explicitly lists localization comparison as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|cohomology|overPullback",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived evaluation/restriction or abelian Ext-cohomology, not the module-to-slice comparison; Mathlib CategoryTheory/Sites/SheafCohomology/Basic.lean:32-36 explicitly lists localization comparison as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf of modules on a ringed site agrees with abelian cohomology on the category over an object",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.noConfusionType, SheafOfModules.over, SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.Scheme.Modules, CategoryTheory.sheafIsAbelian, AlgebraicGeometry.Scheme.Modules.presheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived evaluation/restriction or abelian Ext-cohomology, not the module-to-slice comparison; Mathlib CategoryTheory/Sites/SheafCohomology/Basic.lean:32-36 explicitly lists localization comparison as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, Functor.rightDerived",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.rightDerived'",
+   "date": "2026-10-21",
+   "verdict": "invalid pattern: unknown identifier Functor.rightDerived; reran with SheafOfModules.evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation",
+   "results": "12 hits: SheafOfModules.evaluation, SheafOfModules.evaluationPreservesLimitsOfSize, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.evaluationPreservesLimitsOfShape, SheafOfModules.hasLimit, SheafOfModules.createsLimit, SheafOfModules.evaluationPreservesLimit, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived evaluation/restriction or abelian Ext-cohomology, not the module-to-slice comparison; Mathlib CategoryTheory/Sites/SheafCohomology/Basic.lean:32-36 explicitly lists localization comparison as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting scalars in module sheaf cohomology and localization to the site over an object preserves all right derived sections groups",
+   "results": "8 hits: CategoryTheory.Sheaf.H, SheafOfModules.isQuasicoherent, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.IsQuasicoherent, SheafOfModules.instAbelian, SheafOfModules.QuasicoherentData, PresheafOfModules.Sheafify.module",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived evaluation/restriction or abelian Ext-cohomology, not the module-to-slice comparison; Mathlib CategoryTheory/Sites/SheafCohomology/Basic.lean:32-36 explicitly lists localization comparison as TODO."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-comparison-injective-left-modules-acyclic",
@@ -75,5 +175,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-ringed-site-derived-evaluation-slice",
+  "worker": "stage1",
+  "summary": "Composed the existing arbitrary-ring module/abelian evaluation comparison with abelian localization. Expanded the latter as the identity of section complexes to establish its degree-zero normalization explicitly. Reused all existing tools and created no nodes; statement and statement dependencies unchanged.",
+  "blueprint": "Supports the first paragraph of main-20261015 sk-prop-sf-comparison.proof.md, the injective-acyclicity comparison and its evaluation on slices, as exposed by lem-pe-comparison-injective-left-modules-acyclic. Does not change the comparison or affine-continuity route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic arbitrary-ring comparison of module and underlying abelian derived evaluation; the unit does not reprove this coefficient-forgetting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic preservation of injective abelian sheaves on any slice, used to realize the localized comparison by identical section complexes."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-injectives",
+    "why": "Generic exactness of abelian restriction to a slice, needed to restrict an injective resolution; no geometric comparison step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-site-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-674da8244",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-674da8244 (reviewer sub-agent of L); spot-checked: I read the item and all 4 steps in full. The statement is unchanged and correct against Stacks Tag 03FD (sites-cohomology.tex lines 1862-1921) and Tag 03F3 (lines 608-642). No new nodes, no cycle, no SGA. Live and side-live still show the item unsplit with no repair note, so the delivery is not superseded. Step 1: the cited lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison states exactly the canonical, natural, degree-0-normalized isomorphism used; its ring is an arbitrary sheaf of rings (Lean uses RingCat) acting on the left, and its hypotheses match the item verbatim. Step 2: restricting an abelian injective resolution is elementary from two cited statements, exactness of restriction (lem-weil-pbc-site-restriction-injectives) and preservation of injectives (lem-weil-pbc-cohomology-over-object-localization); the step does not assume module injectives are abelian injectives. Step 3: id_W is terminal, def-pur-localized-ringed-site gives sectionwise restriction, and def-weil-pbc-sites-and-cohomology(2) gives the resolution-independence maps and H^0 = evaluation, so the complexes are identical and the step is elementary. It re-derives the localization isomorphism only to get the degree-0 identity, which the localization node does not state. Step 4 composes and pastes the naturality squares. Edge cases checked: point site with O = M = F_p (M injective as a module but not in Ab), O = M_2(F_p), M = 0, a site with no final object, and smallness of the slice. The duplicate search found only overlaps: the abelian-only localization node, lem-pe-injective-complex-slice-section-model (derived, constant ring) and det-pe-injective-acyclicity-reduction (commutative Λ). I accept the 3 declared tool_uses as generic site-cohomology facts that replace no step of the unit's route (main-20261015 sk-prop-sf-comparison proof, first paragraph)."
  }
 }
