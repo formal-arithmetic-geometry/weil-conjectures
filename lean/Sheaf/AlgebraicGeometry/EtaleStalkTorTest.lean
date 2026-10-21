@@ -103,9 +103,13 @@ theorem geometricStalk_torAmplitude_test
             (A := ModuleCat.{u + 1} A) |>.obj H) := by
         let F := (pointSmallEtale (S.algClosurePoint x)).sheafFiber
           (A := ModuleCat.{u + 1} A)
-        obtain ⟨e, _, _⟩ := exists_derivedTensor_stalk_iso A (S.algClosurePoint x)
+        let M := (_root_.DerivedCategory.singleFunctor _ 0).obj G
+        have ht : derivedTensor (ModuleCat.{u + 1} A) S =
+            curriedTensor (DerivedCategoryModule A S) := rfl
+        have hTensor := congrArg (fun H ↦ (H.obj L).obj M) ht
+        obtain ⟨e⟩ := exactFunctor_tensor_iso L M F
         let eG := (F.mapDerivedCategorySingleFunctor 0).app G
-        let eTensor := e L ((_root_.DerivedCategory.singleFunctor _ 0).obj G) ≪≫
+        let eTensor := F.mapDerivedCategory.mapIso (eqToIso hTensor) ≪≫ e ≪≫
           (tensorLeft (F.mapDerivedCategory.obj L)).mapIso eG
         have hs := (h _ (S.algClosurePoint x) (F.obj G) i hi).of_iso
           ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).mapIso eTensor)

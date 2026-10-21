@@ -11,20 +11,16 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
-import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
-import Sheaf.Paper.EtaleFlatKFlatResolution
-import Mathlib.Algebra.Homology.Additive
-import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
-import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Geometric étale stalks and unbounded derived tensor products
 
-The canonical stage-2 statement was revalidated by group NL against the current
-`newtargets-dag` interface; all mathematical clauses below are unchanged.
+The stage-2 comparison is packaged in `ExactFunctorTensorComparison` to keep
+concrete localization structures behind an API. Its isomorphism, naturality and
+normalization clauses are exposed by `exactFunctorTensorComparison_iff`.
 
 Source: Stacks Project, `sites-cohomology.tex`, Tag 0DEN, clause (1), and Tags 06YS,
 06YT, 06YU and 07A4 (blueprint: lem-sfb-etale-derived-tensor-stalk).
@@ -43,7 +39,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
 
-universe u
+universe u uC uD
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -81,6 +77,178 @@ noncomputable instance moduleSheaf_hasCountableCoproducts
     HasCountableCoproducts (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) where
   out J := (moduleSheaf_hasSmallColimits A T).has_colimits_of_shape (Discrete J)
 
+-- Keep the localization constructions behind their existing comparison APIs.
+attribute [local irreducible] Functor.leftDerivedFunctorIsoMapDerivedCategory
+  Functor.leftDerivedTensorComparison
+
+-- Transport the derived comparison to the termwise derived functor, including its counit
+-- square. Abstract category structures keep the transport rewrites small.
+/-- Naturality and the localization-counit normalization of a tensor comparison for
+an exact monoidal functor. Keeping this proposition named avoids repeatedly reducing
+localized monoidal structures at concrete coefficient categories.
+Source: Stacks Project, Tag 0DEN (blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+@[irreducible]
+def ExactFunctorTensorComparison
+    {C : Type uC} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    {D : Type uD} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.IsLeftAdjoint] [F.Monoidal] : Prop :=
+    ∃ e : ∀ K L : _root_.DerivedCategory C,
+      F.mapDerivedCategory.obj (((curriedTensor (_root_.DerivedCategory C)).obj K).obj L) ≅
+        F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj L,
+      (∀ (K K' L L' : _root_.DerivedCategory C) (f : K ⟶ K') (g : L ⟶ L'),
+        F.mapDerivedCategory.map (((curriedTensor (_root_.DerivedCategory C)).map f).app L ≫
+          ((curriedTensor (_root_.DerivedCategory C)).obj K').map g) ≫
+          (e K' L').hom =
+          (e K L).hom ≫ (F.mapDerivedCategory.map f ⊗ₘ F.mapDerivedCategory.map g)) ∧
+      ∀ P Q : HomotopyCategory C (.up ℤ),
+        (e (_root_.DerivedCategory.Qh.obj P) (_root_.DerivedCategory.Qh.obj Q)).hom ≫
+          (F.mapDerivedCategoryFactorsh.hom.app P ⊗ₘ F.mapDerivedCategoryFactorsh.hom.app Q) ≫
+          Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := D))
+            ((F.mapHomotopyCategory (.up ℤ)).obj P)
+            ((F.mapHomotopyCategory (.up ℤ)).obj Q) =
+        F.mapDerivedCategory.map
+          (Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := C)) P Q) ≫
+          F.mapDerivedCategoryFactorsh.hom.app (P ⊗ Q) ≫
+          (_root_.DerivedCategory.Qh (C := D)).map
+            (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P).app Q)
+
+/-- The defining tensor-comparison clauses, exposed without unfolding the concrete
+localization constructions. Source: Stacks Project, Tag 0DEN
+(blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+theorem exactFunctorTensorComparison_iff
+    {C : Type uC} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    {D : Type uD} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.IsLeftAdjoint] [F.Monoidal] :
+    ExactFunctorTensorComparison F ↔
+    ∃ e : ∀ K L : _root_.DerivedCategory C,
+      F.mapDerivedCategory.obj (((curriedTensor (_root_.DerivedCategory C)).obj K).obj L) ≅
+        F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj L,
+      (∀ (K K' L L' : _root_.DerivedCategory C) (f : K ⟶ K') (g : L ⟶ L'),
+        F.mapDerivedCategory.map (((curriedTensor (_root_.DerivedCategory C)).map f).app L ≫
+          ((curriedTensor (_root_.DerivedCategory C)).obj K').map g) ≫
+          (e K' L').hom =
+          (e K L).hom ≫ (F.mapDerivedCategory.map f ⊗ₘ F.mapDerivedCategory.map g)) ∧
+      ∀ P Q : HomotopyCategory C (.up ℤ),
+        (e (_root_.DerivedCategory.Qh.obj P) (_root_.DerivedCategory.Qh.obj Q)).hom ≫
+          (F.mapDerivedCategoryFactorsh.hom.app P ⊗ₘ F.mapDerivedCategoryFactorsh.hom.app Q) ≫
+          Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := D))
+            ((F.mapHomotopyCategory (.up ℤ)).obj P)
+            ((F.mapHomotopyCategory (.up ℤ)).obj Q) =
+        F.mapDerivedCategory.map
+          (Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := C)) P Q) ≫
+          F.mapDerivedCategoryFactorsh.hom.app (P ⊗ Q) ≫
+          (_root_.DerivedCategory.Qh (C := D)).map
+            (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P).app Q) := by
+  unfold ExactFunctorTensorComparison
+  rfl
+
+/-- The objectwise isomorphisms supplied by a normalized tensor comparison.
+Source: Stacks Project, Tag 0DEN (blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+theorem ExactFunctorTensorComparison.exists_iso
+    {C : Type uC} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    {D : Type uD} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+    {F : C ⥤ D} [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.IsLeftAdjoint] [F.Monoidal]
+    (h : ExactFunctorTensorComparison F) :
+    Nonempty (∀ K L : _root_.DerivedCategory C,
+      F.mapDerivedCategory.obj (((curriedTensor (_root_.DerivedCategory C)).obj K).obj L) ≅
+        F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj L) := by
+  obtain ⟨e, _⟩ := (exactFunctorTensorComparison_iff F).mp h
+  exact ⟨e⟩
+
+/-- An exact monoidal functor preserving flat objects has the normalized derived tensor
+comparison. The proof transports the source left-derived comparison through the exact
+functor comparison and checks its naturality and counit square.
+Source: Stacks Project, Tag 0DEN
+(blueprint: lem-sfb-exact-flat-tensor-derived-counit-comparison). -/
+theorem exactFunctor_tensor_comparison
+    {C : Type uC} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    {D : Type uD} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] :
+    ExactFunctorTensorComparison F := by
+  unfold ExactFunctorTensorComparison
+  simp only [curriedTensor_obj_obj, curriedTensor_map_app, curriedTensor_obj_map,
+    ← tensorHom_def]
+  let η := F.leftDerivedFunctorIsoMapDerivedCategory
+  let c := F.leftDerivedTensorComparison
+  let e := fun K L : _root_.DerivedCategory C ↦
+    (η.app (K ⊗ L)).symm ≪≫ asIso ((c.app K).app L) ≪≫
+      tensorIso (η.app K) (η.app L)
+  refine ⟨e, ?_, ?_⟩
+  · intro K K' L L' f g
+    dsimp only [e, Iso.trans_hom, Iso.symm_hom, asIso_hom, tensorIso_hom,
+      Iso.app_hom, Iso.app_inv]
+    rw [η.inv.naturality_assoc]
+    have hc := F.leftDerivedTensorComparison_naturality_tensorHom f g
+    change F.leftDerivedFunctor.map (f ⊗ₘ g) ≫ (c.app K').app L' =
+      (c.app K).app L ≫ (F.leftDerivedFunctor.map f ⊗ₘ F.leftDerivedFunctor.map g) at hc
+    rw [reassoc_of% hc, tensorHom_comp_tensorHom]
+    rw [η.hom.naturality, η.hom.naturality, ← tensorHom_comp_tensorHom]
+    simp only [Category.assoc]
+  · intro P Q
+    apply (cancel_epi (η.hom.app (_root_.DerivedCategory.Qh.obj P ⊗
+      _root_.DerivedCategory.Qh.obj Q))).1
+    dsimp only [e, Iso.trans_hom, Iso.symm_hom, asIso_hom, tensorIso_hom,
+      Iso.app_hom, Iso.app_inv]
+    simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+    simp only [Category.assoc, tensorHom_comp_tensorHom_assoc]
+    rw [F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac,
+      F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac]
+    rw [F.leftDerivedTensorComparison_app_app_comp_tensorHom]
+    rw [← η.hom.naturality_assoc,
+      F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac_assoc]
+
+/-- The component of the exact-functor comparison at two given derived objects.
+The objects are explicit parameters so their chosen derived-category instances determine
+the source of the component. Source: Stacks Project, Tag 0DEN
+(blueprint: lem-sfb-exact-flat-tensor-derived-counit-comparison). -/
+theorem exactFunctor_tensor_iso
+    {C : Type uC} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    {D : Type uD} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+    (K L : _root_.DerivedCategory C)
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] :
+    Nonempty (F.mapDerivedCategory.obj
+      (((curriedTensor (_root_.DerivedCategory C)).obj K).obj L) ≅
+      F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj L) := by
+  obtain ⟨e⟩ := ExactFunctorTensorComparison.exists_iso
+    (F := F) (exactFunctor_tensor_comparison F)
+  exact ⟨e K L⟩
+
+/-- A geometric module-stalk preserves flat objects, by the geometric-fiber criterion
+and the canonical comparison with the lifted point.
+Source: Stacks Project, Tag 0DEN (blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+instance geometricStalk_preservesFlat
+    (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
+    ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).PreservesFlat :=
+  ⟨fun {M} hM ↦ ObjectProperty.prop_of_iso ObjectProperty.flat
+    (((pointSmallEtale t).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} A)).app M)
+    ((flat_iff_forall_flat_sheafFiber_obj M).1 hM t)⟩
+
 /-- Geometric stalks commute canonically with the unbounded K-flat derived tensor, naturally
 in both arguments. The equation specifies the comparison by the ordinary total-complex
 stalk comparison and the localization counits; thus the existential isomorphism is the
@@ -89,67 +257,26 @@ Source: Stacks Project, Tag 0DEN, clause (1), Tags 06YS, 06YT, 06YU and 07A4
 (blueprint: lem-sfb-etale-derived-tensor-stalk).
 
 Proof.
-1. Exact geometric stalks preserve acyclic complexes and quasi-isomorphisms. The stalk
-of a constant module is that module: compute the constant presheaf colimit over pointed
-étale neighbourhoods and use invariance of stalks under sheafification. Constant sheaves
-of acyclic module complexes are acyclic by exact module-presheaf sheafification.
-These are prop-weil-pbc-geometric-stalks-exact, def-kun-constant-sheaf,
-lem-weil-pbc-sheafification-geometric-stalk and
-lem-weil-pbc-site-r-module-presheaf-sheafification-exact.
-2. Stalks commute with coproducts and ordinary tensor. Apply these comparisons to every
-summand with p + q = n in the direct-sum total complex. Naturality identifies both
-terms of its differential, including the sign (-1)^p, giving the canonical natural
-isomorphism of total tensor complexes used in the displayed localization square.
-Use lem-kun-stalks-commute-colimits, lem-pod-etale-stalk-tensor-scalar and
-def-pc-tensor-complex-sheaves.
-3. For a K-flat sheaf complex P and any acyclic ordinary module complex E, its constant
-sheaf complex is acyclic. Hence P tensor the constant complex is acyclic; its stalk is
-SP tensor E and is acyclic. Thus SP is K-flat, without any boundedness assumption
-(def-pc-kflat-complex and def-pc-module-kflat-complex).
-4. Choose K-flat resolutions P and Q of representatives of the two derived objects.
-Use lem-kun-flat-resolution-existence; their stalks remain K-flat resolutions by
-steps 1 and 3. Localizing the comparison
-of step 2 identifies the two derived tensors, both computed by these resolutions
-(def-kun-derived-tensor and def-weil-abstract-derived-category).
-5. Chain-map naturality survives localization. Changing either K-flat representative
-along a quasi-isomorphism preserves the tensors and their stalks; independence of the
-K-flat construction (lem-kun-derived-tensor-well-defined) gives the natural isomorphism
-of bifunctors. Its defining square is
-the equation below, first on K-flat representatives and then on all representatives
-by the localization counits. No finiteness, Tor-amplitude or boundedness is used. -/
+1. The exact geometric stalk functor is additive, strong monoidal and a left adjoint.
+The geometric-fiber criterion for flat module sheaves shows that it preserves flat
+objects; the canonical universe-lift comparison identifies the two stalk functors.
+2. Apply the source library's `Functor.leftDerivedTensorComparison`. Its construction
+uses flat resolutions whose images are K-flat, and its components are isomorphisms.
+The source API supplies both tensor naturality and the comparison's counit square.
+3. Transport this comparison along `leftDerivedFunctorIsoMapDerivedCategory`.
+Naturality of that isomorphism gives naturality in both arguments. Its compatibility
+with the localization counits turns the source counit square into exactly the displayed
+normalization equation. No boundedness or finiteness hypothesis is used. -/
 theorem exists_derivedTensor_stalk_iso
     (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
-    ∃ e : ∀ K L : DerivedCategoryModule A T,
-      (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj
-          (((derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj L) ≅
-        (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj K ⊗
-          (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj L,
-      (∀ (K K' L L' : DerivedCategoryModule A T) (f : K ⟶ K') (g : L ⟶ L'),
-        (pointSmallEtale t).sheafFiber.mapDerivedCategory.map
-            (((derivedTensor (ModuleCat.{u + 1} A) T).map f).app L ≫
-              ((derivedTensor (ModuleCat.{u + 1} A) T).obj K').map g) ≫
-            (e K' L').hom =
-          (e K L).hom ≫
-            ((pointSmallEtale t).sheafFiber.mapDerivedCategory.map f ⊗ₘ
-              (pointSmallEtale t).sheafFiber.mapDerivedCategory.map g)) ∧
-      ∀ P Q : HomotopyCategory
-        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ),
-        (e (_root_.DerivedCategory.Qh.obj P) (_root_.DerivedCategory.Qh.obj Q)).hom ≫
-          ((pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app P ⊗ₘ
-            (pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app Q) ≫
-          Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := ModuleCat.{u + 1} A))
-            (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) |>.mapHomotopyCategory
-              (ComplexShape.up ℤ)).obj P)
-            (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) |>.mapHomotopyCategory
-              (ComplexShape.up ℤ)).obj Q) =
-        (pointSmallEtale t).sheafFiber.mapDerivedCategory.map
-          (Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh
-            (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) P Q) ≫
-          (pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app (P ⊗ Q) ≫
-          (_root_.DerivedCategory.Qh (C := ModuleCat.{u + 1} A)).map
-            (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
-              ((pointSmallEtale t).sheafFiber)).app P).app Q) := by
-  sorry
+    ExactFunctorTensorComparison
+      ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)) := by
+  let F := (pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)
+  have : F.PreservesFlat := ⟨fun {M} hM ↦
+    ObjectProperty.prop_of_iso ObjectProperty.flat
+      (((pointSmallEtale t).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} A)).app M)
+      ((flat_iff_forall_flat_sheafFiber_obj M).1 hM t)⟩
+  exact exactFunctor_tensor_comparison F
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-exact-flat-tensor-derived-counit-comparison",
+ "kind": "statement",
+ "title": "The counit-normalized tensor comparison of an exact flat-preserving functor",
+ "statement": "Let C and D be braided closed monoidal Grothendieck abelian categories [def-sp-grothendieck-abelian] with additive tensor and functorial flat resolutions. Use their ordinary unbounded derived categories [def-weil-abstract-derived-category], the signed direct-sum tensor on homotopy categories [lem-sfb-total-tensor-homotopy] and the native K-flat derived tensors [lem-sfb-derived-monoidal], built using K-flat complexes [def-pc-module-kflat-complex]. Let F : C → D be additive, exact, a left adjoint and strong monoidal [def-sfb-strong-monoidal-functor], and suppose F preserves flat objects. Write E = D(F), κ_P : E(Qh_C P) ≅ Qh_D(F_h P) for the exact-functor factorization, and δ(P,Q) : F_h(P ⊗ Q) → F_h P ⊗ F_h Q for the termwise oplax comparison. There exist isomorphisms e(K,L) : E(K ⊗ L) ≅ E(K) ⊗ E(L), natural in both derived objects, such that for every homotopy pair P,Q (without a K-flatness restriction) one has e(Qh P,Qh Q).hom ≫ (κ_P.hom ⊗ κ_Q.hom) ≫ μ(Qh_D)(F_h P,F_h Q) = E.map(μ(Qh_C)(P,Q)) ≫ κ_(P ⊗ Q).hom ≫ Qh_D.map(δ(P,Q)). The tensorators μ are the native lax tensorators of localization. No boundedness condition or compatibility of F with the braidings is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0DEN, 0FPQ and 0FPT; agent abstraction and explicit counit transport of the source-library leftDerivedTensorComparison, not a verbatim Stacks statement."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-total-tensor-homotopy",
+  "def-pc-module-kflat-complex",
+  "def-sfb-strong-monoidal-functor",
+  "def-sp-grothendieck-abelian",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "The proved source-library Functor.leftDerivedTensorComparison uses functorial flat resolutions and is invertible componentwise when F preserves flat objects. Its tensor naturality and defining counit square are the source lemmas leftDerivedTensorComparison_naturality_tensorHom and leftDerivedTensorComparison_app_app_comp_tensorHom. These use the native homotopy tensor and K-flat localization, not a replacement monoidal structure.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let η : LF ≅ E be leftDerivedFunctorIsoMapDerivedCategory, available since F is exact. Define e(K,L) = η(K ⊗ L) inverse, followed by the derived tensor comparison, followed by η(K) tensor η(L). To prove naturality, move η inverse through E(f tensor g), use tensor naturality of the source comparison, and then use η naturality on f and g.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For P,Q, precompose the asserted normalization equality by η at Qh(P) tensor Qh(Q), an isomorphism, and cancel η with its inverse. Combine the tensor products of maps. The factorization lemma leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac identifies each η followed by κ with the derived counit. Apply the defining counit square of the source tensor comparison. On the other side, naturality of η at μ(Qh_C)(P,Q), followed by the same factorization lemma, gives the identical composite. Cancel the precomposition to obtain the equation for all P,Q. The objectwise accessor is the corresponding component of this proved family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-total-tensor-homotopy",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Exact-functor specialization and counit transport of the proved source comparison; full Lean proof in the item module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedTensorComparison\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration; source-library comparison supplies the LF version, and the exact-functor counit transport is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorIsoMapDerivedCategory|leftDerivedTensorComparison",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-21",
+   "verdict": "Source-library APIs exist and are reused; no Mathlib theorem states the transported formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal left adjoint preserving flat objects commutes with unbounded derived tensor with the localization counit normalization",
+   "results": "8 hits: derived adjunction unit/counit factorization lemmas and Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-21",
+   "verdict": "These do not supply the exact tensor comparison and its specified homotopy counit equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive strong monoidal functor preserving flat objects commutes with the unbounded derived tensor, naturally with its localization counits",
+   "results": "8 hits: Functor.Monoidal.ofBifunctor; ModuleCat.instAdditiveLocalizationLocalizedModule_functor; exactFunctor_le_additiveFunctor; LocalizedMonoidal; Localization.Monoidal.functorCoreMonoidalOfComp; Module.Flat.lTensor_shortComplex_exact; Localization.Monoidal.toMonoidalCategory; Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1",
+   "date": "2026-10-21",
+   "verdict": "No match: these give ordinary monoidal localization or exactness infrastructure, not the native K-flat derived comparison with the exact-functor homotopy counit equation. The source-library comparison is reused and its transport proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk",
+  "date": "2026-10-21",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-derived-tensor-stalk",
+   "place": "Steps 2 and 3: the abstract comparison and transport before geometric-stalk specialization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDerivedTensorStalk.lean",
+  "declaration": "AlgebraicGeometry.Etale.exactFunctor_tensor_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exactFunctor_tensor_comparison",
+   "AlgebraicGeometry.Etale.exactFunctor_tensor_iso"
+  ],
+  "statement": "theorem exactFunctor_tensor_comparison\n    {C : Type uC} [Category.{u + 1} C] [Abelian C]\n    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]\n    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]\n    {D : Type uD} [Category.{u + 1} D] [Abelian D]\n    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]\n    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] :\n    ExactFunctorTensorComparison F",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f359f",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261021T111206-L-52924",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f359f",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261021T111206-L-52924",
+  "kind": "interface",
+  "note": "independent cc review: Delivered EtaleDerivedTensorStalk (new irreducible ExactFunctorTensorComparison + rfl iff, full proof via leftDerivedTensorComparison, flat-preserving stalk instance) against node lem-sfb-etale-derived-tensor-stalk, the change record, the old statement (scratch: old ⇐ new elaborates), and the 6 direct importers compiled against the delivered item (all clean, 4–21 s; original GeometricStalkTensorConstantSingle fails with the reported rcases error)"
+ }
+}

@@ -168,11 +168,15 @@ private theorem stalk_tensor_single_iso
           (_root_.DerivedCategory.singleFunctor _ 0).obj (S.obj F))) := by
   dsimp only
   let S := (Scheme.pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)
-  obtain ⟨e, -⟩ := exists_derivedTensor_stalk_iso A t
+  let M := (_root_.DerivedCategory.singleFunctor _ 0).obj F
+  have ht : derivedTensor (ModuleCat.{u + 1} A) T =
+      curriedTensor (DerivedCategoryModule A T) := rfl
+  have h := congrArg (fun H ↦ (H.obj Q).obj M) ht
+  obtain ⟨e⟩ := exactFunctor_tensor_iso Q M S
+  let e₀ := S.mapDerivedCategory.mapIso (eqToIso h) ≪≫ e
   exact ⟨(S.mapDerivedCategoryHomologyFunctorIso q).app _ ≪≫
     (_root_.DerivedCategory.homologyFunctor _ q).mapIso
-      (e Q ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ≪≫
-        tensorIso (Iso.refl _) ((S.mapDerivedCategorySingleFunctor 0).app F))⟩
+      (e₀ ≪≫ tensorIso (Iso.refl _) ((S.mapDerivedCategorySingleFunctor 0).app F))⟩
 
 /-- Finite constant-module Tor tests extend to arbitrary module sheaves.
 

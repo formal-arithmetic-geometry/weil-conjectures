@@ -20,80 +20,46 @@
  ],
  "proof": [
   {
-   "text": "Write $S$ for the module-valued geometric stalk. By [lem-sfb-etale-stalk-constant-complex-exactness], $S$ preserves acyclic complexes and quasi-isomorphisms, and for every acyclic ordinary $A$-module complex $E$, the constant complex $cE$ is acyclic with a natural chain isomorphism $E\\cong S(cE)$. By [lem-sfb-etale-stalk-total-tensor-comparison] write $\\theta_{C,D}:S(C\\otimes D)\\cong SC\\otimes SD$ for the normalized natural chain comparison.",
+   "text": "Let S be the geometric module-stalk functor. It is additive, exact and a left adjoint by the existing point/skyscraper adjunction and filtered-colimit exactness [prop-weil-pbc-geometric-stalks-exact]. The proved ordinary monoidal stalk construction in WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal supplies the tensor comparison. Its total-complex comparison, with the Koszul differential, descends to homotopy categories as Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans [def-pc-tensor-complex-sheaves]. Flat sheaves have flat geometric fibers by [lem-sfb-etale-flat-geometric-fibers]. Transfer this along Point.uliftSheafFiberIso to obtain S.PreservesFlat for the unlifted stalk appearing in the statement.",
    "uses": [
-    "lem-sfb-etale-stalk-constant-complex-exactness",
-    "lem-sfb-etale-stalk-total-tensor-comparison"
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-etale-flat-geometric-fibers"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EI, label lemma-sheafification-exact; Tag 04EQ, label lemma-stalk-exact-modules, clauses (1) and (3). Constant-germ normalization: etale-cohomology.tex Tag 03PT, label lemma-stalk-exact, clause (2). Applied termwise to unbounded complexes, expanding parent proof step 1."
-   }
+   "elementary": false
   },
   {
-   "text": "If $P$ is K-flat, then for every acyclic $E$, $cE\\otimes_{A_T}P$ is acyclic by [def-pc-kflat-complex]. Its stalk is acyclic by Step 1 and is $E\\otimes_A SP$ via $\\theta_{cE,P}$ and the constant-germ isomorphism. Thus $SP$ is K-flat by [def-pc-module-kflat-complex]. This tests every acyclic unbounded $E$ and needs no termwise flatness.",
+   "text": "Apply the already proved source-library Functor.leftDerivedTensorComparison to S. Its hypotheses are exactly the exactness, monoidality, colimit preservation and preservation of flat objects established in Step 1. This construction uses functorial flat resolutions whose images are K-flat; it does not require a separate proof that every K-flat sheaf complex has K-flat stalk. The source instance isIso_leftDerivedTensorComparison makes each component c(K,L) invertible. The source lemma leftDerivedTensorComparison_app_app_comp_tensorHom gives its defining square with the homotopy localization tensorators and the left-derived counit. These are the existing K-flat derived tensor and its independence comparison [def-kun-derived-tensor, def-pc-module-kflat-complex, lem-kun-derived-tensor-well-defined]. The fully proved abstract transport is recorded as [lem-sfb-exact-flat-tensor-derived-counit-comparison].",
    "uses": [
-    "lem-sfb-etale-stalk-constant-complex-exactness",
-    "lem-sfb-etale-stalk-total-tensor-comparison",
-    "def-pc-kflat-complex",
-    "def-pc-module-kflat-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, label lemma-check-K-flat-stalks, clause (1); constant-coefficient acyclic test"
-   }
-  },
-  {
-   "text": "Choose K-flat resolutions with flat terms $P\\to C$, $Q\\to D$ of representatives of $K,L$ using [lem-kun-flat-resolution-existence]. Their stalk maps are quasi-isomorphisms by Step 1 and their stalks are K-flat by Step 2. By [def-kun-derived-tensor] and [def-pc-module-kflat-complex], the two desired objects are represented by $S(P\\otimes Q)$ and $SP\\otimes SQ$. Localizing $\\theta_{P,Q}$ identifies them.",
-   "uses": [
-    "lem-kun-flat-resolution-existence",
-    "lem-sfb-etale-stalk-constant-complex-exactness",
-    "lem-sfb-etale-stalk-total-tensor-comparison",
-    "def-pc-kflat-complex",
-    "def-pc-module-kflat-complex",
     "def-kun-derived-tensor",
-    "def-weil-abstract-derived-category"
+    "def-pc-module-kflat-complex",
+    "lem-kun-derived-tensor-well-defined",
+    "lem-sfb-exact-flat-tensor-derived-counit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor) and 07A4 (lemma-pullback-tensor-product)"
-   }
+   "elementary": false
   },
   {
-   "text": "This comparison is canonical and natural. Changing either K-flat sheaf model along a quasi-isomorphism preserves its tensor with any complex by [lem-kun-derived-tensor-well-defined], using signed symmetry for the other factor; its stalk remains a quasi-isomorphism by Step 1. On modules the fixed stalk factor is K-flat, so its tensor preserves quasi-isomorphisms by [def-pc-module-kflat-complex]. The naturality equation for $\\theta$ remains true on inverting these maps, and on composites. More formally, apply [lem-weil-pbc-site-derived-tensor-descent] on a small skeleton of the etale site with $R=A_T$: our chosen resolutions have flat terms, so its resolving-subcategory equivalence and unique-extension clause apply to the two bifunctors with values in $D(A)$. They extend $\\theta$ and its inverse uniquely, giving a natural isomorphism independent of the resolutions. No boundedness, constructibility, finiteness or Tor-amplitude assumption occurred.",
+   "text": "Exactness identifies the total left-derived functor LS with termwise derived stalk DS by η = S.leftDerivedFunctorIsoMapDerivedCategory [def-weil-abstract-derived-category]. Define e(K,L) as η(K tensor L) inverse, followed by c(K,L), followed by η(K) tensor η(L). Naturality follows by naturality of η and leftDerivedTensorComparison_naturality_tensorHom. For the normalization equation, precompose with η(K tensor L) at K = Qh(P), L = Qh(Q), cancel η with its inverse, and combine the two tensor products of maps. Use leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac on both factors, then the defining square of c from Step 2. On the other side naturality of η for μ(Qh)(P,Q) and the same counit factorization give exactly the same composite. Thus all clauses, including the specified localization square, hold without bounds or finiteness hypotheses. The public Lean helper exactFunctor_tensor_comparison carries out this transport with abstract category structures; the public theorem specializes it to S. Package the unchanged three clauses in the irreducible proposition ExactFunctorTensorComparison; its proved iff theorem exposes them, and its exists_iso accessor exposes the objectwise comparisons. This is a definitional API change only: derivedTensor is curriedTensor by definition, and the stalk, localization counits and total-complex comparison are unchanged. Consumer conversions first identify the tensor functors by reflexivity, then project to objects with congrArg and map the resulting equality isomorphism through the stalk; this avoids unfolding localized monoidal structures at concrete objects.",
    "uses": [
-    "lem-sfb-etale-stalk-constant-complex-exactness",
-    "lem-sfb-etale-stalk-total-tensor-comparison",
-    "lem-kun-derived-tensor-well-defined",
-    "def-pc-module-kflat-complex",
-    "lem-weil-pbc-site-derived-tensor-descent",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor), and the resolving-class localization in lem-weil-pbc-site-derived-tensor-descent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-etale-stalk-constant-complex-exactness",
-  "lem-sfb-etale-stalk-total-tensor-comparison",
-  "def-pc-kflat-complex",
-  "def-pc-module-kflat-complex",
-  "lem-kun-flat-resolution-existence",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-etale-flat-geometric-fibers",
   "def-kun-derived-tensor",
-  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
   "lem-kun-derived-tensor-well-defined",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "def-weil-abstract-derived-category",
+  "lem-sfb-exact-flat-tensor-derived-counit-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Constant-coefficient test for Tag 0DEN; K-flat resolution construction Tags 06YS, 06YT, 06YU and canonical totalization of Tag 07A4. Parent steps 1 and 2 extracted as statement-only nodes."
+  "place": "Tags 0DEN, 06YS, 06YT, 06YU and 07A4; shorter implementation via the proved source-library Functor.leftDerivedTensorComparison and Etale.flat_iff_forall_flat_sheafFiber_obj, transported through leftDerivedFunctorIsoMapDerivedCategory with its counit equation (J1, 2026-10-21). Equivalent named proposition and proved accessors prevent concrete localization structures from unfolding during kernel checking; no mathematical clause is changed."
  },
  "mathlib_searches": [
   {
@@ -257,12 +223,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-sheafification-geometric-stalk",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-kun-flat-resolution-existence",
-  "lem-kun-derived-tensor-well-defined",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-kun-derived-tensor-well-defined"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -279,16 +240,20 @@
    "AlgebraicGeometry.Etale.moduleSheafFiber_additive",
    "AlgebraicGeometry.Etale.moduleSheaf_hasSmallColimits",
    "AlgebraicGeometry.Etale.moduleSheaf_hasCountableCoproducts",
-   "AlgebraicGeometry.Etale.exists_derivedTensor_stalk_iso"
+   "AlgebraicGeometry.Etale.exists_derivedTensor_stalk_iso",
+   "AlgebraicGeometry.Etale.ExactFunctorTensorComparison",
+   "AlgebraicGeometry.Etale.exactFunctorTensorComparison_iff",
+   "AlgebraicGeometry.Etale.ExactFunctorTensorComparison.exists_iso",
+   "AlgebraicGeometry.Etale.geometricStalk_preservesFlat"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleDerivedTensorStalk.lean",
-  "statement": "theorem exists_derivedTensor_stalk_iso (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) : ∃ e : ∀ K L : DerivedCategoryModule A T, (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj (((derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj L) ≅ (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj K ⊗ (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj L, (∀ (K K' L L' : DerivedCategoryModule A T) (f : K ⟶ K') (g : L ⟶ L'), (pointSmallEtale t).sheafFiber.mapDerivedCategory.map (((derivedTensor (ModuleCat.{u + 1} A) T).map f).app L ≫ ((derivedTensor (ModuleCat.{u + 1} A) T).obj K').map g) ≫ (e K' L').hom = (e K L).hom ≫ ((pointSmallEtale t).sheafFiber.mapDerivedCategory.map f ⊗ₘ (pointSmallEtale t).sheafFiber.mapDerivedCategory.map g)) ∧ ∀ P Q : HomotopyCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ), (e (_root_.DerivedCategory.Qh.obj P) (_root_.DerivedCategory.Qh.obj Q)).hom ≫ ((pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app P ⊗ₘ (pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app Q) ≫ Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := ModuleCat.{u + 1} A)) (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) |>.mapHomotopyCategory (ComplexShape.up ℤ)).obj P) (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) |>.mapHomotopyCategory (ComplexShape.up ℤ)).obj Q) = (pointSmallEtale t).sheafFiber.mapDerivedCategory.map (Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) P Q) ≫ (pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app (P ⊗ Q) ≫ (_root_.DerivedCategory.Qh (C := ModuleCat.{u + 1} A)).map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) ((pointSmallEtale t).sheafFiber)).app P).app Q)",
+  "statement": "theorem exists_derivedTensor_stalk_iso\n    (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :\n    ExactFunctorTensorComparison\n      ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A))",
   "branch": "newtargets-dag",
   "by": "NL",
   "date": "2026-10-17",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-44f167e35",
-  "note": "Canonical stage-2 declaration already present on newtargets-dag; NL revalidated and redelivers the unchanged statement."
+  "note": "J1: same isomorphism, naturality and normalization clauses packaged in ExactFunctorTensorComparison; the generic iff theorem exposes every clause. This equivalent interface avoids expensive kernel reduction of concrete localized structures. See coord/changes/J1-derived-tensor-stalk-comparison-api.md."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -298,5 +263,15 @@
   "result": "fix",
   "note": "Mathematics, dependencies, canonical normalization, universes, edge cases and per-file compilation pass. review.md records all checks. Complete fixes replace the placeholder second reading (H11) and preserve the literal theorem signature in lean.statement (H2). Lean module unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f359f",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261021T111206-L-52924",
+  "kind": "interface",
+  "note": "independent cc review: Delivered EtaleDerivedTensorStalk (new irreducible ExactFunctorTensorComparison + rfl iff, full proof via leftDerivedTensorComparison, flat-preserving stalk instance) against node lem-sfb-etale-derived-tensor-stalk, the change record, the old statement (scratch: old ⇐ new elaborates), and the 6 direct importers compiled against the delivered item (all clean, 4–21 s; original GeometricStalkTensorConstantSingle fails with the reported rcases error)"
+ }
 }

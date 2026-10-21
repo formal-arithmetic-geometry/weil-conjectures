@@ -56,10 +56,18 @@ theorem geometricStalk_tensor_constant_single
   have : PreservesFilteredColimitsOfSize.{u, u}
       (CategoryTheory.forget (ModuleCat.{u + 1} R)) :=
     CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-  obtain ⟨e, _, _⟩ := exists_derivedTensor_stalk_iso R x
-  let e₀ := e L
-    (((_root_.DerivedCategory.singleFunctor _ 0).obj
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj N)))
+  obtain ⟨e⟩ := ExactFunctorTensorComparison.exists_iso
+    (F := F) (exactFunctor_tensor_comparison F)
+  let M := (_root_.DerivedCategory.singleFunctor _ 0).obj
+    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj N)
+  have ht : derivedTensor (ModuleCat.{u + 1} R) X =
+      curriedTensor (_root_.DerivedCategory
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) := rfl
+  have h : ((derivedTensor (ModuleCat.{u + 1} R) X).obj L).obj M =
+      ((curriedTensor (_root_.DerivedCategory
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))).obj L).obj M :=
+    congrArg (fun H ↦ (H.obj L).obj M) ht
+  let e₀ := F.mapDerivedCategory.mapIso (eqToIso h) ≪≫ e L M
   refine ⟨e₀ ≪≫ ?_⟩
   let eN := (F.mapDerivedCategorySingleFunctor 0).app
       ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj N) ≪≫
