@@ -21988,3 +21988,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:44 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
 - 09:44 L: merged deliver/NH/lem-dl-a1-henselian-global-inertia-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 09:44 L: merged deliver/Q35/lem-weil-pbc-slice-tensor-integer-shift-compatibility (stage 2; reviewer PASS; parallel immutable checks)
+- 09:46 L: merged deliver/Q124/lem-pur-total-tensor-signed-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 09:46 L: merged deliver/Q63/lem-per-continuous-coefficient-slice-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 09:46 L: merged deliver/Q72/lem-trf-section-local-dualizing-comparisons (stage 2; reviewer PASS; parallel immutable checks)

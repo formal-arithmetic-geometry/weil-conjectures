@@ -28,7 +28,12 @@
   "def-asd-compactifiable",
   "def-weil-etale-morphism",
   "cor-amb-affine-space-adjunction",
-  "lem-amb-etale-adjoint-locality"
+  "lem-amb-etale-adjoint-locality",
+  "def-trf-section-local-comparison-data",
+  "def-trf-section-centred-chart-data",
+  "def-trf-section-normal-fibre-map",
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-pur-finite-smooth-canonical-interfaces"
  ],
  "proof": [
   {
@@ -340,5 +345,26 @@
   "group": "Q126",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-ddbda9931 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps and every cited statement. The delivery has no new nodes and leaves the statement byte-identical to side-live. The item is still unsplit live and has no re-split note. Neither the item nor any dependency is in route-pivot-dropped, there is no SGA citation, and the item is not in its own dependency closure. The route follows main-20261015 sk-thm-dnc.proof.md: the opening paragraph and Local construction, stopping before Gluing. The old steps 7-9 from the Q58 report are all kept, and step 9 is expanded into Steps 3-8. Step checks: (1) thm-asd-smooth-tensor applies to g and q with Noetherian bases, and exact inverse image keeps the lines rank-one. (2) prop-asd-smooth-base-change along i_r with the hypothesised fibre pairs gives θ:i_1^*F→C in the right direction. (3) The centred-coordinates node gives Cartesian centres; Nagata applies over affine Noetherian bases; open immersions are étale. These meet the hypotheses of lem-amb-etale-adjoint-locality. (4) det-sp gives the counit-compatible comparison of p^× with p^*(-)(d)[2d], and Tate pullback handles the zero section. (5) Base change to S_i, then locality for u_i and e_i with g_i u_i=p_i e_i, gives c_i. (6) I verified R[x][t,(x)/t]=R[t,u] by monomial injectivity over any R. The Rees node's étale clause, applied to u_i and to e_i with V=A^d, makes the deformed charts base changes of étale maps, which gives f_i. (7)-(8) The λ_i and h_i cancellation is elementary and correct. Edge cases d=0, empty S, A=0 and non-reduced R all go through. The tool_uses are the same set as the merged parent's and are accepted. FIX: Step 4 used p^{-1}A_T≅A_{A^d_T} without citing it, so I added prop-weil-pbc-inverse-image-modules-exact to Step 4's text and uses; it was already in proof_deps. Advisory: the det-sp citation in Step 5 is redundant.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionLocalDualizingComparisons",
+  "declaration": "AlgebraicGeometry.Etale.SectionLocalDualizingComparisons.section_local_dualizing_comparisons",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SectionLocalDualizingComparisons.section_local_dualizing_comparisons"
+  ],
+  "file": "lean/Sheaf/Paper/SectionLocalDualizingComparisons.lean",
+  "statement": "theorem section_local_dualizing_comparisons (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {V S : Scheme.{u}} [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] [HasCompactification (normalProjection d g s hs)] [IsNoetherian s.ker.deformationSpace] [SmoothOfRelativeDimension d (Scheme.Hom.deformationSpaceProj g s)] [IsSeparated (Scheme.Hom.deformationSpaceProj g s)] : (∃ L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A), Nonempty ((sectionInvariant A g s)⟦-(2 * (d : ℤ))⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (S.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) ∧ (∃ L : Sheaf (AffineSpace (ULift.{u} (Fin 1)) S).smallEtaleTopology (ModuleCat.{u + 1} A), Nonempty ((family A g s)⟦-(2 * (d : ℤ))⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage (AffineSpace (ULift.{u} (Fin 1)) S), ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf ((AffineSpace (ULift.{u} (Fin 1)) S).smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) ∧ IsIso (atOne A g s hs) ∧ IsIso (normalFibreMap A d g s hs) ∧ ∀ c : Chart d g s hs, ∃ adjT : rightDerivedLowerShriek (ModuleCat.{u + 1} A) (AffineSpace (ULift.{u} (Fin d)) c.T ↘ c.T) ⊣ affineRight A N hA c.T d, ∃ adjL : rightDerivedLowerShriek (ModuleCat.{u + 1} A) (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin 1)) c.T) ↘ _) ⊣ affineRight A N hA (AffineSpace (ULift.{u} (Fin 1)) c.T) d, ∃ cIso : (upperStar (ModuleCat.{u + 1} A) c.b).leftDerivedFunctor.obj (sectionInvariant A g s) ≅ tateObject A N hA c.T d, ∃ fIso : (upperStar (ModuleCat.{u + 1} A) (AffineSpace.map (ULift.{u} (Fin 1)) c.b)).leftDerivedFunctor.obj (family A g s) ≅ tateObject A N hA (AffineSpace (ULift.{u} (Fin 1)) c.T) d, cIso.hom = localSourceMap A N hN hA hS d g s hs c adjT ∧ fIso.hom = localFamilyMap A N hN hA hS d g s hs c adjL ∧ ∃ theta : (upperStar (ModuleCat.{u + 1} A) (AffineSpace.oneSection (ULift.{u} (Fin 1)) c.T)).leftDerivedFunctor.obj ((upperStar (ModuleCat.{u + 1} A) (AffineSpace.map (ULift.{u} (Fin 1)) c.b)).leftDerivedFunctor.obj (family A g s)) ≅ (upperStar (ModuleCat.{u + 1} A) c.b).leftDerivedFunctor.obj (sectionInvariant A g s), theta.hom = restrictedTheta A g s hs c.b ∧ restrictionAtOne A c.T (normalizedComparison A c.T (rawComparison A N hN hA c.T (invertibleOnSource N c.b hS) d _ _ cIso fIso) theta) = theta",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ffb9554d2",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Item matches the node clause by clause: A/N/S hypotheses, smooth separated finite-type g with closed section, D_sV/q/sigma Rees data, compactifiable g, q, pi, Noetherian D_sV; both shifted rank-one sheaf clauses; IsIso of atOne (theta) and normalFibreMap (eta on Spec Sym(I/I^2) through the unique-normalized Rees comparison); for every affine centred chart, c and f pinned to localSourceMap/localFamilyMap, lambda = f then inverse Tate pullback then a*(c inverse), h and lambda_norm, i1*lambda_norm = actual restricted theta. The existential affine adjunction is faithful because cor-amb-affine-space-adjunction asserts only existence; rightAdjointUniq and the unique-choice locality iso are canonical, and the normalization removes the dependence at 1. Three new definition nodes: real data, named well-definedness sorries checked true (chartGeometry via SectionReesBaseChangeEtale.etale, deformationSpaceToAffineSpace iso, Nagata). Section 1(B) dependency module SectionComparisonArrows copies verbatim the 7 defs of the quarantined NoetherianEtaleSectionSpecialization; no live users of the old names, nothing route-pivot dropped, no competing repair. All lean.statement fields verbatim. Advisories: missing proof-plan imports SectionReesBaseChangeEtale and SmoothSectionCentredCoordinates; Chart and conormal-theorem overlap with SmoothSectionCentredCoordinates (more general, not H4); def-pur-dnc-section-family declarations used outside the item stmt_deps; docstring proof condensed from 8 to 6 steps. Not recompiled per the human's 2026-10-21 instruction; worker compile evidence clean."
  }
 }

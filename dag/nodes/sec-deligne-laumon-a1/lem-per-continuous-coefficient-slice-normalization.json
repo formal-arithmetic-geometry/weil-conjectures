@@ -280,5 +280,43 @@
   "group": "Q144",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-a7d47a6f9 (reviewer sub-agent of L); spot-checked: I read the item, all 17 cited statements and Bhatt–Scholze 4.2.12, 6.8.1, 6.8.2, the paragraph before 6.8.6 and Remark 6.8.15. The statement and stmt_deps are byte-identical to side-live. There are no new nodes, nothing cited is dropped and there is no cycle. The item was created 2026-10-21 by Q115; its only citer is the parent lem-per-continuous-rational-derived-realization (Step 7), and there is no re-split note. The maths is sound. I re-did the Step 2 initial-object computation with the arrow convention of def-weil-proetale-inverse-image, and it is right. The A_X≅B_X identification is used only on noetherian X. Exactness of scalar extension along an isomorphism is right. Étale implies weakly étale by an open, hence flat, diagonal. The Step 7 K-flat/tensor-restriction derivation holds for non-noetherian U. Two faults, both repaired: (1) C5 duplicate: Step 2 re-derives, as an 'elementary' step, clause (1) of the existing node lem-sfb-proetale-object-inverse-image-restriction (initial object (str,id), presheaf iso, invertible sheafification unit). It now cites that node. (2) C1/E5: Step 3 treats the projection A_X→(A/ϖ^n)_X onto the constant sheaf as postcomposition into C(|V|,A/ϖ^n) with nothing linking the two. It now cites lem-pur-proetale-finite-constant-sections (θ normalized on constants and natural in precomposition). proof_deps are now the union of the step uses, and tool_uses gains the two entries. The 8 declared tool_uses are accepted. Advisory: the blueprint.from.place text was rewritten, same place.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousCoefficientSliceNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousSlice.continuous_coefficient_slice_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousSlice.modules",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.modules_exact",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.modules_additive",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.modules_limits",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.modules_colimits",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.derived",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.ring",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.Coefficients",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.residue",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.Adic",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.Completion",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.CompletedPull",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.ExactPull",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.ModuleComparison",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.Ambient",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.Ambient.pullback",
+   "AlgebraicGeometry.Scheme.ContinuousSlice.continuous_coefficient_slice_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousCoefficientSliceNormalization.lean",
+  "statement": "theorem continuous_coefficient_slice_normalization (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∀ (X : Scheme.{u}) (U : X.ProEt), ∃ b : Coefficients U, ∃ a : Adic l E U.hom, Nonempty (ExactPull U.hom _ _ a.integral) ∧ Nonempty (ExactPull U.hom _ _ a.rational) ∧ ∀ R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}, Nonempty (ModuleComparison U R b.commRings)) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X] (_hd : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hi : ∀ x : X, IsUnit (l : X.presheaf.stalk x)), Nonempty (Completion l E X)) ∧ (∀ (X Y : Scheme.{u}) [IsNoetherian X] [IsNoetherian Y] (_hdX : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hdY : ∃ n : ℕ, topologicalKrullDim Y ≤ n) (_hiX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hiY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (g : Y ⟶ X), (Etale g ∨ IsImmersion g) → ∃ a : Adic l E g, Nonempty (ExactPull g _ _ a.integral) ∧ Nonempty (ExactPull g _ _ a.rational) ∧ ∀ (bX : Completion l E X) (bY : Completion l E Y), Nonempty (CompletedPull l E g a bX bY)) ∧ (∀ (X Y : Scheme.{u}) (f : Y ⟶ X) (U : Y.ProEt) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (integralCoefficientSheaf l X E) ⟶ integralCoefficientSheaf l Y E), integralCoefficientRestrictionNormalized l E f c → Nonempty (Ambient f U _ _ c)) ∧ (∀ (X Y : Scheme.{u}) (f : Y ⟶ X) (U : Y.ProEt) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (rationalCoefficientSheaf l X E) ⟶ rationalCoefficientSheaf l Y E), rationalCoefficientRestrictionNormalized l E f c → Nonempty (Ambient f U _ _ c))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem packages initial-index and sheafification normalization, continuous and finite quotient coefficients, normalized completion and localization, exact termwise module restriction, and the pure-tensor/counit-normalized ambient derived comparison. All helpers belong to this assertion; definitions have real data and both postponed theorems carry its proof plan."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0c21183a",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Read the item, all 8 statement dependencies, the module and the report. Item JSON differs from live only in lean; the 8 dependency records match live exactly; lean.statement verbatim; all 17 declarations listed; lines at most 95 characters; imports correct. Clause by clause: slice restriction for any U with no noetherian hypothesis, through the fully pinned object-restriction comparison and its initial index point; the identity on continuous functions pinned to continuousCoefficientPullback; finite quotients, transitions, residue projections and the A to E inclusion pinned; completion with the node's exact hypotheses, pinned by the limit projections and localization normalization; exact module restriction with termwise derived functor, pinned on unit sections, complexes and the derived square; etale or locally closed immersion corollary with pinned CompletedPull and scalar extension along an isomorphism pinned by b⊗m ↦ c⁻¹(b)m, the counit square and IsIso of the counit on all complexes; ambient restriction for integral and rational coefficients pinned sectionwise and by the counit square. Edge cases covered, no hollow definitions, every proof sorry, docstrings complete. Advisories: ExactPull.ordinary and ExactPull.derived are unpinned isomorphisms, redundant with the pinned fields; owner nodes of several used declarations are not in stmt_deps (def-sfb-continuous-coefficient-pullback-maps, def-pe-proetale-object-restriction-comparison-data, def-weil-pbc-bounded-constructible-tower, def-weil-pbc-proetale-operations, plain definitions of lem-weil-pbc-continuous-coefficient-completion and lem-weil-pbc-proetale-derived-pullback-composition); the second reading is the worker's own self-check. No recompile: no file changed."
  }
 }

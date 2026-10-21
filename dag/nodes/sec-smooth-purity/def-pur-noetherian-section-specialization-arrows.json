@@ -73,23 +73,24 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
  "lean": {
-  "module": "Sheaf.Paper.NoetherianEtaleSectionSpecialization",
-  "declaration": "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.family",
+  "module": "Sheaf.Paper.SectionComparisonArrows",
+  "declaration": "AlgebraicGeometry.Etale.SectionComparisonArrows.family",
   "declarations": [
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.family",
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.sectionMap",
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.atOne",
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.atZero",
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.Normalized",
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.specialization",
-   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.linePullback"
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.family",
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.sectionMap",
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.atOne",
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.atZero",
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.Normalized",
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.specialization",
+   "AlgebraicGeometry.Etale.SectionComparisonArrows.linePullback"
   ],
-  "statement": "def family (A : Type (u + 1)) [CommRing A] [Finite A] {V S : Scheme.{u}}\n    (g : V ⟶ S) (s : S ⟶ V) [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] :\n    DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)",
+  "file": "lean/Sheaf/Paper/SectionComparisonArrows.lean",
+  "statement": "def family (A : Type (u + 1)) [CommRing A] [Finite A] {V S : Scheme.{u}} (g : V ⟶ S) (s : S ⟶ V) [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)",
   "branch": "newtargets-dag",
-  "by": "NP",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "Definition ownership only, on the unchanged published module. These are plain constructions, not choices extracted from its main theorem. Project matches: NoetherianEtaleSectionSpecialization lines 100--215. DAG matches were the theorem lem-pur-noetherian-etale-section-specialization and consumers only, not a definition owner. No upstream matches; all four blueprint searches returned zero."
+  "by": "Q72",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The recorded Sheaf.Paper.NoetherianEtaleSectionSpecialization source is absent from the current shared checkout and scompile.py --source reports Module source unavailable. Earlier attempts to recover its broad purity import graph timed out. This dependency module restores precisely the seven recorded plain definitions on the existing ordinary-etale primitives, with the same canonical counit/compositor formulas and no global purity theorem. No definition is chosen from mere existence."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -100,12 +101,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ad6acc699",
-  "group": "NP",
+  "reviewer": "NT-stage2-cc-ffb9554d2",
+  "group": "Q72",
   "result": "pass",
-  "note": "Re-delivery after the H2-only RETURN 9c67e54eb5f6. Item Lean is byte-identical apart from dropping the unused PurityDncFamilyIntrinsic/Deformation imports, so the previously accepted substance stands: actual mateMap counit transpose, independent B targets, R=ULift ZMod(ell^n), base-change/fibre/localization/chart equations, unique normalized kappa_B, delta direction; d=0, empty S, B=0 covered. The def-pur-dnc-section-family 1(B) rewrite is dropped (record identical to live). The theorem stmt_dep lem-pur-noetherian-etale-section-specialization is replaced by 4 new existing:true def nodes on unchanged live modules: noetherian-section-specialization-arrows (7 decls), exceptional-coefficient-base-change-square, smooth-dualizing-base-change-arrows, affine-trace-right-functor. Each statement is verbatim, all decls are plain defs (no .choose), no live owner collision, deps exist, no cycle. The 5 existing def nodes requested by 9c67 are cited. Prose unchanged, no statement_change; only def nodes added to stmt_deps. nt_compile --json clean, 10.0 s, exit 0. Maintainer notes: stale report paragraphs (Dependency modules, proof-dep claim); unitIso/scalarPullbackIso theorem owners not directly cited (only def nodes may be added; both are in the closure); the smooth base-change def node does not cite the compact-support base-change iso theorem."
+  "note": "Item matches the node clause by clause: A/N/S hypotheses, smooth separated finite-type g with closed section, D_sV/q/sigma Rees data, compactifiable g, q, pi, Noetherian D_sV; both shifted rank-one sheaf clauses; IsIso of atOne (theta) and normalFibreMap (eta on Spec Sym(I/I^2) through the unique-normalized Rees comparison); for every affine centred chart, c and f pinned to localSourceMap/localFamilyMap, lambda = f then inverse Tate pullback then a*(c inverse), h and lambda_norm, i1*lambda_norm = actual restricted theta. The existential affine adjunction is faithful because cor-amb-affine-space-adjunction asserts only existence; rightAdjointUniq and the unique-choice locality iso are canonical, and the normalization removes the dependence at 1. Three new definition nodes: real data, named well-definedness sorries checked true (chartGeometry via SectionReesBaseChangeEtale.etale, deformationSpaceToAffineSpace iso, Nagata). Section 1(B) dependency module SectionComparisonArrows copies verbatim the 7 defs of the quarantined NoetherianEtaleSectionSpecialization; no live users of the old names, nothing route-pivot dropped, no competing repair. All lean.statement fields verbatim. Advisories: missing proof-plan imports SectionReesBaseChangeEtale and SmoothSectionCentredCoordinates; Chart and conormal-theorem overlap with SmoothSectionCentredCoordinates (more general, not H4); def-pur-dnc-section-family declarations used outside the item stmt_deps; docstring proof condensed from 8 to 6 steps. Not recompiled per the human's 2026-10-21 instruction; worker compile evidence clean."
  },
  "reviewed_proof": {
   "date": "2026-10-19",
