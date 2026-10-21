@@ -22205,3 +22205,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:10 L: merged deliver/E3/Sheaf.Paper.SectionLocalDualizingComparisons (stage 3; reviewer PASS; first push; landing 20261021T111038-L-3961700 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:10 L: merged deliver/E8/Sheaf.Paper.BoundaryEtaleAdjunctionRestriction (stage 3; reviewer PASS; first push; landing 20261021T111042-L-3971699 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:10 L: merged deliver/E9/Sheaf.Algebra.Homology.KFlatScalarTowerRealization (stage 3; reviewer PASS; first push; landing 20261021T111045-L-3980688 (interface); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/E9-kflat-scalar-tower-imports.md)
+- 11:10 L: merged deliver/F3/Sheaf.SixFunctors.FiniteProperClassicalBoundedSums (stage 3; reviewer PASS; first push; landing 20261021T111049-L-3996816 (proof); batch 20261021T110859; modules 1; new nodes 1)

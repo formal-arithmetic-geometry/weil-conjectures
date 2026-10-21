@@ -1,0 +1,97 @@
+{
+ "id": "src-weil-derived-homology-preserves-coproducts",
+ "kind": "statement",
+ "title": "Derived cohomology preserves exact coproducts",
+ "statement": "Let C be an abelian category with a derived category and K-injective resolutions. Let I be any indexing type such that coproducts of shape Discrete I exist and are exact in C. For every integer q, the derived homology functor H^q : D(C) → C preserves coproducts of shape Discrete I. No boundedness or nonemptiness condition is imposed on the family.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/HomologyCoproducts.lean",
+  "place": "Section Homology, instance preservesColimitsOfShape_homologyFunctor; Stacks Injectives Tag 07D9, coproduct clauses (1)-(2)."
+ },
+ "stmt_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use the already-proved source instance DerivedCategory.preservesColimitsOfShape_homologyFunctor. Represent each member of the derived family by a cochain complex. Localization of their termwise coproduct is a coproduct in D(C), by computing maps into K-injective targets. Exactness of coproducts makes cochain homology preserve this coproduct, via pointwise short-complex homology. Transport its colimit cocone through homologyFunctorFactors and the representative isomorphisms. The transports preserve the specified coprojections. This includes the empty family. This node attaches the existing complete source proof and introduces no Lean obligation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/HomologyCoproducts.lean",
+  "place": "Section Homology, complete proof of preservesColimitsOfShape_homologyFunctor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cohomology functors on a derived category preserve coproducts when coproducts in the abelian category are exact",
+   "results": "Eight hits on finite coproducts and preservation of short-complex homology; none proves derived arbitrary coproduct preservation.",
+   "date": "2026-10-21",
+   "verdict": "Exact statement found in adopted source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape_homologyFunctor|isGE_sigma|isLE_sigma",
+   "results": "No Mathlib hits. Direct rg in lean/WeilConjectures found DerivedCategory.preservesColimitsOfShape_homologyFunctor in CategoryTheory/DerivedCategory/HomologyCoproducts.lean and its bound consequences in CoproductsOfFiniteAmplitude.lean. Both source proofs were read.",
+   "date": "2026-10-21",
+   "verdict": "Adopted source declaration matches."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteProperClassicalBoundedSums",
+  "date": "2026-10-21",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-proper-classical-bounded-sums",
+   "place": "Steps 1-2: cohomology of ambient coproducts",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts",
+  "declaration": "DerivedCategory.preservesColimitsOfShape_homologyFunctor",
+  "statement": "instance preservesColimitsOfShape_homologyFunctor (n : ℤ) :\n    PreservesColimitsOfShape (Discrete β) (homologyFunctor C n)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-21",
+  "note": "Section context: {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] {β : Type*}, [Abelian.HasKInjectiveResolutions C], [HasColimitsOfShape (Discrete β) C], [HasExactColimitsOfShape (Discrete β) C]. This is an existing complete proof; no source-library file is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261021T111049-L-3996816",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261021T111049-L-3996816",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
