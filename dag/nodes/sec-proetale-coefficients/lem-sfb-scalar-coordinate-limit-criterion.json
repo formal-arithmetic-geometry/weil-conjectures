@@ -13,9 +13,100 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to both $R$ and $B$. Its hypotheses are exactly the smallness, abelian sheafification and monoidal-local-equivalence assumptions of the item; the tensor is the stipulated sheafified tensor. It identifies each internal module category with sectionwise module sheaves, preserving underlying sheaves and sections. By [lem-weil-pbc-module-sheaves-limits-sectionwise], finite diagrams in either category therefore have limits whose sections are compatible families, with componentwise scalar action and coordinate projections. This includes the empty diagram: its compatible-family module has one element on every object, so is the zero module, which is terminal. We use these equivalences only to compute limits, not to change the coefficient categories in the assertion.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Final sentence: the inference from natural finite-power coordinates to finite-limit preservation"
+   }
+  },
+  {
+   "text": "Write $V=\\operatorname{Res}_\\varphi$. By [def-sfb-modobj-restriction], $V$ leaves underlying sheaves and arrows unchanged and replaces an action $\\gamma$ by $\\gamma(\\varphi\\otimes-)$. Let $K$ be a finite diagram in $\\operatorname{Mod}_B$ with limit cone $(L,(p_j)_j)$, and let $(L',(p'_j)_j)$ be a limit of $VK$ in $\\operatorname{Mod}_R$. By step 1 and [lem-weil-pbc-module-sheaves-limits-sectionwise], in both categories the underlying abelian sheaf of a limit is the sheaf of compatible families, with the coordinate projections; so the projections are jointly monic on underlying sheaves, and there is an isomorphism $\\theta:L\\to L'$ of underlying sheaves with $p'_j\\theta=p_j$. It is $R$-linear, where $\\gamma_{L'}$ is the $R$-action of $L'$ and $\\gamma_{K_j}(\\varphi\\otimes K_j)$ that of $VK_j$: by $B$-linearity of $p_j$ and $R$-linearity of $p'_j$,\n$$p'_j\\theta\\gamma_L(\\varphi\\otimes L)=\\gamma_{K_j}(\\varphi\\otimes K_j)(R\\otimes p_j)=\\gamma_{K_j}(\\varphi\\otimes K_j)(R\\otimes p'_j)(R\\otimes\\theta)=p'_j\\gamma_{L'}(R\\otimes\\theta)$$\nfor every $j$, hence $\\theta\\gamma_L(\\varphi\\otimes L)=\\gamma_{L'}(R\\otimes\\theta)$; its inverse is then $R$-linear by the computation displayed in step 3 (with $R$ in place of $B$). Thus $\\theta$ is an isomorphism of cones in $\\operatorname{Mod}_R$ from $V(L,(p_j))$ to a limit cone, so the former is limiting. Thus $V$ preserves finite limits, including the empty one (both vertices are then the zero sheaf).",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, first limit construction; restriction action as in def-sfb-modobj-restriction"
+   }
+  },
+  {
+   "text": "The functor $V$ also reflects isomorphisms. If $f:M\\to N$ is $B$-linear and $Vf$ is invertible, [def-sfb-modobj-restriction] says that its inverse gives an inverse $g$ to the underlying sheaf map $f$. From the defining linearity equation of [sk-def-sfb-module-objects], $f\\gamma_M=\\gamma_N(B\\otimes f)$, compute\n$$g\\gamma_N=g\\gamma_N(B\\otimes f)(B\\otimes g)=gf\\gamma_M(B\\otimes g)=\\gamma_M(B\\otimes g).$$\nThus $g$ is $B$-linear. Its underlying inverse equations are the inverse equations in the module category, because its morphisms and composition are the underlying ones. So $f$ is invertible in $\\operatorname{Mod}_B$.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Final sentence: the inference from natural finite-power coordinates to finite-limit preservation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-conservative-left-exact-reflects-finite-limits] with source $\\operatorname{Mod}_B$, target $\\operatorname{Mod}_R$, and functor $V$. Finite limits in its source exist by step 1; step 2 supplies their preservation and step 3 reflection of isomorphisms. Consequently $V$ reflects finite limits.",
+   "uses": [
+    "lem-sfb-conservative-left-exact-reflects-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+    "place": "CategoryTheory.Limits.reflectsFiniteLimits_of_reflectsIsomorphisms, lines 175-178"
+   }
+  },
+  {
+   "text": "We verify the finite-power comparison directly by universal properties. Let $(L,p_j)$ be a limit of $D$ and let $(Q,q_j)$ be a cone over $P_nD$. For each $1\\leq k\\leq n$, the maps $q_{jk}=\\pi_kq_j$ form a cone over $D$, since the arrows of $P_nD$ act coordinatewise. There is a unique $h_k:Q\\to L$ with $p_jh_k=q_{jk}$. The product map $h=(h_k)_k:Q\\to L^n$ then satisfies $p_j^nh=q_j$, checked after every $\\pi_k$; uniqueness follows first from uniqueness for $L$ in each coordinate and then from uniqueness for the product. If $n=0$, every $D(j)^0$ and $L^0$ is terminal, and the unique map $Q\\to0$ is the unique lift. If $J$ is empty, each $h_k$ is the unique map to the terminal $L$; the same argument gives the unique map to $L^n$. Thus $P_n$ preserves all the finite limit cones in question.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Final sentence: the inference from natural finite-power coordinates to finite-limit preservation"
+   }
+  },
+  {
+   "text": "Put $F=V\\circ T$. The given isomorphism $\\alpha:F\\xrightarrow{\\sim}P_n$ transfers the result of step 5 explicitly. For any cone $q_j:Q\\to F(D(j))$, the maps $\\alpha_{D(j)}q_j$ are a cone over $P_nD$ by naturality. Step 5 supplies its unique lift $h:Q\\to P_nL$. Set $u=\\alpha_L^{-1}h$. Naturality gives\n$$F(p_j)u=\\alpha_{D(j)}^{-1}P_n(p_j)h=q_j.$$\nIf $u'$ is another lift, $\\alpha_Lu'$ has the same composites with every $P_n(p_j)$ as $h$, so equals $h$ by step 5, and $u'=u$. These equations and uniqueness still apply to empty cones. Therefore $V\\circ T$ preserves finite limits; this is [lem-sfb-finite-exactness-nat-iso] applied to the natural isomorphism $\\alpha^{-1}:P_n\\xrightarrow{\\sim}V\\circ T$.",
+   "uses": [
+    "lem-sfb-finite-exactness-nat-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Final sentence: the inference from natural finite-power coordinates to finite-limit preservation"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-finite-limit-preservation-cancellation] with $F=T$ and $V=\\operatorname{Res}_\\varphi$. Step 6 gives preservation by $V\\circ T$, and step 4 gives reflection by $V$. It follows that $T$ preserves finite limits. In particular the cone with vertex $T(L)$ and legs $T(p_j)$ in the question is limiting, for every finite $J$, including $J=\\varnothing$.",
+   "uses": [
+    "lem-sfb-finite-limit-preservation-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+    "place": "CategoryTheory.Limits.preservesFiniteLimits_of_reflects_of_preserves, lines 163-166"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-conservative-left-exact-reflects-finite-limits",
+  "lem-sfb-finite-exactness-nat-iso",
+  "lem-sfb-finite-limit-preservation-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Final sentence; expanded finite-power universal-property argument using existing module-limit and categorical-reflection tools"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +149,52 @@
    "results": "24 hits: Mathlib/Algebra/Category/Ring/Under/Limits.lean, Mathlib/Algebra/Category/AlgCat/Limits.lean, Mathlib/Algebra/Category/AlgCat/Limits.lean, Mathlib/Algebra/Category/AlgCat/Limits.lean, Mathlib/Algebra/Category/AlgCat/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Ulift.lean",
    "date": "2026-10-21",
    "verdict": "no match: generic preservation/reflection lemmas require the internal-module restriction reflection and finite-power comparison to be established; ordinary ModuleCat and sectionwise SheafOfModules limits do not give the stated internal-module criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "comap.*[Ll]imit|scalarRestriction.*[Ll]imit|[Pp]ower.*[Pp]reserves|preservesFiniteLimits_of_reflects",
+   "results": "13 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/CategoryTheory/Subobject/Comma.lean, Mathlib/CategoryTheory/Subobject/Comma.lean, Mathlib/CategoryTheory/Subobject/Comma.lean, Mathlib/Topology/Order/AtTopBotIxx.lean, Mathlib/Topology/Order/AtTopBotIxx.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the criterion for internal ring objects; the categorical cancellation hit is reused as its existing Mathlib leaf, while restriction reflection and the finite-power cone calculation remain to be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor between internal module objects preserves finite limits when restriction of scalars identifies it naturally with a finite power functor",
+   "results": "8 hits: ModuleCat.preservesLimit_restrictScalars, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.leftExactFunctor, CategoryTheory.instPreservesFiniteLimitsObjFunctorLeftExactFunctor, CategoryTheory.ObjectProperty.preservesFiniteLimits, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesColimit_restrictScalars, Action.Functor.instPreservesFiniteLimitsMapActionOfHasFiniteLimits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the criterion for internal ring objects; the categorical cancellation hit is reused as its existing Mathlib leaf, while restriction reflection and the finite-power cone calculation remain to be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesFiniteLimits_of_reflects_of_preserves\"",
+   "results": "1 hits: CategoryTheory.Limits.preservesFiniteLimits_of_reflects_of_preserves",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the criterion for internal ring objects; the categorical cancellation hit is reused as its existing Mathlib leaf, while restriction reflection and the finite-power cone calculation remain to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal module functor whose composite with scalar restriction is naturally a finite product power preserves finite limits",
+   "results": "8 hits: CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor, instHasFiniteLimitsLightCondMod, PresheafOfModules.toPresheaf_preservesFiniteLimits, PresheafOfModules.evaluation_preservesFiniteLimits, FGModuleCat.instPreservesFiniteLimitsModuleCatForget₂, ModuleCat.preservesLimit_restrictScalars, FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂, Condensed.instAB4CondensedMod",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the criterion for internal ring objects; the categorical cancellation hit is reused as its existing Mathlib leaf, while restriction reflection and the finite-power cone calculation remain to be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "comap|scalarRestriction",
+   "results": "5 hits: 351, 363, 387, 389, 390 (searched CategoryTheory/Monoidal/Mod.lean)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the criterion for internal ring objects; the categorical cancellation hit is reused as its existing Mathlib leaf, while restriction reflection and the finite-power cone calculation remain to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative restriction functor on internal modules detects that a functor with natural finite power coordinates is left exact",
+   "results": "8 hits: CategoryTheory.LeftExactFunctor.ofExact, CategoryTheory.LeftExactFunctor, CategoryTheory.LeftExactFunctor.ofExact_obj, CategoryTheory.LeftExactFunctor.forget, CategoryTheory.exactFunctor_le_leftExactFunctor, CategoryTheory.LeftExactFunctor.of_fst, CategoryTheory.leftExactFunctor_iff, CategoryTheory.exactFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the criterion for internal ring objects; the categorical cancellation hit is reused as its existing Mathlib leaf, while restriction reflection and the finite-power cone calculation remain to be proved."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-subfield-flat",
@@ -78,5 +211,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-coordinate-limit-criterion",
+  "worker": "stage1",
+  "summary": "Expanded finite-power limit preservation, scalar restriction preservation and reflection, and transport along the given natural isomorphism. Reused existing sectionwise/internal-module equivalence and generic Mathlib reflection/cancellation nodes. Checked n=0 and empty diagrams separately. No new nodes or statement changes.",
+  "blueprint": "Realizes the final sentence of lem-sfb-subfield-flat.proof.md: the inference from Res(T(M)) naturally isomorphic to M^n to preservation of finite limits, including the terminal object.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence preserving underlying sections, to compute internal-module limits with the sheafified tensor; the item unit does not state this equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-344c0b51b",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-344c0b51b (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and every cited statement. The source is main-20261015 lem-sfb-subfield-flat.proof.md, last sentence. The statement is true: Res_φ is identity-on-underlying, so it is conservative and creates finite limits, and Res∘T≅P_n preserves limits. Tested on n=0, n=1, J empty and non-injective φ; no weakening, and the coefficient category is internal Mod_R(Sh(C,Ab)). Not superseded (live and side-live both unsplit), not dropped, no repair note, no SGA, no new nodes. Step 1: the equivalence's hypotheses match the item exactly; tool use of def-weil-pbc-internal-abelian-sheaf-module-equivalence accepted. Step 3's display was checked. Steps 4 and 7: Mathlib Finite.lean:175-178 and 163-166 hypotheses match. Step 5 was checked, including the n=0 and empty-J edge cases. FIX, 2 faults. (1) C3/C4, step 2: the sectionwise reading r·x=φ(r)·x relied on the equivalence being compatible with Res, which only the equivalence node's proof says, not its statement. Rewritten as an internal argument: a sheaf iso θ between the restricted B-limit and the R-limit, shown R-linear via joint monicity of the projections and B-/R-linearity, with inverse linear by step 3's computation. (2) C5, step 6: it restated the same-unit Mathlib leaf lem-sfb-finite-exactness-nat-iso; it now cites it (applied to α^{-1}:P_n≅V∘T), with elementary=false and proof_deps updated. Corrected item in fixes/dag/nodes/sec-proetale-coefficients/.; 1 file(s) fixed by the reviewer"
  }
 }

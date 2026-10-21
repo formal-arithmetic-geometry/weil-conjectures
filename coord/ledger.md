@@ -20056,3 +20056,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:54 L: merged deliver/NS/lem-sfb-finite-field-closed-support (stage 2; reviewer PASS; parallel immutable checks)
 - 03:54 L: merged deliver/N8/lem-weil-pbc-finite-field-stratified-perfect-models (stage 2; reviewer PASS; parallel immutable checks)
 - 03:54 L: merged deliver/Q12/lem-weil-pbc-ringed-slice-pullback-mate-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 03:55 L: merged deliver/Q77/lem-sfb-scalar-coordinate-limit-criterion (reviewer FIX; first push; new nodes: 0)
