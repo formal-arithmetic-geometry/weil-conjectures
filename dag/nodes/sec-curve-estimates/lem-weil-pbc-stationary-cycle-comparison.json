@@ -31,12 +31,13 @@
    "elementary": false
   },
   {
-   "text": "In stationary_projection_kernel, use the lower bound to replace graded r-boundaries by the graded image of (A intersect B)+A′. The degreewise cokernel inverse-image formula filtered_preimage from the normalized-presentation module, followed by the modular law, identifies the kernel of z followed by page projection with the inverse image of D on actual cycles. The epic factorization a_i and ha identify H.step i with the image filtration transported by c. Pulling the next-step cokernel kernel back and using filtered_class_preimage identifies the kernel of homology projection followed by a_q and graded projection with that same subobject. The quotient_kernel calculation uses Mathlib CategoryTheory.Limits.pullback_equalizer with the zero map to pull a cokernel kernel back along the preceding morphism. The derived-couple module and its private helper are not used.",
+   "text": "In stationary_projection_kernel, use the lower bound to replace graded r-boundaries by the graded image of (A intersect B)+A′. The degreewise cokernel inverse-image formula filtered_preimage from the normalized-presentation module, followed by the modular law, identifies the kernel of z followed by page projection with the inverse image of D on actual cycles. The epic factorization a_i and ha identify H.step i with the image filtration transported by c. Pulling the next-step cokernel kernel back and using filtered_class_preimage identifies the kernel of homology projection followed by a_q and graded projection with that same subobject. The upstream quotient_kernel calculation uses the proved private BigradedExactCouple.pullback_kernelSubobject helper from DerivedCoupleKernelIdentities, via a proof-only import all, to pull a cokernel kernel back along the preceding morphism. This is the same pullback-of-kernel calculation as the former copy, which instead used Mathlib pullback_equalizer directly.",
    "uses": [
     "def-sp-filtered-complex-subquotients",
     "lem-sp-filtered-normalized-quotient-presentation",
     "lem-sp-filtered-cohomology-image-finite",
-    "lem-sp-filtered-complex-page-differential"
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-derived-couple-kernel-identities"
    ],
    "elementary": false
   },
@@ -51,14 +52,15 @@
   "lem-sp-filtered-complex-differential-representatives-cover",
   "lem-sp-filtered-cohomology-image-finite",
   "lem-sp-filtered-normalized-quotient-presentation",
-  "lem-sp-filtered-complex-page-differential"
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-derived-couple-kernel-identities"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "P3",
-  "date": "2026-10-17",
+  "group": "J1",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tags 012K, 012Q and 012W; preserved the current complete proof, whose quotient_kernel calculation uses Mathlib pullback_equalizer, and removed the unused derived-couple dependency."
+  "place": "Tags 012K, 012Q and 012W: same stationary comparison proof supplied by the existing upstream twin. Its private quotient_kernel proof uses the proved upstream pullback_kernelSubobject helper."
  },
  "mathlib_searches": [
   {
@@ -133,14 +135,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.FilteredStationaryCycleComparison",
-  "file": "lean/Sheaf/CategoryTheory/FilteredStationaryCycleComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison",
+  "file": "lean/WeilConjectures/CategoryTheory/FilteredStationaryCycleComparison.lean",
   "declaration": "CategoryTheory.filteredStationary_cycle_comparison",
   "statement": "theorem filteredStationary_cycle_comparison\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K)\n    (q p r : ℤ) (hr : 1 ≤ r)\n    (hupper : F.complexStep (q + r) (q + p + 1) = ⊥)\n    (hlower : F.complexStep (q - r + 1) (q + p - 1) = ⊤)\n    {Y : C} (c : K.homology (q + p) ≅ Y) (H : DecreasingFiltration Y)\n    (a : ∀ i : ℤ, (F.step i : CochainComplex C ℤ).homology (q + p) ⟶ (H.step i : C))\n    (ha : ∀ i : ℤ, a i ≫ (H.step i).arrow =\n      HomologicalComplex.homologyMap (F.step i).arrow (q + p) ≫ c.hom)\n    (hepi : ∀ i : ℤ, Epi (a i)) :\n    ∃ (z : (F.step q : CochainComplex C ℤ).cycles (q + p) ⟶\n        (F.complexCycles q (q + p) r : C))\n      (e : filteredComplexPageObject K F r (q, p) ≅ H.gradedPiece q),\n      Epi z ∧\n      z ≫ (F.complexCycles q (q + p) r).arrow =\n        (F.step q : CochainComplex C ℤ).iCycles (q + p) ≫\n          (F.complexQuotientπ q (q + 1) (by omega)).f (q + p) ∧\n      z ≫ filteredComplexPageπ K F r (q, p) ≫ e.hom =\n        (F.step q : CochainComplex C ℤ).homologyπ (q + p) ≫ a q ≫\n          cokernel.π (Subobject.ofLE (H.step (q + 1)) (H.step q)\n            (H.antitone_step (Int.le_add_one (le_refl q))))",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-21 J1: retire the duplicate Sheaf module in favor of the upstream twin. The full public theorem signature is identical, including both representative equations and all bounds. All consumers use the upstream theorem; no mathematical node or dependency is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -153,14 +156,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
-  "result": "pass",
-  "landing": "20261017T003427-L-3317039",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-b25a9",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261021T002936-L-1581369",
+  "kind": "interface",
+  "note": "independent cc review: upstream WeilConjectures filteredStationary_cycle_comparison signature vs live Sheaf copy (identical); 3 adapted importers vs live (one import line each); item node lean record vs upstream; page-two node vs live"
  },
  "lean_audit": {
   "master": {

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
-import Sheaf.CategoryTheory.FilteredStationaryCycleComparison
+import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
 
 /-! # Stationary CE comparisons at outer filtration bounds
 

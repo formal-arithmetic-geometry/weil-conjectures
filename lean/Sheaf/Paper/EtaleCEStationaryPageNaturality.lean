@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.EtaleCETotalSections
 public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
-import Sheaf.CategoryTheory.FilteredStationaryCycleComparison
+import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 

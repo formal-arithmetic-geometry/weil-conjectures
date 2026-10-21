@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
-import Sheaf.CategoryTheory.FilteredStationaryCycleComparison
+import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
 import Sheaf.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
