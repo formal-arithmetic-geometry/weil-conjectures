@@ -1,21 +1,19 @@
 # Work queue
 
-129 items; claim with `tools/claim.py next <group> [--stage N]`.
+126 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (30 clusters, 1506 modules)
+## Rework: quarantined by the upstream sync (29 clusters, 1498 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.Paper.PbcRationalTransport` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.ConstructibleComparisonTensorTestReflection` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofVertexNormalization` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.RelativeMVResolvedRowRoofComparisons` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.SingleOpenTensorCoefficientCoherence` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StandardSingleOpenRelativeArrow` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.OpenSingleCoefficientTransport` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleOpenStalkArrow` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.FlatDerivedStructureUnitProperties` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
@@ -25,18 +23,19 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.CategoryTheory.CartanEilenbergDecalageTruncationDiagram` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.LocalZeroBottomModelPullback` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectLowestRankBoundOpen` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.Picard.TensorSingleBaseChangeSquare` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.DerivedCanonicalFiltration` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PicardTermwiseModelComparison` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.Paper.PrimeFieldTensorDevissage` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.OpenRestrictedCanonicalSquare` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalComparisonSquare` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PicardKunnethQcohFunctoriality` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.Algebra.Homology.FilteredGlobalHomExactAdjunction` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 27, stage 3 23 items.
@@ -49,7 +48,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (74)
+## Stage 3: modules to prove (72)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -58,7 +57,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 11 | 1 | repair | route |
 | `Sheaf.Paper.LisseAdicAutomorphismPullback` | 6 | 1 | disputed | 3 |
 | `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison` | - | 1 | proof | 1 |
-| `Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CompletedDirectImageLimits` | - | 6 | proof | 1 |
 | `Sheaf.Paper.DerivedInternalHomFilteredColimit` | - | 4 | proof | 1 |
 | `Sheaf.Paper.FiniteLevelProEtaleBaseChange` | - | 1 | proof | 1 |
@@ -92,7 +90,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.StrictTowerPullbackSquarePasting` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedSiteDualityMaps` | - | 4 | proof | 3 |
 | `Sheaf.CategoryTheory.SystemLevelLeftExtension` | - | 1 | proof | 3 |
-| `Sheaf.Paper.CoefficientExtensionReductionModel` | - | 2 | proof | 3 |
+| `Sheaf.Paper.CoefficientExtensionReductionModel` | - | 4 | proof | 3 |
 | `Sheaf.Paper.CompletedPullbackUnitTower` | - | 3 | proof | 3 |
 | `Sheaf.Paper.ConstantTowerDirectImageNormalization` | - | 3 | proof | 3 |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | - | 7 | proof | 3 |
@@ -128,7 +126,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ConstantTowerTransition` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ExternalRHomConePairing` | - | 1 | proof | 6 |
-| `Sheaf.Paper.PointReductionUnits` | - | 5 | proof | 6 |
 
 ## Stage 3: held for an open upstream PR (18)
 
