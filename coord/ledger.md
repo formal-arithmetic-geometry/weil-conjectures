@@ -22793,3 +22793,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:18 L: returned deliver/ND/lem-coef-enriched-sequence-projection-formula (reviewer RETURN: L: independent stage-2 immutable head 039c5222568d: H3/H5 F1: the 3e255f21 repair is correct (both 08JA endpoints = ∃!-n)
 - 14:18 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 14:20 L: merged deliver/NV/lem-sfb-transverse-tame-open-shriek-exchange (reviewer PASS; first push; new nodes: 2)
+- 14:21 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
