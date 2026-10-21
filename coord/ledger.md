@@ -23765,3 +23765,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T21:09:39Z L: superseded stage-1 delivery NF/lem-sfb-internal-bar-ordered-cup at 6596ae09971cebe52db303c14663d1e71514b42c; current completion retained; packet archived at refs/superseded/NF/lem-sfb-internal-bar-ordered-cup/6596ae09971cebe52db303c14663d1e71514b42c; stale return retired.
 - 21:10 L: merged deliver/NH/lem-sfb-profinite-action-coherent-presentation (stage 2; reviewer PASS; parallel immutable checks)
 - 21:11 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 21:12 L: merged deliver/NW/lem-sfb-internal-bar-roof-adjunction (stage 2; reviewer PASS; parallel immutable checks)

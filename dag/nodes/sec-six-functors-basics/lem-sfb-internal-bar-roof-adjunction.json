@@ -18,7 +18,8 @@
   "lem-sfb-condensed-derived-restriction-calculus",
   "def-sp-injective-resolutions",
   "def-sp-double-complex-total",
-  "lem-weil-pbc-complex-ses-triangle"
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sfb-condensed-equivariant-bar-data"
  ],
  "proof": [
   {
@@ -367,5 +368,47 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-59a056352 (reviewer sub-agent of L); spot-checked: I read the item and all 13 steps in full; there are no new nodes. I also read the base statement, the sole citer lem-sfb-internal-bar-ordered-cup, and every cited statement. Sources: blueprint main-20261015 ctf-stability-direct-images paragraph (3), route only, so the proof is agent-written. Stacks derived.tex 0152 gives delta = -p q^-1. Mathlib DerivedCategory/ShortExact.lean:38-43 and HomotopyCategory/Pretriangulated.lean:54-55 build triangleOfSESdelta from the cone arrow -fst. The statement correction is right and I checked it myself. For q=1, with v=-H^0 and w=v[1] one gets d_Tot w = a c_f + h^0, so j c_f = -b h~ and s_1 = -1. In general t(p,r) = (-1)^{pr+p(p+1)/2} satisfies t(p,r+1)/t(p,r) = (-1)^p and t(p+1,r)/t(p,r) = (-1)^{p+r+1}, so s_q = (-1)^{q(q+1)/2}. The F_3/C_3 extension is non-split, so the base claim s_1 = 1 was a real error. The base also borrowed j_N and B(N) from lem-sfb-condensed-derived-invariant-bar, which does not define them; the delivery defines them in the statement, which is legitimate and not easier. In the cone computation (kappa=(f,ell), v kappa = e, pr kappa = f-bar) rho_f = -delta. Steps 1-12 check out: flatness via j_{S!} and 03EV; Ind -| U preserves injectives; the face sum is d_h; rows are exact because I^r is injective; first-quadrant comparison with the (-1)^{pr} re-sign; K-injectivity of I[q] with arbitrary source P; the derived adjunct equals the termwise transpose by the unit/counit formulas; and the localized homotopy gives equality in the derived category. Edge cases q=0, trivial group, zero module and split extensions all hold. Repair (1, B3/C4): lem-weil-pbc-complex-ses-triangle only says some delta exists, so the clause rho_f = -delta was not pinned. The statement now defines delta = -Q(pr)Q(v)^-1 through C(i), pr and v, which is exactly Mathlib's triangleOfSESdelta, and step 13 refers to it (fixes/dag/nodes/sec-six-functors-basics/...). Batch-5 flag: lem-trf-bounded-below-derived-adjunction is only the generic bounded-below derived adjunction with its unit/counit formulas, part of neither the trace formula nor Poincare duality nor their proofs. It was accepted before (NW 45bd4f27, Q23 04950963), and the closure already reached sec-trace-formula through restriction-calculus and the mate-model node. Accepted. I accept the seven declared tool_uses as generic module/homological tools. No SGA. No duplicates (the homogeneous-cocycle hits are discrete Galois/etale nodes). MAINTAINER NOTE: the citer lem-sfb-internal-bar-ordered-cup still has a true statement (eps_0 = eps_1 = 1), but its steps 4-6 must be re-signed: Phi_1(roof) = -[a], an extra factor (-1)^q in step 5, and eps_q = s_q T_q (-1)^q. My earlier NW 7aee17f0 review wrongly accepted s_1 = 1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalBarRoofAdjunction",
+  "declaration": "CategoryTheory.CondensedBarRoof.normalized_roofs",
+  "declarations": [
+   "CategoryTheory.CondensedBarRoof.single",
+   "CategoryTheory.CondensedBarRoof.chain",
+   "CategoryTheory.CondensedBarRoof.complex",
+   "CategoryTheory.CondensedBarRoof.termIso",
+   "CategoryTheory.CondensedBarRoof.shiftedSingle",
+   "CategoryTheory.CondensedBarRoof.inflatedUnitIso",
+   "CategoryTheory.CondensedBarRoof.phi",
+   "CategoryTheory.CondensedBarRoof.roof",
+   "CategoryTheory.CondensedBarRoof.coefficientUnit",
+   "CategoryTheory.CondensedBarRoof.RoofAugmentation",
+   "CategoryTheory.CondensedBarRoof.RowFamily",
+   "CategoryTheory.CondensedBarRoof.HomogeneousFamily",
+   "CategoryTheory.CondensedBarRoof.InhomogeneousFamily",
+   "CategoryTheory.CondensedBarRoof.augmentationEquation",
+   "CategoryTheory.CondensedBarRoof.rowEquation",
+   "CategoryTheory.CondensedBarRoof.homogeneousEquation",
+   "CategoryTheory.CondensedBarRoof.coordinateEquation",
+   "CategoryTheory.CondensedBarRoof.comparisonEquation",
+   "CategoryTheory.CondensedBarRoof.extensionEquation",
+   "CategoryTheory.CondensedBarRoof.Normalization",
+   "CategoryTheory.CondensedBarRoof.normalized_roofs"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalBarRoofAdjunction.lean",
+  "statement": "theorem normalized_roofs (M : Model A G) (R : Profinite.CondensedAction.InternalBar.Resolution A.toMon G) : Normalization M R",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The conclusion specifies all canonical chain maps by their degree components and internal generalized-element formulas. It retains the existing normalized finite total and its injective-resolution comparison, the actual canonical derived adjunction and canonical shifts, the triangular sign, and the negative Mathlib short-exact-sequence boundary. No data are chosen from this postponed existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9916ec55",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read the item, all 12 stmt_dep records, the delivered module in full, and the Lean used: CondensedEquivariantBarData (Model, face formulas, totalCochains d_bar+(-1)^p d_I, Computation.iso/normalization), InternalBar.Resolution (boundary generator, augmentation to 1), Invariants (transpose-pinned adjunction), mapDerivedCategoryRightDerivedAdjunction, and Mathlib triangleOfSESδ (built from the cone arrow -fst). Every clause matches: the augmentation, row-zero j_N, f̄ in degree -q and c_f coordinates (f[g]=g0 c(g_{i-1}^{-1}g_i) at every profinite S) are fully pinned; phi is the canonical derived transpose with canonical shifts; comparison j_N Q(c_f) = (-1)^(q(q+1)/2) • (Φ_q(ρ_f) ≫ ε_N) for every injective resolution; extension clause gives unique f, f∂2=0, ρ_f = -triangleOfSESδ. These are the Q07-corrected signs. Edge cases q=0/1, zero ring/module, trivial G, split extension are covered; universes match the landed Model. Node changed only in lean and stmt_deps (added the landed def node def-sfb-condensed-equivariant-bar-data); statement verbatim; 11 dep nodes identical to live; no hollow defs; one sorry; 13-step docstring; no line over 100 characters; no compile run (no file changed; the worker reported 57 s clean). Advisory: Resolution/basis/onSections/regularOne come from the base theorem stmt_dep lem-sfb-condensed-internal-bar-resolution (not a new addition) and should later get a def node; the instance owner def-sfb-condensed-derived-invariants is reached only transitively; the second reading is a self-review; lem-sfb-internal-bar-ordered-cup still needs re-signing (Q07 note)."
  }
 }
