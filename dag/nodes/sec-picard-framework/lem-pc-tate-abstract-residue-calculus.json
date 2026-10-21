@@ -10,9 +10,164 @@
  "stmt_deps": [
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-pc-finite-potent-trace-calculus] for the well-defined finite-potent trace in the statement, including restriction/quotient additivity, cyclicity and its restricted additivity criterion. By [lem-trf-vector-subspace-complement] choose $V=A\\oplus A'$ and let $\\pi(a+a')=a$. This is a $k$-linear projection onto $A$, fixing $A$ pointwise; thus projections exist even when $A$ and $V$ have arbitrary dimension. Throughout, products of operators mean composition, with the right factor applied first.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus",
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, T1–T5, pp. 149–150; projection in Proposition 1, p. 151."
+   }
+  },
+  {
+   "text": "Use the operator algebra of [lem-pc-tate-endomorphism-ideals] for the subspace $A\\subseteq V$. With $X\\prec Y$ meaning that $(X+Y)/Y$ is finite-dimensional, equivalently $X\\subseteq Y+U$ for a finite-dimensional $U$ (choose representatives of a finite basis), put\n$$E=\\{T:TA\\prec A\\},\\quad E_1=\\{T:TV\\prec A\\},\\quad E_2=\\{T:\\dim_k TA<\\infty\\},\\quad E_0=E_1\\cap E_2.$$\nThese are exactly the subspaces of that node, which states that $E$ is a unital $k$-subalgebra of $\\operatorname{End}_k(V)$ and that $E_1,E_2$ are two-sided ideals in $E$; in particular $E_1,E_2\\subseteq E$, and a product with one factor in $E$ and one in $E_i$ lies in $E_i$, in either order. (Concretely, if $TA\\subseteq A+U_T$, $SA\\subseteq A+U_S$, then $TSA\\subseteq A+U_T+TU_S$; if moreover $SV\\subseteq A+U_S$ then $TSV\\subseteq A+U_T+TU_S$ and $STV\\subseteq SV$; if $SA$ is finite-dimensional then so are $TSA$ and $STA\\subseteq SA+SU_T$.) Admissibility of $A$ says precisely that every $m_f$, $f\\in C$, lies in $E$.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, definition of the E spaces and Proposition 1, p. 151; elementary verification of the ideal properties."
+   }
+  },
+  {
+   "text": "By [lem-pc-tate-endomorphism-ideals], every element of $E_0$ is finite-potent and the finite-potent trace of [lem-pc-finite-potent-trace-calculus] is a $k$-linear function on $E_0$. (Directly: for $T,S\\in E_0$ with $SV\\subseteq A+U$, $TSV\\subseteq TA+TU$ is finite-dimensional, so every pairwise product of members of $E_0$ has finite rank, and the restricted additivity and scalar formula of the trace node apply.) The same node gives the two trace-zero rules used below: if $T\\in E_0$ and $S\\in E$, or if $T\\in E_1$ and $S\\in E_2$, then $[T,S]\\in E_0$ and $\\operatorname{Tr}_{\\mathrm{fp}}[T,S]=0$ (both $TS,ST$ lie in $E_0$, and cyclicity plus linearity on $E_0$ give zero). No additivity for arbitrary sums of finite-potent operators is being used.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals",
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, Propositions 1–2, p. 151, deduced explicitly from T4 in the pairwise finite-rank case and T5."
+   }
+  },
+  {
+   "text": "Call $F$ a lift of $f\\in C$ if $F\\in E_1$ and $F-m_f\\in E_2$. For any projection $\\pi$ onto $A$, $F=\\pi m_f$ is a lift: its image is in $A$, and $(\\pi-1)m_f(A)$ is finite-dimensional because $m_f(A)\\subseteq A+U$ and $\\pi-1$ kills $A$. Every lift belongs to $E$ since $E_1\\subseteq E$. Lifts add and scale, and if $F,G$ lift $f,g$ then $FG$ lifts $fg$, since\n$$FG-m_{fg}=(F-m_f)G+m_f(G-m_g)\\in E_2.$$\nFurther, $[F,G]\\in E_1$ by the ideal property of [lem-pc-tate-endomorphism-ideals], and $[F,G]\\in E_2$ because reduction modulo $E_2$ gives $[m_f,m_g]=0$. Hence this commutator belongs to $E_0$ and is finite-potent by the preceding step.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, proof of Theorem 1, p. 151; explicit lift and ideal calculations."
+   }
+  },
+  {
+   "text": "Define $q(f,g)=\\operatorname{Tr}_{\\mathrm{fp}}[F,G]$ using any two lifts in $E_1$. If $F'$ is another lift of $f$, then $F'-F\\in E_0$. The difference of the two commutators is $[F'-F,G]$, whose trace is zero by the first trace-zero rule of [lem-pc-tate-endomorphism-ideals] (step 3). Linearity on $E_0$ therefore proves independence of $F$; interchanging the roles proves independence of $G$. Choosing lifts $\\pi m_f,\\pi m_g$ with one fixed projection, their separate linearity and trace linearity on $E_0$ prove that $q$ is $k$-bilinear. Also $q(f,f)=0$ by taking identical lifts. These are applications of the trace formulas in [lem-pc-finite-potent-trace-calculus] only in the cases checked in step 3.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals",
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, proof of Theorem 1, pp. 151–152; independence and bilinearity."
+   }
+  },
+  {
+   "text": "The formula with just one lifted operator is equally valid. For a lift $F$ of $f$ and $g\\in C$, $[F,m_g]\\in E_1\\cap E_2$: use that $E_1$ is an ideal and that modulo $E_2$ the two multiplications commute. If $G$ lifts $g$, then $m_g-G\\in E_2$ and\n$$[F,m_g]-[F,G]=[F,m_g-G].$$\nThe second trace-zero rule of [lem-pc-tate-endomorphism-ideals] (step 3), followed by linearity on $E_0$, gives $q(f,g)=\\operatorname{Tr}_{\\mathrm{fp}}[F,m_g]$. In particular $q(f,c)=0$ for $c\\in k$, because $m_c=c\\operatorname{id}_V$ commutes with every $k$-linear $F$. Taking $F=\\pi m_f$ proves both the finite-potence assertion and the exact projection formula required by the item, once the residue is constructed.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals",
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, Theorem 1 and the Remark preceding formula (*), p. 152."
+   }
+  },
+  {
+   "text": "Let $F,G,H$ lift $f,g,h$ in $E_1$. Products of lifts are lifts, and the operator identity\n$$[F,GH]=[FG,H]+[HF,G]$$\nis obtained by expanding and cancelling the terms $HFG$. All three commutators are in $E_0$ (step 4, using [lem-pc-tate-endomorphism-ideals]). The trace linearity of [lem-pc-finite-potent-trace-calculus] in step 3 consequently gives\n$$q(f,gh)=q(fg,h)+q(fh,g).$$\nUse the explicit free-$C$-module presentation of $\\Omega^1_{C/k}$ in [def-weil-pbc-kahler-differentials]. On its free module define the $k$-linear functional $\\sum_i f_i[g_i]\\mapsto\\sum_i q(f_i,g_i)$. Bilinearity makes it well-defined on coefficients. It kills every $C$-multiple of an additive relation by additivity in the second variable, every multiple of $[gh]-g[h]-h[g]$ by the displayed identity, and every multiple of $[c]$, $c\\in k$, by step 6. It therefore descends to a $k$-linear functional $r:\\Omega^1_{C/k}\\to k$ with $r(f\\,dg)=q(f,g)$. This uses precisely the presentation stated by the cited node, without assuming that $k$ is a $C$-module.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals",
+    "lem-pc-finite-potent-trace-calculus",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, proof of Theorem 1, pp. 151–152; descent through the differential relations, using the equivalent free-module presentation."
+   }
+  },
+  {
+   "text": "The elements $f\\,dg$ span $\\Omega^1_{C/k}$ over $k$: every differential is a finite $C$-linear sum of $dg$ by the presentation in [def-weil-pbc-kahler-differentials], and each coefficient is absorbed into $f$. Thus the displayed values determine $r$ uniquely. Step 6 shows these values satisfy the required formula for every projection $\\pi$, and step 5 shows they are independent of the choices. Write this unique functional as $\\operatorname{res}_{V,A}$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, uniqueness in Theorem 1, p. 152."
+   }
+  },
+  {
+   "text": "For the ambient-space invariance, write out Tate's finite computation. Fix $f,g$ and a projection $\\pi$, and put\n$$B=A+m_gA,\\qquad D=B\\cap m_f^{-1}(A)\\cap m_{fg}^{-1}(A),\\qquad S=[\\pi m_f,m_g].$$\nThe quotient $B/A$ is finite-dimensional. The linear map $B\\to(V/A)\\oplus(V/A)$ sending $v$ to $(fv\\bmod A,fgv\\bmod A)$ has kernel $D$ and finite-dimensional image: its components are contained in $(fA+fgA+A)/A$ and $(fgA+fg^2A+A)/A$, respectively, both finite-dimensional by admissibility. Choosing representatives of a basis of that image shows $B/D$ is finite-dimensional. Moreover $S(V)\\subseteq B$, and $S(D)=0$, since for $v\\in D$ both $fv,fgv$ lie in $A$ and hence $S(v)=fgv-gfv=0$. Apply restriction/quotient additivity in [lem-pc-finite-potent-trace-calculus] first to $B\\subseteq V$, then to $D\\subseteq B$. The induced endomorphism on $V/B$ and the restriction to $D$ are zero, so\n$$\\operatorname{res}_{V,A}(f\\,dg)=\\operatorname{Tr}_k(\\overline S\\mid B/D).$$\nThis is formula (*) with its finite-dimensionality and all stable-subspace hypotheses verified.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, Remark and finite formula (*), p. 152; restriction/quotient form of T2."
+   }
+  },
+  {
+   "text": "If $W\\subseteq V$ is a $C$-submodule containing $A$, it is admissible as an ambient module because $(m_fA+A)/A$ is the same vector space. Restrict any projection $\\pi:V\\to A$ to $W$. The spaces $B,D$ of step 9 lie in $W$ and are unchanged, and the operator induced on $B/D$ is unchanged. Hence step 9 gives equal residues on each $f\\,dg$; their spanning property from [def-weil-pbc-kahler-differentials] gives $\\operatorname{res}_{W,A}=\\operatorname{res}_{V,A}$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, R1, p. 152; the finite computation above realizes the ambient restriction assertion."
+   }
+  },
+  {
+   "text": "Let $u:V\\to V'$ be a $C$-linear isomorphism with $u(A)=A'$. Admissibility transfers because $u(m_fA+A)=m_fA'+A'$. The conjugate $\\pi'=u\\pi u^{-1}$ projects onto $A'$, and its commutator is $S'=uSu^{-1}$. To compare traces, use cyclicity from [lem-pc-finite-potent-trace-calculus] with $a=u$ and $b=Su^{-1}$, so $ba=S$ and $ab=S'$. The traces, and therefore the residues of $f\\,dg$, coincide. Spanning, as in step 8, proves invariance of the complete functionals.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, T5, p. 150; §2, definition of residue and R1, pp. 151–152."
+   }
+  },
+  {
+   "text": "If $A$ is finite-dimensional, the zero operator is a lift of every $f$: its image is zero and $(0-m_f)(A)$ is finite-dimensional. Using two zero lifts gives $q(f,g)=0$. If $V/A$ is finite-dimensional, choose finitely many representatives for a quotient basis, giving $V=A+U$ for finite-dimensional $U$. Admissibility gives $m_fA\\subseteq A+U_f$, so $m_fV\\subseteq A+U_f+m_fU$. Thus $m_f\\in E_1$, and $m_f$ itself is a lift of $f$. The two original multiplications commute, so again $q(f,g)=0$. In each case $\\operatorname{res}=0$ by step 8. In the second case one can also use $V\\prec A$ to see $m_fV\\prec A$ immediately.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, consequence of R1 and the lift characterization; vanishing for finite-dimensional or finite-codimensional A."
+   }
+  },
+  {
+   "text": "Finally suppose $fA\\subseteq A$ and $gA\\subseteq A$. Take lifts $F=m_f\\pi$ and $G=m_g\\pi$: their images lie in $A$, and $F-m_f$ and $G-m_g$ vanish on $A$, so they lie in $E_2$. For every $v$, both $g\\pi v$ and $f\\pi v$ lie in $A$, and therefore\n$$FGv=fg\\pi v=gf\\pi v=GFv.$$\nThus $q(f,g)=0$. If $A$ is a $C$-submodule, this applies to every $f,g$; step 8 gives $\\operatorname{res}_{V,A}=0$. This works in every characteristic and uses no division by $2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, R2, pp. 152–153; direct commuting-lift verification of the required special case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-potent-trace-calculus",
+  "lem-trf-vector-subspace-complement",
+  "lem-pc-tate-endomorphism-ideals",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§1 T1–T5 and Propositions 1–2; §2 Theorem 1, formula (*), and R1–R2, pp. 149–153."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +196,136 @@
    "results": "8 hits: Submodule.sup_dualAnnihilator_le_inf, Subspace.dualAnnihilator_iInf_eq, Subspace.dualAnnihilator_inf_eq, Submodule.submoduleOf_sup_of_le, Submodule.dualAnnihilator_sup_eq, Submodule.rank_sup_add_rank_inf_eq, Submodule.finrank_sup_add_finrank_inf_eq, Submodule.localized'_inf. Read the returned statements; none constructs the abstract differential residue or proves its asserted identities.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite potent endomorphism trace restriction stable subspace cyclicity trace ab equals trace ba",
+   "results": "{\"t\": \"2026-10-21T08:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finite potent endomorphism trace restriction stable subspace cyclicity trace ab equals trace ba\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LinearMap.trace_comp_comm\", \"LinearMap.trace_restrict_eq_of_forall_mem\", \"LinearMap.trace_comp_cycle'\", \"LinearMap.trace_comp_cycle\", \"LinearMap.trace_mul_cycle'\", \"LinearMap.trace_mul_cycle\", \"LinearMap.trace_mul_comm\"], \"digest\": \"9913d5e2ded9f724\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, LinearMap.restrict",
+   "results": "{\"t\": \"2026-10-21T08:56:11Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.trace, LinearMap.restrict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_sum_trace_restrict\", \"LinearMap.trace_eq_sum_trace_restrict'\", \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup\", \"LinearMap.trace_restrict_eq_of_forall_mem\", \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\"], \"digest\": \"caf9588f993245c9\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.?potent|tateTrace|TateResidue",
+   "results": "{\"t\": \"2026-10-21T08:56:11Z\", \"tool\": \"grep\", \"query\": \"finite.?potent|tateTrace|TateResidue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace of a finite potent endomorphism of an infinite dimensional vector space",
+   "results": "{\"t\": \"2026-10-21T08:56:12Z\", \"tool\": \"leansearch\", \"query\": \"Trace of a finite potent endomorphism of an infinite dimensional vector space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace\", \"Matrix.trace\", \"Algebra.trace\", \"LinearMap.traceAux\", \"Matrix.traceLinearMap\", \"Matrix.trace_toLin'_eq\", \"Matrix.trace_toLin_eq\", \"LinearMap.isNilpotent_trace_of_isNilpotent\"], \"digest\": \"fbb6818786073e90\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate residue differential admissible subspace trace commutator projection",
+   "results": "{\"t\": \"2026-10-21T08:56:33Z\", \"tool\": \"leanfinder\", \"query\": \"Tate residue differential admissible subspace trace commutator projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δAux\", \"Algebra.H1Cotangent.δ\", \"Algebra.Presentation.differentials.comm₂₃\", \"Algebra.Generators.H1Cotangent.δ_map\", \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.Generators.cotangentCompAwaySec\"], \"digest\": \"8139479d24b92f38\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residue|Residue",
+   "results": "{\"t\": \"2026-10-21T08:56:34Z\", \"tool\": \"grep\", \"query\": \"residue|Residue\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abstract residue of Kahler differentials from a projection onto an almost invariant vector subspace",
+   "results": "{\"t\": \"2026-10-21T08:56:35Z\", \"tool\": \"leansearch\", \"query\": \"Abstract residue of Kahler differentials from a projection onto an almost invariant vector subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.fromIdeal\", \"KaehlerDifferential.derivationQuotKerTotal\", \"CommRingCat.KaehlerDifferential.d\", \"KaehlerDifferential.mvPolynomialEquiv\", \"CommRingCat.KaehlerDifferential.map\", \"instInhabitedKaehlerDifferential\"], \"digest\": \"4c7f1c0a073abe80\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace on finite rank modulo a subspace endomorphisms, trace commutator zero and linearity on Tate operator ideals",
+   "results": "{\"t\": \"2026-10-21T08:56:36Z\", \"tool\": \"leanfinder\", \"query\": \"Trace on finite rank modulo a subspace endomorphisms, trace commutator zero and linearity on Tate operator ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\", \"LinearMap.trace_restrict_eq_of_forall_mem\", \"LieModule.trace_comp_toEnd_genWeightSpace_eq\", \"Algebra.normalizedTrace\", \"LinearMap.IsProj.trace\", \"LinearMap.trace_smulRight\", \"Algebra.trace_quotient_mk\"], \"digest\": \"eab7f57ef5ef4edf\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, LinearMap.commute",
+   "results": "{\"t\": \"2026-10-21T08:56:36Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.trace, LinearMap.commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LinearMap.commute'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commutator|trace_comp_comm",
+   "results": "{\"t\": \"2026-10-21T08:56:36Z\", \"tool\": \"grep\", \"query\": \"commutator|trace_comp_comm\", \"sub\": \"LinearAlgebra/Trace.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"240\", \"265\", \"267\", \"284\", \"289\"], \"digest\": \"b0fb629774e04c55\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate operator ideals finite potent trace linearity commutator trace zero",
+   "results": "{\"t\": \"2026-10-21T08:56:37Z\", \"tool\": \"leansearch\", \"query\": \"Tate operator ideals finite potent trace linearity commutator trace zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.matrix_trace_commutator_zero\", \"LinearMap.trace_lie\", \"LieAlgebra.SpecialLinear.sl\", \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LinearMap.trace\", \"LinearMap.trace_eq_contract_of_basis\", \"Algebra.trace\", \"LinearMap.trace_transpose'\"], \"digest\": \"58fe825a38462bc5\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinite dimensional linear endomorphism some power has finite dimensional image trace nilpotent cyclic invariant",
+   "results": "{\"t\": \"2026-10-21T08:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"Infinite dimensional linear endomorphism some power has finite dimensional image trace nilpotent cyclic invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.exists_isNilRegular\", \"LinearMap.exists_isNilRegular_of_finrank_le_card\", \"LinearMap.IsNilRegular\", \"LinearMap.nilRank\", \"LinearMap.charpoly_nilpotent_tfae\", \"Module.End.exists_ker_pow_eq_ker_pow_succ\", \"LinearMap.isNilpotent_trace_of_isNilpotent\", \"LinearMap.nilRank_le_finrank\"], \"digest\": \"c641fd7fe8fbe479\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_lie",
+   "results": "{\"t\": \"2026-10-21T08:57:03Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.trace_lie\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.trace_lie\"], \"digest\": \"73c9032c36373763\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic residue functional on Kahler differentials with almost invariant subspace and finite potent commutator",
+   "results": "{\"t\": \"2026-10-21T08:57:04Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic residue functional on Kahler differentials with almost invariant subspace and finite potent commutator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationQuotKerTotal\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.DLinearMap_apply\", \"Algebra.Extension.toKaehler\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"derivationQuotKerSq_mk\", \"Algebra.Presentation.differentials.comm₂₃\", \"Algebra.Presentation.differentials.comm₂₃'\"], \"digest\": \"2f51c34b97c9ad3d\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.exists_isCompl",
+   "results": "{\"t\": \"2026-10-21T08:59:50Z\", \"tool\": \"loogle\", \"query\": \"Submodule.exists_isCompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Submodule.exists_isCompl\"], \"digest\": \"80e32e56e19c6960\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "match for the auxiliary complement fact only, already lem-trf-vector-subspace-complement; no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isCompl|linearProjOfIsCompl",
+   "results": "{\"t\": \"2026-10-21T08:59:50Z\", \"tool\": \"grep\", \"query\": \"exists_isCompl|linearProjOfIsCompl\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean\", \"Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean\", \"Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean\"], \"digest\": \"1bcb53fd1941f99e\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every vector subspace of an arbitrary vector space over a field admits a linear projection restricting to its identity",
+   "results": "{\"t\": \"2026-10-21T09:00:42Z\", \"tool\": \"leanfinder\", \"query\": \"Every vector subspace of an arbitrary vector space over a field admits a linear projection restricting to its identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.IsProj.map_id\", \"LinearMap.IsProj\", \"LinearMap.IsProj.top\", \"LinearMap.IsProj.codRestrict_apply_cod\", \"LinearMap.linearProjOfIsCompl_of_proj\", \"LinearMap.IsProj.mem_iff_map_id\", \"Submodule.linearProjOfIsCompl_comp_subtype\", \"LinearMap.IsProj.codRestrict\"], \"digest\": \"28c44265a7d79e28\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every submodule over a division ring has a complementary submodule",
+   "results": "{\"t\": \"2026-10-21T09:00:43Z\", \"tool\": \"leansearch\", \"query\": \"Every submodule over a division ring has a complementary submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.exists_isCompl\", \"Submodule.complementedLattice\", \"MonoidAlgebra.Submodule.exists_isCompl\", \"Submodule.isCompl_span_singleton_of_isCoatom_of_notMem\", \"IsSemisimpleModule.toComplementedLattice\", \"isSemisimpleModule_iff\", \"IsSemisimpleModule.exists_submodule_linearEquiv_quotient\", \"LinearMap.isCompl_of_proj\"], \"digest\": \"9b04e362f03099f9\"}; Hits read; ordinary trace, Kähler differential definitions or vector-space complement results do not state the complete abstract residue theorem.",
+   "date": "2026-10-21",
+   "verdict": "match for the auxiliary complement fact only, already lem-trf-vector-subspace-complement; no match for the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-tate-adelic-reciprocity",
@@ -63,5 +344,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-abstract-residue-calculus",
+  "worker": "stage1",
+  "summary": "Checked Tate §§1–2 and the live Lean source; kept the statement unchanged. Reused the existing finite-potent trace-calculus and vector-subspace complement nodes. Wrote the operator-ideal bounds, trace-zero computations, lift independence, differential-relation descent, finite quotient formula, ambient and isomorphism invariances, and all vanishing clauses explicitly. No new nodes. Review FIX: steps 2-7 now cite the existing operator-ideal node lem-pc-tate-endomorphism-ideals (Tate Propositions 1-2) instead of restating it.",
+  "blueprint": "The residue functional in the statement of sk-thm-picard-duality, used to make the curve cokernel trace well-defined: this item supplies its abstract construction and invariances through the blueprint ancestor and lem-pc-tate-adelic-reciprocity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-5d9402ed5",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-5d9402ed5 (reviewer sub-agent of L); spot-checked: I read the item and all 13 steps in full against Tate, ASENS 1968, pp. 149-153: T1-T5, Propositions 1-2, Theorem 1, the Remark with formula (*), and R1-R2. Fault fixed: steps 2-3 prove again, as elementary steps, the statement of the existing base node lem-pc-tate-endomorphism-ideals. That node is Tate Propositions 1-2: E is a unital subalgebra, E1 and E2 are two-sided ideals, E0 is finite-potent with a k-linear trace, and the two trace-zero rules hold. It is in the same unit, sk-thm-picard-duality, yet the report says no operator-ideal node exists. The fix file cites the node in steps 2-7 and adds it to proof_deps; the statement is unchanged. There is no cycle, since the node's only stmt_dep is the trace node and it has no proof yet. Everything else checks out. Step 2: every finite-dimensional bound holds. Step 4: πm_f is a lift, and FG-m_fg lies in E2. Step 6: [F,m_g]-[F,G]=[F,m_g-G] with F in E1 and m_g-G in E2, which gives the item's [πm_f,m_g] formula. Step 7: the identity [F,GH]=[FG,H]+[HF,G] holds by expansion, and the functional kills the C-multiples of all three relation types in the Kähler node's stated presentation. Step 9 matches Tate's (*): the map B->(V/A)^2 has finite image by admissibility of f, fg and fg^2, S(V) lies in B, S(D)=0, and additivity is applied twice. Step 10 matches R1 for a C-submodule W. Step 11 uses cyclicity with a=u and b=Su^-1. Step 12 handles finite A with zero lifts and finite V/A with m_f as its own lift. Step 13 uses the commuting lifts m_fπ and m_gπ. Edge cases: A=0, A=V, V=0, characteristic 2, and V=k((t)) with A=k[[t]] and res(t^-1 dt)=1, which confirms the sign. On B10: Lean TateResidue/Residue.lean covers only [πf,πg], with no ambient-W or pair-isomorphism invariance, so the split is legitimate. The route is Tate's residue as in the main-20261015 sk-thm-picard-duality unit; no SGA is cited. The item is not in the dropped list and has no re-split note. Batch-5 flag on lem-trf-vector-subspace-complement: accepted, because it is the Mathlib leaf Submodule.exists_isCompl, general linear algebra outside the trace formula and Poincaré duality. Maintainer note: lem-pc-tate-dvr-residue-calculus builds res_O independently, as the case V=K, A=O of this item. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
