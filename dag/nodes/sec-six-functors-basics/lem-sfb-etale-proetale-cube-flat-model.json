@@ -304,37 +304,6 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-7f6ddf63a (reviewer sub-agent of L); spot-checked: Read in full: the item, the 10 cited proof nodes, the key stmt_deps (def-kun-projection-formula-map, def-sfb-ringed-derived-comparison-data, the restrict-scalars comparisons) and the Stacks sites-cohomology sources 06YS, 0G7E, 06YY, 0D6D and 07A4. The proof is the 0D6D single-representative route. No SGA is cited, no cycle (transitive closure checked), nothing from the dropped list, statement unchanged against live, 0 new nodes. Steps 1-4 and 7-8 are correct: the preservation clause of ringed-tensor-pullback also covers the identity morphism with the nonflat map A→B, j recursion types and invertibility checked, d_R is the exact localization (first paragraph of sk-thm-pe only), and the outer-whisker naturality recomputed. Two small faults fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-proetale-cube-flat-model.json: (C4) Step 5 applied the composition and two-iso nodes, which explicitly do not assert that lifts exist; it now takes the lifts from the System of lem-sfb-ringed-derived-monoidal-comparisons, by def-sfb-ringed-derived-comparison-data, which is added to uses and proof_deps. (E5) Step 6 asserted a_P = c^{e,0}_P without argument; the step now carries the mate-unit calculation (the pulled-back 1⊗m goes to 1⊗f^0m, then B-linearity and generation). Def-pur orientation checked: j_{El}∘c^e = Q(a_P)∘j_{lE}. Edge cases checked: P=0, X empty, A=B, f=id, Z→F_p nonflat, unbounded P. The ten declared tool_uses are accepted as generic tools. Maintainer note: the proof is 6558 characters with 0 new nodes, about the size that led to the parent's re-split. This is advisory, not a fault.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.Paper.EtaleProEtaleCubeFlatModel",
-  "declaration": "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.simultaneous_flat_model",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Word",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Word.comp",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Good",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.etale",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.proetale",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.comparison",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.etaleScalar",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.proetaleScalar",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Vertex",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Face",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Face.source",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Face.target",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.vertex",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.twoComplexIso",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.ordinaryFace",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.derivedFace",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.Word.NaturalAt",
-   "AlgebraicGeometry.ProEtale.ScalarCubeFlatModel.simultaneous_flat_model"
-  ],
-  "file": "lean/Sheaf/Paper/EtaleProEtaleCubeFlatModel.lean",
-  "statement": "theorem simultaneous_flat_model {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) : (∀ K : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, ∃ (P : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (p : P ⟶ K), Good Y.smallEtaleTopology A P ∧ QuasiIso p) ∧ (∀ P : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, Good Y.smallEtaleTopology A P → Good (Scheme.ProEt.topology Y) A ((comparison A Y).ordinary.obj P) ∧ Good (X.smallEtaleTopology) A ((etale A f).ordinary.obj P) ∧ Good (Y.smallEtaleTopology) B ((etaleScalar a Y).ordinary.obj P) ∧ Good (Scheme.ProEt.topology Y) B (((comparison A Y).comp (proetaleScalar a Y)).ordinary.obj P) ∧ Good (Scheme.ProEt.topology X) A (((comparison A Y).comp (proetale A f)).ordinary.obj P) ∧ Good (Scheme.ProEt.topology X) A (((etale A f).comp (comparison A X)).ordinary.obj P) ∧ Good (X.smallEtaleTopology) B (((etale A f).comp (etaleScalar a X)).ordinary.obj P) ∧ Good (Scheme.ProEt.topology Y) B (((etaleScalar a Y).comp (comparison B Y)).ordinary.obj P) ∧ Good (X.smallEtaleTopology) B (((etaleScalar a Y).comp (etale B f)).ordinary.obj P) ∧ (∀ i : Vertex, Good (Scheme.ProEt.topology X) B ((vertex a f i).ordinary.obj P)) ∧ IsIso ((comparison A Y).representative P) ∧ IsIso ((etale A f).representative P) ∧ IsIso ((etaleScalar a Y).representative P) ∧ IsIso ((proetaleScalar a Y).representative ((comparison A Y).ordinary.obj P)) ∧ IsIso ((proetale A f).representative ((comparison A Y).ordinary.obj P)) ∧ IsIso ((comparison A X).representative ((etale A f).ordinary.obj P)) ∧ IsIso ((etaleScalar a X).representative ((etale A f).ordinary.obj P)) ∧ IsIso ((comparison B Y).representative ((etaleScalar a Y).ordinary.obj P)) ∧ IsIso ((etale B f).representative ((etaleScalar a Y).ordinary.obj P)) ∧ IsIso ((proetale B f).representative (((comparison A Y).comp (proetaleScalar a Y)).ordinary.obj P)) ∧ IsIso ((proetaleScalar a X).representative (((comparison A Y).comp (proetale A f)).ordinary.obj P)) ∧ IsIso ((proetaleScalar a X).representative (((etale A f).comp (comparison A X)).ordinary.obj P)) ∧ IsIso ((comparison B X).representative (((etale A f).comp (etaleScalar a X)).ordinary.obj P)) ∧ IsIso ((proetale B f).representative (((etaleScalar a Y).comp (comparison B Y)).ordinary.obj P)) ∧ IsIso ((comparison B X).representative (((etaleScalar a Y).comp (etale B f)).ordinary.obj P)) ∧ (∀ i : Vertex, IsIso ((vertex a f i).representative P)) ∧ (∀ e : Face, derivedFace a f e (_root_.DerivedCategory.Q.obj P) ≫ (vertex a f e.target).representative P = (vertex a f e.source).representative P ≫ _root_.DerivedCategory.Q.map (ordinaryFace a f e P))) ∧ (∀ (P P' : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (v : P ⟶ P'), Good Y.smallEtaleTopology A P → Good Y.smallEtaleTopology A P' → (comparison A Y).NaturalAt v ∧ (etale A f).NaturalAt v ∧ (etaleScalar a Y).NaturalAt v ∧ ((comparison A Y).comp (proetaleScalar a Y)).NaturalAt v ∧ ((comparison A Y).comp (proetale A f)).NaturalAt v ∧ ((etale A f).comp (comparison A X)).NaturalAt v ∧ ((etale A f).comp (etaleScalar a X)).NaturalAt v ∧ ((etaleScalar a Y).comp (comparison B Y)).NaturalAt v ∧ ((etaleScalar a Y).comp (etale B f)).NaturalAt v ∧ ∀ i : Vertex, (vertex a f i).NaturalAt v)",
-  "branch": "sheaf-dag",
-  "by": "Q13",
-  "date": "2026-10-21",
-  "existing": false,
-  "note": "All six canonical faces are reused, in the same fixed-module presentation as the parent cube. Word.comp defines successive actual representative counits, not chosen isomorphisms. The statement includes every proper suffix, all six vertices, every successive counit, all six simultaneous face equations and chain-map naturality. The generic existing quasiIso.kFlat and ObjectProperty.flat predicates render the recorded K-flat and flat notions in this constant-coefficient presentation; no replacement tensor or new resolution choice is introduced. Helpers scalarPullbackProEtaleIso and directImageComparisonAmbientPullbackIso are housed in EtaleProEtaleScalarMate; its future proof-only import of this module must be omitted to avoid the existing helper-housing import cycle, as for the parent cube."
- },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
@@ -342,5 +311,15 @@
   "group": "Q13",
   "result": "pass",
   "note": "Item node changed only in lean, with a verbatim statement and an 18-declaration list equal to the file; no new nodes. The differing def-weil-pbc-canonical-ringed-tensor-comparison record is the pre-Q64 base, unchanged by the delivery. Six vertices match W0..W5 and the routes 0-1-2-3 / 0-4-5-3. All 9 proper suffixes and 6 vertices are Good; 15 letter-at-suffix IsIso clauses plus all vertices; one fixed j per vertex in the six face equations; NaturalAt for all suffixes and vertices. Derived faces are the landed parent cube's (scalarPullbackProEtaleIso, directImageComparisonAmbientPullbackIso, pbcComparisonReduction, Etale.scalarPullbackIso). Ordinary faces are the canonical adjunction conjugates; comparison faces use the inverse, matching delta^0. Representatives are the published scalarGeometric/scalarExtension counits and copies of their formulas on the pro-etale site; Word.comp = Step 3 recursion. Good = quasiIso.kFlat + ObjectProperty.flat, the predicate def-pur already uses, equivalent to the recorded notions via isKFlatTensor_iff_kFlat / isFlat_iff_flat. No extra hypotheses; Type(u+1) coefficients as parent. Docstrings with source/blueprint/8 steps, sorry only, lines <=100. Advisories: EtaleProEtaleScalarMate import cycle as parent (move helpers to a def module); RingedDerivedComparisonData only transitively imported; face owners not stmt_deps, as parent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c1785",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T134458-L-1194954",
+  "kind": "interface",
+  "note": "independent cc review: emptied item module and flat-model node (lean:null) vs live lean/ and DAG (no importers, no stmt_deps/proof_deps/uses edge, no unit/chapter reference); parent EtaleProEtaleScalarPullbackCube docstring vs its live mate proof (ordinary/derived/reverse_scalar_cube, scalarPullbackEtaleIso_eq_fromMate) and its retained unit-route imports"
  }
 }

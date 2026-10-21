@@ -301,33 +301,19 @@ Source: Stacks Project, Tag 0D6D, `lemma-derived-pullback-composition`.
 (blueprint: lem-sfb-etale-proetale-scalar-pullback-cube).
 
 Proof:
-1. The ordinary inverse-image square of sk-thm-pe-direct-image-comparison is the
-   lift of one geometric square to modules over each constant ring. Naturality
-   for addition, scalar multiplication and constant sections identifies its ring
-   components with the canonical constant-ring pullbacks, compatibly with a.
-2. Apply that naturality to the universal balanced pairing B times N into
-   B tensor_A N. Naturality for both product projections identifies the action on
-   the product with the product of the two actions. Both ordinary cube paths
-   therefore take b tensor m to b tensor theta(m). The balancing relation is
-   preserved. The pure-tensor normalization of
-   def-weil-pbc-canonical-ringed-tensor-comparison and
-   lem-weil-pbc-canonical-ringed-tensor-comparison-construction, followed by module
-   sheafification, proves equality on all generalized sections.
-3. Resolve an arbitrary representative of M by a K-flat complex P with flat
-   terms (lem-pc-kflat-resolution). Ringed pullback preserves this class
-   (lem-weil-pbc-ringed-topoi-derived-tensor-pullback), including pullback along
-   the identity geometric morphism with structural ring map a. Thus all iterated
-   derived functors are computed by ordinary pullbacks of this same P, using
-   lem-weil-pbc-ringed-topoi-derived-pullback and lem-pur-derived-change-of-rings.
-4. The defining normalization of def-pur-etale-scalar-pullback-iso and the
-   composition and specified-2-isomorphism normalization of
-   lem-sfb-ringed-derived-monoidal-comparisons identify each scalar face with its
-   ordinary face on P. The two d faces are the exact localization of the ordinary
-   site square. Localizing the degreewise equality from step 2 proves the cube
-   at Q(P). The coefficient is in degree zero, so no factors or signs are swapped.
-5. Both paths are natural in M. Transport their equality along the resolution
-   isomorphism Q(P) isomorphic to M to obtain the displayed equation. No
-   finiteness of f, boundedness of M, or flatness of a is used. -/
+1. Conjugate the ordinary restriction cube under the geometric and coefficient
+   restriction/coextension adjunctions. The two right-adjoint composites agree
+   sectionwise, so their conjugates agree.
+2. Exact localization preserves this equality. Conjugating with the canonical
+   exact/left-derived pullback isomorphisms gives derived_restriction_cube.
+3. Paste the coefficient-extension adjunction mates. Compatibility of mates with
+   top whiskering gives reverse_scalar_cube for the fixed scalar adjunctions.
+4. Cancel the inverse pro-etale scalar comparison and the inverse etale scalar
+   comparison. The proved scalarPullbackEtaleIso_eq_fromMate identifies the latter
+   with the published representative-normalized Etale.scalarPullbackIso.
+This proof applies to every M directly and uses no common flat-model assertion.
+It retains the scalar-six unit's etale/pro-etale comparison route and assumes no
+finiteness of f, boundedness of M, or flatness of a. -/
 theorem etaleProEtale_scalar_pullback_cube
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
