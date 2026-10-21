@@ -45,6 +45,7 @@ namespace CategoryTheory
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   {J : GrothendieckTopology C} {R : Type (u + 1)} [CommRing R]
 
+omit [EssentiallySmall.{u + 1} C] in
 /-- **Restriction along a cocontinuous functor preserves locally trivial relations.** If
 `G : C ⥤ D` is cocontinuous and `P` has locally trivial relations on `D`, then so has the
 restriction `G.op ⋙ P`: a covering sieve of `G V` pulls back to a covering sieve of `V`. -/
