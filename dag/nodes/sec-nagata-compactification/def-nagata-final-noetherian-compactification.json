@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-nagata-final-noetherian-compactification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Noetherian compactification used in the final assembly",
@@ -20,9 +20,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "descendedModelCompactification|noetherianCompactification|Noetherian.*[Cc]ompactification",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no scheme compactification or Nagata construction in AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define the compactification of the descended finite presentation model by the Noetherian compactification construction",
+   "results": "Hits: AlgebraicGeometry.IsNoetherian.toCompactSpace, TopologicalSpace.NoetherianSpace.compactSpace, TopologicalSpace.NoetherianSpace.isCompact, OnePoint.instCompactSpace, AlgebraicGeometry.IsNoetherian.mk, AlgebraicGeometry.IsNoetherian.casesOn, TopologicalSpace.noetherianSpace_iff_isCompact, AlgebraicGeometry.isNoetherian_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not define the specified descended model compactification by the Noetherian construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification, AlgebraicGeometry.IsNoetherian",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.Compactification'; No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: query rejected because AlgebraicGeometry.Compactification is unknown to Loogle; repeated using properness and open immersion names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chosen Noetherian compactification of a separated finite presentation model descended to a Noetherian approximation stage",
+   "results": "Hits: AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.IsNoetherian, Algebra.FinitePresentation.of_finiteType, AlgHom.FinitePresentation.of_finiteType, AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.IsLocallyNoetherian, RingHom.FinitePresentation.of_finiteType, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not define the specified descended model compactification by the Noetherian construction"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|Compactification|[Nn]agata",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no scheme compactification or Nagata construction in AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not define the specified descended model compactification by the Noetherian construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification of a separated morphism of finite type over a Noetherian scheme",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.Scheme.Hom.toNormalization",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not define the specified descended model compactification by the Noetherian construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -53,5 +103,20 @@
   "statement": "For $Y\\to S$ as in [def-nagata-final-descended-model], define\n\n$$\nC_{Y,\\lambda_Y}\n=\\mathsf C_{\\mathrm{Noeth}}\n(Y_{\\lambda_Y}/S_{\\lambda_Y}).\n$$",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-final-noetherian-compactification",
+  "worker": "stage1",
+  "summary": "Checked the current main-20261015 definition and its three existing statement dependencies. The descended-model definition supplies the selected model and stage, its properties lemma supplies separatedness, finite presentation and Noetherianity, and the recursive Noetherian construction supplies the object being specialized. Finite presentation includes finite type. This is a definition, so no proof steps or new nodes are required. Recorded actual Mathlib searches; none defines this project-specific chosen object. The supplied source now contains descendedModelCompactification, but the direct-delivery brief expressly requires a split rather than another attachment response.",
+  "blueprint": "Realizes exactly the defining displayed formula C_{Y,lambda_Y}=C_Noeth(Y_{lambda_Y}/S_{lambda_Y}) in the current main-20261015 node (order 382), within the unit step: descend to a separated finitely presented model over a Noetherian stage, compactify it by the Noetherian case, then base change. The present item is the middle construction only."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-b80341424",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-b80341424 (reviewer sub-agent of L); spot-checked: I read the item, all three stmt_deps, the unit and both blueprint copies; the full checks are in review.md. The statement matches the defining display in master (order 375) and main-20261015 (order 382) verbatim: C_{Y,λ_Y}=C_Noeth(Y_{λ_Y}/S_{λ_Y}). The hypotheses of def-nagata-noetherian-compactification (Noetherian base, separated, finite type) all come from lemma-nagata-final-descended-model, which gives separated, finite presentation (hence finite type) and S_{λ_Y} Noetherian. The model and stage come from def-nagata-final-descended-model, as revised by its recorded 2026-10-12 statement change. All three stmt_deps are used. proof=[] is right for a definition, and the compactification property stays in lemma-nagata-final-noetherian-compactification. Edge cases: if Y is empty, C_Noeth is the empty stage C_0; no hypothesis is added. Duplicate search with rg over dag/nodes for C_{Y and mathrm{Noeth} found no second definition, so same_as=[] is correct. The Mathlib searches include all three kinds and none finds this object. This is the middle object of the single step of unit sk-cor-nagata-sketch-fp; it is not the key node, so the realized fields are correctly left alone. No new nodes, no SGA, no tool_uses, and no re-split note applies. Advisory: the descended-model node calls the stage D(λ_Y), while the item and the accepted lemma write S_{λ_Y}; the lemma stmt_dep fixes the meaning and the blueprint text is verbatim, so I left it."
  }
 }
