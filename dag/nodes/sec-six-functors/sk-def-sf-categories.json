@@ -3,24 +3,76 @@
  "blueprint": {
   "is": "sk-def-sf-categories",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sf-categories"
+  ]
  },
  "kind": "definition",
  "title": "Ambient categories and small subcategories",
- "statement": "Fix a scheme $T$ carrying a coefficient stage $\\Lambda$ and a site — the\n*small étale* or the *small pro-étale* site of\ndef:weil-pbc-etale-site and def:weil-pbc-proetale-site. The\n*ambient* categories are the ordinary derived categories of\n$\\Lambda_T$-modules\n\n$$\nD(T,\\Lambda),\\quad D^+(T,\\Lambda),\\quad D^-(T,\\Lambda),\\quad D^b(T,\\Lambda),\n$$\n\ntogether with, for a set of primes $P$ invertible on $T$, the full\nsubcategory $D^+_{P\\text{-tor}}(T,\\Lambda)$ of complexes whose geometric\nstalks are torsion with prime divisors in $P$\n(sbc-def-derived-categories-with-allowable-torsion). The *small*\ncategories are the full subcategories\n\n$$\n\\Dbc(T,\\Lambda)\\subseteq D^b(T,\\Lambda),\\qquad\n\\Dctf(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda),\\qquad\nD_c^{[a,b]}(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda)\n$$\n\nof bounded constructible complexes, of bounded constructible complexes of\nfinite Tor amplitude, and of bounded constructible complexes with cohomology\nconcentrated in $[a,b]$\n(def:weil-finite-torsion-constructibility,\ndef:weil-finite-tor-amplitude,\ndef:weil-constructible-intervals); at the field stages\n$\\Dctf=\\Dbc$ by definition.",
+ "statement": "For a scheme $T$, adopt exactly the ambient and small category constructions of [def-sf-categories], with the following notation and coefficient conventions.\n\nChoose $\\tau=\\mathrm{\\acute et}$ or $\\mathrm{pro\\acute et}$ and a sheaf of commutative rings $R_T$ on the corresponding small site $T_\\tau$. The ambient categories are\n$$\nD(T_\\tau,R_T)=D(\\operatorname{Mod}(R_T)),\\qquad\nD^+(T_\\tau,R_T),\\quad D^-(T_\\tau,R_T),\\quad D^b(T_\\tau,R_T).\n$$\nHere $\\operatorname{Mod}(R_T)$ is the abelian category of sheaves of $R_T$-modules, $D$ is its ordinary derived category, and the three full subcategories consist respectively of objects with cohomology vanishing in sufficiently negative degrees, in sufficiently positive degrees, and outside a finite interval. For a set of primes $P$ invertible on $T$, $D^+_{P\\text{-tor}}(T_\\tau,R_T)$ is the full subcategory of $D^+(T_\\tau,R_T)$ on the objects $K$ such that every element $x$ in every geometric stalk of every cohomology sheaf $\\mathcal H^i(K)$ has a positive annihilator $m$ all of whose prime divisors lie in $P$. The stalk is taken on the chosen site. This is a condition on cohomology stalk groups.\n\nFor the coefficient stages, fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, a finite extension $E/\\mathbf Q_\\ell$ inside it, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$, and an integer $n\\ge1$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Require $\\ell$ invertible on $T$ when using the finite-Tor conventions. For $\\Lambda=A_{E,n}$, on either chosen site the small categories are\n$$\nD^b_c(T_\\tau,\\Lambda)\\subseteq D^b(T_\\tau,\\Lambda),\\qquad\nD^b_{ctf}(T_\\tau,\\Lambda)\\subseteq D^b_c(T_\\tau,\\Lambda),\\qquad\nD_c^{[a,b]}(T_\\tau,\\Lambda)\\subseteq D^b_c(T_\\tau,\\Lambda)\n$$\nfor integers $a\\le b$. They consist, respectively, of bounded objects with constructible cohomology, of those objects having finite Tor amplitude, and of those objects with $\\mathcal H^i(K)=0$ for $i\\notin[a,b]$. Finite Tor amplitude means that there are integers $u\\le v$ such that $K\\otimes^L_{\\Lambda_T}M$ has cohomology only in $[u,v]$ for every degree-zero $\\Lambda_T$-module sheaf $M$. Constructibility and tensor products are those on the specified site in [def-sf-categories]. All these subcategories have the morphisms, identities and composition of the containing category.\n\nFor $\\Lambda=\\mathcal O_E$, the ambient category is on the pro-etale site with completed ring sheaf $\\widehat{\\mathcal O}_{E,T}=\\varprojlim_j(A_{E,j})_T$. Its small category $D^b_c(T,\\mathcal O_E)$ is the derived-complete category whose reductions are bounded constructible with one cohomological interval independent of $j$; $D^b_{ctf}(T,\\mathcal O_E)$ additionally imposes one Tor interval independent of $j$. At the field stages,\n$$\nD^b_c(T,E)=D^b_c(T,\\mathcal O_E)[1/\\varpi_E],\\qquad\nD^b_c(T,\\overline{\\mathbf Q}_\\ell)=\\mathop{\\operatorname{2-colim}}_{E'}D^b_c(T,E'),\n$$\nwhere $E'$ runs over finite extensions of $\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, using scalar localization and the common-stage category of [def-sf-categories]. Define $D^b_{ctf}=D^b_c$ at these two field stages. At the three higher stages, $D_c^{[a,b]}$ denotes the full subcategory on the intersection of the shifted standard halves $D_c^{\\ge a}\\cap D_c^{\\le b}$ specified there. The higher-stage constructions have these completed, localized and common-stage meanings; an identification with ordinary discrete constant-coefficient categories is not included.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-categories/_section.md",
   "place": "node sk-def-sf-categories, order 2484"
  },
  "stmt_deps": [
-  "sk-def-sf-operations"
+  "def-sf-categories"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived categories of sheaves of modules on the etale and pro etale sites with bounded constructible finite Tor amplitude subcategories and allowable torsion cohomology",
+   "results": "{\"t\": \"2026-10-21T04:17:00Z\", \"tool\": \"leanfinder\", \"query\": \"Derived categories of sheaves of modules on the etale and pro etale sites with bounded constructible finite Tor amplitude subcategories and allowable torsion cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"HasDerivedCategory.standard\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"173af9b0aad9fc8c\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: hits supply generic derived categories, cohomological bounds or condensed modules, not the site-dependent constructible, finite-Tor and coefficient-stage categories. Existing DAG definition def-sf-categories supplies the package."
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|DerivedCategoryFiniteTor|torAmplitudeIn|boundedConstructible",
+   "results": "{\"t\": \"2026-10-21T04:17:13Z\", \"tool\": \"grep\", \"query\": \"constructibleFiniteTor|DerivedCategoryFiniteTor|torAmplitudeIn|boundedConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: hits supply generic derived categories, cohomological bounds or condensed modules, not the site-dependent constructible, finite-Tor and coefficient-stage categories. Existing DAG definition def-sf-categories supplies the package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible derived category of sheaves with finite Tor amplitude on an etale or proetale site",
+   "results": "{\"t\": \"2026-10-21T04:17:13Z\", \"tool\": \"leansearch\", \"query\": \"Bounded constructible derived category of sheaves with finite Tor amplitude on an etale or proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.sheafIsAbelian\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules.IsFiniteType\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.HasExt\"], \"digest\": \"b0c755f1ae4d2bbf\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: hits supply generic derived categories, cohomological bounds or condensed modules, not the site-dependent constructible, finite-Tor and coefficient-stage categories. Existing DAG definition def-sf-categories supplies the package."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Sheaf",
+   "results": "{\"t\": \"2026-10-21T04:17:14Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Invalid identifier in this query; no absence conclusion from this attempt. The corrected quoted-name Loogle query is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|[Tt]or[Aa]mplitude|[Ff]inite[Tt]or",
+   "results": "{\"t\": \"2026-10-21T04:17:52Z\", \"tool\": \"grep\", \"query\": \"constructible|[Tt]or[Aa]mplitude|[Ff]inite[Tt]or\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: hits supply generic derived categories, cohomological bounds or condensed modules, not the site-dependent constructible, finite-Tor and coefficient-stage categories. Existing DAG definition def-sf-categories supplies the package."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"constructible\"",
+   "results": "{\"t\": \"2026-10-21T04:17:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"constructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: hits supply generic derived categories, cohomological bounds or condensed modules, not the site-dependent constructible, finite-Tor and coefficient-stage categories. Existing DAG definition def-sf-categories supplies the package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves over finite coefficient rings and completed integral l adic rings rationalized derived categories with finite Tor dimension",
+   "results": "{\"t\": \"2026-10-21T04:17:54Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible sheaves over finite coefficient rings and completed integral l adic rings rationalized derived categories with finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"Condensed.profiniteSolid\", \"HasDerivedCategory.standard\", \"CondensedMod.IsSolid\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"cf28bf1faa266c0d\"}",
+   "date": "2026-10-21",
+   "verdict": "No complete match: hits supply generic derived categories, cohomological bounds or condensed modules, not the site-dependent constructible, finite-Tor and coefficient-stage categories. Existing DAG definition def-sf-categories supplies the package."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -46,5 +98,20 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-def-sf-categories",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-sf-categories",
+  "worker": "stage1",
+  "summary": "Reused the already split and reviewed def-sf-categories, whose original blueprint text is identical, as the sole statement dependency. Removed the reverse dependency on six-functor operations. STATEMENT-DISPUTED: clarified the blanket coefficient-site wording by the existing reviewed completed-integral, rationalized and common-stage conventions, with the explicit source type check and counterexample in report.md. Retained all ambient boundedness, cohomological allowable-torsion, finite constructibility, Tor and interval clauses. No new nodes and no complete Lean/Mathlib attachment.",
+  "blueprint": "Realizes the whole statement of sk-def-sf-categories/_section.md via its already reviewed same-statement definition def-sf-categories.md. The unit has no proof steps. The coefficient clarification is the same correction already reviewed for def-sf-categories and follows the detailed coefficient definitions named by the source. No unit proof route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-d6780274b",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-d6780274b (reviewer sub-agent of L); spot-checked: I read the source sk-def-sf-categories/_section.md (main-20261015, order 2484). Its body is identical to def-sf-categories.md; only the front matter differs. The delivery reuses the reviewed def-sf-categories (Q63 pass) as its only stmt_dep and creates no new nodes. I compared the item with that definition clause by clause: ambient D/D+/D-/Db of Mod(R_T) on either site; elementwise P-torsion on cohomology stalks of the chosen site; the A_{E,n} constructible/ctf/interval full subcategories with l invertible for ctf; the completed O_E pro-étale sheaf with uniform reduction intervals; scalar localization at E and the common-stage 2-colimit at Q̄_l, with ctf = c by definition; higher-stage intervals via the standard halves. Nothing is added, dropped or weakened. The source correction holds: the identity of Z_l is continuous but not locally constant, so the discrete and completed constant sheaves differ; a ϖ-torsion object dies after localization. Edge cases: P empty forces zero stalks; over Z/l^2, Tor_i(A/l, A/l) = A/l for every i, so the finite stage needs ctf as a separate condition. Dropping the stmt_dep on the node sk-def-sf-operations removes the old in_cycle edge, and that unit is still reached through def-weil-rationalization-karoubi and the other coefficient definitions. A traversal from def-sf-categories (2726 nodes) does not reach the item, so there is no cycle. The unit changed only realized/realized_by; the only citer, sk-lem-sf-kunneth-star, is consistent with the item. The item is still imported on live, has no repair note, is not dropped, and cites no SGA. No fixes were needed."
+ }
 }
