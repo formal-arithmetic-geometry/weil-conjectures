@@ -210,18 +210,19 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-filtered-two-colimit",
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-772b6636d",
-  "group": "Q69",
+  "reviewer": "NT-stage2-cc-ade963785",
+  "group": "NI",
   "result": "pass",
-  "note": "Review is complete and reports no findings. The immutable delivery matches the statement and dependencies, uses concrete definitions with documented named proof obligations, and passed the required compilation and dry run. The source-required Nonempty I hypothesis was already repaired; no further correction is required."
+  "note": "Item theorem comparison_characterization matches the node: EssSurj<->EssSurjObj, Full<->HomSurj, Faithful<->HomInj, IsFilteredTwoColimit<->IsEquivalence, with the canonical comparison of the model; statement verbatim; Nonempty I is the Stacks directed convention; universes independent. The section 1(B) repair restores the model module deleted on live 2026-10-20 (only the lean field changes; the item is now reached via the TwoColimit target in queue.md). Its tau, normalization (HEq pins satisfiable, constant-system probe), cocycle and compatibility match the node; Hom sets are the actual ColimitType with universal property; composition, identity and comparison are real data; the 15 sorries are law theorems listed in lean.declarations. No name clash on live. nt_compile --json: model 1.8 s, item 1.2 s, clean. Maintainer note: re-creates a module deleted as dead."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FilteredTwoColimitModel",
   "declaration": "CategoryTheory.FilteredTwoColimit.category",
   "declarations": [
    "CategoryTheory.CoherentCategoryCocone",
+   "CategoryTheory.FilteredTwoColimit.Object",
    "CategoryTheory.FilteredTwoColimit.CommonStage",
    "CategoryTheory.FilteredTwoColimit.commonStagePreorder",
    "CategoryTheory.FilteredTwoColimit.HomAt",
@@ -235,7 +236,6 @@
    "CategoryTheory.FilteredTwoColimit.homClass_transition",
    "CategoryTheory.FilteredTwoColimit.homCocone",
    "CategoryTheory.FilteredTwoColimit.homCocone_isColimit",
-   "CategoryTheory.FilteredTwoColimit.Object",
    "CategoryTheory.FilteredTwoColimit.identityHom",
    "CategoryTheory.FilteredTwoColimit.commonStage_isFiltered",
    "CategoryTheory.FilteredTwoColimit.homClass_eq_iff",
@@ -257,12 +257,12 @@
    "CategoryTheory.FilteredTwoColimit.comparison"
   ],
   "file": "lean/Sheaf/CategoryTheory/FilteredTwoColimitModel.lean",
-  "statement": "def category : Category (Object (I := I) (C := C))",
+  "statement": "instance category : Category (Object c)",
   "branch": "newtargets-dag",
-  "by": "Q69",
-  "date": "2026-10-16",
+  "by": "NI",
+  "date": "2026-10-21",
   "existing": false,
-  "note": "Concrete pair objects, Mathlib hom-diagram ColimitType with an explicit colimit cocone and universal-property statement, common-stage composition and canonical comparison. All named law or independence theorems belong to this definition node and its supplied proof steps. Definitions contain no sorry; independent object and morphism universes are retained. 2026-10-20 (U): module Sheaf.CategoryTheory.FilteredTwoColimitModel deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Section 1(B) repair: the recorded module was deleted on 2026-10-20; scompile.py --source confirms Module source unavailable. Reconstructs precisely the node: normalized coherent cocone, pair objects, actual Hom set colimits with lifted universal cocone, common-stage composition, and the canonical comparison. All data is explicit; named law theorems belong to this definition node. Independent universes are retained."
  },
  "lean_audit": {
   "master": {

@@ -181,5 +181,26 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-6359e11e8 (reviewer sub-agent of L); spot-checked: I read the whole split; it is correct and needs no fixes. The delivery has no new nodes. The item statement matches main-20261015 det-def-sfb-filtered-two-colimit-characterization.md exactly, its stmt_deps (model, conditions) are unchanged, and nothing is weakened. Steps 1-4 follow the four blueprint proof points and are correct against the model and conditions statements. The index set {k ≥ i,j} is directed and nonempty, so the existing filtered set-colimit node (Stacks 04AX) applies through its clauses (1) and (3). Step 3 conjugates by the associators to pass from T_mn to the transition map t_mn. Step 4 uses that τ_kkn is the identity, which is the model's own normalization. Step 5 uses the two existing equivalence nodes (Stacks 02C3, at categories.tex l.403 with l.362) only for what they state: one direction each, with no triangle identities assumed. Small cases (a single index, empty stage categories, arrows that become equal only at a later stage) behave correctly. No existing node or blueprint statement duplicates the item, and the live FilteredTwoColimit.lean only defines the three conditions without proving this characterization. Batch-5 finding: lem-trf-fully-faithful-ess-surj-equivalence is the general Stacks 02C3 fact (fully faithful and essentially surjective implies equivalence). Its only dependency is def-nagata-category, it has no proof dependencies, and it is not a step of the trace-formula or Poincaré-duality proofs, so I accept the citation. No item or cited node is on the route-pivot drop list."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredTwoColimitCharacterization",
+  "declaration": "CategoryTheory.FilteredTwoColimit.comparison_characterization",
+  "declarations": [
+   "CategoryTheory.FilteredTwoColimit.comparison_characterization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredTwoColimitCharacterization.lean",
+  "statement": "theorem comparison_characterization {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] {C : I → Type u} [∀ i : I, Category.{v} (C i)] {D : Type u'} [Category.{v'} D] (c : CoherentCategoryCocone (C := C) (D := D)) : ((comparison c).EssSurj ↔ c.toCategoryCocone.EssSurjObj) ∧ ((comparison c).Full ↔ c.toCategoryCocone.HomSurj) ∧ ((comparison c).Faithful ↔ c.toCategoryCocone.HomInj) ∧ (c.toCategoryCocone.IsFilteredTwoColimit ↔ (comparison c).IsEquivalence)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ade963785",
+  "group": "NI",
+  "result": "pass",
+  "note": "Item theorem comparison_characterization matches the node: EssSurj<->EssSurjObj, Full<->HomSurj, Faithful<->HomInj, IsFilteredTwoColimit<->IsEquivalence, with the canonical comparison of the model; statement verbatim; Nonempty I is the Stacks directed convention; universes independent. The section 1(B) repair restores the model module deleted on live 2026-10-20 (only the lean field changes; the item is now reached via the TwoColimit target in queue.md). Its tau, normalization (HEq pins satisfiable, constant-system probe), cocycle and compatibility match the node; Hom sets are the actual ColimitType with universal property; composition, identity and comparison are real data; the 15 sorries are law theorems listed in lean.declarations. No name clash on live. nt_compile --json: model 1.8 s, item 1.2 s, clean. Maintainer note: re-creates a module deleted as dead."
  }
 }
