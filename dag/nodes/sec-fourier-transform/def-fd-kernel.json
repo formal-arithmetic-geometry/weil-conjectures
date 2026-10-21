@@ -3,26 +3,77 @@
  "blueprint": {
   "is": "def-fd-kernel",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-kernel"
+  ]
  },
  "kind": "definition",
  "title": "The Fourier kernel and integrand",
- "statement": "Let $S_0$ be a separated\nscheme of finite type over $k_0$, let $V_0\\to S_0$ be a vector\nbundle of rank $r$ with dual $V_0^\\vee$, and let\n\n$$\nb:V_0\\times_{S_0}V_0^\\vee\\longrightarrow\\mathbf A^1_{S_0},\\qquad\n(x,\\xi)\\longmapsto\\langle x,\\xi\\rangle,\n$$\n\nbe the evaluation pairing, a morphism of $S_0$-schemes; composed with\n$\\mathbf A^1_{S_0}\\to\\mathbf A^1_{k_0}$ it is a global function\n$b\\in\\Gamma(V_0\\times_{S_0}V_0^\\vee,\\mathcal O)$. The\n*Fourier kernel* is the Artin–Schreier sheaf of [def-fd-artin-schreier-sheaf]\nattached to this function,\n\n$$\n\\mathcal K_\\psi:=\\mathcal L_{\\psi,b}=b^*\\mathcal L_\\psi,\n\\qquad \\mathcal L_\\psi=\\mathcal L_{\\psi,x}\\ \\text{on }\\mathbf A^1_{k_0},\n$$\n\non $V_0\\times_{S_0}V_0^\\vee$; the two descriptions agree because the\nArtin–Schreier covering of $f\\circ h$ is the pullback along $h$ of the\ncovering of $f$, so $h^*\\mathcal L_{\\psi,f}=\\mathcal L_{\\psi,f\\circ h}$.\nFor $K\\in D^b_c(V,E)$ (the\ncoefficient category of [def-weil-pbc-qbar-category]), the\n*Fourier integrand* is\n\n$$\n\\mathcal F_\\psi(K):=p_1^*K\\otimes^L_E\\mathcal K_\\psi\\in D^b_c(V\\times_SV^\\vee,E),\n$$\n\nwith $p_1:V\\times_SV^\\vee\\to V$ the first projection; the Fourier–Deligne\ntransform is its compact-support direct image along the second projection\n$p_2$. (The triple product $V\\times_SV^\\vee\\times_SV'$ with its projections\n$r_{ij}$ is introduced separately, for the composition of kernel transforms.)",
+ "statement": "Let $p$ be a prime and let $\\Lambda$ be a commutative ring in which $p$ is invertible. Let $\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes [def-weil-pbc-scheme-conventions], and put $W=V\\times_SV'$ [def-pc-fibre-product]. Assume $p=0$ in $\\Gamma(W,\\mathcal O_W)$; this condition allows $W$ to be empty. Fix a global function $b\\in\\Gamma(W,\\mathcal O_W)$ (the pairing) and a group homomorphism $\\Psi:(\\mathbf F_p,+)\\to\\Lambda^\\times$ (an additive character, allowed to be trivial).\n\nGive $W$ its canonical $\\mathbf F_p$-scheme structure: the ring map $\\mathbf Z\\to\\Gamma(W,\\mathcal O_W)$ factors through $\\mathbf F_p=\\mathbf Z/p\\mathbf Z$, and this ring map determines the structure morphism $W\\to\\operatorname{Spec}\\mathbf F_p$ by [lem-a1-locally-ringed-space-affine-adjunction]. View $b$ as the $\\mathbf F_p$-morphism\n$$\n \\widetilde b:W\\longrightarrow\\mathbf A^1_{\\mathbf F_p}=\\operatorname{Spec}(\\mathbf F_p[t])\n$$\ncorresponding to the ring map $\\mathbf F_p[t]\\to\\Gamma(W,\\mathcal O_W)$ that sends $t$ to $b$, using [def-sbc-affine-space] and [lem-a1-locally-ringed-space-affine-adjunction].\n\nLet $\\mathcal L_\\Psi$ be the Artin–Schreier sheaf on $\\mathbf A^1_{\\mathbf F_p}$ of [def-fd-artin-schreier-sheaf], using its current main-20261015 general-coefficient definition with $k=\\mathbf F_p$ and $q=p$. The Fourier kernel is\n$$\n \\mathcal K_\\psi:=\\mathcal L_{\\Psi,b}:=\\widetilde b^*\\mathcal L_\\Psi\n \\quad\\text{in }\\operatorname{Sh}(W_{\\mathrm{\\acute et}},\\Lambda\\text{-}\\mathrm{Mod}).\n$$\nHere the small étale site is [def-weil-pbc-etale-site] and $\\widetilde b^*$ is inverse image of sheaves with fixed coefficient ring [def-weil-pbc-inverse-image]. The notation $b^*\\mathcal L_\\Psi$ abbreviates $\\widetilde b^*\\mathcal L_\\Psi$; the equality with $\\mathcal L_{\\Psi,b}$ is the definition of the Artin–Schreier sheaf of a function, not a further base-change assertion.\n\nIn the application, use the finite-field data $q=p^a$ and $k_0=\\mathbf F_q$ of [def-fourier-set], $S=S_0$ is a separated scheme of finite type over $k_0$ (the conventions of [def-weil-pbc-scheme-conventions]), and $V=V_0\\to S_0$ is a vector bundle of rank $r$ as in [def-asd-vector-bundle-zero-section]. Take $V'=V_0^\\vee$, its dual vector bundle, with $b(x,\\xi)=\\langle x,\\xi\\rangle$. In local dual frames the pairing is $\\sum_{i=1}^r x_i\\xi_i$; the dual changes of coordinates are inverse transposes. For $S_0=\\operatorname{Spec}k_0$, $V_0=\\mathbf A^1_{k_0}$, this gives $b(x,\\xi)=x\\xi$ and the usual notation $\\mathcal L_{\\Psi,x\\xi}$ for the kernel.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-def-kernel/def-fd-kernel.md",
   "place": "node def-fd-kernel, order 2691"
  },
  "stmt_deps": [
   "def-fd-artin-schreier-sheaf",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-sbc-affine-space",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-asd-vector-bundle-zero-section",
+  "def-fourier-set"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fourier kernel on the small etale site defined as pullback of the Artin Schreier sheaf along a global function",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, SheafOfModules.pullback",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned site, structure-sheaf pullback, or ring-theoretic declarations do not define the Fourier kernel or the Artin–Schreier sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"artinSchreier\"",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned site, structure-sheaf pullback, or ring-theoretic declarations do not define the Fourier kernel or the Artin–Schreier sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "fourierKernel|artinSchreierSheaf|Fourier.Deligne",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned site, structure-sheaf pullback, or ring-theoretic declarations do not define the Fourier kernel or the Artin–Schreier sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier sheaf of an additive character pulled back along a pairing of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.sheaf, AlgebraicGeometry.IsIntegralHom.instFstScheme",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned site, structure-sheaf pullback, or ring-theoretic declarations do not define the Fourier kernel or the Artin–Schreier sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.Schreier|artin[Ss]chreier|exponential[Ss]heaf",
+   "results": "0 hits: none; subdirectory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned site, structure-sheaf pullback, or ring-theoretic declarations do not define the Fourier kernel or the Artin–Schreier sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isotypic component of pushforward along x to x to the p minus x over a finite field defining an exponential etale sheaf",
+   "results": "8 hits: BDeRham, StandardEtalePair.hasMap_X, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.homEquiv_symm_apply, Algebra.etaleLocus, StandardEtalePair.instEtaleRing",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned site, structure-sheaf pullback, or ring-theoretic declarations do not define the Fourier kernel or the Artin–Schreier sheaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -54,5 +105,21 @@
   "statement": "Let $\\Lambda$ be a commutative ring in which the prime $p$ is invertible,\nlet $\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes such that\n$V\\times_SV'$ has characteristic $p$ (that is, $p=0$ in\n$\\Gamma(V\\times_SV',\\mathcal O)$), let\n$b\\in\\Gamma(V\\times_SV',\\mathcal O)$ be a global function (the\n*pairing*), and let $\\Psi:(\\mathbf F_p,+)\\to\\Lambda^\\times$ be an\nadditive character. The *Fourier kernel* is the Artin–Schreier sheaf of\n[def-fd-artin-schreier-sheaf], for $k=\\mathbf F_p$, attached to $b$:\n\n$$\n\\mathcal K_\\psi:=\\mathcal L_{\\Psi,b}=b^*\\mathcal L_\\Psi ,\n$$\n\na sheaf of $\\Lambda$-modules on the small étale site of $V\\times_SV'$,\nwhere $b$ is viewed as a morphism $V\\times_SV'\\to\\mathbf A^1_{\\mathbf F_p}$.\nIn the application, $S=S_0$ is a separated scheme of finite type over\n$k_0$ (conventions of [def-weil-pbc-scheme-conventions]), $V=V_0\\to S_0$\nis a vector bundle of rank $r$, $V'=V_0^\\vee$ is its dual, and\n$b(x,\\xi)=\\langle x,\\xi\\rangle$ is the evaluation pairing; on the affine\nline over a field this is the sheaf $\\mathcal L_{\\psi(x\\xi)}$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-fd-kernel",
+  "worker": "stage1",
+  "summary": "Followed the main-20261015 blueprint_update rather than the obsolete adic-integrand statement. Split this definition by naming its existing construction dependencies; made the canonical F_p structure, evaluation ring map, fixed-coefficient inverse image and dual-frame pairing explicit. Retained p=0 in global sections, including the empty scheme, and allowed trivial characters and the zero coefficient ring. The project fourierKernel declaration at Defs.lean:154 requires the strictly stronger CharP condition and is not an attachment. No new nodes and no proof steps; all six Mathlib searches were run and their hits inspected. Removed the unused qbar-category dependency. The application explicitly takes its finite-field data from def-fourier-set, realizing the setting-unit edge required by sk-def-kernel without identifying discrete and adic coefficient categories.",
+  "blueprint": "Definition def-fd-kernel and unit sk-def-kernel in literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-kernel/: the data in the opening paragraph, the displayed pullback definition, and the final vector-bundle/affine-line application. This definition has no proof steps. blueprint.from remains null because the item is itself imported; same_as records the unit definition sk-def-kernel. The master source field and all blueprint_update/import metadata are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-14a9109c2",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-14a9109c2 (reviewer sub-agent of L); spot-checked: I read the item in full against main-20261015 sec-fourier-transform/sk-def-kernel/def-fd-kernel.md (order 3035) and _section.md (3034). The delivery has 0 new nodes and no proof. The statement now follows the BU: commutative Lambda with p invertible, arbitrary V->S<-V', p=0 in Gamma(W,O) with W allowed to be empty, b in Gamma(W,O), Psi on F_p allowed to be trivial, and K_psi := b~^*L_Psi in Sh(W_et, Lambda-Mod). No hypothesis is added and no coefficient category is changed. The F_p-structure and b~: W->Spec F_p[t] come from the Gamma-Spec adjunction leaf; def-sbc-affine-space gives A^1 = Spec F_p[t]. L_Psi and L_{Psi,f}=f^*L_Psi are from the BU of def-fd-artin-schreier-sheaf with k=F_p, q=p. The module-sheaf inverse image is def-weil-pbc-inverse-image, last sentence. The application takes q, k_0 from def-fourier-set and the frames from def-asd-vector-bundle-zero-section; the inverse-transpose gluing (x^T G)(G^{-1} xi) = x^T xi checks. I read all 9 cited statements. There is no cycle (live closure of 167 nodes does not contain the item). Both cited units, sk-def-as and sk-def-fourier-set, are reached, so no tool_uses are needed. No SGA source is used. The Lean fourierKernel needs CharP Gamma(W) p, which fails on empty W, so not attaching it is right. Edge cases tested: W empty, Lambda=0, trivial Psi, p=2, b=0, rank 0 and rank 1. FIX (one file): the delivered unit record would replace Q35's landed sk-def-kernel.realized.statement=[sk-def-kernel] (merged 07:23 UTC) with [def-fd-kernel]. fixes/dag/units/sk-def-kernel.json keeps both [sk-def-kernel, def-fd-kernel], with realized_by=def-fd-kernel. Maintainer notes: (1) prop-base-linear step 4 cites 'the integrand assertion in [def-fd-kernel]', a clause the current blueprint dropped; lem-fd-stalk-formula step 4 and lem-fd-base-change steps 1/5 read the kernel adically. They should be repointed to def-fd-adic-fourier-realization and prop-kernel-lisse. This delivery cannot edit those nodes. (2) def-fd-kernel and sk-def-kernel are same-unit twins stating the same definition; merging them is the maintainer's call. (3) The dual bundle and evaluation pairing have no definition node; this is advisory, as on the landed twin.; 1 file(s) fixed by the reviewer"
  }
 }
