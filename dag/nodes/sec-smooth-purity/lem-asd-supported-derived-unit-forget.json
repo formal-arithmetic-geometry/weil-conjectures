@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the proved generic exact-single unit comparison [lem-asd-derived-single-unit-exact] to the inverse-image/direct-image adjunction. Unfold the generic single-unit composite and the existing concrete unit and constant comparison; their explicit composites coincide definitionally. A closed immersion supplies exactness of direct image. Express the result through Ext.homEquiv.",
+   "text": "Apply the proved generic exact-single unit comparison [lem-asd-derived-single-unit-exact] to the inverse-image/direct-image adjunction. The concrete unit is the cached explicit generic unit [def-asd-derived-single-unit]. A closed immersion supplies exactness of direct image. Express the result through Ext.homEquiv.",
    "uses": [
     "lemma-weil-pbc-finite-direct-image-exact",
     "lem-asd-derived-single-unit-exact"
@@ -87,7 +87,7 @@
   "declaration": "AlgebraicGeometry.Etale.supported_derived_unit_forget",
   "statement": "theorem supported_derived_unit_forget (A : Type (u + 1)) [CommRing A]\n    {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]\n    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) F 2) :\n    (Ext.mk₀ (ordinaryFiniteIntegralGenerator A T)).comp\n      ((Ext.homEquiv.symm (supportedDerivedUnit A i ≫ supportedExactDerivedMap\n        (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D) F κ)).mapExactFunctor\n          (RawModuleScalarComparison.forget A T)) (zero_add 2) =\n    (Ext.mk₀ (supportedIntegralUnit i)).comp\n      ((Ext.mk₀ (supportedIntegralGenerator A i)).comp\n        (κ.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2))\n      (zero_add 2)",
   "branch": "sheaf-dag",
-  "by": "C3",
+  "by": "T3",
   "date": "2026-10-21"
  },
  "reviewed": {
@@ -103,12 +103,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
-  "result": "pass",
-  "landing": "20261021T002927-L-1578869",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
  },
  "lean_audit": {}
 }

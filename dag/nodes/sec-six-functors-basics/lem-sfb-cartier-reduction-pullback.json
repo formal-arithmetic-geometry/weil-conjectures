@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-cartier-reduction-pullback",
+ "kind": "statement",
+ "title": "Cartier-preserving pullback of the canonical boundary",
+ "statement": "For n>0 and finite A killed by n there is one OrdinaryFiniteTwistTransport [def-asd-ordinary-finite-p1-arrows] such that the canonical classes [def-sfb-geo-cartier-canonical-class] satisfy the pro-etale base-change square [def-sfb-geo-cartier-interface] for every Cartesian square of effective Cartier immersions with n invertible on both bases. The specified counit-mate exchange is invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-canonical-class",
+  "def-sfb-geo-cartier-interface",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Pull back local regular equations and the pole extension. The pulled equations are regular by the Cartier hypothesis. The assignment t inverse↦(g*t) inverse and pullback of units glue, since changes by units are respected. The finite-stalk formula identifies the closed exchange with identity on the supported constant stalks and zero elsewhere.",
+   "uses": [
+    "def-sp-cartier-pole-boundary",
+    "def-pc-divisor-line-bundle",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
+   }
+  },
+  {
+   "text": "Naturality of the relative boundary and derived scalar extension proves the ordinary Ext square. One normalized roots transport works for all schemes: its root inclusion and pure tensor equations fix its components. Uniqueness of the relative boundary identifies both ordinary classes with the canonical ones.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
+   }
+  },
+  {
+   "text": "Comparison preserves inverse-image commutation and counits. The adjunct of closed exchange is inverse-image commutation followed by the pulled counit. Adjunction injectivity therefore identifies its comparison with the actual geoCartierExchange. Transport the ordinary square and its invertibility through the supported comparison isomorphisms. Identity and empty pullbacks give identity and zero maps respectively.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "def-sfb-geo-cartier-canonical-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartier-pole-boundary",
+  "def-pc-divisor-line-bundle",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-pe-direct-image-comparison",
+  "def-sfb-geo-cartier-canonical-class"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kummer boundary class of an effective Cartier divisor commutes with coefficient homomorphisms and pullback",
+   "results": "Eight hits: PreTilt.coeff, CochainComplex.HomComplex.δ_units_smul, WeierstrassCurve.map_b₄, Scheme.Cover.pullbackHom_map, CommRingCat.KaehlerDifferential.map.congr_simp, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass, KaehlerDifferential.map_liftBaseChange_smul, Algebra.Presentation.differentials.comm₂₃'.",
+   "date": "2026-10-21",
+   "verdict": "No supported Cartier class or its compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective Cartier divisor supported Kummer cycle class natural under pullback and extension of finite coefficients",
+   "results": "Eight general algebraic-geometry hits; no supported Kummer Ext class.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\", \"Ext\"",
+   "results": "Zero hits.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|Kummer|cycleClass",
+   "results": "Mathlib has Cartier divisor and number-theoretic Kummer declarations, but no supported étale/pro-étale Cartier cycle class. Project search finds CartierReductionSiteComparison, OrdinarySupportedCartierKummer, GeoCartierCoeffExtension, and the generic exponent comparison.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the ordinary normalized Kummer class. The naturality clauses require matching interfaces; modulus follows by Ext naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "date": "2026-10-21",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierReductionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierReductionPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartierCanonicalClass_pullback",
+  "statement": "theorem geoCartierCanonicalClass_pullback (A : Type (u + 1)) [CommRing A] [Finite A]\n    (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) :\n    ∃ t : Etale.OrdinaryFiniteTwistTransport A n hA,\n      ∀ {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')\n        [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z) (gD : D' ⟶ D)\n        (sq : IsPullback gD i' i g) (hI : i.ker.IsInvertible) (hI' : i'.ker.IsInvertible)\n        (hZ : IsUnit (n : Γ(Z, ⊤))) (hZ' : IsUnit (n : Γ(Z', ⊤))),\n        IsIso (geoCartierExchange A i i' g gD sq.toCommSq) ∧\n        (Ext.mk₀ (geoCartierExchange A i i' g gD sq.toCommSq)).comp\n            (geoCartierCanonicalClass A n hn hA i' hI' hZ') (zero_add 2) =\n          ((geoCartierCanonicalClass A n hn hA i hI hZ).mapExactFunctor\n            (upperStar (ModuleCat.{u + 1} A) g)).comp\n            (Ext.mk₀ (geoCartierLinePullback A n hA t g hZ).hom) (add_zero 2)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+ }
+}

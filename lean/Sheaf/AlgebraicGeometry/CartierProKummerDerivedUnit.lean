@@ -57,6 +57,7 @@ theorem pro_kummer_derived_unit
     CartierScalarUnit (cartierForget A Z) (Scheme.proEtaleUnitsSheaf Z)
       (geoCartierLine A n hA Z) 1 (cartierProKummerUnit A n hA Z hn hZ) := by
   let R := ULift.{u + 1} (ZMod n)
+  unfold GeoCartierScalarCompatibility at hcompat
   obtain ⟨η, θ, hη, hθ, hηunit, hθunit, hsquare⟩ := hcompat
   have : IsIso (Etale.ordinaryFiniteRootMap R n hR Z) :=
     Etale.residueFiniteRootMap_isIso Z n hR
@@ -73,11 +74,14 @@ theorem pro_kummer_derived_unit
     (Scheme.proEtaleRootsOfUnityInclusion Z n) (kernel.condition _)
     (cartierProKummer_exact Z n hn hZ)
     (asIso (cartierProRootMap R n hR Z hn hZ))
-  change (Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ).DerivedUnit _ _ θ at hθunit
+  unfold GeoCartierScalarUnit at hθunit
+  have hθunit' : (Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ).DerivedUnit _ _ θ := by
+    simpa only [Functor.DerivedUnit, Sheaf.IsDerivedBaseChange,
+      Sheaf.derivedRestrictScalars, Category.assoc] using hθunit
   have hcomp := Functor.derivedExtUnit_comp
     (Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ) (cartierForget R Z) 1
     ((cartierProKummer_exact Z n hn hZ).extClass.comp
-      (Ext.mk₀ (cartierProRootMap R n hR Z hn hZ)) (add_zero 1)) θ hRu hθunit
+      (Ext.mk₀ (cartierProRootMap R n hR Z hn hZ)) (add_zero 1)) θ hRu hθunit'
   have hγ := pro_root_scalar n hn φ hR hA Z hZ θ hθ
   have hiso := Functor.derivedExtUnit_iso
     ((Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ) ⋙ (cartierForget R Z))

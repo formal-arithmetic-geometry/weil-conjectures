@@ -1,0 +1,138 @@
+{
+ "id": "def-sfb-geo-cartier-interface",
+ "kind": "definition",
+ "title": "Ordinary supported Cartier class interfaces",
+ "statement": "For a scheme Z, a commutative coefficient ring A killed by N, and a closed immersion i:D→Z, let A_D be the constant pro-étale module, and let A_Z(1) be the comparison inverse image of the finite étale roots tensor line [lem-asd-finite-etale-twist-line]. Define GeoCartierClass to be Ext²(i_*A_D,A_Z(1)), using ordinary pro-étale direct image [def-weil-proetale-module-direct-image]. Its simultaneous families range over all positive prime-power exponents and finite coefficient rings annihilated by that power. The source comparison is the closed direct-image adjunction mate followed by the constant comparison; exchange is the mate of inverse-image commutation followed by the pulled-back counit and constant comparison. The finite-line pullback is the site-comparison square followed by the normalized étale transport [lem-asd-etale-finite-twist-pullback]. The Chern predicate is the Kummer boundary of the dual Cartier ideal, with its actual constant-to-support map. The coefficient predicate requires units normalized on constant sections and pure root tensors, their derived Hom universal properties against every unbounded complex, and the corresponding Ext square. Base change and exponent independence are the literal Ext squares for these specified maps. These definitions assert no existence of a class or compatibility. Underlying interfaces: [def-pc-divisor-line-bundle], [def-weil-pbc-proetale-modules], [def-weil-pbc-site-comparison-morphism], [sk-def-kummer], [lem-asd-finite-etale-twist-line], [def-sf-comparison-derived-pullback], [lem-sc-line-bundle-torsor], [lem-sc-torsor-h1], [lem-amb-kummer-any-base], [lem-pur-derived-change-of-rings], [def-weil-pbc-inverse-image], [lem-asd-etale-finite-twist-pullback], [def-weil-proetale-inverse-image], [def-weil-proetale-module-direct-image], [def-asd-ordinary-supported-kummer-boundary], [def-asd-ordinary-finite-p1-arrows].",
+ "stmt_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-kummer",
+  "lem-asd-finite-etale-twist-line",
+  "def-sf-comparison-derived-pullback",
+  "lem-sc-line-bundle-torsor",
+  "lem-sc-torsor-h1",
+  "lem-amb-kummer-any-base",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-inverse-image",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Statement and opening comparison paragraph: objects and normalization diagrams"
+ },
+ "proof": [
+  {
+   "text": "Name the existing integral and module-coefficient Ext smallness instances on the pro-etale site once. Each proof specializes the library instance. These proposition-only caches avoid rebuilding localization smallness in exposed Ext composites; no Ext object or operation changes. Ordinary etale caches are supplied by the public OrdinaryFiniteP1Kummer interface.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic",
+  "place": "HasExt and the existing sheaf-category smallness instance; proof-only specialization cache."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kummer boundary class of an effective Cartier divisor commutes with coefficient homomorphisms and pullback",
+   "results": "Eight hits: PreTilt.coeff, CochainComplex.HomComplex.δ_units_smul, WeierstrassCurve.map_b₄, Scheme.Cover.pullbackHom_map, CommRingCat.KaehlerDifferential.map.congr_simp, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass, KaehlerDifferential.map_liftBaseChange_smul, Algebra.Presentation.differentials.comm₂₃'.",
+   "date": "2026-10-21",
+   "verdict": "No supported Cartier class or its compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective Cartier divisor supported Kummer cycle class natural under pullback and extension of finite coefficients",
+   "results": "Eight general algebraic-geometry hits; no supported Kummer Ext class.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\", \"Ext\"",
+   "results": "Zero hits.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|Kummer|cycleClass",
+   "results": "Mathlib has Cartier divisor and number-theoretic Kummer declarations, but no supported étale/pro-étale Cartier cycle class. Project search finds CartierReductionSiteComparison, OrdinarySupportedCartierKummer, GeoCartierCoeffExtension, and the generic exponent comparison.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the ordinary normalized Kummer class. The naturality clauses require matching interfaces; modulus follows by Ext naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "date": "2026-10-21",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Statement and opening paragraph: fixed ordinary-module interfaces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeoCartierCycleClassDefs",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoCartierCycleClassDefs.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartierConstant",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.geoCartierConstant",
+   "AlgebraicGeometry.ProEtale.geoCartierLine",
+   "AlgebraicGeometry.ProEtale.GeoCartierClass",
+   "AlgebraicGeometry.ProEtale.GeoCartierClassFamily",
+   "AlgebraicGeometry.ProEtale.geoCartierSourceComparison",
+   "AlgebraicGeometry.ProEtale.geoCartierSourceConstant_isIso",
+   "AlgebraicGeometry.ProEtale.geoCartierPullbackSquare",
+   "AlgebraicGeometry.ProEtale.geoCartierExchange",
+   "AlgebraicGeometry.ProEtale.geoCartierLinePullback",
+   "AlgebraicGeometry.ProEtale.GeoCartierChernEquation",
+   "AlgebraicGeometry.ProEtale.GeoCartierScalarUnit",
+   "AlgebraicGeometry.ProEtale.GeoCartierScalarCompatibility",
+   "AlgebraicGeometry.ProEtale.GeoCartierBaseChange",
+   "AlgebraicGeometry.ProEtale.GeoCartierExponentIndependence",
+   "AlgebraicGeometry.ProEtale.geoCartierIntegralExt",
+   "AlgebraicGeometry.ProEtale.geoCartierModuleExt"
+  ],
+  "statement": "def geoCartierConstant (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :\n    Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+ }
+}

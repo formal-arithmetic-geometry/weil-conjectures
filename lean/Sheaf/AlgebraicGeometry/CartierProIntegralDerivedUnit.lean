@@ -58,6 +58,7 @@ theorem pro_integral_derived_unit
       ((lowerStar (ModuleCat.{u + 1} A) i).obj (geoCartierConstant A D)) 0
       (Ext.mk₀.{u + 1} (cartierProIntegralGenerator A i)) := by
   let R := ULift.{u + 1} (ZMod n)
+  unfold GeoCartierScalarCompatibility at hcompat
   obtain ⟨η, θ, hη, hθ, hηunit, hθunit, hsquare⟩ := hcompat
   let U := Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ
   let V := cartierForget R Z
@@ -68,10 +69,13 @@ theorem pro_integral_derived_unit
   let H := (lowerStar (ModuleCat.{u + 1} A) i).obj (geoCartierConstant A D)
   let η' : G ⟶ U.obj H := (lowerStar (ModuleCat.{u + 1} R) i).map η
   have hRu := pro_integral_residue_derived_unit n hn i
-  change U.DerivedUnit G H η' at hηunit
+  unfold GeoCartierScalarUnit at hηunit
+  have hηunit' : U.DerivedUnit G H η' := by
+    simpa only [Functor.DerivedUnit, Sheaf.IsDerivedBaseChange,
+      Sheaf.derivedRestrictScalars, Category.assoc] using hηunit
   have hcomp := Functor.scalar_unit_comp U V F G H
     (cartierProIntegralGenerator R i) η'
-    hRu hηunit
+    hRu hηunit'
   have hγ := pro_supported_generator_scalar φ i η hη
   change (cartierForget A Z).DerivedUnit F H
     (cartierProIntegralGenerator R i ≫ V.map η') at hcomp

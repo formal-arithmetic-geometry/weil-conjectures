@@ -47,5 +47,16 @@ def derivedSingleUnit (adj : f ⊣ g) (X : C) (Y : D) (c : f.obj X ⟶ Y) :
     g.rightDerivedFunctor.map (f.singleFunctorCompLeftDerivedFunctorIso.hom.app X ≫
       (DerivedCategory.singleFunctor D 0).map c)
 
+/-- Expand the cached single-object unit to its original full derived composite.
+Source: Stacks 0A45 (blueprint: def-asd-derived-single-unit).
+Proof: unfold the named cache; both sides are the same morphism. -/
+theorem derivedSingleUnit_eq (adj : f ⊣ g) (X : C) (Y : D) (c : f.obj X ⟶ Y) :
+    derivedSingleUnit adj X Y c =
+      adj.derivedAdjunction.unit.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
+        g.rightDerivedFunctor.map (f.singleFunctorCompLeftDerivedFunctorIso.hom.app X ≫
+          (DerivedCategory.singleFunctor D 0).map c) := by
+  unfold derivedSingleUnit
+  rfl
+
 end
 end CategoryTheory.Adjunction

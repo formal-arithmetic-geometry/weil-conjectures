@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.CartierProKummerDerivedUnit
 import Sheaf.AlgebraicGeometry.CartierProIntegralDerivedUnit
 import Sheaf.AlgebraicGeometry.EtaleSupportedIntegralDerivedUnit
 import Sheaf.AlgebraicGeometry.DerivedScalarExtUnitZero
+import Sheaf.AlgebraicGeometry.GeoCartierCycleClass
 
 /-! # Cartier reduction and site comparison
 Source: blueprint main-20261015, Cartier comparison proof

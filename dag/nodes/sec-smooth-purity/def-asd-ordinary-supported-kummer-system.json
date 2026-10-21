@@ -18,9 +18,23 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03PL, lemma-kummer-sequence, applied to the relative line-bundle class; supported realization follows the relative-cone construction in the blueprint lem-amb-cartier-kummer-map.md, with ordinary roots-of-unity twist and derived scalar extension; Tag 0A45, lemma-cohomology-with-support-triangle (etale-cohomology.tex), and the supported-Hom interface of lem-amb-closed-support-hom"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Implement the canonical full derived-unit/single-comparison composite through the explicit generic cache [def-asd-derived-single-unit]. Unfolding the cache gives the original full left-derived/right-derived adjunction unit followed by the right-derived image of the same single-object and constant-sheaf comparisons; no mathematical definition changes.",
+   "uses": [
+    "def-asd-derived-single-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-derived-single-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Canonical derived unit and single-object realization in the supported Kummer construction; implementation cache only."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -159,7 +173,8 @@
   "branch": "newtargets-dag",
   "by": "Q39",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": " B3 cache repair: supportedDerivedUnit keeps its existing signature and the same full derived-unit/single-comparison composite, now named by derivedSingleUnit with category instances elaborated once. Local instance selection matches the proofs captured in DerivedCategoryModule. No mathematical data or other definition body changes. See coord/changes/supported-derived-unit-comparison-cache.md."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -176,5 +191,15 @@
   "group": "Q39",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, definitions, universes, edge cases, docstrings, and verbatim signatures. All four modules reproduced clean per-file scompile.py checks. No fixes required; repository and branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
  }
 }

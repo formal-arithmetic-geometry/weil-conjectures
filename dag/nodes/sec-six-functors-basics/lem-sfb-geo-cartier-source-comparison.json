@@ -1,0 +1,113 @@
+{
+ "id": "lem-sfb-geo-cartier-source-comparison",
+ "kind": "statement",
+ "title": "The supported constant comparison mate is invertible",
+ "statement": "For a commutative ring A and a closed immersion i:D→Z, the specified geoCartierSourceComparison [def-sfb-geo-cartier-interface] is invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 1: identify the source by the canonical comparison mate"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof": [
+  {
+   "text": "A closed immersion is quasi-compact and quasi-separated. The ordinary closed-image comparison mate is invertible by the direct-image comparison theorem; compose it with direct image of the constant-sheaf comparison isomorphism. This composite is the specified source map.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 1: identify the source by the canonical comparison mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 1: identify the source by the canonical comparison mate",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kummer boundary class of an effective Cartier divisor commutes with coefficient homomorphisms and pullback",
+   "results": "Eight hits: PreTilt.coeff, CochainComplex.HomComplex.δ_units_smul, WeierstrassCurve.map_b₄, Scheme.Cover.pullbackHom_map, CommRingCat.KaehlerDifferential.map.congr_simp, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass, KaehlerDifferential.map_liftBaseChange_smul, Algebra.Presentation.differentials.comm₂₃'.",
+   "date": "2026-10-21",
+   "verdict": "No supported Cartier class or its compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective Cartier divisor supported Kummer cycle class natural under pullback and extension of finite coefficients",
+   "results": "Eight general algebraic-geometry hits; no supported Kummer Ext class.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\", \"Ext\"",
+   "results": "Zero hits.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|Kummer|cycleClass",
+   "results": "Mathlib has Cartier divisor and number-theoretic Kummer declarations, but no supported étale/pro-étale Cartier cycle class. Project search finds CartierReductionSiteComparison, OrdinarySupportedCartierKummer, GeoCartierCoeffExtension, and the generic exponent comparison.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the ordinary normalized Kummer class. The naturality clauses require matching interfaces; modulus follows by Ext naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "date": "2026-10-21",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Paragraph 1: identify the source by the canonical comparison mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeoCartierSourceComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoCartierSourceComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartierSourceComparison_isIso",
+  "statement": "instance geoCartierSourceComparison_isIso (A : Type (u + 1)) [CommRing A]\n    {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :\n    IsIso (geoCartierSourceComparison A i)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+ }
+}

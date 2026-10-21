@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-geo-cartier-canonical-class",
+ "kind": "definition",
+ "title": "Comparison pullback of the canonical Cartier class",
+ "statement": "For n>0, finite A killed by n and effective Cartier i:D→Z with n invertible on Z, define geoCartierCanonicalClass in the ordinary pro-etale Ext group [def-sfb-geo-cartier-interface] by exact comparison inverse image of the unique ordinary boundary class [def-sfb-geo-cartier-canonical-etale], precomposed with the inverse supported mate [lem-sfb-geo-cartier-source-comparison]. It satisfies the forward comparison equation with that ordinary boundary class.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 1: apply exact comparison inverse image to the constructed class"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-interface",
+  "def-sfb-geo-cartier-canonical-etale",
+  "lem-sfb-geo-cartier-source-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply exact comparison inverse image to the unique ordinary class and precompose with the inverse supported-source mate. Associativity of Ext composition and the two inverse identities prove the forward comparison equation. The construction uses no arbitrary choice of an isomorphism.",
+   "uses": [
+    "def-sfb-geo-cartier-canonical-etale",
+    "lem-sfb-geo-cartier-source-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 1: apply exact comparison inverse image to the constructed class"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-geo-cartier-canonical-etale",
+  "lem-sfb-geo-cartier-source-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 1: apply exact comparison inverse image to the constructed class",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kummer boundary class of an effective Cartier divisor commutes with coefficient homomorphisms and pullback",
+   "results": "Eight hits: PreTilt.coeff, CochainComplex.HomComplex.δ_units_smul, WeierstrassCurve.map_b₄, Scheme.Cover.pullbackHom_map, CommRingCat.KaehlerDifferential.map.congr_simp, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass, KaehlerDifferential.map_liftBaseChange_smul, Algebra.Presentation.differentials.comm₂₃'.",
+   "date": "2026-10-21",
+   "verdict": "No supported Cartier class or its compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective Cartier divisor supported Kummer cycle class natural under pullback and extension of finite coefficients",
+   "results": "Eight general algebraic-geometry hits; no supported Kummer Ext class.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\", \"Ext\"",
+   "results": "Zero hits.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|Kummer|cycleClass",
+   "results": "Mathlib has Cartier divisor and number-theoretic Kummer declarations, but no supported étale/pro-étale Cartier cycle class. Project search finds CartierReductionSiteComparison, OrdinarySupportedCartierKummer, GeoCartierCoeffExtension, and the generic exponent comparison.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the ordinary normalized Kummer class. The naturality clauses require matching interfaces; modulus follows by Ext naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "date": "2026-10-21",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Paragraph 1: apply exact comparison inverse image to the constructed class",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeoCartierCanonicalClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoCartierCanonicalClass.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartierCanonicalClass",
+  "statement": "def geoCartierCanonicalClass (A : Type (u + 1)) [CommRing A] [Finite A]\n    (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}\n    (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (hZ : IsUnit (n : Γ(Z, ⊤))) : GeoCartierClass A n hA i",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.geoCartierCanonicalClass",
+   "AlgebraicGeometry.ProEtale.geoCartierCanonicalClass_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+ }
+}

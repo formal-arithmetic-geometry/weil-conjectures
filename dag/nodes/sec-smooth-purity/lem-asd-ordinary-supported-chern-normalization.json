@@ -1,0 +1,125 @@
+{
+ "id": "lem-asd-ordinary-supported-chern-normalization",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-supported-kummer",
+   "place": "The scalar-Chern and unit clauses, projected for any uniquely normalized supported representative",
+   "via": []
+  },
+  "same_as": []
+ },
+ "title": "Ordinary Chern realization of a normalized supported class",
+ "statement": "Let N>0, A a finite commutative ring killed by N, T a scheme on which N is invertible, and i:D→T a closed immersion with invertible kernel ideal. Use the concrete constant module sheaf and finite Tate line [def-asd-ordinary-finite-p1-kummer-class], the supported boundary and divisor Chern class [def-asd-ordinary-supported-kummer-boundary], and the canonical derived unit and exact-direct-image realization [def-asd-ordinary-supported-kummer-system]. If κ∈Ext²_A(i_*A_D,A_T(1)) satisfies the supported boundary, then the ordinary scalar cohomology realization of u_i ; supportedExactDerivedMap(κ) equals c₁(O_T(D)).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PL and 0A45; the scalar-Chern and unit clauses of lem-asd-ordinary-supported-kummer"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-system"
+ ],
+ "proof": [
+  {
+   "text": "Unfold ordinaryFiniteClass. Apply supported_derived_unit_forget to identify its Ext realization with the supported integral-unit/generator composite; compose supported_kummer_chern_realization to identify that same composite with the divisor Chern class.",
+   "uses": [
+    "lem-asd-supported-derived-unit-forget",
+    "lem-asd-supported-kummer-chern-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-supported-derived-unit-forget",
+  "lem-asd-supported-kummer-chern-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PL and 0A45: compose the existing supported-unit forgetting and Chern-realization identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supported.*[Cc]hern|[Cc]hern.*supported",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No supported Kummer/Chern interface in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext.homEquiv\"",
+   "results": "4 hits: Ext.homEquiv, Ext.homEquiv₀, Ext.homEquiv₀_symm_apply, Ext.homEquiv_chgUniv",
+   "date": "2026-10-21",
+   "verdict": "Use Ext.homEquiv cancellation; supported statement is in the project."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting support of a Cartier divisor Kummer class gives the Chern class of its divisor line bundle",
+   "results": "8 unrelated hits: Scheme.IdealSheafData.mkOfMemSupportIff_ideal, ClassGroup.mkMMem, Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, exists_eq_pow_mul_of_isAffineOpen, ClassGroup.mk0, exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, Scheme.IdealSheafData.isLocalization_away.",
+   "date": "2026-10-21",
+   "verdict": "Use ordinary_supported_kummer, the existing project theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting support of a Cartier divisor Kummer class gives the Chern class of its divisor line bundle",
+   "results": "8 hits: smoothSheafCommRing.ι_forgetStalk_hom_apply; Algebra.unramifiedLocus_eq_compl_support; smoothSheafCommRing.forgetStalk; ClassGroup.mk0; CochainComplex.HomComplex.CohomologyClass.mk_sub; ClassGroup.mk.congr_simp; ClassGroup.mk_def; Function.FactorizedRational.divisor",
+   "date": "2026-10-20",
+   "verdict": "The results concern unrelated support, ideal classes and cohomology; use the existing project theorem ordinary_supported_kummer."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "date": "2026-10-21",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinarySupportedChernNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinarySupportedChernNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinary_supported_kummer_chern",
+  "statement": "theorem ordinary_supported_kummer_chern (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)\n    [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))\n      (Scheme.finiteEtaleTateLine T N A hA) 2)\n    (hκ : SupportedKummerBoundary A N hA i hI hT κ) :\n    ordinaryFiniteClass A T (Scheme.finiteEtaleTateLine T N A hA) 2\n      (supportedDerivedUnit A i ≫ supportedExactDerivedMap\n        (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D)\n        (Scheme.finiteEtaleTateLine T N A hA) κ) =\n      supportedKummerChern A N hA i hI hT",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-21"
+ },
+ "restoration": {
+  "from_commit": "cf48da8d1bd",
+  "original_created": {
+   "by": "worker",
+   "item": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals",
+   "date": "2026-10-21",
+   "group": "A7"
+  },
+  "original_lean_by": "A7",
+  "reason": "Restore the requested ordinary Chern consumer after batch recovery, with a shorter proved composition route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+ }
+}

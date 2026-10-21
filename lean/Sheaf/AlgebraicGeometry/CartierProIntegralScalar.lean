@@ -62,6 +62,7 @@ private theorem source_comparison_unit (A : Type (u + 1)) [CommRing A]
     ((comparisonUpperStarConstantSheafIso A D).app (ModuleCat.of A A)).hom
   simp only [Functor.comp_map] at hh
   erw [← hh]
+  rfl
 
 private theorem constant_generator_scalar {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]

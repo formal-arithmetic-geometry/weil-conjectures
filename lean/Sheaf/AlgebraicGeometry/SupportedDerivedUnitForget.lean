@@ -77,13 +77,12 @@ private theorem derived_unit_class (A : Type (u + 1)) [CommRing A]
     Ext.homEquiv.symm (supportedDerivedUnit A i ≫ supportedExactDerivedMap
       (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D) F κ) =
     (Ext.mk₀ (supportedConstantUnit A i)).comp κ (zero_add 2) := by
-  have h := singleUnitCore_comp (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i)
-    (ordinaryFiniteConstant A T) (ordinaryFiniteConstant A D)
-    ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).hom.app
-      (ModuleCat.of A A)) F κ
-  unfold Adjunction.derivedSingleUnit at h
-  unfold supportedDerivedUnit ordinaryFiniteUnitPullback
-  exact h
+  unfold supportedDerivedUnit
+  exact
+    singleUnitCore_comp (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i)
+      (ordinaryFiniteConstant A T) (ordinaryFiniteConstant A D)
+      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).hom.app
+        (ModuleCat.of A A)) F κ
 
 private def integralUnitAux {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     supportedIntegralConstant Y ⟶

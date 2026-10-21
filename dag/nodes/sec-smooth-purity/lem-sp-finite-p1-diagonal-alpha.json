@@ -31,9 +31,10 @@
    }
   },
   {
-   "text": "The abstract two-adjunction lemma transports fullness and faithfulness from the identity through this isomorphism, so the composite adjunction unit is invertible. Expand alpha, use naturality of the second unit, and identify it with this composite unit followed by the image of the composite of the two constant-object comparison isomorphisms. All these factors are invertible. The Lean proof uses the Mathlib composite-unit formula and full-faithfulness unit instance.",
+   "text": "The abstract two-adjunction lemma transports fullness and faithfulness from the identity through this isomorphism, so the composite adjunction unit is invertible. Expand alpha, use naturality of the second unit, and identify it with this composite unit followed by the image of the composite of the two constant-object comparison isomorphisms. All these factors are invertible. The Lean proof uses the Mathlib composite-unit formula and full-faithfulness unit instance. The private generic cached-unit helper expands derivedSingleUnit_eq at abstract categories and applies this same two-adjunction argument before specializing to scheme sheaves; this preserves the construction while avoiding repeated expansion of concrete derived adjunctions.",
    "uses": [
-    "def-kun-unbounded-exchange"
+    "def-kun-unbounded-exchange",
+    "def-asd-derived-single-unit"
    ],
    "elementary": true,
    "source": {
@@ -44,7 +45,8 @@
  ],
  "proof_deps": [
   "def-kun-unbounded-exchange",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-asd-derived-single-unit"
  ],
  "proof_origin": {
   "by": "agent",
@@ -119,14 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-810d7",
-  "group": "G5",
-  "result": "pass",
-  "landing": "20261020T230743-L-608710",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
   "kind": "interface",
-  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
  },
  "lean_audit": {}
 }

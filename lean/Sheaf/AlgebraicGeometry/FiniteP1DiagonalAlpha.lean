@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import Sheaf.CategoryTheory.DerivedSingleUnit
+import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerSystem
 
 /-! # Invertibility of the diagonal source comparison
 
@@ -17,8 +19,8 @@ lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 universe u
 
@@ -48,6 +50,50 @@ private theorem isIso_pasted_units
     simp only [Category.assoc]
   rw [he]
   infer_instance
+
+section
+open MonoidalCategory
+universe vC vD uC uD
+variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
+  [Abelian C] [Abelian D]
+  [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C]
+  [MonoidalCategory D] [MonoidalPreadditive D] [HasCountableCoproducts D]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
+  [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).obj X)]
+  [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution D]
+  [HasDerivedCategory.{vC} C] [HasDerivedCategory.{vD} D]
+  [HasKInjectiveResolutions C] [HasKInjectiveResolutions D]
+  {f : C ⥤ D} {g : D ⥤ C} {f' : D ⥤ C} {g' : C ⥤ D}
+  [f.Additive] [g.Additive] [f'.Additive] [g'.Additive]
+  [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+  [PreservesFiniteLimits f'] [PreservesFiniteColimits f']
+
+private theorem isIso_pasted_single_units (adj : f ⊣ g) (adj' : f' ⊣ g')
+    (e : f.leftDerivedFunctor ⋙ f'.leftDerivedFunctor ≅ 𝟭 (DerivedCategory C))
+    (X : C) (Y : D) (Z : C) (c : f.obj X ≅ Y) (c' : f'.obj Y ≅ Z) :
+    IsIso (adj.derivedSingleUnit X Y c.hom ≫
+      g.rightDerivedFunctor.map (adj'.derivedSingleUnit Y Z c'.hom)) := by
+  rw [Adjunction.derivedSingleUnit_eq, Adjunction.derivedSingleUnit_eq]
+  exact isIso_pasted_units adj.derivedAdjunction adj'.derivedAdjunction e
+    (f.singleFunctorCompLeftDerivedFunctorIso.app X ≪≫
+      (DerivedCategory.singleFunctor D 0).mapIso c)
+    (f'.singleFunctorCompLeftDerivedFunctorIso.app Y ≪≫
+      (DerivedCategory.singleFunctor C 0).mapIso c')
+end
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 attribute [local irreducible] projectiveLineDiagonalAlpha ordinaryFiniteUnitPullback
   derivedUpperStarLowerStarAdjunction
@@ -79,17 +125,14 @@ theorem isIso_projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
   let e := (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i p
     (𝟙 (ProjectiveLine S)) hi.symm).symm ≪≫ eId
   unfold projectiveLineDiagonalAlpha supportedDerivedUnit
-  exact isIso_pasted_units
-    (L₁ := (upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor)
-    (R₁ := (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor)
-    (L₂ := (upperStar (ModuleCat.{u + 1} A) i).leftDerivedFunctor)
-    (R₂ := (lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor)
-    (X := ordinaryFiniteUnit A (ProjectiveLine S))
-    (Y := ordinaryFiniteUnit A
+  exact isIso_pasted_single_units
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i) e
+    (ordinaryFiniteConstant A (ProjectiveLine S))
+    (ordinaryFiniteConstant A
       (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))
-    (Z := ordinaryFiniteUnit A (ProjectiveLine S))
-    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i) e
-    (ordinaryFiniteUnitPullback A p) (ordinaryFiniteUnitPullback A i)
+    (ordinaryFiniteConstant A (ProjectiveLine S))
+    ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) p).app (ModuleCat.of A A))
+    ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).app (ModuleCat.of A A))
 
 end AlgebraicGeometry.Etale

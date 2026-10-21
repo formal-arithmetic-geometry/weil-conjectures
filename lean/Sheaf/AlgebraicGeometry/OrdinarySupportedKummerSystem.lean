@@ -5,6 +5,7 @@ Authors: SHEAF group Q39
 -/
 module
 
+public import Sheaf.CategoryTheory.DerivedSingleUnit
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerScalar
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 public import WeilConjectures.SixFunctors.Finite.Exact
@@ -35,6 +36,10 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
+-- Match the category-instance proofs captured in the recorded derived module category.
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
 
 /-- The inverse-image/direct-image unit on the derived constant object.
 Source: Stacks 0A45 (blueprint: def-asd-ordinary-supported-kummer-system). -/
@@ -42,9 +47,9 @@ Source: Stacks 0A45 (blueprint: def-asd-ordinary-supported-kummer-system). -/
 def supportedDerivedUnit (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     ordinaryFiniteUnit A T ⟶ (ordinaryFinitePushforward A i).obj (ordinaryFiniteUnit A D) :=
-  (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).unit.app
-      (ordinaryFiniteUnit A T) ≫
-    (ordinaryFinitePushforward A i).map (ordinaryFiniteUnitPullback A i).hom
+  Adjunction.derivedSingleUnit (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i)
+    (ordinaryFiniteConstant A T) (ordinaryFiniteConstant A D)
+    ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).hom.app (ModuleCat.of A A))
 
 
 /-- Realize an Ext class after the canonical exact-direct-image comparison.

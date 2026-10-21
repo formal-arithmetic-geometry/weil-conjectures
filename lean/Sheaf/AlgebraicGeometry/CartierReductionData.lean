@@ -6,7 +6,7 @@ Authors: SHEAF group Q54
 module
 
 public import Sheaf.AlgebraicGeometry.CartierPoleBoundary
-public import Sheaf.AlgebraicGeometry.GeoCartierCycleClass
+public import Sheaf.AlgebraicGeometry.GeoCartierCycleClassDefs
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
 public import Sheaf.Paper.DivisibleExtensionDerivedReduction
 public import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections

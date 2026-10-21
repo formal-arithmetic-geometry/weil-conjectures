@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-geo-cartier-canonical-chern",
+ "kind": "statement",
+ "title": "Chern normalization under the actual comparison mate",
+ "statement": "For n>0, finite A killed by n and effective Cartier i:D→Z with n invertible on Z, the canonical comparison class [def-sfb-geo-cartier-canonical-class] satisfies GeoCartierChernEquation [def-sfb-geo-cartier-interface], using the Kummer Chern class of the dual Cartier ideal and the specified pro-etale constant-to-support map.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 1 and 5: compatibility with units and the positive Chern equation"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-canonical-class",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the ordinary boundary representative, derived arrow and Kummer Chern class from the ordinary supported Kummer theorem. Boundary uniqueness identifies its representative with the canonical ordinary class.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "def-sfb-geo-cartier-canonical-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraphs 1 and 5: compatibility with units and the positive Chern equation"
+   }
+  },
+  {
+   "text": "The exact direct-image single-object comparison intertwines the ordinary derived unit and supportedExactDerivedMap with precomposition by the constant-to-support unit in Ext. Apply it to the ordinary unit equation. The integral-generator equation for the supplied Chern witness is unchanged.",
+   "uses": [
+    "def-asd-ordinary-supported-kummer-system",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraphs 1 and 5: compatibility with units and the positive Chern equation"
+   }
+  },
+  {
+   "text": "The comparison mate commutes with units by the adjunction triangle identities. Apply exact comparison inverse image to the ordinary Ext equation, identify constants by their canonical comparison, and cancel the invertible supported mate. This is the specified pro-etale Chern equation, with the positive boundary of the dual ideal. Empty support and zero coefficients give zero.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "def-sfb-geo-cartier-canonical-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraphs 1 and 5: compatibility with units and the positive Chern equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-ordinary-supported-kummer",
+  "def-sfb-geo-cartier-canonical-etale",
+  "def-asd-ordinary-supported-kummer-system",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "sk-thm-pe-direct-image-comparison",
+  "def-sfb-geo-cartier-canonical-class"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 1 and 5: compatibility with units and the positive Chern equation",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kummer boundary class of an effective Cartier divisor commutes with coefficient homomorphisms and pullback",
+   "results": "Eight hits: PreTilt.coeff, CochainComplex.HomComplex.δ_units_smul, WeierstrassCurve.map_b₄, Scheme.Cover.pullbackHom_map, CommRingCat.KaehlerDifferential.map.congr_simp, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass, KaehlerDifferential.map_liftBaseChange_smul, Algebra.Presentation.differentials.comm₂₃'.",
+   "date": "2026-10-21",
+   "verdict": "No supported Cartier class or its compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective Cartier divisor supported Kummer cycle class natural under pullback and extension of finite coefficients",
+   "results": "Eight general algebraic-geometry hits; no supported Kummer Ext class.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\", \"Ext\"",
+   "results": "Zero hits.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|Kummer|cycleClass",
+   "results": "Mathlib has Cartier divisor and number-theoretic Kummer declarations, but no supported étale/pro-étale Cartier cycle class. Project search finds CartierReductionSiteComparison, OrdinarySupportedCartierKummer, GeoCartierCoeffExtension, and the generic exponent comparison.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the ordinary normalized Kummer class. The naturality clauses require matching interfaces; modulus follows by Ext naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "date": "2026-10-21",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Paragraphs 1 and 5: compatibility with units and the positive Chern equation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeoCartierCanonicalChern",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoCartierCanonicalChern.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartierCanonicalClass_chern",
+  "statement": "theorem geoCartierCanonicalClass_chern (A : Type (u + 1)) [CommRing A] [Finite A]\n    (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}\n    (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (hZ : IsUnit (n : Γ(Z, ⊤))) :\n    GeoCartierChernEquation A n hA i hI hZ\n      (geoCartierCanonicalClass A n hn hA i hI hZ)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3bab2",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261021T134548-L-1367600",
+  "kind": "interface",
+  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+ }
+}
