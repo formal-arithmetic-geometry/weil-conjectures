@@ -21040,3 +21040,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q15/lem-trf-site-balanced-tensor-chain (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q33/lem-sfb-constant-periodic-resolution-nonzero (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q49/lem-sf-cbc-compact-support-composition-limit (reviewer FIX; after a return; new nodes: 2)
+- 08:15 L: merged deliver/Q13/lem-fix-monoidal-dual-hom-comparison (reviewer PASS; first push; new nodes: 0)

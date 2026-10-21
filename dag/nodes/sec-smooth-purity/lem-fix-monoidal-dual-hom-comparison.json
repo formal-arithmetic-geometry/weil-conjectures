@@ -13,9 +13,77 @@
   "def-sfb-monoidal-category",
   "def-sfb-strong-monoidal-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $u:\\mathbf1_{\\mathcal D}\\xrightarrow{\\sim}G\\mathbf1_{\\mathcal C}$ for the unit comparison. Set $e'=u^{-1}\\circ G(e)\\circ\\mu_{P,D}$ and $c'=\\mu_{D,P}^{-1}\\circ G(c)\\circ u$. These are maps $GP\\otimes GD\\to\\mathbf1_{\\mathcal D}$ and $\\mathbf1_{\\mathcal D}\\to GD\\otimes GP$. Expand either triangle composite using these formulas. Naturality of $\\mu$ moves $G(e)$ and $G(c)$ together; associativity coherence changes the two successive tensorators on three factors into the tensorator for the other parenthesization, and unit coherence cancels $u,u^{-1}$ against the unitors. Thus, with precisely the associators and unitors of [def-sfb-monoidal-category] inserted, the two resulting equalities are\n$$(e'\\otimes1_{GP})(1_{GP}\\otimes c')=G\\bigl((e\\otimes1_P)(1_P\\otimes c)\\bigr)=1_{GP},$$\n$$(1_{GD}\\otimes e')(c'\\otimes1_{GD})=G\\bigl((1_D\\otimes e)(c\\otimes1_D)\\bigr)=1_{GD}.$$\nEach equality is the substitution of the naturality, associativity, and unit equations in [def-sfb-strong-monoidal-functor]; no preservation-of-duals theorem is being assumed.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFP (definition-dual, functoriality immediately following it), 0FFQ (lemma-left-dual, explicit insertion/contraction proof), and 0GWJ (remark-internal-hom-monoidal). Tensor order follows the item; no symmetry is used."
+   }
+  },
+  {
+   "text": "For $N\\in\\mathcal C$ abbreviate $H_N=H_{\\mathcal C}(P,N)$ and $v_N=\\operatorname{ev}_{P,N}$. Put\n$$a_N=\\lambda_N\\circ(e\\otimes1_N)\\circ\\alpha^{-1}_{P,D,N}:P\\otimes(D\\otimes N)\\to N,$$\n$$\\phi_N=\\operatorname{curry}(a_N):D\\otimes N\\to H_N,$$\n$$\\psi_N=(1_D\\otimes v_N)\\circ\\alpha_{D,P,H_N}\\circ(c\\otimes1_{H_N})\\circ\\lambda_{H_N}^{-1}:H_N\\to D\\otimes N.$$\nThe inverse-transpose equation of [lem-pod-closed-uncurry-laws] gives $v_N(1_P\\otimes\\phi_N)=a_N$. Substitute this into $\\psi_N\\phi_N$ and move $\\phi_N$ across the insertion of $c$ by bifunctoriality. Omitting only the indicated structural isomorphisms, this reads\n$$\\psi_N\\phi_N=(1_D\\otimes a_N)(c\\otimes1_{D\\otimes N})=\\bigl((1_D\\otimes e)(c\\otimes1_D)\\bigr)\\otimes1_N=1_{D\\otimes N}.$$\nThe last equality is the assumed triangle identity for $D$. This computes an explicit inverse composite, rather than assuming an arbitrary identification of internal Hom with dual tensor.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFP (definition-dual, functoriality immediately following it), 0FFQ (lemma-left-dual, explicit insertion/contraction proof), and 0GWJ (remark-internal-hom-monoidal). Tensor order follows the item; no symmetry is used."
+   }
+  },
+  {
+   "text": "For the other composite use injectivity of the inverse adjunction bijection, with its formula in [lem-pod-closed-uncurry-laws]. Substitution of $\\psi_N$ and the equation $v_N(1_P\\otimes\\phi_N)=a_N$ gives\n$$\\operatorname{uncurry}(\\phi_N\\psi_N)=a_N(1_P\\otimes\\psi_N)=v_N\\circ\\bigl(((e\\otimes1_P)(1_P\\otimes c))\\otimes1_{H_N}\\bigr)=v_N=\\operatorname{uncurry}(1_{H_N}).$$\nFor the middle equality, both expanded maps insert $c$ between $P$ and $H_N$, giving factors $P,D,P,H_N$; contracting the first two factors by $e$ and the last two by $v_N$ commutes by the tensor bifunctor law. The assumed triangle identity for $P$ then contracts $P,D,P$ to $P$. Hence $\\phi_N\\psi_N=1_{H_N}$. Together with step 2 this makes $\\phi_N$ an isomorphism with inverse $\\psi_N$. Repeat exactly these two substitutions in $\\mathcal D$, using the triangles verified in step 1: the transpose $\\phi'_{GN}:GD\\otimes GN\\to H_{\\mathcal D}(GP,GN)$ of $a'_{GN}=\\lambda_{GN}(e'\\otimes1_{GN})\\alpha^{-1}_{GP,GD,GN}$ is an isomorphism as well.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFP (definition-dual, functoriality immediately following it), 0FFQ (lemma-left-dual, explicit insertion/contraction proof), and 0GWJ (remark-internal-hom-monoidal). Tensor order follows the item; no symmetry is used."
+   }
+  },
+  {
+   "text": "Compare the two maps $\\gamma_{P,N}\\circ G(\\phi_N)\\circ\\mu_{D,N}$ and $\\phi'_{GN}$ from $GD\\otimes GN$ to $H_{\\mathcal D}(GP,GN)$. By [lem-pod-closed-uncurry-laws] and the defining transpose of $\\gamma$, the inverse transpose of the first map is\n$$G(v_N)\\circ\\mu_{P,H_N}\\circ\\bigl(1_{GP}\\otimes(G(\\phi_N)\\circ\\mu_{D,N})\\bigr)\n=G(a_N)\\circ\\mu_{P,D\\otimes N}\\circ(1_{GP}\\otimes\\mu_{D,N}).$$\nHere tensorator naturality and $v_N(1_P\\otimes\\phi_N)=a_N$ give the equality. Expand $a_N$ in the right side. Associativity coherence first rewrites it as\n$$G(\\lambda_N)\\circ G(e\\otimes1_N)\\circ\\mu_{P\\otimes D,N}\\circ(\\mu_{P,D}\\otimes1_{GN})\\circ\\alpha^{-1}_{GP,GD,GN}.$$\nNaturality changes $G(e\\otimes1_N)\\mu_{P\\otimes D,N}$ to $\\mu_{\\mathbf1,N}(G(e)\\otimes1_{GN})$. Unit coherence says $G(\\lambda_N)\\mu_{\\mathbf1,N}=\\lambda_{GN}(u^{-1}\\otimes1_{GN})$. Thus the result is precisely $\\lambda_{GN}(e'\\otimes1_{GN})\\alpha^{-1}_{GP,GD,GN}=a'_{GN}$, the inverse transpose of the second map. Injectivity of transposition proves\n$$\\gamma_{P,N}\\circ G(\\phi_N)\\circ\\mu_{D,N}=\\phi'_{GN}.$$",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFP (definition-dual, functoriality immediately following it), 0FFQ (lemma-left-dual, explicit insertion/contraction proof), and 0GWJ (remark-internal-hom-monoidal). Tensor order follows the item; no symmetry is used."
+   }
+  },
+  {
+   "text": "Both $\\phi_N$ and $\\phi'_{GN}$ are isomorphisms by steps 2–3, and $\\mu_{D,N}$ is an isomorphism by [def-sfb-strong-monoidal-functor]. A functor preserves an explicit two-sided inverse: $G(\\phi_N)G(\\psi_N)=G(1)=1$ and $G(\\psi_N)G(\\phi_N)=1$. The equality in step 4 therefore gives\n$$\\gamma_{P,N}=\\phi'_{GN}\\circ\\mu_{D,N}^{-1}\\circ G(\\psi_N),$$\nwith inverse $G(\\phi_N)\\circ\\mu_{D,N}\\circ(\\phi'_{GN})^{-1}$. This proves invertibility of the specified comparison for every $N$, using only the displayed dual-pair identities and the strong monoidal structure.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFP (definition-dual, functoriality immediately following it), 0FFQ (lemma-left-dual, explicit insertion/contraction proof), and 0GWJ (remark-internal-hom-monoidal). Tensor order follows the item; no symmetry is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "lem-pod-closed-uncurry-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Direct inverse-and-transpose calculation expanding Tags 0FFP and 0FFQ in the left-tensor closed convention. Checked against the currently present project proof in lean/WeilConjectures/SixFunctors/Etale/Derived/GenericFibre/Comparison.lean:51–81; no attachment is claimed, as instructed by the repair brief."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +126,73 @@
    "results": "0 hits; ; ",
    "date": "2026-10-21",
    "verdict": "no match: the Cartesian-closed comparisons have extra Cartesian/closed-functor assumptions and rigid Hom equivalences do not state this comparison theorem; the exact general theorem is in the project library, not Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactPairing.map|def tensorLeftHomEquiv|def tensorRightHomEquiv|isIso_ihomComparison",
+   "results": "{\"t\": \"2026-10-21T06:46:16Z\", \"tool\": \"grep\", \"query\": \"ExactPairing.map|def tensorLeftHomEquiv|def tensorRightHomEquiv|isIso_ihomComparison\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"b77d8cd4a79458d8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed-functor results have extra hypotheses; rigid tensor-Hom equivalences are ingredients, not the specified strong-monoidal comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal functor preserves the internal Hom comparison from an object admitting a dual",
+   "results": "{\"t\": \"2026-10-21T06:46:27Z\", \"tool\": \"leansearch\", \"query\": \"A strong monoidal functor preserves the internal Hom comparison from an object admitting a dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.mk\", \"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"CategoryTheory.ihom\", \"CategoryTheory.Functor.functorCategoryClosed\", \"CategoryTheory.expComparison\", \"CategoryTheory.Functor.functorCategoryMonoidalClosed\", \"CategoryTheory.MonoidalClosed.internalHom\", \"CategoryTheory.internalHom\"], \"digest\": \"ad9f216332d9d6b1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed-functor results have extra hypotheses; rigid tensor-Hom equivalences are ingredients, not the specified strong-monoidal comparison theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactPairing\", \"ihom\"",
+   "results": "{\"t\": \"2026-10-21T06:46:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExactPairing\\\", \\\"ihom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed-functor results have extra hypotheses; rigid tensor-Hom equivalences are ingredients, not the specified strong-monoidal comparison theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor between closed monoidal categories preserves the internal Hom comparison out of an object with an exact dual pairing",
+   "results": "{\"t\": \"2026-10-21T06:46:27Z\", \"tool\": \"leanfinder\", \"query\": \"A strong monoidal functor between closed monoidal categories preserves the internal Hom comparison out of an object with an exact dual pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"CategoryTheory.expComparison\", \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"CategoryTheory.expComparison_ev\", \"CategoryTheory.uncurry_expComparison\", \"CategoryTheory.tensorRightHomEquiv\"], \"digest\": \"f39ca7281c1310db\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed-functor results have extra hypotheses; rigid tensor-Hom equivalences are ingredients, not the specified strong-monoidal comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|isIso_ihom",
+   "results": "{\"t\": \"2026-10-21T06:47:07Z\", \"tool\": \"grep\", \"query\": \"ihomUnitTensorToIhom|isIso_ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed-functor results have extra hypotheses; rigid tensor-Hom equivalences are ingredients, not the specified strong-monoidal comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact dual pairs induce tensor Hom equivalences by inserting coevaluation and contracting evaluation",
+   "results": "{\"t\": \"2026-10-21T06:47:08Z\", \"tool\": \"leansearch\", \"query\": \"Exact dual pairs induce tensor Hom equivalences by inserting coevaluation and contracting evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv\", \"dualTensorHomEquivOfBasis\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"FGModuleCat.FGModuleCatEvaluation\", \"FGModuleCat.exactPairing\", \"CategoryTheory.ExactPairing.ctorIdx\"], \"digest\": \"c5cd0c762608c3ec\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient match: tensorLeftHomEquiv gives the canonical insertion/contraction bijection, read at Rigid/Basic.lean:386–405; no new node because existing dual-tensor-adjunction nodes and the explicit elementary inverse calculation suffice"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorLeftHomEquiv",
+   "results": "{\"t\": \"2026-10-21T06:47:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.tensorLeftHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorLeftHomEquiv_tensor\"], \"digest\": \"2b447c56fd72b52b\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient match: tensorLeftHomEquiv gives the canonical insertion/contraction bijection, read at Rigid/Basic.lean:386–405; no new node because existing dual-tensor-adjunction nodes and the explicit elementary inverse calculation suffice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom comparison of a monoidal functor is invertible on a dualizable first argument",
+   "results": "{\"t\": \"2026-10-21T06:47:09Z\", \"tool\": \"leanfinder\", \"query\": \"The internal Hom comparison of a monoidal functor is invertible on a dualizable first argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"CategoryTheory.expComparison\", \"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\"], \"digest\": \"196c248d17637789\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed-functor results have extra hypotheses; rigid tensor-Hom equivalences are ingredients, not the specified strong-monoidal comparison theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact dual pairing with evaluation P tensor D to the unit and coevaluation unit to D tensor P, the canonical bijection from Hom(P tensor T,N) to Hom(T,D tensor N) inserts coevaluation and its inverse contracts evaluation",
+   "results": "{\"t\": \"2026-10-21T06:47:10Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact dual pairing with evaluation P tensor D to the unit and coevaluation unit to D tensor P, the canonical bijection from Hom(P tensor T,N) to Hom(T,D tensor N) inserts coevaluation and its inverse contracts evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorRightHomEquiv\", \"contractLeft_assoc_coevaluation\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"contractLeft_assoc_coevaluation'\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorRightHomEquiv_tensor\"], \"digest\": \"0b6fefe04ae3d955\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient match: tensorLeftHomEquiv gives the canonical insertion/contraction bijection, read at Rigid/Basic.lean:386–405; no new node because existing dual-tensor-adjunction nodes and the explicit elementary inverse calculation suffice"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-site-perfect-scalar-hom",
@@ -78,5 +209,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-monoidal-dual-hom-comparison",
+  "worker": "stage1",
+  "summary": "Proved the specified comparison by explicit inverses for dual-tensor evaluation and an expanded tensorator calculation. Both mapped snake identities are checked from strong monoidal coherence; no symmetry, exactness, equivalence, or boundedness is assumed. No new nodes: the candidate canonical dual-tensor Hom lemma is the existing dual-tensor adjunction with its two inverse formulas written out in elementary steps. Current project source now contains the previously rejected declaration, but the instruction to split rather than answer ATTACH is followed.",
+  "blueprint": "Realizes paragraph 1 of main-20261015 lem-fix-operation-reduction.proof.md: the perfect-source coefficient comparison identifies the actual evaluation maps. This is the generic categorical subargument through lem-fix-site-perfect-scalar-hom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-d70f379c2",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-d70f379c2 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery adds no new nodes, and the statement is byte-identical to the live base. The item is still unsplit live, has no repair note, is not on the dropped list and cites no SGA. All three cited nodes (def-sfb-monoidal-category, def-sfb-strong-monoidal-functor, lem-pod-closed-uncurry-laws) are Mathlib leaves, so there is no route issue and no tool_uses. I recomputed every step. Step 1: the mapped snake identities follow from the cited naturality, associativity and unit coherences of the strong monoidal functor. Step 2: psi∘phi equals the D-snake tensored with 1_N, which I checked against the triangle identities of ExactPairing D P. Step 3: uncurry(phi∘psi) = a_N(1⊗psi) = v∘(P-snake⊗1) = uncurry(1), using clauses 1-3 of uncurry-laws and injectivity. Step 4: I recomputed the transpose calculation through mu naturality, associativity coherence and left-unit coherence, and it gives a'. Step 5 writes an explicit inverse. Tensor orders are kept throughout and no braiding is used. Edge cases checked: unit duality, zero object, non-faithful G. The parent lem-fix-site-perfect-scalar-hom (live, reviewed) cites the item with the same pairing convention and the same gamma. Read-only cross-check: the sorry-free project lemma isIso_ihomComparison_app_of_exactPairing (GenericFibre/Comparison.lean:51-81) proves the same statement. Duplicate search found nothing that states the generic comparison; lem-sc-monoidal-projection-conjugate, lem-sf-source-etale-dualizable-hom-comparison, lem-ag-dual-tensor-hom-comparison and lem-sfb-dual-tensor-adjunctions are each specialized or only ingredients. Stacks 0FFP and 0FFQ (lemma-left-dual proof, categories.tex 9341ff) were read, and 0GWJ and 0GM7 were located in tags/tags. No changes."
  }
 }
