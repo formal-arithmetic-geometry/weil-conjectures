@@ -20663,3 +20663,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:25 L: returned deliver/Q63/def-per-support-condition (reviewer RETURN: C7/C8 route + E6. The delivery types CosuppCon for an arbitrary field k through lem-per-qbar-arbitrary-field-duality. Th)
 - 07:25 L: returned deliver/NQ/lem-cbc-ringed-open-extension-products (reviewer RETURN: Superseded (A7/B10). This delivery is a re-split answering the human's 2026-10-21 note, committed 05:53 UTC on base ecf1)
 - 07:25 L: returned deliver/NU/sk-def-sf-kv-maps (reviewer RETURN: E7/E1: the delivery restricts sk-def-sf-kv-maps to separated Y_i. This is the separated-target correction of def-sf-kv-m)
+- 07:26 L: returned deliver/Q31/def-per-support-condition (reviewer RETURN: Route-pivot fault: the cosupport clause cites lem-per-qbar-arbitrary-field-duality. That node is dropped (route-pivot-dr)
