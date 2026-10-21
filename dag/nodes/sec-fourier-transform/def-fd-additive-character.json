@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-fd-additive-character",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-char"
+  ]
  },
  "kind": "definition",
  "title": "Additive characters",
- "statement": "Let $k$ be a finite field or an algebraic closure of one, and let\n$p=\\operatorname{char}k$. A *nondegenerate additive character*\nof $k$ is a nontrivial homomorphism\n\n$$\n\\psi:(k,+)\\longrightarrow\\overline{\\mathbf Q}_\\ell^\\times.\n$$\n\nFor a finite field $k_0=\\mathbf F_q$ with trace\n$\\operatorname{Tr}:k_0\\to\\mathbf F_p$, the character\n$\\psi(x)=\\Psi(\\operatorname{Tr}(x))$, for a fixed nontrivial\n$\\Psi:\\mathbf F_p\\to\\overline{\\mathbf Q}_\\ell^\\times$, is called\n*the* nondegenerate additive character. For $a\\in k_0^\\times$ the scalings\n$\\psi_a(x)=\\psi(ax)$ are again nondegenerate characters.",
+ "statement": "Let $k$ be a finite field or an algebraic closure of one, and let\n$p=\\operatorname{char}k$. A *nondegenerate additive character*\nof $k$ is a nontrivial homomorphism\n\n$$\n\\psi:(k,+)\\longrightarrow\\overline{\\mathbf Q}_\\ell^\\times.\n$$\n\nFor a finite field $k_0=\\mathbf F_q$ with trace\n$\\operatorname{Tr}:k_0\\to\\mathbf F_p$, let $F'$ be a field of\ncharacteristic different from $p$ (for instance\n$\\overline{\\mathbf Q}_\\ell$), and fix a nontrivial character\n$\\Psi:\\mathbf F_p\\to F'(\\mu_p)^\\times$ with values in the $p$-th\ncyclotomic extension $F'(\\mu_p)$ of $F'$. The character\n$\\psi(x)=\\Psi(\\operatorname{Tr}(x))$ is called *the* nondegenerate\nadditive character of $k_0$. It is primitive: for every $a\\in k_0^\\times$\nthe scaling $\\psi_a(x)=\\psi(ax)$ is again nontrivial.\n\nHere $\\mathbf Q_\\ell$ is the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], $\\overline{\\mathbf Q}_\\ell$ is a fixed algebraic closure [def-weil-algebraic-closure], and $F'(\\mu_p)$ is the field obtained by adjoining the $p$-th roots of unity to $F'$. Nontrivial means that the homomorphism is not identically $1$; no injectivity of a character of $k_0$ is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-def-char/def-fd-additive-character.md",
   "place": "node def-fd-additive-character, order 2672",
@@ -16,7 +18,8 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure"
  ],
  "proof": [],
  "proof_deps": [],
@@ -29,10 +32,236 @@
     "Mathlib.NumberTheory.LegendreSymbol.AddCharacter:212 (def)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial additive character of a finite field defined by composing a nontrivial prime field character with the field trace is primitive, so every nonzero multiplicative shift is nontrivial",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AddChar.FiniteField.primitiveChar_to_Complex_isPrimitive",
+     "AddChar.FiniteField.primitiveChar",
+     "AddChar.IsPrimitive.of_ne_one",
+     "AddChar.FiniteField.primitiveChar_to_Complex",
+     "AddChar.PrimitiveAddChar.prim",
+     "AddChar.not_isPrimitive_mulShift",
+     "AddChar.primitiveZModChar",
+     "AddChar.PrimitiveAddChar.n"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: AddChar.FiniteField.primitiveChar_to_Complex_isPrimitive, AddChar.FiniteField.primitiveChar, AddChar.IsPrimitive.of_ne_one, AddChar.FiniteField.primitiveChar_to_Complex, AddChar.PrimitiveAddChar.prim"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddChar.compAddMonoidHom",
+   "results": {
+    "hits": 5,
+    "top": [
+     "AddChar.compAddMonoidHom",
+     "AddChar.compAddMonoidHom_injective_right",
+     "AddChar.compAddMonoidHom_injective_left",
+     "AddChar.compAddMonoidHom_apply",
+     "AddChar.coe_compAddMonoidHom"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: AddChar.compAddMonoidHom, AddChar.compAddMonoidHom_injective_right, AddChar.compAddMonoidHom_injective_left, AddChar.compAddMonoidHom_apply, AddChar.coe_compAddMonoidHom"
+  },
+  {
+   "tool": "grep",
+   "query": "primitiveChar|trace_surjective|compAddMonoidHom_inj|IsPrimitive.of_ne_one",
+   "results": {
+    "hits": 24,
+    "top": [
+     "Mathlib/NumberTheory/JacobiSum/Basic.lean",
+     "Mathlib/NumberTheory/GaussSum.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+     "Mathlib/NumberTheory/LegendreSymbol/Complex.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nontrivial additive character composed with a surjective additive homomorphism is nontrivial",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AddChar.compAddMonoidHom",
+     "AddChar.coe_compAddMonoidHom",
+     "AddChar.compAddMonoidHom_apply",
+     "MonoidHom.compAddChar",
+     "MulChar.ringHomComp_eq_one_iff",
+     "AddChar.mk.noConfusion",
+     "MonoidHom.compAddChar_injective_right",
+     "MulChar.ringHomComp_ne_one_iff"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: AddChar.compAddMonoidHom, AddChar.coe_compAddMonoidHom, AddChar.compAddMonoidHom_apply, MonoidHom.compAddChar, MulChar.ringHomComp_eq_one_iff"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a surjective additive monoid homomorphism is injective on additive characters",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AddChar.compAddMonoidHom_injective_left",
+     "MonoidHom.compAddChar_injective_left",
+     "MonoidHom.compAddChar_injective_right",
+     "AddChar.compAddMonoidHom_injective_right",
+     "AddMonoidHom.cancel_right",
+     "AddHom.cancel_right",
+     "AddChar.IsPrimitive.compMulHom_of_isPrimitive",
+     "AddSubmonoid.comap_injective_of_surjective"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: AddChar.compAddMonoidHom_injective_left, MonoidHom.compAddChar_injective_left, MonoidHom.compAddChar_injective_right, AddChar.compAddMonoidHom_injective_right, AddMonoidHom.cancel_right"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddChar.IsPrimitive.of_ne_one",
+   "results": {
+    "hits": 1,
+    "top": [
+     "AddChar.IsPrimitive.of_ne_one"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: AddChar.IsPrimitive.of_ne_one"
+  },
+  {
+   "tool": "grep",
+   "query": "^structure AddChar|^def compAddMonoidHom|^lemma compAddMonoidHom_injective_left|^def IsPrimitive|^theorem IsPrimitive.of_ne_one|^def mulShift|^lemma val_isUnit|^noncomputable def FiniteField.primitiveChar|^noncomputable def trace |^theorem Algebra.trace_surjective|^def CyclotomicField",
+   "results": {
+    "hits": 18,
+    "top": [
+     "Mathlib/NumberTheory/PythagoreanTriples.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+     "Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+     "Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean",
+     "Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean",
+     "Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean",
+     "Mathlib/Dynamics/SymbolicDynamics/Basic.lean",
+     "Mathlib/Algebra/Group/AddChar.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: Mathlib/NumberTheory/PythagoreanTriples.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Ff]inite|finite.*[Ff]initeDimensional|finite_of_finite|of_finite|ofFinite",
+   "results": {
+    "hits": 17,
+    "top": [
+     "Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+     "Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean"
+    ],
+    "note": "",
+    "subdirectory": "LinearAlgebra/Dimension"
+   },
+   "date": "2026-10-21",
+   "verdict": "match: Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean, Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean, Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "instance ofFinite|instance.*isSeparable|instance.*IsSeparable|instance.*isAlgebraic",
+   "results": {
+    "hits": 2,
+    "top": [
+     "308",
+     "338"
+    ],
+    "note": "",
+    "subdirectory": "FieldTheory/Perfect.lean"
+   },
+   "date": "2026-10-21",
+   "verdict": "match: 308, 338"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_to_zmod_nondegenerate",
+   "results": {
+    "hits": 2,
+    "top": [
+     "18",
+     "37"
+    ],
+    "note": "",
+    "subdirectory": "FieldTheory/Finite/Trace.lean"
+   },
+   "date": "2026-10-21",
+   "verdict": "match: 18, 37"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Ff]inite.*Module.Finite|instance.*Module.Finite|instance.*finite_of_finite|of_finite.*Module.Finite",
+   "results": {
+    "hits": 16,
+    "top": [
+     "Mathlib/RingTheory/Finiteness/Finsupp.lean",
+     "Mathlib/RingTheory/Finiteness/Finsupp.lean",
+     "Mathlib/RingTheory/Finiteness/Finsupp.lean",
+     "Mathlib/RingTheory/Finiteness/Finsupp.lean",
+     "Mathlib/RingTheory/Finiteness/Nilpotent.lean",
+     "Mathlib/RingTheory/Finiteness/Basic.lean",
+     "Mathlib/RingTheory/Finiteness/Basic.lean",
+     "Mathlib/RingTheory/Finiteness/Basic.lean"
+    ],
+    "note": "",
+    "subdirectory": "RingTheory/Finiteness"
+   },
+   "date": "2026-10-21",
+   "verdict": "match: Mathlib/RingTheory/Finiteness/Finsupp.lean, Mathlib/RingTheory/Finiteness/Finsupp.lean, Mathlib/RingTheory/Finiteness/Finsupp.lean, Mathlib/RingTheory/Finiteness/Finsupp.lean, Mathlib/RingTheory/Finiteness/Nilpotent.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "isAlgebraic_of_finite|isAlgebraic.*Finite|of_finite.*IsAlgebraic|instance.*IsAlgebraic",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "FieldTheory/Algebraic"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match in this query; other recorded queries locate the declarations"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AddChar.compAddMonoidHom",
+  "file": "Mathlib/Algebra/Group/AddChar.lean",
+  "line": 232,
+  "how": "specializes in one line per clause: AddChar (Mathlib/Algebra/Group/AddChar.lean:70) with the additional condition ψ ≠ 1 is exactly a nontrivial homomorphism from an additive group to a multiplicative group; take the codomain to be the units. The trace character is Ψ.compAddMonoidHom (Algebra.trace (ZMod p) k₀).toAddMonoidHom (AddChar.compAddMonoidHom, same file:232; evaluation formula:238). Algebra.trace (Mathlib/RingTheory/Trace/Defs.lean:71, Stacks Tag 0BIF) is the field trace. Its surjectivity is Algebra.trace_surjective (Mathlib/RingTheory/Trace/Basic.lean:521). Precomposition is injective by AddChar.compAddMonoidHom_injective_left (Mathlib/Algebra/Group/AddChar.lean:241), so its inequality-preserving map applied to Ψ ≠ 1 gives ψ ≠ 1 (the composite of the trivial character is definitionally trivial). FiniteDimensional (ZMod p) k₀ is supplied by Module.Finite.of_finite (Mathlib/RingTheory/Finiteness/Basic.lean:241); separability is supplied by PerfectField.ofFinite (:308) and Algebra.IsAlgebraic.isSeparable_of_perfectField (:338) in Mathlib/FieldTheory/Perfect.lean. Finally AddChar.IsPrimitive.of_ne_one (Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean:84) applied to ψ ≠ 1 gives exactly the scaling clause: IsPrimitive is defined there at line 61, and AddChar.mulShift (Mathlib/Algebra/Group/AddChar.lean:438, evaluation:441) is x ↦ ψ(ax). CyclotomicField p F' (Mathlib/NumberTheory/Cyclotomic/Basic.lean:654; isCyclotomicExtension:674) realizes F'(μ_p). The recorded blueprint name AddChar.FiniteField.primitiveChar (Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean:212) is the canonical special choice of Ψ; the arbitrary fixed Ψ in this statement is covered by the preceding general declarations, without identifying it with that choice."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -78,5 +307,21 @@
   "statement": "Let $k$ be a finite field or an algebraic closure of one, and let\n$p=\\operatorname{char}k$. A *nondegenerate additive character*\nof $k$ is a nontrivial homomorphism\n\n$$\n\\psi:(k,+)\\longrightarrow\\overline{\\mathbf Q}_\\ell^\\times.\n$$\n\nFor a finite field $k_0=\\mathbf F_q$ with trace\n$\\operatorname{Tr}:k_0\\to\\mathbf F_p$, let $F'$ be a field of\ncharacteristic different from $p$ (for instance\n$\\overline{\\mathbf Q}_\\ell$), and fix a nontrivial character\n$\\Psi:\\mathbf F_p\\to F'(\\mu_p)^\\times$ with values in the $p$-th\ncyclotomic extension $F'(\\mu_p)$ of $F'$. The character\n$\\psi(x)=\\Psi(\\operatorname{Tr}(x))$ is called *the* nondegenerate\nadditive character of $k_0$. It is primitive: for every $a\\in k_0^\\times$\nthe scaling $\\psi_a(x)=\\psi(ax)$ is again nontrivial.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-fd-additive-character",
+  "worker": "stage1",
+  "group": "Q142",
+  "summary": "Updated the statement to the mandated main-20261015 version, retaining the arbitrary fixed nontrivial prime-field character and cyclotomic coefficients. All clauses are covered by the named Mathlib definitions and their one-line specializations recorded in mathlib_match, including nontriviality by injective precomposition with the surjective trace and primitivity by IsPrimitive.of_ne_one. No new node or project attachment is proposed. Removed the unused scheme-conventions dependency and cited the existing ℓ-adic-number and algebraic-closure definitions. Existing blueprint/import and Lean audit fields are preserved.",
+  "blueprint": "Definition def-fd-additive-character (main-20261015), first paragraph (nontrivial additive homomorphism), second paragraph (F'(μ_p) coefficients and composition with the finite-field trace), final sentence (every nonzero scaling is nontrivial). sk-def-char states the same character convention and additionally gives trace transitivity over finite extensions; that additional clause is not imported into this item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-280dbbf92",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-280dbbf92 (reviewer sub-agent of L); spot-checked: Mathlib-leaf delivery with no new nodes. The statement is the main-20261015 text of def-fd-additive-character (order 3016) verbatim, plus one sentence naming its stmt_deps. The dependencies were reduced to def-weil-l-adic-numbers and def-weil-algebraic-closure: the scheme-conventions node is unused and stays in uses_not_cited. The new statement generalizes the base: Ψ takes values in F'(μ_p) for any F' with char F' ≠ p, and F' = Q̄_ℓ recovers the base. I read the citing contexts of all 19 citers; each still has its Q̄_ℓ-valued Ψ∘Tr and its primitivity. I re-checked every Mathlib line against the project checkout. AddChar is at :70 and one_apply defines the trivial character. compAddMonoidHom is at :232/:238. Algebra.trace (Trace/Defs:71) is the field trace. Algebra.trace_surjective (Trace/Basic:521) gets its hypotheses from Module.Finite.of_finite (:241), PerfectField.ofFinite (:308) and isSeparable_of_perfectField (:338). compAddMonoidHom_injective_left (:241) then gives ψ ≠ 1. IsPrimitive.of_ne_one (AddCharacter:84), with IsPrimitive (:61) and mulShift_apply (:441), is exactly the scaling clause. CyclotomicField (:654, :674) applies because NeZero p holds when char F' ≠ p. Edge cases checked: F_p (Tr = id); p = 2 (Ψ(1) = −1); F_4, where Tr(1) = 0 but Tr(t) = 1, so evaluating at 1 is not enough and the proof does not rely on it; a = 0 is excluded. Searches cover LeanSearch, LeanFinder, Loogle and grep. Live is still imported and there is no repair note, so the delivery is not superseded. Advisory: the how does not name the inferred instance Algebra.IsAlgebraic.of_finite (RingTheory/Algebraic/Integral.lean:108)."
  }
 }
