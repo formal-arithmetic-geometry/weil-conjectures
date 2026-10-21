@@ -212,5 +212,44 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-81eb1e644 (reviewer sub-agent of L); spot-checked: First split of the item. There is no repair note, so the 10-21 re-split rules do not apply. The statement is preserved and checked on small cases: r=0 constant complex with h^even=1; r=1, m=(2) acyclic, giving the exterior algebra on one generator. Steps 1-8 are verified. d^2 follows from the cosimplicial identities. di=0 holds as a cup product of 1-cocycles. pd=0 holds because the quadratic merged-block terms cancel in the wedge and repeated indices vanish. Divided-monomial multidegree components are finite and form a split dual simplicial module: zero-block insertion gives the splitting indexed by surjections. The Mathlib leaf homotopyEquivNondegComplex (SplitSimplicialObject.lean:148/165/307-312, needs only Preadditive) matches the new mathlib node. N_m (monomials with no zero block) is a subcomplex dual to the merge differential. Partial sums give a bijection with the strict chains of T_m, with sign -1 and degree shift n-2. Transpose rank, pi=1 and equal dimensions make i_* and p_* inverse isomorphisms. A complement-of-cycles homotopy (lem-trf-vector-subspace-complement) gives dh+hd=1-ip, and rational matrices extend to any B. The new node product-chain-proper-interval-homology is true: if some m_j>=2 the max(v,e_j) cone contracts it; if m is squarefree it is the subdivided boundary of a simplex, a sphere of dimension s-2; s=1 gives H_{-1}=Q. It is a separate combinatorial input and does not restate the item. split-simplicial is not a duplicate of lem-cbc-normalized-alternating-homotopy-equivalence (Moore kernels versus a supplied splitting). The blueprint source, main-20261015 direct-images paragraph (3), has no algebraic proof; the proof is honestly marked agent-formulated with references WANTED. Batch 5: lem-trf-vector-subspace-complement is the Mathlib leaf Submodule.exists_isCompl with closure {def-weil-field}. It is general linear algebra outside the trace-formula and Poincare-duality assumptions, so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalPolynomialBarContraction",
+  "declaration": "RationalPolynomialBar.contraction",
+  "declarations": [
+   "RationalPolynomialBar.P",
+   "RationalPolynomialBar.ExteriorIndex",
+   "RationalPolynomialBar.K",
+   "RationalPolynomialBar.merge",
+   "RationalPolynomialBar.differential",
+   "RationalPolynomialBar.inclusion",
+   "RationalPolynomialBar.coordinateExponent",
+   "RationalPolynomialBar.sortingSign",
+   "RationalPolynomialBar.coordinateSubset",
+   "RationalPolynomialBar.projectMonomial",
+   "RationalPolynomialBar.projection",
+   "RationalPolynomialBar.extendHomotopy",
+   "RationalPolynomialBar.differential_squared",
+   "RationalPolynomialBar.polynomialComplexNat",
+   "RationalPolynomialBar.exteriorComplexNat",
+   "RationalPolynomialBar.polynomialComplex",
+   "RationalPolynomialBar.exteriorComplex",
+   "RationalPolynomialBar.contraction"
+  ],
+  "file": "lean/Sheaf/Paper/RationalPolynomialBarContraction.lean",
+  "statement": "theorem contraction (r : ℕ) : ∃ h : ∀ n : ℕ, P ℚ r (n + 1) →ₗ[ℚ] P ℚ r n, ∀ (B : Type u) [CommRing B] [Algebra ℚ B], differential B r 0 = 0 ∧ (∀ n : ℕ, (differential B r (n + 1)).comp (differential B r n) = 0) ∧ (∀ q : ℕ, (differential B r q).comp (inclusion B r q) = 0) ∧ (∀ q : ℕ, (projection B r (q + 1)).comp (differential B r q) = 0) ∧ (∀ q : ℕ, (projection B r q).comp (inclusion B r q) = LinearMap.id) ∧ (extendHomotopy B r 0 (h 0)).comp (differential B r 0) = LinearMap.id - (inclusion B r 0).comp (projection B r 0) ∧ (∀ n : ℕ, (differential B r n).comp (extendHomotopy B r n (h n)) + (extendHomotopy B r (n + 1) (h (n + 1))).comp (differential B r (n + 1)) = LinearMap.id - (inclusion B r (n + 1)).comp (projection B r (n + 1)))",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The owning module implements the displayed P, K, cofaces, ordered inclusion, signed monomial projection, and rational monomial-matrix scalar extension. differential_squared states the d² clause separately to supply the proof needed to construct P; contraction states all identities including d² and the universally extended homotopy. Helpers belong to this node’s explicitly specified construction; no new mathematical notion or alternative definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a30abdd5",
+  "group": "O3",
+  "result": "pass",
+  "note": "Only the lean record changed; the statement is verbatim from the file and all 18 declarations exist. Clause by clause: the differential (first term, inner merge with sign (-1)^(a+1), last term with sign (-1)^(n+1), checked outside the sum by Mathlib's term:67 precedence), the degree-0 cancellation, i via increasing enumeration with i(e_empty)=1, p via injective one-coordinate-per-block tuples with the inversion sign and p^0 = 1, and d^2=0, di=0, pd=0, pi=1, dh+hd=1-ip in degree 0 and n+1. h is chosen over Q before the statement ranges over every B and extended by its monomial matrix, as the citers require. Edge cases checked by hand: n=0, r=0 (h=1 in even degrees >=2), r=1 and r=2 di=0 and pd=0 checks, q>r, zero algebra. Not hollow, only sorry proofs, docstrings and imports conform; the per-degree-only rule does not apply to a chain-level statement. Advisory: the polynomialComplex/exteriorComplex definitions are unused by contraction; a HomotopyEquiv corollary could package them later."
  }
 }

@@ -23366,3 +23366,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:40 L: merged deliver/Q11/lem-sfb-internal-inflation-graded-cup (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T18:40:58Z L: superseded stage-1 delivery NC/lem-pur-affine-chart-exceptional-identification at cd45125148d0f5fded1c9f9c44e71265f53847fc; current completion retained; packet archived at refs/superseded/NC/lem-pur-affine-chart-exceptional-identification/cd45125148d0f5fded1c9f9c44e71265f53847fc; stale return retired.
 - 18:41 L: returned deliver/NY/lem-sfb-normed-scalar-profinite-hom-acyclic (reviewer RETURN: E2: the new node lem-sfb-normed-scalar-profinite-cech-exact is false for F=Omega with the norm topology, and so is the i)
+- 18:41 L: merged deliver/O3/lem-sfb-rational-polynomial-bar-contraction (stage 2; reviewer PASS; parallel immutable checks)
