@@ -25,131 +25,104 @@
  ],
  "proof": [
   {
-   "text": "Write $R=\\mathcal O_{E,T}$ and $S=E_T$. The coefficient-localization node identifies $S$ with $\\operatorname{colim}(R\\xrightarrow{\\ell}R\\to\\cdots)$ and states its flatness over $R$. Consequently scalar extension is exact; the exact-functor clause of [sk-def-sfb-derived-categories] identifies $F_T=S\\otimes_R^{\\mathbf L}-$ with this termwise scalar-extension functor. Tensoring the displayed coefficient colimit with a module gives $\\operatorname{Res}F_TN=\\operatorname{colim}(N\\xrightarrow{\\ell}N\\to\\cdots)$: tensor is a left adjoint, and the tensor-over-$R$ relations are imposed by a coequalizer, so they commute with this colimit. Use the chosen small skeleton of the pro-étale site, in its larger universe. Sheaves of $R$-modules have exact filtered colimits by the ringed-site Grothendieck theorem. Applying the preceding identity degreewise therefore preserves quasi-isomorphisms, and for every complex $L$ gives $\\operatorname{Res}F_TL\\simeq\\operatorname{colim}_n(L\\xrightarrow{\\ell}L\\to\\cdots)$ in the derived category. The structure map at stage $n$ is multiplication by $\\ell^{-n}$ after the scalar-extension unit.",
+   "text": "For the exact published boundedConstructibleExtendScalars F, use its existing localization instance at ell-power-torsion cones. Compare F to the Verdier rationalization Q with Localization.uniq and its comparison isomorphism. The scalar-fraction and equality criteria for Q identify its Hom map as localization of integer modules. Transport this along the fully faithful equivalence and its object comparison isomorphisms; full-subcategory inclusions identify these Hom groups with the ambient Hom groups.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "sk-def-sfb-derived-extension-of-scalars",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "def-weil-pbc-proetale-site",
-    "sk-def-sfb-derived-categories"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Hom groups: identification of localization with the sequential colimit; exactness made explicit"
-   }
-  },
-  {
-   "text": "The constructible categories are full subcategories of the ambient derived categories. Derived scalar extension is left adjoint to restriction, so\n$\\Hom_{D(S)}(F_TK_0,F_TL_0[q])=\\Hom_{D(R)}(K_0,\\operatorname{Res}F_TL_0[q])$.\nChoose a bounded-below representative of $L_0$ by truncating below its lowest nonzero cohomological degree; all copies in its $\\ell$-multiplication diagram have this same lower bound. Apply the integral Ext-continuity statement with $C=K_0$, this diagram, and the given integer $q$, and then step 1. It identifies the last group with\n$\\operatorname{colim}_n\\Hom_{D(R)}(K_0,L_0[q])$, with transition maps multiplication by $\\ell$. Under the adjunction the stage-$n$ element $h$ maps to $\\ell^{-n}F_T(h)$; thus the identification concerns the natural map in the statement, not just an abstract group isomorphism.",
-   "uses": [
+    "thm-sfb-extend-scalars-localization",
+    "lem-sfb-rationalization-scalar-fractions",
     "sk-def-sfb-bounded-constructible",
+    "def-sfb-bounded-constructible-extend-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Hom groups, integral models and functor comparisons; use existing localization and continuous push-comparison APIs"
+   }
+  },
+  {
+   "text": "Check that the actual constant-section scalar actions in the statement make F O_E-linear. Restriction of continuous module sheaves is linear sectionwise. Exact restriction remains linear on derived categories by localization of complexes. The published coefficient-encoding square, derived through its composition isomorphisms, transports this linearity to internal module objects; the derived scalar adjunction gives linearity of extension. Restrict the integer-module Hom localization to O_E. Since E is O_E with ell inverted, IsLocalizedModule.isBaseChange gives the E-linear tensor equivalence and its pure-tensor formula. Apply it to K and L[q], using stability of bounded constructibility under shifts, and postcompose with the canonical commShiftIso.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
     "sk-def-sfb-derived-extension-of-scalars",
-    "det-lem-int-ext-continuity"
+    "def-weil-linear-functor",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-localization-module-tensor",
+    "sk-def-sfb-bounded-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Hom groups: integral Ext continuity, with its common lower bound and scalar-extension adjunction supplied"
+    "place": "Hom groups, integral models and functor comparisons; use existing localization and continuous push-comparison APIs"
    }
   },
   {
-   "text": "For any $\\mathcal O_E$-module $A$, the colimit of repeated multiplication by $\\ell$ is $A[1/\\ell]$: the class of $a$ at stage $n$ is sent to $a/\\ell^n$, and two representatives agree precisely when a further power of $\\ell$ kills their cross-multiplied difference. The valuation description of $\\mathcal O_E$ gives $E=\\mathcal O_E[1/\\ell]$: for each $x\\in E$, choose $n$ with $|\\ell|_E^n|x|_E\\le1$, so $\\ell^nx\\in\\mathcal O_E$. The maps $a/\\ell^n\\mapsto a\\otimes\\ell^{-n}$ and $a\\otimes(b/\\ell^n)\\mapsto ba/\\ell^n$ are inverse; finite sums have a common denominator and the tensor relations are exactly the fraction relations. Apply this to $A=\\Hom(K_0,L_0[q])$ and step 2. This proves the asserted isomorphism and its $E$-linearity for every $q$.",
+   "text": "Apply the proved continuousConstructible_integral_model theorem to the rational bounded-constructible object, using the induced norm and normed-algebra structure on the embedded finite field E. Its continuous valuation ring and coefficient inclusion are definitionally the published O_E and padic-integers inclusion, and its integralScalarExtension is the exact ambient derived extension in the statement. The resulting integral bounded-constructible object and isomorphism supply the model clause.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Hom groups: explicit computation of the module colimit and of the natural map"
-   }
-  },
-  {
-   "text": "Now prove essential surjectivity, rather than assuming it from generation. The integral-generators node says that every rational constructible complex is built by finitely many cones and shifts from $(a_!L_0)[1/\\ell]$, and that each $a_!L_0$ is integral constructible. Shifts of integral models are integral models. For the cone step, suppose its endpoints have models $A_0,B_0$ and its arrow, after those identifications, is $u:F_TA_0\\to F_TB_0$. The Hom calculation just proved writes $u=\\ell^{-n}F_T(v)$ for a single integral arrow $v:A_0\\to B_0$ (combine finitely many tensor summands over a common denominator). The integral category is triangulated, so $C_0=\\operatorname{Cone}(v)$ is integral constructible. The cone description of the derived triangulated structure in [def-weil-abstract-derived-category] shows that exact termwise scalar extension preserves these triangles: it commutes with shifts and finite direct sums, and sends the block differential of a cone to the block differential of the image cone. Thus it sends the distinguished triangle of $v$ to a cone triangle for $F_T(v)$. Multiplication by $\\ell^{-n}$ on $F_TB_0$, with the identity on $F_TA_0$, is an isomorphism from the arrow $F_T(v)$ to $u$; TR3 in [def-weil-triangulated-category] extends these two maps to a morphism of the distinguished cone triangles. Its first two components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes its third component an isomorphism $F_TC_0\\simeq\\operatorname{Cone}(u)$. Thus induction on the finite cone-and-shift construction gives an integral model for every object. The empty construction gives the zero model. All uses of the full triangulated subcategory are on the Noetherian schemes explicitly in the statement.",
-   "uses": [
-    "det-lem-integral-models-generators",
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-derived-categories",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "def-weil-pbc-continuous-integral-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Essential surjectivity: expand item (4) of integral models by the Hom calculation and cone lifting"
+    "place": "Hom groups, integral models and functor comparisons; use existing localization and continuous push-comparison APIs"
    }
   },
   {
-   "text": "Apply the coefficient-comparison isomorphism (Pull) to $\\mathcal O_E\\to E$. Its flatness hypothesis was verified in step 1; it gives $F_XLf_{\\mathcal O_E}^*\\simeq Lf_E^*F_Y$. The cartesian-coefficient statement identifies both pullbacks with the exact inverse-image functors, so the derived symbols may be omitted. Integral pullback preserves $\\Dbc$ by clause (1) of [det-lem-integral-models-operations]. Scalar extension preserves constructibility here: after the finite stratification in the constructibility definition, a finite constant local presentation tensors to the same finite presentation over $E$; exactness gives $H^i(FK)=F H^i(K)$, so boundedness is preserved too. Hence the ambient comparison restricts to the stated isomorphism in $\\Dbc(X,E)$, natural in $K_0$.",
+   "text": "For pullback, apply the published preservation theorem to each coefficient ring and use preservation by scalar extension. The published derivedPullIso is an isomorphism, so its inverse remains invertible after restriction. For lower shriek, use the standing compactification and apply preservation by open extension by zero followed by preservation under proper derived pushforward, for each coefficient ring.",
    "uses": [
+    "lem-sfb-dc-upper-star-preserves",
+    "lem-sfb-extend-scalars-bounded-constructible",
     "sk-def-sfb-coefficient-comparisons",
-    "sk-prop-sfb-cartesian-coefficients",
-    "det-lem-integral-models-operations",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Functors: pullback commutes with the coefficient localization"
-   }
-  },
-  {
-   "text": "Choose the compactification $f=p\\circ j$ supplied by the standing-setting node, with $p$ proper and $j$ open, and use $Rf_!=Rp_*j_!$ for both coefficient rings. Put $N_0=j_!M_0$. The integral-operations node gives $N_0\\in\\Dbc(\\overline X,\\mathcal O_E)$, and the $\\underline{\\mathcal O}_E$ direct-image preservation clause of [sk-def-sfb-dc-restricted-functors] gives $Rp_*N_0\\in\\Dbc(Y,\\mathcal O_E)$. Choose a representative of $N_0$ vanishing below some fixed $a$. Proper $p$ is quasi-compact and quasi-separated. Apply bounded direct-image continuity to the sequential diagram consisting of this representative with transition $\\ell$. For every $r$ it identifies\n$\\operatorname{colim}(H^r(Rp_*N_0)\\xrightarrow{\\ell}H^r(Rp_*N_0)\\to\\cdots)$ with $H^r(Rp_*\\operatorname{colim}_{\\ell}N_0)$. By exact filtered colimits as in step 1, this says the canonical map\n$\\operatorname{colim}_{\\ell}Rp_*N_0\\to Rp_*\\operatorname{colim}_{\\ell}N_0$\nis a quasi-isomorphism. In coefficient-change notation this is\n$F_YRp_*N_0\\xrightarrow{\\sim}Rp_*F_{\\overline X}N_0$.\nTo compare coefficient categories, the explicit isomorphism of [def-sfb-derived-comap-lower-star-iso] makes restriction of scalars commute with derived pushforward (its flatness hypothesis holds by step 1); the displayed colimit calculation is its (Push) comparison on restriction. Restriction is exact and reflects zero cohomology sheaves, so the comparison is also an isomorphism over $E_Y$.",
-   "uses": [
     "sk-def-sfb-dc-setting",
-    "sk-def-sfb-module-derived-lower-shriek",
-    "det-lem-integral-models-operations",
-    "sk-def-sfb-dc-restricted-functors",
-    "det-pe-bounded-continuity-direct-image",
-    "sk-def-sfb-coefficient-comparisons",
-    "def-sfb-derived-comap-lower-star-iso"
+    "sk-def-sfb-dc-lower-shriek",
+    "lem-sfb-dc-open-lower-shriek-preserves",
+    "lem-sfb-dc-lower-star-preserves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Functors: compactification and bounded continuity for the proper part; replace the smooth-only tower citation"
+    "place": "Hom groups, integral models and functor comparisons; use existing localization and continuous push-comparison APIs"
    }
   },
   {
-   "text": "The extension-by-zero coefficient comparison gives $F_{\\overline X}j_!M_0\\simeq j_!F_XM_0$, with no extra flatness or smoothness hypothesis. Compose this with step 6:\n$$\n(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]\n=F_YRp_*j_!M_0\\xrightarrow{\\sim}Rp_*F_{\\overline X}j_!M_0\n\\xrightarrow{\\sim}Rp_*j_!F_XM_0=Rf_{!,E}(M_0[1/\\ell]).\n$$\nThe integral output is constructible by step 6, and its scalar extension is bounded constructible by the local-presentation argument of step 5, so this is an isomorphism in $\\Dbc(Y,E)$. Its inverse is the orientation stated in the conclusion. These are the coefficient-comparisons node's (Shriek) maps for the chosen compactification; naturality of its (Push) and extension-by-zero maps proves the asserted naturality. No claim that an arbitrary unbounded direct image commutes with all colimits has been used.",
+   "text": "For the isomorphism clause of lower shriek, extension by zero sends the integral input to an integral bounded-constructible complex on the chosen compactification. The already proved continuous integral push comparison is invertible on this input for the proper, hence qcqs, compactification map. Its scalar inclusion is definitionally the published padic-integers inclusion for the induced norm on E. Expand the canonical derivedLowerShriekHom: its components are this push comparison, the open extension-by-zero comparison isomorphism, and associators. Each component is invertible at the input; pointwise invertibility gives the asserted restricted natural-transformation isomorphism.",
    "uses": [
+    "lem-sfb-dc-open-lower-shriek-preserves",
+    "lem-weil-pbc-continuous-integral-push-comparison",
     "sk-def-sfb-coefficient-comparisons",
     "sk-def-sfb-module-derived-lower-shriek"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-    "place": "Proof, Functors: compose the open and proper comparisons"
+    "place": "Hom groups, integral models and functor comparisons; use existing localization and continuous push-comparison APIs"
    }
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "sk-def-sfb-derived-extension-of-scalars",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "def-weil-pbc-proetale-site",
-  "sk-def-sfb-derived-categories",
+  "thm-sfb-extend-scalars-localization",
+  "lem-sfb-rationalization-scalar-fractions",
   "sk-def-sfb-bounded-constructible",
-  "det-lem-int-ext-continuity",
-  "def-weil-l-adic-coefficient-extension",
-  "det-lem-integral-models-generators",
-  "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
+  "def-sfb-bounded-constructible-extend-scalars",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-weil-linear-functor",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-pbc-continuous-constructible-integral-model",
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-sfb-extend-scalars-bounded-constructible",
   "sk-def-sfb-coefficient-comparisons",
-  "sk-prop-sfb-cartesian-coefficients",
-  "det-lem-integral-models-operations",
-  "sk-def-sfb-constructible",
   "sk-def-sfb-dc-setting",
-  "sk-def-sfb-module-derived-lower-shriek",
-  "sk-def-sfb-dc-restricted-functors",
-  "det-pe-bounded-continuity-direct-image",
-  "def-sfb-derived-comap-lower-star-iso"
+  "sk-def-sfb-dc-lower-shriek",
+  "lem-sfb-dc-open-lower-shriek-preserves",
+  "lem-sfb-dc-lower-star-preserves",
+  "lem-weil-pbc-continuous-integral-push-comparison",
+  "sk-def-sfb-module-derived-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
-  "place": "All three paragraphs; expanded using existing integral generators, Ext continuity, and bounded direct-image continuity"
+  "place": "Stage-3 C3: use the existing bounded-constructible localization and scalar-fraction Hom calculation, with the canonical continuous scalar actions and the proved qcqs integral push comparison."
  },
  "mathlib_searches": [
   {
@@ -280,5 +253,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Read the item node (only the lean field changed vs side-live; statement verbatim; lines ≤100), all 9 stmt_dep records, the module and the declarations used: boundedConstructible/IsConstructibleModuleObject, padicIntegersToPadicSubfield, continuousRingModuleEquivalence, derivedPullIso/derivedLowerShriekHom, compactificationOverField, FiniteIntermediateField/integers. Every clause matches: char p>0, p≠ℓ; Noetherian separated finite-type T; continuous O_E and E condensed coefficients; bounded constructible full subcategories; extend = L(extendScalars). Essential surjectivity is stated. The Hom equivalence is E-linear and fixed on pure tensors by e•(F h ≫ commShiftIso), with the standard constant-section scalar actions carried along the published encoding. Pullback and compact-support comparisons are pinned to the published canonical maps, with the same chosen compactification on both sides, plus membership conjuncts. Edge cases covered (empty T, zero objects, all q, ℓ=2, torsion); no universe restriction. Every proof-dependency module is imported; docstrings carry source, blueprint id and proof steps 1-7; one sorry; no hollow defs. The EllAdicRationalization localization instance is not the same statement (H4 ok). No compile run, per the 2026-10-21 rule. Advisories: the pull IsIso conjunct is automatic (inverse of an existing iso; the node's content there is membership); comparison maps, encoding and flatness instance come from nodes outside stmt_deps; global NormedField E.1 and Linear instances are exported; the item's boundedConstructible differs from integral_models' constantModelBoundedConstructible, so stage 3 needs their agreement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T225101-L-3764898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
