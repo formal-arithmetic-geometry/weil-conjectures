@@ -19812,3 +19812,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:26 L: merged deliver/Q54/lem-sfb-finite-field-internal-hom-finiteness (reviewer FIX; after a return; new nodes: 4)
 - 03:26 L: merged deliver/Q58/lem-sp-et-proet-coefficient-compatibility (reviewer FIX; after a return; new nodes: 5)
 - 03:26 L: merged deliver/Q35/det-sp-reduction-direct-image (reviewer PASS; after a return; new nodes: 3)
+- 03:26 L: merged deliver/Q38/det-thm-sfb-proper-base-change-finite (reviewer FIX; after a return; new nodes: 2)
