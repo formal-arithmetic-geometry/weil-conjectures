@@ -23,9 +23,111 @@
   "lem-per-rational-module-realization-functor",
   "lem-per-rational-stratum-integral-models"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-uniform-complete-triangulated], the actual category $\\mathcal C_X$ with its compatible etale-origin witnesses contains zero and is closed under all integer shifts and cones. By [lem-per-rational-module-realization-functor], $F_X$ is triangulated and $J_X(QK)=F_X(K)$. Consequently $J_X(Q0)\\cong0$ and $J_X(Q(K[r]))\\cong J_X(QK)[r]$ for every integer $r$. Composing these isomorphisms with any given image witness proves the zero and shift assertions for the isomorphism-closed essential image.",
+   "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), triangulated source and scalar-localization functor; compatible-tower closure supplied by the cited node"
+   }
+  },
+  {
+   "text": "Write $U=J_X(QK_1)$ and $V=J_X(QK_2)$. Use the shift comparison to regard the connecting arrow $\\delta:V\\to U[1]$ as an arrow $J_X(QK_2)\\to J_X(Q(K_1[1]))$. Full faithfulness, which is a hypothesis here, gives a unique arrow $\\alpha:QK_2\\to Q(K_1[1])$ mapping to it. By the definition of the raw rationalization [def-weil-pbc-rational-category], $\\alpha$ is an element of $\\operatorname{Hom}_{\\mathcal C_X}(K_2,K_1[1])\\otimes_A E$, and $Q$ sends an integral arrow $g$ to $g\\otimes1$. Since $E=A[1/\\varpi]$, every element $\\sum_i g_i\\otimes\\varpi^{-n_i}$ of this tensor product equals $f\\otimes\\varpi^{-n}$ with $n=\\max_i n_i\\geq0$ and $f=\\sum_i\\varpi^{n-n_i}g_i:K_2\\to K_1[1]$; hence $\\varpi^n\\alpha=f\\otimes1=Q(f)$, i.e. $\\alpha=f/\\varpi^n$. The $E$-linearity of $J_X$ and the formula $J_X(Qf)=F_X(f)$ of [lem-per-rational-module-realization-functor] give $F_X(f)=\\varpi^n\\delta$ after the same shift identification. Only $\\alpha$ is unique; its numerator and denominator need not be.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), full faithfulness used to lift extension classes; explicit scalar-fraction argument"
+   }
+  },
+  {
+   "text": "Choose a cone triangle $K_2\\xrightarrow{f}K_1[1]\\to D\\to K_2[1]$ using TR1 of [def-weil-triangulated-category]. The closure theorem [lem-weil-pbc-uniform-complete-triangulated] gives $D\\in\\mathcal C_X$ and $K=D[-1]\\in\\mathcal C_X$, with the required witnesses. Applying the triangulated functor $F_X$ of [lem-per-rational-module-realization-functor] gives a distinguished triangle $V\\xrightarrow{F_X(f)}U[1]\\to F_X(D)\\to V[1]$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, derived-definition-triangulated-category, TR1; integral closure and exact realization from the cited nodes"
+   }
+  },
+  {
+   "text": "Rotate the given triangle $U\\xrightarrow{i}C\\xrightarrow{p}V\\xrightarrow{\\delta}U[1]$ twice by TR2 of [def-weil-triangulated-category], obtaining $V\\xrightarrow{\\delta}U[1]\\xrightarrow{-i[1]}C[1]\\xrightarrow{-p[1]}V[1]$. Compare this with the image cone triangle of Step 3. On the first two vertices take $a=1_V$ and $b=\\varpi^n1_{U[1]}$. The first square commutes because $b\\delta=\\varpi^n\\delta=F_X(f)a$. Both maps are invertible, with inverses $1_V$ and $\\varpi^{-n}1_{U[1]}$. TR3 completes them to a morphism of distinguished triangles, and [lem-sf-triangle-morphism-iso] makes its third component $c:C[1]\\to F_X(D)$ invertible. Shifting $c$ by $[-1]$ and using the shift comparison for $F_X$ gives $C\\cong F_X(D[-1])=J_X(QK)$. This also proves extension closure when the endpoints are merely isomorphic to image objects, by conjugating their arrows by the given endpoint isomorphisms.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, TR2 and TR3; Tag 014A, lemma-third-isomorphism-triangle; explicit rescaling square"
+   }
+  },
+  {
+   "text": "Let $0=F_0\\subset\\cdots\\subset F_m=F$ be any supplied finite filtration and let $M_k[0]\\in\\mathcal C_X$ be its supplied integral quotient models, as in [lem-per-rational-stratum-integral-models]. Exact scalar localization in [lem-per-rational-module-realization-functor] identifies $J_X(Q(M_k[0]))$ with $(F_k/F_{k-1})[0]$. Induct on $k$ with the assertion that an integral object $K_k$ and an isomorphism $J_X(QK_k)\\cong F_k[0]$ have been constructed: take $K_0=0$. The short exact sequence $0\\to F_{k-1}\\to F_k\\to F_k/F_{k-1}\\to0$ gives a distinguished triangle in $D(E_X)$ by [lem-sf-derived-ses-triangle]. Conjugate its endpoints by the inductive isomorphism and the supplied quotient comparison; Steps 2-4 construct $K_k$ by one integral cone and shift. At $k=m$ this gives a model of $F[0]$. For $m=0$ the base case already gives it.",
+   "uses": [
+    "lem-per-rational-stratum-integral-models",
+    "lem-per-rational-module-realization-functor",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 and Proposition 6.8.14(2), finite filtration reduction; short-exact-sequence triangle is Stacks Tag 0152"
+   }
+  },
+  {
+   "text": "Now let $C$ have constructible cohomology vanishing outside $[a,b]$. By [def-kun-truncations], $\\tau_{\\leq a-1}C$ is acyclic and $\\tau_{\\leq b}C\\to C$ induces isomorphisms on all cohomology. Choose a complex representing $C$. The map $0\\to\\tau_{\\leq a-1}C$ of complexes is a quasi-isomorphism, and the truncation inclusion at $b$ is a quasi-isomorphism. Both become invertible in the derived category by [def-weil-abstract-derived-category]. Hence start the tower with the zero integral model of $\\tau_{\\leq a-1}C$ and end with the indicated isomorphism to $C$. If all cohomology vanishes, the same quasi-isomorphism $0\\to C$ directly gives the zero model, without any tower.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, endpoints; Tag 05RU, derived localization at quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "For each $r=a,\\ldots,b$, the constructible sheaf $\\mathcal H^r(C)$ has an integral degree-zero model by Step 5. Shift that model by $[-r]$. The successive-truncation triangle of [lem-weil-pbc-truncation-triangle] is $\\tau_{\\leq r-1}C\\to\\tau_{\\leq r}C\\to\\mathcal H^r(C)[-r]\\to(\\tau_{\\leq r-1}C)[1]$. Induct on $r$, starting with the zero model from Step 6: if a model of $\\tau_{\\leq r-1}C$ has been constructed, its isomorphism and the shifted sheaf model identify the endpoints of this triangle with image objects, so Steps 2-4 give an integral model of $\\tau_{\\leq r}C$. There are $b-a+1$ steps. The last model realizes $C$ by Step 6. All intermediate integral objects are shifts or cones of previously constructed objects; the sheaf models themselves use finite filtrations. Thus the entire construction is finite and uses no summand extraction or idempotent completion.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, successive cohomology triangles; finite induction expanding Bhatt-Scholze Proposition 6.8.14(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-rational-category",
+  "def-weil-triangulated-category",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-stratum-integral-models",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-uniform-complete-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), pp. 61-62; explicit expansion of its essential-surjectivity reduction, using Stacks Tags 0145, 014A, 0152, 08J5 and the existing compatible-integral-category interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +163,45 @@
    "results": "12 hits: CategoryTheory.Functor.essImage; CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage; CategoryTheory.Functor.essImage.witness; CategoryTheory.Functor.obj_mem_essImage; CategoryTheory.Functor.EssSurj.mem_essImage; CategoryTheory.Functor.EssSurj.mk; CategoryTheory.Functor.toEssImage; CategoryTheory.Functor.essImage.ofIso. Generic essential image definitions and witnesses only, not integral cone models.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful rationalization of a triangulated integral category realizes constructible sheaves by lifting extension classes and taking finitely many integral cones",
+   "results": "8 hits: CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.contractible_mem_essImageDistTriang; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.exists_iso_Q_obj_of_isGE; CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished; DerivedCategory.exists_iso_Q_obj_of_isLE; CategoryTheory.Functor.essImageDistTriang; generic triangulated/localization or derived-complex infrastructure; does not state the completed-integral finite-cone realization assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*(Extension|Triangulat)|integral.*cone.*model",
+   "results": "3 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; inspected Subcategory.lean:725-741: generic full triangulated functor has triangulated essential image; no integral numerator/denominator or constructible-sheaf model construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful triangulated functor whose morphisms are fractions of integral morphisms has essential image closed under extensions using rescaled integral mapping cones",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor; CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.Functor.map_distinguished_iff; CategoryTheory.Functor.IsTriangulated.map_distinguished; CategoryTheory.Equivalence.fullyFaithfulToEssImage; CategoryTheory.Functor.IsTriangulated.mk; generic triangulated/localization or derived-complex infrastructure; does not state the completed-integral finite-cone realization assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "12 hits: CategoryTheory.Functor.essImage; CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage; CategoryTheory.Functor.essImage.witness; CategoryTheory.Functor.obj_mem_essImage; CategoryTheory.Functor.EssSurj.mem_essImage; CategoryTheory.Functor.EssSurj.mk; CategoryTheory.Functor.toEssImage; CategoryTheory.Functor.essImage.ofIso; generic triangulated/localization or derived-complex infrastructure; does not state the completed-integral finite-cone realization assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifting bounded complexes from constructible rational coefficient sheaves to completed integral complexes by finite truncations and cones",
+   "results": "8 hits: HomologicalComplex.restrictionToTruncGE'_hasLift; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; CochainComplex.cm5b; ComplexShape.Embedding.liftExtend; generic triangulated/localization or derived-complex infrastructure; does not state the completed-integral finite-cone realization assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -85,5 +222,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-rational-realization-finite-cone-models",
+  "worker": "stage1",
+  "summary": "Q148: retained the conditional statement; supplied seven proof steps with explicit scalar-fraction lifting, signed rotations and rescaling square, finite filtration induction and bounded truncation induction. All non-elementary inputs reuse existing DAG nodes; no new nodes, no Lean, no compilation. Full faithfulness and integral quotient models remain assumptions. Maintainer reader Q148 (FIX): step 2 now takes the fraction representation directly from the Hom-tensor definition of the raw rationalization [def-weil-pbc-rational-category] instead of lem-sfb-rationalization-scalar-fractions, whose rationalization is the Verdier quotient by torsion objects, a different construction not identified with the raw one by any cited node.",
+  "blueprint": "lem-per-smooth-pullback-t-exact, first proof paragraph (ordinary cohomology under pullback), through continuous rational realization: realizes the finite extension and bounded truncation essential-surjectivity subargument of retained parent steps 5, 8, 9; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-uniform-complete-triangulated",
+    "why": "Closure of precisely the compatible uniform integral tower category under zero, shifts and cones; a coefficient-category tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive cohomology triangle of the ambient derived category, used for a finite Postnikov induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-0e1e0ccad",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-0e1e0ccad (reviewer sub-agent of L); spot-checked: I read the delivery in full: zero new nodes, statement byte-identical to live, item still unsplit in live and side-live, not on the dropped list, no re-split note, no cycle. The source is Bhatt-Scholze 6.8.13 and 6.8.14(2), pp. 61-62: full faithfulness from 6.8.12, essential surjectivity by reduction to local systems with O_E-structures. The item expands that reduction with full faithfulness and the stratum models as hypotheses. Steps 1, 3 and 4 check against the closure, realization and TR1-TR3 statements; the two rotations V->U[1]->C[1]->V[1] carry the signs -i[1], -p[1]; the rescaling square b=varpi^n commutes and b is invertible; the third map is an isomorphism by the two-of-three Mathlib leaf. Step 5's filtration induction (stratum models, exact localization, ses-triangle leaf) is correct, Step 6 is truly elementary, and Step 7's induction over r=a..b on the successive-truncation triangle is correct. One fault, C4 in step 2: it cited lem-sfb-rationalization-scalar-fractions, whose Q is the Verdier quotient of sk-def-sfb-rationalization, while the item's Q is the raw Hom-tensor-E rationalization of def-weil-pbc-rational-category, and no node identifies the two. FIX: step 2 now derives f/varpi^n from that definition by a common denominator; proof_deps and split_report.tool_uses are updated and the scalar-fractions tool_use is removed. Accepted tool_uses: lem-weil-pbc-uniform-complete-triangulated, lem-weil-pbc-truncation-triangle. Advisory: steps 6-7 could have cited lem-sfb-degreewise-bounded-devissage; inlining keeps the explicit finite-cone description the statement asserts. Edge cases checked: X empty, zero objects, n=0, delta=0, filtration length 0 or 1, a=b, negative degrees, zero cohomology.; 1 file(s) fixed by the reviewer"
  }
 }
