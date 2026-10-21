@@ -13,9 +13,133 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the category. For composable $(f,a),(g,b),(h,c)$, both associations have underlying arrow $fgh$ and label $c\\,h^*b\\,(gh)^*a$, since restriction in $K$ is a group homomorphism. The two identity equations follow from $f^*1=1$. The arrow $(1_U,a)$ is invertible with inverse $(1_U,a^{-1})$. The objects and arrows are $\\mathcal V$-small: the latter are the dependent union, over pairs of objects and base arrows $f:V\\to U$, of the small sets $K(V)$. These are direct verifications of the category and size conditions, without any representability hypothesis on $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical input: category laws and size"
+   }
+  },
+  {
+   "text": "Here is an explicit pullback, needed for the site axioms [def-weil-pbc-sites-and-cohomology]. For $(f,a):V\\to U$ and $(g,b):W\\to U$, choose $P=V\\times_UW$ in $C$, with projections $p,q$. In $C_K$ use $(p,1)$ and $(q,e)$, where $e=p^*a\\,(q^*b)^{-1}$. Their composites have label $p^*a$. A cone $(u,c):T\\to V$, $(v,d):T\\to W$ satisfies $fu=gv$ and $c\\,u^*a=d\\,v^*b$. Its unique factor is $(t,c):T\\to P$, where $pt=u$, $qt=v$: the second projected label is $c\\,t^*e=d$. The first projection forces both $t$ and the label, proving uniqueness. Thus these are actual pullbacks; for $a=b=1$ both projections have label $1$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical input: explicit pullback calculation"
+   }
+  },
+  {
+   "text": "The proposed coverings satisfy the three site axioms [def-weil-pbc-sites-and-cohomology]. An isomorphism in $C_K$ has an underlying isomorphism in $C$, so its singleton covers. Composites of covering families cover because their underlying base families do. Pulling back a covering along $(g,b)$ gives the pullbacks just calculated; the arrows to its source $W$ have underlying maps $q:U_i\\times_UW\\to W$, a covering in $C$. This proves base-change stability. For later use, every $(f_i,a_i)$ equals $(f_i,1)\\circ(1_{U_i},a_i)$: every cover is isomorphic, by invertible arrows on its sources, to its normalized cover with labels $1$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical input; Stacks Tag 00VH site axioms applied directly"
+   }
+  },
+  {
+   "text": "At the presheaf level send an equivariant module $M$ to $E(M)$ with $E(M)(f,a)(m)=a\\cdot f^*m$. Naturality of the action gives\n$$b\\cdot g^*(a\\cdot f^*m)=(b\\,g^*a)\\cdot(fg)^*m,$$\nwhich is exactly contravariant functoriality with the stated composition order. These restrictions are semilinear over $R(f)$ because the action is linear. The identity action gives identities. On morphisms use the same component linear maps; their naturality for $(f,a)$ follows from restriction naturality and equivariance. This uses precisely the presheaf-module notion [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical input: explicit extension of presheaves"
+   }
+  },
+  {
+   "text": "Conversely, for a presheaf $N$ of $R_K$-modules restrict along $(f,1)$ and put $a\\cdot n=N(1_U,a)(n)$. The identity and composition laws give $1\\cdot n=n$ and $a\\cdot(b\\cdot n)=(ab)\\cdot n$: indeed $(1,b)\\circ(1,a)=(1,ab)$ and $N$ is contravariant. Comparing $(1_U,a)\\circ(f,1)=(f,f^*a)=(f,1)\\circ(1_V,f^*a)$ gives restriction naturality. Semilinearity for $(1_U,a)$ is $R(U)$-linearity since its ring restriction is the identity. The factorization $(f,a)=(f,1)\\circ(1_V,a)$ recovers every restriction of $N$. A natural transformation commutes with $(f,1)$ and $(1,a)$ exactly when it is restriction-natural and equivariant. Thus the two constructions are inverse on objects and morphisms, preserving addition of maps [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical input: inverse and additivity"
+   }
+  },
+  {
+   "text": "For a normalized covering $\\{(f_i,1)\\}$, the pullback projections are normalized, by step 2. Hence the matching-family equalizer for $E(M)$ is exactly the matching-family equalizer for $M$ on $\\{f_i\\}$ [def-weil-pbc-sites-and-cohomology]. For an arbitrary cover, the source isomorphisms of step 3 and their induced pullback isomorphisms identify its matching diagram with the normalized one. Concretely its local section $n_i$ becomes $a_i^{-1}\\cdot n_i$ on the normalized source; invertibility makes this a bijection of matching families and identifies their unique gluings. Thus $E(M)$ is a sheaf if and only if $M$ is one. Apply the same argument to $R$, whose action is trivial: $R_K(f,a)=f^*$ is functorial and $R_K$ is a ring sheaf. The inverse presheaf constructions of steps 4--5 therefore restrict to the claimed additive equivalence of module-sheaf categories.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical input: matching-family calculation, including the ring sheaf"
+   }
+  },
+  {
+   "text": "Let $P$ now be an equivariant presheaf of $R$-modules on $C$, and let $A=P^\\#$ be its ordinary module sheafification. By [def-weil-presheaf-modules-sheafification] its underlying abelian sheaf is the abelian sheafification; [lem-pc-sites-sheafification-underlying-sets] identifies its underlying set sheaf and unit with set sheafification. Set sheafification preserves finite products [lem-weil-pbc-sheafification-sets-exact]. Sheafify the natural set map $K\\times P\\to P$. Since $K$ is already a sheaf, this produces a map $K\\times A\\to A$ compatible with the unit $P\\to A$. Its unit and associativity identities are the sheafifications of the original identities on $P$ and $K\\times K\\times P$. Its additivity and scalar-linearity identities are obtained in exactly the same way from the two equal maps on $K\\times P\\times P$ and $K\\times R\\times P$, respectively. Product preservation identifies their sheafifications with the corresponding products involving $A$, $K$ and $R$, since $K,R$ are sheaves. Thus all the required laws hold, and the extended action is unique because maps from the sheafification of $K\\times P$ to the sheaf $A$ are determined by their composites with its unit.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WJ (lemma-sheafification-exact), 00YR (section-sheaves-algebraic-structures); module sheafification is Tag 03CY in sites-modules.tex"
+   }
+  },
+  {
+   "text": "If $Q$ is an equivariant module sheaf and $v:P\\to Q$ an equivariant presheaf map, the module-sheafification adjunction [def-weil-presheaf-modules-sheafification] gives a unique $R$-linear extension $v^\\#:A\\to Q$. It is equivariant: the two maps $K\\times A\\to Q$ expressing equivariance are equal after composition with $K\\times P\\to K\\times A$, by equivariance of $v$. This last map is a set-sheafification unit by product preservation [lem-weil-pbc-sheafification-sets-exact] and the underlying-set identification [lem-pc-sites-sheafification-underlying-sets], so its universal property forces equality. Thus $A$ with the induced action is the reflection of $P$ into equivariant sheaves, with the same unit and underlying module sheafification.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), combined with Sites Tags 00WJ and 00YR"
+   }
+  },
+  {
+   "text": "Apply the equivalences of steps 4--6 to this reflection. For every $R_K$-module sheaf $N$, maps $E(P)\\to N$ correspond to equivariant presheaf maps $P\\to E^{-1}N$, which by step 8 extend uniquely to maps $A\\to E^{-1}N$, hence to maps $E(A)\\to N$. Therefore $E(P)\\to E(A)$ has precisely the module-sheafification universal property on $C_K$ [def-weil-presheaf-modules-sheafification]. The canonical isomorphism from the sheafification of $E(P)$ to $E(A)$ is the unique one commuting with the unit. Restriction along $(f,1)$ is consequently the asserted sheafification comparison, natural in $P$; equivariance is part of the same isomorphism.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY: uniqueness of the reflector, applied to the explicit equivalences"
+   }
+  },
+  {
+   "text": "For an equivariant map $M\\to N$, its sectionwise kernel is stable under $K(U)$ since the map is equivariant. It is the underlying kernel sheaf on $C$ and has the kernel universal property among equivariant maps by restricting their images. The sectionwise cokernel $P(U)=N(U)/\\operatorname{im}M(U)$ inherits the linear $K(U)$-action and restriction maps. Its module sheafification on $C$, with the action of step 7, is the equivariant cokernel: maps killing $M$ factor uniquely first through the quotient presheaf and then, equivariantly by step 8, through its sheafification. The formulas agree with the ordinary module kernels and cokernels [def-weil-sheaf-of-modules-category], so forgetting creates both. Finally the equivalence changes no section modules: a module sheaf on $C_K$ has zero restriction exactly when every section module is zero, which is exactly the zero module sheaf on $C_K$. This also covers the trivial group, the zero ring, and objects admitting empty covers.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), preceding explicit kernel and cokernel constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), categorical foundation; explicit action-site argument written by NR using Stacks Tags 00VH, 00WJ, 00YR, 03CY and 03DA"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +175,45 @@
    "results": "{\"t\": \"2026-10-21T14:37:52Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves with an internal group action are sheaves on the action category site with twisted arrows and the topology induced by the original site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instCategorySheaf\", \"CategoryTheory.sheafOver\", \"SheafOfModules.instCategory\", \"TopCat.instCategorySheaf\", \"CategoryTheory.sheafForget\", \"CategoryTheory.Sheaf.over\", \"SheafOfModules\", \"CategoryTheory.sheafHom\"], \"digest\": \"19f3113b7233a9da\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits define ordinary sheaves, module sheaves, slices, presentations or scalar sheafification; none constructs the twisted-arrow site or its internal group-action equivalence and sheafification comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves with an internal group action are sheaves on the category of restriction maps twisted by local group sections, and sheafification forgets the action",
+   "results": "{\"t\": \"2026-10-21T15:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves with an internal group action are sheaves on the category of restriction maps twisted by local group sections, and sheafification forgets the action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"PresheafOfModules.Sheafify.smul\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"PresheafOfModules.Sheafify.smulCandidate\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\", \"PresheafOfModules.Sheafify.map_smul\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\"], \"digest\": \"24b5c4f7464da68e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern ordinary module sheafification, group cochains, opposite actions or the generic Grothendieck construction, not the action-site sheaf equivalence and restriction comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "actionSite|classifyingSite|internalAction|twisted.*[Ss]ite|[Ss]ite.*[Aa]ction",
+   "results": "{\"t\": \"2026-10-21T15:16:42Z\", \"tool\": \"grep\", \"query\": \"actionSite|classifyingSite|internalAction|twisted.*[Ss]ite|[Ss]ite.*[Aa]ction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Util/Notation3.lean\", \"Mathlib/Algebra/Star/Basic.lean\", \"Mathlib/Algebra/Module/Opposite.lean\", \"Mathlib/Algebra/Module/Opposite.lean\", \"Mathlib/Algebra/Quandle.lean\", \"Mathlib/Algebra/Group/Opposite.lean\", \"Mathlib/Algebra/Group/Action/Faithful.lean\", \"Mathlib/Algebra/Group/Action/Faithful.lean\"], \"digest\": \"6fdbe944e7de8118\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern ordinary module sheafification, group cochains, opposite actions or the generic Grothendieck construction, not the action-site sheaf equivalence and restriction comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules with internal group action are equivalent to modules on an action site",
+   "results": "{\"t\": \"2026-10-21T15:16:43Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules with internal group action are equivalent to modules on an action site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mk\", \"SheafOfModules\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.sections\", \"SheafOfModules.hom_ext\", \"SheafOfModules.mk.inj\", \"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.over\"], \"digest\": \"542eaa9466fb29f8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern ordinary module sheafification, group cochains, opposite actions or the generic Grothendieck construction, not the action-site sheaf equivalence and restriction comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Action\"",
+   "results": "{\"t\": \"2026-10-21T15:16:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern ordinary module sheafification, group cochains, opposite actions or the generic Grothendieck construction, not the action-site sheaf equivalence and restriction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck construction for a presheaf of groups: functors on its action category are presheaves with a sectionwise group action",
+   "results": "{\"t\": \"2026-10-21T15:17:31Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction for a presheaf of groups: functors on its action category are presheaves with a sectionwise group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.grothendieckTypeToCatFunctor\", \"CategoryTheory.Grothendieck.grothendieckTypeToCatInverse\", \"CategoryTheory.PresheafOfGroups.ZeroCochain\", \"CategoryTheory.PresheafOfGroups.OneCochain\", \"CategoryTheory.PresheafOfGroups.OneCocycle\", \"GrpCat.sectionsGroup\", \"CategoryTheory.Grothendieck.functorFrom_obj\", \"GrpCat.instSmallElemForallObjCompMonCatForget₂ForgetSections\"], \"digest\": \"46c2e8e4e0779d55\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern ordinary module sheafification, group cochains, opposite actions or the generic Grothendieck construction, not the action-site sheaf equivalence and restriction comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-condensed-product-action-inflation",
@@ -66,7 +225,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), formal input below the partial Kummer boundary-unit calculation: present internal group actions by a small ringed site before applying the ringed-site Grothendieck theorem. Agent-formulated categorical input, not an assertion in the displayed blueprint paragraph.",
+   "place": "Paragraph (3), formal input below the partial Kummer boundary-unit calculation: present internal group actions by a small ringed site before applying the ringed-site Grothendieck theorem. Agent-formulated categorical input, not an assertion in the displayed blueprint paragraph. The ancestor command returns None because the inherited created.item chain ends at a Lean module name; the known blueprint motivation is det-thm-sf-ctf-stability-direct-images, paragraph (3).",
    "via": [
     "lem-sfb-condensed-product-action-inflation",
     "lem-sfb-transverse-tame-open-shriek-exchange",
@@ -78,5 +237,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-action-site-presentation",
+  "worker": "stage1",
+  "summary": "Constructed the twisted category and pullbacks explicitly, checked cover normalization and presheaf/sheaf equivalence, extended the action through finite-product-preserving set sheafification, and verified kernel/cokernel creation. Statement unchanged. All generic inputs are existing nodes; no new nodes.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: agent-formulated categorical foundation for the internal-action input below the partial Kummer boundary calculation. This theorem is not stated by the blueprint. The inherited created.item chain is broken at a Lean module name and ancestor returns None; retained from.node=null with the motivation made explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-0827c312d",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-0827c312d (reviewer sub-agent of L); spot-checked: Read the item in full: 10 steps, 0 new nodes, statement unchanged. Also read the statements of all six cited nodes, the citer lem-sfb-condensed-product-action-inflation, and blueprint paragraph (3) of det-thm-sf-ctf-stability-direct-images; the blueprint does not state the lemma, so proof_origin=agent and the WANTED line are correct. Recomputed each step. Composition labels: both associations give c·h*b·(gh)*a. Pullback: the second leg (q, p*a(q*b)^-1) gives a unique cone factor. Site axioms (i)-(iii) of def-weil-pbc-sites-and-cohomology hold and covers normalize via (f,a)=(f,1)(1,a). E is contravariant in the stated order and semilinear because R_K(f,a)=f*. The inverse construction gives a left action, since (1,b)(1,a)=(1,ab). The sheaf condition matches on normalized covers and is invariant under isomorphism. The action extends to P^# using the module-sheafification extension, |P^#|=|P|^# and product preservation; additivity and scalar laws checked after composing with the unit K×P×P→K×A×A. v^# is equivariant because maps out of a unit are determined by their composites. The reflector comparison on C_K follows from uniqueness. Kernels and cokernels match the formulas in def-weil-sheaf-of-modules-category, and zero detection holds. Edge cases checked: trivial K, zero ring, one-object base (BG with opposite composition gives left G-sets), nonabelian label order, empty covers. Stacks tags 00VH, 00WJ, 00YR, 03CY and 03DA exist. No SGA citation; the phrase 'No SGA route' does not match the route-lock regex. No duplicate found in the DAG (rg -L for equivariant, action-site and Grothendieck-construction nodes). All proof deps are definitions or Mathlib leaves, so no route issue and no tool_uses. from.node=null is inherited from a broken created.item chain and is explained in the node. No repair note exists for this item. No fixes written."
  }
 }

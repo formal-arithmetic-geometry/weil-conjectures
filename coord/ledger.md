@@ -22941,3 +22941,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:35 L: merged deliver/NO/lem-sfb-qcqs-rational-integral-localizing-generators (stage 2; reviewer PASS; parallel immutable checks)
 - 15:37 L: returned deliver/NX/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: Route-pivot drop rule F plus C1. The item is live: it is absent from side-live route-pivot-dropped.txt and its citer lem)
 - 15:37 L: merged deliver/O3/lem-sfb-field-separable-cech-coordinates (stage 2; reviewer FIX; parallel immutable checks)
+- 15:38 L: merged deliver/NR/lem-sfb-internal-action-site-presentation (reviewer PASS; first push; new nodes: 0)
