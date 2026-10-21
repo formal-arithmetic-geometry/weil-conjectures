@@ -19807,3 +19807,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:25 L: merged deliver/Q13/sk-prop-sf-rf-shriek-preservation (reviewer PASS; after a return; new nodes: 4)
 - 03:26 L: merged deliver/Q64/lem-sp-acyclic-flat-proper-coefficient-model (reviewer FIX; after a return; new nodes: 2)
 - 03:26 L: merged deliver/N7/lem-sfb-internal-scalar-extension-finite-presentation (reviewer PASS; first push; new nodes: 0)
+- 03:26 L: merged deliver/Q61/lem-sfb-adic-stratified-perfect (reviewer FIX; after a return; new nodes: 4)
