@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-pulled-reduction-normalization-comparison",
+ "kind": "statement",
+ "title": "Successive quotient normalizations under the pulled reduction comparison",
+ "statement": "Let $g:T'\\to T$ be a morphism of schemes and use the adic datum, small pro-etale sites and coefficient sheaves of [def-weil-pbc-adic-coefficient-datum]. For $W=T,T'$ put $B_W=A_W$, $R_W=\\underline A_W$ and $S_{n,W}=(P_n)_W$. Let $K\\in D(B_T)$ be arbitrary, $K_n=K\\otimes^L_{B_T}S_{n,T}$, $N=Lg_R^*\\operatorname{Res}_T K$, $N_n=N\\otimes^L_{R_{T'}}S_{n,T'}$, and $H_n=Lg_n^*K_n$. Use finite module pullback [def-weil-pbc-completed-pullback] and the specified finite coefficient isomorphisms $\\tau_n:N_n\\xrightarrow{\\sim}H_n$ of [lem-weil-pbc-pulled-reduction-strict-tower-comparison].\n\nFor $b\\geq a\\geq1$ let $\\theta^N_{b,a}:N_b\\otimes^L_{S_{b,T'}}S_{a,T'}\\to N_a$ be successive scalar-extension normalization [lem-sfb-successive-derived-quotient-normalization]. Define $\\theta^H_{b,a}:H_b\\otimes^L_{S_{b,T'}}S_{a,T'}\\to H_a$ by the canonical pullback/scalar-extension comparison followed by $Lg_a^*$ of the normalization $K_b\\otimes^L_{S_{b,T}}S_{a,T}\\to K_a$ of [def-weil-pbc-adic-coefficient-datum]. Then $\\theta^H_{b,a}$ is invertible and\n$$\\theta^H_{b,a}\\circ(\\tau_b\\otimes^L1)=\\tau_a\\circ\\theta^N_{b,a}.$$\nThe comparisons are natural in $K$. For $c\\geq b\\geq a$, successive $\\theta^H_{c,b}$ and $\\theta^H_{b,a}$ equal $\\theta^H_{c,a}$ under canonical derived scalar associativity; for $b=a$ the map $\\theta^H_{a,a}$ is the scalar-extension unit identification.\n\nOn a flat-term K-flat representative $P$ of $K$ [def-pc-kflat-complex], these are the derived maps induced by the balancing maps $(x\\otimes t)\\otimes s\\mapsto x\\otimes q_{b,a}(t)s$ before and after inverse image and scalar extension. The two triple-normalization composites are the map $((x\\otimes t)\\otimes s)\\otimes v\\mapsto x\\otimes q_{c,a}(t)q_{b,a}(s)v$ under the same comparisons. These formulas specify morphisms of sheaf tensor complexes [def-pc-tensor-complex-sheaves], and the stated comparisons and equalities hold independently of the chosen K-flat representative.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); the quotient balancing, triple and unit equations in paragraph 1 of the current blueprint proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*[Nn]ormaliz|[Nn]ormaliz.*quotient",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean, Mathlib/GroupTheory/Transfer.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback scalar extension quotient normalization associativity unit coherence",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Limits.pullbackPullbackRightIsPullback, CategoryTheory.Limits.pullbackAssoc, CategoryTheory.Limits.pullbackAssocIsPullback, CommRingCat.moduleCatExtendScalarsPseudofunctor, CategoryTheory.Limits.pullbackPullbackLeftIsPullback, CategoryTheory.Limits.pullbackAssocSymmIsPullback, ModuleCat.extendScalars_assoc'",
+   "date": "2026-10-21",
+   "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived inverse image functor carries successive quotient tensor normalization maps to the canonical associativity isomorphisms, compatibly with all quotient cocycles and unit maps",
+   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor, rTensor.inverse_apply, id_tensor_π_preserves_coequalizer_inv_desc, π_tensor_id_preserves_coequalizer_inv_desc, rTensor.inverse_comp_rTensor, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, lTensor.inverse_comp_lTensor, lTensor.inverse_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Aa]ssoc|[Aa]ssoc.*pullback",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite quotient change of rings comparison for ringed sheaves commutes with two successive scalar extensions after geometric inverse image",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.comap_comp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: underived module scalar associativity and sheaf pullback composition do not give normalized derived quotient comparisons for a completed-coefficient pullback tower"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-completed-pullback-reduction",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Proof paragraph 1: compatibility with normalization cocycles; paragraph 2: identify the pulled-back reduction tower before completion.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+ "kind": "statement",
+ "title": "Augmented strict reduction tower of ordinary pullback",
+ "statement": "Let $g:T'\\to T$ be a morphism of schemes. Use the Noetherian adic datum $A,I,P_n=A/I^n$, small pro-etale sites, coefficient sheaves $B_W=A_W=\\varprojlim_n(P_n)_W$, and strict tower categories of [def-weil-pbc-adic-coefficient-datum], for $W=T,T'$. Put $R_W=\\underline A_W$, $S_{n,W}=\\underline{P_n}_W=(P_n)_W$, and write $\\operatorname{Res}_W:D(B_W)\\to D(R_W)$ for exact restriction of scalars [def-pc-sheaf-restrict-scalars]. Use the canonical finite coefficient comparisons of [lem-weil-pbc-constant-completion-equivalence] and the derived module pullbacks of [def-weil-pbc-completed-pullback].\n\nFor any $K\\in D(B_T)$, without a completeness hypothesis, put $K_n=K\\otimes^L_{B_T}S_{n,T}$ and $N=Lg^*_{R}\\operatorname{Res}_T K$. Let $H_\\bullet=Lg^*_{\\operatorname{Tow}}K_\\bullet$, a complex of strict $B_{T'}$-towers whose finite coefficient evaluations are $H_n=Lg_n^*K_n$. Let $\\mathcal R(N)_n=N\\otimes^L_{R_{T'}}S_{n,T'}$ denote the strict reduction tower computed on one flat-term K-flat representative [def-weil-pbc-complete-coefficient-datum, def-pc-kflat-complex].\n\nThere is a canonical natural isomorphism $\\tau:\\mathcal R(N)\\xrightarrow{\\sim}\\operatorname{Res}_{T'}H_\\bullet$ in the derived category of strict $R_{T'}$-towers, induced by an isomorphism of strict diagrams on compatible K-flat models. Its finite coefficient evaluation is the composite $\\tau_n$ of the canonical pullback/tensor comparison with $Lg_n^*$ of the finite constant-to-completed scalar comparison. It commutes with every quotient transition and carries the quotient augmentation from the constant tower on $N$ to the restriction of the pulled-back quotient augmentation, precomposed with the ordinary constant-to-completed pullback comparison.\n\nFor $\\widehat N=R\\lim\\mathcal R(N)$, using total right derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit], it induces an isomorphism $\\rho:\\operatorname{Res}_{T'}(R\\lim H_\\bullet)\\xrightarrow{\\sim}\\widehat N$. If $p_n^H,p_n$ are the respective evaluations, then $\\operatorname{Res}(p_n^H)=\\tau_n p_n\\rho$. Under $\\rho$ the pulled-back augmentation gives the quotient-completion unit $\\eta:N\\to\\widehat N$, and $p_n\\eta=u_n$, the finite scalar-extension unit. All comparisons are natural in $K$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (lemma-pushforward-Noetherian-case), proof of (5); the augmented strict-tower and evaluation normalization of the second paragraph of the current blueprint proof is made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback strict quotient reduction tower comparison with restriction of coefficients",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison, Derivation.restrictScalars.congr_simp, Derivation.restrictScalars, DiscreteQuotient.LEComap, Submodule.Quotient.restrictScalarsEquiv_symm_mk, Derivation.restrictScalars_apply, Submodule.Quotient.restrictScalarsEquiv, Submodule.Quotient.restrictScalarsEquiv_mk",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, algebraic scalar restriction and ordinary adic evaluation do not give the augmented strict derived tower comparison with both coefficient presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat change from constant to completed ring sheaves, derived pullback of the strict quotient reduction tower agrees with the reduction tower of ordinary constant coefficient pullback, preserving augmentations and limit projections",
+   "results": "8 hits: AdicCompletion.flat_of_isNoetherian, AdicCompletion.factor_evalₐ_eq_eval, IsAdicComplete.of_liftRingHom, IsAdicComplete.StrictMono.of_lift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.evalOneₐ_liftAlgHom, IsAdicComplete.mkₐ_comp_liftAlgHom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, algebraic scalar restriction and ordinary adic evaluation do not give the augmented strict derived tower comparison with both coefficient presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Tt]ower|[Tt]ower.*restrictScalars",
+   "results": "25 hits: Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, algebraic scalar restriction and ordinary adic evaluation do not give the augmented strict derived tower comparison with both coefficient presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A single K flat complex gives a strict isomorphism between the reduction diagram of inverse image and the inverse image of its reduction diagram, respecting the augmentation and derived limit evaluations",
+   "results": "8 hits: HomologicalComplex.singleMapHomologicalComplex_inv_app_self, HomologicalComplex.extendSingleIso, HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.singleCompEvalIsoSelf_inv_app, HomologicalComplex.singleMapHomologicalComplex_inv_app_ne, HomologicalComplex.singleCompEvalIsoSelf_hom_app, HomologicalComplex.singleCompEvalIsoSelf, HomologicalComplex.restriction.sc'Iso_inv_τ₁",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, algebraic scalar restriction and ordinary adic evaluation do not give the augmented strict derived tower comparison with both coefficient presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf pullback, algebraic scalar restriction and ordinary adic evaluation do not give the augmented strict derived tower comparison with both coefficient presentations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-completed-pullback-reduction",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Proof paragraph 2: derived pullback commutes with tensor, so its defining tower is the reduction tower of ordinary pullback; preserve its augmentation and derived-limit evaluations.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

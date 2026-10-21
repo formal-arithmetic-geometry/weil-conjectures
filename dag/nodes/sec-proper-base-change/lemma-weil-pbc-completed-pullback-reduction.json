@@ -25,98 +25,101 @@
  ],
  "proof": [
   {
-   "text": "Write $R_W=\\underline A_W$, $S_{n,W}=\\underline{P_n}_W$ and $\\operatorname{Res}_W$ for restriction from $A_W$ to $R_W$. Put $N=Lg^*_{\\underline A}\\operatorname{Res}_T K$ and $N_n=N\\otimes^L_{R_{T'}}S_{n,T'}$. The constant-to-completed coefficient comparison [lem-weil-pbc-constant-completion-equivalence] and the completed-pullback construction [def-weil-pbc-completed-pullback] identify the restricted pulled-back strict tower with $(N_n)_n$, including quotient transitions. They identify $\\operatorname{Res}_{T'}L$ with $\\widehat N=R\\lim_nN_n$, and the comparison from ordinary constant-coefficient pullback with its completion unit $\\eta:N\\to\\widehat N$. In particular $p_n\\eta=u_n$, where $p_n:\\widehat N\\to\\operatorname{Res}N_n$ is evaluation and $u_n:N\\to\\operatorname{Res}N_n$ is the quotient unit. These are comparisons of strict towers and their evaluations, not an exchange of inverse image and infinite limits. The hypotheses of [def-weil-pbc-complete-coefficient-datum] hold for $(T',\\Lambda=A,I,N)$: Noetherianity, finite generation, additive torsion of $A/I$, and perfectness of every $P_n$ are supplied by [def-weil-pbc-adic-coefficient-datum]. No completeness of $N$ is asserted.",
+   "text": "Put $N=Lg_R^*\\operatorname{Res}K$, $N_n=N\\otimes^L_RS_n$ and $\\widehat N=R\\lim N_n$. Apply [lem-weil-pbc-pulled-reduction-strict-tower-comparison]: $\\operatorname{Res}L=\\widehat N$, with evaluation $p_n$, unit $\\eta$ and $p_n\\eta=u_n$. Its $\\tau_n:N_n\\simeq Lg_n^*K_n$ preserve transitions. The adic datum supplies the Noetherian, torsion and perfect-quotient hypotheses of [def-weil-pbc-complete-coefficient-datum] for $N$.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-complete-coefficient-datum",
-    "def-weil-pbc-adic-coefficient-datum"
+    "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-complete-coefficient-datum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-    "place": "Second paragraph: ordinary pullback and its reduction tower; Stacks 099N (lemma-pushforward-Noetherian-case), (2), (5)"
+    "place": "Paragraph 2: augmented strict reduction tower of ordinary pullback."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-koszul-completion-reflector] on the small site $T'_{\\Proet}$ with $\\mathcal O=R_{T'}$ and the finite generators of $I$. For arbitrary $N$ its Koszul completion is locally derived complete. By [lem-weil-pbc-constant-completion-equivalence] this Koszul limit, with its unit, is $\\widehat N$ of step 1. Thus the Koszul completion unit of $\\widehat N$ is an isomorphism, by the same reflector. Now form the Koszul completion unit of $L$ over $A_{T'}$. The restriction comparisons in [lem-weil-pbc-constant-completion-equivalence] identify its restriction with the Koszul unit of $\\operatorname{Res}_{T'}L=\\widehat N$: the Koszul factors are finite free and restriction identifies the derived limits and units. Restriction is exact and unchanged on underlying abelian sheaves, so the cohomology sheaves of a restricted cone vanish only if those of the original cone vanish. It therefore reflects isomorphisms. The Koszul unit of $L$ is an isomorphism, which is precisely derived $I$-completeness in [def-weil-pbc-intrinsic-completion].",
+   "text": "The reflector [lem-weil-pbc-ringed-koszul-completion-reflector] and the unit-preserving quotient/Koszul comparison [lem-weil-pbc-constant-completion-equivalence] make $\\widehat N$ complete. Flatness there permits [lem-weil-pbc-flat-scalar-koszul-tower-comparison]: the restricted Koszul unit of $L$ is invertible. Restriction leaves cohomology sheaves unchanged, so reflects isomorphisms. Thus $L$ satisfies [def-weil-pbc-intrinsic-completion].",
    "uses": [
     "lem-weil-pbc-ringed-koszul-completion-reflector",
     "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
     "def-weil-pbc-intrinsic-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-    "place": "First paragraph, completeness; Stacks 099B (lemma-derived-completion), 0A0E (lemma-derived-completion-koszul), and 099M (lemma-naive-completion)"
+    "place": "Paragraph 1: completeness via the restricted Koszul unit."
    }
   },
   {
-   "text": "Apply [lemma-weil-pbc-adic-completion-reduction] to $X=T'$, $\\Lambda=A$, and $K=N$, with the datum verified in step 1. Its strict tower is exactly $(N_n)_n$, and it imposes no derived-completeness hypothesis on $N$. It gives a functorial isomorphism $\\beta_n:\\widehat N\\otimes^L_{R_{T'}}S_{n,T'}\\to N_n$ in the quotient-coefficient derived category, specifically the scalar-extension adjoint of $p_n$. The finite comparisons and evaluation comparisons of [lem-weil-pbc-constant-completion-equivalence] and [def-weil-pbc-completed-pullback] identify its source with $L\\otimes^L_{A_{T'}}(P_n)_{T'}$ and its target with $Lg_n^*K_n$. Because the strict tower comparison preserves $p_n$, its adjoint is the projection-induced $\\alpha_n$ in the statement. Thus $\\alpha_n$ is an isomorphism in the indicated quotient-coefficient category and is natural in $K$.",
+   "text": "Apply [lemma-weil-pbc-adic-completion-reduction] to $N$, obtaining invertible $\\beta_n:\\widehat N\\otimes^L_RS_n\\to N_n$, adjoint to $p_n$. The flatness and multiplication isomorphism of [lem-weil-pbc-completed-constant-sheaf-reduction] permit [lem-weil-pbc-flat-coefficient-reduction-adjunct]. Its adjunct equation identifies $\\alpha_n$ with $\\tau_n\\beta_n$ under its source comparison $\\kappa_n$. All maps are natural in $K$.",
    "uses": [
     "lemma-weil-pbc-adic-completion-reduction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-completed-pullback"
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-flat-coefficient-reduction-adjunct"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-    "place": "First paragraph, finite reduction; second paragraph, apply finite reduction of adic completion to ordinary pullback"
+    "place": "Paragraph 1: specified projection-induced reduction arrow."
    }
   },
   {
-   "text": "To verify the coherence of these specified maps, set $r_n=\\eta\\otimes^L1:N_n\\to\\widehat N\\otimes^L_{R_{T'}}S_{n,T'}$. Use the canonical derived adjunction in [def-weil-pbc-projection-formula-arrows] for the identity underlying topos with ring map $R_{T'}\\to S_{n,T'}$; direct image is exact restriction of scalars. The adjunct of $\\beta_nr_n$ is $p_n\\eta=u_n$ by step 1. The adjunct of $1_{N_n}$ is also $u_n$, so $\\beta_nr_n=1_{N_n}$. Since $\\beta_n$ is an isomorphism by step 3, $r_n=\\beta_n^{-1}$. This is an adjunction identity, not a claim that the unreduced completion unit $\\eta$ is an isomorphism.",
+   "text": "Let $r_n=\\eta\\otimes^L1$. Under the derived scalar adjunction of [def-weil-pbc-projection-formula-arrows], the adjuncts of $\\beta_nr_n$ and $1_{N_n}$ are both $u_n=p_n\\eta$. Hence $\\beta_nr_n=1$ and $r_n=\\beta_n^{-1}$.",
    "uses": [
     "def-weil-pbc-projection-formula-arrows"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-    "place": "Compatibility clause: identify the finite comparison as the inverse of the reduced completion unit"
+    "place": "Compatibility clause: elementary adjunction cancellation."
    }
   },
   {
-   "text": "Let $q^N_{b,a}$ and $q^{\\widehat N}_{b,a}$ be the quotient-transition maps of [def-weil-pbc-complete-coefficient-datum]. Naturality of tensoring $\\eta$ with $P_b\\to P_a$ gives $q^{\\widehat N}_{b,a}r_b=r_aq^N_{b,a}$. Multiplying on the left by $\\beta_a$ and on the right by $\\beta_b$ and using step 4 yields $q^N_{b,a}\\beta_b=\\beta_aq^{\\widehat N}_{b,a}$. The finite comparisons in [lem-weil-pbc-constant-completion-equivalence] commute with these quotient transitions; the tower in [def-weil-pbc-completed-pullback] has the pulled-back transitions. Hence this equation is exactly the transition square for $\\alpha_b,\\alpha_a$.",
+   "text": "Naturality gives $q^{\\widehat N}_{b,a}r_b=r_aq^N_{b,a}$. Cancel the invertible $r$ to get $q^N_{b,a}\\beta_b=\\beta_aq^{\\widehat N}_{b,a}$. The transition-compatible $\\tau$ of [lem-weil-pbc-pulled-reduction-strict-tower-comparison] and $\\kappa$ of [lem-weil-pbc-flat-coefficient-reduction-adjunct] (steps 1 and 3) turn this into the transition square for $\\alpha$.",
    "uses": [
-    "def-weil-pbc-complete-coefficient-datum",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-completed-pullback"
+    "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+    "lem-weil-pbc-flat-coefficient-reduction-adjunct"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-    "place": "First paragraph, compatibility with the transition maps"
+    "place": "Paragraph 1: quotient-transition square."
    }
   },
   {
-   "text": "Write $\\theta^N_{b,a}$ and $\\theta^{\\widehat N}_{b,a}$ for the scalar-extension normalization maps of [def-weil-pbc-complete-coefficient-datum]. Their naturality gives $\\theta^{\\widehat N}_{b,a}(r_b\\otimes^L1)=r_a\\theta^N_{b,a}$. Substitution of step 4 and cancellation gives $\\theta^N_{b,a}(\\beta_b\\otimes^L1)=\\beta_a\\theta^{\\widehat N}_{b,a}$. These are also the intended normalizations after the finite coefficient comparisons: the balancing maps in [def-weil-pbc-adic-coefficient-datum] send $(x\\otimes t)\\otimes s$ to $x\\otimes q_{b,a}(t)s$. Applying inverse image and scalar extension to this formula gives the same map for the pulled-back reduction tower. This computation is valid on K-flat representatives, since [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] says pullback preserves that resolving class and identifies the derived tensor comparison. Thus the equation just proved is the required normalization square for $\\alpha$. For three levels both normalization composites send $((x\\otimes t)\\otimes s)\\otimes v$ to $x\\otimes q_{c,a}(t)q_{b,a}(s)v$; for equal indices they are the balancing unit. These sectionwise formulas respect restrictions and differentials, so give the asserted cocycle and unit equations in the derived categories. Naturality follows from the same formulas with $x$ replaced by its image under a chain map, independently of the K-flat representative.",
+   "text": "Naturality of [lem-sfb-successive-derived-quotient-normalization] gives $\\theta^{\\widehat N}_{b,a}(r_b\\otimes^L1)=r_a\\theta^N_{b,a}$. Invert $r$ to get $\\theta^N_{b,a}(\\beta_b\\otimes^L1)=\\beta_a\\theta^{\\widehat N}_{b,a}$. The comparison square, cocycle and unit in [lem-weil-pbc-pulled-reduction-normalization-comparison], and scalar-associativity compatibility in [lem-weil-pbc-flat-coefficient-reduction-adjunct], turn this into all the asserted normalization equations for $\\alpha$.",
    "uses": [
-    "def-weil-pbc-complete-coefficient-datum",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-pulled-reduction-normalization-comparison",
+    "lem-weil-pbc-flat-coefficient-reduction-adjunct"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-    "place": "First paragraph, normalization cocycles; coefficient normalizations computed before and after pullback"
+    "place": "Paragraph 1: normalization square, quotient cocycle and equal-index unit."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-complete-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
   "def-weil-pbc-intrinsic-completion",
   "def-weil-pbc-projection-formula-arrows",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-coefficient-reduction-adjunct",
+  "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
+  "lem-weil-pbc-pulled-reduction-normalization-comparison",
+  "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
   "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lemma-weil-pbc-adic-completion-reduction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-  "place": "Both proof paragraphs, expanded using the existing unrestricted constant-coefficient completion-reduction lemma"
+  "place": "Both paragraphs: same original completion-reduction route, with four independent strict-tower/coefficient arguments extracted as unsplit nodes."
  },
  "mathlib_searches": [
   {
@@ -409,20 +412,26 @@
   "date": "2026-10-21",
   "item": "lemma-weil-pbc-completed-pullback-reduction",
   "worker": "stage1",
-  "summary": "NL rechecked and retained the already reviewed live six-step split, with no change to its statement, proof, dependencies or blueprint route. Verified every cited statement, completion and coefficient hypotheses, projection-induced maps, transitions, normalization cocycles and unit identities against the current blueprint and Stacks. Added six actually logged Mathlib searches; no new nodes. The sandbox report and citations.json record this direct-delivery review.",
-  "blueprint": "Current main-20261015 proof paragraph 1: completeness in step 2, finite reduction in step 3, transitions and normalization in steps 4–6. Paragraph 2: step 1 identifies ordinary pullback and its reduction tower. Finite reduction uses the unrestricted lemma-weil-pbc-adic-completion-reduction rather than applying lem-weil-pbc-finite-reduction-reconstruction outside its complete-input hypothesis.",
-  "tool_uses": []
+  "summary": "NF repairs the explicit human re-split return: retain the statement and six logical steps, extract four independent arguments as statement-only nodes (augmented strict pullback tower, flat Koszul restriction, finite reduction adjunct normalization, and pulled-back quotient normalization). The parent is a short assembly with elementary inverse-unit and transition cancellation. Earlier actual Mathlib searches and helper files retained; metadata refreshed from current live node.",
+  "blueprint": "Main-20261015 paragraph 2 is realized by the new strict tower comparison in step 1. Paragraph 1 completeness uses the new Koszul restriction in step 2; finite reduction uses the new adjunct comparison in step 3; normalization and its triple/unit equations use the new pulled reduction normalization in step 6. Steps 4–5 retain the original elementary adjunction/cancellation argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic derived scalar associativity naturality for a map eta, needed for the normalization square; the unit supplies no separate statement of this naturality."
+   }
+  ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution"
+  "lem-pc-kflat-resolution",
+  "lem-sfb-successive-derived-quotient-normalization"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NL-08ce37fbd",
-  "group": "NL",
+  "reviewer": "NT-cc-NF-a14cb2d72",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-08ce37fbd (reviewer sub-agent of L); spot-checked: This is a near no-op re-delivery of a split that has been live and reviewed since Q90 230c42ab (2026-10-17). Compared field by field, the statement, all six steps (text, uses, elementary), stmt_deps, proof_deps, blueprint, blueprint_update, source and tool_uses are identical. Only split_report and mathlib_searches changed; the reviewed/reviewed_proof differences come from the base. All nine cited statements are also unchanged. I re-read the maths in full. The statement matches blueprint main-20261015 sk-prop-pbc-complete and Stacks 099N(2)/(5): g is arbitrary, the coefficients are the completed A_{T'}, and the targets lie in D((P_n)_{T'}). Step 1: the constant-completion equivalence and the completed-pullback definition give Res L = N^ with p_n eta = u_n. Step 2: the Koszul reflector plus the Koszul=quotient unit identification gives completeness; Res commutes with R lim (A^ is flat) and reflects isomorphisms. Step 3: adic-completion-reduction has no completeness hypothesis, so it applies to the incomplete N. It does not misuse the blueprint's reconstruction lemma. Step 4: the adjunct argument gives r_n = beta_n^{-1}. Steps 5 and 6: naturality plus the balancing formulas give the transitions, the normalization, the cocycle and the unit. Edge cases K=0, I=0, I=A and the empty site all hold. No SGA source is used. The stale maintainer-owned tool_uses entry lem-pc-kflat-resolution is harmless. Maintainer: the item is already live and reviewed with stage-3 proofs landed (D9, 2026-10-19), so withdraw it from S1 dispatch."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-a14cb2d72 (reviewer sub-agent of L); spot-checked: This delivery answers the 2026-10-21 human re-split note (side-live coord/repair-notes). The note was reopened because NL 08ce37fb landed with no new node. The item is not in the dropped list, and none of the four new node ids exists live. The statement and stmt_deps are unchanged and nothing is weakened. The proof is now 2248 characters (2359 after the fix). Step by step: (1) the old step 1 strict-tower argument (Res L = N^, eta, p_n eta = u_n) is now lem-weil-pbc-pulled-reduction-strict-tower-comparison. tau_n is the 07A4 pullback/tensor map composed with Lg_n^* of the constant-completion finite comparison, rho is Res Rlim = Rlim Res, and no completeness hypothesis is used. (2) The old step 2 restricted-Koszul claim is now lem-weil-pbc-flat-scalar-koszul-tower-comparison. C(x)_B(B(x)_R Q_m(R)) = Res C(x)_R Q_m(R) holds on the nose, Rlim commutes with Res, and the units match; r=0 is trivial. Completeness of N^ via the reflector and the Koszul=quotient comparison, and reflection of isomorphisms, stay in the parent. (3) The old step 3 identification is now lem-weil-pbc-flat-coefficient-reduction-adjunct: K-flat with flat terms is preserved under restriction along the flat B, the adjunct equation p_R# = p_B# kappa holds, and the hypotheses come from completed-constant-sheaf-reduction. I re-derived alpha_n kappa = tau_n beta_n (rho(x)1), so alpha_n is invertible. (4) and (5) are kept. (6) The balancing, triple and unit formulas are now lem-weil-pbc-pulled-reduction-normalization-comparison, which has no Rlim or alpha and so does not restate the parent's normalization clause. I checked theta^N(beta_b(x)1) = beta_a theta^N^ and its conjugation by tau, kappa and rho. Nothing from the old argument was dropped or blurred. The four nodes have comparable sizes (1.7-2.2k characters each), are statement-only and unsplit, and each has three kinds of Mathlib search. They partly overlap the clauses of lem-weil-pbc-constant-completion-equivalence that are specific to A-hat, but they generalize those clauses and add the adjunct and unit content, so they are not duplicates (advisory). I checked the edge cases K=0, I=0, I=A, r=0 and g=id. The Stacks tags 099N(5), 0A0E, 0A07, 0G7E, 0D6D, 07A4 and 07A6 were verified against tags/tags and proetale.tex, and no SGA source is used. FIX: step 5 relied on the transition compatibility of tau and kappa from the two new nodes but had empty uses, so I added lem-weil-pbc-pulled-reduction-strict-tower-comparison and lem-weil-pbc-flat-coefficient-reduction-adjunct to its text and uses (both were already in proof_deps).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.CompletedPullbackReduction",

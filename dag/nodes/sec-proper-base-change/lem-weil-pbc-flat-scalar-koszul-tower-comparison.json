@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
+ "kind": "statement",
+ "title": "Restriction of scalars identifies strict Koszul towers and their units",
+ "statement": "Let $\\mathcal C$ be a small site, $\\varphi:R\\to B$ a morphism of sheaves of commutative rings, and $a_1,\\ldots,a_r$ a finite list of global sections of $R$, allowing $r=0$. Assume $B$ is flat over $R$, meaning that $B\\otimes_R-$ is exact. Use module sheaves and unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] and restriction of scalars $\\operatorname{Res}$ [def-pc-sheaf-restrict-scalars]. For $O=R,B$, write $a_{j,R}=a_j$ and $a_{j,B}=\\varphi(a_j)$, and define\n$$Q_m(O)=\\bigotimes_{j=1}^r[O\\xrightarrow{a_{j,O}^m}O]\\qquad(m\\geq1)$$\nin degrees $[-r,0]$, using the total tensor complex [def-pc-tensor-complex-sheaves]. Give these the inverse transition $(a_{j,O},1)$ in each two-term factor and the degree-zero maps $O[0]\\to Q_m(O)$, as in [def-weil-pbc-ringed-koszul-system]. For any unbounded $B$-module complex $C$, put $T_B(C)_m=\\operatorname{Tot}(C\\otimes_BQ_m(B))$ and $T_R(\\operatorname{Res}C)_m=\\operatorname{Tot}(\\operatorname{Res}C\\otimes_RQ_m(R))$.\n\nThere is a canonical natural isomorphism of strict towers of complexes\n$$\\operatorname{Res}T_B(C)\\xrightarrow{\\sim}T_R(\\operatorname{Res}C).$$\nOn the summand indexed by any exterior basis element it is the identity on $\\operatorname{Res}C$. It commutes with the transition maps and the degree-zero maps from $\\operatorname{Res}C$. With $R\\lim$ the total right derived inverse limit of strict towers [lem-weil-pbc-ringed-strict-tower-homotopy-limit], this induces a natural isomorphism\n$$\\gamma_C:\\operatorname{Res}(R\\lim_m T_B(C)_m)\\xrightarrow{\\sim}R\\lim_mT_R(\\operatorname{Res}C)_m.$$\nWriting $\\eta_B$ and $\\eta_R$ for the units induced by those degree-zero maps, one has $\\gamma_C\\circ\\operatorname{Res}(\\eta_B)=\\eta_R$. The isomorphism also identifies every derived-limit evaluation with the corresponding restricted evaluation. These comparisons descend to $D(B)$ independently of the representative $C$. For $r=0$ they give the identity under the constant-tower identifications.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E (lemma-derived-completion-koszul), finite free Koszul model; derived-limit restriction is Tag 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim), specialized to the identity topos with flat structural ring map. The strict tower, evaluation and unit normalization are made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Rr]estrict|[Rr]estrict.*Koszul|[Rr]estrict.*[Hh]omotopy[Ll]imit",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, underived module tensor base change and module adic completion do not state the strict sheaf Koszul tower and unit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with Koszul completion units and strict derived inverse limit of Koszul complexes",
+   "results": "8 hits: AlgHom.restrictScalars, RestrictScalars, ModuleCat.RestrictScalars.obj', RestrictScalars.algebra, RestrictScalars.module, FormalMultilinearSeries.restrictScalars, LinearEquiv.restrictScalars, ContinuousLinearMap.bilinearRestrictScalars_eq_restrictScalarsL_comp_restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, underived module tensor base change and module adic completion do not state the strict sheaf Koszul tower and unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, underived module tensor base change and module adic completion do not state the strict sheaf Koszul tower and unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a flat morphism of ring sheaves identifies the strict Koszul tensor towers and their derived inverse limits with their completion units",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Algebra.FormallyUnramified.flat_of_restrictScalars, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, underived module tensor base change and module adic completion do not state the strict sheaf Koszul tower and unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For R to B a flat algebra sheaf the complex M tensor over B with Koszul B is the restricted M tensor over R with Koszul R naturally in the power tower",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv, Algebra.kerTensorProductMapIdToAlgHomEquiv, Module.Flat.ker_lTensor_eq, KaehlerDifferential.moduleBaseChange', KaehlerDifferential.cotangentComplexBaseChange_tmul, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, KaehlerDifferential.cotangentComplexBaseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, underived module tensor base change and module adic completion do not state the strict sheaf Koszul tower and unit comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-completed-pullback-reduction",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Proof paragraph 1: completeness of the defining derived limit, compared with the intrinsic completed-coefficient Koszul unit.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
