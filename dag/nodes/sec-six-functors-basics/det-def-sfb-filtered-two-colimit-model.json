@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "The set colimit can be constructed as the quotient of $\\coprod_{k\\in J_{ab}}H_k$ by eventual equality: $(k,g)\\sim(n,h)$ if there is $p\\ge k,n$ with $t_{kp}(g)=t_{np}(h)$. Reflexivity uses $p=k$, symmetry reverses the equality, and transitivity follows by moving two equality witnesses to one upper bound and using the transition law in step 1. The coprojections are compatible, and any compatible family $u_k:H_k\\to S$ factors uniquely by $[k,g]\\mapsto u_k(g)$, since eventual equality implies equality of these values. This is exactly the colimit universal property of [def-weil-pbc-category-colimit]. In any chosen colimit, [lem-weil-pbc-filtered-colimit-sets-elementwise] gives representatives $[k,g]$ and the same common-stage equality criterion. This justifies the Hom-set construction without assuming existence of any colimit over a large category.",
+   "text": "For fixed objects use Mathlib Functor.ColimitType for the Hom diagram, the quotient of the sigma type by the generating transition relation. Functor.ιColimitType_map proves compatibility of the classes. For any cocone on the ULift-valued diagram, descend the map (k,g) ↦ ι_k(ULift.up g) by Quot.lift; cocone naturality respects the generating relation. Factorization is definitional and uniqueness follows by quotient induction. This proves homCocone_isColimit and realizes [def-weil-pbc-category-colimit]. With the filteredness of the common-stage preorder from step 1, Functor.ιColimitType_eq_iff_of_isFiltered gives the common-stage equality criterion directly on this quotient, realizing [lem-weil-pbc-filtered-colimit-sets-elementwise] without a further ULift comparison.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
@@ -48,10 +48,8 @@
    }
   },
   {
-   "text": "Define the composite by the formula in the statement. If $m$ and $n$ are two upper bounds of the representative stages $k,k'$, choose $p\\ge m,n$. By steps 1 and 3 the images in stage $p$ of both proposed composite representatives are exactly $t_{k'p}(h)t_{kp}(g)$, so their classes agree. If $[k,g]=[r,\\widetilde g]$ and $[k',h]=[s,\\widetilde h]$, the equality criterion of [lem-weil-pbc-filtered-colimit-sets-elementwise] gives witnesses $u\\ge k,r$ and $v\\ge k',s$. Choose $p$ above $u,v$ and the two stages used to form the proposed composites. At $p$ the two representatives of each input agree by step 1. Their products therefore agree, by step 3, proving independence of representatives and of the common stage simultaneously.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
+   "text": "The helper compAt_transition moves a product to a later stage using steps 1 and 3 and homClass_transition. For two upper bounds m and n choose p above both. Moving each product to p proves compRepresentative_eq_compAt. To descend composition by Quot.liftOn₂ it suffices to respect the generating transition relation separately in each input. Choose a stage above the other input and the later representative; homTransition_comp identifies the two transported inputs there. This proves compRepresentative_rel_right and compRepresentative_rel_left without needing the full eventual-equality criterion.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
@@ -68,10 +66,9 @@
    }
   },
   {
-   "text": "For a representative $g\\in H_k$ the map $P_k(g)=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}$ has source $\\Phi_i(x)$ and target $\\Phi_j(y)$ by [det-def-sfb-filtered-two-colimit-cocone]. For $k\\le n$, cocone compatibility, applied to $i\\le k\\le n$ and $j\\le k\\le n$, gives\n$$\\theta_{in,x}^{-1}=\\Phi_n(\\tau_{ikn,x})\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1},\\qquad\n\\theta_{jn,y}=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_n(\\tau_{jkn,y})^{-1}.$$\nSubstitute these and $t_{kn}(g)=\\tau_{jkn,y}T_{kn}(g)\\tau_{ikn,x}^{-1}$. The two pairs of inverse $\\Phi_n(\\tau)$ factors cancel, and naturality of the cocone isomorphism $\\theta_{kn}:\\Phi_nT_{kn}\\Rightarrow\\Phi_k$ gives\n$$P_n(t_{kn}(g))=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_nT_{kn}(g)\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1}=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}=P_k(g).$$\nBy [lem-weil-pbc-filtered-colimit-sets-elementwise], equal classes have representatives equal at a common stage; the displayed invariance therefore makes $\\Phi([k,g])=P_k(g)$ independent of representatives.",
+   "text": "For a representative $g\\in H_k$ the map $P_k(g)=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}$ has source $\\Phi_i(x)$ and target $\\Phi_j(y)$ by [det-def-sfb-filtered-two-colimit-cocone]. For $k\\le n$, cocone compatibility, applied to $i\\le k\\le n$ and $j\\le k\\le n$, gives\n$$\\theta_{in,x}^{-1}=\\Phi_n(\\tau_{ikn,x})\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1},\\qquad\n\\theta_{jn,y}=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_n(\\tau_{jkn,y})^{-1}.$$\nSubstitute these and $t_{kn}(g)=\\tau_{jkn,y}T_{kn}(g)\\tau_{ikn,x}^{-1}$. The two pairs of inverse $\\Phi_n(\\tau)$ factors cancel, and naturality of the cocone isomorphism $\\theta_{kn}:\\Phi_nT_{kn}\\Rightarrow\\Phi_k$ gives\n$$P_n(t_{kn}(g))=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_nT_{kn}(g)\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1}=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}=P_k(g).$$\nThe private helper mapHomRepresentative_transition proves this calculation directly from cocone compatibility and naturality. Thus the formula respects each generating transition relation, and Quot.liftOn descends it to all classes without using the full eventual-equality criterion.",
    "uses": [
-    "det-def-sfb-filtered-two-colimit-cocone",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "det-def-sfb-filtered-two-colimit-cocone"
    ],
    "elementary": true,
    "source": {
@@ -97,7 +94,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-  "place": "All three blueprint proof paragraphs, expanded into seven steps; the set-colimit quotient is checked directly using Stacks Tag 04AX (section-directed-colimits)"
+  "place": "All three blueprint proof paragraphs, expanded into seven steps; the set-colimit quotient is checked directly using Stacks Tag 04AX (section-directed-colimits); formalized by E1 on 2026-10-21 with Functor.ColimitType and quotient descent for composition and comparison"
  },
  "mathlib_searches": [
   {
@@ -264,5 +261,15 @@
   "existing": false,
   "note": "Section 1(B) repair: the recorded module was deleted on 2026-10-20; scompile.py --source confirms Module source unavailable. Reconstructs precisely the node: normalized coherent cocone, pair objects, actual Hom set colimits with lifted universal cocone, common-stage composition, and the canonical comparison. All data is explicit; named law theorems belong to this definition node. Independent universes are retained."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261021T061004-L-1682422",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
