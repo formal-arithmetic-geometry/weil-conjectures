@@ -3,40 +3,156 @@
  "blueprint": {
   "is": "lemma-nagata-strict-transform-chart-localization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Strict-transform chart formula localizes",
- "statement": "The constructed localized comparison $(\\overline\\sigma_a)_s$ equals the\nstrict-transform chart comparison constructed directly from the localized\ndata.",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings, $I\\subseteq A$ an ideal, $a\\in I$, $b=f(a)$, $J=IB$, and $s\\in B$. Set\n$$R=C_a^{\\mathrm{st}}(A,B,I),\\quad T=B[J/b],\\quad R'=C_a^{\\mathrm{st}}(A,B_s,I),\\quad T'=B_s[JB_s/(b/1)].$$\nWrite $g:R\\to T$ and $g':R'\\to T'$ for the comparisons of [def-nagata-strict-transform-chart-comparison]. Let $\\alpha:R_s\\xrightarrow{\\sim}R'$ be the canonical source identification of [lemma-nagata-strict-transform-chart-localization-data], and let $\\beta:T_s\\to T'$ be the canonical map induced by $B\\to B_s$, sending $y\\in B$ to $y/1$ and $z/b$ ($z\\in J$) to $(z/1)/(b/1)$. Here localization at $s$ always means localization at its structural image.\n\nThe constructed localized comparison $g_s=(\\overline\\sigma_a)_s:R_s\\to T_s$ of [def-nagata-strict-transform-chart-comparison-localized] equals the comparison constructed directly from the localized data, under these identifications:\n$$\\beta\\circ g_s=g'\\circ\\alpha.$$\nThe map $\\beta$ is an isomorphism, so equivalently $\\beta\\circ g_s\\circ\\alpha^{-1}=g'$. For localization at an element of $A$, use its image in $B$. The equality is preserved under the canonical tensor-product and iterated-localization presentation transports specified in [def-nagata-strict-transform-chart-comparison-localized], including further localization of the chart rings.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.md",
   "place": "node lemma-nagata-strict-transform-chart-localization, order 153"
  },
  "stmt_deps": [
-  "def-nagata-strict-transform-chart-comparison-localized"
+  "def-nagata-strict-transform-chart-comparison-localized",
+  "def-nagata-strict-transform-chart-comparison",
+  "lemma-nagata-strict-transform-chart-localization-data",
+  "def-nagata-blowup-chart-ring"
  ],
  "proof": [
   {
-   "text": "Localization commutes with the tensor product and with the power-torsion\nquotient by [lemma-nagata-power-torsion-localization]. Both maps send\nevery pure tensor and every generator $x/a$ to the same fraction. Ring-map\nextensionality gives the equality, and\n[prop-nagata-strict-transform-chart-iso] supplies the equivalence\nproperty on both sides.",
+   "text": "Put $C=B\\otimes_A A[I/a]$ and $C'=B_s\\otimes_A A[I/a]$, with quotient maps $q:C\\to R$ and $q':C'\\to R'$. The canonical isomorphism in [lemma-nagata-strict-transform-chart-localization-data] gives $\\alpha:R_s\\simeq R'$. Its canonical map is induced by the coefficient-localization map $y\\otimes u\\mapsto(y/1)\\otimes u$, hence $\\alpha(q(y\\otimes u)/1)=q'((y/1)\\otimes u)$. This records the map as well as its isomorphism property; no injectivity of $B\\to B_s$ is assumed.",
    "uses": [
-    "lemma-nagata-power-torsion-localization",
-    "prop-nagata-strict-transform-chart-iso"
+    "lemma-nagata-strict-transform-chart-localization-data",
+    "def-nagata-strict-transform-chart-ring"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+    "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "Construct the target map without assuming localization is injective. The localization universal property gives $B_b\\to(B_s)_{b/1}$, sending $y/b^n$ to $(y/1)/(b/1)^n$. Its restriction to $T$ lands in $T'$: by [def-nagata-blowup-chart-ring], $T$ is generated as a $B$-algebra by $z/b$ for $z\\in J$, and the displayed images are generators of $T'$ or coefficients in $B_s$. Thus it gives $k:T\\to T'$. The image $k(s)=s/1$ is a unit of $T'$, with inverse the coefficient $1/s\\in B_s$. Applying [lem-weil-pbc-localization-away-universal-property] to $k$ gives $\\beta:T_s\\to T'$ with $\\beta(t/s^n)=k(t)(s/1)^{-n}$. This argument uses only the specified subalgebra generators and the cited universal property.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+    "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "Compare maps before the quotient. By [def-nagata-strict-chart-to-extended-blowup-chart], both $gq$ and $g'q'$ are the maps obtained from the coefficient map and the chart map by the tensor-product universal property. The two maps from $C$ to $T'$ obtained by going through $R$ and $R'$ agree on $y\\otimes1$: both give $y/1$. They agree on $1\\otimes(x/a)$ for $x\\in I$: both give $(f(x)/1)/(b/1)$. The algebra $A[I/a]$ is generated by these fractions over $A$, so the chart-factor maps agree. Tensor-product uniqueness now gives equality on $C$. Since $q$ is surjective, this gives, for every $r\\in R$,\n$$k(g(r))=g'(\\alpha(r/1)).$$\nHere the comparison on the quotient is exactly the induced map specified by [def-nagata-strict-transform-chart-comparison]; the argument does not use an uncited assertion of naturality.",
+   "uses": [
+    "def-nagata-strict-chart-to-extended-blowup-chart",
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-nagata-strict-transform-chart-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+    "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "By the definition of the localized comparison, $g_s(r/1)=g(r)/1$. Step 3 therefore says that $\\beta g_s$ and $g'\\alpha$ agree on every $r/1\\in R_s$. Apply the uniqueness clause of [lem-weil-pbc-localization-away-universal-property] with source ring $R$, localization element the image of $s$, and target $T'$. The two ring maps are equal. Explicitly their common value at $r/s^n$ is $g'(\\alpha(r/1))(s/1)^{-n}$. This proves the asserted equality on all fractions, not merely on the unlocalized generators.",
+   "uses": [
+    "def-nagata-strict-transform-chart-comparison-localized",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+    "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "Apply [prop-nagata-strict-transform-chart-iso] to both $A\\to B$ and $A\\to B_s$: $g$ and $g'$ are isomorphisms. The inverse $g^{-1}:T\\to R$ takes the structural image of $s$ to that of $s$, because $g$ is a $B$-algebra map by its defining tensor construction. Localize $g^{-1}$ by the universal property to obtain $h:T_s\\to R_s$. The composites $hg_s$ and $g_sh$ fix the images of $R$ and $T$, respectively, so localization uniqueness makes them identities. Thus $g_s$ is invertible. From step 4,\n$$\\beta=g'\\alpha h,$$\nwhich is a composite of three isomorphisms. This proves that the canonical target map is the required identification, rather than assuming this identification at the start.",
+   "uses": [
+    "prop-nagata-strict-transform-chart-iso",
+    "def-nagata-strict-chart-to-extended-blowup-chart",
+    "def-nagata-strict-transform-chart-comparison",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+    "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "For $s\\in A$, apply the result to $f(s)\\in B$; the denominators are the structural images specified by [def-nagata-strict-transform-chart-comparison-localized]. Set $F=\\beta g_s\\alpha^{-1}:R'\\to T'$. Step 4 gives $F=g'$. For canonical presentation isomorphisms $v:R'\\simeq\\widetilde R$ and $u:T'\\simeq\\widetilde T$, composing this equality gives $uFv^{-1}=ug'v^{-1}$, exactly the transported comparison. For further localization at any chart element $c\\in R'$, use the target $T'_{g'(c)}$. Since $F(c)=g'(c)$ is a unit in that target, both maps extend by [lem-weil-pbc-localization-away-universal-property] to maps $R'_c\\to T'_{g'(c)}$. Each sends $r/c^n$ to $g'(r)/g'(c)^n$, so uniqueness makes the extensions equal. Thus the same equality holds after further chart localization with the matched target denominator; $c$ need not come from $A$ or $B$.",
+   "uses": [
+    "def-nagata-strict-transform-chart-comparison-localized",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+    "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-power-torsion-localization",
+  "lemma-nagata-strict-transform-chart-localization-data",
+  "def-nagata-strict-transform-chart-ring",
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-strict-chart-to-extended-blowup-chart",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-nagata-strict-transform-chart-comparison",
+  "def-nagata-strict-transform-chart-comparison-localized",
   "prop-nagata-strict-transform-chart-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization.proof.md",
+  "place": "Proof of order 161: equality on pure tensors and chart generators, then the equivalence property; expanded with Stacks Tags 052Q (definition-blow-up), 0BIP (lemma-blowup-base-change), and 00CP (proposition-universal-property-localization)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictTransform|StrictChart|blowup.*localiz|localiz.*blowup",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match for the strict-transform comparison equality; generic localization and tensor tools are already cited as existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison homomorphism from a tensor product modulo power torsion to a blowup chart commutes with localization",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, Algebra.tensorH1CotangentOfIsLocalization, IsLocalizedModule.rTensor, Submodule.toLocalizedQuotient'_mk, IsLocalization.tensor, IsLocalizedModule.map_lTensor, IsLocalization.mk'_tmul, KaehlerDifferential.isLocalizedModule_map",
+   "date": "2026-10-21",
+   "verdict": "no match for the strict-transform comparison equality; generic localization and tensor tools are already cited as existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.awayMap",
+   "results": "12 hits: Localization.awayMap, Localization.awayMap_surjective_iff, Localization.awayMap_injective_iff, Localization.awayMap_surjective_of_dvd, Localization.awayMap_bijective_of_dvd, Localization.awayMap_injective_of_dvd, Localization.awayMap_awayMap_surjective, RingHom.RespectsIso.isLocalization_away_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the strict-transform comparison equality; generic localization and tensor tools are already cited as existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the strict transform blowup chart comparison equals the chart comparison of the localized rings",
+   "results": "8 hits: AlgebraicGeometry.isIso_SpecMap_stakMap_localization, AlgebraicGeometry.stalkwise_SpecMap_iff, AlgebraicGeometry.stalkwise_Spec_map_iff, AlgebraicGeometry.HasRingHomProperty.stalkwise, AlgebraicGeometry.IsPreimmersion.of_isLocalization, AlgebraicGeometry.localRingHom_comp_stalkIso, Localization.localRingHom_comp, Localization.localRingHom_mk'",
+   "date": "2026-10-21",
+   "verdict": "no match for the strict-transform comparison equality; generic localization and tensor tools are already cited as existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the isomorphism between a tensor product modulo torsion and an affine blowup algebra under localization of the coefficient ring",
+   "results": "8 hits: Algebra.tensorH1CotangentOfIsLocalization, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, AdicCompletion.ofTensorProduct_naturality, IsLocalization.Away.tensorEquiv, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, IsLocalization.Away.tensorRightEquiv, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk, QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop",
+   "date": "2026-10-21",
+   "verdict": "no match for the strict-transform comparison equality; generic localization and tensor tools are already cited as existing nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -76,5 +192,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-strict-transform-chart-localization",
+  "worker": "stage1",
+  "summary": "Q04 rebased the retained split-owned fields onto the current item record and re-read all ten direct dependencies. The six-step proof constructs the target map from chart generators, proves the square on coefficients and chart generators, descends through the quotient and localization, and obtains its isomorphism property from the existing comparison isomorphisms. The final step now specifies both denominators and the fraction formula for further chart localization, following the current localized-comparison definition. The full statement, sixteen unchanged citation quotes and the refreshed quote for the current self-contained comparison-isomorphism statement and all five logged Mathlib searches are retained. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the current main-20261015 order-161 proof (the sibling .proof.md): equality on pure tensors and chart generators, then equivalences. Unit step 1: these descriptions commute with localization. The master order-153 proof is the same argument. No unit or chapter route change."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-f69aab3ed",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-f69aab3ed (reviewer sub-agent of L); spot-checked: Third delivery. The two earlier heads (15a5d691, 34c31bcd) were both reader-PASSed and then refused at landing only because the side completion was never promoted; neither return was mathematical. Diff against 34c31bcd: only step 6 and the split summary changed. Step 6 now gives an explicit further-localization target T'_{g'(c)}. Item is still imported in live and side-live, has no repair note, is in no dropped list and is not a re-split item. All 10 proof_deps statements are identical to live, including localization-data merged by Q128 at 08:28. 0 new nodes, no SGA. Sources: main-20261015 order 161 .md and .proof.md (same as master order 153); unit sk-lem-nagata-sketch-blowups step 1, 'these descriptions commute with localization'. Statement: square β∘g_s = g'∘α, β an iso, transports preserved. T' is the target of g' because f'(a)=b/1 and IB_s=JB_s. T_{f(c)}=T_s because σ̄_a is a B-algebra map. No hypotheses added and the blueprint statement is not weakened. Steps: (1) the only B- and A[I/a]-compatible map is y⊗u ↦ (y/1)⊗u, so step 1 reads it from 'canonical' without using the node's proof. (2) k: T→T' via the generators z/b; s/1 is a unit because 1/s ∈ B_s. (3) kσ_a and σ'_aλ agree on y⊗1, on 1⊗x/a and on the A-structure; tensor-uniqueness clause (3) and surjectivity of q then give kg = g'α(-/1). (4) uniqueness on r/1. (5) chart-iso applied to A→B and to A→B_s; g⁻¹ is a B-algebra map and localizes to h; β=g'αh; not circular. (6) F=g', conjugation, and localization at c by the formula r/c^n ↦ g'(r)/g'(c)^n plus uniqueness. Edge cases: s=1, s=0 or nilpotent, a=0, Z with s=3, k[x,y]→k[x,y]/(y), zero-divisor s. Citers chart-cocycle and closed-chart-model are consistent. B10: strictChartComparisonAway_eq (StrictTransformChart.lean:581, no sorry) lands in ambient (B_s)_{b'} and is not exact for this statement. Advisory: C_a^st and B_s are not bracket-cited in the statement (imported node, cosmetic). The power-torsion-localization wording note in the report is correct and unused here. No fixes, no tool_uses."
  }
 }
