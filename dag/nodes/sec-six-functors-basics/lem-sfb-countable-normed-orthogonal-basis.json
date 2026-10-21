@@ -203,5 +203,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-566621558 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 4 steps, both new nodes, def-weil-l-adic-coefficient-extension, and the whole source file main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md. Its paragraph (3) does not contain this lemma: the item is an agent auxiliary already marked WANTED, so I checked the maths directly. The item statement is unchanged and true. Steps 2-4 are correct: q=|ℓ|_E^{-1}=ℓ; rescaling by ℓ^m puts norms in [1,q); c=min(‖b0‖,1) and C=max(‖b0‖,q); coefficient, projection, injective basis-map and inverse bounds are all C/c. Both new statements are true and not duplicates. Best approximation holds because norms on a finite-dimensional space over the complete, locally compact E are equivalent, so the infimum is attained and W is closed. Residual orthogonality follows from the ultrametric case split. Duplicate search with rg -L over dag/nodes found only Hahn-Banach, pivot and Cech nodes. No repair note, no SGA, not on a dropped list. Two repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/. (1) B2/B3: lem-sfb-ultrametric-orthogonal-extension took its setting 'as in [lem-sfb-finite-ultrametric-best-approximation]' without that node in stmt_deps; its hypotheses are now written inline and cite only the definition. (2) The new best-approximation node was cited by no step, and nearest-point existence was hidden inside the extension node. The extension node now takes a nearest point w as a hypothesis and concludes b_n=x−w≠0 plus the orthogonality formula. Item step 1 now cites both nodes with the induction written out (base, inductive step, union, spanning, finite-vs-N index), and proof_deps gained the best-approximation node.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.NormedSpace.CountableUltrametricBasis",
+  "declaration": "Padic.exists_countable_ultrametric_basis",
+  "file": "lean/Sheaf/Analysis/NormedSpace/CountableUltrametricBasis.lean",
+  "statement": "theorem exists_countable_ultrametric_basis (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (V : Type v) [NormedAddCommGroup V] (h_ultra : ∀ x y : V, ‖x + y‖ ≤ max ‖x‖ ‖y‖) (v₀ : V) (hv₀ : v₀ ≠ 0) : letI := spectralNorm.nontriviallyNormedField (Padic l) E ∀ [NormedSpace E V], (∃ s : ℕ → V, Submodule.span E (Set.range s) = ⊤) → ∃ (J : Set ℕ) (h₀ : 0 ∈ J) (b : Module.Basis J E V) (c C : ℝ), (J = Set.univ ∨ ∃ d : ℕ, 1 ≤ d ∧ J = Set.Iio d) ∧ b ⟨0, h₀⟩ = v₀ ∧ 0 < c ∧ c ≤ C ∧ (∀ a : J →₀ E, c * ((a.support.sup (fun j ↦ ‖a j‖₊) : NNReal) : ℝ) ≤ ‖b.repr.symm a‖ ∧ ‖b.repr.symm a‖ ≤ C * ((a.support.sup (fun j ↦ ‖a j‖₊) : NNReal) : ℝ)) ∧ (∀ j : J, Continuous (b.coord j)) ∧ (∀ S : Set J, Continuous (b.constr E (fun j ↦ if j ∈ S then b j else 0))) ∧ (∀ σ : J ↪ J, Topology.IsEmbedding (b.constr E (fun j ↦ b (σ j))))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcda9dfc5",
+  "group": "NF",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; the statement is verbatim in the file. Checked every clause against the node: spectralNorm.nontriviallyNormedField is the same spectral norm as def-weil-l-adic-coefficient-extension's coefficientExtensionAbsoluteValue (project convention); NormedAddCommGroup+NormedSpace+h_ultra give exactly definite, |a|-homogeneous, ultrametric; the ℕ-indexed spanning sequence covers finite and countable; no completeness; V≠0 follows from hv0; J=univ or Iio d with d≥1, b0=v0, 0<c≤C, two-sided NNReal-sup bounds (empty support gives 0), coord/subset-projection continuity, IsEmbedding for σ : J ↪ J covers basis-subset maps and the inverse on the coordinate subspace. Maths true (nearest point by local compactness, ultrametric residual orthogonality, ℓ-power rescaling, operator bounds C/c). Universes independent. No duplicate (Sheaf/WeilConjectures/Mathlib), no definition, sorry only, docstrings carry the source place (WANTED) and proof steps, not dropped, no repair note, report sections present. No compile (no fix). Advisory: NormedSpace/ directory vs existing Normed/Module/; possibly redundant Mathlib imports."
  }
 }
