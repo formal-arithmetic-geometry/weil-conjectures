@@ -13,173 +13,71 @@
  ],
  "proof": [
   {
-   "text": "First fix the completed tensor comparisons. For arbitrary ambient $V,W$ and complete $Z$, the closed tensor adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] identifies precomposition by $\\eta_V\\otimes1_W$ with precomposition by $\\eta_V$ on maps into $R\\mathcal Hom(W,Z)$. That last object is complete by [lem-sf-ringed-rhom-derived-complete], so the completion adjunction [lem-sp-completed-pullback-adjunction] makes this a bijection. Thus $C(\\eta_V\\otimes1_W):C(V\\otimes W)\\to C(CV\\otimes W)$ is invertible: testing maps to its complete source and target gives a two-sided inverse. Symmetry gives the comparison for the other factor. The same hom-set argument gives $C_{\\mathcal X}u^*(\\eta_V)$ invertible, because maps into complete $Z$ transpose to maps into the complete object $PZ$. These comparisons specify the completed pullback tensor isomorphism. Their coherence follows by precomposing with the completion units: every resulting associativity or unit diagram becomes the ordinary tensor/pullback diagram, and these precompositions are injective. In the remaining steps all tensor signs without a hat denote ordinary derived tensor.",
+   "text": "Use [lem-pur-completed-tensor-unit-insertion] for the unit-normalized tensor comparisons. Set $M=PH\\otimes_A^LK$, $N=H\\otimes_A^Lu^*K$. The induced adjunction [lem-sp-completed-pullback-adjunction] gives $\\varepsilon^c_H\\eta_{u^*PH}=\\varepsilon_H$. Consequently the completed projection transpose, restricted along the units, is $u^*M\\xrightarrow{\\mu}u^*PH\\otimes u^*K\\xrightarrow{\\varepsilon_H\\otimes1}N\\xrightarrow{\\eta_N}C_{\\mathcal X}N$: the first factor unit cancels by this counit equation and the second gives $\\eta_{u^*K}$. Transpose using [lem-weil-pbc-ringed-projection-mate-exact] to obtain $\\pi^c\\eta_M=P(\\eta_N)\\pi^o$. The target is complete; precomposition with $\\eta_M$ is bijective, proving uniqueness.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sf-ringed-rhom-derived-complete",
-    "lem-sp-completed-pullback-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099A (lemma-derived-complete-internal-hom), 099G (remark-completed-tensor-product); the displayed hom-set calculation supplies the completion-unit normalization"
-   }
-  },
-  {
-   "text": "Put $M=PH\\otimes K$ and $N=H\\otimes u^*K$, so the required source and target are $C_{\\mathcal Y}M$ and $PC_{\\mathcal X}N$. Write $\\varepsilon:u^*P\\to1$ for the ordinary counit. By the induced hom-set bijections in [lem-sp-completed-pullback-adjunction], the completed counit $\\varepsilon^c_H:C_{\\mathcal X}u^*PH\\to H$ satisfies $\\varepsilon^c_H\\eta_{u^*PH}=\\varepsilon_H$. Under the unit-induced tensor comparisons of Step 1, the completed projection transpose, restricted along the units, is consequently\n$$u^*(PH\\otimes K)\\cong u^*PH\\otimes u^*K\\xrightarrow{\\varepsilon_H\\otimes1}N\\xrightarrow{\\eta_N}C_{\\mathcal X}N.$$\nIndeed its two tensor-factor units are followed by $\\varepsilon^c_H$ and the identity of $C_{\\mathcal X}u^*K$, respectively; the first cancels by the counit equation and the second gives $\\eta_{u^*K}$. The definition of the comparison for the second factor in Step 1 then gives $\\eta_N$. The ordinary projection has transpose $(\\varepsilon_H\\otimes1)\\mu$ by [lem-weil-pbc-ringed-projection-mate-exact]. Transposing the displayed equality yields\n$$\\pi^c\\eta_M=P(\\eta_N)\\pi^o.$$\nSince $PC_{\\mathcal X}N$ is complete, the completion adjunction makes precomposition with $\\eta_M$ bijective. This also proves the asserted uniqueness.",
-   "uses": [
+    "lem-pur-completed-tensor-unit-insertion",
     "lem-sp-completed-pullback-adjunction",
     "lem-weil-pbc-ringed-projection-mate-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); completed adjunction of proetale.tex Tag 099N"
+    "place": "Assembly of the extracted auxiliary statements; equation-projection-formula-map and algebraization.tex remark-completed-tensor-product"
    }
   },
   {
-   "text": "Let $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$. On the small diagram sites of [lem-weil-pbc-diagram-site-realization] use both the constant ring $\\Delta\\underline A_T$ and the ring sheaf $B_T=(\\underline{A/I^n}_T)_n$. The latter is a sheaf: the sheaf condition is imposed separately at each index, and every horizontal map is the actual quotient homomorphism. Its modules are strict semilinear quotient systems; kernels and cokernels are computed componentwise, by their ordinary module universal properties. Restriction along $\\Delta\\underline A_T\\to B_T$ is exact and reflects quasi-isomorphisms, since these properties are detected on underlying cohomology sheaves. Write $U_T$ for this restriction, $S_T=-\\otimes^L_{\\Delta\\underline A_T}B_T$, and $\\mathcal R_T=S_T\\Delta_T$. Let $\\mathcal L_T$ be total derived inverse limit on constant-$A$ towers. Choose one flat-term K-flat representative $Q$ of an ambient object $V$ by [lem-pc-kflat-resolution]. Its diagonal is K-flat: tensor with an acyclic tower is acyclic at each index, hence acyclic by [lem-weil-tower-category-levelwise-abelian]. The tensor construction of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] therefore represents $\\mathcal R_TV$ by the actual strict tower $(Q\\otimes_A\\underline{A/I^n})_n$. Denote its underlying augmentation by $i_V:\\Delta V\\to U_T\\mathcal R_TV$. This fixes quotient transitions before localization; it makes no choice of unrelated derived level maps.",
+   "text": "Use [lem-pur-strict-quotient-diagonal-normalization] for $\\mathcal R=S\\Delta$, $U$, $i$, $\\ell$ and $\\mathcal L U\\mathcal R=C$ with $\\mathcal L(i)\\ell^{-1}=\\eta$, and [lem-weil-pbc-constant-tower-pushforward-normalization] for $\\chi:\\Delta P\\cong P^J\\Delta$, its limit normalization and strict counit equation $\\varepsilon^{J}_{\\Delta H}G(\\chi_H)=\\Delta(\\varepsilon_H)$. By [lem-pur-perfect-quotient-exchange-normalization], the coefficient mate $h_F:\\mathcal R(PF)\\to P_B\\mathcal R F$ and all $h_{F,n}$ are the specified perfect-coefficient isomorphisms, $d\\,U(h_F)=h^A_F$ is the constant-$A$ projection mate, and $\\rho_F=a^{-1}\\mathcal L(h^A_F)$ satisfies $\\rho_F\\eta_{PF}=P(\\eta_F)$. This applies to $H$ and to $N$, complete or not.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-pc-kflat-resolution",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-pur-perfect-quotient-exchange-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940 (section-derived-limits); diagram-site construction and K-flat scalar extension"
+    "place": "Assembly of the extracted auxiliary statements; lemma-derived-limit-is-ok and lemma-projection-formula"
    }
   },
   {
-   "text": "Use $G=u^*$ on constant-$A$ towers, $P^J=Ru_*^J$, and $G_B\\dashv P_B$ on the $B$-ringed diagram sites. These adjunctions come from componentwise module adjunctions, whose hom-set bijections preserve transition squares by naturality. The derived adjunctions and their normalization are [lem-weil-pbc-ringed-projection-mate-exact, lem-pc-pre-derived-adjoint-functors-general]. The constant tower functor $\\Delta$ preserves K-injectives. To see this, $1$ is terminal in $J$, and a tower map $T\\to\\Delta V$ is uniquely determined by $T_1\\to V$; hence $\\operatorname{ev}_1\\dashv\\Delta$ with exact left adjoint [lem-weil-tower-category-levelwise-abelian]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective]. K-injective resolutions exist on the small diagram sites [prop-pur-kinjective-resolutions-exist]. On a diagonal K-injective representative the literal identities $u_*^J\\Delta=\\Delta u_*$ and $\\lim\\Delta=1$ consequently give $P^J\\Delta=\\Delta P$ and $\\mathcal L\\Delta=1$, by [lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The fraction formula for the derived adjunction identifies diagonal counits with the ordinary counit. Finally $\\mathcal L_Ti_V=\\eta_{T,V}$, by the completion formula and unit of [lem-sp-completed-pullback-adjunction].",
+   "text": "On the quotient-ring diagram form $v=\\pi_B(h_H\\otimes1):\\mathcal R_{\\mathcal Y}M\\to P_B\\mathcal R_{\\mathcal X}N$ using [lem-pur-quotient-diagram-projection-evaluation]. Its evaluation is exactly $\\pi^{(n)}_{H_n,K_n}(h_{H,n}\\otimes1)$ with tensor balancing. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the diagram coefficient square, the object $\\Delta H$ and tensor argument $\\Delta K$. Its equality is $v=h_N\\mathcal R_{\\mathcal Y}(\\pi^o)$; the strict counit equation of [lem-weil-pbc-constant-tower-pushforward-normalization] identifies the constant-diagram projection with $\\Delta\\pi^o$. This equality holds before evaluation or inverse limit.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sp-completed-pullback-adjunction"
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok); derived adjunction fraction normalization"
+    "place": "Assembly of the extracted auxiliary statements; remark-compatible-with-diagram and equation-projection-formula-map"
    }
   },
   {
-   "text": "Write $a_T$ as $a_V:P\\mathcal L_{\\mathcal X}V\\xrightarrow{\\sim}\\mathcal L_{\\mathcal Y}P^JV$, using [lem-weil-ringed-tower-pushforward-limit-comparison]. We verify its counit normalization rather than infer it from projections. The exact adjunction $\\Delta\\dashv\\lim$ derives to $\\Delta\\dashv\\mathcal L$: use [lem-pc-pre-derived-adjoint-functors-general] and the K-injective computation of Step 4. The two composite derived adjunctions give the bijections\n$$\\operatorname{Hom}(M,\\mathcal L_{\\mathcal Y}P^JV)\\cong\\operatorname{Hom}(\\Delta M,P^JV)\\cong\\operatorname{Hom}(G\\Delta M,V)=\\operatorname{Hom}(\\Delta u^*M,V)\\cong\\operatorname{Hom}(u^*M,\\mathcal L_{\\mathcal X}V)\\cong\\operatorname{Hom}(M,P\\mathcal L_{\\mathcal X}V).$$\nTheir right-adjoint comparison is $a_V^{-1}$: before derivation both sides are the identical composite $u_*\\lim=\\lim u_*^J$; [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the fraction normalization identify its derived comparison with the specified $a$. Thus, for a tower arrow $b:GZ\\to V$, its tower adjunct $b^\\sharp:Z\\to P^JV$, and an augmentation $j:\\Delta M\\to Z$, the ordinary adjunct of the total-limit map of $b\\,G(j)$ is exactly\n$$a_V^{-1}\\mathcal L_{\\mathcal Y}(b^\\sharp)\\mathcal L_{\\mathcal Y}(j):M\\to P\\mathcal L_{\\mathcal X}V.$$\nHere $G\\Delta M=\\Delta u^*M$ and $\\mathcal L\\Delta=1$. This proves the stated transpose/augmentation compatibility for whole tower arrows, including their counits.",
+   "text": "Take $r=a^{-1}\\mathcal L_{\\mathcal Y}(d\\,Uv)$, with $a$ of [lem-weil-ringed-tower-pushforward-limit-comparison] and $d$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. By Steps 2-3, $d\\,Uv=h^A_N\\circ U\\mathcal R_{\\mathcal Y}(\\pi^o)$, so naturality of $\\mathcal L U\\mathcal R=C$ in [lem-pur-strict-quotient-diagonal-normalization] gives $r=\\rho_N C_{\\mathcal Y}(\\pi^o)$. Naturality of $\\eta$ and Step 2 give $r\\eta_M=\\rho_N\\eta_{PN}\\pi^o=P(\\eta_N)\\pi^o$; uniqueness in Step 1 gives $r=\\pi^c$. The finite evaluations in Step 3 and invertibility in Step 2 supply exactly the asserted source comparisons; $a^{-1}$ supplies the target comparison. [lem-pur-tower-limit-transpose-normalization] supplies the counit and augmented-transpose clause for these same comparisons. All maps are natural; no faithfulness of reductions is used.",
    "uses": [
+    "lem-pur-tower-limit-transpose-normalization",
     "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A07 (lemma-Rf-commutes-with-Rlim), 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint)"
-   }
-  },
-  {
-   "text": "On the ringed diagram square formed by $u$ and the coefficient maps $\\Delta\\underline A\\to B$, let\n$$h_F:\\mathcal R_{\\mathcal Y}(PF)\\longrightarrow P_B\\mathcal R_{\\mathcal X}F$$\nbe the coefficient exchange mate, with transpose $S_{\\mathcal X}\\Delta(\\varepsilon_F)$ under $G_B\\mathcal R_{\\mathcal Y}\\cong\\mathcal R_{\\mathcal X}u^*$. The coefficient restrictions identify $U_{\\mathcal Y}P_B\\cong P^JU_{\\mathcal X}$ by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the two factorizations of the same ringed morphism; restriction is exact. Under this comparison $U h_F$ is the constant-$A$ diagram projection for $\\Delta F$ and coefficient diagram $B$. Indeed both transposes are counit tensor identity, with the tensor comparison of [lem-weil-pbc-ringed-projection-mate-exact]. The derived fraction formula [lem-pc-pre-derived-adjoint-functors-general] preserves this equality from the module adjunctions. Evaluation of this underlying projection is the ordinary projection with constant coefficient $\\underline{A_n}$, by the evaluation comparison of [lem-weil-ringed-tower-pushforward-limit-comparison] and the pullback/tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. No flatness of $A\\to A_n$ is asserted.",
-   "uses": [
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-pur-strict-quotient-diagonal-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6, 0B56, 0D6E; coefficient-restriction comparison via the identical ringed composite"
-   }
-  },
-  {
-   "text": "For each $n$, take a bounded finite-projective $A$-complex representing $A_n$. Its constant sheaf complex still represents $\\underline{A_n}$: the constant-module functor is inverse image from the point, so preserves kernels and cokernels. Every term retains its explicit retraction from a finite free sheaf. Apply [def-weil-pbc-projection-formula-arrows, lemma-weil-pbc-projection-formula-totalization] to these packages on the ordinary ringed topoi. They say that the counit-defined evaluated map $h_{F,n}$ is invertible. Thus $h_F$ is invertible on the whole derived diagram: its underlying cone has zero cohomology at every index, so is zero by [lem-weil-tower-category-levelwise-abelian]; exact restriction reflects zero cohomology. These are the specified perfect-coefficient projection comparisons, not arbitrary isomorphisms. Since $h_F$ was constructed on the diagram, all its quotient transitions already commute. Notice that this uses perfectness of $A_n$ over $A$, but neither finite cardinality of $A_n$ nor a scheme hypothesis.",
-   "uses": [
-    "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-totalization",
-    "lem-weil-tower-category-levelwise-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944 (lemma-projection-formula), with the finite-projective totalization and adjoint arrow of Tag 0B56"
-   }
-  },
-  {
-   "text": "The scalar-extension tensor isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], on the two diagram sites, gives\n$$\\mathcal R_{\\mathcal Y}M\\cong\\mathcal R_{\\mathcal Y}(PH)\\otimes_B\\mathcal R_{\\mathcal Y}K,\\qquad \\mathcal R_{\\mathcal X}N\\cong\\mathcal R_{\\mathcal X}H\\otimes_B G_B\\mathcal R_{\\mathcal Y}K.$$\nLet $\\pi_B$ be the projection for $G_B\\dashv P_B$ and set\n$$v=\\pi_B\\circ(h_H\\otimes1):\\mathcal R_{\\mathcal Y}M\\longrightarrow P_B\\mathcal R_{\\mathcal X}N.$$\nThis is a specified arrow on the $B$-ringed diagram site. Its evaluation is $\\pi^{(n)}_{H_n,K_n}$ after the source comparison $h_{H,n}$ and tensor balancing. For clarity, evaluation is exact on the quotient systems because underlying kernels and cokernels are componentwise. Its direct-image comparison is obtained by restricting to the constant-$A$ tower, using the comparison in Step 6, then evaluating and using the same ringed-composition comparison at $A_n$. The fraction formula [lem-pc-pre-derived-adjoint-functors-general] identifies the evaluated adjunction with $u_n^*\\dashv Ru_{*,A_n}$: the underlying module bijections are those of $u^{-1}\\dashv u_*$ with the quotient action. Substitution in the counit-tensor transpose formula [lem-weil-pbc-ringed-projection-mate-exact] gives exactly the stated finite mate. This argument does not assume that evaluation preserves K-injectives for varying coefficient rings.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6, 0B56; quotient coefficient ringed-square normalization"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the diagram-site ringed square with vertical maps $u$ over $A$ and $B$, horizontal coefficient-extension maps, object $\\Delta H$, and tensor argument $\\Delta K$. Its two composites are precisely $v$ of Step 8 and $h_N\\mathcal R_{\\mathcal Y}(\\pi^o)$. The tensor identifications are the scalar-extension comparisons already fixed in Step 8, and the constant-diagram projection is $\\Delta\\pi^o$ by Step 4. Therefore\n$$v=h_N\\mathcal R_{\\mathcal Y}(\\pi^o)$$\nin the derived category of $B$-module diagrams. This proves equality before restriction, inverse limit, or evaluation; it uses no faithfulness of any derived reduction functor.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48 (remark-compatible-with-diagram), with the coefficient-extension square on diagram sites"
-   }
-  },
-  {
-   "text": "Write $\\widetilde h_F=U h_F$ under the direct-image comparison of Step 6, so $\\widetilde h_F:U\\mathcal R_{\\mathcal Y}(PF)\\to P^JU\\mathcal R_{\\mathcal X}F$. Naturality in the coefficient argument and tensor-unit normalization of [lem-weil-pbc-ringed-projection-mate-exact], applied on the constant-$A$ diagram sites to $\\Delta\\underline A\\to B$, give\n$$\\widetilde h_F i_{PF}=P^J(i_F).$$\nIndeed the projection for the tensor unit is the identity of $\\Delta PF$, and the two vertical arrows of this naturality square are the actual quotient augmentations. Define\n$$\\rho_F=a_{U\\mathcal R_{\\mathcal X}F}^{-1}\\mathcal L_{\\mathcal Y}(\\widetilde h_F):C_{\\mathcal Y}PF\\longrightarrow PC_{\\mathcal X}F.$$\nApply $\\mathcal L$ to the preceding square. Naturality of $a$ [lem-weil-ringed-tower-pushforward-limit-comparison], $a_{\\Delta F}=1$ on diagonal K-injective representatives, and $\\mathcal L(i_F)=\\eta_F$ from Step 4 yield\n$$\\rho_F\\eta_{PF}=P(\\eta_F).$$\nThis is the normalized unit equation for the specified whole-tower comparison; it is not deduced from equalities of evaluated arrows.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56 and 0A07; naturality for the strict quotient augmentation"
-   }
-  },
-  {
-   "text": "Take the total inverse limit of $Uv$ and then use $a^{-1}$ on its target. Its source is $\\mathcal L_{\\mathcal Y}U\\mathcal R_{\\mathcal Y}M=C_{\\mathcal Y}M$, and its target is $PC_{\\mathcal X}N$, by [lem-sp-completed-pullback-adjunction, lem-weil-ringed-tower-pushforward-limit-comparison]. Step 9 gives the formula $r=\\rho_N C_{\\mathcal Y}(\\pi^o)$ for this total-limit arrow. Step 10 and naturality of $\\eta$ give\n$$r\\eta_M=\\rho_N\\eta_{PN}\\pi^o=P(\\eta_N)\\pi^o.$$\nThe uniqueness proved in Step 2 implies $r=\\pi^c$. By Steps 7 and 8, this is exactly the total limit of the finite projection mates, with source identification given by the perfect-coefficient comparisons and balancing, and target identification given by $a^{-1}$. Step 5 proves that the same identifications preserve the counits and the transpose of any strict tower arrow after a constant augmentation. Every construction used is natural, so these are equalities of the specified natural transformations. This proves all clauses of the item.",
-   "uses": [
-    "lem-sp-completed-pullback-adjunction",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A07 and 0B56; proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case)"
+    "place": "Assembly of the extracted auxiliary statements; lemma-Rf-commutes-with-Rlim"
    }
   }
  ],
  "proof_deps": [
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sf-ringed-rhom-derived-complete",
+  "lem-pur-completed-tensor-unit-insertion",
   "lem-sp-completed-pullback-adjunction",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-pc-kflat-resolution",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-strict-quotient-diagonal-normalization",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-pur-perfect-quotient-exchange-normalization",
+  "lem-pur-quotient-diagram-projection-evaluation",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pur-tower-limit-transpose-normalization",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-weil-pbc-projection-formula-arrows",
-  "lemma-weil-pbc-projection-formula-totalization",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -352,83 +250,39 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-compact-support-completed-projection-coherence",
   "worker": "stage1",
-  "summary": "Expanded the completion projection coherence into eleven steps, using existing general ringed-site results only. Proved the unit equation by the actual completed adjunction, constructed the quotient-ring diagram projection, used ringed exchange/tensor coherence before inverse limit, and supplied the total-limit counit normalization by composite hom-set bijections. No new nodes; no statement change.",
+  "summary": "Repair of human-requested re-split: retained the exact item statement and extracted five self-contained statement-only arguments from the eleven-step proof. The item is a four-step assembly below 3000 characters. The complete original argument and extraction map are retained in report.md. No Lean edits or compilation.",
   "blueprint": "Nearest blueprint ancestor thm-pur-rational-and-qbar-purity, Qbar-stage independence of finite coefficient extension; expands parent lem-pur-compact-support-integral-coefficient-comparison step 9 and unit sk-thm-sf-compatibility clause (7). Preserves the existing completion/tower route.",
   "tool_uses": [
    {
-    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "why": "The ordinary ringed-site tensor-Hom bijection tests the completed tensor comparisons; no coefficient-stage or scheme theorem is substituted."
-   },
-   {
-    "node": "lem-sf-ringed-rhom-derived-complete",
-    "why": "Completeness of RHom into a complete object permits the completion hom-set bijection for tensors on arbitrary small ringed sites."
-   },
-   {
     "node": "lem-sp-completed-pullback-adjunction",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the completion reflector and induced adjunction on complete objects. No alternative geometric proof route is introduced."
+    "why": "The existing general ringed-site adjunction/projection or exchange statement assembles the extracted quotient/completion arguments without changing the unit route."
    },
    {
     "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the counit-defined projection and its naturality. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-diagram-site-realization",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-tower-category-levelwise-abelian",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the derived hom-set fraction normalization preserving the specified counits. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the resolution or diagram construction cited in the proof. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the canonical whole-tower direct-image/limit comparison. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the normalized comparison for identical composite ringed direct images. No alternative geometric proof route is introduced."
-   },
-   {
-    "node": "def-weil-pbc-projection-formula-arrows",
-    "why": "The general ringed-topos finite-projective totalization fixes the actual projection and inverse."
-   },
-   {
-    "node": "lemma-weil-pbc-projection-formula-totalization",
-    "why": "The bounded finite-projective coefficient inverse applies on arbitrary small ringed topoi, without imposing the stronger scheme/finite-set hypotheses of adjacent adic lemmas."
+    "why": "The existing general ringed-site adjunction/projection or exchange statement assembles the extracted quotient/completion arguments without changing the unit route."
    },
    {
     "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "Generic ringed-site/derived-diagram tool used with the stated small-site hypotheses; supplies the coefficient-square projection identity before total inverse limit. No alternative geometric proof route is introduced."
+    "why": "The existing general ringed-site adjunction/projection or exchange statement assembles the extracted quotient/completion arguments without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "why": "Generic ringed-topos constant-tower direct-image comparison chi, its limit normalization and counit equation; reviewer FIX replaces the duplicated clauses of the new strict-quotient node."
+   },
+   {
+    "node": "lem-weil-pbc-augmented-diagram-projection-mate",
+    "why": "Generic strict-tower projection mate with evaluation and augmentation square; reviewer FIX replaces the duplicated clauses of the new perfect-exchange node."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Direct-image/limit comparison a used in the final assembly step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Derived-composition comparison d used in the final assembly step."
    }
   ]
  },
@@ -450,15 +304,17 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "def-weil-pbc-projection-formula-arrows",
   "lemma-weil-pbc-projection-formula-totalization",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-augmented-diagram-projection-mate"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q112-1d3168076",
-  "group": "Q112",
+  "reviewer": "NT-cc-Q75-5b49bfe17",
+  "group": "Q75",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-1d3168076 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven steps, cited statements and source passages. Verified completion-unit uniqueness, quotient-ring tensor balancing, whole-tower equality and counit normalization; checked edge cases, duplicates, cycles, route and target-category distinctions. Accepted all 18 generic tool uses. No repairs or new nodes. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-5b49bfe17 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 (repair note checked in live and side-live; the item was not re-split by any other group). Item statement is byte-identical to the base. Old 11 steps mapped: 1→completed-tensor-unit-insertion, 3-4→strict-quotient node, 5→tower-limit-transpose, 6-7 and the unit equation of 10→perfect-quotient-exchange, 8→quotient-diagram-projection-evaluation; 2, 9 and 11 remain as the assembly. Nothing was dropped, and none of the 5 nodes restates the item. All 5 new statements read and true. Unit-insertion: the cone of η dies after ⊗A_n (099M/099N, 099A/099G). Transpose: formal conjugate comparison via 0D6E/0A07. Perfect exchange: invertible by 0944 (perfect K, unbounded E). Evaluation node: types and balancing checked. Small cases: I=0, I=A, u=id, H/K/F=0. Stacks tags verified; no SGA; B1-B9 fields fine. Faults: C5/D1 F1, the strict-quotient node restated chi, L(chi)^-1 a_Delta=1 and the diagonal counit equation of the existing lem-weil-pbc-constant-tower-pushforward-normalization. C5/D1 F2, the perfect-exchange node restated the constant-A projection mate, its evaluation and h~ i = P^J(i) chi, which are the existing lem-weil-pbc-augmented-diagram-projection-mate with Q=(A_n). C1/C3 F3, assembly step 4 used a, d and LUR=C while citing only the transpose node. FIX: the strict node is restated on one site T with (1) realization, U exact and conservative, (2) K-flat model, (3) Delta preserves K-injectives, (4) LUR=C and L(i) l^-1 = eta. The perfect-exchange node now takes h^A and chi from the existing nodes and asserts only dU(h_F)=h^A_F, h_{F,n}, invertibility and rho eta = P eta. Item steps 2-4 re-cited and proof_deps updated; the assembly is 2955 characters. split_report.tool_uses records the 4 generic other-unit tools. No cycle: the item is absent from both existing nodes' closures. Advisory: lem-sp-completion-mate-comparison in the item stmt_deps is not cited by the statement, but it was inherited from the base, so I left it.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.CompletedProjectionCoherence",
