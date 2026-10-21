@@ -22299,3 +22299,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/NG/def-pur-support-triangle (reviewer PASS; after a return; new nodes: 0)
 - 11:19 L: merged deliver/NI/lem-weil-pbc-augmented-diagram-projection-mate (stage 2; reviewer PASS; parallel immutable checks)
 - 11:20 L: returned deliver/NH/lem-sfb-bounded-bifunctor-devissage (reviewer RETURN: Superseded (A7/B10), and C5/D1 on the new node. The live item lem-sfb-bounded-bifunctor-devissage already has reviewed ()
+- 11:24 L: merged deliver/Q71/lem-sfb-continuous-algcl-stratified-finite-models (stage 2; reviewer PASS; parallel immutable checks)
