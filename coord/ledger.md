@@ -19922,3 +19922,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:42:27Z L: superseded stage-1 delivery Q93/lem-sp-direct-image-change-ring-transpose at 6ec76ee9c2abc3cedccb31631b8231a3ad48cd86; current completion retained; packet archived at refs/superseded/Q93/lem-sp-direct-image-change-ring-transpose/6ec76ee9c2abc3cedccb31631b8231a3ad48cd86; stale return retired.
 - 03:42 L: merged deliver/Q129/lem-sfb-finite-proper-classical-coproducts (reviewer FIX; first push; new nodes: 0)
 - 03:42 L: merged deliver/Q32/lem-weil-pbc-stratum-completion-unit-restriction (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T03:42:50Z L: superseded stage-1 delivery Q31/lem-sp-proetale-open-scalar-cocycle at 2a2f0a68185f2ff86ebf00d3a2132602cde8cd6e; current completion retained; packet archived at refs/superseded/Q31/lem-sp-proetale-open-scalar-cocycle/2a2f0a68185f2ff86ebf00d3a2132602cde8cd6e; stale return retired.
