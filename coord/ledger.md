@@ -20603,3 +20603,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:14 L: merged deliver/Q129/def-nagata-strict-transform-chart-comparison-localized (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/O1/lem-pur-finite-free-quotient-completion (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/Q44/lem-pur-completed-line-tensor-coherence (reviewer PASS; first push; new nodes: 0); claim not held by Q44: not your claim
+- 07:14 L: merged deliver/Q99/lem-trf-weakly-etale-between-objects (reviewer PASS; first push; new nodes: 0)

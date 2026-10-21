@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-weakly-etale-between-objects",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Morphisms between weakly etale objects",
@@ -21,10 +21,17 @@
    "*Recorded in advance* from chapter *The trace formula* of the source."
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-weakly-etale-morphism"
+ ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0951, lemma-weakly-etale-permanence; the current blueprint proof is supplied directly by Mathlib WeaklyEtale.of_comp, lines 117-118."
+ },
  "mathlib_searches": [
   {
    "tool": "text search of the local Mathlib checkout (0df444a360)",
@@ -33,10 +40,49 @@
     "Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale:117 (lemma)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between schemes weakly etale over the same base is weakly etale",
+   "results": "Eight hits for etale stability, etale over-categories and formally unramified composition; no weakly etale hit.",
+   "date": "2026-10-21",
+   "verdict": "no match in semantic results; exact leaf located by Loogle and grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.WeaklyEtale.of_comp",
+   "results": "One hit: AlgebraicGeometry.WeaklyEtale.of_comp, Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale, with hypotheses [WeaklyEtale (f ≫ g)] [WeaklyEtale g] and conclusion WeaklyEtale f.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale|of_comp",
+   "results": "Single-file grep returned five poorly parsed file/line fields (20, 25, 44, 48, 52); read source and ran a directory grep below to obtain usable declaration locations.",
+   "date": "2026-10-21",
+   "verdict": "definition candidate; directory grep below confirms theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism whose composite with a weakly etale morphism is weakly etale is weakly etale",
+   "results": "Eight hits, including AlgebraicGeometry.IsEtale.of_comp and its postcomposition instance, RingHom.Etale.stableUnderComposition and formally etale composition; none states the weakly etale result.",
+   "date": "2026-10-21",
+   "verdict": "no match in semantic results; exact leaf located by Loogle and grep"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma of_comp|theorem of_comp|class WeaklyEtale",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean:44 class WeaklyEtale; :117 lemma of_comp (f : X ⟶ Y) (g : Y ⟶ Z) [WeaklyEtale (f ≫ g)] [WeaklyEtale g] : WeaklyEtale f. Read lines 35-125, especially 42-46 and 110-118. Directory: AlgebraicGeometry/Morphisms.",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.WeaklyEtale.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+  "how": "specializes in one line: lines 117-118, with X = U, Y = V, Z = S and g the structure morphism V → S. For an S-morphism f, rewrite f ≫ g as the given weakly etale structure morphism U → S, and apply WeaklyEtale.of_comp f g. The definition at lines 42-46 is exactly flat with flat diagonal (Stacks 094P). No finiteness, separation or nonemptiness hypotheses are needed."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "citation_only",
@@ -93,5 +139,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-weakly-etale-between-objects",
+  "worker": "stage1",
+  "summary": "Q99 checked the current blueprint, Stacks 0951 (more-morphisms.tex, lemma-weakly-etale-permanence), and Mathlib WeaklyEtale.of_comp at lines 117-118. The item is a one-line specialization of this theorem after rewriting the composite by the S-morphism equality. Recorded the existing scheme and weakly etale definition nodes and the five actual logged searches; no new nodes or proof steps.",
+  "blueprint": "Realizes the entire current main-20261015 proof in sec-proetale-coefficients/sk-lem-pe-weakly-etale-stability/lem-trf-weakly-etale-between-objects.proof.md by the exact Mathlib cancellation theorem. The imported chapter/unit fields are retained unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-cb7af959a",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-cb7af959a (reviewer sub-agent of L); spot-checked: Mathlib leaf delivery with no new nodes, and the statement is byte-identical to base/live. The item is still unsplit in clones/live and side-live, so no other group has superseded it. Stacks 0951 (more-morphisms.tex:19165) states exactly this result over an arbitrary base S. The main-20261015 blueprint statement and proof (sk-lem-pe-weakly-etale-stability) match it, proving it by cancellation, and no SGA source is used. In Mathlib WeaklyEtale.lean, lines 42-46 define WeaklyEtale as Flat f plus Flat (diagonal f), which is literally def-weil-weakly-etale-morphism. Line 117, of_comp [WeaklyEtale (f≫g)] [WeaklyEtale g] : WeaklyEtale f, specializes in one line with g = V→S, using f≫g = U→S, and needs no extra hypotheses. The empty-source and identity edge cases are covered. The stmt_deps def-pc-scheme and def-weil-weakly-etale-morphism are both correct mathlib nodes. All three search kinds are logged, and the umbrella and localization nodes are not equivalent to the item, so same_as is correctly empty. The stale imported unit placement and the lean.branch record are advisory only. No fixes were needed."
  }
 }
