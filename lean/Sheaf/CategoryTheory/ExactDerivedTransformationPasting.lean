@@ -2,8 +2,8 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
-public import Sheaf.CategoryTheory.ExactDerivedComposition
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.CategoryTheory.DerivedCategory.ExactRestrictionComposition
 
 /-! # Pasting arbitrary cells of exact derived functors
 
@@ -148,6 +148,126 @@ def Expression.derived {i j : I} {P R : Word C i j} :
   | .rightUnit P => (Functor.rightUnitor P.derived).hom
   | .rightUnitInv P => (Functor.rightUnitor P.derived).inv
 
+private def wordFactors {i j : I} (P : Word C i j) :
+    DerivedCategory.Q ⋙ P.derived ≅
+      P.ordinary.obj.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+  Functor.isoWhiskerLeft DerivedCategory.Q P.comparison.symm ≪≫
+    P.ordinary.obj.mapDerivedCategoryFactors
+
+private lemma wordFactors_nil (i : I) (K : CochainComplex (C i) ℤ) :
+    (wordFactors C (.nil i)).hom.app K = 𝟙 _ := by
+  dsimp [wordFactors, Word.comparison, Word.ordinary]
+  rw [← Functor.mapDerivedCategoryIdIso_hom_app_Q_obj]
+  simp
+
+private lemma wordFactors_comp {i j k : I} (P : Word C i j) (R : Word C j k)
+    (K : CochainComplex (C i) ℤ) :
+    (wordFactors C (.comp P R)).hom.app K =
+      R.derived.map ((wordFactors C P).hom.app K) ≫
+        (wordFactors C R).hom.app
+          ((P.ordinary.obj.mapHomologicalComplex (.up ℤ)).obj K) := by
+  dsimp only [wordFactors, Word.comparison, Word.ordinary, Word.derived,
+    Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  simp only [Category.assoc]
+  rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors P.ordinary.obj R.ordinary.obj K]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [← NatTrans.naturality_assoc, ← NatTrans.naturality_assoc]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
+
+private lemma cell_factors {i j : I} {P R : Word C i j}
+    (α : P.ordinary.obj ⟶ R.ordinary.obj) (K : CochainComplex (C i) ℤ) :
+    (Word.cell C α).app (DerivedCategory.Q.obj K) ≫ (wordFactors C R).hom.app K =
+      (wordFactors C P).hom.app K ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex α (.up ℤ)).app K) := by
+  have hP : Localization.Lifting.iso DerivedCategory.Q
+      (HomologicalComplex.quasiIso (C i) (.up ℤ))
+      (P.ordinary.obj.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+      P.ordinary.obj.mapDerivedCategory = P.ordinary.obj.mapDerivedCategoryFactors := rfl
+  have hR : Localization.Lifting.iso DerivedCategory.Q
+      (HomologicalComplex.quasiIso (C i) (.up ℤ))
+      (R.ordinary.obj.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+      R.ordinary.obj.mapDerivedCategory = R.ordinary.obj.mapDerivedCategoryFactors := rfl
+  simp only [Word.cell, wordFactors, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.trans_hom,
+    Iso.symm_hom, Localization.liftNatTrans_app, Category.assoc,
+    Iso.hom_inv_id_app_assoc, hP, hR, Functor.whiskerRight_app,
+    Iso.inv_hom_id_app, Category.comp_id]
+
+private lemma expression_factors {i j : I} {P R : Word C i j}
+    (e : Expression C P R) (K : CochainComplex (C i) ℤ) :
+    e.derived.app (DerivedCategory.Q.obj K) ≫ (wordFactors C R).hom.app K =
+      (wordFactors C P).hom.app K ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex e.ordinary (.up ℤ)).app K) := by
+  induction e with
+  | cell α => exact cell_factors C α K
+  | id P =>
+      simp [Expression.derived, Expression.ordinary]
+  | vcomp e f he hf =>
+      dsimp only [Expression.derived, Expression.ordinary, NatTrans.comp_app]
+      rw [Category.assoc, hf, ← Category.assoc, he]
+      simp only [NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app,
+        Functor.map_comp, Category.assoc]
+  | input U e he =>
+      dsimp only [Expression.derived, Expression.ordinary, Functor.whiskerLeft_app]
+      rw [wordFactors_comp, wordFactors_comp, ← e.derived.naturality_assoc]
+      dsimp only [Functor.comp_obj]
+      rw [he]
+      simp only [Category.assoc]
+      rfl
+  | output e V he =>
+      dsimp only [Expression.derived, Expression.ordinary, Functor.whiskerRight_app]
+      rw [wordFactors_comp, wordFactors_comp, ← V.derived.map_comp_assoc, he]
+      simp only [Functor.map_comp, Category.assoc]
+      have hn := (wordFactors C V).hom.naturality
+        ((NatTrans.mapHomologicalComplex e.ordinary (.up ℤ)).app K)
+      dsimp only [Functor.comp_map] at hn
+      rw [hn]
+      rfl
+  | assoc P R S =>
+      change 𝟙 _ ≫ (wordFactors C (.comp P (.comp R S))).hom.app K =
+        (wordFactors C (.comp (.comp P R) S)).hom.app K ≫ DerivedCategory.Q.map (𝟙 _)
+      simp only [Category.id_comp, Functor.map_id, wordFactors_comp,
+        Word.derived, Functor.comp_map, Functor.map_comp, Category.assoc]
+      erw [Category.comp_id]
+      rfl
+  | assocInv P R S =>
+      change 𝟙 _ ≫ (wordFactors C (.comp (.comp P R) S)).hom.app K =
+        (wordFactors C (.comp P (.comp R S))).hom.app K ≫ DerivedCategory.Q.map (𝟙 _)
+      simp only [Category.id_comp, Functor.map_id, wordFactors_comp,
+        Word.derived, Functor.comp_map, Functor.map_comp, Category.assoc]
+      erw [Category.comp_id]
+      rfl
+  | leftUnit P =>
+      change 𝟙 _ ≫ (wordFactors C P).hom.app K =
+        (wordFactors C (.comp (.nil _) P)).hom.app K ≫ DerivedCategory.Q.map (𝟙 _)
+      simp only [wordFactors_comp, wordFactors_nil, Word.derived,
+        Functor.map_id, Category.id_comp]
+      erw [Category.comp_id]
+      rfl
+  | leftUnitInv P =>
+      change 𝟙 _ ≫ (wordFactors C (.comp (.nil _) P)).hom.app K =
+        (wordFactors C P).hom.app K ≫ DerivedCategory.Q.map (𝟙 _)
+      simp only [wordFactors_comp, wordFactors_nil, Word.derived,
+        Functor.map_id, Category.id_comp]
+      erw [Category.comp_id]
+      rfl
+  | rightUnit P =>
+      change 𝟙 _ ≫ (wordFactors C P).hom.app K =
+        (wordFactors C (.comp P (.nil _))).hom.app K ≫ DerivedCategory.Q.map (𝟙 _)
+      simp only [wordFactors_comp, wordFactors_nil, Word.derived,
+        Functor.id_map, Functor.map_id, Category.id_comp]
+      erw [Category.comp_id, Category.comp_id]
+  | rightUnitInv P =>
+      change 𝟙 _ ≫ (wordFactors C (.comp P (.nil _))).hom.app K =
+        (wordFactors C P).hom.app K ≫ DerivedCategory.Q.map (𝟙 _)
+      simp only [wordFactors_comp, wordFactors_nil, Word.derived,
+        Functor.id_map, Functor.map_id, Category.id_comp]
+      erw [Category.comp_id]
+
 /-- Exact derived localization preserves every finite pasting equation, including square
 pasting in both orientations, naturality and unit equations. Invertible ordinary cells
 give invertible derived cells. No boundedness or resolution is used.
@@ -155,27 +275,20 @@ give invertible derived cells. No boundedness or resolution is used.
 Source: Stacks Tags 015F and 04VG and the natural-transformation localization enhancement.
 (blueprint: lem-sp-exact-derived-transformation-pasting)
 
-Proof: (1) Apply cells degreewise; naturality at differentials makes complex morphisms, and
-degreewise evaluation preserves identities, vertical composition and both whiskerings.
-(2) Exactness inverts quasi-isomorphisms. Compose the exact factorization isomorphisms along
-each word; the empty word has the identity factorization. The unique normalized compositor
-of lem-sfb-exact-derived-composition identifies these with the comparisons above.
-(3) Use lem-weil-pbc-localization-universal-property to lift each degreewise cell uniquely.
-Its component at Q(K), followed by the target factorization, is Q(C(α)_K) preceded by the
-source factorization. Conjugation by the source and target comparisons gives exactly this.
-(4) This normalization preserves identities and vertical composition by cancellation of
-the intermediate factorization isomorphism, followed by Localization.natTrans_ext.
-(5) For output whiskering use naturality of the output word's factorization at C(α)_K.
-(6) For input whiskering use naturality of the lifted cell at the input word's factorization,
-an actual derived morphism; no lifting of that morphism to a complex morphism is assumed.
-(7) Iterated comparisons have the same normalization by induction on words; uniqueness
-identifies localized structural associators and unitors with those of the derived word
-functors and proves both unit comparison equations, including the empty word.
-(8) Induction on expressions now identifies their derived evaluation with the normalized
-lift of their ordinary evaluation. Equal ordinary evaluations give equal derived evaluations.
-Horizontal square pasting is the two whiskerings followed by vertical composition.
-(9) Lift an inverse ordinary cell too. Step (4) turns its two inverse equations into the
-derived inverse equations. This proves invertibility without cancelling any noninvertible cell.
+Proof: Define the word factorization by whiskering the inverse comparison with Q and
+then applying the exact functor factorization. The identity comparison gives the empty
+word formula. Expanding the prescribed compositor and using its normalization gives the
+composition formula, by cancellation and naturality of the word comparisons.
+The component formula for Localization.liftNatTrans gives the normalization of Word.cell.
+Induct on expressions to obtain the same normalization for their derived evaluations.
+Vertical composition uses functoriality; input whiskering uses naturality of the derived
+cell at the input word factorization; output whiskering uses naturality of the output
+word factorization at the degreewise ordinary cell. Associators and unitors have identity
+components, so the word composition and empty-word formulas handle both directions.
+Cancel the target factorization and use Localization.natTrans_ext to identify an expression
+with the cell of its ordinary evaluation. Equality of ordinary evaluations then gives
+equality of derived evaluations. For an invertible ordinary cell, its localized term is
+the hom of mapDerivedCategoryNatIso, so conjugation by the word comparisons is invertible.
 -/
 theorem exact_derived_transformation_pasting [Finite I] :
     (∀ {i j : I} {P R : Word C i j} (e : Expression C P R),
@@ -184,6 +297,20 @@ theorem exact_derived_transformation_pasting [Finite I] :
       e.ordinary = f.ordinary → e.derived = f.derived) ∧
     (∀ {i j : I} {P R : Word C i j} (α : P.ordinary.obj ⟶ R.ordinary.obj),
       IsIso α → IsIso (Word.cell C α)) := by
-  sorry
+  have h : ∀ {i j : I} {P R : Word C i j} (e : Expression C P R),
+      e.derived = Word.cell C e.ordinary := by
+    intro i j P R e
+    apply Localization.natTrans_ext DerivedCategory.Q
+      (HomologicalComplex.quasiIso (C i) (.up ℤ))
+    intro K
+    apply (cancel_mono ((wordFactors C R).hom.app K)).mp
+    exact (expression_factors C e K).trans (cell_factors C e.ordinary K).symm
+  refine ⟨h, ?_, ?_⟩
+  · intro i j P R e f hef
+    rw [h e, h f, hef]
+  · intro i j P R α hα
+    change IsIso (P.comparison.inv ≫
+      (Functor.mapDerivedCategoryNatIso (asIso α)).hom ≫ R.comparison.hom)
+    infer_instance
 
 end CategoryTheory.ExactDerivedPasting
