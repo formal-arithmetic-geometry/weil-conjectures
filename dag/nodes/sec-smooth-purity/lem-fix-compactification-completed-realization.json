@@ -26,9 +26,174 @@
   "def-exchange-projection",
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$ and $H=j_!K$. The DVR theorem makes $A$ Noetherian: it is a principal ideal domain, so every ideal has one generator. The standard-quotient theorem gives finite sets $A_n$ and perfect two-term resolutions $[A\\xrightarrow{t^n}A]$. Thus $(A,(t))$ satisfies the adic hypotheses in the direct-image and perfect-projection lemmas (the finite residue field has characteristic $\\ell$, so $A/(t)$ is additive torsion). A field is Noetherian since its only ideals are $0$ and itself; its spectrum is a one-point affine scheme. Finite type over this Noetherian base makes $X,\\overline X,Y$ Noetherian. The compactification already supplies the quasi-compact open $j$; no existence of a new compactification is used.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 2, two-term perfect quotient; verification of the hypotheses of the cited adic and open lemmas"
+   }
+  },
+  {
+   "text": "Use the specified strict open reduction $r_j(K)$, not a separately chosen family of levelwise isomorphisms. It gives $H_n\\cong j_{!,n}K_n$, respects quotient transitions and reduction augmentations, and says that $H$ is derived complete with its actual completion unit. If all $K_n$ have cohomology in $[a,b]$, the finite open-extension theorem gives constructibility of $j_{!,n}K_n$ and the same interval $[a,b]$. Consequently $H\\in D^b_c(\\overline X,\\mathcal O_E)$ by the definition of that category. This uses uniform cohomological boundedness of the reductions, without a Tor bound.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-open-finite-constructibility-interval",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.1.13 and 6.5.8; strict open reduction is the cited agent refinement of Stacks 0GL1"
+   }
+  },
+  {
+   "text": "Let $\\eta_H:H\\to R\\lim\\operatorname{Res}_nH_n$ be this completion unit. Apply the strict direct-image/limit comparison to $p$. Restriction of coefficients identifies $Rp_{*,R}\\operatorname{Res}_n$ with $\\operatorname{Res}_nRp_{*,n}$ as derived strict-diagram functors. Hence the composite\n$$a_H:Rp_{*,R}H\\xrightarrow{Rp_{*,R}\\eta_H}Rp_{*,R}R\\lim\\operatorname{Res}_nH_n\\xrightarrow{\\sim}R\\lim\\operatorname{Res}_nRp_{*,n}H_n$$\nis a natural isomorphism. It is normalized so that its $n$-th projection is $Rp_{*,R}$ of the reduction augmentation, followed by coefficient restriction. The direct-image theorem also gives derived completeness of $Rp_{*,R}H$. In the coefficient-restriction lemma its auxiliary prime $p_0\\ne\\ell$ can be chosen arbitrarily; that lemma imposes no characteristic condition on the schemes.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof on the sequence topoi; coefficient restriction also uses Tag 0D6E, lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Set $N_n=\\operatorname{Res}_nRp_{*,n}H_n$ and $M_n=\\operatorname{Res}_nRp_{*,n}j_{!,n}K_n$. Applying proper image to the strict open comparison defines $\\beta_n:N_n\\xrightarrow{\\sim}M_n$. The proper-image tower lemma gives $\\beta_n t^N_n=t^M_n\\beta_{n+1}$ with $t^M_n$ precisely the compact-support restriction-of-scalars transition. These maps come from $r_j(K)$ and derived direct image on the coefficient diagram, so this is the specified strict-diagram comparison of Step 3. Define $d_c(K)=R\\lim(\\beta_\\bullet)\\circ a_H$. Functoriality of total derived limit makes this an isomorphism. The definition of integral compact support identifies its target and all the transitions with $Rf_!^cK$.",
+   "uses": [
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 2, applying direct-image reduction to the proper factor and extension by zero; explicit quotient transitions"
+   }
+  },
+  {
+   "text": "The integral direct-image constructibility theorem applies to $p$ and $H$ from Step 2. Its integral direct image is defined as the right-hand tower in $a_H$, and Step 3 identifies this with ordinary $Rp_{*,R}H$. Therefore $Rp_{*,R}j_!K$ lies in $D^b_c(Y,\\mathcal O_E)$, with the theorem's uniform cohomological bound. This use of constructibility concerns all bounded constructible finite reductions; it does not replace that category by the finite-Tor constructible category.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2; the cited DAG theorem states the bounded finite-stalk version needed here"
+   }
+  },
+  {
+   "text": "For every $n$, perfect-coefficient projection gives the specified isomorphism $\\pi_{p,H,A_n}:(Rp_{*,R}H)_n\\xrightarrow{\\sim}Rp_{*,n}H_n$ after coefficient restriction. Its composite with $Rp_{*,n}(r_j(K)_n)$ is the ordered comparison\n$$(Rp_{*,R}j_!K)_n\\xrightarrow{\\pi_{p,H,A_n}}Rp_{*,n}(j_!K)_n\\xrightarrow{Rp_{*,n}(r_j(K)_n)}Rp_{*,n}j_{!,n}K_n.$$\nThe direct-image/limit theorem identifies the completion map with this projection-formula comparison on the entire augmented quotient diagram. The reduction/limit adjunction identifies its evaluated map with the scalar-extension adjoint of the actual limit projection. Thus this is exactly the reduction comparison induced by $d_c$, including the quotient transitions, rather than just an isomorphism between its source and target.",
+   "uses": [
+    "lemma-weil-pbc-perfect-projection-formula",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 2, canonical perfect-coefficient projection comparison; Stacks sites-cohomology.tex Tag 0943, section-projection-formula"
+   }
+  },
+  {
+   "text": "For the projection assertion, write $U_T$ for restriction from $R_T$-modules to constant-$A$ modules, only on derived-complete objects. The constant/completion theorem makes $U_T$ an equivalence there and identifies reductions, total limits and completion units. Both $U_T(M\\widehat\\otimes N)$ and the constant-coefficient completed tensor of $U_TM,U_TN$ are the total limit of the same strict system $M_n\\otimes^L_{A_n}N_n$: use the theorem's change-of-rings isomorphisms and the strict tensor reduction comparison. The maps are tensor reassociation, so they respect associators and units. The theorem's pullback reduction comparison similarly identifies completed pullbacks by their defining strict limit, naturally in the whole input system. Completed-operation substitution fixes these identifications on nested expressions and their structural maps. This is a construction of comparisons by strict system maps, without using faithfulness of individual reductions.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-integral-tensor-reduction-tower-comparison",
+    "lem-pur-completed-operation-tower-substitution",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099I, lemma-restriction-derived-complete-equivalence, with sites-modules.tex Tag 093M, lemma-completion-flat; tensor and pullback reassociation for the common finite quotients"
+   }
+  },
+  {
+   "text": "These identifications preserve the actual completed adjunction. Indeed let $Q_R=Lp_R^*$, $Q_A=p^{-1}$, and $\\kappa:U_YRp_{*,R}\\cong Rp_{*,A}U_{\\overline X}$. The coefficient-restriction counit theorem gives\n$$U_{\\overline X}(\\varepsilon_R)\\,\\tau_{Rp_{*,R}H}=\\varepsilon_A\\,Q_A(\\kappa_H),$$\nwhere $\\tau$ is induced by $x\\mapsto1\\otimes x$. The common-quotient pullback comparison of Step 7 is the completion of this same $\\tau$. The reflector adjunction formula says that the completed counit precomposed with the completion unit equals the ordinary counit. Since precomposition with that unit is bijective for maps into complete $H$, the displayed ordinary counit identity implies the completed counit identity under Step 7's equivalences. Here the completion reflector and its unit over $R_T$ are the Koszul reflector, identified with quotient-tower completion by the constant/completion theorem. Thus the constant completed adjunction and completed-ring adjunction have the same specified counits under these comparisons.",
+   "uses": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-sbc-reflector-adjunction-unit-formulas",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, and Tag 0D6E, lemma-derived-pushforward-composition; completing the canonical counit through the reflector"
+   }
+  },
+  {
+   "text": "Apply completed projection coherence with constant ring $A$, ideal $(t)$, proper map $p$, and complete inputs $U_{\\overline X}H,U_YL$. Its hypotheses are Step 1's Noetherian and perfect-quotient facts; no Tor condition is present. It identifies the constant completed counit-defined projection with the total limit of the actual finite projection mates on the ringed coefficient diagram, including transitions. Steps 7-8 identify its tensor comparison, pullback comparison, direct image and counit with those of the completed-ring projection. Consequently full faithfulness of $U_Y$ on complete objects gives the same equality for that specified completed-ring projection. This uses an equality of total-limit morphisms supplied by the coherence theorem, not a claim that equal finite evaluations imply equal integral morphisms.",
+   "uses": [
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56, equation-projection-formula-map, 0941, lemma-derived-limit-is-ok, and 0A07, lemma-Rf-commutes-with-Rlim; agent-derived completion coherence is the cited statement"
+   }
+  },
+  {
+   "text": "Finally realize the strict open-tensor comparison on the coefficient diagram. Open reduction identifies realized extension by zero with ordinary $j_!$ and fixes its adjunction unit; completed-operation substitution identifies the tensor and pullback vertices, including $j^*p^*\\cong f^*$. Its open restriction is the identity by the normalization of open tensor. The completed open-tensor map has the same restriction; both its source and target are open extensions (the strict open-tensor isomorphism and the open realization provide this identification). Full faithfulness of $j_!$ therefore identifies these specified maps. Compose this equality after the proper projection equality of Step 9 and use $d_c$ at both compact-support arguments. By the defining ordered formula for $\\operatorname{PF}^c$, the result is precisely the asserted projection square. All maps were constructed on the strict coefficient diagrams before total limit. The assumed domain condition on $L$ supplies every bounded constructible vertex used here. For $K=0$, $X=\\varnothing$, or an empty open all maps are the zero-object identifications; for identity $j$ and identity $p$ the open unit and proper counit normalizations give the respective identity comparisons.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-pur-completed-operation-tower-substitution",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 2 and final paragraph: compact-support comparison and preservation of tensor/adjunction maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-completed-projection-coherence",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-sbc-reflector-adjunction-unit-formulas",
+  "lem-sf-compact-support-proper-image-tower",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Paragraph 2 and the final paragraph; explicit strict-tower and coefficient-restriction argument using the cited existing DAG lemmas, with the human-source ingredients Stacks 0A07, 0GL1, 099I and Bhatt-Scholze 6.1.13, 6.5.8, 6.7.2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +229,52 @@
    "results": "8 hits; ; localCohomology.diagram, Condensed.profiniteSolid, localCohomology.ofDiagram, Condensed.profiniteSolidCounit, IsAdicComplete.of_comp_lift, IsAdicComplete.StrictMono.of_comp_lift, Condensed.profiniteSolidification, IsAdicComplete.StrictMono.factorPow_comp_extend",
    "date": "2026-10-21",
    "verdict": "no match: local cohomology, condensed right Kan extension, pointwise derived-functor colimits and compactly supported functions do not state this completed-ring proper/open realization or its projection normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(limit|complet)|shriek.*(limit|complet)",
+   "results": "25 hits; Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic completion, condensed solidification, underived sheaf pushforward and pointwise derived-functor existence do not state the completed-ring compactification realization with its strict-tower projection normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete sheaves extension by zero proper pushforward finite coefficient inverse limit projection formula",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instFullPushforward, SheafOfModules.pushforwardComp, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic completion, condensed solidification, underived sheaf pushforward and pointwise derived-functor existence do not state the completed-ring compactification realization with its strict-tower projection normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"limit\"",
+   "results": "2 hits; CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic completion, condensed solidification, underived sheaf pushforward and pointwise derived-functor existence do not state the completed-ring compactification realization with its strict-tower projection normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient proper direct image of open extension equals derived inverse limit of finite quotient compact supports with counit projection normalization",
+   "results": "8 hits; IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.of_comp_lift, AdicCompletion.component_sumInv, AdicCompletion.sum_lof, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.mkQ_comp_lift",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic completion, condensed solidification, underived sheaf pushforward and pointwise derived-functor existence do not state the completed-ring compactification realization with its strict-tower projection normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(complet|limit)|extension[Bb]y[Zz]ero|lowerShriek",
+   "results": "2 hits; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic completion, condensed solidification, underived sheaf pushforward and pointwise derived-functor existence do not state the completed-ring compactification realization with its strict-tower projection normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adically complete constructible sheaf extension by zero inverse limit quotient tower proper derived pushforward compatibility counit tensor projection",
+   "results": "8 hits; Condensed.profiniteSolidCounit, Condensed.profiniteSolid, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, Condensed.profiniteSolidification, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic completion, condensed solidification, underived sheaf pushforward and pointwise derived-functor existence do not state the completed-ring compactification realization with its strict-tower projection normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-operation-reduction",
@@ -82,5 +289,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-compactification-completed-realization",
+  "worker": "stage1",
+  "summary": "Ten-step split using existing DAG results only. Constructs the completion/strict-open/proper-image comparison, verifies constructibility and its ordered reduction, and explicitly transfers the constant-coefficient projection coherence to completed-ring adjunctions by the coefficient-restriction counit identity. No statement change, no new node, and no finite-Tor hypothesis.",
+  "blueprint": "lem-fix-operation-reduction, paragraph 2: proper-factor perfect-coefficient direct-image reduction followed by open extension; final paragraph: the specified counit/tensor maps commute with the realization. The inherited unit is sk-prop-sf-pf-reduction; no route step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic tool for paragraph 2, canonical perfect-coefficient projection comparison; Stacks sites-cohomology.tex Tag 0943, section-projection-formula; the item unit gives the coefficient/projection route but does not state this auxiliary Coherent derived reduction, limit adjunction and fiberwise evaluation."
+   },
+   {
+    "node": "lem-pur-compact-support-completed-projection-coherence",
+    "why": "Generic tool for Tags 0B56, equation-projection-formula-map, 0941, lemma-derived-limit-is-ok, and 0A07, lemma-Rf-commutes-with-Rlim; agent-derived completion coherence is the cited statement; the item unit gives the coefficient/projection route but does not state this auxiliary Completion coherence for the integral projection mate."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic tool for Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof on the sequence topoi; coefficient restriction also uses Tag 0D6E, lemma-derived-pushforward-composition; the item unit gives the coefficient/projection route but does not state this auxiliary Completed-coefficient pushforward restriction and strict reduction towers."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic tool for Tag 099I, lemma-restriction-derived-complete-equivalence, with sites-modules.tex Tag 093M, lemma-completion-flat; tensor and pullback reassociation for the common finite quotients; the item unit gives the coefficient/projection route but does not state this auxiliary Coherent substitution of normalized systems into completed operations."
+   },
+   {
+    "node": "lem-pur-integral-tensor-reduction-tower-comparison",
+    "why": "Generic tool for Tag 099I, lemma-restriction-derived-complete-equivalence, with sites-modules.tex Tag 093M, lemma-completion-flat; tensor and pullback reassociation for the common finite quotients; the item unit gives the coefficient/projection route but does not state this auxiliary Strict tensor comparison for finite coefficient-reduction towers."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "Generic tool for Tag 07A6, lemma-adjoint, and Tag 0D6E, lemma-derived-pushforward-composition; completing the canonical counit through the reflector; the item unit gives the coefficient/projection route but does not state this auxiliary Derived ringed-topos counit under coefficient restriction."
+   },
+   {
+    "node": "lem-sbc-reflector-adjunction-unit-formulas",
+    "why": "Generic tool for Tag 07A6, lemma-adjoint, and Tag 0D6E, lemma-derived-pushforward-composition; completing the canonical counit through the reflector; the item unit gives the coefficient/projection route but does not state this auxiliary Units and counits for restriction of an adjunction through completion reflectors."
+   },
+   {
+    "node": "lem-sf-compact-support-proper-image-tower",
+    "why": "Generic tool for paragraph 2, applying direct-image reduction to the proper factor and extension by zero; explicit quotient transitions; the item unit gives the coefficient/projection route but does not state this auxiliary The proper-image reduction tower of open extension equals the compact-support tower."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic tool for Lemma 6.7.2; the cited DAG theorem states the bounded finite-stalk version needed here; the item unit gives the coefficient/projection route but does not state this auxiliary The integral derived direct image of a constructible complex along a finite-type morphism is constructible."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic tool for Lemmas 6.1.13 and 6.5.8; strict open reduction is the cited agent refinement of Stacks 0GL1; the item unit gives the coefficient/projection route but does not state this auxiliary Strict reduction and normalized realization of completed open extension."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Generic tool for Lemmas 6.1.13 and 6.5.8; strict open reduction is the cited agent refinement of Stacks 0GL1; the item unit gives the coefficient/projection route but does not state this auxiliary Open extension preserves finite constructibility and its cohomological interval."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic tool for paragraph 2 and final paragraph: compact-support comparison and preservation of tensor/adjunction maps; the item unit gives the coefficient/projection route but does not state this auxiliary Open-extension unit normalization for derived tensor and base change."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic tool for paragraph 2, two-term perfect quotient; verification of the hypotheses of the cited adic and open lemmas; the item unit gives the coefficient/projection route but does not state this auxiliary The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic tool for Tag 099I, lemma-restriction-derived-complete-equivalence, with sites-modules.tex Tag 093M, lemma-completion-flat; tensor and pullback reassociation for the common finite quotients; the item unit gives the coefficient/projection route but does not state this auxiliary Constant-to-completed coefficients on derived-complete categories."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool for paragraph 2, two-term perfect quotient; verification of the hypotheses of the cited adic and open lemmas; the item unit gives the coefficient/projection route but does not state this auxiliary A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6)."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic tool for Tag 07A6, lemma-adjoint, and Tag 0D6E, lemma-derived-pushforward-composition; completing the canonical counit through the reflector; the item unit gives the coefficient/projection route but does not state this auxiliary Ringed koszul reflector."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic tool for paragraph 2, applying direct-image reduction to the proper factor and extension by zero; explicit quotient transitions; the item unit gives the coefficient/projection route but does not state this auxiliary Strict tower homotopy limit."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Generic tool for paragraph 2, two-term perfect quotient; verification of the hypotheses of the cited adic and open lemmas; the item unit gives the coefficient/projection route but does not state this auxiliary Perfectness of the standard quotients."
+   },
+   {
+    "node": "lemma-weil-pbc-perfect-projection-formula",
+    "why": "Generic tool for paragraph 2, canonical perfect-coefficient projection comparison; Stacks sites-cohomology.tex Tag 0943, section-projection-formula; the item unit gives the coefficient/projection route but does not state this auxiliary Perfect projection formula for reductions."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic tool for Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof on the sequence topoi; coefficient restriction also uses Tag 0D6E, lemma-derived-pushforward-composition; the item unit gives the coefficient/projection route but does not state this auxiliary Direct image, derived limits, and completeness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-completed-projection-coherence",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-sbc-reflector-adjunction-unit-formulas",
+  "lem-sf-compact-support-proper-image-tower",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NE-c8ebcce9d",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-c8ebcce9d (reviewer sub-agent of L); spot-checked: PASS: I read the whole split and all 25 cited statements, and found nothing to fix. Shape: one commit on base 9a67106, only the item and its report, no new nodes, no fixes written. The statement, stmt_deps, blueprint and created fields are unchanged from live and side-live, where the node is still unsplit, so no other group's work supersedes it. No repair note, not in the dropped list. proof_deps equal the union of uses, there is no cycle, every step is under 2000 characters, and no SGA source is used. Route: the item follows paragraph 2 of the blueprint proof of lem-fix-operation-reduction (perfect projection formula, then direct-image limits, then the proper factor with extension by zero). The projection part keeps the order of the unit sk-prop-sf-pf-reduction: open identification composed with the proper projection transpose. Target: the tower and transitions in Steps 4-5 match def-weil-integral-rational-qbar-compact-support and def-weil-derived-direct-image exactly. f is separated automatically from the compactification definition. The coefficient category is the uniform-interval D^b_c with no Tor condition, and it is not switched. Hypotheses checked: O_E Noetherian with t-torsion residue field, A_n finite and perfect, Spec k Noetherian so the finite-type schemes are Noetherian; the open-reduction lemma's quasi-compact j with ell invertible and K complete; the interval lemma's Noetherian base; the proper-image tower lemma's field, separated f and quasi-compact j; the direct-image constructibility lemma, which holds over any field for proper p. The auxiliary prime in the pushforward comparison plays no role in its statement. The constant-to-completed transfer in Steps 7-9 is correct. It uses the equivalence on complete objects with matching reductions, the pullback comparison x->x(x)1 (the tau of the counit node), the identity eps^c kappa = eps with the bijectivity of the reflector unit, and the constant completed-projection coherence, which already includes transitions and counits. The equality is carried back by full faithfulness of U on complete objects. Step 10 uses full faithfulness of j_! and the identity normalization of j^*gamma. Sources checked in the text: Bhatt-Scholze 6.1.13, 6.5.8, 6.7.2, Def 6.7.6 and Lemma 6.7.7; Stacks 0A07, 0GL1, 099I, 093M, 07A6, 0D6E, 0B56, 0941 and 0943 (labels match). Edge cases: K=0, empty X, identity j or p, n=1, and t-torsion K, for which only perfectness of A_n over O_E is used. I accept all 20 declared tool_uses as generic tools used for what their statements say."
  }
 }
