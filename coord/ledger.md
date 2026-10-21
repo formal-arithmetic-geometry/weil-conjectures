@@ -19667,3 +19667,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:04 L: merged deliver/NL/lemma-weil-pbc-completed-pullback-reduction (reviewer PASS; after a return; new nodes: 0)
 - 03:05 L: merged deliver/Q29/sk-def-sfb-module-lower-shriek (reviewer PASS; after a return; new nodes: 0)
 - 03:05 L: returned deliver/NX/lem-pe-comparison-injective-left-modules-acyclic (reviewer RETURN: A6/D, repair order unfulfilled. coord/repair-notes/lem-pe-comparison-injective-left-modules-acyclic.json records a decis)
+- 03:05 L: returned deliver/N5/lem-sfb-etale-proetale-scalar-mate (reviewer RETURN: G1/D: the human's repair note coord/repair-notes/lem-sfb-etale-proetale-scalar-mate.json (2026-10-21, released before th)
