@@ -16,7 +16,8 @@
   "def-sfb-lisse-coefficient-module",
   "sk-def-pe-wlocal",
   "lem-pe-spectral-components-profinite",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-module-sections"
  ],
  "proof": [
   {
@@ -349,5 +350,33 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-53603522a (reviewer sub-agent of L); spot-checked: Read in full: the item (9 steps), the new helper lem-sfb-acyclic-hypercover-pullback-normalization, every cited statement, and HRS §4.1 (Lemma 4.1, construction (4.1), Prop 4.3). The item's statement is unchanged and true. Small cases: a point component space (strictly henselian local affines, M globally free), empty P, and Cantor P with X'=X^c; no t-exactness is used, consistent with HRS Ex. 4.2. Route: a Stonean hypercover S_n of P from the Stonean cover and finite-basis hypercover existence; component lifts U_n, V_n, shown w-contractible via det-pe-wc-cover-second-stage, whose D is one presentation of the relative lift (cofinality checked); per-term Hom bijection via the component lisse equivalence, with g^*π_U^*≅π_V^* by left adjoints; sections via derived-Hom with P=Λ; termwise isomorphism of complexes; then the helper. All hypotheses checked. The helper is true (functoriality of Stacks 09A2) and is not a duplicate of det-pe-hypercover-complex, computes-bounded-complex, grothendieck-hypercover-pullback or derived-cech-image-totalization. FIX (B2/B3): the helper identified c_g 'under the augmentation-normalized acyclic-hypercover comparisons' without defining them or citing a node that does. I pinned them as the zigzags C_U(M)→T_U(I)←I(X) through bounded-below injective resolutions, citing def-weil-pbc-proetale-hypercover-total and def-weil-pbc-proetale-hypercover-augmentation; both are added to stmt_deps and create no cycle. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-acyclic-hypercover-pullback-normalization.json. Batch-5: both flagged cites (component-relative-profinite-site, wcontractible-lisse-evaluation) reach sec-trace-formula only via def-trf-geometric-morphism, a general definition. The full closure's trf/pod nodes are generic topos/derived tools with no trace-formula or Poincaré-duality step, so they are accepted. Declared tool_uses accepted. Not in the 2026-10-19 drop list; side-live node still unsplit; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WStrictLisseComponentCohomology",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.wstrict_lisse_component_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentModuleSectionsLowerStarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLowerStar_preservesKInjectiveComplexes",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentModuleDerivedSectionsLowerStarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentDerivedSectionsPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLisseSectionsPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLisseSectionsPullback_comp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.wstrict_lisse_component_cohomology"
+  ],
+  "file": "lean/Sheaf/Paper/WStrictLisseComponentCohomology.lean",
+  "statement": "theorem wstrict_lisse_component_cohomology [IsAffine X] [IsAffine Y] [IsWStrictlyLocalRing Γ(X, ⊤)] [IsWStrictlyLocalRing Γ(Y, ⊤)] (hcomponents : IsHomeomorph f.continuous.connectedComponentsMap) (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y)) (hM : IsLisseCoefficientModule Λ.X M) : IsIso ((componentLisseSectionsPullback Λ f).app M)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses the recorded internal coefficient modules and total derived adjunction. The auxiliary section pullback is actual derived-unit followed by the canonical terminal-object Leray comparison, with the canonical single-degree exact-pullback comparison. Its natural transformation type supplies module naturality; the composition theorem supplies commutative-diagram compatibility. The added landed statement dependency owns the existing condensedModuleSections terminal-evaluation definition; there is no copied sections functor, new definition node, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a15e49917",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Re-delivery of e7da645c (H2 RETURN). Lean byte-identical to e7da. The item adds only the new stmt_dep def-sfb-condensed-module-sections against side-live; the qcqs theorem stmt_dep is gone. The new existing:true def node on the unchanged CondensedQcqsPushforwardContinuity.condensedModuleSections matches the abbrev (forget action, evaluate at the final object, MonObj only). Its stmt_deps own all declarations its body uses; no cycle, no duplicate. Item clause-by-clause re-check and edge cases are ok; gates ok. FIX: whole-node fixes/def-sfb-condensed-module-sections.json trims `noncomputable` from lean.statement; check_existing and check_new_node clean after the fix. No Lean changed, so no compile."
  }
 }

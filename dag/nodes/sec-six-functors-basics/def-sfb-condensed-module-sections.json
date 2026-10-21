@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-condensed-module-sections",
+ "kind": "definition",
+ "title": "Global sections of internal condensed coefficient modules with scalars forgotten",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a condensed ring [sk-def-sfb-condensed-ring], let $X$ be a scheme with small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. On internal $\\Lambda_X$-modules [sk-def-sfb-module-objects], define the abelian-group-valued global sections functor $\\Gamma_{\\Lambda,X}:\\operatorname{Mod}_{\\Lambda_X}(\\operatorname{Sh}(X_{\\mathrm{proet}},\\mathbf{Ab}))\\to\\mathbf{Ab}$ by forgetting the module action and evaluating the underlying abelian sheaf at the final object $\\operatorname{id}_X:X\\to X$. Thus $\\Gamma_{\\Lambda,X}(M)=M(X)$ as an abelian group and $\\Gamma_{\\Lambda,X}(a)=a_X$ on morphisms. No commutativity, completeness, affineness, or finiteness hypothesis is required.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, coefficient modules and global sections convention; proof of Lemma 5.3(1), global sections with coefficient action forgotten."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of internal modules over a pulled back condensed ring by forgetting scalars and evaluating at the terminal pro etale object",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.Γ, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.LocallyRingedSpace.Γ, AlgebraicGeometry.SheafedSpace.Γ, SheafOfModules.sectionsFunctor_obj, AlgebraicGeometry.LocallyRingedSpace.Γ_def, SheafOfModules.sections, AlgebraicGeometry.Scheme.Γ",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project condensedModuleSections abbreviation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forget the internal module structure of a sheaf and evaluate its underlying abelian sheaf at the terminal object of the small pro etale site",
+   "results": "8 hits: SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.forget_obj, SheafOfModules.sections, ModuleCat.tilde, SheafOfModules.sectionsFunctor_obj, SheafOfModules.toSheaf, SheafOfModules.unit",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project condensedModuleSections abbreviation."
+  },
+  {
+   "tool": "grep",
+   "query": "condensedModuleSections|Mod\\.forget.*sheafToPresheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project condensedModuleSections abbreviation."
+  },
+  {
+   "tool": "rg",
+   "query": "condensedModuleSections|Mod\\.forget.*sheafToPresheaf in lean/WeilConjectures and lean/Sheaf; condensed module sections in dag/nodes; blueprint_refs.py search condensed.*sections|derived.*sections",
+   "results": "No upstream definition. Sheaf/Paper/CondensedQcqsPushforwardContinuity.lean:127-135 defines the exact functor. Other Sheaf hits only consume it. No definition node owns that declaration; def-sfb-finite-derived-global-sections concerns A-valued sheaf sections. No blueprint node matches.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing project declaration; new definition node records its ownership without a duplicate module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-wstrict-lisse-component-cohomology",
+  "date": "2026-10-21",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The RΓ evaluation-at-the-final-object convention in lem-sfb-wstrict-lisse-component-cohomology, underlying the component-cohomology pullback comparison.",
+   "via": [
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedModuleSections",
+  "statement": "abbrev condensedModuleSections\n    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})\n    [MonObj Λ] (X : Scheme.{u}) :\n    Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (condensedRingObj Λ X) ⥤\n      AddCommGrpCat.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing transparent abbreviation at lines 127–135: Mod.forget ⋙ sheafToPresheaf ⋙ evaluation at op (Scheme.ProEt.mk (𝟙 X)). This definition node owns the underived sections functor used by the item through its total right derived functor. The continuity theorem is not a statement dependency. No new declaration or copied definition is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a15e49917",
+  "group": "Q03",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a15e49917",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Re-delivery of e7da645c (H2 RETURN). Lean byte-identical to e7da. The item adds only the new stmt_dep def-sfb-condensed-module-sections against side-live; the qcqs theorem stmt_dep is gone. The new existing:true def node on the unchanged CondensedQcqsPushforwardContinuity.condensedModuleSections matches the abbrev (forget action, evaluate at the final object, MonObj only). Its stmt_deps own all declarations its body uses; no cycle, no duplicate. Item clause-by-clause re-check and edge cases are ok; gates ok. FIX: whole-node fixes/def-sfb-condensed-module-sections.json trims `noncomputable` from lean.statement; check_existing and check_new_node clean after the fix. No Lean changed, so no compile."
+ }
+}
