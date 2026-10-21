@@ -11,6 +11,17 @@ request's private overlay; they never modify the published build."""
 import fcntl, io, json, os, pathlib, re, shutil, subprocess, sys, tarfile, tempfile, time
 H = pathlib.Path.home(); REPO = H / "weil-conjectures-sheaf"; LEAN = REPO / "lean"
 LEANBIN = str(H / ".elan/bin/lean")
+
+def _pdeathsig():
+    """2026-10-21: a Lean child dies with this call (SIGTERM on parent death). Calls whose worker had died (OOM-killed or
+    stopped deliveries on the Codex machine) left orphaned Lean processes burning a core each for minutes (36 at 19:56)."""
+    import ctypes, signal as _sig
+    try:
+        ctypes.CDLL("libc.so.6", use_errno=True).prctl(1, _sig.SIGTERM, 0, 0, 0)   # PR_SET_PDEATHSIG
+    except Exception:   # noqa: BLE001
+        pass
+
+
 n = 0
 while (REPO / "local" / "PUBLISHING").exists():
     if n >= 30: sys.exit(75)
@@ -206,7 +217,7 @@ try:
                 key = None
         try:
             if not hit:
-                p = subprocess.run(cmd + [str(src)], cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=LP, LEAN_NUM_THREADS="1"),
+                p = subprocess.run(cmd + [str(src)], preexec_fn=_pdeathsig, cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=LP, LEAN_NUM_THREADS="1"),
                                    capture_output=True, text=True, timeout=timeout)
                 rc, out = p.returncode, p.stdout + p.stderr
                 if key and rc == 0:
