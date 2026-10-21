@@ -29,177 +29,81 @@
  ],
  "proof": [
   {
-   "text": "Identify evaluation with an actual inverse-image functor before invoking the tensor theorem. Take the geometric point $\\bar s=\\mathrm{id}_s$ and the pointed-neighbourhood category of [def-weil-proetale-geometric-stalk]. For every $(U,u)$, the lift $u:s\\to U$ is the unique pointed morphism $(s,\\mathrm{id})\\to(U,u)$; hence $(s,\\mathrm{id})$ is initial in that category and terminal in its opposite. Its colimit is therefore $\\mathcal F(s)$: the inverse sends a section over $(U,u)$ to its restriction along $u$, and the colimit relations make this inverse to the map from $\\mathcal F(s)$. Thus the topos point furnished by [lem-fix-geometric-stalk-topos-point] has $p^{-1}=\\Gamma(s,-)$. For finite coefficients its ring stalk is $A$ by [lem-weil-proetale-constant-sheaf-stalk]. For $R_s=\\widehat{\\mathcal O}_{E,s}=\\varprojlim_j(A_{E,j})_s$, sectionwise limits give $p^{-1}R_s=R_s(s)=\\varprojlim_j A_{E,j}=\\mathcal O_E$; the last equality is the coefficient identification used in [lem-weil-point-sections-finiteness](2). Equip this point with the identity ring map to the indicated coefficient ring. Its module pullback is $A\\otimes_A\\Gamma(s,-)$, or $\\mathcal O_E\\otimes_{\\mathcal O_E}\\Gamma(s,-)$, and multiplication identifies it with sections.",
+   "text": "Apply [lem-sf-point-ringed-evaluation-model] to the finite coefficient ring sheaf. It identifies the exact sections fibre with the actual ringed-point derived pullback, with its canonical tensor, coefficient unit, signed constraints and scalar squares. By [lem-sf-tensor-ctf](ii) the tensor of the two finite-Tor inputs is still finite-Tor constructible. This gives the finite comparison and its finite reduction squares.",
    "uses": [
-    "def-weil-proetale-geometric-stalk",
-    "lem-fix-geometric-stalk-topos-point",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "def-weil-completed-integral-coefficients",
-    "lem-weil-point-sections-finiteness",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0991, proetale.tex section-points, pointed-neighbourhood formula; Tag 00Y8, sites.tex lemma-point-pushforward-sheaf; coefficient specialization of Tag 03D7"
-   }
-  },
-  {
-   "text": "Sections is exact by [lem-weil-point-proetale-sections-exact]. For a K-flat flat-term resolution $P\\to K$, [lem-weil-pbc-ringed-topoi-derived-pullback] computes $Lp^*K$ by $p^*P=\\Gamma(s,P)$; exactness makes $\\Gamma(s,P)\\to\\Gamma(s,K)$ a quasi-isomorphism. Naturality of its canonical comparison with termwise pullback identifies $Lp^*$ with sections on the derived category. Now apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this ringed point, not to a scheme map $s\\to s$. Its canonical bifunctorial isomorphism gives $\\Gamma(s,M\\otimes^L_A N)\\cong\\Gamma(s,M)\\otimes^L_A\\Gamma(s,N)$ at finite coefficients; [def-weil-finite-coefficient-point] identifies these with the three fibre objects. Since $s$ is a finite-type $k$-scheme, [lem-sf-tensor-ctf](ii) puts the input tensor in $D^b_{ctf}(s,A)$. The same ringed-point theorem also supplies the comparison for the ordinary ambient derived tensor of $R_s$-modules; completion at the integral stage still needs the next three steps.",
-   "uses": [
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-finite-coefficient-point",
+    "lem-sf-point-ringed-evaluation-model",
     "lem-sf-tensor-ctf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY, lemma-derived-base-change, and 07A4, lemma-pullback-tensor-product, proof by K-flat flat-term resolutions"
+    "place": "Tag 07A4, lemma-pullback-tensor-product, its total-complex construction; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback; proetale.tex Tag 0991, section-points. Agent-written specialization and constraint/scalar normalization of old item steps 1, 2, 8 and 9."
    }
   },
   {
-   "text": "Sections commutes with the strict derived limits used here. Countable products of $R_s$-module sheaves are exact and sectionwise by [lem-weil-proetale-countable-products-exact]; countable products of ordinary $\\mathcal O_E$-modules are exact since coordinatewise lifts of a tuple along surjections give a lift. By [lem-weil-derived-limit-products-core], the products in both derived categories are termwise products. Sections therefore carries the product and the transition endomorphism $1-t$ of a strict tower to the corresponding module product and $1-t$. In the natural Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], the derived limit is represented by the shifted cone of this chain map. Applying exact sections termwise preserves that cone, including its differential and projections. Consequently $\\Gamma(s,R\\varprojlim_j T_j)\\cong R\\varprojlim_j\\Gamma(s,T_j)$ naturally for the strict reduction/tensor towers; this uses the functorial cone model, not an arbitrary lift into a triangulated derived limit.",
+   "text": "At the integral stage put $C=\\Gamma_sM$, $D=\\Gamma_sN$. Their cohomology is bounded and finitely generated by [lem-weil-point-sections-finiteness](2), so they admit bounded finite-projective models by [lem-weil-coefficient-frobenius](2). The completed tensor is constructible and reduces to $M_j\\otimes^L_{A_{E,j}}N_j$ by [lem-pur-integral-operations-preserve-constructible](2), where $M_j,N_j$ are the derived reductions.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07KC, derived.tex lemma-products; Tag 0941, lemma-derived-limit-is-ok, product/cone calculation"
-   }
-  },
-  {
-   "text": "Put $R=\\mathcal O_E$, $C=\\operatorname{Fib}_s(M)$ and $D=\\operatorname{Fib}_s(N)$ for integral $M,N$. By [def-weil-finite-coefficient-point] and [lem-weil-point-sections-finiteness](2), $C,D$ have bounded finitely generated cohomology. The DVR clause of [lem-weil-coefficient-frobenius] makes each perfect, so choose bounded finite-projective module models $P,Q$ as in [def-pc-perfect-ring-complex]. Their total tensor $V=\\operatorname{Tot}(P\\otimes_R Q)$ is again bounded finite projective: projectives are direct summands of finite free modules, so each $P^i\\otimes_RQ^j$ is a direct summand of a finite free module. It computes $C\\otimes_R^L D$. The canonical completion map $V\\to R\\varprojlim_j(V\\otimes_R A_{E,j})$ is an isomorphism. Indeed every term of $V$ is a direct summand of $R^h$; $R=\\varprojlim_j A_{E,j}$ gives the same equality for each such summand and every differential. The quotient transitions are surjective termwise, so $1-t$ on the product complexes is surjective termwise (solve $x_j-t_jx_{j+1}=y_j$ recursively using these surjections), with kernel the termwise inverse limit $V$. Its cone shifted by $-1$ is therefore quasi-isomorphic to $V$. This proves completion for the ordinary module tensor actually appearing on the right of the item.",
-   "uses": [
-    "def-weil-finite-coefficient-point",
     "lem-weil-point-sections-finiteness",
     "lem-weil-coefficient-frobenius",
-    "def-pc-perfect-ring-complex",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-pur-integral-operations-preserve-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Coefficient construction of def-weil-finite-coefficient-point; bounded perfect models and the product/cone model of Tag 0941"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Coefficient finiteness of lem-weil-point-sections-finiteness (2) and the DVR perfectness clause of lem-weil-coefficient-frobenius (2); integral reduction formula of lem-pur-integral-operations-preserve-constructible (2). Agent-written, old item step 4 (models) and step 5 (reductions)."
    }
   },
   {
-   "text": "Write $M_j=M\\otimes_R^L A_{E,j}$ and $N_j=N\\otimes_R^L A_{E,j}$. They are finite-Tor objects by [def-weil-finite-tor-amplitude]. The integral tensor of [def-weil-derived-pullback-tensor-hom] is the strict derived limit of $M_j\\otimes^L_{A_{E,j}}N_j$ with restriction of scalars. It is constructible, and its reductions are those tensors, by [lem-pur-integral-operations-preserve-constructible](2). Step 3 evaluates this limit. Step 2 and [lem-pod-point-sections-derived-reduction] identify its evaluated tower, with its quotient transition maps, with\n$$ (C\\otimes_R^L A_{E,j})\\otimes^L_{A_{E,j}}(D\\otimes_R^L A_{E,j})=(C\\otimes_R^L D)\\otimes_R^L A_{E,j}. $$\nThe equality is the derived base-change associator: on flat-term models it is $(x\\otimes a)\\otimes(y\\otimes b)\\mapsto(x\\otimes y)\\otimes ab$. Thus it commutes with each quotient map $A_{E,j+1}\\to A_{E,j}$. Take the functorial derived limit of this tower identification and compose with the inverse of the canonical completion isomorphism in step 4. This gives $\\operatorname{Fib}_s(M\\widehat\\otimes_R^L N)\\cong C\\otimes_R^L D$ in the asserted direction. All maps used are natural; inverses of their isomorphisms are natural, so the integral comparison is natural too. This proves the integral case without identifying completed sheaf tensor with ordinary module tensor by definition.",
+   "text": "Sections is exact by [lem-weil-point-proetale-sections-exact] and preserves countable products, which are exact and sectionwise by [lem-weil-proetale-countable-products-exact]. Countable products of ordinary $\\mathcal O_E$-modules are exact, since a tuple lifts coordinatewise along surjections; so both categories satisfy the hypotheses of the next lemma. Apply [lem-cbc-exact-product-functor-strict-limit] to sections and the strict tensor tower; its specified comparison preserves both Roos coordinates and coaugmentations. The ambient tensor comparison [lem-sf-point-ringed-evaluation-model] and the natural reduction comparison [lem-pod-point-sections-derived-reduction] identify its levels with $(C\\otimes^L_RA_j)\\otimes^L_{A_j}(D\\otimes^L_RA_j)$. The quotient-coordinate formulas of [lem-sf-perfect-tensor-roos-completion] identify this tower with the reductions of $C\\otimes^L_RD$ and make its coaugmentation invertible. Compose the evaluated-limit identification with its inverse. This is the integral comparison; the first coordinate is the quotient tensor map and the shifted coordinate is zero. Naturality, units, signed constraints and reduction squares follow from the cited Roos and tensor model lemmas. For scalar extension use the source tensor comparison of [lem-pur-integral-operations-scalar-extension] and the normalized fibre comparison of [lem-weil-point-sections-scalar-extension]; their squares are the balanced scalar/completion squares of those model lemmas, including identity and iterated extensions.",
    "uses": [
-    "def-weil-finite-tor-amplitude",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-point-ringed-evaluation-model",
     "lem-pod-point-sections-derived-reduction",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sf-perfect-tensor-roos-completion",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 on finite reductions; integral completed-tensor definition and canonical reduction comparisons"
+    "place": "Tag 0941, lemma-derived-limit-is-ok, shifted-cone model; algebra.tex Tag 031B, lemma-when-finite-module-complete-over-complete-ring, for comparison with classical completeness. Agent-written finite-projective retract and quotient-coaugmentation argument, old item step 4 and the completion parts of steps 5, 8 and 9."
    }
   },
   {
-   "text": "For the rational stage use the integral presentations required by [def-weil-finite-coefficient-point] and [def-weil-derived-pullback-tensor-hom]; they may be arbitrary integral constructible objects, since [lem-coef-integral-residue-tor] identifies $D^b_c(s,R)=D^b_{ctf}(s,R)$, so step 5 applies to these presentations. The ring $E=R[1/\\varpi_E]$ is flat over $R$: localization of a kernel is its localized kernel, since a numerator mapping to zero is killed by some denominator. On the bounded projective models $P,Q$ in step 4, the balanced map\n$$ (P\\otimes_RQ)\\otimes_RE\\longrightarrow (P\\otimes_RE)\\otimes_E(Q\\otimes_RE),\\quad (x\\otimes y)\\otimes c\\longmapsto(x\\otimes1)\\otimes(y\\otimes c) $$\nhas inverse $(x\\otimes a)\\otimes(y\\otimes b)\\mapsto(x\\otimes y)\\otimes ab$ and commutes with the tensor differential. Tensoring the integral comparison with $E$ and applying this isomorphism gives the rational comparison. For morphisms represented by $f\\otimes a$ and $g\\otimes b$, integral naturality tensored with $E$ gives the naturality square multiplied by $ab$, which is precisely rational naturality under the stated definitions.",
+   "text": "By [lem-coef-integral-residue-tor], all integral constructible presentations allowed at the rational stage satisfy the integral finite-Tor hypothesis. Apply [lem-sf-tensor-comparison-localization-descent] to the integral comparisons just constructed, with their scalar squares. The prescribed rational and common-stage coefficient constructions therefore give the remaining comparisons, independent of representatives and with the required naturality, units, tensor constraints and coefficient squares.",
    "uses": [
-    "def-weil-finite-coefficient-point",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-coef-integral-residue-tor"
+    "lem-coef-integral-residue-tor",
+    "lem-sf-tensor-comparison-localization-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Rationalization clauses of the two coefficient definitions; balanced tensor base-change calculation"
-   }
-  },
-  {
-   "text": "For $\\overline{\\mathbf Q}_\\ell$, choose representatives $(E_1,M_1),(E_2,N_2)$ and let $L=E_1E_2$ inside the fixed algebraic closure. Write $M_L=M_1\\otimes_{E_1}L$ and $N_L=N_2\\otimes_{E_2}L$. Apply step 6 over $L$ to obtain\n$$ \\operatorname{Fib}_s(M_L\\otimes_L^L N_L)\\cong\\operatorname{Fib}_s(M_L)\\otimes_L^L\\operatorname{Fib}_s(N_L). $$\nOn the right compose with $\\varphi_{L/E_1,M_1}\\otimes\\varphi_{L/E_2,N_2}$ from [lem-weil-point-sections-scalar-extension], in its rational form. The resulting arrow over $L$ has exactly the source and target of the common-stage tensor and fibre definitions. Upon extension to $L'\\supset L$, the tensor comparison of [lem-pur-integral-operations-scalar-extension] and the composition equation for $\\varphi$ identify each of its three factors with the corresponding factor formed over $L'$: the balanced tensor rule is multiplication of the two new scalars, as in step 6. For two choices of representatives or common field, pass to a field containing both; these equalities identify the arrows there, hence their classes in the 2-colimit. For a pair of morphisms, represent both over such a field and apply rational naturality there. This proves independence and naturality, with the actual comparison arrows specified.",
-   "uses": [
-    "def-weil-finite-coefficient-point",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-point-sections-scalar-extension",
-    "lem-pur-integral-operations-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Common-stage clauses of def-weil-finite-coefficient-point and def-weil-derived-pullback-tensor-hom, with their scalar associator comparisons"
-   }
-  },
-  {
-   "text": "Check the tensor constraints on the canonical comparisons rather than only their objectwise invertibility. At the ambient finite or integral ringed-point level, choose K-flat flat-term representatives as allowed by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-weil-pbc-site-derived-tensor-descent]. The module comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] sends tensor generators to the tensor of their images. In a triple tensor, both associativity composites send $(x\\otimes y)\\otimes z$ to the images of $x,y,z$ in that order, after the associator. In degrees $i,j$, the two symmetry composites both send $x\\otimes y$ to $(-1)^{ij}$ times the images of $y\\otimes x$. With the unit, the two composites send $a\\otimes x$ to $a$ times the image of $x$. These are equalities of balanced module maps in each bidegree; they commute with differentials and sums in totalization, so are equalities of complex maps. The resolving-class uniqueness in [lem-weil-pbc-site-derived-tensor-descent] descends them to the derived categories. At the integral completed stage perform the same identities on every finite reduction and take the functorial limit of their equal chain maps as in steps 3--5; the completion map of step 4 preserves these identities by its quotient projections. Tensoring those equations with $E$ proves them in step 6, and applying them over a common field proves them in step 7. The unit is evaluated as $A$, $R$, $E$, or its common-stage class, by step 1 and the coefficient definitions. Thus all four comparisons respect unit, associativity and symmetry.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-finite-coefficient-point",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 proof, total-complex comparison; Tag 03EL module tensor comparison; Tag 06YU resolving-class descent"
-   }
-  },
-  {
-   "text": "For reduction or scalar change $A\\to B$, the square comparing tensor before and after change of coefficients commutes on flat-term models: its two paths on $(x\\otimes a)\\otimes(y\\otimes b)$ give $(x\\otimes y)\\otimes ab$. This is the change-of-rings associator of [lem-pur-derived-change-of-rings] and the canonical tensor comparison in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Its equality survives resolving-class localization by [lem-weil-pbc-site-derived-tensor-descent]. At the integral stage, the reduction comparison of [lem-pod-point-sections-derived-reduction] is the canonical one, obtained from the cone of multiplication by $\\varpi_E^j$; exact sections sends that multiplication and its cone to the identical module multiplication and cone. Therefore its square with these tensor maps is the just-checked finite square, and steps 3--5 use exactly those quotient projections. For a finite field extension $E\\subset L$, [lem-pur-integral-operations-scalar-extension] gives the source completed-tensor comparison, and [lem-weil-point-sections-scalar-extension] identifies the fibre comparison with the inverse of the canonical sections-tensor map followed by completion. On flat-term models their tensor square is again the displayed balanced rule with $B=\\mathcal O_L$; at the completed stage it is obtained from that rule on its finite quotients. Their stipulated identity and composition equations give the identity-extension and iterated-extension squares. Finally tensor these equations with the fraction field and take their common-stage classes. This proves the finite reduction and scalar extension compatibilities asserted in the item, including the independence invoked in step 7.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pod-point-sections-derived-reduction",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-point-sections-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 canonical flat-term comparison; quotient-cone reduction and canonical scalar-extension comparisons"
+    "place": "Rational and algebraically closed coefficient constructions, together with def-weil-finite-coefficient-point.md in sk-def-sf-admissible. Agent-written conditional descent lemma extracting old item steps 6 and 7 and the rational/common-stage portions of steps 8 and 9."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
-  "def-pur-sheaf-inverse-limit",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-coefficient-point",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-proetale-geometric-stalk",
-  "lem-coef-integral-residue-tor",
-  "lem-fix-geometric-stalk-topos-point",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-point-ringed-evaluation-model",
   "lem-sf-tensor-ctf",
-  "lem-weil-coefficient-frobenius",
-  "lem-weil-derived-limit-products-core",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-point-proetale-sections-exact",
   "lem-weil-point-sections-finiteness",
+  "lem-weil-coefficient-frobenius",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-sf-perfect-tensor-roos-completion",
+  "lem-pur-integral-operations-scalar-extension",
   "lem-weil-point-sections-scalar-extension",
-  "lem-weil-proetale-constant-sheaf-stalk",
-  "lem-weil-proetale-countable-products-exact"
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-tensor-comparison-localization-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, lemma-pullback-tensor-product, specialized via the actual topos point of proetale.tex Tag 0991; explicit completed, rational and common-stage assembly"
+  "place": "Tag 07A4 and the prescribed coefficient constructions; assembly of four extracted model/descent lemmas."
  },
  "mathlib_searches": [
   {
@@ -304,26 +208,44 @@
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-kunneth-relative",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-sf-point-fibre-derived-tensor",
   "worker": "stage1",
-  "summary": "Second reading removed the clause-restating finite child. Nine steps identify evaluation with an actual topos inverse image, reuse the existing arbitrary-ringed-topos tensor theorem, justify evaluation of strict derived limits, prove completeness of the perfect module tensor, and explicitly verify rational/common-stage assembly and all coherence squares. No statement change and no new nodes.",
-  "blueprint": "Realizes the final compact-support specialization sentence of thm-sf-kunneth-relative: translating the point formula to derived coefficient modules at finite, integral, rational, and common finite stages.",
-  "tool_uses": []
+  "summary": "Deliberate re-split ordered by the human: statement unchanged. Three independent statement-only nodes carry ringed-point tensor normalization, perfect tensor completion with its diagrams, and conditional rational/common-stage descent. Strict Roos preservation reuses the existing general exact product functor theorem. All nine old arguments are mapped to these obligations in report.md; the item retains only the short assembly. No Lean changes.",
+  "blueprint": "Proof, final compact-support specialization over Spec k: translating the tensor formula into derived coefficient modules.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Canonical comparison of point sections with derived coefficient reduction; used as an existing generic coefficient tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Canonical source tensor/scalar comparison used to instantiate the integral completion square."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Normalized point-fibre scalar comparison and its identity/tower equations."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Exact product preserving functors commute with the specified Roos model and its coaugmentations; used for sections to ordinary modules."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q20-1b064b326",
-  "group": "Q20",
+  "reviewer": "NT-cc-Q62-57a529291",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-1b064b326 (reviewer sub-agent of L); spot-checked: Read the required guidance, item, unit/chapter route, cited node statements, and cited source locations. Verified all nine proof steps, coefficient categories, ringed-topos base-change morphism, edge cases, dependency acyclicity, duplicate removal, and Mathlib searches. No defects found; review.md written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-57a529291 (reviewer sub-agent of L); spot-checked: I read the whole re-split against the base 9-step proof (11585 chars, from clones/live and side-live, because the snapshot's non-six-functors chapter symlinks point to a dagsnap that no longer exists) and against repair note 2026-10-21. Statement and stmt_deps are unchanged. There are three new statement-only nodes (2415/2414/2503 chars), each with 5 recorded searches of 3 kinds. The item proof is a 2694-char assembly. Every citation exists and is unmerged, and there is no cycle (closure check). There is no SGA, and the item is not in the dropped list. Old-step mapping: steps 1-2 and the ambient parts of 8-9 are in lem-sf-point-ringed-evaluation-model (Stacks 03EL/07A4; Gamma_s equals the stalk because (s,id) is initial). Step 3 goes to the existing lem-cbc-exact-product-functor-strict-limit (unit sk-prop-sf-cbc, which the unit cites). Step 4 and the completion parts of 5/8/9 are in lem-sf-perfect-tensor-roos-completion. I checked d^2=0, that e is a chain map, that 1-t is surjective with kernel V, completeness via 031B, the R[0] case, and cofinal pi-filtrations for finite free R->S. Steps 6-7 and the rational/common parts of 8-9 are in lem-sf-tensor-comparison-localization-descent, which matches the raw (non-Karoubi) rationalization and the common-stage colimit. None of the new nodes is a duplicate or restates the item. Repairs (fixes/dag/nodes/sec-six-functors/): (1) E1 in the descent node: it did not assume T_{L/E} is R_E-linear, or give T_{E/E}=id and T_{M/L}T_{L/E}=T_{M/E} with their equations, which the rational functor and the colimit need. Added. (2) Item step 3: lem-cbc needs exact countable products in O_E-modules too; the coordinatewise-lift sentence of old step 3 was lost and is restored (2874 chars). (3) Step 2's source was copied from step 3; corrected. Also completed `created` (by/date/group) on the three new nodes. Advisory, inherited: lem-pur-integral-operations-scalar-extension does not pin its tensor comparison, which the integral scalar square relies on. Tool uses accepted, including lem-cbc, which is on route anyway.; 4 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "tool_uses": [
   "lem-pur-integral-operations-scalar-extension",
   "lem-weil-point-sections-scalar-extension",
-  "lem-pod-point-sections-derived-reduction"
+  "lem-pod-point-sections-derived-reduction",
+  "lem-cbc-exact-product-functor-strict-limit"
  ],
  "reviewed_lean": {
   "date": "2026-10-17",
