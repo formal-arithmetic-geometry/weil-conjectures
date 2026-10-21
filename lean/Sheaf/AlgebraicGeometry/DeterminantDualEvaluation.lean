@@ -11,7 +11,8 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Sheaf.AlgebraicGeometry.DeterminantExteriorDualIso
+import WeilConjectures.AlgebraicGeometry.DeterminantExteriorDualIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExact
 
 /-! # Ordinary determinant evaluation
@@ -71,8 +72,11 @@ theorem determinant_dual_evaluation (X : Scheme.{u})
   have : F.IsInvertible :=
     (Scheme.Modules.determinant_shortExact S hS 0 d d (by omega)).2.1
   obtain ⟨e⟩ := exteriorSheaf_dual_iso X M d hfree
+  let e' := (Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual M) d).trans
+    (e.trans ((Scheme.Modules.dualFunctor X).mapIso
+      (Scheme.Modules.exteriorSheafPowerIso M d).op))
   let := SheafOfModules.symmetricCategory X.sheaf
-  exact ⟨(e ⊗ᵢ Iso.refl F) ≪≫ (β_ _ _) ≪≫
+  exact ⟨(e' ⊗ᵢ Iso.refl F) ≪≫ (β_ _ _) ≪≫
     (Scheme.Modules.nonempty_tensorObj_dual_iso_unit F).some⟩
 
 end AlgebraicGeometry
