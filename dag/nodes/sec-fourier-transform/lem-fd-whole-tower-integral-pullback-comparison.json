@@ -15,7 +15,10 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-pbc-completed-pullback",
   "def-fd-finite-pullback-comparison-datum",
-  "lem-weil-pbc-integral-stratified-perfect-characterization"
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-pullback-comparison-datum",
+  "def-fd-integral-pullback-shift-coordinates"
  ],
  "proof": [
   {
@@ -395,5 +398,29 @@
   "group": "Q152",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-6641d77ad (reviewer sub-agent of L); spot-checked: FIX: a first split of the Q114 re-split child, with 11 steps and no new nodes. The mathematics is sound, apart from one normalization gap in Step 8, which I repaired. Base checks: the statement, stmt_deps, chapter, unit and blueprint match the live node byte for byte; the item has no repair note of its own and is not on the drop list. proof_deps equals the union of the step uses. The closure walk finds no cycle back to the item or its parent. Every step is under 2000 chars and no SGA source is used. Old parent steps 7–8 are fully covered: steps 1–3 give the tower, the Roos zigzag and representative independence; 4 gives the datum; 5–7 the counit and composition equations; 8–10 the scalar mixed square; 11 shifts and iterations. Sources read: Stacks 099N (2),(5) at proetale.tex l.4336, 0941 at sites-cohomology l.5067, and the 0D6D label. Maths: (1) for an isomorphism h, c_g is an isomorphism and module pullback is exact, so the PBC Lg*_Tow is termwise and both definitions give the same strict tower Q_n. (2) b=[ι_I]^{-1}[H(q)] has the direction I F^s→F^p I, using exact countable products. (4) Γ_P=(0,(γ_n)) is a chain map because t_nγ_{n+1}=γ_n; the Roos augmentation clause gives b Γ_P = the PBC completion map, so (b^int)^{-1} matches the datum's normalization. (6) O_E is a PID, hence Noetherian; the PBC compositor precomposed with the completion unit is ordinary composition, and that unit is invertible for an isomorphism. (7) I re-derived c^p b_{kh}=(F_h b_k)(b_h F_k)c^s from naturality and cancellation of the invertible κ^s_{kh}. (9) Naturality of ρ at d_• gives bδ^s=δ^p C(b). (10) Naturality of b at χ_T, then rationalization with j=χ^{-1}[1/ϖ], gives exactly the item's mixed equation. Edge cases checked: h=id, empty scheme, E=L, ramified ι_m not invertible, odd shifts. FIX: the trf realization lemma's scalar comparison a_h=μ^{-1}λ (used in Steps 5 and 11) and specified-alpha's α=F(χ)δχ^{-1} (used in Steps 8 and 10) were never shown equal. I added a sentence to Step 8: λχ_U and μF(χ_T)δ are both induced by the same strict augmentation (level-m projection, then d_m), so they agree by the strict-roos augmentation clause. That step now also uses lem-trf-integral-pullback-comparison-realization and lem-weil-strict-roos-comparison; both are already proof_deps, so proof_deps is unchanged. Batch 5, accepted for each flagged citation: lem-trf-counit-realization-substitution and lem-trf-quotient-system-mixed-coherence are generic counit/mixed-coherence statements from the Q23 trf re-split. lem-weil-isomorphism-derived-pullback-comparison-normalization is pullback along an isomorphism; its closure has only generic trf/pod helpers. lem-sfb-kflat-scalar-comparison-normalization reaches only lem-trf-geometric-inverse-image-exact (inverse image is exact). All four closures lie inside the closure of the item's base stmt_dep lem-trf-integral-pullback-comparison-realization, which was already accepted as generic. None contains a trace-formula or Poincaré-duality step. The 22 tool_uses are foundational coefficient tools and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WholeTowerIntegralPullbackComparison",
+  "declaration": "WeilConjectures.wholeTowerIntegralPullbackComparison",
+  "declarations": [
+   "WeilConjectures.fdWholeTowerTransportShift",
+   "WeilConjectures.FdWholeTowerIntegralComparison",
+   "WeilConjectures.wholeTowerIntegralPullbackComparison"
+  ],
+  "file": "lean/Sheaf/Paper/WholeTowerIntegralPullbackComparison.lean",
+  "statement": "theorem wholeTowerIntegralPullbackComparison (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (C : ∀ (T : Scheme.{u}) [IsNoetherian T] [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))], FdCoefficientComparison l Ω T) : Nonempty (FdWholeTowerIntegralComparison l Ω C)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Simultaneous normalized integral comparison in the inverse-b orientation of the existing finite datum. Includes actual unit/composition normalization, integral scalar square transported by HEq to the canonically equal coefficient-map presentations, raw mixed-square data, and signed representative/derived shift compatibility. All data have real fields; the existence theorem alone is postponed. Returned H2 repair: the signed shift predicates are owned by def-fd-integral-pullback-shift-coordinates; no statement dependency on the a1 comparison theorem remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18a72fe90",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the d684f6 H2 RETURN. Against d684f6 the only changes are the import (IntegralPullbackCompletedComparison → IntegralPullbackShiftCoordinates) and the stmt_dep swap (a1 theorem → def-fd-integral-pullback-shift-coordinates). That definition node and its module are landed on live (identical to the snapshot); the a1 module publicly imports it and no longer declares ShiftCoordinates/ShiftDescent/levelShift/productShift/roosEnd, so there is no collision. The added stmt_deps are landed definition nodes. Clause audit redone: allowed-scheme hypotheses match; C is the supposed coefficient datum; B=b^{-1}, its normalization and chain fix the Roos realization. Unit (B≫I su=pu) and composition (B_kh≫I sc=pc≫F_h B_k≫B_h F_k) equations are correct after inverting b. su/sc are pinned to the specified source maps; pu/pc are HEq-pinned, with defeq types, to the actual pbcActualCompletedPullIdIso and the inverse of pbcActualCompletedPullCompIso. integral_scalar is the node's integral equation after inverting b; alpha is HEq-pinned to pbcScalarCompletedPullIso, a genuine presentation transport (rawScalar_coefficientMap). Shifts are pinned by the signed coordinates and descent. Statement verbatim, docstrings present, one sorry, no line over 100. No compile (no file changed). Advisory: base theorem stmt_deps (trf realization, stratified characterization) supply definitions; the finite-free strict-tower proof import is absent, as the report discloses."
  }
 }

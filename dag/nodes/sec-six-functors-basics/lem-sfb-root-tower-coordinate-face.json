@@ -17,7 +17,9 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-sfb-lisse-coefficient-module",
   "def-sfb-profinite-test-objects",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-weil-pbc-condensed-e-module-category"
  ],
  "proof": [
   {
@@ -375,5 +377,63 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c33e57ab9 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the sources: BS 2.1.9, Ex. 2.2.2, 2.2.8, 2.4.8; Stacks 0986; HRS Lemma 4.1 and Prop. 4.3. The item's statement and stmt_deps are unchanged and there is no re-split note. Both new nodes are true and are not duplicates. lem-sfb-indfinite-contractible-base-wstrict follows from integral transitions being w-local plus BS 2.1.9 and Ex. 2.2.2. lem-sfb-wstrict-lisse-component-cohomology follows by descent along X×_{π0}S_• over extremally disconnected S_n, which are w-contractible, then HRS 4.1/4.3, then hyperdescent for bounded M[0]. Neither restates a clause of the item. Steps 1 and 3–9 check out, including the nil (not nilpotent) J-root ideal, the closed points of X lying in X', the transpose-of-counit identification and the edge cases. Two repairable faults were found, both in step 2. (1) C1/E5: one cover of U_J does not detect isomorphisms of cohomology sheaves, and test objects are only weakly étale, so v(W) is undefined for some of them. Fixed: the class of w-contractible affines ind-étale over U_J covers every object (sk-thm-pe-indetale-refinement, det-pe-wcb-cover, lem-weil-pbc-ind-etale-stability), and a sheaf that vanishes on such a cover vanishes. (2) C1: step 3 used Γ(A_W) w-contractible, but step 2 proved only weak contractibility. Fixed through the henselian pair (lem-zl-henselian-indetale-closed-lift) and the criterion 'w-contractible iff the closed fibre is' (lem-zl-condensed-henselian-lisse-rigidity). proof_deps were updated and four tool_uses added; no cycle results. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-root-tower-coordinate-face.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RootTowerCoordinateFace",
+  "declaration": "AlgebraicGeometry.ProEtale.RootCoordinateFace.coordinateFace",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.baseIdeal",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.rootIdeal",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.faceRing",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.inclusion",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.baseIdeal_le",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.projection",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.baseInclusion",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.test",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.testMap",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.towerProjection",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.faceProjection",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.square",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.ideals_mono",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.nestedBase",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.nestedFace",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.nested_square",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.profinite_square",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.Modules",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.upper",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.lower",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.adjunction",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.upperComp",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.lowerComp",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.squareUpper",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.beta",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange_adjuncts",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange_vertical_pasting",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange_horizontal_pasting",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange_cube",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange_naturality",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.exchange_proetale",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.fibreInclusion",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.fibreInclusion_properties",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.testModuleComplex",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.Assertion",
+   "AlgebraicGeometry.ProEtale.RootCoordinateFace.coordinateFace"
+  ],
+  "file": "lean/Sheaf/Paper/RootTowerCoordinateFace.lean",
+  "statement": "theorem coordinateFace (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (Ω : Type u) [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (A : Type u) [CommRing A] (b : Spec (.of A) ⟶ Y) [Etale b] (r : ℕ) (s : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hproduct : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of A)).inv (∏ i, s i)})) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({s i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (R : Type u) [CommRing R] (a : A →+* R) [WeaklyEtale (Spec.map (CommRingCat.ofHom a))] : Assertion p (fun i ↦ a (s i)) E ∧ Assertion p (fun i ↦ a (s i)) Ω",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem and compatibility clauses are unchanged from the reviewed delivery. H2/H3 repair of returned head ae952e25753c: the coordinate quotient generator and Spec.map of algebraMap are inlined directly over tameRootAlgebra. The two theorem-only statement dependencies lem-sfb-snc-universal-residual-charts and lem-sfb-root-tower-lisse-morphism-extension and their imports are removed. Only the two already-landed definition nodes supplying tameRootAlgebra and the commutative continuous coefficient interface are added to the base statement dependencies. All construction data are explicit; all theorem proofs are sorry. No source statement or proof split is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1341f61b2",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed ae952e25753c (H2/H3 theorem stmt_deps for plain defs). Diff vs the returned head: only rootIdeal now uses Ideal.Quotient.mk (span tameRootRelations) (X (j,n)) and towerProjection uses Spec.map algebraMap. Both are identical to the removed sncFullRootCoordinate/parameterRootProjection bodies (checked in side-live). Both theorem stmt_deps and their imports were dropped. The only added stmt_deps are the landed definition nodes def-sfb-strict-local-kummer-tame-module and def-weil-pbc-condensed-e-module-category, and both are used. Node otherwise unchanged vs live except lean. lean.statement is verbatim; the declarations set equals the file's. StrictLocalKummerTameModule publicly re-exports the lisse and SNC defs. Full mathematical re-read: hypotheses, the T_J quotient, beta as mate of the canonical square with both adjunct identities, IsIso for all lisse N, J, P for both E and Omega, compatibility mate identities, edge cases J empty/full, r=0, empty, rank 0: all correct. Proofs sorry-only, docstrings fine. Advisory: docstring could relate exchange to condensedAmbientExchange (explained in report). No compile run (no file changed)."
  }
 }
