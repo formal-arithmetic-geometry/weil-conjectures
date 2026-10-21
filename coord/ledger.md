@@ -23079,3 +23079,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:41 L: returned deliver/E2/Sheaf.Paper.CartesianCoefficientsFiniteFree (reviewer RETURN: (reviewer C-1a820, head 1a820ada8) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CartesianCoeff)
 - 16:42 L: returned deliver/NX/lem-sfb-condensed-product-bar-comparison (reviewer RETURN: L: independent stage-2 immutable head 54bc9417c69b: H13: the delivered lem-sfb-condensed-product-action-inflation record)
 - 16:42 L: merged deliver/Q13/lem-sfb-simplex-lattice-shuffle-boundary (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T16:42:52Z L: superseded stage-1 delivery NA/lem-sfb-root-tower-lisse-morphism-extension at 959f652e8c4bd12923a504ec424b8f7399a1a7f0; current completion retained; packet archived at refs/superseded/NA/lem-sfb-root-tower-lisse-morphism-extension/959f652e8c4bd12923a504ec424b8f7399a1a7f0; stale return retired.
