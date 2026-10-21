@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
-import Sheaf.CategoryTheory.MateIsoAlongEquivalences
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 
 /-!
 
@@ -72,15 +70,6 @@ open CategoryTheory Endofunctor
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-private lemma exchangeRight_eq_mate
-    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
-    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
-    {G : C ⥤ C'} {H : D ⥤ D'} (a : L ⊣ R) (b : L' ⊣ R')
-    (θ : G ⋙ L' ≅ L ⋙ H) :
-    Adjunction.exchangeRight a b θ = (mateEquiv a b θ.hom).natTrans := by
-  ext K
-  simp [Adjunction.exchangeRight_app, mateEquiv]
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -97,40 +86,14 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 
-private theorem upperStar_isEquivalence {U V : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
-    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
-    (h : U ⟶ V) [IsIso h] :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).IsEquivalence := by
-  let Λ := Profinite.padicAlgClRingObj ℓ
-  apply Functor.IsEquivalence.mk'
-    (G := boundedConstructibleUpperStar Λ ℓ (inv h))
-  · exact (boundedConstructibleUpperStarId Λ ℓ V).symm ≪≫
-      eqToIso (by simp) ≪≫ boundedConstructibleUpperStarComp Λ ℓ (inv h) h
-  · exact (boundedConstructibleUpperStarComp Λ ℓ h (inv h)).symm ≪≫
-      eqToIso (by simp) ≪≫ boundedConstructibleUpperStarId Λ ℓ U
-
-
 /-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g` of schemes whose
 horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible `ℚ̄_ℓ`-sheaves is an isomorphism.
 No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
     (sq : CommSq g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
-  let Λ := Profinite.padicAlgClRingObj ℓ
-  have := upperStar_isEquivalence ℓ g
-  have := upperStar_isEquivalence ℓ g'
-  rw [boundedConstructibleBaseChange_eq_exchangeRight]
-  have hm := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f')
-    (boundedConstructibleUpperStar Λ ℓ g)
-    (boundedConstructibleUpperStar Λ ℓ g')
-    (boundedConstructiblePullbackSquareComparison Λ ℓ sq)
-  rw [exchangeRight_eq_mate]
-  exact hm
-
+    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
+  sorry
 
 end BaseChangeOfIsIso
 

@@ -11,7 +11,6 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.StalkCardinality
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
-
 import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
 
 /-!
@@ -224,19 +223,6 @@ theorem Scheme.IsConstructibleSheaf.exists_stratification_isIrreducible {X : Sch
   rw [← T.range_immersion i]
   simpa using (IrreducibleSpace.isIrreducible_univ (T.domain i)).image
     (T.immersion i) (T.immersion i).continuous.continuousOn
-
-private theorem mono_map_iff_of_natIso {C D : Type*} [Category* C] [Category* D]
-    {P Q : C ⥤ D} (e : P ≅ Q) {M N : C} (f : M ⟶ N) :
-    Mono (P.map f) ↔ Mono (Q.map f) := by
-  constructor
-  · intro h
-    have hc : Mono (e.inv.app M ≫ P.map f) := inferInstance
-    rw [← e.inv.naturality f] at hc
-    exact @mono_of_mono _ _ _ _ _ _ (e.inv.app N) hc
-  · intro h
-    have hc : Mono (e.hom.app M ≫ Q.map f) := inferInstance
-    rw [← e.hom.naturality f] at hc
-    exact @mono_of_mono _ _ _ _ _ _ (e.hom.app N) hc
 
 /-- Blueprint `lem-weil-pbc-constructible-noetherian-finite-selection`: Noetherian finite
 selection of stalk tests.

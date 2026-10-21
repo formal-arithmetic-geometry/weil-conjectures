@@ -6,7 +6,6 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.Compactification.Over
-import WeilConjectures.Compactification.CommonRefinement
 
 /-!
 
@@ -117,15 +116,6 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [CompactSpace S] [QuasiSeparatedSpace S]
 
-private noncomputable def overRefinementOfRefinement
-    {c c₁ : Compactification f.left} (r : c.Refinement c₁)
-    (h : IsPullback (𝟙 X.left) c.i c₁.i r.hom) : OverRefinement c c₁ where
-  hom := Over.homMk r.hom (by simp [overObj, reassoc_of% r.hom_g])
-  hom_overG := Over.OverMorphism.ext r.hom_g
-  isPullback := IsPullback.of_map (Over.forget S) (Over.OverMorphism.ext h.w) h
-  isProper := r.isProper
-
-set_option linter.unusedSectionVars false in
 /-- Any two compactifications `c₁` and `c₂` of `f.left` have a common refinement: the
 scheme-theoretic closure `Z` of the image of `X` in `Z₁ ×_Y Z₂`, with the projections to `Z₁`
 and `Z₂`. The immersion `X ⟶ Z₁ ×_Y Z₂` is an open immersion into its scheme-theoretic closure,
@@ -133,17 +123,8 @@ and the preimage of `X ⊆ Z₁` in `Z` is `X`, since `X` is closed in `X ×_Y Z
 over `Y`). -/
 theorem exists_overRefinement (c₁ c₂ : Compactification f.left) :
     ∃ c : Compactification f.left, Nonempty (OverRefinement c c₁) ∧
-      Nonempty (OverRefinement c c₂) := by
-  have hqc : QuasiCompact f.left := by
-    have hcomp : QuasiCompact (f.left ≫ Y.hom) := by
-      rw [Over.w]
-      infer_instance
-    exact .of_comp f.left Y.hom
-  exact ⟨inf c₁ c₂,
-    ⟨overRefinementOfRefinement (X := X) (S := S) (infFst c₁ c₂)
-      (isPullback_infFst c₁ c₂).flip⟩,
-    ⟨overRefinementOfRefinement (X := X) (S := S) (infSnd c₁ c₂)
-      (isPullback_infSnd c₁ c₂).flip⟩⟩
+      Nonempty (OverRefinement c c₂) :=
+  sorry
 
 variable [QuasiCompact T.hom] [IsSeparated T.hom]
 

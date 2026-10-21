@@ -8,14 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
-import Sheaf.Paper.EtaleHypercoverHomotopyEqualizer
-import Sheaf.Paper.EtaleHypercoverProduct
-import Sheaf.Paper.FiniteSplitHypercoverExistence
-import Sheaf.Paper.FiniteSplitHypercoverReplacement
-import Sheaf.Paper.FiniteSplitLocalReplacementAssembly
-import Sheaf.Paper.FiniteSplitLocalReplacementExtension
-import Sheaf.Paper.FiniteSplitLocalReplacementZero
-import Sheaf.Paper.SemiRepresentableHypercoverEtale
 
 /-!
 # Blueprint statements
