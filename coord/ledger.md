@@ -22911,3 +22911,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:20 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 15:20 L: merged deliver/N6/lem-sfb-partial-kummer-boundary-unit-model (reviewer FIX; after a return; new nodes: 4)
 - 15:20 L: merged deliver/N7/lem-sfb-transverse-tame-open-shriek-exchange (stage 2; reviewer PASS; parallel immutable checks)
+- 15:21 L: returned deliver/NP/lem-sfb-complete-group-forgetful-automorphisms (reviewer RETURN: L: independent stage-2 immutable head f08623fc3d88: H2 theorem stmt_dep: the statement's ≃ₜ* on Aut(openOrbitForget G) a)
