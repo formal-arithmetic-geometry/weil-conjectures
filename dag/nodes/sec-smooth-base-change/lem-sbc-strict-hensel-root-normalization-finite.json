@@ -23,15 +23,11 @@
  ],
  "proof": [
   {
-   "text": "First transport the retained upstream regular-divisor quotient theorem from the full affine-neighbourhood colimit to H through smallStrictHenselizationColimitIso. The theorem smallStrictHenselizationColimitIso_toBase identifies the structural maps. Pull the nonunit condition back through the inverse ring equivalence. Transfer Noetherianity by isNoetherianRing_of_ringEquiv and the quotient properties by Ideal.quotientEquiv, IsRegularRing.of_ringEquiv and MulEquiv.isDomain_iff. Use strictHenselizationLocalStructure to make H local. The regular-divisor quotient theorem gives Noetherianness of H and regularity of H/(g). To recover flatness on the original small coordinate-ring colimit without importing the conflicting upstream structural-map helper, form the natural stage maps GammaSpecIso(R).inv followed by each pointed etale neighbourhood structure map on global sections. Cofilteredness of the pointed category makes the opposite ring diagram filtered. The stage maps are flat since etale morphisms are flat. The characterizing equation of exists_strictHenselizationStructuralMap and Spec.map_injective identify every composite with its colimit coprojection with b. Apply RingHom.Flat.of_isColimit, the colimit-presentation form of the ind-flat characterization, and then hf.of_flat to make g regular.",
+   "text": "Use the canonical full affine-neighbourhood strict henselization H and its local and strictly henselian instances. Apply strictHenselization_regular_divisor_quotient to obtain Noetherianness and regular domain quotient H/(g). The upstream strictHenselization_structural_ringHom_flat theorem makes the structural map flat; hf.of_flat makes g regular. All hypotheses refer to this same prescribed structural map.",
    "uses": [
     "lem-weil-pbc-strict-henselization-local-structure",
     "lem-sbc-strict-hensel-regular-divisor-quotient",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-etale-algebra-flat",
-    "lem-weil-pbc-flat-ring-map-iff-ind-flat",
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "lem-sbc-affine-strict-henselization-structural-flat"
    ],
    "elementary": false
   },
@@ -71,25 +67,21 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sbc-affine-strict-henselization-structural-flat",
   "lem-sbc-finite-etale-open-integral-closure",
   "lem-sbc-root-algebra-regular-at-root",
   "lem-sbc-strict-hensel-regular-divisor-quotient",
-  "lem-weil-pbc-etale-algebra-flat",
-  "lem-weil-pbc-flat-ring-map-iff-ind-flat",
   "lem-weil-pbc-regular-local-localization",
   "lem-weil-pbc-regular-ring-normal",
   "lem-weil-pbc-relative-normalization",
-  "lem-weil-pbc-strict-henselization-local-structure",
-  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+  "lem-weil-pbc-strict-henselization-local-structure"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A3",
-  "document": "Stacks Project",
-  "place": "Tags 0EYG, 04HX, 05WS and 06LN",
-  "note": "Only the small/full colimit transport required by retirement of the duplicate regular-divisor quotient module changes. The original remaining proof and all public signatures are preserved."
+  "group": "M2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0EYG, 0EYH and 032L; retained upstream root-normalization proof.",
+  "note": "Retirement attaches the node to the unchanged adopted upstream theorem. Its full-colimit proof uses the structural-flatness theorem recorded in the first step. The already-retired tame-normalization parent uses this theorem directly; no consumer restoration or small/full-colimit transport is needed in this delivery."
  },
  "mathlib_searches": [
   {
@@ -143,14 +135,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationFinite",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationFinite.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationFinite",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationFinite.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.strict_hensel_root_normalization_finite",
-  "statement": "theorem GaloisCover.strict_hensel_root_normalization_finite\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (_hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (_hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    let H := strictHenselizationRing barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ¬ IsUnit g → ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization",
+  "statement": "theorem GaloisCover.strict_hensel_root_normalization_finite\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY) :\n    let H := strictHenselization barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ¬ IsUnit g → ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization",
   "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-13"
+  "by": "M2",
+  "date": "2026-10-22",
+  "note": "Retire the duplicate small-colimit module under the approved retirement hand-off. The node now names the unchanged upstream full-colimit theorem and its exact signature. The former direct Sheaf tame-normalization consumer has already been withdrawn; its node names the upstream tame-normalization theorem, which imports and applies this twin directly. No parent mathematical dependency or unit step is removed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -165,12 +158,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b3bec",
-  "group": "A3",
+  "reviewer": "C-43bed",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261021T140748-L-2740975",
+  "landing": "20261021T203711-L-3855879",
   "kind": "interface",
-  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
+  "note": "independent cc review: node lean record vs upstream WeilConjectures StrictHenselRootNormalizationFinite theorem (verbatim, script-checked); retire-items row 2047; live import graph (0 importers); proof steps/proof_deps vs upstream proof (structural_ringHom_flat)"
  },
  "lean_audit": {}
 }
