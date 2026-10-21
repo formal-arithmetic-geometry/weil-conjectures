@@ -19863,3 +19863,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:37 L: merged deliver/NW/lem-cbc-adic-pullback-presentation-transport (reviewer FIX; after a return; new nodes: 7)
 - 03:37 L: merged deliver/Q72/lem-sfb-scalar-matrix-inverse-image (reviewer PASS; first push; new nodes: 0)
 - 03:37 L: merged deliver/O4/lem-sfb-scalar-unit-equality-detection (stage 2; reviewer PASS; parallel immutable checks)
+- 03:38 L: merged deliver/Q16/lem-weil-pbc-flat-common-quotient-reduction-tower (reviewer PASS; first push; new nodes: 0)
