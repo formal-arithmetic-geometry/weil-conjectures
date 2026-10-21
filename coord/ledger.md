@@ -20174,3 +20174,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:03:53Z L: superseded stage-1 delivery O2/lem-sp-open-exceptional-scalar-locality at e1ed043b533c9405b4245084c3ddfdafb305033e; current completion retained; packet archived at refs/superseded/O2/lem-sp-open-exceptional-scalar-locality/e1ed043b533c9405b4245084c3ddfdafb305033e; stale return retired.
 - 04:04 L: merged deliver/Q21/lem-sfb-continuous-lattice-sum (stage 2; reviewer PASS; parallel immutable checks)
 - 04:04 L: merged deliver/NK/lem-weil-pbc-direct-image-roos-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 04:04 L: returned deliver/Q07/lem-weil-pbc-flat-constant-tensor-pro-zero-cones (reviewer RETURN: L: independent stage-2 immutable head 50021a33f438: H2: delivery added theorem node lem-pur-derived-change-of-rings to s)
