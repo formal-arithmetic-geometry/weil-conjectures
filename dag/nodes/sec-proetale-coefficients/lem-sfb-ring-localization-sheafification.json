@@ -16,17 +16,16 @@
  ],
  "proof": [
   {
-   "text": "Use the section-ring reconstruction in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] for each commutative ring object in the statement: the section product is $r s=\\mu(r\\otimes s)$ and the section unit is $\\eta(1)$. Its size hypotheses hold because the coefficient universe contains the site data. Its monoidal-local-equivalence hypothesis follows from [sk-def-sfb-sheaf-tensor]: $a(q\\otimes_p H)\\cong a(q)\\otimes a(H)$, so a map inverted by $a$ remains inverted after tensoring. An internal ring morphism is a sectionwise ring map by evaluating its multiplication and unit equations on $r\\otimes s$ and $1$. Conversely, [det-def-sfb-ring-object-sheaf] gives the internal structure on every sheaf of rings and sends sheaf ring maps to internal ring morphisms. These operations recover the starting internal structure: its multiplication is the unique extension of the displayed sectionwise bilinear map through $a(R\\otimes_pR)$, and its unit is the unique extension of $n\\mapsto n\\cdot1$ through $a(\\underline{\\mathbf Z})$, by [def-weil-pbc-sheafification]. Thus all subsequent sectionwise ring constructions and factorizations give exactly the ring-object constructions and factorizations asserted here.",
+   "text": "Use the section-ring reconstruction of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its underlying abelian presheaf is the starting sheaf presheaf. The sectionwise product evaluates multiplication on pure tensors, and the section unit is the value of the unit at 1. Convert ring maps to internal presheaf morphisms by their multiplication and integer-unit equations, and conversely recover ring maps from those equations. The coefficient-size hypothesis implies that the site is essentially small in that universe. The enriched ends of [det-def-sfb-sheaf-tensor-presheaf], followed by Mathlib GrothendieckTopology.W.monoidal, give tensor stability of local equivalences. Construct sheafification on the small model and transport it back as in [def-weil-pbc-sheafification].",
    "uses": [
     "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-sheaf-tensor",
-    "det-def-sfb-ring-object-sheaf",
+    "det-def-sfb-sheaf-tensor-presheaf",
     "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.md",
-    "place": "Unique extension of the sectionwise multiplication and unit; section-ring reconstruction and its morphism equations."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "Small-model enriched-end construction; section-ring conversion and monoidal sheafification adjunction as in the node proof."
    }
   },
   {
@@ -42,10 +41,9 @@
    }
   },
   {
-   "text": "Let $\\sigma:P\\to aP$ be ring sheafification [def-weil-pbc-sheafification] and put $\\eta=\\sigma i$. This is a ring sheaf morphism because $R$ is already a sheaf. Apply [det-def-sfb-ring-object-sheaf] to equip the ring sheaf $aP$ with the commutative ring-object structure for the sheafified tensor product; by step 1 the map $\\eta$ is an internal ring morphism from the original $R$. The sections $u_U=1/t_U\\in P(U)$ commute with every restriction. In $P(U)$ one has $(t_U/1)u_U=u_U(t_U/1)=1$, by [def-weil-ring-localization-away]. Applying $\\sigma_U$ gives a compatible global inverse for $\\eta(t)$ in $aP$.",
+   "text": "Apply the strong braided monoidal sheafification functor to the actual sectionwise localization ring object. Mathlib Adjunction.mapCommMon lifts the sheafification adjunction of [def-weil-pbc-sheafification] to commutative monoid objects. Its counit has the original sheafification counit as underlying map; its invertibility is reflected by the forgetful functors. Compose its inverse with the sheafified r/1 map. Naturality and the right triangle identity identify its map on sections with r/1 followed by the sheafification unit. The compatible fraction 1/t gives invertibility of the image of t by [def-weil-ring-localization-away], since the sheafification unit preserves the reconstructed section-ring operations.",
    "uses": [
     "def-weil-pbc-sheafification",
-    "det-def-sfb-ring-object-sheaf",
     "def-weil-ring-localization-away"
    ],
    "elementary": false,
@@ -66,10 +64,9 @@
    }
   },
   {
-   "text": "The sheafification universal property [def-weil-pbc-sheafification], in commutative rings, extends $g$ uniquely to a ring sheaf morphism $\\widetilde f:aP\\to D$ with $\\widetilde f\\sigma=g$. Consequently $\\widetilde f\\eta=\\widetilde f\\sigma i=gi=f$. By [det-def-sfb-ring-object-sheaf] this is a ring-object morphism. If $h:aP\\to D$ is any other ring-object morphism with $h\\eta=f$, step 1 makes it a ring sheaf morphism; each $(h\\sigma)_U:P(U)\\to D(U)$ agrees with $f_U$ on $r/1$. By [lem-weil-pbc-localization-away-universal-property] it equals $g_U$, so $h\\sigma=g$. Uniqueness in sheafification then gives $h=\\widetilde f$. This proves exactly the asserted ring-object universal property.",
+   "text": "Convert the presheaf ring map from step 4 into a commutative monoid morphism. The Hom equivalence of Mathlib Adjunction.mapCommMon applied to the sheafification adjunction [def-weil-pbc-sheafification] gives its unique extension to the sheafified ring. On underlying abelian presheaves, the lifted adjunction unit is exactly toSheafify; thus the extension has the asserted sectionwise formula. Equality of ring maps after r/1 implies equality on the entire localization by [lem-weil-pbc-localization-away-universal-property]. The ordinary sheafification Hom equivalence then implies equality of the maps of sheaves, and faithfulness of the forgetful functor implies equality of internal ring maps. This proves both the localization and the arbitrary-presheaf-map universal properties.",
    "uses": [
     "def-weil-pbc-sheafification",
-    "det-def-sfb-ring-object-sheaf",
     "lem-weil-pbc-localization-away-universal-property"
    ],
    "elementary": false,
@@ -90,8 +87,7 @@
  ],
  "proof_deps": [
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-def-sfb-sheaf-tensor",
-  "det-def-sfb-ring-object-sheaf",
+  "det-def-sfb-sheaf-tensor-presheaf",
   "def-weil-pbc-sheafification",
   "def-weil-ring-localization-away",
   "lem-weil-pbc-localization-away-universal-property"
@@ -99,7 +95,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0EMC, lemma-simple-invert: proof supplied because Stacks omits it; ordinary fractions and universal property from algebra.tex Tags 00CO and 00CP; the internal formulation uses the existing section-ring reconstruction and unique-extension nodes."
+  "place": "Tag 0EMC, lemma-simple-invert; explicit six-step proof implemented by F2 using Mathlib localization and Adjunction.mapCommMon. Tensor stability uses the existing enriched-end declaration directly; no stalks or new intermediate assumptions."
  },
  "mathlib_searches": [
   {
@@ -269,5 +265,15 @@
   "group": "Q62",
   "result": "pass",
   "note": "Dep records identical to live; stmt_deps unchanged, no theorem stmt_dep; statement verbatim; all 12 decls recorded. Clauses match node and Stacks 0EMC: Localization.Away presheaf with spec (power-torsion relation, +, ×, restriction); aP = presheafToSheaf.mapCommMon pinned by the ring-sheafification universal property via toSheafify; η = counit⁻¹ ≫ a(r↦r/1) with section formula pinned; IsUnit η(t); ∃! factorization; ∃! normalized iso to any L. Universes u,v independent, coefficients max u v w. Sorry'd HasSheafify/IsMonoidal instance theorems are true and needed (existing instance is u+1 only); no extra hypotheses. Real data, docstrings and 6-step proof present. No H4 duplicate. Advisories: sectionRings owned by a proof_dep-only node; global priority-20000 sorry instances; Sheaf.monoidalCategory used directly (same data as sfbSheafTensorStructure). Not compiled, per instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T130014-L-2488016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
