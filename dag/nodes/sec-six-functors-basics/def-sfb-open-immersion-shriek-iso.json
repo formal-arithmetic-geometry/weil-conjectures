@@ -259,5 +259,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso",
+  "statement": "noncomputable def openImmersionShriekIso :\n    (j)_!open⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X) ≅\n      Mod.extendScalars (coefficientMap a U) ⋙ (j)_!open⟦Λ'⟧",
+  "branch": "slopmaster2",
+  "by": "Q133",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing definition in the published live WeilConjectures framework, confirmed with scompile.py --source. For arbitrary commutative condensed rings, a monoid morphism a and an open immersion j, its data is (conjugateIsoEquiv ... ...).symm (comapUpperStarIso a j), using precisely the two openImmersionLowerShriekUpperStarAdjunction and the two Mod.extendRestrictAdjunction instances. The signature is the underived extension-of-scalars / extension-by-zero natural isomorphism, with no flatness or compactification hypothesis. The upstream dependency proofs remain open; this attachment asserts a statement match, not proof closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59ed82aae",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Existing-declaration attachment: the node differs from live only by the lean field (existing:true, AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso, ChangeOfCoefficients.lean:281). The blueprint source is verbatim the node statement and its lean list names this declaration; the item is not on the dropped list. Each clause matches: arbitrary a with IsMonHom (no flatness; the PreservesFiniteLimits variable belongs only to section Derived), IsOpenImmersion j, coefficientMap a_X/a_U, j_! ⋙ Ext_X ≅ Ext_U ⋙ j_!. The body is (conjugateIsoEquiv adj1 adj2).symm (comapUpperStarIso a j) along the j_!⊣j^* and Ext⊣Res adjunctions, in the node's orientation. All used declarations are in the five stmt_dep records (conjugateIsoEquiv is the Mathlib match). No other node owns the declaration; the derived version is a separate node. Edge cases checked: identity a and j, empty U and X, non-flat a, arbitrary universe u. nt_compile --json probe (#check, #print axioms, rfl body equality) exited 0 in 10.0 s. sorryAx comes only from open upstream lemmas, as the report states. No findings."
  }
 }

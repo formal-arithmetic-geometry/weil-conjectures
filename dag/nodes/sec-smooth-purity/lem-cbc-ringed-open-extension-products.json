@@ -226,5 +226,23 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-b327290ea (reviewer sub-agent of L); spot-checked: I read the item, the 5 cited statements and Stacks proetale.tex 09BP/09AA/09AG/09BN/09AH. The statement and stmt_deps are byte-identical to the live node. There are no new nodes and no repair note; the proof has 5 steps and 3275 characters, with no SGA source. The proof does not follow 09BP's own argument, which uses exactness of products after reducing to an affine X. Instead it checks the comparison c after restricting to U and to the closed complement Z, then kills ker c and coker c with the localization exact sequence. Step 1: lem-weil-pbc-proetale-ringed-open-closed needs only a closed immersion, a quasi-compact complementary open and an arbitrary ring sheaf; its qcqs clause is unused. It gives j^{-1}j_! ≅ id, i^{-1}j_! = 0, exactness of j_! and i_*, and the short exact sequence. Step 2: lem-weil-pbc-proetale-immersion-limit-preservation applies to the open immersion, and the projection equality shows that the restriction of the specified map c is invertible, not just that its endpoints are isomorphic. Step 3: the same node for the closed immersion, with i^{-1}j_! = 0, gives zero on both sides; the empty product is 0 sectionwise. Step 4: the kernel/cokernel argument is valid in the abelian module category. Step 5: naturality and the empty family check out. I tested U=∅, j=id, X=∅, the zero ring, the empty and singleton families, and a non-quasi-compact X. Duplicates: det-sf-open-closed-extension-zero-limits clause 3 is the qcqs special case of the item, which NV already created; advisory only. lem-sfb-condensed-open-extension-products is a different statement (derived categories, condensed coefficients). Accepted tool_uses: reduced-induced-closed-subscheme, proetale-ringed-open-closed and proetale-immersion-limit-preservation, all generic black-box tools; unit sk-prop-sf-cbc has an empty realized field. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProducts",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingedExtensionByZero_products",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedOpenExtensionProducts.lean",
+  "statement": "theorem proEtaleRingedExtensionByZero_products {X : Scheme.{u}} (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom] (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (S : Type (u + 1)) (F : S → ringedSiteModules.{u + 1} ((proEtaleModuleCoefficients R).over U)) : IsIso (piComparison (proEtaleRingedExtensionByZero U R) F) ∧ ∀ (G : S → ringedSiteModules.{u + 1} ((proEtaleModuleCoefficients R).over U)) (a : ∀ s : S, F s ⟶ G s), (proEtaleRingedExtensionByZero U R).map (Limits.Pi.map a) ≫ piComparison (proEtaleRingedExtensionByZero U R) G = piComparison (proEtaleRingedExtensionByZero U R) F ≫ Limits.Pi.map (fun s ↦ (proEtaleRingedExtensionByZero U R).map (a s))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3ecd72da",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: arbitrary X (no qcqs), U : X.ProEt with IsOpenImmersion+QuasiCompact U.hom (same encoding as proEtale_ringed_open_closed), arbitrary CommRingCat.{u+1} R, modules over (proEtaleModuleCoefficients R).over U, canonical existing proEtaleRingedExtensionByZero (extensionByZeroPresheaf ⋙ sheafification), S : Type (u+1) possibly empty, IsIso (piComparison L F) plus the correct naturality square. Node otherwise identical to live (only lean record added); lean.statement verbatim; imports = stmt_dep/proof_dep modules; docstrings carry source 09BP, blueprint id and 5-step proof; one sorry, no defs, lines <=100. No existing duplicate (det-sf-open-closed-extension-zero-limits is a qcqs Ab/MonObj special case). nt_compile --json clean in 6.2 s. Advisory: naturality conjunct is generic but node-mandated."
  }
 }

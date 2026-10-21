@@ -19849,3 +19849,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:36 L: merged deliver/NR/lem-pe-principal-reduction-cone-calculus (reviewer PASS; first push; new nodes: 0); claim not held by NR: not your claim
 - 03:36 L: merged deliver/O3/det-pe-derived-nakayama-resolution (reviewer PASS; after a return; new nodes: 2)
 - 03:36 L: merged deliver/Q46/sk-lem-stratified-lattice (reviewer FIX; after a return; new nodes: 4)
+- 03:36 L: merged deliver/Q106/lem-sfb-exact-derived-composition (stage 2; reviewer PASS; parallel immutable checks)
+- 03:36 L: merged deliver/Q133/def-sfb-open-immersion-shriek-iso (stage 2; reviewer PASS; parallel immutable checks)
+- 03:36 L: merged deliver/NH/lem-cbc-ringed-open-extension-products (stage 2; reviewer PASS; parallel immutable checks)

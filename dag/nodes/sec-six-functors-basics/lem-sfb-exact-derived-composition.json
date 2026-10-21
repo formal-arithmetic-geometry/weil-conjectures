@@ -194,5 +194,23 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-f04b2df7d (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes and the statement is unchanged. The four steps check out against the cited statements. Step 1: GF is exact, so lem-weil-pbc-exact-functor-derived-factorization applies to it and H=Q_C C(GF) inverts quasi-isomorphisms. Step 2: beta_K = a_{G,C(F)K} o D(G)(a_{F,K}) is well typed, and C(G)C(F)=C(GF) holds termwise; marking this step elementary is right. Step 3: clause (2) of lem-weil-pbc-localization-universal-property with tau=id gives mu_{QK}=beta_K^{-1} a_{GF,K}. I checked the direction, and this is exactly the displayed equation; mu is an isomorphism because isomorphisms lift. Step 4: uniqueness follows by cancelling beta_K and applying clause (3). Sources read: Stacks categories.tex 04VG at l.4406-4428 (it gives only the functor factorization, and the delivery is honestly marked agent-written) and the blueprint sentence at def-sfb-derived-extend-comp-iso.proof.md l.9-10. No SGA source is used. The project Lean in ExactFunctor.lean:175-216 matches the proof: mapDerivedCategoryCompIso is liftNatIso of Iso.refl, and _fac is the displayed equation. Lean does not state uniqueness, so B10 does not strictly apply. Maintainer note: existence and normalization are already closed in Lean, and uniqueness is Localization.natTrans_ext. Edge cases checked: F=id, zero functors, unbounded complexes. The duplicate search found no node stating the compositor. The only problem is cosmetic: source.place says 'see report.md'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactDerivedComposition",
+  "declaration": "CategoryTheory.Functor.existsUnique_mapDerivedCategoryCompIso",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedComposition.lean",
+  "statement": "theorem existsUnique_mapDerivedCategoryCompIso {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w₁} C] {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{w₂} D] {E : Type u₃} [Category.{v₃} E] [Abelian E] [HasDerivedCategory.{w₃} E] (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G] [PreservesFiniteColimits G] : ∃! μ : @mapDerivedCategory C _ _ _ E _ _ _ (F ⋙ G) inferInstance (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G) ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory, ∀ K : CochainComplex C ℤ, μ.hom.app (DerivedCategory.Q.obj K) ≫ G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫ G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app K) = (@mapDerivedCategoryFactors C _ _ _ E _ _ _ (F ⋙ G) inferInstance (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G)).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "Q106",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07097da3a",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Item lem-sfb-exact-derived-composition at 07097da3: the Lean ∃! μ : D(F⋙G) ≅ D(F)⋙D(G) with normalization μ_QK ≫ D(G)(a_F,K) ≫ a_G,C(F)K ≫ Q(termwise id) = a_{F⋙G},K matches the node clause by clause. Hypotheses are exactly additive plus finite limits and colimits; universes are independent; the comp_preserves* arguments are Prop-valued and derived from the hypotheses. lean.statement is verbatim in the file; docstrings carry the source, blueprint tag and 4 proof steps; one sorry; report has both sections. nt_compile --json is clean (3.3 s). A /tmp probe proving it from the project's mapDerivedCategoryCompIso/_fac plus Localization.natTrans_ext compiled (2.8 s), so the statement is true and not vacuous. No existing ∃! declaration and no name or path clash in side-live; the live node has no lean. Advisory: redundant Localization.Predicate import."
  }
 }
