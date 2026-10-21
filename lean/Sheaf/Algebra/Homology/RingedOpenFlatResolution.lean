@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Flat resolutions under ringed slice extension
 
@@ -38,6 +40,26 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
+/-- Present the fixed-right-factor site tensor using the left presheaf tensor.
+Source: Stacks Project, Tag 03EK (blueprint: lem-cbc-ringed-open-flat-resolution).
+Proof: braid the presheaf factors, apply the shared sectionwise tensor comparison,
+and whisker by the forgetful functor and module sheafification. -/
+private def siteLeftTensorIso {T : Type c} [Category.{v} T]
+    {K : GrothendieckTopology T} [EssentiallySmall.{r} T]
+    [HasSheafify K AddCommGrpCat.{r}]
+    [K.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    (A : Sheaf K CommRingCat.{r})
+    (M : SheafOfModules.{r}
+      ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj A)) :
+    (forget.{r} ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj A) ⋙
+      MonoidalCategory.tensorLeft M.val ⋙ PresheafOfModules.sheafification.{r}
+        (R := (sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj A) (𝟙 _)) ≅
+      siteSheafTensorRight (A := A) M := by
+  exact Functor.isoWhiskerLeft (forget _) (Functor.isoWhiskerRight
+    (BraidedCategory.tensorLeftIsoTensorRight M.val ≪≫
+      (siteTensorRightIso.{c, v, r} A M.val).symm)
+    (PresheafOfModules.sheafification (𝟙 _)))
+
 variable {S : Type c} [Category.{v} S] {J : GrothendieckTopology S}
   (R : Sheaf J CommRingCat.{max c v r}) (U : S)
 
@@ -64,28 +86,18 @@ Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8I
 (blueprint: lem-cbc-ringed-open-flat-resolution).
 
 Proof:
-1. Both restriction and extension are exact by
-   lem-pur-site-restriction-module-adjunction-exact. Apply either functor to
-   0 -> Z^i X -> X^i -> B^(i+1) X -> 0 and
-   0 -> B^i X -> Z^i X -> H^i X -> 0. This identifies the homology of the
-   image with the image of homology naturally in chain maps, in every integer degree
-   (def-pc-acyclic-complex-modules). In particular acyclic complexes stay acyclic.
-2. For acyclic A, restriction makes j^* A acyclic. The unbounded total-tensor
-   comparison of lem-sf-ringed-open-total-tensor-kflat identifies
-   Tot(e_! P tensor A) with e_! Tot(P tensor j^* A). The inner complex is acyclic
-   by def-pc-kflat-complex, and exact extension preserves acyclicity. Interchanging
-   the tensor factors uses the signed swap (-1)^(pq) on the (p,q) summand; its square
-   is the identity and it commutes with d_P tensor 1 + (-1)^p 1 tensor d_A.
-3. Restrict a short exact sequence, tensor with a flat P^i, and extend. Exactness
-   of both functors and the natural module projection isomorphism of
-   lem-weil-pbc-ringed-slice-extension-tensor identify this exact sequence with its
-   tensor by e_!(P^i). This is def-pc-flat-sheaf-modules for each image term.
-4. Apply exact extension to the kernel short exact sequence of each epimorphic q^i.
-   Thus every image component is epimorphic. Step 1 identifies H^i(e_! q) with
-   e_! H^i(q), an isomorphism, proving def-pc-quasi-iso-modules for the image map.
-   Combining steps 2--4 gives preservation of flat-term K-flat replacements.
-5. For strict towers apply these arguments at every level. The tower assertion
-   below retains exactly the image transition maps, without choosing new lifts. -/
+1. Reuse the K-flat preservation conjunct of ringedOpen_totalTensor_kFlat. That theorem
+   already proves the unbounded total-tensor comparison and the signed interchange.
+2. Fix M = P.X i. Presheaf braiding and siteTensorRightIso identify site flatness
+   with exactness of forgetting M's variable partner, tensoring on the left with M.val,
+   and sheafifying. Call this functor SM. Restrict the natural projection isomorphism
+   to pairs (M,N), varying N: it identifies restriction followed by SM and extension
+   with the analogous functor for e_! M. The three functors are exact, so this last
+   functor is exact. The same presheaf comparison translates back to site flatness.
+3. Exact extension preserves epimorphisms and homology. The component of an extended
+   chain map is the extension of its component. Mathlib's
+   HomologicalComplex.quasiIso_map_of_preservesHomology gives the quasi-isomorphism
+   assertion using the same canonical sheafification witnesses as ringedOpenQuasiIso. -/
 theorem ringedOpen_preserves_flat_resolution :
     (∀ P : CochainComplex (SheafOfModules.{max c v r}
         (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ,
@@ -113,7 +125,80 @@ theorem ringedOpen_preserves_flat_resolution :
         (∀ i : ℤ, Epi (((ringedOpenExtensionOnComplexes.{c, v, r} R U).map q).f i)) ∧
           ringedOpenQuasiIso.{c, v, r} R
             ((ringedOpenExtensionOnComplexes.{c, v, r} R U).map q)) := by
-  sorry
+  refine ⟨(ringedOpen_totalTensor_kFlat.{c, v, r} R U).2.1, ?_, ?_⟩
+  · intro P hP i
+    let : HasSheafify J AddCommGrpCat.{max c v r} :=
+      hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
+    let : HasSheafify (J.over U) AddCommGrpCat.{max c v r} :=
+      hasSheafify_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
+    let : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} :=
+      wEqualsLocallyBijective_coefficientUniverse.{c, v, max c v r} (J := J)
+    let : (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r} :=
+      wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
+    let L := localizedSystemExtension.{c, v, r} R U
+    let T := localizedSystemRestriction.{c, v, r} R U
+    have : PreservesFiniteLimits L := localizedSystemExtensionLimits.{c, v, r} R U
+    have : PreservesFiniteColimits L := localizedSystemExtensionColimits.{c, v, r} R U
+    have : PreservesFiniteLimits T := localizedSystemRestrictionLimits.{c, v, r} R U
+    have : PreservesFiniteColimits T := localizedSystemRestrictionColimits.{c, v, r} R U
+    let M := P.X i
+    let aU := PresheafOfModules.sheafification.{max c v r} (𝟙
+      ((sheafCompose (J.over U)
+        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj (R.over U)).obj)
+    let a := PresheafOfModules.sheafification.{max c v r} (𝟙
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj)
+    let SM := forget.{max c v r} ((sheafCompose (J.over U)
+      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj (R.over U)) ⋙
+      MonoidalCategory.tensorLeft
+      (C := PresheafOfModules.{max c v r}
+        ((R.over U).obj ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r}))
+      (show PresheafOfModules.{max c v r}
+        ((R.over U).obj ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r})
+        from M.val) ⋙ aU
+    let SN := forget.{max c v r} ((sheafCompose J
+      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) ⋙ MonoidalCategory.tensorLeft
+      (C := PresheafOfModules.{max c v r}
+        (R.obj ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r}))
+      (show PresheafOfModules.{max c v r}
+        (R.obj ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r})
+        from (L.obj M).val) ⋙ a
+    have hM : exactFunctor _ _ (siteSheafTensorRight (A := R.over U) M) := hP i
+    have hSM : exactFunctor _ _ SM := (exactFunctor _ _).prop_of_iso
+      (siteLeftTensorIso.{max c v, v, max c v r} (R.over U) M).symm hM
+    have : PreservesFiniteLimits SM := hSM.1
+    have : PreservesFiniteColimits SM := hSM.2
+    obtain ⟨θ⟩ := ringedSlice_extension_tensor.{c, max c r, v} J R U
+    let eθ : T ⋙ SM ⋙ L ≅ SN := NatIso.ofComponents
+      (fun N ↦ θ.app (M, N)) (by
+        intro N N' f
+        have h := θ.hom.naturality (X := (M, N)) (Y := (M, N')) (𝟙 M, f)
+        simpa [SM, SN, L, T, aU, a, Functor.comp_map, Functor.prod_map,
+          MonoidalCategory.tensor_map] using h)
+    have : PreservesFiniteLimits (SM ⋙ L) := comp_preservesFiniteLimits _ _
+    have : PreservesFiniteColimits (SM ⋙ L) := comp_preservesFiniteColimits _ _
+    have he : exactFunctor _ _ (T ⋙ SM ⋙ L) :=
+      ⟨comp_preservesFiniteLimits _ _, comp_preservesFiniteColimits _ _⟩
+    have hSN : exactFunctor _ _ SN := (exactFunctor _ _).prop_of_iso eθ he
+    exact (exactFunctor _ _).prop_of_iso
+      (siteLeftTensorIso.{c, v, max c v r} R (L.obj M)) hSN
+  · intro P C q hq hqi
+    let : HasSheafify J AddCommGrpCat.{max c v r} :=
+      hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
+    let : HasSheafify (J.over U) AddCommGrpCat.{max c v r} :=
+      hasSheafify_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
+    let : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} :=
+      wEqualsLocallyBijective_coefficientUniverse.{c, v, max c v r} (J := J)
+    let : (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r} :=
+      wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
+    have : QuasiIso q := hqi
+    refine ⟨?_, ?_⟩
+    · intro i
+      have := hq i
+      change Epi ((localizedSystemExtension.{c, v, r} R U).map (q.f i))
+      infer_instance
+    · change QuasiIso (((localizedSystemExtension.{c, v, r} R U).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map q)
+      infer_instance
 
 /-- The same three preservation assertions hold objectwise for strict inverse sequences.
 The extended tower is the actual composite functor, and its resolution map is
@@ -123,24 +208,10 @@ Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8I
 (lemma-j-shriek-and-tensor); agent-written strict-tower refinement
 (blueprint: lem-cbc-ringed-open-flat-resolution).
 
-Proof:
-1. Exact restriction and extension give the natural homology comparison using the
-   two cycle/boundary short exact sequences as in the preceding assertion
-   (lem-pur-site-restriction-module-adjunction-exact,
-   def-pc-acyclic-complex-modules).
-2. At every level use lem-sf-ringed-open-total-tensor-kflat and the signed tensor swap
-   to apply def-pc-kflat-complex to the restricted acyclic test complex.
-3. At every level use the exact module projection isomorphism of
-   lem-weil-pbc-ringed-slice-extension-tensor to test def-pc-flat-sheaf-modules.
-4. Exact extension preserves the kernel short exact sequence of each resolution
-   component, hence its epimorphism. The natural homology comparison preserves
-   its quasi-isomorphism (def-pc-quasi-iso-modules).
-5. Postcompose the original strict tower with the existing complex extension
-   functor and whisker its resolution map. Functoriality preserves the chain-map
-   and tower equations with precisely e_!(t_n) as transitions. Kernels, cokernels,
-   epimorphisms and homology in the tower category are detected levelwise by
-   lem-weil-tower-category-levelwise-abelian. The three conclusions together say
-   that every objectwise flat-term K-flat replacement remains one. -/
+Proof: apply the three clauses of ringedOpen_preserves_flat_resolution to P.obj n
+and q.app n at each tower level n. Postcomposition and whiskerRight have precisely the
+specified objects and maps by definition, retaining all strict transitions and their
+commutation equations. No separate calculation of homology in a tower category is needed. -/
 theorem ringedOpen_tower_preserves_flat_resolution :
     (∀ P : ℕᵒᵖ ⥤ CochainComplex (SheafOfModules.{max c v r}
         (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ,
@@ -172,6 +243,14 @@ theorem ringedOpen_tower_preserves_flat_resolution :
         (∀ n : ℕᵒᵖ,
           ringedOpenQuasiIso.{c, v, r} R ((Functor.whiskerRight q
             (ringedOpenExtensionOnComplexes.{c, v, r} R U)).app n))) := by
-  sorry
+  obtain ⟨hk, hf, hq⟩ := ringedOpen_preserves_flat_resolution.{c, v, r} R U
+  refine ⟨?_, ?_, ?_⟩
+  · intro P hP n
+    exact hk (P.obj n) (hP n)
+  · intro P hP n
+    exact hf (P.obj n) (hP n)
+  · intro P C q he hqi
+    exact ⟨fun n ↦ (hq (P.obj n) (C.obj n) (q.app n) (he n) (hqi n)).1,
+      fun n ↦ (hq (P.obj n) (C.obj n) (q.app n) (he n) (hqi n)).2⟩
 
 end SheafOfModules
