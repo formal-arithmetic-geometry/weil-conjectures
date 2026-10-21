@@ -2,7 +2,8 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q70
-Definitions moved unchanged by the maintainer L (2026-10-18) out of FiniteRingCompactSupportProjection.lean
+Definitions moved by the maintainer L (2026-10-18) out of
+FiniteRingCompactSupportProjection.lean
 -/
 module
 
@@ -17,20 +18,7 @@ public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
-import Mathlib.GroupTheory.Torsion
-import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 /-!
 # Compact-support projection with arbitrary finite primary coefficients
@@ -48,11 +36,88 @@ transported by that realization, on the ordinary unbounded intrinsic derived cat
 
 set_option autoImplicit false
 
+-- Keep lifted coefficient instances on the commutative-ring projection.
+attribute [local instance 2000] CommRing.toRing
+attribute [local instance 2000] isNoetherian_of_finite
+
 universe u
 
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+/-! Named instance proofs keep the ULift coefficient and realization arguments atomic.
+Without these shortcuts Lean abstracts the constructed proofs separately in the map and
+in its users, and comparing the derived tensor expressions can exceed the compile limit.
+All statements below are existing instances; no additional hypotheses or data are introduced.
+Source: the imported Mathlib and fixed-coefficient instances
+(blueprint: def-sp-finite-ring-compact-support-projection-map). -/
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_groupW {X : Scheme.{u}} :
+    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_groupSheafify {X : Scheme.{u}} :
+    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_moduleSheafify (R : Type u) [CommRing R] {X : Scheme.{u}} :
+    HasSheafify (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_sheafGroth (R : Type u) [CommRing R] {X : Scheme.{u}} :
+    IsGrothendieckAbelian.{u + 1}
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} R))) := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_functorLimits (R : Type u) [CommRing R] [Finite R]
+    {X : Scheme.{u}} :
+    PreservesFiniteLimits (sfIntrinsicModuleEquivalence X R).functor := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_functorColimits (R : Type u) [CommRing R] [Finite R]
+    {X : Scheme.{u}} :
+    PreservesFiniteColimits (sfIntrinsicModuleEquivalence X R).functor := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_inverseAdditive (R : Type u) [CommRing R] [Finite R]
+    {X : Scheme.{u}} :
+    (sfIntrinsicModuleEquivalence X R).inverse.Additive := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_inverseLimits (R : Type u) [CommRing R] [Finite R]
+    {X : Scheme.{u}} :
+    PreservesFiniteLimits (sfIntrinsicModuleEquivalence X R).inverse := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_inverseColimits (R : Type u) [CommRing R] [Finite R]
+    {X : Scheme.{u}} :
+    PreservesFiniteColimits (sfIntrinsicModuleEquivalence X R).inverse := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_moduleGroth (R : Type u) [CommRing R] :
+    IsGrothendieckAbelian.{u + 1} (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_modulePreadditive (R : Type u) [CommRing R] :
+    MonoidalPreadditive (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_moduleFlat (R : Type u) [CommRing R] :
+    Abelian.HasFunctorialFlatResolution
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) := inferInstance
+
+/-- Atomic instance proof for the canonical coefficient transport. -/
+theorem finiteProjection_upperFlat (R : Type u) [CommRing R] [Finite R] :
+    ProEtale.UpperStarPreservesFlat
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) := inferInstance
+
+attribute [local instance 10000] finiteProjection_groupW finiteProjection_groupSheafify
+  finiteProjection_moduleSheafify finiteProjection_sheafGroth finiteProjection_functorLimits
+  finiteProjection_functorColimits finiteProjection_inverseAdditive finiteProjection_inverseLimits
+  finiteProjection_inverseColimits finiteProjection_moduleGroth finiteProjection_modulePreadditive
+  finiteProjection_moduleFlat finiteProjection_upperFlat
 
 /-- The specified compact-support projection arrow in intrinsic constant-ring modules.
 The fixed-scalar arrow is the counit-defined proper projection, followed by the inverse
