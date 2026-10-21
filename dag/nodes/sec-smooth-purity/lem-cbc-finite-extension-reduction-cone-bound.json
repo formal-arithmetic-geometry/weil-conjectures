@@ -16,71 +16,85 @@
  ],
  "proof": [
   {
-   "text": "Put $R=A_T$, $S=(A/I^n)_T$. The DVR and finite-quotient clauses of [def-weil-l-adic-coefficient-extension] give $0\\to A\\xrightarrow{\\varpi^n}A\\to A/I^n\\to0$, with $A$ Noetherian and $A/I^n$ finite. By [lem-weil-pbc-constant-module-section-properties] its constant-sheaf sequence is exact. By [lem-weil-pbc-completed-constant-sheaf-reduction], $R$ is flat over $\\underline A$ and $R\\otimes_{\\underline A}\\underline{A/I^n}\\cong S$ canonically (flatness identifies ordinary and derived tensor here). Tensor the sequence by $R$ to obtain $0\\to R\\xrightarrow{\\varpi^n}R\\to S\\to0$, with quotient map the canonical projection.",
+   "text": "Reuse the completed DVR coefficient resolution constructed in coefficient_resolution of AdicReductionCohomologySequence. Its first arrow is obtained by conjugating multiplication by the uniformizer power through the constant-to-completed unit comparison. Prove that the completed scalar map used in that construction equals pbcCompletedScalar by the uniqueness of the constant scalar map and the limit projection formulas. Evaluate the conjugated multiplication at 1 using the constant generator and the ordinary scalar-adjunction unit. It is exactly the completed section of the uniformizer power. The tensor multiplication formula therefore identifies tensoring this first arrow with scalar multiplication on every module.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
+    "lem-weil-pbc-adic-reduction-cohomology-sequence",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat), applied to the uniformizer-power quotient sequence"
+    "place": "Tags 093J and 093M; existing coefficient_resolution and constant-generator calculations in lean/Sheaf/Paper/AdicReductionCohomologySequence.lean"
    }
   },
   {
-   "text": "Choose a K-flat representative $P$ of $M$ as in [def-weil-pbc-adic-coefficient-datum]. Apply [lem-cbc-regular-quotient-cone-augmentation] to the exact sequence of Step 1, with $r=\\varpi^n$. It gives a natural isomorphism $A_M:Q_R C(r\\operatorname{id}_P)\\xrightarrow{\\sim}\\operatorname{Res}_n M_n$. Its component is the quotient augmentation $(y,x)\\mapsto y\\otimes1$; it carries the cone inclusion to canonical reduction and is independent of representatives, natural for all derived morphisms.",
+   "text": "Use the independent-coefficient functorial flat-cover construction and its reduced left-resolution functor P with augmentation rho. Its augmentation is a quasi-isomorphism, its terms are flat by preservation of colimits and closure of flat objects under integer-indexed colimits, and its categorical K-flatness implies IsKFlatIndependentCoefficients by tensoring the quasi-isomorphism from zero to an acyclic complex. Tensor the coefficient resolution degreewise with P(X). The tensor_complex_exact calculation from AdicReductionTriangle gives a short exact complex sequence whose first arrow is uniformizer-power scalar multiplication and whose second arrow is the ordinary scalar-adjunction unit.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-cbc-regular-quotient-cone-augmentation"
+    "lem-pc-kflat-resolution",
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-weil-pbc-adic-reduction-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), and the constructions preceding definition-derived-tor and lemma-derived-base-change in the same chapter; agent expansion of the principal quotient augmentation and its descent, from the old item steps 2 and 3."
+    "place": "Tag 06YS; reduced left-resolution API and the existing independent-coefficient flat-cover construction"
    }
   },
   {
-   "text": "The cone-triangle convention of [def-weil-abstract-derived-category] makes $M\\xrightarrow{r}M\\xrightarrow{i}Q_RC(r\\operatorname{id}_P)\\xrightarrow{-p}M[1]$ distinguished. Transport its third vertex along $A_M$ from Step 2: the maps become $A_Mi$ and $(-p)A_M^{-1}$. The naturality in [lem-cbc-regular-quotient-cone-augmentation], together with the diagonal cone maps commuting with inclusion and projection, gives the asserted natural triangle.",
+   "text": "The natural universal derived-extension counit on cochain representatives, followed by exact derived restriction, compares derived reduction with ordinary reduction. On P(X) this comparison is invertible by K-flatness. Combine its inverse with the derived augmentation isomorphism to obtain a natural comparison of ordinary reduction of P(X) with derived reduction of X. The normalization clause of pbcDerivedScalarAdjunction_exists identifies the second arrow with the derived scalar-adjunction unit. This uses actual natural transformations, not objectwise choices of connecting maps.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-cbc-regular-quotient-cone-augmentation"
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-adic-reduction-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY; the recorded universal extension counit and normalized derived scalar adjunction"
+   }
+  },
+  {
+   "text": "Apply Mathlib triangleOfSES to the degreewise short exact complex sequence. Naturality of triangleOfSESdelta gives a natural transformation on complexes. Conjugate by the two natural comparison isomorphisms, and descend its connecting transformation through the fully faithful whiskering functor of the quasi-isomorphism localization Q. Transport the distinguished triangles first along the resolution isomorphisms, then along the essential-surjectivity isomorphism of Q. Scalar multiplication commutes with those isomorphisms by linearity. This proves the natural distinguished triangle simultaneously for all derived objects.",
+   "uses": [
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU (definition-unbounded-derived-category), with cone triangles; sites-cohomology.tex Tag 06YU for the K-flat tensor construction."
+    "place": "Tags 05RU and 05RS; Mathlib DerivedCategory.triangleOfSES_distinguished, triangleOfSESdelta_naturality, and Localization.fullyFaithfulWhiskeringLeft"
    }
   },
   {
-   "text": "Apply [lem-sf-derived-homology-long-exact], with the functors of [def-weil-derived-cohomology-sheaves]. Restriction of scalars [def-pc-sheaf-restrict-scalars] preserves the underlying abelian sheaf, hence kernels, images and cohomology, and reflects zero objects. In the exact segment $\\mathcal H^q(M)\\to\\mathcal H^q(\\operatorname{Res}_nM_n)\\to\\mathcal H^{q+1}(M)$, both outer terms vanish when $q<a-1$ or $q>b$. Thus $\\mathcal H^q(M_n)=0$ outside $[a-1,b]$. This interval does not depend on the chosen positive $n$.",
+   "text": "For q<a-1 or q>b, both H^q(M) and H^(q+1)(M) vanish. Apply DerivedCategory.HomologySequence.exact3 to the constructed triangle and ShortComplex.Exact.isZero_of_both_isZero. Finally n>=1 identifies (n-1)+1 with n, so the same interval [a-1,b] works for every positive exponent, including n=1.",
    "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "def-weil-derived-cohomology-sheaves",
-    "def-pc-sheaf-restrict-scalars"
+    "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RS (lemma-cohomology-homological), long exact sequence of a distinguished triangle"
+    "place": "Tag 05RS; exact portion H^q(M) to H^q(restricted reduction) to H^(q+1)(M)"
    }
   }
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-adic-reduction-cohomology-sequence",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "def-weil-pbc-adic-coefficient-datum",
-  "lem-cbc-regular-quotient-cone-augmentation",
+  "lem-pc-kflat-resolution",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-weil-pbc-adic-reduction-triangle",
+  "def-weil-pbc-bounded-constructible-tower",
   "def-weil-abstract-derived-category",
-  "lem-sf-derived-homology-long-exact",
-  "def-weil-derived-cohomology-sheaves",
-  "def-pc-sheaf-restrict-scalars"
+  "lem-sf-derived-homology-long-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 093J, 093M and 05RS/06YU, assembled into the completed-coefficient cone comparison"
+  "by": "worker",
+  "group": "E9",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Reuse the proved completed coefficient resolution and tensor short-exactness; construct a functorial flat model and descend the natural SES connecting map through localization. All additional helpers are private and completely proved."
  },
  "mathlib_searches": [
   {
@@ -158,9 +172,7 @@
  "tool_uses": [
   "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-tensor-mapping-cone-iso"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -188,5 +200,15 @@
   "result": "pass",
   "note": "Statement, dependencies, universes, edge cases, docstrings, source citations, and canonical completed-coefficient interfaces verified; per-file scompile passed."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T100947-L-4179330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
