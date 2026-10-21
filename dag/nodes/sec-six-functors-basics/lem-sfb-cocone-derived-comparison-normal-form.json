@@ -19,9 +19,91 @@
   "def-sfb-derived-extend-comp-iso",
   "lem-sfb-exact-derived-natural-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The functors $A,B,C$ preserve finite colimits by [sk-def-sfb-change-of-scalars](2). They preserve finite limits by [lem-sfb-subfield-flat] (for $A$) and [lem-sfb-qlbar-flat] (for $B,C$), so they are exact additive scalar-extension functors. By [lem-sfb-subfield-coefficient-map-comp] the composite coefficient map is $\\kappa$; [def-sfb-extend-scalars-iso-of-eq] gives the specified $e:D\\cong C$. Thus $D$ is exact as well: transport each finite limiting or colimiting cone through the natural isomorphism $e$, use preservation by $C$, and transport back. The composite $BA$ is exact because applying $A$ and then $B$ preserves each such cone.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-subfield-flat",
+    "lem-sfb-qlbar-flat",
+    "lem-sfb-subfield-coefficient-map-comp",
+    "def-sfb-extend-scalars-iso-of-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exactness paragraph; compare TwoColimit.lean:138-141"
+   }
+  },
+  {
+   "text": "Let $R=\\operatorname{Res}_{\\psi\\varphi}$. Restriction along $\\varphi$ after restriction along $\\psi$ has action $\\gamma_N(\\psi\\otimes1)(\\varphi\\otimes1)=\\gamma_N((\\psi\\varphi)\\otimes1)$ and leaves every underlying arrow unchanged, by [sk-def-sfb-change-of-scalars](1). Pasting the two adjunction Hom bijections in (2) gives $BA\\dashv R$, with unit $\\eta_{BA,M}=\\operatorname{Res}_{\\varphi}(\\eta_{B,AM})\\circ\\eta_{A,M}$. Also $D\\dashv R$. In the fixed construction, denote by $s:D\\cong BA$ the comparison called `Mod.extendScalarsComp`; its definition is left-adjoint uniqueness for these two adjunctions, after this very restriction identification. Therefore its defining unit equation is $R(s_M)\\circ\\eta_{D,M}=\\eta_{BA,M}$, as in [lem-weil-pbc-conjugate-iso-unit-equation]. Applying $R(s_M^{-1})$ gives $R(s_M^{-1})\\circ\\eta_{BA,M}=\\eta_{D,M}$. The uniqueness clause of that node, now with $L_1=BA,L_2=D$, gives $s^{-1}=u$. The other underived factor is exactly $e$, by [def-sfb-extend-scalars-iso-of-eq], not just an unspecified comparison along the equal maps. Hence the underived isomorphism passed to derivation in the fixed definition is $\\theta=e\\circ s^{-1}=e\\circ u$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-sfb-extend-scalars-iso-of-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Final underived-composition sentence; explicit definition of Mod.extendScalarsComp in lean/WeilConjectures/CategoryTheory/ModuleObjects/ExtendScalars.lean:463-468 and Mod.extendScalarsIsoOfEq in ChangeOfScalarsSquare.lean:144-146"
+   }
+  },
+  {
+   "text": "Write $a_J:(LJ)Q\\cong QC(J)$ for the specified exact localization comparisons, and let $c_0:L(BA)\\cong(LB)(LA)$ be the comparison used by the fixed construction. Its definition transports the localization comparison for termwise composition along the exact-functor identifications $LJ\\cong D(J)$ of [sk-def-sfb-derived-categories]. The termwise composition comparison comes from the identity $C(B)C(A)=C(BA)$. Consequently, cancelling the intervening exact-functor identifications and their inverses in this definition gives, on every complex $K$,\n$$a_{B,C(A)K}\\circ LB(a_{A,K})\\circ c_{0,QK}=a_{BA,K}.$$\nThis is exactly the characterizing equation of [lem-sfb-exact-derived-composition] for the comparisons $a_J$ fixed here. Its uniqueness clause gives $c_0=c$. In particular, the first factor in the definition of $\\delta$ is $c^{-1}$, in the direction $(LB)(LA)\\to L(BA)$.",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact-derived-composition sentence; expanded definitions in lean/WeilConjectures/CategoryTheory/DerivedCategory/LeftDerivedFunctor/MapDerivedCategory.lean:199-205 and WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:175-196"
+   }
+  },
+  {
+   "text": "For $\\theta:BA\\cong C$ from step 2, let $n_0:L(BA)\\cong LC$ be the second factor in the fixed construction. Expand its definition: it is the termwise natural isomorphism $C(\\theta)$ localized, with the exact-functor identifications $L(BA)\\cong D(BA)$ and $LC\\cong D(C)$ on either side. Thus cancellation of these identifications yields\n$$a_{C,K}\\circ n_{0,QK}=Q(C(\\theta)_K)\\circ a_{BA,K}$$\nfor every complex $K$, with degree-$j$ map $\\theta_{K^j}$. This is the characterizing equation of [lem-sfb-exact-derived-natural-iso]; uniqueness gives $n_0=L(\\theta)$. The universal property [lem-weil-pbc-localization-universal-property](2)-(3) makes these comparisons equal as natural transformations on the entire derived category: equality after the localization functor detects equality, rather than merely giving isomorphic values on objects.",
+   "uses": [
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact-derived-composition sentence and final scalar-extension sentence; expanded definition in lean/WeilConjectures/CategoryTheory/DerivedCategory/LeftDerivedFunctor/MapDerivedCategory.lean:148-153 and WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:107-115"
+   }
+  },
+  {
+   "text": "Unfold the fixed definition of $\\delta$ (TwoColimit.lean:142-146): it is $n_0\\circ c_0^{-1}$, with $\\theta$ the underived composite read in step 2. Substituting steps 2-4 gives\n$$\\delta=L(e\\circ u)\\circ c^{-1}.$$\nBy [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar], the symbols $LA,LB,LC$ denote exactly the specified extension functors $T_{E,H},T_{H,\\Omega},T_{E,\\Omega}$. The substitutions above are equalities of natural transformations between these fixed functors, with their object and arrow maps, so they do not replace any functor by another chosen equivalent one. Any postcomposition by an automorphism would have to satisfy the same localization equation to preserve the specified construction; by the uniqueness in step 4 it would equal the identity. This proves the asserted normalization of the chosen comparison.",
+   "uses": [
+    "def-sfb-derived-extend-subfield",
+    "def-sfb-derived-extend-to-qlbar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "The fixed construction in lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean:135-146; substitution of preceding steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-qlbar-flat",
+  "lem-sfb-subfield-coefficient-map-comp",
+  "def-sfb-extend-scalars-iso-of-eq",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "sk-def-sfb-derived-categories",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-localization-universal-property",
+  "def-sfb-derived-extend-subfield",
+  "def-sfb-derived-extend-to-qlbar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Exact-scalar-extension proof paragraph, made precise using the specified construction and its defining adjunction and localization comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +139,45 @@
    "results": "Algebra.FormallyEtale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.Etale.comp; KaehlerDifferential.endEquivAuxEquiv; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; KaehlerDifferential.isBaseChange_of_formallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
    "date": "2026-10-21",
    "verdict": "no match: exact-functor localization and ordinary scalar extensions are related tools, but no Mathlib declaration specifies the project cocone comparison or its normalization by this internal unit-compatible comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorCompIso|leftDerivedFunctorNatIso|extendScalarsComp",
+   "results": "No hits (Mathlib/CategoryTheory searched).",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness and ordinary ModuleCat scalar extensions do not state the normalization of this specified internal-module cocone construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar extension composition isomorphism is obtained by localizing the underived adjunction uniqueness comparison",
+   "results": "LinearMap.extendScalarsOfIsLocalizationEquiv; IsLocalizedModule.mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply; LinearMap.extendScalarsOfIsLocalizationEquiv_apply; CategoryTheory.Localization.compUniqFunctor; LinearEquiv.extendScalarsOfIsLocalizationEquiv; LinearMap.extendScalarsOfIsLocalization; LocalizedModule.restrictScalars_map_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness and ordinary ModuleCat scalar extensions do not state the normalization of this specified internal-module cocone construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness and ordinary ModuleCat scalar extensions do not state the normalization of this specified internal-module cocone construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of left adjoints identifies the inverse scalar extension composition comparison with the unit preserving comparison of adjunctions",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.homEquiv_extendScalarsId; ModuleCat.ExtendRestrictScalarsAdj.unit_app; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; ModuleCat.extendRestrictScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness and ordinary ModuleCat scalar extensions do not state the normalization of this specified internal-module cocone construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified comparison for derived extension of internal coefficient rings equals the inverse exact derived composition comparison followed by the derived unit compatible scalar extension isomorphism",
+   "results": "CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; ModuleCat.extendScalarsComp; ModuleCat.extendScalars_assoc'; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; ModuleCat.extendScalars_assoc_assoc; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_id_comp_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness and ordinary ModuleCat scalar extensions do not state the normalization of this specified internal-module cocone construction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-coefficient-cocone-comparison-agreement",
@@ -79,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-cocone-derived-comparison-normal-form",
+  "worker": "stage1",
+  "summary": "Verified the chosen comparison by unfolding its actual construction, identifying the inverse underived comparison by its unit equation, and identifying the two derived comparisons by their localization equations. Reused existing generic nodes; no new nodes and no statement change.",
+  "blueprint": "lem-sfb-constructible-cocone-hom-surj, first paragraph, transitivity isomorphisms: fixes the comparison used to transport Hom morphisms; realizes the cocone-comparison construction in unit step 9.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Finite-subfield scalar extension preserves finite limits; this is the input to the unit exact-scalar-extension route, not a replacement of that route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-subfield-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-678b1fd5d",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-678b1fd5d (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full; the delivery has no new nodes. Statement, stmt_deps, blueprint and source are byte-equal to the live unsplit node. The item is not superseded, not on the dropped list and has no repair note; there is no cycle and proof_deps equals the union of the step uses. Checked the steps against the cited statements and the fixed Lean construction derivedExtendScalarsCompIso (TwoColimit.lean:135-146, identical to Sheaf finiteCoefficientDerivedTensorCompIso), which is consistent with the DAG def node's steps 3-4. Step 1: exactness of A, B, C from change-of-scalars(2), subfield-flat and qlbar-flat (for H and for E), plus map-comp; D by transport through e. Step 2: Mod.extendScalarsComp is leftAdjointUniq, so by unit_leftAdjointUniq_hom_app R(s)∘η_D = η_BA; the conjugate-iso uniqueness (L1=BA, L2=D, δ=id) gives s⁻¹ = u, orientation correct, and θ = e∘u. Step 3: leftDerivedFunctorCompIso is ι∘mapDerivedCategoryCompIso∘ι⁻¹ and its _fac is the composition node's equation; applying the node to (LJ, a_J∘ι_J) is legitimate because the factorization node only asserts existence of some pair. Step 4: mapDerivedCategoryNatIso_fac matches the natural-iso node, and localization-universal-property(3) gives global equality. Step 5: δ = n0∘c0⁻¹, matching the Lean order. Edge cases E=H, zero complex and unbounded complexes are fine. No duplicate: flat-scalar-tower-coherence and internal-tensor-composition-unit-normalization state different comparisons, and the latter is the parent's companion input. Accepted tool use: lem-sfb-subfield-flat (cartesian-coefficients unit; this unit's finite-extension-compatibility route has no subfield-flat node). No SGA cited; three search kinds recorded. No fixes."
  }
 }
