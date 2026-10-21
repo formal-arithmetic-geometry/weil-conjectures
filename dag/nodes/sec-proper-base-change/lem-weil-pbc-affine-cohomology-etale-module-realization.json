@@ -26,9 +26,142 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every affine etale $v:V\\to S$, base change makes $f_V:X_V\\to V$ quasi-compact and separated. Thus $X_V$ is quasi-compact (apply quasi-compactness to the affine open $V$ itself), and is separated as a scheme because its base $V$ is affine. Pullback makes $G_V=j_V^*G$ quasi-coherent. These are exactly the geometric hypotheses of the simultaneous comparison, and they hold also for $V'$ in every arrow in the affine subsite; no quasi-compactness or separatedness of $S$ is required.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03Q8 construction; hypotheses for 03P2 affine-base application"
+   }
+  },
+  {
+   "text": "Write $F=L(G_{\\mathrm{et}})$, $T=L(E_{\\mathrm{et}})$ and $R=L(\\mathcal O_{S,\\mathrm{et}})$. The base change $j_V$ of $v$ is etale. Inverse image along $j_V$ is restriction: on an etale $w:W\\to X_V$ it evaluates $F$ on $j_Vw$. The module pullback composition isomorphism identifies $(j_Vw)^*G$ with $w^*G_V$, naturally in $w$. Hence $j_V^{-1}F=L((G_V)_{\\mathrm{et}})$ with precisely the structural coefficient identification. Applying the same sectionwise lift to restrictions preserves these identities. In particular the presheaf in 03Q8 is the presheaf $P(V)=H^q(X_{V,\\mathrm{et}},L((G_V)_{\\mathrm{et}}))$ in the statement, with its actual restriction maps.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pc-module-pullback-identity-composition",
+    "def-sc-etale-qcoherent-module",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03Q8 restricted coefficient; 03S2 restriction and tensor-pullback composition"
+   }
+  },
+  {
+   "text": "On the full etale site put $\\widetilde P(V)=H^q(X_V,j_V^{-1}F)$, with cohomological restriction. The canonical cocycle class $\\iota:\\widetilde P\\to R^qf_*F$ exhibits $R^qf_*F$ as its abelian sheafification. For arbitrary $V$, let $a\\in R(V)$ act on $\\widetilde P(V)$ by the cohomology endomorphism induced by multiplying $j_V^{-1}F$ by $f_V^*a$. The coefficient identities $(a+b)m=am+bm$, $(ab)m=a(bm)$ and $1m=m$ pass to cohomology, giving a module structure. Coefficient naturality of cohomology pullback (clause 3 of its functoriality theorem) carries that multiplication to multiplication by the restricted base function, so this is a presheaf of $R$-modules. Its module sheafification has underlying abelian sheaf $R^qf_*F$ by the module-sheafification interface. Its action is exactly the action induced by local multiplication specified in the item; it is not chosen through an eventual isomorphism with $T$.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q8, label lemma-higher-direct-images; module structure by Tag 03CY"
+   }
+  },
+  {
+   "text": "For affine $v$ define $\\alpha_V(x)=\\operatorname{ULift.up}(e_v(c^q_{X_V,G_V}(x)))$. For $h:V'\\to V$, comparison naturality and the given compatibility of $e$ give\n$$\\alpha_{V'}(h_X^*x)=\\operatorname{ULift.up}(e_{vh}(h_X^*c^q_{X_V,G_V}(x)))=\\rho_h(\\alpha_V(x)).$$\nThus $\\alpha:P|_{\\mathrm{aff}}\\to T|_{\\mathrm{aff}}$ is an isomorphism of additive presheaves. For $a\\in\\Gamma(V,\\mathcal O_V)$ put $b=f_V^*a$. Comparison intertwines the endomorphism multiplying by $b$, and module cohomology sends that endomorphism to scalar multiplication by $b$. The given $\\Gamma(V,\\mathcal O_V)$-linearity of $e_v$ therefore gives $\\alpha_V(\\operatorname{ULift.up}(a)x)=\\operatorname{ULift.up}(a)\\alpha_V(x)$. Every lifted scalar has this form. This proves linearity for the action fixed in step 3.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+    "lem-weil-pbc-module-cohomology-scalar-endomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2 canonical comparison, applied to arrows between affine etale base objects and to multiplication"
+   }
+  },
+  {
+   "text": "Give the full affine etale subcategory $\\mathcal A\\subset S_{\\mathrm{et}}$ the induced sieve topology. Its inclusion is fully faithful. Every etale $W\\to S$ is covered by affine opens, so the image-covering condition of the sieve dense-subsite comparison holds. Its local fullness and local faithfulness conditions hold with the maximal sieve, since the inclusion is full and faithful; its covering-detection condition is the definition of the induced topology. Apply that comparison in the common universe $u+1$ to obtain an equivalence on sheaves of $\\mathrm{Type}(u+1)$. This gives an abelian equivalence in the same universe: extend each underlying set sheaf, lift addition, zero and negation by full faithfulness, and check their identities after faithful restriction. Restriction preserves products since sheaf products are computed sectionwise. Thus the dense-subsite sheafification comparison applies to the actual abelian coefficients, without resizing them or assuming $S$ is qcqs.",
+   "uses": [
+    "lem-trf-sieve-dense-subsite-comparison",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 04HR affine-cover route; sieve dense-subsite comparison in the common coefficient universe"
+   }
+  },
+  {
+   "text": "The restriction $T|_{\\mathrm{aff}}$ is a sheaf for the induced topology, by the equivalence of step 5; hence step 4 makes $P|_{\\mathrm{aff}}$ a sheaf as well. Write $u:\\mathcal A\\to S_{\\mathrm{et}}$ for the inclusion and $\\eta=\\iota:\\widetilde P\\to\\widetilde P^\\#=R^qf_*F$ for the sheafification unit; by step 2, $\\widetilde P\\circ u^{op}=P|_{\\mathrm{aff}}$. The dense-subsite sheafification comparison gives isomorphisms $\\theta_H:(H\\circ u^{op})^\\#\\cong H^\\#\\circ u^{op}$, natural in the abelian presheaf $H$ on $S_{\\mathrm{et}}$. Naturality for the morphism $\\eta:\\widetilde P\\to\\widetilde P^\\#$ reads $\\theta_{\\widetilde P^\\#}\\circ(\\eta\\circ u^{op})^\\#=(\\eta^\\#\\circ u^{op})\\circ\\theta_{\\widetilde P}$. Here $\\eta^\\#$ is invertible (the sheafification of a sheafification unit, by the universal property), so $(\\eta\\circ u^{op})^\\#$ is invertible. But $\\eta\\circ u^{op}=\\iota|_{\\mathrm{aff}}:P|_{\\mathrm{aff}}\\to(R^qf_*F)|_{\\mathrm{aff}}$ is a morphism between sheaves on $\\mathcal A$, whose sheafification units are invertible and natural; so $\\iota|_{\\mathrm{aff}}$ is conjugate to $(\\iota|_{\\mathrm{aff}})^\\#$ and is invertible. No compatibility of $\\theta$ with units is used. Consequently each affine $\\iota_V:P(V)\\to(R^qf_*F)(V)$ is invertible and the formula $\\Phi_V=\\alpha_V\\iota_V^{-1}$ defines an isomorphism on restricted abelian sheaves. Full faithfulness of restriction uniquely extends it and its inverse to an abelian sheaf isomorphism $\\Phi:R^qf_*F\\to T$. The two inverse identities hold because they hold after faithful restriction.",
+   "uses": [
+    "lem-pc-dense-subsite-sheafification-compatibility",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 04HR affine-subsite descent; canonical dense-subsite/sheafification adjunction comparison"
+   }
+  },
+  {
+   "text": "On every affine object the equation $\\Phi_V\\iota_V=\\alpha_V$ is the defining equation of step 6. The unit $\\iota$ is linear for the sheafified action of step 3; thus its inverse is linear on each affine object, as is $\\alpha_V$ by step 4. For an arbitrary etale $W\\to S$, a scalar $a\\in R(W)$ and $s\\in(R^qf_*F)(W)$, restrict the two sections $\\Phi_W(as)$ and $a\\Phi_W(s)$ to an affine open cover $\\{V_i\\to W\\}$. On $V_i$ their values are $\\Phi_{V_i}(a|_{V_i}s|_{V_i})$ and $a|_{V_i}\\Phi_{V_i}(s|_{V_i})$, equal by affine linearity. Sheaf uniqueness makes the two original sections equal. This proves linearity on every etale object; the inverse is linear by applying the bijection $\\Phi_W$ to the scalar identity.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03CY module sheafification, followed by the etale sheaf uniqueness axiom"
+   }
+  },
+  {
+   "text": "For an affine $v$ and $x\\in P(V)$, step 6 reads\n$$\\Phi_V(\\iota_V(x))=\\alpha_V(x)=\\operatorname{ULift.up}(e_v(c^q_{X_V,G_V}(x))),$$\nwhich is the requested normalization with the common coefficient lift. For a raw class $z$, the raw-class normalization lemma gives $\\kappa_V(z)=\\iota_V(c_{\\mathrm{raw}}(z))$, with the actual constructed raw evaluation and canonical higher-image class map. Substitute $x=c_{\\mathrm{raw}}(z)$ into the preceding equality. This yields exactly the equivalent raw formula and completes the isomorphism with all local scalar compatibilities.",
+   "uses": [
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q8 canonical cohomology-class normalization, combined with the affine maps of step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention",
+  "lem-pc-dense-subsite-sheafification-compatibility",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-trf-sieve-dense-subsite-comparison",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+  "lem-weil-pbc-raw-restricted-class-normalization",
+  "lem-weil-pbc-separated-base-change",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, label lemma-higher-direct-images, expanded using Tag 03P2, Topologies 04HR and Modules on Sites 03CY; scalar and raw-class normalizations retained."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +197,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The forgetful functor from presheaves of modules to presheaves of abelian groups commutes with the hom-set bijection induced by sheafification and the adjunction between presheaves and sheaves. Specif\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For a presheaf of modules $ P $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a natural transformation $ \\\\alpha: R_0 \\\\to R $, the forgetful functor fro\"}\n  {\"name\": \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a ring homomorphism $ \\\\alpha: R_0 \\\\to R $, the canonical bijection betw\"}\n  {\"name\": \"PresheafOfModules.sheafifyHomEquiv'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}",
    "date": "2026-10-21",
    "verdict": "no match: abstract module sheafification and dense restriction provide tools, but do not identify localized coherent cohomology with abelian higher direct images or normalize the scalar and raw-class comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible affine etale coherent cohomology isomorphisms realize an abelian higher direct image as a module sheaf with its canonical scalar action",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.H, SheafOfModules.instAbelian, instAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instCategory, instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheafification, cohomology presheaves and adjunction tools do not state the explicit raw-to-restricted class normalization or the affine coherent module realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheafification, cohomology presheaves and adjunction tools do not state the explicit raw-to-restricted class normalization or the affine coherent module realization"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|étale).*(cohomology|higherDirectImage)|(sheafif|Sheafif).*(linear|module|Module)",
+   "results": "OK 18 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheafification, cohomology presheaves and adjunction tools do not state the explicit raw-to-restricted class normalization or the affine coherent module realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural affine etale cohomology comparisons glue to a normalized isomorphism of module higher direct image sheaves",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardCongr.congr_simp, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr, AlgebraicGeometry.Scheme.Hom.toNormalization",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheafification, cohomology presheaves and adjunction tools do not state the explicit raw-to-restricted class normalization or the affine coherent module realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism on an affine etale basis between coherent cohomology and sections gives an isomorphism from abelian higher direct images compatible with multiplication",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.IsAffineOpen.fromSpec_app_self_apply, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheafification, cohomology presheaves and adjunction tools do not state the explicit raw-to-restricted class normalization or the affine coherent module realization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
@@ -94,5 +262,54 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-affine-cohomology-etale-module-realization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Verify qc separated affine pullbacks, form the normalized affine presheaf isomorphism using simultaneous comparison, descend through canonical sheafification and the dense affine subsite with its induced sieve topology, and verify local scalar actions. Isolate only the generic abelian raw-class normalization; all geometric and sheafification ingredients are existing nodes.",
+  "blueprint": "0GKV case (b) inside thm-weil-pbc-direct-image-finiteness-proper: pass from the 0GKA affine coherent edge maps through 03P2 to the abelian higher image, retaining pullback, coefficient-universe and scalar normalization; glue by the affine etale subsite (item former steps 5 and 6, degree-one part). Steps 1-4 supply the affine coherent comparison, 5-7 glue with the common coefficient universe and genuine scalar action, and 8 supplies the raw-class normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic Identity and composition for tensor-formula module pullback tool for realizing the affine cohomology-presheaf construction of 03Q8; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction tool for realizing the affine cohomology-presheaf construction of 03Q8; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+    "why": "Generic Module cohomology preserves multiplication by a global section tool for realizing the affine cohomology-presheaf construction of 03Q8; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic The pullback of a quasi-coherent module is quasi-coherent tool for realizing the affine cohomology-presheaf construction of 03Q8; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic Higher direct image as a sheafified cohomology presheaf tool for realizing the affine cohomology-presheaf construction of 03Q8; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Coefficient naturality (clause 3) verifies scalar semilinearity of the restricted cohomology presheaf; generic cohomology tool, not a change of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NE-7422913ce",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-7422913ce (reviewer sub-agent of L); spot-checked: Read the item (8 steps), the new node lem-weil-pbc-raw-restricted-class-normalization and every cited statement in full; checked the source at Stacks 03Q8 (etale-cohomology.tex l.7510ff). One fault, fixed (C3/C4): step 6 relied on the dense-subsite comparison isomorphism being compatible with the sheafification units, but the statement of lem-pc-dense-subsite-sheafification-compatibility only gives an isomorphism natural in F. The rewritten step 6 derives the result from that naturality alone. Apply naturality to eta: P~ -> P~^#. Since eta^# is invertible, (eta o u^op)^# is invertible. eta o u^op = iota|_aff is a map between sheaves (P|_aff is isomorphic to T|_aff), so iota|_aff is invertible. Uses and statement are unchanged. Steps 1-5, 7 and 8 checked: qc/separated base change and X_V separated over affine V; etale inverse image is restriction plus module-pullback composition; the module action and clause 3 of cohomology-pullback-functorial; alpha natural and linear via the comparison naturality and the scalar-endomorphism lemma; comparison-lemma hypotheses (1)-(4) for the affine subcategory with the induced topology; non-affine linearity by affine covers and sheaf separation. The new node is true (checked for q=0 and empty V), strictly smaller than the item and not a restatement of any existing node (class-compatibility, natural-iso, functor-iso, raw-class def). It is statement-only and its B fields are fine. Batch-5 flag: lem-trf-sieve-dense-subsite-comparison is a Mathlib leaf (IsDenseSubsite.sheafEquiv) with empty closure, the general comparison lemma and no part of the trace formula or Poincaré duality, so the citation is accepted. All six declared tool_uses are accepted: module-pullback-identity-composition, etale-inverse-image-restriction, module-cohomology-scalar-endomorphism, module-pullback-quasi-coherent, sbc-lem-higher-direct-image-presheaf and cohomology-pullback-functorial. Advisory for the maintainer: 'the canonical comparison of lem-sbc-abelian-higher-direct-image-natural-comparison' points at a statement that only asserts existence (its proof constructs the map). If e is read as an arbitrary witness, e -> -e keeps the stated compatibility. A def node for the constructed comparison would pin kappa. The phrase was inherited from the base statement and is used by 24 nodes.; 1 file(s) fixed by the reviewer"
+ }
 }
