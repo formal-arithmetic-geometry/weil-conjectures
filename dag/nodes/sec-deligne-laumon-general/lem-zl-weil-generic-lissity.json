@@ -12,7 +12,9 @@
   "def-pc-reduced-scheme",
   "def-weil-pbc-scheme-conventions",
   "def-weil-weil-sheaf-complex",
-  "def-pod-lisse-l-adic-sheaves"
+  "def-pod-lisse-l-adic-sheaves",
+  "def-a1-common-stage-lisse-lattice",
+  "def-zl-weil-ind-sheaf-category"
  ],
  "proof": [
   {
@@ -269,5 +271,31 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-d84fae333 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps and every cited statement. There are no new nodes. The item is live: it is not on route-pivot-dropped.txt, its citer thm-zl-relative-line-stratification is live, it has no repair note and it is not a re-split. The statement is unchanged and nothing cites SGA. Steps 1 and 3-6 are sound. Step 1 handles the empty scheme. Step 3 shows the projection p from X to X_0 is integral on charts (k/k_0 is algebraic), so p(C) is closed (Stacks 01WM/02JK). Step 4 proves density by incomparability (00GT), using 01IS and 0BA8; I tested an X_0 that is not geometrically irreducible. Step 5 restricts to the open; step 6 builds the Weil structure from Phi_X∘j = j∘Phi_U and integral pullback composition, which allows semilinear Frobenius. The closed-image construction U_0 = X_0 minus p(C) is a valid argument below paragraph 4 of the main-20261015 proof. I fixed two faults, both in step 2. (1) Step 2 cited lem-per-qbar-generic-duality-model, which the 2026-10-19 artin-gabber drop removed (line 1838; see coord/repair-notes/lem-per-artin-gabber-affine-curve.json). It used only that node's generic-open clause, and that clause came from the final clause of lem-per-adic-heart-pullback-fibres plus component bookkeeping. I re-proved it inline: lisse on a finite stratification (Bhatt-Scholze 6.8.6/6.8.14), opens V_i around the component generic points, a stratum containing a generic point contains an open, and strata are isomorphic over those opens because X is reduced (lem-kun-geometric-reduced-perfect). (2) Delivery-errors E: step 2 said the cited node uses 'exactly the same heart'. It does not: the item uses the sf categories and the node uses the PBC categories. I added lem-fd-rational-coefficient-category-comparison, which gives an identity-induced equivalence J. The two integral categories are the same and both t-structures are defined by the same cohomology sheaves, so J carries one heart into the other. The fixed step 2 is 1687 characters; proof_deps is the union of the step uses, and split_report.tool_uses is updated. Batch-5 check: lem-per-adic-heart-pullback-fibres and lem-per-lisse-completed-system-comparison reach only def-pod-lisse-l-adic-sheaves, a pure definition, so I accept them; the dropped node is removed. The fixed closure adds 0 sec-trace-formula or sec-poincare-duality nodes to the closure of thm-zl-relative-line-stratification and contains no dropped id. I rejected the alternative citation lem-zl-raw-heart-adic-lisse-stratification because it would add 2 batch-5 nodes. Artin-gabber route check: the dropped citation is removed and the item uses none of the excluded routes. Maintainer note: lem-zl-raw-heart-adic-lisse-stratification (Q124) overlaps the geometric part of step 2.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilGenericLissity",
+  "declaration": "WeilConjectures.weil_exists_dense_open_lisse",
+  "declarations": [
+   "WeilConjectures.zlGenericOpenModel",
+   "WeilConjectures.zlGenericOpenInclusion",
+   "WeilConjectures.zlGenericOpenModel_locallyOfFiniteType",
+   "WeilConjectures.zlGenericOpenModel_quasiCompact",
+   "WeilConjectures.weil_exists_dense_open_lisse"
+  ],
+  "file": "lean/Sheaf/Paper/WeilGenericLissity.lean",
+  "statement": "theorem weil_exists_dense_open_lisse (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [IsReduced X₀.left] (F : sfCommonStageWeilSheaf D l hl X₀ Ω) : ∃ U₀ : X₀.left.Opens, Dense (U₀ : Set X₀.left) ∧ (IsEmpty X₀.left → U₀ = ⊤) ∧ HasCommonStageLisseLattice l Ω (D.geometricFiber (zlGenericOpenModel D X₀ U₀)).left (((zlWeilPull D l hl Ω (zlGenericOpenInclusion D X₀ U₀)).obj F).obj.carrier)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the landed common-stage Weil heart, canonical normalized Weil inverse image, and integral lisse-lattice realization; includes the top-open choice on the empty model. The existing upstream WeilSheaf generic-lissity theorem has a different coefficient category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7538da8e",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement field verbatim; one sorry. Snapshot node differs from live only in lean and in two added landed stmt_deps (def-a1-common-stage-lisse-lattice, def-zl-weil-ind-sheaf-category), which the statement uses; they add no batch-5 or dropped nodes to the closure. Hypotheses match exactly (finite type as LocallyOfFiniteType+QuasiCompact, IsSeparated, IsReduced; universes u and v independent). U₀ is a dense Opens; the model open and inclusion are real data; the restriction is the canonical zlWeilPull (normalized Frobenius square), giving a Weil sheaf on U₀. Lissity via HasCommonStageLisseLattice (global finite locally free completed lattice) matches def-pod-lisse item 4. Empty case U₀=⊤ is stated. The upstream WeilSheaf generic-lissity theorem uses another category, so not existing. Docstrings carry the source and all six steps. Advisory: the Second reading section is a brief self-audit."
  }
 }
