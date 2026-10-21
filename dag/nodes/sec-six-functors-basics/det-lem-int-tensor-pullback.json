@@ -37,146 +37,91 @@
  ],
  "proof": [
   {
-   "text": "Put $R_T=\\mathcal O_{E,T}$, $C_T=(\\mathcal O_E)_T$ (the discrete constant sheaf), and $A_{n,T}=(\\mathcal O_E/\\pi_E^n)_T$. The cartesian coefficient statement gives $g^{-1}R_Y\\cong R_X$ and $g^{-1}A_{n,Y}\\cong A_{n,X}$, and identifies module pullback with the exact functor $g^{-1}$. Thus it is computed termwise on complexes, preserves distinguished triangles (it commutes with shifts and the finite direct sums and differentials defining mapping cones), and $H^q(g^*N)=g^*H^q(N)$: apply the exact functor to kernels and images of the differential. In particular it preserves a given cohomological bound. The module pullback composition isomorphisms will identify restrictions after base change.",
+   "text": "Cartesian coefficients identify $g^*$ with exact inverse image. Applying it to kernels and images gives $H^q(g^*N)=g^*H^q(N)$; it preserves bounds and mapping-cone triangles. The finite-model pullback lemma preserves constructible cohomology, using the same scalar presentations on base-changed strata and covers.",
    "uses": [
     "sk-prop-sfb-cartesian-coefficients",
     "sk-def-sfb-module-derived-pushpull",
-    "sk-def-sfb-module-pushforward-pullback"
+    "lem-sfb-pullback-constant-model-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "first paragraph; exactness and coefficient identifications"
+    "place": "First paragraph and Local models; old steps 1--2"
    }
   },
   {
-   "text": "Here is the elementary finite-presentation argument needed for the local models. For a constructible $R_T$-module $F$ on a standing scheme $T$ and a morphism $h:T'\\to T$, choose its finite stratification and, on each stratum $S$, a pro-étale covering $W_j\\to S$ with presentations $R_{W_j}^{r_j}\\xrightarrow{B_j}R_{W_j}^{s_j}\\to F|_{W_j}\\to0$, where $B_j$ has entries in $\\mathcal O_E$. The base-changed strata form a finite stratification of $T'$. The inverse-image construction sends the covering to its base-changed covering. On $W_j\\times_TT'$ exact pullback and the cartesian coefficients give the same presentation with the same scalar matrix $B_j$ over $R_{W_j\\times_TT'}$. This is a finite constant local model, so $h^*F$ is constructible by its definition. Empty strata are simply discarded.",
+   "text": "For a stratum generator $a_!M$ of the shriek lemma, the base-changed covering carries the same bounded finite free scalar complex: exact pullback and the coefficient isomorphisms preserve its terms and scalar differentials. Step 1 gives bounded constructible cohomology for $g_S^*M$. The bounded stratum base-change lemma identifies $g^*a_!M$ with $a'_!g_S^*M$, which is bounded constructible by clause (1) of the shriek lemma.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "lemma-constructible-pullback-stratification",
-    "def-weil-proetale-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "Local models: base-changed covering and unchanged scalar matrices"
-   }
-  },
-  {
-   "text": "For an open immersion $j:U\\hookrightarrow T$ of standing schemes, write $i:Z\\hookrightarrow T$ for its closed complement, and let $j':U'\\hookrightarrow T'$ and $i':Z'\\hookrightarrow T'$ be their base changes by $h:T'\\to T$. The schemes are Noetherian, so these opens are quasi-compact as morphisms. Take $N\\in D^b(U,R_U)$; this is the case needed for the generators below. Adjunction gives $\\beta:j'_!h_U^*N\\to h^*j_!N$: its adjoint is $h_U^*N\\cong j'^*h^*j_!N$, using pullback composition and $j^*j_!\\cong\\mathrm{id}$. The adjunction triangle identity makes $j'^*\\beta$ the identity under these identifications; $i'^*\\beta$ is $0\\to0$ by $i^*j_!=0$ and pullback composition. Exactness preserves cohomological bounds, so $C=\\operatorname{Cone}(\\beta)$ is bounded and the cited $D^+$ localization triangle applies. Its two end terms $j'_!j'^*C$ and $i'_*i'^*C$ are zero, hence $C=0$. Thus $h^*j_!N\\cong j'_!h_U^*N$ for these bounded complexes.",
-   "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA (lemma-closed-immersion), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); adjunction calculation of open base change"
-   }
-  },
-  {
-   "text": "For the closed immersion in the square of step 3, take $N\\in D^b(Z,R_Z)$. The unit for $i'^*\\dashv i'_*$ gives $\\gamma:h^*i_*N\\to i'_*i'^*h^*i_*N\\cong i'_*h_Z^*N$. The last identification uses pullback composition and $i^*i_*\\cong\\mathrm{id}$. The adjunction triangle identity makes $i'^*\\gamma$ the identity under these identifications, and $j'^*\\gamma$ is $0\\to0$ since $j^*i_*=0$. Both $i_*$ and $i'_*$ are exact because their complementary opens are quasi-compact, so $C=\\operatorname{Cone}(\\gamma)$ is bounded. In its localization triangle $j'_!j'^*C\\to C\\to i'_*i'^*C\\to$, the two end terms vanish, hence $C=0$ and $h^*i_*N\\cong i'_*h_Z^*N$. For a locally closed immersion factor $a=i\\circ u:S\\hookrightarrow\\overline S\\hookrightarrow T$, with $u$ open and $i$ closed. For bounded $M$ the two calculations give $h^*i_*u_!M\\cong i'_*h_{\\overline S}^*u_!M\\cong i'_*u'_!h_S^*M=a'_!h_S^*M$. All complexes entering these calculations remain bounded by exactness.",
-   "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); adjunction calculation of closed base change"
-   }
-  },
-  {
-   "text": "Consider a generator $a_!M$ supplied by clause (2) of [det-lem-int-tensor-shriek]. Write $S'=S\\times_YX$ and $g_S:S'\\to S$. On the base-changed local-model covering, $g_S^*M$ is the same bounded finite free scalar complex $P_j\\otimes_{\\mathcal O_E}R_{W'_j}$, by termwise exact pullback and coefficient compatibility. To check membership without assuming any commutation of arbitrary inverse image with inverse limits, use $M\\in\\Dbc(S,\\mathcal O_E)$: its finitely many nonzero cohomology sheaves are constructible, and the finite-presentation argument of step 2 shows that their pullbacks are constructible. Step 1 gives the same bounds and identifies these with the cohomology of $g_S^*M$. Thus $g_S^*M\\in\\Dbc(S',\\mathcal O_E)$. Clause (1) of [det-lem-int-tensor-shriek] gives $a'_!g_S^*M\\in\\Dbc(X,\\mathcal O_E)$, and steps 3--4 identify this with $g^*a_!M$.",
-   "uses": [
+    "lem-sfb-integral-bounded-stratum-base-change",
     "det-lem-int-tensor-shriek",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-scalar-matrix-inverse-image",
     "sk-def-sfb-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "Local models; preservation on stratum generators"
+    "place": "Local models; old steps 3--5"
    }
   },
   {
-   "text": "The full subcategory of $\\Dbc(Y,\\mathcal O_E)$ consisting of $N$ for which $g^*N\\in\\Dbc(X,\\mathcal O_E)$ is closed under isomorphisms and the two-out-of-three operation on distinguished triangles: by clause (1) of [sk-lem-int-integral-heart] applied on both schemes, two vertices in $\\Dbc(Y,\\mathcal O_E)$ force the third to lie there; $g^*$ takes that triangle to a triangle, and the triangulatedness of $\\Dbc(X,\\mathcal O_E)$ gives the same conclusion for their pullbacks. It contains every generator of step 5. Clause (2) of [det-lem-int-tensor-shriek] therefore implies that it contains every $K\\in\\Dbc(Y,\\mathcal O_E)$. This proves (1), by the finite-stratum dévissage required by the unit.",
+   "text": "The objects $N$ with $g^*N$ bounded constructible form a full subcategory closed under isomorphisms and two-out-of-three on triangles: step 1 preserves triangles and the integral-heart lemma makes $\\Dbc(X,\\mathcal O_E)$ triangulated. Step 2 supplies all generators. Clause (2) of the shriek lemma therefore proves (1) by finite-stratum dévissage.",
    "uses": [
-    "det-lem-int-tensor-shriek",
-    "sk-lem-int-integral-heart"
+    "sk-lem-int-integral-heart",
+    "det-lem-int-tensor-shriek"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "Dévissage paragraph"
+    "place": "Dévissage; old step 6"
    }
   },
   {
-   "text": "Apply the criterion in clause (2) of [sk-lem-integral-models] to the object $g^*K$ just proved bounded constructible. The scheme $X$ is in its separated finite-type characteristic-$p$ setting, and $E/\\mathbf Q_\\ell$ is finite with $\\ell\\ne p$, exactly as required. The same criterion applies to $K$ on $Y$. In particular both $K$ and $g^*K$ are derived $\\pi_E$-complete. Consequently its canonical unit $g^*K\\to R\\varprojlim_n(g^*K\\otimes^L_{R_X}A_{n,X})$ is an isomorphism, by [sk-def-pe-derived-completion]. Only the criterion in clause (2) is used here, not the preservation assertion in clause (3).",
+   "text": "By (1), proved in step 3, $g^*K\\in\\Dbc(X,\\mathcal O_E)$. Clause (2) of the integral-model criterion on $Y$ and $X$ makes $K$ and $g^*K$ derived complete; its hypotheses are exactly the standing separated finite-type characteristic-$p$ setting, with $E/\\mathbf Q_\\ell$ finite and $\\ell\\ne p$. Let $P$ be the flat-term K-flat representative of $K$ with which the completed-pullback definition defines $c_K$; then $c_K$ is the localization of $\\alpha_T$ for the strict tower $T_n=g^*(P\\otimes_{R_Y}A_{n,Y})$. The first chain equality $L_P\\alpha_T=\\alpha_U$ of the strict Roos normalization lemma identifies $c_K$, including transitions and augmentation, with the completion unit of $g^*K$, computed on the flat-term K-flat representative $g^*P$. That unit is invertible by the definition of derived completeness, proving the first assertion of (2).",
    "uses": [
     "sk-lem-integral-models",
-    "sk-def-pe-derived-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "Local models and comparison paragraphs: integral criterion, now applied after dévissage"
-   }
-  },
-  {
-   "text": "Derived tensor compatibility for ringed-topos pullback gives natural isomorphisms $g^*(K\\otimes^L_{R_Y}A_{n,Y})\\cong g^*K\\otimes^L_{R_X}A_{n,X}$. Naturality in the second variable makes these commute with $A_{n+1}\\to A_n$ and with the quotient maps out of $K$. Use the functorial strict reduction-tower construction of [def-weil-pbc-completed-pullback], not an unspecified cone of unrelated maps. It therefore identifies the displayed unit in step 7 with precisely $c_K$ in the statement, including its transition maps and its map from $g^*K$. Since $g^*=g^{-1}$ on these coefficient modules, its target is the stated $R\\varprojlim_ng^{-1}(K\\otimes^L A_{n,Y})$. Thus $c_K$ is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-pe-derived-completion",
+    "lem-sfb-integral-pullback-strict-roos-normalization",
     "def-weil-pbc-completed-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "first paragraph: compatible reduction tower and completion unit"
+    "place": "First paragraph and Local models; old steps 7--8"
    }
   },
   {
-   "text": "Finally $R_T\\cong\\varprojlim_n A_{n,T}$ by [det-prop-sfb-qlbar-colimit-x-integral-limit]. The cartesian coefficient isomorphism in [sk-prop-sfb-cartesian-coefficients] identifies the source $\\operatorname{Res}_X(g^*K)$ canonically with $g^{-1}\\operatorname{Res}_Y K$: the scalar-extension map is an isomorphism because $g^{-1}R_Y\\to R_X$ is one. Restriction of scalars $C_T\\to R_T$ has, by [lem-weil-pbc-constant-completion-equivalence], the natural finite-reduction comparison, its compatibility with pullback and quotient transitions, and preservation of the derived limits of these strict towers and their completion units. Hence the restriction of the target of $c_K$ is $R\\varprojlim_ng^{-1}(\\operatorname{Res}_Y K\\otimes^L_{C_Y}A_{n,Y})$, with the same comparison map. By [sk-lem-integral-models] (1),(2), $\\operatorname{Res}_Y K$ is an object of the constant-coefficient derived-complete constructible category. The last paragraph of [def-weil-pbc-completed-pullback] identifies exactly this tower and its unit with the Stacks completed inverse image (Tag 099N, proetale-lemma-pushforward-Noetherian-case, clauses (2),(5)). This proves the scalar-restriction assertion in (2).",
+   "text": "Use the second normalized equality of the strict Roos lemma: the restriction of $c_K$ is the constant-coefficient quotient-tower unit, with source identification $d$ and target identification $E_P$. Clause (2) of the integral-model criterion places $\\operatorname{Res}_YK$ in the constant derived-complete constructible category. The completed-pullback definition identifies precisely this tower and unit with Stacks completed inverse image (099N(2),(5)). This proves the scalar-restriction assertion of (2).",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-integral-pullback-strict-roos-normalization",
     "sk-lem-integral-models",
-    "def-weil-pbc-completed-pullback",
-    "sk-prop-sfb-cartesian-coefficients"
+    "def-weil-pbc-completed-pullback"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), with algebraization.tex Tag 099I (lemma-restriction-derived-complete-equivalence)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+    "place": "Comparison with the Stacks Project; old step 9"
    }
   }
  ],
  "proof_deps": [
   "sk-prop-sfb-cartesian-coefficients",
   "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-constructible",
-  "lemma-constructible-pullback-stratification",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-pullback-constant-model-constructible",
+  "lem-sfb-integral-bounded-stratum-base-change",
   "det-lem-int-tensor-shriek",
+  "lem-sfb-scalar-matrix-inverse-image",
+  "sk-def-sfb-constructible",
   "sk-lem-int-integral-heart",
   "sk-lem-integral-models",
   "sk-def-pe-derived-completion",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-completed-pullback",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-pbc-constant-completion-equivalence"
+  "lem-sfb-integral-pullback-strict-roos-normalization",
+  "def-weil-pbc-completed-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-  "place": "entire proof; expanded open/closed base change and tower-unit comparison; constructibility before completeness"
+  "place": "entire proof; finite-stratum assembly through bounded stratum base change and strict Roos normalization"
  },
  "mathlib_searches": [
   {
@@ -285,43 +230,27 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-int-tensor",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-lem-int-tensor-pullback",
   "worker": "stage1",
-  "summary": "Kept both clauses and the finite-stratum generator route. Expanded immersion base change from recollement, proved constructible local-model pullback by scalar presentations, and deduced completeness from the existing criterion after dévissage. Identified the canonical strict-tower unit and its scalar restriction. Reused existing nodes throughout; no new nodes.",
-  "blueprint": "First paragraph -> steps 1,8; Local models -> steps 2--5,7; Dévissage -> step 6; Comparison with the Stacks Project -> step 9. Completeness is checked after constructibility using the existing criterion, avoiding unsupported product-preservation assertions.",
+  "summary": "Human-requested re-split: two statement-only parallel work items separate the bounded open/closed stratum base-change argument from the strict finite-reduction/Roos/constant-scalar normalization argument. Reused the existing scalar-model pullback and scalar-matrix nodes. The statement and Lean record are unchanged. All nine old arguments are retained verbatim in the report and mapped to the new interfaces or existing nodes; the item is a short finite-stratum assembly.",
+  "blueprint": "First paragraph -> steps 1,4 and strict Roos node; Local models -> steps 1,2 and bounded stratum base-change node; Dévissage -> step 3; Comparison with the Stacks Project -> step 5 and strict Roos node.",
   "tool_uses": [
    {
     "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Exact inverse image and identification of integral and finite coefficient sheaves; a coefficient-system tool, not a replacement for dévissage."
+    "why": "Exact coefficient-compatible inverse image, used for cohomology and finite scalar complexes."
    },
    {
-    "node": "lemma-constructible-pullback-stratification",
-    "why": "Base change of the finite constructible stratification; geometric bookkeeping for the unchanged local-model route."
+    "node": "lem-sfb-pullback-constant-model-constructible",
+    "why": "Generic finite-presentation lemma supplies the old scalar-model argument without duplicating it."
    },
    {
-    "node": "lem-weil-pbc-condensed-open-closed-recollement",
-    "why": "Open/closed adjunctions and localization triangle detect the explicitly constructed base-change maps; no six-functor finiteness assertion is imported."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Exactness, vanishing cross-restrictions, and restriction identities for the same open/closed calculation."
+    "node": "lem-sfb-scalar-matrix-inverse-image",
+    "why": "The same scalar differential matrices on the pulled-back finite free models."
    },
    {
     "node": "sk-lem-integral-models",
-    "why": "Only the constant/completed comparison and derived-completeness criterion (1),(2), never its pullback-preservation clause (3)."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic monoidality and naturality of derived module pullback identify the finite reduction tower."
-   },
-   {
-    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "why": "Identification of the completed integral coefficient ring with the limit of finite constant coefficients."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic coefficient-restriction comparisons including strict derived limits and units; the unit has no more specific tower-coherence lemma."
+    "why": "Only clauses (1),(2), the constant coefficient criterion and completeness; never the pullback preservation clause (3)."
    }
   ]
  },
@@ -333,15 +262,17 @@
   "sk-lem-integral-models",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-pbc-constant-completion-equivalence"
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-pullback-constant-model-constructible",
+  "lem-sfb-scalar-matrix-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-ND-fd9913728",
-  "group": "ND",
+  "reviewer": "NT-cc-Q70-4e6beab49",
+  "group": "Q70",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-fd9913728 (reviewer sub-agent of L); spot-checked: I read the whole item, all 21 cited node statements, the blueprint statement and proof (main-20261015), the unit sk-lem-int-tensor, and Stacks proetale.tex 099L/099M/099N (lines 4273-4355) and algebraization.tex 099I (line 1427). The statement keeps the blueprint's mathematics: the same standing Noetherian schemes, the integral coefficients O_{E,X}, and both clauses. The tag change 09C4->099N is correct: 09C4 is definition-adic-constructible, and 099N clauses (2),(5) give Lf^*_comp = R lim Lf^*(M ⊗^L Λ/I^n). That is the target of c_K after restricting scalars along C->R, and the two coefficient categories are never silently identified. Steps 1-9 all check. Step 2 pulls back the scalar-matrix local models along base-changed covers and strata. Steps 3-4 build the open and closed base-change maps from adjunctions and show their cones vanish with the D^+ recollement, for bounded inputs and quasi-compact complements. Steps 5-6 do the dévissage through det-lem-int-tensor-shriek and the integral-heart lemma. Step 7 uses sk-lem-integral-models clause (2) only, and a script check over all dependencies found no cycle. Step 8 matches c_K with the strict-tower completion unit using the natural tensor-pullback isomorphism. Step 9 uses the derived-limit, unit and pullback compatibilities that lem-weil-pbc-constant-completion-equivalence states. Small cases checked: identity morphism, empty schemes, K=0, K=R_Y, the torsion sheaf (O_E/π)_Y (the H^{-1} transitions are zero, so R lim = O_E/π), and shifts. There are no new nodes. All three kinds of Mathlib search are recorded and none matches. The declared tool_uses are generic tools and I accept them. Fixes, written to fixes/dag/nodes/sec-six-functors-basics/det-lem-int-tensor-pullback.json: added four notions the statement uses to stmt_deps (def-weil-proetale-inverse-image, def-weil-pbc-constant-sheaf, def-pc-sheaf-restrict-scalars, def-weil-derived-limit; none creates a cycle), and added Tag 099N to source.external. Observation, not a fault: clause (1) is a one-line case (Λ=O_E) of the existing reviewed node lem-sfb-dc-upper-star-preserves, which the unit's proof cites. The delivery proves it again by the blueprint's dévissage, which is valid, so I left the proof unchanged. det-sfb-dc-restricted-functors-completed-pullback is correctly recorded in same_as; whether to merge it is the maintainer's call.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-4e6beab49 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited statement, the main-20261015 blueprint proof, unit sk-lem-int-tensor, and Stacks proetale 099M/099N (lines 4273-4395). The snapshot's chapter symlinks point into a pruned dagsnap, so I read the existing nodes read-only from the live DAG. Re-split compliance: the live item still has its old 9-step split and no other group has re-split it. Every old argument has a place. Old steps 3-4 became new node lem-sfb-integral-bounded-stratum-base-change. Old steps 8-9 became new node lem-sfb-integral-pullback-strict-roos-normalization. Old step 2 is the existing node lem-sfb-pullback-constant-model-constructible, which states the same base-changed strata, covers and modules, so citing it avoids a duplicate. Old steps 1 and 5-7 remain as short assembly steps. The proof is 2439 characters after the fix, the two nodes are comparable (about 1900 characters of old argument each), and neither restates a clause of the item. Node 1 is true: beta is the mate under j'_! -| j'^*, gamma is the closed unit, both are exact, the restrictions are id or 0->0 by 09AA, i^*j_!=0 and j^*i_*=0, and the cone dies in the localization sequence (09AH, with exact i_* by 09BM on Noetherian schemes). The composite for a=i∘u checks. It duplicates nothing: the existing extension-by-zero base-change nodes are étale-site and open-only, thm-sfb-dc-open-base-change-iso works on restricted D_cons, and no pro-étale closed base-change node exists. Node 2 is true. The cone and shift signs check, and the lift (0,b) is a chain map. R⊗_C A_n≅A_n and the flatness of R over C (lem-weil-pbc-constant-completion-equivalence) give theta and K-flatness of Res P, and d is the identity on g^{-1}P. Products on X_proét are exact, so R(W) models R lim. It is finer than lem-weil-pbc-pulled-reduction-strict-tower-comparison, which works only in derived categories, so it is not a duplicate. Base change and coefficients: V_n=g_C^*(Res P⊗_C A_n) is exactly Stacks 099N(5) for constant Λ applied to Res K; the constant and completed categories stay distinct. sk-lem-integral-models is used through clauses (1),(2) only, never (3), and there is no cycle. I accept the four declared tool uses. FIX to step 4: it now says g^*K∈Dbc by (1) before applying the criterion, and it names P as the flat-term K-flat representative with which def-weil-pbc-completed-pullback defines c_K, so node 2's first chain equality applies; that node is added to the step's uses, and proof_deps is unchanged. Corrected file: fixes/dag/nodes/sec-six-functors-basics/det-lem-int-tensor-pullback.json.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "lean": {

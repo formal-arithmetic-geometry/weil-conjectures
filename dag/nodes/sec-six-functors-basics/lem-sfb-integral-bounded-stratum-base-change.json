@@ -1,0 +1,81 @@
+{
+ "id": "lem-sfb-integral-bounded-stratum-base-change",
+ "kind": "statement",
+ "title": "Bounded ambient base change for integral stratum extension",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. All schemes below are separated and finite type over $k$, and all arrows are $k$-morphisms [sk-def-sfb-dc-setting]. On their small pro-étale sites put $R_V=\\mathcal O_{E,V}$ [sk-def-sfb-pulled-back-coefficients]. Use module pullback and its composition maps [sk-def-sfb-module-pushforward-pullback], applied termwise to bounded derived categories [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-categories], and open extension by zero [sk-def-sfb-module-lower-shriek].\n\nLet $h:T'\\to T$, let $j:U\\hookrightarrow T$ be open with closed complement $i:Z\\hookrightarrow T$, and form their fibre products $j':U'\\hookrightarrow T'$ and $i':Z'\\hookrightarrow T'$, with projections $h_U:U'\\to U$ and $h_Z:Z'\\to Z$ [def-pc-fibre-product, def-weil-open-immersion, def-weil-closed-immersion]. For every $N\\in D^b(U,R_U)$ the map\n$$\\beta_N:j'_!h_U^*N\\longrightarrow h^*j_!N$$\nadjoint to $h_U^*N\\cong j'^*h^*j_!N$, using the open adjunction unit and pullback composition, is an isomorphism. For every $N\\in D^b(Z,R_Z)$ the map\n$$\\gamma_N:h^*i_*N\\longrightarrow i'_*h_Z^*N$$\nis an isomorphism; it is the closed adjunction unit followed by $i'^*h^*i_*N\\cong h_Z^*N$. Under the canonical identifications, $j'^*\\beta_N$ and $i'^*\\gamma_N$ are identities, while $i'^*\\beta_N$ and $j'^*\\gamma_N$ are the maps between zero objects.\n\nConsequently, for a locally closed immersion factored as $a=i\\circ u:S\\hookrightarrow\\overline S\\hookrightarrow T$ with $u$ open and $i$ closed, put $a_!=i_*u_!$. For its base change $a'=i'\\circ u'$ and projection $h_S:S\\times_TT'\\to S$, the composite of $\\gamma^{-1}$ and $\\beta$ gives a natural isomorphism\n$$a'_!h_S^*M\\xrightarrow{\\sim}h^*a_!M\\qquad(M\\in D^b(S,R_S)).$$\nNo constructibility or derived-completeness hypothesis is imposed on these bounded inputs.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); bounded adjunction/base-change consequence"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-lower-shriek",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(locally.closed|closed.immersion).*base.change|base.change.*(extension|shriek)",
+   "results": "Mathlib/CategoryTheory/GuitartExact/KanExtension.lean | Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of locally closed extension by zero for bounded complexes of proetale sheaves with integral condensed coefficients",
+   "results": "LinearMap.baseChange_zero; HomologicalComplex.extendMap_zero; Algebra.Etale.baseChange; AlgebraicGeometry.universallyClosed_isStableUnderBaseChange; LieSubmodule.baseChange_bot; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Condensed.lanCondensedSet; Condensed.lanSheafProfinite",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bounded complexes of integral proetale module sheaves, inverse image commutes with extension by zero along a locally closed immersion via the adjunction base change maps",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|closed.*baseChange",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-tensor-pullback",
+  "date": "2026-10-21",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "Local models: 'The open–closed operations commute with base change'; old split steps 3--4, adjunction-normalized open and closed maps",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
