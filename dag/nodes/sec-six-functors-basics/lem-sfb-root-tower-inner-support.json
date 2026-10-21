@@ -20,9 +20,112 @@
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-sfb-root-tower-boundary-acyclicity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $q_P:T[P]\\to U$ be the unpunctured structural map and $H_P=Rq_{P,*}\\mathcal N_P[0]$. On $T[P]$ invert the outer parameters, obtaining $l:T_V[P]\\hookrightarrow T[P]$ and $q_{V,P}:T_V[P]\\to V$; then invert the inner ones, obtaining $j:T^\\circ[P]\\hookrightarrow T_V[P]$. The puncture-invariance input applied on $T_V[P]$ with subset $I_i$ identifies $\\mathcal N_P|_{T_V[P]}[0]$ with $Rj_*\\mathcal N_P|_{T^\\circ[P]}[0]$. Its hypotheses hold after localizing $B$ at the outer parameters: the remaining boundary is the inner one, and the already adjoined outer roots are an affine pro-etale extension there. Hence $K_P\\cong Rq_{V,P,*}\\mathcal N_P|_{T_V[P]}[0]$. Applying puncture invariance on $T[P]$ with $I_o$ and then derived composition identifies $Ra_*K_P\\cong H_P$. All these identifications use inverses of the actual open units; composition uses the conjugate of the exact inverse-image composition. Thus they keep the adjunction normalization and not just the objects.",
+   "uses": [
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: replace both punctured structural images by images of supplied unpunctured extensions"
+   }
+  },
+  {
+   "text": "For each nonempty $J\\subseteq I_i$ put $U_J=V_U(t_j:j\\in J)$, $V_J=U_J\\cap V$, with inclusions $g_J:U_J\\hookrightarrow U$ and $d_J:V_J\\hookrightarrow V$. Define $T_J$ by setting the roots indexed by $J$ to zero, as in the coordinate-face input, and denote the restricted lisse module by $\\mathcal N_{J,P}$. Apply its $\\beta_{J,P}$ over $V$ to the unpunctured presentation of $K_P$ in step 1. This gives $d_J^*K_P\\cong Rq_{V_J,P,*}\\mathcal N_{J,P}|_{T_{V_J}[P]}[0]$. Exactness of the closed direct image and derived composition turn $Ra_*d_{J,*}d_J^*K_P$ into the structural image of this restriction on $U$. Apply puncture invariance to the tower $T_J[P]$ with subset $I_o$: its chart is the regular intersection of the branches indexed by $J$, its remaining boundary parameters are those outside $J$, and $U_J$ is its affine pro-etale pullback. This application is local on that chart: discard empty branches and choose affine open neighborhoods on which the restricted components are the branches; the resulting comparisons glue because they are the actual open units. The defining regular-intersection clause of the strict normal crossings boundary supplies precisely this regularity. We get\n$$Ra_*d_{J,*}d_J^*K_P\\cong g_{J,*}R(q_{J,P})_*\\mathcal N_{J,P}[0]\\cong g_{J,*}g_J^*H_P.$$\nThe last comparison is the coordinate-face input over $U$. Its adjunct-unit normalization identifies $Ra_*$ of the closed unit $K_P\\to d_{J,*}d_J^*K_P$ with the closed unit $H_P\\to g_{J,*}g_J^*H_P$ under step 1. Compatibility for nested faces identifies all restriction maps in these diagrams as well.",
+   "uses": [
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: compute each inner intersection and normalize its unit"
+   }
+  },
+  {
+   "text": "The closed subschemes $V_{\\{d\\}}$, $d\\in I_i$, cover $Z$ as closed subsets: a prime contains the product of the inner parameters if and only if it contains one of them. They factor through the reduced $Z$: apply [lem-sfb-snc-root-limit-normal-charts] with no root parameters to each regular finite-type divisor chart and its weakly etale algebra $R/(t_d)$. It gives normality, hence reducedness, of this algebra. Indeed a nilpotent vanishes in every domain prime localization, and therefore vanishes in the ring. A map from this reduced divisor to the scheme-theoretic union annihilates its nilradical and so factors through $Z$. Their nonempty intersections are $V_J$. Their complementary opens are quasi-compact, being finite unions of principal opens on the affine localization $V$. Apply the finite closed-cover resolution to $K_P$ on $V$ and $h:Z\\hookrightarrow V$. It applies to this derived object using a nonnegative representative, since $K_P$ is the right derived direct image of a module in degree zero. Its augmentation identifies $\\eta_{h,K_P}$ with the augmentation into the finite alternating complex of the $d_{J,*}d_J^*K_P$. Apply $Ra_*$ and then $s^*$. A finite total complex is formed by finitely many shifts and cones, which these derived functors preserve. Step 2 identifies its terms with $s^*g_{J,*}g_J^*H_P$.",
+   "uses": [
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-coordinate-face",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-snc-root-limit-normal-charts",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: resolve the reduced inner union using closed intersections, preserving the original unit"
+   }
+  },
+  {
+   "text": "Every $g_J$ contains $S$, so write $s=g_Js_J$. By the invertible closed counit,\n$$s^*g_{J,*}g_J^*H_P\\cong s_J^*g_J^*g_{J,*}g_J^*H_P\\cong s_J^*g_J^*H_P=s^*H_P.$$\nThe triangle identity sends the restriction of the unit $H_P\\to g_{J,*}g_J^*H_P$ to the identity of $s^*H_P$. Hence every term and every face map of step 3 is the constant diagram on $A_P=s^*H_P$, with its signed alternating differential, and its augmentation is the diagonal identity. In particular this is a statement about the actual map induced by $\\eta_h$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-root-tower-coordinate-face"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: closed counit and triangle identity trivialize the restricted finite diagram"
+   }
+  },
+  {
+   "text": "Choose the least element $d_0$ of the nonempty ordered set $I_i$. For an abelian group (or sheaf) $G$, the augmented alternating complex of nonempty subsets of $I_i$ with constant value $G$, identity face maps and augmentation the diagonal, is contractible. Explicitly, for an alternating cochain $c$, extended by antisymmetry and by zero on repeated indices, put $(Hc)(a_0,\\ldots,a_{n-1})=c(d_0,a_0,\\ldots,a_{n-1})$; in degree zero $H$ is evaluation at $d_0$ into the augmentation object. In $dH+Hd$ the terms deleting an $a_j$ cancel in pairs, and deleting $d_0$ leaves $c$; this also covers the augmented degree $-1$. Step 4 identifies the terms with $A_P$ and the face maps with identities only in the derived category, so do not contract at chain level. Filter the augmented finite total complex of step 3, after $s^*Ra_*$, by horizontal degree; this filtration has finitely many steps and each graded piece is a shifted term, so the exact triangulated functor $s^*Ra_*$ carries it to a finite tower of distinguished triangles. Its first-page differentials are induced by the horizontal maps. On each cohomology sheaf $\\mathcal H^q$ the first page is therefore the constant augmented alternating complex on $\\mathcal H^q(A_P)$ with diagonal augmentation, which the homotopy $H$ contracts. A finitely filtered complex whose first page is exact is acyclic, so the cone of the augmentation $A_P\\to s^*Ra_*(\\text{total complex})$ is zero and the augmentation is an isomorphism. Steps 1--4 now show that\n$$\\delta_P=s^*Ra_*(\\eta_{h,K_P}):s^*R(af_P)_*\\mathcal N_P[0]\\longrightarrow s^*Ra_*h_*h^*K_P$$\nis invertible: its composite with the step-3 isomorphism onto the total complex is this augmentation. This elementary argument uses a finite complex only.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: explicit simplex contraction proves invertibility of the supported restriction map"
+   }
+  },
+  {
+   "text": "Let $B_P=p_S^*R\\underline{\\operatorname{Hom}}_{C_F}(C_F[P],M_F)$. The boundary-acyclicity node gives the specified restriction-of-sections isomorphism $\\alpha_P:s^*R(af_P)_*\\mathcal N_P[0]\\cong B_P$: its chart is $B$, its affine pro-etale object is $U$, its full boundary intersection is $S$, and its lisse extension and boundary trivialization are exactly the supplied ones. Define $\\sigma_P=\\alpha_P\\delta_P^{-1}$. This is an isomorphism and associativity gives $\\sigma_P\\delta_P=\\alpha_P$, with the canonical derived composition from step 1. Consequently the required normalization follows from the given comparison, rather than from a new choice of target identification.",
+   "uses": [
+    "lem-sfb-root-tower-boundary-acyclicity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: define the normalized supported comparison by the given boundary comparison"
+   }
+  },
+  {
+   "text": "Naturality of the actual closed unit makes $\\delta_P$ a natural transformation. Steps 1--4 use the natural open units, coordinate-face comparisons, and the natural finite closed-cover augmentation, so their identifications commute with maps of $P$, maps of supplied extensions, and pro-etale base change of $U$. For a profinite family indexed by $Q$, apply those same constructions to the $Q$-parametrized terms; the family clauses of the two root-tower inputs identify the entire diagrams, including their units. Thus the equality for $\\delta_P$ holds on these terms. The boundary comparison has exactly this family naturality as well. Inverting a natural isomorphism preserves its commuting squares, so $\\sigma_P=\\alpha_P\\delta_P^{-1}$ has every required naturality and equivariance. The temporary choice $d_0$ proves invertibility only and occurs in neither $\\delta_P$ nor $\\sigma_P$. If $I_o$ is empty, the outer open unit is the identity and the argument still applies. With one inner branch the finite resolution has one term. If $S$ is empty both sides are zero on its site. Rank zero gives zero throughout. No step uses a root-nerve totalization or group invariants.",
+   "uses": [
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-boundary-acyclicity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: naturality on parametrized terms and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-root-tower-puncture-invariance",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-root-tower-coordinate-face",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-sfb-finite-closed-cover-resolution",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-snc-root-limit-normal-charts",
+  "lem-sfb-root-tower-boundary-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent-written one-term proof using puncture invariance, unpunctured coordinate-face base change, and finite closed-cover resolution. Exact all-continuous geometric inputs remain WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +161,38 @@
    "results": "8 hits: Condensed.profiniteSolid, Profinite.NobelingProof.succ_exact, CondensedMod.IsSolid, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, CondensedMod.ofSheafProfinite",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived closed support restriction of a full Kummer root tower after direct image across outer punctures",
+   "results": "8 hits: RootPairing.restrictScalars_coe_root, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, Polynomial.Gal.restrictDvd, AlgebraicGeometry.Scheme.zeroLocus_map, Polynomial.support_restriction, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, Polynomial.Gal.restrictComp_surjective, Polynomial.Gal.galActionHom_restrict",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state this pro-etale internal-module assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"support\", \"derived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state this pro-etale internal-module assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|rootTower).*(closed|support|boundary)|(closed|support).*rootTower",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state this pro-etale internal-module assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of a full parameter root tower with inner closed support and outer punctures",
+   "results": "8 hits: derivedSet, support_iteratedFDeriv_subset, isScalarTower_of_section_of_ker_sqZero, RootPairing.Base.span_root_support, RootPairing.Base.root_mem_span_int, RootPairing.Base.root_mem_or_neg_mem, support_deriv_subset, RootPairing.Base.span_coroot_support",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state this pro-etale internal-module assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-partial-kummer-boundary-unit-model",
@@ -85,5 +216,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-root-tower-inner-support",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Proved invertibility of the actual closed-unit map by replacing punctured images by unpunctured ones, computing all coordinate faces, and contracting a finite closed-cover resolution; defined the normalized isomorphism using the existing boundary comparison. Three distinct input lemmas are statement-only obligations, with logged Mathlib searches. Checked all family naturality and edge cases.",
+  "blueprint": "Paragraph (3), open direct-image stability: the one-root-tower inner-support term of the partial Kummer calculation, before group descent. The ancestor command returns None; preserved the inherited null ancestor and recorded exact placement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic module closed/open adjunction, exactness and invertible closed counit; used as a ringed-topos tool, not an alternate proof route."
+   },
+   {
+    "node": "def-trf-strict-normal-crossings-boundary",
+    "why": "Regularity of coordinate intersections in the supplied boundary definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-trf-strict-normal-crossings-boundary"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-04c71912c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-04c71912c (reviewer sub-agent of L); spot-checked: I read the whole delivery; it gets two small repairs. This is a first split, not a re-split: there is no repair note, and the item was unsplit with the same statement on the N6 snapshots. Its source, blueprint main-20261015 ctf-stability direct-images proof paragraph (3), gives no root-tower argument, so labelling the proof as agent-written is correct. The proof works. Step 1: puncture invariance applies with base V, which is affine pro-etale over B, first for the inner subset and then for the outer subset on T, giving Ra_*K_P ≅ H_P. Step 2: coordinate-face applies directly over V for every J inside the inner index set. Puncture invariance on T_J uses the regular face chart V(t_J), with Zariski localization when branches are disconnected or empty, and the adjunct clause matches the units. Step 3: the V_d cover Z and their complements are quasi-compact principal opens. Normal-charts with no roots gives reducedness, and the closed-cover augmentation is the closed unit. Step 4: the closed counit and triangle identity make every term and face map constant. Step 6: sigma is alpha times delta inverse, and boundary-acyclicity matches the same chart, U, S, module and trivialization. Step 7: naturality holds before inversion. The three new nodes are statement-only, true as far as I can test, not duplicates and not restatements of the item. Puncture invariance follows from Abhyankar on the regular Kummer levels plus pro-p wild inertia with l different from p. Coordinate-face is integral closed base change plus topological invariance, checked on r=1. The closed-cover resolution holds in any ringed topos: by Stacks 09AH it reduces to Mayer-Vietoris for subterminal objects. Fixes: (E5) step 5 contracted a strictly constant double complex, but step 4 identifies the terms only in the derived category. It now filters the finite total complex by columns and contracts the first page on cohomology sheaves. (B3) The closed-cover node now cites def-weil-closed-immersion in its statement and stmt_deps. Batch 5: def-trf-strict-normal-crossings-boundary is a general SNC definition, not part of the trace-formula or Poincare-duality proofs, and the item already cited it on base, so it is accepted. Accepted tool uses: ringed-open-closed and the SNC definition; derived-composition is a reviewed generic tool with Lean. No SGA, no cycle, no target weakened.; 2 file(s) fixed by the reviewer"
  }
 }
