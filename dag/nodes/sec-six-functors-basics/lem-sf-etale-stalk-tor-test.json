@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Kernels and images of maps of module sheaves inherit the action of $A_T$, and their quotient has the induced action, so their underlying abelian sheaves compute the same kernels, images and cohomology. For any representing complex $C$ of $A_T$-module sheaves, apply exactness of geometric stalks to its underlying abelian sheaves. The exact-functor homology comparison, applied in degrees $i-1,i,i+1$, gives $H^i(C)_{\\bar t}\\cong H^i(C_{\\bar t})$. In particular termwise stalks send quasi-isomorphisms to quasi-isomorphisms, so this identity is valid for every $E\\in D(T_{\\mathrm{et}},A)$. A module sheaf is zero exactly when its underlying abelian sheaf is zero. Apply geometric-stalk conservativity to the map from that underlying abelian sheaf to zero: $H^i(E)=0$ if and only if $H^i(E_{\\bar t})=0$ for every $\\bar t$. This uses no bound on $E$.",
+   "text": "Apply the existing exact geometric stalk functor directly to module-valued sheaves. Functor.mapDerivedCategoryHomologyFunctorIso identifies the stalk of each cohomology sheaf with the cohomology of the derived stalk, without a boundedness assumption. The universe-lifted algebraic-closure points jointly reflect isomorphisms for ModuleCat A coefficients. Therefore a module sheaf H is zero if all its ordinary geometric stalks are zero: use uliftSheafFiberIso to pass to the conservative lifted family, apply isIso_of_isIso_sheafFiber_map to the zero morphism H → 0, and transport the zero-object property through that isomorphism. This is the module-valued specialization of exactness, homology comparison and conservativity already stated by the dependencies.",
    "uses": [
     "prop-weil-pbc-geometric-stalks-exact",
     "lem-sp-exact-functor-preserves-homology",
@@ -53,9 +53,8 @@
    }
   },
   {
-   "text": "Let $u:U\\to T$ be any scheme morphism and suppose $K$ has Tor amplitude $[a,b]$. The constant-coefficient module inverse image is exact, agrees with inverse image on underlying abelian sheaves, and identifies $u^{-1}A_T$ with $A_U$. Thus $u^*K$ is represented by applying $u^*$ termwise. For a geometric point $\\bar v$ of $U$, the natural inverse-image stalk comparison gives $(u^*C^n)_{\\bar v}\\cong C^n_{u\\circ\\bar v}$ in every degree. These are additive and $A$-linear: the canonical comparison respects products and addition, and its naturality for each scalar-multiplication map $m_c:C^n\\to C^n$ gives $c\\,x\\mapsto c\\,x$ for all $c\\in A$. Naturality for $d^n$ makes them an isomorphism of complexes. By exactness of stalks it induces $(u^*K)_{\\bar v}\\cong K_{u\\circ\\bar v}$ in $D(A)$. Step 2 says that this complex tensored with any $A$-module has cohomology in $[a,b]$. Applying step 3 on $U$ proves that $u^*K$ has the same Tor interval.",
+   "text": "For a scheme morphism u:U → T, use the exact ModuleCat A-valued upperStar functor already supplied by the source library. The module-valued natural isomorphism upperStarCompSheafFiberIso identifies upperStar u followed by the stalk at v with the stalk at v ≫ u. Apply Functor.mapDerivedCategoryNatIso and Functor.mapDerivedCategoryCompIso to obtain the same identification on unbounded derived categories. Tensor its component on the right with an arbitrary M[0] and apply homology. The forward direction of the stalk test on T gives vanishing; transport it through this isomorphism, then use the converse of the stalk test on U. The existing exact-functor instances and the module-valued stalk comparison already incorporate linearity and differential compatibility, so no reconstruction of a SheafOfModules inverse-image witness is needed.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
     "lemma-openclosed-stalk-upperstar",
     "prop-weil-pbc-geometric-stalks-exact"
    ],
@@ -73,13 +72,12 @@
   "def-kun-tor-amplitude",
   "lem-sfb-geometric-stalk-tensor-constant-single",
   "lem-sfb-etale-derived-tensor-stalk",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), proof specialized to constant coefficients, with the forward implication tested on constant module sheaves; inverse-image consequence from etale-cohomology.tex Tag 03Q1 (lemma-stalk-pullback)."
+  "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), proof specialized to constant coefficients, with the forward implication tested on constant module sheaves; inverse-image consequence from etale-cohomology.tex Tag 03Q1 (lemma-stalk-pullback). Lean implementation uses the existing exact module-valued sheafFiber and upperStar functors and their derived homology, single-object and composition comparisons; the four mathematical steps and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -234,5 +232,15 @@
   "result": "pass",
   "note": "lem-sf-etale-stalk-tor-test at 79f0a644: every clause matches the node. Ring any commutative A (Type u+1), no extra hypotheses; K an unbounded DerivedCategoryModule; a ≤ b kept; the iff ranges over all geometric points (Ω : Type u, algebraically closed) and all modules (ModuleCat.{u+1} A); i < a ∨ b < i → IsZero(H^i(stalk K ⊗ M[0])), where ⊗ is the derived monoidal structure on D(ModuleCat A) (checked by #synth); the pullback conjunct holds for arbitrary f with the same interval, via upperStar.mapDerivedCategory, which is the framework's own D((f)^*[A]). Point.sheafFiber is the colimit of the same diagram as the recorded pointedEtaleStalk and is the convention the landed lem-sfb-etale-derived-tensor-stalk uses, so it is not a second definition. torAmplitudeIn_leftDerivedUpperStar is about a different flat-model predicate, so not a duplicate. Only the node's lean field changed and lean.statement matches the file verbatim. Docstrings carry the source and the four proof steps; imports are statement-dep and proof-dep modules (lean_audit modules for the two Mathlib-matched proof deps); no line over 100 characters. nt_compile --json is clean in 2.6 s, and a control copy with an injected error fails as expected. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261021T061000-L-1681833",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

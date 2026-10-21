@@ -5,17 +5,10 @@ Authors: SHEAF group Q61
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.SixFunctors.GeometricStalkTensorConstantSingle
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Geometric-stalk test for Tor intervals on the small etale site
 
@@ -35,7 +28,7 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory ZeroObject
 open AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Etale
@@ -83,6 +76,57 @@ theorem geometricStalk_torAmplitude_test
       DerivedCategory.hasTorAmplitudeIn A T a b K →
         DerivedCategory.hasTorAmplitudeIn A U a b
           ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)) := by
-  sorry
+  have test (S : Scheme.{u}) (L : DerivedCategoryModule A S) :
+      DerivedCategory.hasTorAmplitudeIn A S a b L ↔
+        ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
+          (M : ModuleCat.{u + 1} A) (i : ℤ), i < a ∨ b < i →
+          IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).obj
+            (((pointSmallEtale s).sheafFiber
+              (A := ModuleCat.{u + 1} A)).mapDerivedCategory.obj L ⊗
+              (_root_.DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) 0).obj M)) := by
+    constructor
+    · intro h Ω _ _ s M i hi
+      let F := (pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} A)
+      have hz := h ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) i hi
+      have hs := (F.map_isZero hz).of_iso
+        ((F.mapDerivedCategoryHomologyFunctorIso i).app _).symm
+      exact hs.of_iso
+        ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).mapIso
+          (geometricStalk_tensor_constant_single A s L M).some).symm
+    · intro h G i hi
+      let H := (_root_.DerivedCategory.homologyFunctor
+        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) i).obj
+          (((derivedTensor (ModuleCat.{u + 1} A) S).obj L).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj G))
+      have hz (x : S) : IsZero
+          ((pointSmallEtale (S.algClosurePoint x)).sheafFiber
+            (A := ModuleCat.{u + 1} A) |>.obj H) := by
+        let F := (pointSmallEtale (S.algClosurePoint x)).sheafFiber
+          (A := ModuleCat.{u + 1} A)
+        obtain ⟨e, _, _⟩ := exists_derivedTensor_stalk_iso A (S.algClosurePoint x)
+        let eG := (F.mapDerivedCategorySingleFunctor 0).app G
+        let eTensor := e L ((_root_.DerivedCategory.singleFunctor _ 0).obj G) ≪≫
+          (tensorLeft (F.mapDerivedCategory.obj L)).mapIso eG
+        have hs := (h _ (S.algClosurePoint x) (F.obj G) i hi).of_iso
+          ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).mapIso eTensor)
+        exact hs.of_iso ((F.mapDerivedCategoryHomologyFunctorIso i).app _)
+      have : IsIso (0 : H ⟶ 0) := Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦
+        (NatIso.isIso_map_iff (GrothendieckTopology.Point.uliftSheafFiberIso.{u + 1}
+          (pointSmallEtale (S.algClosurePoint x)) (ModuleCat.{u + 1} A)) _).2
+          (isIso_of_source_target_iso_zero _ (hz x).isoZero
+            (Functor.map_isZero _ (isZero_zero _)).isoZero)
+      exact (isZero_zero _).of_iso (asIso (0 : H ⟶ 0))
+  refine ⟨test T K, ?_⟩
+  intro U f hK
+  apply (test U _).2
+  intro Ω _ _ s M i hi
+  let F := (pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} A)
+  let e := (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) f) F).symm
+    ≪≫ Functor.mapDerivedCategoryNatIso (upperStarCompSheafFiberIso
+      (ModuleCat.{u + 1} A) f s)
+  exact ((test T K).1 hK Ω (s ≫ f) M i hi).of_iso
+    ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).mapIso
+      ((tensorRight ((_root_.DerivedCategory.singleFunctor
+        (ModuleCat.{u + 1} A) 0).obj M)).mapIso (e.app K)))
 
 end AlgebraicGeometry.Etale
