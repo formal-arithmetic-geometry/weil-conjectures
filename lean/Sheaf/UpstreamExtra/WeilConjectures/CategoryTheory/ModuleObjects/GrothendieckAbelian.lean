@@ -1,13 +1,6 @@
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
@@ -45,16 +38,13 @@ The intended arguments are:
 
 universe v u
 
-open CategoryTheory MonoidalCategory Limits
+open CategoryTheory MonoidalCategory Limits MonObj
 
 namespace CategoryTheory.Mod
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
   {R : C} [MonObj R] [IsCommMonObj R]
-
-open MonObj in
-section
 
 /-- The quotient map defining the relative tensor product is linear in its first factor. -/
 private noncomputable def relativeTensorπ (M N : Mod C R) :
@@ -113,17 +103,21 @@ private noncomputable def relativeTensorRightIso (N : Mod C R) :
     cases j <;> apply Mod.hom_ext <;>
       simp [relativeTensorCofork, relativeTensorπ, tensorObjπ_whiskerRight])
 
-end
+/-- Tensoring module objects preserves colimits, hence has a right adjoint.
 
-omit [MonoidalPreadditive C] in
-/-- The equalizer adjunction, transported along the relative tensor comparison. -/
-private lemma relativeTensor_isLeftAdjoint (M : Mod C R) :
-    (MonoidalCategory.tensorLeft M).IsLeftAdjoint :=
-  ⟨ihom' R M, ⟨(ihom'Adjunction R M).ofNatIsoLeft
-    (relativeTensorRightIso M ≪≫ (BraidedCategory.tensorLeftIsoTensorRight M).symm)⟩⟩
-
-open MonObj in
-section
+Compare the monoidal tensor with the colimit-preserving coequalizer tensor constructed in
+`WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor`. The special adjoint functor theorem
+applies because the module category is Grothendieck abelian and has a separator.
+(blueprint: lem-weil-pbc-module-relative-tensor-adjoint) -/
+theorem relativeTensor_isLeftAdjoint (M : Mod C R) :
+    (MonoidalCategory.tensorLeft M).IsLeftAdjoint := by
+  have : IsGrothendieckAbelian.{v} (Mod C R) := isGrothendieckAbelian R
+  have : PreservesColimits (MonoidalCategory.tensorRight M) :=
+    preservesColimits_of_natIso (relativeTensorRightIso M)
+  have : PreservesColimits (MonoidalCategory.tensorLeft M) :=
+    preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm
+  exact isLeftAdjoint_of_preservesColimits_of_isSeparating
+    (isSeparator_separator (Mod C R)) _
 
 /-- The free relative tensor product is the ordinary tensor product, by the split action
 coequalizer. -/
@@ -215,7 +209,6 @@ private noncomputable def freeTensorForgetIso (F : C) :
     exact congrArg (fun k ↦ (α_ M.X R F).inv ≫ k ▷ F)
       (congrArg Hom.hom (rightActHom_naturality f)))
 
-omit [MonoidalPreadditive C] in
 /-- A free module on a flat ambient object is flat for the relative tensor product. -/
 private lemma flat_free {F : C} (hF : ObjectProperty.flat F) :
     ObjectProperty.flat ((free R).obj F) := by
@@ -231,7 +224,4 @@ private lemma flat_free {F : C} (hF : ObjectProperty.flat F) :
   simp only [ObjectProperty.flat, exactFunctor_iff]
   exact ⟨⟨inferInstance, inferInstance⟩, ⟨inferInstance, inferInstance⟩⟩
 
-end
-
-omit [MonoidalPreadditive C] in
 end CategoryTheory.Mod
