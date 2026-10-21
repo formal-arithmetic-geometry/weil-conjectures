@@ -104,14 +104,14 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.FilteredStableSubquotient",
-  "file": "lean/Sheaf/CategoryTheory/FilteredStableSubquotient.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.FilteredStableSubquotient",
+  "file": "lean/WeilConjectures/CategoryTheory/FilteredStableSubquotient.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.stableSubquotient_at_bounds",
   "statement": "theorem stableSubquotient_at_bounds\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K)\n    (p n r : ℤ) (hr : 1 ≤ r)\n    (hupper : L.complexStep (p + r) (n + 1) = ⊥)\n    (hlower : L.complexStep (p - r + 1) (n - 1) = ⊤)\n    (hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r) :\n    Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅\n      (L.homologyFiltration n).gradedPiece p)",
   "branch": "sheaf-dag",
-  "by": "P1",
-  "date": "2026-10-12"
+  "by": "M3",
+  "date": "2026-10-21"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -126,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-0b3f9",
-  "group": "T1",
+  "reviewer": "C-62dd2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261021T005752-L-1890573",
+  "landing": "20261021T024152-L-3040755",
   "kind": "interface",
-  "note": "independent cc review: removed Sheaf cohomologyImage abbrev vs the homologyFiltration rename in 6 consumers (diff vs clones/live, rename/import only); 4 node lean.statement records vs delivered signatures; lcompile --all 7 modules exit 0; no importers outside the delivered set"
+  "note": "independent cc review: Sheaf stableSubquotient_at_bounds (live) vs upstream WeilConjectures.CategoryTheory.FilteredStableSubquotient: byte-identical body; node lean record vs upstream signature; importers of the Sheaf module: none"
  }
 }
