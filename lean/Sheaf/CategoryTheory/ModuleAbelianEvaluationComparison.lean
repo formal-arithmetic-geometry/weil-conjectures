@@ -13,12 +13,12 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 
 /-!
@@ -56,7 +56,9 @@ private theorem forgotten_injective_evaluation_acyclic
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-private noncomputable def exact_comp_comparison
+/-- An exact functor sending injectives to acyclic objects commutes with right derivation.
+The components are computed from the mapped injective resolutions. -/
+noncomputable def exact_comp_comparison
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [Abelian B] [Abelian D]
     [EnoughInjectives A] [EnoughInjectives B]
@@ -100,7 +102,8 @@ private noncomputable def exact_comp_comparison
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-private theorem exact_comp_comparison_formula
+/-- The exact-composite comparison is computed by every compatible resolution lift. -/
+theorem exact_comp_comparison_formula
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [Abelian B] [Abelian D]
     [EnoughInjectives A] [EnoughInjectives B]
@@ -140,7 +143,8 @@ private theorem exact_comp_comparison_formula
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-private theorem exact_comp_comparison_zero
+/-- The exact-composite comparison preserves the canonical degree-zero augmentation. -/
+theorem exact_comp_comparison_zero
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [Abelian B] [Abelian D]
     [EnoughInjectives A] [EnoughInjectives B]

@@ -17,32 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] at the object $W$. Its smallness, common-universe and enough-injectives hypotheses are precisely those of the item; its ring sheaf is arbitrary and its modules are left modules, with no commutativity or flatness requirement. It supplies canonical additive isomorphisms $\\alpha^q_M:R^q\\Gamma_{\\mathrm{Mod},W}(M)\\xrightarrow{\\sim}H^q(W,M_{ab})$, natural in $M$, with $\\alpha^0_M$ the identity under the usual degree-zero evaluation identifications.",
-   "uses": [
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, second equality and proof"
-   }
-  },
-  {
-   "text": "Put $G=M_{ab}$. By [def-weil-pbc-sites-and-cohomology] the abelian sheaf category has enough injectives; choose an injective resolution $G\\to J^\\bullet$ as in [def-sp-injective-resolutions]. Restriction $j_W^*$ to the slice is exact by [lem-weil-pbc-site-restriction-injectives] and sends injective abelian sheaves to injective abelian sheaves by [lem-weil-pbc-cohomology-over-object-localization]. Thus $G|_W\\to J^\\bullet|_W$ is an injective resolution: exactness preserves its augmented exact sequence, and every restricted term is injective. This uses an abelian resolution of $G$, not a claim that the forgotten terms of a module resolution are injective.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-site-restriction-injectives",
-    "lem-weil-pbc-cohomology-over-object-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03F3, lemma-cohomology-of-open (1) and proof; exact restriction and extension by zero: sites-modules.tex Tags 03DI and 03DJ"
-   }
-  },
-  {
-   "text": "The object $\\operatorname{id}_W$ is terminal in $\\mathcal C/W$: the only morphism from $V\\to W$ to it is the structure arrow. By [def-pur-localized-ringed-site], $\\Gamma(\\operatorname{id}_W,J^n|_W)=J^n(W)$ and this equality respects both differentials and augmentations. The cohomology definition [def-weil-pbc-sites-and-cohomology] therefore computes $H^q(W,G)$ and $H^q(\\mathcal C/W,G|_W)$ by the identical complex $J^\\bullet(W)$. Let $\\beta^q_G$ be its identity-induced additive isomorphism. A comparison chain map over the identity of $G$ restricts to the same evaluated chain map; hence the resolution-independence identifications specified in that definition agree on both sides. Likewise a chain map lifting $G\\to G'$ evaluates to the same map on both sides, proving naturality of $\\beta$. In degree zero, both augmentations are the same $G(W)\\to J^0(W)$, so $\\beta^0_G$ identifies $G(W)$ with $G|_W(\\operatorname{id}_W)$ by the identity.",
+   "text": "Put A = SheafOfModules.toSheaf R, B = J.overPullback AddCommGrpCat W, T = A followed by B, and F = evaluation of abelian sheaves on the slice at id_W. A is exact: finite limits are preserved by the module forgetful functor, and finite colimits by the proved source instance SheafOfModules.preservesFiniteColimits_toSheaf. B is additive sectionwise, preserves finite limits as a continuous sheaf pushforward, and preserves colimits by Mathlib sheafAdjunctionCocontinuous for Over.forget W. Hence T is exact. T followed by F is definitionally module evaluation at W. The two abelian sheaf categories have enough injectives by their Grothendieck abelian instances.",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-pbc-sites-and-cohomology"
@@ -50,16 +25,53 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03F3, lemma-cohomology-of-open (2), proof: equality of the section complexes"
+    "place": "Tags 03FD and 03F3; exact forgetting and sectionwise restriction"
    }
   },
   {
-   "text": "Define the asserted comparison as $\\beta^q_{M_{ab}}\\circ\\alpha^q_M$. Its source and target are the two groups in the statement. It is an additive isomorphism as a composite of additive isomorphisms. For a module morphism $f:M\\to N$, the naturality squares for $\\alpha$ and for $\\beta$ at $f_{ab}$ paste to the naturality square for this composite. When $q=0$ each factor is the identity of $M(W)$ under the evaluation identifications established above. The construction imposes neither injectivity of $M_{ab}$ nor flatness of $\\mathcal O$ over the integer sheaf.",
+   "text": "For every injective module I and n > 0, apply lem-sc-injective-module-abelian-acyclic-zariski in its already proved arbitrary-site form to get H^n(W,A(I)) = 0. Transport zero across lem-weil-pbc-cohomology-over-object-localization to H^n(id_W,T(I)), and then across lem-sc-site-cohomology-right-derived-sections to R^n F(T(I)). Thus T sends injectives to F-acyclic objects. This uses neither injectivity of A(I) nor flatness over the integer sheaf.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-sc-site-cohomology-right-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, positive cohomology of forgotten injective modules; Tag 03F3(2), slice localization"
+   }
+  },
+  {
+   "text": "For each module M choose its existing injectiveResolution I. Exactness of T makes T.mapResolution I.ι a resolution by F-acyclic objects. Compose I.isoRightDerivedObj (T followed by F) q with the inverse of F.rightDerivedObjIsoOfResolution on this mapped resolution. For a module morphism use InjectiveResolution.desc and its augmentation equation. Apply lem-sc-acyclic-comparison-natural and the naturality of isoRightDerivedObj; reassociation gives naturality of these components, defining e_q by NatIso.ofComponents. This is the existing public exact_comp_comparison construction already used in ModuleAbelianEvaluationComparison, now applied directly to T.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-sc-acyclic-comparison-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E, acyclic resolutions and naturality of the comparison"
+   }
+  },
+  {
+   "text": "Apply lem-sc-ext-derived-composite to T and F. Its formula for all augmentation-compatible lifts identifies the constructed comparison with the canonical object comparison: compare on the chosen resolutions and canonical descOfQuasiIso lift, where both formulas reduce to the same homology map. The complex-composition isomorphism for the identity composite is the identity componentwise. Cancel the target resolution isomorphism to obtain exactly the displayed formula for arbitrary I, K and φ (the imported exact_comp_comparison_formula).",
+   "uses": [
+    "lem-sc-ext-derived-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, exact-composite comparison and its formula via acyclic resolutions"
+   }
+  },
+  {
+   "text": "In degree zero take the chosen resolutions and canonical comparison lift. The augmentation compatibility equation implies equality after the inclusion of cycles, so cancel that inclusion to identify the two maps into cycles. Use toRightDerivedZero_eq, naturality of the homology projection, and the lift formula from the preceding step to show the two augmentations agree after the comparison. Cancel the target resolution isomorphism and conclude the displayed natural-transformation equation (the imported exact_comp_comparison_zero). Assemble the isomorphisms, this normalization, and the all-lifts formula. All arguments remain valid for the zero ring or module, noncommutative coefficients, and sites without a final object.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03FD and 03F3, composition of the normalized comparisons"
+    "place": "Tags 03FD and 03F3, comparison in degree zero and identity of section augmentations"
    }
   }
  ],
@@ -67,14 +79,20 @@
   "def-pur-localized-ringed-site",
   "def-sp-injective-resolutions",
   "def-weil-pbc-sites-and-cohomology",
+  "lem-sc-acyclic-comparison-natural",
+  "lem-sc-ext-derived-composite",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-site-cohomology-right-derived-sections",
   "lem-weil-pbc-cohomology-over-object-localization",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-site-restriction-injectives"
+  "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "G1",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 03FD (module/abelian comparison) and 03F3 (abelian localization, identity of section complexes)"
+  "place": "Tags 03FD and 03F3(2), using derived.tex Tags 015E and 015M",
+  "note": "Direct exact-composite comparison for forgetting followed by slice restriction. Import and use the existing exact_comp_comparison, exact_comp_comparison_formula and exact_comp_comparison_zero from ModuleAbelianEvaluationComparison, made public in place in this repair. No duplicate helpers, new mathematical statements or new holes. The Precoverage-specialized theorem is not used."
  },
  "mathlib_searches": [
   {
@@ -198,9 +216,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-cohomology-over-object-localization",
-  "lem-weil-pbc-site-restriction-injectives"
+  "lem-weil-pbc-cohomology-over-object-localization"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -228,5 +244,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Statement matches the node and Stacks 03FD/03F3(2) clause by clause. Left side: derived module evaluation at W in Mod(R). Right side: derived evaluation at Over.mk (𝟙 W) of abelian sheaves on J.over W, applied to toSheaf ⋙ overPullback. The NatIso gives naturality in M; the degree-0 toRightDerivedZero equation points the right way. The resolution-lift equation pins e uniquely (lifts exist and are unique up to homotopy) and is true. Only EnoughInjectives on modules is assumed; ring may be noncommutative; one universe u; no flatness or injectivity binders. Edge cases fine: M=0, O=0, M_2(F_p), empty cover, no terminal object or pullbacks in C, q=0. lean.statement is verbatim; only the lean field changed vs side-live; docstrings carry the source place, blueprint id and 4-step proof; proof is sorry only; no duplicate found. nt_compile --json: 31.0 s, exit 0, clean. Advisory: general GrothendieckTopology instead of the node's Precoverage site is a true generalization; the comparison's private lemmas and injective_module_abelian_acyclic are stated for any topology, so the DAG route still proves it. The Second reading section is an author self-reading. Three plain imports are used only by the later proof."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261021T111124-L-4155636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
