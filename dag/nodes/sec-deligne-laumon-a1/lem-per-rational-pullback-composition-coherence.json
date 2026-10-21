@@ -25,9 +25,133 @@
   "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-weil-pbc-constant-completion-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $d_{g,n}:g^{-1}(A/\\varpi^n)_X\\to(A/\\varpi^n)_{X'}$ for the finite constant-coefficient map. The definition of pro-etale inverse image and the adjunction-compatible site composition identify $d_{g\\circ h,n}$ with $d_{h,n}h^{-1}d_{g,n}$: their adjoints both pull a constant section $a$ back to that same $a$ on $X''\\times_XU$. This also proves the identity case and compatibility with the quotient transitions. By the definition of $c_g$, for every $n$,\n$$\\pi_{X'',n}c_hh^{-1}c_g=d_{h,n}h^{-1}d_{g,n}h^{-1}g^{-1}\\pi_{X,n}=\\pi_{X'',n}c_{g\\circ h}.$$\nThe projections of the actual limit sheaf $B_{X''}$ are jointly monic, so $c_{g\\circ h}=c_hh^{-1}c_g$, under inverse-image composition. The same argument gives $c_{\\mathrm{id}}=1$. No inverse image is commuted with an inverse limit.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites; finite-quotient computation for the coefficient maps"
+   }
+  },
+  {
+   "text": "Denote ordinary integral and rational composition by $a:P_hP_g\\xrightarrow{\\sim}P_{g\\circ h}$ and $b:G_hG_g\\xrightarrow{\\sim}G_{g\\circ h}$. Apply the ringed-derived monoidal comparisons to the ring maps from Step 1 and to their localizations. They are defined on flat-term K-flat representatives, and ordinary pullback preserves that class. The inverse-image/localization comparison is the specified one, preserves the unit, and satisfies its identity/composition equations. Let $\\delta_g:F_{X'}P_g\\xrightarrow{\\sim}G_gF_X$ be balanced tensor flattening from the realization comparison. After these identifications both paths from $F_{X''}P_hP_gK$ to $G_{g\\circ h}F_XK$ send the local generator $e''\\otimes b'\\otimes k$ to $e''\\,\\iota_{X''}(c_h(b'))\\otimes k$, where $b'\\in h^{-1}B_{X'}$ and $\\iota_{X''}:B_{X''}\\to E_{X''}$. Thus\n$$\\delta_{g\\circ h}F_{X''}(a)=b\\,G_h(\\delta_g)\\,\\delta_{h,P_g}.$$\nEquality holds on sheafified tensor complexes (the displayed balanced maps commute with restrictions and differentials), and hence on the derived functors. If $d_h:h^{-1}E_{X'}\\to E_{X''}$ is the localized ring map, $b$ itself sends $e''\\otimes e'\\otimes k$ to $e''d_h(e')\\otimes k$; its inverse inserts $1$. This is the formula in the statement, with $h^{-1}(e')$ acted on by $d_h$. Scalars have degree zero, so no sign is introduced.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); agent expansion of their balanced tensor formulas"
+   }
+  },
+  {
+   "text": "Let $\\mathscr D_W^{\\mathrm{comp}}\\subset D(B_W)$ be the full locally derived $(\\varpi)$-complete category, without a constructibility restriction. The Koszul completion reflector exists with its specified natural unit. The constant-to-completed coefficient equivalence identifies that unit with the finite-quotient tower unit. Consequently [def-weil-pbc-completed-pullback] identifies $\\widehat P_g$ with completion of $P_g$, including $\\gamma_g$, rather than just identifying their values. The ringed pushforward completion lemma says that $Rg_*$ preserves these full complete categories: its ideal hypothesis holds since Step 1 sends the constant scalar $\\varpi$ to $\\varpi$. Combining the reflector Hom bijection with the ordinary derived adjunction gives $\\widehat P_g\\dashv Rg_*$ on complete objects. The same applies to $h$ and $g\\circ h$. This uses no isomorphism of the coefficient structure maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ringed-pushforward-completion",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099J (lemma-pushforward-derived-complete), 0A0E (lemma-derived-completion-koszul), lemma-pushforward-derived-complete-adjoint; quotient-unit identification from proetale.tex Tags 099L, 099M"
+   }
+  },
+  {
+   "text": "Use the reflected-compositor unit-normalization lemma on the three ambient categories $D(B_X),D(B_{X'}),D(B_{X''})$, their full complete subcategories of Step 3, and $L_{01}=P_g,L_{12}=P_h,L_{02}=P_{g\\circ h}$. Take its right comparison to be the canonical derived direct-image composition comparison. The ordinary pullback comparison $a$ is its adjunction conjugate by the ringed-derived monoidal lemma. All the reflector and right-adjoint preservation hypotheses were verified in Step 3. The lemma therefore identifies the specified completed compositor $\\widehat a:\\widehat P_h\\widehat P_g\\to\\widehat P_{g\\circ h}$, defined by the restricted composite adjunction, and gives the equation\n$$\\widehat a_K\\,\\gamma_{h,\\widehat P_gK}\\,P_h(\\gamma_{g,K})=\\gamma_{g\\circ h,K}\\,a_K.$$\nSince the quotient-tower construction has the same reflector and units, uniqueness in the reflector Hom bijection fixes this same compositor for that construction; no comparison is selected merely because its endpoints are isomorphic.",
+   "uses": [
+    "lem-sbc-reflected-compositor-unit-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (lemma-pushforward-Noetherian-case), clause (2); agent expansion using the cited abstract reflector normalization"
+   }
+  },
+  {
+   "text": "For $K\\in\\mathcal C_X$, the realization pullback comparison says $P_gK\\in\\mathcal C_{X'}$ and that the specified $\\gamma_{g,K}$ is an isomorphism. Applying it also to $h$ and to $g\\circ h$ makes every unit in Step 4 invertible; in particular $\\widehat P_gK\\in\\mathcal C_{X'}$ since it is isomorphic to $P_gK$. Cancel the units in Step 4 to obtain\n$$\\widehat a_K=\\gamma_{g\\circ h,K}\\,a_K\\,P_h(\\gamma_{g,K}^{-1})\\,\\gamma_{h,\\widehat P_gK}^{-1}.$$\nThe comparison specified in the item is exactly $\\alpha_g=\\delta_g F_{X'}(\\gamma_g^{-1})$, not a different natural isomorphism.",
+   "uses": [
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; algebraic cancellation using the specified comparison of the cited node"
+   }
+  },
+  {
+   "text": "Abbreviate $F_{X''}$ to $F''$. Expand the second route using Step 5 and naturality of $\\delta_h$ at $\\gamma_g^{-1}:\\widehat P_gK\\to P_gK$:\n$$\\begin{aligned}\nb\\,G_h(\\alpha_g)\\,\\alpha_{h,\\widehat P_gK}\n&=b\\,G_h(\\delta_g)\\,\\delta_{h,P_gK}\\,F''(P_h\\gamma_g^{-1})\\,F''(\\gamma_{h,\\widehat P_gK}^{-1})\\\\\n&=\\delta_{g\\circ h}\\,F''(a_KP_h\\gamma_g^{-1}\\gamma_{h,\\widehat P_gK}^{-1})\\\\\n&=\\delta_{g\\circ h}\\,F''(\\gamma_{g\\circ h,K}^{-1})\\,F''(\\widehat a_K)\n=\\alpha_{g\\circ h,K}\\,F''(\\widehat a_K).\n\\end{aligned}$$\nThe second equality is precisely Step 2; the third is the unit equation of Step 4 with invertible units canceled. This proves the requested equality of the two specified transformations on integral representatives, including their naturality in $K$.",
+   "uses": [
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; explicit naturality and cancellation calculation, agent supplied"
+   }
+  },
+  {
+   "text": "Write $e:P_{\\mathrm{id}}\\to\\mathrm{id}$ and $e_E:G_{\\mathrm{id}}\\to\\mathrm{id}$ for the specified ambient identities. The reflector universal property says that the completed identity $\\widehat e$ is characterized by $\\widehat e_K\\gamma_{\\mathrm{id},K}=e_K$: both are the adjunction-compatible map to the already complete object $K$. Hence $\\widehat e=e\\gamma_{\\mathrm{id}}^{-1}$. The identity case of balanced tensor flattening satisfies $e_E\\delta_{\\mathrm{id}}=F(e)$, since both maps multiply the coefficient into the module and remove the inserted $1$. Therefore\n$$e_E\\alpha_{\\mathrm{id}}=F(e\\gamma_{\\mathrm{id}}^{-1})=F(\\widehat e).$$\nThis is the identity diagram for the specified maps. It also shows that conjugation by $\\gamma$ preserves the normalization of the identity, just as the equation of Step 4 does for composition.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Reflector universal property; identity specialization of sites-cohomology.tex Tags 0D6D and 07A4"
+   }
+  },
+  {
+   "text": "Finally $J_WQ=F_W$ with $J_W(f/\\varpi^n)=\\varpi^{-n}F_W(f)$. Every map used above is linear over the constant scalar $\\varpi$: finite coefficient pullbacks fix that scalar, tensor flattening is balanced, and completion units are natural at scalar multiplication. Thus naturality for an integral map $f$ implies naturality for $f/\\varpi^n$ by multiplying both sides by the same invertible scalar $\\varpi^{-n}$. Every object of the raw rationalization is an integral object, so the equations of Steps 6 and 7 are equations of natural transformations on the entire raw rationalized categories. The ambient tensor formula in Step 2 is retained under these identifications; the completed maps are precisely its conjugates by the specified units, as computed in Step 5. No full-faithfulness assertion for $J$ is needed.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "def-weil-pbc-rational-category",
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15; fraction descent of the displayed equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-rational-category",
+  "def-weil-proetale-inverse-image",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-sbc-reflected-compositor-unit-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, p. 62; explicit coherence argument using Stacks 03CB, 0D6D, 07A4, 099J, 0A0E and the cited reflector-unit normalization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +187,45 @@
    "results": "5 hits: SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv. Ordinary sheaf pullbackComp and associativity, not normalized completed/rational comparisons.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback_assoc|completion.*[Uu]nit",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. Read the sheaf pullback source at PullbackContinuous.lean:167–215; these ordinary module/extension-of-scalars comparisons do not state the quotient-completed integral and raw rational realization equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Read the sheaf pullback source at PullbackContinuous.lean:167–215; these ordinary module/extension-of-scalars comparisons do not state the quotient-completed integral and raw rational realization equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived module pullback tensor reassociation transported through natural isomorphisms of completed pullback functors preserves composition",
+   "results": "8 hits: CategoryTheory.Over.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, SheafOfModules.pullback_assoc, PresheafOfModules.pullback_assoc, PresheafOfModules.pullback_comp_id, CategoryTheory.MonoOver.pullbackComp. Read the sheaf pullback source at PullbackContinuous.lean:167–215; these ordinary module/extension-of-scalars comparisons do not state the quotient-completed integral and raw rational realization equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized rational realization of completed integral pro-etale pullback commutes with composition and identity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization. Read the sheaf pullback source at PullbackContinuous.lean:167–215; these ordinary module/extension-of-scalars comparisons do not state the quotient-completed integral and raw rational realization equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The change of scalars tensor associator commutes with composition of derived inverse images and the identity via a natural completion unit isomorphism",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_comp_id, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange. Read the sheaf pullback source at PullbackContinuous.lean:167–215; these ordinary module/extension-of-scalars comparisons do not state the quotient-completed integral and raw rational realization equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -87,5 +246,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-rational-pullback-composition-coherence",
+  "worker": "stage1",
+  "summary": "Q146: eight-step proof without new nodes. Check finite-quotient coefficient composition, calculate the balanced tensor square on K-flat models, identify quotient completion units with the reflector units, apply the existing abstract reflected-compositor normalization, and explicitly cancel these units in the rational realization diagram. Identity and fraction-morphism naturality are written out. Statement unchanged; no coefficient structure map is assumed invertible.",
+  "blueprint": "First paragraph of the main-20261015 proof of lem-per-smooth-pullback-t-exact, the comparison of raw rational coefficients with continuous-module pullback before the cohomology support calculation; expands retained Step 14 of lem-per-continuous-rational-derived-realization. The perverse unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Step 1 uses the adjunction-normalized inverse-image composition to compare finite constant sections. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Steps 2–4 and 7 use ordinary K-flat composition, identity, tensor and adjunction normalization for arbitrary structural ring maps. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step 2 uses flat-term K-flat preservation and computation of derived tensor pullback. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "Step 2 uses the unit-preserving localization comparison and its composition equation. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Steps 3 and 7 use the completion reflector with its specified unit and Hom bijection. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Step 3 identifies Koszul and finite-quotient completion, preserving their actual units. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pushforward-completion",
+    "why": "Step 3 uses preservation of complete objects for arbitrary structural ring maps. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   },
+   {
+    "node": "lem-sbc-reflected-compositor-unit-normalization",
+    "why": "Step 4 uses the generic category-theoretic unit equation for the specified reflected adjunction conjugate. This is a generic tool, not a replacement of a step of the perverse unit; that unit has no such general interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-sbc-reflected-compositor-unit-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-c0a415ca9",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-c0a415ca9 (reviewer sub-agent of L); spot-checked: Read all eight steps in full against every cited statement; no faults, no fixes written. The item statement and stmt_deps are unchanged from side-live; the item is still unsplit live; there are no new nodes, no repair note and no cycle. Source check: Bhatt–Scholze Remark 6.8.15 on p. 62 (f*K = f*_naive K ⊗ Λ_Y) matches P_g and G_g; the Stacks citations 03CB, 0D6D, 07A4, 099J/pushforward-derived-complete-adjoint, 0A0E and 099N(2),(5) were checked against tags and labels. Step 1: both coefficient composites agree on constant sections, by the adjunction-compatible composition of 03CB(3), and joint monicity of the projections of the limit sheaf gives c_{gh}=c_h h^{-1}c_g and c_id=1. Step 2: I traced the generator e''⊗b'⊗k along both paths; both give e''ι(c_h b')⊗k, using the flat-term K-flat preservation lemma and the localization/inverse-image coherence lemma. Step 3: the def of completed pullback states that its comparison is the completion unit; the pushforward-completion lemma allows arbitrary ring maps; together these give P̂ ⊣ Rg_* on complete objects. Step 4: the reflected-compositor lemma applies with d=κ, and a is its conjugate by the adjunction-compatibility clause of the monoidal lemma. Steps 5–7: I re-derived the cancellation and the identity case, and the domains of δ_h at γ_g^{-1} are correct. Step 8: fraction naturality follows by ϖ-linearity; full faithfulness of J is not used. Edge cases checked: identities, the empty scheme, torsion objects. Batch-5 flag on lem-weil-pbc-localization-inverse-image-coherence → lem-trf-geometric-inverse-image-exact: accepted. That node only states exactness of inverse image along a geometric morphism, which is general sheaf theory, and recomputing the target closure with and without the item shows the delivery adds 0 nodes to the batch-5 closure (both nodes are already in it). The worker wrote the eight tool_uses themselves; all are accurate generic interfaces and I accepted them. lem-weil-pbc-realization-completed-pull is a narrower existing node (finite type over a field k), not something this split duplicates."
  }
 }
