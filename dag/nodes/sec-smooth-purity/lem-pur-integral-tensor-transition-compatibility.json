@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-integral-tensor-transition-compatibility",
+ "kind": "statement",
+ "title": "Quotient compatibility of the normalized total tensor comparison",
+ "statement": "Let R be the completed coefficient sheaf on X_proet and S_n its recorded finite quotients. Suppose b_n is a natural S_n-linear isomorphism from reduction of a total tensor to the total tensor of the two reductions, carrying 1 tensor (x tensor y) in each (p,q)-summand to (1 tensor x) tensor (1 tensor y). Then after scalar restriction, b_n commutes with the consecutive quotient transitions: T(r_n) followed by b_n equals b_(n+1) followed by the tensor transition. This is an equality of natural chain maps on all pairs of complexes, with no K-flatness hypothesis. All reduction, tensor, and transition maps are those recorded in def-weil-integral-reduction-tower, def-coef-ringed-tensor-hom-model and lem-pur-integral-operations-well-defined.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor products (section-tensor-product), scalar-extension identity immediately following the sectionwise tensor construction; sheafification compatibility in lemma-sheafification-tensor. Combined with total complexes, Stacks 06YM and 07A4; Bhatt--Scholze Definition 3.4.10."
+ },
+ "stmt_deps": [
+  "def-weil-integral-reduction-tower",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Extension and scalar restriction preserve the coproduct defining each total degree. Precompose the two proposed maps with its extended summand injections. A locally surjective sheafification unit and separatedness of the target reduce equality to s tensor (x tensor y); tensor additivity gives equality on the presheaf generators.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The isomorphism b_n is S_n-linear. Extend its normalization at scalar 1 to scalar s, moving s into the first tensor factor. The two routes on s tensor (x tensor y) are both (rho(s) tensor x) tensor (1 tensor y), by the scalar and tensor transition generator formulas. The coproduct injections and degreewise equality give the required natural-transformation equation.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-scalar-ordinary-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-21",
+  "note": "Extract the strict finite-level comparison and the separate quotient-compatibility argument from the completed tensor calculation; no derived descent is included in these lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf scalar extension tensor comparison is natural with respect to quotient coefficient maps on total complexes",
+   "results": "Eight matches, including PresheafOfModules.Monoidal.tensorObjMap, HomologicalComplex.ιTensorObj and ModuleCat.extendScalarsComp_hom_app_one_tmul. They supply constituent algebraic and total-complex APIs; none states the strict sheaf coefficient-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct.map\", \"naturality\"",
+   "results": "Zero matches.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitOfPreserves.*(restrictScalars|changeOfRings)",
+   "results": "One match: Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:64, preservation for sectionwise scalar restriction. No completed-coefficient tensor-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of the total tensor product of sheaf module complexes commutes with quotient coefficient transitions",
+   "results": "Eight matches: ModuleCat.ExtendScalars.obj', ModuleCat.ExtendScalars.smul_tmul, TensorProduct.isScalarTower_left and scalar-action and localization instances. The sectionwise scalar extension and its scalar formula are constituent APIs, not an isomorphism of sheaf total-complex towers or its quotient-transition square. Inspected Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, definitions extendScalars and ExtendScalars.smul_tmul.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralDerivedOperationsOnSlices",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "completed tensor product in the integral derived operations; compare the two finite-reduction presentations",
+   "via": [
+    "def-pur-integral-derived-operations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorTransitionCompatibility",
+  "file": "lean/Sheaf/Paper/IntegralTensorTransitionCompatibility.lean",
+  "declaration": "WeilConjectures.integralTensorTransitionCompatibility",
+  "statement": "theorem integralTensorTransitionCompatibility\n    (b : ∀ n : ℕ, coefficientTotalTensor.{u, t + 1, t}\n      (AlgebraicGeometry.Scheme.ProEt.topology X)\n      (completedIntegralCommRingSheafUnrestricted l E X) ⋙\n        unrestrictedIntegralFiniteComplex l E X n ≅\n      (unrestrictedIntegralFiniteComplex l E X n).prod\n        (unrestrictedIntegralFiniteComplex l E X n) ⋙\n          Functor.uncurry.obj\n            ((MonoidalCategory.curriedTensor\n              (integralOperationsFiniteModules l E X n)).map₂CochainComplex))\n    (hb : ∀ (n : ℕ) (P Q : CochainComplex (integralTowerModules l E X) ℤ)\n      (p q : ℤ) (V : X.ProEtᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),\n      (((b n).hom.app (P, Q)).f (p + q)).val.app V\n        (unrestrictedIntegralTensorSection l E X n _ V 1\n          (coefficientTensorGenerator.{u, t + 1, t}\n            (AlgebraicGeometry.Scheme.ProEt.topology X)\n            (completedIntegralCommRingSheafUnrestricted l E X) P Q p q (p + q) rfl V x y)) =\n        integralOperationsTotalTensorSection l E X n P Q p q V\n          (unrestrictedIntegralTensorSection l E X n _ V 1 x)\n          (unrestrictedIntegralTensorSection l E X n _ V 1 y)) (n : ℕ) :\n    Functor.whiskerLeft (coefficientTotalTensor.{u, t + 1, t}\n      (AlgebraicGeometry.Scheme.ProEt.topology X)\n      (completedIntegralCommRingSheafUnrestricted l E X))\n      (unrestrictedIntegralTransition l E X n) ≫\n        (Functor.isoWhiskerRight (b n) (integralOperationsRestrict l E X n)).hom =\n    (Functor.isoWhiskerRight (b (n + 1)) (integralOperationsRestrict l E X (n + 1))).hom ≫\n      integralOperationsTensorTransition l E X n",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T020959-L-2686655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T020959-L-2686655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

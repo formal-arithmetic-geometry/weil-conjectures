@@ -15,6 +15,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import all Sheaf.Paper.IntegralReductionTowerUnrestricted
+import all Sheaf.Paper.IntegralOperationsWellDefined
+import Sheaf.Algebra.Homology.KFlatTotalTensorModel
+import Sheaf.Paper.IntegralTensorReductionTowerComparison
+import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import all Sheaf.Paper.ResolvingRepresentativeWhiskering
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
@@ -41,6 +46,63 @@ open scoped ChangeOfRings
 
 
 universe a b c d e f r
+
+private theorem sliceModuleTransport
+    {C H : Type a} [Category.{b} C] [Category.{b} H]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology H)
+    (e : C ≌ H) [e.inverse.IsDenseSubsite K J]
+    (R : Sheaf J RingCat.{r}) (S : Sheaf K RingCat.{r})
+    (c : S ≅ (e.inverse.sheafPushforwardContinuous RingCat.{r} K J).obj R) :
+    ∃ q : SheafOfModules.{r} R ≌ SheafOfModules.{r} S,
+      q.functor ⋙ SheafOfModules.forget _ =
+        SheafOfModules.forget _ ⋙ PresheafOfModules.pushforward (F := e.inverse) c.hom.hom := by
+  let ψ : R ⟶ (e.functor.sheafPushforwardContinuous RingCat.{r} J K).obj S :=
+    { hom := Functor.whiskerRight e.op.unitIso.hom R.obj ≫
+        Functor.whiskerLeft e.functor.op c.inv.hom }
+  have H₁ : Functor.whiskerRight (NatTrans.op e.symm.counit) R.obj =
+      ψ.hom ≫ e.functor.op.whiskerLeft c.hom.hom := by
+    apply NatTrans.ext
+    funext U
+    change R.obj.map _ =
+      (R.obj.map _ ≫ c.inv.hom.app _) ≫ c.hom.hom.app _
+    rw [Category.assoc]
+    have hc := congrArg (fun f ↦ f.hom.app (e.functor.op.obj U)) c.inv_hom_id
+    have hc' : c.inv.hom.app (e.functor.op.obj U) ≫
+        c.hom.hom.app (e.functor.op.obj U) = 𝟙 _ := hc
+    change R.obj.map (e.unitInv.app U.unop).op =
+      R.obj.map (e.unitInv.app U.unop).op ≫
+        (c.inv.hom.app (e.functor.op.obj U) ≫ c.hom.hom.app (e.functor.op.obj U))
+    exact (Category.comp_id _).symm.trans
+      (congrArg (fun f ↦ R.obj.map (e.unitInv.app U.unop).op ≫ f) hc'.symm)
+  have H₂ : c.hom.hom ≫ e.inverse.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op e.symm.unit) S.obj = 𝟙 S.obj := by
+    apply NatTrans.ext
+    funext U
+    change c.hom.hom.app U ≫
+      (R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op ≫
+        c.inv.hom.app (e.functor.op.obj (e.inverse.op.obj U))) ≫
+        S.obj.map (e.counitInv.app U.unop).op = 𝟙 _
+    rw [Category.assoc]
+    have hn := c.inv.hom.naturality (e.counitInv.app U.unop).op
+    change R.obj.map (e.inverse.map (e.counitInv.app U.unop)).op ≫
+      c.inv.hom.app U =
+      c.inv.hom.app (e.functor.op.obj (e.inverse.op.obj U)) ≫
+        S.obj.map (e.counitInv.app U.unop).op at hn
+    rw [← hn]
+    have hm : R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op ≫
+        R.obj.map (e.inverse.map (e.counitInv.app U.unop)).op = 𝟙 _ := by
+      rw [← Functor.map_comp, ← op_comp]
+      simp
+    rw [← Category.assoc (R.obj.map _) (R.obj.map _) _, hm]
+    change c.hom.hom.app U ≫ 𝟙 _ ≫ c.inv.hom.app U = 𝟙 _
+    have hc : c.hom.hom.app U ≫ c.inv.hom.app U = 𝟙 _ :=
+      congrArg (fun f ↦ f.hom.app U) c.hom_inv_id
+    exact (congrArg (fun f ↦ c.hom.hom.app U ≫ f)
+      (Category.id_comp (c.inv.hom.app U))).trans hc
+  have : e.symm.functor.IsContinuous K J := inferInstanceAs (e.inverse.IsContinuous K J)
+  have : e.symm.inverse.IsContinuous J K := inferInstanceAs (e.functor.IsContinuous J K)
+  refine ⟨SheafOfModules.pushforwardPushforwardEquivalence e.symm c.hom ψ H₁ H₂, rfl⟩
+
 
 private theorem resolvingWhiskering
     {K : Type a} [Category.{b} K] {H : Type c} [Category.{d} H]
@@ -690,6 +752,61 @@ def roos := tower l E X U ⋙ integralOperationsRoosFunctor
 (blueprint: def-pur-integral-derived-operations). -/
 def roosGood := (Good l E X U).ι ⋙ roos l E X U ⋙ DerivedCategory.Q
 
+private theorem sliceProductsExact :
+    HasExactLimitsOfShape (Discrete ℕ) (Mod l E X U) := by
+  cases U with
+  | none =>
+      exact AlgebraicGeometry.Scheme.ProEt.products_exact.{t, u, 0} X
+        (rings l E X none) ℕ
+  | some V =>
+      let J := (AlgebraicGeometry.Scheme.ProEt.topology X).over V
+      let K := AlgebraicGeometry.Scheme.ProEt.topology V.left
+      let e := AlgebraicGeometry.Scheme.ProEt.sliceEquiv X V
+      let : e.inverse.IsDenseSubsite K J := AlgebraicGeometry.Scheme.ProEt.sliceDense X V
+      let R := rings l E X (some V)
+      let S := (e.inverse.sheafPushforwardContinuous RingCat.{max u (t + 1)} K J).obj R
+      obtain ⟨q, _⟩ := sliceModuleTransport J K e R S (Iso.refl _)
+      let := AlgebraicGeometry.Scheme.ProEt.products_exact.{t, u, 0} V.left S ℕ
+      exact HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) q.symm
+
+private theorem goodLocalization :
+    (qGood l E X U).IsLocalization
+      ((HomologicalComplex.quasiIso (Mod l E X U) (.up ℤ)).inverseImage
+        (Good l E X U).ι) := by
+  let : EssentiallySmall.{max u (t + 1)} (Site X U) := essentiallySmallSelf _
+  exact goodComplexes_isLocalization (ring l E X U) (Good l E X U) (fun _ ↦ Iff.rfl)
+
+private theorem levelQuasiIso (n : ℕ) {P Q : Cx l E X U} (α : P ⟶ Q)
+    (hP : Good l E X U P) (hQ : Good l E X U Q) (hα : QuasiIso α) :
+    QuasiIso ((level l E X U n).map α) := by
+  let : EssentiallySmall.{max u (t + 1)} (Site X U) := essentiallySmallSelf _
+  let := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
+    (SheafOfModules.derivedChangeRingIndependentCoefficients (topology X U) (finite l E X U n)))
+  let φ := (sheafCompose _
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+      (projection l E X U n)
+  let T := SheafOfModules.restrictScalars φ
+  have hT := coefficientRestriction_exact φ
+  let : PreservesFiniteLimits T := hT.1
+  let : PreservesFiniteColimits T := hT.2
+  have h := (reductionWitness l E X U n).choose_spec.choose_spec.choose_spec.choose_spec.1
+    α hP.1 hQ.1 hα
+  exact HomologicalComplex.quasiIso_map_of_preservesHomology _ T (hφ := h)
+
+private theorem roosGoodInverts :
+    ((HomologicalComplex.quasiIso (Mod l E X U) (.up ℤ)).inverseImage
+      (Good l E X U).ι).IsInvertedBy (roosGood l E X U) := by
+  let := sliceProductsExact l E X U
+  intro P Q α hα
+  change IsIso (DerivedCategory.Q.map
+    (integralOperationsRoosMap ((tower l E X U).map α.hom)))
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
+  apply roosMap_quasiIso
+  intro n
+  delta WeilConjectures.IntegralOnSlice.tower
+  change QuasiIso ((level l E X U n).map α.hom)
+  exact levelQuasiIso l E X U n α.hom P.property Q.property hα
+
 /-- Completion is the unique descent equipped with its representative comparison.
 Source: Stacks 06YN, 08TC (blueprint: def-pur-integral-derived-operations).
 Proof: restriction has exact underlying sheaves, also on a slice; the pro-etale
@@ -704,7 +821,31 @@ theorem completion_exists :
       ∀ (F' : D l E X U ⥤ D l E X U) (e : qGood l E X U ⋙ F ≅ roosGood l E X U)
         (e' : qGood l E X U ⋙ F' ≅ roosGood l E X U),
         ∃! a : F ≅ F', Functor.whiskerLeft (qGood l E X U) a.hom ≫ e'.hom = e.hom := by
-  sorry
+  let W := (HomologicalComplex.quasiIso (Mod l E X U) (.up ℤ)).inverseImage
+    (Good l E X U).ι
+  let := goodLocalization l E X U
+  let hR := roosGoodInverts l E X U
+  let F := Localization.lift (roosGood l E X U) hR (qGood l E X U)
+  let e₀ := Localization.fac (roosGood l E X U) hR (qGood l E X U)
+  let ff := Localization.fullyFaithfulWhiskeringLeft (qGood l E X U) W (D l E X U)
+  refine ⟨F, ⟨e₀⟩, ?_⟩
+  intro F' e e'
+  let a : F ≅ F' := ff.isoEquiv.symm (e ≪≫ e'.symm)
+  have ha : Functor.isoWhiskerLeft (qGood l E X U) a = e ≪≫ e'.symm :=
+    ff.isoEquiv.apply_symm_apply _
+  refine ⟨a, ?_, ?_⟩
+  · have hi : Functor.isoWhiskerLeft (qGood l E X U) a ≪≫ e' = e := by
+      rw [ha]
+      simp
+    exact congrArg Iso.hom hi
+  · intro b hb
+    apply ff.isoEquiv.injective
+    change Functor.isoWhiskerLeft (qGood l E X U) b =
+      Functor.isoWhiskerLeft (qGood l E X U) a
+    rw [ha]
+    apply Iso.ext
+    apply (cancel_mono e'.hom).1
+    simpa using hb
 
 /-- Completion chosen with its determining representative normalization. Source: Stacks 08TC
 (blueprint: def-pur-integral-derived-operations). -/
@@ -852,6 +993,63 @@ Source: Bhatt--Scholze, Definition 3.4.10 (blueprint: def-pur-integral-derived-o
 def completedTensor : (D l E X U) × (D l E X U) ⥤ D l E X U :=
   (duality l E X U).closed.tensor ⋙ completion l E X U
 
+attribute [local irreducible] duality SheafOfModules.monoidalCategory
+  HasDerivedCategory.standard constantSheaf
+  completedIntegralCoefficientSheafUnrestricted
+
+private theorem globalTower_eq :
+    tower l E X none =
+      (Functor.ofOpSequence (X := fun n ↦ unrestrictedIntegralComplexFunctor l E X n)
+        (unrestrictedIntegralTransition l E X)).flip := by
+  have h (n : ℕ) : transition l E X none n = unrestrictedIntegralTransition l E X n := by
+    apply (transition_existsUnique l E X none n).unique
+      (transition_existsUnique l E X none n).exists.choose_spec
+    intro P i V s x
+    exact (unrestrictedIntegralTransition_existsUnique l E X n).exists.choose_spec P i V s x
+  have hh : transition l E X none = unrestrictedIntegralTransition l E X := funext h
+  delta tower
+  rw [hh]
+
+private theorem totalTensorGood
+    (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :
+    Good l E X none
+      ((coefficientTotalTensor.{u, t + 1, t} (topology X none)
+        (ring l E X none)).obj (P.obj, Q.obj)) := by
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  have h := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
+    (ring l E X none) P.obj Q.obj P.property.1 Q.property.1 P.property.2 Q.property.2
+  exact ⟨h.1, h.2.1⟩
+
+private def totalTensorOnGood :
+    (integralOperationsGoodComplex l E X).FullSubcategory ×
+      (integralOperationsGoodComplex l E X).FullSubcategory ⥤
+        (Good l E X none).FullSubcategory :=
+  ObjectProperty.lift _
+    (((integralOperationsGoodComplex l E X).ι.prod
+      (integralOperationsGoodComplex l E X).ι) ⋙
+        coefficientTotalTensor.{u, t + 1, t} (topology X none) (ring l E X none))
+    (fun P ↦ totalTensorGood l E X P.1 P.2)
+
+private theorem tensorCompletionOnGood :
+    Nonempty (((integralOperationsGoodLocalization l E X).prod
+      (integralOperationsGoodLocalization l E X)) ⋙ completedTensor l E X none ≅
+        totalTensorOnGood l E X ⋙ roosGood l E X none) := by
+  let H : (integralOperationsGoodComplex l E X).FullSubcategory ⥤
+      ObjectProperty.FullSubcategory
+        (CochainComplex.IsKFlatIndependentCoefficients
+          (J := topology X none) (R := ring l E X none) :
+            ObjectProperty (Cx l E X none)) :=
+    ObjectProperty.lift _ (integralOperationsGoodComplex l E X).ι
+      (fun P ↦ P.property.1)
+  let c := Functor.isoWhiskerLeft (H.prod H) (duality l E X none).models.comparison
+  have c' : ((integralOperationsGoodLocalization l E X).prod
+      (integralOperationsGoodLocalization l E X)) ⋙ (duality l E X none).closed.tensor ≅
+        totalTensorOnGood l E X ⋙ qGood l E X none := c.symm
+  let e := Functor.isoWhiskerRight c' (completion l E X none)
+  let d := Functor.isoWhiskerLeft (totalTensorOnGood l E X)
+    (completionComparison l E X none)
+  exact ⟨e ≪≫ d⟩
+
 /-- The global specialization computes precisely the recorded finite-tensor Roos model,
 so this extension does not introduce a different global tensor product.
 Source: Bhatt--Scholze, Definition 3.4.10; Stacks 06YY
@@ -868,7 +1066,31 @@ theorem completedTensor_global_comparison :
     Nonempty (((integralOperationsGoodLocalization l E X).prod
       (integralOperationsGoodLocalization l E X)) ⋙ completedTensor l E X none ≅
         integralOperationsTensorOnGood l E X) := by
-  sorry
+  obtain ⟨a⟩ := tensorCompletionOnGood l E X
+  obtain ⟨b⟩ := integralTensorReductionTowerComparison l E X
+  let H := (integralOperationsGoodComplex l E X).ι.prod
+    (integralOperationsGoodComplex l E X).ι
+  let T := coefficientTotalTensor.{u, t + 1, t} (topology X none) (ring l E X none)
+  let R := integralOperationsRoosFunctor (A := Mod l E X none)
+  let Q := DerivedCategory.Q (C := Mod l E X none)
+  let W := tower l E X none
+  let V := integralOperationsTensorTowerFunctor l E X
+  have e : totalTensorOnGood l E X ⋙ (Good l E X none).ι ≅ H ⋙ T :=
+    (Good l E X none).liftCompιIso (H ⋙ T) (fun P ↦ totalTensorGood l E X P.1 P.2)
+  have b' : T ⋙ W ≅ V := by
+    dsimp only [T, W, V]
+    rw [globalTower_eq]
+    exact b
+  refine ⟨a ≪≫ ?_⟩
+  exact (Functor.associator (totalTensorOnGood l E X)
+      (Good l E X none).ι (roos l E X none ⋙ Q)).symm ≪≫
+    Functor.isoWhiskerRight e (roos l E X none ⋙ Q) ≪≫
+    Functor.isoWhiskerLeft (H ⋙ T) (Functor.associator W R Q) ≪≫
+    (Functor.associator (H ⋙ T) W (R ⋙ Q)).symm ≪≫
+    Functor.isoWhiskerRight (Functor.associator H T W) (R ⋙ Q) ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft H b') (R ⋙ Q) ≪≫
+    Functor.associator H V (R ⋙ Q) ≪≫
+    Functor.isoWhiskerLeft H (Functor.associator V R Q).symm
 
 end IntegralOnSlice
 end WeilConjectures

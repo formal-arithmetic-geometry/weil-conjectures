@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-integral-tensor-reduction-tower-comparison",
+ "kind": "statement",
+ "title": "Strict tensor comparison for finite coefficient-reduction towers",
+ "statement": "For the completed coefficient sheaf R on X_proet and its finite quotients S_n, the strict tower obtained by reducing the ordinary direct-sum total tensor of any two R-complexes is naturally isomorphic to the strict tower of the total tensors of their two separately reduced complexes. Both towers are read as R-module complexes by the recorded scalar restrictions. No boundedness or K-flatness is required. The finite reduction and transition functors are those of def-weil-integral-reduction-tower and lem-pur-integral-operations-well-defined; the total tensor is def-coef-ringed-tensor-hom-model.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor products (section-tensor-product), scalar-extension identity immediately following the sectionwise tensor construction; sheafification compatibility in lemma-sheafification-tensor. Combined with total complexes, Stacks 06YM and 07A4; Bhatt--Scholze Definition 3.4.10."
+ },
+ "stmt_deps": [
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary scalar-extension tensor isomorphism, normalized by the adjunction unit on pure sections. Apply the total-complex tensor comparison and its naturality to obtain a finite-level natural isomorphism. Its generator equation is obtained by evaluating on the total-summand injections and the scalar-extension unit.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-sfb-scalar-tensor-comparison",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every consecutive pair of quotients, apply the normalized transition-compatibility lemma. Form a natural transformation of the two strict towers with NatTrans.ofOpSequence. Its components are the finite-level isomorphisms, so it is an isomorphism; their naturality makes this natural in both input complexes.",
+   "uses": [
+    "lem-pur-integral-tensor-transition-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sfb-scalar-tensor-comparison",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-21",
+  "note": "Extract the strict finite-level comparison and the separate quotient-compatibility argument from the completed tensor calculation; no derived descent is included in these lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf scalar extension tensor comparison is natural with respect to quotient coefficient maps on total complexes",
+   "results": "Eight matches, including PresheafOfModules.Monoidal.tensorObjMap, HomologicalComplex.ιTensorObj and ModuleCat.extendScalarsComp_hom_app_one_tmul. They supply constituent algebraic and total-complex APIs; none states the strict sheaf coefficient-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct.map\", \"naturality\"",
+   "results": "Zero matches.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitOfPreserves.*(restrictScalars|changeOfRings)",
+   "results": "One match: Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:64, preservation for sectionwise scalar restriction. No completed-coefficient tensor-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of the total tensor product of sheaf module complexes commutes with quotient coefficient transitions",
+   "results": "Eight matches: ModuleCat.ExtendScalars.obj', ModuleCat.ExtendScalars.smul_tmul, TensorProduct.isScalarTower_left and scalar-action and localization instances. The sectionwise scalar extension and its scalar formula are constituent APIs, not an isomorphism of sheaf total-complex towers or its quotient-transition square. Inspected Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, definitions extendScalars and ExtendScalars.smul_tmul.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralDerivedOperationsOnSlices",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "completed tensor product in the integral derived operations; compare the two finite-reduction presentations",
+   "via": [
+    "def-pur-integral-derived-operations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorReductionTowerComparison",
+  "file": "lean/Sheaf/Paper/IntegralTensorReductionTowerComparison.lean",
+  "declaration": "WeilConjectures.integralTensorReductionTowerComparison",
+  "statement": "theorem integralTensorReductionTowerComparison :\n    Nonempty (coefficientTotalTensor.{u, t + 1, t}\n      (AlgebraicGeometry.Scheme.ProEt.topology X)\n      (completedIntegralCommRingSheafUnrestricted l E X) ⋙\n        (Functor.ofOpSequence\n          (X := fun n ↦ unrestrictedIntegralComplexFunctor l E X n)\n          (unrestrictedIntegralTransition l E X)).flip ≅\n      integralOperationsTensorTowerFunctor l E X)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T020959-L-2686655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T020959-L-2686655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
