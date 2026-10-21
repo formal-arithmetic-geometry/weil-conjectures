@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-!
 # Scalar linearity of ordinary unbounded pro-etale operations
@@ -29,6 +30,21 @@ universe u v
 open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+private noncomputable abbrev sectionScalarLinear
+    (A : Type v) [CommRing A] (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) :
+    Linear A (proEtaleRingModules X R) := by
+  letI : Linear (RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat))
+      (proEtaleRingModules X R) :=
+    SheafOfModules.homLinear R.obj
+      ((sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).property
+  exact
+    { homModule := fun M N ↦ Module.compHom (M ⟶ N) a
+      smul_comp := fun M N P r h k ↦ Linear.smul_comp M N P (a r) h k
+      comp_smul := fun M N P h r k ↦ Linear.comp_smul M N P h (a r) k }
 
 /-- Ordinary unbounded ringed operations are additive and linear over compatible scalars.
 The existential linear structures are specified by their sectionwise action on every
@@ -83,6 +99,27 @@ theorem proEtaleRingDerivedOperations_scalarLinearity
         (proEtaleRingDerivedDirectImage f RV RU c).Additive ∧
         Functor.Linear A (proEtaleRingDerivedDirectImage f RV RU c))
         (_iU := lU) (_iV := lV) := by
-  sorry
+  let lU := sectionScalarLinear A U RU aU
+  let lV := sectionScalarLinear A V RV aV
+  have : Functor.Linear A (proEtaleRingModuleDirectImage f RV RU c) := by
+    constructor
+    intro M N h a
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro W
+    ext x
+    change (aU a).val (op ((proEtaleBaseChange f).obj W.unop)) •
+      h.val.app (op ((proEtaleBaseChange f).obj W.unop)) x =
+        (proEtaleRingDirectImageMap f RV RU c).hom.app W ((aV a).val W) •
+          h.val.app (op ((proEtaleBaseChange f).obj W.unop)) x
+    rw [hc a W.unop]
+  have : Functor.Linear A (proEtaleRingModulePullback f RV RU c) :=
+    (proEtaleRingModuleAdjunction f RV RU c).left_adjoint_linear
+  refine ⟨lU, lV, ?_, ?_, inferInstance, inferInstance, inferInstance, ?_⟩
+  · intro M N h a W x
+    rfl
+  · intro M N h a W x
+    rfl
+  · exact (proEtaleRingDerivedAdjunction f RV RU c).right_adjoint_linear
 
 end AlgebraicGeometry.Scheme
