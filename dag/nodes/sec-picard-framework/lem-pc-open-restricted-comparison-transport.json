@@ -40,10 +40,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F2",
-  "date": "2026-10-13",
+  "group": "W6",
+  "date": "2026-10-21",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Locality of equation-bc; exact open restriction uses Tag 0D5U and K-flat restriction uses Tag 06YB."
+  "place": "Reuse the adopted source proof: construct literal restricted representative data, specialize the open comparison square, and package its witnesses. Restore the historical Sheaf path as a public re-export without a duplicate declaration."
  },
  "mathlib_searches": [
   {
@@ -101,14 +101,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedComparisonTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictedComparisonTransport.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_open_restricted_comparison_transport",
-  "statement": "theorem exists_open_restricted_comparison_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g)\n    (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ) :\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n      AddCommGrpCat.{u}\n    let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n      AddCommGrpCat.{u}\n    let H := comparisonStalkCohomology X' (pullback.fst g' U.ι z) i ⋙ F\n    let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU\n    ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,\n      ∀ (K : schemeDerivedCategory X)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : P.IsAcyclicTensorKFlat)\n        (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n        (eP : DerivedCategory.Q.obj P ≅ K),\n      let Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=\n        ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n      ∃ (hQ : Q.IsAcyclicTensorKFlat) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n        (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),\n      let a := F.map (comparisonIntoPullback f f' g g' sq\n        (pullback.fst g' U.ι z) P hcP i)\n      let b := FU.map (comparisonIntoPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n        g (pullback.snd g' U.ι) sqU z Q hcQ i)\n      let β := openRestrictedCompositionMap g' U K\n      ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,\n        a ≫ H.map ((derivedPullback g').map eP.hom) ≫\n            η.hom.app ((derivedPullback g').obj K) =\n          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β)",
+  "statement": "theorem exists_open_restricted_comparison_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g)\n    (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ) :\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n      AddCommGrpCat.{u}\n    let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n      AddCommGrpCat.{u}\n    let H := comparisonStalkCohomology X' (pullback.fst g' U.ι z) i ⋙ F\n    let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU\n    ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,\n      ∀ (K : schemeDerivedCategory X)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : P.IsKFlatTensor)\n        (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n        (eP : DerivedCategory.Q.obj P ≅ K),\n      let Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=\n        ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n      ∃ (hQ : Q.IsKFlatTensor) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n        (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),\n      let a := F.map (comparisonIntoPullback f f' g g' sq\n        (pullback.fst g' U.ι z) P hcP i)\n      let b := FU.map (comparisonIntoPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n        g (pullback.snd g' U.ι) sqU z Q hcQ i)\n      let β := openRestrictedCompositionMap g' U K\n      ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,\n        a ≫ H.map ((derivedPullback g').map eP.hom) ≫\n            η.hom.app ((derivedPullback g').obj K) =\n          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β)",
   "branch": "sheaf-dag",
-  "by": "A4",
-  "date": "2026-10-13"
+  "by": "W6",
+  "date": "2026-10-21",
+  "note": "The historical Sheaf module publicly re-exports this adopted source proof. IsKFlatTensor and the original IsAcyclicTensorKFlat are definitionally equal; the full archived signature is checked by a compiling probe. The two representative-data/comparison-square dependencies and the unit route are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -121,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-634a0",
-  "group": "F2",
+  "reviewer": "C-b67d6",
+  "group": "W6",
   "result": "pass",
-  "landing": "20261013T172653-L-2098665",
-  "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, DAG nodes, change record, compilation, and forced adaptation checks all agree; delivered modules compile, and the original downstream importer fails while the adapted importer compiles."
+  "landing": "20261021T162130-L-292211",
+  "kind": "proof",
+  "note": "independent cc review: historical Sheaf module re-exporting the WC exists_open_restricted_comparison_transport, checked against the archived signature (IsKFlatTensor = IsAcyclicTensorKFlat by rfl), the node lean record (existing:true, statement copied exactly from the WC file) and the change record"
  },
  "lean_audit": {}
 }
