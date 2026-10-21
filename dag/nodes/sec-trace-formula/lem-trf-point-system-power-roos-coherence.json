@@ -20,7 +20,8 @@
   "lem-trf-point-system-transport-descent",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-weil-strict-roos-comparison",
-  "lem-cbc-exact-product-functor-strict-limit"
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-strict-roos-model"
  ],
  "proof": [
   {
@@ -291,5 +292,55 @@
   "group": "Q126",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-bfd568af7 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against the statements of the cited nodes. The delivery has no new nodes, and the item statement and stmt_deps are byte-identical to the base. The item is still unsplit in live and side-live; there is no repair note and nothing cited is on the dropped list. Step 1: lem-trf-constant-coefficient-composition with (h, h^m), plus iso-inverse-image (3) and the pi_n c = c_n g^{-1}(pi_n) equation of the inverse-image comparison definition, gives the completed coefficient compositor. Step 2: insertion-calculus j_{m+1}=T_m j_{1,H_m} j_m. I checked the site directions: res_h res_{h^m} is the morphism h^{m+1}. The compositor is the termwise (h^{m+1})^* ~ h^*(h^m)^* of pbc-derived-pullback-composition. Step 3: descent-node transitions and differentials, then localization of a strict equality; no use of evaluation detection. Step 4: every hypothesis of lem-cbc-exact-product-functor-strict-limit holds (exact countable products on the pro-étale site, F_r an equivalence preserving limits), and its lambda = theta^{-1} kappa F(theta) is exactly a_{r,C}. Step 5: I recomputed both sides on each pr_n; with T_n = d_{m,X_n} both give T_n F_1F_m(pr_n). Step 6: the cone maps are diagonal with zero off-diagonal entries and commute with s and the signed differential. Step 7: I redid the conjugation algebra and the two sides agree, with matching types. Edge cases checked: m=1, the zero system, non-surjective transitions, and complexes in a single degree. The route is fine because sk-d-weil is cited by the unit. I accept the 7 declared tool uses (generic exactness, product and Roos normalization lemmas). Duplicates: point-transport-composition (finite D^b_c case), point-system-roos-transport (single r), integral-inverse-image-comparison-composition (the kappa/Lg^* compositor) and the cone-descent and strict-quotient nodes are all different from the item. Source check: the quoted Global-powers sentence is in thm-trf-l-function-euler-product.proof.md Step 1, which proof_origin, the step sources and blueprint.from all name. Advisory only: the item's source.document, inherited from Q89, still names prop-trf-rational-frobenius-integral-model.proof.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSystemPowerRoosCoherence",
+  "declaration": "WeilConjectures.PointSystemTransport.PowerRoos.point_system_power_roos_coherence",
+  "declarations": [
+   "WeilConjectures.PointSystemTransport.PowerRoos.F",
+   "WeilConjectures.PointSystemTransport.PowerRoos.Fc",
+   "WeilConjectures.PointSystemTransport.PowerRoos.Ft",
+   "WeilConjectures.PointSystemTransport.PowerRoos.Uc",
+   "WeilConjectures.PointSystemTransport.PowerRoos.Gc",
+   "WeilConjectures.PointSystemTransport.PowerRoos.coordinates",
+   "WeilConjectures.PointSystemTransport.PowerRoos.Compositors",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasSiteSections",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasSystemSections",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasRestrictionSections",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasTensorUnits",
+   "WeilConjectures.PointSystemTransport.PowerRoos.RoosNormalization",
+   "WeilConjectures.PointSystemTransport.PowerRoos.toRoos",
+   "WeilConjectures.PointSystemTransport.PowerRoos.Comparisons",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasProducts",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasFirstCoordinate",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasSecondCoordinate",
+   "WeilConjectures.PointSystemTransport.PowerRoos.HasDerivedModel",
+   "WeilConjectures.PointSystemTransport.PowerRoos.tc",
+   "WeilConjectures.PointSystemTransport.PowerRoos.td",
+   "WeilConjectures.PointSystemTransport.PowerRoos.dc",
+   "WeilConjectures.PointSystemTransport.PowerRoos.dd",
+   "WeilConjectures.PointSystemTransport.PowerRoos.u",
+   "WeilConjectures.PointSystemTransport.PowerRoos.I",
+   "WeilConjectures.PointSystemTransport.PowerRoos.StrictTransportCoherence",
+   "WeilConjectures.PointSystemTransport.PowerRoos.DerivedTransportCoherence",
+   "WeilConjectures.PointSystemTransport.PowerRoos.ProductCoherence",
+   "WeilConjectures.PointSystemTransport.PowerRoos.ConeCoherence",
+   "WeilConjectures.PointSystemTransport.PowerRoos.DerivedComparisonCoherence",
+   "WeilConjectures.PointSystemTransport.PowerRoos.point_system_power_roos_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/PointSystemPowerRoosCoherence.lean",
+  "statement": "theorem point_system_power_roos_coherence (hl : l ≠ D.p) : ∃ (P : Compositors D l E) (N : RoosNormalization D l E) (A : Comparisons D l E), HasSiteSections D l E P ∧ HasSystemSections D l E P ∧ HasRestrictionSections D l E P ∧ HasTensorUnits D l E P ∧ HasProducts D l E P A ∧ HasFirstCoordinate D l E A ∧ HasSecondCoordinate D l E A ∧ HasDerivedModel D l E N A ∧ ∀ (m : ℕ) (hm : 1 ≤ m), StrictTransportCoherence D l E hl P m hm ∧ DerivedTransportCoherence D l E hl P m hm ∧ ProductCoherence D l E P A m ∧ ConeCoherence D l E P A m ∧ DerivedComparisonCoherence D l E P A m",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83e3d1488",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Mathematics and records correct. Item changes only lean + added landed def stmt_dep def-weil-strict-roos-model (used for roosF/roosP/roosPmap/roosχ/roosι/roosLimitFunctor); statement verbatim; nothing dropped; no cycle. Clause check: only hl : l ≠ D.p, independent universes t,u; all five coherence clauses (strict u, derived I, product, cone, a_{m+1}d_m = L(t_m)a_1F_1(a_m)) match the node in diagrammatic order for all m ≥ 1. Every existential witness is uniquely pinned: d/t/b identity on sections via HEq over propositionally equal Over objects (h commutes with h^m); tensor via iso j's; ordinary by projections; unit on K-injectives; theta via theta_normalization; psi by projections; kappa by both coordinates (off-diagonals 0); a by HasDerivedModel on every Q(M). The theorem stmt_dep lem-trf-point-system-transport-descent is genuine (derivedTransport is .choose of its main theorem); the owners of other decls are in the transitive closure (advisory). No duplicate found, no hollow data, single sorry, docstrings and line lengths fine. Finding H11: the second reading was not clause by clause. FIX: fixes/lem-trf-point-system-power-roos-coherence.report.md keeps the Worker report and the original paragraphs verbatim and adds a clause-by-clause subsection; no Lean change, no compile needed. Advisories: source.document names prop-trf-rational-frobenius-integral-model instead of thm-trf-l-function-euler-product (maintainer field); tensor compositor identified with the canonical pullback composition only via its unit property, because the dependency's canonical map is single-universe and derived-level."
  }
 }

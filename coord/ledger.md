@@ -23638,3 +23638,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:20 L: merged deliver/NR/lem-sfb-prime-to-ell-complete-scalar-integral (stage 2; reviewer PASS; parallel immutable checks)
 - 20:20 L: merged deliver/NB/lem-sfb-bounded-finite-evaluation-rectangle-replacement (stage 2; reviewer PASS; parallel immutable checks)
 - 20:20 L: merged deliver/NU/lem-sfb-profinite-metric-function-quotients (stage 2; reviewer PASS; parallel immutable checks)
+- 20:22 L: merged deliver/O3/lem-sfb-field-action-derived-section-transport (stage 2; reviewer PASS; parallel immutable checks)
+- 20:22 L: merged deliver/Q01/lem-trf-point-system-power-roos-coherence (stage 2; reviewer FIX; parallel immutable checks)

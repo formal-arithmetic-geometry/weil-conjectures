@@ -1,0 +1,115 @@
+{
+ "id": "def-sfb-field-action-scalar-transport-data",
+ "kind": "definition",
+ "title": "Normalized scalar transport for the field-action equivalence",
+ "status": "split",
+ "statement": "Given fields $k\\subset k^s$, the Krull group $G$, commutative condensed rings $R,R'$ and $\\varphi:R\\to R'$, and normalized field data $e_R,e_{R'}$ as in [def-sfb-field-action-transport-data], define $\\mathrm{ScalarTransport}(\\varphi,e_R,e_{R'})$ as follows. Restriction is the normalized scalar-action restriction of [lem-sfb-condensed-galois-global-descent], required exact, and ordinary extension is its additive left adjoint. Their adjunction square with ordinary scalar extension [sk-def-sfb-change-of-scalars] on the field site and with ordinary condensed scalar extension preserves every Hom transpose. The field restriction comparison is identity on the normalized geometric sections and has the total-right-derived-unit normalization. Derived extension has a total-left-derived counit with its universal property in the unbounded categories of [sk-def-sfb-derived-categories]; its adjunction to exact restriction has counit equal to the transpose of the original ordinary scalar unit. Its squares with the field and forgotten scalar adjunctions have their exact restriction comparisons normalized by those ordinary comparisons. The derived scalar counit, adjunction and field-extension comparison preserve canonical shifts. This defines the type of compatible scalar data; it does not assert existence.",
+ "stmt_deps": [
+  "def-sfb-field-action-transport-data",
+  "lem-sfb-condensed-galois-global-descent",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-categories"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10 (field site); Definition 6.8.3 and Proposition 6.8.4 (finite-field lisse modules). Agent-formulated ordinary derived and coefficient normalization of that presentation; exact combined reference WANTED."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Scalar adjunction transport for a condensed Galois field equivalence preserving ordinary and derived extension units counits and canonical shifts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) (x : ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars f g)) x =\\n    (CategoryTheory.Concrete\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the natural bijection between $ R $-linear maps $ X → Y^{\\text{res}} $ and $ S $-linear maps $ X^{\\text{ext}} → Y $ sends an\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[adj.CommShift A] (a : A) (Y : D) : ((G ⋙ F).commShiftIso a).inv.app Y ≫ adj.counit.app (Y⟦a⟧) = (adj.counit.app Y)⟦a⟧'\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ commuting with shift operations parameterized by an additive monoid $ A $, the inverse of\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityCounit adj e₁ e₂) (X : C) :\\n  e₁.hom.app X = F.map ((adj.unit.app X)⟦a⟧') ≫ F.map (e₂.inv.app _) ≫ adj.counit.app _\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an additive monoid $A$ with s\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Eight related hits; none defines the normalized internal field-action transport data. Reused the existing internal module, derived, shift and geometric-section constructions instead."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Normalized field-action scalar and geometric transport data with derived-unit and counit equations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"Mathlib.Tactic.FieldSimp.normalize\", \"module\": \"Mathlib/Tactic/FieldSimp\", \"type\": \"{v : Lean.Level} →\\n  {M : Q(Type v)} →\\n    ({u : Lean.Level} → (type : Q(Sort u)) → Lean.MetaM Q(«$type»)) →\\n      (iM : Q(CommGroupWithZero «$M»)) →\\n        (x : Q(«$M»)) →\\n          Mathlib.Tactic.AtomM\\n            ((y : Q(«$M»)) ×\\n              ((g : Mathlib.Tactic.FieldSimp.Sign M) ×\\n           \", \"doc\": \"Given a field element $ x $ in a commutative group with zero $ M $, the function produces a normalized representation consisting of: (1) an equivalent element $ y $, (2) a sign indicator $ g $ (positi\"}\n  {\"name\": \"groupCohomology.norm_ofAlgebraAutOnUnits_eq\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [inst_3 : FiniteDimensional K L]\\n  [IsGalois K L] (x : Lˣ),\\n  ↑(Additive.toMul\\n        (Rep.toAdditive\\n          ((CategoryTheory.ConcreteCategory.hom (Rep.ofAlgebraAutOnUnits K L).norm.hom)\\n            (Rep.toAdditive.symm (A\", \"doc\": \"For any unit $ x $ in the field extension $ L $ over $ K $, the norm of the representation of the algebra automorphism group acting on $ x $ coincides with the algebraic norm $ N_{L/K}(x) $, i.e., $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"normalize_apply\", \"module\": \"Mathlib/Algebra/GCDMonoid/Basic\", \"type\": \"∀ {α : Type u_1} [inst : CommMonoidWithZero α] [inst_1 : NormalizationMonoid α] (x : α), normalize x = x * ↑(normUnit x)\", \"doc\": \"For any element $ x $ in a normalization monoid $ \\\\alpha $, the normalization of $ x $ is equal to the product of $ x $ and the normalization unit of $ x $, i.e., $ \\\\text{normalize}(x) = x \\\\cdot \\\\text\"}\n  {\"name\": \"groupCohomology.exists_div_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L] [IsGalois K L]\\n  [IsCyclic Gal(L/K)] {g : Gal(L/K)},\\n  (∀ (x : Gal(L/K)), x ∈ Subgroup.zpowers g) → ∀ {x : L}, (Algebra.norm K) x = 1 → ∃ y, ↑y / g ↑y = x\", \"doc\": \"Let $L/K$ be a finite Galois extension with a cyclic Galois group $\\\\mathrm{Gal}(L/K)$ generated by an element $g$. For any element $x \\\\in L$ with norm $N_{L/K}(x) = 1$, there exists a non-zero element\"}\n  {\"name\": \"IntermediateField.restrictScalars_normal\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] {L : Type u_3}\\n  [inst_3 : Field L] [inst_4 : Algebra F L] [inst_5 : Algebra K L] [inst_6 : IsScalarTower F K L]\\n  {E : IntermediateField K L}, Normal F ↥(IntermediateField.restrictScalars F E) ↔ Normal F ↥E\", \"doc\": \"For an intermediate field $ E $ between fields $ K $ and $ L $, the field $ E $ is a normal extension of $ F $ if and only if the scalar restriction of $ E $ to $ F $ is also a normal extension of $ F\"}\n  {\"name\": \"instSMulDistribClassAlgEquiv\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra K L] [inst_9 : Algebra A L] [inst_10 \", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ acts on the integral closure $B$ of $A$ in $L$ as a distributive scalar multiplication, satisfying $\\\\sigma(b_1 + b_2) = \\\\sigma(b_1) + \\\\sigma(b_2)$ and $\\\\sigma(b \\\\cdo\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No matching normalized field-action data definition."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"The unit of the derived adjunction, see `Adjunction.derived`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"An adjunction between functors induces an adjunction between the\\ncorresponding left/right derived functors, when these derived\\nfunctors are *absolute*, i.e. they remain derived functors\\nafter the post\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"Auxiliary definition for `Adjunction.derived`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No exact bundled data interface."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep FieldData|GeometricTransport|ScalarTransport|CoefficientTransport CategoryTheory; rg \\b(FieldData|GeometricTransport|ScalarTransport)\\b dag/nodes lean/WeilConjectures lean/Sheaf Mathlib/CategoryTheory; blueprint_refs.py search field action transport data",
+   "results": "[grep] OK 0 hit(s)\nExact-word rg: no hits in DAG, upstream, Sheaf or Mathlib.\n0 blueprint nodes match field action transport data.\nBroader AdjunctionSquare search found generic squareExchange and normalizedAdjunctionSquare_transpose; they construct/calculate a mate, not these normalized field/scalar/geometric data types.",
+   "date": "2026-10-21",
+   "verdict": "New packaging of existing canonical functors; no duplicate field-action interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-action-derived-section-transport",
+  "date": "2026-10-21",
+  "group": "O3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of the current direct-images proof: the geometric field-action presentation and its normalized derived scalar projection, used by lem-sfb-geometric-condensed-finite-scalar-model.",
+   "via": [
+    "lem-sfb-field-action-derived-section-transport",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldActionScalarTransportData",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldActionTransport.ScalarTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.ScalarTransport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldActionScalarTransportData.lean",
+  "statement": "structure ScalarTransport extends OrdinaryScalarTransport k ks φ e e'",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52d0aa2c5",
+  "group": "O3",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52d0aa2c5",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read the item (statement verbatim equal to the live Q01-FIXed text), all 18 stmt_deps (CondensedGaloisGlobalDescent GeometricData/OrdinaryData/CoefficientComparison/twist, CondensedActionModule, ActionAbelian (Prop fields only)/ScalarAction, NormContinuousMonodromyData, IsLisseCoefficientModule=locally Mod.IsFree finite rank) and all 5 delivered modules. Every clause is rendered: E_R=GeometricData at Spec k with section/normalization/twist-action equations + IsEquivalence; t-exact; ScalarTransport pins restriction (ScalarAction, field_sections, derived-unit), extensions via AdjunctionSquare transposes, derived extension by IsLeftDerivedFunctor counit = transpose of ordinary unit, shifts; GeometricTransport tests pinned on fibres, ordinary by sections, derived/forgotten by total-derived-unit equations; beta=scalarProjection with rho a normalized CoefficientComparison, projection/arithmetic_counit/forgotten_projection with pointProjection and pinned MorphismScalar/PointScalar squares; restriction/shift naturality; ForgetData; lisse clause via NormContinuousLisse/Representations with C(P,W) realization (n=0, trivial G included). No hollow data, only the main theorem sorry, 16-step docstring, source+blueprint docstrings, no extra hypotheses or universe restriction. Records verbatim; new def nodes well-formed; stmt_deps gain 4 new nodes + landed def-sfb-norm-continuous-monodromy-data. Advisories: coefficientExtensionNormedField is a wrapper in a theorem node's module outside stmt_deps (norm unique; widely used); unused plain imports; pulledModulesDerived is the same instance term as moduleDerived. No compile (no file changed)."
+ }
+}

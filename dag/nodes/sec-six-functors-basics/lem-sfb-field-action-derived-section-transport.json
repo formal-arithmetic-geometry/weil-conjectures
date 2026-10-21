@@ -20,7 +20,12 @@
   "lem-sfb-condensed-galois-global-descent",
   "sk-def-sfb-module-derived-pushpull",
   "def-sfb-lisse-coefficient-module",
-  "def-sfb-continuous-map-condensed-ring"
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-sfb-field-action-transport-data",
+  "def-sfb-field-action-scalar-transport-data",
+  "def-sfb-field-action-geometric-transport-data",
+  "def-sfb-field-action-coefficient-transport-data"
  ],
  "proof": [
   {
@@ -616,5 +621,28 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-b7519026b (reviewer sub-agent of L); spot-checked: I read the whole item: statement and all 16 steps. I checked every cited node's statement, Bhatt–Scholze Ex. 4.1.10 (pp. 27–28) and blueprint main-20261015 direct-images paragraph (3). The statement is byte-identical to the NV-era copy and it is a first split (no repair note, no new nodes). There is no SGA source, no cycle, and no duplicate in the DAG (I checked the profinite-algcl invariants comparison, the exc G-module core and the global-descent node). Checks that held: steps 1–10 (free-orbit subsite = action site with composition (fh, c·h^*b); fully-fixed equalizer, so p_s^* = trivial inflation; exact conservative forgetting; K-flat preservation with no flatness of R→R'; E_R a_* = equivariant geometric sections on K-injectives; the slice comparison with A = h_{s̄}). Steps 13–16 also hold: lisse ⇔ finite free via a point of a profinite chart; the internal action on R^n ⇔ continuous representation by A = action of id_G; Hom = E-matrices. Two repairable faults, both fixed. (1) B3: the statement names 'the scalar-adjunction transpose defining β for K in lem-sfb-condensed-galois-global-descent', but that node does not define β. I wrote the explicit definition into the statement, the same formula as the parent's β_R; this clarifies, it does not weaken. (2) C1/C4: step 11's 'unit-counit cancellation' and step 12's identification of the R-linear projection α of ringed-projection-mate-exact with the R'-linear adjunct both need the step-10 composition comparison ρ to be the conjugate of the derived pullback comparison a_{R'}^*S_s ≅ S_X a_R^*. No cited node says this: derived-composition-adjunction-normalization needs exact left adjoints, and S is not exact. I cited lem-sfb-ringed-comparison-tensor-adjunction ('c is the conjugate of θ', for any commuting square of ringed topoi with no exactness assumed) in steps 11 and 12. I added it to proof_deps and to split_report.tool_uses (it belongs to another unit and is a generic mate fact) and checked that it does not reach the item. I accept the 15 declared tool uses. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-action-derived-section-transport.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldActionDerivedSectionTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldActionTransport.field_action_derived_section_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.Assertion",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.field_action_derived_section_transport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldActionDerivedSectionTransport.lean",
+  "statement": "theorem field_action_derived_section_transport : Assertion k ks",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The explicitly defined proposition Assertion quantifies the complete normalized field, scalar, geometric and lisse transport system. Its data specifications are the four new definition nodes. The only postponed proof is the main theorem, with the sixteen-step proof docstring. Existing norm-continuous monodromy definitions are reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52d0aa2c5",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read the item (statement verbatim equal to the live Q01-FIXed text), all 18 stmt_deps (CondensedGaloisGlobalDescent GeometricData/OrdinaryData/CoefficientComparison/twist, CondensedActionModule, ActionAbelian (Prop fields only)/ScalarAction, NormContinuousMonodromyData, IsLisseCoefficientModule=locally Mod.IsFree finite rank) and all 5 delivered modules. Every clause is rendered: E_R=GeometricData at Spec k with section/normalization/twist-action equations + IsEquivalence; t-exact; ScalarTransport pins restriction (ScalarAction, field_sections, derived-unit), extensions via AdjunctionSquare transposes, derived extension by IsLeftDerivedFunctor counit = transpose of ordinary unit, shifts; GeometricTransport tests pinned on fibres, ordinary by sections, derived/forgotten by total-derived-unit equations; beta=scalarProjection with rho a normalized CoefficientComparison, projection/arithmetic_counit/forgotten_projection with pointProjection and pinned MorphismScalar/PointScalar squares; restriction/shift naturality; ForgetData; lisse clause via NormContinuousLisse/Representations with C(P,W) realization (n=0, trivial G included). No hollow data, only the main theorem sorry, 16-step docstring, source+blueprint docstrings, no extra hypotheses or universe restriction. Records verbatim; new def nodes well-formed; stmt_deps gain 4 new nodes + landed def-sfb-norm-continuous-monodromy-data. Advisories: coefficientExtensionNormedField is a wrapper in a theorem node's module outside stmt_deps (norm unique; widely used); unused plain imports; pulledModulesDerived is the same instance term as moduleDerived. No compile (no file changed)."
  }
 }
