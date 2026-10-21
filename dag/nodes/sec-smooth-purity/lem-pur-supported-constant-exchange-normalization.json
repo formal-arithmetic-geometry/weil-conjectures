@@ -29,9 +29,145 @@
   "def-pur-support-cohomology",
   "lem-weil-pbc-comparison-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the fixed larger coefficient universe, so the chosen sites are small. The etale and pro-etale inverse-image adjunctions and the comparison geometric morphism are those of [def-weil-pbc-inverse-image], [def-weil-proetale-inverse-image] and [def-weil-pbc-site-comparison-morphism]. For the etale scheme inverse image, [prop-weil-pbc-inverse-image-modules-exact] explicitly gives exactness and the constant-unit map. Apply [lem-pe-constant-left-module-inverse-image] to the pro-etale and comparison geometric morphisms and $\\Lambda=A$. It supplies exact inverse image on ordinary modules, the canonical $q:LA_X\\simeq A_{\\mathrm{target}}$ preserving every constant scalar, and compatibility of the underlying units with composition and localization. Thus the same assertion applies on the complementary opens and on the closed schemes. The constant identifications for two successive inverse images are their composite: both carry every constant scalar to itself. This also holds across the specified inverse-image comparison, since constant sheaves are sheafifications of the constant presheaves [def-weil-pbc-constant-sheaf], and their constant sections determine maps out of them.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YV, proposition-functoriality-algebraic-structures-topoi (2), (5), (6), and 0H7J, example-constant-sheaf; fixed-ring specialization and constant sections"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-closed-short-exact] with $F=A_X$ on the etale site. Under $i^{-1}A_X\\simeq A_Z$ and $j^{-1}A_X\\simeq A_U$ its maps are exactly $\\rho$ and $\\epsilon$. Apply [lem-pur-proetale-supported-constant-presentation] on the pro-etale site. Consequently in every source and target pair $\\rho$ is the cokernel of $\\epsilon$. The latter cited statement expressly permits a non-quasi-compact open complement. We use its assertion only for the constant sheaf, not for arbitrary pro-etale sheaves.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-pur-proetale-supported-constant-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L, lemma-ses-associated-to-open; pro-etale constant-coefficient version is the existing presentation lemma, modeled on Milne LEC Section 9, proof of Theorem 9.4, p. 67"
+   }
+  },
+  {
+   "text": "Write $L_U$ for the inverse image on the open and $a:L_Uj^{-1}\\simeq j'^{-1}L$ for the localization comparison. The isomorphisms $b:Lj_!\\simeq j'_!L_U$ are supplied respectively by [lem-cbc-extension-zero-base-change], [lem-cbc-proetale-extension-zero-base-change] and [lem-cbc-proetale-extension-zero-comparison]. Here the inverse of the canonical comparison is the open-adjunction transpose of $a_{j_!F}\\,L_U(\\eta^j_F):L_UF\\to j'^{-1}Lj_!F$. For the site comparison this normalization is explicitly [lem-sf-open-comparison-unit-normalization]; the same mate description for scheme pullback follows by composing the open adjunctions and the sectionwise localization identity of [lem-weil-pbc-localize-ringed-site-morphism]. Use the adjunctions of [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-extension-by-zero-adjunction]. Transposing $q\\,L\\epsilon\\,b^{-1}$ under $j'_!\\dashv j'^{-1}$ gives $j'^{-1}(q)\\,a_{A_X}\\,L_U(j^{-1}\\epsilon\\,\\eta^j_{A_U})=q_U$, by the triangle identity and the constant identifications. Transposing $\\epsilon'j'_!q_U$ also gives $q_U$. Hence $q\\,L\\epsilon=\\epsilon'j'_!q_U\\,b$: this is the asserted compatibility with the actual counit.",
+   "uses": [
+    "lem-cbc-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change, proof by common right adjoints; sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites; proetale.tex Tag 09AF, lemma-jshriek-comparison; displayed counit calculation is agent-written"
+   }
+  },
+  {
+   "text": "Check the normalization of the actual closed exchange before using the cokernel. Put $r=i^{-1}$, $r'=i'^{-1}$, let $L_Z$ be inverse image on the closed schemes, and write $t:r'L\\simeq L_Zr$ for the canonical comparison. Let $q_i:rA_X\\simeq A_Z$ and $q_{i'}:r'A_{\\mathrm{target}}\\simeq A_{Z'}$. By [def-weil-pbc-underived-exchange] and the mate formula [def-weil-pbc-adjunction-mate], $d:Li_*A_Z\\to i'_*A_{Z'}$ has transpose $q_Z\\,L_Z(\\varepsilon^i_{A_Z})\\,t_{i_*A_Z}$. Constant restriction $\\rho$ is the adjunct of $q_i$, so $\\varepsilon^i_{A_Z}\\,r\\rho=q_i$. Naturality of $t$ now says that the transpose of $dL\\rho$ is $q_Z\\,L_Zq_i\\,t_{A_X}$. The transpose of $\\rho'q$ is $q_{i'}\\,r'q$. These are equal by the constant-unit coherence from step 1. The adjunction bijection therefore gives $dL\\rho=\\rho'q$. This calculation uses only adjunction naturality and the triangle identity; it applies unchanged to the pro-etale and site-comparison mates.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, definition as the adjunct of inverse image of the counit; explicit constant-unit triangle calculation"
+   }
+  },
+  {
+   "text": "By exactness, $L\\rho$ is a cokernel of $L\\epsilon$. Step 3 identifies $L\\epsilon$ with $\\epsilon'$ through isomorphisms on its source and target, so the cokernel universal property gives a unique $\\bar d:LP\\to P'$ with $\\bar dL\\rho=\\rho'q$. Applying the same property with $q^{-1}$ gives $e:P'\\to LP$ with $e\\rho'=L\\rho q^{-1}$. Then $(e\\bar d)L\\rho=L\\rho$ and $(\\bar de)\\rho'=\\rho'$. Cokernel uniqueness gives $e\\bar d=1$ and $\\bar de=1$. Step 4 identifies $d=\\bar d$. This proves both invertibility and the characterization of the prescribed exchange, not merely an isomorphism of the objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095L and 03S6; elementary cokernel universal-property argument from steps 1–4"
+   }
+  },
+  {
+   "text": "Put $N=\\nu_X^{-1}$, $N'=\\nu_{X'}^{-1}$, $H=h_{\\mathrm{et}}^{-1}$ and $H_p=h_{\\mathrm{proet}}^{-1}$. Use the natural coherent comparison $k:N'H\\simeq H_pN$ of [lem-weil-pbc-comparison-pullback]. Precompose the two claimed closed-exchange composites with $N'H\\rho$. For $\\gamma_{X'}N'(c_e)$, step 4 gives $\\rho'_{\\mathrm{proet}}q_{N'}N'(q_H)$. For $c_pH_p(\\gamma_X)k_P$, naturality gives $k_PN'H\\rho=H_pN\\rho\\,k_{A_X}$; step 4 then gives $\\rho'_{\\mathrm{proet}}q_{H_p}H_p(q_N)k_{A_X}$. The two coefficient maps are equal, since they are the coherent constant identification from step 1. Finally $N'H\\rho$ is epic, as a cokernel carried through two exact functors. Cancel it to obtain exactly $\\gamma_{X'}N'(c_e)=c_pH_p(\\gamma_X)k_P$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YV and 0H7J; elementary cancellation using the canonical comparison of lem-weil-pbc-comparison-pullback and steps 1, 4–5"
+   }
+  },
+  {
+   "text": "For any $M$, let $\\sigma_L(M):M(X)\\to(LM)(X_{\\mathrm{target}})$ be the adjunction-unit section map. The localized direct-image identity in [lem-weil-pbc-localize-ringed-site-morphism] identifies the restrictions of the unit on $X$ and on $U$. In particular $\\operatorname{res}_{U'}\\sigma_L(M)=\\sigma_{L_U}(j^{-1}M)\\operatorname{res}_U$, after the canonical open inverse-image identification. Thus a section restricting to zero on $U$ has image restricting to zero on $U'$. Restrict $\\sigma_L(M)$ to these kernels to define $\\lambda_M$. Naturality of the unit in $M$ gives naturality of $\\lambda$. By [def-pur-support-cohomology] these kernels are precisely $\\Gamma_Z$ and $\\Gamma_{Z'}$ in both topologies. This construction works for every ordinary module sheaf, independently of any higher cohomology.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; Milne LEC Section 9, kernel-of-restriction definition and functoriality"
+   }
+  },
+  {
+   "text": "For completeness check the units underlying the section square. The right adjoints of $N'H$ and $H_pN$ agree sectionwise: on an etale object $V\\to X$ both evaluate a pro-etale sheaf on $V\\times_XX'$, with the same restrictions and scalar action. This is immediate from the direct-image definitions [def-weil-pbc-direct-image], [def-weil-proetale-module-direct-image] and [def-weil-pbc-site-comparison-morphism]. Form their composite units by [def-weil-pbc-composite-adjunction]. The canonical conjugate comparison is $k$; the unit equation in [lem-weil-pbc-conjugate-iso-unit-equation] says that applying $k_M$ after the first composite section map gives the second composite section map. More explicitly, for $s\\in M(X)$ it gives $\\Gamma(k_M)(\\sigma_{N'}(HM)(\\sigma_H(M)(s)))=\\sigma_{H_p}(NM)(\\sigma_N(M)(s))$. By step 7 each intermediate section has the required support whenever $s$ does. Restricting this equality to the kernels proves the asserted square for $\\lambda$. The calculation also identifies the coefficient maps used in step 6 as the actual unit-preserving ones. None of steps 1–8 used quasi-compactness of $U$, or a finiteness condition on $h$ or $X'$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0, lemma-compose-counits, and 0B65, lemma-transformation-between-functors-and-adjoints; explicit unit equation for the sectionwise-identical composite right adjoints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pur-proetale-supported-constant-presentation",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "def-pur-support-cohomology",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 095L and 03S6, with sites.tex Tags 00YV and 0H7J, sites-modules.tex Tag 04J0, proetale.tex Tag 09AF and Milne LEC Section 9, Theorem 9.4; explicit constant exchange and section-square calculations by Q14"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +210,52 @@
    "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
    "date": "2026-10-21",
    "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves commutes with extension by zero and the cokernel constant sheaf supported on a closed subscheme; canonical base change map respects the constant restriction unit",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: the hits give general adjunctions, scheme structure-sheaf restrictions or abstract cokernel comparisons, not the etale/pro-etale supported-constant exchanges and both prescribed squares. Read Adjunction/Basic.lean:193–238, Sites/ConstantSheaf.lean:125–160, ModuleCat/Sheaf/PullbackFree.lean:72–107 and Limits/Preserves/Shapes/Kernels.lean:252–274."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*exchange|supported.*constant|constant.*cokernel|shriek.*baseChange",
+   "results": "3 hits: Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/FieldTheory/Minpoly/Field.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: the hits give general adjunctions, scheme structure-sheaf restrictions or abstract cokernel comparisons, not the etale/pro-etale supported-constant exchanges and both prescribed squares. Read Adjunction/Basic.lean:193–238, Sites/ConstantSheaf.lean:125–160, ModuleCat/Sheaf/PullbackFree.lean:72–107 and Limits/Preserves/Shapes/Kernels.lean:252–274."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical closed immersion base change for a constant sheaf is the isomorphism induced on the cokernel of extension by zero and respects the unit of restriction",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.constantCommuteCompose, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: the hits give general adjunctions, scheme structure-sheaf restrictions or abstract cokernel comparisons, not the etale/pro-etale supported-constant exchanges and both prescribed squares. Read Adjunction/Basic.lean:193–238, Sites/ConstantSheaf.lean:125–160, ModuleCat/Sheaf/PullbackFree.lean:72–107 and Limits/Preserves/Shapes/Kernels.lean:252–274."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsLeftAdjoint",
+   "results": "5 hits: CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint, CategoryTheory.Functor.IsLeftAdjoint.mk, CategoryTheory.isLeftAdjoint_triangle_lift",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: the hits give general adjunctions, scheme structure-sheaf restrictions or abstract cokernel comparisons, not the etale/pro-etale supported-constant exchanges and both prescribed squares. Read Adjunction/Basic.lean:193–238, Sites/ConstantSheaf.lean:125–160, ModuleCat/Sheaf/PullbackFree.lean:72–107 and Limits/Preserves/Shapes/Kernels.lean:252–274."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*constantSheaf|constantSheaf.*pullback|preservesCokernel|mapCokernel",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: the hits give general adjunctions, scheme structure-sheaf restrictions or abstract cokernel comparisons, not the etale/pro-etale supported-constant exchanges and both prescribed squares. Read Adjunction/Basic.lean:193–238, Sites/ConstantSheaf.lean:125–160, ModuleCat/Sheaf/PullbackFree.lean:72–107 and Limits/Preserves/Shapes/Kernels.lean:252–274."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the adjunction mate base change map for direct image on constant ring sheaves and compatibility with the cokernel sequence for an open closed decomposition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: the hits give general adjunctions, scheme structure-sheaf restrictions or abstract cokernel comparisons, not the etale/pro-etale supported-constant exchanges and both prescribed squares. Read Adjunction/Basic.lean:193–238, Sites/ConstantSheaf.lean:125–160, ModuleCat/Sheaf/PullbackFree.lean:72–107 and Limits/Preserves/Shapes/Kernels.lean:252–274."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-supported-hom-pullback",
@@ -96,5 +274,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-supported-constant-exchange-normalization",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and split its proof into eight steps, reusing existing exact constant-module pullback, etale/pro-etale constant cokernel presentations, and open comparison lemmas. Calculated the actual closed mate on constant restriction, constructed its inverse by the cokernel universal property, and checked the closed-exchange and supported-section squares by cancellation and composite-unit equations. No new nodes and no Lean changes.",
+  "blueprint": "thm-pur-affine-line-orientation, current main-20261015 proof: the geometric-fibre restriction and final etale-origin comparison. This is the underived exchange refinement of lem-pur-supported-hom-pullback, original steps 1–3 and 9, recorded in blueprint.from.place. The affine-line/Kummer unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact geometric inverse image on fixed-scalar module sheaves with coherent constant units; a general small-site tool independent of the affine-line/Kummer computation."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Etale open/closed presentation at the constant sheaf; a generic sheaf localization tool, not an alternative Kummer route."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Canonical etale open extension comparison as an adjunction mate; a generic sheaf operation used to compare the two cokernel presentations."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Canonical pro-etale open extension comparison; the same generic sheaf operation with no quasi-compactness condition."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Etale-to-pro-etale open extension comparison, used only at sheaf level to identify the constant cokernel maps."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Unit normalization of the site comparison for open extension, needed to identify its actual counit."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic localization identity for ringed-site inverse and direct images; used for the open counit and restriction of section maps."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The etale open adjunction used in the explicit transpose calculation."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "The pro-etale open adjunction used in the same explicit transpose calculation."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Coherent comparison of the two inverse-image composites, used as a generic sheaf-level comparison in both squares."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uniqueness and unit normalization of a conjugate adjunction isomorphism; a general categorical tool for the section square."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and the canonical constant-ring identification for ordinary etale module pullback; a general coefficient-sheaf tool, not a replacement of the Kummer argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-6784f47d1",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-6784f47d1 (reviewer sub-agent of L); spot-checked: I read all eight steps in full against the statements of every cited node and against Stacks 03S6 (lemma-shriek-base-change) and 095L (lemma-ses-associated-to-open). The item's statement is unchanged from live (unsplit); only the split fields changed. There are no new nodes, the closure check finds no cycle, and the item is neither on the dropped list nor already split live. No SGA source is cited. The 12 declared tool_uses are all generic sheaf or adjunction operations; I accept them. Step 1 gets the exact inverse images and the scalar-preserving constant identification q from prop-weil-pbc-inverse-image-modules-exact and lem-pe-constant-left-module-inverse-image. Step 2: rho is the cokernel of epsilon in both topologies, by the open/closed sequence with Lambda=A and by the pro-etale constant presentation, which needs no quasi-compactness. In step 3 I redid the transpose and it holds: q Lε = ε' j'_!(q_U) b; step 5 needs only an isomorphism b satisfying this equation. In step 4 I checked the mate types; the triangle identity gives ε^i r(ρ)=q_i, so dLρ=ρ'q. Step 5 is a correct two-sided inverse argument through the cokernel's universal property, and it also gives uniqueness. Step 6 is correct cancellation by the epimorphism N'Hρ, with the two coefficient maps equal because both send the section 1 to 1. Step 7 builds λ from the unit section maps and the localization identity. Step 8 proves the section square from the conjugate-isomorphism unit equation. One advisory point: the fact that k is the adjoint conjugate is stated only in the proof and in the Lean of lem-weil-pbc-comparison-pullback, not in its statement. This is the DAG's fixed reading of that canonical map, spelled out verbatim in lem-pur-comparison-pullback-open-unit, so I do not count it as a C3 fault. Edge cases checked: Z empty, Z=X, h the identity, X' empty, non-quasi-compact U, and arbitrary M. No fixes written."
  }
 }

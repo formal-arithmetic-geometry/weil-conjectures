@@ -21380,3 +21380,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q57/lem-sfb-finite-colimit-matrix-cokernels (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q78/lem-pur-perfect-quotient-exchange-normalization (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q84/lem-pur-finite-expression-reduction-comparison (reviewer PASS; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q14/lem-pur-supported-constant-exchange-normalization (reviewer PASS; first push; new nodes: 0)
