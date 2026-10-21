@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-nagata-blowup-flat-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Flat base change of blow-ups",
@@ -17,26 +17,125 @@
  ],
  "proof": [
   {
-   "text": "Relative Proj sends the graded equivalence of\n[lemma-nagata-flat-pullback-rees] to an affine-local isomorphism.\nCompatibility with degree zero identifies the structure maps, and the\nlocalization cocycle glues the local isomorphisms.",
+   "text": "Use the data of [def-nagata-blowup-flat-base-change-map]: $g:Y\\to X$ is flat, $\\mathcal I$ is quasi-coherent, $\\mathcal J=\\mathcal I\\mathcal O_Y$, $B=\\operatorname{Bl}_{\\mathcal J}(Y)$, and $T=Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)$. Write $f=\\operatorname{bc}_g:B\\to T$. By [lemma-nagata-flat-pullback-rees], the canonical map $\\beta_g:g^*\\mathcal R_X(\\mathcal I)\\to\\mathcal R_Y(\\mathcal J)$ is a graded algebra equivalence. Its degree-zero map is the canonical identification $g^*\\mathcal O_X\\cong\\mathcal O_Y$: this is the $n=0$ component of the canonical maps in [def-nagata-flat-pullback-rees-map]. Thus it preserves the chosen degree-zero structural maps, as required when applying relative Proj.",
    "uses": [
-    "lemma-nagata-flat-pullback-rees"
+    "def-nagata-blowup-flat-base-change-map",
+    "lemma-nagata-flat-pullback-rees",
+    "def-nagata-flat-pullback-rees-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up, proof; compare the current blueprint proof of thm-nagata-blowup-flat-base-change"
+   }
+  },
+  {
+   "text": "Let $a:B\\xrightarrow{\\sim}P_Y(\\mathcal R_Y(\\mathcal J))$ and $d:Y\\times_X P_X(\\mathcal R_X(\\mathcal I))\\xrightarrow{\\sim}T$ denote the chart-preserving identifications in [def-nagata-blowup-flat-base-change-map]. For each affine open $W\\subseteq Y$, the restriction of the specified comparison is exactly $f_W=d_W\\circ(c_g)_W\\circ P_Y(\\beta_g)_W\\circ a_W$, by the displayed composite in that definition. Apply clause (2) of [prop-nagata-relative-proj-functoriality] to the graded equivalence from Step 1: contravariance gives an isomorphism from the Proj of $\\mathcal R_Y(\\mathcal J)$ to the Proj of $g^*\\mathcal R_X(\\mathcal I)$. Clause (4), with the given flat $g$, gives the isomorphism $c_g$ to $Y\\times_X P_X(\\mathcal R_X(\\mathcal I))$. Clause (1) identifies the affine-base restrictions. All four factors are over $W$: the middle maps respect the degree-zero structural maps and the coefficientwise base-change structure, and the outer identifications respect the chosen local models and structure morphisms, as specified in the comparison definition. Thus $f_W$ is an isomorphism over $W$; its inverse is $a_W^{-1}\\circ P_Y(\\beta_g)_W^{-1}\\circ(c_g)_W^{-1}\\circ d_W^{-1}$, with the inverse equations obtained by cancelling adjacent inverse factors. Here restriction means inverse image of $W$ under each structure map to $Y$, and makes no claim that a blow-up is affine.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up, proof; compare the current blueprint proof of thm-nagata-blowup-flat-base-change"
+   }
+  },
+  {
+   "text": "Choose the affine open cover $(W_a)$ of $Y$ used to construct $f$ and write $h_a=(f_{W_a})^{-1}:T|_{W_a}\\to B|_{W_a}$. These inverse maps are over $W_a$. On $W_a\\cap W_b$ both $f_{W_a}$ and $f_{W_b}$ restrict to the same map $f_{ab}$, since they are restrictions of the specified global $f$. Their inverses restrict to inverses of $f_{ab}$, so they agree: if $u$ and $v$ are these inverses, then $u=u\\circ(f_{ab}\\circ v)=(u\\circ f_{ab})\\circ v=v$. Regard $h_a$ as a map $T|_{W_a}\\to B$ and apply [lem-weil-pbc-scheme-morphism-gluing] to obtain $h:T\\to B$. The opens $T|_{W_a}$ cover $T$, and $B|_{W_a}$ cover $B$. On these covers $f\\circ h$ and $h\\circ f$ are respectively the identities, by the local inverse equations. The uniqueness assertion of the same gluing node gives $f\\circ h=1_T$ and $h\\circ f=1_B$. This proves that the constructed comparison itself is an isomorphism; it does not merely produce an unspecified isomorphism between the two schemes.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA, section-glueing-schemes, mapping property in lemma-glue; inverse-gluing argument for Tag 0805 expanded"
+   }
+  },
+  {
+   "text": "Let $p:B\\to Y$ and $q:T\\to Y$ be the structure maps. Step 2 gives $q\\circ f=p$ locally on the cover of $B$, hence globally by [lem-weil-pbc-scheme-morphism-gluing]. Composing with the inverse $h$ of Step 3 gives $p\\circ h=q\\circ f\\circ h=q$. Thus $f$ and its inverse are morphisms over $Y$, proving the asserted isomorphism over $Y$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA, section-glueing-schemes, mapping property in lemma-glue; inverse-gluing argument for Tag 0805 expanded"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-flat-pullback-rees-map",
+  "lem-weil-pbc-scheme-morphism-gluing",
   "lemma-nagata-flat-pullback-rees",
-  "lemma-nagata-global-blowup-overlap-cocycle",
   "prop-nagata-relative-proj-functoriality"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-blowup-flat-base-change.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0805 (lemma-flat-base-change-blowing-up), proof; relative-Proj comparison as in Tag 01O3 (constructions-lemma-relative-proj-base-change), with inverse gluing expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a quasi coherent ideal commutes with flat base change",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.Flat.instSndScheme",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, blowup",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|Blowup|blowing",
+   "results": "No hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup of an ideal sheaf commutes with flat base change",
+   "results": "RingHom.Flat.isStableUnderBaseChange; IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat; Module.Flat.isBaseChange; AlgebraicGeometry.Flat.isStableUnderBaseChange; IsSMulRegular.of_flat_of_isBaseChange; RingHom.FaithfullyFlat.isStableUnderBaseChange; Ideal.comap_map_eq_self_of_faithfullyFlat; RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective spectrum of the Rees algebra of an extended ideal is the pullback of the blowup along a flat morphism",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc; AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|ReesAlgebra|BlowUp",
+   "results": "No hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackAwayιIso|def fromOfGlobalSections|theorem isStableUnderBaseChange",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -78,5 +177,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "thm-nagata-blowup-flat-base-change",
+  "worker": "stage1",
+  "summary": "Repair of the return at efbece0ac30: re-read all five cited statements on the current DAG. The comparison definition now specifies a four-factor global composite with chart-preserving blow-up identifications and Y first in the fibre product. Step 2 now identifies every local comparison with the restriction of that exact composite, including its two outer identifications, and writes its inverse. Revalidated the degree-zero hypothesis and replaced the stale definition quotes in citations.json. Retained the reviewed four-step Rees/relative-Proj and inverse-gluing argument, statement, searches and blueprint metadata. No new nodes or Mathlib leaves.",
+  "blueprint": "Current main-20261015 proof, first sentence: Steps 1–2 apply relative Proj to the flat Rees equivalence and the relative-Proj base-change isomorphism. Second sentence: Steps 2 and 4 check degree zero and the structure morphisms; Step 3 expands compatible gluing by uniqueness of local inverses. This is not the key node of the unit, so its realization record is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-0bbded31f",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-0bbded31f (reviewer sub-agent of L); spot-checked: I read the full 4-step split. It has no new nodes, and against live only split-owned fields change; the statement, stmt_deps and blueprint_update are unchanged. It repairs the landing return of efbece0ac30: Step 2 now uses the four-factor composite d∘c_g∘P_Y(β_g)∘a of def-nagata-blowup-flat-base-change-map, and that statement matches live exactly (Q135 PASS). The item is still imported live and no repair note names it, so the re-split rule does not apply. Sources read: main-20261015 item and its proof (order 125); Stacks 0805 at divisors.tex l.8351-8380; Stacks 01O3 at constructions.tex l.4081. Step 1: lemma-nagata-flat-pullback-rees gives the graded equivalence, and the n=0 component of def-nagata-flat-pullback-rees-map is g*O_X≅O_Y, which is the degree-zero hypothesis clause (2) needs. Step 2: prop-nagata-relative-proj-functoriality clause (2) gives contravariant P_Y(β_g) (correct direction) and clause (4) with flat g gives c_g. The outer maps a and d are isomorphisms by the definition, all four factors are over Y, and the written inverse is in the right order. Step 3: local inverses agree on overlaps by inverse uniqueness, with no affine intersections assumed. The Mathlib leaf gives existence and uniqueness, hence fh=1 and hf=1. Step 4: the over-Y claim is a genuinely elementary step. Dropping the overlap-cocycle node is correct, since gluing morphisms needs only pairwise agreement. The route is fine: relative-Proj is in the cited unit sk-def-nagata-sketch-data and the gluing lemma is a Mathlib leaf, so no tool_uses are needed. There is no cycle (256-node closure), no duplicate (searched blow/flat/base change and tag 0805), and no SGA citation. Edge cases checked: unit, zero and nilpotent ideals, g=id, empty Y. Advisory: since bc_g is now a global composite of four isomorphisms, the localize-and-glue argument in Steps 2–3 is longer than needed but correct. The Lean blowupFlatBaseChangeIso has the opposite factor order and is not attached."
  }
 }
