@@ -1,0 +1,92 @@
+{
+ "id": "lem-sfb-continuous-frame-sheaf-comparison",
+ "kind": "statement",
+ "title": "Continuous frames identify coefficient sheaves and their scalar extension",
+ "statement": "Let $K$ be a field with a topology making its field operations continuous, and let $A\\subseteq K$ be a subring with the subspace topology. Let $r\\geq0$ and $L\\subseteq K^r$ be an $A$-submodule, with the subspace topology from the product topology. Suppose $b_1,\\ldots,b_r\\in L$ are an $A$-basis of $L$ and a $K$-basis of $K^r$, and that $\\beta:A^r\\to L$, $(a_i)\\mapsto\\sum_i a_i b_i$, is a homeomorphism. Let $S$ be any scheme [def-pc-scheme], with its small pro-étale site [def-weil-pbc-proetale-site]. For a topological ring $T$, put $T_S(U)=C(|U|,T)$ with pointwise operations and precomposition restrictions, as in [def-weil-pbc-lisse-lattice-coefficients]. Define $F_L(U)=C(|U|,L)$ with pointwise $A_S(U)$-action and the same restrictions. Then $A_S,K_S$ are sheaves of rings and $F_L$ is a sheaf of $A_S$-modules [def-weil-sheaf-of-modules-category]. The maps\n$$\\phi_U:A_S(U)^r\\xrightarrow{\\sim}F_L(U),\\qquad (a_i)\\mapsto\\bigl(x\\mapsto\\sum_i a_i(x)b_i\\bigr),$$\nwith inverse $f\\mapsto(x\\mapsto(\\beta^{-1}(f(x)))_i)_i$, are $A_S(U)$-linear isomorphisms commuting with every restriction. In particular $F_L\\cong A_S^r$ as module sheaves. The actual inclusion $\\iota:F_L\\hookrightarrow K_S^r$ is postcomposition with $L\\subseteq K^r$. For every $U$, its scalar-extension map\n$$\\mu_U:K_S(U)\\otimes_{A_S(U)}F_L(U)\\xrightarrow{\\sim}C(|U|,K^r),\\qquad a\\otimes f\\mapsto\\bigl(x\\mapsto a(x)f(x)\\bigr)$$\nis a $K_S(U)$-linear isomorphism. If $B\\in\\operatorname{GL}_r(K)$ has columns $b_i$ and $\\underline b_i$ denotes the constant $L$-valued section, its inverse sends $g$ to $\\sum_i (B^{-1}g)_i\\otimes\\underline b_i$. The maps $\\mu_U$ and their inverses commute with every restriction. Under $\\phi_U$ and the identification $a\\otimes(a_i)_i\\mapsto(aa_i)_i$, the map $\\mu_U$ is multiplication by the constant matrix $B$. Thus the presheaf tensor product is already a sheaf, and the morphism $K_S\\otimes_{A_S}F_L\\to K_S^r$ induced by $\\iota$ is an isomorphism for the sheaf tensor product [def-pur-sheaf-tensor-product]. All assertions include $r=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace, sentence that the constant sheaf attached to the sum lattice is free and spans E^r: continuous frame and actual inclusion after scalar extension; general coordinate lemma extracted by Q46 from the explicit argument of lem-sfb-continuous-lattice-sum"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, TensorProduct",
+   "results": "3 hits; ContinuousMap.tensorHom, ContinuousMap.denseRange_tensorHom, ContinuousMap.tensorHom_tmul. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousLattice|lattice.*[Tt]ensor|[Tt]ensor.*lattice|continuousMap.*[Bb]asis|ContinuousMap.*[Tt]ensor",
+   "results": "2 hits; Mathlib/CategoryTheory/Monoidal/Cartesian/InfSemilattice.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/InfSemilattice.lean. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions into a lattice with a topological basis form a free module sheaf and extension of scalars of its inclusion is given by its invertible basis matrix",
+   "results": "8 hits; TopModuleCat.freeObj, SheafOfModules.ιFree, SheafOfModules.free, Module.Basis.coe_constrL, Module.Basis.constrL.congr_simp, TopModuleCat.freeMap, TopModuleCat.free, TopModuleCat.instIsLeftAdjointTopCatFree. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a full p-adic integral lattice with a basis coordinate homeomorphism the continuous function module sheaf is free and its actual inclusion becomes an isomorphism after tensoring with continuous field valued functions",
+   "results": "8 hits; Profinite.NobelingProof.Nobeling_aux, LocallyConstant.freeOfProfinite, TopModuleCat.freeAdj, TopModuleCat.free_obj, TopModuleCat.coe_freeObj, instModuleFree_of_discrete_submodule, ZLattice.module_free, TopModuleCat.free. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposing continuous functions with a lattice basis matrix gives a natural free coefficient sheaf whose field scalar extension is the ambient vector valued function sheaf",
+   "results": "8 hits; SheafOfModules.freeMap, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeFunctor_map, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.Presentation.mapGenerators. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|isSheaf_fpqcTopology_continuousMapPresheafAb|pi.*[Tt]ensor|[Tt]ensor.*pi",
+   "results": "5 hits; Mathlib/Topology/UniformSpace/ProdApproximation.lean, Mathlib/Topology/UniformSpace/ProdApproximation.lean, Mathlib/Topology/UniformSpace/ProdApproximation.lean, Mathlib/Topology/UniformSpace/ProdApproximation.lean, Mathlib/Topology/UniformSpace/ProdApproximation.lean. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a subring A of a topological field K and a submodule with a homeomorphic finite basis also spanning K to the r power, the continuous function sheaf is free and its tensor extension is K valued functions",
+   "results": "8 hits; Algebra.TensorProduct.basisAux, SheafOfModules.ιFree, SheafOfModules.free, TopModuleCat.freeObj, TopCat.presheafToTopCommRing, continuousSubmodule, SheafOfModules.pullbackObjFreeIso.congr_simp, TopCat.continuousFunctions. Read ContinuousMap.tensorHom at Mathlib/Topology/UniformSpace/ProdApproximation.lean:90-99: its tensor is over constant R and its target is functions on a product of two spaces, so it is a different map. SheafOfModules.free is an abstract free sheaf, not the continuous-function identification. Algebra.TensorProduct.basisAux is algebraic; it does not establish the continuous coordinate comparison or its sheaf and restriction compatibility. No full match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-lattice-sum",
+  "date": "2026-10-21",
+  "group": "Q46"
+ },
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Pushing down by the trace, sentence that the constant sheaf attached to the sum lattice is free and spans E^r: continuous frame and actual inclusion after scalar extension",
+   "via": [
+    "lem-sfb-continuous-lattice-sum"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
