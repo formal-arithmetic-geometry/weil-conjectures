@@ -17,88 +17,78 @@
  ],
  "proof": [
   {
-   "text": "Choose complexes representing $K,L$. Put $A=\\tau_{\\leq a-1}K$, $B=\\tau_{\\leq c-1}L$, $K^+=\\tau_{\\geq a}K$, and $L^+=\\tau_{\\geq c}L$. By the explicit good-truncation cohomology in [def-kun-truncations], $A$ has zero cohomology above $a-1$, $B$ above $c-1$, and $K^+$ above $b_K$. The latter assertion includes $a>b_K$, when $K^+$ is acyclic. The same definition shows that $K^+$ has cohomology only in $[a,b_K]$ and $L^+$ only in $[c,b_L]$. If a lower endpoint exceeds its upper endpoint, all cohomology vanishes. These constructions and their canonical maps are interpreted in the localization [def-weil-abstract-derived-category].",
+   "text": "Equip module sheaves with the existing symmetric closed monoidal structure, monoidal preadditivity and functorial flat resolutions at the independent site universes. The existing Grothendieck-abelian theorem applies in coefficient universe max(u,v). These are the hypotheses of the source generic derived monoidal category, not extra hypotheses of the statement.",
    "uses": [
-    "def-kun-truncations",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pc-kflat-resolution",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (section-truncations), canonical cochain truncations and their cohomology"
-   }
+   "elementary": false
   },
   {
-   "text": "Use good upper truncation [def-kun-truncations] to represent $A,L,K^+,B$ by complexes with terms zero above $a-1,b_L,b_K,c-1$, respectively. Indeed the upper-truncation inclusion retains all possibly nonzero cohomology and is a quasi-isomorphism, hence invertible in the localization [def-weil-abstract-derived-category]. Apply [lem-pc-kflat-bounded-flat-replacement] to each of these four complexes, preserving its indicated upper term bound. Write the resulting flat complexes as $P_A,P_L,P_+,P_B$. They are K-flat by [lem-pc-bounded-above-flat-kflat-site]. By [lem-weil-pbc-site-derived-tensor-descent], the complexes $\\operatorname{Tot}(P_A\\otimes_RP_L)$ and $\\operatorname{Tot}(P_+\\otimes_RP_B)$ represent $A\\otimes_R^{\\mathbf L}L$ and $K^+\\otimes_R^{\\mathbf L}B$, respectively. This construction uses only a small ringed site, without points or finiteness conditions.",
+   "text": "Use the flat-term K-flat resolving subcategory, its equivalence after localization, and the two natural tensor comparisons of wf_site_derived_tensor_descent. The ordinary complex tensor and the uncurried bifunctor have identity components; their map formulas agree by tensorHom_def. Descend the resulting comparison to the homotopy category by lifting both components of every morphism through its full quotient functor. On the resolving subcategory the source derived tensor counit is invertible: the acyclic-tensor definition gives categorical K-flatness via the homotopy-category acyclic criterion and signed symmetry. Compose the natural comparisons there. Its localization equivalence makes precomposition fully faithful, so this natural isomorphism extends to an isomorphism from wfSiteDerivedTensor to the source derived tensor on all pairs of derived objects.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-localization-universal-property",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the first-factor comparison use the canonical distinguished triangle tau_LE(a-1)K -> K -> tau_GE(a)K. Tensor on the right with L. The source derived tensor functors preserve distinguished triangles; their proof reduces arbitrary derived objects to K-flat homotopy models, as in lem-sc-source-kflat-tensor-left-triangulated, with the right-variable version provided by symmetry. Apply the generic source declaration DerivedCategory.isLE_tensor recorded by lem-weil-pbc-source-derived-tensor-upper-bound to the module-sheaf category. Its first term has upper cohomological bound (a-1)+bL <= i-1. Thus its cohomology in i and i+1 vanishes. The homological-functor long exact sequence makes H^i of the second arrow both monic and epic, hence invertible. The private tensor_truncGE_left theorem is this argument.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-sf-derived-truncation-triangle",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upper bound bK for K is preserved by good lower truncation, including when a>bK. Apply the same triangle argument to L and tensor on the left with tau_GE(a)K. Its discarded first term has bound bK+(c-1) <= i-1. This is the private tensor_truncGE_right theorem. Compose the two induced cohomology isomorphisms using tensorHom_def and functoriality. Naturality of the tensor comparison from Step 2 transfers invertibility to H^i of the specified wfSiteDerivedTensor image of the two canonical truncation maps; an arbitrary objectwise tensor isomorphism would not suffice.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-sf-derived-truncation-triangle",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard t-structure gives tau_GE(a)K lower bound a and preserves its upper bound bK, and gives tau_GE(c)L lower bound c and preserves upper bound bL. Translate these bounds to zero cohomology outside the two stated intervals. If a>bK or c>bL, every integer lies outside the relevant interval, so this proof also covers empty windows.",
    "uses": [
     "def-kun-truncations",
     "def-weil-abstract-derived-category",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 077J (lemma-resolution-by-direct-sums-extensions-by-zero), 06YS (lemma-K-flat-resolution), 06YQ (lemma-bounded-flat-K-flat), and 06YU (definition-derived-tor); bounded-above replacements as in the cited replacement node"
-   }
-  },
-  {
-   "text": "The degree $n$ term of the first total tensor is $\\bigoplus_{p+q=n}P_A^p\\otimes_RP_L^q$ by [def-pc-tensor-complex-sheaves]. A nonzero summand requires $p\\leq a-1$ and $q\\leq b_L$, so the entire term is zero for $n>a-1+b_L$. Since $a\\leq i-b_L$, this implies vanishing in every degree $n\\geq i$, and in particular in degrees $i$ and $i+1$. For the second total tensor, a nonzero summand requires $p\\leq b_K$ and $q\\leq c-1$, so its term is zero for $n>b_K+c-1$. The inequality $c\\leq i-b_K$ again makes all terms in degrees $n\\geq i$ zero. Consequently $H^i$ and $H^{i+1}$ of both $A\\otimes_R^{\\mathbf L}L$ and $K^+\\otimes_R^{\\mathbf L}B$ vanish: cohomology in a degree with zero term is zero, by the kernel/image formula of [def-weil-derived-cohomology-sheaves]. No flatness of good lower truncations is claimed.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
     "def-weil-derived-cohomology-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), with the total-complex formula of homology.tex Tag 012Z (definition-associated-simple-complex)"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-derived-truncation-triangle] to $K$ with $b=a$ to obtain $A\\to K\\to K^+\\to A[1]$, with the canonical map $K\\to K^+$. Derived tensor is exact in each variable by [lem-weil-pbc-ringed-projection-mate-exact], applied to the identity morphism of the ringed topos of $(\\mathcal C,R)$; only its sentence asserting separate exactness is used. Tensor this triangle with $L$. The long exact sequence of [lem-sf-derived-homology-long-exact] contains\n$$0=H^i(A\\otimes_R^{\\mathbf L}L)\\longrightarrow H^i(K\\otimes_R^{\\mathbf L}L)\\longrightarrow H^i(K^+\\otimes_R^{\\mathbf L}L)\\longrightarrow H^{i+1}(A\\otimes_R^{\\mathbf L}L)=0.$$\nThe zero terms were proved in Step 3. Exactness makes the middle arrow both monic and epic, hence an isomorphism in the abelian category of module sheaves. The arrow is induced by the canonical truncation map, since it is the second arrow of the tensored triangle.",
-   "uses": [
-    "lem-sf-derived-truncation-triangle",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), Tags 05RS (lemma-cohomology-homological) and 0147 (definition-homological); tensor exactness is sites-cohomology.tex Tag 06YU"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-derived-truncation-triangle] to $L$ with $b=c$, obtaining $B\\to L\\to L^+\\to B[1]$. Tensor on the left with $K^+$, using separate exactness from [lem-weil-pbc-ringed-projection-mate-exact] for the same identity ringed-topos morphism. The long exact sequence [lem-sf-derived-homology-long-exact] now gives\n$$0=H^i(K^+\\otimes_R^{\\mathbf L}B)\\longrightarrow H^i(K^+\\otimes_R^{\\mathbf L}L)\\longrightarrow H^i(K^+\\otimes_R^{\\mathbf L}L^+)\\longrightarrow H^{i+1}(K^+\\otimes_R^{\\mathbf L}B)=0,$$\nagain by Step 3, so its middle arrow is an isomorphism. Compose it with the isomorphism of Step 4. Bifunctoriality in [lem-weil-pbc-site-derived-tensor-descent] identifies the composite with $H^i$ of the tensor of the two canonical truncation maps: applying the first map and then the second equals their bifunctor image. This is the asserted canonical isomorphism; the window assertions were proved in Step 1.",
-   "uses": [
-    "lem-sf-derived-truncation-triangle",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), Tags 05RS and 0147; sites-cohomology.tex Tag 06YU (definition-derived-tor) and Tag 094H (lemma-locally-constant-tensor-product), corrected finite-window argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-truncations",
-  "def-weil-abstract-derived-category",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
   "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-localization-universal-property",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-derived-cohomology-sheaves",
+  "def-kun-truncations",
   "lem-sf-derived-truncation-triangle",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sf-derived-homology-long-exact"
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-weil-pbc-source-derived-tensor-upper-bound",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094H (lemma-locally-constant-tensor-product), first truncation reduction, with the already-corrected cutoffs; explicit degree calculation using Tags 06YQ, 06YU, 077J and derived.tex Tags 08J5, 05RS."
+  "place": "Tag 094H, corrected finite-window argument; reuse the generic source bound DerivedCategory.isLE_tensor in FlatModel.lean:441-449 and tensor exactness in Monoidal/Shift.lean. The natural comparison with the existing named tensor is proved by resolving-subcategory localization."
  },
  "mathlib_searches": [
   {
@@ -247,10 +237,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat-site"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -277,5 +264,15 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261021T061014-L-1683930",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
