@@ -1,0 +1,83 @@
+{
+ "id": "lem-sfb-internal-scalar-extension-section-test",
+ "kind": "statement",
+ "title": "Internal scalar-extension flatness tested on sectionwise module sheaves",
+ "statement": "Let $(C,J)$ be a site small in a coefficient universe $w$. Assume abelian sheafification exists, its local equivalences are monoidal, and $\\mathcal A=\\operatorname{Sh}(C,\\operatorname{Ab})$ has the closed symmetric monoidal structure of sheafified objectwise tensor over $\\mathbf Z$ [sk-def-sfb-sheaf-tensor]. Let $\\varphi:R\\to S$ be a morphism of commutative ring objects in $\\mathcal A$, and let $R_{\\mathrm{sec}},S_{\\mathrm{sec}}$ and $\\varphi_{\\mathrm{sec}}$ be their reconstructed section-ring sheaves and ring-sheaf map. Write $E_R:\\operatorname{Mod}_R(\\mathcal A)\\simeq\\operatorname{Mod}(R_{\\mathrm{sec}})$ and $E_S:\\operatorname{Mod}_S(\\mathcal A)\\simeq\\operatorname{Mod}(S_{\\mathrm{sec}})$ for the underlying-abelian-sheaf preserving equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Let $\\operatorname{Ext}_\\varphi,\\operatorname{Res}_\\varphi$ be internal extension and restriction of scalars [sk-def-sfb-change-of-scalars]. Give $S_{\\mathrm{sec}}$ its $R_{\\mathrm{sec}}$-module structure through $\\varphi_{\\mathrm{sec}}$. There is a natural isomorphism\n$$E_R\\operatorname{Res}_\\varphi\\operatorname{Ext}_\\varphi(M)\\ \\cong\\ S_{\\mathrm{sec}}\\otimes_{R_{\\mathrm{sec}}}E_R(M)$$\nwith sheafified sectionwise tensor [def-pur-sheaf-tensor-product], characterized on local pure tensors by $s\\otimes m\\mapsto s\\otimes m$. For $u:M\\to N$ it intertwines the induced map on the left with $1\\otimes E_R(u)$. Moreover $\\operatorname{Ext}_\\varphi$ preserves finite limits if and only if $S_{\\mathrm{sec}}$ is a flat $R_{\\mathrm{sec}}$-module sheaf [def-pc-flat-sheaf-modules]. All rings and module section groups lie in $w$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), balanced tensor and change of rings; Tag 03DB (lemma-limits-colimits), sectionwise limits. Agent comparison of the internal coequalizer with these constructions and the finite-limit test, extracted from lem-sfb-qlbar-flat proof steps 1 and 6; serves the blueprint tensor sentence and its final exactness conclusion."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-change-of-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For internal commutative ring objects R to S in abelian sheaves, extension of scalars preserves finite limits if and only if tensoring sectionwise R modules with S does",
+   "results": "{\"t\": \"2026-10-21T03:26:54Z\", \"tool\": \"leanfinder\", \"query\": \"For internal commutative ring objects R to S in abelian sheaves, extension of scalars preserves finite limits if and only if tensoring sectionwise R modules with S does\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"SheafOfModules.Finite.hasFiniteLimits\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\"], \"digest\": \"7a0efa1eef17cfae\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-21T03:27:26Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal module extension of scalars in abelian sheaves agrees naturally with the sheafified balanced tensor after restricting scalars and detects flatness",
+   "results": "{\"t\": \"2026-10-21T03:27:27Z\", \"tool\": \"leansearch\", \"query\": \"Internal module extension of scalars in abelian sheaves agrees naturally with the sheafified balanced tensor after restricting scalars and detects flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.Sheafify.SMulCandidate.h\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.Sheafify.map_smul\", \"PresheafOfModules.sheafificationAdjunction\"], \"digest\": \"81fb2b394557993f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|changeOfRings|restrictScalars|reflects",
+   "results": "{\"t\": \"2026-10-21T03:27:27Z\", \"tool\": \"grep\", \"query\": \"extendScalars|changeOfRings|restrictScalars|reflects\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"c3f743f6e986b245\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal change of rings for module objects in tensor abelian sheaves is left exact exactly when the underlying sheaf module is flat",
+   "results": "{\"t\": \"2026-10-21T03:27:38Z\", \"tool\": \"leanfinder\", \"query\": \"Internal change of rings for module objects in tensor abelian sheaves is left exact exactly when the underlying sheaf module is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\"], \"digest\": \"6a3657e27ea88695\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-21T03:28:08Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.extendScalars, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"9659f7d7c8f8f04b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the abstract-ring ModuleCat flatness/extension results do not construct the internal-to-sectionwise sheaf comparison; SheafOfModules restriction and limit results supply components only. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:30-43, Sheaf/Limits.lean:59-119, and RingTheory/Flat/CategoryTheory.lean:72-96."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-flat",
+  "date": "2026-10-21",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-finite-extension-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-qlbar-flat",
+   "place": "Tag 03EK (section-tensor-product), balanced tensor and change of rings; Tag 03DB (lemma-limits-colimits), sectionwise limits. Agent comparison of the internal coequalizer with these constructions and the finite-limit test, extracted from lem-sfb-qlbar-flat proof steps 1 and 6; serves the blueprint tensor sentence and its final exactness conclusion.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

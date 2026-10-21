@@ -18,78 +18,42 @@
  ],
  "proof": [
   {
-   "text": "Put $R=E_X$, $B=\\overline{\\mathbf Q}_{\\ell,X}$. Choose a small site skeleton and coefficient universe [def-weil-size-convention]. The closed tensor and monoidal local equivalences are [sk-def-sfb-sheaf-tensor, det-def-sfb-sheaf-tensor-local-iso]. Thus [lem-pe-internal-section-tensor-comparison] identifies internal and sectionwise module tensors. The underlying extension of [sk-def-sfb-change-of-scalars] is this tensor, with $B$ acting on its first factor.",
+   "text": "Put $R=E_X$ and $B=\\overline{\\mathbf Q}_{\\ell,X}$. Choose the small site and coefficient universe of [def-weil-size-convention]. The closed tensor and monoidal local-equivalence hypotheses of [lem-sfb-internal-scalar-extension-section-test] hold by [sk-def-sfb-sheaf-tensor, det-def-sfb-sheaf-tensor-local-iso]. This test identifies internal scalar-extension flatness with flatness of the corresponding section-ring module sheaf, using its specified natural tensor comparison.",
    "uses": [
     "def-weil-size-convention",
     "sk-def-sfb-sheaf-tensor",
     "det-def-sfb-sheaf-tensor-local-iso",
-    "lem-pe-internal-section-tensor-comparison",
-    "sk-def-sfb-change-of-scalars"
+    "lem-sfb-internal-scalar-extension-section-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Module conventions in returned step 1; the existing tensor comparison replaces its inline argument"
+    "place": "Tensor sentence and exactness conclusion: internal/sectionwise bridge, formerly steps 1 and 6."
    }
   },
   {
-   "text": "By [lem-sfb-qlbar-tail-module-colimit], the nonempty directed poset $I_E$ of finite $F\\supseteq E$ gives $B=\\operatorname{colim}_{F\\in I_E}F_X$ in $R$-module sheaves, with the specified coefficient-inclusion legs.",
+   "text": "By [lem-sfb-qlbar-tail-module-colimit], $B$ with the coefficient-inclusion legs $q_F$ is the colimit of $F_X$ in the fixed category $\\operatorname{Mod}(R)$ over the small nonempty directed poset $I_E$ of finite $F\\supseteq E$. For each $F$, [lem-sfb-subfield-flat] says its internal extension preserves finite limits. Applying [lem-sfb-internal-scalar-extension-section-test] to $E_X\\to F_X$ proves that its underlying section-ring module sheaf is flat over $R$.",
    "uses": [
-    "lem-sfb-qlbar-tail-module-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "First sentence; extracted cofinal coefficient module-colimit argument"
-   }
-  },
-  {
-   "text": "Set $T_F=\\operatorname{Res}_{R\\to F_X}(F_X\\otimes_R-)$ and $T=\\operatorname{Res}_{R\\to B}(B\\otimes_R-)$. By [lem-weil-pbc-independent-sheaf-tensor-colimits] and tensor symmetry [def-pur-sheaf-tensor-product], step 2 gives $\\theta_M:\\operatorname{colim}_F T_F(M)\\cong T(M)$. Its $F$-leg is $s\\otimes m\\mapsto q_F(s)\\otimes m$. This commutes with $m\\mapsto u(m)$ and coefficient inclusions, so $\\theta$ identifies the natural transformations on every arrow $u$.",
-   "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Tensor-colimit sentence; returned step 4, retaining the canonical maps"
-   }
-  },
-  {
-   "text": "Each $T_F$ preserves kernels: apply [lem-sfb-subfield-flat] and the limit-preserving restriction of [sk-def-sfb-change-of-scalars]. The fixed category $\\operatorname{Mod}(R)$ is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], so its filtered colimit functor preserves finite limits. Now [lem-sfb-arrow-exact-colimits] identifies the colimit of these kernel cones with the kernel cone of the colimit arrow. Step 3 therefore identifies $T(\\ker u)\\to T(M)$ with the kernel of $T(u)$, for every $u:M\\to N$.",
-   "uses": [
+    "lem-sfb-qlbar-tail-module-colimit",
     "lem-sfb-subfield-flat",
-    "sk-def-sfb-change-of-scalars",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sfb-arrow-exact-colimits"
+    "lem-sfb-internal-scalar-extension-section-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Last sentence; returned steps 5-6 now use the existing Grothendieck and arrow-kernel lemmas"
+    "place": "First sentence and finite-stage exactness sentence; retains the existing cofinal module-colimit extraction."
    }
   },
   {
-   "text": "The balanced tensor formula $b\\otimes(u+v)(m)=b\\otimes u(m)+b\\otimes v(m)$ proves that $T$ is additive [def-pur-sheaf-tensor-product]. Since it preserves kernels, [lem-sfb-kernel-cokernel-finite-exactness] implies that $T$ preserves finite limits, including the empty limit.",
+   "text": "Apply [lem-sfb-filtered-colimit-flat-module-sheaves] to this $R$-module colimit: $B$ is a flat $R$-module sheaf. Applying [lem-sfb-internal-scalar-extension-section-test] to $R\\to B$ now gives finite-limit preservation of the internal extension in the statement. The tensor-colimit and kernel comparisons and the reflection of the resulting comparison in $B$-modules are precisely those provided by the two extracted lemmas.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-sfb-kernel-cokernel-finite-exactness"
+    "lem-sfb-filtered-colimit-flat-module-sheaves",
+    "lem-sfb-internal-scalar-extension-section-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Last sentence; the existing kernel criterion replaces the finite-diagram calculation"
-   }
-  },
-  {
-   "text": "For a finite diagram $D$, the extension comparison $a:B\\otimes_R\\lim D\\to\\lim(B\\otimes_R D)$ is $B$-linear. Sectionwise limits [lem-weil-pbc-module-sheaves-limits-sectionwise] show that restriction makes it the invertible comparison of step 5. Its inverse is $B$-linear: $a(b a^{-1}y)=by=a(a^{-1}(by))$, and cancel $a$. Thus $a$ is an isomorphism of $B$-modules, proving the statement.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Last sentence; returned step 8, reflection of the specified finite-limit comparison"
+    "place": "Tensor-colimit and final exactness sentences: assembles the two independent extracted arguments."
    }
   }
  ],
@@ -97,21 +61,15 @@
   "def-weil-size-convention",
   "sk-def-sfb-sheaf-tensor",
   "det-def-sfb-sheaf-tensor-local-iso",
-  "lem-pe-internal-section-tensor-comparison",
-  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-internal-scalar-extension-section-test",
   "lem-sfb-qlbar-tail-module-colimit",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "def-pur-sheaf-tensor-product",
   "lem-sfb-subfield-flat",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sfb-arrow-exact-colimits",
-  "lem-sfb-kernel-cokernel-finite-exactness",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise"
+  "lem-sfb-filtered-colimit-flat-module-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-  "place": "Finer repair of the filtered-colimit proof: cofinal coefficient module colimit extracted, existing tensor-comparison, Grothendieck, arrow-kernel and finite-exactness lemmas reused. All colimits remain in E_X-modules."
+  "place": "Assembly of the existing cofinal coefficient module colimit, the internal/sectionwise scalar-extension test, and Stacks Tag 03EU for flat module sheaves. The blueprint route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -217,34 +175,9 @@
   "date": "2026-10-21",
   "item": "lem-sfb-qlbar-flat",
   "worker": "stage1",
-  "summary": "Kept the statement byte-for-byte. Replaced the 8067-character proof by a short assembly. Extracted the cofinal coefficient module colimit into one new statement node, with its complete sub-3000-character proof in report.md as required by the return. Reused existing internal/section tensor comparison, Grothendieck ringed-site category, arrow-kernel colimit and additive kernel criterion nodes rather than duplicating them. The main proof is below 3000 characters. Searches and previous metadata retained; every actual citation has quotation evidence.",
-  "blueprint": "First sentence is new lem-sfb-qlbar-tail-module-colimit (returned steps 2-3); tensor sentence is step 3; last sentence is steps 4-6. Existing lem-pe-internal-section-tensor-comparison replaces returned step 1.",
-  "tool_uses": [
-   {
-    "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Generic equivalence of internal and sectionwise relative tensors; the coefficient-compatibility unit has no such bridge."
-   },
-   {
-    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "why": "Generic tensor-colimit theorem on a small ringed site, used in the blueprint tensor sentence."
-   },
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Generic exactness of filtered colimits of ringed-site module sheaves, on the chosen small site skeleton; no coefficient-specific node supplies it."
-   },
-   {
-    "node": "lem-sfb-arrow-exact-colimits",
-    "why": "Generic commutation of kernels with an exact colimit, applied in the fixed E_X-module category; the unit has no arrow-kernel theorem."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "why": "Generic computation of limits needed to identify the underlying extension comparison after restriction of scalars."
-   },
-   {
-    "node": "det-def-sfb-sheaf-tensor-local-iso",
-    "why": "Generic monoidal stability of sheafification equivalences supplies the explicitly checked hypothesis of the existing internal/sectionwise tensor comparison."
-   }
-  ]
+  "summary": "Statement unchanged. The read clone already contains the Q28 repair and its unsplit cofinal coefficient module-colimit node; preserved that node and all metadata. This explicit further re-split adds two comparable statement-only tasks: the internal scalar-extension/section tensor flatness test (old steps 1 and 6), and filtered-colimit flatness of module sheaves (old steps 3-5). Existing cofinality work stays in lem-sfb-qlbar-tail-module-colimit. Complete proposed arguments and preservation map are in report.md.",
+  "blueprint": "First sentence remains lem-sfb-qlbar-tail-module-colimit; tensor-colimit sentence and final exactness sentence are realized by the two new lemmas and the three assembly steps.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
@@ -259,10 +192,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q28-358c0793d",
-  "group": "Q28",
+  "reviewer": "NT-cc-Q78-f12300b37",
+  "group": "Q78",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-358c0793d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node, every cited statement, the unit, and the main-20261015 blueprint statement and proof. The re-split does what the human's 2026-10-21 note (coord/repair-notes) asks. The statement and the lean/lean_audit/reviewed records are byte-identical to live. The main proof is now 6 steps of 2312 characters, longest step 522. The new node's proof, given in the report, is 2106 characters. The steps check out. (1) lem-pe-internal-section-tensor-comparison gets its hypotheses from def-weil-size-convention, det-def-sfb-sheaf-tensor-local-iso and sk-def-sfb-sheaf-tensor. Its coequalizer matches the sk-def-sfb-change-of-scalars Ext because B is commutative. (2) The new node gives B as a colimit in Mod(R). (3) lem-weil-pbc-independent-sheaf-tensor-colimits plus symmetry give a natural θ. (4) lem-sfb-subfield-flat and Res, then lem-pur-ringed-site-grothendieck-abelian (small site, commutative R; AB5), then lem-sfb-arrow-exact-colimits, give that T preserves kernels. (5) The Mathlib leaf preservesFiniteLimits_of_preservesKernels (LeftExact.lean:117) gives finite limits from additivity. (6) The B-linear inverse is elementary. No argument of the old 8 steps is lost, and all colimits stay in Mod(E_X), correcting the blueprint's Mod_{Q̄_X} slip. The new node is true: a filtered ring colimit restricted to the cofinal I_E is a module colimit, through lem-sfb-directed-ring-sheaf-module-colimit. The edge cases X=∅, E=Q_ℓ, F=E, H incomparable with E, and nonemptiness all hold. It is not a duplicate of sk-prop-sfb-qlbar-colimit-x, def-sfb-qlbar-x-cocone, the generic directed lemma or lem-weil-pbc-condensed-flat-coefficient-calculus. It is strictly smaller than the item. Five searches are recorded. The blueprint fields are correct. There is no Lean to attach: live Compatibility.lean:154-158 is still sorry. There are no cycles, and the item is not dropped or superseded. I accept all 6 declared tool uses as generic. FIX (B2): the new node's statement used 'the specified maps q_F' without defining them. The corrected statement introduces q_F as the coefficient map of def-sfb-subfield-to-qlbar-coefficient-map for F, with the R-actions through def-sfb-subfield-coefficient-map and q_E. Wording only; stmt_deps unchanged. review_split's 'new node lem-sfb-directed-ring-sheaf-module-colimit: status split' concerns the earlier reviewed Q116 node and is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-f12300b37 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited statement, the unit, the main-20261015 blueprint statement and proof, Stacks 03EU (sites-modules.tex l.4342-4360) and the human's reopened 2026-10-21 re-split note, which asks for at least 2 new nodes. The base is the live Q28 6-step proof; the item statement, stmt_deps, lean and reviewed records are byte-identical to it. Every argument of the old 8-step, 8067-character proof now sits in a node: steps 1 and 8 (internal vs sectionwise tensor; B-linear inverse and reflection) are in lem-sfb-internal-scalar-extension-section-test; steps 2-3 are in the existing lem-sfb-qlbar-tail-module-colimit; steps 4, 6 and 7 (θ naturality, exact filtered colimits and kernels, additivity to finite limits) are in lem-sfb-filtered-colimit-flat-module-sheaves; step 5 is now item step 2 (subfield-flat plus the new test's ⇒ direction). The item is a 3-step assembly of 1362 characters, and the two new nodes are of comparable size. Neither restates the item. Node A: Res∘Ext ≅ S_sec⊗E_R(-), and Ext is left exact ⇔ S_sec is flat, because Res preserves limits and is conservative and tensor is right exact. Tested on Z→Z/2 (both sides false), S=0 and empty X. It is not a duplicate of lem-pe-internal-section-tensor-comparison, which lacks the Res∘Ext identification and the finite-limit test. Node B is exactly Stacks 03EU(2) restricted to nonempty directed index posets. Tested on a singleton, (1/n!)Z→Q, and non-injective or eventually-zero transitions. It is not a duplicate: existing nodes cover only coproducts and K-flat closure, and lem-weil-pbc-filtered-colimit-flat-modules is the ring version. All hypotheses are met in the assembly: I_E is nonempty, directed and w-small, the colimit is in Mod(E_X) with legs q_F, and the closed and monoidal sheafification hypotheses come from sk-def-sfb-sheaf-tensor and det-def-sfb-sheaf-tensor-local-iso. det-def-sfb-sheaf-tensor-local-iso is on the unit's route, so there is no new tool use to accept. review_split.py, run read-only on the snapshot, flags only inherited faults: the earlier Q116/Q28 nodes are now split, and the blueprint's own citation of lem-sfb-subfield-flat is recorded. No SGA. Blueprint, created and search fields are correct: six logged searches per node. Maintainer notes: the report mentions a citations.json that is not in the branch, and the node's old Q28 tool_uses list is now mostly unused by the item. No fixes."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-sfb-finite-extension-compatibility",
