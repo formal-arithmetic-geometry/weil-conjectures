@@ -201,5 +201,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6e2244ff3 (reviewer sub-agent of L); spot-checked: I read all six steps of the split in full. The statement and stmt_deps are byte-identical to the base, and the item is still unsplit in clones/live and clones/side-live. There are no new nodes, no repair note and no dropped-list entry. Step 1: conjugating by e (H(f)=e_Y^-1 U(f) e_X) makes Gq additive, by bilinearity of composition (00ZY). Steps 2-3: q and Gq carry the X⊕Y relations (0103/0104) to biproduct relations in D and E. The product lift t=T(i1)a+T(i2)b has the right projections and is unique by the identity Σi_r p_r=1. Step 4: essential surjectivity gives isomorphisms qX≅A1 and qY≅A2. Every product cone of A1,A2 is cone-isomorphic to the transported one, and G keeps cone isomorphisms, so G preserves all binary product cones. Fullness is never used and the transport is written out. Step 5: 0=b∘0∘a^-1, so G(0)=0 on every Hom group. Step 6: lem-sfb-products-zero-additive is a Mathlib leaf for Functor.additive_of_preserves_binary_products (AdditiveFunctor.lean:234). Its hypotheses are binary products in D (D is additive), preservation of binary products and preservation of zero morphisms, exactly what steps 4-5 supply. All cited nodes are Mathlib leaves or definitions, so no route or tool_uses question arises. The one citer (lem-weil-integral-scalar-extension-well-defined) uses the item as stated. Edge cases checked: zero category, zero summands, q the identity, q killing nonzero maps. Stacks tags 00ZY/0103/0104/0105/0DLP resolve to the cited labels, there is no SGA, the blueprint from-chain matches the created.item ancestry, and the three kinds of Mathlib search are recorded. Advisory: the item's maintainer-owned source.place still cites 04VG and 'full faithfulness on natural transformations', which the proof no longer uses."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdditiveLocalizationDescent",
+  "declaration": "CategoryTheory.Functor.additive_of_additive_localization",
+  "file": "lean/Sheaf/CategoryTheory/AdditiveLocalizationDescent.lean",
+  "statement": "theorem Functor.additive_of_additive_localization {C : Type u₁} {D : Type u₂} {E : Type u₃} [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Preadditive C] [Preadditive D] [Preadditive E] [HasFiniteBiproducts C] [HasFiniteBiproducts D] [HasFiniteBiproducts E] (W : MorphismProperty C) (q : C ⥤ D) [q.Additive] [q.IsLocalization W] [q.EssSurj] (U : C ⥤ E) [U.Additive] (G : D ⥤ E) (e : q ⋙ G ≅ U) : G.Additive",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7e3cb3fd",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match: three additive categories as Preadditive+HasFiniteBiproducts with independent universes; W : MorphismProperty C; q additive with IsLocalization W and explicit EssSurj (no calculus of fractions, no Full); U additive; G plain functor; e : q ⋙ G ≅ U; conclusion G.Additive. lean.statement verbatim; node delta vs side-live is lean only; not dropped, no repair note. Statement is true and edge cases (zero object, zero summands, empty or full W) are fine. No Mathlib/project match: additive_of_full_essSurj_comp needs Full, functor_additive_iff needs a calculus of fractions; no name collision. Docstrings carry Stacks tags, the blueprint id and all six proof steps; proof is only sorry. nt_compile --json clean in 3.6 s (worker's server compile had failed on a missing Mathlib olean). Advisory: the node's source.place still mentions full faithfulness, which the proof does not use (stage-1 field)."
+ }
 }

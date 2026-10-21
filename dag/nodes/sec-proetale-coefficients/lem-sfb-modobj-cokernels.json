@@ -200,5 +200,23 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-module-category",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleObjectCokernelAction",
+  "declaration": "CategoryTheory.Mod.exists_cokernel_action",
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjectCokernelAction.lean",
+  "statement": "theorem exists_cokernel_action {C : Type u} [Category.{v} C] [MonoidalCategory C] [Preadditive C] [MonoidalPreadditive C] {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)] {M N : Mod C R} (f : M ⟶ N) {Q : C} (π : N.X ⟶ Q) (w : f.hom ≫ π = 0) (hπ : IsColimit (CokernelCofork.ofπ π w)) : ∃ (a : ModObj R Q), R ◁ π ≫ a.smul = ModObj.smul (M := R) (X := N.X) ≫ π ∧ (∀ (γ : R ⊗ Q ⟶ Q), R ◁ π ≫ γ = ModObj.smul (M := R) (X := N.X) ≫ π → γ = a.smul) ∧ ∃ (p : N ⟶ ({ X := Q, mod := a } : Mod C R)), p.hom = π ∧ ∃ (wp : f ≫ p = 0), Nonempty (IsColimit (CokernelCofork.ofπ p wp))",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f59fed24",
+  "group": "Q153",
+  "result": "pass",
+  "note": "All node clauses rendered exactly: given cokernel (Q,π,w,hπ), ∃ a : ModObj R Q with R◁π≫a.smul = smul_N≫π, uniqueness among all raw γ, ∃ module map p with p.hom=π and Nonempty IsColimit of its cokernel cofork in Mod C R. Hypotheses: Preadditive, MonoidalPreadditive, MonObj, PreservesFiniteColimits (tensorLeft R); no extras, independent universes. lean.statement verbatim; node diff vs live = lean only. nt_compile --json clean (7.8 s); rfl probes passed: N.X action = N.mod, zero hom = 0. No definitions, sorry only, source/blueprint docstrings and 7-step proof docstring present. H4: upstream Mod.isColimitCokernelCofork covers only the chosen cokernel and has no uniqueness clause, so not existing:true. Advisory: stage 3 can reuse it; upstream has two Preadditive (Mod C R) instances (pre-existing)."
+ }
 }

@@ -139,5 +139,23 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sfb-qlbar-two-colimit",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+  "declaration": "CategoryTheory.Mod.extendScalarsIsoOfEq",
+  "statement": "noncomputable def extendScalarsIsoOfEq (h : φ = ψ) : extendScalars φ ≅ extendScalars ψ",
+  "branch": "slopmaster2",
+  "by": "Q19",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing definition in the live source, ChangeOfScalarsSquare.lean:144-146. Uses the recorded Mod.extendScalars and Mod.extendRestrictAdjunction of sk-def-sfb-change-of-scalars, comparing the right adjoints by (Mod.comapCongr h).symm and then applying Adjunction.leftAdjointUniq. The inherited binders require a braided monoidal category, coequalizers, tensor preservation of smallest colimits on both sides, a commutative source monoid and an arbitrary target monoid, two monoid morphisms and their equality. All-colimit preservation in the node supplies the preservation instances needed for this coequalizer construction. No new module or definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-deb3ddec9",
+  "group": "Q19",
+  "result": "pass",
+  "note": "The only change is the item's lean record: existing:true for CategoryTheory.Mod.extendScalarsIsoOfEq (ChangeOfScalarsSquare.lean:144); the statement field is verbatim. The dependency sk-def-sfb-change-of-scalars is unchanged, and the declaration uses its recorded extendScalars/extendRestrictAdjunction under the same binders. The construction is leftAdjointUniq of the φ-adjunction and the ψ-adjunction moved by (comapCongr h).symm, with comapCongr identity on components: the canonical uniqueness-of-left-adjoints iso in the stated direction. Hypotheses: braided, coequalizers, {0,0} tensor colimit preservation (weaker than the node's hypothesis), commutative R, arbitrary S, φ=ψ; universes free. No duplicate; already cited by side-live nodes. Not hollow; axioms without sorryAx. nt_compile --json probe (#check/#print axioms) clean in 3.4 s. Report has Worker report and Second reading by Q19. Item not dropped, no repair note. No findings."
+ }
 }

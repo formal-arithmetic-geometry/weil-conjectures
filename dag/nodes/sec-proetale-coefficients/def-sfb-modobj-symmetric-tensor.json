@@ -192,5 +192,31 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-module-category",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.Symmetric",
+  "declaration": "CategoryTheory.Mod.symmetricCategory",
+  "statement": "noncomputable instance symmetricCategory : SymmetricCategory (Mod C R)",
+  "branch": "slopmaster2",
+  "by": "Q148",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "The upstream module defines the relative-tensor braiding on Mod C R by descending the ambient symmetry through the coequalizer, proves module-linearity and the hexagon/unit axioms, and registers the resulting symmetric monoidal structure. Its explicit hypotheses match the node: a symmetric monoidal C with coequalizers, tensoring on either side preserving colimits, and a commutative monoid object R.",
+  "declarations": [
+   "CategoryTheory.Mod.symmetricCategory",
+   "CategoryTheory.Mod.braidedCategory",
+   "CategoryTheory.Mod.braiding",
+   "CategoryTheory.Mod.braidingHom",
+   "CategoryTheory.Mod.braidingHomX",
+   "CategoryTheory.Mod.tensorObjπ_braidingHomX"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7417c043b",
+  "group": "Q148",
+  "result": "pass",
+  "note": "existing:true record Mod.symmetricCategory (WeilConjectures.CategoryTheory.ModuleObjects.Symmetric, the blueprint-named declaration); statement verbatim; the node differs from live only in lean; hypotheses match the node (symmetric monoidal C, HasCoequalizers, PreservesColimitsOfSize.{0,0} for tensorLeft/Right, which is weaker and the same as the dep Mod.monoidalCategory, MonObj+IsCommMonObj R); the braiding is the canonical coequalizer.desc of β (tensorObjπ_braidingHomX), an R-linear iso with inverse braidingHom N M; hexagons, naturality and symmetry are proved; unit regular R from the dep; no sorry, axioms standard; probe compile through nt_compile --json clean in 8.8 s; no findings"
+ }
 }

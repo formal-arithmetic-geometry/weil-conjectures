@@ -186,5 +186,23 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-module-category",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleObjects.KernelStructure",
+  "declaration": "CategoryTheory.Mod.exists_kernel_module_structure",
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjects/KernelStructure.lean",
+  "statement": "theorem exists_kernel_module_structure {C : Type u} [Category.{v} C] [MonoidalCategory C] [Preadditive C] [MonoidalPreadditive C] (R : C) [MonObj R] {M N : Mod C R} (f : M ⟶ N) {K : C} (ι : K ⟶ M.X) (w : ι ≫ f.hom = 0) (hK : IsLimit (KernelFork.ofι ι w)) : ∃ k : ModObj R K, k.smul ≫ ι = R ◁ ι ≫ ModObj.smul (M := R) (X := M.X) ∧ (∀ a : R ⊗ K ⟶ K, a ≫ ι = R ◁ ι ≫ ModObj.smul (M := R) (X := M.X) → a = k.smul) ∧ ∃ i : ({ X := K, mod := k } : Mod C R) ⟶ M, i.hom = ι ∧ ∃ hi : i ≫ f = 0, Nonempty (IsLimit (KernelFork.ofι i hi))",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96d7327a5",
+  "group": "Q152",
+  "result": "pass",
+  "note": "First S2 delivery; only the lean record is new vs live. Clause-by-clause match to the node and the blueprint source lem-sfb-modobj-kernels.md: [Preadditive C][MonoidalPreadditive C], MonObj R, f : M ⟶ N in Mathlib Mod (the dep's record), an arbitrary supplied kernel via IsLimit (KernelFork.ofι ι w), ∃ k : ModObj R K with the compatibility square, uniqueness over all arrows R ⊗ K ⟶ K, and a module inclusion i with i.hom = ι that is a kernel in Mod C R. Zero maps in Mod C R come from the canonical upstream Preadditive instance (homMk 0) under the same hypotheses. No stronger assumptions; universes u, v free. H4: upstream Mod.isLimitKernelFork / createsLimit cover only the chosen kernel and lack uniqueness, so a new theorem is justified; no definitions. One sorry; source and blueprint docstrings with all 5 proof steps; lean.statement verbatim. nt_compile --json clean in 4.8 s (load ~156). Advisories: redundant transitive imports (H9); the Preadditive (Mod) instance comes from the module of theorem node lem-sfb-modobj-abelian, which is not a stmt_dep (same as landed LiftExact)."
+ }
 }

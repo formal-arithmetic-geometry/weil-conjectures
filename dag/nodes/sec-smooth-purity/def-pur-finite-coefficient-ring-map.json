@@ -1,0 +1,115 @@
+{
+ "id": "def-pur-finite-coefficient-ring-map",
+ "kind": "definition",
+ "title": "Pointwise finite coefficient ring maps on the pro-etale site",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $R,S$ be finite rings, not necessarily commutative, with their discrete topologies, and let $\\phi:R\\to S$ be a unital ring homomorphism. Use the coefficient presheaves $P_R,P_S$ and coefficient ring sheaves $R_T,S_T$ on the small pro-etale site of [def-weil-pbc-proetale-modules]. Define the presheaf morphism $P_\\phi:P_R\\to P_S$ at each object $U\\to T$ by pointwise composition $s\\mapsto\\phi\\circ s$ on $\\operatorname{Cont}(\\pi_0(|U|),R)$. Its component is a unital ring homomorphism, and it commutes with restrictions because those are precomposition. Define $\\phi_T:R_T\\to S_T$ to be the image of $P_\\phi$ under ring-valued sheafification [def-weil-pbc-sheafification].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Parent proof invocation of completed pullback: coefficient components and finite-reduction compatibility; extracted naturality argument of item Step 1."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pointwise postcomposition by a finite ring homomorphism on continuous functions on connected components followed by sheafification defines a pro-etale coefficient sheaf map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.continuousFunctions.map\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \"(X : TopCat.{u}ᵒᵖ) {R S : TopCommRingCat.{u}} (φ : R ⟶ S) : continuousFunctions X R ⟶ continuousFunctions X S\", \"doc\": \"Given a topological space $X$ (in the opposite category) and a continuous ring homomorphism $\\\\phi: R \\\\to S$ between topological commutative rings $R$ and $S$, this defines a ring homomorphism from the\"}\n  {\"name\": \"PresheafOfModules.toSheafify\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \": M₀ ⟶ (restrictScalars α).obj (sheafify α φ).val\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.sheafifyMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"(fac : (toPresheaf R₀).map τ₀ ≫ φ' = φ ≫ τ.val) : sheafify α φ ⟶ sheafify α φ'\", \"doc\": \"Given a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs a morphism between the sheafifications of $ M_0 $ t\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": SheafOfModules.{v} R ⥤ SheafOfModules.{v} S\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LocallyConstant.mapRingHom\", \"module\": \"Mathlib.Topology.LocallyConstant.Algebra\", \"type\": \"[Semiring Y] [Semiring Z] (f : Y →+* Z) : LocallyConstant X Y →+* LocallyConstant X Z\", \"doc\": \"Given a ring homomorphism $ f : Y \\to Z $ between semirings $ Y $ and $ Z $, this constructs a ring homomorphism between the spaces of locally constant functions $ X \\to Y $ and $ X \\to Z $, defined by p\"}\n  {\"name\": \"LocallyConstant.comapₐ\", \"module\": \"Mathlib.Topology.LocallyConstant.Algebra\", \"type\": \"(R : Type*) [CommSemiring R] [Semiring Z] [Algebra R Z] (f : C(X, Y)) : LocallyConstant Y Z →ₐ[R] LocallyConstant X Z\", \"doc\": \"Given a continuous function $ f : X \\\\to Y $ between topological spaces and an $ R $-algebra $ Z $ over a commutative semiring $ R $, this constructs an $ R $-algebra homomorphism from the algebra of l\"}\n  {\"name\": \"TopCat.continuousFunctions.pullback\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \"{X Y : TopCatᵒᵖ} (f : X ⟶ Y) (R : TopCommRingCat) : continuousFunctions X R ⟶ continuousFunctions Y R\", \"doc\": \"Let $X$ and $Y$ be topological spaces and let $f: Y \\\\to X$ be a continuous map. Let $R$ be a topological commutative ring. The pullback along $f$ is a ring homomorphism from the ring of continuous fun\"}\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceMap\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) : Spec.sheafedSpaceObj S ⟶ Spec.sheafedSpaceObj R\", \"doc\": \"For commutative rings $R$ and $S$ and a ring homomorphism $f : R \\to S$, this constructs the morphism of sheafed spaces from $\\\\operatorname{Spec}(S)$ to $\\\\operatorname{Spec}(R)$. It consists of the con\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Generic continuous-function or sheafification operations; the exact pro-etale RingCat constructions already exist as finiteScalarPresheafMap and finiteScalarRingMap in the project, reused below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring homomorphism induces a map of sheafified finite continuous coefficient presheaves by pointwise postcomposition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.toPresheaf_map_toSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Applying the forgetful functor from presheaves of modules to presheaves of abelian groups to the sheafification morphism $\\\\alpha$ results in the original morphism $\\\\phi$, i.e., $(\\\\text{toPresheaf} \\\\, \"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"PresheafOfModules.sheafification_map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For a presheaf of rings $\\\\mathcal{O}$ on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and a morphism $f: X \\\\to Y$ between presheaves of $\\\\mathcal{O}$-modules, the sheafification functor \"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functorToPresheaves_map_app\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] {X Y : ModuleCat R} (f : X ⟶ Y) (S : (CompHausLike P)ᵒᵖ),\\n  ((CompHausLike.LocallyConstantModule.functorToPresheaves R).map f).app S =\\n    ModuleCat.ofHom (LocallyConstant.mapₗ R (ModuleCat.Hom.hom f))\", \"doc\": \"For a ring $ R $, compact Hausdorff-like predicate $ P $, $ R $-modules $ X $ and $ Y $, and a morphism $ f : X \\to Y $, the action of the locally constant module functor on $ f $ evaluated at an objec\"}\n  {\"name\": \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For a presheaf of modules $ P $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a natural transformation $ \\\\alpha: R_0 \\\\to R $, the forgetful functor fro\"}\n  {\"name\": \"PresheafOfModules.toSheafify_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ and any element $x$ in the presheaf $M_0$ evaluated at $X$, the application of the sheafification map's component at $X$ to $x$ eq\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The forgetful functor from presheaves of modules to presheaves of abelian groups commutes with the hom-set bijection induced by sheafification and the adjunction between presheaves and sheaves. Specif\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Generic continuous-function or sheafification operations; the exact pro-etale RingCat constructions already exist as finiteScalarPresheafMap and finiteScalarRingMap in the project, reused below."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteScalarPresheafMap|finiteScalarRingMap|sheafifyMap CategoryTheory/Sites",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"191\", \"text\": \"    (sheafifyComposeIso J U ((const Cᵒᵖ).obj X)).inv ≫ sheafifyMap J (constComp Cᵒᵖ X U).hom := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"449\", \"text\": \"noncomputable def sheafifyMap {P Q : Cᵒᵖ ⥤ D} (η : P ⟶ Q) : J.sheafify P ⟶ J.sheafify Q :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"453\", \"text\": \"theorem sheafifyMap_id (P : Cᵒᵖ ⥤ D) : J.sheafifyMap (𝟙 P) = 𝟙 (J.sheafify P) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"454\", \"text\": \"  dsimp [sheafifyMap, sheafify]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"458\", \"text\": \"theorem sheafifyMap_comp {P Q R : Cᵒᵖ ⥤ D} (η : P ⟶ Q) (γ : Q ⟶ R) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"459\", \"text\": \"    J.sheafifyMap (η ≫ γ) = J.sheafifyMap η ≫ J.sheafifyMap γ := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"110\", \"text\": \"noncomputable abbrev sheafifyMap {P Q : Cᵒᵖ ⥤ D} (η : P ⟶ Q) : sheafify J P ⟶ sheafify J Q :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"114\", \"text\": \"theorem sheafifyMap_id (P : Cᵒᵖ ⥤ D) : sheafifyMap J (𝟙 P) = 𝟙 (sheafify J P) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"115\", \"text\": \"  simp [sheafifyMap, sheafify]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"118\", \"text\": \"theorem sheafifyMap_comp {P Q R : Cᵒᵖ ⥤ D} (η : P ⟶ Q) (γ : Q ⟶ R) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"line\": \"119\", \"text\": \"    sheafifyMap J (η ≫ γ) = sheafifyMap J η ≫ sheafifyMap J γ := by\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Generic continuous-function or sheafification operations; the exact pro-etale RingCat constructions already exist as finiteScalarPresheafMap and finiteScalarRingMap in the project, reused below."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'finiteScalarPresheafMap|finiteScalarRingMap' dag/nodes; rg -n 'finiteScalarPresheafMap|finiteScalarRingMap' lean/WeilConjectures; rg -n 'finiteScalarPresheafMap|finiteScalarRingMap' lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteScalarUnitComparison.lean",
+   "results": "DAG: dag/nodes/sec-deligne-laumon-a1/def-per-adic-exceptional-scalar-data.json and dag/nodes/sec-smooth-purity/lem-exc-proetale-finite-scalar-unit-comparison.json. WeilConjectures: no hits. Sheaf: definitions at lines 40 and 54, use at 57, 64 and in private direct-image naturality proof at 92 onward. The scalar-data node consumes comparisons rather than defining these plain coefficient maps; the theorem node lists the helpers but has no definition-node ownership.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing project definitions; no existing definition node owns the two coefficient-map constructions."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'finite scalar'; ancestor lem-cbc-finite-constant-map-naturality",
+   "results": "7 blueprint nodes match 'finite scalar': lem-coef-rational-operations, lem-coef-rational-retract-evaluation, lem-wf-tate-twist-compatibility, prop-constructible-truncations, prop-weil-pbc-scalar-extension, thm-coef-qbar-verdier, thm-sf-pf-field. Ancestor: lem-cbc-completed-extension-zero-comparison.",
+   "date": "2026-10-21",
+   "verdict": "No standalone definition node for pointwise finite coefficient maps."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-finite-constant-map-naturality",
+  "date": "2026-10-21",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Pointwise coefficient maps used in the finite-reduction compatibility extracted by lem-cbc-finite-constant-map-naturality.",
+   "via": [
+    "lem-cbc-finite-constant-map-naturality",
+    "lem-cbc-adic-pullback-presentation-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteScalarUnitComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteScalarRingMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteScalarPresheafMap",
+   "AlgebraicGeometry.ProEtale.finiteScalarRingMap"
+  ],
+  "statement": "def finiteScalarRingMap (T : Scheme.{u}) :\n    finiteCoefficientRingSheaf T R ⟶ finiteCoefficientRingSheaf T S",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition-node ownership requested by independent review of immutable head 15d7dc1c1918 (H2/stmt_deps). Reuses the unchanged existing pointwise presheaf map and its ring-valued sheafification. Section variables are {R S : Type (u + 1)} [Ring R] [Finite R] [TopologicalSpace R] [DiscreteTopology R] [Ring S] [Finite S] [TopologicalSpace S] [DiscreteTopology S] (φ : R →+* S); f, X and Y are unused by both definitions. No theorem conclusion or choice is used."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85242d24c",
+  "group": "NB",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85242d24c",
+  "group": "NB",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN of 15d7dc1c. The Lean file is byte-identical (sha aafd5d09) and compiles clean in 11.2 s with nt_compile. The item delta is lean plus the stmt_dep def-pur-finite-coefficient-ring-map replacing the theorem. The new existing:true definition node owns finiteScalarPresheafMap/finiteScalarRingMap on the unchanged ProEtaleFiniteScalarUnitComparison; its statement matches the bodies; body owners are in its stmt_deps; check_new_node is clean; no race, duplicate or cycle. FIX: fixes/def-pur-finite-coefficient-ring-map.json trims `noncomputable` from lean.statement (check_existing note: differs from signature); it now gives no failures and no notes."
+ }
+}

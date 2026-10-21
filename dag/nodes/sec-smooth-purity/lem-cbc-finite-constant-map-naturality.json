@@ -11,7 +11,8 @@
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-pur-finite-coefficient-ring-map"
  ],
  "proof": [
   {
@@ -187,5 +188,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-e429f3f7b (reviewer sub-agent of L); spot-checked: Read all three steps, the four cited statements, the main-20261015 ancestor proof (lem-cbc-completed-extension-zero-comparison.proof.md) and the Stacks tags 00WH, 09A5 and 0H7J. The statement and stmt_deps are unchanged and true. Edge cases checked: zero ring, empty scheme, φ=id, the quotient Z/4→Z/2 (fibres merge) and the diagonal Z/2→Z/2×Z/2. Step 1: postcomposition defines a map of ring presheaves, and φ_W∘a_B=a_C∘P_φ by the universal property of sheafification. Step 2: I checked it piece by piece over the clopen pieces W_b×_T T', using the ρ that the prop's statement defines (not its proof); then I used that g_*C is a sheaf and that the extension through sheafification is unique. Step 3: I recomputed the counit-naturality chain, and the adjunct equivalence follows from unit naturality and bijectivity. I accept the declared tool use of prop-weil-pbc-proetale-constant-ring-map, because the unit sk-prop-sf-cbc has no steps. No SGA source, no cycle, no new nodes. The item is unsplit on live and side-live, is in no drop list and has no repair note. Advisory for the maintainer: the existing node lem-weil-pbc-profinite-coefficient-inverse-image (split, reviewed pass) states (t_n)_U c_{u,n+1}=c_{u,n}u^{-1}(t_n)_V for arbitrary finite-ring towers. With Q_1=C, Q_n=B and t_1=φ it specializes to this item, so the report's claim that no node states a varying-coefficient square missed it. That node proves the clause in one vague sentence and works with constant sheaves rather than the Cont(π0) model, so I keep this explicit split. Consider merging or recording same-content, so that stage 2 reuses one declaration."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantMapNaturality",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteConstantMap_naturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantMapNaturality.lean",
+  "statement": "theorem finiteConstantMap_naturality {T' T : Scheme.{u}} (g : T' ⟶ T) {B C : Type (u + 1)} [CommRing B] [Finite B] [TopologicalSpace B] [DiscreteTopology B] [CommRing C] [Finite C] [TopologicalSpace C] [DiscreteTopology C] (φ : B →+* C) : (finiteCoefficientInverseImageMap g B ≫ finiteScalarRingMap φ T' = (Scheme.proEtaleSheafInverseImage g RingCat.{u + 1}).map (finiteScalarRingMap φ T) ≫ finiteCoefficientInverseImageMap g C) ∧ (finiteCoefficientDirectImageMap g B ≫ (Scheme.proEtaleSheafDirectImage g RingCat.{u + 1}).map (finiteScalarRingMap φ T') = finiteScalarRingMap φ T ≫ finiteCoefficientDirectImageMap g C)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the recorded continuous-function coefficient sheaves, canonical constant-section maps, and finiteScalarRingMap (postcomposition followed by sheafification), owned by the new existing-definition node def-pur-finite-coefficient-ring-map. Replaces the theorem-only statement dependency from returned head 15d7dc1c1918; the Lean statement is unchanged. Both inverse-image and adjunct direct-image equalities are stated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85242d24c",
+  "group": "NB",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN of 15d7dc1c. The Lean file is byte-identical (sha aafd5d09) and compiles clean in 11.2 s with nt_compile. The item delta is lean plus the stmt_dep def-pur-finite-coefficient-ring-map replacing the theorem. The new existing:true definition node owns finiteScalarPresheafMap/finiteScalarRingMap on the unchanged ProEtaleFiniteScalarUnitComparison; its statement matches the bodies; body owners are in its stmt_deps; check_new_node is clean; no race, duplicate or cycle. FIX: fixes/def-pur-finite-coefficient-ring-map.json trims `noncomputable` from lean.statement (check_existing note: differs from signature); it now gives no failures and no notes."
+ }
 }

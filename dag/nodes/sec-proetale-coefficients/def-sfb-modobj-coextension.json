@@ -188,5 +188,33 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-change-of-scalars",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars",
+  "declaration": "CategoryTheory.Mod.coextendScalars",
+  "declarations": [
+   "CategoryTheory.Mod.coextendFst",
+   "CategoryTheory.Mod.coextendSnd",
+   "CategoryTheory.Mod.coextendSMul",
+   "CategoryTheory.Mod.coextendScalarsObj",
+   "CategoryTheory.Mod.coextendι",
+   "CategoryTheory.Mod.coextendEv",
+   "CategoryTheory.Mod.coextendLift",
+   "CategoryTheory.Mod.coextendScalarsMap"
+  ],
+  "statement": "def coextendScalars : Mod C R ⥤ Mod C S",
+  "branch": "slopmaster2",
+  "by": "Q146",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction in ExtendScalars.lean: lines 488-503 give the closed monoidal context and two parallel internal-Hom maps; lines 549-610 construct the equalizer with its right-multiplication S-action; lines 620-634 give its inclusion and restricted evaluation; lines 670-675 give equalizer factorization; lines 723-740 give postcomposition and the functor. The coextension section has no braiding, commutativity, coequalizer or tensor-exactness hypotheses. Its construction accepts any underlying arrow phi, so applying it to the monoid morphism in this node gives precisely the specified construction without a new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70bb9ff9b",
+  "group": "Q146",
+  "result": "pass",
+  "note": "existing:true record of CategoryTheory.Mod.coextendScalars (WeilConjectures/CategoryTheory/ModuleObjects/ExtendScalars.lean, identical in side-live and the published build, .olean present). Clause-by-clause match: MonoidalClosed C + HasEqualizers C with arbitrary universes and no braiding/commutativity (the extension section's hypotheses stop before the coextension namespace); coextendFst = pre(φ▷S≫μ), coextendSnd = curry(α≫R◁ev≫γ); object = equalizer (rfl checked); action = equalizer.lift of curry(α⁻¹≫μ▷_≫S◁ι≫ev), i.e. (s·f)(t)=f(ts) with no swap; map = postcomposition; Mod C R ⥤ Mod C S over the recorded Mathlib Mod/MonObj deps. IsMonHom is not needed by the def (a generalization, not an extra hypothesis). Blueprint source lean field names the same declaration; the parent sk-def-sfb-change-of-scalars records it too (consistent, not a duplicate). Statement verbatim from def. Only the lean field changed vs live; dep records unchanged. Report has Worker report + Second reading by Q146. Not dropped, no repair note. nt_compile --json probe: #check of all 9 decls, functor elaborated under IsMonHom, rfl object identity: EXIT 0, 7.7 s, no warnings."
+ }
 }

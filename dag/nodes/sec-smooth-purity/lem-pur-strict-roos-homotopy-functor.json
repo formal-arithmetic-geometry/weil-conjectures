@@ -241,5 +241,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-2e767175d (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full; there are no new nodes. The base statement is true and unchanged; it matches def-weil-strict-roos-model, which defines the cone as Cone(u)[-1] with coordinates P^{i-1}⊕P^i and differential (y,x)↦(−dy−ux,dx). I checked that this differential squares to zero and agrees with the Stacks 014E cone convention after the [-1] shift. I recomputed each calculation. Step 2: s_Y F = F s_X at every projection, using the tower-morphism equation. Steps 4–5: DT+TD for T=(−Hy,Hx) equals ((dH+Hd)y+(Hv−vH)x,(dH+Hd)x); the mixed term vanishes by compatibility of h with transitions, and the signs and degrees are correct. Step 6: the homotopy quotient is made explicit (witnesses 0, −h, h+h', bha), and adjacent compatibility implies compatibility with all transitions. Step 8: scalar multiplication passes through products and homotopies. Small cases checked: zero tower, f=g with h=0, constant tower, complexes in one degree, characteristic 2, and the sign flip, which fails as it should. The Stacks tags 014E/08TC/013H/0112/09MJ exist at the cited labels. No SGA is cited, and all citations are definition nodes, so no route issue and no tool_uses. There is no re-split note, the item is not dropped, no existing Lean is attachable, and no duplicate exists among the DAG's strict-Roos nodes. One fault, fixed: Steps 1 and 8 use the universal property of products without citing it. I added def-weil-category-product to their uses, their text and proof_deps (fixes/dag/nodes/sec-smooth-purity/lem-pur-strict-roos-homotopy-functor.json). Advisory: the statement's 'countable products' could also cite that node; I left the statement untouched.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StrictRoosHomotopyFunctor",
+  "declaration": "CategoryTheory.roosF_homotopy_functor",
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosHomotopyFunctor.lean",
+  "statement": "theorem roosF_homotopy_functor {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A] : (roosF (A := A)).Additive ∧ (∀ (X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (f g : X ⟶ Y) (h : Homotopy f g), ∃ H : Homotopy (roosF.map f) (roosF.map g), ∀ (p : ℤ) (n : ℕ), (H.hom ((p + 1) + 1) (p + 1) ≫ (roosχ Y p).hom ≫ biprod.fst ≫ (Pi.π (fun m : ℕ ↦ Y.asFunctor.obj (op m)) n).f p = -((roosχ X (p + 1)).hom ≫ biprod.fst ≫ (Pi.π (fun m : ℕ ↦ X.asFunctor.obj (op m)) n).f (p + 1) ≫ (h.hom (p + 1) p).app (op n))) ∧ (H.hom ((p + 1) + 1) (p + 1) ≫ (roosχ Y p).hom ≫ biprod.snd ≫ (Pi.π (fun m : ℕ ↦ Y.asFunctor.obj (op m)) n).f (p + 1) = (roosχ X (p + 1)).hom ≫ biprod.snd ≫ (Pi.π (fun m : ℕ ↦ X.asFunctor.obj (op m)) n).f ((p + 1) + 1) ≫ (h.hom ((p + 1) + 1) (p + 1)).app (op n))) ∧ (∃ RF : HomotopyCategory (ℕᵒᵖ ⥤ A) (ComplexShape.up ℤ) ⥤ HomotopyCategory A (ComplexShape.up ℤ), RF.Additive ∧ HomotopyCategory.quotient (ℕᵒᵖ ⥤ A) (ComplexShape.up ℤ) ⋙ RF = roosF ⋙ HomotopyCategory.quotient A (ComplexShape.up ℤ) ∧ ∀ (k : Type w) [CommRing k] [Linear k A], (roosF (A := A)).Linear k ∧ RF.Linear k)",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aac868524",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Delivers roosF_homotopy_functor in Sheaf.CategoryTheory.StrictRoosHomotopyFunctor, sorry-only; node record differs from live only in lean. Clause check: Abelian + HasCountableProducts, no extra assumptions; existing roosP/roosU/roosF/roosχ reused; Homotopy in ℕᵒᵖ⥤A = transition-compatible levelwise homotopy (not stronger); the two projection equations at degree (p+1)+1, all p and n, pin T(y,x)=(−Hy,Hx). Hand-checked roosχ coordinates (XIsoOfEq, homotopyCofiber.XIsoBiprod, braiding) and the [−1] shift sign: differential is (−dy−vx,dx), and DT+TD=(F−G) holds under Mathlib's f=hd+dh+g convention, so the statement is provable. RF pinned by quotient⋙RF=roosF⋙quotient, Additive; ∀ k:Type w CommRing, Linear k A ⇒ roosF.Linear k ∧ RF.Linear k. Universes u,v,w independent. No duplicate in side-live lean or Mathlib. Docstrings have source places, blueprint tag and all 8 steps; lean.statement verbatim; no line over 100 chars; report has both required sections. nt_compile --json on the snapshot: 15.6 s, exit 0, no errors or warnings. Advisory: unused OfSequence dependency import."
+ }
 }

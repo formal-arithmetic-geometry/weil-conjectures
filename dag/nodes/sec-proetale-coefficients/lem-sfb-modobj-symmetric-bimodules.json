@@ -192,5 +192,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-10272e598 (reviewer sub-agent of L); spot-checked: Read all five nodes, cited statements, current blueprint route, and Mathlib source locations. All five proof steps and four new leaves check out; nonsymmetric braided small-case tests pass. No duplicates, missing dependencies, cycles, or target weakening found. Report’s missing-metadata warning is stale. Full findings written to review.md; no repairs required."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+  "declaration": "CategoryTheory.Mod.fullyFaithfulToBimod",
+  "declarations": [
+   "CategoryTheory.Mod.toBimodObj",
+   "CategoryTheory.Mod.toBimod",
+   "CategoryTheory.Mod.fullyFaithfulToBimod",
+   "Bimod.IsSymmetric",
+   "Bimod.isSymmetric_toBimodObj"
+  ],
+  "statement": "def fullyFaithfulToBimod : (toBimod R : Mod C R ⥤ _).FullyFaithful",
+  "branch": "slopmaster2",
+  "by": "Q149",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream match, clause by clause: toBimodObj keeps M.X and its left action and defines actRight as the braiding followed by the left action, with all five bimodule laws; toBimod keeps the underlying morphisms; fullyFaithfulToBimod supplies the inverse on hom-sets; Bimod.IsSymmetric is precisely the displayed right-action equality and isSymmetric_toBimodObj proves it for every value. All use only Category.{v}, MonoidalCategory and BraidedCategory on C : Type u and MonObj R with IsCommMonObj R; no symmetry or coequalizers are assumed. Read locally and verified against live source with scompile.py --source."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87a9f58b5",
+  "group": "Q149",
+  "result": "pass",
+  "note": "existing:true binding to WeilConjectures.CategoryTheory.ModuleObjects.Bimod (CategoryTheory.Mod.fullyFaithfulToBimod, named by the source blueprint itself). Clause by clause: BraidedCategory with no symmetry assumption; MonObj+IsCommMonObj R; Mathlib Mod C R (= sk-def-sfb-module-objects record); actRight = β ≫ γ; Bimod (Mon.mk R) (Mon.mk R) with all five laws proved; toBimod keeps f.hom; FullyFaithful with explicit preimage; Bimod.IsSymmetric is exactly the node's definition; isSymmetric_toBimodObj needs no coequalizer instances (that section closes first). lean.statement is verbatim from line 94. Node differs from live only in lean. nt_compile --json probe: #check of all 5 declarations clean in 4.5 s, axioms propext/choice/Quot.sound only. Not dropped. Report sections present. Stale lean_not_found import flag is not a fault."
+ }
 }

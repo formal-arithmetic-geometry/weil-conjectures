@@ -249,5 +249,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6e6b0caf2 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged, true and source-backed. Flatness of B is needed: Z→F_2 with P=F_2[0] is a counterexample without it, and I checked it. Dropping the derived-category stmt_dep is correct. There are 0 new nodes, the item is not superseded on live/side-live, review_split passes, and no SGA is cited. I read every cited statement against its step. Steps 1, 4, 5 and 6 are correct: forget detects exactness; on summand (p,q) both sides of the differential square equal (d_A a⊗1)⊗x+(-1)^p(a⊗1)⊗d_P x; the acyclic test matches def-pc-kflat-complex; the flat-term clause follows from naturality in M of β. I checked the Stacks places 06YN, 06YY (context only, as the report says), 03EK, 03DA/03DB, 03ER(3), 0GMW, and homology 010N/012Z. Fixes: (1) Step 2 used the extension/tensor comparison 'naturally', but that node states no naturality. I added the argument: the pure-tensor formula plus uniqueness of maps out of a module sheafification, citing def-weil-presheaf-modules-sheafification. (2) Step 3 justified the B-action c(m⊗n)=m⊗cn by the global tensor universal property, which does not handle local sections, and it never said that β is B-linear, which βγ=id needs. I replaced this with module sheafification of the presheaf tensor as a presheaf of B-modules, citing lem-pc-sites-module-sheafification-interface (a Mathlib leaf), and derived B-linearity of β from uniqueness of factorization. lem-pc-balanced-sheaf-tensor-comparison-isIso and lem-weil-pbc-scalar-tensor-comparison-universes are not duplicates: the first is for spaces only, the second is natural only in N and only as abelian sheaves. The declared tool_uses are accepted; they are all in sk-thm-picard-semicon, which is on the route.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatScalarRestrictionKFlat",
+  "declaration": "SheafOfModules.isKFlat_restrictScalars_of_flat",
+  "file": "lean/Sheaf/Algebra/Homology/FlatScalarRestrictionKFlat.lean",
+  "statement": "theorem isKFlat_restrictScalars_of_flat {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C] {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{w}} (φ : R ⟶ B) (hB : IsFlatOnSite (J := J) (R := R) ((restrictScalars.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)).obj (unit (J := J) ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B)))) (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B)) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := B) P) : CochainComplex.IsKFlatIndependentCoefficients (R := R) (((restrictScalars.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧ ((∀ q : ℤ, IsFlatOnSite (J := J) (R := B) (P.X q)) → ∀ q : ℤ, IsFlatOnSite (J := J) (R := R) ((restrictScalars.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)).obj (P.X q)))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b5b1bd14",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Single sorry'd theorem SheafOfModules.isKFlat_restrictScalars_of_flat matches every node clause: EssentiallySmall.{w} site with independent universes and no universe equality; arbitrary φ : R ⟶ B of commutative ring sheaves; hB = IsFlatOnSite of Res_φ(unit B); P an unbounded ℤ-complex of ringedSiteModules.{w} B with the recorded IsKFlatIndependentCoefficients; conclusions are K-flatness of termwise restriction and the flat-terms implication. Having hP in context for the second clause is faithful to the node, and all 4 citers use K-flat P with flat terms. Node diff vs side-live is lean only; statement verbatim; no line over 100 characters; source and blueprint docstrings and the 6-step proof docstring present; stated proof-dependency modules imported plainly. No duplicate: ChangeOfRingsKFlat is scalar extension and LocalizationRestrictionKFlat covers ordinary modules. nt_compile --json clean in 8.9 s; a broken-name control compile errored as expected."
+ }
 }

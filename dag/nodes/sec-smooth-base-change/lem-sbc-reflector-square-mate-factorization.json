@@ -213,5 +213,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-ce3521bd0 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. On the base it was unsplit with no proof and no repair note, so this is a first split and the re-split rules don't apply. The statement now indexes the reflector by the target category of L_u, which replaces source(u). This matches the citer, lem-sbc-completed-operations-linear-natural-exchange step 4, which reads source(u) as the source scheme of the pullback. No hypothesis is added and no conclusion weakened. Dropping def-weil-pbc-composite-adjunction from stmt_deps is right because neither the statement nor the proof uses it. I checked def-weil-pbc-adjunction-mate (Mathlib leaf mateEquiv) against both squares: the ambient one with L1=L_g, L2=L_h, G=L_f, H=L_e, and the reflected one with P in place of L. All eight steps typecheck and hold: step 1 gives the reflected counit times k_g equals the ambient counit by injectivity of H_g; steps 3-5 use T_h=ε_h L_h(-), the square hypothesis and naturality of κ_Y at L_e(δ); step 6 uses counit naturality at k_e; step 7 gives uniqueness because R_hP_eK lies in C_X; step 8 gives naturality. No completion unit is inverted. Source: Stacks 07A7 (sites-cohomology remark-base-change, lines 4032-4058) uses the same counit-adjoint convention, and proof_origin is correctly marked agent. Unit sk-rem-rest has no steps, so there is no route departure and no tool_uses are needed. I re-checked the small cases: all identities, a Set example with the reflective subcategory {∅,1} and non-invertible units, and empty K. lem-sbc-reflector-adjunction-unit-formulas (additive/linear, a single adjunction) and lem-sbc-reflected-compositor-unit-normalization (the compositor analogue, a hypothesis here) are distinct, not duplicates. No SGA. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReflectorSquareMateFactorization",
+  "declaration": "CategoryTheory.ReflectorSquare.mate_factorization",
+  "declarations": [
+   "CategoryTheory.ReflectorSquare.left",
+   "CategoryTheory.ReflectorSquare.right",
+   "CategoryTheory.ReflectorSquare.unit",
+   "CategoryTheory.ReflectorSquare.mate_factorization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ReflectorSquareMateFactorization.lean",
+  "statement": "theorem mate_factorization {AS : Type uS} {AT : Type uT} {AX : Type uX} {AY : Type uY} [Category.{vS} AS] [Category.{vT} AT] [Category.{vX} AX] [Category.{vY} AY] (s : ObjectProperty AS) (t : ObjectProperty AT) (x : ObjectProperty AX) (y : ObjectProperty AY) [Reflective s.ι] [Reflective t.ι] [Reflective x.ι] [Reflective y.ι] (Lf : AS ⥤ AX) (Rf : AX ⥤ AS) (af : Lf ⊣ Rf) (Lg : AS ⥤ AT) (Rg : AT ⥤ AS) (ag : Lg ⊣ Rg) (Lh : AX ⥤ AY) (Rh : AY ⥤ AX) (ah : Lh ⊣ Rh) (Le : AT ⥤ AY) (Re : AY ⥤ AT) (ae : Le ⊣ Re) (hf : ∀ N : x.FullSubcategory, s (Rf.obj N.obj)) (hg : ∀ N : t.FullSubcategory, s (Rg.obj N.obj)) (hh : ∀ N : y.FullSubcategory, x (Rh.obj N.obj)) (he : ∀ N : y.FullSubcategory, t (Re.obj N.obj)) (acf : left s x Lf ⊣ right s x Rf hf) (acg : left s t Lg ⊣ right s t Rg hg) (ach : left x y Lh ⊣ right x y Rh hh) (ace : left t y Le ⊣ right t y Re he) (hcf : ∀ (M : s.FullSubcategory) (N : x.FullSubcategory) (a : (left s x Lf).obj M ⟶ N), (acf.homEquiv M N a).hom = af.homEquiv M.obj N.obj ((unit s x Lf).app M ≫ a.hom)) (hcg : ∀ (M : s.FullSubcategory) (N : t.FullSubcategory) (a : (left s t Lg).obj M ⟶ N), (acg.homEquiv M N a).hom = ag.homEquiv M.obj N.obj ((unit s t Lg).app M ≫ a.hom)) (hch : ∀ (M : x.FullSubcategory) (N : y.FullSubcategory) (a : (left x y Lh).obj M ⟶ N), (ach.homEquiv M N a).hom = ah.homEquiv M.obj N.obj ((unit x y Lh).app M ≫ a.hom)) (hce : ∀ (M : t.FullSubcategory) (N : y.FullSubcategory) (a : (left t y Le).obj M ⟶ N), (ace.homEquiv M N a).hom = ae.homEquiv M.obj N.obj ((unit t y Le).app M ≫ a.hom)) (θ : Lf ⋙ Lh ≅ Lg ⋙ Le) (θc : left s x Lf ⋙ left x y Lh ≅ left s t Lg ⋙ left t y Le) (hθ : ∀ M : s.FullSubcategory, Lh.map ((unit s x Lf).app M) ≫ (unit x y Lh).app ((left s x Lf).obj M) ≫ (θc.hom.app M).hom = θ.hom.app M.obj ≫ Le.map ((unit s t Lg).app M) ≫ (unit t y Le).app ((left s t Lg).obj M)) : (Functor.whiskerLeft (right s t Rg hg) (unit s x Lf) ≫ Functor.whiskerRight (mateEquiv acg ach θc.hom).natTrans x.ι = Functor.whiskerLeft t.ι (mateEquiv ag ah θ.hom).natTrans ≫ Functor.whiskerRight (unit t y Le) Rh) ∧ (∀ K : t.FullSubcategory, (∀ a : (left s x Lf).obj ((right s t Rg hg).obj K) ⟶ (right x y Rh hh).obj ((left t y Le).obj K), (unit s x Lf).app ((right s t Rg hg).obj K) ≫ a.hom = (mateEquiv ag ah θ.hom).app K.obj ≫ Rh.map ((unit t y Le).app K) → a = (mateEquiv acg ach θc.hom).app K) ∧ (ah.homEquiv (Lf.obj (Rg.obj K.obj)) ((left t y Le).obj K).obj).symm ((unit s x Lf).app ((right s t Rg hg).obj K) ≫ ((mateEquiv acg ach θc.hom).app K).hom) = θ.hom.app (Rg.obj K.obj) ≫ Le.map (ag.counit.app K.obj) ≫ (unit t y Le).app K)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9762ab630",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Checked the node clause by clause against ReflectorSquare.mate_factorization. Categories, ObjectProperty reflective subcategories, the four adjunction directions and the hf..he preservation hypotheses match the node. left/right/unit are P_u, D_u, k_u (real data). hc* fully pin the reflected adjunctions to the specified Hom bijection and are satisfiable. hθ is the node's square in left-to-right order. b and α are mateEquiv (the def-weil-pbc-adjunction-mate leaf), oriented as in Stacks 07A7. The NatTrans factorization, uniqueness over P_fD_gK→D_hP_eK and the transpose θ≫Le(ε_g)≫k_e all match the node. No invertibility assumed; 8 universes independent. No duplicate in side-live lean/Sheaf. lean.statement is verbatim in the file; proof is a single sorry; docstrings carry the source and all 8 proof steps; report sections present; only the lean field of the node changed. nt_compile --json: clean, 5.1 s, exit 0."
+ }
 }

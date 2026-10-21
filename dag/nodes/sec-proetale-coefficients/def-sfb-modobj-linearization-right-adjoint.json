@@ -268,5 +268,33 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+  "declaration": "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+  "declarations": [
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+   "CategoryTheory.Functor.ProjectionFormula.theta",
+   "CategoryTheory.Functor.ProjectionFormula.rightSMul",
+   "CategoryTheory.Functor.ProjectionFormula.rightModObj",
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight_obj_X",
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight_map_hom",
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight_obj_smul",
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight_comp_forget"
+  ],
+  "statement": "noncomputable def mapModRight : Mod D B ⥤ Mod C (S.obj B)",
+  "branch": "slopmaster2",
+  "by": "Q31",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction, confirmed against the current live server source via scompile.py --source. Context: arbitrary monoidal C and D with independent object and morphism universes; S : D ⥤ C with S.Monoidal; P : C ⥤ D; pf : S.ProjectionFormula P; G : D ⥤ C; adj : P ⊣ G; B : D with MonObj B. theta is the specified counit mate; rightSMul and rightModObj give its composite with G of the action and the module axioms; mapModRight sends underlying objects/maps through G; mapModRight_comp_forget is equality of the specified forgetful composites. No extra assumptions or new module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eced09ae8",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Lean-only existing:true record for CategoryTheory.Functor.ProjectionFormula.mapModRight (side ModuleObjects/ProjectionFormula.lean 324-450). Checked clause by clause: theta is the canonical adjunction mate of (L◁c_N)∘π; rightSMul = theta ≫ G.map γ with module axioms proved via theta_unit/theta_assoc/naturality; mapModRight : Mod D B ⥤ Mod C (S.obj B) uses the Mathlib-transported monoid on S B; strict forget compatibility. Independent universes, no extra hypotheses. Dependency records (ProjectionFormula Q18, Mathlib Mod Q48, mapMod) are consistent. No duplicate node, not dropped. #check probe of all 8 declarations compiled cleanly in 3.9 s via nt_compile --json; axioms propext/choice/Quot.sound only. Advisory: statement field carries `noncomputable`."
+ }
 }
