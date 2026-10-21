@@ -13,6 +13,8 @@ public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import Sheaf.Paper.PbcActualScalarPullback
 public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 import Sheaf.Paper.ScalarTensorPullbackNormalization
+import Sheaf.Paper.ScalarPullbackIsoExistence
+import Sheaf.Paper.ScalarPullbackIsoUniqueness
 
 /-!
 # Restriction of the derived coefficient mate equals the projection morphism
@@ -143,7 +145,10 @@ theorem scalarPullbackIso_existsUnique
           scalarGeometricRepresentative B f
             (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).obj P) ≫
           _root_.DerivedCategory.Q.map ((scalarSheafPullbackComplexIso φ f).hom.app P) := by
-  sorry
+  obtain ⟨c, hc⟩ := scalarPullbackIso_exists φ f
+  refine ⟨c, hc, ?_⟩
+  intro d hd
+  exact (scalarPullbackIso_unique φ f (c := c) (d := d) hc hd).symm
 
 /-- The uniquely normalized derived scalar/pullback isomorphism.
 Source: Stacks 07A4 and 0G7E (blueprint: lem-pur-etale-scalar-mate-projection). -/

@@ -1,0 +1,137 @@
+{
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 07A7: normalized derived scalar/pullback comparison"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurEtaleScalarMateProjection",
+  "date": "2026-10-21",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-etale-scalar-pullback-iso",
+   "place": "Proof decomposition of normalized derived scalar/pullback comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "existence uniqueness normalized derived scalar pullback comparison K-flat representative counit",
+   "results": "{\"t\": \"2026-10-21T00:02:25Z\", \"tool\": \"leanfinder\", \"query\": \"existence uniqueness normalized derived scalar pullback comparison K-flat representative counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"2c619abafb77f3a9\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact specialized comparison theorem found. Use the generic localization, derived counit and adjunction uniqueness APIs in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionRepresentative.*IsIso",
+   "results": "{\"t\": \"2026-10-21T00:02:25Z\", \"tool\": \"grep\", \"query\": \"scalarExtensionRepresentative.*IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact specialized comparison theorem found. Use the generic localization, derived counit and adjunction uniqueness APIs in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isIso_leftDerivedFunctorCounit_app_of_kFlat",
+   "results": "{\"t\": \"2026-10-21T00:02:25Z\", \"tool\": \"loogle\", \"query\": \"Functor.isIso_leftDerivedFunctorCounit_app_of_kFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.isIso_leftDerivedFunctorCounit_app_of_kFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact specialized comparison theorem found. Use the generic localization, derived counit and adjunction uniqueness APIs in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "existence and uniqueness of a natural isomorphism characterized on K-flat cochain representatives via localization and derived adjunction counits",
+   "results": "{\"t\": \"2026-10-21T01:08:30Z\", \"tool\": \"leansearch\", \"query\": \"existence and uniqueness of a natural isomorphism characterized on K-flat cochain representatives via localization and derived adjunction counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.rightDerivedUnique.congr_simp\", \"CategoryTheory.Functor.leftDerivedUnique.congr_simp\", \"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Adjunction.Localization.ε\", \"CategoryTheory.Functor.leftDerivedNatIso\"], \"digest\": \"c9651954f6b401a4\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact small-etale scalar/pullback normalization theorem. Mathlib.CategoryTheory.Functor.Derived.LeftDerived supplies generic leftDerivedUnique and leftDerived_ext (source inspected); the existing proof uses localization descent and extensionality after constructing invertible representative comparisons."
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 07A7: normalized derived scalar/pullback comparison"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "id": "lem-pur-etale-scalar-pullback-existence",
+ "kind": "theorem",
+ "title": "Existence of normalized derived scalar/pullback comparison",
+ "statement": "Work in the unbounded small-etale derived module categories [def-weil-pbc-derived-categories]. Use derived scalar extension and its specified counit [lem-pur-derived-change-of-rings], the ordinary scalar/pullback comparison and geometric representative [def-pur-scalar-pullback-representative-data], and K-flat complexes [def-pc-kflat-complex]. The precise proposition is:\n\ntheorem scalarPullbackIso_exists\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    ∃ c : scalarExtension φ W ⋙ L(upperStar (ModuleCat.{u + 1} B) f) ≅\n        L(upperStar (ModuleCat.{u + 1} A) f) ⋙ scalarExtension φ Z,\n      ∀ (P : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ),\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →\n      c.hom.app (_root_.DerivedCategory.Q.obj P) ≫\n          (scalarExtension φ Z).map (scalarGeometricRepresentative A f P) ≫\n          scalarExtensionRepresentative φ Z\n            (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) =\n        L(upperStar (ModuleCat.{u + 1} B) f).map (scalarExtensionRepresentative φ W P) ≫\n          scalarGeometricRepresentative B f\n            (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          _root_.DerivedCategory.Q.map ((scalarSheafPullbackComplexIso φ f).hom.app P)",
+ "stmt_deps": [
+  "def-pur-scalar-pullback-representative-data",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary scalar extension preserves quasi-isomorphisms between K-flat complexes: after exact faithful restriction it is tensoring with the coefficient sheaf, which preserves acyclicity on K-flat complexes. Identify its specified representative map with the derived counit using uniqueness of left adjoints. That counit is invertible on K-flat inputs.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-derived-adjoint-cochain-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the reduced functorial flat resolution. The resolution is K-flat, and its geometric inverse image is K-flat because inverse image preserves flat objects and the colimits presenting the resolution. The geometric representative counit is invertible everywhere because inverse image is exact.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-scalar-pullback-representative-data",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two normalization paths are natural transformations from the two derived composites, precomposed with Q, to the same ordinary cochain composite followed by Q. On the functorial resolving models both paths are invertible. Conjugate their quotient by the resolution quasi-isomorphisms to obtain a natural isomorphism on all cochains, and descend it through localization. Naturality along the resolution map gives the normalization equation on every cochain complex.",
+   "uses": [
+    "def-pur-scalar-pullback-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-scalar-pullback-representative-data",
+  "lem-derived-adjoint-cochain-counit",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.ScalarPullbackIsoExistence",
+  "declaration": "AlgebraicGeometry.Etale.scalarPullbackIso_exists",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarPullbackIso_exists"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarPullbackIsoExistence.lean",
+  "statement": "theorem scalarPullbackIso_exists\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    ∃ c : scalarExtension φ W ⋙ L(upperStar (ModuleCat.{u + 1} B) f) ≅\n        L(upperStar (ModuleCat.{u + 1} A) f) ⋙ scalarExtension φ Z,\n      ∀ (P : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ),\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →\n      c.hom.app (_root_.DerivedCategory.Q.obj P) ≫\n          (scalarExtension φ Z).map (scalarGeometricRepresentative A f P) ≫\n          scalarExtensionRepresentative φ Z\n            (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) =\n        L(upperStar (ModuleCat.{u + 1} B) f).map (scalarExtensionRepresentative φ W P) ≫\n          scalarGeometricRepresentative B f\n            (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          _root_.DerivedCategory.Q.map ((scalarSheafPullbackComplexIso φ f).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T012408-L-2185191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T012408-L-2185191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
