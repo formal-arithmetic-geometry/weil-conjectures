@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-flat-hom-evaluation-roof-data",
+ "kind": "definition",
+ "title": "Canonical flat scalar Hom comparison and evaluation-roof data",
+ "status": "split",
+ "statement": "On a site small in the module universe, use the normalized scalar, closed tensor-Hom and representative models [def-sfb-scalar-hom-comparison-data], [def-coef-hom-representative-evaluation], and the strict normalized Hom comparison and denominator [def-sfb-internal-hom-strict-models], [def-sfb-internal-hom-strict-roof]. For a commutative coefficient map $a:R\\to S$, define $c:E_a^L H_R(K,L)\\to H_S(E_a^LK,E_a^LL)$ to be the transpose of the inverse strong scalar tensor comparison followed by scalar-extended evaluation. Define its restriction using the normalized scalar-Hom adjunction. Use the actual restricted regular $S$-module for strict tensoring; define the exact-extension representative comparison using the universal derived counit, termwise restriction and the tensor identification. Define the source and target representative maps by this comparison and the fixed Hom-resolution isomorphisms. Keep the recorded strict numerator and denominator, and define the inverse localized denominator only when it is a quasi-isomorphism. Define EvaluationRoof to be the data type of a tensor/restricted-extension identification fixed on pure tensors, together with the assertions that exact extension computes derived extension; the denominator is a quasi-isomorphism on flat-term K-flat first inputs; the restricted comparison satisfies both the denominator equation and equivalent numerator/inverse-denominator roof; and these maps are natural in both inputs and compatible with coefficient composition, including identity maps. This packages data and properties and does not assert that the type is inhabited.",
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-coef-hom-representative-evaluation",
+  "def-sfb-internal-hom-strict-models",
+  "def-sfb-internal-hom-strict-roof"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 0A95, with sites-modules Tag 03CZ; existing evaluation-transpose construction and strict roof data in FlatInternalHomEvaluationRoof, refinement of the final paragraph of blueprint lem-sfb-dc-hom-preserves.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Koszul braiding, restricted regular finite coefficient modules, finite subfield ring cocone, flat scalar internal Hom evaluation roof, section ring map",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat\", \"RingHom.Flat\", \"FGModuleCat.FGModuleCatEvaluation\", \"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"PresheafOfModules.restriction\"]}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "loogle",
+   "query": "BraidedCategory, Mod.comap, Cocone, sectionRingSheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'BraidedCategory'\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "internalBraiding|qlbarTailStage|qlbarTailVertex|completedSubfieldCocone|EvaluationRoof|sectionScalarMap",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n internalBraiding|qlbarTailStage|qlbarTailVertex|completedSubfieldCocone|SfbFlatHom.comparison|SfbFlatHom.EvaluationRoof|sectionScalarMap dag/nodes --glob def-*.json; same names in lean/WeilConjectures and lean/Sheaf",
+   "results": "No definition node owns any exact declaration. WeilConjectures has only unrelated HomologyEvaluationRoof module imports. Sheaf hits: ModuleObjectRingedSiteDerivedComparison:85; QlbarTailModuleColimit:45,56; CompletedCondensedCoefficients:202; FlatInternalHomEvaluationRoof:60,179; InternalSectionScalarAdjunction:48. The theorem nodes list these helper definitions but do not determine them by choice. def-sfb-qlbar-x-cocone owns the underlying abelian cocone, not its Mon-bundled refinement.",
+   "date": "2026-10-21",
+   "verdict": "Use the single existing implementation; add definition ownership records only, as requested by the immutable-head review."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'section scalar'; search 'tail module'; search 'evaluation roof'; search 'braiding'; search 'subfield cocone'; ancestor lem-sfb-qlbar-internal-hom-coefficient-comparison",
+   "results": "0, 0, 0, 9, 0 blueprint hits respectively. Braiding hits are ordinary module tensor braidings and trace pairings, not the derived internalBraiding declaration. ancestor returns None, with message 'a node created for lem-sfb-qlbar-internal-hom-coefficient-comparison has blueprint.from.node = None'.",
+   "date": "2026-10-21",
+   "verdict": "Retain inherited null ancestor with explicit proof place and prepend the item to via."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "date": "2026-10-21",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ownership extraction for Canonical flat scalar Hom comparison and evaluation-roof data in lem-sfb-dc-hom-preserves, proof: Algebraic-closure paragraph: finite coefficient fields, finite-free stages, small cofinal index, evaluation/transition compatibility and filtered passage; live proof step 9.",
+   "via": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatInternalHomEvaluationRoof",
+  "declaration": "CategoryTheory.SfbFlatHom.EvaluationRoof",
+  "declarations": [
+   "CategoryTheory.SfbFlatHom.scalarTensor",
+   "CategoryTheory.SfbFlatHom.comparison",
+   "CategoryTheory.SfbFlatHom.restrictedComparison",
+   "CategoryTheory.SfbFlatHom.representative",
+   "CategoryTheory.SfbFlatHom.sourceMap",
+   "CategoryTheory.SfbFlatHom.targetMap",
+   "CategoryTheory.SfbFlatHom.denominator",
+   "CategoryTheory.SfbFlatHom.numerator",
+   "CategoryTheory.SfbFlatHom.denominatorInverse",
+   "CategoryTheory.SfbFlatHom.EvaluationRoof"
+  ],
+  "statement": "structure EvaluationRoof",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing published definitions only; no duplicate module and no theorem witness chosen. Extracted ownership from the theorem module as required by the returned immutable-head review. The surrounding variables and universes are those in the source module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44f60eb7",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44f60eb7",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of e3ce9f8f. Lean file byte-identical (sha256 6c3a9e37…), lean record identical, statement verbatim. All 21 stmt_deps are now definitions: 5 new existing:true owners (def-sfb-native-derived-koszul-braiding→internalBraiding; def-sfb-qlbar-tail-module-objects→qlbarTailStage/Vertex; def-sfb-qlbar-ring-object-cocone→completedPointSubfieldDiagram/Cocone, completedSubfieldCocone/Inclusion/Leg; def-sfb-flat-hom-evaluation-roof-data→SfbFlatHom scalarTensor…EvaluationRoof; def-sfb-section-scalar-map-data→sectionScalarMap etc.) plus def-coef-hom-representative-evaluation for coefficientHomResolution. dc-hom-filtered-colimit dropped; the theorems stay in proof_deps (+hom-flat-evaluation-roof, +internal-section-scalar-adjunction). Checked in side-live source: each owned decl exists, is a plain def/abbrev/structure/instance (none .choose of a theorem), node statements match the Lean bodies, citations = stmt_deps, signatures verbatim, no cycle, no competing live owner, live item lean still null. Item module scan: every use from the 6 theorem modules is now owned. Mathematics (continuity, IsGE lower bound, IsIso, naturality, field tail, colimit formula, pinned normalizations), edge cases and universes reconfirmed. Advisories only: unused proof imports, redundant Nonempty EvaluationRoof conjunct, verbose retry logs in report. No FIX, so no compile; report records server dry-run OK 2da826511ba."
+ }
+}

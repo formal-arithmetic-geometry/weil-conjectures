@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-native-derived-koszul-braiding",
+ "kind": "definition",
+ "title": "Native derived Koszul braiding",
+ "status": "split",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a commutative condensed ring with pulled-back internal modules and their relative derived tensor [sk-def-sfb-derived-tensor-hom]. Define the braiding on $D(\\operatorname{Mod}_{\\Lambda_X})$ to be the K-flat localization Koszul braiding, transported along the equality of this localization monoidal structure with the native derived monoidal structure. It is the actual braiding, with sign $(-1)^{pq}$ on total tensor summands of degrees $p,q$, not an arbitrary braided structure.",
+ "stmt_deps": [
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06YL, Koszul tensor symmetry; native module-object realization already defined in ModuleObjectRingedSiteDerivedComparison.internalBraiding."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Koszul braiding, restricted regular finite coefficient modules, finite subfield ring cocone, flat scalar internal Hom evaluation roof, section ring map",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat\", \"RingHom.Flat\", \"FGModuleCat.FGModuleCatEvaluation\", \"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"PresheafOfModules.restriction\"]}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "loogle",
+   "query": "BraidedCategory, Mod.comap, Cocone, sectionRingSheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'BraidedCategory'\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "internalBraiding|qlbarTailStage|qlbarTailVertex|completedSubfieldCocone|EvaluationRoof|sectionScalarMap",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n internalBraiding|qlbarTailStage|qlbarTailVertex|completedSubfieldCocone|SfbFlatHom.comparison|SfbFlatHom.EvaluationRoof|sectionScalarMap dag/nodes --glob def-*.json; same names in lean/WeilConjectures and lean/Sheaf",
+   "results": "No definition node owns any exact declaration. WeilConjectures has only unrelated HomologyEvaluationRoof module imports. Sheaf hits: ModuleObjectRingedSiteDerivedComparison:85; QlbarTailModuleColimit:45,56; CompletedCondensedCoefficients:202; FlatInternalHomEvaluationRoof:60,179; InternalSectionScalarAdjunction:48. The theorem nodes list these helper definitions but do not determine them by choice. def-sfb-qlbar-x-cocone owns the underlying abelian cocone, not its Mon-bundled refinement.",
+   "date": "2026-10-21",
+   "verdict": "Use the single existing implementation; add definition ownership records only, as requested by the immutable-head review."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'section scalar'; search 'tail module'; search 'evaluation roof'; search 'braiding'; search 'subfield cocone'; ancestor lem-sfb-qlbar-internal-hom-coefficient-comparison",
+   "results": "0, 0, 0, 9, 0 blueprint hits respectively. Braiding hits are ordinary module tensor braidings and trace pairings, not the derived internalBraiding declaration. ancestor returns None, with message 'a node created for lem-sfb-qlbar-internal-hom-coefficient-comparison has blueprint.from.node = None'.",
+   "date": "2026-10-21",
+   "verdict": "Retain inherited null ancestor with explicit proof place and prepend the item to via."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "date": "2026-10-21",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ownership extraction for Native derived Koszul braiding in lem-sfb-dc-hom-preserves, proof: Algebraic-closure paragraph: finite coefficient fields, finite-free stages, small cofinal index, evaluation/transition compatibility and filtered passage; live proof step 9.",
+   "via": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.internalBraiding",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.internalBraiding"
+  ],
+  "statement": "instance internalBraiding : BraidedCategory (DerivedCategory (Internal Λ X))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing published definitions only; no duplicate module and no theorem witness chosen. Extracted ownership from the theorem module as required by the returned immutable-head review. The surrounding variables and universes are those in the source module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44f60eb7",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44f60eb7",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of e3ce9f8f. Lean file byte-identical (sha256 6c3a9e37…), lean record identical, statement verbatim. All 21 stmt_deps are now definitions: 5 new existing:true owners (def-sfb-native-derived-koszul-braiding→internalBraiding; def-sfb-qlbar-tail-module-objects→qlbarTailStage/Vertex; def-sfb-qlbar-ring-object-cocone→completedPointSubfieldDiagram/Cocone, completedSubfieldCocone/Inclusion/Leg; def-sfb-flat-hom-evaluation-roof-data→SfbFlatHom scalarTensor…EvaluationRoof; def-sfb-section-scalar-map-data→sectionScalarMap etc.) plus def-coef-hom-representative-evaluation for coefficientHomResolution. dc-hom-filtered-colimit dropped; the theorems stay in proof_deps (+hom-flat-evaluation-roof, +internal-section-scalar-adjunction). Checked in side-live source: each owned decl exists, is a plain def/abbrev/structure/instance (none .choose of a theorem), node statements match the Lean bodies, citations = stmt_deps, signatures verbatim, no cycle, no competing live owner, live item lean still null. Item module scan: every use from the 6 theorem modules is now owned. Mathematics (continuity, IsGE lower bound, IsIso, naturality, field tail, colimit formula, pinned normalizations), edge cases and universes reconfirmed. Advisories only: unused proof imports, redundant Nonempty EvaluationRoof conjunct, verbose retry logs in report. No FIX, so no compile; report records server dry-run OK 2da826511ba."
+ }
+}

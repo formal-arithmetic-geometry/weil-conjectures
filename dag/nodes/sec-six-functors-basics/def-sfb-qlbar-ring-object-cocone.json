@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-qlbar-ring-object-cocone",
+ "kind": "definition",
+ "title": "Ring-object bundling of the finite-subfield coefficient cocone",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $X$ a scheme. Start with the finite-subextension coefficient diagram and algebraic-closure cocone in abelian sheaves [def-sfb-qlbar-x-cocone]. Bundle its point diagram as a diagram of ring objects: the object at $E$ is $\\underline E$ with its actual multiplication and unit, and each inclusion is the specified ring-object map. Bundle the point cocone with vertex $\\underline\\Omega$ and its specified ring-object inclusions. Define the cocone on $X$ to be its image under the ring-object functor induced by $p_X^*$ [sk-def-sfb-pullback-from-point], [sk-def-sfb-pulled-back-coefficients]. Thus its vertex, transitions and legs are the original coefficient objects and maps, now with their ring-object structure retained. Define also the bundled transitions and legs by pulling back the corresponding condensed-ring homomorphisms. This definition asserts no colimit property.",
+ "stmt_deps": [
+  "def-sfb-qlbar-x-cocone",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-qlbar-x-cocone.md",
+  "place": "The mapped coefficient cocone, retaining the already specified ring structures as in CompletedCondensedCoefficients, third comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Koszul braiding, restricted regular finite coefficient modules, finite subfield ring cocone, flat scalar internal Hom evaluation roof, section ring map",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat\", \"RingHom.Flat\", \"FGModuleCat.FGModuleCatEvaluation\", \"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"PresheafOfModules.restriction\"]}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "loogle",
+   "query": "BraidedCategory, Mod.comap, Cocone, sectionRingSheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'BraidedCategory'\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "internalBraiding|qlbarTailStage|qlbarTailVertex|completedSubfieldCocone|EvaluationRoof|sectionScalarMap",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published project declaration through an existing:true ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n internalBraiding|qlbarTailStage|qlbarTailVertex|completedSubfieldCocone|SfbFlatHom.comparison|SfbFlatHom.EvaluationRoof|sectionScalarMap dag/nodes --glob def-*.json; same names in lean/WeilConjectures and lean/Sheaf",
+   "results": "No definition node owns any exact declaration. WeilConjectures has only unrelated HomologyEvaluationRoof module imports. Sheaf hits: ModuleObjectRingedSiteDerivedComparison:85; QlbarTailModuleColimit:45,56; CompletedCondensedCoefficients:202; FlatInternalHomEvaluationRoof:60,179; InternalSectionScalarAdjunction:48. The theorem nodes list these helper definitions but do not determine them by choice. def-sfb-qlbar-x-cocone owns the underlying abelian cocone, not its Mon-bundled refinement.",
+   "date": "2026-10-21",
+   "verdict": "Use the single existing implementation; add definition ownership records only, as requested by the immutable-head review."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'section scalar'; search 'tail module'; search 'evaluation roof'; search 'braiding'; search 'subfield cocone'; ancestor lem-sfb-qlbar-internal-hom-coefficient-comparison",
+   "results": "0, 0, 0, 9, 0 blueprint hits respectively. Braiding hits are ordinary module tensor braidings and trace pairings, not the derived internalBraiding declaration. ancestor returns None, with message 'a node created for lem-sfb-qlbar-internal-hom-coefficient-comparison has blueprint.from.node = None'.",
+   "date": "2026-10-21",
+   "verdict": "Retain inherited null ancestor with explicit proof place and prepend the item to via."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "date": "2026-10-21",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ownership extraction for Ring-object bundling of the finite-subfield coefficient cocone in lem-sfb-dc-hom-preserves, proof: Algebraic-closure paragraph: finite coefficient fields, finite-free stages, small cofinal index, evaluation/transition compatibility and filtered passage; live proof step 9.",
+   "via": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCondensedCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.completedSubfieldCocone",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.completedPointSubfieldDiagram",
+   "AlgebraicGeometry.ProEtale.completedPointSubfieldCocone",
+   "AlgebraicGeometry.ProEtale.completedSubfieldCocone",
+   "AlgebraicGeometry.ProEtale.completedSubfieldInclusion",
+   "AlgebraicGeometry.ProEtale.completedSubfieldLeg"
+  ],
+  "statement": "def completedSubfieldCocone (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing published definitions only; no duplicate module and no theorem witness chosen. Extracted ownership from the theorem module as required by the returned immutable-head review. The surrounding variables and universes are those in the source module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44f60eb7",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44f60eb7",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of e3ce9f8f. Lean file byte-identical (sha256 6c3a9e37…), lean record identical, statement verbatim. All 21 stmt_deps are now definitions: 5 new existing:true owners (def-sfb-native-derived-koszul-braiding→internalBraiding; def-sfb-qlbar-tail-module-objects→qlbarTailStage/Vertex; def-sfb-qlbar-ring-object-cocone→completedPointSubfieldDiagram/Cocone, completedSubfieldCocone/Inclusion/Leg; def-sfb-flat-hom-evaluation-roof-data→SfbFlatHom scalarTensor…EvaluationRoof; def-sfb-section-scalar-map-data→sectionScalarMap etc.) plus def-coef-hom-representative-evaluation for coefficientHomResolution. dc-hom-filtered-colimit dropped; the theorems stay in proof_deps (+hom-flat-evaluation-roof, +internal-section-scalar-adjunction). Checked in side-live source: each owned decl exists, is a plain def/abbrev/structure/instance (none .choose of a theorem), node statements match the Lean bodies, citations = stmt_deps, signatures verbatim, no cycle, no competing live owner, live item lean still null. Item module scan: every use from the 6 theorem modules is now owned. Mathematics (continuity, IsGE lower bound, IsIso, naturality, field tail, colimit formula, pinned normalizations), edge cases and universes reconfirmed. Advisories only: unused proof imports, redundant Nonempty EvaluationRoof conjunct, verbose retry logs in report. No FIX, so no compile; report records server dry-run OK 2da826511ba."
+ }
+}

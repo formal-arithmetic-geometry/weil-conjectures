@@ -23173,3 +23173,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T17:20:09Z L: superseded stage-1 delivery NL/lem-sfb-condensed-product-bar-comparison at f978b76f17e322b292adf59f02b7a72a5be1d6a2; current completion retained; packet archived at refs/superseded/NL/lem-sfb-condensed-product-bar-comparison/f978b76f17e322b292adf59f02b7a72a5be1d6a2; stale return retired.
 - 17:20 L: returned deliver/NF/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F (route pivot) and B5/C5 (working around the drop). The item is live: it is not in the drop list, and its citer lem-)
 - 17:22 L: merged deliver/NJ/lem-sfb-profinite-constant-derived-functions (reviewer FIX; first push; new nodes: 1)
+- 17:22 L: merged deliver/N8/lem-sfb-qlbar-internal-hom-coefficient-comparison (stage 2; reviewer PASS; parallel immutable checks)
