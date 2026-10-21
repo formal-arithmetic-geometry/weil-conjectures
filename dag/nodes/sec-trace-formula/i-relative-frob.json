@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "i-relative-frob",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Relative Frobenius",
- "statement": "In the setting of [d-relative-frob], for every $m\\geq1$ the map\n$r_m:X\\to X'_m$ is finite and a universal homeomorphism\n([def-weil-scheme-morphism-properties]).",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], with $q=p^a$ and $k$ the fixed algebraic closure of $k_0=\\mathbf F_q$. Let $f_0:X_0\\to Y_0$ be a morphism of separated finite-type $k_0$-schemes, and let $f:X\\to Y$ be its geometric base change, where $X=X_0\\times_{k_0}k$ and $Y=Y_0\\times_{k_0}k$. Let $\\Phi_X,\\Phi_Y$ be the base changes of the absolute $q$-power Frobenii on the models, as in [d-relative-frob]. For every integer $m\\geq1$, form $X'_m=Y\\times_{\\Phi_Y^m,Y,f}X$ and let $r_m=(f,\\Phi_X^m):X\\to X'_m$ be the unique map with first projection $f$ and second projection $\\Phi_X^m$, as in [d-relative-frob]. Then $r_m$ is finite [def-weil-finite-integral-morphism] and is a universal homeomorphism, meaning that every base change is a homeomorphism on underlying spaces [def-weil-universal-homeomorphism, sk-d-setup].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
   "place": "node i-relative-frob, order 2362",
@@ -19,46 +19,175 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
   "d-relative-frob",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-finite-integral-morphism",
+  "def-weil-universal-homeomorphism",
+  "sk-d-setup"
  ],
  "proof": [
   {
-   "text": "Put $Q=q^m$. By [d-relative-frob], $r_m$ is the base change along\n$k_0\\to k$ of the relative $Q$-power Frobenius\n$F_{X_0/Y_0}:X_0\\to X_0^{(Q)}$. Finite morphisms and universal\nhomeomorphisms are stable under base change, so it suffices to prove\nthat $F_{X_0/Y_0}$ is finite and a universal homeomorphism. Write\n$\\pi:X_0^{(Q)}\\to X_0$ for the second projection, the base change of\n$F_{Y_0}$ along $f_0$; then $\\pi\\circ F_{X_0/Y_0}=F_{X_0}$.",
+   "text": "Fix $m\\geq1$ and put $Q=q^m=p^{am}$. Write $H=F_{X_0/Y_0}:X_0\\to Z_0=Y_0\\times_{F_{Y_0},Y_0,f_0}X_0$ for the relative $Q$-power Frobenius, and $\\pi:Z_0\\to X_0$ for the second projection. The definition gives $\\pi H=F_{X_0}$ and identifies $r_m$ with $H\\times_{k_0}\\operatorname{id}_k$. Here $F_{X_0}$ and $F_{Y_0}$ denote absolute $Q$-power Frobenii, whereas the maps on $X,Y$ in the item are their model base changes. We prove the two properties of $H$ and then extend scalars.",
    "uses": [
     "d-relative-frob"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
+    "place": "Proof, opening paragraph; current main-20261015 statement with d-relative-frob"
+   }
   },
   {
-   "text": "*Step 1: finiteness.* Since $\\pi\\circ F_{X_0/Y_0}=F_{X_0}$ is the\nidentity on underlying spaces, for affine opens\n$\\operatorname{Spec}R\\subseteq Y_0$ and\n$\\operatorname{Spec}S\\subseteq f_0^{-1}(\\operatorname{Spec}R)$ the\ninverse image under $F_{X_0/Y_0}$ of the affine open\n$\\operatorname{Spec}(R\\otimes_{F,R}S)\\subseteq X_0^{(Q)}$ is\n$\\operatorname{Spec}S$, and such opens cover $X_0^{(Q)}$. Finiteness is\nlocal on the target, so it suffices that the ring map\n$R\\otimes_{F,R}S\\to S$, $r'\\otimes s\\mapsto f_0^\\#(r')s^Q$, of\n[d-relative-frob] is finite. Choose generators $s_1,\\ldots,s_n$ of the\nfinitely generated $R$-algebra $S$. Its image contains $f_0^\\#(R)$ and\nall $Q$-th powers. Every element of $S$ is an $f_0^\\#(R)$-linear\ncombination of monomials $s^e=\\prod_is_i^{e_i}$, and writing\n$e_i=Qa_i+b_i$ with $0\\leq b_i<Q$ gives $s^e=(s^a)^Q\\,s^b$. Hence the\n$Q^n$ monomials $s^b$ with $0\\leq b_i<Q$ generate $S$ as a module over\nthe image, and the ring map is finite.",
+   "text": "The structure map $X_0\\to\\operatorname{Spec}k_0$ is of finite type and $Y_0\\to\\operatorname{Spec}k_0$ is separated. Apply the finite-type-to-separated-target statement to this commutative triangle to see that $f_0$ is of finite type, hence locally of finite type. Choose affine opens $U_i=\\operatorname{Spec}R_i$ covering $Y_0$ and affine opens $V_{ij}=\\operatorname{Spec}S_{ij}$ covering $f_0^{-1}(U_i)$ with $S_{ij}$ a finitely generated $R_i$-algebra, as the definition of local finite type allows.",
+   "uses": [
+    "d-relative-frob",
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
+    "place": "Proof, Step 1: choice of finitely generated affine coordinate algebras; finite-type hypothesis made explicit"
+   }
+  },
+  {
+   "text": "On such a pair $U=\\operatorname{Spec}R$, $V=\\operatorname{Spec}S$, the corresponding affine open $W\\subset Z_0$ has ring $B=R\\otimes_{F,R}S$ and the map of $H$ is $h:B\\to S$, $r'\\otimes s\\mapsto g(r')s^Q$, where $g:R\\to S$ is the map of $f_0$. Its image contains $g(R)$, since $h(r'\\otimes1)=g(r')$, and all $Q$-th powers, since $h(1\\otimes s)=s^Q$. Choose algebra generators $s_1,\\ldots,s_n$. For each monomial $s^e$ write $e_i=Qa_i+b_i$, $0\\leq b_i<Q$. Then $g(r)s^e=h(r\\otimes s^a)s^b$. Every polynomial expression in the generators is therefore a $B$-linear combination of the finitely many $s^b$ with $0\\leq b_i<Q$. Thus $S$ is a finite $B$-module. This is generation, not a claim of independence or freeness.",
    "uses": [
     "d-relative-frob"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
+    "place": "Proof, Step 1, monomial argument; compare Stacks varieties.tex Tag 0CCD, lemma-relative-frobenius-finite"
+   }
   },
   {
-   "text": "*Step 2: absolute Frobenius.* For an $\\mathbf F_p$-scheme $T$, the\nabsolute $Q$-power Frobenius $F_T$ is the identity on the underlying\nspace, hence bijective; it is integral, since every local section $b$\nis a root of $t^Q-b^Q$ whose coefficient $b^Q$ lies in the image; and\non residue fields it induces $\\kappa\\to\\kappa$, $a\\mapsto a^Q$, a\npurely inseparable extension. Thus $F_T$ is radicial, that is,\nuniversally injective, and being integral, universally injective and\nsurjective it is a universal homeomorphism\n([Stacks, Tag 04DF](https://stacks.math.columbia.edu/tag/04DF)). In\nparticular $F_{Y_0}$ is one, and so is its base change $\\pi$.",
-   "uses": [],
-   "elementary": null
+   "text": "The opens $W_{ij}$ above cover $Z_0$: for a point $z$, choose $i$ containing its $Y_0$-projection and $j$ containing its $X_0$-projection. This is possible because $F_{Y_0}$ is the identity on points and $F_{Y_0}\\operatorname{pr}_1=f_0\\pi$. Moreover $H^{-1}(W_{ij})=f_0^{-1}(U_i)\\cap F_{X_0}^{-1}(V_{ij})=V_{ij}$, since $F_{X_0}$ is the identity on points and $V_{ij}\\subseteq f_0^{-1}(U_i)$. The affine descriptions and these inverse images are those of d-relative-frob. The finite-local-on-target criterion, condition (2), applied to the finite ring maps in step 3, proves $H$ finite. A finite morphism is integral, so $H$ is integral as well.",
+   "uses": [
+    "d-relative-frob",
+    "def-weil-absolute-frobenius-scheme",
+    "lem-weil-pbc-finite-local-on-target",
+    "pqf-lem-finite-integral-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WI, lemma-finite-local, (2) implies (1); Tag 01WJ, lemma-finite-integral; affine opens as in the blueprint Step 1"
+   }
   },
   {
-   "text": "*Step 3: universal homeomorphism.* The morphism $F_{X_0/Y_0}$ is\nintegral by Step 1. It is surjective: for $x'\\in X_0^{(Q)}$ choose $x$\nwith $F_{X_0}(x)=\\pi(x')$ (Step 2); then\n$\\pi(F_{X_0/Y_0}(x))=\\pi(x')$, and $\\pi$ is injective, so\n$F_{X_0/Y_0}(x)=x'$. It is universally injective: a morphism is\nuniversally injective if and only if it is injective on $K$-valued\npoints for every field $K$, and on $K$-points\n$\\pi\\circ F_{X_0/Y_0}=F_{X_0}$ is injective by Step 2, so\n$F_{X_0/Y_0}$ is injective on $K$-points. By\n[Stacks, Tag 04DF](https://stacks.math.columbia.edu/tag/04DF) again,\n$F_{X_0/Y_0}$ is a universal homeomorphism. With Step 1 and the\nreduction at the beginning, $r_m$ is a finite universal homeomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "For either $T=X_0$ or $T=Y_0$, the absolute $q$-power Frobenius $A_T$ is a universal homeomorphism by the absolute finite-field Frobenius statement; it has no finite-type hypothesis. Its $m$-th iterate is $F_T$, since repeated powers on sections give $s\\mapsto s^{q^m}$ and the underlying map stays the identity. To verify the universal property for the iterate explicitly, fix $T'\\to T$. The pullback of $A_T^{j+1}=A_T\\circ A_T^j$ factors through $T\\times_{A_T,T}T'$: the second arrow is a pullback of $A_T$, and the first is a pullback of $A_T^j$. These identifications follow by matching the two projections of the fibre products. For $j=0$ the base change is the identity; induction makes each of the two arrows a homeomorphism, so their composite is a homeomorphism. This proves every base change of $F_T$ is a homeomorphism, exactly the definition. The field $k_0$ continues to have $q$ elements throughout this induction.",
+   "uses": [
+    "lem-pur-absolute-frobenius-universal-homeomorphism",
+    "def-weil-absolute-frobenius-scheme",
+    "def-pc-fibre-product",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC8, lemma-frobenius, with the q-power theorem iterated; pullback factorization expanded from the universal property"
+   }
+  },
+  {
+   "text": "Since $\\pi$ is the base change of $F_{Y_0}$ along $f_0$, it is a universal homeomorphism. In particular its underlying map is injective, by taking the identity base change in the definition. To prove $H$ surjective, let $z\\in Z_0$. Since $F_{X_0}$ is the identity on points, take $x=\\pi(z)\\in X_0$. Then $\\pi(H(x))=F_{X_0}(x)=\\pi(z)$; injectivity of $\\pi$ gives $H(x)=z$.",
+   "uses": [
+    "d-relative-frob",
+    "def-weil-absolute-frobenius-scheme",
+    "lem-weil-pbc-universal-homeomorphism-base-change",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
+    "place": "Proof, Step 2 final sentence and Step 3 surjectivity argument; Stacks morphisms.tex Tag 0CEU, lemma-base-change-universal-homeomorphism"
+   }
+  },
+  {
+   "text": "Every base change of $F_{X_0}$ is a homeomorphism by step 5, hence is injective; thus $F_{X_0}$ is universally injective by the definition in the radicial-morphism node. The field-point equivalence in that node now says that $F_{X_0}$ is injective on $K$-valued points for every field $K$. If $u,v:\\operatorname{Spec}K\\to X_0$ satisfy $Hu=Hv$, composing with $\\pi$ gives $F_{X_0}u=F_{X_0}v$, hence $u=v$. Apply the same field-point equivalence in the reverse direction to conclude that $H$ is universally injective. Along with integrality from step 4 and surjectivity from step 6, the integral-radicial-surjective criterion proves that $H$ is a universal homeomorphism.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S4, lemma-universally-injective, field-point equivalence; Tag 04DF, lemma-universal-homeomorphism, (2) implies (1); blueprint Step 3"
+   }
+  },
+  {
+   "text": "Finally, finite morphisms are preserved by arbitrary base change, as are universal homeomorphisms. Apply the two cited permanence statements to $H$ along $k_0\\to k$. Under the canonical identification of d-relative-frob, its base change is precisely $r_m$, so $r_m$ is finite and a universal homeomorphism for the chosen $m\\geq1$.",
+   "uses": [
+    "d-relative-frob",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-universal-homeomorphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
+    "place": "Proof, opening reduction and final sentence; finite base change as in Stacks morphisms.tex Tag 01WL, lemma-base-change-finite; universal-homeomorphism base change as in Tag 0CEU, lemma-base-change-universal-homeomorphism"
+   }
   }
  ],
  "proof_deps": [
-  "d-relative-frob"
+  "d-relative-frob",
+  "def-pc-fibre-product",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-radicial-morphism",
+  "def-weil-universal-homeomorphism",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-pur-absolute-frobenius-universal-homeomorphism",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-universal-homeomorphism-base-change",
+  "lemma-nagata-finite-type-to-separated-target",
+  "pqf-lem-finite-integral-lft"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-relative-frob/i-relative-frob.md",
-  "place": "## Proof"
+  "place": "Full proof, with implicit finiteness locality and morphism criteria replaced by existing cited nodes; q-power universal homeomorphism iteration expanded."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of finite type schemes over a finite field the base changed relative iterated Frobenius is finite and a universal homeomorphism",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete relative-Frobenius assertion; hits are component facts or ring Frobenius only"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|relative_frobenius|UniversalHomeomorphism",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete relative-Frobenius assertion; hits are component facts or ring Frobenius only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Frobenius of a locally finite type scheme in characteristic p is finite and universally homeomorphic",
+   "results": "LinearMap.frobenius, frobenius, LinearMap.frobenius_def, FiniteField.Extension.frob, frobenius_def, bijective_frobenius, frobenius_inj, AlgebraicGeometry.IsFinite.recOn",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete relative-Frobenius assertion; hits are component facts or ring Frobenius only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.UniversallyInjective",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete relative-Frobenius assertion; hits are component facts or ring Frobenius only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from a scheme to its pullback by an iterated Frobenius on the base is a finite universal homeomorphism",
+   "results": "AlgebraicGeometry.IsFinite.instFstScheme, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, bijective_iterateFrobenius, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete relative-Frobenius assertion; hits are component facts or ring Frobenius only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -83,5 +212,39 @@
    "AlgebraicGeometry.ProEtale.isFinite_and_isUniversalHomeomorphism_relativeFrobenius"
   ],
   "note": "attached by the lead's tool attach.py 2026-10-16 22:51 UTC for group Q87, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: its conjunction gives finiteness and universal-homeomorphism of r_m."
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "i-relative-frob",
+  "worker": "stage1",
+  "summary": "Q159: preserved the finite universal-homeomorphism assertion and supplied its actual definition references. Eight steps follow the unit route: model reduction, finite-type charts, monomial generation, affine locality and integrality, absolute-Frobenius iteration, surjectivity, field-point injectivity and the universal-homeomorphism criterion, then scalar extension. No new nodes. The previously attached declaration is absent from the current read clone, so no attachment is claimed. Dry-run repair: expanded the inherited contextual statement into a self-contained one and cited sk-d-setup for its quantified universal-homeomorphism convention, realizing the remaining cited unit.",
+  "blueprint": "main-20261015 i-relative-frob and unit sk-i-relative-frob retain the statement; master i-relative-frob Proof and unit steps 1-3 supply the detailed route. Split steps 1 and 8 realize unit step 1; split steps 2-4 realize unit step 2; split steps 5-7 realize unit step 3.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic finite-type triangle theorem supplies finite type of f_0 from the separated finite-type k_0 models; no geometric route is replaced."
+   },
+   {
+    "node": "lem-pur-absolute-frobenius-universal-homeomorphism",
+    "why": "Generic absolute q-power Frobenius theorem supplies the absolute maps required by unit step 3; the iterate argument is explicit."
+   },
+   {
+    "node": "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "why": "Generic Stacks 04DF criterion explicitly prescribed in unit step 3, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-pur-absolute-frobenius-universal-homeomorphism",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-b783a11db",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-b783a11db (reviewer sub-agent of L); spot-checked: No new nodes. The live node is still imported with no split, and nothing else has landed for this item, so it is not superseded. The item is not on the dropped list and has no repair note. Statement: the delivery writes out the setting of d-relative-frob without changing the conclusion or any hypothesis (separated finite-type models, Φ = Φ0×id_k, X'_m = Y×_{Φ_Y^m,Y,f}X, r_m = (f,Φ_X^m)). It correctly repoints finite and universal homeomorphism to def-weil-finite-integral-morphism and def-weil-universal-homeomorphism, since def-weil-scheme-morphism-properties defines neither. Steps checked against Stacks 0CCD (varieties.tex l.7154), 04DF (morphisms.tex l.11361), 01WI, 01WJ and 01S4, and against the unit's 3-step route. Step 2: f0 is of finite type by the Nagata triangle lemma. Step 3: the monomial identity h(r⊗s^a)s^b = g(r)s^e is verified. Step 4: the opens W_ij cover Z0 and H^{-1}(W_ij) = V_ij, so 01WI(2) applies and 01WJ gives integral. Step 5: the induction for the m-fold absolute Frobenius is set up properly. Step 6: π is injective, so H is surjective. Step 7: field-point injectivity via 01S4, then 04DF. Step 8: base change along k0→k. Edge cases tested: f0 = id, Y0 = Spec k0, empty X0, F_q[ε]/(ε²), F_q[t]. No cycle. Accepted tool uses: the Nagata finite-type triangle lemma, absolute-Frobenius universal homeomorphism, and 04DF. The existing lem-trf-relative-frobenius-finite and lem-trf-relative-frobenius-universal-homeomorphism (n = 1 only) cover parts of the claim; the item keeps the unit's own route instead, which is allowed. FIX (C1/C4, minor): steps 4 and 6 use that F is the identity on points without citing def-weil-absolute-frobenius-scheme; I added it to both steps' uses. Advisory: the sk-d-setup stmt_dep only serves the route check. Maintainer B10: the attached AlgebraicGeometry.ProEtale.isFinite_and_isUniversalHomeomorphism_relativeFrobenius exists without sorry in its proof at slopmaster2 Frobenius.lean:543, as a generalization; the report's claim that it is absent is wrong, and the node could be closed through the attachment.; 1 file(s) fixed by the reviewer"
  }
 }
