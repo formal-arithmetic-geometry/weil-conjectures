@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport
+import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonTransport
 
 /-! # Open transport before the coefficient morphism
 
