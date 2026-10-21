@@ -16,74 +16,75 @@
  ],
  "proof": [
   {
-   "text": "Put $E_q=\\tau_{\\le q}E$ for every integer $q\\ge a-1$. The truncation-cohomology statement gives $H^i(E_q)\\cong H^i(E)$ for $i\\le q$ and $H^i(E_q)=0$ for $i>q$. Thus $H^i(E_q)=0$ for $i<a$ as well, and $E_q$ is in $D^+(\\mathcal A)$. Each $C_q=H^q(E)[0][-q]$ is also bounded below, being concentrated in degree $q$. The full bounded-below subcategory has the inherited triangulated structure, so a distinguished triangle of these objects in $D(\\mathcal A)$ is a distinguished triangle in the domain of $\\Phi,\\Psi$. We will prove $P(q)$: $\\eta_{E_q}$ is invertible, for $a-1\\le q\\le b$.",
+   "text": "Let t be the standard t-structure induced on D+(A). The lower cohomology vanishing hypothesis gives E >= a using DerivedCategory.isGE_iff and Plus.isGE_ι_obj_iff. Work directly with t.truncLE, so no choice of a concrete cochain-complex representative or comparison with concrete truncations is needed.",
    "uses": [
-    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), realized using the induced t-structure and the proved derived-category API"
+   }
+  },
+  {
+   "text": "The degree-one shift equation expresses eta at M[1] as the composite of the specified shift isomorphisms with eta(M)[1]. Therefore eta(M[1]) is invertible if and only if eta(M) is: shift by one reflects isomorphisms. Integer induction about zero, using shiftFunctorZero and shiftFunctorAdd, gives invertibility at M[n] for every integer n whenever it holds at M. Naturality transports invertibility along every object isomorphism (NatTrans.isIso_app_iff_of_iso).",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), realized using the induced t-structure and the proved derived-category API"
+   }
+  },
+  {
+   "text": "For the base q=a-1, t.isZero_truncLE_obj_of_isGE shows that t.truncLE(q)(E) is zero. The exact functors are additive and preserve zero objects, so eta at this object is a morphism between two zero objects and is invertible. This also proves the empty-interval case without any use of the cohomology-component hypothesis.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), realized using the induced t-structure and the proved derived-category API"
+   }
+  },
+  {
+   "text": "For a-1 <= q and q+1 <= b, put X=t.truncLE(q+1)(E) and apply the standard distinguished triangle t.truncLE(q)(X) -> X -> t.truncGE(q+1)(X) -> t.truncLE(q)(X)[1]. The truncation of the inclusion X -> E is an isomorphism in degrees <= q, by t.isIso_truncLE_map_truncLEι_app, so the induction hypothesis transports to the first vertex. The proved theorem DerivedCategory.Plus.nonempty_eTruncGE_eTruncLT_iso_singleFunctor identifies the third vertex with H^(q+1)(E) in degree q+1. The singleFunctors.shiftIso identifies this with H^(q+1)(E)[0][-(q+1)], where the preceding shift argument and the cohomology-component hypothesis give invertibility.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
     "def-weil-pbc-bounded-derived-subcategories"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU (definition-unbounded-derived-category): the full triangulated subcategory D+; Tag 08J5 (remark-truncation-distinguished-triangle); truncation cohomology in homology.tex Tag 0118 (section-truncations)"
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), realized using the induced t-structure and the proved derived-category API"
    }
   },
   {
-   "text": "For $q=a-1$, every cohomology object of $E_{a-1}$ is zero by step 1: in degrees at most $a-1$ this is the lower-bound hypothesis, and in larger degrees it is upper truncation. The map $E_{a-1}\\to0$ induces isomorphisms on all cohomology objects, hence is an isomorphism by cohomology detection in $D^+(\\mathcal A)$. In particular $\\mathrm{id}_{E_{a-1}}=0$. The functors are additive by the definition of exact triangulated functor, so $\\mathrm{id}_{\\Phi(E_{a-1})}=\\Phi(\\mathrm{id}_{E_{a-1}})=\\Phi(0)=0$, and likewise for $\\Psi$. The zero map $\\Psi(E_{a-1})\\to\\Phi(E_{a-1})$ is therefore a two-sided inverse of $\\eta_{E_{a-1}}$: both composites are the zero identities. This proves $P(a-1)$.",
+   "text": "Apply both exact functors to that distinguished triangle. Construct their triangle morphism with the components of eta: the first two squares are naturality and the last is naturality composed with the given degree-one shift equation. Mathlib Pretriangulated.isIso₂_of_isIso₁₃ gives invertibility at X from the first and third components. Integer induction from a-1 to b completes the proof. This direct construction uses only the stated degree-one equation and does not require constructing a NatTrans.CommShift instance in every integer degree.",
    "uses": [
-    "lem-weil-pbc-derived-plus-iso-on-cohomology",
     "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU (definition-unbounded-derived-category) and Tag 05RT (lemma-acyclic): acyclic objects become zero; the zero-object argument for additive functors is written out here"
-   }
-  },
-  {
-   "text": "The assumed shift equation rewrites as $\\eta_{M[1]}=\\zeta_M^{-1}\\circ\\eta_M[1]\\circ\\xi_M$. Thus $\\eta_{M[1]}$ is invertible exactly when $\\eta_M$ is: the shift is an autoequivalence, so its inverse shift carries an inverse of $\\eta_M[1]$ back to an inverse of $\\eta_M$. Iterating this equivalence forwards, and backwards by applying it to $M[-1]$, proves invertibility on every integral shift of $M$. Canonical identifications of iterated shifts cause no difficulty: for any isomorphism $u:M\\to N$, naturality gives $\\eta_N=\\Psi(u)\\circ\\eta_M\\circ\\Phi(u)^{-1}$. Consequently the hypothesis on $\\eta_{H^q(E)[0]}$ implies that $\\eta_{C_q}$ is invertible for every $a\\le q\\le b$.",
-   "uses": [
-    "def-weil-triangulated-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0145 and 014V (definition-triangulated and definition-exact-functor-triangulated-categories): shifts and their inverses; the displayed conjugation and its iteration use the hypotheses directly"
-   }
-  },
-  {
-   "text": "Fix $q$ with $a\\le q\\le b$ and assume $P(q-1)$. The successive-truncation triangle gives the distinguished triangle $E_{q-1}\\longrightarrow E_q\\longrightarrow C_q\\longrightarrow E_{q-1}[1]$. Its three vertices belong to $D^+(\\mathcal A)$ by step 1. Apply the two-out-of-three theorem for a shift-compatible natural transformation between exact triangulated functors, with $\\alpha=\\eta$, $X=E_{q-1}$, $Y=E_q$, $Z=C_q$, and the specified comparisons $\\xi,\\zeta$. Its compatibility condition is exactly the equation in the statement of this item. The first component is invertible by the induction hypothesis and the third by step 3, so its middle component $\\eta_{E_q}$ is invertible. This proves $P(q-1)\\Rightarrow P(q)$.",
-   "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "lem-sf-triangle-two-out-of-three"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), successive upper-truncation triangle with index q-1; Tag 014A (lemma-third-isomorphism-triangle) via the cited shift-compatible natural-transformation theorem"
-   }
-  },
-  {
-   "text": "The integer $N=b-a+1$ is nonnegative. Starting with $P(a-1)$ from step 2 and using step 4 exactly $N$ times proves $P(b)$, which is the required invertibility of $\\eta_{\\tau_{\\le b}E}$. When $N=0$, equivalently $b=a-1$, the conclusion is already step 2 and no assumption on a cohomology component is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Agent finite induction realizing the bounded-below complexes paragraph of literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md"
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), realized using the induced t-structure and the proved derived-category API"
    }
   }
  ],
  "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-two-out-of-three",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
-  "lem-weil-pbc-truncation-cohomology",
-  "lem-weil-pbc-truncation-triangle"
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Finite induction on b-a+1 from Tag 08J5 (remark-truncation-distinguished-triangle), using Tag 014A (lemma-third-isomorphism-triangle) through lem-sf-triangle-two-out-of-three; the agent supplies the zero base and integral-shift argument."
+  "place": "T1: finite Postnikov induction from Tag 08J5, using the induced t-structure on D+(A), the proved single-cohomology truncation isomorphism in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus, and Mathlib Pretriangulated.isIso₂_of_isIso₁₃ directly. No concrete truncation triangle or additional unproved statement is required."
  },
  "mathlib_searches": [
   {
@@ -217,9 +218,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-triangle-two-out-of-three"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -246,5 +245,15 @@
   "result": "pass",
   "note": "Statement verbatim; node differs from side-live only in lean. Clause by clause matches the node: A abelian with HasDerivedCategory.{w}; T Pretriangulated+IsTriangulated per def-weil-triangulated-category; Φ,Ψ : DerivedCategory.Plus A ⥤ T with CommShift ℤ + IsTriangulated (standard encoding, equivalent to a single [1] iso); hη is the degree-1 equation in the correct direction; hE, hH via Plus.homologyFunctor/Plus.singleFunctor 0 (confirmed by a pp.fullNames probe); conclusion uses t.onPlus.truncLE b. Edge cases b=a-1 (zero object), negative degrees, unbounded-above E, any target: covered and true. No duplicate: PlusDevissage lemmas have the narrower Plus D target. Stacks 08J5 at derived.tex l.4076 checked. Docstrings carry the source place, blueprint tag and 5-step proof; sorry only; universes bound; not in route-pivot-dropped. nt_compile --json clean (3.0 s). Advisory only: proof-stage plain imports unused by the statement."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261021T111629-L-438603",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

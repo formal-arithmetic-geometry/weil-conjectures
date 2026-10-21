@@ -7,9 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import WeilConjectures.CategoryTheory.TruncationTriangle
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 
 /-!
 # Invertibility along a finite Postnikov filtration
@@ -33,6 +31,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory.Plus
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite Postnikov propagation of invertibility, including the empty interval `b = a - 1`.
 
 Source: Stacks Project, Derived Categories, Remark 08J5, and the bounded below complexes
@@ -73,6 +73,62 @@ theorem isIso_app_truncLE_of_isIso_app_homology
     (hH : ∀ (q : ℤ), a ≤ q → q ≤ b →
       IsIso (η.app ((singleFunctor A 0).obj ((homologyFunctor A q).obj E)))) :
     IsIso (η.app ((DerivedCategory.TStructure.t.onPlus.truncLE b).obj E)) := by
-  sorry
+  let t := DerivedCategory.Plus.TStructure.t (C := A)
+  have hshift (M : DerivedCategory.Plus A) :
+      IsIso (η.app (M⟦(1 : ℤ)⟧)) ↔ IsIso (η.app M) := by
+    have heq : η.app (M⟦(1 : ℤ)⟧) = (Φ.commShiftIso (1 : ℤ)).hom.app M ≫
+        (η.app M)⟦(1 : ℤ)⟧' ≫ (Ψ.commShiftIso (1 : ℤ)).inv.app M := by
+      rw [← cancel_mono ((Ψ.commShiftIso (1 : ℤ)).hom.app M)]
+      simpa using hη M
+    rw [heq, isIso_comp_left_iff, isIso_comp_right_iff]
+    exact ⟨fun _ ↦ isIso_of_reflects_iso (η.app M) (shiftFunctor T (1 : ℤ)),
+      fun _ ↦ inferInstance⟩
+  have hshifts (M : DerivedCategory.Plus A) (n : ℤ) (hM : IsIso (η.app M)) :
+      IsIso (η.app (M⟦n⟧)) := by
+    induction n using Int.inductionOn' (b := 0) with
+    | zero =>
+      exact (NatTrans.isIso_app_iff_of_iso η
+        ((shiftFunctorZero (DerivedCategory.Plus A) ℤ).app M)).2 hM
+    | succ n _ ih =>
+      exact (NatTrans.isIso_app_iff_of_iso η
+        ((shiftFunctorAdd (DerivedCategory.Plus A) n 1).app M)).2 ((hshift _).2 ih)
+    | pred n _ ih =>
+      apply (hshift _).1
+      exact (NatTrans.isIso_app_iff_of_iso η
+        ((shiftFunctorAdd' (DerivedCategory.Plus A) (n - 1) 1 n (by omega)).app M)).1 ih
+  have : E.IsGE a := (isGE_ι_obj_iff E a).1
+    ((DerivedCategory.isGE_iff (ι.obj E) a).2 hE)
+  have hmain (q : ℤ) (hq : a - 1 ≤ q) :
+      q ≤ b → IsIso (η.app ((t.truncLE q).obj E)) := by
+    induction q, hq using Int.leInduction with
+    | base =>
+      intro _
+      have hz := t.isZero_truncLE_obj_of_isGE (a - 1) a (by omega) E
+      exact (Φ.map_isZero hz).isIso (Ψ.map_isZero hz) _
+    | succ q hq ih =>
+      intro hqb
+      let X := (t.truncLE (q + 1)).obj E
+      let Δ := (t.triangleLEGE q (q + 1) rfl).obj X
+      have hi := ih (by omega)
+      have := t.isIso_truncLE_map_truncLEι_app q (q + 1) (by omega) E
+      have h₁ : IsIso (η.app Δ.obj₁) :=
+        (NatTrans.isIso_app_iff_of_iso η
+          (asIso ((t.truncLE q).map ((t.truncLEι (q + 1)).app E)))).2 hi
+      have h₃ : IsIso (η.app Δ.obj₃) := by
+        obtain ⟨e⟩ := nonempty_eTruncGE_eTruncLT_iso_singleFunctor E (q + 1)
+        apply (NatTrans.isIso_app_iff_of_iso η e).2
+        apply (NatTrans.isIso_app_iff_of_iso η
+          (((singleFunctors A).shiftIso (-(q + 1)) (q + 1) 0 (by omega)).app
+            ((homologyFunctor A (q + 1)).obj E))).1
+        exact hshifts _ _ (hH (q + 1) (by omega) hqb)
+      let γ : Φ.mapTriangle.obj Δ ⟶ Ψ.mapTriangle.obj Δ :=
+        Pretriangulated.Triangle.homMk _ _ (η.app _) (η.app _) (η.app _)
+          (by simp) (by simp) (by
+            dsimp
+            simp only [Category.assoc, ← hη, NatTrans.naturality_assoc])
+      exact Pretriangulated.isIso₂_of_isIso₁₃ γ
+        (Φ.map_distinguished _ (t.triangleLEGE_distinguished q (q + 1) rfl X))
+        (Ψ.map_distinguished _ (t.triangleLEGE_distinguished q (q + 1) rfl X)) h₁ h₃
+  exact hmain b hab le_rfl
 
 end DerivedCategory.Plus
