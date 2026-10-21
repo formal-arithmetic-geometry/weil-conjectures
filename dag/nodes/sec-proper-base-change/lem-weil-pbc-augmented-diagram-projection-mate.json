@@ -17,9 +17,89 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-tower-derived-evaluation-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$. The rings $R_X,R_Y$ are commutative: the statement tensors over them and calls $Q_{Y,n}$ commutative $R_Y$-algebras, and $R_X\\cong f^{-1}R_Y$ inherits commutativity; so the diagram rings $\\Delta_TR_T$ are sheaves of commutative rings, as [lem-weil-pbc-diagram-site-realization] and [lem-weil-pbc-ringed-projection-mate-exact] require. Apply [lem-weil-pbc-diagram-site-realization] to both small presenting sites. Its exact module equivalences identify modules over the diagram ring $\\Delta_TR_T$ with strict $J$-diagrams of $R_T$-modules; applying the equivalences and their inverses to complexes therefore identifies their derived categories as well. The termwise sheaf adjunction $f^{-1,J}\\dashv f_*^J$ is obtained by transposing each component: naturality of the original adjunction says precisely that the transposes commute with each arrow of $J$. Finite limits are levelwise, so $f^{-1,J}$ preserves them. This gives a morphism between the diagram topoi, with ring map $\\Delta_YR_Y\\to f_*^J\\Delta_XR_X$ induced by the specified ring map. Its module pullback and direct image are $F^{\\rm Tow},G^{\\rm Tow}$. By levelwise exactness [lem-weil-tower-category-levelwise-abelian] and exactness of $F$, $F^{\\rm Tow}$ is exact. Thus the ringed derived adjunction in [lem-weil-pbc-ringed-projection-mate-exact], applied to these diagram sites, is $F^{\\rm Tow}\\dashv\\mathcal G^{\\rm Tow}$, with its canonical counit $\\varepsilon^{\\rm Tow}$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); agent expansion on the small product sites"
+   }
+  },
+  {
+   "text": "Write $\\mu$ for the canonical derived tensor/pullback comparison on these diagram sites. Apply [lem-weil-pbc-ringed-projection-mate-exact] with $E=\\Delta_XK$ and $P=Q_{Y,\\bullet}$. It gives $\\alpha_{\\Delta_XK,Q}:\\mathcal G^{\\rm Tow}(\\Delta_XK)\\otimes^L Q_{Y,\\bullet}\\to\\mathcal G^{\\rm Tow}(\\Delta_XK\\otimes^L F^{\\rm Tow}Q_{Y,\\bullet})$. The coefficient pullback is $Q_{X,\\bullet}$, so the target is $\\mathcal G^{\\rm Tow}B_X(K)$ using [lem-weil-pbc-reduction-pullback-derived-tower]. Define\n$$h_K=\\alpha_{\\Delta_XK,Q}\\circ(\\chi_K\\otimes^L1_Q).$$\nIts source is $B_Y(\\mathcal GK)$ by [lem-weil-pbc-constant-tower-pushforward-normalization]. This is a single morphism in the derived category of strict towers: $\\alpha$ has been constructed on the diagram site, rather than assembled from evaluated arrows. It is natural in $K$ because $\\alpha$, $\\chi$, and tensor are natural. All transitions of $Q$ are part of the diagram object used in this construction.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), applied on diagram sites"
+   }
+  },
+  {
+   "text": "For $M\\in D(R_Y)$ the comparison $\\mu_{\\Delta_YM,Q}$ identifies with $\\tau_M$ of [lem-weil-pbc-reduction-pullback-derived-tower]. Indeed, with flat-term K-flat representatives, both are the ordinary tensor/pullback map $F(x\\otimes q)\\mapsto F(x)\\otimes F(q)$, with the same reduction counits; the uniqueness normalization in that node identifies the derived maps. This is the representative construction of Tag 07A4 (lemma-pullback-tensor-product). Transpose the definition of $h_K$ from step 2. The mate formula and naturality of $\\mu$ from [lem-weil-pbc-ringed-projection-mate-exact] give\n$$\\begin{aligned}\n\\varepsilon^{\\rm Tow}_{B_XK}F^{\\rm Tow}(h_K)\n&=(\\varepsilon^{\\rm Tow}_{\\Delta_XK}\\otimes1)\\mu\\,F^{\\rm Tow}(\\chi_K\\otimes1)\\\\\n&=((\\varepsilon^{\\rm Tow}_{\\Delta_XK}F^{\\rm Tow}\\chi_K)\\otimes1)\\mu_{\\Delta_Y\\mathcal GK,Q}\\\\\n&=(\\Delta_X\\varepsilon_K\\otimes1)\\tau_{\\mathcal GK}\n=B_X(\\varepsilon_K)\\tau_{\\mathcal GK}.\n\\end{aligned}$$\nThe third equality is the strict counit equation of [lem-weil-pbc-constant-tower-pushforward-normalization]. This proves the asserted equivalent description, with all comparisons in the derived category of strict towers.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map); explicit transpose calculation with the cited normalizations"
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-weil-pbc-tower-derived-evaluation-normalization] hold: $\\operatorname{Mod}(R_T)$ and $\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R_T))$ are Grothendieck abelian by [lem-weil-pbc-small-module-diagrams-grothendieck] (for the second, $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$; for the first, $J$ the one-object category), evaluation is exact [lem-weil-tower-category-levelwise-abelian], and $F\\dashv G$ with $F$ exact by hypothesis. Let $e_n$ denote evaluation and use $\\beta_n:e_n\\mathcal G^{\\rm Tow}\\cong\\mathcal Ge_n$ from [lem-weil-pbc-tower-derived-evaluation-normalization]. That node carries evaluation of $\\varepsilon^{\\rm Tow}$ to the specified ambient counit. The evaluations of $B_T$ and $\\tau$ are the normalized derived tensors and tensor/pullback comparisons by [lem-weil-pbc-reduction-pullback-derived-tower]. Evaluating the transpose equation of step 3 consequently says that $\\beta_{n,B_XK}e_n(h_K)$ is adjoint to\n$$F(\\mathcal GK\\otimes^L Q_{Y,n})\\xrightarrow{\\mu}F\\mathcal GK\\otimes^L Q_{X,n}\\xrightarrow{\\varepsilon_K\\otimes1}K\\otimes^L Q_{X,n}.$$\nBy the mate description of [lem-weil-pbc-ringed-projection-mate-exact], this is exactly its counit-tensor projection map, with the source and target claimed in the statement. Uniqueness in the ambient adjunction proves this identification of arrows, not merely of their objects.",
+   "uses": [
+    "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); evaluation using the specified counit normalization"
+   }
+  },
+  {
+   "text": "Compare the transposes of the two maps from $\\Delta_Y\\mathcal GK$ to $\\mathcal G^{\\rm Tow}B_XK$. By step 3, the transpose of $h_Ki_{Y,\\mathcal GK}$ is\n$$B_X(\\varepsilon_K)\\tau_{\\mathcal GK}F^{\\rm Tow}(i_{Y,\\mathcal GK})\n=B_X(\\varepsilon_K)i_{X,F\\mathcal GK}\n=i_{X,K}\\Delta_X(\\varepsilon_K).$$\nHere the first equality is the augmentation equation for $\\tau$ in [lem-weil-pbc-reduction-pullback-derived-tower], and the second is naturality of $i_X$: it is tensoring with the fixed algebra unit $\\Delta_XR_X\\to Q_{X,\\bullet}$. On the other hand, naturality of the tower counit gives the transpose of $\\mathcal G^{\\rm Tow}(i_{X,K})\\chi_K$ as\n$$i_{X,K}\\varepsilon^{\\rm Tow}_{\\Delta_XK}F^{\\rm Tow}(\\chi_K)\n=i_{X,K}\\Delta_X(\\varepsilon_K),$$\nby [lem-weil-pbc-constant-tower-pushforward-normalization]. The adjunction of [lem-weil-pbc-ringed-projection-mate-exact] on the diagram sites is a bijection on Hom sets, so equality of these transposes proves the required strict derived-tower identity. This calculation uses only the algebra units, the cited natural comparisons, and the counits; it imposes no perfectness, completeness, or invertibility condition on $h_K$.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); agent calculation of the augmentation square before evaluation or inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-weil-pbc-small-module-diagrams-grothendieck"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0B56; diagram-site specialization and explicit normalized counit/augmentation calculations"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +128,59 @@
    "results": "{\"top\": [\"Derivation.instIsScalarTower\", \"Perfection.coeff_map\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_map\", \"Derivation.compAlgebraMap\", \"LinearMap.coeIsScalarTower\", \"PreTilt.coeff_def\", \"IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace\", \"Perfection.coeff\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits provide only ordinary pullback, abstract derivation or cone APIs; none states this normalized strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojection[Ff]ormula|projection.*[Mm]ate|[Aa]ugment.*[Tt]ower",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula map for a tower of ringed sheaves respects the tensor unit and algebra augmentation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"KaehlerDifferential.derivationTensorProduct_algebraMap\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"Algebra.TensorProduct.rTensor\", \"Algebra.TensorProduct.lTensor\", \"Algebra.Extension.Cotangent.of_val\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula mate for derived strict inverse diagrams of sheaves is natural in an algebra coefficient tower and commutes with its unit augmentation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.sheafComposeNatTrans_fac\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"CategoryTheory.sheafComposeNatTrans\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|ProjectionFormula",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adjunction of monoidal derived categories the projection morphism is the transpose of the counit tensored with identity and is natural in the second variable",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derived'_unit\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|unitToPushforwardObjUnit|tensorObjMap",
+   "results": "{\"ok\": true, \"n_hits\": 18, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits; underived sheaf adjunction/unit maps and abstract derived-counit identities do not state the normalized strict coefficient-tower morphism and its augmentation identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-direct-image-limits",
@@ -68,5 +197,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-augmented-diagram-projection-mate",
+  "worker": "stage1",
+  "summary": "Constructed the projection morphism on ringed diagram sites; identified its transpose using the normalized constant-tower counit; proved its evaluated mate formula and its augmentation equality by strict-tower adjunction. Reused all existing comparison nodes and created none. Corrected doubled TeX escapes only; no mathematical statement change.",
+  "blueprint": "Realizes the final sentence of prop-weil-pbc-direct-image-limits in the main-20261015 blueprint: coefficient-transition compatibility and identification of the completion unit. The strict augmentation is proved before evaluation and before applying R lim."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-7ba21e078",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-7ba21e078 (reviewer sub-agent of L); spot-checked: I read the full delivery: one commit, no new nodes, statement and stmt_deps byte-identical to base. All five steps are correct. Checked against Stacks 0943/0B56 (sites-cohomology l.13658-13679; projection map is the adjoint of the counit-tensor map, built with 07A4 and 07A6) and against the main-20261015 parent prop-weil-pbc-direct-image-limits (finite-level projection isomorphisms, completion map). Step 2: h=α_{Δ_XK,Q}(χ_K⊗1); source and target agree because F exact gives L=F^Tow and LQ_Y=Q_X. Step 3: I recomputed the transpose ε^Tow F^Tow h=(Δ_Xε_K⊗1)τ, using the mate formula, naturality of μ and the strict counit equation of the constant node. μ_{Δ_YM,Q}=τ_M on flat-term K-flat representatives, by τ's uniqueness clause and the 07A4 construction. Step 4: the evaluated transpose is (ε_K⊗1)μ, which is the ambient 0B56 map. Step 5: both transposes equal i_{X,K}Δ_X(ε_K), by the τ augmentation equation and naturality of the counit. Edge cases checked: f=id, Q=R constant, K=0, non-invertible transitions. No cycle, all citations in unit sk-thm-properbasechange, no SGA. Two repairs in the whole-file fix fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-augmented-diagram-projection-mate.json. (1) E1/C4: step 1 applies diagram-site-realization and ringed-projection-mate-exact, which both require commutative ring sheaves, without checking it. Added a sentence that R_T is commutative, presupposed by the commutative R_Y-algebras and the tensors over R_T; the statement is unchanged. (2) C1/E1: step 4 applies tower-derived-evaluation-normalization, whose Grothendieck abelian hypotheses were not checked. It now cites lem-weil-pbc-small-module-diagrams-grothendieck (J=N^op, and J=pt) and lem-weil-tower-category-levelwise-abelian; proof_deps updated to the union of all uses. Advisory: the report wrongly says the worker corrected doubled backslashes; the base already had single backslashes. No tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
  }
 }
