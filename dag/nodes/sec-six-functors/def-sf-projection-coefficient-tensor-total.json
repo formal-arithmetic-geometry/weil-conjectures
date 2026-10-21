@@ -5,9 +5,53 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
   "place": "Weil restriction, with the coefficient and ordinary/completed tensor comparison detailed in DAG proof step 13"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Lift the recorded ring-sheaf coefficient isomorphism to commutative ring sheaves by keeping its sectionwise ring homomorphisms. Faithfulness proves its inverse laws. The restriction along this explicit lift is definitionally the recorded fdCoefficientTransport.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply ringIso_tensor_transport to the explicit lift. Its braided structure supplies the invertible ordinary tensor map, its pure_hom field is exactly the required local pure-tensor formula, and oplax monoidal naturality supplies simultaneous naturality.",
+   "uses": [
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, precompose a competing comparison by the inverse of the constructed comparison. Its action on every target pure tensor is the identity, by the two pure-tensor formulas and the inverse law. The sheafification adjunction reduces equality of maps out of a sheaf tensor to equality on presheaf pure tensors; the module tensor extensionality theorem finishes. Function and isomorphism extensionality give equality of the families.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Read naturality from the unique witness used to define moduleComparison. The tensorHom formula is definitionally the same naturality identity. The definition total is the unchanged inverse-comparison direct-sum construction tensorPullbackTotal, with the source, target, and additive instances explicitly fixed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The equivalence in ringIso_tensor_transport makes the recorded coefficient restriction a left adjoint. Apply tensorPullbackTotal_isIso with its adjunction to the selected moduleComparison and its proved tensorHom naturality. The theorem proves invertibility of this actual signed-total map, since left adjoints preserve its coproducts. Inverting asIso gives totalIso in the required orientation.",
+   "uses": [
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 03EK and 03CY: tensor sheafification and its universal property; specialization of the existing ring-isomorphism tensor transport and signed-total left-adjoint comparison. Q3 Lean proof, 2026-10-22."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -108,5 +152,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Re-delivery after c5b7cea9 RETURN (H3). tensor_identification now asserts ∃! Weil iso with e.hom.hom.f HEq tensorComparisonArrow (coefficient tensor comparison, R.ordinary of the actual W.finite counit cancellations, R.chi) plus explicit wfWeilCarrier = wfTensor carrier equality and structure-map HEq. Each piece is pinned by ∃!: cancellation (W.finite counit at fromExact), comparison (localization of integralComparison on integral reps), integralComparison (integralArrow for every OpenFactorCoherence.Tensor t; checked t-independent, presentations exist), ordinaryComparison (K-flat square via totalIso), moduleComparison (local pure tensors); completion_isIso true (BS 6.5). Carrier equality follows from Normalized + wfIntegralTensor/completedAmbient definitions. Rest of the module byte-identical to the accepted clauses (mates moved to def-sf-constructible-projection-mates verbatim). Statements verbatim, no hollow defs, no clashes, nothing dropped. nt_compile --json clean: 31.7/28.2/19.5/48.6 s. Advisory: def-sf-projection-tensor-coefficient-comparison cites theorem lem-fix-constructible-tensor-completion for plain abbrevs constructibleTensorOrdinary/Total (same as landed def-sf-tensor-completion-comparison; the -total node uses them uncited) — maintainer may give them an existing:true def node; pentagon/imports/rationalExchange identification advisories persist."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T233800-L-862182",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
