@@ -374,6 +374,6 @@ theorem module_pullback_tensor_iso_tail
   subst q'
   refine ⟨e, fun M M' N N' f g ↦ he f g, ?_⟩
   intro M N Z x y z hz W t
-  simpa only [Category.assoc] using hp M N Z x y z hz W t
+  simpa only [Category.assoc, ringedComparisonPure] using hp M N Z x y z hz W t
 
 end SheafOfModules
