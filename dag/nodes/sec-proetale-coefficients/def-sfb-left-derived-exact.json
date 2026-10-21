@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-left-derived-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Left derived functor of an exact functor",
@@ -13,30 +13,129 @@
   "place": "node def-sfb-left-derived-exact, order 1613"
  },
  "stmt_deps": [
-  "def-sfb-left-derived-functor"
+  "def-sfb-left-derived-functor",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof": [
   {
-   "text": "By [def-sfb-preserves-kflat-quasi-iso], $F$ preserves K-flat quasi-isomorphisms, so $LF$\nis defined. Since $F$ is exact, $D(F)$ is defined and $Q\\circ F\\cong D(F)\\circ Q$. Its\ninverse is a counit for $D(F)$ that is an isomorphism on all complexes, in particular on\nthe K-flat ones. By the characterization in [def-sfb-left-derived-functor], $D(F)$ is a\nleft derived functor of $F$. Left derived functors are unique up to unique isomorphism,\nwhich gives $LF\\cong D(F)$.",
+   "text": "Exactness here means additivity and preservation of finite limits and finite colimits, as in [def-sfb-preserves-kflat-quasi-iso]. Its final assertion gives preservation of quasi-isomorphisms between K-flat complexes. All the ambient hypotheses of [def-sfb-left-derived-functor] are assumed in the item, so that node supplies $LF:D(\\mathcal C)\\to D(\\mathcal D)$ and its counit $\\epsilon:LF\\circ Q_{\\mathcal C}\\Rightarrow Q_{\\mathcal D}\\circ K(F)$ on $K(\\mathcal C)$. Here $Q$ denotes homotopy-category localization and $K(F)$ denotes termwise application on homotopy classes.",
    "uses": [
     "def-sfb-preserves-kflat-quasi-iso",
     "def-sfb-left-derived-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-exact.md",
+    "place": "Proof, first sentence: preservation and existence of LF"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-exact-functor-derived-factorization] for the assertion that the termwise complex functor $C(F)$ preserves every quasi-isomorphism, not merely those between K-flat complexes. It also induces $K(F):K(\\mathcal C)\\to K(\\mathcal D)$: a chain homotopy $f-g=dh+hd$ is sent to $F(f)-F(g)=F(d)F(h)+F(h)F(d)$ by additivity and preservation of composition. Thus homotopic maps have homotopic images, and identities and composition descend. By [def-weil-abstract-derived-category], $Q_{\\mathcal D}$ inverts quasi-isomorphisms and $Q_{\\mathcal C}:K(\\mathcal C)\\to D(\\mathcal C)$ localizes at their images. Consequently $T=Q_{\\mathcal D}\\circ K(F)$ inverts that class of arrows.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, proof: exact functors transform quasi-isomorphisms into quasi-isomorphisms; termwise chain-homotopy calculation supplied here"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-localization-universal-property] to $Q_{\\mathcal C}$ and $T$. It gives $D(F):D(\\mathcal C)\\to D(\\mathcal D)$ with a natural isomorphism $\\varphi:D(F)\\circ Q_{\\mathcal C}\\xrightarrow{\\sim}T$. This is the termwise derived functor: on every complex $K$, its value at $Q_{\\mathcal C}K$ is represented by $F(K)$, and clause (2) makes any two such factorizations uniquely isomorphic compatibly with $\\varphi$. Use $\\varphi$ itself as the counit, in the direction $D(F)Q_{\\mathcal C}\\Rightarrow Q_{\\mathcal D}K(F)$. Thus the isomorphism written in the opposite direction in the blueprint is inverted before using it as a counit.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-exact.md",
+    "place": "Proof, second and third sentences: termwise factorization and the direction of its counit"
+   }
+  },
+  {
+   "text": "Every component of $\\varphi$ is invertible, hence so is its component at every K-flat complex. Apply the converse characterization in [def-sfb-left-derived-functor], for the same additive $F$ and the preservation property already established in step 1. It follows that $(D(F),\\varphi)$ is a total left derived functor of $T$ along $Q_{\\mathcal C}$. No assertion that $F$ sends K-flat objects to K-flat objects is needed, and no monoidal structure on $\\mathcal D$ is used.",
+   "uses": [
+    "def-sfb-left-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-exact.md",
+    "place": "Proof, fourth sentence: characterization by the counit on K-flat complexes"
+   }
+  },
+  {
+   "text": "The two total left derived pairs $(LF,\\epsilon)$ from [def-sfb-left-derived-functor] and $(D(F),\\varphi)$ from step 4 are right Kan extensions of the same $T$ along the same $Q_{\\mathcal C}$. Apply [lem-sfb-right-kan-extension-unique-iso] with $R=LF$ and $S=D(F)$. It gives the unique natural isomorphism $u:LF\\xrightarrow{\\sim}D(F)$ satisfying $\\varphi\\circ(uQ_{\\mathcal C})=\\epsilon$, and its inverse satisfies $\\epsilon\\circ(u^{-1}Q_{\\mathcal C})=\\varphi$. This counit compatibility specifies the claimed canonical comparison, rather than making an arbitrary choice of isomorphism.",
+   "uses": [
+    "def-sfb-left-derived-functor",
+    "lem-sfb-right-kan-extension-unique-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-exact.md",
+    "place": "Proof, final sentence: unique counit-compatible comparison"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-preserves-kflat-quasi-iso",
-  "def-sfb-left-derived-functor"
+  "def-sfb-left-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-right-kan-extension-unique-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-exact.md",
-  "place": "## Proof"
+  "place": "Proof, all five sentences; preservation and localization expanded using Stacks Tag 015F and the existing localization and Kan-uniqueness nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived functor of an exact additive functor between abelian categories is canonically isomorphic to its termwise functor on derived categories",
+   "results": "Eight hits: mapDerivedCategory, mapDerivedCategoryFactors, mapDerivedCategoryFactorsh and their single-degree variants; leftDerivedZeroIsoSelf concerns degree zero, not this unbounded total functor.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a one-line match for the whole K-flat-derived item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "leftDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.LeftDerived, read at line 136. It assumes both left-derived universal properties; it does not establish the K-flat existence theorem used by this item.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a one-line match for the whole K-flat-derived item"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|isLeftDerivedFunctor_of_inverts",
+   "results": "PointwiseLeftDerived.lean:174 isLeftDerivedFunctor_of_inverts, :185 isIso_of_isLeftDerivedFunctor_of_inverts; LeftDerived.lean:136 leftDerivedUnique. Sources read; ingredients reused via existing DAG nodes.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a one-line match for the whole K-flat-derived item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total left derived functor of an exact functor is the induced functor on derived categories",
+   "results": "Eight hits including totalLeftDerived, mapDerivedCategory, mapHomologicalComplexUpToQuasiIso and IsLeftDerivedFunctor.mk. These are the universal construction or exact factorization, not the existence of the K-flat-computed LF in the statement.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a one-line match for the whole K-flat-derived item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor descending through a localization with an invertible counit is a right Kan extension, unique among total left derived functors",
+   "results": "Eight hits including IsLeftDerivedFunctor.isRightKanExtension, isLeftDerivedFunctor_iff_isRightKanExtension and hasLeftDerivedFunctor_iff. Confirmed total left derivation is a right Kan extension.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a one-line match for the whole K-flat-derived item"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|mapDerivedCategoryFactorsh",
+   "results": "The single-file grep printed lines 16, 36, 39, 41, 42 (its filename column is lost for a single input file). Direct source read confirms mapDerivedCategory at 36, mapDerivedCategoryFactors at 41, mapDerivedCategoryFactorsh at 67. These are the termwise factorization already covered by an existing Mathlib leaf.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a one-line match for the whole K-flat-derived item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -94,5 +193,20 @@
    "CategoryTheory.Functor.leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory_hom_fac"
   ],
   "sorry_after": []
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-sfb-left-derived-exact",
+  "worker": "stage1",
+  "summary": "Expanded the imported paragraph into preservation/existence, termwise descent to homotopy, localization, K-flat counit characterization, and counit-compatible uniqueness. Read every cited statement. Reused existing nodes only; no new nodes. The upstream comparison under WeilConjectures imposes three extra graded-tensor assumption families and is not an attachment under these hypotheses. The Sheaf total-tensor comparison is recorded already but is outside the brief's upstream attachment criterion. Statement unchanged.",
+  "blueprint": "Unit sk-def-sfb-derived-categories, step 3, LF clause. Item proof first sentence is step 1; second sentence is steps 2-3; third sentence is step 3; fourth sentence is step 4; final sentence is step 5. No unit/chapter route change."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-9cc687412",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-9cc687412 (reviewer sub-agent of L); spot-checked: Read the item and all six cited statements, the blueprint main-20261015 def-sfb-left-derived-exact .md/.proof.md, the unit sk-def-sfb-derived-categories and Stacks derived.tex l.5884 lemma-right-derived-exact-functor (015F). The delivery has no new nodes and the statement is unchanged; its five steps follow the blueprint's five proof sentences. Step 1: the final clause of preserves-kflat ('every exact F has this property') plus the existence and counit of def-sfb-left-derived-functor. Step 2: the factorization leaf says C(F) preserves all quasi-isomorphisms; the chain-homotopy descent is written out; abstract-derived-category says K(C)→D(C) is a localization, so T=Q_D K(F) inverts the images of quasi-isomorphisms. Step 3: clause (1) of the localization-universal-property leaf gives D(F) and φ; φ points in the counit direction, the inverse of the blueprint's iso as the blueprint says; clause (2) identifies D(F) with the termwise F_D. Step 4: the converse clause of def-sfb-left-derived-functor applies because φ is invertible everywhere. Step 5: right-Kan uniqueness with R=LF, S=D(F) gives the unique counit-compatible u. 'Total left derived' unfolds to a right Kan extension, as in Mathlib's IsLeftDerivedFunctor (LeftDerived.lean:48-58); I accepted that as the meaning of the notion. Tested F=0, F=id and -⊗Q on Ab; no boundedness is used. No cycle, no SGA, no duplicate (right-derived-exact is the dual; unary-left-derived-calculus is general existence). Not dropped, no repair note, still imported live. Maintainer notes: the item was already Lean-closed (reviewed_proof 2026-10-18) when re-dispatched to S1. stmt_deps gained preserves-kflat and the factorization leaf; both match the statement wording and the existing Lean record, but the report does not mention the change."
  }
 }
