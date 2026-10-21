@@ -2,7 +2,7 @@
 
 Stage 3 proves, from the targets downward, and prunes (stages/3-proving-and-pruning.md; coord/brief-stage3.md; roles/lead.md §3; AGENTS.md §4 and §5: read these in the clone). The delivery is the module of the item with proofs written, possibly new modules lean/Sheaf/<Topic>/<Name>.lean stating what is left (each a public theorem `:= by sorry` with its node), node files, change records, and the report. A delivery that changes only proofs is landed without a reader; this one reached you because it changes more (the reason is in your prompt and in the packet under `Class`).
 
-The delivered files, whole, are in FILESDIR (a mirror of the repository: lean/…, dag/nodes/…, coord/…); the packet holds their diffs against sheaf-dag. Compile them: `python3 /home/ubuntu/weil-launcher/lcompile.py --all FILESDIR` (import order; each must compile without error or warning). Compare with the version of the library in the clone (`diff`).
+The delivered files, whole, are in FILESDIR (a mirror of the repository: lean/…, dag/nodes/…, coord/…); the packet holds their diffs against sheaf-dag. Do not compile the delivered files (the human, 2026-10-21): the worker compiled them before delivering, and the global build verifies every landing; a review is a reading of the mathematics and the records, not a second compile. Compile only a file you changed yourself (FIX), once, alone: `python3 /home/ubuntu/weil-launcher/lcompile.py <that file>`. Compare with the version of the library in the clone (`diff`).
 
 Decide by these points, in this order. A failed point you can correct inside the delivery's files you correct yourself (FIX: the whole corrected files, compiled); a failed point you cannot correct that way is a point of your RETURN.
 

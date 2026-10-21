@@ -11,16 +11,17 @@ edge cases, one-definition-per-notion, dependency records, bound variables/unive
 statement field verbatim. Check the pilot maintainer gates: no hollow definitions, source-place and
 blueprint docstrings, no unintended stronger assumptions, no local proof beyond `sorry`, no global
 build, no live Lean write, and no pro-etale substitute. The delivery's report must contain a real
-`## Worker report` and `## Second reading by GROUP` section. Verify the delivery's recorded per-file
-per-file compile and its reproducibility as needed through scompile.py (local side overlay, with server confirmation when needed); do not run a
+`## Worker report` and `## Second reading by GROUP` section. Do not reproduce the delivery's per-file compile (the human, 2026-10-21): the worker compiled
+the statement before delivering, and the landing and the global build compile it again; a review reads the mathematics and
+the records. Compile only a file you change yourself (FIX), once, through scompile.py; do not run a
 lake build or modify any repository. The worker-facing brief's instructions to repair, deliver,
 or edit a sandbox do not apply to this maintainer review.
 
 Use the immutable snapshot for the delivery files. You may read the read-only source clone
 /home/ubuntu/weil-newtargets-GROUP and /home/ubuntu/weil-src-slopmaster2 for context. For
 pro-etale work, the 51-module side framework is in the group clone's lean/WeilConjectures/
-tree, not in the older slopmaster2 tree; check the exact declaration there and reproduce the
-per-file compile against the local side overlay through scompile.py. Do not run
+tree, not in the older slopmaster2 tree; check the exact declaration there (read the source; no compile unless you
+change a file). Do not run
 git commands that change anything, do not claim, merge, deliver, ssh, or edit a project clone.
 Write only REVIEWDIR/review.md and optional corrected files under REVIEWDIR/fixes/. A FIX must give
 complete replacement files and/or JSON records accepted by tools/merge_delivery.py --stage 2;
