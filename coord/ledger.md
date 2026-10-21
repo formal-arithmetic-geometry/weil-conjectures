@@ -20126,3 +20126,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: merged deliver/NO/lem-pur-finite-free-completion-exchange (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T04:01:01Z L: superseded stage-1 delivery Q113/lem-pd-section-derived-tensor-normalization at f053eb0ff34560a9b4ed030d0d16d0823df8fc93; current completion retained; packet archived at refs/superseded/Q113/lem-pd-section-derived-tensor-normalization/f053eb0ff34560a9b4ed030d0d16d0823df8fc93; stale return retired.
 - 04:01 L: merged deliver/Q10/lem-sp-open-exceptional-scalar-locality (reviewer FIX; first push; new nodes: 0); claim not held by Q10: not your claim
+- 04:01 L: merged deliver/Q16/lem-weil-pbc-heart-test-bounded-below (reviewer PASS; first push; new nodes: 0)

@@ -14,9 +14,77 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any integer $m$. Since $E\\in D^+(\\mathcal A)$, choose an integer $a_0$ with $H^q(E)=0$ for $q<a_0$, and put $a=\\min(a_0,m+1)$. Then $a-1\\le m$ and $H^q(E)=0$ for $q<a$. Apply finite Postnikov propagation with target $\\mathcal T=D^+(\\mathcal B)$, the given functors and shift comparisons, and $b=m$. Its hypothesis on $\\eta_{H^q(E)[0]}$ for $a\\le q\\le m$ is included in our hypothesis for all $q$. Hence $\\eta_{\\tau_{\\le m}E}$ is invertible. This also covers $m<a_0$: then $a=m+1$ and the finite interval is empty.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-finite-postnikov-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category), and finite induction on the successive triangles of Tag 08J5 (remark-truncation-distinguished-triangle), as packaged in lem-weil-pbc-finite-postnikov-isomorphism."
+   }
+  },
+  {
+   "text": "The canonical truncation triangle, with $b=m+1$, is $\\tau_{\\le m}E\\xrightarrow{c_m}E\\longrightarrow T_m\\longrightarrow(\\tau_{\\le m}E)[1]$, where $T_m=\\tau_{\\ge m+1}E$ and $H^q(T_m)=0$ for $q<m+1$. Both $E$ and $T_m$ are bounded below; closure of the full bounded-below subcategory under distinguished triangles therefore puts $\\tau_{\\le m}E$ in it too. The triangle is thus a triangle in the domain of both functors. By the definition of triangulated functor, applying either $F=\\Phi$ or $F=\\Psi$ gives a distinguished triangle $F(\\tau_{\\le m}E)\\xrightarrow{F(c_m)}F(E)\\longrightarrow F(T_m)\\longrightarrow F(\\tau_{\\le m}E)[1]$, using its specified shift comparison for the last map.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), first triangle; Tag 05RU (definition-unbounded-derived-category); Tag 014V (definition-exact-functor-triangulated-categories)."
+   }
+  },
+  {
+   "text": "Apply the lower-bound-preservation hypothesis with $M=T_m$ and $n=m+1$. For either $F$ this gives $H^{m-1}(F(T_m))=H^m(F(T_m))=0$. The long exact cohomology sequence of the image triangle in step 2 contains the exact segment $0\\longrightarrow H^m(F(\\tau_{\\le m}E))\\xrightarrow{H^m(F(c_m))}H^m(F(E))\\longrightarrow0$. Thus this middle arrow is monic and epic, and hence invertible in the abelian category $\\mathcal B$. This proves the two claimed truncation-map isomorphisms, for every integer $m$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC (lemma-negative-vanishing), proof of (2), using only the assumed tail bound in place of (1); Tag 05RS (lemma-cohomology-homological) and Tag 0147 (definition-homological)."
+   }
+  },
+  {
+   "text": "Naturality at $c_m$ says $\\eta_E\\circ\\Phi(c_m)=\\Psi(c_m)\\circ\\eta_{\\tau_{\\le m}E}$. Applying the functor $H^m$ preserves composition. Right-compose the resulting equality with the inverse of $H^m(\\Phi(c_m))$ from step 3. This gives exactly $H^m(\\eta_E)=H^m(\\Psi(c_m))\\circ H^m(\\eta_{\\tau_{\\le m}E})\\circ H^m(\\Phi(c_m))^{-1}$. The middle factor is invertible by step 1 and functoriality, and the outside factors by step 3, so $H^m(\\eta_E)$ is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Bounded below complexes paragraph: degreewise upper-truncation comparison; naturality and composition of inverses written out here."
+   }
+  },
+  {
+   "text": "The integer $m$ was arbitrary, so $\\eta_E$ induces an isomorphism on every cohomology object. Both its source and target lie in $D^+(\\mathcal B)$ by the stated codomains of the functors. Cohomology detection of isomorphisms in that category therefore implies that $\\eta_E$ is invertible. Every comparison used a single finite upper truncation and its tail, so the argument requires neither an upper bound on $E$ nor any preservation of infinite limits.",
+   "uses": [
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), cohomology detection in the localization; bounded-below complexes paragraph of the current blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-finite-postnikov-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+  "place": "Bounded below complexes paragraph; finite Postnikov propagation is the existing node, and the tail argument follows the proof of Stacks Tag 05TC (2), with lower-bound preservation assumed instead of derived-functor construction."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +127,52 @@
    "results": "20 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean. Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(heart|bounded)|[Pp]ostnikov|[Ii]sLeftTExact",
+   "results": "{\"t\": \"2026-10-21T03:49:11Z\", \"tool\": \"grep\", \"query\": \"isIso.*(heart|bounded)|[Pp]ostnikov|[Ii]sLeftTExact\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned only homological-functor infrastructure, bounded representatives, single-degree objects or no hits; no declaration states the full heart test and its comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"isIso\", \"trunc\"",
+   "results": "{\"t\": \"2026-10-21T03:49:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, \\\"isIso\\\", \\\"trunc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned only homological-functor infrastructure, bounded representatives, single-degree objects or no hits; no declaration states the full heart test and its comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation of triangulated functors preserving lower cohomology bounds is an isomorphism on bounded below objects when it is an isomorphism on cohomology objects",
+   "results": "{\"t\": \"2026-10-21T03:49:11Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformation of triangulated functors preserving lower cohomology bounds is an isomorphism on bounded below objects when it is an isomorphism on cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.functorHomMk\", \"CategoryTheory.NatTrans.app_homology\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\", \"CategoryTheory.ShortComplex.opcyclesFunctorIso\", \"CategoryTheory.Functor.IsTriangulated.mk\", \"CategoryTheory.Functor.IsTriangulated\"], \"digest\": \"355a531a700b42d5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned only homological-functor infrastructure, bounded representatives, single-degree objects or no hits; no declaration states the full heart test and its comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A shift compatible natural transformation of left t exact triangulated functors on bounded below derived categories is invertible if invertible on all cohomology objects in the heart",
+   "results": "{\"t\": \"2026-10-21T03:49:12Z\", \"tool\": \"leanfinder\", \"query\": \"A shift compatible natural transformation of left t exact triangulated functors on bounded below derived categories is invertible if invertible on all cohomology objects in the heart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isHomological_of_localization\", \"DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\"], \"digest\": \"75eafe6adbc01ad1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned only homological-functor infrastructure, bounded representatives, single-degree objects or no hits; no declaration states the full heart test and its comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans|isIso|homologyFunctor",
+   "results": "{\"t\": \"2026-10-21T03:49:27Z\", \"tool\": \"grep\", \"query\": \"NatTrans|isIso|homologyFunctor\", \"sub\": \"Algebra/Homology/DerivedCategory/Bounded\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned only homological-functor infrastructure, bounded representatives, single-degree objects or no hits; no declaration states the full heart test and its comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below derived objects can be tested on finite upper truncations for an isomorphism of triangulated functors preserving all lower cohomology bounds",
+   "results": "{\"t\": \"2026-10-21T03:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded below derived objects can be tested on finite upper truncations for an isomorphism of triangulated functors preserving all lower cohomology bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\"], \"digest\": \"bad348da7e1549a2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned only homological-functor infrastructure, bounded representatives, single-degree objects or no hits; no declaration states the full heart test and its comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-properbasechange",
@@ -79,5 +189,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-heart-test-bounded-below",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses unchanged. Reused finite Postnikov propagation, choosing a lower bound at most m+1 to cover degrees below the original bound. Applied the canonical truncation triangle, the assumed tail bound and the long exact cohomology sequence to prove both truncation-map isomorphisms, then wrote the naturality formula and applied cohomology detection. No new nodes; existing project Lean has partial coverage but no declaration of the entire conjunction including the displayed formula.",
+  "blueprint": "Realizes the entire Bounded below complexes paragraph of main-20261015 sk-thm-properbasechange: the finite Postnikov sentence through lem-weil-pbc-finite-postnikov-isomorphism, and the preceding degreewise upper-truncation comparison through steps 2–5."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-2cddb46c5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-2cddb46c5 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes. The statement is unchanged and true; it is a generic test on D+ for triangulated functors that preserve lower cohomology bounds. Step 1 applies the reviewed finite-Postnikov node with target D+(B) and a=min(a0,m+1). This gives a-1<=m and handles the empty interval; the node's hypotheses and shift equation match the item's exactly, and it has no cycle back to the item. Step 2 takes the truncation triangle (Mathlib leaf) with b=m+1; tau<=m E lies in D+ because D+ is closed under triangles, and exact functors keep the triangle distinguished. Step 3 applies the long exact sequence (Mathlib leaf): the bound for T_m with n=m+1 kills H^{m-1} and H^m of F(T_m), so H^m(F c_m) is invertible. This is exactly the proof of Stacks 05TC(2) at derived.tex l.5497, with the assumed bound in place of 05TC(1). Step 4 is correctly elementary: naturality, apply H^m, compose with the inverse; I checked the order of the factors. Step 5 applies cohomology detection in D+(B) (Mathlib leaf Plus.isIso_iff). proof_deps equals the union of the uses. The route follows the main-20261015 sk-thm-properbasechange 'Bounded below complexes' paragraph, and the only citer (the parent's step 2) uses exactly this statement. Edge cases checked: E=0, E=A[0] with m=-5, m=a0-1, E unbounded above, a non-split E. No new nodes and no duplicates: the sbc truncation-criterion and finite-range nodes and lem-weil-pbc-derived-functor-truncation-iso are about specific exchanges or Rv. The project Lean Plus.isIso_app_of_forall_homology (PlusDevissage.lean:148) is close but is not an exact attachment; stage 2 may reuse it (advisory). No SGA citation. Cosmetic: step 5's source cites 05RT."
  }
 }
