@@ -21852,3 +21852,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:18 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 09:18 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
 - 09:18 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
+- 09:18 L: returned deliver/Q07/lem-weil-pbc-exact-faithful-torsion (reviewer RETURN: A6/A7/B10, superseded; the mathematics is sound. This is Q07's 4th push. Timing: the live repair note releasing the re-s)
