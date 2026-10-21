@@ -706,6 +706,118 @@ private theorem beta_id_open {U X : Scheme.{u}} (p : U ⟶ X)
   exact iso_unit_cancel ((beta B p (𝟙 U) (𝟙 X) p h hsq).app N) _ _
     (betaInv_id_open B p h N)
 
+private theorem betaInv_mate {U' U X' X : Scheme.{u}}
+    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g) :
+    mateEquiv (jAdj B j) (jAdj B j') (betaInv B a j' j g w) =
+      (squareG B a j' j g w).inv := by
+  apply mateEquiv_eq_of_unit
+  intro M
+  symm
+  change (jAdj B j').homEquiv _ _ (betaInvApp B a j' j g w M) = _
+  exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
+
+private theorem jComp_conjugate {U V X : Scheme.{u}} (k : U ⟶ V) (j : V ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j] :
+    conjugateEquiv (jAdj B (k ≫ j)) ((jAdj B k).comp (jAdj B j))
+      (jComp B k j).hom = (gComp B k j).hom := by
+  simp [jComp, Adjunction.leftAdjointCompIso, conjugateIsoEquiv]
+
+private theorem betaInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (wk : b ≫ k = k₁ ≫ a) (wj : a ≫ j = j₁ ≫ g)
+    (w : b ≫ (k ≫ j) = (k₁ ≫ j₁) ≫ g)
+    (hp : ∀ N : Derived B X,
+      (G B b).map ((gComp B k j).hom.app N) ≫
+        (squareG B b k₁ k a wk).inv.app ((G B j).obj N) ≫
+        (G B k₁).map ((squareG B a j₁ j g wj).inv.app N) =
+      (squareG B b (k₁ ≫ j₁) (k ≫ j) g w).inv.app N ≫
+        (gComp B k₁ j₁).hom.app ((G B g).obj N)) :
+    betaInv B b (k₁ ≫ j₁) (k ≫ j) g w =
+      (((TwoSquare.mk _ _ _ _ (betaInv B b k₁ k a wk)).vComp
+        (TwoSquare.mk _ _ _ _ (betaInv B a j₁ j g wj))).whiskerLeft
+          (jComp B k j).hom).whiskerRight (jComp B k₁ j₁).inv := by
+  apply (mateEquiv (jAdj B (k ≫ j)) (jAdj B (k₁ ≫ j₁))).injective
+  rw [betaInv_mate, mateEquiv_conjugateEquiv_vcomp _
+    ((jAdj B k₁).comp (jAdj B j₁)),
+    conjugateEquiv_mateEquiv_vcomp _ ((jAdj B k).comp (jAdj B j)),
+    mateEquiv_hcomp, betaInv_mate, betaInv_mate, jComp_conjugate]
+  rw [show conjugateEquiv ((jAdj B k₁).comp (jAdj B j₁)) (jAdj B (k₁ ≫ j₁))
+    (jComp B k₁ j₁).inv = (gComp B k₁ j₁).inv from
+      Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _]
+  ext N
+  dsimp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
+    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans]
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
+  set_option backward.isDefEq.respectTransparency false in
+    change _ = ((G B b).map ((gComp B k j).hom.app N) ≫
+    ((squareG B b k₁ k a wk).inv.app ((G B j).obj N) ≫
+      (G B k₁).map ((squareG B a j₁ j g wj).inv.app N))) ≫
+        (gComp B k₁ j₁).inv.app ((G B g).obj N)
+  rw [hp N]
+  simp only [Category.assoc, Iso.hom_inv_id_app]
+  exact (Category.comp_id _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem beta_open_comp_aux {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (wk : b ≫ k = k₁ ≫ a) (wj : a ≫ j = j₁ ≫ g)
+    (w : b ≫ (k ≫ j) = (k₁ ≫ j₁) ≫ g)
+    (sk : IsPullback b k₁ k a) (sj : IsPullback a j₁ j g)
+    (s : IsPullback b (k₁ ≫ j₁) (k ≫ j) g) (M : Derived B V) :
+    (G B g).map ((jComp B k j).inv.app M) ≫
+        (beta B a j₁ j g wj sj).hom.app ((J B k).obj M) ≫
+        (J B j₁).map ((beta B b k₁ k a wk sk).hom.app M) ≫
+        (jComp B k₁ j₁).hom.app ((G B b).obj M) =
+      (beta B b (k₁ ≫ j₁) (k ≫ j) g w s).hom.app M := by
+  have hp (N : Derived B X) :
+      (G B b).map ((gComp B k j).hom.app N) ≫
+        (squareG B b k₁ k a wk).inv.app ((G B j).obj N) ≫
+        (G B k₁).map ((squareG B a j₁ j g wj).inv.app N) =
+      (squareG B b (k₁ ≫ j₁) (k ≫ j) g w).inv.app N ≫
+        (gComp B k₁ j₁).hom.app ((G B g).obj N) := by
+    have hh := squareG_pasting_inv B g a b j k j₁ k₁
+      wj.symm wk.symm w.symm N
+    rw [squareG_flip B a j₁ j g wj, squareG_flip B b k₁ k a wk,
+      squareG_flip B b (k₁ ≫ j₁) (k ≫ j) g w] at hh
+    simp only [Iso.symm_inv] at hh
+    apply (cancel_epi ((squareG B b (k₁ ≫ j₁) (k ≫ j) g w).hom.app N)).1
+    rw [← Category.assoc, ← hh]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+      ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [(G B k₁).map_id, Category.comp_id]
+  have hi := congr_app (betaInv_open_comp B k j k₁ j₁ a b g wk wj w hp) M
+  dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
+    TwoSquare.mk, TwoSquare.natTrans] at hi
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id] at hi
+  let e := beta B b (k₁ ≫ j₁) (k ≫ j) g w s
+  let e₁ := beta B b k₁ k a wk sk
+  let e₂ := beta B a j₁ j g wj sj
+  change _ = e.hom.app M
+  apply (cancel_epi (e.inv.app M)).1
+  change (betaInv B b (k₁ ≫ j₁) (k ≫ j) g w).app M ≫ _ = _
+  rw [hi]
+  simp only [Category.assoc]
+  change (jComp B k₁ j₁).inv.app _ ≫ (J B j₁).map (e₁.inv.app M) ≫
+    e₂.inv.app ((J B k).obj M) ≫ (G B g).map ((jComp B k j).hom.app M) ≫
+      (G B g).map ((jComp B k j).inv.app M) ≫ e₂.hom.app _ ≫
+        (J B j₁).map (e₁.hom.app M) ≫ (jComp B k₁ j₁).hom.app _ = _
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Iso.inv_hom_id_app]
+  erw [(G B g).map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [(J B j₁).map_id, Category.id_comp, Iso.inv_hom_id_app]
+  rfl
+
 end PullbackUnits
 
 section NormalizedIdentities
@@ -862,7 +974,7 @@ theorem beta_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
         (J B j₁).map ((beta B b k₁ k a wk sk).hom.app M) ≫
         (jComp B k₁ j₁).hom.app ((G B b).obj M) =
       (beta B b (k₁ ≫ j₁) (k ≫ j) g w s).hom.app M := by
-  sorry
+  exact beta_open_comp_aux B k j k₁ j₁ a b g wk wj w sk sj s M
 
 /-- Intrinsic alpha agrees with vertical pasting on every input.
 Source: Stacks, Tag 0F7C and blueprint, fifth proof step
