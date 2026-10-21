@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
+import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
+
 /-! # Shift coherence of a normalized derived square
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0D6G, with Tag 08FI and the
@@ -32,6 +34,45 @@ variable {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'}
   [Abelian A] [Abelian B] [Abelian A'] [Abelian B']
   [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
   [HasDerivedCategory.{wA'} A'] [HasDerivedCategory.{wB'} B']
+
+private theorem shift_app_comm_of_comp
+    {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
+    {U V W : C ⥤ D} [U.CommShift ℤ] [V.CommShift ℤ] [W.CommShift ℤ]
+    (α : U ⟶ V) (τ : V ⟶ W) [NatTrans.CommShift α ℤ]
+    [NatTrans.CommShift (α ≫ τ) ℤ] (X : C) (n : ℤ) [Epi (α.app (X⟦n⟧))] :
+    τ.app (X⟦n⟧) ≫ (W.commShiftIso n).hom.app X =
+      (V.commShiftIso n).hom.app X ≫ (τ.app X)⟦n⟧' := by
+  apply (cancel_epi (α.app (X⟦n⟧))).1
+  have h := NatTrans.shift_app_comm (α ≫ τ) n X
+  simp only [NatTrans.comp_app, Functor.map_comp] at h
+  rw [← Category.assoc, NatTrans.shift_app_comm α n X, Category.assoc] at h
+  simpa only [Category.assoc] using h.symm
+
+private theorem commShift_of_kinjective
+    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+    {D : Type*} [Category* D] [HasShift D ℤ]
+    (L : CochainComplex C ℤ ⥤ D) (R : DerivedCategory C ⥤ D)
+    [L.CommShift ℤ] [R.CommShift ℤ] (η : L ⟶ DerivedCategory.Q ⋙ R)
+    (hres : ∀ K : CochainComplex C ℤ, ∃ I : CochainComplex C ℤ,
+      I.IsKInjective ∧ ∃ s : K ⟶ I, QuasiIso s)
+    (hshift : ∀ (I : CochainComplex C ℤ), I.IsKInjective → ∀ n : ℤ,
+      η.app (I⟦n⟧) ≫ ((DerivedCategory.Q ⋙ R).commShiftIso n).hom.app I =
+        (L.commShiftIso n).hom.app I ≫ (η.app I)⟦n⟧') :
+    NatTrans.CommShift η ℤ where
+  shift_comm n := by
+    ext K
+    obtain ⟨I, hI, s, hs⟩ := hres K
+    have := hs
+    have : IsIso ((DerivedCategory.Q ⋙ R).map s) := by
+      change IsIso (R.map (DerivedCategory.Q.map s))
+      infer_instance
+    change (L.commShiftIso n).hom.app K ≫ (η.app K)⟦n⟧' =
+      η.app (K⟦n⟧) ≫ ((DerivedCategory.Q ⋙ R).commShiftIso n).hom.app K
+    rw [← cancel_mono (((DerivedCategory.Q ⋙ R).map s)⟦n⟧'),
+      Category.assoc, ← Functor.map_comp, ← η.naturality,
+      Functor.map_comp, ← Functor.commShiftIso_hom_naturality_assoc,
+      ← hshift I hI n, Category.assoc,
+      ← Functor.commShiftIso_hom_naturality, η.naturality_assoc]
 
 /-- The computation map `a_I = r_D(η_I) φ_r⁻¹` in the proof of Stacks Tag 0D6G.
 It is defined for every complex, and is invertible on K-injectives.
@@ -148,6 +189,84 @@ theorem derivedSquare_shift_on_kinjectives
       ((G.mapHomologicalComplex (.up ℤ)).obj
           ((t.mapHomologicalComplex (.up ℤ)).obj (I⟦n⟧))).d a (a + 1) =
         n.negOnePow • G.map (t.map (I.d (a + n) (a + 1 + n)))) := by
-  sorry
+  have hleft (I : CochainComplex A ℤ) (hI : I.IsKInjective) :
+      IsIso (derivedSquareLeftComputation F r RF ηF I) := by
+    have := hηF I hI
+    unfold derivedSquareLeftComputation
+    infer_instance
+  have hright (I : CochainComplex A ℤ) (hI : I.IsKInjective) :
+      IsIso (derivedSquareRightComputation G t RG ηG I) := by
+    have := hηG _ (ht I hI)
+    unfold derivedSquareRightComputation
+    infer_instance
+  have hδ : NatTrans.CommShift
+      (F₁ := F.mapHomologicalComplex (.up ℤ) ⋙ r.mapHomologicalComplex (.up ℤ))
+      (F₂ := t.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ))
+      (NatTrans.mapHomologicalComplex δ.hom (.up ℤ)) ℤ := by
+    constructor
+    intro n
+    ext I a
+    simp only [Functor.comp_obj, CochainComplex.shiftFunctor_obj_X', NatTrans.comp_app,
+      Functor.whiskerRight_app, HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f',
+      Functor.whiskerLeft_app, Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
+      Category.comp_id, Functor.commShiftIso_comp_hom_app,
+      Functor.mapHomologicalComplex_map_f]
+    erw [Functor.map_id, Category.id_comp, Functor.map_id, Category.comp_id]
+    rfl
+  have := hδ
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro E I hI e
+    refine ⟨hleft I hI, hright I hI, ?_⟩
+    rw [γ.hom.naturality, ← Category.assoc, hnorm I, Category.assoc]
+  · have := commShift_of_kinjective _ RF ηF hA hshiftF
+    have := commShift_of_kinjective _ RG ηG hA' hshiftG
+    let a : (F.mapHomologicalComplex (.up ℤ) ⋙ r.mapHomologicalComplex (.up ℤ)) ⋙
+        DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ (RF ⋙ r.mapDerivedCategory) :=
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft _ r.mapDerivedCategoryFactors.inv ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight ηF _ ≫
+        (Functor.associator _ _ _).hom
+    let b : (t.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ)) ⋙
+        DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ (t.mapDerivedCategory ⋙ RG) :=
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft _ ηG ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight t.mapDerivedCategoryFactors.inv _ ≫
+        (Functor.associator _ _ _).hom
+    let u : F.mapHomologicalComplex (.up ℤ) ⋙ r.mapHomologicalComplex (.up ℤ) ⟶
+        t.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) :=
+      NatTrans.mapHomologicalComplex δ.hom (.up ℤ)
+    have : NatTrans.CommShift a ℤ := by dsimp [a]; infer_instance
+    have : NatTrans.CommShift b ℤ := by dsimp [b]; infer_instance
+    have : NatTrans.CommShift u ℤ := hδ
+    have heq : a ≫ Functor.whiskerLeft DerivedCategory.Q γ.hom =
+        Functor.whiskerRight u DerivedCategory.Q ≫ b := by
+      ext K
+      simpa [a, b, u, derivedSquareLeftComputation, derivedSquareRightComputation] using
+        hnorm K
+    have : NatTrans.CommShift (a ≫ Functor.whiskerLeft DerivedCategory.Q γ.hom) ℤ := by
+      rw [heq]
+      infer_instance
+    have : NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Q γ.hom) ℤ :=
+      commShift_of_kinjective _ _ _ hA (by
+        intro I hI n
+        have := hI
+        have : IsIso (a.app (I⟦n⟧)) := by
+          simpa [a, derivedSquareLeftComputation] using hleft (I⟦n⟧) inferInstance
+        exact shift_app_comm_of_comp a _ I n)
+    have : NatTrans.CommShift γ.hom ℤ :=
+      NatTrans.CommShift.of_whiskerLeft γ.hom DerivedCategory.Q (fun E ↦
+        ⟨DerivedCategory.Q.objPreimage E, (DerivedCategory.Q.objObjPreimageIso E).inv,
+          inferInstance⟩)
+    intro n E
+    exact (NatTrans.shift_app_comm γ.hom n E).symm
+  · intro I _ n
+    exact (NatTrans.shift_app_comm
+      (F₁ := F.mapHomologicalComplex (.up ℤ) ⋙ r.mapHomologicalComplex (.up ℤ))
+      (F₂ := t.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ))
+      (NatTrans.mapHomologicalComplex δ.hom (.up ℤ)) n I).symm
+  · intro I _ n a
+    refine ⟨rfl, rfl, ?_, ?_⟩ <;>
+      simp only [Functor.mapHomologicalComplex_obj_d, CochainComplex.shiftFunctor_obj_d',
+        Units.smul_def, Functor.map_zsmul]
 
 end CategoryTheory
