@@ -23,9 +23,58 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 07A6, lemma-adjoint; derived.tex Tags 0FND and 09T5. Canonical unit and restriction/sections data used in current blueprint prop-trf-rational-frobenius-integral-model proof clause (4)."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify mixed total tensor with the regular target coefficient module in degree zero with termwise extension of scalars, using the single-complex comparison and the target tensor left unitor. The inverse sends 1 tensor x to the specified degree-(a,0) summand 1 tensor (1 tensor x); the total-flip sign is one because the other degree is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Derive the ordinary module extension/restriction adjunction. Extension preserves K-flat quasi-isomorphisms, and exact restriction agrees with its right derived functor. Compare its left derived counit with the published mixed-tensor counit by the universal left derived lift. This lift is invertible on K-flat representatives and hence on every derived object, using flat resolutions. Transport the adjunction along this comparison; the universal counit equation and naturality give precisely the stated tensor-generator unit.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-extension-kflat-quasi-iso",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-pod-point-sections-derived-reduction",
+    "lem-trf-point-sections-finite-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing normalized sheaf coefficient adjunction to the actual finite coefficient quotient and its published ordinary extension functor. Its Hom formula at the identity gives the ordinary tensor unit. Transport the homotopy-level normalization along quotientCompQhIso; naturality of the exact-restriction comparison yields the required cochain-level equality.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-point-sections-finite-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves section elements. Naturality of constant-presheaf sheafification identifies the finite scalar actions. In the integral case, the completed-coefficient limit projection composed with the integral constant map is the constant quotient map, by the limit cone equation. The identity functions therefore define linear natural isomorphisms. Extensionality proves uniqueness from the prescribed value on each element.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-point-proetale-sections-exact",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-extension-kflat-quasi-iso",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A9",
+  "date": "2026-10-21",
+  "note": "Complete proofs of the five unit-existence and identity-on-sections theorems, with proved private comparison helpers. Uses the existing derived adjunction and K-flat scalar-extension API; no new holes. The typed finite map and its proved object equation present the existing coefficient construction without changing it. The derived sections comparisons retain their formulas with explicit local exactness proofs."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -92,6 +141,8 @@
    "WeilConjectures.pointUnitIntegralSectionsRestriction",
    "WeilConjectures.pointUnitIntegralSectionsRestrictionIso",
    "WeilConjectures.pointUnitIntegralDerivedSectionsRestrictionIso",
+   "WeilConjectures.pointUnitFiniteCoefficientMap",
+   "WeilConjectures.pointUnitFiniteExtensionObj",
    "WeilConjectures.pointUnitFiniteRestriction",
    "WeilConjectures.pointUnitFiniteRestrictionLimits",
    "WeilConjectures.pointUnitFiniteRestrictionColimits",
@@ -132,5 +183,15 @@
   "group": "Q50",
   "result": "fix",
   "note": "Mathematics accepted; both immutable Lean modules compile cleanly through scompile.py. review.md and a complete replacement report repair H1/H11’s missing substantive second reading and record reproduced compiler evidence. No Lean, node, or branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b00fa",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261021T002923-L-1578406",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointReductionUnits.lean and node def-trf-point-reduction-units against the published module, the change records' Old/New text (rfl/defeq probes), and the compiled importer PointReductionUnitNormalization"
  }
 }
