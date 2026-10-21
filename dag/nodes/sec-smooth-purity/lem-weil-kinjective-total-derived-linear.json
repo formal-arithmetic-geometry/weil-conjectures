@@ -15,9 +15,81 @@
   "def-weil-linear-functor",
   "def-sfb-right-derived-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On cochain maps put $(f+g)^r=f^r+g^r$ and $(af)^r=af^r$. Bilinearity of composition makes these chain maps. If $f-g=ds+sd$, then $a(f-g)=d(as)+(as)d$; sums of such identities give the corresponding assertion for addition. Thus the operations descend to homotopy classes. Applying $U$ to $f-g=ds+sd$ gives $U(f)-U(g)=U(d)U(s)+U(s)U(d)$ by additivity and functoriality. Consequently $U_K$ is well defined. Its componentwise formulas are $U_K([f]+[g])=U_K([f])+U_K([g])$ and $U_K(a[f])=aU_K([f])$, by the assumed linearity of $U$.",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09MJ (definition-linear-category), 09MK (definition-functor-linear-categories); agent calculation with the chain-homotopy equation"
+   }
+  },
+  {
+   "text": "The cited derived-linearity statement says that localization of cochain maps is $R$-linear in both categories. Each homotopy class is represented by a cochain map, and its image under $Q_{\\mathcal A}$ or $Q_{\\mathcal B}$ is the image of that map under cochain localization. Applying that statement to representatives gives $Q([f]+[g])=Q([f])+Q([g])$ and $Q(a[f])=aQ([f])$. Combined with Step 1, $T=Q_{\\mathcal B}\\circ U_K$ is therefore $R$-linear on homotopy morphisms.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09MK (definition-functor-linear-categories); agent application of the cited localization-linearity statement to chain-map representatives"
+   }
+  },
+  {
+   "text": "Every derived object has a representative complex, because the derived category is the localization of complexes. Resolve that complex using the hypothesis to obtain an isomorphism to the image of a K-injective. Now fix any $I_M,I_N,q_M,q_N$ as in the statement. The cited K-injective Hom comparison, applied with source $I_M$ and target $I_N$, gives a bijection $L:\\operatorname{Hom}_{K(\\mathcal A)}(I_M,I_N)\\to\\operatorname{Hom}_{D(\\mathcal A)}(Q_{\\mathcal A}I_M,Q_{\\mathcal A}I_N)$, $g\\mapsto Q_{\\mathcal A}(g)$. It is $R$-linear by Step 2. Define $\\bar h=L^{-1}(q_Nh q_M^{-1})$. Bilinearity gives $q_N(h+h\\prime)q_M^{-1}=q_Nh q_M^{-1}+q_Nh\\prime q_M^{-1}$ and $q_N(ah)q_M^{-1}=a(q_Nh q_M^{-1})$. Applying $L$ and its injectivity yields $\\overline{h+h\\prime}=\\bar h+\\bar h\\prime$ and $\\overline{ah}=a\\bar h$. Thus the unique lift is linear for these fixed representatives.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), equivalence (1) and (3); agent linearity calculation for its bijective Hom map"
+   }
+  },
+  {
+   "text": "The derived-functor unit is natural and its components at K-injectives are isomorphisms. Hence the displayed $c_M,c_N$ are isomorphisms. Naturality at $\\bar h$ reads $RU(Q_{\\mathcal A}\\bar h)\\,\\eta_{I_M}=\\eta_{I_N}\\,T(\\bar h)$. Substitute the definitions and use functoriality and the lift equation to obtain\n$$c_N RU(h)c_M^{-1}=\\eta_{I_N}^{-1}RU(q_N h q_M^{-1})\\eta_{I_M}=\\eta_{I_N}^{-1}RU(Q_{\\mathcal A}\\bar h)\\eta_{I_M}=T(\\bar h).$$\nThis proves the representative formula for every choice in the statement.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); agent naturality calculation using the unit specified in def-sfb-right-derived-functor"
+   }
+  },
+  {
+   "text": "Keep $q_M,q_N,I_M,I_N$ fixed for the parallel maps $h,h\\prime$. Steps 2--4 give\n$$c_N RU(h+h\\prime)c_M^{-1}=T(\\bar h+\\bar h\\prime)=T(\\bar h)+T(\\bar h\\prime)=c_N\\bigl(RU(h)+RU(h\\prime)\\bigr)c_M^{-1},$$\nand\n$$c_N RU(ah)c_M^{-1}=T(a\\bar h)=aT(\\bar h)=c_N\\bigl(aRU(h)\\bigr)c_M^{-1}.$$\nThe last equality in each line is bilinearity of composition in $D(\\mathcal B)$. Cancel $c_N$ and $c_M^{-1}$ to get both asserted identities, which are exactly the requirements for an $R$-linear functor. The choices were fixed only while comparing morphisms; no functorial, additive or linear choice of resolutions was used. Only the additivity of $U$, its scalar linearity, and the hypothesized K-injective computation entered.",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09MJ and 09MK (definitions of linear category and linear functor); agent cancellation calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "lem-weil-linear-abelian-derived-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Scalar-linearity argument extracted from Tag 070I Hom comparison, with naturality of the unit in def-sfb-right-derived-functor; linear definitions are Tags 09MJ and 09MK. This is an agent proof, not a theorem quoted verbatim from Stacks."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -90,10 +162,58 @@
    "results": "0 hits; ",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ll]inear|[Ll]inear.*rightDerived|map_smul",
+   "subdirectory": "CategoryTheory/Functor/Derived",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: totalRightDerived supplies the construction but not linearity; rightDerived is degreewise on the abelian category; mapDerivedCategory linearity assumes exactness of the original functor; localization and homotopy functor linearity are only ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Functor.rightDerived",
+   "subdirectory": "",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: totalRightDerived supplies the construction but not linearity; rightDerived is degreewise on the abelian category; mapDerivedCategory linearity assumes exactness of the original functor; localization and homotopy functor linearity are only ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total right derived functor preserves addition and scalar multiplication on derived morphisms using K-injective resolutions",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.totalLeftDerived",
+   "date": "2026-10-21",
+   "verdict": "no match: totalRightDerived supplies the construction but not linearity; rightDerived is degreewise on the abelian category; mapDerivedCategory linearity assumes exactness of the original functor; localization and homotopy functor linearity are only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive R-linear functor between abelian categories has an R-linear total right derived functor computed by K-injective resolutions",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.rightDerived, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-21",
+   "verdict": "no match: totalRightDerived supplies the construction but not linearity; rightDerived is degreewise on the abelian category; mapDerivedCategory linearity assumes exactness of the original functor; localization and homotopy functor linearity are only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearity of a functor after right derivation with respect to quasi-isomorphisms on the unbounded homotopy category",
+   "subdirectory": "",
+   "results": "8 hits; DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinear, CategoryTheory.instLinearHomotopyCategoryMapHomotopyCategory, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory, CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-21",
+   "verdict": "no match: totalRightDerived supplies the construction but not linearity; rightDerived is degreewise on the abelian category; mapDerivedCategory linearity assumes exactness of the original functor; localization and homotopy functor linearity are only ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|linear",
+   "subdirectory": "Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "results": "4 hits; 9, 120, 122, 123",
+   "date": "2026-10-21",
+   "verdict": "no match: totalRightDerived supplies the construction but not linearity; rightDerived is degreewise on the abelian category; mapDerivedCategory linearity assumes exactness of the original functor; localization and homotopy functor linearity are only ingredients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-compact-support-representative-independence",
@@ -110,5 +230,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-kinjective-total-derived-linear",
+  "worker": "stage1",
+  "summary": "Q100 supplied the five-step proof without changing the statement or creating nodes. The non-elementary input is the existing K-injective Hom comparison; linearity of homotopy lifts follows from injectivity and linearity of localization. Naturality of the derived-functor unit gives the formula for arbitrary specified representatives, followed by explicit addition and scalar calculations. Checked current Lean for attachments and Mathlib for the full theorem; the exact-functor Mathlib result has stronger hypotheses.",
+  "blueprint": "The first sentence of the proof of lem-weil-compact-support-representative-independence asserts that integral compact support, built using a derived inverse limit, is scalar-linear. This item supplies precisely the generic K-injective total-derivation argument needed for that assertion; the current snapshot locates the ancestor under sec-six-functors-basics/sk-thm-sf-pf-field. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-b00e24543",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-b00e24543 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to live side (unsplit there). The delivery adds only proof, proof_deps, proof_origin, split_report and searches, with no new nodes. The item is not in route-pivot-dropped, has no repair note and cites no SGA. Sources checked: derived.tex 070I lemma-K-injective (1)<=>(3) at l.9632, 070Y and 070K; dga.tex 09MJ and 09MK. Step 1: sums, scalar multiples and homotopies descend to K(A), and U_K is well defined and linear without exactness. Step 2: linearity of Q on cochain maps (lem-weil-linear-abelian-derived-category) passes to K(A) through representatives, so T=Q_B U_K is linear. Step 3: the unbounded K-injective Hom bijection (lem-weil-pbc-kinjective-hom-derived) is linear, so its inverse lift is additive and homogeneous. Step 4: I verified the directions of the maps: c_M=eta^{-1}RU(q_M), and naturality of the unit at the lift (def-sfb-right-derived-functor) gives c_N RU(h) c_M^{-1}=T(lift). Step 5: cancelling the isomorphisms gives linearity, with no functorial choice of resolutions. I tested a=0, R=0, U=id and non-exact U=lim (the parent's use); none needs exactness or boundedness. The parent lem-weil-compact-support-representative-independence supplies every hypothesis. A whole-DAG duplicate scan found no general duplicate. Advisory: lem-sf-kinjective-derived-map-computation states the same formula, but only for chain resolutions; the item's version takes arbitrary isomorphisms in D, so re-deriving it in two lines in Step 4 is acceptable."
  }
 }
