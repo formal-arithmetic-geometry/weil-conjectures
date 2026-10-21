@@ -21320,3 +21320,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:45 L: returned deliver/Q23/lem-pe-endomorphism-fibre-double-cone (reviewer RETURN: L: independent stage-2 immutable head 30a72bc98408: H2: stmt_deps adds theorem node lem-weil-signed-mapping-cocone-shift)
 - 08:45 L: returned deliver/Q68/lem-trf-site-one-sided-tensor-normalization (reviewer RETURN: L: independent stage-2 immutable head 645f5df3ec49: H2: the delivery adds theorem node lem-weil-pbc-kflat-fixed-tensor-t)
 - 08:45 L: returned deliver/S3/Sheaf.Paper.IntegralCoherenceTower (reviewer RETURN: (reviewer C-cc049, head cc0497e0b) C5 / brief-stage3 §0: the item node drops proof_dep lem-pur-quotient-expression-kflat)
+- 08:45 L: returned deliver/NB/lem-weil-pbc-reflected-adjunction-coefficient-squares (reviewer RETURN: L: independent stage-2 immutable head 7b9a2fbeed58: H2/theorem-stmt_dep: the delivery adds theorem node lem-sbc-reflecto)
