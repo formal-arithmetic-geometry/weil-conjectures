@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-supported-product-support-congruence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Definition of the supported pairing; support invariance from Stacks 09XP, literature/stacks-project/etale-cohomology.tex, section-cohomology-support",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The supported product is invariant under equality of closed supports",
+ "statement": "Let A be a commutative ring, f:X→S and g:Y→S scheme morphisms, i:Z→X and i′:Z′→X closed immersions with the same open complement, and j:W→Y and j′:W′→Y closed immersions with the same open complement. For arbitrary unbounded etale A-module complexes K on X and L on Y, the actual product [def-pur-supported-exterior-product] for (i,j,K,L) is invertible if and only if that for (i′,j′,K,L) is invertible. Supports and derived support functors are as in [def-pur-support-cohomology] and [def-pur-etale-derived-supported-sections]. No reducedness or boundedness assumption is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+  "place": "Definition of the supported pairing; support invariance from Stacks 09XP, literature/stacks-project/etale-cohomology.tex, section-cohomology-support"
+ },
+ "stmt_deps": [
+  "def-pur-supported-exterior-product",
+  "def-pur-support-cohomology",
+  "def-pur-etale-derived-supported-sections"
+ ],
+ "proof": [
+  {
+   "text": "Equal open complements identify the kernels defining support sections and their inclusions into global sections, hence also their right derived functors. The normalized supported-coefficient adjunctions therefore have identified right adjoints. Uniqueness of left adjoints gives an isomorphism of supported coefficient functors. Their quotient maps from constant coefficients agree under this isomorphism by the normalization of the Hom bijections. This is the ordinary kernel identification underlying the derived support congruence in [lem-pur-support-restriction-triangle].",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The product supports have equal complements: their underlying closed sets are the intersections of the inverse images of the two specified closed sets. Under the coefficient isomorphisms the two coefficient tensor comparisons agree: precompose with the tensor of the constant-to-support quotients, use their defining constant-tensor equations, and cancel this epimorphism. Signed total-complex comparisons agree on every bidegree inclusion. Their derived comparison families agree by the cochain-model normalization and naturality of [def-pur-supported-exterior-product].",
+   "uses": [
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjunction uniqueness makes the two evaluation counits commute with these isomorphisms. Transpose the tensor of their evaluations under the product-support adjunction. The resulting supported products are conjugate by the supported-section isomorphisms on their sources and targets, so their invertibility is equivalent. The same calculation includes empty and full supports and arbitrary shifts.",
+   "uses": [
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-supported-exterior-product",
+  "lem-pur-support-restriction-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+  "place": "Definition of the supported pairing; support invariance from Stacks 09XP, literature/stacks-project/etale-cohomology.tex, section-cohomology-support"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Invariance of an exterior product in cohomology with supports under equal closed supports",
+   "results": "{\"t\": \"2026-10-21T06:40:59Z\", \"tool\": \"leanfinder\", \"query\": \"Invariance of an exterior product in cohomology with supports under equal closed supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"extDerivWithin_congr'\", \"extDerivWithin_congr\", \"groupCohomology.congr\", \"groupCohomology.inhomogeneousCochains.ext\", \"groupCohomology.inhomogeneousCochains.ext_iff\", \"Filter.EventuallyEq.extDeriv_eq\", \"Rep.FiniteCyclicGroup.groupCohomology\\u03c0Even_eq_iff\", \"Filter.EventuallyEq.extDerivWithin_eq\"], \"digest\": \"9f83eec9813b174c\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic categorical API used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"supportedExteriorProduct\"",
+   "results": "{\"t\": \"2026-10-21T06:40:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"supportedExteriorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedExteriorProduct|supportedCoefficientTensor",
+   "results": "{\"t\": \"2026-10-21T06:40:58Z\", \"tool\": \"grep\", \"query\": \"supportedExteriorProduct|supportedCoefficientTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invertibility of supported exterior product is invariant under changing a closed immersion with the same open complement",
+   "results": "{\"t\": \"2026-10-21T07:47:48Z\", \"tool\": \"leansearch\", \"query\": \"Invertibility of supported exterior product is invariant under changing a closed immersion with the same open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra.invertibleAlgebraMapEquiv_symm_apply_invOf_toQuot\", \"ExteriorAlgebra.invertibleAlgebraMapEquiv\", \"ExteriorAlgebra.invertibleAlgebraMapEquiv_apply_invOf\", \"ExteriorAlgebra.ι_leftInverse\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.IsOpenImmersion.ΓIso_inv\", \"ExteriorAlgebra.ιInv_comp_map\"], \"digest\": \"5084d44895a71a55\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching supported derived pairing theorem. Returned generic tensor or unrelated exterior-algebra results do not provide this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KunnethSupported",
+  "date": "2026-10-21",
+  "group": "P9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedProductSupportCongruence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedProductSupportCongruence.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_supportedExteriorProduct_iff_supportComplement_eq",
+  "statement": "theorem isIso_supportedExteriorProduct_iff_supportComplement_eq\n    (A : Type (u + 1)) [CommRing A] {S X Y Z Z' W W' : Scheme.{u}}\n    (f : X ⟶ S) (g : Y ⟶ S) (i : Z ⟶ X) (i' : Z' ⟶ X)\n    (j : W ⟶ Y) (j' : W' ⟶ Y)\n    [IsClosedImmersion i] [IsClosedImmersion i']\n    [IsClosedImmersion j] [IsClosedImmersion j']\n    (hi : i.openComplement = i'.openComplement)\n    (hj : j.openComplement = j'.openComplement)\n    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y) :\n    IsIso (supportedExteriorProduct A f g i j K L) ↔\n      IsIso (supportedExteriorProduct A f g i' j' K L)",
+  "branch": "sheaf-dag",
+  "by": "P9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261021T111424-L-124716",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261021T111424-L-124716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
