@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-scalar-pullback-strict-cone-naturality",
+ "kind": "statement",
+ "title": "Strict scalar pullback cone maps and their derived naturality",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Fix a prime $\\ell$ and finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and uniformizers $\\varpi_E,\\varpi_L$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a scheme morphism with $\\ell$ invertible [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $R_W=\\widehat{\\mathcal O}_{E,W}$, $S_W=\\widehat{\\mathcal O}_{L,W}$, $B_{F,W,m}=(\\mathcal O_F/\\varpi_F^m)_W$ for $W=X,Y$, $F=E,L$, $m\\ge1$ [def-weil-completed-integral-coefficients]. Use the quotient maps $\\iota_m:\\mathcal O_E/\\varpi_E^m\\to\\mathcal O_L/\\varpi_L^m$ and $\\rho_m=(\\iota_m)_Y\\pi^E_m$ of [def-weil-integral-scalar-extension]. For any cochain complex $P$ of $R_Y$-modules put $Q=P\\otimes_{R_Y}S_Y$; tensor products are sheaf tensor products [def-pur-sheaf-tensor-product]. For an $\\widehat{\\mathcal O}_{F,Y}$-complex $M$ put\n$$D^F_m(M)=\\operatorname{Res}^F_m g_{F,m}^*(M\\otimes B_{F,Y,m}),\\qquad A_F(M)=\\operatorname{Cone}(1-s:\\prod_mD^F_m(M)\\to\\prod_mD^F_m(M))[-1],$$\nusing module inverse image $g_{F,m}^*=g^{-1}(-)\\otimes_{g^{-1}B_{F,Y,m}}B_{F,X,m}$, coefficient structure maps [def-weil-proetale-inverse-image], restriction of scalars and quotient transitions [def-pur-integral-derived-operations]. There is a natural strict tower map $d_m:D^E_m(P)\\otimes_{R_X}S_X\\to D^L_m(Q)$ uniquely specified on local tensor generators by\n$$((g^{-1}(p\\otimes\\bar a))\\otimes b)\\otimes s\\longmapsto(g^{-1}(p\\otimes\\iota_m(\\bar a)))\\otimes(\\iota_m(b)\\pi^L_m(s)).$$\nThese formulas are balanced, commute with the cochain differentials and every quotient transition, and are natural in all chain maps $P\\to P'$. Since $S_X$ is a finite free $R_X$-module [lem-weil-finite-free-completed-scalar-comparison], the canonical tensor/product maps are isomorphisms, independent of a choice of finite free basis of $S_X$ over $R_X$, and identify $A_E(P)\\otimes_{R_X}S_X$ with the Roos cone of $D^E_\\bullet(P)\\otimes_{R_X}S_X$. The induced chain map $\\delta_P$ to $A_L(Q)$ sends both cone coordinates by $\\prod_m d_m$. On flat-term K-flat representatives [def-pc-kflat-complex], these chain maps descend to a natural transformation\n$$C_X Lg_E^*\\longrightarrow Lg_L^* C_Y,\\qquad C_WH=H\\otimes^L_{R_W}S_W,$$\nwith representative $[\\delta_P]$ under the canonical comparison isomorphisms of [lem-pur-integral-operations-well-defined, lem-pur-derived-change-of-rings]. In particular the represented morphism is independent of the K-flat resolution and natural for arbitrary derived morphisms [def-weil-abstract-derived-category]. For $E\\subset L\\subset F$ the level maps and cone maps compose to those for $E\\subset F$ after the canonical tensor associators; for $L=E$ they are identities under the tensor unit identifications.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 6.5.9(4); agent-formulated strict scalar/pullback cone construction and descent extracted from returned proof Steps 2, 4, 5 and 8, not a literal numbered theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-pc-kflat-complex",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, NatTrans",
+   "results": ". loogle: unknown identifier 'NatTrans'",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic scalar, natural-transformation and derived localization APIs do not specify these coefficient tower maps or their cone coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of l-adic coefficient fields induces a natural strict tower map between finite coefficient pullback complexes, hence a specified map of Roos cones with the same map on both coordinates.",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; LightProfinite.Extend.cone; LightProfinite.transitionMap; Profinite.Extend.cone; Profinite.Extend.cone_π_app; LightDiagram.cone; LightProfinite.transitionMapLE; LightProfinite.Extend.functor",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic scalar, natural-transformation and derived localization APIs do not specify these coefficient tower maps or their cone coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback|Roos|roos|completed.*scalar|scalar.*completion",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean; Mathlib/NumberTheory/LSeries/ZMod.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic scalar, natural-transformation and derived localization APIs do not specify these coefficient tower maps or their cone coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension commutes with products and the mapping cone of one minus shift on a tower of sheaf complexes.",
+   "results": "ModuleCat.ExtendScalars.obj'; IsBaseChange.finitePow; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Algebra.TensorProduct.instFree; Algebra.Extension.instIsScalarTowerRing_1; Module.Free.tensor; instFinitePresentationTensorProduct; Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic scalar, natural-transformation and derived localization APIs do not specify these coefficient tower maps or their cone coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, SheafOfModules",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic scalar, natural-transformation and derived localization APIs do not specify these coefficient tower maps or their cone coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural chain map between functors on K-flat sheaf complexes descends through localization at quasi-isomorphisms to a natural derived transformation independent of resolution.",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic scalar, natural-transformation and derived localization APIs do not specify these coefficient tower maps or their cone coordinates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-specified-pullback-comparison-alpha",
+  "date": "2026-10-21",
+  "group": "Q101"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "In both composites the first arrow is the transport of cohomology along $g_Y$, namely $\\tau_{\\operatorname{For}K}$ for $\\RGamma$ and $\\tau_{c,\\operatorname{For}K}$ for $\\RGammac$. Resolution-level scalar compatibility: returned proof Steps 2, 4, 5, 8 (strict tensor generators, both cone coordinates, descent and coherence).",
+   "via": [
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

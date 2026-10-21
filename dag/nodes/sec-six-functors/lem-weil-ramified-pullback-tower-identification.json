@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-ramified-pullback-tower-identification",
+ "kind": "statement",
+ "title": "Ramified identification of the scalar-extended finite pullback tower",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$, valuation rings and uniformizers $\\varpi_E,\\varpi_L$ [def-weil-l-adic-coefficient-extension]. There is an integer $e\\ge1$, the ramification index, characterized by $\\varpi_E\\mathcal O_L=\\varpi_L^e\\mathcal O_L$. For this $e$ the following assertions hold. Let $g:X\\to Y$ be a scheme morphism with $\\ell$ invertible [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $R_W=\\widehat{\\mathcal O}_{E,W}$, $S_W=\\widehat{\\mathcal O}_{L,W}$ and $B_{F,W,m}=(\\mathcal O_F/\\varpi_F^m)_W$ for $W=X,Y$, $F=E,L$, $m\\ge1$ [def-weil-completed-integral-coefficients]. For any cochain complex $P$ of $R_Y$-modules put $Q=P\\otimes_{R_Y}S_Y$, and\n$$D^F_m(M)=\\operatorname{Res}^F_m g_{F,m}^*(M\\otimes B_{F,Y,m}),$$\nwhere $g_{F,m}^*=g^{-1}(-)\\otimes_{g^{-1}B_{F,Y,m}}B_{F,X,m}$, and restriction and transitions are induced by the completed coefficient projections and quotient reductions [def-weil-proetale-inverse-image, def-pur-integral-derived-operations, def-pur-sheaf-tensor-product]. Write $T_{a,b}:D^L_b(Q)\\to D^L_a(Q)$ for their composite transition, $1\\le a\\le b$. The canonical reduction maps and tensor associators give isomorphisms of $S_W$-modules\n$$B_{E,W,m}\\otimes_{R_W}S_W\\cong B_{L,W,em},$$\nand natural isomorphisms of $S_X$-complexes\n$$\\widetilde d_m:D^E_m(P)\\otimes_{R_X}S_X\\xrightarrow{\\sim}D^L_{em}(Q).$$\nThe coefficient isomorphism is normalized by $\\bar a\\otimes s\\mapsto j_m(\\bar a)\\pi^L_{em}(s)$, where $j_m:\\mathcal O_E/\\varpi_E^m\\to\\mathcal O_L/\\varpi_L^{em}$ is induced by inclusion. The pullback isomorphism has local formula\n$$((g^{-1}(p\\otimes\\bar a))\\otimes b)\\otimes s\\longmapsto(g^{-1}(p\\otimes j_m(\\bar a)))\\otimes(j_m(b)\\pi^L_{em}(s)).$$\nThese isomorphisms commute with transitions $m+1\\to m$ and $e(m+1)\\to em$, and with chain maps of $P$. The same-index map defined by this formula with $j_m$ and $\\pi^L_{em}$ replaced by $\\iota_m$ and $\\pi^L_m$ [def-weil-integral-scalar-extension] is exactly $T_{m,em}\\circ\\widetilde d_m$. Thus the scalar-extended $E$-pullback tower is identified with the $e$-subsequence of the $L$-pullback tower, and its specified same-index map is the transition from that subsequence, without any injectivity assertion about $T_{m,em}$. All identifications are independent of the unit relating $\\varpi_E$ and $\\varpi_L^e$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M (lemma-completion-flat), applied to the powers of each uniformizer; agent-formulated pullback tower identification extracted from returned proof Step 7, Level identification. Context: Bhatt–Scholze Lemma 6.8.2(1)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient, TensorProduct",
+   "results": ". loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-21",
+   "verdict": "no match: Ring quotient and adic-completion APIs do not identify the completed coefficient sheaf pullback towers with their prescribed transition maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ramified finite extension of l-adic fields of ramification index e, scalar extension of the completed integral coefficient quotient modulo pi_E^m is the quotient modulo pi_L^(e*m), compatibly with module pullback.",
+   "results": "Ideal.quotientRangePowQuotSuccInclusionEquiv; Ideal.quotientToQuotientRangePowQuotSucc_mk; Ideal.Quotient.algebraMap_quotient_pow_ramificationIdx; Ideal.quotientToQuotientRangePowQuotSucc; IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'; Ideal.Quotient.algebraQuotientPowRamificationIdx; Ideal.Quotient.algebraMap_quotient_of_ramificationIdx_neZero; IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletionIntegers",
+   "date": "2026-10-21",
+   "verdict": "no match: Ring quotient and adic-completion APIs do not identify the completed coefficient sheaf pullback towers with their prescribed transition maps."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx|ramificationIndex|completion.*quotient|quotient.*completion",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/RamificationInertia/Valuation.lean; Mathlib/NumberTheory/RamificationInertia/Valuation.lean; Mathlib/NumberTheory/RamificationInertia/Valuation.lean; Mathlib/NumberTheory/RamificationInertia/Valuation.lean; Mathlib/NumberTheory/RamificationInertia/Valuation.lean; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Ring quotient and adic-completion APIs do not identify the completed coefficient sheaf pullback towers with their prescribed transition maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of sheaf module pullback along a finite coefficient ring extension identifies uniformizer reduction towers after ramification reindexing.",
+   "results": "SheafOfModules.pullback; PresheafOfModules.pullback; IsBaseChange.finitePow; KaehlerDifferential.tensorKaehlerEquivBase; SheafOfModules.pullbackObjFreeIso; Submodule.baseChange; IsBaseChange.basis.congr_simp; Algebra.Extension.baseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: Ring quotient and adic-completion APIs do not identify the completed coefficient sheaf pullback towers with their prescribed transition maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", TensorProduct",
+   "results": "TensorProduct.quotientTensorEquiv; TensorProduct.tensorQuotientEquiv; TensorProduct.quotientTensorQuotientEquiv; TensorProduct.quotientTensorEquiv_apply_tmul_mk; TensorProduct.tensorQuotientEquiv_apply_mk_tmul; TensorProduct.quotientTensorEquiv_symm_apply_mk_tmul; TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk; TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk",
+   "date": "2026-10-21",
+   "verdict": "no match: Ring quotient and adic-completion APIs do not identify the completed coefficient sheaf pullback towers with their prescribed transition maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a completed constant sheaf quotient with an extension of the valuation ring gives the completed coefficient quotient for the extended ideal.",
+   "results": "AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "date": "2026-10-21",
+   "verdict": "no match: Ring quotient and adic-completion APIs do not identify the completed coefficient sheaf pullback towers with their prescribed transition maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-specified-pullback-comparison-alpha",
+  "date": "2026-10-21",
+  "group": "Q101"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "In both composites the first arrow is the transport of cohomology along $g_Y$, namely $\\tau_{\\operatorname{For}K}$ for $\\RGamma$ and $\\tau_{c,\\operatorname{For}K}$ for $\\RGammac$. Resolution-level scalar compatibility: returned proof Step 7, Level identification (ramification and completed constant reduction).",
+   "via": [
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

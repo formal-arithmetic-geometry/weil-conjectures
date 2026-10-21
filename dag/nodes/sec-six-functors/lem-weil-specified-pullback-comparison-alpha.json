@@ -27,12 +27,12 @@
  ],
  "proof": [
   {
-   "text": "Set R_W=R-hat and S_W=S-hat. The finite-free completed scalar comparison says S_W is finite free over R_W and identifies ordinary derived tensor with the specified strict-tower scalar extension on derived-complete inputs. Choose the flat-term K-flat resolution P -> K and put Q=P tensor_{R_Y} S_Y. Derived change of rings and K-flat change of rings show that Q represents C_Y K and is K-flat with flat terms over S_Y.",
+   "text": "Choose $P$ by K-flat resolution and put $Q=P \\otimes_{R_Y}S_Y$. Change of rings makes $Q$ flat-term K-flat and a representative of $C_YK$. The integral-operations comparison identifies $A_E(P)$ and $A_L(Q)$ with the two derived pullbacks.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
     "lem-pc-kflat-resolution",
     "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings"
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-integral-operations-well-defined"
    ],
    "elementary": false,
    "source": {
@@ -41,54 +41,9 @@
    }
   },
   {
-   "text": "The coefficient inclusion gives compatible maps rho_m=(iota_m)_Y pi^E_m and hence P_{E,m}=P tensor B_{E,Y,m} and Q_{L,m}=Q tensor B_{L,Y,m}=P tensor B_{L,Y,m}. The last equality is tensor associativity and balancing. The strict-tower definition of integral scalar extension and the finite-level pullback definition give exactly the towers used in A_E(P) and A_L(Q).",
+   "text": "Apply the strict cone naturality lemma. Its normalized $d_m$ are precisely the displayed same-index maps, and its tensor/product isomorphism identifies the induced $\\delta_P$ on both cone coordinates. This supplies the chain model and its derived representative.",
    "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-completed-integral-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-well-defined.md",
-    "place": "statement: scalar extension formed levelwise modulo powers of the two uniformizers; the explicit level-m tensor-generator formula is agent-written (the blueprint gives none)"
-   }
-  },
-  {
-   "text": "The definition of the integral derived operations is the Roos cone Cone(1-s: product_m Res^F_m g_{F,m}^*(M tensor B_{F,Y,m}) -> product_m Res^F_m g_{F,m}^*(M tensor B_{F,Y,m}))[-1]. Applying it to (F,M)=(E,P) and (L,Q) gives A_E(P) and A_L(Q), which represent Lg_E^* K and Lg_L^*(C_Y K) by the K-flat resolution and well-definedness results.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10 and Lemma 6.5.9(4), pp. 22, 49-50"
-   }
-  },
-  {
-   "text": "At level m, tensor balancing and iota_m define d_m:D^E_m(P) tensor_{R_X} S_X -> D^L_m(Q). On local pure tensors the formula is ((g^{-1}(p tensor a-bar)) tensor b) tensor s maps to (g^{-1}(p tensor iota_m(a-bar))) tensor (iota_m(b) pi^L_m(s)). The inverse-image coefficient map and sheaf tensor product make this formula respect differentials, balancing, and quotient transitions, so the d_m form a strict tower map.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-integral-scalar-extension",
-    "def-pur-integral-derived-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-well-defined.md",
-    "place": "statement: scalar extension formed levelwise modulo powers of the two uniformizers; the explicit level-m tensor-generator formula is agent-written (the blueprint gives none)"
-   }
-  },
-  {
-   "text": "Since S_X is finite free over R_X, tensoring with S_X commutes with the termwise countable products in the Roos cone; in a finite free basis this is a finite direct-sum calculation. It also commutes with 1-s and the shifted cone. Applying the cone construction to the tower map gives delta_P:A_E(P) tensor_{R_X} S_X -> A_L(Q), with both coordinates (b,a) mapped to ((product_m d_m)b,(product_m d_m)a).",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-proetale-countable-products-exact",
-    "def-weil-abstract-derived-category",
-    "def-pur-integral-derived-operations"
+    "lem-weil-scalar-pullback-strict-cone-naturality"
    ],
    "elementary": false,
    "source": {
@@ -97,30 +52,9 @@
    }
   },
   {
-   "text": "The finite-free completed scalar comparison at Y is represented on Q by chi_Y(P): q maps to (0,(q mod varpi_L^m)_m) in the Roos cone. Its shifted-product component is zero by the cone convention, and the comparison theorem says it is a quasi-isomorphism for derived-complete inputs. Thus it represents chi_{Y,K}:C_Y K -> T_Y K and is invertible in the derived category.",
+   "text": "Choose the ramification index $e$. The ramified tower identification gives $\\widetilde d_m:D^E_m(P)\\otimes_{R_X}S_X\\cong D^L_{em}(Q)$, with $d_m=T_{m,em}\\widetilde d_m$. Hence $\\delta_P$ is the forward Roos transition $\\Delta$ for $K_n=D^L_n(Q)$.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-integral-scalar-extension",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "def-weil-derived-complete-integral-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), pp. 58-59; Proposition 3.5.1"
-   }
-  },
-  {
-   "text": "Let $e$ be the ramification index, so that $\\varpi_E\\mathcal O_L=\\varpi_L^e\\mathcal O_L$ and $A_{E,m}\\otimes_{\\mathcal O_E}\\mathcal O_L=\\mathcal O_L/\\varpi_E^m\\mathcal O_L=A_{L,em}$. Level identification. Apply the completed-constant-sheaf reduction theorem to $(\\mathcal O_E,(\\varpi_E))$ and to $(\\mathcal O_L,(\\varpi_L))$ on $X_{\\mathrm{proet}}$: $R_X$ and $S_X$ are flat over the constant sheaves $\\underline{\\mathcal O_E}$, $\\underline{\\mathcal O_L}$, and $R_X\\otimes_{\\underline{\\mathcal O_E}}\\underline{A_{E,m}}\\cong(A_{E,m})_X$, $S_X\\otimes_{\\underline{\\mathcal O_L}}\\underline{A_{L,a}}\\cong(A_{L,a})_X$ by the reduction maps. Hence, constant sheaves commuting with tensor products, $(A_{E,m})_X\\otimes_{R_X}S_X\\cong\\underline{A_{E,m}}\\otimes_{\\underline{\\mathcal O_E}}S_X\\cong\\underline{A_{L,em}}\\otimes_{\\underline{\\mathcal O_L}}S_X\\cong(A_{L,em})_X$. Since $D^E_m(P)$ is restricted from an $(A_{E,m})_X$-module complex, tensor associativity and base change of the module pullback $g_{E,m}^*$ along $A_{E,m}\\to A_{L,em}$ give a canonical isomorphism $\\tilde d_m:D^E_m(P)\\otimes_{R_X}S_X\\cong D^L_{em}(Q)$, compatible with transitions, under which the statement's $d_m$ (induced by $\\iota_m$, which factors as $A_{E,m}\\to A_{L,em}\\to A_{L,m}$) is the composite L-transition $T_{m,em}:D^L_{em}(Q)\\to D^L_m(Q)$. It need not be injective (e.g. $E=\\mathbf Q_\\ell$, $L=\\mathbf Q_\\ell(\\sqrt\\ell)$, $e=2$, $m=1$). Thus, writing $Y_n=D^L_n(Q)$, $K_\\bullet=(Y_n)$ and $K^{(e)}_\\bullet=(Y_{en})$, $\\delta_P$ becomes the cone map $\\Delta=\\mathsf R(T):\\mathsf R(K^{(e)}_\\bullet)\\to\\mathsf R(K_\\bullet)$ applying $T=\\prod_nT_{n,en}$ to both coordinates. Cofinality. The cofinality lemma applies with $A=\\mathbf Z$: modules over $\\widehat{\\mathcal O}_{L,X}$ have the same kernels, cokernels and (sectionwise) countable products as their underlying abelian sheaves, these products are exact by the countable-products theorem, and the coordinate and block maps are $\\widehat{\\mathcal O}_{L,X}$-linear. It gives the quasi-isomorphism $r_e:\\mathsf R(K_\\bullet)\\to\\mathsf R(K^{(e)}_\\bullet)$, $r_e(y,x)=(b_ey,a_ex)$ on cone coordinates. Coordinate check. $\\Delta r_e(y,x)=(\\psi y,\\varphi x)$ with $\\varphi(x)_n=T_{n,en}x_{en}$ and $\\psi(y)_n=\\sum_{i=en}^{e(n+1)-1}T_{n,i}y_i$. Put $h(y)_n=\\sum_{i=n}^{en-1}T_{n,i}y_i$ (zero for $e=1$) and $f=1-s$. Telescoping gives $h f=1-\\varphi$ and $f h=1-\\psi$. Hence $H(y,x)=(0,hy)$ satisfies $dH+Hd=(fh,hf)=1-\\Delta r_e$ on the cone (up to the sign of the $[-1]$ shift), so $\\Delta r_e$ is homotopic to the identity. As $r_e$ is a quasi-isomorphism, $\\Delta$, hence $\\delta_P$, is a quasi-isomorphism, and $[\\delta_P]=[r_e]^{-1}$ under the identifications $\\tilde d$. Conclusion. The finite-free completion comparison makes $\\chi_{Y,K}$ invertible (K is derived complete). The isomorphism theorem for $g$ gives $Lg_E^*K\\cong g^{-1}K\\in D^b_c(X,\\mathcal O_E)$ for the same integral pullback (def-weil-derived-pullback-tensor-hom uses def-pur-integral-derived-operations at integral level), so $Lg_E^*K$ is derived complete and $\\chi_{X,Lg_E^*K}$ is invertible. Hence $\\alpha_K=Lg_L^*(\\chi_{Y,K})\\circ[\\delta_P]\\circ\\chi_{X,Lg_E^*K}^{-1}$ is a composite of isomorphisms $T_X(Lg_E^*K)\\to Lg_L^*(T_YK)$. The scalar-extension theorem asserts only the existence of a natural isomorphism between these objects; $\\alpha_K$ is such an isomorphism (naturality in Step 8), built from exactly the ingredients its route uses (ordinary tensor associativity, the quotient-tower completion maps and the $e$-subsequence reindexing), and the statement designates this composite as the specified comparison.",
-   "uses": [
-    "lem-pur-compact-support-roos-cofinality",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-isomorphism-derived-pullback",
-    "def-weil-integral-scalar-extension",
-    "def-pur-integral-derived-operations",
-    "def-weil-abstract-derived-category"
+    "lem-weil-ramified-pullback-tower-identification"
    ],
    "elementary": false,
    "source": {
@@ -129,13 +63,35 @@
    }
   },
   {
-   "text": "All maps in the construction are induced by functorial coefficient and inverse-image maps, tensor balancing, products, cones, and the explicit quotient reductions. The well-definedness theorem identifies these maps after replacing P by any other flat-term K-flat resolution, so the localized morphism is independent of P. The same coordinate formulas commute with morphisms of K, and the block maps in the cofinality lemma compose under successive index reindexing; ordinary tensor associativity gives the successive coefficient-extension identity. The completion comparisons are natural by the finite-free comparison. Thus the displayed formula is natural in K and is the specified canonical comparison, rather than an arbitrary isomorphism between its source and target.",
+   "text": "Apply the forward Roos transition lemma to the underlying abelian sheaves ($A=\\mathbf Z$). Countable products are exact on $X_{\\mathrm{proet}}$. Its coordinate maps and homotopy are $S_X$-linear, so $\\Delta$, and therefore $\\delta_P$, is a quasi-isomorphism of $S_X$-complexes, with localized inverse $[r_e]$.",
    "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-pur-compact-support-roos-cofinality",
+    "lem-weil-roos-transition-homotopy",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1) (O_{E,X} = lim O_E/varpi^n) and Proposition 3.5.1 / proof of Lemma 6.5.9 (strict pro-isomorphisms of quotient towers give the same R lim); explicit homotopy agent-written"
+   }
+  },
+  {
+   "text": "The finite-free completed scalar comparison represents $\\chi_{Y,K}$ by $q\\mapsto(0,(q\\bmod\\varpi_L^m)_m)$ and makes it invertible. Isomorphism pullback preserves $D^b_c$ for the derived pullback of [def-weil-derived-pullback-tensor-hom], whose integral level is by definition the construction of [def-pur-integral-derived-operations] represented by $A_E(P)$; so $Lg_E^*K$ is derived complete and the same comparison makes $\\chi_{X,Lg_E^*K}$ invertible. Conjugate $[\\delta_P]$ by these two comparisons to obtain the displayed $\\alpha_K$.",
+   "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-integral-scalar-extension",
-    "def-weil-abstract-derived-category"
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; Proposition 3.5.1"
+   }
+  },
+  {
+   "text": "The strict cone lemma supplies resolution independence and naturality of $[\\delta_P]$ with the canonical representative comparisons. The completion comparison is natural. Their composite is therefore independent of $P$ and natural in $K$. This is exactly the specified tensor-and-quotient-completion construction of the statement.",
+   "uses": [
+    "lem-weil-scalar-pullback-strict-cone-naturality",
+    "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": false,
    "source": {
@@ -145,23 +101,17 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-finite-free-completed-scalar-comparison",
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
   "lem-pur-kflat-change-of-rings",
-  "def-weil-integral-scalar-extension",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-completed-integral-coefficients",
-  "def-pur-integral-derived-operations",
   "lem-pur-integral-operations-well-defined",
+  "lem-weil-scalar-pullback-strict-cone-naturality",
+  "lem-weil-ramified-pullback-tower-identification",
+  "lem-weil-roos-transition-homotopy",
   "lem-weil-proetale-countable-products-exact",
-  "def-weil-proetale-inverse-image",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-pur-compact-support-roos-cofinality",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-isomorphism-derived-pullback"
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
@@ -251,28 +201,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-weil-specified-pullback-comparison-alpha",
   "worker": "stage1",
-  "summary": "Audited the imported concrete model against the existing strict-tower definitions; statement unchanged. No new nodes. Finite-free completion supplies the specified quotient-cone maps chi; the integral operation definitions supply the pullback cones; Step 7 identifies the E-level tower tensored with S_X with the e-subsequence of the L-tower and proves delta_P a quasi-isomorphism from the Roos cofinality lemma by an explicit homotopy; the isomorphism theorem for g gives derived completeness of Lg_E^*K. Maintainer review (2026-10-18) restored the blueprint ancestry, wrote out the Step 7 identification and homotopy, and corrected two source places.",
+  "summary": "Repair of the human re-split return: statement unchanged. Extracted three independent statement-only lemmas for the strict scalar pullback cone construction and descent, the ramified quotient-tower identification, and the forward Roos transition homotopy. Retained the original argument verbatim in the report, with an allocation of every old step. The parent now assembles these lemmas and the existing resolution, completion and isomorphism-pullback results. No Lean changes or compilation.",
   "blueprint": "Via lem-weil-isomorphism-comparison-scalar-extension and the Frobenius-transport chain: makes explicit the coefficient-change compatibility of the completed integral pullback needed in the first (cohomology-transport) arrow of def-weil-global-geometric-frobenius's composites; the blueprint states no proof of this model, and its integral/common-stage paragraph of def-weil-derived-pullback-tensor-hom is the related notion.",
-  "tool_uses": [
-   {
-    "node": "lem-pur-compact-support-roos-cofinality",
-    "why": "Step 7 and 8 use its generic statement that restriction of a strict tower to the subsequence en induces the explicit quasi-isomorphism r_e of Roos cones; no node of the unit's route states this tower cofinality."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pur-compact-support-roos-cofinality"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NE-36e922b3b",
-  "group": "NE",
+  "reviewer": "NT-cc-Q101-12140e1f4",
+  "group": "Q101",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-36e922b3b (reviewer sub-agent of L); spot-checked: Read in full: the item, the parent lem-weil-isomorphism-comparison-scalar-extension, every cited statement, and the proof of lem-pur-integral-operations-scalar-extension. Sources read: Bhatt–Scholze Lemma 6.8.2(1), Def 3.4.10, Lemma 3.4.12, Prop 3.5.1 and Lemma 6.5.9(4) with its proof, plus the blueprint files lem-weil-scalar-extension-well-defined and def-weil-derived-pullback-tensor-hom. The statement is unchanged from base and is true. Coefficient categories: modules over the completed sheaf throughout, and the integral level of def-weil-derived-pullback-tensor-hom is def-pur-integral-derived-operations, so it is the same Lg^*. Also checked: chi_Y(P) is exactly the representative given by the finite-free comparison, d_m is R_X-balanced through rho_m, and alpha_K has the right source and target. Edge cases checked: L=E, ramified e=2 with m=1 (d_1 not injective), K=0, and unramified L. Repairs, all in fixes/.../lem-weil-specified-pullback-comparison-alpha.json: (1) blueprint.from: the worker had replaced it with def-weil-derived-pullback-tensor-hom and via []; restored to the ancestor tools/blueprint_refs.py gives, def-weil-global-geometric-frobenius with via [parent,...] (B9), and split_report.blueprint rewritten to match. (2) Step 7 said 'a direct coordinate check' and used D^E_m(P) tensor S_X = D^L_{em}(Q) without citation (E5). Written out: the identification via lem-weil-pbc-completed-constant-sheaf-reduction (unit inside the route); the cofinality lemma applied with A=Z, products exact by lem-weil-proetale-countable-products-exact; and the homotopy h(y)_n = sum_{i=n}^{en-1} T_{n,i} y_i, with hf = 1-phi and fh = 1-psi, so Delta r_e is homotopic to the identity and delta_P is a quasi-isomorphism. (3) Source places of Steps 2 and 4 corrected: they cited a blueprint formula that does not exist. The split_report summary said the scalar-extension theorem supplies invertibility, which is wrong; corrected. Accepted tool use: lem-pur-compact-support-roos-cofinality (unit sk-thm-sf-compatibility, generic Roos subsequence cofinality used as a black box), now declared in split_report.tool_uses. No duplicates found in the DAG; no new nodes. On an overlay copy, review_split passes, blueprint_refs check reports 0 errors, and check_dag reports nothing for this item.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-12140e1f4 (reviewer sub-agent of L); spot-checked: Re-split meets the note: proof 1733 chars (1921 after the fix), 3 independent new unsplit nodes of comparable size, statement and stmt_deps identical to the live base, not on the drop list, not superseded. Every old step 1-8 maps to a cited node or an existing theorem. I checked every identity in the Roos transition-homotopy node by hand. r_e and Delta are chain maps (b_e f = f^(e) a_e by telescoping). Delta r_e = (psi, phi), hf = 1 - phi, fh = 1 - psi, also for e=1. With d(y,x) = (-dy - fx, dx) and H = (0, -hy), dH + Hd = 1 - Delta r_e, so the sign is right. r_e Delta is also homotopic to 1, so the node is true. Ramified node checked: B_E,m tensor S = S/varpi_L^{em} (Stacks 093M sites-modules lemma-completion-flat read), and same-index map = T_{m,em} d~_m since iota_m = reduction after j_m. Cases E=L, unramified, Q_l(sqrt l) m=1 all agree. Strict-cone node is true. None of the three duplicates roos-cofinality, sp-strict-tower-arithmetic-restriction or pur-finite-free-completion-exchange: those give r_e or a single-site exchange, not Delta, the homotopy, or the pullback tower. Two repairs, files under fixes/dag/nodes/sec-six-functors/. (1) Step 5 had dropped the old proof's point that the Lg^* of lem-weil-isomorphism-derived-pullback (def-weil-derived-pullback-tensor-hom) is by definition the def-pur-integral-derived-operations construction used by the item. I restored it and cited def-weil-derived-pullback-tensor-hom. (2) B2/B3: the strict-cone node used a finite free basis of S_X with no citation. I added the clause and the stmt_dep lem-weil-finite-free-completed-scalar-comparison. Snapshot chapter symlinks point to a pruned dagsnap (ba587727), so cited statements were read from clones/side-live. Retained tool_use lem-pur-compact-support-roos-cofinality is no longer cited by the item's steps; harmless.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SpecifiedPullbackComparisonAlpha",

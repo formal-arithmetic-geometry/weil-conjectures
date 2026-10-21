@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-roos-transition-homotopy",
+ "kind": "statement",
+ "title": "The forward Roos subsequence transition and its explicit homotopy",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Let $\\mathcal C$ be a small site, $A$ a commutative ring and $\\mathcal A$ the abelian category of sheaves of modules over the constant ring sheaf $\\underline A$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Suppose countable products in $\\mathcal A$ are exact. Let $K_\\bullet$ be a strict tower of cochain complexes with transitions $t_i:K_{i+1}\\to K_i$, $i\\ge1$ [def-weil-inverse-system]. Write $T_{n,i}=t_n\\cdots t_{i-1}:K_i\\to K_n$ for $i\\ge n$, with $T_{n,n}=1$, and put $U=\\prod_nK_n$, $(sx)_n=t_nx_{n+1}$, $f=1-s$. Use\n$$\\mathsf R(K)=\\operatorname{Cone}(f:U\\to U)[-1],\\quad\\mathsf R(K)^q=U^{q-1}\\oplus U^q,\\quad d(y,x)=(-dy-fx,dx)$$\n[def-weil-abstract-derived-category]. For an integer $e\\ge1$ let $K^{(e)}_n=K_{en}$ with composite transitions. Define the product maps\n$$a_e(x)_n=x_{en},\\qquad b_e(y)_n=\\sum_{i=en}^{e(n+1)-1}T_{en,i}y_i,\\qquad T(z)_n=T_{n,en}z_n.$$\nThe first two maps induce $r_e(y,x)=(b_ey,a_ex):\\mathsf R(K)\\to\\mathsf R(K^{(e)})$. The last induces a chain map $\\Delta(y,x)=(Ty,Tx):\\mathsf R(K^{(e)})\\to\\mathsf R(K)$. Put\n$$\\varphi(x)_n=T_{n,en}x_{en},\\qquad\\psi(y)_n=\\sum_{i=en}^{e(n+1)-1}T_{n,i}y_i,\\qquad h(y)_n=\\sum_{i=n}^{en-1}T_{n,i}y_i.$$\nThen $\\Delta r_e=(\\psi,\\varphi)$, $hf=1-\\varphi$ and $fh=1-\\psi$. The degree $-1$ map $H(y,x)=(0,-hy)$ is a chain homotopy satisfying $dH+Hd=1-\\Delta r_e$ for the displayed shifted-cone convention. Consequently $\\Delta$ is a quasi-isomorphism and $[\\Delta]=[r_e]^{-1}$ in the derived category. These identities are natural for morphisms of strict towers. If the $K_i$ are also modules over a sheaf of commutative $\\underline A$-algebras $\\mathcal R$ and their transitions are $\\mathcal R$-linear, every displayed map and the homotopy is $\\mathcal R$-linear, and the same quasi-isomorphism and localized inverse identity hold in $D(\\mathcal R)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent-formulated forward transition and homotopy extracted from returned proof Step 7, Cofinality and Coordinate check. The explicit homotopy is not a literal assertion of Tag 0941."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Homotopy, CochainComplex",
+   "results": "Homotopy.mkCoinductive; CochainComplex.HomComplex.Cochain.ofHomotopy; CochainComplex.HomComplex.δ_ofHomotopy; CochainComplex.HomComplex.Cochain.equivHomotopy; CochainComplex.HomComplex.Cochain.equivHomotopy_apply_coe; CochainComplex.HomComplex.Cochain.equivHomotopy_apply_of_eq; CochainComplex.HomComplex.Cochain.equivHomotopy_symm_apply_hom; Homotopy.shift",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic homotopy constructors do not give the finite-block homotopy or the specified forward Roos transition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transition map from the e-th subsequence Roos complex of an inverse tower back to the full Roos complex is a homotopy inverse to the restriction and finite block sum cofinality map.",
+   "results": "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv; HomologicalComplex.homotopyCofiber.XIso; HomologicalComplex.homotopyCofiber.sndX_inrX; AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId; CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι; HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom; AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant; HomologicalComplex.homotopyCofiber.desc_f'",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic homotopy constructors do not give the finite-block homotopy or the specified forward Roos transition."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|homotopyLimit|homotopy.*limit|cofinal.*homotopy",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic homotopy constructors do not give the finite-block homotopy or the specified forward Roos transition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an inverse sequence of complexes, finite telescoping sums give a chain homotopy between the identity and the composite of subsequence restriction with the transition map on the mapping fiber of one minus shift.",
+   "results": "Homotopy; HomotopyEquiv.homotopyInvHomId; CategoryTheory.ShortComplex.HomotopyEquiv.homotopyInvHomId; Homotopy.mk; Homotopy.trans; CategoryTheory.ShortComplex.HomotopyEquiv.homotopyHomInvId; Homotopy.compLeftId; Homotopy.comp",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic homotopy constructors do not give the finite-block homotopy or the specified forward Roos transition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A telescoping block homotopy identifies the forward transition map between mapping fibers of one minus shift for a tower and its e-subsequence.",
+   "results": "Homotopy.mkInductiveAux₃; Homotopy.mkCoinductiveAux₃; Homotopy.mkInductiveAux₂; AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant; Homotopy.mkInductiveAux₂_add_one; Homotopy.mkInductiveAux₁; Homotopy.mkCoinductiveAux₂_add_one; Homotopy.mkCoinductiveAux₂",
+   "date": "2026-10-21",
+   "verdict": "no match: Generic homotopy constructors do not give the finite-block homotopy or the specified forward Roos transition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-specified-pullback-comparison-alpha",
+  "date": "2026-10-21",
+  "group": "Q101"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "In both composites the first arrow is the transport of cohomology along $g_Y$, namely $\\tau_{\\operatorname{For}K}$ for $\\RGamma$ and $\\tau_{c,\\operatorname{For}K}$ for $\\RGammac$. Resolution-level scalar compatibility: returned proof Step 7, Cofinality and Coordinate check (forward transition and finite-block homotopy).",
+   "via": [
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
