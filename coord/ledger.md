@@ -21484,3 +21484,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q67/lem-a1-roos-intrinsic-unit-comparison (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q25/lem-pur-support-comparison-section-model (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q72/lem-sfb-dvr-projective-complex-matrix-model (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q152/lem-fd-whole-tower-integral-pullback-comparison (reviewer FIX; first push; new nodes: 0); claim not held by Q152: not your claim

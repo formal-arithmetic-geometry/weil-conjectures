@@ -17,48 +17,237 @@
   "def-fd-finite-pullback-comparison-datum",
   "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify both integral coefficient sheaves with $R_{E,W}=\\lim_n(A_{E,n})_W$ and their full constructible subcategories using [lem-weil-pbc-integral-stratified-perfect-characterization]. For an isomorphism $h$, [lem-weil-proetale-isomorphism-inverse-image] identifies inverse image with reindexing the pro-etale site, an exact equivalence preserving limits. Applying this to the coefficient limit gives $h^{-1}R_{E,T}\\simeq R_{E,U}$ with precisely its quotient-defined structure map. By [lem-weil-sheaf-scalar-extension-ring-iso], module pullback is this same exact inverse image with transported action. It is exact on strict towers as well, since exactness is levelwise. Thus [lem-weil-pbc-exact-functor-derived-factorization] computes its tower-derived functor by the termwise functor itself. On the reductions of any flat-term K-flat $P$, the two constructions in [def-weil-derived-pullback-tensor-hom] and [def-weil-pbc-completed-pullback] therefore have the identical strict tower $Q_{h,E}(P)$, including every quotient arrow. This argument does not require the quotient complexes to be K-flat over the completed ring.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: identifying the completed coefficient and finite pullback presentations; Stacks 099N, proetale.tex, lemma-pushforward-Noetherian-case (2),(5)."
+   }
+  },
+  {
+   "text": "Put $H(Q)=\\operatorname{Cone}(1-s_Q)[-1]$. Countable products of $R_{E,U}$-modules are exact by [lem-weil-proetale-countable-products-exact], so [lem-weil-strict-roos-comparison] applies to the common strict tower, not merely to its evaluations in a triangulated category. For a K-injective tower replacement $q:Q\\to I$, write $\\iota_I:\\lim I\\to H(I)$, $z\\mapsto(0,z)$. Define the ambient comparison by\n$$b^{\\mathrm{amb}}_{h,E,P}=[\\iota_I]^{-1}[H(q)]:H(Q)\\xrightarrow{\\sim}\\lim I.$$\nInsert on each side the defining realization identifications from Step 1. This is the requested direction $IF^s_h\\to F^p_hI$ and is the realization comparison of the identity morphism of $Q$. The cited lemma asserts both that these arrows are invertible and that the resulting comparison is natural for morphisms of entire derived towers.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; normalized exact-product Roos comparison refinement."
+   }
+  },
+  {
+   "text": "The K-flat representative comparisons in [lem-pur-integral-operations-well-defined] carry strict quotient maps to strict quotient maps and are compatible with the defining localized functors. Naturality and resolution independence of [lem-weil-strict-roos-comparison] therefore identify the preceding $b$ for every change of $P$, $q$, or common refinement. The uniqueness of descent of natural transformations in [lem-weil-pbc-localization-universal-property] extends these identities from representative maps to all derived morphisms. Hence $b^{\\mathrm{amb}}$ is a natural isomorphism on the ambient categories. Framework pullback preserves the integral constructible category by [lem-pur-integral-operations-preserve-constructible]; the isomorphic PBC object is in the same full category by [lem-weil-pbc-integral-stratified-perfect-characterization]. Restrict $b^{\\mathrm{amb}}$ to obtain $b^{\\mathrm{int}}$.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: independence of representatives and restriction to the common full integral category."
+   }
+  },
+  {
+   "text": "For the ordinary module pullback $G_hP$, let $\\gamma_n:G_hP\\to Q_{h,E}(P)_n$ be the finite quotient augmentation. On an inverse-image unit section it sends $\\gamma_h(p)$ to $\\gamma_h(p\\otimes1)\\otimes1$. Thus it is exactly finite reduction followed by finite inverse-image unit. The quotient transitions give $t_n\\gamma_{n+1}=\\gamma_n$ as chain maps, so\n$$\\Gamma_P:G_hP\\to H(Q),\\qquad x\\mapsto(0,(\\gamma_nx)_n)$$\nis a chain map: the shifted differential term is $-(1-s)(\\gamma_nx)_n=0$. The augmentation clause of [lem-weil-strict-roos-comparison] gives $b^{\\mathrm{amb}}\\Gamma_P=v^p_P$, the canonical derived-limit augmentation. By [def-weil-pbc-completed-pullback] this is its actual completion map, with the ordinary derived-pullback counit inserted. The constant-tower identification is normalized by the universal counit equation of [lem-cbc-derived-constant-tower-normalization]; no arbitrary cone filler is involved. Multiplying this equality by $(b^{\\mathrm{amb}})^{-1}$ gives precisely the ambient localization/counit equation required by [def-fd-finite-pullback-comparison-datum]. Its integral datum is $(b^{\\mathrm{int}})^{-1}$, and its rational datum is the localization of this inverse. The formula for $\\Gamma_P$ supplies the required chain lift and its zero shifted coordinate.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-derived-constant-tower-normalization",
+    "def-fd-finite-pullback-comparison-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: actual unit-section chain map and finite pullback comparison datum."
+   }
+  },
+  {
+   "text": "Choose once the simultaneous realization system asserted by [lem-trf-integral-pullback-comparison-realization]. On each common quotient tower use the natural comparison of Step 2. Its augmentation normalization identifies the constant-tower/derived-limit counit on a K-injective model with $\\Delta\\lim I\\to I$, since both maps are the same compatible limit cone before localization. Consequently its derived-change-of-rings adjunct on whole quotient systems is the same whole-system counit. The substitution statement [lem-trf-counit-realization-substitution] now identifies every iterated framework realization with realization of the corresponding word of system operations, retaining that counit at each intermediate object. All these intermediate objects are constructible and complete by the stated domain assertions of [lem-trf-integral-pullback-comparison-realization]. Naturality of Step 2 is on the entire tower category, so this single family works for all representatives, maps and finite coefficient fields simultaneously.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-counit-realization-substitution",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: simultaneous choices with the fixed whole-diagram realization system."
+   }
+  },
+  {
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], every ideal of $\\mathcal O_E$ is principal, hence finitely generated, so this coefficient ring is Noetherian. Transport the constant-coefficient completed adjunction through [lem-weil-pbc-constant-completion-equivalence], which identifies the finite reduction towers, derived limits and completion units with those for the completed ring sheaf. We verify that the PBC composition normalization is the actual one. By [lem-sp-completed-pullback-adjunction], its adjunction is induced by ordinary pullback/direct image and the completion adjunction, with the indicated hom-set bijections. The conjugation bijection of [def-weil-pbc-adjunction-conjugate] defines its compositor from direct-image composition. Under those hom-set bijections its precomposition with the completion units is ordinary pullback composition: the inserted unit and counit cancel by the adjunction triangle identities. On a representative this ordinary map is the termwise $c_{h,k,n}$ by [lem-weil-pbc-proetale-derived-pullback-composition]. This identifies the PBC map uniquely: for an isomorphism the ordinary inverse image of a complete object is already complete, as witnessed by the invertible specified unit in [lem-weil-isomorphism-derived-pullback-comparison-normalization], and the PBC unit is the same invertible augmentation by Steps 2 and 4. Thus precomposition with that unit is injective on Hom. This argument checks equality of completed maps by an invertible unit, rather than by separate finite evaluations.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sp-completed-pullback-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5); actual completed-adjunction normalization and Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+   }
+  },
+  {
+   "text": "Here is the composition equation explicitly. Suppress the identity $I$ and coefficient index, put $\\kappa^s_h:G_h\\to F^s_h$ for the augmentation of Step 4 and $\\kappa^p_h=b_h\\kappa^s_h$, and let $c^G:G_{kh}\\to G_hG_k$ be ordinary composition. Step 5 and the source normalization give\n$$c^s\\kappa^s_{kh}=(F^s_h\\kappa^s_k)(\\kappa^s_hG_k)c^G.$$\nStep 6 gives the identical formula with $s$ replaced by $p$. Substitute $\\kappa^p=b\\kappa^s$ in the latter formula and use naturality of $b_h$ at $\\kappa^s_k$. Both sides of\n$$c^p b_{kh}=(F^p_h b_k)(b_hF^s_k)c^s$$\nthen have the same composite with $\\kappa^s_{kh}$. This is invertible by [lem-weil-isomorphism-derived-pullback-comparison-normalization], so cancel it. For identity maps the same calculation reads $u^p b_1\\kappa^s_1=u^s\\kappa^s_1$, giving $u^p b_1=u^s$. Reinsert $I$ to obtain exactly the two displayed integral equations. The source $c^s$ used here is the whole-system counit formula fixed by [lem-trf-integral-pullback-comparison-realization].",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: unit and composition equations, with their explicit cancellation argument."
+   }
+  },
+  {
+   "text": "For scalar change write $C_W=-\\otimes^L_{R_{E,W}}R_{L,W}$ for ordinary PBC extension and $S_W$ for framework extension. The coefficient sheaf $R_{L,W}$ is finite free over $R_{E,W}$, and $\\chi_W:C_W\\to S_W$ is the specified quotient/zero-coordinate completion map, by [lem-weil-finite-free-completed-scalar-comparison]. Use the actual strict tower map $d_\\bullet$ in [lem-weil-specified-pullback-comparison-alpha]; it is specified on both cone coordinates and on all quotient transitions, and defines $\\delta^s:C_UF^s_{h,E}\\to F^s_{h,L}C_T$. That lemma gives\n$$\\alpha^s=F^s_{h,L}(\\chi_T)\\,\\delta^s\\,\\chi_{U,F^s_{h,E}}^{-1}.$$\nOn the PBC realization use the derived limit of the same entire $d_\\bullet$, together with tensor/limit comparison, to obtain $\\delta^p:C_UF^p_{h,E}\\to F^p_{h,L}C_T$. This is the specified $\\alpha^p$: the ordinary scalar mate is the balanced tensor map by [lem-sfb-kflat-scalar-comparison-normalization], and [lem-weil-pbc-finite-free-strict-tower-transport] identifies its derived-limit and augmented-tower realizations. These are the canonical integral change-of-rings/completed-pullback comparisons of [prop-weil-pbc-scalar-extension]. This identification retains the completion unit; no level map $d_n$ is asserted to be invertible. The framework scalar comparison $a_h=\\mu_h^{-1}\\lambda_h$ of [lem-trf-integral-pullback-comparison-realization], used in Steps 5 and 11, is this same $\\alpha^s$: $\\lambda_h\\chi_U$ and $\\mu_hF^s_{h,L}(\\chi_T)\\delta^s$ are both the derived maps induced by the strict augmentation of $C_UF^s_{h,E}K$ by its unshifted level-$m$ projection followed by $d_m$, so they agree by the augmentation clause of [lem-weil-strict-roos-comparison].",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-finite-free-strict-tower-transport",
+    "prop-weil-pbc-scalar-extension",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparing the specified framework and actual PBC scalar/pullback maps."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-exact-product-functor-roos-descent] to the exact tensor functor $C_U$; its product and limit comparisons are the canonical ones from [lem-weil-pbc-finite-free-strict-tower-transport]. Its hypotheses on normalized Roos comparisons hold by Step 2, and finite freeness gives the required product preservation. That lemma identifies tensor transport of $\\rho_Q=[\\iota_I]^{-1}[H(q)]$ with the PBC derived-limit transport, with the universal units retained. Naturality of [lem-weil-strict-roos-comparison] for the whole tower morphism $d_\\bullet$ therefore gives\n$$b_{h,L,C_TK}\\,\\delta^s_K=\\delta^p_{IK}\\,C_U(b_{h,E,K}).$$\nThis is an equality of the realized whole-diagram maps with their fixed model identifications. In particular the argument includes the transition maps and the derived-limit counit, not just their images at each finite quotient.",
+   "uses": [
+    "lem-cbc-exact-product-functor-roos-descent",
+    "lem-weil-pbc-finite-free-strict-tower-transport",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: whole-tower naturality under finite-free coefficient transport."
+   }
+  },
+  {
+   "text": "Substitute the formula for $\\alpha^s$ of Step 8 and the equality of Step 9. Naturality of $b_{h,L}$ at $\\chi_T$ gives\n$$F^p_{h,L}(\\chi_T^{-1})\\,b_{h,L,S_TK}\\,\\alpha^s_K\n=b_{h,L,C_TK}\\,\\delta^s_K\\,\\chi_{U,F^s_{h,E}K}^{-1}\n=\\alpha^p_{IK}\\,C_U(b_{h,E,K})\\,\\chi_{U,F^s_{h,E}K}^{-1}.$$\nThis is the integral completion-map equation, in the requested direction. The raw localization of [def-weil-rationalization-karoubi] acts on integral morphisms by $f\\mapsto f\\otimes1$ and preserves composition and inverses. Apply it to this equation and write $j=\\chi^{-1}[1/\\varpi_L]$. Ordinary $C_U$ rationalizes to $P_U$ by [prop-weil-pbc-scalar-extension]; the resulting equation is exactly\n$$F^p_{h,L}(j_T)b_{h,L,S_TK}J_{U,L}(\\alpha^s_K)=\\alpha^p_{J_{T,E}K}P_U(b_{h,E,K})j_{U,F^s_{h,E}K}.$$\nThe inverse of the same localized $b$ is the rational part of the finite datum in Step 4.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: integral mixed square and its raw rationalization."
+   }
+  },
+  {
+   "text": "For an integer shift $r$, the signed cone comparison $H(Q[r])\\to H(Q)[r]$ sends $(y,x)$ to $((-1)^r y,x)$. Its commutation with the cone differential is checked by substituting $d_{Q[r]}=(-1)^r d_Q$. It sends $(0,z)$ to $(0,z)$; hence the defining zigzag for $b$ commutes with shifts, with the canonical exact-functor localization shifts of [lem-weil-pbc-exact-functor-derived-factorization]. Both coordinates of every scalar cone map are given by the same degree-zero $d_\\bullet$, so the same calculation applies to the scalar square. For arbitrary finite words, [lem-trf-quotient-system-mixed-coherence] gives associativity, unit, repeated-field and coefficient-tower equations in entire quotient diagrams. Transport these equations using Step 5 and the normalization checks in Steps 6 and 8. Adjacent model comparisons and their inverses cancel by [lem-trf-counit-realization-substitution]. Thus all the preceding equations are compatible with successive coefficient extensions and any finite scheme composition. The scalar associators are exactly its $\\chi$-conjugated tensor associators; repeated fields use its multiplication/completeness unit. Applying raw localization preserves these equalities. This proves every remaining coherence assertion without a finite Tor-amplitude assumption.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-trf-quotient-system-mixed-coherence",
+    "lem-trf-counit-realization-substitution",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: shifts, repeated fields and arbitrary finite iterations; same whole-diagram normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-cbc-derived-constant-tower-normalization",
+  "def-fd-finite-pullback-comparison-datum",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-counit-realization-substitution",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sp-completed-pullback-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-specified-pullback-comparison-alpha",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "prop-weil-pbc-scalar-extension",
+  "lem-cbc-exact-product-functor-roos-descent",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-quotient-system-mixed-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; explicit normalized strict-tower comparison argument by Q152, supported by Stacks Tags 099N, 0941, 0D6D and the existing cited diagram lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Identity on a strict finite reduction pullback tower gives a natural comparison between the product cone realization and K injective derived inverse limit with completion units scalar extension and composition normalized",
-   "results": "[leanfinder] OK 8 hit(s); IsAdicComplete.StrictMono.of_lift; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.piEquivFin_apply; AdicCompletion.piEquivOfFintype_apply; IsAdicComplete.of_comp_lift; IsAdicComplete.of_lift; AdicCompletion.eval_lift; AdicCompletion.piEquivFin",
+   "results": "8 hits; IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivOfFintype_apply, IsAdicComplete.of_comp_lift, IsAdicComplete.of_lift, AdicCompletion.eval_lift, AdicCompletion.piEquivFin; digest 6a429bf51d8d7b06",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary limit uniqueness and categorical pullback comparisons do not compare these strict derived pullback towers with their normalized counits"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso",
-   "results": "[loogle] OK 12 hit(s); CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso; CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom; CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv; CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom_assoc; CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv_assoc; CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_hom_comp; CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_inv_comp; CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_hom_comp_assoc; CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_inv_comp_assoc; CategoryTheory.Limits.limit.conePointUniqueUpToIso_hom_comp; CategoryTheory.Limits.limit.conePointUniqueUpToIso_inv_comp; CategoryTheory.Limits.limit.conePointUniqueUpToIso_hom_comp_assoc",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary limit uniqueness and categorical pullback comparisons do not compare these strict derived pullback towers with their normalized counits"
+   "verdict": "no match: ordinary limits, underived adic modules and categorical pullback comparisons do not state this normalized derived strict-tower comparison"
   },
   {
    "tool": "grep",
    "query": "Roos|derivedInverseLimit|homotopyLimit|completedPullback",
-   "results": "[grep] OK 0 hit(s); none",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary limit uniqueness and categorical pullback comparisons do not compare these strict derived pullback towers with their normalized counits"
+   "verdict": "no match: ordinary limits, underived adic modules and categorical pullback comparisons do not state this normalized derived strict-tower comparison"
   },
   {
    "tool": "leansearch",
    "query": "Compare completed derived pullbacks via the same strict quotient tower retaining counit composition and coefficient compatibility",
-   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.Limits.pullback.map_comp; CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.instIsIsoPullbackComparison; CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso; CategoryTheory.Over.pullbackComp; CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp; CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst",
+   "results": "8 hits; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.Limits.pullback.map_comp, CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso, CategoryTheory.Over.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst; digest 5bc8c591ebd9ecd0",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary limit uniqueness and categorical pullback comparisons do not compare these strict derived pullback towers with their normalized counits"
+   "verdict": "no match: ordinary limits, underived adic modules and categorical pullback comparisons do not state this normalized derived strict-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso",
+   "results": "12 hits; CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom_assoc, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv_assoc, CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_hom_comp, CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_inv_comp, CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_hom_comp_assoc; digest f6ab68cd1325dc89",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, underived adic modules and categorical pullback comparisons do not state this normalized derived strict-tower comparison"
   },
   {
    "tool": "leanfinder",
    "query": "Product cone realization of completed sheaf pullback agrees naturally with derived inverse limit realization on the whole quotient diagram including scalar and scheme composition coherence",
-   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; CategoryTheory.Sheaf.coneΓ_π_app",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, CategoryTheory.Sheaf.coneΓ_π_app; digest e892c60418fdadf6",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary limit uniqueness and categorical pullback comparisons do not compare these strict derived pullback towers with their normalized counits"
+   "verdict": "no match: ordinary limits, underived adic modules and categorical pullback comparisons do not state this normalized derived strict-tower comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-rational-coefficient-category-comparison",
@@ -77,5 +266,134 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "worker": "stage1",
+  "summary": "Identified both actual completed pullbacks on the same strict quotient tower and constructed their natural comparison by the normalized Roos/K-injective zigzag. Checked the actual completion augmentation and ambient lift, actual PBC adjunction compositor, the specified scalar maps and the mixed equation, and retained whole-diagram counits through shifts and finite iterations. Reused existing lemmas throughout; no new nodes or statement changes.",
+  "blueprint": "def-fd-trace-function final sentence: the normalized integral-pullback comparison needed to interpret local Frobenius in the PBC coefficient category; realizes extracted old steps 7–8 of lem-fd-rational-coefficient-category-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-cbc-derived-constant-tower-normalization",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-trf-counit-realization-substitution",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sp-completed-pullback-adjunction",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-specified-pullback-comparison-alpha",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-strict-tower-transport",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-roos-descent",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-trf-quotient-system-mixed-coherence",
+    "why": "General coefficient, strict-tower realization, derived descent or normalized comparison tool used in the explicit proof; the trace-function unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The valuation ring is a PID, hence Noetherian, as required to apply the actual PBC completed adjunction; the trace-definition unit has no local-field algebra result."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Transport the actual constant-coefficient completed adjunction to completed sheaf coefficients while retaining quotient towers and completion units; the trace-definition unit has no coefficient-presentation equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-cbc-derived-constant-tower-normalization",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-counit-realization-substitution",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-specified-pullback-comparison-alpha",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "prop-weil-pbc-scalar-extension",
+  "lem-cbc-exact-product-functor-roos-descent",
+  "lem-trf-quotient-system-mixed-coherence",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-6641d77ad",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-6641d77ad (reviewer sub-agent of L); spot-checked: FIX: a first split of the Q114 re-split child, with 11 steps and no new nodes. The mathematics is sound, apart from one normalization gap in Step 8, which I repaired. Base checks: the statement, stmt_deps, chapter, unit and blueprint match the live node byte for byte; the item has no repair note of its own and is not on the drop list. proof_deps equals the union of the step uses. The closure walk finds no cycle back to the item or its parent. Every step is under 2000 chars and no SGA source is used. Old parent steps 7–8 are fully covered: steps 1–3 give the tower, the Roos zigzag and representative independence; 4 gives the datum; 5–7 the counit and composition equations; 8–10 the scalar mixed square; 11 shifts and iterations. Sources read: Stacks 099N (2),(5) at proetale.tex l.4336, 0941 at sites-cohomology l.5067, and the 0D6D label. Maths: (1) for an isomorphism h, c_g is an isomorphism and module pullback is exact, so the PBC Lg*_Tow is termwise and both definitions give the same strict tower Q_n. (2) b=[ι_I]^{-1}[H(q)] has the direction I F^s→F^p I, using exact countable products. (4) Γ_P=(0,(γ_n)) is a chain map because t_nγ_{n+1}=γ_n; the Roos augmentation clause gives b Γ_P = the PBC completion map, so (b^int)^{-1} matches the datum's normalization. (6) O_E is a PID, hence Noetherian; the PBC compositor precomposed with the completion unit is ordinary composition, and that unit is invertible for an isomorphism. (7) I re-derived c^p b_{kh}=(F_h b_k)(b_h F_k)c^s from naturality and cancellation of the invertible κ^s_{kh}. (9) Naturality of ρ at d_• gives bδ^s=δ^p C(b). (10) Naturality of b at χ_T, then rationalization with j=χ^{-1}[1/ϖ], gives exactly the item's mixed equation. Edge cases checked: h=id, empty scheme, E=L, ramified ι_m not invertible, odd shifts. FIX: the trf realization lemma's scalar comparison a_h=μ^{-1}λ (used in Steps 5 and 11) and specified-alpha's α=F(χ)δχ^{-1} (used in Steps 8 and 10) were never shown equal. I added a sentence to Step 8: λχ_U and μF(χ_T)δ are both induced by the same strict augmentation (level-m projection, then d_m), so they agree by the strict-roos augmentation clause. That step now also uses lem-trf-integral-pullback-comparison-realization and lem-weil-strict-roos-comparison; both are already proof_deps, so proof_deps is unchanged. Batch 5, accepted for each flagged citation: lem-trf-counit-realization-substitution and lem-trf-quotient-system-mixed-coherence are generic counit/mixed-coherence statements from the Q23 trf re-split. lem-weil-isomorphism-derived-pullback-comparison-normalization is pullback along an isomorphism; its closure has only generic trf/pod helpers. lem-sfb-kflat-scalar-comparison-normalization reaches only lem-trf-geometric-inverse-image-exact (inverse image is exact). All four closures lie inside the closure of the item's base stmt_dep lem-trf-integral-pullback-comparison-realization, which was already accepted as generic. None contains a trace-formula or Poincaré-duality step. The 22 tool_uses are foundational coefficient tools and accepted.; 1 file(s) fixed by the reviewer"
  }
 }
