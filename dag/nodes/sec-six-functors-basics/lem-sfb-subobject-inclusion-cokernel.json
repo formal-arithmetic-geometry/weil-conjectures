@@ -10,9 +10,60 @@
  "stmt_deps": [
   "def-sp-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=\\underline{[f]}$, $V=\\underline{[g]}$, and let $j_f:U\\to M$, $j_g:V\\to M$ be their representative inclusions. By the definition of equality of subobject classes, there are isomorphisms $e_f:U\\xrightarrow{\\sim}A$ and $e_g:V\\xrightarrow{\\sim}B$ such that $j_f=f\\circ e_f$ and $j_g=g\\circ e_g$. Set $p=\\alpha\\circ e_f:U\\xrightarrow{\\sim}A\\prime$ and $q=e_g:V\\xrightarrow{\\sim}B$, with inverses $e_f^{-1}\\circ\\alpha^{-1}$ and $e_g^{-1}$. Write $i=\\iota_h$; its defining equation is $j_g\\circ i=j_f$. The two cokernels used below exist because the category admits cokernels [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+    "place": "Second paragraph, passage from the exact sequence on open-extension objects to the quotient of the corresponding subsheaves of F; representative-change comparison. Unpacking the represented subobjects."
+   }
+  },
+  {
+   "text": "The square with top $i:U\\to V$, left $p:U\\to A\\prime$, right $q:V\\to B$, and bottom $\\phi:A\\prime\\to B$ commutes. Indeed, $g\\circ q\\circ i=j_g\\circ i=j_f=f\\circ e_f=g\\circ\\phi\\circ\\alpha\\circ e_f=g\\circ\\phi\\circ p$. Cancel the monomorphism $g$ to obtain $q\\circ i=\\phi\\circ p$. This computation uses the defining equation for $i$ and hence applies to every proof $h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+    "place": "Second paragraph, passage from the exact sequence on open-extension objects to the quotient of the corresponding subsheaves of F; representative-change comparison. Representative-change commuting square."
+   }
+  },
+  {
+   "text": "This square is a pushout, as follows directly from the colimit universal property [def-weil-pbc-category-colimit] for the finite span $V\\leftarrow U\\to A\\prime$. For an object $T$ and maps $s:V\\to T$, $t:A\\prime\\to T$ satisfying $s\\circ i=t\\circ p$, define $u=s\\circ q^{-1}:B\\to T$. Then $u\\circ q=s$, and the square equation gives $q^{-1}\\circ\\phi=i\\circ p^{-1}$, so $u\\circ\\phi=s\\circ i\\circ p^{-1}=t$. If $u\\prime\\circ q=s$, then $u\\prime=s\\circ q^{-1}=u$. Thus a unique map from $B$ realizes every compatible cocone; the indexing category is finite and hence small.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), applied to a finite span; explicit verification above."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-pushout-cokernel-iso] to the pushout of step 3, substituting $(w,y,x,z)=(U,V,A\\prime,B)$ and $(f,g,h,k)=(i,p,q,\\phi)$ in that node. Its hypotheses hold: the category is abelian, the square commutes by step 2, it is cocartesian by step 3, and both cokernels exist by step 1. It gives an isomorphism $\\theta:\\operatorname{coker}(i)\\xrightarrow{\\sim}\\operatorname{coker}(\\phi)$ characterized by $\\theta\\circ\\pi_i=\\pi_\\phi\\circ q$, which is the required conclusion.",
+   "uses": [
+    "lem-weil-pbc-pushout-cokernel-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 08N3, lemma-cartesian-kernel, part (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-pushout-cokernel-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+  "place": "Second paragraph, passage from the exact sequence on open-extension objects to the quotient of the corresponding subsheaves of F; representative-change comparison. Explicit representative comparison via the pushout universal property and Stacks Tag 08N3(2)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +113,59 @@
    "results": "5 hits: Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean",
    "date": "2026-10-21",
    "verdict": "no match: returned image/coimage or cokernel invariance statements do not identify the inclusion between the two represented subobjects; the existing project declaration is recorded in the report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"Subobject\"",
+   "results": "1 hits: ModuleCat.cokernel_π_imageSubobject_ext",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*[Ii]so|[Ii]so.*cokernel",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cokernel of the inclusion between subobjects represented by monomorphisms f and g with f = g phi alpha for an isomorphism alpha is isomorphic to the cokernel of phi",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.ofIsoComp, CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernelCompIsIso, CategoryTheory.Limits.cokernelIsoOfEq, CategoryTheory.Limits.cokernel.congr, CategoryTheory.Limits.cokernelIsoOfEq_hom_comp_desc_assoc, CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.cokernelIsoOfEq_trans",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.mapIso|def mapIso|cokernelCompIsIso|cokernelEpiComp",
+   "results": "5 hits: 264, 667, 682, 684, 775",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cokernels of isomorphic arrows are isomorphic",
+   "results": "8 hits: CategoryTheory.Limits.cokernelIsoOfEq_hom_comp_desc_assoc, CategoryTheory.Limits.cokernel.congr_inv, CategoryTheory.Limits.cokernelIsoOfEq, CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.CokernelCofork.mapIsoOfIsColimit_hom, CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernelIsoOfEq_inv_comp_desc, CategoryTheory.Limits.π_comp_cokernelIsoOfEq_inv_assoc",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernels of isomorphic morphisms are isomorphic: for a commutative square with isomorphisms on source and target, the induced cokernel map is an isomorphism",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.cokernel.mapIso_inv, CategoryTheory.Limits.cokernelCompIsIso, CategoryTheory.Limits.cokernel.ofIsoComp, CategoryTheory.Limits.cokernelCompIsIso_hom, CategoryTheory.Limits.cokernel.congr, CategoryTheory.Limits.cokernelIsoOfEq",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
+  },
+  {
+   "tool": "grep",
+   "query": "def cokernel.mapIso|def cokernelCompIsIso|def cokernelEpiComp|def underlyingIso|underlyingIso_hom_comp_eq_mk|ofLE_arrow",
+   "results": "18 hits: Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Basic.lean, Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no direct match for the represented-subobject statement; cokernel.mapIso gives the general isomorphic-square comparison, while the existing DAG leaf lem-weil-pbc-pushout-cokernel-iso is reused after the explicit pushout verification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-coefficient-heart-filtration",
@@ -82,5 +182,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-subobject-inclusion-cokernel",
+  "worker": "stage1",
+  "summary": "Expanded the representative-change argument without changing the statement. Chosen representative isomorphisms give a commuting square after cancellation of g; the explicit inverse formula verifies its pushout universal property. The existing Mathlib leaf lem-weil-pbc-pushout-cokernel-iso supplies the cokernel comparison. No new nodes were needed. The instruction against repeating the rejected attachment was followed.",
+  "blueprint": "det-lem-coefficient-heart-filtration, proof second paragraph, passage from the exact sequence on open-extension objects to the cokernel of the inclusion of represented subsheaves: steps 1-2 compare representatives, step 3 constructs the pushout, step 4 identifies cokernels.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-b0a1a83a9",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b0a1a83a9 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged. It is used by its only citer, det-lem-coefficient-heart-filtration, with f=eps_{k-1}, g=eps_k, alpha=1, phi=d_k; the counit identity supplies f=g phi alpha, so it fits. Step-by-step checks: (1) a representative of [f] is isomorphic over M to f, giving e_f and e_g; p=alpha e_f and q=e_g type-check; cokernels exist by def-sp-abelian. (2) g q i = j_g i = j_f = f e_f = g phi p, and cancelling the monomorphism g gives q i = phi p. (3) The pushout is verified directly against def-weil-pbc-category-colimit (Stacks 002F, categories.tex:1310): u=s q^{-1}, u phi = s i p^{-1} = t, uniqueness from u'q=s; the finite span is small. (4) This applies the Mathlib leaf lem-weil-pbc-pushout-cokernel-iso. I checked it against Stacks 08N3(2) (homology.tex:852), including the orientation, with (w,y,x,z)=(U,V,A',B) and (f,g,h,k)=(i,p,q,phi); its theta pi_i = pi_phi q is the conclusion. Edge cases checked: [f]=[g], A=0, g=id. There are no new nodes. My grep of dag/nodes found no duplicate. All cited off-unit nodes are Mathlib leaves, so no tool_uses are needed. There is no SGA citation and no repair note. proof_deps equals the union of the steps' uses, and the blueprint fields are filled. No fixes."
  }
 }
