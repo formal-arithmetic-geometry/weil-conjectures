@@ -124,7 +124,7 @@
   "module": "Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap",
   "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImageCycleMap.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_cycle_map",
-  "statement": "theorem cohomologyImage_cycle_map\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ)\n    (c : ((L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥ :\n      Subobject (K.X n)) : C) ⟶\n      K.cycles n)\n    (hc : c ≫ K.iCycles n =\n      (L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥).arrow) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  let f := c ≫ K.homologyπ n\n  imageSubobject f = (L.cohomologyImage n).step p ∧\n    (Subobject.pullback f).obj ((L.cohomologyImage n).step (p + 1)) =\n      (Subobject.pullback (A ⊓ Z).arrow).obj ((A ⊓ B) ⊔ (A' ⊓ Z))",
+  "statement": "theorem cohomologyImage_cycle_map\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ)\n    (c : ((L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥ :\n      Subobject (K.X n)) : C) ⟶\n      K.cycles n)\n    (hc : c ≫ K.iCycles n =\n      (L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥).arrow) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  let f := c ≫ K.homologyπ n\n  imageSubobject f = (L.homologyFiltration n).step p ∧\n    (Subobject.pullback f).obj ((L.homologyFiltration n).step (p + 1)) =\n      (Subobject.pullback (A ⊓ Z).arrow).obj ((A ⊓ B) ⊔ (A' ⊓ Z))",
   "branch": "sheaf-dag",
   "by": "E4",
   "date": "2026-10-13"
@@ -142,13 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-249dc",
-  "group": "C4",
-  "result": "fix",
-  "landing": "20261021T001111-L-1371181",
+  "reviewer": "C-0b3f9",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261021T005752-L-1890573",
   "kind": "interface",
-  "note": "independent cc review: delivery 249dc11d against clones/live Sheaf FilteredCohomologyImage chain, earlier FIXes at 50015399/3ad505bc and the 3ad505bc landing refusal (change-record status)",
-  "sorry_before": [],
-  "sorry_after": []
+  "note": "independent cc review: removed Sheaf cohomologyImage abbrev vs the homologyFiltration rename in 6 consumers (diff vs clones/live, rename/import only); 4 node lean.statement records vs delivered signatures; lcompile --all 7 modules exit 0; no importers outside the delivered set"
  }
 }

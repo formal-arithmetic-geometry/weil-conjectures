@@ -8,7 +8,7 @@ module
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
-import Sheaf.CategoryTheory.FilteredCohomologyImage
+import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 
@@ -120,28 +120,28 @@ private theorem stationary_model_comparison (M : FilteredPageTwoModel V)
     (hu : U.filtration.complexStep (p + r) (p + q + 1) = ⊥)
     (hl : U.filtration.complexStep (p - r + 1) (p + q - 1) = ⊤) :
     ∃ (e : ((M.S.obj U).page r hr).X (p, q) ≅
-        (U.filtration.cohomologyImage (p + q)).gradedPiece p)
+        (U.filtration.homologyFiltration (p + q)).gradedPiece p)
       (z : (U.filtration.step p : CochainComplex V ℤ).cycles (p + q) ⟶
         ((M.S.obj U).page r hr).X (p, q)), Epi z ∧
       z ≫ e.hom = (U.filtration.step p : CochainComplex V ℤ).homologyπ (p + q) ≫
         factorThruImageSubobject (HomologicalComplex.homologyMap
           (U.filtration.step p).arrow (p + q)) ≫ cokernel.π
-          (Subobject.ofLE ((U.filtration.cohomologyImage (p + q)).step (p + 1))
-            ((U.filtration.cohomologyImage (p + q)).step p)
-            ((U.filtration.cohomologyImage (p + q)).antitone_step (by omega))) ∧
+          (Subobject.ofLE ((U.filtration.homologyFiltration (p + q)).step (p + 1))
+            ((U.filtration.homologyFiltration (p + q)).step p)
+            ((U.filtration.homologyFiltration (p + q)).antitone_step (by omega))) ∧
       z ≫ (M.pageIso U p q r hr).hom ≫
           image.ι (HomologicalComplex.homologyMap (M.φ U p r hr) (p + q)) =
         HomologicalComplex.cyclesMap (U.filtration.complexQuotientπ p (p + r)
           (by omega)) (p + q) ≫
           (U.filtration.complexQuotient p (p + r) (by omega)).homologyπ (p + q) ≫
             HomologicalComplex.homologyMap (M.φ U p r hr) (p + q) := by
-  let F := U.filtration.cohomologyImage (p + q)
+  let F := U.filtration.homologyFiltration (p + q)
   let a := fun i ↦ factorThruImageSubobject
     (HomologicalComplex.homologyMap (U.filtration.step i).arrow (p + q))
   have ha (i : ℤ) : a i ≫ (F.step i).arrow =
       HomologicalComplex.homologyMap (U.filtration.step i).arrow (p + q) ≫
         (Iso.refl _).hom := by
-    dsimp only [a, F, DecreasingFiltration.cohomologyImage]
+    dsimp only [a, F, DecreasingFiltration.homologyFiltration]
     simp only [Iso.refl_hom, Category.comp_id]
     exact imageSubobject_arrow_comp _
   have hepi (i : ℤ) : Epi (a i) := by dsimp [a]; infer_instance
@@ -210,8 +210,8 @@ private theorem finite_degree_bounds (U : FilteredObject (CochainComplex V ℤ))
 
 private noncomputable def cohomologyFilteredMap
     {U W : FilteredObject (CochainComplex V ℤ)} (f : U ⟶ W) (n : ℤ) :
-    (⟨U.obj.homology n, U.filtration.cohomologyImage n⟩ : FilteredObject V) ⟶
-      (⟨W.obj.homology n, W.filtration.cohomologyImage n⟩ : FilteredObject V) where
+    (⟨U.obj.homology n, U.filtration.homologyFiltration n⟩ : FilteredObject V) ⟶
+      (⟨W.obj.homology n, W.filtration.homologyFiltration n⟩ : FilteredObject V) where
   hom := HomologicalComplex.homologyMap f.hom n
   preserves p := by
     obtain ⟨s, hs⟩ := f.preserves p
@@ -234,10 +234,10 @@ private theorem cohomology_restriction_naturality
       HomologicalComplex.homologyMap s n ≫
         factorThruImageSubobject (HomologicalComplex.homologyMap
           (W.filtration.step p).arrow n) := by
-  apply (cancel_mono ((W.filtration.cohomologyImage n).step p).arrow).1
+  apply (cancel_mono ((W.filtration.homologyFiltration n).step p).arrow).1
   rw [Category.assoc, show FilteredObject.restrictionSteps (cohomologyFilteredMap f n) p ≫
-      ((W.filtration.cohomologyImage n).step p).arrow =
-      ((U.filtration.cohomologyImage n).step p).arrow ≫
+      ((W.filtration.homologyFiltration n).step p).arrow =
+      ((U.filtration.homologyFiltration n).step p).arrow ≫
         HomologicalComplex.homologyMap f.hom n from
       Classical.choose_spec ((cohomologyFilteredMap f n).preserves p)]
   change factorThruImageSubobject
@@ -286,8 +286,8 @@ theorem filteredPageTwoModel_comparison (M : FilteredPageTwoModel V)
   obtain ⟨loU, hiU, hbU⟩ := finite_degree_bounds U hU
   obtain ⟨loW, hiW, hbW⟩ := finite_degree_bounds W hW
   intro n
-  let F : FilteredObject V := ⟨U.obj.homology n, U.filtration.cohomologyImage n⟩
-  let G : FilteredObject V := ⟨W.obj.homology n, W.filtration.cohomologyImage n⟩
+  let F : FilteredObject V := ⟨U.obj.homology n, U.filtration.homologyFiltration n⟩
+  let G : FilteredObject V := ⟨W.obj.homology n, W.filtration.homologyFiltration n⟩
   let t := cohomologyFilteredMap f n
   have hF : F.filtration.IsFinite := U.filtration.cohomologyImage_isFinite
     (fun i ↦ ⟨loU, hiU, hbU i⟩) n
@@ -343,8 +343,8 @@ theorem filteredPageTwoModel_comparison (M : FilteredPageTwoModel V)
       HomologicalComplex.homologyπ_naturality, Category.assoc]
   have hat := cohomology_restriction_naturality f (p + q) p (s p) (hs p)
   have hgraded := Classical.choose_spec (FilteredObject.exists_gradedMap_steps
-    (⟨U.obj.homology (p + q), U.filtration.cohomologyImage (p + q)⟩ : FilteredObject V)
-    (⟨W.obj.homology (p + q), W.filtration.cohomologyImage (p + q)⟩ : FilteredObject V)
+    (⟨U.obj.homology (p + q), U.filtration.homologyFiltration (p + q)⟩ : FilteredObject V)
+    (⟨W.obj.homology (p + q), W.filtration.homologyFiltration (p + q)⟩ : FilteredObject V)
     (cohomologyFilteredMap f (p + q)) p)
   change cokernel.π _ ≫ FilteredObject.gradedMapSteps
     (cohomologyFilteredMap f (p + q)) p = _ at hgraded

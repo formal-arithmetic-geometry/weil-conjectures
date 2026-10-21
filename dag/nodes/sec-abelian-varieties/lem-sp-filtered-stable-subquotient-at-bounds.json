@@ -108,7 +108,7 @@
   "module": "Sheaf.CategoryTheory.FilteredStableSubquotient",
   "file": "lean/Sheaf/CategoryTheory/FilteredStableSubquotient.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.stableSubquotient_at_bounds",
-  "statement": "theorem stableSubquotient_at_bounds\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K)\n    (p n r : ℤ) (hr : 1 ≤ r)\n    (hupper : L.complexStep (p + r) (n + 1) = ⊥)\n    (hlower : L.complexStep (p - r + 1) (n - 1) = ⊤)\n    (hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r) :\n    Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅\n      (L.cohomologyImage n).gradedPiece p)",
+  "statement": "theorem stableSubquotient_at_bounds\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K)\n    (p n r : ℤ) (hr : 1 ≤ r)\n    (hupper : L.complexStep (p + r) (n + 1) = ⊥)\n    (hlower : L.complexStep (p - r + 1) (n - 1) = ⊤)\n    (hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r) :\n    Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅\n      (L.homologyFiltration n).gradedPiece p)",
   "branch": "sheaf-dag",
   "by": "P1",
   "date": "2026-10-12"
@@ -126,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-249dc",
-  "group": "C4",
-  "result": "fix",
-  "landing": "20261021T001111-L-1371181",
+  "reviewer": "C-0b3f9",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261021T005752-L-1890573",
   "kind": "interface",
-  "note": "independent cc review: delivery 249dc11d against clones/live Sheaf FilteredCohomologyImage chain, earlier FIXes at 50015399/3ad505bc and the 3ad505bc landing refusal (change-record status)"
+  "note": "independent cc review: removed Sheaf cohomologyImage abbrev vs the homologyFiltration rename in 6 consumers (diff vs clones/live, rename/import only); 4 node lean.statement records vs delivered signatures; lcompile --all 7 modules exit 0; no importers outside the delivered set"
  }
 }

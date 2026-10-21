@@ -18,7 +18,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 import all Sheaf.CategoryTheory.SecondFiltrationTwoColumnImage
 import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
-import Sheaf.CategoryTheory.FilteredCohomologyImage
+import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
@@ -1033,10 +1033,10 @@ private theorem comparison_page_two
 private theorem cohomology_image_preserves
     {C : Type uCT} [Category.{vCT} C] [Abelian C]
     {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (p n : ℤ) :
-    ∃ a : ((U.filtration.cohomologyImage n).step p : C) ⟶
-        ((V.filtration.cohomologyImage n).step p : C),
-      a ≫ ((V.filtration.cohomologyImage n).step p).arrow =
-        ((U.filtration.cohomologyImage n).step p).arrow ≫
+    ∃ a : ((U.filtration.homologyFiltration n).step p : C) ⟶
+        ((V.filtration.homologyFiltration n).step p : C),
+      a ≫ ((V.filtration.homologyFiltration n).step p).arrow =
+        ((U.filtration.homologyFiltration n).step p).arrow ≫
           HomologicalComplex.homologyMap t.hom n := by
   obtain ⟨s, hs⟩ := t.preserves p
   let a := HomologicalComplex.homologyMap (U.filtration.step p).arrow n
@@ -1219,7 +1219,7 @@ theorem cartanEilenberg_comparison_independence
     exact (independent P R c' (comparison_comp c d) v (t ≫ u) hc hv htu).trans
       (M.S.map_comp t u)
   · let HF := fun (P : CartanEilenbergPresentation F) (n : ℤ) ↦
-      (L P).cohomologyImage n
+      (L P).homologyFiltration n
     let m := fun (P Q : CartanEilenbergPresentation F) (c : P.Comparison Q) (n : ℤ) ↦
       HomologicalComplex.homologyMap
         (HomologicalComplex₂.total.map
