@@ -220,5 +220,34 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-fae7b12a3 (reviewer sub-agent of L); spot-checked: PASS. I read the item, its report and every cited node's statement in full; the delivery creates no new nodes. Statement and stmt_deps are byte-identical to the item as created by Q43's re-split (PASS d7de9670); all 5 inherited search records are kept and 5 new ones added. Live and side-live still hold the item unsplit, there is no repair note, and neither the item nor any cited node is in route-pivot-dropped. No SGA is cited. Step 1: the forgetful node's clause (1) gives exactness, then abelian epi = locally surjective = set-sheaf epi, then the evaluation hypothesis. The site is V-small, so sheafification exists. Step 2: id_U is terminal, so Hom(C^r,F)=F(U)^r and C^r is projective. Step 3: θ_q lifts along the epi from cycles onto H^q, and v is a quasi-iso without any boundedness of Z. Step 4: the Hom-complex form of K-projectivity in degree 0 is the null-homotopy form; Stacks 064B (derived.tex:6822) needs no enough projectives, and the Mathlib lemmas isKProjective_of_projective (KProjective.lean:111-124) and Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) were read. Step 5: C^r[-q] sits in degree q, the only homotopy component is h^q, and step 1 gives H^q(E)(U)=ker(d^q)(U)/d(E^{q-1}(U)); the description f ↦ H^q(f)(e_j) gives representative independence and naturality. Step 6: uniqueness of the top inclusion follows from step 5. Edge cases checked: r=0, a=b, all ranks 0 (acyclic N), U empty, one-point site. Tags 09C3, 064B, 03DA, 03CN and 00WN confirmed in Stacks. No duplicate: lem-wf-bounded-free-complex-projective-cohomology-splitting is over an ordinary ring, and det-pe-wc-sections-exact needs a w-contractible affine. Accepted tool use: lem-weil-pbc-module-sheaves-colimits-forgetful (generic exactness of forgetting the module structure; the unit cites no units). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectiveCohomologySplitModel",
+  "declaration": "WeilConjectures.sf_projective_cohomology_split_model",
+  "declarations": [
+   "WeilConjectures.sfSplitRings",
+   "WeilConjectures.sfSplitComplex",
+   "WeilConjectures.sfSplitCell",
+   "WeilConjectures.sfFreeCohomologyMap",
+   "WeilConjectures.sfShiftedFreeGeneratorMap",
+   "WeilConjectures.sf_projective_cohomology_split_model",
+   "WeilConjectures.sf_shifted_free_generator_bijective_natural",
+   "WeilConjectures.sf_bounded_above_projective_chain_representatives"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectiveCohomologySplitModel.lean",
+  "statement": "theorem sf_projective_cohomology_split_model (hEval : ∀ (F G : Sheaf (Scheme.ProEt.topology U) (Type (max (u + 1) v))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (Scheme.ProEt.mk (𝟙 U))))) (N : DerivedCategory (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C))) (a b : ℤ) (hab : a ≤ b) (r : ℤ → ℕ) (hN : ∀ q : ℤ, ¬ (a ≤ q ∧ q ≤ b) → IsZero ((DerivedCategory.homologyFunctor _ q).obj N)) (theta : ∀ (q : ℤ) (_hq : a ≤ q ∧ q ≤ b), SheafOfModules.free (R := sfSplitRings.{u, v} C) (ULift.{max (u + 1) v} (Fin (r q))) ≅ (DerivedCategory.homologyFunctor _ q).obj N) (Z : CochainComplex (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) ℤ) (e : DerivedCategory.Q.obj Z ≅ N) : ∃ v : sfSplitComplex C a b r ⟶ Z, QuasiIso v ∧ (∀ (q : ℤ) (hq : a ≤ q ∧ q ≤ b), sfFreeCohomologyMap C q (r q) (DerivedCategory.Q.map (sfSplitCell C a b r q hq ≫ v) ≫ e.hom) = (theta q hq).hom) ∧ (∀ f : DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) b).obj (SheafOfModules.free (R := sfSplitRings.{u, v} C) (ULift.{max (u + 1) v} (Fin (r b))))) ⟶ N, sfFreeCohomologyMap C b (r b) f = (theta b ⟨hab, le_refl b⟩).hom → f = DerivedCategory.Q.map (sfSplitCell C a b r b ⟨hab, le_refl b⟩ ≫ v) ≫ e.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The three theorem declarations state respectively the prescribed-cohomology splitting with the top-cell identification, the natural generator-section bijection, and chain representatives modulo Homotopy. The definitions are the concrete model and canonical maps belonging to these clauses. Independent coefficient and site universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b71c3b7e",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Re-delivery of H13-RETURNed eb5d4689: the def-weil-derived-cohomology-sheaves record is now byte-identical to side-live (now Q20's existing:true homologyFunctor), so no dependency is rebound. Item module byte-identical to the returned one (sha f3371a93); item node equals live except the added lean record. Independent clause-by-clause reading: hEval, Mod(C)/D(Mod(C)) with independent universes, hN, theta isomorphisms, split complex with zero differentials, exists v with QuasiIso v and exact theta via canonical singleObjHomologySelfIso/homologyFunctorFactors, generator-section bijection plus naturality for every derived arrow, bounded-above projective chain representatives mod Homotopy, top-cell uniqueness with the same v: all match the node and are true (U terminal gives projective C^r, then K-projective, then Hom = H^q(A)(U)^r). Edge cases a=b, zero ranks, empty scheme, zero ring, universes all covered. lean.statement verbatim; 8 declarations present; canonical, non-hollow defs; sorry only; docstrings with source and blueprint; imports exist; not in dropped list. No compile (no file changed). No findings."
  }
 }

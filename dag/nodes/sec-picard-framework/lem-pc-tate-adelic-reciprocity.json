@@ -205,5 +205,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-26e2ce539 (reviewer sub-agent of L); spot-checked: I read Tate 1968 pp.149-157 (§1 T1-T5; §2 Thm 1, (*) p.152, R1, R2, R5 p.153; §3 Thm 3 proof pp.155-156). The item's statement is unchanged against side-live. The live item is still unsplit, there is no repair note and no prior run. The 8 steps are Tate's Thm 3 proof with uncompleted K coordinates, which is valid because R1, R2 and R5 are abstract. Step-by-step: (1) V is a K-module and Δ is injective for I nonempty; (2) (fA+A)/A injects into the finite sum over i in S_f of (fO_i+O_i)/O_i, using the dvr node's quotient clause, and B=ΔK is a submodule; (3) A∩B=Δ(∩O_i) and V/(A+B)≅coker P, since q is onto with kernel A and qΔ=P; (4) R5 plus the vanishing clauses give res_{V,A}=0; (5) the dvr node's annihilation clause gives support in S; (6) the decomposition V=V_T⊕⊕W_i, R5 applied S times with res_0=0, and the ambient-restriction and isomorphism clauses; (7) R2 on C_T, and the local residue equals res_{K,O_i} because both are Tr_fp([π m_f,m_g]) for the same projection; (8) finite symbol sums and k-linearity. All hypotheses checked; the edge cases I=∅, S=∅ and T=∅ are covered. New nodes: abstract-residue-calculus (Thm 1 with (*), R1, R2) is true and was tested on A=0, A=V and finite-dimensional A. The lattice identity is exactly R5, which is non-elementary because Tr_fp is not known to be additive, and was tested on A=B, A=0, B=V and A⊂B. Both are statement-only, have 3 kinds of searches and correct blueprint.from, with no duplicates found by rg -L over dag/nodes or the blueprint. Neither restates a clause of the item or the parent, and there is no cycle. All citations are in the same unit; the Kähler definition is a Mathlib leaf; no tool_uses. Maintainer notes: the main project's Lean has TateResidue.residue_theorem (ResidueTheorem.lean:348, with an extra admissibility hypothesis) and res_sup_add_res_inf, which may close these nodes later. Slopmaster2 has no such module, so B10 does not apply, and the earlier attachment was rejected upstream. The existing dvr node restates the abstract construction for (K,O), so a later split of it can cite the new abstract node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateResidue.AdelicReciprocity",
+  "declaration": "TateResidue.adelic_reciprocity",
+  "file": "lean/Sheaf/RingTheory/TateResidue/AdelicReciprocity.lean",
+  "statement": "theorem adelic_reciprocity (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (I : Type w) (O : I → Subalgebra k K) [∀ i : I, IsDiscreteValuationRing (O i)] [∀ i : I, IsFractionRing (O i) K] [∀ i : I, FiniteDimensional k (IsLocalRing.ResidueField (O i))] (hfin : ∀ f : K, {i : I | f ∉ O i}.Finite) (hH0 : FiniteDimensional k (⨅ i : I, O i : Subalgebra k K)) (hH1 : FiniteDimensional k ((Π₀ i : I, K ⧸ (O i).toSubmodule) ⧸ LinearMap.range (principalParts O hfin))) (ξ : KaehlerDifferential k K) : (Function.support fun i : I ↦ localRes (O i) ξ).Finite ∧ ∑ᶠ i : I, localRes (O i) ξ = 0",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b04e16de",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean; lean.statement matches the file exactly. All hypotheses match the node: Field k/K, I : Type w unrestricted, O : I → Subalgebra k K with DVR, IsFractionRing and finite-residue instances (same encoding as the dvr dep), hfin for every f, hH0 = finite-dim ⨅ O_i, hH1 = finite-dim quotient of Π₀ K⧸O_i by the range of the canonical upstream principalParts (principalParts_apply gives f mod O_i). Both conclusions match: finite support and ∑ᶠ localRes = 0, where localRes is the map the dvr dep ties to tateTrace[πm_f,m_g]. No admissibility, separability or nonemptiness added. Upstream residue_theorem needs an extra hadm, so existing:false is correct. Edge cases I=∅, ξ=0, char p, inseparable κ and universes checked. Docstrings give source, blueprint id and 8 steps; sorry only; imports needed; no SGA or pro-étale substitute. No file changed, no compile run (worker reports clean compiles). Advisory: stage 3 can use residue_theorem with admissibility from dvr_residue_calculus clause 1."
  }
 }

@@ -18,7 +18,12 @@
   "def-weil-derived-limit",
   "def-pc-sheaf-restrict-scalars",
   "lem-pur-derived-change-of-rings",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete",
+  "def-sf-completed-integral-scalar-action",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof": [
   {
@@ -269,5 +274,34 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-256dc309f (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md is written. The delivery is one commit with 0 new nodes, and the item statement and stmt_deps are identical to side-live. The item is still unsplit in live and side-live, is not in the dropped list and has no repair note. Mechanical checks: proof_deps equals the union of the step uses, no cited id is missing or merged, there is no cycle (1028-node closure checked) and no SGA source is cited. Step 1: the DVR node (PID, so Noetherian; ϖ≠0) and clause (1) of the constant-module section lemma give the exact uniformizer sequence and epimorphic transitions; Stacks 093J states presheaf exactness on any site. Step 2: the completed-constant reduction lemma applies with A=R and I=(ϖ), and its B is literally B_T; flatness gives the exact sequence 0→B→B→R_n→0 with third arrow q_n. Step 3: the item's bounded complexes have flat terms, so they are K-flat; this is 06YQ, and the report's note that the cited node's tag is wrongly given as 06YS is correct. Step 4: the surjective-tower lemma for the ring sheaf B_T gives a Roos triangle with the actual projections. The shift by [-d] is handled up to a sign flip on δ, which the derived-limit definition allows, and r=0 is included. Step 5: the item uses the K-flat factor clause of the total-tensor node, which allows arbitrary endpoints; this is needed because R_n is not K-flat. Step 6: Cone(ϖ^n: B[0]→B[0]) equals P_n under the cone convention, and the inclusion-compatible tensor-cone iso makes the middle arrow exactly x↦x⊗1. Small cases checked: n=1, r=0, empty T, and M=R_1 (H^{-1} consistent). The 9 off-unit tool_uses are generic tools (the unit has uses []) and are accepted. Nearby candidates lem-coef-normalized-dvr-adic-cone-model and lem-coef-tower-coaugmentation are not duplicates."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompletedCoefficientFreeResolution",
+  "declaration": "WeilConjectures.CompletedCoefficientFree.completed_coefficient_free_resolution",
+  "declarations": [
+   "WeilConjectures.CompletedCoefficientFree.freeUnitComplex",
+   "WeilConjectures.CompletedCoefficientFree.uniformizerPower",
+   "WeilConjectures.CompletedCoefficientFree.quotientResolution",
+   "WeilConjectures.CompletedCoefficientFree.residueModule",
+   "WeilConjectures.CompletedCoefficientFree.quotientProjection",
+   "WeilConjectures.CompletedCoefficientFree.freeCell",
+   "WeilConjectures.CompletedCoefficientFree.reductionMap",
+   "WeilConjectures.CompletedCoefficientFree.completed_coefficient_free_resolution"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CompletedCoefficientFreeResolution.lean",
+  "statement": "theorem completed_coefficient_free_resolution : (∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E T) (quotientResolution l E T n) ∧ ∃ ε : quotientResolution l E T n ⟶ (CochainComplex.singleFunctor _ 0).obj (residueModule l E T n), QuasiIso ε ∧ CochainComplex.mappingCone.inr (uniformizerPower l E T n) ≫ ε = (CochainComplex.singleFunctor _ 0).map (quotientProjection l E T n)) ∧ (∀ (r : ℕ) (d : ℤ), IntegralOnSlice.IsComplete l E T none (DerivedCategory.Q.obj (freeCell l E T r d))) ∧ ∀ (n : ℕ) (M : DerivedCategory (scalarReductionSource l E T)), ∃ δ : (scalarReductionDerivedRestriction l E T n).obj ((scalarReductionDerivedExtension l E T n).obj M) ⟶ M⟦(1 : ℤ)⟧, Triangle.mk ((integralScalarDerivedAction l E T (Padic.coefficientExtensionUniformizer l E ^ (n + 1))).app M) (reductionMap l E T n M) δ ∈ distTriang _",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Positive exponents are indexed by n+1. Uses the actual published completion with independent scheme/coefficient universes, the normalized scalar action and derived-reduction adjunction, and the recorded global branch of quotient-tower completeness. The augmentation is specified by its restriction to the degree-zero cone inclusion, which determines the map to the degree-zero residue complex uniquely."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ef5b84f8",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery of 5c777a52 (RETURN H2). Lean module byte-identical; only change: item stmt_dep lem-weil-integral-scalar-extension-well-defined -> new def node def-sf-completed-integral-scalar-action (existing:true on unchanged Sheaf.Paper.IntegralScalarExtensionWellDefined, declarations integralScalarFiniteConstant/Constant_existsUnique/Constant/ChainAction_existsUnique/ChainAction/DerivedAction). Node statement matches Lean: c_a unique by finite residues, sectionwise c_a·x chain action unique, derived action = localization preimage; real data, independent universes t,u, no extra hypotheses; statement verbatim except leading noncomputable (ignored by the reader); same ownership pattern as def-weil-pbc-integer-quotient-inclusions. Mechanical finding on lem-weil-derived-scalar-extension-restriction-adjunction: PASS on this point, reductionMap = .choose.unit of the theorem's normalized adjunction (genuine constructed object, pinned on K-flat representatives). Item maths rechecked: cone in degrees -1,0, unique augmentation via inr with actual q_n, QuasiIso + K-flat, free cells all r (incl. 0) and all d complete via canonical Roos triangle, triangle for all unbounded M, n+1 indexing. Item still split/unstated in side-live, no repair note, not dropped. No compile (no file changed). Advisories: new node could also cite def-weil-integral-reduction-tower; scalarReductionDerivedExtension is also owned by def-weil-integral-derived-reduction."
  }
 }

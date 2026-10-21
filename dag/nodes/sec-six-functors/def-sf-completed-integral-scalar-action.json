@@ -1,0 +1,115 @@
+{
+ "id": "def-sf-completed-integral-scalar-action",
+ "kind": "definition",
+ "title": "Canonical integral scalar action on completed-coefficient complexes",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $R=\\mathcal O_E$ and chosen uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a scheme and use its small pro-etale site [def-weil-pbc-proetale-site]. Write $B_T=\\varprojlim_{n\\geq1}(R/\\varpi^n)_T$ for the completed constant coefficient ring sheaf with its actual quotient projections $q_n$ and canonical constant-to-completed map [def-weil-completed-integral-coefficients]. Put $\\mathcal A=\\operatorname{Mod}(B_T)$ [def-weil-sheaf-of-modules-category] and let $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ be localization at quasi-isomorphisms [def-weil-abstract-derived-category]. For $a\\in R$ and a site object $U$, let $c_a(U)\\in B_T(U)$ be the image of the constant section $a$ under the canonical constant-to-completed map, equivalently the unique section whose $q_n$-image is the constant section $a\\bmod\\varpi^n$ for every $n\\geq1$. Define the natural chain endomorphism $\\sigma_a$ of the identity on $\\mathrm{CoCh}(\\mathcal A)$ by $(\\sigma_a(P)^i)_U(x)=c_a(U)x$. Define its derived action $\\overline\\sigma_a$ to be the unique natural endomorphism of the identity on $D(\\mathcal A)$ whose whiskering along $Q$ is $Q(\\sigma_a)$, obtained through the fully faithful whiskering functor of localization.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, scalar multiplication by the uniformizer on completed coefficients and the top-generator triangle; canonical constant-section action used also in Bhatt--Scholze, Proposition 6.8.14(1)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical constant scalar multiplication on complexes of module sheaves over completed integral coefficients and its descent to the derived category",
+   "results": "8 hits: ModuleCat.smulShortComplex; PresheafOfModules.Sheafify.smul_zero; PresheafOfModules.Sheafify.smul; PresheafOfModules.Sheafify.SMulCandidate.ctorIdx; PresheafOfModules.Sheafify.SMulCandidate.mk; HomologicalComplex.hasIntScalar; PresheafOfModules.Sheafify.SMulCandidate; CategoryTheory.sheafHomHasZSMul.",
+   "date": "2026-10-21",
+   "verdict": "No specialized completed-integral scalar action; use the already published project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar action on complexes over a completed constant integral ring sheaf characterized by finite quotient residues and descended through localization",
+   "results": "8 hits: ModuleCat.Tilde.sections_smul_localizations_def; ModuleCat.Tilde.smul_section_apply; PresheafOfModules.Sheafify.smulCandidate; PresheafOfModules.Sheafify.SMulCandidate.x; PresheafOfModules.Sheafify.SMulCandidate; PresheafOfModules.Sheafify.smul; PresheafOfModules.Sheafify.instNonemptySMulCandidate; ModuleCat.Tilde.instIsScalarTowerCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop.",
+   "date": "2026-10-21",
+   "verdict": "No match for this specialized completed-coefficient construction."
+  },
+  {
+   "tool": "grep",
+   "query": "integralScalarChainAction|integralScalarDerivedAction|completed.*scalar (Mathlib/CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralScalarChainAction|integralScalarDerivedAction|constant-section scalar in dag/nodes, lean/Sheaf, lean/WeilConjectures; tools/blueprint_refs.py search integral scalar",
+   "results": "Sheaf.Paper.IntegralScalarExtensionWellDefined defines integralScalarChainAction_existsUnique, integralScalarChainAction, integralScalarDerivedAction and their constant-section helpers. No WeilConjectures source match. DAG matches are theorem records and consumers, with no definition node owning this notion. Blueprint search returned five unrelated Tate, Frobenius, rationalization and coefficient-extension nodes.",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions: attach them to this new definition node without duplicating Lean data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-completed-coefficient-free-resolution",
+  "date": "2026-10-21",
+  "group": "Q36"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Free quotient resolutions and complete free cells over completed coefficients; old parent steps 1 and the quotient-resolution part of 5. Canonical constant-section scalar action used for the uniformizer maps.",
+   "via": [
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralScalarExtensionWellDefined",
+  "declaration": "WeilConjectures.integralScalarDerivedAction",
+  "declarations": [
+   "WeilConjectures.integralScalarFiniteConstant",
+   "WeilConjectures.integralScalarConstant_existsUnique",
+   "WeilConjectures.integralScalarConstant",
+   "WeilConjectures.integralScalarChainAction_existsUnique",
+   "WeilConjectures.integralScalarChainAction",
+   "WeilConjectures.integralScalarDerivedAction"
+  ],
+  "statement": "noncomputable def integralScalarDerivedAction (a : Padic.coefficientExtensionIntegers l E) :\n    𝟭 (DerivedCategory (integralTowerModules l E Y)) ⟶\n      𝟭 (DerivedCategory (integralTowerModules l E Y))",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Returned-delivery H2 repair: owns the existing canonical constant-section scalar constructions and their uniqueness characterizations. The chain action is chosen from an existsUnique theorem, and the derived action is its explicit localization preimage; no scalar-extension well-definedness theorem is used to define either action. Independent coefficient/site universes and arbitrary schemes are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ef5b84f8",
+  "group": "Q36",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ef5b84f8",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery of 5c777a52 (RETURN H2). Lean module byte-identical; only change: item stmt_dep lem-weil-integral-scalar-extension-well-defined -> new def node def-sf-completed-integral-scalar-action (existing:true on unchanged Sheaf.Paper.IntegralScalarExtensionWellDefined, declarations integralScalarFiniteConstant/Constant_existsUnique/Constant/ChainAction_existsUnique/ChainAction/DerivedAction). Node statement matches Lean: c_a unique by finite residues, sectionwise c_a·x chain action unique, derived action = localization preimage; real data, independent universes t,u, no extra hypotheses; statement verbatim except leading noncomputable (ignored by the reader); same ownership pattern as def-weil-pbc-integer-quotient-inclusions. Mechanical finding on lem-weil-derived-scalar-extension-restriction-adjunction: PASS on this point, reductionMap = .choose.unit of the theorem's normalized adjunction (genuine constructed object, pinned on K-flat representatives). Item maths rechecked: cone in degrees -1,0, unique augmentation via inr with actual q_n, QuasiIso + K-flat, free cells all r (incl. 0) and all d complete via canonical Roos triangle, triangle for all unbounded M, n+1 indexing. Item still split/unstated in side-live, no repair note, not dropped. No compile (no file changed). Advisories: new node could also cite def-weil-integral-reduction-tower; scalarReductionDerivedExtension is also owned by def-weil-integral-derived-reduction."
+ }
+}

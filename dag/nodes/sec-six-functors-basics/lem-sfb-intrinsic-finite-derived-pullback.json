@@ -341,5 +341,31 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-0174fbb8e (reviewer sub-agent of L); spot-checked: I read the whole split. The statement is unchanged against live and nothing is weakened. There are no new nodes, no repair note, and no dropped item or citation (checked against side-live route-pivot-dropped). Live still shows the item unsplit, there is no cycle (closure of 293 nodes), and no SGA is cited. Step 1: c_A^h is an iso (lem-pur-proetale-constant-coefficient-comparison) and the tensor pullback is identified with the exact f*_Λ of lem-pe-constant-left-module-inverse-image via n⊗a↦an. Step 2: the H^r(FK)≅F(H^rK) clause of exact-functor-bounded-below covers all of unbounded D. Step 3: the base-change stratification lemma plus Stacks 054I (morphisms.tex l.4340, any morphism, no qc hypothesis); the empty-S, N≥1 case is handled. Step 4: the composition iso is applied to the literal equality h∘i'_a=i_a∘h_a. Steps 5–6: weakly étale and fpqc base change give the cover; localize-ringed-site-morphism, weakly-etale-localization and geometric-inverse-image-constant-module give the same models M_{a,b}. Step 7: the abelian stalk iso is A-linear by naturality on the scalar endomorphisms, and the stalks are finite. Step 8 is elementary and keeps the interval. Against BS 6.5.9(5), which is qcqs with completion trivial at m=0, the arbitrary-scheme extension is agent-marked and uses no qcqs hypothesis. Not duplicates: lem-weil-pbc-pullback-preserves-bounded-constructible (étale-origin, P_n), lem-sfb-pullback-constant-model-constructible (qcqs, condensed coefficients) and lem-weil-pbc-finite-pullback-constructibility (Noetherian). lem-pur-proetale-finite-local-constancy-pullback covers the stratum-level conclusion, but the item needs the specific same-model cover, so the inline steps 5–6 are justified (note for the maintainer). All 14 tool_uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntrinsicFiniteDerivedPullback",
+  "declaration": "AlgebraicGeometry.Scheme.intrinsicFiniteDerivedPullback_bounded_constructible",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.intrinsicFiniteModulePullback_exact",
+   "AlgebraicGeometry.Scheme.intrinsicFiniteModulePullback_derived",
+   "AlgebraicGeometry.Scheme.intrinsicFiniteModulePullback_stratification",
+   "AlgebraicGeometry.Scheme.intrinsicFiniteModulePullback_constructible",
+   "AlgebraicGeometry.Scheme.intrinsicFiniteDerivedPullback_bounded_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/IntrinsicFiniteDerivedPullback.lean",
+  "statement": "theorem intrinsicFiniteDerivedPullback_bounded_constructible {X Y : Scheme.{u}} (h : X ⟶ Y) (A : Type u) [Field A] [Finite A] (K : proEtaleDerivedCategory Y A) (a b : ℤ) (_hab : a ≤ b) (_hvanish : ∀ q : ℤ, (q < a ∨ b < q) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y A)) q).obj K)) (_hconstructible : ∀ q : ℤ, IsConstructibleProEtaleModuleSheaf Y A ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y A)) q).obj K)) : (∀ q : ℤ, (q < a ∨ b < q) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj ((proEtaleConstantModulePullbackFunctor h A).mapDerivedCategory.obj K))) ∧ ∀ q : ℤ, IsConstructibleProEtaleModuleSheaf X A ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj ((proEtaleConstantModulePullbackFunctor h A).mapDerivedCategory.obj K))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The five declarations state all clauses: exactness; ordinary termwise derived factorization and natural cohomology isomorphisms; the actual base-changed witnessing stratification and same finite local models; intrinsic sheaf constructibility; bounded constructibility with each given vanishing interval unchanged. The constructibility dependency already records IsConstructibleProEtaleModuleSheaf among its declarations and publicly imports its defining module, so its record needs no repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30edea336",
+  "group": "O2",
+  "result": "pass",
+  "note": "Only the item lean field changed; deps byte-equal to live; statement verbatim; 5 decls all sorry; imports exist. Clauses: exactness (Additive/finite limits/colimits), termwise derived factorization plus natural H^q iso over all unbounded D (node says 'there is', Nonempty OK), constructibility preserved via the recorded IsConstructibleProEtaleModuleSheaf, s.pullback h strata (fst=h_a, snd=i'_a), restriction iso, same cover/same models M_j (∃ b unique since ProEt is full in Over), finite plus Module.Finite stalks, bounded class with the same [a,b]. Functor objects are definitionally proEtaleConstantModulePullback (asIso of the canonical c_A^h). No qcqs/Noetherian/char assumption; edge cases empty S, empty covers, F=0, a=b covered; universes as in the dependency. Advisory: functor, Stratification.pullback, proEtaleModuleRestriction and fixed stalk owners not in stmt_deps; unused proof-plan imports. No recompile (no file changed)."
  }
 }

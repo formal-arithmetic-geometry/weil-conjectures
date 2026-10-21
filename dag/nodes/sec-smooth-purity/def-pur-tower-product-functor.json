@@ -1,0 +1,107 @@
+{
+ "id": "def-pur-tower-product-functor",
+ "kind": "definition",
+ "title": "Termwise product functor on strict tower complexes",
+ "status": "split",
+ "statement": "Let $\\mathcal A$ be an abelian category with countable products [def-weil-category-product]. A strict tower is a functor $\\mathbf N^{\\mathrm{op}}\\to\\mathcal A$, with level $n\\in\\mathbf N$ denoting positive level $n+1$. For a cochain complex $X$ of strict towers, write $X_n$ for the evaluated complex and use the explicit product $\\operatorname{roosP}(X)=\\prod_n X_n$ and product maps $\\operatorname{roosPmap}(f)=\\prod_n f_n$ of [def-weil-strict-roos-model]. Define the termwise product functor $\\Pi:C(\\mathbf N^{\\mathrm{op}}\\to\\mathcal A)\\to C(\\mathcal A)$ by $\\Pi(X)=\\operatorname{roosP}(X)$ and $\\Pi(f)=\\operatorname{roosPmap}(f)$. Its identity and composition laws are the existing laws for these product maps. The complexes are unbounded and cohomologically indexed by $\\mathbf Z$; no exactness of products and no hypothesis on tower transitions is imposed.",
+ "stmt_deps": [
+  "def-weil-strict-roos-model",
+  "def-weil-category-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof: the termwise product of evaluated tower complexes; strict functorial packaging used by the coefficient-comparison sentence in blueprint main-20261015/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "termwise product functor from cochain complexes of inverse towers to cochain complexes",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.prodFunctor; CategoryTheory.Functor.pi; CategoryTheory.Functor.prod'; CategoryTheory.Functor.pi'; CategoryTheory.Functor.map₂CochainComplex; CategoryTheory.Limits.pointwiseProduct; CategoryTheory.Functor.chosenProd; AlgebraicTopology.alternatingCofaceMapComplex.",
+   "date": "2026-10-21",
+   "verdict": "General functor and product constructions; no exact strict-tower product functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "termwise product functor on cochain complexes of inverse towers",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Functor.map₂CochainComplex; CochainComplex.ιMapBifunctor; CochainComplex.HasMapBifunctor; CategoryTheory.Functor.mapCochainComplexSingleFunctor; CategoryTheory.Functor.instCommShiftCochainComplexIntObjFlipMap₂CochainComplex; CochainComplex.mapBifunctor; HomotopyCategory.composableArrowsFunctor; CochainComplex.instHasMapBifunctorObjIntShiftFunctor_1.",
+   "date": "2026-10-21",
+   "verdict": "Bifunctor constructions and mapping cones; no exact strict-tower product functor."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py Q11 lem-pur-injective-tower-roos-shifts grep \"roosPmap|towerProductFunctor|productFunctor\" CategoryTheory",
+   "results": "[grep] OK 2 hit(s): Mathlib/CategoryTheory/Limits/Types/Products.lean:159 def binaryProductFunctor : Type u ⥤ Type u ⥤ Type u where; :173 binaryProductFunctor ≅ (prod.functor : Type u ⥤ _) := by.",
+   "date": "2026-10-21",
+   "verdict": "No exact strict-tower functor in Mathlib; use existing categorical product constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"roosPmap|towerProductFunctor|productFunctor\" lean/WeilConjectures lean/Sheaf; rg -n \"productFunctor|roosPmap\" dag/lean_names_upstream.json; rg -n \"tower.product.functor|towerProductFunctor|def-pur-tower-product-functor\" lean/Sheaf lean/WeilConjectures dag/nodes; python3 tools/blueprint_refs.py search \"tower product\"",
+   "results": "No hits in WeilConjectures or dag/lean_names_upstream.json. Sheaf: StrictRoosModel.lean defines roosPmap, roosPmap_id, roosPmap_comp and uses them in cone constructions; ProductCommShift.lean:28 defines the generic ProductShift.productFunctor; RoosCommShift.lean:90 defines a productFunctor for a different source category; other hits are uses of roosPmap. No existing node or declaration with the proposed definition name; blueprint search: 0 blueprint nodes match 'tower product'.",
+   "date": "2026-10-21",
+   "verdict": "As requested by return L, package the existing roosP/roosPmap in its own definition module, reusing all data and laws; do not cite the product-shift theorem as a definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-injective-tower-roos-shifts",
+  "date": "2026-10-21",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction: the termwise tower-product functor underlying the canonical product/shift comparison.",
+   "via": [
+    "lem-pur-injective-tower-roos-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TowerProductFunctor",
+  "declaration": "CategoryTheory.InjectiveTowerRoos.productFunctor",
+  "file": "lean/Sheaf/CategoryTheory/TowerProductFunctor.lean",
+  "statement": "def productFunctor : CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Packages the already defined roosP/roosPmap using roosPmap_id/roosPmap_comp. Requested by independent return L to separate the termwise tower-product notion from the theorem lem-weil-product-comm-shift; no theorem conclusion from that module is used."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0b1886be",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0b1886be",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery after return L. The only fault there was the theorem stmt_dep lem-weil-product-comm-shift, used only for its plain productFunctor abbrev. It is repaired exactly by route (a). The new def node def-pur-tower-product-functor has its own module TowerProductFunctor: noncomputable def productFunctor with obj roosP, map roosPmap and laws roosPmap_id/roosPmap_comp from StrictRoosModel (same Abelian+HasCountableProducts binders); real data, no sorry, not a duplicate (ProductShift.productFunctor is owned by a theorem node, RoosCommShift.productFunctor has another source). §5(A) fields complete: stmt_deps equal the cited ids, three search kinds, lean.statement verbatim. blueprint.from.via recomputed with blueprint_refs.chain on live nodes and matches. The item swaps the stmt_dep, drops the ProductCommShift import and moves the helper. The theorem signature is byte-identical to the 4919a5f9 head, whose clause-by-clause reading I re-checked and agree with (roosχ coordinates, signed χ both directions, pinned csP/csL/csC, distinguished Roos triangle with pinned δ, boundary sign with shiftFunctorComm, naturality, total-derived-limit normalization; edge cases m=0,±1,2, char 2, zero ring). The live node matches the snapshot except the allowed stmt_deps additions (landed def-weil-strict-roos-model plus the new def node). No compile reproduced (human 2026-10-21); worker reports clean scompile of both modules and a passing dry run; no file changed. Advisories: proof-only imports unused by the statement; extra roosP K-injectivity conclusion; IsDerivedLimit not used (justified)."
+ }
+}

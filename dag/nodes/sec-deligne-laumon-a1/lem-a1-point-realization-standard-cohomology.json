@@ -307,5 +307,52 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-58a2021b8 (reviewer sub-agent of L); spot-checked: PASS: I read the whole split, which has no new nodes, 8 steps and 16 cited statements, against the cited nodes and Bhatt–Scholze Example 4.1.10 and Props. 6.8.11(3)/6.8.14. Status: the item is still unsplit in live and side-live, has no re-split note, and is not in route-pivot-dropped. No proof_dep reaches the item, so there is no cycle. Step 1 uses the last two sentences of stratified-perfect-characterization to identify the derived-complete-integral category on Spec k with the category of pbc-integral-tstructure; Spec k is Noetherian of dimension 0 and ℓ≠p, and the Tor hypothesis is correctly avoided. localized-tstructure gives Q t-exact with halves equal to those of the standard-tstructure definition. Steps 2–3: Γ(s,−) is exact, ⊗E is termwise exact, and every rational triangle is isomorphic to Q of an integral triangle, so F_E is exact and t-exact. The action on morphisms, f/ϖ^n ↦ ϖ^{-n}qG(f), matches def-weil-finite-coefficient-point. Step 4: the composition and uniqueness clauses of pod-texact-truncation-comparison identify δ on QC₀ with the cycle/quotient comparison, as the statement requires. Steps 5–7: φ = β∘(Γχ∘θ)^{-1} is exactly the specified map. Its shift compatibility comes from completed-scalar-shift and sections-tensor-shift, and the square follows from the natural-transformation clause with η=φ. The unit and tower equations come from the statements of point-sections-scalar-extension and coefficient-complex-rationalization. Step 8: common-stage exactness, t-exactness and descent of δ in the pair categories are correct. Edge cases checked: C=0, torsion heart objects, L=E, repeated fields, negative j. Not a duplicate of point-fibre-equivalence, dl-a1-constructible-fibres-exact, pod-point-sections-derived-reduction or trf-point-exact-derived-model. All 11 declared tool_uses are generic coefficient/t-structure infrastructure and I accept them. Batch-5 flag: the closure of lem-pod-texact-truncation-comparison is only def-weil-t-structure and def-weil-triangulated-category, i.e. abstract t-exact functor theory. It is neither given by the Poincaré duality or trace-formula assumptions nor part of their proofs, so I accept it. The unflagged prop-constructible-truncations is the D^b_c t-structure itself and reaches only generic infrastructure. Advisory, not a fault: the bounded standard t-structure on D^b_fd(E) is fixed by the item's statement and is standard (Mathlib derived-category t-structure). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointRealizationStandardCohomology",
+  "declaration": "WeilConjectures.pointRealizationStandardCohomology",
+  "declarations": [
+   "WeilConjectures.pointRealizationFieldTensor",
+   "WeilConjectures.PointRealizationComparison",
+   "WeilConjectures.PointRealizationComparison.delta",
+   "WeilConjectures.PointRealizationCohomologySquare",
+   "WeilConjectures.pointRealizationAmbient",
+   "WeilConjectures.pointRealizationSourceT",
+   "WeilConjectures.pointRealizationScalar",
+   "WeilConjectures.pointRealizationScalarIso",
+   "WeilConjectures.pointExactDerivedComparison_existsUnique",
+   "WeilConjectures.pointExactDerivedComparison",
+   "WeilConjectures.pointCompositeCohomologyIso",
+   "WeilConjectures.pointRealizationIntegralT",
+   "WeilConjectures.pointRealizationIntegralNormalization_existsUnique",
+   "WeilConjectures.pointRealizationIntegralNormalization",
+   "WeilConjectures.pointRealizationCommonAmbient",
+   "WeilConjectures.pointRealizationCommonT",
+   "WeilConjectures.pointRealizationStageAmbient",
+   "WeilConjectures.pointRealizationStageNormalization_existsUnique",
+   "WeilConjectures.pointRealizationStageNormalization",
+   "WeilConjectures.PointRealizationScalarCoherence",
+   "WeilConjectures.PointRealizationFiniteCohomologyData",
+   "WeilConjectures.pointFieldComparison",
+   "WeilConjectures.pointStageTargetComparison",
+   "WeilConjectures.PointRealizationCommonSquare",
+   "WeilConjectures.PointRealizationStandardCohomologyData",
+   "WeilConjectures.pointRealizationStandardCohomology"
+  ],
+  "file": "lean/Sheaf/Paper/PointRealizationStandardCohomology.lean",
+  "statement": "theorem pointRealizationStandardCohomology : Nonempty (PointRealizationStandardCohomologyData D l hl Ω)",
+  "branch": "sheaf-dag",
+  "by": "Q81",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Exactness and the ordinary target t-structure are expressed through the existing full finite-stage embedding and fully faithful common-stage realization. The data package specifies the canonical truncation-induced maps, integral normalization, all scalar squares, scalar units and towers, and common-stage compatibility. No target categories or point functors are replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c47297bde",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Read the node, all 522 lines of the module, the six stmt_dep records and the live dependency sources (FiniteCoefficientPoint, PointFdQbarCategory, SfConstructibleHeart, GeneralAlgebraicallyClosedCoefficients, ConstructibleTruncations, ExactFunctor mapDerivedCategoryTrunc*Iso, TExactTruncationComparison). Every clause is rendered on the recorded functors and categories. Truncation comparisons are fixed by counit/unit. δ is pinned by integral_normalization (finite) and common_square (Ω); scalar, integral, localization and inclusion shifts are pinned. φ is the recorded pointRationalFibreScalarIso; the scalar square endpoints match; unit/tower coherence uses sfRationalScalarUnit/Comp and fieldScalarUnit/Tower; heart degree-zero holds at both stages. The HEq identity pins are satisfiable (pointQbarFibre object = literal pair, pointFdQbarObject = fieldDerivedScalarExtension subtype). 4 sorry theorems; 26/26 declarations; statement verbatim; node unchanged outside lean; no line over 100; Worker report and Second reading present. Not recompiled (no change); worker reports 55.1 s clean, close to the 60 s limit. Advisories: constructibleTruncationCohomology (prop-constructible-truncations) and sfIntegralStandardTruncations used without stmt_dep, which S2 cannot add, same pattern as the stmt_dep itself; free commShift in finite/common is irrelevant to the pinned δ; common_square is conditional on an identity-φ whose existence is a separate true ∃! and the def is unused; associator compatibility follows from uniqueness; PreservesHomology import harmless; second reading by the same worker; ConstructibleTruncations module is in stage-3 rework-hold only."
  }
 }
