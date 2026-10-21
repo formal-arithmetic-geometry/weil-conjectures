@@ -16,11 +16,122 @@
   "def-sfb-constructible-module",
   "sk-def-sfb-constructible",
   "sk-def-sfb-bounded-constructible",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-constructible-stratification",
+  "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the sectionwise module sheaves corresponding to $M$ under [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its forward functor keeps the abelian sheaf, sections and restrictions identically; the action is the section action of the same ring multiplication. A finite sum of the regular module therefore corresponds to the same finite free module, and the cokernel universal property is unchanged under this equivalence. For every stratum immersion or covering map $g:V\\to X$, [sk-prop-sfb-cartesian-coefficients](1) identifies $g^{-1}\\Lambda_X$ with $\\Lambda_V$. Its final paragraph identifies module pullback with inverse image equipped with the transported action. Hence a presentation over $g^*\\Lambda_X$ in the internal definition is precisely a presentation over $\\Lambda_V$ in the sectionwise convention. We use these canonical identifications throughout.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Restriction paragraph; internal/sectionwise conventions and Cartesian coefficients"
+   }
+  },
+  {
+   "text": "The assumed local Noetherianity gives quasi-separatedness by [lem-weil-pbc-locally-noetherian-quasi-separated]; together with the assumed quasi-compactness this puts $X$ in the qcqs branch of [sk-def-sfb-constructible]. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], descending chains of closed subsets of $X$ stabilize: a minimal member of the set of chain terms equals every later term. Every stratum $S\\subseteq X$ also has this property. Indeed, for a descending closed chain $C_n=S\\cap F_n$, with $F_n$ closed in $X$, replace $F_n$ by $\\bigcap_{j\\le n}F_j$; its intersection with $S$ is still $C_n$, and the resulting ambient chain stabilizes. Thus every stratum has Noetherian underlying topology, as required by both field-coefficient local-triviality lemmas below.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OY (lemma-locally-Noetherian-quasi-separated) and 01OZ (lemma-Noetherian-topology); elementary subspace descending-chain argument"
+   }
+  },
+  {
+   "text": "Suppose $M$ has the finite stratification and finite constant local models of [sk-def-sfb-constructible]. On each stratum, the last assertion of [det-def-sfb-constructible-local-model] gives local finite presentation: its scalar matrix description is also a finite presentation over the coefficient ring sheaf. With the identifications of step 1, the very same stratification therefore satisfies [def-sfb-constructible-module]. This proves the reverse implication for all three families, including torsion scalar modules.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-local-model",
+    "def-sfb-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Parts 1–2; sk-def-sfb-constructible-local-model.md, final implication"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline{\\mathcal O_E}$, apply [lem-sfb-integral-lfp-constant-model-comparison] on $X$ itself, which is quasi-compact and locally Noetherian by assumption. Its conditions (i) and (ii) are exactly the two module predicates here, under step 1. In particular its scalar modules are finitely presented over $\\mathcal O_E$, its presentations allow arbitrary coefficient-sheaf entries, and its conclusion allows a changed finite constructible stratification. The implication (i)$\\Rightarrow$(ii) gives the required forward implication in the integral case, without requiring the scalar modules to be torsion-free.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Theorem 6.2(2)–(3); the precise local-presentation comparison obligation is the existing integral comparison node"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline E$, choose a finite stratification witnessing [def-sfb-constructible-module]. On a stratum $S$, the restriction is locally finitely presented, hence has finite free cokernel presentations on a pro-étale cover by [def-sfb-locally-finitely-presented]. Step 2 supplies Noetherian underlying topology on $S$, so [lem-weil-pbc-condensed-lfp-local-triviality] gives a pro-étale cover $W_j\\to S$ with $M|_{W_j}\\cong\\Lambda_{W_j}^{r_j}$, $r_j\\ge0$. Put $P_j=E^{r_j}$. It is finitely presented by the scalar presentation $E^0\\to E^{r_j}\\to P_j\\to0$, and coordinatewise multiplication identifies $\\Lambda_{W_j}\\otimes_E P_j$ with $\\Lambda_{W_j}^{r_j}$. Thus each stratum has a finite constant local model and the chosen stratification satisfies [sk-def-sfb-constructible].",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Theorem 6.2(2)–(3); existing finite-field local-triviality bridge, then the scalar free model"
+   }
+  },
+  {
+   "text": "For the specified $\\Lambda=\\underline{\\overline{\\mathbf Q}}_\\ell$, start with a stratification witnessing [def-sfb-constructible-module]. On each stratum $S$ its restriction has local finite free cokernel presentations by [def-sfb-locally-finitely-presented]. Apply [lem-weil-pbc-condensed-qbar-lfp-local-triviality], using the Noetherian topology from step 2. That statement uses exactly the finite-subextension-valued condensed ring of [sk-def-sfb-qlbar-condensed]; it gives $M|_{W_j}\\cong\\Lambda_{W_j}^{r_j}$ on a pro-étale cover of $S$. The scalar ring is $\\Lambda(*)=\\overline{\\mathbf Q}_\\ell$: every single algebraic element belongs to a finite subextension. Take $P_j=\\overline{\\mathbf Q}_\\ell^{r_j}$, with presentation from the zero module. The coordinatewise tensor identification of step 5 gives its finite constant model. The original stratification now satisfies [sk-def-sfb-constructible].",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/ConstructibleSheaf/ProEtaleModule/Def.lean",
+    "place": "IsLocallyFinitelyPresented and IsConstructible; existing bounded-image algebraic-closure local-triviality bridge"
+   }
+  },
+  {
+   "text": "Steps 3–6 prove the module-predicate equivalence for the three specified coefficient families. By [sk-def-sfb-bounded-constructible], an object $K$ of the ordinary $D_X$ belongs to $\\mathcal B_X$ exactly when its cohomology vanishes outside an interval $[a,b]$ and every $H^n(K)$ has the first predicate. By [sk-def-sfb-constructible], membership in $\\Dbc(X,\\Lambda)$ has the identical boundedness requirement and the second predicate for every $H^n(K)$. Substitute the proved equivalence degree by degree, retaining the same interval. The object properties, and hence their full subcategories with ambient morphisms, agree. Neither definition introduces derived completeness, so this argument needs no such condition.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Final paragraph defining Dbc, compared with sk-def-sfb-bounded-constructible/_section.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-constructible-module",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "def-sfb-locally-finitely-presented",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+  "place": "Comparison of the two constructibility definitions, using the existing coefficient-specific integral comparison and rational local-triviality nodes; not claimed verbatim from the existence-restriction proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +167,59 @@
    "results": "Condensed.finFree; CondensedMod.IsSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFiniteType",
    "date": "2026-10-21",
    "verdict": "no match: generic finite-presentation or condensed-module definitions and constructible subsets do not compare the two coefficient-specific module predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModule|IsConstantModelConstructible|[Ll]fp.*[Cc]onstant|[Cc]onstructible.*[Cc]ondensed",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: generic finite-presentation definitions and condensed free-module constructions do not compare the two stratified adic module predicates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"Sheaf\"",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.instIsClosedUnderIsomorphismsIsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: generic finite-presentation definitions and condensed free-module constructions do not compare the two stratified adic module predicates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stratified locally finitely presented sheaves over l-adic condensed rings have finitely presented constant scalar local models",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.Presentation.IsFinite.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: generic finite-presentation definitions and condensed free-module constructions do not compare the two stratified adic module predicates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme, locally finitely presented pro-etale modules over condensed l-adic coefficients are stratified finite constant scalar local models",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation; Condensed.finFree; Condensed.profiniteSolid; Condensed.profiniteFree; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; SheafOfModules.IsFinitePresentation; CondensedMod.IsSolid; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: generic finite-presentation definitions and condensed free-module constructions do not compare the two stratified adic module predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "-dummy",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "inconclusive: accidental empty-purpose query; not used as absence evidence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented module sheaf over a continuous p-adic coefficient ring becomes finite free or a finite constant scalar module after a pro-etale cover and finite stratification",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-21",
+   "verdict": "no match: generic finite-presentation definitions and condensed free-module constructions do not compare the two stratified adic module predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFinitePresentation|def isFinitePresentation|structure IsFinitePresentation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic finite-presentation definitions and condensed free-module constructions do not compare the two stratified adic module predicates"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-localizing-exceptional-cohomology",
@@ -70,13 +230,68 @@
  "unit": "sk-cor-existence-ii",
  "blueprint": {
   "from": {
-   "node": null,
-   "place": "Geometric restriction in lem-sfb-dc-proper-pushforward-left-adjoint-e, expanded by det-existence-restriction.proof.md: identify the constructibility predicates before applying its integral/rational bullets; returned item step 2.",
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Geometric restriction in the proper exceptional-adjoint proof, expanded in det-existence-restriction.proof.md: identify the bounded constructibility predicates before its integral/rational bullets; parent cohomology split, step 2.",
    "via": [
-    "lem-sfb-adic-localizing-exceptional-cohomology"
+    "lem-sfb-adic-localizing-exceptional-cohomology",
+    "lem-sfb-adic-localizing-exceptional-constructible"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-adic-constructibility-predicate-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused the existing integral comparison and finite-field/bounded-image algebraic-closure local-triviality nodes; proved the common converse, checked Noetherian strata and qcqs hypotheses, and identified the bounded ordinary derived object properties degree by degree. No new nodes or Mathlib leaves. Repaired the null blueprint ancestor through the parent’s explicit blueprint reference.",
+  "blueprint": "The comparison prerequisite for the integral/rational bullets of det-existence-restriction.proof.md, serving lem-sfb-dc-proper-pushforward-left-adjoint-e through the existing exceptional-cohomology parent. The seven steps expand this prerequisite; they do not replace the unit’s exceptional-adjoint route.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identify inverse-image coefficients and the exact module pullback; no unit-local node states this general coefficient compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supply the qcqs hypothesis of the finite-global definition; the unit concerns exceptional adjoints, not scheme separation."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Supply Noetherian underlying topology for strata; no exceptional-adjoint node states this topological tool."
+   },
+   {
+    "node": "det-def-sfb-constructible-local-model",
+    "why": "Supply the scalar-matrix-to-local-finite-presentation implication for the common converse."
+   },
+   {
+    "node": "lem-sfb-integral-lfp-constant-model-comparison",
+    "why": "Supply precisely the existing integral comparison, including torsion scalar models; this is a coefficient tool, not an exceptional-adjoint restriction theorem."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-lfp-local-triviality",
+    "why": "Supply finite free local models for finite rational coefficients on Noetherian strata."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "why": "Supply finite free local models for the bounded-image algebraic-closure coefficients on Noetherian strata."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-515cbfd50",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-515cbfd50 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 11 stmt_deps and 13 proof_deps, the blueprint main-20261015 sk-def-sfb-constructible (_section, local-model and its proof, constructible-module), det-existence-restriction.proof.md, and HRS Ex. 3.1 / Thm 6.2(2)-(3), which serve as context only. The item is not dropped and is still unsplit live, created by the parent's PASSed 10-21 re-split; the statement is byte-identical to base and there are no new nodes. Two stmt_deps were added and the statement uses both; proof_deps equal the union of the step uses; no cycle; no SGA. blueprint.from.node is now the real blueprint ancestor lem-sfb-dc-proper-pushforward-left-adjoint-e, with via [parent, grandparent]. Step 1: the section-action equivalence keeps the sheaf, sections and restrictions, and cartesian-coefficients (1) plus its last paragraph identify mapMod(g^*) over g^*Λ_X with modules over Λ_V. Step 2: the qcqs branch holds via the locally-Noetherian⇒QS leaf; the subspace descending-chain argument with F'_n=∩_{j≤n}F_j is checked, giving Noetherian strata as the local-triviality lemmas require. Step 3: the converse holds for all families by the final assertion of det-def-sfb-constructible-local-model. Step 4: the O_E case is (i)⇒(ii) of lem-sfb-integral-lfp-constant-model-comparison, whose hypotheses match exactly and which allows torsion and a changed stratification. Steps 5-6: E^c_X of the pbc lemma is the same p_X^* as sk-def-sfb-pullback-from-point; P=E^r or Q̄^r is finitely presented, and Λ(*)=Q̄_ℓ for the finite-subextension ring; locally closed strata are constructible because X is Noetherian, as the definition states. Step 7 is elementary: the same bounded D(Mod_{Λ_X}) with H^n substituted degree by degree. Edge cases checked: empty X, rank 0, O_E/π^n, characteristic ℓ, non-separated X. No duplicate: only the cited integral special case states the comparison. All 7 declared tool_uses are accepted as generic coefficient and topology tools. Maintainer note: the certificate node's case (iii) says C(-,Q̄_ℓ) while the item, the qbar nodes and the Lean use the finite-subextension ring; the certificate owner's prose should be aligned, and this is not a fault of the delivery."
  }
 }
