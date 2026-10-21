@@ -170,7 +170,8 @@ theorem cohomologyImage_cycle_map
     let i := K.iCycles n
     let q := K.homologyπ n
     have hi : Subobject.mk i = Z := cycles_subobject K n
-    have hTZ : T ≤ Z := inf_le_right
+    have hTZ : T ≤ Z := by
+      exact inf_le_right
     have hTz : T.arrow ≫ K.d n (n + 1) = 0 := by
       apply (kernelSubobject_factors_iff _ _).mp
       apply (Subobject.le_iff_factors_arrow _ _).mp
