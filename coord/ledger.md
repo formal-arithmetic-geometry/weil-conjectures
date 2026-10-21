@@ -20209,3 +20209,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:06 L: merged deliver/NF/lemma-weil-pbc-completed-pullback-reduction (reviewer FIX; after a return; new nodes: 4)
 - 04:06 L: merged deliver/Q03/lem-sbc-reflector-square-mate-factorization (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T04:06:42Z L: superseded stage-1 delivery Q83/lem-sfb-pushforward-comp-monoidal at 848e29f211734e932b03817d780b75d39d7a986d; current completion retained; packet archived at refs/superseded/Q83/lem-sfb-pushforward-comp-monoidal/848e29f211734e932b03817d780b75d39d7a986d; stale return retired.
+- 04:06 L: returned deliver/J4/Sheaf.Paper.QlbarTailModuleColimit (reviewer RETURN: (reviewer C-25365, head 253653267) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.QlbarTailModul)
