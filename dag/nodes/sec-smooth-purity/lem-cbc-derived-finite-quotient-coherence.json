@@ -12,9 +12,159 @@
   "def-weil-pbc-completed-pullback",
   "lem-weil-pbc-constant-completion-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\underline A_T$, $R'=\\underline A_{T'}$, $B=A_T$, $B'=A_{T'}$, and $S_n=(P_n)_T$, $S_n'=(P_n)_{T'}$. The finite coefficient structure theorem identifies each $S_n$ with the constant ring sheaf, preserving constant sections. The constant-completion comparison gives flat $R\\to B$, $R'\\to B'$ and the projection-normalized identifications $B/I^nB=S_n$, $B'/I^nB'=S_n'$. Write $G=g_B^*$ for completed-coefficient module pullback and $g_R^*$ for constant-$A$ module inverse image. Choose a flat-term K-flat representative $P\\to K$. In the category of strict towers of $R$-module complexes, choose one objectwise flat-term K-flat resolution $v:V_\\bullet\\to(S_n[0])_n$. This uses the small category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$, not separately chosen resolutions with unrelated transition maps. Write $t_{b,a}:V_b\\to V_a$ for its arrows, so $v_at_{b,a}=q_{b,a}v_b$ for every $b\\geq a$.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Define $H_n=\\operatorname{Tot}(P\\otimes_R V_n)$, with arrows $1\\otimes t_{b,a}$. Balancing identifies this with $\\operatorname{Tot}(P\\otimes_B(B\\otimes_R V_n))$. Extension of scalars makes $B\\otimes_R V_n$ K-flat over $B$ with flat terms, and the total-tensor lemma makes $H_n$ K-flat over $B$ with flat terms. The balancing map is $x\\otimes(b\\otimes z)\\mapsto bx\\otimes z$, with inverse $x\\otimes z\\mapsto x\\otimes(1\\otimes z)$; it commutes with the differentials and the maps $t_{b,a}$. Thus $H_\\bullet$ is in the resolving class used for the universal tower pullback.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-kflat-total-tensor-model",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Let $R(P)_n=P\\otimes_B S_n$. Restriction makes $P$ K-flat over $R$, since $B$ is flat over $R$. Consequently $1\\otimes v_n:P\\otimes_R V_n\\to P\\otimes_R S_n$ is a quasi-isomorphism: its cone is the tensor of $P$ with the acyclic cone of $v_n$. The common-quotient comparison identifies $P\\otimes_R S_n$ with $P\\otimes_B S_n$, using the ordinary projection-normalized quotient maps. Their composites give $r_n:H_n\\to R(P)_n$. Since $v_at_{b,a}=q_{b,a}v_b$, these maps form a quasi-isomorphism $r:H_\\bullet\\to R(P)_\\bullet$ of strict $B$-tower complexes, with $R(P)$ representing $\\mathcal R_T(K)$.",
+   "uses": [
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-flat-common-quotient-reduction-tower",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Set $D_n=g_n^*(P\\otimes_B S_n)$, regarded as a $B'$-complex. The finite coefficient structure maps $c_{g,n}$ are isomorphisms by the constant-ring structure theorem. The ordinary balancing comparison\n$$\\beta_n:G(P\\otimes_B S_n)\\longrightarrow D_n$$\nis an isomorphism: both sides identify with $g^{-1}P\\otimes_{g^{-1}B}S_n'$. On pure sections it sends $(g^{-1}x\\otimes g^{-1}s)\\otimes b'$ to $g^{-1}x\\otimes c_{g,n}(g^{-1}s)\\pi_n'(b')$, in that common tensor presentation; its inverse sends $g^{-1}x\\otimes s'$ to $(g^{-1}x\\otimes c_{g,n}^{-1}(s'))\\otimes1$. Here the projection square $\\pi_n'c_g=c_{g,n}g^{-1}\\pi_n$ makes the balancing relations identical. For $b\\geq a$, the finite constant-map identity $q_{b,a}'c_{g,b}=c_{g,a}g^{-1}q_{b,a}$ shows that the two composites from $G(R(P)_b)$ to $D_a$ have this same formula with $q_{b,a}'$ applied to the scalar. Therefore the $\\beta_n$ form a strict $B'$-tower isomorphism, with target arrows induced by $g^{-1}(1\\otimes q_{b,a})$ and the canonical restriction-of-scalars identifications.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-finite-constant-map-naturality",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "We must check that $\\alpha_n=\\beta_nG(r_n):G(H_n)\\to D_n$ is a quasi-isomorphism; $R(P)_n$ need not be K-flat over $B$. The natural cochain pullback/tensor comparison, followed by balancing scalar extension, identifies\n$$G(H_n)\\cong\\operatorname{Tot}(G(P)\\otimes_{R'}g_R^*V_n),\\qquad\nD_n\\cong G(P)\\otimes_{B'}S_n'\\cong G(P)\\otimes_{R'}S_n'.$$\nUnder these identifications $\\alpha_n$ is $1\\otimes g_R^*v_n$. To check its normalization, send a pure section $(g^{-1}(x\\otimes z))\\otimes b'$ to $(g^{-1}x\\otimes b')\\otimes g^{-1}z$ before augmentation; either composite gives $g^{-1}x\\otimes\\pi_n'(b')c_{g,n}(g^{-1}v_n(z))$. The inverse balancing inserts $1$ in the extra scalar factor. Naturality of the cochain comparison ensures these are maps of complexes, also for unbounded direct-sum total tensors.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-flat-common-quotient-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Pullback preserves K-flatness and flat terms, so $G(P)$ is flat-term K-flat over $B'$. Since $B'$ is flat over $R'$, its restriction is K-flat over $R'$. The constant-ring inverse-image theorem applies to the arbitrary ring $A$, and says that $g_R^*$ is exact; hence $g_R^*v_n$ is a quasi-isomorphism with target $S_n'$. Tensoring its acyclic cone with the restricted $G(P)$ is acyclic. By the computation in Step 5, each $\\alpha_n$ is a quasi-isomorphism. Step 4 and strictness of $r$ show that $\\alpha:G(H_\\bullet)\\to D_\\bullet$ is a morphism of strict $B'$-tower complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Write $Q_{\\rm Tow},Q'_{\\rm Tow}$ for tower localization and $\\tau$ for the universal derived counit. The resolving-class computation gives the tower isomorphism\n$$\\chi=\\tau_{H_\\bullet}\\,\\widetilde L_0(Q_{\\rm Tow}r)^{-1}:\n\\widetilde L_0\\mathcal R_T(K)\\xrightarrow{\\sim}Q'_{\\rm Tow}G(H_\\bullet).$$\nCompose it with $Q'_{\\rm Tow}(\\alpha)$. At level $n$ this is the canonical $F_{0,n}$: exact finite inverse image identifies $D_n$ with $B_n(K)$; the comparisons in Steps 3 and 5 are the ordinary common-quotient and scalar-insertion comparisons that induce the stated constant-completion comparison. In particular the map is induced by the fixed projection $B'\\to S_n'$ and by $c_{g,n}$. The evaluation-normalization lemma identifies evaluation of $\\chi$ with the inverse of $L_0(r_n)$ followed by the level derived counit, so this is also the prescribed finite comparison for the universal evaluation construction. The resolving-class comparison is natural under quasi-isomorphisms between resolving models, so this identification is independent of $P$ and $V_\\bullet$.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-cbc-derived-tower-evaluation-normalization",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-common-quotient-reduction-tower",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Every arrow of $Q'_{\\rm Tow}(\\alpha)\\chi$ is a morphism in the derived category of strict towers. Its evaluations therefore commute with every transition: for $b\\geq a$, strictness of $\\chi$ gives $G(t^H_{b,a})\\chi_b=\\chi_a d_{0,b,a}$, and strictness of $\\alpha$ gives $d_{D,b,a}\\alpha_b=\\alpha_aG(t^H_{b,a})$. Composing yields\n$$d_{B,b,a}F_{0,b}=d_{D,b,a}\\alpha_b\\chi_b\n=\\alpha_aG(t^H_{b,a})\\chi_b\n=\\alpha_a\\chi_a d_{0,b,a}=F_{0,a}d_{0,b,a}.$$\nHere $t^H_{b,a}=1\\otimes t_{b,a}$ and the chain maps are understood after localization. Step 4 identifies $d_D$ with the specified finite quotient map $d_B$ on the underlying $B'$-complexes.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  },
+  {
+   "text": "Finally $P\\otimes_BS_b$ is a flat-term K-flat $S_b$-complex by K-flat change of rings; finite inverse image carries it to a flat-term K-flat $S_b'$-complex. Thus $D_b$ computes $B_b(K)$ with its finite coefficient action. Successive derived scalar extension is represented by the ordinary balancing map\n$$(x\\otimes r)\\otimes s\\longmapsto x\\otimes q_{b,a}'(r)s,$$\nwith inverse $x\\otimes s\\mapsto(x\\otimes1)\\otimes s$. Pullback of this map has the same formula because the finite constant coefficient maps commute with $q_{b,a}$. It is therefore the normalization used in Step 4, including its restriction-of-scalars composition identification. For $b=a$ the formula is scalar multiplication and hence the unit identification. For $c\\geq b\\geq a$, both reassociations send $((x\\otimes r_c)\\otimes r_b)\\otimes r_a$ to $x\\otimes q_{c,a}'(r_c)q_{b,a}'(r_b)r_a$. Equality on pure sections determines the sheaf tensor maps, so these are the equal-index identity and three-index quotient cocycle in the finite derived categories.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-cbc-finite-constant-map-naturality",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); simultaneous coefficient-resolution argument below, written by Q34"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-kflat-total-tensor-model",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-flat-common-quotient-reduction-tower",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-cbc-finite-constant-map-naturality",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-cbc-derived-tower-evaluation-normalization",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-reduction compatibility in the completed extension-by-zero proof; simultaneous constant-coefficient resolution argument, using Stacks Tags 093M, 06YS, 07A2, 0G7E, 03EL, 06YY and 0D6D."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +200,45 @@
    "results": "[leanfinder] OK 8 hit(s); AdicCompletion.transitionMap_comp_reduceModIdeal: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.redu; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq': ∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] {I : Ideal S} {a : ℕ → ℕ}\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n),\n  (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) →\n    ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotie; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq: ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\n  (∀ {m : ℕ}, Submodule.fa; AdicCompletion.transitionMapₐ: {R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → {m n : ℕ} → m ≤ n → R ⧸ I ^ n • ⊤ →ₐ[R] R ⧸ I ^ m • ⊤; AdicCompletion.transitionMap_map_pow: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {m n a : ℕ} (hmn : m ≤ n) (x : R ⧸ I ^ n • ⊤),\n  (AdicCompletion.transitionMap I R hmn) (x ^ a) = (AdicCompletion.transitionMap I R hmn) x ^ a; IsAdicComplete.StrictMono.factorPow_comp_extend: ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\n  (∀ {m : ℕ}, Submodule.fa; AdicCompletion.transitionMap: {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (M : Type u_4) →\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → {m n : ℕ} → m ≤ n → M ⧸ I ^ n • ⊤ →ₗ[R] M ⧸ I ^ m • ⊤; Ideal.powQuotSuccInclusion: {R : Type u} →\n  [inst : CommRing R] →\n    {S : Type v} →\n      [inst_1 : CommRing S] →\n        (p : Ideal R) →\n          (P : Ideal S) →\n            [inst_2 : Algebra R S] →\n              (i : ℕ) →\n                ↥(Ideal.map (Ideal.Quotient.mk (P ^ Ideal.ramificationIdx (algebr",
    "date": "2026-10-21",
    "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite quotient comparisons of derived pullback on a strict inverse tower of sheaf modules commute with quotient transitions",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.Presentation.map_π_eq, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, naturality or scalar restriction does not state the derived strict-tower finite evaluation comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(quotient|tower).*(coher|transition)|finite.*evaluation.*pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, naturality or scalar restriction does not state the derived strict-tower finite evaluation comparison and its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a strict inverse system of sheaves commutes with finite reduction and quotient transition maps",
+   "results": "8 hits: SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, TopCat.Presheaf.stalkPullbackIso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, naturality or scalar restriction does not state the derived strict-tower finite evaluation comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, naturality or scalar restriction does not state the derived strict-tower finite evaluation comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived restriction of scalars and pullback for modules over common finite quotient rings of flat ring sheaves",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, naturality or scalar restriction does not state the derived strict-tower finite evaluation comparison and its normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -72,5 +257,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-derived-finite-quotient-coherence",
+  "worker": "stage1",
+  "summary": "Proved all-quotient coherence by a single strict coefficient-tower resolution, tensoring with a K-flat completed-coefficient model, and the universal derived counit. Verified the finite comparison on balanced sections and proved its quasi-isomorphism using flatness over constant coefficients; did not assume quotient levels K-flat over completed coefficients. No new nodes, no Mathlib leaf, no statement change.",
+  "blueprint": "Realizes the finite-reduction compatibility sentence in the ancestor completed extension-by-zero proof (its identification of the actual pulled-back reduction tower with finite inverse images), specifically the canonical comparison before presentation transport in lem-cbc-adic-pullback-presentation-transport Step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic Objectwise K-flat replacements in strict diagram categories used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic Change of rings preserves K-flat complexes with flat terms used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic K-flat total tensor model for flat-term resolutions used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "why": "Generic Flat scalar restriction preserves K-flat complexes used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-common-quotient-reduction-tower",
+    "why": "Generic Derived common-quotient reduction as a normalized strict tower used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic Signed tensor comparison and composition on cochain sheaf pullbacks used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic Ringed pullback kflat used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic Exact geometric inverse image with arbitrary constant left-module coefficients used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic Left derived functor on the derived category computed by a resolving class used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic Successive derived scalar extensions agree with direct quotient extension used for the simultaneous resolving-class/tensor computation; the compact-support unit has no replacement for this general coefficient or homological-algebra tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the finite coefficient objects and their structure maps with constant ring sheaves and isomorphisms; needed by the ordinary balanced comparison, not a replacement for a compact-support route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-flat-common-quotient-reduction-tower",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-left-derived-from-kflat-class",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-a8b68be9b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-a8b68be9b (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited statements, the ancestor proof (main-20261015 lem-cbc-completed-extension-zero-comparison) and Stacks 093M. The item is not on the drop list and its statement and stmt_deps are byte-identical to side-live; there are no new nodes and no SGA source. Step 1 builds one strict R-tower resolution V of (S_n) from the diagram K-flat node. Step 2 makes H_n=Tot(P⊗_R V_n) K-flat over B by the change-of-rings and total-tensor nodes. Step 3 shows r:H→F(P) is a quasi-isomorphism, using flat restriction R→B and the common-quotient node, without assuming S_n flat over B. Step 4: I recomputed that β_n is an isomorphism (g^{-1}S_n⊗_{g^{-1}B}B'=B'/I^n=S_n' via the c_g projection square) and that it commutes with transitions by finite constant-map naturality. Steps 5–6: α_n=1⊗g_R^*v_n is a quasi-isomorphism by the pullback-tensor coherence, G(P) being K-flat over R' and g_R^* exact; this is the Tor-vanishing, which I checked independently via flatness over constant A. Step 7: the evaluation normalization gives ev_n χ=ε L(r_n)^{-1}v_n; this matches the scalar-insertion representative that the constant-completion statement gives. Step 8 is formal naturality of derived transitions. Step 9: the successive-quotient normalization gives d_B, the unit identity and the cocycle. Edge cases checked: K=0, I=A, T' empty, b=a, A=Z with I=(ℓ). I accept the 14 tool_uses as generic. Advisory: the identification of (P_n)_T with the constant sheaf is an inherited DAG convention; a parallel Q05 delivery (f39e58ab) of the same item exists, so whichever lands second is superseded."
  }
 }
