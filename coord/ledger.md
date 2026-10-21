@@ -20105,3 +20105,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: merged deliver/Q26/lem-sp-varying-ring-cartesian-comparison-lift-relabelling (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q72/lem-sfb-qlbar-direct-image-comparison (reviewer FIX; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q67/lem-sfb-localized-direct-image-comparison (reviewer PASS; first push; new nodes: 0)
+- 03:59 L: merged deliver/Q03/lem-cbc-derived-constant-tower-normalization (reviewer PASS; first push; new nodes: 0)

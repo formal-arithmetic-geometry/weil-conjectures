@@ -17,9 +17,89 @@
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal A'=\\operatorname{Mod}(S)$, and distinguish the complex/homotopy constant-tower functors $\\Delta_K,\\Delta'_K$ from their induced derived functors $\\Delta_D,\\Delta'_D$. Kernels and cokernels of towers are levelwise, so a constant short exact sequence is short exact; hence $\\Delta,\\Delta'$ are exact. Apply exact-functor derived factorization to obtain $\\Delta_D Q\\cong Q_{\\mathrm{Tow}}\\Delta_K$ and $\\Delta'_D Q'\\cong Q'_{\\mathrm{Tow}}\\Delta'_K$. Termwise module pullback of a constant tower has all levels $F(P)$ and identity transitions, so $\\widetilde F\\Delta_K=\\Delta'_K F$, naturally on complexes and homotopy classes. Set $U=\\Delta'_D L$ and $V=\\widetilde L\\Delta_D$; from now on use the preceding canonical identifications in their components.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02MZ, lemma-inverse-systems-abelian; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P$ be the class of K-flat complexes with flat terms. The diagram-replacement theorem with the one-object category gives, for every complex $X$, a quasi-isomorphism $P\\to X$ with $P\\in\\mathcal P$. Its tower version gives the resolving class of objectwise K-flat flat-term tower complexes, and $\\Delta_KP$ belongs to this class because every evaluation is $P$. The same theorem says that pullback inverts quasi-isomorphisms between objects of these respective classes. The resolving-class derived-functor theorem therefore makes $\\varepsilon_P$ and $T_P:=\\tau_{\\Delta_KP}$ invertible. This applies to the chosen universal pairs: compare each with the pair supplied by that theorem using universality in both directions; uniqueness makes the composites identities and the comparison preserves the counit. Put $E_P=\\Delta'_D(\\varepsilon_P):U(QP)\\to Q'_{\\mathrm{Tow}}\\Delta'_KF(P)$ and $a_P=T_P^{-1}E_P:U(QP)\\to V(QP)$. Both factors are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, dual part; sites-cohomology.tex Tags 077J and 0G7E as packaged by the cited strict-diagram node"
+   }
+  },
+  {
+   "text": "For any homotopy-category morphism $t:P\\to P'$ between objects of $\\mathcal P$, put $H(t)=Q'_{\\mathrm{Tow}}\\Delta'_KF(t)$. Naturality of the two counits gives $T_{P'}V(Qt)=H(t)T_P$ and $E_{P'}U(Qt)=H(t)E_P$. Consequently\n$$T_{P'}V(Qt)a_P=H(t)E_P=E_{P'}U(Qt)=T_{P'}a_{P'}U(Qt).$$\nCancel the isomorphism $T_{P'}$ to get $V(Qt)a_P=a_{P'}U(Qt)$. Thus the explicitly defined $a_P$ is natural on the full resolving class. This calculation uses the counits of the chosen pairs, not a comparison chosen without its counit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, computation on the resolving class; explicit counit naturality calculation"
+   }
+  },
+  {
+   "text": "In $K(\\mathcal A)$ the quasi-isomorphisms $W$ admit a right calculus of fractions and $Q$ is their localization. Apply the resolving-class extension lemma with source $K(\\mathcal A)$, target $D(\\operatorname{Tow}(\\mathcal A'))$, resolving predicate $\\mathcal P$, functors $UQ,VQ$, and components $a_P$. Its resolution hypothesis is Step 2, its naturality hypothesis is Step 3, and $UQ$ inverts $W$ because $Q$ does. It supplies a natural transformation $\\gamma:UQ\\to VQ$ with $\\gamma_P=a_P$. The homotopy-category objects here are the same underlying complexes; the replacements of Step 2 give the required morphisms in that category.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-sc-nattrans-from-resolving-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VC, definition-multiplicative-system, right Ore axioms; derived.tex Tag 05RT, lemma-acyclic; resolving-class extension supplied by lem-sc-nattrans-from-resolving-class"
+   }
+  },
+  {
+   "text": "For a resolution $s:P\\to X$ as in Step 2, naturality of $\\gamma$ gives\n$$\\gamma_X=V(Qs)a_PU(Qs)^{-1}.$$\nEvery factor is invertible, since $Qs$ is invertible. Thus $\\gamma$ is a natural isomorphism (inverting its naturality squares gives the naturality of its componentwise inverse). Both $UQ$ and $VQ$ invert quasi-isomorphisms and are already lifts of $U,V$ along $Q$. Apply the natural-isomorphism lifting clause of the localization universal-property node to obtain $b:U\\xrightarrow{\\sim}V$ with $b_{QX}=\\gamma_X$. At $P\\in\\mathcal P$ this yields $b_{QP}=T_P^{-1}E_P$, so $\\tau_{\\Delta P}b_{QP}=\\Delta'(\\varepsilon_P)$ as required.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VK, lemma-properties-right-localization; natural-transformation enhancement in Mathlib CategoryTheory/Localization/Predicate.lean, liftNatIso and liftNatTrans_app"
+   }
+  },
+  {
+   "text": "Let $c:U\\xrightarrow{\\sim}V$ satisfy the displayed normalization. Cancelling $T_P$ gives $c_{QP}=a_P=b_{QP}$ for every $P\\in\\mathcal P$. For any complex $X$, choose $s:P\\to X$ as in Step 2. Naturality of $b,c$ gives\n$$c_{QX}=V(Qs)c_{QP}U(Qs)^{-1}=V(Qs)b_{QP}U(Qs)^{-1}=b_{QX}.$$\nThe faithfulness clause (3) of the localization universal-property node makes $c=b$ on the derived category. Equality of natural isomorphisms follows from equality of their forward transformations. This proves uniqueness under exactly the representative normalization in the statement, without imposing a counit equation on non-K-flat complexes.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VK, lemma-properties-right-localization; Mathlib CategoryTheory/Localization/Predicate.lean, natTrans_ext"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Completed-pullback invocation, expanded constant-tower comparison in parent presentation-transport Step 4; resolving-class construction from Stacks 06XN and existing DAG descent/localization lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +135,45 @@
    "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Adjunction.derived'_counit: ∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryThe; CategoryTheory.Adjunction.derived_counit: ∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryThe; CategoryTheory.PreservesFiniteLimitsOfFlat.uniq: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  {J : Type v₁} [inst_2 : CategoryTheory.SmallCategory J] [CategoryTheory.FinCategory J]\n  (F : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat F]; CategoryTheory.PreservesFiniteLimitsOfFlat.fac: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  {J : Type v₁} [inst_2 : CategoryTheory.SmallCategory J] [inst_3 : CategoryTheory.FinCategory J]\n  {K : CategoryTheory.Functor J C} (F : CategoryTheory.Functor; CategoryTheory.PreservesFiniteLimitsOfFlat.lift: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\n        {J : Type v₁} →\n          [inst_2 : CategoryTheory.SmallCategory J] →\n            [CategoryTheory.FinCategory J] →\n              {K : ; CategoryTheory.compatiblePreservingOfFlat: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} D]\n  (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat G],\n  CategoryTheory.CompatiblePreserving K G; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac: ∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : Categ; CategoryTheory.lan_flat_of_flat: ∀ {C D : Type u₁} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D] (E : Type u₂)\n  [inst_2 : CategoryTheory.Category.{u₁, u₂} E] [inst_3 : CategoryTheory.HasForget E]\n  [CategoryTheory.Limits.HasLimits E] [inst_5 : CategoryTheory.Limits.HasColimit",
    "date": "2026-10-21",
    "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Cc]onstant|[Cc]onstant.*leftDerived|leftDerived_ext|leftDerivedUnique",
+   "results": "6 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. Read LeftDerived.lean:77-137 and ExactFunctor.lean for the generic derived-pair and exact-functor APIs; none states the constant strict-tower normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unique natural isomorphism between derived pullback and constant tower functors is computed by the inverse counit on K flat complexes",
+   "results": "8 hits: CategoryTheory.Functor.constComp; CategoryTheory.Functor.rightDerivedNatIso_inv; CategoryTheory.constantCommuteCompose; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.Functor.constCompEvaluationObj_inv_app; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. Read LeftDerived.lean:77-137 and ExactFunctor.lean for the generic derived-pair and exact-functor APIs; none states the constant strict-tower normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerived_ext",
+   "results": "0 hits: . Read LeftDerived.lean:77-137 and ExactFunctor.lean for the generic derived-pair and exact-functor APIs; none states the constant strict-tower normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total left derived functors commute with constant inverse systems via unique comparison normalized on K flat resolutions",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.NatTrans.leftDerived_comp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc. Read LeftDerived.lean:77-137 and ExactFunctor.lean for the generic derived-pair and exact-functor APIs; none states the constant strict-tower normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant diagram functor preserves K flat resolutions and commutes with total left derived extension of scalars by a unique counit normalized natural isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app. Read LeftDerived.lean:77-137 and ExactFunctor.lean for the generic derived-pair and exact-functor APIs; none states the constant strict-tower normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match for the full statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -77,5 +192,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-derived-constant-tower-normalization",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and all statement dependencies. Defined the representative comparison as the inverse tower counit composed with the constant ordinary counit; proved its naturality explicitly, extended it by the existing resolving-class lemma, lifted it by the existing localization universal-property Mathlib leaf, and proved uniqueness by cancellation along resolutions. No new nodes and no Lean edits or compiles.",
+  "blueprint": "Ancestor lem-cbc-completed-extension-zero-comparison, proof invocation of def-weil-pbc-completed-pullback; parent lem-cbc-adic-pullback-presentation-transport Step 4 constant-tower subargument. The six steps supply the normalization, naturality and uniqueness left implicit in that invocation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic resolving-class computation gives invertible counits for both chosen universal pairs; the CBC unit does not prove this general construction."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic strict-diagram resolutions and pullback invariance supply resolving classes for single complexes and strict towers."
+   },
+   {
+    "node": "lem-sc-nattrans-from-resolving-class",
+    "why": "Generic extension of a natural comparison from a resolving class is the categorical descent tool; no CBC-unit statement provides this general lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-sc-nattrans-from-resolving-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-a7406cdd1",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-a7406cdd1 (reviewer sub-agent of L); spot-checked: I read the item and all eight cited statements in full. The delivery creates no new nodes. The statement and stmt_deps are unchanged from live and side-live, where the item is still unsplit; it was not re-split, superseded or dropped, and it causes no cycle. Source: Stacks 06XN lemma-find-existence-computes (derived.tex:5092), dual part. Step 1: the levelwise tower node makes Δ, Δ' exact, the exact-functor factorization gives the derived functors, and F̃Δ_K=Δ'_K F holds strictly. Step 2: the diagram K-flat replacements (J = one object and J = N^op) give the resolving classes; objectwise quasi-isomorphisms are quasi-isomorphisms in Tow because cohomology is levelwise; lem-pur-left-derived-from-kflat-class then makes ε_P and τ_{ΔP} invertible, and this passes to the chosen pairs through the counit-compatible Kan comparison. Step 3: the naturality algebra checks out (cancel T_{P'}). Step 4: hypotheses of lem-sc-nattrans-from-resolving-class are met (right calculus from the multiplicative-system leaf, incoming resolutions, UQ inverts W). Step 5: γ_X=V(Qs)a_P U(Qs)^{-1} is invertible, and clause (2) of the localization leaf lifts it with φ=id. Step 6: uniqueness by cancelling T_P, naturality along s, then clause (3). Edge cases checked: zero complex, identity morphism of topoi, non-flat Z→Z/2, empty site. No duplicate found in the DAG. The three generic tool_uses are accepted. No SGA."
  }
 }
