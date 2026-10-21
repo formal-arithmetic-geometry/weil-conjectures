@@ -19262,3 +19262,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:08 L: returned deliver/U7/Sheaf.Paper.AdicCoefficientDatum (reviewer RETURN: (reviewer C-77542, head 775422335) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicCoefficien)
 - 00:09 L: returned deliver/B6/Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow (reviewer RETURN: (reviewer C-997a7, head 997a7a91e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Loc)
 - 00:10 L: returned deliver/K7/Sheaf.AlgebraicGeometry.StrictHenselizationRestriction (reviewer RETURN: (the landing tools, head e3d405983) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.StrictLocalSmallModel.So)
+- 00:10 L: returned deliver/N3/Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation (reviewer RETURN: (the landing tools, head 1fb6d473b) the delivery did not land: lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselDiviso)
