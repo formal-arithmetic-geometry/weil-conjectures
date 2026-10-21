@@ -19279,3 +19279,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:11 L: merged deliver/J1/Sheaf.CategoryTheory.CartanEilenbergHorizontalCutComparison (stage 3; reviewer PASS; first push; landing 20261021T001121-L-1372872 (proof); batch 20261021T001057; modules 1; new nodes 0)
 - 00:11 L: merged deliver/J6/Sheaf.Paper.AdicReductionCohomologySequence (stage 3; reviewer PASS; after a return; landing 20261021T001122-L-1373080 (interface); batch 20261021T001057; modules 2; new nodes 1)
 - 00:11 L: merged deliver/J7/Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus (stage 3; reviewer PASS; first push; landing 20261021T001124-L-1373453 (proof); batch 20261021T001057; modules 1; new nodes 0)
+- 00:11 L: merged deliver/K2/Sheaf.Paper.PbcConstructibleReductionCriterion (stage 3; reviewer PASS; first push; landing 20261021T001127-L-1373987 (proof); batch 20261021T001057; modules 1; new nodes 0)
