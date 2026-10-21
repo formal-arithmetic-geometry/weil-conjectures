@@ -22,8 +22,19 @@
    "elementary": true
   },
   {
-   "text": "Finite sums of I_R(L) are K-injective: component null-homotopies combine into a null-homotopy. Hom(P,I_R(L)^d)=Hom(P,I_R(L))^d by projections and finite-sum inclusions. Under these identifications the normalized comparison is Hom applied to the target augmentation, composed with that finite-sum isomorphism. The augmentation is a quasi-isomorphism between K-injectives, so the comparison is a quasi-isomorphism. For d=0 both complexes are zero.",
+   "text": "The sectionwise tensor-unit isomorphism sends x to 1 tensor x. The single-complex total-tensor isomorphism gives the same formula for complexes. Evaluating the normalization of the comparison on these sections identifies the rank-one comparison, after this tensor-unit isomorphism, with Hom(P,-) applied to the composite of the inverse tensor-unit isomorphism and the target K-injective augmentation. This is a quasi-isomorphism between K-injectives, so Hom preserves it.",
    "uses": [
+    "def-pur-kinjective-complex",
+    "def-pur-hom-complex",
+    "lem-pur-rhom-well-defined-universes",
+    "lem-sfb-internal-hom-comparison-exists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor with a fixed complex and the raw Hom(P,-) functor are additive, hence preserve finite products. Applying the first to a finite-power presentation of T shows that T tensor I_R(L) is a finite product of K-injectives and therefore K-injective. The natural transformation from raw Hom(P,T tensor I_R(L)) to its resolved representative is a quasi-isomorphism at T and at the unit. After taking homology it transports the finite-product limit cone of the raw Hom functor to the resolved Hom functor. Naturality of the comparison and the rank-one calculation then show that the comparison at T is an isomorphism on every homology object. Empty products cover rank zero without any additional assumption.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
     "def-pur-kinjective-complex",
     "def-pur-hom-complex",
     "lem-pur-rhom-well-defined-universes",
@@ -43,7 +54,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Subargument of lem-sfb-dc-hom-filtered-colimit, steps 2--9, with strict representative normalizations retained."
+  "place": "Finite-free subargument of lem-sfb-dc-hom-filtered-colimit, steps 2--9; implemented by tensor-unit section evaluation and transport of finite-product cones on homology (M3)."
  },
  "mathlib_searches": [
   {
@@ -122,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b5c9a",
-  "group": "R6",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261021T005750-L-1889871",
+  "landing": "20261021T014226-L-2390619",
   "kind": "interface",
-  "note": "independent cc review: moved Modules..Continuous block byte-identical to live (modulo blueprint tags, same file options); filteredColimit_comparison signature unchanged, proof complete from finite-free stage + filtered continuity (both checked true) + exact-colimit quasiIso stability + 2-of-3; all 4 modules compile (item 33.2 s at 560 s limit vs published 36.8 s; 60 s timeout was load ~85); axioms propext/Classical.choice/Quot.sound/sorryAx; 0 importers"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
