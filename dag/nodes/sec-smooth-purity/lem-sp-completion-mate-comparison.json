@@ -89,13 +89,11 @@
    }
   },
   {
-   "text": "For an edge $u:U\\to V$ and any $F\\in D(U,A)$ form the diagram projection map $h_{u,F}:\\mathcal R_V(Ru_*F)\\to R_u^{\\mathcal T}\\mathcal R_U(F)$ using $R_u^{\\mathcal T}\\Delta F=\\Delta Ru_*F$. It is the counit-tensor adjunct on the small diagram site. Evaluation at $n$ gives the ordinary projection map with coefficient $\\underline{P_n}$: evaluated K-injective tower resolutions compute ordinary direct image by [lem-weil-ringed-tower-pushforward-limit-comparison], evaluated pullback/tensor is the comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the adjunction counit is respected by the fraction formula of [lem-pc-pre-derived-adjoint-functors-general]. Take a bounded finite-projective $A$-complex representing $P_n$. Passing to constant module sheaves preserves this quasi-isomorphism: it is the module inverse image from the point, hence preserves kernels by left exactness and cokernels as a left adjoint. Its constant sheaves have in every degree explicit retractions of finite free sheaves, and inverse image preserves those retractions. Apply [def-weil-pbc-projection-formula-arrows] and [lemma-weil-pbc-projection-formula-totalization] on the ordinary small ringed topoi: their specified total projection and inverse are inverse isomorphisms, and the projection is exactly the counit-tensor adjunct just obtained. Hence every evaluation of $h_{u,F}$ is invertible. Its cone has zero cohomology at every level, so its cohomology tower is zero by [lem-weil-tower-category-levelwise-abelian]; therefore $h_{u,F}$ is invertible in the derived tower category. This proves invertibility of $H=G_g h_{f,K}$, after the pullback/reduction comparison, and proves the assertion about its evaluations. It uses neither finiteness of the set $P_n$ nor boundedness of $F$.",
+   "text": "For each fixed n, form the finite counit mate [def-sp-constant-quotient-projection]. Apply mateEquiv_vcomp to the normalized reduction/pullback square and the inverse evaluation/pullback square. It identifies evaluation of projection followed by the canonical evaluation/direct-image comparison with this finite mate. The evaluation/direct-image comparison is invertible by [def-cbc-strict-constant-tower-operations]. The single-quotient perfect projection theorem [lem-sp-constant-perfect-quotient-projection] therefore makes every evaluated projection invertible. To detect invertibility of the strict tower morphism, use DerivedCategory.isIso_iff. Exact evaluation commutes naturally with each homology functor; each component of the homology natural transformation is invertible, so NatIso.isIso_of_isIso_app makes the entire homology transformation invertible. This proves projection_isIso with a complete categorical argument. The finite perfect projection is the separate source lemma; no arbitrary comparison isomorphisms or equality-of-evaluated-morphisms criterion is introduced.",
    "uses": [
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-totalization",
+    "def-sp-constant-quotient-projection",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-sp-constant-perfect-quotient-projection",
     "lem-weil-tower-category-levelwise-abelian"
    ],
    "elementary": false,
@@ -213,9 +211,10 @@
   "lem-pc-pre-derived-adjoint-functors-general",
   "def-weil-pbc-adjunction-mate",
   "lem-sp-completed-pullback-adjunction",
+  "def-sp-constant-quotient-projection",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-sp-constant-perfect-quotient-projection",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "def-weil-pbc-projection-formula-arrows",
-  "lemma-weil-pbc-projection-formula-totalization",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-weil-pbc-adjunction-conjugate",
@@ -225,8 +224,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "Proof Step 4, missing integral completed-mate identification; explicit strict-diagram coherence and completion-unit transpose calculation, using Stacks 0941, 0A07, 0B56, 0944, 0E48, 099M and 099N; B3 stage-3 implementation of the original-site quotient compatibility, additivity and resolving-class construction of reduction_exists; V1 represents complex comparisons with explicit iterated endpoints and proved degreewise identities (2026-10-21).; T1 original-site implementation: coupled universal models and normalized augmentation/pullback. Reviewer C-63948 option (b): retain the six complete model proofs and leave projection_isIso open; the three unlanded projection modules and nodes are omitted.",
-  "group": "T1",
+  "place": "Proof Step 4, missing integral completed-mate identification; explicit strict-diagram coherence and completion-unit transpose calculation, using Stacks 0941, 0A07, 0B56, 0944, 0E48, 099M and 099N; B3 stage-3 implementation of the original-site quotient compatibility, additivity and resolving-class construction of reduction_exists; V1 represents complex comparisons with explicit iterated endpoints and proved degreewise identities (2026-10-21).; T1 original-site implementation: coupled universal models and normalized augmentation/pullback. Reviewer C-63948 option (b): retain the six complete model proofs and leave projection_isIso open; the three unlanded projection modules and nodes are omitted.; B3 proves the tower-to-single-quotient reduction by mate composition, exact homology/evaluation comparison and componentwise isomorphism detection. The remaining single-quotient perfect formula is explicitly named as its own source lemma.",
+  "group": "B3",
   "date": "2026-10-21"
  },
  "mathlib_searches": [
@@ -579,11 +578,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-021ef",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261021T061653-L-1809251",
+  "landing": "20261021T151106-L-1123595",
   "kind": "interface",
-  "note": "independent cc review: Delivered Models + item vs live ProEtaleConstantReductionTower (39 public signatures byte-identical; post-projection item body identical); change record vs changed defs; both nodes' proof_deps vs step uses; 6 direct importers compiled against delivered modules; #print axioms on the 6 closed holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

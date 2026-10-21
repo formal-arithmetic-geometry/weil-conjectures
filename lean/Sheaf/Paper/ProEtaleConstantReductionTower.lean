@@ -6,6 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.Paper.ProEtaleConstantReductionModels
+import Sheaf.Paper.ConstantPerfectQuotientProjection
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Perfect projection for strict constant-coefficient reduction towers
 
@@ -26,6 +28,51 @@ variable {U V : Scheme.{t}} (f : U ⟶ V)
 
 attribute [local irreducible] projection
 
+private theorem isIso_of_evaluations {T : Scheme.{t}} {K L : TD (A := A) T}
+    (a : K ⟶ L) (h : ∀ n : ℕᵒᵖ, IsIso ((quotientEvaluation (A := A) T n).map a)) : IsIso a := by
+  rw [DerivedCategory.isIso_iff]
+  intro q
+  let : ∀ n : ℕᵒᵖ,
+      IsIso (((DerivedCategory.homologyFunctor _ q).map a).app n) := fun n ↦ by
+    have := h n
+    let E := (CategoryTheory.evaluation ℕᵒᵖ
+      (reductionModules T (exchangeConstantRing T A))).obj n
+    exact (NatIso.isIso_map_iff (E.mapDerivedCategoryHomologyFunctorIso q) a).2
+      (show IsIso ((DerivedCategory.homologyFunctor _ q).map
+        ((quotientEvaluation T n).map a)) from inferInstance)
+  exact NatIso.isIso_of_isIso_app _
+
+private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
+    (quotientEvaluation V n).map (projection d f K) ≫
+        (quotientEvaluationPush (A := A) f n).app ((reduction d U).obj K) =
+      (quotientProjection d f n).app K := by
+  let a := proEtaleRingDerivedAdjunction f
+    (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A)
+  let b := exchangeTowerAdjunction f
+    (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A)
+  let α := TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom
+  let β := TwoSquare.mk _ _ _ _
+    (quotientEvaluationPull (A := A) f n).inv
+  have h := congrArg (fun z ↦ z.natTrans.app K) (mateEquiv_vcomp a b a α β)
+  have hp : (mateEquiv a b α).app K = projection d f K := by
+    unfold projection
+    exact (b.homEquiv _ _).symm_apply_eq.mp (mateEquiv_counit a b α K)
+  have he : mateEquiv b a β = quotientEvaluationPush (A := A) f n := by
+    rfl
+  have hab : α.hComp β =
+      TwoSquare.mk _ _ _ _ (quotientTensorPull d f n).hom := by
+    rfl
+  rw [hab] at h
+  simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk,
+    NatTrans.comp_app, Functor.associator_inv_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp,
+    Category.comp_id] at h
+  change (quotientProjection d f n).app K =
+    (quotientEvaluation V n).map ((mateEquiv a b α).app K) ≫
+      (mateEquiv b a β).app ((reduction d U).obj K) at h
+  rw [hp, he] at h
+  exact h.symm
+
 /-- Perfect quotients make the strict projection invertible, on all ambient inputs.
 Source: Stacks 0944, 099M (blueprint: lem-sp-completion-mate-comparison).
 Proof: evaluate its counit-tensor adjunct at every finite quotient. The canonical
@@ -34,7 +81,17 @@ Every evaluated cone is acyclic. Levelwise cohomology makes the strict cone acyc
 so the strict projection is invertible. No faithfulness of derived evaluations is used. -/
 @[instance]
 theorem projection_isIso (K : D (A := A) U) : IsIso (projection d f K) := by
-  sorry
+  apply isIso_of_evaluations
+  intro n
+  have : IsIso (quotientEvaluationPush (A := A) f n) :=
+    AlgebraicGeometry.ProEtale.StrictTower.evalR_isIso A f n.unop
+  have hf : IsIso ((quotientProjection d f n).app K) :=
+    quotientProjection_isIso d f n K
+  have hc : IsIso ((quotientEvaluation V n).map (projection d f K) ≫
+      (quotientEvaluationPush (A := A) f n).app ((reduction d U).obj K)) := by
+    rw [projection_evaluation]
+    exact hf
+  exact (isIso_comp_right_iff _ _).mp hc
 
 /-- The identity comparison of ordinary constant diagrams and termwise pullback.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/

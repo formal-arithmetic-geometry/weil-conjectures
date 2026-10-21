@@ -22882,3 +22882,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:10 L: merged deliver/NU/lem-sfb-pointed-finite-etale-limit-cover (reviewer PASS; first push; new nodes: 0)
 - 15:11 L: merged deliver/A6/Sheaf.AlgebraicGeometry.ConstructibleExtContinuityStratum (stage 3; reviewer PASS; first push; landing 20261021T151100-L-1118417 (proof); batch 20261021T151059; modules 1; new nodes 0; change records: coord/changes/A6-constructible-ext-stratum-exactness.md)
 - 15:11 L: merged deliver/A9/Sheaf.CategoryTheory.CommonStageKaroubiInverse (stage 3; reviewer PASS; first push; landing 20261021T151103-L-1120213 (proof); batch 20261021T151059; modules 1; new nodes 0)
+- 15:11 L: merged deliver/B3/Sheaf.Paper.ProEtaleConstantReductionTower (stage 3; reviewer PASS; first push; landing 20261021T151106-L-1123595 (interface); batch 20261021T151059; modules 2; new nodes 2)

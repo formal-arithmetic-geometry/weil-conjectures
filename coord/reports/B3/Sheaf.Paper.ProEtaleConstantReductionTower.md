@@ -1,110 +1,107 @@
 ## What changed
 
-In `Sheaf.Paper.ProEtaleConstantReductionTower`, proved quotient compatibility,
-additivity of the strict reduction functor, and existence of its total left-derived
-functor with the specified K-flat computation property. The last proof uses the
-existing independent-coefficient K-flat resolutions, derived scalar extension,
-exact scalar restriction, levelwise detection of quasi-isomorphisms, and the
-resolving-class construction of a left-derived functor. Two proved private helpers,
-`scalarReduction_map_quasiIso` and `kFlat_leftDerived_exists`, keep the coefficient
-map, target category and additive functor abstract during kernel checking; they
-introduce no public declarations or proof obligations.
+Replaced the sole sorry in `Sheaf.Paper.ProEtaleConstantReductionTower`,
+`AlgebraicGeometry.Scheme.OrderedExchange.projection_isIso`, by a categorical
+reduction to the perfect projection formula for one fixed quotient.
+The original declaration signature, instance attribute, and public imports stay unchanged.
+No existing definition or target statement changes.
 
-Added the private proof import
-`WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass`.
-Retained `Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients` and all
-original public imports. Removed unused private imports listed below. Added only
-file-local irreducibility attributes to large chosen comparison definitions: this
-prevents expensive unfolding while elaborating subsequent definitions. Every
-existing declaration signature and every non-theorem body is unchanged. No source
-library file, target statement, or consumer was adapted. The local attribute changes
-are recorded in `coord/changes/B3-ProEtaleConstantReductionTower-elaboration.md`,
-as requested by the first delivery preflight.
+The new module `Sheaf.Paper.ConstantPerfectQuotientProjection` defines exact derived
+evaluation, the existing pullback/evaluation and direct-image/evaluation comparisons,
+the pasted normalized finite tensor/pullback comparison, and its precise counit mate.
+These definitions introduce no unproved data and no freely chosen comparison isomorphisms.
+The parent proof uses Mathlib's `mateEquiv_vcomp` and `mateEquiv_counit` to identify
+evaluation of the original projection, followed by the canonical invertible
+pushforward/evaluation comparison, with that finite mate. Exact evaluation commutes
+with homology, and componentwise invertibility of a homology natural transformation
+detects invertibility of the strict-tower map. This uses neither faithfulness of
+derived evaluation nor equality detection by evaluation.
 
-Updated step 1, its dependencies, and proof origin in
-`lem-sp-completion-mate-comparison` to record the implemented resolving-class
-argument. The later steps remain needed by the unfinished comparisons.
-
-Validation: the final complete module compiled through `lcompile.py` in 55.1 seconds.
-The unchanged live consumers `Sheaf.Paper.CompletedProjectionCoherence` and
-`Sheaf.Paper.CompletedPullbackUnitTower` compiled against it in 9.7 and 12.0 seconds.
-These are separate single-file compiles, not a library build. An import-only
-axiom probe for the three filled declarations also compiled (1.7 seconds): it
-reports the standard axioms plus `sorryAx` from existing unfinished dependencies.
-This is a proof from the existing stated dependencies, not a claim that the
-entire transitive axiom closure has been completed.
+The finite module also contains fully proved private preparation for its source proof:
+`scalarResolution` realizes a bounded finite-projective scalar resolution by an actual
+augmentation quasi-isomorphism; `constantUnit` identifies the constant scalar module
+with the sheaf tensor unit; `constantFiniteRetract` constructs its finite-free
+retractions; and `constantResolution` realizes the bounded augmented resolution on the
+original pro-etale site, including its strict-perfect package and flat K-flat property.
+The final normalization of the finite mate with finite-total tensor projection remains
+in the separate source lemma below. The original-site object and morphism universes
+are preserved throughout. The downstream audit reports 86 transitive consumers and no
+external explicit use of the instance name; no consumer signature or definition changes.
+All original public declarations and docstrings below the proof are literally unchanged.
 
 ## Proved and sorry left
 
-Closed 3 of the 10 original holes; added 0 holes and split off 0 statements.
-All declarations below have node `lem-sp-completion-mate-comparison`.
+Validation: both sandbox Lean modules compile cleanly through `lcompile.py`; the
+parent categorical proof checks in 6 seconds. The required delivery preflight checks
+the packet again before pushing.
 
-Proved:
+Closed the body of
+`AlgebraicGeometry.Scheme.OrderedExchange.projection_isIso` (the item's only original
+sorry), from the new finite source theorem and the existing canonical evaluation
+comparison. The two private lemmas `isIso_of_evaluations` and `projection_evaluation`
+are proved without new holes. The scalar and constant-resolution helpers listed above
+are also proved without holes.
 
-- `AlgebraicGeometry.Scheme.OrderedExchange.quotient_comm`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.reductionModule_additive`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.reduction_exists`.
+Added exactly one sorry:
+`AlgebraicGeometry.Scheme.OrderedExchange.quotientProjection_isIso`, in
+`Sheaf.Paper.ConstantPerfectQuotientProjection`, node
+`lem-sp-constant-perfect-quotient-projection`. This is the Stacks 0944 perfect projection
+formula for a single fixed perfect scalar quotient and its specified counit mate;
+it contains no assertion detecting isomorphisms in a tower. Its docstring gives the
+complete finite resolution and normalization argument. Its proof is exactly `by sorry`.
 
-The seven original holes left unchanged are:
-
-- `AlgebraicGeometry.Scheme.OrderedExchange.step_existsUnique`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryAugmentation_existsUnique`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.augmentation_existsUnique`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryReductionPullInv_isIso`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.levelPullIso_transition`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.reductionPullIso_existsUnique`.
-- `AlgebraicGeometry.Scheme.OrderedExchange.projection_isIso`.
-
-The existing generic `completionMateComparison` reexport is unchanged and is not
-counted as a newly closed hole. The proved existence theorem uses existing stated
-results with their own proof obligations; this delivery does not claim those
-upstream obligations are closed. There are no new public declarations or hollow definitions.
+Thus the item has zero remaining sorries; the packet adds one elsewhere. This is a
+one-to-one decomposition, not a net proof or a net reduction in the closure's hole count.
+No sorry occurs in a definition, a private declaration, or a partially completed proof.
 
 ## No longer needed
 
-Removed these unused private imports from the item:
+No existing library module is withdrawn, and no global module pruning is claimed.
+The parent's direct proof dependency `def-weil-pbc-projection-formula-arrows`
+moves into the new finite source lemma's proof dependencies and remains needed there.
+The node `lemma-weil-pbc-projection-formula-totalization` and its module
+`Sheaf.Paper.ProjectionFormulaTotalization` are not needed on this route: the
+finite proof uses the already proved, universe-independent chain theorem
+`CategoryTheory.tensorAdjunctionTotal_isIso`, reexported by the retained arrow API,
+rather than the equal-site-universe ringed-site totalization theorem. This does not
+withdraw that module or assert that its other consumers no longer need it.
+The parent now needs only the finite theorem, the canonical strict-tower evaluation
+comparison, and homology conservativity for this part of its argument.
 
-- `Sheaf.Algebra.Homology.KFlat`.
-- `Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients`.
-- `Sheaf.CategoryTheory.DiagramSiteRealization`.
-- `Sheaf.CategoryTheory.KInjectiveTotalDerived`.
-- `Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral`.
-- `Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses`.
-- `Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients`.
-- `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition`.
-- `Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison`.
-- `Sheaf.Paper.CompletedPullbackAdjunction`.
-- `Sheaf.Paper.ProEtaleProjectionFormulaArrows`.
-- `Sheaf.Paper.ProjectionFormulaTotalization`.
-- `Sheaf.Paper.ProjectionMateExact`.
-- `Sheaf.Paper.RingedExchangeTensorCoherence`.
-- `Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses`.
-- `WeilConjectures.Algebra.Homology.TowerEvaluationKInjective`.
-- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`.
-
-No module or node is withdrawn. These direct private imports are unnecessary for
-the three implemented proofs and the existing definitions. Their mathematical
-results can still be needed by the seven unfinished proofs or by the generic
-comparison imported publicly; removal here does not establish that they are
-outside the targets' dependency closure. Accordingly the node retains those
-planned dependencies and all existing tool approvals.
+Removed redundant exploratory direct proof imports of
+`Mathlib.Algebra.Homology.DerivedCategory.Fractions` and
+`Sheaf.Paper.StrictPerfectPackageOnSite` from the new finite module; the APIs used by
+the proved helpers are already exposed by the retained imports. Removed an unnecessary
+public wrapper theorem for the already proved `ProEtale.StrictTower.evalR_isIso`.
+There are no removals from the original item's imports.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-No statement discrepancy was found. The original-site layer must be preserved:
-although its two live importers do not use all of it, the quarantined
-`Sheaf.Paper.OrderedExchangeCoefficientComparison` uses its constructions. A
-search restricted to live importers would incorrectly suggest it can be pruned.
-The quarantined source and its dependencies are preserved, and no withdrawal is
-proposed.
+The existing totalization and projection APIs do not by themselves identify the exact
+constant-coefficient finite mate on the original site: completed-coefficient formulas
+use another coefficient ring, and the general ringed-site statements use a small-site
+presentation with equal site universes. Applying either without the normalized scalar
+and representative comparisons would leave a gap. The new finite statement records
+that genuine source specialization explicitly; the parent now supplies all tower and
+mate-pasting glue in Lean. No statement is disputed or weakened, and the blueprint
+unit route is retained.
 
-For elaboration performance, use the existing finite-limit and finite-colimit
-preservation lemmas for scalar restriction rather than reconstructing exactness
-through the underlying sheaf functor. Large nested chosen comparisons also need
-file-local unfolding boundaries; no global transparency attributes were changed.
-The first preflight requested a change record for these local commands (included
-above). A subsequent compile exceeded 60 seconds; the private, proved helper
-lemmas reduced the checking cost, and the complete module then compiled.
+Checked the new statement against rank-zero terms, the zero and unit ideals, zero
+quotients, empty sites, and an unbounded input: none requires an extra hypothesis.
+The boundedness is only that of the perfect coefficient resolution, not of the input.
+
+## New nodes
+
+`def-sp-constant-quotient-projection` records the five canonical finite evaluation and
+mate definitions in `Sheaf.Paper.ConstantPerfectQuotientProjection`. The construction
+uses only the already normalized reduction and evaluation comparisons.
+
+`lem-sp-constant-perfect-quotient-projection` records the separate single-quotient
+perfect projection formula, with source, full proof in words, three Mathlib searches,
+and the exact Lean attachment. The parent node `lem-sp-completion-mate-comparison`
+changes only its proof, proof dependencies, and proof origin to match the categorical
+reduction. No definition or statement repair, change record, or forced consumer
+adaptation is needed.
 
 ## Second reading by B3
 

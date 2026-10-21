@@ -1,0 +1,136 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleConstantReductionTower",
+  "group": "B3",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for a single perfect quotient constant sheaf on unbounded derived modules",
+   "results": "Eight results about localization and single complexes; no projection-formula theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "tensorAdjunctionTotal_isIso",
+   "results": "No Mathlib hit. The project declaration was read in ProjectionFormulaArrows and supplies the finite-total chain isomorphism.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*projection|projection.*perfect",
+   "results": "No Mathlib match. The project has completed-coefficient formulas and small equal-universe formulas; neither directly specializes to the specified original-site constant-coefficient mate.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for a perfect constant quotient coefficient and unbounded derived direct image",
+   "results": "Eight unrelated hits about discrete quotient projections, projective-resolution augmentations and module cokernels; no derived projection formula.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 4, finite perfect-coefficient projection within lem-sp-completion-mate-comparison.",
+   "via": [
+    "lem-sp-completion-mate-comparison"
+   ]
+  }
+ },
+ "id": "lem-sp-constant-perfect-quotient-projection",
+ "kind": "statement",
+ "title": "Perfect projection for one constant quotient",
+ "statement": "With d, f:U→V, n and the fixed finite mate π_n of [def-sp-constant-quotient-projection], assume that each positive quotient A/I^m is perfect over A [def-pc-perfect-ring-complex], as recorded in d. For every unbounded K in D(U,A), π_n(K) is an isomorphism in D(V,A). The morphism is the specified counit mate, with no new choice of source or target isomorphisms. There is no completeness, properness, smoothness, etale-origin or boundedness hypothesis on K or f.",
+ "stmt_deps": [
+  "def-sp-constant-quotient-projection",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded finite-projective A-resolution of A/I^(n+1). Exact constant module realization preserves its augmentation quasi-isomorphism and finite-free retractions. Scalar tensor cancellation identifies finite evaluated reduction with total tensor by that resolution on flat K-flat complexes. The reduction counit fixes this comparison; the normalization of reductionPullIso fixes its compatibility with inverse image.",
+   "uses": [
+    "def-sp-constant-reduction-models",
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-injective representative J of K. Tensor by the bounded finite-projective coefficient preserves K-injectives. The derived-adjunction counit factorization computes the specified finite mate as localization of tensorAdjunctionTotal, through the normalized comparisons from the first step. Finite-free terms give the finite-product projection isomorphism; inclusions and retractions give the finite-projective inverse. Bounded signed totalization gives a chain inverse. Localization preserves both inverse identities, proving invertibility for the one fixed quotient. No tower conservativity is used in this finite theorem.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-constant-reduction-models",
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-projection-formula-arrows",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 and 0944, canonical projection map and perfect-coefficient projection formula; Tags 06YY and 0941, localization and evaluation."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original-site constant coefficient specialization of Tags 0B56 and 0944, with the existing counit-normalized reduction model.",
+  "group": "B3",
+  "date": "2026-10-21"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantPerfectQuotientProjection",
+  "file": "lean/Sheaf/Paper/ConstantPerfectQuotientProjection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.quotientProjection_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.OrderedExchange.quotientProjection_isIso"
+  ],
+  "statement": "theorem quotientProjection_isIso (n : ℕᵒᵖ) (K : D (A := A) U) :\n    IsIso ((quotientProjection d f n).app K)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261021T151106-L-1123595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261021T151106-L-1123595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
