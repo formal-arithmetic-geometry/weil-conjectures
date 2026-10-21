@@ -1,0 +1,82 @@
+{
+ "id": "lem-trf-point-sheaf-insertion-calculus",
+ "kind": "statement",
+ "title": "Normalized sheaf insertion calculus at an automorphic point",
+ "statement": "Let $k$ be an algebraically closed field, $s=\\operatorname{Spec}k$, $h:s\\xrightarrow{\\sim}s$ a scheme automorphism, and $A$ a finite commutative ring. Use compatible small skeletons of $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], its constant ring sheaf $A_s$ [def-weil-pbc-constant-sheaf], and the category $\\mathcal M$ of $A_s$-module sheaves [def-weil-sheaf-of-modules-category]. For $r\\geq1$ let $H_r=(h^r)^*$ be ordinary module pullback: inverse image followed by extension of scalars along the canonical constant-section-preserving map $c^{h^r}_A$ [def-weil-proetale-inverse-image, def-pur-sheaf-tensor-product, prop-weil-pbc-proetale-constant-ring-map]. Put $(R_rF)(U\\xrightarrow{u}s)=F(U\\xrightarrow{h^ru}s)$, with the restrictions of $F$ and the constant-coefficient action transported through $c^{h^r}_A$.\n\nFor $F\\in\\mathcal M$ define the $A$-module map $j_{r,F}:F(s,\\operatorname{id})\\to(H_rF)(s,\\operatorname{id})$ by restriction along $h^r:(s,h^r)\\to(s,\\operatorname{id})$, the inverse-image colimit coprojection at $(s,h^r)$ with graph $(\\operatorname{id}_s,\\operatorname{id}_s):s\\to s\\times_{s,h^r}s$, its sheafification map [def-weil-pbc-sheafification], and the scalar insertion $x\\mapsto x\\otimes1$. For $m\\geq1$ write $T_{m,F}:H_1H_mF\\xrightarrow{\\sim}H_{m+1}F$ for the ordinary canonical module-pullback compositor, oriented from successive pullback to direct pullback.\n\nThere are $A_s$-linear isomorphisms $e_{r,F}:H_rF\\xrightarrow{\\sim}R_rF$, natural in $F$ and in site objects. They have the following normalization: at $U\\xrightarrow{u}s$, insertion of $x\\in F(U,h^ru)$ at the comma index $(U,h^ru)$ with graph $(u,\\operatorname{id}_U):U\\to s\\times_{s,h^r}U$, followed by sheafification and $x\\mapsto x\\otimes1$, maps to $x$. With the identification $R_1R_mF=R_{m+1}F$ induced by $h^mh=h^{m+1}$, they satisfy\n$$e_{m+1,F}\\circ T_{m,F}=R_1(e_{m,F})\\circ e_{1,H_mF},\\qquad e_{r,F}(s)\\circ j_{r,F}=\\operatorname{res}_{h^r}^{F}.$$\nFor every $A_s$-module morphism $v:F\\to G$,\n$$ (H_rv)(s)\\circ j_{r,F}=j_{r,G}\\circ v(s),\\qquad\nj_{m+1,F}=T_{m,F}(s)\\circ j_{1,H_mF}\\circ j_{m,F}.$$\nFor every cochain complex $K$ of $\\mathcal M$ [def-weil-abstract-derived-category], the degreewise maps $j_{r,K^i}$ form an $A$-linear chain map $j_{r,K}:\\Gamma(s,K)\\to\\Gamma(s,C(H_r)K)$, natural for chain maps, and the last composition identity holds as an equality of chain maps with $T_m$ applied degreewise. Here $C(H_r)$ denotes termwise application of $H_r$ and $\\Gamma(s,K)^i=K^i(s,\\operatorname{id})$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CE (lemma-localize-given-products) and 06UM (section-pullback); agent refinement at powers of an automorphism, retaining old point-transport Steps 2-5. Deligne Weil II (1.1.7) fixes the transport convention."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback_assoc|conjugateEquiv_pullbackComp",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: generic compositors and free-sheaf formulas do not give the normalized initial-index point-section insertion and its sheaf/chain-map calculus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image colimit insertion at a terminal comma index identifies point section transport with restriction and respects composition of automorphisms",
+   "results": "8 hits: CategoryTheory.Limits.colimitOfTerminal, CategoryTheory.Functor.Final.ι_colimitIso_inv, CategoryTheory.Limits.isIso_ι_terminal, CategoryTheory.Limits.IsColimit.ofIsoColimit_desc, CategoryTheory.preservesColimitIso_inv_comp_desc_assoc, CategoryTheory.preservesColimitIso_inv_comp_desc, CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation_inv_colimit_map, CategoryTheory.Limits.IsColimit.coconePointsIsoOfNatIso_inv_desc_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic compositors and free-sheaf formulas do not give the normalized initial-index point-section insertion and its sheaf/chain-map calculus"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: generic compositors and free-sheaf formulas do not give the normalized initial-index point-section insertion and its sheaf/chain-map calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of finite constant modules on the proetale site of an algebraically closed field, restriction along powers of an automorphism followed by inverse image colimit insertion and tensor unit is natural and composes via the canonical module pullback comparison",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: generic compositors and free-sheaf formulas do not give the normalized initial-index point-section insertion and its sheaf/chain-map calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field automorphism, sheaf pullback is reindexing objects of the small site; the canonical pullback composition isomorphism sends nested colimit coprojections and tensor units to the direct coprojection, giving a cocycle of section maps",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic compositors and free-sheaf formulas do not give the normalized initial-index point-section insertion and its sheaf/chain-map calculus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-transport-composition",
+  "date": "2026-10-21",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Proof paragraph 'transports the pair ...' along the compact-support base-change identification; finite point-fiber insertion and its composition (old item Steps 2-5)",
+   "via": [
+    "lem-trf-point-transport-composition",
+    "lem-trf-compact-frobenius-transport-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

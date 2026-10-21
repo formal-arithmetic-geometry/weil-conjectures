@@ -21,117 +21,47 @@
  ],
  "proof": [
   {
-   "text": "Write $H_r=(h^r)^*$ for the underived module pullback, and $C(H_r)$ for its termwise action on complexes. Every $h^r$ is an isomorphism, since $h$ is an automorphism. The site equivalence of [lem-weil-proetale-isomorphism-inverse-image] (1) sends $(s,\\operatorname{id})$ to $(s,h^r)$, so $(s,h^r)$ is an object of the small pro-etale site. The ring $A$ is finite and commutative, and the canonical structure maps for its constant sheaves are isomorphisms by [prop-weil-pbc-proetale-constant-ring-map]. By [prop-weil-pbc-proetale-constant-exact], $H_r$ is exact. Thus [lem-weil-pbc-exact-functor-derived-factorization] applies: $C(H_r)$ preserves quasi-isomorphisms and represents $Q_r$ on every complex. Evaluation $\\Gamma(s,-)$ also preserves quasi-isomorphisms by [lem-weil-point-proetale-sections-exact]. Finally [lem-weil-isomorphism-derived-pullback], applied to $g=h^r$ and $\\Lambda=A$, shows that $Q_r$ preserves $D^b_c(s,A)$; here $\\ell$ is invertible on $s$ because $\\ell\\ne p$.",
+   "text": "Write $H_r=(h^r)^*$. Apply [lem-trf-point-exact-derived-model] to the fixed datum. It supplies exact termwise models for $Q_r$ and $V$, stability of $D^b_c(s,A)$, and identifies the specified $t_m$ with the class of the ordinary $T_m$. Its hypotheses hold: $k$ is algebraically closed, $A=\\mathcal O_E/\\varpi_E^n$ is finite commutative, $h$ is an automorphism, and $\\ell\\ne p$ makes $\\ell$ invertible on $s$.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-isomorphism-derived-pullback"
+    "lem-trf-point-exact-derived-model"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 015F (derived.tex, lemma-right-derived-exact-functor), 0D6D (lemma-derived-pullback-composition); exact finite constant-coefficient specialization"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Finite point-fiber part of the iterate transport: exact models"
    }
   },
   {
-   "text": "For a sheaf $F$ of $A_s$-modules define $R_rF$ by $(R_rF)(U\\xrightarrow{u}s)=F(U\\xrightarrow{h^ru}s)$, with the induced restrictions and the constant-coefficient action. Apply [lem-sfb-proetale-object-inverse-image-restriction] to $h^r:s\\to s$. It gives a natural $A_s$-linear isomorphism $e_{r,F}:H_rF\\xrightarrow{\\sim}R_rF$. Its normalization is explicit: at $U$, the initial index for inverse image is $(U,h^ru)$ with map $(u,\\operatorname{id}_U):U\\to s\\times_{s,h^r}U$. Its coprojection identifies $F(U,h^ru)$ with the presheaf inverse image, and the map to its sheafification is an isomorphism. The tensor extension along the coefficient isomorphism has inverse $x\\otimes a\\mapsto c_{h^r}^{-1}(a)x$; in particular $e_{r,F}$ takes the insertion of $x$, followed by $x\\mapsto x\\otimes1$, to $x$. This also describes $e_r$ on restrictions and on sheaf morphisms.",
+   "text": "Apply [lem-trf-point-sheaf-insertion-calculus] with this $k,A,h$. Its $j_{r,K}$ is the degreewise restriction, distinguished coprojection, sheafification, and tensor-unit map. The finite recipes of [def-weil-frobenius-point-transport] and [def-weil-inverse-image-pullback-comparison] therefore identify $\\iota_{\\mathsf L K}^{(r)}$ with its localized class. The calculus gives the chain-map equality $j_{m+1,K}=\\Gamma(C(T_m)_K)\\circ j_{1,C(H_m)K}\\circ j_{m,K}$, as well as naturality for all chain maps.",
    "uses": [
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE (lemma-localize-given-products), specialized to the pro-etale object h^r; initial-index normalization of inverse image"
-   }
-  },
-  {
-   "text": "Let $j_{r,F}:F(s,\\operatorname{id})\\to (H_rF)(s,\\operatorname{id})$ be the finite-level recipe in the statement, before localization. By [def-weil-frobenius-point-transport] and the finite clause (a) of [def-weil-inverse-image-pullback-comparison], this is restriction along $h^r$, insertion at $(s,h^r)$, and tensoring with $1$. Step 2 therefore gives\n$$e_{r,F}(s)j_{r,F}=\\operatorname{res}_{h^r}^F:F(s,\\operatorname{id})\\longrightarrow F(s,h^r).$$\nThis equality identifies precisely the specified insertion, rather than choosing an unspecified isomorphism of fibers. Restriction preserves the constant section $a\\in A$ by [def-weil-pbc-constant-sheaf], so this is $A$-linear. For a sheaf morphism $v:F\\to G$, the defining commutation of $v$ with restrictions says $v(s,h^r)\\operatorname{res}_{h^r}^F=\\operatorname{res}_{h^r}^Gv(s,\\operatorname{id})$. Naturality of $e_r$ then gives $(H_rv)(s)j_{r,F}=j_{r,G}v(s)$.",
-   "uses": [
+    "lem-trf-point-sheaf-insertion-calculus",
     "def-weil-frobenius-point-transport",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 06UM (section-pullback): inverse image on represented sections; explicit finite-level recipe, Deligne Weil II (1.1.7)"
-   }
-  },
-  {
-   "text": "Let $T_{m,F}:H_1H_mF\\xrightarrow{\\sim}H_{m+1}F$ be the ordinary module-pullback composition comparison. Under $e_r$ its normalization is\n$$e_{m+1,F}T_{m,F}=R_1(e_{m,F})e_{1,H_mF},$$\nwhere $R_1R_mF=R_{m+1}F$ by $h^mh=h^{m+1}$. To check this, use the inverse-image colimits of [def-weil-proetale-inverse-image]. A section $x\\in F(U,h^{m+1}u)$ at the direct initial index is sent by the inverse composition comparison to its nested initial insertions: first at $(U,hu)$ for $h$, then at $(U,h^mhu)$ for $h^m$. Both sides of the displayed equality return its label $x$. The initial coprojections are isomorphisms by [lem-sfb-proetale-object-inverse-image-restriction], so this checks the entire inverse-image comparison, not just selected sections. For module pullback the corresponding calculation is $(x\\otimes1)\\otimes1\\mapsto x\\otimes1$; the tensor relations and sheafification defining [def-pur-sheaf-tensor-product] give the same equality. The coefficient identifications agree: each is the map preserving constant sections, as specified by [prop-weil-pbc-proetale-constant-ring-map]; equivalently the two adjoint maps from the constant sheaf agree on its generating constant presheaf. Thus these are the canonical composition comparisons with the coefficient maps in the statement.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "def-pur-sheaf-tensor-product",
-    "prop-weil-pbc-proetale-constant-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 06UM (section-pullback), 03CE (lemma-localize-given-products); direct and nested initial coprojections, and module tensor units"
-   }
-  },
-  {
-   "text": "Apply Step 4 at the final object, followed by Step 3 twice. Naturality of $e_{m,F}$ with respect to the site arrow $h:(s,h)\\to(s,\\operatorname{id})$ gives\n\\begin{align*}\ne_{m+1,F}(s)T_{m,F}(s)j_{1,H_mF}j_{m,F}\n&=(R_1e_{m,F})(s)\\operatorname{res}_h^{H_mF}j_{m,F}\\\\\n&=\\operatorname{res}_h^{R_mF}e_{m,F}(s)j_{m,F}\\\\\n&=\\operatorname{res}_h^{R_mF}\\operatorname{res}_{h^m}^F\n=\\operatorname{res}_{h^{m+1}}^F\n=e_{m+1,F}(s)j_{m+1,F}.\n\\end{align*}\nThe penultimate equality is the presheaf composition law: after $R_m$, the arrow $h$ is $h:(s,h^{m+1})\\to(s,h^m)$, whose composite with $h^m:(s,h^m)\\to(s,\\operatorname{id})$ is $h^{m+1}$. Cancel $e_{m+1,F}(s)$ to obtain the required composition identity for sheaves. The restriction maps and the coprojection and tensor-unit maps commute with every sheaf morphism (Step 3), so applying this degree by degree to a complex gives an identity of chain maps, including their differentials.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 06UM (section-pullback): restriction formula and the presheaf composition law"
-   }
-  },
-  {
-   "text": "The class of $C(T_m)$ is exactly $t_m$ under the termwise models of Step 1. Indeed, choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution], on the ringed site $(s_{\\mathrm{proet}},A_s)$. By [lem-weil-pbc-proetale-derived-pullback-composition], $t_{m,P}$ is the inverse of the class of the ordinary comparison $(h^{m+1})^*P\\to h^*(h^m)^*P$, hence is the class of $T_{m,P}$. Every pullback here is exact by [prop-weil-pbc-proetale-constant-exact], so the arrows from $P$ to $K$ become isomorphisms after applying the termwise pullbacks, by [lem-weil-pbc-exact-functor-derived-factorization]. Naturality of the specified derived composition comparison and of the ordinary comparison then gives\n$$t_{m,K}=Q_{m+1}(P\\to K)\\,t_{m,P}\\,(Q_1Q_m(P\\to K))^{-1},$$\nand the identical conjugation formula for the class of $T_{m,K}$. They are therefore equal. This checks the normalization on arbitrary complexes, without assuming that a bounded constructible representative is K-flat. Localize the chain-map equality of Step 5 and apply evaluation, which preserves quasi-isomorphisms by [lem-weil-point-proetale-sections-exact]. The definition of $\\iota$ identifies its class with that chain map, so the resulting equality is $\\iota_N^{(m+1)}=V(t_{m,N})\\iota_{Q_mN}^{(1)}\\iota_N^{(m)}$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-point-proetale-sections-exact"
+    "def-weil-inverse-image-pullback-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0D6D (lemma-derived-pullback-composition), and derived.tex Tag 015F"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Finite point-fiber part of the iterate transport: explicit sheaf insertion"
    }
   },
   {
-   "text": "It remains to check naturality for every derived morphism, rather than only chain maps. Step 3, applied termwise, proves $V(Q_ru)\\iota_N^{(r)}=\\iota_{N'}^{(r)}V(u)$ for each chain map. If $w:K\\to L$ is a quasi-isomorphism, both $V(w)$ and $V(Q_rw)$ are invertible by Step 1. Multiplying that equality on the left by $V(Q_rw)^{-1}$ and on the right by $V(w)^{-1}$ gives\n$$V(Q_rw)^{-1}\\iota_L^{(r)}=\\iota_K^{(r)}V(w)^{-1}.$$\nHence naturality holds also for the formal inverse of $w$, and it is preserved by composition. The localization defining [def-weil-abstract-derived-category] constructs every derived morphism from chain maps and these formal inverses, so it holds for all derived morphisms. Finally restrict to the full subcategory $D^b_c(s,A)$: its stability under all $Q_r$ was checked in Step 1, and [def-weil-finite-coefficient-point] identifies $V$ there with termwise $\\Gamma(s,-)$. Both the composition equality and the naturality equality are thus in the exact categories and for the exact point-fiber maps asserted in the statement.",
+   "text": "Localize the chain-map equality using [lem-trf-point-exact-derived-model]. Its comparison formula changes the localized $T_m$ to the specified $t_m$, giving $\\iota_N^{(m+1)}=V(t_{m,N})\\circ\\iota_{Q_mN}^{(1)}\\circ\\iota_N^{(m)}$. Apply its natural-transformation descent to the $A$-linear sheaf maps $j_r$ of [lem-trf-point-sheaf-insertion-calculus]: for every derived $u:N\\to N\\prime$ it gives $V(Q_ru)\\circ\\iota_N^{(r)}=\\iota_{N\\prime}^{(r)}\\circ V(u)$. Restrict the two equalities to the full bounded constructible subcategory; its preservation and the identification of evaluation with the point fiber functor are supplied by the same exact-model lemma. This proves both clauses for every $m,r\\geq1$.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-finite-coefficient-point"
+    "lem-trf-point-exact-derived-model",
+    "lem-trf-point-sheaf-insertion-calculus"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU (definition-derived-category): localization at quasi-isomorphisms; elementary extension of naturality to the inverted arrows"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Finite point-fiber part of the iterate transport: assembly after localization"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "def-weil-proetale-inverse-image",
-  "def-pur-sheaf-tensor-product",
+  "lem-trf-point-exact-derived-model",
+  "lem-trf-point-sheaf-insertion-calculus",
   "def-weil-frobenius-point-transport",
-  "def-weil-inverse-image-pullback-comparison",
-  "def-weil-pbc-constant-sheaf",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "def-weil-abstract-derived-category",
-  "def-weil-finite-coefficient-point"
+  "def-weil-inverse-image-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -204,45 +134,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-trf-point-transport-composition",
   "worker": "stage1",
-  "summary": "Kept the statement and its statement dependencies unchanged. Proved the explicit finite recipe is restriction under the existing normalized inverse-image restriction isomorphism; checked direct versus nested initial indices and tensor units; calculated the sheaf and chain-map composition; identified the given derived comparison on arbitrary representatives through a K-flat resolution; extended naturality to inverted quasi-isomorphisms. All dependencies are existing nodes, and every step is below 2000 characters. No new nodes, no complete Lean attachment, no whole-item Mathlib match. LeanSearch was rate-limited and is recorded as unavailable.",
-  "blueprint": "Realizes the finite point-fiber part of the m-th-iterate transport in the proof paragraph of lem-trf-frobenius-operator-compact-description (main-20261015), through lem-trf-compact-frobenius-transport-composition. The unit sk-d-weil uses pullback composition to form Weil iterates; no unit route or statement is changed.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "Identifies the site object (s,h^r) and inverse image for an automorphism; a generic site tool, absent from the Weil-data unit."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Supplies the canonical coefficient isomorphism preserving constants, including its normalization for composition; generic coefficient tool."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Exactness of finite constant-coefficient pullback makes the explicit termwise maps compute derived maps; generic coefficient tool."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Exact evaluation at the algebraically closed point preserves quasi-isomorphisms; generic point tool."
-   },
-   {
-    "node": "lem-weil-isomorphism-derived-pullback",
-    "why": "Ensures h^r pullback remains bounded constructible, so every displayed point functor is defined; generic preservation tool."
-   },
-   {
-    "node": "lem-sfb-proetale-object-inverse-image-restriction",
-    "why": "Gives restriction and the initial-index coprojection normalization for pullback along the site object h^r; generic site-localization tool."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Allows testing the specified derived composition map on a flat-term K-flat resolution; generic ringed-site resolution tool."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Supplies precisely the K-flat termwise normalization of the canonical derived comparison named by the item; generic derived-functor tool."
-   }
-  ]
+  "summary": "Human-requested re-split of the 7316-character proof into two comparable statement-only tasks: normalized sheaf insertion calculus (old Steps 2-5), and exact derived point models/comparison/descent (old Steps 1,6,7). The unchanged statement is assembled in three short steps. All old arguments are retained verbatim in report.md with their allocation. Both new nodes are unsplit and searched using the logged search command.",
+  "blueprint": "Realizes the finite point-fiber part of the m-th-iterate transport in the proof paragraph of lem-trf-frobenius-operator-compact-description (main-20261015), through lem-trf-compact-frobenius-transport-composition. The unit sk-d-weil uses pullback composition to form Weil iterates; no unit route or statement is changed."
  },
  "tool_uses": [
   "lem-weil-proetale-isomorphism-inverse-image",
@@ -255,12 +151,12 @@
   "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q24-5a3aa40ce",
-  "group": "Q24",
+  "reviewer": "NT-cc-Q96-464d4a7b3",
+  "group": "Q96",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-5a3aa40ce (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, blueprint route, Deligne and Stacks sources. Verified finite coefficient/base-change hypotheses, pullback comparison direction, seven proof steps, edge cases, searches, and no duplicate or forbidden SGA use. Full review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-464d4a7b3 (reviewer sub-agent of L); spot-checked: I read the whole re-split delivery, and the mathematics holds. The item statement is byte-identical to the base. The proof went from 7322 to 1612 characters: a 3-step assembly of 2 new statement-only nodes of comparable size. lem-trf-point-sheaf-insertion-calculus carries old Steps 2-5 (3985 characters of old argument); lem-trf-point-exact-derived-model carries old Steps 1, 6 and 7 (3331 characters). No old argument is dropped, and neither node restates the item. Sheaf node checks: (1) h^r:(s,h^r)->(s,id) is a site arrow and the graph (id,id) gives the comma index (s,h^r). (2) The index (U,h^r u) with graph (u,id_U) is the initial pair of lem-sfb-proetale-object-inverse-image-restriction (1). (3) e_r(s)j_r=res_{h^r}. (4) R_1R_m=R_{m+1}. (5) res_h on R_mF composed with res_{h^m} gives res_{h^{m+1}}, so j_{m+1}=T_m(s)j_{1,H_m}j_m, with the order and the successive->direct direction matching the item. (6) h=id, the zero sheaf and m=1 all behave. Model node checks: (1) H_r is exact (prop-weil-pbc-proetale-constant-exact) and Gamma is exact because k is algebraically closed. (2) Termwise models come from lem-weil-pbc-exact-functor-derived-factorization. (3) Q_r preserves D^b_c (lem-weil-isomorphism-derived-pullback, since l != p). (4) t_m is the inverse of c_{h,h^m} from Tag 0D6D, and it equals the class of C(T_m) on any K by K-flat conjugation. (5) Descent of any natural alpha follows from the universal property of a localization, which is true. Assembly: j_r equals sigma followed by kappa (def-weil-frobenius-point-transport and clause (a) of def-weil-inverse-image-pullback-comparison), and applying descent with alpha=j_r gives naturality for every derived u. Duplicates: lem-weil-frobenius-point-transport-natural (r=1 only), lem-trf-integral-point-transport-tower-powers (integral towers) and lem-trf-derived-pullback-coherence are different statements. lem-pod-constant-comparison-module-localization states the model node's t_m clause in general; this is advisory, and that node's prover should cite it. Batch 5: the item is already in the batch-5 closure via def-pod-dual-tate-datum -> lem-trf-frobenius-operator-compact-description; it is the functoriality of the point Frobenius transport, not a step of the trace formula or of Poincare duality. Both flagged citations are its own split children. Their closures add no trf or pod nodes beyond the old proof's closure, and those nodes are generic, so both citations are accepted. FIXes (B3, missing statement references): (1) the sheaf node gets def-weil-pbc-sheafification; (2) the model node gets prop-weil-pbc-proetale-constant-ring-map, lem-weil-point-proetale-sections-exact (V_amb is now introduced explicitly) and lem-weil-pbc-exact-functor-derived-factorization. Each is added in the text and in stmt_deps. No SGA is cited. Sources checked: Stacks Tags 03CE, 06UM, 0D6D, 06YS, 015F, 05RU and the main-20261015 proof paragraph. Mid-review the snapshot's other-chapter symlinks vanished, so I read those statements from clones/live.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
