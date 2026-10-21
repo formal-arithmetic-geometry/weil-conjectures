@@ -18,9 +18,68 @@
   "lem-weil-pbc-profinite-point-pullback",
   "sk-d-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=\\Psi$ and $z_j=F^j\\circ z$ for $j\\geq0$. Associativity gives $F^m\\circ z_j=F^j\\circ F^m\\circ z=z_j$, so every $z_j$ is fixed by $F^m$, including $z_1=\\Psi z$. Also $z_{m+j}=z_j$ as actual morphisms $s\\to X$. No finiteness or invertibility of $F$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), the loop based at a fixed point; elementary equality of powers of the single endomorphism."
+   }
+  },
+  {
+   "text": "Put $B_j=Lz_j^*M$. Let $c_j:Lz_{j+1}^*M\\xrightarrow{\\sim}Lz_j^*LF^*M$ be the pullback-composition comparison, and set $A_j=(Lz_j^*\\psi)\\circ c_j:B_{j+1}\\xrightarrow{\\sim}B_j$. The cited coherence theorem supplies the module-object and derived composition comparisons and their identity, associativity and common-composite compatibilities; it applies to the pulled-back condensed coefficient ring used here. Functors preserve inverses, so $A_j$ is an isomorphism. Substituting the morphism equality $z_{m+j}=z_j$ identifies $B_{m+j}$ with $B_j$ and $A_{m+j}$ with $A_j$: both the functor $Lz_j^*$ and its natural comparison $c_j$ then have identical arguments. In particular $A_m=A_0$ after these equality identifications.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (2), canonical pullback-stalk comparisons; Part (3), the one-step transport. Coherence is taken from the cited node, not from finite-coefficient stalk comparisons."
+   }
+  },
+  {
+   "text": "For $j,r\\geq0$, let $C_{j,r}:B_{j+r}\\to B_j$ be $Lz_j^*\\psi_r$ preceded by $Lz_{j+r}^*M\\cong Lz_j^*L(F^r)^*M$. Prove simultaneously for all $j$ by induction on $r$ that $C_{j,0}=1_{B_j}$ and, for $r>0$, $C_{j,r}=A_j\\circ A_{j+1}\\circ\\cdots\\circ A_{j+r-1}$. The base follows from the identity comparison and $\\psi_0=1$. For the successor, substitute $\\psi_{r+1}=\\psi\\circ LF^*\\psi_r$; naturality of the composition comparison moves $Lz_j^*LF^*\\psi_r$ past $c_j$, and the associativity comparison identifies the remaining pullback from $z_j,F,F^r$ with that from $z_{j+1},F^r$. Thus $C_{j,r+1}=A_j\\circ C_{j+1,r}$, which gives the displayed product by the induction hypothesis. For $r=m$, the equality $z_{j+m}=z_j$ and the identity coherence show from the definition of the fixed-point identification that $C_{j,m}=V_{z_j,m}$.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Parts (2)–(3), expand the iterated Weil map and the commuting-iterate cocycle as an explicit induction on the length of the stalk path."
+   }
+  },
+  {
+   "text": "If $m=0$, step 3 gives $V_{z,0}=1_{B_0}$ and $V_{z_1,0}=1_{B_1}$, hence $A_0\\circ V_{z_1,0}=V_{z,0}\\circ A_0$. If $m>0$, step 3 and $A_m=A_0$ give $A_0\\circ V_{z_1,m}=A_0\\circ A_1\\circ\\cdots\\circ A_m=(A_0\\circ\\cdots\\circ A_{m-1})\\circ A_0=V_{z,m}\\circ A_0$. This is associativity of composition of the displayed maps, not an identification of arbitrary coefficient categories. Since $A_0$ is invertible it conjugates $V_{z_1,m}$ to $V_{z,m}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), the two routes around the stalk loop, with the actual maps and the zero-iterate case written out."
+   }
+  },
+  {
+   "text": "Apply the cited categorical conjugacy theorem in the braided (indeed symmetric) monoidal category $\\mathcal D_s$ with $P=B_1$, $Q=B_0$, $u=V_{z_1,m}$, $v=V_{z,m}$ and $a=A_0$. The two required right duals are exactly those assumed in the item; step 4 is its intertwining hypothesis. Its conclusion is $\\operatorname{tr}_{\\mathcal D_s}(V_{\\Psi z,m})=\\operatorname{tr}_{\\mathcal D_s}(V_{z,m})$ as endomorphisms of the same unit $U_s$.",
+   "uses": [
+    "lem-zl-dualizable-categorical-trace-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), last sentence, using the abstract categorical conjugacy law rather than the perfect ordinary-module specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-zl-dualizable-categorical-trace-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+  "place": "Parts (2)–(3), coherent-pullback analogue for condensed modules; explicit stalk-path product proof checked against lean/WeilConjectures/TraceFormula/Slop/Stalk.lean:157–250."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -70,10 +129,45 @@
    "results": "0 hits: ",
    "date": "2026-10-21",
    "verdict": "no match: hits are ordinary linear/field traces, ring Frobenius or condensed infrastructure; none supplies the stalk-transport intertwining for condensed Weil objects"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkFrobenius|WeilBoundedConstructible|trace_eq_of_iso",
+   "results": "; 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The categorical local Frobenius trace is invariant along the orbit of a scheme endomorphism equipped with an invertible Weil structure",
+   "results": "; 8 hits: LinearMap.trace_conj', LinearMap.trace_conj, LinearMap.trace_map, Algebra.trace_eq_of_algEquiv, LinearMap.traceAux_eq, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.frobenius, coe_frobenius_comp_coe_frobeniusEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary linear trace conjugacy and isocrystal Frobenius do not state this condensed stalk result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"trace\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local categorical Frobenius traces at a fixed point and its endomorphism translate agree for an invertible Weil structure on condensed derived modules",
+   "results": "; 8 hits: LightCondensed.ihomPoints_symm_comp, CondensedMod.IsSolid, LightCondensed.ihomPoints, LightCondensed.instMonoidalCategoryLightCondMod, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed tensor/Hom infrastructure, not stalk Frobenius."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of the iterated Weil map on the stalk at z equals its trace on the stalk at Psi z by cyclic permutation of one step transport maps",
+   "results": "; 8 hits: trace_quotient_eq_trace_localization_quotient, Algebra.traceMatrix_localizationLocalization, Algebra.trace_localization, Algebra.trace_quotient_mk, Algebra.normalizedTrace_trans, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace_trans_apply, Algebra.normalizedTrace_comp_algHom",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern algebra traces and localization, not categorical stalk endomorphisms."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-finite-stage-categorical-trace",
@@ -104,5 +198,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-condensed-stalk-frobenius-orbit-trace",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the coherent pullback transport into one-step stalk maps and proved the iterated-path product by induction. Periodicity of the points gives an explicit conjugacy, including m=0. Added only the general braided categorical trace-conjugacy interface, already stated by a project declaration, rather than using the finite ordinary-module trace law outside its hypotheses. The previous rejected attachment is not resubmitted.",
+  "blueprint": "prop-every-iterate-trace, proof trace-identity sentence on independence of geometric lifts, via lem-zl-finite-stage-categorical-trace; implements the conjugacy calculation in lem-trf-local-frobenius-conjugacy.proof.md parts (2)–(3), in the condensed coefficient category.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic coherent module-object and derived pullback comparisons for the same condensed coefficient construction; needed for the stalk-path induction and not supplied by the zeta unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-116ebaef5",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-116ebaef5 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, the parent lem-zl-finite-stage-categorical-trace, every cited statement (lem-weil-pbc-profinite-point-pullback, sk-d-trace, sk-def-sfb-module-derived-pushpull, def-sfb-dc-upper-star, the dc-setting, bounded-constructible and Qlbar definitions), the main-20261015 lem-trf-local-frobenius-conjugacy proof parts (1)-(3), and the live Lean in Stalk.lean:120-255 and Braided.lean:61-96. Status: live and side-live have the item unsplit with an identical statement and stmt_deps. It has no repair note, no competing split, is not on any drop list, and contains no SGA reference. The math holds. Step 1: z_{m+j}=z_j follows from commuting powers. Step 2: A_j is built from the pullback comparisons fixed in the statement; z_{m+j}=z_j carries A_{m+j} to A_j. Step 3: the induction is stated for every j, with base r=0 and successor C_{j,r+1}=A_j C_{j+1,r}, from naturality of c_j and the associativity coherence; C_{j,m}=V_{z_j,m}. This is the source's cocycle (2). Step 4: I checked the domains; A_0 V_{z_1,m}=V_{z,m} A_0 uses A_m=A_0, and m=0 is the identity case. This is the source's conjugacy (3). Step 5 applies the new node with P=B_1, Q=B_0, a=A_0. Small cases checked: m=0, m=1, X=s with Psi=id, a period that divides m without equalling it, zero stalk, k not algebraically closed. The parent's use (induction along Phi^i z_x^0, duals from its step 3) matches the item's hypotheses. New node: the braided-category trace conjugacy law is true and is exactly Lean trace_eq_of_iso (Braided.lean:92-96), with the same trace convention as sk-d-trace. It is not a duplicate: prop-trf-trace-formal-laws (1) covers Perf(A) of ordinary modules only, and the DAG grep found no other node stating it. It is not elementary, since cyclicity needs a mate and braiding chase. It does not restate the item, and its form and searches are fine. tool_uses lem-weil-pbc-profinite-point-pullback is accepted as generic pullback coherence whose comparisons the statement already uses. Advisories: attach trace_eq_of_iso to the new node (lean_candidates is empty there); the braided structure on D_s is presupposed by the statement, the same as in the parent; the citations.json named in the report was not delivered, which is harmless."
  }
 }

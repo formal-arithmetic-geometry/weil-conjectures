@@ -21843,3 +21843,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: returned deliver/N0/det-def-sfb-filtered-two-colimit-model (reviewer RETURN: Superseded again: A6, A7, B10 and G4 (fourth push of this split). Process: the live item is split and reviewed. E1's sta)
 - 09:17 L: merged deliver/Q56/lem-sfb-intrinsic-finite-derived-pullback (reviewer PASS; first push; new nodes: 0)
 - 09:17 L: merged deliver/Q85/lem-wf-tate-twist-frobenius (reviewer FIX; first push; new nodes: 0)
+- 09:17 L: merged deliver/Q100/lem-zl-condensed-stalk-frobenius-orbit-trace (reviewer PASS; first push; new nodes: 1)
