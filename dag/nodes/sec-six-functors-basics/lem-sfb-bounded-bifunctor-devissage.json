@@ -15,49 +15,56 @@
  ],
  "proof": [
   {
-   "text": "For an exact functor G:D(C)→T, let P(X) mean S(G(X[0])) and let Q(L) mean S(G(L)). Both are closed under isomorphisms, and Q is triangulated and stable under all integer shifts, by the exactness of G and the strict fullness and triangulated closure of S. This choice of P needs no closure assumption on the original classes A₀ and B₀.",
+   "text": "An exact functor $G:D(\\mathcal C)\\to\\mathcal T$ is additive. It preserves zero: $\\mathrm{id}_{G(0)}=G(\\mathrm{id}_0)=G(0)=0$. Set $Q_G(L)\\iff G(L)\\in\\mathcal S$. Functors preserve isomorphisms; the shift comparisons and image distinguished triangles, together with strict fullness of $\\mathcal S$, show that $Q_G$ contains zero and is closed under isomorphisms, integer shifts and extensions. No closure assumption on the original classes is used.",
    "uses": [
     "def-weil-triangulated-category",
     "def-weil-triangulated-subcategory"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), finite truncation induction in each variable; abstract tower: BBD 1.3.3-1.3.6, 1.3.13"
+   }
   },
   {
-   "text": "Use the already proved DerivedCategory.exists_iteratedExtensions_of_bounded in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall. For a bounded L whose cohomology objects satisfy P, it expresses L as a finite iterated extension of objects isomorphic to X concentrated in degree n, with P(X). This theorem implements finite standard-t-structure truncation induction, splitting off the top cohomology. The canonical singleFunctors.shiftIso identifies X in degree n with X[0][-n], so shift and isomorphism closure give Q on each such object. The proved DerivedCategory.iteratedExtensions_le then gives Q(L). This is the private one-variable helper bounded_functor_devissage; all library results used here are proved, with no new open lemma.",
+   "text": "Fix $F\\in\\mathcal A_0$ and $G=B(F[0],-)$. Choose $c\\in\\mathbf Z$, $n\\in\\mathbf N$ with $M\\in D(\\mathcal B)^{\\ge c}\\cap D(\\mathcal B)^{\\le c+n-1}$. Apply lem-sfb-bounded-postnikov-extension-generation to the standard t-structure and $M$. Its tower has $L_0\\cong0$, $L_n\\cong M$ and factor $H^r(M)[0][-r]$ at $r=c+j$. If $H^r(M)=0$, its degree-zero image under $G$ is zero. Otherwise $h_{MB}$ and the pair hypothesis give $G(H^r(M)[0])\\in\\mathcal S$. Shift closure and exactness give $Q_G$ on every factor. Induct on $j=0,\\ldots,n$: the base is $Q_G(L_0)$; the tower triangle and extension closure give $Q_G(L_{j+1})$ from $Q_G(L_j)$. The endpoint isomorphism gives $B(F[0],M)\\in\\mathcal S$.",
    "uses": [
+    "lem-sfb-bounded-postnikov-extension-generation",
     "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-subcategory"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply the one-variable helper to G=B(-,M) and K. For each q, if H^q(K) is zero then its degree-zero image is zero, since both the single functor and G preserve zero objects. It belongs to S, which contains every zero object. Otherwise hKA places H^q(K) in A₀.",
-   "uses": [
     "def-weil-triangulated-category",
     "def-weil-triangulated-subcategory"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), finite truncation induction in each variable; abstract tower: BBD 1.3.3-1.3.6, 1.3.13"
+   }
   },
   {
-   "text": "In the nonzero case of step 3 apply the helper to G=B(H^q(K)[0],-) and M. For each r, a zero H^r(M) again gives a zero image in S. A nonzero H^r(M) belongs to B₀ by hMB, and h₀ gives S(B(H^q(K)[0],H^r(M)[0])). Thus the inner helper gives S(B(H^q(K)[0],M)), and the outer helper gives S(B(K,M)). These two finite inductions cover arbitrary integer intervals, zero objects, gaps and empty classes without assuming zero belongs to A₀ or B₀.",
+   "text": "Fix $M$ and $G=B(-,M)$, and choose $a\\in\\mathbf Z$, $m\\in\\mathbf N$ with $K\\in D(\\mathcal A)^{\\ge a}\\cap D(\\mathcal A)^{\\le a+m-1}$. Apply lem-sfb-bounded-postnikov-extension-generation to $K$. For each tower factor $H^q(K)[0][-q]$, zero cohomology gives a zero image; otherwise $h_{KA}$ puts $H^q(K)$ in $\\mathcal A_0$, and step 2 gives $G(H^q(K)[0])\\in\\mathcal S$. Shift closure gives $Q_G$ on the factor. Starting from the zero endpoint, induction on the $m$ triangles gives $Q_G$ on every successive middle vertex by exactness and extension closure. Transport across the final isomorphism to obtain $B(K,M)\\in\\mathcal S$. Negative intervals, gaps, acyclic inputs and empty classes cause no change: only nonzero cohomology uses the class hypotheses.",
    "uses": [
+    "lem-sfb-bounded-postnikov-extension-generation",
+    "def-sbc-standard-tstructure-derived-category",
     "def-weil-triangulated-category",
     "def-weil-triangulated-subcategory"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), finite truncation induction in each variable; abstract tower: BBD 1.3.3-1.3.6, 1.3.13"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-triangulated-category",
   "def-weil-triangulated-subcategory",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-abstract-derived-category"
+  "lem-sfb-bounded-postnikov-extension-generation",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 08J5, the same two finite Postnikov inductions, reusing the fully proved DerivedCategory.exists_iteratedExtensions_of_bounded and iteratedExtensions_le in lean/WeilConjectures/CategoryTheory/DerivedCategory/BoundedEssentiallySmall.lean; one-variable inverse-image-property glue and zero cases proved in the item module by H2."
+  "place": "Tag 08J5 (remark-truncation-distinguished-triangle), finite truncation induction in each variable; abstract tower: BBD 1.3.3-1.3.6, 1.3.13"
  },
  "mathlib_searches": [
   {
@@ -175,27 +182,17 @@
   "date": "2026-10-21",
   "item": "lem-sfb-bounded-bifunctor-devissage",
   "worker": "stage1",
-  "summary": "Wrote both finite truncation inductions directly using existing nodes. Checked endpoint quasi-isomorphisms, zero base cases and gaps in the support without requiring zero in either class. No statement change, new nodes, Lean writing or compilation. No exact project attachment or Mathlib leaf found.",
-  "blueprint": "Realizes the bounded-complex passage in reviewed DAG proof step 5 of det-lem-integral-models-operations, serving paragraph (2) of its blueprint proof: extension of the sheaf tensor calculation to bounded complexes by finite truncations.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-truncation-triangle",
-    "why": "Generic successive-cohomology triangle for arbitrary abelian categories, used in both finite inductions; the integral-model unit does not separately state it."
-   },
-   {
-    "node": "lem-weil-pbc-truncation-descends",
-    "why": "Generic canonical-truncation cohomology formula and descent, used to identify finite-tower endpoints; no integral-model route is replaced."
-   }
-  ]
+  "summary": "Repaired the returned extraction: the new statement now constructs an ordered finite Postnikov tower for any t-structure, not the already proved derived-category iteratedExtensions property. Kept the parent statement and all live Lean/review metadata. Both finite image inductions, zero cases and endpoint transports are explicit in an assembly below 3000 characters. No Lean changes or compilation.",
+  "blueprint": "Realizes the bounded-complex passage of det-lem-integral-models-operations, paragraph (2), retaining both finite truncation inductions; the new node carries the truncation construction and its identifications, in the general t-structure form of BBD 1.3.3-1.3.6."
  },
  "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NF-58701bbdc",
-  "group": "NF",
+  "reviewer": "NT-cc-NA-9f1ae700d",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-58701bbdc (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement and the parent. The statement is true and unchanged, and it is exactly what step 5 of det-lem-integral-models-operations needs (derived tensor, integral scalar-model classes, D^b_c). Step 1 (zero object, shift and extension closure) follows from def-weil-triangulated-category and def-weil-triangulated-subcategory; strict fullness absorbs H^q being defined only up to isomorphism, so the classes need not be closed under isomorphism. Step 2's endpoints follow from the H^r formula in lem-weil-pbc-truncation-descends (a) and the localization; it is correctly marked elementary. Step 3's triangle is lem-weil-pbc-truncation-triangle; I checked it against Stacks 08J5 (derived.tex:4099-4103, a=q-1), and the tag-label mapping is correct. Step 4 (j=0..d-c+1) and step 5 (j=0..b-a+1) are both set up correctly. H^q[-q]=(H^q[0])[-q] holds, and gaps and empty classes go through the zero cases. Edge cases tested: one-degree inputs, acyclic inputs, empty classes, gaps, negative intervals. No duplicate found: lem-sbc-cohomology-in-weak-serre-subcategory and the trf thick-closure and devissage nodes state different things. There are no new nodes, no SGA citations and no repair note for this item. I accept the two declared tool uses (generic truncation-triangle and truncation-descends nodes of sk-thm-properbasechange). Mathlib searches are recorded with unavailable services marked as such. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-9f1ae700d (reviewer sub-agent of L); spot-checked: Judged on merits: the side-live repair note is still released and the 10:58Z maintenance rule withdrew the A7/B10 supersession rule, so the 3b61e28f return points no longer decide this push. Re-split audit against the 5-step proof of 3119 chars from note time (NF 58701bbdc): old step 1 (S closure) is new step 1. Old steps 2-3 (truncation endpoints and the triangle τ≤q−1→τ≤q→H^q[−q]) moved into the new node lem-sfb-bounded-postnikov-extension-generation. Old steps 4-5 (the induction in M with F[0] fixed and the induction in K) are new steps 2-3, with base, successor, zero/nonzero split and endpoint still written out. Nothing is dropped. The assembly is 1888 chars and nothing in the item changed except proof, proof_deps and split_report. proof_deps equals the union of the uses, tool_uses is [], there is no cycle and no SGA. New node: a finite ordered tower L_j=τ≤a+j−1 K for an arbitrary t-structure. I checked L_0≅0 since K∈U^{≥a}, L_n≅K, and the factor τ≥qτ≤q K=H_t^q[−q] (BBD 1.3.3/1.3.5). n=0 gives K≅0 by orthogonality; I also tested n=1, gaps and negative a. In the standard case the factor is H^q[0][−q] (BBD 1.3.6). Sources read: BBD PDF pp.30-35 (1.3.3, 1.3.13) and Stacks derived.tex:4075-4108 (08J5). The node is not B10, since no project declaration states it (the Mathlib TStructure SpectralObject/TruncLTGE triangles are only components). It is not a duplicate of lem-sfb-degreewise-bounded-devissage (property propagation on D(C)) or of the cone-witness, heart-short-exact-triangles or pbc truncation-triangle nodes. C5 is advisory: citing degreewise-bounded-devissage would leave no new node, which the note forbids. Item steps check out: step 2 applies the node to the standard t-structure on M with h_MB, the pair hypothesis and shift/extension closure; step 3 does the same on K with G=B(−,M), using step 2 for degree-zero images. Edge cases fine: acyclic or zero inputs, empty classes, gaps, classes without zero. One FIX (B3): the node says the t-structure need not be bounded and uses τ≤q, τ≥q, but def-weil-t-structure defines truncations only for bounded t-structures. I added [lem-weil-heart-short-exact-triangles] (clause 1: the unique triangle and functors for any t-structure) to the statement and stmt_deps. That node is Lean-attached, already in the parent det-lem-integral-models-operations closure, and creates no cycle. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-bounded-postnikov-extension-generation.json. Maintainer: retire the released repair note after landing.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedBifunctorDevissage",
