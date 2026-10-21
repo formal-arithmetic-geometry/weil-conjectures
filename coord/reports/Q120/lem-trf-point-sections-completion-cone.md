@@ -1,0 +1,59 @@
+# Q120 stage-1 delivery: lem-trf-point-sections-completion-cone
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-point-sections-completion-cone.json`: statement, split into eight proof steps, preserving its statement and imported metadata. No whole-item Mathlib match. No new nodes and no Mathlib leaves.
+- `citations.json`: one verbatim statement quote for every node used by every numbered proof step.
+- `report.md`: this report. `searches.jsonl` contains the searches actually run; `write_split.py` is sandbox-only preparation and is not a delivery file.
+
+## Attachments
+
+None. Searched the read-only live `lean/WeilConjectures/` by the exact blueprint tag, completion/cone/Roos terminology, and point/sections terminology. The Roos and derived-limit modules and finite-coefficient completed exchange are ingredients, not declarations stating all clauses of this item. No attachment is claimed and no compiler was run.
+
+## WANTED
+
+None. The current blueprint, Stacks source, and Bhatt--Scholze PDF needed for this split are present.
+
+## Audit of the item and sources
+
+The sandbox initially had only dispatcher brief markers, with no node, report or search log to continue. Copied the current repository item, retaining its statement, source, chapter/unit, blueprint provenance and Q91 search records, then appended the actual Q120 searches. No statement dispute was found. In particular the item already restricts itself to whole strict towers and to a specified cone representative, which avoids the nonuniqueness of a bare Roos triangle emphasized in Stacks Tag 08TC.
+
+Read `dag/chapters/sec-trace-formula.json`, `dag/units/sk-d-weil.json`, the three blueprint levels in SETUP, and the current `main-20261015` proof of `prop-trf-rational-frobenius-integral-model`, especially (3). The item refines the integral-limit identification there; it does not replace a unit step. Read Stacks `sites-cohomology.tex`, `lemma-derived-limit-is-ok` (Tag 0941) and the adjacent sections/derived-limit discussion, and `derived.tex`, `definition-derived-limit` (08TC) and `lemma-products` (07KC). Read Bhatt--Scholze pp. 24--25, especially Definition 3.5.2 specifying the natural completion map over the completed ring, and the accompanying reconstruction statements. The explicit coordinate and naturality proof is marked agent-written: neither a generic commutation statement nor the blueprint alone fixes those coordinates.
+
+Whole-DAG keyword searches and `tools/blueprint_refs.py search` for Roos, completion, sections, canonical completion and sectionwise located the existing ingredients. The ancestor command confirmed `prop-trf-rational-frobenius-integral-model`. No blueprint node states the entire normalized assertion of this item in another form; `blueprint.same_as` stays empty. The existing source and from.place already specify clause (3) and the parent realization steps and are retained.
+
+Mathlib searches were run through msearch and logged. Both semantic phrasings were read: one searched the canonical completion augmentation, the other the more general exact-product functor/cone comparison. The latter found `CochainComplex.mappingCone.mapHomologicalComplexXIso`, `mapHomologicalComplexIso` and `map_δ`; their source was read in MappingCone.lean (around 597--669) and Pretriangulated.lean (420). Loogle found `evaluationPreservesLimits`, whose source at Basic.lean:405 was read. LeanSearch and the first LeanFinder query found ordinary global-sections and limit-cone comparisons; GlobalSections.lean was read. These are useful general ingredients but do not state the canonical integral completion map and completed pullback normalization, their resolution comparisons and derived naturality together. The broader generic cone part is proved by the explicit component calculation; it is elementary given the cited product theorem and signed model, and does not justify creating an extra node.
+
+## Problems corrected
+
+The item was statement-only and had no proof. Supplied the argument without moving its clauses into new nodes. Did not use the signed-coordinate comparison nodes `lem-cbc-exact-product-functor-roos-chain-maps` or `...-compatibility` as black boxes: their displayed ordering/sign conventions differ from this item's coordinates. Instead used the matching `def-weil-strict-roos-model` and wrote the equation with the item's own differential. Did not use mere compatibility of isolated derived levels to infer compatibility on a homotopy limit; whole strict-tower descent and the already-stated functorial integral-operation comparison are used. Did not assume that sections of a K-flat sheaf complex are K-flat over the coefficient ring, nor that reductions of a torsion object are ordinary quotients.
+
+## Not duplicates
+
+No new nodes were created, so there are no new/existing same-tag pairs to distinguish. Existing statements are cited directly.
+
+## Review by Q120
+
+I checked delivery-errors B--E against the node, cited statements and sources. There is no new unsplit node to audit under B1--B9. The item statement is unchanged, TeX is written with single backslashes, every proof use is in proof_deps, and all citation spans were checked against the actual current statement text (including its actual newlines). The following is the mathematical citation and hypothesis review.
+
+1. Read `lem-weil-proetale-countable-products-exact`: it explicitly gives both exactness and the sectionwise product formula for arbitrary module sheaves on the small pro-etale site, including the completed coefficient sheaf. Thus its projections are exactly the ones needed to identify the shift map, not a different product comparison. Read `lem-weil-point-proetale-sections-exact`: its hypothesis is an algebraically closed field, which our k satisfies, and its module-sheaf conclusion supplies exact additive sections. The component isomorphism follows by applying these two statements to the displayed two products and their binary biproduct.
+
+2. Read `def-weil-strict-roos-model`: its coordinate order is the item's shifted-product-first order and its differential is precisely (-dy-u(z),dz). Checked the sign in the differential and wrote the actual equality (1-s_Y)W=W(1-s_X); these make the diagonal map a chain map. Both components of the section square are the same evaluated product map. The calculation is elementary from the specified coordinates, so no separate node restates this clause.
+
+3. Read `lem-weil-derived-limit-products-core`, which states that termwise product cones become limiting and homology preserves products under exactness. Its hypothesis holds for the pro-etale source by the cited exact-product theorem; for the ordinary target module category I checked exactness coordinate by coordinate, choosing a lift of each component. Read `def-weil-abstract-derived-category` for the actual shifted cone triangle and `def-weil-derived-limit` for what is required. Together they give the asserted derived-limit triangles of the entire unbounded towers. There is no smallness problem: one uses countable sequences in the fixed site/module universes, and ordinary modules can equivalently be sheaves on the single-object site.
+
+4. Read `lem-weil-strict-roos-comparison`, whose statement gives descent to D(Tow(A)) for exactly this cone and exact-product module-sheaf categories, with augmentation normalization. Its site and exactness hypotheses hold on the source and the one-object target just described. The exact-sections theorem explicitly preserves quasi-isomorphisms, so all arrows inverted in the comparison square really become invertible. The localization is the one specified by `def-weil-abstract-derived-category`. Wrote how the square for an inverse is obtained by multiplication with inverses. This proves naturality on localized strict towers; it does not infer uniqueness of a map from projection equations alone.
+
+5. Read `lem-pur-derived-change-of-rings`: it allows arbitrary maps of ring sheaves and computes derived extension on a K-flat representative, with no flatness assumption on the quotient map. Our P meets its hypothesis and the maps R -> (A_n)_s are the actual projections. Read the finite and integral clauses of `def-weil-derived-pullback-tensor-hom`: the finite pullback is exact termwise inverse image with coefficient action transported along the constant-ring comparison, and the integral pullback uses all reductions of a common flat-term K-flat representative with actual transitions. Exact sections therefore compute the two evaluated finite-level objects, and Step 3 gives their whole-tower limits. No finite flat dimension or uniform boundedness premise was inserted.
+
+6. Read `lem-weil-finite-free-completed-scalar-comparison` in full. Its statement explicitly includes the identity extension L=E (despite the inclusion notation), identifies the map with derived completeness, specifies zero shifted-product coordinate, and asserts both naturality and independence of resolution. Our N is derived complete, so the stated theorem applies with Y=s. Composing with c yields an isomorphism. Verified that its representative is the displayed a_P and that quotient compatibility kills (1-s) on its product component. This verifies the canonical augmentation, rather than choosing an isomorphism merely because the objects are isomorphic.
+
+7. Read `def-weil-derived-pullback-tensor-hom` for the defining cone representative, and `lem-pur-integral-operations-well-defined` in full for its actual theorem assertions. Clause (2) explicitly supplies a descended functor and the comparisons identifying it with that complex construction after localization, independent of resolutions compatibly with those comparisons. With f=g and P flat-term K-flat this is exactly the model used here. Therefore composing its representative comparison with c_C specifies beta, whose two components are the evaluated identity maps. No unstated theorem is extracted from a definition.
+
+8. The same completion theorem states naturality in K, and the same well-defined-operations theorem gives the descended integral pullback functor with natural representative comparisons. These are their statements, not extra facts from their proofs. Composed these with the natural comparison of Step 4 and wrote both resulting equations, including which morphism acts on each tower. Applying the equations to a resolution comparison gives independence; applying the inverse-square calculation extends them to inverted quasi-isomorphisms and their composites. The generic off-unit uses are declared in split_report.tool_uses with the specific role of each and do not replace the unit route.
+
+I tested the zero tower and zero input (all maps are the unique maps of zero complexes), a tower with zero transitions (1-s is the identity and the cone is acyclic), and constant identity-transition towers (the same diagonal inclusion and zero shifted component satisfy the differential equation). The proof never needs surjective transitions. For a torsion input such as O_E/varpi, its K-flat resolution has the derived Tor term at finite reduction; no step suppresses that term or substitutes an ordinary quotient. Arbitrary unbounded strict towers are covered because exact products, rather than a bound on individual complexes, are what identify the derived products. The computation for a nonidentity strict tower map uses its strict transition square explicitly. No non-elementary step exceeds 2000 characters; each of the eight steps was checked for hidden standalone lemmas, and existing generic results cover the non-elementary content.
+
+## Unfinished work
+
+No proof step is left open at this split level. No new nodes, no new Mathlib leaves, no Lean edits and no compilation. Maintainer review and delivery validation are separate from this mathematical self-review.

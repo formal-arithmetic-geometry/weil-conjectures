@@ -23,9 +23,124 @@
   "lem-weil-point-proetale-sections-exact",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V_X=\\prod_nX_n$ termwise. By [lem-weil-proetale-countable-products-exact], evaluation at $s$ identifies $\\Gamma(V_X)^i$ with $\\prod_n\\Gamma(X_n^i)$, with the actual product projections. In these identifications, the $n$-th component of $\\Gamma(s_X)$ is $\\Gamma(w_n)\\operatorname{pr}_{n+1}$, hence $\\Gamma(1-s_X)=1-s_{\\Gamma X}$. Exact sections [lem-weil-point-proetale-sections-exact] are additive and preserve binary biproducts. Define $c_X^i$ by these identifications on the two summands $V_X^{i-1}\\oplus V_X^i$. Both summand identifications are invertible, so $c_X^i$ is invertible.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "Under $c_X$, the differential applied to $(b,a)$ is $(-\\Gamma(d)b-(1-s_{\\Gamma X})a,\\Gamma(d)a)$ on either side, so the componentwise isomorphisms are a chain isomorphism. For a strict tower map $w:X\\to Y$, put $W=\\prod_nw_n$. Strict compatibility gives $(1-s_Y)W=W(1-s_X)$. The diagonal map $(b,a)\\mapsto(Wb,Wa)$ therefore commutes with the displayed differentials; its identity and composition laws hold on both components. Evaluating this map at $s$ gives precisely the diagonal map built from $\\prod_n\\Gamma(w_n)$, proving $c_Y\\Gamma H(w)=H(\\Gamma w)c_X$. This uses the signed cone coordinates and strict cone-map construction of [def-weil-strict-roos-model].",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "The source sheaf-module category has exact countable products by [lem-weil-proetale-countable-products-exact]. The target module category does too: products are Cartesian products with componentwise action, and a product of surjections is surjective by choosing a lift in each coordinate. Apply [lem-weil-derived-limit-products-core] in both categories. Thus the termwise products used above represent products of the entire complexes in their derived categories, with no boundedness or Mittag--Leffler assumption. The shifted cone triangle of $1-s$ is distinguished by [def-weil-abstract-derived-category], so it exhibits $H(X)$ and $H(\\Gamma X)$ as the derived limits of their whole towers in the sense of [def-weil-derived-limit].",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-strict-roos-comparison] to the source module-sheaf category and to ordinary modules viewed as sheaves on the one-object site with trivial topology. Its exact-product hypothesis was checked in Step 3. Its descent assertion says that the strict cone construction inverts levelwise quasi-isomorphisms of tower complexes. Sections also preserve quasi-isomorphisms by [lem-weil-point-proetale-sections-exact], levelwise and on the resulting cones. Consequently both sides of $c_X$ invert these maps. The equality of Step 2 descends by the localization defining the derived category [def-weil-abstract-derived-category]: if $v:X\\to X'$ is inverted, $c_{X'}\\Gamma H(v)=H(\\Gamma v)c_X$ also implies the corresponding square for $v^{-1}$ by multiplication with the two inverses. Composition then gives naturality for localized tower morphisms. No identification of arbitrary separately chosen Roos triangles is used.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "For the fixed flat-term K-flat resolution $q:P\\to N$, the complexes $P_n$ compute $N_n=N\\otimes_R^L(A_n)_s$ by [lem-pur-derived-change-of-rings], applied to the projections $R\\to(A_n)_s$. At finite coefficients, [def-weil-derived-pullback-tensor-hom] specifies that $Lg_n^*$ is computed by exact termwise module inverse image on any representative. Thus $C_n=\\operatorname{Res}_ng_n^*P_n$ computes the finite pullback, with the actual quotient transitions specified in the same definition. Applying exact sections computes $\\Gamma(N_n)$ and $\\Gamma(Lg_n^*N_n)$ by [lem-weil-point-proetale-sections-exact]. Step 3 now identifies $H(D)$ and $H(B)$ with the two derived-limit codomains asserted in the item. This uses one strict representative of each entire tower, not just a list of isomorphisms between separate levels.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "Specialize [lem-weil-finite-free-completed-scalar-comparison] to the identity extension $L=E$, $Y=s$, $K=N$. Its completeness hypothesis is exactly the derived completeness assumed here, and it gives a specified natural isomorphism $\\chi_N:N\\to H(P_\\bullet)$, independent of the resolution. Define $\\alpha_N=c_{P_\\bullet}\\Gamma(\\chi_N)$. Sections preserve isomorphisms, so this is an isomorphism. That lemma specifies $\\chi_Nq$ as the augmentation with zero shifted-product component and product component $(r_n)_n$. Since $c_P$ is the sectionwise identification, $\\alpha_N\\Gamma(q)$ is represented by $a_P(z)=(0,(\\Gamma(r_n)z)_n)$. In particular it is the specified map, including its sign and zero component. Directly, $(1-s_D)(\\Gamma(r_n)z)_n=0$ because each quotient transition carries $r_{n+1}$ to $r_n$, so the displayed formula commutes with the differential.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "Write $\\iota_{g,N}:Lg^*N\\xrightarrow{\\sim}H(C_\\bullet)$ for the representative comparison in the defining integral pullback of [def-weil-derived-pullback-tensor-hom]. Define $\\beta_N=c_{C_\\bullet}\\Gamma(\\iota_{g,N})$. This is an isomorphism, and on the chosen model $H(C)$ its sectionwise map is exactly $c_C$, the identity under both product identifications. The comparison $\\iota_{g,N}$ is the comparison with the explicit complex supplied by [lem-pur-integral-operations-well-defined], whose statement gives descent to functors and independence of resolutions with these very comparison maps. Thus this construction fixes $\\beta_N$ without making a choice from a Roos triangle.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  },
+  {
+   "text": "The identity-extension maps $\\chi_N$ are natural for derived morphisms and independent of resolutions by [lem-weil-finite-free-completed-scalar-comparison]. The completed pullbacks and their representative comparisons have the same properties by [lem-pur-integral-operations-well-defined]. Combine these two assertions with the localized naturality of $c$ from Step 4. Explicitly, for a derived morphism $f:N\\to N'$, let $D(f)$ and $B(f)$ denote the maps on the evaluated reduction and pullback towers induced by those descended constructions. Composition of the two naturality squares gives\n$$H(D(f))\\alpha_N=\\alpha_{N'}\\Gamma(f),\\qquad H(B(f))\\beta_N=\\beta_{N'}\\Gamma(Lg^*f).$$\nFor a change of flat-term K-flat resolution the same equations apply with the canonical comparison maps, so the two definitions agree under those maps. Naturality for an inverse quasi-isomorphism follows by multiplying the chain-map square by its inverses, and hence holds for every derived morphism. This proves independence and naturality with the specified strict-cone comparisons throughout.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; explicit sectionwise refinement of blueprint prop-trf-rational-frobenius-integral-model, proof (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-strict-roos-model",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and Tag 08TC (derived.tex); Bhatt--Scholze Definition 3.5.2, p. 24; explicit signed-coordinate refinement of blueprint proof (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +183,52 @@
    "results": "msearch printed the single-file hit as file=405. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:405: CategoryTheory.Limits.evaluationPreservesLimits concerns ordinary functor-category limits; it does not supply the normalized derived completion unit or completed pullback comparison.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a derived complete sheaf complex identify its canonical completion augmentation with the zero-first-coordinate map into the homotopy inverse limit of its reductions",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, CategoryTheory.Sheaf.coneΓ, CategoryTheory.Sheaf.isLimitConeΓ, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm, CategoryTheory.Sheaf.ΓNatIsoLim, CategoryTheory.InjectiveResolution.toRightDerivedZero', CochainComplex.cm5b.fac; ordinary evaluation and additive cone/shift comparisons do not state the canonical completed-coefficient augmentation, integral pullback comparison and resolution-independent derived naturality together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*complet|mappingCocone.*[Ee]val|[Ee]val.*mappingCocone",
+   "results": "0 hits: ; ordinary evaluation and additive cone/shift comparisons do not state the canonical completed-coefficient augmentation, integral pullback comparison and resolution-independent derived naturality together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact global sections commute with homotopy inverse limits of reductions of derived complete sheaf complexes",
+   "results": "8 hits: CategoryTheory.Sheaf.Γ, CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, CategoryTheory.Sheaf.ΓNatIsoLim, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.SheafedSpace.Γ_def, CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.LocallyRingedSpace.Γ_def, SheafOfModules.sectionsFunctor_obj; ordinary evaluation and additive cone/shift comparisons do not state the canonical completed-coefficient augmentation, integral pullback comparison and resolution-independent derived naturality together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.evaluationPreservesLimits",
+   "results": "1 hits: CategoryTheory.Limits.evaluationPreservesLimits; ordinary evaluation and additive cone/shift comparisons do not state the canonical completed-coefficient augmentation, integral pullback comparison and resolution-independent derived naturality together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving countable products commutes naturally with the shifted mapping cone of one minus shift on inverse sequences of cochain complexes",
+   "results": "8 hits: CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CategoryTheory.Functor.mapCochainComplexShiftIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso'; ordinary evaluation and additive cone/shift comparisons do not state the canonical completed-coefficient augmentation, integral pullback comparison and resolution-independent derived naturality together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexXIso|map_δ",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; ordinary evaluation and additive cone/shift comparisons do not state the canonical completed-coefficient augmentation, integral pullback comparison and resolution-independent derived naturality together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-point-transport-tower-realization",
@@ -90,5 +247,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-point-sections-completion-cone",
+  "worker": "stage1",
+  "summary": "Reused existing exact sectionwise products, signed strict Roos model and descent, normalized identity-extension completion map, and well-defined integral pullback. Wrote the differential, tower-map and augmentation calculations and the naturality equations explicitly. No statement change, no new nodes, no Lean writing or compilation.",
+  "blueprint": "Realizes clause (3) of prop-trf-rational-frobenius-integral-model: explicit sectionwise limit comparison and canonical completion identifications extracted through lem-trf-integral-point-transport-tower-realization; preserves that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exactness and sectionwise computation of products on the small pro-etale site; a generic categorical input to the unit's integral-limit route."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact sections at the algebraically closed point, including preservation of quasi-isomorphisms; the unit has no separate theorem proving this site-theoretic tool."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Generic identification of derived products with termwise products under exactness, needed to verify the defining Roos triangles."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized functorial cone descent for strict towers in an exact-product module category, used to localize the componentwise comparison."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic computation of derived change of rings by a K-flat representative, needed to identify the finite reductions."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "The identity-extension specialization supplies the already-normalized natural completeness map; it does not replace the sectionwise comparison argument."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic explicit-cone descent and representative comparison for integral pullback, used to identify and descend beta."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-04a7ea47e",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-04a7ea47e (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement in full. Shape: one commit with the item and report only, no new nodes, statement byte-identical to base, live item still unsplit (parallel Q129 delivery noted), no repair note, not dropped, no SGA. Union of step uses = proof_deps, no cycle; the only citer, transport-tower-realization step 2, takes exactly c, alpha_N, a_P, beta_N. Step 1: proetale-countable-products-exact gives sectionwise products for the completed sheaf; exact point sections are additive. Step 2: C(f)[-1] differential from def-weil-abstract-derived-category, with f=1-s, equals the item's (-db-(1-s)a,da) and strict-roos-model (y,z)->(-dy-u(z),dz); strictness gives W(1-s_X)=(1-s_Y)W. Step 3: derived-limit-products-core holds in sheaf modules and in ordinary Gamma(R)-modules; the rotated cone triangle is the Roos triangle of 08TC, with its sign remark. Step 4: strict-roos-comparison applies on s_proet and on the one-object trivial site; levelwise qis are inverted; naturality passes to roofs. Step 5: change-of-rings (2) gives P_n = N_n; finite Lg_n^* is termwise inverse image; g is an automorphism. Step 6: the completion comparison at L=E is stated as the derived-completeness map with augmentation (0,(r_n)); its completeness hypothesis matches D^b_c; I checked a_P is a chain map. Step 7: integral-operations-well-defined (2) at f=g with a flat-term K-flat P gives iota onto H(C), matching the integral pullback definition. Step 8: naturality and independence come from the two statements plus Step 4; roofs of K-flat flat-term complexes reduce levelwise to qis. Advisory: D(f) could cite integral-operations-well-defined at f=id. Edge cases zero, zero transitions, constant towers, torsion Tor term and unbounded towers are fine. Neighbours lem-pod-point-sections-derived-reduction and lem-weil-point-sections-scalar-extension are not duplicates. Tool uses are generic and accepted."
  }
 }
