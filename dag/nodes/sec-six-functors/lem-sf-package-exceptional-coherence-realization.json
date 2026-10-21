@@ -12,11 +12,159 @@
  "stmt_deps": [
   "def-fix-six-functor-datum",
   "def-weil-compactifications-refinements",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The structure map of $Y$ is finite type and separated. By the finite-type definition, the preimage of the affine scheme $\\operatorname{Spec}k$ is quasi-compact, so $Y$ is quasi-compact. Its structure map is quasi-separated by separated-implies-quasi-separated; since $\\operatorname{Spec}k$ is affine and hence quasi-separated, quasi-separated permanence makes $Y$ quasi-separated as a scheme. Apply the nonemptiness assertion for $\\operatorname{Comp}(f)$ with base $Y$ and the assumed separated finite-type map $f$. It supplies a compactification with quasi-compact open $j$ and proper $p$. The assertions below apply to any chosen such compactification, not just the one supplied by nonemptiness.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "prop-nagata-compactification-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Exceptional-adjunction sentence: existence of the chosen compactification; Nagata compactification input to the finite constructible adjunction."
+   }
+  },
+  {
+   "text": "Properness of $p$ includes finite type. Compose $p$ with the finite-type structure morphism of $Y$ using finite-type composition; thus $\\overline X$ is finite type over $k$. The finite-type dimension theorem gives a finite Krull dimension bound. If $\\overline X$ is nonempty, choose a nonnegative integer $d\\ge\\dim\\overline X$; if it is empty choose $d=0$. The same theorem also supplies nonnegative finite bounds $d_X,d_Y$ for $X,Y$, using $0$ in the empty cases. These are geometric bounds independent of the finite coefficient index.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Exceptional-adjunction sentence: finite dimension bounds required by the finite class-relative theorem and the integral uniform-interval theorem."
+   }
+  },
+  {
+   "text": "At $A_n$, use the class-relative adjunction theorem at the chosen $c=(j,p)$ and bound $d$. Its right functor $R_c=\\nu_X^*f_c^\\times R\\nu_{Y,*}$ is precisely the finite exceptional functor of the operation datum. The theorem gives natural bijections $\\operatorname{Hom}(Rp_*j_!K,L)\\cong\\operatorname{Hom}(K,R_cL)$ for bounded-below $K$ of etale origin, explicitly including bounded constructible $K$. For $K\\in\\mathcal C_{X,A_n}$, extension by zero preserves bounded constructibility and its Tor interval; direct-image finite-Tor preservation applied to the proper map $p$ and $j_!K$ then puts $Rp_*j_!K$ in $\\mathcal C_{Y,A_n}$. Exceptional preservation puts $R_cL$ in $\\mathcal C_{X,A_n}$ for $L\\in\\mathcal C_{Y,A_n}$. Restrict the displayed natural Hom bijections to these full subcategories: they give $Rf_!\\dashv Rf_n^!$ there, with the same units and counits. The compactification comparison and cocycle are those of the class-relative theorem. This restriction uses no ambient pro-etale adjoint hypothesis.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "def-weil-exceptional-inverse-image",
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale",
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Exceptional-adjunction sentence: finite constructible adjunction, using the stated class-relative existence and preservation inputs of lem-coef-finite-exceptional."
+   }
+  },
+  {
+   "text": "Apply finite exceptional coefficient change on the finite-Tor constructible domains just verified. It identifies the finite right functor with $D_{X,n}f^*D_{Y,n}$. For $m\\ge n$ it gives $Q_XRf_m^!\\cong Rf_n^!Q_Y$, the identity comparison at equal indices and the quotient cocycle. In its unit equation $G_n(q_K)b_{F_mK}Q_X(\\eta_{m,K})=\\eta_{n,Q_XK}$ and counit equation $\\epsilon_{n,Q_YL}F_n(b_L)q_{G_mL}=Q_Y(\\epsilon_{m,L})$, take $F_r=Rf_{!,r}$ and $G_r=Rf_r^!$. These are exactly preservation of the adjunction maps by the specified finite compact-support comparison, rather than just isomorphisms of the underlying right functors.",
+   "uses": [
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Sentence \"The exceptional adjunction and its coefficient comparisons are ...\": lem-coef-finite-exceptional."
+   }
+  },
+  {
+   "text": "First apply integral residue-Tor control: since $L_1$ has bounded cohomology, choose $[a,b]$ containing its support; all $L_n$ then have Tor amplitude in this same interval. Here $\\ell$ is invertible on $Y$ because $\\ell\\ne p$. Apply the integral exceptional-adjoint theorem to the actual coherent coefficient-system realization specified there. Its functor is $G_fL=R\\varprojlim_n\\operatorname{Res}_n Rf_n^!L_n$, with $L_n=L\\otimes^L_{R_Y}(A_n)_Y$. It preserves the stated derived-complete constructible category, is right adjoint to integral compact support, and is canonically $D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}$. The same theorem identifies its reductions with $Rf_n^!L_n$ and identifies the units and counits with the finite ones. For an input reduction Tor interval $[a,b]$, the fixed geometric bounds of step 2 give output interval $[a-2d_X,b+2d_Y]$, independent of $n$. Thus its hypotheses and conclusions use completed coefficient sheaves and a single interval for all reductions, as required by the item; the construction is not an inverse limit of unspecified arrows in an ordinary derived category.",
+   "uses": [
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Sentence \"The exceptional adjunction and its coefficient comparisons are ...\": prop-coef-integral-exceptional-adjoint."
+   }
+  },
+  {
+   "text": "At $E$, apply identification of the rational coefficient-passage operations to the integral functor of step 5. It gives the right adjoint $Rf_E^!$ to $Rf_{!,E}$ on the rationalized constructible categories and the formula $Rf_E^!=D_{X,E}f^*D_{Y,E}$. The integral tensor product used in this passage is the completed one. The rational theorem identifies $\\omega_{X,E}$ with $Ra_{X,E}^!E$ and explicitly preserves evaluations, units and counits, also under finite coefficient-field extension. Hence these are the rationalized integral adjunction and its specified comparisons.",
+   "uses": [
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Sentence \"The exceptional adjunction and its coefficient comparisons are ...\": lem-coef-rational-operations."
+   }
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, use the common-stage Verdier theorem: its internal-Hom dual is into $Ra_X^!\\overline{\\mathbf Q}_\\ell$, and its coefficient passage gives $Rf_!\\dashv Rf^!$ and $Rf^!=D_Xf^*D_Y$ on $D^b_c$. To see explicitly that the adjunction maps have the asserted normalization, represent an object or arrow over a finite common extension $L/\\mathbf Q_\\ell$ in the pair-category definition. Represent the unit, counit and evaluation by their $L$-coefficient versions. Step 6 says that enlarging $L$ preserves all three maps; consequently their classes are independent of the representative. The triangle identities and the equations preserving these maps hold at $L$ and hence in the colimit Hom groups, since composition is represented over a common finite field. This gives precisely the descended constructible adjunction and evaluation comparisons, with no reduction functor on the field category being asserted.",
+   "uses": [
+    "thm-coef-qbar-verdier",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Exceptional-adjunction sentence and its field coefficient passage: thm-coef-qbar-verdier, as also cited in the package statement."
+   }
+  },
+  {
+   "text": "Check the defining maps in coefficient comparison, in addition to the exceptional units and counits already handled. Elementary operation reduction preserves tensor associativity, evaluations, units and counits on its stated domains. For general finite-Tor internal Hom use the finite Hom comparison: it is the transpose of coefficient change of evaluation and respects evaluation, tensor-Hom adjunction and composition. For integral Hom use its reduction comparison, whose displayed transpose is the reduced evaluation pairing, so evaluation and its transposes are preserved without a site-perfect first-variable restriction. For finite coefficient-field extension use the integral finite-extension comparisons of internal Hom and the dualizing object; they preserve evaluation and biduality and respect identity and composition of extensions. Together with the rational and common-stage identifications of steps 6 and 7, these give the evaluation normalizations at every stage. The site-perfect restriction of the elementary finite Hom comparison is not used to claim a general Hom comparison.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "thm-coef-finite-hom",
+    "lem-coef-integral-hom-reduction",
+    "lem-coef-integral-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Sentence \"Finally apply [fix-prop-coherence]\": its evaluation-defined coefficient-comparison inputs."
+   }
+  },
+  {
+   "text": "Apply coherence of the proved comparison maps to this operation datum. It gives the identity, composition, exchange and projection equations, includes the exceptional comparisons of steps 4--6, retains exactly the additional smooth-orientation and site-perfect Poincare pairing compatibilities, and gives Weil equivariance at field coefficients. Interpret each equation only where every functor and comparison in it is defined and proved: restricting natural transformations to this common full domain restricts both composites to the same equality. When the data and Weil objects descend to the finite field, the Weil-equivariance clause applies to those maps. This proves the final assertions while retaining every individual domain and purity/pairing hypothesis; it does not add a pullback-commutation assertion for Verdier duality.",
+   "uses": [
+    "fix-prop-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Sentence \"Finally apply [fix-prop-coherence]\": domainwise coherence, additional purity/pairing compatibilities and field Weil equivariance."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-kun-topological-krull-dimension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "fix-prop-coherence",
+  "lem-coef-finite-exceptional",
+  "lem-coef-integral-finite-extension",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-rational-operations",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "prop-coef-integral-exceptional-adjoint",
+  "prop-nagata-compactification-category",
+  "thm-coef-finite-hom",
+  "thm-coef-qbar-verdier",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Exceptional-adjunction sentence and final coherence sentence; argument expanded using the existing independently stated geometric, class-relative and coefficient-comparison nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +200,52 @@
    "results": "{\"hits\": 8, \"top\": [\"localCohomology.diagramComp\", \"localCohomology.diagram\", \"localCohomology.isoOfFinal\", \"LightCondensed.ihomPoints_symm_comp\", \"localCohomology.isoSelfLERadical\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"AdicCompletion.transitionMap_comp_eval\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-exceptional-coherence-realization.search-results.txt\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|exceptionalInverse|sixOperations|constructible.*adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Basic.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Cycles.lean\", \"Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Differentials.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\"], \"digest\": \"346131bceea05b34\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional pullback adjunction to compact support compatible with reduction modulo powers of a uniformizer",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.ChosenPullbacksAlong.mapPullbackAdj\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.Over.mapPullbackAdj\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"CategoryTheory.MorphismProperty.Over.mapPullbackAdj\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"a2f6067392bfc9d1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "invalid query (unknown identifier); corrected by the subsequent CategoryTheory.Adjunction query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible exceptional inverse image is Verdier dual pullback dual and right adjoint to compact support at finite adic and rational coefficients",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"localCohomology.diagram\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"LightCondMod.LocallyConstant.adjunction\", \"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolidification\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"c848b1164f00b969\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality constructs exceptional inverse image for bounded constructible sheaves with coherent coefficient changes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\"], \"digest\": \"be9a47f317db5f87\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.id\", \"CategoryTheory.Adjunction.instInhabitedId\", \"CategoryTheory.Adjunction\", \"CategoryTheory.Equivalence.toAdjunction\", \"CategoryTheory.Equivalence.toAdjunction'\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\"], \"digest\": \"b2038ff05fe43306\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-functor-package",
@@ -70,5 +260,105 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-package-exceptional-coherence-realization",
+  "worker": "stage1",
+  "group": "Q132",
+  "summary": "Expanded the exceptional/coherence assembly into nine checked steps, reusing existing geometric, class-relative adjunction, finite preservation, coefficient-passage and coherence statements. No new nodes; statement retained. Explicitly checked finite-Tor versus integral/rational domains, a uniform reduction interval, common-stage map normalization, and the inadmissibility of using the conditional fix-prop-adjunctions for an unconditional conclusion.",
+  "blueprint": "prop-functor-package proof: exceptional-adjunction sentence (steps 1--7) and final fix-prop-coherence sentence (steps 8--9).",
+  "tool_uses": [
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Existing generic The pro-étale direct image for all finite-Tor objects used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "fix-prop-coherence",
+    "why": "Existing generic Coherence of the proved comparisons used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "Existing generic Finite exceptional adjoints and coefficient change used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-coef-integral-finite-extension",
+    "why": "Existing generic Integral duality and a finite extension of coefficient fields used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Existing generic Integral internal Hom and reduction used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Existing generic Identification with the rational internal Hom and exceptional inverse image used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Existing generic Basic operations and coefficient reduction used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Existing generic Finiteness of the dimension of a finite type scheme used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Existing generic Extension by zero preserves constructibility and Tor amplitude used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "prop-coef-integral-exceptional-adjoint",
+    "why": "Existing generic The integral exceptional adjoint on constructible complexes used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "prop-nagata-compactification-category",
+    "why": "Existing generic The compactification category is nonempty, cofiltered, and base-changes used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "Existing generic General constructible internal Hom and finite coefficient change used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "thm-coef-qbar-verdier",
+    "why": "Existing generic Verdier biduality at algebraically closed coefficients used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Existing generic The exceptional adjoint on the bounded comparison class used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Existing generic The preservation clauses of exceptional-adjoint admissibility are theorems on the coefficient class used on its explicitly stated domain for the exceptional/coherence assembly; it supplies a prerequisite or compatibility named by the package route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic integral coefficient-domain theorem supplies a common finite-reduction Tor interval from the item's bounded residue cohomology; it checks the integral exceptional theorem's domain without adding a hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-sf-direct-image-ctf-proetale",
+  "fix-prop-coherence",
+  "lem-coef-finite-exceptional",
+  "lem-coef-integral-finite-extension",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-rational-operations",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-trf-open-ctf",
+  "prop-coef-integral-exceptional-adjoint",
+  "prop-nagata-compactification-category",
+  "thm-coef-finite-hom",
+  "thm-coef-qbar-verdier",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "lem-coef-integral-residue-tor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-029f596bd",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-029f596bd (reviewer sub-agent of L); spot-checked: Read the full source (prop-functor-package.proof.md, main-20261015: the exceptional-adjunction sentence and 'Finally apply [fix-prop-coherence]'), the item, and the statements of all 25 proof_deps and 4 stmt_deps. There are 0 new nodes, the statement is unchanged, and proof_deps equals the union of the steps' uses. No SGA is cited and there is no cycle. Step 1: Y is qcqs (finite-type definition, separated implies quasi-separated, Spec k qcqs, permanence (2)), so prop-nagata-compactification-category (1) gives a compactification with j quasi-compact and p proper. Step 2: p proper implies finite type; composition makes Xbar finite type over k; lem-kun-dimension-finite-type gives finite dimension, and dim of the empty space is −∞, so d=0 works there. Step 3: thm-sf-ambient-adjoint-class (2) gives the Hom bijection for bounded-below étale-origin K, with dim Xbar ≤ d. j_! (lem-trf-open-ctf), Rp_* (cor-sf-direct-image-ctf-proetale) and Rf_n^! (thm-sf-preservation-class (2), Y separated) all preserve ctf, so restricting to the ctf subcategories gives the adjunction. No ambient adjoint is used and the conditional fix-prop-adjunctions is avoided. Step 4: lem-coef-finite-exceptional states the D f^* D formula, b_{m,n}, the cocycle and the unit/counit equations verbatim. Step 5: lem-coef-integral-residue-tor gives one Tor interval; prop-coef-integral-exceptional-adjoint gives G_f, the adjunction, D f^*_comp D, the reductions, the units/counits and the output interval [a−2d_X, b+2d_Y]. Steps 6–7: lem-coef-rational-operations and thm-coef-qbar-verdier; normalization at Q̄_ℓ follows from colimit-Hom representation over a common finite field. Step 8: each evaluation property used is a statement clause of lem-fix-operation-reduction, thm-coef-finite-hom, lem-coef-integral-hom-reduction or lem-coef-integral-finite-extension. Step 9: fix-prop-coherence, restricted to common domains. Edge cases checked: empty X or Y, f=id, n=m, n=1, identity field extension. Accepted tool uses: fix-prop-coherence (named by the blueprint proof) and lem-trf-open-ctf (generic). Maintainer note: Q120 delivered the same item in parallel (bfb38702, same base, same statement); only one should merge."
  }
 }
