@@ -1,0 +1,126 @@
+{
+ "id": "lem-dl-a1-geometric-point-etale-idempotents",
+ "kind": "statement",
+ "title": "Etale splitting of a finite algebra at a geometric point",
+ "statement": "Let $A$ and $C$ be commutative rings, $C$ a finite $A$-module algebra, $\\Omega$ an algebraically closed field, and $\\phi:A\\to\\Omega$ a ring map. Write $I$ for the finite set of ring maps $t:C\\to\\Omega$ extending $\\phi$. There exist an etale $A$-algebra $B$ [def-weil-etale-morphism], a map $\\phi_B:B\\to\\Omega$ extending $\\phi$, and complete orthogonal idempotents $e_t$ in $B\\otimes_A C$ [def-weil-pbc-module-tensor-product], indexed by $t\\in I$, whose sum is one and whose values under $b\\otimes c\\mapsto\\phi_B(b)t'(c)$ are $1$ if $t'=t$ and $0$ otherwise. This allows $I$ empty.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00UJ and 00UL (etale local splitting), with geometric-point refinement proved in lean/WeilConjectures/Mathlib/RingTheory/Etale/FiniteSplitting.lean; field-embedding and residue-field arguments are given in that source module."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The source proof first isolates one geometric point. Enlarge the base residue field by its finite separable subextension using an etale residue-field realization; the remaining residue extension is purely inseparable. Apply Mathlib 00UJ to isolate its kernel. Pure inseparability ensures that a point with this kernel is unique. Induct over the finite set of points: transport earlier idempotents through each etale base change and multiply the new one by the complements of the earlier ones. They stay orthogonal and retain their indicator values. The complementary idempotent vanishes at every point of the fibre. Its support has closed image under the finite map and misses the chosen point; invert a base element nonzero at that point to kill the complement. The resulting idempotents sum to one. This is the complete existing Lean proof in FiniteSplitting.lean:85-472; the pinned sorry map records no reachable holes.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UJ and 00UL (etale local splitting), with geometric-point refinement proved in lean/WeilConjectures/Mathlib/RingTheory/Etale/FiniteSplitting.lean; field-embedding and residue-field arguments are given in that source module."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Existing sorry-free source proof, attached rather than duplicated: lean/WeilConjectures/Mathlib/RingTheory/Etale/FiniteSplitting.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite algebra etale base change complete orthogonal idempotents indexed by geometric points",
+   "results": "CompleteOrthogonalIdempotents, Algebra.Etale.baseChange, and idempotent lifting; none separates all geometric points.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; the existing source declaration is reused without restatement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CompleteOrthogonalIdempotents, Algebra.Etale",
+   "results": "Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq isolates primes with trivial base residue extension; it does not separate distinct embeddings at one prime.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; the existing source declaration is reused without restatement."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_completeOrthogonalIdempotents_forall",
+   "results": "Mathlib.RingTheory.Etale.QuasiFinite has the prime-indexed theorem. Source FiniteSplitting.lean:427 has the exact geometric-point theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; the existing source declaration is reused without restatement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.IntegralNormalResidueEtaleSplitting",
+  "date": "2026-10-21",
+  "group": "S9"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Finite-quotient etale localization in the second paragraph; geometric-point implementation of the integral splitting reduction.",
+   "via": [
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia",
+    "lem-dl-a1-integral-normal-residue-etale-splitting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting",
+  "declaration": "Algebra.exists_etale_completeOrthogonalIdempotents_forall_tensor_eq",
+  "statement": "theorem exists_etale_completeOrthogonalIdempotents_forall_tensor_eq [Module.Finite A B]\n    (φ : A →+* Ω) [Fintype (PointsOver φ B)] [DecidableEq (PointsOver φ B)] :\n    ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra A A') (_ : Algebra.Etale A A')\n      (φ' : A' →+* Ω) (hφ' : φ'.comp (algebraMap A A') = φ) (e : PointsOver φ B → A' ⊗[A] B),\n      CompleteOrthogonalIdempotents e ∧\n        ∀ t t' : PointsOver φ B, t'.tensor hφ' (e t) = if t' = t then 1 else 0",
+  "branch": "slopmaster2",
+  "by": "S9",
+  "date": "2026-10-21",
+  "existing": true
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Algebra.exists_etale_completeOrthogonalIdempotents_forall_tensor_eq",
+     "module": "WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting",
+     "lines": [
+      420,
+      472
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T171840-L-3161465",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T171840-L-3161465",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

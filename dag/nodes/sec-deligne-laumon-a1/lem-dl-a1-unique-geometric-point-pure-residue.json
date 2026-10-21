@@ -1,0 +1,125 @@
+{
+ "id": "lem-dl-a1-unique-geometric-point-pure-residue",
+ "kind": "statement",
+ "title": "A unique geometric point at a prime has purely inseparable residue extension",
+ "statement": "Let $A\\to C$ be an integral map, $\\Omega$ an algebraically closed field, and $\\phi:A\\to\\Omega$. Let $t:C\\to\\Omega$ extend $\\phi$. Suppose every other extension $t'$ with kernel equal to $\\ker t$ equals $t$. Then the induced residue-field map $\\kappa(\\ker\\phi)\\to\\kappa(\\ker t)$ [def-weil-residue-field] is purely inseparable. The same holds with primes explicitly identified with those kernels.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00UJ and 00UL (etale local splitting), with geometric-point refinement proved in lean/WeilConjectures/Mathlib/RingTheory/Etale/GeometricPoint.lean; field-embedding and residue-field arguments are given in that source module."
+ },
+ "stmt_deps": [
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Use phi to embed its residue field into Omega. Integrality makes the extension to the residue field of ker t algebraic. Each embedding of that extension in Omega gives a point of C extending phi with kernel ker t. The hypothesis equates these points; equality on C determines equality on its residue field by the fraction-field universal property. Thus there is at most one embedding in Omega. The algebraic embedding equivalence with the algebraic closure and Mathlib isPurelyInseparable_iff_subsingleton_emb imply pure inseparability. Substituting the explicit equalities of primes gives the primed form. This is the complete existing proof in GeometricPoint.lean:233-273; the pinned sorry map records no reachable holes.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UJ and 00UL (etale local splitting), with geometric-point refinement proved in lean/WeilConjectures/Mathlib/RingTheory/Etale/GeometricPoint.lean; field-embedding and residue-field arguments are given in that source module."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Existing sorry-free source proof, attached rather than duplicated: lean/WeilConjectures/Mathlib/RingTheory/Etale/GeometricPoint.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral algebra over a ring primes over geometric point exist and unique geometric point implies purely inseparable residue field",
+   "results": "instIsAlgebraicResidueFieldOfIsIntegral; IsPurelyInseparable.mk; no ring-geometric-point criterion.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; the existing source declaration is reused without restatement."
+  },
+  {
+   "tool": "loogle",
+   "query": "isPurelyInseparable_iff_subsingleton_emb",
+   "results": "isPurelyInseparable_iff_subsingleton_emb characterizes field embeddings, but not maps from integral rings with a fixed kernel.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; the existing source declaration is reused without restatement."
+  },
+  {
+   "tool": "grep",
+   "query": "isPurelyInseparable_iff_subsingleton_emb|instIsAlgebraicResidueFieldOfIsIntegral",
+   "results": "PurelyInseparable/Basic.lean:446; UniversallyInjective.lean:143. The source GeometricPoint module supplies the exact integral-ring statements.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; the existing source declaration is reused without restatement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.IntegralNormalResidueEtaleSplitting",
+  "date": "2026-10-21",
+  "group": "S9"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Finite-quotient etale localization in the second paragraph; geometric-point implementation of the integral splitting reduction.",
+   "via": [
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia",
+    "lem-dl-a1-integral-normal-residue-etale-splitting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint",
+  "declaration": "RingHom.PointsOver.isPurelyInseparable_of_forall_eq'",
+  "statement": "lemma isPurelyInseparable_of_forall_eq' [Algebra.IsIntegral A B] (t : PointsOver φ B)\n    (h : ∀ t' : PointsOver φ B, RingHom.ker t'.1 = RingHom.ker t.1 → t' = t)\n    (p : Ideal A) [p.IsPrime] (hp : RingHom.ker φ = p) (q : Ideal B) [q.IsPrime]\n    (hq : RingHom.ker t.1 = q) (hpq : p = q.comap (algebraMap A B)) :\n    (Ideal.ResidueField.map p q (algebraMap A B) hpq).IsPurelyInseparable",
+  "branch": "slopmaster2",
+  "by": "S9",
+  "date": "2026-10-21",
+  "existing": true
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "RingHom.PointsOver.isPurelyInseparable_of_forall_eq'",
+     "module": "WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint",
+     "lines": [
+      265,
+      273
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T171840-L-3161465",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T171840-L-3161465",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
