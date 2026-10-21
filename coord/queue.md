@@ -1,8 +1,8 @@
 # Work queue
 
-132 items; claim with `tools/claim.py next <group> [--stage N]`.
+134 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (12 clusters, 708 modules)
+## Rework: quarantined by the upstream sync (13 clusters, 705 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,6 +10,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -41,8 +42,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-field-profinite-galois-site` | 4014 | none |
 | `lem-sfb-internal-bar-roof-adjunction` | 4014 | none |
 | `lem-sfb-internal-inflation-graded-cup` | 4014 | none |
-| `lem-sfb-polynomial-translation-acyclic` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
+| `lem-sfb-ind-unipotent-procyclic-difference` | 4015 | none |
 | `lem-sfb-poset-augmented-chain-prism` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
@@ -84,9 +85,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-thm-acyclicity` | 1 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 107 nodes that wait for a statement dependency (bottom-up), 17 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 108 nodes that wait for a statement dependency (bottom-up), 17 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (62)
+## Stage 3: modules to prove (63)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -134,7 +135,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.RingedSiteBoundedEvaluationAssembly` | - | 1 | proof | 6 |
 | `Sheaf.CategoryTheory.RingedSiteFiniteRetractDualExact` | - | 1 | proof | 6 |
 | `Sheaf.Paper.AdicPullbackPresentationTransport` | - | 4 | proof | 6 |
-| `Sheaf.Paper.CompletedRingStrictFiniteExchange` | - | 2 | proof | 6 |
+| `Sheaf.Paper.CompletedRingStrictFiniteExchange` | - | 1 | proof | 6 |
 | `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 10 | proof | 6 |
 | `Sheaf.Paper.RingedOpenStrictReduction` | - | 13 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedHomCompositionModel` | - | 3 | proof | 7 |
@@ -146,6 +147,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedScalarUnitAdjunction` | - | 1 | proof | 7 |
 | `Sheaf.Paper.CompletedStrictOpenExchange` | - | 7 | proof | 7 |
 | `Sheaf.Paper.DerivedFiniteQuotientCoherence` | - | 1 | proof | 7 |
+| `Sheaf.Paper.NormalizedFiniteComparisonExistence` | - | 1 | proof | 7 |
 | `Sheaf.Paper.QuotientDiagramScalarProjection` | - | 1 | proof | 7 |
 | `Sheaf.Paper.StrictQuotientPullbackComputation` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel` | - | 1 | proof | 15 |
