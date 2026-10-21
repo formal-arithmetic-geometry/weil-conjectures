@@ -23006,3 +23006,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:11 L: merged deliver/NG/lem-pe-internal-module-sectionwise-short-exact (reviewer PASS; first push; new nodes: 0)
 - 16:11 L: merged deliver/N9/lem-pur-concentrated-support-etale-transfer (stage 2; reviewer PASS; parallel immutable checks)
 - 16:11 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 16:12 L: returned deliver/NO/lem-sfb-condensed-internal-bar-resolution (reviewer RETURN: L: independent stage-2 immutable head 5f61e04a9f33: H2 theorem-stmt_dep fault, confirmed: the statement uses lem-pe-inte)
