@@ -17,159 +17,61 @@
  ],
  "proof": [
   {
-   "text": "First work with arbitrary complexes $E,F$, before imposing K-flatness. Write $E[a]^p=E^{p+a}$, $d_{E[a]}=(-1)^a d_E$ [def-weil-abstract-derived-category]. The proposed $t_{a,b}$ sends $x\\otimes y$ in shifted bidegree $(p,q)$ to $(-1)^{bp}x\\otimes y$. For the first differential, applying $t$ after $d$ gives exponent $a+b(p+1)=bp+a+b$, the exponent for $d$ after $t$. For the second differential the exponents are $p+b+bp$ and $bp+(a+b)+(p+a)$, equal modulo $2$. These are precisely the two terms of [def-pc-tensor-complex-sheaves]. Thus $t$ is a chain isomorphism, with inverse the same scalar and reverse reindexing. It is natural in both chain maps, since degree-zero maps preserve $p,q$ and commute with integer scalars. This checks the specified shifted-degree normalization, for all integers $a,b$.",
+   "text": "Use [lem-pur-derived-tensor-additive-constraints] for the canonical derived constraints, separate additivity, and flat degree-zero tensor sources. Thus $P\\otimes^LQ$ and $Q\\otimes^LR$ are again flat degree-zero sources, so both iterated operations are defined. Composing the separately additive tensor map with the fixed $t_{a,b}$ proves additivity of $B$.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent signed calculation refining Tags 0FPL/0FPM; compare More on Algebra, Sign rules (item-shift-tensor), with the shifted-degree normalization explicitly fixed here."
-   }
-  },
-  {
-   "text": "The ordinary associator and additive tensor of [lem-pc-sheaf-modules-tensor-closed] give a chain isomorphism $(E\\otimes F)\\otimes G\\cong E\\otimes(F\\otimes G)$: on degree $(i,j,k)$ it sends $(x\\otimes y)\\otimes z$ to $x\\otimes(y\\otimes z)$, and both differentials have coefficients $1,(-1)^i,(-1)^{i+j}$. Tensor commutes with the sums in these totalizations because its right adjoint in that node identifies maps from a tensor of a sum with families of maps from the tensor summands. If $E,F$ are K-flat, then for any acyclic $A$, $(A\\otimes E)\\otimes F$ is acyclic twice by [def-pc-kflat-complex], so $E\\otimes F$ is K-flat. If their terms are flat, each $E^i\\otimes F^j$ is flat: tensoring with it is the composite of two exact functors [def-pc-flat-sheaf-modules]. Its countable sum in each total degree is flat by [lem-pc-kflat-closure]. Finally Step 1 with $(a,b)=(0,n)$ identifies $A\\otimes E[n]$ with $(A\\otimes E)[n]$; hence shifts preserve K-flatness and flat terms. Finite sums remain in this resolving class by the countable-sum clause (pad with zero complexes).",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-kflat-closure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A2 (lemma-tensor-product-K-flat); Tag 0FPT (lemma-symmetric-monoidal-derived), explicit associator and closure verification."
-   }
-  },
-  {
-   "text": "Use $\\mathcal P_{\\mathcal O}$ from [lem-weil-pbc-site-derived-tensor-descent]. Its localization is equivalent to $D(\\mathcal O)$, and its representative comparison identifies total tensor with derived tensor, including arbitrary derived morphisms. Step 1's natural isomorphism, and Step 2's associator, therefore descend uniquely to derived natural isomorphisms. For the signed swap $x_i\\otimes y_j\\mapsto(-1)^{ij}y_j\\otimes x_i$, the chain-map check is also direct: the coefficients of $y\\otimes dx$ are $ij+j$ on both sides, and those of $dy\\otimes x$ are $ij$ on both sides, modulo $2$. Its inverse is the reverse swap and it is natural. It too descends, giving the symmetry specified in the statement. The natural-transformation clause of the cited descent node shows that equations between these transformations can be checked on resolving models. For three variables, apply that clause with one variable fixed, then again in the remaining variable (a constant second variable gives the one-variable case). Thus the computations below establish equations for arbitrary derived objects and maps; we never assume that $f,g,h$ have chain-map representatives on the degree-zero source sheaves. Lean implementation of the symmetry: use the bicomplex braiding and total-complex flip, whose summand coefficient is Int.negOnePow, and identify it with (-1)^(pq). The signed summand equations determine each component by the total coproduct universal property. Apply lem-pc-kflat-resolution and lem-weil-pbc-resolving-representative-whiskering to make restriction to resolving complex pairs fully faithful. Transport the chain swap through the representative isomorphism, take its unique preimage under this restriction, and use the same summand uniqueness to prove the required normalized uniqueness.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-resolving-representative-whiskering"
+    "lem-pur-derived-tensor-additive-constraints"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YU (definition-derived-tor), 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT; descent of the explicit comparisons."
+    "place": "Tag 0FPT; assembly of the separately additive resolving constraints."
    }
   },
   {
-   "text": "Derived tensor is additive in each variable. Indeed ordinary tensor is additive by [lem-pc-sheaf-modules-tensor-closed], so its total tensor preserves the finite direct-sum inclusion and projection diagrams. In the additive derived category of [def-weil-abstract-derived-category], these give the biproduct diagrams of the represented complexes. The representative comparisons and full resolving localization of [lem-weil-pbc-site-derived-tensor-descent] therefore identify tensoring their inclusions and projections with a biproduct diagram, first on resolving models and then on all objects. For any $v,w:X\\to Y$, write $v+w=\\nabla_Y(v\\oplus w)\\Delta_X$; preservation of that diagram makes tensoring send this to the sum of the two tensor morphisms. This proves additivity without choosing roofs for $v,w$. Composing $f\\otimes^Lg$ with the fixed $t_{a,b}$ is additive because composition in the derived category is bilinear. Hence $B$ is additive separately in $f$ and $g$.",
+   "text": "Apply [lem-pur-total-tensor-signed-coherence] to the triple shifted tensor on resolving models, then [lem-pur-derived-tensor-additive-constraints] to descend its reassociation identity. Precompose with $f\\otimes^Lg\\otimes^Lh$. Naturality moves the inner $t$ through the outer tensor and identifies the source associators. Substitution of $B=t(f\\otimes^Lg)$ gives exactly the two displayed iterated $B$ expressions.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pur-total-tensor-signed-coherence",
+    "lem-pur-derived-tensor-additive-constraints"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YU and 0FPT; agent biproduct argument for additivity of the localized tensor."
+    "place": "Tag 0FPQ; assembly of the triple signed comparison."
    }
   },
   {
-   "text": "On $E[a]^p\\otimes F[b]^q\\otimes G[c]^r$, moving the shifts out on the left-associated side has exponent $bp+c(p+q)$; moving them out on the right-associated side has exponent $cq+(b+c)p$. They are equal as integers. Both underlying maps are the ordinary associator from Step 2, so the two natural transformations from the triple shifted tensor to $(E\\otimes F\\otimes G)[a+b+c]$ agree. By Step 3 the identity holds in the derived category. Precompose with $f\\otimes^Lg\\otimes^Lh$. Naturality of $t$ moves the inner $t_{a,b}$ or $t_{b,c}$ through the outer tensor, and naturality of the associator identifies the two source parenthesizations. After substituting the definition of $B$, the resulting identity is exactly $B_{a+b,c}(B_{a,b}(f,g),h)=B_{a,b+c}(f,B_{b,c}(g,h))$.",
+   "text": "Descend the signed swap identity of [lem-pur-total-tensor-signed-coherence] using [lem-pur-derived-tensor-additive-constraints]. Precompose with $f\\otimes^Lg$ and substitute symmetry naturality $\\sigma_{K[a],L[b]}(f\\otimes^Lg)=(g\\otimes^Lf)\\sigma_{P,Q}$. The result is precisely the stated symmetry formula for $B$, with the scalar $(-1)^{ab}$ and the same identification $a+b=b+a$.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPL (lemma-cup-product-associative), agent explicit shifted-Hom refinement of the associativity diagram."
-   }
-  },
-  {
-   "text": "On shifted bidegree $(p,q)$, the composite $\\sigma_{E,F}[a+b]t_{a,b}$ has sign exponent $bp+(p+a)(q+b)$. The composite $(-1)^{ab}t_{b,a}\\sigma_{E[a],F[b]}$ has exponent $ab+pq+aq$. Their difference is $2bp$, so the maps agree, including negative shifts. Step 3 descends this identity. Naturality of the derived symmetry gives $\\sigma_{K[a],L[b]}(f\\otimes^Lg)=(g\\otimes^Lf)\\sigma_{P,Q}$. Substitute it into the descended identity and compose with $f\\otimes^Lg$ to obtain $\\sigma_{K,L}[a+b]B_{a,b}(f,g)=(-1)^{ab}B_{b,a}(g,f)\\sigma_{P,Q}$. Both sides use the same reindexing $a+b=b+a$ and the same ordinary sheaf swap. In particular two odd shifts give a minus sign; in characteristic two this scalar is the identity.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPM (lemma-cup-product-commutative; proof omitted there), explicit Koszul calculation with shifted degrees."
-   }
-  },
-  {
-   "text": "Check that the displayed iterated operations have their required sources. A flat degree-zero sheaf is a bounded-above complex of flat terms and hence K-flat by [lem-pc-kflat-closure]. Thus [lem-weil-pbc-site-derived-tensor-descent] identifies $P\\otimes^LQ$ canonically with $(P\\otimes Q)[0]$. The latter sheaf is flat: tensoring with it is, by the associator of [lem-pc-sheaf-modules-tensor-closed], tensoring successively with $P$ and $Q$, which is exact by [def-pc-flat-sheaf-modules]. Therefore $B(f,g)$ may be used as the first input of the next $B$, and likewise on the right. This also identifies the source associators in Step 5 with those in the statement. No flatness is imposed on $K,L,M$.",
-   "uses": [
-    "lem-pc-kflat-closure",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), Tag 06YU; explicit flat-source typing of the iterated operation."
-   }
-  },
-  {
-   "text": "Take $R_I=u^{-1}\\mathcal O$. Transport its ring operations and each module's addition and scalar action through the finite-product comparisons of $u^{-1}$; their axioms remain equalities because a functor preserves equations. On morphisms use $u^{-1}$ itself. This gives the algebraic presentation of [def-weil-pbc-algebraic-inverse-image]; its graph equations are exactly the transported operation equations. The specified module pullback is scalar extension along $R_I\\to\\mathcal O'$, on both objects and maps. Apply [lem-weil-pbc-canonical-ringed-tensor-comparison-construction] and [def-weil-pbc-canonical-ringed-tensor-comparison]. Their pure-tensor normalization sends the inserted inverse image of $x\\otimes y$ to $\\overline x\\otimes\\overline y$. These tensors generate locally: [def-pur-sheaf-tensor-product] is sheafification of the tensor presheaf, elements there are sums of pure tensors, and $u^{-1}$ preserves their epimorphic generating family since it is a left adjoint. Hence the associativity square has both composites $\\overline x\\otimes(\\overline y\\otimes\\overline z)$, and the symmetry square has both composites $\\overline y\\otimes\\overline x$. Scalar-extension coefficients agree by commutative multiplication in $\\mathcal O'$. This proves ordinary coherence from the normalization.",
-   "uses": [
-    "def-weil-pbc-algebraic-inverse-image",
-    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-    "def-weil-pbc-canonical-ringed-tensor-comparison",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites Tag 03EL (lemma-tensor-product-pullback), pure-tensor construction; agent coherence check."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-ringed-topoi-module-adjunction], $u^*$ preserves direct sums: maps from $u^*(\\bigoplus_i E_i)$ to $H$ are maps from $\\bigoplus_iE_i$ to $u_*H$, hence families of maps $u^*E_i\\to H$. Take the sum of Step 8's comparison in bidegrees $(p,q)$, using this coproduct identification. It identifies $u^*\\operatorname{Tot}(E\\otimes F)$ with $\\operatorname{Tot}(u^*E\\otimes u^*F)$. Module pullback is additive, as is immediate from its inverse-image and scalar-extension formula in the cited adjunction node. Thus this comparison respects the differential coefficients $1,(-1)^p$, the shift coefficient $(-1)^{bp}$, and the symmetry coefficient $(-1)^{pq}$ separately. Step 8 gives its compatibility with the unsigned associator. Reindexing degrees commutes with termwise pullback, and $u^*((-1)^n d)=(-1)^nu^*d$ gives the shift comparison. Therefore all the requested chain-level comparison diagrams commute.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), total-complex comparison; Tag 03D7 (module adjunction)."
-   }
-  },
-  {
-   "text": "[lem-weil-pbc-ringed-topoi-derived-tensor-pullback] says that pullback sends K-flat flat-term models to such models, and supplies the canonical simultaneous derived tensor comparison. Its source is the comparison of Step 9, with the K-flat representative identifications of [lem-weil-pbc-ringed-topoi-derived-pullback]. Thus the diagram equalities from Steps 8--9 descend by [lem-weil-pbc-site-derived-tensor-descent]. Exactness of $u^*$ ensures that its termwise functor sends every acyclic complex to an acyclic complex (exact functors preserve kernels, images and their quotients), hence every quasi-isomorphism to one. On resolving models this functor and $Lu^*$ have the same comparison; the resolving localization therefore identifies them. Their shift comparisons are the termwise ones just checked. For flat $P$, the degree-zero model $P[0]$ is K-flat by Step 7, and the preservation clause of the tensor-pullback node shows that $u^*P$ is flat; likewise for $Q,R$. Apply the descended naturality square of $t_{a,b}$ to $f,g$, and use naturality of the derived tensor comparison for $f\\otimes^Lg$. Its two composites are respectively $Lu^*(t_{a,b}(f\\otimes^Lg))$ and $t'_{a,b}(Lu^*f\\otimes^LLu^*g)$ under the stated source and target identifications. This is the claimed pullback law for $B$, with associator, symmetry and shift compatibility already established.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pur-total-tensor-signed-coherence",
+    "lem-pur-derived-tensor-additive-constraints"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 with Tags 06YY (lemma-derived-base-change) and 0G7E (lemma-pullback-K-flat); descent of the chain-level equations."
+    "place": "Tag 0FPQ; assembly of the signed swap comparison."
+   }
+  },
+  {
+   "text": "By [lem-pur-exact-pullback-signed-comparison], $Lu^*$ is canonically termwise derived pullback, sends the flat sources to flat sources, and its prescribed tensor comparison $\\mu$ obeys the signed shift square and the associator and symmetry squares. Apply its shift square to $K,L$ and precompose with $Lu^*(f\\otimes^Lg)$. Naturality of $\\mu$ replaces this last map by $Lu^*f\\otimes^LLu^*g$ after the source comparison; the degree-zero and shift comparisons identify the two inputs. This is exactly the claimed pullback equality for $B$. The other two squares give its asserted coherence.",
+   "uses": [
+    "lem-pur-exact-pullback-signed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; assembly of normalized exact pullback coherence."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-kflat-closure",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-weil-pbc-algebraic-inverse-image",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-  "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-resolving-representative-whiskering"
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-pur-exact-pullback-signed-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0FPL, 0FPM, 0FPQ, 0FPT and 07A4; explicit signed-Hom refinement using the prescribed shifted-degree normalization, K-flat localization, biproducts, and normalized ordinary pullback. E6 Lean implementation: the published model is obtained by composing the homotopy representative comparisons with quotientCompQhIso; the signed symmetry is transported by fully faithful restriction to resolving pairs. The exact comparison specializes the independent-universe canonical derived pullback theorem and cancels the homotopy/complex quotient comparison isomorphisms."
+  "place": "Assembly of the three extracted statement-only lemmas, preserving the former ten-step argument and its normalization. Tags 0FPQ, 0FPT and 07A4; explicit signed-Hom refinement of the relative-cup diagrams."
  },
  "mathlib_searches": [
   {
@@ -258,41 +160,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-shifted-tensor-morphism-calculus",
   "worker": "stage1",
-  "summary": "Kept the entire statement and its exact shifted-degree sign. Gave ten short proof steps: chain-map checks, resolving-model closure, localization of comparisons, biproduct additivity, explicit associativity and symmetry signs, flat-source typing, normalized ordinary pullback coherence, totalization and derived pullback. Reused existing generic nodes; no new nodes, no Mathlib leaves and no Lean changes. Searched both source declarations and Mathlib; no exact attachment or leaf.",
-  "blueprint": "Realizes the tensor-sign content of lem-pur-frame-independence, Permutations (even-degree Künneth sign), and the product additivity, association and pullback needed by Unit multiples and Elementary shears, via the parent supported-cup split. The node is a foundational tool and does not alter the geometric unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Ordinary module tensor associators, additivity and tensor adjunction supply the model calculations; the purity unit has no separate generic ringed-site tensor construction."
-   },
-   {
-    "node": "lem-pc-kflat-closure",
-    "why": "Bounded-above flat models and countable flat sums ensure valid resolving models and degree-zero source typing; no geometric purity assertion is substituted."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Its full resolving localization and natural-transformation extension turn the model identities into identities for arbitrary derived morphisms."
-   },
-   {
-    "node": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-    "why": "Supplies normalized ordinary pullback tensor comparison data; the signed calculation needs its pure-tensor normalization."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "The ordinary module adjunction proves preservation of the totalization sums by their universal property."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Supplies the canonical derived tensor comparison and preservation of K-flat flat-term representatives for the exact-pullback clause."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Supplies the natural representative comparisons identifying totalized termwise pullback with the actual left derived functor."
-   }
-  ]
+  "summary": "Human-requested re-split: preserved the statement verbatim; extracted three substantial statement-only nodes for complex signed coherence, normalized additive derived constraints, and exact normalized pullback coherence. The four-step assembly is below 3000 characters. The report preserves and allocates every former proof step; no Lean or existing dependency node was changed.",
+  "blueprint": "The same Permutations, Unit multiples and Elementary shears places of lem-pur-frame-independence, through lem-pur-supported-cup-functoriality, now realized by the three independent proof tasks.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pc-sheaf-modules-tensor-closed",
@@ -304,12 +177,12 @@
   "lem-weil-pbc-ringed-topoi-derived-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q04-584ae784a",
-  "group": "Q04",
+  "reviewer": "NT-cc-Q84-8525f9fe1",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-584ae784a (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages and blueprint route. All ten proof steps check out, including shifted signs, localization and canonical pullback coherence. No new nodes, duplicates or cycles. Corrected Step 8’s source path to sites-modules.tex (Tag 03EL) in the fixes overlay. Statement unchanged; full checks and accepted tool_uses recorded in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-8525f9fe1 (reviewer sub-agent of L); spot-checked: Read the item, the three new nodes, all cited statements, the repair note (human re-split of 2026-10-21) and Stacks 0FPQ/0FPT/07A4 (sites-cohomology.tex:12936/13136/3684). The re-split is correct. Every one of the 10 old steps reappears in a new node: chain-level signs, associator and swap in lem-pur-total-tensor-signed-coherence; resolving closure, unique normalized t/alpha/sigma, the finite-variable restriction criterion, biproduct additivity and flat degree-zero sources in lem-pur-derived-tensor-additive-constraints; eta: Lu^* = D(F), flatness, the normalized mu and its shift/associator/symmetry squares in lem-pur-exact-pullback-signed-comparison. The parent proof is a 4-step assembly of 1740 characters. The three nodes are of comparable size, none restates the item, there is no cycle, no SGA, and the item statement is unchanged. Hand checks: t is a chain map (a+b(p+1) vs bp+a+b; p+b+bp vs bp+a+b+p+a); the swap is a chain map; triple exponents bp+c(p+q)=cq+(b+c)p; symmetry exponents differ by 2bp; small cases a=b=1 (gives -1), characteristic 2, negative shifts, identity morphism, Z->Q. The mu normalization transports exactly to the existing canonical-shift-unit formula. Fault fixed (C5/B3, one class): the new statements restated facts from base nodes without citing them. Added lem-weil-pbc-total-tensor-integer-shifts (t^Ch = s^1_a[b] o s^2_b) to node A; lem-pur-kflat-total-tensor-model, lem-weil-pbc-kflat-fixed-tensor-triangulated and lem-pc-kflat-closure to node B; lem-pur-cochain-pullback-tensor-coherence (c and its ordinary coherence) and lem-weil-pbc-pullback-tensor-canonical-shift-unit (mu under eta) to node C. All have acyclic closures. Advisory: lem-sfb-exact-tensor-functor-derived-normalization/-braiding are abstract tools for C's proof. No new tool_uses. Maintainer note: the snapshot's chapter symlinks point to the pruned dagsnap 24bda39, so cited nodes were read from clones/live and the base was dated from svc.log (14:06–14:33).; 3 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

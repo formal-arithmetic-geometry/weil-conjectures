@@ -20961,3 +20961,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/NH/lem-weil-pbc-tensor-arrow-mate-right-unit (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/ND/lem-sp-etale-ctf-chart-domain (reviewer PASS; first push; new nodes: 0); claim not held by ND: not your claim
 - 08:09 L: merged deliver/Q104/lem-weil-boundary-proetale-q-compatibility (reviewer FIX; after a return; new nodes: 1)
+- 08:09 L: merged deliver/Q84/lem-pur-shifted-tensor-morphism-calculus (reviewer FIX; after a return; new nodes: 3)
