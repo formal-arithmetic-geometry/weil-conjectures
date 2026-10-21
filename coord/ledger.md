@@ -21198,3 +21198,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:41 L: merged deliver/Q43/lem-pur-open-cover-cohomology-detection (reviewer PASS; first push; new nodes: 0)
 - 08:41 L: merged deliver/Q84/lem-pur-closed-finite-adjoint-counit-transport (reviewer FIX; first push; new nodes: 0); claim not held by Q84: not your claim
 - 08:42 L: merged deliver/Q148/lem-fd-local-frobenius-weil-morphism-naturality (reviewer PASS; first push; new nodes: 0)
+- 08:42 L: merged deliver/N8/lem-sf-point-ringed-evaluation-model (reviewer PASS; first push; new nodes: 0)

@@ -17,9 +17,145 @@
   "def-weil-completed-integral-coefficients",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-fix-geometric-stalk-topos-point] to $Y=s$ and $\\bar y=\\operatorname{id}_s$. Its inverse image is the pointed-neighbourhood colimit of [def-weil-proetale-geometric-stalk]. The object $(s,\\operatorname{id}_s)$ is initial in that neighbourhood category: its unique pointed arrow to $(U,u)$ is $u:s\\to U$. It is therefore terminal in the opposite index. Explicitly send a representative $(U,u,z)$ to $u^*z\\in\\mathcal F(s)$ and send $w\\in\\mathcal F(s)$ to its class at $(s,\\operatorname{id})$. Pointed-arrow compatibility makes the first map well-defined; the colimit relation for $u$ makes the two maps inverse. This proves the claimed natural identification, with precisely the restriction maps specified in the statement.",
+   "uses": [
+    "lem-fix-geometric-stalk-topos-point",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0991, section-points, paragraph before lemma-classical-point (Tag 0993); explicit initial-object specialization"
+   }
+  },
+  {
+   "text": "The same restriction formulas respect addition, multiplication and module actions, since all those operations in [def-weil-proetale-geometric-stalk] are computed on common representatives. Hence $p^{-1}B=R=B(s)$ with its actual ring operations. Equip this point with $p^{-1}B\\to R$ equal to the identity. By the module-pullback formula in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $p^*M=R\\otimes_Rp^{-1}M\\cong M(s)$ via $a\\otimes x\\mapsto ax$, with inverse $x\\mapsto1\\otimes x$. These maps are natural on module morphisms. Thus the actual module pullback is $\\Gamma_s$. It is exact and its termwise functor preserves quasi-isomorphisms by [lem-weil-point-proetale-sections-exact].",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; sites-modules.tex Tag 03D2, lemma-pullback-module; exact sections as in the cited point lemma"
+   }
+  },
+  {
+   "text": "Use [lem-pur-cochain-pullback-tensor-coherence] for this ringed point, presenting $\\mathbf{Set}$ by the one-object trivial site and $R$ as its ring sheaf. Its cochain isomorphism $c_{p;P,Q}$, through step 2, is $b_{P,Q}$. Its inverse sends $x\\otimes y$ to the section tensor of $x,y$: substitute $1\\otimes x$ and $1\\otimes y$ in the displayed inverse formula for $c$. This holds on every bidegree summand, including arbitrary direct-sum total degrees. On a generator of bidegree $(i,j)$, the differential on either side is $dx\\otimes y+(-1)^i x\\otimes dy$, since the coefficient factors have degree zero. The cited lemma supplies the isomorphism and its naturality; this calculation fixes the direction and normalization of the specified chain map.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, displayed total-complex map; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback"
+   }
+  },
+  {
+   "text": "For flat-term K-flat $P,Q$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] says that $p^*P$ and $p^*Q$ are K-flat with flat terms. Under step 2 these are $\\Gamma_sP,\\Gamma_sQ$. By [lem-pur-kflat-total-tensor-model], $T=\\operatorname{Tot}(P\\otimes_BQ)$ is itself flat-term K-flat and represents the derived tensor. Apply [lem-pur-exact-pullback-signed-comparison] to the exact $p^*=\\Gamma_s$ of step 2. Its isomorphism $\\eta:Lp^*\\cong D(\\Gamma_s)$ identifies the resolving comparison on every flat-term K-flat complex with the termwise sections comparison. Its displayed representative square identifies the canonical derived tensor comparison with the localization of the specific $b_{P,Q}$ of step 3, including the representative maps for $P,Q,T$. The uniqueness and naturality in that lemma give independence of K-flat resolutions and naturality for all derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-exact-pullback-signed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 07A2 (lemma-tensor-product-K-flat), 06YY (lemma-derived-base-change), and 07A4 (lemma-pullback-tensor-product), with the cited representative-normalized exact-functor refinement"
+   }
+  },
+  {
+   "text": "The unit isomorphism is the actual equality $\\Gamma_sB=R$. The constraint equations of [lem-pur-cochain-pullback-tensor-coherence] apply before localization. More explicitly, under $b^{-1}$ the associativity square sends $(x\\otimes y)\\otimes z$ to the section $x\\otimes(y\\otimes z)$ along either route. The symmetry square sends $x\\otimes y$ in degrees $(i,j)$ to $(-1)^{ij}$ times the section $y\\otimes x$ along either route. The two unit squares send $a\\otimes x$ or $x\\otimes a$ to $ax$. The coefficient-unit identification of step 2 sends $1\\otimes a$ to $a$, so these are the specified unitors. These are equalities of chain maps, with the same signs on each summand, rather than just existence of compatible constraints.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 total-complex construction and Tag 03EL; explicit constraint equations of the cited cochain-coherence lemma"
+   }
+  },
+  {
+   "text": "For $B\\to B'$ use in [lem-pur-cochain-pullback-tensor-coherence] the coefficient square $p^{-1}B\\to p^{-1}B'$ over $R\\to R'=B'(s)$, with both vertical ring maps the identities. The square commutes because the restriction maps of step 1 are natural also in ring sheaves. The cited $\\kappa$ and tensor/scalar equation give the requested square with the canonical scalar comparisons. In its inverse form, both routes on a homogeneous generator send $(x\\otimes a)\\otimes(y\\otimes b)$ to the section $(x\\otimes y)\\otimes ab$. This uses balancing over $R$ and multiplication in $R'$; the new scalars have degree zero, so there is no extra sign. For $B\\to B'\\to B''$, the scalar-association maps send $(x\\otimes a)\\otimes b$ to $x\\otimes ab$; the composition equation of the same lemma applies, and the iterated tensor square sends the two coefficient factors to their product in $B''(s)$. For an identity ring map these are multiplication unitors. This verifies the identity and composed scalar squares at chain level, with no flatness assumption on the coefficient map.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 and sites-modules.tex Tag 03EL; coefficient and composition equations of the cited cochain-coherence refinement"
+   }
+  },
+  {
+   "text": "Localize the equations in steps 5 and 6 using flat-term K-flat models. [lem-weil-pbc-site-derived-tensor-descent] identifies their localization with the derived category and its specified tensor representatives; [lem-pur-kflat-total-tensor-model] keeps every iterated tensor in the resolving class. For scalar extension, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to the identity topos with coefficient map $B\\to B'$ (and to $R\\to R'$ on the one-object site) supplies flat-term K-flat images even when the coefficient map is not flat. Consequently these are representatives for the derived scalar comparisons, rather than a claim that scalar extension is exact. The localization universal property [lem-weil-pbc-localization-universal-property], applied successively in each variable, preserves composition and equality of these transformations and makes them natural for localized morphisms. Step 4 pins the localized tensor comparison to the canonical one. Thus all the chain constraint and scalar equations descend to the required derived equations, independently of models.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor), 0G7E (lemma-pullback-K-flat), and 07A4; categories.tex Tag 04VG with the cited localization universal property"
+   }
+  },
+  {
+   "text": "For the coefficient datum of [def-weil-completed-integral-coefficients], the valuation-ring and uniformizer hypotheses are supplied by [lem-weil-l-adic-extension-integers-dvr]. By [lem-weil-valued-dvr-finite-quotients], each $A_{E,n}$ is finite. Apply [lem-pur-proetale-finite-constant-sections] with $X=V=s$ and $A=A_{E,n}$. Since $|s|$ is a singleton, evaluation of a continuous function at its unique point identifies $(A_{E,n})_s(s)$ with $A_{E,n}$. The cited comparison sends every constant-presheaf element to its constant function, so the inverse is exactly the constant-section map. For a coefficient homomorphism $A_{E,m}\\to A_{E,n}$, naturality of sheafification sends the constant section $a$ to the constant section of its image. These elements exhaust the sections, so the induced section map is precisely the quotient homomorphism.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-pur-proetale-finite-constant-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, discrete-space assertion; coefficient hypotheses and finite quotients from the cited arithmetic nodes"
+   }
+  },
+  {
+   "text": "By [def-weil-completed-integral-coefficients] and the sectionwise limit formula of [def-pur-sheaf-inverse-limit], $\\widehat{\\mathcal O}_{E,s}(s)=\\varprojlim_n A_{E,n}$, with coordinate projections. The canonical map $\\mathcal O_E\\to\\varprojlim_n A_{E,n}$ is an isomorphism: choose representatives $a_n\\in\\mathcal O_E$ for a compatible tuple. Then $a_m-a_n\\in\\varpi_E^n\\mathcal O_E$ for $m\\ge n$, hence $|a_m-a_n|_E\\le|\\varpi_E|_E^n\\to0$. By [lem-weil-l-adic-extension-complete] they converge to $a\\in E$. The closed balls $\\mathcal O_E$ and $a_n+\\varpi_E^n\\mathcal O_E$ contain the appropriate tails, so $a\\in\\mathcal O_E$ and has the given residues. Injectivity follows from $|a|_E\\le|\\varpi_E|_E^n$ for all $n$. Here $0<|\\varpi_E|_E<1$ follows from [lem-weil-l-adic-extension-integers-dvr]. The forward map is $a\\mapsto(a\\bmod\\varpi_E^n)_n$; it is a ring homomorphism, so its inverse is also one. Together with step 8 this identifies the constant-section and every quotient map exactly. Applying steps 3--7 to this ring sheaf uses its ordinary ambient tensor, as asserted.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/def-weil-completed-integral-coefficients.md",
+    "place": "Completed coefficient sheaf definition; agent-written elementary compatible-residue Cauchy argument using the cited completeness and valuation statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-geometric-stalk-topos-point",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-exact-pullback-signed-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pur-proetale-finite-constant-sections",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-l-adic-extension-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 06YY and 0G7E with sites-modules.tex Tag 03EL and proetale.tex Tag 0991; explicit point, signed-constraint, scalar and coefficient specialization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +191,80 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.evaluationPreservesLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesLimit F (evaluation R X)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the evaluation functor at $X$ preserves limits of diagrams in the category of sheaves of modules over a sheaf of rings $R$. This \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_preservesPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": PreservesLimit (cospan g f) (LocallyRingedSpace.forgetToSheafedSpace ⋙ SheafedSpace.forgetToPresheafedSpace)\", \"doc\": \"The composition of the forgetful functor from locally ringed spaces to sheafed spaces over commutative rings and the forgetful functor from sheafed spaces to presheafed spaces preserves the pullback o\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesLimitsOfSize.{v₂, v} (evaluation R X : SheafOfModules.{v} R ⥤ _)\", \"doc\": \"For any object $ X $ in the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $, the evaluation functor at $ X $, which maps a sheaf of modules over a sheaf of rings $ R $ to its module over $ R(X) $, prese\"}\n  {\"name\": \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \"(X : Cᵒᵖ) : PreservesFiniteColimits (evaluation.{v} R X)\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, the evaluation functor at an object $ X $ (which maps presheaves of modules over $ R $ to modules over $ R(X) $) preserves finite colimits.\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \"{X Y : Cᵒᵖ} (f : X ⟶ Y) (m₁ : M₁.obj X) (m₂ : M₂.obj X) :\\n  DFunLike.coe (α := (M₁.obj X ⊗ M₂.obj X :)) (β := fun _ ↦\\n      (ModuleCat.restrictScalars (R.map f).hom).obj (M₁.obj Y ⊗ M₂.obj Y))\\n      (ModuleCat.Hom.hom (R := ↑(R.obj X)) ((tensorObj M₁ M₂).map f)) (m₁ ⊗ₜ[R.obj X] m₂) =\\n    M₁.map f m₁\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and presheaves of modules $ M_1, M_2 $ over $ R $, given a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{C}^{\\\\text{op}} $, the tensor product of th\"}\n  {\"name\": \"PresheafOfModules.evaluation_preservesFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesFiniteLimits (evaluation.{v} R X)\", \"doc\": \"For any object $ X $ in the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $, the evaluation functor at $ X $, which maps presheaves of modules over a presheaf of rings $ R $ to their module over $ R(X) \"}\n  {\"name\": \"PresheafOfModules.evaluation_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (X : Cᵒᵖ)\\n  (M : PresheafOfModules R), (PresheafOfModules.evaluation R X).obj M = M.obj X\", \"doc\": \"For a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, the evaluation functor at an object $ X $ maps $ M $ to the module $ M(X) $ over the ring $ R(X) $. Specif\"}\n  {\"name\": \"PresheafOfModules.instPreservesLimitsOfSizeModuleCatCarrierObjOppositeRingCatEvaluation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesLimitsOfSize.{v, v} (evaluation.{v} R X)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the evaluation functor at $X$ preserves limits of a specified size. Specifically, this functor maps a presheaf of modules over a \"}",
    "date": "2026-10-21",
    "verdict": "no match: Old steps 1--2 and the ambient portions of 8--9: actual ringed point and specified derived tensor maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"tensor\"",
+   "results": "2 hits; CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ; CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|tensorHom_comp_toPresheafFiber",
+   "results": "25 hits; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; searched Mathlib/CategoryTheory/Sites/Point",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact geometric stalk functor is symmetric monoidal on derived sheaf modules",
+   "results": "8 hits; PresheafOfModules.monoidalCategory; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; PresheafOfModules.monoidalCategoryStruct; CategoryTheory.Sheaf.monoidalCategory; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; CategoryTheory.Sheaf.symmetricCategory; ModuleCat.MonoidalCategory.symmetricCategory; TopCat.Presheaf.stalk_mono_of_mono",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections on the small proetale site of an algebraically closed field equal geometric stalk pullback and commute with signed derived tensor",
+   "results": "8 hits; AlgebraicGeometry.germ_stalkClosedPointIso_hom; AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc; AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec; AlgebraicGeometry.Scheme.fromSpecStalk_appTop; AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo; AlgebraicGeometry.stalkMap_toStalk_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves of modules commutes with unbounded derived tensor with K flat models and scalar extension",
+   "results": "8 hits; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_exact; Module.Flat.lTensor_exact; Module.Flat.iff_rTensor_exact'; Module.FaithfullyFlat.iff_exact_iff_rTensor_exact; Module.FaithfullyFlat.rTensor_reflects_exact; Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|ProEtale|geometricPoint|ofIsCofiltered",
+   "results": "10 hits; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/Map.lean; Mathlib/CategoryTheory/Sites/Point/Map.lean; Mathlib/CategoryTheory/Sites/Point/Map.lean; searched Mathlib/CategoryTheory/Sites/Point",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"sheafFiber\"",
+   "results": "12 hits; CategoryTheory.GrothendieckTopology.Point.presheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber; CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.toPresheafFiber; CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber'",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor of geometric stalks of sheaves on a proetale site is a topos point",
+   "results": "8 hits; TopCat.Presheaf.stalk; TopCat.Presheaf.stalkFunctor_obj; TopCat.Presheaf.stalkFunctor; CategoryTheory.GrothendieckTopology.Point.presheafFiber; CategoryTheory.GrothendieckTopology.Point.sheafFiber; instIsLeftAdjointPresheafStalkFunctor; CategoryTheory.GrothendieckTopology.Point.fiber; TopCat.Presheaf.stalk_mono_of_mono",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk on the small proetale site of a scheme is the inverse image of a geometric morphism from sets and preserves colimits",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Hom.stalkMap; AlgebraicGeometry.Scheme.stalkMap_germ_apply; AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo; AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec; AlgebraicGeometry.Scheme.stalkMap_germ; AlgebraicGeometry.PresheafedSpace.stalkMap_germ_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric point of a scheme defines a point of its pro etale topos by colimits of sections over pointed neighborhoods",
+   "results": "8 hits; AlgebraicGeometry.over_def; AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf; AlgebraicGeometry.Scheme.stalkClosedPointTo; AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf; AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo; AlgebraicGeometry.Scheme.IsGermInjectiveAt; AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-21",
+   "verdict": "no match: underived site-point or ordinary algebra declarations do not give the full ringed, signed, derived and coefficient-normalized assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-point-fibre-derived-tensor",
   "by": "worker",
@@ -76,5 +282,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-point-ringed-evaluation-model",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine steps identify the actual point by restriction representatives, apply existing signed cochain and exact-derived pullback theorems with fixed representative maps, verify tensor/scalar constraints and identity/composition formulas, and compute finite/completed coefficient sections. Reused existing nodes throughout; no new nodes or Lean edits.",
+  "blueprint": "thm-sf-kunneth-relative, proof step 5 (final compact-support specialization over Spec k); realizes the ambient point-normalization part previously extracted from lem-sf-point-fibre-derived-tensor steps 1, 2, 8 and 9.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Supplies the actual geometric-stalk adjunction; the Kunneth unit has no point-construction theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-topos or resolving-localization fact needed for the point specialization; no node of this Kunneth unit supplies it."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic ringed-topos or resolving-localization fact needed for the point specialization; no node of this Kunneth unit supplies it."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic signed cochain tensor and compatible coefficient/composition equations, specialized to the ringed point."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of flat-term K-flat models under total tensor, needed for iterated constraints."
+   },
+   {
+    "node": "lem-pur-exact-pullback-signed-comparison",
+    "why": "Generic exact ringed-pullback identification with fixed representative comparisons, needed to identify actual derived maps."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-topos or resolving-localization fact needed for the point specialization; no node of this Kunneth unit supplies it."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Arithmetic valuation and uniformizer properties for the coefficient ring; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Generic computation of finite constant coefficient sections with constant-section normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-exact-pullback-signed-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-proetale-finite-constant-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-0ca408776",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-0ca408776 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. There are no new nodes. The statement and stmt_deps are byte-equal to the live/side-live unsplit node; the item is not in the drop list, has no repair note, and is not superseded. All 19 citations exist and none is merged; the union of uses equals proof_deps, and there is no cycle (the 402-node closure misses both the item and its parent). No SGA is used. Sources checked: Stacks 0991 (the paragraph before 0993), 03EL, 03D2 and 07A4 (K-flat flat-term total-complex proof); the 0G7E/07A2/06YY/06YS/06YU/04VG tags are correct. Step 1: (s,id) is initial because h∘id=u forces h=u; the topos point comes from lem-fix-geometric-stalk-topos-point. Step 2: p^{-1}B=B(s), and p^*≅Γ_s via the module-pullback formula, which is exact for any ring sheaf. Step 3: in cochain-coherence the inverse formula with s=t=1 gives b^{-1}. Step 4: exact-pullback-signed-comparison applies since F≅Γ_s is exact; η and its representative square pin μ. Steps 5–6: reassociation, signed symmetry and the unitors are in the coherence statement. For the κ-square I took φ'=id, and the compatibility hypothesis holds. The inverse balanced formula (x⊗a)⊗(y⊗b)↦(x⊗y)⊗ab needs no sign. Composites are handled as composites of the ringed morphisms (id,B→B'). Step 7: the identity-topos derived pullback gives K-flat flat-term images for a non-flat B→B'. Step 8: the pro-étale finite-constant-sections node with X=V=s, and A_{E,n} is finite by the dvr + finite-quotient leaves. Step 9: the sectionwise limit and the Cauchy/closed-ball argument are correct. Edge cases checked: B=0, unbounded complexes, odd/odd degrees, a quotient coefficient map, n=1, the zero tuple. I accept all 9 tool uses as generic. Advisory overlaps: lem-zl-contractible-derived-sections-tensor (abstract monoidality only) and lem-weil-point-finite-free-sections-tensor (O_F≅Γ(s,R_F) clause); neither is a duplicate. Advisory: the derived scalar comparisons are pinned only through κ/model formulas, the inherited parent advisory."
  }
 }
