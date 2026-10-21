@@ -19376,3 +19376,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:49 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 - 00:51 L: returned deliver/K7/Sheaf.AlgebraicGeometry.StrictHenselizationRestriction (reviewer RETURN: (reviewer C-ccf94, head ccf94e9f4) Brief point 2: restore live StrictHenselizationClosedLift and StrictLocalNeighbourhoo)
 - 00:54 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
+- 00:57 L: returned deliver/A3/Sheaf.Paper.IntegralStratifiedPerfectCharacterization (reviewer RETURN: (the landing tools, head 24aca3a61) the delivery did not land: lean/Sheaf/Paper/IntegralStratifiedPerfectCharacterizatio)
