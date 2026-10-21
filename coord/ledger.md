@@ -21495,3 +21495,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q109/lem-zl-classical-weil-filtration-heart-transport (reviewer FIX; first push; new nodes: 0); claim not held by Q109: not your claim
 - 08:58 L: merged deliver/N5/lem-weil-pbc-flat-scalar-tower-limit-square (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/NK/lem-sfb-continuous-algcl-open-finiteness (reviewer PASS; first push; new nodes: 2)
+- 08:58 L: merged deliver/Q144/lem-per-continuous-coefficient-slice-normalization (reviewer FIX; first push; new nodes: 0)
