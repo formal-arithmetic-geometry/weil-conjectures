@@ -19720,3 +19720,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:20 L: merged deliver/Q12/lem-sf-module-object-ordinary-coefficient-equivalence (reviewer FIX; after a return; new nodes: 1)
 - 03:20 L: merged deliver/Q45/sk-lem-integral-models (reviewer PASS; after a return; new nodes: 1)
 - 03:20 L: returned deliver/Q60/det-ctf-finite-proper-localizing (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; 4 new)
+- 03:20 L: returned deliver/Q20/det-prop-scalar-six-pullback (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; the i)
