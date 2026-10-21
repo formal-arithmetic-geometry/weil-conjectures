@@ -21828,3 +21828,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: returned deliver/NC/lem-pur-tower-limit-transpose-normalization (reviewer RETURN: L: independent stage-2 immutable head 2697b770ba8c: H2: stmt_deps add theorem nodes lem-pe-constant-left-module-inverse-)
 - 09:17 L: returned deliver/Q60/lem-pur-open-cover-cohomology-detection (reviewer RETURN: L: independent stage-2 immutable head 300f659a9d5f: H13/H4: delivery overwrites N5's landed lean record of def-weil-deri)
 - 09:17 L: returned deliver/Q26/lem-trf-quotient-system-mixed-coherence (reviewer RETURN: L: independent stage-2 immutable head 33e3f1b6d094: H13: the delivered lean record of dependency def-trf-integral-compar)
+- 09:17 L: returned deliver/Q52/lem-sfb-finite-flat-constructible-total-tensor (reviewer RETURN: L: independent stage-2 immutable head 41777ce65ea0: H13: the delivery overwrites two landed dependency records. (1) def-)
