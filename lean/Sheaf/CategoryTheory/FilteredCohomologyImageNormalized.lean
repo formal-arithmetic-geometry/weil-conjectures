@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
-import Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap
+import WeilConjectures.CategoryTheory.FilteredCohomologyImageCycleMap
 
 /-! # Normalized presentation of the cohomology image graded piece
 
