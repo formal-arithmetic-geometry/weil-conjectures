@@ -18,9 +18,119 @@
   "def-weil-derived-complete",
   "lem-weil-strict-roos-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-a1-principal-koszul-strict-replacement] with the given $A,t,W,P$. It verifies the adic-datum hypotheses for $(A,(t))$, identifies the specified quotient projection with $R_W/t^nR_W$, and gives the strict tower map $a:V\\to U$ as a levelwise quasi-isomorphism. In particular the principal Koszul tower here is the one in the intrinsic definition, with precisely the transitions $(t,1)$. Countable products of $R_W$-module sheaves are exact by [lem-weil-proetale-countable-products-exact], so the hypotheses of the strict Roos comparison hold on this site. Work in a common universe in which the small pro-etale site and its module sheaves have the sizes required there.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed cone and strict augmentation refinement written by Q67"
+   }
+  },
+  {
+   "text": "Put $B=\\prod_n V_n$ and $f=1-s$. The intrinsic definition gives $F(P)^i=B^i\\oplus B^{i-1}$ and $d_F(x,y)=(dx,fx-dy)$; the strict model gives $\\mathsf C(V)^i=B^{i-1}\\oplus B^i$ and $d_{\\mathsf C}(y,x)=(-dy-fx,dx)$. Consequently $d_{\\mathsf C}j_P(x,y)=(dy-fx,dx)=j_Pd_F(x,y)$. The inverse is $(y,x)\\mapsto(x,-y)$. This proves the chain isomorphism, including its sign, directly. Writing $u_V:P\\to B$ for the product of the degree-zero Koszul units, the intrinsic unit is $p\\mapsto(u_Vp,0)$, so $j_P$ carries it to $(0,u_Vp)$, exactly $\\eta_V$. The coordinate formulas also commute with every chain map $P\\to P\\prime$.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed cone and strict augmentation refinement written by Q67"
+   }
+  },
+  {
+   "text": "Let $u_{U,n}:P\\to U_n$ be the quotient tensor unit and $u_{V,n}:P\\to V_n$ the degree-zero Koszul tensor unit. On the two-term Koszul factor, the composite of the degree-zero inclusion $R_W[0]\\to Q_{W,n}$ and $\\epsilon_n:Q_{W,n}\\to S_{W,n}[0]$ is the specified quotient $R_W\\to S_{W,n}$. Tensoring this equality gives $a_nu_{V,n}=u_{U,n}$. The source transition fixes the degree-zero unit and the quotient transitions compose with the quotient units, so these families are strictly compatible, and $fu_U=fu_V=0$ in the respective products. The strict Roos map is the product of $a_n$ in both coordinates. Thus $\\mathsf C(a)\\eta_V=(0,(a_nu_{V,n})_n)=(0,(u_{U,n})_n)=\\eta_U$ as chain maps, with no choice of a homotopy.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed cone and strict augmentation refinement written by Q67"
+   }
+  },
+  {
+   "text": "The strict Roos functor of [lem-weil-strict-roos-comparison] descends to $D(\\operatorname{Tow}(\\operatorname{Mod}(R_W)))$. Since $a$ is a levelwise quasi-isomorphism, it becomes an isomorphism there, and therefore $\\mathsf C(a)$ is an isomorphism after localization. Compose it with the chain isomorphism $j_P$ and the normalized comparison $\\rho_U$ to obtain the asserted isomorphism $d_K=\\rho_U\\mathsf C(a)j_P$. The chain equalities in steps 2 and 3 give $d_K\\eta_K^{\\mathrm{intr}}=\\rho_U\\eta_U$. The strict-augmentation clause of the same comparison identifies $\\rho_U\\eta_U$ with the canonical derived strict quotient-augmentation map $\\operatorname{comp}_K$. This uses that clause of its statement, not merely agreement after the tower projections.",
+   "uses": [
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed cone and strict augmentation refinement written by Q67"
+   }
+  },
+  {
+   "text": "At $L=E$, [lem-weil-integral-scalar-extension-well-defined] supplies the functorial quotient Roos model on flat-term K-flat representatives and its independence of those representatives. The intrinsic definition supplies the localized intrinsic fiber and its specified unit. All maps used above are natural already before localization: a chain map on $P$ is tensored with the identities of the quotient and Koszul factors, its product maps are diagonal in both cone coordinates, and $(-y,x)$ commutes with those diagonal maps. The comparison $\\rho$ is natural and independent of its injective resolution. The natural-transformation clause (2) of [lem-weil-pbc-localization-universal-property] therefore descends these transformations and their composite equations; clause (3) identifies transformations agreeing on representatives. The inverse of $j_P$ descends by the same clause. Hence the isomorphism $d_K$ and both unit identities are independent of $P$, and natural in $K$; no functorial choice of an individual resolution is required.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed cone and strict augmentation refinement written by Q67"
+   }
+  },
+  {
+   "text": "Now suppose $K$ is complete in the Roos-triangle convention. Apply [lem-weil-finite-free-completed-scalar-comparison] to the identity coefficient extension $E\\subset E$, with the same uniformizer on both sides and with $Y=W$. Its statement covers arbitrary schemes and unbounded $K$. After the multiplication identification $P\\otimes_{R_W}R_W\\cong P$, its specified map $\\chi_{E/E,K}$ is exactly $\\eta_U$: its product coordinates are the actual quotient tensor units and its shifted-product coordinate is zero. That theorem says this specified map is an isomorphism, rather than merely giving some isomorphism to a limit. Thus $\\eta_U$ is invertible. The isomorphisms $\\rho_U$ and $d_K$ and the equality in step 4 imply that $\\operatorname{comp}_K$ and the actual intrinsic unit $\\eta_K^{\\mathrm{intr}}$ are invertible as well.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.5.1 and Definition 3.5.2, p. 24; identity-extension specialization of the existing finite-free completed scalar comparison"
+   }
+  },
+  {
+   "text": "For $r\\in\\mathbf Z$, shifting a flat-term K-flat representative gives another such representative: the terms are reindexed and tensoring with $P[r]$ is, by the signed total-tensor identification, a shift of tensoring with $P$, so acyclicity is preserved. Since the quotient sheaves lie in degree zero, the quotient tower of $P[r]$ is $U[r]$, and its quotient units are the shifts of those of $P$. In the specified cone coordinates the natural chain isomorphism $\\sigma_r:\\mathsf C(U[r])\\to\\mathsf C(U)[r]$ is $(y,x)\\mapsto((-1)^r y,x)$. Substituting $d_{U[r]}=(-1)^rd_U$ in the differential of the strict model verifies the chain equation; the inverse has the same signs. In particular $\\sigma_r\\eta_{U[r]}=\\eta_U[r]$. Thus $\\eta_{U[r]}$ is invertible by step 6. The standard distinguished cone triangle for $1-s$ has first term $\\mathsf C(U[r])$ and first map its unshifted product projection. Transport that triangle through $\\eta_{U[r]}$; its second map remains $1-s$, and its first map has the components $u_{U[r],n}$. By [def-weil-integral-reduction-tower], computed with the K-flat resolution $P[r]\\to K[r]$, these components represent exactly the maps $c_n:K[r]\\to K[r]_n$ and the termwise product with $1-s$ represents the transition endomorphism of the reduction tower of $K[r]$; by [lem-weil-integral-reduction-tower-well-defined] the system and the $c_n$ computed from any other K-flat resolution are isomorphic to these compatibly with the maps from $K[r]$, so the triangle transports to one for every choice. By [def-weil-derived-complete], this is a completeness triangle for $K[r]$. Applying steps 1--6 to $P[r]$ proves every asserted conclusion for the shift.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-complete",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed cone and strict augmentation refinement written by Q67"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-weil-proetale-countable-products-exact",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-strict-roos-model",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed-model and unit calculation by Q67, using Stacks proetale.tex Tag 099M and the existing identity-extension scalar comparison for canonical-unit invertibility"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +173,45 @@
    "results": "Hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|[Kk]oszul.*[Cc]omplet|[Dd]erived[Cc]omplet",
+   "results": "No hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, IsIso",
+   "results": "No hits. loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completion unit computed by the inverse limit of quotient complexes and Koszul complexes",
+   "results": "Hits: AdicCompletion.module, AdicCompletion.instCommRing, AdicCompletion, AdicCompletion.instAddCommGroup, AdicCompletion.subring, AdicCompletion.of, IsAdicComplete.of_lift, AdicCompletion.liftRingHom.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unit from a complex of completed coefficient sheaves to its quotient Roos cone agrees with the Koszul mapping fiber completion unit",
+   "results": "Hits: SheafOfModules.Presentation.map_π_eq, CochainComplex.cm5b.i, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.p, SheafOfModules.generatorsOfIsCokernelFree_π, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.lift_f_snd_v, CochainComplex.mappingCone.inl_desc",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex is the homotopy inverse limit of its reductions modulo powers of a regular element, with the canonical augmentation",
+   "results": "Hits: BDeRhamPlus, BDeRham, AdicCompletion, AdicCompletion.pi_apply_coe, Hausdorffification, AdicCompletion.of_apply, AdicCompletion.of, AdicCompletion.incl",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-integral-pullback-completed-comparison",
@@ -87,5 +232,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-roos-intrinsic-unit-comparison",
+  "worker": "stage1",
+  "summary": "Seven-step split with no new nodes. Reuses the principal strict Koszul replacement and the normalized strict Roos comparison; verifies the fiber/cone sign, strict augmentation equality and descent, and obtains invertibility of the actual quotient unit from the existing finite-free scalar comparison at L=E. An explicit signed shift comparison proves shift completeness. No statement change.",
+  "blueprint": "Ancestor lem-a1-finite-map-purity, first paragraph: geometric-stalk restriction for finite-map pullback; via lem-a1-integral-pullback-completed-comparison, its canonical-map steps 3 and 4. This split supplies the signed intrinsic/strict quotient unit comparison required by those steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products on the arbitrary small pro-etale site; a generic site tool, not a replacement of the affine-line route."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Normalized comparison of a strict cone and total derived inverse limit, including the actual strict augmentation."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Use L=E to descend the quotient tower cone independently of its K-flat representative."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent and equality of natural transformations through quasi-isomorphism localization."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Identity-extension case L=E proves invertibility of the specified zero-shifted-coordinate quotient unit under precisely the Roos-triangle completeness hypothesis."
+   },
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "Step 7: independence of the reduction tower and its maps c_n from the K-flat resolution, needed to read the transported triangle of P[r] as the Roos triangle of K[r]; generic coefficient tool, no node of the affine-line unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-5e514a19a",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-5e514a19a (reviewer sub-agent of L); spot-checked: FIX for one repaired citation gap. I read the whole delivery: one commit, no new nodes, statement and stmt_deps byte-identical to live. The live item is still unsplit, it is not in the dropped list, and no SGA is used. Sources read: Stacks 099M (proetale.tex l.4304) and 0941 (sites-cohomology.tex l.5067); both are context only, and proof_origin 'agent' is correct. Step 2: I re-derived the intrinsic F(C) differential (dx, fx-dy) and the strict-model differential (-dy-fx, dx); j(x,y)=(-y,x) intertwines them and sends the unit (u,0) to (0,u). Step 3: a_n u_V,n = u_U,n holds as an equality of chain maps. Step 4 uses the strict-augmentation clause of lem-weil-strict-roos-comparison, which gives comp_K, not just agreement after the projections. Step 6: lem-weil-finite-free-completed-scalar-comparison treats L=E explicitly, its chi is literally eta_U with zero shifted component, and its hypothesis is the same Roos-triangle completeness. I computed the dependency closures: no cycle. Step 7: I checked the signs of sigma_r ((y,x) to ((-1)^r y,x)) by hand. Fault C1/C4 in step 7: identifying the first map of the transported triangle with c_n for K[r] needs def-weil-integral-reduction-tower (computed on P[r]) and lem-weil-integral-reduction-tower-well-defined. I added both to step 7, to proof_deps and to tool_uses; the cycle check is clean. Small cases: W empty, K=R_W, K=S_1 (R lim of [S_n -t-> S_n] is S_1), and r=0,±1,2. Tool uses (generic coefficient tools; the localization lemma is a Mathlib leaf) accepted. Advisory: the item's completeness clause overlaps the reviewed lem-pur-roos-intrinsic-completeness-equivalence (i)=>(iv),(v) over the same R; the maintainer may merge them later. Step 5 leaves implicit that the localization of flat-term K-flat complexes at quasi-isomorphisms is D(R_W); accepted as standard.; 1 file(s) fixed by the reviewer"
  }
 }
