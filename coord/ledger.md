@@ -21845,3 +21845,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: merged deliver/Q85/lem-wf-tate-twist-frobenius (reviewer FIX; first push; new nodes: 0)
 - 09:17 L: merged deliver/Q100/lem-zl-condensed-stalk-frobenius-orbit-trace (reviewer PASS; first push; new nodes: 1)
 - 09:17 L: merged deliver/Q105/lem-pc-tate-abstract-residue-calculus (reviewer FIX; first push; new nodes: 0)
+- 09:17 L: merged deliver/Q144/lem-weil-isomorphism-scalar-augmentation-cone (reviewer PASS; first push; new nodes: 0)
