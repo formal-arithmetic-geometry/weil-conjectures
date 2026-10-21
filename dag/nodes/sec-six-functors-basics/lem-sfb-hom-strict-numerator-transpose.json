@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-hom-strict-numerator-transpose",
+ "kind": "statement",
+ "title": "Transpose of the strict normalized Hom numerator for arbitrary coefficient modules",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, $R$ a sheaf of commutative rings, $P$ a flat-term K-flat complex of $R$-module sheaves, $C$ any unbounded $R$-complex, and $T$ any $R$-module sheaf, regarded as a complex in degree zero [def-weil-sheaf-of-modules-category] [def-pc-kflat-complex]. Use localization $Q$, the normalized derived tensor-Hom structure $H_R$, and its fixed Hom representative and inverse localized augmentation [def-weil-abstract-derived-category] [def-coef-ringed-tensor-hom-model] [def-pur-derived-internal-hom] [def-coef-hom-representative-evaluation]. In the strict models [def-sfb-internal-hom-strict-models] [def-sfb-internal-hom-strict-roof], write $\\eta_M:M\\to I_R(M)$, $J=I_R(C)$, $B=\\mathcal Hom_R^\\bullet(P,J)$ and $A=T\\otimes_R B$, where $\\otimes$ is the actual total sheaf tensor. Let $a_T:A\\to\\mathcal Hom_R^\\bullet(P,I_R(T\\otimes_R J))$ be the fixed normalized comparison. Then evaluation into $QC$, under $QB\\cong H_R(QP,QC)$, is represented by $\\operatorname{ev}_J:B\\otimes_R P\\to J$, $f\\otimes p\\mapsto f(p)$, followed by $[\\eta_C]^{-1}$. There is a chain map $h_T:A\\otimes_R P\\to T\\otimes_R J$ with formula $(t\\otimes f)\\otimes p\\mapsto t\\otimes f(p)$ on every slice and homogeneous total-tensor summand. The uncurried chain map of $a_T$ is exactly $\\eta_{T\\otimes_R J}\\circ h_T$, tested with the actual product-Hom projections and sheafification units. Consequently the derived tensor-Hom transpose of $[a_T]:QA\\to H_R(QP,Q(T\\otimes_R J))$ is $[h_T]$. Here $Q(A\\otimes_R P)$ computes $QA\\otimes_R^{\\mathbf L}QP$; neither $A$ nor $T$ is required to be flat. These identifications are natural in $T$, contravariantly in $P$, and covariantly in $C$, and commute with compatible coefficient maps and inversion of quasi-isomorphisms of the complex representatives. The tensor order is $A,P$, so no interchange sign is inserted. No boundedness, finite generation or continuity assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), chain Hom/tensor transposition; agent refinement for the strict normalized numerator, not a verbatim assertion of the tag."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-hom-representative-evaluation",
+  "def-pur-derived-internal-hom",
+  "def-sfb-internal-hom-strict-models",
+  "def-sfb-internal-hom-strict-roof"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(internalHom|homComplex|homFixed).*(scalar|tensor|evaluation)|(scalar|tensor|evaluation).*(internalHom|homComplex|homFixed)",
+   "results": "2 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scalar extension map on the sheaf Hom complex has tensor Hom transpose equal to scalar evaluation followed by the injective replacement unit",
+   "results": "8 hits: transpose_dualTensorHom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendScalars.map', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"curry\"",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry', CategoryTheory.MonoidalClosed.uncurry', CategoryTheory.MonoidalClosed.uncurry'_curry', CategoryTheory.MonoidalClosed.curryHomEquiv', CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.MonoidalClosed.curry'_id, CategoryTheory.MonoidalClosed.curry_injective",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation transpose of a normalized scalar coefficient map S tensor Hom(P,I(C)) to Hom(P,I(S tensor I(C))) is evaluation followed by the resolution unit",
+   "results": "8 hits: ModuleCat.ihom_ev_app, ModuleCat.ihom_coev_app, PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.monoidalClosedHomEquiv, PresheafOfModules.Monoidal.tensorHom, ModuleCat.monoidalClosed_uncurry",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|isIso_of_isLeftDerivedFunctor_of_inverts|monoidalClosed_uncurry|ExtendScalars.map_tmul|fromExtendScalars_hom_apply",
+   "results": "18 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module sheaf T and a K flat complex P the normalized chain map T tensor Hom(P,I(C)) to Hom(P,I(T tensor I(C))) has derived transpose (t tensor f) tensor p maps to t tensor f(p)",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.tensorHom, HomologicalComplex.HasTensor, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat currying and generic HomologicalComplex tensor maps do not identify the strict sheaf-complex numerator with its fixed inverse-augmentation derived transpose, particularly for arbitrary non-flat T and non-K-flat A."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hom-flat-evaluation-roof",
+  "date": "2026-10-21",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph, 'descending to a finite extension E': coefficient-passage argument, via lem-sfb-dc-hom-filtered-colimit, old steps 7 and 10 (evaluation roof and canonical comparison) and step 11 (derived naturality).",
+   "via": [
+    "lem-sfb-hom-flat-evaluation-roof",
+    "lem-sfb-dc-hom-filtered-colimit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

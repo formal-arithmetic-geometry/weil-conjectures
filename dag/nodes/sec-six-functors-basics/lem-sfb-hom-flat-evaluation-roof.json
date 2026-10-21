@@ -20,13 +20,14 @@
  ],
  "proof": [
   {
-   "text": "Exactness of $E$ and the natural cohomology comparison give $H^r(Eu)=E(H^r(u))$, so $E$ preserves quasi-isomorphisms. For any complex $M$, choose a flat-term K-flat resolution $T\\to M$. The defining K-flat computation of $E^{\\mathbf L}QM$ and the quasi-isomorphism $ET\\to EM$ identify it canonically with $Q(EM)$. These identifications commute with maps, since both are induced by localization of the same exact functor. Set $e=E\\eta_C:EC\\to EJ$. It is a quasi-isomorphism. Naturality gives $I_R(e)\\eta_{EC}=\\eta_{EJ}e$, and both augmentations are quasi-isomorphisms; hence $I_R(e)$ is a quasi-isomorphism between K-injectives. Apply Hom-invariance with first-variable map $1_P$ and second-variable map $I_R(e)$. It gives the required quasi-isomorphism $v_S=\\mathcal Hom_R(P,I_R(e))$.",
+   "text": "Exact-functor cohomology shows that $E$ preserves quasi-isomorphisms; the exact-derived-functor theorem makes termwise $E$ a left derived functor of itself, so uniqueness of left derived functors identifies the derived scalar extension $E^{\\mathbf L}$ canonically with it: $E^{\\mathbf L}QM\\cong Q(EM)$ for every complex $M$. Set $e=E\\eta_C:EC\\to EJ$. It is a quasi-isomorphism. The natural augmentation equation $I_R(e)\\eta_{EC}=\\eta_{EJ}e$ and two-out-of-three make $I_R(e)$ a quasi-isomorphism between K-injectives. Hom-invariance with first map $1_P$ gives that $v_S=\\mathcal Hom_R(P,I_R(e))$ is a quasi-isomorphism. Its localization represents $H_R(QP,[e])$.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-functor",
     "lem-pur-derived-change-of-rings",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-rhom-well-defined"
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false,
    "source": {
@@ -35,97 +36,46 @@
    }
   },
   {
-   "text": "Put $A=UEB=S\\otimes_R B$, with the actual representative identification understood. Since $J=I_R(C)$, the fixed Hom representative identifies $QB$ with $H_R(QP,QC)$. Apply the K-flat chain-transpose lemma to $1_B:B\\to\\mathcal Hom_R(P,J)$ and the K-injective target $J$. Thus evaluation into $QC$ is represented by $\\operatorname{ev}_J:B\\otimes_R P\\to J$, $f\\otimes p\\mapsto f(p)$, followed in the derived category by $[\\eta_C]^{-1}$. The order is $B,P$, so no interchange sign occurs. The same lemma applies to the arbitrary complex $A$ and the K-injective target $I_R(EJ)$; $A$ need not be K-flat.",
+   "text": "Apply the strict-numerator transpose lemma with the restricted regular module $T=US$. It gives $h((s\\otimes f)\\otimes p)=s\\otimes f(p)$, transpose $[a_S]=[h]$, and evaluation into $QC$ as $[\\eta_C]^{-1}[\\operatorname{ev}_J]$. Apply the flat scalar evaluation model with $D=B$ and $b=1_B$. Its descent clause handles this possibly non-K-flat Hom complex. Naturality in the target along $[\\eta_C]^{-1}$ and the evaluation equation of $\\Theta$ then give the transpose of $d=\\Theta U(c)$ as $[e]^{-1}[h]$.",
    "uses": [
-    "def-coef-hom-representative-evaluation",
-    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-sfb-hom-strict-numerator-transpose",
+    "lem-sfb-hom-flat-scalar-evaluation-model",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product), K-flat representative comparison, and Tag 08J9 (sites-cohomology-lemma-internal-hom), evaluation and functoriality; agent one-K-flat-factor scalar evaluation refinement, not a verbatim assertion of either tag."
+   }
+  },
+  {
+   "text": "By naturality of closed transposition, the transpose of $[v_S]d$ is $[e][e]^{-1}[h]=[h]$, the transpose of $[a_S]$ in step 2. The adjunction Hom-bijection is injective, hence $[v_S]\\Theta U(c)=[a_S]$. Invert $[v_S]$ using step 1 to obtain the roof identity. The evaluation normalization of $\\Theta$ makes it natural in both inputs and compatible with coefficient maps; the two new lemmas give naturality of the numerator evaluation and of the scalar comparison, on representatives, inverse quasi-isomorphisms and coefficient compositions. The fixed augmentation is natural, so the denominator squares also commute. Composition, inversion and these canonical identifications preserve the squares; consequently the displayed roof identity is natural in both derived inputs and in compatible coefficient maps. None of the cited statements assumes finite freeness, continuity or boundedness.",
+   "uses": [
+    "lem-sfb-hom-strict-numerator-transpose",
+    "lem-sfb-hom-flat-scalar-evaluation-model",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "def-coef-ringed-tensor-hom-model",
     "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), proof using the actual Hom/tensor adjunction; fixed inverse-augmentation normalization."
-   }
-  },
-  {
-   "text": "Define $h:A\\otimes_R P\\to UEJ$ by $h((s\\otimes f)\\otimes p)=s\\otimes f(p)$. The scalar chain-identification lemma, with $q=1_{EJ}$, supplies this evaluation map: it is evaluation of $\\theta\\,U(\\sigma_{1_{EJ}})$, hence is a chain map on the actual sheaf tensors and product Hom complexes. The strict normalization of $a_S$ says exactly that its uncurried chain map is $\\eta_{EJ}\\circ h$: on every slice, degree, Hom-product projection and pure tensor both maps send $(s\\otimes f)\\otimes p$ to $\\eta_{EJ}(s\\otimes f(p))$. Such tensors generate the sheafified tensor and the product projections detect equality. The chain-transpose lemma and inverse-augmentation normalization therefore identify the derived transpose of $[a_S]:QA\\to H_R(QP,Q(UEJ))$ with $[\\eta_{EJ}]^{-1}[\\eta_{EJ}h]=[h]$.",
-   "uses": [
-    "lem-sfb-hom-scalar-chain-identification",
-    "def-sfb-internal-hom-strict-models",
-    "def-sfb-internal-hom-strict-roof",
-    "lem-sfb-hom-kflat-chain-transpose",
-    "def-coef-hom-representative-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom); sites-modules.tex Tag 03CZ (lemma-adjointness-tensor-restrict) on slices. Agent computation with the strict normalized comparison."
-   }
-  },
-  {
-   "text": "Here is the tensor representative used when restricting scalar-extended evaluation. Choose a flat-term K-flat resolution $t:T\\to B$. On the K-flat pair $T,P$ the normalized scalar tensor comparison is the localization of the actual chain tensor isomorphism. After restriction and insertion of the scalar unit on $P$, its pure-tensor formula is $(s\\otimes x)\\otimes p\\mapsto s\\otimes(x\\otimes p)$. The chain-transpose lemma makes $t\\otimes1_P$ a quasi-isomorphism; exact $E$ preserves this map and $t$. Also $EP$ is K-flat by scalar-extension preservation. Consequently the representative square descends along these quasi-isomorphisms from $T$ to $B$, giving the same displayed formula for $A\\otimes_R P$. Composing with $E(\\operatorname{ev}_J)$ gives $h$ of step 3. This verifies the representative comparison for the possibly non-K-flat complex $B$; it does not assume that tensoring arbitrary complexes computes a derived tensor.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-sfb-scalar-tensor-comparison",
-    "lem-sfb-scalar-extension-kflat",
-    "lem-sfb-hom-kflat-chain-transpose",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (K-flat tensor and derived pullback) and 08J9 (lemma-internal-hom); agent descent of the normalized tensor square along t."
-   }
-  },
-  {
-   "text": "Write $d=\\Theta\\,U(c)$, with source $QA$ and target $H_R(QP,Q(UEC))$. By the evaluation equation for $\\Theta$, its transpose is restricted scalar-extended evaluation after the scalar unit on $P$. Steps 2 and 4 compute it as $[e]^{-1}[h]:Q(A\\otimes_R P)\\to Q(UEC)$. Postcomposition with $[v_S]$ is the map $H_R(QP,[e])$ under the fixed Hom representatives, because $v_S=F(e)$. Naturality of tensor-Hom transposition in the target makes the transpose of $[v_S]d$ equal to $[e][e]^{-1}[h]=[h]$. This equals the transpose of $[a_S]$ computed in step 3. Injectivity of the closed-adjunction Hom-bijection gives $[v_S]\\Theta U(c)=[a_S]$. Since step 1 makes $[v_S]$ invertible, multiplication by its inverse gives $\\Theta U(c)=[v_S]^{-1}[a_S]$.",
-   "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "def-pur-derived-internal-hom",
-    "def-coef-ringed-tensor-hom-model",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), adjunction and evaluation; agent cancellation of the two explicit localized augmentations."
-   }
-  },
-  {
-   "text": "For maps $u:P'\\to P$ and $w:C\\to C'$, the evaluation identities are $\\operatorname{ev}_J((f\\circ u)\\otimes p')=f(u(p'))$ and $I_R(w)(f(p))=(I_R(w)\\circ f)(p)$. Naturality of $\\eta$ supplies the squares for $e$ and $v_S$; the scalar chain-identification lemma supplies the squares for $h$ under compatible ring maps. Thus the transpose computation commutes with maps of all the complex representatives. It also commutes with inversion of representative quasi-isomorphisms by the chain-transpose lemma and Hom-invariance. Since localization is generated by complex maps and inverses of quasi-isomorphisms, this gives naturality in both derived inputs. The scalar adjunction's coefficient compatibility and the normalized scalar tensor square give the same assertion for compatible coefficient maps (with the flatness assumptions of the statement). Equivalently, the established roof equals the evaluation-defined $d$, whose naturality follows from these squares and injectivity of transposition. No step uses a finite basis, a colimit or a degree bound.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sfb-hom-scalar-chain-identification",
-    "lem-sfb-hom-kflat-chain-transpose",
-    "lem-pur-rhom-well-defined",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-sfb-scalar-tensor-comparison",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), functoriality, and Tag 0A95 (lemma-RHom-well-defined); agent explicit naturality calculation."
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), chain Hom/tensor transposition; agent refinement for the strict normalized numerator, not a verbatim assertion of the tag."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-pur-derived-change-of-rings",
   "prop-pur-kinjective-resolutions-exist",
   "lem-pur-rhom-well-defined",
-  "def-coef-hom-representative-evaluation",
-  "lem-sfb-hom-kflat-chain-transpose",
-  "lem-sfb-hom-scalar-chain-identification",
-  "def-sfb-internal-hom-strict-models",
-  "def-sfb-internal-hom-strict-roof",
-  "lem-sfb-scalar-tensor-comparison",
-  "lem-sfb-scalar-extension-kflat",
-  "lem-sfb-dc-hom-scalar-adjunction",
   "def-pur-derived-internal-hom",
-  "def-coef-ringed-tensor-hom-model",
-  "def-weil-abstract-derived-category"
+  "lem-sfb-hom-strict-numerator-transpose",
+  "lem-sfb-hom-flat-scalar-evaluation-model",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof_origin": {
   "by": "agent",
@@ -236,28 +186,28 @@
   "date": "2026-10-21",
   "item": "lem-sfb-hom-flat-evaluation-roof",
   "worker": "stage1",
-  "summary": "Proved the exact-extension roof denominator is a quasi-isomorphism, computed both transposes with the fixed augmentations, and verified the tensor representative for non-K-flat B by resolving B. Reused existing DAG nodes throughout; no statement changes or new nodes. Recorded fresh searches and checked exact cited statements.",
-  "blueprint": "Nearest ancestor lem-sfb-dc-hom-preserves, final coefficient-passage paragraph ('descending to a finite extension E'), via lem-sfb-dc-hom-filtered-colimit: evaluation roof, canonical comparison, and derived naturality (parent old steps 7, 10 and 11).",
+  "summary": "Repair of the human-requested re-split: extract the strict numerator transpose and the non-K-flat scalar evaluation model/coherence into two independently stated unsplit nodes. Reuse the existing exact-derived-functor theorem; leave only resolution-unit invariance, application and cancellation in the parent. The complete old argument is retained and allocated in the worker report; the statement is unchanged.",
+  "blueprint": "Final paragraph, 'descending to a finite extension E': coefficient-passage argument, via lem-sfb-dc-hom-filtered-colimit, old steps 7 and 10 (evaluation roof and canonical comparison) and step 11 (derived naturality).",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-exact-functor-complex-cohomology",
-    "why": "Exact additive functors commute with cohomology; used to invert E eta and extend the normalized representative square, with no coefficient-specific finiteness input."
+    "why": "Generic exact-functor preservation of cohomology gives preservation of quasi-isomorphisms."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic flat-term K-flat replacement of B and arbitrary complexes; the unit does not supply resolution existence."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "The existing unbounded K-flat definition/computation of derived scalar extension, specialized to an exact scalar functor."
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor theorem supplies canonical representatives for unbounded derived scalar extension; avoids a duplicate new lemma."
    },
    {
     "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic functorial K-injective replacements and natural augmentations used by the fixed Hom models."
+    "why": "Generic functorial K-injective replacements and natural quasi-isomorphic augmentations."
    },
    {
     "node": "lem-pur-rhom-well-defined",
-    "why": "Hom-complex invariance under quasi-isomorphisms between K-injective targets; applied to I_R(e), not to the non-injective complexes EC and EJ."
+    "why": "Generic Hom invariance for the quasi-isomorphism I_R(e) between K-injectives."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived scalar extension as a left derived functor; uniqueness identifies it with the exact termwise extension. No node of the unit defines it."
    }
   ]
  },
@@ -266,15 +216,16 @@
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-rhom-well-defined"
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-exact-functor-derived-functor"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q116-ee6d7b51c",
-  "group": "Q116",
+  "reviewer": "NT-cc-Q53-17e03ad52",
+  "group": "Q53",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-ee6d7b51c (reviewer sub-agent of L); spot-checked: Read the item's 6 steps in full, every cited statement, and the Stacks tags 08J9/0A95/06YY/07A4/03CZ/010N/015F. The delivery has no new nodes, and the statement and stmt_deps are unchanged. The item is not superseded (live and side-live both unsplit) and is not in route-pivot-dropped. There is no repair note for the item, so the re-split rules do not apply. Statement against def-sfb-internal-hom-strict-models/-roof: a_S is the normalized comparison at T=S, L=C, and v_S is roofDenominator(S); the domains and targets match ΘU(c) under the identification E^L QM ≅ Q(EM). Step 1: Eη_C is a quasi-isomorphism by exact cohomology; I_R(e) is a quasi-isomorphism between K-injectives by naturality of η; Hom-invariance with t=1_P then gives v_S. Steps 2-3: the chain transpose (P flat-term K-flat, target K-injective) gives the evaluation as [η_C]^{-1}[ev_J], and Normalized gives the transpose of [a_S] as [h]. Step 4: B is resolved by a K-flat T before using the scalar tensor square; I recomputed the pure-tensor composite (s⊗f)⊗p ↦ s⊗f(p). Step 5: the transpose of [v_S]ΘU(c) is [e][e]^{-1}[h] = [h]; injectivity of the transpose and invertibility of v_S finish the proof. Step 6: naturality is essentially formal. Edge cases R=S and P=R give the identity roof; P=0 and C=0 are trivial. The 5 tool_uses (exact-functor cohomology, K-flat resolution, derived change of rings, K-injective resolutions, RHom well-defined) are generic tools and accepted. No SGA source is cited. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-17e03ad52 (reviewer sub-agent of L); spot-checked: Read the item's three assembly steps, both new nodes and every cited statement in full. Stacks checks: 08J9 lemma-internal-hom (arbitrary K, K-flat L, K-injective I), 0A95, 06YY, 07A4, 010N, 03CZ. No SGA source is cited. Snapshot defect: every chapter symlink except sec-six-functors-basics points to the evicted dagsnap 967e9e9a; the off-chapter cited nodes were read from dagsnap 87746714 instead. Re-split (note of 2026-10-21): the statement and stmt_deps are byte-identical to the base. The parent proof goes from 4889 to 2050 characters with 2 new nodes of comparable size. Old step 1 stays as a short assembly of existing nodes. Old steps 2+3 become lem-sfb-hom-strict-numerator-transpose, which keeps ev_J with [eta_C]^-1, h_T, the Normalized uncurry eta∘h_T and the inverse-augmentation cancellation, and generalizes to an arbitrary module T. Old step 4 becomes lem-sfb-hom-flat-scalar-evaluation-model, with the descent along Et, E(t⊗1), t⊗1 explicit for an arbitrary D. Old steps 5 and 6 are carried by the assembly and the naturality and coherence clauses of the nodes. Nothing was dropped, neither node restates the item, and there is no cycle. Mathematics: I recomputed (s⊗f)⊗p ↦ s⊗f(p) through the scalar unit, the inverse tensor comparison and E^L[ev_J], and it matches the Theta normalization of lem-sfb-dc-hom-scalar-adjunction. The transpose of [v_S]d is [e][e]^-1[h]=[h]. Step 1 checks: I(e) is a quasi-isomorphism by 2-of-3 between K-injectives, and lem-pur-rhom-well-defined applies with t=1_P. Edge cases T=0, T=R, phi=id, D=0, a non-flat degree-0 D and P=0 all hold, with no Koszul sign since t has degree 0. The composition and identity coherence of c^phi is true. Duplicate checks against kflat-chain-transpose, scalar-chain-identification, internal-hom-finite-free-stage, comparison-exists, localization-comparison and scalar-tensor-comparison found none. Searches cover three kinds and the blueprint from/via fields are correct. FIX, 2 faults: C3, step 1 identified E^L QM≅Q(EM) without citing lem-pur-derived-change-of-rings (needed for the uniqueness of the left derived functor); it was added to uses, proof_deps and tool_uses, where it was already an accepted tool of this item. C1, step 3's naturality in coefficient maps uses Theta's coefficient compatibility, so lem-sfb-dc-hom-scalar-adjunction was added to its uses. Tool uses accepted: exact-functor cohomology, exact-derived-functor, K-injective resolutions, RHom well-defined, derived change of rings.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.FlatInternalHomEvaluationRoof",
