@@ -20722,3 +20722,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:32 L: returned deliver/Q83/lem-pe-finite-scalar-restriction-constructible (reviewer RETURN: L: independent stage-2 immutable head 04abde48d108: H2(2): delivery added theorem stmt_dep lem-weil-pbc-ring-sheaf-chang)
 - 07:32 L: returned deliver/NX/lem-sfb-integral-derived-extension-comparison (reviewer RETURN: L: independent stage-2 immutable head 1f03d3b050c5: H13/H2: the delivery rebinds Q36's landed sk-def-sfb-bounded-constru)
 - 07:32 L: returned deliver/Q18/lem-pur-torsion-line-system-base-change (reviewer RETURN: L: independent stage-2 immutable head 22e1f79e9afc: H3/H5: the node's final clause (internal-module interpretation via d)
+- 07:34 L: returned deliver/NL/lem-pur-roos-intrinsic-completeness-equivalence (reviewer RETURN: L: independent stage-2 immutable head 23f770385b3a: H13: the delivery replaces two landed dependency records with narrow)
