@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-acyclicity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Acyclic resolutions",
@@ -12,37 +12,194 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-acyclicity/_section.md",
   "place": "node sk-thm-acyclicity, order 1050"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-sp-acyclic",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
  "proof": [
   {
-   "text": "For the first assertion put $Z^0=F$ and let $Z^{m+1}$ be the image of\n$A^m\\to A^{m+1}$. The exact sequences\n\n$$\n0\\longrightarrow Z^m\\longrightarrow A^m\\longrightarrow Z^{m+1}\\longrightarrow0\n$$\n\ngive\n\n$$\n\\operatorname{coker}(vA^m\\to vZ^{m+1})\\simeq R^1vZ^m,\n\\qquad R^avZ^{m+1}\\simeq R^{a+1}vZ^m\\quad(a\\geq1).\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Left exactness identifies the kernel of $vA^q\\to vA^{q+1}$ with $vZ^q$.\nConsequently, for $q\\geq1$,\n\n$$\n\\mathcal H^q(vA^\\bullet)=\\operatorname{coker}(vA^{q-1}\\to vZ^q)\n\\simeq R^1vZ^{q-1}\\simeq\\cdots\\simeq R^qvF,\n$$\n\nand degree zero is $vF$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For the complex assertion first observe that a bounded below exact complex\nof $v$-acyclic objects remains exact after applying $v$. Indeed, its cycle\nsequences have the same form, starting with a zero cycle at the first nonzero\ndegree. The long exact sequences show inductively that all cycles are\n$v$-acyclic, so each cycle sequence remains short exact after $v$. Now choose\na quasi-isomorphism $A^\\bullet\\to J^\\bullet$ to a bounded below complex of\ninjectives. Its cone is bounded below, exact, and termwise $v$-acyclic, since\nits terms are finite direct sums of terms of $A^\\bullet$ and of $J^\\bullet$.\nApplying $v$ to the cone shows that $vA^\\bullet\\to vJ^\\bullet$ is a\nquasi-isomorphism. The target computes $Rv(A^\\bullet)$, proving the\nassertion. No spectral sequence is needed; this is why the lemma is separated\nfrom [sk-thm-groth-ss].",
+   "text": "For the resolution assertion, use its nonnegative augmented exact complex $0\\to F\\to A^0\\to A^1\\to\\cdots$. Set $Z^0=F$ and $Z^{m+1}=\\operatorname{im}(A^m\\to A^{m+1})$ for $m\\geq0$. Exactness identifies $Z^m$ with $\\ker(A^m\\to A^{m+1})$, giving short exact sequences $0\\to Z^m\\to A^m\\to Z^{m+1}\\to0$. Here cohomology means kernel modulo image, and $v$-acyclic means $R^av(A^m)=0$ for all $a>0$.",
    "uses": [
-    "sk-thm-groth-ss"
+    "def-weil-abstract-derived-category",
+    "def-sp-acyclic"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TA (proposition-enough-acyclics), proof: break an exact complex into its image/cycle short exact sequences; blueprint imported proof paragraph 1."
+   }
+  },
+  {
+   "text": "Apply the long exact derived sequence to each sequence in step 1. Identify $R^0v$ with $v$ using its natural degree-zero isomorphism. Since $R^av(A^m)=0$ for $a>0$, the segment $vA^m\\to vZ^{m+1}\\to R^1vZ^m\\to0$ identifies $\\operatorname{coker}(vA^m\\to vZ^{m+1})$ with $R^1vZ^m$. For every $a\\geq1$, the segment $0\\to R^avZ^{m+1}\\to R^{a+1}vZ^m\\to0$ gives $R^avZ^{m+1}\\simeq R^{a+1}vZ^m$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sp-derived-well-defined",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), parts (1)–(2); Tag 05TD (lemma-left-exact-higher-derived), part (3); blueprint imported proof paragraph 1."
+   }
+  },
+  {
+   "text": "Left exactness identifies $\\ker(vA^q\\to vA^{q+1})$ with $vZ^q$: factor the differential through $Z^{q+1}\\hookrightarrow A^{q+1}$, whose image under $v$ is still monic, and use the kernel sequence of step 1. Thus for $q\\geq1$, $\\mathcal H^q(vA^\\bullet)=\\operatorname{coker}(vA^{q-1}\\to vZ^q)\\simeq R^1vZ^{q-1}\\simeq R^2vZ^{q-2}\\simeq\\cdots\\simeq R^qvZ^0=R^qvF$, by the successive isomorphisms of step 2. For $q=1$ there are no further shifts; for $q=0$ the kernel is $vZ^0=vF\\simeq R^0vF$.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), part (3), and the cohomology definition; blueprint imported proof paragraph 2."
+   }
+  },
+  {
+   "text": "Now let $A^\\bullet$ be the bounded below complex in the second assertion and choose $a\\in\\mathbf Z$ with $A^n=0$ for $n<a$. The bounded below injective replacement theorem gives a quasi-isomorphism $s:A^\\bullet\\to J^\\bullet$ with every $J^n$ injective and $J^n=0$ for $n<a$. Each $J^n$ is $v$-acyclic by injective vanishing. The zero object is injective because every map into it is the unique zero map and hence extends across every monomorphism; in particular zero is also $v$-acyclic.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K (lemma-injective-resolutions-exist), part (3); Tag 015B (lemma-higher-derived-functors), part (3)."
+   }
+  },
+  {
+   "text": "Form the cochain mapping cone $C=\\operatorname{Cone}(s)$ with $C^n=J^n\\oplus A^{n+1}$ and differential $\\begin{pmatrix}d_J^n&s^{n+1}\\\\0&-d_A^{n+1}\\end{pmatrix}$. Since $s$ is a quasi-isomorphism, the cone criterion says $C$ is acyclic. The displayed terms vanish for $n<a-1$, so $C$ is bounded below with lower bound $b=a-1$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TA (proposition-enough-acyclics), proof, cone C(s); Tag 05RT (lemma-acyclic) with the cone triangle and its cohomology sequence."
+   }
+  },
+  {
+   "text": "Every term $C^n$ is $v$-acyclic. Indeed, apply the long exact derived sequence to the split short exact sequence $0\\to J^n\\to J^n\\oplus A^{n+1}\\to A^{n+1}\\to0$. For each $r>0$ its exact segment $R^rvJ^n\\to R^rvC^n\\to R^rvA^{n+1}$ has both outside objects zero, by step 4 and the hypothesis on $A^\\bullet$; therefore the middle object is zero. This establishes the needed closure under the binary direct sum without assuming that $v$ is exact.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-sp-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), part (1), applied to a split sequence; Tag 05TA, proof: the cone terms are acyclic."
+   }
+  },
+  {
+   "text": "Put $T^n=\\ker(C^n\\to C^{n+1})$. Acyclicity gives short exact sequences $0\\to T^n\\to C^n\\to T^{n+1}\\to0$. For $n<b$ the cycles are zero, and $T^b=\\operatorname{im}(C^{b-1}\\to C^b)=0$. Induct on $n\\geq b$, with inductive assertion that $R^rvT^n=0$ for every $r>0$. The base is zero acyclicity from step 4. For the induction step, the long exact sequence and step 6 give $R^rvT^{n+1}\\simeq R^{r+1}vT^n=0$ for every $r>0$. The same sequence in degree zero, using $R^0v=v$ and $R^1vT^n=0$, gives $0\\to vT^n\\to vC^n\\to vT^{n+1}\\to0$. Since $v$ preserves kernels, $vT^n=\\ker(vC^n\\to vC^{n+1})$, and surjectivity of $vC^{n-1}\\to vT^n$ shows that this kernel is exactly the image of $vC^{n-1}\\to vC^n$. Hence $vC$ is acyclic in every degree, including degrees below $b$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sp-derived-well-defined",
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TA (proposition-enough-acyclics), proof, induction on cycles of an exact bounded below complex; Tag 015B (lemma-higher-derived-functors), parts (1)–(2)."
+   }
+  },
+  {
+   "text": "The canonical biproduct comparison $v(J^n\\oplus A^{n+1})\\simeq vJ^n\\oplus vA^{n+1}$ identifies $vC$ with $\\operatorname{Cone}(v(s))$ as complexes: additivity sends the differential matrix in step 5 to $\\begin{pmatrix}v(d_J^n)&v(s^{n+1})\\\\0&-v(d_A^{n+1})\\end{pmatrix}$, since it preserves sums, zero and negatives. Thus step 7 says that $\\operatorname{Cone}(v(s))$ is acyclic. Applying the cone criterion in $\\mathcal B$ shows $v(s):vA^\\bullet\\to vJ^\\bullet$ is a quasi-isomorphism.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TA (proposition-enough-acyclics), proof, reduction to the acyclic mapping cone; the additive functor preserves its defining differential matrix."
+   }
+  },
+  {
+   "text": "Let $\\alpha_L:Q_{\\mathcal B}(vL)\\to Rv(Q_{\\mathcal A}L)$ be the canonical natural comparison for the bounded below right derived functor. Its existence and the fact that $\\alpha_J$ is an isomorphism for the bounded below injective complex $J$ are precisely the bounded below injective computation theorem. Naturality at $s$ is $Rv(Q_{\\mathcal A}s)\\circ\\alpha_A=\\alpha_J\\circ Q_{\\mathcal B}(v(s))$. The factor $Q_{\\mathcal B}(v(s))$ is invertible by step 8 and localization at quasi-isomorphisms; $Rv(Q_{\\mathcal A}s)$ is invertible because $s$ is a quasi-isomorphism and $Rv$ is a functor. Therefore $\\alpha_A=Rv(Q_{\\mathcal A}s)^{-1}\\circ\\alpha_J\\circ Q_{\\mathcal B}(v(s))$ is an isomorphism in $D^+(\\mathcal B)$. This proves the canonical comparison itself, and completes the second assertion.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TH (lemma-injective-acyclic), part (1), and Tag 05TI (lemma-enough-injectives-right-derived), part (2); naturality of the canonical derived comparison."
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-groth-ss"
+  "def-weil-abstract-derived-category",
+  "def-sp-acyclic",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sp-derived-well-defined",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "def-sp-injective-resolutions",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-right-derived-plus-injective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-acyclicity/_section.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraphs 1–3, expanded using Stacks derived.tex Tags 015B, 013K, 05TA, 05TH and 05TI; the main-20261015 statement adds the derived comparison."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightAcyclic|rightDerived.*[Aa]cyclic|[Aa]cyclic.*rightDerived",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic resolutions compute right derived functors and bounded below complexes of acyclic objects compute total right derived functors",
+   "results": "CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, HomologicalComplex.Acyclic; inspected candidates: rightDerived defines classical derived functors; mapDerivedCategory assumes exactness, stronger than left exactness; none states both clauses for termwise acyclic objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived; inspected candidates: rightDerived defines classical derived functors; mapDerivedCategory assumes exactness, stronger than left exactness; none states both clauses for termwise acyclic objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below complex of acyclic objects computes the right derived functor of a left exact additive functor",
+   "results": "CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor; inspected candidates: rightDerived defines classical derived functors; mapDerivedCategory assumes exactness, stronger than left exactness; none states both clauses for termwise acyclic objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left exact functor sends quasi-isomorphisms of bounded below complexes of objects with vanishing higher derived functors to quasi-isomorphisms",
+   "results": "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, HomologicalComplex.quasiIso_map_of_preservesHomology, HomologicalComplex.quasiIso_map_iff_of_preservesHomology, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, HomologicalComplex.quasiIsoAt_map_of_preservesHomology; inspected candidates: rightDerived defines classical derived functors; mapDerivedCategory assumes exactness, stronger than left exactness; none states both clauses for termwise acyclic objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|resolution|rightDerived",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Ext.lean, Mathlib/CategoryTheory/Abelian/Ext.lean, Mathlib/CategoryTheory/Abelian/Ext.lean; inspected candidates: rightDerived defines classical derived functors; mapDerivedCategory assumes exactness, stronger than left exactness; none states both clauses for termwise acyclic objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -65,5 +222,39 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-acyclicity",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "sk-thm-acyclicity",
+  "worker": "stage1",
+  "summary": "Preserved both clauses; supplied the missing notion dependencies and all non-elementary citations. Wrote the dimension shifting with degree-zero and degree-one cases; for the derived comparison, chose an injective replacement, proved acyclicity of its cone terms from split exact sequences, gave the full cycle induction, checked the cone differential after v, and used naturality to identify the actual canonical comparison. Removed the unused Grothendieck spectral-sequence citation. No new nodes are necessary.",
+  "blueprint": "Unit sk-thm-acyclicity, its single proof step, is realized by steps 1–3 (cycle short exact sequences and dimension shifting). Imported main-20261015 proof paragraph 3, giving the additional complex assertion, is realized by steps 4–9 (injective replacement, cone, cycle induction, canonical comparison). No spectral sequence is used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "The unit explicitly needs the long exact sequences for its cycle sequences; this general homological-algebra tool supplies them, without replacing dimension shifting."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "The expanded bounded-below assertion needs an actual quasi-isomorphism into a bounded-below complex of injectives; the unit has no injective replacement construction."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "The mapping-cone argument needs exactly the equivalence between quasi-isomorphisms and acyclic cones, in both abelian categories; this is a generic complex-theory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-03cc5d68b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-03cc5d68b (reviewer sub-agent of L); spot-checked: I read the whole item and its 9 steps. There are no new nodes and no fixes. The statement is verbatim main-20261015 sk-thm-acyclicity: the resolution clause plus the D^+ canonical comparison, not weakened. Steps 1-3 realize the unit's single dimension-shifting step; I checked the indices, the cokernel identification and the q=0/q=1 cases. Steps 4-9 expand base paragraph 3 along the Stacks 05TA proof, which I read: injective replacement with the same bound (013K), cone bound b=a-1, cone terms acyclic via the split s.e.s. and the long exact sequence, cycle induction with an explicit base T^b=0 and the degree-0 epimorphism, v(Cone s)=Cone(v s) by additivity, then naturality of alpha from lem-weil-pbc-right-derived-plus-injective, so alpha_A itself is an isomorphism. Every cited statement says what its step takes from it; no Grothendieck hypothesis or exactness of v is needed. proof_deps equals the union of the step uses, the closure is acyclic, and no SGA is cited. The item is not on the 2026-10-19 dropped list, is still imported (unsplit) in live and side-live, and has no re-split note. I accept the three declared tool uses: lem-weil-pbc-derived-functor-long-exact and lem-weil-pbc-complex-injective-resolution-mono from sk-thm-p1, and lem-pur-quasi-iso-cone-acyclic. Removing the sk-thm-groth-ss pointer is correct. Notes for the maintainer: (1) the imported node lemma-weil-pbc-leray-acyclicity in the same unit already states clause 1 (its clause 2), a duplication between two blueprint nodes that predates this delivery and is a candidate for merging; (2) lem-weil-pbc-leray-acyclicity-quasi-iso (unsplit) states what steps 4-8 prove, so it could later cite this item."
+ }
 }
