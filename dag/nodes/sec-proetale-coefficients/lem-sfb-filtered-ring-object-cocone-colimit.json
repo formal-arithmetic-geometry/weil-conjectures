@@ -1,0 +1,54 @@
+{
+ "id": "lem-sfb-filtered-ring-object-cocone-colimit",
+ "kind": "statement",
+ "title": "A ring-object cocone over a filtered diagram is a colimit when its underlying cocone is",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf 1)$ be a monoidal category [def-sfb-monoidal-category], and let $I$ be a small filtered category: $I$ is nonempty, for any two objects $i,j$ there are arrows $i\\to k$ and $j\\to k$ to some object $k$, and for any two parallel arrows $u,v\\colon i\\to j$ there is an arrow $w\\colon j\\to k$ with $wu=wv$. Assume that for every object $Y$ of $\\mathcal C$ both functors $Y\\otimes-$ and $-\\otimes Y$ preserve colimits of $I$-indexed diagrams [def-weil-pbc-category-colimit].\n\nLet $D\\colon I\\to\\operatorname{Mon}(\\mathcal C)$ be a diagram of ring objects of $\\mathcal C$ and morphisms of ring objects [sk-def-sfb-ring-object]. Let $A$ be a ring object and let $c_i\\colon D(i)\\to A$ $(i\\in I)$ be morphisms of ring objects with $c_j\\circ D(u)=c_i$ for every arrow $u\\colon i\\to j$. Suppose that $(A,(c_i)_{i\\in I})$ is a colimit in $\\mathcal C$ of the underlying diagram $i\\mapsto D(i)$. Then $(A,(c_i)_{i\\in I})$ is a colimit of $D$ in the category of ring objects of $\\mathcal C$. Explicitly: if $B$ is a ring object and $b_i\\colon D(i)\\to B$ are morphisms of ring objects with $b_j\\circ D(u)=b_i$ for every $u\\colon i\\to j$, then the unique morphism $b\\colon A\\to B$ of $\\mathcal C$ with $b\\circ c_i=b_i$ for all $i$ is a morphism of ring objects.\n\nIf moreover $\\mathcal C$ is braided and $A$ and all $D(i)$ are commutative ring objects, then $(A,(c_i)_{i\\in I})$ is also a colimit of $D$ in the full subcategory of commutative ring objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+  "place": "Paragraph *Third isomorphism*: the cocone of def-sfb-qlbar-x-cocone is asserted to be a colimit of the ring objects E_X; this node is the agent-formulated generic statement that upgrades the abelian colimit to ring objects. The same argument is the private Lean helper siftedRingCoconeIsColimit, lean/Sheaf/Paper/CompletedCondensedCoefficients.lean lines 219-254 (sifted index, PreservesColimit2 of the tensor); filtered implies sifted is Mathlib IsFiltered.isSifted, Mathlib/CategoryTheory/Filtered/Final.lean line 334."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-weil-pbc-category-colimit",
+  "sk-def-sfb-ring-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Filtered (file names and contents) in Mathlib/CategoryTheory/Monoidal and Mathlib/Algebra/Category/Ring",
+   "results": "2 files: Mathlib/Algebra/Category/Ring/FilteredColimits.lean (filtered colimits of concrete SemiRingCat/CommRingCat, forget preserves filtered colimits), Mathlib/Algebra/Category/Ring/FinitePresentation.lean; no file under CategoryTheory/Monoidal mentions filtered colimits of Mon objects",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of a general monoidal category; concrete rings only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSifted|IsFiltered in Mathlib/CategoryTheory/Limits/Sifted.lean and Mathlib/CategoryTheory/Filtered/*.lean",
+   "results": "Sifted.lean: IsSifted (diagonal final), prod_isSifted, colim_preservesBinaryProducts_of_isSifted; Filtered/Final.lean:329 IsFilteredOrEmpty.isSiftedOrEmpty, :334 IsFiltered.isSifted",
+   "date": "2026-10-21",
+   "verdict": "ingredient only (filtered implies sifted); no ring-object colimit statement"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "Project Lean: private CategoryTheory helper siftedRingCoconeIsColimit, lean/Sheaf/Paper/CompletedCondensedCoefficients.lean lines 219-254, with Mathlib IsFiltered.isSifted (Mathlib/CategoryTheory/Filtered/Final.lean:334); needs PreservesColimit2 of the tensor, which follows from preservation in each variable.",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "sk-prop-sfb-qlbar-colimit-x",
+  "date": "2026-10-21",
+  "group": "Q04"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sfb-qlbar-colimit-x",
+   "place": "Proof paragraph *Third isomorphism*, last sentence: the image under p_X^* of the point colimit is a colimit cocone of the ring objects E_X (ring-object upgrade of the abelian colimit)."
+  },
+  "same_as": []
+ }
+}

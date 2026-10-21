@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Put $T_n=\\cO_E/\\pi_E^n$ for $n\\geq1$. Apply [det-prop-sfb-qlbar-colimit-x-integral-limit] to the given finite extension and scheme. Its clauses (1) and (2) identify both $\\varprojlim_n(T_n)_X$ and $\\cO_{E,X}$ with the sheaf represented by $X[\\cO_E]=\\varprojlim_n\\coprod_{T_n}X$; clause (3) identifies their ring structures. Thus the canonical first comparison is an isomorphism of sheaves of rings. This uses representability, not preservation of arbitrary inverse limits by $p_X^*$.",
+   "text": "Apply clause (3) of the integral-limit lemma to $E,X,\\pi_E$. It gives the first canonical ring-sheaf isomorphism, with the specified reduction projections; clauses (1) and (2) identify its represented underlying sheaf.",
    "uses": [
     "det-prop-sfb-qlbar-colimit-x-integral-limit"
    ],
@@ -32,12 +32,9 @@
    }
   },
   {
-   "text": "Use the explicit scalar-localization cocone of lem-weil-pbc-continuous-integral-scalar-exact, whose legs send a continuous integral function a to a/ell^n. Its universal property follows from a uniform denominator on a compact profinite test space. Apply monoidal sheafification and the scheme inverse image to this cocone of regular modules, using their preservation of colimits and the canonical regular-module and restriction-of-scalars comparisons. Transport along the coefficient isomorphisms. The zeroth leg is the specified integral inclusion. The colimit universal property gives the unique factorization in completedCondensedRational. Multiplication by ell on continuous E-valued functions has inverse division by ell, hence is invertible after inverse image. For every scheme map, monoidal comparison naturality gives the zeroth square; induction on n, cancelling multiplication by ell, gives all remaining squares. This realizes the localization step directly in the underived interface.",
+   "text": "The inversion lemma identifies the module telescope with $E_X$ as a sheaf of rings, using exactly the legs $\\ell^{-m}\\varphi$ of the integral inclusion. Invert its canonical isomorphism to obtain the second comparison.",
    "uses": [
-    "lem-weil-pbc-continuous-integral-scalar-exact",
-    "def-weil-pbc-continuous-integral-coefficients",
-    "def-sfb-integers-to-subfield",
-    "sk-def-sfb-pullback-from-point-comp"
+    "det-prop-sfb-qlbar-colimit-x-invert-ell"
    ],
    "elementary": false,
    "source": {
@@ -46,7 +43,7 @@
    }
   },
   {
-   "text": "On the point, set $A=\\underline{\\Qlb}$ as defined in [sk-def-sfb-qlbar-condensed], and use $\\underline E(S)=C(S,E)$ from [sk-def-sfb-condensed-ring]. The finite subextensions form a directed poset and a set (they are subsets of the fixed set $\\Qlb$), so the diagram is small in a universe containing $\\Qlb$. The inclusions $j_E:\\underline E\\to A$ are those of [def-sfb-qlbar-subextension-to-qlbar]. To verify the colimit in abelian sheaves, let $G$ be an abelian sheaf and let $a_E:\\underline E\\to G$ be a compatible family. For $t\\in A(S)$ choose a finite $E$ containing its image and define $a_S(t)=a_{E,S}(t)$. If both $E$ and $F$ work, their compositum $H$ works and compatibility with the maps into $H$ gives the same value. Choosing such a common $H$ for two sections proves additivity. Restriction is respected because the same $E$ works after precomposition. These maps therefore give a sheaf morphism $a:A\\to G$, uniquely since every section belongs to some $\\underline E(S)$. This proves the point-colimit universal property without assuming the missing blueprint reference sk-prop-sfb-qlbar-colimit-point.",
+   "text": "On the point put $A=\\underline{\\Qlb}$. Given compatible additive sheaf maps $a_E:\\underline E\\to G$, define $a_S(t)=a_{E,S}(t)$ by choosing a finite field containing the image of $t\\in A(S)$. Such $E$ exists by the definition of $A$. Passing to a common finite compositum proves independence and additivity; restrictions use the same $E$. Every section occurs at some stage, so this additive sheaf map is unique. Thus the inclusions $j_E$ form an abelian colimit cocone. The index is nonempty and directed, and is a set of subsets of $\\Qlb$, hence small in a universe containing $\\Qlb$.",
    "uses": [
     "sk-def-sfb-qlbar-condensed",
     "sk-def-sfb-condensed-ring",
@@ -55,111 +52,68 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-    "place": "Third isomorphism: point-colimit argument supplied explicitly"
+    "place": "Third isomorphism: explicit point-colimit universal property"
    }
   },
   {
-   "text": "By [sk-def-sfb-pullback-from-point], $p_X^*$ is a left adjoint. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the small diagram and colimit established in step 3. Its image is a colimit cocone in abelian sheaves on $X_{\\mathrm{proét}}$. Its terms and vertex are precisely $E_X$ and $\\QbarX$, by [def-sfb-subfield-coefficient-ring] and [def-sfb-qlbar-coefficient-ring]; its transition maps and legs are $p_X^*$ of the inclusions on the point. Thus the canonical map $\\varinjlim_E E_X\\to\\QbarX$ is an isomorphism on underlying abelian sheaves, with exactly the requested cocone maps.",
+   "text": "The left adjoint $p_X^*$ preserves the colimit in step 3; its image is exactly the cocone of [def-sfb-qlbar-x-cocone], a colimit in $\\Sh(X_{\\mathrm{proét}},\\Ab)$. Its terms, vertex and legs are ring objects and ring-object morphisms, since [sk-def-sfb-pulled-back-coefficients] makes $\\Lambda\\mapsto\\Lambda_X$ a functor on ring objects. The index poset is filtered: it contains $\\mathbf Q_\\ell$, is directed by [sk-def-sfb-qlbar-condensed], and has at most one arrow between two objects. By the sheaf-tensor theorem each functor $Y\\otimes-$ and $-\\otimes Y$ has a right adjoint and so preserves colimits. Hence [lem-sfb-filtered-ring-object-cocone-colimit] applies: the cocone is a colimit in ring objects, and also in commutative ring objects since $\\QbarX$ and all $E_X$ are commutative.",
    "uses": [
     "sk-def-sfb-pullback-from-point",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "def-sfb-subfield-coefficient-ring",
-    "def-sfb-qlbar-coefficient-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-    "place": "Third isomorphism: apply the left adjoint to the point colimit"
-   }
-  },
-  {
-   "text": "This cocone is also a colimit in sheaves of rings. All transition maps and legs are ring maps because [sk-def-sfb-pulled-back-coefficients] makes $p_X^*$ functorial on ring objects. Let $B$ be a sheaf of rings and let $b_E:E_X\\to B$ be a compatible cocone of ring maps. Step 4 gives a unique additive sheaf map $b:\\QbarX\\to B$. It preserves the unit by restriction to the stage $E=\\mathbf Q_\\ell$. To check multiplication, [sk-def-sfb-sheaf-tensor] says that tensoring abelian sheaves preserves colimits in each variable. Consequently the maps $E_X\\otimes F_X\\to\\QbarX\\otimes\\QbarX$ jointly determine maps out of $\\QbarX\\otimes\\QbarX$. For each pair $E,F$, choose a common finite subextension $H$ using the directedness in [sk-def-sfb-qlbar-condensed]. After restricting to $E_X\\otimes F_X$, the equality $b\\mu_{\\QbarX}=\\mu_B(b\\otimes b)$ follows by factoring both variables through $H_X$, since $H_X\\to\\QbarX$ and $b_H$ are ring maps. Hence $b$ is a ring map, and uniqueness follows from its underlying additive map. This proves the third comparison with its ring structure, rather than only its additive version.",
-   "uses": [
+    "def-sfb-qlbar-x-cocone",
     "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-qlbar-condensed",
     "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-qlbar-condensed"
+    "lem-sfb-filtered-ring-object-cocone-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-    "place": "Third isomorphism: verify the universal property for ring maps"
+    "place": "Third isomorphism: transport the abelian cocone and lift its ring structure"
    }
   },
   {
-   "text": "For each reduction, integral inclusion and finite-field leg, apply naturality of the monoidal comparison f^* p_Y^* ≅ p_X^* from [sk-def-sfb-pullback-from-point-comp]. The mapMon composition and natural-isomorphism comparisons have underlying components equal to the original comparison components, so their naturality gives precisely the three displayed squares for ring objects of [sk-def-sfb-pulled-back-coefficients]. This is the private generic Lean helper completedRingComparisonNaturality; no separate representable calculation is needed here.",
+   "text": "Apply clauses (1), (2), (3) of the pullback-comparison lemma to any scheme map $f:X\\to Y$. They give compatibility of the three canonical comparisons, including preservation of this particular integral limit and every colimit leg.",
    "uses": [
-    "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-pulled-back-coefficients"
+    "det-prop-sfb-qlbar-colimit-x-pullback"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "Part (1): adjunction/Yoneda computation of inverse image of representables (Stacks Tag 001P, categories-lemma-yoneda)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+    "place": "Compatibility with inverse image"
    }
   },
   {
-   "text": "Take normalized integral limit cones over Y and X supplied by completedCondensedIntegral (the integral comparison of step 1, from [det-prop-sfb-qlbar-colimit-x-integral-limit]). The comparison [sk-def-sfb-pullback-from-point-comp], lifted to ring objects, is an isomorphism between their inverse diagrams. Its component at the integral ring and the two vertex identifications give an isomorphism from the pulled-back Y-cone vertex to the X-cone vertex. To check every leg, cancel the image of the Y vertex identification, use both normalization equations, then apply naturality at the reduction. Transport IsLimit along the resulting cone and diagram isomorphisms. This is the private generic helper completedLimitTransport. It uses no preservation of arbitrary inverse limits.",
+   "text": "Specialize the first two comparisons to $E=\\mathbf Q_\\ell$ and $\\pi_E=\\ell$. Its integers are $\\mathbf Z_\\ell$, and the residue identifications with $\\mathbf Z/\\ell^n$ send the class of an integer to its class modulo $\\ell^n$; these commute with reductions. This gives both stated specializations.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "sk-def-sfb-pullback-from-point-comp"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "Part (1): base change of the profinite test scheme and all reduction projections"
-   }
-  },
-  {
-   "text": "The integral-inclusion and finite-field-leg squares were obtained in step 6 directly from [sk-def-sfb-pullback-from-point-comp]. For the finite-subfield cocone, apply the colimit-preserving inverse image functor of [det-pe-topos-functoriality-inverse-image] to the already available additive colimit isColimitPadicAlgClRingObjCocone. Upgrade this to a ring-object colimit using the same siftedRingCoconeIsColimit helper as in the algebraic-closure comparison (steps 3–5). Tensoring preserves colimits by [sk-def-sfb-sheaf-tensor], and the finite-subextension index is filtered, hence sifted. This proves the final pullback colimit clause.",
-   "uses": [
-    "sk-def-sfb-pullback-from-point-comp",
-    "det-pe-topos-functoriality-inverse-image",
-    "sk-def-sfb-sheaf-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "Parts (2) and (3): naturality on every colimit structure map"
-   }
-  },
-  {
-   "text": "For the integral specialization retain the stated quotient-ring argument from det-prop-sfb-qlbar-colimit-x-integral-limit: identify the integers in Q_ell with Z_ell and its finite quotients with Z/ell^n, compatibly with reduction. This integral Lean declaration remains unproved in this delivery. For completedCondensedPadicRational, apply the scalar-localization construction of step 2 directly to E = Q_ell. The subring PadicInt.subring ell agrees with continuousIntegers by their norm-at-most-one predicates. The generic sequential colimit and invertible-scalar arguments then give its universal property and inverse-image naturality.",
-   "uses": [
-    "def-weil-l-adic-numbers",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "lem-weil-pbc-continuous-integral-scalar-exact",
-    "def-weil-pbc-continuous-integral-coefficients",
-    "sk-def-sfb-pullback-from-point-comp"
+    "def-weil-l-adic-numbers"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-    "place": "Statement, final paragraph: specialization to Q_ell"
+    "place": "Final Q_ell specialization in the statement"
    }
   }
  ],
  "proof_deps": [
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-pbc-continuous-integral-scalar-exact",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "def-sfb-integers-to-subfield",
-  "sk-def-sfb-pullback-from-point-comp",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-condensed-ring",
   "def-sfb-qlbar-subextension-to-qlbar",
   "sk-def-sfb-pullback-from-point",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "def-sfb-subfield-coefficient-ring",
-  "def-sfb-qlbar-coefficient-ring",
+  "def-sfb-qlbar-x-cocone",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-sheaf-tensor",
-  "det-pe-topos-functoriality-inverse-image",
+  "lem-sfb-filtered-ring-object-cocone-colimit",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
   "def-weil-l-adic-numbers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-  "place": "Four comparison paragraphs, with explicit point-colimit, ring, and pullback arguments; Stacks Tags 001P and 0038 supply the generic categorical tools. N3 stage 3: pullback steps 6–8 use monoidal naturality, transport of normalized integral cones, and the existing additive finite-subfield colimit; the other comparison steps remain the plan for the four retained holes. J1 stage 3: rational comparisons (steps 2 and rational part of 9) proved using the explicit continuous scalar-localization cocone and monoidal transport; integral comparisons remain the existing plan. The declared PadicIntegersInvertEll interface and ContinuousIntegralRegularTelescope module each reach this module, so their underived constructions are used through ContinuousIntegralScalarExact instead."
+  "place": "The four blueprint comparison paragraphs; assembly using the existing integral, localization and pullback detail nodes. The point-colimit universal property is explicit; the ring upgrade uses the filtered ring-object cocone lemma of this unit."
  },
  "mathlib_searches": [
   {
@@ -291,23 +245,15 @@
   "det-prop-sfb-qlbar-colimit-x-pullback"
  ],
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "sk-prop-sfb-qlbar-colimit-x",
   "worker": "stage1",
-  "summary": "Reused the existing integral-limit and inversion lemmas, supplied the missing point-colimit argument from the finite-image definition, transported the colimit by the existing left-adjoint Mathlib leaf, verified its ring universal property, and proved inverse-image compatibility directly without the cyclic imported pullback dependency. Clarified the sequential colimit as a module colimit with localization ring structure. No new nodes.",
-  "blueprint": "The four paragraphs First isomorphism, Second isomorphism, Third isomorphism, Compatibility with inverse image of sk-prop-sfb-qlbar-colimit-x.proof.md are realized by steps 1, 2, 3-5, 6-8 respectively; step 9 realizes the Q_ell specialization. The current node has no chapter/unit metadata or corresponding dag/chapters or dag/units record; the current chapter text and this sketch/proof were read directly.",
+  "summary": "Dedicated Q04 re-split handoff repaired without changing the statement. Replaced the inline localization and pullback arguments by their existing detail nodes; replaced the hidden ring-colimit lifting argument by the statement-only node lem-sfb-filtered-ring-object-cocone-colimit (reviewer FIX: the first version cited the route-pivot-dropped lem-coef-associative-word-filtration). The point-colimit argument remains an elementary explicit universal-property calculation. One new node (added at review); otherwise creating separate nodes for these existing arguments would duplicate them. Removed the old C4 misuse of the scalar-exactness statement as a localization-cocone theorem. All proof dependencies were opened and reverse paths checked.",
+  "blueprint": "First isomorphism: step 1; Second isomorphism: step 2; Third isomorphism: steps 3-4; Compatibility with inverse image: step 5; final Q_ell specialization: step 6. All four unit steps remain on the prescribed route.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Generic Mathlib leaf for transport of the explicit point colimit under p_X^*, which the sketch itself requires."
-   },
-   {
-    "node": "lem-galois-yoneda-hom-bijection",
-    "why": "Generic Mathlib Yoneda lemma computes Hom(h_V,G) for the same representable-base-change argument in the blueprint; fully faithful Yoneda alone would not give this formula."
-   },
-   {
-    "node": "lem-galois-yoneda-fully-faithful",
-    "why": "Generic Mathlib leaf, applied to the opposite sheaf category to identify the objects after the explicit Hom computation."
+    "why": "Generic Stacks Tag 0038 / Mathlib colimit-preservation tool used on the point cocone, as the unit requires."
    }
   ]
  },
@@ -317,12 +263,12 @@
   "lem-galois-yoneda-fully-faithful"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-N7-81fc78f1a",
-  "group": "N7",
+  "reviewer": "NT-cc-Q04-7413fb076",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-81fc78f1a (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, and source locations. Verified all nine steps, canonical pullback maps, coefficient categories, ring-colimit argument, and edge cases; dependency traversal found no cycle. No new nodes or repairs. Detailed findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7413fb076 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement byte-identical to live; six assembly steps, re-split per the human note of 2026-10-21), the blueprint main-20261015 proof (4 paragraphs), the unit, and the statements of all cited nodes. Steps 1, 2 and 5 cite det-…-integral-limit (3), det-…-invert-ell (module telescope, legs ℓ^{-m}φ, ring iso) and det-…-pullback (1)-(3); each says what the step takes from it. Step 3 is an elementary point-colimit universal-property check from the finite-image sections of sk-def-sfb-qlbar-condensed, using composita for independence and additivity; the index is nonempty since it contains Q_ℓ. Step 6: O_{Q_ℓ}=Z_ℓ and Z_ℓ/ℓ^n≅Z/ℓ^n by def-weil-l-adic-numbers. Edge cases checked: X empty, f=id, E=Q_ℓ, ℓ a residue characteristic. Closure traversal finds no cycle. Route pivot: step 4 cited lem-coef-associative-word-filtration, which is on route-pivot-dropped.txt line 225. The step is named and the clause used (filtered-colimit creation for algebras) is correct, but citing it makes a dropped node with a 15-step proof reachable again, so I do not accept it. FIX: new statement-only node lem-sfb-filtered-ring-object-cocone-colimit (unit/item sk-prop-sfb-qlbar-colimit-x). It states that over a small filtered I, with tensor preserving I-colimits in each variable, a ring-object cocone whose underlying cocone is a colimit is a colimit in ring objects, and in commutative ring objects when braided. Its proof is checked: the diagonal is final, so the c_i⊗c_i are jointly epimorphic, and the unit holds via a nonempty I. It is the landed Lean helper siftedRingCoconeIsColimit. Step 4 is rewritten to use this node, with filtered from directedness plus Q_ℓ, legs as ring maps from pulled-back-coefficients, and preservation from the sheaf-tensor right adjoints. lem-coef-associative-word-filtration and lem-sfb-proetale-sheaves-grothendieck are removed from uses, proof_deps and split_report.tool_uses. Unit realized step 3 now lists the new node. Accepted tool_use: lem-weil-pbc-left-adjoint-preserves-colimits.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-qlbar-colimit-x",
