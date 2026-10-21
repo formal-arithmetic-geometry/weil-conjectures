@@ -2,7 +2,7 @@
  "id": "lem-sfb-pointed-finite-etale-limit-cover",
  "kind": "statement",
  "title": "Pointed profinite etale limit and its Cech component coordinates",
- "statement": "Let $X$ be a nonempty connected quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-connected-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], and let $x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point]. Put $\\Pi=\\pi_1^{\\mathrm{et}}(X,x)$ with its profinite topology [def-galois-fibre-functor]. A pointed connected finite etale Galois cover means a finite etale $X$-scheme $Y$, a point $y\\in Y_x$, and a connected total space, with its $X$-automorphism group acting simply transitively on $Y_x$ [def-weil-pbc-finite-etale-category]. Let $T$ be the inverse limit over a small cofinal system of these pointed covers and pointed transition maps, taken in schemes over $X$. This limit exists, is connected, and its projection $v:T\\to X$ is affine [pqf-def-affine-morphism], faithfully flat (flat and surjective on spectra) [def-weil-flat-morphism, def-weil-surjective-morphism] and weakly etale [def-weil-weakly-etale-morphism]; the singleton $\\{v\\}$ is a covering in $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. The compatible points define $t:\\operatorname{Spec}\\Omega\\to T$ above $x$.\n\nFor every finite etale $X$-scheme $Y$ there is a canonical splitting\n$$T\\times_XY\\simeq\\coprod_{s\\in Y_x}T,$$\nnatural in $Y$, whose section indexed by $s$ takes $t$ to $s$. Write $T\\times\\Pi^q=\\varprojlim_N\\coprod_{(\\Pi/N)^q}T$, for open normal subgroups $N\\subseteq\\Pi$. There are compatible Cech identifications\n$$T^{q+1}_{/X}\\simeq T\\times\\Pi^q\\quad(q\\geq0),\\qquad \\pi_0(T^{q+1}_{/X})\\simeq\\Pi^q,$$\nwhere the component space has its quotient topology. These coordinates have the group-nerve faces: consecutive labels $g,h$ compose to $gh$, so the descent equation for right torsor sections is $c(gh)=c(g)c(h)$. They are normalized by the finite fibre functor's left monodromy action. More explicitly, for $U\\subseteq\\Pi$ open, on $T\\times_XT$ the canonical sections of the split cover with fibre $\\Pi/U$ obey $\\mathrm{pr}_2^*s=\\mathrm{pr}_1^*(g s)$ at label $g$. The construction is natural for pointed scheme morphisms, with the induced homomorphism on fundamental groups acting on these labels. The inverse limits and coproducts use compatible universes.",
+ "statement": "Let $X$ be a nonempty connected quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-connected-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], and let $x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point]. Put $\\Pi=\\pi_1^{\\mathrm{et}}(X,x)$ with its profinite topology [def-galois-fibre-functor]. A pointed connected finite etale Galois cover means a finite etale $X$-scheme $Y$, a point $y\\in Y_x$, and a connected total space, with its $X$-automorphism group acting simply transitively on $Y_x$ [def-weil-pbc-finite-etale-category]. Let $T$ be the inverse limit over a small cofinal system of these pointed covers and pointed transition maps, taken in schemes over $X$. This limit exists, is connected, and its projection $v:T\\to X$ is affine [pqf-def-affine-morphism], faithfully flat (flat and surjective on spectra) [def-weil-flat-morphism, def-weil-surjective-morphism] and weakly etale [def-weil-weakly-etale-morphism]; the singleton $\\{v\\}$ is a covering in $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. The compatible points define $t:\\operatorname{Spec}\\Omega\\to T$ above $x$.\n\nFor every finite etale $X$-scheme $Y$ there is a canonical splitting\n$$T\\times_XY\\simeq\\coprod_{s\\in Y_x}T,$$\nnatural in $Y$, whose section indexed by $s$ takes $t$ to $s$. Write $T\\times\\Pi^q=\\varprojlim_N\\coprod_{(\\Pi/N)^q}T$, for open normal subgroups $N\\subseteq\\Pi$. There are compatible Cech identifications\n$$T^{q+1}_{/X}\\simeq T\\times\\Pi^q\\quad(q\\geq0),\\qquad \\pi_0(T^{q+1}_{/X})\\simeq\\Pi^q,$$\nwhere the component space has its quotient topology. These coordinates have the group-nerve faces: consecutive labels $g,h$ compose to $gh$. For a right torsor with a chosen section over $T$, the Cech cocycle equation is $c(z,gh)=c(z,g)c(z\\cdot g,h)$, where $z\\cdot g$ denotes the second vertex with first vertex $z$ and label $g$, and coefficient sections are pulled back to the triple overlap. When the transition element depends only on the group label, this specializes to $c(gh)=c(g)c(h)$. They are normalized by the finite fibre functor's left monodromy action. More explicitly, for $U\\subseteq\\Pi$ open, on $T\\times_XT$ the canonical sections of the split cover with fibre $\\Pi/U$ obey $\\mathrm{pr}_2^*s=\\mathrm{pr}_1^*(g s)$ at label $g$. The construction is natural for pointed scheme morphisms, with the induced homomorphism on fundamental groups acting on these labels. The inverse limits and coproducts use compatible universes.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 7.4.3, p. 69 (cofiltered-limit compatibility for profinite groups), Construction 7.4.4, and the finite-cover fibre functor underlying Lemma 7.4.10. Agent expansion into the pointed finite-etale inverse limit and its Cech coordinates. Upstream reference implementation: lean/WeilConjectures/AlgebraicGeometry/FundamentalGroup/UniversalCoverConstruction.lean, cover/proj/pt, bijective_fiber, transport, loop and continuous_loop, lines 129–164, 305–314, 356–376, 783–852; the full Cech statement here is not asserted to be an already finished Lean declaration."
@@ -19,11 +19,244 @@
   "pqf-def-affine-morphism",
   "def-weil-flat-morphism",
   "def-weil-surjective-morphism",
-  "def-weil-weakly-etale-morphism"
+  "def-weil-weakly-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the finite-etale equivalence and the pointed open-subgroup correspondence. For each open normal subgroup $N\\triangleleft\\Pi$, choose the pointed connected cover $(Y_N,y_N)$ with fibre $\\Pi/N$ and marked coset $N$. An equivariant endomorphism of $\\Pi/N$ is right translation; these act simply transitively. Conversely, for a pointed transitive fibre $\\Pi/U$, its equivariant automorphisms have orbit $N_\\Pi(U)/U$ at $U$, so simple transitivity forces $U$ normal. Full faithfulness makes pointed arrows $Y_M\\to Y_N$ unique and identifies them with $aM\\mapsto aN$ for $M\\subseteq N$. Thus this small directed poset (ordered by reverse inclusion, with common refinement $M\\cap N$) is a skeleton of the pointed Galois covers. A cone on either indexing system is a compatible family on the other, by these pointed isomorphisms; the same holds for a cofinal system. We may therefore compute the specified limit with this poset. The finite-set equivalence also supplies a small skeleton within the stipulated universes.",
+   "uses": [
+    "thm-galois-fundamental",
+    "cor-galois-open-subgroups",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (theorem-fundamental-group), (1); Lemma 0BN2 (lemma-galois); finite coset calculation"
+   }
+  },
+  {
+   "text": "Every $Y_N\\to X$ and every transition is finite etale: these are morphisms in the finite-etale category. They are affine by the definition of finite. Their domains are quasi-compact because the inverse images of a finite affine cover of $X$ are affine, hence quasi-compact. They are quasi-separated because finite morphisms are separated and the base is quasi-separated: the separated diagonal is a closed immersion, hence affine and quasi-compact, and the quasi-separated composition property applies. Consequently the stages are qcqs. The affine-transition limit theorem gives $T=\\varprojlim_NY_N$ with affine projections $p_N$. Composing one $p_N$ with the finite, hence affine, map $Y_N\\to X$ gives an affine map $v:T\\to X$. Compatibility makes this independent of $N$.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX (lemma-directed-inverse-system-has-limit), 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); Morphisms 01WN (lemma-finite-proper), 01SC (lemma-composition-affine)"
+   }
+  },
+  {
+   "text": "Each map $Y_M\\to Y_N$ with $M\\subseteq N$ has a lift of the marked point and connected target. The finite-etale degree theorem makes its degree positive, so every geometric fibre is nonempty. The same argument applies to $Y_N\\to X$. For a point $z\\in Y_N$, base change the system on the cofinal tail $M\\subseteq N$ to $\\operatorname{Spec}\\kappa(z)$. Every stage fibre is nonempty (a geometric point above $z$ has a lift), affine and quasi-compact. Fibre products commute with the limit, so its limit is the fibre of $p_N$ over $z$. The nonempty-limit theorem makes it nonempty. Hence all $p_N$ are surjective, and $v$ is surjective as a composite of $p_N$ and $Y_N\\to X$. This argument applies unchanged to $N=\\Pi$, for which $Y_N=X$.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-trace-degree",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-limit-nonempty",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z2 (lemma-limit-nonempty), applied to fibres; fibre-product limit identity; finite-etale degrees as in Morphisms 02KA (lemma-finite-locally-free)"
+   }
+  },
+  {
+   "text": "Over an affine open $V=\\operatorname{Spec}A$ of $X$, affineness gives $v^{-1}V=\\varprojlim_N(Y_N\\times_X V)=\\operatorname{Spec}B$, where $B$ is the filtered colimit of the coordinate rings of the finite etale affine $V$-schemes. The affine etale/ring-etale criterion makes these etale $A$-algebras of finite presentation. Hence $A\\to B$ is ind-etale. The affine ind-etale implication gives weak etaleness on every such chart, and the all-affine-chart criterion gives weak etaleness of $v$. In particular $v$ is flat. For each affine $V\\subseteq X$, its inverse image is one affine open mapping surjectively onto $V$ by step 3. This is exactly the finite-affine-open condition for the singleton $\\{v\\}$ to cover in the stated pro-etale site. Thus $v$ is faithfully flat as asserted.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-ind-etale-algebra",
+    "det-pe-morphisms-etale-comparison",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 097I (definition-ind-etale), 097N (lemma-ind-etale-implies); affine weakly-etale criterion; singleton fpqc covering condition"
+   }
+  },
+  {
+   "text": "The maps $y_N:\\operatorname{Spec}\\Omega\\to Y_N$ are compatible, so the limit universal property gives a unique $t:\\operatorname{Spec}\\Omega\\to T$ with $p_Nt=y_N$. Composing with $Y_N\\to X$ gives $vt=x$. In particular $T$ is nonempty. Since $v$ is affine and $X$ quasi-compact, pulling back a finite affine cover shows that $T$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YX (lemma-directed-inverse-system-has-limit), cone universal property"
+   }
+  },
+  {
+   "text": "If $C\\subseteq T$ is clopen, both $C$ and $T\\setminus C$ are quasi-compact, being closed in the quasi-compact space $T$. Descend each to a quasi-compact open of a stage by the compact-open descent theorem, and move the two opens to a common stage $Y_N$, obtaining $A,B$ with $p_N^{-1}A=C$ and $p_N^{-1}B=T\\setminus C$. Surjectivity of $p_N$ implies $A\\cap B=\\varnothing$ and $A\\cup B=Y_N$ directly: a point violating either equality would have a preimage violating the corresponding equality on $T$. Thus $A$ is clopen in connected $Y_N$, so $A$ is empty or all of $Y_N$. Its inverse image $C$ is empty or all of $T$. Together with nonemptiness this proves connectedness of $T$.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z4 (lemma-descend-opens), (1); connectedness argument from descended complementary opens"
+   }
+  },
+  {
+   "text": "For a finite etale $Y\\to X$, put $E=Y_x$ with its finite continuous left $\\Pi$-action. Choose an open normal $N$ acting trivially on $E$: each point stabilizer is open, their finite intersection is the kernel of the action, hence open normal. In the finite $\\Pi$-set category, the map $\\coprod_{s\\in E}\\Pi/N\\to(\\Pi/N)\\times E$ sending the point $aN$ in summand $s$ to $(aN,a s)$ is equivariant and bijective, with inverse $(aN,e)\\mapsto(aN,a^{-1}e)$. Normality and triviality of the $N$-action make both formulas independent of representatives. The finite-etale equivalence preserves finite products and coproducts, so this is an isomorphism $\\coprod_EY_N\\simeq Y_N\\times_XY$ over $Y_N$. Its summand $s$ gives a map $f_{s,N}:Y_N\\to Y$ taking $y_N$ to $s$. Exactness of finite-etale base change preserves the finite coproduct, so pulling back along $p_N$ gives $\\coprod_ET\\simeq T\\times_XY$, with sections $f_s=f_{s,N}p_N$ having the required value at $t$. The formulas include $E=\\varnothing$.",
+   "uses": [
+    "thm-galois-fundamental",
+    "def-weil-pbc-finite-etale-category",
+    "lem-fet-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (theorem-fundamental-group), (1); explicit equivariant bijection (a,s) ↦ (a,as)"
+   }
+  },
+  {
+   "text": "For $M\\subseteq N$ acting trivially on $E$, precomposing $f_{s,N}$ with $Y_M\\to Y_N$ has fibre formula $aM\\mapsto a s$, exactly that of $f_{s,M}$; full faithfulness makes these scheme maps equal. Two arbitrary choices have such a common refinement, proving independence of $N$. For a morphism $b:Y\\to Z$, equivariance gives $b(a s)=a b(s)$, so the same full-faithfulness argument yields $bf_s=f_{b(s)}$. The splittings are therefore natural in $Y$. Moreover every $X$-map $T\\to Y$ corresponds, under the splitting, to a section of $\\coprod_ET\\to T$. The inverse images of the summands partition connected nonempty $T$ into finitely many clopens, so exactly one summand occurs. Such a section is the identity into that summand. Thus $f_s$ is the unique $X$-map taking $t$ to $s$.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (theorem-fundamental-group), full faithfulness; explicit common-refinement and connected-summand arguments"
+   }
+  },
+  {
+   "text": "For $g\\in\\Pi$ and every $Y_N$, use the just-constructed map $f_{gN}:T\\to Y_N$. Naturality makes these a cone, so they define $d_g:T\\to T$. For any finite etale $Y$ and $s\\in Y_x$, choose $N$ acting trivially on $Y_x$. The finite fibre formula for $f_{s,N}$ gives $f_s d_g=f_{g s}$. Consequently $f_s d_h d_g=f_{h s}d_g=f_{g h s}$. Taking $Y=Y_N$ and $s=N$ tests equality against every $p_N$, so $d_h d_g=d_{gh}$ and $d_1=1$. In particular $d_{g^{-1}}$ is inverse to $d_g$. Write $z\\cdot g=d_g(z)$: this is a right action, and its defining equality is precisely the claimed normalization by left monodromy on the finite fibres.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YX (lemma-directed-inverse-system-has-limit), limit universal property and explicit composition calculation"
+   }
+  },
+  {
+   "text": "The topology of $\\Pi=\\operatorname{Aut}(F_x)$ is induced by evaluations on finite fibres. Kernels of actions on finitely many fibres therefore form a neighbourhood basis at $1$ of open normal finite-index subgroups: each is the kernel of a homomorphism into a finite product of finite permutation groups. Thus all open normal subgroups form a basis. The map $\\Pi\\to\\varprojlim_N\\Pi/N$ is injective, since two different automorphisms differ on a finite fibre. For a compatible family of cosets, their inverse images in compact $\\Pi$ are nonempty closed sets with the finite intersection property (refine finitely many subgroups by their intersection). Compactness gives an element realizing the family, unique by injectivity. The quotient projections generate the stipulated topology, so this is a homeomorphism. Applying it coordinatewise gives $\\Pi^q=\\varprojlim_N(\\Pi/N)^q$.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "lem-galois-aut-profinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMR (lemma-aut-inverse-limit), evaluation topology; explicit compact finite-intersection argument"
+   }
+  },
+  {
+   "text": "Take the limit over $N$ of the compatible splittings $T\\times_XY_N\\simeq\\coprod_{\\Pi/N}T$ from steps 7–8. Base change commutes with the directed limit by the fibre-product theorem (the constant systems on $T$ and $X$ have identity, hence affine, transitions). Therefore $T\\times_XT\\simeq\\varprojlim_N\\coprod_{\\Pi/N}T=T\\times\\Pi$. Under this isomorphism $(z,g)$ represents $(z,d_g(z))$: its second projection to $Y_N$ is $f_{gN}(z)$, which characterizes $d_g$. For a cover with fibre $\\Pi/U$, the identity $f_s d_g=f_{gs}$ now reads $\\mathrm{pr}_2^*s=\\mathrm{pr}_1^*(gs)$ on the subscheme with label $g$. The finite-limit versions of these formulas, for $gN$ whenever $N$ acts trivially on the fibre, specify the identities as scheme morphisms, not merely as equalities of geometric points.",
+   "uses": [
+    "lem-weil-pbc-limit-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Fibre-product limit universal property, cf. Tag 002M (categories-lemma-colimits-commute); the explicit finite splittings of steps 7–8"
+   }
+  },
+  {
+   "text": "Iterate the same fibre-product limit identity $q$ times, over the same directed poset. This gives $T^{q+1}_{/X}\\simeq\\varprojlim_N\\coprod_{(\\Pi/N)^q}T$. Initially the $q$ labels are relative to the first coordinate. Replace them by consecutive labels: the finite bijection $(g_1,\\ldots,g_q)\\mapsto(g_1,g_1g_2,\\ldots,g_1\\cdots g_q)$ has inverse $(a_1,\\ldots,a_q)\\mapsto(a_1,a_1^{-1}a_2,\\ldots,a_{q-1}^{-1}a_q)$ and commutes with all quotient homomorphisms. It permutes the finite coproduct summands and hence induces an isomorphism of their inverse limits. In the resulting coordinates the map is $(z,g_1,\\ldots,g_q)\\mapsto(z,z\\cdot g_1,z\\cdot(g_1g_2),\\ldots,z\\cdot(g_1\\cdots g_q))$. For $q=0$ this is $T\\simeq T$.",
+   "uses": [
+    "lem-weil-pbc-limit-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Repeated fibre-product limit identity; explicit cumulative-to-consecutive finite-label permutations"
+   }
+  },
+  {
+   "text": "Put $P=\\Pi^q$. On an affine open $W=\\operatorname{Spec}A\\subseteq T$, the inverse image of $W$ in $T\\times P$ is $\\operatorname{Spec}(\\varinjlim_N A^{(\\Pi/N)^q})$: finite coproducts of affine schemes are spectra of finite products. This colimit is $\\operatorname{LC}(P,A)$. Indeed a locally constant function on compact $P$ has finitely many clopen fibres, and the quotient topology in step 10 gives a finite cover by quotient cylinders on which it is constant; a common normal-subgroup refinement makes it factor through one $(\\Pi/N)^q$. Equality of two such functions is checked at a common quotient, since the quotient projections are surjective. Pointwise ring operations verify the colimit universal property. The locally-constant prime-spectrum theorem identifies this affine chart with $|W|\\times P$, naturally in restriction to smaller affine opens. These maps glue, giving $|T\\times P|\\simeq |T|\\times P$ over $|T|$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), locally constant ring model; LocallyConstant.homeomorphPrimeSpectrum in the cited node"
+   }
+  },
+  {
+   "text": "Every connected subset of $|T|\\times P$ maps to a point of the totally disconnected Hausdorff space $P$. Conversely each fibre $|T|\\times\\{a\\}$ is a copy of connected nonempty $T$. These are therefore exactly the connected components. The projection $|T|\\times P\\to P$ is a quotient map: it is continuous, surjective, and open, since the image of a basic open rectangle $O\\times V$ is $V$ if $O$ is nonempty and is empty otherwise. Consequently the bijection of component sets is a homeomorphism for the quotient topology. This proves $\\pi_0(T^{q+1}_{/X})\\simeq\\Pi^q$, including the one-component case $q=0$.",
+   "uses": [
+    "lem-galois-aut-profinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMR (lemma-aut-inverse-limit), profiniteness; elementary connected-product and quotient-topology calculation"
+   }
+  },
+  {
+   "text": "Omitting an interior vertex of $(z,z\\cdot g_1,\\ldots,z\\cdot(g_1\\cdots g_q))$ replaces the adjacent labels $g_i,g_{i+1}$ by $g_ig_{i+1}$; omitting the first vertex sends it to $(z\\cdot g_1,g_2,\\ldots,g_q)$, and omitting the last drops $g_q$. Repeating a vertex inserts $1$. These formulas hold at each finite quotient and hence for the scheme limits; they give all Cech compatibilities. If a right torsor has a chosen section $e$ on $T$, write $e(z\\cdot g)=e(z)c(z,g)$ with coefficients pulled back to the Cech terms. On triples, $e(z\\cdot(gh))=e(z)c(z,g)c(z\\cdot g,h)$ gives the cocycle equation. When the coefficient elements factor through the label space, this is $c(gh)=c(g)c(h)$, with the stated order. Without that factorization the correct equation retains the shifted argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Agent calculation from the explicit Cech coordinates and the defining free transitive right action of a torsor"
+   }
+  },
+  {
+   "text": "For a pointed morphism $f:(X',x')\\to(X,x)$ between schemes satisfying the hypotheses, let $T'$ be its pointed limit. For each $Y_N$, pull back to the finite etale cover $f^*Y_N$ of $X'$ and use its canonical section over $T'$ indexed by the pullback of $y_N$. Composing with $f^*Y_N\\to Y_N$ gives a compatible cone, hence a pointed map $F:T'\\to T$ over $f$. The base-change fibre bijections intertwine the actions through $f_*:\\Pi'\\to\\Pi$. Thus for every finite cover and fibre element $s$, $f_sF$ is the section over $T'$ indexed by the corresponding element $s'$, while its value after $d_h'$ is indexed by $h s'$, corresponding to $f_*(h)s$. Uniqueness in step 8 and testing against all $p_N$ give $F d'_h=d_{f_*(h)}F$. Hence the map of Cech terms sends $(z,g_1,\\ldots,g_q)$ to $(F(z),f_*(g_1),\\ldots,f_*(g_q))$. The same uniqueness proves identity and composition compatibility. Everything is formed using the small representatives and compatible universes fixed in step 1.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (theorem-fundamental-group), (3); direct construction from finite-cover sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-galois-fundamental",
+  "cor-galois-open-subgroups",
+  "def-weil-size-convention",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-composition",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-limit-nonempty",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-ind-etale-algebra",
+  "det-pe-morphisms-etale-comparison",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-proetale-site",
+  "pqf-def-affine-morphism",
+  "pqf-lem-limit-qc-open-descends",
+  "lem-fet-finite-limits",
+  "def-galois-fibre-functor",
+  "lem-galois-aut-profinite",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-galois-pi1-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Finite-cover construction from Theorem 0BND and explicit finite coset coordinates; Stacks Limits 01YX, 01Z2, 01Z4 and Proetale 097N. Bhatt–Scholze §7.4 is motivation, not a theorem under the item's general qcqs hypotheses."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +292,53 @@
    "results": "[leansearch] OK 8 hit(s); CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, ProfiniteGrp.isIso_toLimit, Profinite.asLimit, AlgebraicGeometry.Scheme.smallEtaleTopology, Profinite.isoAsLimitConeLift, ProfiniteGrp, ProfiniteGrp.rec",
    "date": "2026-10-21",
    "verdict": "no match: finite Galois objects and abstract profinite limits do not construct the scheme cover or its Cech coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*[Cc]over|prorepresent.*[Ff]ib[er]{2}|weaklyEtale_of_isLimit",
+   "results": "{\"t\": \"2026-10-21T14:41:10Z\", \"tool\": \"grep\", \"query\": \"universal.*[Cc]over|prorepresent.*[Ff]ib[er]{2}|weaklyEtale_of_isLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean\"], \"digest\": \"e341af076e618103\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern finite Galois objects, abstract profinite groups, or unrelated universal covers; none states the scheme limit together with all Cech and component clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteEtale\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-21T14:41:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"FiniteEtale\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern finite Galois objects, abstract profinite groups, or unrelated universal covers; none states the scheme limit together with all Cech and component clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected quasi compact quasi separated scheme admits a connected universal profinite etale cover trivializing every finite etale cover",
+   "results": "{\"t\": \"2026-10-21T14:41:11Z\", \"tool\": \"leansearch\", \"query\": \"A connected quasi compact quasi separated scheme admits a connected universal profinite etale cover trivializing every finite etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\"], \"digest\": \"bab6608594b070dd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern finite Galois objects, abstract profinite groups, or unrelated universal covers; none states the scheme limit together with all Cech and component clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal profinite etale covering scheme is the inverse limit of pointed finite Galois covers and its Cech nerve has fundamental group coordinates",
+   "results": "{\"t\": \"2026-10-21T14:41:12Z\", \"tool\": \"leanfinder\", \"query\": \"The universal profinite etale covering scheme is the inverse limit of pointed finite Galois covers and its Cech nerve has fundamental group coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"lightDiagramToLightProfinite_obj\", \"Profinite.diagram'\", \"InfiniteGalois.profiniteGalGrpIsoLimit\", \"CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat\", \"LightProfinite.proj\", \"LightDiagram'.toProfinite\", \"InfiniteGalois.asProfiniteGaloisGroupFunctor\"], \"digest\": \"33987523474bab8c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern finite Galois objects, abstract profinite groups, or unrelated universal covers; none states the scheme limit together with all Cech and component clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "PointedGaloisObject|pro.?represent|IsFundamentalGroup",
+   "results": "{\"t\": \"2026-10-21T14:52:06Z\", \"tool\": \"grep\", \"query\": \"PointedGaloisObject|pro.?represent|IsFundamentalGroup\", \"sub\": \"CategoryTheory/Galois\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/Topology.lean\", \"Mathlib/CategoryTheory/Galois/Topology.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\"], \"digest\": \"2dad9a885a2557f0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern finite Galois objects, abstract profinite groups, or unrelated universal covers; none states the scheme limit together with all Cech and component clauses",
+   "directory": "CategoryTheory/Galois"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of all pointed connected finite Galois covers is a connected scheme affine faithfully flat weakly etale over its base with Cech nerve indexed by powers of the etale fundamental group",
+   "results": "{\"t\": \"2026-10-21T14:52:08Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse limit of all pointed connected finite Galois covers is a connected scheme affine faithfully flat weakly etale over its base with Cech nerve indexed by powers of the etale fundamental group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"8d2391ef199a202a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern finite Galois objects, abstract profinite groups, or unrelated universal covers; none states the scheme limit together with all Cech and component clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-complete-group-torsor-monodromy",
@@ -85,5 +361,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-pointed-finite-etale-limit-cover",
+  "worker": "stage1",
+  "summary": "Constructed the cover over the directed set of open normal subgroups, with faithful flatness, connectedness by compact-open descent, canonical finite-cover splittings, explicit right-action Cech coordinates and quotient topology on components. Reused existing nodes throughout; no new clause-nodes. STATEMENT-DISPUTED: qualified the right-torsor cocycle formula by label dependence; wrote the general shifted equation.",
+  "blueprint": "The existing provenance has no blueprint ancestor (blueprint_refs.py ancestor prints None). This realizes the finite-cover limit and monodromy/Cech compatibility requested by the recorded det-thm-sf-ctf-stability-direct-images paragraph (3) chain, without changing its route. Whole-blueprint searches found no node stating this cover with its Cech coordinates.",
+  "tool_uses": [
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "cor-galois-open-subgroups",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-trace-degree",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-prime-spectrum",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "Generic finite Galois, scheme-limit, affine-chart or compact-open theorem used with its stated hypotheses; no node of this unit supplies this underlying tool. This does not replace the unit's constructibility route."
+   },
+   {
+    "node": "lem-fet-finite-limits",
+    "why": "Finite-etale base change preserves finite coproducts, used to pull the finite-stage splitting to T. Generic geometric tool, not a replacement of the constructibility route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-galois-fundamental",
+  "cor-galois-open-subgroups",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-weil-pbc-limit-fibre-products",
+  "det-pe-morphisms-etale-comparison",
+  "lem-galois-aut-profinite",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-galois-pi1-functoriality",
+  "lem-fet-finite-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-7aacf4ffb",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-7aacf4ffb (reviewer sub-agent of L); spot-checked: I read the item, all 16 steps and all 26 cited statements in full. There are no new nodes, no SGA citations and no dropped ids. The shape is clean: one commit with the item and its report. There is no re-split note for this item. Steps: (2) finite gives affine and separated, and with the qcqs-permanence lemma the stages are qcqs. (3) Trace-degree (b) gives d≥1 on connected Y_N, and limit-fibre-products with limit-nonempty makes every p_N surjective. (4) Each chart is ind-étale, so det-pe-morphisms-etale-comparison clauses 2 and 4 give weak étaleness, and the affine preimage covers V, so {v} is a pro-étale covering. (6) Compact-open descent (01Z4), surjectivity of p_N and connectedness of Y_N make T connected. (7-8) The splitting (aN,s)↦(aN,as) is well defined and invertible, base change is exact (lem-fet-finite-limits), and marked sections are unique by connectedness. (9) I checked f_s d_g = f_{gs} and d_h d_g = d_{gh} by hand, so the action is a right action. (10) Π ≅ lim Π/N as a homeomorphism. (11-12) Fibre-product limits give the Cech terms, with correct cumulative/consecutive label bijections. (13-14) LC(P,A) is the colimit and the prime-spectrum homeomorphism applies; π0 = Π^q with the quotient topology because the projection is open. (15) The cocycle derivation is correct. (16) lem-galois-pi1-functoriality gives F d'_h = d_{f_*h} F. Statement change (E7): base claimed c(gh)=c(g)c(h) for all right torsors. I verified the counterexample: X = Spec R, T = Spec C, G_m-torsor with section 1+i, giving c(σ) = −i and c(σ)² = −1. The shifted equation c(z,gh) = c(z,g)c(z·g,h) holds and keeps c(gh)=c(g)c(h) as the label-only special case. The sole citer, lem-sfb-complete-group-torsor-monodromy, works with a totally disconnected constant group G over connected T, so it still gets what it uses. This is not a weakening. I accept the 10 declared generic tool_uses: Galois, scheme-limit and pro-étale tools that replace no unit step. Stacks tags 0BND, 0BN2, 01YX, 01Z2, 01Z4, 097I and 097N resolve. Edge cases checked: Π=1, X=Spec k, Y empty, q=0. No fixes."
  }
 }

@@ -22879,3 +22879,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:09 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
 - 15:09 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 15:09 L: merged deliver/NA/lem-fd-common-stage-comparison-descent (stage 2; reviewer PASS; parallel immutable checks)
+- 15:10 L: merged deliver/NU/lem-sfb-pointed-finite-etale-limit-cover (reviewer PASS; first push; new nodes: 0)
