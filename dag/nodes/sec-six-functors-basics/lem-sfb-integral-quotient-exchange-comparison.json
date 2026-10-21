@@ -22,9 +22,121 @@
   "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D_T=D_{n,T}$. On each corner let $E_T^R,E_T^S$ denote the termwise derived section-action equivalences. The derived pushpull normalization identifies the internal and section-module $L_{u,*},F_{u,*}$, their independently specified adjunctions, units, counits and geometric pullback compositors. The scalar-adjunction comparison identifies $D_T$ with the actual section-module derived extension along $R_T\\to S_T$, using the same balanced generators on K-flat representatives. Thus we may perform the calculation in section-module categories and return through these equivalences; this preserves the specified transformations, rather than choosing new adjunctions on their endpoints. In particular the internal ambient exchanges become exactly the section-module unit--square--counit exchanges. The tensor comparison preserves flat-term K-flat representatives.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 08BJ (lemma-adjoint-preserve-K-injectives); sites-cohomology.tex Tag 07A6 (lemma-adjoint); internal/section normalization supplied by the cited comparison nodes"
+   }
+  },
+  {
+   "text": "The coefficient limits and their finite projections are the ones in the statement. Apply the profinite-coefficient inverse-image theorem to the tower $A/\\pi^m$. It gives $c_{u,R}:u^{-1}R_V\\cong R_U$ and $c_{u,S}:u^{-1}S_V\\cong S_U$, satisfying $a_Uc_{u,R}=c_{u,S}u^{-1}a_V$, where $a_T:R_T\\to S_T$ is the actual projection. These comparisons commute with composition. The canonical integral-limit identification identifies this tower with the pulled-back condensed integral coefficient. Indeed, after every finite projection both coefficient comparisons send a locally constant residue to its pullback; equality follows from the uniqueness of a map into the displayed limit. Hence these are the cartesian coefficient identifications used in $\\lambda_u$, and the two paths around the scheme square respect the coefficient projections.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), coefficient projections in the assertion that reduction of the canonical exchange is canonical; compare the cited profinite-coefficient theorem"
+   }
+  },
+  {
+   "text": "Let $\\theta^R:L_{f',R}L_{g,R}\\cong L_{h,R}L_{f,R}$ and $\\theta^S$ denote the specified geometric squares. For every $M\\in D_R(Y)$ the balancing maps satisfy\n$$D_{X'}(\\theta^R_M)\\circ\\lambda_{f',L_{g,R}M}\\circ L_{f',S}(\\lambda_{g,M})\n=\\lambda_{h,L_{f,R}M}\\circ L_{h,S}(\\lambda_{f,M})\\circ\\theta^S_{D_YM}.$$\nTo check this equality, take a flat-term K-flat representative $P$ of $M$. Geometric pullback preserves this class. Extension $P\\otimes_RS$ is K-flat over $S$: tensoring it with an acyclic $S$-complex is $P$ tensored over $R$ with that complex restricted to $R$, which is acyclic. Its terms are flat by the same exact-tensor test. Thus all functors in the displayed equation are computed by the ordinary balanced tensors and pullbacks of $P$. The specified compositors are the termwise geometric ones. Both paths send a local tensor in $(f')^{-1}g^{-1}(P\\otimes_RS_Y)$ to the pullback of $x\\in P$ along $fh=gf'$ tensored with the pullback of $s\\in S_Y$. The coefficient compatibility of Step 2 makes these the same $S_{X'}$-linear map. Balanced pure tensors generate the sheafified tensor, so equality holds degreewise, and localization gives the displayed equation for every $M$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); elementary balanced-tensor verification of the coefficient/geometric cube"
+   }
+  },
+  {
+   "text": "For each vertical edge $u=f,f'$, the comparison $\\rho_{u,n}$ in the statement is exactly the mate of $\\lambda_u:L_{u,S}D_V\\to D_UL_{u,R}$. This follows by substituting its defining adjunct into the mate formula: its transpose is $D_U(\\varepsilon^R_{u,K})\\circ\\lambda_{u,F_{u,R}K}$. Equivalently,\n$$\\varepsilon^S_{u,D_UK}\\circ L_{u,S}(\\rho_{u,n,K})=D_U(\\varepsilon^R_{u,K})\\circ\\lambda_{u,F_{u,R}K}.$$\nLikewise $\\operatorname{Ex}^R$ and $\\operatorname{Ex}^S$ are exactly the mates of $\\theta^R$ and $\\theta^S$ by the ambient exchange definition. These equalities fix the orientation of every mate; no inverse of an exchange is taken.",
+   "uses": [
+    "lem-sfb-integral-quotient-direct-image-comparison",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), the counit-adjunct definition"
+   }
+  },
+  {
+   "text": "Apply the exchange-mate cube to the four integral categories $D_R(Y),D_R(X),D_R(Y'),D_R(X')$, the corresponding four quotient categories, the four connecting functors $D_Y,D_X,D_{Y'},D_{X'}$, and the adjunctions on $f,f'$ at the two coefficient levels. Its invertible pullback comparisons are $p_u=\\lambda_u^{-1}$. The inverse-image cube hypothesis is exactly Step 3. By Step 4 the vertical comparison mates are the specified $\\rho_{f,n},\\rho_{f',n}$ and the two remaining mates are the actual exchanges. The cube gives, at $K$,\n$$D_{Y'}(\\operatorname{Ex}^R_K)\\text{ followed by }\\rho_{f',n,L_{h,R}K}\\text{ followed by }F_{f',S}(\\lambda_{h,K}^{-1})\n=\\lambda_{g,F_{f,R}K}^{-1}\\text{ followed by }L_{g,S}(\\rho_{f,n,K})\\text{ followed by }\\operatorname{Ex}^S_{D_XK}.$$\nPrecompose with $\\lambda_{g,F_{f,R}K}$ and postcompose with $F_{f',S}(\\lambda_{h,K})$. The inverse pairs cancel by functoriality. The resulting equation is precisely the one asserted, in $D_S(Y')$.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal), with the cited explicit exchange-mate cube supplying the omitted mate verification"
+   }
+  },
+  {
+   "text": "To identify the independently specified finite rectangle, denote its pullback/reduction comparison by $\\chi_u$ and its finite projection by $\\operatorname{pr}_{u,n}$. In section-module coordinates, $\\chi_u=\\lambda_u$: both are the localization of $u^{-1}(x\\otimes s)\\mapsto u^{-1}x\\otimes u^{-1}s$. The normalized finite projection is the adjunct of reduction of the integral counit after $\\chi_u$, so Step 4 and uniqueness of adjuncts give $\\operatorname{pr}_{u,n}=\\rho_{u,n}$. Step 1 identifies both ambient exchanges with the ringed exchanges. The finite rectangle is therefore\n$$\\operatorname{Ex}^S_{D_XK}\\circ L_{g,S}(\\rho_{f,n,K})=F_{f',S}(\\lambda_{h,K}^{-1})\\circ\\rho_{f',n,L_{h,R}K}\\circ D_{Y'}(\\operatorname{Ex}^R_K)\\circ\\lambda_{g,F_{f,R}K}.$$\nPostcomposing with $F_{f',S}(\\lambda_{h,K})$ yields Step 5. This is equality with that normalized rectangle, including its specified projection mates, not merely an isomorphism between its four objects. The formula has just been proved from the unrestricted cube; no properness or completeness condition from the four-corner applications is used.",
+   "uses": [
+    "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
+    "def-weil-pbc-four-arrows",
+    "lem-sfb-integral-quotient-direct-image-comparison",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0E48 (remark-compatible-with-diagram); compare lean/Sheaf/Paper/FiniteReductionExchangeRectangle.lean, theorem finiteReductionExchange_rectangle"
+   }
+  },
+  {
+   "text": "The $\\lambda_u$ and $\\rho_{u,n}$ are natural isomorphisms by the direct-image comparison statement. Thus $L_{g,S}(\\rho_{f,n})$ identifies the two sources, and $\\rho_{f',n}$ and $F_{f',S}(\\lambda_h)$ identify the targets. Rearranging Step 5 along those isomorphisms identifies the reduction of the actual integral exchange with the actual quotient exchange. All equalities above are equations of natural transformations (the balancing checks are natural in the representative and the mate cube is natural), so evaluation gives an equality natural in $K$. There was no use of invertibility of either exchange or of properness, completeness, boundedness or constructibility.",
+   "uses": [
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), exchange part of reduction of the canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-four-arrows",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pc-kflat-resolution",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), exchange compatibility, with the coefficient/geometric mate cube and the internal/section normalization supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +165,38 @@
    "results": "25 hits; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/LinearAlgebra/Dimension/Localization.lean; Mathlib/RingTheory/Algebraic/Integral.lean; Mathlib/RingTheory/Algebraic/Integral.lean",
    "date": "2026-10-21",
    "verdict": "no match: abstract mate-composition formulas and ordinary module scalar adjunctions do not identify the actual completed-coefficient ring-sheaf exchange cube"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of sheaf coefficients commutes with the base change exchange natural transformation defined as the adjunction mate, retaining quotient scalar action",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pullback adjunctions and abstract mate identities do not assert the normalized unbounded integral/quotient internal-module exchange and its independently specified ringed realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "10 hits; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_comp_id_right; CategoryTheory.Bicategory.mateEquiv_id_comp_right",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pullback adjunctions and abstract mate identities do not assert the normalized unbounded integral/quotient internal-module exchange and its independently specified ringed realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar extension and geometric pullback commute coherently with pullback composition and with the unit counit base change morphism of sheaf modules",
+   "results": "8 hits; CommRingCat.moduleCatExtendScalarsPseudofunctor; SheafOfModules.conjugateEquiv_pullbackComp_inv; ModuleCat.extendScalars_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackComp; PresheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pullback adjunctions and abstract mate identities do not assert the normalized unbounded integral/quotient internal-module exchange and its independently specified ringed realization"
+  },
+  {
+   "tool": "grep",
+   "query": "(exchange|baseChange|base_change).*(quotient|scalar|coefficien)|(quotient|scalar|coefficien).*(exchange|baseChange|base_change)",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pullback adjunctions and abstract mate identities do not assert the normalized unbounded integral/quotient internal-module exchange and its independently specified ringed realization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-sfb-proper-base-change-integral",
@@ -73,5 +213,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-quotient-exchange-comparison",
+  "worker": "stage1",
+  "summary": "Proved the normalized quotient exchange by the balanced inverse-image cube and its mate, including the actual internal/section adjunction realization and the independently specified finite rectangle. Statement unchanged; existing general comparison nodes suffice; no new nodes.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral.proof.md paragraph (3), sentence asserting that the reduction of each canonical map is the corresponding torsion map, exchange part: Steps 1-3 fix and check its coefficient cube, Steps 4-5 take the specified mates, Steps 6-7 identify the finite rectangle and the natural isomorphisms.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic normalization of internal/section derived adjunctions and geometric compositors for arbitrary schemes; the proper-image unit does not supply this comparison."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact tensor equivalence preserving flat and K-flat models; needed to compare the actual realizations."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-mate-cube",
+    "why": "Formal mate-cube identity for arbitrary categories; implements the unit route canonical-reduction assertion without replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, K-flat, pullback-composition or normalized finite-rectangle tool used for the actual reduction-mate calculation; no proper-image-unit statement supplies this ingredient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pc-kflat-resolution",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-f74fff816",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-f74fff816 (reviewer sub-agent of L); spot-checked: I read the item in full, all 7 steps, every cited statement and the source. Q28 gives the item a 7-step proof with the statement unchanged and 0 new nodes; the seed had no proof and there is no re-split note. Source: blueprint main-20261015 sk-thm-sfb-proper-base-change-integral.proof.md paragraph (3), the 'reduction of each canonical map' sentence, exchange half; I also checked Stacks 07A7, 0E47 (read at sites-cohomology.tex:4094) and 0E48, and the labels are correct. I matched the mate cube against the Lean signature of exchangeMate_cube: a..d=D_Y,D_X,D_Y',D_X', pF,pG,pH,pK=λ_f^-1,λ_g^-1,λ_h^-1,λ_f'^-1. Under this, hc is exactly Step 3's balancing equation. Step 4 is right: ρ is the transpose form of mate(λ). The cube's conclusion, composed with λ_g on the source side and F(λ_h) on the target side, is the item's equation, with matching source and target. Step 3's K-flat argument is correct: (P⊗_R S)⊗_S N ≅ P⊗_R N, and flatness of R→S is not used, which the scalar-adjunction node allows. Step 2 identifies the coefficients by uniqueness into the limit after each projection. Step 6 identifies the formulas only: χ=λ and p=ρ by uniqueness of adjuncts, without the four-arrows properness or witness hypotheses. Small cases: the identity square, empty X, K=0 and n=1 hold. There is no cycle, all ids exist, and the item is not a duplicate of lem-weil-pbc-strict-tower-exchange-mate-normalization, which needs properness and derived completeness. I accept all 11 declared tool_uses as generic. Batch-5: lem-pd-section-derived-pushpull-normalization is a general internal/section normalization of derived pushpull, adjunctions and compositors for any scheme morphism and condensed ring. Its 631-node closure contains no trace-formula, Poincaré-duality-content or nt-assume node; its only poincare-chapter nodes are itself and def-pd-section-module-operations-data. It is outside both assumptions, so I accept the citation. No fixes."
  }
 }
