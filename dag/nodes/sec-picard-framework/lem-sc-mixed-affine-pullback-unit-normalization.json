@@ -117,14 +117,15 @@
  "unit": "sk-thm-picard-duality",
  "lean_audit": {},
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsPullbackUnitNormalization.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MixedAffineSectionsPullbackUnitNormalization.lean",
   "declaration": "AlgebraicGeometry.exists_mixedAffineSections_pullback_unit_normalization",
   "statement": "theorem exists_mixedAffineSections_pullback_unit_normalization\n    {S T : Scheme.{u}} [IsAffine S] [IsAffine T] (g : T ⟶ S) :\n    let F : ModuleCat.{u} Γ(S, ⊤) ⥤\n        SheafOfModules.{u} (moduleRings S.toRingedSpace) :=\n      tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ\n    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace\n    let J := RingedSpace.globalSectionsFunctor T.toRingedSpace\n    let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g\n    let R := ModuleCat.restrictScalars.{u} g.appTop.hom\n    let d : F ⋙ H ⟶ F ⋙ K ⋙ J ⋙ R :=\n      Functor.whiskerRight (Functor.whiskerLeft F\n        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit) H\n    ∀ [F.Additive] [H.Additive] [J.Additive] [K.Additive]\n      (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)\n      (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),\n    let C := (F.mapHomologicalComplex (.up ℤ)).obj P\n    let Q : DerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) := DerivedCategory.Q.obj C\n    let Y := ((F ⋙ K ⋙ J).mapHomologicalComplex (.up ℤ)).obj P\n    ∃ b : (schemeDerivedGlobalSections T).obj ((derivedPullback g).obj Q) ≅\n        DerivedCategory.Q.obj Y,\n      mixedSectionsComplexUnit S C ≫\n        (schemeDerivedGlobalSections S).map ((schemeHomPullbackAdjunction g).unit.app Q) ≫\n          (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q) ≫\n            (schemeGlobalScalarRestriction g).map b.hom =\n      DerivedCategory.Q.map ((d.mapHomologicalComplex (.up ℤ)).app P) ≫\n        R.mapDerivedCategoryFactors.inv.app Y",
   "branch": "sheaf-dag",
   "by": "J4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "The quarantined Sheaf duplicate is restored as a compatibility import of the adopted source theorem, whose public signature is byte-for-byte identical. All mathematical dependencies and the complete source proof are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -137,13 +138,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-fb1aa",
-  "group": "V2",
+  "reviewer": "C-99c5f",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T171519-L-1983870",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered modules and direct importer compile; target statement, DAG metadata, proof route, and interface changes match the packet."
+  "landing": "20261021T225210-L-3794310",
+  "kind": "proof",
+  "note": "independent cc review: node lem-sc-mixed-affine-pullback-unit-normalization lean.statement verbatim in the WeilConjectures twin (and in the quarantined Sheaf text); Sheaf path restored as a pure re-export shell; twin axioms clean"
  }
 }
