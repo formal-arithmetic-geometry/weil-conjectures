@@ -22519,3 +22519,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:24 L: returned deliver/NL/lem-pod-stratified-dualizable-bounded (reviewer RETURN: L: independent stage-2 immutable head ebe38b889e66: H1: no Lean module, item lean record is null, report has only '## Re)
 - 13:25 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
 - 13:25 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: A7/B10: the item is superseded by a later stage-3 landing. The 2026-10-21 re-split note (live coord/repair-notes, mtime )
+- 13:25 L: returned deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer RETURN: Superseded (A6/A7/B10). This is the third push with unchanged content, and the maths is sound. (1) The item is Lean-clos)
