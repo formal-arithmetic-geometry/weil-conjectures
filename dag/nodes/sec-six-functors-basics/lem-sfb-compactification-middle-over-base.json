@@ -24,9 +24,79 @@
   "def-weil-finite-type-morphism",
   "sk-def-nagata-sketch-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $a_Z=a_Y\\circ p$. By the definition of an $S$-morphism, $p$ is over $S$ because $a_Y\\circ p=a_Z$. Associativity and the two assumed commutativities give $a_Z\\circ i=a_Y\\circ(p\\circ i)=a_Y\\circ f=a_X$, so $i$ is over $S$ as well. Conversely, any $b:Z\\to S$ for which $p$ is over $S$ must satisfy $b=a_Y\\circ p=a_Z$; thus the structure morphism is unique. In the category $\\mathit{Sch}/S$ the two arrows have the original underlying maps $i,p$, and their composite equals $f$ because its underlying map is $p\\circ i=f$; equality of $S$-morphisms is equality of their underlying morphisms. Their open-immersion and properness properties are precisely those supplied by the given compactification.",
+   "uses": [
+    "def-weil-scheme-over-base",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+    "place": "Statement paragraph 3: the middle scheme and both maps over the base; the explicit associativity and uniqueness argument. Stacks Tag 01JX, schemes-definition-scheme-over, gives the definitions."
+   }
+  },
+  {
+   "text": "The properness of $p$ implies, by the definition of proper, that $p$ is separated and of finite type. These are the two properties of $p$ needed below; no geometric property of $a_X$ is used.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1, definition-proper."
+   }
+  },
+  {
+   "text": "Apply the separated-composition assertion (e) of [lem-weil-pbc-proper-fp-permanence] to $p:Z\\to Y$ and $a_Y:Y\\to S$. Its first separatedness hypothesis is step 2, and its second is a hypothesis of this item. The conclusion is that $a_Y\\circ p=a_Z$ is separated.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU, lemma-separated-permanence, composition clause (1)."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-sfb-finite-type-composition-base-change] to $p:Z\\to Y$ and $a_Y:Y\\to S$. Both morphisms are of finite type, respectively by step 2 and by hypothesis. Hence their composite $a_Z$ is of finite type.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T3, lemma-composition-finite-type, finite-type clause."
+   }
+  },
+  {
+   "text": "Finite type includes quasi-compactness of the morphism, so step 4 implies that $a_Z$ is quasi-compact [def-weil-finite-type-morphism]. Apply clause (2), quasi-compact case, of [lem-weil-pbc-qcqs-morphism-permanence] with $U=Z$, $T=S$, and morphism $a_Z$. Its base quasi-compactness hypothesis is part of the stated qcqs hypothesis on $S$. Thus $Z$ is quasi-compact as a scheme. Together with steps 1, 3 and 4 this proves every assertion for the given $c$. Neither an existence theorem for compactifications nor a choice of one has been used.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K4, lemma-quasi-compact-affine: inverse images of affine opens are quasi-compact; a finite affine cover of the quasi-compact base gives a finite cover of Z by these inverse images. This is the quasi-compact case of the cited permanence node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-scheme-over-base",
+  "sk-def-nagata-sketch-data",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+  "place": "Statement paragraph 3, middle-scheme closure and both maps over the base; expanded by associativity and Stacks Tags 01W1, 01KU, 01T3 and 01K4."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -76,10 +146,45 @@
    "results": "Hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.Scheme.Hom.isOver_iff, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
    "date": "2026-10-21",
    "verdict": "no match for the full relative compactification lifting statement; individual geometric properties are already existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|compactification|isOver_iff",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Birational/Composition.lean, Mathlib/AlgebraicGeometry/Birational/Composition.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement; the geometric clauses have existing DAG Mathlib leaves, while the slice lift is an elementary construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.CategoryStruct.comp",
+   "results": "Hits: AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.ext_of_isDominant_of_isSeparated. ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement; the geometric clauses have existing DAG Mathlib leaves, while the slice lift is an elementary construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A factorization of a morphism of schemes over a base lifts uniquely to the slice category by composing the structure morphism",
+   "results": "Hits: AlgebraicGeometry.ValuativeCriterion.Uniqueness, CategoryTheory.Limits.IsImage.mk.injEq, AlgebraicGeometry.ValuativeCriterion, CategoryTheory.Functor.IsCartesian.fac, CategoryTheory.IsHomLift.fac, CategoryTheory.CommSq.LiftStruct.mk.noConfusion, AlgebraicGeometry.IsOpenImmersion.lift_uniq, CategoryTheory.Limits.IsImage.lift_fac. ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement; the geometric clauses have existing DAG Mathlib leaves, while the slice lift is an elementary construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compactification X to Z proper over Y of a morphism of S-schemes has a unique structure morphism Z to S compatible with both arrows; Z is separated finite type and quasi-compact if Y is separated finite type over a quasi-compact base",
+   "results": "Hits: AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.toIsSeparated. ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement; the geometric clauses have existing DAG Mathlib leaves, while the slice lift is an elementary construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A factorization of a scheme morphism over S becomes a factorization in the slice category by defining the middle structure map to be the proper map followed by the target structure map, uniquely",
+   "results": "Hits: CategoryTheory.MorphismProperty.HasFactorization.over, AlgebraicGeometry.Scheme.Hom.asOver, AlgebraicGeometry.Scheme.Hom.asOverProp, AlgebraicGeometry.Scheme.Hom.isOver_iff, AlgebraicGeometry.Scheme.Hom.IsOver, AlgebraicGeometry.Scheme.CanonicallyOver, AlgebraicGeometry.Scheme.asOver, AlgebraicGeometry.Scheme.Over. ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement; the geometric clauses have existing DAG Mathlib leaves, while the slice lift is an elementary construction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-sfb-dc-setting",
@@ -96,5 +201,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-compactification-middle-over-base",
+  "worker": "stage1",
+  "summary": "Q08: preserved the statement and proved the unique relative structure and slice factorization explicitly. Extracted separatedness and finite type from properness, then applied three existing Mathlib leaves for separated composition, finite-type composition and quasi-compactness over a quasi-compact base. No new nodes, no compactification existence or source finiteness hypothesis. Project Compactification.Over covers only part of the statement; uniqueness and absolute quasi-compactness preclude a full attachment.",
+  "blueprint": "Realizes sk-def-sfb-dc-setting, statement paragraph 3 and its recorded unit proof: Z has the composite structure morphism, both arrows are base morphisms, and proper p composed with separated finite-type a_Y remains separated finite type. Also proves the explicit uniqueness and quasi-compactness in the extracted item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-e8827ea39",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e8827ea39 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited source, and found nothing to fix. The delivery is one commit (the item plus its report) and creates no new nodes. Compared with the side-live unsplit node, only proof, proof_deps, proof_origin, status, split_report and the appended mathlib_searches changed; the 7 old searches are kept as a prefix. The statement is unchanged and true: it generalizes paragraph 3 of the unit sk-def-sfb-dc-setting statement (main-20261015 _section.md) to a qcqs base S. Uniqueness of a_Z is forced by p being over S, and quasi-compactness of Z needs S quasi-compact (counterexample: an infinite disjoint union of Spec of a field). Quasi-separatedness of S is unused but harmless. The steps follow the unit's own step exactly, and each cited statement says what the step takes from it. Step 1 (elementary): the S-morphism definition gives a_Z=a_Y∘p, both i and p are over S, and a_Z is unique. Step 2 (elementary): proper includes separated and finite type by the statement of def-weil-proper-morphism. Step 3: clause (e) of lem-weil-pbc-proper-fp-permanence (separated composition; Stacks 01KU checked at schemes.tex:4289). Step 4: clause (1) of lem-sfb-finite-type-composition-base-change (Stacks 01T3). Step 5: finite type includes quasi-compact, then clause (2) of lem-weil-pbc-qcqs-morphism-permanence with U=Z, T=S (Stacks 01K4 checked at schemes.tex:3584). Off-unit citations are only Mathlib leaves and definitions, so no tool_uses are needed. There is no SGA, no Nagata existence or choice, and no cycle. Edge cases checked: X=∅, Z=∅, p=id, and proper components of Z away from X. The item is not in a dropped list and has no re-split note."
  }
 }
