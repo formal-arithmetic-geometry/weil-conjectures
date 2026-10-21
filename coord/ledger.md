@@ -22457,3 +22457,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:16 L: merged deliver/ND/lem-dl-a1-finite-group-inertia-invariants-etale (stage 2; reviewer PASS; parallel immutable checks)
 - 12:16 L: merged deliver/Q22/lem-per-constructible-rational-hom-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 12:17 L: merged deliver/Q12/sk-thm-picard-duality (stage 2; reviewer PASS; parallel immutable checks)
+- 12:19 L: merged deliver/NW/lem-zl-dualizable-categorical-trace-conjugacy (stage 2; reviewer PASS; parallel immutable checks)

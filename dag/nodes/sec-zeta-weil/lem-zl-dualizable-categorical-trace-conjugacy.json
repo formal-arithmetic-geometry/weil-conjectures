@@ -245,5 +245,23 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-193615945 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The statement is unchanged from the base. The base had no proof and there is no re-split note. The item is still unsplit in live and side-live. Step check: (1) with g=a and h=u a^{-1}, hg=u and gh=v, using that a is invertible and a u = v a. (2) The new leaf gives a single mate t with both the coevaluation identity and the evaluation identity. (3) (h⊗1)(g⊗1)η_P = (h⊗t)η_Q; each map's source and target match. (4) Forward braiding naturality, β_{P,P^∨}(h⊗t) = (t⊗h)β_{Q,Q^∨} (Braided/Basic.lean:121-124), followed by ε_P(t⊗1) = ε_Q(1⊗g). (5) Naturality again turns this into tr(v) as defined by sk-d-trace (coev, then v⊗1, then sym, then ev). No symmetry of the braiding is used. This is the same argument as the project's trace_comp_comm and trace_eq_of_iso (Rigid/Braided.lean:80-96). The new leaf lem-zl-right-dual-mate-identities matches pinned Mathlib Rigid/Basic.lean exactly: rightAdjointMate at line 295, coevaluation_comp_rightAdjointMate at 583, rightAdjointMate_comp_evaluation at 601. Its triangle identities match ExactPairing (lines 77-90). It is not a duplicate: lem-trf-frame-dual-mate covers only complexes with frames, lem-trf-exact-pairing-iso-transport only transports pairings, and prop-trf-trace-formal-laws(1) only covers scalar traces of Perf. It does not restate the item, since it says nothing about traces and allows f to be non-invertible. The source is blueprint lem-trf-local-frobenius-conjugacy.proof.md lines 70-76, and proof_origin=agent is correct. The route only passes through Mathlib leaves and the sk-d-trace definition, so no tool_uses are needed. There is no SGA citation. Edge cases checked: identity, the same object with two different duals, zero object, unit object, finite-dimensional vector spaces with t the transpose, and a non-symmetric braiding. Advisory only: the new node lacks a lean_audit field."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided",
+  "declaration": "CategoryTheory.MonoidalCategory.trace_eq_of_iso",
+  "statement": "theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅ X') (f : X ⟶ X)\n    (f' : X' ⟶ X') (h : f ≫ w.hom = w.hom ≫ f') : trace f = trace f'",
+  "branch": "slopmaster2",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing theorem at lines 92–96, with the same braided trace recorded on sk-d-trace. The ambient variables impose only Category, MonoidalCategory and BraidedCategory; the two HasRightDual instances supply the chosen duals. Lean diagrammatic composition f ≫ w.hom = w.hom ≫ f' is precisely a ∘ u = v ∘ a. No module is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac2679bab",
+  "group": "NW",
+  "result": "pass",
+  "note": "existing:true attachment to CategoryTheory.MonoidalCategory.trace_eq_of_iso (WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:92-96 in the live tree; absent from the older slopmaster2 checkout, present in the published live tree). lean.statement verbatim (substring check including ' :='). The only node change is the lean field. Clauses: braided C (ambient vars, no symmetry), HasRightDual X/X', w : X ≅ X', f ≫ w.hom = w.hom ≫ f' is a∘u = v∘a, trace f = trace f' in End(𝟙), trace = sk-d-trace record (η, f▷Xᘁ, β.hom, ε). Universes unrestricted. Edge cases OK (identity, different duals, unit, non-symmetric braiding). Reused by TraceFormalLaws/ChainSupertrace; no Mathlib duplicate. Report sections present. No findings; no compile needed."
  }
 }
