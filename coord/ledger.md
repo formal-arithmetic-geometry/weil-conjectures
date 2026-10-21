@@ -19892,3 +19892,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:39 L: merged deliver/NG/lem-weil-pbc-augmented-diagram-projection-mate (reviewer FIX; first push; new nodes: 0)
 - 03:39 L: merged deliver/Q127/sk-def-sfb-coefficient-comparisons (reviewer PASS; first push; new nodes: 0); claim not held by Q127: not your claim
 - 03:39 L: merged deliver/Q20/det-prop-scalar-six-pullback (reviewer FIX; after a return; new nodes: 7)
+- 03:40 L: merged deliver/Q42/lem-sfb-lattice-subquotient-filtration (reviewer FIX; first push; new nodes: 0); claim not held by Q42: not your claim
