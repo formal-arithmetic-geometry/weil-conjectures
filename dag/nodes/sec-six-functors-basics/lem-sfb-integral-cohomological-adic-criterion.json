@@ -1,282 +1,247 @@
 {
-  "id": "lem-sfb-integral-cohomological-adic-criterion",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "det-lem-integral-models-stacks",
-      "place": "Proof, first sentence: the invocation of sk-prop-integral-criterion identifying bounded constructible cohomology with derived completeness and the first constructible reduction. The cited sketch exists as a source file but has no DAG node.",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sfb-integral-cohomological-adic-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence: the invocation of sk-prop-integral-criterion identifying bounded constructible cohomology with derived completeness and the first constructible reduction. The cited sketch exists as a source file but has no DAG node.",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Cohomological description of integral adic constructible complexes",
-  "statement": "Let $\\ell$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $R=\\mathcal O_E$, uniformizer $\\pi$, and residue field $k=R/(\\pi)$, as in [def-weil-l-adic-coefficient-extension], and let $X$ be a Noetherian scheme [def-pc-scheme], meaning that it has a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. On the pro-étale site [def-weil-pbc-proetale-site] $X_{\\mathrm{proét}}$ put $B=\\varprojlim_{n\\geq1}(R/\\pi^n)_X=\\mathcal O_{E,X}$, with the canonical quotient $B\\to k_X$ ([det-prop-sfb-qlbar-colimit-x-integral-limit], [det-prop-integral-criterion-constant-coefficients]). Let $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism]. A $B$-module sheaf is constructible if it admits a finite stratification of $X$ by constructible locally closed subschemes [def-constructible-stratification] on each of which it is pro-étale locally $B\\otimes_R P$ for a finitely presented $R$-module $P$ [def-sc-finitely-presented-module], [sk-def-sfb-constructible]. Use the bounded constructible cohomology condition of [sk-def-sfb-bounded-constructible], and derived $(\\pi)$-completeness in the sense of [def-weil-pbc-locally-derived-ringed-ideal-complete].\n\nHere $\\operatorname{Mod}(B)$ is the category of $B$-module sheaves [def-weil-sheaf-of-modules-category], $D$ is the unbounded derived category [def-weil-abstract-derived-category], $X_{\\mathrm{ét}}$ is the small étale site [def-weil-pbc-etale-site], and all derived tensors are relative tensors [sk-def-sfb-derived-tensor-hom]. For every $K\\in D(\\operatorname{Mod}(B))$, the following are equivalent:\n\n1. $K$ is bounded and every cohomology sheaf of $K$ is constructible as a $B$-module sheaf.\n2. $K$ is derived $(\\pi)$-complete and there exists a bounded complex $C\\in D(X_{\\mathrm{ét}},k)$ with constructible cohomology sheaves and finite Tor amplitude, together with an isomorphism $\\nu_X^*C\\simeq K\\otimes_B^{\\mathbf L}k_X$ in $D(X_{\\mathrm{proét}},k_X)$.\n\nHere finite Tor amplitude means that there are integers $a\\leq b$ such that $H^i(C\\otimes_{k_X}^{\\mathbf L}N)=0$ for every étale $k_X$-module sheaf $N$ and every $i\\notin[a,b]$. Constructible étale $k_X$-module sheaves mean those which on a finite constructible locally closed stratification are locally constant with finite-dimensional $k$-values. Torsion $R$-modules $P$ are allowed; no finite dimension of $X$ or invertibility of $\\ell$ on $X$ is assumed.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.10 and Proposition 6.8.11(3), with Definition 6.5.1 (completed coefficient formulation) and Definition 6.3.1 / Remark 6.3.2 (residue field constructible complexes). See also Stacks Tag 09C0, proetale.tex, section-suitable-derived, for the adic criterion."
-  },
-  "stmt_deps": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-integral-criterion-constant-coefficients",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
-    "def-weil-pbc-locally-derived-ringed-ideal-complete",
-    "def-weil-l-adic-coefficient-extension",
-    "def-pc-scheme",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-proetale-site",
-    "def-constructible-stratification",
-    "def-sc-finitely-presented-module",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-etale-site",
-    "sk-def-sfb-derived-tensor-hom",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-sfb-adic-stratified-perfect-data",
-    "def-sfb-completed-constant-stratified"
-  ],
-  "proof": [
-    {
-      "text": "The ring $R$ is a DVR, hence Noetherian, by [lem-weil-l-adic-extension-integers-dvr]. It is $(\\pi)$-adically complete: put $r=|\\pi|_E\\in(0,1)$. For compatible residues choose lifts $x_n\\in R$; for $m\\geq n$, $|x_m-x_n|_E\\leq r^n$. Completeness [lem-weil-l-adic-extension-complete] gives a limit $x\\in E$, and the nonarchimedean inequality [lem-weil-l-adic-extension-absolute-value] gives $|x|_E\\leq1$ and $|x-x_n|_E\\leq r^n$. The DVR factorization identifies the latter ball with $\\pi^nR$, so $x$ realizes the given residues. An element in every $\\pi^nR$ has norm at most every $r^n$, hence is zero. By [det-prop-sfb-qlbar-colimit-x-integral-limit] this completed coefficient sheaf is the given $B=\\mathcal O_{E,X}$. For every scheme $S$, [det-prop-integral-criterion-constant-coefficients](1) gives flatness of $R_S\\to B_S$ and $B_S/\\pi B_S=k_S$. Thus the general coefficient hypotheses of [lem-sfb-adic-stratified-perfect] hold for $A=R$, $I=(\\pi)$; its condition (a) is exactly condition (2) of the item.",
-      "uses": [
-        "lem-weil-l-adic-extension-integers-dvr",
-        "lem-weil-l-adic-extension-complete",
-        "lem-weil-l-adic-extension-absolute-value",
-        "det-prop-sfb-qlbar-colimit-x-integral-limit",
-        "det-prop-integral-criterion-constant-coefficients",
-        "lem-sfb-adic-stratified-perfect"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Proposition 6.8.11(3): coefficient specialization of Definition 6.5.1 and Proposition 6.6.11"
-      }
-    },
-    {
-      "text": "Every finitely presented $R$-module $P$ has a length-one finite free resolution. Indeed choose a finite surjection $R^m\\twoheadrightarrow P$. Its kernel $N$ is finite by [lem-weil-pbc-noetherian-submodule-finite], and it is torsion-free because $N\\subset R^m$ and $R$ is a domain. Hence [lem-sc-dvr-fg-torsionfree-free] makes $N$ finite free. The complex $[N\\to R^m]$ in degrees $-1,0$ resolves $P$. On any scheme $S$, [lem-weil-pbc-constant-module-section-properties](1) makes the corresponding constant-sheaf sequence exact. Flatness from [det-prop-integral-criterion-constant-coefficients](1), interpreted using [def-pc-flat-sheaf-modules], keeps it exact after tensoring with $B_S$. Therefore the finite constant local model $B_S\\otimes_R P$ is represented by the two-term finite free $B_S$-complex $B_S\\otimes_R[N\\to R^m]$. This works also for torsion $P$; it does not assume $P$ free.",
-      "uses": [
-        "lem-weil-pbc-noetherian-submodule-finite",
-        "lem-sc-dvr-fg-torsionfree-free",
-        "lem-weil-pbc-constant-module-section-properties",
-        "det-prop-integral-criterion-constant-coefficients",
-        "def-pc-flat-sheaf-modules"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Proposition 6.8.11(3), forward inclusion: finite projective resolution of the local module"
-      }
-    },
-    {
-      "text": "Let $F$ be a constructible $B$-module sheaf. By its definition in the item and [sk-def-sfb-constructible], there is a finite constructible stratification on which $F$ is pro-étale locally $B_S\\otimes_R P$ with $P$ finitely presented. Step 2 supplies a perfect $R$-complex representing each such model. Apply (b)$\\Rightarrow$(a) of [lem-sfb-adic-stratified-perfect] to $F[0]$. This proves that each constructible sheaf in degree zero satisfies (2).",
-      "uses": [
-        "sk-def-sfb-constructible",
-        "lem-sfb-adic-stratified-perfect"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Proposition 6.8.11(3), forward inclusion, reduction to a constructible sheaf; Proposition 6.6.11, reverse direction"
-      }
-    },
-    {
-      "text": "Assume (1), and choose $u\\leq v$ with $H^q(K)=0$ outside $[u,v]$. Each $H^q(K)[-q]$ satisfies (a) by Step 3 and the shift closure in [lem-sfb-adic-stratified-perfect]. For $q=u,u+1,\\ldots,v$, use the distinguished triangles of [lem-weil-pbc-truncation-triangle], $\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to H^q(K)[-q]\\to(\\tau_{\\leq q-1}K)[1]$. Start with $\\tau_{\\leq u-1}K\\simeq0$ and apply the triangulated-subcategory clause of [lem-sfb-adic-stratified-perfect] at each of these finitely many triangles. This gives (a) for $\\tau_{\\leq v}K\\simeq K$, hence (2).",
-      "uses": [
-        "lem-sfb-adic-stratified-perfect",
-        "lem-weil-pbc-truncation-triangle"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Proposition 6.8.11(3), forward inclusion: finite cohomological dévissage"
-      }
-    },
-    {
-      "text": "Assume (2). By [lem-sfb-adic-stratified-perfect], $K$ is bounded and has a finite stratification on which it is pro-étale locally $B_S\\otimes_R P^\\bullet$, with $P^\\bullet$ bounded finite projective. For a stratum immersion $g:S\\hookrightarrow X$, inverse image preserves the constant quotient sheaves and, by [lem-weil-pbc-proetale-immersion-limit-preservation], their inverse limit. Hence $g^{-1}B\\simeq\\varprojlim_n(R/\\pi^n)_S=B_S$, so extension along this coefficient identification is exact by the same cited statement. Restriction to an object of a pro-étale cover is induced by an exact module restriction [def-weil-pbc-ringed-derived-restriction]. These restrictions therefore commute with cohomology. Constant sheafification is exact by [lem-weil-pbc-constant-module-section-properties](1), and extension from $R_S$ to $B_S$ is exact by [det-prop-integral-criterion-constant-coefficients](1) and [def-pc-flat-sheaf-modules]. Consequently the local cohomology is $B_S\\otimes_R H^q(P^\\bullet)$. Kernels and images of differentials in the finite modules $P^i$ are finite by [lem-weil-pbc-noetherian-submodule-finite], so their cohomology quotients are finite. Each $H^q(P^\\bullet)$ is finitely presented by [lem-sc-noetherian-finite-module-finite-presentation]. Thus each $H^q(K)$ has exactly the finite constant local models required for constructibility. Together with boundedness this proves (1).",
-      "uses": [
-        "lem-sfb-adic-stratified-perfect",
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "def-weil-pbc-ringed-derived-restriction",
-        "lem-weil-pbc-constant-module-section-properties",
-        "det-prop-integral-criterion-constant-coefficients",
-        "def-pc-flat-sheaf-modules",
-        "lem-weil-pbc-noetherian-submodule-finite",
-        "lem-sc-noetherian-finite-module-finite-presentation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Proposition 6.8.11(3), reverse inclusion via Proposition 6.6.11 and finite cohomology of perfect DVR-complexes"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomological description of integral adic constructible complexes",
+ "statement": "Let $\\ell$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $R=\\mathcal O_E$, uniformizer $\\pi$, and residue field $k=R/(\\pi)$, as in [def-weil-l-adic-coefficient-extension], and let $X$ be a Noetherian scheme [def-pc-scheme], meaning that it has a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. On the pro-étale site [def-weil-pbc-proetale-site] $X_{\\mathrm{proét}}$ put $B=\\varprojlim_{n\\geq1}(R/\\pi^n)_X=\\mathcal O_{E,X}$, with the canonical quotient $B\\to k_X$ ([det-prop-sfb-qlbar-colimit-x-integral-limit], [det-prop-integral-criterion-constant-coefficients]). Let $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism]. A $B$-module sheaf is constructible if it admits a finite stratification of $X$ by constructible locally closed subschemes [def-constructible-stratification] on each of which it is pro-étale locally $B\\otimes_R P$ for a finitely presented $R$-module $P$ [def-sc-finitely-presented-module], [sk-def-sfb-constructible]. Use the bounded constructible cohomology condition of [sk-def-sfb-bounded-constructible], and derived $(\\pi)$-completeness in the sense of [def-weil-pbc-locally-derived-ringed-ideal-complete].\n\nHere $\\operatorname{Mod}(B)$ is the category of $B$-module sheaves [def-weil-sheaf-of-modules-category], $D$ is the unbounded derived category [def-weil-abstract-derived-category], $X_{\\mathrm{ét}}$ is the small étale site [def-weil-pbc-etale-site], and all derived tensors are relative tensors [sk-def-sfb-derived-tensor-hom]. For every $K\\in D(\\operatorname{Mod}(B))$, the following are equivalent:\n\n1. $K$ is bounded and every cohomology sheaf of $K$ is constructible as a $B$-module sheaf.\n2. $K$ is derived $(\\pi)$-complete and there exists a bounded complex $C\\in D(X_{\\mathrm{ét}},k)$ with constructible cohomology sheaves and finite Tor amplitude, together with an isomorphism $\\nu_X^*C\\simeq K\\otimes_B^{\\mathbf L}k_X$ in $D(X_{\\mathrm{proét}},k_X)$.\n\nHere finite Tor amplitude means that there are integers $a\\leq b$ such that $H^i(C\\otimes_{k_X}^{\\mathbf L}N)=0$ for every étale $k_X$-module sheaf $N$ and every $i\\notin[a,b]$. Constructible étale $k_X$-module sheaves mean those which on a finite constructible locally closed stratification are locally constant with finite-dimensional $k$-values. Torsion $R$-modules $P$ are allowed; no finite dimension of $X$ or invertibility of $\\ell$ on $X$ is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), with Definition 6.5.1 (completed coefficient formulation) and Definition 6.3.1 / Remark 6.3.2 (residue field constructible complexes). See also Stacks Tag 09C0, proetale.tex, section-suitable-derived, for the adic criterion."
+ },
+ "stmt_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-integral-criterion-constant-coefficients",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proetale-site",
+  "def-constructible-stratification",
+  "def-sc-finitely-presented-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sfb-completed-constant-stratified"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-pbc-pid-noetherian-normal], $R$ is Noetherian local with maximal ideal $(\\pi)$ and residue field $k$. Clause (1) of [lem-sfb-integers-profinite-tower] gives $R\\simeq\\varprojlim_n R/\\pi^n$. Thus [lem-sfb-adic-stratified-perfect] applies with $A=R$, $I=(\\pi)$ and $\\widehat A_X=B$; its condition (a) is exactly (2).",
+   "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-l-adic-extension-absolute-value",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-integral-criterion-constant-coefficients",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sfb-integers-profinite-tower",
+    "lem-sfb-adic-stratified-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), coefficient specialization of Proposition 6.6.11"
+   }
+  },
+  {
+   "text": "For a constructible sheaf $F$, choose its finite stratification and models $B_S\\otimes_R P$ as in [sk-def-sfb-constructible]. Identify the pulled-back coefficients with $B_S$ by [det-prop-sfb-qlbar-colimit-x-integral-limit]. The integral case of [lem-sfb-finite-constant-model-two-term-free-resolution] gives a scalar two-term finite free complex resolving each $P$ and an extended complex resolving its model. These are the perfect scalar models in condition (b) of [lem-sfb-adic-stratified-perfect]. Hence $F[0]$ satisfies (a).",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
     "lem-sfb-adic-stratified-perfect",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-sc-dvr-fg-torsionfree-free",
-    "lem-weil-pbc-constant-module-section-properties",
-    "def-pc-flat-sheaf-modules",
-    "sk-def-sfb-constructible",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "def-weil-pbc-ringed-derived-restriction",
-    "lem-sc-noetherian-finite-module-finite-presentation"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), using Proposition 6.6.11, Definition 6.5.1 and Lemma 6.5.3"
+    "place": "Proposition 6.8.11(3), constructible sheaves concentrated in degree zero"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Over the ring of integers of a finite l-adic field, bounded complexes of constructible sheaves are exactly derived complete complexes with constructible residue reduction",
-      "results": "BDeRhamPlus; CondensedMod; CondensedMod.isDiscrete_tfae; Condensed.profiniteSolid; instAbelianCondensedMod; AdicCompletion.map_exact; CondensedMod.IsSolid; LightCondMod.isDiscrete_tfae",
-      "date": "2026-10-16",
-      "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Constructible\", \"Complete\"",
-      "results": "No hits",
-      "date": "2026-10-16",
-      "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
-    },
-    {
-      "tool": "leansearch",
-      "query": "A bounded constructible complex of integral pro etale sheaves is derived adically complete and has constructible residue reduction",
-      "results": "IsAdicComplete.bot; IsAdicComplete; AdicCompletion; IsAdicComplete.of_subsingleton; IsAdicComplete.mk; IsAdicComplete.rec; IsAdicComplete.casesOn; AdicCompletion.module",
-      "date": "2026-10-16",
-      "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*(complete|adic)|complete.*constructible|constructibleCohomology",
-      "results": "No hits",
-      "date": "2026-10-16",
-      "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Bhatt Scholze constructible completed coefficient complexes characterized by finite stratifications and bounded constructible cohomology",
-      "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Profinite.NobelingProof.CC_exact; ChevalleyThm.chevalley_polynomialC; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CondensedMod.IsSolid; ChevalleyThm.chevalley_mvPolynomialC; PrimeSpectrum.BasicConstructibleSetData.g; BDeRhamPlus",
-      "date": "2026-10-16",
-      "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "det-lem-integral-models-stacks",
-    "date": "2026-10-16",
-    "group": "Q09"
-  },
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-lem-integral-models",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-sfb-integral-cohomological-adic-criterion",
-    "worker": "stage1",
-    "summary": "Replaced the historical diagnostic copy by a source-based five-step split. Kept all mathematical hypotheses, corrected doubled TeX escapes, used the general adic/stratified-perfect theorem, supplied the DVR resolution and finite truncation argument explicitly, and avoided the existing characterization with extra dimension and invertibility assumptions. The assigned node is absent from the current shared snapshot; this delivery restores only its historical record under the explicit re-assignment. No Lean changes or compiles.",
-    "blueprint": "det-lem-integral-models-stacks proof, first sentence invoking sk-prop-integral-criterion: realizes both directions of that criterion using the local-model route of Bhatt–Scholze 6.8.11(3).",
-    "tool_uses": [
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "det-prop-integral-criterion-constant-coefficients",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "lem-weil-pbc-constant-module-section-properties",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "def-pc-flat-sheaf-modules",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "sk-def-sfb-constructible",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "lem-weil-pbc-truncation-triangle",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      },
-      {
-        "node": "def-weil-pbc-ringed-derived-restriction",
-        "why": "Generic coefficient, exactness, or truncation statement used in the explicitly cited step; the integral-models unit supplies no replacement for this supporting tool. No operation or base-change route is substituted."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-integral-criterion-constant-coefficients",
-    "lem-weil-pbc-constant-module-section-properties",
-    "def-pc-flat-sheaf-modules",
-    "sk-def-sfb-constructible",
+  {
+   "text": "Assume (1), with cohomology in $[u,v]$. Step 2 and shift closure give (a) for $H^q(K)[-q]$. Starting with $\\tau_{\\leq u-1}K=0$, apply [lem-weil-pbc-truncation-triangle] for $q=u,\\ldots,v$. The triangle has vertices $\\tau_{\\leq q-1}K$, $\\tau_{\\leq q}K$, $H^q(K)[-q]$. The triangulated closure in [lem-sfb-adic-stratified-perfect] gives (a) successively for $\\tau_{\\leq q}K$, ending with $K\\simeq\\tau_{\\leq v}K$. This proves (2).",
+   "uses": [
     "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "def-weil-pbc-ringed-derived-restriction"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-cc-Q21-eb5a11bd5",
-    "group": "Q21",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-eb5a11bd5 (reviewer sub-agent of L); spot-checked: Read the full contract and the whole delivery, and checked it against the Bhatt–Scholze PDF: §6.5 setup, Def 6.5.1 and its triangulatedness remark, Lemma 6.5.3, Def 6.3.1/Rem 6.3.2, Prop 6.6.11, Def 6.8.10, Prop 6.8.11(3). Also read the blueprint sk-prop-integral-criterion text. ITEM: states 6.8.11(3) exactly. Coefficients are B=lim(R/pi^n)_X=O_{E,X}, which is BS's R-hat; torsion P is allowed; there is no dimension or ell hypothesis; the residue condition is Def 6.5.1 over the field k; completeness is the local definition, which the parent already relates to the tower notion. Nothing is weakened. STEPS: (1) the Cauchy argument proves R=lim R/pi^n; the child's (a) is literally the item's (2). (2) N in R^m is finite (00IK) and torsion-free, hence free (0AUW); exactness then follows from constant-sheaf exactness and flatness of R_S->B_S (constant-coefficients (1) and def-pc-flat). (3) The child's (b)=>(a) applies to the two-term free models. (4) The truncation-triangle induction is explicit: base 0, end tau_{<=v}K=K, u=v and K=0 covered. (5) The child gives boundedness and local perfect models; exact restrictions, constant-sheaf exactness and flatness give H^q=B_S tensor H^q(P), which is finitely presented. Each step uses only what its cited statements say. NEW NODE lem-sfb-adic-stratified-perfect: true, statement-only and self-contained; it is BS 6.5.1+6.5.3+6.6.11 specialised to a complete local A so that A/I is a field (Rem 6.3.2). Small cases tested: X empty, K=0, A a field, k[e]/e^2, a geometric point, and E_X, which is not complete. Duplicate search over the whole DAG (6.6.11/6.8.11/09C1/09C2/09C7/stratified-perfect): the near matches have extra hypotheses, are only local, or would make a cycle. It does not restate the item or the parent; the DVR resolution and the devissage stay in the item. No cycle in the 2310-node closure; the missing def-weil-pbc-etale-morphism was already missing before this delivery. Accepted tool_uses: lem-weil-l-adic-extension-integers-dvr, lem-weil-pbc-constant-module-section-properties, lem-weil-pbc-truncation-triangle, lem-weil-pbc-proetale-immersion-limit-preservation. The other declared entries are on route, definitions or Mathlib nodes, so declaring them is redundant but harmless. same_as=[] is forced because sk-prop-integral-criterion has no DAG node. No SGA. No changes."
+    "lem-sfb-adic-stratified-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite cohomological dévissage"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.Paper.IntegralCohomologicalAdicCriterion",
-    "declaration": "AlgebraicGeometry.Scheme.integral_cohomological_adic_criterion",
-    "file": "lean/Sheaf/Paper/IntegralCohomologicalAdicCriterion.lean",
-    "statement": "theorem integral_cohomological_adic_criterion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X (ProEtale.IntegralConstantCompletion.ideal l E)))) : (DerivedCategory.TStructure.t.bounded K ∧ ∀ q : ℤ, IsCompletedConstantStratified X (ProEtale.IntegralConstantCompletion.ideal l E) ((DerivedCategory.homologyFunctor _ q).obj K)) ↔ IsSfbAdicConstructible X (ProEtale.IntegralConstantCompletion.ideal l E) K",
-    "branch": "newtargets-dag",
-    "by": "N4",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Uses the published IsSfbAdicConstructible predicate for condition (2), with the existing lifted integer ring and uniformizer ideal of IntegralConstantCompletion. The §1(B) constructibility interface renders condition (1) directly on the same actual completed ring sheaf. No statement correction or extra mathematical hypothesis.",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.integralCriterionWEquals",
-      "AlgebraicGeometry.Scheme.integral_cohomological_adic_criterion"
-    ]
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-b9c9fc08d",
-    "group": "N4",
-    "result": "pass",
-    "note": "Re-delivery after the RETURN of 6854bf38. R1 repaired: lem-sfb-adic-stratified-perfect is no longer a stmt_dep (it stays in proof_deps); the new def node def-sfb-adic-stratified-perfect-data gives an existing:true record (no file) on the unchanged live AdicStratifiedPerfect module, with 6 plain def/abbrev declarations and the IsSfbAdicConstructible statement verbatim (l.150-151). R2 repaired: sk-def-sfb-constructible is JSON-equal to the live N7 record, and the new def node def-sfb-completed-constant-stratified owns IsCompletedConstantStratified, citing the 4 prescribed defs plus def-pc-scheme. Both new nodes meet the H12 field rules. Against live side the item differs only in lean and stmt_deps (+2 new nodes); def-pc-scheme differs only in whitespace. The item Lean is byte-identical to the returned delivery and its statement was re-checked against the node: l prime; E finite over Q_l; R = ULift O_E with ideal span{pi}; Noetherian X; B = actual limit; condition (1) = bounded + stratified finitely presented local models on every H^q; condition (2) = complete + bounded constructible etale k-complex + residue iso along nu + Tor test against every N; iff. Edge cases and universes are OK. nt_compile --json exit 0, clean (7.9 s / 12.4 s; dependency modules up to 23.6 s). Advisory only: CompletedConstantConstructibility's public import of CondensedConstantConstructibility is unused."
+  {
+   "text": "Assume (2). By [lem-sfb-adic-stratified-perfect], $K$ is bounded and has a finite constructible locally closed stratification with pro-étale local perfect scalar models $B_S\\otimes_R P^\\bullet$. Apply [lem-sfb-local-integral-perfect-model-cohomology] on each covering object of each stratum. It identifies the restriction of $H^q(K)$ with $B_S\\otimes_R H^q(P^\\bullet)$, where the scalar module is finitely presented. These are exactly the models of [sk-def-sfb-constructible]. Thus every $H^q(K)$ is constructible, proving (1).",
+   "uses": [
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-local-integral-perfect-model-cohomology",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), final sentence via Proposition 6.6.11"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-adic-stratified-perfect",
+  "sk-def-sfb-constructible",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sfb-local-integral-perfect-model-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), using Proposition 6.6.11, Definition 6.5.1 and Lemma 6.5.3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over the ring of integers of a finite l-adic field, bounded complexes of constructible sheaves are exactly derived complete complexes with constructible residue reduction",
+   "results": "BDeRhamPlus; CondensedMod; CondensedMod.isDiscrete_tfae; Condensed.profiniteSolid; instAbelianCondensedMod; AdicCompletion.map_exact; CondensedMod.IsSolid; LightCondMod.isDiscrete_tfae",
+   "date": "2026-10-16",
+   "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Complete\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible complex of integral pro etale sheaves is derived adically complete and has constructible residue reduction",
+   "results": "IsAdicComplete.bot; IsAdicComplete; AdicCompletion; IsAdicComplete.of_subsingleton; IsAdicComplete.mk; IsAdicComplete.rec; IsAdicComplete.casesOn; AdicCompletion.module",
+   "date": "2026-10-16",
+   "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(complete|adic)|complete.*constructible|constructibleCohomology",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bhatt Scholze constructible completed coefficient complexes characterized by finite stratifications and bounded constructible cohomology",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Profinite.NobelingProof.CC_exact; ChevalleyThm.chevalley_polynomialC; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CondensedMod.IsSolid; ChevalleyThm.chevalley_mvPolynomialC; PrimeSpectrum.BasicConstructibleSetData.g; BDeRhamPlus",
+   "date": "2026-10-16",
+   "verdict": "no match: classical adic module completion and abstract bounded derived categories do not give the integral constructible sheaf criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-integral-models-stacks",
+  "date": "2026-10-16",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-cohomological-adic-criterion",
+  "worker": "stage1",
+  "summary": "Q55 finer-split repair of the 4304-character proof. Statement unchanged. Reused existing separate proofs of coefficient completeness and the two-term scalar free resolution; isolated exact restriction and finite cohomology of local perfect models in one new statement-only child, with its complete short proof in report.md as required for new stage-1 children. The item now has four short assembly steps.",
+  "blueprint": "det-lem-integral-models-stacks proof, first sentence invoking sk-prop-integral-criterion: realizes both directions of that criterion using the local-model route of Bhatt–Scholze 6.8.11(3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-algebra or truncation tool used in the indicated assembly step, without replacing the integral-model unit route."
+   },
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "Generic coefficient-algebra or truncation tool used in the indicated assembly step, without replacing the integral-model unit route."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Its canonical ring isomorphism supplies adic completeness; the integral-model unit has no separate coefficient-completeness theorem."
+   },
+   {
+    "node": "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "why": "Its integral clause supplies the scalar free resolution and the exact extended model; this reuses the already split resolution argument."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic coefficient-algebra or truncation tool used in the indicated assembly step, without replacing the integral-model unit route."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Identifies the pulled-back continuous integral coefficient ring in the existing free-resolution lemma with the inverse-limit ring in this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-weil-pbc-constant-module-section-properties",
+  "def-pc-flat-sheaf-modules",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-finite-constant-model-two-term-free-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-7e4fe5ef7",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-7e4fe5ef7 (reviewer sub-agent of L); spot-checked: Read the whole delivery and BS 6.8.10, 6.8.11(3) with its proof, and 6.6.11 (pdftotext pp. 54, 60). The item is not on the dropped list. Statement, stmt_deps and all non-split fields are byte-equal to the live item, which was reviewed 2026-10-16. Only proof, proof_deps and split_report changed: 4 steps, 1854 chars, every step under 2000. Step 1: the DVR and PID nodes, plus clause (1) of lem-sfb-integers-profinite-tower (O_E≅lim O_E/π^n), meet every hypothesis of lem-sfb-adic-stratified-perfect, which needs no flatness. Its Â_X is literally B, and its (a) is the item's (2), with the same completeness, constructibility (f.p. over the field k) and Tor convention. Step 2: lem-sfb-finite-constant-model-two-term-free-resolution, integral case, gives an exact 0→B^a→B^b→B⊗P→0 for any f.p. P, torsion allowed. Clause (3) of the qlbar integral-limit node identifies p^*O_E with B_S, so (b)⇒(a) applies to F[0], as in BS's projective-resolution argument. Step 3: induction over the truncation triangles from τ≤u−1=0 to τ≤v≅K, using the zero/iso/shift/2-of-3 closure clauses. Step 4: (a)⇒(b) plus boundedness. The model j_U^*g^*K≅Â_S⊗P^• is exactly the hypothesis of the new child, whose conclusion is the finite constant local model of sk-def-sfb-constructible. New lem-sfb-local-integral-perfect-model-cohomology is true. c_g is an isomorphism and g^* is exact by immersion-limit-preservation and constant-left-module-inverse-image. j_U^* is exact. T_U is exact because constant sheaves are exact and R_S→B_S is flat. Exact functors commute with cohomology, and H^q of a finite complex over the DVR is finitely presented. Tested on P=0, U=∅, R[n], and [R--π^m-->R], where H^0=R/π^m and T_U gives (R/π^m)_U. The node is statement-only and self-contained, its 13 stmt_deps equal its citations, it has 3 search kinds, and blueprint.from is det-lem-integral-models-stacks via the item. It is not a restatement of a parent clause: no completeness hypothesis and no global conclusion. A DAG grep found no duplicate; the adic-tor-flat-cohomology nodes have extra hypotheses. No cycle across all 27 deps. The reused profinite-tower, resolution and qlbar nodes are on the unit route. Accepted tool_uses: lem-weil-l-adic-extension-integers-dvr, lem-weil-pbc-truncation-triangle; the PID node is a Mathlib leaf. No SGA. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCohomologicalAdicCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.integral_cohomological_adic_criterion",
+  "file": "lean/Sheaf/Paper/IntegralCohomologicalAdicCriterion.lean",
+  "statement": "theorem integral_cohomological_adic_criterion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X (ProEtale.IntegralConstantCompletion.ideal l E)))) : (DerivedCategory.TStructure.t.bounded K ∧ ∀ q : ℤ, IsCompletedConstantStratified X (ProEtale.IntegralConstantCompletion.ideal l E) ((DerivedCategory.homologyFunctor _ q).obj K)) ↔ IsSfbAdicConstructible X (ProEtale.IntegralConstantCompletion.ideal l E) K",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the published IsSfbAdicConstructible predicate for condition (2), with the existing lifted integer ring and uniformizer ideal of IntegralConstantCompletion. The §1(B) constructibility interface renders condition (1) directly on the same actual completed ring sheaf. No statement correction or extra mathematical hypothesis.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralCriterionWEquals",
+   "AlgebraicGeometry.Scheme.integral_cohomological_adic_criterion"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9c9fc08d",
+  "group": "N4",
+  "result": "pass",
+  "note": "Re-delivery after the RETURN of 6854bf38. R1 repaired: lem-sfb-adic-stratified-perfect is no longer a stmt_dep (it stays in proof_deps); the new def node def-sfb-adic-stratified-perfect-data gives an existing:true record (no file) on the unchanged live AdicStratifiedPerfect module, with 6 plain def/abbrev declarations and the IsSfbAdicConstructible statement verbatim (l.150-151). R2 repaired: sk-def-sfb-constructible is JSON-equal to the live N7 record, and the new def node def-sfb-completed-constant-stratified owns IsCompletedConstantStratified, citing the 4 prescribed defs plus def-pc-scheme. Both new nodes meet the H12 field rules. Against live side the item differs only in lean and stmt_deps (+2 new nodes); def-pc-scheme differs only in whitespace. The item Lean is byte-identical to the returned delivery and its statement was re-checked against the node: l prime; E finite over Q_l; R = ULift O_E with ideal span{pi}; Noetherian X; B = actual limit; condition (1) = bounded + stratified finitely presented local models on every H^q; condition (2) = complete + bounded constructible etale k-complex + residue iso along nu + Tor test against every N; iff. Edge cases and universes are OK. nt_compile --json exit 0, clean (7.9 s / 12.4 s; dependency modules up to 23.6 s). Advisory only: CompletedConstantConstructibility's public import of CondensedConstantConstructibility is unused."
+ }
 }

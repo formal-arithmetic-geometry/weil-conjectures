@@ -19710,3 +19710,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:18 L: merged deliver/Q06/det-sf-comp-composition-interchange (reviewer PASS; after a return; new nodes: 2)
 - 03:18 L: merged deliver/NA/det-def-sfb-filtered-two-colimit-characterization (reviewer PASS; first push; new nodes: 0)
 - 03:18 L: merged deliver/Q48/det-lem-integral-models-stacks (reviewer FIX; after a return; new nodes: 1)
+- 03:18 L: merged deliver/Q55/lem-sfb-integral-cohomological-adic-criterion (reviewer PASS; after a return; new nodes: 1)
