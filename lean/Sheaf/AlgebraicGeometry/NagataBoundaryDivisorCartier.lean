@@ -12,7 +12,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 import WeilConjectures.Blowup.BlowupUniversal
 import Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense
 import WeilConjectures.Blowup.Principalization
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # Cartier boundary and dense interior after blowing up a boundary ideal
@@ -74,6 +73,41 @@ theorem exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl_with_den
                       C.I.blowup.Opens) : Set C.I.blowup)ᶜ ∧
                     IsSchemeTheoreticallyDominant
                       ((C.I.blowupMap ≫ B.I.blowupMap) ⁻¹ᵁ U).ι := by
-  sorry
+  have : QuasiCompact U.ι := U.quasiCompact_ι hU
+  have hdisj : Disjoint (U : Set T) (I.support : Set T) := by
+    rw [hI_support]
+    exact disjoint_compl_right
+  refine ⟨⟨I, hI, hdisj⟩, rfl, ?_⟩
+  change IsSchemeTheoreticallyDominant (I.blowupMap ⁻¹ᵁ U).ι ∧ _
+  have hInv := I.isInvertible_comap_blowupMap
+  have hsupport : ((I.comap I.blowupMap).support : Set I.blowup) =
+      ((I.blowupMap ⁻¹ᵁ U : I.blowup.Opens) : Set I.blowup)ᶜ := by
+    rw [Scheme.IdealSheafData.coe_support_comap, hI_support, Set.preimage_compl]
+    rfl
+  have hopen : (I.comap I.blowupMap).support.compl = I.blowupMap ⁻¹ᵁ U := by
+    apply TopologicalSpace.Opens.ext
+    change (((I.comap I.blowupMap).support : Set I.blowup)ᶜ) = _
+    rw [hsupport, compl_compl]
+  have hdense : IsSchemeTheoreticallyDominant (I.blowupMap ⁻¹ᵁ U).ι := by
+    rw [← hopen]
+    exact hInv.compl_support_dense.2.1
+  refine ⟨hdense, hInv, hsupport, ?_⟩
+  intro C
+  have hInvC := hInv.comap_blowupMap C.I
+  have hsupportC :
+      (((I.comap I.blowupMap).comap C.I.blowupMap).support : Set C.I.blowup) =
+        (((C.I.blowupMap ≫ I.blowupMap) ⁻¹ᵁ U : C.I.blowup.Opens) :
+          Set C.I.blowup)ᶜ := by
+    rw [Scheme.IdealSheafData.coe_support_comap, hsupport, Set.preimage_compl]
+    rfl
+  have hopenC : ((I.comap I.blowupMap).comap C.I.blowupMap).support.compl =
+      (C.I.blowupMap ≫ I.blowupMap) ⁻¹ᵁ U := by
+    apply TopologicalSpace.Opens.ext
+    change ((((I.comap I.blowupMap).comap C.I.blowupMap).support :
+      Set C.I.blowup)ᶜ) = _
+    rw [hsupportC, compl_compl]
+  refine ⟨hInvC, hsupportC, ?_⟩
+  rw [← hopenC]
+  exact hInvC.compl_support_dense.2.1
 
 end AlgebraicGeometry

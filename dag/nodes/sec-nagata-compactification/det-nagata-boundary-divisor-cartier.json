@@ -22,12 +22,11 @@
  ],
  "proof": [
   {
-   "text": "*Admissibility.* Since $T$ is quasi-separated and $U$ is quasi-compact, the open immersion $U\\hookrightarrow T$ is quasi-compact (its pullback to an affine open $V$ of $T$ is $U\\cap V$, a finite union of the intersections of the finitely many affine opens covering $U$ with $V$, each quasi-compact because $T$ is quasi-separated). Since $V(\\mathcal I)=T\\setminus U$, [lemma-nagata-ideal-unit-off-support] applied to $Z=V(\\mathcal I)$ gives $\\mathcal I|_U=\\mathcal O_U$ (in its affine form: $\\Gamma(V,\\mathcal I)=\\Gamma(V,\\mathcal O_T)$ for every affine open $V\\subseteq U$, and these affine opens form a basis of $U$). With $\\mathcal I$ quasi-coherent of finite type, this is exactly the datum of [def-nagata-admissible-blowup], taking $\\pi=b$ and the identity identification with $\\operatorname{Bl}_{\\mathcal I}(T)$; so $b$ is a $U$-admissible blow-up.",
+   "text": "Admissibility: the quasi-compact open immersion U.ι is quasi-compact by Scheme.Opens.quasiCompact_ι applied to hU. Rewrite the center support as the complement of U. The elementary identity Disjoint U Uᶜ supplies the disjoint_support field of IsAdmissible; the other fields are I and hI. This retains the original center definitionally, so B.I = I is reflexivity. No affine unit-ideal calculation is needed because the Lean admissibility datum records disjointness itself.",
    "uses": [
-    "lemma-nagata-ideal-unit-off-support",
     "def-nagata-admissible-blowup"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-boundary-divisor/det-nagata-boundary-divisor-cartier.proof.md",
     "place": "*Admissibility.*"
@@ -76,7 +75,6 @@
   }
  ],
  "proof_deps": [
-  "lemma-nagata-ideal-unit-off-support",
   "def-nagata-admissible-blowup",
   "thm-nagata-blowup-principalizes-center",
   "def-nagata-effective-cartier-ideal",
@@ -88,8 +86,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-boundary-divisor/det-nagata-boundary-divisor-cartier.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-boundary-divisor/det-nagata-boundary-divisor-cartier.proof.md",
+  "place": "The four paragraphs Admissibility, Cartier boundary, Density, and Persistence; Lean realization by R4, using the disjoint-support presentation of IsAdmissible."
  },
  "mathlib_searches": [
   {
@@ -208,5 +206,15 @@
   "group": "Q18",
   "result": "pass",
   "note": "Every hypothesis and conclusion clause of det-nagata-boundary-divisor-cartier matches the Lean (qcqs T, qc U, finite-type I with supp I = U^c; exists B : IsAdmissible T U with B.I = I; density of b^-1 U via IsSchemeTheoreticallyDominant; (I.comap b).IsInvertible; support = complement of b^-1 U; for all C : IsAdmissible over b^-1 U, invertibility, support and density for c≫b). Notions go through the recorded dependency declarations (IsAdmissible, Mathlib IdealSheafData.comap, IsInvertible, Mathlib IsSchemeTheoreticallyDominant). No extra hypotheses; single universe u. The nearest existing theorems (AdmissibleBlowup.lean:646, NagataBoundaryDivisor.lean) lack density/persistence, so existing:false is right. Node unchanged apart from the new lean record; lean.statement equals the file signature verbatim. Docstrings carry the source place, blueprint tag and four proof steps; proof is sorry only; both report sections present. Edge cases U=T, U empty, empty T, non-reduced T covered; persistence checked true independently. nt_compile.py --json on the snapshot file: rc 0, no errors, 2.8 s; a copy with a deliberate error was rejected, #check gives the intended signature, axioms include sorryAx. Minor: the report names Principalization/IdealSheaf.Basic, which the file does not import (harmless)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T154052-L-2784133",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
