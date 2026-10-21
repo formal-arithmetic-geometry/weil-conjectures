@@ -20219,3 +20219,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/Q04/lem-sfb-section-ring-lax-pushforward-coherence (reviewer PASS; first push; new nodes: 0)
 - 04:07 L: merged deliver/NU/lem-sfb-coextension-iso-evaluation-formula (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T04:07:13Z L: superseded stage-1 delivery Q64/lem-sp-acyclic-flat-proper-coefficient-model at c6a9e716ac531fff85b5633e27fe7e77e0343fcf; current completion retained; packet archived at refs/superseded/Q64/lem-sp-acyclic-flat-proper-coefficient-model/c6a9e716ac531fff85b5633e27fe7e77e0343fcf; stale return retired.
+- 04:07 L: merged deliver/NM/lem-sbc-koszul-fibre-linear-descent (reviewer PASS; first push; new nodes: 0)
