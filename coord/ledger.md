@@ -23957,3 +23957,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:54 L: merged deliver/NE/lem-sfb-uncountable-almost-disjoint-family (stage 2; reviewer PASS; parallel immutable checks)
 - 22:56 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 22:59 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 22:59 L: returned deliver/NA/lem-sfb-norm-completion-positive-cohomology-mono (reviewer RETURN: E2: the new node lem-sfb-punctured-norm-class-finite-etale-descent is false. Counterexample with q=1: k algebraically cl)
