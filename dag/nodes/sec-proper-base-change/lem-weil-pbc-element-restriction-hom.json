@@ -1,136 +1,157 @@
 {
-  "id": "lem-weil-pbc-element-restriction-hom",
-  "kind": "statement",
-  "title": "Exact closed restriction on arbitrary element sites",
-  "statement": "For a commutative ring sheaf R, actual element restriction has a natural derived internal-Hom comparison. Further restriction along every sheaf arrow admits the exact additive, K-injective, unit and derived-Hom data of RingedPresentationCore, with identity unit. For each site object U the module category on C/U is equivalent to the module category on the element site of the sheafified representable of U; its forward unit and derived Hom are compatible and the usual overFunctor corresponds to element restriction. Actual restriction additivity, exactness, colimits, K-injectivity, element-map continuity and relocalization are already proved in RingedPresentationData and are not asserted as unfinished parts here.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI and 08JB; sites-modules.tex Tags 04IE and 04J4; sites.tex Tag 00Y1"
+ "id": "lem-weil-pbc-element-restriction-hom",
+ "kind": "statement",
+ "title": "Exact closed restriction on arbitrary element sites",
+ "statement": "For a commutative ring sheaf R, actual element restriction has a natural derived internal-Hom comparison. Further restriction along every sheaf arrow admits the exact additive, K-injective, unit and derived-Hom data of RingedPresentationCore, with identity unit. For each site object U the module category on C/U is equivalent to the module category on the element site of the sheafified representable of U; its forward unit and derived Hom are compatible and the usual overFunctor corresponds to element restriction. Actual restriction additivity, exactness, colimits, K-injectivity, element-map continuity and relocalization are already proved in RingedPresentationData and are not asserted as unfinished parts here.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI and 08JB; sites-modules.tex Tags 04IE and 04J4; sites.tex Tag 00Y1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "For a functor whose induced functors on all over categories are equivalences, precomposition gives a bijection on restricted module morphisms. Lift the underlying abelian-group natural transformation through the equivalence and prove linearity using essential surjectivity. These bijections yield a sectionwise sheaf-Hom isomorphism, natural in both variables.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-pbc-ringed-presentation-comparison-data"
-  ],
-  "proof": [
-    {
-      "text": "Use the already proved presentationElementRestriction_additive, _exact and _kInjective API theorems for actual element restriction. Its sectionwise formula sends the regular module to itself with identity unit comparison. Continuity and relocalization are also already proved in the same data module; the unfinished content begins with the derived-Hom comparison.",
-      "uses": [
-        "def-weil-pbc-ringed-presentation-comparison-data"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "At (U,a) the further slice of the element site is C/U: the section on V→U is forced by restriction of a. Therefore sectionwise sheaf Hom commutes with restriction. Products commute as well, so the Hom complex and its signed differential commute with restriction. Compute derived Hom using a K-injective target and its restricted K-injective target. The representing comparisons are natural in both arguments.",
-      "uses": [
-        "def-pur-sheaf-hom",
-        "def-pur-hom-complex",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For B→A, repeat the closed restriction calculation on the element site of A, obtaining the further-restriction core and its identity regular-unit comparison. Relocalization and element-map continuity are supplied by the proved data API. Over h_U#, the fibre/extension equivalence identifies localized sheaves with element-site sheaves. Transport module operations through its fibres; the restricted ring is R|U and ordinary restriction is the same functor under this equivalence. The preceding Hom calculation gives its forward closed comparison; the parent derives the reverse formally.",
-      "uses": [
-        "lem-weil-pbc-localized-sheaves-over-representable",
-        "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-        "def-weil-pbc-ringed-presentation-comparison-data"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-ringed-presentation-comparison-data",
-    "def-pur-sheaf-hom",
+  {
+   "text": "Restriction preserves integer-indexed products, as seen after the limit-reflecting forgetful functor to abelian presheaves. Compare Hom complexes by their product projections. The projection differential formula and naturality of the sheaf-Hom comparison prove compatibility with the signed differential and with both complex variables.",
+   "uses": [
     "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute derived Hom using the canonical functorial K-injective resolutions. Compare the restricted resolution with the resolution of the restricted complex through a common resolution. Their natural quasi-isomorphisms between K-injectives induce isomorphisms of Hom complexes after localization. Fully faithful whiskering by the product localization descends the resulting natural isomorphism. Apply this to the element projection, whose over-category functors are equivalences, using the existing exactness and K-injective API.",
+   "uses": [
     "def-pur-derived-internal-hom",
-    "lem-weil-pbc-localized-sheaves-over-representable",
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI and 08JB; sites-modules.tex Tags 04IE and 04J4; sites.tex Tag 00Y1; explicit comparison argument of the original nine-step presentation-transport proof"
+    "lem-pur-rhom-well-defined-universes",
+    "def-weil-pbc-ringed-presentation-comparison-data"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Restriction of sheaves of modules to the category of elements of an arbitrary sheaf preserves derived internal Hom and K-injective complexes",
-      "results": "[leanfinder] OK 8 hit(s); SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.homEquivOfIsLocallyBijective",
-      "date": "2026-10-21",
-      "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"SheafOfModules\", \"overFunctor\"",
-      "results": "[loogle] OK 2 hit(s); SheafOfModules.overFunctor, SheafOfModules.overFunctorMap",
-      "date": "2026-10-21",
-      "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
-    },
-    {
-      "tool": "grep",
-      "query": "overFunctor.*[Hh]om|[Hh]om.*overFunctor|element.*[Hh]om",
-      "results": "[grep] OK 25 hit(s); Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Continuity.lean:16, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean:41, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean:42, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean:43, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.lean:58, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unital.lean:153, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean:20, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean:86, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean:195, Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean:400, Mathlib/ModelTheory/ElementaryMaps.lean:141, Mathlib/ModelTheory/Order.lean:40, Mathlib/ModelTheory/Basic.lean:361, Mathlib/ModelTheory/Basic.lean:511, Mathlib/ModelTheory/Basic.lean:725, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean:621, Mathlib/Algebra/Algebra/NonUnitalHom.lean:115, Mathlib/Algebra/Algebra/NonUnitalHom.lean:133, Mathlib/Algebra/Algebra/Hom.lean:66, Mathlib/Algebra/Algebra/Hom.lean:528, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean:19, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean:65, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean:75, Mathlib/Analysis/Normed/Group/Hom.lean:15, Mathlib/Algebra/GradedMonoid.lean:644",
-      "date": "2026-10-21",
-      "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Restriction to the element site of a sheaf commutes with derived internal Hom and preserves K-injectives",
-      "results": "8 hits: CategoryTheory.Sheaf.ΓRes, CategoryTheory.sheafHom, AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Sheaf.natTransΓRes_app, SheafOfModules.restrictScalars, CategoryTheory.sheafHom'Iso, AlgebraicGeometry.Scheme.Modules.restrict, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom; ",
-      "date": "2026-10-21",
-      "verdict": "No match at the arbitrary ringed-topos and element-site scope."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.CategoryTheory.RingedPresentationTransport",
-    "date": "2026-10-21",
-    "group": "Z5"
+  {
+   "text": "For B→A construct the fibre sheaf on the element site of A, using the specified element-site fibre equivalence to verify its sheaf property. Flatten its iterated element category to the element category of B and prove this is an equivalence of sites by the covering-sieve formula. The continuous-cocontinuous ringed restriction and ringed module-equivalence theorem identify module restriction with this equivalence. Transport exactness, sequential colimits and K-injectivity from ordinary element restriction. The over-category equivalence for B→A follows by cancellation from those of the two projections, so the generic derived-Hom comparison applies. The regular-module unit is definitionally the identity.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "lem-weil-pbc-ringed-equivalence-module-hom",
+    "def-weil-pbc-ringed-presentation-comparison-data"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "prop-weil-pbc-scalar-extension",
-      "place": "Final scalar-extension/exchange clause: invariance of the ambient direct-image/completion comparison under ringed-topos presentations. Exact closed restriction on arbitrary element sites",
-      "via": [
-        "lem-weil-pbc-ringed-presentation-transport",
-        "lem-weil-pbc-ringed-pushforward-completion"
-      ]
-    },
-    "same_as": []
+  {
+   "text": "For U construct C/U→Elements(h_U#) by sending a→U to its sheafification section. It is faithful, cover-dense by local surjectivity of the sheafification unit, and locally full by local injectivity of that unit. Its image sieves cover exactly when the original slice sieves cover. The dense-subsite equivalence and continuous-cocontinuous ringed restriction give the closed module equivalence by the ringed-equivalence theorem. Reverse that equivalence and its derived-Hom comparison. The composite with ordinary restriction agrees sectionwise with element restriction, giving the required natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "lem-weil-pbc-ringed-equivalence-module-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined-universes",
+  "def-weil-pbc-ringed-presentation-comparison-data",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-ringed-equivalence-module-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI and 08JB; sites-modules.tex Tags 04IE and 04J4; sites.tex Tags 00Y1 and 0791; V7: product-projection Hom-complex comparison and canonical dense-subsite comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to the category of elements of an arbitrary sheaf preserves derived internal Hom and K-injective complexes",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.homEquivOfIsLocallyBijective",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
   },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.CategoryTheory.ElementRestrictionHom",
-    "file": "lean/Sheaf/CategoryTheory/ElementRestrictionHom.lean",
-    "declaration": "CategoryTheory.element_restriction_hom",
-    "statement": "theorem element_restriction_hom\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{u}) :\n    ∃ (s : ∀ {A B : Sheaf J (Type u)} (b : B ⟶ A),\n        RingedPresentationCore (presentationElementRing R A) (presentationElementRing R B)\n          (elementModulePullbackOver.{u, u} (localCoefficientRings R) b\n            (presentationElementRestriction_continuous b))),\n      (∀ A : Sheaf J (Type u),\n        Nonempty (presentationRHom R ⋙\n          presentationDerivedMap (R := R) (S := presentationElementRing R A)\n            (elementModulePullback.{u, u} (localCoefficientRings R) A)\n            (presentationElementRestriction_additive R A)\n            (presentationElementRestriction_exact R A).1\n            (presentationElementRestriction_exact R A).2.1 ≅\n          ((presentationDerivedMap (R := R) (S := presentationElementRing R A)\n            (elementModulePullback.{u, u} (localCoefficientRings R) A)\n              (presentationElementRestriction_additive R A)\n              (presentationElementRestriction_exact R A).1\n              (presentationElementRestriction_exact R A).2.1).op.prod\n            (presentationDerivedMap (R := R) (S := presentationElementRing R A)\n            (elementModulePullback.{u, u} (localCoefficientRings R) A)\n              (presentationElementRestriction_additive R A)\n              (presentationElementRestriction_exact R A).1\n              (presentationElementRestriction_exact R A).2.1)) ⋙\n            presentationRHom (presentationElementRing R A))) ∧\n      (∀ {A B : Sheaf J (Type u)} (b : B ⟶ A), (s b).unit = Iso.refl _) ∧\n      ∀ U : C,\n        ∃ E : RingedPresentationEquivalenceCore (R.over U)\n          (presentationElementRing R ((presheafToSheaf J (Type u)).obj (yoneda.obj U))),\n          Nonempty (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U ⋙\n            E.modules.functor ≅ elementModulePullback.{u, u} (localCoefficientRings R)\n              ((presheafToSheaf J (Type u)).obj (yoneda.obj U)))",
-    "branch": "sheaf-dag",
-    "by": "Z5",
-    "date": "2026-10-21"
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"overFunctor\"",
+   "results": "[loogle] OK 2 hit(s); SheafOfModules.overFunctor, SheafOfModules.overFunctorMap",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
   },
-  "reviewed": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "C-1ea02",
-    "group": "Z5",
-    "result": "pass",
-    "landing": "20261020T221408-L-4183112",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  {
+   "tool": "grep",
+   "query": "overFunctor.*[Hh]om|[Hh]om.*overFunctor|element.*[Hh]om",
+   "results": "[grep] OK 25 hit(s); Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Continuity.lean:16, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean:41, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean:42, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean:43, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.lean:58, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unital.lean:153, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean:20, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean:86, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean:195, Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean:400, Mathlib/ModelTheory/ElementaryMaps.lean:141, Mathlib/ModelTheory/Order.lean:40, Mathlib/ModelTheory/Basic.lean:361, Mathlib/ModelTheory/Basic.lean:511, Mathlib/ModelTheory/Basic.lean:725, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean:621, Mathlib/Algebra/Algebra/NonUnitalHom.lean:115, Mathlib/Algebra/Algebra/NonUnitalHom.lean:133, Mathlib/Algebra/Algebra/Hom.lean:66, Mathlib/Algebra/Algebra/Hom.lean:528, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean:19, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean:65, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean:75, Mathlib/Analysis/Normed/Group/Hom.lean:15, Mathlib/Algebra/GradedMonoid.lean:644",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
   },
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "C-1ea02",
-    "group": "Z5",
-    "result": "pass",
-    "landing": "20261020T221408-L-4183112",
-    "kind": "interface",
-    "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+  {
+   "tool": "leansearch",
+   "query": "Restriction to the element site of a sheaf commutes with derived internal Hom and preserves K-injectives",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes, CategoryTheory.sheafHom, AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Sheaf.natTransΓRes_app, SheafOfModules.restrictScalars, CategoryTheory.sheafHom'Iso, AlgebraicGeometry.Scheme.Modules.restrict, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom; ",
+   "date": "2026-10-21",
+   "verdict": "No match at the arbitrary ringed-topos and element-site scope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedPresentationTransport",
+  "date": "2026-10-21",
+  "group": "Z5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final scalar-extension/exchange clause: invariance of the ambient direct-image/completion comparison under ringed-topos presentations. Exact closed restriction on arbitrary element sites",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
   },
-  "lean_audit": {}
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ElementRestrictionHom",
+  "file": "lean/Sheaf/CategoryTheory/ElementRestrictionHom.lean",
+  "declaration": "CategoryTheory.element_restriction_hom",
+  "statement": "theorem element_restriction_hom\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{u}) :\n    ∃ (s : ∀ {A B : Sheaf J (Type u)} (b : B ⟶ A),\n        RingedPresentationCore (presentationElementRing R A) (presentationElementRing R B)\n          (elementModulePullbackOver.{u, u} (localCoefficientRings R) b\n            (presentationElementRestriction_continuous b))),\n      (∀ A : Sheaf J (Type u),\n        Nonempty (presentationRHom R ⋙\n          presentationDerivedMap (R := R) (S := presentationElementRing R A)\n            (elementModulePullback.{u, u} (localCoefficientRings R) A)\n            (presentationElementRestriction_additive R A)\n            (presentationElementRestriction_exact R A).1\n            (presentationElementRestriction_exact R A).2.1 ≅\n          ((presentationDerivedMap (R := R) (S := presentationElementRing R A)\n            (elementModulePullback.{u, u} (localCoefficientRings R) A)\n              (presentationElementRestriction_additive R A)\n              (presentationElementRestriction_exact R A).1\n              (presentationElementRestriction_exact R A).2.1).op.prod\n            (presentationDerivedMap (R := R) (S := presentationElementRing R A)\n            (elementModulePullback.{u, u} (localCoefficientRings R) A)\n              (presentationElementRestriction_additive R A)\n              (presentationElementRestriction_exact R A).1\n              (presentationElementRestriction_exact R A).2.1)) ⋙\n            presentationRHom (presentationElementRing R A))) ∧\n      (∀ {A B : Sheaf J (Type u)} (b : B ⟶ A), (s b).unit = Iso.refl _) ∧\n      ∀ U : C,\n        ∃ E : RingedPresentationEquivalenceCore (R.over U)\n          (presentationElementRing R ((presheafToSheaf J (Type u)).obj (yoneda.obj U))),\n          Nonempty (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U ⋙\n            E.modules.functor ≅ elementModulePullback.{u, u} (localCoefficientRings R)\n              ((presheafToSheaf J (Type u)).obj (yoneda.obj U)))",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261021T204044-L-3929134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {}
 }
