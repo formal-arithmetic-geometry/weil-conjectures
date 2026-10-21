@@ -373,7 +373,9 @@ theorem module_pullback_tensor_iso_tail
     exact (hq' M W m).trans (hq M W m).symm
   subst q'
   refine ⟨e, fun M M' N N' f g ↦ he f g, ?_⟩
+  -- Expose the normalization formula before specializing generalized sections.
+  unfold ringedComparisonPureCondition ringedComparisonPure at hp
   intro M N Z x y z hz W t
-  simpa only [Category.assoc, ringedComparisonPure] using hp M N Z x y z hz W t
+  simpa only [Category.assoc] using hp M N Z x y z hz W t
 
 end SheafOfModules
