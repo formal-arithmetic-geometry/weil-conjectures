@@ -1,6 +1,6 @@
 # Work queue
 
-477 items; claim with `tools/claim.py next <group> [--stage N]`.
+483 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (13 clusters, 1538 modules)
 
@@ -52,7 +52,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-dl-a1-galois-prime-residue-lifting` | - | none |
 | `lem-dl-a1-integral-normal-residue-etale-splitting` | - | none |
 
-## Stage 2: nodes to state (53)
+## Stage 2: nodes to state (52)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -97,7 +97,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-tensor-comparison-localization-descent` | 1 | state | 0 |
 | `lem-sfb-continuous-frame-sheaf-comparison` | 1 | state | 0 |
 | `lem-sfb-ordinary-proetale-direct-image-plus-comparison` | 1 | state | 0 |
-| `lem-sfb-reduction-single-cohomology-normalization` | 1 | state | 0 |
 | `lem-sp-normalized-error-tower-vanishing` | 1 | state | 0 |
 | `lem-sp-power-torsion-sheaf-limit-complete` | 1 | state | 0 |
 | `lem-sp-semilinear-kflat-tower-model` | 1 | state | 0 |
@@ -112,7 +111,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 355 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 122 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (381)
+## Stage 3: modules to prove (388)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -309,6 +308,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 7 | proof | 3 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatConstantScalarMono` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex` | - | 1 | proof | 4 |
+| `Sheaf.Algebra.Homology.CochainTensorModelRigidity` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints` | - | 4 | proof | 4 |
 | `Sheaf.Algebra.Homology.FiniteFreeMonoCokernelKFlat` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.FlatScalarEvaluationModel` | - | 1 | proof | 4 |
@@ -348,6 +348,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.Abelian.DerivedRepresentableTransport` | - | 4 | proof | 4 |
 | `Sheaf.CategoryTheory.AdjointEquivalenceConjugation` | - | 4 | proof | 4 |
 | `Sheaf.CategoryTheory.CofinalRoosRestriction` | - | 1 | proof | 4 |
+| `Sheaf.CategoryTheory.CompletedTensorRationalNaturality` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.DerivedCategory.ConstantTowerNormalization` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.DerivedTowerCounitProjections` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.FlatScalarKoszulTowerComparison` | - | 1 | proof | 4 |
@@ -359,7 +360,9 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.SiteRepresentableAlgebraicPullback` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.StrictRoosHomotopyFunctor` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.TowerLimitTransposeNormalization` | - | 1 | proof | 4 |
+| `Sheaf.Paper.AutomorphismCompletionUnitComparison` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CoefficientExtensionReductionModel` | - | 1 | proof | 4 |
+| `Sheaf.Paper.CompletedCoefficientPullbackLinearity` | - | 8 | proof | 4 |
 | `Sheaf.Paper.CompletedFiniteExchangeCoordinates` | - | 17 | proof | 4 |
 | `Sheaf.Paper.CompletedStrictOpenExchange` | - | 7 | proof | 4 |
 | `Sheaf.Paper.CompletedTensorScalarLinearity` | - | 1 | proof | 4 |
@@ -385,6 +388,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 10 | proof | 4 |
 | `Sheaf.Paper.OrdinaryPullbackStratifiedModels` | - | 10 | proof | 4 |
 | `Sheaf.Paper.PbcActualScalarPullback` | - | 2 | proof | 4 |
+| `Sheaf.Paper.PbcAutomorphismTransport` | - | 13 | proof | 4 |
 | `Sheaf.Paper.PbcFiniteRawScalarComparison` | - | 1 | proof | 4 |
 | `Sheaf.Paper.ProjectiveCohomologySplitModel` | - | 3 | proof | 4 |
 | `Sheaf.Paper.ProjectiveTopCellAttachment` | - | 1 | proof | 4 |
@@ -394,6 +398,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RestrictedScalarCohomologyLocalConstancy` | - | 1 | proof | 4 |
 | `Sheaf.Paper.RingedSitePerfectProjectionFormula` | - | 1 | proof | 4 |
 | `Sheaf.Paper.RingedSliceComparisonsShift` | - | 1 | proof | 4 |
+| `Sheaf.Paper.SfConstructibleCanonicalCompleteness` | - | 3 | proof | 4 |
 | `Sheaf.Paper.SfExactPullbackCounitNormalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SheafTensorIdealQuotient` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 4 |
@@ -442,6 +447,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.UnitAdjunctTensorAction` | - | 1 | proof | 5 |
 | `Sheaf.NumberTheory.Padics.FiniteSumLattice` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedLineTensorCoherence` | - | 23 | proof | 5 |
+| `Sheaf.Paper.CompletedTowerDirectImage` | - | 1 | proof | 5 |
 | `Sheaf.Paper.ComponentRelativeProfiniteSite` | - | 1 | proof | 5 |
 | `Sheaf.Paper.ConstructibleLocalizingDetermination` | - | 1 | proof | 5 |
 | `Sheaf.Paper.ContinuousLatticeSum` | - | 1 | proof | 5 |
@@ -500,7 +506,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPresentation` | - | 2 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.UnboundedDirectImageSectionPresheaf` | - | 1 | proof | 18 |
 
-## Stage 3: waiting for statements of dependencies (27)
+## Stage 3: waiting for statements of dependencies (25)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -518,11 +524,9 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CompletedOpenStrictMateIdentification` | - | 2 | `lem-cbc-ringed-open-scalar-limit-coherence` |
 | `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | `lem-pur-perfect-quotient-exchange-normalization` |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | `lem-weil-pbc-pulled-reduction-normalization-comparison` |
-| `Sheaf.Paper.ContinuousAlgClStratifiedFiniteModels` | - | 1 | `lem-sfb-normal-continuous-algcl-monodromy` |
 | `Sheaf.Paper.FiniteClopenConstructibilityBounds` | - | 1 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.FiniteClopenDerivedDecomposition` | - | 16 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.IntegralPullbackCompletedComparison` | - | 1 | `lem-a1-roos-intrinsic-unit-comparison` |
-| `Sheaf.Paper.NormalizedScalarComparisonRealization` | - | 1 | `lem-pur-completed-primitive-counit-comparison` |
 | `Sheaf.Paper.PbcScalarExtension` | - | 16 | `lem-weil-pbc-finite-free-strict-tower-transport` |
 | `Sheaf.Paper.PointFibreDerivedTensor` | - | 1 | `lem-sf-point-ringed-evaluation-model` |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | `lem-weil-point-finite-free-sections-tensor` |
