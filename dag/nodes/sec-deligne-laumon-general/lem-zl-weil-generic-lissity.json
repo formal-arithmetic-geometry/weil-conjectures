@@ -14,9 +14,127 @@
   "def-weil-weil-sheaf-complex",
   "def-pod-lisse-l-adic-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$, take $U_0=X_0$. On the empty scheme the zero inverse system is a lisse integral sheaf and its rationalization represents the unique heart object, so the restricted underlying sheaf is lisse. Restricting the given isomorphism and its inverse gives the Weil structure. This includes $X_0=\\varnothing$ and gives precisely $U_0=X_0$ in that case. Henceforth assume $X\\ne\\varnothing$.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.proof.md",
+    "place": "Paragraphs 1 and 4, including the empty-scheme convention of the item."
+   }
+  },
+  {
+   "text": "Base change makes $X$ separated of finite type over $k$ [lem-pod-separated-finite-type-base-change]; $X$ and $X_0$ are Noetherian, being of finite type over fields [lem-weil-pbc-finite-type-over-noetherian]. As $k_0$ is perfect and $X_0$ reduced, $X$ is reduced [lem-kun-geometric-reduced-perfect]. The identity-induced equivalence $J_X$ of [lem-fd-rational-coefficient-category-comparison] sends the heart of [def-weil-constructible-heart] used in [def-weil-weil-sheaf-complex] into the heart of [lem-per-adic-heart-pullback-fibres]: $J_X(E,K)=(E,K)$ on integral representatives, and both standard pairs are cut out by the same ambient cohomology sheaves of an integral representative in the same integral category. By the final clause of that node, $F$ is lisse of finite rank [def-pod-lisse-l-adic-sheaves] on the strata of a finite stratification $X=\\coprod_\\nu X_\\nu$. $X$ has finitely many irreducible components $C_i$ [lem-sc-noetherian-closed-subset-finite-components] with generic points $\\eta_i$ [lem-sc-scheme-sober]; the opens $V_i=X\\setminus\\bigcup_{j\\ne i}C_j$ are irreducible, pairwise disjoint, and $\\eta_i\\in V_i$. The stratum through $\\eta_i$ meets $V_i$ in a locally closed set containing its generic point, hence in a set containing an open $W_i\\ni\\eta_i$. Over $W_i$ the stratum immersion is a surjective immersion onto the reduced open $W_i$, hence an isomorphism, so $F|_{W_i}$ is lisse. Put $W=\\coprod_iW_i$, an open containing every component generic point. Then $F|_W$ is lisse: extend the finitely many finite-stage lisse models to their compositum [def-weil-algebraically-closed-coefficients] and take their disjoint union. Zero and unequal ranks are allowed.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-geometric-reduced-perfect",
+    "def-weil-constructible-heart",
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-per-adic-heart-pullback-fibres",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.6, 6.8.8 and 6.8.10; Proposition 6.8.14 (constructible = lisse on a finite stratification)."
+   }
+  },
+  {
+   "text": "Let $p:X=X_0\\times_{k_0}k\\to X_0$ be the projection. It is integral: for any affine open $\\operatorname{Spec}A\\subset X_0$, its inverse image is $\\operatorname{Spec}(A\\otimes_{k_0}k)$, and $A\\to A\\otimes_{k_0}k$ is integral by [lem-weil-pbc-integral-base-change], since every element of the algebraic extension $k/k_0$ satisfies a monic polynomial over $k_0$. The integral-morphism criterion then implies that $p$ is universally closed. Put $C=X\\setminus W$. Consequently $p(C)$ is closed, and $U_0=X_0\\setminus p(C)$ is an open subscheme with $p^{-1}(U_0)\\subset W$.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-base-change",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition 01WH (definition-integral), Lemma 01WM (lemma-integral-universally-closed); algebra.tex, Lemma 02JK (lemma-base-change-integral)."
+   }
+  },
+  {
+   "text": "The open $U_0$ contains every generic point $\\eta$ of $X_0$. Indeed, let $x\\in X$ lie over $\\eta$. By the finite irreducible-component covering of $X$ and sobriety, there is a component generic point $\\xi$ generalizing $x$. Continuity gives that $p(\\xi)$ generalizes $\\eta$; maximality of the component with generic point $\\eta$ and uniqueness of its generic point force $p(\\xi)=\\eta$. In an affine neighbourhood of $\\eta$ and its affine inverse image, the points $\\xi,x$ are comparable primes for an integral ring map, with equal contraction. Incomparability therefore gives $\\xi=x$. Thus $x$ is a component generic point and belongs to $W$, by step 2. No point of $C$ can lie over $\\eta$, so $\\eta\\notin p(C)$. Finally the finitely many components of $X_0$ cover it and are the closures of their generic points; since $U_0$ contains those points, its closure is all of $X_0$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "def-weil-irreducible-components",
+    "pqf-lem-incomparability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00GT (lemma-integral-no-inclusion); schemes.tex, Lemma 01IS (lemma-scheme-sober); properties.tex, Lemma 0BA8 (lemma-Noetherian-irreducible-components)."
+   }
+  },
+  {
+   "text": "Write $U=p^{-1}(U_0)=U_0\\times_{k_0}k$ and $j:U\\hookrightarrow X$. Its factorization through $W$ shows that $j^*F$ is lisse. Explicitly, restrict each finite-level locally constant sheaf of a lisse integral model on $W$ to the open $U$; it remains locally constant, and the tensor-transition isomorphisms restrict to the same isomorphisms. Rationalization and finite coefficient extension give the asserted lisse object at the common stage. The completed-system comparison identifies this restriction with the completed derived pullback on the constructible heart, which stays in that heart by [lem-per-adic-heart-pullback-fibres].",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-weil-pbc-etale-locally-constant-open-pullback",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) b)-d), pp.146-147; completed pullback comparison as in Bhatt-Scholze Proposition 6.8.4."
+   }
+  },
+  {
+   "text": "Because $U_0$ is an open of the finite-field model, the geometric Galois Frobenius preserves $U=p^{-1}(U_0)$ and $\\Phi_X\\circ j=j\\circ\\Phi_U$: on a base-changed affine chart both composites send $a\\otimes b$ to $a\\otimes\\gamma(b)$. Pullback composition therefore gives an isomorphism $L\\Phi_U^*Lj^*F\\cong Lj^*L\\Phi_X^*F$. Compose it with $Lj^*\\theta$ to obtain $\\theta_U:L\\Phi_U^*(j^*F)\\xrightarrow{\\sim}j^*F$. For the common-stage category this construction is made at a common finite coefficient field representing $F$, $\\theta$, its inverse, and their inverse equations. The integral composition isomorphism of [lem-pod-integral-pullback-composition] rationalizes at that field; passage to its common-stage class gives the displayed comparison. Its composite with the pulled-back inverse of $\\theta$ supplies the inverse of $\\theta_U$. By the fixed-pair definition this is a Weil sheaf, and step 5 makes it lisse. This completes every clause without asserting that geometric Frobenius is a $k$-morphism.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.proof.md",
+    "place": "Paragraph 4, finite-field-model choice; completed composition at integral stage and passage to common finite coefficient stages."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-integral-morphism",
+  "def-weil-frobenius-detailed",
+  "def-weil-irreducible-components",
+  "def-weil-weil-sheaf-complex",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-etale-locally-constant-open-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-base-change",
+  "pqf-lem-incomparability",
+  "pqf-lem-integral-univclosed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-stratification.proof.md",
+  "place": "Paragraphs 1 and 4; explicit closed-image construction beneath the unit route, using the stratified lissity of the common-stage constructible heart."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +170,45 @@
    "results": "Hits: BDeRham, BDeRhamPlus, IsArithFrobAt.arithFrobAt, Algebra.isOpen_unramifiedLocus, Algebra.isOpen_etaleLocus, Algebra.isOpen_smoothLocus, WittVector.exists_frobenius_solution_fractionRing, AlgebraicGeometry.exists_lift_of_germInjective_aux Read the returned signatures: the geometric affine-limit, locally quasi-finite, condensed locally constant, etale-locus, and Frobenius ring results do not state generic lissity of constructible Weil sheaves. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 defines ell-adic coefficient sheaves and their cohomology, not constructible Weil sheaves or their lisse loci.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicLisse|WeilSheaf|sfCommonStageWeilSheaf|generic.*lisse",
+   "results": "No hits. Read the returned types: these are condensed discrete sheaf constructions, affine limit statements, or ranks of finitely presented ring modules, and do not concern common-stage constructible adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible rational adic Weil sheaves are generically lisse over the finite field model",
+   "results": "Hits: CondensedSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.iso, LightCondensed, LightCondensed.lanLightCondSet, Condensed.lanSheafProfinite, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, LightCondensed.IsDiscrete, Condensed.lanCondensedSet Read the returned types: these are condensed discrete sheaf constructions, affine limit statements, or ranks of finitely presented ring modules, and do not concern common-stage constructible adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicConstructibleSheaf\", \"IsAdicLisseSheaf\"",
+   "results": "No hits. Read the returned types: these are condensed discrete sheaf constructions, affine limit statements, or ranks of finitely presented ring modules, and do not concern common-stage constructible adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible adic sheaf in the common finite coefficient stage category over a finite field is lisse on the base change of a dense open of the finite field model",
+   "results": "Hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType Read the returned types: these are condensed discrete sheaf constructions, affine limit statements, or ranks of finitely presented ring modules, and do not concern common-stage constructible adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a dense open subset on which a constructible ell adic sheaf becomes locally constant",
+   "results": "Hits: LightCondensed.locallyConstantPresheaf, LightCondSet.LocallyConstant.functor, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Condensed.locallyConstantPresheaf, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Module.isLocallyConstant_rankAtStalk_freeLocus, Profinite.exists_locallyConstant, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat Read the returned types: these are condensed discrete sheaf constructions, affine limit statements, or ranks of finitely presented ring modules, and do not concern common-stage constructible adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-zl-relative-line-stratification",
@@ -72,5 +225,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-weil-generic-lissity",
+  "worker": "stage1",
+  "summary": "Preserved the common-stage statement. Rejected the tempting upstream direct-Qbar pro-etale attachment because no comparison with the prescribed category is part of that theorem. Reused the stratified lissity of the common-stage heart (via the sf/PBC comparison) and existing geometric tools; constructed the model open by removing the integral projection of the bad closed locus and proved density by incomparability. No new nodes are needed. Included the empty scheme, variable rank, and the semilinear Frobenius restriction at a common coefficient stage.",
+  "blueprint": "thm-zl-relative-line-stratification.proof.md paragraph 1 is realized by steps 1-2 (geometric generic lissity); paragraph 4 by steps 3-6 (dense open over the model and its restricted Weil structure).",
+  "tool_uses": [
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Its final clause gives the finite lisse stratification of a common-stage heart object; also cohomology and preservation under restriction."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Identity-induced comparison of the raw sf and PBC common-stage categories, transporting the item heart to that of lem-per-adic-heart-pullback-fibres (reviewer FIX replacing a route-pivot-dropped citation)."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Identifies finite-level lisse-system restriction with completed pullback in the prescribed heart."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "General completed-pullback composition supplies the Frobenius restriction comparison at finite coefficient stage."
+   },
+   {
+    "node": "lem-weil-pbc-etale-locally-constant-open-pullback",
+    "why": "General geometric or finite-level sheaf tool used with its stated hypotheses; this unit has no replacement for this background assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-pod-integral-pullback-composition",
+  "lem-weil-pbc-etale-locally-constant-open-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-d84fae333",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-d84fae333 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps and every cited statement. There are no new nodes. The item is live: it is not on route-pivot-dropped.txt, its citer thm-zl-relative-line-stratification is live, it has no repair note and it is not a re-split. The statement is unchanged and nothing cites SGA. Steps 1 and 3-6 are sound. Step 1 handles the empty scheme. Step 3 shows the projection p from X to X_0 is integral on charts (k/k_0 is algebraic), so p(C) is closed (Stacks 01WM/02JK). Step 4 proves density by incomparability (00GT), using 01IS and 0BA8; I tested an X_0 that is not geometrically irreducible. Step 5 restricts to the open; step 6 builds the Weil structure from Phi_X∘j = j∘Phi_U and integral pullback composition, which allows semilinear Frobenius. The closed-image construction U_0 = X_0 minus p(C) is a valid argument below paragraph 4 of the main-20261015 proof. I fixed two faults, both in step 2. (1) Step 2 cited lem-per-qbar-generic-duality-model, which the 2026-10-19 artin-gabber drop removed (line 1838; see coord/repair-notes/lem-per-artin-gabber-affine-curve.json). It used only that node's generic-open clause, and that clause came from the final clause of lem-per-adic-heart-pullback-fibres plus component bookkeeping. I re-proved it inline: lisse on a finite stratification (Bhatt-Scholze 6.8.6/6.8.14), opens V_i around the component generic points, a stratum containing a generic point contains an open, and strata are isomorphic over those opens because X is reduced (lem-kun-geometric-reduced-perfect). (2) Delivery-errors E: step 2 said the cited node uses 'exactly the same heart'. It does not: the item uses the sf categories and the node uses the PBC categories. I added lem-fd-rational-coefficient-category-comparison, which gives an identity-induced equivalence J. The two integral categories are the same and both t-structures are defined by the same cohomology sheaves, so J carries one heart into the other. The fixed step 2 is 1687 characters; proof_deps is the union of the step uses, and split_report.tool_uses is updated. Batch-5 check: lem-per-adic-heart-pullback-fibres and lem-per-lisse-completed-system-comparison reach only def-pod-lisse-l-adic-sheaves, a pure definition, so I accept them; the dropped node is removed. The fixed closure adds 0 sec-trace-formula or sec-poincare-duality nodes to the closure of thm-zl-relative-line-stratification and contains no dropped id. I rejected the alternative citation lem-zl-raw-heart-adic-lisse-stratification because it would add 2 batch-5 nodes. Artin-gabber route check: the dropped citation is removed and the item uses none of the excluded routes. Maintainer note: lem-zl-raw-heart-adic-lisse-stratification (Q124) overlaps the geometric part of step 2.; 1 file(s) fixed by the reviewer"
  }
 }
