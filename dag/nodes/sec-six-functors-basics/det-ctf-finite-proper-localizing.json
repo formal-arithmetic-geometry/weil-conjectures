@@ -46,175 +46,39 @@
  ],
  "proof": [
   {
-   "text": "First fix the coefficient and geometric conventions for the transfer. A field is Noetherian because its only ideals are zero and the unit ideal; hence its one-point affine spectrum is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure map of each standing scheme $T$: it is Noetherian, in particular quasi-compact. It is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. For every proper morphism used below, including those between non-Noetherian base changes, finite type implies quasi-compactness by definition, and separatedness implies quasi-separatedness by [lem-pc-separated-quasi-separated]. Thus each such morphism is qcqs. The ring $A$ is Noetherian since its finite set of ideals admits no infinite strictly increasing chain. By [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant], the finite condensed coefficient ring on $T$ is the ordinary constant ring sheaf. Transport of a module action along this ring isomorphism has an inverse, leaves the underlying abelian sheaf unchanged, and identifies tensors, complexes and their quasi-isomorphisms. We therefore use these ordinary constant-$A$ categories throughout. By [det-pe-finite-tor-comparison-noetherian], applicable since $T$ is qcqs and $A$ is discrete Noetherian, the comparison $\\nu_T^*$ identifies the étale and pro-étale $\\Dctf$ subcategories, preserving each Tor interval.",
+   "text": "Each standing scheme is Noetherian and qcqs: a field is Noetherian, then apply [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-locally-noetherian-quasi-separated]. A finite ring is Noetherian by the ascending chain condition on its finite ideal set. The two finite-discrete coefficient lemmas identify its condensed pullback with constant $A$. Hence [det-pe-finite-tor-comparison-noetherian] identifies the étale and pro-étale Dctf subcategories. Obtain $e$ and the uniform geometric bound from [lem-sfb-finite-proper-geometric-cd-bound], and classicality of the localizing closure from [lem-sfb-finite-classical-localizing].",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-finite-discrete-condensed-ring-constant",
     "lem-weil-pbc-finite-discrete-scheme-ring-constant",
     "det-pe-finite-tor-comparison-noetherian",
-    "lem-pc-separated-quasi-separated"
+    "lem-sfb-finite-proper-geometric-cd-bound",
+    "lem-sfb-finite-classical-localizing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: coefficient conventions and correspondence of the small subcategories"
+    "place": "Transfer: coefficient and generator conventions"
    }
   },
   {
-   "text": "We verify the uniform fibre bound needed by [det-ctf-finite-proper-tor], rather than treating it as an unstated hypothesis. Properness includes finite type, and $Y$ is quasi-compact by step 1, so [lem-fin-finite-type-fibre-dimension-bound] gives $e\\geq0$ with $\\dim X_y\\leq e$ for every $y$. For any geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$, where $\\Omega$ is an arbitrary separably closed field, [lem-sc-fibre-dimension-after-base-change] identifies every local dimension on $X_{\\bar y}$ with the corresponding local dimension on $X_y$; [lem-weil-pbc-dimension-supremum-local-dimensions] then gives $\\dim X_{\\bar y}\\leq e$. The map $X_{\\bar y}\\to\\operatorname{Spec}\\Omega$ is proper by [lem-pc-proper-base-change]. By [lem-kun-03qu-sep-closed], the separably closed field $\\Omega$ has torsion cohomological dimension zero: every abelian sheaf on its étale point has no positive cohomology. For a nonempty geometric fibre of dimension $r\\leq e$, [thm-sc-finite-type-torsion-cd] with $c=0$ gives torsion cohomological dimension at most $2r\\leq2e$. Its finite-type hypothesis holds because the displayed structure map is proper. This applies in particular to $\\ell$-primary sheaves, giving the required uniform $\\ell$-cohomological bound $d=2e$. Thus, for every $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ and any Tor interval $[a,b]$ for $C$, [det-ctf-finite-proper-tor] gives $Rp_{\\mathrm{ét},*}C\\in\\Dctf(Y_{\\mathrm{ét}},A)$, with interval $[a,b+2e]$. Empty fibres contribute no cohomology and satisfy the dimension bound.",
+   "text": "The bound $2e$ allows [det-ctf-finite-proper-tor] to send an étale $C$ of Tor interval $[a,b]$ into the small target category with interval $[a,b+2e]$. Proper maps are qcqs (finite type and [lem-pc-separated-quasi-separated]). The bounded-below comparison [sk-thm-pe-direct-image-comparison] identifies $Rp_*\\nu_X^*C$ with $\\nu_Y^*Rp_{\\mathrm{ét},*}C$. Thus $Rp_*$ preserves the small subcategory.",
    "uses": [
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-weil-pbc-dimension-supremum-local-dimensions",
-    "lem-pc-proper-base-change",
-    "lem-kun-03qu-sep-closed",
-    "thm-sc-finite-type-torsion-cd",
-    "det-ctf-finite-proper-tor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095U, lemma-cohomological-dimension-proper; fibre bound: morphisms.tex Tag 0A3V, lemma-morphism-finite-type-bounded-dimension; the Tor step is det-ctf-finite-proper-tor in the current blueprint"
-   }
-  },
-  {
-   "text": "For $K\\in\\Dctf(X,A)$ choose $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ with $K\\simeq\\nu_X^*C$ by step 1. The complexes $C$ and $Rp_{\\mathrm{ét},*}C$ are bounded by step 2. Proper $p$ is qcqs, so the bounded-below comparison [sk-thm-pe-direct-image-comparison] gives $Rp_*K\\simeq\\nu_Y^*Rp_{\\mathrm{ét},*}C$. The finite-Tor equivalence of step 1 and step 2 put this in $\\Dctf(Y,A)$. This uses no unbounded direct-image comparison and no condition on the cohomological dimension of $k$.",
-   "uses": [
+    "det-ctf-finite-proper-tor",
+    "lem-pc-separated-quasi-separated",
     "sk-thm-pe-direct-image-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
+    "place": "Étale statements and Transfer: preservation of generators"
    }
   },
   {
-   "text": "Let $\\mathcal C_T$ denote the full subcategory of the ordinary pro-étale derived category consisting of complexes with classical cohomology sheaves. The sheaf-level comparison [det-pe-classical-sheaves-modules] is exact and left adjoint, so arbitrary sums of classical sheaves are classical. By [det-pe-classical-derived-weak-serre], kernels, cokernels and extensions of classical sheaves are classical. Module sheaves form a Grothendieck abelian category by [lem-pur-ringed-site-grothendieck-abelian]; hence arbitrary sums are exact (express a sum as the filtered colimit of finite sums), and commute with cohomology. By [lem-kun-grothendieck-derived-coproducts], these termwise sums are the actual ambient derived coproducts. The cohomology long exact sequence now shows that $\\mathcal C_T$ is replete, triangulated and closed under those coproducts. It contains $\\Dctf(T,A)$ by step 1, hence contains $\\Loc(\\Dctf(T,A))$ by [sk-def-localizing-closure]. The inverse-image comparison in [sk-thm-pe-direct-image-comparison] and exactness of constant-coefficient inverse image show that any scheme pullback takes classical cohomology to classical cohomology, and commutes with truncation.",
+   "text": "By [lem-sfb-finite-proper-classical-coproducts], $Rp_*$ preserves sums of classical complexes. It is triangulated by [lem-pc-right-derived-functor-triangulated]. Therefore the classical objects sent into $\\Loc(\\Dctf(Y,A))$ form a replete triangulated subcategory closed under ambient sums and containing $\\Dctf(X,A)$. Minimality [sk-def-localizing-closure] gives preservation of its closure. Apply [lem-weil-pbc-triangulated-functor-restriction] for the exact restriction, proving (1).",
    "uses": [
-    "det-pe-classical-sheaves-modules",
-    "det-pe-classical-derived-weak-serre",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-kun-grothendieck-derived-coproducts",
-    "sk-def-localizing-closure",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "Keep the bound $e$ of step 2. For every affine weakly contractible object $V\\to Y$ put $Z=X\\times_YV$, $h=p_V:Z\\to V$. Properness is preserved by base change [lem-pc-proper-base-change]. The fibre comparison [lem-sc-fibre-dimension-after-base-change] and the supremum of local dimensions [lem-weil-pbc-dimension-supremum-local-dimensions] show that all ordinary fibres of $h$ have dimension at most $e$, even though $V$ need not be Noetherian. If $H$ is ANY classical $A$-module sheaf on $Z_{\\mathrm{proét}}$, write $H=\\nu_Z^*F$ using [det-pe-classical-sheaves-modules]. Its underlying étale abelian sheaf is killed by $\\ell^n$. Therefore [lem-kun-proper-torsion-cd-bound] gives $R^qh_{\\mathrm{ét},*}\\operatorname{For}(F)=0$ for $q>2e$. Apply clause (2) of [lem-weil-pbc-exchange-forget-coefficients] to $h$ in its cartesian square with identity base change: forgetting coefficients commutes with bounded-below derived direct image and detects zero sheaves. Thus $R^qh_{\\mathrm{ét},*}F=0$ in that range. The qcqs bounded-below comparison [sk-thm-pe-direct-image-comparison], applied just to the sheaf $F[0]$, gives $R^qh_*H=0$ for $q>2e$. Every cited cohomological statement in this step allows this non-Noetherian $V$ and $Z$.",
-   "uses": [
-    "lem-pc-proper-base-change",
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-weil-pbc-dimension-supremum-local-dimensions",
-    "det-pe-classical-sheaves-modules",
-    "lem-kun-proper-torsion-cd-bound",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "The terminal object $V$ of $V_{\\mathrm{proét}}$ is weakly contractible: by [lem-weil-proetale-weakly-etale-localization] and [lem-weil-pbc-localized-sheaves-over-representable], this topos is $\\operatorname{Sh}(Y_{\\mathrm{proét}})/h_V$. An epimorphism onto its terminal object is an epimorphism onto $h_V$ in the original topos, and splits by the defining projectivity of $h_V$ in [sk-def-pe-weak-contractible]. It is affine as well. Consequently $\\Gamma(V,-)$ is exact by [det-proper-heart-continuity-sections]. The derived composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $Z\\xrightarrow{h}V\\to\\mathrm{point}$ identifies $R\\Gamma(Z,H)$ with $R\\Gamma(V,Rh_*H)$. Exactness of $\\Gamma(V,-)$ and step 5 give $H^q(Z,H)=0$ for every classical $H$ and $q>2e$. In particular this bound is for ALL classical sheaves on $Z$, not merely those pulled back from $X$.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-localized-sheaves-over-representable",
-    "sk-def-pe-weak-contractible",
-    "det-proper-heart-continuity-sections",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "For an unbounded $K\\in\\mathcal C_X$, choose a K-injective representative $I$ using [sk-def-sfb-derived-categories]. By [det-pe-topos-functoriality-inverse-image], an affine weakly contractible $V\\to Y$ gives the site object $r:Z=X\\times_YV\\to X$, and $(p_*I)(V)=\\Gamma(Z,I|_Z)$ as complexes. The site and constant coefficients on $Z$ are the localization at this object by [lem-weil-proetale-weakly-etale-localization]. By [lem-pur-kinjective-restrict-localized], $I|_Z$ is K-injective. Exact evaluation at $V$, supplied by [det-proper-heart-continuity-sections], therefore gives, naturally in $K$,\n$$ (\\mathcal H^mRp_*K)(V)=H^mR\\Gamma(Z,K|_Z). $$",
-   "uses": [
-    "sk-def-sfb-derived-categories",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-kinjective-restrict-localized",
-    "det-proper-heart-continuity-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "We identify the restriction used in step 7 with scheme inverse image directly from the formulas. Under [lem-weil-proetale-weakly-etale-localization], the base-change functor $u(T)=T\\times_XZ$ has left adjoint $a:(W\\to Z)\\mapsto(W\\to X)$, since $\\operatorname{Hom}_X(aW,T)=\\operatorname{Hom}_Z(W,uT)$. Thus the comma category computing $(\\operatorname{Lan}_{u^{\\mathrm{op}}}F)(W)$ has terminal object the unit $W\\to u(aW)$, so this value is $F(aW)$. These values already form the restriction sheaf by the covering identification in that localization statement. Consequently the inverse-image formula of [det-pe-topos-functoriality-inverse-image] is exactly $F|_Z$, including its scalar actions. Its derived functor is the exact termwise restriction [def-weil-pbc-ringed-derived-restriction]. Step 4 applied to the scheme morphism $r$ now shows that $K|_Z$ has classical cohomology. Exactness also gives $(\\tau_{\\ge N}K)|_Z=\\tau_{\\ge N}(K|_Z)$, by the kernels and cokernels defining good truncation.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "det-pe-topos-functoriality-inverse-image",
-    "def-weil-pbc-ringed-derived-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "Apply [det-pe-unbounded-classical-truncation], clause (2), on $Z$ with its terminal object and the bound $2e$ proved in step 6. For $N<m-2e-1$, the map induced by $K\\to\\tau_{\\ge N}K$ is an isomorphism in degree $m$ on every affine weakly contractible $V\\to Y$. By [det-pe-sections-conservative] this gives the natural sheaf isomorphism\n$$\\mathcal H^mRp_*K\\xrightarrow{\\sim}\\mathcal H^mRp_*\\tau_{\\ge N}K.$$",
-   "uses": [
-    "det-pe-unbounded-classical-truncation",
-    "det-pe-sections-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "For a cartesian base change $p':X'=X\\times_YY'\\to Y'$ and an affine weakly contractible $W\\to Y'$, put $Z'=X'\\times_{Y'}W=X\\times_YW$. Its proper map to $W$ has the same fibre bound $e$ by step 5, and step 6 gives $H^q(Z',H')=0$ for all classical $H'$ and $q>2e$. If $J\\in\\mathcal C_{X'}$ and $I'$ is K-injective representing it, [lem-pur-kinjective-restrict-localized] and the localization in steps 7--8 give a K-injective $I'|_{Z'}$ representing the classical restriction $J|_{Z'}$. The direct-image formula and exact evaluation in step 7 give\n$$(\\mathcal H^mRp'_*J)(W)=H^mR\\Gamma(Z',J|_{Z'}).$$\nApply clause (2) of [det-pe-unbounded-classical-truncation] with $N<m-2e-1$. Its truncation map is invertible on each such $W$, and [det-pe-sections-conservative] yields the natural sheaf isomorphism\n$$\\mathcal H^mRp'_*J\\xrightarrow{\\sim}\\mathcal H^mRp'_*\\tau_{\\ge N}J.$$",
-   "uses": [
-    "lem-pur-kinjective-restrict-localized",
-    "det-pe-unbounded-classical-truncation",
-    "det-pe-sections-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "First take a small family of complexes $L_s$ with a common lower cohomological bound $N$. Replace each by its good lower truncation representative, which has zero terms below $N$. Index their finite direct sums by the filtered set of finite subsets of the indexing set. Their termwise colimit is $\\bigoplus_sL_s$. By [det-pe-bounded-continuity-direct-image], for qcqs $p$ this filtered colimit commutes with every $\\mathcal H^mRp_*$. The finite-subset complexes all vanish below the SAME $N$, as required by that statement. The unbounded derived functor is triangulated, in particular additive, by [lem-pc-right-derived-functor-triangulated]. Its additivity identifies the finite sums of images with the images of finite sums. Exact sums in the module category and [lem-kun-grothendieck-derived-coproducts] therefore identify the resulting map with\n$$ \\mathcal H^m(\\bigoplus_sRp_*L_s)\\xrightarrow{\\sim}\\mathcal H^mRp_*(\\bigoplus_sL_s). $$\nAll identifications respect the coprojections, being induced by the finite-subset inclusions. In particular this is the canonical ambient coproduct comparison; the empty family gives zero.",
-   "uses": [
-    "det-pe-bounded-continuity-direct-image",
-    "lem-kun-grothendieck-derived-coproducts",
-    "lem-pc-right-derived-functor-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "Now let $(K_s)$ be any small family in $\\mathcal C_X$ and fix $m$. Its sum remains in $\\mathcal C_X$ by step 4. Put $N=m-2e-2$, so $N<m-2e-1$. Exactness of sums implies that good truncation commutes with sums: degreewise this follows because both kernels and cokernels commute with exact sums. Use step 9 for each $K_s$ and for $\\bigoplus_sK_s$, and use step 11 for $L_s=\\tau_{\\geq N}K_s$. Naturality gives a commutative square whose upper horizontal map is $\\mathcal H^m$ of the actual coproduct comparison for the $K_s$, lower horizontal map is the isomorphism of step 11, and both vertical maps are the truncation isomorphisms of step 9 (on the left summed over $s$). Thus the upper map is an isomorphism. This holds for every $m$, so the comparison is an isomorphism in the derived category. Here cohomology commutes with the source coproduct by the Grothendieck and termwise-coproduct facts in step 4. This proves preservation of ambient sums for families in $\\mathcal C_X$, in particular in $\\Loc(\\Dctf(X,A))$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "The total $Rp_*$ is triangulated by [lem-pc-right-derived-functor-triangulated], using the Grothendieck module categories and their K-injective resolutions. Inside the ambient category, consider the objects $K\\in\\mathcal C_X$ with $Rp_*K\\in\\Loc(\\Dctf(Y,A))$. They form a full replete triangulated subcategory by exactness, and are closed under arbitrary ambient coproducts by steps 4 and 12 and the coproduct closure of the target. They contain $\\Dctf(X,A)$ by step 3. The defining minimality [sk-def-localizing-closure] therefore puts $\\Loc(\\Dctf(X,A))$ in this subcategory. Apply [lem-weil-pbc-triangulated-functor-restriction] to obtain the exact restriction, with the ambient shift and triangle structures; step 12 gives its sum preservation. This completes (1).",
-   "uses": [
+    "lem-sfb-finite-proper-classical-coproducts",
     "lem-pc-right-derived-functor-triangulated",
     "sk-def-localizing-closure",
     "lem-weil-pbc-triangulated-functor-restriction"
@@ -222,101 +86,54 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
+    "place": "Transfer: localizing minimality"
    }
   },
   {
-   "text": "For clause (2), take the cartesian square [def-weil-pbc-cartesian-square] with $p$ proper, projections $p',g'$, and arbitrary $g:Y'\\to Y$. The ambient exchange [def-weil-pbc-ambient-ringed-exchange] is the specified mate $\\beta$, whose transpose is $g'^*\\varepsilon_p\\circ\\theta_\\square$. First let $B$ be bounded below with classical cohomology. By [sk-prop-sf-comparison], the derived unit hypothesis of [det-pe-classical-derived-equivalence] holds for the discrete ring $A$. That equivalence supplies $L\\in D^+(X_{\\mathrm{\\acute et}},A)$ and $B\\simeq\\nu_X^*L$. All cohomology is killed by $\\ell^n$. The étale abelian exchange on $\\operatorname{For}L$ is invertible by [thm-weil-pbc-bounded-below], and clause (3) of [lem-weil-pbc-exchange-forget-coefficients] makes the étale module exchange $E_L$ invertible. Both $p$ and $p'$ are qcqs by step 1. Hence [lem-weil-pbc-transport-identifies-exchange] applies with this finite discrete $A$ and gives invertible $S_L,T_L$ with\n$$\\beta_{\\nu_X^*L}\\circ S_L=T_L\\circ\\nu_{Y'}^*(E_L).$$\nThus $\\beta_B$ is invertible. This identifies the actual ambient mate, rather than choosing an isomorphism between its endpoints, and only uses bounded-below comparison.",
+   "text": "For (2), fix $m$ and set $N=m-2e-2$. The canonical mate [def-weil-pbc-ambient-ringed-exchange] is natural for $K\\to\\tau_{\\geq N}K$. Its left vertical map is invertible in degree $m$ by [lem-sfb-finite-proper-classical-truncation] and exact $g^*$. The right one is invertible by the same lemma after base change: [lem-sfb-finite-classical-localizing] makes $g'^*K$ classical, and exact pullback commutes with truncation. The bottom mate is invertible by [sk-thm-properbasechange], since its input is bounded below and its underlying cohomology is killed by $\\ell^n$. This theorem's exchange is the same unit--square--counit mate. Hence $\\mathcal H^m\\beta_K$ is invertible for every $m$, proving (2).",
    "uses": [
-    "def-weil-pbc-cartesian-square",
     "def-weil-pbc-ambient-ringed-exchange",
-    "sk-prop-sf-comparison",
-    "det-pe-classical-derived-equivalence",
-    "thm-weil-pbc-bounded-below",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lem-weil-pbc-transport-identifies-exchange"
+    "lem-sfb-finite-proper-classical-truncation",
+    "lem-sfb-finite-classical-localizing",
+    "sk-thm-properbasechange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
+    "place": "Étale statements: bounded-below proper base change and naturality"
    }
   },
   {
-   "text": "For $K\\in\\Loc(\\Dctf(X,A))\\subseteq\\mathcal C_X$ fix $m$ and set $N=m-2e-2$. Naturality of the mate formula [def-weil-pbc-ambient-ringed-exchange] gives the square with top arrow $\\beta_K$, bottom arrow $\\beta_{\\tau_{\\ge N}K}$, and vertical arrows induced by $K\\to\\tau_{\\ge N}K$. Its left vertical map is invertible in degree $m$ by step 9 and exactness of $g^*$. Its right vertical map is invertible by step 10 with $J=g'^*K$: step 4 makes $J$ classical, and exact $g'^*$ commutes with truncation. The bottom arrow is invertible by step 14. Commutativity of this square implies that $\\mathcal H^m\\beta_K$ is invertible. This holds for every $m$, proving clause (2), with no flatness hypothesis on $g$.",
-   "uses": [
-    "def-weil-pbc-ambient-ringed-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: relative finite-cohomological-dimension argument; Transfer restricted to bounded-below comparisons"
-   }
-  },
-  {
-   "text": "For an open immersion $j:U\\hookrightarrow X$ apply [det-proper-image-localizing-open] with $\\Lambda=A$ carrying its discrete topology. Its scheme hypotheses hold because $U,X$ are standing schemes over the same field of characteristic different from $\\ell$; its finite-admissible coefficient case is exactly the finite commutative ring annihilated by $\\ell^n$ used here. Its ambient categories are the ordinary unbounded module-object categories, identified with the constant-$A$ categories in step 1; its $\\Dctf$ and ambient coproduct closure have the same definitions as in this item. That theorem gives preservation of $\\Dctf$, all small ambient sums, and an exact sum-preserving restriction to the two localizing closures. This supplies the open part of (3) from an existing theorem for all admissible coefficients, without introducing a node restating the clause.",
+   "text": "Apply [det-proper-image-localizing-open] to the admissible coefficient $A$ with its discrete topology. It gives all open assertions in (3). For a compactification compose its exact sum-preserving restriction with that of (1). The two canonical coproduct comparisons compose, preserving each coprojection, so the composite preserves sums and the small subcategory, including the empty family.",
    "uses": [
     "det-proper-image-localizing-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Extension by zero: specialize the existing admissible-coefficient theorem; its current-blueprint proof verifies exactness, constructibility, Tor intervals and coproducts"
-   }
-  },
-  {
-   "text": "For a chosen compactification $f=p\\circ j$, apply step 16 to $j:U\\hookrightarrow X$ and step 13 to $p:X\\to Y$. Each takes finite-Tor constructible objects into the corresponding small category and restricts to an exact functor of the closures, so their composite does too. For a family $(K_s)$ in the source closure, the two canonical coproduct comparisons compose to\n$$Rp_*j_!(\\bigoplus_sK_s)\\simeq Rp_*(\\bigoplus_sj_!K_s)\\simeq\\bigoplus_sRp_*j_!K_s.$$\nThe composite preserves coprojections because each constituent does. It is invertible, including for the empty family. This proves the compactification clause of (3).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Extension by zero: final composition with (1)"
+    "place": "Extension by zero and composition"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-ringed-derived-restriction",
   "det-ctf-finite-proper-tor",
-  "det-pe-bounded-continuity-direct-image",
-  "det-pe-classical-derived-equivalence",
-  "det-pe-classical-derived-weak-serre",
-  "det-pe-classical-sheaves-modules",
   "det-pe-finite-tor-comparison-noetherian",
-  "det-pe-sections-conservative",
-  "det-pe-topos-functoriality-inverse-image",
-  "det-pe-unbounded-classical-truncation",
-  "det-proper-heart-continuity-sections",
   "det-proper-image-localizing-open",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-03qu-sep-closed",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-pc-proper-base-change",
   "lem-pc-right-derived-functor-triangulated",
   "lem-pc-separated-quasi-separated",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sc-fibre-dimension-after-base-change",
-  "lem-weil-pbc-dimension-supremum-local-dimensions",
-  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-sfb-finite-classical-localizing",
+  "lem-sfb-finite-proper-classical-coproducts",
+  "lem-sfb-finite-proper-classical-truncation",
+  "lem-sfb-finite-proper-geometric-cd-bound",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
   "lem-weil-pbc-finite-discrete-scheme-ring-constant",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-localized-sheaves-over-representable",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-transport-identifies-exchange",
   "lem-weil-pbc-triangulated-functor-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
   "sk-def-localizing-closure",
-  "sk-def-pe-weak-contractible",
-  "sk-def-sfb-derived-categories",
-  "sk-prop-sf-comparison",
   "sk-thm-pe-direct-image-comparison",
-  "thm-sc-finite-type-torsion-cd",
-  "thm-weil-pbc-bounded-below"
+  "sk-thm-properbasechange"
  ],
  "proof_origin": {
   "by": "agent",
@@ -416,171 +233,55 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-ctf-finite-proper",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-ctf-finite-proper-localizing",
-  "worker": "stage1",
-  "summary": "Repaired the retained seventeen-step general-field split: correct K-injective citation, explicit elementary restriction identification, existing bounded-below classical equivalence and canonical mate transport, current step references, and complete citation quotes. No new nodes; all steps are shorter than 2000 characters.",
-  "blueprint": "Steps 1–6 retain the finite-Tor and relative cohomological-dimension route. Steps 7–10 give localization, evaluation, and finite-window truncation. Steps 11–13 prove sums and localizing closure. Steps 14–15 transfer the bounded-below canonical mate and upgrade it by truncation. Steps 16–17 give extension by zero and composition.",
+  "worker": "Q60",
+  "summary": "Repair of the 2026-10-21 proof-length return under the clarified statement-only route note: four new unsplit lemmas isolate geometric cohomological dimension, classical localizing closure, relative truncation and arbitrary classical coproducts. The unchanged statement now has a short five-step assembly. All prior proof drafts and logged searches are retained; two deeper helper drafts are recorded in the report for the later split of the truncation lemma, rather than delivered as unused nodes.",
+  "blueprint": "Step 1: Transfer coefficient comparison and uniform fibre bound; step 2: Étale statements finite Tor and bounded comparison; step 3: Transfer localizing minimality; step 4: Étale statements bounded-below base change upgraded by the relative window; step 5: Extension by zero. The previously reviewed general-field repair remains unchanged.",
   "tool_uses": [
    {
-    "node": "def-weil-pbc-ambient-ringed-exchange",
-    "why": "The generic mate definition normalizes the actual base-change map before any boundedness condition."
-   },
-   {
-    "node": "det-pe-bounded-continuity-direct-image",
-    "why": "Generic qcqs bounded-below continuity supplies the common-lower-bound coproduct comparison; finite-window truncation then gives the source unbounded assertion."
-   },
-   {
-    "node": "det-pe-classical-derived-weak-serre",
-    "why": "Generic weak Serre statement is exactly what establishes classical cohomology as a triangulated subcategory."
-   },
-   {
-    "node": "det-pe-classical-sheaves-modules",
-    "why": "Sheaf-level classical comparison identifies each sheaf in the relative cohomological bound and establishes closure of classical sheaves under sums."
-   },
-   {
     "node": "det-pe-finite-tor-comparison-noetherian",
-    "why": "The generator comparison required by the source transfer, with its qcqs and Noetherian coefficient hypotheses checked."
-   },
-   {
-    "node": "det-pe-sections-conservative",
-    "why": "Generic affine weakly contractible evaluation criterion turns the locally proved finite-window comparison into a sheaf isomorphism."
-   },
-   {
-    "node": "det-pe-unbounded-classical-truncation",
-    "why": "Generic finite-window lemma for complexes with classical cohomology realizes the source uniform-bound argument; its hypotheses are proved over each proper fibre neighborhood, without any field cohomological bound."
-   },
-   {
-    "node": "det-proper-heart-continuity-sections",
-    "why": "Generic exactness of evaluation on affine weakly contractible objects relates direct-image cohomology to sections and relative to absolute vanishing."
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
     "node": "det-proper-image-localizing-open",
-    "why": "Existing admissible-coefficient theorem supplies the open part of the source route, specialized to finite A."
-   },
-   {
-    "node": "lem-fin-finite-type-fibre-dimension-bound",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-kun-03qu-sep-closed",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-kun-grothendieck-derived-coproducts",
-    "why": "Generic termwise description identifies the actual ambient coproduct and its coprojections."
-   },
-   {
-    "node": "lem-kun-proper-torsion-cd-bound",
-    "why": "The source relative cohomological-dimension tool, valid after arbitrary base change, supplies the uniform bound without a cohomological-dimension assumption on the ground field."
-   },
-   {
-    "node": "lem-pc-proper-base-change",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
     "node": "lem-pc-right-derived-functor-triangulated",
-    "why": "Generic unbounded triangulated exactness of K-injective right derivation supplies finite additivity in step 11 and exactness for the localizing restriction in step 13; it replaces no proper or comparison argument."
-   },
-   {
-    "node": "lem-pur-kinjective-restrict-localized",
-    "why": "Generic restriction of K-injectives proves the unbounded evaluation identity without assuming unbounded base change."
-   },
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Generic module-sheaf Grothendieck theorem supplies exact sums and K-injective resolutions."
-   },
-   {
-    "node": "lem-sc-fibre-dimension-after-base-change",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-exchange-forget-coefficients",
-    "why": "Only its bounded-below direct-image comparison with underlying abelian sheaves is used to apply the source torsion cohomological bound."
-   },
-   {
-    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-localized-sheaves-over-representable",
-    "why": "Generic slice equivalence verifies that the terminal object of the neighborhood site is projective."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic derived composition converts the relative higher-direct-image bound into absolute neighborhood cohomology vanishing."
-   },
-   {
-    "node": "lem-weil-pbc-triangulated-functor-restriction",
-    "why": "Generic restriction theorem supplies the exact structure after the explicit localizing-closure argument."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Generic localization identifies neighborhood site restrictions, coefficients and K-injective evaluation."
-   },
-   {
-    "node": "sk-def-localizing-closure",
-    "why": "The defining smallest-closure property is used for classical cohomology and proper images."
-   },
-   {
-    "node": "sk-def-pe-weak-contractible",
-    "why": "The projectivity definition is used explicitly in the slice to show exact terminal evaluation."
-   },
-   {
-    "node": "sk-def-sfb-derived-categories",
-    "why": "The generic unbounded K-injective construction supplies representatives used for the evaluation identity."
-   },
-   {
-    "node": "sk-thm-pe-direct-image-comparison",
-    "why": "Only the inverse-image comparison and qcqs bounded-below direct-image comparison are used, avoiding the inapplicable field-restricted unbounded transfer."
-   },
-   {
-    "node": "thm-sc-finite-type-torsion-cd",
-    "why": "Existing generic geometric or coefficient tool verifies the specific hypotheses in steps 1–2 of the source finite-Tor and uniform-fibre-bound argument; it does not replace proper stability or the unit route."
-   },
-   {
-    "node": "det-pe-topos-functoriality-inverse-image",
-    "why": "Generic base-change site functor and its direct-image formula verify that the neighborhood is a site object and justify the literal resolution-evaluation identity."
-   },
-   {
-    "node": "def-weil-pbc-ringed-derived-restriction",
-    "why": "The exact additive localized module-restriction construction identifies the unbounded restriction and its good-truncation compatibility in the finite-window evaluation argument."
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
     "node": "lem-pc-separated-quasi-separated",
-    "why": "Generic separated-implies-quasi-separated lemma checks every use of the qcqs comparison and continuity tools, including non-Noetherian proper base changes."
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
-    "node": "sk-prop-sf-comparison",
-    "why": "Generic bounded-below comparison verifies the unit hypothesis of the classical equivalence, used only on a truncated input."
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
-    "node": "det-pe-classical-derived-equivalence",
-    "why": "Generic bounded-below equivalence supplies an etale representative for a truncated classical input; no unbounded equivalence is asserted."
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
-    "node": "thm-weil-pbc-bounded-below",
-    "why": "The source bounded-below proper base-change theorem on torsion abelian etale complexes, upgraded by the relative truncation argument."
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    },
    {
-    "node": "lem-weil-pbc-transport-identifies-exchange",
-    "why": "The canonical finite-coefficient bounded-below transport identity identifies precisely the ambient pro-etale mate with the etale module exchange; it replaces an inapplicable etale-only representative lemma."
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
+   },
+   {
+    "node": "lem-weil-pbc-triangulated-functor-restriction",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
+   },
+   {
+    "node": "sk-thm-properbasechange",
+    "why": "Generic tool used exactly as stated in the short assembly; the proof stays on the reviewed relative finite-coefficient route."
    }
   ]
  },
@@ -629,12 +330,12 @@
   "lem-weil-pbc-transport-identifies-exchange"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q117-881f98752",
-  "group": "Q117",
+  "reviewer": "NT-cc-Q60-90c338b01",
+  "group": "Q60",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-881f98752 (reviewer sub-agent of L); spot-checked: I read the item, all 17 steps and the full current statement of each of the 42 cited nodes. Delivery shape: no new nodes; proof_deps equals the union of step uses; no merged or missing citations; a traversal of everything the cited nodes depend on (10722 nodes) finds no path back to the item; no SGA source. Statement: the three clauses match main-20261015 sk-prop-ctf-finite-proper-localizing.md, with the general-field standing setting of sk-def-sfb-dc-setting made explicit. The ultrafilter counterexample to the bare import is correct. Base-change map: beta_K is the unit / p'^*g^*~g'^*p^* / counit mate, which is exactly the map defined in the blueprint sk-prop-proper-base-change-unbounded and the composite in def-weil-pbc-ambient-ringed-exchange. The coefficients are constant A-module sheaves, identified with the condensed ring by the two finite-discrete lemmas. Route departure from the Transfer step: genuine. det-ctf-finite-comparison-localizing is stated only over Fq-bar and lem-sfb-unbounded-direct-image-comparison only over finite or algebraically closed k. Compact generation and the unbounded comparison fail for k of infinite cohomological dimension. The replacement is the source's own argument (uniform fibre bound, Stacks 095U, truncation window N=m-2e-2, bounded-below proper base change) carried out on the pro-etale side. The maintainer should record this in HUMAN.md. Step checks: (1) qcqs hypotheses and the Tor-interval comparison. (2) Fibre dimension via local dimensions and the supremum, 03QU and torsion cd give d=2e for det-ctf-finite-proper-tor. (5)-(6) Relative vanishing for every classical sheaf over non-Noetherian V; an epimorphism in the slice topos splits by weak contractibility; exact sections. (7)-(10) K-injective restriction (Stacks 08FI), the elementary Kan-extension identification, truncation clause (2), sections conservativity. (11)-(13) Bounded continuity with a common lower bound, then sum preservation and minimality of Loc without assuming ambient sum preservation. (14) Classical derived equivalence, thm-weil-pbc-bounded-below, coefficient forgetting (3) and transport-identifies-exchange identify the actual mate on bounded-below input. (15) Naturality square with no flatness on g. (16) det-proper-image-localizing-open is an existing more general theorem, not a relabelled clause. Edge cases checked: e=0, empty fibres and families, zero ring, identity maps, non-flat g, non-closed k. I accept the 41 split_report.tool_uses. Note for the merge: the retained maintainer tool_uses list and the old Q03 reviewed field are stale and should be regenerated. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-90c338b01 (reviewer sub-agent of L); spot-checked: Every argument of the old proof is still present in the re-split. The item statement and stmt_deps are byte-identical to the live node. The 17-step, 15,969-character proof is now a 5-step assembly of about 2,600 characters. Mapping of old steps: 1→new step 1. 2→lem-sfb-finite-proper-geometric-cd-bound plus new step 2 (det-ctf-finite-proper-tor with d=2e). 3→new step 2. 4→lem-sfb-finite-classical-localizing. 5–10→lem-sfb-finite-proper-classical-truncation, stated for every S→Y, which covers both old 9 and old 10. 11–12→lem-sfb-finite-proper-classical-coproducts. 13→new step 3. 14→the existing sk-thm-properbasechange: I read its statement and its 9 proof steps, and it states exactly the D^+_class proét exchange with torsion cohomology, for the def-weil-pbc-ambient-ringed-exchange mate, via the same classical-equivalence, forget and transport argument. The blueprint proof also cites it here. 15→new step 4. 16–17→new step 5. The four new nodes are statement-only, unsplit, with created.item set and source pointing to main-20261015. The preflight requires this; the drafts are kept in the report. I checked each new node for truth: the fibre bound after base change (0A3V and fibre-dimension invariance) and the geometric torsion cd ≤ 2e with cd(Ω)=0; closure of classical cohomology (BS weak Serre, exact Grothendieck sums, pullback commuting with ν*, Dctf classical for qcqs T); the truncation window (095U relative cd 2e after any base change; the cone τ≤N−1 needs N<m−2e+1, and the node requires the stronger N<m−2e−1); and the coproducts (qcqs bounded-below continuity plus the window, empty family included). Small cases e=0 and empty fibres hold. I checked every item hypothesis: Y quasi-compact, d=2e covering ℓ-power torsion, the S=Y and S=Y' uses of the truncation node, τ≥N K bounded below, classical and killed by ℓ^n for sk-thm-properbasechange, and finite ℓ-power A admissible for det-proper-image-localizing-open. None of the 4 new nodes duplicates an existing one: I compared lem-amb-proper-coproducts (étale, Noetherian), lem-sfb-adic-proper-bounded-below-coproducts, det-proper-unbounded-window-ii-general, det-pe-unbounded-classical-truncation, lem-sfb-unbounded-direct-image-truncation-stability, lem-exc-finite-cd-derived-coproduct-criterion, lem-weil-pbc-proetale-module-cohomology-coproducts and lem-kun/cbc/fin fibre-bound nodes. Batch-5 flag on sk-thm-properbasechange: accepted. Proper base change is outside both assumptions, and the blueprint cites it itself. The reached node lem-pod-lisse-module-sheaves-as-module-objects is a generic lisse/FLC module-object equivalence. The base step 14 already reached it through thm-weil-pbc-bounded-below. I recomputed the closures: both contain 32 trf/pod nodes, and the delivery adds none. There is no SGA citation. Maintainer note: lem-sfb-finite-proper-classical-truncation carries about 5k characters of the old steps 5–10. Its own split should create the neighbourhood-vanishing and weakly-contractible-evaluation nodes drafted in the report."
  },
  "lean_audit": {
   "master": {

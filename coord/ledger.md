@@ -19803,3 +19803,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:25 L: merged deliver/NX/lem-pe-comparison-injective-left-modules-acyclic (reviewer PASS; after a return; new nodes: 3)
 - 03:25 L: merged deliver/Q02/lem-cbc-ringed-open-extension-products (reviewer PASS; first push; new nodes: 0)
 - 03:25 L: merged deliver/NS/lem-pur-completed-coefficient-pushforward-comparison (reviewer FIX; after a return; new nodes: 3)
+- 03:25 L: merged deliver/Q60/det-ctf-finite-proper-localizing (reviewer PASS; after a return; new nodes: 4)
