@@ -6,7 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
@@ -17,7 +17,8 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
@@ -29,6 +30,46 @@ Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH. -/
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+-- Transfer the retained upstream theorem through the canonical small-colimit comparison.
+private theorem small_regular_divisor_quotient
+    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
+    [IsRegularRing (R ⧸ Ideal.span {f})]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
+    (b : R ⟶ strictHenselizationRing barY)
+    (hb : Spec.map b = strictHenselizationStructuralMap barY)
+    (hg : ¬ IsUnit (b.hom f)) :
+    IsNoetherianRing (strictHenselizationRing barY) ∧
+      IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
+      IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb, ← smallStrictHenselizationColimitIso_toBase barY]
+    simp only [e, ← Category.assoc, ← Spec.map_comp, Iso.inv_hom_id, Spec.map_id,
+      Category.id_comp]
+  have hg' : ¬ IsUnit ((b ≫ e.hom).hom f) := by
+    intro h
+    apply hg
+    have h' := h.map e.inv.hom
+    change IsUnit (e.commRingCatIsoToRingEquiv.symm
+      (e.commRingCatIsoToRingEquiv (b.hom f))) at h'
+    simpa only [RingEquiv.symm_apply_apply] using h'
+  obtain ⟨hN, hQ, hD⟩ :=
+    strictHenselization_regular_divisor_quotient R f barY (b ≫ e.hom) hbe hg'
+  let : IsNoetherianRing (strictHenselization barY) := hN
+  let : IsRegularRing
+      (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) := hQ
+  let eQ : (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) ≃+*
+      (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) :=
+    Ideal.quotientEquiv _ _ e.symm.commRingCatIsoToRingEquiv (by
+      rw [Ideal.map_span, Set.image_singleton]
+      change Ideal.span {b.hom f} = Ideal.span {
+        e.commRingCatIsoToRingEquiv.symm (e.commRingCatIsoToRingEquiv (b.hom f))}
+      rw [RingEquiv.symm_apply_apply])
+  exact ⟨isNoetherianRing_of_ringEquiv _ e.symm.commRingCatIsoToRingEquiv,
+    IsRegularRing.of_ringEquiv eQ, eQ.toMulEquiv.isDomain_iff.mp hD⟩
+
 
 -- Apply the existing affine-chart theorem to the identity chart of Spec R.
 set_option backward.isDefEq.respectTransparency false in
@@ -151,7 +192,7 @@ theorem GaloisCover.strict_hensel_root_normalization_generic_etale
       ∃ (O : N.Opens), j η ∈ O ∧ Etale (a.fromNormalization ∣_ O) := by
   dsimp only
   intro hg hN hp he hn D j hD hDi hj hV η hη
-  have hQ := strictHenselization_regular_divisor_quotient R f barY b hb hg
+  have hQ := small_regular_divisor_quotient R f barY b hb hg
   have : IsNoetherianRing (strictHenselizationRing barY) := hQ.1
   have : IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := hQ.2.1
   have : IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := hQ.2.2

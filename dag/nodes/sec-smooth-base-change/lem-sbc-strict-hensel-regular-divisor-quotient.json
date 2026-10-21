@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Compare the small and full affine-neighbourhood structural morphisms by comparison_base and compose b with smallStrictHenselizationColimitIso. Apply the retained upstream strictHenselizationRing_noetherian_of_regular to this composite, and transfer Noetherianity to the small colimit with isNoetherianRing_of_ringEquiv for the inverse comparison. Transport the nonunit condition through the same inverse comparison and apply the retained upstream regularity-and-domain theorem. The induced Ideal.quotientEquiv identifies the full-colimit principal quotient with the small-colimit quotient. Transfer regularity by IsRegularRing.of_ringEquiv and the domain property by MulEquiv.isDomain_iff, and pair them with Noetherianity.",
+   "text": "Apply strictHenselizationRing_noetherian_of_regular to the full canonical affine-neighbourhood colimit and the prescribed structural map b. Apply strictHenselizationRing_regular_divisor_quotient to f with the given regularity and nonunit hypotheses. Combine Noetherianity with the regularity and domain conclusions. The formerly separate small-colimit declaration is retired; its consumers transport this retained theorem through smallStrictHenselizationColimitIso and the induced principal-quotient equivalence.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient-noetherian",
     "lem-sbc-strict-hensel-regular-divisor-quotient-regular"
@@ -30,10 +30,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R4",
+  "group": "A3",
   "document": "Stacks Project",
-  "place": "Tags 04HX, 05WS, 06LJ and 06LN; retirement of the duplicate Noetherianity module",
-  "note": "Keep both mathematical dependency edges and the exact public theorem signature. The single canonical colimit comparison now transports Noetherianity as well as regularity and the domain property."
+  "place": "Tags 0EYG, 05WS and 06LN; retained upstream theorem and canonical small/full comparison",
+  "note": "Zero-hole duplicate retirement, coord/retire-items.tsv row 1975. The mathematical node and both proof dependencies remain; the unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -101,14 +101,14 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotient.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotient.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselization_regular_divisor_quotient",
-  "statement": "theorem strictHenselization_regular_divisor_quotient\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsNoetherianRing (strictHenselizationRing barY) ∧\n      IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧\n      IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})",
+  "statement": "theorem strictHenselization_regular_divisor_quotient\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsNoetherianRing (strictHenselization barY) ∧\n      IsRegularRing (strictHenselization barY ⧸ Ideal.span {b.hom f}) ∧\n      IsDomain (strictHenselization barY ⧸ Ideal.span {b.hom f})",
   "branch": "sheaf-dag",
-  "by": "F2",
-  "date": "2026-10-13"
+  "by": "A3",
+  "date": "2026-10-21"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -123,12 +123,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-40f56",
-  "group": "R4",
+  "reviewer": "C-b3bec",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261021T120516-L-3904630",
+  "landing": "20261021T140748-L-2740975",
   "kind": "interface",
-  "note": "independent cc review: delivered empty item + adapted StrictHenselRegularDivisorQuotient vs live clone and retire-items.tsv line 1891; node lean record vs upstream WeilConjectures theorem (verbatim); compile --all exit 0; axioms of consumer theorem clean"
+  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
  },
  "lean_audit": {}
 }

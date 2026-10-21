@@ -6,7 +6,7 @@ Authors: SHEAF group P4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootFiniteEtaleModel

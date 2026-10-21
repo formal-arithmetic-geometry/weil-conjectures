@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "The strict henselization regular-divisor quotient gives Noetherianness and a regular domain quotient. Apply the existing affine-chart ind-etaleness theorem with the identity chart of Spec R and the identity isomorphism of the small strict-henselization scheme. The hypothesis on b is exactly its structure-map compatibility. Forget the resulting filtered etale algebra presentation to modules; etale stages are flat, and the same-universe flat-colimit-presentation theorem gives flatness of b. Flat base change preserves regularity of f. The root-algebra theorem then gives regular local rings at primes containing the root coordinate.",
+   "text": "First transport the retained upstream regular-divisor quotient theorem from the full affine-neighbourhood colimit to H through smallStrictHenselizationColimitIso. The theorem smallStrictHenselizationColimitIso_toBase identifies the structural maps. Pull the nonunit condition back through the inverse ring equivalence. Transfer Noetherianity by isNoetherianRing_of_ringEquiv and the quotient properties by Ideal.quotientEquiv, IsRegularRing.of_ringEquiv and MulEquiv.isDomain_iff. The strict henselization regular-divisor quotient gives Noetherianness and a regular domain quotient. Apply the existing affine-chart ind-etaleness theorem with the identity chart of Spec R and the identity isomorphism of the small strict-henselization scheme. The hypothesis on b is exactly its structure-map compatibility. Forget the resulting filtered etale algebra presentation to modules; etale stages are flat, and the same-universe flat-colimit-presentation theorem gives flatness of b. Flat base change preserves regularity of f. The root-algebra theorem then gives regular local rings at primes containing the root coordinate.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient",
     "def-weil-pbc-strict-henselization-limit",
@@ -31,7 +31,8 @@
     "lem-weil-pbc-etale-algebra-flat",
     "lem-sbc-root-algebra-regular-at-root",
     "lem-weil-pbc-small-strict-henselization-ind-etale",
-    "lem-weil-pbc-flat-colimit-presentation-same-universe"
+    "lem-weil-pbc-flat-colimit-presentation-same-universe",
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
    ],
    "elementary": false
   },
@@ -65,15 +66,15 @@
   "lem-weil-pbc-etale-algebra-flat",
   "lem-weil-pbc-flat-colimit-presentation-same-universe",
   "lem-weil-pbc-relative-normalization",
-  "lem-weil-pbc-small-strict-henselization-ind-etale"
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
  ],
  "proof_origin": {
-  "kind": "from-document",
   "by": "worker",
-  "group": "D4",
-  "document": "Stacks Project and the existing Lean affine-chart and filtered-colimit APIs",
-  "place": "Tag 04HX for affine-chart ind-etaleness; Tag 05UT for flatness of filtered colimits; Tags 09EB, 0BRM and 0EYG for generic etaleness. Reuse smallStrictHenselization_indEtale_of_affine_chart on the identity chart and ModuleCat.flat_of_colimitPresentation instead of repeating the strict-henselization ring cocone construction.",
-  "note": "G3 repair, 2026-10-21: migrate the identity-chart application to the proved small-model transport corollary when retiring the duplicate Sheaf module. The theorem signature and flat-colimit argument are unchanged."
+  "group": "A3",
+  "document": "Stacks Project",
+  "place": "Tags 0EYG, 04HX, 05WS and 06LN",
+  "note": "Only the small/full colimit transport required by retirement of the duplicate regular-divisor quotient module changes. The original remaining proof and all public signatures are preserved."
  },
  "mathlib_searches": [
   {
@@ -149,12 +150,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-13fea",
-  "group": "G3",
+  "reviewer": "C-b3bec",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261021T061122-L-1709106",
+  "landing": "20261021T140748-L-2740975",
   "kind": "interface",
-  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
  },
  "lean_audit": {}
 }

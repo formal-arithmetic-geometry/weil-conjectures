@@ -9,9 +9,11 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
-import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-! # Strict local limits of regular divisors
@@ -27,7 +29,49 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
+-- Transfer the retained upstream theorem through the canonical small-colimit comparison.
+private theorem small_regular_divisor_quotient
+    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
+    [IsRegularRing (R ⧸ Ideal.span {f})]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
+    (b : R ⟶ strictHenselizationRing barY)
+    (hb : Spec.map b = strictHenselizationStructuralMap barY)
+    (hg : ¬ IsUnit (b.hom f)) :
+    IsNoetherianRing (strictHenselizationRing barY) ∧
+      IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
+      IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb, ← smallStrictHenselizationColimitIso_toBase barY]
+    simp only [e, ← Category.assoc, ← Spec.map_comp, Iso.inv_hom_id, Spec.map_id,
+      Category.id_comp]
+  have hg' : ¬ IsUnit ((b ≫ e.hom).hom f) := by
+    intro h
+    apply hg
+    have h' := h.map e.inv.hom
+    change IsUnit (e.commRingCatIsoToRingEquiv.symm
+      (e.commRingCatIsoToRingEquiv (b.hom f))) at h'
+    simpa only [RingEquiv.symm_apply_apply] using h'
+  obtain ⟨hN, hQ, hD⟩ :=
+    strictHenselization_regular_divisor_quotient R f barY (b ≫ e.hom) hbe hg'
+  let : IsNoetherianRing (strictHenselization barY) := hN
+  let : IsRegularRing
+      (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) := hQ
+  let eQ : (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) ≃+*
+      (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) :=
+    Ideal.quotientEquiv _ _ e.symm.commRingCatIsoToRingEquiv (by
+      rw [Ideal.map_span, Set.image_singleton]
+      change Ideal.span {b.hom f} = Ideal.span {
+        e.commRingCatIsoToRingEquiv.symm (e.commRingCatIsoToRingEquiv (b.hom f))}
+      rw [RingEquiv.symm_apply_apply])
+  exact ⟨isNoetherianRing_of_ringEquiv _ e.symm.commRingCatIsoToRingEquiv,
+    IsRegularRing.of_ringEquiv eQ, eQ.toMulEquiv.isDomain_iff.mp hD⟩
+
+
 -- Preserve the original existential instance binder name `hH`.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 /-- A regular divisor has a pointed regular strict local ind-etale limit.
 
@@ -68,10 +112,22 @@ theorem regular_divisor_strict_local_limit
     (Spec R).fromSpecResidueField_apply y _
   let : Algebra ((Spec R).residueField (barY (IsLocalRing.closedPoint Ω))) Ω :=
     (descResidueField (stalkClosedPointTo barY)).hom.toAlgebra
-  obtain ⟨hlocal, hstrict, hx, _⟩ :=
-    AlgebraicGeometry.strictHenselizationResidue barY rfl
+  obtain ⟨hfullLocal, _, hfull, _⟩ := AlgebraicGeometry.strictHenselizationResidue barY rfl
+  let : IsLocalRing (strictHenselization barY) := hfullLocal
+  obtain ⟨hlocal, hstrict⟩ := AlgebraicGeometry.strictHenselizationLocalStructure barY
   let H := strictHenselizationRing barY
   have : IsLocalRing H := hlocal
+  have hx : strictHenselizationStructuralMap barY (IsLocalRing.closedPoint H) =
+      barY (IsLocalRing.closedPoint Ω) := by
+    have hp : Spec.map (smallStrictHenselizationColimitIso barY).inv
+        (IsLocalRing.closedPoint H) =
+        IsLocalRing.closedPoint (strictHenselization barY) :=
+      @AlgebraicGeometry.Spec_closedPoint (strictHenselization barY)
+        (strictHenselizationRing barY) hfullLocal hlocal
+        (smallStrictHenselizationColimitIso barY).inv inferInstance
+    have hc := congrArg (fun k : Spec H ⟶ Spec R ↦ k (IsLocalRing.closedPoint H))
+      (smallStrictHenselizationColimitIso_toBase barY)
+    exact hc.symm.trans ((congrArg (fun x ↦ strictLocalizationToBase barY x) hp).trans hfull)
   let b : R ⟶ H := Spec.preimage (strictHenselizationStructuralMap barY)
   have hb : Spec.map b = strictHenselizationStructuralMap barY := Spec.map_preimage _
   have hi : b.hom.IndEtale := by
@@ -93,7 +149,7 @@ theorem regular_divisor_strict_local_limit
   have hnunit : ¬ IsUnit (b.hom g) :=
     (IsLocalRing.mem_maximalIdeal _).mp hgm
   obtain ⟨_, hquot, hdomain⟩ :=
-    strictHenselization_regular_divisor_quotient R g barY b hb hnunit
+    small_regular_divisor_quotient R g barY b hb hnunit
   have : IsRegularRing (H ⧸ Ideal.span {b.hom g}) := hquot
   have : IsDomain (H ⧸ Ideal.span {b.hom g}) := hdomain
   have : IsLocalRing (H ⧸ Ideal.span {b.hom g}) :=
@@ -105,7 +161,7 @@ theorem regular_divisor_strict_local_limit
     IsRegularRing.of_ringEquiv ((RingEquiv.quotientBot R).symm.trans
       (Ideal.quotEquivOfEq (Ideal.span_singleton_zero (α := R))).symm)
   obtain ⟨_, hzero, _⟩ :=
-    strictHenselization_regular_divisor_quotient R 0 barY b hb (by simp)
+    small_regular_divisor_quotient R 0 barY b hb (by simp)
   have : IsRegularRing (H ⧸ Ideal.span {b.hom (0 : R)}) := hzero
   let e0 : (H ⧸ Ideal.span {b.hom (0 : R)}) ≃+* H :=
     (Ideal.quotEquivOfEq (by rw [map_zero, Ideal.span_singleton_zero])).trans

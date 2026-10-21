@@ -23,14 +23,15 @@
  ],
  "proof": [
   {
-   "text": "Use strictHenselizationLocalStructure to make H local. The regular-divisor quotient theorem gives Noetherianness of H and regularity of H/(g). To recover flatness on the original small coordinate-ring colimit without importing the conflicting upstream structural-map helper, form the natural stage maps GammaSpecIso(R).inv followed by each pointed etale neighbourhood structure map on global sections. Cofilteredness of the pointed category makes the opposite ring diagram filtered. The stage maps are flat since etale morphisms are flat. The characterizing equation of exists_strictHenselizationStructuralMap and Spec.map_injective identify every composite with its colimit coprojection with b. Apply RingHom.Flat.of_isColimit, the colimit-presentation form of the ind-flat characterization, and then hf.of_flat to make g regular.",
+   "text": "First transport the retained upstream regular-divisor quotient theorem from the full affine-neighbourhood colimit to H through smallStrictHenselizationColimitIso. The theorem smallStrictHenselizationColimitIso_toBase identifies the structural maps. Pull the nonunit condition back through the inverse ring equivalence. Transfer Noetherianity by isNoetherianRing_of_ringEquiv and the quotient properties by Ideal.quotientEquiv, IsRegularRing.of_ringEquiv and MulEquiv.isDomain_iff. Use strictHenselizationLocalStructure to make H local. The regular-divisor quotient theorem gives Noetherianness of H and regularity of H/(g). To recover flatness on the original small coordinate-ring colimit without importing the conflicting upstream structural-map helper, form the natural stage maps GammaSpecIso(R).inv followed by each pointed etale neighbourhood structure map on global sections. Cofilteredness of the pointed category makes the opposite ring diagram filtered. The stage maps are flat since etale morphisms are flat. The characterizing equation of exists_strictHenselizationStructuralMap and Spec.map_injective identify every composite with its colimit coprojection with b. Apply RingHom.Flat.of_isColimit, the colimit-presentation form of the ind-flat characterization, and then hf.of_flat to make g regular.",
    "uses": [
     "lem-weil-pbc-strict-henselization-local-structure",
     "lem-sbc-strict-hensel-regular-divisor-quotient",
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map",
     "lem-weil-pbc-etale-algebra-flat",
-    "lem-weil-pbc-flat-ring-map-iff-ind-flat"
+    "lem-weil-pbc-flat-ring-map-iff-ind-flat",
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
    ],
    "elementary": false
   },
@@ -80,14 +81,15 @@
   "lem-weil-pbc-regular-local-localization",
   "lem-weil-pbc-regular-ring-normal",
   "lem-weil-pbc-relative-normalization",
-  "lem-weil-pbc-strict-henselization-local-structure"
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
  ],
  "proof_origin": {
-  "kind": "from-document",
   "by": "worker",
-  "group": "F1",
-  "document": "Stacks Project and existing Lean library",
-  "place": "Tags 0EYG, 0EYH and 032L, retaining the root-algebra and finite-integral-closure argument. Rework 2026-10-20: direct small-diagram flatness from Tags 04HX and 07QM via RingHom.Flat.of_isColimit in WeilConjectures.RingTheory.ProEtale.FaithfullyFlat; no definition or theorem signature changes."
+  "group": "A3",
+  "document": "Stacks Project",
+  "place": "Tags 0EYG, 04HX, 05WS and 06LN",
+  "note": "Only the small/full colimit transport required by retirement of the duplicate regular-divisor quotient module changes. The original remaining proof and all public signatures are preserved."
  },
  "mathlib_searches": [
   {
@@ -161,16 +163,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "D3",
+  "reviewer": "C-b3bec",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261020T162909-L-3673546",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261021T140748-L-2740975",
+  "kind": "interface",
+  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
  },
  "lean_audit": {}
 }

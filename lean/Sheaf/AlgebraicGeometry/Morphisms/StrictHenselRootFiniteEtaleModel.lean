@@ -6,7 +6,7 @@ Authors: SHEAF group C3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData
 import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
