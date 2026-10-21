@@ -13,9 +13,106 @@
   "def-weil-abstract-derived-category",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-sfb-condensed-derived-restriction-calculus] for $R=C_F$, $J=L$, $H=D$ and $u=\\iota$. This constructs the specified $b_F$ from the inclusion of invariant objects, as a natural transformation of additive triangulated functors $D(\\mathcal A_F(L))\\to D(\\operatorname{Mod}_{C_F})$. In particular it is compatible with the connecting morphism of a short exact sequence of action modules. The map on $H^0$ is the underived invariant inclusion. We will prove that this very transformation is invertible on $V_F[0]$, rather than choose an isomorphism between the two derived objects.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: canonical restriction transformation and its exactness"
+   }
+  },
+  {
+   "text": "The image of $\\mathbf Z^r$ is dense in $\\mathbf Z_\\ell^r$: every nonempty basic open specifies finitely many residues modulo powers of $\\ell$, and each coordinate residue has an integer representative. Let a section $m\\in C(S,F\\otimes_E V)$ be $D$-fixed after every profinite base change, in the sense of [def-sfb-condensed-action-module]. For every $s\\in S$, its value $m(s)$ is fixed by all constant integer elements. The map $x\\mapsto x\\cdot m(s)-m(s)$ on $L$ is continuous, and its zero set is closed since $F\\otimes_E V$ is Hausdorff. Density makes it zero on all of $L$. Thus for every $T\\to S$ and continuous $g:T\\to L$, one has $g(t)m(t)=m(t)$ at every $t$, so the sections are equal. Hence $m$ is $L$-fixed. The reverse inclusion is immediate by restricting the action. Consequently the inclusion of invariants is literally the identity on their common submodule.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: density and degree-zero normalization"
+   }
+  },
+  {
+   "text": "First consider $V=E$ with trivial action. The two coordinate-cup morphisms of [lem-sfb-trivial-ladic-derived-exterior] and [lem-sfb-discrete-lattice-cup-exterior], with $R=C_F$, have exactly the same source $\\mathcal E_{C_F,r}$. Each coordinate character restricts by $a_i(\\iota(n))=n_i1_F$. Restriction in [lem-sfb-condensed-derived-restriction-calculus] therefore sends each degree-one connecting class to the corresponding discrete class and preserves ordered cup products and the unit. On every summand $C_F[-|I|]$ this gives $b_F\\chi_{F,r}=\\chi_{C_F,r}$; the finite biproduct universal property gives the equality on the whole complex. Both $\\chi$ maps are isomorphisms, so $b_F$ is one. For a trivial $d$-dimensional $V$, choose an $E$-basis. Its coefficient module is $C_F^d$, since a continuous map into a finite product is exactly a tuple of continuous maps. Additivity and naturality from the calculus identify its comparison with the finite direct sum of the just-proved comparison. This includes $d=0$.",
+   "uses": [
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: trivial-representation base case, including every rank and coefficient field"
+   }
+  },
+  {
+   "text": "For either $J=L$ or $J=D$, a central element $z\\in J$ acts as an equivariant endomorphism on every action module. On an equivariant injective resolution $N\\to I^\\bullet$ it acts termwise, giving a lift of $z_N$. On $\\Gamma_J(I^q)$ that lift is the identity, by the definition of invariants. The normalized injective-resolution naturality of [lem-sp-derived-injective-resolution-naturality], applied to this commuting augmentation square, therefore gives $R\\Gamma_J(z_N)=\\mathrm{id}$. Such resolutions compute these derived functors by [lem-sfb-condensed-derived-restriction-calculus]. If $z_N-1$ is invertible, its derived image is both invertible and zero (additivity). Thus the identity of $R\\Gamma_JN$ is zero and the object is zero. In particular, if any $T_i-1$ is invertible on $V$, its inverse is a finite $E$-matrix, hence extends to an invertible endomorphism on $V_F$; the two derived invariant objects are then both zero. Take $z=\\iota(e_i)$ for $L$ and $z=e_i$ for $D$. Their centrality follows from commutativity of these groups.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: central-action contraction, an elementary resolution calculation"
+   }
+  },
+  {
+   "text": "If $U\\subseteq V$ is $L$-stable, [lem-sfb-continuous-representation-subquotients] gives continuous finite-dimensional representations $U$ and $Q=V/U$ with their usual topologies and continuous equivariant inclusion and quotient. Choose an $E$-linear splitting of the vector-space quotient. Its continuity follows from [lem-sfb-finite-dimensional-linear-map-continuous], since $E$ is complete and nontrivially valued. After extension to either $F$, a matrix and its inverse between finite product spaces are continuous by the topological field operations. Thus $0\\to U_F\\to V_F\\to Q_F\\to0$ is split exact on the underlying condensed modules: on every profinite $S$, composition with the continuous splitting lifts every $Q_F(S)$ section. The splitting need not be equivariant; the inclusion and quotient are equivariant, and exactness in the action categories is checked on underlying modules by the calculus. It follows that this sequence gives a distinguished triangle, and step 1 gives a morphism between its two derived-invariant triangles, with components $b_F(U),b_F(V),b_F(Q)$.",
+   "uses": [
+    "lem-sfb-continuous-representation-subquotients",
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: exact finite-dimensional devissage for both coefficient fields"
+   }
+  },
+  {
+   "text": "Fix $r$ and use strong induction on $d=\\dim_E V$, for both $F$ separately. Dimension zero is step 3. Write $A_i=T_i-1$. An invertible $A_i$ is settled by step 4. If every $A_i=0$, each integer generator acts trivially; density, using the same closed-zero-set argument as step 2, shows that the $L$-action is trivial, so step 3 applies. Otherwise, with the invertible case excluded, some $A_i$ is nonzero and singular. Then $U=\\ker A_i$ is nonzero and proper. It is $L$-stable since all action operators commute with $T_i$. Thus $0<\\dim_E U<d$ and $0<\\dim_E(V/U)<d$. Apply step 5 and the induction hypothesis to these two representations. The transformation is compatible with shifts by the calculus, so [lem-sf-triangle-two-out-of-three] applies to the displayed morphism of distinguished triangles and proves that $b_F(V)$ is an isomorphism. This exhausts the alternatives: every nonzero $A_i$ is either invertible or singular. No simultaneous diagonalization, semisimplicity, or completeness of $\\Omega$ is used.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: dimension induction; the kernel case carries the nontrivial-representation argument"
+   }
+  },
+  {
+   "text": "Naturality of $b_F$ for every continuous equivariant $E$-linear map is the naturality of the canonical transformation in step 1; the basis and subspaces used to prove invertibility do not define this transformation. Let $\\varphi:C_E\\to C_\\Omega$ be postcomposition by $E\\hookrightarrow\\Omega$, and let $f:V_E\\to\\operatorname{Res}_\\varphi V_\\Omega$ send a section $v$ to $1\\otimes v$. This is equivariant and $C_E$-linear, since both actions use the same matrices over $E$. With $J=L,H=D,u=\\iota$, the coefficient-pasting equality in [lem-sfb-condensed-derived-restriction-calculus] reads exactly $c_D\\circ b_E=(\\operatorname{Res}_\\varphi b_\\Omega)\\circ c_L$, the square requested in the statement. The coefficient transformations there are induced by $f$ and equality of invariants with scalar restriction. Finally, for $r=0$ both groups and the homomorphism are trivial; the normalized transformation is the identity of $V_F[0]$. The identity on $H^0$ for every $r$ was established in step 2.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the dense-lattice input: naturality, coefficient square and the empty product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-trivial-ladic-derived-exterior",
+  "lem-sfb-discrete-lattice-cup-exterior",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sfb-continuous-representation-subquotients",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-sf-triangle-two-out-of-three"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice analytic input: coordinate-cup trivial-coefficient reduction and finite-dimensional kernel induction; not a proof supplied by the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +148,45 @@
    "results": "8 hits: groupCohomology.coindIso, ContinuousCohomology.continuousCohomologyZeroIso, Rep.FiniteCyclicGroup.groupCohomologyIso₀, Rep.FiniteCyclicGroup.groupCohomologyIsoEven, groupCohomology.H1InfRes_X₂, groupCohomology.π_comp_H0IsoOfIsTrivial_hom, groupCohomology.H1InfRes_X₃, groupCohomology.isoShortComplexH1_hom; ",
    "date": "2026-10-22",
    "verdict": "no match: returned constructions concern other coefficient categories or only individual cohomology groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of derived invariants of condensed continuous finite dimensional ell adic representations from Z_ell power r to Z power r",
+   "results": "8 hits; BDeRhamPlus, Condensed.profiniteFree, Condensed.profiniteSolid, CondensedMod.LocallyConstant.functor, cyclotomicCharacter.toZModPow_toFun, Profinite.NobelingProof.Nobeling_aux, LightCondMod.LocallyConstant.functorToPresheaves, Rep.resIndAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: no ordinary internal condensed derived restriction equivalence for these coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"invariants\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: no ordinary internal condensed derived restriction equivalence for these coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "(dense|PadicInt).*(cohomology|invariants)|(cohomology|invariants).*(dense|PadicInt)",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: no ordinary internal condensed derived restriction equivalence for these coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of condensed group invariants from ell adic integers to the dense integer subgroup",
+   "results": "8 hits; PadicInt.denseRange_intCast, PadicInt.denseRange_natCast, PadicInt.subring, PadicInt.instInhabited, PadicInt.instCommRing, LightCondAb, PadicInt.instIsAdicCompleteMaximalIdeal, CondensedAb",
+   "date": "2026-10-21",
+   "verdict": "no match: no ordinary internal condensed derived restriction equivalence for these coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal condensed group cohomology of ell adic integers with trivial all continuous algebraic closure coefficients has only degrees zero and one",
+   "results": "8 hits; groupCohomology.H1ofAutOnUnitsUnique, isZero_groupCohomology_succ_of_subsingleton, continuousCohomology, ContinuousCohomology.continuousCohomologyZeroIso, groupCohomology.H1IsoOfIsTrivial, groupCohomology, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomologyIsoExt",
+   "date": "2026-10-21",
+   "verdict": "no match: no ordinary internal condensed derived restriction equivalence for these coefficients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-inertia-continuous-koszul",
@@ -77,5 +209,45 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
+  "worker": "stage1",
+  "group": "NP",
+  "summary": "Statement unchanged. Proves the canonical restriction comparison by reducing to trivial representations using central-action vanishing and induction on dimension through a nonzero proper kernel. Separates the all-continuous trivial-coefficient analytic exterior calculation from the algebraic discrete cup normalization and the general formal restriction calculus. All new nodes are statement-only, honestly searched, and not claimed proved. Checks degree zero sectionwise, coefficient-square equality and r=0.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sf-ctf-stability-direct-images below the tame-boundary calculation. The ancestor command returns None; inherited null from.node and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Generic normalized resolution computation used to show a central group element acts trivially on derived invariants; the unit has no replacement for that homological tool."
+   },
+   {
+    "node": "lem-sfb-continuous-representation-subquotients",
+    "why": "Generic topology of invariant finite-dimensional subspaces and quotients; needed to retain the exact continuous-representation hypotheses under dimension induction."
+   },
+   {
+    "node": "lem-sfb-finite-dimensional-linear-map-continuous",
+    "why": "Generic continuity of a chosen finite-dimensional E-linear quotient splitting; not applied over the noncomplete field Omega."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic triangulated two-out-of-three for a morphism compatible with shifts, applied to the kernel/quotient triangle; not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sfb-continuous-representation-subquotients",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-sf-triangle-two-out-of-three"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-23a527bb0",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-23a527bb0 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults. This is the first split of an item created on 2026-10-22 by NA b49c0fe4, and no re-split note names it. The item statement is byte-identical to the NA snapshot. Source: main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3), with agent origin and the inherited null from.node and via chain; nothing cites SGA. Step 1 takes the canonical b_u from the calculus node, not a chosen isomorphism. Step 2 shows Z^r is dense in Z_l^r; the zero set of x.m(s)-m(s) is closed in the Hausdorff space F(x)V, so D-invariants equal L-invariants as 'fully fixed' sections of def-sfb-condensed-action-module. Step 3: a_i(iota(n)) = n_i.1 = d_i(n), and restriction preserves the unit and ordered cups, so b.chi_F = chi_{C_F} on each summand of the exterior complex; C(S,F^d) = C(S,F)^d covers the trivial d-dimensional case, including d=0. Step 4: a central z acts termwise on an equivariant injective resolution and is the identity on Gamma(I^q), so lem-sp-derived-injective-resolution-naturality gives RGamma(z) = id; if z-1 is invertible, RGamma(z-1) is both zero and invertible, so both sides vanish. Step 5: the subquotient node's hypotheses hold (L profinite). The continuity lemma is applied only over complete E; E-matrices are continuous over Omega. The sequence is split exact on sections and the calculus detects exactness on underlying modules. Step 6: the induction is exhaustive (some A_i invertible / all A_i = 0, trivial by density / some A_i nonzero singular with a proper L-stable kernel), and two-out-of-three gets its shift compatibility from the calculus. Step 7: the coefficient square is exactly the calculus equality with f(v) = 1(x)v; r=0 follows from the normalization. New nodes: the calculus node is generic and true; it is the condensed group ring module category, the coefficient map needs no flatness, and the connecting-class cocycle is a. discrete-lattice-cup-exterior is true by the finite free Koszul resolution over any R; it overlaps lem-sfb-discrete-lattice-koszul-resolution, but that node is normalized only in degree 0 and step 3 needs the cup normalization, so the overlap is advisory. trivial-ladic-derived-exterior is true for E (continuous cochains of Z_l^r, exterior). For incomplete Omega it is the open condensed-cohomology point inherited from the parent chain, now isolated on the trivial module and marked WANTED; it is not a restatement of the item. All three nodes are statement-only with correct metadata and no cycle. Batch-5 check: lem-sfb-continuous-representation-subquotients reaches def-pod-l-adic-representations, a general definition of l-adic representations, not part of the trace-formula or Poincare-duality proofs; accepted. The four tool uses are generic and accepted (injective-resolution naturality, representation subquotients, finite-dimensional linear-map continuity, triangle two-out-of-three)."
  }
 }
