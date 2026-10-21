@@ -25,9 +25,164 @@
   "lem-weil-pbc-continuous-coefficient-realizations",
   "prop-weil-pbc-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $W=X,X'$, abbreviate $R_W=B_{E,W}$, $S_W=B_{L,W}$ and $C_W=S_W\\otimes^L_{R_W}-$. The integral inclusion $i_W:R_W\\to S_W$ has $n$-th projection $(\\iota_n)_W\\pi^E_n$, where $\\iota_n:A/\\varpi_E^n\\to A_L/\\varpi_L^n$ is induced by inclusion. For $g:X'\\to X$, the two maps $g^{-1}R_X\\to S_{X'}$ agree: after projection to $(A_L/\\varpi_L^n)_{X'}$ both are the constant-sheaf coefficient map after the pulled-back $E$-quotient projection. Equality into the inverse limit proves the integral coefficient square. Under continuous-coefficient realization this says that precomposition with the geometric projection commutes with postcomposition by the field inclusion. Localization gives the same square for $E_W\\to L_W$, preserving the coefficient units. In particular every nonzero constant of $E$ has inverse its constant reciprocal in $L_W$.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; explicit finite-projection coefficient-square calculation"
+   }
+  },
+  {
+   "text": "Let $K\\in\\mathcal C_X$. The integral representative of $T_{L/E}QK$ is $C_XK$, by the scalar-extension statement. Set $U_X(K)=L_X\\otimes^L_{R_X}K$. Derived pullback composition on the identity underlying topos supplies natural isomorphisms\n$$s_K:L_X\\otimes^L_{S_X}(S_X\\otimes^L_{R_X}K)\\xrightarrow{\\sim}U_X(K),\\quad t_K:L_X\\otimes^L_{E_X}(E_X\\otimes^L_{R_X}K)\\xrightarrow{\\sim}U_X(K).$$\nThey use the coefficient maps from Step 1. To compute them, take a flat-term K-flat representative $P$ of $K$; both $S_X\\otimes_{R_X}P$ and $E_X\\otimes_{R_X}P$ remain flat-term K-flat over their new rings. Thus $s_K$ and $t_K$ are induced by $(l\\otimes b)\\otimes p\\mapsto lb\\otimes p$, and their inverses insert $1$. Define $\\theta_{L/E,X,QK}=t_K^{-1}s_K$. The derived composition and monoidal comparisons ensure independence of the representative and naturality for all integral derived morphisms, not merely chain maps.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-rational-module-realization-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat) and 0D6D (lemma-derived-pullback-composition); Bhatt--Scholze Lemma 6.8.2"
+   }
+  },
+  {
+   "text": "Pass to raw rational morphisms using the stated formulas for $J$ and $T$. For $f/\\varpi_E^n$, naturality of Step 2 for $f$ can be multiplied by the central scalar $\\varpi_E^{-n}$ on both sides, since Step 1 makes that scalar invertible in $L_X$. This gives naturality for $f/\\varpi_E^n$. Explicitly, if $f/\\varpi_E^n=h/\\varpi_E^m$, then some $r\\geq0$ kills $\\varpi_E^mf-\\varpi_E^nh$ after multiplication by $\\varpi_E^r$; applying the integral functors and multiplying by $\\varpi_E^{-r-m-n}$ gives equality of their localized images. Each component remains invertible, with inverse $s_K^{-1}t_K$. This proves the required natural isomorphism on the raw categories.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); explicit calculation on the raw scalar-localized Hom groups"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$, express both successive-extension routes using $s,t$ and the specified raw scalar associators. The intermediate $s^{-1}s$ and $t^{-1}t$ cancel. On the common K-flat tensor model the remaining maps both send $m\\otimes l\\otimes p$ to $ml\\otimes p$. These are precisely the derived monoidal composition comparisons, so the equality holds in the derived category and on raw fractions by Step 3. For a fourth field and a scalar $n$ from it, every pentagon route sends $n\\otimes m\\otimes l\\otimes p$ to $nml\\otimes p$; associativity of ring multiplication proves their equality. For repeated fields the raw functor is literally the identity and these maps reduce to the multiplication unitors. Their unit equations follow by $1l=l=l1$.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition); normalized tensor associators and units, explicit field-tower calculation"
+   }
+  },
+  {
+   "text": "Write $\\Lambda_{E,W}$ and $\\Lambda_{L,W}$ for local derived-completion reflectors, with units $\\eta_E,\\eta_L$. The ringed Koszul-completion theorem supplies these reflectors and their universal unit property. They are the specified quotient completions, with the same units, by the constant/completed coefficient comparison. The sheaf $S_W$ is finite free over $R_W$ of rank $[L:E]$. The inclusion preserves the absolute value, and the DVR factorization of $\\varpi_E$ in $\\mathcal O_L$ is $u\\varpi_L^e$ for a unit $u$ and $e\\geq1$: its absolute value is strictly less than $1$. These are the hypotheses of finite-free completion transport. Consequently there is a unit-normalized natural isomorphism\n$$\\kappa_W:C_W\\Lambda_{E,W}\\xrightarrow{\\sim}\\Lambda_{L,W}C_W,\\qquad \\kappa_{W,N}C_W(\\eta_{E,N})=\\eta_{L,C_WN}.$$\nIt respects identity coefficients and successive scalar associators. This applies to ambient complexes before any constructibility restriction, and allows arbitrary positive ramification index.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-finite-free-completion-transport",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E (lemma-derived-completion-koszul), with Bhatt--Scholze Lemma 6.8.2 and the unit-normalized finite-free completion comparison"
+   }
+  },
+  {
+   "text": "Put $P_{F,g}=B_{F,X'}\\otimes^L_{g^{-1}B_{F,X}}g^{-1}(-)$ for $F=E,L$. Step 1 and ringed derived composition give the ordinary balanced comparison $\\beta_g:C_{X'}P_{E,g}\\xrightarrow{\\sim}P_{L,g}C_X$. On flat-term K-flat representatives both sides flatten to $S_{X'}\\otimes_{g^{-1}R_X}g^{-1}P$; $s'\\otimes r'\\otimes p$ maps to $s'i_{X'}(r')\\otimes p$. Apply the reflected-adjunction coefficient-square construction with $F_0=P_{E,g}$, $F_1=P_{L,g}$, $C_A=C_X$, $C_B=C_{X'}$ and its ordinary comparison $\\delta=\\beta_g^{-1}$. The ringed derived adjunctions are the canonical ones; their right adjoints preserve complete objects and have unit-normalized completion comparisons by the ringed-pushforward completion theorem. Step 5 supplies both $\\kappa_T$. Thus all hypotheses of that construction hold. The resulting comparison is\n$$\\widehat\\beta_g=\\Lambda_{L,X'}(\\beta_g)\\kappa_{X',P_{E,g}K}:C_{X'}\\widehat P_{E,g}K\\xrightarrow{\\sim}\\widehat P_{L,g}C_XK.$$\nIt is the finite-quotient-normalized scalar/pullback comparison used in the scalar-extension statement, with its indicated orientation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+    "lem-weil-pbc-ringed-pushforward-completion",
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G (lemma-pushforward-commutes-with-derived-completion); unit-normalized reflected coefficient square, with sites-cohomology Tag 0D6D"
+   }
+  },
+  {
+   "text": "The comparison in Step 6 respects the actual pullback completion units, rather than only the isomorphism classes of their sources and targets. Indeed the unit equation of Step 5 and naturality of $\\eta_L$ give\n$$\\widehat\\beta_{g,K}\\,C_{X'}(\\gamma_{E,g,K})=\\Lambda_L(\\beta_{g,K})\\,\\eta_{L,C_{X'}P_{E,g}K}=\\gamma_{L,g,C_XK}\\,\\beta_{g,K}.$$\nHere $\\gamma_F$ is exactly ordinary pullback followed by its quotient-tower completion unit, by definition of completed pullback. The constant/completed coefficient comparison identifies that quotient unit with $\\eta_F$. Thus the equation uses the finite quotient projections which fixed $\\widehat P$; it does not choose an unrelated isomorphism. The pullback-realization statement makes both $\\gamma$'s isomorphisms on the integral objects in question, and scalar extension carries these objects into the corresponding integral category.",
+   "uses": [
+    "lem-weil-pbc-finite-free-completion-transport",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-per-rational-realization-pullback-comparison",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E (lemma-derived-completion-koszul); naturality of the completion unit and its finite-quotient normalization"
+   }
+  },
+  {
+   "text": "Compare the two mixed routes starting at $J_{L,X'}Q(C_{X'}\\widehat P_{E,g}K)$. Precompose both by the isomorphism $J_{L,X'}Q(C_{X'}\\gamma_{E,g,K})$. Step 7 then replaces $\\widehat\\beta_g$ followed by this map with $\\gamma_L\\beta_g$. By the specified formula for $\\alpha_F$, composing $\\alpha_F$ with $J_FQ(\\gamma_F)$ cancels $J_FQ(\\gamma_F^{-1})$ and leaves ordinary balanced localization. The inverse-image localization comparison preserves the localization units and identifies $g^{-1}E_X$ with $(g^{-1}R_X)[1/\\varpi_E]$. All remaining maps are therefore maps of the common model $L_{X'}\\otimes^L_{g^{-1}R_X}g^{-1}K$. Before flattening, a local tensor $l'\\otimes b'\\otimes p$ with $b'\\in R_{X'}$ goes on either route to $l'i_{X'}(b')\\otimes p$. Step 1 supplies exactly the equality of coefficient actions needed for balancing. Equality on these local generators gives equality of the chain maps on the K-flat models, hence of the derived maps. Cancel the precomposed isomorphism. This proves the square for the specific $\\alpha_g$ and the scalar/pullback comparison in the statement.",
+   "uses": [
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-sheaf-tensor-product",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; explicit mixed balanced-tensor square after cancellation of the specified completion units"
+   }
+  },
+  {
+   "text": "These equations also respect the ambient pullback composition comparisons and every successive scalar associator. The ordinary comparisons are the monoidal K-flat comparisons already used in Steps 2, 4 and 6. For a second geometric map, both ordinary composite routes are the same scalar-insertion and multiplication map after the canonical inverse-image compositor. The localization inverse-image isomorphisms satisfy precisely this composition equation. Reflection preserves pasting and identities for the unit-normalized coefficient squares, so the equation of Step 7 persists under both geometric composition and coefficient towers; the $\\kappa$'s have the corresponding tower equation by Step 5. Substitute $\\alpha_F=({\\rm ordinary\\ balancing})J_FQ(\\gamma_F^{-1})$ in any resulting diagram: each adjacent completion-unit pair cancels, and the remaining diagram is the ordinary one just described. For three coefficient scalars its value is their product acting on the pulled-back representative, independent of parentheses. Finally Step 3 carries each equation to fraction morphisms. This proves all asserted identity, pentagon and mixed coherences without changing the coefficient category.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+    "lem-weil-pbc-finite-free-completion-transport",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-per-rational-realization-pullback-comparison",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition); completion-unit-normalized pasting and localization composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-rational-category",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-finite-free-completion-transport",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.8.2 and Proposition 6.8.14, Remark 6.8.15; explicit expansion using Stacks Tags 0G7E, 0D6D, 0A0E and 0A0G. The nine-step coherence argument is agent-written, not asserted verbatim in Bhatt--Scholze."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +218,101 @@
    "results": "12 hits: TensorProduct.assoc; TensorProduct.assoc_tmul; TensorProduct.lid_tensor; TensorProduct.assoc_symm_tmul; TensorProduct.leftComm_def; TensorProduct.rightComm_def; LinearMap.lTensor_rTensor_comp_assoc; Equiv.tensorProductAssoc_def. Tensor associators on algebraic modules, not finite-field continuous coefficient realization with completion units.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational realization of complete constructible l adic sheaves commutes with ramified finite coefficient extension and its completed pullback comparison",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.sheafificationCompPullback",
+     "IsAdicComplete.of_comp_lift",
+     "Padic.adicCompletionEquiv",
+     "Rat.HeightOneSpectrum.adicCompletion.padicEquiv",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pullbackIso",
+     "Condensed.lanSheafProfinite",
+     "LaurentSeries.coe_X_compare"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern ordinary sheafification/pullback, adic module completion, p-adic fields or condensed sets, not the stated rational realization and mixed coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": {
+    "hits": 5,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match: ordinary module-sheaf pullback composition and associativity do not include derived rational realization or specified quotient-completion units."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*scalar|scalar.*realization|completed.*pullback|pullback.*completed",
+   "results": {
+    "hits": 2,
+    "top": [
+     "Mathlib/Order/CompleteBooleanAlgebra.lean",
+     "Mathlib/Order/CompleteBooleanAlgebra.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match: the only hits are complete-lattice axiom pullbacks, unrelated to coefficient modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars on unbounded derived sheaves of modules commutes with inverting a uniformizer and geometric pullback, with tensor associativity coherence",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullbackObjFreeIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide ordinary module-sheaf pullback/free-module comparisons or their unit equations, not the complete constructible rational realization and mixed square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison between localization of integral constructible pro etale complexes and derived extension of finite l adic coefficient fields is compatible with completed inverse images",
+   "results": {
+    "hits": 8,
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "RingHom.Etale.ofLocalizationSpan",
+     "RingHom.Etale.ofLocalizationSpanTarget",
+     "Algebra.FormallyEtale.localization_map",
+     "fontaineThetaInvertP",
+     "StandardEtalePair.homEquiv",
+     "IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match: the hits provide ordinary module-sheaf pullback/free-module comparisons or their unit equations, not the complete constructible rational realization and mixed square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -87,5 +333,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-rational-realization-scalar-coherence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine steps construct the field-extension comparison on common K-flat models, descend it to raw fractions, verify field towers, normalize scalar completion, and prove the mixed pullback square by its actual completion-unit equation. All ingredients already have nodes; no new nodes. Checked ramified and identity extensions and avoided any assumption that inverse image of the completed ring is the completed ring.",
+  "blueprint": "lem-per-smooth-pullback-t-exact, first proof paragraph: the claim that cohomology sheaves of Lf* K are pullbacks. This item supplies finite-coefficient and mixed-pullback coherence in the intervening rational continuous-module realization; parent lem-per-continuous-rational-derived-realization retained steps 15-16.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General normalized monoidal, identity and composition comparisons of ringed derived pullback."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Supplies finite freeness of the completed coefficient inclusion, for arbitrary ramification."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Identifies intrinsic/local completion with the specific finite-quotient completion, including units."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Naturality of continuous coefficient realization in continuous coefficient maps."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-completion-transport",
+    "why": "General finite-free completion transport with the exact unit and tower equations needed for the mixed square."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "General localization/inverse-image unit and composition normalization."
+   },
+   {
+    "node": "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+    "why": "General unit-normalized reflection and pasting of coefficient squares, applied to completed pullback."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pushforward-completion",
+    "why": "Checks the right-adjoint completeness and unit-normalization hypotheses of reflected coefficient squares."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General flat-term K-flat preservation, needed to compute successive derived scalar changes and geometric pullback on the same representatives."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Supplies the actual raw scalar functor, its balanced associators and its coherent integral pullback comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Existence and universal unit property of the completion reflectors required for reflected coefficient squares; the Fourier-perverse unit supplies no such general ringed-site theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-finite-free-completion-transport",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-1ca43986e",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-1ca43986e (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes, the statement and stmt_deps are unchanged against side-live (where the item is still unsplit), there is no repair note for the item and it is not on the dropped list. Steps 1-4: the coefficient square is equal on each finite projection; θ=t^{-1}s is built from ringed derived composition comparisons over the identity topos on flat-term K-flat models; fractions use ϖ_E=uϖ_L^e being invertible in L; the field towers flatten to m⊗l⊗p↦ml⊗p, which matches the associators of prop-weil-pbc-scalar-extension. Step 5: S is finite free of rank [L:E], and ϖ_E=uϖ_L^e with e≥1 is exactly the hypothesis of completion transport; the Koszul reflector units are identified with the quotient completion by the constant-completion equivalence. Step 6: I checked each hypothesis of the reflected-adjunction square (canonical adjunctions, pushforward completion γ allowing a non-iso ring map, κ_A and κ_B, δ=β^{-1}); \\hatβ=Λ_L(β)κ is the inverse of \\hatδ and agrees with step 6 of the prop ('balancing followed by κ^{-1}'). Step 7: I verified \\hatβ C(η_E)=η_Lβ by naturality, with γ=η via def-weil-pbc-completed-pullback. Step 8: after precomposing by the isomorphism J_LQ(Cγ_E), the α formulas cancel the completion units and both routes are l'⊗b'⊗p↦l'i(b')⊗p. Step 9 applies the pasting, tower and localization-composition clauses of the cited nodes. Sources checked: Bhatt-Scholze pp.58-62 (Lemma 6.8.2, Prop 6.8.14, Rem 6.8.15) and the Stacks tags 0G7E/0D6D/0A0E/0A0G/099B against their labels; there is no SGA. All 11 off-unit statement citations are generic tools declared in tool_uses, and I accept them. Batch-5 flag: lem-weil-pbc-localization-inverse-image-coherence reaches lem-trf-geometric-inverse-image-exact, which is only exactness of geometric inverse image, a general topos fact and no part of the trace formula or Poincare duality; it is already a stmt_dep of the same-unit pullback-comparison node. Accepted. Edge cases E=L, g=id, ramified e>1 and K=0 all hold. No changes."
  }
 }
