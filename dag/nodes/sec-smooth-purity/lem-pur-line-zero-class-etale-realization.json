@@ -22,7 +22,8 @@
   "def-compact-support-direct-image-detailed",
   "def-amb-etale-compact-support",
   "thm-sf-comp-composition",
-  "lem-sf-class-compact-support-comparison"
+  "lem-sf-class-compact-support-comparison",
+  "def-pur-cartier-agreement-maps"
  ],
  "proof": [
   {
@@ -408,5 +409,62 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-1584ee080 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, its split_report, tool_uses and searches, and all 30 cited statements. I also read base Steps 1-2 of the old 9569-character thm-pur-rank-one-thom proof, which this item carries, and the main-20261015 sk-prop-an thm-pur-rank-one-thom.proof.md Step 1. The item matches Step 1 and stays on route through lem-pur-divisor-class. Live still has the item unsplit, so the delivery is not superseded. The only re-split note is the parent's, and it is resolved. Statement: the Cartier-after-base-change clause is now limited to base changes B'->B. That is a correct clarification, because pulling back along z sends (t) to 0, so the other reading is false. Its only citer, the parent step 1, uses only the Cartier property. The report says the item carries a statement_change record, but the JSON has none; this is advisory only. Small cases checked: empty B, B=Spec k, nonreduced R[t], non-flat and non-Noetherian B', ramified F with n=1. Steps 1-4, 6 and 7 are correct with hypotheses checked: B Noetherian by 01T6; E separated of finite type over k with a quasi-compact complement to D; mu_N flat, so the derived and ordinary tensor agree; site descent at exponent n; c^p = theta o nu^*c^e from the witness clause of lem-amb-cartier-kummer-map; Rz_! = z_* on both sites; composition, compact comparison natural in the witness, and site coherence for pi z = id. Fault (C4/C5), fixed: step 5 equated cl(D) with c^p only as 'the same supported construction'. lem-pur-divisor-class and lem-pur-supported-hom do not give that equality. The existing reviewed same-unit node lem-pur-cartier-class-agreement states exactly that cl(D) is c_D of lem-amb-cartier-kummer-map under lem-pur-supported-hom, for T separated of finite type and D Cartier. Step 5 now cites it with its hypotheses checked, and proof_deps is updated. There is no cycle, and the citation adds no trace-formula or Poincare-duality node. Batch-5 flag on lem-amb-vector-projective-completion: the trf nodes it alone brings in (projective-bundle quotient geometry, Proj separatedness, symmetric graded algebra, algebraic-space def) are generic EGA II scheme theory. They are not part of the trace formula or Poincare duality, and the citation is needed for the compactification in step 7, so I accept it. I accept the declared tool_uses as generic. No SGA is cited. There are no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LineZeroClassEtaleRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.line_zero_class_etale_realization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.lineZeroBaseChange",
+   "WeilConjectures.PurityFiniteSetting.line_zero_geometry",
+   "WeilConjectures.PurityFiniteSetting.lineZeroSeparated",
+   "WeilConjectures.PurityFiniteSetting.lineZeroFiniteType",
+   "WeilConjectures.PurityFiniteSetting.lineZeroQuasiCompact",
+   "WeilConjectures.PurityFiniteSetting.lineZeroClosed",
+   "WeilConjectures.PurityFiniteSetting.lineZeroAbsoluteSeparated",
+   "WeilConjectures.PurityFiniteSetting.lineZeroAbsoluteFiniteType",
+   "WeilConjectures.PurityFiniteSetting.lineZeroAbsoluteQuasiCompact",
+   "WeilConjectures.PurityFiniteSetting.lineZeroCompactifiable",
+   "WeilConjectures.PurityFiniteSetting.lineZeroCompositeCompactifiable",
+   "WeilConjectures.PurityFiniteSetting.lineZeroPushforwardExact",
+   "WeilConjectures.PurityFiniteSetting.lineZeroIdeal",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleUnit",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleSource",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleTarget",
+   "WeilConjectures.PurityFiniteSetting.lineZeroExtHom",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleMap",
+   "WeilConjectures.PurityFiniteSetting.lineZeroProUnit",
+   "WeilConjectures.PurityFiniteSetting.lineZeroProSource",
+   "WeilConjectures.PurityFiniteSetting.lineZeroProTarget",
+   "WeilConjectures.PurityFiniteSetting.lineZeroProMap",
+   "WeilConjectures.PurityFiniteSetting.lineZeroUnitComparison",
+   "WeilConjectures.PurityFiniteSetting.lineZeroSupportedComparison",
+   "WeilConjectures.PurityFiniteSetting.lineZeroTwistComparison",
+   "WeilConjectures.PurityFiniteSetting.lineZeroOriginUnit",
+   "WeilConjectures.PurityFiniteSetting.lineZeroProClosedIso",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleClosedIso",
+   "WeilConjectures.PurityFiniteSetting.lineZeroProSourceIso",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleSourceIso",
+   "WeilConjectures.PurityFiniteSetting.lineZeroTau",
+   "WeilConjectures.PurityFiniteSetting.lineZeroEtaleTau",
+   "WeilConjectures.PurityFiniteSetting.lineZeroCompactTarget",
+   "WeilConjectures.PurityFiniteSetting.lineZeroTargetWitness",
+   "WeilConjectures.PurityFiniteSetting.lineZeroCompactSourceComparison",
+   "WeilConjectures.PurityFiniteSetting.lineZeroSourceWitness",
+   "WeilConjectures.PurityFiniteSetting.line_zero_class_etale_realization"
+  ],
+  "file": "lean/Sheaf/Paper/LineZeroClassEtaleRealization.lean",
+  "statement": "theorem line_zero_class_etale_realization (V : PurityVectorBundle P B b 1) : P.generalDivisorClass (V.p ≫ b) V.zeroSection (lineZeroIdeal V) = P.agreementCartierMap (V.p ≫ b) V.zeroSection (lineZeroIdeal V) ∧ P.DivisorLocalEquations (V.p ≫ b) (P.generalDivisorEtaleClasses V.E (V.p ≫ b)) V.zeroSection (lineZeroIdeal V) ∧ Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates V.zeroSection (lineZeroIdeal V) (P.diagonalExponent_isUnit (V.p ≫ b)) (P.agreementCartierEtale (V.p ≫ b) V.zeroSection (lineZeroIdeal V)) ∧ ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) V.E).mapDerivedCategory.map (lineZeroEtaleMap V).hom ≫ (P.lineZeroTwistComparison V.E).hom = (lineZeroSupportedComparison V).hom ≫ (lineZeroProMap V).hom) ∧ ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map (DerivedCategory.Plus.ι.map (lineZeroEtaleSourceIso V).hom) ≫ (P.lineZeroUnitComparison B).hom = (lineZeroCompactSourceComparison V).hom ≫ (lineZeroProSourceIso V).hom) ∧ ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map (DerivedCategory.Plus.ι.map (lineZeroEtaleTau V)) ≫ (lineZeroTargetWitness V).iso.hom = (P.lineZeroSourceWitness B).iso.hom ≫ lineZeroTau V ≫ ((ProEtale.rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} P.Coefficient) V.p).app (P.lineZeroProTarget V.E)).inv)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ec857160",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery after e1133fdd H2 RETURN: Lean byte-identical (sha 9c4eb1d2); item stmt_deps = base 15 + new existing:true def node def-pur-cartier-agreement-maps (agreementCartierEtale = .choose of Etale.cartier_kummer_map, agreementCartierMap = functorialCupCompare of it; statement verbatim, check_existing clean); theorem kept in proof_deps. Lean re-read: datum, geometry with base change over B, cl(D)=c^p, DivisorLocalEquations minus sign, SupportedKummerBoundary pin, flat mu_N L_E, supported/source/tau squares with FixedEtaleOriginWitness data, no invertibility; universes and edge cases OK. Finding fixed: new node cited theorem lem-pur-supported-cup-functoriality for plain FunctorialCupH/functorialCupCompare and lacked body owners; fixes/def-pur-cartier-agreement-maps.json swaps to def-pur-supported-class-operations + def-pur-supported-hom-site-comparison, adds def-pur-frame-kummer-class + def-weil-pbc-direct-image (TeX cites updated; check_new_node [] ; no cycle). No compile run (no .lean changed). Advisory: base-era non-stmt_dep owners, unused SfIntrinsicCompactSupport import, self second reading."
  }
 }

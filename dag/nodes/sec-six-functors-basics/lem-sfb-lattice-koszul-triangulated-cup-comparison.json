@@ -14,7 +14,9 @@
   "def-sfb-condensed-action-module",
   "def-weil-abstract-derived-category",
   "lem-sfb-condensed-derived-restriction-calculus",
-  "lem-sfb-discrete-lattice-koszul-resolution"
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "def-sfb-lattice-algebra-derived-cup",
+  "def-sfb-lattice-restriction-cup-comparison"
  ],
  "proof": [
   {
@@ -398,5 +400,47 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-8a1472a9c (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps, every cited statement and the new node. The statement is byte-identical to the Q08-fixed base (no weakening); this is not a re-split item, and no SGA is used. Source: main-20261015 sk-thm-sf-ctf-stability direct-images proof, paragraph (3), which has no lattice calculation, so proof_origin agent is right. Step checks: I recomputed the totalized homotopy sign (-1)^a and the shift and cone comparisons ((-1)^a on K^a P[1]); they match the cone convention of def-weil-abstract-derived-category and the -p projection, and the SES connecting clause follows. The column and row comparisons apply: bounded below in both indices, and Mod_R has countable coproducts. Step 4 uses only the lattice lemma's invariant-inclusion normalization, which makes Γ(J)[0]→K(J) a quasi-isomorphism on injectives. Mono replacement, lifts and lift homotopies are cited for their statements. In step 8 I re-derived that θ_{a,b}=(-1)^{ab}c_a turns the Hom differential d_P f-(-1)^{a+b}f∂ into d_K+(-1)^a d_P. In step 9 I chased the roof: roof∘t b_J=inc and the derived counit on K-injective J comes from the resolving-adjunction transpose clause. Step 10: B flat gives finite-sum flat terms, K-flat via pc-bounded-above-flat-kflat-site and pe-internal-section-tensor-comparison; flatness of R is never used. Step 12: c_n=(-1)^{pq}c_pc_q holds and the Koszul swap sign is (-1)^{pq}. Step 13: both categories are module sheaves on small sites (action-site presentation), closed and with functorial flat resolutions, and t is exact, strong monoidal and preserves flat objects, as exact-flat-tensor-derived-counit-comparison requires. Numerical tests: d(x⋆y)=dx⋆y+(-1)^p x⋆dy for B=functions on (Z/3)^r with shifts, r=0..4, all p,q, 0 failures. New node lem-sfb-integral-cubical-chain-diagonal: B1-B9 fine, statement only. Exact integer computation of ∂Δ=Δ∂ and all three counit identities on every face, r=0..4, at zero and random negative vertices: 0 failures. rg duplicate search (cubical, diagonal, Koszul+cup/shuffle, T_A, A⊔C) found none; it is not a clause of the item (D1 OK). Batch-5 flag lem-trf-site-functorial-flat-resolution: accepted as genuinely outside the assumptions. It says only that module sheaves on any small ringed site have functorial flat resolutions (Lean-sourced, KFlatResolutionIndependentCoefficients), which is neither the trace formula, Poincaré duality, nor a step of their proofs. Its closure has 8 nodes, and the only trf/pd node in it is itself. The non-trf lem-sfb-sheaf-functorial-flat-resolution covers only A-valued sheaves, so no repoint is available. All 14 declared tool_uses are generic homological black boxes; accepted. Advisory, not a fault: step 6 does not re-verify the lattice lemma's ring-change square for the chosen λ, but the statement does not assert it and the only citer (discrete-lattice-cup-exterior) does not use it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeKoszulTriangulatedCupComparison",
+  "declaration": "Profinite.DiscreteLattice.TriangulatedCup.lattice_koszul_triangulated_cup_comparison",
+  "declarations": [
+   "Profinite.DiscreteLattice.TriangulatedCup.moduleHasTotal",
+   "Profinite.DiscreteLattice.TriangulatedCup.koszulAdditive",
+   "Profinite.DiscreteLattice.TriangulatedCup.total",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalBoundedBelow",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalPlus",
+   "Profinite.DiscreteLattice.TriangulatedCup.bicomplex",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalInclusionF",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalInclusionComm",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalInclusion",
+   "Profinite.DiscreteLattice.TriangulatedCup.moduleComplex",
+   "Profinite.DiscreteLattice.TriangulatedCup.TriangulatedModel",
+   "Profinite.DiscreteLattice.TriangulatedCup.onComplex",
+   "Profinite.DiscreteLattice.TriangulatedCup.ComparisonProperties",
+   "Profinite.DiscreteLattice.TriangulatedCup.CupComparison",
+   "Profinite.DiscreteLattice.TriangulatedCup.IsRankZero",
+   "Profinite.DiscreteLattice.TriangulatedCup.lattice_koszul_triangulated_cup_comparison",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalShiftIsoApp",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalShiftNaturality",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalShiftIso",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalShiftCoherence",
+   "Profinite.DiscreteLattice.TriangulatedCup.totalCommShift",
+   "Profinite.DiscreteLattice.TriangulatedCup.plusQCommShift"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeKoszulTriangulatedCupComparison.lean",
+  "statement": "theorem lattice_koszul_triangulated_cup_comparison : ∃ (K : ∀ r : ℕ, KoszulModel R r) (M : ∀ r : ℕ, TriangulatedModel R r (K r)) (c : ∀ r : ℕ, Comparison R r (K r)), (∀ r : ℕ, ComparisonProperties R r (K r) (M r) (c r)) ∧ IsRankZero R (K 0) (M 0) ∧ (∀ r : ℕ, ∃ E : RestrictionCup.Bridge R r, RestrictionCup.Compatible R r E) ∧ ∀ (r : ℕ) (B : DerivedCup.Algebra R r), IsCommMonObj B.X → ObjectProperty.flat B.X.V → Nonempty (CupComparison R r (K r) (c r) B)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06ade1c7a",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery after RETURN bdc4ce08b4f8. H3(1) fixed: totalCommShift built from mapCochainComplexShiftIso + totalShift₂Iso (sign (-1)^(a·n)), and the new factorShiftCompatibility (NatTrans.CommShift factor.hom) fixes the descended functor's shift through the localization, so triangulated/shiftCompatibility are no longer vacuous. H3(2) fixed: new def node def-sfb-lattice-restriction-cup-comparison (Bridge/Compatible). The equivalence is tied to underlying+constants, invariants fixed by inclusion, derived by computation units on every complex, regular by underlying, the tensorator on flat K-flat representatives and the unit; cohomologyIso does not depend on the choice. Compatible equates the restriction-calculus cup and cupUnit (ring ⟨R.X⟩, G = ULift (Multiplicative (Fin r→ℤ)), the citer's Lattice r) with DerivedCup.cup and cupUnit of the regular algebra, via the raise u+1→u+2 transport and no universe equality. Not a duplicate of the rank-one RelativeCyclic.DiscreteBridge. Records: stmt_deps adds the new node, statement verbatim, declarations listed, 'structure Bridge' convention OK. The other two modules are byte-identical to bdc4 (checked there). Docstrings/H5/H6/H8 OK, no extra hypotheses. No compile (no file changed). Advisory: citer step 3 should name the Bridge for the connecting-class transport."
  }
 }
