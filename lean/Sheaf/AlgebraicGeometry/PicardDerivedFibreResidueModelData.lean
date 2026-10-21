@@ -7,7 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -16,7 +15,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! Simultaneous affine strictly-perfect residue model data for a finite family.
 
@@ -41,6 +39,12 @@ set_option linter.unusedVariables false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+private theorem tensorPullback_invertible_local {X Y : Scheme.{v}} (g : X ⟶ Y)
+    (M : Y.Modules) [M.IsInvertible] : ((Modules.tensorPullback g).obj M).IsInvertible := by
+  obtain ⟨adj⟩ := Modules.nonempty_tensorPullbackAdjunction g
+  exact Modules.IsInvertible.of_iso
+    ((adj.leftAdjointUniq (Modules.pullbackPushforwardAdjunction g)).app M).symm
 
 private theorem perfect_of_invertible_directImage
     [∀ Y : Scheme.{v},
@@ -163,10 +167,7 @@ theorem picard_derived_fibre_residue_model_data
           ((Modules.tensorPullback (ui i)).obj L)))
   have hEperf : IsPerfect W E := by
     let G := (Modules.tensorPullback (pullback.fst f k)).obj L
-    let e := (Classical.choose
-      (Modules.exists_tensorPullbackAdjunction (pullback.fst f k))).leftAdjointUniq
-        (Modules.pullbackPushforwardAdjunction (pullback.fst f k))
-    letI : Modules.IsInvertible G := Modules.IsInvertible.of_iso (e.app L).symm
+    letI : Modules.IsInvertible G := tensorPullback_invertible_local _ _
     dsimp [E]
     exact perfect_of_invertible_directImage (pullback.snd f k)
       G
@@ -174,18 +175,9 @@ theorem picard_derived_fibre_residue_model_data
     intro i
     let M := (Modules.tensorPullback (pullback.fst (fi i) k)).obj
       ((Modules.tensorPullback (ui i)).obj L)
-    let e := (Classical.choose
-      (Modules.exists_tensorPullbackAdjunction (ui i))).leftAdjointUniq
-        (Modules.pullbackPushforwardAdjunction (ui i))
     letI : Modules.IsInvertible ((Modules.tensorPullback (ui i)).obj L) :=
-      Modules.IsInvertible.of_iso (e.app L).symm
-    let N := (Modules.tensorPullback (ui i)).obj L
-    let e' := (Classical.choose
-      (Modules.exists_tensorPullbackAdjunction (pullback.fst (fi i) k))).leftAdjointUniq
-        (Modules.pullbackPushforwardAdjunction (pullback.fst (fi i) k))
-    have hM : Modules.IsInvertible M :=
-      Modules.IsInvertible.of_iso (e'.app N).symm
-    letI : Modules.IsInvertible M := hM
+      tensorPullback_invertible_local _ _
+    letI : Modules.IsInvertible M := tensorPullback_invertible_local _ _
     dsimp [Ei, M]
     exact perfect_of_invertible_directImage (pullback.snd (fi i) k) M
   obtain ⟨U₀, hw₀, K₀, hK₀, eK₀⟩ := hEperf w
