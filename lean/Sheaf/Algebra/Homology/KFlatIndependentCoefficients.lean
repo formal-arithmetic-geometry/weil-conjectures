@@ -7,6 +7,7 @@ module
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.QuasiIso
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Mathlib.CategoryTheory.Limits.EssentiallySmall
 
