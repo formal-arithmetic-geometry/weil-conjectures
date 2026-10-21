@@ -23,9 +23,69 @@
   "lem-weil-pbc-integral-constructible-bounded-below-compactness",
   "lem-weil-pbc-scalar-localization-derived-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the canonical coefficient identification in [lem-per-rational-module-realization-functor]: the completed sheaf $B_X$ is the continuous-function sheaf $A_X$. Thus $K$ belongs to the same full integral category under this identification. Apply [lem-weil-pbc-integral-constructible-hom-sums] with this $X,E,A,\\varpi,K$ and the given countable family. The scheme is noetherian and finite-dimensional, $\\ell$ is invertible, and the family has the common lower bound required there. Its conclusion is exactly the first displayed map for every $q\\in\\mathbf Z$, with the same shifted coprojections, so proves the first assertion. This existing Hom-sums theorem is the passage from the global-derived-Hom continuity of Lemma 6.8.12 to ordinary shifted Hom; no continuity for families unbounded below is invoked.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "lem-weil-pbc-integral-constructible-hom-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
+   }
+  },
+  {
+   "text": "Apply (i)$\\Rightarrow$(iii) of [lem-weil-pbc-integral-stratified-perfect-characterization] to $L\\in\\mathcal C_X$. All its scheme and coefficient hypotheses are those of the item, and membership includes the compatible etale-origin witnesses. It follows that $L$ is bounded, hence bounded below. The same characterization states closure under shifts, so $L[q]$ is again in $\\mathcal C_X$ whenever needed to interpret a morphism of the rational category. No projectivity or flatness of the cohomology modules of $L$ is being assumed.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-scalar-localization-derived-hom] on the small site $X_{\\mathrm{proet}}$ with the commutative ring $A$, scalar $t=\\varpi$, ring sheaf $R=B_X$ and $R_t=E_X$. Step 1 verifies precisely its countable, common-lower-bound coproduct-Hom hypothesis on $K$ for every integer shift; Step 2 verifies its bounded-below hypothesis on $L$. By [lem-per-rational-module-realization-functor], scalar localization is exact on module sheaves and its induced triangulated functor is the actual $F_X=E_X\\otimes^L_{B_X}-$ used in the item. The theorem therefore gives the natural isomorphism $\\operatorname{Hom}_{D(B_X)}(K,L[q])[1/\\varpi]\\simeq\\operatorname{Hom}_{D(E_X)}(F_XK,F_XL[q])$, with the specified image $f/\\varpi^n\\mapsto\\varpi^{-n}F_X(f)$. In particular it is the actual scalar-extension comparison, with its shift comparison, rather than an unspecified isomorphism of the two modules.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-derived-hom",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
+   }
+  },
+  {
+   "text": "For completeness, the fraction formula gives precomposition and postcomposition by $a,b$ as $\\varpi^{-n}F_X(f)F_X(a)$ and $F_X(b)\\varpi^{-n}F_X(f)$, so gives naturality. Shifting gives $\\varpi^{-n}F_X(f)[r]$ under the triangulated shift identification. The identity fraction maps to $F_X(1)=1$, and for composable fractions the formula gives $\\varpi^{-(m+n)}F_X(gf)=(\\varpi^{-m}F_X(g))(\\varpi^{-n}F_X(f))$. These equations hold for every fraction. Finally [def-weil-pbc-bounded-constructible-complete] defines $\\mathcal C_X$ as a full subcategory of $D(B_X)$, and [def-weil-pbc-rational-category] gives every object of $\\mathcal R_X$ as $QK$ and its Hom modules as the localized integral Hom modules. The $q=0$ bijections of Step 3 are therefore exactly the Hom maps of $J_X$ specified in [lem-per-rational-module-realization-functor]. They prove that $J_X$ is fully faithful into the ambient $D(E_X)$.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-rational-category",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-pbc-integral-constructible-hom-sums",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-scalar-localization-derived-hom",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +114,52 @@
    "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:113; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:115; Mathlib/Algebra/Category/ModuleCat/Localization.lean:71; Mathlib/Algebra/Category/ModuleCat/Localization.lean:75; Mathlib/Algebra/Category/ModuleCat/Localization.lean:105; Mathlib/Algebra/Category/ModuleCat/Localization.lean:108; Mathlib/Algebra/Category/Ring/Instances.lean:32; Mathlib/Algebra/Homology/Localization.lean:24; Mathlib/Algebra/Homology/Localization.lean:51; Mathlib/Algebra/Homology/Localization.lean:60; Mathlib/Algebra/Homology/Localization.lean:66; Mathlib/Algebra/Homology/Localization.lean:82; Mathlib/Algebra/Module/FinitePresentation.lean:36; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:86; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:66; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:67; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:123; Mathlib/Algebra/Polynomial/Laurent.lean:532; Mathlib/Algebra/Polynomial/Laurent.lean:539; Mathlib/Algebra/Polynomial/Laurent.lean:547; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean:61; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean:119; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean:124; Mathlib/CategoryTheory/Shift/Localization.lean:154; Mathlib/CategoryTheory/Shift/Localization.lean:185; no hit states the completed integral/rational continuous-module assertion.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible adic complexes commute with bounded below direct sums in derived Hom and scalar localization gives fully faithful rational realization",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; DerivedCategory.instLinearHomotopyCategoryIntUpQh; DerivedCategory.right_fac; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.left_fac. Read the returned results; exact derived-functor constructions, ordinary Ext identifications and algebraic localization do not state bounded-below Hom continuity for constructible adic sheaves or the complete comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Hh]om|[Hh]om.*constructible|localiz.*[Hh]om",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. Read the returned results; exact derived-functor constructions, ordinary Ext identifications and algebraic localization do not state bounded-below Hom continuity for constructible adic sheaves or the complete comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a constructible completed adic complex commutes with direct sums of uniformly bounded below complexes",
+   "results": "8 hits: AdicCompletion.sum_of; AdicCompletion.sum_lof; AdicCompletion.sumInv_apply; AdicCompletion.sum; AdicCompletion.sumInv_comp_sum; AdicCompletion.sumEquivOfFintype_apply; AdicCompletion.component_sumInv; AdicCompletion.sumEquivOfFintype_symm_apply. Read the returned results; exact derived-functor constructions, ordinary Ext identifications and algebraic localization do not state bounded-below Hom continuity for constructible adic sheaves or the complete comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Localization",
+   "results": "0 hits: none. Read the returned results; exact derived-functor constructions, ordinary Ext identifications and algebraic localization do not state bounded-below Hom continuity for constructible adic sheaves or the complete comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|[Cc]ompact|[Ll]ocaliz",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean; Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean. Read the returned results; exact derived-functor constructions, ordinary Ext identifications and algebraic localization do not state bounded-below Hom continuity for constructible adic sheaves or the complete comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at a central scalar identifies derived Hom of bounded constructible sheaves with Hom after extension of scalars",
+   "results": "8 hits: CategoryTheory.Sheaf.H; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt; CategoryTheory.Functor.mapExtLinearMap_coe; CategoryTheory.Functor.mapExtLinearMap_apply; PresheafOfModules.sheafificationHomEquiv; Ext. Read the returned results; exact derived-functor constructions, ordinary Ext identifications and algebraic localization do not state bounded-below Hom continuity for constructible adic sheaves or the complete comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -78,5 +180,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-constructible-rational-hom-comparison",
+  "worker": "stage1",
+  "summary": "Checked the Bhatt-Scholze full-faithfulness argument and reused the existing countable Hom-sums theorem and the abstract scalar-localization comparison. Verified the identical completed coefficient sheaf, compatible-witness integral category, boundedness of L, and the actual fraction formula; no new nodes or statement changes.",
+  "blueprint": "Nearest ancestor lem-per-smooth-pullback-t-exact: continuous-coefficient realization underlying the first pullback/cohomology paragraph, specifically the retained full-faithfulness step 4 of lem-per-continuous-rational-derived-realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-constructible-hom-sums",
+    "why": "Generic passage from integral global derived Hom continuity to the coprojection-induced shifted Hom maps, with exactly the completed coefficient category and common-lower-bound hypothesis; no perverse-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic characterization of the integral completed category provides actual boundedness and closure under shifts; no perverse-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-derived-hom",
+    "why": "Generic ringed-site scalar-localization theorem converts the verified Hom continuity into the actual comparison, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-constructible-hom-sums",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-scalar-localization-derived-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-a686c55af",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-a686c55af (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement, and Bhatt–Scholze pp. 61–62 (Lemma 6.8.12 and Prop 6.8.14(2), where full faithfulness follows from 6.8.12). The proof expands exactly that implication. The delivery is one commit with no new nodes; statement, stmt_deps and blueprint are byte-identical to the unsplit live node; there is no cycle (closure of 2722 nodes); and the item is not superseded, has no repair note and is not on the drop list. Step 1: lem-weil-pbc-integral-constructible-hom-sums states the first assertion verbatim (same E, A, ϖ, noetherian finite-dimensional X with ℓ invertible, K in the complete category, small countable families with a common lower bound, every q, shifted coprojections). The coefficient identification B_X=C(|−|,A) comes from the realization-functor node through the same continuous-coefficients node. Step 2: (i)⇒(iii) of the integral stratified-perfect characterization gives L bounded, and the same node gives closure under shifts. Step 3: I checked every hypothesis of the scalar-localization theorem: small site, t=ϖ, R=B_X, R_t=E_X as the sheafified section localization, the K-hypothesis at every q from Step 1, L bounded below from Step 2, and F equal to the actual scalar localization by the realization-functor node. Its conclusion is the item's display, with naturality, shifts and composition. Step 4 is elementary: the complete category is a full subcategory of D(B_X), and the rational category has the same objects with Hom⊗E and no Karoubi envelope, so the q=0 maps are those of J_X and J_X is fully faithful. Edge cases are consistent: empty family, K=0 or L=0, negative q, and ϖ-torsion K (both sides 0). Neither the cited nodes nor the item claim anything for families unbounded below. I accept the tool_uses of the three generic pbc nodes; the parent already carries two of them. No duplicate: the condensed-e-realization node is for separated finite-type k-schemes into condensed modules, and the lisse-rational-realization node covers lisse objects only. Advisory for the maintainer: the item's first assertion restates hom-sums verbatim; that statement was written by Q115 and is unchanged by this delivery. No SGA, no fixes."
  }
 }
