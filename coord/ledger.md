@@ -21772,3 +21772,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:15 L: merged deliver/Q18/lem-pod-pullback-identities-scalar-extension (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 09:15 L: merged deliver/Q23/lem-pur-line-zero-class-exchange (reviewer FIX; first push; new nodes: 0); claim not held by Q23: not your claim
 - 09:15 L: merged deliver/Q142/lem-weil-isomorphism-scalar-tensor-kflat-model (reviewer PASS; first push; new nodes: 0)
+- 09:15 L: merged deliver/Q142/lem-dl-a1-henselian-global-inertia-comparison (reviewer FIX; first push; new nodes: 0)
