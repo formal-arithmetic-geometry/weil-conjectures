@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "Use openPinnedTensorOpenIso and overFunctorEquiv to form rho. The defining leftDerivedUnique factorization, exact restriction single factorization and naturality of singleMapHomologicalComplex identify the displayed a with q_U followed by single(rho). Construct b from inverse tensor composition for k.hom,r with the path equality hr, tensor composition for r',U.ι and tensorPullback r' of rho. The section variable supplies HasDerivedCategory for every scheme; no additional tensor-additivity hypothesis is retained by the public theorem.",
+   "text": "Use openPinnedTensorOpenIso and overFunctorEquiv to form rho. The defining leftDerivedUnique factorization, exact restriction single factorization and naturality of singleMapHomologicalComplex identify the displayed a with q_U followed by single(rho). Construct b from inverse tensor composition for k.hom,r with the path equality hr, tensor composition for r',U.ι and tensorPullback r' of rho. The section variable supplies HasDerivedCategory for every scheme; no additional tensor-additivity hypothesis is retained by the public theorem. The Lean normalization names the fixed leftDerivedUnique comparison and its counit factorization before applying exact-functor naturality, keeping the chosen counit abstract in the subsequent calculations. Apply the counit factorization before normalizing the underived open comparison; the inverse uniqueness identity and the lifted single-complex naturality identities are proved privately in general categories.",
    "uses": [
     "def-pc-single-complex-open-restriction-data",
     "def-pc-tensor-pullback-composition-iso",
@@ -25,7 +25,7 @@
    "elementary": false
   },
   {
-   "text": "The pinned derived counit along k.hom is invertible on every complex because k is an isomorphism. Its component at the single tensorPullback r M followed by the single comparison and single.mapIso b defines d. Apply picardTermwiseSingleMap_composition to k.hom,r and to r',U.ι. Naturality for rho and cancellation of the composition comparisons yield the coefficient equation. This argument uses no direct image or base-change map, and includes zero modules and empty schemes/opens. The Lean proof normalizes picardTermwiseSingleMap, proves coefficient naturality from the pinned counit and single comparison naturality, obtains the normalized composition equation by postcomposing the existing equation with the single comparison, eliminates the equality of composite paths before this calculation, and cancels the two tensor comparisons. Local reducibility of Scheme.Modules and a private instance identifying its derived category with the given sheaf-module derived category avoid costly redundant unfolding; no definition or signature is changed.",
+   "text": "The pinned derived counit along k.hom is invertible on every complex because k is an isomorphism. Its component at the single tensorPullback r M followed by the single comparison and single.mapIso b defines d. Apply picardTermwiseSingleMap_composition to k.hom,r and to r',U.ι. Naturality for rho and cancellation of the composition comparisons yield the coefficient equation. This argument uses no direct image or base-change map, and includes zero modules and empty schemes/opens. The Lean proof normalizes picardTermwiseSingleMap, proves coefficient naturality from the pinned counit and single comparison naturality, obtains the normalized composition equation by postcomposing the existing equation with the single comparison, eliminates the equality of composite paths before this calculation, and cancels the two tensor comparisons. Local reducibility of Scheme.Modules and a private instance identifying its derived category with the given sheaf-module derived category avoid costly redundant unfolding; no definition or signature is changed. Restoration uses the adopted WeilConjectures isomorphism-counit module and the existing irreducible derivedPullback interface; the public signature and construction of the coefficient transport remain identical to the archive. The private calculations use the existing SingleComplexBaseChange.counit definition for that exact selected counit and one canonical private tensor-additivity instance, with scoped let sharing, so the large existential specifications are not repeatedly expanded. The final coefficient diagram is pasted using a proved private abstract category lemma, preserving the same constructed b and d and all original path equalities.",
    "uses": [
     "lem-pc-isomorphism-pullback-counit",
     "lem-sc-picard-termwise-single-map-composition",
@@ -45,10 +45,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "T2",
-  "date": "2026-10-14",
+  "group": "F1",
+  "date": "2026-10-21",
   "document": "Stacks Project",
-  "place": "Tags 06YJ, 08HY and 0D5S"
+  "place": "Tags 06YJ, 08HY and 0D5S; restoration of the existing coefficient-composition proof against the current adopted source API"
  },
  "mathlib_searches": [
   {
@@ -122,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261014T101747-L-1177271",
-  "kind": "interface",
+  "landing": "20261021T005733-L-1886698",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
