@@ -21477,3 +21477,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q65/lem-a1-principal-koszul-strict-replacement (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q03/lem-weil-pbc-strict-quotient-scalar-balancing (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q74/lem-pur-concentrated-support-etale-transfer (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q156/lem-per-adic-normalized-fibre-exactness (reviewer FIX; first push; new nodes: 0); claim not held by Q156: not your claim
