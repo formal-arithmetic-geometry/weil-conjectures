@@ -24,9 +24,122 @@
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-bounded-representative] to the abelian category of ordinary $A_Z$-module sheaves and the given cohomology vanishing of $B$, with $a=r,b=s$. It gives a complex $B^\\bullet$, zero outside $[r,s]$, and an isomorphism $B\\cong Q_Z(B^\\bullet)$. Here $Q_W$ denotes localization of complexes on $W_{\\Et}$. This step uses no Tor-amplitude hypothesis on $B$.",
+   "uses": [
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "place": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, lines 180–186"
+   }
+  },
+  {
+   "text": "Use the small-etale-site clause of [lem-sf-flat-model], with $K=M,a=u,b=v$. The coefficient ring is exactly $A_{E,n}$, $\\ell$ is invertible on $T$ because $\\ell\\ne p$, $M$ is bounded constructible, and $u\\le v$. The asserted Tor amplitude is therefore condition (i) of that lemma. It supplies $V^\\bullet$ representing $M$, zero outside $[u,v]$, whose terms are flat in the sense of that lemma: $V^h\\otimes_A-$ preserves injections of $A_T$-module sheaves. Since $V^h\\otimes_A-$ also preserves cokernels [lem-weil-pbc-independent-sheaf-tensor-colimits], it carries short exact sequences to short exact sequences and is exact; composing with the symmetry $\\mathcal G\\otimes_AV^h\\cong V^h\\otimes_A\\mathcal G$, the sheafification of the sectionwise symmetry of module tensor products [def-pur-sheaf-tensor-product], each $V^h$ is flat in the sense of [def-pc-flat-sheaf-modules], the notion used below. This complex is bounded above by $v$, so [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. Only the flat-model equivalence is used, not its stronger constructible-model clause.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; bounded input: lem-sf-flat-model, etale clause"
+   }
+  },
+  {
+   "text": "For constant $A$ on the small etale sites, [prop-weil-pbc-inverse-image-modules-exact] identifies $i_e^*$ with the exact inverse image, using the canonical isomorphism $i_e^{-1}A_T\\cong A_Z$. Applying [lem-weil-pbc-exact-functor-derived-factorization] shows that the termwise complex $lV^\\bullet$ represents $lM$: explicitly apply the induced derived functor to $M\\cong Q_T(V^\\bullet)$ and then its displayed comparison with $Q_Z(lV^\\bullet)$. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] to this morphism of constant-ring topoi and the flat-term K-flat complex $V^\\bullet$. It says that $lV^\\bullet$ is K-flat and has flat terms. Since the additive pullback carries zero to zero, it is still zero outside $[u,v]$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 04JC, sites-modules-lemma-flat-pullback-exact; Tag 015F, derived-lemma-right-derived-exact-functor; Tag 0G7E, lemma-pullback-K-flat"
+   }
+  },
+  {
+   "text": "Apply the right-factor version of [lem-trf-site-one-sided-tensor-normalization] on $(Z_{\\Et},A_Z)$, with fixed flat-term K-flat factor $lV^\\bullet$ and arbitrary complex $B^\\bullet$. The resulting isomorphism, composed with those from steps 1 and 3, identifies $B\\otimes_A^LlM$ with $Q_Z\\operatorname{Tot}(B^\\bullet\\otimes_A lV^\\bullet)$. The cited statement explicitly permits $B^\\bullet$ to be non-flat and non-K-flat. By [def-pc-tensor-complex-sheaves], the total terms are $\\bigoplus_{j+h=d}B^j\\otimes_A lV^h$ and the differential on bidegree $(j,h)$ is $d_B\\otimes1+(-1)^j1\\otimes d_{lV}$, exactly the complex in the statement.",
+   "uses": [
+    "lem-trf-site-one-sided-tensor-normalization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and its preceding construction, with right-factor normalization"
+   }
+  },
+  {
+   "text": "For a nonzero summand of the degree-$d$ total term one must have $r\\le j\\le s$, $u\\le h\\le v$, and $j+h=d$. These imply $r+u\\le d\\le s+v$. Thus every summand, and hence the total term, is zero if $d<r+u$ or $d>s+v$; only finitely many summands occur in any degree. The formula $\\mathcal H^d=\\ker(d^d)/\\operatorname{im}(d^{d-1})$ from [def-weil-pbc-derived-categories] then gives zero cohomology in those degrees. Consequently $Q=B\\otimes_A^LlM$ belongs to $D^b(Z_e,A)$ and to $D^+(Z_e,A)$, with lower bound $r+u$ and upper bound $s+v$. This is a vanishing bound; it does not require nonzero cohomology at either endpoint.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor; elementary degree support of the direct-sum total complex"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-proper], $i$ is proper. Unpacking [def-weil-proper-morphism] gives separatedness and finite type; unpacking [def-weil-finite-type-morphism] gives quasi-compactness. By [lem-pc-separated-quasi-separated], the separated morphism $i$ is quasi-separated. These verify the geometric hypotheses of the direct-image comparison, independently of any cohomological amplitude.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W5, morphisms-lemma-closed-immersion-proper; separated implies quasi-separated"
+   }
+  },
+  {
+   "text": "The ring $A=A_{E,n}$ is finite by [def-weil-l-adic-coefficient-extension], clause 4, and it is the same ordinary constant coefficient ring on both sites. Step 5 puts $Q$ in $D^+(Z_e,A)$ and step 6 makes $i$ quasi-compact and quasi-separated. Thus [lem-weil-pbc-comparison-direct-image-canonical-mate] applies with $u=i$ and $K=Q$: its specified mate $b_{i,Q}:C_TRi_{e,*}Q\\to Ri_{p,*}C_ZQ$ is defined and invertible. This is the named morphism in the item, rather than an arbitrarily chosen isomorphism. No step required finite Tor amplitude of $B$ or local freeness of $V^h$. The zero complex can be used for a zero input; on the empty site every term is zero; and none of the inequalities or cited results requires either interval to have positive length.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, proetale-section-comparison; canonical normalization as in lem-weil-pbc-comparison-direct-image-canonical-mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-representative",
+  "lem-sf-flat-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Auxiliary bounded-tensor preparation for the second evaluation paragraph; assembled from the cited bounded flat model, Stacks 06YQ, 0G7E, 06YU and 099R."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -142,10 +255,128 @@
    "date": "2026-10-21",
    "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together",
    "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Tor amplitude complex of module sheaves admits a flat complex representative in that same degree interval whose tensor with a bounded complex is bounded in the sum interval",
+   "results": {
+    "t": "2026-10-21T09:03:47Z",
+    "tool": "leanfinder",
+    "query": "A finite Tor amplitude complex of module sheaves admits a flat complex representative in that same degree interval whose tensor with a bounded complex is bounded in the sum interval",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.tfae_equational_criterion",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.Flat.iff_rTensor_exact",
+     "Module.Flat.iff_lTensor_exact'"
+    ],
+    "digest": "588ffbdce45d021b"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the bounded representative is already the existing Mathlib leaf lem-sfb-bounded-representative; the hits do not state the entire flat pullback/tensor/mate assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|HasTorDimension|kFlat_of_bounded_of_flat|exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": {
+    "t": "2026-10-21T09:04:11Z",
+    "tool": "grep",
+    "query": "torAmplitude|TorAmplitude|HasTorDimension|kFlat_of_bounded_of_flat|exists_iso_Q_obj_of_isGE_of_isLE",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean"
+    ],
+    "digest": "b846f075576aace0"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the bounded representative is already the existing Mathlib leaf lem-sfb-bounded-representative; the hits do not state the entire flat pullback/tensor/mate assertion.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor of an arbitrary bounded complex of sheaves and a bounded flat complex computes derived tensor with cohomology in the sum of the degree intervals",
+   "results": {
+    "t": "2026-10-21T09:04:12Z",
+    "tool": "leansearch",
+    "query": "Tensor of an arbitrary bounded complex of sheaves and a bounded flat complex computes derived tensor with cohomology in the sum of the degree intervals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.tensorObj",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "HomologicalComplex.tensorHom",
+     "CategoryTheory.Sheaf.tensorProd_isSheaf",
+     "HomologicalComplex.instHasTensorTensorUnit",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "HomologicalComplex.HasTensor"
+    ],
+    "digest": "fbd1c57fc9e86a37"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the bounded representative is already the existing Mathlib leaf lem-sfb-bounded-representative; the hits do not state the entire flat pullback/tensor/mate assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": {
+    "t": "2026-10-21T09:04:12Z",
+    "tool": "loogle",
+    "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "digest": "a7b25b75b1756892"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the bounded representative is already the existing Mathlib leaf lem-sfb-bounded-representative; the hits do not state the entire flat pullback/tensor/mate assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback preserves a bounded flat representative of a finite Tor dimension etale sheaf complex and tensoring it with any bounded complex adds the cohomological intervals",
+   "results": {
+    "t": "2026-10-21T09:05:34Z",
+    "tool": "leanfinder",
+    "query": "Pullback preserves a bounded flat representative of a finite Tor dimension etale sheaf complex and tensoring it with any bounded complex adds the cohomological intervals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier"
+    ],
+    "digest": "70345c6014800430"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the bounded representative is already the existing Mathlib leaf lem-sfb-bounded-representative; the hits do not state the entire flat pullback/tensor/mate assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-boundary-proetale-projection-comparison",
@@ -164,5 +395,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-boundary-bounded-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Split into bounded representative, etale bounded flat model, exact pullback and K-flat preservation, right-factor derived tensor computation, elementary sum interval, qcqs verification and the specified canonical comparison mate. All ingredients already have nodes; no new node and no statement change.",
+  "blueprint": "The second evaluation paragraph of cor-weil-boundary-duality-discharge requires the bounded tensor Q before applying the ordinary-to-proetale comparison; steps 1–5 give that preparation and steps 6–7 verify applicability of its named mate.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic etale bounded flat-model theorem; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site bounded-flat K-flatness theorem; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact constant-coefficient etale inverse image; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-topos K-flat pullback theorem; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Generic one-sided K-flat derived tensor comparison; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "def-weil-pbc-derived-categories",
+    "why": "Generic cohomology and bounded subcategory definitions; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic finite coefficient ring definition and finiteness; this unit has no proof steps or replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic named etale/proetale direct-image mate theorem; this unit has no proof steps or replacement for this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-flat-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "def-weil-pbc-derived-categories",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-65468a6c5",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-65468a6c5 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, and every cited statement. Sources checked: Stacks 06YQ (sites-cohomology.tex:3120), 0G7E (:3508), tags file, blueprint main-20261015 cor-weil-boundary-duality-discharge proof. Context: no new nodes; statement identical to base and side-live; item still unsplit live; neither the item nor its parent chain is in route-pivot-dropped; no repair note; no SGA. Steps 1 and 3–7 hold. (1) bounded representative on Mod(Z_et,A). (3) exact module inverse image ≅ i^*; the termwise complex represents lM by 015F; 0G7E needs K-flat with flat terms, which step 2 supplies. (4) right-factor clause of the one-sided normalization allows an arbitrary B^•; the sign and terms match def-pc-tensor-complex-sheaves. (5) elementary [r+u,s+v] bound, so Q is in D^b ∩ D^+. (6) closed immersion is proper, so qc, separated and qs. (7) A_{E,n} is finite (clause 4) and i is qcqs, so the named counit-normalized mate b_{i,Q} is invertible. Small cases checked: Z empty, zero inputs, point with A[-r]⊗A[-u], non-flat B over Z/ℓ², equal endpoints. One fault, C4 in step 2, repaired: lem-sf-flat-model's 'flat' means only that P⊗− preserves injections, while 06YQ and 0G7E need def-pc-flat-sheaf-modules exactness. Fix adds right exactness via lem-weil-pbc-independent-sheaf-tensor-colimits (on route) and tensor symmetry via def-pur-sheaf-tensor-product, with the matching uses and proof_deps. The fixed node is acyclic. Accepted tool_uses: lem-sf-flat-model and lem-trf-site-one-sided-tensor-normalization, the only off-route statements, both generic black boxes. Advisory: lem-sf-source-tensor-cohomology-interval overlaps only the degree bound, not a duplicate. lem-pc-bounded-above-flat-kflat-site has a stale source tag (06YS; correct 06YQ).; 1 file(s) fixed by the reviewer"
  }
 }
