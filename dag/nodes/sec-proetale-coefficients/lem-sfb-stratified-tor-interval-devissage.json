@@ -15,9 +15,76 @@
   "sk-def-sfb-constructible",
   "def-constructible-stratification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite constructible stratification $s_a:S_a\\hookrightarrow X$ for $M$, so that $M_a=s_a^*M$ has a finite constant local model. Apply [lem-fix-constructible-open-closed-refinement] to this one partition. It gives a finite rooted binary tree, with root $X$, qcqs vertices $T$, and structure maps $t_T:T\\to X$. Each internal vertex is split into a quasi-compact open child and its closed complement. For each nonempty leaf $T$, choose the actual factorization $t_T=s_a\\circ h_T$ through a stratum supplied by the lemma. This uses the scheme-theoretic factorization in its statement, not a factorization inferred merely from containment of images.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-fix-constructible-open-closed-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; use its existing scheme-theoretic binary refinement node"
+   }
+  },
+  {
+   "text": "Fix a nonempty leaf and its map $h_T:T\\to S_a$. Choose a model cover $V_\\lambda\\to S_a$ and scalar matrices $A_\\lambda$ presenting $M_a|_{V_\\lambda}$ as $\\operatorname{coker}(\\Lambda_{V_\\lambda}^{m_\\lambda}\\xrightarrow{A_\\lambda}\\Lambda_{V_\\lambda}^{n_\\lambda})$ by [det-def-sfb-constructible-local-model]. Base change gives a pro-etale cover $W_\\lambda=T\\times_{S_a}V_\\lambda\\to T$, by the covering-preserving base-change assertion of [def-weil-proetale-inverse-image]. By [sk-prop-sfb-cartesian-coefficients], pullback is exact and identifies the pulled-back coefficient ring with $\\Lambda_{W_\\lambda}$; hence it sends this cokernel to $\\operatorname{coker}(\\Lambda_{W_\\lambda}^{m_\\lambda}\\xrightarrow{A_\\lambda}\\Lambda_{W_\\lambda}^{n_\\lambda})$. The entries remain the same elements of $\\Lambda(*)$, since their actions are pulled back along the structure maps from the point. The composition comparison [def-sfb-module-upper-star-comp] identifies these modules with $(t_T^*M)|_{W_\\lambda}$. The matrix criterion therefore proves that $t_T^*M$ has a finite constant local model. This is the direct application of an exact functor to a finite presentation.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "def-weil-proetale-inverse-image",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
+    "place": "Matrix-presentation criterion, clause 2; pull back the presentation on the base-changed cover"
+   }
+  },
+  {
+   "text": "Apply the hypothesis of the item with $S=T$ to every nonempty leaf, using step 2: $t_T^*M$ has Tor amplitude in the original interval $[c,d]$. For an empty leaf (or an empty root), the empty family is a pro-etale cover: all weakly etale conditions are vacuous, and every affine open is empty and is covered by the empty finite family, as in [def-weil-pbc-proetale-covering]. The definition [det-def-sfb-constructible-local-model] therefore gives a finite constant local model for its restricted module, with no matrices to choose. Apply the same hypothesis on this empty scheme. Thus the assertion holds at every leaf, including the empty cases, without any assumption that $0\\in[c,d]$.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Strata; leaf case of the finite induction, including empty strata"
+   }
+  },
+  {
+   "text": "Induct upwards on the finite tree (equivalently, on the height of the subtree below a vertex). The induction assertion at a vertex $T$ is that $M_T=t_T^*M$, in degree zero, has Tor amplitude in $[c,d]$. Step 3 proves the height-zero case. At an internal vertex let $j:U\\hookrightarrow T$ and $i:Z\\hookrightarrow T$ be its open and closed child maps. The induction hypotheses give the assertion for the two child restrictions of $M$. By [def-sfb-module-upper-star-comp] these are $j^*M_T$ and $i^*M_T$. The canonical coefficient isomorphisms and exact inverse-image description in [sk-prop-sfb-cartesian-coefficients] identify these with the restrictions over $j^{-1}\\Lambda_T$ and $i^{-1}\\Lambda_T$ required by [lem-sfb-tor-interval-local-detection](ii). Its open immersion is quasi-compact by step 1, so that lemma applies to $K=M_T[0]$ over the sheaf of rings $\\Lambda_T$, and proves the same Tor interval at $T$. Tor amplitude is invariant under the displayed isomorphisms by [det-def-sfb-constructible-tor-amplitude]. This proves the induction assertion. At the root the restricted module is $M$, which is the desired conclusion. Each use keeps $[c,d]$ unchanged; no bound grows with the number of vertices.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-tor-interval-local-detection",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Strata; finite open-closed induction, using the refinement rather than assuming an original stratum is open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-proetale-inverse-image",
+  "det-def-sfb-constructible-local-model",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-sfb-tor-interval-local-detection",
+  "sk-def-sfb-constructible",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Strata paragraph, repaired by the existing finite scheme-theoretic open-closed refinement and fixed-interval local detection"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +120,24 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"For each type $X$, this functor constructs a sheaf on the opposite category of compact Hausdorff-like spaces $\\\\mathbf{CompHausLike}_P^\\\\text{op}$ with values in $\\\\mathrm{Type}$. The sheaf assigns to ea\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {s : Set X} [PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X],\\n  Topology.IsLocallyConstructible s → Topology.IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor_obj_val\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : CompHausLike.HasExplicitFiniteCoproducts P] [inst_1 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (X : Type (max u w)),\\n  ((C\", \"doc\": \"For any predicate $P$ on topological spaces with explicit finite coproducts and pullbacks, and under the condition that effective epimorphisms in $\\\\mathbf{CompHausLike}_P$ are surjective on underlying\"}\n  {\"name\": \"LightCondensed.locallyConstantPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type u → CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)\", \"doc\": \"For each type $X$, this functor constructs a presheaf on the opposite category of light profinite spaces $\\\\mathrm{LightProfinite}^{\\\\mathrm{op}}$, where: (1) the value on an object $S$ is the set of lo\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (X : LightCondSet)\\n  (h :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.val.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} →\\n  (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite)) →\\n    (X : Type u) →\\n      CategoryTheory.Limits.IsLimit c →\\n        [∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)] →\\n          CategoryTheory.Limits.IsColimit ((LightCondensed.locall\", \"doc\": \"The presheaf of locally constant functions on the opposite category of light profinite spaces, constructed from a diagram of finite types, satisfies the universal property of a colimit. Specifically, \"}",
    "date": "2026-10-21",
    "verdict": "no match: component scalar algebra, generic homological, sheaf or topological infrastructure does not state this ringed-site assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Tor amplitude of constructible sheaves from finite constant local models by open closed induction",
+   "results": "8 hits: Topology.IsLocallyConstructible.isConstructible; CompHausLike.LocallyConstantModule.functor; Topology.IsConstructible.induction_of_isTopologicalBasis; Topology.IsConstructible.isLocallyConstructible; SheafOfModules.LocalGeneratorsData.IsFiniteType; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; Topology.IsLocallyConstructible.of_isOpenCover'; CompHausLike.LocallyConstant.functor.",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern topological constructibility, locally constant functors, limits, or algebraic flatness, not the uniform ringed pro-etale constructible-sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform flat dimension bounds on locally constant models imply the same bounds on constructible module sheaves",
+   "results": "8 hits: Module.Flat.of_isLocalizedModule; Module.flat_of_isLocalized_span; Algebra.FormallyUnramified.flat_of_restrictScalars; Module.flat_of_localized_maximal; SheafOfModules.hasLimitsOfSize; Module.free_of_flat_of_finrank_eq; Module.Flat.finsupp; Module.Flat.of_forall_isTrivialRelation.",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern topological constructibility, locally constant functors, limits, or algebraic flatness, not the uniform ringed pro-etale constructible-sheaf assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-def-localizing-closure-ctf-equals-bc",
@@ -73,5 +154,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-stratified-tor-interval-devissage",
+  "worker": "stage1",
+  "summary": "Retained the full statement and all imported data. Reused the existing finite scheme-theoretic open-closed refinement theorem and fixed-interval Tor detection lemma. Wrote out the elementary pullback of scalar-matrix local models and a finite-tree induction, including empty and nonreduced cases. No new nodes.",
+  "blueprint": "Realizes the Strata paragraph of det-def-localizing-closure-ctf-equals-bc: local models on strata, exact open-closed detection, and finite induction. Repairs the unsupported globally open-stratum choice using the existing refinement theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Generic geometric refinement of a finite constructible locally closed partition into actual complementary open/closed pullbacks. The unit has no such refinement statement; its local-model and localization route is retained."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Only the untwisted coefficient isomorphism and exact inverse-image description for arbitrary scheme morphisms are used to pull back matrices and identify restriction rings. This is coefficient transport needed by the unit, not a replacement of its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-open-closed-refinement",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-974397020",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-974397020 (reviewer sub-agent of L); spot-checked: Read the item's 4 steps in full against every cited statement; no repairs. Shape: one commit; statement, stmt_deps, source and blueprint unchanged from the side base; no new nodes; proof_deps = union of uses; no cycle in a 3147-node closure; no SGA; item not in any drop list; no repair note, so not a re-split. Source error confirmed: the blueprint's Strata paragraph chooses an open stratum, but a finite constructible locally closed partition need not have one. Counterexample checked: on A1 ⊔ A1', the strata (A1∖0)⊔{0'} and {0}⊔(A1'∖0') are each locally closed and constructible, and neither is open. Step 1: lem-fix-constructible-open-closed-refinement (reviewed PASS by Q89) states, for qcqs X and one partition, a binary tree with quasi-compact open children and an actual morphism from each nonempty leaf to a stratum; I checked Stacks 09Y4. Step 2 (elementary): the matrix criterion of det-def-sfb-constructible-local-model, the covering-preserving base change of def-weil-proetale-inverse-image, the exact pullback and alpha iso of sk-prop-sfb-cartesian-coefficients (alpha comes from f^*p_Y^*≅p_X^*, so scalar entries stay scalar) and def-sfb-module-upper-star-comp give the leaf a finite constant local model. Step 3: the item hypothesis on nonempty leaves; on empty leaves the empty family is a pro-étale cover per def-weil-pbc-proetale-covering, so no assumption 0∈[c,d] is needed. Step 4: the induction is fully set up and uses lem-sfb-tor-interval-local-detection (ii), which needs a quasi-compact open (true, Stacks 09AH allows any closed subscheme, so nonreduced children are fine); [c,d] is never enlarged. Both declared tool uses (the refinement node and the cartesian-coefficients node) are accepted as generic geometry and coefficient transport. Edge cases tested: one stratum, X empty, nonreduced and disconnected strata, Z/ℓ² (the hypothesis fails for F_ℓ, so no false consequence), Q̄_ℓ. No duplicate of the item found in the DAG."
  }
 }
