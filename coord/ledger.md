@@ -20767,3 +20767,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:40 L: returned deliver/NV/lem-sf-immersion-completed-pullback-comparison (reviewer RETURN: Faults C5, D1/D2 and the 2026-10-21 re-split note. The statement is unchanged and the assembly is 1963 characters. The m)
 - 07:40 L: returned deliver/Q97/lem-weil-frobenius-point-transport-natural (reviewer RETURN: G1/D, re-split note only partly carried out. The note (human, 2026-10-21) says every argument of the old 8574-char proof)
 - 07:42 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: Superseded (A7/B10, brief l.103: live finished nodes are not split). The human's re-split note was written at 05:04 UTC.)
+- 07:42 L: returned deliver/Q71/det-lem-int-integral-heart-local-model (reviewer RETURN: Re-split delivery for the 2026-10-21 human note. The one new node, lem-sfb-completed-scalar-complex-cohomology, is true:)
