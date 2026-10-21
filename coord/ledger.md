@@ -23309,3 +23309,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:20 L: merged deliver/N6/lem-sfb-filtered-colimit-strictly-henselian-local (stage 2; reviewer PASS; parallel immutable checks)
 - 18:20 L: merged deliver/Q11/lem-sfb-prime-to-ell-condensed-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
 - 18:20 L: merged deliver/Q07/lem-sfb-integral-lisse-closed-base-change (stage 2; reviewer PASS; parallel immutable checks)
+- 18:20 L: returned deliver/Q17/lem-coef-compact-support-normalized-realization (reviewer RETURN: L: independent stage-2 immutable head dd28bbf6c515: H2/C3: stmt_dep lem-weil-compact-support-reduction-tower-functor is )
