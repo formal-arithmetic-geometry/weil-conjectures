@@ -1,0 +1,140 @@
+{
+ "id": "def-weil-pbc-realization-pull-data",
+ "kind": "definition",
+ "title": "Normalized realization pullback comparison data",
+ "statement": "For the integral constructible complete and raw rational categories, define the normalized scalar pullback data for the realization pullback comparison: separated finite-type schemes over a field with explicit finiteness and invertibility hypotheses; actual integral and rational coefficient maps, ordinary and strict completed integral restrictions, unit-normalized scalar comparisons, and their identity, composition and fraction equations. The existence proposition retains the canonical completed compositor normalization and uniqueness as well as raw rational coherence. This is precisely the original data of that lemma, with no mathematical change.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.6.11 and Remark 6.8.15: ordinary and completed pullback scalar comparison"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-realization-scalar-functor",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with ordinary sheaf pullback with identity and composition coherence",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.extendScalars_assoc and ordinary module scalar-extension identities. These concern module categories over rings, not the normalized actual pro-etale sheaf pullback.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with pullback and derived adic completion on constructible complexes",
+   "results": "8 adic-completion algebra hits, no sheaf pullback comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft|isoWhiskerRight|ofComponents",
+   "results": "25 generic natural-isomorphism lemmas; used for the categorical assembly, none states the normalized coefficient and ordinary scalar system.",
+   "date": "2026-10-21",
+   "verdict": "generic infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RealizationCompletedPull",
+  "date": "2026-10-21",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The coefficient-normalized scalar pullback definitions in the integral lattice comparison",
+   "via": [
+    "lem-weil-pbc-realization-completed-pull",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealizationCompletedPullData",
+  "file": "lean/Sheaf/Paper/RealizationCompletedPullData.lean",
+  "declaration": "WeilConjectures.RealizationCompletedPullData",
+  "declarations": [
+   "WeilConjectures.RealizationPullScheme",
+   "WeilConjectures.realizationPullScalarMap",
+   "WeilConjectures.realizationPullDenominator",
+   "WeilConjectures.realizationPullRationalScalar",
+   "WeilConjectures.realizationPullIntegral",
+   "WeilConjectures.RealizationCompletedPullCoefficients",
+   "WeilConjectures.RealizationCompletedPullIntegral",
+   "WeilConjectures.RealizationCompletedPullArrow",
+   "WeilConjectures.RealizationCompletedPullArrow.integralOrdinary",
+   "WeilConjectures.RealizationCompletedPullArrow.integralCompleted",
+   "WeilConjectures.RealizationCompletedPullArrow.rationalOrdinary",
+   "WeilConjectures.RealizationCompletedPullArrow.rationalCompleted",
+   "WeilConjectures.RealizationCompletedPullArrow.continuousPull",
+   "WeilConjectures.RealizationPullHom",
+   "WeilConjectures.realizationPullSiteId",
+   "WeilConjectures.realizationPullRawFraction",
+   "WeilConjectures.realizationPullLawRationalAlphaIntegral",
+   "WeilConjectures.realizationPullLawCoefficientComp",
+   "WeilConjectures.realizationPullLawRationalCompCanonical",
+   "WeilConjectures.realizationPullLawCompletedCompNormalization",
+   "WeilConjectures.realizationPullLawCompletedCompUnique",
+   "WeilConjectures.realizationPullLawAlphaComp",
+   "WeilConjectures.realizationPullLawModuleIdUnit",
+   "WeilConjectures.realizationPullLawContinuousIdNormalization",
+   "WeilConjectures.realizationPullLawAlphaId",
+   "WeilConjectures.realizationPullLawRawFractions",
+   "WeilConjectures.realizationPullLawRawUnitIntegral",
+   "WeilConjectures.realizationPullLawRawCompIntegral",
+   "WeilConjectures.realizationPullLawRawIdIntegral",
+   "WeilConjectures.realizationPullLawRawAlphaComp",
+   "WeilConjectures.realizationPullLawRawAlphaId",
+   "WeilConjectures.RealizationCompletedPullData"
+  ],
+  "statement": "def RealizationCompletedPullData (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k] : Prop",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Unchanged signatures extracted from the parent realization pullback module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f1ff9",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T183350-L-1608812",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f1ff9",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T183350-L-1608812",
+  "kind": "interface",
+  "note": "independent cc review: delivered data module vs live original section (byte-identical), residual RealizationPullOrdinarySystem vs original RealizationCompletedPullData clauses and nodes; reader gate compiled Data, OrdinarySystem, RationalDescent, item and importer RealizationAdjointComparisons in import order; #print axioms sorryAx traced to upstream sorry statements"
+ }
+}

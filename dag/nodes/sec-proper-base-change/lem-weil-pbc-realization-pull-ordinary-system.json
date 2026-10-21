@@ -1,0 +1,208 @@
+{
+ "id": "lem-weil-pbc-realization-pull-ordinary-system",
+ "kind": "statement",
+ "title": "Ordinary normalized scalar pullback system",
+ "statement": "Let ell be prime, E a finite normed extension of Q_ell, k a field of prime characteristic different from ell, and let the schemes be separated finite-type k-schemes with the Noetherian, finite-dimension and invertibility assumptions of [lem-weil-pbc-realization-scalar-functor]. For any family of its normalized scalar realization data, the actual ordinary and strict completed pullbacks admit the integral preservation and linearity data and the coefficient-normalized scalar comparisons defined in [def-weil-pbc-realization-pull-data]. There is an ordinary comparison system: coefficient comparisons compose canonically; the rational derived compositor is the specified ringed derived compositor; ordinary scalar comparison commutes with the ordinary integral compositor; module and derived identity comparisons preserve the specified unit sections and cochain factorizations, and ordinary scalar comparison commutes with identity. No rationalized pullback or completed compositor is asserted here.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.6.11 and Remark 6.8.15: ordinary and completed pullback scalar comparison"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "lem-weil-pbc-realization-scalar-functor",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-realization-pull-data"
+ ],
+ "proof": [
+  {
+   "text": "Set $Q_n=A/\\varpi^n$. The coefficient datum of [def-weil-l-adic-coefficient-extension] supplies the extending nonarchimedean absolute value, DVR and finite residue field; hence these are finite rings by [lem-weil-valued-dvr-finite-quotients]. Apply [lem-weil-pbc-profinite-coefficient-inverse-image] to this tower. Its isomorphism $c_h:h^{-1}A_U\\to A_T$ has precisely the finite-projection equations defining the coefficient map in [def-weil-pbc-completed-pullback]; uniqueness of a map into a limit identifies the two actual maps. Under the continuous-function identification in [lem-weil-pbc-continuous-coefficients-immersion-restriction], precomposition with $V\\times_U T\\to V$ has those same projections: reducing the value of a continuous function modulo $\\varpi^n$ commutes with precomposition. It therefore gives this same $c_h$. Its compatibility with coefficient inclusion and composition is [lem-weil-pbc-continuous-coefficient-pullback-composition]; profinite comparison also supplies identity and composition. In particular it carries the pulled uniformizer to the chosen uniformizer, without any assertion that inverse image preserves arbitrary inverse limits.",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-continuous-coefficient-pullback-composition",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.5.1 and 6.8.1; finite-projection normalization of the coefficient pullback"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-proetale-operations] with the isomorphism of step 1, ordinary $P_h=Lh_A^*$ is exact module inverse image applied termwise. Use (i)$\\Rightarrow$(ii) of [lem-weil-pbc-integral-stratified-perfect-characterization] for $K$. Pull back its finite strata by forming $T\\times_U U_i$, rather than merely taking set-theoretic images. Inverse images preserve disjointness, the covering union and local closedness, so these immersions form a finite stratification in [def-constructible-stratification], omitting empty strata. The local trivializing pro-etale covers pull back to covers: weakly etale maps and fpqc covering families are stable under base change by [lem-weil-pbc-weakly-etale-composition-base-change] and [lem-galois-fpqc-covering-base-change]. On each pulled-back chart, pullback composition [lem-weil-pbc-proetale-derived-pullback-composition] and the tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify the restricted object with $A_T\\otimes_A^L P$, for the same bounded finite-projective $A$-complex $P$. Concretely each term is the image of the same finite idempotent matrix, and each differential is the same matrix with its entries mapped into the pulled coefficient sheaf. Thus (ii)$\\Rightarrow$(i) of the characterization gives $P_hK\\in\\mathcal I_T$, including the compatible etale-origin witnesses and uniform reduction bounds. All hypotheses of that characterization hold on $T$ and $U$ by the statement.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-constructible-stratification",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, stratified perfect characterization; Remark 6.8.15, ordinary pullback"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-reduction-pullback-derived-tower] with $R_U=A_U$, $R_T=A_T$ and quotient tower $(Q_n)_U$. Step 1 identifies its pulled tower with $(Q_n)_T$, including transitions. Its isomorphism $\\tau_K$ identifies the pulled reduction tower of $K$ with the reduction tower of $P_hK$ and, crucially, sends the pulled strict augmentation to the actual quotient augmentation. Apply the derived-limit functor and its constant-tower-adjunction unit as in [def-weil-pbc-completed-pullback]. Naturality of that adjunction unit and the augmentation equation for $\\tau_K$ identify the specified $\\gamma_{h,K}$ with the canonical quotient-tower completion unit of $P_hK$; this is equality of the functorially induced maps, not an inference from equality of their projections. Step 2 makes $P_hK$ intrinsically complete. Now [lem-weil-pbc-intrinsic-to-tower-complete] says exactly that this constant-tower-adjunction unit followed by the strict quotient augmentation is invertible. Therefore the specified $\\gamma_{h,K}$ is an isomorphism. Both objects lie in the full integral subcategory; the completed one does because it is isomorphic to $P_hK$, using the characterization of step 2.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-intrinsic-to-tower-complete",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion; strict augmentation normalization supplied by the cited tower comparison"
+   }
+  },
+  {
+   "text": "The continuous-coefficient theorem identifies $E_W$ with the sheafified localization $A_W[1/\\varpi]$ for $W=T,U$. Apply [lem-weil-pbc-localization-inverse-image-coherence] to the geometric inverse image and transport its coefficients along the actual $c_h$ of step 1. Its ring comparison gives the continuous rational coefficient map: both maps precompose continuous functions, as follows first for integral numerators and then for fractions from the localization unit. Write $Q_h=Lh_c^*$. Invert the module comparison $\\beta_h$ of that node to obtain the ordinary scalar comparison\n$$B_{h,K}:F_TP_hK\\xrightarrow{\\sim}Q_hF_UK.$$\nThis is the comparison for the actual scalar-extension functor of [lem-weil-pbc-realization-scalar-functor], since that functor is tensor with this very localization. The cited coherence node gives exactness, unbounded derived comparison and naturality, so no bounded resolution interchange is implicit here. If $\\lambda_W:M\\to F_WM$ is the localization unit, its normalization reads $B_h\\lambda_T=h^{-1}\\lambda_U$, as maps of underlying integral-module objects, after the canonical scalar-restriction and pullback identifications. Locally $B_h$ sends $(h^{-1}m)/\\varpi^n$ to $h^{-1}(m/\\varpi^n)$. These are sheaf-local fraction representatives, with no claim of a single global denominator.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-weil-pbc-realization-scalar-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; localization inverse-image comparison with its unit normalization"
+   }
+  },
+  {
+   "text": "Put $C_h=Lh^*_{\\mathrm{comp}}$ and define $\\alpha_h=B_hF_T(\\gamma_h^{-1})$. Step 3 and step 4 make this a natural isomorphism with exactly the source, target and order of factors asserted in the statement. The construction of the quotient augmentation and its adjunction unit in [def-weil-pbc-completed-pullback] is natural, so inverses of its now invertible components are natural as well. The precise unit normalization is\n$$\\alpha_h F_T(\\gamma_h)\\lambda_{T,P_hK}=h^{-1}(\\lambda_{U,K}),$$\nas maps of underlying integral-module objects with the canonical scalar-restriction and pullback identifications. Indeed $F_T(\\gamma_h^{-1})F_T(\\gamma_h)=1$, leaving the unit equation for $B_h$ from step 4. The same cancellation proves the asserted fraction formula after identifying completed pullback with ordinary pullback by this specified unit; it does not choose a second comparison.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-localization-inverse-image-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation of the completion-unit normalization"
+   }
+  },
+  {
+   "text": "On tensor generators the two ordinary composition paths send a twice-pulled numerator to the same scalar tensor. The module maps agree by tensor balancing and sheafification. On flat-term K-flat resolutions the derived counit normalizations therefore give the ordinary composition equation, after cancelling invertible counits. The same calculation with an identity map gives the module and derived identity comparisons and their specified normalization. The rational derived compositor is the canonical ringed compositor supplied by the derived pullback composition theorem.",
+   "uses": [
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.6.11 and Remark 6.8.15: ordinary and completed pullback scalar comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-continuous-coefficient-pullback-composition",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-intrinsic-to-tower-complete",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-realization-scalar-functor",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-valued-dvr-finite-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 and Remark 6.8.15, with explicit strict-unit and localization-coherence calculations using the existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with ordinary sheaf pullback with identity and composition coherence",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.extendScalars_assoc and ordinary module scalar-extension identities. These concern module categories over rings, not the normalized actual pro-etale sheaf pullback.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with pullback and derived adic completion on constructible complexes",
+   "results": "8 adic-completion algebra hits, no sheaf pullback comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft|isoWhiskerRight|ofComponents",
+   "results": "25 generic natural-isomorphism lemmas; used for the categorical assembly, none states the normalized coefficient and ordinary scalar system.",
+   "date": "2026-10-21",
+   "verdict": "generic infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RealizationCompletedPull",
+  "date": "2026-10-21",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof: ordinary scalar pullback preceding completed-unit cancellation and rationalization",
+   "via": [
+    "lem-weil-pbc-realization-completed-pull",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealizationPullOrdinarySystem",
+  "file": "lean/Sheaf/Paper/RealizationPullOrdinarySystem.lean",
+  "declaration": "WeilConjectures.realizationPullOrdinarySystem",
+  "declarations": [
+   "WeilConjectures.RealizationPullOrdinarySystem",
+   "WeilConjectures.realizationPullOrdinarySystem"
+  ],
+  "statement": "theorem realizationPullOrdinarySystem\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    (scalar : ∀ T : RealizationPullScheme l k, RealizationScalarFunctorData l E T.scheme) :\n    Nonempty (RealizationPullOrdinarySystem scalar)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f1ff9",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T183350-L-1608812",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f1ff9",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T183350-L-1608812",
+  "kind": "interface",
+  "note": "independent cc review: delivered data module vs live original section (byte-identical), residual RealizationPullOrdinarySystem vs original RealizationCompletedPullData clauses and nodes; reader gate compiled Data, OrdinarySystem, RationalDescent, item and importer RealizationAdjointComparisons in import order; #print axioms sorryAx traced to upstream sorry statements"
+ }
+}

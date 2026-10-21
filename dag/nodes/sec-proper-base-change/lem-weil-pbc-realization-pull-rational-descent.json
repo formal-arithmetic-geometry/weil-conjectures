@@ -1,0 +1,134 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.6.11 and Remark 6.8.15: ordinary and completed pullback scalar comparison"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with ordinary sheaf pullback with identity and composition coherence",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.extendScalars_assoc and ordinary module scalar-extension identities. These concern module categories over rings, not the normalized actual pro-etale sheaf pullback.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with pullback and derived adic completion on constructible complexes",
+   "results": "8 adic-completion algebra hits, no sheaf pullback comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft|isoWhiskerRight|ofComponents",
+   "results": "25 generic natural-isomorphism lemmas; used for the categorical assembly, none states the normalized coefficient and ordinary scalar system.",
+   "date": "2026-10-21",
+   "verdict": "generic infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RealizationCompletedPull",
+  "date": "2026-10-21",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Rationalization of the normalized integral pullback comparisons",
+   "via": [
+    "lem-weil-pbc-realization-completed-pull",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-realization-pull-rational-descent",
+ "kind": "statement",
+ "title": "Raw rational descent of normalized integral pullback comparisons",
+ "statement": "Given scalar realization data and actual normalized integral pullback arrows as in [def-weil-pbc-realization-pull-data], and completed composition and continuous identity comparisons satisfying the integral alpha composition and identity equations, extend the ordinary and completed integral restrictions to the raw scalar localizations. There exist the rational alpha, unit, completed compositor and identity isomorphisms. Their components on integral objects are the localized integral maps, they retain every uniformizer denominator, and rational alpha satisfies the specified identity and composition equations on every raw rational object.",
+ "stmt_deps": [
+  "def-weil-pbc-realization-pull-data"
+ ],
+ "proof": [
+  {
+   "text": "The tensor extension of an A-linear functor preserves pure tensors and composition. Extend natural isomorphisms by applying the scalar localization functor to their components. Tensor induction proves the compositor and identity comparisons, and linearity gives the unchanged-denominator formula.",
+   "uses": [
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; rationalization and inheritance of coherence"
+   }
+  },
+  {
+   "text": "The tensor Hom equivalence with triangulated rationalization makes the integral rationalization functor a localization at scalar isogenies. Its restriction on functor categories is fully faithful. Conjugate integral alpha by the realization integral isomorphisms, then lift through that restriction. The normalization is the map-preimage equation. Here the tensor Hom equivalence is the already proved Rationalization.tensorHomEquiv in WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom; no new rationalization property is assumed.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; rationalization and inheritance of coherence"
+   }
+  },
+  {
+   "text": "Every raw object is an unchanged integral object. Write rational alpha as the conjugate of integral alpha. In its composition equation, cancel the adjacent scalar integral inverse and forward isomorphisms; naturality of the scalar integral comparison and rational compositor leaves the given integral equation. For identity use the integral completion unit inverse followed by ordinary identity, and cancel the unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; rationalization and inheritance of coherence"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; detailed tensor-localization and conjugation calculation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealizationPullRationalDescent",
+  "file": "lean/Sheaf/Paper/RealizationPullRationalDescent.lean",
+  "declaration": "WeilConjectures.realizationPullRationalDescent",
+  "statement": "theorem realizationPullRationalDescent\n    (hc : realizationPullLawAlphaComp scalar arrow rationalComp completedComp)\n    (hi : realizationPullLawAlphaId scalar arrow continuousId) :\n    ∃ rationalAlpha : (∀ {T U : RealizationPullScheme l k} (h : RealizationPullHom T U),\n      (arrow h).rationalCompleted ⋙ realizationPullRationalScalar l E (scalar T) ≅\n        realizationPullRationalScalar l E (scalar U) ⋙ (arrow h).continuousPull),\n      realizationPullLawRationalAlphaIntegral scalar arrow rationalAlpha ∧\n      realizationPullLawRawFractions scalar arrow ∧\n    ∃ rawUnit : (∀ {T U : RealizationPullScheme l k} (h : RealizationPullHom T U),\n      (arrow h).rationalOrdinary ≅ (arrow h).rationalCompleted),\n      realizationPullLawRawUnitIntegral scalar arrow rawUnit ∧\n    ∃ rawComp : (∀ {T U V : RealizationPullScheme l k}\n      (h : RealizationPullHom T U) (j : RealizationPullHom U V),\n      (arrow j).rationalCompleted ⋙ (arrow h).rationalCompleted ≅\n        (arrow (h ≫ j)).rationalCompleted),\n      realizationPullLawRawCompIntegral scalar arrow completedComp rawComp ∧\n    ∃ rawId : (∀ T : RealizationPullScheme l k,\n      (arrow (𝟙 (Over.mk (T.scheme ↘ Spec (.of k))))).rationalCompleted ≅ 𝟭 _),\n      realizationPullLawRawIdIntegral scalar arrow rawId ∧\n      realizationPullLawRawAlphaComp scalar arrow rationalAlpha rationalComp rawComp ∧\n      realizationPullLawRawAlphaId scalar arrow rationalAlpha continuousId rawId",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "proof_deps": [
+  "lem-weil-pbc-realization-scalar-functor",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f1ff9",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T183350-L-1608812",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f1ff9",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T183350-L-1608812",
+  "kind": "interface",
+  "note": "independent cc review: delivered data module vs live original section (byte-identical), residual RealizationPullOrdinarySystem vs original RealizationCompletedPullData clauses and nodes; reader gate compiled Data, OrdinarySystem, RationalDescent, item and importer RealizationAdjointComparisons in import order; #print axioms sorryAx traced to upstream sorry statements"
+ }
+}
