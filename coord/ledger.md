@@ -21682,3 +21682,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: merged deliver/NK/lem-sf-completed-pullback-mate-factorization (reviewer PASS; first push; new nodes: 0)
 - 09:12 L: merged deliver/Q37/lem-sf-locally-closed-closure-comparison-square (reviewer PASS; first push; new nodes: 0)
 - 09:12 L: merged deliver/Q34/lem-sf-package-compactified-tower-comparisons (reviewer PASS; first push; new nodes: 0); claim not held by Q34: not your claim
+- 09:12 L: merged deliver/Q99/lem-zl-bertini-prescribed-point-smooth-system (reviewer FIX; after a return; new nodes: 0)
