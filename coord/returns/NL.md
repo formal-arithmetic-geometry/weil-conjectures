@@ -56,3 +56,11 @@ L: independent stage-2 immutable head 1e2785dc05ab: A7/H4: item already stated b
 
 
 
+
+
+## def-sfb-dc-upper-star-comp (dedicated repair handoff; head b2cc08841f61ebab07b404959249c3308cc9fbb8)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 3384 characters, far too much work for one node. The purpose of this re-split is to SPREAD THE WORK so that many workers can start on it at once: cut the proof into new nodes, each a separate argument with its own self-contained statement, delivered statement-only (status unsplit, source, three kinds of Mathlib search, no proof steps: other workers write their proofs in parallel), cited by the step that uses it. This node keeps its statement; its proof becomes the short assembly of the new nodes, at most 3000 characters, and the delivery adds at least 1 new node(s), of comparable size, not one node that restates the whole. Do NOT shorten, summarise or blur the existing argument: every argument the old proof carries must reappear as a new node. A shorter text without the new nodes is the worst answer and is returned. Longest steps: step 3 (841 characters). Lean module: WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible.
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-21): the proof in words is 3384 characters, far too much work for one node. The purpose of this re-split is to SPREAD THE WORK so that many workers can start on it at once: cut the proof into new nodes, each a separate argument with its own self-contained statement, delivered statement-only (status unsplit, source, three kinds of Mathlib search, no proof steps: other workers write their proofs in parallel), cited by the step that uses it. This node keeps its statement; its proof becomes the short assembly of the new nodes, at most 3000 characters, and the delivery adds at least 1 new node(s), of comparable size, not one node that restates the whole. Do NOT shorten, summarise or blur the existing argument: every argument the old proof carries must reappear as a new node. A shorter text without the new nodes is the worst answer and is returned. Longest steps: step 3 (841 characters). Lean module: WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible.
