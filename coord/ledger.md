@@ -22043,3 +22043,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: returned deliver/K1/Sheaf.CategoryTheory.ModuleObjects.KernelStructure (reviewer RETURN: (the landing tools, head c5740e69c) the delivery did not land: lean/Sheaf/CategoryTheory/ModuleObjects/KernelStructure.l)
 - 10:02 L: returned deliver/K2/Sheaf.Paper.RingedCoefficientPullbackComparison (reviewer RETURN: (the landing tools, head dd158ce46) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 10:03 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
+- 10:03 L: merged deliver/Q82/lem-pod-condensed-localization-hom (reviewer FIX; first push; new nodes: 2); claim not held by Q82: not your claim

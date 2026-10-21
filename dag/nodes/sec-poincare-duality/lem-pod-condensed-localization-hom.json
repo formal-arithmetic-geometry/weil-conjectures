@@ -2,7 +2,7 @@
  "id": "lem-pod-condensed-localization-hom",
  "kind": "statement",
  "title": "Hom localization for stratified dualizable condensed sheaves on qcqs schemes",
- "statement": "Let $Y$ be a quasi-compact quasi-separated scheme [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], put $R=\\Gamma(*,\\Lambda)$ and choose $t\\in R$. On the small pro-etale site [def-weil-pbc-proetale-site] put $B=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Let $\\Lambda[t^{-1}]$ be the condensed ring obtained by inverting $t$, whose underlying module sheaf is the filtered colimit of repeated multiplication by $t$ on $\\Lambda$, equipped with the localization ring structure, and put $B'=p_Y^*(\\Lambda[t^{-1}])=B[t^{-1}]$. Use the ordinary unbounded derived categories $D(B)$ and $D(B')$ of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with ordinary relative derived tensor [def-weil-derived-tensor].\n\nLet $\\mathcal T_\\Lambda(Y)$ be the full subcategory of $D(B)$ on objects $M$ admitting a finite stratification of $Y$ by constructible locally closed subschemes [def-constructible-stratification] such that the derived restriction of $M$ to every stratum is dualizable for the ordinary derived tensor. Here dualizable means that there are an object $D$ and maps $D\\otimes M\\to B$ and $B\\to M\\otimes D$ whose two contraction composites are the identities, with associators and unitors inserted [def-sfb-monoidal-category]. Strata and duals may depend on $M$. For every $M,N\\in\\mathcal T_\\Lambda(Y)$ and every integer $r$, the canonical map\n$$\n\\operatorname{Hom}_{D(B)}(M,N[r])\\otimes_R R[t^{-1}]\n\\longrightarrow\n\\operatorname{Hom}_{D(B')}(B'\\otimes_B^L M,(B'\\otimes_B^L N)[r])\n$$\nis bijective. It sends $f/t^n$ to $t^{-n}(1\\otimes f)$, is natural in $M,N$, and respects identities and composition. Equivalently, extension of scalars induces a fully faithful functor from the raw scalar localization $\\mathcal T_\\Lambda(Y)[1/t]$ [def-weil-linear-scalar-localization] to $D(B')$. Its tensor and unit comparisons are the canonical balanced tensor isomorphisms, and are compatible with associativity, symmetry, units and restriction along morphisms of qcqs schemes. No Noetherian or finite-dimensional hypothesis on $Y$ is imposed, and no idempotent completion or essential-surjectivity assertion is included.",
+ "statement": "Let $Y$ be a quasi-compact quasi-separated scheme [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], put $R=\\Gamma(*,\\Lambda)$ and choose $t\\in R$. On the small pro-etale site [def-weil-pbc-proetale-site] put $B=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Let $\\Lambda[t^{-1}]$ be the condensed ring obtained by inverting $t$, whose underlying module sheaf is the filtered colimit of repeated multiplication by $t$ on $\\Lambda$, equipped with the localization ring structure, and put $B'=p_Y^*(\\Lambda[t^{-1}])=B[t^{-1}]$. Use the ordinary unbounded derived categories $D(B)$ and $D(B')$ of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with ordinary relative derived tensor [sk-def-sfb-derived-tensor-hom].\n\nLet $\\mathcal T_\\Lambda(Y)$ be the full subcategory of $D(B)$ on objects $M$ admitting a finite stratification of $Y$ by constructible locally closed subschemes [def-constructible-stratification, def-weil-constructible-subset] such that the derived restriction of $M$ to every stratum is dualizable for the ordinary derived tensor. Here dualizable means that there are an object $D$ and maps $D\\otimes M\\to B$ and $B\\to M\\otimes D$ whose two contraction composites are the identities, with associators and unitors inserted [def-sfb-monoidal-category]. Strata and duals may depend on $M$. For every $M,N\\in\\mathcal T_\\Lambda(Y)$ and every integer $r$, the canonical map\n$$\n\\operatorname{Hom}_{D(B)}(M,N[r])\\otimes_R R[t^{-1}]\n\\longrightarrow\n\\operatorname{Hom}_{D(B')}(B'\\otimes_B^L M,(B'\\otimes_B^L N)[r])\n$$\nis bijective. It sends $f/t^n$ to $t^{-n}(1\\otimes f)$, is natural in $M,N$, and respects identities and composition. Equivalently, extension of scalars induces a fully faithful functor from the raw scalar localization $\\mathcal T_\\Lambda(Y)[1/t]$ [def-weil-linear-scalar-localization] to $D(B')$. Its tensor and unit comparisons are the canonical balanced tensor isomorphisms, and are compatible with associativity, symmetry, units and restriction along morphisms of qcqs schemes. No Noetherian or finite-dimensional hypothesis on $Y$ is imposed, and no idempotent completion or essential-surjectivity assertion is included.",
  "source": {
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Section 5.3, Proposition 5.5 and its proof using Lemma 5.3; the displayed Hom comparison in that proof, passed to homotopy categories and specialized to powers of one scalar. Definition 3.3 gives stratified dualizability. Balanced-tensor coherence and qcqs restriction are the canonical scalar-extension formulation."
@@ -15,14 +15,132 @@
   "sk-def-sfb-pulled-back-coefficients",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-weil-derived-tensor",
+  "sk-def-sfb-derived-tensor-hom",
   "def-constructible-stratification",
+  "def-weil-constructible-subset",
   "def-sfb-monoidal-category",
   "def-weil-linear-scalar-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E=B'\\otimes_B^{\\mathbf L}-$ and $U$ for restriction. Both $B'$ and the sheafified sectionwise localization $B[1/t]$ have underlying $B$-module the same telescope, with multiplication given by $(b/t^n)(c/t^m)=bc/t^{n+m}$, so they are canonically the same ring sheaf [def-weil-pbc-ringed-site-section-localization]. Apply [lem-sfb-derived-scalar-localization-reflection]: ordinary extension and restriction are exact, compute $E,U$ termwise, and the unit is $x\\mapsto1\\otimes x$. For every complex $C$, [lem-weil-pbc-scalar-localization-complex-colimit] therefore identifies the termwise colimit of $C\\xrightarrow{t}C\\xrightarrow{t}\\cdots$ with $UE(C)$, with stage-$n$ leg $t^{-n}\\eta_C$. These statements apply on the chosen small pro-etale site and do not require boundedness.",
+   "uses": [
+    "def-weil-pbc-ringed-site-section-localization",
+    "lem-sfb-derived-scalar-localization-reflection",
+    "lem-weil-pbc-scalar-localization-complex-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 5.3, localization telescope before Proposition 5.5"
+   }
+  },
+  {
+   "text": "By [lem-pod-stratified-dualizable-bounded], choose a representative $C$ of $N$ vanishing termwise below some integer $a$. Its scalar telescope has this same lower bound at every stage and is indexed by the small filtered category $\\mathbf N$. Apply [lem-pod-stratified-dualizable-hom-continuity] with $K=M$ to this diagram, and then Step 1. For every $r$ we obtain a bijection $\\varinjlim_n\\operatorname{Hom}_{D(B)}(M,N[r])\\xrightarrow{\\sim}\\operatorname{Hom}_{D(B)}(M,UE(N)[r])$. The transition on the left is multiplication by $t$: postcomposition by $t_N[r]$ is scalar multiplication on the $R$-module of morphisms. Its stage-$n$ map is $f\\mapsto t^{-n}\\eta_N[r]\\circ f$. Only the targets of this telescope need a common lower bound; no cohomological dimension bound for $Y$ has been used.",
+   "uses": [
+    "lem-pod-stratified-dualizable-bounded",
+    "lem-pod-stratified-dualizable-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Proposition 5.5: applying Lemma 5.3 to the localization of N"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-module-localization-filtered-colimit] to the ordinary $R$-module $H=\\operatorname{Hom}_{D(B)}(M,N[r])$. It identifies its scalar telescope with $H[1/t]$, with stage-$n$ element $f$ sent to $f/t^n$. Identify $H[1/t]=H\\otimes_R R[1/t]$ by the mutually inverse balanced maps $f\\otimes(a/t^n)\\mapsto af/t^n$ and $f/t^n\\mapsto f\\otimes t^{-n}$; the fraction relations and $R$-balancing make both maps well defined. Step 2 becomes $H\\otimes_R R[1/t]\\xrightarrow{\\sim}\\operatorname{Hom}_{D(B)}(M,UE(N)[r])$, with the same displayed formula on fractions.",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Module-localization telescope and its fraction formula, as stated by lem-sc-module-localization-filtered-colimit"
+   }
+  },
+  {
+   "text": "The derived coefficient adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] identifies $\\operatorname{Hom}_{D(B)}(M,UE(N)[r])$ with $\\operatorname{Hom}_{D(B')}(E(M),E(N)[r])$. Extension and restriction are the exact functors from Step 1, so they commute with the cochain shift. The normalized unit and adjunct formulas in this node send $\\eta_N[r]\\circ f$ to $E(f)=1\\otimes f$. They send $t^{-n}\\eta_N[r]\\circ f$ to $t^{-n}E(f)$ by linearity over the localized scalars. Combining with Step 3 gives exactly the required canonical bijection, rather than just some isomorphism of these groups.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, in the representative-normalized formulation of the cited node"
+   }
+  },
+  {
+   "text": "The construction is natural: for $u:M'\\to M$ and $v:N\\to N'$ its value on $(v[r]\\circ f\\circ u)/t^n$ is $E(v)[r]\\circ(t^{-n}E(f))\\circ E(u)$. On unshifted maps the product of the images of $f/t^n$ and $g/t^m$ is $t^{-(n+m)}E(g\\circ f)$, and the image of $1_M/1$ is $1_{E(M)}$. These identities use bilinearity of composition and functoriality of $E$. By [def-weil-linear-scalar-localization] these are the composition and identity formulas in the raw scalar localization. Thus the bijections define the asserted fully faithful functor, without adjoining any objects or splitting idempotents.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 5.5, Hom comparison and passage to the raw scalar-localized homotopy category"
+   }
+  },
+  {
+   "text": "The tensors used here are the ordinary closed symmetric monoidal tensors of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Intersect finite constructible stratifications for $M$ and $N$. Derived restriction to a locally closed stratum is the pro-etale inverse image along its immersion [def-weil-proetale-inverse-image]; it carries $B$ to the coefficient ring of the stratum [sk-def-sfb-pullback-from-point-comp] and commutes with derived tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Hence the restriction of $M\\otimes N$ to a common stratum is the tensor of the restrictions, and a dual pair on a stratum restricts to a dual pair on each piece of the common refinement. On each intersection the tensor of their dual pairs is a dual pair: use $D_N\\otimes D_M$ as dual of $M\\otimes N$, evaluate first $D_M$ against $M$ and then $D_N$ against $N$, and insert the two coevaluations in reverse order. Each contraction reduces to the two original contractions and is the identity. The unit is dual to itself. Consequently $\\mathcal T_\\Lambda(Y)$ is closed under tensor and contains $B$. For scalar extension the canonical tensor isomorphism exists by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity topos with ring map $B\\to B'$; its hypotheses hold for arbitrary sheaves of commutative rings on a small site.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-proetale-inverse-image",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT; tensor change-of-rings on K-flat representatives"
+   }
+  },
+  {
+   "text": "On K-flat representatives the tensor comparison is $(a\\otimes x)\\otimes(b\\otimes y)\\mapsto ab\\otimes(x\\otimes y)$, with inverse $a\\otimes(x\\otimes y)\\mapsto(a\\otimes x)\\otimes(1\\otimes y)$; balancing proves they are inverse. The unit comparison is $B'\\otimes_B B\\to B'$, $a\\otimes b\\mapsto ab$. The constraint formulas in [lem-sf-ringed-tensor-complex-constraints] now check coherence: either associativity route sends three factors to $abc\\otimes(x\\otimes(y\\otimes z))$; either unit route multiplies the ring coefficient; either symmetry route gives $(-1)^{ij}ab\\otimes(y\\otimes x)$ for $x,y$ of degrees $i,j$. Pure local tensor generators generate the sheafified tensor complexes, so these equalities give equal chain maps and hence equal derived maps. The same formulas hold on fractions of morphisms because both tensor factors multiply their denominators. Thus the comparisons descend to the raw scalar localization and satisfy all the asserted monoidal constraints.",
+   "uses": [
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT, explicit signed total-tensor constraints, as in the cited node"
+   }
+  },
+  {
+   "text": "Let $g:Z\\to Y$ be a morphism of qcqs schemes. Use its pro-etale inverse image [def-weil-proetale-inverse-image]. The monoidal composition isomorphism [sk-def-sfb-pullback-from-point-comp] gives the coefficient identifications $g^{-1}B_Y=B_Z$ and $g^{-1}B'_Y=B'_Z$; inverse image preserves colimits, so it preserves the localization telescope. The tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies $g^*E_Y(M)$ with $E_Zg^*M$: on representatives both are $B'_Z\\otimes_{B_Z}g^{-1}M$. On a section $a\\otimes x$ the comparison is the identity on the pulled-back tensor generator; it carries the unit to $1\\otimes g^{-1}x$ and stage-$n$ leg to $t^{-n}$ times this unit. Hence the Hom comparisons and the tensor and unit diagrams commute with restriction. Finite constructible strata pull back to finite constructible locally closed strata by [lem-pur-scheme-constructible-preimage]; the same tensor comparisons pull evaluation, coevaluation and their triangle identities back. Thus restriction takes the stated subcategory into the corresponding subcategory on $Z$. All constructions therefore have the claimed qcqs restriction compatibility.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-scheme-constructible-preimage",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3, restriction paragraph; Section 5.3, localization by inverse image and balanced tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-site-section-localization",
+  "lem-sfb-derived-scalar-localization-reflection",
+  "lem-weil-pbc-scalar-localization-complex-colimit",
+  "lem-pod-stratified-dualizable-bounded",
+  "lem-pod-stratified-dualizable-hom-continuity",
+  "lem-sc-module-localization-filtered-colimit",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-linear-scalar-localization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-scheme-constructible-preimage",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Definition 3.3, Corollary 4.11, Lemma 5.3 and proof of Proposition 5.5; ordinary balanced-tensor constraints written out explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -140,10 +258,106 @@
    },
    "date": "2026-10-21",
    "verdict": "No match. The inspected hits concern underived locally constant condensed modules, underived light-condensed monoidal structures, or ring/scheme localization; none states derived Hom localization for stratified dualizable sheaves on qcqs schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom of a stratified dualizable condensed sheaf on a quasi compact quasi separated scheme commutes with scalar localization",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.ihomPoints_symm_comp",
+     "CondensedMod.hom_naturality_apply",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_apply",
+     "AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app",
+     "AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived condensed Hom, fully faithful discrete embeddings, abstract derived-category structures, or unrelated localization; none states this qcqs constructible Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "condens.*localiz|localiz.*condens|[Hh]om.*[Ll]ocaliz|[Ll]ocaliz.*[Hh]om",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean",
+     "Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived condensed Hom, fully faithful discrete embeddings, abstract derived-category structures, or unrelated localization; none states this qcqs constructible Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom between constructible condensed sheaves commutes with localization of the coefficient ring",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "HasDerivedCategory.standard",
+     "DerivedCategory.instLinear",
+     "LightCondensed.ihomPoints",
+     "Condensed.free",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+     "Condensed.freeForgetAdjunction",
+     "CondensedSet.LocallyConstant.iso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived condensed Hom, fully faithful discrete embeddings, abstract derived-category structures, or unrelated localization; none states this qcqs constructible Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsLocalization",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived condensed Hom, fully faithful discrete embeddings, abstract derived-category structures, or unrelated localization; none states this qcqs constructible Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of coefficients to R[1/t] is fully faithful on the scalar localization of stratified dualizable sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+     "AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "LightCondSet.LocallyConstant.functorFullyFaithful",
+     "SheafOfModules.fullyFaithfulForget",
+     "CondensedMod.LocallyConstant.instFullModuleCatFunctor",
+     "LightCondMod.LocallyConstant.instFullModuleCatFunctor"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern underived condensed Hom, fully faithful discrete embeddings, abstract derived-category structures, or unrelated localization; none states this qcqs constructible Hom comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-perfect",
@@ -160,5 +374,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pod-condensed-localization-hom",
+  "worker": "stage1",
+  "summary": "Checked HRS Proposition 5.5 against Definition 3.3, Corollary 4.11 and Lemma 5.3. The Hom comparison is split through the scalar telescope, uniformly bounded-below Hom continuity, ordinary module localization, and normalized derived scalar adjunction. Added only the two missing general-qcqs HRS inputs as statement-only nodes. Proved fraction naturality, composition, balanced tensor coherence and restriction compatibility explicitly. No change to the item statement.",
+  "blueprint": "sk-def-perfect final local-model equivalence: the qcqs condensed scalar-localization comparison needed in its rational coefficient local models.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-scalar-localization-reflection",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-complex-colimit",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "lem-sc-module-localization-filtered-colimit",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Generic module-localization, ringed-site derived tensor/adjunction, tensor constraints, or constructible inverse-image tool used in the indicated step; sk-def-perfect supplies no general ringed-site version."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point-comp",
+    "why": "The canonical monoidal coefficient identification under an arbitrary scheme inverse image is needed for restriction compatibility; this is a generic coefficient tool, not a replacement for any perfectness argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-scalar-localization-reflection",
+  "lem-weil-pbc-scalar-localization-complex-colimit",
+  "lem-sc-module-localization-filtered-colimit",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-b0ed21f12",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-b0ed21f12 (reviewer sub-agent of L); spot-checked: Read HRS arXiv:2305.18131: Def 3.3, Lemma 4.10, Cor 4.11, Lemma 5.3(2) with its global-Hom assertion, Rem 5.4 and Prop 5.5 with its proof. The item is the Hom form of Prop 5.5 for t^n on qcqs Y with arbitrary condensed Λ. It is not weakened, includes no essential surjectivity, and is unsplit in live, clones/live and side-live, so not superseded. Steps 1-8 check out: telescope legs t^{-n}η; the new bounded node gives a representative vanishing below a for the uniform lower bound of Rem 5.4; continuity with K=M; module localization; adjunct of η∘f is E(f) by the triangle identity; fraction composition; dual pairs closed under tensor; balanced tensor coherence including the Koszul sign; qcqs pullback. New nodes: lem-pod-stratified-dualizable-bounded (Cor 4.11) and lem-pod-stratified-dualizable-hom-continuity (Lemma 5.3(2) in H^r). Both are statement-only, self-contained and strictly smaller than the item. They are not duplicates: sk-lem-constructible-ext-continuity, the condensed local-piece and integral sheaf Hom continuity nodes, and lem-zl-condensed-* need Noetherian X, specific Λ or finitely many irreducible components. Tool uses accepted: all 8 generic ringed-site and localization tools; no SGA. Fixes, 2 faults: (1) B3: item and both new nodes cited def-weil-derived-tensor, which only defines the tensor over the constant sheaf A_Y. Replaced with sk-def-sfb-derived-tensor-hom (relative derived tensor over Λ_X) in statements and stmt_deps, and added def-weil-constructible-subset for 'constructible'. (2) C1/C3: Step 6 used that restriction to strata is monoidal and preserves dual pairs without citing anything. Added a sentence citing def-weil-proetale-inverse-image, sk-def-sfb-pullback-from-point-comp and lem-weil-pbc-ringed-topoi-derived-tensor-pullback, with uses updated; proof_deps unchanged.; 3 file(s) fixed by the reviewer"
  }
 }
