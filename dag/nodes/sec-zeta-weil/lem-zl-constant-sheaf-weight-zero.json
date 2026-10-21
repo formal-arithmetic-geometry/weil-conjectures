@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-constant-sheaf-weight-zero",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weight zero of the constant sheaf",
@@ -13,32 +13,104 @@
   "place": "node lem-zl-constant-sheaf-weight-zero, order 2872"
  },
  "stmt_deps": [
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constant-weil-structure",
+  "def-weil-punctual-weights"
  ],
  "proof": [
   {
-   "text": "At a degree-$n$ closed point, the local Frobenius operator of\n[def-weil-local-frobenius-trace] acts on the constant stalk by\nidentity (the $n$-fold iterate of the geometric Frobenius of\n[def-weil-global-geometric-frobenius] fixes the constant section\n$1$), whose complex absolute value is $1=q^{n\\cdot0/2}=q_y^{0/2}$\nas required by [def-weil-punctual-weights].",
+   "text": "Let $Y_0$ be the separated finite-type $k_0$-scheme in the statement, and take $E=\\mathbf Q_\\ell$. The canonical constant $E$-Weil sheaf admits the normalized compatible integral constant datum by [lem-zl-constant-weil-datum]; its hypotheses are exactly separatedness, finite type and $\\ell\\neq p$. Apply the first assertion of [lem-zl-constant-sheaf-lseries] to this datum. For every closed point $y$, the one-circuit geometric local operator $F_y$ of that assertion, explicitly the operator of def-weil-local-frobenius-trace, is the identity on its degree-zero constant stalk $E$. This uses that lemma's geometric-operator assertion, not its Euler product or any global trace identity. In particular it is the full return operator at degree $[\\kappa(y):k_0]$, including geometric-point transport, that is the identity.",
    "uses": [
-    "def-weil-local-frobenius-trace",
-    "def-weil-global-geometric-frobenius",
+    "lem-zl-constant-weil-datum",
+    "lem-zl-constant-sheaf-lseries"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/lem-zl-constant-sheaf-weight-zero.proof.md",
+    "place": "Proof paragraph: identity on the constant stalk, followed by the weight-zero equality; expanded using the existing constant-datum/local-factor lemmas."
+   }
+  },
+  {
+   "text": "By clause 5 of [def-weil-constant-weil-structure], the canonical $\\Qlb$-Weil sheaf is represented at the stage $E=\\mathbf Q_\\ell$ by the very constant $E$-Weil sheaf used in Step 1. The common-stage stalk and local-operator convention of [def-weil-punctual-weights] takes $\\mathrm H^0(C_E)\\otimes_E\\Qlb$ and the scalar extension of its local operator. Thus here the stalk is $E\\otimes_E\\Qlb\\cong\\Qlb$, by $a\\otimes b\\mapsto ab$, and its local operator sends $a\\otimes b$ to $F_y(a)\\otimes b=a\\otimes b$. Pure tensors span, so the common-stage local operator is the identity. This uses the common-stage construction itself and makes no identification with the distinct upstream ProEtaleWeilSheaf category.",
+   "uses": [
+    "def-weil-constant-weil-structure",
     "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/lem-zl-constant-sheaf-weight-zero.proof.md",
+    "place": "Proof paragraph: identity on the constant stalk, followed by the weight-zero equality; expanded using the existing constant-datum/local-factor lemmas."
+   }
+  },
+  {
+   "text": "Fix any closed point $y$ and any local eigenvalue $\\alpha\\in\\Qlb$. By the eigenvalue convention in [def-weil-punctual-weights], there is a nonzero stalk vector $v$ with $F_y(v)=\\alpha v$. Step 2 gives $v=\\alpha v$, hence $(\\alpha-1)v=0$, and since $\\Qlb$ is a field and $v\\neq0$, $\\alpha=1$. The field embedding $\\iota$ sends $1$ to $1$, so $|\\iota(\\alpha)|=1=q_y^{0/2}$. This is the required purity condition at every closed point. If $Y_0$ is empty there are no such points, and the condition holds vacuously.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/lem-zl-constant-sheaf-weight-zero.proof.md",
+    "place": "Proof paragraph: identity on the constant stalk, followed by the weight-zero equality; expanded using the existing constant-datum/local-factor lemmas."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-local-frobenius-trace",
-  "def-weil-global-geometric-frobenius",
+  "lem-zl-constant-weil-datum",
+  "lem-zl-constant-sheaf-lseries",
+  "def-weil-constant-weil-structure",
   "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/lem-zl-constant-sheaf-weight-zero.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/lem-zl-constant-sheaf-weight-zero.proof.md",
+  "place": "Proof paragraph: identity on the constant stalk, followed by the weight-zero equality; expanded using the existing constant-datum/local-factor lemmas."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPunctuallyPureOfWeight|WeilSheaf|punctual.*pur",
+   "results": "No hits.  The hits concern ordinary constant sheaves, scalar eigenvalue shifts, isocrystals, field Frobenius, or sieve weights; none states punctual purity for constructible l-adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constant Weil sheaf over a finite field has Frobenius eigenvalues of complex absolute value one and is pure of weight zero",
+   "results": "Hits: CategoryTheory.Sheaf.isConstant_of_iso, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.isocrystal_classification, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, FiniteField.frobeniusAlgEquiv, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, FiniteField.frobeniusAlgHom, CategoryTheory.Sheaf.IsConstant.casesOn.  The hits concern ordinary constant sheaves, scalar eigenvalue shifts, isocrystals, field Frobenius, or sieve weights; none states punctual purity for constructible l-adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue, LinearMap.id",
+   "results": "Hits: Module.End.hasEigenvalue_sub_iff, Module.End.hasEigenvalue_sub'_iff, Module.End.hasEigenvalue_add'_iff, Module.End.hasEigenvalue_add_iff.  The hits concern ordinary constant sheaves, scalar eigenvalue shifts, isocrystals, field Frobenius, or sieve weights; none states punctual purity for constructible l-adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant l-adic Weil sheaf is punctually pure of weight zero because its local geometric Frobenius eigenvalue is one",
+   "results": "Hits: LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CategoryTheory.Sheaf.isConstant_of_forget, WittVector.StandardOneDimIsocrystal, CategoryTheory.Sheaf.isConstant_iff_forget, WittVector.isocrystal_classification, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val.  The hits concern ordinary constant sheaves, scalar eigenvalue shifts, isocrystals, field Frobenius, or sieve weights; none states punctual purity for constructible l-adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*[Ff]robenius|[Ff]robenius.*stalk|pure.*weight",
+   "results": "Hits: Mathlib/NumberTheory/SelbergSieve.lean, Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean.  The hits concern ordinary constant sheaves, scalar eigenvalue shifts, isocrystals, field Frobenius, or sieve weights; none states punctual purity for constructible l-adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rank one constant etale sheaf with canonical descent over a finite field has identity local Frobenius at every closed point",
+   "results": "Hits: IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, WittVector.instIsocrystalStandardOneDimIsocrystal, AlgebraicGeometry.Scheme.residueFieldCongr_refl, WittVector.isocrystal_classification, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgHom.IsArithFrobAt.isArithFrobAt_localize.  The hits concern ordinary constant sheaves, scalar eigenvalue shifts, isocrystals, field Frobenius, or sieve weights; none states punctual purity for constructible l-adic Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -73,5 +145,34 @@
   "group": "Q55",
   "result": "pass",
   "note": "Existing record for AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant in WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed. The node changed only in lean, and the record has all its fields. The statement field matches lines 48-49 of the live source verbatim. Clauses: the constant Weil sheaf is WeilSheaf.adicConstant (genuine pro-etale unit sheaf with its canonical Frobenius structure). Punctual purity is the recorded def-weil-punctual-weights predicate IsPunctuallyPureOfWeight iota 0 over finitePoints with residueCard. The theorem holds for every k0-scheme and any embedding iota, a harmless generalization; the separated/finite-type/quasi-compact specialization compiles. Edge cases: empty X is vacuous, l != char k0 is kept, universes are fine. No duplicate declaration in lean/Sheaf. The two citers use the item only in proof_deps. nt_compile --json of a check file: 17.9 s, no errors or warnings; axioms are propext, Classical.choice and Quot.sound (no sorry). Non-blocking: the second-reading section is the 2026-10-17 placeholder; the report mentions a citations.json that is not in the delivery; the sf and upstream Weil-sheaf encodings coexist at project level."
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-constant-sheaf-weight-zero",
+  "worker": "stage1",
+  "summary": "Retained the statement verbatim. Replaced the unsupported inference from global geometric Frobenius to a local stalk by the already existing geometric local-operator assertion of lem-zl-constant-sheaf-lseries, whose normalized-constant-datum hypothesis is supplied by lem-zl-constant-weil-datum. Made the Ql-to-Qlbar common-stage stalk scalar extension explicit and wrote out the eigenvector argument. Added the constant-Weil-structure and punctual-weights statement dependencies. No new nodes or Mathlib leaves. The tagged upstream theorem is not attached across the different coefficient encodings.",
+  "blueprint": "main-20261015, order 3215: the proof paragraph identity-on-constant-stalk clause is Steps 1-2, and the displayed weight-zero equality is Step 3. This realizes sk-input-weights proof clause (1), its second recorded step; the item is not the unit key proposition, so no unit realization fields are changed.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-constant-weil-datum",
+    "why": "Supplies the canonical normalized constant coefficient tower required by the existing constant-local-factor lemma; sk-input-weights has no node for that coefficient construction."
+   },
+   {
+    "node": "lem-zl-constant-sheaf-lseries",
+    "why": "Uses only its geometric local-Frobenius identity on the canonical constant Ql stalk, as a coefficient/stalk tool. This is the identical local computation in sk-input-weights clause (1), not a replacement by a global trace or purity theorem; no other node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-constant-weil-datum",
+  "lem-zl-constant-sheaf-lseries"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-e8b7cbee4",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e8b7cbee4 (reviewer sub-agent of L); spot-checked: PASS, no changes. The statement is verbatim (main-20261015 and master), there are no new nodes, and the item is neither dropped nor under a repair note. The blueprint proof inferred the local stalk identity from the global geometric Frobenius (def-weil-global-geometric-frobenius), which does not support it; the delivery correctly replaces that with the explicit local statement of an existing lemma. Step 1: lem-zl-constant-weil-datum supplies the normalized constant datum, with its hypotheses (separated finite type, l != p) checked. The first assertion of lem-zl-constant-sheaf-lseries states that F_y of def-weil-local-frobenius-trace for the canonical (E_Y, theta_E), E = Ql, is the identity on the degree-0 stalk E, including point transport and the return g_Y^r y = y g_s^r. Step 2: def-weil-constant-weil-structure clause 5 represents the canonical Qlbar structure at stage Ql by that same object. def-weil-punctual-weights takes the stalk H^0(C_E) tensor Qlbar with the scalar-extended composite, so the Qlbar operator is the identity. Step 3: an eigenvalue needs a nonzero eigenvector, so alpha = 1 and |iota(1)| = 1 = q_y^0. Tested Spec F_{q^2} over F_q (degree-2 point, swapped copies), empty and disconnected schemes, and a scalar-twisted non-canonical structure; the last is excluded because the canonical structure is now a stmt_dep, as is def-weil-punctual-weights. proof_deps is the union of the steps' uses. No duplicate, no cycle, no SGA. The two tool uses are accepted: lseries and datum are sk-thm-rationality lemmas used as a black-box version of the local computation in unit sk-input-weights step (1), and they also give P = 1 - T^{d_y}. Batch 5: the flagged path via def-weil-local-frobenius-trace is a general definition and was already in the item's statement closure through def-weil-punctual-weights. The batch-5 closure, recomputed from the targets without descending into the assumed nodes, already contains both cited lemmas through sk-thm-rationality; the new edges add 0 nodes, and no assumed node is reached from either lemma. So the citation is genuinely outside the assumed statements. The existing lean and reviewed_lean records are unchanged, and the worker's choice not to attach the upstream WeilSheaf theorem across encodings is left to the maintainer."
  }
 }

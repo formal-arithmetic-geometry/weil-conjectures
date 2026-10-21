@@ -22458,3 +22458,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:16 L: merged deliver/Q22/lem-per-constructible-rational-hom-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 12:17 L: merged deliver/Q12/sk-thm-picard-duality (stage 2; reviewer PASS; parallel immutable checks)
 - 12:19 L: merged deliver/NW/lem-zl-dualizable-categorical-trace-conjugacy (stage 2; reviewer PASS; parallel immutable checks)
+- 12:22 L: merged deliver/NB/lem-zl-constant-sheaf-weight-zero (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
