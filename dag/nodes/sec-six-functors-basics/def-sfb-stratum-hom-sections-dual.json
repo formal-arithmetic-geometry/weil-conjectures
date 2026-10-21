@@ -1,0 +1,107 @@
+{
+ "id": "def-sfb-stratum-hom-sections-dual",
+ "kind": "definition",
+ "title": "Global derived Hom, derived sections and internal dual for stratum modules",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $X$ be a scheme and let $R_X=p_X^*\\Lambda$ be its pulled-back coefficient ring on the small pro-étale site [sk-def-sfb-pulled-back-coefficients], in the size convention [def-weil-size-convention]. Let $\\mathcal A_X$ be the category of internal $R_X$-module sheaves [sk-def-sfb-module-objects], with ordinary unbounded derived category $D(\\mathcal A_X)$ [sk-def-sfb-derived-categories]. For $M\\in\\mathcal A_X$, define the global derived Hom functor $R\\operatorname{Hom}_X(M,-):D(\\mathcal A_X)\\to D(\\operatorname{Ab})$ to be the unbounded right derived functor of $\\operatorname{Hom}_{\\mathcal A_X}(M,-)$, valued in abelian groups. On a K-injective representative $I^\\bullet$ this is the complex with degree-$q$ term $\\operatorname{Hom}_{\\mathcal A_X}(M,I^q)$ and differential postcomposition with $d_I$, equivalently the global Hom complex with source $M[0]$ [def-pur-hom-complex]. Define $R\\Gamma(X,-)=R\\operatorname{Hom}_X(R_X,-)$, where $R_X$ is the regular module. This is the derived global sections convention of [def-pur-ringed-site-zeroth-hypercohomology], before taking zeroth cohomology: under the canonical section-action equivalence from internal modules to sectionwise module sheaves [def-weil-pbc-internal-abelian-sheaf-module-equivalence], the regular module corresponds to the unit sheaf, and global sections is $\\operatorname{Hom}_{R_X}(R_X,-)$. Finally, for $L\\in\\mathcal A_X$ define $L^\\vee=\\mathcal Hom_{R_X}(L,R_X)$ using sheaf Hom [def-pur-sheaf-hom], equivalently the internal Hom from $L$ to the tensor unit. These are definitions; no support-adjunction theorem, admissibility or local freeness is assumed.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "Lattices, target completeness and reductions; Integral targets, applying support and finite locally free tensor to the reduction tower and the displayed RHom/global-sections/derived-limit comparison. Stacks Tag 0D6K, label lemma-RGamma-commutes-with-Rlim."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom of module sheaves is the right derived functor of Hom and derived global sections is Hom from the regular module",
+   "results": "Eight hits: CategoryTheory.Functor.rightDerived; AlgebraicGeometry.Scheme.Modules.Hom; CategoryTheory.Sheaf.Γ; CategoryTheory.sheafHom'; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.instIsRightAdjointSheafΓ; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.sheafHom. These give bounded ordinary right derived functors or sheaf Hom/sections; no exact combined unbounded pro-etale module-object definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom dual of a sheaf of modules and global derived sections as derived Hom from the regular coefficient module",
+   "results": "Eight hits: SheafOfModules.unitHomEquiv; SheafOfModules.unitHomEquiv_comp_apply; LightCondensed.ihomPoints; CategoryTheory.Sheaf.ΓHomEquiv; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; LightCondensed.ihomPoints_apply; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.sheafifyHomEquiv. No exact combined definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preadditiveCoyoneda|rightDerivedFunctor|ihom",
+   "results": "14 Mathlib/Algebra/Homology hits, in DerivedCategory/DerivabilityStructureInjectives.lean, DerivedCategory/RightDerivedFunctorPlus.lean, DerivedCategory/Ext/ExactSequences.lean: bounded-below derived functors and Ext exactness, no combined definition. Direct rg of lean/WeilConjectures and lean/Sheaf found the exact three existing definitions in Sheaf.AlgebraicGeometry.ClosedSupportStratumHom, lines 49-65; reuse them unchanged. DAG searches for these names and the concepts found theorem records, but no definition node owning these notions; blueprint_refs searches global derived Hom and internal dual found comparison theorems, not a definition.",
+   "date": "2026-10-21",
+   "verdict": "existing project definitions; no owning definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-supported-hom-reduction-tower",
+  "date": "2026-10-21",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-uniform-constructible-ext-integral",
+   "place": "Integral targets: the displayed equality R Hom_X(a_! L_0,b_! M_0) = R Gamma(S,F); the definition F = L_0 dual tensor u* R Gamma_Z b_! M_0.",
+   "via": [
+    "lem-sfb-lattice-supported-hom-reduction-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-uniform-constructible-ext",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportStratumHom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.stratumGlobalRHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumGlobalRHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumRGamma",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDual"
+  ],
+  "statement": "noncomputable def stratumGlobalRHom (X : Scheme.{u}) (M : supportModules Λ X) :\n    DerivedCategory (supportModules Λ X) ⥤ DerivedCategory Ab.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Owns only the three unchanged definitions at lines 49-65, not closedSupport_stratum_globalHom. stratumRGamma unfolds to (preadditiveCoyoneda.obj (op (Mod.regular (condensedRingObj Λ X)))).rightDerivedFunctor. The cited ringedSiteZerothHypercohomologyOfUniverses is the same right-derived Hom-from-unit convention, in the sectionwise presentation, followed by H^0. sectionModuleEquivalence identifies the regular module with the unit sheaf by identity on sections/actions and identifies Hom complexes termwise; its exactness preserves K-injectives. Thus the full derived-sections functor is reconciled before H^0 without defining a second RΓ or imposing any comparison hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a337640be",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a337640be",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after RETURN d5b286bb (H2/H4). The Lean diff is 7 docstring lines only; the item record changes only by swapping theorem stmt_dep det-lem-formal-closed-support-stratum-hom for new def node def-sfb-stratum-hom-sections-dual (theorem kept in proof_deps/step 10), plus one note sentence. New node: kind definition, 9 bracket citations = 9 stmt_deps, all live, including def-pur-sheaf-hom, def-pur-hom-complex and def-pur-ringed-site-zeroth-hypercohomology. Its existing:true record covers the unchanged plain defs stratumGlobalRHom/stratumRGamma/stratumDual (ClosedSupportStratumHom l.49-65) with a verbatim signature. RGamma = Hom(regular,-) is reconciled with the ringed-site H0∘RΓ via the section-action equivalence (regular = unit, K-injectives preserved). No duplicate def node: def-sfb-finite-derived-global-sections is A-valued sheaf RΓ, not module objects. Item not landed and not dropped; base stmt_deps 15 + 1 new def node. Reread Assertions: all clauses, projection-normalized comparisons, canonical commShiftIso, all q, rank 0 and empty strata allowed, only sorry is the main theorem. Advisory: the old blueprint tags on the reused defs are unavoidable under existing:true. No files changed, no compile."
+ }
+}

@@ -229,5 +229,36 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-afe3d1099 (reviewer sub-agent of L); spot-checked: Read the whole item (8 steps) and both cited definitions (def-weil-pbc-free-module, def-weil-pbc-module-chain-complex-homology; both Mathlib leaves), and checked that the citer lem-sfb-discrete-lattice-koszul-resolution uses exactly what the statement gives. One commit, item plus report, statement unchanged from base, 0 new nodes, proof_deps = union of uses, no repair or re-split note, no SGA. Recomputed by hand: the ∂² sign cancellation (exponents q_i+q_j−1 vs q_i+q_j); the p_i chain map (on the i-face both vertices reset to the same point); the Σ_n telescoping for n>0, n=0, n=−1 and n<−1; step 4 face cancellation for j<i and j>i (exponents q_i+q_j+[i<j] vs q_i+q_j−[j<i]); step 5 (sign product 1, Σ_{v_i+1}−Σ_{v_i}=[v,I]); the sum of P_{i−1}(1−p_i) telescoping to 1−P_r=e; exactness; r=0; translation and free orbits; non-equivariance of s. My own script checked ∂²=0 and ∂h+h∂=1−e on 1111 cells (r≤3, coordinates in [−2,2]) with 0 failures. A DAG grep for cubical, contraction and Koszul-lattice found no duplicate. Elementary marks are justified: each step is a few-line check, the source tags are cited for comparison only, proof_origin is agent. No tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.IntegralLatticeCubicalContraction",
+  "declaration": "IntegralLatticeCubical.contraction",
+  "declarations": [
+   "IntegralLatticeCubical.Directions",
+   "IntegralLatticeCubical.Chains",
+   "IntegralLatticeCubical.cell",
+   "IntegralLatticeCubical.unitVector",
+   "IntegralLatticeCubical.boundary",
+   "IntegralLatticeCubical.incomingBoundary",
+   "IntegralLatticeCubical.augmentation",
+   "IntegralLatticeCubical.sectionMap",
+   "IntegralLatticeCubical.originProjection",
+   "IntegralLatticeCubical.translate",
+   "IntegralLatticeCubical.contraction"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/IntegralLatticeCubicalContraction.lean",
+  "statement": "theorem contraction (r : ℕ) : (∀ a : ℤ, (boundary r (a - 1)).comp (boundary r a) = 0) ∧ (augmentation r).comp (boundary r 1) = 0 ∧ (augmentation r).comp (sectionMap r) = LinearMap.id ∧ originProjection r 0 = (sectionMap r).comp (augmentation r) ∧ (∀ a : ℤ, a ≠ 0 → originProjection r a = 0) ∧ (∀ a : ℤ, a < 0 ∨ (r : ℤ) < a → Subsingleton (Chains r a)) ∧ (∀ a : ℤ, Module.Free ℤ (Chains r a)) ∧ (∃ h : (a : ℤ) → Chains r a →ₗ[ℤ] Chains r (a + 1), (∀ (a : ℤ) (_ : 0 ≤ a) (x : Chains r a), incomingBoundary r a (h a x) + LinearEquiv.cast (R := ℤ) (M := Chains r) (sub_add_cancel a 1) (h (a - 1) (boundary r a x)) = x - originProjection r a x) ∧ (∀ x : Chains r 0, h (-1) (boundary r 0 x) = 0) ∧ (r = 0 → ∀ a : ℤ, h a = 0)) ∧ (∀ a : ℤ, 0 < a → LinearMap.range (incomingBoundary r a) = LinearMap.ker (boundary r a)) ∧ LinearMap.range (boundary r 1) = LinearMap.ker (augmentation r) ∧ Function.Surjective (augmentation r) ∧ (∀ (a : ℤ) (w : Fin r → ℤ), (boundary r a).comp (translate r a w) = (translate r (a - 1) w).comp (boundary r a)) ∧ (∀ w : Fin r → ℤ, (augmentation r).comp (translate r 0 w) = augmentation r) ∧ (∀ a : ℤ, Finite (Directions r a)) ∧ (∀ a : ℤ, ∃ e : Chains r a ≃ₗ[ℤ] (Directions r a →₀ ((Fin r → ℤ) →₀ ℤ)), (∀ (v : Fin r → ℤ) (I : Directions r a), e (Finsupp.single (v, I) 1) = Finsupp.single I (Finsupp.single v 1)) ∧ (∀ (w : Fin r → ℤ) (x : Chains r a) (I : Directions r a), e (translate r a w x) I = Finsupp.mapDomain (fun v ↦ v + w) (e x I))) ∧ (r = 0 → ∃ e : Chains r 0 ≃ₗ[ℤ] ℤ, e.toLinearMap = augmentation r ∧ e.symm.toLinearMap = sectionMap r)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62dd1485b",
+  "group": "NM",
+  "result": "pass",
+  "note": "Item adds only the lean field (diff vs side-live); the record is complete and its statement is verbatim in the file; no existing IntegralLatticeCubical declaration. Every node clause is rendered: free C_a with Subsingleton outside [0,r] and Module.Free; boundary with sign (-1)^#{j<i} and I.erase i faces; ε, s, e (originProjection 0 = sε, 0 elsewhere); ∂∂=0 for all a, ε∂1=0, εs=id; ∃h with ∂h+h∂=1-e for a≥0 via LinearEquiv.cast degree transports, h(-1)∂0=0, r=0→h=0; exactness as range=ker for a>0, range ∂1 = ker ε, ε surjective; translation commutes with ∂ and ε; C_a ≃ Directions →₀ ℤ[D] compatible with the basis and translation, Directions finite; no equivariance of h or s; r=0 iso C_0≃ℤ equal to ε with inverse s. Edge cases r=0, a<0, a>r, top degree checked. Defs carry real data, the only sorry is the theorem proof, docstrings carry source, blueprint and the 8 proof steps, lines ≤100, autoImplicit false. Advisory H9: the ShortComplex homology imports appear only in docstrings because exactness is stated as ker=range; not blocking. No compile: no file changed."
  }
 }

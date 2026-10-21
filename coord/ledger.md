@@ -23274,3 +23274,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:05:53Z L: superseded stage-1 delivery Q22/lem-wf-tate-twist-compatibility at 49804c8acdbdc3d3a7187db9fb5e56940b7da5a4; current completion retained; packet archived at refs/superseded/Q22/lem-wf-tate-twist-compatibility/49804c8acdbdc3d3a7187db9fb5e56940b7da5a4; stale return retired.
 - 18:06 L: merged deliver/Q15/lem-sfb-rational-polynomial-bar-contraction (reviewer PASS; first push; new nodes: 2)
 - 18:06 L: merged deliver/Q09/lem-sfb-lattice-koszul-triangulated-cup-comparison (reviewer PASS; first push; new nodes: 1)
+- 18:06 L: merged deliver/Q32/lem-zl-lisse-cohomology-derived-dual (stage 2; reviewer PASS; parallel immutable checks)
+- 18:06 L: merged deliver/NX/lem-sfb-finite-closed-cover-resolution (stage 2; reviewer FIX; parallel immutable checks)
+- 18:06 L: merged deliver/NM/lem-sfb-integral-lattice-cubical-contraction (stage 2; reviewer PASS; parallel immutable checks)
+- 18:06 L: merged deliver/Q10/lem-sfb-lattice-supported-hom-reduction-tower (stage 2; reviewer PASS; parallel immutable checks)

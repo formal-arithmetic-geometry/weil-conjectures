@@ -16,7 +16,9 @@
   "lem-weil-pbc-proetale-ringed-open-closed",
   "def-weil-closed-immersion",
   "def-pc-fibre-product",
-  "def-weil-finite-type-morphism"
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-unit-normalized-adjunction"
  ],
  "proof": [
   {
@@ -355,5 +357,48 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-ee3ddb2f6 (reviewer sub-agent of L); spot-checked: PASS. I read all 8 steps in full against every cited statement; no changes were made and no SGA source is cited. Delivery: one commit, no new nodes, no repair note (first split). The base item in live and side-live is unsplit with no proof, and it is not dropped. Statement change: 'quasi-compact open' now reads 'complementary open immersions are quasi-compact morphisms'. Stacks 09AH (proetale.tex l.5138) assumes exactly this, and so does lem-weil-pbc-proetale-ringed-open-closed. The report's counterexample (two copies of Spec k[x_1,x_2,...] glued along the union of the D(x_n)) is correct. The only citer, lem-sfb-root-tower-inner-support step 3, works on an affine V with principal-open complements and so still supplies the hypothesis. Step checks: (1) the complement of Z_J is a finite union of quasi-compact opens, and closed and open functors are exact. (2) d^2=0 and r_{Z,J}eta_i=eta_{i_J} follow from composite-adjunction units. (3) zero detection by induction through V=X\\Z_1 is correct; base change keeps complements quasi-compact. (4) affine reduction makes X, X', Z, Z_a, Z_J qcqs, so the hypotheses of lem-sf-ring-sheaf-base-change-mates hold. (5) the Cech homotopy in index a gives dh+hd=1 in degrees -1, 0 and top, using Z_J x_X Z_a = Z_{J+a} because a closed immersion is a monomorphism. (6) exactness follows from (3). (7) the finite-strip row-augmentation hypotheses match exactly. (8) the alternating refinement map is a chain map and is unique in D. Edge cases m=1, m=2, repeated members, empty intersections, K=0 and Z empty were checked. No duplicates: lem-exc-open-closed-detection only states the two-piece detection, which step 3 re-derives in one line (advisory). Advisory: step 4's wording about open restriction is loose, but the identification it needs is elementary. Batch 5: lem-trf-geometric-inverse-image-exact is a general exactness fact for inverse images along geometric morphisms, not part of the trace formula or Poincare duality; its closure reaches only generic trf definitions, so it is accepted. The declared tool uses are all generic and none replaces a step of paragraph (3) of the unit route; accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedCoverResolution",
+  "declaration": "AlgebraicGeometry.finite_closed_cover_resolution",
+  "declarations": [
+   "AlgebraicGeometry.finiteClosedRestriction",
+   "AlgebraicGeometry.finiteClosedRestriction_zero",
+   "AlgebraicGeometry.finiteClosedUnit",
+   "AlgebraicGeometry.finiteClosedIntersection",
+   "AlgebraicGeometry.finiteClosedTerms",
+   "AlgebraicGeometry.finiteClosedDifferential",
+   "AlgebraicGeometry.finiteClosedAllTotal",
+   "AlgebraicGeometry.finiteClosedDouble",
+   "AlgebraicGeometry.finiteClosedTotal",
+   "AlgebraicGeometry.FiniteClosedResolution",
+   "AlgebraicGeometry.finiteClosedDerivedRefinement",
+   "AlgebraicGeometry.finiteClosedRefinementSign",
+   "AlgebraicGeometry.finiteClosedRefinementMap",
+   "AlgebraicGeometry.finiteClosedTotalMap",
+   "AlgebraicGeometry.FiniteClosedRefinementCompatible",
+   "AlgebraicGeometry.finiteClosedInverseZero",
+   "AlgebraicGeometry.finiteClosedPullbackComplex",
+   "AlgebraicGeometry.FiniteClosedPullbackCompatible",
+   "AlgebraicGeometry.finiteClosedTermProjection",
+   "AlgebraicGeometry.finiteClosedPullbackFamily",
+   "AlgebraicGeometry.finiteClosedPullbackRowFormula",
+   "AlgebraicGeometry.finite_closed_cover_resolution"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedCoverResolution.lean",
+  "statement": "theorem finite_closed_cover_resolution {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (m : ℕ) (hm : 0 < m) (W : Fin m → Over X) (hclosed : ∀ a, IsClosedImmersion (W a).hom) (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i)) (hcover : Set.range i = ⋃ a, Set.range (W a).hom) (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι) (hqcW : ∀ a, ∃ U : X.Opens, Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : ∃ D : FiniteClosedResolution i W A, FiniteClosedRefinementCompatible D ∧ FiniteClosedPullbackCompatible D",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair F1: every intersection has a unit-compatible pullback comparison; the asserted row map is their product under terms and preserves the augmentation. Its totalization is pinned on all diagonal inclusions (equivalently via g* Tot ≅ Tot g*), and its localization must equal the augmentation-normalized derived comparison. Repair F2: use ringedSiteModules, proEtaleModuleInverseImage and proEtaleSheafInverseImage directly; replace the two helper-only theorem dependencies by the definition node owning the existing normalized adjunction. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11c47ebaa",
+  "group": "NX",
+  "result": "fix",
+  "note": "Re-delivery of 23a13b10 RETURN. F1 fixed: FiniteClosedPullbackCompatible now quantifies unit-compatible c and cs for every intersection; requires σ pinned componentwise by finiteClosedPullbackRowFormula (Π cs under terms) with augmentation square via c; τ pinned on all g^*ιTotal(p,q,n), the jointly epimorphic summands since g^* is a left adjoint; and Q(τ)=e for the unique augmentation-normalized e. Non-tautological (σ existence = face compatibility via epi units) and true. F2 fixed: aliases unfolded to proEtaleModuleInverseImage/proEtaleSheafInverseImage/ringedSiteModules; lem-pur tensor-comparison dep dropped; closed-underived-projection theorem dep replaced by new def-sfb-proetale-unit-normalized-adjunction existing:true on unchanged ProEtaleClosedUnderivedProjection (adjunction_exists is a proved ∃!, adjunction its choose, so not hollow); check_existing and check_new_node clean; all dep records byte-identical to live. FIX (record only): fixes/def-sfb-proetale-unit-normalized-adjunction.json adds body owner def-sfb-proetale-inverse-image-unit-section (inverseSection, used in adjunction_exists) to stmt_deps and TeX; check_new_node [] on it. Advisory: proEtaleRingedDirectImage owned only by theorem lem-weil-pbc-proetale-ringed-open-closed (inherited from the base statement). Other clauses re-verified on the unfolded text: qc morphisms, Over-X product intersections, unit-pinned restrictions, signed differential, augment_unit, total sign, quasiIso on plus, derivedIso, refinement signs. Edge cases m=1, repeats, empty intersections, Z empty, K=0, arbitrary g. Single sorry; docstrings and blueprint ids present; statement verbatim; Worker report and Second reading sections present. No compile (no Lean changed); worker reports 28.9/30.1 s clean."
  }
 }

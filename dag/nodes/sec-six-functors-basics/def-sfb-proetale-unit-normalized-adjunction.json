@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-proetale-unit-normalized-adjunction",
+ "kind": "definition",
+ "title": "Unit-normalized adjunction for pro-etale module inverse image",
+ "statement": "Let $f:Z\\to X$ be a morphism of schemes [def-pc-scheme], with small pro-etale sites [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings on $X_{\\mathrm{proet}}$, and let $f^*$ and $f_*$ be the module inverse image and direct image with inverse-image coefficients of [def-weil-proetale-inverse-image], on the module sheaf categories [def-weil-sheaf-of-modules-category]. Define the canonical adjunction $f^*\\dashv f_*$ to be the unique adjunction whose unit on every module $M$, site object $V\\to X$ and section $s\\in M(V)$ is the actual inverse-image unit section $f^{-1}s\\in(f^*M)(Z\\times_XV)$ [def-sfb-proetale-inverse-image-unit-section]. Here the actual section map is the unit of the sheafified module pullback on the compatible small model, transported back by the sectionwise model equivalences. This fixes the entire adjunction, including its counit, rather than choosing an arbitrary adjunction between the functors. The notation does not require $f$ to be closed, and imposes no finiteness or flatness assumption on $R$ or $M$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-proetale-inverse-image-unit-section"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3; lemma-adjoint-push-pull-modules, canonical unit under inverse-image coefficients; proetale.tex Tag 09AA"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "canonicalAdjunction|adjunction.*[Pp]ro[Ee]tale|proEtale.*[Aa]djunction",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "Generic adjunction constructions, no exact small-proetale unit-normalized public specialization in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical adjunction for inverse image and direct image of module sheaves on small proetale sites with sectionwise unit",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-21",
+   "verdict": "Generic adjunction constructions, no exact small-proetale unit-normalized public specialization in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-21",
+   "verdict": "Generic adjunction constructions, no exact small-proetale unit-normalized public specialization in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "rg canonicalAdjunction|ProEtaleClosedProjection.adjunction lean/WeilConjectures lean/Sheaf; rg -l ProEtaleClosedProjection.adjunction|canonicalAdjunction dag/nodes/*/def*.json; tools/blueprint_refs.py search module adjunction",
+   "results": "No WeilConjectures match. Sheaf: ProEtaleClosedUnderivedProjection.adjunction is the exact public unit-normalized adjunction, with adjunction_exists proving its unique characterization; ProEtaleModuleInverseImageCanonicalUnit.canonicalAdjunction and canonicalUnit_sections are private. No definition node records the public adjunction. Blueprint search returns five general/constant-coefficient adjunction nodes, none this arbitrary-ring-sheaf unit-normalized specialization. Existing theorem node lem-weil-pbc-proetale-closed-underived-projection records it only as a helper, not in its statement.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the exact public helper via existing:true, without any new Lean definition."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-closed-cover-resolution",
+  "date": "2026-10-21",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: actual closed restriction units for the finite closed-support resolution; same technical extraction as the consumer, not a verbatim blueprint unit.",
+   "via": [
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClosedUnderivedProjection",
+  "declaration": "AlgebraicGeometry.ProEtaleClosedProjection.adjunction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleClosedProjection.adjunction_exists",
+   "AlgebraicGeometry.ProEtaleClosedProjection.adjunction"
+  ],
+  "statement": "def adjunction {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :\n    inverse i R ⊣ proEtaleRingedDirectImage i R",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "F2 repair: this definition node owns the exact existing public normalized adjunction and its unique sectionwise-unit characterization helper. It reuses the declaration in ProEtaleClosedUnderivedProjection without modifying that module or restating its projection theorem. adjunction_exists fixes the unique data, and adjunction selects only those uniquely determined data. The consumer no longer cites the projection theorem or the tensor-comparison theorem merely for their helper definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11c47ebaa",
+  "group": "NX",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11c47ebaa",
+  "group": "NX",
+  "result": "fix",
+  "note": "Re-delivery of 23a13b10 RETURN. F1 fixed: FiniteClosedPullbackCompatible now quantifies unit-compatible c and cs for every intersection; requires σ pinned componentwise by finiteClosedPullbackRowFormula (Π cs under terms) with augmentation square via c; τ pinned on all g^*ιTotal(p,q,n), the jointly epimorphic summands since g^* is a left adjoint; and Q(τ)=e for the unique augmentation-normalized e. Non-tautological (σ existence = face compatibility via epi units) and true. F2 fixed: aliases unfolded to proEtaleModuleInverseImage/proEtaleSheafInverseImage/ringedSiteModules; lem-pur tensor-comparison dep dropped; closed-underived-projection theorem dep replaced by new def-sfb-proetale-unit-normalized-adjunction existing:true on unchanged ProEtaleClosedUnderivedProjection (adjunction_exists is a proved ∃!, adjunction its choose, so not hollow); check_existing and check_new_node clean; all dep records byte-identical to live. FIX (record only): fixes/def-sfb-proetale-unit-normalized-adjunction.json adds body owner def-sfb-proetale-inverse-image-unit-section (inverseSection, used in adjunction_exists) to stmt_deps and TeX; check_new_node [] on it. Advisory: proEtaleRingedDirectImage owned only by theorem lem-weil-pbc-proetale-ringed-open-closed (inherited from the base statement). Other clauses re-verified on the unfolded text: qc morphisms, Over-X product intersections, unit-pinned restrictions, signed differential, augment_unit, total sign, quasiIso on plus, derivedIso, refinement signs. Edge cases m=1, repeats, empty intersections, Z empty, K=0, arbitrary g. Single sorry; docstrings and blueprint ids present; statement verbatim; Worker report and Second reading sections present. No compile (no Lean changed); worker reports 28.9/30.1 s clean."
+ }
+}

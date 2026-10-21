@@ -332,5 +332,44 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-a4be630d4 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Stacks 08JI/08J9/08JB/08JC, coefficient constructions, truncation degrees, evaluation normalization, Weil variance, edge cases and duplicates. The new theta/chi lemma repairs the comparison gap without restating the parent. No long-step or forbidden-route violation found. Detailed checks and accepted tool uses are in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.LisseCohomologyDerivedDual",
+  "declaration": "WeilConjectures.LisseCohomologyDual.lisseCohomologyDerivedDual",
+  "declarations": [
+   "WeilConjectures.LisseCohomologyDual.Operations",
+   "WeilConjectures.LisseCohomologyDual.piece",
+   "WeilConjectures.LisseCohomologyDual.pair",
+   "WeilConjectures.LisseCohomologyDual.dual",
+   "WeilConjectures.LisseCohomologyDual.dualMap",
+   "WeilConjectures.LisseCohomologyDual.restrictedEvaluation",
+   "WeilConjectures.LisseCohomologyDual.quotientEvaluation",
+   "WeilConjectures.LisseCohomologyDual.LisseCohomology",
+   "WeilConjectures.LisseCohomologyDual.Comparison",
+   "WeilConjectures.LisseCohomologyDual.Comparison.sheafIso",
+   "WeilConjectures.LisseCohomologyDual.Family",
+   "WeilConjectures.LisseCohomologyDual.Transport",
+   "WeilConjectures.LisseCohomologyDual.Transport.piece",
+   "WeilConjectures.LisseCohomologyDual.Compatible",
+   "WeilConjectures.LisseCohomologyDual.rational",
+   "WeilConjectures.LisseCohomologyDual.common",
+   "WeilConjectures.LisseCohomologyDual.lisseCohomologyDerivedDual",
+   "WeilConjectures.LisseCohomologyDual.weil_equation"
+  ],
+  "file": "lean/Sheaf/Paper/LisseCohomologyDerivedDual.lean",
+  "statement": "theorem lisseCohomologyDerivedDual : ∃ (a : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : LisseRealization.Base D l hl) [IsSeparated (X.scheme ↘ Spec (.of D.k))], Family (rational D l hl E X)) (b : ∀ (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : LisseRealization.Base D l hl) [IsSeparated (X.scheme ↘ Spec (.of D.k))], Family (common D l hl Ω X)), (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : LisseRealization.Base D l hl) [IsSeparated (X.scheme ↘ Spec (.of D.k))] (Y : LisseRealization.Base D l hl) [IsSeparated (Y.scheme ↘ Spec (.of D.k))] (h : X.scheme ≅ Y.scheme), ∃ (e : (rationalDerivedPullback l E h.hom).obj (rational D l hl E Y).unit ≅ (rational D l hl E X).unit) (p : Transport (rational D l hl E Y) (rational D l hl E X) (rationalDerivedPullback l E h.hom) (fun K L ↦ canonicalRationalPullbackTensor l E h.hom K L) e), Compatible _ _ _ (a E Y) (a E X) p) ∧ (∀ (E L : Type u) [Field E] [Field L] [Algebra ℚ_[l] E] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (X : LisseRealization.Base D l hl) [IsSeparated (X.scheme ↘ Spec (.of D.k))], ∃ p : Transport (rational D l hl E X) (rational D l hl L X) (sfRationalScalarExtension l E X.scheme 0 (Fact.out : l.Prime).ne_zero L ι) (fun K M ↦ (rationalTensorScalarComparison l E L ι X.scheme).app (K, M)) (pullbackTensorRationalScalarUnit l E L ι X.scheme), Compatible _ _ _ (a E X) (a L X) p) ∧ (∀ (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : LisseRealization.Base D l hl) [IsSeparated (X.scheme ↘ Spec (.of D.k))] (Y : LisseRealization.Base D l hl) [IsSeparated (Y.scheme ↘ Spec (.of D.k))] (h : X.scheme ≅ Y.scheme), ∃ (e : (commonStageDerivedPullback l Ω h.hom).obj (common D l hl Ω Y).unit ≅ (common D l hl Ω X).unit) (p : Transport (common D l hl Ω Y) (common D l hl Ω X) (commonStageDerivedPullback l Ω h.hom) (fun K L ↦ canonicalCommonStagePullbackTensor l Ω h.hom K L) e), Compatible _ _ _ (b Ω Y) (b Ω X) p) ∧ (∀ (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : LisseRealization.Base D l hl) [IsSeparated (X.scheme ↘ Spec (.of D.k))] (E : AlgebraicallyClosedCoefficients.Index l Ω), ∃ (tensor : ∀ K L : sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X.scheme, (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X.scheme) E).obj ((rational D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X).tensor.obj (K, L)) ≅ (common D l hl Ω X).tensor.obj ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj K, (GeneralAlgebraicallyClosedCoefficients.inclusion E).obj L)) (unit : (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X.scheme) E).obj (rational D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X).unit ≅ (common D l hl Ω X).unit) (p : Transport (rational D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X) (common D l hl Ω X) (GeneralAlgebraicallyClosedCoefficients.inclusion E) tensor unit), Compatible _ _ _ (a (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X) (b Ω X) p)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Evaluation-normalized derived comparison of cohomology pieces, with the per-degree sheaf isomorphism obtained by shifting (Comparison.sheafIso), contravariant naturality, normalized isomorphism-pullback and finite-scalar squares, and explicit contragredient Weil equation. The generic packages only name composites of the recorded operations, specialized by rational/common; no category or coefficient notion is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11b7a3507",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q32), module, and the recorded dependency declarations (PodPartialClosed/podRationalClosed, constructibleRationalHomPairs/commonStageHomPairs, rationalLisseHeartProperty = LisseRealization.Lisse, IsCommonStageLisse, Base, sfWeilFrobeniusPullback, sfRationalScalarExtension). Derived-form iso Q_{-i}(DK) ≅ D(Q_iK) with degree -i bound and shifted sheafIso; pinned by evaluation equation + uniqueness (existence and injectivity checked by degree vanishing). Hypotheses exact: lisse cohomology in all degrees, hK = recorded permitted pair, separated instance, no universe restriction. Naturality for all morphisms. Pullback conjuncts cover all scheme isos (not only k-linear); scalar conjunct covers every finite extension with the specified comparisons; Transport pinned by unit/counit, evaluation and unitor equations. Extra finite-to-common conjunct is true and harmless. weil_equation follows from Compatible plus naturality for theta^{-1}; contragredient variance correct. Statement verbatim, declarations match, stmt_deps unchanged, sorry only, docstrings carry source and proof steps. No recompile (no change); worker reports clean 25.3/20.0 s. Advisory: decls owned by nodes outside stmt_deps (PodPartialClosed/.evaluation from theorem lem-pod-derived-automorphism-hom-evaluation; t-structures, pullback-tensor comparisons, units, lisse predicates from def nodes); base stmt_deps unchanged, so maintainer note only."
+ }
 }

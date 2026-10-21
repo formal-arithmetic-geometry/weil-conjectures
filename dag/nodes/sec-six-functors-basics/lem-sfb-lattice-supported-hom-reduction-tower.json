@@ -22,7 +22,8 @@
   "sk-def-sfb-derived-tensor-hom",
   "def-pur-ringed-site-zeroth-hypercohomology",
   "sk-def-pe-derived-completion",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-sfb-stratum-hom-sections-dual"
  ],
  "proof": [
   {
@@ -351,5 +352,49 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-07a9af0ca (reviewer sub-agent of L); spot-checked: I read the delivery in full. It adds a 10-step proof to the item (created 2026-10-21 by Q76, base proof empty) and adds no new nodes. The statement and stmt_deps are unchanged. It is not a re-split and not on the dropped list. The route matches the blueprint main-20261015 proof of sk-lem-uniform-constructible-ext, paragraphs Lattices (lines 22-35) and Integral targets (lines 59-70). Checks: step 1, X/Z/B Noetherian, so j, u, v and the closed complements are quasi-compact, as open/closed exactness, extension-zero limits and stratum-hom require. Step 2, lisse gives finite locally free and finite locally projective, rank 0 included. Steps 3-4, R_Y = lim A_n with the free-resolution node's B_T, pi^n injective, M_0 = lim M_0/pi^n by a local finite-sum argument. Step 5, b_! exact; N tensor^L A_n = [N -> N] ~ N_n; the transition chain map (pi, id) commutes. Step 6, v_! keeps products and kernels, h_* is a right adjoint, so N = lim N_n with epimorphic transitions. Step 7, the surjective-tower lemma gives the Roos triangle, and the canonical completion map is an isomorphism. Step 8, closed-support-ii with O_E (admissible) sends Roos triangles to Roos triangles. Step 9, the ringed-site RGamma-limit lemma on S_proet at U=S. Step 10, stratum-hom (quasi-compact j, locally projective L, all q) gives all displayed identifications. Edge cases tested: empty strata, rank 0, varying rank, identity immersions, n=1, ramified pi, negative q. No cycle; the only citer is the parent, which uses exactly the stated clauses. No duplicate found in the DAG. Off-unit tool_uses are generic, and I accept them. Batch-5 flag on sk-lem-formal-closed-support-ii: its path to lem-trf-geometric-inverse-image-exact runs through sk-lem-formal-closed-support, which is already a base stmt_dep of the item. A closure walk finds no trace-formula or Poincare-duality node added by the new citations. The flagged node is a generic topos fact (geometric inverse image is exact), not part of either assumption or its proof, so I accept it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedLatticeHomReductionTower",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedLatticeHom.supported_lattice_hom_reduction_tower",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.finiteQuotient",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.ordinaryRestrictComp",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.finiteQuotientStep",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.quotient",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.quotientStep",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.extension",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.finiteExtension",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.restrictionIso",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.target",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.level",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.finiteDerivedExtension",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.levelRestrictionIso",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.step",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.projection",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.supportFunctor",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.transformedTarget",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.transformedLevel",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.transformedStep",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.sectionsLevel",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.sectionsStep",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.sectionsCommShift",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.Assertions",
+   "AlgebraicGeometry.ProEtale.SupportedLatticeHom.supported_lattice_hom_reduction_tower"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedLatticeHomReductionTower.lean",
+  "statement": "theorem supported_lattice_hom_reduction_tower (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hp : p ≠ l) {X Z V S B T : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (i : Z ⟶ X) (j : V ⟶ X) (uS : S ⟶ Z) (h : B ⟶ X) (v : T ⟶ B) [IsClosedImmersion i] [IsOpenImmersion j] [IsOpenImmersion uS] [IsClosedImmersion h] [IsOpenImmersion v] (hij : Set.range i.base = (Set.range j.base)ᶜ) (L : AdicCompletion.Modules l E S) (M : AdicCompletion.Modules l E T) (hL : IsLisseCoefficientModule (DerivedNakayama.integerRing l E) L) (hM : IsLisseCoefficientModule (DerivedNakayama.integerRing l E) M) : Assertions l E h v i j uS L M",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The assertion predicate spells out every clause, including projection-normalized image Roos triangles. Level n means exponent n+1. The canonical levelRestrictionIso identifies the integral presentation of the supported quotient with Res_n of its finite-coefficient degree-zero extension. All helpers construct this specific tower from the recorded coefficient, module-extension, completion, support and global-Hom APIs. The three unchanged stratumGlobalRHom/stratumRGamma/stratumDual definitions are owned by def-sfb-stratum-hom-sections-dual; the stratum-Hom theorem is a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a337640be",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after RETURN d5b286bb (H2/H4). The Lean diff is 7 docstring lines only; the item record changes only by swapping theorem stmt_dep det-lem-formal-closed-support-stratum-hom for new def node def-sfb-stratum-hom-sections-dual (theorem kept in proof_deps/step 10), plus one note sentence. New node: kind definition, 9 bracket citations = 9 stmt_deps, all live, including def-pur-sheaf-hom, def-pur-hom-complex and def-pur-ringed-site-zeroth-hypercohomology. Its existing:true record covers the unchanged plain defs stratumGlobalRHom/stratumRGamma/stratumDual (ClosedSupportStratumHom l.49-65) with a verbatim signature. RGamma = Hom(regular,-) is reconciled with the ringed-site H0∘RΓ via the section-action equivalence (regular = unit, K-injectives preserved). No duplicate def node: def-sfb-finite-derived-global-sections is A-valued sheaf RΓ, not module objects. Item not landed and not dropped; base stmt_deps 15 + 1 new def node. Reread Assertions: all clauses, projection-normalized comparisons, canonical commShiftIso, all q, rank 0 and empty strata allowed, only sorry is the main theorem. Advisory: the old blueprint tags on the reused defs are unavoidable under existing:true. No files changed, no compile."
  }
 }
