@@ -1,0 +1,87 @@
+{
+ "id": "def-sfb-tensor-symmetry-pure-equation",
+ "kind": "definition",
+ "title": "Pure-section predicate for the tensor-complex Koszul symmetry",
+ "status": "split",
+ "statement": "Let $J$ be a topology on a category with object universe $c$ and morphism universe $v$, with module sheafification and locally bijective equivalences in universe $\\max(c,v,u)$, and let $R$ be a sheaf of commutative rings in that universe. Use its module sheaves [def-weil-sheaf-of-modules-category], total tensor complexes [def-pc-tensor-complex-sheaves], and actual sheafified pure-tensor summand generators $\\iota_{p,q}^n(x\\otimes y)$ [def-coef-ringed-tensor-hom-model]. Write $\\beta_{P,Q}:P\\otimes_R Q\\to Q\\otimes_R P$ for the canonical cochain-complex braiding. Define the signed-pure-section property of this braiding to be the following proposition: for every pair of unbounded module complexes $P,Q$, integers $p,q,n$ with $p+q=n$ and $q+p=n$, site object $U$, and sections $x\\in P^p(U)$, $y\\in Q^q(U)$, one has $\\beta_{P,Q}^n(\\iota_{p,q}^n(x\\otimes y))=(-1)^{pq}\\iota_{q,p}^n(y\\otimes x)$. This defines a predicate, without asserting it, and imposes no K-flatness, boundedness or characteristic condition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (sites-cohomology-definition-derived-tor), the subsequent commutativity display and sign convention from More on Algebra, Section sign-rules; homogeneous-generator form of the total-complex braiding."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The symmetry of cochain complexes sends a homogeneous tensor in degrees p q to minus one to the power p times q times its swapped tensor",
+   "results": "8 hits: TensorProduct.gradedCommAux, TensorProduct.gradedComm, TensorProduct.gradedComm_symm, ComplexShape.σ_def, TotalComplexShapeSymmetry.noConfusionType, TotalComplexShapeSymmetry.symmetry, TotalComplexShapeSymmetry.mk, HomologicalComplex.mapBifunctorFlipIso",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match for this fixed ringed-site helper; use the existing project definition, with no copied construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul braiding of cochain complexes evaluated on homogeneous pure tensor generators",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.tensorObj, HomologicalComplex.instHasTensorXTensorUnit_1, CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.HomComplex.Cochain.δ_toSingleMk, CochainComplex.HomComplex.Cochain.toSingleMk_v",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match for this fixed ringed-site helper; use the existing project definition, with no copied construction."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_braiding_hom|braiding.*negOnePow",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match for this fixed ringed-site helper; use the existing project definition, with no copied construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hom-kflat-chain-transpose",
+  "date": "2026-10-21",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph, 'descending to a finite extension E': the one-K-flat chain-transpose representative calculation, Koszul factor interchange in steps 3 and 7.",
+   "via": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-sfb-dc-hom-filtered-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedTensorComplexConstraints",
+  "declaration": "CategoryTheory.RingedDerivedNative.symmetryPure",
+  "declarations": [
+   "CategoryTheory.RingedDerivedNative.symmetryPure"
+  ],
+  "statement": "def symmetryPure : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership only, as requested in the return of a9eb1d31f866: symmetryPure is the existing Prop-valued definition at lines 31-38 of the recorded module, not the complexConstraints theorem and not a choice from any theorem. Its actual braiding and generators are unchanged."
+ },
+ "import_flags": [
+  "unreachable"
+ ]
+}
