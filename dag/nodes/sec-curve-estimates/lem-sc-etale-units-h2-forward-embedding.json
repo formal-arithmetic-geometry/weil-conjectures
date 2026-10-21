@@ -13,33 +13,33 @@
  },
  "proof": [
   {
-   "text": "For Ks = SeparableClosure K and Omega = AlgebraicClosure K, obtain an additive stalk equivalence c and its action-on-germs identity hc. The separable closure is the canonical intermediate field inside the algebraic closure.",
+   "text": "Identify the stalk of the units sheaf at the Galois point of the separable closure with the units of the separable closure, Galois-equivariantly, by evaluating germs at the geometric point (`gmSheafFiberGaloisPointAddEquiv` and its action lemma, built from the evaluation equivalence over an algebraically closed field).",
    "uses": [
-    "lem-sc-etale-units-stalk-galois"
+    "lem-sc-etale-units-stalk-evaluation-overfield"
    ],
    "elementary": false
   },
   {
-   "text": "The coefficient topology of galoisUnitsTopRep K is definitionally discrete. Apply the general stalk comparison with F = gmSheaf, M = galoisUnitsTopRep K, c, hc, and n = 2. This produces e from etale H2 to continuous Galois H2.",
+   "text": "Specialize the additive comparison `sheafHAddEquivContinuousCohomology` to the separable closure, the multiplicative sheaf, this stalk equivalence and degree two.",
    "uses": [
     "lem-sc-etale-stalk-continuous-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Take e.symm.toEmbedding. The two endpoint abbreviations unfold to the two cohomology groups in the target. This is a forward embedding with unchanged hypotheses.",
+   "text": "The inverse additive equivalence, after forgetting additivity, is an embedding from Field.GaloisUnitsH2 K to the cohomological Brauer group.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-units-stalk-galois",
-  "lem-sc-etale-stalk-continuous-cohomology"
+  "lem-sc-etale-stalk-continuous-cohomology",
+  "lem-sc-etale-units-stalk-evaluation-overfield"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JQ and 03QU, Example 03QV (2), Section 0DVG; S1 formal reduction through two comparison steps"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EtaleStalkContinuousCohomology.lean",
+  "place": "The adopted source additive comparison is specialized directly; its inverse toEmbedding replaces the retired duplicate stalk theorem."
  },
  "mathlib_searches": [
   {
@@ -104,14 +104,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
-  "result": "pass",
-  "landing": "20261012T153300-L-2370590",
+  "reviewer": "C-853ea",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261021T004825-L-1791435",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf duplicate vs adopted WeilConjectures.sheafHAddEquivContinuousCohomology; adapted consumer EtaleUnitsH2ForwardEmbedding compiled (and its importer EtaleUnitsTwoCocycleComparison), axioms clean; node proof fields vs the Lean as written"
  },
  "lean_audit": {
   "master": {
