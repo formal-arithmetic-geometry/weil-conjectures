@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-finite-discrete-encoding-compactification",
+ "kind": "statement",
+ "title": "Normalized coefficient encoding and a fixed compactification",
+ "statement": "For a finite discrete commutative ring A, any family E of normalized Encodings from [lem-sf-finite-discrete-normalized-encoding], any scheme morphism f:X->Y, and any specified compactification c of f, there is a natural isomorphism from CondensedRing.rightDerivedLowerShriekOfCompactification (coefficient A) c followed by (E Y).fixedDerived to (E X).fixedDerived followed by the fixed ModuleCat(ULift A) rightDerivedLowerShriekOfCompactification c. Both functors use the very same c; no alternative compactification or completion is used.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Coefficient-identification argument, steps 11--12."
+ },
+ "stmt_deps": [
+  "lem-sf-finite-discrete-normalized-encoding"
+ ],
+ "proof": [
+  {
+   "text": "For $h:U\\to T$, both underived direct images have section group $M(V\\times_TU)$ on $V\\in T_{\\mathrm{proet}}$ ([sk-def-sfb-module-pushforward-pullback]; [def-weil-pbc-proetale-operations] and, through step 3, [def-sfb-finite-lower-star]). In the internal construction the scalar acts through $\\eta_h$; in the ordinary construction it acts through the constant-ring restriction. The equation in the universe-general canonicalAbelianMap_naturality of [lem-sf-finite-discrete-encoding-naturality] identifies these actions, so the identity on the section groups gives a natural isomorphism $E_Th_*\\cong h_*E_U$. For an open immersion $j:U\\hookrightarrow T$, step 8 identifies internal $j^*$ with the ordinary module pullback, which for an open immersion is restriction $(j^*G)(W\\to U)=G(W\\to U\\to T)$, the pullback of [def-sfb-finite-extension-by-zero-adjunction] read through step 3. The exact internal $j_!$ of [sk-def-sfb-module-lower-shriek] and the ordinary $j_!$ of [def-sfb-finite-extension-by-zero] (the one used in [def-sfb-finite-derived-lower-shriek-compactification]) are both left adjoint to these, by [sk-def-sfb-module-lower-shriek] and [def-sfb-finite-extension-by-zero-adjunction]. They are therefore identified by their Hom bijections: $\\operatorname{Hom}(E_Tj_!M,N)\\cong\\operatorname{Hom}(M,j^*E_T^{-1}N)\\cong\\operatorname{Hom}(E_UM,j^*N)\\cong\\operatorname{Hom}(j_!E_UM,N)$. The bijections are natural and their identity transposes give inverse isomorphisms.",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-naturality",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-proetale-operations",
+    "def-sfb-finite-lower-star",
+    "sk-def-sfb-module-lower-shriek",
+    "def-sfb-finite-extension-by-zero",
+    "def-sfb-finite-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Module pushforward and adjunction with open restriction; the section-action equality and explicit adjoint Hom bijections"
+   }
+  },
+  {
+   "text": "The exact equivalences $E_U,E_T$ preserve K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], since each is right adjoint to its exact inverse. Given any complex $M$ on $U$, choose an internal K-injective resolution $M\\to I$. Then $E_UM\\to E_UI$ is an ordinary K-injective resolution. Compute the two derived direct images on these representatives: step 11 gives $E_T(h_*I)\\cong h_*(E_UI)$ termwise, hence $D(E_T)Rh_*\\cong Rh_*D(E_U)$ naturally on the unbounded categories, using [sk-def-sfb-module-derived-pushpull] and [sk-def-sfb-derived-categories]. The exact $j_!$ comparison from step 11 applies termwise. For the fixed compactification $c=(j,p)$, compose these two comparisons to obtain $D(E_Y)Rp_*D(j_!)\\cong Rp_*j_!D(E_X)$. These are exactly the two composites defined in [sk-def-sfb-module-derived-lower-shriek] and [def-sfb-finite-derived-lower-shriek-compactification]. No compactification change or etale/pro-etale comparison is used.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-module-derived-lower-shriek",
+    "def-sfb-finite-derived-lower-shriek-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; K-injective computation of the separately derived compactification factors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-discrete-encoding-naturality",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-module-lower-shriek",
+  "def-sfb-finite-extension-by-zero",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "def-sfb-finite-derived-lower-shriek-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Strict component of lem-sf-module-object-ordinary-coefficient-equivalence.",
+  "note": "The original public statement is unchanged. This node isolates a proper part of its argument. The displayed proof in words is the corresponding part of the original twelve-step argument; it remains a named proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized equivalence between internal modules over a discrete condensed ring and constant-ring module sheaves preserves constructibility tensor Tor intervals and compactly supported pushforward",
+   "results": "CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CondensedMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functor; CondensedMod.isDiscrete_tfae",
+   "date": "2026-10-21",
+   "verdict": "No match: these identify discrete condensed modules on the point, not the normalized scheme section-action functors or their tensor, geometric and derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "These give the required additive restriction functor, but no coefficient equivalence, tensor, constructibility or compactification comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Tt]ensor|[Tt]or.*[Ee]quiv|[Cc]oefficient.*[Ee]quivalence",
+   "results": "25 unrelated matches, including NumberTheory.KummerDedekind, NumberTheory.NumberField.CanonicalEmbedding and tactic proxy-equivalence declarations. Local rg additionally found InternalSectionTensorComparison, ExactMonoidalEquivalenceDerived, ConstantRingModuleSheaves and FiniteDiscreteCoefficientTerminal; these are reused where applicable.",
+   "date": "2026-10-21",
+   "verdict": "No complete match. The general section-action tensor theorem needs scalar transport; the generic terminal-unit proof supplies coefficient naturality in all coefficient universes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact coefficient equivalence identifies compactly supported derived direct images computed using the same open proper compactification",
+   "results": "Mathlib.Tactic.Ring.ExtractCoeff.mk.injEq (Mathlib.Tactic.Ring.Basic); CompactlySupportedContinuousMap.noConfusion (Mathlib.Topology.ContinuousMap.CompactlySupported); IsLocalFrameOn.coeff_eq_of_eq (Mathlib.Geometry.Manifold.VectorBundle.LocalFrame); TestFunction.coe_ofSupportedInLM (Mathlib.Analysis.Distribution.TestFunction); CompactlySupportedContinuousMap.noConfusionType (Mathlib.Topology.ContinuousMap.CompactlySupported); AlgebraicGeometry.IsOpenImmersion.opensEquiv_apply_coe (Mathlib.AlgebraicGeometry.OpenImmersion); CompactlySupportedContinuousMap.continuousMapEquiv (Mathlib.Topology.ContinuousMap.CompactlySupported); TestFunction.coe_ofSupportedInCLM (Mathlib.Analysis.Distribution.TestFunction)",
+   "date": "2026-10-21",
+   "verdict": "No match: these declarations do not give the normalized scheme coefficient comparison in this node. Existing constant sheaf and module sheafification APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence",
+  "date": "2026-10-21",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+   "place": "Coefficient identification: Normalized coefficient encoding and a fixed compactification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteEncodingCompactification",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteEncodingCompactification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.encoding_compactification",
+  "statement": "theorem encoding_compactification [Finite A] [DiscreteTopology A]\n    (E : ∀ T : Scheme.{u}, Encoding A T)\n    (X Y : Scheme.{u}) (f : X ⟶ Y) (c : Compactification f) :\n    Nonempty (CondensedRing.rightDerivedLowerShriekOfCompactification (coefficient A) c ⋙\n        (E Y).fixedDerived.functor ≅\n      (E X).fixedDerived.functor ⋙\n        rightDerivedLowerShriekOfCompactification\n          (ModuleCat.{u + 1} (ULift.{u + 1} A)) c)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-caefd",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T061419-L-1771997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-caefd",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T061419-L-1771997",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem signature (md5) and the 17 moved defs vs live lean/ (= quarantine/) text, verbatim apart from blueprint ids; the three sorry components vs the item's clauses and CondensedConstantConstructibility definitions; importers FiniteLocalizingExceptionalPreservation and TowerCompactSupportProjectionFormula compiled with the delivered modules"
+ }
+}

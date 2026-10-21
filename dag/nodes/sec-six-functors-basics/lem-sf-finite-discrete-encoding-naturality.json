@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-finite-discrete-encoding-naturality",
+ "kind": "statement",
+ "title": "Canonical constant scalars commute with scheme coefficient maps",
+ "statement": "For any commutative topological ring A in Type u, every scheme morphism j:U->T, and every pro-etale test object V over T, the canonical constant scalar map from [lem-sf-finite-discrete-normalized-encoding] followed by condensedPushforwardHom (coefficient A) j equals the same canonical constant scalar map on the base-changed test object over U. This requires neither finite or discrete A nor nonempty schemes.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Coefficient-identification proof, scalar-compatibility step 8."
+ },
+ "stmt_deps": [
+  "lem-sf-finite-discrete-normalized-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the general constantScheme_pushforward terminal-unit proof from the terminal-comparison module for the canonical pointConstants adjoint. Propagate along the unique map from a test object to the base-changed terminal object using naturality.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-coefficient-terminal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-coefficient-terminal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Strict component of lem-sf-module-object-ordinary-coefficient-equivalence.",
+  "note": "A proved specialization of the existing general terminal-unit proof, followed by naturality; it removes the public Type-0 coefficient restriction from the scalar compatibility interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized equivalence between internal modules over a discrete condensed ring and constant-ring module sheaves preserves constructibility tensor Tor intervals and compactly supported pushforward",
+   "results": "CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CondensedMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functor; CondensedMod.isDiscrete_tfae",
+   "date": "2026-10-21",
+   "verdict": "No match: these identify discrete condensed modules on the point, not the normalized scheme section-action functors or their tensor, geometric and derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "These give the required additive restriction functor, but no coefficient equivalence, tensor, constructibility or compactification comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Tt]ensor|[Tt]or.*[Ee]quiv|[Cc]oefficient.*[Ee]quivalence",
+   "results": "25 unrelated matches, including NumberTheory.KummerDedekind, NumberTheory.NumberField.CanonicalEmbedding and tactic proxy-equivalence declarations. Local rg additionally found InternalSectionTensorComparison, ExactMonoidalEquivalenceDerived, ConstantRingModuleSheaves and FiniteDiscreteCoefficientTerminal; these are reused where applicable.",
+   "date": "2026-10-21",
+   "verdict": "No complete match. The general section-action tensor theorem needs scalar transport; the generic terminal-unit proof supplies coefficient naturality in all coefficient universes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical constant sheaf map to an inverse image commutes with the direct image coefficient map under composition of scheme morphisms",
+   "results": "CategoryTheory.constantCommuteCompose (Mathlib.CategoryTheory.Sites.ConstantSheaf); AlgebraicGeometry.Scheme.Hom.naturality_assoc (Mathlib.AlgebraicGeometry.Scheme); AlgebraicGeometry.Scheme.Hom.naturality (Mathlib.AlgebraicGeometry.Scheme); AlgebraicGeometry.StructureSheaf.toOpen_comp_comap (Mathlib.AlgebraicGeometry.StructureSheaf); AlgebraicGeometry.Spec.sheafedSpaceMap_comp (Mathlib.AlgebraicGeometry.Spec); CategoryTheory.constantSheafAdj_counit_w (Mathlib.CategoryTheory.Sites.ConstantSheaf); AlgebraicGeometry.Scheme.Modules.pushforward_map_app (Mathlib.AlgebraicGeometry.Modules.Sheaf); CategoryTheory.constantCommuteCompose_hom_app_val (Mathlib.CategoryTheory.Sites.ConstantSheaf)",
+   "date": "2026-10-21",
+   "verdict": "No match: these declarations do not give the normalized scheme coefficient comparison in this node. Existing constant sheaf and module sheafification APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence",
+  "date": "2026-10-21",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+   "place": "Scalar naturality in proof step 8.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteEncodingNaturality",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteEncodingNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.canonicalAbelianMap_naturality",
+  "statement": "theorem canonicalAbelianMap_naturality (T U : Scheme.{u}) (j : U ⟶ T) (V : T.ProEtᵒᵖ) :\n    (toSheafify (Scheme.ProEt.topology T)\n        ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A))) ≫\n      (canonicalAbelianMap A T).hom).app V ≫\n        (condensedPushforwardHom (coefficient A) j).hom.app V =\n    (toSheafify (Scheme.ProEt.topology U)\n        ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A))) ≫\n      (canonicalAbelianMap A U).hom).app\n        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj V)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-caefd",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T061419-L-1771997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-caefd",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T061419-L-1771997",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem signature (md5) and the 17 moved defs vs live lean/ (= quarantine/) text, verbatim apart from blueprint ids; the three sorry components vs the item's clauses and CondensedConstantConstructibility definitions; importers FiniteLocalizingExceptionalPreservation and TowerCompactSupportProjectionFormula compiled with the delivered modules"
+ }
+}

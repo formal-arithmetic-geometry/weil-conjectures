@@ -1,61 +1,17 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N8
+Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
-public import Sheaf.CategoryTheory.InternalSectionTensorComparison
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import Sheaf.Paper.CondensedConstantConstructibility
-public import Sheaf.Paper.LocalizingClosure
-public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
-public import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-public import Sheaf.Paper.FiniteDiscreteSchemeRing
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import Sheaf.Paper.FiniteDiscreteOrdinaryEncoding
+import Sheaf.Paper.FiniteDiscreteEncodingTensorTor
+import Sheaf.Paper.FiniteDiscreteEncodingConstructibility
+import Sheaf.Paper.FiniteDiscreteEncodingCompactification
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import Mathlib.CategoryTheory.Monoidal.Mod
-public import Sheaf.CategoryTheory.SheafTensor
-public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-public import Sheaf.Paper.LocalizingAdmissibleCoefficients
-import Sheaf.Paper.FiniteDiscreteCondensedRing
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
-import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import Sheaf.Paper.FiniteDiscreteCoefficientSections
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Mathlib.CategoryTheory.Sites.Sheafification
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-
-/-! # Finite discrete internal and ordinary coefficients
-
-Source: blueprint main-20261015, sec-six-functors-basics,
-sk-prop-sf-rf-shriek-preservation, coefficient-identification step
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence).
--/
+/-! # Finite discrete coefficient comparison -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,187 +26,90 @@ namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
-/-- The already defined continuous condensed coefficient ring.
-Source: blueprint coefficient identification
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-abbrev coefficient := Profinite.continuousCoefficientRingObj A
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem ordinaryLocalModel_of_iso (T : Scheme.{u})
+    {M N : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))}
+    (e : M ≅ N) (h : ordinaryLocalModel A T M) : ordinaryLocalModel A T N := by
+  obtain ⟨C, hC⟩ := h
+  refine ⟨C, fun i ↦ ?_⟩
+  obtain ⟨P, hP, ⟨h⟩⟩ := hC i
+  exact ⟨P, hP, ⟨(upperStar _ (C.f i)).mapIso e.symm ≪≫ h⟩⟩
 
-/-- The pulled-back internal module category, without boundedness or completion.
-Source: blueprint coefficient identification
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-abbrev Internal (T : Scheme.{u}) :=
-  Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (coefficient A) T)
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem ordinaryStratified_of_iso (T : Scheme.{u})
+    {M N : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))}
+    (e : M ≅ N) (h : ordinaryStratified A T M) : ordinaryStratified A T N := by
+  obtain ⟨S, hS⟩ := h
+  exact ⟨S, fun a ↦ ordinaryLocalModel_of_iso A _
+    ((upperStar _ (S.immersion a)).mapIso e) (hS a)⟩
 
-/-- Ordinary modules over the constant commutative ring sheaf, in the scalar universe.
-Source: blueprint coefficient identification
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-abbrev Ordinary (T : Scheme.{u}) :=
-  realizationModules (Scheme.ProEt.topology T) (ULift.{u + 1} A)
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem ordinaryConstructible_of_iso (T : Scheme.{u})
+    {M N : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))}
+    (e : M ≅ N) (h : ordinaryConstructible A T M) : ordinaryConstructible A T N := by
+  classical
+  unfold ordinaryConstructible at h ⊢
+  split_ifs at h ⊢ with hT
+  · exact ordinaryStratified_of_iso A T e h
+  · intro U hU
+    exact ordinaryStratified_of_iso A U.toScheme ((upperStar _ U.ι).mapIso e) (h U hU)
 
-/-- The reconstructed commutative section-ring sheaf of the pulled-back coefficients.
-Source: Stacks 00YV, section-action equivalence
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-abbrev sectionRing (T : Scheme.{u}) :=
-  InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
-    (Scheme.ProEt.topology T) (condensedRingObj (coefficient A) T)
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private local instance ordinaryCtf_iso (T : Scheme.{u}) :
+    (ordinaryCtf A T).IsClosedUnderIsomorphisms where
+  of_iso e h := by
+    refine ⟨⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e h.1.1, ?_⟩,
+      (DerivedCategory.finiteTorAmplitude _).prop_of_iso e h.2⟩
+    intro n
+    exact ordinaryConstructible_of_iso A T ((DerivedCategory.homologyFunctor _ n).mapIso e)
+      (h.1.2 n)
 
-/-- Constant functions, as a map into the actual continuous condensed sheaf.
-Source: blueprint proof step 1, constant-section normalization
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def pointConstants :
-    (Functor.const Profinite.{u}ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶
-      (coefficient A).obj where
-  app S := AddCommGrpCat.ofHom
-    { toFun a := ULift.up (ContinuousMap.const S.unop a.down)
-      map_zero' := rfl
-      map_add' _ _ := rfl }
-  naturality _ _ _ := rfl
+section Localizing
+universe w v₁ v₂
+variable {C D : Type w} [Category.{v₁} C] [Category.{v₂} D]
+  [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+  [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+  [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
 
-/-- The canonical constant-coefficient map: sheafify constant functions on the point,
-then apply the monoidal inverse image and its constant-sheaf comparison.
-Source: blueprint proof step 1
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def canonicalAbelianMap (T : Scheme.{u}) :
-    (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}).obj
-      (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶ condensedRingObj (coefficient A) T :=
-  (constantSchemeIso T).hom.app (AddCommGrpCat.of (ULift.{u + 1} A)) ≫
-    (upperStarFromPoint T).map
-      (((sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv
-        _ (coefficient A)).symm (pointConstants A))
+private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
+    [F.CommShift ℤ] [F.IsTriangulated]
+    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
+    (hP : IsLocalizingSubcategory P) :
+    IsLocalizingSubcategory (P.inverseImage F) := by
+  let := hP.1
+  let := hP.2.1
+  refine ⟨inferInstance, inferInstance, ?_⟩
+  intro I G hG hPG
+  let := hG
+  let : HasColimit (G ⋙ F) := ⟨_, isColimitOfPreserves F (colimit.isColimit G)⟩
+  exact P.prop_of_iso (preservesColimitIso F G).symm
+    (hP.2.2 (G ⋙ F) inferInstance hPG)
 
-/-- The intrinsic-to-fixed coefficient functor restricts to constant scalar sections.
-The commutative-ring/underlying-ring constant-sheaf comparison is canonical.
-Source: blueprint proof step 3, Stacks 03CY
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def fixedRestriction (T : Scheme.{u}) :
-    Ordinary A T ⥤ Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A)) :=
-  SheafOfModules.restrictScalars
-    ((constantCommuteCompose (Scheme.ProEt.topology T)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app
-        (CommRingCat.of (ULift.{u + 1} A))) ⋙
-    constantRingModuleRestriction (Scheme.ProEt.topology T) (ULift.{u + 1} A)
+private theorem localizing_forward (S : ObjectProperty C) (T : ObjectProperty D)
+    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
+    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
+    (hST : ∀ K, S K → T (F.obj K)) {K : C} (hK : localizingClosure S K) :
+    localizingClosure T (F.obj K) := by
+  intro P hP hT
+  exact hK (P.inverseImage F) (inverseImageLocalizing P F hP)
+    (fun L hL ↦ hT _ (hST L hL))
 
-/-- Restrict the section-action equivalence along the specified coefficient isomorphism.
-Source: blueprint proof step 2, Stacks 00YV
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def sectionEncoding (T : Scheme.{u})
-    (c : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T) :
-    Internal A T ⥤ Ordinary A T :=
-  (InternalAbelianSheafModule.sectionModuleEquivalence (Scheme.ProEt.topology T)
-    (condensedRingObj (coefficient A) T)).functor ⋙
-      SheafOfModules.restrictScalars
-        ((sheafCompose (Scheme.ProEt.topology T)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.hom)
-
-/-- The two coefficient presentations and their actual section-action functors.
-The ring isomorphism is normalized by the canonical constant-function map; the
-forward intrinsic functor is precisely section-action followed by scalar restriction.
-The fixed scalar encoding likewise restricts along the constant-sheaf unit.
-Source: blueprint proof steps 1--3, Stacks 00YV and 03CY
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-structure Encoding (T : Scheme.{u}) where
-  ringIso : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T
-  normalization : ∀ (U : T.ProEtᵒᵖ) (a : ULift.{u + 1} A),
-    ringIso.hom.hom.app U
-      ((toSheafify (Scheme.ProEt.topology T)
-        ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app U a) =
-    (canonicalAbelianMap A T).hom.app U
-      ((toSheafify (Scheme.ProEt.topology T)
-        ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)))).app U a)
-  ordinary : Internal A T ≌ Ordinary A T
-  ordinary_functor : ordinary.functor = sectionEncoding A T ringIso
-  fixed : Ordinary A T ≌
-    Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))
-  fixed_functor : fixed.functor = fixedRestriction A T
-  [ordinaryAdditive : ordinary.functor.Additive]
-  [ordinaryInverseAdditive : ordinary.inverse.Additive]
-  [fixedAdditive : fixed.functor.Additive]
-  [fixedInverseAdditive : fixed.inverse.Additive]
-
-attribute [instance] Encoding.ordinaryAdditive Encoding.ordinaryInverseAdditive
-  Encoding.fixedAdditive Encoding.fixedInverseAdditive
-
-/-- Termwise extension of the specified intrinsic equivalence to unbounded derived categories.
-Source: blueprint proof step 4, Stacks 015F
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def Encoding.ordinaryDerived {T : Scheme.{u}} (e : Encoding A T) :
-    DerivedCategory (Internal A T) ≌ Scheme.proEtaleDerivedCategory T A :=
-  letI := HasDerivedCategory.standard (Ordinary A T)
-  e.ordinary.mapDerivedCategory
-
-/-- Termwise extension to fixed scalar sheaves, using the same intrinsic equivalence.
-Source: blueprint proof steps 3--4, Stacks 015F
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def Encoding.fixedDerived {T : Scheme.{u}} (e : Encoding A T) :
-    DerivedCategory (Internal A T) ≌
-      DerivedCategory (Sheaf (Scheme.ProEt.topology T)
-        (ModuleCat.{u + 1} (ULift.{u + 1} A))) :=
-  letI : (e.ordinary.trans e.fixed).functor.Additive :=
-    inferInstanceAs (e.ordinary.functor ⋙ e.fixed.functor).Additive
-  letI : (e.ordinary.trans e.fixed).inverse.Additive :=
-    inferInstanceAs (e.fixed.inverse ⋙ e.ordinary.inverse).Additive
-  (e.ordinary.trans e.fixed).mapDerivedCategory
-
-/-- The canonical shift comparison on the actual termwise derived functor.
-Source: blueprint proof step 4 and Stacks 015F
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-instance Encoding.fixedDerivedShift {T : Scheme.{u}} (e : Encoding A T) :
-    e.fixedDerived.functor.CommShift ℤ := by
-  letI : (e.ordinary.trans e.fixed).functor.Additive :=
-    inferInstanceAs (e.ordinary.functor ⋙ e.fixed.functor).Additive
-  letI : (e.ordinary.trans e.fixed).inverse.Additive :=
-    inferInstanceAs (e.fixed.inverse ⋙ e.ordinary.inverse).Additive
-  change (e.ordinary.trans e.fixed).functor.mapDerivedCategory.CommShift ℤ
-  infer_instance
-
-/-- The ordinary finite constant local models: on each member of one pro-etale cover
-there is a constant finite module. Over a finite ring, finite modules are precisely
-finitely presented modules. This is the ordinary side of the source's local-model clause.
-Source: blueprint proof step 9 and sk-def-sfb-constructible, clause 1
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def ordinaryLocalModel (T : Scheme.{u})
-    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
-  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage T, ∀ i : C.I₀,
-    ∃ P : ModuleCat.{u + 1} (ULift.{u + 1} A), Finite P ∧
-      Nonempty ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (C.f i)).obj M ≅
-        (constantSheaf (Scheme.ProEt.topology (C.X i))
-          (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P)
-
-/-- The ordinary finite stratification condition in the same scalar presentation.
-Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def ordinaryStratified (T : Scheme.{u})
-    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
-  ∃ S : Scheme.Stratification T, ∀ a : Fin S.n,
-    ordinaryLocalModel A (S.domain a)
-      ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (S.immersion a)).obj M)
-
-open Classical in
-/-- Qcqs schemes use finite constructible stratifications; otherwise use every affine open.
-Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def ordinaryConstructible (T : Scheme.{u})
-    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
-  if CompactSpace T ∧ QuasiSeparatedSpace T then ordinaryStratified A T M
-  else ∀ U : T.Opens, IsAffineOpen U → ordinaryStratified A U.toScheme
-    ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) U.ι).obj M)
-
-/-- The ordinary bounded constructible predicate in the fixed scalar presentation.
-Source: sk-def-sfb-constructible, final paragraph, and blueprint proof step 9
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def ordinaryBoundedConstructible (T : Scheme.{u}) :
-    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)
-      (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=
-  DerivedCategory.TStructure.t.bounded ⊓ fun K ↦ ∀ n : ℤ,
-    ordinaryConstructible A T ((DerivedCategory.homologyFunctor _ n).obj K)
-
-/-- The ordinary bounded constructible finite-Tor predicate, without a fixed Tor bound.
-Source: sk-def-sfb-constructible, final paragraph, and blueprint proof steps 7 and 9
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence). -/
-def ordinaryCtf (T : Scheme.{u}) :
-    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)
-      (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=
-  ordinaryBoundedConstructible A T ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+private theorem localizing_equivalence (S : ObjectProperty C) (T : ObjectProperty D)
+    [T.IsClosedUnderIsomorphisms] (e : C ≌ D)
+    [e.functor.CommShift ℤ] [e.functor.IsTriangulated]
+    [e.inverse.CommShift ℤ] [e.inverse.IsTriangulated]
+    (hST : ∀ K, S K ↔ T (e.functor.obj K)) (K : C) :
+    localizingClosure S K ↔ localizingClosure T (e.functor.obj K) := by
+  constructor
+  · exact localizing_forward S T e.functor (fun L ↦ (hST L).1)
+  · intro hK P hP hS
+    let := hP.2.1
+    have hi (L : D) (hL : T L) : S (e.inverse.obj L) :=
+      (hST _).2 (T.prop_of_iso (e.counitIso.app L).symm hL)
+    have h := localizing_forward T S e.inverse hi hK
+    exact P.prop_of_iso (e.unitIso.app K).symm (h P hP hS)
+end Localizing
 
 /-- Finite discrete condensed and ordinary coefficients agree, including the exact
 section-action equivalence, its actual unbounded termwise extension, relative derived
@@ -335,6 +194,41 @@ theorem moduleObject_ordinary_coefficient_equivalence [Finite A] [DiscreteTopolo
           (E X).fixedDerived.functor ⋙
             rightDerivedLowerShriekOfCompactification
               (ModuleCat.{u + 1} (ULift.{u + 1} A)) c)) := by
-  sorry
+  classical
+  let E : ∀ T : Scheme.{u}, Encoding A T := fun T ↦ Classical.choice (encoding_exists A T)
+  refine ⟨E, ?_, encoding_compactification A E⟩
+  intro T
+  obtain ⟨hm, ho, ht⟩ := encoding_tensor_tor A T (E T)
+  obtain ⟨hl, hb⟩ := encoding_constructibility A T (E T)
+  have hf (K : DerivedCategory (Internal A T)) :
+      DerivedCategory.finiteTorAmplitude _ K ↔
+        DerivedCategory.finiteTorAmplitude _ ((E T).fixedDerived.functor.obj K) := by
+    constructor
+    · rintro ⟨a, b, h⟩
+      exact ⟨min a b, b, (ht K _ _ (min_le_right a b)).1
+        (h.mono (min_le_left a b) le_rfl)⟩
+    · rintro ⟨a, b, h⟩
+      exact ⟨min a b, b, (ht K _ _ (min_le_right a b)).2
+        (h.mono (min_le_left a b) le_rfl)⟩
+  have hctf (K : DerivedCategory (Internal A T)) :
+      (constantModelBoundedConstructible (coefficient A) T K ∧
+        DerivedCategory.finiteTorAmplitude _ K) ↔
+          ordinaryCtf A T ((E T).fixedDerived.functor.obj K) :=
+    and_congr (hb K) (hf K)
+  let : ((E T).ordinary.trans (E T).fixed).functor.Additive :=
+    inferInstanceAs ((E T).ordinary.functor ⋙ (E T).fixed.functor).Additive
+  let : ((E T).ordinary.trans (E T).fixed).inverse.Additive :=
+    inferInstanceAs ((E T).fixed.inverse ⋙ (E T).ordinary.inverse).Additive
+  let : (E T).fixedDerived.functor.IsTriangulated := by
+    change ((E T).ordinary.functor ⋙ (E T).fixed.functor).mapDerivedCategory.IsTriangulated
+    infer_instance
+  let : (E T).fixedDerived.inverse.CommShift ℤ := by
+    change ((E T).fixed.inverse ⋙ (E T).ordinary.inverse).mapDerivedCategory.CommShift ℤ
+    infer_instance
+  let : (E T).fixedDerived.inverse.IsTriangulated := by
+    change ((E T).fixed.inverse ⋙ (E T).ordinary.inverse).mapDerivedCategory.IsTriangulated
+    infer_instance
+  exact ⟨hm, ho, ht, hl, hctf, ⟨inferInstance⟩, inferInstance, inferInstance,
+    localizing_equivalence _ _ (E T).fixedDerived hctf⟩
 
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary

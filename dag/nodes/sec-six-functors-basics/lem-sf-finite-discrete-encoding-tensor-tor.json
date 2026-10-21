@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-finite-discrete-encoding-tensor-tor",
+ "kind": "statement",
+ "title": "Derived tensor and Tor under normalized coefficient encoding",
+ "statement": "For a finite discrete commutative ring A, a scheme T, and any normalized Encoding e supplied by [lem-sf-finite-discrete-normalized-encoding], the actual termwise fixed-scalar derived equivalence admits a strong monoidal structure. For every internal derived object K and every ordered interval a <= b, its generic Tor-amplitude condition is equivalent both to HasProEtaleTorAmplitude for the ordinary section-module image and to generic Tor-amplitude for the fixed scalar image. These are the existing derived tensors and all degree-zero test modules, not a newly transferred tensor structure.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Coefficient-identification argument, steps 5--7."
+ },
+ "stmt_deps": [
+  "lem-sf-finite-discrete-normalized-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pe-internal-section-tensor-comparison] with $C=T_{\\mathrm{pro\\acute et}}$ and $R=p_T^*\\underline A$; its site, sheafification and closed-monoidal hypotheses are exactly those used in step 2 and [sk-def-sfb-sheaf-tensor]. It gives natural isomorphisms $E_R(M\\otimes_RN)\\cong E_RM\\otimes_{R_{\\mathrm{sec}}}E_RN$ and $E_R(R)\\cong R_{\\mathrm{sec}}$ for the coequalizer tensor of [def-sfb-modobj-relative-tensor] and the sheafified balanced tensor of [def-pur-sheaf-tensor-product], given on local pure tensors by $m\\otimes n\\mapsto m\\otimes n$ and compatible with associators, unitors and symmetry. By step 2, $E_T$ is $E_R$ followed by restriction of scalars along the ring-sheaf isomorphism $c_T:A_T\\to R_{\\mathrm{sec}}$. Under $c_T$ the balancing relations $m a\\otimes n=m\\otimes an$ over $R_{\\mathrm{sec}}(U)$ and over $A_T(U)$ are the same relations, so the presheaf tensors of [def-pur-sheaf-tensor-product] coincide sectionwise and hence after sheafification, with the same action through the first factor. Composing gives the natural, coherent comparison $E_T(M\\otimes_{p_T^*\\underline A}N)\\cong E_TM\\otimes_{A_T}E_TN$ with $E_T(p_T^*\\underline A)\\cong A_T$.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-sfb-modobj-relative-tensor",
+    "sk-def-sfb-sheaf-tensor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (sheafified balanced tensor); comparison supplied by the cited internal/section tensor node"
+   }
+  },
+  {
+   "text": "Both equivalences preserve small coproducts: for a family $(M_i)$ and any $L$, the equivalence identifies $\\operatorname{Hom}(E_T(\\bigoplus_i M_i),L)$ with $\\prod_i\\operatorname{Hom}(E_TM_i,L)$, the coproduct universal property. By [lem-pe-internal-section-tensor-comparison], $E_R$ applied termwise identifies the direct-sum total tensor complexes, with differential $d(m\\otimes n)=dm\\otimes n+(-1)^{\\deg m}m\\otimes dn$, and preserves and reflects acyclicity and K-flat complexes in the acyclic-total-tensor sense of [def-pc-kflat-complex]; restricting scalars along $c_T$ as in step 5 changes none of this. The internal K-flatness of [sk-def-sfb-derived-categories] is [def-sfb-preserves-kflat-quasi-iso] ($P\\otimes-$ and $-\\otimes P$ preserve quasi-isomorphisms), which is the same test: the additive total tensor commutes with mapping cones, a map is a quasi-isomorphism exactly when its cone is acyclic, $0\\to Q$ is a quasi-isomorphism exactly when $Q$ is acyclic, and the symmetry handles the second side. Hence an internal K-flat resolution $P\\to K$ goes to an ordinary K-flat resolution $E_TP\\to E_TK$. Computing [sk-def-sfb-derived-tensor-hom] and [def-weil-derived-tensor] on this same $P$ gives the natural comparison $D(E_T)(K\\otimes^{\\mathrm L}_{p_T^*\\underline A}L)\\cong D(E_T)K\\otimes^{\\mathrm L}_{A}D(E_T)L$.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "sk-def-sfb-derived-categories",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-pc-kflat-complex",
+    "sk-def-sfb-derived-tensor-hom",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "K-flat computation of derived tensor, with the explicit acyclic-test argument; definitions in the cited tensor nodes"
+   }
+  },
+  {
+   "text": "Every ordinary module sheaf in degree zero is the image of an internal module sheaf in degree zero, and conversely. For each such test $N$, steps 2 and 6 identify $H^i(K\\otimes^{\\mathrm L}N)$ with its image under the exact equivalence. Since the equivalence reflects zero objects, the vanishing tests in [def-weil-proetale-tor-amplitude] are equivalent for every integer $i$ and every $N$. This proves preservation and reflection of each specified interval $[a,b]$, not merely existence of some finite interval.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude; comparison of identical tensor tests"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-sheaf-tensor",
+  "def-pur-sheaf-tensor-product",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-kflat-complex",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-tor-amplitude",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Strict component of lem-sf-module-object-ordinary-coefficient-equivalence.",
+  "note": "The original public statement is unchanged. This node isolates a proper part of its argument. The displayed proof in words is the corresponding part of the original twelve-step argument; it remains a named proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized equivalence between internal modules over a discrete condensed ring and constant-ring module sheaves preserves constructibility tensor Tor intervals and compactly supported pushforward",
+   "results": "CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CondensedMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functor; CondensedMod.isDiscrete_tfae",
+   "date": "2026-10-21",
+   "verdict": "No match: these identify discrete condensed modules on the point, not the normalized scheme section-action functors or their tensor, geometric and derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "These give the required additive restriction functor, but no coefficient equivalence, tensor, constructibility or compactification comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Tt]ensor|[Tt]or.*[Ee]quiv|[Cc]oefficient.*[Ee]quivalence",
+   "results": "25 unrelated matches, including NumberTheory.KummerDedekind, NumberTheory.NumberField.CanonicalEmbedding and tactic proxy-equivalence declarations. Local rg additionally found InternalSectionTensorComparison, ExactMonoidalEquivalenceDerived, ConstantRingModuleSheaves and FiniteDiscreteCoefficientTerminal; these are reused where applicable.",
+   "date": "2026-10-21",
+   "verdict": "No complete match. The general section-action tensor theorem needs scalar transport; the generic terminal-unit proof supplies coefficient naturality in all coefficient universes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized equivalence of coefficient module sheaves preserves unbounded derived tensor products and all Tor amplitude intervals",
+   "results": "CategoryTheory.Equivalence.sheafCongrPrecoherent (Mathlib.CategoryTheory.Sites.Coherent.Equivalence); PiTensorProduct.congr (Mathlib.LinearAlgebra.PiTensorProduct); CategoryTheory.Equivalence.precoherent_isSheaf_iff (Mathlib.CategoryTheory.Sites.Coherent.Equivalence); LinearEquiv.lTensor (Mathlib.LinearAlgebra.TensorProduct.Basic); Module.Invertible.rTensorEquiv (Mathlib.RingTheory.PicardGroup); TensorProduct.tensorQuotMapSMulEquivTensorQuot (Mathlib.LinearAlgebra.TensorProduct.Quotient); CategoryTheory.Equivalence.sheafCongrPreregular (Mathlib.CategoryTheory.Sites.Coherent.Equivalence); PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)",
+   "date": "2026-10-21",
+   "verdict": "No match: these declarations do not give the normalized scheme coefficient comparison in this node. Existing constant sheaf and module sheafification APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence",
+  "date": "2026-10-21",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+   "place": "Coefficient identification: Derived tensor and Tor under normalized coefficient encoding",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteEncodingTensorTor",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteEncodingTensorTor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.encoding_tensor_tor",
+  "statement": "theorem encoding_tensor_tor [Finite A] [DiscreteTopology A]\n    (T : Scheme.{u}) (e : Encoding A T) :\n    Nonempty (e.fixedDerived.functor.Monoidal) ∧\n    (∀ (K : DerivedCategory (Internal A T)) (a b : ℤ), a ≤ b →\n      (DerivedCategory.torAmplitudeIn _ a b K ↔\n        Scheme.HasProEtaleTorAmplitude T A (e.ordinaryDerived.functor.obj K) a b)) ∧\n    (∀ (K : DerivedCategory (Internal A T)) (a b : ℤ), a ≤ b →\n      (DerivedCategory.torAmplitudeIn _ a b K ↔ DerivedCategory.torAmplitudeIn _ a b\n        (e.fixedDerived.functor.obj K)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-caefd",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T061419-L-1771997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-caefd",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T061419-L-1771997",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem signature (md5) and the 17 moved defs vs live lean/ (= quarantine/) text, verbatim apart from blueprint ids; the three sorry components vs the item's clauses and CondensedConstantConstructibility definitions; importers FiniteLocalizingExceptionalPreservation and TowerCompactSupportProjectionFormula compiled with the delivered modules"
+ }
+}
