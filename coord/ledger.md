@@ -23861,3 +23861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:02 L: returned deliver/D2/Sheaf.Paper.StratifiedLatticeRank (reviewer RETURN: (reviewer C-1ec74, head 1ec7410dd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.StratifiedLatt)
 - 22:02 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 22:02 L: merged deliver/Q05/lem-sfb-tame-stratum-kummer-descent (stage 2; reviewer PASS; parallel immutable checks)
+- 22:02 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
