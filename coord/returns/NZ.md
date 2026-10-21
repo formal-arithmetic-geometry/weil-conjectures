@@ -79,7 +79,3 @@ L: approved by the reader, but the landing refused it: NOT MERGED lem-per-hensel
 
 
 
-## sk-lem-nagata-sketch-dense-valuative (2026-10-21 07:39 UTC, branch head f7b2971e53f)
-
-L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-nagata-sketch-dense-valuative: cited node lemma-nagata-scheme-image-ideal-qc: statement changed since the reviewed delivery; rebase and revalidate the citation Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
-

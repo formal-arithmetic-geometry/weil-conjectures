@@ -3,32 +3,292 @@
  "blueprint": {
   "is": "sk-lem-nagata-sketch-dense-valuative",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lemma-nagata-dense-source-valuative"
+  ]
  },
  "kind": "statement",
  "title": "Dense-source valuative criterion",
- "statement": "Let $f\\colon W\\to S$ be a morphism and let $h\\colon D\\to W$ be\nquasi-compact with dense image (for instance a dense quasi-compact open\n$D\\subseteq W$). Suppose every valuation diagram over $S$ whose generic\npoint maps into $D$ has a unique lift to $W$. If $f$ is quasi-compact,\nit is universally closed; if $f$ is quasi-separated, it is separated. In\nparticular, if $f$ is moreover of finite type and quasi-separated, then\n$f$ is proper; see 0894.",
+ "statement": "Let $f:W\\to S$ and $h:D\\to W$ be morphisms of schemes [def-pc-scheme], with $h$ quasi-compact [def-weil-finite-type-morphism] and with dense topological image. Assume that for every valuation ring $A$ with fraction field $K$, every pair $u:\\operatorname{Spec}K\\to D$ and $a:\\operatorname{Spec}A\\to S$ with $fhu=a|_{\\operatorname{Spec}K}$ has exactly one morphism $b:\\operatorname{Spec}A\\to W$ satisfying $b|_{\\operatorname{Spec}K}=hu$ and $fb=a$. Here a valuation ring is a domain $A$ such that every nonzero element of $K$ or its inverse belongs to $A$, and spectra and their induced morphisms are as in [def-weil-affine-spectrum]. If $f$ is quasi-compact, it is universally closed [def-weil-proper-morphism]. If $f$ is quasi-separated [def-weil-quasi-separated-morphism], it is separated. In particular, if $f$ is of finite type and quasi-separated, it is proper. A dense quasi-compact open immersion $D\\hookrightarrow W$ is a special case of $h$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-dense-valuative/_section.md",
   "place": "node sk-lem-nagata-sketch-dense-valuative, order 126"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-proper-morphism"
+ ],
  "proof": [
   {
-   "text": "For universal closedness of a quasi-compact $f$, test the existence part of\nthe valuative criterion. Replace $W$ by the scheme-theoretic image of $h$,\nwhich has the same points and receives every map from a reduced scheme, so\nthat $h$ becomes scheme-theoretically dense; this survives flat base change.\nA valuation probe through the dense source, centred at the given field\npoint, together with an extension of valuation rings along the residue\nfield extension and the composite valuation ring, turns the given square\ninto one whose generic point maps into $D$; its unique lift descends to the\nrequired lift. For separatedness of a quasi-separated $f$, the uniqueness\nhypothesis shows that the quasi-compact diagonal satisfies the same\ncriterion, so it is universally closed, hence a closed immersion. Universal\nclosedness together with finite type and separatedness gives properness.",
-   "uses": [],
-   "elementary": null
+   "text": "We first prove the existence of a lift for an arbitrary square $\\eta:\\operatorname{Spec}K\\to W$, $a:\\operatorname{Spec}A\\to S$, with $A$ a valuation ring and $K=\\operatorname{Frac}A$, without any compactness assumption on $f$. Choose an affine open $S_0=\\operatorname{Spec}R$ containing $a(\\mathfrak m_A)$. The open $a^{-1}(S_0)$ is all of $\\operatorname{Spec}A$ by the valuation-open lemma. Replace $S,W,D$ by $S_0,f^{-1}(S_0),h^{-1}f^{-1}(S_0)$. Restricting the quasi-compact map $h$ to this open preserves quasi-compactness and density: inverse images of affine opens are the same inverse images as before, and every nonempty open of the restricted target meets $h(D)$. The original unique-lift hypothesis restricts, since a lift over $S_0$ has image in $f^{-1}(S_0)$. Thus we may work over $\\operatorname{Spec}R$.",
+   "uses": [
+    "lemma-nagata-valuation-open-closed-point",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Let $x$ be the image of $\\eta$ and choose an affine open $V\\subset W$ containing $x$. The scheme $h^{-1}V$ is quasi-compact, so choose a finite affine open cover $T_1,\\ldots,T_n$ of it. Since $h(D)\\cap V$ is dense in $V$, the union of the finitely many closed sets $\\overline{h(T_i)}$ is $V$. Consequently $x\\in\\overline{h(T_i)}$ for at least one index. Fix this affine scheme $T=T_i$. This is the only place where quasi-compactness of the original source map is used to choose a finite affine cover; no quasi-separatedness of $h$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Write $V=\\operatorname{Spec}B$ and $T=\\operatorname{Spec}E$, and let $J=\\ker(B\\to E)$. The scheme-image interface and affine-kernel node give $Z=\\operatorname{Spec}(B/J)\\hookrightarrow V$ with support $\\overline{h(T)}$ and a factor $t:T\\to Z$. Here $T\\to V$ is quasi-compact since both schemes are affine. The interface gives injectivity of $\\mathcal O_Z\\to t_*\\mathcal O_T$, so its kernel is zero and the scheme-theoretic image of $t$ is all of $Z$. Since $x\\in |Z|$, the field point $\\eta$ factors uniquely through $Z$. The map $t$ is quasi-compact and quasi-separated: between affine spectra the inverse image of a principal open $D(b)$ is the affine principal open $D(t^\\#b)$, and the diagonal is induced by the surjective multiplication map $E\\otimes_{B/J}E\\to E$. This justifies using the existing flat-density lemma even in its older quasi-separated formulation.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-field-point-factors-through-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Put $B_0=B/J$. Form $P=B_0[X_k:k\\in K]$ and the $B_0$-algebra map $\\pi:P\\to K$ sending $X_k$ to $k$ and acting on coefficients through the point $\\eta:\\operatorname{Spec}K\\to Z$. This map is surjective, since every $k$ is the image of $X_k$. The projection $q:\\operatorname{Spec}P\\to Z$ is flat by the polynomial-projection leaf, and the composition $\\operatorname{Spec}K\\to\\operatorname{Spec}P\\to Z\\to W$ is $\\eta$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-nagata-polynomial-projection-flat",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Apply flat density to the quasi-compact, quasi-separated $t:T\\to Z$ with scheme-theoretic image $Z$ and the flat $q:\\operatorname{Spec}P\\to Z$. Thus $H=T\\times_Z\\operatorname{Spec}P\\to\\operatorname{Spec}P$ has scheme-theoretic image $\\operatorname{Spec}P$. This is a map between affine schemes (its source is the spectrum of $E\\otimes_{B_0}P$), hence quasi-compact. The scheme-image interface identifies the closure of its topological range with the underlying closed subset of that image, namely all of $\\operatorname{Spec}P$. Let $z=\\ker\\pi\\in\\operatorname{Spec}P$. The closure-specialization lemma gives a point $v\\in H$ whose image specializes to $z$. Apply the specialization-valuation lemma to $H\\to\\operatorname{Spec}P$, $v$, and $z$. We obtain a valuation ring $A\\prime$ with fraction field $K\\prime$, a generic map $\\operatorname{Spec}K\\prime\\to H$, and $\\alpha:\\operatorname{Spec}A\\prime\\to\\operatorname{Spec}P$, whose closed point maps to $z$, with the square commuting. The generic map therefore factors through $T\\to D$.",
+   "uses": [
+    "lemma-nagata-dense-flat-pullback",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sc-picard-closure-specialization",
+    "lem-sc-picard-valuation-probe-specializes",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Let $k\\prime=A\\prime/\\mathfrak m\\prime$. The centre equality says that the composite $P\\to A\\prime\\to k\\prime$ has kernel $\\ker\\pi$. Since $\\pi$ is surjective, it induces an embedding $\\tau:K\\hookrightarrow k\\prime$. Extend the valuation ring $A\\subset K$ along $\\tau$ to a valuation subring $A\\prime\\prime\\subset k\\prime$ dominating $A$. The valuation-intersection lemma gives $K\\cap A\\prime\\prime=A$ (identifying $K$ with its image under $\\tau$).",
+   "uses": [
+    "lemma-nagata-valuation-ring-extension",
+    "lemma-nagata-valuation-intersection",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Form $C=\\{c\\in A\\prime:c\\bmod\\mathfrak m\\prime\\in A\\prime\\prime\\}$. The composite-valuation lemma makes $C$ a valuation ring with fraction field $K\\prime$ and quotient $C/\\mathfrak m\\prime\\cong A\\prime\\prime$. The map $R\\to A\\prime$ from $\\alpha$ lands in $C$: its residue is the composite $R\\to A\\to K\\xrightarrow{\\tau}k\\prime$, which lands in $A\\prime\\prime$. The generic map $\\operatorname{Spec}K\\prime\\to T\\to D$ and this $R\\to C$ form a square for the original lifting hypothesis, because the two maps $R\\to K\\prime$ agree through $P$. Let $g_C:\\operatorname{Spec}C\\to W$ be its lift.",
+   "uses": [
+    "lemma-nagata-composite-valuation-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "The two maps $\\operatorname{Spec}A\\prime\\to W$ given by $\\alpha$ followed by $\\operatorname{Spec}P\\to Z\\to W$, and by $\\operatorname{Spec}A\\prime\\to\\operatorname{Spec}C\\xrightarrow{g_C}W$, have the same generic map through $T\\to D$. They also have the same composite to $S=\\operatorname{Spec}R$, since the map $R\\to C$ is the restriction of the given $R\\to A\\prime$. The uniqueness hypothesis for the valuation ring $A\\prime$ therefore identifies them.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Restrict $g_C$ along $\\operatorname{Spec}A\\prime\\prime\\hookrightarrow\\operatorname{Spec}C$ using $C/\\mathfrak m\\prime\\cong A\\prime\\prime$, and call the resulting map $g\\prime\\prime$. Its generic restriction $\\operatorname{Spec}k\\prime\\to W$ equals $\\operatorname{Spec}(\\tau)$ followed by $\\eta$: the two maps agree by restricting the preceding equality on $\\operatorname{Spec}A\\prime$ to its closed-point residue field $k\\prime$, and the residue equality $P\\to k\\prime=\\tau\\pi$ gives the claimed formula. Its composite to $S$ is the original map $R\\to A\\subset A\\prime\\prime$.",
+   "uses": [
+    "lemma-nagata-composite-valuation-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Let $w=g\\prime\\prime(\\mathfrak m_{A\\prime\\prime})$ and choose an affine open $Q=\\operatorname{Spec}F\\subset W$ containing $w$. The valuation-open lemma implies that all of $g\\prime\\prime$ factors through $Q$, and the equality of generic restrictions implies that $\\eta$ factors through $Q$. Write $\\beta:F\\to A\\prime\\prime$ and $\\gamma:F\\to K$ for these maps. Inside $k\\prime$ we have $\\beta=\\tau\\gamma$, so $\\gamma(F)\\subset K\\cap A\\prime\\prime=A$. Thus $\\gamma$ defines $F\\to A$ and hence $b:\\operatorname{Spec}A\\to Q\\to W$ extending $\\eta$. Moreover $fb=a$: the two maps $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ agree after composition with $\\operatorname{Spec}K\\to\\operatorname{Spec}A$, and on rings $A\\hookrightarrow K$ is injective. We have proved existence for every square for $f$, without assuming $f$ quasi-compact.",
+   "uses": [
+    "lemma-nagata-valuation-open-closed-point",
+    "lemma-nagata-valuation-intersection",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Existence for all valuation squares persists under every base change $f\\prime:W\\times_SS\\prime\\to S\\prime$: compose a square with $S\\prime\\to S$, take the lift to $W$ just constructed, and pair it with the prescribed map to $S\\prime$. The fibre-product universal property gives a lift to $W\\times_SS\\prime$, with the required generic restriction.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Fix such a base change, a point $w\\prime\\in W\\times_SS\\prime$, and a specialization $f\\prime(w\\prime)\\rightsquigarrow s$. Apply the specialization-valuation lemma to the morphism $j:\\operatorname{Spec}\\kappa(w\\prime)\\to S\\prime$, its unique point, and $s$. This gives a valuation ring $V$ with fraction field $L$, a map $\\operatorname{Spec}V\\to S\\prime$ centred at $s$, and a generic map $\\operatorname{Spec}L\\to\\operatorname{Spec}\\kappa(w\\prime)\\to W\\times_SS\\prime$. Step 11 gives a lift $b_V$. The generic point of $\\operatorname{Spec}V$ specializes to its closed point, so continuity gives $w\\prime\\rightsquigarrow b_V(\\mathfrak m_V)$, and the latter point maps to $s$. Thus every base change of $f$ lifts specializations.",
+   "uses": [
+    "lem-sc-picard-valuation-probe-specializes",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "If $f$ is quasi-compact, the universal-specialization criterion applied to step 12 shows that $f$ is universally closed. This proves the first clause. Notice that step 10 needed no quasi-compactness of $f$; that hypothesis is used precisely here.",
+   "uses": [
+    "lem-nagata-universally-specializing-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Now assume only that $f$ is quasi-separated, so its diagonal $\\Delta:W\\to W\\times_SW$ is quasi-compact. A valuation square for $\\Delta$ with generic map through $h$ consists of $u:\\operatorname{Spec}K\\to D$ and a pair $a_1,a_2:\\operatorname{Spec}A\\to W$ over $S$ whose generic restrictions both equal $hu$. The original uniqueness hypothesis gives $a_1=a_2$. This common map is a lift for the diagonal square, and any diagonal lift equals it by the first projection. Therefore $\\Delta$ and the same quasi-compact dense $h$ satisfy the unique-lift hypothesis. Apply the universal-closedness argument of steps 1–13 to $\\Delta$ to conclude that $\\Delta$ is universally closed. This invocation uses the already established argument for an arbitrary morphism; it does not assume quasi-compactness of $f$.",
+   "uses": [
+    "def-weil-quasi-separated-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "The diagonal is an immersion by the diagonal-immersion lemma. Since it is universally closed, its image is closed, so the immersion-with-closed-image lemma makes it a closed immersion. By definition $f$ is separated. This proves the second clause.",
+   "uses": [
+    "lem-weil-pbc-diagonal-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
+  },
+  {
+   "text": "Finally suppose $f$ is of finite type and quasi-separated. Finite type includes quasi-compactness, so steps 13 and 15 give universal closedness and separatedness. Along with finite type these are exactly the definition of properness. For the older unit formulation, separatedness already guarantees uniqueness of valuation lifts, so its existence hypothesis on a dense open $D\\subseteq W$ whose inclusion is a quasi-compact morphism supplies the unique-lift hypothesis used here, with $h$ the inclusion.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lemma-nagata-separated-valuation-lift-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-residue-field",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-nagata-universally-specializing-closed",
+  "lem-sc-picard-closure-specialization",
+  "lem-sc-picard-valuation-probe-specializes",
+  "lem-weil-pbc-diagonal-immersion",
+  "lem-weil-pbc-field-point-factors-through-closed-immersion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-composite-valuation-ring",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lemma-nagata-valuation-intersection",
+  "lemma-nagata-valuation-open-closed-point",
+  "lemma-nagata-valuation-ring-extension"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-dense-valuative/_section.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0894, lemma-refined-valuative-criterion-universally-closed, proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "of_valuativeCriterion|RelativeTo|isDominant",
+   "results": "{\"t\": \"2026-10-21T04:23:21Z\", \"tool\": \"grep\", \"query\": \"of_valuativeCriterion|RelativeTo|isDominant\", \"sub\": \"AlgebraicGeometry/ValuativeCriterion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"237\", \"246\", \"250\", \"323\", \"341\"], \"digest\": \"b3379c0582ef98bc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary valuative criteria require all generic points; none supplies the dense-source reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dense source valuative criterion of universal closedness and separatedness",
+   "results": "{\"t\": \"2026-10-21T04:23:21Z\", \"tool\": \"leansearch\", \"query\": \"Dense source valuative criterion of universal closedness and separatedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.UniversallyClosed\"], \"digest\": \"46e19e1a6def8a67\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary valuative criteria require all generic points; none supplies the dense-source reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact morphism with unique valuation lifts whose generic point factors through a quasi compact dense source is universally closed and quasi separated implies separated and finite type implies proper",
+   "results": "{\"t\": \"2026-10-21T04:23:22Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact morphism with unique valuation lifts whose generic point factors through a quasi compact dense source is universally closed and quasi separated implies separated and finite type implies proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.QuasiCompact\"], \"digest\": \"13b473e9eb6ba762\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary valuative criteria require all generic points; none supplies the dense-source reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion",
+   "results": "{\"t\": \"2026-10-21T04:27:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\"], \"digest\": \"1f8a1c8432f94410\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary valuative criteria require all generic points; none supplies the dense-source reduction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -52,5 +312,59 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-dense-valuative",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-lem-nagata-sketch-dense-valuative",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0894 into a complete argument. Local affine source images meet the generic field point and satisfy the older quasi-separated hypotheses of the image/base-change nodes. Constructed the composite valuation ring, used uniqueness before descent, and descended by an explicit affine ring intersection. Expanded the ordinary existence criterion through universal specialization lifting. Proved separatedness via the quasi-compact diagonal and properness by definition. Two new Mathlib leaves; no new unsplit nodes. Current project source also contains the properness corollary at line 646; the brief explicitly requires a split rather than another ATTACH answer. Repair of returned delivery f7b2971e53f: re-read the current scheme-image interface, made its direct-image injectivity and vanishing-locus closure uses explicit in steps 3 and 5, and revalidated all cited root statements and quotations against the current DAG.",
+  "blueprint": "Realizes the single unit step and every sentence of the current 0894 proof: dense valuation probes, extension and composite valuations, descent of the lift, the diagonal, and properness. The affine-image refinement only ensures the hypotheses of existing older node statements; it does not change the route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-picard-closure-specialization",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   },
+   {
+    "node": "lem-sc-picard-valuation-probe-specializes",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-field-point-factors-through-closed-immersion",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   },
+   {
+    "node": "lemma-nagata-dense-flat-pullback",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   },
+   {
+    "node": "lemma-nagata-separated-valuation-lift-unique",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   },
+   {
+    "node": "lemma-nagata-valuation-open-closed-point",
+    "why": "Generic scheme/valuation interface used in the Stacks 0894 argument; this unit has no node stating this exact supporting fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-picard-closure-specialization",
+  "lem-sc-picard-valuation-probe-specializes",
+  "lem-weil-pbc-field-point-factors-through-closed-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lemma-nagata-valuation-open-closed-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-99d63b86e",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-99d63b86e (reviewer sub-agent of L); spot-checked: This head repairs returned head f7b2971e, whose landing was refused because lemma-nagata-scheme-image-ideal-qc changed. I diffed it against run f7b2971e. The item statement, steps 1-2 and 4-16, both new Mathlib leaves (lem-nagata-polynomial-projection-flat: Flat.SpecMap_iff Flat.lean:67, flat_algebraMap_iff, MvPolynomial free instance, Module.Flat.of_free; lem-nagata-universally-specializing-closed: universallyClosed_eq_universallySpecializing UniversallyClosed.lean:171, Stacks 01KC) and the unit file are identical. Only steps 3 and 5 changed. Of the 26 dependencies present in both snapshots, only the scheme-image interface changed its statement; the other reused root statements were re-read and still fit. Step 3: T->V is affine, hence qc, so the current interface gives Z=SIm=Spec(B/J) (kernel node (1)) with support V(ker)=closure(h(T)) containing x. Injectivity of O_Z->t_*O_T makes ker(t)=0, so SIm(t)=Z. This is the root statement used exactly. Step 5: the root of dense-flat-pullback (t qcqs, SIm(t)=Z, q flat) gives SIm(H->Spec P)=Spec P. H->Spec P is affine, hence qc, and the support clause gives a dense range. I re-checked steps 1-16 against Stacks 0894: affine reduction, choice of one affine piece T (avoids requiring h quasi-separated), polynomial surjection, probe centred at ker(pi), tau, the dominating A'' with K∩A''=A, the composite ring C, uniqueness before descent, affine descent via Q, base change, specialization lifting, and the diagonal argument, which is not circular. Edge cases checked: W or D empty, h=id, A=K, non-reduced V, line with doubled origin. The item is not dropped, has no repair note and is still imported live. FIX re-applies my two repairs from f7b2971e, which the refused landing dropped. (1) B9/C5: blueprint.same_as=[lemma-nagata-dense-source-valuative]. That same-unit unsplit node's blueprint_update is verbatim the item's first two clauses, and its root statement is a special case. (2) Step 16: the older unit form now needs a dense open whose inclusion is a quasi-compact morphism. Maintainer note: when dense-source-valuative is split, it should cite this item.; 1 file(s) fixed by the reviewer"
+ }
 }
