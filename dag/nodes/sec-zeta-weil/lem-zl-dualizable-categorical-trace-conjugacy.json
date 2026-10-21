@@ -10,9 +10,76 @@
  "stmt_deps": [
   "sk-d-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\eta_B,\\varepsilon_B$ for the chosen coevaluation and evaluation, and $\\beta_{B,B^\\vee}$ for the forward braiding, for $B=P,Q$. Thus [sk-d-trace] gives $\\operatorname{tr}(z)=\\varepsilon_B\\circ\\beta_{B,B^\\vee}\\circ(z\\otimes1_{B^\\vee})\\circ\\eta_B$. Put $g=a:P\\to Q$ and $h=u\\circ a^{-1}:Q\\to P$. The inverse identities give $h\\circ g=u$, while the intertwining hypothesis gives $g\\circ h=a\\circ u\\circ a^{-1}=v\\circ a\\circ a^{-1}=v$.",
+   "uses": [
+    "sk-d-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), final sentence invoking conjugacy invariance; explicit agent expansion of the dual-mate calculation in lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:80–96."
+   }
+  },
+  {
+   "text": "Apply [lem-zl-right-dual-mate-identities] with $X=P$, $Y=Q$, $f=g$ and exactly the right duals chosen in the statement. It supplies $t:Q^\\vee\\to P^\\vee$ with $(g\\otimes1_{P^\\vee})\\circ\\eta_P=(1_Q\\otimes t)\\circ\\eta_Q$ and $\\varepsilon_P\\circ(t\\otimes1_P)=\\varepsilon_Q\\circ(1_{Q^\\vee}\\otimes g)$. The only hypotheses are the two chosen right dualities; both are given.",
+   "uses": [
+    "lem-zl-right-dual-mate-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), final sentence invoking conjugacy invariance; explicit agent expansion of the dual-mate calculation in lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:80–96."
+   }
+  },
+  {
+   "text": "Expand the trace by [sk-d-trace], substitute $u=h\\circ g$, and use the coevaluation equation from [lem-zl-right-dual-mate-identities]. Bifunctoriality of tensor gives the explicit equality\n$$\\operatorname{tr}(u)=\\varepsilon_P\\circ\\beta_{P,P^\\vee}\\circ(h\\otimes1_{P^\\vee})\\circ(g\\otimes1_{P^\\vee})\\circ\\eta_P=\\varepsilon_P\\circ\\beta_{P,P^\\vee}\\circ(h\\otimes t)\\circ\\eta_Q.$$\nHere $(h\\otimes1_{P^\\vee})\\circ(1_Q\\otimes t)=h\\otimes t$, so the replacement is well typed through $Q\\otimes P^\\vee$.",
+   "uses": [
+    "sk-d-trace",
+    "lem-zl-right-dual-mate-identities"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), final sentence invoking conjugacy invariance; explicit agent expansion of the dual-mate calculation in lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:80–96."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-braiding-naturality] to $h:Q\\to P$ and $t:Q^\\vee\\to P^\\vee$, obtaining $\\beta_{P,P^\\vee}\\circ(h\\otimes t)=(t\\otimes h)\\circ\\beta_{Q,Q^\\vee}$. Factor $t\\otimes h=(t\\otimes1_P)\\circ(1_{Q^\\vee}\\otimes h)$ and use the evaluation equation from [lem-zl-right-dual-mate-identities]. Thus the expression in step 3 equals\n$$\\varepsilon_Q\\circ(1_{Q^\\vee}\\otimes g)\\circ(1_{Q^\\vee}\\otimes h)\\circ\\beta_{Q,Q^\\vee}\\circ\\eta_Q=\\varepsilon_Q\\circ(1_{Q^\\vee}\\otimes(g\\circ h))\\circ\\beta_{Q,Q^\\vee}\\circ\\eta_Q.$$\nBoth substitutions use only tensor bifunctoriality and associativity.",
+   "uses": [
+    "lem-sfb-braiding-naturality",
+    "lem-zl-right-dual-mate-identities"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), final sentence invoking conjugacy invariance; explicit agent expansion of the dual-mate calculation in lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:80–96."
+   }
+  },
+  {
+   "text": "Naturality [lem-sfb-braiding-naturality], now with $g\\circ h:Q\\to Q$ and $1_{Q^\\vee}$, rewrites $(1_{Q^\\vee}\\otimes(g\\circ h))\\circ\\beta_{Q,Q^\\vee}$ as $\\beta_{Q,Q^\\vee}\\circ((g\\circ h)\\otimes1_{Q^\\vee})$. Since $g\\circ h=v$ by step 1, the resulting composite is $\\varepsilon_Q\\circ\\beta_{Q,Q^\\vee}\\circ(v\\otimes1_{Q^\\vee})\\circ\\eta_Q=\\operatorname{tr}(v)$ by [sk-d-trace]. All equalities are morphism equalities $\\mathbf1\\to\\mathbf1$, proving the assertion.",
+   "uses": [
+    "lem-sfb-braiding-naturality",
+    "sk-d-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+    "place": "Part (3), final sentence invoking conjugacy invariance; explicit agent expansion of the dual-mate calculation in lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:80–96."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-d-trace",
+  "lem-zl-right-dual-mate-identities",
+  "lem-sfb-braiding-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-local-frobenius-conjugacy.proof.md",
+  "place": "Part (3), categorical conjugacy sentence; expanded by Q19 using the pinned Mathlib dual-mate identities and existing braiding-naturality leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +129,87 @@
    "results": "; 8 hits: LinearMap.trace_conj, LinearMap.trace_conj', LinearMap.trace_comp_cycle, LinearMap.trace_eq_contract_apply, LinearMap.trace_comp_cycle', LinearMap.trace_eq_contract, CategoryTheory.leftAdjointMate_comp_evaluation, LinearMap.trace_transpose'",
    "date": "2026-10-21",
    "verdict": "no match: LinearMap.trace_conj and trace_comp_cycle concern ordinary modules; leftAdjointMate_comp_evaluation is only a duality identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"HasRightDual\"",
+   "results": "{\"t\": \"2026-10-21T09:44:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"HasRightDual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical trace is invariant under an intertwining isomorphism in a braided monoidal category",
+   "results": "{\"t\": \"2026-10-21T09:44:32Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical trace is invariant under an intertwining isomorphism in a braided monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.yang_baxter'\", \"CategoryTheory.Center\", \"CategoryTheory.MonoidalCategory.tensorμ_natural\", \"CategoryTheory.Center.braiding\", \"CategoryTheory.HalfBraiding.mk.inj\", \"CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight\", \"CategoryTheory.HalfBraiding.naturality_assoc\", \"CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight_hom_app\"], \"digest\": \"5f9c79266aeefcaf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "grep",
+   "query": "trace_comp_comm|trace_eq_of_iso|def trace",
+   "results": "{\"t\": \"2026-10-21T09:44:34Z\", \"tool\": \"grep\", \"query\": \"trace_comp_comm|trace_eq_of_iso|def trace\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical trace invariant under conjugation of dualizable objects",
+   "results": "{\"t\": \"2026-10-21T09:44:35Z\", \"tool\": \"leansearch\", \"query\": \"Categorical trace invariant under conjugation of dualizable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_conj'\", \"LinearMap.trace_conj\", \"CategoryTheory.Bicategory.conjugateEquiv_iso\", \"LinearMap.trace_eq_contract'\", \"LinearMap.trace_eq_contract_of_basis'\", \"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_id\"], \"digest\": \"955dc52d8185e6c5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "grep",
+   "query": "coevaluation_comp_rightAdjointMate|rightAdjointMate_comp_evaluation|def rightAdjointMate",
+   "results": "{\"t\": \"2026-10-21T09:44:35Z\", \"tool\": \"grep\", \"query\": \"coevaluation_comp_rightAdjointMate|rightAdjointMate_comp_evaluation|def rightAdjointMate\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\"], \"digest\": \"99ef78a229533118\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism between objects with chosen right duals evaluation and coevaluation are natural with respect to the right adjoint mate",
+   "results": "{\"t\": \"2026-10-21T09:46:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism between objects with chosen right duals evaluation and coevaluation are natural with respect to the right adjoint mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.rightAdjointMate_comp_evaluation\", \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"CategoryTheory.coevaluation_comp_rightAdjointMate\", \"CategoryTheory.coevaluation_comp_rightAdjointMate_assoc\", \"CategoryTheory.rightAdjointMate\", \"CategoryTheory.rightAdjointMate_comp\", \"CategoryTheory.comp_rightAdjointMate_assoc\", \"CategoryTheory.comp_rightAdjointMate\"], \"digest\": \"f273fb285c72339d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.coevaluation_comp_rightAdjointMate",
+   "results": "{\"t\": \"2026-10-21T09:46:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.coevaluation_comp_rightAdjointMate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.coevaluation_comp_rightAdjointMate\"], \"digest\": \"59e853075213d682\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and coevaluation identities for right adjoint mates in rigid monoidal categories",
+   "results": "{\"t\": \"2026-10-21T09:46:27Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation and coevaluation identities for right adjoint mates in rigid monoidal categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.rightAdjointMate\", \"CategoryTheory.coevaluation_comp_rightAdjointMate\", \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"CategoryTheory.RightRigidCategory.rightDual\", \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"CategoryTheory.HasRightDual.rightDual\", \"CategoryTheory.HasRightDual\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\"], \"digest\": \"9272a1ea2939925c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cyclicity of trace of two composable morphisms between dualizable objects in a braided monoidal category",
+   "results": "{\"t\": \"2026-10-21T09:46:33Z\", \"tool\": \"leanfinder\", \"query\": \"Cyclicity of trace of two composable morphisms between dualizable objects in a braided monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.coevaluation_comp_rightAdjointMate_assoc\", \"CategoryTheory.coevaluation_comp_rightAdjointMate\", \"CategoryTheory.coevaluation_comp_leftAdjointMate_assoc\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\"], \"digest\": \"35e036cb020d7cc4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointMate|coevaluation_comp_rightAdjointMate|rightAdjointMate_comp_evaluation",
+   "results": "{\"t\": \"2026-10-21T09:50:13Z\", \"tool\": \"grep\", \"query\": \"rightAdjointMate|coevaluation_comp_rightAdjointMate|rightAdjointMate_comp_evaluation\", \"sub\": \"CategoryTheory/Monoidal/Rigid/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"27\", \"295\", \"302\", \"306\"], \"digest\": \"8785d139d639745e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.rightAdjointMate_comp_evaluation",
+   "results": "{\"t\": \"2026-10-21T09:50:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.rightAdjointMate_comp_evaluation\"], \"digest\": \"b35d4842694b1a25\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the returned declarations supply duality or braiding infrastructure, or ordinary linear traces, rather than categorical trace conjugacy."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-stalk-frobenius-orbit-trace",
@@ -85,5 +229,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-dualizable-categorical-trace-conjugacy",
+  "worker": "stage1",
+  "summary": "Expanded categorical conjugacy into five typed steps: cancel the isomorphism, use the two right-dual mate identities, move g through coevaluation, use braiding naturality and evaluation, and recognize the trace of v. One new Mathlib leaf states the two dual-mate identities; the existing braiding leaf is reused. The statement and chosen-dual hypotheses are unchanged.",
+  "blueprint": "Realizes the trace-identity sentence of prop-every-iterate-trace, through the geometric-lift independence subclaim in lem-zl-condensed-stalk-frobenius-orbit-trace, using the categorical conjugacy invoked in lem-trf-local-frobenius-conjugacy.proof.md part (3). No unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-193615945",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-193615945 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The statement is unchanged from the base. The base had no proof and there is no re-split note. The item is still unsplit in live and side-live. Step check: (1) with g=a and h=u a^{-1}, hg=u and gh=v, using that a is invertible and a u = v a. (2) The new leaf gives a single mate t with both the coevaluation identity and the evaluation identity. (3) (h⊗1)(g⊗1)η_P = (h⊗t)η_Q; each map's source and target match. (4) Forward braiding naturality, β_{P,P^∨}(h⊗t) = (t⊗h)β_{Q,Q^∨} (Braided/Basic.lean:121-124), followed by ε_P(t⊗1) = ε_Q(1⊗g). (5) Naturality again turns this into tr(v) as defined by sk-d-trace (coev, then v⊗1, then sym, then ev). No symmetry of the braiding is used. This is the same argument as the project's trace_comp_comm and trace_eq_of_iso (Rigid/Braided.lean:80-96). The new leaf lem-zl-right-dual-mate-identities matches pinned Mathlib Rigid/Basic.lean exactly: rightAdjointMate at line 295, coevaluation_comp_rightAdjointMate at 583, rightAdjointMate_comp_evaluation at 601. Its triangle identities match ExactPairing (lines 77-90). It is not a duplicate: lem-trf-frame-dual-mate covers only complexes with frames, lem-trf-exact-pairing-iso-transport only transports pairings, and prop-trf-trace-formal-laws(1) only covers scalar traces of Perf. It does not restate the item, since it says nothing about traces and allows f to be non-invertible. The source is blueprint lem-trf-local-frobenius-conjugacy.proof.md lines 70-76, and proof_origin=agent is correct. The route only passes through Mathlib leaves and the sk-d-trace definition, so no tool_uses are needed. There is no SGA citation. Edge cases checked: identity, the same object with two different duals, zero object, unit object, finite-dimensional vector spaces with t the transpose, and a non-symmetric braiding. Advisory only: the new node lacks a lean_audit field."
  }
 }
