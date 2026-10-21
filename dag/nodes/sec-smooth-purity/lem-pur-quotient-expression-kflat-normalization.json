@@ -20,9 +20,153 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-coef-normalized-dvr-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every arrow $g:W'\\to W$ and every level $j$, use the constant-ring comparison $c^g_j:g^{-1}B_{W,j}\\cong B_{W',j}$. It commutes with $q_{m,n}$: both composites send a constant section $b$ to its quotient $q_{m,n}(b)$, and the maps extend uniquely from the constant presheaf by sheafification. Fixed-coefficient module pullback is therefore exact inverse image with the action transported through $c^g_j$. Work on the compatible small representatives specified by the inverse-image definition. We prove the assertions simultaneously by structural induction on the finite expression: the induction claim includes flat terms, K-flatness, computation of derived operations, strict transition identities, and invertibility and the stated formulas for transition-adjoints. Distinct syntactic pullback expressions need not be identified with one another.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, applied to pro-etale inverse images; constant coefficient identifications as cited"
+   }
+  },
+  {
+   "text": "For a generator $P_i$, apply change-of-rings preservation to $R_Y\\to B_{Y,n}$. Its hypotheses are precisely the given K-flatness and flatness of every term of $P_i$, so $P_{i,n}$ is K-flat with flat terms. The derived change-of-rings theorem identifies its localization with $P_i\\otimes^L_{R_Y}B_{Y,n}$. For a unit $B_{W,n}[0]$, tensoring any acyclic complex with the unit gives that same complex, so it is K-flat; its only nonzero term is free of rank one and the zero terms are flat. These are all base cases, including when the generator list is empty.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, identity underlying topos; Tag 06YY, lemma-derived-base-change"
+   }
+  },
+  {
+   "text": "For a tensor expression $K_n=\\operatorname{Tot}(U_n\\otimes_{B_{W,n}}V_n)$, the induction hypotheses give flat-term K-flat factors. Apply the total-tensor model theorem: its conclusion gives K-flatness and flatness of every direct-sum total term, even for unbounded factors, and identifies its localization with $U_n\\otimes^L_{B_{W,n}}V_n$. Thus this new complex remains an eligible representative for every subsequent operation.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2, lemma-tensor-product-K-flat, and Tag 07A4, lemma-pullback-tensor-product, proof"
+   }
+  },
+  {
+   "text": "For a pullback expression $K_n=g_n^*U_n$, apply the ringed-topos derived pullback/tensor theorem with coefficient rings $B_{W,n},B_{W',n}$ and coefficient map $c^g_n$. The induction hypothesis gives a K-flat input with flat terms. The theorem says its termwise pullback is again K-flat with flat terms and that applying pullback to this representative computes $Lg_n^*$. This proves the representative assertion at this induction step for each of $f,h,f\\circ h$, without any flatness hypothesis on a quotient ring map.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, and Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "The transitions are chain maps and satisfy the cocycle by a separate induction on the same expression. For a generator they send $x\\otimes b$ to $x\\otimes q_{m,n}(b)$; for a unit they are $q_{m,n}$. Hence the identity and cocycle follow from $q_{k,n}=q_{m,n}q_{k,m}$. For a tensor they send $u\\otimes v$ to $t^U_{m,n}(u)\\otimes t^V_{m,n}(v)$, which is balanced since both factors are semilinear for the same $q_{m,n}$. The two composite transitions agree on every pure tensor by the induction hypotheses, in each degree summand, hence on the sheafified total tensor. The differential $du\\otimes v+(-1)^{\\deg u}u\\otimes dv$ is preserved. For a pullback the formula in scalar coordinates is $s\\otimes u\\mapsto q_{m,n}(s)\\otimes g^{-1}t^U_{m,n}(u)$; balancing follows from the coefficient square in Step 1, and both composite formulas agree by the induction hypothesis and $q_{k,n}=q_{m,n}q_{k,m}$. All these maps commute with restriction of local sections. Finally $q_{m,n}\\pi_m=\\pi_n$ makes these transitions $R_W$-linear after scalar restriction. In each cochain degree they therefore give a strict tower, and their differentials give a complex of such towers.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Ordinary quotient maps, sheafified balanced tensor, and direct-sum total differential; definitions as cited"
+   }
+  },
+  {
+   "text": "At every expression and every $m\\geq n$, the flat-term K-flatness already proved lets us use the representative-normalized derived coefficient adjunction for $q^W_{m,n}$. In its notation take $P=K_m$, $H=K_n$ and $g=t^K_{m,n}$. Clause (2) identifies the adjunct of the localized actual transition with the localization of the actual chain map $\\bar t^K_{m,n}:K_m\\otimes_{B_{W,m}}B_{W,n}\\to K_n$, $z\\otimes a\\mapsto a\\,t^K_{m,n}(z)$. It remains to prove that these maps are isomorphisms by structural induction, retaining this fixed representative of each adjunct.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, specialized to change of rings, with the representative normalization in the cited node"
+   }
+  },
+  {
+   "text": "For $K=P_i$, the map from Step 6 is $(x\\otimes b)\\otimes a\\mapsto x\\otimes q_{m,n}(b)a$. Its proposed inverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$ respects $R_Y$-balancing because $q_{m,n}\\pi_m=\\pi_n$. The first composite fixes $x\\otimes a$; the other sends $(x\\otimes b)\\otimes a$ to $(x\\otimes1)\\otimes q_{m,n}(b)a=(x\\otimes b)\\otimes a$ by $B_{Y,m}$-balancing. They are chain maps since they leave $x$ and its differential unchanged. These sectionwise balanced maps induce inverse maps on the sheaf tensors. For $B_{W,m}[0]$, the same calculation is $b\\otimes a\\mapsto q_{m,n}(b)a$ with inverse $a\\mapsto1\\otimes a$. This proves the generator and unit adjoints are chain isomorphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Balanced scalar-association calculation underlying Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "For $K=\\operatorname{Tot}(U\\otimes V)$, apply the cochain pullback/tensor comparison to the identity underlying topos with ring map $q_{m,n}$. In right scalar coordinates its formula is $(u\\otimes v)\\otimes a\\mapsto(u\\otimes a)\\otimes(v\\otimes1)$, with inverse $(u\\otimes a)\\otimes(v\\otimes b)\\mapsto(u\\otimes v)\\otimes ab$. Follow it by $\\bar t^U_{m,n}\\otimes\\bar t^V_{m,n}$. The result sends $(u\\otimes v)\\otimes a$ to $a\\,t^U_{m,n}(u)\\otimes t^V_{m,n}(v)$, exactly $\\bar t^K_{m,n}$ from Step 6. The comparison is a chain isomorphism, and the two factor maps are chain isomorphisms by induction, so this map is an isomorphism. All complexes involved are flat-term K-flat by Steps 2–4 and change-of-rings preservation. The ringed-topos derived monoidal comparison is computed on these representatives, so after localization the displayed factorization is exactly the strong monoidal scalar-extension comparison followed by $\\alpha^U_{m,n}\\otimes^L\\alpha^V_{m,n}$.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; explicit cochain comparison at the identity topos"
+   }
+  },
+  {
+   "text": "For $K=g^*U$, use the scalar comparison normalization with $A_Y=B_{W,m}$, $B_Y=B_{W,n}$ and inverse image $g^{-1}$, transporting its target rings by $c^g_m,c^g_n$. It gives the canonical chain isomorphism $(g_m^*U_m)\\otimes_{B_{W',m}}B_{W',n}\\cong g_n^*(U_m\\otimes_{B_{W,m}}B_{W,n})$, compatible with $u\\mapsto u\\otimes1$, and identifies its localization with the canonical derived scalar-change comparison. In the inverse-image coordinates of Step 1 it sends $g^{-1}u\\otimes a$ to $a\\,(g^{-1}u\\otimes1)$. Composing with $g_n^*\\bar t^U_{m,n}$ gives $a\\,g^{-1}t^U_{m,n}(u)$, precisely the adjunct of the induced transition. Equivalently, precomposing with the insertion $z\\mapsto z\\otimes1$ gives $t^K_{m,n}$, which uniquely determines its ordinary adjunct. The induction hypothesis and functoriality make this composite a chain isomorphism. Its localization is therefore $g^{-1}\\alpha^U_{m,n}$ under the stated scalar-change comparison, proving the pullback induction step for the actual maps.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03EL, sites-modules-lemma-tensor-product-pullback; Tag 0G7E and Tag 07A6; scalar-change mate normalization in the cited node"
+   }
+  },
+  {
+   "text": "Structural induction has now proved every asserted property for each finite expression. The complex of strict $R_W$-towers constructed in Step 5 localizes to the coherent derived-tower datum required in the normalized DVR tower definition; evaluation gives the scalar restrictions of $QK_n$ with precisely the localized transitions from that step. Step 6 identifies their derived adjoints, and Steps 7–9 make those adjoints isomorphisms. The identity and cocycle equations are already strict before localization, so all parts of that definition hold. The argument used only the given flat terms and K-flatness, and the existing unbounded stability theorems. The empty generator list, zero generators, and $m=n$ are included; at $m=n$ the adjunct is the usual action unitor. No claim about preserving an inverse limit by $g^{-1}$ was used.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Definition of normalized DVR tower, strict representative datum and transition-adjoint condition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 07A2, 07A4 and 07A6; structural induction with explicit actual quotient-transition adjoints"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +209,45 @@
    "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes of sheaves reduced modulo a uniformizer form strict normalized towers with tensor and inverse image expressions",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars, AdicCompletion.flat_of_isNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, Module.flat_of_isLocalized_span, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module flatness, completion, or ring colimit syntax, not strict K-flat quotient-expression towers and their actual derived adjuncts"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|normalized.*tower|quotient.*expression",
+   "results": "Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/Algebra/Category/Ring/Colimits.lean, Mathlib/Algebra/Category/Ring/Colimits.lean, Mathlib/Algebra/Category/MonCat/Colimits.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module flatness, completion, or ring colimit syntax, not strict K-flat quotient-expression towers and their actual derived adjuncts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension along quotient ring sheaves sends flat term K-flat complexes to normalized towers compatible with tensor products and inverse images",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.isBaseChange, Module.Flat.instTensorProduct, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearMap.tensorKerEquiv_apply, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module flatness, completion, or ring colimit syntax, not strict K-flat quotient-expression towers and their actual derived adjuncts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Sheaf\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module flatness, completion, or ring colimit syntax, not strict K-flat quotient-expression towers and their actual derived adjuncts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite tensor and pullback expressions of K-flat quotient sheaf complexes have isomorphic derived scalar transition adjoints",
+   "results": "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.rTensor_shortComplex_exact, LinearMap.kerLTensorEquivOfSurjective, Module.Flat.iff_lTensor_exact', Module.Flat.rTensor_exact, Module.Flat.iff_lTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module flatness, completion, or ring colimit syntax, not strict K-flat quotient-expression towers and their actual derived adjuncts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-integral-coherence-tower",
@@ -88,5 +267,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-quotient-expression-kflat-normalization",
+  "worker": "stage1",
+  "summary": "Proved the simultaneous strict quotient-expression normalization by structural induction using existing K-flat closure, cochain monoidal comparison and representative-normalized coefficient adjunction nodes. Actual transition cocycles and generator/tensor/pullback adjoint formulas are written explicitly. No statement change or new node.",
+  "blueprint": "Nearest ancestor def-weil-frobenius-coefficient-twists, coefficient/twist compatibility with finite reduction and tensor twist construction; realizes the strict quotient-model subargument extracted as lem-pur-integral-coherence-tower former step 1 through lem-pur-derived-pullback-tensor-iso.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General K-flat computation of unbounded derived scalar extension for the generator reductions. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "General ring-sheaf scalar extension preserves flat-term K-flat complexes; applied to each coefficient projection, with no quotient flatness. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "General representative-normalized adjunction ensures the adjunct belongs to the actual transition map. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "General coefficient/inverse-image comparison preserving the insertion unit; needed to identify the pullback adjunct. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General ringed-topos K-flat pullback computation and derived monoidal comparison, applied to finite constant coefficients and scalar extension. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "General exactness and action transport of finite constant-coefficient inverse image. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "General constant-ring inverse-image identification needed for the coefficient squares. This is a tool for the quotient-expression construction, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-4b833d617",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-4b833d617 (reviewer sub-agent of L); spot-checked: I read the whole delivery (no new nodes) and checked the statement against the cited Stacks lemmas: 0G7E lemma-pullback-K-flat, 07A2 lemma-tensor-product-K-flat, 07A4 lemma-pullback-tensor-product and 07A6 lemma-adjoint in sites-cohomology.tex, with tags matching the labels. The blueprint ancestor def-weil-frobenius-coefficient-twists covers compatibility with finite reduction. No SGA source is cited. Every cited statement says what its step takes from it. Step 2: kflat-change-of-rings and derived-change-of-rings need K-flatness and flat terms, with no flatness of q. Step 3: kflat-total-tensor-model is a site theorem, unbounded. Step 4: ringed-topoi pullback gives K-flat flat-term reps and computes Lu^*. Step 6: sheaf-ring adjunction clause (2) is exactly the adjunct formula; whether alpha is an isomorphism does not depend on which normalized adjunction is used. Steps 7-9: I checked the inverse, balancing, the cochain comparison composite and the sfb chi_h transport through c^g. Step 10 matches def-coef-normalized-dvr-tower and uses no effectivity theorem. Small cases checked: empty generator list, zero complex, m=n, the empty scheme, and the non-flat quotient Z/l^2->Z/l. No cycle in the full closure; the parent integral-coherence-tower only uses the normalized strict towers and K-flat models. Duplicate search over every citer of def-coef-normalized-dvr-tower found nothing. Batch-5 flag: lem-sfb-kflat-scalar-comparison-normalization adds only lem-trf-geometric-inverse-image-exact (Stacks 04JC, exactness of inverse image for a geometric morphism, general topos theory) and two generic def-trf definitions. That is not part of the trace formula or Poincare duality and neither assumption gives it, so I accept it as generic. Advisory, not a fault: the last sentence of step 8 reads the canonical comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback as the localization on representatives. That is how its proof builds it and how other DAG nodes cite it, and the parent does not use the clause. The tool_uses are accepted. The snapshot DAG was garbage-collected mid-review, so some cited statements were read from the next base snapshots (88fcf57c, then 8c0edbe8); the delivered item text comes from packet.md. No fixes written."
  }
 }
