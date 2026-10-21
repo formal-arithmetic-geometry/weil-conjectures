@@ -19791,3 +19791,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:24 L: merged deliver/Q52/lem-sfb-dc-hom-filtered-colimit (reviewer FIX; after a return; new nodes: 3)
 - 03:24 L: merged deliver/NB/lem-weil-pbc-scalar-localization-sheaf-exact (reviewer FIX; first push; new nodes: 0)
 - 03:24 L: merged deliver/N6/lem-pd-module-ringed-topos-derived-comparison (reviewer PASS; after a return; new nodes: 3)
+- 03:24 L: merged deliver/O2/lem-sfb-exact-derived-natural-iso (reviewer PASS; first push; new nodes: 0)
