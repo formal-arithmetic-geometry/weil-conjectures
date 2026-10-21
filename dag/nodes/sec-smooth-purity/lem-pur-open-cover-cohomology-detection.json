@@ -19,9 +19,135 @@
   "def-pur-localized-ringed-site",
   "lem-sf-exact-functor-derived-triangulated"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every inclusion of an open subscheme is etale by [lem-weil-pbc-open-immersion-etale]. Since the images of the $U_i$ cover $T$, the family $(U_i\\to T)$ is an etale covering by [def-weil-pbc-etale-site], and hence a pro-etale covering by [lem-pur-etale-proetale-cover]. The base-change covering axiom in [def-weil-pbc-sites-and-cohomology] gives the covering $(V\\times_T U_i\\to V)$ for every object $V\\to T$ of either site. Applying the same open-immersion and covering assertions with base $V$ shows it also covers on $V_\\tau$. In the slice over $V$ its underlying family is this same covering, so it covers there by [def-pur-localized-ringed-site]. This argument applies to arbitrary set-indexed covers, without assuming quasi-compactness of $T$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-etale-site",
+    "lem-pur-etale-proetale-cover",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098B, lemma-etale-proetale; sites.tex Definition 00VH, definition-site, covering base-change axiom"
+   }
+  },
+  {
+   "text": "For an open $U\\subseteq T$, its inclusion is etale by [lem-weil-pbc-open-immersion-etale]. Apply [lem-weil-pbc-etale-site-localization-open] to obtain precisely the stated functor $U_{\\mathrm{et}}\\simeq T_{\\mathrm{et}}/U$, including its covering families. In the pro-etale case apply [lem-weil-proetale-weakly-etale-localization], which explicitly includes open subschemes, gives the same functor, and identifies the covering families. Work first on the common bounded-object categories, then transport to the chosen small representatives; these are the same sites up to the equivalences specified in the statement. For nested opens $W\\subseteq U\\subseteq T$ both composites send $V\\to W$ to its composite $V\\to T$ with its factorization through $U$. Relocalization in [def-pur-localized-ringed-site] therefore gives the specified coherent identifications of sites.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 00XZ, section-localize; Lemma 03EH, lemma-relocalize; pro-etale specialization as in proetale.tex Definition 098K, definition-big-small-proetale"
+   }
+  },
+  {
+   "text": "Let $P$ be the constant presheaf of rings with value $A$. Its restriction to the slice is again the constant presheaf with value $A$. By [def-weil-pbc-constant-sheaf] and the ring-valued comparison [lem-pur-ring-presheaf-sheafification-localization], $(P|_U)^\\#\\xrightarrow{\\sim}(P^\\#)|_U$ is the required $A_U\\xrightarrow{\\sim}A_T|_U$. The unit equation in that comparison says explicitly that the image of each constant section $a\\in A$ is unchanged. For nested opens, the direct map and the composite of the two restricted maps agree after precomposition with the constant-presheaf unit. The uniqueness in the sheafification universal property [def-weil-pbc-sheafification] makes the two sheaf maps equal. Thus the coefficient comparison is canonical and respects iterated restriction in both topologies.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-pur-ring-presheaf-sheafification-localization",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XR, lemma-when-shriek, applied to localization Section 00XZ; sheafification universal property Tag 00WH, proposition-sheafification-adjoint"
+   }
+  },
+  {
+   "text": "On the localized ringed site, [def-pur-localized-ringed-site] gives $r_UF(V\\to U)=F(V\\to T)$ and gives the same formula for morphisms and the scalar action. The coefficient identification of Step 3 makes this an $A_U$-module sheaf on $U_\\tau$. The exactness assertion of [lem-pur-site-restriction-module-adjunction-exact], applied to the sheaf of rings $A_T$ and the object $U$, proves exactness of this module restriction. The categories are abelian by [def-weil-sheaf-of-modules-category]; the small representatives and common coefficient universe assumed in the item meet its size condition. Relocalization gives $(F|_U)|_W=F|_W$ sectionwise, and Step 3 shows their scalar identifications agree as well.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site (4); restriction exactness for the localization morphism; sites.tex Lemma 03EH, lemma-relocalize"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to the exact functor $r_U$. For every cochain complex $C$ its canonical natural comparison, inverted, gives $r_UH^a(C)\\xrightarrow{\\sim}H^a(r_UC)$, induced by kernels, images and quotients. By [lem-sf-exact-functor-derived-triangulated], termwise $r_U$ induces $D(r_U)$ on the ordinary unbounded derived categories. The localization description in [def-weil-abstract-derived-category] lets the preceding comparison descend: it is natural for each chain map; for a quasi-isomorphism its naturality square has invertible vertical arrows, so the square for its inverse also commutes. Morphisms of the localization are generated by these maps and their composites, and naturality is preserved by composition. This proves naturality for every derived morphism and gives the asserted $\\chi^a_{U,K}$, independent of the chosen complex representative. No resolution or boundedness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, all complexes compute the derived functor; homology.tex Tag 010N, lemma-exact-functor"
+   }
+  },
+  {
+   "text": "For $W\\subseteq U\\subseteq T$, compare the direct $\\chi^a_W$ with $\\chi^a_{W,D(r_U)(-)}\\circ r_{W/U}(\\chi^a_U)$, under the restriction identifications of Steps 2--4. On a complex both maps are induced by the same inclusion of cycles into the restricted degree-$a$ term and the same quotient by the restricted boundaries. Uniqueness of the induced kernel and quotient maps forces equality. The comparison lemma [lem-weil-pbc-exact-functor-complex-cohomology] specifies exactly these kernel/image-induced maps. Hence equality holds on all complex representatives and therefore on the derived category as in Step 5. This verifies the stated iterated cohomology comparison, rather than choosing unrelated isomorphisms.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, canonical kernel and cokernel maps; sites.tex Lemma 03EH, lemma-relocalize"
+   }
+  },
+  {
+   "text": "Suppose $r_{U_i}F=0$ for every $i$. For each object $V\\to T$, Step 1 supplies the covering $(V\\times_T U_i\\to V)$. Its section modules are $F(V\\times_T U_i)=(r_{U_i}F)(V\\times_T U_i\\to U_i)=0$ by the restriction formula [def-pur-localized-ringed-site]. The underlying abelian sheaf of a module sheaf [def-weil-sheaf-of-modules-category] satisfies the equalizer sheaf axiom [def-weil-pbc-sites-and-cohomology]; in particular $F(V)\\to\\prod_i F(V\\times_T U_i)$ is injective. The product is the zero module, so $F(V)=0$. This holds for every $V$, hence $F$ is the zero module sheaf. Conversely the sectionwise restriction of the zero sheaf has zero section modules, so is zero. This proves both directions for either site without any stalk or point hypothesis.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VM and 00VR, definition-sheaf-sets and definition-sheaf, equalizer sheaf axiom"
+   }
+  },
+  {
+   "text": "For fixed $a$ apply Step 7 to the module sheaf $F=\\mathcal H^a(K)$. The isomorphisms of Step 5 identify the vanishing of $r_{U_i}F$ with that of $\\mathcal H^a(D(r_{U_i})K)$, giving exactly the asserted equivalence. Finally if $T=\\varnothing$, every scheme admitting a morphism to $T$ is empty. On either site the empty family covers each such object: joint surjectivity is vacuous in the etale definition [def-weil-pbc-etale-site], and the pro-etale assertion follows from Step 1 with this empty etale family. The equalizer sheaf axiom [def-weil-pbc-sites-and-cohomology] says $F(V)$ is the equalizer of two maps between empty products, hence the zero module. Thus every module sheaf is zero, also for the empty covering family. If $T$ is nonempty the empty family is not a Zariski cover, so no assertion for that family is needed.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VM and 00VR, empty-product case of the sheaf equalizer; proetale.tex Tag 098B, lemma-etale-proetale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-etale-site",
+  "lem-pur-etale-proetale-cover",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "def-weil-pbc-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Agent-combined argument from Definition 04IX, Sites 00VM/00VR and 03EH, Pro-etale Cohomology 098B/098K, Homology 010N and Derived Categories 015F. The source fragments are cited at the individual steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +197,45 @@
    "results": "[loogle] OK 12 hit(s). Read hits: DerivedCategory.homologyFunctor; DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt; DerivedCategory.instIsHomologicalHomologyFunctor; DerivedCategory.shift_homologyFunctor; DerivedCategory.HomologySequence.δ; DerivedCategory.isIso_iff; DerivedCategory.homologyFunctorFactors; DerivedCategory.HomologySequence.exact₁; DerivedCategory.HomologySequence.exact₃; DerivedCategory.HomologySequence.exact₂; DerivedCategory.homologyFunctorFactorsh; DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff. The site/topology and sheaf-section hits do not identify both small ringed sites, constant coefficients and natural unbounded cohomology comparisons. HomologyFunctor and isIso_iff are general ingredients, not this combined local criterion. No exact match or one-line specialization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv|overSheafEquiv|isZero.*[Rr]estrict|[Rr]estrict.*isZero",
+   "results": "20 hits; read names: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean.  No full match: these concern generic derived functors, structure sheaf sections, or one topology, not the two localized ringed small sites and all canonical comparisons.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module sheaf on the small proetale or etale site is zero if its restrictions to a Zariski open cover are zero, and exact restriction commutes with derived cohomology",
+   "results": "8 hits; read names: AlgebraicGeometry.Scheme.zero_of_zero_cover, SheafOfModules.over, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.isSheaf, AlgebraicGeometry.RingedSpace.res_zero, SheafOfModules.IsQuasicoherent.casesOn, ModuleCat.tildeInModuleCat, AlgebraicGeometry.Scheme.Modules.isSheaf.  No full match: these concern generic derived functors, structure sheaf sections, or one topology, not the two localized ringed small sites and all canonical comparisons.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "12 hits; read names: DerivedCategory.homologyFunctor, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, DerivedCategory.instIsHomologicalHomologyFunctor, DerivedCategory.shift_homologyFunctor, DerivedCategory.HomologySequence.δ, DerivedCategory.isIso_iff, DerivedCategory.homologyFunctorFactors, DerivedCategory.HomologySequence.exact₁.  No full match: these concern generic derived functors, structure sheaf sections, or one topology, not the two localized ringed small sites and all canonical comparisons.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction to open subschemes on etale and proetale sites commutes with derived cohomology and detects zero sheaves on an open cover",
+   "results": "8 hits; read names: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, Opens.mayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf.  No full match: these concern generic derived functors, structure sheaf sections, or one topology, not the two localized ringed small sites and all canonical comparisons.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a ringed site at open subschemes gives exact module restriction whose termwise functor on unbounded derived categories preserves cohomology naturally and is conservative on an open cover",
+   "results": "8 hits; read names: AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, CategoryTheory.Functor.isHomological_of_localization, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom.  No full match: these concern generic derived functors, structure sheaf sections, or one topology, not the two localized ringed small sites and all canonical comparisons.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-degree-zero-derived-map-gluing",
@@ -94,5 +255,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-open-cover-cohomology-detection",
+  "worker": "stage1",
+  "summary": "Eight-step proof using existing site-localization, ring-sheafification, exact-restriction and complex-cohomology nodes. Wrote the covering argument, localization naturality and nested coherence, and sectionwise zero detection including the empty site. No statement change and no new nodes.",
+  "blueprint": "Realizes the open-site/cohomology localization prerequisite of cor-pur-dualizing-object-purity, via lem-pur-vector-integration-site-comparison and lem-pur-degree-zero-derived-map-gluing, at the from.place already recorded in this node. It supplies the local detection used to glue normalized purity maps, without altering the diagonal/DNC route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic geometric fact placing the open subschemes in the small etale site; the smooth-purity unit supplies no replacement for this site input."
+   },
+   {
+    "node": "lem-pur-etale-proetale-cover",
+    "why": "Generic covering comparison places the same Zariski family in the pro-etale topology; no purity construction is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic etale small-site slice equivalence needed for the etale clause; the unit gives no site-localization theorem."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic pro-etale small-site slice equivalence, applied to an open subscheme, needed for the pro-etale clause."
+   },
+   {
+    "node": "lem-pur-ring-presheaf-sheafification-localization",
+    "why": "Generic ring-valued sheafification comparison identifies constant coefficients with the restricted ring, with its unit normalization."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of module restriction to a localized ringed site, supplying the exact functor needed by cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic natural kernel/image cohomology comparison for an exact functor, before descending along quasi-isomorphisms."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic termwise induced functor for ordinary unbounded derived categories; this is not a bounded-below or constructible comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-pur-etale-proetale-cover",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-0a172cda7",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-0a172cda7 (reviewer sub-agent of L); spot-checked: First split of Q36's statement-only node. It is still unsplit and unreviewed in live and side-live, so this delivery is not superseded. It answers no re-split note and is not in the 10-19 dropped list; neither is its citer. The statement and stmt_deps are unchanged against side-live, and there are no new nodes. I read all 8 steps against the cited statements. (1) Open immersions are étale, the Zariski family is an étale cover and, by lem-pur-etale-proetale-cover, a pro-étale cover for any index set; covers base-change by 00VH (iii) and slice covers are tested on the underlying family. (2) The open-U slice equivalences come from lem-weil-pbc-etale-site-localization-open and lem-weil-proetale-weakly-etale-localization (1), with nested coherence by relocalization. (3) A_U≅A_T|_U comes from the ring sheafification-localization e_P with its unit equation, and nested coherence from sheafification uniqueness. (4) Exactness of j_U^* is lem-pur-site-restriction-module-adjunction-exact. (5) χ is the inverse of the exact-functor kernel/image comparison c^r; it descends through Q because naturality holds for chain maps and for inverses of quasi-isomorphisms. (6) Nested coherence follows from uniqueness of the induced kernel and quotient maps. (7) Injectivity into ∏F(V×_T U_i) holds for both sites. (8) For T=∅ the empty family covers and the empty equalizer is 0. Stacks tags 098B, 098K, 00VH, 00XZ, 03EH, 00XR, 00WH, 04IX, 010N, 015F, 00VM and 00VR exist and match. I tested T=∅, U=T, empty and repeated members, A=0, unbounded complexes and disconnected V. There is no cycle: the 146-node closure does not contain the item. The 8 declared tool_uses are generic site and homological-algebra black boxes; accepted. Overlaps with lem-sf-sheaf-zero-on-open-cover (étale zero detection only) and lem-cbc-proetale-stalk-conservative (1) (pro-étale, inverse image only) are advisory; no node states the whole item, and same_as=[] holds."
  }
 }
