@@ -20919,3 +20919,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q70/det-lem-int-tensor-pullback (reviewer FIX; after a return; new nodes: 2)
 - 08:08 L: merged deliver/O3/lem-sfb-pasted-mates-counit-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q18/lem-amb-finite-root-site-comparison (reviewer FIX; first push; new nodes: 0)
+- 08:08 L: merged deliver/Q33/lem-sfb-monoidal-balancing-diagrams (reviewer PASS; first push; new nodes: 0)

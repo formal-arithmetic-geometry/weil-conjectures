@@ -13,9 +13,78 @@
   "sk-def-sfb-module-objects",
   "def-sfb-modobj-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the naturality and associativity equations stated in [def-sfb-strong-monoidal-functor], with $t$ in place of $\\mu$. Tensor bifunctoriality [def-sfb-monoidal-category] gives $(t_{S,R}^{-1}\\otimes1_{FM})\\circ(t_{S,R}\\otimes1_{FM})=1$ and the reverse identity. Hence $t_{1,M}$ is an isomorphism with inverse $(t_{S,R}^{-1}\\otimes1_{FM})\\circ t_{S\\otimes R,M}^{-1}$; $t_{0,M}$ is already a specified tensorator isomorphism.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories: tensorator naturality and associativity diagram, with the inverse associator convention of Tag 0FFK"
+   }
+  },
+  {
+   "text": "Put $k=m_S\\circ(1_S\\otimes\\varphi)$ and $k'=m_{FS}\\circ(1_{FS}\\otimes F\\varphi)$. The transported multiplication is that of [def-sfb-modobj-transport]. Naturality in [def-sfb-strong-monoidal-functor], for $(1_S,\\varphi)$, gives\n\\[\nk'=F(m_S)\\circ t_{S,S}\\circ(1_{FS}\\otimes F\\varphi)\n=F(k)\\circ t_{S,R}.\n\\]\nNaturality again, now for $(k,1_M)$, therefore gives\n\\[\nF(a_M)\\circ t_{1,M}\n=t_{S,M}\\circ(F(k)\\otimes1_{FM})\\circ(t_{S,R}\\otimes1_{FM})\n=t_{0,M}\\circ(k'\\otimes1_{FM})=t_{0,M}\\circ a'_M.\n\\]",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories: tensorator naturality and associativity diagram, with the inverse associator convention of Tag 0FFK"
+   }
+  },
+  {
+   "text": "The associativity axiom of [def-sfb-strong-monoidal-functor] at $(S,R,M)$ reads\n\\[\nF(\\alpha^{\\mathcal C}_{S,R,M})\\circ t_{1,M}\n=t_{S,R\\otimes M}\\circ(1_{FS}\\otimes t_{R,M})\\circ\\alpha^{\\mathcal D}_{FS,FR,FM}.\n\\]\nPostcompose with $F(1_S\\otimes\\gamma_M)$ and apply tensorator naturality for $(1_S,\\gamma_M)$. Using the transported action from [def-sfb-modobj-transport] gives\n\\[\nF(b_M)\\circ t_{1,M}\n=t_{S,M}\\circ(1_{FS}\\otimes(F(\\gamma_M)\\circ t_{R,M}))\\circ\\alpha^{\\mathcal D}_{FS,FR,FM}\n=t_{0,M}\\circ b'_M.\n\\]",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories: tensorator naturality and associativity diagram, with the inverse associator convention of Tag 0FFK"
+   }
+  },
+  {
+   "text": "For the last assertion abbreviate $\\alpha_C=\\alpha^{\\mathcal C}_{S,S,M}$ and $\\alpha_D=\\alpha^{\\mathcal D}_{FS,FS,FM}$, and set\n\\[\nu=t_{S,S\\otimes M}\\circ(1_{FS}\\otimes t_{S,M}),\\qquad\nv=t_{S\\otimes S,M}\\circ(t_{S,S}\\otimes1_{FM}).\n\\]\nAssociativity in [def-sfb-strong-monoidal-functor] gives $F(\\alpha_C)\\circ v=u\\circ\\alpha_D$. Precomposing with $\\alpha_D^{-1}$ and postcomposing with $F(\\alpha_C^{-1})$ yields\n\\[\nv\\circ\\alpha_D^{-1}=F(\\alpha_C^{-1})\\circ u.\n\\]\nThe cancellation uses only $F(\\alpha_C^{-1})\\circ F(\\alpha_C)=F(1)=1$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories: tensorator naturality and associativity diagram, with the inverse associator convention of Tag 0FFK"
+   }
+  },
+  {
+   "text": "By the transported action formula [def-sfb-modobj-transport], tensor bifunctoriality [def-sfb-monoidal-category], and naturality [def-sfb-strong-monoidal-functor] for $(1_S,q)$, the left side of the required equation is\n\\[\nF(\\delta_P)\\circ t_{S,P}\\circ(1_{FS}\\otimes F(q))\\circ(1_{FS}\\otimes t_{S,M})\n=F(\\delta_P\\circ(1_S\\otimes q))\\circ u.\n\\]\nFor its right side, substitute $m_{FS}=F(m_S)\\circ t_{S,S}$ and use naturality for $(m_S,1_M)$ and step 4:\n\\[\n\\begin{aligned}\n\\widehat q\\circ(m_{FS}\\otimes1_{FM})\\circ\\alpha_D^{-1}\n&=F(q)\\circ t_{S,M}\\circ(F(m_S)\\otimes1_{FM})\\circ(t_{S,S}\\otimes1_{FM})\\circ\\alpha_D^{-1}\\\\\n&=F(q\\circ(m_S\\otimes1_M))\\circ v\\circ\\alpha_D^{-1}\\\\\n&=F(q\\circ(m_S\\otimes1_M)\\circ\\alpha_C^{-1})\\circ u.\n\\end{aligned}\n\\]\nThe assumed equation for $q$ makes these expressions equal. All displayed equalities are substitutions, functoriality, or the explicitly cited coherence equations.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories: tensorator naturality and associativity diagram, with the inverse associator convention of Tag 0FFK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-strong-monoidal-functor",
+  "def-sfb-monoidal-category",
+  "def-sfb-modobj-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0FFL, definition-functor-monoidal-categories: tensorator naturality and associativity diagram, with the inverse associator convention of Tag 0FFK"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +129,54 @@
    "date": "2026-10-21",
    "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma",
    "subdirectory": "CategoryTheory/Monoidal/Functor.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|balanced|associativity_inv|μ_natural",
+   "results": "{\"t\": \"2026-10-21T07:33:36Z\", \"tool\": \"grep\", \"query\": \"mapMod|balanced|associativity_inv|μ_natural\", \"sub\": \"CategoryTheory/Monoidal/Functor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"70\", \"74\", \"94\", \"104\", \"121\"], \"digest\": \"3357e829c18fcb98\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply tensorator axioms, ordinary change of rings, or bimodule quotient laws; no declaration states the full three diagram identities under the present hypotheses.",
+   "subdirectory": "CategoryTheory/Monoidal/Functor.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal tensorator naturality and associativity identify a transported module action diagram and extension of scalars balancing arrows",
+   "results": "{\"t\": \"2026-10-21T07:33:37Z\", \"tool\": \"leansearch\", \"query\": \"Monoidal tensorator naturality and associativity identify a transported module action diagram and extension of scalars balancing arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.associator_naturality\", \"CategoryTheory.MonoidalCategory.MonoidalRightAction.actionAssocIso_hom_naturality_assoc\", \"CategoryTheory.MonoidalCategory.id_tensor_associator_naturality_assoc\", \"CategoryTheory.MonoidalCategory.id_tensor_associator_naturality\", \"CategoryTheory.NatTrans.tensor_naturality_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalRightAction.actionAssocIso_hom_naturality\", \"CategoryTheory.GradedObject.Monoidal.associator_naturality\", \"Mathlib.Tactic.Monoidal.naturality_tensorHom\"], \"digest\": \"e0edd1f6025c272f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply tensorator axioms, ordinary change of rings, or bimodule quotient laws; no declaration states the full three diagram identities under the present hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.associativity, CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "results": "{\"t\": \"2026-10-21T07:33:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.LaxMonoidal.associativity, CategoryTheory.Functor.LaxMonoidal.μ_natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply tensorator axioms, ordinary change of rings, or bimodule quotient laws; no declaration states the full three diagram identities under the present hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor transports the two arrows defining extension of scalars of internal left modules, and the equivariance equation of a map out of the tensor presentation",
+   "results": "{\"t\": \"2026-10-21T07:33:39Z\", \"tool\": \"leanfinder\", \"query\": \"A strong monoidal functor transports the two arrows defining extension of scalars of internal left modules, and the equivariance equation of a map out of the tensor presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"CategoryTheory.Mod_.Hom.mk''\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor_map\", \"ModuleCat.ExtendScalars.map_tmul\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"CategoryTheory.Mod_.Hom.mk'\"], \"digest\": \"6a257391c3a47be8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply tensorator axioms, ordinary change of rings, or bimodule quotient laws; no declaration states the full three diagram identities under the present hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the tensorator sends left multiplication on an algebra tensor module to left multiplication after a strong monoidal functor, with the associator inserted",
+   "results": "{\"t\": \"2026-10-21T07:33:55Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the tensorator sends left multiplication on an algebra tensor module to left multiplication after a strong monoidal functor, with the associator inserted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.tensorBimod_actLeft\", \"Bimod.TensorBimod.whiskerLeft_π_actLeft\", \"Bimod.TensorBimod.one_act_left'\", \"Bimod.TensorBimod.left_assoc'\", \"CategoryTheory.ModObj.mul_smul'\", \"Bimod.TensorBimod.π_tensor_id_actRight\", \"CategoryTheory.ModObj.mul_smul\", \"CategoryTheory.ModObj.mul_smul_assoc\"], \"digest\": \"dc9b077ac7fa452c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply tensorator axioms, ordinary change of rings, or bimodule quotient laws; no declaration states the full three diagram identities under the present hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem μ_natural|theorem associativity_inv|class LaxMonoidal|mapMod|balanced",
+   "results": "{\"t\": \"2026-10-21T07:34:14Z\", \"tool\": \"grep\", \"query\": \"theorem μ_natural|theorem associativity_inv|class LaxMonoidal|mapMod|balanced\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/End.lean\", \"Mathlib/CategoryTheory/Monoidal/End.lean\", \"Mathlib/CategoryTheory/Monoidal/End.lean\", \"Mathlib/CategoryTheory/Monoidal/End.lean\"], \"digest\": \"916f3304f26bcc6b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply tensorator axioms, ordinary change of rings, or bimodule quotient laws; no declaration states the full three diagram identities under the present hypotheses.",
+   "subdirectory": "CategoryTheory/Monoidal"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-extension-inverse-image",
@@ -82,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-monoidal-balancing-diagrams",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its four statement dependencies. Wrote five explicit algebraic steps using the existing strong-monoidal coherence equations, tensor bifunctoriality, and transported multiplication/action formulas. No new nodes: each calculation is elementary substitution in these displayed axioms; no braiding, commutativity or colimit hypothesis is introduced. Searched the project source, whole blueprint and Mathlib; the project relative-tensor comparisons have stronger assumptions and are not attachments.",
+  "blueprint": "Realizes the tensorator balancing and first-factor action transport required when restricting the local finite presentations in the final sentence of lem-sfb-extend-to-qlbar-constructible.proof.md; specifically the independent coherence input isolated by lem-sfb-internal-extension-inverse-image. Steps 2 and 3 carry the two balancing-arrow identities, and steps 4 and 5 carry the transported quotient-action identity."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-5057055b6",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-5057055b6 (reviewer sub-agent of L); spot-checked: Q33 lem-sfb-monoidal-balancing-diagrams @5057055b: a split with no new nodes of a statement-only lemma that Q29 created. The statement and stmt_deps are unchanged from the base (dagsnap 7223b2f7). The item is still unsplit in live and side-live, is not in any dropped list, and has no repair note. I recomputed all 5 steps against the displayed axioms in def-sfb-strong-monoidal-functor (naturality and the associativity equation with alpha pointing (XY)Z->X(YZ)), def-sfb-monoidal-category (bifunctoriality) and def-sfb-modobj-transport (F(m)t and F(gamma)t). Step 1: the inverse of t1 is correct. Step 2: k'=F(k)t_{S,R} by naturality at (1,phi), so F(a)t1=t0a'. Step 3: associativity at (S,R,M) plus naturality at (1,gamma) give F(b)t1=t0b'. Step 4: v alpha_D^{-1}=F(alpha_C^{-1})u. Step 5: both sides reduce to F(-)u, and the hypothesis on q makes them equal. Sources and targets check at every junction. Source: Stacks Tag 0FFL, categories.tex l.9238, checked against tags/tags; the proof is marked by:agent. Edge cases: F=id; S=R with phi=1; noncommutative rings (no braiding used); zero M or P. Duplicate search with rg -L for tensorator, balancing and mapMod covered sk-def-sfb-transport, def-sfb-modobj-extend-restrict-adjunction and pur713-def-mapmod: none matches. The citer lem-sfb-internal-extension-inverse-image step 2 uses exactly these three identities. Four Mathlib searches are recorded. No SGA, no tool_uses. Advisory only: steps 2 and 3 use bifunctoriality without listing def-sfb-monoidal-category in uses (it is in proof_deps)."
  }
 }
