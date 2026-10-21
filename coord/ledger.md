@@ -23261,3 +23261,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:00 L: merged deliver/Q35/lem-sfb-integral-closure-ind-etale-base-change (reviewer FIX; first push; new nodes: 1)
 - 18:00 L: merged deliver/Q29/lem-weil-boundary-comparison-composition-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 18:01 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 18:01 L: returned deliver/NF/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9. This is the 4th delivery of this item (after NV 01fd7610, NF 02bfa96d, NF 7bcbe869). The item and its cite)
