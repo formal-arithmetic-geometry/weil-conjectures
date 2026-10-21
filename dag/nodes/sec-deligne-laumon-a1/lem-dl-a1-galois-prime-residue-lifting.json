@@ -13,9 +13,90 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $G=\\operatorname{Aut}_F(E)$ its Krull topology. By [lem-exc-galois-krull-finite-limit], restriction identifies it as a topological group with the compatible-family inverse limit of the finite discrete groups $\\operatorname{Gal}(L/F)$, indexed by the finite Galois intermediate fields $L$. The indexing poset is set-sized (it consists of subfields of the set $E$), nonempty and directed. Apply [lem-dl-a1-finite-group-limit-profinite] to this system. Thus $G$ is compact Hausdorff and totally disconnected. The pointwise-on-discrete-$E$ description of the Krull topology says that fixing a finite subset of $E$ is an open condition.",
+   "uses": [
+    "lem-exc-galois-krull-finite-limit",
+    "lem-dl-a1-finite-group-limit-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRK, lemma-one-orbit-geometric-galois; infinite Galois passage; topological implementation via Fields Tag 0BMJ, lemma-galois-profinite, rather than Zorn maximal pairs."
+   }
+  },
+  {
+   "text": "Each $g\\in G$ restricts to an automorphism of $S$: apply $g$ to a monic equation over $R$ satisfied by $s\\in S$, and use $g^{-1}$ for the inverse. Give $S$ the discrete topology. For $s\\in S$ the orbit map $G\\to S$, $g\\mapsto g(s)$, is locally constant, since the set where $g(s)=h(s)$ is the coset $h\\operatorname{Stab}_G(s)$ of an open subgroup in the Krull topology. Since $S$ is discrete, checking these orbit maps checks continuity on each open slice $G\\times\\{s\\}$ of $G\\times S$. Hence the restricted action is continuous. Every element of $R$ is fixed. Conversely, if $s\\in S$ is fixed by $G$, [lem-exc-etale-galois-fixed-field-subgroup], with intermediate field $F$, gives $s\\in F$. Since $s$ is integral over $R$, the normal-domain hypothesis [def-weil-pbc-normal-ring] gives $s\\in R$. Consequently $S^G=R$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-exc-etale-galois-fixed-field-subgroup",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRK, lemma-one-orbit-geometric-galois; the fixed-ring equality used in part (1), with continuous restriction of the action from Fields 0BMJ."
+   }
+  },
+  {
+   "text": "Apply the prime-transitivity clause of [lem-dl-a1-profinite-invariant-ring-primes] to $A=R$, $B=S$ and $G$ with the structures verified in steps 1 and 2. If $\\mathfrak s\\cap R=\\mathfrak s'\\cap R$, it gives $g\\in G$ with $g(\\mathfrak s)=\\mathfrak s'$, which is (1).",
+   "uses": [
+    "lem-dl-a1-profinite-invariant-ring-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRK, lemma-one-orbit-geometric-galois; part (1)."
+   }
+  },
+  {
+   "text": "For (2), fix $\\mathfrak s$ and $\\mathfrak p=\\mathfrak s\\cap R$. Put $T=R\\setminus\\mathfrak p$, $A=T^{-1}R\\subset F$, $B=T^{-1}S\\subset E$, and $Q=\\{s/t:s\\in\\mathfrak s,\\ t\\in T\\}\\subset B$. Fractions here are taken inside the fields, so cancellation is valid. The map $B\\to\\operatorname{Frac}(S/\\mathfrak s)$ sends $s/t$ to $\\bar s/\\bar t$ and has kernel $Q$; thus $Q$ is prime and contracts to $\\mathfrak s$ in $S$. Its contraction to $A$ is $P=\\mathfrak pA$. Extend the action by $g(s/t)=g(s)/t$, since $G$ fixes $T$. An orbit map on $s/t$ is locally constant wherever $g(s)$ is constant, so the action on discrete $B$ is continuous by the same open-slice argument. If $s/t$ is fixed by every $g$, cancellation gives $g(s)=s$ for all $g$, hence $s\\in R$ by step 2. Thus $B^G=A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRK, lemma-one-orbit-geometric-galois; part (2): localization at the base prime, as in the proof of Tag 0BRJ, lemma-one-orbit-geometric."
+   }
+  },
+  {
+   "text": "The quotient-localization formula [lem-weil-pbc-localization-quotient-by-prime] identifies $A/P$ with $(R/\\mathfrak p)_{\\overline T}=\\operatorname{Frac}(R/\\mathfrak p)$, since $\\overline T=(R/\\mathfrak p)\\setminus\\{0\\}$, and identifies $B/Q$ with $(S/\\mathfrak s)_{\\overline T}$, each by $\\bar s/\\bar t\\mapsto\\overline{s/t}$. Apply the integrality clause of [lem-dl-a1-profinite-invariant-ring-primes] to the invariant-ring action on $A\\subset B$ from step 4. Reducing a monic equation for a lift $b\\in B$ modulo $Q$ shows that $B/Q$ is integral over the field $A/P$. It is a domain because $Q$ is prime. Such a domain is a field: for nonzero $x\\in B/Q$, choose a monic relation of least positive degree over $A/P$; its constant term $c_0$ is nonzero, since otherwise cancellation of $x$ gives a shorter relation. Then $x^{-1}=-c_0^{-1}(x^{n-1}+c_{n-1}x^{n-2}+\\cdots+c_1)$. The natural injection $B/Q\\hookrightarrow\\operatorname{Frac}(S/\\mathfrak s)$ is therefore surjective: its field image contains $S/\\mathfrak s$ and hence all its fractions. These identifications respect the inclusions of the base fields and the displayed fractions.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-by-prime",
+    "lem-dl-a1-profinite-invariant-ring-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRK, lemma-one-orbit-geometric-galois; part (2): identify the localized quotients with the residue fraction fields; compare localization paragraph in Tag 0BRJ."
+   }
+  },
+  {
+   "text": "Let $\\alpha$ be the prescribed $\\kappa(\\mathfrak p)$-automorphism of $\\kappa(\\mathfrak s)$. The explicit identifications of step 5 give an $A/P$-algebra automorphism $\\widetilde\\alpha$ of $B/Q$. By the quotient-lifting clause of [lem-dl-a1-profinite-invariant-ring-primes], applied to $A\\subset B$, there exists $g\\in G$ with $g(Q)=Q$ whose action on $B/Q$ equals $\\widetilde\\alpha$. Contraction to $S$ gives $g(\\mathfrak s)=\\mathfrak s$, since for $s\\in S$ membership in $Q$ of $s/1$ is exactly membership of $s$ in $\\mathfrak s$. Under the fraction formula the quotient action is $\\overline{s/t}\\mapsto\\overline{g(s)/t}$. Therefore its action on $\\kappa(\\mathfrak s)$ is exactly that induced by $g$, and equals $\\alpha$. This proves (2).",
+   "uses": [
+    "lem-dl-a1-profinite-invariant-ring-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRK, lemma-one-orbit-geometric-galois; part (2), surjectivity clause, realized by the profinite quotient-lifting theorem after localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-galois-krull-finite-limit",
+  "lem-dl-a1-finite-group-limit-profinite",
+  "def-weil-pbc-integral-closure",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "def-weil-pbc-normal-ring",
+  "lem-dl-a1-profinite-invariant-ring-primes",
+  "lem-weil-pbc-localization-quotient-by-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRK; same invariant-ring and residue-localization mechanism as Tags 0BRI/0BRJ, implemented by Mathlib profinite invariant-ring theorems and Fields 0BMJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +132,31 @@
    "results": "8 hits: Ideal.isPretransitive_of_isGaloisGroup, Ideal.isPretransitive_of_isGalois, Ideal.exists_smul_eq_of_isGaloisGroup, Ideal.exists_map_eq_of_isGalois, IsFractionRing.stabilizerHom_surjective, Ideal.coe_smul_primesOver_mk_eq_map_galRestrict, Ideal.exists_comap_galRestrict_eq, Ideal.coe_smul_primesOver_eq_map_galRestrict. Finite-group transitivity hits do not cover infinite Galois extensions. Profinite invariant-ring theorems require a continuous action and an invariant-ring identification; these are additional mathematical inputs, not a one-line specialization. The residue-fraction-field assertion also requires localization. Read Mathlib/RingTheory/Invariant/Profinite.lean:61-64,175-179 and WeilConjectures/Mathlib/RingTheory/Invariant/Profinite.lean:62-108; the latter is project code, not Mathlib.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a possibly infinite Galois extension of the fraction field of a normal domain the Galois group is transitive on primes of the integral closure and lifts residue field automorphisms",
+   "results": "{\"t\": \"2026-10-21T09:46:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a possibly infinite Galois extension of the fraction field of a normal domain the Galois group is transitive on primes of the integral closure and lifts residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_comap_galRestrict_eq\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"IsGaloisGroup.of_isFractionRing\", \"Ideal.exists_map_eq_of_isGalois\", \"Algebra.isInvariant_of_isGalois'\"], \"digest\": \"8895196b4d7dabeb\"}. Read project WeilConjectures/Mathlib/RingTheory/Invariant/Profinite.lean:62-108 (no sorry in these declarations); quotient lifting there is not fraction-field lifting. Read Mathlib/RingTheory/Invariant/Profinite.lean:39-64,175-179.",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-group normalization results require finite extensions; profinite invariant-ring results need the continuous invariant-ring setup and localization proved in this split"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.stabilizerHom",
+   "results": "{\"t\": \"2026-10-21T09:58:09Z\", \"tool\": \"loogle\", \"query\": \"Ideal.Quotient.stabilizerHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom\", \"Ideal.Quotient.map_ker_stabilizer_subtype\", \"Ideal.Quotient.ker_stabilizerHom\", \"Ideal.Quotient.stabilizerHom_apply\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerQuotientInertiaEquiv_mk\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\"], \"digest\": \"cba9ee8b470d7612\"}. Read project WeilConjectures/Mathlib/RingTheory/Invariant/Profinite.lean:62-108 (no sorry in these declarations); quotient lifting there is not fraction-field lifting. Read Mathlib/RingTheory/Invariant/Profinite.lean:39-64,175-179.",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-group normalization results require finite extensions; profinite invariant-ring results need the continuous invariant-ring setup and localization proved in this split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinite Galois integral closure prime transitivity and residue field automorphism lifting",
+   "results": "{\"t\": \"2026-10-21T09:58:10Z\", \"tool\": \"leansearch\", \"query\": \"Infinite Galois integral closure prime transitivity and residue field automorphism lifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.isPretransitive_of_isGalois\", \"galLift_galRestrict'\", \"IsGaloisGroup.of_isFractionRing\", \"Ideal.instMulActionAlgEquivElemPrimesOver\", \"algebraMap_galRestrict_apply\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"Algebra.isInvariant_of_isGalois\", \"coe_galRestrict_apply\"], \"digest\": \"7e3bee6711ab57ba\"}. Read project WeilConjectures/Mathlib/RingTheory/Invariant/Profinite.lean:62-108 (no sorry in these declarations); quotient lifting there is not fraction-field lifting. Read Mathlib/RingTheory/Invariant/Profinite.lean:39-64,175-179.",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-group normalization results require finite extensions; profinite invariant-ring results need the continuous invariant-ring setup and localization proved in this split"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-inertia-restriction-surjective",
@@ -75,5 +177,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-galois-prime-residue-lifting",
+  "worker": "stage1",
+  "summary": "Kept both clauses and all hypotheses. Proved continuity of the restricted Galois action and the fixed-ring identification explicitly; used generic profinite invariant-ring theorems for prime conjugacy and quotient automorphism lifting, with a full base-localization and residue-fraction-field comparison. Created two Mathlib leaves for the general profinite invariant-ring package and finite-group inverse-limit topology. No project declaration gives both item clauses, and the project quotient-lifting theorem alone does not give fraction-field lifting.",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions: lisse extension at infinity versus trivial inertia; the Galois prime and residue tools needed through the existing inertia-restriction-surjective chain. This item is below the unit conventions and changes no chapter/unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-b11eabeea",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-b11eabeea (reviewer sub-agent of L); spot-checked: Read Stacks 0BRK (more-algebra.tex 32777-32865): the item keeps (1) and the surjectivity part of (2) with the same hypotheses; statement unchanged and not weakened. Both new nodes are statement-only Mathlib leaves that I checked against the pinned source. lem-dl-a1-profinite-invariant-ring-primes is RingTheory/Invariant/Profinite.lean 39-44/49/61/175: same hypotheses (compact, totally disconnected topological group G, discrete B, continuous action, IsInvariant = B^G=A), one declaration per clause, no maximality/domain/finiteness. lem-dl-a1-finite-group-limit-profinite is ProfiniteGrp/Basic.lean 80-86/223-227/317-321/327-328/380/385; true, and its directed-set citation is defined by the cited node. Duplicate search (rg -L over all chapters for 0BRK/0BMJ/one-orbit, profinite+prime, Krull+compact, inverse limit+finite group) found only finite-group versions (lem-exc-finite-galois-prime-residue-lifting, finite-invariant-quotient-normal-action), lem-galois-aut-profinite (functor Aut) and krull-finite-limit (no compactness); no duplicate, and neither new node restates an item clause. Steps checked: step 1 krull-finite-limit + topology leaf; step 2 restriction, orbit-map continuity on discrete S, fixed-field node with L=F, normality gives S^G=R; step 3 leaf transitivity gives (1); step 4 localization T^{-1}S inside E with kernel prime Q, Q∩S=s, Q∩A=pA, action and B^G=A (elementary, checked); step 5 localization-quotient node twice, then integral domain over field A/P is a field, so B/Q = Frac(S/s); the localization is genuinely needed because Aut κ(s) need not preserve S/s; step 6 leaf lifting, contraction gives g(s)=s, induced action equals α. Edge cases: E=F, R a field, s=0, non-maximal and inseparable residue cases. No SGA; all off-unit inputs have status mathlib, so no tool_uses. Project Lean quotient-lifting decls do not state the item exactly. No fixes."
  }
 }

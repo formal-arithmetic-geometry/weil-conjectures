@@ -22527,3 +22527,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:27 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 13:27 L: returned deliver/NU/def-per-support-condition (reviewer RETURN: B/C: the item cites a dropped route node and the delivery gives no justification at any step (the definition has no step)
 - 13:28 L: merged deliver/NS/lem-sfb-tame-pair-proper-generators (reviewer PASS; first push; new nodes: 2); claim not held by NS: not your claim
+- 13:28 L: merged deliver/Q75/lem-dl-a1-galois-prime-residue-lifting (reviewer PASS; first push; new nodes: 2)
