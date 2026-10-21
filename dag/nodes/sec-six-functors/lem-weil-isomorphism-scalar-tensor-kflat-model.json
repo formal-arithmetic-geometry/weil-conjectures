@@ -20,9 +20,119 @@
   "def-weil-integral-scalar-extension",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j_W:R_W\\to S_W$ for the coefficient map, characterized by $\\pi^L_{W,m}j_W=(\\iota_m)_W\\pi^E_{W,m}$. The maps $\\iota_m$ and their transition compatibility are supplied by [def-weil-integral-scalar-extension]; the limit and its coordinate projections are those of [def-pur-sheaf-inverse-limit]. We first check $c_Lg^{-1}(j_Y)=j_Xc_E$. After composing with $\\pi^L_{X,m}$, the left side is\n$$c^g_{A_{L,m}}g^{-1}((\\iota_m)_Y)g^{-1}(\\pi^E_{Y,m})=(\\iota_m)_Xc^g_{A_{E,m}}g^{-1}(\\pi^E_{Y,m})=(\\iota_m)_X\\pi^E_{X,m}c_E,$$\nwhich is the $m$-th projection of the right side. The first equality is naturality in the coefficient ring of [lem-weil-proetale-isomorphism-inverse-image](3), and the second is the defining projection equation for $c_E$ in [def-weil-inverse-image-pullback-comparison]. Equality of all coordinate maps into the limit proves the assertion. The same naturality also gives $(\\iota_m)_Xc^g_{A_{E,m}}=c^g_{A_{L,m}}g^{-1}((\\iota_m)_Y)$.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB and 03CO (limits); naturality of constant-coefficient inverse image as in the cited node; agent coordinate calculation for the completed coefficient map."
+   }
+  },
+  {
+   "text": "Regard $(g^{-1},c_E)$ as a morphism of ringed topoi from $(X_{\\mathrm{proet}},R_X)$ to $(Y_{\\mathrm{proet}},R_Y)$. Its module pullback is $g^{-1}P\\otimes_{g^{-1}R_Y}R_X$, canonically $G_EP$ since $c_E$ is invertible [def-weil-inverse-image-pullback-comparison]. Apply the flat-term K-flat preservation clause of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $P$. It gives that $G_EP$ is K-flat with flat terms. Apply [lem-pur-kflat-change-of-rings] to $R_Y\\to S_Y$ and $P$, and to $R_X\\to S_X$ and $G_EP$. It gives precisely that $Q=P\\otimes_{R_Y}S_Y$ and $Z=G_EP\\otimes_{R_X}S_X$ are K-flat with flat terms over $S_Y$ and $S_X$. No flatness of either coefficient map is a hypothesis of these cited statements.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, specialized first to (g^{-1},c_E) and then to the two identity-topos coefficient maps."
+   }
+  },
+  {
+   "text": "In each degree apply the change-of-rings clause of [lem-pur-isomorphism-inverse-image-tensor-hom] to the ring sheaf $R_Y$, its algebra $S_Y$, and $P^n$. Its inverse tensor comparison, after transporting the two rings by $c_E,c_L$, gives\n$$b_P:G_EP\\otimes_{R_X}S_X\\xrightarrow{\\sim}G_L(P\\otimes_{R_Y}S_Y).$$\nThe coefficient identity in Step 1 identifies the balancing actions, so these transported tensor products are over exactly $R_X$ and $S_X$. On local sections the comparison is $g^{-1}p\\otimes c_L(g^{-1}s_0)\\mapsto g^{-1}(p\\otimes s_0)$, by the local formula of the cited tensor comparison. In particular it is $S_X$-linear. Naturality in $P^n$ makes these maps commute with $d_P^n$ and with every chain map $P\\to P'$. The coefficient complex $S_Y$ is concentrated in degree zero, so the total-complex differential of [def-pc-tensor-complex-sheaves] is just $d_P\\otimes1$. Thus the degreewise isomorphisms form the stated natural isomorphism of complexes.",
+   "uses": [
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, with its generator formula; homology.tex Tag 012Z for the total-complex convention; agent transport along c_E,c_L."
+   }
+  },
+  {
+   "text": "Fix $m$ and abbreviate $B_{F,W,m}$ to $B_{F,W}$ and $c^g_{A_{F,m}}$ to $c_{F,m}$. The same tensor comparison, with the coefficient projections in [def-weil-inverse-image-pullback-comparison], identifies $G_E(P\\otimes_{R_Y}B_{E,Y})$ with $G_EP\\otimes_{R_X}B_{E,X}$. Reassociate after extension along $(\\iota_m)_X$ by the mutually inverse maps\n$$(y\\otimes a)\\otimes t\\mapsto y\\otimes\\iota_m(a)t,\\qquad y\\otimes t\\mapsto(y\\otimes1)\\otimes t.$$\nThey respect the balancing relations because $R_X\\to B_{L,X}$ factors through $B_{E,X}$ by Step 1. Consequently the finite comparison $b_{P,m}$ has formula\n$$g^{-1}(p\\otimes a)\\otimes t\\longmapsto g^{-1}\\bigl(p\\otimes(\\iota_m)_Y(a)c_{L,m}^{-1}(t)\\bigr).$$\nHere and below inverse images of local scalars are understood. Its inverse sends $g^{-1}(p\\otimes u)$ to $g^{-1}(p\\otimes1)\\otimes c_{L,m}(g^{-1}u)$. The two composites are identities by balancing and the finite coefficient identity of Step 1. These formulas define maps of sheaf tensor products [def-pur-sheaf-tensor-product]: they respect restrictions and balanced additivity before sheafification. They commute with $d_P\\otimes1$, giving the required finite isomorphism of complexes.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); explicit balanced reassociation and finite coefficient calculation."
+   }
+  },
+  {
+   "text": "For $y=g^{-1}p$ and $s=c_L(g^{-1}s_0)$ the upper-left vertical map is\n$$y\\otimes s\\longmapsto g^{-1}(p\\otimes1)\\otimes\\pi^L_{X,m}(s).$$\nStep 4 then sends it to $g^{-1}(p\\otimes\\pi^L_{Y,m}(s_0))$, using $\\pi^L_{X,m}c_L=c_{L,m}g^{-1}(\\pi^L_{Y,m})$ from [def-weil-inverse-image-pullback-comparison]. Applying $b_P$ first and the upper-right quotient map second gives the same expression. Local tensors generate the presheaf tensor product and hence determine maps out of its sheafification [def-pur-sheaf-tensor-product], so the square commutes. For transitions let $q_F:B_{F,W,m+1}\\to B_{F,W,m}$. Starting with $g^{-1}(p\\otimes a)\\otimes t$ at level $m+1$, both paths give\n$$g^{-1}\\bigl(p\\otimes\\iota_m(q_Ea)c_{L,m}^{-1}(q_Lt)\\bigr).$$\nIndeed $q_L\\iota_{m+1}=\\iota_mq_E$ by [def-weil-integral-scalar-extension], and $q_Lc_{L,m+1}=c_{L,m}g^{-1}(q_L)$ by [lem-weil-proetale-isomorphism-inverse-image](3). This proves transition compatibility also when the extension is ramified; the inclusion $\\varpi_E^m\\mathcal O_L\\subset\\varpi_L^m\\mathcal O_L$ used to define $\\iota_m$ is sufficient.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sheafified tensor products; agent calculation with the defining coefficient projection equations and the same-index quotient maps."
+   }
+  },
+  {
+   "text": "Let $K$ be any complex representing the given derived object. Choose a flat-term K-flat resolution $P\\to K$ using [lem-pc-kflat-resolution]. The completed-coefficient inverse-image module functor is exact and preserves quasi-isomorphisms by the Structure isomorphism paragraph of [def-weil-inverse-image-pullback-comparison]. Hence $G_EP\\to G_EK$ is a quasi-isomorphism and, by Step 2, a flat-term K-flat resolution. By [lem-pur-derived-change-of-rings](2), $Q$ represents $C_YK$ and $Z$ represents $C_XG_EK$. The exact functor $G_L$ carries the representative $Q$ to a representative of $G_LC_YK$. Localizing the complex isomorphism $b_P$ therefore gives an isomorphism $b_K:C_XG_EK\\to G_LC_YK$. The cited resolution and derived change-of-rings results are unbounded and have no derived-completeness or constructibility assumption.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YY (lemma-derived-base-change); ordinary derived coefficient extension, not completed pullback."
+   }
+  },
+  {
+   "text": "For a chain map $a:P\\to P'$ between flat-term K-flat complexes the generator formula of Step 3 gives the strict equation\n$$b_{P'}(G_Ea\\otimes1)=G_L(a\\otimes1)b_P.$$\nThese additive termwise functors carry a chain homotopy $h$ to $G_Eh\\otimes1$ and $G_L(h\\otimes1)$, respectively; the identity $a-a'=dh+hd$ is preserved. Thus the equation is natural on the homotopy category. For a quasi-isomorphism $a$ both vertical maps become invertible: $G_Ea$ is a quasi-isomorphism by exactness [def-weil-inverse-image-pullback-comparison], its endpoints are K-flat by Step 2, and coefficient extension preserves quasi-isomorphisms between K-flat complexes [lem-pur-derived-change-of-rings](1); the same applies to $a$ followed by the exact $G_L$. The equivalence $W_{R_Y}^{-1}\\mathcal P_{R_Y}\\simeq D(R_Y)$ of [lem-weil-pbc-site-derived-tensor-descent] now descends this natural isomorphism. Explicitly, naturality for an inverted quasi-isomorphism follows by multiplying the displayed equality by its two invertible images, and then for every composite of ordinary maps and inverted quasi-isomorphisms. The descended component is the $[b_P]$ of Step 6. Applying the same equality to the canonical comparison between any two K-flat representatives shows that these components agree under the canonical representative identifications of [lem-pur-derived-change-of-rings](2). This proves naturality in $K$ and independence of the resolution.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7D (lemma-factor-through-K-flat) and 06YT, and the construction preceding Tag 06YU (definition-derived-tor); localization of the explicitly natural chain comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 06YS, 06YT, 0G7D and 06YY, together with sites-modules.tex Tag 03EL. The coefficient projection and quotient calculations are agent calculations; Bhatt–Scholze Lemma 6.5.9(4) is context only."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +161,52 @@
    "results": "AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
    "date": "2026-10-21",
    "verdict": "no match: the results do not give the completed-ring inverse-image K-flat model, its derived tensor comparison and quotient compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(tensor|[kK]Flat)|([kK]Flat|tensor).*inverseImage",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ring flatness, presheaf tensor, or free-sheaf pullback ingredients; none states the completed-coefficient tensor model with quotient compatibility and derived descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor change of coefficients comparison for inverse image of sheaves is compatible with reduction modulo powers of uniformizers and descends from K-flat complexes to unbounded derived categories",
+   "results": "8 hits: Module.FaithfullyFlat.instTensorProduct, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.baseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, tensorKaehlerQuotKerSqEquiv_symm_tmul_D, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ring flatness, presheaf tensor, or free-sheaf pullback ingredients; none states the completed-coefficient tensor model with quotient compatibility and derived descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ring flatness, presheaf tensor, or free-sheaf pullback ingredients; none states the completed-coefficient tensor model with quotient compatibility and derived descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along an isomorphism of ringed sites commutes with extension of completed coefficient rings and preserves flat-term K-flat complexes",
+   "results": "8 hits: RingHom.Flat.respectsIso, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.FormallySmooth.respectsIso, RingHom.FaithfullyFlat.respectsIso, CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Flat.instResLE",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ring flatness, presheaf tensor, or free-sheaf pullback ingredients; none states the completed-coefficient tensor model with quotient compatibility and derived descent"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|isKFlat|KFlat|kFlat",
+   "results": "0 hits in Mathlib/Algebra/Homology: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ring flatness, presheaf tensor, or free-sheaf pullback ingredients; none states the completed-coefficient tensor model with quotient compatibility and derived descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat-term K-flat complex of sheaves remains K-flat after pullback and extension of scalars; the tensor inverse image comparison commutes with coefficient quotient maps",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ring flatness, presheaf tensor, or free-sheaf pullback ingredients; none states the completed-coefficient tensor model with quotient compatibility and derived descent"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-isomorphism-comparison-scalar-extension",
@@ -76,5 +228,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "worker": "stage1",
+  "summary": "Gave the completed-ring coefficient identity, transported the general K-flat pullback theorem, constructed b_P from the existing sheaf-tensor comparison, computed the finite reassociation and quotient/transition squares on generators, and descended by the existing K-flat localization theorem. The statement is unchanged. No new nodes are needed.",
+  "blueprint": "The first cohomology-transport arrows of def-weil-global-geometric-frobenius (the two displayed composites): coefficient-compatible ordinary inverse image models, as isolated by the parent lem-weil-isomorphism-comparison-scalar-extension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Use the generic exact site equivalence and naturality of constant coefficient structure maps; this auxiliary tensor-model item does not replace any f-shriek preservation step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Use only its general preservation of flat-term K-flat complexes under ringed-topos pullback, specialized to (g^{-1},c_E). No local unit node gives this homological tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Use flat-term K-flat preservation under arbitrary sheaf-ring scalar extension for Q and Z."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Use its ordinary sheaf tensor comparison and generator formula, with arbitrary source ring sheaf; no completed or constructible comparison is substituted."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Use existence of unbounded flat-term K-flat resolutions on a ringed site."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Use quasi-isomorphism preservation on K-flat complexes and canonical ordinary derived scalar-extension models."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Use its first clause, the equivalence between the localization of flat-term K-flat homotopy complexes and the ordinary unbounded derived category, to descend the natural b_P."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-cdd733451",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-cdd733451 (reviewer sub-agent of L); spot-checked: This is the first split of the statement-only child that Q99 created in its re-split of lem-weil-isomorphism-comparison-scalar-extension (Q99 e558ec45 PASS). The item has no repair note of its own; live holds it unsplit, so the delivery is not superseded. Compared with live, the statement, stmt_deps and blueprint are unchanged and there are no new nodes. proof_deps equals the union of the uses, every cited id exists and is unmerged, there is no cycle and no SGA. All trf nodes in the closure were already in the closure of the unchanged stmt_deps, so there is no batch-5 delta. I re-checked all 7 steps against the statements they cite. Step 1: I recomputed coordinatewise that c_L g^{-1}(j_Y) = j_X c_E, using the defining projection equation in the def-weil-inverse-image-pullback-comparison Structure paragraph and lem-weil-proetale-isomorphism-inverse-image(3). Step 2: the K-flat preservation clause of lem-weil-pbc-ringed-topoi-derived-tensor-pullback applies to (g^{-1}, c_E) as an exact equivalence, and lem-pur-kflat-change-of-rings holds for an arbitrary ring map. Step 3: the change-of-rings clause and local formula of lem-pur-isomorphism-inverse-image-tensor-hom hold for any ring sheaf. Steps 4 and 5: I checked the reassociation inverse, the quotient square and the q_L/q_E transitions on generators, also for ramified E⊂L. Steps 6 and 7: derived change of rings (1)/(2), exactness of G_F and the W^{-1}P≃D(R) clause of lem-weil-pbc-site-derived-tensor-descent are used correctly. Edge cases E=L, g=id and P=0 are fine. The candidate duplicates (lem-sfb-kflat-scalar-comparison-normalization, lem-sfb-scalar-inverse-image-tower-diagram, lem-pur-coefficient-pullback-comparison) are untransported or general, so they are not duplicates. Stacks labels 03EL/0G7E/06YS/06YT/0G7D/06YY are verified. I accept the declared tool uses: the ringed-topoi pullback, the K-flat localization, the tensor-hom and the K-flat resolution nodes. Advisory: the proof is 7154 characters with 0 new nodes on a child of a length-driven re-split. That is acceptable for a first split (Q70 precedent), but a later re-split note could move Steps 4–5 into a separate node."
  }
 }
