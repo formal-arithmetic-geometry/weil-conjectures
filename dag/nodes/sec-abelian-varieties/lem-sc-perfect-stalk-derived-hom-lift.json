@@ -44,7 +44,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the exact open stalk functor to iG and iH and compose its derived localization factorization with the restriction-stalk-extension complex isomorphism. Restriction of scalars along the invertible stalk ring map cancels extension of scalars by the adjunction unit. This constructs isomorphisms a:Q(S_U P) to Q(G_x) and b:Q(S_U Q) to Q(H_x).",
+   "text": "Use the source definition perfectLocalModelStalkComparison to construct the canonical isomorphisms a:Q(S_U P) to Q(G_x) and b:Q(S_U Q) to Q(H_x) from iG and iH. Its complete construction applies the exact open stalk functor, its derived factorization, the restriction-stalk-extension comparison, and the invertible stalk-ring restriction/extension adjunction.",
    "uses": [
     "def-sc-open-module-stalk-functor",
     "lem-pc-open-restriction-stalk-extension-iso"
@@ -67,7 +67,7 @@
    "elementary": true
   },
   {
-   "text": "Naturality of S.mapDerivedCategoryFactors gives Q(S(f)) as its inverse factor on the source followed by S.mapDerivedCategory(g) followed by its factor on the target. Substitute the descent equation. Choose cG=cP followed by a and cH=cQ followed by b; associativity gives exactly the requested equality.",
+   "text": "Naturality of S.mapDerivedCategoryFactors gives Q(S(f)) as its inverse factor on the source followed by S.mapDerivedCategory(g) followed by its factor on the target. Substitute the descent equation. The source theorem uses the canonical cG=cP followed by a and cH=cQ followed by b, so associativity proves its equality. These canonical comparisons witness the existential comparisons of the original node assertion. The source theorem does not need hU; it therefore implies that assertion on every affine U. The existing source parent already calls this stronger theorem and the dependency node remains in place.",
    "uses": [],
    "elementary": true
   }
@@ -82,7 +82,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "M3 Lean reduction of Tag 09RE affine lifting route: derived open-stalk descent separated from proved stalk comparisons and chain representatives; repaired duplicate helper by generalizing to arbitrary zero-morphism-preserving functors with finite-free comparisons; B5 retires the duplicate open-stalk descent module in favor of the proved source theorem, explicitly constructs its canonical comparison isomorphisms cP and cQ, and leaves the consumer signature and dependency edges unchanged."
+  "place": "Q2 retirement of the listed zero-hole Sheaf duplicate in favor of the completely proved source theorem. The source proof follows the same stalk comparison, derived Hom descent, affine chain representative and naturality steps. Its canonical comparisons witness the original existential comparisons, and its omission of hU strengthens the assertion; checked by a compiling compatibility proof of the entire original signature. All proof dependencies and the unit route are retained."
  },
  "mathlib_searches": [
   {
@@ -115,11 +115,11 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectStalkDerivedHomLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectStalkDerivedHomLift.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectStalkDerivedHomLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectStalkDerivedHomLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_stalk_hom_lift",
-  "statement": "theorem exists_affine_perfect_stalk_hom_lift (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ W : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))] (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))] (G H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U) (P Q : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q) (iG : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P) (iH : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj H) ≅ DerivedCategory.Q.obj Q) (t : DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (ComplexShape.up ℤ)).obj G) ⟶ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (ComplexShape.up ℤ)).obj H)) : ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U), let T := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ) let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤ ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩ letI : S.PreservesZeroMorphisms := AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩ ∃ (cG : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj P)) ≅ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (.up ℤ)).obj G)) (cH : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj Q)) ≅ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (.up ℤ)).obj H)) (f : T.obj P ⟶ T.obj Q), DerivedCategory.Q.map ((S.mapHomologicalComplex (.up ℤ)).map f) = cG.hom ≫ t ≫ cH.inv",
+  "statement": "theorem exists_affine_perfect_stalk_hom_lift\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (G H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (U : X.Opens) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    (iG : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P)\n    (iH : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj H) ≅ DerivedCategory.Q.obj Q)\n    (t : DerivedCategory.Q.obj\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj G) ⟶\n      DerivedCategory.Q.obj\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj H)) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let T := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤\n          ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩\n      letI : S.PreservesZeroMorphisms :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩\n      let c : T ⋙ S.mapHomologicalComplex (.up ℤ) ≅\n          (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ) :=\n        Functor.mapHomologicalComplexCompIso\n          (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)\n      let cG := DerivedCategory.Q.mapIso (c.app P) ≪≫\n        perfectLocalModelStalkComparison X x U hxU G P iG\n      let cH := DerivedCategory.Q.mapIso (c.app Q) ≪≫\n        perfectLocalModelStalkComparison X x U hxU H Q iH\n      ∃ f : T.obj P ⟶ T.obj Q,\n        DerivedCategory.Q.map\n          ((S.mapHomologicalComplex (.up ℤ)).map f) =\n            cG.hom ≫ t ≫ cH.inv",
   "branch": "sheaf-dag",
   "by": "P2",
   "date": "2026-10-13"
@@ -137,12 +137,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-4f401",
-  "group": "B5",
+  "reviewer": "C-79528",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261021T001104-L-1369547",
+  "landing": "20261021T004838-L-1794227",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf PerfectOpenStalkDerivedHomDescent stub + node lean record (existing:true) vs live WeilConjectures twin (signature verbatim, stronger: no hU/hQ, canonical cP/cQ) and retire-items.tsv row 1353; adapted sole consumer PerfectStalkDerivedHomLift diffed vs live (only forced lines) and compiled; axioms clean"
+  "note": "independent cc review: withdrawn Sheaf PerfectStalkDerivedHomLift stub + node lean record (existing:true) vs live WeilConjectures twin (statement verbatim in source; stronger: no hU, canonical cG/cH, compat proof of old signature compiles, axioms clean); retire-items.tsv row 2387; no importers"
  },
  "lean_audit": {
   "master": {
