@@ -17,7 +17,10 @@
   "def-constructible-stratification",
   "def-weil-geometric-point",
   "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-norm-continuous-monodromy-data",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-condensed-qbar-coefficient-construction"
  ],
  "proof": [
   {
@@ -567,5 +570,61 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a3b193b24 (reviewer sub-agent of L); spot-checked: I read the whole delivery (item, eleven steps, no new nodes, statement unchanged), every cited statement, and HRS Example 3.1 and Lemma 4.1 with its proof (p.5, p.8). No SGA is used. The mathematics is correct. Fibres are exact because Spec of an algebraically closed field is w-contractible. Fibres are finite-dimensional because the stratum factorization holds (I_y in m_y) and covers split over the point. Sheaf conservativity holds: the morphism is a matrix of continuous functions with nowhere-zero determinant, and the adjugate inverse is continuous on F^x. The passage from strata to Z goes through a good stratification ordered by closure, using the quasi-compact open-closed sequence. Derived conservativity uses the finite models of the H^q of source and target only. The scalar comparison takes a K-flat resolution and uses exactness of abstract F'⊗_F, so it needs no flatness or completeness. Small cases checked: Z empty, rank 0, one point, non-complete F. Batch 5: lem-trf-point-sheafification-final is accepted. Its closure is definitions plus lem-trf-point-cover-identity (covering sieves of Spec K contain id), a generic site fact that is not trace-formula content. Fixes: (1) C4: step 1 derived the ring-object iso p_Z^*C_F ≅ C(|U|,F) from the set-valued realization node, so I added lem-sfb-continuous-ring-universe-realization (no cycle, adds no trf/pod node to the closure). (2) C8: nine generic off-route tools (det-pe-wc-sections-exact, det-prop-sfb-module-pullback-exact-main, lem-trf-point-sheafification-final, det-pe-wcb-clopen-partition, lem-sfb-noetherian-good-stratification-refinement, lem-sfb-modobj-forget-left-exact, lem-sfb-modobj-forget-right-exact, lem-sfb-internal-extension-inverse-image, lem-sfb-continuous-ring-universe-realization) were not declared, so I declared them in split_report.tool_uses. (3) source.place still pointed to an absent report.md; I corrected it. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleNormedGeometricFibres",
+  "declaration": "AlgebraicGeometry.ProEtale.normedFibreScalarDerived_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normedPointSections",
+   "AlgebraicGeometry.ProEtale.normedPointSections_laxMonoidal",
+   "AlgebraicGeometry.ProEtale.normedPointScalar",
+   "AlgebraicGeometry.ProEtale.normedPointScalar_isMonHom",
+   "AlgebraicGeometry.ProEtale.normedModuleInverseImage",
+   "AlgebraicGeometry.ProEtale.normedModuleInverseImageIso",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_exact",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_additive",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_limits",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_colimits",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_symmetricMonoidal",
+   "AlgebraicGeometry.ProEtale.normedDerivedGeometricFibre",
+   "AlgebraicGeometry.ProEtale.normedDerivedGeometricFibre_tExact",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_finiteDimensional",
+   "AlgebraicGeometry.ProEtale.normedGeometricFibre_reflectsIso",
+   "AlgebraicGeometry.ProEtale.normedDerivedGeometricFibre_reflectsIso",
+   "AlgebraicGeometry.ProEtale.normedFibreRestrictionUnderlying_eq",
+   "AlgebraicGeometry.ProEtale.normedFibreRestriction_existsUnique",
+   "AlgebraicGeometry.ProEtale.normedFibreRestrictionIso",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarComparison",
+   "AlgebraicGeometry.ProEtale.normedInternalScalarExtension_additive",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarComparison_naturality",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarTransformation",
+   "AlgebraicGeometry.ProEtale.normedVectorScalarExtension_additive",
+   "AlgebraicGeometry.ProEtale.normedVectorScalarExtension_colimits",
+   "AlgebraicGeometry.ProEtale.normedVectorScalarExtension_limits",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarComparison_unit",
+   "AlgebraicGeometry.ProEtale.normedDerivedFibreRestriction",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarDerivedSource",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarDerivedTarget",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarTarget_additive",
+   "AlgebraicGeometry.ProEtale.NormedFibreScalarDerivedNormalized",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarDerived_existsUnique",
+   "AlgebraicGeometry.ProEtale.normedFibreScalarDerivedIso"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleNormedGeometricFibres.lean",
+  "statement": "theorem normedFibreScalarDerived_existsUnique : ∃! δ : normedFibreScalarDerivedSource i κ x ≅ normedFibreScalarDerivedTarget i hi κ x, NormedFibreScalarDerivedNormalized i hi κ x δ",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses are named in lean.declarations. The concrete inverse-image encoding is canonically isomorphic to the recorded CondensedRing.upperStar; the scalar comparison is the adjoint of insertion of one and its derived form is uniquely characterized on K-flat representatives. Symmetric monoidality is expressed after the canonical equivalence to modules over ULift F, so the standard Mathlib tensor has matching ring/module universes. Derived vector categories are arbitrary explicit ambient localization instances; no completeness, condensed flatness or constructibility of unrestricted inputs is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92b4495e0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read item, all 13 stmt_deps and their owner modules, the delivered module and report. Only change vs live: 3 added stmt_deps; no dep edits; not dropped, not superseded. Theorem stmt_dep lem-weil-pbc-condensed-field-continuous-realization: item uses condensedFieldContinuousMapIso = .choose of its ∃! (canonical iso the theorem constructs) → genuine dependence, PASS on that point. Clauses match the node: real fibre construction (inverse image ≅ recorded CondensedRing.upperStar, terminal sections, constants via canonical realization); exact/additive; Nonempty braided + Φ(F_Z)≅F; mapDerivedCategory t-exact; finite-dim on Noetherian Z with FiniteLocallyClosedStratification + constructible strata + local models; sheaf and derived conservativity on constantModelBoundedConstructible source/target only; restriction iso pinned to identity on underlying groups; scalar comparison = adjunct of insertion-of-one (a⊗m↦a⊗m) with unit equation; derived ∃! iso in D(Vect_F') pinned on K-flat representatives through the left-derived counit (uniqueness and existence sound). Edge cases fine (empty Z, rank 0, non-complete F, i=id, universes). Docstrings/sorry/statement-verbatim gates OK. No compile (no file changed); worker reports 20.3/18.9 s clean. Advisories: Braided and derived-restriction Nonempty not pinned; constructibility predicates owned by sk-def-sfb-constructible, not in stmt_deps; ordinary missing from def-weil-pbc-condensed-qbar-coefficient-construction declarations."
  }
 }
