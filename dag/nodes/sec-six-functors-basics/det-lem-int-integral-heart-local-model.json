@@ -57,12 +57,11 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathcal O_E$, $\\pi=\\pi_E$, $k=R/(\\pi)$ and $B_T=\\mathcal O_{E,T}$. Use the Noetherian scheme setting and the identification $B_T=\\varprojlim_n(R/\\pi^n)_T$ in [sk-lem-integral-models]. The coefficient hypotheses for the stratified-perfect theorem applied in step 2 hold with $A=R$ and $I=(\\pi)$: [lem-weil-l-adic-extension-integers-dvr] makes $R$ a local PID, hence Noetherian since each ideal has one generator. Here is also the elementary completeness check, rather than an unstated change of coefficient topology. For a compatible sequence of residue classes choose representatives $a_n\\in R$. For $m\\ge n$, $a_m-a_n\\in\\pi^nR$, hence $|a_m-a_n|_E\\le|\\pi|_E^n\\to0$. By [lem-weil-l-adic-extension-complete] they converge to $a\\in E$. The nonarchimedean inequality of [lem-weil-l-adic-extension-absolute-value] shows $a\\in R$ and $a-a_n\\in\\pi^nR$: both assertions follow by passing to the limit in the corresponding closed-ball inequality, using the DVR factorization to identify the ball of radius $|\\pi|_E^n$ with $\\pi^nR$. Thus $R\\to\\varprojlim R/\\pi^n$ is onto. It is injective because $|a|_E\\le|\\pi|_E^n$ for all $n$ forces $a=0$.",
+   "text": "Put $R=\\mathcal O_E$, $\\pi=\\pi_E$ and $B_T=\\mathcal O_{E,T}=\\varprojlim_n(R/\\pi^n)_T$. The Noetherian scheme setting and coefficient identification are [sk-lem-integral-models]. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a local PID with maximal ideal $\\pi R$, hence Noetherian (each ideal has one generator). By [lem-sfb-integers-profinite-tower](1), the reduction map $R\\to\\varprojlim_nR/\\pi^n$ is a ring isomorphism, so $R$ is $(\\pi)$-adically complete.",
    "uses": [
     "sk-lem-integral-models",
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-l-adic-extension-absolute-value"
+    "lem-sfb-integers-profinite-tower"
    ],
    "elementary": false,
    "source": {
@@ -71,11 +70,11 @@
    }
   },
   {
-   "text": "The meaning of $K\\in\\Dbc(X,\\mathcal O_E)$ is boundedness with constructible cohomology in [sk-def-sfb-constructible]. Apply (1)$\\Rightarrow$(2) of [lem-sfb-integral-cohomological-adic-criterion] to this $B_X$-complex. It gives locally derived $(\\pi)$-completeness and an isomorphism $K\\otimes^L_{B_X}k_X\\simeq\\nu_X^*C$, with $C$ bounded étale constructible of finite Tor amplitude. These are exactly condition (a) of [lem-sfb-adic-stratified-perfect], not just a residue sheaf constancy assumption. Its implication (a)$\\Rightarrow$(b), with the ring hypotheses checked in step 1, gives a finite constructible locally closed stratification of $X$ and on a pro-étale cover of each stratum $S$ an isomorphism $K|_S\\simeq B_S\\otimes_R P^\\bullet$ for a bounded complex of finite projective $R$-modules. The theorem itself identifies the restricted coefficient with $B_S$ and supplies the stratification and the scalar-ring complex. No claim that arbitrary maps between completed free sheaves have constant entries is used.",
+   "text": "By [lem-sfb-integral-cohomological-adic-criterion](1)$\\Rightarrow$(2), $K$ is locally derived $(\\pi)$-complete and its residue reduction is pulled back from a bounded étale constructible complex of finite Tor amplitude. These are condition (a) of [lem-sfb-adic-stratified-perfect]. Apply (a)$\\Rightarrow$(b), with the ring and scheme hypotheses of step 1, to obtain strata and charts with $K|_U\\simeq B_U\\otimes_R P^\\bullet$ for bounded finite projective scalar complexes.",
    "uses": [
-    "sk-def-sfb-constructible",
     "lem-sfb-integral-cohomological-adic-criterion",
-    "lem-sfb-adic-stratified-perfect"
+    "lem-sfb-adic-stratified-perfect",
+    "sk-lem-integral-models"
    ],
    "elementary": false,
    "source": {
@@ -84,10 +83,9 @@
    }
   },
   {
-   "text": "For each term of $P^\\bullet$ from step 2, finite projectivity gives a split surjection $R^r\\twoheadrightarrow P^i$: choose finitely many generators, and split this surjection by projectivity. Thus $P^i$ embeds into $R^r$; since $R$ is a domain by [lem-weil-l-adic-extension-integers-dvr], it is torsion-free. Apply [lem-sc-dvr-fg-torsionfree-free] to obtain a finite $R$-basis of each $P^i$. There are only finitely many nonzero terms. In these bases each $R$-linear differential is a finite matrix over $R$; conjugating consecutive differentials preserves their zero composite. The resulting bounded finite free $R$-complex $M^\\bullet$ is isomorphic to $P^\\bullet$, so $B_S\\otimes_R M^\\bullet$ is the required local model in (1). This is freeness of modules over $R$, not a freeness or constancy assertion about projectors over the sheaf $B_S$.",
+   "text": "Apply [lem-sfb-dvr-projective-complex-matrix-model] to each scalar complex $P^\\bullet$ of step 2 over the DVR of step 1. It gives a bounded finite free matrix complex $M^\\bullet\\simeq P^\\bullet$ with the same support bounds. Termwise scalar extension carries this complex isomorphism to the chart, giving (1).",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sc-dvr-fg-torsionfree-free"
+    "lem-sfb-dvr-projective-complex-matrix-model"
    ],
    "elementary": false,
    "source": {
@@ -96,7 +94,7 @@
    }
   },
   {
-   "text": "Fix $q$. By [sk-def-sfb-constructible], $H^q(K)$ is already a constructible $B_X$-module sheaf. As a degree-zero complex it has only this cohomology sheaf, so it is bounded with constructible cohomology (the other sheaves are zero, with the zero finite constant model). It therefore belongs to $\\Dbc(X,\\mathcal O_E)$. Now [sk-lem-integral-models](2) says explicitly that objects of this $\\Dbc$ are derived complete, with derived completeness defined in its setup by the canonical isomorphism to the derived limit of reductions. Apply it to $H^q(K)[0]$. This proves derived completeness in the precise sense of [sk-def-pe-derived-completion] used here; no identification of that definition with local internal-Hom completeness is required here. This argument is independent of the local cohomology computation below and does not interchange cohomology and an inverse limit.",
+   "text": "By [sk-def-sfb-constructible], $H^q(K)[0]$ is bounded constructible: its other cohomology sheaves are zero, with zero finite constant model. Apply [sk-lem-integral-models](2) to this degree-zero object. It is derived complete in the canonical derived-limit sense of [sk-def-pe-derived-completion], proving the first assertions of (2).",
    "uses": [
     "sk-def-sfb-constructible",
     "sk-lem-integral-models",
@@ -109,12 +107,9 @@
    }
   },
   {
-   "text": "Use exactly the stratification and charts of steps 2–3. The exact inverse-image functor with its coefficient identification in [sk-prop-sfb-cartesian-coefficients] commutes with cohomology: it preserves the kernels and images defining cohomology, both for restriction to $S$ and for the pro-étale charts. On such a chart $U$ the constant-sheaf functor on $R$-modules is exact by [lem-weil-pbc-constant-module-section-properties](1). The completed coefficient $B_U=\\varprojlim_n(R/\\pi^n)_U$ is flat over the constant sheaf $\\underline R$ by [lem-weil-pbc-completed-constant-sheaf-reduction]. The composite functor $N\\mapsto B_U\\otimes_{\\underline R}\\underline N$ is therefore exact. Apply it to the cycles, boundaries and their short exact sequences in $M^\\bullet$ to obtain $H^q(K)|_U\\simeq B_U\\otimes_R H^q(M^\\bullet)$. This is the completed module $\\widehat{\\underline{H^q(M^\\bullet)}}$, computed by extension of scalars, not by commuting an inverse limit with cohomology. Finally $\\ker(d^q)\\subset M^q$ is finite by [lem-weil-pbc-noetherian-submodule-finite], since $R$ is Noetherian by step 1. Its quotient $\\ker(d^q)/\\operatorname{im}(d^{q-1})=H^q(M^\\bullet)$ is finite, because the images of a finite generating set generate any quotient. Together with step 4 this proves every assertion of (2), on the original strata of (1).",
+   "text": "Apply [lem-sfb-local-integral-perfect-model-cohomology] to $g:S\\hookrightarrow X$, each original chart $U$, and $P^\\bullet$ of step 2. It gives $H^q(K)|_U\\simeq B_U\\otimes_R H^q(P^\\bullet)$ with finitely presented scalar cohomology. The complex isomorphism $M^\\bullet\\simeq P^\\bullet$ of step 3 identifies their cohomology, giving $H^q(K)|_U\\simeq B_U\\otimes_R H^q(M^\\bullet)$ with finitely generated scalar cohomology. Together with step 4 this proves (2) on the original strata and charts.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-noetherian-submodule-finite"
+    "lem-sfb-local-integral-perfect-model-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -123,7 +118,7 @@
    }
   },
   {
-   "text": "Choose a finite cohomological interval $[a,b]$ for $K$. By the good-truncation formulas in [def-kun-truncations], the cohomology sheaves of $\\tau_{\\le q}K$ are $H^i(K)$ for $i\\le q$ and zero for $i>q$, and those of $\\tau_{\\ge q}K$ are $H^i(K)$ for $i\\ge q$ and zero for $i<q$. Each list vanishes outside $[a,b]$ and consists of constructible sheaves: this holds for $H^i(K)$ by hypothesis and for zero by its zero finite constant model. Thus both truncations are bounded with constructible cohomology, which is precisely membership in $\\Dbc(X,\\mathcal O_E)$ by [sk-def-sfb-constructible]. This proves (3) directly in $\\Dbc(X,\\mathcal O_E)$, without identifying it with a separately defined adic category.",
+   "text": "By [def-kun-truncations], the two good truncations retain $H^i(K)$ respectively for $i\\leq q$ and $i\\geq q$, and are zero elsewhere. Both lists vanish outside a finite interval and are constructible (including zero). By [sk-def-sfb-constructible] both truncations lie in $\\Dbc$, proving (3).",
    "uses": [
     "def-kun-truncations",
     "sk-def-sfb-constructible"
@@ -137,19 +132,15 @@
  ],
  "proof_deps": [
   "def-kun-truncations",
-  "lem-sc-dvr-fg-torsionfree-free",
   "lem-sfb-adic-stratified-perfect",
+  "lem-sfb-dvr-projective-complex-matrix-model",
+  "lem-sfb-integers-profinite-tower",
   "lem-sfb-integral-cohomological-adic-criterion",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-complete",
+  "lem-sfb-local-integral-perfect-model-cohomology",
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-noetherian-submodule-finite",
   "sk-def-pe-derived-completion",
   "sk-def-sfb-constructible",
-  "sk-lem-integral-models",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-lem-integral-models"
  ],
  "proof_origin": {
   "by": "agent",
@@ -219,15 +210,19 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-int-integral-heart",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-lem-int-integral-heart-local-model",
   "worker": "stage1",
-  "summary": "Repaired all three returned faults. Replaced the invalid constancy argument by the existing complete-local-ring stratified-perfect theorem after the category-correct integral criterion; specialized finite projective scalar modules to free modules explicitly. Derived completeness of H^q in the derived-limit sense is obtained by applying sk-lem-integral-models(2) to its constructible degree-zero object; the local H^q computation now cites coefficient flatness and exact restriction. Truncation membership follows directly from bounded constructible cohomology. No statement change or new nodes. Independent second reading made the standing scheme and coefficient hypotheses explicit in the opening; all three conclusions and proof steps are unchanged.",
-  "blueprint": "Steps 1–3 realize clause (1) using the genuine stratified local-structure theorem; steps 4–5 realize clause (2), with completeness and exact scalar extension separated; step 6 realizes clause (3) directly from the stated category definition. The original Tag 09C3 maps need not be constant (Stacks remark after 09C4), so that returned inference is removed.",
+  "summary": "Repair of R1 and R2: dropped the unused generalization duplicating the Q55 local perfect-model cohomology comparison; step 5 cites that existing node directly. Step 1 cites the existing O_E profinite-tower completeness node (reviewer FIX: replaces the sec-trace-formula restricted-quotient citation). Extracted the complete projective-to-free DVR basis construction, including scalar matrices, strict complex isomorphism and both support bounds, into one statement-only unsplit node. The parent is a short assembly; statement, statement dependencies and Lean record are unchanged. The prior proof/report/search history is retained in the sandbox archive.",
+  "blueprint": "Clause (1): existing adic completeness, cohomological criterion and stratified-perfect characterization plus the new bounded scalar matrix-coordinate lemma (steps 1–3). Clause (2): degree-zero constructibility/completeness and the existing Q55 comparison (steps 4–5). Clause (3): good-truncation formulas (step 6).",
   "tool_uses": [
    {
-    "node": "lem-sc-dvr-fg-torsionfree-free",
-    "why": "Generic module theorem makes the finite projective scalar-ring terms finite free after the written torsion-freeness argument."
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Clause (1) gives O_E = lim O_E/pi^n for the same uniformizer of def-weil-l-adic-coefficient-extension, the completeness hypothesis of the stratified-perfect theorem; replaces the batch-5-flagged sec-trace-formula citation (reviewer FIX)."
+   },
+   {
+    "node": "lem-sfb-local-integral-perfect-model-cohomology",
+    "why": "Existing generic cohomology comparison on a specified locally closed stratum and chart, with finite scalar cohomology; R1 requires this direct citation rather than a duplicate generalization."
    },
    {
     "node": "lem-sfb-adic-stratified-perfect",
@@ -238,36 +233,12 @@
     "why": "Supplies exactly the local internal-Hom derived completeness and bounded étale constructible finite-Tor residue data in condition (a) of the generic stratified-perfect theorem, starting with the item’s bounded constructible cohomology definition."
    },
    {
-    "node": "lem-weil-l-adic-extension-absolute-value",
-    "why": "Supplies the nonarchimedean inequality in that elementary completeness argument."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-complete",
-    "why": "Supplies completeness of E needed for the explicit elementary proof that its valuation ring is adically complete."
-   },
-   {
     "node": "lem-weil-l-adic-extension-integers-dvr",
     "why": "Supplies the local PID, domain and uniformizer facts for the coefficient hypotheses and the finite-free specialization; this unit contains no such valuation theorem."
    },
    {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Supplies flatness of the constant-to-completed coefficient map (Stacks Tag 093M), making the local cohomology computation exact."
-   },
-   {
-    "node": "lem-weil-pbc-constant-module-section-properties",
-    "why": "Generic exactness of constant module sheafification used before flat extension to completed coefficients (Stacks Tag 093J)."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-submodule-finite",
-    "why": "Generic Noetherian module finiteness supplies finite cycles in the bounded finite-free scalar complex."
-   },
-   {
     "node": "sk-lem-integral-models",
     "why": "Supplies the standing Noetherian setting, completed coefficient identification, and (2): an object of the item’s own bounded constructible category is derived complete in the explicitly stated derived-limit sense. Applied to H^q(K)[0]; no triangulated-category identification is used."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Supplies exact coefficient-compatible inverse image, so restriction to the strata and charts commutes with cohomology."
    }
   ]
  },
@@ -282,15 +253,17 @@
   "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-noetherian-submodule-finite",
   "sk-lem-integral-models",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-local-integral-perfect-model-cohomology"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q46-192066148",
-  "group": "Q46",
+  "reviewer": "NT-cc-Q71-efb90aa7b",
+  "group": "Q71",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-192066148 (reviewer sub-agent of L); spot-checked: I read the whole item, the unit and the blueprint statement and proof, and the statements of all 14 cited nodes. I also checked Bhatt–Scholze Definition 6.5.1, Example 6.5.2, Lemma 6.5.3 and Proposition 6.6.11 (with its proof), and Stacks Tag 093M (sites-modules.tex line 8261). The three conclusions match the blueprint word for word. The added opening fixes the chapter's standard setting, the same one used in sk-def-sfb-dc-setting and sk-lem-integral-models. It closes a statement that left X and E undefined and weakens nothing for the four nodes that cite this item; this is not a target node. Step 1: O_E is a DVR, hence Noetherian, local and π-adically complete; the elementary completeness proof is correct. Step 2: condition (1) of lem-sfb-integral-cohomological-adic-criterion uses the same constructibility as sk-def-sfb-constructible. Its condition (2) matches condition (a) of lem-sfb-adic-stratified-perfect with A=O_E and I=(π): the same local completeness notion and the same finite Tor amplitude. Going from (a) to (b) gives the strata and a finite projective scalar complex. This agrees with Bhatt–Scholze 6.6.11 and no longer assumes the Tag 09C3 differentials are constant. Step 3: a finite projective module over a domain is torsion-free, and lem-sc-dvr-fg-torsionfree-free then makes it free. Step 4: H^q(K)[0] lies in Dbc by definition, and sk-lem-integral-models(2) gives derived completeness in the derived-limit sense; this is not circular. Step 5: restriction is exact (sk-prop-sfb-cartesian-coefficients), taking constant sheaves is exact (Tag 093J), and B is flat over the constant sheaf (Tag 093M), so H^q of the local model is B⊗H^q(M); H^q(M) is finitely generated by Tag 00IK. Step 6: the good-truncation formulas give the result directly. Small cases checked: the empty scheme, a geometric point, O_E/π[0] modelled by the complex O_E --π--> O_E (torsion H^0), shifts, and truncation indices outside the range. There are no new nodes. No dependency path leads back to the item (I traversed 3119 nodes), and no SGA source is used. I accept the declared tool uses as generic black-box tools; none replaces a step of the unit's route. One fix: the source of step 4 named the Bhatt–Scholze PDF at a place that is not in that paper. I changed it to the blueprint proof, clause (2) Completeness, in fixes/dag/nodes/sec-six-functors-basics/det-lem-int-integral-heart-local-model.json. Only proof[3].source changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-efb90aa7b (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the new node, every cited statement, the repair note and the earlier Q71 RETURN 5a5c275b. The statement is unchanged and nothing cycles back to the item. Re-split check against the 5912-char base proof: every argument now sits in a node that a step cites. The duplicate node from R1 is gone and step 5 cites the Q55 node lem-sfb-local-integral-perfect-model-cohomology. Its hypotheses (g: S into X locally closed, a chart U, bounded f.g. projective P, j_U^*g^*K ≅ T_U(P)) are exactly what step 2 produces. The old step-3 argument (split surjection, torsion-free, free via lem-sc-dvr-fg-torsionfree-free, matrices) is the new unsplit node lem-sfb-dvr-projective-complex-matrix-model. That node is true and adds no hypotheses. I tested it on P=0, a single term, [R --pi--> R] with its torsion H^0, [R --1--> R], rectangular differentials and negative degrees. It is not a duplicate: lem-pc-finite-projective-complex-free-model is only an upper-bounded quasi-isomorphic replacement, and lem-sc-dvr-fg-torsionfree-free is about one module. Stacks 05CF and 0AUW labels match the tags file, and the blueprint proof file exists. Steps 2, 4 and 6 check out. Criterion (1)⇒(2) matches stratified-perfect (a): same completeness notion, and finite-dimensional over the field k is the same as finitely presented. sk-lem-integral-models(2) gives derived completeness for H^q(K)[0]. def-kun-truncations explicitly gives the good-truncation cohomology. The parent is about 2.4k characters. Batch-5 finding: lem-trf-restricted-quotient-complete is generic Bosch 2.3 Cor. 9 algebra with an empty closure. It is still a sec-trace-formula node created for the trace-formula proof, and the item only needs its trivial case (zero variables, J=0). FIX: step 1 now cites lem-sfb-integers-profinite-tower(1) for O_E ≅ lim O_E/pi_E^n with the same uniformizer. That node is split, its 9-node closure has no trf or Poincaré-duality nodes, and it does not contain the item. The citations to lem-weil-l-adic-extension-complete and -absolute-value were only needed for the trf node and are dropped. proof_deps and split_report.tool_uses are updated to match. Corrected file: fixes/dag/nodes/sec-six-functors-basics/det-lem-int-integral-heart-local-model.json. No SGA cited, coefficient category unchanged, no target weakened.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "lean": {
