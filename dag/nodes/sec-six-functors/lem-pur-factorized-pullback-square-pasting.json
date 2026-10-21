@@ -21,10 +21,8 @@
  ],
  "proof": [
   {
-   "text": "Use [prop-weil-pbc-proetale-constant-ring-map] to regard every arrow in the two squares as a morphism of ringed pro-etale topoi with its specified constant-section coefficient map. By [lem-trf-constant-coefficient-composition], the coefficient map for any composite is exactly the successive coefficient map. Consequently [lem-trf-derived-pullback-coherence] applies with the very comparisons $c$ in the item, rather than with newly chosen composition isomorphisms. We will apply its displayed equation to the three composable triples $(u,r_Y,s_Y)$, $(r_X,u,s_Y)$, and $(r_X,s_X,u)$. Each triple consists of morphisms of schemes with the same finite commutative ring $A$; no geometric property of those morphisms is required.",
+   "text": "Use the published canonical compositor and its coherence theorem [lem-trf-derived-pullback-coherence] directly. That same Lean module exposes proEtaleConstantRingPullbackComposition_ordinary: its chosen ordinary isomorphism has the unit-section normalization and its exact derived localization is the specified derived compositor. Thus no new coefficient-map identifications or ordinary composition isomorphisms are chosen. The coefficient and normalization facts have already been incorporated into this interface.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-trf-constant-coefficient-composition",
     "lem-trf-derived-pullback-coherence"
    ],
    "elementary": false,
@@ -36,7 +34,7 @@
   {
    "text": "Here is the convention for every equality transport in the calculation. For an equality $e:a=b$ of parallel scheme arrows write $E(e):P_a\\to P_b$ for its induced natural isomorphism. For $e:b=b'$ and $q:a=a'$ the composition comparisons of [lem-weil-pbc-proetale-derived-pullback-composition] satisfy\n$$(P_aE(e))c_{a,b}=c_{a,b'}E(e\\circ a),\\qquad (E(q)P_b)c_{a,b}=c_{a',b}E(b\\circ q).$$\nThese are substitution in the two indices of the specified family $c$: eliminating the equality makes both sides identical. Likewise $E(e'e)=E(e')E(e)$, inverse equalities give inverse transports, and whiskering gives the corresponding transport of composed functors. The equality defining the outer square can be taken to be\n$$(s_Yr_Y)u=s_Y(r_Yu)=s_Y(ur_X)=(s_Yu)r_X=(us_X)r_X=u(s_Xr_X).$$\nAny other given proof of this same equality induces the same transport, since equality proofs are propositions. In steps 3--5 we write the formulas after these substitutions, suppressing $E$ and retaining the canonical functor associators. The two displayed substitution identities specify how to insert every suppressed transport. This is an elementary equality calculation, not an extra pseudofunctor coherence hypothesis.",
    "uses": [
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-trf-derived-pullback-coherence"
    ],
    "elementary": true,
    "source": {
@@ -78,10 +76,9 @@
    }
   },
   {
-   "text": "For the representative clause, take any K-flat complex $K$ of $A_Y$-modules with flat terms. By [lem-weil-pbc-ringed-pullback-preserves-kflat], each successive ordinary module pullback in the displayed formulas is again K-flat with flat terms, applying that statement repeatedly to the ringed pro-etale topoi with their canonical coefficient maps. By [lem-weil-pbc-proetale-derived-pullback-composition], every component $c_{a,b}$ occurring here is the class of its canonical termwise module-pullback map on these complexes. Its inverse is represented by the inverse termwise isomorphism, since localization preserves inverse identities. The ordinary termwise pullback computes the derived pullback by [def-weil-pbc-proetale-operations], so whiskering corresponds to applying that ordinary pullback to the termwise map. Equality transports also agree with termwise transports, by substitution (the reflexive equality gives identities in both constructions). Composing these maps gives precisely the two termwise pasting maps whose classes are the components of the two sides. This proves the claimed normalization without restricting $K$ to bounded complexes and without any flatness hypothesis on the scheme morphisms.",
+   "text": "For the representative clause use the ordinary-normalization equation in [lem-trf-derived-pullback-coherence], which identifies each derived compositor with inverse exact-derived composition followed by localization of the selected ordinary compositor. This equation is an equality of natural isomorphisms on the whole unbounded derived category. Substitution identifies localization of equality transports with the corresponding derived transports. The exact termwise derived operations [def-weil-pbc-proetale-operations] preserve composition and inverse of isomorphisms. Naturality of their composition comparison in both functors identifies localization of either whiskering with the corresponding derived whiskering, conjugated by source and target composition comparisons. For the right path the intermediate comparisons cancel immediately. For the left path apply associativity of the exact-derived compositor at (sY,rY,u), (sY,u,rX), and (u,sX,rX), then cancel the intermediate comparisons. The localized ordinary associators are identities. This proves the two natural-transformation normalization equations for all derived objects. Evaluate them at Q(K) to obtain the stated formulas; no K-flatness or term-flatness premise is needed for this stronger normalization, so no K-flat-preservation lemma is used.",
    "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-derived-pullback-coherence",
     "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
@@ -92,17 +89,13 @@
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-trf-constant-coefficient-composition",
   "lem-trf-derived-pullback-coherence",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "def-weil-pbc-proetale-operations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; S9 Lean proof of two-square pasting from published derived coherence, and exact-localization normalization of both ordinary paths"
  },
  "mathlib_searches": [
   {
@@ -250,11 +243,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-trf-constant-coefficient-composition",
   "lem-trf-derived-pullback-coherence",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "def-weil-pbc-proetale-operations"
  ],
  "reviewed": {
@@ -294,5 +283,15 @@
   "group": "Q46",
   "result": "pass",
   "note": "Checked every clause of the module against the node. Compositor direction (.inv = c_{h,k}), C_v as Comp u vY, then eqToIso e, then (Comp vX u).symm, both path factor orders, whiskerings and associators, the outer equality et (follows from er and es, irrelevant by proof irrelevance), A : Type u CommRing Finite, recorded ProEt site and constant-ring derived pullback with no universe equality, and the K-flat representative clause via recorded IsKFlatIndependentCoefficients and IsFlatOnSite with mapDerivedCategorySquareIso of the ordinary paths: all correct. Only the item node (lean, plus 2 added stmt_deps) and the new module changed; no cycle; statement verbatim; 9 declarations present; real-data helpers; sorry only; docstrings carry source, blueprint tag and proof steps 1-6. Mechanical theorem-stmt_dep finding: the statement uses the coherence module only through Classical.choose of proEtaleConstantRingPullbackComposition_ordinary, an ordinary compositor fixed uniquely by its unit-section clause; ordinaryComp is private and no definition node exposes it, so the statement genuinely depends on an object constructed by the theorem: PASS on that point. Advisory: trfPullbackSquareComparison (theorem node lem-trf-pullback-coefficient-iterate-coherence) is the same square comparison with the opposite orientation, and reusing it would mean citing a theorem node for a plain definition; unused proof-only import KFlatRingedToposPullback; trailing whitespace on 4 lines. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T161413-L-4165304",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
