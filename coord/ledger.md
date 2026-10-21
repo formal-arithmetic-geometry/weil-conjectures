@@ -21677,3 +21677,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: merged deliver/Q151/lem-dl-a1-normal-scheme-galois-inertia-presentation (reviewer FIX; first push; new nodes: 2)
 - 09:12 L: merged deliver/N0/lem-weil-pbc-slice-tensor-integer-shift-compatibility (reviewer PASS; first push; new nodes: 0)
 - 09:12 L: merged deliver/NP/lem-sfb-kinjective-hom-scalar-telescope (reviewer PASS; after a return; new nodes: 0)
+- 09:12 L: merged deliver/Q42/lem-weil-scalar-pullback-strict-cone-naturality (reviewer PASS; after a return; new nodes: 0)
