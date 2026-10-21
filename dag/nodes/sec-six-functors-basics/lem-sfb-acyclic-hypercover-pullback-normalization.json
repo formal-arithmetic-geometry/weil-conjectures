@@ -19,9 +19,133 @@
   "def-weil-pbc-proetale-hypercover-total",
   "def-weil-pbc-proetale-hypercover-augmentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i:M[0]\\to I$ and $j:h^*M[0]\\to J$ for the specified resolutions. Use the total and augmentation definitions to work throughout with differential $\\delta+(-1)^p d$. For each coefficient chain map, the section maps commute with both differentials. For a map over $h$, restriction commutes with every face by the assumed simplicial identities and with the coefficient differential by naturality. Consequently the componentwise maps give chain maps on the finite diagonals. The augmentations are the restrictions into bidegree $(0,q)$; their horizontal differential is zero because both faces to degree zero have the same augmentation. In particular the maps in the statement are the actual chain maps, with $T_U(M[0])=C_U(M)$ and $T_V(h^*M[0])=C_V(h^*M)$.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-total",
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, lemma-compute-cohomology; explicit restriction maps and signs"
+   }
+  },
+  {
+   "text": "Evaluation on each $U_p$ and $V_p$ is exact on module sheaves, including nonaffine weakly contractible objects. Indeed the module forgetful functor is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]; its sheafification hypothesis holds on the small-site presentations of [det-pe-topos-functoriality-site]. A module epimorphism is therefore an abelian-sheaf epimorphism, hence locally surjective by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective], and its underlying set-sheaf map is epi by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. Evaluation on a weakly contractible object makes this map surjective by [sk-def-pe-weak-contractible]. Kernels are sectionwise. This proves exactness. Applying evaluation to the short exact sequences defining boundaries, cycles and their quotient identifies the cohomology of the evaluated complex with the evaluation of its cohomology. Thus it carries coefficient quasi-isomorphisms to column quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-topos-functoriality-site",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "sk-def-pe-weak-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2 and sites-cohomology.tex Tag 0946, lemma-w-contractible"
+   }
+  },
+  {
+   "text": "The covering precoverage and subcanonicity required for the injective-row theorem hold by [det-pe-topos-functoriality-site]. Given a compatible matching family over a test object, its map into the finite matching object pulls the assumed matching covering back to a covering where the family lifts; in degree zero pull back $U_0\\to X$ (respectively $V_0\\to X'$). This verifies the local matching hypothesis of [lem-sc-ringed-hypercover-injective-augmentation-ring]. Applying it to every injective module $I^q$ gives exact rows $0\\to I^q(X)\\to I^q(U_0)\\to I^q(U_1)\\to\\cdots$, and likewise for $J^q$. Choose a common strict lower bound $N$ for $I,J,M[0],h^*M[0]$. The bicomplexes vanish for $p<0$ or $q<N$; the augmentations land in column zero and are killed by the outgoing horizontal differential. The row-augmentation theorem [lem-weil-pbc-bounded-below-row-augmentation] in abelian groups therefore proves that the specified $\\alpha_I$ and $\\alpha_J$ are quasi-isomorphisms. No injectivity of the underlying abelian sheaf is used.",
+   "uses": [
+    "det-pe-topos-functoriality-site",
+    "lem-sc-ringed-hypercover-injective-augmentation-ring",
+    "lem-weil-pbc-bounded-below-row-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, final paragraph; hypercovering.tex Tags 01GE/01GW; homology.tex Tag 0133"
+   }
+  },
+  {
+   "text": "By step 2, evaluation of $i$ or $j$ at any hypercover term is a quasi-isomorphism. The corresponding bicomplex maps have common bounds $p\\geq0,q\\geq N$. The column-comparison theorem [lem-weil-pbc-bounded-below-total-column-comparison] proves that $T_U(i)$ and $T_V(j)$ are quasi-isomorphisms. The same argument applies to every quasi-isomorphism between strictly bounded-below coefficient complexes, using the minimum of their lower bounds. All diagonals are finite. Set $A_U^I=T_U(i)^{-1}\\alpha_I$ and $A_V^J=T_V(j)^{-1}\\alpha_J$ in $D(\\mathbf{Ab})$. Under the resolution computations of derived sections these are the two claimed comparison isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, second paragraph; homology.tex Tag 0132"
+   }
+  },
+  {
+   "text": "The given bounded-below injective complexes are K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Derived functors and their resolution identifications are as in [def-sfb-right-derived-functor]; existence on the small ringed sites follows from [prop-pur-kinjective-resolutions-exist]. For two resolutions $i:M[0]\\to I$ and $i':M[0]\\to I'$, [lem-weil-pbc-kinjective-hom-derived] gives a comparison $k:I\\to I'$, unique up to homotopy, with $ki\\simeq i'$. By [lem-sf-kinjective-derived-map-computation], $\\Gamma(k)$ is exactly the canonical transition between the derived-section models. The augmentation square commutes strictly. Moreover $T_U$ carries a coefficient homotopy $s$ to the homotopy with component $(-1)^p s$ on bidegree $(p,q)$: the horizontal mixed terms cancel, and the vertical terms sum to $ds+sd$. Hence $T_U(k)T_U(i)=T_U(i')$ in the derived category, and cancellation gives $A_U^{I'}\\Gamma(k)=A_U^I$. For a coefficient map use the same Hom bijection to lift it between resolutions and the identical calculation. Thus the comparisons are independent of resolutions and natural in coefficients. This argument also applies to $V$.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sfb-right-derived-functor",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, resolution comparison; derived.tex Tag 070I"
+   }
+  },
+  {
+   "text": "Since $h^*$ is exact, $h^*i$ is a quasi-isomorphism. The K-injective Hom bijection supplies a chain map $b:h^*I\\to J$, unique up to homotopy, with $b\\,h^*i\\simeq j$. Let $a:I\\to h_*J$ be its ordinary chain-adjunction transpose, namely $h_*b\\circ\\eta_I$. The complex $h_*J$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective]. Apply the representative formula of [lem-pc-pre-derived-adjoint-functors-general] with left functor $h^*$, right functor $h_*$, right-hand resolution $j$, and identity left resolution (the left functor is exact). It says that the derived transpose of the identity of $h^*M[0]$ is represented by $M[0]\\xrightarrow{\\eta}h_*h^*M[0]\\xrightarrow{h_*j}h_*J$. Naturality of the ordinary unit and $b\\,h^*i\\simeq j$ give $ai\\simeq h_*j\\circ\\eta_{M[0]}$. Thus $Qa\\circ(Qi)^{-1}$ is precisely the actual derived adjunction unit, under the resolution identification $Rh_*h^*M[0]\\cong Qh_*J$. This fixes the normalization, rather than choosing an adjunction on isomorphic functors.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "derived.tex Tags 0DVC/09T5, fraction formula for the derived Hom bijection"
+   }
+  },
+  {
+   "text": "Define $G:T_U(I)\\to T_V(J)$ on the $(p,q)$ summand by restriction along $g_p$ followed by $b^q$. Naturality gives $G T_U(i)=T_V(j)c_g$ in the derived category: the coefficient homotopy $b h^*i\\simeq j$ induces the signed total homotopy of step 5. There is also the strict equality $G\\alpha_I=\\alpha_J\\Gamma(a)$, where $\\Gamma(X,h_*J)=\\Gamma(X',J)$: on column zero both sides restrict a global section of $I$ along $V_0\\to X'\\to X$, then apply $b$, and all other columns are zero. For the ringed-topos morphism $h$ followed by the global-sections morphism to the one-point topos with ring $\\mathbf Z$, [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies the composition comparison with the identity on this section model, because $h_*J$ is already K-injective (take its identity resolution in that theorem). By [lem-sf-kinjective-derived-map-computation] and step 6, $\\Gamma(a)$ therefore represents the unit-induced derived pullback followed by the canonical composition comparison. Cancelling the four isomorphisms in the two squares yields $c_g A_U^I=A_V^J\\Gamma(a)$, the required equality in $D(\\mathbf{Ab})$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, restriction augmentation squares; sites-cohomology.tex Tag 0D6E"
+   }
+  },
+  {
+   "text": "For a refinement $r:U'_\\bullet\\to U_\\bullet$ over the identity, restriction on each $(p,q)$ summand gives a chain map $r_E:T_U(E)\\to T_{U'}(E)$, with $r_I\\alpha_I=\\alpha'_I$ and $r_I T_U(i)=T_{U'}(i)r_M$ strictly. Cancelling gives $r_M A_U=A_{U'}$. The same holds on $V$; the two refinement squares for $c_g$ commute componentwise whenever the diagrams of augmented simplicial maps commute. For a coefficient morphism $M\\to L$, restriction and its inverse-image morphism commute on every section, so the square for $c_g$ commutes strictly; combine with step 5 for derived naturality. For consecutive maps $h:X'\\to X$ and $k:X''\\to X'$ and consecutive augmented simplicial maps, the coefficient identifications $(hk)^*M\\cong k^*h^*M$ identify their degree-$p$ section restrictions with the restriction along the composite. Thus $c_{g'}c_g=c_{gg'}$ under these identifications, and cancellation of the common intermediate comparison gives the same equality for the derived-unit maps identified in step 7. Identity maps give identity restrictions. None of these componentwise identities uses a cartesian square, and the proof only inverts the four resolution and augmentation maps, never $c_g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, agent-formulated refinement and composition calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-topos-functoriality-site",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "sk-def-pe-weak-contractible",
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "lem-weil-pbc-bounded-below-row-augmentation",
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sfb-right-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, injective-resolution proof; explicit derived-adjunction normalization and functoriality using derived.tex Tags 0DVC/09T5 and sites-cohomology.tex Tag 0D6E"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +181,45 @@
    "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not identify the canonical derived-sections pullback with the alternating-complex map for full acyclic hypercovers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial acyclic hypercover comparison identifies the alternating sections map with the derived adjunction unit pullback",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.mem₁, SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac', CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate",
+   "date": "2026-10-21",
+   "verdict": "no match: section restriction or resolution naturality alone does not state the full hypercover derived-unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"derived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: section restriction or resolution naturality alone does not state the full hypercover derived-unit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(Hypercover|hypercover).*(derived|cohomology|quasiIso)|(derived|cohomology).*(Hypercover|hypercover)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: section restriction or resolution naturality alone does not state the full hypercover derived-unit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic hypercovers compute derived sections and their pullback map via restriction augmentations",
+   "results": "8 hits: CategoryTheory.PreZeroHypercover.pullback₂, CategoryTheory.Sheaf.ΓRes, CategoryTheory.PreZeroHypercover.pullback₁, CategoryTheory.Precoverage.ZeroHypercover.pullback₁, CategoryTheory.PreZeroHypercover.restrictIndex, CategoryTheory.Precoverage.ZeroHypercover.pullbackCoverOfLeft, CategoryTheory.Precoverage.ZeroHypercover.pullbackCoverOfLeft_toPreZeroHypercover, CategoryTheory.PreZeroHypercover.restrictIndex_X",
+   "date": "2026-10-21",
+   "verdict": "no match: section restriction or resolution naturality alone does not state the full hypercover derived-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between two augmented acyclic simplicial resolutions computes the canonical derived global section restriction along a geometric morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes_map, CategoryTheory.Sheaf.natTransΓRes, CategoryTheory.Sheaf.natTransΓRes_app, CategoryTheory.Sheaf.ΓRes_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Abelian.LeftResolution.chainComplexMap, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: section restriction or resolution naturality alone does not state the full hypercover derived-unit comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-wstrict-lisse-component-cohomology",
@@ -87,5 +246,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-acyclic-hypercover-pullback-normalization",
+  "worker": "stage1",
+  "summary": "Eight-step augmentation-normalized proof using existing general ringed-hypercover, finite-diagonal and K-injective lemmas; no new nodes. Explicitly identifies the section map with the actual derived unit and verifies coefficient, refinement and composition compatibility without affineness or cartesianness. Statement unchanged.",
+  "blueprint": "Realizes the inherited open-direct-image/root-tower comparison place: hypercover descent identification of the section-complex map with the specified adjunction-unit pullback. blueprint_refs.py ancestor prints None; the existing null ancestor is retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-proetale-hypercover-total",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Signed total sections of an augmented pro-etale simplicial object. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "def-weil-pbc-proetale-hypercover-augmentation",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Restriction augmentation into total hypercover sections. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Colimits of sheaves of modules and the forgetful functor to abelian sheaves. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "det-pe-topos-functoriality-site",
+    "why": "Generic tool for the injective-resolution hypercover comparison: The pro-étale site is subcanonical and its sheaves form a topos. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic tool for the injective-resolution hypercover comparison: An epimorphism of abelian sheaves on a site is locally surjective (and conversely). It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic tool for the injective-resolution hypercover comparison: A morphism of sheaves of sets on a site is an epimorphism iff it is locally surjective. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "sk-def-pe-weak-contractible",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Weak contractibility. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-sc-ringed-hypercover-injective-augmentation-ring",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Injective hypercover augmentation for sheaves of arbitrary rings. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-row-augmentation",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Comparison of a row augmentation with a bounded-below total complex. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-total-column-comparison",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Column and row comparison for uniformly bounded-below integer bicomplexes. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Bounded-below complexes of injectives are K-injective. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Right derived functor on the unbounded derived category. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Existence of K-injective resolutions of sheaves of modules. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Morphisms into a K-injective complex are computed in the homotopy category. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Computation of unbounded derived morphisms on arbitrary K-injective resolutions. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic tool for the injective-resolution hypercover comparison: A right adjoint of an exact functor preserves K-injective complexes. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Pre-derived adjunction from essentially constant derived systems. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool for the injective-resolution hypercover comparison: Canonical composition comparison for unbounded ringed-topos direct images. It supplies no alternative geometric route to the unit; the root-tower unit has no such general homological-algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-topos-functoriality-site",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "sk-def-pe-weak-contractible",
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "lem-weil-pbc-bounded-below-row-augmentation",
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sfb-right-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-818bfc61a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-818bfc61a (reviewer sub-agent of L); spot-checked: Read the item's 8 steps against all 18 cited statements and Stacks proetale.tex Tag 09A2 (lemma-compute-cohomology, line 3066). Steps 2-4 are the source's two spectral-sequence arguments in bicomplex form. Step 2: exactness of evaluation comes from forgetful exactness, then epi implies locally surjective implies epi of set sheaves, then the weakly-contractible definition; this avoids the affine-only det-pe-wc-sections-exact. Step 3: hypotheses of lem-sc-ringed-hypercover-injective-augmentation-ring verified (precoverage, subcanonicity and smallness from det-pe-topos-functoriality-site; local matching by pulling back the covering U_n→M_n), then the row-augmentation lemma with K^{p,q}=I^q(U_p). Step 4: column comparison with bounds P=0, Q=N. Step 5: recomputed the signed total homotopy (-1)^p s; the mixed δ terms cancel and give ds+sd; independence and naturality follow by cancellation. Step 6: 0DVC formula with s=j, t=id and f=h_*j∘η, whose transpose is j; together with a·i≃h_*j·η this gives the actual derived unit. Step 7: G·α_I=α_J·Γ(a) checked to hold strictly; 0D6E composition applies with the morphism to (pt,Z) and the identity resolution of the K-injective h_*J; cancellation gives c_g·A_U=A_V·Γ(a) in the stated direction. Step 8 (refinement, coefficient and composition compatibility) is elementary given steps 5 and 7. No new nodes, no cycle (closure of 265 nodes), no SGA, no re-split note, statement unchanged. det-pe-hypercover-complex and lem-weil-pbc-proetale-hypercover-computes-bounded-complex give only an unnormalized single-site isomorphism, so they are not duplicates. Edge cases checked: zero sheaf, empty base, constant hypercover, and two points mapping to one point (c_g is not a quasi-isomorphism there, consistent with the statement). The 18 declared tool_uses are generic homological or site tools and are accepted. No changes."
  }
 }
