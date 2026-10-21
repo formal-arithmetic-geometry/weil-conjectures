@@ -1,8 +1,8 @@
 # Work queue
 
-192 items; claim with `tools/claim.py next <group> [--stage N]`.
+133 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (19 clusters, 949 modules)
+## Rework: quarantined by the upstream sync (14 clusters, 948 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -11,26 +11,21 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.SitePerfectComplex` | 1 |  | error: Sheaf/Paper/SitePerfectComplex.lean:122:10: failed to synthesize instance of type class |
-| `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.WeilTensorProduct` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 90, stage 3 4 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 90, stage 3 2 items.
 
-## Stage 1: nodes to split (14)
+## Stage 1: nodes to split (17)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -45,8 +40,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-profinite-constant-derived-functions` | 4012 | none |
 | `lem-sfb-root-coordinate-supported-vanishing` | 4012 | none |
-| `lem-sfb-root-tower-coordinate-face` | 4013 | none |
 | `lem-sfb-snc-tame-root-etale-extension` | 4013 | none |
+| `lem-sfb-indfinite-contractible-base-wstrict` | 4014 | none |
+| `lem-sfb-wstrict-lisse-component-cohomology` | 4014 | none |
+| `sk-thm-pe-indetale-refinement` | - | none |
+| `sk-thm-pe-wc-cover` | - | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (31)
@@ -68,10 +66,10 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
-| `lem-sfb-internal-action-site-presentation` | 1 | state | 0 |
 | `lem-sfb-nonnegative-derived-totalization` | 1 | state | 0 |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
+| `lem-sfb-root-tower-coordinate-face` | 1 | state | 0 |
 | `lem-sfb-root-tower-puncture-invariance` | 1 | state | 0 |
 | `lem-sfb-simplex-lattice-shuffle-boundary` | 1 | state | 0 |
 | `lem-sfb-snc-finite-root-regular-ring` | 1 | state | 0 |
@@ -85,9 +83,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (120)
+## Stage 3: modules to prove (63)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -113,7 +111,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.FiniteFreeCompletionTransport` | - | 4 | proof | 3 |
 | `Sheaf.CategoryTheory.FiniteFreeStrictTowerTransport` | - | 1 | proof | 3 |
-| `Sheaf.Paper.CompletedExchangeCoherence` | - | 9 | proof | 3 |
 | `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 3 |
 | `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 3 | proof | 3 |
 | `Sheaf.Paper.PullbackTensorCanonicalShiftUnit` | - | 1 | proof | 3 |
@@ -124,89 +121,33 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.KoszulFibreLinearDescent` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeQuotientCompletion` | - | 1 | proof | 4 |
-| `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 10 | proof | 4 |
-| `Sheaf.Paper.PbcAutomorphismTransport` | - | 13 | proof | 4 |
 | `Sheaf.Paper.RegularQuotientCompletionUnit` | - | 1 | proof | 4 |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 6 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSiteStrictPerfectHom` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
-| `Sheaf.CategoryTheory.FlatScalarTowerExchange` | - | 1 | proof | 5 |
-| `Sheaf.CategoryTheory.FlatScalarTowerLimitSquare` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedOpenExchangeTransport` | - | 1 | proof | 5 |
-| `Sheaf.Paper.CompletedScalarUnitAdjunction` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PulledReductionNormalizationComparison` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PulledReductionStrictTowerComparison` | - | 1 | proof | 5 |
-| `Sheaf.Paper.QuotientDiagramScalarProjection` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 5 |
-| `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 1 | proof | 6 |
 | `Sheaf.CategoryTheory.RingedSiteDualityMaps` | 4 | 4 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedDualComponents` | - | 1 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedEvaluationAssembly` | - | 1 | proof | 6 |
 | `Sheaf.CategoryTheory.RingedSiteFiniteRetractDualExact` | - | 1 | proof | 6 |
 | `Sheaf.Paper.AdicPullbackPresentationTransport` | - | 4 | proof | 6 |
 | `Sheaf.Paper.CompletedRingStrictFiniteExchange` | - | 2 | proof | 6 |
-| `Sheaf.Paper.ConstantWeilStructure` | - | 3 | proof | 6 |
-| `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients` | - | 21 | proof | 6 |
+| `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 10 | proof | 6 |
 | `Sheaf.Paper.RingedOpenStrictReduction` | - | 13 | proof | 6 |
-| `Sheaf.Paper.IntegralCompletedLocalPerfectCriterion` | 4 | 1 | proof | 7 |
 | `Sheaf.Algebra.Homology.RingedHomCompositionModel` | - | 3 | proof | 7 |
 | `Sheaf.Algebra.Homology.RingedOrdinaryEvaluationLocalization` | - | 1 | proof | 7 |
 | `Sheaf.Algebra.Homology.RingedSignedBidualLocalization` | - | 1 | proof | 7 |
+| `Sheaf.CategoryTheory.FlatScalarTowerExchange` | - | 1 | proof | 7 |
+| `Sheaf.CategoryTheory.FlatScalarTowerLimitSquare` | - | 1 | proof | 7 |
 | `Sheaf.Paper.CompletedFiniteExchangeCoordinates` | - | 2 | proof | 7 |
-| `Sheaf.Paper.CompletedKoszulReductionRoosTriangle` | - | 1 | proof | 7 |
+| `Sheaf.Paper.CompletedScalarUnitAdjunction` | - | 1 | proof | 7 |
 | `Sheaf.Paper.CompletedStrictOpenExchange` | - | 7 | proof | 7 |
 | `Sheaf.Paper.DerivedFiniteQuotientCoherence` | - | 1 | proof | 7 |
-| `Sheaf.Paper.DerivedPullbackTensorHom` | - | 12 | proof | 7 |
-| `Sheaf.Paper.FiniteCoefficientPoint` | - | 9 | proof | 7 |
+| `Sheaf.Paper.QuotientDiagramScalarProjection` | - | 1 | proof | 7 |
 | `Sheaf.Paper.StrictQuotientPullbackComputation` | - | 1 | proof | 7 |
-| `Sheaf.SixFunctors.FrobeniusPointTransport` | - | 3 | proof | 7 |
-| `Sheaf.Paper.IntegralOperationsWellDefined` | 11 | 2 | proof | 8 |
-| `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | proof | 8 |
-| `Sheaf.Paper.IntegralComparisonSequenceSystems` | - | 7 | proof | 8 |
-| `Sheaf.Paper.IntegralOperationsScalarComparisons` | - | 13 | proof | 8 |
-| `Sheaf.Paper.IntegralPullbackComparisonRealization` | - | 1 | proof | 8 |
-| `Sheaf.Paper.IntegralPullbackReductionCounit` | - | 1 | proof | 8 |
-| `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | proof | 8 |
-| `Sheaf.Paper.SfIntegralCompactSupportConstructible` | - | 2 | proof | 8 |
-| `Sheaf.Paper.WeilIndSheafCategory` | - | 8 | proof | 8 |
-| `Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence` | - | 2 | proof | 9 |
-| `Sheaf.Algebra.Homology.RingedOpenTotalTensorKFlat` | - | 1 | proof | 9 |
-| `Sheaf.CategoryTheory.CoefficientSequenceGlobalSections` | - | 1 | proof | 9 |
-| `Sheaf.CategoryTheory.EnrichedSequenceProjectionFormula` | - | 4 | proof | 9 |
-| `Sheaf.CategoryTheory.SequencePushforwardLimitProjections` | - | 1 | proof | 9 |
-| `Sheaf.Paper.CompletedOperationTowerSubstitution` | - | 1 | proof | 9 |
-| `Sheaf.Paper.EffectiveComparisonRealizationModels` | - | 1 | proof | 9 |
-| `Sheaf.Paper.EtaleCompactSupportCoefficientChange` | - | 3 | proof | 9 |
-| `Sheaf.Paper.IntegralAmbientOperationModels` | - | 4 | proof | 9 |
-| `Sheaf.Paper.IntegralCoherenceTower` | - | 1 | proof | 9 |
-| `Sheaf.Paper.IntegralTowerInverseImageUnit` | - | 1 | proof | 9 |
-| `Sheaf.Paper.PointDerivedSectionsTensorDescent` | - | 1 | proof | 9 |
-| `Sheaf.Paper.PointDerivedTensorTowerCoherence` | - | 1 | proof | 9 |
-| `Sheaf.Paper.PointFiniteFreeSectionsTensor` | - | 1 | proof | 9 |
-| `Sheaf.Paper.QuotientSystemMixedCoherence` | - | 3 | proof | 9 |
-| `Sheaf.SixFunctors.CompactSupportProperImageTower` | - | 1 | proof | 9 |
-| `Sheaf.SixFunctors.IntegralOpenReductionComparison` | - | 1 | proof | 9 |
-| `Sheaf.TraceFormula.CounitRealizationSubstitution` | - | 1 | proof | 9 |
-| `Sheaf.Paper.CoefficientExtensionReductionModel` | - | 1 | proof | 10 |
-| `Sheaf.Paper.CompletedLineTensorCoherence` | - | 23 | proof | 10 |
-| `Sheaf.Paper.CompletedPrimitiveCounitComparison` | - | 8 | proof | 10 |
-| `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | proof | 10 |
-| `Sheaf.Paper.NormalizedOperationSystemModels` | - | 1 | proof | 10 |
-| `Sheaf.Paper.NormalizedPullbackCompositionTransport` | - | 1 | proof | 10 |
-| `Sheaf.Paper.NormalizedTensorConstraintTransport` | - | 1 | proof | 10 |
-| `Sheaf.Paper.ProEtaleScalarMateNormalization` | - | 3 | proof | 10 |
-| `Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus` | - | 3 | proof | 10 |
-| `Sheaf.Paper.QuotientExpressionKFlatNormalization` | - | 1 | proof | 10 |
-| `Sheaf.SixFunctors.OpenQuotientKoszulCompleteness` | - | 1 | proof | 10 |
-| `Sheaf.SixFunctors.OpenSemilinearTensorModel` | - | 1 | proof | 10 |
-| `Sheaf.Algebra.Homology.LineUnboundedDerivedTensor` | - | 1 | proof | 11 |
-| `Sheaf.CategoryTheory.TowerLimitTransposeNormalization` | - | 1 | proof | 11 |
-| `Sheaf.Paper.CompletedTensorUnitInsertion` | - | 1 | proof | 11 |
-| `Sheaf.Paper.PerfectQuotientExchangeNormalization` | - | 1 | proof | 11 |
-| `Sheaf.Paper.QuotientDiagramProjectionEvaluation` | - | 1 | proof | 11 |
-| `Sheaf.Paper.StrictQuotientDiagonalNormalization` | - | 1 | proof | 11 |
-| `Sheaf.Paper.CompletionMateComparison` | - | 21 | proof | 12 |
-| `Sheaf.Paper.SemilinearDerivedCalculus` | - | 1 | proof | 12 |
 | `Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel` | - | 1 | proof | 15 |
 | `Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge` | - | 1 | proof | 17 |
@@ -222,12 +163,11 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | `lem-sfb-integral-ambient-tower-comparison` |
 
-## Stage 3: held for an open upstream PR (3)
+## Stage 3: held for an open upstream PR (2)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
 | module | source |
 |---|---|
-| `WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal` | bundle/sec-smooth-purity-d1 |
