@@ -3,25 +3,152 @@
  "blueprint": {
   "is": "sk-d-real-weights",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Local weights and reality",
- "statement": "For a Weil sheaf $\\mathcal F$, given by a representation $\\rho$ of\n$W(C_0)$ on a finite-dimensional $\\Qlb$-vector space $V$,\nand a closed point $x$ with local Frobenius $F_x$ of [sk-d-real-weil], use the\ndeterminant to set\n\n$$\nP_x(\\mathcal F,T)=\\det(1-T\\rho(F_x)\\mid V),\\qquad\n\\wt_{\\iota,q_x}(\\alpha)=\n\\frac{2\\log|\\iota(\\alpha)|}{\\log q_x}\n$$\n\nfor a nonzero local eigenvalue $\\alpha$ (an eigenvalue of $\\rho(F_x)$,\ni.e. an inverse root of $P_x$) and the\nresidue cardinality $q_x$ of $x$.\nThe sheaf is punctually $\\iota$-pure of weight $w$ if, at every closed\npoint $x$, all these weights are $w$, and has weights at most $w$ if all\nare $\\le w$.\nIt is $\\iota$-real if $\\iota P_x(\\mathcal F,T)\\in\\mathbf R[T]$ for every\n$x$, equivalently if each complex local eigenvalue multiset is stable\nunder complex conjugation. This condition is imposed on polynomials.\nFor a constructible Weil sheaf the same definitions are made with the\nstalk $\\mathcal F_{\\bar x}$ and its Frobenius $F_x$ in place of $V$ and\n$\\rho(F_x)$.",
+ "statement": "Use the coefficient embedding $\\iota$, curve and residue cardinalities of [sk-d-real-setup]. For a Weil sheaf $\\mathcal F$, given by a representation $\\rho$ of\n$W(C_0)$ on a finite-dimensional $\\Qlb$-vector space $V$,\nand a closed point $x$ with local Frobenius $F_x$ of [sk-d-real-weil], use the reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial] to set\n\n$$\nP_x(\\mathcal F,T)=\\det(1-T\\rho(F_x)\\mid V),\\qquad\n\\wt_{\\iota,q_x}(\\alpha)=\n\\frac{2\\log|\\iota(\\alpha)|}{\\log q_x}\n$$\n\nThe formula is for a nonzero local eigenvalue $\\alpha$ and the residue cardinality $q_x$ of $x$. Here $|\\cdot|$ is complex absolute value [def-weil-complex-absolute-value], and $\\log$ is the natural logarithm on positive reals [def-wf-positive-real-logarithm]. A local eigenvalue is a root of the characteristic polynomial [def-weil-characteristic-polynomial] of $\\rho(F_x)$ (equivalently, an inverse root of $P_x$); its algebraic multiplicity is its root multiplicity [def-weil-root-multiplicity].\nThe sheaf is punctually $\\iota$-pure of weight $w\\in\\mathbf R$ if, at every closed\npoint $x$, all these weights are $w$, and has weights at most $w$ if all\nare $\\le w$.\nIt is $\\iota$-real if $\\iota P_x(\\mathcal F,T)\\in\\mathbf R[T]$ for every\n$x$, equivalently if each complex local eigenvalue multiset is stable\nunder complex conjugation $z=a+bi\\mapsto\\overline z=a-bi$, with multiplicities. This condition is imposed on polynomials.\nFor a constructible Weil sheaf the same definitions are made with the\nstalk $\\mathcal F_{\\bar x}$ and its local geometric Frobenius $F_x$ (the stalk-operator convention of [def-weil-punctual-weights], with the embedding $\\iota$ still as fixed here) in place of $V$ and\n$\\rho(F_x)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
   "place": "node sk-d-real-weights, order 2932"
  },
  "stmt_deps": [
   "sk-d-real-weil",
-  "sk-d-real-setup"
+  "sk-d-real-setup",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-complex-absolute-value",
+  "def-wf-positive-real-logarithm",
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity",
+  "def-weil-punctual-weights"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Fix a closed point $x$ and write $F=\\rho(F_x)$ and $n=\\dim V$. Since $\\rho$ is a group representation, $F$ is an automorphism. By [lem-weil-charpoly-monic-degree], $\\chi_F$ is monic of degree $n$. Apply [lem-weil-alg-closed-linear-factorization] over the algebraically closed field $\\Qlb$ to obtain $\\chi_F(U)=\\prod_{j=1}^n(U-\\alpha_j)$, with the roots repeated according to their algebraic multiplicities. Its constant coefficient is nonzero: [lem-weil-endomorphism-invertible-iff-det-nonzero] gives $\\det F\\ne0$, and [lem-weil-charpoly-constant-coefficient-det] gives $\\det F=(-1)^n\\chi_F(0)$. Thus every $\\alpha_j$ is nonzero. By [lem-weil-reverse-charpoly-eq-reverse] and the finite-product clause of [lem-weil-polynomial-reflection-multiplicative], reversing these degree-one factors gives $P_x(T)=\\prod_{j=1}^n(1-\\alpha_jT)$. Its degree is $n$, since its leading coefficient is $\\prod_j(-\\alpha_j)\\ne0$, and $P_x(0)=1$. Clause 3 of [lem-weil-reciprocal-root-factorization] now identifies its reciprocal-root multiset with the $\\alpha_j$, including multiplicities. For $n=0$ both products are $1$ and the multisets are empty.",
+   "uses": [
+    "lem-weil-charpoly-monic-degree",
+    "lem-weil-alg-closed-linear-factorization",
+    "lem-weil-endomorphism-invertible-iff-det-nonzero",
+    "lem-weil-charpoly-constant-coefficient-det",
+    "lem-weil-reverse-charpoly-eq-reverse",
+    "lem-weil-polynomial-reflection-multiplicative",
+    "lem-weil-reciprocal-root-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
+    "place": "Definition: determinant, inverse eigenvalues, logarithmic weight, reality equivalence and constructible-stalk clause."
+   }
+  },
+  {
+   "text": "The choice of local Frobenius in [sk-d-real-weil] changes $F$ to $AFA^{-1}$ for an invertible $A$. In the basis obtained by applying $A$ to an original basis, the matrix of $AFA^{-1}$ is exactly the original matrix of $F$. The basis-independent determinant construction [def-weil-reverse-characteristic-polynomial] therefore gives the same $P_x$; the same argument for $\\det(U-F)$ gives the same characteristic polynomial [def-weil-characteristic-polynomial] and root multiplicities. All the displayed local quantities and predicates are consequently independent of this choice.",
+   "uses": [
+    "sk-d-real-weil",
+    "def-weil-reverse-characteristic-polynomial",
+    "def-weil-characteristic-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
+    "place": "Definition: determinant, inverse eigenvalues, logarithmic weight, reality equivalence and constructible-stalk clause."
+   }
+  },
+  {
+   "text": "Apply $\\iota$ to the factorization of step 1, obtaining $Q_x(T)=\\iota P_x(T)=\\prod_j(1-z_jT)$ with $z_j=\\iota(\\alpha_j)\\ne0$. Coefficientwise complex conjugation gives $\\overline{Q_x}(T)=\\prod_j(1-\\overline{z_j}T)$, because conjugation preserves finite sums and products. A coefficient $a+bi$ is fixed by conjugation exactly when $b=0$, so $Q_x\\in\\mathbf R[T]$ is equivalent to $\\overline{Q_x}=Q_x$. Both products have constant coefficient $1$ and degree $n$. By the uniqueness-up-to-reordering clause 3 of [lem-weil-reciprocal-root-factorization], equality of these products implies equality of the multisets $(z_j)$ and $(\\overline{z_j})$. Conversely equality of those multisets makes their products equal. This proves precisely the asserted reality equivalence at $x$, hence at every closed point.",
+   "uses": [
+    "lem-weil-reciprocal-root-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
+    "place": "Definition: determinant, inverse eigenvalues, logarithmic weight, reality equivalence and constructible-stalk clause."
+   }
+  },
+  {
+   "text": "For each nonzero local eigenvalue $\\alpha$, injectivity of the field embedding makes $\\iota(\\alpha)\\ne0$, and [def-weil-complex-absolute-value] gives $|\\iota(\\alpha)|>0$. Also $q_x=q^{e_x}>1$ in [sk-d-real-setup]. The logarithms are therefore taken on positive inputs and [def-wf-positive-real-logarithm] gives $\\log q_x>0$, so the displayed quotient is a well-defined real number. The punctual-purity and upper-weight predicates are exactly the stated universal equality and inequality for this number; no assertion about a mixed filtration is being substituted for the pointwise bound.",
+   "uses": [
+    "def-weil-complex-absolute-value",
+    "sk-d-real-setup",
+    "def-wf-positive-real-logarithm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
+    "place": "Definition: determinant, inverse eigenvalues, logarithmic weight, reality equivalence and constructible-stalk clause."
+   }
+  },
+  {
+   "text": "For a constructible Weil sheaf, use the finite-dimensional stalk and its local geometric-Frobenius automorphism from the stalk-operator convention in [def-weil-punctual-weights]. This citation supplies that local datum only, not its separate mixed-filtration predicate or its stronger choice of coefficient isomorphism. Replace $(V,\\rho(F_x))$ by $(\\mathcal F_{\\bar x},F_x)$ in the definitions. Steps 1 and 3 apply to each such automorphism without a global representation or a rank-constancy hypothesis. Step 4 uses the same residue cardinality and the embedding of this item. A zero stalk gives polynomial $1$ and an empty eigenvalue multiset, so the purity and bound predicates there are vacuous and reality holds. This realizes the final constructible clause without imposing lissity on the whole sheaf.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
+    "place": "Definition: determinant, inverse eigenvalues, logarithmic weight, reality equivalence and constructible-stalk clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-charpoly-monic-degree",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-weil-endomorphism-invertible-iff-det-nonzero",
+  "lem-weil-charpoly-constant-coefficient-det",
+  "lem-weil-reverse-charpoly-eq-reverse",
+  "lem-weil-polynomial-reflection-multiplicative",
+  "lem-weil-reciprocal-root-factorization",
+  "sk-d-real-weil",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-characteristic-polynomial",
+  "def-weil-complex-absolute-value",
+  "sk-d-real-setup",
+  "def-wf-positive-real-logarithm",
+  "def-weil-punctual-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/_section.md",
+  "place": "Expanded the definition and its reality-equivalence assertion using the existing generic polynomial statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local Frobenius determinant polynomial and logarithmic eigenvalue weights, punctual purity and real Weil sheaves",
+   "results": "IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.StandardOneDimIsocrystal, WittVector.isocrystal_classification, WittVector.exists_frobenius_solution_fractionRing, AlgHom.IsArithFrobAt.apply_of_pow_eq_one",
+   "date": "2026-10-21",
+   "verdict": "no match for the combined Weil-sheaf definition; hits concern different Frobenius settings or individual polynomial notions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Real.log, Polynomial.roots",
+   "results": "Polynomial.logMahlerMeasure_eq_log_leadingCoeff_add_sum_log_roots",
+   "date": "2026-10-21",
+   "verdict": "no match for the combined Weil-sheaf definition; hits concern different Frobenius settings or individual polynomial notions"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusWeight|IsPunctuallyPure|WeilSheaf|localPolynomial",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the combined Weil-sheaf definition; hits concern different Frobenius settings or individual polynomial notions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctually pure and real Weil sheaves defined by local Frobenius eigenvalues",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.isocrystal_classification, WittVector.instIsocrystalStandardOneDimIsocrystal, IsPurelyInseparable.iterateFrobenius, IsPurelyInseparable, Isocrystal.term_≃ᶠˡ[_,_]_, WittVector.StandardOneDimIsocrystal, WittVector.Isocrystal.ctorIdx",
+   "date": "2026-10-21",
+   "verdict": "no match for the combined Weil-sheaf definition; hits concern different Frobenius settings or individual polynomial notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf has real local Frobenius polynomials and every eigenvalue has weight twice log absolute value divided by log residue cardinality",
+   "results": "BDeRham, IsArithFrobAt.arithFrobAt, WittVector.StandardOneDimIsocrystal, IsArithFrobAt.exists_of_isInvariant, AlgHom.IsArithFrobAt.isArithFrobAt_localize, AlgHom.IsArithFrobAt, WittVector.Isocrystal, WittVector.isocrystal_classification",
+   "date": "2026-10-21",
+   "verdict": "no match for the combined Weil-sheaf definition; hits concern different Frobenius settings or individual polynomial notions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -56,5 +183,29 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-weights",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-d-real-weights",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint, lisse Lean definitions and constructible interfaces. Added explicit primitive dependencies, one Mathlib natural-logarithm leaf, and full arguments for inverse roots, conjugacy independence and the reality criterion. Retained every clause and the field-embedding hypothesis; no mixedness or semisimplicity assumption is introduced.",
+  "blueprint": "Realizes the full main-20261015 definition: displayed local polynomial and logarithmic weight, all-point purity and upper bound, polynomial reality and its multiset equivalence, and the final constructible-stalk extension. The unit has no numbered proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-reciprocal-root-factorization",
+    "why": "Uses the generic uniqueness of a product of nonzero reciprocal-root factors to identify multiplicities and compare a polynomial with its complex conjugate; no lemma in this unit states this polynomial tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-reciprocal-root-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-3aa67483a",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-3aa67483a (reviewer sub-agent of L); spot-checked: I read the item, the new node, the unit record and every cited node in full. The statement matches main-20261015 sk-d-real-weights clause by clause, with additions that only fix notation and nothing weakened; the unit has no steps, so realized={statement:[item],steps:[]} is right. Step 1 is correct: charpoly monic of degree n, factorization over Qlb, det F≠0 and det=(-1)^n chi(0) give nonzero alpha_j, reversal of the product gives P_x=prod(1-alpha_j T), and clause 3 of lem-weil-reciprocal-root-factorization (P(0)=1, degree n) gives the multiplicities. Step 2: conjugacy independence holds because the determinant does not depend on the basis. Step 3: reality equivalence via clause 3 over C applied to Q and its conjugate. Step 4: |iota(alpha)|>0 and q_x=q^{e_x}>1, so log q_x>0. Step 5: the stalk and local-operator convention of def-weil-punctual-weights, the same one def-wf-iota-real uses; its iota-isomorphism and mixed-filtration clauses are not used, and the zero-stalk case is handled. Small cases checked: rank 1 with alpha=1 and alpha=q_x, nonreal scalar, conjugate pair, Jordan block, e_x>1. New node def-wf-positive-real-logarithm is an exact Mathlib leaf: Real.log, log_of_pos, exp_log, log_exp and log_pos are at the claimed lines 44/50/59/75/188 of Log/Basic.lean. It is not a duplicate: rg -L found only def-weil-real-power, which uses log without defining it, and sk-d-real-log, the l-adic small logarithm. Tool use of lem-weil-reciprocal-root-factorization, a generic polynomial uniqueness lemma, is accepted. No cycle. Batch-5 flag on def-weil-punctual-weights reaching lem-weil-local-frobenius-conjugacy-class is accepted: that lemma only makes the local Frobenius eigenvalues well defined (definitional well-definedness), neither assumption gives it and it is no step of their proofs, and the batch-5 closure is unchanged with or without the citation, since about 80 other citers already reach it (e.g. thm-weil-deligne-purity). No changes."
+ }
 }
