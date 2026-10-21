@@ -97,6 +97,19 @@ section Proper
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
+/- STATEMENT-DISPUTED: the unconditional ambient pro-etale assertion below is false.
+For the proper structure morphism of a positive dimensional abelian variety over an
+algebraically closed field with field coefficients, the theorem
+`ProEtale.not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety` in
+`WeilConjectures.SixFunctors.ProEtale.AmbientCounterexampleCoproducts` proves failure to
+preserve countable coproducts. Every left adjoint preserves them.
+Source: blueprint `sk-rem-sf-fullcd-scope`, "The counterexample and the repair boundary".
+J2 independently compiled the negation of this exact conclusion and checked properness
+and all coefficient-category hypotheses; its axioms are only `propext`, `Classical.choice`
+and `Quot.sound`. The complete probe is reproduced in the delivery report.
+The protected source signature and its original hole are retained pending an authorized
+correction. The counterexample cannot be imported here because it would close a cycle.
+(blueprint: thm-sfb-finite-proper-pushforward-left-adjoint) -/
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_proét) ⥤ D(Y_proét)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
