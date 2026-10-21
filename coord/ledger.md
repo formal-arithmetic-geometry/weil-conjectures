@@ -21765,3 +21765,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T09:14:28Z L: superseded stage-1 delivery Q109/lem-per-adic-stratified-pullback-texact at bd18edc5b73b19d0ccc6b523170e2ecb1b0c0615; current completion retained; packet archived at refs/superseded/Q109/lem-per-adic-stratified-pullback-texact/bd18edc5b73b19d0ccc6b523170e2ecb1b0c0615; stale return retired.
 - 09:14 L: returned deliver/V3/Sheaf.SixFunctors.IntegralOpenReductionComparison (reviewer RETURN: (reviewer C-042aa, head 042aaab61) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.Integral)
 - 09:15 L: merged deliver/Q137/lem-pc-tate-endomorphism-ideals (reviewer PASS; first push; new nodes: 0)
+- 09:15 L: merged deliver/Q106/lem-pc-tate-residue-lattice-identity (reviewer PASS; first push; new nodes: 0)

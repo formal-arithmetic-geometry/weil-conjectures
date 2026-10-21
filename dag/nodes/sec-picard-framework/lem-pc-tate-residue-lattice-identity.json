@@ -10,9 +10,106 @@
  "stmt_deps": [
   "lem-pc-tate-abstract-residue-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=A+B$ and $I=A\\cap B$. For subspaces write $X\\prec Y$ when $(X+Y)/Y$ is finite-dimensional; equivalently $X\\subseteq Y+E$ for some finite-dimensional $E$, by lifting a finite basis of the quotient. For fixed $f\\in C$, choose finite-dimensional $E_A,E_B$ with $fA\\subset A+E_A$ and $fB\\subset B+E_B$. Then $fS\\subset S+E_A+E_B$, so $S$ is admissible in the sense of [lem-pc-tate-abstract-residue-calculus]. The map $V/I\\to V/A\\oplus V/B$, $v+I\\mapsto(v+A,v+B)$, is injective. Under it the image of $fI$ lies in the direct sum of the finite-dimensional images of $fA$ in $V/A$ and $fB$ in $V/B$. Thus $(fI+I)/I$ is finite-dimensional. This proves admissibility of $I$ for every $f$.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "Choose complements $A=I\\oplus A_0$, $B=I\\oplus B_0$, and $V=I\\oplus A_0\\oplus B_0\\oplus D$: extend a basis of $I$ to bases of $A,B$, and extend their union to one of $V$. Let $\\pi_I,\\pi_A,\\pi_B,\\pi_S$ be the coordinate projections onto $I$, $I\\oplus A_0$, $I\\oplus B_0$, and $I\\oplus A_0\\oplus B_0$. Checking the four summands gives $\\pi_A+\\pi_B=\\pi_S+\\pi_I$. All are $k$-linear projections onto their indicated subspaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "Fix $f,g\\in C$ and, for $L\\in\\{I,A,B,S\\}$, put $Z_L=\\pi_Lm_{fg}-m_g\\pi_Lm_f=[\\pi_Lm_f,m_g]$. By [lem-pc-tate-abstract-residue-calculus], $\\operatorname{res}_{V,L}(f\\,dg)=\\operatorname{Tr}_{\\mathrm{fp}}(Z_L)$. We record explicit image bounds. Since $\\pi_L(V)\\subset L$, one has $Z_L(V)\\subset L+gL\\prec L$. Also $(\\pi_L-1)m_f(L)$ and $(\\pi_L-1)m_{fg}(L)$ are finite-dimensional: $fL\\prec L$ and $fgL\\prec L$, and $\\pi_L-1$ kills $L$. On $L$ the identity\n$$Z_L=(\\pi_L-1)m_{fg}-m_g(\\pi_L-1)m_f$$\ntherefore shows that $Z_L(L)$ is finite-dimensional. Multiplication by $g$ preserves finite-dimensionality, and $m_{fg}=m_gm_f$ because $C$ is commutative.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "For $T\\in\\{Z_A,Z_S\\}$, Step 3 gives $T(V)\\prec S$, $T(S)\\prec A$, and $T(A)\\prec0$: for $Z_A$ use $Z_A(V)\\prec A$ and its finite-dimensional restriction to $A$; for $Z_S$ use its finite-dimensional restriction to $S$. Every product $T_1T_2T_3$ of three of these operators has finite-dimensional image. Indeed $T_3(V)\\subset S+E_3$ implies $T_2T_3(V)\\subset A+E_2+T_2(E_3)$ and then $T_1T_2T_3(V)\\subset E_1+T_1(E_2)+T_1T_2(E_3)$, for suitable finite-dimensional $E_i$. Define $W_{A,S}$ as the sum of the images of the eight products of length three. It is finite-dimensional and invariant under both operators: $T(T_1T_2T_3v)=(TT_1T_2)(T_3v)$ lies in one of those images. By expanding the cube, every $(cZ_A+dZ_S)^3(V)$ lies in $W_{A,S}$, for all $c,d\\in k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-finite-potent-trace-calculus] to the finite invariant subspace $W_{A,S}$ from Step 4, with $N=3$. For $T=Z_A,Z_S,Z_A-Z_S$ it identifies $\\operatorname{Tr}_{\\mathrm{fp}}(T)$ with the ordinary trace of $T|_{W_{A,S}}$. The latter is the sum of its diagonal matrix entries [def-weil-endomorphism-trace], so subtraction of matrices gives\n$$\\operatorname{Tr}_{\\mathrm{fp}}(Z_A)-\\operatorname{Tr}_{\\mathrm{fp}}(Z_S)=\\operatorname{Tr}_{\\mathrm{fp}}(Z_A-Z_S).$$\nThis uses one finite invariant subspace for all three operators; it does not assume additivity of Tate trace on arbitrary finite-potent operators.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "For the second pair $T\\in\\{Z_I,Z_B\\}$, Step 3 gives $T(V)\\prec B$, $T(B)\\prec I$, and $T(I)\\prec0$. For $Z_I$ its full image is almost in $I$ and its restriction to $I$ is finite-dimensional; for $Z_B$ its restriction to $B$ is finite-dimensional, hence so is its restriction to $I\\subset B$. Explicitly the same three containments as Step 4, with $S,A$ replaced by $B,I$, show that all eight products of length three have finite-dimensional image. Their sum $W_{I,B}$ is invariant under both operators, since $T(T_1T_2T_3v)=(TT_1T_2)(T_3v)$; the cubes of $Z_I$, $Z_B$, and $Z_I-Z_B$ have image in it. The restriction characterization of [lem-pc-finite-potent-trace-calculus] and the diagonal-entry definition of [def-weil-endomorphism-trace] therefore give\n$$\\operatorname{Tr}_{\\mathrm{fp}}(Z_I)-\\operatorname{Tr}_{\\mathrm{fp}}(Z_B)=\\operatorname{Tr}_{\\mathrm{fp}}(Z_I-Z_B).$$",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "The projection identity of Step 2 implies the exact operator identity\n$$Z_A-Z_S=[(\\pi_A-\\pi_S)m_f,m_g]=[(\\pi_I-\\pi_B)m_f,m_g]=Z_I-Z_B.$$\nSteps 5 and 6 consequently give $\\operatorname{Tr}_{\\mathrm{fp}}(Z_A)-\\operatorname{Tr}_{\\mathrm{fp}}(Z_S)=\\operatorname{Tr}_{\\mathrm{fp}}(Z_I)-\\operatorname{Tr}_{\\mathrm{fp}}(Z_B)$. Substituting the residue formulas of [lem-pc-tate-abstract-residue-calculus] from Step 3 and rearranging in $k$ proves\n$$\\operatorname{res}_{V,A}(f\\,dg)+\\operatorname{res}_{V,B}(f\\,dg)=\\operatorname{res}_{V,S}(f\\,dg)+\\operatorname{res}_{V,I}(f\\,dg).$$",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  },
+  {
+   "text": "By the generators-and-relations construction in [def-weil-pbc-kahler-differentials], $\\Omega^1_{C/k}$ is generated as a $C$-module by the symbols $dg$, hence as a $k$-vector space by $f\\,dg$ with $f,g\\in C$. Each residue is $k$-linear by [lem-pc-tate-abstract-residue-calculus]. The identity of Step 7 on these generators therefore extends to every differential, proving the asserted equality of $k$-linear maps.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tate-abstract-residue-calculus",
+  "lem-pc-finite-potent-trace-calculus",
+  "def-weil-endomorphism-trace",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§2, property R5 and proof, printed p. 153; §1, T4 and its proof, printed p. 150."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +138,38 @@
    "results": "8 hits: Set.add_iInter_subset, Finset.sum_union_inter, finsum_mem_inter_add_diff', Finset.sum_inter_add_sum_diff, finsum_mem_eq_sum_of_inter_support_eq, finsum_mem_inter_add_diff, Finset.sum_indicator_eq_sum_inter, Set.inter_add_subset. Read the returned statements; none constructs the abstract differential residue or proves its asserted identities.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.?potent|tateTrace|res_sup_add_res_inf",
+   "results": "0 hits: . Returned statements read; they concern residue fields, valuations, finite sums or annihilators, not Tate differential residues.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate abstract residue satisfies inclusion exclusion for sum and intersection of admissible subspaces",
+   "results": "8 hits: finsum_mem_union_inter', finsum_mem_union_inter, Subspace.dualAnnihilator_iInf_eq, Subspace.dualAnnihilator_inf_eq, Set.add_iInter_subset, Set.add_inter_subset, Submodule.finrank_sup_add_finrank_inf_eq, finsum_mem_inter_add_diff'. Returned statements read; they concern residue fields, valuations, finite sums or annihilators, not Tate differential residues.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For admissible subspaces of a module over a commutative algebra, Tate residues obey the sum and intersection identity",
+   "results": "8 hits: Ideal.rank_pow_quot_aux, IsLocalRing.instModuleResidueFieldCotangentSpace, Ideal.quotientToQuotientRangePowQuotSucc_mk, Ideal.quotientRangePowQuotSuccInclusionEquiv, Ideal.ResidueField.exists_smul_eq_tmul_one, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace, Submodule.exists_isInternal_prime_power_torsion. Returned statements read; they concern residue fields, valuations, finite sums or annihilators, not Tate differential residues.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue maps defined by commutator traces are a valuation on the lattice of admissible vector subspaces",
+   "results": "8 hits: IsDedekindDomain.selmerGroup.valuation, Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap, ModP.preVal, Valuation.leSubmodule_v_le_of_mem, Valuation.ltSubmodule_v_le_of_mem, Valuation.leIdeal_map_algebraMap_eq_leSubmodule_min, LieModule.range_traceForm_le_span_weight, LieSubmodule.trace_eq_trace_restrict_of_le_idealizer. Returned statements read; they concern residue fields, valuations, finite sums or annihilators, not Tate differential residues.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-tate-adelic-reciprocity",
@@ -63,5 +188,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-residue-lattice-identity",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and wrote out Tate R5: admissibility, compatible projections, commutator bounds, two finite invariant spaces for restricted trace subtraction, and the equality on differential generators. Reused the existing finite-potent trace calculus instead of adding a general-linearity node. The upstream equality theorem does not state the admissibility clauses, so it is not a whole-item attachment.",
+  "blueprint": "sk-thm-picard-duality, statement: Tate k-linear residues and the residue theorem making the cokernel trace well defined; this is the sum/intersection identity used in the adelic reciprocity proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-7b973cb2e",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-7b973cb2e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 4 cited statements (lem-pc-tate-abstract-residue-calculus, lem-pc-finite-potent-trace-calculus, def-weil-endomorphism-trace, def-weil-pbc-kahler-differentials), the citer lem-pc-tate-adelic-reciprocity, the unit sk-thm-picard-duality, and Tate ASENS 1968 §1 T1-T5 (pp.149-150), Thm 1 and Remark (*) (pp.151-152), and R5 with its proof (p.153). The statement is unchanged and agrees with R5 hypothesis by hypothesis, including both admissibility conclusions. Step 1: the sum is admissible because fS lies in S+E_A+E_B; the intersection is admissible through the injection V/I into V/A+V/B. Step 2: I checked that basis-of-I plus A_0 plus B_0 is independent, and that pi_A+pi_B=pi_S+pi_I on each of the four summands. Step 3: Z_L=[pi_L m_f,m_g] is exactly the residue node's formula; I verified the expansion Z_L=(pi_L-1)m_fg - m_g(pi_L-1)m_f, which gives finite Z_L(L). Steps 4 and 6: I checked the filtrations V>S>A>0 for Z_A,Z_S and V>B>I>0 for Z_I,Z_B; the eight length-3 words have finite image and span an invariant W containing every cube. This is Tate's 'finite potent subspace' and T4 proof written out. Step 5 uses only the trace-calculus sentence 'equals Tr_k(T|_U) for finite T-stable U containing T^N(V)' plus matrix additivity, not the pairwise-product clause, whose hypothesis does not hold here. Step 7: Z_A-Z_S=Z_I-Z_B exactly, as in Tate's display. Step 8: Omega^1 is k-spanned by f dg, and the residues are k-linear. Edge cases: A=B, A in B, A=0, B=V, V finite-dimensional, char 2, non-domain C, and the citer's disjoint-summand use. No new nodes, no duplicate (lem-pc-tate-endomorphism-ideals covers a single A), no cycle (the cited unsplit nodes have empty proof_deps), same-unit route, no SGA, no tool_uses, and proof_deps equals the union of the step uses. Maintainer note: TateResidue.res_sup_add_res_inf covers the equality clause only, as the report says. No fixes."
  }
 }
