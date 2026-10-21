@@ -1,0 +1,80 @@
+{
+ "id": "lem-pur-scalar-hom-comparison-tower",
+ "kind": "statement",
+ "title": "Evaluation-defined scalar Hom maps respect coefficient towers",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-pbc-sites-and-cohomology], and let $R\\xrightarrow{a}S\\xrightarrow{b}V$ be homomorphisms of sheaves of commutative rings. Use the ordinary unbounded derived module categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], their closed tensor and internal-Hom structures [lem-sf-ringed-derived-closed-symmetric-monoidal], and derived scalar extensions $T_a,T_b,T_{ba}$ [lem-pur-derived-change-of-rings]. Equip them with the canonical tensor comparisons $\\mu_a:T_a(P\\otimes^LQ)\\cong T_aP\\otimes^LT_aQ$ and balanced scalar associator $\\alpha:T_bT_a\\cong T_{ba}$, normalized on K-flat representatives. Assume the tensor-tower and identity equations of [lem-sfb-scalar-hom-tensor-coherence] for these comparisons. Write $H_R,H_S,H_V$ for the derived internal Homs [def-pur-derived-internal-hom], with evaluation in the convention $P\\otimes H_R(P,Q)\\to Q$ (using symmetry when needed). Define\n$$c^a_{P,Q}:T_aH_R(P,Q)\\longrightarrow H_S(T_aP,T_aQ)$$\nto be the transpose of $T_aP\\otimes T_aH_R(P,Q)\\xrightarrow{\\mu_a^{-1}}T_a(P\\otimes H_R(P,Q))\\xrightarrow{T_a(\\operatorname{ev})}T_aQ$, and define $c^b,c^{ba}$ likewise. These maps are natural contravariantly in $P$ and covariantly in $Q$, and satisfy\n$$H_V(\\alpha_P^{-1},\\alpha_Q)\\,c^b_{T_aP,T_aQ}\\,T_b(c^a_{P,Q})=c^{ba}_{P,Q}\\,\\alpha_{H_R(P,Q)}.$$\nFor the identity ring map, $c^{\\mathrm{id}}$ is the identity under the scalar multiplication unitor. No flatness, finite-freeness, perfectness, boundedness or completeness assumption is required; the assertion concerns these maps, not their invertibility.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom) and 07A4 (lemma-pullback-tensor-product); formal evaluation-transpose argument for the coefficient-tower equation in returned Step 12."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation transposed derived internal Hom base change comparison is coherent with successive scalar extension and identity ring maps",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.ihom_ev_app, CategoryTheory.expComparison_ev, ModuleCat.homEquiv_extendScalarsComp, CategoryTheory.coev_expComparison, CategoryTheory.coev_app_comp_pre_app, CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev, ModuleCat.monoidalClosed_uncurry, ModuleCat.ihom_coev_app",
+   "date": "2026-10-21",
+   "verdict": "no match: expComparison is for Cartesian monoidal categories, not derived tensor categories; ihom composition and coevaluation hits do not give this coefficient-extension comparison or its tower equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"closed\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s); Lean.Compiler.LCNF.ConfigOptions.extractClosed, Lean.Compiler.LCNF.compiler.extract_closed, Lean.Compiler.LCNF.extractClosed, Lean.Compiler.LCNF.ExtractClosed.Context, Lean.Compiler.LCNF.ExtractClosed.State, Lean.Compiler.LCNF.ExtractClosed.ExtractM, Lean.Compiler.LCNF.ExtractClosed.M, Lean.Compiler.LCNF.ExtractClosed.Context.baseName, Lean.Compiler.LCNF.ExtractClosed.extractFVar, Lean.Compiler.LCNF.ExtractClosed.isIrrelevantArg, Lean.Compiler.LCNF.ExtractClosed.shouldExtractFVar, Lean.Compiler.LCNF.ExtractClosed.extractArg",
+   "date": "2026-10-21",
+   "verdict": "no match: expComparison is for Cartesian monoidal categories, not derived tensor categories; ihom composition and coevaluation hits do not give this coefficient-extension comparison or its tower equation"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(comp|tensor)|internalHom.*(map|comp)",
+   "results": "[grep] OK 24 hit(s); Mathlib/CategoryTheory/Topos/Sheaf.lean:201, Mathlib/CategoryTheory/Pi/Monoidal.lean:144, Mathlib/CategoryTheory/Pi/Monoidal.lean:150, Mathlib/CategoryTheory/Sites/IsSheafFor.lean:254, Mathlib/CategoryTheory/Sites/IsSheafFor.lean:301, Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean:97, Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean:104, Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean:111, Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean:172, Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean:179, Mathlib/CategoryTheory/Sites/Sieves.lean:17, Mathlib/CategoryTheory/Filtered/Basic.lean:38, Mathlib/CategoryTheory/Galois/Topology.lean:112, Mathlib/CategoryTheory/Category/Cat/CartesianClosed.lean:22, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean:190, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean:47, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean:54, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:102, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:135, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:398, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:409, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean:48, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean:54, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean:64; subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: expComparison is for Cartesian monoidal categories, not derived tensor categories; ihom composition and coevaluation hits do not give this coefficient-extension comparison or its tower equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map extension of internal Hom to internal Hom of extended objects satisfies coefficient tower and unit coherence",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ihom.coev, CategoryTheory.ihom.ihom_adjunction_unit, ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.exp.coev, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.CoextendScalars.instCoeFunCarrierObj'Forall",
+   "date": "2026-10-21",
+   "verdict": "no match: expComparison is for Cartesian monoidal categories, not derived tensor categories; ihom composition and coevaluation hits do not give this coefficient-extension comparison or its tower equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor between closed monoidal categories induces internal hom maps compatible with composition of functors",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.closedIhom_obj_map, CategoryTheory.MonoidalClosed.pre_comm_ihom_map, CategoryTheory.Functor.ihom_map, CategoryTheory.MonoidalClosed.pre_map, CategoryTheory.pre_map, CategoryTheory.Functor.closedIhom_map_app, CategoryTheory.MonoidalClosed.pre, CategoryTheory.MonoidalClosed.comp",
+   "date": "2026-10-21",
+   "verdict": "no match: expComparison is for Cartesian monoidal categories, not derived tensor categories; ihom composition and coevaluation hits do not give this coefficient-extension comparison or its tower equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-operations-scalar-extension",
+  "date": "2026-10-21",
+  "group": "O1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'. Evaluation-defined scalar Hom maps respect coefficient towers",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

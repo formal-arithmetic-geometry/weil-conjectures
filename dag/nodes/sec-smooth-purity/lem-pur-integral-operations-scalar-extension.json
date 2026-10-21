@@ -28,191 +28,118 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E$, $B=\\mathcal O_L$, $t=\\varpi_E$, $v=\\varpi_L$. The absolute-value restriction and the DVR descriptions in [def-weil-l-adic-coefficient-extension] give $t=uv^e$ with $u\\in B^\\times$ and $e\\geq1$. Thus $(t^n)B=(v^{en})$. By [lem-weil-valued-dvr-finite-quotients], $B/tB=B/v^eB$ is a finite set, hence a finite-dimensional vector space over $A/tA$. Choose a basis of this vector space and lift it to $b_1,\\ldots,b_d\\in B$. These lifts form an $A$-basis of $B$, as follows. Given $x\\in B$, successively write $x_j=\\sum_i a_{ij}b_i+t x_{j+1}$, starting with $x_0=x$, with $a_{ij}\\in A$ chosen representatives of the residue coefficients. Then $x-\\sum_i(\\sum_{j<n}t^j a_{ij})b_i\\in t^nB$. The inner sums converge in $A$, by completeness of $E$ in [lem-weil-l-adic-extension-complete]; their limits belong to $A$ since its unit ball is closed. The error has norm at most $|t|^n$, hence tends to zero, proving spanning. A nonzero relation between the $b_i$ can be divided by the smallest $t$-adic valuation of its coefficients; reducing the resulting relation modulo $t$ contradicts independence of the chosen residue basis. This proves $B\\cong A^d$ and also $B/t^nB\\cong(A/t^nA)^d$ with one fixed basis compatible with all reductions.",
+   "text": "Write $R_W=\\widehat{\\mathcal O}_{E,W}$, $S_W=\\widehat{\\mathcal O}_{L,W}$ and $T_W=-\\otimes^L_{R_W}S_W$. By [lem-weil-finite-free-completed-scalar-comparison], $S_W$ is finite free and the specified integral scalar functor equals $T_W$ on complete inputs, through its natural quotient-augmentation map $\\chi$.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-l-adic-extension-complete"
+    "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09E4 (definition-extension-discrete-valuation-rings); explicit lifting argument using completeness and finite quotients"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   },
   {
-   "text": "For each $W$ write $R_W=\\widehat{\\mathcal O}_{E,W}$ and $S_W=\\widehat{\\mathcal O}_{L,W}$ as in [def-weil-completed-integral-coefficients]. Taking the inverse limit of the compatible finite-level basis isomorphisms from Step 1 gives a canonical algebra map and an isomorphism $R_W\\otimes_A B\\xrightarrow{\\sim} S_W$; in the chosen basis its underlying module map is $R_W^d\\xrightarrow{\\sim} S_W$. Indeed the subsequence $v^{en}$ has the same ordinary inverse limit as all $v^m$: extend a compatible family at indices $en$ to index $m$ by reduction from any $en\\geq m$, which is independent of that choice. Finite direct sums are finite products, so taking the sheaf limit commutes with the $d$ coordinates. The map itself sends $r\\otimes b$ to $rb$, so its definition is independent of the basis. In particular $S_W$ is flat over $R_W$, and tensoring with $S_W$ is an exact finite-sum functor after forgetting scalars. The coefficient reduction result [lem-weil-pbc-completed-constant-sheaf-reduction], applied to the Noetherian DVR $A$ and its two-term free resolution $[A\\xrightarrow{t^n}A]$ of $A/t^nA$, identifies $[R_W\\xrightarrow{t^n}R_W]$ with $(A/t^nA)_W$. The analogous assertion holds for $S_W$, $v^m$, and $(B/v^mB)_W$. This checks the completed, rather than constant, coefficient rings used below.",
-   "uses": [
-    "def-weil-completed-integral-coefficients",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093M (lemma-completion-flat) and 093J (lemma-constant-exact), for the two-term reduction model; compatible finite-basis inverse-limit argument"
-   }
-  },
-  {
-   "text": "For each $W$ and a complex $Q$ of $R_W$-modules define $C_RQ=R\\lim_n(Q\\otimes^L_{R_W}(A/t^nA)_W)$ using its strict tower. The completed-constant-sheaf reduction theorem [lem-weil-pbc-completed-constant-sheaf-reduction] identifies the reduction with the two-term Koszul resolution $[R_W\\xrightarrow{t^n}R_W]$. Thus [lem-weil-pbc-ringed-koszul-completion-reflector] applies and makes $C_R$ the local derived $(t)$-completion reflector.",
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], the valuation rings are principal ideal domains, hence Noetherian. The reduction theorem [lem-weil-pbc-completed-constant-sheaf-reduction] identifies $R_W/t^nR_W$ with $(\\mathcal O_E/t^n)_W$ and makes $t$ regular. Koszul reconstruction and the completion reflector identify quotient completion $C_R$ with local derived completion: a complete $K$ is isomorphic to $C_RK$, hence satisfies the reflector's local vanishing criterion, so its specified unit is invertible. The same applies over $L$.",
    "uses": [
     "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul; Tag 099B, lemma-derived-completion"
-   }
-  },
-  {
-   "text": "The derived-completeness hypothesis on $K$ gives the specified Roos triangle [def-weil-derived-complete]. Step 2 shows that the canonical quotient maps $[R_W\\xrightarrow{t^n}R_W]\\to(A/t^nA)_W$ are quasi-isomorphisms, so $t$ is injective on $R_W$ and these quotients are its quotient sheaves. Choose a K-flat representative by [lem-pc-kflat-resolution] and apply [lem-pur-derived-complete-koszul-reconstruction]: it identifies the strict towers in their derived category and gives an isomorphism $K\\cong C_RK$ respecting the quotient projections. The strict-tower homotopy-limit theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] provides the second Roos triangle required for this comparison. For scalarRoosMap_existsUnique, construct the comparison for any additive functor directly by mappingCocone.lift: map the source cocone to the cocone of the mapped boundary, then use the product comparison square to reach the target cocone. The boundary square follows after every product projection. The two diagonal coordinate equations and the cocone degreewise biproduct identity give uniqueness; no preservation of infinite products is required for the existence of this comparison map.",
-   "uses": [
-    "def-weil-derived-complete",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-pur-derived-complete-koszul-reconstruction",
-    "lem-pc-kflat-resolution"
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; strict Koszul/quotient comparison isolated in lem-pur-derived-complete-koszul-reconstruction"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   },
   {
-   "text": "The reflector theorem [lem-weil-pbc-ringed-koszul-completion-reflector] says that $C_RK$ is locally derived $(t)$-complete. Restrict the isomorphism $K\\cong C_RK$ from Step 4 to any slice and apply $R\\mathcal Hom(R_U[1/f],-)$ for $f\\in(t)(U)$: its value on $K|_U$ is isomorphic to its zero value on $(C_RK)|_U$. Thus $K$ satisfies the same local vanishing condition, and the unit criterion in the reflector theorem makes its specified unit $K\\to C_RK$ invertible.",
+   "text": "The DVR factorization [lem-weil-l-adic-extension-integers-dvr] gives $t=uv^e$, $u$ a unit and $e\\geq1$ since $|t|<1$. Products are exact on these pro-etale module categories. Thus [lem-pur-finite-free-completion-exchange] gives $T_WC_R\\cong C_ST_W$ on arbitrary ambient inputs, respecting the quotient units.",
    "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-pur-derived-complete-koszul-reconstruction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099B, lemma-derived-completion; elementary invariance of the local vanishing condition under the Step 4 isomorphism, followed by the unit criterion"
-   }
-  },
-  {
-   "text": "Define $C_S$ with $v$ in the same way. Exactness of countable products follows from [lem-weil-proetale-countable-products-exact], and [lem-weil-strict-roos-comparison] identifies strict derived limits with product cones, respecting strict augmentations. To apply [lem-pur-compact-support-roos-cofinality], first regard the $v$-reduction tower as modules over the constant sheaf $\\underline B$ via $\\underline B\\to S_W$. Its countable products are exact by the same product theorem. Forgetting the $S_W$-action changes neither kernels, cokernels nor products of these module sheaves, so it preserves and detects quasi-isomorphisms and computes the same product cone. Apply the cofinality lemma with $e\\geq1$ from Step 1. Its selected-coordinate and finite weighted block maps are $S_W$-linear, since every transition is $S_W$-linear. The resulting natural quasi-isomorphism therefore holds for the $S_W$-module cones as well. It identifies the full tower with the tower at indices $en$, preserves strict augmentations, and composes under further arithmetic reindexing.",
-   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-compact-support-roos-cofinality"
+    "lem-pur-finite-free-completion-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; derived.tex Tag 0H9J, remark-functoriality-derived-limit; arithmetic strict-cone comparison supplied by existing lem-pur-compact-support-roos-cofinality"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   },
   {
-   "text": "Let $T_W(Q)=Q\\otimes^L_{R_W}S_W$ denote ordinary ambient change of rings. The construction [lem-pur-derived-change-of-rings] computes it on K-flat resolutions; it is just termwise tensor since $S_W$ is finite free. The integral scalar extension [def-weil-integral-scalar-extension] is $C_S T_W(Q)$: associating the tensor products identifies each reduction with $Q\\otimes^L_{R_W}(B/v^mB)_W$. Restrict to $m=en$ by Step 6. Its reduction tower is then the tensor with $S_W$ of the $t$-reduction tower of $Q$. Tensor with a finite free module commutes with termwise products: in a basis both sides are $d$ copies of the same product; the canonical map, defined without a basis, is therefore invertible. It also commutes with cones. Consequently $C_ST_W(Q)\\cong T_W C_R(Q)$, naturally and $S_W$-linearly, and $T_W(Q)$ is derived complete when $Q$ is. On complete inputs integral scalar extension is therefore canonically ordinary finite free change of rings. This applies to all complete objects used below, whether or not their internal Hom is constructible. The restriction to $D^b_c$ is stipulated in the statement of the item; none of the ambient comparisons uses constructibility preservation.",
+   "text": "Put $F_R,F_S$ for ordinary ambient pullbacks. The ambient-model lemma identifies $Lf_E^*=C_RF_R$ and $Lf_L^*=C_SF_S$. Ringed pullback composition gives $T_XF_R\\cong F_ST_Y$: both paths are $S_X\\otimes^L_{f^{-1}R_Y}f^{-1}(-)$. Exchange completion to obtain $T_XC_RF_R\\cong C_ST_XF_R\\cong C_SF_ST_Y$, proving the pullback assertion through $\\chi$.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-integral-scalar-extension"
+    "lem-pur-integral-ambient-operation-models",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-finite-free-completion-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YY (lemma-derived-base-change); product-cone comparison on finite free coefficients"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   },
   {
-   "text": "Choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. Let $F_R$ and $F_S$ be the ambient derived module pullbacks for $f$, with coefficient maps $f^{-1}R_Y\\to R_X$ and $f^{-1}S_Y\\to S_X$. These maps are induced by the finite quotient maps and their limits; no assertion $f^{-1}R_Y=R_X$ is needed. The completed definitions [def-pur-integral-derived-operations] give $Lf_E^*K=C_R F_RK$ and $Lf_L^*T_YK=C_S F_ST_YK$. To check these equalities on towers, the quotient model from Step 2 identifies $F_RP\\otimes_{R_X}(A/t^nA)_X$ with $f^{-1}(P\\otimes_{R_Y}(A/t^nA)_Y)$; finite constant coefficient inverse image is exact by [prop-weil-pbc-proetale-constant-exact]. K-flatness of ambient pullbacks is supplied by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The coefficient description $S_W=R_W\\otimes_A B$ gives the ordinary comparison $T_XF_RP\\cong F_S T_YP$: termwise both are $S_X\\otimes_{f^{-1}R_Y}f^{-1}P$, using $f^{-1}(P\\otimes_{R_Y}S_Y)=f^{-1}P\\otimes_{f^{-1}R_Y}f^{-1}S_Y$ and cancelling $f^{-1}S_Y$ in the next tensor. In a basis this is the finite-sum comparison, and it is independent of that basis. Apply Step 7 to $F_RK$, and use that $C_RF_RK$ is complete by Step 5. This gives $T_X Lf_E^*K\\cong C_S T_XF_RK\\cong C_S F_ST_YK=Lf_L^*T_YK$, the first claimed isomorphism. The preservation of good representatives (scalarGood) uses the general coefficient-change theorem [lem-pur-kflat-change-of-rings], which does not need finite freeness. The object and morphism formulas of integralOrdinaryScalarWitness give a degreewise isomorphism to changeOfRingsComplex. Convert IsFlatOnSite to exactness of the canonical tensorRight using [lem-weil-pbc-independent-sheaf-tensor-colimits], apply changeOfRings_isKFlat_of_flat_terms, and transport both K-flatness and termwise flatness back along that isomorphism.",
+   "text": "The same model lemma writes completed tensor as $C_R(M\\otimes^L_{R_W}N)$. The canonical tensor comparison for change of rings and completion exchange give $T_WC_R(M\\otimes^LN)\\cong C_S(T_WM\\otimes^L_{S_W}T_WN)$, the second assertion. The completion outputs are complete by Step 2, so $\\chi$ applies.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-integral-derived-operations",
-    "prop-weil-pbc-proetale-constant-exact",
+    "lem-pur-integral-ambient-operation-models",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+    "lem-pur-finite-free-completion-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); K-flat tensor comparison"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   },
   {
-   "text": "For $Q=M\\otimes^L_{R_W}N$, the completed tensor in [def-pur-integral-derived-operations] is $C_RQ$. On K-flat representatives $P,Q'$ its $n$-th term is $(P\\otimes_{R_W}Q')\\otimes_{R_W}(A/t^nA)_W$, since $(P\\otimes A_n)\\otimes_{A_n}(Q'\\otimes A_n)\\cong(P\\otimes Q')\\otimes A_n$; these identifications respect quotient transitions. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with coefficient map $R_W\\to S_W$, to obtain $T_W(M\\otimes^L_{R_W}N)\\cong T_WM\\otimes^L_{S_W}T_WN$. Step 7 and completeness of $C_RQ$ now give $T_W(M\\widehat\\otimes^L_{R_W}N)=T_WC_RQ\\cong C_ST_WQ\\cong C_S(T_WM\\otimes^L_{S_W}T_WN)$. This is precisely the second displayed isomorphism. No perfectness or termwise constructibility of the resolutions has been used.",
+   "text": "If $N$ is complete, the local-completeness theorem for internal Hom and Step 2 make $H_R(M,N)$ complete. Finite-free Hom base change is the evaluation-defined natural isomorphism $T_WH_R(M,N)\\cong H_S(T_WM,T_WN)$. Apply $\\chi$ to its complete inputs to obtain the third assertion, without imposing perfectness on $M$.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sf-ringed-rhom-derived-complete",
+    "lem-sf-ringed-finite-free-hom-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to identity topos and change of rings; compatible tensor quotient identities"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   },
   {
-   "text": "Write $H_R(M,N)=R\\mathcal Hom_{R_W}(M,N)$. It is complete if $N$ is complete. Indeed [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives restriction to every slice and derived currying; on a slice its two currying isomorphisms and tensor symmetry identify $R\\mathcal Hom(R_U[1/t],H_R(M,N)|_U)$ with $R\\mathcal Hom(M|_U,R\\mathcal Hom(R_U[1/t],N|_U))=0$. Here the last vanishing follows from the local completion criterion in [lem-weil-pbc-ringed-koszul-completion-reflector], already identified with the reduction-tower definition in Step 4. The criterion for the generator $t$ implies the criterion for all sections in $(t)$: after inverting $at$, $t$ is invertible, and the usual localization tensor/currying identity gives the same vanishing (equivalently use [lem-weil-pbc-ringed-derived-complete-elements-ideal]). Thus Step 7 identifies scalar extension of $H_R(M,N)$ with $H_R(M,N)\\otimes_{R_W}S_W$.",
+   "text": "All chosen maps are natural. The ordinary pullback tower routes agree on local tensors by $((p\\otimes s)\\otimes s')\\mapsto p\\otimes ss'$; normalized derived pullback composition preserves this equality. Tensor tower/unit coherence is [lem-sfb-scalar-hom-tensor-coherence], and Hom tower/unit coherence is [lem-pur-scalar-hom-comparison-tower]. The actual completion exchanges satisfy the tower and identity equations of [lem-pur-finite-free-completion-exchange-coherence]. Their quotient-unit equation identifies $\\chi$ with $\\epsilon\\,T\\eta$ on complete inputs, so conjugating the ordinary equations by $\\chi$ gives the integral tower and identity clauses.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-pbc-ringed-derived-complete-elements-ideal"
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-pur-scalar-hom-comparison-tower",
+    "lem-pur-finite-free-completion-exchange-coherence",
+    "lem-pur-finite-free-completion-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U); Bhatt--Scholze Lemma 3.4.11 argument; algebraization.tex Tags 0998 (lemma-ideal-of-elements-complete-wrt) and 099B (lemma-derived-completion)"
-   }
-  },
-  {
-   "text": "To prove the third comparison, use [def-pur-derived-internal-hom] and a K-injective resolution $T_WN\\to J$ over $S_W$, existing by [prop-pur-kinjective-resolutions-exist]. Its restriction to $R_W$ is K-injective: for an acyclic $R_W$-complex $Z$, tensoring with the finite free $S_W$ keeps it acyclic, and the termwise tensor universal property gives $\\operatorname{Hom}^\\bullet_{R_W}(Z,\\operatorname{Res}J)=\\operatorname{Hom}^\\bullet_{S_W}(Z\\otimes_{R_W}S_W,J)$, which is acyclic by K-injectivity. By [lem-pur-kinjective-restrict-localized], $J$ and its $R_W$-restriction remain K-injective on every slice. Repeating the acyclic-test adjunction there computes the internal Hom complexes sectionwise, and gives $\\operatorname{Res}H_S(T_WM,T_WN)\\cong H_R(M,\\operatorname{Res}T_WN)$. In the temporary basis $b_i$, $\\operatorname{Res}T_WN=N^d$. Finite sums of a K-injective resolution of $N$ are K-injective (the Hom complex out of an acyclic input is a finite sum of acyclic complexes), and the internal Hom complex commutes with this finite sum in its second argument. Therefore the canonical map $H_R(M,N)\\otimes_{R_W}S_W\\to H_R(M,N\\otimes_{R_W}S_W)$ is an isomorphism: in the basis it is the identity on $d$ copies of $H_R(M,N)$. Its sectionwise formula is $h\\otimes s\\mapsto(m\\mapsto h(m)\\otimes s)$, so it is $S_W$-linear and independent of the basis. Combining with the preceding adjunction and Step 7 proves the third isomorphism for arbitrary complete $M,N$, in particular the stated constructible ones. This proves the derived scalar adjunction here rather than invoking the finite-Tor-only comparison of another node.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kinjective-restrict-localized"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); injectives.tex Tag 079P; sites-modules.tex Tag 03EO (lemma-internal-hom-adjoint-tensor); Tag 08FI (lemma-restrict-K-injective-to-open)"
-   }
-  },
-  {
-   "text": "All comparisons above come from strict-tower maps, tensor universal maps, and evaluation, so they are natural in their inputs. For $E\\subset L\\subset L'$, write $S'_W=\\widehat{\\mathcal O}_{L',W}$. Repeat Steps 1--2 and the scalar-extension construction of Step 7 for both inclusions. The integral composition map is induced by $(P\\otimes_{R_W}S_W)\\otimes_{S_W}S'_W\\to P\\otimes_{R_W}S'_W$, $(p\\otimes s)\\otimes s'\\mapsto p\\otimes ss'$, and the completion comparisons. The two pullback routes both send a local tensor $a\\otimes(p\\otimes s)\\otimes s'$ to $a\\otimes p\\otimes ss'$. The two tensor routes both send $(m\\otimes s)\\otimes(n\\otimes t')\\otimes u'$ to $(m\\otimes n)\\otimes st'u'$ after the appropriate ring embeddings. For internal Hom, uncurry the two routes using the termwise adjunction in Step 11: both send $(h\\otimes s\\otimes s',m\\otimes t')$ to $h(m)\\otimes ss't'$ in $N\\otimes S'_W$. These equalities hold on sheaf tensors because local pure tensors generate, and commute with differentials, quotients, transition maps, products and cones. Thus they remain equal in the derived categories and after completion. The generator formulas define the maps; the bases were used only to prove they are invertible. For $L=E$, scalar extension is $C_R$ and its canonical comparison with the identity on complete objects is the completion unit of [lem-weil-pbc-ringed-koszul-completion-reflector]; under this identification all three formulas are identities. This proves the identity clause in its usual categorical sense (the originally displayed functor is a product-cone construction, not literally the identity on representatives). No rational-composition statement is used to infer integral coherence. In Lean, scalarHomOrdinary_naturality is proved for arbitrary coefficient closed structures and any functor with a tensor comparison: uncurry both sides, use the inverse tensor-comparison naturality squares, and apply evaluation naturality in both variables. Injectivity of the transpose equivalence then proves the desired equation without any finite-free or completeness argument.",
-   "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 03EO (lemma-internal-hom-adjoint-tensor): tensor universal maps; explicit multiplication/evaluation calculations for coherence"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-weil-l-adic-extension-complete",
-  "def-weil-completed-integral-coefficients",
+  "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "def-weil-derived-complete",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-pur-derived-complete-koszul-reconstruction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "lem-pur-compact-support-roos-cofinality",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-integral-scalar-extension",
-  "lem-pc-kflat-resolution",
-  "def-pur-integral-derived-operations",
-  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-derived-complete-elements-ideal",
-  "def-pur-derived-internal-hom",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-pur-kflat-change-of-rings",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+  "lem-sf-ringed-rhom-derived-complete",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-pur-scalar-hom-comparison-tower",
+  "lem-pur-finite-free-completion-exchange-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral/common-stage clause; finite-free extension argument written here using the cited Stacks ringed-site results and Bhatt--Scholze §§3.4--3.5",
-  "note": "Y3, 2026-10-19: partial Lean proof closes the additive Roos comparison, preservation of good representatives by general change of rings, and evaluation-defined Hom naturality. The other proof steps remain obligations; no new statements or holes are introduced."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'. Short assembly after the explicit human re-split return of 2026-10-21. The former proof and partial-Lean evidence remain recorded in scratch/retained-item.json and the report."
  },
  "mathlib_searches": [
   {
@@ -337,51 +264,55 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sf-compatibility",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-integral-operations-scalar-extension",
   "worker": "stage1",
-  "summary": "Retained the completion, pullback, tensor, internal-Hom and coefficient-coherence arguments. The strict Koszul/quotient tower reconstruction is isolated in one statement-only helper and arithmetic reindexing uses the existing cofinality theorem. Maintainer review folded the two-line transfer of local completeness into elementary Step 5 and dropped its unnecessary helper. The item statement, complete Lean record and maintainer-owned fields are unchanged.",
-  "blueprint": "Realizes the integral/common-stage paragraph of def-weil-derived-pullback-tensor-hom. Steps 3–6 provide Koszul identification, Roos reconstruction, elementary transfer of local completeness to the specified unit, and arithmetic cone comparison; Steps 7–12 provide pullback, tensor, internal-Hom, and coefficient coherence.",
+  "summary": "Repair of the human re-split return: preserve the item statement verbatim and replace the 14,147-character proof by a 2,772-character assembly of existing tools and four new statement-only unsplit technical lemmas. In particular extract the composition and identity of the actual completion-exchange maps as a separate task, rather than leaving this argument within another task. Preserve the original twelve arguments verbatim in the report, with their allocation to the new and reused nodes. No Lean change.",
+  "blueprint": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'. Coefficient compatibility in clause (7) of sk-thm-sf-compatibility.",
   "tool_uses": [
    {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
     "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 2, 3; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 3, 5, 10, 12; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 4; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Existence of K-flat resolutions on the ringed site in Steps 4 and 8; a generic resolution tool that retains the coefficient-compatibility route."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 8; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 8, 9; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 10; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 10; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
-   },
-   {
-    "node": "lem-weil-strict-roos-comparison",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 6; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
    },
    {
     "node": "lem-pur-derived-complete-koszul-reconstruction",
-    "why": "Generic ringed-site or derived-category tool used in Step(s) 4, 5; supplies the stated comparison or local criterion, while retaining the unit coefficient-compatibility route."
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-sf-ringed-rhom-derived-complete",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-sfb-scalar-hom-tensor-coherence",
+    "why": "Generic ambient ringed-site or completion tool, supplying the stated comparison or local criterion while retaining the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Arithmetic tool: valuation rings are principal ideal domains and a nonzero element factors as a unit times a uniformizer power; positivity is read from its absolute value."
    }
   ]
  },
@@ -395,15 +326,22 @@
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-weil-pbc-ringed-derived-complete-elements-ideal",
   "lem-weil-strict-roos-comparison",
-  "lem-pur-derived-complete-koszul-reconstruction"
+  "lem-pur-derived-complete-koszul-reconstruction",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-rhom-derived-complete",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q109-5bce72a8f",
-  "group": "Q109",
+  "reviewer": "NT-cc-O1-bf31ebbfc",
+  "group": "O1",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q109-5bce72a8f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, source locations and route. Folded the elementary reflector-transfer inference into Step 5; retained the valid Koszul reconstruction helper. Completed-ring maps, ramification, internal Hom and coefficient coherence checked. No dependency cycle or target weakening. Corrected JSON and review.md written.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-bf31ebbfc (reviewer sub-agent of L); spot-checked: Read in full: the item, all four new nodes, every cited statement, the source (main-20261015 def-weil-derived-pullback-tensor-hom, final paragraph; unit sk-thm-sf-compatibility clause 7) and Stacks 0941/06YY/0G7E/07A4/08J9. Re-split check: each of the 12 old steps is carried either by a cited node whose statement says it or by a new node, and none was shortened. Old 1-2 = lem-weil-finite-free-completed-scalar-comparison (finite free, χ iso, L=E). Old 3-5 = completed-constant reduction + Koszul reconstruction + reflector. Old 6-7 = the exchange and exchange-coherence nodes. Old 8-9 = the ambient-models node + derived-monoidal/tensor-pullback nodes. Old 10 = lem-sf-ringed-rhom-derived-complete. Old 11 = lem-sf-ringed-finite-free-hom-base-change. Old 12 = the coherence nodes. The item proof is a short 7-step assembly and the new nodes are of comparable size; none restates a clause of the item. Hypotheses checked: t=uv^e with e>=1 from DVR (5) and |t|_L<1; t and v regular from the [A->A] resolution clause; exact products for any ring sheaf; the exchange applied to the incomplete F_R K; χ applied only to complete objects. All four new statements are true and type-check: tested rank 0, e=f=1, the identity map, Q=0, exponent ef, Hom variance, and no f^{-1}R_Y=R_X assumption. No duplicates: the cofinality finite-free clause is constant-ring only; the existing Hom coherence nodes concern U H_S(FK,N); the tensor-tower node is only a tool. No cycle, no SGA, generic tool uses accepted. FIX (B3): lem-pur-integral-ambient-operation-models used Tot without a citation; I cited def-pc-tensor-complex-sheaves in its statement and stmt_deps (fixes/dag/nodes/sec-smooth-purity/). Note: the integral composition iso in the item statement is fixed only through χ-conjugation (the base statement cites the rational lem-weil-scalar-extension-composition); this is inherited, not a fault.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

@@ -1,0 +1,80 @@
+{
+ "id": "lem-pur-finite-free-completion-exchange-coherence",
+ "kind": "statement",
+ "title": "Coefficient-tower coherence of the specified quotient-completion exchange",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-pbc-sites-and-cohomology], and let $R\\xrightarrow a S\\xrightarrow b V$ be homomorphisms of sheaves of commutative rings. Assume $S$ is finite free as an $R$-module sheaf and $V$ finite free as an $S$-module sheaf (ranks may be zero). Let $t\\in R(1)$, $v\\in S(1)$ and $w\\in V(1)$ act injectively on their respective rings, with $a(t)=u v^e$ and $b(v)=z w^f$, where $u,z$ are units and $e,f\\geq1$. Assume countable products of $R$-, $S$-, $V$-modules and of abelian sheaves are exact. Use the unbounded derived module categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], the derived scalar functors $T_a=-\\otimes_R^L S$, $T_b=-\\otimes_S^L V$, $T_{ba}=-\\otimes_R^L V$ [lem-pur-derived-change-of-rings], and the balanced scalar associator $\\alpha:T_bT_a\\xrightarrow\\sim T_{ba}$, induced by $((p\\otimes s)\\otimes q)\\mapsto p\\otimes b(s)q$. For $A=R,S,V$ and $h=t,v,w$ respectively put\n$$C_AQ=R\\lim_{n\\geq1}(Q\\otimes_A^L A/h^nA),$$\nusing the strict quotient tower and its quotient augmentation $\\eta^A$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. For each of $a,b,ba$, let $\\epsilon$ be precisely the exchange isomorphism of [lem-pur-finite-free-completion-exchange]: the canonical tensor/product map, followed by quotient tensor associativity and the inverse of the selected-coordinate/weighted-block arithmetic-subsequence Roos map of [lem-pur-compact-support-roos-cofinality]. For $ba$ use exponent $ef$, since $(ba)(t)=b(u)z^e w^{ef}$.\nThen for every $Q\\in D(R)$ the following equality holds in $D(V)$, naturally in $Q$:\n$$C_V(\\alpha_Q)\\circ\\epsilon^b_{T_aQ}\\circ T_b(\\epsilon^a_Q)=\\epsilon^{ba}_Q\\circ\\alpha_{C_RQ}.$$\nThus both routes from $T_bT_aC_RQ$ to $C_VT_{ba}Q$ agree for the specified maps, including their quotient augmentations. For the identity map of any one of these ring sheaves, with the same chosen section and exponent $1$, the exchange is the identity on $C_AQ$ under the scalar multiplication identification $Q\\otimes_A^LA\\cong Q$. After composing with the specified arithmetic restriction quasi-isomorphisms, the tower equation is represented by equality of the actual maps on both Roos product coordinates. The displayed equality therefore also holds under the normalized strict-derived-limit comparisons. No completeness, constructibility, boundedness or perfectness hypothesis on $Q$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok (the Roos model); agent-formulated coefficient-tower and identity equations extracted from original proof Step 12 and the end of Step 7. Tensor/product and weighted-block maps are those specified in the cited exchange and cofinality statements."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-compact-support-roos-cofinality"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite free scalar extension comparison with derived completion via Roos product cones respects composition of coefficient maps and multiplication of ramification exponents",
+   "results": "galLift_comp, Ideal.ramificationIdxIn_mul_ramificationIdxIn, Algebra.Extension.Cotangent.map_comp, Algebra.Extension.CotangentSpace.map_comp, Algebra.Extension.H1Cotangent.map_comp, Algebra.Extension.CotangentSpace.map_comp_apply, galRestrict'_comp, Ideal.ramificationIdx_tower",
+   "date": "2026-10-21",
+   "verdict": "no match: arithmetic ramification and cotangent functoriality do not concern the specified derived-completion map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"map_comp\"",
+   "results": "AdicCompletion.transitionMap_comp_eval, AdicCompletion.transitionMap_comp_eval_apply, AdicCompletion.AdicCauchySequence.map_comp, AdicCompletion.AdicCauchySequence.map_comp_apply, AdicCompletion.map_comp, AdicCompletion.map_comp_apply, AdicCompletion.transitionMap_comp_reduceModIdeal",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, direct limits, or ordinary categorical product projections do not state the derived quotient-completion tower equation with arithmetic reindexing"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(comp|coher)|roos|homotopyLimit",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, direct limits, or ordinary categorical product projections do not state the derived quotient-completion tower equation with arithmetic reindexing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor product map on inverse limit product cones and arithmetic cofinal subsequence maps commute with successive finite free changes of rings",
+   "results": "TensorProduct.directLimitLeft_rTensor_of, TensorProduct.fromDirectLimit, TensorProduct.toDirectLimit, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.toDirectLimit_tmul_of, TensorProduct.fromDirectLimit_of_tmul, Submodule.FG.rTensor.directLimit_apply, Submodule.FG.rTensor.directLimit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, direct limits, or ordinary categorical product projections do not state the derived quotient-completion tower equation with arithmetic reindexing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving products commutes with homotopy inverse limits and its comparison maps are compatible with composition of functors",
+   "results": "CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc, CategoryTheory.preservesLimitIso_hom_π, CategoryTheory.Limits.inv_piComparison_comp_map_π, CategoryTheory.preservesLimitIso_inv_π, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.preservesLimitIso_inv_π_assoc, CategoryTheory.preservesLimitIso_hom_π_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, direct limits, or ordinary categorical product projections do not state the derived quotient-completion tower equation with arithmetic reindexing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-operations-scalar-extension",
+  "date": "2026-10-21",
+  "group": "O1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final integral/common-stage paragraph: compatibility of finite coefficient stages. Returned proof Step 12, the product/cone and arithmetic-subsequence part of coefficient-tower and identity compatibility.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
