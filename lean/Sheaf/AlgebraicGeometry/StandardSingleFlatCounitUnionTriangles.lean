@@ -6,9 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-public import Mathlib.CategoryTheory.Comma.Arrow
-public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.StandardSingleUnionSESPresentation

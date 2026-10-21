@@ -5,19 +5,9 @@ Authors: SHEAF groups NJ, K7
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.Algebra.Module.FinitePresentation
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import Sheaf.Paper.CondensedModuleDerivedPushpull
-public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import Sheaf.Paper.CondensedConstantConstructibility
-public import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Sheaf.Paper.CartesianCoefficients
-import Mathlib.Algebra.Field.ULift
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 import all Sheaf.Paper.CondensedCoefficientIsoConstructible
 import all Sheaf.Paper.IntegralLfpConstantModelComparison
 import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality

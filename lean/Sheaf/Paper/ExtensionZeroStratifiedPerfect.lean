@@ -5,21 +5,6 @@ Authors: SHEAF group N8
 -/
 module
 
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.Paper.AdicCoefficientDatum
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-public import Sheaf.SixFunctors.IntrinsicDerivedTensor
-public import Mathlib.CategoryTheory.Sites.Over
-public import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.Paper.CompletedExtensionZeroComparison
 public import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 

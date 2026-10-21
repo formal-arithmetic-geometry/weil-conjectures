@@ -6,8 +6,6 @@ Authors: SHEAF group Q77
 module
 
 public import Mathlib.FieldTheory.Galois.Basic
-public import Mathlib.FieldTheory.Normal.Basic
-public import Mathlib.RingTheory.Ideal.Pointwise
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.FieldTheory.Galois.Infinite
 import Mathlib.FieldTheory.Galois.Profinite

@@ -7,8 +7,6 @@ module
 
 public import Sheaf.SixFunctors.IntegralOpenReductionComparison
 public import Sheaf.Paper.IntegralLineTensorComparisonDefinitions
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Sheaf.Paper.CanonicalOpenRestrictionModel
 import Sheaf.Paper.OpenRestrictionCompleteness
 

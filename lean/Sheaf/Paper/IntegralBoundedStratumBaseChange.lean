@@ -6,18 +6,11 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.Paper.IntegralDerivedCoefficientData
-public import Sheaf.Paper.CondensedModuleDerivedPushpull
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.Paper.CondensedOpenClosedRecollement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
-import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Bounded integral base change for a stratum extension
 

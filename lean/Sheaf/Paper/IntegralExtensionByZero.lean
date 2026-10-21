@@ -5,20 +5,12 @@ Authors: SHEAF group Q35
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.LocalizingClosureExistence
 public import Sheaf.Paper.IntegralDerivedCoefficientData
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import Sheaf.Paper.OpenExtensionConstantModelConstructible
 import Sheaf.Paper.CondensedOpenExtensionProducts
 import Sheaf.Paper.IntegralOpenExtensionReduction
 import Sheaf.CategoryTheory.PretriangulatedKernelSplit
-import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Integral extension by zero

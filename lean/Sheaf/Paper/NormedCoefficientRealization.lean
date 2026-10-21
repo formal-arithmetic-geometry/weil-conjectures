@@ -5,19 +5,12 @@ Authors: SHEAF group O4
 -/
 module
 
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Sheaf.Topology.ProfiniteCondensedRing
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 public import Sheaf.Paper.CondensedModuleDerivedPushpull
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
 
 /-!
 # Realization of finite normed coefficient fields

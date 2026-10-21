@@ -9,8 +9,6 @@ public import Sheaf.Paper.BoundaryExceptionalComparisonData
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjection
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction

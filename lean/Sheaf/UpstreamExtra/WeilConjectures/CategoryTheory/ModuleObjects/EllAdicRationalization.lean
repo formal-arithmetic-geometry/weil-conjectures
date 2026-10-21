@@ -1,23 +1,9 @@
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
-public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated
-public import Sheaf.Paper.ContinuousConstructibleIntegralModel
-public import Sheaf.Paper.ContinuousConstructibleIntegralDenominators
 public import Sheaf.Paper.ContinuousIntegralLocalizationColimitTransport
 public import Sheaf.Paper.IntegralConstructibleSequentialHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
-public import Sheaf.Paper.ContinuousIntegralScalarExact
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
 import all Sheaf.Paper.IntegralConstructibleSequentialHom
-import Sheaf.Paper.IntegralConstructibleSheafHom
 
 /-! Private proof helpers moved from
 `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`

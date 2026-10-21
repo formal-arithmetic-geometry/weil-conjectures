@@ -6,7 +6,6 @@ Authors: SHEAF group N7
 module
 
 public import Sheaf.Topology.ProfiniteCondensedRing
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 
 /-!
 # Condensed realizations of the base p-adic coefficients
