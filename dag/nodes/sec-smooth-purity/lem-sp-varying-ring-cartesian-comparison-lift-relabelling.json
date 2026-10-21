@@ -30,9 +30,117 @@
   "def-weil-presheaf-modules-sheafification",
   "def-weil-extension-by-zero-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pe-constant-left-module-inverse-image] to the geometric morphism of small pro-etale topoi in [def-weil-proetale-inverse-image], separately with each constant ring $R_n$. It identifies the underlying abelian inverse image and its unit with the module inverse image and its unit, and identifies $f^{-1}(R_n)_T$ with $(R_n)_X$ by the same constant scalars. These identifications also respect $\\varphi_n$: both scalar maps send a constant $r$ to the constant $\\varphi_n(r)$. Hence applying abelian inverse image to the transition of a system gives its semilinear transition after pullback. The simultaneous levelwise inverse image of [lem-coef-semilinear-derived-sections] is left adjoint to the sectionwise system direct image: the level adjunction bijections carry the equations expressing compatibility with transitions to one another, by naturality of the units. The left-adjoint specification in [def-sp-varying-ring-operations] therefore identifies this functor with $f^*_\\bullet$, with these units. This proves the inverse-image assertion in (1), for arbitrary $N'$ on $T$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "lem-coef-semilinear-derived-sections",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, (2), (5), (6); applying fixed-ring scalar endomorphisms levelwise"
+   }
+  },
+  {
+   "text": "For $j=i$ or $b$, the ordinary open localization in [def-sp-varying-ring-operations] is the module extension of [lem-pur-site-restriction-module-adjunction-exact]. Thus $(j_{!,\\bullet}M)_n=P_{M_n}^{\\#}$, with $P$ exactly as in [def-weil-extension-by-zero-presheaf]. By [def-weil-presheaf-modules-sheafification], its underlying abelian sheaf is the abelian sheafification of this direct-sum presheaf. The explicit adjunction in [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint], applied after forgetting scalars, sends a map $v:M_n\\to j^*F$ to the map $[c,x]\\mapsto v_{(U,c)}(x)$. Taking the transpose of the identity of $j_!M_n$ therefore gives the open unit $x\\mapsto[\\mathrm{id},x]$ on the localized site. This map is linear by the summandwise scalar action in $P$, so the same formula is the module unit. This proves the extension assertion of (1) and fixes the unit normalization needed below.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, statement and proof: presheaf formula and the explicit adjunction"
+   }
+  },
+  {
+   "text": "By [def-weil-extension-by-zero-presheaf], applying a module map to $P$ acts only on its section coordinate. For the semilinear map $t_n$, give the target the $R_{n+1}$-action via $\\varphi_n$; then $[c,x]\\mapsto[c,t_n(x)]$ is additive and satisfies $[c,t_n(rx)]=[c,\\varphi_n(r)t_n(x)]$. It commutes with restriction because $t_n$ does. Sheafification [def-weil-presheaf-modules-sheafification] consequently gives the system transition of $j_!M$. Step 1 says inverse image applies to the same map and leaves the pulled-back lift label fixed. Consequently both $A=p^*_\\bullet i_{!,\\bullet}N$ and $B=b_{!,\\bullet}q^*_\\bullet N$ have the transition formula in (1). Here, on the inverse-image side, $x$ denotes a pulled-back local representative; no expression $N_n(H\\to S)$ is used unless $H\\to S$ is an object of $S_{\\mathrm{proet}}$.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, summandwise functoriality; agent semilinear calculation"
+   }
+  },
+  {
+   "text": "For any $h:H\\to W$, the universal property in [def-pc-fibre-product] gives mutually inverse functions $c\\mapsto(h,c)$ and $a\\mapsto q\\circ a$ between lifts of $p\\circ h$ through $i$ and lifts of $h$ through $b$. Indeed $b(h,c)=h$, $q(h,c)=c$, and $(ba,qa)=a$ by uniqueness. For $v:H'\\to H$ the same uniqueness gives $(h,c)v=(hv,cv)$. Thus the relabelling respects restrictions, and it does not alter the section or its scalar action.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, lift indices; agent fibre-product universal-property calculation"
+   }
+  },
+  {
+   "text": "Write $\\delta=\\beta^{-1}:B\\to A$. By [def-sp-varying-ring-proper-open-arrows], its transpose is $q^*N\\xrightarrow{q^*\\eta_i}q^*i^*i_!N\\xrightarrow{\\chi}b^*p^*i_!N$, where $\\chi$ is the specified inverse-image composition comparison. Step 2 computes $\\eta_i$ as insertion into the lift-labelled summand. The normalization in [def-sp-varying-ring-operations] and the unit/composition compatibility of [lem-pe-constant-left-module-inverse-image] mean that $\\chi$ identifies the two pullbacks of that same section along $iqa= pba$. On a localized object $(H,a)$ with $ba=h$, this transpose therefore sends $x$ to the pulled-back section $[qa,x]$. Applying the explicit extension adjunction of [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] now gives $\\delta_n([a,x])=[qa,x]$. This computes the specified arrow, rather than choosing a separate base-change isomorphism. All occurrences of $x$ after pullback mean the image of a section under the inverse-image unit (and its restrictions); the formula also applies additively to their local representatives.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-sp-varying-ring-operations",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, explicit adjunction; agent calculation for the unit-defined comparison"
+   }
+  },
+  {
+   "text": "For $a=(h,c)$, Step 4 gives $qa=c$. Step 5 reads $\\delta_n([(h,c),x])=[c,x]$. Since $\\beta$ is the inverse of this specified invertible transpose [def-sp-varying-ring-proper-open-arrows], applying $\\beta_n$ gives exactly $\\beta_n([c,x])=[(h,c),x]$. Conversely its inverse sends $[a,x]$ to $[qa,x]$. These formulas respect restrictions by Step 4 and finite sums by additivity. For a system map $u:N\\to M$, both orders, applying $u$ and relabelling, send $[a,x]$ to $[qa,u_n(x)]$ on the direct-sum presheaf of $b_!q^*N$. The uniqueness in [def-weil-presheaf-modules-sheafification] extends this equality to sheaves. Hence $\\delta$, and therefore its inverse $\\beta$, is natural in $N$.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, summand formula; agent inversion and naturality calculation"
+   }
+  },
+  {
+   "text": "Let $T^A_n,T^B_n$ denote the underlying abelian transition maps of $A,B$. On a generator $[a,x]$ of the extension presheaf of $B_{n+1}$, Steps 3 and 5 give $T^A_n\\delta_{n+1}[a,x]=[qa,t_n(x)]=\\delta_nT^B_n[a,x]$. The equality holds for arbitrary sections $x$ of $q^*N_{n+1}$: the transition of $q^*N$ is the inverse image of $t_n$, as established in Step 1. Both maps are additive and semilinear over $\\varphi_n$, so the presheaf equality extends uniquely to its sheafification [def-weil-presheaf-modules-sheafification]. Multiplying by $\\beta_n$ on the left and $\\beta_{n+1}$ on the right yields $\\beta_nT^A_n=T^B_n\\beta_{n+1}$. Thus the computed level maps and their inverses are maps of ordinary systems. This establishes (2) with the stated transition compatibility. The proof used arbitrary fixed-ring inverse image and summandwise semilinearity, so requires none of the excluded coefficient hypotheses.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, functoriality; agent transition equation and inversion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-semilinear-derived-sections",
+  "def-sp-varying-ring-operations",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "def-pc-fibre-product",
+  "def-sp-varying-ring-proper-open-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI (lemma-extension-by-zero), explicit unit/transpose calculation with Tag 00YV (sites-proposition-functoriality-algebraic-structures-topoi); varying-ring and fibre-product calculations written here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -47,10 +155,59 @@
    "results": "AlgebraicGeometry/Modules/Sheaf.lean:564,603 and Modules/Tilde.lean:576-597 (Scheme.Modules.restrictFunctor for Zariski O_X-modules)",
    "date": "2026-10-21",
    "verdict": "no match: Zariski O_X-modules only; no base-change of extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|lowerShriek|overPullback",
+   "results": "Site hits give overPullback (Over.lean:288), sheaf Hom and local iso checks. Module-sheaf semilinear/extension-zero search gives no hits. Candidate pullback/free names at PullbackContinuous.lean:177 and PullbackFree.lean:118,125 were read and give only composition or free-sheaf comparisons. Returned names/files: Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for extension by zero of sheaves along open immersions",
+   "results": "The eight hits concern open-immersion geometry, zero maps, Zariski restriction and stalks. None computes extension-by-zero comparison on semilinear systems. Returned names/files: AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, LinearMap.baseChange_zero, AlgebraicGeometry.RingedSpace.res_zero, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "Sheafification adjunction and sheaf-compose comparisons; no open-extension or varying-ring-system comparison. Returned names/files: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with extension by zero along a cartesian square of open immersions, relabelling lifts, for inverse systems with varying constant coefficient rings",
+   "results": "Read hits: pullback of free sheaves and its generators, pullback composition as conjugate, Zariski restriction composition, or presentations. They do not state open-extension base change or semilinear lift relabelling. Returned names/files: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|extension.*zero|lowerShriek",
+   "results": "Site hits give overPullback (Over.lean:288), sheaf Hom and local iso checks. Module-sheaf semilinear/extension-zero search gives no hits. Candidate pullback/free names at PullbackContinuous.lean:177 and PullbackFree.lean:118,125 were read and give only composition or free-sheaf comparisons. Returned names/files: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism and an open subtopos, compute the inverse image extension by zero comparison on direct sum generators and show it commutes with semilinear transition maps",
+   "results": "Read hits: pullback of free sheaves and its generators, pullback composition as conjugate, Zariski restriction composition, or presentations. They do not state open-extension base change or semilinear lift relabelling. Returned names/files: SheafOfModules.Presentation.mapGenerators, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.Presentation.map_π_eq, SheafOfModules.ιFree_mapFree_inv_assoc, ModuleCat.Tilde.toOpen_res, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|pullbackObjFreeIso|pullback_map_ιFree_comp",
+   "results": "Site hits give overPullback (Over.lean:288), sheaf Hom and local iso checks. Module-sheaf semilinear/extension-zero search gives no hits. Candidate pullback/free names at PullbackContinuous.lean:177 and PullbackFree.lean:118,125 were read and give only composition or free-sheaf comparisons. Returned names/files: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +224,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-tower-geometric"
+ "unit": "sk-prop-sp-tower-geometric",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-varying-ring-cartesian-comparison-lift-relabelling",
+  "worker": "stage1",
+  "summary": "Split into seven steps using existing constant-module inverse-image and site-extension results. Compute the open unit and its transpose on the actual direct-sum generators, use the fibre-product bijection for lift labels, and write the naturality and semilinear-transition equations explicitly. No new nodes, no coefficient restrictions, no statement changes.",
+  "blueprint": "det-sp-tower-gluing, Local pairs paragraph: actual tower maps for open restriction and proper/open interchange; realizes the abelian-operation and beta relabelling portions isolated from lem-sp-varying-ring-proper-open-pasting.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic fixed-ring inverse-image theorem, including compatibility with underlying abelian sheaves, units and composition; needed independently at every arbitrary R_n, not a replacement of any tower-gluing unit step."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic simultaneous levelwise inverse image on actual semilinear systems; identifies the ordinary functor specified by adjunction, without imposing cartesianness or deriving any new morphism equality from evaluations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-2845758f3",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-2845758f3 (reviewer sub-agent of L); spot-checked: PASS: the 7-step proof is correct and reads in full; no fixes. Shape: one commit with the item and the report, 0 new nodes. Statement and stmt_deps are byte-identical to side-live, where the item is still unsplit (the Q65 reviewer created it on 2026-10-21). This is its first delivery, it is not under a re-split note, and it is not in route-pivot-dropped. proof_deps equals the union of the step uses, every citation exists and is unmerged, and there is no cycle. The closure gains only 4 generic lem-pe constant-module nodes, none of them batch-5 or trace-formula. Sources: Stacks 03DI (sites-modules.tex:2058) gives the direct-sum presheaf, the summand action and the adjunction formula, matching Steps 2 and 5; 00YV (sites.tex:10473) supports Step 1's levelwise scalars; 0F7B is cited as context only; no SGA. Cited statements give what each step uses. The open-restriction identification comes from def-sp-varying-ring-operations. beta^{-1} is the transpose specified in def-sp-varying-ring-proper-open-arrows, and Step 5 computes delta[a,x]=[qa,x] from the explicit unit x->[c,x] (i mono, so the lift is unique). Step 4's lift bijection follows from fibre-product uniqueness. Naturality and transition compatibility are checked on generators and extended through sheafification. Edge cases checked: S empty, i=id, no lifts, N=0, non-flat Z/4->Z/2. Accepted tool_uses: lem-pe-constant-left-module-inverse-image and lem-coef-semilinear-derived-sections (generic coefficient tools). Not duplicates: lem-cbc-extension-zero-base-change, lem-cbc-proetale-extension-zero-base-change, lem-cbc-finite-open-exchange-scalars, lem-trf-open-square-exchange and lem-trf-open-base-change-site-transport are etale or finite-ring versions without the lift formula. Advisories only: the statement's 'pulled back' wording is informal (the proof makes it precise as local representatives), and the coefficient-universe assumption is implicit."
+ }
 }
