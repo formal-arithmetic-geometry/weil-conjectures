@@ -12,6 +12,7 @@ public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 public import Sheaf.Paper.BoundedConstructibleTower
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import all Sheaf.AlgebraicGeometry.VaryingRingOperations
 
 /-! # SemilinearCompactSupportCoefficientTransport
 
@@ -83,7 +84,16 @@ theorem scalarQuotients_commute (W : Scheme.{u}) (n : ℕ) :
         coefficientSequenceCommRingTransition.{u, u} l F W n =
       coefficientSequenceCommRingTransition.{u, u} l E W n ≫
         integralScalarQuotientSheafMap.{u, u} l E F i W n := by
-  sorry
+  unfold integralScalarQuotientSheafMap
+  have h (K : Type u) [NormedField K] [NormedAlgebra ℚ_[l] K]
+      [FiniteDimensional ℚ_[l] K] :
+      coefficientSequenceCommRingTransition.{u, u} l K W n =
+        (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
+          (quotientMaps l K n) := rfl
+  rw [h E, h F, ← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  ext x
+  exact RingHom.congr_fun (integralScalarQuotientMap_transition l E F i n) x.down
 
 /-- The actual ring map on the entire vertical sequence site.
 Source: blueprint proof Steps 9--11; semilinear systemMap
@@ -127,6 +137,63 @@ def systemScalarData (W : Scheme.{u}) :
     (coefficientSequenceCommRingTransition.{u, u} l F W)
       (integralScalarQuotientSheafMap.{u, u} l E F i W) (scalarQuotients_commute l E F i W)
 
+private theorem scalarSystemMap_app (W : Scheme.{u}) (n : ℕ) (U : W.ProEtᵒᵖ) :
+    (scalarSystemMap l E F i W).hom.app (op (n, U.unop)) =
+      (integralScalarQuotientSheafMap l E F i W n).hom.app U :=
+  (SemilinearSections.systemMap_existsUnique (ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W)
+    (coefficientSequenceCommRingTransition l E W)
+    (integralCoefficientCommRingSheaf l F W)
+    (coefficientSequenceCommRingTransition l F W)
+    (integralScalarQuotientSheafMap l E F i W)
+    (scalarQuotients_commute l E F i W)).exists.choose_spec n U
+
+private theorem scalarSystemMap_push_square {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    SemilinearProperOpen.coefficientMap (quotientRings l E) (quotientMaps l E) f ≫
+        ((SemilinearProperOpen.siteMap f).sheafPushforwardContinuous CommRingCat.{u + 1}
+          (coefficientSequenceTopology (ProEt.topology Y))
+          (coefficientSequenceTopology (ProEt.topology X))).map
+            (scalarSystemMap l E F i X) =
+      scalarSystemMap l E F i Y ≫
+        SemilinearProperOpen.coefficientMap (quotientRings l F) (quotientMaps l F) f := by
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  have hE := eq_of_heq ((SemilinearProperOpen.coefficientMap_existsUnique
+    (quotientRings l E) (quotientMaps l E) f).choose_spec.1 U.unop.1 U.unop.2)
+  have hF := eq_of_heq ((SemilinearProperOpen.coefficientMap_existsUnique
+    (quotientRings l F) (quotientMaps l F) f).choose_spec.1 U.unop.1 U.unop.2)
+  have hX := scalarSystemMap_app l E F i X U.unop.1
+    (op ((proEtaleBaseChange f).obj U.unop.2))
+  have hY := scalarSystemMap_app l E F i Y U.unop.1 (op U.unop.2)
+  have h := congrArg (fun t ↦ t.hom.app (op U.unop.2))
+    (VaryingRing.constantMap_naturality f (CommRingCat.ofHom
+      ((ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).symm.toRingHom.comp
+        ((integralScalarQuotientMap l E F i U.unop.1).comp
+          (ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).toRingHom))))
+  exact (congrArg₂ (fun a b ↦ a ≫ b) hE hX).trans
+    (h.symm.trans (congrArg₂ (fun a b ↦ a ≫ b) hY hF).symm)
+
+private theorem restriction_push_iso
+    {A B : Type*} [Category A] [Category B]
+    {J : GrothendieckTopology A} {K : GrothendieckTopology B}
+    (T : A ⥤ B) [T.IsContinuous J K]
+    {RX SX : Sheaf K RingCat.{u + 1}} {RY SY : Sheaf J RingCat.{u + 1}}
+    (aX : RX ⟶ SX) (aY : RY ⟶ SY)
+    (bE : RY ⟶ (T.sheafPushforwardContinuous RingCat.{u + 1} J K).obj RX)
+    (bF : SY ⟶ (T.sheafPushforwardContinuous RingCat.{u + 1} J K).obj SX)
+    (h : bE ≫ (T.sheafPushforwardContinuous RingCat.{u + 1} J K).map aX = aY ≫ bF) :
+    ∃ d : SheafOfModules.restrictScalars.{u + 1} aX ⋙ SheafOfModules.pushforward bE ≅
+        SheafOfModules.pushforward bF ⋙ SheafOfModules.restrictScalars aY,
+      ∀ (M : SheafOfModules.{u + 1} SX) (U : Aᵒᵖ)
+        (x : M.val.obj (T.op.obj U)), (d.hom.app M).val.app U x = x := by
+  let d : SheafOfModules.restrictScalars.{u + 1} aX ⋙ SheafOfModules.pushforward bE ≅
+      SheafOfModules.pushforward bF ⋙ SheafOfModules.restrictScalars aY :=
+    SheafOfModules.pushforwardComp (F := T) (G := 𝟭 B) bE aX ≪≫
+      SheafOfModules.pushforwardCongr h ≪≫
+        (SheafOfModules.pushforwardComp (F := 𝟭 A) (G := T) aY bF).symm
+  exact ⟨d, fun _ _ _ ↦ rfl⟩
+
 /-- Restriction commutes with ordinary geometric pushforward by the identity on sections.
 Source: blueprint proof Step 10; Stacks 03D7
 (blueprint: def-pur-semilinear-compact-support-coefficient-transport).
@@ -143,7 +210,30 @@ theorem systemRestrictionPush_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
           SemilinearProperOpen.push (quotientRings l E) (quotientMaps l E) f).obj M).val.obj
             (op (n, U))),
         HEq ((d.hom.app M).val.app (op (n, U)) x) x := by
-  sorry
+  let a (W : Scheme.{u}) := (sheafCompose _
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (scalarSystemMap l E F i W)
+  let b (K : Type u) [NormedField K] [NormedAlgebra ℚ_[l] K]
+      [FiniteDimensional ℚ_[l] K] := (sheafCompose _
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (SemilinearProperOpen.coefficientMap (quotientRings l K) (quotientMaps l K) f)
+  have he : b E ≫ ((SemilinearProperOpen.siteMap f).sheafPushforwardContinuous
+      RingCat.{u + 1} (coefficientSequenceTopology (ProEt.topology Y))
+        (coefficientSequenceTopology (ProEt.topology X))).map (a X) = a Y ≫ b F := by
+    exact congrArg (fun t ↦ (sheafCompose _
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map t)
+        (scalarSystemMap_push_square l E F i f)
+  obtain ⟨d, hd⟩ := restriction_push_iso (SemilinearProperOpen.siteMap f)
+    (a X) (a Y) (b E) (b F) he
+  refine ⟨d, fun M n U x ↦ heq_of_eq (hd M (op (n, U)) x), ?_⟩
+  intro d' hd'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact (eq_of_heq (hd' M U.unop.1 U.unop.2 x)).trans (hd M U x).symm
 
 /-- The ordinary inverse-image comparison is the specified pushforward mate.
 Source: blueprint proof Step 10
@@ -297,7 +387,24 @@ comparison. The functoriality of G and associativity give the displayed equation
 theorem rightUnitApp_naturality {K L : CochainComplex A ℤ} (f : K ⟶ L) :
     DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map f) ≫ rightUnitApp G L =
       rightUnitApp G K ≫ G.rightDerivedFunctor.map (DerivedCategory.Q.map f) := by
-  sorry
+  let π := HomotopyCategory.quotient A (.up ℤ)
+  let H := G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let e : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ≅ π ⋙ H :=
+    Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (G.mapHomotopyCategoryFactors (.up ℤ)).symm _ ≪≫
+      Functor.associator _ _ _
+  let η : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ G.rightDerivedFunctor :=
+    e.hom ≫ Functor.whiskerLeft π G.rightDerivedFunctorUnit ≫
+      (Functor.associator _ _ _).inv ≫
+      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A)
+        G.rightDerivedFunctor).hom
+  have hfac (K : CochainComplex A ℤ) :
+      (G.mapHomotopyCategoryFactors (.up ℤ)).inv.app K =
+        𝟙 ((HomotopyCategory.quotient B (.up ℤ)).obj
+          ((G.mapHomologicalComplex (.up ℤ)).obj K)) := rfl
+  simpa [η, e, rightUnitApp, hfac, π] using η.naturality f
 
 /-- The actual universal right-derived unit as one natural transformation on complexes.
 Source: Stacks 0D6E; blueprint proof Steps 2--3
@@ -308,6 +415,29 @@ def rightUnit : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
   naturality := fun _ _ f ↦ rightUnitApp_naturality G f
 
 end DerivedUnit
+
+private theorem composed_rightUnit_naturality
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    [Abelian A] [Abelian B] [Abelian C]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    [Abelian.HasKInjectiveResolutions B]
+    (V : A ⥤ B) [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    (G : B ⥤ C) [G.Additive]
+    {K L : CochainComplex A ℤ} (f : K ⟶ L) :
+    DerivedCategory.Q.map
+        ((G.mapHomologicalComplex (.up ℤ)).map
+          ((V.mapHomologicalComplex (.up ℤ)).map f)) ≫
+        (rightUnit G).app ((V.mapHomologicalComplex (.up ℤ)).obj L) ≫
+        G.rightDerivedFunctor.map (V.mapDerivedCategoryFactors.inv.app L) =
+      ((rightUnit G).app ((V.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        G.rightDerivedFunctor.map (V.mapDerivedCategoryFactors.inv.app K)) ≫
+        G.rightDerivedFunctor.map (V.mapDerivedCategory.map (DerivedCategory.Q.map f)) := by
+  change _ ≫ rightUnitApp G _ ≫ _ = _
+  rw [← Category.assoc, rightUnitApp_naturality]
+  simp only [Category.assoc, ← Functor.map_comp]
+  apply congrArg ((rightUnit G).app ((V.mapHomologicalComplex (.up ℤ)).obj K) ≫ ·)
+  exact congrArg G.rightDerivedFunctor.map
+    (V.mapDerivedCategoryFactors.inv.naturality f)
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -328,7 +458,9 @@ on the underlying additive sheaves. Thus the map of a sum of compatible sections
 is the sum of their limit maps. The universal projections detect this equation. -/
 theorem ordinarySystemLimit_additive (W : Scheme.{u}) :
     (ordinarySystemLimit l E W).Additive := by
-  sorry
+  have h := coefficientConstantTowerLimitAdditive l E W
+  change (coefficientSequenceRestriction l E W ⋙ lim).Additive
+  infer_instance
 
 attribute [instance] ordinarySystemLimit_additive
 
@@ -355,7 +487,8 @@ theorem limitUnitApp_naturality (W : Scheme.{u})
         limitUnitApp l E W L =
       limitUnitApp l E W K ≫ (coefficientSequenceLimit.{u, u} l E W).map
         (DerivedCategory.Q.map f) := by
-  sorry
+  exact composed_rightUnit_naturality (coefficientSequenceRestriction l E W)
+    (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W) f
 
 /-- The actual total-limit comparison on complexes, retained to normalize coefficient
 transport before evaluation. Source: blueprint proof Steps 3 and 10
@@ -410,6 +543,49 @@ def restrictionTower (W : Scheme.{u}) :
           (scalarReductionSource.{u, u} l E W)).obj (completedRestriction l E F i W) :=
   (restrictionTower_existsUnique l E F i W).exists.choose
 
+private theorem restriction_preserves_tower_limits
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (a : R ⟶ S) :
+    PreservesLimitsOfShape ℕᵒᵖ (SheafOfModules.restrictScalars.{u + 1} a) := by
+  let U := SheafOfModules.forget.{u + 1} R ⋙ PresheafOfModules.toPresheaf R.obj
+  have : PreservesLimitsOfShape ℕᵒᵖ (SheafOfModules.restrictScalars.{u + 1} a ⋙ U) :=
+    inferInstanceAs (PreservesLimitsOfShape ℕᵒᵖ
+      (SheafOfModules.forget.{u + 1} S ⋙ PresheafOfModules.toPresheaf S.obj))
+  have : ReflectsLimitsOfShape ℕᵒᵖ U :=
+    reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact preservesLimitsOfShape_of_reflects_of_preserves _ U
+
+private theorem limit_comparison_existsUnique
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    [HasLimitsOfShape ℕᵒᵖ B] [HasLimitsOfShape ℕᵒᵖ C]
+    (R : B ⥤ C) [PreservesLimitsOfShape ℕᵒᵖ R]
+    (V : A ⥤ ℕᵒᵖ ⥤ B) (U : A ⥤ ℕᵒᵖ ⥤ C)
+    (e : U ≅ V ⋙ (Functor.whiskeringRight ℕᵒᵖ B C).obj R) :
+    ∃! d : V ⋙ lim ⋙ R ≅ U ⋙ lim,
+      ∀ (M : A) (n : ℕᵒᵖ), d.hom.app M ≫ limit.π (U.obj M) n ≫
+        (e.hom.app M).app n = R.map (limit.π (V.obj M) n) := by
+  let d : V ⋙ lim ⋙ R ≅ U ⋙ lim :=
+    Functor.isoWhiskerLeft V (preservesLimitNatIso R) ≪≫
+      Functor.isoWhiskerRight e.symm lim
+  have hd (M : A) (n : ℕᵒᵖ) : d.hom.app M ≫ limit.π (U.obj M) n ≫
+      (e.hom.app M).app n = R.map (limit.π (V.obj M) n) := by
+    change ((preservesLimitIso R (V.obj M)).hom ≫ lim.map (e.inv.app M)) ≫ _ ≫ _ = _
+    simp only [Category.assoc, lim_map, limMap_π_assoc,
+      ← NatTrans.comp_app, Iso.inv_hom_id, NatTrans.id_app]
+    change (preservesLimitIso R (V.obj M)).hom ≫
+      limit.π (V.obj M ⋙ R) n ≫ 𝟙 _ = _
+    rw [Category.comp_id]
+    exact preservesLimitIso_hom_π R (V.obj M) n
+  refine ⟨d, hd, ?_⟩
+  intro d' hd'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply limit.hom_ext
+  intro n
+  apply (cancel_mono ((e.hom.app M).app n)).mp
+  simpa only [Category.assoc] using (hd' M n).trans (hd M n).symm
+
 /-- The ordinary limit comparison is fixed by every actual strict-tower projection.
 Source: Stacks 0A07; blueprint proof Step 11
 (blueprint: def-pur-semilinear-compact-support-coefficient-transport).
@@ -427,7 +603,17 @@ theorem ordinaryLimitRestriction_existsUnique (W : Scheme.{u}) :
             ((restrictionTower l E F i W).hom.app M).app (op n) =
           (completedRestriction l E F i W).map
             (limit.π ((coefficientSequenceRestriction.{u, u} l F W).obj M) (op n)) := by
-  sorry
+  let R := completedRestriction l E F i W
+  have : PreservesLimitsOfShape ℕᵒᵖ R := restriction_preserves_tower_limits
+    ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (completedCoefficientMap l E F i W))
+  obtain ⟨d, hd, hu⟩ := limit_comparison_existsUnique R
+    (coefficientSequenceRestriction l F W)
+    (systemRestriction l E F i W ⋙ coefficientSequenceRestriction l E W)
+    (restrictionTower l E F i W)
+  refine ⟨d, fun M n ↦ hd M (op n), ?_⟩
+  intro d' hd'
+  exact hu d' (fun M n ↦ hd' M n.unop)
 
 /-- The canonical ordinary limit/restriction comparison.
 Source: blueprint proof Step 11
@@ -444,7 +630,12 @@ Proof: Restriction is additive sectionwise and the sectionwise inverse limit pre
 composite therefore maps each zero arrow to zero. -/
 theorem systemRestrictionLimit_zero (W : Scheme.{u}) :
     (systemRestriction l E F i W ⋙ ordinarySystemLimit l E W).PreservesZeroMorphisms := by
-  sorry
+  constructor
+  intro X Y
+  have := coefficientConstantTowerLimitAdditive l E W
+  change lim.map ((coefficientSequenceRestriction l E W).map
+    ((systemRestriction l E F i W).map 0)) = 0
+  simp only [Functor.map_zero]
 
 attribute [instance] systemRestrictionLimit_zero
 
@@ -455,7 +646,11 @@ Proof: both factors are additive on section morphisms and map zero to zero.
 Their composite therefore maps the zero arrow between any two modules to zero. -/
 theorem systemLimitRestriction_zero (W : Scheme.{u}) :
     (ordinarySystemLimit l F W ⋙ completedRestriction l E F i W).PreservesZeroMorphisms := by
-  sorry
+  constructor
+  intro X Y
+  change (completedRestriction l E F i W).map
+    ((ordinarySystemLimit l F W).map 0) = 0
+  rw [Functor.map_zero, Functor.map_zero]
 
 /-- The exact universal normalization equation on whole complexes.
 Source: blueprint proof Steps 10--12; Stacks 06YY and 0D6E
