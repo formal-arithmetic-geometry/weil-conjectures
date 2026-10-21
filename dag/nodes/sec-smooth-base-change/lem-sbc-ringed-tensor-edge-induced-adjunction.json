@@ -1,0 +1,157 @@
+{
+ "id": "lem-sbc-ringed-tensor-edge-induced-adjunction",
+ "kind": "statement",
+ "title": "A supplied tensor edge has its induced module adjunction",
+ "statement": "Let $e$ be a ringed tensor edge [def-weil-pbc-ringed-tensor-square-presentation]. Composing its inverse-image ring identification with its structural ring homomorphism gives ring data $d$ on the same geometric adjunction [def-weil-pbc-ringed-topos-ring-data]. There are an induced module lift $m$ of $d$, an adjunction $a:e^*\\dashv m_*$, and a natural isomorphism $t:e_*\\cong m_*$ from the edge's supplied right adjoint. The Hom bijection of $a$, after the lift's underlying-sheaf identification, is the geometric Hom bijection applied after the canonical scalar insertion of $e$. Moreover $\\eta_e;t_{e^*}=\\eta_a$ and $e^*(t);\\epsilon_a=\\epsilon_e$, so this isomorphism preserves the supplied adjunction.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules and its explicit scalar-extension transpose"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "def-weil-pbc-ringed-topos-ring-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose the ring identification with the structural ring homomorphism. The four generalized-element ring identities follow by applying that ring homomorphism to the operation equations in the algebraic inverse image. Apply [lem-weil-pbc-ringed-topos-induced-modules] to obtain the induced module lift.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-induced-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules and its explicit scalar-extension transpose"
+   }
+  },
+  {
+   "text": "Cancel the ring identification to obtain the structural-map equality required by [lem-sfb-supplied-tensor-adjunction-normalization]. Its normalized scalar-extension adjunction has the specified pullback as left adjoint and the induced lift as right adjoint.",
+   "uses": [
+    "lem-sfb-supplied-tensor-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules and its explicit scalar-extension transpose"
+   }
+  },
+  {
+   "text": "Apply uniqueness of right adjoints to the edge module adjunction and this normalized adjunction. The uniqueness isomorphism satisfies the unit and counit equations, by the standard adjunction uniqueness identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules and its explicit scalar-extension transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-induced-modules",
+  "lem-sfb-supplied-tensor-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules and its explicit scalar-extension transpose",
+  "note": "The ordinary adapter needed in the first step of the local projection-mate presentation; fully proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ringed topos tensor edge induces a ringed topos morphism whose normalized module pullback is adjoint to the induced module direct image",
+   "results": "8 ordinary continuous-site or scheme module pullback/pushforward adjunctions; no arbitrary supplied geometric edge.",
+   "date": "2026-10-21",
+   "verdict": "Use the library induced-module construction and normalized supplied tensor adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified scalar extension after algebraic inverse image is left adjoint to the induced pushforward of sheaves of modules",
+   "results": "8 site/scheme or presheaf adjunctions; no arbitrary supplied geometric edge.",
+   "date": "2026-10-21",
+   "verdict": "No full match; rightAdjointUniq handles the final comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedTensorEdge|AlgebraicInverseImage",
+   "results": "0 Mathlib matches.",
+   "date": "2026-10-21",
+   "verdict": "No full match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedSitePerfectProjectionFormula",
+  "date": "2026-10-21",
+  "group": "M2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; locality of the perfect-coefficient projection mate on ordinary ringed slices; ordinary ringed-morphism adapter and adjunction normalization",
+   "via": [
+    "lem-sbc-projection-mate-slice-presentation",
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedTensorEdgeInducedAdjunction",
+  "file": "lean/Sheaf/Paper/RingedTensorEdgeInducedAdjunction.lean",
+  "declaration": "SheafOfModules.RingedTensorEdge.inducedModuleAdjunction",
+  "declarations": [
+   "SheafOfModules.RingedTensorEdge.ringData",
+   "SheafOfModules.RingedTensorEdge.inducedModuleAdjunction"
+  ],
+  "statement": "theorem RingedTensorEdge.inducedModuleAdjunction\n    {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) :\n    ∃ m : e.ringData.Modules,\n    ∃ am : e.pullback ⊣ m.modules,\n    ∃ t : e.pushforward ≅ m.modules,\n      (∀ (M : Y.mateModules) (H : X.mateModules) (v : e.pullback.obj M ⟶ H),\n        (SheafOfModules.toSheaf _ ⋙\n          sheafCompose Y.topology (CategoryTheory.forget AddCommGrpCat)).map\n            (am.homEquiv M H v) ≫ m.underlying.hom.app H =\n          e.adjunction.homEquiv _ _ (e.insertion M ≫\n            (SheafOfModules.toSheaf _ ⋙\n              sheafCompose X.topology (CategoryTheory.forget AddCommGrpCat)).map v)) ∧\n      (∀ M, e.moduleAdjunction.unit.app M ≫ t.hom.app (e.pullback.obj M) =\n        am.unit.app M) ∧\n      (∀ H, e.pullback.map (t.hom.app H) ≫ am.counit.app H =\n        e.moduleAdjunction.counit.app H)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-ringed-tensor-edge-induced-adjunction",
+  "worker": "stage3-M2",
+  "summary": "Constructed and proved the ordinary adapter for a supplied tensor edge, with its normalized Hom bijection and both adjunction comparison identities.",
+  "blueprint": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; locality of the perfect-coefficient projection mate on ordinary ringed slices; ordinary ringed-morphism adapter and adjunction normalization",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-induced-modules",
+    "why": "Generic construction of the structural-map-induced additive module direct image; no projection-formula assertion."
+   },
+   {
+    "node": "lem-sfb-supplied-tensor-adjunction-normalization",
+    "why": "Generic scalar-extension adjunction normalized by insertion, applied to the explicitly constructed ring data."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261021T140843-L-2762743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261021T140843-L-2762743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

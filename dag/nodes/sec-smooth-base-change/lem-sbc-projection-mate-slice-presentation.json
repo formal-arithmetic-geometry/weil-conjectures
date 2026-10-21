@@ -1,0 +1,219 @@
+{
+ "id": "lem-sbc-projection-mate-slice-presentation",
+ "kind": "statement",
+ "title": "Exact local presentations of the canonical derived projection mate",
+ "statement": "Let $Y,X$ be small ringed sites with commutative coefficient sheaves, ordinary unbounded derived categories and tensor models, and let $e:X\\to Y$ be a ringed-topos morphism with its derived adjunction $L\\dashv R$ [def-weil-pbc-ringed-tensor-square-presentation, lem-weil-pbc-ringed-projection-mate-exact]. Fix $E\\in D(X)$ and $U\\in Y$. Let $r_U:D(Y)\\to D(Y/U)$ be exact termwise module restriction [lem-pur-site-restriction-module-adjunction-exact], allowing an independently chosen Hom universe for the ordinary derived category on the slice. Put $F(P)=R(E)\\otimes^LP$ and $G(P)=R(E\\otimes^LL(P))$, with canonical counit mate $\\pi:F\\to G$ [lem-weil-pbc-ringed-exchange-tensor-coherence]. There exist exact functors $F_U,G_U:D(Y/U)\\to D(Y/U)$ compatible with integer shifts, a shift-compatible natural transformation $\\tau_U:F_U\\to G_U$, and natural isomorphisms $s:r_U\\circ F\\cong F_U\\circ r_U$ and $t:r_U\\circ G\\cong G_U\\circ r_U$. For every $P$, the actual arrows satisfy $t_P\\circ r_U(\\pi_P)=\\tau_U(r_U(P))\\circ s_P$. No perfectness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0944, lemma-projection-formula, first paragraph of proof; remark-compatible-with-diagram, the projection/base-change compatibility square"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sbc-ringed-tensor-edge-induced-adjunction] to construct the induced module direct image and its normalized adjunction, with the right-adjoint comparison preserving unit and counit. Use [lem-weil-pbc-element-restriction-hom] to identify module restriction to the ordinary slice at U with element restriction at the sheafified representable A. Apply [lem-sbc-ringed-topos-sheaf-slice-derived-comparison] to A and the ringed morphism underlying the supplied edge. Its ordinary inverse image is scalar extension after the algebraic inverse image; uniqueness of right adjoints identifies its direct image with the supplied one. The derived left functors are identified by uniqueness of total left derived functors, and their right adjoints and adjunctions by adjunction uniqueness. Transport the slice comparison along these adjunction-preserving identifications. The implemented private helpers edge_left_derived_comparison and derived_counit_comparison transfer the homotopy left-derived universal property to complexes, apply left-derived uniqueness to the ordinary pullback identification with its factorization equation on every complex, and apply adjunction conjugation with its actual counit equation. The quotient transfer reuses the proved private helper in [lem-sfb-resolving-derived-adjunction-normalization].",
+   "uses": [
+    "lem-weil-pbc-element-restriction-hom",
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-sbc-ringed-tensor-edge-induced-adjunction",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, first paragraph of proof; remark-compatible-with-diagram, the projection/base-change compatibility square"
+   }
+  },
+  {
+   "text": "Choose the ordinary unbounded derived tensor models on the two element slices using [lem-weil-pbc-site-derived-tensor-descent]. The normalized comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify tensor after restriction with tensor of the two restricted factors. If the given global and local Hom universes differ, first raise all models to a common universe at least as large as the two given universes and u+1. Compare each model with the localization of the same cochain-complex category; the localization equivalences identify Q, termwise restriction and their shift structures. Transport the target element-slice category through the equivalence of step 1 to the ordinary slice.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-element-restriction-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, first paragraph of proof; remark-compatible-with-diagram, the projection/base-change compatibility square"
+   }
+  },
+  {
+   "text": "Fix E_U equal to restriction of E to the source element slice. Let L_U and R_U be the derived slice adjoints. Set F_U(Q)=R_U(E_U) tensor Q and G_U(Q)=R_U(E_U tensor L_U(Q)), transported to the ordinary target slice. [lem-weil-pbc-ringed-projection-mate-exact] supplies integer-shift structures, exactness of both functors, and the shift-compatible natural counit mate tau_U. This uses no perfectness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, first paragraph of proof; remark-compatible-with-diagram, the projection/base-change compatibility square"
+   }
+  },
+  {
+   "text": "Let beta:r_Y R -> R_U r_X and theta:L_U r_Y -> r_X L denote the invertible exchange and pullback comparisons, with theta oriented as in the slice-comparison statement. The source comparison is restriction/tensor comparison followed by beta_E tensor identity. The target comparison is beta at E tensor LP, followed inside R_U by restriction/tensor comparison and the inverse of theta at P on the second tensor factor. All are natural isomorphisms. The projection/base-change equality [lem-weil-pbc-ringed-exchange-tensor-coherence] says precisely r_Y(pi_P) followed by the target comparison equals the source comparison followed by tau_U(r_Y P). Composing with the transport equivalences preserves this equality of arrows, giving the displayed equation on the ordinary slice.",
+   "uses": [
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, first paragraph of proof; remark-compatible-with-diagram, the projection/base-change compatibility square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-restriction-hom",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sbc-ringed-tensor-edge-induced-adjunction",
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-21",
+  "note": "Interface assembly for the locality sentence and projection/base-change square of Stacks 0944, using the stated unbounded sheaf-slice comparison.",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0944, lemma-projection-formula, proof; remark-compatible-with-diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived projection mate restricts to an exact unit-normalized natural transformation on a slice of a ringed topos",
+   "results": "8 hits: Adjunction.derivedη, Adjunction.derivedε, toRightDerivedZero, totalRightDerivedUnit, PresheafOfModules.unitHomEquiv, SheafOfModules.unitToPushforwardObjUnit and generic adjunction facts.",
+   "date": "2026-10-21",
+   "verdict": "no match: these are derived adjunction and unit comparisons, without local tensor/projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact local derived functors on the slice of a ringed site with a natural comparison to restriction of the projection formula counit mate",
+   "results": "8 hits: Functor.totalLeftDerivedCounit; Adjunction.derivedε; Adjunction.derived'_counit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; Adjunction.derivedε_fac_app; Adjunction.derivedη; Adjunction.derived_counit; Adjunction.derivedη_fac_app.",
+   "date": "2026-10-21",
+   "verdict": "no match: no slice tensor or projection mate compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*slice|slice.*projection",
+   "results": "0 hits in Mathlib. The library has RingedProjectionRestriction only for the pro-etale, site-functor presentation, not arbitrary small ringed-topos edges.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedSitePerfectProjectionFormula",
+  "date": "2026-10-21",
+  "group": "M2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; locality of the perfect-coefficient projection mate on ordinary ringed slices",
+   "via": [
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionMateSlicePresentation",
+  "file": "lean/Sheaf/Paper/ProjectionMateSlicePresentation.lean",
+  "declaration": "SheafOfModules.projectionMateSlicePresentation",
+  "declarations": [
+   "SheafOfModules.projectionSliceModules",
+   "SheafOfModules.projectionSliceRestriction",
+   "SheafOfModules.ProjectionMateSlicePresentation",
+   "SheafOfModules.projectionMateSlicePresentation"
+  ],
+  "statement": "theorem projectionMateSlicePresentation\n    {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X)\n    (a : RingedTensorModel Y) (b : RingedTensorModel X) (E : X.mateDerived)\n    (U : Y.site) [HasDerivedCategory.{w'} (projectionSliceModules Y U)] :\n    Nonempty (ProjectionMateSlicePresentation e a b E U)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-projection-mate-slice-presentation",
+  "worker": "stage3-M2",
+  "summary": "Locality and exact counit-mate comparison on an ordinary slice, separated from finite devissage and local-to-global detection. The ordinary induced-adjunction adapter is proved in a separate module.",
+  "blueprint": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; locality of the perfect-coefficient projection mate on ordinary ringed slices",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-element-restriction-hom",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-site localization, tensor or adjunction infrastructure needed to assemble the local counit-mate equation; it does not assert invertibility for a perfect coefficient."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Its proved quotient-universal-property helper compares homotopy and cochain presentations of total left derived functors; no geometric or projection-formula assertion is used."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261021T140843-L-2762743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261021T140843-L-2762743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

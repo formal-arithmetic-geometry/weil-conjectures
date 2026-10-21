@@ -17,87 +17,72 @@
  ],
  "proof": [
   {
-   "text": "For any such $u$ and any fixed $E$, put $F(Q)=RE\\otimes^LQ$ and $G(Q)=R(E\\otimes^LLQ)$. By [lem-weil-pbc-ringed-projection-mate-exact], these are exact additive functors and the specified map $\\pi_Q:F(Q)\\to G(Q)$ is natural, commutes with integer shifts and gives a morphism of distinguished triangles. Under the unit identifications $\\pi_{R_Y}=1_{RE}$. Hence $\\pi_{R_Y[n]}$ is invertible for every integer $n$, including negative $n$. This argument applies to every ringed slice morphism as well, and puts no bound on $E$.",
+   "text": "For each ordinary slice at U use [lem-sbc-projection-mate-slice-presentation]. This gives exact shift-compatible local functors and a natural mate, with the exact equation comparing it to restriction of the global projection. Derive invertibility of the global mate at the ring directly from the unit equation of [lem-weil-pbc-ringed-projection-mate-exact], cancelling the invertible mapped tensor-unitor. Restriction carries the single degree-zero global ring to the single degree-zero slice ring, via mapDerivedCategorySingleFunctor and the sectionwise identity on restricted ring modules. The mate equation and naturality then prove invertibility of the local mate at the slice ring.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-sbc-projection-mate-slice-presentation",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, proof"
+    "place": "Tag 0944, lemma-projection-formula; projection morphism immediately preceding the lemma"
    }
   },
   {
-   "text": "The isomorphism locus of $\\pi$ is closed under finite sums and retracts. Indeed, additivity and naturality from [lem-weil-pbc-ringed-projection-mate-exact] identify $\\pi_{Q_1\\oplus Q_2}$ with the diagonal matrix $(\\pi_{Q_1},\\pi_{Q_2})$. If $Q\\xrightarrow{i}H\\xrightarrow{p}Q$ satisfies $pi=1$ and $\\pi_H$ is invertible, the map $F(p)\\pi_H^{-1}G(i):G(Q)\\to F(Q)$ is its inverse: composing with $\\pi_Q$ on either side and using naturality gives respectively $F(p)F(i)=1$ and $G(p)G(i)=1$. By step 1 this proves the assertion for every shift of a sheaf which is a direct summand of a finite free sheaf, including rank zero.",
+   "text": "Apply the existing proved NatTrans.isoLocus API: the isomorphism locus of a shift-compatible natural transformation between exact triangulated functors is a triangulated object property, closed under isomorphisms and retracts. Finite products of the degree-zero ring lie in this locus because the degree-zero single functor preserves finite products. The splittings in [def-weil-pbc-strict-perfect-coefficient-package] exhibit each term of a strict-perfect representative as a retract of such a finite product, including rank zero. Apply [lem-weil-pbc-bounded-complex-triangulated-devissage] to deduce invertibility at Q(T) for every bounded strict-perfect representative T. Naturality transports it to the restricted coefficient. This uses the proved source module WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators, not a new triangle induction.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-pbc-bounded-complex-triangulated-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula; projection morphism immediately preceding the lemma"
+   }
+  },
+  {
+   "text": "For a perfect object choose its global representative K. For each site object W choose its covering sieve of strict-perfect local representatives. Index a single covering family by all triples (W,U,f) with f:U -> W in that sieve, using U as the corresponding domain. It covers every W because each original covering sieve is contained in its sieve of domains. At each member, the quasi-isomorphism from the strict-perfect complex and the representative isomorphism give r_U(P) isomorphic to Q(T). Steps 1 and 2, followed by cancellation of the target comparison, make restriction of the specified global projection mate invertible.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sbc-projection-mate-slice-presentation"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, proof"
+    "place": "Tag 0944, lemma-projection-formula; projection morphism immediately preceding the lemma"
    }
   },
   {
-   "text": "Suppose $Q$ is represented by a strict-perfect complex $T$ supported in $[a,b]$, with the degreewise splittings of [def-weil-pbc-strict-perfect-coefficient-package]. For $c\\in\\mathbf Z$ let $T_{\\ge c}$ be the stupid tail (equal to $T$ in degrees at least $c$ and zero below). In each degree the sequence $0\\to T_{\\ge c+1}\\to T_{\\ge c}\\to T^c[-c]\\to0$ is split exact: above $c$ its maps are identity and zero, at $c$ they are zero and identity, and below $c$ everything is zero. Thus [lem-weil-pbc-degreewise-split-derived-triangle] gives its distinguished triangle. Descend from $c=b+1$ to $c=a$: the initial tail is zero, where an additive transformation between additive functors is invertible; at each step $\\pi_{T^c[-c]}$ is invertible by step 2. The transformation gives a morphism between the two image triangles by [lem-weil-pbc-ringed-projection-mate-exact], and [lem-sf-triangle-morphism-iso] makes $\\pi_{T_{\\ge c}}$ invertible from the outer two components. The final tail is $T$ itself. Naturality conjugates this isomorphism along any derived isomorphism $T\\cong Q$. This argument uses the degreewise summands directly, without claiming that their splittings are chain maps into a free complex.",
+   "text": "Prove local detection of arbitrary derived arrows by replacing their target with a K-injective complex using [prop-pur-kinjective-resolutions-exist]. Essential surjectivity of Q gives a complex for the source, and the K-injective Hom comparison lifts the derived arrow to a chain map g. The natural exact-restriction factorization identifies Q(r_U g) with restriction of Q(g), hence each r_U g is a quasi-isomorphism. Exact restriction commutes with short-complex homology. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the underlying sheaf map of each H^n(g), then reflect isomorphisms back to modules. Thus g is a quasi-isomorphism, so Q(g) is invertible. Cancel the two representative isomorphisms to obtain invertibility of the original derived arrow. Apply this to the global projection mate and the covering family of step 3.",
    "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-weil-pbc-degreewise-split-derived-triangle",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-triangle-morphism-iso"
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-sheaf-cover-local-isomorphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, proof"
-   }
-  },
-  {
-   "text": "Fix a target site object $V$. By the perfectness condition in [def-weil-pbc-strict-perfect-coefficient-package], choose a covering $\\{V_i\\to V\\}$ on which $P$ has strict-perfect representatives. For each $i$ put $A_i=a(h_{V_i})$ and $B_i=u^{-1}A_i$. By [lem-weil-pbc-element-restriction-hom], module sheaves on the element-site slice at $A_i$ are equivalent to module sheaves on the usual localized site at $V_i$, and element restriction corresponds to ordinary restriction. Apply [lem-sbc-ringed-topos-sheaf-slice-derived-comparison] to $A_i$: the pullback comparison is the one induced by the ringed square and its exchange mate $\\beta$ is invertible. The canonical tensor comparisons for the restrictions are those of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; here derived restriction is ordinary exact restriction. In [lem-weil-pbc-ringed-exchange-tensor-coherence] set $f=u$, $g=j_{A_i}$, $g'=j_{B_i}$, $f'=u_{A_i}$ and $Q=P$. Its displayed equality identifies restriction of $\\pi_{u,E,P}$, conjugated by these invertible comparisons, with $\\pi_{u_{A_i},r_XE,r_YP}$. Step 3 proves the latter invertible on its strict-perfect model. Consequently $\\pi_{u,E,P}|_{V_i}$ is invertible. Bounds and ranks are chosen separately on each $V_i$.",
-   "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-weil-pbc-element-restriction-hom",
-    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, proof"
-   }
-  },
-  {
-   "text": "For each integer $q$, exact restriction commutes with $H^q$ by [lem-weil-pbc-exact-functor-complex-cohomology], so step 4 makes every $H^q(\\pi)$ invertible on the covering slices. This natural cohomology comparison also applies to derived arrows: represent an arrow by a roof, apply the natural comparison to both chain maps, and invert the image of the quasi-isomorphism. Collect the domains $V_i$ of the chosen coverings for all site objects $V$; they form a small family whose domain sieve covers every $V$. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the underlying abelian sheaves of $H^q(\\pi)$. The resulting inverse is module-linear, since the original map is module-linear and bijective. Thus $H^q(\\pi)$ is invertible for every $q$. By [lem-weil-pbc-unbounded-derived-iso-cohomology], $\\pi$ is an isomorphism in the ordinary unbounded derived category. No common bound on the local complexes or on $E$ has been used.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, proof"
+    "place": "Tag 0944, lemma-projection-formula; projection morphism immediately preceding the lemma"
    }
   }
  ],
  "proof_deps": [
+  "lem-sbc-projection-mate-slice-presentation",
   "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-weil-pbc-degreewise-split-derived-triangle",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-element-restriction-hom",
-  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "lem-weil-pbc-bounded-complex-triangulated-devissage",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-sheaf-cover-local-isomorphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-21",
+  "note": "Stacks 0944 locality and finite devissage, implemented using the existing proved bounded-complex and isoLocus APIs; K-injective lift gives local detection without a new cohomology criterion.",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0944, lemma-projection-formula, proof"
+  "place": "Tag 0944, lemma-projection-formula, proof; remark-compatible-with-diagram"
  },
  "mathlib_searches": [
   {
@@ -264,5 +249,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Item node unchanged except the added lean record; the six dependency nodes are byte-identical to side-live; lean.statement matches the file exactly. Clauses match the node and Stacks 0944: the ringed-topos presentation, derived adjunction and K-flat tensor models are those of mate-exact; E is unbounded; hP is the recorded locally strict-perfect predicate (bounds and ranks inside the cover, degreewise splittings, universes all u). A probe showed e.projection equals derivedProjectionFormulaMate, the alpha of mate-exact, i.e. the adjoint of (counit ⊗ 1) after the tensor comparison. Edge cases checked: P=0, rank 0, all shifts, non-flat Z->Z/2, empty site. No duplicate; proof is sorry only; docstrings carry source and proof steps 1-5; plain imports are exactly the proof-dependency modules. nt_compile clean in 27.3 s (worker recorded 17.6/20.5 s). Advisories only: projection and the Corner/Edge/Model presentation are owned by nodes outside the item's stmt_deps; the RingedToposMorphism declaration is imported but not used in the signature."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261021T140843-L-2762743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
