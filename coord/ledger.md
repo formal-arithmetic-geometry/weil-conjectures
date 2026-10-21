@@ -22850,3 +22850,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/Z5/Sheaf.Paper.LocalFrobeniusTrace (stage 3; reviewer PASS; first push; landing 20261021T144034-L-39802 (interface); batch 20261021T143835; modules 1; new nodes 0; change records: coord/changes/Z5-local-frobenius-trace-elaboration.md)
 - 14:41 L: merged deliver/NL/lem-pur-signed-line-derived-base-change (stage 2; reviewer PASS; parallel immutable checks)
 - 14:44 L: merged deliver/NQ/lem-sfb-normal-generic-continuous-sections (stage 2; reviewer PASS; parallel immutable checks)
+- 14:44 L: returned deliver/Q11/lem-sfb-continuous-frame-sheaf-comparison (reviewer RETURN: L: independent stage-2 immutable head a1245c021dc8: incremental DAG validation: reach: def-sfb-continuous-frame-module i)
