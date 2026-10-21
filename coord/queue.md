@@ -1,6 +1,6 @@
 # Work queue
 
-75 items; claim with `tools/claim.py next <group> [--stage N]`.
+74 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (10 clusters, 363 modules)
 
@@ -21,7 +21,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 52, stage 3 1 items.
 
-## Stage 1: nodes to split (7)
+## Stage 1: nodes to split (6)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,23 +30,22 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
-| `lem-sfb-uncountable-almost-disjoint-family` | 4016 | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (8)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-pur-affine-line-purity-comparison` | 1 | state | 14 |
+| `def-pur-affine-space-comparison` | 1 | state | 10 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-sfb-constructible-normed-geometric-fibres` | 1 | state | 0 |
 | `lem-sfb-countable-endomorphism-module-reconstruction` | 1 | state | 0 |
 | `lem-sfb-finite-ultrametric-best-approximation` | 1 | state | 0 |
+| `lem-sfb-uncountable-almost-disjoint-family` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
-| `lem-sfb-ultrametric-orthogonal-extension` | 2 | state | 0 |
 
-Not open yet: 372 nodes that below a finished node, not needed, 93 nodes that wait for a statement dependency (bottom-up), 6 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 372 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up), 5 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (44)
 
