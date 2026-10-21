@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "Use the four constructors of [def-pur-completed-operation-expressions]. Induct simultaneously over all output locations on expression size: an input has size zero, a unit size one, a tensor has size one plus both child sizes, and a pullback has size one plus its child size. The induction claim is that $S_P$ is normalized and the specified recursive $\\beta_P:K_P\\to\\mathcal L S_P$ is invertible. Every child has strictly smaller size. Induction on this natural number therefore permits both tensor hypotheses at once, even when the two children coincide.",
+   "text": "Use structural induction on the four constructors of [def-pur-completed-operation-expressions], with induction claim that the whole-system value is normalized and the specified recursive beta is invertible, simultaneously over all output locations. This is the finite-expression induction: both tensor children and the pullback child are proper subexpressions, even when the children coincide.",
    "uses": [
     "def-pur-completed-operation-expressions"
    ],
@@ -69,10 +69,10 @@
    }
   },
   {
-   "text": "Fix such a $P$ of output $W$. By [lem-coef-derived-system-evaluation-calculus], $\\mathcal R_W$ is a functor on the derived category and $e_{S_P}:\\mathcal R_W\\mathcal L_WS_P\\to S_P$ is its actual adjunction counit in the whole derived system category. The preceding induction gives normalized $S_P$, so [lem-coef-normalized-dvr-effectivity] makes this coherent counit invertible. Functoriality makes $\\mathcal R_W(\\beta_P)$ invertible, with inverse $\\mathcal R_W(\\beta_P^{-1})$. Consequently the specified $\\gamma_P=e_{S_P}\\circ\\mathcal R_W(\\beta_P)$ is an isomorphism of whole systems, with inverse $\\mathcal R_W(\\beta_P^{-1})\\circ e_{S_P}^{-1}$. No boundedness or constructibility hypothesis is needed for the cited effectivity assertion.",
+   "text": "Fix an expression P. The induction gives normalized systemValue P and invertible beta P. Use the actual whole-system adjunction counit of the supplied reduction record [lem-coef-derived-system-evaluation-calculus]. The counit_effective field of the supplied primitive Comparisons record [lem-pur-completed-primitive-counit-comparison], at the identity scheme map, makes this counit invertible on systemValue P. Reduction preserves the beta isomorphism, and their composite, the defined gamma P, is therefore invertible. The normalized-DVR effectivity theorem need not be applied again: its needed consequence is already a hypothesis in Comparisons.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-normalized-dvr-effectivity"
+    "lem-pur-completed-primitive-counit-comparison"
    ],
    "elementary": false,
    "source": {
@@ -81,7 +81,7 @@
    }
   },
   {
-   "text": "For $m\\ge n\\ge1$, transition maps give natural transformations from evaluation at $m$ to restriction of evaluation at $n$. Indeed, the compatible componentwise morphisms in [lem-coef-semilinear-derived-sections] commute with the strict transitions; this equation holds degreewise on system complexes, and remains natural after passing to homotopy and then inverting quasi-isomorphisms. Hence it holds for every whole derived-system morphism. Put $b=\\mathcal R_W(\\beta_P)$ and $e=e_{S_P}$, both such morphisms by [lem-coef-derived-system-evaluation-calculus]. Their two transition equations are\n$$\\tau^{\\mathcal R\\mathcal L S_P}_{m,n}b_m=\\operatorname{Res}_{m,n}(b_n)\\tau^{\\mathcal R K_P}_{m,n},\\qquad \\tau^{S_P}_{m,n}e_m=\\operatorname{Res}_{m,n}(e_n)\\tau^{\\mathcal R\\mathcal L S_P}_{m,n}.$$\nCompose these equations and use functoriality of restriction to obtain\n$$\\tau^{S_P}_{m,n}(e_mb_m)=\\operatorname{Res}_{m,n}(e_nb_n)\\tau^{\\mathcal R K_P}_{m,n}.$$\nSince $(\\gamma_P)_r=e_rb_r$, this is precisely the required actual transition square. At $m=n$ both transitions are identities, so the same argument includes that case.",
+   "text": "The actual coefficientSequenceDerivedTransition is a natural transformation from evaluation at m to evaluation at n followed by restriction. Apply its naturality equation directly to the constructed whole-system morphism gamma P. This gives exactly the displayed transition square, including m=n. It is equivalent to composing the naturality squares of reduction(beta P) and the actual adjunction counit, and does not infer equality from componentwise evaluations.",
    "uses": [
     "lem-coef-semilinear-derived-sections",
     "lem-coef-derived-system-evaluation-calculus"
@@ -109,13 +109,12 @@
   "def-pur-integral-derived-operations",
   "lem-pur-completed-primitive-counit-comparison",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
   "lem-coef-semilinear-derived-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-  "place": "Order 2232, the sentence that the natural Weil actions commute with finite reduction; formal finite-expression/counit argument extracted as original steps 7-8 of lem-pur-completed-operation-tower-substitution, preserved in coord/reports/N5/lem-pur-completed-operation-tower-substitution.md. This induction is agent-written, not a theorem quoted from the blueprint."
+  "place": "B6 Lean implementation of the seven-step finite-expression argument: structural induction, the supplied primitive tensor/geometric/counit isomorphism fields, functor preservation of isomorphisms and transition naturality. No new mathematical hypothesis or intermediate result."
  },
  "mathlib_searches": [
   {
@@ -241,7 +240,6 @@
  },
  "tool_uses": [
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
   "lem-coef-semilinear-derived-sections"
  ],
  "reviewed": {
@@ -276,5 +274,15 @@
   "group": "Q02",
   "result": "pass",
   "note": "Item node differs from side-live only in lean; the 12 dep nodes are byte-identical; statement verbatim; declarations exact; one sorry. Lean matches the node: systemValue/completedValue use the recorded tensor, pull, unit and integralCompletedTensor/integralDerivedPullback. beta is identities at leaves and functor image followed by PrimitiveCounit.tensorBeta/pullBeta (r then L(T(e,e))/L(F(e))). gamma = R(beta) followed by the adjunction counit. The primitive-iso hypothesis is tensor_iso/geometric_iso of the pinned Comparisons record (typing X=W a, Y=W b, rhoX=rho a correct; the other fields are conclusions of the primitive theorem). hUnit/hTensor/hPull are the closure assumptions, no stronger than the node. Conclusions: normalization, IsIso beta, IsIso gamma, and the transition square in the node's order including m=n. Edge cases (empty I/S, repeated inputs, f=id) and independent universes t,u,s,i checked. No hollow defs; docstrings with source and blueprint; both report sections present. Advisory: proof-only plain imports (H9); PrimitiveCounit.pull duplicate belongs to the dependency. Not compiled, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261021T151109-L-1126568",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

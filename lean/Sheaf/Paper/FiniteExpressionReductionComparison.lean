@@ -14,8 +14,6 @@ public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.CompletedOperationExpressions
 public import Sheaf.Paper.CompletedPrimitiveCounitComparison
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-! # Finite expression comparison and coherent reduction
 
@@ -172,6 +170,40 @@ theorem finiteExpressionReductionComparison
             (normalizedDVRRes l E (W a) h).map
               ((coefficientSequenceDerivedEvaluation l E (W a) n).map
                 (gamma l E W D ρ C P N))) := by
-  sorry
+  have h : IsNormalizedCoefficientSequence l E (W a) (systemValue l E W D N P) ∧
+      IsIso (beta l E W D ρ C P N) := by
+    induction P with
+    | input k =>
+        refine ⟨hN k, ?_⟩
+        dsimp only [beta]
+        infer_instance
+    | unit a =>
+        refine ⟨hUnit a, ?_⟩
+        dsimp only [beta]
+        infer_instance
+    | @tensor a P Q hP hQ =>
+        have := hP.2
+        have := hQ.2
+        have := (C (𝟙 (W a))).tensor_iso
+          (systemValue l E W D N P) (systemValue l E W D N Q) hP.1 hQ.1
+        have : IsIso (Prod.mkHom (beta l E W D ρ C P N) (beta l E W D ρ C Q N)) :=
+          (isIso_prod_iff (f := _)).mpr ⟨hP.2, hQ.2⟩
+        refine ⟨hTensor a _ _ hP.1 hQ.1, ?_⟩
+        dsimp only [beta]
+        infer_instance
+    | @pullback a b f P hP =>
+        have := hP.2
+        have := (C f).geometric_iso (systemValue l E W D N P) hP.1
+        refine ⟨hPull f _ hP.1, ?_⟩
+        dsimp only [beta]
+        infer_instance
+  have := h.2
+  have := (C (𝟙 (W a))).counit_effective (systemValue l E W D N P) h.1
+  refine ⟨h.1, h.2, ?_, ?_⟩
+  · dsimp only [gamma]
+    infer_instance
+  · intro m n hmn
+    exact (coefficientSequenceDerivedTransition l E (W a) hmn).naturality
+      (gamma l E W D ρ C P N)
 
 end WeilConjectures.FiniteExpressionReduction
