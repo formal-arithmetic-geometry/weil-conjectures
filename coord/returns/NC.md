@@ -55,9 +55,6 @@ L: independent stage-2 immutable head 408006eebdb1: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-algclosed-curve-model: lem-trf-algclosed-curve-model: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+## lem-coef-sequence-global-sections-evaluation (2026-10-21 07:49 UTC, branch head 30cd11879cc)
 
-
-
-
-
-
+L: independent stage-2 immutable head 30cd11879cc5: H2: stmt_deps cite theorem nodes lem-pur-system-derived-transition and lem-weil-pbc-tower-derived-evaluation-normalization only for the plain defs systemDerivedTransition and towerDerivedEvaluationTransition (both Localization.liftNatTrans, no .choose, theorems unused); no def node owns them. Re-deliver with definition node(s) (e.g. existing:true on the unchanged modules) owning those defs, cited by the item in place of the theorem nodes; also cite def-pur-system-level-left-extension-basic (StrictRingSystem/systemEvaluation/derivedSystemEvaluation are used directly). Lean otherwise correct clause by clause (pinned exact restriction, universal derived pairs, unit-pinned evaluation and scalar comparisons, finite_transition directions checked); Lean may stay byte-identical. Advisory: Sheaf.Γ instead of the own lim spelling; duplicate HasDerivedCategory.standard tower-Ab instance with CoefDerivedSystemEvaluationCalculus. nt_compile timed out at 60 s twice (load 282-299); report records clean 30.7/33.5 s.
