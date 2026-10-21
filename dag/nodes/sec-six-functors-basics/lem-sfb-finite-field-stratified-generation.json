@@ -22,69 +22,83 @@
  ],
  "proof": [
   {
-   "text": "Work on the small-site skeleton in the common coefficient universe of [def-weil-size-convention]. For any ordinary $A_X$-module sheaf $F$, apply [lem-exc-constant-field-module-flat] with $\\kappa=A$ and $J=X_{\\mathrm{proet}}$. Its smallness hypothesis holds by this skeleton convention; use the ordinary commutative-ring and abelian-group sheafifications on the small site. Abelian sheafification exists by [lem-sfb-grothendieck-sheafification], and its locally-bijective criterion is [lem-weil-pbc-site-sheafification-iso-locally-bijective]. The associated constant ring is exactly the coefficient ring $A_X$ in the item. Hence $F$ is flat in the tensor-exactness sense. In particular this applies to each constructible cohomology sheaf of $P$.",
+   "text": "Represent a finite construction by a natural-number-indexed sequence with a finite used prefix, a zero first object, and an isomorphism from its last object to the input. Prove directly that this property is replete and closed under generators, all integer shifts, and middle-term extensions of distinguished triangles. For an extension, concatenate the two used prefixes. Insert the second prefix's zero first object using a shift by zero of the first zero object; translate every reference in the second prefix by the first prefix length plus one. Transport the extension triangle along the two endpoint isomorphisms and append its middle term. All translated references remain earlier entries. This defines an isomorphism-closed triangulated object property without retracts.",
    "uses": [
-    "def-weil-size-convention",
-    "lem-exc-constant-field-module-flat",
-    "lem-sfb-grothendieck-sheafification",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03ER (definition-flat) and 08FC (lemma-flat-eq); Fields Tag 09FN (lemma-vector-space-is-free); application of the existing constant-field flatness theorem"
-   }
-  },
-  {
-   "text": "Let $F$ be any constructible $A_X$-module sheaf. Apply clauses (1) and (2) of [det-sf-flat-model-generation], using Step 1 for flatness. Its hypotheses are precisely a finite commutative ring and a Noetherian scheme on the ordinary pro-étale site; no finite-type or invertibility hypothesis is needed. Obtain finitely many locally closed strata $a_k:S_k\\hookrightarrow X$, constructible because the underlying space of the Noetherian scheme $X$ is Noetherian, so every locally closed subset is constructible [def-weil-constructible-subset]; locally constant $L_k=F|_{S_k}$ with finite projective $A$-values, and a finite sheaf filtration $0=F_0\\subset F_1\\subset\\cdots\\subset F_m=F$ whose quotients are $a_{k!}L_k$. By that node's convention, $a_{k!}L_k=g_{k*}j_{k!}L_k$ for the open immersion into the scheme-theoretic closure followed by its closed immersion. A finitely generated module over the field $A$ is a finite-dimensional vector space, so these are generators of exactly the kind allowed here. We use the finite sheaf filtration in clause (2).",
-   "uses": [
-    "det-sf-flat-model-generation",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
-    "place": "Clauses (1) and (2), with the ordinary pro-étale coefficient and locally closed extension conventions in the DAG statement"
-   }
-  },
-  {
-   "text": "For the filtration in Step 2, each short exact sequence $0\\to F_{k-1}\\to F_k\\to g_{k*}j_{k!}L_k\\to0$ gives the distinguished triangle $F_{k-1}[0]\\to F_k[0]\\to(g_{k*}j_{k!}L_k)[0]\\to F_{k-1}[1]$ by [lem-sf-derived-ses-triangle]. Induct on $k=0,\\ldots,m$: the initial object is zero, and at each successor the first and third terms have already been constructed, so the allowed middle-term extension constructs $F_k[0]$. The last object is $F[0]$. Thus every constructible sheaf in degree zero has a finite construction of the required form.",
-   "uses": [
-    "lem-sf-derived-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), applied to sheaves placed in degree zero"
-   }
-  },
-  {
-   "text": "Choose integers $a\\le b$ with $H^q(P)=0$ for $q<a$ or $q>b$. Use the canonical truncations of [def-kun-truncations] and choose a complex representing $P$ in [def-weil-abstract-derived-category]. The cohomology formulas for good truncations show that $\\tau_{\\le a-1}P$ is acyclic, hence isomorphic to zero, and that the inclusion $\\tau_{\\le b}P\\to P$ is a quasi-isomorphism, hence an isomorphism in the derived category. These statements also cover an acyclic $P$, for which any interval can be chosen.",
-   "uses": [
-    "def-kun-truncations",
-    "def-weil-abstract-derived-category"
+    "def-weil-triangulated-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), with the cohomology formulas in Homology section-truncations"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9, finite stratified dévissage in the proof of Lemma 6.7.13; degree-zero sheaf filtrations followed by the finite truncation tower."
    }
   },
   {
-   "text": "For each integer $q=a,\\ldots,b$, [lem-weil-pbc-truncation-triangle] gives $\\tau_{\\le q-1}P\\to\\tau_{\\le q}P\\to H^q(P)[-q]\\to(\\tau_{\\le q-1}P)[1]$. Step 3 constructs $H^q(P)[0]$, and one further allowed shift operation, the automorphism $[-q]$ of the triangulated category [def-weil-triangulated-category], constructs $H^q(P)[-q]$ (the complex with $H^q(P)$ in degree $q$ under the convention $(M[1])^r=M^{r+1}$). Starting at $\\tau_{\\le a-1}P\\cong0$, induction over these $b-a+1$ triangles constructs the middle term $\\tau_{\\le q}P$ from the already constructed first and third terms. At $q=b$ this is $P$ up to the isomorphism of Step 4. Only finitely many $q$ occur, and each contributes finitely many strata and triangle steps. This gives one finite collection of the required generators and finitely many shifts and extensions. For the empty scheme or the zero object the construction may start and end at zero.",
+   "text": "Apply SheafOfModules.isFlat_constantFieldModule to the lifted field ULift A and the original small pro-etale site. The existing essentially-small sheafification instances supply its site hypotheses; specialize the locally-bijective instance explicitly to the module universe rather than asking typeclass search to invert a maximum of universe levels. Mathlib's ULift field instance supplies the field structure. Thus every ordinary constant-field module sheaf is flat. The proved constant-scalar encoding equivalences in ProEtaleConstantModuleConstructibility and ConstructibleCoefficientSerre convert the given constructibility predicate to the coefficient-universe predicate expected by the flat-model theorem, without changing its strata or its meaning.",
    "uses": [
-    "lem-weil-pbc-truncation-triangle",
+    "def-weil-size-convention",
+    "lem-exc-constant-field-module-flat",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-constructible-coefficient-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9, finite stratified dévissage in the proof of Lemma 6.7.13; degree-zero sheaf filtrations followed by the finite truncation tower."
+   }
+  },
+  {
+   "text": "For a constructible sheaf F, apply clauses (1) and (2) of det-sf-flat-model-generation using this flatness. Obtain an ordered finite stratification and a filtration of F whose factors are exactly the canonical flatModelProEtaleExtension objects. The recorded stratum-range equality transports constructibility of each stratum to the range of its immersion. For a restriction L, its local constancy and finite stalks give finite constant models by the proved finiteLocal_iff encoding lemma and the finite-model local-constancy theorem. Restricting and then extending the constant scalar action identifies those models with the intrinsic localized constant module sheaves. A finite underlying module is finitely generated, so these are precisely generators allowed by the target.",
+   "uses": [
+    "det-sf-flat-model-generation",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-proetale-finite-model-local-constancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9, finite stratified dévissage in the proof of Lemma 6.7.13; degree-zero sheaf filtrations followed by the finite truncation tower."
+   }
+  },
+  {
+   "text": "Map the filtration's zero first term into degree zero. Each short exact filtration step gives its distinguished singleTriangle by lem-sf-derived-ses-triangle. Induct over Fin (str.n + 1), using the finite-construction property from Step 1 and the generator membership from Step 3 for the third term. Transport the last term by the filtration endpoint isomorphism. This constructs F[0].",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "det-sf-flat-model-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9, finite stratified dévissage in the proof of Lemma 6.7.13; degree-zero sheaf filtrations followed by the finite truncation tower."
+   }
+  },
+  {
+   "text": "Take the isomorphism closure of the constructible-sheaf predicate. The preceding step constructs its degree-zero objects, and the singleFunctors shift isomorphism constructs each such sheaf in degree q. Convert the given cohomological bounds a <= b into the standard IsGE a and IsLE b conditions. Apply lem-sfb-degreewise-bounded-devissage with the natural length (b-a+1).toNat and the constant family of isomorphism-closed constructibility predicates. Its hypotheses on zero objects, extensions and degree-q single objects are exactly Steps 1 and 4. This is the finite good-truncation induction of Stacks Tag 08J5, reused from the proved library declaration; it constructs P without any Tor-amplitude or etale-origin assumption.",
+   "uses": [
+    "lem-sfb-degreewise-bounded-devissage",
+    "def-weil-abstract-derived-category",
     "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), second displayed triangle and finite induction"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9, finite stratified dévissage in the proof of Lemma 6.7.13; degree-zero sheaf filtrations followed by the finite truncation tower."
+   }
+  },
+  {
+   "text": "Unpack the finite used prefix obtained for P. Restrict its sequence to Fin (n+1); replace every natural-number reference by its Fin (n+1) counterpart, which exists because that reference is at most the preceding step index. Fin.succ and Fin.last preserve exactly the natural indices used in the construction. The zero first term, endpoint isomorphism, and three alternatives are therefore the displayed target. Zero-length constructions and empty schemes require no separate nonemptiness hypothesis.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9, finite stratified dévissage in the proof of Lemma 6.7.13; degree-zero sheaf filtrations followed by the finite truncation tower."
    }
   }
  ],
  "proof_deps": [
-  "def-kun-truncations",
   "def-weil-abstract-derived-category",
   "def-weil-constructible-subset",
   "def-weil-size-convention",
@@ -92,14 +106,16 @@
   "det-sf-flat-model-generation",
   "lem-exc-constant-field-module-flat",
   "lem-sf-derived-ses-triangle",
-  "lem-sfb-grothendieck-sheafification",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "lem-weil-pbc-truncation-triangle"
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-sfb-degreewise-bounded-devissage",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-finite-model-local-constancy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemmas 6.3.3 and 6.3.9 and the finite dévissage in Lemma 6.7.13; explicit ordinary finite-field argument through the existing sheaf-filtration node and Stacks Tags 0152 and 08J5."
+  "place": "Lemmas 6.3.3 and 6.3.9 and the finite dévissage in Lemma 6.7.13; explicit ordinary finite-field argument through the existing sheaf-filtration node and Stacks Tags 0152 and 08J5. Lean proof by U3: finite-prefix closure, the existing single-triangle filtration, and the existing degreewise bounded-devissage theorem; all private bookkeeping and coefficient-model helpers are proved."
  },
  "mathlib_searches": [
   {
@@ -229,11 +245,8 @@
  },
  "tool_uses": [
   "lem-exc-constant-field-module-flat",
-  "lem-sfb-grothendieck-sheafification",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
   "det-sf-flat-model-generation",
-  "lem-sf-derived-ses-triangle",
-  "lem-weil-pbc-truncation-triangle"
+  "lem-sf-derived-ses-triangle"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -262,5 +275,15 @@
   "group": "N6",
   "result": "pass",
   "note": "Clause-by-clause match with node: finite field, IsNoetherian X, ordinary proEtaleDerivedCategory, bounded homology, recorded IsConstructibleProEtaleModuleSheaf per degree; conclusion is a finite Fin(n+1) list from IsZero to ≅P whose steps are canonical flatModelProEtaleExtension (toImage j_! then imageι g_*) of finite-dimensional locally constant L on constructible immersed strata, shifts of earlier entries, or distTriang middle terms with earlier outer terms; no retracts. Pinned abelian instances only fix universes (defeq). Edge cases n=0/acyclic/empty scheme covered. Statement verbatim, imports = proof_deps modules (added GrothendieckSheafification vs prior e0cdd9d1), docstrings OK, one sorry. nt_compile --json clean 16.9 s exit 0. Advisory: IsConstructible (def-weil-constructible-subset) not in stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261021T120731-L-3939761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

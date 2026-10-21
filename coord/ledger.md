@@ -22407,3 +22407,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:07 L: merged deliver/U2/Sheaf.Algebra.Homology.LocallyFreeDerivedScalars (stage 3; reviewer PASS; first push; landing 20261021T120721-L-3937160 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:07 L: merged deliver/U2/Sheaf.Paper.FiniteProEtalePushforwardConstructible (stage 3; reviewer PASS; first push; landing 20261021T120725-L-3937832 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:07 L: merged deliver/Q101/lem-a1-completed-perfect-scalar-pullback (stage 2; reviewer PASS; parallel immutable checks)
+- 12:07 L: merged deliver/U3/Sheaf.Paper.FiniteFieldStratifiedGeneration (stage 3; reviewer PASS; first push; landing 20261021T120731-L-3939761 (interface); batch 20261021T120309; modules 1; new nodes 0; change records: coord/changes/finite-field-stratified-generation-local-instance.md)
