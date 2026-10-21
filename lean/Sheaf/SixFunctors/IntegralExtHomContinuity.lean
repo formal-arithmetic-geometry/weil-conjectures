@@ -8,26 +8,12 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.ConstructibleHomContinuityDevissage
-import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
-import Sheaf.AlgebraicGeometry.BoundedContinuityDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
-import Sheaf.CategoryTheory.Monoidal.ModuleEqualizerInternalHom
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.FormalClosedSupportDerived
-import Sheaf.Paper.IntegralStratumHomFormula
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FreeSheafFlat
-import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
-import WeilConjectures.CategoryTheory.TruncationHypercohomology
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.Paper.IntegralHeartDualizable
+import all Sheaf.Paper.IntegralLfpConstantModelComparison
+import all Sheaf.Paper.IntegralConstructibleSequentialHom
+import all Sheaf.Paper.CondensedLocalPieceHomContinuity
+import Sheaf.Paper.IntegralLfpHomContinuity
+import Sheaf.Paper.CondensedLocallyClosedExtensionTower
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Continuity of Ext out of integral constructible complexes
@@ -57,6 +43,67 @@ variable {ℓ : ℕ} {k : Type u} {E : Type} [Field k] [Field E]
   [Fact ℓ.Prime] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+/-- Local finite-presentation continuity, packaged with the coefficient monoid data. -/
+private def localIntegralContinuity
+    (R : CommMon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] : Prop :=
+  ∀ (U : Scheme.{u}) [TopologicalSpace.NoetherianSpace U]
+    (P : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj R.X U)),
+    IsLocallyFinitelyPresented (condensedRingObj R.X U) P →
+    ∀ (L : I ⥤ CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj R.X U)) ℤ),
+      (∃ a : ℤ, ∀ (s : I) (r : ℤ), r < a → IsZero ((L.obj s).X r)) →
+      ∀ n : ℤ, IsIso (colimit.desc _
+        ((condensedShiftedHom R.X U ((DerivedCategory.singleFunctor _ 0).obj P) n).mapCocone
+          (colimit.cocone L)))
+
+/-- Finite locally closed towers and bounded Postnikov devissage reduce continuity to
+locally finitely presented modules on strata. Source: det-lem-int-ext-continuity. -/
+private theorem constructible_hom_continuity
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) [IsNoetherian X]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (hC : constantModelBoundedConstructible Λ X C)
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    (K : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ)
+    [HasColimit K]
+    (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r))
+    (hlocal : localIntegralContinuity (CommMon.mk Λ) (I := I)) :
+    homColimitProperty (K ⋙ DerivedCategory.Q)
+      (DerivedCategory.Q.mapCocone (colimit.cocone K)) C := by
+  let D := K ⋙ DerivedCategory.Q
+  let c := DerivedCategory.Q.mapCocone (colimit.cocone K)
+  let : ObjectProperty.IsClosedUnderIsomorphisms
+      (IsConstructibleModuleObject (condensedRingObj Λ X)) :=
+    ⟨fun e h ↦ constructible_of_iso _ e h⟩
+  apply homColimit_bounded D c (IsConstructibleModuleObject (condensedRingObj Λ X))
+  · intro M hM
+    obtain ⟨r, hr⟩ := exists_condensedLocallyClosed_extension_tower X Λ M hM
+    have hP : condensedLocallyClosedPiece Λ X ≤ homColimitProperty D c :=
+      locally_closed_generators_continuity X Λ K ⟨b, hK⟩
+        hlocal
+    have h : ∀ r : ℕ, (condensedLocallyClosedPiece Λ X).extensionProductIter r ≤
+        homColimitProperty D c := by
+      intro r
+      induction r with
+      | zero => exact hP
+      | succ r ih =>
+        rw [ObjectProperty.extensionProductIter_succ]
+        rintro B ⟨A, B', f, g, k, hdist, hA, hB⟩
+        exact homColimitProperty_extensions D c _ hdist (hP _ hA) (ih _ hB)
+    exact h r _ hr
+  · exact hC.1
+  · intro q
+    apply constructible_of_finiteConstantStratified Λ X
+    have h := hC.2 q
+    simpa only [IsConstantModelConstructible, if_pos
+      (show CompactSpace X ∧ QuasiSeparatedSpace X from
+        ⟨inferInstance, inferInstance⟩)] using h
+
+set_option linter.unusedSectionVars false in
 /-- Ext out of an integral constructible complex commutes with a bounded-below filtered
 termwise colimit: for `C ∈ Dbc(X, 𝒪_E)` and every `q`, the canonical map
 `colim_i Hom(C, K_i[q]) ⟶ Hom(C, K[q])` induced by the colimit cocone is an isomorphism of
@@ -114,6 +161,21 @@ theorem integralExtHomContinuous
     (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r)) (q : ℤ) :
     IsIso (homContinuityComparison (K ⋙ DerivedCategory.Q)
       (DerivedCategory.Q.mapCocone (colimit.cocone K)) C q) := by
-  sorry
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let : NormedAlgebra ℚ_[ℓ] E := ⟨by
+    intro r x
+    change ‖algebraMap E (PadicAlgCl ℓ) (r • x)‖ ≤ ‖r‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
+    rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+      PadicAlgCl.norm_extends]⟩
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : IsNoetherian X.left := {}
+  have hR : CommMon.mk (integralCoeff.{u} ℓ E) =
+      CommMon.mk (Profinite.padicIntegersRingObj ℓ E) := rfl
+  have hlocal : localIntegralContinuity (CommMon.mk (integralCoeff.{u} ℓ E)) (I := I) := by
+    intro U _ P hP L hL n
+    exact integral_lfp_hom_continuity U ℓ E P hP L hL n
+  have hlocal' := Eq.mp (congrArg (fun R => localIntegralContinuity R (I := I)) hR) hlocal
+  exact constructible_hom_continuity _ X.left C hC K b hK hlocal' q
 
 end AlgebraicGeometry.ProEtale.CondensedRing

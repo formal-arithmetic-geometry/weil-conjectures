@@ -23040,3 +23040,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:27 L: merged deliver/NY/lem-sfb-bicosimplicial-shuffle-totalization (reviewer PASS; first push; new nodes: 1)
 - 16:27 L: returned deliver/E2/Sheaf.Paper.CartesianCoefficientsFiniteFree (reviewer RETURN: (the landing tools, head 1a820ada8) the delivery did not land: (d) user Sheaf.Paper.ProperIntegralRationalScalarComparis)
 - 16:27 L: returned deliver/S1/Sheaf.Algebra.Homology.KFlatResolution (reviewer RETURN: (the landing tools, head 4f1871883) the delivery did not land: (d) user Sheaf.Paper.SheafSliceDerivedComparison (mention)
+- 16:27 L: merged deliver/A7/Sheaf.SixFunctors.IntegralExtHomContinuity (stage 3; reviewer PASS; first push; landing 20261021T162726-L-686391 (proof); batch 20261021T162723; modules 1; new nodes 0)
