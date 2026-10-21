@@ -20025,3 +20025,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:52 L: merged deliver/Q37/lem-sf-adjunct-conjugate-open-factor (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q39/lem-sf-semilinear-clopen-unit-projector (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q22/lem-sfb-finite-sum-lattice (reviewer PASS; first push; new nodes: 0)
+- 03:52 L: merged deliver/Q19/lem-cbc-derived-tower-evaluation-normalization (reviewer PASS; first push; new nodes: 0)

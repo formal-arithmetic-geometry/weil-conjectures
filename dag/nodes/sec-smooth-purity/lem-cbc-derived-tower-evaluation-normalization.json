@@ -17,9 +17,113 @@
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(R)$, $\\mathcal B=\\operatorname{Mod}(S)$ and $\\mathcal T=\\operatorname{Tow}(\\mathcal A)$; write $Q_{\\mathcal T},Q'_{\\mathcal T}$ for the tower localizations. Evaluation is exact by [lem-weil-tower-category-levelwise-abelian], so [lem-weil-pbc-exact-functor-derived-factorization] identifies its derived value with termwise evaluation. In degree $q$ both $e'_nF(P_\\bullet)$ and $F(e_nP_\\bullet)$ are $F(P_n^q)$, with differential $F(d_{P_n}^q)$. For $b\\geq a$ the evaluated transition is $F(d^P_{b,a})$ on both sides, since the levelwise functor applies $F$ to each composite transition [def-weil-inverse-system]. Thus these identities include the differentials and every transition, before localization and hence after it.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "Let $\\mathcal P_{\\mathcal T}$ be the full subcategory of $K(\\mathcal T)$ on the complexes whose every level is K-flat with flat terms. Apply [lem-weil-pbc-diagram-kflat-replacements] to the small index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$: every complex receives a quasi-isomorphism $P_\\bullet\\to M_\\bullet$ with $P_\\bullet\\in\\mathcal P_{\\mathcal T}$, and the levelwise $F$ takes quasi-isomorphisms between such objects to quasi-isomorphisms. The same statement for the one-object identity category gives the corresponding resolving class $\\mathcal P_{\\mathcal A}$ in $K(\\mathcal A)$. Evaluation sends $\\mathcal P_{\\mathcal T}$ into $\\mathcal P_{\\mathcal A}$ by its definition. In particular these are resolutions of strict towers, including all their maps.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "The two resolving classes satisfy the hypotheses of [lem-pur-left-derived-from-kflat-class], by Step 2. Its computation assertion makes $\\tau_{P_\\bullet}$ and $\\varepsilon_{P_n}$ invertible for all $P_\\bullet\\in\\mathcal P_{\\mathcal T}$. This applies to the chosen universal pairs: the universal property gives mutually inverse comparison maps between any two universal pairs, since either composite and the identity have the same composite with the universal counit. The comparisons preserve the counits, so invertibility of these components transfers to the specified $\\tau,\\varepsilon$.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "Write $U_n=e'_n\\widetilde L$ and $V_n=Le_n$. On $\\mathcal P_{\\mathcal T}$ define $w_{n,P}=\\varepsilon_{P_n}^{-1}e'_n(\\tau_P):U_n(Q_{\\mathcal T}P)\\to V_n(Q_{\\mathcal T}P)$. It is an isomorphism by Step 3. For a homotopy-category morphism $h:P\\to P'$ between good objects, naturality of the two counits of [lem-pur-left-derived-from-kflat-class] gives, with $H=Q'F$, $H(h_n)\\varepsilon_{P_n}=\\varepsilon_{P'_n}V_n(Q_{\\mathcal T}h)$ and $H(h_n)e'_n\\tau_P=e'_n\\tau_{P'}U_n(Q_{\\mathcal T}h)$. Substitute $\\varepsilon_{P_n}w_{n,P}=e'_n\\tau_P$ and cancel the invertible $\\varepsilon_{P'_n}$. This yields $V_n(Q_{\\mathcal T}h)w_{n,P}=w_{n,P'}U_n(Q_{\\mathcal T}h)$, so $w_n$ is a natural isomorphism on the full resolving subcategory.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-resolving-representative-whiskering] with $K=H=K(\\mathcal T)$, $p=\\operatorname{id}$, $q=Q_{\\mathcal T}$ and $P=S=\\mathcal P_{\\mathcal T}$. The category $\\mathcal T$ is abelian by [lem-weil-tower-category-levelwise-abelian]; its homotopy quasi-isomorphisms have a right calculus of fractions and $Q_{\\mathcal T}$ is their localization by [lem-pc-quasi-isomorphisms-multiplicative-system]. The required resolving arrows are exactly Step 2, from [lem-weil-pbc-diagram-kflat-replacements]. Thus restriction on two-variable functors is fully faithful. It also gives the unary assertion needed here: for unary functors $A,B$ and a transformation on their resolving restrictions, apply fullness to $A\\circ\\pi_1,B\\circ\\pi_1$ and the transformation pulled back from the first resolving factor, then restrict the lift along the diagonal. For unary faithfulness, pull two transformations back along $\\pi_1$, use two-variable faithfulness, and restrict along the diagonal. Consequently restriction to $\\mathcal P_{\\mathcal T}$ is fully faithful for functors $D(\\mathcal T)\\to D(\\mathcal B)$.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "By the fullness established in Step 5, extend $w_n$ and $w_n^{-1}$ of Step 4 to transformations $v_n:U_n\\to V_n$ and $z_n:V_n\\to U_n$. Their composites restrict to identities, so faithfulness gives $z_nv_n=1$ and $v_nz_n=1$. This proves that $v_n$ is a natural isomorphism with the required normalization. Any other normalized isomorphism $v'_n$ has $\\varepsilon_{P_n}v'_{n,Q_{\\mathcal T}P}=e'_n\\tau_P=\\varepsilon_{P_n}v_{n,Q_{\\mathcal T}P}$ on good towers. Cancel $\\varepsilon_{P_n}$ and use faithfulness in Step 5 to get $v'_n=v_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "Fix $b\\geq a$ and a good strict tower complex $P$. Let $t=d^P_{b,a}:P_b\\to P_a$ and retain $H=Q'F$. Naturality of $\\varepsilon$ [lem-pur-left-derived-from-kflat-class] gives $\\varepsilon_{P_a}L(Qt)=H(t)\\varepsilon_{P_b}$. The transition transformations from [def-weil-inverse-system], using the termwise localization identifications of [lem-weil-pbc-exact-functor-derived-factorization] and Step 1, give $H(t)e'_b(\\tau_P)=e'_a(\\tau_P)d'_{b,a}$: this is naturality of the target evaluation-transition transformation at the single morphism $\\tau_P$ in $D(\\operatorname{Tow}(\\mathcal B))$. Therefore\n$$\\varepsilon_{P_a}L(Qt)v_{b,Q_{\\mathcal T}P}=H(t)\\varepsilon_{P_b}v_{b,Q_{\\mathcal T}P}=H(t)e'_b(\\tau_P)=e'_a(\\tau_P)d'_{b,a}=\\varepsilon_{P_a}v_{a,Q_{\\mathcal T}P}d'_{b,a}.$$\nCancel the invertible $\\varepsilon_{P_a}$. This proves the transition identity on good towers, including all composite transitions, without making any replacement of their individual levels.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-inverse-system",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  },
+  {
+   "text": "Both $L(d_{b,a})v_b$ and $v_ad'_{b,a}$ are natural transformations $U_b\\to V_a$. Step 7 says their restrictions to $\\mathcal P_{\\mathcal T}$ agree. The faithfulness in Step 5 gives their equality on $D(\\mathcal T)$, hence at every $M$. For $a=b$, all transitions used are identities and the same calculation reduces to $v_a=v_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-pc-quasi-isomorphisms-multiplicative-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, lemma-find-existence-computes (dual), combined with categories.tex Tags 04VI--04VK; agent-written evaluation and transition calculation for the completed-pullback invocation in the parent blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +159,45 @@
    "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app: ∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : Categor; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D); CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D); CategoryTheory.Functor.mapDerivedCategorySingleFunctor: {C₁ : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\n    [inst_1 : CategoryTheory.Abelian C₁] →\n      [inst_2 : HasDerivedCategory C₁] →\n        {C₂ : Type u₂} →\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\n            [inst_4 : CategoryTheory.Abelian C",
    "date": "2026-10-21",
    "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Ll]eftDerived|[Ll]eftDerived.*evaluation|resolvingRepresentativesFullyFaithful",
+   "results": "{\"t\": \"2026-10-21T03:41:37Z\", \"tool\": \"grep\", \"query\": \"evaluation.*[Ll]eftDerived|[Ll]eftDerived.*evaluation|resolvingRepresentativesFullyFaithful\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor factorization and generic derived comparisons do not supply counit-normalized evaluation for strict ringed-site towers or its transition identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "{\"t\": \"2026-10-21T03:41:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.leftDerivedNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.Functor.leftDerivedNatIso_inv\"], \"digest\": \"9451af80b3f2358a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor factorization and generic derived comparisons do not supply counit-normalized evaluation for strict ringed-site towers or its transition identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of total left derived functors of a diagram is determined by its counit on resolving complexes and commutes with all evaluation transitions",
+   "results": "{\"t\": \"2026-10-21T03:41:38Z\", \"tool\": \"leansearch\", \"query\": \"A natural isomorphism of total left derived functors of a diagram is determined by its counit on resolving complexes and commutes with all evaluation transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.NatTrans.leftDerived\"], \"digest\": \"fd5df2f00f86f993\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor factorization and generic derived comparisons do not supply counit-normalized evaluation for strict ringed-site towers or its transition identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of strict inverse systems commutes with the total left derived functor of module pullback, uniquely normalized by counits on objectwise K-flat complexes",
+   "results": "{\"t\": \"2026-10-21T03:41:44Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of strict inverse systems commutes with the total left derived functor of module pullback, uniquely normalized by counits on objectwise K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.leftDerived_map_eq\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc\"], \"digest\": \"197453e2d8c96f8e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor factorization and generic derived comparisons do not supply counit-normalized evaluation for strict ringed-site towers or its transition identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison between derived evaluation after a levelwise functor and the derived functor after exact evaluation on a diagram category",
+   "results": "{\"t\": \"2026-10-21T03:41:45Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison between derived evaluation after a levelwise functor and the derived functor after exact evaluation on a diagram category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\"], \"digest\": \"74c290e437984f39\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor factorization and generic derived comparisons do not supply counit-normalized evaluation for strict ringed-site towers or its transition identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -70,12 +209,46 @@
  "blueprint": {
   "from": {
    "node": "lem-cbc-completed-extension-zero-comparison",
-   "place": "Tag 06XN, lemma-find-existence-computes (dual); parent blueprint completed-pullback invocation, item Step 4 evaluation subargument.",
+   "place": "Proof, completed-pullback invocation 'By [def-weil-pbc-completed-pullback] its reduction maps are Lg_n^*j_!K_n'; presentation-transport Step 4: counit-normalized tower evaluation and all quotient-index transitions.",
    "via": [
     "lem-cbc-adic-pullback-presentation-transport"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-derived-tower-evaluation-normalization",
+  "worker": "stage1",
+  "summary": "Constructs the comparison from the two counits on the existing strict objectwise K-flat flat-term resolution class, extends it by the existing resolving-representative full-faithfulness theorem, proves its inverse and uniqueness, and computes every transition square before descending the equality. No new nodes or statement corrections. Searches and all cited statements read.",
+  "blueprint": "Realizes the evaluation subargument of presentation-transport Step 4 behind the parent blueprint's completed-pullback and finite-reduction sentences.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Supplies strict good resolutions and quasi-isomorphism invariance of module pullback; the CBC unit does not construct resolutions."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Supplies the universal left-derived counits and invertibility on resolving representatives, used to normalize the comparison."
+   },
+   {
+    "node": "lem-weil-pbc-resolving-representative-whiskering",
+    "why": "Generic localization tool extends representative transformations and detects their equality; no CBC-unit node states this descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-b4f8f356b",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-b4f8f356b (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement and stmt_deps are byte-identical to the side-live node, which is still unsplit and was created by the NW re-split of lem-cbc-adic-pullback-presentation-transport (live PASS f59a23c1; its Step 4 cites this item). The item is not on the dropped list, has no repair note of its own, cites no SGA and is not Lean-closed. Source: Stacks derived.tex 06XN lemma-find-existence-computes (dual), read at the label. Its hypotheses (resolutions from P, F(s) invertible between P objects) are those of lem-pur-left-derived-from-kflat-class, which Step 2 supplies through lem-weil-pbc-diagram-kflat-replacements (J=N>=1^op and the one-object J; hypotheses small sites, commutative rings, (f,c)). I checked the typing of eps_{P_n} v_n = e'_n(tau_P) and of the transition identity. Step 4: I recomputed both counit naturality squares on K(T) and the cancellation of the invertible eps_{P'_n}. Step 5: the whiskering hypotheses hold with p=id, q=Q_T, P=S, the right calculus coming from lem-pc for the abelian Tow(A); the unary fullness and faithfulness via pi_1 and the diagonal is valid. Step 6: the inverse and uniqueness follow by faithfulness. Step 7: I recomputed the four-equality chain, with the middle equality being naturality of d' at tau_P and Step 1 giving d' = H(t). Step 8: faithfulness. Edge cases checked: a=b, zero tower, f=id, one-object J, non-flat c, unbounded complexes. No duplicate: I read the reduction-pullback-derived-tower, constant-tower-normalization, ringed-strict-tower-projection and strict-tower-alpha-single-evaluation candidates. I accept the three declared tool_uses (kflat replacements, left-derived-from-kflat-class, resolving-representative whiskering) as generic black-box tools. Advisories: Step 3 implicitly uses that Q'K(F) is triangulated (F additive); lem-sc-nattrans-from-resolving-class would also serve in Step 5. No fixes."
  }
 }
