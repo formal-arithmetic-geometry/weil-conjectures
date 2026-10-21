@@ -12,67 +12,81 @@
  ],
  "proof": [
   {
-   "text": "Identify open restriction with localization of the ordinary pro-etale site. For systems localize the vertical site at the sheaf of open objects. Direct-sum extension and module sheafification give exact additive extension, the specified adjunction and its invertible section unit.",
+   "text": "For the ordinary site transport the direct-sum extension followed by module sheafification along the pro-etale slice equivalence. Its exactness and invertible unit give OpenExtension. For the vertical site express an arbitrary ring sheaf as its level rings and semilinear transition maps, apply semilinearDerivedSections.localization, and transport its adjunction along the product slice equivalence. Evaluate its unit at each level and use the ordinary localized unit to prove it invertible. This constructs an exact extension on the actual vertical site, without assuming transition maps invertible.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
     "def-weil-extension-by-zero-presheaf",
     "def-weil-presheaf-modules-sheafification",
-    "lem-cbc-sieve-slice-sheafification",
-    "lem-weil-pbc-diagram-site-realization"
+    "lem-coef-semilinear-derived-sections",
+    "def-coef-semilinear-system-models",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Construct both ordinary module pullbacks as inverse image followed by extension of scalars and use their adjunctions to the specified direct images. Flat-term K-flat resolutions give the left derived functors and flat-model comparisons. For equal-universe APIs, first lift the site hom types to its object universe and transport topology, ring sheaves and module functors through that category equivalence; then transport back. These exact equivalences preserve the resolving class and sectionwise normalizations.",
+   "text": "Construct both ordinary pullbacks from a geometric inverse image and extension of scalars. Reuse the independent-universe coefficient-arrow scalar-extension adjunction, structural-map graph argument, ringed pullback presentation and linear-mate correspondence. For the actual continuous-site direct image, verify addition and scalar action sectionwise using the product comparison projections. Restrict the set adjunction to linear maps and compose with scalar extension; this retains the specified right adjoint with site homs in Type u and coefficients in Type (u+1). Choose the already constructed derived-change-of-rings functor as scalar extension and transport the ordinary adjunction along its presentation isomorphism. Flat-term K-flat resolutions, exact algebraic inverse image and K-flat quasi-isomorphism invariance then construct the total left derived pullbacks and resolving-model comparisons.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-kflat-resolution"
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-pur-independent-composite-algebraic-image",
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the ringed-site morphism. Its ordinary pullback comparison is the mate of the given section-normalized right square. Restriction preserves the resolving class, so descent gives theta with its representative equation.",
+   "text": "Compute the mate of the supplied section-normalized right square using the adjunction between open postcomposition and base change. The first-projection condition on t identifies the site mate with the canonical composite-pullback isomorphism; this holds also in the product index category. Its action on sections proves the horizontal module mate invertible. The iterated-mate/conjugation identity therefore makes the vertical module mate invertible, with precisely the required unit equation. Restriction preserves flat terms and K-flatness. Fully faithful restriction to flat K-flat representatives descends the ordinary comparison to theta and proves its specified model equation.",
    "uses": [
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction keeps both sections on every simple tensor. Sheafification gives the underived tensor comparison, and the canonical tensor pullback theorem descends its signed total comparison for the supplied tensor models. Assemble the Operations record retaining the four supplied models and supplied right square.",
+   "text": "Present restriction as the explicit algebraic inverse image of the continuous cocontinuous open-site functor. Apply the existing universe-independent inverse-image tensor comparison. Evaluate its generalized-section formula on the cartesian pairing of the two underlying module sheaves to obtain exactly the required pure-section equation; its naturality gives the simultaneous tensor naturality. The signed total pullback comparison is invertible because restriction is a left adjoint. Descend this comparison with tensorComparisonDescent for the supplied tensor models, and cancel the inverse representative maps to obtain the required TensorComparison equation. Assemble Operations with exactly the four supplied tensor models and right square.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "lem-cbc-sieve-slice-sheafification",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-pur-independent-inverse-image-tensor-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-tensor-coherence-data",
   "def-pur-sheaf-tensor-product",
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
-  "lem-cbc-sieve-slice-sheafification",
+  "lem-coef-semilinear-derived-sections",
   "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-independent-composite-algebraic-image",
+  "lem-pur-independent-inverse-image-tensor-comparison",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+  "lem-weil-pbc-resolving-representative-whiskering",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
   "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI, 03DJ, 0F6Z, 04J0 and 03EL; sites-cohomology.tex Tags 06YS, 06YY, 0G7E and 07A4. The simultaneous presentation is an agent-formulated construction from these results. Explicit subargument of lem-sf-open-tensor-normalization; no normalized beta or gamma is assumed."
+  "place": "Tags 03DI, 03DJ, 0F6Z, 04J0 and 03EL; sites-cohomology.tex Tags 06YS, 06YY, 0G7E and 07A4. F9: complete Lean construction using the ordinary slice and vertical semilinear localization, module adjunction, mate calculus, and fully faithful representative descent. No normalized beta or gamma is assumed; no new sorry is introduced."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -163,13 +177,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-9ffe9",
-  "group": "X8",
-  "result": "fix",
-  "landing": "20261020T221404-L-4182007",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T020120-L-2586500",
   "kind": "interface",
-  "note": "independent cc review: delivered Data/item/3 new modules vs live OpenTensorNormalization.lean (diff), 4 new + 2 changed node files vs live dag, new sorry statements vs Operations/TensorModel definitions, 33 importers compiled"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
