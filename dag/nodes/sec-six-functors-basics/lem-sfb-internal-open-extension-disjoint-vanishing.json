@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-internal-open-extension-disjoint-vanishing",
+ "kind": "statement",
+ "title": "Disjoint pullback of internal module extension by zero vanishes",
+ "statement": "Let Lambda be any commutative condensed ring, and use internal coefficient modules Mod_{Lambda_T} with Lambda_T=p_T^*Lambda [sk-def-sfb-module-objects, sk-def-sfb-pulled-back-coefficients]. Let j:U -> X be an open immersion of schemes and let g:W -> X be any scheme morphism whose image is disjoint from the image of j. For every internal module M over Lambda_U, the actual coefficient module pullback g^*(j_!M) is a zero object. Here j_! is the coefficient-linear extension by zero [sk-def-sfb-module-lower-shriek], and g^* is the actual scalar-extension pullback [sk-def-sfb-module-pushforward-pullback]. No quasi-compactness, finiteness, Noetherian, or immersion hypothesis on g is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+  "place": "The assertion that extension by zero restricts to zero on X minus U; generalized to any morphism with image disjoint from U. Existing complete source proof: ModuleObject/OpenClosed.lean, isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint. Compare Stacks proetale.tex Tags 09BN and 09AH and sites-modules.tex Tag 03DI."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient map alpha_g is an isomorphism, so extension of scalars along it is restriction along its inverse. Thus the underlying abelian sheaf of g^*N is canonically g^* of the underlying sheaf of N. The underlying sheaf of j_!M is abelian extension by zero. These are precisely upperStarObjXIso and openImmersionLowerShriek_comp_forget in the existing implementation.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an abelian sheaf H on W, the open restriction j^*g_*H is zero: over a pro-etale object T over U its sections are H(T times_X W). Disjointness of the two images makes this fibre product empty; the sheaf condition on the empty covering makes its sections zero. The open inverse image is restriction, so this gives the asserted zero sheaf.",
+   "uses": [
+    "def-sfb-finite-upper-star",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two abelian adjunctions identify Hom(g^*j_!M,H) with Hom(M,j^*g_*H). The latter has one element by the previous step, for every H. Therefore g^*j_!M is initial and hence zero in the abelian category. Combining with the underlying-sheaf comparisons in Step 1 makes the underlying sheaf of the internal module g^*j_!M zero. The module forgetful functor is faithful, so its identity is zero and the internal module is zero. This is the complete existing source theorem, rather than a new unproved statement.",
+   "uses": [
+    "sk-def-sfb-finite-lower-shriek",
+    "def-sfb-finite-upper-star",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-finite-lower-shriek",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T2",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+  "place": "Existing source proof via abelian disjoint-image vanishing and the canonical scalar-extension comparison. The node records an already proved source declaration; no Lean declaration or hole is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of internal sheaves of modules restricts to identity on the open and zero on a disjoint closed subscheme",
+   "results": "ModuleCat.Tilde.toOpen_res; ModuleCat.Tilde.res_apply; AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app; AlgebraicGeometry.RingedSpace.res_zero; AlgebraicGeometry.Scheme.Opens.ι_app_self; ModuleCat.Tilde.res_const; ModuleCat.Tilde.exists_const",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for condensed coefficient module objects. The existing source theorem isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint gives the exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_openImmersionRestriction_lowerStar|fullyFaithfulOpenImmersionLowerShriek|upperStarObjXIso",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for condensed coefficient module objects. The existing source theorem isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint gives the exact statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for internal module objects is fully faithful and its pullback to a disjoint subscheme vanishes",
+   "results": "CategoryTheory.Limits.IsZero.of_full_of_faithful_of_isZero; ContinuousLinearMap.extend_zero; TrivSqZeroExt.inrHom; TrivSqZeroExt.inr; TrivSqZeroExt.inl; CategoryTheory.Injective.zero_injective; ComplexShape.Embedding.fullyFaithfulExtendFunctor; Finsupp.supportedEquivFinsupp_symm_apply_coe",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for condensed coefficient module objects. The existing source theorem isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint gives the exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|fullyFaithful.*(Mod|Shriek)|isZero.*(Shriek|extension)",
+   "results": "Mathlib/Algebra/Category/FGModuleCat/Abelian.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for condensed coefficient module objects. The existing source theorem isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint gives the exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenModuleRestrictionIdentities",
+  "date": "2026-10-21",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-open-lower-shriek-preserves",
+   "place": "The restriction of j_!M to X minus U is zero.",
+   "via": [
+    "lem-sfb-open-module-restriction-identities"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint",
+  "statement": "lemma isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint {U W X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (g : W ⟶ X) (hjg : Disjoint (Set.range j.base) (Set.range g.base)) (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) : IsZero ((g)^*⟦Λ⟧.obj ((j)_!open⟦Λ⟧.obj M))",
+  "branch": "slopmaster2",
+  "by": "T2",
+  "date": "2026-10-21",
+  "note": "Exact existing source theorem, imported and used by the compiling item proof. Lambda and its commutative monoid structure are section variables. A zero module, empty U or W, the zero coefficient ring, and arbitrary non-Noetherian schemes all satisfy the statement; disjointness is the only geometric vanishing hypothesis. The blueprint search found an etale abelian analogue (lemma-openclosed-vanishing-lowershriek), not this pro-etale internal module statement."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T143954-L-30874",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T143954-L-30874",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

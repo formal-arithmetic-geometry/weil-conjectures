@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.AlgebraicGeometry.ProEtaleIdentifiedOpenClosed
+import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 
 /-!
 # Open and closed restrictions of coefficient-linear extension by zero
@@ -77,6 +78,19 @@ theorem open_module_restriction_identities
       (Functor.const
         (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))).obj
         (0 : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) := by
-  sorry
+  let ff := (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)).fullyFaithfulFunctor.comp
+    (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).fullyFaithfulMapModLeft
+  have : (openImmersionLowerShriek Λ j).Full := ff.full
+  have : (openImmersionLowerShriek Λ j).Faithful := ff.faithful
+  have : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
+    (openImmersionLowerShriekUpperStarAdjunction Λ j).unit_isIso_of_L_fully_faithful
+  refine ⟨⟨(asIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit).symm⟩, ?_⟩
+  have hdisj : Disjoint (Set.range j.base) (Set.range i.base) := by
+    rw [hij]
+    exact disjoint_compl_right
+  refine ⟨NatIso.ofComponents (fun M ↦
+    (isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint Λ j i hdisj M).isoZero)
+    (fun f ↦ ?_)⟩
+  exact (isZero_zero _).eq_of_tgt _ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -17,72 +17,41 @@
  ],
  "proof": [
   {
-   "text": "For $T=X,U,Z$, let $B_T$ be the section-ring sheaf of $\\Lambda_T$ and let $E_T:\\Mod_{\\Lambda_T}\\simeq\\Mod(B_T)$ be the equivalence in [lem-sfb-internal-module-operations-transport]. Its statement gives the coefficient identifications $g^{-1}B_X\\cong B_T$ induced by $\\alpha_g$ and natural comparisons $c_g:E_Tg^*\\cong g^*_{\\rm sec}E_X$ for $g=j,i$. It also gives $o:E_Xj_!\\cong LE_U$, where $L=j_{!,\\rm sec}$ is left adjoint to $R=j^*_{\\rm sec}$. These comparisons are for the actual tensor pullbacks and the coefficient-linear extension of the item, not merely the underlying abelian sheaves.",
+   "text": "The abelian pro-etale open extension is fully faithful. Its linearization is fully faithful because the lifted unit has the same underlying abelian unit and the module forgetful functor reflects isomorphisms. Restriction of scalars along alpha_j is an equivalence, since alpha_j is invertible. Their composite is exactly the specified internal openImmersionLowerShriek, so this functor is fully faithful. Apply unit_isIso_of_L_fully_faithful to its specified adjunction; the inverse of its unit is the natural isomorphism j^*j_! ≅ identity.",
    "uses": [
-    "lem-sfb-internal-module-operations-transport"
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-alpha-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-proetale-identified-open-closed] with coefficient sheaves $B_X,B_Z,B_U$ and the identifications just obtained. The schemes, closed immersion, complementary quasi-compact open immersion, and arbitrary commutative coefficient rings meet exactly its hypotheses. It supplies an additive sectionwise functor $F:\\Mod(B_U)\\to\\Mod(B_X)$ and adjunction $F\\dashv R$ with invertible unit $\\eta^F:\\mathrm{id}\\to RF$, together with $i^*_{\\rm sec}F(N)\\cong0$ for every $N$. There is no Noetherian or coefficient-finiteness hypothesis in this application.",
+   "text": "The complement equation gives Disjoint(range j,range i). Apply the existing internal disjoint-pullback vanishing theorem to j and i. Each object i^*j_!M is zero, hence has its canonical isomorphism to the chosen zero module.",
    "uses": [
-    "lem-sfb-proetale-identified-open-closed"
+    "lem-sfb-internal-open-extension-disjoint-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
-   }
+   "elementary": false
   },
   {
-   "text": "Identify $L$ with $F$ as left adjoints to the same $R$, writing $\\eta^L,\\varepsilon^L$ and $\\eta^F,\\varepsilon^F$ for their units and counits. Explicitly, $a_N=\\varepsilon^F_{LN}\\circ F(\\eta^L_N):FN\\to LN$ and $b_N=\\varepsilon^L_{FN}\\circ L(\\eta^F_N):LN\\to FN$ are natural. Under the $F\\dashv R$ Hom bijection, $b_Na_N$ and $\\mathrm{id}_{FN}$ both transpose to $\\eta^F_N$; under $L\\dashv R$, $a_Nb_N$ and $\\mathrm{id}_{LN}$ both transpose to $\\eta^L_N$, by naturality and the triangle identities. Hence $b:L\\cong F$. In particular $o$ gives $\\widetilde o:E_Xj_!\\cong FE_U$ by composition with $bE_U$. This checks the identity of the extension functors, rather than choosing a different extension with the same name.",
-   "uses": [
-    "lem-sfb-internal-module-operations-transport",
-    "lem-sfb-proetale-identified-open-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
-   }
-  },
-  {
-   "text": "Compose the natural isomorphisms from the previous steps to obtain $E_U(j^*j_!M)\\xrightarrow{c_j}R(E_Xj_!M)\\xrightarrow{R(\\widetilde o_M)}RF(E_UM)\\xrightarrow{(\\eta^F_{E_UM})^{-1}}E_UM$. Since $E_U$ is fully faithful, this lifts uniquely to an isomorphism $j^*j_!M\\cong M$: lift the displayed map and its inverse by fullness, then use faithfulness to check their two composites are identities. Apply the same faithfulness to each naturality square, giving naturality in $M$.",
-   "uses": [
-    "lem-sfb-internal-module-operations-transport",
-    "lem-sfb-proetale-identified-open-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
-   }
-  },
-  {
-   "text": "Likewise $E_Z(i^*j_!M)\\xrightarrow{c_i}i^*_{\\rm sec}(E_Xj_!M)\\xrightarrow{i^*_{\\rm sec}(\\widetilde o_M)}i^*_{\\rm sec}F(E_UM)\\cong0$. The additive equivalence $E_Z$ sends the zero internal module to a zero sectionwise module. Fullness and faithfulness lift the last composite and its inverse to $i^*j_!M\\cong0$, as in Step 4. The maps to and from zero are unique, so this isomorphism is natural in $M$. The argument uses only the hypotheses checked in Step 2, and thus establishes the stated absence of finiteness and Noetherian restrictions.",
-   "uses": [
-    "lem-sfb-internal-module-operations-transport",
-    "lem-sfb-proetale-identified-open-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
-   }
+   "text": "Package these zero-object isomorphisms with NatIso.ofComponents. For any module morphism, the naturality square commutes because its two composites have zero target, and hence are equal. Together with the inverse unit from Step 1 this proves both Nonempty assertions. The empty-open, whole-open, zero-module and zero-coefficient-ring cases are included in the same argument.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-internal-module-operations-transport",
-  "lem-sfb-proetale-identified-open-closed"
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-open-extension-disjoint-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "T2",
+  "date": "2026-10-21",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-  "place": "The two restriction assertions in the blueprint proof; explicit transport through the existing internal/sectionwise comparison and identified-coefficient open–closed theorem."
+  "place": "The two restriction assertions, proved directly using the existing source module functors: full faithfulness of the linearized open extension, the inverse of its specified unit, and disjoint-image vanishing. No sectionwise module transport is needed."
  },
  "mathlib_searches": [
   {
@@ -192,10 +161,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-internal-module-operations-transport",
-  "lem-sfb-proetale-identified-open-closed"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -222,5 +188,15 @@
   "group": "Q17",
   "result": "pass",
   "note": "Statement matches node: Λ condensed comm ring via framework binder, Mod over condensedRingObj, [IsOpenImmersion j][QuasiCompact j], [IsClosedImmersion i], Set.range i = (Set.range j)ᶜ, recorded upperStar (mapMod ⋙ extendScalars α) and openImmersionLowerShriek (comap α ⋙ linear j_!), conclusions Nonempty(j_!⋙j^* ≅ 𝟭) ∧ Nonempty(j_!⋙i^* ≅ const 0) = node's existence of natural isos; no extra hypotheses or universe restriction. Node differs from side-live only in lean; lean.statement verbatim; not dropped, no repair note, no parallel delivery. Proof deps imported non-public per brief. Docstrings carry source, blueprint tag and 5 proof steps; only the proof is sorry; lines <=100. nt_compile --json clean 14.6 s. Advisory: the public import ModuleObjects.Abelian is redundant (compiles without it). Item is on rework-hold for its proof import InternalModuleOperationsTransport (dispatcher matter, not a delivery fault)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T143954-L-30874",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
