@@ -20023,3 +20023,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:52 L: merged deliver/NI/lem-weil-pbc-finite-basis-cech-first-limit (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q28/lem-cbc-constant-derived-limit-resolution-unit (reviewer PASS; first push; new nodes: 0); claim not held by Q28: not your claim
 - 03:52 L: merged deliver/Q37/lem-sf-adjunct-conjugate-open-factor (reviewer PASS; first push; new nodes: 0)
+- 03:52 L: merged deliver/Q39/lem-sf-semilinear-clopen-unit-projector (reviewer PASS; first push; new nodes: 0)
