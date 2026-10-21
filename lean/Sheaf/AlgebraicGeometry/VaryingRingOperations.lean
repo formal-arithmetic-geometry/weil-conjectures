@@ -602,7 +602,18 @@ theorem moduleEvalG_unique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
         (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
           ((eval R φ Y n).obj N)) :
     d = e := by
-  sorry
+  apply Iso.ext_inv
+  apply NatTrans.ext
+  funext N
+  apply ((Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
+    (coefficients R X n) (StrictTower.constantRingIso (R n) f)).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  have hd' := congrArg
+    (fun a ↦ a ≫ (StrictTower.moduleDirectImage (R n) f).map (d.inv.app N)) (hd N)
+  have he' := congrArg
+    (fun a ↦ a ≫ (StrictTower.moduleDirectImage (R n) f).map (e.inv.app N)) (he N)
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] at hd' he'
+  exact hd'.symm.trans he'
 
 theorem moduleEvalG_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! d : pull R φ f ⋙ eval R φ X n ≅
