@@ -63,33 +63,18 @@
    }
   },
   {
-   "text": "For any such $c$, give $Z$ the structure morphism $a_Z=a_Y\\circ p$. By [def-weil-proper-morphism], properness of $p$ includes separatedness and finite type. By [def-weil-finite-type-morphism], $p$ and $a_Y$ are locally of finite type and quasi-compact. Apply clause (e) of [lem-weil-pbc-proper-fp-permanence] to $p$ and $a_Y$: their composite $a_Z$ is separated and locally of finite type. To check its quasi-compactness using only the cited statements, first apply clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] to $p$ and the quasi-compact scheme $Y$ of step 2; this makes $Z$ quasi-compact. Its map $a_Z$ to the quasi-separated scheme $S$ is then quasi-compact by clause (1) of that same node. The definition of finite type now gives that $a_Z$ is of finite type. Consequently $Z$ belongs to the setting.",
+   "text": "Apply [lem-sfb-compactification-middle-over-base] to $S=\\operatorname{Spec}k$, the structure maps, $f$, and the compactification $c$ of step 3. Step 2 gives the qcqs base; $a_Y$ is separated and of finite type by the setting. The lemma gives $a_Z=a_Y\\circ p$ separated and of finite type and makes $i,p$ morphisms over $k$. Thus $Z$ and both maps stay in the setting.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-sfb-compactification-middle-over-base"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01KU (lemma-separated-permanence), composition clause; morphisms.tex Tags 01W1 (definition-proper) and 01T3 (lemma-composition-finite-type). Quasi-compactness is checked via the two clauses of the cited permanence node."
-   }
-  },
-  {
-   "text": "With $a_Z=a_Y\\circ p$, the equality saying that $p$ is over $k$ is its definition. The equality saying that $i$ is over $k$ is $a_Z\\circ i=(a_Y\\circ p)\\circ i=a_Y\\circ(p\\circ i)=a_Y\\circ f=a_X$: the middle identity uses the compactification equality in [sk-def-nagata-sketch-data], and the last identity is precisely the hypothesis that $f$ is a $k$-morphism in [def-weil-scheme-over-base]. Thus both maps stay over the same field, without imposing any additional hypothesis.",
-   "uses": [
-    "sk-def-nagata-sketch-data",
-    "def-weil-scheme-over-base"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
-    "place": "Statement, paragraph 3, sentence that i and p are k-morphisms; imported proof last sentence, with the structure morphism and equality written out."
+    "place": "Statement paragraph 3, closure in the setting; assembly of the extracted middle-scheme lemma (returned steps 4–5)."
    }
   },
   {
-   "text": "The definition [def-sfb-compactification-over-field] fixes one compactification $c_f$ for precisely these hypotheses on $X$, $Y$ and $f$. Here $Y$ is quasi-compact over $k$ by step 2. Use that already specified choice for the displayed $c_f$; steps 4–5 apply to it as to every compactification. The last sentence of the item records which compactification subsequent shriek constructions use; it does not construct a shriek functor or assert preservation of constructibility or existence of an adjoint for every condensed ring.",
+   "text": "The definition [def-sfb-compactification-over-field] fixes one compactification $c_f$ for precisely these hypotheses on $X$, $Y$ and $f$. Here $Y$ is quasi-compact over $k$ by step 2. Use that already specified choice for the displayed $c_f$; step 4 applies to it as to every compactification. The last sentence of the item records which compactification subsequent shriek constructions use; it does not construct a shriek functor or assert preservation of constructibility or existence of an adjoint for every condensed ring.",
    "uses": [
     "def-sfb-compactification-over-field"
    ],
@@ -109,9 +94,7 @@
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-sfb-compactification-over-base",
   "sk-def-nagata-sketch-data",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-proper-fp-permanence",
-  "def-weil-scheme-over-base",
+  "lem-sfb-compactification-middle-over-base",
   "def-sfb-compactification-over-field"
  ],
  "proof_origin": {
@@ -282,19 +265,19 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "sk-def-sfb-dc-setting",
   "worker": "stage1",
-  "summary": "Kept the source statement exactly. Added the existing definition dependencies for module objects, schemes over a base, finite type, properness, and the specified compactification choice. Expanded the imported geometric proof into six steps; existence uses the existing over-base lemma, and closure of the ambient scheme uses existing permanence leaves. Checked every cited statement, its hypotheses, the field structure morphism, and the distinction between fixed categorical sheaf coefficients in slopmaster2 and condensed ring-object coefficients here. No new nodes, attachments, or new Mathlib leaves.",
-  "blueprint": "The current sk-def-sfb-dc-setting statement paragraphs 1–2 and first display are step 1; paragraph 3 existence is steps 2–3; its closure-in-the-setting sentence is steps 4–5; the final display and choice convention are step 6. The imported proof paragraph is expanded without changing the route. The current _section.md has no separate Proof section."
+  "summary": "Repair of the human-requested re-split: statement unchanged; extracted the returned steps 4–5 into the independent statement-only lemma lem-sfb-compactification-middle-over-base over an arbitrary qcqs base. Parent retains coefficient notation, qcqs checks, compactification existence and fixed choice; its proof is now a short assembly. The full extracted argument is retained verbatim in report.md for the next worker. New node has no proof steps, searches actually run, and explicit source and blueprint references.",
+  "blueprint": "Current statement paragraphs 1–2 and first display: step 1; paragraph 3 existence: steps 2–3; closure and base compatibility: step 4 using the new lemma; final display and choice: step 5. The current source has no separate proof section."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-N3-69aa93c8f",
-  "group": "N3",
+  "reviewer": "NT-cc-Q155-1db4eef4a",
+  "group": "Q155",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-69aa93c8f (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, checked every cited statement against current blueprint and Stacks sources, and verified compactification hypotheses, coefficient category, field-structure equalities, edge cases, duplicates, and dependency acyclicity. No new nodes or repairs needed. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-1db4eef4a (reviewer sub-agent of L); spot-checked: Re-split note satisfied (side-live coord/repair-notes, 2026-10-21: at least 1 new node, proof at most 3000 chars, no shortening). The JSON diff against the base 6-step live node shows: statement and stmt_deps byte-identical to the base and to main-20261015 _section.md; steps 1-3 verbatim; old step 6 verbatim as new step 5 apart from the cross-reference. Old steps 4-5 (814+475 chars: separated, locally of finite type and quasi-compact composite a_Z=a_Y∘p, and both over-base equations) now sit in full in the new statement-only node lem-sfb-compactification-middle-over-base (arbitrary qcqs S, arbitrary given compactification, plus one-line uniqueness of a_Z). The report keeps the old argument for the next worker. New proof is 2632 chars. The new node is true: a_Z is forced, separated by Stacks 01KU, locally of finite type by 01T3, Z quasi-compact via Y quasi-compact and p proper, a_Z quasi-compact since its target is quasi-separated; the qcqs hypothesis on S is stronger than needed but harmless. Small cases checked: X empty, Z=P^1 over Y, Z empty, S=Spec Z. Form: B1 statement-only with no proof steps, B2 self-contained, notions cite def-weil-proper-morphism (which defines separated), def-weil-finite-type-morphism, def-weil-scheme-over-base and sk-def-nagata-sketch-data; 7 searches of all three kinds; blueprint.from is the item at statement paragraph 3. Not a duplicate: compared with lem-sfb-compactification-over-base (existence only), def-sfb-compactification-over-field (choice only), the pbc permanence leaves and the zl/trf/a1 compactification nodes. Parent step 4 hypotheses hold (qcqs from step 2, a_Y separated and of finite type from the setting, c from step 3); step 5 hypotheses for def-sfb-compactification-over-field hold. All citations are in-unit, definitions or Mathlib leaves; no tool_uses; no cycle; proof_deps equals the union of uses; the unit record changes only realized and realized_by. Coefficient category unchanged; no base-change morphism in this definition. Live item is not yet re-split. No fixes."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-setting",
