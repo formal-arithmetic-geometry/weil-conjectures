@@ -13,10 +13,114 @@
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-kinjective-total-derived"
  ],
- "proof": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q$ for each localization, suppressing its exact-functor comparison isomorphisms. The ordinary tower adjunction $F^{\\rm Tow}\\dashv G^{\\rm Tow}$ is defined by applying the ordinary Hom bijection at each level: naturality of that bijection says exactly that compatible level maps correspond to compatible level maps. Its unit and counit are levelwise the original ones. Levelwise exactness makes $F^{\\rm Tow}$ exact, and evaluations and $F,F^{\\rm Tow}$ therefore induce termwise exact derived functors. The additive adjunctions also induce adjunctions on homotopy categories. These identifications retain the ordinary units and counits, not arbitrary adjunctions with the same functors.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise adjunction of Tag 0DVC, lemma-pre-derived-adjoint-functors"
+   }
+  },
+  {
+   "text": "The assumed Grothendieck property gives K-injective resolutions in $\\mathcal A,\\mathcal B$ and both tower categories. For a K-injective tower complex $J$ in $\\mathcal A$, evaluation preserves K-injectivity, so $e_nJ$ is K-injective. The total-derived computation theorem makes both $a_n(J):=e_n(\\eta_{G^{\\rm Tow},J})$ and $b_n(J):=\\eta_{G,e_nJ}$ invertible. Both have source $Q(G(e_nJ))$, by the strict ordinary evaluation identity. Put $A_n=e_n\\mathcal G^{\\rm Tow}$ and $B_n=\\mathcal G e_n$ and define $\\delta_n(J)=b_n(J)a_n(J)^{-1}:A_n(QJ)\\to B_n(QJ)$. Thus $\\delta_n(J)a_n(J)=b_n(J)$, the required normalization.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, lemma-enough-K-injectives-implies and lemma-K-injective-defined; existence: injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "For a homotopy class $k:J\\to J'$ between K-injective tower complexes, naturality of the two universal derived units gives\n$$A_n(Qk)a_n(J)=a_n(J')Q(G(e_nk)),\\qquad B_n(Qk)b_n(J)=b_n(J')Q(G(e_nk)).$$\nSubstituting $\\delta_n= b_na_n^{-1}$ yields $B_n(Qk)\\delta_n(J)=\\delta_n(J')A_n(Qk)$. Additive functors respect homotopies, so this calculation uses the homotopy class of $k$. It proves naturality on the full subcategory of K-injective complexes in the homotopy category.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined: naturality of the derived comparison; Tag 0DVC, termwise functors on homotopy categories"
+   }
+  },
+  {
+   "text": "For each $M\\in D(\\operatorname{Tow}(\\mathcal A))$ choose an isomorphism $u:M\\xrightarrow{\\sim}QJ$ with $J$ K-injective, using a representative of $M$ and a K-injective resolution. Define\n$$\\beta_{n,M}=B_n(u)^{-1}\\delta_n(J)A_n(u).$$\nFor another choice $u':M\\to QJ'$, full faithfulness of localization on K-injectives gives a unique homotopy class $k:J\\to J'$ with $Qk=u'u^{-1}$. Step 3, multiplied by $B_n(u')^{-1}$ on the left and $A_n(u)$ on the right, proves that the two definitions coincide. For any $h:M\\to N$ and choices $u:M\\to QJ$, $v:N\\to QJ'$, use the unique class $k$ with $Qk=vhu^{-1}$ in the same equation; it gives $B_n(h)\\beta_{n,M}=\\beta_{n,N}A_n(h)$. Thus $\\beta_n$ is a natural isomorphism. Taking $u=1$ proves its normalization. Any normalized comparison equals $\\delta_n$ at $QJ$ by cancellation of $a_n(J)$; naturality with respect to $u$ forces the displayed formula at $M$. This proves uniqueness.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, fully faithful localization on K-injectives; injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "Fix a tower transition $t:e_m\\to e_n$ ($m\\geq n$). Denote the induced transitions $A_m\\to A_n$ and $B_m\\to B_n$ by $s_A,s_B$. At $QJ$, naturality of evaluation transitions with respect to the tower morphism $\\eta_{G^{\\rm Tow},J}$ and naturality of $\\eta_G$ with respect to $t_J:e_mJ\\to e_nJ$ give\n$$s_Aa_m=a_nQ(Gt_J),\\qquad s_Bb_m=b_nQ(Gt_J).$$\nConsequently $s_B\\delta_m a_m=b_nQ(Gt_J)=\\delta_n s_Aa_m$. Cancel the invertible $a_m$. This is transition compatibility at $QJ$; conjugating by the functorial images of $u:M\\xrightarrow{\\sim}QJ$ proves it at every $M$. The calculation applies to every transition, including identity transitions.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined: naturality of universal units, applied also to tower transition maps"
+   }
+  },
+  {
+   "text": "Apply the normalized derived-adjunction theorem to $F\\dashv G$ and $F^{\\rm Tow}\\dashv G^{\\rm Tow}$, using all source homotopy objects as the left resolving class. Identity resolutions verify the resolving condition; exactness of the left functors ensures that their localized termwise functors invert quasi-isomorphisms. K-injective resolutions give the right derived pairs. The theorem's Hom-transpose formula specifies the canonical adjunctions. Write $\\varepsilon^0$ for the ordinary counits and $\\varepsilon^D$ for these derived counits. For a K-injective target $I$, apply that formula to the ordinary map $\\varepsilon^0_I:F(GI)\\to I$. Its ordinary transpose is $1_{GI}$, so its derived transpose is $\\eta_{G,I}$. By the definition of an adjunction counit as inverse transpose of the identity, the inverse transpose of $\\eta_{G,I}$ is $\\varepsilon^D_{QI}F(\\eta_{G,I})$. Therefore\n$$\\varepsilon^D_{QI}F(\\eta_{G,I})=Q(\\varepsilon^0_I).$$\nThe same argument in the tower categories gives $\\varepsilon^{D,\\rm Tow}_{QJ}F^{\\rm Tow}(\\eta_{G^{\\rm Tow},J})=Q(\\varepsilon^{0,\\rm Tow}_J)$. All the exact-localization identifications are those of step 1.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, with the normalized Hom formula of the cited resolving-class theorem"
+   }
+  },
+  {
+   "text": "At a K-injective tower $J$, evaluate the tower counit equation of step 6. Since the ordinary tower counit is levelwise the ambient one, it reads\n$$e_n(\\varepsilon^{D,\\rm Tow}_{QJ})F(a_n(J))=Q(\\varepsilon^0_{e_nJ}).$$\nFor the proposed right-hand side of the claimed identity, normalization of $\\beta_n$ and the ambient equation of step 6 give\n$$\\varepsilon^D_{e_nQJ}F(\\beta_{n,QJ})F(a_n(J))=\\varepsilon^D_{e_nQJ}F(b_n(J))=Q(\\varepsilon^0_{e_nJ}).$$\nHere $e_nJ$ is K-injective, as established in step 2. Cancel the isomorphism $F(a_n(J))$. This proves the required counit equality at $QJ$.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors: compare the two normalized counits on a K-injective representative"
+   }
+  },
+  {
+   "text": "Let $C(M)=e_n(\\varepsilon^{D,\\rm Tow}_M)$ and $D(M)=\\varepsilon^D_{e_nM}F(\\beta_{n,M})$. They are natural transformations $F A_n\\to e_n$, by naturality of the counits and step 4. For $u:M\\xrightarrow{\\sim}QJ$, naturality gives $e_n(u)C(M)=C(QJ)F A_n(u)$ and $e_n(u)D(M)=D(QJ)F A_n(u)$. Step 7 identifies the right sides; cancel $e_n(u)$ to obtain $C(M)=D(M)$. Thus the normalized comparisons have the stated counit compatibility for every derived tower object.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors: naturality; injectives.tex Tag 079P for a K-injective representative"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, diagram-topos evaluation expanded using derived.tex Tags 070I, 070K, 070Y and 09T5; normalized units and counits proved explicitly"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-direct-image-limits",
@@ -53,9 +157,54 @@
    "results": "{\"top\": [\"CategoryTheory.Adjunction.derived\\u03b5\", \"CategoryTheory.Adjunction.derived\\u03b5.congr_simp\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived\\u03b5_fac_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"CategoryTheory.Adjunction.derived\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: abstract derived comparison and adjunction APIs only; no normalized tower evaluation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of the right derived functor on inverse sequences agrees with the levelwise right derived functor and preserves the adjunction counit",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.Functor.rightDerived_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Functor.rightDerived_fac\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide abstract derived comparison or exact localization APIs, not tower evaluation with transition and adjunction-counit normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived.*[Ee]valuation|[Ee]valuation.*[Dd]erived|rightDerivedUnique",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"n_hits\": 2, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide abstract derived comparison or exact localization APIs, not tower evaluation with transition and adjunction-counit normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedUnique",
+   "results": "{\"top\": [\"CategoryTheory.Functor.rightDerivedUnique\"], \"n_hits\": 1, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide abstract derived comparison or exact localization APIs, not tower evaluation with transition and adjunction-counit normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison of derived functors commutes with evaluation of inverse systems and the counit of an exact left adjoint",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Functor.toRightDerivedZero\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide abstract derived comparison or exact localization APIs, not tower evaluation with transition and adjunction-counit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact evaluation functor preserving K injective complexes commutes with total right derivation of a postcomposition functor on a diagram category",
+   "results": "{\"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerived_map_eq\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide abstract derived comparison or exact localization APIs, not tower evaluation with transition and adjunction-counit normalization"
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective"
+ ],
  "blueprint": {
   "from": {
    "node": "prop-weil-pbc-direct-image-limits",
@@ -64,5 +213,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "worker": "stage1 Q138",
+  "summary": "Constructed the comparison explicitly on K-injective towers and descended by fully faithful localization. Proved uniqueness, transition compatibility and the counit equation by formulas with the universal derived units. Statement unchanged. All ingredients already have DAG nodes; no new nodes.",
+  "blueprint": "prop-weil-pbc-direct-image-limits.proof.md first sentence: derived tower evaluation; steps 1-4 construct the normalized evaluation, step 5 its transition compatibility, steps 6-8 its derived-adjunction counit normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalized unbounded derived Hom adjunction, specialized to an exact left adjoint and the resolving class of all objects. The proper-base-change unit supplies no such abstract unit/counit formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-fc8bfaa64",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-fc8bfaa64 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the full statements of the 10 cited nodes. The delivery is one commit and creates no new nodes. The statement and stmt_deps are unchanged from the base, and there is no re-split note for this item. Sources: Stacks 0A07 (sites-cohomology.tex:5150, diagram-topos proof) and the first sentence of the main-20261015 proof of prop-weil-pbc-direct-image-limits; the proof is correctly marked by: agent. All step tags (015F, 070Y, 070I, 070K, 09T5, 0DVC, 079P) match tags/tags, and no SGA is cited. Steps 2-4: δ=b·a⁻¹ is well defined because e_nJ is K-injective by lem-weil-tower-evaluation-kinjective and η is invertible on K-injectives by kinjective-total-derived. Naturality holds on K-injective towers. Descent to all M works because u'u⁻¹=Qk with k unique (kinjective-hom-derived), and uniqueness follows by cancelling a(J). Step 5: I checked the transition equations s_A a_m=a_n QG(t_J) and s_B b_m=b_n QG(t_J); no epimorphic transitions are used. Step 6: lem-sfb-resolving-derived-adjunction-normalization applies with the roles swapped (its G=F, its F=G), with P = all objects; taking f=ε⁰_I gives ε^D F(η_{G,I})=Q(ε⁰_I), and that Hom formula determines the adjunction uniquely. Steps 7-8: the counit equation holds on K-injectives and extends to all M by naturality along u:M≅QJ, not by joint faithfulness of the evaluations. Edge cases checked: zero objects, F=G=id (β is the identity), zero and identity transitions. No cycle: none of the cited closures reaches the item. A DAG grep found no duplicate. The declared tool use of lem-sfb-resolving-derived-adjunction-normalization is accepted. Three minor points, not faults: (1) exactness of the termwise QG on K(A) is used without a cited node, which is standard; (2) step 6 does not say explicitly that (F_D, φ⁻¹) is the universal left derived pair; (3) lem-weil-pbc-kinjective-functorial-existence comes from another unit (sk-prop-cd) and is not declared as a tool use, which other pbc nodes also leave undeclared; the maintainer should record it at the merge. No fixes."
  }
 }
