@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-lattice-coefficient-pullback-isIso",
+ "kind": "statement",
+ "title": "Coefficient immersion isomorphisms in the lattice encoding",
+ "statement": "theorem latticeCoefficientPullback_isIso (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [IsImmersion f] :\n    IsIso (continuousCoefficientInverseImageMap f (latticeCoefficientIntegers l E)) ∧\n      IsIso (continuousCoefficientInverseImageMap f\n        (WithAbs (Padic.coefficientExtensionAbsoluteValue l E))) (Notation and constructions as in def-weil-pbc-continuous-constructible-module.)",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-constructible-module"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1), Definition 6.8.1 and paragraph before Definition 6.8.6"
+ },
+ "proof": [
+  {
+   "text": "Give E its canonical norm. The identity ring equivalence from WithAbs to E is\nan isometry, and restricts to a homeomorphic ring equivalence of their valuation subrings.\nPostcompose continuous functions with these equivalences and move the universe lift through\nthe function space. These sectionwise ring isomorphisms commute with restrictions.\nTaking inverse-image adjuncts shows that the canonical lattice coefficient map is conjugate\nto continuousCoefficientPullback. The existing immersion restriction theorem makes the\nlatter invertible. Cancel the two presentation isomorphisms. This argument also applies to\nempty test objects and the empty immersed scheme.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-pullback-isIso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-pullback-isIso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Lemma 6.5.8(1), Definition 6.8.1 and paragraph before Definition 6.8.6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the sheaf of continuous functions along an immersion is an isomorphism",
+   "results": "OK 8 hits; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instIsIsoInvApp; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instIsIsoCommRingCatInvApp; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.instIsIsoInvApp; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.c_iso; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.c_iso'; AlgebraicGeometry.Scheme.Hom.isIso_app; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"inverseImage\"",
+   "results": "OK 2 hits; PresheafOfModules.instIsLocalizationSheafOfModulesSheafificationInverseImageFunctorOppositeAbWToPresheaf; PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCoefficient.*[Ii]so|pullback.*[Cc]ontinuous.*[Cc]oeff",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of continuous coefficient rings along scheme immersions",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Hom.appIso; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpaceHom; AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc; AlgebraicGeometry.Scheme.Hom.coe_preimage; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict; AlgebraicGeometry.IsOpenImmersion.ΓIso; AlgebraicGeometry.IsOpenImmersion.opensEquiv_symm_apply; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Coefficient immersion isomorphisms in the lattice encoding; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeCoefficientPullbackIso",
+  "file": "lean/Sheaf/Paper/LatticeCoefficientPullbackIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.latticeCoefficientPullback_isIso",
+  "statement": "theorem latticeCoefficientPullback_isIso (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [IsImmersion f] :\n    IsIso (continuousCoefficientInverseImageMap f (latticeCoefficientIntegers l E)) ∧\n      IsIso (continuousCoefficientInverseImageMap f\n        (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

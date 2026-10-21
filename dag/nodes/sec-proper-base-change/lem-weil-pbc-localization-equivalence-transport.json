@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-localization-equivalence-transport",
+ "kind": "statement",
+ "title": "Localization transports across equivalent supported categories",
+ "statement": "theorem localization_equivalence_transport\n    {C O S I Z : Type u} [Category.{v} C] [Category.{v} O] [Category.{v} S]\n    [Category.{v} I] [Category.{v} Z] [HasZeroMorphisms C]\n    (Q : O ≌ S) (F : C ⥤ O) (A : S ⥤ C) (R : C ⥤ S)\n    (aj₀ : A ⊣ R) (e : F ⋙ Q.functor ≅ R)\n    (FC : C ⥤ I) (D : I ⥤ C) (ai₀ : FC ⊣ D)\n    (E : I ⥤ Z) (RC : Z ⥤ I) (aE : E ⊣ RC) [RC.IsEquivalence]\n    (h : ∀ L, Mono (aj₀.counit.app L) ∧ Epi (ai₀.unit.app L) ∧\n      (ComposableArrows.mk₂ (aj₀.counit.app L) (ai₀.unit.app L)).Exact) :\n    ∃ (aj : Q.functor ⋙ A ⊣ F) (ai : FC ⋙ E ⊣ RC ⋙ D),\n      ∀ L, Mono (aj.counit.app L) ∧ Epi (ai.unit.app L) ∧\n        (ComposableArrows.mk₂ (aj.counit.app L) (ai.unit.app L)).Exact (Notation and constructions as in Mathlib category theory.)",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tag 09AH; elementary adjunction and exact-sequence transport"
+ },
+ "proof": [
+  {
+   "text": "transport the open adjunction through Q and the displayed restriction\ncomparison. Its counit is A applied to the comparison, followed by the old\ncounit. Compose the closed adjunction with the scalar adjunction. Its unit is\nthe old unit followed by D applied to the scalar unit; this last map is an\nisomorphism because the scalar right adjoint is an equivalence. The resulting\nthree-term sequence is isomorphic to the original sequence, with the middle\nisomorphism the identity. Monicity, epicity and exactness transport along it.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Stacks Tag 09AH; elementary adjunction and exact-sequence transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction and its localization exact sequence across equivalent categories",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.localization; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Localization.isEquivalence; CategoryTheory.LocalizerMorphism.isEquivalence_imp; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'; CategoryTheory.LocalizerMorphism.isEquivalence; CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_unit_of_unit; CategoryTheory.Adjunction.isLocalization'",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"leftAdjointUniq\"",
+   "results": "OK 12 hits; CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "(Adjunction|adjunction).*(ofNatIso|transport)|exact_of_iso",
+   "results": "OK 25 hits; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport adjunction localization exact sequence across category equivalences",
+   "results": "OK 8 hits; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Functor.IsLocalization.of_equivalence_source; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.localization; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Equivalence.transportSheafificationAdjunction; CategoryTheory.Functor.IsLocalization.of_equivalence_target",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Localization transports across equivalent supported categories; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenClosedAdjunctionTransport",
+  "file": "lean/Sheaf/Paper/OpenClosedAdjunctionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.localization_equivalence_transport",
+  "statement": "theorem localization_equivalence_transport\n    {C O S I Z : Type u} [Category.{v} C] [Category.{v} O] [Category.{v} S]\n    [Category.{v} I] [Category.{v} Z] [HasZeroMorphisms C]\n    (Q : O ≌ S) (F : C ⥤ O) (A : S ⥤ C) (R : C ⥤ S)\n    (aj₀ : A ⊣ R) (e : F ⋙ Q.functor ≅ R)\n    (FC : C ⥤ I) (D : I ⥤ C) (ai₀ : FC ⊣ D)\n    (E : I ⥤ Z) (RC : Z ⥤ I) (aE : E ⊣ RC) [RC.IsEquivalence]\n    (h : ∀ L, Mono (aj₀.counit.app L) ∧ Epi (ai₀.unit.app L) ∧\n      (ComposableArrows.mk₂ (aj₀.counit.app L) (ai₀.unit.app L)).Exact) :\n    ∃ (aj : Q.functor ⋙ A ⊣ F) (ai : FC ⋙ E ⊣ RC ⋙ D),\n      ∀ L, Mono (aj.counit.app L) ∧ Epi (ai.unit.app L) ∧\n        (ComposableArrows.mk₂ (aj.counit.app L) (ai.unit.app L)).Exact",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

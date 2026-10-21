@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-continuous-extension-scalar-change",
+ "kind": "statement",
+ "title": "Ordinary scalar change commutes with continuous extension by zero",
+ "statement": "theorem continuousExtension_scalar_change {X : Scheme.{u}} (U : X.ProEt)\n    (T S : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    [TopologicalSpace S] [CommRing S] [IsTopologicalRing S]\n    (a : T →+* S) (ha : Continuous a)\n    (M : SheafOfModules.{u + 1} (latticeModuleRing U.left T)) :\n    Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1}\n        (latticeCoefficientSheafMap X a ha)\n        ((continuousModuleExtensionByZero U T).obj M) ≅\n      (continuousModuleExtensionByZero U S).obj\n        (SheafOfModules.changeOfRings.{u, u + 1, u + 1}\n          (latticeCoefficientSheafMap U.left a ha) M)) (Notation and constructions as in def-weil-pbc-integral-model-open-closed-basic.)",
+ "stmt_deps": [
+  "def-weil-pbc-integral-model-open-closed-basic"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 03D7, 03DI and 0E8I, proved by uniqueness of left adjoints"
+ },
+ "proof": [
+  {
+   "text": "take the sheafified tensor left adjoints to scalar restriction on X and U.\nThe two composites of scalar restriction and restriction to U have identical\nsection groups, maps and scalar actions. Transport the composite adjunctions\nthrough this identity comparison and use uniqueness of left adjoints. Evaluate\nat M; the object equations of the scalar adjunctions identify the resulting\nisomorphism with the displayed ordinary changes of rings. This proof needs no\nflatness and includes the empty open and zero module.",
+   "uses": [
+    "lem-weil-pbc-continuous-module-open-restriction",
+    "lem-weil-pbc-localization-equivalence-transport",
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-module-open-restriction",
+  "lem-weil-pbc-localization-equivalence-transport",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Stacks Tags 03D7, 03DI and 0E8I, proved by uniqueness of left adjoints"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary scalar extension commutes with extension by zero and closed immersion direct image",
+   "results": "OK 8 hits; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_id_comp_assoc; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_assoc; ModuleCat.extendScalarsComp; AlgebraicGeometry.liftCoborder_app; ModuleCat.extendScalars_assoc_assoc; ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"changeOfRings\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "(changeOfRings|scalarExtension).*(pushforward|extensionByZero)|projection.*[Cc]losed",
+   "results": "OK 19 hits; Mathlib/Topology/Sets/Closeds.lean; Mathlib/Topology/Sets/Closeds.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Topology/Algebra/Module/ClosedSubmodule.lean; Mathlib/Topology/Algebra/Module/Complement.lean",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scalar extension commutes with closed immersion direct image",
+   "results": "OK 8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgHom.extendScalars; AlgEquiv.extendScalarsOfSurjective; AlgHom.extendScalarsOfSurjective; IntermediateField.extendScalars; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; AlgebraicGeometry.IsImmersion.isStableUnderBaseChange",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Ordinary scalar change commutes with continuous extension by zero; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousExtensionScalarChange",
+  "file": "lean/Sheaf/Paper/ContinuousExtensionScalarChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousExtension_scalar_change",
+  "statement": "theorem continuousExtension_scalar_change {X : Scheme.{u}} (U : X.ProEt)\n    (T S : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    [TopologicalSpace S] [CommRing S] [IsTopologicalRing S]\n    (a : T →+* S) (ha : Continuous a)\n    (M : SheafOfModules.{u + 1} (latticeModuleRing U.left T)) :\n    Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1}\n        (latticeCoefficientSheafMap X a ha)\n        ((continuousModuleExtensionByZero U T).obj M) ≅\n      (continuousModuleExtensionByZero U S).obj\n        (SheafOfModules.changeOfRings.{u, u + 1, u + 1}\n          (latticeCoefficientSheafMap U.left a ha) M))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

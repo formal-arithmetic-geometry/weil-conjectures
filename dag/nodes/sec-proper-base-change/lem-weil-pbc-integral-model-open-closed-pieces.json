@@ -23,102 +23,56 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], $|X|$ has the descending-chain condition on closed subsets: a strictly descending chain would contradict a minimal element of the set of its terms. By [lem-sfb-noetherian-space-compact-subsets], every subset of $|X|$ is quasi-compact. In particular $U\\cap V$ is quasi-compact for every affine open $V\\subset X$, which is exactly quasi-compactness of $j$. Thus the complementary-immersion hypotheses of the ringed open/closed lemma hold, including for $U=\\varnothing$ or $Z=\\varnothing$.",
+   "text": "Use the proved lattice-presentation coefficient pullback theorem to take the canonical integral/rational coefficient isomorphisms. Noetherian quasi-compactness supplies the open hypothesis through the Mathlib instance.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-sfb-noetherian-space-compact-subsets"
+    "lem-weil-pbc-lattice-coefficient-pullback-isIso",
+    "def-weil-pbc-integral-model-open-closed-basic"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH (lemma-ses-associated-to-open), quasi-compactness hypothesis; properties.tex Tag 01OZ (lemma-Noetherian-topology) and topology.tex Tag 04ZA (lemma-Noetherian-quasi-compact)."
-   }
+   "elementary": true
   },
   {
-   "text": "Choose a finite locally closed stratification $(U_a)$ adapted to $M_U$ by [def-weil-pbc-continuous-constructible-module]. Regard each $U_a\\hookrightarrow U\\hookrightarrow X$ as the same locally closed stratum in $X$ and append $Z$; these are disjoint and cover $X$, so form a finite stratification [def-constructible-stratification]. For $Q=j_!M_U$, [lem-weil-pbc-proetale-ringed-open-closed] gives $j^{-1}Q\\cong M_U$ and $i^{-1}Q=0$. On an old stratum the restriction of $Q$ is therefore the given restriction of $M_U$: inverse-image composition and its module structures are compatible by [lem-pur-proetale-inverse-image-tensor-comparison]. The coefficient isomorphisms of [lem-weil-pbc-continuous-coefficients-immersion-restriction] identify these inverse images with ringed restrictions over $A_{U_a}$. Retain exactly the old pro-etale covering family and its finitely presented $A$-modules. On $Z$, the restricted module is zero, with local model $A_Z\\otimes_A0=0$; the zero $A$-module is finitely presented. This proves continuous integral constructibility of $Q$ directly from the definition.",
+   "text": "Apply continuousConstructible_supported, with its coefficient-immersion hypothesis discharged by latticeCoefficientPullback_isIso, to both given integral modules.",
    "uses": [
-    "def-weil-pbc-continuous-constructible-module",
-    "def-constructible-stratification",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pur-proetale-inverse-image-tensor-comparison",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+    "lem-weil-pbc-continuous-constructible-supported",
+    "lem-weil-pbc-lattice-coefficient-pullback-isIso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA, 09AH, 09AG: restrictions of extension by zero; agent expansion using Bhatt-Scholze Definition 6.8.10"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose an adapted finite stratification $(Z_b)$ for $M_Z$ [def-weil-pbc-continuous-constructible-module]. Its strata, embedded in $X$ by composition with $i$, together with $U$, are disjoint locally closed subsets covering $X$ [def-constructible-stratification]. For $P=i_*M_Z$, [lem-weil-pbc-proetale-ringed-open-closed] gives $i^{-1}P\\cong M_Z$ and $j^{-1}P=0$. Thus each $Z_b$ has exactly the old local models, by inverse-image composition [lem-pur-proetale-inverse-image-tensor-comparison] and the continuous coefficient identifications [lem-weil-pbc-continuous-coefficients-immersion-restriction]. The added open stratum $U$ has model $A_U\\otimes_A0=0$. These finitely many strata and their given covering families witness constructibility of $P$. Empty strata may be discarded, so neither empty complementary locus causes an exception.",
+   "text": "Use continuousExtension_scalar_change on the valuation-subring inclusion to obtain the open rationalization comparison. This is an adjoint-uniqueness argument rather than the tensor-Hom route.",
    "uses": [
-    "def-weil-pbc-continuous-constructible-module",
-    "def-constructible-stratification",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pur-proetale-inverse-image-tensor-comparison",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+    "lem-weil-pbc-continuous-extension-scalar-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA and 09AH: closed direct image and disjoint open restriction; agent expansion using Bhatt-Scholze Definition 6.8.10"
-   }
+   "elementary": false
   },
   {
-   "text": "Identify the open site with the slice at $U$ by [lem-weil-proetale-weakly-etale-localization]. Apply the ordinary formula [lem-weil-pbc-ringed-slice-extension-tensor] with ring $A_X$, open module $M_U$ and ambient module $E_X$. Commuting the two tensor factors gives an $A_X$-linear isomorphism $T:=E_X\\otimes_{A_X}j_!M_U\\cong j_!((j^{-1}E_X)\\otimes_{j^{-1}A_X}M_U)$. By [lem-weil-pbc-continuous-coefficients-immersion-restriction], the module inside is $S_UM_U$. To specify the canonical map as well, use the tensor restriction comparison [lem-pur-proetale-inverse-image-tensor-comparison] to identify $j^{-1}T$ with $S_UM_U$. The open counit $j_!j^{-1}T\\to T$ is an isomorphism: the preceding formula places $T$ in the essential image of $j_!$, and $j^{-1}j_!\\cong\\mathrm{id}$ from [lem-weil-pbc-proetale-ringed-open-closed] makes this counit invertible by the adjunction triangle identities. Its inverse is the desired comparison $S_XQ\\cong j_!S_UM_U$, normalized to the identity on restriction to $U$. This is also $E_X$-linear. Indeed both extensions by zero have the same underlying sheafification construction, and on local pure tensors the counit sends $e\\otimes m$ to $e\\otimes m$, so multiplication by a local section $b$ of $E_X$ on either side sends it to $(be)\\otimes m$. The equality respects restrictions and passes to sheafification.",
+   "text": "Use closedImmersion_scalar_change for the integral-to-rational coefficient square. Naturality of inverse-image adjuncts proves this square for the actual continuous-function inclusion.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-pur-proetale-inverse-image-tensor-comparison",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-weil-pbc-closed-immersion-scalar-change",
+    "lem-weil-pbc-lattice-coefficient-pullback-isIso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (sites-modules.tex, lemma-j-shriek-and-tensor); open adjunction and coefficient restriction. The normalization is an agent argument."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-proetale-closed-underived-projection] with $R=A_X$, $B=E_X$, $F=E_X$ and $M=M_Z$. After tensor symmetry it gives the canonical $E_X$-linear isomorphism $E_X\\otimes_{A_X}i_*M_Z\\cong i_*((i^{-1}E_X)\\otimes_{i^{-1}A_X}M_Z)$. Compose with the coefficient isomorphisms $i^{-1}A_X\\cong A_Z$ and $i^{-1}E_X\\cong E_Z$ of [lem-weil-pbc-continuous-coefficients-immersion-restriction], compatible with $A\\to E$. The result is $S_XP\\cong i_*S_ZM_Z$. The chosen projection map restricts, under the closed counit, to the identity on $E_Z\\otimes_{A_Z}M_Z$, as follows from its explicit adjunct in the new lemma. No derived tensor, flatness or degree-zero identification is used.",
+   "text": "Use continuousModule_localization for the rational coefficients. For arbitrary alpha and beta, form the endpoint isomorphisms eU followed by j!(alpha), and eZ followed by i*(beta). An explicit ComposableArrows.isoMk2 with identity middle component transports monicity, epicity and exactness, producing exactly the two arrows of the original statement.",
    "uses": [
-    "lem-weil-pbc-proetale-closed-underived-projection",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+    "lem-weil-pbc-continuous-module-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA and 09AH, and sites-modules.tex Tag 03EL; agent-formulated underived closed projection consequence"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] to the ring $E_X$ and module $L$ to obtain $0\\to j_!j^{-1}L\\xrightarrow{\\epsilon_L}L\\xrightarrow{\\eta_L}i_*i^{-1}L\\to0$. Write $\\alpha:S_UM_U\\cong j^{-1}L$ and $\\beta:S_ZM_Z\\cong i^{-1}L$ for the specified isomorphisms, and $c_U:S_XQ\\cong j_!S_UM_U$, $c_Z:S_XP\\cong i_*S_ZM_Z$ for Steps 4 and 5. Define the first arrow to be $\\epsilon_L\\circ j_!(\\alpha)\\circ c_U$ and the second arrow to be $c_Z^{-1}\\circ i_*(\\beta^{-1})\\circ\\eta_L$. These formulas give an isomorphism of this three-term sequence with the canonical open/closed sequence, including both end maps. Hence it is short exact, and the comparisons identify it with that canonical sequence as asserted. This retains the correct sequence also for the zero sheaf and either empty complementary locus.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH (lemma-ses-associated-to-open), with explicit transport of the unit and counit"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "def-weil-pbc-continuous-constructible-module",
-  "def-constructible-stratification",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-pur-proetale-inverse-image-tensor-comparison",
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-proetale-closed-underived-projection"
+  "lem-weil-pbc-lattice-coefficient-pullback-isIso",
+  "lem-weil-pbc-continuous-constructible-supported",
+  "lem-weil-pbc-continuous-extension-scalar-change",
+  "lem-weil-pbc-closed-immersion-scalar-change",
+  "lem-weil-pbc-continuous-module-localization",
+  "def-weil-pbc-integral-model-open-closed-basic"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Expansion of the omitted constructible-filtration sentence in Lemma 6.8.13, using Definition 6.8.10, Stacks open/closed restrictions and underived tensor formulas; BS does not state the auxiliary projection assertions."
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf; literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Definition 6.8.10 and Lemma 6.8.13; Stacks 09AH, 03DI and 03EL; E5 stage-3 proof with ordinary adjunction transport."
  },
  "mathlib_searches": [
   {
@@ -215,10 +169,6 @@
   "module": "Sheaf.Paper.IntegralModelOpenClosedPieces",
   "declaration": "AlgebraicGeometry.ProEtale.integralModel_open_closed_pieces",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.openSliceModules",
-   "AlgebraicGeometry.ProEtale.continuousModuleDirectImage",
-   "AlgebraicGeometry.ProEtale.continuousModuleExtensionByZero",
-   "AlgebraicGeometry.ProEtale.integralModelRationalize",
    "AlgebraicGeometry.ProEtale.integralModel_open_closed_pieces"
   ],
   "file": "lean/Sheaf/Paper/IntegralModelOpenClosedPieces.lean",
@@ -235,5 +185,15 @@
   "group": "NO",
   "result": "pass",
   "note": "Clause-by-clause match of integralModel_open_closed_pieces with the node: hypotheses identical to the citer's (IsNoetherian, Krull bound, ℓ unit in stalks), quasi-compactness of j not assumed, U : X.ProEt with an open immersion and complementary range. cU/cZ homs pinned to continuousCoefficientInverseImageMap. Helper defs (slice transport, restrictScalars ⋙ ringed direct image, changeOfRings rationalization) are real data. Final clause = Mono/Epi/Exact of the canonical E_X sequence transported by eU, j_!α, counit / unit, i_*β⁻¹, eZ⁻¹ (node step 6); existential adjunctions are absorbed. Edge cases U=∅, Z=∅, X=∅, zero/torsion modules and universes OK. Statement verbatim, docstrings/H8 OK, sorry only, no duplicate found, no dep record changes, not landed elsewhere. Advisories: eU/eZ unnormalized (node says only ≅; citer needs only an SES); proEtaleRingModulePullback owner (def-weil-pbc-proetale-operations) not in stmt_deps; continuousModuleDirectImage specializes proEtaleRingModuleDirectImage; second reading done by the same worker. No compile run (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
  }
 }

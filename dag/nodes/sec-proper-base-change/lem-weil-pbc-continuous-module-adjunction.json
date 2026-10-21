@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-continuous-module-adjunction",
+ "kind": "statement",
+ "title": "Adjunction for the concrete continuous direct image",
+ "statement": "theorem continuousModule_adjunction {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    (c : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj\n      (latticeCoefficientSheaf Y T) ≅ latticeCoefficientSheaf X T)\n    (hc : c.hom = continuousCoefficientInverseImageMap f T) :\n    Nonempty (Scheme.proEtaleRingModulePullback f (latticeCoefficientSheaf Y T)\n      (latticeCoefficientSheaf X T) c ⊣ continuousModuleDirectImage f T) (Notation and constructions as in def-weil-pbc-integral-model-open-closed-basic, def-weil-pbc-proetale-operations.)",
+ "stmt_deps": [
+  "def-weil-pbc-integral-model-open-closed-basic",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 03D2 and 03D6; composition of the constructed module adjunctions"
+ },
+ "proof": [
+  {
+   "text": "compose the constructed module inverse-image adjunction with extension/restriction\nof scalars. The resulting right adjoint has the same section groups and maps as the\ncontinuous direct image. Its scalar action first applies the ring adjunction unit and\nthen c; this is exactly the action of the two composed functors defining the continuous\ndirect image. The sectionwise identity is therefore a natural linear isomorphism.\nTransport the adjunction along it.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Stacks Tags 03D2 and 03D6; composition of the constructed module adjunctions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction and its localization exact sequence across equivalent categories",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.localization; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Localization.isEquivalence; CategoryTheory.LocalizerMorphism.isEquivalence_imp; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'; CategoryTheory.LocalizerMorphism.isEquivalence; CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_unit_of_unit; CategoryTheory.Adjunction.isLocalization'",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"leftAdjointUniq\"",
+   "results": "OK 12 hits; CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "(Adjunction|adjunction).*(ofNatIso|transport)|exact_of_iso",
+   "results": "OK 25 hits; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport adjunction localization exact sequence across category equivalences",
+   "results": "OK 8 hits; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Functor.IsLocalization.of_equivalence_source; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.localization; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Equivalence.transportSheafificationAdjunction; CategoryTheory.Functor.IsLocalization.of_equivalence_target",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Adjunction for the concrete continuous direct image; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousModuleAdjunction",
+  "file": "lean/Sheaf/Paper/ContinuousModuleAdjunction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousModule_adjunction",
+  "statement": "theorem continuousModule_adjunction {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    (c : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj\n      (latticeCoefficientSheaf Y T) ≅ latticeCoefficientSheaf X T)\n    (hc : c.hom = continuousCoefficientInverseImageMap f T) :\n    Nonempty (Scheme.proEtaleRingModulePullback f (latticeCoefficientSheaf Y T)\n      (latticeCoefficientSheaf X T) c ⊣ continuousModuleDirectImage f T)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

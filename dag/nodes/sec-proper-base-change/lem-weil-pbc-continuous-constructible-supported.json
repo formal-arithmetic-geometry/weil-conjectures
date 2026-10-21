@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-continuous-constructible-supported",
+ "kind": "statement",
+ "title": "Constructibility of supported continuous modules",
+ "statement": "theorem continuousConstructible_supported\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    (hT : ∀ (Y W : Scheme.{u}) [IsNoetherian Y] (f : W ⟶ Y) [IsImmersion f],\n      IsIso (continuousCoefficientInverseImageMap f T))\n    {X Z : Scheme.{u}} [IsNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i]\n    (U : X.ProEt) [IsOpenImmersion U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ) :\n    (∀ M : SheafOfModules.{u + 1} (latticeModuleRing U.left T),\n      @IsContinuousConstructible U.left\n        (U.hom.isEmbedding.isInducing.noetherianSpace (α := X)) T\n        inferInstance inferInstance inferInstance M →\n      IsContinuousConstructible X T ((continuousModuleExtensionByZero U T).obj M)) ∧\n    (∀ M : SheafOfModules.{u + 1} (latticeModuleRing Z T),\n      @IsContinuousConstructible Z\n        (i.isEmbedding.isInducing.noetherianSpace (α := X)) T\n        inferInstance inferInstance inferInstance M →\n      IsContinuousConstructible X T ((continuousModuleDirectImage i T).obj M)) (Notation and constructions as in def-weil-pbc-integral-model-open-closed-basic.)",
+ "stmt_deps": [
+  "def-weil-pbc-integral-model-open-closed-basic"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Lemma 6.8.13; Stacks Tags 09AH and 03DI"
+ },
+ "proof": [
+  {
+   "text": "for extension by zero, take a witnessing finite stratification of U and\ncompose its immersions with U -> X. Append Z as one additional stratum. The ranges\nare locally closed, disjoint, and cover X; they are constructible since X is\nnoetherian. Restriction to each old stratum identifies with the original module\nrestriction. First identify the actual ordinary change of rings along a coefficient\nisomorphism with the scalar-equivalence left adjoint, by uniqueness of left\nadjoints to scalar restriction. Composition of ringed inverse images then applies;\nits coefficient square follows by taking adjuncts of precomposition of continuous\nfunctions along the two base-change projections. Thus the open unit identifies\nthe old restrictions. Restriction to Z is zero by continuous-coefficient open-closed\nlocalization. Retain the old pro-etale covers and finitely presented local models;\non Z use the singleton identity cover and the finitely presented zero module.\nFor closed direct image, compose a witnessing stratification of Z with i and\nappend U. The closed counit gives the original restrictions on Z and the open\nrestriction is zero. The same cover and zero-model argument gives a witnessing\nstratification. Empty strata and zero local models are allowed throughout.",
+   "uses": [
+    "def-weil-pbc-continuous-constructible-module",
+    "def-constructible-stratification",
+    "lem-weil-pbc-continuous-module-localization",
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-constructible-module",
+  "def-constructible-stratification",
+  "lem-weil-pbc-continuous-module-localization",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+  "lem-pur-proetale-inverse-image-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Definition 6.8.10 and Lemma 6.8.13; Stacks Tags 09AH and 03DI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and closed direct image preserve sheaf constructibility on finite strata",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Hom.isConstructible_image; Topology.IsConstructible.image_of_isClosedEmbedding; Topology.IsLocallyConstructible.isConstructible; Topology.IsConstructible.image_of_isOpenEmbedding; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; Topology.IsConstructible.preimage; Topology.IsConstructible.preimage_of_isClosedEmbedding; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(extensionByZero|pushforward)|extensionByZero.*constructible",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves constructible sheaves on noetherian schemes",
+   "results": "OK 8 hits; HasCompactSupport.extend_zero; ContMDiff.extend_zero; Function.ExtendByZero.linearMap; HasCompactSupport.continuous_extend_zero; AlgebraicGeometry.RingedSpace.res_zero; Finsupp.extendDomain.congr_simp; FractionalIdeal.extended_zero; Finsupp.extendDomain",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Constructibility of supported continuous modules; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousConstructibleSupported",
+  "file": "lean/Sheaf/Paper/ContinuousConstructibleSupported.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousConstructible_supported",
+  "statement": "theorem continuousConstructible_supported\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    (hT : ∀ (Y W : Scheme.{u}) [IsNoetherian Y] (f : W ⟶ Y) [IsImmersion f],\n      IsIso (continuousCoefficientInverseImageMap f T))\n    {X Z : Scheme.{u}} [IsNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i]\n    (U : X.ProEt) [IsOpenImmersion U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ) :\n    (∀ M : SheafOfModules.{u + 1} (latticeModuleRing U.left T),\n      @IsContinuousConstructible U.left\n        (U.hom.isEmbedding.isInducing.noetherianSpace (α := X)) T\n        inferInstance inferInstance inferInstance M →\n      IsContinuousConstructible X T ((continuousModuleExtensionByZero U T).obj M)) ∧\n    (∀ M : SheafOfModules.{u + 1} (latticeModuleRing Z T),\n      @IsContinuousConstructible Z\n        (i.isEmbedding.isInducing.noetherianSpace (α := X)) T\n        inferInstance inferInstance inferInstance M →\n      IsContinuousConstructible X T ((continuousModuleDirectImage i T).obj M))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

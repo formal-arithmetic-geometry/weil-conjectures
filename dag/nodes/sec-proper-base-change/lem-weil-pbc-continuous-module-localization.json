@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-continuous-module-localization",
+ "kind": "statement",
+ "title": "Localization for the actual continuous module functors",
+ "statement": "theorem continuousModule_localization {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    (cU : (Scheme.proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj\n      (latticeCoefficientSheaf X T) ≅ latticeCoefficientSheaf U.left T)\n    (cZ : (Scheme.proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj\n      (latticeCoefficientSheaf X T) ≅ latticeCoefficientSheaf Z T)\n    (hcU : cU.hom = continuousCoefficientInverseImageMap U.hom T)\n    (hcZ : cZ.hom = continuousCoefficientInverseImageMap i T) :\n    ∃ (aj : continuousModuleExtensionByZero U T ⊣\n        Scheme.proEtaleRingModulePullback U.hom (latticeCoefficientSheaf X T)\n          (latticeCoefficientSheaf U.left T) cU)\n      (ai : Scheme.proEtaleRingModulePullback i (latticeCoefficientSheaf X T)\n        (latticeCoefficientSheaf Z T) cZ ⊣ continuousModuleDirectImage i T),\n      ∀ L, Mono (aj.counit.app L) ∧ Epi (ai.unit.app L) ∧\n        (ComposableArrows.mk₂ (aj.counit.app L) (ai.unit.app L)).Exact (Notation and constructions as in def-weil-pbc-integral-model-open-closed-basic.)",
+ "stmt_deps": [
+  "def-weil-pbc-integral-model-open-closed-basic"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 09AH and 03DI"
+ },
+ "proof": [
+  {
+   "text": "apply ringed localization to the continuous ring on X. The explicit site\nequivalence identifies open restriction with pullback. On the closed site, scalar\nrestriction along the coefficient isomorphism is an equivalence, with scalar\nextension as its left adjoint. Transport localization through these equivalences;\nthe transported unit and counit give exactly the displayed sequence.",
+   "uses": [
+    "lem-weil-pbc-continuous-module-open-restriction",
+    "lem-weil-pbc-localization-equivalence-transport",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-module-open-restriction",
+  "lem-weil-pbc-localization-equivalence-transport",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Stacks Tags 09AH and 03DI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction and its localization exact sequence across equivalent categories",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.localization; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Localization.isEquivalence; CategoryTheory.LocalizerMorphism.isEquivalence_imp; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'; CategoryTheory.LocalizerMorphism.isEquivalence; CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_unit_of_unit; CategoryTheory.Adjunction.isLocalization'",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"leftAdjointUniq\"",
+   "results": "OK 12 hits; CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "(Adjunction|adjunction).*(ofNatIso|transport)|exact_of_iso",
+   "results": "OK 25 hits; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport adjunction localization exact sequence across category equivalences",
+   "results": "OK 8 hits; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Functor.IsLocalization.of_equivalence_source; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.localization; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Equivalence.transportSheafificationAdjunction; CategoryTheory.Functor.IsLocalization.of_equivalence_target",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Localization for the actual continuous module functors; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousModuleLocalization",
+  "file": "lean/Sheaf/Paper/ContinuousModuleLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousModule_localization",
+  "statement": "theorem continuousModule_localization {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    (cU : (Scheme.proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj\n      (latticeCoefficientSheaf X T) ≅ latticeCoefficientSheaf U.left T)\n    (cZ : (Scheme.proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj\n      (latticeCoefficientSheaf X T) ≅ latticeCoefficientSheaf Z T)\n    (hcU : cU.hom = continuousCoefficientInverseImageMap U.hom T)\n    (hcZ : cZ.hom = continuousCoefficientInverseImageMap i T) :\n    ∃ (aj : continuousModuleExtensionByZero U T ⊣\n        Scheme.proEtaleRingModulePullback U.hom (latticeCoefficientSheaf X T)\n          (latticeCoefficientSheaf U.left T) cU)\n      (ai : Scheme.proEtaleRingModulePullback i (latticeCoefficientSheaf X T)\n        (latticeCoefficientSheaf Z T) cZ ⊣ continuousModuleDirectImage i T),\n      ∀ L, Mono (aj.counit.app L) ∧ Epi (ai.unit.app L) ∧\n        (ComposableArrows.mk₂ (aj.counit.app L) (ai.unit.app L)).Exact",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

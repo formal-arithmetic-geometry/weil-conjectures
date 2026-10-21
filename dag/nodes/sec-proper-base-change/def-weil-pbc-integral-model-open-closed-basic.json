@@ -1,0 +1,118 @@
+{
+ "id": "def-weil-pbc-integral-model-open-closed-basic",
+ "kind": "definition",
+ "title": "Concrete supported functors and ordinary rationalization",
+ "statement": "For a scheme X, an object U of its pro-etale site, and a topological commutative ring T, openSliceModules U T is module pushforward along the explicit equivalence (X_proet)/U -> U_proet, with the sectionwise identity coefficient map. For f: X -> Y, continuousModuleDirectImage f T is scalar restriction along the canonical adjoint continuous-function map f^{-1}T_Y -> T_X, followed by ringed direct image with coefficients T_Y. continuousModuleExtensionByZero U T is openSliceModules followed by the concrete ringed slice extension by zero. For prime l and a finite extension E/Q_l, integralModelRationalize l E X M is the actual sheafified sectionwise change of rings along the continuous inclusion of its valuation-subring coefficient sheaf into its WithAbs field coefficient sheaf. These are the original four constructions, with their bodies and types unchanged.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definitions 6.8.1 and 6.8.10; Stacks Tags 09BN, 03DI, 03D6 and 03EK"
+ },
+ "proof": [
+  {
+   "text": "These are explicit functor compositions and the published sheafified ordinary tensor construction. Their bodies are unchanged from the original item.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Definitions 6.8.1 and 6.8.10; Stacks Tags 09BN, 03DI, 03D6 and 03EK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction and its localization exact sequence across equivalent categories",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.localization; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Localization.isEquivalence; CategoryTheory.LocalizerMorphism.isEquivalence_imp; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'; CategoryTheory.LocalizerMorphism.isEquivalence; CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_unit_of_unit; CategoryTheory.Adjunction.isLocalization'",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"leftAdjointUniq\"",
+   "results": "OK 12 hits; CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "(Adjunction|adjunction).*(ofNatIso|transport)|exact_of_iso",
+   "results": "OK 25 hits; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/RepresentationTheory/FiniteIndex.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport adjunction localization exact sequence across category equivalences",
+   "results": "OK 8 hits; CategoryTheory.Functor.IsLocalization.of_equivalences; CategoryTheory.Functor.IsLocalization.of_equivalence_source; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.localization; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Equivalence.transportSheafificationAdjunction; CategoryTheory.Functor.IsLocalization.of_equivalence_target",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Concrete supported functors and ordinary rationalization; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralModelOpenClosedBasic",
+  "file": "lean/Sheaf/Paper/IntegralModelOpenClosedBasic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openSliceModules",
+  "statement": "def openSliceModules {X : Scheme.{u}} (U : X.ProEt)\n    (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :\n    SheafOfModules.{u + 1} (latticeModuleRing U.left T) ⥤\n      SheafOfModules.{u + 1} ((latticeModuleRing X T).over U)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openSliceModules",
+   "AlgebraicGeometry.ProEtale.continuousModuleDirectImage",
+   "AlgebraicGeometry.ProEtale.continuousModuleExtensionByZero",
+   "AlgebraicGeometry.ProEtale.integralModelRationalize"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}

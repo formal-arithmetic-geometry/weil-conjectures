@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-scalar-change",
+ "kind": "statement",
+ "title": "Ordinary closed scalar change with transported coefficients",
+ "statement": "theorem closedImmersion_scalar_change {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (R B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (S T : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (a : R ⟶ B) (b : S ⟶ T)\n    (cR : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R ≅ S)\n    (cB : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj B ≅ T)\n    (h : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).map a ≫ cB.hom =\n      cR.hom ≫ b)\n    (M : SheafOfModules.{u + 1} (proEtaleModuleCoefficients S)) :\n    Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1} a\n        ((SheafOfModules.restrictScalars\n          ((sheafCompose (ProEt.topology Z)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map cR.hom) ⋙\n              proEtaleRingedDirectImage i R).obj M) ≅\n      (SheafOfModules.restrictScalars\n        ((sheafCompose (ProEt.topology Z)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map cB.hom) ⋙\n            proEtaleRingedDirectImage i B).obj\n              (SheafOfModules.changeOfRings.{u, u + 1, u + 1} b M)) (Notation and constructions as in lem-weil-pbc-proetale-ringed-open-closed, def-pur-sheaf-tensor-product.)",
+ "stmt_deps": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 09AA, 09AH, 03EK and 03EL; underived projection with the actual scalar extension"
+ },
+ "proof": [
+  {
+   "text": "apply the underived closed projection formula to R, its module B, and the\nrestriction of M along cR. The projection is invertible because its source has\nzero restriction to the complementary open; localization identifies it with its\nclosed direct image. Its closed restriction is the tensor of M with inverse\nimage of B, by inverse-image tensor comparison and the closed counit. Identify\nordinary change of rings with the sheafification of B tensor_R N, using tensor\nsymmetry. On the closed site, transport the same tensor through cR and cB. The\ncoefficient-square hypothesis identifies its balancing relation with the one\nfor b. The resulting maps are linear over B: on pure tensors the projection\nsends m tensor s to m tensor bar(s), where bar is the ring-adjunction unit, so\nmultiplication on the B factor is preserved. Pure tensors locally generate the\nsheafifications; hence the linear maps extend uniquely and their inverse\nidentities can be checked there. This supplies an isomorphism of B-modules,\nwithout flatness, finite presentation or constructibility hypotheses.",
+   "uses": [
+    "lem-weil-pbc-proetale-closed-underived-projection",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-closed-underived-projection",
+  "lem-pur-proetale-inverse-image-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stage-3 expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+  "place": "Stacks Tags 09AA, 09AH, 03EK and 03EL; underived projection with the actual scalar extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary scalar extension commutes with extension by zero and closed immersion direct image",
+   "results": "OK 8 hits; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_id_comp_assoc; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_assoc; ModuleCat.extendScalarsComp; AlgebraicGeometry.liftCoborder_app; ModuleCat.extendScalars_assoc_assoc; ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"changeOfRings\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "(changeOfRings|scalarExtension).*(pushforward|extensionByZero)|projection.*[Cc]losed",
+   "results": "OK 19 hits; Mathlib/Topology/Sets/Closeds.lean; Mathlib/Topology/Sets/Closeds.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Order/Interval/Set/ProjIcc.lean; Mathlib/Topology/Algebra/Module/ClosedSubmodule.lean; Mathlib/Topology/Algebra/Module/Complement.lean",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scalar extension commutes with closed immersion direct image",
+   "results": "OK 8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgHom.extendScalars; AlgEquiv.extendScalarsOfSurjective; AlgHom.extendScalarsOfSurjective; IntermediateField.extendScalars; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; AlgebraicGeometry.IsImmersion.isStableUnderBaseChange",
+   "date": "2026-10-21",
+   "verdict": "No full statement match. Use the existing adjunction, exactness and scalar-extension infrastructure where applicable; the specialized interface is supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelOpenClosedPieces",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Ordinary closed scalar change with transported coefficients; expansion of lem-weil-pbc-integral-model-open-closed-pieces",
+   "via": [
+    "lem-weil-pbc-integral-model-open-closed-pieces",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionScalarChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionScalarChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.closedImmersion_scalar_change",
+  "statement": "theorem closedImmersion_scalar_change {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (R B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (S T : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (a : R ⟶ B) (b : S ⟶ T)\n    (cR : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R ≅ S)\n    (cB : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj B ≅ T)\n    (h : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).map a ≫ cB.hom =\n      cR.hom ≫ b)\n    (M : SheafOfModules.{u + 1} (proEtaleModuleCoefficients S)) :\n    Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1} a\n        ((SheafOfModules.restrictScalars\n          ((sheafCompose (ProEt.topology Z)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map cR.hom) ⋙\n              proEtaleRingedDirectImage i R).obj M) ≅\n      (SheafOfModules.restrictScalars\n        ((sheafCompose (ProEt.topology Z)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map cB.hom) ⋙\n            proEtaleRingedDirectImage i B).obj\n              (SheafOfModules.changeOfRings.{u, u + 1, u + 1} b M))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c9bc5",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261021T154019-L-2756307",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 9 new modules against the clone's item and the defs IsContinuousConstructible / Scheme.Stratification / closed_underived_projection; verbatim def move diffed; importer RationalStratumIntegralModels compiled against delivered modules (rc 0); #print axioms clean apart from the 2 sorry halves"
+ }
+}
