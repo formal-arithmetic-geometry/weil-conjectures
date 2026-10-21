@@ -385,5 +385,37 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-7dcd383d4 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read in full the item, the three new nodes and every cited statement. The source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). That paragraph does not cover coefficient topology, so the item is an agent obligation and proof_origin=agent is correct. No SGA is cited, and the item is still unsplit in live, so the delivery is not superseded. The target statement is unchanged. The split is a genuine Hochschild-Serre-type reduction, not a relabelling (D1): a geometric finite model with beta_C/beta_B, a profinite derived-invariants comparison, Galois descent, and a finite truncation induction using the declared generic tools def-sbc-standard-tstructure-derived-category and lem-sf-triangle-two-out-of-three, which I accept. Cycle check: the full dependency closure of each new node does not reach the item; the circular downstream continuous-algcl scalar comparisons are not used. Small cases checked: empty X and V=0; X=Spec k^s; trivial G; H^0; G=Z_ell with W=E(chi); and H^1 with trivial action for any profinite G, where a Baire argument shows a compact subgroup of Omega-hat inside Omega lies in a finite extension. No duplicates: field-separable-cech-coordinates, condensed-derived-invariant-bar, normal-subgroup-comparison, procyclic-torsor descent, qlbar-direct-image-comparison, dense-lattice and prime-to-ell comparisons were all checked. Two repairable faults (E5/B2), both fixed: (1) the scalar-model node stated the beta coefficient square only after restriction to A, while step 4 needs it in D(A_G(C)), because the descent naturality and alpha are both built from C-linear maps; (2) beta_R was described through an undefined 'geometric pullback'. The fixed scalar-model node now defines beta_R as the transpose of K_A(eta_V) followed by the scalar-restriction comparison, and states Res_c(beta_B)∘gamma = kappa∘beta_C in D(A_G(C)). Step 4 of the item is rewritten to use that square. The B half of the geometric node and the arbitrary-profinite comparison remain substantive inputs, honestly marked WANTED.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormAlgclCohomologyTopologyComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.NormAlgclComparison.isIso_derivedGlobalSections_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusionRing",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusion",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusion_isMonHom",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.finiteScalarMap",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.inclusionOnScheme",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.finiteSubextensionModule",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.normContinuousModule",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientModuleMap",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.comparison",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.derivedGlobalSections",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.isIso_derivedGlobalSections_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/NormAlgclCohomologyTopologyComparison.lean",
+  "statement": "theorem isIso_derivedGlobalSections_comparison {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) (a : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType a] [QuasiCompact a] [IsSeparated a] (V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X))) (hV : constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X V) : IsIso ((derivedGlobalSections ℓ X E).map (comparison ℓ X E V))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical comparison is written as c_X[0] tensor_A^L V in D(A), with both regular coefficient modules restricted to A. These are the canonical restricted derived scalar extensions in the node; the comparison computes z tensor v mapping to c_X(z) tensor v on a flat-term K-flat resolution. derivedGlobalSections forgets the A action exactly and then applies the ordinary unbounded right derived global-sections functor. No flatness of c_X or extra boundedness of the target is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f2757801",
+  "group": "NJ",
+  "result": "pass",
+  "note": "All clauses match the node: ℓ prime; k char p≠ℓ; X separated finite type via a:X⟶Spec k (LocallyOfFiniteType+QuasiCompact+IsSeparated); C=padicAlgClRingObj, B=continuousMapRingObj (PadicAlgCl ℓ), A=condensedRingObj (continuousMapRingObj E) X with the published padicSubfieldRingObjToPadicAlgCl; hV is the recorded constantModelBoundedConstructible; m_V=(single 0 c_X as A-module map)▷V in Mod.derivedMonoidalCategory (K-flat relative ⊗ᴸ_A), canonically Res(S⊗ᴸ_A V), representative z⊗v↦c(z)⊗v; RΓ = Mod.forget.mapDerivedCategory ⋙ Sheaf.Γ.rightDerivedFunctor (unbounded K-injective); conclusion is IsIso in D(Ab), a derived-category isomorphism. Empty X, V=0, E=⊥ and universes covered; only the lean field changed; statement field verbatim; docstrings and 4-step plan present; sorry only, no hollow defs. Maintainer note: coefficientInclusionRing/coefficientInclusion are identical (defeq) to O4's landed algClTopologyInclusionRing/algClTopologyInclusion in the downstream theorem module ConstructibleAlgClTopologyComparison, whose proof closure contains this item; recommend factoring c into a def node (e.g. def-sfb-algcl-topology-inclusion) and repointing both. No fix, no compile."
  }
 }
