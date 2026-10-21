@@ -21768,3 +21768,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:15 L: merged deliver/Q106/lem-pc-tate-residue-lattice-identity (reviewer PASS; first push; new nodes: 0)
 - 09:15 L: merged deliver/Q79/lem-pc-tate-residue-field-extension (reviewer FIX; first push; new nodes: 2)
 - 09:15 L: merged deliver/Q98/lem-zl-bertini-finite-cover-irreducible-system (reviewer PASS; after a return; new nodes: 0)
+- 09:15 L: merged deliver/Q146/lem-sf-fully-faithful-exceptional-hom-transport (reviewer PASS; first push; new nodes: 0)

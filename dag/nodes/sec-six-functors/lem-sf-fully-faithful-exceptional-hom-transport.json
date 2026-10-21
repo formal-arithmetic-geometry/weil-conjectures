@@ -10,9 +10,70 @@
  "stmt_deps": [
   "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\alpha_{A,L}:\\operatorname{Hom}(C_TA,L)\\to\\operatorname{Hom}(A,RL)$ and $\\beta_{H,N}:\\operatorname{Hom}(F_eH,N)\\to\\operatorname{Hom}(H,G_eN)$ for the two given natural adjunction bijections. The adjunction formulas of [lem-weil-pbc-adjunction-of-natural-bijection], applied to these specified bijections, give $\\alpha_{A,L}(w)=R(w)\\circ j_A$ and $\\beta_{G_eN,N}(\\mu^e_N)=\\mathrm{id}_{G_eN}$. Here the second equality also follows immediately because the counit is the inverse image of the identity. These formulas use the given units and counits, so no choice of a new adjunction is involved.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following adjunction-map formulas; Tag 0DV0, lemma-compose-counits, explicit composite Hom-bijection argument."
+   }
+  },
+  {
+   "text": "For every $H,L$, precomposition by $b_H$ is a bijection with inverse precomposition by $b_H^{-1}$, the next two arrows $\\alpha,\\beta$ are bijections by hypothesis, and the last arrow is bijective by full faithfulness of $C_Z$. Their composite is therefore the specified bijection $h_{H,L}$. For $a:H^\\prime\\to H$ and $s:L\\to L^\\prime$, naturality of $b$ gives $F_pC_Z(a)\\circ b_{H^\\prime}=b_H\\circ C_TF_e(a)$; naturality of $\\alpha$ and $\\beta$ and preservation of composition by $C_Z$ then give $h_{H^\\prime,L}(q\\circ F_pC_Z(a))=h_{H,L}(q)\\circ C_Z(a)$ and $h_{H,L^\\prime}(s\\circ q)=G_p(s)\\circ h_{H,L}(q)$. These are precisely naturality in the two variables.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following adjunction-map formulas; Tag 0DV0, lemma-compose-counits, explicit composite Hom-bijection argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sp-adjunction-unit-fully-faithful-left] to $L=C_T$ and the specified right adjoint $R$. Its only extra hypothesis is full faithfulness of $C_T$, which is assumed, so every $j_N:N\\to RC_TN$ is invertible. The morphism $o_N=C_ZG_e(j_N)$ is consequently invertible: its inverse is $C_ZG_e(j_N^{-1})$, since each of $G_e,C_Z$ preserves identities and composition.",
+   "uses": [
+    "lem-sp-adjunction-unit-fully-faithful-left"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 07RB, lemma-adjoint-fully-faithful (1); functorial preservation of inverse identities."
+   }
+  },
+  {
+   "text": "Fix $q:F_pC_ZH\\to C_TN$ and put $w=q\\circ b_H$. Full faithfulness of $C_T$ supplies the unique $v:F_eH\\to N$ with $w=C_T(v)$. The formula in Step 1 and naturality of $j$ give $\\alpha_{F_eH,C_TN}(w)=RC_T(v)\\circ j_{F_eH}=j_N\\circ v$. Naturality of $\\beta$ in its second variable therefore gives $\\beta_{H,RC_TN}(j_N\\circ v)=G_e(j_N)\\circ\\beta_{H,N}(v)$. Applying $C_Z$ proves $h_{H,C_TN}(q)=o_N\\circ C_Z(\\beta_{H,N}(v))$. Postcomposition with $o_N^{-1}$ leaves exactly $C_Z(\\beta_{H,N}(v))$, where $v$ was obtained by precomposing $q$ with $b_H$ and then applying the inverse fully faithful Hom map of $C_T$. This proves equality with the entire four-arrow chain in the statement, not merely existence of an unspecified bijection.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following adjunction-map formulas; Tag 0DV0, lemma-compose-counits, explicit composite Hom-bijection argument."
+   }
+  },
+  {
+   "text": "Take $H=G_eN$ and $q=C_T(\\mu^e_N)\\circ b_{G_eN}^{-1}$. Then $q\\circ b_{G_eN}=C_T(\\mu^e_N)$, so Step 4 has $v=\\mu^e_N$ and Step 1 gives $h(q)=o_N\\circ C_Z(\\mathrm{id}_{G_eN})=o_N$. Since $h$ is injective by Step 2, this $q$ is its unique preimage of $o_N$. Under the identification of its target by $o_N^{-1}$, $o_N$ becomes the identity of $C_ZG_eN$; hence its unique preimage is the counit on the stated origin objects, in the precise identity-preimage sense. Every occurrence of $H$ throughout the argument lies in $\\mathcal X_e$, so the argument makes no additional adjunction assertion for arbitrary objects of $\\mathcal X_p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following adjunction-map formulas; Tag 0DV0, lemma-compose-counits, explicit composite Hom-bijection argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sp-adjunction-unit-fully-faithful-left"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0037 (definition-adjoint), 07RB (lemma-adjoint-fully-faithful), 0DV0 (lemma-compose-counits); explicit comparison normalization supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -114,10 +175,141 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: restrictFullyFaithful has different input commuting squares and does not state this specified four-arrow Hom chain and its origin-map evaluation; composition and evaluation still require an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|comp_homEquiv|homEquiv_counit",
+   "results": {
+    "t": "2026-10-21T09:04:10Z",
+    "tool": "grep",
+    "query": "restrictFullyFaithful|comp_homEquiv|homEquiv_counit",
+    "sub": "CategoryTheory/Adjunction",
+    "ok": true,
+    "n_hits": 24,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean"
+    ],
+    "digest": "70840dc5b0a55207"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: homEquiv and comp_homEquiv provide constituent equivalences only; restrictFullyFaithful requires a given ambient adjunction plus both restriction squares, while this item only has an adjunction before comparison and asserts Hom bijections on origin objects with a specified normalization.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural Hom bijection through fully faithful comparison functors and counit compatibility",
+   "results": {
+    "t": "2026-10-21T09:04:11Z",
+    "tool": "leansearch",
+    "query": "Natural Hom bijection through fully faithful comparison functors and counit compatibility",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.FullyFaithful.map_bijective",
+     "CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Functor.FullyFaithful.nonempty_iff_map_bijective",
+     "CategoryTheory.Functor.FullyFaithful.homEquiv",
+     "CategoryTheory.nerveFunctor.fullyfaithful",
+     "CategoryTheory.unitCompPartialBijectiveAux",
+     "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit"
+    ],
+    "digest": "5c2ee2d68966c667"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: homEquiv and comp_homEquiv provide constituent equivalences only; restrictFullyFaithful requires a given ambient adjunction plus both restriction squares, while this item only has an adjunction before comparison and asserts Hom bijections on origin objects with a specified normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": {
+    "t": "2026-10-21T09:04:12Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction.homEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.mk'_homEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "digest": "05a3b8c6fadac431"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: homEquiv and comp_homEquiv provide constituent equivalences only; restrictFullyFaithful requires a given ambient adjunction plus both restriction squares, while this item only has an adjunction before comparison and asserts Hom bijections on origin objects with a specified normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom(Fp Cz H,L) equivalent to Hom(Cz H,Cz Ge R L) using Ct left adjoint R and Fe left adjoint Ge",
+   "results": {
+    "t": "2026-10-21T09:04:12Z",
+    "tool": "leanfinder",
+    "query": "Hom(Fp Cz H,L) equivalent to Hom(Cz H,Cz Ge R L) using Ct left adjoint R and Fe left adjoint Ge",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ParametrizedAdjunction.homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Functor.partialLeftAdjointHomEquiv_comp_symm",
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_eq",
+     "CategoryTheory.Functor.partialLeftAdjointHomEquiv_map_comp",
+     "CategoryTheory.Functor.partialLeftAdjointHomEquiv_map",
+     "CategoryTheory.Functor.partialLeftAdjointHomEquiv_comp"
+    ],
+    "digest": "c47e9f9764f2d923"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: homEquiv and comp_homEquiv provide constituent equivalences only; restrictFullyFaithful requires a given ambient adjunction plus both restriction squares, while this item only has an adjunction before comparison and asserts Hom bijections on origin objects with a specified normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose adjunction Hom equivalences with a fully faithful functor and an isomorphism to transport Hom sets and evaluate the counit",
+   "results": {
+    "t": "2026-10-21T09:04:13Z",
+    "tool": "leanfinder",
+    "query": "Compose adjunction Hom equivalences with a fully faithful functor and an isomorphism to transport Hom sets and evaluate the counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+     "CategoryTheory.Adjunction.restrictFullyFaithful",
+     "CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit",
+     "CategoryTheory.Adjunction.homEquiv_counit",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit",
+     "CategoryTheory.Adjunction.homEquiv_symm_apply",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv"
+    ],
+    "digest": "9e1c3d5e9e5ea250"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: homEquiv and comp_homEquiv provide constituent equivalences only; restrictFullyFaithful requires a given ambient adjunction plus both restriction squares, while this item only has an adjunction before comparison and asserts Hom bijections on origin objects with a specified normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-boundary-proetale-projection-comparison",
@@ -136,5 +328,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-fully-faithful-exceptional-hom-transport",
+  "worker": "stage1",
+  "summary": "Expanded the specified Hom chain, verified naturality in both variables, reused the existing fully faithful left-adjoint unit leaf, and computed the origin normalization by writing q b = C_T(v) and using the two naturality identities. No statement change, new node, or attachment.",
+  "blueprint": "cor-weil-boundary-duality-discharge, second proof paragraph: the evaluation-defined boundary comparison is normalized by adjunction; realizes the auxiliary exceptional-counit normalization identified in blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-aafc19813",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-aafc19813 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and the report. Statement, stmt_deps, blueprint, source and created are unchanged from the side-live base. The item is unsplit on live and side-live, has no repair note and is not in route-pivot-dropped. Sources read: Stacks categories.tex 0037 definition-adjoint l.3344 (unit/counit are the images of the identities, matching the item's convention), 07RB lemma-adjoint-fully-faithful l.3440 and 0DV0 lemma-compose-counits l.3576. proof_origin 'agent' is correct; no SGA. Both cited nodes are Mathlib leaves, so they are tools and not route. lem-weil-pbc-adjunction-of-natural-bijection (mkOfHomEquiv) states Psi(a)=G(a)∘eta, the counit as Psi^-1(id) and both naturality laws, which is what Steps 1, 2 and 4 use. lem-sp-adjunction-unit-fully-faithful-left (unit_isIso_of_L_fully_faithful) gives j invertible for C_T ⊣ R (Step 3). Checked on paper: the four-arrow types; naturality in H through b and the left naturality of alpha and beta; naturality in L through R(s) and G_eR(s), giving G_p(s); alpha(C_T v)=RC_T(v)∘j=j_N∘v; beta(j_N∘v)=G_e(j_N)∘beta(v), so h(q)=o_N∘C_Z beta(v); v=mu gives h(C_T mu∘b^-1)=o_N, and the preimage is unique by injectivity. Edge cases: all functors identities; one-object BG with central b=g (preimage g^-1, so the b^-1 direction is right); the report's Set / Set×Set example, which confirms that restricting to origin objects is needed. Duplicate search (rg -L over 'fully faithful' + counit + b-composites, and Q103's comparison list) found no node stating this abstract transport. No new nodes, no fixes."
  }
 }
