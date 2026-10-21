@@ -17,9 +17,62 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ring-sheaves-grothendieck] to the small pro-étale site and its constant ring sheaf $\\Lambda_{X_{\\mathrm{proét}}}$. Its left-module category is Grothendieck abelian, with no commutativity hypothesis, so [lem-sp-grothendieck-enough-injectives] gives enough injectives. Construct a resolution $M\\to I^\\bullet$ as follows: embed $M$ into an injective $I^0$; embed $I^0/M$ into an injective $I^1$ and define $d^0$ by the quotient followed by this embedding. Recursively embed $\\operatorname{coker}(d^{n-1})$ into an injective $I^{n+1}$ and let $d^n$ be the quotient followed by that embedding. The kernel of $d^n$ is the image of $d^{n-1}$, so this is an injective resolution concentrated in nonnegative degrees.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q (remark-existence-D), with derived.tex Tag 013K (lemma-injective-resolutions-exist), proof of (1)"
+   }
+  },
+  {
+   "text": "Put $J^\\bullet=\\nu_{X,*}I^\\bullet$. By the injective-resolution definition [def-sp-left-exact-additive], $R^q\\nu_{X,*}M=\\mathcal H^q(J^\\bullet)$, and the same resolution computes $R^q\\Gamma_{\\mathrm{proét},W}(M)=H^q(I^\\bullet(W))$ for each étale $W\\to X$. Direct image in the statement is restriction, including on module morphisms; hence $J^n(W)=I^n(W)$ and the differentials agree. Thus the hypothesis says exactly $H^q(J^\\bullet(W))=0$ as an abelian group for every such $W$.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V (lemma-relative-comparison), first paragraph; injective-resolution interpretation expanded from the definition"
+   }
+  },
+  {
+   "text": "In the étale module category let $Z=\\ker(d^q:J^q\\to J^{q+1})$. Kernels of module sheaves are sectionwise [def-weil-sheaf-of-modules-category], so $Z(W)=\\ker(d^q(W))$. Since $d^q d^{q-1}=0$, the previous differential factors as $J^{q-1}\\xrightarrow{p}Z\\hookrightarrow J^q$. The equality $H^q(J^\\bullet(W))=0$ from Step 2 means that every $z\\in Z(W)$ equals $d^{q-1}(W)(y)$ for some $y\\in J^{q-1}(W)$; consequently $p(W)$ is surjective for every étale $W$. Here $q>0$ ensures that the preceding degree is in the chosen resolution.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian) and preceding construction of kernels; cycle-boundary calculation for the complex in Tag 099V"
+   }
+  },
+  {
+   "text": "The map $p$ is an epimorphism of module sheaves: if $a,b:Z\\to N$ satisfy $a p=b p$, for every $W$ and $z\\in Z(W)$ choose $y$ with $p(W)(y)=z$; then $a(W)(z)=a(W)(p(W)(y))=b(W)(p(W)(y))=b(W)(z)$. Equality at every object is equality of sheaf morphisms. Therefore $\\operatorname{coker}(p)=0$. The cohomology object $\\mathcal H^q(J^\\bullet)$ is precisely this cokernel of the preceding differential with codomain restricted to its cycle object $Z$. Step 2 now gives $R^q\\nu_{X,*}M=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); explicit epimorphism and cohomology-cokernel argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-left-exact-additive",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099V (lemma-relative-comparison), first-paragraph vanishing argument expanded using one module-injective resolution and sectionwise kernels (sites-modules.tex Tag 03DA)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +108,52 @@
    "results": "8 hits: CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact_succ, CategoryTheory.exact_f_d, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, SheafOfModules.instAbelian",
    "date": "2026-10-21",
    "verdict": "no match: injective-input vanishing requires an injective input and does not prove the criterion for arbitrary M; the remaining results concern injective resolutions or abelian-category structure. Read Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-159 and CategoryTheory/Sites/SheafCohomology/Basic.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|exact_of",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean (Mathlib subdirectory CategoryTheory/Sites/SheafCohomology)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern injective-input vanishing, bounded complexes or definitions of underived sections/cohomology; none states the arbitrary-module comparison-direct-image criterion. Read RightDerived.lean:153-159 and Sites/SheafCohomology/Basic.lean:19-39, 79-97."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Limits.IsZero",
+   "results": "1 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern injective-input vanishing, bounded complexes or definitions of underived sections/cohomology; none states the arbitrary-module comparison-direct-image criterion. Read RightDerived.lean:153-159 and Sites/SheafCohomology/Basic.lean:19-39, 79-97."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Objectwise vanishing of derived sections implies vanishing of higher direct image of a sheaf of modules",
+   "results": "8 hits: SheafOfModules.pushforwardSections, PresheafOfModules.Derivation'.d_app, SheafOfModules.sections, SheafOfModules.sectionsFunctor, SheafOfModules.GeneratingSections.ofEpi_s, PresheafOfModules.sections, SheafOfModules.GeneratingSections, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern injective-input vanishing, bounded complexes or definitions of underived sections/cohomology; none states the arbitrary-module comparison-direct-image criterion. Read RightDerived.lean:153-159 and Sites/SheafCohomology/Basic.lean:19-39, 79-97."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of a sheaf of left modules vanishes if the derived evaluation at every target object vanishes, using one injective resolution",
+   "results": "8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isKInjective_of_injective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CochainComplex.IsKInjective, CategoryTheory.Sheaf.H",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern injective-input vanishing, bounded complexes or definitions of underived sections/cohomology; none states the arbitrary-module comparison-direct-image criterion. Read RightDerived.lean:153-159 and Sites/SheafCohomology/Basic.lean:19-39, 79-97."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|rightDerived",
+   "results": "0 hits:  (Mathlib subdirectory Algebra/Category/ModuleCat/Sheaf)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern injective-input vanishing, bounded complexes or definitions of underived sections/cohomology; none states the arbitrary-module comparison-direct-image criterion. Read RightDerived.lean:153-159 and Sites/SheafCohomology/Basic.lean:19-39, 79-97."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves whose evaluations have zero cohomology in one degree at every object has zero cohomology sheaf in that degree",
+   "results": "8 hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.isZero_of_isLE, CochainComplex.isZero_of_isGE, CategoryTheory.Sheaf.H, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern injective-input vanishing, bounded complexes or definitions of underived sections/cohomology; none states the arbitrary-module comparison-direct-image criterion. Read RightDerived.lean:153-159 and Sites/SheafCohomology/Basic.lean:19-39, 79-97."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-comparison-injective-left-modules-acyclic",
@@ -77,5 +172,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-left-module-comparison-vanishing-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary associative unital coefficient ring and arbitrary M. Constructed one injective resolution using the existing Grothendieck-module and enough-injectives results, evaluated that same resolution, and proved vanishing via a sectionwise surjection onto its kernel sheaf. No exactness of sheaf evaluation, underlying abelian injectivity, or geometric-point conservativity is assumed. No new nodes.",
+  "blueprint": "First paragraph of main-20261015 sk-prop-sf-comparison.proof.md: the acyclicity input used to compute the comparison derived direct image termwise, as isolated in lem-pe-comparison-injective-left-modules-acyclic Step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic existence infrastructure for arbitrary noncommutative ring sheaves on a small site; no geometric comparison route is replaced."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic Grothendieck-category theorem used only to construct a module-injective resolution; no such resolution-existence theorem is supplied within this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-46e99f3ce",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-46e99f3ce (reviewer sub-agent of L); spot-checked: I read the delivered item in full, its eight stmt_deps and four proof_deps statements, and the parent lem-pe-comparison-injective-left-modules-acyclic, whose Step 4 hypothesis matches this item exactly. I also read Stacks 099V (proetale.tex l.3953-3983), Stacks 03DA (sites-modules.tex l.1337) and the first paragraph of the main-20261015 sk-prop-sf-comparison proof. On side-live the item is still unsplit and its statement is byte-identical to the delivered one. It has no repair note and is not in route-pivot-dropped. There are no new nodes. The statement is true for an arbitrary associative ring Λ and arbitrary M; I checked Λ=0, X empty, M_2(F_p), and that no step assumes a module-injective is abelian-injective. Step 1: the Grothendieck lemma and enough injectives give an injective resolution, and the iterative cokernel construction is correct. Step 2: def-sp-left-exact-additive is a Mathlib-matched definition that includes independence of the resolution. Evaluation and ν_* preserve kernels because module kernels are sectionwise, and étale W is an object of X_proét, so J^n(W)=I^n(W). Advisory: left exactness of ν_* is argued only in the report, but the statement fixes this computation. Step 3: the sectionwise kernel clause gives that p(W) is surjective, and q>0 is used correctly. Step 4: a sectionwise surjection is an epimorphism of sheaves, and H^q=coker(J^{q-1}→Z)=0. This is valid and simpler than the 03F3 sheafification route because the hypothesis holds for every étale W. There is no duplicate: det-pe-injective-acyclicity-reduction is for commutative Λ and affine W, and the other candidates are for scheme morphisms or injective inputs. I accept the declared tool_uses: lem-weil-pbc-ring-sheaves-grothendieck is generic and the parent uses it too, and lem-sp-grothendieck-enough-injectives is a Mathlib leaf. No SGA is cited and there is no cycle. No fixes were made."
  }
 }
