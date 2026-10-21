@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-strict-transform-chart-cocycle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cocycle for strict-transform charts",
@@ -17,28 +17,162 @@
  ],
  "proof": [
   {
-   "text": "On an intersection of the $a$- and $a'$-charts, choose a basic affine\nrefinement on which both chart restrictions are defined. The ordinary\nblow-up transition is the specified localization isomorphism; by\n[lemma-nagata-affine-blowup-restrict-cocycle] its two composites on a\ntriple refinement agree. Localizing the quotient map\n$C_a\\twoheadrightarrow C_a^{\\mathrm{st}}$ gives the quotient by the\nlocalized power-torsion ideal, by\n[lemma-nagata-strict-transform-chart-localization-data]. Thus the\nordinary transition descends uniquely to a transition of strict-transform\nchart rings. The descended maps agree with the comparisons constructed\nafter localization by\n[lemma-nagata-strict-transform-chart-localization]. On a triple\nrefinement their two composites become the same ordinary transition before\nquotienting, hence are equal after quotienting. This proves both the\ndouble-overlap compatibility and the cocycle.",
+   "text": "Fix a ring map $f:A\\to B$, an ideal $I\\subseteq A$ and $a\\in I$. Write $C_a=B\\otimes_A A[I/a]$, $K_a=\\Gamma_{(a)}(C_a)$, $R_a=C_a/K_a$, $J=IB$, $b=f(a)$ and $T_a=B[J/b]$. Let $F_a:R_a\\to T_a$ be the comparison. First fix this chart and elements $s,t\\in R_a$. By [def-nagata-strict-transform-chart-comparison-localized], the two successive localizations of $F_a$, in either order, send an iterated fraction to $F_a(z)F_a(s)^{-m}F_a(t)^{-n}$. After identifying both iterated source rings with $(R_a)_{st}$ and both iterated target rings with $(T_a)_{F_a(st)}$, the two maps therefore agree. The inverses exist because inverting a product inverts each factor (an inverse of $s$ is $t(st)^{-1}$). Uniqueness in [lem-weil-pbc-localization-away-universal-property] proves equality of the maps, not just of their presentations. For $s_0,t_0\\in B$, take $s,t$ to be their structural images in $R_a$. Then [lemma-nagata-strict-transform-chart-localization-data] identifies successive quotient-chart localizations with the chart of localized data, and [lemma-nagata-strict-transform-chart-localization] identifies the maps with the comparisons constructed there. For elements of $A$, apply this assertion to their images in $B$. The coefficient-chart identifications themselves agree by [lemma-nagata-affine-blowup-restrict-cocycle].",
    "uses": [
-    "lemma-nagata-affine-blowup-restrict-cocycle",
+    "def-nagata-strict-transform-chart-comparison-localized",
+    "lem-weil-pbc-localization-away-universal-property",
     "lemma-nagata-strict-transform-chart-localization-data",
-    "lemma-nagata-strict-transform-chart-localization"
+    "lemma-nagata-strict-transform-chart-localization",
+    "lemma-nagata-affine-blowup-restrict-cocycle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-cocycle.proof.md",
+    "place": "Proof, compatibility with localized data and double localizations; expanded using Stacks Tag 00CP"
+   }
+  },
+  {
+   "text": "Now let $a,a'\\in I$ and put $u=1\\otimes(a'/a)\\in C_a$, $v=1\\otimes(a/a')\\in C_{a'}$. The map of [def-nagata-homogeneous-away-to-chart] sends $xt^n/(at)^n$ to $x/a^n$; [lemma-nagata-homogeneous-away-to-chart], [lemma-nagata-homogeneous-away-to-chart-injective] and [lemma-nagata-homogeneous-away-to-chart-surjective] make it a ring isomorphism. Use this to identify the degree-zero Rees chart with $A[I/a]$. Apply [lemma-nagata-proj-chart-ring-cocycle] to the degree-one elements $aX,a'X$ of the Rees algebra: it gives the ordinary transition between the localized chart rings on their intersection. Extending this transition by the identity on $B$ gives\n$$\\theta_{aa'}:(C_a)_u\\xrightarrow{\\sim}(C_{a'})_v.$$\nHere [lem-weil-pbc-algebra-localization-away-base-change] identifies localizing the tensor chart with tensoring the localized chart, and [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives the extended map and its inverse. The fraction description of [def-nagata-blowup-chart-ring] gives its explicit formula: it fixes $B$ and sends $x/a$ to $(x/a')v^{-1}$ for $x\\in I$, so it sends $u$ to $v^{-1}$. In the common overlap ring the structural images satisfy $a'=au$, with $u$ a unit. No cancellation of $a$ is being asserted in $C_a$: this relation already holds in $A[I/a]\\subseteq A_a$ and is preserved by tensoring. For three indices the extended ordinary transitions satisfy $\\theta_{a'a''}\\theta_{aa'}=\\theta_{aa''}$ after further localization: this is the cited Proj cocycle, extended on pure tensors by $y\\otimes z\\mapsto y\\otimes\\theta(z)$.",
+   "uses": [
+    "lemma-nagata-proj-chart-ring-cocycle",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-nagata-blowup-chart-ring",
+    "def-nagata-homogeneous-away-to-chart",
+    "lemma-nagata-homogeneous-away-to-chart",
+    "lemma-nagata-homogeneous-away-to-chart-injective",
+    "lemma-nagata-homogeneous-away-to-chart-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4, lemma-standard-open, (1)(c)-(e), applied to aX, a′X and their products; tensor localization uses Tags 00DK/00DL"
+   }
+  },
+  {
+   "text": "The quotient rings really restrict to the quotients of the overlap rings. For any $c\\in C_a$, the extension $K_a(C_a)_c$ equals the $a/1$-power-torsion ideal of $(C_a)_c$. Indeed, if $a^n(z/c^m)=0$, the localization relation says $c^ka^nz=0$ for some $k\\geq0$; hence $c^kz\\in K_a$ and $z/c^m=(c^kz)/c^{m+k}$ belongs to the extended ideal. Conversely a fraction with numerator killed by $a^n$ is killed by the same power after localization; finite sums use the maximum of the exponents. By [lem-weil-pbc-localization-quotient-commute] we consequently have\n$$(R_a)_{\\bar c}\\cong (C_a)_c/\\Gamma_{(a/1)}((C_a)_c),\\qquad [z]/\\bar c^m\\longmapsto[z/c^m].$$\nThe torsion ideal here is precisely the one defined in [def-nagata-strict-transform-chart-ring]. This argument applies to chart elements such as $u$, not merely to images of elements of $B$.",
+   "uses": [
+    "def-nagata-strict-transform-chart-ring",
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient; the power-torsion calculation is an explicit fraction argument supplementing Tag 0BIP, lemma-blowup-base-change"
+   }
+  },
+  {
+   "text": "In the ordinary overlap of step 2, $a'=au$ with $u$ invertible. Thus $a^nz=0$ if and only if $(a')^nz=u^na^nz=0$: the reverse implication multiplies by $u^{-n}$. Since $\\theta_{aa'}$ fixes structural scalars, it therefore carries the $a$-power-torsion ideal exactly onto the $a'$-power-torsion ideal. Using step 3, define\n$$\\bar\\theta_{aa'}:(R_a)_{\\bar u}\\longrightarrow(R_{a'})_{\\bar v},\\qquad [w]\\longmapsto[\\theta_{aa'}(w)].$$\nIf $w-w'$ is in the source ideal then its image is in the target ideal, so this formula is well-defined and respects sums, products and $1$. The inverse is induced by $\\theta_{aa'}^{-1}$. Every quotient class has a representative, so the displayed commutation with the quotient maps characterizes $\\bar\\theta_{aa'}$ uniquely. This is descent of a map through a surjective quotient as in [def-weil-pbc-algebra-hom-quotient], with the ideals identified in [def-nagata-strict-transform-chart-ring].",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-nagata-strict-transform-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BIP, lemma-blowup-base-change, quotient chart description; explicit descent on representatives"
+   }
+  },
+  {
+   "text": "Check that these descended transitions are compatible with the comparisons named in the statement. Apply the ordinary transition construction also to the charts $T_a=B[J/b]$ and $T_{a'}=B[J/f(a')]$, using [lemma-nagata-proj-chart-ring-cocycle] over $B$; denote it by $\\tau_{aa'}$. In its target overlap put $v_B=b/f(a')$. By [def-nagata-strict-chart-to-extended-blowup-chart], the unquotiented comparison $\\sigma_a$ fixes $B$ and sends $x/a$ to $f(x)/b$. The two routes from the $a$-chart to the target overlap agree on $B$ and on every generator $x/a$, since both have value\n$$\\frac{f(x)}{f(a')}v_B^{-1}.$$\nThey also agree on the inverted $u$, whose image is $v_B^{-1}$. The blowup chart is generated by the $x/a$ over $A$ [def-nagata-blowup-chart-ring]; tensor uniqueness and localization uniqueness therefore give equality on the whole overlap. The quotient comparison [def-nagata-strict-transform-chart-comparison] satisfies $F_aq_a=\\sigma_a$. Surjectivity of the overlap quotient then gives\n$$\\tau_{aa'}\\circ(F_a)_{\\bar u}=(F_{a'})_{\\bar v}\\circ\\bar\\theta_{aa'}.$$\nThese localized maps are exactly those of [def-nagata-strict-transform-chart-comparison-localized], by their fraction formula. Together with step 1 this checks the comparisons for base-localized presentations too.",
+   "uses": [
+    "lemma-nagata-proj-chart-ring-cocycle",
+    "def-nagata-strict-chart-to-extended-blowup-chart",
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-nagata-strict-transform-chart-comparison",
+    "def-nagata-strict-transform-chart-comparison-localized"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-cocycle.proof.md",
+    "place": "Proof, identification with the localized comparisons; explicit generator check supplementing Stacks Tags 01M4 and 0BIP"
+   }
+  },
+  {
+   "text": "Finally restrict three charts $a,a',a''$ to the triple overlap, inverting the two overlap ratios in each chart. Step 3 applies successively; step 4 preserves the ideals at each restriction. Write $q_a$ for the surjection from the resulting ordinary overlap ring to its torsion quotient. The ordinary cocycle of step 2, supplied by [lemma-nagata-proj-chart-ring-cocycle], gives\n$$(\\bar\\theta_{a'a''}\\bar\\theta_{aa'})q_a\n=q_{a''}\\theta_{a'a''}\\theta_{aa'}\n=q_{a''}\\theta_{aa''}\n=\\bar\\theta_{aa''}q_a.$$\nEvery element of the source quotient is $q_a(w)$, so this is the asserted triple cocycle. Localizing this equation further preserves it: every fraction maps to the image of its numerator times the inverse image of its denominator. The double-localization equality of step 1 and the comparison squares of step 5 identify these maps with the localized strict-transform chart comparisons, in either order of restriction. The choices $a,a',a''$ and the further localizations were arbitrary, so this proves both clauses of the item.",
+   "uses": [
+    "lemma-nagata-proj-chart-ring-cocycle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-cocycle.proof.md",
+    "place": "Proof, final two sentences: equality before quotienting implies equality after quotienting; double restriction independence is step 1"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-affine-blowup-restrict-cocycle",
+  "def-nagata-strict-transform-chart-comparison-localized",
+  "lem-weil-pbc-localization-away-universal-property",
   "lemma-nagata-strict-transform-chart-localization-data",
-  "lemma-nagata-strict-transform-chart-localization"
+  "lemma-nagata-strict-transform-chart-localization",
+  "lemma-nagata-affine-blowup-restrict-cocycle",
+  "lemma-nagata-proj-chart-ring-cocycle",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-homogeneous-away-to-chart",
+  "lemma-nagata-homogeneous-away-to-chart",
+  "lemma-nagata-homogeneous-away-to-chart-injective",
+  "lemma-nagata-homogeneous-away-to-chart-surjective",
+  "def-nagata-strict-transform-chart-ring",
+  "lem-weil-pbc-localization-quotient-commute",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-nagata-strict-chart-to-extended-blowup-chart",
+  "def-nagata-strict-transform-chart-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-cocycle.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-cocycle.proof.md",
+  "place": "Entire proof, expanded into six steps; Stacks Tags 01M4, 00CP, 00CT, 00DK/00DL and 0BIP supply the chart/localization interfaces"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict.transform|chart.*cocycle",
+   "results": "0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict-transform chart maps and their overlap cocycle. Generic localization/gluing tools do not identify these quotient charts or comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of quotient rings induced comparison isomorphisms commute on iterated localization and satisfy cocycle",
+   "results": "8 hits: Submodule.toLocalizedQuotient'_mk, instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient, IsLocalization.Away.commutes, IsLocalization.Away.mvPolynomialQuotientEquiv.congr_simp, IsLocalization.map_comp_map, IsLocalization.Away.mvPolynomialQuotientEquiv, IsLocalization.map_map, IsLocalization.Away.map",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict-transform chart maps and their overlap cocycle. Generic localization/gluing tools do not identify these quotient charts or comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.map_comp",
+   "results": "1 hits: IsLocalization.map_comp",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict-transform chart maps and their overlap cocycle. Generic localization/gluing tools do not identify these quotient charts or comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transform blowup chart comparison maps commute with localization and satisfy the cocycle identity on triple chart overlaps",
+   "results": "8 hits: AlgebraicGeometry.Proj.SpecMap_awayMap_awayι, AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst, AlgebraicGeometry.Scheme.GlueData.glue_condition, AlgebraicGeometry.Scheme.Pullback.cocycle, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict-transform chart maps and their overlap cocycle. Generic localization/gluing tools do not identify these quotient charts or comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp_map|ringHom_ext|quotient.*[Ll]ocal|[Ll]ocal.*quotient",
+   "results": "24 hits: Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/Finiteness.lean; searched Mathlib/RingTheory/Localization",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict-transform chart maps and their overlap cocycle. Generic localization/gluing tools do not identify these quotient charts or comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transition isomorphisms between affine blowup charts descend modulo power torsion and their compositions agree on intersections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover_map_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap_glueDataObjι_assoc, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict-transform chart maps and their overlap cocycle. Generic localization/gluing tools do not identify these quotient charts or comparisons."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -80,5 +214,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-strict-transform-chart-cocycle",
+  "worker": "stage1",
+  "summary": "Q03: retained the current blueprint statement and expanded its proof into double-localization uniqueness, ordinary overlap transitions, arbitrary chart-localization torsion quotients, explicit quotient descent, comparison-generator compatibility, and the triple cocycle. Reused existing DAG nodes only. The tagged live Lean theorem identifies overlap ideals but does not state the localized map cocycle, so is not an exact attachment. Corrected two C4 gaps: base restriction cocycles are not chart-change cocycles, and localization-data is stated only for s in B, so it cannot alone justify localization at chart ratios. Repair of the 2026-10-21 08:00 UTC return (returned head 2c340fa21aa): rebased the retained split through the delivery tool onto the current fetched DAG and re-read every cited statement; all 25 retained citation quotes still match. Tightened step 1 to separate the canonical source and target identifications and to apply coefficient-localization data only to elements of B, with A handled through its structural map. This delivery supplies the split to the current live imported item; it does not assert side completion or perform promotion.",
+  "blueprint": "main-20261015 order 163, Proof: ordinary transitions and their cocycle are step 2; localization of the torsion quotient is step 3; unique descent is step 4; agreement with comparisons is steps 1 and 5; equality on triple refinements is step 6. All realize the unit’s clause that quotient charts commute with localization."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-f71d3a9a2",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-f71d3a9a2 (reviewer sub-agent of L); spot-checked: I read all six steps in full. The delivery is one commit: the item JSON plus the report, with no new nodes. The item's statement, stmt_deps and source are unchanged from the live imported item (main-20261015 order 163). Compared with the earlier head 2c340fa, only step 1 changed: the source and target identifications are now separate, and localization-data is applied only to s0,t0 in B, as that node requires, with elements of A going through f. This is a real repair, not a re-push. Every cited statement supplies what its step uses. Step 2 cites the Proj chart-ring cocycle for the change of chart index, which matches Stacks 01M4 (constructions.tex:955) with aX and a'X of degree 1. affine-blowup-restrict-cocycle is cited only for base localizations, which is right: in its current statement and in its blueprint_update it concerns base restriction only. Also checked: the base-change formula (C_a)_u = A[I/a]_{a'/a} tensor B, the tensor UP, the relation a'=au without cancellation, the step-3 extended-torsion argument at an arbitrary chart element c (localize-quotient 00CT), torsion-ideal transport and quotient descent in step 4, the generator check x/a -> (f(x)/f(a'))v_B^{-1} in step 5, and the descended cocycle in step 6. Edge cases (a=a', a=0, I=A, and A=k[x,y], I=(x,y), B=A/(y), where C_x=k[x,u]/(xu) has a zero overlap) gave no counterexample. No cycle; proof_deps equals the union of the step uses; every step is under 2000 characters; no SGA. Advisory only: step 3 proves inline a corrected version of lemma-nagata-power-torsion-localization, whose literal 'image' wording fails for N=k[a,s]/(a). No changes."
  }
 }
