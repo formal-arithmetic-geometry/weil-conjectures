@@ -19,11 +19,11 @@
  ],
  "proof": [
   {
-   "text": "For $T=X,Y$, the abelian sheaf category on the chosen small pro-étale site is closed symmetric monoidal Grothendieck abelian by [lem-weil-pbc-sheaf-tensor-closed], applied to $\\Ab$ with its usual tensor product. Its tensor is additive. The module-object theorem [lem-sfb-modobj-grothendieck] therefore makes $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ Grothendieck abelian. The termwise coproduct theorem [lem-kun-grothendieck-derived-coproducts] supplies all the ambient derived coproducts in the fixed universe, including the empty coproduct.",
+   "text": "For T = X,Y, the sheaf tensor/Grothendieck theorem [lem-weil-pbc-sheaf-tensor-closed] and module-object theorem [lem-sfb-modobj-grothendieck] provide the Grothendieck abelian module categories. Their small coproducts and K-injective resolutions give ambient coproducts of derived objects directly by [lem-grothendieck-derived-has-coproducts], including the empty coproduct. No chosen complex representatives are needed in this proof.",
    "uses": [
     "lem-weil-pbc-sheaf-tensor-closed",
     "lem-sfb-modobj-grothendieck",
-    "lem-kun-grothendieck-derived-coproducts"
+    "lem-grothendieck-derived-has-coproducts"
    ],
    "elementary": false,
    "source": {
@@ -32,10 +32,10 @@
    }
   },
   {
-   "text": "Coproducts in $\\mathcal A_T$ are exact: they are filtered colimits of finite direct sums, and filtered colimits are exact by the Grothendieck property established in Step 1. Consequently kernels, images and cokernels in a termwise sum of complexes are the sums of the corresponding kernels, images and cokernels. Thus $H^n(\\bigoplus_t C_t)=\\bigoplus_tH^n(C_t)$, naturally with the specified coprojections. The kernel/cokernel formulas of [def-kun-truncations] similarly identify $\\bigoplus_t\\tau_{\\geq a}C_t$ with $\\tau_{\\geq a}(\\bigoplus_t C_t)$ and identify the sum of the canonical truncation maps with the canonical truncation map of the sum. The termwise-derived-coproduct theorem makes these identities valid in $D_T$ for unbounded families.",
+   "text": "Exact coproducts in the Grothendieck abelian categories imply that the derived homology functors preserve these coproducts; the already proved source-library instance DerivedCategory.preservesColimitsOfShape_homologyFunctor implements this standard kernel/image/cokernel calculation. Hence a coproduct of objects in degrees at least a again lies in degrees at least a. For the good truncation [def-kun-truncations], construct an inverse to its coproduct comparison using the universal map K → τ≥a K: the sum of these maps factors uniquely through τ≥a of the sum, since the target sum lies in degrees at least a. Naturality and the two universal properties prove the inverse identities. These are the proved private helpers coproduct_isGE and truncGE_preservesCoproducts, following the identical generic helpers of EllAdicProperLocalizingCoproducts.",
    "uses": [
     "def-kun-truncations",
-    "lem-kun-grothendieck-derived-coproducts"
+    "lem-grothendieck-derived-has-coproducts"
    ],
    "elementary": true,
    "source": {
@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "Choose $c$ from [lem-sfb-qcqs-proper-hull-tail-bound]. Fix an output degree $n$ and set $a=n-c$. For every $K\\in\\mathcal L_X$, use the canonical triangle\n$$\\tau_{<a}K\\longrightarrow K\\xrightarrow{\\pi_K}\\tau_{\\geq a}K\\longrightarrow(\\tau_{<a}K)[1]$$\nof the standard t-structure. The actual total right derived functor is triangulated by [lem-pc-right-derived-functor-triangulated]. In its image triangle the tail estimate kills $H^n$ AND $H^{n+1}$ of the first term, since both degrees are at least $a+c=n$. Exactness of the cohomology sequence therefore gives an isomorphism $H^n(Rf_*\\pi_K)$. This applies to each $L_t$ and to $K=\\bigoplus_tL_t$, because the defining ambient localizing closure contains that sum. It does not require $\\tau_{\\geq a}K$ or $\\tau_{<a}K$ to belong to the hull.",
+   "text": "Choose $c$ from [lem-sfb-qcqs-proper-hull-tail-bound]. Fix an output degree $n$ and set $a=n-c$. For every $K\\in\\mathcal L_X$, use the canonical triangle\n$$\\tau_{<a}K\\longrightarrow K\\xrightarrow{\\pi_K}\\tau_{\\geq a}K\\longrightarrow(\\tau_{<a}K)[1]$$\nof the standard t-structure. The actual total right derived functor is triangulated by [lem-pc-right-derived-functor-triangulated]. In its image triangle the tail estimate kills $H^n$ AND $H^{n+1}$ of the first term, since both degrees are at least $a+c=n$. Exactness of the cohomology sequence therefore gives an isomorphism $H^n(Rf_*\\pi_K)$. This applies to each $L_t$ and to $K=\\bigoplus_tL_t$, because the defining ambient localizing closure contains that sum. It does not require $\\tau_{\\geq a}K$ or $\\tau_{<a}K$ to belong to the hull. In Lean use triangleLEGE (a - 1) a, matching the tail theorem literally. To apply the latter to the fixed-size localizing hull of the item, restrict each larger-universe localizing property to smaller sums: lift the indexing type with ULift and transport closure along its discrete equivalence. Thus the smaller-sum hull is contained in the larger-sum hull used by the tail theorem. Closure of the smaller hull under its own sums follows directly from its intersection definition.",
    "uses": [
     "lem-sfb-qcqs-proper-hull-tail-bound",
     "def-sbc-standard-tstructure-derived-category",
@@ -98,7 +98,7 @@
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
-  "lem-kun-grothendieck-derived-coproducts",
+  "lem-grothendieck-derived-has-coproducts",
   "lem-pc-right-derived-functor-triangulated",
   "lem-pc-separated-quasi-separated",
   "lem-sf-derived-homology-long-exact",
@@ -112,7 +112,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
-  "place": "(2), first paragraph. Explicit uniform-tail/continuity argument; the all-coefficient qcqs geometric tail estimate is isolated as its own unsplit statement."
+  "place": "(2), first paragraph. Q6 implements the uniform-tail/continuity argument in Lean, using the existing generic derived coproduct theorem and the private truncation helpers from the field-case proof. The geometric tail bound remains the existing stated dependency; no new holes or statements are introduced."
  },
  "mathlib_searches": [
   {
@@ -265,7 +265,6 @@
  "tool_uses": [
   "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-modobj-grothendieck",
-  "lem-kun-grothendieck-derived-coproducts",
   "lem-pc-separated-quasi-separated",
   "lem-sfb-adic-proper-bounded-below-coproducts",
   "lem-pc-right-derived-functor-triangulated",
@@ -297,5 +296,15 @@
   "group": "Q60",
   "result": "pass",
   "note": "Only the item lean record and the new module QcqsProperLocalizingCoproducts.lean are delivered; the statement is byte-identical to live and lean.statement is verbatim in the file. The hypotheses match the node through the recorded declarations: IsLocalizingAdmissibleCoefficient, the module-object DerivedCategory, constantModelBoundedConstructible ⊓ finiteTorAmplitude (= ConstantModelConstructibleFiniteTor), localizingClosureOfSize.{u+1}, CompactSpace+QuasiSeparatedSpace S, and IsProper for q and f. The conclusion PreservesColimit (Discrete.functor L) (moduleObjectDerivedPushforward Λ f) is the canonical comparison being invertible, since both ambient coproducts exist, and matches the landed bounded-below dependency. No stronger hypotheses and no forced universe equality. The empty family, zero ring and identity-map cases are covered. No duplicate: the field-base EllAdic version, the bounded-below version and the Noetherian étale versions are narrower. Proof is sorry only; source place, blueprint tag and the 6-step proof docstring are present. nt_compile --json clean in 25.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T111527-L-236289",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
