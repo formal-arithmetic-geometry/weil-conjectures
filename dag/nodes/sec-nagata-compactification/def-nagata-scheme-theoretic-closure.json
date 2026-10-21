@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-nagata-scheme-theoretic-closure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Scheme-theoretic closure",
@@ -13,7 +13,10 @@
   "place": "node def-nagata-scheme-theoretic-closure, order 67"
  },
  "stmt_deps": [
-  "def-nagata-scheme-theoretic-image"
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
  ],
  "proof": [],
  "proof_deps": [],
@@ -26,10 +29,63 @@
     "Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme:662 (abbrev)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev image|def imageι|isClosedImmersion_imageι|def ker|ker_apply",
+   "results": "Search in AlgebraicGeometry/IdealSheaf: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean. Read local hits: Hom.image at Subscheme.lean:662, Hom.imageι at :665, Hom.ker at Basic.lean:693, Hom.ker_apply at :702, closed-immersion instance in Morphisms/ClosedImmersion.lean:94.",
+   "date": "2026-10-21",
+   "verdict": "related results; exact match confirmed by other recorded searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme theoretic image of a scheme morphism as a closed subscheme",
+   "results": "AlgebraicGeometry.Scheme.Hom.image and AlgebraicGeometry.Scheme.Hom.imageι in Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme; source read at lines 662 and 665: image is f.ker.subscheme and imageι is f.ker.subschemeι.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.image",
+   "results": "AlgebraicGeometry.Scheme.Hom.image and AlgebraicGeometry.Scheme.Hom.imageι in Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme; source read at lines 662 and 665: image is f.ker.subscheme and imageι is f.ker.subschemeι.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme theoretic closure of an immersion is the scheme theoretic image closed subscheme",
+   "results": "Related immersion API: AlgebraicGeometry.IsImmersion.instToImage and AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage. This search did not return Hom.image; exact definition confirmed by Loogle, LeanSearch and local source.",
+   "date": "2026-10-21",
+   "verdict": "related results; exact match confirmed by other recorded searches"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.image|imageι|IsClosedImmersion.*subschemeι",
+   "results": "Search in AlgebraicGeometry/IdealSheaf/Subscheme.lean: 21, 662, 665, 695, 702. Read local hits: Hom.image at Subscheme.lean:662, Hom.imageι at :665, Hom.ker at Basic.lean:693, Hom.ker_apply at :702, closed-immersion instance in Morphisms/ClosedImmersion.lean:94.",
+   "date": "2026-10-21",
+   "verdict": "related results; exact match confirmed by other recorded searches"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Hom.image|instance.*subscheme|IsClosedImmersion.*subschemeι|subschemeι.*IsClosedImmersion",
+   "results": "Search in AlgebraicGeometry/IdealSheaf: Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean. Read local hits: Hom.image at Subscheme.lean:662, Hom.imageι at :665, Hom.ker at Basic.lean:693, Hom.ker_apply at :702, closed-immersion instance in Morphisms/ClosedImmersion.lean:94.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.*subschemeι|IsClosedImmersion.*imageι|instIsClosedImmersionSubschemeι|instIsClosedImmersionImageι",
+   "results": "Search in AlgebraicGeometry: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean. Read local hits: Hom.image at Subscheme.lean:662, Hom.imageι at :665, Hom.ker at Basic.lean:693, Hom.ker_apply at :702, closed-immersion instance in Morphisms/ClosedImmersion.lean:94.",
+   "date": "2026-10-21",
+   "verdict": "related results; exact match confirmed by other recorded searches"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.image",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "how": "specializes in one line: for the given quasi-compact quasi-separated immersion a, take a.image with inclusion a.imageι. Hom.image at Subscheme.lean:662 is a.ker.subscheme; Hom.imageι at :665 is a.ker.subschemeι. The IsClosedImmersion instance in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:94-95 applies with I := a.ker and supplies the closed-subscheme clause. Both definitions are available for arbitrary scheme morphisms and require no extra hypotheses. Hom.ker in Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:693-694 is the largest quasi-coherent ideal in the sheaf-map kernel; Hom.ker_apply at :702-703 identifies its affine sections with the actual kernel under the given quasi-compactness hypothesis. This is exactly SIm(a) of the current blueprint."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -62,5 +118,20 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-scheme-theoretic-closure",
+  "worker": "stage1",
+  "summary": "Confirmed the unchanged definition against the main-20261015 blueprint and Stacks Tags 01R7 and 01R8. Recorded the exact Mathlib image construction and inclusion, including the closed-immersion instance and kernel agreement under quasi-compactness. Added existing definition dependencies for immersion, quasi-compactness and quasi-separatedness; no new nodes or proof obligations.",
+  "blueprint": "The definition in main-20261015/sec-nagata-compactification/sk-lem-nagata-sketch-closure/def-nagata-scheme-theoretic-closure.md (order 75) is realized by Scheme.Hom.image and Scheme.Hom.imageι. It supplies the closure object used in the first sentence of the current unit sk-lem-nagata-sketch-closure; the open-immersion and density theorems are separate nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-3aead0763",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-3aead0763 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes and no proof. Its statement matches master order 67 and main-20261015 order 75 word for word, and the node has no blueprint_update. The delivery changes the node from imported to a Mathlib leaf matched to AlgebraicGeometry.Scheme.Hom.image with imageι. I read the Mathlib source: Subscheme.lean:662 and :665 define image := f.ker.subscheme and imageι := f.ker.subschemeι for any morphism. Basic.lean:693-694 defines Hom.ker as the largest quasi-coherent ideal in the componentwise kernel, and Hom.ker_apply at :702-703 gives the actual kernel when the map is quasi-compact. ClosedImmersion.lean:94-95 provides the IsClosedImmersion instance for I.subschemeι. Together these match the current blueprint SIm (kernel ideal) restricted to a quasi-compact immersion. This is a one-line specialization, not a comparison theorem. The three added stmt_deps are correct notion carriers and are themselves Mathlib leaves: def-weil-closed-immersion (it defines immersion), def-weil-finite-type-morphism (quasi-compact) and def-weil-quasi-separated-morphism. The parent def-nagata-scheme-theoretic-image is still imported, and its old 'largest closed subscheme' wording differs from its update. For a quasi-compact a the two agree (Stacks 01R8), so the item is unaffected. Searches cover all three kinds: LeanSearch, Loogle/LeanFinder and grep. Small cases checked: empty T, the identity, Spec(A/I)→Spec A with nilpotents kept, and the open D(x) in Spec k[x,y]/(xy,y^2), where the closure is Spec k[x] and the embedded point is removed. No duplicate definition exists in the DAG; the closure-minimal node and the Chow nodes are theorems about this object. There is no SGA citation, no re-split note, and the item is not on the dropped list. Minor, not faults: source still names master order 67 (same text), and the report lists citations.json and searches.jsonl, which are not in the commit."
  }
 }
