@@ -10,10 +10,13 @@ public import Sheaf.Paper.DerivedCompleteOnSlices
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.DerivedNakayama
-import Sheaf.Paper.NormalizedDVRTower
+import all Sheaf.Paper.NormalizedDVREffectivity
+import all Sheaf.Paper.CoefficientSequenceRoosModel
+import Sheaf.Paper.CoefficientConstantTowerRoos
+import all Sheaf.Paper.NormalizedDVRKFlatReductionModel
+import Sheaf.Paper.NormalizedDVRKFlatTransition
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.CategoryTheory.AdjointEquivalenceConjugation
 
 /-!
 # Normalized reconstruction and its adjunction calculus
@@ -38,9 +41,70 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 universe t u tX tY tZ v₁ v₂ v₃ v₄ v₅ v₆ u₁ u₂ u₃ u₄ u₅ u₆
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor AlgebraicGeometry
 namespace WeilConjectures
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+  normalizedDVRResCompletedComp normalizedDVRKFlatComparison
+attribute [local instance 4000] normalizedDVRKFlatReductionModelLocal1
+attribute [local instance] normalizedDVRKFlatReductionModelLocal2
+  normalizedDVRKFlatReductionModelLocal3
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
+
+private theorem reconstructionProjectionTransition
+    (D : FiniteFieldDatum.{0}) (hlp : l ≠ D.p)
+    (N : coefficientSequenceDerived l E W) (n : ℕ) :
+    (coefficientSequenceProjection l E W (n + 1)).app N ≫
+      (normalizedDVRResCompleted l E W D hlp (n + 1)).map
+        ((coefficientSequenceDerivedTransition l E W n.le_succ).app N) ≫
+      (normalizedDVRResCompletedComp l E W D hlp n.le_succ).hom.app
+        ((coefficientSequenceDerivedEvaluation l E W n).obj N) =
+      (coefficientSequenceProjection l E W n).app N := by
+  obtain ⟨hp, δ, hδ⟩ := coefficientConstantTower_roos l E W D hlp
+    ((coefficientSequenceDerivedRestriction l E W).obj N)
+  let := hp
+  have h := adjacentRoosProjection _ _ _ δ hδ n
+  simp only [Pi.lift_π_assoc, Pi.lift_π] at h
+  change ((coefficientConstantTowerProjection l E W (n + 1)).app _ ≫
+    (coefficientRestrictedEvaluationIso l E W (n + 1)).hom.app N) ≫ _ ≫ _ =
+    (coefficientConstantTowerProjection l E W n).app _ ≫
+      (coefficientRestrictedEvaluationIso l E W n).hom.app N
+  rw [Category.assoc, ← derivedRestrictedTransition l E W D hlp N n.le_succ]
+  rw [← Category.assoc, h]
+
+private theorem reconstructionFiniteTransition
+    (D : FiniteFieldDatum.{0}) (hlp : l ≠ D.p)
+    (S : CoefficientDerivedSystemCalculus l E W)
+    (K : DerivedCategory (scalarReductionSource l E W)) (n : ℕ) :
+    (S.reductionEvaluation (n + 1)).inv.app K ≫
+      (coefficientSequenceDerivedTransition l E W n.le_succ).app (S.reduction.obj K) =
+      normalizedDVRReductionTransition l E W D hlp n.le_succ K ≫
+        (normalizedDVRRes l E W n.le_succ).map ((S.reductionEvaluation n).inv.app K) := by
+  have h := adjointTransition (coefficientFiniteAdjunction l E W (n + 1))
+    (coefficientFiniteAdjunction l E W n) (normalizedDVRRes l E W n.le_succ)
+    (normalizedDVRResCompletedComp l E W D hlp n.le_succ)
+    (S.adjunction.unit.app K ≫
+      (coefficientSequenceProjection l E W (n + 1)).app (S.reduction.obj K))
+    (S.adjunction.unit.app K ≫
+      (coefficientSequenceProjection l E W n).app (S.reduction.obj K))
+    ((coefficientSequenceDerivedTransition l E W n.le_succ).app (S.reduction.obj K)) (by
+      have ht := reconstructionProjectionTransition l E W D hlp (S.reduction.obj K) n
+      change (coefficientSequenceProjection l E W (n + 1)).app (S.reduction.obj K) ≫
+        (coefficientFiniteDerivedRestriction l E W (n + 1)).map
+          ((coefficientSequenceDerivedTransition l E W n.le_succ).app
+            (S.reduction.obj K)) ≫
+        (normalizedDVRResCompletedComp l E W D hlp n.le_succ).hom.app _ = _ at ht
+      simpa only [Category.assoc] using congrArg
+        (fun f ↦ S.adjunction.unit.app K ≫ f) ht)
+  have ha (j : ℕ) : ((coefficientFiniteAdjunction l E W j).homEquiv _ _).symm
+      (S.adjunction.unit.app K ≫
+        (coefficientSequenceProjection l E W j).app (S.reduction.obj K)) =
+      (S.reductionEvaluation j).inv.app K := by
+    apply ((coefficientFiniteAdjunction l E W j).homEquiv _ _).injective
+    rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+    exact S.unit_projection K j
+  rw [ha, ha] at h
+  exact h
 
 /-- Reconstruction uses the actual evaluation-calculus adjunction.
 Source: the sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence
@@ -61,7 +125,136 @@ theorem purNormalizedReconstruction
         IsIso (S.adjunction.counit.app N)) ∧
     (∀ (K : DerivedCategory (scalarReductionSource l E W)),
       IntegralOnSlice.IsComplete l E W none K → IsIso (S.adjunction.unit.app K)) := by
-  sorry
+  have hc (N : coefficientSequenceDerived l E W)
+      (hN : IsNormalizedCoefficientSequence l E W N) :
+      IntegralOnSlice.IsComplete l E W none ((coefficientSequenceLimit l E W).obj N) ∧
+        IsIso (S.adjunction.counit.app N) := by
+    obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
+    let : Fact p.Prime := ⟨hp⟩
+    let D : FiniteFieldDatum.{0} := {
+      p := p, a := 1, q := p, prime := hp, exponent_pos := le_refl 1,
+      cardinality_eq := (pow_one p).symm, k₀ := ZMod p,
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+    have hlp : l ≠ D.p := by change l ≠ p; omega
+    obtain ⟨T, e, hprod, δ, hδ⟩ := coefficientSequence_roosModel l E W D hlp N hN
+    let := hprod
+    have heff := normalizedDVRTower_effectivity l E W D hlp T _ _ δ hδ
+    refine ⟨⟨D, hlp, heff.2.2⟩, ?_⟩
+    apply (S.isIso_iff_evaluations _).2
+    intro n
+    let adj := coefficientFiniteAdjunction l E W n
+    let q := (adj.homEquiv _ _).symm ((coefficientSequenceProjection l E W n).app N)
+    have hi := normalizedDVRRoos_finite_reduction l E W D hlp T _ _ δ hδ n adj
+    have heq : (adj.homEquiv _ _).symm
+        ((Pi.lift (fun k : ℕ ↦ (coefficientSequenceProjection l E W k).app N ≫
+          (normalizedDVRResCompleted l E W D hlp k).map (e k).inv ≫
+          (T.evaluationIso k).inv)) ≫ Pi.π _ n ≫ (T.evaluationIso n).hom) =
+        q ≫ (e n).inv := by
+      simp only [Pi.lift_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      exact adj.homEquiv_naturality_right_symm _ _
+    have : IsIso (q ≫ (e n).inv) := by rw [← heq]; exact hi
+    have : IsIso q := IsIso.of_isIso_comp_right q (e n).inv
+    have hq : (S.reductionEvaluation n).inv.app ((coefficientSequenceLimit l E W).obj N) ≫
+        (coefficientSequenceDerivedEvaluation l E W n).map (S.adjunction.counit.app N) =
+        q := by
+      apply (adj.homEquiv _ _).injective
+      exact (S.counit_projection N n).trans
+        ((adj.homEquiv _ _).apply_symm_apply _).symm
+    have : IsIso ((S.reductionEvaluation n).inv.app
+        ((coefficientSequenceLimit l E W).obj N) ≫
+        (coefficientSequenceDerivedEvaluation l E W n).map (S.adjunction.counit.app N)) := by
+      rw [hq]
+      infer_instance
+    exact IsIso.of_isIso_comp_left
+      ((S.reductionEvaluation n).inv.app ((coefficientSequenceLimit l E W).obj N)) _
+  refine ⟨hc, ?_⟩
+  intro K hK
+  obtain ⟨D, hlp, P, G, q, hq, eG, hp, δ, hδ⟩ := hK
+  let := hp
+  have : QuasiIso q := hq.1
+  let e : DerivedCategory.Q.obj P ≅ K := asIso (DerivedCategory.Q.map q) ≪≫ eG
+  let N := S.reduction.obj K
+  let X := (coefficientSequenceDerivedRestriction l E W).obj N
+  obtain ⟨hpX, δX, hδX⟩ := coefficientConstantTower_roos l E W D hlp X
+  let := hpX
+  have hi (n : ℕ) : IsIso (normalizedDVRKFlatComparison l E W n P) :=
+    representativeComparison_isIso l E W n P hq.2
+  let a (n : ℕ) :=
+    (scalarReductionDerivedRestriction l E W n).mapIso
+        ((scalarReductionDerivedExtension l E W n).mapIso e.symm) ≪≫
+      @asIso _ _ _ _ (normalizedDVRKFlatComparison l E W n P) (hi n)
+  let b (n : ℕ) := (coefficientRestrictedEvaluationIso l E W n).app N ≪≫
+    (scalarReductionDerivedRestriction l E W n).mapIso ((S.reductionEvaluation n).app K)
+  let d (n : ℕ) := b n ≪≫ a n
+  have ht (n : ℕ) : (normalizedDVRTowerTransition l E W D hlp n.le_succ).app X ≫
+      (d n).hom = (d (n + 1)).hom ≫
+        (integralReductionTower l E W D hlp P).map (homOfLE n.le_succ).op := by
+    have hs := restrictionIsoSquare
+      (scalarReductionDerivedRestriction l E W (n + 1))
+      (scalarReductionDerivedRestriction l E W n) (normalizedDVRRes l E W n.le_succ)
+      (normalizedDVRResCompletedComp l E W D hlp n.le_succ)
+      ((S.reductionEvaluation (n + 1)).app K).symm
+      ((S.reductionEvaluation n).app K).symm
+      ((coefficientSequenceDerivedTransition l E W n.le_succ).app N)
+      (normalizedDVRReductionTransition l E W D hlp n.le_succ K)
+      (reconstructionFiniteTransition l E W D hlp S K n)
+    have hk := normalizedDVR_kflat_transition l E W D hlp P hq.2 K e n
+      (normalizedDVRIntegralAdjunction l E W (n + 1))
+      (normalizedDVRIntegralAdjunction l E W n)
+      (normalizedDVRKFlatUnit l E W D hlp (n + 1) P hq.2)
+      (normalizedDVRKFlatUnit l E W D hlp n P hq.2)
+    dsimp only [d, b, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    rw [← Category.assoc, derivedRestrictedTransition l E W D hlp N n.le_succ]
+    simp only [Category.assoc]
+    dsimp only [Functor.mapIso_inv, Iso.symm_inv, Iso.app_hom] at hs
+    have hsr :
+        (normalizedDVRResCompleted l E W D hlp (n + 1)).map
+            ((coefficientSequenceDerivedTransition l E W n.le_succ).app N) ≫
+          (normalizedDVRResCompletedComp l E W D hlp n.le_succ).hom.app
+            ((coefficientSequenceDerivedEvaluation l E W n).obj N) ≫
+          (scalarReductionDerivedRestriction l E W n).map
+            ((S.reductionEvaluation n).hom.app K) =
+        (scalarReductionDerivedRestriction l E W (n + 1)).map
+            ((S.reductionEvaluation (n + 1)).hom.app K) ≫
+          (scalarReductionDerivedRestriction l E W (n + 1)).map
+            (normalizedDVRReductionTransition l E W D hlp n.le_succ K) ≫
+          (normalizedDVRResCompletedComp l E W D hlp n.le_succ).hom.app
+            ((scalarReductionDerivedExtension l E W n).obj K) := hs
+    rw [reassoc_of% hsr]
+    dsimp only [a, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+    simpa only [integralReductionTower, Functor.ofOpSequence_map_homOfLE_succ,
+      normalizedDVRReductionTransition, X, N, normalizedDVRTowerEvaluation,
+      coefficientConstantTowerEvaluation, Category.assoc] using congrArg
+      (fun f ↦ (coefficientRestrictedEvaluationIso l E W (n + 1)).hom.app N ≫
+        (scalarReductionDerivedRestriction l E W (n + 1)).map
+          ((S.reductionEvaluation (n + 1)).hom.app K) ≫ f) hk
+  obtain ⟨hpP, δP, hδP⟩ := roosTransport
+    (fun n ↦ (normalizedDVRTowerTransition l E W D hlp n.le_succ).app X)
+    (fun n ↦ (integralReductionTower l E W D hlp P).map (homOfLE n.le_succ).op)
+    ((coefficientSequenceLimit l E W).obj N) _ δX hδX d
+    (fun n ↦ (coefficientConstantTowerProjection l E W n).app X ≫ (d n).hom) ht
+    (fun n ↦ by simp only [Pi.lift_π_assoc])
+  let := hpP
+  obtain ⟨φ⟩ := (exists_isDerivedLimit_and_iso
+    (fun n ↦ (integralReductionTower l E W D hlp P).obj (Opposite.op n))
+    (fun n ↦ (integralReductionTower l E W D hlp P).map (homOfLE n.le_succ).op)).2
+    K ((coefficientSequenceLimit l E W).obj N) ⟨_, δ, hδ⟩ ⟨_, δP, hδP⟩
+  have : IsIso (S.adjunction.counit.app N) := (hc N (S.reduction_normalized K)).2
+  have : IsIso (S.adjunction.unit.app ((coefficientSequenceLimit l E W).obj N) ≫
+      (coefficientSequenceLimit l E W).map (S.adjunction.counit.app N)) := by
+    rw [S.adjunction.right_triangle_components]
+    exact CategoryTheory.IsIso.id _
+  have : IsIso (S.adjunction.unit.app ((coefficientSequenceLimit l E W).obj N)) :=
+    IsIso.of_isIso_comp_right _ ((coefficientSequenceLimit l E W).map
+      (S.adjunction.counit.app N))
+  have : IsIso (S.adjunction.unit.app K ≫
+      (S.reduction ⋙ coefficientSequenceLimit l E W).map φ.hom) := by
+    rw [← S.adjunction.unit.naturality φ.hom]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((S.reduction ⋙ coefficientSequenceLimit l E W).map φ.hom)
 
 /-- The normalized replete subcategory selected by Q. Source: the same proof paragraph
 (blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
@@ -126,7 +319,44 @@ theorem purRestrictedUnitCounit :
       S.adjunction.unit.app K.obj) ∧
     (∀ N, ((purRestrictedAdjunction l E W hl S Q).counit.app N).hom =
       S.adjunction.counit.app N.obj) := by
-  sorry
+  have hu (K) : ((purRestrictedAdjunction l E W hl S Q).unit.app K).hom =
+      S.adjunction.unit.app K.obj := by
+    change (purCompleteProperty l E W S Q).ι.map
+      ((purRestrictedAdjunction l E W hl S Q).unit.app K) = _
+    unfold purRestrictedAdjunction
+    rw [Adjunction.map_restrictFullyFaithful_unit_app]
+    change S.adjunction.unit.app K.obj ≫
+      (coefficientSequenceLimit l E W).map (𝟙 _) ≫ 𝟙 _ = _
+    rw [CategoryTheory.Functor.map_id]
+    exact Category.comp_id _
+  have hc (N) : ((purRestrictedAdjunction l E W hl S Q).counit.app N).hom =
+      S.adjunction.counit.app N.obj := by
+    change (purNormalizedProperty l E W Q).ι.map
+      ((purRestrictedAdjunction l E W hl S Q).counit.app N) = _
+    unfold purRestrictedAdjunction
+    rw [Adjunction.map_restrictFullyFaithful_counit_app]
+    change 𝟙 _ ≫ S.reduction.map (𝟙 _) ≫ S.adjunction.counit.app N.obj = _
+    rw [CategoryTheory.Functor.map_id]
+    simp only [Category.id_comp]
+  refine ⟨?_, ?_, hu, hc⟩
+  · intro K
+    have h : IsIso (S.adjunction.unit.app K.obj) :=
+      (purNormalizedReconstruction l E W hl S).2 K.obj K.property.1
+    have hi : IsIso ((purCompleteProperty l E W S Q).ι.map
+        ((purRestrictedAdjunction l E W hl S Q).unit.app K)) := by
+      change IsIso (((purRestrictedAdjunction l E W hl S Q).unit.app K).hom)
+      rw [hu]
+      infer_instance
+    exact isIso_of_reflects_iso _ (purCompleteProperty l E W S Q).ι
+  · intro N
+    have h : IsIso (S.adjunction.counit.app N.obj) :=
+      ((purNormalizedReconstruction l E W hl S).1 N.obj N.property.1).2
+    have hi : IsIso ((purNormalizedProperty l E W Q).ι.map
+        ((purRestrictedAdjunction l E W hl S Q).counit.app N)) := by
+      change IsIso (((purRestrictedAdjunction l E W hl S Q).counit.app N).hom)
+      rw [hc]
+      infer_instance
+    exact isIso_of_reflects_iso _ (purNormalizedProperty l E W Q).ι
 
 /-- The restricted adjoint equivalence, retaining the actual unit and counit.
 Source: the same proof paragraph
@@ -209,6 +439,33 @@ structure Calculus (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ ≌ N₃
       (compositionComparison eX eY eZ F H).hom ≫
         realizedTransformation eX eZ (Functor.whiskerRight α H ≫ Functor.whiskerLeft F' β)
 
+private theorem calculus (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ ≌ N₃) :
+    Calculus eX eY eZ := by
+  constructor
+  · intro F G adj K
+    simp [realizedAdjunction, Functor.map_comp, Category.assoc]
+  · intro F G adj P N a
+    simpa [realized, realizedAdjunction, realizationComparison, Equivalence.invFunIdAssoc,
+      Functor.map_comp, Category.assoc] using
+      AdjointEquivalenceConjugation.conjugation_transpose eX eY adj P N a
+  · intro F H K
+    simp [compositionComparison]
+  · intro F F' H H' α β
+    ext K
+    simp only [realizedTransformation, compositionComparison, realized,
+      NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, Functor.comp_map,
+      Functor.comp_obj, isoWhiskerLeft_hom, isoWhiskerRight_hom, Iso.trans_hom,
+      Functor.leftUnitor_hom_app]
+    dsimp only [Functor.id_obj, NatTrans.id_app]
+    simp only [Category.comp_id, ← CategoryTheory.Functor.map_comp]
+    apply congrArg eZ.inverse.map
+    rw [← β.naturality, ← H.map_comp_assoc]
+    have hn := eY.counit.naturality (α.app (eX.functor.obj K))
+    dsimp only [Functor.id_map, Functor.comp_map] at hn
+    dsimp only [Equivalence.counit] at hn
+    rw [hn, H.map_comp, Category.assoc]
+
+
 end PurReconstruction
 
 /-- Reconstruction and adjunction calculus, including arbitrary replete restrictions.
@@ -241,6 +498,6 @@ theorem purNormalizedReconstructionAdjunctionCalculus
       (purReconstructionEquivalence l E X hX SX QX)
       (purReconstructionEquivalence l E Y hY SY QY)
       (purReconstructionEquivalence l E Z hZ SZ QZ) := by
-  sorry
+  exact PurReconstruction.calculus _ _ _
 
 end WeilConjectures

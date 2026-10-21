@@ -19,98 +19,94 @@
  ],
  "proof": [
   {
-   "text": "Choose the single flat-term K-flat representative $Q\\to P$ supplied by [lem-coef-derived-system-evaluation-calculus]. Its strict quotient system represents $\\mathcal R_WP$. By [lem-pur-kflat-change-of-rings], $Q\\otimes_{\\widehat R_W}B_m$ is K-flat over $B_m$; hence [lem-pur-derived-change-of-rings] computes its next derived reduction by ordinary tensor. The adjoint of the actual quotient transition is the balancing isomorphism\n$$(Q\\otimes_{\\widehat R_W}B_m)\\otimes_{B_m}B_n\\longrightarrow Q\\otimes_{\\widehat R_W}B_n,\\quad (x\\otimes b)\\otimes a\\longmapsto x\\otimes q_{m,n}(b)a.$$\nIts inverse is $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. Both composites are identities by balancing, and these formulas commute with differentials and restrictions. For three indices both composites multiply the two quotient scalars in the same order. Thus these are the adjoints of the specified transitions, with their cocycle, so $\\mathcal R_WP$ is normalized as defined in [def-coef-normalized-dvr-tower].",
+   "text": "Reduction is normalized by the reduction_normalized field of the specified evaluation calculus. No reconstruction or boundedness hypothesis is added.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "def-coef-normalized-dvr-tower"
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and Lemma 3.5.7; Roos comparison for unbounded normalized systems."
+   }
+  },
+  {
+   "text": "Choose an auxiliary finite-field datum of characteristic different from l. Apply coefficientSequence_roosModel to N and normalizedDVRTower_effectivity to its canonical Roos triangle. This proves completeness of the actual total limit. The finite-reduction theorem, valid for the specified finite adjunction, identifies the adjuncts of its projections as isomorphisms. The counit_projection equation and joint conservative evaluations therefore make the actual system counit invertible.",
+   "uses": [
+    "lem-coef-sequence-roos-model",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+    "place": "Definition 3.5.2 and Lemma 3.5.7; Roos comparison for unbounded normalized systems."
    }
   },
   {
-   "text": "For normalized $N\\in D(\\mathscr S_W)$, its restriction $U_WN$ is the coherent underlying $\\widehat R_W$-tower required by [def-coef-normalized-dvr-tower]: the coherence is supplied by the strict system itself. Its levels and transition adjoints are exactly the ones in that definition. By [lem-coef-derived-system-evaluation-calculus], its total limit is $M=\\mathcal L_WN$. Apply [lem-coef-normalized-dvr-effectivity] to this tower. It says that $M$ is derived complete and that, for each $n\\geq1$, the scalar-extension adjunct $c_n:M\\otimes^L_{\\widehat R_W}B_n\\to N_n$ of the specified total-limit projection is an isomorphism. This is its canonical counit comparison, rather than an arbitrarily chosen finite-level isomorphism. The lemma imposes no boundedness or constructibility condition.",
+   "text": "For any strict system, its restricted tower has the canonical Roos triangle. The zero composition of consecutive arrows in that triangle proves compatibility of its total-limit projections with successor transitions. Transport through the restricted-evaluation comparison. Precompose by the reconstruction unit and use unit_projection. Taking finite scalar-extension adjoints identifies the transitions of reduction(K), under reductionEvaluation, with normalizedDVRReductionTransition.",
    "uses": [
-    "def-coef-normalized-dvr-tower",
+    "lem-coef-constant-tower-roos",
+    "lem-coef-sequence-roos-model",
     "lem-coef-derived-system-evaluation-calculus",
     "lem-coef-normalized-dvr-effectivity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+    "place": "Definition 3.5.2 and Lemma 3.5.7; Roos comparison for unbounded normalized systems."
    }
   },
   {
-   "text": "The actual counit $e_N$ is already a morphism in $D(\\mathscr S_W)$, by [lem-coef-derived-system-evaluation-calculus]. The same statement identifies its $n$th evaluation with the scalar-extension adjunct of the total-limit projection, hence with $c_n$ from Step 2, for the specified adjunction. Every such evaluation is invertible. The joint detection of isomorphisms by derived evaluations, asserted in that node, therefore makes $e_N$ itself invertible. This establishes invertibility in the derived strict-system category without attempting to lift an arbitrary compatible family of level maps.",
+   "text": "Unpack derived completeness of K into its K-flat resolution q:P→G, representative isomorphism and canonical quotient Roos triangle. The invertible K-flat scalar comparison identifies the restricted finite reductions of K with the localized strict quotients of P. The previous transition identity and normalizedDVR_kflat_transition make these identifications commute with successive transitions. Transport the canonical total-limit Roos triangle along their product. Thus K and L R K are derived limits of the same strict quotient tower.",
    "uses": [
+    "lem-coef-normalized-dvr-kflat-transition",
+    "lem-coef-normalized-dvr-kflat-reduction-model",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-constant-tower-roos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and Lemma 3.5.7; Roos comparison for unbounded normalized systems."
+   }
+  },
+  {
+   "text": "Uniqueness up to isomorphism of the objects of Roos triangles gives an isomorphism φ:K≅L R K. It need not be the actual adjunction unit. Since e_(RK) is invertible, the right triangle identity makes u_(LRK) invertible. Naturality at φ gives φ≫u_(LRK)=u_K≫LR(φ); cancellation of the two isomorphisms makes the actual u_K invertible. This avoids identifying maps into a homotopy limit by their projections.",
+   "uses": [
+    "lem-weil-derived-limit-existence",
     "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+    "place": "Definition 3.5.2 and Lemma 3.5.7; Roos comparison for unbounded normalized systems."
    }
   },
   {
-   "text": "The coefficient hypotheses needed to apply [lem-pur-roos-intrinsic-completeness-equivalence] hold for $A=R$, $t=\\varpi$, $T=W$. Indeed [lem-weil-l-adic-extension-integers-dvr] says that $R$ is a principal ideal domain and $\\varpi\\ne0$, so every ideal is finitely generated and multiplication by $\\varpi^n$ is injective. By [lem-weil-valued-dvr-finite-quotients], all $R/(\\varpi^n)$ are finite; in particular $R/(\\varpi)$ is torsion as an additive group. The exact sequence $0\\to R\\xrightarrow{\\varpi^n}R\\to R/(\\varpi^n)\\to0$ represents each quotient by a bounded complex of finite free modules, hence makes it perfect by [def-pc-perfect-ring-complex]. These verify precisely the Noetherian, finite-quotient, perfect-quotient and torsion assumptions of [def-weil-pbc-adic-coefficient-datum]. The auxiliary prime $p\\ne\\ell$ in the completeness-equivalence lemma can be chosen arbitrarily; its statement imposes no characteristic condition on $W$. Its completed sheaf and strict reductions are expressly the constant-quotient presentation used here.",
-   "uses": [
-    "lem-pur-roos-intrinsic-completeness-equivalence",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-pc-perfect-ring-complex",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
-   }
-  },
-  {
-   "text": "Let $K$ be derived complete and put $N=\\mathcal R_WK$; it is normalized by Step 1, so Steps 2--3 make $e_N$ invertible. The triangle identity $\\mathcal L_W(e_N)\\circ u_{\\mathcal L_WN}=1$ of [lem-coef-derived-system-evaluation-calculus] then shows that $u_{\\mathcal L_WN}=\\mathcal L_W(e_N)^{-1}$ is an isomorphism. Next, by the same node $N$ is the strict system $(Q\\otimes_{\\widehat R_W}B_n)_n$ on one flat-term K-flat representative $Q\\to K$, and $\\mathcal L_WN=R\\lim U_WN$ is the total derived limit of exactly the strict reductions $\\operatorname{Res}_nK_n$ formed on that same $Q$ in [lem-pur-roos-intrinsic-completeness-equivalence]. With the coefficient hypotheses verified in Step 4, the implication (i)$\\Rightarrow$(v) of that lemma makes the canonical augmentation $\\varphi=\\operatorname{comp}_K:K\\to\\mathcal L_WN$ an isomorphism. Only its invertibility is used; $\\varphi$ is not identified with $u_K$. Naturality of $u$ applied to $\\varphi$ gives $\\mathcal L_W\\mathcal R_W(\\varphi)\\circ u_K=u_{\\mathcal L_WN}\\circ\\varphi$. The right side and $\\mathcal L_W\\mathcal R_W(\\varphi)$ are isomorphisms, hence $u_K=\\mathcal L_W\\mathcal R_W(\\varphi)^{-1}\\circ u_{\\mathcal L_WN}\\circ\\varphi$ is an isomorphism. Thus the actual unit is invertible without comparing two maps into a homotopy limit through their projections, and without identifying the specified adjunction with another one.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-roos-intrinsic-completeness-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
-   }
-  },
-  {
-   "text": "The transformations used throughout are the unit $u$ and counit $e$ of the one adjunction of [lem-coef-derived-system-evaluation-calculus], which already asserts their naturality and triangle identities in the derived system categories. Thus for $a:N\\to N'$ and $b:K\\to K'$ their squares read $a\\circ e_N=e_{N'}\\circ\\mathcal R_W\\mathcal L_W(a)$ and $\\mathcal L_W\\mathcal R_W(b)\\circ u_K=u_{K'}\\circ b$. Its identities remain $e_{\\mathcal R_WP}\\circ\\mathcal R_W(u_P)=1$ and $\\mathcal L_W(e_N)\\circ u_{\\mathcal L_WN}=1$. Steps 1–5 show that the relevant objects lie in the stated full subcategories and that these same components are invertible there. Restricting these equalities proves all requested naturality and triangle assertions, with no additional hypotheses.",
+   "text": "Naturality and the two triangle identities already belong to the specified adjunction. Restrict these actual components to the complete and normalized full subcategories.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+    "place": "Definition 3.5.2 and Lemma 3.5.7; Roos comparison for unbounded normalized systems."
    }
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
-  "def-pc-perfect-ring-complex",
-  "def-weil-pbc-adic-coefficient-datum",
+  "lem-coef-constant-tower-roos",
   "lem-coef-derived-system-evaluation-calculus",
   "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-roos-intrinsic-completeness-equivalence",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients"
+  "lem-coef-normalized-dvr-kflat-reduction-model",
+  "lem-coef-normalized-dvr-kflat-transition",
+  "lem-coef-sequence-roos-model",
+  "lem-weil-derived-limit-existence"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "§3.5, Lemma 3.5.7(1)–(5), especially the unbounded regular-ideal case (5); actual maps are those of the sequence-topos adjunction in (1)."
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "P5 Lean proof: canonical Roos triangles, finite adjunction normalization, and uniqueness of their objects; actual unit via triangle identity and naturality."
  },
  "mathlib_searches": [
   {
@@ -240,11 +236,7 @@
  },
  "tool_uses": [
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-roos-intrinsic-completeness-equivalence",
-  "lem-weil-l-adic-extension-integers-dvr"
+  "lem-coef-normalized-dvr-effectivity"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -271,5 +263,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Existing:true binding of WeilConjectures.purNormalizedReconstruction (Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus); statement verbatim in live source; only the node's lean field and the report changed. Clauses: completeness of L(N) and IsIso of the counit on normalized N, and IsIso of the unit on complete K, are in the theorem; normalization of R(P), counit evaluation = adjoint of the projection, naturality and triangle identities are fields of the specified S (reduction_normalized, counit_projection, adjunction); ∀ S is harmless since reduction is pinned by reductionModel and L is fixed. IsNormalizedCoefficientSequence = transition-adjoint invertibility via Yoneda, m=n included; IsComplete none = landed global predicate. Edge cases n=0, m=n, empty W, zero objects and unbounded complexes ok. No cycle (closure of 3009 nodes). nt_compile --json probe (#check + field terms) clean in 17.4 s. Advisory: the parent node also lists the declaration; decl owners outside stmt_deps (def-coef-ringed-sequence-site, def-coef-derived-system-calculus-data), stmt_deps unchanged; the docstring describes the older Nakayama route."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261021T170756-L-2758743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
