@@ -19754,3 +19754,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:22 L: returned deliver/Q14/det-thm-sfb-proper-base-change-rational (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/NW/lem-cbc-adic-pullback-presentation-transport (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: merged deliver/Q56/lem-sfb-pullback-constant-model-constructible (reviewer PASS; after a return; new nodes: 2)
+- 03:22 L: merged deliver/NC/lem-sfb-filtered-ring-object-cocone-colimit (reviewer PASS; first push; new nodes: 0)

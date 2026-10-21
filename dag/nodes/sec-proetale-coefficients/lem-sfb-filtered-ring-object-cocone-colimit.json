@@ -12,9 +12,101 @@
   "def-weil-pbc-category-colimit",
   "sk-def-sfb-ring-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a ring object $B$ and a compatible ring-object cocone $(b_i:D(i)\\to B)$. Forgetting its ring structure gives a cocone in $\\mathcal C$. The assumed underlying colimit and [def-weil-pbc-category-colimit] give a unique morphism $b:A\\to B$ such that $b\\circ c_i=b_i$ for all $i$. We will verify the two defining equations for a ring-object morphism. Composition below is ordinary right-to-left composition.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit: existence and uniqueness of the mediating morphism; applied to the underlying cocone."
+   }
+  },
+  {
+   "text": "Write $\\eta_R:\\mathbf1\\to R$ and $\\mu_R:R\\otimes R\\to R$ for the unit and multiplication of any ring object $R$, as in [sk-def-sfb-ring-object]. Since $I$ is nonempty, choose an object $i$. Both $c_i$ and $b_i$ preserve units, so $b\\circ\\eta_A=b\\circ c_i\\circ\\eta_{D(i)}=b_i\\circ\\eta_{D(i)}=\\eta_B$. This proves unit preservation.",
+   "uses": [
+    "sk-def-sfb-ring-object",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+    "place": "Third isomorphism: elementary unit check in the ring-object upgrade; nonemptiness is Stacks Tag 002V, definition-directed."
+   }
+  },
+  {
+   "text": "Set $f=b\\circ\\mu_A$ and $g=\\mu_B\\circ(b\\otimes b)$, both maps $A\\otimes A\\to B$. For each $k\\in I$, preservation of multiplication by $c_k,b_k$, the equation $b\\circ c_k=b_k$, and bifunctoriality of tensor give $f\\circ(c_k\\otimes c_k)=b\\circ c_k\\circ\\mu_{D(k)}=b_k\\circ\\mu_{D(k)}=\\mu_B\\circ(b_k\\otimes b_k)=g\\circ(c_k\\otimes c_k)$. These are equations of morphisms, requiring no interpretation as elements of the objects.",
+   "uses": [
+    "sk-def-sfb-ring-object",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+    "place": "Third isomorphism: elementary check of multiplication on two inputs from the same stage; tensor bifunctor laws are Stacks Tag 0FFK, definition-monoidal-category."
+   }
+  },
+  {
+   "text": "For arbitrary objects $i,j\\in I$, choose $k$ and arrows $u:i\\to k$, $v:j\\to k$, using filteredness as written in the statement and [def-weil-pbc-category-colimit]. The cocone equations and tensor bifunctoriality give $c_i\\otimes c_j=(c_k\\otimes c_k)\\circ(D(u)\\otimes D(v))$. Precomposing the equality of step 3 with $D(u)\\otimes D(v)$ therefore gives $f\\circ(c_i\\otimes c_j)=g\\circ(c_i\\otimes c_j)$ for every pair $i,j$. No equalization of parallel arrows is needed for this calculation.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002V, definition-directed, common successor condition; Tag 0FFK, definition-monoidal-category, tensor as a bifunctor. Elementary expansion of the blueprint third isomorphism."
+   }
+  },
+  {
+   "text": "Fix $i$. By the assumed preservation of $I$-indexed colimits by $D(i)\\otimes-$, the cocone with vertex $D(i)\\otimes A$ and legs $\\mathrm{id}_{D(i)}\\otimes c_j$ is a colimit of $j\\mapsto D(i)\\otimes D(j)$. Here preservation means precisely that the image of a colimit cocone is a colimit cocone. The maps $f\\circ(c_i\\otimes\\mathrm{id}_A)$ and $g\\circ(c_i\\otimes\\mathrm{id}_A)$ agree after each such leg by step 4 and bifunctoriality. They are thus two mediating morphisms for the same cocone, so uniqueness in [def-weil-pbc-category-colimit] makes them equal.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit, uniqueness applied to the cocone preserved by D(i) tensor -; Tag 0FFK, definition-monoidal-category. Elementary expansion of the blueprint third isomorphism."
+   }
+  },
+  {
+   "text": "By the assumed preservation of $I$-indexed colimits by $-\\otimes A$, the cocone with vertex $A\\otimes A$ and legs $c_i\\otimes\\mathrm{id}_A$ is a colimit of $i\\mapsto D(i)\\otimes A$. Step 5 says that $f$ and $g$ agree after all its legs. Uniqueness in [def-weil-pbc-category-colimit] gives $f=g$, that is, $b\\circ\\mu_A=\\mu_B\\circ(b\\otimes b)$. Along with step 2 this is exactly the definition of a morphism of ring objects in [sk-def-sfb-ring-object].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit, uniqueness applied to the cocone preserved by - tensor A; ring-object morphism definition from the blueprint sk-def-sfb-ring-object. Elementary expansion of the third isomorphism."
+   }
+  },
+  {
+   "text": "The ring-object morphism $b$ has the required factorization equations by step 1. Any other ring-object morphism with these equations has the same underlying morphism by the underlying colimit uniqueness, hence is equal to $b$: a ring-object morphism is just a morphism satisfying the multiplication and unit equations. This proves the ring-object colimit universal property. In the braided case, let $B$ be any commutative ring object. The same $b$ is a morphism in the full subcategory of commutative ring objects, because fullness means that its morphisms are exactly the ring-object morphisms between these objects. The existence and uniqueness just proved therefore give the final asserted colimit as well.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+    "place": "Third isomorphism: ring-object universal property and its restriction to the full subcategory of commutative ring objects."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "sk-def-sfb-ring-object",
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+  "place": "Third isomorphism, final sentence: explicit generic ring-object upgrade by the colimit universal property and the tensor-preservation hypotheses. Read also Stacks Tags 002F, 002V and 0FFK; the seven elementary steps expand the argument without invoking a separate tensor-colimit theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -29,11 +121,78 @@
    "results": "Sifted.lean: IsSifted (diagonal final), prod_isSifted, colim_preservesBinaryProducts_of_isSifted; Filtered/Final.lean:329 IsFilteredOrEmpty.isSiftedOrEmpty, :334 IsFiltered.isSifted",
    "date": "2026-10-21",
    "verdict": "ingredient only (filtered implies sifted); no ring-object colimit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from monoid objects in a monoidal category reflects filtered colimits when tensor preserves these colimits",
+   "results": "{\"t\": \"2026-10-21T03:13:29Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from monoid objects in a monoidal category reflects filtered colimits when tensor preserves these colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.FilteredColimits.forget_preservesFilteredColimits\", \"CommMonCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"CommMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"GrpCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"SemiRingCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"AddCommMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"AddMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"ModuleCat.FilteredColimits.forget_reflectsFilteredColimits\"], \"digest\": \"d14361f962fe6863\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit|ReflectsColimit|CreatesColimit",
+   "results": "{\"t\": \"2026-10-21T03:13:37Z\", \"tool\": \"grep\", \"query\": \"IsColimit|ReflectsColimit|CreatesColimit\", \"sub\": \"CategoryTheory/Monoidal/Mon\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits",
+   "sub": "CategoryTheory/Monoidal/Mon"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A colimit of underlying objects of a filtered diagram of monoid objects is a colimit of monoid objects if tensor preserves filtered colimits",
+   "results": "{\"t\": \"2026-10-21T03:13:37Z\", \"tool\": \"leansearch\", \"query\": \"A colimit of underlying objects of a filtered diagram of monoid objects is a colimit of monoid objects if tensor preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.FilteredColimits.M.mk\", \"MonCat.FilteredColimits.M\", \"CommMonCat.FilteredColimits.M\", \"MonCat.FilteredColimits.colimitMonoid\", \"AddCommMonCat.FilteredColimits.M\", \"MonCat.FilteredColimits.colimit\", \"AddCommMonCat.FilteredColimits.colimitAddCommMonoid\", \"MonCat.FilteredColimits.colimitCoconeIsColimit\"], \"digest\": \"7c0fd7e4f091d785\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mon.forget, CategoryTheory.Limits.IsColimit",
+   "results": "{\"t\": \"2026-10-21T03:13:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Mon.forget, CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit|ReflectsColimit|CreatesColimit",
+   "results": "{\"t\": \"2026-10-21T03:13:52Z\", \"tool\": \"grep\", \"query\": \"IsColimit|ReflectsColimit|CreatesColimit\", \"sub\": \"CategoryTheory/Monoidal/Mon_.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits",
+   "sub": "CategoryTheory/Monoidal/Mon_.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mon, CategoryTheory.Limits.ReflectsColimitsOfShape",
+   "results": "{\"t\": \"2026-10-21T03:13:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Mon, CategoryTheory.Limits.ReflectsColimitsOfShape\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given monoid objects A and B in a monoidal category, the map induced from an underlying colimit cocone preserves multiplication and unit for a filtered index category",
+   "results": "{\"t\": \"2026-10-21T03:13:54Z\", \"tool\": \"leanfinder\", \"query\": \"Given monoid objects A and B in a monoidal category, the map induced from an underlying colimit cocone preserves multiplication and unit for a filtered index category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.FilteredColimits.coconeMorphism\", \"MonCat.FilteredColimits.colimitMulAux\", \"MonCat.FilteredColimits.colimit_mul_mk_eq\", \"MonCat.FilteredColimits.colimitDesc\", \"MonCat.FilteredColimits.colimit\", \"MonCat.FilteredColimits.colimitMulOneClass\", \"MonCat.FilteredColimits.colimit_mul_mk_eq'\", \"MonCat.FilteredColimits.colimitMul\"], \"digest\": \"9678bece0ccea727\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit|ReflectsColimit|CreatesColimit|colimit",
+   "results": "{\"t\": \"2026-10-21T03:14:06Z\", \"tool\": \"grep\", \"query\": \"IsColimit|ReflectsColimit|CreatesColimit|colimit\", \"sub\": \"CategoryTheory/Monoidal/Mon.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for monoid objects of an arbitrary monoidal category; returned concrete-monoid results or no hits",
+   "sub": "CategoryTheory/Monoidal/Mon.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit|ReflectsColimit|CreatesColimit",
+   "results": "{\"t\": \"2026-10-21T03:14:06Z\", \"tool\": \"grep\", \"query\": \"IsColimit|ReflectsColimit|CreatesColimit\", \"sub\": \"CategoryTheory/Monoidal/Limits\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean\"], \"digest\": \"4eff9333ef682f61\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient only: IsColimit.tensor and tensor₂ are tensor-colimit statements, not a ring-object universal property",
+   "sub": "CategoryTheory/Monoidal/Limits"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": "Project Lean: private CategoryTheory helper siftedRingCoconeIsColimit, lean/Sheaf/Paper/CompletedCondensedCoefficients.lean lines 219-254, with Mathlib IsFiltered.isSifted (Mathlib/CategoryTheory/Filtered/Final.lean:334); needs PreservesColimit2 of the tensor, which follows from preservation in each variable.",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -47,8 +206,25 @@
   "is": null,
   "from": {
    "node": "sk-prop-sfb-qlbar-colimit-x",
-   "place": "Proof paragraph *Third isomorphism*, last sentence: the image under p_X^* of the point colimit is a colimit cocone of the ring objects E_X (ring-object upgrade of the abelian colimit)."
+   "place": "Proof paragraph *Third isomorphism*, last sentence: the image under p_X^* of the point colimit is a colimit cocone of the ring objects E_X (ring-object upgrade of the abelian colimit).",
+   "via": []
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-filtered-ring-object-cocone-colimit",
+  "worker": "stage1",
+  "group": "NC",
+  "summary": "No exact project attachment or Mathlib match was found. Seven elementary steps construct the underlying mediator, check units by nonemptiness, check multiplication on diagonal and mixed stages, and apply two separately preserved colimit universal properties. The argument uses only the three existing definition nodes, creates no new nodes, and keeps the statement unchanged. The commutative clause follows from fullness.",
+  "blueprint": "Realizes the ring-object colimit assertion in the Third isomorphism paragraph of sk-prop-sfb-qlbar-colimit-x. The abelian-to-ring upgrade is proved directly, without replacing the unit route or introducing siftedness as an extra hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NC-cedf9018b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-cedf9018b (reviewer sub-agent of L); spot-checked: I read the whole item. It has 7 elementary steps, no new nodes, and the statement is unchanged; the base proof was statement-only and no re-split note applies. I checked the three cited statements: def-weil-pbc-category-colimit gives the unique mediator and filteredness per Stacks 002V, sk-def-sfb-ring-object gives the monoid-object μ/η equations and commutativity, and def-sfb-monoidal-category gives tensor bifunctoriality. Step 1: the underlying mediator b is correct. Step 2: unit preservation needs nonemptiness, which filteredness supplies (with I empty, A would be initial). Step 3: f and g agree on c_k⊗c_k; I checked each equality. Step 4: the mixed pairs follow from c_i⊗c_j=(c_k⊗c_k)(D(u)⊗D(v)), using only the common-successor clause. Steps 5 and 6: the two colimit-uniqueness arguments use D(i)⊗− and −⊗A, both preserved by hypothesis. Step 7: uniqueness in Mon(C), and fullness gives the commutative case. Test cases: singleton I and directed limits of rings in Ab both hold. The only citer, sk-prop-sfb-qlbar-colimit-x step 4, checks every hypothesis (filtered poset, tensor preserves colimits via adjoints, commutative). Grepping the DAG found no duplicate. The source is the blueprint main-20261015 sk-prop-sfb-qlbar-colimit-x proof, Third isomorphism paragraph, plus Stacks 002F/002V/0FFK. No SGA is cited. No fixes."
  }
 }
