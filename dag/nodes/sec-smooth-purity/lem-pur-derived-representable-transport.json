@@ -16,9 +16,121 @@
   "lem-weil-pbc-right-derived-plus-injective",
   "lem-sc-p1-rhom-hom-derived-roof"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q$ for the relevant localizations, and omit their canonical termwise identifications. By [lem-weil-pbc-exact-functor-derived-factorization], $L$ preserves quasi-isomorphisms and descends to $DL$, commuting with shifts through the stated termwise comparison. By [lem-weil-pbc-bounded-below-injectives-kinjective], $I,J$ are K-injective. The morphism $Q(e')Q(Le)^{-1}:Q(LI)\\to QJ$ therefore lifts to a homotopy class of chain maps $t:LI\\to J$ by [lem-weil-pbc-kinjective-hom-derived]. Its composite with $Le$ has image $Q(e')$; injectivity of the localization map into the K-injective target $J$ gives $tLe\\simeq e'$. The same argument gives uniqueness up to homotopy. Such resolutions are available: [lem-weil-pbc-dplus-injective-representative] gives an injective representative $QI\\cong QF$, and the inverse isomorphism lifts to $e:F\\to I$ by the same Hom bijection; $e$ is a quasi-isomorphism because its image under every cohomology functor is an isomorphism. Apply this also to $LF$. No injectivity of $LI$ has been used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 070I (lemma-K-injective), and 015F (lemma-right-derived-exact-functor)."
+   }
+  },
+  {
+   "text": "Let $u_K:Q(S(K))\\to RS(QK)$ and $u'_T:Q(S'(T))\\to RS'(QT)$ be the derived units supplied by [lem-weil-pbc-right-derived-plus-injective]. Its Kan factorization property applied to the natural maps $u'_{LK}Q(\\lambda_K)$ gives the unique natural transformation $b$ satisfying $b_{QK}u_K=u'_{LK}Q(\\lambda_K)$. The units $u_I,u'_J$ are isomorphisms by that node's injective-computation clause. Thus $c_e=RS(Qe)^{-1}u_I$ and $c'_{e'}=RS'(Qe')^{-1}u'_J$ identify $Q(SI),Q(S'J)$ with $RS(QF),RS'(Q(LF))$, respectively. The functors send the inverted arrows to isomorphisms because $e,e'$ are quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic); Kan characterization as stated in lem-weil-pbc-right-derived-plus-injective."
+   }
+  },
+  {
+   "text": "Naturality of $b$ at $Qe$, its defining factorization at $I$, and naturality of $u'$ at $t$ give\n$$b_{QF}c_e=RS'(QLe)^{-1}u'_{LI}Q(\\lambda_I),\\qquad u'_JQ(S't)=RS'(Qt)u'_{LI}.$$\nSince $Qt\\,QLe=Qe'$, substitution gives\n$$b_{QF}c_e=RS'(Qe')^{-1}u'_JQ(S't)Q(\\lambda_I)=c'_{e'}Q(S't\\circ\\lambda_I).$$\nThis is the required injective-model formula. Every inverse here is the image of a quasi-isomorphism or a derived unit at an injective complex; $u'_{LI}$ is never inverted.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH and 05TI; explicit naturality calculation using the units from lem-weil-pbc-right-derived-plus-injective."
+   }
+  },
+  {
+   "text": "For a cocycle $f:P\\to I^a$, the hypothesis and naturality of $\\theta'$ at $t^a$ yield\n$$S'(t^a)\\lambda_{I^a}\\theta_{I^a}(f)=S'(t^a)\\theta'_{LI^a}(Lf\\,d^{-1})=\\theta'_{J^a}(t^aLf\\,d^{-1}).$$\nThe right-hand morphism is closed: $\\partial_J^a t^a Lf\\,d^{-1}=t^{a+1}L(\\partial_I^a f)d^{-1}=0$. Naturality of $\\theta$ with respect to the differentials identifies the complex $S(I)$ with $\\operatorname{Hom}(P,I^\\bullet)$; likewise for $\\theta'$ and $J$. Thus this equality of cocycles computes the map on their cohomology. Applying the Kan property to $\\theta,\\theta^{-1}$ gives mutually inverse derived transformations, since both composites factor the identity unit. Hence these are exactly the derived-$\\theta$ identifications in the definition of $\\chi,\\chi'$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH and 05TI; agent calculation from the assumed representability square and Kan uniqueness."
+   }
+  },
+  {
+   "text": "Let $\\widetilde f:P[0]\\to I[a]$ be the chain map of the cocycle. By [lem-sc-p1-rhom-hom-derived-roof], its class, transported by $c_e$ and $\\theta$, has image $Q(e)[a]^{-1}Q(\\widetilde f)$ under $\\chi$. Steps 3--4 and the same roof formula for $J$ give image\n$$Q(e')[a]^{-1}Q(t)[a]Q(L\\widetilde f)d^{-1}$$\nunder $\\chi'$ after applying $H^a(b)$. The equality $Qt\\,QLe=Qe'$ implies $Q(e')[a]^{-1}Q(t)[a]=Q(Le)[a]^{-1}$. By the shift-normalized factorization in [lem-weil-pbc-exact-functor-derived-factorization], the last display is therefore\n$$DL\\bigl(Q(e)[a]^{-1}Q(\\widetilde f)\\bigr)d^{-1}.$$\nHere $d^{-1}$ denotes the map on complexes concentrated in degree zero, and all shifted factors use the termwise comparison fixed in the statement. Every cohomology class of $S(I)$ has a cocycle representative, so the asserted equation holds for every $\\alpha$ and every integer $a$.",
+   "uses": [
+    "lem-sc-p1-rhom-hom-derived-roof",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I and the roof normalization of lem-sc-p1-rhom-hom-derived-roof; Tag 015F and shift comparison of lem-weil-pbc-exact-functor-derived-factorization."
+   }
+  },
+  {
+   "text": "If $f=\\partial_I^{a-1}g$, the degree-$a-1$ map $(-1)^ag$ gives a chain homotopy from $\\widetilde f$ to zero: the only nonzero source term is $P$ in degree zero, so the homotopy equation in that degree is $(-1)^a\\partial_I^{a-1}((-1)^ag)=f$. Thus its localized map and its roof are zero. Additive functors carry a homotopy $h$ to the homotopy obtained by applying the functor to each $h^n$; in particular homotopic $t$ give the same map of cohomology. Finally step 3 identifies every resolution-based representative with the single canonical $b_{QF}$, and [lem-sc-p1-rhom-hom-derived-roof] supplies its normalized formula for every chosen resolution. Consequently changing $e,e',t$ or a cocycle representative changes neither the derived map nor the Hom formula.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sc-p1-rhom-hom-derived-roof"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Localization through the homotopy category (Tag 05RU); Tags 05TH, 05TI; resolution-uniform roof formula in lem-sc-p1-rhom-hom-derived-roof."
+   }
+  },
+  {
+   "text": "For the second datum write $b_2:RS'\\to RS''DL_2$ and $u''$ for the third derived unit. At a bounded-below complex $K$, the defining equations give\n$$ (b_{2,DL(QK)}b_{QK})u_K=b_{2,Q(LK)}u'_{LK}Q(\\lambda_K)=u''_{L_2LK}Q(\\lambda_{2,LK})Q(\\lambda_K).$$\nThis is precisely the factorization equation for $\\lambda_{\\mathrm{tot}}=(\\lambda_2L)\\lambda$. Uniqueness in [lem-weil-pbc-right-derived-plus-injective] identifies the composite with $b_{\\mathrm{tot}}$, under the canonical identification $D(L_2L)=DL_2DL$. This identification is induced by the degreewise identity $L_2(LK)=(L_2L)K$ through localization. Moreover, applying the two assumed representability squares successively gives\n$$\\theta''_{L_2LM}\\bigl(L_2Lf\\,(d_2L_2d)^{-1}\\bigr)=\\lambda_{2,LM}\\lambda_M\\theta_M(f),$$\nsince $(d_2L_2d)^{-1}=(L_2d)^{-1}d_2^{-1}$. Thus the composite datum satisfies the hypotheses. Applying the already proved Hom formula twice gives $DL_2DL(\\chi(\\alpha))(L_2d)^{-1}d_2^{-1}$, which is exactly the formula for this composite datum.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI and 015F; explicit Kan-uniqueness and inverse-composition calculations."
+   }
+  },
+  {
+   "text": "For the final coherence assertion, put $E=L_2L$ and let $\\zeta:E\\xrightarrow{\\sim}T$ be the given identification with another composite. The hypothesis means $\\lambda_T=S''(\\zeta)\\lambda_E$ and $d_T\\zeta_P=d_E$. The degreewise maps $\\zeta_{K^n}$ form an isomorphism of complexes, natural in $K$ and compatible with shifts. Localizing it gives $D\\zeta:DE\\cong DT$; naturality first on chain maps and then on inverses of quasi-isomorphisms proves naturality on roofs. Naturality of the target derived unit gives\n$$RS''(Q\\zeta_K)b_{E,QK}u_K=RS''(Q\\zeta_K)u''_{EK}Q\\lambda_{E,K}=u''_{TK}Q\\lambda_{T,K}.$$\nKan uniqueness therefore yields $RS''(D\\zeta)b_E=b_T$. On Hom groups, naturality of $D\\zeta$ at $\\chi(\\alpha):P[0]\\to F[a]$ gives\n$$D\\zeta_F[a]\\,DE(\\chi(\\alpha))d_E^{-1}=DT(\\chi(\\alpha))\\zeta_Pd_E^{-1}=DT(\\chi(\\alpha))d_T^{-1}.$$\nThe source identity uses $d_T\\zeta_P=d_E$. This proves agreement of the derived comparisons and their Hom formulas under the specified coherent identifications.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RU and 015F for localization of the termwise natural isomorphism; Tag 05TI for Kan uniqueness; agent coherence calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-rhom-hom-derived-roof"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 013K, 070J, 070I, 05TI, 05TH, 015F; explicit representability, roof-cancellation and Kan-composition refinement, following the existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +180,45 @@
    "results": "15 hits: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
    "date": "2026-10-21",
    "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison|mapExactFunctor|isoRightDerivedObj",
+   "results": "10 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean; inspected PointwiseRightDerived.lean:40–83, RightDerived.lean:108–175 and Ext/Map.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match: comparison factorization and object-level right-derived/Ext maps do not state the entire bounded-below-complex representability, cocycle, roof-normalization and composition assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived comparison of representable left exact functors along an exact functor using injective resolution cocycles",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.injectiveResolutions, CategoryTheory.NatTrans.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.toRightDerivedZero; inspected PointwiseRightDerived.lean:40–83, RightDerived.lean:108–175 and Ext/Map.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match: comparison factorization and object-level right-derived/Ext maps do not state the entire bounded-below-complex representability, cocycle, roof-normalization and composition assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "results": "6 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc; inspected PointwiseRightDerived.lean:40–83, RightDerived.lean:108–175 and Ext/Map.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match: comparison factorization and object-level right-derived/Ext maps do not state the entire bounded-below-complex representability, cocycle, roof-normalization and composition assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor between abelian categories transports right derived represented functors, with comparison computed on injective resolutions and compatible with composition",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.NatTrans.rightDerived, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; inspected PointwiseRightDerived.lean:40–83, RightDerived.lean:108–175 and Ext/Map.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match: comparison factorization and object-level right-derived/Ext maps do not state the entire bounded-below-complex representability, cocycle, roof-normalization and composition assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocycle in Hom(P,I) is sent to t composed with L(f) composed with d inverse under the right derived comparison along an exact functor",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.Functor.mapDerivedCategoryFactors; inspected PointwiseRightDerived.lean:40–83, RightDerived.lean:108–175 and Ext/Map.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match: comparison factorization and object-level right-derived/Ext maps do not state the entire bounded-below-complex representability, cocycle, roof-normalization and composition assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-supported-hom-pullback",
@@ -83,12 +230,46 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-affine-line-orientation",
-   "place": "Proof, pullback of the supported coordinate boundary and final etale-origin transport: original supported-Hom pullback steps 5, 7–8 and derived part of step 9",
+   "place": "thm-pur-affine-line-orientation proof, final etale-origin comparison transports the assertion and its normalization; supported-Hom pullback original steps 5, 7–8 and derived part of step 9.",
    "via": [
     "lem-pur-supported-hom-pullback"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-derived-representable-transport",
+  "worker": "stage1",
+  "summary": "Eight explicit steps using existing injective-representative, K-injective Hom-localization, exact-functor descent, Kan-extension and normalized-RHom-roof statements. No new nodes. Statement and existing provenance/search records retained. No preservation of injectives by L is required.",
+  "blueprint": "Realizes thm-pur-affine-line-orientation proof final etale-origin transport with normalization, via lem-pur-supported-hom-pullback. Steps 1–3 supply the canonical injective model, steps 4–6 prove the Hom normalization and independence, steps 7–8 give composition/coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic bounded-below derived-functor universal property and invertible unit on injective complexes; the purity unit has no replacement for this homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic existence of a bounded-below injective representative in any abelian category with enough injectives; not a purity computation."
+   },
+   {
+    "node": "lem-sc-p1-rhom-hom-derived-roof",
+    "why": "Generic all-integer-degree cocycle-to-derived-Hom roof normalization; needed to track the supported-Hom pullback, not to replace any geometric step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sc-p1-rhom-hom-derived-roof"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-73fcf0024",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-73fcf0024 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the cited statements, and the mathematics holds; the review is in review.md and no fixes are needed. Shape: one commit; the statement is byte-identical to side-live, which is still unsplit, and stmt_deps are unchanged; proof_deps equals the union of the uses; no SGA; no new nodes; 6507 characters, each step under 1100. Step 1: Le is a quasi-isomorphism by exact-functor-derived-factorization, J is K-injective, and t is lifted through the kinjective-hom-derived bijection, which also gives tLe≃e' and uniqueness. The resolutions e come from lifting the dplus-injective-representative isomorphism, and e is a quasi-isomorphism because H^r∘Q≅H^r. Steps 2–3: I recomputed b_{QF}c_e=c'_{e'}Q(S't∘λ_I) from naturality at Qe and t and from QtQLe=Qe'; u'_{LI} is never inverted. Step 4: the cocycle t^aLf d^{-1} is closed, by naturality of θ'. Step 5: the roof node is applied to e and e', the order Q(e')[a]^{-1}Q(t)[a]=Q(Le)[a]^{-1} is right, and shift clause (2) gives DL(χα)d^{-1}. Step 6: the homotopy (-1)^a g is right because d_{I[a]}=(-1)^a∂; independence follows from the canonical b and from the roof node covering every resolution. Step 7: the composite factorization and the composite hypothesis via (d_2L_2d)^{-1}=(L_2d)^{-1}d_2^{-1} check out. Step 8: Kan uniqueness gives RS''(Dζ)b_E=b_T, and d_Tζ_P=d_E gives the Hom formula. Small cases checked: L=id, P=0, a<0 and odd a. Sources read: Stacks 05TH and 05TI (derived.tex l.6948ff), 015F (l.5884), and the blueprint main-20261015 thm-pur-affine-line-orientation proof, final étale-origin transport sentence. No duplicate: lem-sc-ext-right-derived-cocycle-comparison, lem-sf-normalized-derived-comparison-composition and lem-kun-derived-adjoint-square-comparison are related but none states this transport. Accepted tool_uses, all generic homological algebra: lem-weil-pbc-right-derived-plus-injective, lem-weil-pbc-dplus-injective-representative, lem-sc-p1-rhom-hom-derived-roof. Advisory only: the one-line fact that DL maps D^+ to D^+ is left implicit, and the roof node's Rv is identified with the Kan R Hom(P,-) by clause (3), as the base statement already assumes."
  }
 }
