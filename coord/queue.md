@@ -1,8 +1,8 @@
 # Work queue
 
-198 items; claim with `tools/claim.py next <group> [--stage N]`.
+196 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (22 clusters, 954 modules)
+## Rework: quarantined by the upstream sync (19 clusters, 954 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -13,7 +13,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.SitePerfectComplex` | 1 |  | error: Sheaf/Paper/SitePerfectComplex.lean:122:10: failed to synthesize instance of type class |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.WeilTensorProduct` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.IntegralIndConstructibleHeartClosure` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -26,14 +25,12 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.ReductionOpenEtaleOrigin` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (17)
+## Stage 1: nodes to split (19)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -44,7 +41,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 4011 | none |
 | `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
-| `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
+| `lem-sfb-norm-algcl-cohomology-topology-comparison` | 4012 | none |
+| `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 4012 | none |
 | `lem-sfb-snc-universal-residual-charts` | 4012 | none |
 | `lem-sfb-bicosimplicial-shuffle-totalization` | 4013 | none |
@@ -52,10 +50,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-nonnegative-derived-totalization` | 4013 | none |
 | `lem-sfb-root-tower-coordinate-face` | 4013 | none |
 | `lem-sfb-root-tower-puncture-invariance` | 4013 | none |
-| `lem-sfb-snc-root-limit-normal-charts` | 4013 | none |
+| `lem-sfb-faithfully-flat-normal-ring-descent` | 4014 | none |
+| `lem-sfb-snc-finite-root-regular-ring` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (27)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -67,7 +66,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
-| `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
@@ -81,15 +79,17 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
 | `lem-sfb-root-tower-lisse-morphism-extension` | 1 | state | 0 |
+| `lem-sfb-snc-root-limit-normal-charts` | 1 | state | 0 |
+| `lem-sfb-supported-finite-stage-topology-defect` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 18 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (125)
+## Stage 3: modules to prove (123)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -129,7 +129,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 10 | proof | 4 |
 | `Sheaf.Paper.PbcAutomorphismTransport` | - | 13 | proof | 4 |
 | `Sheaf.Paper.RegularQuotientCompletionUnit` | - | 1 | proof | 4 |
-| `Sheaf.Paper.StrictQuotientExchangeUnitEquation` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison` | 5 | 9 | proof | 5 |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 6 | proof | 5 |
 | `Sheaf.Algebra.Homology.LineUnboundedDerivedTensor` | - | 1 | proof | 5 |
@@ -197,7 +196,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CoefficientExtensionReductionModel` | - | 1 | proof | 10 |
 | `Sheaf.Paper.CompletedPrimitiveCounitComparison` | - | 8 | proof | 10 |
 | `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | proof | 10 |
-| `Sheaf.Paper.ExpressionCounitSubstitutionCoherence` | - | 1 | proof | 10 |
 | `Sheaf.Paper.NormalizedOperationSystemModels` | - | 1 | proof | 10 |
 | `Sheaf.Paper.NormalizedPullbackCompositionTransport` | - | 1 | proof | 10 |
 | `Sheaf.Paper.NormalizedTensorConstraintTransport` | - | 1 | proof | 10 |
