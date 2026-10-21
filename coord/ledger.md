@@ -23155,3 +23155,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: merged deliver/NA/lem-sfb-simplex-lattice-shuffle-boundary (stage 2; reviewer PASS; parallel immutable checks)
 - 17:15 L: merged deliver/Q12/lem-sfb-nonnegative-derived-totalization (stage 2; reviewer FIX; parallel immutable checks)
 - 2026-10-21T17:16:23Z L: superseded stage-1 delivery NZ/lem-sfb-internal-action-site-presentation at 8fda62728a59a3a28f9318fa76e4e45866a96f0f; current completion retained; packet archived at refs/superseded/NZ/lem-sfb-internal-action-site-presentation/8fda62728a59a3a28f9318fa76e4e45866a96f0f; stale return retired.
+- 17:17 L: merged deliver/N9/lem-sfb-prime-to-ell-derived-invariants-reduction (reviewer PASS; after a return; new nodes: 2)

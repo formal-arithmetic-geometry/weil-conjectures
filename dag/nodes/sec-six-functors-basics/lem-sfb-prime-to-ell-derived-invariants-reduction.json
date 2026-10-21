@@ -13,9 +13,110 @@
   "def-weil-abstract-derived-category",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\rho:B\\to\\operatorname{GL}_E(V)$ for the action. Its kernel $K$ is open and normal: the finite set $\\rho(B)$ is discrete as a subspace of the Hausdorff finite-dimensional matrix space, and $\\rho$ is continuous. Thus $B/K=Q$. Every finite continuous quotient $K/H$ has order prime to $\\ell$: $H$ is open in $B$, and its core $H_0=\\bigcap_{b\\in B}bHb^{-1}$ is a finite intersection because $[B:H]<\\infty$. Then $B/H_0$ is a finite continuous quotient of $B$, and $K/H$ is a quotient of its subgroup $K/H_0$. Choose an $E$-basis of $V$, of size $d$. The corresponding maps $F\\otimes_E V\\cong F^d$ and their inverses are continuous matrices, so $V_F\\cong C_F^d$ as $K$-modules with trivial action. If $d=0$ these are zero objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 1"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-prime-to-ell-condensed-acyclicity] to $K$. It gives the canonical scalar augmentation $C_F[0]\\to R\\Gamma_K(C_F[0])$ as an isomorphism for both $F$. The same holds for $V_F$: take $d$ copies of a K-injective resolution of $C_F$; their finite direct sum is K-injective since a chain map from an acyclic complex to it is a tuple of $d$ null-homotopic maps, whose homotopies form a tuple. Termwise invariants preserve finite sums. Under the basis identification the augmentation is therefore the direct sum of $d$ scalar augmentations. This argument uses only finite sums, including the empty sum, and the resolution computation of [sk-def-sfb-derived-categories].",
+   "uses": [
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 2"
+   }
+  },
+  {
+   "text": "For $G=B$ use [lem-sfb-derived-invariants-normal-subgroup-comparison] with this $K$ and the given $L$, and write $T_F$ for its kernel invariants functor. Since $K$ acts trivially on $V_F$, $T_F(V_F)$ is $V_F$ with the residual $Q\\times L$-action. The underlying map of $\\eta_F:T_F(V_F)[0]\\to RT_F(V_F[0])$ is exactly the augmentation in step 2, hence is an isomorphism. Use the generated Grothendieck action site of [lem-sfb-internal-action-site-presentation] over the small coherent profinite site; its base has finite limits and its group and coefficient ring are sheaves. Forgetting actions creates kernels and cokernels and detects zero by the final paragraph of that statement, so the cohomology of the cone vanishes before forgetting whenever it vanishes after forgetting. Consequently $\\eta_F$ is an isomorphism in $D(\\mathcal A_{Q\\times L}(C_F))$. The normalized equation $c_F\\operatorname{inf}_F=R\\Gamma_{Q\\times L}(\\eta_F)$ now proves that $\\operatorname{inf}_F:R\\Gamma_{Q\\times L}(V_F)\\to R\\Gamma_{B\\times L}(V_F)$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 3"
+   }
+  },
+  {
+   "text": "Put $m=|Q|$. For any internal $C_F$-module $M$ with $Q\\times L$-action, the finite sum $e_M=m^{-1}\\sum_{q\\in Q}q$ defines an internal $L$-equivariant idempotent. A continuous $Q$-valued section is locally constant on a finite clopen partition; on each piece multiplication permutes the finite sum. Hence $\\operatorname{im}e_M=M^Q$ for the full condensed notion of fixed sections. The scalar $m^{-1}$ is a continuous constant section of $C_F$, so is available also for $F=\\Omega$. Invariants are left exact by [lem-sfb-condensed-product-action-inflation]. They preserve epimorphisms as well: an invariant section of a target has a local lift through an epimorphism of module sheaves, and averaging that lift gives an invariant lift of the same section. Here [lem-sfb-internal-action-site-presentation] uses the generated Grothendieck action topology and identifies the underlying cokernel with the sheafification on the base profinite site of the sectionwise cokernel. Thus the lifts are local on the base site; no composition property of the unsaturated action precoverage is needed. Thus $\\Gamma_Q^L:\\mathcal A_{Q\\times L}(C_F)\\to\\mathcal A_L(C_F)$ is exact. This finite sum uses no integration over an infinite group.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 4"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-derived-invariants-normal-subgroup-comparison] with $G=K=Q$ and quotient $1$. Its comparison reads $R\\Gamma_{Q\\times L}(M)\\cong R\\Gamma_L(R\\Gamma_Q^L(M))$. Exactness from step 4 and the exact-functor clause of [sk-def-sfb-derived-categories] identify $R\\Gamma_Q^L(M[0])$ with $M^Q[0]$, through the canonical map. The normalized inflation equation therefore makes $b_F:R\\Gamma_L(V_F^Q)\\to R\\Gamma_{Q\\times L}(V_F)$ an isomorphism. On $V$, the finite average $e=m^{-1}\\sum_q\\rho(q)$ has image $V^B$; both its inclusion and its projection are continuous linear maps. Tensoring this splitting with $F$ identifies $F\\otimes_E V^B$ with $\\operatorname{im}(1\\otimes e)$, with the subspace topology (choose a basis of the image and kernel). Applying continuous maps on every profinite test set proves $(V^B)_F=V_F^Q$, including residual $L$-actions.",
+   "uses": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 5"
+   }
+  },
+  {
+   "text": "The composite $\\operatorname{inf}_F b_F$ has source $R\\Gamma_L((V^B)_F)$ and target $R\\Gamma_{B\\times L}(V_F)$. The composition clause of [lem-sfb-derived-invariants-normal-subgroup-comparison] identifies it with the canonical inflation $a_F$ for $B\\times L\\to Q\\times L\\to L$ and the invariant inclusion. Thus $a_F$ is an isomorphism. Its degree-zero map is the original inclusion: the ordinary normalized transposes restrict codomain to invariants and their inverses compose with inclusion. Both source and target invariant submodules are the same $L$-fixed part of $V_F^B$, so this map is the identity after that identification.",
+   "uses": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 6"
+   }
+  },
+  {
+   "text": "All maps used are canonical resolution maps, normalized inflation maps, or invariant inclusions. For an equivariant continuous $E$-linear map $f:V\\to W$, $f\\rho_V(b)=\\rho_W(b)f$ implies $f(V^B)\\subseteq W^B$ and equality of the two composites with invariant inclusions. The naturality clause of [lem-sfb-derived-invariants-normal-subgroup-comparison], applied directly to $a_F$ viewed as the single quotient $B\\to1$, gives the requested naturality without choosing a common finite image or compatible bases. The coefficient clause of that node applied to $C_E\\to C_\\Omega$ and $v\\mapsto1\\otimes v$ gives $u_{B\\times L}a_E=(\\operatorname{Res}a_\\Omega)u_L$. The invariant identifications of step 5 respect this map since $e_\\Omega(1\\otimes v)=1\\otimes e_E(v)$, term by term in the same finite sum. Thus this is precisely the coefficient square in the statement, in ordinary condensed modules.",
+   "uses": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 7"
+   }
+  },
+  {
+   "text": "If $B=1$, then $K=Q=1$, both kernel augmentations and the normalized comparisons in [lem-sfb-derived-invariants-normal-subgroup-comparison] are identities; invariant inclusion is also the identity. The composite in step 6 is therefore the identity. If $V=0$ the constructions are zero, and if $V^B=0$ step 5 gives zero derived invariants for $Q\\times L$ and hence step 3 gives zero derived invariants for $B\\times L$. No completeness assertion about $\\Omega$ has been used.",
+   "uses": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-inertia input; agent expansion, step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-prime-to-ell-condensed-acyclicity",
+  "sk-def-sfb-derived-categories",
+  "lem-sfb-derived-invariants-normal-subgroup-comparison",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-condensed-product-action-inflation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) supplies context only. Agent proof through open-kernel scalar acyclicity, normalized quotient composition, and an explicit finite averaging idempotent. Analytic scalar acyclicity is a statement-only WANTED input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +152,45 @@
    "results": "8 hits: BDeRhamPlus, Condensed.profiniteSolid, BDeRham, Condensed.profiniteFree, CondensedMod.IsSolid, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, IsArithFrobAt.arithFrobAt; ",
    "date": "2026-10-22",
    "verdict": "no match: returned constructions concern other coefficient categories or only individual cohomology groups"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|profinite).*(invariant|acyclic)|(invariant|acyclic).*(Condensed|profinite)",
+   "results": "5 hits: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representations, discrete condensed modules, solidification and topological continuous cohomology do not state this ordinary internal condensed derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"invariants\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representations, discrete condensed modules, solidification and topological continuous cohomology do not state this ordinary internal condensed derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|profinite).*(invariant|acyclic)|(invariant|acyclic).*(Condensed|profinite)",
+   "results": "5 hits: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representations, discrete condensed modules, solidification and topological continuous cohomology do not state this ordinary internal condensed derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inflation comparison for derived invariants of condensed modules with norm topological ell adic coefficients",
+   "results": "8 hits: groupCohomology.infNatTrans, AdicCompletion.of_injective_iff, AdicCompletion.module, AdicCompletion.of_inj, AdicCompletion, IsUltrametricDist.invariantExtension, CondensedMod.isDiscrete_tfae, Ideal.adicModuleTopology; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representations, discrete condensed modules, solidification and topological continuous cohomology do not state this ordinary internal condensed derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Profinite group of order prime to ell has no higher condensed cohomology with trivial coefficient continuous functions into the algebraic closure of Q ell",
+   "results": "8 hits: continuousCohomology, ContinuousCohomology.continuousCohomologyZeroIso, isZero_groupCohomology_succ_of_subsingleton, groupCohomology.H1ofAutOnUnitsUnique, LightCondAb.ofSheafLightProfinite, LocallyConstant.freeOfProfinite, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representations, discrete condensed modules, solidification and topological continuous cohomology do not state this ordinary internal condensed derived comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-inertia-continuous-koszul",
@@ -77,5 +213,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-prime-to-ell-derived-invariants-reduction",
+  "worker": "stage1",
+  "group": "N9",
+  "summary": "Statement unchanged. Reduced to rank-one trivial scalar acyclicity for the open kernel and a generic normalized open-normal-subgroup comparison; finite averaging, topology of invariant summands, canonical inflation, naturality, and coefficient square are proved explicitly. Both new inputs remain statement-only, with the noncomplete Omega obligation visible. Repair after landing refusal: revalidated the changed action-site statement, explicitly use its generated Grothendieck topology and unchanged underlying kernel/cokernel and zero-detection clauses in steps 3 and 4, and refreshed the two citation quotes.",
+  "blueprint": "Realizes paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md below the analytic tame-inertia input. blueprint_refs ancestor returns None; retain the inherited null ancestor and via chain. Whole-blueprint searches found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N9-37f7c6fed",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-37f7c6fed (reviewer sub-agent of L); spot-checked: This re-delivery answers L's landing refusal of the PASSed head 35e7c657, which was refused for stale citations after NL corrected lem-sfb-internal-action-site-presentation on 2026-10-21 (generated Grothendieck topology instead of a bind-closed precoverage). Diff against the prior snapshot: both new nodes are identical; in the item only steps 3 and 4 and the summary changed, and the statement, stmt_deps and proof_deps are unchanged. Step 3 now uses the generated action site: the base has finite limits, C(-,Q×L) is a sheaf of groups and C_F is a sheaf of rings. Its conclusion uses only the unchanged final paragraph of the action-site statement (forgetting creates kernels and cokernels and detects zero), so η_F is a quasi-isomorphism and c∘inf=RΓ(η) makes inf invertible. Step 4 lifts locally on the base site through the base-sheafified cokernel and averages with m^{-1}Σq (m invertible in E); left exactness comes from the right-adjoint clause of lem-sfb-condensed-product-action-inflation. No bind axiom is needed. The cited statements equal side-live verbatim. I re-read steps 1, 2 and 5-8: open kernel and its normal core, finite sum of K-injectives, G=K=Q comparison plus the e-splitting, composition, naturality and coefficient clauses (e_Ω(1⊗v)=1⊗e_E(v)), and the K=1 normalization. New nodes: the scalar leaf is the B=K, L=1, V=E analytic core; small cases K=1 and K=Z_q (q≠ℓ) are fine, the noncomplete Ω stays WANTED, and compact images in Ω need not lie in a finite extension. The normal-subgroup comparison is formal: T is right adjoint to exact inflation and Res_K has the exact left adjoint A[Q×L]⊗−. Duplicate check against nodes added since: lem-sfb-condensed-derived-restriction-calculus has b_u restriction but no T, c_N or open-normal comparison, so it overlaps without duplicating; lem-sfb-trivial-ladic-derived-exterior is Z_ℓ^r; def-sfb-condensed-equivariant-bar-data is a cochain model. No repair note, not dropped, still unsplit live, no SGA, no tool_uses."
  }
 }
