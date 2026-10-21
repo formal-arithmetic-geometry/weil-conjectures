@@ -16,11 +16,145 @@
   "def-pur-smooth-trace",
   "def-weil-site-perfect-complex",
   "thm-pur-adic-reconstruction",
-  "thm-pur-rational-and-qbar-purity"
+  "thm-pur-rational-and-qbar-purity",
+  "def-sf-coefficient-duality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At a finite stage apply [thm-pur-finite-coefficient-smooth-purity] to $f$ and $L$. Its coefficient ring is exactly $A_n$, its schemes are separated finite type over the fixed $k$, and its smoothness, pure relative dimension and finite-Tor hypotheses are exactly ours. Thus the specified $\\gamma_{f,L}:f^*L(r)[2r]\\to Rf^!L$ is an isomorphism. Define the displayed inverse-direction comparison to be $\\gamma_{f,L}^{-1}$; both inverse identities follow from the isomorphism identities. This retains the diagonal/deformation normalization of that theorem.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), finite purity"
+   }
+  },
+  {
+   "text": "For $n\\ge m\\ge1$, [thm-pur-finite-reduction-of-purity] says precisely that the square comparing the reduction of $\\gamma_{f,L}$ with $\\gamma_{f,L\\otimes^L_{A_n}A_m}$ commutes, on the finite-Tor domains. Its statement also includes the smooth traces. Inverting the two horizontal isomorphisms gives the corresponding square for the inverse-direction comparison: from $b\\,C(\\gamma)=\\gamma^\\prime a$ one obtains $a\\,C(\\gamma^{-1})=(\\gamma^\\prime)^{-1}b$. This uses only composition with the inverses, not a new choice of orientation.",
+   "uses": [
+    "thm-pur-finite-reduction-of-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), normalized finite reductions"
+   }
+  },
+  {
+   "text": "At integral coefficients a stated object $L\\in D^b_c(Y,R)$ lies in $D^b_{ctf}(Y,R)$ by [lem-coef-integral-residue-tor]: choose a cohomological interval for its bounded residue reduction, and the lemma supplies that same Tor interval for every finite reduction. Apply [thm-pur-adic-reconstruction] to $L$. It gives a coherent strict-tower realization of the compatible finite purity family and an isomorphism $\\gamma_{f,L}$ whose reduction is exactly $\\gamma_{f,L_n}$ for each $n$. We use the specified normalized realization, as required in the item; we do not assert uniqueness of a lift from its components. Concretely, the specified realization is the component $\\gamma_{E,L}$ of the simultaneous normalized family of [lem-pur-adic-purity-scalar-naturality]: it is an isomorphism whose finite reductions are exactly the $\\gamma_{f,L_n}$ of [thm-pur-adic-reconstruction], so it is such a realization, and Steps 3, 4 and 6 concern one and the same integral map. Its inverse is the integral comparison, with the reduction squares proved by the inverse calculation in Step 2.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "thm-pur-adic-reconstruction",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), integral reconstruction"
+   }
+  },
+  {
+   "text": "For the specified integral lattice representing a field-stage object, [thm-pur-rational-and-qbar-purity] carries integral purity to an isomorphism at $E$ and then to the common finite-field presentation of the algebraically closed coefficient category. To track the choice when the coefficient field is enlarged, use the simultaneous normalized natural family of [lem-pur-adic-purity-scalar-naturality]. With its notation the square is $b\\,C(\\gamma_E)=\\gamma_F a$, including the tensor associators, identities and triple-extension cocycle. The lattice and normalized purity system in the statement are this specified family. Functorial passage to rationalization and a common stage preserves the equation and the inverse identities. Consequently $a\\,C(\\gamma_E^{-1})=\\gamma_F^{-1}b$ at those stages as well. No reduction functor from a field to $A_n$ is used.",
+   "uses": [
+    "thm-pur-rational-and-qbar-purity",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), normalized field transport"
+   }
+  },
+  {
+   "text": "The coefficient-valued smooth trace is, by [def-pur-smooth-trace], $t_L=\\epsilon_L\\circ Rf_!(\\gamma_{f,L})$. At higher coefficients define its normalized transport by the same composite using the specified purity isomorphism and exceptional counit. This has source $Rf_!(f^*L(r)[2r])$ and target $L$, exactly as at finite level. In particular reading purity in its inverse direction does not replace $Rf_!(\\gamma_{f,L})$ by $Rf_!(\\gamma_{f,L}^{-1})$ in the trace formula.",
+   "uses": [
+    "def-pur-smooth-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), trace normalization"
+   }
+  },
+  {
+   "text": "Here is the trace comparison calculation, including the counit. For any of the specified coefficient functors $C$, put $H(L)=f^*L(r)[2r]$, $G(L)=Rf^!L$, $P=Rf_!$, and write $a:CH\\cong H^\\prime C$, $b:CG\\cong G^\\prime C$, $c:CP\\cong P^\\prime C$. Purity compatibility gives $b_LC(\\gamma_L)=\\gamma^\\prime_{CL}a_L$. Naturality of $c$ and counit compatibility then give\n$$\\begin{aligned} C(t_L)&=C(\\epsilon_L)\\,CP(\\gamma_L)\\\\ &=\\epsilon^\\prime_{CL}\\,P^\\prime(b_L)\\,c_{GL}\\,CP(\\gamma_L)\\\\ &=\\epsilon^\\prime_{CL}\\,P^\\prime(b_LC(\\gamma_L))\\,c_{HL}\\\\ &=t^\\prime_{CL}\\,P^\\prime(a_L)\\,c_{HL}.\\end{aligned}$$\nThe counit equation used here is stated explicitly for finite quotients in [lem-coef-finite-exceptional], for integral reduction in [prop-coef-integral-exceptional-adjoint], and for rationalization and finite coefficient-field extension in [lem-coef-rational-operations]. The comparisons for $P$, pullback, twist and tensor and their naturality are those of [lem-fix-operation-reduction]. Together with Steps 2--4, this proves exactly the claimed trace squares. The equation passes to a common field stage because each arrow is represented there.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-rational-operations",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), trace and coefficient comparison"
+   }
+  },
+  {
+   "text": "For point coefficients apply [lem-weil-coefficient-frobenius], using the canonical coefficient evaluation of [def-sf-coefficient-duality]. At $A_n$, the ring is self-injective and the ordinary finite-module evaluation is invertible; the same node states derived biduality on bounded complexes with finite cohomology. At $R$, use its different assertion that every bounded finite-cohomology complex is perfect and that derived $R$-Hom evaluation is invertible. At $E$ and at a common finite field stage, the field assertion gives bounded finite-dimensional biduality. Thus the dualizing object in each assertion is the coefficient ring itself. In particular the $R$ assertion is not ordinary module reflexivity: the module $R/(\\varpi)$ has zero ordinary dual but has the asserted derived biduality.",
+   "uses": [
+    "lem-weil-coefficient-frobenius",
+    "def-sf-coefficient-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "For (7), point duality"
+   }
+  },
+  {
+   "text": "Let $T/k$ be as stated and set $a=a_T$. This is a smooth separated finite-type morphism of pure relative dimension $d$. Apply Steps 1--4 to $a$ and the coefficient unit. The unit-pullback identification yields $\\gamma_{a,\\Lambda}:\\Lambda_T(d)[2d]\\xrightarrow{\\sim}\\omega_T=Ra^!\\Lambda$; take its inverse $\\eta_T$. Put $J=\\Lambda_T(d)[2d]$, $H=R\\mathcal Hom$ and $M^\\vee=H(M,\\Lambda_T)$. These are exactly the operations of [def-fix-six-functor-datum] and the units, twists and coefficient presentations of [def-coefficient-twists-detailed], with the site-perfect hypothesis interpreted by [def-weil-site-perfect-complex]. The construction uses the structure morphism of $T$ itself; no model over a finite field or geometric connectedness assumption on $T$ is imposed.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-coefficient-twists-detailed",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "For (7), smooth dualizing object"
+   }
+  },
+  {
+   "text": "By [sk-def-perfect], an object of $D(T_{\\mathrm{proet}},\\Lambda)$ is perfect over $\\Lambda_T$ (dualizable for $\\otimes^L_{\\Lambda_T}$) if and only if it is locally quasi-isomorphic to a bounded complex of finite projective $\\Lambda_T$-modules; so the site-perfect $M\\in\\mathcal C_{T,\\Lambda}$ (in $D^b_{ctf}$ at every stage, at $R$ by Step 3's [lem-coef-integral-residue-tor]) satisfies the perfectness hypothesis of the next citation. The isomorphism $\\gamma_{a,\\Lambda}$ of Step 8 is the smooth-purity orientation which that statement names. Apply the relative perfect-duality statement [sk-thm-sf-dual-perfect] with $f=a_T$, $K=M$, the orientation just obtained, and $Y=\\operatorname{Spec}k$. This is its arbitrary-base relative form. It gives the specific composite\n$$D_TM=H(M,\\omega_T)\\xrightarrow{H(M,\\eta_T)}H(M,J)\\xrightarrow{\\sim}M^\\vee(d)[2d],$$\nand it identifies the evaluation-defined map $M\\to D_TD_TM$, under the resulting double-dual comparison, with the coefficient evaluation $M\\to M^{\\vee\\vee}$, an isomorphism for site-perfect $M$. This identification is part of the cited statement, not inferred from the mere existence of an object isomorphism. The relative theorem is the formal orientation/perfect-complex calculation: it uses the tensor--Hom adjunction, invertible Tate twist and perfect dual pair, not axiom (A6) of an axiomatized datum or general geometric biduality. Its statement allows an arbitrary base of the setting, so no hypothesis on $T$ beyond smoothness and pure dimension is needed. The coefficient categories here have exactly its completed, localized and common-stage meanings, so this proves the requested special case on each stated domain without changing site-perfectness into finite Tor amplitude.",
+   "uses": [
+    "sk-thm-sf-dual-perfect",
+    "sk-def-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "For (7), smooth site-perfect case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-pur-finite-coefficient-smooth-purity",
+  "thm-pur-finite-reduction-of-purity",
+  "lem-coef-integral-residue-tor",
+  "thm-pur-adic-reconstruction",
+  "thm-pur-rational-and-qbar-purity",
+  "lem-pur-adic-purity-scalar-naturality",
+  "def-pur-smooth-trace",
+  "lem-coef-finite-exceptional",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-coef-rational-operations",
+  "lem-fix-operation-reduction",
+  "lem-weil-coefficient-frobenius",
+  "def-sf-coefficient-duality",
+  "def-fix-six-functor-datum",
+  "def-coefficient-twists-detailed",
+  "def-weil-site-perfect-complex",
+  "sk-thm-sf-dual-perfect",
+  "sk-def-perfect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6) and the point/site-perfect sentence of (7), with explicit counit comparison calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +190,45 @@
    "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation\", \"Module.symm_dualMap_evalEquiv\", \"AlgebraicGeometry.Scheme.evaluation\", \"AlgebraicGeometry.Scheme.Γevaluation\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen\", \"smoothSheafCommRing.ι_evalHom\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-normalized-orientation-perfect-duality.search-results.txt\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity and its trace commute with coefficient reduction and induce evaluation biduality on perfect sheaf complexes",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"SheafOfModules.Presentation.map_π_eq\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"LinearMap.trace_eq_contract'\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\"], \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*purity|purity.*smooth|verdierDual",
+   "results": "{\"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"CategoryTheory\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image purity and perfect complex Verdier biduality over adic coefficients",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"DomAddAct.isClosedEmbedding_mk_symm\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"AdicCompletion.congr_symm_apply\", \"AdicCompletion.ofLinearEquiv_symm_of\", \"LinearMap.IsPerfPair.dualEval\", \"LinearMap.apply_symm_toPerfPair_self\", \"IsAdicComplete.recOn\"], \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.toIhomIhomUnit",
+   "results": "{\"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalClosed.toIhomIhomUnit'\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived double dual evaluation for perfect complexes of sheaves with invertible dualizing object",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.Q\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory.instLinear\", \"Ext\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-functor-package",
@@ -74,5 +243,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-package-normalized-orientation-perfect-duality",
+  "worker": "stage1",
+  "summary": "Reused existing purity, coherent coefficient-transport, counit-comparison and independent perfect-duality nodes. Wrote the trace coefficient square explicitly, supplied the uniform integral Tor hypothesis, retained the specified coherent purity family, and separated ordinary finite/field duality from derived DVR duality. No new nodes and no statement change.",
+  "blueprint": "prop-functor-package.proof.md: Clause (6) is the three purity theorems (Steps 1--6); For (7), coefficient-frobenius and smooth site-perfect duality (Steps 7--9).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-adic-purity-scalar-naturality",
+    "why": "The simultaneous coherent normalized purity family gives coefficient-field squares and cocycles; pointwise integral reconstruction in the package unit does not supply this compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-adic-purity-scalar-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-4a382d0db",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-4a382d0db (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the item in full, all 17 cited statements, and the main-20261015 prop-functor-package clause (6) and the point/site-perfect sentence of (7) that it realizes. No new nodes, no SGA, statement unchanged. It keeps and expands old parent steps 12/14 of Q92's re-split. Step checks: Step 1 finite purity hypotheses match exactly. Step 2 inverse algebra b C(γ)=γ'a ⇒ a C(γ⁻¹)=γ'⁻¹b is correct. Step 3: residue-tor gives D^b_c=D^b_ctf for the reconstruction theorem, and no uniqueness is used. Step 4: rational/Q̄ transport and the scalar-naturality square are correct. Step 5 matches def-pur-smooth-trace (γ, not γ⁻¹). Step 6 counit calculation verified line by line against the counit equations in lem-coef-finite-exceptional, prop-coef-integral-exceptional-adjoint, lem-coef-rational-operations and the mate definition of b. Step 7: Frobenius clauses verified; R/ϖ has ordinary dual 0 but derived biduality; A_n is QF. Steps 8–9: orientation from the unit, sk-thm-sf-dual-perfect gives the relative form over any base. Tool use lem-pur-adic-purity-scalar-naturality accepted: reconstruction gives no uniqueness, so compatibility of the chosen lifts under E⊂F needs that family. All other citations are on the unit route; no cycle. Repairs: (1) Step 3 now names the integral comparison as the γ_{E,L} component of the simultaneous family, so Steps 3, 4 and 6 concern the same map. (2) C1/C4, Step 9: added [sk-def-perfect] to bridge site-perfect (local finite projective) to the cited theorem's 'perfect over Λ_X' (dualizable), and noted that γ_{a,Λ} is the smooth-purity orientation that theorem names. (3) C3, Step 9: replaced the appeal to the source proof with the statement's arbitrary-base form. Advisory: sk-thm-purity-transport partly overlaps clause (6). Corrected item in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

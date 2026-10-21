@@ -21645,3 +21645,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:08 L: merged deliver/NQ/lem-sfb-ordinary-proetale-direct-image-plus-comparison (reviewer PASS; after a return; new nodes: 0)
 - 09:08 L: merged deliver/Q114/lem-zl-two-point-curve-constituent-purity (reviewer FIX; first push; new nodes: 0); claim not held by Q114: not your claim
 - 09:08 L: merged deliver/NO/lem-sfb-derived-scalar-localization-reflection (reviewer PASS; after a return; new nodes: 0)
+- 09:08 L: merged deliver/Q122/lem-sf-package-normalized-orientation-perfect-duality (reviewer FIX; first push; new nodes: 0); claim not held by Q122: not your claim
